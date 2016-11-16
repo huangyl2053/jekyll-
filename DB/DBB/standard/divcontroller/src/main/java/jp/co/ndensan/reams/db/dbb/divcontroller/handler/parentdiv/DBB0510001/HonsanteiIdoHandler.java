@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
@@ -392,17 +393,15 @@ public class HonsanteiIdoHandler {
                 div.getXtTaishoTokuchoKaishiTsuki().setValue(処理対象なし);
             }
             div.getXtTaishoTokuchoKaishiTsuki().setReadOnly(false);
+        } else if (月分_10.equals(処理対象) || 月分_12.equals(処理対象)) {
+            div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
+                    SubGyomuCode.DBB介護賦課, 本算定異動現年度通知書一括発行_10と12月);
+        } else if (月分_2.equals(処理対象)) {
+            div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
+                    SubGyomuCode.DBB介護賦課, 本算定異動現年度通知書一括発行_2月);
         } else {
-            if (月分_10.equals(処理対象) || 月分_12.equals(処理対象)) {
-                div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
-                        SubGyomuCode.DBB介護賦課, 本算定異動現年度通知書一括発行_10と12月);
-            } else if (月分_2.equals(処理対象)) {
-                div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
-                        SubGyomuCode.DBB介護賦課, 本算定異動現年度通知書一括発行_2月);
-            } else {
-                div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
-                        SubGyomuCode.DBB介護賦課, 本算定異動現年度通知書一括発行_通常月);
-            }
+            div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().load(
+                    SubGyomuCode.DBB介護賦課, 本算定異動現年度通知書一括発行_通常月);
         }
     }
 
@@ -467,9 +466,7 @@ public class HonsanteiIdoHandler {
             if (!dataSource.isEmpty()) {
                 div.getHonSanteiIdoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setSelectedIndex(NUM_0);
             }
-            KitsukiList 期月_リスト = new FuchoKiUtil().get期月リスト().filtered本算定期間();
-            if (!RString.isNullOrEmpty(算定期)
-                    && Integer.parseInt(算定期.toString()) <= 期月_リスト.get最終法定納期().get期AsInt()) {
+            if (!FuchokiJohoTsukiShoriKubun.随時.equals(月の期.get月処理区分())) {
                 div.getHonSanteiIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().setDisplayNone(true);
                 div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtNotsuShutsuryokuKi().setDisplayNone(false);
             } else {
@@ -619,15 +616,12 @@ public class HonsanteiIdoHandler {
         KitsukiList 期月リスト = util.get期月リスト();
         RString 処理対象月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
         Kitsuki 月の期 = 期月リスト.get月の期(Tsuki.toValue(処理対象月));
-        KitsukiList 期月_リスト = 期月リスト.filtered本算定期間();
-        RString 算定期 = 月の期.get期();
-        if (!RString.isNullOrEmpty(算定期)
-                && Integer.parseInt(算定期.toString()) <= 期月_リスト.get最終法定納期().get期AsInt()) {
+        if (!FuchokiJohoTsukiShoriKubun.随時.equals(月の期.get月処理区分())) {
             paramter.set随時フラグ(Boolean.FALSE);
         } else {
             paramter.set随時フラグ(Boolean.TRUE);
         }
-        paramter.set算定期(算定期);
+        paramter.set算定期(月の期.get期());
         return paramter;
     }
 
@@ -665,12 +659,10 @@ public class HonsanteiIdoHandler {
             } else {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
             }
+        } else if (flag) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(通知書作成実行する, false);
         } else {
-            if (flag) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(通知書作成実行する, false);
-            } else {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(通知書作成実行する, true);
-            }
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(通知書作成実行する, true);
         }
     }
 }

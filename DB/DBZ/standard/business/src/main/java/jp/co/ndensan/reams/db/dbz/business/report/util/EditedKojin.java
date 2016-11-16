@@ -231,4 +231,13 @@ public class EditedKojin {
     public AtenaBanchi get番地() {
         return 個人.get住所().get番地().getBanchi();
     }
+
+    /**
+     * 氏名５０音カナを返します。
+     *
+     * @return 氏名５０音カナ
+     */
+    public RString get氏名５０音カナ() {
+        return 個人.get名称().getKana().getColumnValue();
+    }
 }

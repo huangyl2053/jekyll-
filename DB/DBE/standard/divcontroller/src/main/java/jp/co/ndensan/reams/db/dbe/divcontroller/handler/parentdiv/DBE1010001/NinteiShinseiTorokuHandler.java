@@ -205,7 +205,7 @@ public class NinteiShinseiTorokuHandler {
             keyList.add(new RString("key0"));
             div.getCcdKaigoNinteiShinseiKihon().setChkShikakuShutokuMae(keyList);
         }
-        if (result.get二号特定疾病コード() != null) {
+        if (result.get二号特定疾病コード() != null && !result.get二号特定疾病コード().isEmpty()) {
             div.getCcdKaigoNinteiShinseiKihon().setTokuteiShippei(TokuteiShippei.toValue(result.get二号特定疾病コード().value()));
         }
         div.getCcdKaigoNinteiShinseiKihon().setServiceSakujoTeikeibun(result.get申請サービス削除の理由());

@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbb.service.report.kaigohokenryogaku;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.TokuchoKaishiTsuchishoInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuKeteiProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuReport;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -51,13 +51,13 @@ public class KaigoHokenryogakuPrintService {
     /**
      * 介護保険料額変更通知書発行一覧表(単一帳票出力用)
      *
-     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
+     * @param 編集後本算定通知書共通情報List List<TokuchoKaishiTsuchishoInfo>
      * @param 帳票作成日時 RDateTime
      * @param 出力順ID RString
      * @param タイトル RString
      * @return SourceDataCollection
      */
-    public SourceDataCollection printSingle(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, RDateTime 帳票作成日時,
+    public SourceDataCollection printSingle(List<TokuchoKaishiTsuchishoInfo> 編集後本算定通知書共通情報List, RDateTime 帳票作成日時,
             RString 出力順ID, RString タイトル) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
@@ -70,13 +70,13 @@ public class KaigoHokenryogakuPrintService {
     /**
      * printメソッド
      *
-     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
+     * @param 編集後本算定通知書共通情報List List<TokuchoKaishiTsuchishoInfo>
      * @param 帳票作成日時 RDateTime
      * @param 出力順ID RString
      * @param reportManager ReportManager
      * @param タイトル RString
      */
-    public void printタイプ(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, RDateTime 帳票作成日時,
+    public void printタイプ(List<TokuchoKaishiTsuchishoInfo> 編集後本算定通知書共通情報List, RDateTime 帳票作成日時,
             RString 出力順ID, ReportManager reportManager, RString タイトル) {
         IOutputOrder 並び順 = null;
         if (!RString.isNullOrEmpty(出力順ID)) {
@@ -92,9 +92,11 @@ public class KaigoHokenryogakuPrintService {
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 Decimal 連番 = Decimal.ONE;
                 if (編集後本算定通知書共通情報List != null && !編集後本算定通知書共通情報List.isEmpty()) {
-                    for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
+                    for (TokuchoKaishiTsuchishoInfo 編集本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
                         List<RString> 並び順List = get出力順(並び順);
-                        KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(編集後本算定通知書共通情報,
+                        KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(編集本算定通知書共通情報.get生活保護区分(),
+                                編集本算定通知書共通情報.get特徴8月開始者区分(), 編集本算定通知書共通情報.get特徴10月開始者区分(),
+                                編集本算定通知書共通情報.get本算定通知書情報(), 編集本算定通知書共通情報.get編集後本算定通知書共通情報(),
                                 帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
                         report.writeBy(reportSourceWriter);
                         連番 = 連番.add(Decimal.ONE);
@@ -109,9 +111,11 @@ public class KaigoHokenryogakuPrintService {
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 Decimal 連番 = Decimal.ONE;
                 if (編集後本算定通知書共通情報List != null && !編集後本算定通知書共通情報List.isEmpty()) {
-                    for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
+                    for (TokuchoKaishiTsuchishoInfo 編集本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
                         List<RString> 並び順List = get出力順(並び順);
-                        KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(編集後本算定通知書共通情報,
+                        KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(編集本算定通知書共通情報.get生活保護区分(),
+                                編集本算定通知書共通情報.get特徴8月開始者区分(), 編集本算定通知書共通情報.get特徴10月開始者区分(),
+                                編集本算定通知書共通情報.get本算定通知書情報(), 編集本算定通知書共通情報.get編集後本算定通知書共通情報(),
                                 帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
                         report.writeBy(reportSourceWriter);
                         連番 = 連番.add(Decimal.ONE);

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkot
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
@@ -32,6 +33,10 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
 
+    private final RString 生活保護区分;
+    private final RString 特徴8月開始者区分;
+    private final RString 特徴10月開始者区分;
+    private final HonSanteiTsuchiShoKyotsu 本算定通知書情報;
     private final RString タイトル;
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final RDateTime 帳票作成日時;
@@ -53,6 +58,10 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
     /**
      * インスタンスを生成します。
      *
+     * @param 生活保護区分 RString
+     * @param 特徴8月開始者区分 RString
+     * @param 特徴10月開始者区分 RString
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
      * @param 帳票作成日時 RDateTime
      * @param 地方公共団体 Association
@@ -60,12 +69,17 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
      * @param 連番 Decimal
      * @param タイトル RString
      */
-    protected KaigoHokenryogakuEditor(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+    protected KaigoHokenryogakuEditor(RString 生活保護区分, RString 特徴8月開始者区分, RString 特徴10月開始者区分,
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報, EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             RDateTime 帳票作成日時,
             Association 地方公共団体,
             List<RString> 並び順List,
             Decimal 連番,
             RString タイトル) {
+        this.生活保護区分 = 生活保護区分;
+        this.特徴8月開始者区分 = 特徴8月開始者区分;
+        this.特徴10月開始者区分 = 特徴10月開始者区分;
+        this.本算定通知書情報 = 本算定通知書情報;
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.帳票作成日時 = 帳票作成日時;
         this.地方公共団体 = 地方公共団体;
@@ -133,6 +147,7 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         }
         source.listUpper_12 = 生活保護扶助名称;
         listlowers(source);
+        set改頁(source);
     }
 
     /**
@@ -230,5 +245,28 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
             }
         }
         return 口座情報;
+    }
+
+    private void set改頁(KaigoHokenryogakuSource source) {
+        if (編集後本算定通知書共通情報.get編集後宛先() != null) {
+            source.banchiCode = 編集後本算定通知書共通情報.get編集後宛先().get編集番地コード();
+            source.choikiCode = 編集後本算定通知書共通情報.get編集後宛先().get町域コード();
+            source.gyoseikuCode = 編集後本算定通知書共通情報.get編集後宛先().get行政区コード().getColumnValue();
+            source.chikuCode1 = 編集後本算定通知書共通情報.get編集後宛先().get地区１();
+            source.chikuCode2 = 編集後本算定通知書共通情報.get編集後宛先().get地区２();
+            source.chikuCode3 = 編集後本算定通知書共通情報.get編集後宛先().get地区３();
+        }
+        if (編集後本算定通知書共通情報.get編集後個人() != null) {
+            source.shikibetsuCode = 編集後本算定通知書共通情報.get編集後個人().get識別コード().value();
+            source.kanaMeisho = 編集後本算定通知書共通情報.get編集後個人().get氏名５０音カナ();
+        }
+        source.nenkinCode = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金コード();
+        if (本算定通知書情報.get納組情報() != null && 本算定通知書情報.get納組情報().getNokumi() != null) {
+            source.nokumiCode = 本算定通知書情報.get納組情報().getNokumi().getNokumiCode();
+        }
+        source.seihoFlag = 生活保護区分;
+        source.seihoFlag1 = 生活保護区分;
+        source.tokuchoKaishi8 = 特徴8月開始者区分;
+        source.tokuchoKaishi10 = 特徴10月開始者区分;
     }
 }

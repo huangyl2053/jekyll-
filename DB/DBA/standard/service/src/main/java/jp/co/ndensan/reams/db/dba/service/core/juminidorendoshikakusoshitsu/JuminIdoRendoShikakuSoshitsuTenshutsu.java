@@ -129,8 +129,8 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
         List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
 
         if (dbT1001List == null || dbT1001List.isEmpty()) {
-            JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance()
-                    .shiboHihodaichoNashi(entity, 住民異動情報, paramter, storeConfigParamter);
+            JuminIdoRendoShikakuSoshitsu.createInstance().
+                    getTenshutsuHihodaichoNashi(住民異動情報, storeConfigParamter, entity, paramter);
         }
         RString 喪失事由 = RString.EMPTY;
         if (dbT1001List != null && !dbT1001List.isEmpty()) {
@@ -139,10 +139,12 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
         }
         if (!RString.isNullOrEmpty(喪失事由)) {
 
-            JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().shiboHihodaichoSoshitsuChu(paramter, entity, 住民異動情報);
+            JuminIdoRendoShikakuSoshitsu.createInstance().
+                    getTenshutsuHihodaichoSoshitsuChu(住民異動情報, storeConfigParamter, entity, paramter);
             return;
         }
-        JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().shiboHihodaichoShutokuChu(paramter, entity, 住民異動情報);
+        JuminIdoRendoShikakuSoshitsu.createInstance().
+                getTenshutsuHihodaichoShutokuChu(住民異動情報, storeConfigParamter, entity, paramter);
     }
 
     private FlexibleDate nullToMin(FlexibleDate date) {

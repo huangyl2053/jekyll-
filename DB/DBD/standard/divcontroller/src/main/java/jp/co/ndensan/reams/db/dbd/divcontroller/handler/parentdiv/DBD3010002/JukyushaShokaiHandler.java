@@ -25,6 +25,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKub
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.SakujoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteichosajokyo.NinteiChosaJokyoDataPass;
 import static jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode.V06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
@@ -36,6 +39,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -50,7 +54,9 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 「受給照会」画面のHandlerクラスです。
@@ -699,4 +705,26 @@ public class JukyushaShokaiHandler {
         return false;
     }
 
+    /**
+     * 調査状況ボタン用のデータを準備する。
+     *
+     */
+    public void onBeforeOpenDialog_btnChosaJokyo() {
+
+        JukyuShokaiService manager = JukyuShokaiService.createInstance();
+        List<NinteiChosaJokyoDataPass> result
+                = manager.get履歴情報(new HihokenshaNo(div.getHiddenHihokenshaNo()), div.getNinteiDetail().getDvShinseiJoho().getTxtNinteiYMD().getValue());
+        if (result != null && !result.isEmpty()) {
+            NinteiShinseiJohoManager ninteiShinseiJohoManager = NinteiShinseiJohoManager.createInstance();
+            NinteiShinseiJoho ninteiShinseiJoho = ninteiShinseiJohoManager.get要介護認定申請情報(result.get(0).get申請書管理番号());
+            ViewStateHolder.put(ViewStateKeys.厚労省IF識別コード, ninteiShinseiJoho.get厚労省IF識別コード().value());
+
+            div.setHidden今回履歴情報(DataPassingConverter.serialize(result.get(0)));
+        }
+        if (result != null && result.size() > 1) {
+            div.setHidden前回履歴情報(DataPassingConverter.serialize(result.get(1)));
+        }
+        div.setHidden表示判定キー(new RString("1"));
+        div.setHiddenSubGyomuCd(SubGyomuCode.DBD介護受給.getColumnValue());
+    }
 }

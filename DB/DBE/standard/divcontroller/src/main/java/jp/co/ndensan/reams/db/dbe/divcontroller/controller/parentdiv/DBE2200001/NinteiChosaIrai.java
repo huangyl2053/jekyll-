@@ -518,6 +518,17 @@ public class NinteiChosaIrai {
     }
 
     /**
+     * 提出期限のonChange処理です。
+     *
+     * @param div NinteiChosaIraiDiv
+     * @return ResponseData<NinteiChosaIraiDiv>
+     */
+    public ResponseData<NinteiChosaIraiDiv> onChange_radKigen(NinteiChosaIraiDiv div) {
+        getHandler(div).onChange_radKigen();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「選択した帳票を発行する」ボタンのclick処理です。
      *
      * @param div NinteiChosaIraiDiv

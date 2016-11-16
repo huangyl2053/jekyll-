@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.PostMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.dgShichoson_Row;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -56,9 +58,7 @@ public class PostMainPanelCheck {
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_38 = 38;
-    private static final int NUM_43 = 43;
     private static final int NUM_322 = 322;
-    private static final int NUM_328 = 328;
     private static final int NUM_90 = 90;
     private static final int NUM_341 = 341;
     private static final int NUM_62 = 62;
@@ -208,35 +208,35 @@ public class PostMainPanelCheck {
 
     private void getNum1長さ判定(RString fileName, Code 導入形態コード, dgShichoson_Row row, RDateTime sharedFileId, RString 市町村コード) {
         if (fileName.equals(単一国保情報)) {
-            長さ判定(INT_1, 単一国保情報, NUM_90, 0, NUM_6, 導入形態コード, null, sharedFileId, 市町村コード);
+            長さ判定(INT_1, 単一国保情報, NUM_90, 0, 導入形態コード, null, sharedFileId, 市町村コード);
         }
         if (fileName.equals(国保情報)) {
             長さ判定(INT_1, 国保情報.replace(定値_処理枝番, NUM_00.concat(row.
-                    getShichosonShikibetuID())), NUM_90, 0, NUM_6, 導入形態コード, row, sharedFileId, 市町村コード);
+                    getShichosonShikibetuID())), NUM_90, 0, 導入形態コード, row, sharedFileId, 市町村コード);
         }
         if (fileName.equals(広域後期情報)) {
-            長さ判定(INT_1, 広域後期情報, NUM_62, 0, NUM_6, 導入形態コード, null, sharedFileId, 市町村コード);
+            長さ判定(INT_1, 広域後期情報, NUM_62, 0, 導入形態コード, null, sharedFileId, 市町村コード);
         }
         if (fileName.equals(後期情報)) {
             長さ判定(INT_1, 後期情報.replace(定値_処理枝番, NUM_00.concat(row.
-                    getShichosonShikibetuID())), NUM_62, 0, NUM_6, 導入形態コード, row, sharedFileId, 市町村コード);
+                    getShichosonShikibetuID())), NUM_62, 0, 導入形態コード, row, sharedFileId, 市町村コード);
         }
     }
 
     private void getNum2長さ判定(RString fileName, Code 導入形態コード, dgShichoson_Row row, RDateTime sharedFileId, RString 市町村コード) {
         if (fileName.equals(単一国保情報)) {
-            長さ判定(INT_2, 単一国保情報, NUM_341, NUM_38, NUM_43, 導入形態コード, null, sharedFileId, 市町村コード);
+            長さ判定(INT_2, 単一国保情報, NUM_341, NUM_38, 導入形態コード, null, sharedFileId, 市町村コード);
         }
         if (fileName.equals(国保情報)) {
             長さ判定(INT_2, 国保情報.replace(定値_処理枝番, NUM_00.concat(row.
-                    getShichosonShikibetuID())), NUM_341, NUM_38, NUM_43, 導入形態コード, row, sharedFileId, 市町村コード);
+                    getShichosonShikibetuID())), NUM_341, NUM_38, 導入形態コード, row, sharedFileId, 市町村コード);
         }
         if (fileName.equals(広域後期情報)) {
-            長さ判定(INT_2, 広域後期情報, NUM_492, NUM_322, NUM_328, 導入形態コード, null, sharedFileId, 市町村コード);
+            長さ判定(INT_2, 広域後期情報, NUM_492, NUM_322, 導入形態コード, null, sharedFileId, 市町村コード);
         }
         if (fileName.equals(後期情報)) {
             長さ判定(INT_2, 後期情報.replace(定値_処理枝番, NUM_00.concat(row.
-                    getShichosonShikibetuID())), NUM_492, NUM_322, NUM_328, 導入形態コード, row, sharedFileId, 市町村コード);
+                    getShichosonShikibetuID())), NUM_492, NUM_322, 導入形態コード, row, sharedFileId, 市町村コード);
         }
     }
 
@@ -247,13 +247,12 @@ public class PostMainPanelCheck {
      * @param fileName RString
      * @param num int
      * @param from int
-     * @param to int
      * @param 導入形態コード int
      * @param row int
      * @param sharedFileId RDateTime
-     * @param 市町村コード
+     * @param 市町村コード RString
      */
-    public void 長さ判定(int 長さ判定, RString fileName, int num, int from, int to, Code 導入形態コード,
+    public void 長さ判定(int 長さ判定, RString fileName, int num, int from, Code 導入形態コード,
             dgShichoson_Row row, RDateTime sharedFileId, RString 市町村コード) {
         try {
             RString path = new RString(SharedFile.getBasePath().concat(File.separator)
@@ -277,15 +276,15 @@ public class PostMainPanelCheck {
                             .replace(国保取込ファイルのフォーマット.toString()).evaluate());
                 }
             } else {
-                if (hasread.length() != num && ResponseHolder.getMenuID().equals(DBCMN82002)) {
+                if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getMenuID().equals(DBCMN82002)) {
                     throw new ApplicationException(UrErrorMessages.不正.getMessage()
                             .replace(後期高齢取込ファイルのフォーマット.toString()).evaluate());
                 }
-                if (hasread.length() != num && ResponseHolder.getMenuID().equals(DBCMN82001)) {
+                if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getMenuID().equals(DBCMN82001)) {
                     throw new ApplicationException(UrErrorMessages.不正.getMessage()
                             .replace(国保取込ファイルのフォーマット.toString()).evaluate());
                 } else {
-                    市町村コード(長さ判定, 導入形態コード, hasread, from, to, row, 市町村コード);
+                    市町村コード(長さ判定, 導入形態コード, hasread, from, row, 市町村コード);
                 }
                 bufferedReader.close();
             }
@@ -314,21 +313,30 @@ public class PostMainPanelCheck {
      * @param hasread RString
      * @param row dgShichoson_Row
      * @param from int
-     * @param to int
      * @param 市町村コード RString
      */
-    public void 市町村コード(int 長さ判定, Code 導入形態コード, RString hasread, int from, int to, dgShichoson_Row row, RString 市町村コード) {
+    public void 市町村コード(int 長さ判定, Code 導入形態コード, RString hasread, int from, dgShichoson_Row row, RString 市町村コード) {
         if (ResponseHolder.getMenuID().equals(DBCMN82001) && 長さ判定 == INT_2) {
             市町村コード = 市町村コード.substring(0, NUM_5);
-            if (!hasread.substring(from, to).equals(市町村コード)) {
+            if (get指定位置な文字列(hasread, from, NUM_5).equals(市町村コード)) {
                 messeges();
             }
         } else {
-            if (!hasread.substring(from, to).equals(市町村コード)) {
+            if (get指定位置な文字列(hasread, from, NUM_6).equals(市町村コード)) {
                 messeges();
             }
         }
 
+    }
+
+    private RString get指定位置な文字列(RString 指定な文字列, int 開始位置, int 終了位置) {
+        try {
+            return new RString(new String(指定な文字列.toString().
+                    getBytes(Encode.SJIS.getName()), 開始位置, 終了位置, Encode.SJIS.getName()));
+        } catch (UnsupportedEncodingException ex) {
+            ex.getMessage();
+        }
+        return null;
     }
 
     /**

@@ -318,7 +318,9 @@ public class KogakuGassanShikyuKetteiHosei {
             if (!処理モード.equals(ONE) && 更新data == null) {
                 return;
             }
-            set更新条件(更新data, 画面DIV.getUpdate合算給付実績パラメータ());
+            if (!処理モード.equals(ONE)) {
+                set更新条件(更新data, 画面DIV.getUpdate合算給付実績パラメータ());
+            }
             IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(
                     IKogakuGassanShikyuKetteiHoseiMapper.class);
             if (THREE.equals(処理モード)) {
@@ -336,22 +338,22 @@ public class KogakuGassanShikyuKetteiHosei {
             RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付,
                     SaibanHanyokeyName.高額合算給付実績整理番号.get名称(), FlexibleDate.
                     getNowDate().getNendo()).nextString();
-            KogakuGassanKyufuJisseki 新規data = new KogakuGassanKyufuJisseki(
-                    定値交換情報識別番号, 画面DIV.getUpdate合算給付実績パラメータ().
-                    get更新後被保険者番号(), 画面DIV.getUpdate合算給付実績パラメータ().
-                    get更新後支給申請書整理番号(), 整理番号);
-            新規data = 新規data.createBuilderForEdit().set自己負担額証明書整理番号(画面DIV.
-                    getUpdate合算給付実績パラメータ().get更新後自己負担額証明書整理番号()).
-                    set保険制度コード(KaigoGassan_HokenSeido.国保.getCode()).
-                    set給付実績作成区分コード(ONE).
-                    set証記載保険者番号(画面DIV.getUpdate合算給付実績パラメータ().get更新後証記載保険者番号()).
-                    set申請年月日(画面DIV.getUpdate合算給付実績パラメータ().get更新後申請年月日()).
-                    set決定年月日(画面DIV.getUpdate合算給付実績パラメータ().get更新後決定年月日()).
-                    set自己負担総額(画面DIV.getUpdate合算給付実績パラメータ().get更新後自己負担総額()).
-                    set支給額(get支給額(画面DIV.getUpdate合算給付実績パラメータ())).
-                    setデータ区分(ZERO).
-                    build().added();
-            高額合算給付実績dac.save(新規data.toEntity());
+            DbT3075KogakuGassanKyufuJissekiEntity 新規data = new DbT3075KogakuGassanKyufuJissekiEntity();
+            新規data.setKokanJohoShikibetsuNo(定値交換情報識別番号);
+            新規data.setHihokenshaNo(画面DIV.getUpdate合算給付実績パラメータ().get更新後被保険者番号());
+            新規data.setShikyuShinseiSeiriNo(画面DIV.getUpdate合算給付実績パラメータ().get更新後支給申請書整理番号());
+            新規data.setSeiriNo(整理番号);
+            新規data.setJikoFutanSeiriNo(画面DIV.getUpdate合算給付実績パラメータ().get更新後自己負担額証明書整理番号());
+            新規data.setHokenSeidoCode(KaigoGassan_HokenSeido.国保.getCode());
+            新規data.setKyufuJissekiSakuseiKubunCode(ONE);
+            新規data.setShoKisaiHokenshaNo(画面DIV.getUpdate合算給付実績パラメータ().get更新後証記載保険者番号());
+            新規data.setShinseiYMD(画面DIV.getUpdate合算給付実績パラメータ().get更新後申請年月日());
+            新規data.setKetteiYMD(画面DIV.getUpdate合算給付実績パラメータ().get更新後決定年月日());
+            新規data.setJikoFutanSogaku(画面DIV.getUpdate合算給付実績パラメータ().get更新後自己負担総額());
+            新規data.setShikyuGaku(画面DIV.getUpdate合算給付実績パラメータ().get更新後支給額());
+            新規data.setDataKubun(ZERO);
+            新規data.setState(EntityDataState.Added);
+            高額合算給付実績dac.save(新規data);
         } else if (更新data != null && (ONE.equals(更新data.get給付実績作成区分コード())
                 || TWO.equals(更新data.get給付実績作成区分コード()))
                 && 画面DIV.getUpdate合算給付実績パラメータ().isFlag()) {
@@ -363,15 +365,18 @@ public class KogakuGassanShikyuKetteiHosei {
         }
     }
 
-    private Decimal get支給額(KogakuGassanShikyuGakuKeisanKekkaUpdateParameter 合算給付実績パラメータ) {
+    /**
+     * 支給額取得
+     *
+     * @param 支給申請書整理番号 RString
+     * @return Decimal
+     */
+    public Decimal get支給額(RString 支給申請書整理番号) {
         Decimal 支給額 = Decimal.ZERO;
-        if (合算給付実績パラメータ.get更新前支給額() != null) {
-            支給額 = 合算給付実績パラメータ.get更新前支給額();
-        }
-        List<DbT3075KogakuGassanKyufuJissekiEntity> 高額合算給付実績データ = 高額合算給付実績dac.
-                get高額合算給付実績データ(合算給付実績パラメータ.get更新後支給申請書整理番号());
-        for (DbT3075KogakuGassanKyufuJissekiEntity entity : 高額合算給付実績データ) {
-            支給額 = 支給額.add(entity.getShikyuGaku());
+        List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> 高額合算支給不支給決定データ = 高額合算支給不支給決定dac.
+                get高額合算支給不支給決定データ(支給申請書整理番号);
+        for (DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity : 高額合算支給不支給決定データ) {
+            支給額 = 支給額.add(entity.getShikyugaku());
         }
         return 支給額;
     }

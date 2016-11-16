@@ -81,7 +81,7 @@ public enum DBC8020001MainDivSpec implements IPredicate<DBC8020001MainDiv> {
                 @Override
                 public boolean apply(DBC8020001MainDiv div
                 ) {
-                    RString 委託者ID = div.getTxtItakushaCode().getValue();
+                    RString 委託者ID = div.getItakusha().getItakushaId();
                     div.getTxtFurikomiShiteiYMD().getValue();
                     KozaFurikomiMapperParameter parameter;
                     parameter = KozaFurikomiMapperParameter.createSelectParameter(new Decimal(委託者ID.toString()),
@@ -98,10 +98,10 @@ public enum DBC8020001MainDivSpec implements IPredicate<DBC8020001MainDiv> {
                 @Override
                 public boolean apply(DBC8020001MainDiv div
                 ) {
-                    RString 委託者ID = div.getTxtItakushaCode().getValue();
+                    RString 委託者ID = div.getItakusha().getItakushaId();
                     KozaFurikomiMapperParameter parameter;
                     parameter = KozaFurikomiMapperParameter.createSelectParameter(new Decimal(委託者ID.toString()),
-                            div.getTxtFurikomiShiteiYMD().getValue(), SubGyomuCode.DBC介護給付);
+                            div.getTxtWrongFurikomiShiteiYMD().getValue(), SubGyomuCode.DBC介護給付);
                     KozaFurikomiManager manager = KozaFurikomiManager.createInstance();
                     int size = manager.get口座振込リストBy検索条件(parameter).records().size();
                     return 0 != size;

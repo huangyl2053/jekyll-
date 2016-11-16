@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.nenkintokucho;
 
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb241001.TokuchoHaishinDataTorikomiMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.nenkintokucho.NenkinTokuchoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 
 /**
  * バッチ設計_DBB241001_特徴配信データ取り込みのmapperのクラスです。
@@ -23,11 +21,4 @@ public interface INenkinTokuchoMapper {
      */
     NenkinTokuchoEntity get取込ファイル_回付情報();
 
-    /**
-     * 年金特徴回付情報を取得
-     *
-     * @param parameter TokuchoHaishinDataTorikomiMybatisParameter
-     * @return UeT0511NenkinTokuchoKaifuJohoEntity
-     */
-    UeT0511NenkinTokuchoKaifuJohoEntity select年金特徴回付情報(TokuchoHaishinDataTorikomiMybatisParameter parameter);
 }

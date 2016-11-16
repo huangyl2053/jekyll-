@@ -120,13 +120,13 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.yukoKikanSTYMD = commonYMD(entity.get有効期間開始年月日());
             source.yukoKikanEDNengo = commonRStringEra(entity.get有効期間終了年月日());
             source.yukoKikanEDYMD = commonRStringYMD(entity.get有効期間終了年月日());
-            Boolean 公費負担限額減額 = entity.get公費負担上限額減額();
+            RString 公費負担限額減額 = entity.get公費負担上限額減額();
             if (公費負担限額減額 != null) {
                 source.kohiFutanJogenGaku = new RString(公費負担限額減額.toString());
             }
             RString 支給限度基準額1 = entity.get支給限度基準額1();
             if (支給限度基準額1 != null) {
-                source.sikyuGendoKijunGaKu1 = 支給限度基準額1.padLeft(RString.HALF_SPACE, SIX);
+                source.sikyuGendoKijunGaKu1 = 支給限度基準額1;
             }
             source.jogenTekiyoSTNengo1 = commonEra(entity.get上限管理適用開始年月日１());
             source.jogenKaTekiyoSTYMD1 = commonYMD(entity.get上限管理適用開始年月日１());
@@ -178,9 +178,9 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.shaTekiyoSTYMD = commonRStringYMD(entity.get軽減率適用開始年月日());
             source.shaTekiyoEDNengo = commonRStringEra(entity.get軽減率適用終了年月日());
             source.shaTekiyoEDYMD = commonRStringYMD(entity.get軽減率適用終了年月日());
-            Boolean 小規模居宅ｻｰﾋﾞｽ = entity.get小規模居宅ｻｰﾋﾞｽ利用();
+            RString 小規模居宅ｻｰﾋﾞｽ = entity.get小規模居宅ｻｰﾋﾞｽ利用();
             if (小規模居宅ｻｰﾋﾞｽ != null) {
-                source.shokiboKyotakuUmu = new RString(小規模居宅ｻｰﾋﾞｽ.toString());
+                source.shokiboKyotakuUmu = 小規模居宅ｻｰﾋﾞｽ;
             }
             source.nijiYoboTaishoKbn = entity.get二次予防事業区分();
             source.nijiYoboSTNengo = commonEra(entity.get二次予防有効期間開始年月日());

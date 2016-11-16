@@ -24,21 +24,9 @@ public enum KaigoHokenryogakuOutPutOrder implements IReportItems {
      */
     町域コード(new RString("0002"), new RString("町域コード"), new RString("\"atesaki_choikiCode\"")),
     /**
-     * 番地コード1
+     * 番地コード
      */
-    番地コード1(new RString("0003"), new RString("番地コード1"), new RString("\"atesaki_banchiCode1\"")),
-    /**
-     * 番地コード2
-     */
-    番地コード2(new RString("0003"), new RString("番地コード2"), new RString("\"atesaki_banchiCode2\"")),
-    /**
-     * 番地コード3
-     */
-    番地コード3(new RString("0003"), new RString("番地コード3"), new RString("\"atesaki_banchiCode3\"")),
-    /**
-     * 番地コード4
-     */
-    番地コード4(new RString("0003"), new RString("番地コード4"), new RString("\"atesaki_banchiCode4\"")),
+    番地コード(new RString("0003"), new RString("番地コード"), new RString("\"atesaki_banchiCode\"")),
     /**
      * 行政区コード
      */
@@ -91,10 +79,12 @@ public enum KaigoHokenryogakuOutPutOrder implements IReportItems {
      * 納組コード
      */
     納組コード(new RString("0208"), new RString("納組コード"), new RString("\"caT0714nokumiCode\"")),
+    //TODO 仕様確認
     /**
      * 生活保護
      */
     生活保護(new RString("0133"), new RString("生活保護"), new RString("\"生活保護区分\"")),
+    //TODO 仕様確認
     /**
      * 生活保護種別
      */
@@ -106,13 +96,11 @@ public enum KaigoHokenryogakuOutPutOrder implements IReportItems {
     /**
      * 8月特徴開始者
      */
-    //QA1854 確認中
-    八月特徴開始者(new RString("0220"), new RString("八月特徴開始者"), new RString("\"dbT2015KeisangoJoho_sakuseiShoriName\"")),
+    八月特徴開始者(new RString("0220"), new RString("8月特徴開始者"), new RString("\"特徴8月開始者区分\"")),
     /**
      * 10月特徴開始者
      */
-    //QA1854 確認中
-    十月特徴開始者(new RString("0219"), new RString("十月特徴開始者"), new RString("\"dbT2015KeisangoJoho_sakuseiShoriName\""));
+    十月特徴開始者(new RString("0219"), new RString("10月特徴開始者"), new RString("\"特徴10月開始者区分\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

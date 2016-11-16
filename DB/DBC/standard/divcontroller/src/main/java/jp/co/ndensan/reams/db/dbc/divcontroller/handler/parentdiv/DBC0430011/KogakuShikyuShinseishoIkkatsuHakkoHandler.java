@@ -164,6 +164,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
 
         div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(true);
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(true);
+        div.getShinseishoHakkoParameters().getBtniHokenSearch().setDisabled(true);
     }
 
     /**
@@ -215,7 +216,9 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             parameter.setChushutsuJoken(KogakuKyufu_OshiraseTsuchi_ChushutsuJoken.審査年月);
         } else if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
             RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey();
-            処理年月 = new FlexibleYearMonth(年月.toString().substring(BEGININDEX, ENDINDEX));
+            if (!年月.isEmpty()) {
+                処理年月 = new FlexibleYearMonth(年月.toString().substring(BEGININDEX, ENDINDEX));
+            }
             parameter.setChushutsuJoken(KogakuKyufu_OshiraseTsuchi_ChushutsuJoken.被保険者番号);
         } else if (!div.getShinseishoHakkoParameters().getRadHakushiInsatsu().getSelectedKey().isEmpty()) {
             処理年月 = FlexibleYearMonth.EMPTY;

@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc150010.ShutsuRyokuDat
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc150010.CreateRiyojokyoIchiranHyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.DbWT1513RiyoJokyoTokeihyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.riyojokyoichiran.RiyoJokyoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.euc.riyojokyotokeihyomeisailistsakusei.IRiyoJokyoIchiranEUCEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.riyojokyoichiran.RiyoJokyoIchiranReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.riyojokyotokeihyo.RiyoJokyoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.riyojokyotokeihyomeisailistsakusei.RiyoJokyoTokeihyoMeisaiListSakuseiService;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.BreakPageCreator;

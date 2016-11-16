@@ -379,13 +379,13 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
                 : KaigoGassan_Idokubun.toValue(result.get異動区分()).get名称());
         kanriJohoDiv1.getDdlShotokuKBN().setIsBlankLine(false);
         kanriJohoDiv1.getDdlShotokuKBN().setDataSource(set所得区分(result.get対象年度()));
-        if (result.get所得区分() == null) {
+        if (result.get所得区分() == null || result.get所得区分().isEmpty()) {
             kanriJohoDiv1.getDdlShotokuKBN().setSelectedIndex(0);
         } else {
             kanriJohoDiv1.getDdlShotokuKBN().setSelectedKey(result.get所得区分());
         }
         kanriJohoDiv1.getDdl70SaiIjouShotokuKBN().setDataSource(set70歳以上所得区分());
-        if (result.get70歳以上の者に係る所得区分() == null) {
+        if (result.get70歳以上の者に係る所得区分() == null || result.get70歳以上の者に係る所得区分().isEmpty()) {
             kanriJohoDiv1.getDdl70SaiIjouShotokuKBN().setSelectedIndex(0);
         } else {
             kanriJohoDiv1.getDdl70SaiIjouShotokuKBN().setSelectedKey(

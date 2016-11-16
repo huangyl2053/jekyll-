@@ -122,6 +122,7 @@ public class NinteiChosaIraiShudouHandler {
                 div.getNinteichosaIraiByHand().getTxtChosaIraiD().setValue(new RDate(認定調査依頼年月日.toString()));
             }
             div.getTxtHokkoymd().setValue(RDate.getNowDate());
+            div.getTxtKigenymd().setValue(RDate.getNowDate());
             setCheckBoxValue();
         }
     }
@@ -325,7 +326,8 @@ public class NinteiChosaIraiShudouHandler {
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
-                RString.EMPTY,
+                div.getTxtHokkoymd().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString(),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,

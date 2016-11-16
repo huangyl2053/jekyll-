@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.dta.dbb233001;
+package jp.co.ndensan.reams.db.dbb.entity.csv;
 
 import jp.co.ndensan.reams.uz.uza.io.fld.Align;
 import jp.co.ndensan.reams.uz.uza.io.fld.FldField;

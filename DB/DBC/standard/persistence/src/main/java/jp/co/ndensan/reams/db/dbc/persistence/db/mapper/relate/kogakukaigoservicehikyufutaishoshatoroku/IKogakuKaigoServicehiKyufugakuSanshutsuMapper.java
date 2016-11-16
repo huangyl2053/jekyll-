@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3112KogakuShikyuShinsaKette
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.inskyufujissekichukankogakutmpprocess.InsKyufuJissekiChukanJigyoKogakuTmpProcess7Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.inskyufujissekichukankogakutmpprocess.InsKyufuJissekiChukanKogakuTmpProcess7Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannJigyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinShotokuHanteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.HanteiEraaResultEntity;
@@ -529,16 +530,24 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
     List<DbT3055KogakuKyufuTaishoshaGokeiEntity> get高額介護サービス費給付対象者合計();
 
     /**
+     * select高額介護サービス費給付対象者明細全件更新一時メソッドです。
+     *
+     * @return 高額介護サービス費給付対象者明細全件更新一時 TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity
+     */
+    List<TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity> get高額介護サービス費給付対象者明細全件更新一時();
+
+    /**
+     * select事業高額介護サービス費給付対象者明細全件更新一時メソッドです。
+     *
+     * @return 事業高額介護サービス費給付対象者明細全件更新一時 TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity
+     */
+    List<TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity> get事業高額介護サービス費給付対象者明細全件更新一時();
+
+    /**
      * update高額介護サービス費給付対象者合計メソッドです。
      *
      */
     void update高額介護サービス費給付対象者合計();
-
-    /**
-     * insert高額介護サービス給付対象者明細メソッドです。
-     *
-     */
-    void insert高額介護サービス給付対象者明細();
 
     /**
      * insert事業高額介護サービス費支給申請メソッドです。
@@ -573,12 +582,6 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      *
      */
     void update事業高額介護サービス費給付対象者合計();
-
-    /**
-     * insert事業高額介護サービス給付対象者明細メソッドです。
-     *
-     */
-    void insert事業高額介護サービス給付対象者明細();
 
     /**
      * 高額介護サービス世帯員所得判定明細高額一時２と宛名情報の抽出メソッドです。

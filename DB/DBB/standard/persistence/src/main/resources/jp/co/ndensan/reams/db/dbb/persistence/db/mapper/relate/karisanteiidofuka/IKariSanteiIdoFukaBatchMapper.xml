@@ -516,12 +516,12 @@
                  ) AS 賦課Newest
         ON 賦課Newest."hihokenshaNo" = 特別徴収開始Temp."hihokenshaNo"
         AND 賦課Newest."fukaNendo"::int = 特別徴収開始Temp."fukaNendo"::int -1
-        LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別
+        INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別
         ON 賦課Newest."choteiNendo" = 介護期別."choteiNendo"
         AND 賦課Newest."fukaNendo" = 介護期別."fukaNendo"
         AND 賦課Newest."tsuchishoNo" = 介護期別."tsuchishoNo"
         AND 賦課Newest."rirekiNo" = 介護期別."rirekiNo"
-        LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 介護継承
+        INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 介護継承
         ON 介護期別."choteiId" = 介護継承."choteiId"
     </select>
     

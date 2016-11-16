@@ -115,7 +115,7 @@ public class DBC190020_kijunsyunyunenji extends BatchFlowBase<DBC190020_kijunsyu
     protected IBatchFlowCommand callSetaiShotokuKazeiHanteiKogakuKaikoProcess() {
         RString 管理識別区分 = SetaiinHaakuKanriShikibetsuKubun.高額介護.getコード();
         DBB002001_SetaiinHaakuParameter param = new DBB002001_SetaiinHaakuParameter(管理識別区分);
-        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, param).define();
+        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBZ介護共通, param).define();
     }
 
     /**
@@ -204,7 +204,7 @@ public class DBC190020_kijunsyunyunenji extends BatchFlowBase<DBC190020_kijunsyu
     protected IBatchFlowCommand callInsSetaiyinShotokuJyohoTemp2Process() {
         InsSetaiyinShotokuJyohoTemp1ProcessParameter parameter = new InsSetaiyinShotokuJyohoTemp1ProcessParameter();
         parameter.set帳票出力順ID(getParameter().get帳票出力順ID());
-        parameter.set帳票ID(ReportIdDBC.DBC100064.getReportId());
+        parameter.set帳票ID(ReportIdDBC.DBC100075.getReportId());
         parameter.set抽出条件(getParameter().get抽出条件());
         parameter.set世帯員把握基準日2(getParameter().get世帯員把握基準日2());
         parameter.set被保険者番号(new HihokenshaNo(getParameter().get被保険者番号()));

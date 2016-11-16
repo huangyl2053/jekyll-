@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.kyotakuserviceriyohyomain.Kyotaku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.TodokedeKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.HihokenshaKankeiCode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -110,10 +111,10 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         } else {
             div.getTxtTodokedeYmd().setValue(DateConverter.flexibleDateToRDate(居宅給付計画届出.get届出年月日()));
         }
-        if (居宅給付計画届出.get届出区分() == null) {
+        if (RString.isNullOrEmpty(居宅給付計画届出.get届出区分())) {
             div.getTxtTodokedeKubun().clearValue();
         } else {
-            div.getTxtTodokedeKubun().setValue(居宅給付計画届出.get届出区分());
+            div.getTxtTodokedeKubun().setValue(TodokedeKubun.toValue(居宅給付計画届出.get届出区分()).get名称());
         }
         if (row.getTekiyoKaishiYMD() == null) {
             div.getTxtTekiyoKikan().clearFromValue();
@@ -139,7 +140,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         } else {
             div.getTodokedesha().getTxtTodokedeshaShimeiKana().setDomain(居宅給付計画届出.get届出者氏名カナ());
         }
-        if (居宅給付計画届出.get届出者関係区分().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(居宅給付計画届出.get届出者関係区分())) {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().clearValue();
         } else {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().setValue(
@@ -168,7 +169,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         for (TaishoshaIchiranResult result : 対象情報一覧) {
             dgRiyoNentstsuIchiran_Row row = new dgRiyoNentstsuIchiran_Row();
             row.getRiyoYM().setValue(new RDate(result.get利用年月().toString()));
-            if (!result.get更新区分().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(result.get更新区分())) {
                 row.setKoshinKubun(KyufukanrihyoSakuseiKubun.toValue(result.get更新区分()).get名称());
             }
             row.getKoshinYMD().setValue(DateConverter.flexibleDateToRDate(result.get更新年月日()));

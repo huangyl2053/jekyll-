@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaIdoRenrakuhyo;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ViewControl;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -40,6 +44,42 @@ public class JukyushaIdoRenrakuhyoValidationHandler {
     }
 
     private ValidationDictionary create入力チェックDictionary() {
+
+        List<ViewControl> controls = new ArrayList<>();
+
+        RString 食費負担限度額 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getTxtShokuhiFutanGendogaku().getText();
+        RString 従来型個室 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getTxtJuraigataKoshitsuTokuyoFutanGendogaku().getText();
+        RString 老健_療養 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().getText();
+        RString 多床室 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getTxtTashoshitsu().getText();
+        RString ユニット型個室 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getTxtUnitKoshitsuGendogaku().getText();
+        RString ユニット型準個室 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getTxtUnitJunKoshitsuFutanGendogaku().getText();
+
+        if (RString.isNullOrEmpty(食費負担限度額)) {
+            controls.add(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtShokuhiFutanGendogaku());
+        } else if (RString.isNullOrEmpty(従来型個室)) {
+            controls.add(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuTokuyoFutanGendogaku());
+        } else if (RString.isNullOrEmpty(老健_療養)) {
+            controls.add(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku());
+        } else if (RString.isNullOrEmpty(多床室)) {
+            controls.add(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtTashoshitsu());
+        } else if (RString.isNullOrEmpty(ユニット型個室)) {
+            controls.add(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitKoshitsuGendogaku());
+        } else if (RString.isNullOrEmpty(ユニット型準個室)) {
+            controls.add(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitJunKoshitsuFutanGendogaku());
+        }
+
         return new ValidationDictionaryBuilder()
                 .add(JukyushaIdoRenrakuhyoValidationMessage.異動日の必須項目,
                         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD())
@@ -73,13 +113,6 @@ public class JukyushaIdoRenrakuhyoValidationHandler {
                         div.getKyotakuServicePlanPanel().getRadKyotakuServiceSakuseiKubun())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.減免申請中区分の必須項目,
                         div.getGemmenGengakuPanel().getRadGemmenShinseichuKubun())
-                .add(JukyushaIdoRenrakuhyoValidationMessage.利用者負担区分の必須項目,
-                        div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
-                        getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode())
-                .add(JukyushaIdoRenrakuhyoValidationMessage.標準負担区分の必須項目,
-                        div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
-                        getJukyushaIdoRenrakuhyoHyojunFutan().
-                        getRadHyojunFutanKubun())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.認定申請中区分の必須項目,
                         div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                         getRadTokuteiNyushoshaNinteiShinseichuKubun())
@@ -91,8 +124,6 @@ public class JukyushaIdoRenrakuhyoValidationHandler {
                         getRadKaizeisoTokureiGengakuSochiTaishoFlag())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.公費負担上限額減額_生活保護等の必須項目,
                         div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag())
-                .add(JukyushaIdoRenrakuhyoValidationMessage.二次予防事業区分の必須項目,
-                        div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.旧訪問通所_管理適用期間が不正,
                         div.getShikyuGendoKijungakuPanel().getTxtHomonTsushoServiceJogenKanriTekiyoYMD())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.旧短期入所_管理適用期間が不正,
@@ -107,6 +138,7 @@ public class JukyushaIdoRenrakuhyoValidationHandler {
                 .add(JukyushaIdoRenrakuhyoValidationMessage.社会福祉法人軽減情報適用期間が不正,
                         div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                         getJukyushaIdoRenrakuhyoFukushiHojinKeigen().getTxtKeigenritsuTekiyoYMD())
+                .add(JukyushaIdoRenrakuhyoValidationMessage.標準負担と異動日が不正)
                 .add(JukyushaIdoRenrakuhyoValidationMessage.標準負担適用期間が不正,
                         div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                         getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD())
@@ -121,6 +153,8 @@ public class JukyushaIdoRenrakuhyoValidationHandler {
                         div.getRiyosyaFutanWariaiPanel().getTxtRiyosyaFutanWariaiYukoYMD())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.二次予防事業適用期間が不正,
                         div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange())
+                .add(JukyushaIdoRenrakuhyoValidationMessage.認定負担限度額が不正,
+                        controls)
                 .build();
     }
 

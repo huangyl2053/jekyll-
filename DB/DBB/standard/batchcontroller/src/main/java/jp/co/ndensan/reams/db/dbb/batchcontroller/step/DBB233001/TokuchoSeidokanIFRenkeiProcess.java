@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb233001.TokuchouSeidoKanIFRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb233001.TokuchouSeidoKanIFRenkeiEntity;
-import jp.co.ndensan.reams.db.dbb.entity.dta.dbb233001.TokuchouSeidoKanIFRenkeiDTAEntity;
+import jp.co.ndensan.reams.db.dbb.entity.csv.TokuchouSeidoKanIFRenkeiDTAEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosofujohorenkei.ITokuchoSofuJohoRenkeiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;

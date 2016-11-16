@@ -391,17 +391,17 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
     private void set宛先情報(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource source, SofubutsuAtesakiSource compSofubutsuAtesakiソース) {
         source.customerBarCode = compSofubutsuAtesakiソース.customerBarCode;
         source.dainoKubunMei = compSofubutsuAtesakiソース.dainoKubunMei;
-        source.gyoseiku2 = compSofubutsuAtesakiソース.gyoseiku;
-        source.jusho4 = compSofubutsuAtesakiソース.jusho1;
-        source.jusho5 = compSofubutsuAtesakiソース.jusho2;
-        source.jusho6 = compSofubutsuAtesakiソース.jusho3;
+        source.gyoseiku = compSofubutsuAtesakiソース.gyoseiku;
+        source.jusho1 = compSofubutsuAtesakiソース.jusho1;
+        source.jusho2 = compSofubutsuAtesakiソース.jusho2;
+        source.jusho3 = compSofubutsuAtesakiソース.jusho3;
         source.jushoText = compSofubutsuAtesakiソース.jushoText;
         source.kakkoLeft1 = compSofubutsuAtesakiソース.kakkoLeft1;
         source.kakkoLeft2 = compSofubutsuAtesakiソース.kakkoLeft2;
         source.kakkoRight1 = compSofubutsuAtesakiソース.kakkoRight1;
         source.kakkoRight2 = compSofubutsuAtesakiソース.kakkoRight2;
-        source.katagaki3 = compSofubutsuAtesakiソース.katagaki1;
-        source.katagaki4 = compSofubutsuAtesakiソース.katagaki2;
+        source.katagaki1 = compSofubutsuAtesakiソース.katagaki1;
+        source.katagaki2 = compSofubutsuAtesakiソース.katagaki2;
         source.katagakiSmall1 = compSofubutsuAtesakiソース.katagakiSmall1;
         source.katagakiSmall2 = compSofubutsuAtesakiソース.katagakiSmall2;
         source.katagakiText = compSofubutsuAtesakiソース.katagakiText;
@@ -412,8 +412,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         source.samabunShimei1 = compSofubutsuAtesakiソース.samabunShimei1;
         source.samabunShimei2 = compSofubutsuAtesakiソース.samabunShimei2;
         source.samabunShimeiText = compSofubutsuAtesakiソース.samabunShimeiText;
-        source.shimei5 = compSofubutsuAtesakiソース.shimei1;
-        source.shimei6 = compSofubutsuAtesakiソース.shimei2;
+        source.shimei1 = compSofubutsuAtesakiソース.shimei1;
+        source.shimei2 = compSofubutsuAtesakiソース.shimei2;
         source.shimeiSmall1 = compSofubutsuAtesakiソース.shimeiSmall1;
         source.shimeiSmall2 = compSofubutsuAtesakiソース.shimeiSmall2;
         source.shimeiText = compSofubutsuAtesakiソース.shimeiText;

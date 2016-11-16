@@ -47,6 +47,7 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiDac implements ISaveable<DbT
     private static final RString 支給整理番号 = new RString("支給申請書整理番号");
     private static final RString 履歴の番号 = new RString("履歴番号");
     private static final RString 高額合算支給不支給決定エンティティ = new RString("高額合算支給不支給決定エンティティ");
+    private static final RString メッセージ_支給申請書整理番号 = new RString("支給申請書整理番号");
 
     /**
      * 主キーで高額合算支給不支給決定を取得します。
@@ -213,6 +214,22 @@ public class DbT3074KogakuGassanShikyuFushikyuKetteiDac implements ISaveable<DbT
                                 eq(isDeleted, false))).
                 order(by(rirekiNo, Order.DESC)).limit(1).
                 toObject(DbT3074KogakuGassanShikyuFushikyuKetteiEntity.class);
+    }
+
+    /**
+     * 高額合算支給不支給決定データを取得します。
+     *
+     * @param 支給申請書整理番号 RString
+     * @return List<DbT3075KogakuGassanKyufuJissekiEntity>
+     */
+    @Transaction
+    public List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> get高額合算支給不支給決定データ(RString 支給申請書整理番号) {
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_支給申請書整理番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3074KogakuGassanShikyuFushikyuKettei.class).
+                where(eq(shikyuSeiriNo, 支給申請書整理番号)).
+                toList(DbT3074KogakuGassanShikyuFushikyuKetteiEntity.class);
     }
 
     /**

@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.DelSetaiyinShot
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.DelTaishoSeitaiyinTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.InsTaishoSeitaiyinTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdSetaiyinShotokuJyohoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.UpdShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp2Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190020.UpdTaishoSeitaiyinTemp3Process;
@@ -19,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.CreateTaishoSet
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp2Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.InsSetaiyinShotokuJyohoTemp3Process;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.UpdShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030.UpdTaishoSeitaiyinTemp5Process;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030.DBC190030_kijunsyunygetsujiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuJoken;
@@ -125,7 +125,7 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_kijunsy
 
     @Step(世帯員把握バッチ)
     IBatchFlowCommand setaiShotokuKazeiHanteiFlow() {
-        return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBB介護賦課,
+        return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBZ介護共通,
                 new DBB002001_SetaiinHaakuParameter(管理識別区分)).define();
     }
 

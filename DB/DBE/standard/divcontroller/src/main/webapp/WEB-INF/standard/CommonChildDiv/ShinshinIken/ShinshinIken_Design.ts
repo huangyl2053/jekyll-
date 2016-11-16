@@ -8,20 +8,20 @@ module DBE {
 
         export class Events {
 
-            public static changeChkNinchishoShuhenShojoUmu(): string {
-                return "changeChkNinchishoShuhenShojoUmu";
+            public static changeRadNinchishoShuhenShojoUmu(): string {
+                return "changeRadNinchishoShuhenShojoUmu";
             }
 
             public static changeChkNinchishoShuhenShojoSonota(): string {
                 return "changeChkNinchishoShuhenShojoSonota";
             }
 
-            public static changeChkSonotaShojo(): string {
-                return "changeChkSonotaShojo";
+            public static changeRadSonotaShojo(): string {
+                return "changeRadSonotaShojo";
             }
 
-            public static changeChkSenmonJushin(): string {
-                return "changeChkSenmonJushin";
+            public static changeRadSenmonJushin(): string {
+                return "changeRadSenmonJushin";
             }
 
             public static changeChkShishiKesson(): string {
@@ -113,12 +113,12 @@ module DBE {
                 return new UZA.Panel(this.convFiledName("NichijoJiritsudo"));
             }
 
-            public chkShogaiKoreishaNichijoSeikatsuJiritsudo(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkShogaiKoreishaNichijoSeikatsuJiritsudo"));
+            public radShogaiKoreishaNichijoSeikatsuJiritsudo(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radShogaiKoreishaNichijoSeikatsuJiritsudo"));
             }
 
-            public chkNinchishoKoreishaJiritsu(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkNinchishoKoreishaJiritsu"));
+            public radNinchishoKoreishaJiritsu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radNinchishoKoreishaJiritsu"));
             }
 
             public NinchishoChukakuShojo(): UZA.Panel {
@@ -141,8 +141,8 @@ module DBE {
                 return new UZA.Panel(this.convFiledName("NinchishoShuhenShojo"));
             }
 
-            public chkNinchishoShuhenShojoUmu(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkNinchishoShuhenShojoUmu"));
+            public radNinchishoShuhenShojoUmu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radNinchishoShuhenShojoUmu"));
             }
 
             public chkNinchishoShuhenShojo(): UZA.CheckBoxList {
@@ -161,16 +161,16 @@ module DBE {
                 return new UZA.Panel(this.convFiledName("SonotaShojo"));
             }
 
-            public chkSonotaShojo(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkSonotaShojo"));
+            public radSonotaShojo(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radSonotaShojo"));
             }
 
             public txtShojomei(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtShojomei"));
             }
 
-            public chkSenmonJushin(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkSenmonJushin"));
+            public radSenmonJushin(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radSenmonJushin"));
             }
 
             public txtShosaiTokkiJiko(): UZA.TextBox {
@@ -181,20 +181,20 @@ module DBE {
                 return new UZA.Panel(this.convFiledName("KaradaJotai"));
             }
 
-            public chkKikiude(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkKikiude"));
+            public radKikiude(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKikiude"));
             }
 
             public txtShincho(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtShincho"));
             }
 
-            public txtTaiju(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtTaiju"));
+            public radKakoTaijuHenka(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKakoTaijuHenka"));
             }
 
-            public chkKakoTaijuHenka(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkKakoTaijuHenka"));
+            public txtTaiju(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTaiju"));
             }
 
             public chkShishiKesson(): UZA.CheckBoxList {
@@ -217,32 +217,32 @@ module DBE {
                 return new UZA.CheckBoxList(this.convFiledName("chkMigiJoshiMahi"));
             }
 
-            public chkMigiJoshiMahiTeido(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkMigiJoshiMahiTeido"));
+            public radMigiJoshiMahiTeido(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radMigiJoshiMahiTeido"));
             }
 
             public chkHidariJoshiMahi(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkHidariJoshiMahi"));
             }
 
-            public chkHidariJoshiMahiTeido(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkHidariJoshiMahiTeido"));
+            public radHidariJoshiMahiTeido(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radHidariJoshiMahiTeido"));
             }
 
             public chkMigiKashiMahi(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkMigiKashiMahi"));
             }
 
-            public chkMigiKashiMahiTeido(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkMigiKashiMahiTeido"));
+            public radMigiKashiMahiTeido(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radMigiKashiMahiTeido"));
             }
 
             public chkHidariKashiMahi(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkHidariKashiMahi"));
             }
 
-            public chkHidariKashiMahiTeido(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkHidariKashiMahiTeido"));
+            public radHidariKashiMahiTeido(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radHidariKashiMahiTeido"));
             }
 
             public Sp1(): UZA.Space {
@@ -257,8 +257,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtSonotaMahiBui"));
             }
 
-            public SonotaMahiTeido(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("SonotaMahiTeido"));
+            public radSonotaMahiTeido(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radSonotaMahiTeido"));
             }
 
             public linHorizon2(): UZA.HorizontalLine {
@@ -273,8 +273,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtKinryokuTeikaBui"));
             }
 
-            public chkKinryokuTeikaTeido(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkKinryokuTeikaTeido"));
+            public radKinryokuTeikaTeido(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKinryokuTeikaTeido"));
             }
 
             public linHorizon3(): UZA.HorizontalLine {
@@ -289,8 +289,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtKansetsuKoshukuBui"));
             }
 
-            public chkKansetsuKoshukuTeido(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkKansetsuKoshukuTeido"));
+            public radKansetsuKoshukuTeido(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKansetsuKoshukuTeido"));
             }
 
             public linHorizon4(): UZA.HorizontalLine {
@@ -305,8 +305,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtKansetsuItamiBui"));
             }
 
-            public chkKansetsuItamiTeido(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkKansetsuItamiTeido"));
+            public radKansetsuItamiTeido(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKansetsuItamiTeido"));
             }
 
             public linHorizon5(): UZA.HorizontalLine {
@@ -341,8 +341,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtJokusoBui"));
             }
 
-            public chkJokusoTeido(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkJokusoTeido"));
+            public radJokusoTeido(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radJokusoTeido"));
             }
 
             public linHorizon7(): UZA.HorizontalLine {
@@ -357,8 +357,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtSonotaHifuShikkanBui"));
             }
 
-            public chkSonotaHifuShikkanTeido(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkSonotaHifuShikkanTeido"));
+            public radSonotaHifuShikkanTeido(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radSonotaHifuShikkanTeido"));
             }
 
             public btnKakutei(): UZA.Button {

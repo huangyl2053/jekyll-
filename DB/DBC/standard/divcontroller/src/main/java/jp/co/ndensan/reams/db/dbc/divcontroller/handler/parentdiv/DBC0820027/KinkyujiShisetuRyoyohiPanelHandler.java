@@ -11,27 +11,23 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyoBuilder;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.KinkyujiShisetuRyoyohiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.dgdKinkyujiShiseturyoyo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
-import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面のハンドラクラスです
@@ -48,6 +44,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 登録_削除 = new RString("登録_削除");
+    private static final RString 確定する = new RString("Element1");
     private static final int 位置１ = 32;
     private static final int 位置２ = 64;
     private static final int 位置３ = 96;
@@ -69,7 +66,6 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
     private static final int 位置１９ = 608;
     private static final int 位置２０ = 640;
     private static final int SIX = 6;
-    private static final int ZERO = 0;
 
     private KinkyujiShisetuRyoyohiPanelHandler(KinkyujiShisetuRyoyohiPanelDiv div) {
         this.div = div;
@@ -97,9 +93,8 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
      * @param 証明書 RString
      * @param 様式番号 RString
      * @param 識別コード ShikibetsuCode
-     * @return ArrayList<ShokanKinkyuShisetsuRyoyo>
      */
-    public ArrayList<ShokanKinkyuShisetsuRyoyo> initPanelHead(HihokenshaNo 被保険者番号,
+    public void initPanelHead(HihokenshaNo 被保険者番号,
             RString 整理番号,
             FlexibleYearMonth サービス年月,
             RDate 申請日,
@@ -117,10 +112,6 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
 
-        ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
-        ArrayList<ShokanKinkyuShisetsuRyoyo> list = (ArrayList<ShokanKinkyuShisetsuRyoyo>) finder.
-                getKinkyujiShisetsuRyoyoData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-        return list;
     }
 
     /**
@@ -132,42 +123,46 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         List<dgdKinkyujiShiseturyoyo_Row> lists = new ArrayList<>();
         for (ShokanKinkyuShisetsuRyoyo result : list) {
             dgdKinkyujiShiseturyoyo_Row row = new dgdKinkyujiShiseturyoyo_Row();
-            row.setDefaultDataName1(result.get緊急時傷病名１());
-            row.setDefaultDataName2(result.get緊急時傷病名２());
-            row.setDefaultDataName3(result.get緊急時傷病名３());
-            if (result.get緊急時治療開始年月日１() != null) {
-                row.getDefaultDataName4().setValue(new RDate(result.get緊急時治療開始年月日１()
-                        .wareki().toDateString().toString()));
-            }
-            if (result.get緊急時治療開始年月日２() != null) {
-                row.getDefaultDataName5().setValue(new RDate(result.get緊急時治療開始年月日２()
-                        .wareki().toDateString().toString()));
-            }
-            if (result.get緊急時治療開始年月日３() != null) {
-                row.getDefaultDataName6().setValue(new RDate(result.get緊急時治療開始年月日３()
-                        .wareki().toDateString().toString()));
-            }
-
-            row.getDefaultDataName7().setValue(new Decimal(result.get往診日数()));
-            row.setDefaultDataName8(result.get往診医療機関名());
-            row.getDefaultDataName9().setValue(new Decimal(result.get通院日数()));
-            row.setDefaultDataName10(result.get通院医療機関名());
-
-            row.getDefaultDataName11().setValue(new Decimal(result.get緊急時治療管理単位数()));
-            row.getDefaultDataName12().setValue(new Decimal(result.get緊急時治療管理日数()));
-            row.getDefaultDataName13().setValue(new Decimal(result.get緊急時治療管理小計()));
-            row.getDefaultDataName14().setValue(new Decimal(result.get緊急時施設療養費合計単位数()));
-
-            row.getDefaultDataName15().setValue(new Decimal(result.getリハビリテーション単位数()));
-            row.getDefaultDataName16().setValue(new Decimal(result.get処置単位数()));
-            row.getDefaultDataName17().setValue(new Decimal(result.get手術単位数()));
-            row.getDefaultDataName18().setValue(new Decimal(result.get麻酔単位数()));
-            row.getDefaultDataName19().setValue(new Decimal(result.get放射線治療単位数()));
-            row.setDefaultDataName20(get摘要(result));
-            row.setDefaultDataName21(result.get連番());
+            setRow(row, result);
             lists.add(row);
         }
         div.getDgdKinkyujiShiseturyoyo().setDataSource(lists);
+    }
+
+    private void setRow(dgdKinkyujiShiseturyoyo_Row row, ShokanKinkyuShisetsuRyoyo result) {
+        row.setDefaultDataName1(result.get緊急時傷病名１());
+        row.setDefaultDataName2(result.get緊急時傷病名２());
+        row.setDefaultDataName3(result.get緊急時傷病名３());
+        if (result.get緊急時治療開始年月日１() != null && !result.get緊急時治療開始年月日１().isEmpty()) {
+            row.getDefaultDataName4().setValue(new RDate(result.get緊急時治療開始年月日１()
+                    .wareki().toDateString().toString()));
+        }
+        if (result.get緊急時治療開始年月日２() != null && !result.get緊急時治療開始年月日２().isEmpty()) {
+            row.getDefaultDataName5().setValue(new RDate(result.get緊急時治療開始年月日２()
+                    .wareki().toDateString().toString()));
+        }
+        if (result.get緊急時治療開始年月日３() != null && !result.get緊急時治療開始年月日３().isEmpty()) {
+            row.getDefaultDataName6().setValue(new RDate(result.get緊急時治療開始年月日３()
+                    .wareki().toDateString().toString()));
+        }
+
+        row.getDefaultDataName7().setValue(new Decimal(result.get往診日数()));
+        row.setDefaultDataName8(result.get往診医療機関名());
+        row.getDefaultDataName9().setValue(new Decimal(result.get通院日数()));
+        row.setDefaultDataName10(result.get通院医療機関名());
+
+        row.getDefaultDataName11().setValue(new Decimal(result.get緊急時治療管理単位数()));
+        row.getDefaultDataName12().setValue(new Decimal(result.get緊急時治療管理日数()));
+        row.getDefaultDataName13().setValue(new Decimal(result.get緊急時治療管理小計()));
+        row.getDefaultDataName14().setValue(new Decimal(result.get緊急時施設療養費合計単位数()));
+
+        row.getDefaultDataName15().setValue(new Decimal(result.getリハビリテーション単位数()));
+        row.getDefaultDataName16().setValue(new Decimal(result.get処置単位数()));
+        row.getDefaultDataName17().setValue(new Decimal(result.get手術単位数()));
+        row.getDefaultDataName18().setValue(new Decimal(result.get麻酔単位数()));
+        row.getDefaultDataName19().setValue(new Decimal(result.get放射線治療単位数()));
+        row.setDefaultDataName20(get摘要(result));
+        row.setDefaultDataName21(result.get連番());
     }
 
     private RString get摘要(ShokanKinkyuShisetsuRyoyo result) {
@@ -347,469 +342,328 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         return false;
     }
 
-    /**
-     * 申請を保存する設定
-     *
-     * @param keys ShoukanharaihishinseimeisaikensakuParameter
-     * @param 処理モード RString
-     * @param shokanKinkyuShisetsuRyoyoList List<ShokanKinkyuShisetsuRyoyo>
-     */
-    public void 保存処理(ShoukanharaihishinseimeisaikensakuParameter keys,
-            RString 処理モード, List<ShokanKinkyuShisetsuRyoyo> shokanKinkyuShisetsuRyoyoList) {
-        JigyoshaNo 事業者番号 = keys.get事業者番号();
-        RString 様式番号 = keys.get様式番号();
-        HihokenshaNo 被保険者番号 = keys.get被保険者番号();
-        FlexibleYearMonth 提供購入年月 = new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().
-                getValue().toDateString().substring(0, SIX));
-        RString 整理番号 = keys.get整理番号();
-        RString 明細番号 = keys.get明細番号();
-        if (削除.equals(処理モード)) {
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
-                    被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        } else {
-            int max連番 = 0;
-            Map<RString, ShokanKinkyuShisetsuRyoyo> map = new HashMap<>();
-            for (ShokanKinkyuShisetsuRyoyo entity : shokanKinkyuShisetsuRyoyoList) {
-                map.put(entity.get連番(), entity);
-                if (max連番 < Integer.valueOf(entity.get連番().toString())) {
-                    max連番 = Integer.valueOf(entity.get連番().toString());
-                }
-            }
-
-            List<ShokanKinkyuShisetsuRyoyo> list = new ArrayList<>();
-
-            for (dgdKinkyujiShiseturyoyo_Row row : div.getDgdKinkyujiShiseturyoyo().getDataSource()) {
-                if (RowState.Added == row.getRowState()) {
-                    max連番 = max連番 + 1;
-                    ShokanKinkyuShisetsuRyoyo entity = new ShokanKinkyuShisetsuRyoyo(
-                            被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号,
-                            new RString(String.format("%02d", max連番)));
-                    entity = entity.added();
-                    entity = buildEntity(entity, row);
-                    list.add(entity);
-                } else if (RowState.Modified == row.getRowState()) {
-                    ShokanKinkyuShisetsuRyoyo entityModified = map.get(row.getDefaultDataName21());
-                    entityModified = entityModified.modified();
-                    entityModified = buildEntity(entityModified, row);
-                    list.add(entityModified);
-                } else if (RowState.Deleted == row.getRowState()) {
-                    ShokanKinkyuShisetsuRyoyo entityDeleted = map.get(row.getDefaultDataName21());
-                    entityDeleted = entityDeleted.deleted();
-                    list.add(entityDeleted);
-                } else {
-                    list.add(map.get(row.getDefaultDataName21()));
-                }
-            }
-            RString 証明書コード = div.getPanelHead().getTxtShomeisho().getValue();
-
-            ShokanKihonParameter parameter = ShokanKihonParameter.
-                    createSelectByKeyParam(被保険者番号, 提供購入年月, 整理番号, 事業者番号, 証明書コード, 明細番号, 0);
-            SyokanbaraihiShikyuShinseiKetteManager manager = SyokanbaraihiShikyuShinseiKetteManager.createInstance();
-            manager.updShokanKinkyuShisetsuRyoyo(parameter, list);
-        }
-    }
-
-    private ShokanKinkyuShisetsuRyoyo buildEntity(ShokanKinkyuShisetsuRyoyo entity, dgdKinkyujiShiseturyoyo_Row row) {
-        ShokanKinkyuShisetsuRyoyoBuilder builder = entity.createBuilderForEdit();
-        builder = clear2(builder);
-        builder.set緊急時傷病名１(row.getDefaultDataName1());
-        builder.set緊急時傷病名２(row.getDefaultDataName2());
-        builder.set緊急時傷病名３(row.getDefaultDataName3());
-
-        if (row.getDefaultDataName4().getValue() != null) {
-            builder.set緊急時治療開始年月日１(new FlexibleDate(row.getDefaultDataName4().getValue()
-                    .seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString().toString()));
-        }
-
-        if (row.getDefaultDataName5().getValue() != null) {
-            builder.set緊急時治療開始年月日２(new FlexibleDate(row.getDefaultDataName5().getValue()
-                    .seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString().toString()));
-        }
-
-        if (row.getDefaultDataName6().getValue() != null) {
-            builder.set緊急時治療開始年月日３(new FlexibleDate(row.getDefaultDataName6().getValue()
-                    .seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString().toString()));
-        }
-
-        if (row.getDefaultDataName7().getValue() != null) {
-            builder.set往診日数(Integer.valueOf(row.getDefaultDataName7().getValue().toString()));
-        }
-        builder.set往診医療機関名(row.getDefaultDataName8());
-
-        if (row.getDefaultDataName9().getValue() != null) {
-            builder.set通院日数(Integer.valueOf(row.getDefaultDataName9().getValue().toString()));
-        }
-        builder.set通院医療機関名(row.getDefaultDataName10());
-
-        if (row.getDefaultDataName11().getValue() != null) {
-            builder.set緊急時治療管理単位数(Integer.valueOf(row.getDefaultDataName11().getValue().toString()));
-        }
-
-        if (row.getDefaultDataName12().getValue() != null) {
-            builder.set緊急時治療管理日数(Integer.valueOf(row.getDefaultDataName12().getValue().toString()));
-        }
-
-        if (row.getDefaultDataName13().getValue() != null) {
-            builder.set緊急時治療管理小計(Integer.valueOf(row.getDefaultDataName13().getValue().toString()));
-        }
-
-        if (row.getDefaultDataName15().getValue() != null) {
-            builder.setリハビリテーション単位数(Integer.valueOf(row.getDefaultDataName15().getValue().toString()));
-        }
-
-        if (row.getDefaultDataName16().getValue() != null) {
-            builder.set処置単位数(Integer.valueOf(row.getDefaultDataName16().getValue().toString()));
-        }
-
-        if (row.getDefaultDataName17().getValue() != null) {
-            builder.set手術単位数(Integer.valueOf(row.getDefaultDataName17().getValue().toString()));
-        }
-
-        if (row.getDefaultDataName18().getValue() != null) {
-            builder.set麻酔単位数(Integer.valueOf(row.getDefaultDataName18().getValue().toString()));
-        }
-
-        if (row.getDefaultDataName19().getValue() != null) {
-            builder.set放射線治療単位数(Integer.valueOf(row.getDefaultDataName19().getValue().toString()));
-        }
-
-        if (row.getDefaultDataName14().getValue() != null) {
-            builder.set緊急時施設療養費合計単位数(Integer.valueOf(row.getDefaultDataName14().getValue().toString()));
-        }
-
-        RString 摘要 = row.getDefaultDataName20();
+    private ShokanKinkyuShisetsuRyoyo build摘要(ShokanKinkyuShisetsuRyoyo ryoyo, RString 摘要) {
         int length = 摘要.length();
-        if (length != 0) {
-            builder = build摘要(builder, length, 摘要);
-        }
-        return builder.build();
-    }
-
-    private ShokanKinkyuShisetsuRyoyoBuilder clear2(ShokanKinkyuShisetsuRyoyoBuilder builder) {
-        builder.set緊急時治療開始年月日１(null).set緊急時治療開始年月日２(null).set緊急時治療開始年月日３(null).
-                set往診日数(ZERO).set通院日数(ZERO).set緊急時治療管理単位数(ZERO).set緊急時治療管理日数(ZERO).
-                set緊急時治療管理小計(ZERO).setリハビリテーション単位数(ZERO).set処置単位数(ZERO).
-                set手術単位数(ZERO).set麻酔単位数(ZERO).set放射線治療単位数(ZERO).
-                set緊急時施設療養費合計単位数(ZERO).set摘要１(null).set摘要２(null).set摘要３(null).
-                set摘要４(null).set摘要５(null).set摘要６(null).set摘要７(null).set摘要８(null).
-                set摘要８(null).set摘要９(null).set摘要１０(null).set摘要１１(null).
-                set摘要１２(null).set摘要１３(null).set摘要１４(null).set摘要１５(null).
-                set摘要１６(null).set摘要１７(null).set摘要１８(null).set摘要１９(null).
-                set摘要２０(null).build();
-        return builder;
-    }
-
-    private ShokanKinkyuShisetsuRyoyoBuilder build摘要(ShokanKinkyuShisetsuRyoyoBuilder builder,
-            int length, RString 摘要) {
         if (length <= 位置１) {
-            builder.set摘要１(摘要);
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要).build();
         }
         if (length > 位置１ && length <= 位置２) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, length));
+            ryoyo = ryoyo.createBuilderForEdit()
+                    .set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, length))
+                    .build();
         }
         if (length > 位置２ && length <= 位置３) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, length))
+                    .build();
         }
         if (length > 位置３ && length <= 位置４) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, length))
+                    .build();
         }
         if (length > 位置４ && length <= 位置５) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, length))
+                    .build();
         }
         if (length > 位置５ && length <= 位置６) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, length))
+                    .build();
         }
         if (length > 位置６ && length <= 位置７) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, length))
+                    .build();
         }
         if (length > 位置７ && length <= 位置８) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, length))
+                    .build();
         }
 
-        builder = build摘要2(builder, length, 摘要);
-        return builder;
+        ryoyo = build摘要2(ryoyo, length, 摘要);
+        return ryoyo;
     }
 
-    private ShokanKinkyuShisetsuRyoyoBuilder build摘要2(ShokanKinkyuShisetsuRyoyoBuilder builder,
+    private ShokanKinkyuShisetsuRyoyo build摘要2(ShokanKinkyuShisetsuRyoyo ryoyo,
             int length, RString 摘要) {
         if (length > 位置８ && length <= 位置９) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, length))
+                    .build();
         }
         if (length > 位置９ && length <= 位置１０) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, length))
+                    .build();
         }
         if (length > 位置１０ && length <= 位置１１) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, 位置１０));
-            builder.set摘要１１(摘要.substring(位置１０, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, 位置１０))
+                    .set摘要１１(摘要.substring(位置１０, length))
+                    .build();
         }
         if (length > 位置１１ && length <= 位置１２) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, 位置１０));
-            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
-            builder.set摘要１２(摘要.substring(位置１１, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, 位置１０))
+                    .set摘要１１(摘要.substring(位置１０, 位置１１))
+                    .set摘要１２(摘要.substring(位置１１, length))
+                    .build();
         }
         if (length > 位置１２ && length <= 位置１３) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, 位置１０));
-            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
-            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
-            builder.set摘要１３(摘要.substring(位置１２, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, 位置１０))
+                    .set摘要１１(摘要.substring(位置１０, 位置１１))
+                    .set摘要１２(摘要.substring(位置１１, 位置１２))
+                    .set摘要１３(摘要.substring(位置１２, length))
+                    .build();
         }
         if (length > 位置１３ && length <= 位置１４) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, 位置１０));
-            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
-            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
-            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
-            builder.set摘要１４(摘要.substring(位置１３, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, 位置１０))
+                    .set摘要１１(摘要.substring(位置１０, 位置１１))
+                    .set摘要１２(摘要.substring(位置１１, 位置１２))
+                    .set摘要１３(摘要.substring(位置１２, 位置１３))
+                    .set摘要１４(摘要.substring(位置１３, length))
+                    .build();
         }
-        builder = build摘要3(builder, length, 摘要);
-        return builder;
+        ryoyo = build摘要3(ryoyo, length, 摘要);
+        return ryoyo;
     }
 
-    private ShokanKinkyuShisetsuRyoyoBuilder build摘要3(ShokanKinkyuShisetsuRyoyoBuilder builder,
+    private ShokanKinkyuShisetsuRyoyo build摘要3(ShokanKinkyuShisetsuRyoyo ryoyo,
             int length, RString 摘要) {
         if (length > 位置１４ && length <= 位置１５) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, 位置１０));
-            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
-            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
-            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
-            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
-            builder.set摘要１５(摘要.substring(位置１４, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, 位置１０))
+                    .set摘要１１(摘要.substring(位置１０, 位置１１))
+                    .set摘要１２(摘要.substring(位置１１, 位置１２))
+                    .set摘要１３(摘要.substring(位置１２, 位置１３))
+                    .set摘要１４(摘要.substring(位置１３, 位置１４))
+                    .set摘要１５(摘要.substring(位置１４, length))
+                    .build();
         }
         if (length > 位置１５ && length <= 位置１６) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, 位置１０));
-            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
-            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
-            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
-            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
-            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
-            builder.set摘要１６(摘要.substring(位置１５, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, 位置１０))
+                    .set摘要１１(摘要.substring(位置１０, 位置１１))
+                    .set摘要１２(摘要.substring(位置１１, 位置１２))
+                    .set摘要１３(摘要.substring(位置１２, 位置１３))
+                    .set摘要１４(摘要.substring(位置１３, 位置１４))
+                    .set摘要１５(摘要.substring(位置１４, 位置１５))
+                    .set摘要１６(摘要.substring(位置１５, length))
+                    .build();
         }
         if (length > 位置１６ && length <= 位置１７) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, 位置１０));
-            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
-            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
-            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
-            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
-            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
-            builder.set摘要１６(摘要.substring(位置１５, 位置１６));
-            builder.set摘要１７(摘要.substring(位置１６, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, 位置１０))
+                    .set摘要１１(摘要.substring(位置１０, 位置１１))
+                    .set摘要１２(摘要.substring(位置１１, 位置１２))
+                    .set摘要１３(摘要.substring(位置１２, 位置１３))
+                    .set摘要１４(摘要.substring(位置１３, 位置１４))
+                    .set摘要１５(摘要.substring(位置１４, 位置１５))
+                    .set摘要１６(摘要.substring(位置１５, 位置１６))
+                    .set摘要１７(摘要.substring(位置１６, length))
+                    .build();
         }
         if (length > 位置１７ && length <= 位置１８) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, 位置１０));
-            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
-            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
-            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
-            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
-            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
-            builder.set摘要１６(摘要.substring(位置１５, 位置１６));
-            builder.set摘要１７(摘要.substring(位置１６, 位置１７));
-            builder.set摘要１８(摘要.substring(位置１７, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, 位置１０))
+                    .set摘要１１(摘要.substring(位置１０, 位置１１))
+                    .set摘要１２(摘要.substring(位置１１, 位置１２))
+                    .set摘要１３(摘要.substring(位置１２, 位置１３))
+                    .set摘要１４(摘要.substring(位置１３, 位置１４))
+                    .set摘要１５(摘要.substring(位置１４, 位置１５))
+                    .set摘要１６(摘要.substring(位置１５, 位置１６))
+                    .set摘要１７(摘要.substring(位置１６, 位置１７))
+                    .set摘要１８(摘要.substring(位置１７, length))
+                    .build();
         }
         if (length > 位置１８ && length <= 位置１９) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, 位置１０));
-            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
-            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
-            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
-            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
-            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
-            builder.set摘要１６(摘要.substring(位置１５, 位置１６));
-            builder.set摘要１７(摘要.substring(位置１６, 位置１７));
-            builder.set摘要１８(摘要.substring(位置１７, 位置１８));
-            builder.set摘要１９(摘要.substring(位置１８, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, 位置１０))
+                    .set摘要１１(摘要.substring(位置１０, 位置１１))
+                    .set摘要１２(摘要.substring(位置１１, 位置１２))
+                    .set摘要１３(摘要.substring(位置１２, 位置１３))
+                    .set摘要１４(摘要.substring(位置１３, 位置１４))
+                    .set摘要１５(摘要.substring(位置１４, 位置１５))
+                    .set摘要１６(摘要.substring(位置１５, 位置１６))
+                    .set摘要１７(摘要.substring(位置１６, 位置１７))
+                    .set摘要１８(摘要.substring(位置１７, 位置１８))
+                    .set摘要１９(摘要.substring(位置１８, length))
+                    .build();
         }
         if (length > 位置１９ && length <= 位置２０) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, 位置１０));
-            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
-            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
-            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
-            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
-            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
-            builder.set摘要１６(摘要.substring(位置１５, 位置１６));
-            builder.set摘要１７(摘要.substring(位置１６, 位置１７));
-            builder.set摘要１８(摘要.substring(位置１７, 位置１８));
-            builder.set摘要１９(摘要.substring(位置１８, 位置１９));
-            builder.set摘要２０(摘要.substring(位置１９, length));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, 位置１０))
+                    .set摘要１１(摘要.substring(位置１０, 位置１１))
+                    .set摘要１２(摘要.substring(位置１１, 位置１２))
+                    .set摘要１３(摘要.substring(位置１２, 位置１３))
+                    .set摘要１４(摘要.substring(位置１３, 位置１４))
+                    .set摘要１５(摘要.substring(位置１４, 位置１５))
+                    .set摘要１６(摘要.substring(位置１５, 位置１６))
+                    .set摘要１７(摘要.substring(位置１６, 位置１７))
+                    .set摘要１８(摘要.substring(位置１７, 位置１８))
+                    .set摘要１９(摘要.substring(位置１８, 位置１９))
+                    .set摘要２０(摘要.substring(位置１９, length))
+                    .build();
         }
         if (length > 位置２０) {
-            builder.set摘要１(摘要.substring(0, 位置１));
-            builder.set摘要２(摘要.substring(位置１, 位置２));
-            builder.set摘要３(摘要.substring(位置２, 位置３));
-            builder.set摘要４(摘要.substring(位置３, 位置４));
-            builder.set摘要５(摘要.substring(位置４, 位置５));
-            builder.set摘要６(摘要.substring(位置５, 位置６));
-            builder.set摘要７(摘要.substring(位置６, 位置７));
-            builder.set摘要８(摘要.substring(位置７, 位置８));
-            builder.set摘要９(摘要.substring(位置８, 位置９));
-            builder.set摘要１０(摘要.substring(位置９, 位置１０));
-            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
-            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
-            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
-            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
-            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
-            builder.set摘要１６(摘要.substring(位置１５, 位置１６));
-            builder.set摘要１７(摘要.substring(位置１６, 位置１７));
-            builder.set摘要１８(摘要.substring(位置１７, 位置１８));
-            builder.set摘要１９(摘要.substring(位置１８, 位置１９));
-            builder.set摘要２０(摘要.substring(位置１９, 位置２０));
+            ryoyo = ryoyo.createBuilderForEdit().set摘要１(摘要.substring(0, 位置１))
+                    .set摘要２(摘要.substring(位置１, 位置２))
+                    .set摘要３(摘要.substring(位置２, 位置３))
+                    .set摘要４(摘要.substring(位置３, 位置４))
+                    .set摘要５(摘要.substring(位置４, 位置５))
+                    .set摘要６(摘要.substring(位置５, 位置６))
+                    .set摘要７(摘要.substring(位置６, 位置７))
+                    .set摘要８(摘要.substring(位置７, 位置８))
+                    .set摘要９(摘要.substring(位置８, 位置９))
+                    .set摘要１０(摘要.substring(位置９, 位置１０))
+                    .set摘要１１(摘要.substring(位置１０, 位置１１))
+                    .set摘要１２(摘要.substring(位置１１, 位置１２))
+                    .set摘要１３(摘要.substring(位置１２, 位置１３))
+                    .set摘要１４(摘要.substring(位置１３, 位置１４))
+                    .set摘要１５(摘要.substring(位置１４, 位置１５))
+                    .set摘要１６(摘要.substring(位置１５, 位置１６))
+                    .set摘要１７(摘要.substring(位置１６, 位置１７))
+                    .set摘要１８(摘要.substring(位置１７, 位置１８))
+                    .set摘要１９(摘要.substring(位置１８, 位置１９))
+                    .set摘要２０(摘要.substring(位置１９, 位置２０))
+                    .build();
         }
-        return builder;
+        return ryoyo;
     }
 
     /**
      * ボタン表示制御処理
      *
      * @param entity ShikibetsuNoKanri
-     * @param parameter ShoukanharaihishinseimeisaikensakuParameter
+     * @param count 基本情報件数
      */
-    public void getボタンを制御(ShikibetsuNoKanri entity, ShoukanharaihishinseimeisaikensakuParameter parameter) {
-
-        FlexibleYearMonth サービス年月 = parameter.getサービス年月();
-        HihokenshaNo 被保険者番号 = parameter.get被保険者番号();
-        RString 整理番号 = parameter.get整理番号();
-        JigyoshaNo 事業者番号 = parameter.get事業者番号();
-        RString 明細番号 = parameter.get明細番号();
-        RString 様式番号 = parameter.get様式番号();
-
+    public void getボタンを制御(ShikibetsuNoKanri entity, int count) {
         if (設定不可.equals(entity.get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
         } else if (設定可必須.equals(entity.get基本設定区分())) {
-            int count1 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShokanKihonCount(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count1 != 0) {
+            if (count != 0) {
                 div.getPanelHead().getBtnKihonInfo().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKihonInfo().setIconNameEnum(IconName.Complete);
@@ -821,9 +675,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         if (設定不可.equals(entity.get明細設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisai().setDisabled(true);
         } else if (設定可必須.equals(entity.get明細設定区分())) {
-            int count2 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanMeisaiCount(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count2 != 0) {
+            if (count != 0) {
                 div.getPanelHead().getBtnKyufuhiMeisai().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKyufuhiMeisai().setIconNameEnum(IconName.Complete);
@@ -835,9 +687,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         if (設定不可.equals(entity.get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryohi().setDisabled(true);
         } else if (設定可必須.equals(entity.get特定診療費設定区分())) {
-            int count3 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count3 != 0) {
+            if (count != 0) {
                 div.getPanelHead().getBtnTokuteiShinryohi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnTokuteiShinryohi().setIconNameEnum(IconName.Complete);
@@ -846,20 +696,15 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
             div.getPanelHead().getBtnTokuteiShinryohi().setIconNameEnum(IconName.NONE);
         }
 
-        getボタンを制御2(entity, サービス年月, 被保険者番号, 整理番号, 事業者番号, 明細番号, 様式番号);
-        getボタンを制御3(entity, サービス年月, 被保険者番号, 整理番号, 事業者番号, 明細番号, 様式番号);
+        getボタンを制御2(entity, count);
+        getボタンを制御3(entity, count);
     }
 
-    private void getボタンを制御2(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月,
-            HihokenshaNo 被保険者番号, RString 整理番号, JigyoshaNo 事業者番号,
-            RString 明細番号, RString 様式番号) {
-
+    private void getボタンを制御2(ShikibetsuNoKanri entity, int count) {
         if (設定不可.equals(entity.get居宅計画費設定区分())) {
             div.getPanelHead().getBtnServiceKeikakuhi().setDisabled(true);
         } else if (設定可必須.equals(entity.get居宅計画費設定区分())) {
-            int count4 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanServicePlan(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count4 != 0) {
+            if (count != 0) {
                 div.getPanelHead().getBtnServiceKeikakuhi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnServiceKeikakuhi().setIconNameEnum(IconName.Complete);
@@ -871,10 +716,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         if (設定不可.equals(entity.get特定入所者設定区分())) {
             div.getPanelHead().getBtnTokuteiNyushosya().setDisabled(true);
         } else if (設定可必須.equals(entity.get特定入所者設定区分())) {
-            int count5 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                    .updShokanTokuteiNyushoshaKaigoServiceHiyo(被保険者番号, サービス年月, 整理番号,
-                            事業者番号, 様式番号, 明細番号);
-            if (count5 != 0) {
+            if (count != 0) {
                 div.getPanelHead().getBtnTokuteiNyushosya().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnTokuteiNyushosya().setIconNameEnum(IconName.Complete);
@@ -888,9 +730,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         if (設定不可.equals(entity.get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setDisabled(true);
         } else if (設定可必須.equals(entity.get明細住所地特例設定区分())) {
-            int count6 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShokanMeisaiJushochiTokureiCount(
-                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count6 != 0) {
+            if (count != 0) {
                 div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setIconNameEnum(IconName.Complete);
@@ -900,16 +740,11 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         }
     }
 
-    private void getボタンを制御3(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月,
-            HihokenshaNo 被保険者番号, RString 整理番号, JigyoshaNo 事業者番号,
-            RString 明細番号, RString 様式番号) {
-
+    private void getボタンを制御3(ShikibetsuNoKanri entity, int count) {
         if (設定不可.equals(entity.get緊急時施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShoteiShikan().setDisabled(true);
         } else if (設定可必須.equals(entity.get緊急時施設療養設定区分())) {
-            int count7 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShoteiShikkanShisetsuRyoyo(
-                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count7 != 0) {
+            if (count != 0) {
                 div.getPanelHead().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.Complete);
@@ -921,9 +756,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         if (設定不可.equals(entity.get食事費用設定区分())) {
             div.getPanelHead().getBtnShokujiHiyo().setDisabled(true);
         } else if (設定可必須.equals(entity.get食事費用設定区分())) {
-            int count9 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShokujiHiyo(
-                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count9 != 0) {
+            if (count != 0) {
                 div.getPanelHead().getBtnShokujiHiyo().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnShokujiHiyo().setIconNameEnum(IconName.Complete);
@@ -935,9 +768,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         if (設定不可.equals(entity.get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
         } else if (設定可必須.equals(entity.get集計設定区分())) {
-            int count10 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShukei(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count10 != 0) {
+            if (count != 0) {
                 div.getPanelHead().getBtnSeikyugakuShukei().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnSeikyugakuShukei().setIconNameEnum(IconName.Complete);
@@ -949,9 +780,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         if (設定不可.equals(entity.get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         } else if (設定可必須.equals(entity.get社会福祉法人軽減設定区分())) {
-            int count11 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShakaiFukushiHojinKeigengaku(
-                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count11 != 0) {
+            if (count != 0) {
                 div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.Complete);
@@ -1015,6 +844,17 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         div.getBtnAdd().setDisabled(true);
         div.getDgdKinkyujiShiseturyoyo().setReadOnly(true);
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(確定する, true);
+    }
+
+    /**
+     * 新規修正モード初期化
+     */
+    public void init_Added() {
+        div.getBtnAdd().setDisabled(false);
+        div.getDgdKinkyujiShiseturyoyo().setReadOnly(false);
+        div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(false);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(確定する, false);
     }
 
     /**
@@ -1052,12 +892,14 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
     /**
      * 「確定ボタン」押下設置
      *
-     * @param state RString
+     * @param state 状態
+     * @param renban 連番
+     * @return is追加
      */
-    public void click_Confirm(RString state) {
+    public boolean click_Confirm(RString state, int renban) {
         div.getBtnAdd().setDisabled(false);
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(true);
-
+        boolean is追加 = false;
         List<dgdKinkyujiShiseturyoyo_Row> list = div.getDgdKinkyujiShiseturyoyo().getDataSource();
         if (登録.equals(state)) {
             if (!RString.EMPTY.equals(div.getRowId())) {
@@ -1065,7 +907,9 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
                 confirm(row, state);
                 list.set(Integer.parseInt(div.getRowId().toString()), row);
             } else {
+                is追加 = true;
                 dgdKinkyujiShiseturyoyo_Row row = new dgdKinkyujiShiseturyoyo_Row();
+                row.setDefaultDataName21(new RString(renban));
                 confirm(row, state);
                 list.add(row);
             }
@@ -1078,24 +922,200 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
             list.set(Integer.parseInt(div.getRowId().toString()), row);
         }
         div.getDgdKinkyujiShiseturyoyo().setDataSource(list);
+        return is追加;
     }
 
     /**
      * 入力チェック
      *
-     * @return ValidationMessageControlPairs
+     * @param flag ShomeishoNyuryokuFlag
      */
-    public ValidationMessageControlPairs 入力チェック() {
-        KinkyujiShisetuRyoyohiPanelValidationHandler validationHandler = new KinkyujiShisetuRyoyohiPanelValidationHandler();
-        ValidationMessageControlPairs validPairs;
+    public void set証明書入力有無フラグ(ShomeishoNyuryokuFlag flag) {
         for (dgdKinkyujiShiseturyoyo_Row row : div.getDgdKinkyujiShiseturyoyo().getDataSource()) {
-            if (RowState.Added == row.getRowState() || RowState.Modified == row.getRowState()) {
-                validPairs = validationHandler.必須チェックValidate(row);
-                if (validPairs.iterator().hasNext()) {
-                    return validPairs;
+            if (RowState.Added == row.getRowState()) {
+                flag.set緊急時施設療養費_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力あり);
+                break;
+            }
+        }
+    }
+
+    /**
+     * 最大連番を取る
+     *
+     * @param list {@link ShokanKinkyuShisetsuRyoyo}のリスト
+     * @return 最大連番
+     */
+    public int get最大連番(List<ShokanKinkyuShisetsuRyoyo> list) {
+        int renban = 0;
+        for (ShokanKinkyuShisetsuRyoyo shokanKinyuShisetsuRyoyo : list) {
+            int renbanlist = Integer.parseInt(shokanKinyuShisetsuRyoyo.get連番().toString());
+            if (renbanlist - renban > 0) {
+                renban = renbanlist;
+            }
+        }
+        return renban;
+    }
+
+    /**
+     * 更新リストを取る
+     *
+     * @param list {@link ShokanKinkyuShisetsuRyoyo}リスト
+     * @param parameter ShoukanharaihishinseimeisaikensakuParameter
+     * @param updateList ShokanKinkyuShisetsuRyoyo
+     * @return 更新リスト
+     */
+    public List<ShokanKinkyuShisetsuRyoyo> get更新リスト(
+            List<ShokanKinkyuShisetsuRyoyo> list, ShoukanharaihishinseimeisaikensakuParameter parameter,
+            List<ShokanKinkyuShisetsuRyoyo> updateList) {
+        List<dgdKinkyujiShiseturyoyo_Row> rowList = div.getDgdKinkyujiShiseturyoyo().getDataSource();
+        if (updateList == null) {
+            updateList = new ArrayList<>();
+        }
+        List<dgdKinkyujiShiseturyoyo_Row> addedRowList = new ArrayList<>();
+        List<dgdKinkyujiShiseturyoyo_Row> updateRowList = new ArrayList<>();
+        List<dgdKinkyujiShiseturyoyo_Row> deletedRowList = new ArrayList<>();
+        for (dgdKinkyujiShiseturyoyo_Row row : rowList) {
+            if (row.getRowState() == RowState.Added) {
+                addedRowList.add(row);
+            }
+            if (row.getRowState() == RowState.Deleted) {
+                deletedRowList.add(row);
+            }
+            if (row.getRowState() == RowState.Modified) {
+                updateRowList.add(row);
+            }
+        }
+        for (ShokanKinkyuShisetsuRyoyo ryoyo : list) {
+            for (dgdKinkyujiShiseturyoyo_Row updateRow : updateRowList) {
+                if (ryoyo.get連番().equals(updateRow.getDefaultDataName21())) {
+                    ryoyo = set償還払請求緊急時施設療養(ryoyo, updateRow);
+                    ryoyo = ryoyo.modified();
+                    updateList.add(ryoyo);
+                }
+            }
+            for (dgdKinkyujiShiseturyoyo_Row deletedRow : deletedRowList) {
+                if (ryoyo.get連番().equals(deletedRow.getDefaultDataName21())) {
+                    ryoyo = ryoyo.deleted();
+                    updateList.add(ryoyo);
                 }
             }
         }
-        return null;
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getPanelCcd().getCcdKaigoShikakuKihon().get被保険者番号());
+        FlexibleYearMonth サービス提供年月 = FlexibleYearMonth.EMPTY;
+        if (div.getPanelHead().getTxtServiceTeikyoYM().getValue() != null) {
+            サービス提供年月 = new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().
+                    toDateString().substring(0, SIX));
+        }
+        RString 整理番号 = parameter.get整理番号();
+        JigyoshaNo 事業者番号 = parameter.get事業者番号();
+        RString 様式番号 = parameter.get様式番号();
+        RString 明細番号 = parameter.get明細番号();
+        for (dgdKinkyujiShiseturyoyo_Row addedRow : addedRowList) {
+            ShokanKinkyuShisetsuRyoyo ryoyo = new ShokanKinkyuShisetsuRyoyo(
+                    被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, addedRow.getDefaultDataName21());
+            ryoyo = set償還払請求緊急時施設療養(ryoyo, addedRow);
+            updateList.add(ryoyo);
+        }
+        return updateList;
+    }
+
+    private ShokanKinkyuShisetsuRyoyo set償還払請求緊急時施設療養(
+            ShokanKinkyuShisetsuRyoyo ryoyo, dgdKinkyujiShiseturyoyo_Row updateRow) {
+        ryoyo = ryoyo.createBuilderForEdit()
+                .set緊急時傷病名１(updateRow.getDefaultDataName1())
+                .set緊急時傷病名２(updateRow.getDefaultDataName2())
+                .set緊急時傷病名３(updateRow.getDefaultDataName3())
+                .set緊急時治療開始年月日１(updateRow.getDefaultDataName4().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(updateRow.getDefaultDataName4().getValue().toDateString()))
+                .set緊急時治療開始年月日２(updateRow.getDefaultDataName5().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(updateRow.getDefaultDataName5().getValue().toDateString()))
+                .set緊急時治療開始年月日３(updateRow.getDefaultDataName6().getValue() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(updateRow.getDefaultDataName6().getValue().toDateString()))
+                .set往診日数(null == updateRow.getDefaultDataName7().getValue()
+                        ? 0 : updateRow.getDefaultDataName7().getValue().intValue())
+                .set往診医療機関名(updateRow.getDefaultDataName8())
+                .set通院日数(updateRow.getDefaultDataName9().getValue() == null
+                        ? 0 : updateRow.getDefaultDataName7().getValue().intValue())
+                .set通院医療機関名(updateRow.getDefaultDataName10())
+                .set緊急時治療管理単位数(updateRow.getDefaultDataName11().getValue() == null
+                        ? 0 : updateRow.getDefaultDataName11().getValue().intValue())
+                .set緊急時治療管理日数(updateRow.getDefaultDataName12().getValue() == null
+                        ? 0 : updateRow.getDefaultDataName12().getValue().intValue())
+                .set緊急時治療管理小計(updateRow.getDefaultDataName13().getValue() == null
+                        ? 0 : updateRow.getDefaultDataName13().getValue().intValue())
+                .setリハビリテーション単位数(updateRow.getDefaultDataName15().getValue() == null
+                        ? 0 : updateRow.getDefaultDataName15().getValue().intValue())
+                .set処置単位数(updateRow.getDefaultDataName16().getValue() == null
+                        ? 0 : updateRow.getDefaultDataName16().getValue().intValue())
+                .set手術単位数(updateRow.getDefaultDataName17().getValue() == null
+                        ? 0 : updateRow.getDefaultDataName17().getValue().intValue())
+                .set麻酔単位数(updateRow.getDefaultDataName18().getValue() == null
+                        ? 0 : updateRow.getDefaultDataName18().getValue().intValue())
+                .set放射線治療単位数(updateRow.getDefaultDataName19().getValue() == null
+                        ? 0 : updateRow.getDefaultDataName19().getValue().intValue())
+                .set緊急時施設療養費合計単位数(updateRow.getDefaultDataName14().getValue() == null
+                        ? 0 : updateRow.getDefaultDataName14().getValue().intValue())
+                .build();
+        RString 摘要 = updateRow.getDefaultDataName20();
+        ryoyo = build摘要(ryoyo, 摘要);
+        return ryoyo;
+    }
+
+    /**
+     * 緊急時施設療養費一覧
+     *
+     * @param list ShokanKinkyuShisetsuRyoyo
+     * @param updateList ShokanKinkyuShisetsuRyoyo
+     * @param map Map
+     * @return ShokanKinkyuShisetsuRyoyo
+     */
+    public List<ShokanKinkyuShisetsuRyoyo> setRealList(
+            List<ShokanKinkyuShisetsuRyoyo> list, List<ShokanKinkyuShisetsuRyoyo> updateList,
+            Map<RString, RString> map) {
+        List<dgdKinkyujiShiseturyoyo_Row> rowList = new ArrayList<>();
+        List<ShokanKinkyuShisetsuRyoyo> realList = new ArrayList<>();
+        for (Map.Entry<RString, RString> mapValue : map.entrySet()) {
+            dgdKinkyujiShiseturyoyo_Row row = new dgdKinkyujiShiseturyoyo_Row();
+            boolean isModified = false;
+            for (ShokanKinkyuShisetsuRyoyo updateRyoyo : updateList) {
+                if (mapValue.getValue().equals(updateRyoyo.get連番())) {
+                    setRow(row, updateRyoyo);
+                    RowState rowState = RowState.valueOf(mapValue.getKey().toString());
+                    if (rowState == RowState.Modified) {
+                        isModified = true;
+                    }
+                    row.setRowState(rowState);
+                    rowList.add(row);
+                    realList.add(updateRyoyo);
+                    break;
+                }
+            }
+            if (!isModified) {
+                for (ShokanKinkyuShisetsuRyoyo result : list) {
+                    if (mapValue.getValue().equals(result.get連番())) {
+                        setRow(row, result);
+                        row.setRowState(RowState.valueOf(mapValue.getKey().toString()));
+                        rowList.add(row);
+                        realList.add(result);
+                        break;
+                    }
+                }
+            }
+        }
+        div.getDgdKinkyujiShiseturyoyo().setDataSource(rowList);
+        return realList;
+    }
+
+    /**
+     * データグリッドについてのMapを取る
+     *
+     * @return map
+     */
+    public Map<RString, RString> getDataGridMap() {
+        Map<RString, RString> map = new HashMap<>();
+        for (dgdKinkyujiShiseturyoyo_Row row : div.getDgdKinkyujiShiseturyoyo().getDataSource()) {
+            map.put(new RString(row.getRowState().name()), row.getDefaultDataName21());
+        }
+        return map;
     }
 }

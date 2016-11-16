@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.workflowcontroller.dbbwf82002;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB213001.DBB213001_TokuchoSofuJohoRenkeiParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
@@ -23,7 +24,7 @@ public class DBBWF82002 {
      */
     public DBB213001_TokuchoSofuJohoRenkeiParameter toBatchParameter(FlowParameters flowParameter) {
         DBB213001_TokuchoSofuJohoRenkeiParameter parameter
-                = new DBB213001_TokuchoSofuJohoRenkeiParameter();
+                = new DBB213001_TokuchoSofuJohoRenkeiParameter(RString.EMPTY);
         return parameter;
     }
 

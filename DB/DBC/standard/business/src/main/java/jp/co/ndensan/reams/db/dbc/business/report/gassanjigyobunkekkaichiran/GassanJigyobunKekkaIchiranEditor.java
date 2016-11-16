@@ -59,6 +59,7 @@ public class GassanJigyobunKekkaIchiranEditor implements
     private final JigyobunShikyugakuRenrakuhyo entity;
     private final IOutputOrder 出力順情報;
     private final RString 自市町村コード;
+    private final List<RString> breakItemIds;
 
     /**
      * コンストラクタです
@@ -66,12 +67,15 @@ public class GassanJigyobunKekkaIchiranEditor implements
      * @param entity JigyobunShikyugakuRenrakuhyo
      * @param 出力順情報 IOutputOrder
      * @param 自市町村コード RString
+     * @param breakItemIds List<RString>
      *
      */
-    public GassanJigyobunKekkaIchiranEditor(JigyobunShikyugakuRenrakuhyo entity, IOutputOrder 出力順情報, RString 自市町村コード) {
+    public GassanJigyobunKekkaIchiranEditor(JigyobunShikyugakuRenrakuhyo entity, IOutputOrder 出力順情報, RString 自市町村コード,
+            List<RString> breakItemIds) {
         this.entity = entity;
         this.出力順情報 = 出力順情報;
         this.自市町村コード = 自市町村コード;
+        this.breakItemIds = breakItemIds;
     }
 
     @Override
@@ -95,7 +99,6 @@ public class GassanJigyobunKekkaIchiranEditor implements
 
         source.city_cd = 自市町村コード;
         source.city_mei = entity.get市町村名();
-        setHeader(source);
 
         if (帳票用データ == null) {
             source.List1_2 = 無関連データ;
@@ -163,6 +166,7 @@ public class GassanJigyobunKekkaIchiranEditor implements
             source.yubinNo = 帳票用データ.getYubinNo();
             source.taishoNendo = 帳票用データ.getTaishoNendo();
             source.shoKisaiHokenshaNo = 帳票用データ.getShoKisaiHokenshaNo();
+            setHeader(source);
         }
 
         return source;
@@ -206,20 +210,21 @@ public class GassanJigyobunKekkaIchiranEditor implements
             list = new ArrayList<>();
         }
 
-        if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
-            改頁１ = new RString(list.get(0).get出力順位());
+        List<RString> returnList = getReturnList(source);
+        if (returnList.size() > INDEX_0) {
+            改頁１ = returnList.get(INDEX_0);
         }
-        if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
+        if (returnList.size() > INDEX_1) {
             改頁２ = RString.EMPTY;
         }
-        if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
-            改頁３ = new RString(list.get(INDEX_2).get出力順位());
+        if (returnList.size() > INDEX_2) {
+            改頁３ = returnList.get(INDEX_2);
         }
-        if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
+        if (returnList.size() > INDEX_3) {
             改頁４ = RString.EMPTY;
         }
-        if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
-            改頁５ = new RString(list.get(INDEX_4).get出力順位());
+        if (returnList.size() > INDEX_4) {
+            改頁５ = returnList.get(INDEX_4);
         }
 
         if (list.size() > INDEX_0) {
@@ -266,5 +271,44 @@ public class GassanJigyobunKekkaIchiranEditor implements
                 source.List1_4 = 不支給結果;
             }
         }
+    }
+
+    private List<RString> getReturnList(GassanJigyobunKekkaIchiranSource source) {
+        List<RString> list = this.breakItemIds;
+        List<RString> list2 = new ArrayList();
+        if (list.contains(GassanJigyobunKekkaIchiranOrder.証記載保険者番号.get項目ID())) {
+            list2.add(source.shoKisaiHokenshaNo);
+        }
+        if (list.contains(GassanJigyobunKekkaIchiranOrder.郵便番号.get項目ID())) {
+            list2.add(source.yubinNo);
+        }
+        if (list.contains(GassanJigyobunKekkaIchiranOrder.町域コード.get項目ID())) {
+            list2.add(source.choikiCode);
+        }
+        if (list.contains(GassanJigyobunKekkaIchiranOrder.行政区コード.get項目ID())) {
+            list2.add(source.gyoseiCode);
+        }
+        if (list.contains(GassanJigyobunKekkaIchiranOrder.氏名５０音カナ.get項目ID())) {
+            list2.add(source.atenaKanaShimei);
+        }
+        if (list.contains(GassanJigyobunKekkaIchiranOrder.市町村コード.get項目ID())) {
+            list2.add(source.shichosonCode);
+        }
+        if (list.contains(GassanJigyobunKekkaIchiranOrder.被保険者番号.get項目ID())) {
+            list2.add(source.List1_1);
+        }
+        if (list.contains(GassanJigyobunKekkaIchiranOrder.支払方法.get項目ID())) {
+            list2.add(source.List1_14);
+        }
+        if (list.contains(GassanJigyobunKekkaIchiranOrder.対象年度.get項目ID())) {
+            list2.add(source.taishoNendo);
+        }
+        if (list.contains(GassanJigyobunKekkaIchiranOrder.支給区分コード.get項目ID())) {
+            list2.add(source.List1_4);
+        }
+        if (list.contains(GassanJigyobunKekkaIchiranOrder.申請書整理番号.get項目ID())) {
+            list2.add(source.List1_3);
+        }
+        return list2;
     }
 }

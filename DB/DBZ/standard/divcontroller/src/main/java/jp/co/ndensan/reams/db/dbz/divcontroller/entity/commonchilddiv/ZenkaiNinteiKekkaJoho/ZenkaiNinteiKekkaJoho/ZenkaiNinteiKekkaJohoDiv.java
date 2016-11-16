@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @reamsid_L DBE-3000-020 dongyabin
  */
 public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekkaJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-04_20-07-38">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -285,7 +285,8 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
     public static enum ShokaiButtonType implements ICommonChildDivMode {
 
         ShokaiButtonMode("ShokaiButtonMode"),
-        ShokaiButtonNoneMode("ShokaiButtonNoneMode");
+        ShokaiButtonNoneMode("ShokaiButtonNoneMode"),
+        ShokaiButtonDisabledMode("ShokaiButtonDisabledMode");
 
         private final String name;
 

@@ -35,7 +35,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.HolidayAccessor;
@@ -80,7 +82,8 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final int INDEX_9 = 9;
     private static final int INDEX_10 = 10;
     private static final RString MARU = new RString("○○");
-    private static final RString 審査会名称 = new RString("第○○回審査会");
+    private static final RString BATU = new RString("×");
+    private static final RString 審査会名称 = new RString("第○○回　合×");
     private static final RString 汎用キー = new RString("審査会開催番号");
     private static final RString NENNDO = new RString("年");
     private static final RString GETSU = new RString("月");
@@ -632,8 +635,9 @@ public class ShinsakaiKaisaiYoteiToroku {
                 if (Integer.parseInt(開催番号.toString()) == INDEX_0) {
                     開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー).nextString();
                 }
+                RString 合議体番号 = new RString(entity.get合議体番号());
                 entity.set開催番号(開催番号);
-                entity.set審査会名称(entity.get審査会名称().replace(MARU, 開催番号));
+                entity.set審査会名称(entity.get審査会名称().replace(MARU, 開催番号).replace(BATU, 合議体番号));
             }
             yoteiJohoEntityList2.addAll(shinkiList);
         }
@@ -665,7 +669,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     }
 
     private RString setLblMonth(RYearMonth month) {
-        return month.seireki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        return month.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
     }
 
     private RString setLblMonth(FlexibleYearMonth month) {

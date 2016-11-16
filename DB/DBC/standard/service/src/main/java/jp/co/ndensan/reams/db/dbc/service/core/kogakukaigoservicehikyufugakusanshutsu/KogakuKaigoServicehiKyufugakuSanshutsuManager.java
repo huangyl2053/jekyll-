@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufugakusan
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
@@ -15,11 +16,14 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3112KogakuShikyuShinsaKette
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3056KogakuShikyuShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3057KogakuShikyuHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3058KogakuShikyuShinsaKetteiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3110JigyoKogakuShikyuShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3112KogakuShikyuShinsaKetteiDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3055KogakuKyufuTaishoshaGokeiDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -30,10 +34,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
 
+    private final DbT3054KogakuKyufuTaishoshaMeisaiDac dbt3054Dac;
     private final DbT3055KogakuKyufuTaishoshaGokeiDac dbt3055Dac;
     private final DbT3056KogakuShikyuShinseiDac dbt3056Dac;
     private final DbT3057KogakuShikyuHanteiKekkaDac dbt3057Dac;
     private final DbT3058KogakuShikyuShinsaKetteiDac dbt3058Dac;
+    private final DbT3108JigyoKogakuKyufuTaishoshaMeisaiDac dbt3108Dac;
     private final DbT3109JigyoKogakuKyufuTaishoshaGokeiDac dbt3109Dac;
     private final DbT3110JigyoKogakuShikyuShinseiDac dbt3110Dac;
     private final DbT3111JigyoKogakuShikyuHanteiKekkaDac dbt3111Dac;
@@ -43,10 +49,12 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * コンストラクタです。
      */
     public KogakuKaigoServicehiKyufugakuSanshutsuManager() {
+        this.dbt3054Dac = InstanceProvider.create(DbT3054KogakuKyufuTaishoshaMeisaiDac.class);
         this.dbt3055Dac = InstanceProvider.create(DbT3055KogakuKyufuTaishoshaGokeiDac.class);
         this.dbt3056Dac = InstanceProvider.create(DbT3056KogakuShikyuShinseiDac.class);
         this.dbt3057Dac = InstanceProvider.create(DbT3057KogakuShikyuHanteiKekkaDac.class);
         this.dbt3058Dac = InstanceProvider.create(DbT3058KogakuShikyuShinsaKetteiDac.class);
+        this.dbt3108Dac = InstanceProvider.create(DbT3108JigyoKogakuKyufuTaishoshaMeisaiDac.class);
         this.dbt3109Dac = InstanceProvider.create(DbT3109JigyoKogakuKyufuTaishoshaGokeiDac.class);
         this.dbt3110Dac = InstanceProvider.create(DbT3110JigyoKogakuShikyuShinseiDac.class);
         this.dbt3111Dac = InstanceProvider.create(DbT3111JigyoKogakuShikyuHanteiKekkaDac.class);
@@ -60,6 +68,18 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      */
     public static KogakuKaigoServicehiKyufugakuSanshutsuManager createInstance() {
         return InstanceProvider.create(KogakuKaigoServicehiKyufugakuSanshutsuManager.class);
+    }
+
+    /**
+     * 高額介護サービス費給付対象者明細を登録します。
+     *
+     * @param entity DbT3054KogakuKyufuTaishoshaMeisaiEntity
+     */
+    public void save高額介護サービス費給付対象者明細(DbT3054KogakuKyufuTaishoshaMeisaiEntity entity) {
+        if (!entity.hasChanged()) {
+            return;
+        }
+        this.dbt3054Dac.save(entity);
     }
 
     /**
@@ -108,6 +128,18 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
             return;
         }
         this.dbt3055Dac.save(entity);
+    }
+
+    /**
+     * 事業高額介護サービス費給付対象者明細を登録します。
+     *
+     * @param entity DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity
+     */
+    public void save事業高額介護サービス費給付対象者明細(DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity) {
+        if (!entity.hasChanged()) {
+            return;
+        }
+        this.dbt3108Dac.save(entity);
     }
 
     /**

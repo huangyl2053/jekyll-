@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-@OnNextSchema("rgdb")
 public class ShotaiinHaakuIttokiTempEntity extends DbTableEntityBase<ShotaiinHaakuIttokiTempEntity> implements IDbAccessable {
 
     @PrimaryKey

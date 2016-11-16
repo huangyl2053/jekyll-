@@ -350,6 +350,8 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         }
         getHandler(div).set状態_Two(true);
         ViewStateHolder.put(ViewStateKeys.画面モード, 削除);
+        KogakuGassanShikyuKetteiHoseiDetailParameter parameter = getHandler(div).get決定情報タブ();
+        ViewStateHolder.put(ViewStateKeys.詳細データ, parameter);
         return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報補正);
     }
 
@@ -406,6 +408,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             getHandler(div).set状態_Two(false);
             getHandler(div).set画面tap();
             getHandler(div).release支払方法タブ();
+            div.getCcdShiharaiHohoJoho().clear();
             return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報一覧);
         } else {
             return ResponseData.of(div).respond();

@@ -553,6 +553,13 @@ public class TokuchoInfoFDownloadHandler {
      */
     public void onChange_dgkoikiShoriSelect() {
         List<dgkoikiShoriSelect_Row> 処理対象Rows = div.getKoikiShoriSelect().getDgkoikiShoriSelect().getSelectedItems();
+        List<dgShoriKakunin_Row> 処理状況Rows = div.getTokuchoInfoDownloadShoriKakunin().getDgShoriKakunin().getDataSource();
+        List<RString> 処理月済List = new ArrayList<>();
+        for (dgShoriKakunin_Row 処理状況 : 処理状況Rows) {
+            if (STR_済.equals(処理状況.getTxtJokyo().getValue())) {
+                処理月済List.add(処理状況.getTxtTsuki().getValue());
+            }
+        }
         if (処理対象Rows.isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
         } else {
@@ -560,7 +567,11 @@ public class TokuchoInfoFDownloadHandler {
             処理対象Rows.clear();
             処理対象Rows.add(選択Row);
             div.getKoikiShoriSelect().getDgkoikiShoriSelect().setSelectedItems(処理対象Rows);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, false);
+            if (処理月済List.contains(選択Row.getTxtMonth().getValue())) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, false);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
+            }
         }
     }
 
@@ -570,6 +581,13 @@ public class TokuchoInfoFDownloadHandler {
      */
     public void onChange_dgTsukiShoriSelect() {
         List<dgTsukiShoriSelect_Row> 処理対象Rows = div.getTsukiShoriSelect().getDgTsukiShoriSelect().getSelectedItems();
+        List<dgShoriKakunin_Row> 処理状況Rows = div.getTokuchoInfoDownloadShoriKakunin().getDgShoriKakunin().getDataSource();
+        List<RString> 処理月済List = new ArrayList<>();
+        for (dgShoriKakunin_Row 処理状況 : 処理状況Rows) {
+            if (STR_済.equals(処理状況.getTxtJokyo().getValue())) {
+                処理月済List.add(処理状況.getTxtTsuki().getValue());
+            }
+        }
         if (処理対象Rows.isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
         } else {
@@ -577,7 +595,11 @@ public class TokuchoInfoFDownloadHandler {
             処理対象Rows.clear();
             処理対象Rows.add(選択Row);
             div.getTsukiShoriSelect().getDgTsukiShoriSelect().setSelectedItems(処理対象Rows);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, false);
+            if (処理月済List.contains(選択Row.getTxtMonth().getValue())) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, false);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
+            }
         }
     }
 

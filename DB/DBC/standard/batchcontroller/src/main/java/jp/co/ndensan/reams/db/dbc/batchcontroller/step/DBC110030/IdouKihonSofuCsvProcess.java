@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200010.JukyushaIdorenrakuhyoSofuTaishoshachiranReport;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200010.JukyushaIdorenrakuhyoSofuTaishoshachiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouSofuListTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200010.JukyushaIdorenrakuhyoSofuTaishoshachiranSource;
@@ -16,7 +17,11 @@ import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichoson
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -47,7 +52,6 @@ public class IdouKihonSofuCsvProcess extends BatchProcessBase<IdouSofuListTempEn
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200010");
     private static final RString CSV_作成年月日 = new RString("作成年月日");
-    private static final RString CSV_ページ数 = new RString("ページ数");
     private static final RString CSV_タイトル = new RString("タイトル");
     private static final RString CSV_市町村コード = new RString("市町村コード");
     private static final RString CSV_市町村名称 = new RString("市町村名称");
@@ -63,6 +67,9 @@ public class IdouKihonSofuCsvProcess extends BatchProcessBase<IdouSofuListTempEn
     private RString eucFilePath;
     private FileSpoolManager spoolManager;
     private CsvListWriter csvListWriter;
+    @BatchWriter
+    private BatchReportWriter<JukyushaIdorenrakuhyoSofuTaishoshachiranSource> batchWrite;
+    private static final ReportId REPORT_DBC200010 = ReportIdDBC.DBC200010.getReportId();
 
     @Override
     protected IBatchReader createReader() {
@@ -82,6 +89,8 @@ public class IdouKihonSofuCsvProcess extends BatchProcessBase<IdouSofuListTempEn
                 .hasHeader(true)
                 .setHeader(getHeaderList())
                 .build();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC200010.value()).create();
+        reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
 
     @Override
@@ -103,6 +112,8 @@ public class IdouKihonSofuCsvProcess extends BatchProcessBase<IdouSofuListTempEn
 
     @Override
     protected void afterExecute() {
+        csvListWriter.close();
+        spoolManager.spool(eucFilePath);
         HonnSanteiFukaManager.createInstance().get基本送付出力用();
         HonnSanteiFukaManager.createInstance().get償還送付出力用();
         HonnSanteiFukaManager.createInstance().get高額送付出力用();
@@ -116,7 +127,6 @@ public class IdouKihonSofuCsvProcess extends BatchProcessBase<IdouSofuListTempEn
     public List<RString> getHeaderList() {
         List<RString> headerList = new ArrayList<>();
         headerList.add(CSV_作成年月日);
-        headerList.add(CSV_ページ数);
         headerList.add(CSV_タイトル);
         headerList.add(CSV_市町村コード);
         headerList.add(CSV_市町村名称);
@@ -142,6 +152,7 @@ public class IdouKihonSofuCsvProcess extends BatchProcessBase<IdouSofuListTempEn
     public List<RString> getBodyList(JukyushaIdorenrakuhyoSofuTaishoshachiranEntity entity) {
         List<RString> headerList = new ArrayList<>();
         headerList.add(dateChangeToRString(FlexibleDate.getNowDate()));
+        headerList.add(new RString("受給者異動連絡票情報送付対象者リスト"));
         headerList.add(市町村コード);
         headerList.add(市町村名称);
         headerList.add(entity.get被保険者番号());

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.kyotakuserviceriyohyomain.Kyotaku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.TodokedeKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.HihokenshaKankeiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -118,12 +119,16 @@ public class KyotakuServiceRiyohyoMainHandler {
         } else {
             div.getTxtTodokedeYmd().setValue(DateConverter.flexibleDateToRDate(居宅給付計画届出.get届出年月日()));
         }
-        if (居宅給付計画届出.get届出区分() == null) {
+        if (RString.isNullOrEmpty(居宅給付計画届出.get届出区分())) {
             div.getTxtTodokedeKubun().clearValue();
         } else {
-            div.getTxtTodokedeKubun().setValue(居宅給付計画届出.get届出区分());
+            div.getTxtTodokedeKubun().setValue(TodokedeKubun.toValue(居宅給付計画届出.get届出区分()).get名称());
         }
-        div.getTxtTekiyoKikan().setFromValue(new RDate(row.getTekiyoKaishiYMD().getValue().toString()));
+        if (row.getTekiyoKaishiYMD().getValue() == null || row.getTekiyoKaishiYMD().getValue().toDateString().isEmpty()) {
+            div.getTxtTekiyoKikan().clearFromValue();
+        } else {
+            div.getTxtTekiyoKikan().setFromValue(new RDate(row.getTekiyoKaishiYMD().getValue().toString()));
+        }
         if (row.getTekiyoShuryoYMD() == null) {
             div.getTxtTekiyoKikan().clearToValue();
         } else {
@@ -143,7 +148,7 @@ public class KyotakuServiceRiyohyoMainHandler {
         } else {
             div.getTodokedesha().getTxtTodokedeshaShimeiKana().setDomain(居宅給付計画届出.get届出者氏名カナ());
         }
-        if (居宅給付計画届出.get届出者関係区分() == null) {
+        if (RString.isNullOrEmpty(居宅給付計画届出.get届出者関係区分())) {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().clearValue();
         } else {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().setValue(

@@ -106,6 +106,7 @@ public class KyodoShoriKihonSofuBusiness {
         tableEntity.set履歴番号(entity.getRirekiNo());
         tableEntity.set世帯集約番号(entity.getSetaiShuyakuNo());
         tableEntity.set世帯所得区分コード(entity.getSetaiShotokuKubunCode());
+        tableEntity.set所得区分コード(entity.getShotokuKubunCode());
         tableEntity.set老齢福祉年金受給有フラグ(entity.getRoureiFukushiNenkinJukyuAriFlag());
         tableEntity.set利用者負担第２段階有フラグ(entity.getRiyoshaFutan2DankaiAriFlag());
         tableEntity.set支給申請書出力有フラグ(entity.getShikyuShinseishoOutputAriFlag());
