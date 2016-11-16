@@ -152,14 +152,20 @@ public class JukyushaIdoRenrakuhyoValidationHandler {
                 .add(JukyushaIdoRenrakuhyoValidationMessage.食費限度額適用期間が不正,
                         div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                         getTxtFutanGendogakuTekiyoYMD())
+                .add(JukyushaIdoRenrakuhyoValidationMessage.食費限度額適用情報が不正,
+                        div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.償還払化期間が不正,
                         div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.給付率引下げ期間が不正,
                         div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.二割負担事業適用期間が不正,
                         div.getRiyosyaFutanWariaiPanel().getTxtRiyosyaFutanWariaiYukoYMD())
+                .add(JukyushaIdoRenrakuhyoValidationMessage.二割負担事業適用情報が不正,
+                        div.getRiyosyaFutanWariaiPanel())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.二次予防事業適用期間が不正,
                         div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange())
+                .add(JukyushaIdoRenrakuhyoValidationMessage.二次予防事業適用情報が不正,
+                        div.getNijiyoboJigyoPanel())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.認定負担限度額が不正,
                         controls)
                 .build();

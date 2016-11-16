@@ -78,6 +78,16 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnZengetsuCopy(ServiceRiyohyoInfoDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    前月の明細情報の確認.toString());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
         RDate 利用年月日 = div.getTxtRiyoYM().getValue();
         if (利用年月日 == null) {
             throw new ApplicationException(前月の明細情報エラー.toString());
@@ -91,17 +101,7 @@ public class ServiceRiyohyoInfo {
                 利用年月.minusMonth(1));
         if (サービス利用票情報 == null || サービス利用票情報.isEmpty()) {
             throw new ApplicationException(前月の明細情報エラー.toString());
-        }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    前月の明細情報の確認.toString());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            return ResponseData.of(div).respond();
-        }
+        }        
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         List<dgServiceRiyohyoBeppyoList_Row> rowList = new ArrayList<>();
         int i = 0;
@@ -323,6 +323,10 @@ public class ServiceRiyohyoInfo {
         if (明細計算Pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(明細計算Pairs).respond();
         }
+        ValidationMessageControlPairs 割引適用後率Pairs = validationhandler.validate割引適用後率();
+        if (割引適用後率Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(割引適用後率Pairs).respond();
+        }
         明細の計算(div);
 
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
@@ -352,9 +356,9 @@ public class ServiceRiyohyoInfo {
         }
         if (RSTRING_17.equals(サービス種類Tmp) || RSTRING_67.equals(サービス種類Tmp)
                 || RSTRING_88.equals(サービス種類Tmp)) {
-            ValidationMessageControlPairs サービス単位Pairs = validationhandler.validateサービス単位必須();
-            if (サービス単位Pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(サービス単位Pairs).respond();
+            ValidationMessageControlPairs サービス種類Pairs = validationhandler.validateサービス種類必須();
+            if (サービス種類Pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(サービス種類Pairs).respond();
             }
         } else {
             ValidationMessageControlPairs サービス単位必須以外Pairs = validationhandler.validateサービス単位必須以外();

@@ -436,6 +436,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 return o1.get被保険者番号().compareTo(o2.get被保険者番号());
             }
         });
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        RString 合併情報区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         List<HihokenshaDaicho> daichoList = new ArrayList<>();
         boolean isFirst = true;
         HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
@@ -454,7 +457,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 daichoList.add(daicho);
             } else {
                 sort資格の情報(daichoList);
-                process一時表(daichoList, 賦課情報Map.get(被保険者番号), param);
+                process一時表(daichoList, 賦課情報Map.get(被保険者番号), param, 市町村セキュリティ情報, 合併情報区分);
                 daichoList.clear();
                 被保険者番号 = daicho.get被保険者番号();
                 daichoList.add(daicho);
@@ -463,10 +466,11 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         if (daichoList.isEmpty()) {
             return;
         }
-        process一時表(daichoList, 賦課情報Map.get(daichoList.get(0).get被保険者番号()), param);
+        process一時表(daichoList, 賦課情報Map.get(daichoList.get(0).get被保険者番号()), param, 市町村セキュリティ情報, 合併情報区分);
     }
 
-    private void process一時表(List<HihokenshaDaicho> 資格の情報, FukaJoho 賦課の情報, TsuchishoNoCreateParameter param) {
+    private void process一時表(List<HihokenshaDaicho> 資格の情報, FukaJoho 賦課の情報, TsuchishoNoCreateParameter param,
+            ShichosonSecurityJoho 市町村セキュリティ情報, RString 合併情報区分) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         if (賦課の情報 == null) {
             for (HihokenshaDaicho daicho : 資格の情報) {
@@ -504,7 +508,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 mapper.insertTmpHonsantei(entity);
             }
         }
-        load月別ランク(資格の情報, param.get賦課年度());
+        load月別ランク(資格の情報, param.get賦課年度(), 市町村セキュリティ情報, 合併情報区分);
     }
 
     private void set資格の情報Entity(HihokenshaDaicho 資格の情報, HonsanteiEntity entity,
@@ -546,13 +550,11 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         }
     }
 
-    private void load月別ランク(List<HihokenshaDaicho> 資格の情報, FlexibleYear 賦課年度) {
+    private void load月別ランク(List<HihokenshaDaicho> 資格の情報, FlexibleYear 賦課年度,
+            ShichosonSecurityJoho 市町村セキュリティ情報, RString 合併情報区分) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null
                 && DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
-            RString 合併情報区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,
-                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
             if (合併情報区分_合併あり.equals(合併情報区分)) {
                 HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
                 List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格の情報, 賦課年度);
@@ -756,12 +758,10 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 .set徴収方法履歴番号(調定計算.get徴収方法の情報().get履歴番号() + INT_1);
         if (!is普徴期別金額あり(調定計算.get賦課の情報())) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
+        } else if (!賦課計算の情報.get口座().isEmpty()) {
+            builder.set口座区分(KozaKubun.口座振替.getコード());
         } else {
-            if (!賦課計算の情報.get口座().isEmpty()) {
-                builder.set口座区分(KozaKubun.口座振替.getコード());
-            } else {
-                builder.set口座区分(KozaKubun.現金納付.getコード());
-            }
+            builder.set口座区分(KozaKubun.現金納付.getコード());
         }
         builder.set職権区分(ShokkenKubun.非該当.getコード());
         HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
@@ -834,12 +834,10 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                     .set徴収方法履歴番号(徴収方法の情報.get履歴番号() + INT_1);
             if (!is普徴期別金額あり(賦課の情報_更正後)) {
                 builder.set口座区分(KozaKubun.現金納付.getコード());
+            } else if (!賦課計算の情報.get口座().isEmpty()) {
+                builder.set口座区分(KozaKubun.口座振替.getコード());
             } else {
-                if (!賦課計算の情報.get口座().isEmpty()) {
-                    builder.set口座区分(KozaKubun.口座振替.getコード());
-                } else {
-                    builder.set口座区分(KozaKubun.現金納付.getコード());
-                }
+                builder.set口座区分(KozaKubun.現金納付.getコード());
             }
             HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
             List<HihokenshaDaicho> 資格 = new ArrayList<>();
@@ -1266,12 +1264,18 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         RString 特徴定例納期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_設定納期数, 処理日付, SubGyomuCode.DBB介護賦課);
         業務コンフィグ情報.set特徴定例納期数(Integer.parseInt(特徴定例納期数.toString()));
         List<FlexibleDate> 年金支払日List = new ArrayList<>();
-        RString 年金支払日_4月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_4月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
-        RString 年金支払日_6月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_6月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
-        RString 年金支払日_8月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_8月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
-        RString 年金支払日_10月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_10月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
-        RString 年金支払日_12月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_12月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
-        RString 年金支払日_2月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_2月, 処理日付, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_4月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_4月, 処理日付,
+                SubGyomuCode.DBB介護賦課).getConfigValue();
+        RString 年金支払日_6月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_6月, 処理日付,
+                SubGyomuCode.DBB介護賦課).getConfigValue();
+        RString 年金支払日_8月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_8月, 処理日付,
+                SubGyomuCode.DBB介護賦課).getConfigValue();
+        RString 年金支払日_10月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_10月, 処理日付,
+                SubGyomuCode.DBB介護賦課).getConfigValue();
+        RString 年金支払日_12月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_12月, 処理日付,
+                SubGyomuCode.DBB介護賦課).getConfigValue();
+        RString 年金支払日_2月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_2月, 処理日付,
+                SubGyomuCode.DBB介護賦課).getConfigValue();
         年金支払日List.add(new FlexibleDate(年金支払日_4月));
         年金支払日List.add(new FlexibleDate(年金支払日_6月));
         年金支払日List.add(new FlexibleDate(年金支払日_8月));
@@ -1279,14 +1283,16 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         年金支払日List.add(new FlexibleDate(年金支払日_12月));
         年金支払日List.add(new FlexibleDate(年金支払日_2月));
         業務コンフィグ情報.set年金支払日(年金支払日List);
-        RString 特徴開始前普通徴収_8月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_8月, 処理日付, SubGyomuCode.DBB介護賦課);
+        RString 特徴開始前普通徴収_8月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_8月, 処理日付,
+                SubGyomuCode.DBB介護賦課);
         if (定数_1.equals(特徴開始前普通徴収_8月)) {
             業務コンフィグ情報.set捕捉分開始前普徴区分(定数_1);
         } else if (定数_0.equals(特徴開始前普通徴収_8月)) {
             業務コンフィグ情報.set捕捉分開始前普徴区分(定数_2);
         }
 
-        RString 特徴開始前普通徴収_10月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_10月, 処理日付, SubGyomuCode.DBB介護賦課);
+        RString 特徴開始前普通徴収_10月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_10月, 処理日付,
+                SubGyomuCode.DBB介護賦課);
         if (定数_1.equals(特徴開始前普通徴収_10月)) {
             業務コンフィグ情報.set特徴開始前普徴区分(定数_1);
         } else if (定数_0.equals(特徴開始前普通徴収_10月)) {
@@ -1296,7 +1302,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         業務コンフィグ情報.set増額時普調切替区分(定数_0);
         set捕捉計算区分(業務コンフィグ情報, 処理日付, 算定月);
 
-        RString 期割計算_特徴減額期割方法 = DbBusinessConfig.get(ConfigNameDBB.期割計算_特徴減額期割方法, 処理日付, SubGyomuCode.DBB介護賦課);
+        RString 期割計算_特徴減額期割方法 = DbBusinessConfig.get(ConfigNameDBB.期割計算_特徴減額期割方法, 処理日付,
+                SubGyomuCode.DBB介護賦課);
         if (定数_1.equals(期割計算_特徴減額期割方法)) {
             業務コンフィグ情報.set併徴現年減額区分(定数_2);
         } else if (定数_0.equals(期割計算_特徴減額期割方法)) {
@@ -1367,16 +1374,14 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             kiwariKeisanInput.set特徴開始停止区分(INT_8);
             set特徴停止とする期(kiwariKeisanInput, 資格喪失事由コード, 資格喪失日,
                     特徴喪失日の特徴期, 特別徴収_年金支払い日);
-        } else {
-            if (!is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法11月())
-                    && is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法12月())) {
-                kiwariKeisanInput.set特徴開始停止区分(INT_1);
-                kiwariKeisanInput.set特徴開始停止期(INT_5);
-            } else if (!is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法1月())
-                    && is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法2月())) {
-                kiwariKeisanInput.set特徴開始停止区分(INT_1);
-                kiwariKeisanInput.set特徴開始停止期(INT_6);
-            }
+        } else if (!is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法11月())
+                && is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法12月())) {
+            kiwariKeisanInput.set特徴開始停止区分(INT_1);
+            kiwariKeisanInput.set特徴開始停止期(INT_5);
+        } else if (!is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法1月())
+                && is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法2月())) {
+            kiwariKeisanInput.set特徴開始停止区分(INT_1);
+            kiwariKeisanInput.set特徴開始停止期(INT_6);
         }
     }
 
@@ -1740,7 +1745,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
      * @param 年度内連番 年度内連番
      * @param 処理枝番 処理枝番
      */
-    public void insert処理日付管理(GennendoIdoFukaProcessParameter processParameter, YMDHMS システム日時, RString 処理枝番, RString 年度内連番) {
+    public void insert処理日付管理(GennendoIdoFukaProcessParameter processParameter, YMDHMS システム日時, RString 処理枝番,
+            RString 年度内連番) {
         RString 年度連番;
         DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select最大年度内連番(processParameter.get賦課年度());
         if (entity != null && !RString.isNullOrEmpty(entity.getNendoNaiRenban())) {

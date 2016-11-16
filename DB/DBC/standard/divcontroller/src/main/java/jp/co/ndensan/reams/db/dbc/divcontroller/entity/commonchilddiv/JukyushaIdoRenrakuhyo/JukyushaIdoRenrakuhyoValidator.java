@@ -105,8 +105,12 @@ public class JukyushaIdoRenrakuhyoValidator {
                 .thenAdd(JukyushaIdoRenrakuhyoValidationMessage.給付率引下げ期間が不正)
                 .ifNot(JukyushaIdoRenrakuhyoSpec.二割負担事業適用期間の関連チェック)
                 .thenAdd(JukyushaIdoRenrakuhyoValidationMessage.二割負担事業適用期間が不正)
+                .ifNot(JukyushaIdoRenrakuhyoSpec.二割負担事業適用期間と異動日の関連チェック)
+                .thenAdd(JukyushaIdoRenrakuhyoValidationMessage.二割負担事業適用情報が不正)
                 .ifNot(JukyushaIdoRenrakuhyoSpec.二次予防事業適用期間の関連チェック)
                 .thenAdd(JukyushaIdoRenrakuhyoValidationMessage.二次予防事業適用期間が不正)
+                .ifNot(JukyushaIdoRenrakuhyoSpec.二次予防事業適用期間と異動日の関連チェック)
+                .thenAdd(JukyushaIdoRenrakuhyoValidationMessage.二次予防事業適用情報が不正)
                 .ifNot(JukyushaIdoRenrakuhyoSpec.認定負担限度額の関連チェック)
                 .thenAdd(JukyushaIdoRenrakuhyoValidationMessage.認定負担限度額が不正)
                 .messages());

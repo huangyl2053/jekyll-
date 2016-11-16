@@ -342,6 +342,15 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
                 }
             },
     /**
+     * 二割負担事業適用期間と異動日の関連チェックです。
+     */
+    二割負担事業適用期間と異動日の関連チェック {
+                @Override
+                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+                    return !SpecHelper.check二割負担事業適用期間と異動日の関連(div);
+                }
+            },
+    /**
      * 二次予防事業適用期間の関連チェックです。
      */
     二次予防事業適用期間の関連チェック {
@@ -349,6 +358,15 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
                 public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
                     return !(SpecHelper.check二次予防事業適用期間の関連(div) || SpecHelper.check二次予防事業適用期間の送付年月関連(div)
                     || SpecHelper.check二次予防事業適用期間の異動日関連(div));
+                }
+            },
+    /**
+     * 二次予防事業適用期間と異動日の関連チェックです。
+     */
+    二次予防事業適用期間と異動日の関連チェック {
+                @Override
+                public boolean apply(JukyushaIdoRenrakuhyoDiv div) {
+                    return !SpecHelper.check二次予防事業適用期間と異動日の関連(div);
                 }
             },
     /**
@@ -922,6 +940,19 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         }
 
         /**
+         * 二割負担事業適用期間と異動日の関連チェック４です。
+         *
+         * @param div JukyushaIdoRenrakuhyoDiv
+         * @return 「false」エラー 「true」正常
+         */
+        public static boolean check二割負担事業適用期間と異動日の関連(JukyushaIdoRenrakuhyoDiv div) {
+            FlexibleDate 異動日 = div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().getValue();
+            RDate check年月 = new RDate("平成27年4月1日");
+            return (異動日 != null && !異動日.toString().isEmpty() && 異動日.isBefore(new FlexibleDate(check年月.toString())))
+                    && 期間いずれか設定チェック(div.getRiyosyaFutanWariaiPanel().getTxtRiyosyaFutanWariaiYukoYMD());
+        }
+
+        /**
          * 二次予防事業適用期間の関連チェックです。
          *
          * @param div JukyushaIdoRenrakuhyoDiv
@@ -958,6 +989,19 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
         }
 
         /**
+         * 二次予防事業適用期間と異動日の関連チェック４です。
+         *
+         * @param div JukyushaIdoRenrakuhyoDiv
+         * @return 「false」エラー 「true」正常
+         */
+        public static boolean check二次予防事業適用期間と異動日の関連(JukyushaIdoRenrakuhyoDiv div) {
+            FlexibleDate 異動日 = div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().getValue();
+            RDate check年月 = new RDate("平成24年4月1日");
+            return (異動日 != null && !異動日.toString().isEmpty() && 異動日.isBefore(new FlexibleDate(check年月.toString())))
+                    && 期間いずれか設定チェック(div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange());
+        }
+
+        /**
          * check認定負担限度額の関連チェックです。
          *
          * @param div JukyushaIdoRenrakuhyoDiv
@@ -981,12 +1025,12 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
             return ("shinki".equals(div.getMode_DisplayMode().toString()) || "teisei".equals(div.getMode_DisplayMode().toString()))
                     && THREE.equals(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                             getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey())
-                    && (!RString.isNullOrEmpty(食費負担限度額)
-                    || !RString.isNullOrEmpty(従来型個室)
-                    || !RString.isNullOrEmpty(老健_療養)
-                    || !RString.isNullOrEmpty(多床室)
-                    || !RString.isNullOrEmpty(ユニット型個室)
-                    || !RString.isNullOrEmpty(ユニット型準個室));
+                    && (RString.isNullOrEmpty(食費負担限度額)
+                    || RString.isNullOrEmpty(従来型個室)
+                    || RString.isNullOrEmpty(老健_療養)
+                    || RString.isNullOrEmpty(多床室)
+                    || RString.isNullOrEmpty(ユニット型個室)
+                    || RString.isNullOrEmpty(ユニット型準個室));
         }
 
         private static boolean 期間関連チェック(TextBoxDateRange textBoxDateRange) {

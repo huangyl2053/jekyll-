@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.karisanteiidokekka.Karis
 import jp.co.ndensan.reams.db.dbb.service.core.karisanteiidofuka.KariSanteiIdoFukaBatch;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 仮算定異動(一括)結果一覧表出力クラスです。
@@ -26,10 +27,14 @@ public class SpoolKariSanteiIdoKekkaIchiranProcess extends SimpleBatchProcessBas
     @Override
     protected void process() {
         KariSanteiIdoFukaBatch manager = KariSanteiIdoFukaBatch.createInstance();
+        Long 出力順ID = null;
+        if (!RString.isNullOrEmpty(processParameter.get出力帳票Entity().get出力順ID())) {
+            出力順ID = Long.parseLong(processParameter.get出力帳票Entity().get出力順ID().toString());
+        }
         if (processParameter.get出力帳票Entity() != null) {
             manager.spoolKariSanteiIdoKekkaIchiran(processParameter.get調定年度(),
                     processParameter.get賦課年度(), new YMDHMS(processParameter.get調定日時()),
-                    Long.parseLong(processParameter.get出力帳票Entity().get出力順ID().toString()));
+                    出力順ID);
         }
     }
 

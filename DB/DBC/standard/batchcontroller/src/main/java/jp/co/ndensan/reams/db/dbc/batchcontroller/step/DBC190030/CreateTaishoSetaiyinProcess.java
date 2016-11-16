@@ -585,7 +585,9 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             申請一覧Entity.set年金収入(doDecimal(entity.get対象世帯員().getNenkinShunyuGaku()));
             申請一覧Entity.setその他合計所得(doDecimal(entity.get対象世帯員().getSonotanoGoukeiShotokuKingakuGoukei()));
             申請一覧Entity.set合計(this.合計(entity.get対象世帯員().getNenkinShunyuGaku(), entity.get対象世帯員().getSonotanoGoukeiShotokuKingakuGoukei()));
-            申請一覧Entity.set要介護度(YokaigoJotaiKubun.toValue(entity.get対象世帯員().getNijiHanteiYokaigoJotaiKubunCode()).get名称());
+            if (!RString.isNullOrEmpty(entity.get対象世帯員().getNijiHanteiYokaigoJotaiKubunCode())) {
+                申請一覧Entity.set要介護度(YokaigoJotaiKubun.toValue(entity.get対象世帯員().getNijiHanteiYokaigoJotaiKubunCode()).get名称());
+            }
             申請一覧Entity.set認定開始日(entity.get対象世帯員().getNinteiYukoKikanKaishiYMD());
             申請一覧Entity.set認定終了日(entity.get対象世帯員().getNinteiYukoKikanShuryoYMD());
 
