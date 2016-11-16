@@ -105,9 +105,10 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
         if (宛名データ != null) {
             if (宛名データ.get識別コード() != null) {
                 source.shikibetsuCode = 宛名データ.get識別コード().getColumnValue();
+            } else {
+                source.shikibetsuCode = RString.EMPTY;
             }
-        }
-        if (source.shikibetsuCode == null) {
+        } else {
             source.shikibetsuCode = RString.EMPTY;
         }
         source.拡張情報 = new ExpandedInformation(new Code("0003"), 文_被保険者番号, get非空文字列(source.hihokenshaNo));
