@@ -81,7 +81,7 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
         if (基準収入額決定通知一覧表パラメータ.get適用開始年月() != null) {
-            source.listHakkoTaishosha_8 = 基準収入額決定通知一覧表パラメータ.get適用開始年月().wareki().eraType(EraType.KANJI)
+            source.listHakkoTaishosha_8 = 基準収入額決定通知一覧表パラメータ.get適用開始年月().wareki()
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
         if (基準収入額決定通知一覧表パラメータ.get算定基準額() != null) {

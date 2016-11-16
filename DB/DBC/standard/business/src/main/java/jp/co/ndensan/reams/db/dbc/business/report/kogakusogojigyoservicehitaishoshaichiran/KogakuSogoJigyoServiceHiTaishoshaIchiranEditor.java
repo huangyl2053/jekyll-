@@ -174,6 +174,13 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranEditor implements IKogakuSo
         if (高額総合事業サービス費対象者一覧表 != null) {
             source.listTaishoshaIchiran_11 = 高額総合事業サービス費対象者一覧表.get備考();
         }
+        if (高額総合事業サービス費対象者一覧表 != null) {
+            source.listTaishoshaIchiran_12 = 高額総合事業サービス費対象者一覧表.get証記載保険者番号().getColumnValue();
+            source.listTaishoshaIchiran_13 = 高額総合事業サービス費対象者一覧表.get郵便番号().getColumnValue();
+            source.listTaishoshaIchiran_14 = 高額総合事業サービス費対象者一覧表.get町域コード().getColumnValue();
+            source.listTaishoshaIchiran_15 = 高額総合事業サービス費対象者一覧表.get行政区コード().getColumnValue();
+            source.listTaishoshaIchiran_16 = 高額総合事業サービス費対象者一覧表.get氏名５０音カナ();
+        }
     }
 
 }

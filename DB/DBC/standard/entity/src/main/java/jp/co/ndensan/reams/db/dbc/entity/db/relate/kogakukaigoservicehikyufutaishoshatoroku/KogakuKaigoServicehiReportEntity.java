@@ -49,5 +49,6 @@ public class KogakuKaigoServicehiReportEntity {
     private YubinNo 郵便番号;
     private ChoikiCode 町域コード;
     private GyoseikuCode 行政区コード;
+    private RString 氏名５０音カナ;
 
 }

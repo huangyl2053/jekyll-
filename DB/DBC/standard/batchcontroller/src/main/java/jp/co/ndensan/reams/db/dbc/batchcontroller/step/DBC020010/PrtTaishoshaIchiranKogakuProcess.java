@@ -175,6 +175,11 @@ public class PrtTaishoshaIchiranKogakuProcess extends BatchProcessBase<KogakuKai
         対象者一覧表Entity.set利用者負担額(entity.get利用者負担額());
         対象者一覧表Entity.set支給予定金額(entity.get支給予定金額());
         対象者一覧表Entity.set備考(entity.get備考欄個人所得区分());
+        対象者一覧表Entity.set証記載保険者番号(entity.get証記載保険者番号());
+        対象者一覧表Entity.set郵便番号(entity.get郵便番号());
+        対象者一覧表Entity.set町域コード(entity.get町域コード());
+        対象者一覧表Entity.set行政区コード(entity.get行政区コード());
+        対象者一覧表Entity.set氏名５０音カナ(entity.get氏名５０音カナ());
         return 対象者一覧表Entity;
     }
 

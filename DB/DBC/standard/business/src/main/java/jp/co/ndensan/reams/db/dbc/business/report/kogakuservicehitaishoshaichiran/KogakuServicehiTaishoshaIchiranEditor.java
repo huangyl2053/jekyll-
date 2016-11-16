@@ -177,6 +177,13 @@ public class KogakuServicehiTaishoshaIchiranEditor implements IKogakuServicehiTa
         if (高額介護サービス費対象者一覧表 != null) {
             source.listTaishosha_14 = 高額介護サービス費対象者一覧表.get備考();
         }
+        if (高額介護サービス費対象者一覧表 != null) {
+            source.listTaishosha_15 = 高額介護サービス費対象者一覧表.get証記載保険者番号().getColumnValue();
+            source.listTaishosha_16 = 高額介護サービス費対象者一覧表.get郵便番号().getColumnValue();
+            source.listTaishosha_17 = 高額介護サービス費対象者一覧表.get町域コード().getColumnValue();
+            source.listTaishosha_18 = 高額介護サービス費対象者一覧表.get行政区コード().getColumnValue();
+            source.listTaishosha_19 = 高額介護サービス費対象者一覧表.get氏名５０音カナ();
+        }
     }
 
 }

@@ -47,6 +47,24 @@ public class KogakuServicehiTaishoshaIchiranPageBreak extends PageBreaker<Kogaku
         } else if (this.breakKeysList.contains(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.要介護度.get項目ID())
                 && !currentSource.getSource().listTaishosha_6.equals(nextSource.getSource().listTaishosha_6)) {
             flg = true;
+        } else if (this.breakKeysList.contains(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.市町村コード.get項目ID())
+                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.証記載保険者番号.get項目ID())
+                && !currentSource.getSource().listTaishosha_15.equals(nextSource.getSource().listTaishosha_15)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.郵便番号.get項目ID())
+                && !currentSource.getSource().listTaishosha_16.equals(nextSource.getSource().listTaishosha_16)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.町域コード.get項目ID())
+                && !currentSource.getSource().listTaishosha_17.equals(nextSource.getSource().listTaishosha_17)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.行政区コード.get項目ID())
+                && !currentSource.getSource().listTaishosha_18.equals(nextSource.getSource().listTaishosha_18)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().listTaishosha_19.equals(nextSource.getSource().listTaishosha_19)) {
+            flg = true;
         }
         return flg;
     }
