@@ -129,7 +129,6 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void initialize() {
-        is検索結果データあり = false;
         一覧表_通番 = INT_0;
         count = INT_0;
         改頁項目リスト = new ArrayList<>();
