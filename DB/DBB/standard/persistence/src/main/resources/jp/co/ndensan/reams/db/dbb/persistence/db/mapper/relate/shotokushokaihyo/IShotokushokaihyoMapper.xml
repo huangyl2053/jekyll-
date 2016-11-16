@@ -606,8 +606,7 @@
     <select resultOrdered="true" id="selectAll所得照会票1" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataTempEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "ShotokuShoukaiDataTemp" AS TEMP
-        ORDER BY TEMP."zenkokuJushoCode", 
-                 TEMP."setaiCode", 
+        ORDER BY TEMP."setaiCode", 
                  TEMP."kouhoshakubun", 
                  TEMP."genLasdecCode"
     </select>

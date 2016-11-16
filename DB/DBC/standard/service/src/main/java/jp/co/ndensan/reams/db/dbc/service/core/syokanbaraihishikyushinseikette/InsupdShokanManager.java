@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisaiJushochiTokurei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
@@ -19,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaig
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssekihensyu.KyufujissekiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3039ShokanMeisaiDac;
@@ -200,14 +200,13 @@ public class InsupdShokanManager {
         }
     }
 
-    private void update償還払請求明細(List<ShokanMeisai> 償還払請求明細List) {
-        for (ShokanMeisai dbT3039entity : 償還払請求明細List) {
-            if (EntityDataState.Added.equals(dbT3039entity.toEntity().getState())
-                    || EntityDataState.Modified.equals(dbT3039entity.toEntity().getState())) {
-                償還払請求明細Dac.save(dbT3039entity.toEntity());
-            } else if (EntityDataState.Deleted.equals(dbT3039entity.toEntity().getState())) {
-
-                償還払請求明細Dac.delete(dbT3039entity.toEntity());
+    private void update償還払請求明細(List<ShokanMeisaiResult> 償還払請求明細List) {
+        for (ShokanMeisaiResult dbT3039entity : 償還払請求明細List) {
+            if (EntityDataState.Added.equals(dbT3039entity.getEntity().toEntity().getState())
+                    || EntityDataState.Modified.equals(dbT3039entity.getEntity().toEntity().getState())) {
+                償還払請求明細Dac.save(dbT3039entity.getEntity().toEntity());
+            } else if (EntityDataState.Deleted.equals(dbT3039entity.getEntity().toEntity().getState())) {
+                償還払請求明細Dac.delete(dbT3039entity.getEntity().toEntity());
             }
         }
     }
@@ -379,7 +378,7 @@ public class InsupdShokanManager {
         if (住所地特例データList != null && !住所地特例データList.isEmpty()) {
             update償還払請求明細_住所地特例(住所地特例データList);
         }
-        List<ShokanMeisai> 償還払請求明細List = db情報.get償還払請求明細データList();
+        List<ShokanMeisaiResult> 償還払請求明細List = db情報.get償還払請求明細データList();
         if (償還払請求明細List != null && !償還払請求明細List.isEmpty()) {
             update償還払請求明細(償還払請求明細List);
         }

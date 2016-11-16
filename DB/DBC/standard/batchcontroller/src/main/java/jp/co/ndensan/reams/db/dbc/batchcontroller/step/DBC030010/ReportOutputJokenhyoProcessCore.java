@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -60,17 +59,16 @@ public class ReportOutputJokenhyoProcessCore {
     private static final RString TITLE_開始時間 = new RString("【開始時間】");
     private static final RString TITLE_終了時間 = new RString("【終了時間】");
     private static final RString TITLE_出力順 = new RString("【出力順】");
-    private static final int イチ = 1;
-    private static final RString FLAG_TRUE = new RString("1");
-    private static final RString FLAG_FALSE = new RString("0");
+    private static final RString フラグ_FALSE = new RString("false");
+    private static final RString フラグ_TRUE = new RString("true");
     private static final int RSTRING_12 = 12;
     private static final RString 午前 = new RString("午前");
     private static final RString 午後 = new RString("午後");
     
     /**
-     * 
-     * @param parameter
-     * @param order
+     * get出力条件
+     * @param parameter parameter
+     * @param order order
      * @return 出力条件
      */
     public List<RString> get出力条件(DBC030010_ShokanShikyuKetteiTsuchishoParameter parameter, IOutputOrder order) {
@@ -99,7 +97,7 @@ public class ReportOutputJokenhyoProcessCore {
 
         出力条件.add(TITLE_発行日.concat(RString.FULL_SPACE).concat(toパターン6(parameter.get発行日())));
         出力条件.add(TITLE_文書番号.concat(RString.FULL_SPACE).concat(doStrToStr(parameter.get文書番号())));
-        if (FLAG_TRUE.equals(parameter.getテスト出力フラグ())) {
+        if (フラグ_TRUE.equals(parameter.getテスト出力フラグ())) {
             出力条件.add(TITLE_テスト出力.concat(RString.FULL_SPACE).concat(する));
         } else {
             出力条件.add(TITLE_テスト出力.concat(RString.FULL_SPACE).concat(しない));
@@ -111,11 +109,11 @@ public class ReportOutputJokenhyoProcessCore {
             出力条件.add(TITLE_決定日一括更新.concat(RString.FULL_SPACE).concat(しない));
         }
         出力条件.add(TITLE_決定日.concat(RString.FULL_SPACE).concat(toパターン6(parameter.get決定日())));
-        if ((FLAG_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) && (FLAG_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ()))) {
+        if ((フラグ_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) && (フラグ_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ()))) {
             出力条件.add(TITLE_出力対象.concat(RString.FULL_SPACE).concat(出力対象_1));
-        } else if ((FLAG_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) && (FLAG_FALSE.equals(parameter.get受領委任者向け決定通知書フラグ()))) {
+        } else if ((フラグ_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) && (フラグ_FALSE.equals(parameter.get受領委任者向け決定通知書フラグ()))) {
             出力条件.add(TITLE_出力対象.concat(RString.FULL_SPACE).concat(出力対象_2));
-        } else if ((FLAG_FALSE.equals(parameter.get利用者向け決定通知書フラグ())) && (FLAG_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ()))) {
+        } else if ((フラグ_FALSE.equals(parameter.get利用者向け決定通知書フラグ())) && (フラグ_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ()))) {
             出力条件.add(TITLE_出力対象.concat(RString.FULL_SPACE).concat(出力対象_3));
         }
         出力条件.add(TITLE_振込予定日.concat(RString.FULL_SPACE).concat(toパターン6(parameter.get振込予定日())));
@@ -151,7 +149,6 @@ public class ReportOutputJokenhyoProcessCore {
 
     private RString toパターン6(RDate 日付) {
         if (日付 != null) {
-            FlexibleDate flex日付 = new FlexibleDate(日付.toDateString());
             return 日付.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
