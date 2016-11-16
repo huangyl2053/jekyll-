@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.dbjoho;
 import java.io.Serializable;
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisaiJushochiTokurei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
@@ -19,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisets
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
@@ -37,7 +37,7 @@ public class DbJohoViewState implements Serializable {
     private ShokanShinsei 償還払支給申請;
     private ArrayList<ShokanKihon> 償還払請求基本データList;
     private ArrayList<ShokanMeisaiJushochiTokurei> 住所地特例データList;
-    private ArrayList<ShokanMeisai> 償還払請求明細データList;
+    private ArrayList<ShokanMeisaiResult> 償還払請求明細データList;
     private ArrayList<ShokanTokuteiShinryohi> 償還払請求特定診療費データList;
     private ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> 特別療養費データList;
     private ArrayList<ShokanServicePlan200904> 償還払請求サービス計画200904データList;
