@@ -244,6 +244,8 @@ public class FuchoKariSanteiFukaBatch {
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度);
         KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
         int 期 = 期月リスト.get最終法定納期().get期AsInt();
+        Decimal 期別端数 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, 調定年度開始日,
+                SubGyomuCode.DBB介護賦課).toString());
         if (区分_新規.equals(区分)) {
             int 納期数 = 0;
             RString 仮算定賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
@@ -258,15 +260,13 @@ public class FuchoKariSanteiFukaBatch {
                 納期数 = get賦課納期数(納期数, 前年度開始日, 前年度賦課情報, 期, 期月リスト);
             }
             if (仮算定賦課方法_01.equals(仮算定賦課方法)) {
-                Decimal 期別端数 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, 調定年度開始日,
-                        SubGyomuCode.DBB介護賦課).toString());
                 Decimal 期別納付額_端数調整 = 計算用保険料.divide(期別端数).roundDownTo(0).multiply(期別端数);
                 金額リスト0 = 仮算定端数調整有無_あり.equals(仮算定端数調整有無) ? 計算用保険料.roundDownTo(0) : 期別納付額_端数調整;
                 金額リスト1 = 期別納付額_端数調整;
             } else {
                 Decimal 納付額 = 計算用保険料.multiply(期).divide(納期数).roundDownTo(0);
                 Decimal 期別納付額 = 納付額.divide(期).roundDownTo(0);
-                Decimal 期別納付額_端数調整 = 期別納付額;
+                Decimal 期別納付額_端数調整 = 期別納付額.divide(期別端数).roundDownTo(0).multiply(期別端数);
                 金額リスト0 = 仮算定端数調整有無_あり.equals(仮算定端数調整有無)
                         ? 期別納付額_端数調整.add(納付額).subtract(期別納付額_端数調整.multiply(期)) : 期別納付額_端数調整;
                 金額リスト1 = 期別納付額_端数調整;
@@ -286,8 +286,6 @@ public class FuchoKariSanteiFukaBatch {
                 }
             }
             Decimal 期別納付額 = 六月より前の普徴仮算定金額.divide(六月より前仮期数);
-            Decimal 期別端数 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, 調定年度開始日,
-                    SubGyomuCode.DBB介護賦課).toString());
             Decimal 期別納付額_端数調整 = 期別納付額.divide(期別端数).roundDownTo(0).multiply(期別端数);
             if (仮算定端数調整有無_あり.equals(仮算定端数調整有無)) {
                 金額リスト0 = 期別納付額_端数調整.add(六月より前の普徴仮算定金額).subtract(期別納付額_端数調整.multiply(六月より前仮期数));
