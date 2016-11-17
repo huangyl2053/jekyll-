@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKeigengaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
@@ -23,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMe
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
@@ -50,7 +50,7 @@ public class DbJohoViewState implements Serializable {
     private ArrayList<ShokanServicePlan200604Result> 償還払請求サービス計画200604データResultList;
     private ArrayList<ShokanServicePlan200004Result> 償還払請求サービス計画200004データResultList;
     private ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> 償還払請求特定入所者介護サービス費用データList;
-    private ArrayList<ShokanShakaiFukushiHojinKeigengaku> 償還払請求社会福祉法人軽減額データList;
+    private ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> 償還払請求社会福祉法人軽減額データList;
     private ArrayList<ShokanShoteiShikkanShisetsuRyoyo> 償還払請求所定疾患施設療養費等データList;
     private ArrayList<ShokanKinkyuShisetsuRyoyo> 償還払請求緊急時施設療養データList;
     private ArrayList<ShokanShukeiResult> 償還払請求集計データList;

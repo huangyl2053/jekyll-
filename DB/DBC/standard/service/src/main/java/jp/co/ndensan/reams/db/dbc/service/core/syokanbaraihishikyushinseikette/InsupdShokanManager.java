@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMe
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssekihensyu.KyufujissekiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3039ShokanMeisaiDac;
@@ -109,8 +110,7 @@ public class InsupdShokanManager {
     /**
      * 初期化メソッドです。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TaishoshaKensaku}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TaishoshaKensaku}のインスタンス
      */
     public static InsupdShokanManager createInstance() {
         return InstanceProvider.create(InsupdShokanManager.class);
@@ -309,8 +309,9 @@ public class InsupdShokanManager {
     }
 
     private void update償還払請求社会福祉法人軽減額(
-            List<ShokanShakaiFukushiHojinKeigengaku> 償還払請求社会福祉法人軽減額データList) {
-        for (ShokanShakaiFukushiHojinKeigengaku dbT3051entity : 償還払請求社会福祉法人軽減額データList) {
+            List<ShokanShakaiFukushiHojinKeigengakuResult> 償還払請求社会福祉法人軽減額データList) {
+        for (ShokanShakaiFukushiHojinKeigengakuResult hojinKeigengakuResult : 償還払請求社会福祉法人軽減額データList) {
+            ShokanShakaiFukushiHojinKeigengaku dbT3051entity = hojinKeigengakuResult.getShokanShakai();
             if (EntityDataState.Added.equals(dbT3051entity.toEntity().getState())
                     || EntityDataState.Modified.equals(dbT3051entity.toEntity().getState())) {
                 償還払請求社会福祉法人軽減額Dac.save(dbT3051entity.toEntity());
@@ -403,7 +404,7 @@ public class InsupdShokanManager {
         if (償還払請求特定入所者介護サービス費用データList != null && !償還払請求特定入所者介護サービス費用データList.isEmpty()) {
             update償還払請求特定入所者介護サービス費用(償還払請求特定入所者介護サービス費用データList);
         }
-        List<ShokanShakaiFukushiHojinKeigengaku> 償還払請求社会福祉法人軽減額データList
+        List<ShokanShakaiFukushiHojinKeigengakuResult> 償還払請求社会福祉法人軽減額データList
                 = db情報.get償還払請求社会福祉法人軽減額データList();
         if (償還払請求社会福祉法人軽減額データList != null && !償還払請求社会福祉法人軽減額データList.isEmpty()) {
             update償還払請求社会福祉法人軽減額(償還払請求社会福祉法人軽減額データList);
