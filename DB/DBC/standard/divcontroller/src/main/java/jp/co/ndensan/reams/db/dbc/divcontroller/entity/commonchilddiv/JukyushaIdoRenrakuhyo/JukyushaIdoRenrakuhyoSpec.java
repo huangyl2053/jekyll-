@@ -561,9 +561,10 @@ public enum JukyushaIdoRenrakuhyoSpec implements IPredicate<JukyushaIdoRenrakuhy
          * @return 「false」エラー 「true」正常
          */
         public static boolean check減免申請中区分の必須(JukyushaIdoRenrakuhyoDiv div) {
-            RString 減免申請中区分 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan()
-                    .getRadGemmenShinseichuKubun().getSelectedKey();
-            return (RString.isNullOrEmpty(減免申請中区分) || 空KEY.equals(減免申請中区分));
+        	return false;
+ //           RString 減免申請中区分 = div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan()
+ //                   .getRadGemmenShinseichuKubun().getSelectedKey();
+ //           return (RString.isNullOrEmpty(減免申請中区分) || 空KEY.equals(減免申請中区分));
         }
 
         /**
