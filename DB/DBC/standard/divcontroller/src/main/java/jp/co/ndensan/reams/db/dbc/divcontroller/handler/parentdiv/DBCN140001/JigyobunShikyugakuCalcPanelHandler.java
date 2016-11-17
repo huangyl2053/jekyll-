@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -198,7 +199,8 @@ public class JigyobunShikyugakuCalcPanelHandler {
             parameter.set年度(null);
             parameter.set出力対象区分(ONE);
             parameter.set被保険者番号(null);
-            parameter.set受取年月(div.getChushutsuJoken().getTxtUketoriYM().getValue().getYearMonth());
+            RDate date = new RDate(div.getChushutsuJoken().getTxtUketoriYM().getValue().toString());
+            parameter.set受取年月(new FlexibleYearMonth(date.getYearMonth().toDateString()));
         }
         parameter.set処理日(FlexibleDate.getNowDate());
         parameter.set処理時間(RTime.now());
