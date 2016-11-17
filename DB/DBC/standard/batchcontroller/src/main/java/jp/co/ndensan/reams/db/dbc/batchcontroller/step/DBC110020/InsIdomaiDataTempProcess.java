@@ -1919,9 +1919,10 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 entity.set国民健康保険被保険者証番号(国保資格.getKokuhoHokenshoNo());
                 entity.set国民健康保険個人番号(国保資格.getKokuhoKojinNo());
             }
-
-            entity.set国民健康保険被保険者証番号(entity.get被保険者番号().getColumnValue());
             entity.set送付年月(処理年月);
+            if (宛名情報.get名称() != null) {
+                entity.set被保険者氏名(宛名情報.get名称().getColumnValue());
+            }
         }
 
     }

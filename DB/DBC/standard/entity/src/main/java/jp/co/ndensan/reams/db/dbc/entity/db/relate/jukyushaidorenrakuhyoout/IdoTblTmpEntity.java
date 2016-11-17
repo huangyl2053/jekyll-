@@ -38,6 +38,7 @@ public class IdoTblTmpEntity extends DbTableEntityBase<IdoTblTmpEntity> implemen
     private RString 受給者異動事由;
     private ShoKisaiHokenshaNo 証記載保険者番号;
     private RString 被保険者氏名カナ;
+    private RString 被保険者氏名;
     private FlexibleDate 生年月日;
     private RString 性別コード;
     private FlexibleDate 資格取得年月日;

@@ -1555,7 +1555,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private JukyushaIdorenrakuhyoSofuCsvEntity get送付対象者リスト(IdoTblTmpEntity 異動一時2entity, RString 変更項目) {
         JukyushaIdorenrakuhyoSofuCsvEntity entity = new JukyushaIdorenrakuhyoSofuCsvEntity();
         entity.set被保険者番号(異動一時2entity.get被保険者番号().getColumnValue());
-        entity.set氏名(異動一時2entity.get被保険者氏名カナ());
+        entity.set氏名(異動一時2entity.get被保険者氏名());
         entity.set区分(JukyushaIF_IdoKubunCode.toValue(異動一時2entity.get異動区分コード()).get名称());
         entity.set異動年月日(new RString(異動一時2entity.get異動年月日().toString()));
         //TODO
