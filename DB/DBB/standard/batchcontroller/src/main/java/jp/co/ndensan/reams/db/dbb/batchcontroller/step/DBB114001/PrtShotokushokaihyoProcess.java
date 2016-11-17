@@ -37,10 +37,9 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
@@ -65,7 +64,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-1720-040 lijunjun
  */
-public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukaiDataTempEntity> {
+public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiDataTempEntity> {
 
     /**
      * PARAMETER_OUT_OUTPUTCOUNT
@@ -109,9 +108,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
             + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.selectAll所得照会票1");
 
-    @BatchWriter
     private BatchReportWriter<ShotokuShokaihyoTateSource> tateReportWriter;
-    @BatchWriter
     private BatchReportWriter<ShotokuShokaihyoYokoSource> yokoReportWriter;
     private ReportSourceWriter<ShotokuShokaihyoTateSource> tateSourceWriter;
     private ReportSourceWriter<ShotokuShokaihyoYokoSource> yokoSourceWriter;
@@ -181,11 +178,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
     }
 
     @Override
-    protected void keyBreakProcess(ShotokuShoukaiDataTempEntity t) {
-    }
-
-    @Override
-    protected void usualProcess(ShotokuShoukaiDataTempEntity t) {
+    protected void process(ShotokuShoukaiDataTempEntity t) {
         所得照会票データ = t;
         if (送付先住所コード.equals(RString.EMPTY)
                 && 世帯コード.equals(SetaiCode.EMPTY)
@@ -208,6 +201,20 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
         outputCount.setValue(INDEX_1);
     }
 
+    @Override
+    protected void afterExecute() {
+        int 出力ページ数 = 0;
+        if (flag) {
+            出力ページ数 = 所得照会票Report();
+        }
+        if (文字列_001.equals(通知書タイプ)) {
+            yokoReportWriter.close();
+        } else {
+            tateReportWriter.close();
+        }
+        loadバッチ出力条件リスト(出力ページ数, CSV出力有無_有り, CSVファイル名_一覧表);
+    }
+
     private int 所得照会票Report() {
         NushiJuminJohoResult result = creat所得照会票データ();
         if (文字列_001.equals(通知書タイプ)) {
@@ -217,15 +224,6 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
             new ShotokuShokaihyoTateReport(result, sourceBuilder, 文書タイトル, 送付先担当課名称).writeBy(tateSourceWriter);
             return tateSourceWriter.pageCount().value();
         }
-    }
-
-    @Override
-    protected void afterExecute() {
-        int 出力ページ数 = 0;
-        if (flag) {
-            出力ページ数 = 所得照会票Report();
-        }
-        loadバッチ出力条件リスト(出力ページ数, CSV出力有無_有り, CSVファイル名_一覧表);
     }
 
     private void setKey() {
