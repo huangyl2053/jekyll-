@@ -43,7 +43,7 @@ public class ServiceRiyohyoInfo {
     private static final RString RSTRING_TWO = new RString("2");
     private static final RString プラス値入力不可 = new RString("単位：プラス値入力不可");
     private static final RString マイナス値入力不可 = new RString("単位：マイナス値入力不可");
-    private static final RString 給付率値 = new RString(" & viewState.給付率 & ");
+//    private static final RString 給付率値 = new RString(" & viewState.給付率 & ");
     private static final RString 前月の明細情報エラー = new RString("前月の明細は存在しません。");
     private static final RString 前月の明細情報の確認 = new RString("明細行が前月の状態に置き換わります。よろしいですか？");
     private static final RString RSTRING_ZERO = new RString("0");
@@ -374,6 +374,14 @@ public class ServiceRiyohyoInfo {
                 return ResponseData.of(div).addValidationMessages(給付率必須Pairs).respond();
             }
         }
+        ValidationMessageControlPairs 単位数単価Pairs = validationhandler.validate単位数単価();
+        if (単位数単価Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(単位数単価Pairs).respond();
+        }
+        ValidationMessageControlPairs 給付率Pairs = validationhandler.validate給付率();
+        if (給付率Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(給付率Pairs).respond();
+        }
         getHandler(div).onClick_btnGokeiKeisan();
         return ResponseData.of(div).respond();
     }
@@ -385,7 +393,24 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoGokeiKakutei(ServiceRiyohyoInfoDiv div) {
-        onClick_btnGokeiKeisan(div);
+//        onClick_btnGokeiKeisan(div);
+        ServiceRiyohyoInfoDivValidationHandler validationhandler = getValidatioHandler(div);
+        ValidationMessageControlPairs サービス単位必須以外Pairs = validationhandler.validateサービス単位必須以外();
+        if (サービス単位必須以外Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(サービス単位必須以外Pairs).respond();
+        }
+        ValidationMessageControlPairs 給付率必須Pairs = validationhandler.validate給付率必須();
+            if (給付率必須Pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(給付率必須Pairs).respond();
+            }
+        ValidationMessageControlPairs 単位数単価Pairs = validationhandler.validate単位数単価();
+        if (単位数単価Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(単位数単価Pairs).respond();
+        }
+        ValidationMessageControlPairs 給付率Pairs = validationhandler.validate給付率();
+        if (給付率Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(給付率Pairs).respond();
+        }
         Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, HokenKyufuRitsu.class) == null
                 ? Decimal.ZERO : ViewStateHolder.get(ViewStateKeys.給付率, HokenKyufuRitsu.class).getColumnValue();
         Decimal 給付率div = div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue() == null
@@ -394,12 +419,10 @@ public class ServiceRiyohyoInfo {
         if (給付率.compareTo(給付率div) != 0) {
             if (給付率.compareTo(DECIMAL_90) == 0 && !ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbcQuestionMessages.給付率修正確認.getMessage()
-                        .replace(RSTRING_ONE.toString())
-                        .replace(給付率値.toString(), 給付率.toString())).respond();
+                        .replace(RSTRING_ONE.toString(), 給付率.toString())).respond();
             } else if (給付率.compareTo(DECIMAL_80) == 0 && !ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbcQuestionMessages.給付率修正確認.getMessage()
-                        .replace(RSTRING_TWO.toString())
-                        .replace(給付率値.toString(), 給付率.toString())).respond();
+                        .replace(RSTRING_TWO.toString(), 給付率.toString())).respond();
             }
         }
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())
