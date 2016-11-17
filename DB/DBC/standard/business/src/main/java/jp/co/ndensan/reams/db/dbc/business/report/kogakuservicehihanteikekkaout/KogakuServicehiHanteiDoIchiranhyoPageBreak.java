@@ -50,6 +50,12 @@ public class KogakuServicehiHanteiDoIchiranhyoPageBreak extends PageBreaker<Koga
         } else if (this.breakKeysList.contains(KogakuServicehiHanteiDoIchiranhyoOutPutOrder.行政区コード.get項目ID())
                 && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
             flag = true;
+        } else if (this.breakKeysList.contains(KogakuServicehiHanteiDoIchiranhyoOutPutOrder.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().shimei50onKana.equals(nextSource.getSource().shimei50onKana)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KogakuServicehiHanteiDoIchiranhyoOutPutOrder.市町村コード.get項目ID())
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
+            flag = true;
         } else if (this.breakKeysList.contains(KogakuServicehiHanteiDoIchiranhyoOutPutOrder.被保険者番号.get項目ID())
                 && !currentSource.getSource().listCenter_2.equals(nextSource.getSource().listCenter_2)) {
             flag = true;

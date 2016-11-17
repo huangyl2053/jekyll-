@@ -136,6 +136,7 @@ public class FukushiyoguShohinInputGuideHandler {
                 dgFukushiyoguShohinList.add(dgFukushiyoguShohin);
             }
         } else {
+            div.getDgFukushiyoguShohin().getDataSource().clear();
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
         return dgFukushiyoguShohinList;

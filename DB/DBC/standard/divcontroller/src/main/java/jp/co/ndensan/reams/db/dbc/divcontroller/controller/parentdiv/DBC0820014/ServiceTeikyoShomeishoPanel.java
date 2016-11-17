@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820014
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
+import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.DBC0820014TransitionEventName;
@@ -41,6 +42,7 @@ public class ServiceTeikyoShomeishoPanel {
     private static final RString 処理モード_登録 = new RString("登録");
     private static final RString 処理モード_削除 = new RString("削除");
     private static final RString 変更あり = new RString("1");
+    private static final RString 入力完了 = new RString("1");
 
     /**
      * 画面初期化onLoad
@@ -82,7 +84,8 @@ public class ServiceTeikyoShomeishoPanel {
         handler.load宛名と基本情報(識別コード, 被保険者番号);
         handler.loadボタンエリア(償還払支給申請.is国保連再送付フラグ());
         handler.load申請共通エリア(画面モード, サービス年月, 整理番号);
-        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報);
+        DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報, 償還払ViewStateDB情報);
         ShomeishoNyuryokuFlag 証明書入力済フラグ = ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class);
         if (null == 証明書入力済フラグ) {
             setShomeishoNyuryokuFlag();
@@ -160,7 +163,8 @@ public class ServiceTeikyoShomeishoPanel {
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         handler.証明書選択チェック();
-        handler.サービス提供証明書の存在チェック(整理番号, サービス年月, 被保険者番号);
+        DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        handler.サービス提供証明書の存在チェック(整理番号, サービス年月, 被保険者番号, 償還払ViewStateDB情報);
         putViewStateDown(処理モード_登録, div);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払い費支給申請).respond();
     }
@@ -269,6 +273,10 @@ public class ServiceTeikyoShomeishoPanel {
     }
 
     private void 入力有無フラグ設定() {
+        RString 証明書入力完了フラグ = ViewStateHolder.get(ViewStateKeys.証明書入力完了フラグ, RString.class);
+        if (入力完了.equals(証明書入力完了フラグ)) {
+            ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_サービス提供証明書, 変更あり);
+        }
         ShomeishoNyuryokuFlag 証明書入力済フラグ = ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class);
         if (ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())
                 || ShomeishoNyuryokuKubunType.入力あり.getCode().equals(証明書入力済フラグ.get基本情報_証明書入力済フラグ().getCode())

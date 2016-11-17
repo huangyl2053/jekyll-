@@ -287,7 +287,8 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
         RString 住民種別コード = 所得照会票.get住民種別コード();
         if ((RSTRING_1.equals(住民種別コード) || RSTRING_3.equals(住民種別コード)
                 || is日本人(所得照会票.get世帯員リスト())) && set生年月日(生年月日)) {
-            return 生年月日.wareki().toDateString();
+            return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.ZERO).toDateString();
         }
         if ((RSTRING_2.equals(住民種別コード) || RSTRING_4.equals(住民種別コード)
                 || is外国人(所得照会票.get世帯員リスト())) && set生年月日TWO(生年月日)) {

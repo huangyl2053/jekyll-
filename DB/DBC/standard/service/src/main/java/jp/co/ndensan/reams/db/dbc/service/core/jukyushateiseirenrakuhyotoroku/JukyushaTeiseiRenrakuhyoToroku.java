@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaatenaayouhou.Jukyusha
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3001JukyushaIdoRenrakuhyoDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushaatenajyouhou.IJukyushaAtenaJyouhouMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -29,7 +31,9 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
@@ -62,6 +66,8 @@ public class JukyushaTeiseiRenrakuhyoToroku {
     private final DbT1001HihokenshaDaichoDac dbt1001Dac;
     private final DbT7060KaigoJigyoshaDac dbt7060Dac;
     private final DbT7063KaigoJigyoshaShiteiServiceDac dbt7063Dac;
+    private final DbT4001JukyushaDaichoDac dbt4001Dac;
+    private final DbT3105SogoJigyoTaishoshaDac dbt3105Dac;
     private final MapperProvider mProvider;
     private static final RString 新規モード = new RString("新規モード");
     private static final RString 被保険者 = new RString("被保険者");
@@ -81,6 +87,8 @@ public class JukyushaTeiseiRenrakuhyoToroku {
         this.dbt1001Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         this.dbt7060Dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
         this.dbt7063Dac = InstanceProvider.create(DbT7063KaigoJigyoshaShiteiServiceDac.class);
+        this.dbt4001Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
+        this.dbt3105Dac = InstanceProvider.create(DbT3105SogoJigyoTaishoshaDac.class);
         this.mProvider = InstanceProvider.create(MapperProvider.class);
     }
 
@@ -164,6 +172,30 @@ public class JukyushaTeiseiRenrakuhyoToroku {
         List<DbT3001JukyushaIdoRenrakuhyoEntity> 受給者訂正Entity
                 = dbt3001Dac.selectHihokenshaNo(被保険者番号 == null ? null : 被保険者番号);
         return 受給者訂正Entity == null || 受給者訂正Entity.isEmpty();
+    }
+
+    /**
+     * 検索した被保番号が　受給者異動送付に検索
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return boolean
+     */
+    public boolean selectBooleanDbT3105SogoJigyoTaishosha(HihokenshaNo 被保険者番号) {
+        List<DbT3105SogoJigyoTaishoshaEntity> 事業対象者Entity
+                = dbt3105Dac.get事業対象者(被保険者番号 == null ? null : 被保険者番号);
+        return 事業対象者Entity == null || 事業対象者Entity.isEmpty();
+    }
+
+    /**
+     * 検索した被保番号が　受給者異動送付に検索
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return boolean
+     */
+    public boolean selectBooleanDbT4001JukyushaDaicho(HihokenshaNo 被保険者番号) {
+        List<DbT4001JukyushaDaichoEntity> 受給者台帳Entity
+                = dbt4001Dac.get受給者台帳(被保険者番号 == null ? null : 被保険者番号);
+        return 受給者台帳Entity == null || 受給者台帳Entity.isEmpty();
     }
 
     /**

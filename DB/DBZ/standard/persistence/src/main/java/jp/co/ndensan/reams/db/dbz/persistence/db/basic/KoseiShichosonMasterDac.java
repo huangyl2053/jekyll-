@@ -106,7 +106,7 @@ public class KoseiShichosonMasterDac implements IReplaceable<DbT7051KoseiShichos
         return accessor.
                 select().
                 table(DbT7051KoseiShichosonMaster.class).
-                where(and(eq(shichosonCode, 市町村コード), eq(gappeiKyuShichosonKubun, 最新の構成市町村))).
+                where(and(eq(shichosonCode, 市町村コード), eq(gappeiKyuShichosonKubun, 最新の構成市町村))).limit(1).
                 toObject(DbT7051KoseiShichosonMasterEntity.class);
     }
 }

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
@@ -142,10 +141,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         source.listUpper_6 = RString.EMPTY;
         source.hokenshaNo = RString.EMPTY;
         source.atesaki_choikiCode = RString.EMPTY;
-        source.atesaki_banchiCode1 = RString.EMPTY;
-        source.atesaki_banchiCode2 = RString.EMPTY;
-        source.atesaki_banchiCode3 = RString.EMPTY;
-        source.atesaki_banchiCode4 = RString.EMPTY;
+        source.atesaki_banchiCode = RString.EMPTY;
         source.atesaki_gyoseikuCode = RString.EMPTY;
         source.atesaki_chikuCode1 = RString.EMPTY;
         source.atesaki_chikuCode2 = RString.EMPTY;
@@ -161,10 +157,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
 
     private void set宛先改頁(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source, UaFt250FindAtesakiEntity 宛先) {
         ChoikiCode 町域コード = 宛先.getChoikiCode();
-        BanchiCode 番地コード1 = 宛先.getBanchiCode1();
-        BanchiCode 番地コード2 = 宛先.getBanchiCode2();
-        BanchiCode 番地コード3 = 宛先.getBanchiCode3();
-        BanchiCode 番地コード4 = 宛先.getBanchiCode4();
+        RString 番地コード = entity.get番地コード();
         GyoseikuCode 行政区コード = 宛先.getGyoseikuCode();
         ChikuCode 地区１ = 宛先.getChikuCode1();
         ChikuCode 地区２ = 宛先.getChikuCode2();
@@ -172,17 +165,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         if (町域コード != null) {
             source.atesaki_choikiCode = 町域コード.value();
         }
-        if (番地コード1 != null) {
-            source.atesaki_banchiCode1 = 番地コード1.value();
-        }
-        if (番地コード2 != null) {
-            source.atesaki_banchiCode2 = 番地コード2.value();
-        }
-        if (番地コード3 != null) {
-            source.atesaki_banchiCode3 = 番地コード3.value();
-        }
-        if (番地コード4 != null) {
-            source.atesaki_banchiCode4 = 番地コード4.value();
+        if (番地コード != null) {
+            source.atesaki_banchiCode = 番地コード;
         }
         if (行政区コード != null) {
             source.atesaki_gyoseikuCode = 行政区コード.value();

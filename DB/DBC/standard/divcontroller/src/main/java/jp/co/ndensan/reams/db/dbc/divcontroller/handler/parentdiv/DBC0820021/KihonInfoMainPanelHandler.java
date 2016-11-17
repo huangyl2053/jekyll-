@@ -12,7 +12,6 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.KihonInfoMainPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
@@ -488,12 +487,10 @@ public class KihonInfoMainPanelHandler {
             if (事業者 != null && !事業者.isEmpty()) {
                 return true;
             }
-        } else {
-            if (事業者 == null || 事業者.isEmpty()) {
-                return true;
-            } else if (!事業者.equals(居宅サービス計画事業者番号.value())) {
-                return true;
-            }
+        } else if (事業者 == null || 事業者.isEmpty()) {
+            return true;
+        } else if (!事業者.equals(居宅サービス計画事業者番号.value())) {
+            return true;
         }
         return false;
     }
@@ -507,12 +504,10 @@ public class KihonInfoMainPanelHandler {
             if (row開始年月日 != null) {
                 return true;
             }
-        } else {
-            if (row開始年月日 == null) {
-                return true;
-            } else if (!row開始年月日.equals(new RDate(shokanKihon.get開始年月日().toString()))) {
-                return true;
-            }
+        } else if (row開始年月日 == null) {
+            return true;
+        } else if (!row開始年月日.equals(new RDate(shokanKihon.get開始年月日().toString()))) {
+            return true;
         }
 
         RDate row中止年月日 = div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan().getToValue();
@@ -520,12 +515,10 @@ public class KihonInfoMainPanelHandler {
             if (row中止年月日 != null) {
                 return true;
             }
-        } else {
-            if (row中止年月日 == null) {
-                return true;
-            } else if (!row中止年月日.equals(new RDate(shokanKihon.get中止年月日().toString()))) {
-                return true;
-            }
+        } else if (row中止年月日 == null) {
+            return true;
+        } else if (!row中止年月日.equals(new RDate(shokanKihon.get中止年月日().toString()))) {
+            return true;
         }
 
         if (サービス年月.isBeforeOrEquals(平成２１年３月)
@@ -551,12 +544,10 @@ public class KihonInfoMainPanelHandler {
             if (row入所_院年月日 != null) {
                 return true;
             }
-        } else {
-            if (row入所_院年月日 == null) {
-                return true;
-            } else if (!row入所_院年月日.equals(new RDate(shokanKihon.get入所_院年月日().toString()))) {
-                return true;
-            }
+        } else if (row入所_院年月日 == null) {
+            return true;
+        } else if (!row入所_院年月日.equals(new RDate(shokanKihon.get入所_院年月日().toString()))) {
+            return true;
         }
 
         Decimal row入所_院実日数 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu().getValue();
@@ -569,12 +560,10 @@ public class KihonInfoMainPanelHandler {
             if (row退所_院年月日 != null) {
                 return true;
             }
-        } else {
-            if (row退所_院年月日 == null) {
-                return true;
-            } else if (!row退所_院年月日.equals(new RDate(shokanKihon.get退所_院年月日().toString()))) {
-                return true;
-            }
+        } else if (row退所_院年月日 == null) {
+            return true;
+        } else if (!row退所_院年月日.equals(new RDate(shokanKihon.get退所_院年月日().toString()))) {
+            return true;
         }
 
         Decimal row外泊日数 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu().getValue();
@@ -618,19 +607,23 @@ public class KihonInfoMainPanelHandler {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param サービス年月 FlexibleYearMonth
+     * @param 申請日 RDate
      * @param 整理番号 RString
-     * @return paramter 償還払費申請検索キー
+     * @return paramter 明細検索キー
      */
-    public ShoukanharaihishinseikensakuParameter putViewState(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号) {
-        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
+    public ShoukanharaihishinseimeisaikensakuParameter putViewState(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月,
+            RDate 申請日,
+            RString 整理番号) {
+        ShoukanharaihishinseimeisaikensakuParameter paramter = new ShoukanharaihishinseimeisaikensakuParameter(
                 被保険者番号,
                 サービス年月,
+                申請日,
                 整理番号,
                 new JigyoshaNo(div.getPanelTwo().getTxtJigyoshaBango().getValue()),
                 div.getPanelTwo().getTxtShomeisho().getValue(),
-                div.getPanelTwo().getTxtMeisaiBango().getValue(),
-                div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().getValue());
+                div.getPanelTwo().getTxtMeisaiBango().getValue());
         return paramter;
     }
 

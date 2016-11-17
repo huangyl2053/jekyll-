@@ -433,7 +433,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     public void onClick_btnKanyuJohoTsuika() {
         div.getKanyuRirekiIchiran().setIsOpen(false);
         div.getKanyuRirekiInput().setIsOpen(true);
-        保険者加入情報パネルクリア();
+        div.getTxtKanyuRirekiHokenshaMei().clearValue();
+        div.getTxtKanyuRirekiKanyuKikanYMD().clearFromValue();
+        div.getTxtKanyuRirekiKanyuKikanYMD().clearToValue();
+        div.getTxtJikoFutangakuShomeishoSeiriBango().clearValue();
         加入履歴情報TAB制御(false);
     }
 
@@ -463,7 +466,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     public void onClick_btnKanyuRirekiModoru() {
         div.getKanyuRirekiIchiran().setIsOpen(true);
         div.getKanyuRirekiInput().setIsOpen(false);
-        保険者加入情報パネルクリア();
+        div.getTxtKanyuRirekiHokenshaMei().clearValue();
+        div.getTxtKanyuRirekiKanyuKikanYMD().clearFromValue();
+        div.getTxtKanyuRirekiKanyuKikanYMD().clearToValue();
+        div.getTxtJikoFutangakuShomeishoSeiriBango().clearValue();
     }
 
     /**

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 保険者情報送付データ作成_[37K]高額合算補正済自己負担額情報のクラスです。
@@ -22,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KogakuGassanHoseizumiJikofutangakuJoho {
 
+    private final RString バッチID = new RString("ExecutionBatchId");
+    private final RString フロー固定ID_給報出力 = new RString("DBC110080_KogakugassanHoseisumiJikofutangakuOut");
     private RYearMonth 処理年月;
     private RString 再処理区分;
     private RString 交換情報識別番号;
@@ -56,6 +60,8 @@ public class KogakuGassanHoseizumiJikofutangakuJoho {
         if (getHandler(div).setBatchParameter(再処理区分, 処理年月) != null) {
             return ResponseData.of(getHandler(div).setBatchParameter(再処理区分, 処理年月)).respond();
         }
+        FlowParameters fp = FlowParameters.of(バッチID, フロー固定ID_給報出力);
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(new DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter()).respond();
     }
 

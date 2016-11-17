@@ -51,6 +51,7 @@ public class RiyoshaFutanWariaiHantei {
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString なし = new RString("00");
+    private static final RString 対象外 = new RString("0");
     private static final RString 課税区分未申告 = new RString("3");
     private static final RString 課税区分所得調査中 = new RString("4");
     private static final RString 課税区分非課税 = new RString("2");
@@ -521,8 +522,7 @@ public class RiyoshaFutanWariaiHantei {
             List<RiyoshaFutanWariaiKonkyoTempEntity> 利用者負担割合根拠情報,
             FlexibleYear 対象年度) {
         if (利用者負担割合明細情報 == null || 利用者負担割合明細情報.isEmpty()
-                || 利用者負担割合根拠情報 == null || 利用者負担割合根拠情報.isEmpty()
-                || 対象年度 == null) {
+                || 利用者負担割合根拠情報 == null || 対象年度 == null) {
             throw new NullPointerException();
         }
         Map<RString, List<RiyoshaFutanWariaiKonkyoTempEntity>> 根拠情報map = new HashMap<>();
@@ -567,14 +567,12 @@ public class RiyoshaFutanWariaiHantei {
     private RiyoshaFutanWariaiTempEntity 枝番号の振り直し(List<RiyoshaFutanWariaiMeisaiTempEntity> 明細情報result,
             Map<RString, List<RiyoshaFutanWariaiKonkyoTempEntity>> 根拠情報map) {
         RiyoshaFutanWariaiTempEntity result = new RiyoshaFutanWariaiTempEntity();
-        RString 負担割合区分;
         List<RiyoshaFutanWariaiMeisaiTempEntity> 明細情報temp = new ArrayList<>();
         int edaNo = 1;
         List<RiyoshaFutanWariaiKonkyoTempEntity> 根拠情報temp = new ArrayList<>();
         HihokenshaNo beforeNo = null;
         for (RiyoshaFutanWariaiMeisaiTempEntity 明細情報 : 明細情報result) {
-            負担割合区分 = 明細情報.getFutanWariaiKubun();
-            if (なし.equals(負担割合区分)) {
+            if (対象外.equals(明細情報.getHanteiKubun())) {
                 continue;
             }
             if (beforeNo != null && !beforeNo.equals(明細情報.getHihokenshaNo())) {

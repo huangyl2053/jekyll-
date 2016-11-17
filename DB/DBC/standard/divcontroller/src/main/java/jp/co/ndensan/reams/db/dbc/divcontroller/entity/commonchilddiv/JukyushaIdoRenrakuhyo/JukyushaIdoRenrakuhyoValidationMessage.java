@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaIdoRenrakuhyo;
 
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -82,14 +83,6 @@ public enum JukyushaIdoRenrakuhyoValidationMessage implements IValidationMessage
      */
     減免申請中区分の必須項目(UrErrorMessages.必須項目_追加メッセージあり, "減免申請中区分"),
     /**
-     * 利用者負担区分の必須項目
-     */
-    利用者負担区分の必須項目(UrErrorMessages.必須項目_追加メッセージあり, "利用者負担区分"),
-    /**
-     * 標準負担区分の必須項目
-     */
-    標準負担区分の必須項目(UrErrorMessages.必須項目_追加メッセージあり, "標準負担区分"),
-    /**
      * 認定申請中区分の必須項目
      */
     認定申請中区分の必須項目(UrErrorMessages.必須項目_追加メッセージあり, "認定申請中区分"),
@@ -105,10 +98,6 @@ public enum JukyushaIdoRenrakuhyoValidationMessage implements IValidationMessage
      * 公費負担上限額減額(生活保護等) の必須項目
      */
     公費負担上限額減額_生活保護等の必須項目(UrErrorMessages.必須項目_追加メッセージあり, "公費負担上限額減額(生活保護等) "),
-    /**
-     * 二次予防事業区分の必須項目
-     */
-    二次予防事業区分の必須項目(UrErrorMessages.必須項目_追加メッセージあり, "二次予防事業区分"),
     /**
      * 旧訪問通所_管理適用期間が不正
      */
@@ -134,9 +123,17 @@ public enum JukyushaIdoRenrakuhyoValidationMessage implements IValidationMessage
      */
     社会福祉法人軽減情報適用期間が不正(UrErrorMessages.期間が不正),
     /**
+     * 標準負担と異動日が不正
+     */
+    標準負担と異動日が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成17年10月", "以降", "標準負担情報"),
+    /**
      * 標準負担適用期間が不正
      */
     標準負担適用期間が不正(UrErrorMessages.期間が不正),
+    /**
+     * 認定負担限度額が不正
+     */
+    認定負担限度額が不正(DbcErrorMessages.負担限度額設定不正),
     /**
      * 食費限度額適用期間が不正
      */
@@ -156,8 +153,27 @@ public enum JukyushaIdoRenrakuhyoValidationMessage implements IValidationMessage
     /**
      * 二次予防事業適用期間が不正
      */
-    二次予防事業適用期間が不正(UrErrorMessages.期間が不正);
-
+    二次予防事業適用期間が不正(UrErrorMessages.期間が不正),
+    /**
+     * 住特適用期間と異動日が不正
+     */
+    住特適用情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成27年04月", "より前", "住所地特例情報"),
+    /**
+     * 社会福祉法人軽減情報が不正
+     */
+    社会福祉法人軽減情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成17年10月", "より前", "社会福祉法人軽減情報"),
+    /**
+     * 食費限度額適用情報が不正
+     */
+    食費限度額適用情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成17年10月", "より前", "特定入所者サービス費情報"),
+    /**
+     * 二割負担事業適用情報が不正
+     */
+    二割負担事業適用情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成27年04月", "より前", "二割負担情報"),
+    /**
+     * 二次予防事業適用情報が不正
+     */
+    二次予防事業適用情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成24年04月", "より前", "二次予防事業情報");
     private final Message message;
 
     /**

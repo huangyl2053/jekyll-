@@ -318,11 +318,11 @@ public class PostMainPanelCheck {
     public void 市町村コード(int 長さ判定, Code 導入形態コード, RString hasread, int from, dgShichoson_Row row, RString 市町村コード) {
         if (ResponseHolder.getMenuID().equals(DBCMN82001) && 長さ判定 == INT_2) {
             市町村コード = 市町村コード.substring(0, NUM_5);
-            if (get指定位置な文字列(hasread, from, NUM_5).equals(市町村コード)) {
+            if (!get指定位置な文字列(hasread, from, NUM_5).equals(市町村コード)) {
                 messeges();
             }
         } else {
-            if (get指定位置な文字列(hasread, from, NUM_6).equals(市町村コード)) {
+            if (!get指定位置な文字列(hasread, from, NUM_6).equals(市町村コード)) {
                 messeges();
             }
         }

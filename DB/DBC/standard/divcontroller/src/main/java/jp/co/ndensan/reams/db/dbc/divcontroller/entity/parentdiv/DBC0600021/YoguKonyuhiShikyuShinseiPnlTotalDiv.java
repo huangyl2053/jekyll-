@@ -28,11 +28,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 /**
  * YoguKonyuhiShikyuShinseiPnlTotal のクラスファイル
  *
- * @reamsid_L DBC-1020-030 quxiaodong
+ * @author 自動生成
  */
 public class YoguKonyuhiShikyuShinseiPnlTotalDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -49,6 +49,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotalDiv extends Panel {
     private PnlKeteiJohoMsgDiv PnlKeteiJohoMsg;
     @JsonProperty("checkflag")
     private RString checkflag;
+    @JsonProperty("mode")
+    private RString mode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -144,6 +146,24 @@ public class YoguKonyuhiShikyuShinseiPnlTotalDiv extends Panel {
     @JsonProperty("checkflag")
     public void setCheckflag(RString checkflag) {
         this.checkflag = checkflag;
+    }
+
+    /*
+     * getmode
+     * @return mode
+     */
+    @JsonProperty("mode")
+    public RString getMode() {
+        return mode;
+    }
+
+    /*
+     * setmode
+     * @param mode mode
+     */
+    @JsonProperty("mode")
+    public void setMode(RString mode) {
+        this.mode = mode;
     }
 
     /*

@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariaiHanteiJohoEntity> {
 
+    private static final RString 一号被保険者 = new RString("1");
     private static final int NUM1 = 1;
     private static final RString 年次 = new RString("1");
     private static final RString 当初 = new RString("00");
@@ -216,7 +217,9 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
             if (insert3115Entity.getSetaiinHihokenshaNo() == null || insert3115Entity.getSetaiinShotokuRirekiNo() == null) {
                 return;
             }
-            利用者負担割合根拠.insert(insert3115Entity);
+            if (一号被保険者.equals(判定対象者.getHihokenshaKubunCode())) {
+                利用者負担割合根拠.insert(insert3115Entity);
+            }
         }
     }
 

@@ -160,13 +160,17 @@ public class IchijihanteiekkahyoTokkijiko {
     public List<RString> getTokkiImg() {
         List<RString> filePathList = new ArrayList<>();
         for (int i = 1; i <= 最大ページ; i++) {
+            RString tokkiImgPath;
             RStringBuilder ファイル名 = new RStringBuilder();
             ファイル名.append("C410");
             ファイル名.append(1);
             if (kyotsuEntity.isJimukyoku()) {
-                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_BAK.png").toRString()));
+                tokkiImgPath = getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_BAK.png").toRString());
             } else {
-                filePathList.add(getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append(".png").toRString()));
+                tokkiImgPath = getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append(".png").toRString());
+            }
+            if (!RString.isNullOrEmpty(tokkiImgPath)) {
+                filePathList.add(tokkiImgPath);
             }
         }
         return filePathList;

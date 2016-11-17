@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -72,7 +71,6 @@ public class PrtErrorListKogakuProcess extends BatchProcessBase<HanteiEraaResult
     private static final Code EUC_CODE = new Code("0003");
     private static final RString EUC_CODE_NAME = new RString("被保険者番号");
     private static final RString 作成 = new RString("作成");
-    private static final RString 審査分 = new RString("審査分");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -240,19 +238,9 @@ public class PrtErrorListKogakuProcess extends BatchProcessBase<HanteiEraaResult
     }
 
     private RString format審査年月(FlexibleYearMonth 審査年月) {
-
-        if (審査年月 != null) {
-            RString format審査年月From = 審査年月.wareki().firstYear(FirstYear.ICHI_NEN)
-                    .separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
-            RString format審査年月To = RDate.getNowDate().getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN)
-                    .separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
-            return format審査年月From.concat(RString.FULL_SPACE)
-                    .concat(format審査年月To).concat(RString.FULL_SPACE)
-                    .concat(審査分);
-        }
-        return RString.EMPTY;
+        return 審査年月.wareki().firstYear(FirstYear.ICHI_NEN)
+                .separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
     }
 
     private void get出力順(RString 出力順ID) {

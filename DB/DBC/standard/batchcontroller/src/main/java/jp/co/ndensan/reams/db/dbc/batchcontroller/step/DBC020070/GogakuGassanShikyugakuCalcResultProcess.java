@@ -96,7 +96,7 @@ public class GogakuGassanShikyugakuCalcResultProcess extends BatchProcessBase<Db
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
         }
-        自市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().code市町村RString();
+        自市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
         自市町村名 = AssociationFinderFactory.createInstance().getAssociation().get市町村名();
     }
 

@@ -76,8 +76,18 @@ public class KogakuServicehiTaishoshaIchiranSource implements IReportSource {
     public RString listTaishosha_13;
     @ReportItem(name = "listTaishosha_14", length = 46, order = 28)
     public RString listTaishosha_14;
+    @ReportItem(name = "listTaishosha_15", length = 46, order = 29)
+    public RString listTaishosha_15;
+    @ReportItem(name = "listTaishosha_16", length = 46, order = 30)
+    public RString listTaishosha_16;
+    @ReportItem(name = "listTaishosha_17", length = 46, order = 31)
+    public RString listTaishosha_17;
+    @ReportItem(name = "listTaishosha_18", length = 46, order = 32)
+    public RString listTaishosha_18;
+    @ReportItem(name = "listTaishosha_19", length = 46, order = 33)
+    public RString listTaishosha_19;
     @ReportPerson(id = "A")
-    @ReportItem(name = "shikibetsuCode", length = 46, order = 29)
+    @ReportItem(name = "shikibetsuCode", length = 46, order = 34)
     public RString shikibetsuCode;
     @ReportExpandedInfo(id = "A")
     public ExpandedInformation 拡張情報;
@@ -121,6 +131,11 @@ public class KogakuServicehiTaishoshaIchiranSource implements IReportSource {
         listTaishosha_12,
         listTaishosha_13,
         listTaishosha_14,
+        listTaishosha_15,
+        listTaishosha_16,
+        listTaishosha_17,
+        listTaishosha_18,
+        listTaishosha_19,
         shikibetsuCode
     }
 }

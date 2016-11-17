@@ -28,4 +28,12 @@ public class DBB213001_TokuchoSofuJohoRenkeiParameter extends BatchParameterBase
     public DBB213001_TokuchoSofuJohoRenkeiParameter(RString dumy) {
         this.dumy = dumy;
     }
+
+    /**
+     * コンストラクタです。
+     *
+     */
+    public DBB213001_TokuchoSofuJohoRenkeiParameter() {
+    }
+
 }

@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.henkokenchushitsuchisho.KaigoH
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuProperty.OutputOrderEnum;
 import jp.co.ndensan.reams.db.dbb.business.report.karisantei.IdoKarisanteigakuTsuchishoOutPutOrder;
 import jp.co.ndensan.reams.db.dbb.business.report.ketteitsuchisho.KaigoHokenHokenryogakuKetteiTsuchishoJoho;
-import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranProperty.NonyuOutputOrderEnum;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiProperty.BreakerFieldsEnum;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
@@ -253,6 +252,8 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         para.put(キー_調定年度.toString(), 調定年度);
         mapper.update異動賦課情報一時テーブル更正前対象者情報(para);
         mapper.update異動賦課情報一時テーブル生活保護区分();
+        mapper.update特徴8月開始者区分();
+        mapper.update特徴10月開始者区分();
     }
 
     /**
@@ -1010,15 +1011,12 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
             return RString.EMPTY;
         }
         RString 出力順 = RString.EMPTY;
-        //QA1854 確認中
         if (特別徴収開始通知書本算定_帳票分類ID.equals(帳票分類ID)) {
             出力順 = MyBatisOrderByClauseCreator.create(BreakerFieldsEnum.class, outputOrder);
         } else if (特別徴収開始通知書仮算定_帳票分類ID.equals(帳票分類ID)) {
             出力順 = MyBatisOrderByClauseCreator.create(IdoKarisanteigakuTsuchishoOutPutOrder.class, outputOrder);
         } else if (決定変更通知書_帳票分類ID.equals(帳票分類ID)) {
             出力順 = MyBatisOrderByClauseCreator.create(OutputOrderEnum.class, outputOrder);
-        } else if (納入通知書_帳票分類ID.equals(帳票分類ID)) {
-            出力順 = MyBatisOrderByClauseCreator.create(NonyuOutputOrderEnum.class, outputOrder);
         }
         return 出力順;
     }

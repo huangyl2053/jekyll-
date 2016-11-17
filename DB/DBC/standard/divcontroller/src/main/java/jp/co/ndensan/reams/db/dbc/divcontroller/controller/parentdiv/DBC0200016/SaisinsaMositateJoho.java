@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0200011.KokuhorenData
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -20,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 画面設計_DBCMNF1001_保険者情報送付データ作成_[174]再審査申立書情報のクラスです。
@@ -33,7 +37,9 @@ public class SaisinsaMositateJoho {
     private RString 外部ＣＳＶファイル名;
     private static final RString 状態パターン = new RString("1");
     private static final ReportId 帳票ID = ReportIdDBC.DBC200047.getReportId();
-
+    private final RString バッチID = new RString("ExecutionBatchId");
+    private final RString フロー固定ID_給報出力 = new RString("DBC110120_SaishinsaMoshitateshoOut");
+    private static final RString 帳票出力順の取得メッセージ引数 = new RString("帳票出力順の取得");
     /**
      * onLoadのメソッドです。
      *
@@ -63,10 +69,13 @@ public class SaisinsaMositateJoho {
                 KokuhorenDataSofuViewState.class);
         再処理区分 = parmater.get再処理区分();
         処理年月 = parmater.get処理年月();
+        FlowParameters fp = FlowParameters.of(バッチID, フロー固定ID_給報出力);
+        FlowParameterAccessor.merge(fp);
         if (getHandler(div).setBatchParameter(再処理区分, 処理年月) != null) {
             return ResponseData.of(getHandler(div).setBatchParameter(再処理区分, 処理年月)).respond();
         }
-        return ResponseData.of(new DBC110120_SaishinsaMoshitateshoOutParameter()).respond();
+
+        throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().replace(帳票出力順の取得メッセージ引数.toString()).evaluate());
     }
 
     private SaisinsaMositateJohoHandler getHandler(SaisinsaMositateJohoDiv div) {

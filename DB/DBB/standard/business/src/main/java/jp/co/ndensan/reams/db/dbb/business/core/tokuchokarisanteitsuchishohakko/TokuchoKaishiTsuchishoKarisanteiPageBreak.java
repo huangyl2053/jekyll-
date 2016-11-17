@@ -46,10 +46,7 @@ public class TokuchoKaishiTsuchishoKarisanteiPageBreak
                 && !currentSource.getSource().atesaki_choikiCode.equals(nextSource.getSource().atesaki_choikiCode)) {
             flg = true;
         } else if (this.breakKeysList.contains(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.番地コード.get項目ID())
-                && (!currentSource.getSource().atesaki_banchiCode1.equals(nextSource.getSource().atesaki_banchiCode1)
-                || !currentSource.getSource().atesaki_banchiCode2.equals(nextSource.getSource().atesaki_banchiCode2)
-                || !currentSource.getSource().atesaki_banchiCode3.equals(nextSource.getSource().atesaki_banchiCode3)
-                || !currentSource.getSource().atesaki_banchiCode4.equals(nextSource.getSource().atesaki_banchiCode4))) {
+                && !currentSource.getSource().atesaki_banchiCode.equals(nextSource.getSource().atesaki_banchiCode)) {
             flg = true;
         } else if (this.breakKeysList.contains(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.行政区コード.get項目ID())
                 && !currentSource.getSource().atesaki_gyoseikuCode.equals(nextSource.getSource().atesaki_gyoseikuCode)) {

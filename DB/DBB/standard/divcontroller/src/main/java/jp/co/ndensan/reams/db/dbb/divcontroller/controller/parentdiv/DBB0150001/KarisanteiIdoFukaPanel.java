@@ -47,11 +47,9 @@ public class KarisanteiIdoFukaPanel {
         boolean flag = getHandler(div).initialize();
         ViewStateHolder.put(ViewStateKeys.実行フラグ, flag);
         if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())) {
-            return ResponseData.of(ResponseData.of(div).setState(
-                    DBB0150001StateName.仮算定異動賦課).data).rootTitle(特徴仮算定賦課).respond();
+            return ResponseData.of(div).setState(DBB0150001StateName.仮算定異動賦課);
         } else {
-            return ResponseData.of(ResponseData.of(div).setState(
-                    DBB0150001StateName.通知書一括発行).data).rootTitle(通知書一括発行).respond();
+            return ResponseData.of(div).setState(DBB0150001StateName.通知書一括発行);
         }
     }
 
@@ -137,7 +135,11 @@ public class KarisanteiIdoFukaPanel {
     public ResponseData<KarisanteiIdoFukaPanelDiv> onStateTransition(KarisanteiIdoFukaPanelDiv div) {
         boolean falg = ViewStateHolder.get(ViewStateKeys.実行フラグ, Boolean.class);
         getHandler(div).set実行ボタン(falg);
-        return ResponseData.of(div).respond();
+        if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())) {
+            return ResponseData.of(div).rootTitle(特徴仮算定賦課).respond();
+        } else {
+            return ResponseData.of(div).rootTitle(通知書一括発行).respond();
+        }
     }
 
     private KarisanteiIdoFukaPanelHandler getHandler(KarisanteiIdoFukaPanelDiv div) {

@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.kogakugassan;
 
+import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -15,10 +18,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KogakuGassanNendoKey {
+public class KogakuGassanNendoKey implements Serializable {
 
-    private RString 整理番号;
+    private HokenshaNo 保険者番号;
+    private RString 自己負担額証明書整理番号;
     private RString 支給申請書整理番号;
     private int 履歴番号;
+    private FlexibleDate 自己負担額証明書作成年月日;
 
 }

@@ -53,7 +53,7 @@ public class InsJigyoKogakuKaigoServiceHiProcess extends SimpleBatchProcessBase 
         }
         mapper.update事業高額介護サービス費給付対象者合計();
         List<TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity> 高額介護サービス費給付対象者明細全件更新一時リスト
-                = mapper.get高額介護サービス費給付対象者明細全件更新一時();
+                = mapper.get事業高額介護サービス費給付対象者明細全件更新一時();
         for (TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity entity : 高額介護サービス費給付対象者明細全件更新一時リスト) {
             DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity dbT3108Entity = new DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity();
             dbT3108Entity.setHihokenshaNo(entity.getHihokenshaNo());

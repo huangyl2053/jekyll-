@@ -25,10 +25,15 @@
                 AND ("shikakuSoshitsuYMD" IS NULL
                 OR #{資格基準日}<![CDATA[<=]]> "shikakuSoshitsuYMD")
                 <if test="市町村コード">
-                    AND ("koikinaiJushochiTokureiFlag" ='1' AND "sochimotoShichosonCode" IN
+                    AND ("koikinaiJushochiTokureiFlag" ='1' AND "koikinaiTokureiSochimotoShichosonCode" IN
                     <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
                     )
-                    OR ("koikinaiJushochiTokureiFlag" ='0' AND "sochimotoShichosonCode" IN
+                    OR  "hihokennshaKubunCode" = '1'
+                    AND "logicalDeletedFlag" = FALSE
+                    AND "ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{資格基準日}
+                    AND ("shikakuSoshitsuYMD" IS NULL
+                    OR #{資格基準日}<![CDATA[<=]]> "shikakuSoshitsuYMD")
+                    AND ("koikinaiJushochiTokureiFlag" ='0' AND "shichosonCode" IN
                     <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
                     )
                 </if>

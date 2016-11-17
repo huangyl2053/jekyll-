@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 画面設計_DBCMNF1001_保険者情報送付データ作成_[531]受給者異動連絡票情報のクラスです。
@@ -34,6 +36,8 @@ public class JukyushaIdoRenrakuhyoJoho {
     private static final RString 月次 = new RString("月次");
     private static final RString 年次 = new RString("年次");
     private static final RString 状態パターン = new RString("4");
+    private final RString バッチID = new RString("ExecutionBatchId");
+    private final RString フロー固定ID_給報出力 = new RString("DBC110020_JukyushaIdoRenrakuhyoOut");
 
     /**
      * onLoadのメソッドです。
@@ -73,6 +77,8 @@ public class JukyushaIdoRenrakuhyoJoho {
         DBC110020_JukyushaIdoRenrakuhyoOutParameter parameter = new DBC110020_JukyushaIdoRenrakuhyoOutParameter();
         parameter.set再処理区分(再処理区分);
         parameter.set処理年月(処理年月);
+        FlowParameters fp = FlowParameters.of(バッチID, フロー固定ID_給報出力);
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 }

@@ -25,4 +25,5 @@ public class AtenaJohoMybatisParameter implements IMyBatisParameter {
     private IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey;
     private FlexibleYearMonth サービス提供年月;
     private RString psmShikibetsuTaisho;
+    private final RString isTrue = new RString("1");
 }

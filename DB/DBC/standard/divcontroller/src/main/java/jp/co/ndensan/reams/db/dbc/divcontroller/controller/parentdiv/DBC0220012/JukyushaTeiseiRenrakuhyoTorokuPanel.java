@@ -151,7 +151,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             }
             setエラー有無(div, result);
         }
-        if (0 == result.getエラー有無()) {
+        List<RString> チェック状態 = getHandler(div).getチェックボックス状態();
+        if (0 == result.getエラー有無() && !チェック状態.isEmpty()) {
             div.getHdnFlag().setValue(起動);
         } else {
             div.getHdnFlag().setValue(停止);
@@ -165,7 +166,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (0 == result.getエラー有無()) {
+            if (停止.equals(div.getHdnFlag().getValue())) {
+                getErrorMessages(result);
                 return get更新と状態遷移(div, 受給者訂正連絡票登録画面Div, 引き継ぎ情報);
             } else {
                 getErrorMessages(result);
@@ -271,9 +273,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
 
     private void getErrorMessages(
             JukyushaTeiseiRenrakuhyoTorokuManagerResult result) {
-        if (result.getエラーメッセージコード().equals(T_S_Z)) {
+        if (1 == result.getエラー有無() && result.getエラーメッセージコード().equals(T_S_Z)) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
-        } else if (result.getエラーメッセージコード().equals(T_O_Z)) {
+        } else if (1 == result.getエラー有無() && result.getエラーメッセージコード().equals(T_O_Z)) {
             throw new ApplicationException(UrErrorMessages.既に存在.getMessage().replace(
                     履歴番号.toString()));
         }
@@ -355,7 +357,12 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
      */
     public ResponseData<JukyushaTeiseiRenrakuhyoTorokuPanelDiv> onClick_btnContinue(
             JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
-        return ResponseData.of(div).respond();
+
+        ViewStateHolder.put(ViewStateKeys.退避用データ, null);
+        KyodoJukyushaTaishoshaEntity 引き継ぎ情報 = ViewStateHolder.get(
+                ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
+        getHandler(div).前排他キーの解除(引き継ぎ情報.get被保番号());
+        return ResponseData.of(div).forwardWithEventName(DBC0220012TransitionEventName.検索条件).respond();
     }
 
     private JukyushaTeiseiRenrakuhyoTorokuPanelHandler getHandler(JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {

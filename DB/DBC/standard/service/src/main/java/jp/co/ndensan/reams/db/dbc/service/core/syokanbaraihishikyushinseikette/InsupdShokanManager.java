@@ -7,11 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisaiJushochiTokurei;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKeigengaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
@@ -19,6 +15,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaig
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssekihensyu.KyufujissekiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3039ShokanMeisaiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3040ShokanKinkyuShisetsuRyoyoDac;
@@ -33,9 +34,9 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3051ShokanShakaiFukush
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3052ShokanShoteiShikkanShisetsuRyoyoDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3107ShokanMeisaiJushochiTokureiDac;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraishikyukettekyufujssekihensyu.SyokanbaraiShikyuKetteKyufuJssekiHensyuManager;
+import jp.co.ndensan.reams.db.dbc.service.core.taishoshakensaku.TaishoshaKensaku;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3034ShokanShinseiDac;
@@ -108,7 +109,8 @@ public class InsupdShokanManager {
     /**
      * 初期化メソッドです。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TaishoshaKensaku}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TaishoshaKensaku}のインスタンス
      */
     public static InsupdShokanManager createInstance() {
         return InstanceProvider.create(InsupdShokanManager.class);
@@ -121,7 +123,7 @@ public class InsupdShokanManager {
      *
      */
     public void update償還払支給申請(DbJohoViewState db情報) {
-        DbT3034ShokanShinseiEntity dbt3034entity = db情報.getShokanShinsei().toEntity();
+        DbT3034ShokanShinseiEntity dbt3034entity = db情報.get償還払支給申請().toEntity();
         if (EntityDataState.Added.equals(dbt3034entity.getState())
                 || EntityDataState.Modified.equals(dbt3034entity.getState())) {
             償還払支給申請Dac.save(dbt3034entity);
@@ -200,14 +202,13 @@ public class InsupdShokanManager {
         }
     }
 
-    private void update償還払請求明細(List<ShokanMeisai> 償還払請求明細List) {
-        for (ShokanMeisai dbT3039entity : 償還払請求明細List) {
-            if (EntityDataState.Added.equals(dbT3039entity.toEntity().getState())
-                    || EntityDataState.Modified.equals(dbT3039entity.toEntity().getState())) {
-                償還払請求明細Dac.save(dbT3039entity.toEntity());
-            } else if (EntityDataState.Deleted.equals(dbT3039entity.toEntity().getState())) {
-
-                償還払請求明細Dac.delete(dbT3039entity.toEntity());
+    private void update償還払請求明細(List<ShokanMeisaiResult> 償還払請求明細List) {
+        for (ShokanMeisaiResult dbT3039entity : 償還払請求明細List) {
+            if (EntityDataState.Added.equals(dbT3039entity.getEntity().toEntity().getState())
+                    || EntityDataState.Modified.equals(dbT3039entity.getEntity().toEntity().getState())) {
+                償還払請求明細Dac.save(dbT3039entity.getEntity().toEntity());
+            } else if (EntityDataState.Deleted.equals(dbT3039entity.getEntity().toEntity().getState())) {
+                償還払請求明細Dac.delete(dbT3039entity.getEntity().toEntity());
             }
         }
     }
@@ -238,58 +239,58 @@ public class InsupdShokanManager {
 
     private void update償還払請求サービス計画(DbJohoViewState db情報, FlexibleYearMonth サービス提供年月) {
         if (サービス年月_200904.isBeforeOrEquals(サービス提供年月)) {
-            List<ShokanServicePlan200904> 償還払請求サービス計画200904データList = db情報.getShokanServicePlan200904();
-            if (償還払請求サービス計画200904データList != null && !償還払請求サービス計画200904データList.isEmpty()) {
-                サービス計画200904(償還払請求サービス計画200904データList);
+            List<ShokanServicePlan200904Result> 償還払請求サービス計画200904データResultList = db情報.get償還払請求サービス計画200904データResultList();
+            if (償還払請求サービス計画200904データResultList != null && !償還払請求サービス計画200904データResultList.isEmpty()) {
+                サービス計画200904(償還払請求サービス計画200904データResultList);
             }
 
         } else if (サービス年月_200604.isBeforeOrEquals(サービス提供年月)
                 && サービス提供年月.isBeforeOrEquals(サービス年月_200903)) {
-            List<ShokanServicePlan200604> 償還払請求サービス計画200604データList = db情報.getShokanServicePlan200604();
-            if (償還払請求サービス計画200604データList != null && !償還払請求サービス計画200604データList.isEmpty()) {
-                サービス計画200604(償還払請求サービス計画200604データList);
+            List<ShokanServicePlan200604Result> 償還払請求サービス計画200604データResultList = db情報.get償還払請求サービス計画200604データResultList();
+            if (償還払請求サービス計画200604データResultList != null && !償還払請求サービス計画200604データResultList.isEmpty()) {
+                サービス計画200604(償還払請求サービス計画200604データResultList);
             }
 
         } else if (サービス提供年月.isBeforeOrEquals(サービス年月_200603)) {
-            List<ShokanServicePlan200004> 償還払請求サービス計画200004データList = db情報.getShokanServicePlan200004();
-            if (償還払請求サービス計画200004データList != null && !償還払請求サービス計画200004データList.isEmpty()) {
-                サービス計画200004(償還払請求サービス計画200004データList);
+            List<ShokanServicePlan200004Result> 償還払請求サービス計画200004データResultList = db情報.get償還払請求サービス計画200004データResultList();
+            if (償還払請求サービス計画200004データResultList != null && !償還払請求サービス計画200004データResultList.isEmpty()) {
+                サービス計画200004(償還払請求サービス計画200004データResultList);
             }
         }
     }
 
-    private void サービス計画200904(List<ShokanServicePlan200904> 償還払請求サービス計画200904データList) {
-        for (ShokanServicePlan200904 dbt3047entity : 償還払請求サービス計画200904データList) {
-            if (EntityDataState.Added.equals(dbt3047entity.toEntity().getState())
-                    || EntityDataState.Modified.equals(dbt3047entity.toEntity().getState())) {
-                償還払請求サービス計画200904Dac.save(dbt3047entity.toEntity());
+    private void サービス計画200904(List<ShokanServicePlan200904Result> 償還払請求サービス計画200904データResultList) {
+        for (ShokanServicePlan200904Result dbt3047 : 償還払請求サービス計画200904データResultList) {
+            if (EntityDataState.Added.equals(dbt3047.getEntity().toEntity().getState())
+                    || EntityDataState.Modified.equals(dbt3047.getEntity().toEntity().getState())) {
+                償還払請求サービス計画200904Dac.save(dbt3047.getEntity().toEntity());
             }
-            if (EntityDataState.Deleted.equals(dbt3047entity.toEntity().getState())) {
-                償還払請求サービス計画200904Dac.delete(dbt3047entity.toEntity());
-            }
-        }
-    }
-
-    private void サービス計画200604(List<ShokanServicePlan200604> 償還払請求サービス計画200604データList) {
-        for (ShokanServicePlan200604 dbt3046entity : 償還払請求サービス計画200604データList) {
-            if (EntityDataState.Added.equals(dbt3046entity.toEntity().getState())
-                    || EntityDataState.Modified.equals(dbt3046entity.toEntity().getState())) {
-                償還払請求サービス計画200604Dac.save(dbt3046entity.toEntity());
-            }
-            if (EntityDataState.Deleted.equals(dbt3046entity.toEntity().getState())) {
-                償還払請求サービス計画200604Dac.delete(dbt3046entity.toEntity());
+            if (EntityDataState.Deleted.equals(dbt3047.getEntity().toEntity().getState())) {
+                償還払請求サービス計画200904Dac.delete(dbt3047.getEntity().toEntity());
             }
         }
     }
 
-    private void サービス計画200004(List<ShokanServicePlan200004> 償還払請求サービス計画200004データList) {
-        for (ShokanServicePlan200004 dbt3045entity : 償還払請求サービス計画200004データList) {
-            if (EntityDataState.Added.equals(dbt3045entity.toEntity().getState())
-                    || EntityDataState.Modified.equals(dbt3045entity.toEntity().getState())) {
-                償還払請求サービス計画200004Dac.save(dbt3045entity.toEntity());
+    private void サービス計画200604(List<ShokanServicePlan200604Result> 償還払請求サービス計画200604データResultList) {
+        for (ShokanServicePlan200604Result dbt3046 : 償還払請求サービス計画200604データResultList) {
+            if (EntityDataState.Added.equals(dbt3046.getEntity().toEntity().getState())
+                    || EntityDataState.Modified.equals(dbt3046.getEntity().toEntity().getState())) {
+                償還払請求サービス計画200604Dac.save(dbt3046.getEntity().toEntity());
             }
-            if (EntityDataState.Deleted.equals(dbt3045entity.toEntity().getState())) {
-                償還払請求サービス計画200004Dac.delete(dbt3045entity.toEntity());
+            if (EntityDataState.Deleted.equals(dbt3046.getEntity().toEntity().getState())) {
+                償還払請求サービス計画200604Dac.delete(dbt3046.getEntity().toEntity());
+            }
+        }
+    }
+
+    private void サービス計画200004(List<ShokanServicePlan200004Result> 償還払請求サービス計画200004データResultList) {
+        for (ShokanServicePlan200004Result dbt3045 : 償還払請求サービス計画200004データResultList) {
+            if (EntityDataState.Added.equals(dbt3045.getEntity().toEntity().getState())
+                    || EntityDataState.Modified.equals(dbt3045.getEntity().toEntity().getState())) {
+                償還払請求サービス計画200004Dac.save(dbt3045.getEntity().toEntity());
+            }
+            if (EntityDataState.Deleted.equals(dbt3045.getEntity().toEntity().getState())) {
+                償還払請求サービス計画200004Dac.delete(dbt3045.getEntity().toEntity());
             }
         }
     }
@@ -345,14 +346,14 @@ public class InsupdShokanManager {
         }
     }
 
-    private void update償還払請求集計(List<ShokanShukei> 償還払請求集計データList) {
-        for (ShokanShukei dbT3053entity : 償還払請求集計データList) {
-            if (EntityDataState.Added.equals(dbT3053entity.toEntity().getState())
-                    || EntityDataState.Modified.equals(dbT3053entity.toEntity().getState())) {
-                償還払請求集計Dac.save(dbT3053entity.toEntity());
-            } else if (EntityDataState.Deleted.equals(dbT3053entity.toEntity().getState())) {
+    private void update償還払請求集計(List<ShokanShukeiResult> 償還払請求集計データList) {
+        for (ShokanShukeiResult dbT3053entity : 償還払請求集計データList) {
+            if (EntityDataState.Added.equals(dbT3053entity.getShukei().toEntity().getState())
+                    || EntityDataState.Modified.equals(dbT3053entity.getShukei().toEntity().getState())) {
+                償還払請求集計Dac.save(dbT3053entity.getShukei().toEntity());
+            } else if (EntityDataState.Deleted.equals(dbT3053entity.getShukei().toEntity().getState())) {
 
-                償還払請求集計Dac.delete(dbT3053entity.toEntity());
+                償還払請求集計Dac.delete(dbT3053entity.getShukei().toEntity());
             }
         }
 
@@ -371,25 +372,25 @@ public class InsupdShokanManager {
     }
 
     private void set償還払請求1(DbJohoViewState db情報, FlexibleYearMonth サービス提供年月) {
-        List<ShokanKihon> 償還払請求基本データList = db情報.getShokanKihon();
+        List<ShokanKihon> 償還払請求基本データList = db情報.get償還払請求基本データList();
         if (償還払請求基本データList != null && !償還払請求基本データList.isEmpty()) {
             update償還払請求基本(償還払請求基本データList);
         }
-        List<ShokanMeisaiJushochiTokurei> 住所地特例データList = db情報.getShokanMeisaiJushochiTokurei();
+        List<ShokanMeisaiJushochiTokurei> 住所地特例データList = db情報.get住所地特例データList();
         if (住所地特例データList != null && !住所地特例データList.isEmpty()) {
             update償還払請求明細_住所地特例(住所地特例データList);
         }
-        List<ShokanMeisai> 償還払請求明細List = db情報.getShokanMeisai();
+        List<ShokanMeisaiResult> 償還払請求明細List = db情報.get償還払請求明細データList();
         if (償還払請求明細List != null && !償還払請求明細List.isEmpty()) {
             update償還払請求明細(償還払請求明細List);
         }
         if (サービス提供年月.isBeforeOrEquals(サービス年月_200303)) {
-            List<ShokanTokuteiShinryohi> 償還払請求特定診療費データList = db情報.getShokanTokuteiShinryohi();
+            List<ShokanTokuteiShinryohi> 償還払請求特定診療費データList = db情報.get償還払請求特定診療費データList();
             if (償還払請求特定診療費データList != null && !償還払請求特定診療費データList.isEmpty()) {
                 update償還払請求特定診療費(償還払請求特定診療費データList);
             }
         } else if (サービス年月_200304.isBeforeOrEquals(サービス提供年月)) {
-            List<ShokanTokuteiShinryoTokubetsuRyoyo> 特別療養費データList = db情報.getShokanTokuteiShinryoTokubetsuRyoyo();
+            List<ShokanTokuteiShinryoTokubetsuRyoyo> 特別療養費データList = db情報.get特別療養費データList();
             if (特別療養費データList != null && !特別療養費データList.isEmpty()) {
                 update償還払請求特定診療費_特別療養費(特別療養費データList);
             }
@@ -398,29 +399,29 @@ public class InsupdShokanManager {
 
     private void set償還払請求2(DbJohoViewState db情報) {
         List<ShokanTokuteiNyushoshaKaigoServiceHiyo> 償還払請求特定入所者介護サービス費用データList
-                = db情報.getShokanTokuteiNyushoshaKaigoServiceHiyo();
+                = db情報.get償還払請求特定入所者介護サービス費用データList();
         if (償還払請求特定入所者介護サービス費用データList != null && !償還払請求特定入所者介護サービス費用データList.isEmpty()) {
             update償還払請求特定入所者介護サービス費用(償還払請求特定入所者介護サービス費用データList);
         }
         List<ShokanShakaiFukushiHojinKeigengaku> 償還払請求社会福祉法人軽減額データList
-                = db情報.getShokanShakaiFukushiHojinKeigengaku();
+                = db情報.get償還払請求社会福祉法人軽減額データList();
         if (償還払請求社会福祉法人軽減額データList != null && !償還払請求社会福祉法人軽減額データList.isEmpty()) {
             update償還払請求社会福祉法人軽減額(償還払請求社会福祉法人軽減額データList);
         }
         List<ShokanShoteiShikkanShisetsuRyoyo> 償還払請求所定疾患施設療養費等データList
-                = db情報.getShokanShoteiShikkanShisetsuRyoyo();
+                = db情報.get償還払請求所定疾患施設療養費等データList();
         if (償還払請求所定疾患施設療養費等データList != null && !償還払請求所定疾患施設療養費等データList.isEmpty()) {
             update償還払請求所定疾患施設療養費等(償還払請求所定疾患施設療養費等データList);
         }
-        List<ShokanKinkyuShisetsuRyoyo> 償還払請求緊急時施設療養データList = db情報.getShokanKinkyuShisetsuRyoyo();
+        List<ShokanKinkyuShisetsuRyoyo> 償還払請求緊急時施設療養データList = db情報.get償還払請求緊急時施設療養データList();
         if (償還払請求緊急時施設療養データList != null && !償還払請求緊急時施設療養データList.isEmpty()) {
             update償還払請求緊急時施設療養(償還払請求緊急時施設療養データList);
         }
-        List<ShokanShukei> 償還払請求集計データList = db情報.getShokanShukei();
+        List<ShokanShukeiResult> 償還払請求集計データList = db情報.get償還払請求集計データList();
         if (償還払請求集計データList != null && !償還払請求集計データList.isEmpty()) {
             update償還払請求集計(償還払請求集計データList);
         }
-        List<ShokanShokujiHiyo> 償還払請求食事費用データList = db情報.getShokanShokujiHiyo();
+        List<ShokanShokujiHiyo> 償還払請求食事費用データList = db情報.get償還払請求食事費用データList();
         if (償還払請求食事費用データList != null && !償還払請求食事費用データList.isEmpty()) {
             update償還払請求食事費用(償還払請求食事費用データList);
         }

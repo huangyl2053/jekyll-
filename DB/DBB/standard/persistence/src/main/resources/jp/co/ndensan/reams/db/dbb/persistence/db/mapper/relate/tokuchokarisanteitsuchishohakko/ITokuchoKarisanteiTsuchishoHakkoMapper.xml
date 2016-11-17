@@ -6,10 +6,10 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteitsuchishohakko.ITokuchoKarisanteiTsuchishoHakkoMapper">
     
     <resultMap id="resultMap_TsuchishoDataTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohakko.TsuchishoDataTempEntity" autoMapping="true">
-        <id column="choteiNendo"/>
-        <id column="fukaNendo"/>
-        <id column="tsuchishoNo"/>
-        <id column="shikibetsuCode"/>
+        <id column="dbT2015KeisangoJoho_choteiNendo"/>
+        <id column="dbT2015KeisangoJoho_fukaNendo"/>
+        <id column="dbT2015KeisangoJoho_tsuchishoNo"/>
+        <id column="dbT2015KeisangoJoho_shikibetsuCode"/>
         <association property="計算後情報" resultMap="resultMap_計算後情報"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
@@ -318,6 +318,7 @@
         <result property="前年度特徴期別金額04" column="zennendoTokuchoKibetsuKingaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="前年度特徴期別金額05" column="zennendoTokuchoKibetsuKingaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="前年度特徴期別金額06" column="zennendoTokuchoKibetsuKingaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="番地コード" column="番地コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="計算後情報" resultMap="resultMap_計算後情報"/>
         <association property="前年度賦課情報" resultMap="resultMap_前年度賦課情報"/>
         <association property="宛名" resultMap="resultMap_宛名情報"/>
@@ -346,9 +347,10 @@
     <select resultOrdered="true" id="select出力対象データ" resultMap="resultMap_出力対象情報の取得"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoMybatisParameter" fetchSize="500">
         SELECT
-            *
+            A.*,
+            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" AS 番地コード
         FROM
-            "KarisanteiIkkatsuHakkoTemp"
+            "KarisanteiIkkatsuHakkoTemp" AS A
         WHERE 1=1
            <if test="出力対象 == 1">
             AND "hihokenshaKubun" = '0'

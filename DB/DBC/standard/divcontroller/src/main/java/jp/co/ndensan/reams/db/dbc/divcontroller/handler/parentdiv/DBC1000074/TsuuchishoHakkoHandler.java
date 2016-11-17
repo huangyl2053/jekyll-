@@ -41,7 +41,7 @@ public class TsuuchishoHakkoHandler {
     private static final RString 入力チェック_申請 = new RString("申請");
     private static final RString 入力チェック_決定 = new RString("決定");
     private static final RString 入力チェック = new RString("入力チェック");
-    private static final RString 処理名 = new RString("基準収入額適用決定通知書");
+    private static final RString 処理名 = new RString("基準収入額適用決定通知書発行");
     private static final RString 出力順を = new RString("出力順を");
     private static final ReportId 帳票ID = new ReportId("DBC100074_KijunShunyugakuTekiyoKetteiTsuchisho");
     private static final int NUM_1 = 1;
@@ -94,10 +94,10 @@ public class TsuuchishoHakkoHandler {
         RDate 前回対象開始日時Temp = null;
         RDate 前回対象終了日時Temp = null;
         if (処理日付管理マスタ != null) {
-            if (処理日付管理マスタ.get対象開始日時() != null) {
+            if (処理日付管理マスタ.get対象開始日時() != null && !処理日付管理マスタ.get対象開始日時().isEmpty()) {
                 前回対象開始日時Temp = 処理日付管理マスタ.get対象開始日時().getDate();
             }
-            if (処理日付管理マスタ.get対象終了日時() != null) {
+            if (処理日付管理マスタ.get対象終了日時() != null && !処理日付管理マスタ.get対象終了日時().isEmpty()) {
                 前回対象終了日時Temp = 処理日付管理マスタ.get対象終了日時().getDate();
             }
         }

@@ -296,12 +296,16 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
      * @param 異動一時List List<IdouTblEntity>
      * @return List<DbT3105SogoJigyoTaishoshaEntity>
      */
-    public static List<DbT3105SogoJigyoTaishoshaEntity> get総合事業対象者(List<IdouTblEntity> 異動一時List) {
+    public static List<DbT3105SogoJigyoTaishoshaEntity> get総合事業対象者(List<IdouTblEntity> 異動一時List,
+            List<KyotakuEntity> 居宅計画List) {
         List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List = new ArrayList<>();
         for (IdouTblEntity 異動一時 : 異動一時List) {
             DbT3105SogoJigyoTaishoshaEntity 総合事業対象者 = get総合事業対象者entity(異動一時.get総合事業対象者());
             if (総合事業対象者 == null) {
                 continue;
+            }
+            if (居宅計画List != null && !居宅計画List.isEmpty()) {
+                総合事業対象者.setTekiyoKaishiYMD(居宅計画List.get(ORDER_0).get届出年月日());
             }
             総合事業対象者List.add(総合事業対象者);
         }

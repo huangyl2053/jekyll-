@@ -138,7 +138,7 @@ public class KanendoFukaKakutei {
     public ResponseData<KanendoFukaKakuteiDiv> onClick_dgKanendoFukaIchiran(KanendoFukaKakuteiDiv div) {
         dgKanendoFukaIchiran_Row row = div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getClickedItem();
         Optional<FukaShokaiKey> 後履歴 = getKanendoFukaKakuteiHandler(div).get後履歴Key(row);
-        Optional<FukaShokaiKey> 前履歴 = getKanendoFukaKakuteiHandler(div).get後履歴Key(row);
+        Optional<FukaShokaiKey> 前履歴 = getKanendoFukaKakuteiHandler(div).get前履歴Key(row);
         ViewStateHolder.put(ViewStateKeys.賦課比較キー, FukaHikakuInput.createFor前履歴との比較(後履歴.get(), 前履歴.get()));
         return ResponseData.of(div).forwardWithEventName(DBB0550002TransitionEventName.選択).respond();
     }

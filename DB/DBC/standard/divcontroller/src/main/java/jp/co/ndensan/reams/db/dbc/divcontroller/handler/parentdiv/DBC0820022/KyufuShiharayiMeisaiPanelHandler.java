@@ -248,6 +248,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
         if (登録.equals(state)) {
             List<dgdKyufuhiMeisai_Row> list = div.getPanelThree().getDgdKyufuhiMeisai().getDataSource();
             list.add(ddgRow);
+            div.getPanelThree().getDgdKyufuhiMeisai().setDataSource(list);
         }
         clear給付費明細登録();
         div.getPanelThree().getPanelFour().setVisible(false);
@@ -283,59 +284,101 @@ public class KyufuShiharayiMeisaiPanelHandler {
     }
 
     /**
+     * is入力済
+     *
+     *
+     * @return true
+     */
+    public boolean is入力済() {
+        for (dgdKyufuhiMeisai_Row ddgList : div.getPanelThree().getDgdKyufuhiMeisai().getDataSource()) {
+            if (RowState.Added.equals(ddgList.getRowState())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * is変更済
+     *
+     *
+     * @return true
+     */
+    public boolean is変更済() {
+        for (dgdKyufuhiMeisai_Row ddgList : div.getPanelThree().getDgdKyufuhiMeisai().getDataSource()) {
+            if (RowState.Modified.equals(ddgList.getRowState())
+                    || RowState.Deleted.equals(ddgList.getRowState())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 保存処理
      *
      * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
-     * @param 処理モード RString
      * @param shkonlist List<ShokanMeisaiResult>
+     * @return List<ShokanMeisai>
      */
-    public void 保存処理(ShoukanharaihishinseimeisaikensakuParameter meisaiPar, RString 処理モード,
+    public ArrayList<ShokanMeisaiResult> set保存処理(ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
             List<ShokanMeisaiResult> shkonlist) {
+        ArrayList<ShokanMeisaiResult> entityList = new ArrayList<>();
+        int max連番 = 0;
+        Map<RString, ShokanMeisaiResult> mapList = new HashMap<>();
+        for (ShokanMeisaiResult shokanMeisaiResult : shkonlist) {
+            mapList.put(shokanMeisaiResult.getEntity().get連番(), shokanMeisaiResult);
+            if (max連番 < Integer.parseInt(shokanMeisaiResult.getEntity().get連番().toString())) {
+                max連番 = Integer.parseInt(shokanMeisaiResult.getEntity().get連番().toString());
+            }
+        }
+        setResult(mapList, entityList, max連番, meisaiPar);
+        return entityList;
+    }
+
+    private void setResult(Map<RString, ShokanMeisaiResult> mapList,
+            ArrayList<ShokanMeisaiResult> entityList,
+            int max連番,
+            ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
         JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
         RString 様式番号 = meisaiPar.get様式番号();
         RString 明細番号 = meisaiPar.get明細番号();
-        List<ShokanMeisai> entityList = new ArrayList<>();
         List<dgdKyufuhiMeisai_Row> dgrow = div.getPanelThree().getDgdKyufuhiMeisai().getDataSource();
-        if (削除.equals(処理モード)) {
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().
-                    delShokanSyomeisyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        } else {
-            int max連番 = 0;
-            Map<RString, ShokanMeisai> mapList = new HashMap<>();
-            for (ShokanMeisaiResult shokanMeisaiResult : shkonlist) {
-                mapList.put(shokanMeisaiResult.getEntity().get連番(), shokanMeisaiResult.getEntity());
-                if (max連番 < Integer.parseInt(shokanMeisaiResult.getEntity().get連番().toString())) {
-                    max連番 = Integer.parseInt(shokanMeisaiResult.getEntity().get連番().toString());
-                }
-            }
-            for (dgdKyufuhiMeisai_Row row : dgrow) {
-                if (RowState.Modified.equals(row.getRowState())) {
-                    ShokanMeisai entityModified = mapList.get(row.getDefaultDataName6());
-                    entityModified = buildshokanMeisai(entityModified, row);
-                    entityList.add(entityModified.modified());
-                } else if (RowState.Deleted.equals(row.getRowState())) {
-                    entityList.add(mapList.get(row.getDefaultDataName6()).deleted());
-                } else if (RowState.Added.equals(row.getRowState())) {
-                    max連番 = max連番 + 1;
-                    ShokanMeisai entityAdded = new ShokanMeisai(
-                            被保険者番号,
-                            サービス年月,
-                            整理番号,
-                            事業者番号,
-                            様式番号,
-                            明細番号,
-                            new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
-                    entityAdded = buildshokanMeisai(entityAdded, row);
-                    entityList.add(entityAdded.added());
-                }
 
+        for (dgdKyufuhiMeisai_Row row : dgrow) {
+            if (null != row.getRowState()) {
+                switch (row.getRowState()) {
+                    case Modified:
+                        ShokanMeisaiResult modifiedResult = mapList.get(row.getDefaultDataName6());
+                        ShokanMeisai entityModified = modifiedResult.getEntity();
+                        entityModified = buildshokanMeisai(entityModified, row);
+                        entityList.add(new ShokanMeisaiResult(entityModified.modified(), modifiedResult.getServiceName()));
+                        break;
+                    case Deleted:
+                        ShokanMeisaiResult deletedResult = mapList.get(row.getDefaultDataName6());
+                        entityList.add(new ShokanMeisaiResult(deletedResult.getEntity().deleted(), deletedResult.getServiceName()));
+                        break;
+                    case Added:
+                        max連番 = max連番 + 1;
+                        ShokanMeisai entityAdded = new ShokanMeisai(
+                                被保険者番号,
+                                サービス年月,
+                                整理番号,
+                                事業者番号,
+                                様式番号,
+                                明細番号,
+                                new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
+                        entityAdded = buildshokanMeisai(entityAdded, row);
+                        entityList.add(new ShokanMeisaiResult(entityAdded.added(), div.getPanelThree().getPanelFour().getCcdServiceCodeInput().getサービス名称()));
+                        break;
+                    default:
+                        break;
+                }
             }
         }
-        SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanMeisai(entityList);
-
     }
 
     private ShokanMeisai buildshokanMeisai(ShokanMeisai entity, dgdKyufuhiMeisai_Row row) {

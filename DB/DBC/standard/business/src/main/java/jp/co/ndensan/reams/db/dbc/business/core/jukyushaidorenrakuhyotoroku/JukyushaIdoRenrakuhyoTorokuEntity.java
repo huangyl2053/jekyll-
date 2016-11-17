@@ -55,7 +55,7 @@ public class JukyushaIdoRenrakuhyoTorokuEntity {
     private RString 標準負担額;
     private RString 標準適用開始年月日;
     private RString 標準適用終了年月日;
-    private Boolean 公費負担上限額減額;
+    private RString 公費負担上限額減額;
     private RString 償還払化適用開始年月日;
     private RString 償還払化適用終了年月日;
     private RString 給付率引下げ適用開始年月日;
@@ -81,7 +81,7 @@ public class JukyushaIdoRenrakuhyoTorokuEntity {
     private RString 軽減率;
     private RString 軽減率適用開始年月日;
     private RString 軽減率適用終了年月日;
-    private Boolean 小規模居宅ｻｰﾋﾞｽ利用;
+    private RString 小規模居宅ｻｰﾋﾞｽ利用;
     private RString 二次予防事業区分;
     private FlexibleDate 二次予防有効期間開始年月日;
     private FlexibleDate 二次予防有効期間終了年月日;

@@ -17,8 +17,8 @@
                 KOGAKUSHIKYU."rirekiNo" DESC) AS rrkno
             FROM rgdb."DbT3056KogakuShikyuShinsei" AS KOGAKUSHIKYU
             ) AS T
-            WHERE
-                T.rrkno = 1
+<!--            WHERE
+                T.rrkno = 1-->
         ) AS T1
         WHERE
             T1."hihokenshaNo" = #{hihokenshaNo}
@@ -38,8 +38,8 @@
                 SHOKANHANTEI."rirekiNo" DESC) AS rrkno
             FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS SHOKANHANTEI
             ) AS T
-            WHERE
-                T.rrkno = 1
+<!--            WHERE
+                T.rrkno = 1-->
         ) AS T1
         WHERE
             T1."hihokenshaNo" = #{hihokenshaNo}
