@@ -96,6 +96,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     private static final RString 資格取得事由_11 = new RString("11");
     private static final RString 資格取得事由_13 = new RString("13");
     private static final RString 資格取得事由_17 = new RString("17");
+    private static final FlexibleDate MIN_DATE = new FlexibleDate(new RString("20150401"));
     private static final RString 星 = new RString("*");
     private JukyushaIdoRenrakuhyoOutProcessParameter processParameter;
     private List<IdouTblEntity> 異動一時List;
@@ -156,7 +157,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             return;
         }
         被保険者番号 = entity.get被保険者番号();
-//        if (!被保険者番号.equals(new HihokenshaNo("2015123457"))) {
+//        if (!被保険者番号.equals(new HihokenshaNo("2016111601"))) {
 //            異動一時List.clear();
 //            異動一時Map.clear();
 //            return;
@@ -165,7 +166,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         List<DbT4001JukyushaDaichoEntity> 受給者台帳List = JukyushaIdoRenrakuhyoOutCommonProcess.get受給者台帳(異動一時List);
         List<KyotakuEntity> 居宅計画List = JukyushaIdoRenrakuhyoOutCommonProcess.get居宅計画(異動一時List);
         List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List
-                = JukyushaIdoRenrakuhyoOutCommonProcess.get総合事業対象者(異動一時List, 居宅計画List);
+                = JukyushaIdoRenrakuhyoOutCommonProcess.get総合事業対象者(異動一時List);
         総合事業対象者適用開始年月日設定(総合事業対象者List, 居宅計画List);
         受給者台帳処理(受給者台帳List, 処理年月, 総合事業対象者List);
         List<DbT3100NijiYoboJigyoTaishoshaEntity> 二次予防List = JukyushaIdoRenrakuhyoOutCommonProcess.get二次予防(異動一時List);
@@ -348,7 +349,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                     && コート_4.equals(受給者台帳.getJukyuShinseiJiyu())
                     && isBeforeYearMonth(受給者台帳.getJukyuShinseiYMD(), 処理年月)) {
                 IdoTblTmpEntity insertEntity;
-                FlexibleDate 異動年月日 = get月初(受給者台帳.getNinteiYukoKikanKaishiYMD());
+                FlexibleDate 異動年月日 = get月初(受給者台帳.getJukyuShinseiYMD());
                 if (isDateEmpty(異動年月日)) {
                     continue;
                 }
@@ -533,8 +534,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             }
         }
         DbT4001JukyushaDaichoEntity 後履歴 = get後履歴の有効データ(受給者台帳List, 受給者台帳);
-        if (後履歴 != null && isBeforeDate(後履歴.getNinteiYukoKikanKaishiYMD(), 受給者台帳.getNinteiYMD())
-                && isBeforeDate(受給者台帳.getNinteiYMD(), 後履歴.getNinteiYukoKikanShuryoYMD())) {
+        if (後履歴 != null && isBeforeDate(後履歴.getNinteiYukoKikanKaishiYMD(), checkDate)
+                && isBeforeDate(checkDate, 後履歴.getNinteiYukoKikanShuryoYMD())) {
             return true;
         }
         return false;
@@ -1625,7 +1626,11 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 if (!isYMdif(総合事業対象者.getTekiyoKaishiYMD(), 居宅計画.get届出年月日())
                         && !isYMdif(総合事業対象者.getTekiyoKaishiYMD(), 居宅計画.get適用開始日())
                         && STR_4.equals(居宅計画.get居宅サービス計画作成区分コード())) {
-                    総合事業対象者.setTekiyoKaishiYMD(居宅計画.get届出年月日());
+                    if (isBeforeDate(居宅計画.get届出年月日(), MIN_DATE)) {
+                        総合事業対象者.setTekiyoKaishiYMD(MIN_DATE);
+                    } else {
+                        総合事業対象者.setTekiyoKaishiYMD(居宅計画.get届出年月日());
+                    }
                 }
             }
         }
@@ -1735,6 +1740,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         sort異動一時2データ(allData);
         IdoTblTmpEntity 前履歴データ = null;
         for (IdoTblTmpEntity entity : allData) {
+            System.out.println(entity.get異動年月日().toString());
             if (前履歴データ == null) {
                 前履歴データ = entity;
                 continue;
@@ -1913,9 +1919,10 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 entity.set国民健康保険被保険者証番号(国保資格.getKokuhoHokenshoNo());
                 entity.set国民健康保険個人番号(国保資格.getKokuhoKojinNo());
             }
-
-            entity.set国民健康保険被保険者証番号(entity.get被保険者番号().getColumnValue());
             entity.set送付年月(処理年月);
+            if (宛名情報.get名称() != null) {
+                entity.set被保険者氏名(宛名情報.get名称().getColumnValue());
+            }
         }
 
     }

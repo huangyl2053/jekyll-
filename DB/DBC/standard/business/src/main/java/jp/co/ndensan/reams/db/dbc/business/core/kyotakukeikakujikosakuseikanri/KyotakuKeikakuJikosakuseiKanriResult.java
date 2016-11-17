@@ -296,35 +296,35 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString(""), new RString("\"yubinNo\"")),
+        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("\"yubinNo\"")),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString(""), new RString("\"choikiCode\"")),
+        町域コード(new RString("0002"), new RString("choikiCode"), new RString("\"choikiCode\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString(""), new RString("\"gyoseikuCode\"")),
+        行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("\"gyoseikuCode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"shimei50onKana\"")),
+        氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("\"shimei50onKana\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), new RString("\"shichosonCode\"")),
+        市町村コード(new RString("0016"), new RString("shichosonCode"), new RString("\"shichosonCode\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString(""), new RString("\"exHihokenshaNo\"")),
+        被保険者番号(new RString("0104"), new RString("hihokenshaNo"), new RString("\"hihokenshaNo\"")),
         /**
          * 利用年月
          */
-        利用年月(new RString("0370"), new RString(""), new RString("\"riyoYM\"")),
+        利用年月(new RString("0370"), new RString("riyoYM"), new RString("\"riyoYM\"")),
         /**
          * 要介護状態区分
          */
-        要介護状態区分(new RString("0369"), new RString(""), new RString("\"yokaigoJotaiKubunCode\""));
+        要介護状態区分(new RString("0369"), new RString("yokaigoJotaiKubunCode"), new RString("\"yokaigoJotaiKubunCode\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

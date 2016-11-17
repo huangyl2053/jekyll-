@@ -46,6 +46,8 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     private static final RString 事業高額サービス費給付お知らせ通知書作成 = new RString("事業高額サービス費給付お知らせ通知書作成");
     private static final RString 出力順 = new RString("出力順");
     private static final int INT_10 = 10;
+    private static final int INT_1 = 1;
+    private static final RString DEFAULT_VALUE = new RString("default");
 
     /**
      * 画面初期化のメソッドです。
@@ -148,8 +150,8 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> isError(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        if (div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey().equals(new RString("default"))
-                || div.getShinseishoHakkoParameters().getDdlServiceYM().getDataSource().size() == 1) {
+        if (DEFAULT_VALUE.equals(div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey())
+                || div.getShinseishoHakkoParameters().getDdlServiceYM().getDataSource().size() == INT_1) {
             ValidationMessageControlPairs validPairs = getCheckHandler().確定チェック();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -202,14 +204,14 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onBeforeOpenDialog(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
-        if ((div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey().equals(new RString("default"))
-                || div.getShinseishoHakkoParameters().getDdlServiceYM().getDataSource().size() == 1)
+        if ((DEFAULT_VALUE.equals(div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey())
+                || div.getShinseishoHakkoParameters().getDdlServiceYM().getDataSource().size() == INT_1)
                 && !div.getRadHihokenshaNo().getSelectedKey().isEmpty()) {
             ValidationMessageControlPairs validPairs = getCheckHandler().確定チェック();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
-        }        
+        }
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getCcdShuturyokujun().get出力順ID() == null) {
             validPairs.add(new ValidationMessageControlPair(

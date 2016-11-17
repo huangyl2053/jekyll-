@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikohijukyusha;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,4 +45,10 @@ public class SogojigyohiKohiJukyushaEntity {
     private Decimal 公費分本人負担額集計;
     private ShikibetsuCode 識別コード;
     private HihokenshaNo 被保険者番号;
+    private RString 郵便番号;
+    private RString 町域コード;
+    private RString 行政区コード;
+    private RString 氏名５０音カナ;
+    private LasdecCode 市町村コード;
+
 }

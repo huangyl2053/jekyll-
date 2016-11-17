@@ -40,6 +40,9 @@ public class InsJukyushaIdoRenrakuhyoTempProcess extends BatchProcessBase<DbT300
 
     @Override
     protected void process(DbT3001JukyushaIdoRenrakuhyoEntity entity) {
+//        if (!entity.getHiHokenshaNo().equals(new HihokenshaNo("2016111601"))) {
+//            return;
+//        }
         受給者異動送付一時tableWriter.insert(entity);
     }
 
