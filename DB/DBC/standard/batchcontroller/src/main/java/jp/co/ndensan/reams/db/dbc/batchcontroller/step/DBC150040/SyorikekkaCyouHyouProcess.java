@@ -32,14 +32,14 @@ public class SyorikekkaCyouHyouProcess extends BatchProcessBase<SyorikekkatempTb
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hekinriyogakutokehyo.IHekinRiyoGakuTokehyoMapper."
             + "get処理結果確認リスト作成");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU900002");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC900004");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
     private FileSpoolManager manager;
     @BatchWriter
     private CsvWriter<SyorikekkaCyouHyouEucCsvEntity> eucCsvWriter;
-    private static final RString 処理結果確認リストCSV = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private static final RString 処理結果確認リストCSV = new RString("DBC900004_ShoriKekkaKakuninList.csv");
     private HekinRiyoGakuTokehyoResult hekinRiyoGakuTokehyoResult;
 
     @Override
