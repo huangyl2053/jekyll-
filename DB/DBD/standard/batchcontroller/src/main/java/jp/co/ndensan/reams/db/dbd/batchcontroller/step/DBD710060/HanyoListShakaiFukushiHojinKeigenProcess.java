@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.ShutsuryokuKomok
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.hanyolist.HanyoListReportSource;
-import jp.co.ndensan.reams.db.dbz.service.core.hanyolist.HanyoListReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
@@ -194,6 +193,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         ShakaiFukushiHojinKeigenEucCsvEntity eucCsvEntity = new ShakaiFukushiHojinKeigenEucCsvEntity();
         HanyoListShakaiFukushiHojinKeigenManager.createInstance().get情報設定(eucCsvEntity, entity, association, hokenshaList,
                 processParamter.isCsvhitsukesurasyuhensyu());
+        eucCsvEntity.set連番(new RString(String.valueOf(連番)));
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));
         boolean flag = false;
@@ -242,13 +242,21 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
     protected void afterExecute() {
         if (eucCsvWriter.getCount() == 0) {
             eucCsvWriter.writeLine(HanyoListShakaiFukushiHojinKeigenManager.createInstance().setBlank());
-            if (hanyoListShutsuryokuKomoku != null) {
-                for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
-                    RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
-                    帳票出力とCSV出力編集new(i, hanyoListShutsuryokuKomoku, get項目名称);
-                }
-                帳票出力とCSV出力();
+            // TODO : 出力項目が選択できるようになったら下を採用
+            int index = 0;
+            for (ShakaiFukushiHojinKeigenCsvEnumEntity e : ShakaiFukushiHojinKeigenCsvEnumEntity.values()) {
+                RString get項目名称 = e.get名称().substring(3);
+                帳票出力とCSV出力編集new(index, hanyoListShutsuryokuKomoku, get項目名称);
+                index++;
             }
+            帳票出力とCSV出力();
+//            if (hanyoListShutsuryokuKomoku != null) {
+//                for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
+//                    RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
+//                    帳票出力とCSV出力編集new(i, hanyoListShutsuryokuKomoku, get項目名称);
+//                }
+//                帳票出力とCSV出力();
+//            }
         }
         eucCsvWriter.close();
         eucCsvWriter1.close();

@@ -69,7 +69,7 @@ public class HanyoListParamHandler {
     private static final RString 汎用リスト_訪問介護利用者負担額減額帳票ID = new RString("DBD701005_HanyoListHomonKaigoRiyoshaFutanGakuGengaku");
     private static final RString 汎用リスト_社会福祉法人軽減帳票ID = new RString("DBD701006_HanyoListShakaiFukushiHojinKeigen");
     private static final RString 汎用リスト_特別地域加算減免帳票ID = new RString("DBD701007_HanyoListTokubetsuChiikiKasanGemmen");
-    private static final RString 汎用リスト_負担限度額認定帳票ID = new RString("DBD701003_HanyoListFutanGendoGakuNintei");
+    private static final RString 汎用リスト_負担限度額認定帳票ID = new RString("DBD701008_HanyoListFutanGendoGakuNintei");
     private static final RString 汎用リスト_国保帳票ID = new RString("DBD701010_HanyoListKokuho");
     private static final RString 汎用リスト_後期高齢者帳票ID = new RString("DBD701011_HanyoListKokiKoreisha");
     private static final RString 汎用リスト_事業対象者帳票ID = new RString("DBD701012_HanyoListJigyoTaishosha");
@@ -253,7 +253,6 @@ public class HanyoListParamHandler {
         }
         div.getRadShuturyokuHoho().setDataSource(出力方法list);
         if (汎用リスト_施設入退所メニューID.equals(menuID)) {
-            div.setTitle(new RString("汎用リスト　施設入退所"));
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_施設入退所帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_施設入退所帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_施設入退所表題);
