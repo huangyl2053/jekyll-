@@ -111,8 +111,8 @@ public class JukyushaIdoRenrakuhyoValidationHandler {
                         div.getYokaigoNinteiPanel().getRadMinashiYokaigoJotaiKubun())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.計画作成区分の必須項目,
                         div.getKyotakuServicePlanPanel().getRadKyotakuServiceSakuseiKubun())
-                .add(JukyushaIdoRenrakuhyoValidationMessage.減免申請中区分の必須項目,
-                        div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun())
+//                .add(JukyushaIdoRenrakuhyoValidationMessage.減免申請中区分の必須項目,
+//                        div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun())
                 .add(JukyushaIdoRenrakuhyoValidationMessage.認定申請中区分の必須項目,
                         div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                         getRadTokuteiNyushoshaNinteiShinseichuKubun())
