@@ -294,6 +294,7 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         受給者台帳一時Entity.setKyotakuServiceSakuseiKubunCode(RString.EMPTY);
         受給者台帳一時Entity.setKeisakuSakuseiJigyoshaNo(RString.EMPTY);
         受給者台帳一時Entity.setSikibetsuCode(ShikibetsuCode.EMPTY);
+        受給者台帳一時Entity.setServiceTeikyoYM(FlexibleYearMonth.EMPTY);
         受給者台帳一時Entity.setShikakuShutokuYMD(FlexibleDate.EMPTY);
         受給者台帳一時Entity.setShikakuSoshitsuYMD(FlexibleDate.EMPTY);
         受給者台帳一時Entity.setShichosonCode(LasdecCode.EMPTY);
