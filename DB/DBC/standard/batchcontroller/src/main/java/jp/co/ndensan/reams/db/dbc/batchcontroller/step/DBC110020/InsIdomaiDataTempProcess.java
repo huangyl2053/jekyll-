@@ -1938,11 +1938,13 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         List<FlexibleYearMonth> 同じ年月List = new ArrayList<>();
         Map<FlexibleYearMonth, List<IdoTblTmpEntity>> 同じ年月Map = new HashMap<>();
         for (IdoTblTmpEntity entity : allData) {
-//            if (!isDateEmpty(entity.get資格喪失年月日())
-//                    && !isBeforeOreqDate(entity.get認定有効期間開始年月日(), entity.get資格喪失年月日())) {
-//                return;
-//            }
             if (isDateEmpty(entity.get認定有効期間開始年月日())) {
+                continue;
+            }
+            if (isDateEmpty(entity.get認定有効期間開始年月日())) {
+                continue;
+            }
+            if (!isBeforeOreqDate(entity.get認定有効期間開始年月日(), entity.get資格喪失年月日())) {
                 continue;
             }
             FlexibleYearMonth 同じ年月 = entity.get認定有効期間開始年月日().getYearMonth();
