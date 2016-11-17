@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.T
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.CharacteristicsPhase;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.ShunyuJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
@@ -336,10 +337,10 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
      *
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 RDateTime
-     * @param 編集後仮算定通知書共通情報List List<EditedKariSanteiTsuchiShoKyotsu>
+     * @param 編集後仮算定通知書共通情報List List<EditedKariSanteiTsuchiShoKyotsuInfo>
      */
     public void publish特別徴収開始通知書仮算定発行一覧表(FlexibleYear 調定年度, RDateTime 帳票作成日時,
-            List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List) {
+            List<EditedKariSanteiTsuchiShoKyotsuInfo> 編集後仮算定通知書共通情報List) {
 
         List<RString> headerList = new ArrayList<>();
         headerList.add(タイトル_作成年月日);
@@ -375,7 +376,8 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
                 .setEncode(Encode.UTF_8withBOM)
                 .hasHeader(true).setHeader(headerList)
                 .build()) {
-            for (EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 : 編集後仮算定通知書共通情報List) {
+            for (EditedKariSanteiTsuchiShoKyotsuInfo 編集仮算定通知書共通情報 : 編集後仮算定通知書共通情報List) {
+                EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 編集仮算定通知書共通情報.get編集後仮算定通知書情報();
                 List<RString> bodyList = new ArrayList<>();
                 bodyList.add(帳票作成日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
                 bodyList.add(帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));

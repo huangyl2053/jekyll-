@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiTsuchiShoKyotsuKomokuHenshu;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
@@ -117,9 +118,10 @@ public class PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchPr
             return;
         }
         KariSanteiTsuchiShoKyotsuKomokuHenshu 仮算定共通情報作成 = InstanceProvider.create(KariSanteiTsuchiShoKyotsuKomokuHenshu.class);
-        List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List = new ArrayList<>();
+        List<EditedKariSanteiTsuchiShoKyotsuInfo> 編集後仮算定通知書共通情報List = new ArrayList<>();
         int 総ページ数 = 0;
         for (TmpIdoGennendoKarisanteiEntity tmpResult : result.get特徴開始通知書ResultList()) {
+            EditedKariSanteiTsuchiShoKyotsuInfo info = new EditedKariSanteiTsuchiShoKyotsuInfo();
             KariSanteiTsuchiShoKyotsu 仮算定通知書情報 = new KariSanteiTsuchiShoKyotsu();
             仮算定通知書情報.set発行日(processParameter.get特徴_発行日());
             仮算定通知書情報.set帳票分類ID(特別徴収開始通知書仮算定帳票分類ID);
@@ -158,7 +160,9 @@ public class PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchPr
                 仮算定特徴開始通知書情報.set特徴捕捉月(対象者_追加含む_情報.get捕捉月());
             }
             総ページ数 = 総ページ数 + publish特徴開始通知書(出力帳票一覧, 仮算定特徴開始通知書情報, result, 仮算定通知書情報);
-            編集後仮算定通知書共通情報List.add(編集後仮算定通知書共通情報);
+            info.set仮算定通知書情報(仮算定通知書情報);
+            info.set編集後仮算定通知書情報(編集後仮算定通知書共通情報);
+            編集後仮算定通知書共通情報List.add(info);
         }
         manager.publish特徴開始通知仮算定(result, 編集後仮算定通知書共通情報List, 総ページ数);
     }

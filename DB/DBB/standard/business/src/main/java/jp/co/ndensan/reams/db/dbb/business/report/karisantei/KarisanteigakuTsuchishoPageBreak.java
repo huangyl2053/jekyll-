@@ -38,12 +38,64 @@ public class KarisanteigakuTsuchishoPageBreak extends PageBreaker<TokubetsuChosh
     @Override
     public boolean isBreak(ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> currentSource,
             ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> nextSource) {
+
         boolean flag = false;
-        //TODO QA1859確認中
         if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.郵便番号.get項目ID())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
             flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.町域コード.get項目ID())
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.番地コード.get項目ID())
+                && !currentSource.getSource().banchiCode.equals(nextSource.getSource().banchiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.行政区コード.get項目ID())
+                && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.地区１.get項目ID())
+                && !currentSource.getSource().chikuCode1.equals(nextSource.getSource().chikuCode1)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.地区２.get項目ID())
+                && !currentSource.getSource().chikuCode2.equals(nextSource.getSource().chikuCode2)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.地区３.get項目ID())
+                && !currentSource.getSource().chikuCode3.equals(nextSource.getSource().chikuCode3)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.世帯コード.get項目ID())
+                && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.識別コード.get項目ID())
+                && !currentSource.getSource().shikibetsuCode.equals(nextSource.getSource().shikibetsuCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().kanaMeisho.equals(nextSource.getSource().kanaMeisho)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.生年月日.get項目ID())
+                && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.性別.get項目ID())
+                && !currentSource.getSource().listUpper_6.equals(nextSource.getSource().listUpper_6)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.市町村コード.get項目ID())
+                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.被保険者番号.get項目ID())
+                && !currentSource.getSource().hihokenshaNo.equals(nextSource.getSource().hihokenshaNo)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.年金コード.get項目ID())
+                && !currentSource.getSource().nenkinCode.equals(nextSource.getSource().nenkinCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.納組コード.get項目ID())
+                && !currentSource.getSource().nokumiCode.equals(nextSource.getSource().nokumiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.生活保護種別.get項目ID())
+                && !currentSource.getSource().seihoFlag.equals(nextSource.getSource().seihoFlag)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KarisanteigakuTsuchishoOutPutOrder.調定事由.get項目ID())
+                && !currentSource.getSource().choteiJiyu.equals(nextSource.getSource().choteiJiyu)) {
+            flag = true;
         }
         return flag;
+
     }
 }
