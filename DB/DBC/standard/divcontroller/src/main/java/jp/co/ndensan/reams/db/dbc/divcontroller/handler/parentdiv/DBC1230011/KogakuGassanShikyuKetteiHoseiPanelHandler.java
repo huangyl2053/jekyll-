@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.Hi
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KoshinShoriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter;
@@ -1113,10 +1114,12 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             para.setHihokenshaNo(被保険者番号);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 登録);
         } else if (修正.equals(処理モデル)) {
+            para.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(row.getShiharaiHohoKubun()));
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
             para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
-            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 登録);
+            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 修正);
         } else if (削除.equals(処理モデル) || 照会.equals(処理モデル)) {
+            para.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(row.getShiharaiHohoKubun()));
             para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 照会);
