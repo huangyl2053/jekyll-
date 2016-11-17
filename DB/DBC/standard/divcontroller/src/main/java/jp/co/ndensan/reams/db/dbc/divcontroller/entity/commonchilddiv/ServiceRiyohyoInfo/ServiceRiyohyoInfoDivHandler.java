@@ -1341,8 +1341,8 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
+//        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
+//        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
 
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoGokei().setDisabled(false);
