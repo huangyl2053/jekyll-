@@ -88,8 +88,6 @@ public class DbT2020ShotokuShokaihyoHakkoRirekiDac implements ISaveable<DbT2020S
     @Override
     public int save(DbT2020ShotokuShokaihyoHakkoRirekiEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("所得照会票発行履歴エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 

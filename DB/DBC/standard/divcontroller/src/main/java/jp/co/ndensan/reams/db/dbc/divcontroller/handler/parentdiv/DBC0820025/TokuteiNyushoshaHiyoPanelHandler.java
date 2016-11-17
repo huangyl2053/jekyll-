@@ -7,15 +7,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820025;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025.TokuteiNyushoshaHiyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025.dgdTokuteiYichiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(特定入所者費用）のハンドラクラスです。
@@ -47,6 +49,15 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     private static final int SIX = 6;
     private static final RString FORMAT = new RString("%02d");
     private static final RString 確定する = new RString("btnKakutei");
+
+    private static final Comparator COMPARATOR = new Comparator<dgdTokuteiYichiran_Row>() {
+
+        @Override
+        public int compare(dgdTokuteiYichiran_Row o1, dgdTokuteiYichiran_Row o2) {
+            return Integer.parseInt(o2.getNumber().toString()) - Integer.parseInt(o1.getNumber().toString());
+        }
+
+    };
 
     /**
      * コンストラクタです。
@@ -280,6 +291,15 @@ public class TokuteiNyushoshaHiyoPanelHandler {
             if (entity.getサービス項目コード() != null) {
                 builder.append(entity.getサービス項目コード().value());
             }
+            if (EntityDataState.Added.equals(entity.toEntity().getState())) {
+                row.setRowState(RowState.Added);
+            }
+            if (EntityDataState.Deleted.equals(entity.toEntity().getState())) {
+                row.setRowState(RowState.Deleted);
+            }
+            if (EntityDataState.Modified.equals(entity.toEntity().getState())) {
+                row.setRowState(RowState.Modified);
+            }
             row.setDefaultDataName1(builder.toRString());
             row.getDefaultDataName2().setValue(new Decimal(entity.get費用単価()));
             row.getDefaultDataName3().setValue(new Decimal(entity.get負担限度額()));
@@ -290,7 +310,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
             row.setNumber(entity.get連番());
             dataSource.add(row);
         }
-
+        Collections.sort(dataSource, COMPARATOR);
         div.getPanelTokutei().getDgdTokuteiYichiran().setDataSource(dataSource);
     }
 
@@ -411,14 +431,15 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      *
      * @param dgdRow dgdTokuteiYichiran_Row
      * @param state 状態
+     * @param serviceHiyoList ShokanTokuteiNyushoshaKaigoServiceHiyoのリスト
      */
-    public void modifyRow(dgdTokuteiYichiran_Row dgdRow, RString state) {
+    public void modifyRow(dgdTokuteiYichiran_Row dgdRow, RString state, List<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyoList) {
         if (修正.equals(state)) {
             if (RowState.Added.equals(dgdRow.getRowState())) {
                 dgdRow.setRowState(RowState.Added);
                 setDgdTokuteiYichiran_Row(dgdRow, state);
             } else {
-                modifiedDgdTokuteiYichiran(dgdRow, state);
+                modifiedDgdTokuteiYichiran(dgdRow, state, serviceHiyoList);
             }
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(dgdRow.getRowState())) {
@@ -436,44 +457,52 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         }
     }
 
-    private void modifiedDgdTokuteiYichiran(dgdTokuteiYichiran_Row dgdRow, RString 状態) {
-        boolean flag = modifiedCheck(dgdRow);
-        if (flag) {
+    private void modifiedDgdTokuteiYichiran(dgdTokuteiYichiran_Row dgdRow, RString 状態, List<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyoList) {
+
+        setDgdTokuteiYichiran_Row(dgdRow, 状態);
+        if (modifiedCheck(dgdRow, getShokanTokuteiNyushoshaKaigoServiceHiyo(dgdRow, serviceHiyoList))) {
             dgdRow.setRowState(RowState.Modified);
-            setDgdTokuteiYichiran_Row(dgdRow, 状態);
+        } else {
+            dgdRow.setRowState(RowState.Unchanged);
         }
     }
 
-    private boolean modifiedCheck(dgdTokuteiYichiran_Row dgdRow) {
-        RString サービス種類コード = div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().getサービスコード1();
-        RString サービス項目コード = div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().getサービスコード2();
+    private ShokanTokuteiNyushoshaKaigoServiceHiyo getShokanTokuteiNyushoshaKaigoServiceHiyo(dgdTokuteiYichiran_Row dgdRow, List<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyoList) {
+
+        for (ShokanTokuteiNyushoshaKaigoServiceHiyo entity : serviceHiyoList) {
+
+            if (dgdRow.getNumber().equals(entity.get連番())) {
+                return entity;
+            }
+        }
+
+        return null;
+    }
+
+    private boolean modifiedCheck(dgdTokuteiYichiran_Row dgdRow, ShokanTokuteiNyushoshaKaigoServiceHiyo entity) {
+        RString サービス種類コード = entity.getサービス種類コード().getColumnValue();
+        RString サービス項目コード = entity.getサービス項目コード().getColumnValue();
         RStringBuilder builder = new RStringBuilder();
         builder.append(サービス種類コード).append(サービス項目コード);
         if (!dgdRow.getDefaultDataName1().equals(builder.toRString())) {
             return true;
         }
-        if (!dgdRow.getDefaultDataName2().getValue().equals(div.getPanelTokutei().getPanelMeisai()
-                .getTxtHyojyuntanka().getValue())) {
+        if (dgdRow.getDefaultDataName2().getValue().intValue() != entity.get費用単価()) {
             return true;
         }
-        if (!dgdRow.getDefaultDataName3().getValue().equals(div.getPanelTokutei().getPanelMeisai()
-                .getTxtFutangenndogaku().getValue())) {
+        if (dgdRow.getDefaultDataName3().getValue().intValue() != entity.get負担限度額()) {
             return true;
         }
-        if (!dgdRow.getDefaultDataName4().getValue().equals(div.getPanelTokutei().getPanelMeisai()
-                .getTxtNisu().getValue())) {
+        if (dgdRow.getDefaultDataName4().getValue().intValue() != entity.get日数()) {
             return true;
         }
-        if (!dgdRow.getDefaultDataName5().getValue().equals(div.getPanelTokutei().getPanelMeisai()
-                .getTxtHiyogaku().getValue())) {
+        if (dgdRow.getDefaultDataName5().getValue().intValue() != entity.get費用額()) {
             return true;
         }
-        if (!dgdRow.getDefaultDataName6().getValue().equals(div.getPanelTokutei().getPanelMeisai()
-                .getTxtHokenbun().getValue())) {
+        if (dgdRow.getDefaultDataName6().getValue().intValue() != entity.get保険分請求額()) {
             return true;
         }
-        return (!dgdRow.getDefaultDataName7().getValue().equals(div.getPanelTokutei().getPanelMeisai()
-                .getTxtRiyoshafutangaku().getValue()));
+        return dgdRow.getDefaultDataName7().getValue().intValue() != entity.get利用者負担額();
     }
 
     private void setDgdTokuteiYichiran_Row(dgdTokuteiYichiran_Row dgdRow, RString 状態) {
@@ -504,11 +533,24 @@ public class TokuteiNyushoshaHiyoPanelHandler {
                     .getTxtRiyoshafutangaku().getValue());
         }
         if (登録.equals(状態)) {
-            List<dgdTokuteiYichiran_Row> list = div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource();
-            list.add(dgdRow);
+            dgdRow.setNumber(new RString(getMaxRowNum() + 1));
+            div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource().add(dgdRow);
         }
+        List<dgdTokuteiYichiran_Row> dataSource = div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource();
+        Collections.sort(dataSource, COMPARATOR);
+        div.getPanelTokutei().getDgdTokuteiYichiran().setDataSource(dataSource);
         cancel特定入所者費登録エリア();
         set特定入所者費用一覧の合計エリア();
+    }
+
+    private int getMaxRowNum() {
+        int 連番 = 0;
+        for (dgdTokuteiYichiran_Row dgdRow : div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource()) {
+            if (連番 < Integer.valueOf(dgdRow.getNumber().toString())) {
+                連番 = Integer.valueOf(dgdRow.getNumber().toString());
+            }
+        }
+        return div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource().size();
     }
 
     /**
