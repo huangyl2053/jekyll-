@@ -1171,7 +1171,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
     private boolean get負担割合状況(List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 二割負担List) {
         boolean 負担割合状況 = false;
         for (DbT3114RiyoshaFutanWariaiMeisaiEntity 二割負担 : 二割負担List) {
-            if (コード_20.equals(二割負担.getFutanWariaiKubun())) {
+            if (!コード_20.equals(二割負担.getFutanWariaiKubun())) {
                 continue;
             }
             負担割合状況 = true;
@@ -1404,6 +1404,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.setYukoKaishiYMD(new FlexibleDate(二割負担Info.get(ORDER_0)));
         entity.setYukoShuryoYMD(new FlexibleDate(二割負担Info.get(ORDER_1)));
         entity.setHihokenshaNo(new HihokenshaNo(二割負担Info.get(ORDER_2)));
+        entity.setFutanWariaiKubun(二割負担Info.get(ORDER_3));
         return entity;
     }
 
