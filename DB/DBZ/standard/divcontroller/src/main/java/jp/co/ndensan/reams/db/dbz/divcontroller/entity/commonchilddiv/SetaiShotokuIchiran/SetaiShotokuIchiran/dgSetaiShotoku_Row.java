@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShot
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Oct 21 19:12:33 CST 2016 
+ * Thu Nov 17 12:47:51 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  */
 
 public class dgSetaiShotoku_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
 
     private RString hdnHihoNo;
     private RString hdnShikibetsuCode;
@@ -41,6 +41,8 @@ public class dgSetaiShotoku_Row extends DataRow {
     private RString txtJukiIdoYMD;
     private RString txtJuteiYMD;
     private RString txtJukiIdoJiyu;
+    private RString hdnHonninKubun;
+    private RString hdnJuminhyoHyojijun;
 
     public dgSetaiShotoku_Row() {
         super();
@@ -63,6 +65,8 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.txtJukiIdoYMD = RString.EMPTY;
         this.txtJuteiYMD = RString.EMPTY;
         this.txtJukiIdoJiyu = RString.EMPTY;
+        this.hdnHonninKubun = RString.EMPTY;
+        this.hdnJuminhyoHyojijun = RString.EMPTY;
         this.setOriginalData("hdnHihoNo", hdnHihoNo);
         this.setOriginalData("hdnShikibetsuCode", hdnShikibetsuCode);
         this.setOriginalData("txtKetsugo01", txtKetsugo01);
@@ -82,9 +86,11 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.setOriginalData("txtJukiIdoYMD", txtJukiIdoYMD);
         this.setOriginalData("txtJuteiYMD", txtJuteiYMD);
         this.setOriginalData("txtJukiIdoJiyu", txtJukiIdoJiyu);
+        this.setOriginalData("hdnHonninKubun", hdnHonninKubun);
+        this.setOriginalData("hdnJuminhyoHyojijun", hdnJuminhyoHyojijun);
     }
 
-    public dgSetaiShotoku_Row(RString hdnHihoNo, RString hdnShikibetsuCode, RString txtKetsugo01, RString txtShimei, Button btnMemo, RString txtKetsugo02, RString txtShubetsu, RString txtIdoYMD, RString txtJuminzeiGenmenMae, RString txtJuminzeiGenmenAto, RString txtJuminzei, RString txtGekihenTaishosha, RString txtKetsugo03, RString txtKetsugo04, RString txtTorokuGyomu, RString txtDougetsuService, RString txtJukiIdoYMD, RString txtJuteiYMD, RString txtJukiIdoJiyu) {
+    public dgSetaiShotoku_Row(RString hdnHihoNo, RString hdnShikibetsuCode, RString txtKetsugo01, RString txtShimei, Button btnMemo, RString txtKetsugo02, RString txtShubetsu, RString txtIdoYMD, RString txtJuminzeiGenmenMae, RString txtJuminzeiGenmenAto, RString txtJuminzei, RString txtGekihenTaishosha, RString txtKetsugo03, RString txtKetsugo04, RString txtTorokuGyomu, RString txtDougetsuService, RString txtJukiIdoYMD, RString txtJuteiYMD, RString txtJukiIdoJiyu, RString hdnHonninKubun, RString hdnJuminhyoHyojijun) {
         super();
         this.setOriginalData("hdnHihoNo", hdnHihoNo);
         this.setOriginalData("hdnShikibetsuCode", hdnShikibetsuCode);
@@ -105,6 +111,8 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.setOriginalData("txtJukiIdoYMD", txtJukiIdoYMD);
         this.setOriginalData("txtJuteiYMD", txtJuteiYMD);
         this.setOriginalData("txtJukiIdoJiyu", txtJukiIdoJiyu);
+        this.setOriginalData("hdnHonninKubun", hdnHonninKubun);
+        this.setOriginalData("hdnJuminhyoHyojijun", hdnJuminhyoHyojijun);
         this.hdnHihoNo = hdnHihoNo;
         this.hdnShikibetsuCode = hdnShikibetsuCode;
         this.txtKetsugo01 = txtKetsugo01;
@@ -124,6 +132,8 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.txtJukiIdoYMD = txtJukiIdoYMD;
         this.txtJuteiYMD = txtJuteiYMD;
         this.txtJukiIdoJiyu = txtJukiIdoJiyu;
+        this.hdnHonninKubun = hdnHonninKubun;
+        this.hdnJuminhyoHyojijun = hdnJuminhyoHyojijun;
     }
 
     public RString getHdnHihoNo() {
@@ -200,6 +210,14 @@ public class dgSetaiShotoku_Row extends DataRow {
 
     public RString getTxtJukiIdoJiyu() {
         return txtJukiIdoJiyu;
+    }
+
+    public RString getHdnHonninKubun() {
+        return hdnHonninKubun;
+    }
+
+    public RString getHdnJuminhyoHyojijun() {
+        return hdnJuminhyoHyojijun;
     }
 
     public void setHdnHihoNo(RString hdnHihoNo) {
@@ -295,6 +313,16 @@ public class dgSetaiShotoku_Row extends DataRow {
     public void setTxtJukiIdoJiyu(RString txtJukiIdoJiyu) {
         this.setOriginalData("txtJukiIdoJiyu", txtJukiIdoJiyu);
         this.txtJukiIdoJiyu = txtJukiIdoJiyu;
+    }
+
+    public void setHdnHonninKubun(RString hdnHonninKubun) {
+        this.setOriginalData("hdnHonninKubun", hdnHonninKubun);
+        this.hdnHonninKubun = hdnHonninKubun;
+    }
+
+    public void setHdnJuminhyoHyojijun(RString hdnJuminhyoHyojijun) {
+        this.setOriginalData("hdnJuminhyoHyojijun", hdnJuminhyoHyojijun);
+        this.hdnJuminhyoHyojijun = hdnJuminhyoHyojijun;
     }
 
     // </editor-fold>
