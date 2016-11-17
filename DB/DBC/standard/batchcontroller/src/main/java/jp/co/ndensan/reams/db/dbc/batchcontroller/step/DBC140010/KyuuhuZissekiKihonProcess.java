@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC140010;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushakyufujissekidaicho.JukyushaKyufuDaichoEdit;
-import jp.co.ndensan.reams.db.dbc.business.report.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoData;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.CareManagementEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.HukushiYouguEntity;
@@ -23,18 +21,14 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.Sh
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShuukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.TokuteiServiceHiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.TokuteiShinryouHiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoReportSource;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaTmpMapper;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 受給者給付実績台帳のバッチ処理クラスです。
@@ -47,9 +41,6 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonEntity> {
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaTmpMapper."
             + "get基本");
-    private static final ReportId ID = ReportIdDBC.DBC100055.getReportId();
-    private static final RString MESSAGE = new RString("**　対象データは存在しません　**");
-    private boolean flag = false;
     private JukyushaKyufuJissekidaichoData jukyushaKyufuDaicho;
     private JukyushaKyufujissekiDaichoProcessParameter parameter;
     private IJukyushaTmpMapper mapper;
@@ -65,13 +56,11 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonEntity> {
     List<CareManagementEntity> ケアマネジメント費;
     List<ShoteiShikkanEntity> 所定疾患施設療養費;
     List<ShuukeiEntity> 集計;
-    List<KihonEntity> 給付実績高額;
     private RString 保険者コード;
     private RString 保険者名;
 
     @BatchWriter
-    private BatchReportWriter<JukyushaKyufuJissekidaichoReportSource> batchReportWriter;
-    private ReportSourceWriter<JukyushaKyufuJissekidaichoReportSource> reportSourceWriter;
+    BatchEntityCreatedTempTableWriter データList;
 
     @Override
     protected void initialize() {
@@ -95,14 +84,12 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonEntity> {
         ケアマネジメント費 = mapper.getケアマネジメント費();
         所定疾患施設療養費 = mapper.get所定疾患施設療養費();
         集計 = mapper.get集計();
-        給付実績高額 = mapper.get給付実績高額();
     }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value())
-                .create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        データList = new BatchEntityCreatedTempTableWriter(JukyushaKyufuJissekidaichoData.TABLE_NAME,
+                JukyushaKyufuJissekidaichoData.class);
     }
 
     @Override
@@ -112,12 +99,10 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonEntity> {
 
     @Override
     protected void process(KihonEntity entity) {
-        flag = true;
         jukyushaKyufuDaicho = new JukyushaKyufuJissekidaichoData();
         edit.report受給者給付台帳(entity,
-                給付実績高額,
                 jukyushaKyufuDaicho,
-                reportSourceWriter,
+                データList,
                 明細,
                 集計,
                 特定入所者介護サービス費用,
@@ -135,11 +120,5 @@ public class KyuuhuZissekiKihonProcess extends BatchProcessBase<KihonEntity> {
 
     @Override
     protected void afterExecute() {
-        if (!flag) {
-            jukyushaKyufuDaicho = new JukyushaKyufuJissekidaichoData();
-            jukyushaKyufuDaicho.set被保険者氏名(MESSAGE);
-            JukyushaKyufuJissekidaichoReport report = new JukyushaKyufuJissekidaichoReport(jukyushaKyufuDaicho);
-            report.writeBy(reportSourceWriter);
-        }
     }
 }

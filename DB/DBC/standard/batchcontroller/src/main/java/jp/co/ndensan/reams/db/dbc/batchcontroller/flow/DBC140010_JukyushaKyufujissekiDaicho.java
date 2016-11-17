@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC140010.CareManagementListCreateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC140010.HukushiYouguListCreateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC140010.JukyushaKyufuJissekidaichoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC140010.JuutakuKaishuuListCreateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC140010.KeikakuHiCreateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC140010.KihonListCreateProcess;
@@ -47,6 +48,7 @@ public class DBC140010_JukyushaKyufujissekiDaicho extends BatchFlowBase<DBC14001
     private static final String 社会福祉法人_TMP = "ShakaiHukushiHouzinKeigenListCreateProcess";
     private static final String ケアマネジメント費_TMP = "CareManagementListCreateProcess";
     private static final String 所定疾患_TMP = "ShoteiShikkanListCreateProcess";
+    private static final String 帳票実行 = "JukyushaKyufuJissekidaichoProcess";
 
     @Override
     protected void defineFlow() {
@@ -65,6 +67,7 @@ public class DBC140010_JukyushaKyufujissekiDaicho extends BatchFlowBase<DBC14001
         executeStep(ケアマネジメント費_TMP);
         executeStep(所定疾患_TMP);
         executeStep(給付実績基本);
+        executeStep(帳票実行);
     }
 
     /**
@@ -229,6 +232,17 @@ public class DBC140010_JukyushaKyufujissekiDaicho extends BatchFlowBase<DBC14001
     @Step(所定疾患_TMP)
     protected IBatchFlowCommand createShoteiShikkanList() {
         return loopBatch(ShoteiShikkanListCreateProcess.class)
+                .arguments(getParameter().toJukyushaKyufujissekiDaichoProcessParameter()).define();
+    }
+
+    /**
+     * 所定疾患の一時テーブルの作成します。
+     *
+     * @return KyuuhuZissekiKihonProcess
+     */
+    @Step(帳票実行)
+    protected IBatchFlowCommand jukyushaKyufuJissekidaichoProcess() {
+        return loopBatch(JukyushaKyufuJissekidaichoProcess.class)
                 .arguments(getParameter().toJukyushaKyufujissekiDaichoProcessParameter()).define();
     }
 }

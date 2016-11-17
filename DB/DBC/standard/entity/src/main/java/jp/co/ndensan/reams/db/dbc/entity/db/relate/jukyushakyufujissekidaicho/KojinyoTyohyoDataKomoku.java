@@ -417,5 +417,7 @@ public class KojinyoTyohyoDataKomoku {
     private Decimal 決定後_保険分請求額合計_合計情報公費３;
     private Decimal 決定前_利用者負担額合計_合計情報公費３;
     private Decimal 決定後_利用者負担額合計_合計情報公費３;
-
+    private RString 市町村コード;
+    private RString 事業所番号;
+    private RString 入力識別番号;
 }
