@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3118ShikibetsuNoKanriDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -20,8 +21,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class SyokanbaraihiShikyuShinseiManager {
 
-    private static final RString 必要な分証明書入力済 = new RString("1");
-    private static final RString 証明書入力未済あり = new RString("2");
     private static final RString 設定可_必須 = new RString("1");
     private static final RString 未入力 = new RString("0");
     private static final RString 必要な分申請書入力済 = new RString("1");
@@ -40,7 +39,8 @@ public class SyokanbaraihiShikyuShinseiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link SyokanbaraihiShikyuShinseiKetteManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link SyokanbaraihiShikyuShinseiKetteManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link SyokanbaraihiShikyuShinseiKetteManager}のインスタンス
      */
     public static SyokanbaraihiShikyuShinseiManager createInstance() {
         return InstanceProvider.create(SyokanbaraihiShikyuShinseiManager.class);
@@ -52,46 +52,46 @@ public class SyokanbaraihiShikyuShinseiManager {
      * @param 証明書入力済フラグ 証明書入力済フラグ
      * @param 識別番号 識別番号
      * @param サービス年月 サービス年月
-     * @return 証明書入力済フラグ（"1"：必要な分証明書入力済　"2"：証明書入力未済あり）
+     * @return 証明書入力完了フラグ（"1"：入力完了 "2"：入力未完了）
      */
-    public RString 証明書InputCheck(ShomeishoNyuryokuFlag 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
+    public ShomeishoNyuryokuKanryoKubunType 証明書InputCheck(ShomeishoNyuryokuFlag 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
         ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
 
         if (!基本証明書InputCheck(証明書入力済フラグ.get基本情報_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
-            return 証明書入力未済あり;
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
         if (!明細証明書InputCheck(証明書入力済フラグ.get給付費明細_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
-            return 証明書入力未済あり;
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
         if (!特定診療費証明書InputCheck(証明書入力済フラグ.get特定診療費_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
-            return 証明書入力未済あり;
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
         if (!居宅計画費証明書InputCheck(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
-            return 証明書入力未済あり;
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
         if (!特定入所者証明書InputCheck(証明書入力済フラグ.get特定入所者費用_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
-            return 証明書入力未済あり;
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
         if (!明細住所地特例証明書InputCheck(証明書入力済フラグ.get給付費明細住特_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
-            return 証明書入力未済あり;
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
         if (!特定診療特別療養証明書InputCheck(証明書入力済フラグ.get緊急時所定疾患_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
-            return 証明書入力未済あり;
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
         if (!緊急時施設療養証明書InputCheck(証明書入力済フラグ.get緊急時施設療養費_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
-            return 証明書入力未済あり;
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
         if (!食事費用証明書InputCheck(証明書入力済フラグ.get食事費用_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
-            return 証明書入力未済あり;
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
         if (!集計証明書InputCheck(証明書入力済フラグ.get請求額集計_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
-            return 証明書入力未済あり;
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
         if (!社会福祉法人軽減証明書InputCheck(証明書入力済フラグ.get社福軽減額_証明書入力済フラグ().getCode(), shikibetsuNoKanri)) {
-            return 証明書入力未済あり;
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
 
-        return 必要な分証明書入力済;
+        return ShomeishoNyuryokuKanryoKubunType.入力完了;
     }
 
     private boolean 基本証明書InputCheck(RString 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.Serv
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.dgdYichiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820024.ServiceKeikakuHiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
@@ -402,7 +403,7 @@ public class ServiceKeikakuHiPanel {
                 ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, 証明書入力済フラグ);
                 ViewStateHolder.put(ViewStateKeys.証明書変更済フラグ, 証明書変更済フラグ);
                 if (eventName.equals(DBC0820024TransitionEventName.一覧に戻る)) {
-                    RString 証明書完了フラグ = SyokanbaraihiShikyuShinseiManager.createInstance().証明書InputCheck(
+                    ShomeishoNyuryokuKanryoKubunType 証明書完了フラグ = SyokanbaraihiShikyuShinseiManager.createInstance().証明書InputCheck(
                             証明書入力済フラグ, parameter.get様式番号(), parameter.getサービス年月());
                     if (証明書入力未済あり.equals(証明書完了フラグ)) {
                         throw new ApplicationException(証明書入力未済ありエラー.toString());
