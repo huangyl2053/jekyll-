@@ -364,18 +364,17 @@ public class ServiceRiyohyoInfo {
         }
         if (RSTRING_17.equals(サービス種類Tmp) || RSTRING_67.equals(サービス種類Tmp)
                 || RSTRING_88.equals(サービス種類Tmp)) {
-            ValidationMessageControlPairs サービス種類Pairs = validationhandler.validateサービス種類必須();
-            if (サービス種類Pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(サービス種類Pairs).respond();
-            }
-        } else {
-            ValidationMessageControlPairs サービス単位必須以外Pairs = validationhandler.validateサービス単位必須以外();
-            if (サービス単位必須以外Pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(サービス単位必須以外Pairs).respond();
+            ValidationMessageControlPairs サービス単位Pairs = validationhandler.validateサービス単位必須();
+            if (サービス単位Pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(サービス単位Pairs).respond();
             }
         }
-        RString 利用者負担定率定額区分
-                = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
+        ValidationMessageControlPairs サービス単位必須以外Pairs = validationhandler.validateサービス単位必須以外();
+        if (サービス単位必須以外Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(サービス単位必須以外Pairs).respond();
+        }
+        
+        RString 利用者負担定率定額区分 = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
         if (RSTRING_TWO.equals(利用者負担定率定額区分)) {
             ValidationMessageControlPairs 給付率必須Pairs = validationhandler.validate給付率必須();
             if (給付率必須Pairs.iterator().hasNext()) {
