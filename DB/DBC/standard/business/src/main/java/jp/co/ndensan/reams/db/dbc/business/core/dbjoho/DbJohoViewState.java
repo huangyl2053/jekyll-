@@ -59,7 +59,7 @@ public class DbJohoViewState implements Serializable {
     private ArrayList<ShokanShukeiResult> 償還払請求集計データList;
     private ArrayList<ShokanShokujiHiyo> 償還払請求食事費用データList;
     private ShokanHanteiKekka 償還払支給判定結果;
-    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap;
+    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力完了フラグMap;
     private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap;
 
     /**
@@ -73,7 +73,6 @@ public class DbJohoViewState implements Serializable {
      * @param 明細番号 RString
      * @return サービス計画200904データ
      */
-
     public List<ShokanServicePlan200904Result> get償還払請求サービス計画200904データResultList(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
