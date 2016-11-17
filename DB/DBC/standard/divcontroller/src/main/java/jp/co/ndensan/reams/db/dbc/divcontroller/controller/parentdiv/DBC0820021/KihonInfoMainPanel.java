@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.S
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.DBC0820021StateName;
@@ -72,8 +73,6 @@ public class KihonInfoMainPanel {
     private static final RString KEY_2 = new RString("2");
     private static final RString KEY_3 = new RString("3");
     private static final RString KEY_4 = new RString("4");
-
-    private static final RString 証明書入力未済ありエラー = new RString("請求額集計情報の未登録のサービス種類が存在します。\n\r請求額集計情報を登録して下さい。");
 
     /**
      * 画面初期化処理のメソッドます。
@@ -217,11 +216,12 @@ public class KihonInfoMainPanel {
             ShomeishoNyuryokuKanryoKubunType 証明書入力完了フラグ = SyokanbaraihiShikyuShinseiManager.createInstance()
                     .証明書InputCheck(ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class), 識別コード.getColumnValue(), サービス年月);
             if (証明書入力完了フラグ.equals(ShomeishoNyuryokuKanryoKubunType.入力完了)) {
-                ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, 証明書入力完了フラグ);
                 db情報.get証明書入力完了フラグMap().put(meisaiPar, 証明書入力完了フラグ);
                 ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
             } else if (証明書入力完了フラグ.equals(ShomeishoNyuryokuKanryoKubunType.入力未完了)) {
-                throw new ApplicationException(証明書入力未済ありエラー.toString());
+                db情報.get証明書入力完了フラグMap().put(meisaiPar, 証明書入力完了フラグ);
+                ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
+                throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.toString());
             }
         }
     }
@@ -237,13 +237,13 @@ public class KihonInfoMainPanel {
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = db情報.get証明書変更済フラグMap();
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap = db情報.get証明書入力完了フラグMap();
 
-        if (証明書入力済フラグMap.isEmpty()) {
+        if (null == 証明書入力済フラグMap) {
             証明書入力済フラグMap = new HashMap<>();
         }
-        if (証明書変更済フラグMap.isEmpty()) {
+        if (null == 証明書変更済フラグMap) {
             証明書変更済フラグMap = new HashMap<>();
         }
-        if (証明書入力完了フラグMap.isEmpty()) {
+        if (null == 証明書入力完了フラグMap) {
             証明書入力完了フラグMap = new HashMap<>();
         }
 
@@ -259,7 +259,6 @@ public class KihonInfoMainPanel {
             } else {
                 証明書入力済フラグ.set基本情報_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
             }
-            ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, 証明書入力済フラグ);
             証明書入力済フラグMap.put(meisaiPar, 証明書入力済フラグ);
             db情報.set証明書入力済フラグMap(証明書入力済フラグMap);
         } else {
@@ -269,7 +268,6 @@ public class KihonInfoMainPanel {
             } else {
                 証明書変更済フラグ.set基本情報_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
             }
-            ViewStateHolder.put(ViewStateKeys.証明書変更済フラグ, 証明書変更済フラグ);
             証明書変更済フラグMap.put(meisaiPar, 証明書変更済フラグ);
             db情報.set証明書変更済フラグMap(証明書変更済フラグMap);
         }
