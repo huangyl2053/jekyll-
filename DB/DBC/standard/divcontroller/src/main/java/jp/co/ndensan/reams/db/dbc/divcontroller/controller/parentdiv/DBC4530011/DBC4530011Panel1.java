@@ -66,16 +66,6 @@ public class DBC4530011Panel1 {
     }
 
     /**
-     * 「戻る」ボタン押下時のイベントメソッドです。
-     *
-     * @param div DBC4530011Panel1Div
-     * @return ResponseData<DBC4530011Panel1Div>
-     */
-    public ResponseData<DBC4530011Panel1Div> onClick_btnBack(DBC4530011Panel1Div div) {
-        return ResponseData.of(div).forwardWithEventName(DBC4530011TransitionEventName.処理完了).respond();
-    }
-
-    /**
      * 「完了する」ボタン押下時のイベントメソッドです。
      *
      * @param div DBC4530011Panel1Div
