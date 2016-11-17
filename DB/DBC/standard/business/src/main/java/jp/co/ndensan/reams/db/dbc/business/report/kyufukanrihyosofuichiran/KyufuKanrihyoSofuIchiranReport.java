@@ -41,7 +41,6 @@ public class KyufuKanrihyoSofuIchiranReport extends Report<KyufuKanrihyoSofuIchi
     @Override
     public void writeBy(ReportSourceWriter<KyufuKanrihyoSofuIchiranReportSource> reportSourceWriter) {
         KyufuKanrihyoSofuIchiranEditor editor = new KyufuKanrihyoSofuIchiranEditor(entity, 出力順Map, 改頁リスト);
-        
         IKyufuKanrihyoSofuIchiranBuilder builder = new KyufuKanrihyoSofuIchiranBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }

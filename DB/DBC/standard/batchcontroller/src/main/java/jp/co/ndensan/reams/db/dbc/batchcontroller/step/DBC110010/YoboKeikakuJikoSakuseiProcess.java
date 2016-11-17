@@ -64,7 +64,8 @@ public class YoboKeikakuJikoSakuseiProcess extends BatchProcessBase<YoboKeikakuJ
     @Override
     protected IBatchReader createReader() {
 
-        return new BatchDbReader(MYBATIS_SELECT_ID, paramter.toKyufukanrihyoOutMybatisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, paramter.toKyufukanrihyoOutMybatisParameter(RString.EMPTY,
+                RString.EMPTY, RString.EMPTY));
 
     }
 

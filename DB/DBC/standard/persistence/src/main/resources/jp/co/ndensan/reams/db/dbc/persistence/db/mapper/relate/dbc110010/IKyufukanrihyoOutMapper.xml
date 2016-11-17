@@ -433,7 +433,7 @@
         AND( "serviceTeikyoJigyoshaName" = '' OR "serviceTeikyoJigyoshaName" IS NULL)
     </select>
   
-    <select id="get帳票出力対象データ" resultMap="resultMap_KyufukanrihyoOutDoBillOutEntity" 
+    <select id="get帳票出力対象データ" resultMap="resultMap_KyufukanrihyoOutDoBillOutEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufukanrihyoout.KyufukanrihyoOutMybatisParameter" 
             fetchSize="500" resultOrdered="true">
         SELECT 
@@ -442,9 +442,11 @@
         FROM "DbWT8211KyotakuKeikakuJikosakuseiKanri" AS "DbWT8211KyotakuKeikakuJikosakuseiKanri"
         , "DbWT1001Hihokensha" AS "DbWT1001Hihokensha"
         WHERE "DbWT8211KyotakuKeikakuJikosakuseiKanri"."renban" = "DbWT1001Hihokensha"."exRenban"
-        ORDER BY
-        <if test="出力順 != null">
-            ${出力順}
+        <if test="has出力順1">
+            ${出力順},
+        </if>
+        <if test="has出力順2">
+            ORDER BY
         </if>
         "DbWT8211KyotakuKeikakuJikosakuseiKanri"."riyoYM"
         ,"DbWT8211KyotakuKeikakuJikosakuseiKanri"."hihokenshaNo"
@@ -731,27 +733,27 @@
         "DbWT1001Hihokensha"."shichosonKanyuYmd" AS "shichosonKanyuYmd",							
         "DbWT1001Hihokensha"."shichosonDattaiYmd" AS "shichosonDattaiYmd"											
     </sql>
-         <sql id="allColumns_DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu">
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."hihokenshaNo" as "dbT3010_hihokenshaNo",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."taishoYM" as "dbT3010_taishoYM",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."rirekiNo" as "dbT3010_rirekiNo",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."riyoYM" as "dbT3010_riyoYM",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."insertDantaiCd" as "dbT3010_insertDantaiCd",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."insertTimestamp" as "dbT3010_insertTimestamp",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."insertReamsLoginId" as "dbT3010_insertReamsLoginId",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."insertContextId" as "dbT3010_insertContextId",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."isDeleted" as "dbT3010_isDeleted",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."updateCount" as "dbT3010_updateCount",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."lastUpdateTimestamp" as "dbT3010_lastUpdateTimestamp",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."lastUpdateReamsLoginId" as "dbT3010_lastUpdateReamsLoginId",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."zenkaiRiyoNissu" as "dbT3010_zenkaiRiyoNissu",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."konkaiKeikakuRiyoNissu" as "dbT3010_konkaiKeikakuRiyoNissu",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."zanteiKubun" as "dbT3010_zanteiKubun",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."koshinKubun" as "dbT3010_koshinKubun",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."koshinYMD" as "dbT3010_koshinYMD",
-         "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."sofuYM" as "dbT3010_sofuYM"
+    <sql id="allColumns_DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu">
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."hihokenshaNo" as "dbT3010_hihokenshaNo",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."taishoYM" as "dbT3010_taishoYM",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."rirekiNo" as "dbT3010_rirekiNo",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."riyoYM" as "dbT3010_riyoYM",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."insertDantaiCd" as "dbT3010_insertDantaiCd",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."insertTimestamp" as "dbT3010_insertTimestamp",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."insertReamsLoginId" as "dbT3010_insertReamsLoginId",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."insertContextId" as "dbT3010_insertContextId",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."isDeleted" as "dbT3010_isDeleted",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."updateCount" as "dbT3010_updateCount",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."lastUpdateTimestamp" as "dbT3010_lastUpdateTimestamp",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."lastUpdateReamsLoginId" as "dbT3010_lastUpdateReamsLoginId",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."zenkaiRiyoNissu" as "dbT3010_zenkaiRiyoNissu",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."konkaiKeikakuRiyoNissu" as "dbT3010_konkaiKeikakuRiyoNissu",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."zanteiKubun" as "dbT3010_zanteiKubun",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."koshinKubun" as "dbT3010_koshinKubun",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."koshinYMD" as "dbT3010_koshinYMD",
+        "DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."sofuYM" as "dbT3010_sofuYM"
     </sql>
-<!--テーブルDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuの項目をDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityの項目にマッピングします。-->
+    <!--テーブルDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuの項目をDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity" autoMapping="true">
         <id property="hihokenshaNo" column="dbT3010_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="taishoYM" column="dbT3010_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
