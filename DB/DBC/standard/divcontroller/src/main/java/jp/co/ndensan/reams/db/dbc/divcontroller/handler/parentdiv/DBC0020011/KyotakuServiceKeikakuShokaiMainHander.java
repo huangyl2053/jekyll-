@@ -55,8 +55,9 @@ public class KyotakuServiceKeikakuShokaiMainHander {
      * 画面初期化のメソッドです。
      *
      * @param 資格対象者 TaishoshaKey
+     * @retrun KyotakuServiceRirekiIchiranEntityResult
      */
-    public void initialize(TaishoshaKey 資格対象者) {
+    public List<KyotakuServiceRirekiIchiranEntityResult> initialize(TaishoshaKey 資格対象者) {
         div.getCcdKaigoAtenaInfo().initialize(資格対象者.get識別コード());
 
         if (資格対象者.get被保険者番号() == null || RString.EMPTY.equals(資格対象者.get被保険者番号().getColumnValue())) {
@@ -85,6 +86,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
 
         }
         div.getDgKyotakuServiceRirekiIchiran().setDataSource(rowList);
+        return entityLists;
     }
 
     /**

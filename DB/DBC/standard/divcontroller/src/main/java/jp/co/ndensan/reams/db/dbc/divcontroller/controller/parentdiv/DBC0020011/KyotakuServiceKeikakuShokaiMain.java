@@ -39,7 +39,9 @@ public class KyotakuServiceKeikakuShokaiMain {
      */
     public ResponseData<KyotakuServiceKeikakuShokaiMainDiv> onLoad(KyotakuServiceKeikakuShokaiMainDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        this.getHander(div).initialize(資格対象者);
+        if (this.getHander(div).initialize(資格対象者).isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
+        }
         return ResponseData.of(div).setState(DBC0020011StateName.初期表示);
     }
 
@@ -58,9 +60,6 @@ public class KyotakuServiceKeikakuShokaiMain {
         int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
         KyotakuKeikakuTodokedeManager manager = new KyotakuKeikakuTodokedeManager();
         KyotakuKeikakuTodokede 居宅給付計画届出 = manager.get居宅給付計画届出(被保険者番号, 対象年月, 履歴番号);
-        if (居宅給付計画届出 == null) {
-            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
-        }
         ViewStateHolder.put(ViewStateKeys.居宅給付計画届出, 居宅給付計画届出);
         this.getHander(div).get対象情報一覧(被保険者番号, 居宅給付計画届出);
         return ResponseData.of(div).setState(DBC0020011StateName.届出表示);
