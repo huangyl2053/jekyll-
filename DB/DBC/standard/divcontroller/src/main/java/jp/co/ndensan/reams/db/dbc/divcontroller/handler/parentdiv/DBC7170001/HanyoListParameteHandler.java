@@ -249,7 +249,7 @@ public class HanyoListParameteHandler {
             parameter.set金融機関名称(panel.getCcdKinyuKikan().get金融機関名());
         }
 
-        if (panel.getDdlTaishoNendo().getSelectedValue() != null) {
+        if (panel.getDdlTaishoNendo().getSelectedValue() != null && !panel.getDdlTaishoNendo().getSelectedValue().isEmpty()) {
             RString 年度 = div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue();
             RString 対象年度
                     = new RString(Integer.parseInt(Pattern.compile(new RString("[^0-9]").toString()).matcher(年度).replaceAll("").trim()) + VALUE);
