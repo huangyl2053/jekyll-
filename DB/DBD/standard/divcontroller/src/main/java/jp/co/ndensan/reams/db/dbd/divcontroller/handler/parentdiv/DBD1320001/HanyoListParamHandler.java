@@ -780,7 +780,7 @@ public class HanyoListParamHandler {
         if (年度KEY.equals(div.getRadChushutsuJokenA1().getSelectedKey())) {
             para.setCyusyutsuhohokubun(ChushutsuHohoKubun.年度.getコード());
         } else {
-            para.setCyusyutsuhohokubun(ChushutsuHohoKubun.基準日.getコード());
+            para.setCyusyutsuhohokubun(ChushutsuHohoKubun.年度基準日.getコード());
         }
         if (年度基準日KEY.equals(div.getRadChushutsuJokenA2().getSelectedKey())) {
             RString 年度 = div.getDdlKijunNendo().getSelectedKey();
@@ -911,6 +911,8 @@ public class HanyoListParamHandler {
     }
 
     private void restore汎用リスト_利用者負担割合BatchParameter(BatchParameterMap batchParameterMap) {
+        div.getRadChushutsuJokenA1().clearSelectedItem();
+        div.getRadChushutsuJokenA2().clearSelectedItem();
         restore表題(batchParameterMap, 表題パラメータ名称);
         restore出力方法(batchParameterMap, 出力方法パラメータ名称);
         restore抽出方法区分(batchParameterMap, 抽出方法区分パラメータ名称1);
