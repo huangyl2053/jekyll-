@@ -739,7 +739,7 @@ public class ServiceNoKanribangouRendou {
     private RString trimZero(RString str) {
         str = str.trimStart(ZERO);
         if (str.length() == NUM_1) {
-            str = RString.EMPTY.concat(str);
+            str = RString.HALF_SPACE.concat(str);
         }
         return str;
     }
