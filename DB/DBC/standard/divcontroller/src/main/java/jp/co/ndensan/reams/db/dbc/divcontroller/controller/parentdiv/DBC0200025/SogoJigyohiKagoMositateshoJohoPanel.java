@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 public class SogoJigyohiKagoMositateshoJohoPanel {
 
     private final RString バッチID = new RString("ExecutionBatchId");
-    private final RString フロー固定ID_給報出力 = new RString("DBC110080_KogakugassanHoseisumiJikofutangakuOut");
+    private final RString フロー固定ID_給報出力 = new RString("DBC110140_SogojigyohiKagoMoshitateshoOut");
 
     /**
      * 画面初期化のメソッドます。
