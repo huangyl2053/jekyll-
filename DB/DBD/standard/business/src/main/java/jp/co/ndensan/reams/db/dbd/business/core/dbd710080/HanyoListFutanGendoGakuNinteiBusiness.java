@@ -659,10 +659,10 @@ public class HanyoListFutanGendoGakuNinteiBusiness {
         eucCsvEntity.set配偶者住所２(entity.get介護保険負担限度額認定_配偶者住所２().value());
         eucCsvEntity.set配偶者課税区分(set課税区分(entity.get介護保険負担限度額認定_配偶者課税区分()));
         eucCsvEntity.set配偶者住民コード(entity.get介護保険負担限度額認定_配偶者識別コード().value());
-        eucCsvEntity.set預貯金額(new RString(KingakuFormatter.create(entity.get介護保険負担限度額認定_預貯金額()).format(KingakuUnit.円)
-                .setCommaSeparated().toString()));
-        eucCsvEntity.set有価証券評価概算額(new RString(KingakuFormatter.create(entity.get介護保険負担限度額認定_有価証券評価概算額()).format(KingakuUnit.円)
-                .setCommaSeparated().toString()));
+        eucCsvEntity.set預貯金額(entity.get介護保険負担限度額認定_預貯金額() == null ? RString.EMPTY
+                : new RString(KingakuFormatter.create(entity.get介護保険負担限度額認定_預貯金額()).format(KingakuUnit.円).setCommaSeparated().toString()));
+        eucCsvEntity.set有価証券評価概算額(entity.get介護保険負担限度額認定_有価証券評価概算額() == null ? RString.EMPTY
+                : new RString(KingakuFormatter.create(entity.get介護保険負担限度額認定_有価証券評価概算額()).format(KingakuUnit.円).setCommaSeparated().toString()));
         eucCsvEntity.setその他金額(entity.get介護保険負担限度額認定_その他金額() != null
                 ? new RString(KingakuFormatter.create(entity.get介護保険負担限度額認定_その他金額()).format(KingakuUnit.円)
                         .setCommaSeparated().toString()) : RString.EMPTY);
