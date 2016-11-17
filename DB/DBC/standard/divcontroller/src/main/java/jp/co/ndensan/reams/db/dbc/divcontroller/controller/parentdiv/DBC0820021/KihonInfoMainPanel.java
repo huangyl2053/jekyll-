@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.DBC0820021StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.DBC0820021TransitionEventName;
@@ -33,7 +34,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
@@ -165,24 +165,15 @@ public class KihonInfoMainPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.一覧に戻る).respond();
         }
-        boolean flag = getHandler(div).get内容変更状態(
-                ViewStateHolder.get(ViewStateKeys.基本データ, ShokanKihon.class),
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.様式番号List, List.class),
-                ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
-        if (flag) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = (QuestionMessage) DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄
+                    .getMessage();
+            return ResponseData.of(div).addMessage(message).respond();
+        } else {
+            //再リクエストの場合の処理
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.一覧に戻る).respond();
             }
-        } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.一覧に戻る).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -235,7 +226,7 @@ public class KihonInfoMainPanel {
     private void set支給申請(KihonInfoMainPanelDiv div,
             List<RString> 様式番号List,
             RString 様式番号, ShoukanharaihishinseimeisaikensakuParameter meisaiPar, ShokanKihon shokanKihon) {
-        DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払支給申請データ, DbJohoViewState.class);
+        DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         if (db情報 == null || db情報.get償還払請求基本データList().isEmpty()) {
             db情報 = new DbJohoViewState();
         }
@@ -277,7 +268,7 @@ public class KihonInfoMainPanel {
         }
 
 //        ArrayList<ShokanKihon> newList = 請求基本データList;
-        ViewStateHolder.put(ViewStateKeys.償還払支給申請データ, db情報);
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
     }
 
     private ResponseData<KihonInfoMainPanelDiv> judge画面のチェック(KihonInfoMainPanelDiv div,
