@@ -339,7 +339,20 @@ public class ShokanKihon extends ModelBase<ShokanKihonIdentifier, DbT3038ShokanK
     }
 
     /**
-     * 保持する償還払請求基本を削除対象とします。<br/> {@link DbT3038ShokanKihonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払請求基本を登録対象とします。<br/>
+     * {@link DbT3038ShokanKihonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     *
+     * @return 登録対象処理実施後の{@link ShokanKihon}
+     */
+    public ShokanKihon added() {
+        DbT3038ShokanKihonEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ShokanKihon(addedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求基本を削除対象とします。<br/>
+     * {@link DbT3038ShokanKihonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanKihon}
      */
@@ -356,7 +369,8 @@ public class ShokanKihon extends ModelBase<ShokanKihonIdentifier, DbT3038ShokanK
     }
 
     /**
-     * 保持する償還払請求基本を更新対象とします。<br/> {@link DbT3038ShokanKihonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば更新状態にします。
+     * 保持する償還払請求基本を更新対象とします。<br/>
+     * {@link DbT3038ShokanKihonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば更新状態にします。
      *
      * @return 更新対象処理実施後の{@link ShokanKihon}
      */

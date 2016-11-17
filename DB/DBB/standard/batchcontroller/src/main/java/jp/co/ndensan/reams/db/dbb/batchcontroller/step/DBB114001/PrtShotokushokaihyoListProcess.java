@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB114001;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranBatchReport;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranBreakKey;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranOutPutOrder;
@@ -68,6 +70,15 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     private static final int NUM_0 = 0;
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
+    private static final RString 町域コード = new RString("町域コード");
+    private static final RString 行政区コード = new RString("行政区コード");
+    private static final RString 世帯コード = new RString("世帯コード");
+    private static final RString 識別コード = new RString("識別コード");
+    private static final RString 氏名５０音カナ = new RString("氏名５０音カナ");
+    private static final RString 生年月日 = new RString("生年月日");
+    private static final RString 市町村コード = new RString("市町村コード");
+    private static final RString 異動年月日 = new RString("異動年月日");
+    private static final RString 前住所コード = new RString("前住所コード");
     private static final RString 被保険者区分コード_EMPTY = new RString("");
     private static final RString 被保険者区分コード_NUM1 = new RString("1");
     private static final RString 被保険者区分コード_NUM2 = new RString("2");
@@ -115,11 +126,13 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     private List<RString> pageBreakKeys;
     private Association association;
     private List<RString> 出力順項目リスト;
+    private Map<RString, RString> 改頁項目Map;
     private List<RString> 改頁項目リスト;
     private RString 出力順;
 
     @Override
     public void initialize() {
+        改頁項目Map = new HashMap<>();
         get出力順();
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         association = finder.getAssociation();
@@ -143,6 +156,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
         for (ISetSortItem item : 出力順情報.get設定項目リスト()) {
             出力順項目リスト.add(item.get項目名());
             if (item.is改頁項目()) {
+                改頁項目Map.put(item.get項目名(), item.get項目名());
                 改頁項目リスト.add(item.get項目名());
                 pageBreakKeys.add(item.get項目ID());
             }
@@ -189,10 +203,55 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
 
     @Override
     protected void usualProcess(ShotokuShoukaiDataTempEntity t) {
+        change改頁項目コード(t);
         new ShotokushokaihyoHakkoIchiranBatchReport(t, creat構成市町村情報リスト(), 出力順項目リスト, 改頁項目リスト,
                 processParameter.get照会年月日(), processParameter.get処理年度(), processParameter.isテストプリント(), association)
                 .writeBy(sourceWriter);
         publish所得情報一覧表(t);
+    }
+
+    private void change改頁項目コード(ShotokuShoukaiDataTempEntity entity) {
+        if (改頁項目リスト.isEmpty()) {
+            return;
+        }
+        for (RString 改頁 : 改頁項目リスト) {
+            if (町域コード.equals(改頁項目Map.get(改頁))) {
+                改頁項目Map.put(改頁, entity.getChoikiCode());
+            }
+            if (行政区コード.equals(改頁項目Map.get(改頁))) {
+                改頁項目Map.put(改頁, entity.getGyoseikuCode());
+            }
+            if (世帯コード.equals(改頁項目Map.get(改頁))) {
+                RString setaiCode = entity.getSetaiCode() == null ? RString.EMPTY : entity.getSetaiCode().getColumnValue();
+                改頁項目Map.put(改頁, setaiCode);
+            }
+            if (識別コード.equals(改頁項目Map.get(改頁))) {
+                RString shikibetsuCode = entity.getShikibetsuCode() == null ? RString.EMPTY : entity.getShikibetsuCode().getColumnValue();
+                改頁項目Map.put(改頁, shikibetsuCode);
+            }
+            if (氏名５０音カナ.equals(改頁項目Map.get(改頁))) {
+                RString kanaMeisho = entity.getKanaMeisho() == null ? RString.EMPTY : entity.getKanaMeisho().getColumnValue();
+                改頁項目Map.put(改頁, kanaMeisho);
+            }
+            if (生年月日.equals(改頁項目Map.get(改頁))) {
+                RString seinengappiYMD = entity.getSeinengappiYMD() == null ? RString.EMPTY : new RString(entity.getSeinengappiYMD().toString());
+                改頁項目Map.put(改頁, seinengappiYMD);
+            }
+            if (市町村コード.equals(改頁項目Map.get(改頁))) {
+                改頁項目Map.put(改頁, entity.getShichosonCode());
+            }
+            if (異動年月日.equals(改頁項目Map.get(改頁))) {
+                RString idoYMD = entity.getIdoYMD() == null ? RString.EMPTY : new RString(entity.getIdoYMD().toString());
+                改頁項目Map.put(改頁, idoYMD);
+            }
+            if (前住所コード.equals(改頁項目Map.get(改頁))) {
+                改頁項目Map.put(改頁, entity.getZenjushoCode());
+            }
+        }
+        改頁項目リスト.clear();
+        for (RString 改頁項目 : 改頁項目Map.values()) {
+            改頁項目リスト.add(改頁項目);
+        }
     }
 
     @Override

@@ -189,9 +189,9 @@
             <include refid="allColumns_送付エラー一時" />
         FROM
           "SoufuError"
-<!--        WHERE <foreach collection="list" item="item" index="index" separator="or" >  
+        WHERE <foreach collection="list" item="item" index="index" separator="or" >  
              ("SoufuError"."被保険者番号" = #{item.被保険者番号})
-            </foreach> -->
+            </foreach> 
     </select>
     
     <select id="select送付エラーデータ" resultMap="resultMap_送付エラー一時"

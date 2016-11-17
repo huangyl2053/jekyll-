@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo;
 
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -70,4 +71,5 @@ public class HomonChosaIraishoRelateEntity {
     private RString 今回連番;
     private RString 今回連番に対する調査項目;
     private RString 直近区分;
+    private DbT5201NinteichosaIraiJohoEntity dbt5201Entity;
 }

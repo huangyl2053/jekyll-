@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbb.service.report.tokuchokarisanteitsuchishohakk
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.KaishiTsuchishoKariHakkoIchiranProperty;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.KariSanteiTsuchishoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuInfo;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -45,13 +47,15 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService {
     /**
      * 特別徴収開始通知書（仮算定）発行一覧表(単一帳票出力用)
      *
+     * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @param 編集後仮算定通知書情報List List<EditedKariSanteiTsuchiShoKyotsu>
      * @param 出力順ID RString
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 YMDHMS
      * @return SourceDataCollection
      */
-    public SourceDataCollection printSingle(List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書情報List,
+    public SourceDataCollection printSingle(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
+            List<EditedKariSanteiTsuchiShoKyotsuInfo> 編集後仮算定通知書情報List,
             RString 出力順ID, FlexibleYear 調定年度, YMDHMS 帳票作成日時) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
@@ -62,16 +66,85 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService {
     }
 
     /**
+     * 特別徴収開始通知書（仮算定）発行一覧表(単一帳票出力用)
+     *
+     * @param 編集後仮算定通知書情報List List<EditedKariSanteiTsuchiShoKyotsuInfo>
+     * @param 出力順ID RString
+     * @param 調定年度 FlexibleYear
+     * @param 帳票作成日時 YMDHMS
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection printKariSantei(List<EditedKariSanteiTsuchiShoKyotsuInfo> 編集後仮算定通知書情報List,
+            RString 出力順ID, FlexibleYear 調定年度, YMDHMS 帳票作成日時) {
+        SourceDataCollection collection;
+        try (ReportManager reportManager = new ReportManager()) {
+            printKariSantei(編集後仮算定通知書情報List, 出力順ID, 調定年度, 帳票作成日時, reportManager);
+            collection = reportManager.publish();
+        }
+        return collection;
+    }
+
+    /**
      * 特別徴収開始通知書（仮算定）発行一覧表の printメソッド(複数帳票出力用)。
      *
-     * @param 編集後仮算定通知書情報List List<EditedKariSanteiTsuchiShoKyotsu>
+     * @param 編集後仮算定通知書情報List List<EditedKariSanteiTsuchiShoKyotsuInfo>
+     * @param 出力順ID RString
+     * @param 調定年度 FlexibleYear
+     * @param 帳票作成日時 YMDHMS
+     * @param reportManager ReportManager
+     */
+    public void printKariSantei(
+            List<EditedKariSanteiTsuchiShoKyotsuInfo> 編集後仮算定通知書情報List,
+            RString 出力順ID,
+            FlexibleYear 調定年度,
+            YMDHMS 帳票作成日時,
+            ReportManager reportManager) {
+        IOutputOrder 並び順 = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, 特別徴収開始通知書仮算定_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
+        KariSanteiTsuchishoProperty property = new KariSanteiTsuchishoProperty(並び順);
+        try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> assembler
+                = createAssembler(property, reportManager)) {
+            ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            Association association = AssociationFinderFactory.createInstance().getAssociation();
+
+            if (並び順 == null || 並び順.get設定項目リスト() == null || 並び順.get設定項目リスト().isEmpty()) {
+                executereport(編集後仮算定通知書情報List, 調定年度, 帳票作成日時, association, new ArrayList(),
+                        new ArrayList(), reportSourceWriter);
+                return;
+            }
+            List<RString> 出力項目リスト = new ArrayList();
+            List<RString> 改頁項目リスト = new ArrayList();
+            for (int i = NUM0; i < NUM5; i++) {
+                if (i < 並び順.get設定項目リスト().size()) {
+                    出力項目リスト.add(並び順.get設定項目リスト().get(i).get項目名());
+                    if (並び順.get設定項目リスト().get(i).is改頁項目()) {
+                        改頁項目リスト.add(並び順.get設定項目リスト().get(i).get項目名());
+                    }
+                } else {
+                    break;
+                }
+            }
+            executereport(編集後仮算定通知書情報List, 調定年度, 帳票作成日時, association, 出力項目リスト,
+                    改頁項目リスト, reportSourceWriter);
+
+        }
+    }
+
+    /**
+     * 特別徴収開始通知書（仮算定）発行一覧表の printメソッド(複数帳票出力用)。
+     *
+     * @param 編集後仮算定通知書情報List List<EditedKariSanteiTsuchiShoKyotsuInfo>
      * @param 出力順ID RString
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 YMDHMS
      * @param reportManager ReportManager
      */
     public void print(
-            List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書情報List,
+            List<EditedKariSanteiTsuchiShoKyotsuInfo> 編集後仮算定通知書情報List,
             RString 出力順ID,
             FlexibleYear 調定年度,
             YMDHMS 帳票作成日時,
@@ -110,7 +183,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService {
         }
     }
 
-    private void executereport(List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書情報List,
+    private void executereport(List<EditedKariSanteiTsuchiShoKyotsuInfo> 編集後仮算定通知書情報List,
             FlexibleYear 調定年度,
             YMDHMS 帳票作成日時,
             Association association,
@@ -118,9 +191,10 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService {
             List<RString> 改頁項目リスト,
             ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> reportSourceWriter) {
         int i = NUM1;
-        for (EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書情報 : 編集後仮算定通知書情報List) {
-            TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport report = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(
-                    編集後仮算定通知書情報, 調定年度, 帳票作成日時, association, 出力項目リスト, 改頁項目リスト, i);
+        for (EditedKariSanteiTsuchiShoKyotsuInfo 編集仮算定通知書情報 : 編集後仮算定通知書情報List) {
+            TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport report
+                    = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(編集仮算定通知書情報.get仮算定通知書情報(),
+                            編集仮算定通知書情報.get編集後仮算定通知書情報(), 調定年度, 帳票作成日時, association, 出力項目リスト, 改頁項目リスト, i);
             report.writeBy(reportSourceWriter);
             i = i + NUM1;
         }

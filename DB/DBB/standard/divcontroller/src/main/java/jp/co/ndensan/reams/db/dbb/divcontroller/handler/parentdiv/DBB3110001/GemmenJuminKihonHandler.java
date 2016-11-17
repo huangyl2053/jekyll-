@@ -1088,10 +1088,13 @@ public class GemmenJuminKihonHandler {
         para.set調定日時(YMDHMS.now());
         para.set年度分賦課リスト_更正前(年度分賦課減免リスト.to年度分賦課リスト());
         para.set徴収方法の情報_更正前(new ChoshuHohoManager().get介護徴収方法(賦課年度, 被保険者番号));
-        Decimal 減免前介護保険料_年額 = 年度分賦課減免リスト.get現年度().get減免前介護保険料_年額();
         Decimal 減免額_画面 = div.getGemmenMain().getKiwarigaku().getTxtGemmengaku().getValue();
-        Decimal 減免額 = (減免前介護保険料_年額 != null ? 減免前介護保険料_年額 : Decimal.ZERO)
-                .subtract(減免額_画面 != null ? 減免額_画面 : Decimal.ZERO);
+        Decimal 減免額 = Decimal.ZERO;
+        if (年度分賦課減免リスト.get現年度() != null && 年度分賦課減免リスト.get現年度().get減免前介護保険料_年額() != null) {
+            Decimal 減免前介護保険料_年額 = 年度分賦課減免リスト.get現年度().get減免前介護保険料_年額();
+            減免額 = (減免前介護保険料_年額 != null ? 減免前介護保険料_年額 : Decimal.ZERO)
+                    .subtract(減免額_画面 != null ? 減免額_画面 : Decimal.ZERO);
+        }
         para.set年額保険料(減免額);
         para.set資格の情報(HihokenshaDaichoManager.createInstance().selectByHihokenshaNo(被保険者番号));
         KoseiShorikoaResult 計算結果fuka = FukaKeisan.createInstance().do調定計算(para);

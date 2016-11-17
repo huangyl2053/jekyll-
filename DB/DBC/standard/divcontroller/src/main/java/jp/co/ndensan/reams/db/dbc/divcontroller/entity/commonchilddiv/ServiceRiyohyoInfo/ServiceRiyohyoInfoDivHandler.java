@@ -65,8 +65,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ServiceRiyohyoInfoDivHandler {
 
     private final ServiceRiyohyoInfoDiv div;
-    private static final RString 居宅 = new RString("居宅サービス計画");
-    private static final RString 総合事業 = new RString("総合事業費計画");
+    private static final RString 居宅 = new RString("1");
+    private static final RString 総合事業 = new RString("2");
     private static final RString 定値_01 = new RString("01");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
@@ -969,16 +969,16 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     private void 選択データありの場合(dgServiceRiyohyoBeppyoList_Row row, RString 状態) throws ApplicationException {
-        boolean サービスコードフラグ
-                = row.getHdnServiceShuruiCode().equals(div.getCcdServiceCodeInput().getサービスコード1())
-                && row.getHdnServiceKomokuCode().equals(div.getCcdServiceCodeInput().getサービスコード2());
-        if (row.getHdnJigyoshaCode().equals(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo()) && サービスコードフラグ) {
-            if (row.getServiceTani().equals(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani())) {
-                throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage());
-            } else {
-                throw new ApplicationException(DbcErrorMessages.重複サービス.getMessage());
-            }
-        }
+//        boolean サービスコードフラグ
+//                = row.getHdnServiceShuruiCode().equals(div.getCcdServiceCodeInput().getサービスコード1())
+//                && row.getHdnServiceKomokuCode().equals(div.getCcdServiceCodeInput().getサービスコード2());
+//        if (row.getHdnJigyoshaCode().equals(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo()) && サービスコードフラグ) {
+//            if (row.getServiceTani().equals(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani())) {
+//                throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage());
+//            } else {
+//                throw new ApplicationException(DbcErrorMessages.重複サービス.getMessage());
+//            }
+//        }
         RowState state = row.getRowState();
         if (修正.equals(状態)) {
             row.setRowState(RowState.Modified);

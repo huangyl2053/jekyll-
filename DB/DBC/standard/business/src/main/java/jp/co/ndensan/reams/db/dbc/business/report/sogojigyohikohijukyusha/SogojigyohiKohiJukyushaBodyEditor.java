@@ -73,6 +73,11 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
         source.listUpper_11 = getColumnValue(帳票出力対象データ.get証記載保険者番号());
         source.shikibetsuCode = getColumnValue(帳票出力対象データ.get識別コード());
         source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listUpper_10);
+        source.yubinNo = 帳票出力対象データ.get郵便番号();
+        source.choikiCode = 帳票出力対象データ.get町域コード();
+        source.gyoseikuCode = 帳票出力対象データ.get行政区コード();
+        source.shimei50onKana = 帳票出力対象データ.get氏名５０音カナ();
+        source.shichosonCode = getColumnValue(帳票出力対象データ.get市町村コード());
     }
 
     private void edit集計(SogojigyohiKohiJukyushaSource source) {
