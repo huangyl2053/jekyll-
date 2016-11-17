@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsTais
 import jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.InsTaishoSeitaiyinTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.TaishoSetaiinEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiShotokuEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -102,14 +103,19 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
         taiShoEntity.setShotaikijunDay(parameter.get世帯員把握基準日());
         taiShoEntity.setShotaikijunDay2(parameter.get世帯員把握基準日2());
         taiShoEntity.setShotaiCode(getColumnValue(世帯員所得情報一時.getSetaiCode()));
-        if (null != 被保険者台帳管理Newest.getKyuShichosonCode()) {
-            taiShoEntity.setRannkuShichosonCode(getColumnValue(被保険者台帳管理Newest.getKyuShichosonCode()));
-        } else if (null != 被保険者台帳管理Newest.getKoikinaiTokureiSochimotoShichosonCode()) {
-            taiShoEntity.setRannkuShichosonCode(getColumnValue(被保険者台帳管理Newest.getKoikinaiTokureiSochimotoShichosonCode()));
+        if (被保険者台帳管理Newest != null) {
+            if (null != 被保険者台帳管理Newest.getKyuShichosonCode()) {
+                taiShoEntity.setRannkuShichosonCode(getColumnValue(被保険者台帳管理Newest.getKyuShichosonCode()));
+            } else if (null != 被保険者台帳管理Newest.getKoikinaiTokureiSochimotoShichosonCode()) {
+                taiShoEntity.setRannkuShichosonCode(getColumnValue(被保険者台帳管理Newest.getKoikinaiTokureiSochimotoShichosonCode()));
+            } else {
+                taiShoEntity.setRannkuShichosonCode(getColumnValue(被保険者台帳管理Newest.getShichosonCode()));
+            }
+            taiShoEntity.setHihokenshaNo(getHihokenshaNo(被保険者台帳管理Newest.getHihokenshaNo()));
         } else {
-            taiShoEntity.setRannkuShichosonCode(getColumnValue(被保険者台帳管理Newest.getShichosonCode()));
+            taiShoEntity.setRannkuShichosonCode(RString.EMPTY);
+            taiShoEntity.setHihokenshaNo(HihokenshaNo.EMPTY);
         }
-        taiShoEntity.setHihokenshaNo(entity.get被保険者台帳管理Newest().getHihokenshaNo());
         taiShoEntity.setShikibetsuCode(世帯員所得情報一時.getShikibetsuCode());
         taiShoEntity.setKazeiKubun(世帯員所得情報一時.getKazeiKubunGemmenGo());
         taiShoEntity.setKazeiShotokuGaku(世帯員所得情報一時.getKazeiShotokuGaku());
@@ -138,13 +144,20 @@ public class InsTaishoSeitaiyinTempProcess extends BatchProcessBase<InsTaishoSei
         return RString.EMPTY;
     }
 
+    private HihokenshaNo getHihokenshaNo(HihokenshaNo date) {
+        if (null != date) {
+            return date;
+        }
+        return HihokenshaNo.EMPTY;
+    }
+
     private void editTaishoSetaiin(TaishoSetaiinEntity taiShoEntity, IKojin 宛名) {
 
         taiShoEntity.setSeinengappiYMD(宛名.get生年月日().toFlexibleDate());
         if (RSTRING_1.equals(parameter.get処理区分())) {
             taiShoEntity.setHihokenshaName(getColumnValue(宛名.get名称().getName()));
             taiShoEntity.setHihokenshaKana(getColumnValue(宛名.get名称().getKana()));
-            taiShoEntity.setSex(宛名.get性別().getCommonName());
+            taiShoEntity.setSex(宛名.get性別().getCode());
             AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), JuminJotai.住民, FlexibleDate.MAX, parameter.get世帯員把握基準日());
             taiShoEntity.setAge(ageCalculator.get年齢());
             if (宛名.is住民() && 宛名.is日本人()) {
