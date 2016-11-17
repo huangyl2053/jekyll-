@@ -80,7 +80,6 @@ public class JikoFutangakushomeishoHandler {
             HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         div.getJikoFutanShomeishoSakusei().getCcdAtenaInfo().initialize(識別コード);
         div.getJikoFutanShomeishoSakusei().getCcdShikakuKihon().initialize(被保険者番号);
-
         if (0 < 年度毎キー.size()) {
             set対象年度DDL(システム日付, 年度毎キー);
             支給申請書整理番号DDL(年度毎キー);
@@ -95,7 +94,18 @@ public class JikoFutangakushomeishoHandler {
             div.getJikoFutanShomeishoSakusei().setTitle(事業分_自己負担額証明書作成);
         }
         div.getJikoFutanShomeishoSakuseiPrint().getCcdBunshoNo().initialize(new ReportId(new RString("DBC100050_JikoFutangakushomeisho")));
+    }
 
+    /**
+     *
+     * onLoadhas対象者データ
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 識別コード ShikibetsuCode
+     */
+    public void onLoadhas対象者データ(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+        div.getJikoFutanShomeishoSakusei().getCcdAtenaInfo().initialize(識別コード);
+        div.getJikoFutanShomeishoSakusei().getCcdShikakuKihon().initialize(被保険者番号);
     }
 
     /**
@@ -215,12 +225,15 @@ public class JikoFutangakushomeishoHandler {
     /**
      * get高額合算データ
      *
+     * @param is帳票設計DBC100050 boolean
+     * @param is帳票設計DBC100051 boolean
+     * @param 識別コード ShikibetsuCode
      * @param 年度毎キー Map
      * @param 被保険者番号 HihokenshaNo
      * @param メニューID メニューID
      * @return JikoFutangakushomeishoData
      */
-    public JikoFutangakushomeishoData get高額合算データ(Map<FlexibleYear, List<KogakuGassanNendoKey>> 年度毎キー,
+    public JikoFutangakushomeishoData get高額合算データ(boolean is帳票設計DBC100050, boolean is帳票設計DBC100051, ShikibetsuCode 識別コード, Map<FlexibleYear, List<KogakuGassanNendoKey>> 年度毎キー,
             HihokenshaNo 被保険者番号, RString メニューID) {
         JikoFutangakushomeishoParameter parameter = new JikoFutangakushomeishoParameter();
         parameter.set被保険者番号(被保険者番号.value());
@@ -237,12 +250,13 @@ public class JikoFutangakushomeishoHandler {
         parameter.set対象年度(対象年度);
         parameter.set支給申請書整理番号(支給申請書整理番号);
         parameter.setメニューID(メニューID);
+        parameter.set識別コード(識別コード);
         JikoFutangakushomeishoData 高額合算データ = new JikoFutangakushomeishoData();
         KogakuGassanData kogakuGassanData = 高額合算申請書.get高額合算情報(parameter);
         高額合算データ.set高額合算データ(kogakuGassanData);
-        if (メニューID_DBCMN63001.equals(メニューID)) {
+        if (is帳票設計DBC100050) {
             高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(ReportIdDBC.DBC100050.getReportId()));
-        } else if (メニューID_DBCMNN2001.equals(メニューID)) {
+        } else if (is帳票設計DBC100051) {
             高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(ReportIdDBC.DBC100051.getReportId()));
         }
 
@@ -281,7 +295,9 @@ public class JikoFutangakushomeishoHandler {
      * @return Map<FlexibleYear, List<KogakuGassanNendoKey>>年度毎キー
      */
     public Map<FlexibleYear, List<KogakuGassanNendoKey>> get高額合算キークラス(List<KogakuGassanShinSeisho> 対象者データ) {
-        対象年度 = 対象者データ.get(0).get対象年度();
+        if (!対象者データ.isEmpty()) {
+            対象年度 = 対象者データ.get(0).get対象年度();
+        }
         kogakuGassanNendoKeyList = new ArrayList<>();
         for (KogakuGassanShinSeisho kogakuGassanShinSeisho : 対象者データ) {
             if (!対象年度.equals(kogakuGassanShinSeisho.get対象年度())) {

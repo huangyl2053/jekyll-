@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.report.kyufukanrihyosofuichiran;
 
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyotakuServiceKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyosofuichiran.KyufuKanrihyoSofuIchiranEntity;
@@ -47,7 +46,7 @@ public class KyufuKanrihyoSofuIchiranEditor implements IKyufuKanrihyoSofuIchiran
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
-    private static final int INDEX_5 = 5;
+    private static final int INDEX_0 = 0;
 
     /**
      * インスタンスを生成します。
@@ -83,11 +82,11 @@ public class KyufuKanrihyoSofuIchiranEditor implements IKyufuKanrihyoSofuIchiran
         source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);
         source.shutsuryokujun4 = get並び順(KEY_並び順の５件目);
         source.shutsuryokujun5 = get並び順(KEY_並び順の６件目);
-        source.kaiPege1 = get改頁(INDEX_1);
-        source.kaiPege2 = get改頁(INDEX_2);
-        source.kaiPege3 = get改頁(INDEX_3);
-        source.kaiPege4 = get改頁(INDEX_4);
-        source.kaiPege5 = get改頁(INDEX_5);
+        source.kaiPege1 = get改頁(INDEX_0);
+        source.kaiPege2 = get改頁(INDEX_1);
+        source.kaiPege3 = get改頁(INDEX_2);
+        source.kaiPege4 = get改頁(INDEX_3);
+        source.kaiPege5 = get改頁(INDEX_4);
         source.listUpper_1 = パターン54(entity.get利用年月());
         source.listUpper_2 = entity.get被保険者番号();
         source.listUpper_3 = entity.get宛名名称();
@@ -103,6 +102,8 @@ public class KyufuKanrihyoSofuIchiranEditor implements IKyufuKanrihyoSofuIchiran
         if (!利用年月.isEmpty() && !RString.isNullOrEmpty(表示用要介護状態区分コード)) {
             source.listUpper_7
                     = YokaigoJotaiKubunSupport.toValue(利用年月, 表示用要介護状態区分コード).getName();
+        } else {
+            source.listUpper_7 = RString.EMPTY;
         }
         source.listUpper_8 = toRString(entity.get表示用支給限度単位数());
         source.listUpper_9 = パターン54(entity.get限度額管理開始年月日());
@@ -112,6 +113,8 @@ public class KyufuKanrihyoSofuIchiranEditor implements IKyufuKanrihyoSofuIchiran
         source.listUpper_13 = toRString(entity.get明細合計単位数());
         if (entity.get表示用支給限度単位数().compareTo(entity.get明細合計単位数()) < 0) {
             source.listUpper_14 = 備考;
+        } else {
+            source.listUpper_14 = RString.EMPTY;
         }
         source.bikoTitle = entity.get備考タイトル();
         source.listLower_1 = entity.get備考_証記載保険者番号();
@@ -119,8 +122,15 @@ public class KyufuKanrihyoSofuIchiranEditor implements IKyufuKanrihyoSofuIchiran
         source.shuseiGokeiKensu = toRString(entity.get合計件数_修正());
         source.torikeshiGokeiKensu = toRString(entity.get合計件数_取消());
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hihokennshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
-                ReportKomokuEditorUtil.get非空文字列(entity.get被保険者番号()));
+        source.hihokennshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), entity.get被保険者番号());
+        source.yubinNo = entity.getYubinNo();
+        source.choikiCode = entity.getChoikiCode();
+        source.gyoseikuCode = entity.getGyoseikuCode();
+        source.shimei50onKana = entity.getShimei50onKana();
+        source.shichosonCode = entity.getShichosonCode();
+        source.riyoYM = entity.getRiyoYM();
+        source.yokaigoJotaiKubunCode = entity.getYokaigoJotaiKubunCode();
+        source.hihokenshaNo = entity.getHihokenshaNo();
         return source;
     }
 

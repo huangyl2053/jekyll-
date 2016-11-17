@@ -53,10 +53,17 @@ public class KyufukanrihyoOutProcessParameter implements IBatchProcessParameter 
     /**
      * MybatisParameterを作成する。
      *
+     * @param 出力順 RString
+     * @param 制度改正施行日支給限度額一本化の年月 RString
+     * @param 居宅サービス区分短期入所のコード RString
      * @return KyufukanrihyoOutMybatisParameter
      */
-    public KyufukanrihyoOutMybatisParameter toKyufukanrihyoOutMybatisParameter() {
-        return new KyufukanrihyoOutMybatisParameter(処理年月, is再処理区分(再処理区分), 出力順ID, 最終更新年月日);
+    public KyufukanrihyoOutMybatisParameter toKyufukanrihyoOutMybatisParameter(RString 出力順,
+            RString 制度改正施行日支給限度額一本化の年月,
+            RString 居宅サービス区分短期入所のコード) {
+        return KyufukanrihyoOutMybatisParameter.createParam(処理年月, is再処理区分(再処理区分), 出力順ID, 最終更新年月日, 出力順,
+                制度改正施行日支給限度額一本化の年月,
+                居宅サービス区分短期入所のコード);
     }
 
     private boolean is再処理区分(RString 再処理区分) {

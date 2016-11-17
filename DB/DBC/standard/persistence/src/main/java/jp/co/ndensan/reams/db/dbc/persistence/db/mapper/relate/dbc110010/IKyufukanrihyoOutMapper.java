@@ -86,9 +86,9 @@ public interface IKyufukanrihyoOutMapper {
      * get帳票出力対象データ
      *
      * @param parameter KyufukanrihyoOutMybatisParameter
-     * @return List<KyufukanrihyoOutDoBillOutEntity>
+     * @return KyufukanrihyoOutDoBillOutEntity
      */
-    List<KyufukanrihyoOutDoBillOutEntity> get帳票出力対象データ(KyufukanrihyoOutMybatisParameter parameter);
+    KyufukanrihyoOutDoBillOutEntity get帳票出力対象データ(KyufukanrihyoOutMybatisParameter parameter);
 
     /**
      * select介護事業者名称
