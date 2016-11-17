@@ -11,7 +11,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.servicenokanribangourendou.JigyouKetteiTutisyoResult;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicenokanribangourendou.JigyouKetteiTutisyoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicenokanribangourendou.JigyouKetteiTutisyoEntity;
@@ -376,12 +375,6 @@ public class ServiceNoKanribangouRendou {
 
     private void set給付の種類(JigyouKetteiTutisyoEntity 決定通知書Entity,
             RString 審査方法区分, JigyouKetteiTutisyoParameter param) {
-        if (!ShinsaHohoKubun.審査依頼.getコード().equals(審査方法区分)) {
-            決定通知書Entity.set給付の種類１(RString.EMPTY);
-            決定通知書Entity.set給付の種類２(RString.EMPTY);
-            決定通知書Entity.set給付の種類３(RString.EMPTY);
-            return;
-        }
         IServiceNoKanribangouRendouMapper mapper = mapperProvider.create(IServiceNoKanribangouRendouMapper.class);
         List<DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity> 対象者明細 = mapper.get対象者明細情報(param);
         if (対象者明細 == null || 対象者明細.isEmpty()) {
