@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC28100",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "受給者台帳突合結果情報随時",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410046",
+     "toLayoutTitle": "受給者台帳突合結果情報随時",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410046",
+     "layoutTitle": "受給者台帳突合結果情報随時",
+     "eventName": "実行する",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

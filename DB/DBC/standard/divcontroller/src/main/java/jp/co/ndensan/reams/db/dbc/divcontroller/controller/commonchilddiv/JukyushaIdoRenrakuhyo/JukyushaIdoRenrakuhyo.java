@@ -66,6 +66,17 @@ public class JukyushaIdoRenrakuhyo {
     }
 
     /**
+     * 認定申請中区分チェック
+     *
+     * @param div JukyushaIdoRenrakuhyoDiv
+     * @return ResponseData
+     */
+    public ResponseData<JukyushaIdoRenrakuhyoDiv> onClick_radTokuteiNyushoshaNinteiShinseichuKubun(JukyushaIdoRenrakuhyoDiv div) {
+        getHandler(div).onChange_認定申請中区分();
+        return createResponse(div);
+    }
+
+    /**
      * 住所地特例の保険者番号focus outのメソッドです。
      *
      * @param div JukyushaIdoRenrakuhyoDiv

@@ -222,7 +222,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             RString 指定バイト数な文字列 = get指定バイト数な文字列(INDEX_62, result);
             setEntity(指定バイト数な文字列);
-            if (INDEX_62 == バイト数) {
+            if (INDEX_62 != バイト数) {
                 取込後期高齢者情報Entity.setエラーコード(エラーコード_01);
                 取込後期高齢者情報Entity.setエラー文言(コード文言_フォーマットエラー);
                 取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
@@ -239,7 +239,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             RString 指定バイト数な文字列 = get指定バイト数な文字列(INDEX_492, result);
             setEntityDensanNi(指定バイト数な文字列);
-            if (INDEX_492 == バイト数) {
+            if (INDEX_492 != バイト数) {
                 取込後期高齢者情報Entity.setエラーコード(エラーコード_51);
                 取込後期高齢者情報Entity.setエラー文言(コード文言_フォーマットエラー);
                 取込後期高齢者情報Entity.setエラー区分(エラー区分_1);

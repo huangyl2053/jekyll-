@@ -56,7 +56,6 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
 
     private static final RString 帳票制御汎用キー_用紙タイプ = new RString("用紙タイプ");
     private static final RString 帳票制御汎用キー_支払予定日印字有無 = new RString("支払予定日印字有無");
-    private static final RString 帳票制御汎用キー_償還払い支給不支給決定通知書 = new RString("２号発行有無");
     private static final RString 用紙タイプ_A4 = new RString("1");
     private static final RString 用紙タイプ_シーラ = new RString("2");
     private static final RString 用紙タイプ_諏訪広域版 = new RString("3");
@@ -101,12 +100,6 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
         if (更新する.equals(getParameter().get窓口払い一括更新区分())) {
             executeStep(DB_UPDATE2);
         }
-        ChohyoSeigyoHanyo 帳票制御汎発行有無 = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
-                FlexibleYear.MIN, 帳票制御汎用キー_償還払い支給不支給決定通知書);
-        if (帳票制御汎発行有無 != null && 発行有無_発行しない.equals(帳票制御汎発行有無.get設定値())) {
-            executeStep(DBC200024);
-            return;
-        }
         
         if (用紙タイプ_A4.equals(用紙タイプ)) {
             if (支払予定日印字有無_印字しない.equals(支払予定日印字有無)) {
@@ -128,6 +121,7 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
             executeStep(DBC100005);
         }
         executeStep(DBC200023);
+        executeStep(DBC200024);
     }
 
     @Step(TEMP_INSERT)

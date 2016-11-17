@@ -340,6 +340,18 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyo extends ModelBase<ShokanToku
     }
 
     /**
+     * 保持する償還払請求特定入所者介護サービス費用データをinsert対象とします。<br/>
+     * {@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であればinsert状態にします。
+     *
+     * @return 修正対象処理実施後の{@link ShokanTokuteiNyushoshaKaigoServiceHiyo}
+     */
+    public ShokanTokuteiNyushoshaKaigoServiceHiyo added() {
+        DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Added);
+        return new ShokanTokuteiNyushoshaKaigoServiceHiyo(modifiedEntity, id);
+    }
+
+    /**
      * 償還払請求特定入所者介護サービス費用の識別子{@link ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier}を返します。
      *
      * @return 償還払請求特定入所者介護サービス費用の識別子{@link ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier}

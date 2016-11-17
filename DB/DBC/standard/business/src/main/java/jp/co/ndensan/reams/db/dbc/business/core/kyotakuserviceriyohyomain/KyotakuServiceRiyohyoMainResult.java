@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -106,12 +107,12 @@ public class KyotakuServiceRiyohyoMainResult implements Serializable {
     }
 
     /**
-     * 計画変更年月日を返します。
+     * 更新日を返します。
      *
-     * @return 計画変更年月日
+     * @return 更新日
      */
-    public FlexibleDate get計画変更年月日() {
-        return entity.getKeikakuHenkoYMD();
+    public RDate get更新日() {
+        return entity.getUpdateYMD().getDate();
     }
 
     /**
