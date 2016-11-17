@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku;
+package jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
