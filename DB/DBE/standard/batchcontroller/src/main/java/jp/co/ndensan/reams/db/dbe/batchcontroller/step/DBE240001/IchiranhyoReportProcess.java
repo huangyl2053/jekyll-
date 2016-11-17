@@ -80,22 +80,22 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
 
     @Override
     protected void beforeExecute() {
-        ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
-                帳票ID,
-                new FlexibleDate(processParamter.getHakkobi()),
-                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
-                ichiranhyoReportSourceWriter);
-        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
+ //       ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+ //               帳票ID,
+ //               new FlexibleDate(processParamter.getHakkobi()),
+ //               NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
+ //               ichiranhyoReportSourceWriter);
+ //       通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
     }
 
     @Override
     protected void keyBreakProcess(HomonChosaIraishoRelateEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            連番 = 1;
-            ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.
-                    createFrom(business.setBodyItem(current, 連番, ninshoshaSource, 通知文Map));
-            report.writeBy(ichiranhyoReportSourceWriter);
-        }
+ //       if (hasBrek(getBefore(), current)) {
+ //           連番 = 1;
+ //           ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.
+ //                   createFrom(business.setBodyItem(current, 連番, ninshoshaSource, 通知文Map));
+ //           report.writeBy(ichiranhyoReportSourceWriter);
+ //       }
     }
 
     private boolean hasBrek(HomonChosaIraishoRelateEntity before, HomonChosaIraishoRelateEntity current) {
@@ -104,9 +104,9 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
 
     @Override
     protected void usualProcess(HomonChosaIraishoRelateEntity entity) {
-        ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.
-                createFrom(business.setBodyItem(entity, 連番, ninshoshaSource, 通知文Map));
-        report.writeBy(ichiranhyoReportSourceWriter);
+  //      ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.
+  //              createFrom(business.setBodyItem(entity, 連番, ninshoshaSource, 通知文Map));
+  //      report.writeBy(ichiranhyoReportSourceWriter);
     }
 
     @Override
