@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
@@ -337,7 +335,9 @@ public class ShokanBaraiKa1GoHandler {
         getValidationHandler().validateFor申請日入力チェック(pairs, div);
         getValidationHandler().validateFor申請内容決定日入力チェック(pairs, div);
         getValidationHandler().validateFor弁明審査結果選択チェック(pairs, div);
-        getValidationHandler().validateFor弁明理由選択チェック(pairs, div);
+        if (!ShiharaiHenkoBenmeiShinsaKekkaKubun.申請不要.getコード().equals(div.getDdlBemmeiShinsaKekka().getSelectedKey())){
+            getValidationHandler().validateFor弁明理由選択チェック(pairs, div);
+        }
         getValidationHandler().validateFor申請審査結果選択チェック(pairs, div);
         getValidationHandler().validateFor申請理由選択チェック(pairs, div);
         getValidationHandler().validateFor終了状況選択チェック(pairs, div);
@@ -357,9 +357,13 @@ public class ShokanBaraiKa1GoHandler {
         } else {
             builder.set弁明審査結果区分(ShiharaiHenkoBenmeiShinsaKekkaKubun.申請却下.getコード());
         }
-        builder.set弁明書受付年月日(FromRDateToFlexibleDate(div.getTxtBemmeiUketsukeYMD().getValue()))
+        if (ShiharaiHenkoBenmeiShinsaKekkaKubun.申請不要.getコード().equals(div.getDdlBemmeiShinsaKekka().getSelectedKey())){
+        }else{
+            builder.set弁明書受付年月日(FromRDateToFlexibleDate(div.getTxtBemmeiUketsukeYMD().getValue()))
                 .set弁明理由コード(div.getDdlBemmeiRiyu().getSelectedKey())
                 .set弁明審査決定年月日(FromRDateToFlexibleDate(div.getTxtBemmeiNaiyoKetteiYMD().getValue()));
+        }
+        
         if (null != builder.build().getState()
                 && !builder.build().getState().equals(EntityDataState.Added)) {
             builder.setState(EntityDataState.Modified);
@@ -604,7 +608,7 @@ public class ShokanBaraiKa1GoHandler {
     }
 
     private FlexibleDate FromRDateToFlexibleDate(RDate rDate) {
-        if (rDate.toString().isEmpty()) {
+        if (rDate==null || rDate.toString().isEmpty()) {
             return null;
         } else {
             return new FlexibleDate(rDate.toString());
