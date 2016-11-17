@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010000
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShokujiHiyo;
@@ -19,7 +18,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.JukyushaDaich
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KojinKakuteiKey;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCareManagementHiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCareManagementHiJyohou;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiSearchDataBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShakaiFukushiHojinKeigengakuBusiness;
@@ -209,9 +210,10 @@ public class KyufuJissekiShokai {
             div.getDgKyufuJissekiGokeiList().getGridSetting().getColumns().get(i).setVisible(true);
         }
         KyufuJissekiSearchDataBusiness 一覧データ = 給付実績情報照会情報.getSearchData();
-        handler.onClick_btnKyufuJissekiSearch(給付実績ヘッダ情報1.get(INT_ZERO),
-                サービス提供年月_開始, サービス提供年月_終了, 一覧データ);
-        setパラメータ(給付実績情報照会情報);
+        KyufuJissekiHeader 給付実績基本情報子Divデータ
+                = handler.onClick_btnKyufuJissekiSearch(給付実績ヘッダ情報1.get(INT_ZERO),
+                        サービス提供年月_開始, サービス提供年月_終了, 一覧データ);
+        setパラメータ(給付実績情報照会情報, 給付実績基本情報子Divデータ);
         div.getKyufuJissekiSearchPanel().setIsOpen(false);
         div.getKyufuJissekiListPanel().setIsOpen(true);
         return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会一覧);
@@ -1122,7 +1124,7 @@ public class KyufuJissekiShokai {
         return ViewStateHolder.get(ViewStateKeys.給付実績情報照会検索一覧, KyufuJissekiSearchDataBusiness.class);
     }
 
-    private void setパラメータ(KyufuJissekiPrmBusiness 給付実績情報照会情報) {
+    private void setパラメータ(KyufuJissekiPrmBusiness 給付実績情報照会情報, KyufuJissekiHeader 給付実績基本情報子Divデータ) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
@@ -1190,12 +1192,13 @@ public class KyufuJissekiShokai {
         jukyushaDaichoJyohou.setJukyushaData(給付実績情報照会情報.getJukyushaData());
         ViewStateHolder.put(ViewStateKeys.受給者台帳情報, jukyushaDaichoJyohou);
         clearパラメータ(給付実績情報照会情報);
+        ViewStateHolder.put(ViewStateKeys.給付実績基本情報子Div, 給付実績基本情報子Divデータ);
     }
 
     private void clearパラメータ(KyufuJissekiPrmBusiness 給付実績情報照会情報) {
         KyufuJissekiSearchDataBusiness searchData = new KyufuJissekiSearchDataBusiness();
         給付実績情報照会情報.setSearchData(searchData);
-        List<KyufujissekiKihon> csData_A = new ArrayList<>();
+        List<KyufuJissekiKihonShukeiRelate> csData_A = new ArrayList<>();
         給付実績情報照会情報.setCsData_A(csData_A);
         List<KyufujissekiMeisaiBusiness> csData_B = new ArrayList<>();
         給付実績情報照会情報.setCsData_B(csData_B);

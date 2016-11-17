@@ -6,8 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -245,5 +249,40 @@ public class KyufuJissekiHeaderHandler {
             return 事業所番号.value();
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * 被保情報を設定します。
+     *
+     * @param 給付実績基本情報子Divデータ 給付実績基本情報子Divデータ
+     */
+    public void set被保情報(KyufuJissekiHeader 給付実績基本情報子Divデータ) {
+        div.getTxtHihoNo().setValue(給付実績基本情報子Divデータ.get被保険者番号());
+        div.getTxtJuminShubetsu().setValue(給付実績基本情報子Divデータ.get住民種別());
+        div.getTxtYoKaigodo().setValue(給付実績基本情報子Divデータ.get要介護度());
+        div.getTxtYukoKikan().setFromValue(給付実績基本情報子Divデータ.get有効期間開始年月日());
+        div.getTxtYukoKikan().setToValue(給付実績基本情報子Divデータ.get有効期間終了年月日());
+        div.getTxtShimei().setValue(給付実績基本情報子Divデータ.get氏名());
+        div.getTxtSeibetsu().setValue(給付実績基本情報子Divデータ.get性別());
+        div.getTxtSeinengappi().setValue(給付実績基本情報子Divデータ.get生年月日());
+    }
+
+    /**
+     * 被保情報を設定します。
+     *
+     * @param csData_A 給付実績基本情報子Divデータ
+     */
+    public void set被保情報2(KyufuJissekiKihonShukeiRelate csData_A) {
+        KyufujissekiKihon 給付実績基本データ = csData_A.get給付実績基本データ();
+        ShikibetsuNoKanri 識別番号管理 = csData_A.get識別番号管理();
+        div.getTxtTeikyoNengetsu().setValue(new RDate(
+                給付実績基本データ.getサービス提供年月().getYearValue(), 給付実績基本データ.getサービス提供年月().getMonthValue(), 1));
+        set実績区分(給付実績基本データ.get給付実績区分コード());
+        set整理番号(給付実績基本データ.get整理番号());
+        set識別番号名称(識別番号管理.get識別番号());
+        if (給付実績基本データ.get事業者番号() != null) {
+            set事業者名称(給付実績基本データ.get事業者番号().getColumnValue());
+        }
+        //
     }
 }

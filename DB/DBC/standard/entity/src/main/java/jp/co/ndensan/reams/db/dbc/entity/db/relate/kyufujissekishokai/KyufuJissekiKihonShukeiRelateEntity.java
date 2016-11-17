@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 
 /**
  * 給付実績基本集計データEntityクラスです。
@@ -21,6 +22,7 @@ public class KyufuJissekiKihonShukeiRelateEntity implements Serializable {
 
     private static final long serialVersionUID = -4696623917043891214L;
 
-    private DbT3033KyufujissekiShukeiEntity 給付実績集計データ;
+    private AtenaMeisho 事業者名称;
+    private DbT3118ShikibetsuNoKanriEntity 識別番号管理;
     private DbT3017KyufujissekiKihonEntity 給付実績基本データ;
 }
