@@ -216,6 +216,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
     private RString spoolWorkPath;
     private RString eucFilePath;
     private RString 帳票タイトル;
+    private RString before帳票タイトル;
     private RString 最終頁帳票タイトル;
     private RString 市町村コード;
     private RString 市町村名称;
@@ -236,6 +237,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         clear合計();
         clear総合計();
         帳票タイトル = RString.EMPTY;
+        before帳票タイトル = RString.EMPTY;
         最終頁帳票タイトル = RString.EMPTY;
         市町村コード = RString.EMPTY;
         市町村名称 = RString.EMPTY;
@@ -351,6 +353,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
                 = new ShotokuDankaiBetsuShunoritsuIchiranReport(険料段階別収納率通知書Data);
         get総合計集計(entity);
         通知書report.writeBy(reportSourceWriter_一覧表);
+        before帳票タイトル = 帳票タイトル;
     }
 
     @Override
@@ -640,7 +643,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         data.set市町村名(finder.getAssociation(保険料段階別収納率.getLasdecCode()).get市町村名());
         data.set被保険者番号(市町村コード);
         data.set被保険者名(市町村名称);
-        data.set帳票タイトル(帳票タイトル);
+        data.set帳票タイトル(before帳票タイトル);
         data.set科目コード(保険料段階別収納率.getKamokuCode());
         data.setHdn年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -703,7 +706,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         data.set市町村名(finder.getAssociation(保険料段階別収納率.getLasdecCode()).get市町村名());
         data.set被保険者番号(市町村コード);
         data.set被保険者名(市町村名称);
-        data.set帳票タイトル(帳票タイトル);
+        data.set帳票タイトル(before帳票タイトル);
         data.set科目コード(保険料段階別収納率.getKamokuCode());
         data.setHdn年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -748,7 +751,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         data.set市町村名(finder.getAssociation(保険料段階別収納率.getLasdecCode()).get市町村名());
         data.set被保険者番号(市町村コード);
         data.set被保険者名(市町村名称);
-        data.set帳票タイトル(帳票タイトル);
+        data.set帳票タイトル(before帳票タイトル);
         data.set科目コード(保険料段階別収納率.getKamokuCode());
         data.setHdn年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -793,7 +796,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         data.set市町村名(finder.getAssociation(保険料段階別収納率.getLasdecCode()).get市町村名());
         data.set被保険者番号(市町村コード);
         data.set被保険者名(市町村名称);
-        data.set帳票タイトル(帳票タイトル);
+        data.set帳票タイトル(before帳票タイトル);
         data.set科目コード(保険料段階別収納率.getKamokuCode());
         data.setHdn年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
@@ -850,7 +853,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         data.set市町村名(finder.getAssociation(保険料段階別収納率.getLasdecCode()).get市町村名());
         data.set被保険者番号(市町村コード);
         data.set被保険者名(市町村名称);
-        data.set帳票タイトル(帳票タイトル);
+        data.set帳票タイトル(before帳票タイトル);
         data.set科目コード(保険料段階別収納率.getKamokuCode());
         data.setHdn年度(保険料段階別収納率.getChoteiNendo().wareki().toDateString().concat(斜線).
                 concat(保険料段階別収納率.getFukaNendo().wareki().toDateString()));
