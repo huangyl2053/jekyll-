@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
@@ -38,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -175,6 +175,7 @@ public class HokenshaSofuListHandler {
                         .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
                 row.setTxtKoshinNichiji(作成日.concat(RString.HALF_SPACE).concat(作成時));
                 row.setTxtItiranHyoujiJyun(entity.getH一覧表示順());
+                row.setDeleteButtonState(DataGridButtonState.Enabled);
                 rowList.add(row);
             }
         }
@@ -189,7 +190,7 @@ public class HokenshaSofuListHandler {
                 .concat(uzt0885Entity.getSharedFileName().toString()).concat(File.separator)
                 .concat((uzt0885Entity.getSharedFileId().toString().replace(コロン.toString(), 中黒.toString())
                         .replace(ハイフン.toString(), 中黒.toString()))).concat(File.separator)
-                .concat(ファイル.toString()));
+                .concat(uzt0885Entity.getLocalFileName().toString()));
 
         HokenshaSofuResult hokenshaSofuListEntity;
         try (CsvListReader csvReader = new CsvListReader.InstanceBuilder(new RString(file.getAbsolutePath()))
@@ -265,19 +266,16 @@ public class HokenshaSofuListHandler {
     public RString コントロールレコード配列内容チェック(
             List<RString> コントロールレコード, FileData file, List<RString> データレコード, RString データ種別) {
         if (コントロールレコード.size() != 十二) {
-            deleteEntitys(file);
             throw new ApplicationException(DbcErrorMessages.国保連データフォーマット不正.getMessage());
         }
 
         if (!コントロールレコード.get(ゼロ).equals(一)) {
-            deleteEntitys(file);
             throw new ApplicationException(DbcErrorMessages.国保連レコード種別不正.getMessage());
         }
 
         RDate nowDate = RDate.getNowDate();
         if (コントロールレコード.get(六) != null && !コントロールレコード.get(六).equals(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 nowDate, SubGyomuCode.DBU介護統計報告))) {
-            deleteEntitys(file);
             throw new ApplicationException(DbcErrorMessages.国保連保険者番号不正.getMessage());
         }
 
@@ -287,7 +285,6 @@ public class HokenshaSofuListHandler {
             保険者番号取得(データレコード, データ種別);
         }
         if (コントロールレコード.get(二2).compareTo(一) > 0) {
-            deleteEntitys(file);
             throw new ApplicationException(DbcErrorMessages.国保連ボリューム連番不正.getMessage());
         }
         return 保険者番号;
@@ -338,20 +335,6 @@ public class HokenshaSofuListHandler {
     }
 
     /**
-     * deleteEntitysのメソッドです。
-     *
-     * @param file FileData
-     */
-    public void deleteEntitys(FileData file) {
-        List<UzT0885SharedFileEntryEntity> uzt0885EntityList = SharedFile.searchSharedFile(file.getFileName());
-        for (UzT0885SharedFileEntryEntity entity : uzt0885EntityList) {
-            ReadOnlySharedFileEntryDescriptor deleteEntity = new ReadOnlySharedFileEntryDescriptor(
-                    new FilesystemName(entity.getSharedFileName()), entity.getSharedFileId());
-            SharedFile.deleteEntry(deleteEntity);
-        }
-    }
-
-    /**
      * 二重取込チェックのメソッドです。
      *
      * @param file FileData
@@ -369,7 +352,6 @@ public class HokenshaSofuListHandler {
                     && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
                 if (new RString(DbcQuestionMessages.国保連取込済続行確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                    deleteEntitys(file);
                     return RString.EMPTY;
                 }
                 if (二重取込チェック判断1(コントロールレコード, faceKanri)) {
@@ -380,7 +362,6 @@ public class HokenshaSofuListHandler {
                     && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
                 if (new RString(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                    deleteEntitys(file);
                     return RString.EMPTY;
                 }
                 if (二重取込チェック判断2(コントロールレコード, faceKanri)) {
@@ -391,27 +372,7 @@ public class HokenshaSofuListHandler {
         return null;
     }
 
-    /**
-     * 二重取込messageのメソッドです。
-     *
-     * @param 二重取込チェック RString
-     * @param 処理年月 FlexibleYearMonth
-     * @param データ種別 RString
-     * @return ResponseData JyusinDataBaitaiTorikomuDiv
-     */
-    public ResponseData<JyusinDataBaitaiTorikomuDiv> 二重取込message(RString 二重取込チェック,
-            FlexibleYearMonth 処理年月, RString データ種別) {
-        switch (二重取込チェック.toString()) {
-            case "国保連取込済続行確認":
-                return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込済続行確認.getMessage()
-                        .replace(処理年月.toString(), ConfigKeysKokuhorenTorikomi.toValue(データ種別).toString())).respond();
-            case "国保連取込済二重取込続行確認":
-                return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage()
-                        .replace(処理年月.toString(), ConfigKeysKokuhorenTorikomi.toValue(データ種別).toString())).respond();
-            default:
-                return ResponseData.of(div).respond();
-        }
-    }
+
 
     /**
      * 審査年月チェックのメソッドです。
@@ -429,7 +390,6 @@ public class HokenshaSofuListHandler {
             if (new RString(DbcQuestionMessages.国保連先月処理なし取込漏れ確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                deleteEntitys(file);
                 return RString.EMPTY;
             }
             if (審査年月チェック判断1(データ種別, kanri)) {
@@ -438,7 +398,6 @@ public class HokenshaSofuListHandler {
             if (new RString(DbcQuestionMessages.国保連取込漏れ確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                deleteEntitys(file);
                 return RString.EMPTY;
             }
             if (審査年月の翌月.isBefore(審査年月)
@@ -448,7 +407,6 @@ public class HokenshaSofuListHandler {
             if (new RString(DbcQuestionMessages.国保連取込順序逆転確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                deleteEntitys(file);
                 return RString.EMPTY;
             }
             if (審査年月.isBefore(審査年月の翌月)
@@ -459,31 +417,7 @@ public class HokenshaSofuListHandler {
         return null;
     }
 
-    /**
-     * 審査年月messageのメソッドです。
-     *
-     * @param 審査年月チェック RString
-     * @param 処理年月の前月 FlexibleYearMonth
-     * @param 審査年月の翌月 FlexibleYearMonth
-     * @param 審査年月 FlexibleYearMonth
-     * @return ResponseData JyusinDataBaitaiTorikomuDiv
-     */
-    public ResponseData<JyusinDataBaitaiTorikomuDiv> 審査年月message(RString 審査年月チェック,
-            FlexibleYearMonth 処理年月の前月, FlexibleYearMonth 審査年月の翌月, FlexibleYearMonth 審査年月) {
-        switch (審査年月チェック.toString()) {
-            case "国保連先月処理なし取込漏れ確認":
-                return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連先月処理なし取込漏れ確認.getMessage()
-                        .replace(処理年月の前月.toString())).respond();
-            case "国保連取込漏れ確認":
-                return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込漏れ確認.getMessage()
-                        .replace(審査年月の翌月.toString(), 審査年月.toString())).respond();
-            case "国保連取込順序逆転確認":
-                return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込順序逆転確認.getMessage()
-                        .replace(審査年月の翌月.toString(), 審査年月.toString())).respond();
-            default:
-                return ResponseData.of(div).respond();
-        }
-    }
+
 
     /**
      * 判断１のメソッドです。

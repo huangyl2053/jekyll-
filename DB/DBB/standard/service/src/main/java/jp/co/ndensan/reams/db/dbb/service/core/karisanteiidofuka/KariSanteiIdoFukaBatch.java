@@ -1126,7 +1126,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             更正前後EntityList.add(entity);
         }
 
-        new KarisanteiIdoKekkaIchiranPrintService().print仮算定異動一括結果一覧表(更正前後EntityList, new RString(出力順ID),
+        new KarisanteiIdoKekkaIchiranPrintService().print仮算定異動一括結果一覧表(更正前後EntityList, 出力順ID,
                 調定日時, 賦課年度);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID_仮算定異動一括結果一覧表CSV, UzUDE0831EucAccesslogFileType.Csv);

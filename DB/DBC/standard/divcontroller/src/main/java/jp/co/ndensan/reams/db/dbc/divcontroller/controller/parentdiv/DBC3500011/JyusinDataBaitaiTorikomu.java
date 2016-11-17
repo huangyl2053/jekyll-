@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.hokenshasofulist.HokenshaSofuResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.config.ConfigKeysKokuhorenTorikomi;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hokenshasofulist.HokenshaSofuListMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3500011.JyusinDataBaitaiTorikomuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3500011.JyusinDataList_Row;
@@ -23,14 +23,12 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -48,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JyusinDataBaitaiTorikomu {
 
     private static final int ゼロ = 0;
+    private final RString searchSharedFileStr = new RString("1_");
     private final RString searchSharedFile = new RString("1\\_%");
     private static final int 一1 = 1;
     private static final int 四 = 4;
@@ -155,12 +154,7 @@ public class JyusinDataBaitaiTorikomu {
             file.setFileName(ViewStateHolder.get(ViewStateKeys.共有ファイル名, RString.class));
             file.setFilePath(ViewStateHolder.get(ViewStateKeys.共有ファイルエントリ情報, RString.class));
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(file.getFileName()));
-        sfd = SharedFile.defineSharedFile(sfd);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        if (files != null && files.length != ゼロ) {
-            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(file.getFilePath()), opts);
-        }
+
         HokenshaSofuListMybatisParameter myBatisParameter = new HokenshaSofuListMybatisParameter();
         try (CsvListReader csvReader = new CsvListReader.InstanceBuilder(file.getFilePath())
                 .setDelimiter(カンマ).setEncode(Encode.SJIS)
@@ -178,32 +172,20 @@ public class JyusinDataBaitaiTorikomu {
             } else {
                 識別番号 = データ種別;
             }
-            RString 共有ファイル名 = searchSharedFile.concat(識別番号)
-                    .concat(コントロールレコード.get(Integer.parseInt(二.toString()))).concat(コントロールレコード.get(六)).concat(CSV);
+            RString 共有ファイル名 = searchSharedFileStr.concat(識別番号).concat(コントロールレコード.get(六)).concat(CSV);
 
-            List<UzT0885SharedFileEntryEntity> uzt0885EntityList = SharedFile.searchSharedFile(共有ファイル名);
-            try {
-                ConfigKeysKokuhorenTorikomi.toValue(データ種別);
-            } catch (IllegalArgumentException e) {
-                for (UzT0885SharedFileEntryEntity entity : uzt0885EntityList) {
-                    ReadOnlySharedFileEntryDescriptor deleteEntity = new ReadOnlySharedFileEntryDescriptor(
-                            new FilesystemName(entity.getSharedFileName()), entity.getSharedFileId());
-                    SharedFile.deleteEntry(deleteEntity);
-                }
-                getHandler(div).deleteEntitys(file);
-                throw new ApplicationException(DbcErrorMessages.国保連アップロード対象ファイル不正.getMessage());
-            }
             getHandler(div).コントロールレコード配列内容チェック(コントロールレコード, file, データレコード, データ種別);
+
             処理年月 = getHandler(div).処理年月取得(データ種別);
             処理年月の前月 = FlexibleYearMonth.EMPTY;
             if (処理年月 != null) {
                 処理年月の前月 = 処理年月.minusMonth(一1);
             }
-
             HokenshaSofuResult entity = HokenshaSofuFinder.createInstance().get国保連管理(データ種別, 処理年月);
             RString 二重取込チェック = getHandler(div).二重取込チェック(file, データ種別, myBatisParameter, コントロールレコード, entity);
+
             if (二重取込チェック != null && 処理年月 != null) {
-                return getHandler(div).二重取込message(二重取込チェック, 処理年月, データ種別);
+                return 二重取込message(二重取込チェック, 処理年月, データ種別, div);
             }
 
             entity = HokenshaSofuFinder.createInstance().get国保連管理2(データ種別, 処理年月の前月);
@@ -212,26 +194,64 @@ public class JyusinDataBaitaiTorikomu {
                 kanri = entity.getKokuhorenInterfaceKanriList().get(ゼロ);
             }
             審査年月の翌月 = FlexibleYearMonth.EMPTY;
-            if (kanri != null && kanri.get実績データ上審査年月() != null) {
-                if (!kanri.get実績データ上審査年月().isEmpty()) {
-                    審査年月の翌月 = kanri.get実績データ上審査年月().plusMonth(一1);
-                }
+            if (kanri != null && kanri.get実績データ上審査年月() != null && !kanri.get実績データ上審査年月().isEmpty()) {
+                審査年月の翌月 = kanri.get実績データ上審査年月().plusMonth(一1);
             }
             RString 審査年月チェック = getHandler(div).審査年月チェック(file, データ種別, 審査年月の翌月, 審査年月, kanri);
             if (審査年月チェック != null) {
-                return getHandler(div).審査年月message(審査年月チェック, 処理年月の前月, 審査年月の翌月, 審査年月);
+                return 審査年月message(審査年月チェック, 処理年月の前月, 審査年月の翌月, 審査年月, div);
             }
 
-            List<UzT0885SharedFileEntryEntity> uzt0885EntityList2 = SharedFile.searchSharedFile(searchSharedFile);
-            getHandler(div).setDatasource(uzt0885EntityList2);
-            List<JyusinDataList_Row> rowList = div.getJyusinDataList().getDataSource();
-            for (JyusinDataList_Row row : rowList) {
-                row.setDeleteButtonState(DataGridButtonState.Disabled);
-            }
+            upload共有ファイル情報(共有ファイル名, file);
+            set共有ファイル情報to画面Grid(div);
+            div.getPanelUpload().setVisible(false);
         }
         return ResponseData.of(div).respond();
     }
 
+    private ResponseData<JyusinDataBaitaiTorikomuDiv> 二重取込message(RString 二重取込チェック,
+            FlexibleYearMonth 処理年月, RString データ種別, JyusinDataBaitaiTorikomuDiv div) {
+        switch (二重取込チェック.toString()) {
+            case "国保連取込済続行確認":
+                return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込済続行確認.getMessage()
+                        .replace(処理年月.toString(), ConfigKeysKokuhorenTorikomi.toValue(データ種別).toString())).respond();
+            case "国保連取込済二重取込続行確認":
+                return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage()
+                        .replace(処理年月.toString(), ConfigKeysKokuhorenTorikomi.toValue(データ種別).toString())).respond();
+            default:
+                return ResponseData.of(div).respond();
+        }
+    }
+
+    private ResponseData<JyusinDataBaitaiTorikomuDiv> 審査年月message(RString 審査年月チェック, FlexibleYearMonth 処理年月の前月,
+            FlexibleYearMonth 審査年月の翌月, FlexibleYearMonth 審査年月, JyusinDataBaitaiTorikomuDiv div) {
+        switch (審査年月チェック.toString()) {
+            case "国保連先月処理なし取込漏れ確認":
+                return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連先月処理なし取込漏れ確認.getMessage()
+                        .replace(処理年月の前月.toString())).respond();
+            case "国保連取込漏れ確認":
+                return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込漏れ確認.getMessage()
+                        .replace(審査年月の翌月.toString(), 審査年月.toString())).respond();
+            case "国保連取込順序逆転確認":
+                return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込順序逆転確認.getMessage()
+                        .replace(審査年月の翌月.toString(), 審査年月.toString())).respond();
+            default:
+                return ResponseData.of(div).respond();
+        }
+    }
+
+    private void upload共有ファイル情報(RString fileName, FileData file) {
+        file.setFileName(fileName);
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(fileName));
+        sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(file.getFilePath()), opts);
+    }
+
+    private void set共有ファイル情報to画面Grid(JyusinDataBaitaiTorikomuDiv div) {
+        List<UzT0885SharedFileEntryEntity> uzt0885EntityList2 = SharedFile.searchSharedFile(searchSharedFile);
+        getHandler(div).setDatasource(uzt0885EntityList2);
+    }
     private boolean 判断(HokenshaSofuResult entity) {
         return entity != null && entity.getKokuhorenInterfaceKanriList() != null && !entity.getKokuhorenInterfaceKanriList().isEmpty();
     }

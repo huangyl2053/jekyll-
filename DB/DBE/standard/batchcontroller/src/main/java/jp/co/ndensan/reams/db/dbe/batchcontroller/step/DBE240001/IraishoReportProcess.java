@@ -84,8 +84,8 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-     //   ChosaIraishoReport report = ChosaIraishoReport.createFrom(business.setChosaIraishoHeadItem(entity, 通知文Map, ninshoshaSource, 文書番号));
-     //   report.writeBy(iraishoReportSourceWriter);
+        ChosaIraishoReport report = ChosaIraishoReport.createFrom(business.setChosaIraishoHeadItem(entity, 通知文Map, ninshoshaSource, 文書番号));
+        report.writeBy(iraishoReportSourceWriter);
     }
 
     @Override

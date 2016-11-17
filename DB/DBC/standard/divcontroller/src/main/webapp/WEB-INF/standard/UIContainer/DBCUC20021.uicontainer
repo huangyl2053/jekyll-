@@ -52,7 +52,7 @@
      "layoutName": "DBC2000022",
      "layoutTitle": "利用者負担割合即時更正",
      "eventName": "保存",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC2000023",

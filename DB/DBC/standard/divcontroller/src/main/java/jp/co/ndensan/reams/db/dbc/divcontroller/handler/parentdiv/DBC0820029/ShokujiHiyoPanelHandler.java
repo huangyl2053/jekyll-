@@ -13,11 +13,12 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyoBuilder;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseijoho.ShokujiHiyoUpdateData;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.ShokujiHiyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.dgdShokuji_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -539,7 +540,7 @@ public class ShokujiHiyoPanelHandler {
      */
     public boolean get内容変更状態_1709(List<ShokanShokujiHiyo> shokanShokujiHiyoList) {
         if (shokanShokujiHiyoList.isEmpty()) {
-            return true;
+            return false;
         }
         ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
         if (shokanShokujiHiyo.get食事提供延べ日数()
@@ -649,26 +650,25 @@ public class ShokujiHiyoPanelHandler {
     }
 
     /**
-     * 保存処理 のメソッド
+     * 更新用データを取得します。
      *
      * @param paramter ShoukanharaihishinseimeisaikensakuParameter
      * @param shokanShokujiHiyoList List<ShokanShokujiHiyo>
      * @param shokanMeisaiList List<ShokanMeisai>
      * @param 処理モード RString
+     * @return 更新用データ　ShokujiHiyoUpdateData
      */
-    public void 保存処理(ShoukanharaihishinseimeisaikensakuParameter paramter,
+    public ShokujiHiyoUpdateData get更新用データ(ShoukanharaihishinseimeisaikensakuParameter paramter,
             List<ShokanShokujiHiyo> shokanShokujiHiyoList,
             List<ShokanMeisai> shokanMeisaiList,
             RString 処理モード) {
-
+        List<ShokanMeisai> meisaiListForUpd = new ArrayList<>();
         HihokenshaNo 被保険者番号 = paramter.get被保険者番号();
         FlexibleYearMonth サービス提供年月 = paramter.getサービス年月();
         RString 整理番号 = paramter.get整理番号();
         JigyoshaNo 事業者番号 = paramter.get事業者番号();
         RString 様式番号 = paramter.get様式番号();
         RString 明細番号 = paramter.get明細番号();
-        ShokanKihonParameter par = ShokanKihonParameter.createSelectByKeyParam(
-                被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 0);
 
         if (削除.equals(処理モード)) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
@@ -678,37 +678,38 @@ public class ShokujiHiyoPanelHandler {
                 if (!shokanShokujiHiyoList.isEmpty()) {
                     ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
                     shokanShokujiHiyo = build食事費用登録1(shokanShokujiHiyo);
-                    SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                            .updShokanShokujiHiyo(shokanShokujiHiyo, null, par);
+                    shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
                 } else {
                     ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用登録1(paramter);
-                    SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                            .updShokanShokujiHiyo(shokanShokujiHiyo, null, par);
+                    shokanShokujiHiyoList.add(shokanShokujiHiyo);
                 }
 
             } else if (!サービス提供年月.isEmpty() && 平成１５年３月.isBefore(サービス提供年月)
                     && サービス提供年月.isBeforeOrEquals(平成17年９月)) {
                 int max連番 = 0;
                 Map<RString, ShokanMeisai> map = new HashMap<>();
-                for (ShokanMeisai entity : shokanMeisaiList) {
-                    map.put(entity.get連番(), entity);
-                    if (max連番 < Integer.valueOf(entity.get連番().toString())) {
-                        max連番 = Integer.valueOf(entity.get連番().toString());
+                for (ShokanMeisai shokanMeisai : shokanMeisaiList) {
+                    map.put(shokanMeisai.get連番(), shokanMeisai);
+                    if (max連番 < Integer.valueOf(shokanMeisai.get連番().toString())) {
+                        max連番 = Integer.valueOf(shokanMeisai.get連番().toString());
                     }
                 }
-                List<ShokanMeisai> meisaiList = new ArrayList<>();
+
                 for (dgdShokuji_Row dgd : div.getPanelShokuji().getPanelShoikujiList().
                         getDgdShokuji().getDataSource()) {
                     if (RowState.Modified.equals(dgd.getRowState())) {
                         ShokanMeisai entityModified = map.get(dgd.getDefaultDataName6());
-                        entityModified = entityModified.createBuilderForEdit().build();
-                        entityModified = clearShokanMeisai(entityModified);
-                        entityModified = buildShokanMeisai(entityModified, dgd);
-                        meisaiList.add(entityModified);
+                        if (checkIsRealModified(entityModified, dgd)) {
+                            entityModified = entityModified.createBuilderForEdit().build();
+                            entityModified = clearShokanMeisai(entityModified);
+                            entityModified = buildShokanMeisai(entityModified, dgd);
+                            entityModified.modified();
+                        }
+                        meisaiListForUpd.add(entityModified);
                     } else if (RowState.Deleted.equals(dgd.getRowState())) {
                         ShokanMeisai entityDeleted = map.get(dgd.getDefaultDataName6());
                         entityDeleted = entityDeleted.deleted();
-                        meisaiList.add(entityDeleted);
+                        meisaiListForUpd.add(entityDeleted);
                     } else if (RowState.Added.equals(dgd.getRowState())) {
                         max連番 = max連番 + 1;
                         ShokanMeisai entityAdded = new ShokanMeisai(
@@ -720,37 +721,54 @@ public class ShokujiHiyoPanelHandler {
                                 明細番号,
                                 new RString(String.format(フォーマット.toString(), max連番))).createBuilderForEdit().build();
                         entityAdded = buildShokanMeisai(entityAdded, dgd);
-                        meisaiList.add(entityAdded);
+                        meisaiListForUpd.add(entityAdded);
                     } else {
                         ShokanMeisai entityUnchanged = map.get(dgd.getDefaultDataName6());
-                        meisaiList.add(entityUnchanged);
+                        meisaiListForUpd.add(entityUnchanged);
                     }
                 }
                 if (!shokanShokujiHiyoList.isEmpty()) {
                     ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
                     shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
-                    SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                            .updShokanShokujiHiyo(shokanShokujiHiyo, meisaiList, par);
+                    shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
                 } else {
                     ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用合計設定(paramter);
-                    SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                            .updShokanShokujiHiyo(shokanShokujiHiyo, meisaiList, par);
+                    shokanShokujiHiyoList.add(shokanShokujiHiyo);
                 }
 
             } else if (!サービス提供年月.isEmpty() && 平成17年１０月.isBeforeOrEquals(サービス提供年月)) {
                 if (!shokanShokujiHiyoList.isEmpty()) {
                     ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
                     shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
-                    SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                            .updShokanShokujiHiyo(shokanShokujiHiyo, null, par);
+                    shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
                 } else {
                     ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用合計設定(paramter);
                     shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
-                    SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                            .updShokanShokujiHiyo(shokanShokujiHiyo, null, par);
+                    shokanShokujiHiyoList.add(shokanShokujiHiyo);
                 }
             }
         }
+        ShokujiHiyoUpdateData 更新用データ = new ShokujiHiyoUpdateData();
+        更新用データ.set償還払請求明細データ(toShokanMeisaiResultList(meisaiListForUpd));
+        更新用データ.set償還払請求食事費用データ(shokanShokujiHiyoList);
+        return 更新用データ;
+    }
+
+    public List<ShokanMeisaiResult> toShokanMeisaiResultList(List<ShokanMeisai> shokanMeisaiList) {
+        List<ShokanMeisaiResult> shokanMeisaiResultList = new ArrayList();
+        for (ShokanMeisai shokanMeisai : shokanMeisaiList) {
+            shokanMeisaiResultList.add(new ShokanMeisaiResult(shokanMeisai, null));
+        }
+        return shokanMeisaiResultList;
+    }
+
+    private boolean checkIsRealModified(ShokanMeisai shokanMeisai, dgdShokuji_Row dgd) {
+        RString serviceCodeShuruyi = new RString(dgd.getDefaultDataName2().subSequence(ZERO, TWO).toString());
+        RString serviceCodeKoumoku = new RString(dgd.getDefaultDataName2().subSequence(THREE, SEVEN).toString());
+        return !shokanMeisai.getサービス種類コード().value().equals(serviceCodeShuruyi)
+                || !shokanMeisai.getサービス項目コード().value().equals(serviceCodeKoumoku)
+                || shokanMeisai.get単位数() != dgd.getDefaultDataName3().getValue().intValue()
+                || shokanMeisai.get日数_回数() != Integer.parseInt(dgd.getDefaultDataName4().toString());
 
     }
 
@@ -948,21 +966,21 @@ public class ShokujiHiyoPanelHandler {
                 事業者番号,
                 様式番号,
                 明細番号,
-                連番).createBuilderForEdit().set食事提供延べ日数(
-                        div.getPanelShokuji().getPanelDetailGokei()
-                        .getTxtTeikyouHisu().getValue().intValue())
-                .set標準負担額_日額(
-                        div.getPanelShokuji().getPanelDetailGokei()
-                        .getTxtHigaku().getValue().intValue())
-                .set標準負担額_月額(
-                        div.getPanelShokuji().getPanelDetailGokei()
-                        .getTxtGetsugaku().getValue().intValue())
-                .set食事提供費合計(
-                        div.getPanelShokuji().getPanelDetailGokei()
-                        .getTxtTeikyohiGokei().getValue().intValue())
-                .set食事提供費請求額(
-                        div.getPanelShokuji().getPanelDetailGokei()
-                        .getTxtShokujiShiseigaku().getValue().intValue())
+                連番).createBuilderForEdit().set食事提供延べ日数(div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyouHisu().getValue() != null
+                        ? div.getPanelShokuji().getPanelDetailGokei()
+                        .getTxtTeikyouHisu().getValue().intValue() : 0)
+                .set標準負担額_日額(div.getPanelShokuji().getPanelDetailGokei().getTxtHigaku().getValue() != null
+                        ? div.getPanelShokuji().getPanelDetailGokei()
+                        .getTxtHigaku().getValue().intValue() : 0)
+                .set標準負担額_月額(div.getPanelShokuji().getPanelDetailGokei().getTxtGetsugaku().getValue() != null
+                        ? div.getPanelShokuji().getPanelDetailGokei()
+                        .getTxtGetsugaku().getValue().intValue() : 0)
+                .set食事提供費合計(div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyohiGokei().getValue() != null
+                        ? div.getPanelShokuji().getPanelDetailGokei()
+                        .getTxtTeikyohiGokei().getValue().intValue() : 0)
+                .set食事提供費請求額(div.getPanelShokuji().getPanelDetailGokei().getTxtShokujiShiseigaku().getValue() != null
+                        ? div.getPanelShokuji().getPanelDetailGokei()
+                        .getTxtShokujiShiseigaku().getValue().intValue() : 0)
                 .build();
         return shokanShokujiHiyo;
     }
