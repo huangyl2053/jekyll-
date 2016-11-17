@@ -49,4 +49,19 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranItem {
     private RString listLower_5;
     private RString listLower_6;
 
+    private RString banchiCode;
+    private RString choikiCode;
+    private RString gyoseikuCode;
+    private RString chikuCode1;
+    private RString chikuCode2;
+    private RString chikuCode3;
+    private RString shikibetsuCode;
+    private RString kanaMeisho;
+    private RString hihokenshaNo;
+    private RString nenkinCode;
+    private RString nokumiCode;
+    private RString seihoFlag;
+    private RString seinengappiYMD;
+    private RString seibetsuCode;
+
 }

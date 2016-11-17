@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.karisantei.IdoKarisanteigakuTs
 import jp.co.ndensan.reams.db.dbb.business.report.ketteitsuchisho.KaigoHokenHokenryogakuKetteiTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiProperty.BreakerFieldsEnum;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiKetteiTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsuKomokuHenshu;
@@ -513,15 +513,15 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
      * 特徴開始通知書(仮算定）の発行メソッドです。
      *
      * @param result HonsanteiIdoGennendoTsuchisyoIkatsuHakoResult
-     * @param 編集後仮算定通知書共通情報List List<EditedKariSanteiTsuchiShoKyotsu>
+     * @param 編集後仮算定通知書共通情報List List<EditedKariSanteiTsuchiShoKyotsuInfo>
      * @param 総ページ数 int
      */
     public void publish特徴開始通知仮算定(HonsanteiIdoGennendoTsuchisyoIkatsuHakoResult result,
-            List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List, int 総ページ数) {
+            List<EditedKariSanteiTsuchiShoKyotsuInfo> 編集後仮算定通知書共通情報List, int 総ページ数) {
 
         publish特別徴収開始通知書仮算定発行一覧表(result.get調定年度(), result.get帳票作成日時().getRDateTime(), 編集後仮算定通知書共通情報List);
         new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService()
-                .printSingle(編集後仮算定通知書共通情報List, result.get出力順ID(),
+                .printKariSantei(編集後仮算定通知書共通情報List, result.get出力順ID(),
                         result.get調定年度(), result.get帳票作成日時());
         loadバッチ出力条件リスト(result.get出力条件リスト(), result.get帳票ID(),
                 new RString(総ページ数), CSV出力有無_あり, CSVファイル名_特徴一覧表, result.get帳票名());

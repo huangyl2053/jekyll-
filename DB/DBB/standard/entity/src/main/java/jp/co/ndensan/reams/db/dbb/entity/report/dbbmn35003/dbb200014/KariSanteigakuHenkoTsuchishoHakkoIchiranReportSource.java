@@ -70,6 +70,35 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource implements IRe
     public RString listLower_5;
     @ReportItem(name = "listLower_6", length = 38, order = 29)
     public RString listLower_6;
+
+    @ReportItem(name = "choikiCode", length = 15, order = 30)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 15, order = 31)
+    public RString gyoseikuCode;
+    @ReportItem(name = "chikuCode1", length = 15, order = 32)
+    public RString chikuCode1;
+    @ReportItem(name = "chikuCode2", length = 15, order = 33)
+    public RString chikuCode2;
+    @ReportItem(name = "chikuCode3", length = 15, order = 34)
+    public RString chikuCode3;
+    @ReportItem(name = "shikibetsuCode", length = 15, order = 35)
+    public RString shikibetsuCode;
+    @ReportItem(name = "kanaMeisho", length = 30, order = 36)
+    public RString kanaMeisho;
+    @ReportItem(name = "hihokenshaNo", length = 15, order = 37)
+    public RString hihokenshaNo;
+    @ReportItem(name = "nenkinCode", length = 15, order = 38)
+    public RString nenkinCode;
+    @ReportItem(name = "nokumiCode", length = 15, order = 39)
+    public RString nokumiCode;
+    @ReportItem(name = "seihoFlag", length = 15, order = 40)
+    public RString seihoFlag;
+    @ReportItem(name = "banchiCode", length = 30, order = 41)
+    public RString banchiCode;
+    @ReportItem(name = "seinengappiYMD", length = 30, order = 42)
+    public RString seinengappiYMD;
+    @ReportItem(name = "seibetsuCode", length = 30, order = 43)
+    public RString seibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
