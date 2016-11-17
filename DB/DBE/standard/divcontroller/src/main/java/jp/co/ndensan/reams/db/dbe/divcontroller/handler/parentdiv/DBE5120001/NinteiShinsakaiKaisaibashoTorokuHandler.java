@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
@@ -101,11 +102,21 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
     public void set開催場所一覧の削除() {
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
         dgKaisaibashoIchiran_Row clickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
-        if (追加モード.equals(clickedItem.getJyotai())) {
-            rowList.remove(div.getDgKaisaibashoIchiran().getClickedRowId());
-        } else {
-            clickedItem.setJyotai(削除);
+        if (削除モード.equals(clickedItem.getJyotai())) {
+            clear開催場所編集エリア();
+            clickedItem.setJyotai(RString.EMPTY);
+            clickedItem.setModifyButtonState(DataGridButtonState.Enabled);
             rowList.set(div.getDgKaisaibashoIchiran().getClickedRowId(), clickedItem);
+        } else {
+            if (追加モード.equals(clickedItem.getJyotai())) {
+                rowList.remove(div.getDgKaisaibashoIchiran().getClickedRowId());
+            } else {
+                clickedItem.setJyotai(削除);
+                clear開催場所編集エリア();
+                set開催場所編集エリア非活性();
+                clickedItem.setModifyButtonState(DataGridButtonState.Disabled);
+                rowList.set(div.getDgKaisaibashoIchiran().getClickedRowId(), clickedItem);
+            }
         }
         div.getDgKaisaibashoIchiran().setDataSource(rowList);
     }
