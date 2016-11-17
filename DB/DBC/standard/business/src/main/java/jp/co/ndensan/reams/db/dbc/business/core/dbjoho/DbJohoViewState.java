@@ -82,6 +82,9 @@ public class DbJohoViewState implements Serializable {
             RString 様式番号,
             RString 明細番号) {
         List<ShokanServicePlan200904Result> entity200904ResultList = new ArrayList<>();
+        if (null == 償還払請求サービス計画200904データResultList) {
+            return entity200904ResultList;
+        }
         for (ShokanServicePlan200904Result entity200904Result : 償還払請求サービス計画200904データResultList) {
             if (被保険者番号.equals(entity200904Result.getEntity().get被保険者番号())
                     && サービス年月.equals(entity200904Result.getEntity().getサービス提供年月())
@@ -101,6 +104,9 @@ public class DbJohoViewState implements Serializable {
      * @param entity200904ResultList 200904データResultList
      */
     public void add償還払請求サービス計画200904データResult(List<ShokanServicePlan200904Result> entity200904ResultList) {
+        if (null == 償還払請求サービス計画200904データResultList) {
+            償還払請求サービス計画200904データResultList = new ArrayList<>();
+        }
         償還払請求サービス計画200904データResultList.addAll(entity200904ResultList);
     }
 
@@ -122,6 +128,9 @@ public class DbJohoViewState implements Serializable {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) {
+        if (null == 償還払請求サービス計画200604データResultList) {
+            return null;
+        }
         for (ShokanServicePlan200604Result entity200604Result : 償還払請求サービス計画200604データResultList) {
             if (被保険者番号.equals(entity200604Result.getEntity().get被保険者番号())
                     && サービス年月.equals(entity200604Result.getEntity().getサービス提供年月())
@@ -141,6 +150,12 @@ public class DbJohoViewState implements Serializable {
      * @param entity200604Result 200604データResult
      */
     public void add償還払請求サービス計画200604データResult(ShokanServicePlan200604Result entity200604Result) {
+        if (null == entity200604Result) {
+            return;
+        }
+        if (null == 償還払請求サービス計画200604データResultList) {
+            償還払請求サービス計画200604データResultList = new ArrayList<>();
+        }
         償還払請求サービス計画200604データResultList.add(entity200604Result);
     }
 
@@ -162,6 +177,9 @@ public class DbJohoViewState implements Serializable {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) {
+        if (null == 償還払請求サービス計画200004データResultList) {
+            return null;
+        }
         for (ShokanServicePlan200004Result entity200004Result : 償還払請求サービス計画200004データResultList) {
             if (被保険者番号.equals(entity200004Result.getEntity().get被保険者番号())
                     && サービス年月.equals(entity200004Result.getEntity().getサービス提供年月())
@@ -181,6 +199,12 @@ public class DbJohoViewState implements Serializable {
      * @param entity200004Result 200004データResult
      */
     public void add償還払請求サービス計画200004データResult(ShokanServicePlan200004Result entity200004Result) {
+        if (null == entity200004Result) {
+            return;
+        }
+        if (null == 償還払請求サービス計画200004データResultList) {
+            償還払請求サービス計画200004データResultList = new ArrayList<>();
+        }
         償還払請求サービス計画200004データResultList.add(entity200004Result);
     }
 }
