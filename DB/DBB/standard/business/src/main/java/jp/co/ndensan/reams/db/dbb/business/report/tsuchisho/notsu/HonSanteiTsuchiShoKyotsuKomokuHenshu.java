@@ -103,14 +103,12 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         Decimal 特徴今後納付すべき額;
         Decimal 既に納付すべき額;
         Decimal 今後納付すべき額;
-        Decimal 納付済額;
         if (本算定通知書情報.get普徴納期情報リスト() == null) {
             本算定通知書情報.set普徴納期情報リスト(Collections.EMPTY_LIST);
         }
         if (本算定通知書情報.get特徴納期情報リスト() == null) {
             本算定通知書情報.set特徴納期情報リスト(Collections.EMPTY_LIST);
         }
-        FukaJoho 賦課情報_更正後 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
         if (GennenKanen.現年度.equals(現年度_過年度区分)) {
             List<NokiJoho> 普徴納期情報リスト = 本算定通知書情報.get普徴納期情報リスト();
             int 普徴_最初期 = 0;
@@ -145,13 +143,13 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 }
             }
 
-            特徴納付済額_未到来期含む = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_納付済期);
-            特徴納付済額_未到来期含まない = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_最大期);
+            特徴納付済額_未到来期含まない = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_納付済期);
+            特徴納付済額_未到来期含む = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_最大期);
             納付済額_未到来期含む = 普徴納付済額_未到来期含む.add(特徴納付済額_未到来期含む);
             納付済額_未到来期含まない = 普徴納付済額_未到来期含まない.add(特徴納付済額_未到来期含まない);
             未到来期の納付済額 = 納付済額_未到来期含む.subtract(納付済額_未到来期含まない);
             RString 普徴現在期 = new KoseiTsukiHantei().find更正月(本算定通知書情報.get発行日()).get期();
-
+            FukaJoho 賦課情報_更正後 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
             RString 月 = new RString(本算定通知書情報.get発行日().getMonthValue());
             RString 特徴現在期 = new TokuchoKiUtil().get期月リスト().get月の期(Tsuki.toValue(月.padZeroToLeft(2))).get期();
             if (本算定通知書情報.get賦課の情報_更正前() != null) {
@@ -166,16 +164,17 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 特徴今後納付すべき額 = Decimal.ZERO;
             }
             RString 普徴最終期 = new FuchoKiUtil().get期月リスト().get最終法定納期().get期();
-            納付済額 = get普徴納付済額(賦課情報_更正後, 1, Integer.parseInt(普徴最終期.toString()));
+            Decimal 納付済額 = get普徴納付済額(賦課情報_更正後, 1, Integer.parseInt(普徴最終期.toString()));
             普徴今後納付すべき額_調定元に = 納付済額.subtract(普徴既に納付すべき額);
             普徴今後納付すべき額_収入元に = 納付済額.subtract(普徴納付済額_未到来期含む);
             特徴今後納付すべき額 = get特徴納付済額(賦課情報_更正後, 1, SIZE_6).subtract(特徴既に納付すべき額);
             既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
-            今後納付すべき額 = 普徴今後納付すべき額_調定元に.add(特徴今後納付すべき額);
+//            今後納付すべき額 = 普徴今後納付すべき額_調定元に.add(特徴今後納付すべき額);
+            今後納付すべき額 = 納付済額.add(get特徴納付済額(賦課情報_更正後, 1, SIZE_6)).subtract(納付済額_未到来期含む);
         } else {
             Decimal 普徴納付済額 = get普徴納付済額(本算定通知書情報.get収入情報(), 1, SIZE_14);
             Decimal 特徴納付済額 = get特徴納付済額(本算定通知書情報.get収入情報(), 1, SIZE_6);
-            納付済額 = 普徴納付済額.add(特徴納付済額);
+            Decimal 納付済額 = 普徴納付済額.add(特徴納付済額);
 
             普徴納付済額_未到来期含まない = 普徴納付済額;
             普徴納付済額_未到来期含む = 普徴納付済額;
@@ -192,8 +191,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
             今後納付すべき額 = 普徴今後納付すべき額_収入元に;
         }
-//        既に納付すべき額 = get納付済額(賦課情報_更正後);
-        今後納付すべき額 = get特徴納付済額(賦課情報_更正後, 1, SIZE_6).add(納付済額).subtract(既に納付すべき額);
+
         FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
         EditedHonSanteiTsuchiShoKyotsu shoKyotsu = new EditedHonSanteiTsuchiShoKyotsu();
         shoKyotsu.set被保険者番号(賦課情報.get被保険者番号());
@@ -240,17 +238,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         return shoKyotsu;
     }
 
-//    private Decimal get納付済額(FukaJoho fukaJoho) {
-//        Decimal sum = Decimal.ZERO;
-//        for (long 収納ID : fukaJoho.get収納ID()) {
-//            Shuno 収納 = ShunoManager.createInstance().get収納(収納ID);
-//            if (null == 収納 || null == 収納.get収入合計情報()) {
-//                continue;
-//            }
-//            sum = sum.add(収納.get収入合計情報().get本税());
-//        }
-//        return sum;
-//    }
     private void edit編集後本算定通知書共通情報(HonSanteiTsuchiShoKyotsu 本算定通知書情報, EditedHonSanteiTsuchiShoKyotsu shoKyotsu) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(本算定通知書情報.get賦課の情報_更正後().get宛名().toEntity());
         EditedKojin editedKojin = new EditedKojin(kojin, 本算定通知書情報.get帳票制御共通(), 本算定通知書情報.get地方公共団体());
