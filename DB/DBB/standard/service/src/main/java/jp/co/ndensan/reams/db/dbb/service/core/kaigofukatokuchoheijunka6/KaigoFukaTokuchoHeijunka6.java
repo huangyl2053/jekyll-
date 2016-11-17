@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka6.ShorijyokyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.HeijunkaKeisanPageJoho;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001.DBB012001_TokuchoHeinjunka6GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001.DBB012001_TokuchoHeinjunka6GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6.ShorijyokyoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KaigoFukaTokuchoHeijunka6 {
 
     private static final RString 帳票分類ＩＤ_DBB100012 = new RString("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
+    private static final RString 帳票分類ＩＤ_DBB100010 = new RString("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final RString 項目名 = new RString("通知書タイプ");
     private static final RString 標準版B5横タイプ = new RString("001");
     private static final RString 標準版A4縦タイプ = new RString("002");
@@ -75,7 +76,7 @@ public class KaigoFukaTokuchoHeijunka6 {
         for (OutputChohyoIchiran shuturyokuChohuo : pageData.get出力帳票一覧List()) {
             if (帳票分類ＩＤ_DBB100012.equals(shuturyokuChohuo.get帳票分類ID())) {
                 DbT7067ChohyoSeigyoHanyoEntity dbT7067ChohyoSeigyoHanyoEntity
-                        = get帳票制御汎用キー(SubGyomuCode.DBB介護賦課, new ReportId(shuturyokuChohuo.get帳票分類ID()), pageData.get調定年度(), 項目名);
+                        = get帳票制御汎用キー(SubGyomuCode.DBB介護賦課, new ReportId(帳票分類ＩＤ_DBB100010), pageData.get調定年度(), 項目名);
                 RString komokuValue = RString.EMPTY;
                 if (dbT7067ChohyoSeigyoHanyoEntity != null) {
                     komokuValue = dbT7067ChohyoSeigyoHanyoEntity.getKomokuValue();
@@ -113,7 +114,7 @@ public class KaigoFukaTokuchoHeijunka6 {
         for (OutputChohyoIchiran shuturyokuChohuo : pageData.get出力帳票一覧List()) {
             if (帳票分類ＩＤ_DBB100012.equals(shuturyokuChohuo.get帳票分類ID())) {
                 DbT7067ChohyoSeigyoHanyoEntity dbT7067ChohyoSeigyoHanyoEntity
-                        = get帳票制御汎用キー(SubGyomuCode.DBB介護賦課, new ReportId(shuturyokuChohuo.get帳票分類ID()), pageData.get調定年度(), 項目名);
+                        = get帳票制御汎用キー(SubGyomuCode.DBB介護賦課, new ReportId(帳票分類ＩＤ_DBB100010), pageData.get調定年度(), 項目名);
                 RString komokuValue = RString.EMPTY;
                 if (dbT7067ChohyoSeigyoHanyoEntity != null) {
                     komokuValue = dbT7067ChohyoSeigyoHanyoEntity.getKomokuValue();
