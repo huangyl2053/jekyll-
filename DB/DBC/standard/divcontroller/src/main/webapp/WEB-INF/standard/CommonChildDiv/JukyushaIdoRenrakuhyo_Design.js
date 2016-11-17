@@ -28,6 +28,10 @@ var DBC;
                 return "onBeforeOpenDialog_btnSearch";
             };
 
+            Events.onClick_radTokuteiNyushoshaNinteiShinseichuKubun = function () {
+                return "onClick_radTokuteiNyushoshaNinteiShinseichuKubun";
+            };
+
             Events.onClick_radNijiyoboJigyoKubun = function () {
                 return "onClick_radNijiyoboJigyoKubun";
             };
@@ -133,6 +137,10 @@ var DBC;
 
             Controls.prototype.txtShinseiYMD = function () {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiYMD"));
+            };
+
+            Controls.prototype.spc01 = function () {
+                return new UZA.Space(this.convFiledName("spc01"));
             };
 
             Controls.prototype.radShinseiShubetsu = function () {
@@ -247,10 +255,6 @@ var DBC;
                 return new UZA.Panel(this.convFiledName("GemmenGengakuPanel"));
             };
 
-            Controls.prototype.radGemmenShinseichuKubun = function () {
-                return new UZA.RadioButton(this.convFiledName("radGemmenShinseichuKubun"));
-            };
-
             Controls.prototype.btnGemmenGengakuRireki = function () {
                 return new UZA.ButtonDialog(this.convFiledName("btnGemmenGengakuRireki"));
             };
@@ -259,8 +263,16 @@ var DBC;
                 return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoGemmenGengakuSub"));
             };
 
+            Controls.prototype.GemmenGengakuRightPanel = function () {
+                return new UZA.Panel(this.convFiledName("GemmenGengakuRightPanel"));
+            };
+
             Controls.prototype.JukyushaIdoRenrakuhyoRiyoshaFutan = function () {
                 return new UZA.Panel(this.convFiledName("JukyushaIdoRenrakuhyoRiyoshaFutan"));
+            };
+
+            Controls.prototype.radGemmenShinseichuKubun = function () {
+                return new UZA.RadioButton(this.convFiledName("radGemmenShinseichuKubun"));
             };
 
             Controls.prototype.radRiyoshaFutanKubunCode = function () {
@@ -327,36 +339,12 @@ var DBC;
                 return new UZA.TextBoxDateRange(this.convFiledName("txtFutanGendogakuTekiyoYMD"));
             };
 
-            Controls.prototype.lblKyojuhiFutanGendogaku = function () {
-                return new UZA.Label(this.convFiledName("lblKyojuhiFutanGendogaku"));
-            };
-
             Controls.prototype.lin1 = function () {
                 return new UZA.HorizontalLine(this.convFiledName("lin1"));
             };
 
-            Controls.prototype.txtJuraigataKoshitsuTokuyoFutanGendogaku = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtJuraigataKoshitsuTokuyoFutanGendogaku"));
-            };
-
-            Controls.prototype.txtKyotakuhiShin1FutanGendogaku = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtKyotakuhiShin1FutanGendogaku"));
-            };
-
-            Controls.prototype.txtJuraigataKoshitsuRokenRyoyoFutanGendogaku = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtJuraigataKoshitsuRokenRyoyoFutanGendogaku"));
-            };
-
-            Controls.prototype.txtKyotakuhiShin2FutanGendogaku = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtKyotakuhiShin2FutanGendogaku"));
-            };
-
-            Controls.prototype.txtTashoshitsu = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtTashoshitsu"));
-            };
-
-            Controls.prototype.txtKyotakuhiShin3utanGendogaku = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtKyotakuhiShin3utanGendogaku"));
+            Controls.prototype.lblKyojuhiFutanGendogaku = function () {
+                return new UZA.Label(this.convFiledName("lblKyojuhiFutanGendogaku"));
             };
 
             Controls.prototype.txtUnitKoshitsuGendogaku = function () {
@@ -365,6 +353,30 @@ var DBC;
 
             Controls.prototype.txtUnitJunKoshitsuFutanGendogaku = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtUnitJunKoshitsuFutanGendogaku"));
+            };
+
+            Controls.prototype.txtJuraigataKoshitsuTokuyoFutanGendogaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtJuraigataKoshitsuTokuyoFutanGendogaku"));
+            };
+
+            Controls.prototype.txtJuraigataKoshitsuRokenRyoyoFutanGendogaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtJuraigataKoshitsuRokenRyoyoFutanGendogaku"));
+            };
+
+            Controls.prototype.txtTashoshitsu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtTashoshitsu"));
+            };
+
+            Controls.prototype.txtKyotakuhiShin1FutanGendogaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtKyotakuhiShin1FutanGendogaku"));
+            };
+
+            Controls.prototype.txtKyotakuhiShin2FutanGendogaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtKyotakuhiShin2FutanGendogaku"));
+            };
+
+            Controls.prototype.txtKyotakuhiShin3utanGendogaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtKyotakuhiShin3utanGendogaku"));
             };
 
             Controls.prototype.KokiKoureiIryoHokenshaPanel = function () {
@@ -403,12 +415,12 @@ var DBC;
                 return new UZA.Panel(this.convFiledName("KyufuSeigenPanel"));
             };
 
-            Controls.prototype.radKohiFutanJogenGengakuAriFlag = function () {
-                return new UZA.RadioButton(this.convFiledName("radKohiFutanJogenGengakuAriFlag"));
-            };
-
             Controls.prototype.btnKyufuSeigenRireki = function () {
                 return new UZA.ButtonDialog(this.convFiledName("btnKyufuSeigenRireki"));
+            };
+
+            Controls.prototype.radKohiFutanJogenGengakuAriFlag = function () {
+                return new UZA.RadioButton(this.convFiledName("radKohiFutanJogenGengakuAriFlag"));
             };
 
             Controls.prototype.txtShokanbaraikaYMD = function () {

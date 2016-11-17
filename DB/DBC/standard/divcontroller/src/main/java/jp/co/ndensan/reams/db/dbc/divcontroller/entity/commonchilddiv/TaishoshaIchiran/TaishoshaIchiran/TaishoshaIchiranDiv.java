@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
  * @reamsid_L DBC-4471-010 xupeng
  */
 public class TaishoshaIchiranDiv extends Panel implements ITaishoshaIchiranDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
