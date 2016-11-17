@@ -89,7 +89,7 @@ public class ServiceNoKanribangouRendou {
     private static final RString 定値_2 = new RString("2");
     private static final RString 定値_3 = new RString("3");
     private static final RString 定値_4 = new RString("4");
-    private static final RString 全角のコンマ = new RString("，");
+    private static final RString 全角のコンマ = new RString("、");
     private static final RString 定値_する = new RString("する");
     private static final RString 定値_しない = new RString("しない");
     private static final RString 定値_支給金額 = new RString("支給金額");
@@ -228,7 +228,7 @@ public class ServiceNoKanribangouRendou {
             if (事業高額介護サービス費支給情報.get本人支払額() != null) {
                 決定通知書Entity.set本人支払額(toDecimal(事業高額介護サービス費支給情報.get本人支払額()));
             }
-            set給付の種類(決定通知書Entity, 事業高額介護サービス費支給情報.get審査方法区分(), param);
+            set給付の種類(決定通知書Entity, param);
             if (ShikyuKubun.支給.getコード().equals(事業高額介護サービス費支給情報.get支給区分コード())) {
                 決定通知書Entity.set支給(定値_する);
                 決定通知書Entity.set理由ﾀｲﾄﾙ(定値_増減の理由);
@@ -373,8 +373,7 @@ public class ServiceNoKanribangouRendou {
         }
     }
 
-    private void set給付の種類(JigyouKetteiTutisyoEntity 決定通知書Entity,
-            RString 審査方法区分, JigyouKetteiTutisyoParameter param) {
+    private void set給付の種類(JigyouKetteiTutisyoEntity 決定通知書Entity, JigyouKetteiTutisyoParameter param) {
         IServiceNoKanribangouRendouMapper mapper = mapperProvider.create(IServiceNoKanribangouRendouMapper.class);
         List<DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity> 対象者明細 = mapper.get対象者明細情報(param);
         if (対象者明細 == null || 対象者明細.isEmpty()) {
