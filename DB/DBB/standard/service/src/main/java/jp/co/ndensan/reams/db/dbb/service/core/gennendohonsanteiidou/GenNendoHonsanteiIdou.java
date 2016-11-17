@@ -793,7 +793,11 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 調定計算.get徴収方法の情報().toEntity();
         dbT2001ChoshuHohoEntity.setRirekiNo(調定計算.get徴収方法の情報().get履歴番号() + INT_1);
         dbT2001ChoshuHohoEntity.setState(EntityDataState.Added);
-        徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+        DbT2001ChoshuHohoEntity entity = 徴収方法Dac.selectByKey(dbT2001ChoshuHohoEntity.getFukaNendo(),
+                dbT2001ChoshuHohoEntity.getHihokenshaNo(), 調定計算.get徴収方法の情報().get履歴番号() + INT_1);
+        if (entity == null) {
+            徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+        }
     }
 
     private void create既存の賦課処理(CalculateFukaEntity 賦課計算の情報, FukaKokyoBatchParameter fukaKokyoBatchParameter,
@@ -869,7 +873,11 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報.toEntity();
             dbT2001ChoshuHohoEntity.setRirekiNo(徴収方法の情報.get履歴番号() + INT_1);
             dbT2001ChoshuHohoEntity.setState(EntityDataState.Added);
-            徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+            DbT2001ChoshuHohoEntity entity = 徴収方法Dac.selectByKey(dbT2001ChoshuHohoEntity.getFukaNendo(),
+                    dbT2001ChoshuHohoEntity.getHihokenshaNo(), 徴収方法の情報.get履歴番号() + INT_1);
+            if (entity == null) {
+                徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+            }
         }
 
     }
