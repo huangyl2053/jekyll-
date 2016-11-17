@@ -67,6 +67,10 @@ public class MeisaiListCreateProcess extends BatchProcessBase<MeisaiRelateEntity
         明細データ.set後日数回数(entity.getDbt3018().getAtoNissuKaisu());
         明細データ.setサービス単位数(entity.getDbt3018().getServiceTanisu());
         明細データ.set後サービス単位数(entity.getDbt3018().getAtoServiceTanisu());
+        明細データ.set公費１対象日数回数(entity.getDbt3018().getKohi1TaishoNissuKaisu());
+        明細データ.set後公費１対象日数回数(entity.getDbt3018().getAtoKohi1TaishoNissuKaisu());
+        明細データ.set公費１対象サービス点数(entity.getDbt3018().getKohi1TaishoServiceTanisu());
+        明細データ.set後公費１対象サービス点数(entity.getDbt3018().getAtoKohi1TaishoServiceTanisu());
         明細データ.set公費２対象日数回数(entity.getDbt3018().getKohi2TaishoNissuKaisu());
         明細データ.set後公費２対象日数回数(entity.getDbt3018().getAtoKohi2TaishoNissukaisu());
         明細データ.set公費２対象サービス点数(entity.getDbt3018().getKohi2TaishoServiceTanisu());

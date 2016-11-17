@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoSyutuMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoData;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.CareManagementEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.HukushiYouguEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.JuutakuKaishuuEntity;
@@ -116,4 +118,12 @@ public interface IJukyushaTmpMapper {
      * @return List<KihonEntity>
      */
     List<KihonEntity> get給付実績高額();
+
+    /**
+     * 帳票データを取得します。
+     *
+     * @param param param
+     * @return 帳票データ
+     */
+    List<JukyushaKyufuJissekidaichoData> get帳票データ(JukyushaKyufujissekiDaichoSyutuMybatisParameter param);
 }

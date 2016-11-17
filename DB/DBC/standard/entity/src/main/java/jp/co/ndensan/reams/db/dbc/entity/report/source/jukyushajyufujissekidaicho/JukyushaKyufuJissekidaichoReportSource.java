@@ -822,6 +822,12 @@ public class JukyushaKyufuJissekidaichoReportSource implements IReportSource {
     public RString tekiyoS21;
     @ReportItem(name = "shoriYmdHms", length = 21, order = 405)
     public RString shoriYmdHms;
+    @ReportItem(name = "shichousonCode", length = 21, order = 406)
+    public RString shichousonCode;
+    @ReportItem(name = "inputShikibetsuNo", length = 22, order = 407)
+    public RString inputShikibetsuNo;
+    @ReportItem(name = "jigyoshoNo_No", length = 23, order = 408)
+    public RString jigyoshoNo_No;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
