@@ -40,7 +40,7 @@ public enum ServiceRiyohyoInfoDivValidationMessage implements IValidationMessage
     /**
      * 割引適用後率入力値が不正
      */
-    割引適用後率入力値が不正(UrErrorMessages.入力値が不正_追加メッセージあり, "割引適用後率：100％までの値を入力してください。"),
+    割引適用後率入力値が不正チェック(UrErrorMessages.入力値が不正_追加メッセージあり, "割引適用後率：100％までの値を入力してください。"),
     /**
      * 回数入力値が不正
      */

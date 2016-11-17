@@ -1084,7 +1084,10 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), 出力順ID);
+        IOutputOrder outputOrder = null;
+        if (出力順ID != null) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), 出力順ID);
+        }
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(KarisanteiIdoKekkaIchiranProperty.BreakerFieldsEnum.class,

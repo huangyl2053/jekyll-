@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 画面設計_DBCMNK2001_利用者負担割合即時更正_新規のハンドラクラスです。
@@ -58,6 +59,7 @@ public class PanelAllHandler {
     private static final RString 新年度 = new RString("新年度");
     private static final RString 現年度 = new RString("現年度");
     private static final RString 過年度 = new RString("過年度");
+    private static final RString 新規判定 = new RString("btnJikko");
 
     /**
      * コンストラクタです
@@ -84,6 +86,7 @@ public class PanelAllHandler {
         if (処理日付管理情報 == null || 処理日付管理情報.isEmpty()) {
             throw new ApplicationException(DbzErrorMessages.未実行.getMessage().replace(年次利用者負担割合判定を実行してください.toString()));
         } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(新規判定, false);
             for (ShoriDateKanri shoriDateKanri : 処理日付管理情報) {
                 keyValues.add(new KeyValueDataSource(new RString(
                         Integer.toString(shoriDateKanri.toEntity().getNendo().getYearValue())),

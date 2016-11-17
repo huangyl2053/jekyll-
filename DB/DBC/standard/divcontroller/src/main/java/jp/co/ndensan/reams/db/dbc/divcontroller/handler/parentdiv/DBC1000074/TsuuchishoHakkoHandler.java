@@ -94,10 +94,10 @@ public class TsuuchishoHakkoHandler {
         RDate 前回対象開始日時Temp = null;
         RDate 前回対象終了日時Temp = null;
         if (処理日付管理マスタ != null) {
-            if (処理日付管理マスタ.get対象開始日時() != null) {
+            if (処理日付管理マスタ.get対象開始日時() != null && !処理日付管理マスタ.get対象開始日時().isEmpty()) {
                 前回対象開始日時Temp = 処理日付管理マスタ.get対象開始日時().getDate();
             }
-            if (処理日付管理マスタ.get対象終了日時() != null) {
+            if (処理日付管理マスタ.get対象終了日時() != null && !処理日付管理マスタ.get対象終了日時().isEmpty()) {
                 前回対象終了日時Temp = 処理日付管理マスタ.get対象終了日時().getDate();
             }
         }

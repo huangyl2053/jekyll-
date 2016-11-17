@@ -104,7 +104,7 @@
       WHERE
       "mst"."hiHokenshaNo" = #{被保険者番号}
       AND #{サービス提供年月_開始} <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
-      AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月_開始}
+      AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月_終了}
       AND "mst"."shinsaYM" <![CDATA[<>]]> ''
       <if test="isKey0検索対象">
             AND "mst"."inputShikibetsuNo" not in ('71P1','8161') 
@@ -621,6 +621,245 @@ ORDER BY
       , "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceShuruiCode"
       , "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceKomokuCode"
     </select>
+    <select resultOrdered="true" id="get集計データ" resultMap="ResultMap_集計データ" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
+        
+        <include refid="withDbT3017KyufujissekiKihon" />
+            
+      SELECT
+     "集計対象"."serviceTeikyoYM" AS "serviceTeikyoYM"
+   , "集計対象"."serviceSyuruiCode" AS "serviceSyuruiCode"
+   , SUM("集計対象"."tanisu") AS "tanisu"
+   , SUM("集計対象"."dekidakaTanisu") AS "dekidakaTanisu"
+   , SUM("集計対象"."seikyugaku") AS "seikyugaku"
+   , SUM("集計対象"."riyoshaFutangaku") AS "riyoshaFutangaku"
+FROM 
+   (SELECT
+      "DbT3017KyufujissekiKihon"."serviceTeikyoYM" as "serviceTeikyoYM"
+      , "DbT3033KyufujissekiShukei"."serviceSyuruiCode" as "serviceSyuruiCode"
+      , CASE "DbT3033KyufujissekiShukei"."atoHokenTanisuTotal"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3033KyufujissekiShukei"."atoHokenTanisuTotal" END
+        END as "tanisu"
+      , CASE "DbT3033KyufujissekiShukei"."atoHokenDekidakaTanisuTotal"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3033KyufujissekiShukei"."atoHokenDekidakaTanisuTotal" END
+        END as "dekidakaTanisu"
+      , CASE "DbT3033KyufujissekiShukei"."atoHokenSeikyugaku"
+        WHEN null THEN 0 
+        WHEN ''   THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3033KyufujissekiShukei"."atoHokenSeikyugaku" :: integer END
+        END as "seikyugaku"
+      , CASE "DbT3033KyufujissekiShukei"."hokenRiyoshaFutangaku"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3033KyufujissekiShukei"."hokenRiyoshaFutangaku" END
+        END as "riyoshaFutangaku"
+    FROM
+      "給付実績" AS "DbT3017KyufujissekiKihon"
+    INNER JOIN
+       rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei" 
+    ON
+      "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3033KyufujissekiShukei"."inputShikibetsuNo"
+      and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3033KyufujissekiShukei"."hiHokenshaNo"
+      and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3033KyufujissekiShukei"."serviceTeikyoYM"
+      and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3033KyufujissekiShukei"."jigyoshoNo"
+      and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3033KyufujissekiShukei"."toshiNo"
+    UNION ALL
+    SELECT
+      "DbT3017KyufujissekiKihon"."serviceTeikyoYM" as "serviceTeikyoYM"
+      , substr("DbT3025KyufujissekiKyotakuService"."serviceCode",1,2) as "serviceSyuruiCode"
+      , CASE "DbT3025KyufujissekiKyotakuService"."atoTanisu"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3025KyufujissekiKyotakuService"."atoTanisu" END
+        END as "tanisu"
+      , 0 as "dekidakaTanisu"
+      , CASE "DbT3025KyufujissekiKyotakuService"."atoSeikyuKingaku"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3025KyufujissekiKyotakuService"."atoSeikyuKingaku" END
+        END as "seikyugaku"
+      , 0 as "riyoshaFutangaku"
+    FROM
+      "給付実績" AS "DbT3017KyufujissekiKihon"
+    INNER JOIN
+      rgdb."DbT3025KyufujissekiKyotakuService" AS "DbT3025KyufujissekiKyotakuService" 
+    ON
+      "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3025KyufujissekiKyotakuService"."inputShikibetsuNo"
+      and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3025KyufujissekiKyotakuService"."hiHokenshaNo"
+      and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM"
+      and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3025KyufujissekiKyotakuService"."jigyoshoNo"
+      and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3025KyufujissekiKyotakuService"."toshiNo"
+    UNION ALL
+    SELECT
+      "DbT3028KyufujissekiKogakuKaigoServicehi"."serviceTeikyoYM" as "serviceTeikyoYM"
+      , '' as "serviceSyuruiCode"
+      , 0 as "tanisu"
+      , 0 as "dekidakaTanisu"
+      , CASE "DbT3028KyufujissekiKogakuKaigoServicehi"."shikyugaku"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3028KyufujissekiKogakuKaigoServicehi"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3028KyufujissekiKogakuKaigoServicehi"."shikyugaku" END
+        END as "seikyugaku"
+      , 0 as "riyoshaFutangaku"
+    FROM
+    (SELECT
+          "mst".*
+     FROM
+          rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS "mst"
+     WHERE
+          "mst"."hiHokenshaNo" = '0000562408' 
+      AND '200004' <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
+      AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> '201703'
+      AND "mst"."shinsaYM" <![CDATA[<>]]> ''
+      AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS "slv"
+          WHERE
+                "mst"."inputShikibetsuNo" = "slv"."inputShikibetsuNo"
+            AND "mst"."hiHokenshaNo" = "slv"."hiHokenshaNo"
+            AND "mst"."serviceTeikyoYM" = "slv"."serviceTeikyoYM"
+            AND "mst"."seiriNo" = "slv"."seiriNo"
+            AND "slv"."shinsaYM" <![CDATA[<>]]> ''
+            AND (("mst"."shinsaYM" <![CDATA[<]]> "slv"."shinsaYM")
+             OR  ("mst"."shinsaYM" = "slv"."shinsaYM"
+            AND   "slv"."kyufuSakuseiKubunCode" <![CDATA[<]]> "mst"."kyufuSakuseiKubunCode")))
+   ) AS "DbT3028KyufujissekiKogakuKaigoServicehi" 
+   ) AS "集計対象"
+GROUP BY 
+     "serviceTeikyoYM"
+   , "serviceSyuruiCode"
+ORDER BY
+     "serviceTeikyoYM" DESC
+   , "serviceSyuruiCode" 
+
+    </select>
+    
+    <select resultOrdered="true" id="get集計データ_経過措置" resultMap="ResultMap_集計データ" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
+        
+        <include refid="withDbT3017KyufujissekiKihon" />
+            
+      SELECT
+     "集計対象"."serviceTeikyoYM" AS "serviceTeikyoYM"
+   , "集計対象"."serviceSyuruiCode" AS "serviceSyuruiCode"
+   , SUM("集計対象"."tanisu") AS "tanisu"
+   , SUM("集計対象"."dekidakaTanisu") AS "dekidakaTanisu"
+   , SUM("集計対象"."seikyugaku") AS "seikyugaku"
+   , SUM("集計対象"."riyoshaFutangaku") AS "riyoshaFutangaku"
+FROM
+   (SELECT
+      "DbT3017KyufujissekiKihon"."serviceTeikyoYM" as "serviceTeikyoYM"
+      , "DbT3033KyufujissekiShukei"."serviceSyuruiCode" as "serviceSyuruiCode"
+      , CASE "DbT3033KyufujissekiShukei"."atoHokenTanisuTotal"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3033KyufujissekiShukei"."atoHokenTanisuTotal" END
+        END as "tanisu"
+      , CASE "DbT3033KyufujissekiShukei"."atoHokenDekidakaTanisuTotal"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3033KyufujissekiShukei"."atoHokenDekidakaTanisuTotal" END
+        END as "dekidakaTanisu"
+      , CASE "DbT3033KyufujissekiShukei"."atoHokenSeikyugaku"
+        WHEN null THEN 0 
+        WHEN ''   THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3033KyufujissekiShukei"."atoHokenSeikyugaku" :: integer END
+        END as "seikyugaku"
+      , CASE "DbT3033KyufujissekiShukei"."hokenRiyoshaFutangaku"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3033KyufujissekiShukei"."hokenRiyoshaFutangaku" END
+        END as "riyoshaFutangaku"
+    FROM
+      "給付実績" AS "DbT3017KyufujissekiKihon"
+    INNER JOIN
+       rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei" 
+    ON
+      "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3033KyufujissekiShukei"."inputShikibetsuNo"
+      and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3033KyufujissekiShukei"."hiHokenshaNo"
+      and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3033KyufujissekiShukei"."serviceTeikyoYM"
+      and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3033KyufujissekiShukei"."jigyoshoNo"
+      and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3033KyufujissekiShukei"."toshiNo"
+    UNION ALL
+    SELECT
+      "DbT3017KyufujissekiKihon"."serviceTeikyoYM" as "serviceTeikyoYM"
+      , substr("DbT3031KyufuJissekiCareManagementHi"."serviceCode",1,2) as "serviceSyuruiCode"
+      , CASE "DbT3031KyufuJissekiCareManagementHi"."atoTanisu"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3031KyufuJissekiCareManagementHi"."atoTanisu" END
+        END as "tanisu"
+      , 0 as "dekidakaTanisu"
+      , CASE "DbT3031KyufuJissekiCareManagementHi"."atoSeikyuKingaku"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3031KyufuJissekiCareManagementHi"."atoSeikyuKingaku" END
+        END as "seikyugaku"
+      , CASE "DbT3031KyufuJissekiCareManagementHi"."riyoushaFutangaku"
+        WHEN null THEN 0 
+        ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3031KyufuJissekiCareManagementHi"."riyoushaFutangaku" END
+        END as "riyoshaFutangaku"
+    FROM
+      "給付実績" AS "DbT3017KyufujissekiKihon"
+    INNER JOIN
+      rgdb."DbT3031KyufuJissekiCareManagementHi" AS "DbT3031KyufuJissekiCareManagementHi"
+    ON
+      "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3031KyufuJissekiCareManagementHi"."inputShikibetsuNo"
+      and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3031KyufuJissekiCareManagementHi"."hiHokenshaNo"
+      and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM"
+      and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3031KyufuJissekiCareManagementHi"."jigyoshoNo"
+      and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3031KyufuJissekiCareManagementHi"."toshiNo"
+   ) AS "集計対象"
+GROUP BY 
+     "serviceTeikyoYM"
+   , "serviceSyuruiCode"
+ORDER BY
+     "serviceTeikyoYM" DESC
+   , "serviceSyuruiCode"
+
+    </select>
+    
+    <resultMap id="ResultMap_集計データ" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiShukeiKekkaData" autoMapping="true">
+        <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="serviceSyuruiCode" column="serviceSyuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="tanisu" column="tanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="dekidakaTanisu" column="dekidakaTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="seikyugaku" column="seikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="riyoshaFutangaku" column="riyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
     
     <resultMap id="ResultMap_給付実績基本集計データ" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiKihonShukeiRelateEntity" autoMapping="true">
         <association property="給付実績基本データ" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>

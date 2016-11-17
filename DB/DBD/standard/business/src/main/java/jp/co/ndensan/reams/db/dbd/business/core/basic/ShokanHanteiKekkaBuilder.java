@@ -174,6 +174,54 @@ public class ShokanHanteiKekkaBuilder {
     }
 
     /**
+     * 前回支払金額を設定します。
+     *
+     * @param 前回支払金額 前回支払金額
+     * @return {@link ShokanHanteiKekkaBuilder}
+     */
+    public ShokanHanteiKekkaBuilder set前回支払金額(Decimal 前回支払金額) {
+        requireNonNull(前回支払金額, UrSystemErrorMessages.値がnull.getReplacedMessage("前回支払金額"));
+        entity.setZenkaiShiharaiKingaku(前回支払金額);
+        return this;
+    }
+
+    /**
+     * 差額金額合計を設定します。
+     *
+     * @param 差額金額合計 差額金額合計
+     * @return {@link ShokanHanteiKekkaBuilder}
+     */
+    public ShokanHanteiKekkaBuilder set差額金額合計(Decimal 差額金額合計) {
+        requireNonNull(差額金額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("差額金額合計"));
+        entity.setSagakuKingakuGokei(差額金額合計);
+        return this;
+    }
+
+    /**
+     * 決定通知Noを設定します。
+     *
+     * @param 決定通知No 決定通知No
+     * @return {@link ShokanHanteiKekkaBuilder}
+     */
+    public ShokanHanteiKekkaBuilder set決定通知No(RString 決定通知No) {
+        requireNonNull(決定通知No, UrSystemErrorMessages.値がnull.getReplacedMessage("決定通知No"));
+        entity.setKetteiTsuchiNo(決定通知No);
+        return this;
+    }
+
+    /**
+     * 振込明細書作成年月日を設定します。
+     *
+     * @param 振込明細書作成年月日 振込明細書作成年月日
+     * @return {@link ShokanHanteiKekkaBuilder}
+     */
+    public ShokanHanteiKekkaBuilder set振込明細書作成年月日(FlexibleDate 振込明細書作成年月日) {
+        requireNonNull(振込明細書作成年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("振込明細書作成年月日"));
+        entity.setFurikomiMeisaishoSakuseiYMD(振込明細書作成年月日);
+        return this;
+    }
+
+    /**
      * {@link ShokanHanteiKekka}のインスタンスを生成します。
      *
      * @return {@link ShokanHanteiKekka}のインスタンス

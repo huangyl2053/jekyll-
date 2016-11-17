@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakuserviceriyohyomain;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -27,7 +28,7 @@ public class KyotakuServiceRirekiEntity {
     private RString sakuseiKubunCode;
     private FlexibleDate tekiyoKaishiYMD;
     private FlexibleDate tekiyoShuryoYMD;
-    private FlexibleDate keikakuHenkoYMD;
+    private RDateTime updateYMD;
     private int rirekiSort;
     private RString sogoJigyoKubun;
 

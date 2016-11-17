@@ -47,18 +47,18 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
         }
     },
     /**
-     * サービス単位必須入力のチェックです。
+     * サービス種類必須入力のチェックです。
      */
-    サービス単位必須入力チェック {
+    サービス種類必須入力チェック {
         @Override
         public boolean apply(ServiceRiyohyoInfoDiv div) {
             return !RString.isNullOrEmpty(div.getCcdServiceTypeInput().getサービス種類コード());
         }
     },
     /**
-     * サービス種類必須入力のチェックです。
+     * サービス単位必須入力のチェックです。
      */
-    サービス種類必須入力チェック {
+    サービス単位必須入力チェック {
         @Override
         public boolean apply(ServiceRiyohyoInfoDiv div) {
             return !RString.isNullOrEmpty(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getText());
@@ -70,8 +70,12 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
     割引適用後率入力値が不正チェック {
         @Override
         public boolean apply(ServiceRiyohyoInfoDiv div) {
+            boolean flag = true;
             Decimal 割引適用後率 = div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue();
-            return 0 <= Decimal.ONE.compareTo(割引適用後率 == null ? Decimal.ZERO : 割引適用後率);
+            if (割引適用後率 != null && 割引適用後率.compareTo(SpecHelper.maxPercent) > 0) {
+                flag = false;
+            }
+            return flag;
         }
     },
     /**
@@ -131,4 +135,8 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
             return !RString.isNullOrEmpty(div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getText());
         }
     };
+    
+    private static class SpecHelper {
+        private static final Decimal maxPercent = new Decimal(100);
+    }
 }

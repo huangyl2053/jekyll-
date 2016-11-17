@@ -1496,7 +1496,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
         tmpEntity.setUaT0302KinyuKikan_hyojijun(uat0302Entity.getHyojijun());
 
         UaT0301YokinShubetsuPatternEntity uat0301Entity = 特定口座.getYokinShubetsuPatternEntity();
-        if (uat0301Entity != null) {
+        if (uat0301Entity != null && uat0301Entity.getYokinShubetsuPatternCode() != null) {
             tmpEntity.setUaT0301YokinShubetsuPattern_yokinShubetsuPatternCode(uat0301Entity.getYokinShubetsuPatternCode().getColumnValue());
             tmpEntity.setUaT0301YokinShubetsuPattern_yokinShubetsuCode(uat0301Entity.getYokinShubetsuCode());
             tmpEntity.setUaT0301YokinShubetsuPattern_yokinShubetsuMeisho(uat0301Entity.getYokinShubetsuMeisho());
@@ -1504,7 +1504,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
         }
 
         UaT0303KinyuKikanShitenEntity uat0303Entity = 特定口座.getKinyuKikanShitenEntity();
-        if (uat0303Entity != null) {
+        if (uat0303Entity != null && uat0303Entity.getKinyuKikanCode() != null) {
             tmpEntity.setUaT0303KinyuKikanShiten_kinyuKikanCode(uat0303Entity.getKinyuKikanCode());
             tmpEntity.setUaT0303KinyuKikanShiten_kinyuKikanShitenCode(uat0303Entity.getKinyuKikanShitenCode());
             tmpEntity.setUaT0303KinyuKikanShiten_kaishiYMD(uat0303Entity.getKaishiYMD());

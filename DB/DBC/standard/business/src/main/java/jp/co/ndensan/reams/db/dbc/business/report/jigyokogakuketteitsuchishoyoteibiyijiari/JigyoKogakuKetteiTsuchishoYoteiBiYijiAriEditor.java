@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.jigyokogakuketteitsuchishoyoteib
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  *
@@ -27,6 +28,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiBiYijiAriEditor implements IJigyoKog
     private static final RString 定型文文字サイズ_レイヤフォント大 = new RString("2");
     private static final RString 定型文文字サイズ_レイヤフォント混在 = new RString("3");
     private static final RString 定型文文字サイズ_レイヤフォント混在2 = new RString("4");
+    private static final RString 改行 = new RString("\n");
 
     /**
      * インスタンスを生成します。
@@ -110,21 +112,15 @@ public class JigyoKogakuKetteiTsuchishoYoteiBiYijiAriEditor implements IJigyoKog
             source.ketteiYMD = 決定通知書Entity.get決定年月日();
             source.honninShiharaiGaku = 決定通知書Entity.get本人支払額();
             source.taishoYM = 決定通知書Entity.get対象年月();
-            source.kyufuShu1 = 決定通知書Entity.get給付の種類１();
-            source.kyufuShu2 = 決定通知書Entity.get給付の種類２();
-            source.kyufuShu3 = 決定通知書Entity.get給付の種類３();
+            source.kyufuShurui = conectRString(決定通知書Entity.get給付の種類１(), 決定通知書Entity.get給付の種類２(), 決定通知書Entity.get給付の種類３());
             source.kekka = 決定通知書Entity.get支給();
             source.ketteiGaku = 決定通知書Entity.get支給金額ﾀｲﾄﾙ();
             source.shikyuGaku = 決定通知書Entity.get支給金額();
             source.riyuTitle = 決定通知書Entity.get理由ﾀｲﾄﾙ();
-            source.riyu1 = 決定通知書Entity.get理由１();
-            source.riyu2 = 決定通知書Entity.get理由２();
-            source.riyu3 = 決定通知書Entity.get理由３();
+            source.riyu = conectRString(決定通知書Entity.get理由１(), 決定通知書Entity.get理由２(), 決定通知書Entity.get理由３());
             source.torikeshi1 = 決定通知書Entity.get取消１();
             source.torikeshi2 = 決定通知書Entity.get取消２();
-            source.mochimono1 = 決定通知書Entity.get持物１();
-            source.mochimono2 = 決定通知書Entity.get持物２();
-            source.mochimono3 = 決定通知書Entity.get持物３();
+            source.mochimono = conectRString(決定通知書Entity.get持物１(), 決定通知書Entity.get持物２(), 決定通知書Entity.get持物３());
             source.shiharaiBasho = 決定通知書Entity.get支払場所();
             source.shiharaiStartYMD = 決定通知書Entity.get支払期間開始年月日();
             source.shiharaiEndYMD = 決定通知書Entity.get支払期間終了年月日();
@@ -171,5 +167,15 @@ public class JigyoKogakuKetteiTsuchishoYoteiBiYijiAriEditor implements IJigyoKog
             source.ninshoshaYakushokuMei2 = 認証者情報.ninshoshaYakushokuMei2;
         }
         return source;
+    }
+
+    private RString conectRString(RString firstLine, RString secendLine, RString thirdLine) {
+        RStringBuilder rsb = new RStringBuilder();
+        rsb.append(firstLine);
+        rsb.append(改行);
+        rsb.append(secendLine);
+        rsb.append(改行);
+        rsb.append(thirdLine);
+        return rsb.toRString();
     }
 }

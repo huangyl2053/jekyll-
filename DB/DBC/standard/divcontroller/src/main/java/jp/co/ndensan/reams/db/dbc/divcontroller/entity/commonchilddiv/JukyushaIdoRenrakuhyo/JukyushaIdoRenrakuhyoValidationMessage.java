@@ -125,7 +125,7 @@ public enum JukyushaIdoRenrakuhyoValidationMessage implements IValidationMessage
     /**
      * 標準負担と異動日が不正
      */
-    標準負担と異動日が不正(UrErrorMessages.期間が不正),
+    標準負担と異動日が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成17年10月", "以降", "標準負担情報"),
     /**
      * 標準負担適用期間が不正
      */
@@ -153,8 +153,27 @@ public enum JukyushaIdoRenrakuhyoValidationMessage implements IValidationMessage
     /**
      * 二次予防事業適用期間が不正
      */
-    二次予防事業適用期間が不正(UrErrorMessages.期間が不正);
-
+    二次予防事業適用期間が不正(UrErrorMessages.期間が不正),
+    /**
+     * 住特適用期間と異動日が不正
+     */
+    住特適用情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成27年04月", "より前", "住所地特例情報"),
+    /**
+     * 社会福祉法人軽減情報が不正
+     */
+    社会福祉法人軽減情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成17年10月", "より前", "社会福祉法人軽減情報"),
+    /**
+     * 食費限度額適用情報が不正
+     */
+    食費限度額適用情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成17年10月", "より前", "特定入所者サービス費情報"),
+    /**
+     * 二割負担事業適用情報が不正
+     */
+    二割負担事業適用情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成27年04月", "より前", "二割負担情報"),
+    /**
+     * 二次予防事業適用情報が不正
+     */
+    二次予防事業適用情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成24年04月", "より前", "二次予防事業情報");
     private final Message message;
 
     /**

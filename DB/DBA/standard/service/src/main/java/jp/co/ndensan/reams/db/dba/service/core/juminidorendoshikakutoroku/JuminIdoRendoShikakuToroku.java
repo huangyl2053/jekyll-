@@ -438,7 +438,12 @@ public class JuminIdoRendoShikakuToroku {
             entity.set不整合コード(RString.EMPTY);
             entity.set転入保留作成事由コード(転入処理区分.get(転入保留作成事由.toString()));
             return entity;
-        } else {
+        } else if (広域内転入.equals(転入処理区分.get(処理区分.toString()))) {
+            JuminIdoRendoTennyuEntity idorendoTennyuEntity = new JuminIdoRendoTennyuManager().execute広域内転入(住民異動情報);
+            entity.set不整合コード(idorendoTennyuEntity.getデータ不整合理由());
+            entity.set転入保留作成事由コード(idorendoTennyuEntity.get作成事由());
+            entity.set被保険者台帳EntityList(idorendoTennyuEntity.get被保険者台帳list());
+        } else if (広域外転入.equals(転入処理区分.get(処理区分.toString()))) {
             JuminIdoRendoTennyuEntity idorendoTennyuEntity = new JuminIdoRendoTennyuManager().execute転入処理(住民異動情報, 被保険者台帳);
             entity.set不整合コード(idorendoTennyuEntity.getデータ不整合理由());
             entity.set転入保留作成事由コード(idorendoTennyuEntity.get作成事由());
@@ -974,8 +979,8 @@ public class JuminIdoRendoShikakuToroku {
         住民異動情報.setShimeiRiyoKubun(宛名識別対象.get氏名利用区分());
         住民異動情報.setKanaTsushomei(宛名識別対象.getカナ通称名());
         住民異動情報.setKatakanaHyoki(宛名識別対象.getカタカナ表記());
-        住民異動情報.setKokusekiChiikiCode(宛名識別対象.get国籍地域コード().value());
-        住民異動情報.setZairyuShikakuCode(宛名識別対象.get在留資格コード().value());
+        住民異動情報.setKokusekiChiikiCode(宛名識別対象.get国籍地域コード() == null ? Code.EMPTY : 宛名識別対象.get国籍地域コード().value());
+        住民異動情報.setZairyuShikakuCode(宛名識別対象.get在留資格コード() == null ? Code.EMPTY : 宛名識別対象.get在留資格コード().value());
         住民異動情報.setZairyuKikanCode(宛名識別対象.get在留期間コード());
         住民異動情報.setZairyuKikantoManryoYMD(宛名識別対象.get在留期間等満了年月日());
         住民異動情報.setZairyuCardtoNo(宛名識別対象.get在留カード等番号());
@@ -999,7 +1004,7 @@ public class JuminIdoRendoShikakuToroku {
         住民異動情報.setTennyumaeBanchi(宛名識別対象.get転入前番地());
         住民異動情報.setTennyumaeKatagaki(宛名識別対象.get転入前方書());
         住民異動情報.setTennyumaeSetainushimei(宛名識別対象.get転入前世帯主名());
-        住民異動情報.setTennyumaeKyusei(new AtenaMeisho(宛名識別対象.get転入前旧姓()));
+        住民異動情報.setTennyumaeKyusei(宛名識別対象.get転入前旧姓() == null ? AtenaMeisho.EMPTY : new AtenaMeisho(宛名識別対象.get転入前旧姓()));
         住民異動情報.setSaishuJutochiYubinNo(宛名識別対象.get最終住登地郵便番号());
         住民異動情報.setSaishuJutochiZenkokuJushoCode(宛名識別対象.get最終住登地全国住所コード());
         住民異動情報.setSaishuJutochiJusho(宛名識別対象.get最終住登地住所());
@@ -1028,9 +1033,9 @@ public class JuminIdoRendoShikakuToroku {
         住民異動情報.setKensakuRenrakusaki1(宛名識別対象.get検索連絡先１());
         住民異動情報.setKensakuRenrakusaki2(宛名識別対象.get検索連絡先２());
         住民異動情報.setKensakuRenrakusaki3(宛名識別対象.get検索連絡先３());
-        住民異動情報.setRenrakusakiKubun1(宛名識別対象.get連絡先区分１().value());
-        住民異動情報.setRenrakusakiKubun2(宛名識別対象.get連絡先区分２().value());
-        住民異動情報.setRenrakusakiKubun3(宛名識別対象.get連絡先区分３().value());
+        住民異動情報.setRenrakusakiKubun1(宛名識別対象.get連絡先区分１() == null ? Code.EMPTY : 宛名識別対象.get連絡先区分１().value());
+        住民異動情報.setRenrakusakiKubun2(宛名識別対象.get連絡先区分２() == null ? Code.EMPTY : 宛名識別対象.get連絡先区分２().value());
+        住民異動情報.setRenrakusakiKubun3(宛名識別対象.get連絡先区分３() == null ? Code.EMPTY : 宛名識別対象.get連絡先区分３().value());
         住民異動情報.setMailAddress(宛名識別対象.getメールアドレス());
         住民異動情報.setBiko(宛名識別対象.get備考());
         juminIdoRendoKyotsu(住民異動情報, csvWriter);

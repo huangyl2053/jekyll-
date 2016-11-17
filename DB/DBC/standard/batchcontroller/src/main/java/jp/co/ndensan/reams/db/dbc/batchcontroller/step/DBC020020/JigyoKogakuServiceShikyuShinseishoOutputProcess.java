@@ -114,17 +114,17 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
             KogakuJigyoShikyuShinseishoYuchoReport report = new KogakuJigyoShikyuShinseishoYuchoReport(param);
             report.writeBy(yuchoReportSourceWriter);
             count1 = count1 + 1;
-        } else {
-            KogakuJigyoShikyuShinseishoEntity param = new KogakuJigyoShikyuShinseishoEntity();
-            param.setシステム日付(RDate.getNowDate());
-            param.set申請情報帳票発行一時(entity);
-            param.set認証者役職名(認証者名);
-            param.set連番(new RString(count2));
-            param.set注意文(注意文);
-
-            KogakuJigyoShikyuShinseishoReport report = new KogakuJigyoShikyuShinseishoReport(param);
-            report.writeBy(shinseishoReportSourceWriter);
-            count2 = count2 + 1;
         }
+        KogakuJigyoShikyuShinseishoEntity param1 = new KogakuJigyoShikyuShinseishoEntity();
+        param1.setシステム日付(RDate.getNowDate());
+        param1.set申請情報帳票発行一時(entity);
+        param1.set認証者役職名(認証者名);
+        param1.set連番(new RString(count2));
+        param1.set注意文(注意文);
+
+        KogakuJigyoShikyuShinseishoReport report1 = new KogakuJigyoShikyuShinseishoReport(param1);
+        report1.writeBy(shinseishoReportSourceWriter);
+        count2 = count2 + 1;
+
     }
 }

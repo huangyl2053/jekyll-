@@ -196,6 +196,8 @@ public class KyufuJissekiShokai {
         RString 検索対象 = div.getRadTaisho1().getSelectedKey();
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
                 get検索データ(被保険者番号, サービス提供年月_開始, サービス提供年月_終了, KEY.equals(検索対象));
+        KyufuJissekiShokaiHandler handler = getHandler(div);
+        handler.edit集計データ(サービス提供年月_開始, サービス提供年月_終了, !KEY.equals(検索対象), 給付実績情報照会情報, 被保険者番号);
         ValidationMessageControlPairs validationMessages = getValidationHandler(div).do検索チェック(給付実績情報照会情報, 検索対象);
         if (validationMessages.iterator().hasNext()) {
             div.getKyufuJissekiSearchPanel().setIsOpen(true);
@@ -207,7 +209,7 @@ public class KyufuJissekiShokai {
             div.getDgKyufuJissekiGokeiList().getGridSetting().getColumns().get(i).setVisible(true);
         }
         KyufuJissekiSearchDataBusiness 一覧データ = 給付実績情報照会情報.getSearchData();
-        getHandler(div).onClick_btnKyufuJissekiSearch(給付実績ヘッダ情報1.get(INT_ZERO),
+        handler.onClick_btnKyufuJissekiSearch(給付実績ヘッダ情報1.get(INT_ZERO),
                 サービス提供年月_開始, サービス提供年月_終了, 一覧データ);
         setパラメータ(給付実績情報照会情報);
         div.getKyufuJissekiSearchPanel().setIsOpen(false);

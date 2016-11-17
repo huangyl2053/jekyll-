@@ -246,7 +246,7 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getTxtTodokedeYMD().setDisabled(true);
         div.getTxtTekiyoKikan().setDisabled(true);
         div.getTxtRiyoYM().setDisabled(true);
-        div.getChkZanteiKubun().setDisabled(true);
+//        div.getChkZanteiKubun().setDisabled(true);
         div.getTxtKubunShikyuGendogaku().setDisabled(true);
         div.getTxtGendoKanriKikan().setDisabled(true);
         div.getBtnShowShuruiGendogaku().setDisabled(false);
@@ -331,7 +331,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getBtnKakutei().setDisabled(false);
         } else if (削除.equals(表示モード)) {
             非活性または活性(true);
-            div.getChkZanteiKubun().setDisabled(true);
+//            div.getChkZanteiKubun().setDisabled(true);
             div.getDdlKoshinKbn().setDisabled(true);
             div.getTxtKoshinYMD().setDisabled(true);
             div.getServiceRiyohyoBeppyoRiyoNissu().getTxtZengetsuRiyoNissu().setDisabled(false);
@@ -1013,7 +1013,9 @@ public class ServiceRiyohyoInfoDivHandler {
         row.setJigyosha(div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho());
         row.setService(サービスTmp);
         row.setTani(new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtTani().getValue().toString()));
-        row.setWaribikigoRitsu(new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue().toString()));
+        if (div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue() != null) {
+            row.setWaribikigoRitsu(new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue().toString()));
+        }
         row.setWaribikigoTani(new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().getValue().toString()));
         row.setKaisu(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue() == null ? null
                 : new RString(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue().toString()));

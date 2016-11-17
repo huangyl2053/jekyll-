@@ -54,8 +54,6 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
     private static final String DBC200023 = "ketteiTsuchiIchiranOutputProcess";
     private static final String DBC200024 = "ShokanbaraiSashitomeTaishoshaIchiranOutputProcess";
 
-    private static final RString FLAG_TRUE = new RString("1");
-    private static final RString FLAG_FALSE = new RString("0");
     private static final RString 帳票制御汎用キー_用紙タイプ = new RString("用紙タイプ");
     private static final RString 帳票制御汎用キー_支払予定日印字有無 = new RString("支払予定日印字有無");
     private static final RString 用紙タイプ_A4 = new RString("1");
@@ -64,6 +62,9 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
     private static final RString 支払予定日印字有無_印字しない = new RString("0");
     private static final RString 支払予定日印字有無_印字する = new RString("1");
     private static final RString 更新する = new RString("2");
+    private static final RString フラグ_FALSE = new RString("false");
+    private static final RString フラグ_TRUE = new RString("true");
+    private static final RString 発行有無_発行しない = new RString("0");
     private static Long jobId = Long.MIN_VALUE;
 
     @Override
@@ -93,19 +94,21 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
         executeStep(MEISAI_TEMP_INSERT);
         executeStep(TEMP_UPDATE_YOSHIKI);
         executeStep(TEMP_UPDATE_SERVICE);
-        if (FLAG_TRUE.endsWith(getParameter().getテスト出力フラグ())) {
+        if (フラグ_FALSE.equals(getParameter().getテスト出力フラグ())) {
             executeStep(DB_UPDATE);
         }
-        if (更新する.endsWith(getParameter().get窓口払い一括更新区分())) {
+        if (更新する.equals(getParameter().get窓口払い一括更新区分())) {
             executeStep(DB_UPDATE2);
         }
+        
         if (用紙タイプ_A4.equals(用紙タイプ)) {
             if (支払予定日印字有無_印字しない.equals(支払予定日印字有無)) {
                 executeStep(DBC100002);
             } else if (支払予定日印字有無_印字する.equals(支払予定日印字有無)) {
                 executeStep(DBC100003);
             }
-        } else if (FLAG_FALSE.equals(getParameter().get受領委任者向け決定通知書フラグ())
+        } 
+        if (フラグ_FALSE.equals(getParameter().get受領委任者向け決定通知書フラグ())
                 && 用紙タイプ_諏訪広域版.equals(用紙タイプ)) {
             executeStep(DBC100006);
         }
@@ -114,7 +117,7 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
             executeStep(DBC100004);
         }
 
-        if (FLAG_TRUE.equals(getParameter().get利用者向け決定通知書フラグ())) {
+        if (フラグ_TRUE.equals(getParameter().get利用者向け決定通知書フラグ())) {
             executeStep(DBC100005);
         }
         executeStep(DBC200023);

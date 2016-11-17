@@ -276,7 +276,7 @@ public class KyotakuServiceRiyohyoMain {
 
     private ResponseData<KyotakuServiceRiyohyoMainDiv> 削除処理(KyotakuServiceRiyohyoMainDiv div, RString 居宅総合事業区分,
             TankiNyushoResult 短期入所情報, LockingKey key) {
-        if (div.getCcdServiceRiyohyoInfo().getSofuYM() != null
+        if (div.getCcdServiceRiyohyoInfo().getSofuYM() == null
                 && KyufukanrihyoSakuseiKubun.新規.getコード().equals(div.getCcdServiceRiyohyoInfo().getKoshinKbn())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),

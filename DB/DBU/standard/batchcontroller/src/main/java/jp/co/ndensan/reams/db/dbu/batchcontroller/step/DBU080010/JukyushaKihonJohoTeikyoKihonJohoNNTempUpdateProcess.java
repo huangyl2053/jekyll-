@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -47,6 +48,8 @@ public class JukyushaKihonJohoTeikyoKihonJohoNNTempUpdateProcess extends BatchPr
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter teikyoKihonJohoNNTemp;
+    @BatchWriter
+    private BatchPermanentTableWriter<DbT7301TokuteiKojinJohoHanKanriEntity> dbT7301EntityWriter;
 
     @Override
     protected void initialize() {
@@ -79,6 +82,7 @@ public class JukyushaKihonJohoTeikyoKihonJohoNNTempUpdateProcess extends BatchPr
 
     @Override
     protected void createWriter() {
+        dbT7301EntityWriter = new BatchPermanentTableWriter(DbT7301TokuteiKojinJohoHanKanriEntity.class);
         teikyoKihonJohoNNTemp = new BatchEntityCreatedTempTableWriter(
                 processParameter.get提供基本情報中間テーブル名(), TeikyoKihonJohoNNTempEntity.class);
     }
@@ -104,6 +108,7 @@ public class JukyushaKihonJohoTeikyoKihonJohoNNTempUpdateProcess extends BatchPr
                 RString.EMPTY, processParameter.get特定個人情報名コード(), DataSetNo._0201受給者基本情報.getコード(), FlexibleDate.EMPTY)) {
             DbT7301TokuteiKojinJohoHanKanriEntity entity = 個人情報提供.toEntity();
             entity.setShokaiTeikyoKubun(ShokaiTeikyoKubun.初回提供済み.getコード());
+            dbT7301EntityWriter.update(entity);
         }
     }
 }

@@ -88,7 +88,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
     private static final int INT5 = 5;
     private static final int ZERO = 0;
     private static final int TEN = 10;
-    private static final RString カンマ = new RString(",");
+    private static final RString カンマ = new RString("、");
     List<ShokanKetteiTsuchiShoShiharai> 帳票データリスト = new ArrayList<>();
     Map<RString, RString> 種類Map = new HashMap<RString, RString>();
     ShokanKetteiTsuchiShoSealerBatchParameter batchPram;
@@ -193,7 +193,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
         RString 種類 = データ.get種類() == null ? RString.EMPTY : データ.get種類();
         if (種類Map.containsKey(key)) {
             RString bef種類 = 種類Map.get(key) == null ? RString.EMPTY : 種類Map.get(key);
-            if (bef種類.indexOf(種類) == 0) {
+            if (bef種類.indexOf(種類) == -1) {
                 種類Map.put(key, set種類(bef種類, 種類));
             }
         } else {

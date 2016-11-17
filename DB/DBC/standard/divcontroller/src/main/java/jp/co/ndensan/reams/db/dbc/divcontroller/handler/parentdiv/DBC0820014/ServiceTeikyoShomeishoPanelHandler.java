@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820014;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdServiceTeikyoShomeisyo_Row;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書のHandlerです。
@@ -121,11 +122,13 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * @param 申請日 申請日
      * @param 証明書リスト 証明書リスト
      * @param 証明書一覧情報 証明書一覧情報
+     * @param 償還払ViewStateDB情報 償還払ViewStateDB情報
      */
     public void load申請明細エリア(RString 処理モード,
             RDate 申請日,
             List<ShikibetsuNoKanri> 証明書リスト,
-            List<ServiceTeikyoShomeishoResult> 証明書一覧情報) {
+            List<ServiceTeikyoShomeishoResult> 証明書一覧情報,
+            DbJohoViewState 償還払ViewStateDB情報) {
         div.getPanelShinseiNaiyo().getTxtShinseibi().setValue(申請日);
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(証明書BLANK, RString.EMPTY);
@@ -149,6 +152,22 @@ public class ServiceTeikyoShomeishoPanelHandler {
             }
             row.setData3(証明書情報.getServiceTeikyoShomeisho().getMeisanNo());
             row.setData4(証明書情報.getServiceTeikyoShomeisho().getYoshikiNo());
+            rowDataList.add(row);
+        }
+        List<DbT3038ShokanKihonEntity> 償還払請求基本データList = new ArrayList<>();
+        if (null != 償還払ViewStateDB情報 && !償還払ViewStateDB情報.get償還払請求基本データList().isEmpty()) {
+            for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.get償還払請求基本データList()) {
+                if (EntityDataState.Added.equals(償還払請求基本.toEntity().getState())) {
+                    償還払請求基本データList.add(償還払請求基本.toEntity());
+                }
+            }
+        }
+        for (DbT3038ShokanKihonEntity 償還払請求基本データ : 償還払請求基本データList) {
+            dgdServiceTeikyoShomeisyo_Row row = new dgdServiceTeikyoShomeisyo_Row();
+            row.setData1(償還払請求基本データ.getJigyoshaNo().value());
+//            row.setData2(処理モード);
+            row.setData3(償還払請求基本データ.getMeisaiNo());
+            row.setData4(償還払請求基本データ.getYoshikiNo());
             rowDataList.add(row);
         }
         div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().setDataSource(rowDataList);
@@ -233,17 +252,17 @@ public class ServiceTeikyoShomeishoPanelHandler {
             List<DbT3047ShokanServicePlan200904Entity> 償還払請求サービス計画200904データList = new ArrayList<>();
             List<DbT3046ShokanServicePlan200604Entity> 償還払請求サービス計画200604データList = new ArrayList<>();
             List<DbT3045ShokanServicePlan200004Entity> 償還払請求サービス計画200004データList = new ArrayList<>();
-            for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.getShokanKihon()) {
+            for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.get償還払請求基本データList()) {
                 償還払請求基本データList.add(償還払請求基本.toEntity());
             }
-            for (ShokanServicePlan200904 償還払請求サービス計画200904 : 償還払ViewStateDB情報.getShokanServicePlan200904()) {
-                償還払請求サービス計画200904データList.add(償還払請求サービス計画200904.toEntity());
+            for (ShokanServicePlan200904Result 償還払請求サービス計画200904Result : 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList()) {
+                償還払請求サービス計画200904データList.add(償還払請求サービス計画200904Result.getEntity().toEntity());
             }
-            for (ShokanServicePlan200604 償還払請求サービス計画200604 : 償還払ViewStateDB情報.getShokanServicePlan200604()) {
-                償還払請求サービス計画200604データList.add(償還払請求サービス計画200604.toEntity());
+            for (ShokanServicePlan200604Result 償還払請求サービス計画200604Result : 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList()) {
+                償還払請求サービス計画200604データList.add(償還払請求サービス計画200604Result.getEntity().toEntity());
             }
-            for (ShokanServicePlan200004 償還払請求サービス計画200004 : 償還払ViewStateDB情報.getShokanServicePlan200004()) {
-                償還払請求サービス計画200004データList.add(償還払請求サービス計画200004.toEntity());
+            for (ShokanServicePlan200004Result 償還払請求サービス計画200004Result : 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList()) {
+                償還払請求サービス計画200004データList.add(償還払請求サービス計画200004Result.getEntity().toEntity());
             }
             int 証明書件数ViewState = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShomeishoKensu(
                     被保険者番号,
