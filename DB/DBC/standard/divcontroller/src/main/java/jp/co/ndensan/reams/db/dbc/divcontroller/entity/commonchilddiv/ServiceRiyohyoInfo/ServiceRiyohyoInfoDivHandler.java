@@ -65,8 +65,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ServiceRiyohyoInfoDivHandler {
 
     private final ServiceRiyohyoInfoDiv div;
-    private static final RString 居宅 = new RString("居宅サービス計画");
-    private static final RString 総合事業 = new RString("総合事業費計画");
+    private static final RString 居宅 = new RString("1");
+    private static final RString 総合事業 = new RString("2");
     private static final RString 定値_01 = new RString("01");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");

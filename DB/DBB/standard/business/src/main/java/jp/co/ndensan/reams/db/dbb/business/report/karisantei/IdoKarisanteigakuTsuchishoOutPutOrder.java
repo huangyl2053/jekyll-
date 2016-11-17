@@ -24,21 +24,9 @@ public enum IdoKarisanteigakuTsuchishoOutPutOrder implements IReportItems {
      */
     町域コード(new RString("0002"), new RString("町域コード"), new RString("\"Atesaki_choikiCode\"")),
     /**
-     * 番地コード1
+     * 番地コード
      */
-    番地コード1(new RString("0003"), new RString("番地コード1"), new RString("\"Atesaki_banchiCode1\"")),
-    /**
-     * 番地コード2
-     */
-    番地コード2(new RString("0003"), new RString("番地コード2"), new RString("\"Atesaki_banchiCode2\"")),
-    /**
-     * 番地コード3
-     */
-    番地コード3(new RString("0003"), new RString("番地コード3"), new RString("\"Atesaki_banchiCode3\"")),
-    /**
-     * 番地コード4
-     */
-    番地コード4(new RString("0003"), new RString("番地コード4"), new RString("\"Atesaki_banchiCode4\"")),
+    番地コード(new RString("0003"), new RString("番地コード"), new RString("\"Atesaki_banchiCode\"")),
     /**
      * 行政区コード
      */
@@ -78,15 +66,15 @@ public enum IdoKarisanteigakuTsuchishoOutPutOrder implements IReportItems {
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"dbT2015KeisangoJoho_fukaShichosonCode\"")),
+    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"dbT2002Fuka_fukaShichosonCode\"")),
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"dbT2015KeisangoJoho_hihokenshaNo\"")),
+    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"dbT2002Fuka_hihokenshaNo\"")),
     /**
      * 年金コード
      */
-    年金コード(new RString("0206"), new RString("年金コード"), new RString("\"UeT0511after_nenkinCode\"")),
+    年金コード(new RString("0206"), new RString("年金コード"), new RString("\"dbT2001ChoshuHoho_honNenkinCode\"")),
     /**
      * 納組コード
      */
@@ -94,23 +82,11 @@ public enum IdoKarisanteigakuTsuchishoOutPutOrder implements IReportItems {
     /**
      * 生活保護種別
      */
-    生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("\"生活保護区分\"")),
+    生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("\"dbT2002Fuka_seihofujoShurui\"")),
     /**
-     * 調定事由1
+     * 調定事由
      */
-    調定事由1(new RString("0212"), new RString("調定事由1"), new RString("\"dbT2015KeisangoJoho_choteiJiyu1\"")),
-    /**
-     * 調定事由2
-     */
-    調定事由2(new RString("0212"), new RString("調定事由2"), new RString("\"dbT2015KeisangoJoho_choteiJiyu2\"")),
-    /**
-     * 調定事由3
-     */
-    調定事由3(new RString("0212"), new RString("調定事由3"), new RString("\"dbT2015KeisangoJoho_choteiJiyu3\"")),
-    /**
-     * 調定事由4
-     */
-    調定事由4(new RString("0212"), new RString("調定事由4"), new RString("\"dbT2015KeisangoJoho_choteiJiyu4\""));
+    調定事由(new RString("0212"), new RString("調定事由"), new RString("\"dbT2002Fuka_choteiJiyu\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

@@ -74,7 +74,7 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<DBE525002_HanteiKekkaHokenshaParameter> onClick_btnHanteikekkaOutput(NijihanteiKekkaOutputDiv nijiDiv) {
-        FlowParameters fp = FlowParameters.of(new RString("key"), "batch1");
+        FlowParameters fp = FlowParameters.of(new RString("key"), "Batch1");
         FlowParameterAccessor.merge(fp);
         return ResponseData.of(getHandler(nijiDiv).setBatchParameter()).respond();
     }
@@ -86,7 +86,7 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<DBE491001_NichijiShinchokuParameter> onClick_btnRenkeiDataOutput(NijihanteiKekkaOutputDiv nijiDiv) {
-        FlowParameters fp = FlowParameters.of(new RString("key"), "batch2");
+        FlowParameters fp = FlowParameters.of(new RString("key"), "Batch2");
         FlowParameterAccessor.merge(fp);
         return ResponseData.of(getHandler(nijiDiv).setCSVBatchParameter()).respond();
     }

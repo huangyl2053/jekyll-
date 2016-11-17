@@ -155,7 +155,9 @@ public class ServiceTeikyoShomeishoPanelHandler {
             rowDataList.add(row);
         }
         List<DbT3038ShokanKihonEntity> 償還払請求基本データList = new ArrayList<>();
-        if (null != 償還払ViewStateDB情報 && !償還払ViewStateDB情報.get償還払請求基本データList().isEmpty()) {
+        if (null != 償還払ViewStateDB情報
+                && null != 償還払ViewStateDB情報.get償還払請求基本データList()
+                && !償還払ViewStateDB情報.get償還払請求基本データList().isEmpty()) {
             for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.get償還払請求基本データList()) {
                 if (EntityDataState.Added.equals(償還払請求基本.toEntity().getState())) {
                     償還払請求基本データList.add(償還払請求基本.toEntity());

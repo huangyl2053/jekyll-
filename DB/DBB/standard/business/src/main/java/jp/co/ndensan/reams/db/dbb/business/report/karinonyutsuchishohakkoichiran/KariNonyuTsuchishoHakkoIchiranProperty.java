@@ -62,25 +62,9 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
         町域コード(new RString("0002"), new RString("町域コード"),
                 ENCLOSURE.concat(new RString("atesaki_choikiCode").concat(ENCLOSURE))),
         /**
-         * 番地コード1
+         * 番地コード
          */
-        番地コード1(new RString("0003"), new RString("番地コード1"),
-                ENCLOSURE.concat(new RString("atesaki_banchiCode1").concat(ENCLOSURE))),
-        /**
-         * 番地コード2
-         */
-        番地コード2(new RString("0003"), new RString("番地コード2"),
-                ENCLOSURE.concat(new RString("atesaki_banchiCode2").concat(ENCLOSURE))),
-        /**
-         * 番地コード3
-         */
-        番地コード3(new RString("0003"), new RString("番地コード3"),
-                ENCLOSURE.concat(new RString("atesaki_banchiCode3").concat(ENCLOSURE))),
-        /**
-         * 番地コード4
-         */
-        番地コード4(new RString("0003"), new RString("番地コード4"),
-                ENCLOSURE.concat(new RString("atesaki_banchiCode4").concat(ENCLOSURE))),
+        番地コード(new RString("0003"), new RString("番地コード"), new RString("\"atesaki_banchiCode\"")),
         /**
          * 行政区コード
          */
@@ -147,18 +131,6 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
          */
         現金口座区分(new RString("0210"), new RString("現金口座区分"),
                 ENCLOSURE.concat(new RString("dbT2015KeisangoJoho_kozaKubun").concat(ENCLOSURE))),
-        /**
-         * 8月特徴開始者
-         */
-        //QA1922 確認中
-        月8特徴開始者(new RString("0220"), new RString("月8特徴開始者"),
-                ENCLOSURE.concat(new RString("6").concat(ENCLOSURE))),
-        /**
-         * 10月特徴開始者
-         */
-        //QA1922 確認中
-        月10特徴開始者(new RString("0219"), new RString("月10特徴開始者"),
-                ENCLOSURE.concat(new RString("6").concat(ENCLOSURE))),
         /**
          * 納組コード
          */

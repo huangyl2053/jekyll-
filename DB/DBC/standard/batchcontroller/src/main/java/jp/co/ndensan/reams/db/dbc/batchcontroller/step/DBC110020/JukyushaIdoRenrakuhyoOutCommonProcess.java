@@ -1013,7 +1013,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             DbT4001JukyushaDaichoEntity 受給者台帳, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
         insertEntity.set被保険者番号(被保険者番号);
         insertEntity.set異動年月日(異動年月日);
-        insertEntity.set変更申請中区分コード(STR_3);
+        insertEntity.set申請種別コード(STR_3);
         insertEntity.set変更申請中区分コード(STR_2);
         insertEntity.set申請年月日(受給者台帳.getJukyuShinseiYMD());
         insertEntity.setエラーフラグ(エラーなし);

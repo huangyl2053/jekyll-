@@ -1,4 +1,4 @@
-var DBC;
+﻿var DBC;
 (function (DBC) {
     (function (JukyushaIdoRenrakuhyo) {
         var ModeController = (function () {
