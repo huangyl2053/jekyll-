@@ -858,7 +858,7 @@ public class JukyushaKyufuJissekiDaichoHandler {
             batchParameter.set給付率(new RString(div.getTxtKyufuritsu().getValue().toString()));
         }
         if (div.getCcdChohyoShutsuryokujun().get出力順ID() != null) {
-            batchParameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
+            batchParameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
         }
     }
 }
