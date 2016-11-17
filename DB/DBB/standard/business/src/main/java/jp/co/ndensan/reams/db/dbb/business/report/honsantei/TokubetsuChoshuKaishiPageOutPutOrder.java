@@ -74,7 +74,7 @@ public enum TokubetsuChoshuKaishiPageOutPutOrder implements IReportItems {
     /**
      * 年金コード
      */
-    年金コード(new RString("0206"), new RString("年金コード"), new RString("\"ueT0511after_nenkinCode\"")),
+    年金コード(new RString("0206"), new RString("年金コード"), new RString("\"dbT2015KeisangoJoho_honNenkinCode\"")),
     /**
      * 納組コード
      */
@@ -82,7 +82,7 @@ public enum TokubetsuChoshuKaishiPageOutPutOrder implements IReportItems {
     /**
      * 生活保護種別
      */
-    生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("\"生活保護区分\"")),
+    生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("\"dbT2015KeisangoJoho_seihofujoShurui\"")),
     /**
      * 10月特徴開始者
      */

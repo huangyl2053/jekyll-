@@ -78,7 +78,7 @@ public enum NonyuTsuchIchiranOutPutOrder implements IReportItems {
     /**
      * 生活保護種別
      */
-    生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("\"生活保護区分\"")),
+    生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("\"dbT2015KeisangoJoho_seihofujoShurui\"")),
     /**
      * 現金口座区分
      */

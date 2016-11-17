@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC5000011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC140010.DBC140010_JukyushaKyufujissekiDaichoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC140020.DBC140020_JukyushaKyufujissekiIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5000011.DBC5000011StateName;
@@ -12,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5000011.DBC5
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5000011.JukyushaKyufuJissekiDaichoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5000011.JukyushaKyufuJissekiDaichoPreservation;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5000011.JukyushaKyufuJissekiDaichoHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5000011.JukyushaKyufuJissekiDaichoValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
@@ -23,6 +25,8 @@ import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -38,6 +42,9 @@ public class JukyushaKyufuJissekiDaicho {
     private static final RString あり = new RString("あり");
     private static final RString 遷移1 = new RString("1");
     private static final RString 遷移2 = new RString("2");
+    private static final int 月１３以上 = 12;
+    private static final Decimal いち = new Decimal("1");
+    private static final Decimal いちゼロ = new Decimal("100");
     private static final RString MENUID_DBCMNJ1001 = new RString("DBCMNJ1001");
     private static final RString MENUID_DBCMNJ1002 = new RString("DBCMNJ1002");
     private static final RString 受給者給付実績台帳 = new RString("受給者給付実績台帳");
@@ -302,5 +309,74 @@ public class JukyushaKyufuJissekiDaicho {
 
     private JukyushaKyufuJissekiDaichoHandler getHandler(JukyushaKyufuJissekiDaichoDiv div) {
         return new JukyushaKyufuJissekiDaichoHandler(div);
+    }
+
+    private JukyushaKyufuJissekiDaichoValidationHandler getValidation(JukyushaKyufuJissekiDaichoDiv div) {
+        return new JukyushaKyufuJissekiDaichoValidationHandler(div);
+    }
+
+    /**
+     * 入力チェックを実行します。
+     *
+     * @param div JukyushaKyufuJissekiDaichoDiv
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
+     */
+    public ResponseData<JukyushaKyufuJissekiDaichoDiv> onBefore_btnParameter(JukyushaKyufuJissekiDaichoDiv div) {
+        boolean flag = true;
+        ValidationMessageControlPairs message = new ValidationMessageControlPairs();
+        if (div.getTxtRangeYM().getFromValue() == null) {
+            flag = false;
+            message.add(getValidation(div).check開始終了年月が必須(new RString("開始年月を")));
+        }
+        if (div.getTxtRangeYM().getToValue() == null) {
+            flag = false;
+            message.add(getValidation(div).check開始終了年月が必須(new RString("終了年月を")));
+        }
+        if (flag && div.getTxtRangeYM().getToValue().isBefore(div.getTxtRangeYM().getFromValue())) {
+            message.add(getValidation(div).check大小関係不正(new RString("年月")));
+        }
+        if (flag && div.getTxtRangeYM().getToValue().getMonthValue() > 月１３以上 && div.getTxtRangeYM().getFromValue().getMonthValue() > 月１３以上) {
+            message.add(getValidation(div).check年月範囲不正());
+        }
+        if (div.getTxtRangeHihokenshaNoFrom().getValue().compareTo(div.getTxtRangeHihokenshaNoTo().getValue()) > 0) {
+            message.add(getValidation(div).check大小関係不正(new RString("被保険者番号")));
+        }
+        if (div.getTxtRojinhokenShikuchosonNoRangeFrom().getValue().compareTo(div.getTxtRojinhokenShikuchosonNoRangeTo().getValue()) > 0) {
+            message.add(getValidation(div).check大小関係不正(new RString("老人保健市町村番号")));
+        }
+        onBefore_btnParameter1(message, div);
+        if (message.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(message).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private void onBefore_btnParameter1(ValidationMessageControlPairs message, JukyushaKyufuJissekiDaichoDiv div) {
+        List<RString> 要介護を = div.getChkYokaigodo().getSelectedKeys();
+        List<RString> 出力様式を1 = div.getChkShutsuryokuYoshiki1().getSelectedKeys();
+        List<RString> 出力様式を2 = div.getChkShutsuryokuYoshiki2().getSelectedKeys();
+        List<RString> 出力様式を3 = div.getChkShutsuryokuYoshiki3().getSelectedKeys();
+        List<RString> 出力様式を4 = div.getChkShutsuryokuYoshiki4().getSelectedKeys();
+        List<RString> 出力様式を5 = div.getChkShutsuryokuYoshiki5().getSelectedKeys();
+        if (div.getTxtRojinHokenJukyushaNoFrom().getValue().compareTo(div.getTxtRojinHokenJukyushaNoTo().getValue()) > 0) {
+            message.add(getValidation(div).check大小関係不正(new RString("老人保健受給者番号")));
+        }
+        if (div.getTxtJigyoshaNoFrom().getValue().compareTo(div.getTxtJigyoshaNoTo().getValue()) > 0) {
+            message.add(getValidation(div).check大小関係不正(new RString("事業者番号")));
+        }
+        if (要介護を == null || 要介護を.isEmpty()) {
+            message.add(getValidation(div).check未指定(new RString("要介護を")));
+        }
+        if (出力様式を1.isEmpty() && 出力様式を2.isEmpty() && 出力様式を3.isEmpty() && 出力様式を4.isEmpty() && 出力様式を5.isEmpty()) {
+            message.add(getValidation(div).check未指定(new RString("出力様式を")));
+        }
+        if (div.getTabChushutsuJoken().getTxtKyufuritsu().getValue() == null
+                || div.getTabChushutsuJoken().getTxtKyufuritsu().getValue().compareTo(いち) > 0
+                && div.getTabChushutsuJoken().getTxtKyufuritsu().getValue().compareTo(いちゼロ) > 0) {
+            message.add(getValidation(div).check必須項目を入力(new RString("１～100")));
+        }
+        if (div.getCcdChohyoShutsuryokujun().get出力順ID() == null) {
+            message.add(getValidation(div).check出力順序を指定());
+        }
     }
 }

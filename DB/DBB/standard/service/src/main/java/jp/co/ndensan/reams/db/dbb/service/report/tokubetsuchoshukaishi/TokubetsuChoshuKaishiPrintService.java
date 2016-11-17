@@ -114,7 +114,7 @@ public class TokubetsuChoshuKaishiPrintService {
             List<RString> 出力項目リスト, List<RString> 改頁項目リスト, ReportSourceWriter<TokubetsuChoshuKaishiSource> reportSourceWriter) {
         int i = NUM1;
         for (TokuchoKaishiTsuchishoInfo tokuchoKaishiTsuchishoInfo : 編集本算定通知書共通情報) {
-            TokubetsuChoshuKaishiReport report = new TokubetsuChoshuKaishiReport(tokuchoKaishiTsuchishoInfo.get生活保護区分(),
+            TokubetsuChoshuKaishiReport report = new TokubetsuChoshuKaishiReport(
                     tokuchoKaishiTsuchishoInfo.get特徴10月開始者区分(), tokuchoKaishiTsuchishoInfo.get本算定通知書情報(),
                     tokuchoKaishiTsuchishoInfo.get編集後本算定通知書共通情報(), 賦課年度, 帳票作成日時, 市町村コード,
                     市町村名, 出力項目リスト, 改頁項目リスト, i);
