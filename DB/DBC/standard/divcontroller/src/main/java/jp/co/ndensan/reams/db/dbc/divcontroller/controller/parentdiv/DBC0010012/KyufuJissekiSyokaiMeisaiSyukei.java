@@ -151,7 +151,7 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
 
     private KyufujissekiKihon getCsData_A() {
         return ViewStateHolder.get(ViewStateKeys.給付実績基本情報, KyufujissekiKihonJyohou.class)
-                .getCsData_A().get(INT_ZERO);
+                .getCsData_A().get(INT_ZERO).get給付実績基本データ();
     }
 
     private List<KyufujissekiMeisaiBusiness> getCsData_B() {

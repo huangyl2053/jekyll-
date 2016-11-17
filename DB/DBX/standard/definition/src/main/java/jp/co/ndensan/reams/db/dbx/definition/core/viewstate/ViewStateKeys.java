@@ -2651,5 +2651,9 @@ public enum ViewStateKeys {
     /**
      * 緊急時施設療養DB
      */
-    緊急時施設療養DB;
+    緊急時施設療養DB,
+    /**
+     * 給付実績基本情報子Div
+     */
+    給付実績基本情報子Div;
 }
