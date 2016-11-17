@@ -156,7 +156,6 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
         for (ISetSortItem item : 出力順情報.get設定項目リスト()) {
             出力順項目リスト.add(item.get項目名());
             if (item.is改頁項目()) {
-                改頁項目Map.put(item.get項目名(), item.get項目名());
                 改頁項目リスト.add(item.get項目名());
                 pageBreakKeys.add(item.get項目ID());
             }
@@ -204,54 +203,27 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     @Override
     protected void usualProcess(ShotokuShoukaiDataTempEntity t) {
         change改頁項目コード(t);
-        new ShotokushokaihyoHakkoIchiranBatchReport(t, creat構成市町村情報リスト(), 出力順項目リスト, 改頁項目リスト,
+        new ShotokushokaihyoHakkoIchiranBatchReport(t, creat構成市町村情報リスト(), 出力順項目リスト, 改頁項目Map, 改頁項目リスト,
                 processParameter.get照会年月日(), processParameter.get処理年度(), processParameter.isテストプリント(), association)
                 .writeBy(sourceWriter);
         publish所得情報一覧表(t);
     }
 
     private void change改頁項目コード(ShotokuShoukaiDataTempEntity entity) {
-        if (改頁項目リスト.isEmpty()) {
-            return;
-        }
-        for (RString 改頁 : 改頁項目リスト) {
-            if (町域コード.equals(改頁項目Map.get(改頁))) {
-                改頁項目Map.put(改頁, entity.getChoikiCode());
-            }
-            if (行政区コード.equals(改頁項目Map.get(改頁))) {
-                改頁項目Map.put(改頁, entity.getGyoseikuCode());
-            }
-            if (世帯コード.equals(改頁項目Map.get(改頁))) {
-                RString setaiCode = entity.getSetaiCode() == null ? RString.EMPTY : entity.getSetaiCode().getColumnValue();
-                改頁項目Map.put(改頁, setaiCode);
-            }
-            if (識別コード.equals(改頁項目Map.get(改頁))) {
-                RString shikibetsuCode = entity.getShikibetsuCode() == null ? RString.EMPTY : entity.getShikibetsuCode().getColumnValue();
-                改頁項目Map.put(改頁, shikibetsuCode);
-            }
-            if (氏名５０音カナ.equals(改頁項目Map.get(改頁))) {
-                RString kanaMeisho = entity.getKanaMeisho() == null ? RString.EMPTY : entity.getKanaMeisho().getColumnValue();
-                改頁項目Map.put(改頁, kanaMeisho);
-            }
-            if (生年月日.equals(改頁項目Map.get(改頁))) {
-                RString seinengappiYMD = entity.getSeinengappiYMD() == null ? RString.EMPTY : new RString(entity.getSeinengappiYMD().toString());
-                改頁項目Map.put(改頁, seinengappiYMD);
-            }
-            if (市町村コード.equals(改頁項目Map.get(改頁))) {
-                改頁項目Map.put(改頁, entity.getShichosonCode());
-            }
-            if (異動年月日.equals(改頁項目Map.get(改頁))) {
-                RString idoYMD = entity.getIdoYMD() == null ? RString.EMPTY : new RString(entity.getIdoYMD().toString());
-                改頁項目Map.put(改頁, idoYMD);
-            }
-            if (前住所コード.equals(改頁項目Map.get(改頁))) {
-                改頁項目Map.put(改頁, entity.getZenjushoCode());
-            }
-        }
-        改頁項目リスト.clear();
-        for (RString 改頁項目 : 改頁項目Map.values()) {
-            改頁項目リスト.add(改頁項目);
-        }
+        改頁項目Map.put(町域コード, entity.getChoikiCode());
+        改頁項目Map.put(行政区コード, entity.getGyoseikuCode());
+        RString setaiCode = entity.getSetaiCode() == null ? RString.EMPTY : entity.getSetaiCode().getColumnValue();
+        改頁項目Map.put(世帯コード, setaiCode);
+        RString shikibetsuCode = entity.getShikibetsuCode() == null ? RString.EMPTY : entity.getShikibetsuCode().getColumnValue();
+        改頁項目Map.put(識別コード, shikibetsuCode);
+        RString kanaMeisho = entity.getKanaMeisho() == null ? RString.EMPTY : entity.getKanaMeisho().getColumnValue();
+        改頁項目Map.put(氏名５０音カナ, kanaMeisho);
+        RString seinengappiYMD = entity.getSeinengappiYMD() == null ? RString.EMPTY : new RString(entity.getSeinengappiYMD().toString());
+        改頁項目Map.put(生年月日, seinengappiYMD);
+        改頁項目Map.put(市町村コード, entity.getShichosonCode());
+        RString idoYMD = entity.getIdoYMD() == null ? RString.EMPTY : new RString(entity.getIdoYMD().toString());
+        改頁項目Map.put(異動年月日, idoYMD);
+        改頁項目Map.put(前住所コード, entity.getZenjushoCode());
     }
 
     @Override

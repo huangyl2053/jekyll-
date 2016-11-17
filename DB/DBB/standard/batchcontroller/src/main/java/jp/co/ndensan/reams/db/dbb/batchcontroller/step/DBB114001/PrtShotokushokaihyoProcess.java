@@ -72,7 +72,6 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     public static final RString PARAMETER_OUT_OUTPUTCOUNT;
 
     private static final RString INDEX_0 = new RString("0");
-    private static final RString INDEX_1 = new RString("1");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_9 = 9;
@@ -119,6 +118,7 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
 
     private ShotokuShokaihyoHakkoProcessParameter processParameter;
     private ShotokuShoukaiDataTempEntity 所得照会票データ;
+    private ShotokuShoukaiDataTempEntity 所得照会票データbefore;
     private OutputParameter<RString> outputCount;
     private NinshoshaSource sourceBuilder;
     private Association association;
@@ -131,7 +131,6 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     private SetaiCode 世帯コード = SetaiCode.EMPTY;
     private RString 候補者区分 = RString.EMPTY;
     private List<SetaiInn> 世帯員リスト;
-    private boolean flag;
 
     @Override
     public void initialize() {
@@ -150,7 +149,6 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
         送付先担当課名称 = TokuchoKaishiTsuchishoDataHenshu.createInstance()
                 .load帳票制御汎用ByKey(帳票分類ID, 管理年度, 項目名_送付先担当課名称).get設定値();
         outputCount.setValue(INDEX_0);
-        flag = false;
     }
 
     @Override
@@ -180,33 +178,28 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     @Override
     protected void process(ShotokuShoukaiDataTempEntity t) {
         所得照会票データ = t;
-        if (送付先住所コード.equals(RString.EMPTY)
-                && 世帯コード.equals(SetaiCode.EMPTY)
-                && 候補者区分.equals(RString.EMPTY)) {
-            set世帯員();
-            setKey();
-            flag = true;
-        } else if (送付先住所コード.equals(所得照会票データ.getZenkokuJushoCode())
+        if (送付先住所コード.equals(所得照会票データ.getZenkokuJushoCode())
                 && 世帯コード.equals(所得照会票データ.getSetaiCode())
                 && 候補者区分.equals(所得照会票データ.getKouhoshakubun())) {
             set世帯員();
-            flag = true;
+        } else if (世帯員リスト.isEmpty()) {
+            所得照会票データbefore = t;
+            set世帯員();
+            setKey();
         } else {
             所得照会票Report();
             世帯員リスト.clear();
             set世帯員();
             setKey();
-            flag = false;
+            所得照会票データbefore = t;
         }
-        outputCount.setValue(INDEX_1);
+
     }
 
     @Override
     protected void afterExecute() {
         int 出力ページ数 = 0;
-        if (flag) {
-            出力ページ数 = 所得照会票Report();
-        }
+        出力ページ数 = 所得照会票Report();
         if (文字列_001.equals(通知書タイプ)) {
             yokoReportWriter.close();
         } else {
@@ -320,17 +313,17 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
         result.set発行日(new RDate(processParameter.get照会年月日().toString()));
         result.set市町村名(association.get市町村名());
         set所得照会先(result);
-        result.set生年月日(所得照会票データ.getSeinengappiYMD());
-        if (!転出者.equals(所得照会票データ.getJuminJotaiCode())) {
-            result.set転入前住所(所得照会票データ.getZenjusho());
+        result.set生年月日(所得照会票データbefore.getSeinengappiYMD());
+        if (!転出者.equals(所得照会票データbefore.getJuminJotaiCode())) {
+            result.set転入前住所(所得照会票データbefore.getZenjusho());
         } else {
-            result.set転出先住所(所得照会票データ.getGenjusho());
+            result.set転出先住所(所得照会票データbefore.getGenjusho());
         }
-        result.set氏名(所得照会票データ.getHihokenshaName());
-        result.set世帯コード(所得照会票データ.getSetaiCode());
-        result.set前住所(所得照会票データ.getZenjusho());
-        result.set現住所(所得照会票データ.getGenjusho());
-        result.set住民状態コード(所得照会票データ.getJuminJotaiCode());
+        result.set氏名(所得照会票データbefore.getHihokenshaName());
+        result.set世帯コード(所得照会票データbefore.getSetaiCode());
+        result.set前住所(所得照会票データbefore.getZenjusho());
+        result.set現住所(所得照会票データbefore.getGenjusho());
+        result.set住民状態コード(所得照会票データbefore.getJuminJotaiCode());
         result.set世帯員リスト(世帯員リスト);
         result.set担当部署名(差出人情報.get部署名());
         result.set担当者名(差出人情報.get担当者名());
@@ -339,7 +332,7 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
         result.set内線番号(差出人情報.get内線番号());
         result.set差出人_郵便番号(差出人情報.get郵便番号());
         result.set電話番号(差出人情報.get電話番号());
-        result.set住民種別コード(所得照会票データ.getJuminShubetsuCode());
+        result.set住民種別コード(所得照会票データbefore.getJuminShubetsuCode());
         return result;
     }
 
