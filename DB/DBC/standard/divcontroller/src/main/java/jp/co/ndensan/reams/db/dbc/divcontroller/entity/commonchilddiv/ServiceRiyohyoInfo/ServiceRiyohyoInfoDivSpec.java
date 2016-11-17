@@ -95,7 +95,7 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
         @Override
         public boolean apply(ServiceRiyohyoInfoDiv div) {
             Decimal 単位数単価 = div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().getValue();
-            return Decimal.ONE.compareTo(単位数単価) < 0;
+            return Decimal.ONE.compareTo(単位数単価) < 0 || Decimal.ONE.compareTo(単位数単価) == 0;
         }
     },
     /**

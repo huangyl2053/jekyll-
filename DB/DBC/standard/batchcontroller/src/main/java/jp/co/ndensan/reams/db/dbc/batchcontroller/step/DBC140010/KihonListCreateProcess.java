@@ -90,6 +90,7 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
     private static final RString サービス提供年月_200510 = new RString("200510");
     private static final RString 入所_院_前 = new RString("201104");
     private static final RString 区分_基本 = new RString("1");
+    private static final RString 広域内住所地特例フラグ = new RString("1");
 
     private static final int 居住サービス計画事業者名_LENGTH = 20;
     @BatchWriter
@@ -178,8 +179,7 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         基本entity.set後保険請求額(entity.getDbT3017_atoHokenSeikyugaku());
         基本entity.set前利用者負担額(entity.getDbT3017_maeHokenRiyoshaFutangaku());
         基本entity.set後利用者負担額(entity.getDbT3017_atoHokenRiyoshaFutangaku());
-        if (入力識別番号_715X.equals(入力識別番号)
-                || 入力識別番号_215X.equals(入力識別番号)
+        if (入力識別番号_715X.equals(入力識別番号) || 入力識別番号_215X.equals(入力識別番号)
                 || 入力識別番号_719X.equals(入力識別番号)
                 || 入力識別番号_219X.equals(入力識別番号)) {
             基本entity.set前緊急時施設療養費請求額(entity.getDbT3017_maeHokenKinkyuShisetsuRyoyoSeikyugaku());
@@ -269,7 +269,16 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         基本entity.set行政区(entity.getPsm_tmp2_gyoseikuName());
         基本entity.set住民コード(entity.getDbT1001_tmp2_shikibetsuCode());
         基本entity.set区分(区分_基本);
+        基本entity.set市町村コード(get市町村コード(entity));
         return 基本entity;
+    }
+
+    private RString get市町村コード(KihonRelateEntity entity) {
+        if (!広域内住所地特例フラグ.equals(entity.getDbT1001_tmp2_koikinaiJushochiTokureiFlag())) {
+            return entity.getDbT1001_tmp2_shichosonCode();
+        } else {
+            return entity.getDbT1001_tmp2_koikinaiTokureiSochimotoShichosonCode();
+        }
     }
 
     private RString get期間(RString 開始, RString 終了) {
