@@ -448,6 +448,7 @@
         <id column="taishoYM1"/>
         <id column="taishoYM2"/>
         <id column="居宅計画種類"/>
+        <id column="有効終了日"/>
         <association property="居宅計画" resultMap="resultMap_居宅計画Entity"/>
         <association property="異動一時" resultMap="resultMap_IdouTblEntity"/>
     </resultMap>
