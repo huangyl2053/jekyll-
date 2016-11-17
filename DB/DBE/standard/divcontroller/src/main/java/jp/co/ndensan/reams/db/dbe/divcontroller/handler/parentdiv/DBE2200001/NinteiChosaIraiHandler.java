@@ -269,6 +269,7 @@ public class NinteiChosaIraiHandler {
     public void set未割付申請者一覧(List<WaritsukeBusiness> 未割付一覧, RString hokenshaName) {
         List<dgMiwaritsukeShinseishaIchiran_Row> dataSource = new ArrayList<>();
         int i = 1;
+        FlexibleDate 基準日 = FlexibleDate.getNowDate();
         for (WaritsukeBusiness business : 未割付一覧) {
             dgMiwaritsukeShinseishaIchiran_Row row = new dgMiwaritsukeShinseishaIchiran_Row();
             row.setNo(new RString(String.valueOf(i++)));
@@ -288,7 +289,13 @@ public class NinteiChosaIraiHandler {
                 row.setShinseiKubunShinseiji(new RString(NinteiShinseiKubunShinsei.toValue(ninteiShinseiKubun).name()));
             }
             if (business.getChikuCode() != null) {
-                row.setChiku(business.getChikuCode().value());
+                RString codeName = CodeMaster.getCodeMeisho(
+                        SubGyomuCode.DBE認定支援,
+                        DBECodeShubetsu.調査地区コード.getコード(),
+                        new Code(business.getChikuCode().value()), 基準日);
+                if (codeName != null) {
+                    row.setChiku(codeName);
+                }
             }
             row.setZenkaiChosaItakusaki(nullToEmpty(business.getTemp_jigyoshaMeisho()));
             row.setZenkaiNinteiChosainShimei(nullToEmpty(business.getTemp_chosainShimei()));
@@ -412,6 +419,7 @@ public class NinteiChosaIraiHandler {
     public void set割付済み申請者一覧(List<WaritsukeBusiness> 割付済み申請者一覧, RString hokenshaName) {
         List<dgWaritsukeZumiShinseishaIchiran_Row> dataSource = new ArrayList<>();
         int i = 1;
+        FlexibleDate 基準日 = FlexibleDate.getNowDate();
         for (WaritsukeBusiness business : 割付済み申請者一覧) {
             dgWaritsukeZumiShinseishaIchiran_Row row = new dgWaritsukeZumiShinseishaIchiran_Row();
             TextBoxNum num = new TextBoxNum();
@@ -425,7 +433,13 @@ public class NinteiChosaIraiHandler {
             }
             setNinteiShinseiJoho(business, row);
             if (business.getChikuCode() != null) {
-                row.setChiku(business.getChikuCode().value());
+                RString codeName = CodeMaster.getCodeMeisho(
+                        SubGyomuCode.DBE認定支援,
+                        DBECodeShubetsu.調査地区コード.getコード(),
+                        new Code(business.getChikuCode().value()), 基準日);
+                if (codeName != null) {
+                    row.setChiku(codeName);
+                }
             }
             row.setZenkaiChosaItakusaki(nullToEmpty(business.getTemp_jigyoshaMeisho()));
             row.setZenkaiChosain(nullToEmpty(business.getTemp_chosainShimei()));
