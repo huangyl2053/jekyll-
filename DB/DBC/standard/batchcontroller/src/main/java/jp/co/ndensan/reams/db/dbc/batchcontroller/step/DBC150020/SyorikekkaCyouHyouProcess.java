@@ -33,7 +33,7 @@ public class SyorikekkaCyouHyouProcess extends BatchProcessBase<SyorikekkatempTb
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nenreikaikyuriyojokyo.INenreikaikyuRiyojokyoMapper."
             + "get処理結果確認リスト作成");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU900002");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC900004");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
@@ -47,7 +47,7 @@ public class SyorikekkaCyouHyouProcess extends BatchProcessBase<SyorikekkatempTb
     protected void initialize() {
         edit = new KyufujissekiEdit();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBU900002_ShoriKekkaKakuninList.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBC900004_ShoriKekkaKakuninList.csv"));
     }
 
     @Override

@@ -37,10 +37,10 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1801Shori
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "nenjiriyoshafutanwariaihantei.INenjiRiyoshaFutanwariaiHanteiMapper.get処理結果確認リスト");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBU900002"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC900004"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString CSVMEISHO = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private static final RString CSVMEISHO = new RString("DBC900004_ShoriKekkaKakuninList.csv");
     private static final RString 被保険者台帳データがありません = new RString("被保険者台帳データがありません。");
     private static final RString 宛名データがありません = new RString("宛名データがありません。");
     private static final RString 対象データがありません = new RString("対象データがありません。");
