@@ -12,8 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.ca.cax.business.core.shuno.shuno.Shuno;
-import jp.co.ndensan.reams.ca.cax.service.core.shuno.shuno.ShunoManager;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HyojiCodeResearcher;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
@@ -194,7 +192,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
             今後納付すべき額 = 普徴今後納付すべき額_収入元に;
         }
-        既に納付すべき額 = get納付済額(賦課情報_更正後);
+//        既に納付すべき額 = get納付済額(賦課情報_更正後);
         今後納付すべき額 = get特徴納付済額(賦課情報_更正後, 1, SIZE_6).add(納付済額).subtract(既に納付すべき額);
         FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
         EditedHonSanteiTsuchiShoKyotsu shoKyotsu = new EditedHonSanteiTsuchiShoKyotsu();
@@ -242,18 +240,17 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         return shoKyotsu;
     }
 
-    private Decimal get納付済額(FukaJoho fukaJoho) {
-        Decimal sum = Decimal.ZERO;
-        for (long 収納ID : fukaJoho.get収納ID()) {
-            Shuno 収納 = ShunoManager.createInstance().get収納(収納ID);
-            if (null == 収納 || null == 収納.get収入合計情報()) {
-                continue;
-            }
-            sum = sum.add(収納.get収入合計情報().get本税());
-        }
-        return sum;
-    }
-
+//    private Decimal get納付済額(FukaJoho fukaJoho) {
+//        Decimal sum = Decimal.ZERO;
+//        for (long 収納ID : fukaJoho.get収納ID()) {
+//            Shuno 収納 = ShunoManager.createInstance().get収納(収納ID);
+//            if (null == 収納 || null == 収納.get収入合計情報()) {
+//                continue;
+//            }
+//            sum = sum.add(収納.get収入合計情報().get本税());
+//        }
+//        return sum;
+//    }
     private void edit編集後本算定通知書共通情報(HonSanteiTsuchiShoKyotsu 本算定通知書情報, EditedHonSanteiTsuchiShoKyotsu shoKyotsu) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(本算定通知書情報.get賦課の情報_更正後().get宛名().toEntity());
         EditedKojin editedKojin = new EditedKojin(kojin, 本算定通知書情報.get帳票制御共通(), 本算定通知書情報.get地方公共団体());
