@@ -128,13 +128,16 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             DbT1001HihokenshaDaichoEntity 被保険者台帳 = 被保険者台帳List.get(i);
             if (!isDateEmpty(被保険者台帳.getShikakuSoshitsuYMD())) {
                 チェック使用被保険者台帳.add(被保険者台帳);
+                if (i == 被保険者台帳List.size() - ORDER_1) {
+                    lastRecordAdd = false;
+                }
             } else if (STR_11.equals(被保険者台帳.getShikakuShutokuJiyuCode())
                     || STR_13.equals(被保険者台帳.getShikakuShutokuJiyuCode())
                     || STR_17.equals(被保険者台帳.getShikakuShutokuJiyuCode())) {
                 チェック使用被保険者台帳.add(被保険者台帳);
-            }
-            if (i == 被保険者台帳List.size() - ORDER_1) {
-                lastRecordAdd = false;
+                if (i == 被保険者台帳List.size() - ORDER_1) {
+                    lastRecordAdd = false;
+                }
             }
         }
         if (lastRecordAdd) {
@@ -296,16 +299,12 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
      * @param 異動一時List List<IdouTblEntity>
      * @return List<DbT3105SogoJigyoTaishoshaEntity>
      */
-    public static List<DbT3105SogoJigyoTaishoshaEntity> get総合事業対象者(List<IdouTblEntity> 異動一時List,
-            List<KyotakuEntity> 居宅計画List) {
+    public static List<DbT3105SogoJigyoTaishoshaEntity> get総合事業対象者(List<IdouTblEntity> 異動一時List) {
         List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List = new ArrayList<>();
         for (IdouTblEntity 異動一時 : 異動一時List) {
             DbT3105SogoJigyoTaishoshaEntity 総合事業対象者 = get総合事業対象者entity(異動一時.get総合事業対象者());
             if (総合事業対象者 == null) {
                 continue;
-            }
-            if (居宅計画List != null && !居宅計画List.isEmpty()) {
-                総合事業対象者.setTekiyoKaishiYMD(居宅計画List.get(ORDER_0).get届出年月日());
             }
             総合事業対象者List.add(総合事業対象者);
         }
@@ -1167,13 +1166,6 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             entity.set給付率引下げ開始年月日(星);
             entity.set給付率引下げ終了年月日(星);
         }
-        if (STR_3.equals(entity.get減免申請中区分コード())
-                && (RString.isNullOrEmpty(entity.get適用開始年月日())
-                || 星.equals(entity.get適用開始年月日())
-                || RString.isNullOrEmpty(entity.get負担額適用開始年月日())
-                || 星.equals(entity.get負担額適用開始年月日()))) {
-            entity.set減免申請中区分コード(STR_1);
-        }
         if (!RString.isNullOrEmpty(entity.get適用終了年月日())
                 && (isBeforeDate(new FlexibleDate(entity.get適用終了年月日()), entity.get異動年月日())
                 || isBeforeDate(new FlexibleDate(entity.get適用終了年月日()), entity.get資格取得年月日()))) {
@@ -1199,6 +1191,14 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 && (RString.isNullOrEmpty(entity.get負担限度額適用開始年月日())
                 || 星.equals(entity.get負担限度額適用開始年月日()))) {
             entity.set特定入所者認定申請中区分コード(STR_1);
+        }
+
+        if (STR_3.equals(entity.get減免申請中区分コード())
+                && (RString.isNullOrEmpty(entity.get適用開始年月日())
+                || 星.equals(entity.get適用開始年月日())
+                || RString.isNullOrEmpty(entity.get負担額適用開始年月日())
+                || 星.equals(entity.get負担額適用開始年月日()))) {
+            entity.set減免申請中区分コード(STR_1);
         }
 
         if (!RString.isNullOrEmpty(entity.get負担限度額適用終了年月日())

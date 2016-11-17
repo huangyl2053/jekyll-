@@ -50,7 +50,7 @@ public class KyufukanrihyoOutDoBillOutProcess extends BatchKeyBreakBase<Kyufukan
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(READ_DATA_ID, parameter.toKyufukanrihyoOutMybatisParameter());
+        return new BatchDbReader(READ_DATA_ID, parameter.toKyufukanrihyoOutMybatisParameter(RString.EMPTY, RString.EMPTY, RString.EMPTY));
     }
 
     @Override

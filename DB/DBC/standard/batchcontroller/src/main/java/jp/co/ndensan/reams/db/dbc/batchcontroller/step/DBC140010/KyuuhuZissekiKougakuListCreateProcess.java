@@ -46,8 +46,8 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
     private static final RString 入力識別番号_7155 = new RString("7155");
     private static final RString 入力識別番号_7156 = new RString("7156");
     private static final RString サービス提供年月_200510 = new RString("200510");
-    private static final RString 区分_基本 = new RString("1");
-
+    private static final RString 区分_高額 = new RString("2");
+    private static final RString 広域内住所地特例フラグ = new RString("1");
     private static final int 居住サービス計画事業者名_LENGTH = 20;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 基本List;
@@ -124,7 +124,7 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
         基本entity.set行政区コード(entity.getPsm_tmp2_gyoseikuCode());
         基本entity.set行政区(entity.getPsm_tmp2_gyoseikuName());
         基本entity.set住民コード(entity.getDbt1001_tmp2_shikibetsuCode());
-        基本entity.set区分(区分_基本);
+        基本entity.set区分(区分_高額);
         基本entity.set高額受付年月日(entity.getDbt3028_uketsukeYMD());
         基本entity.set高額決定年月日(entity.getDbt3028_ketteiYMD());
         基本entity.set高額公費１負担番号(entity.getDbt3028_kohi1FutanNo());
@@ -138,7 +138,16 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
         基本entity.set高額公費１支給額(entity.getDbt3028_kohi1Shikyugaku());
         基本entity.set高額公費２支給額(entity.getDbt3028_kohi2Shikyugaku());
         基本entity.set高額公費３支給額(entity.getDbt3028_kohi3Shikyugaku());
+        基本entity.set市町村コード(名称);
         return 基本entity;
+    }
+
+    private RString get市町村コード(KyuuhuZissekiKougakuRelateEntity entity) {
+        if (!広域内住所地特例フラグ.equals(entity.getDbt1001_tmp2_koikinaiJushochiTokureiFlag())) {
+            return entity.getDbt1001_tmp2_shichosonCode();
+        } else {
+            return entity.getDbt1001_tmp2_koikinaiTokureiSochimotoShichosonCode();
+        }
     }
 
     private RString get基本ヘッダー(RString 入力識別番号, RString サービス提供年月, List<RString> 入力識別番号List) {

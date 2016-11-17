@@ -47,6 +47,9 @@ public class Kitsuki {
      * @throws NumberFormatException 保持する期がint型に変換できない場合
      */
     public int get期AsInt() {
+        if (RString.isNullOrEmpty(期)) {
+            return 0;
+        }
         return Integer.parseInt(期.toString());
     }
 

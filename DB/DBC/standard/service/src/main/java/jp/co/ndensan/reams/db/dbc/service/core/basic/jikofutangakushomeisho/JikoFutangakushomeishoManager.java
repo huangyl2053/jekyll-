@@ -45,7 +45,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesak
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -105,6 +104,9 @@ public class JikoFutangakushomeishoManager {
             parameter.set申請状況区分(申請状況区分);
             parameter.set支給申請区分(支給申請区分);
             List<TaisyousyaEntity> 対象者データ = mapper.get対象者データ1(parameter);
+            if (対象者データ.isEmpty()) {
+                return new ArrayList<>();
+            }
             List<KogakuGassanShinSeisho> 対象者データlist = new ArrayList<>();
             for (TaisyousyaEntity taisyousyaEntity : 対象者データ) {
                 KogakuGassanShinSeisho kogakuGassanShinSeisho = new KogakuGassanShinSeisho();
@@ -134,7 +136,7 @@ public class JikoFutangakushomeishoManager {
             }
             return 対象者データlist;
         }
-        return null;
+        return new ArrayList<>();
     }
 
     /**
@@ -166,18 +168,22 @@ public class JikoFutangakushomeishoManager {
      */
     public ToiawasesakiSource get問合せ先(ReportId 帳票分類ID) {
         DbT7069KaigoToiawasesakiEntity dbT7069 = 介護問合せ先dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID);
+
         KaigoToiawasesaki kaigoToiawasesaki = new KaigoToiawasesaki(dbT7069);
         ToiawasesakiSource source = new ToiawasesakiSource();
-        if (kaigoToiawasesaki.get郵便番号() != null) {
-            source.yubinBango = kaigoToiawasesaki.get郵便番号().value();
+        if (dbT7069 != null) {
+            if (kaigoToiawasesaki.get郵便番号() != null) {
+                source.yubinBango = kaigoToiawasesaki.get郵便番号().value();
+            }
+            source.shozaichi = kaigoToiawasesaki.get所在地();
+            source.choshaBushoName = kaigoToiawasesaki.get庁舎名();
+            source.tantoName = kaigoToiawasesaki.get担当者名();
+            if (kaigoToiawasesaki.get電話番号() != null) {
+                source.telNo = kaigoToiawasesaki.get電話番号().value();
+            }
+            source.naisenNo = kaigoToiawasesaki.get内線番号();
+            return source;
         }
-        source.shozaichi = kaigoToiawasesaki.get所在地();
-        source.choshaBushoName = kaigoToiawasesaki.get庁舎名();
-        source.tantoName = kaigoToiawasesaki.get担当者名();
-        if (kaigoToiawasesaki.get電話番号() != null) {
-            source.telNo = kaigoToiawasesaki.get電話番号().value();
-        }
-        source.naisenNo = kaigoToiawasesaki.get内線番号();
         return source;
     }
 
@@ -205,7 +211,8 @@ public class JikoFutangakushomeishoManager {
         return kogakuGassanData;
     }
 
-    private void editKogakuGassanData1(KogakuGassanJohoEntity 高額合算情報, KogakuGassanData kogakuGassanData, JikoFutangakushomeishoParameter parameter) {
+    private void editKogakuGassanData1(KogakuGassanJohoEntity 高額合算情報,
+            KogakuGassanData kogakuGassanData, JikoFutangakushomeishoParameter parameter) {
         KogakuGassanJohoEntity 宛名から被保険者 = mapper.get宛名から被保険者の個人情報(parameter);
         DbT3170JigyoKogakuGassanJikoFutanGakuEntity 事業高額合算自己負担額entity = 高額合算情報.get事業高額合算自己負担額entity();
         List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity> 事業高額合算自己負担額明細entityList = 高額合算情報.get事業高額合算自己負担額明細entity();
@@ -231,7 +238,7 @@ public class JikoFutangakushomeishoManager {
         kogakuGassanData.set合計_70_74自己負担額_内訳(事業高額合算自己負担額entity.getGokei_70_74JikoFutanGaku());
         kogakuGassanData.set補正済_合計_自己負担額(事業高額合算自己負担額entity.getSumi_Gokei_JikoFutanGaku());
         kogakuGassanData.set補正済_合計_70_74自己負担額_内訳(事業高額合算自己負担額entity.getSumi_Gokei_70_74JikoFutanGaku());
-        kogakuGassanData.set識別コード(ShikibetsuCode.EMPTY);
+        kogakuGassanData.set識別コード(parameter.get識別コード());
         List<KogakuGassanMeisai> 明細List = new ArrayList<>();
         if (!事業高額合算自己負担額明細entityList.isEmpty()) {
             for (DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity 事業高額合算自己負担額明細entity : 事業高額合算自己負担額明細entityList) {
@@ -248,7 +255,8 @@ public class JikoFutangakushomeishoManager {
 
     }
 
-    private void editKogakuGassanData(KogakuGassanJohoEntity 高額合算情報, KogakuGassanData kogakuGassanData, JikoFutangakushomeishoParameter parameter) {
+    private void editKogakuGassanData(KogakuGassanJohoEntity 高額合算情報,
+            KogakuGassanData kogakuGassanData, JikoFutangakushomeishoParameter parameter) {
         KogakuGassanJohoEntity 宛名から被保険者 = mapper.get宛名から被保険者の個人情報(parameter);
         DbT3070KogakuGassanJikoFutanGakuEntity 高額合算自己負担額entity = 高額合算情報.get高額合算自己負担額entity();
         List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity> 高額合算自己負担額明細entityList = 高額合算情報.get高額合算自己負担額明細entity();
@@ -274,7 +282,7 @@ public class JikoFutangakushomeishoManager {
         kogakuGassanData.set合計_70_74自己負担額_内訳(高額合算自己負担額entity.getGokei_70_74JikoFutanGaku());
         kogakuGassanData.set補正済_合計_自己負担額(高額合算自己負担額entity.getSumi_Gokei_JikoFutanGaku());
         kogakuGassanData.set補正済_合計_70_74自己負担額_内訳(高額合算自己負担額entity.getSumi_Gokei_70_74JikoFutanGaku());
-        kogakuGassanData.set識別コード(ShikibetsuCode.EMPTY);
+        kogakuGassanData.set識別コード(parameter.get識別コード());
         List<KogakuGassanMeisai> 明細List = new ArrayList<>();
         for (DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 高額合算自己負担額明細entity : 高額合算自己負担額明細entityList) {
             KogakuGassanMeisai meisai = new KogakuGassanMeisai();

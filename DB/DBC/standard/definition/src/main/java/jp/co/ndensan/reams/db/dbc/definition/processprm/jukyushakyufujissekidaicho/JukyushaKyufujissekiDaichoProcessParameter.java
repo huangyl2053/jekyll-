@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushakyufujissekidaicho;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoSyutuMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -79,7 +80,7 @@ public class JukyushaKyufujissekiDaichoProcessParameter implements IBatchProcess
     private RString 計画作成事業者番号;
     private RString 給付率区分;
     private RString 給付率;
-    private RString 出力順ID;
+    private long 出力順ID;
     private RString psmShikibetsuTaisho;
 
     /**
@@ -207,7 +208,7 @@ public class JukyushaKyufujissekiDaichoProcessParameter implements IBatchProcess
             RString 計画作成事業者番号,
             RString 給付率区分,
             RString 給付率,
-            RString 出力順ID) {
+            long 出力順ID) {
         this.対象年月 = 対象年月;
         this.年月範囲_開始 = 年月範囲_開始;
         this.年月範囲_終了 = 年月範囲_終了;
@@ -339,6 +340,16 @@ public class JukyushaKyufujissekiDaichoProcessParameter implements IBatchProcess
                 給付率,
                 出力順ID,
                 psmShikibetsuTaisho);
+    }
+
+    /**
+     * 帳票データの取得のパラメータを作成します。
+     *
+     * @param 出力順 出力順
+     * @return 帳票データの取得のパラメータ
+     */
+    public JukyushaKyufujissekiDaichoSyutuMybatisParameter toJukyushaKyufujissekiDaichoMybatisParameter(RString 出力順) {
+        return JukyushaKyufujissekiDaichoSyutuMybatisParameter.createParam(出力順);
     }
 
 }

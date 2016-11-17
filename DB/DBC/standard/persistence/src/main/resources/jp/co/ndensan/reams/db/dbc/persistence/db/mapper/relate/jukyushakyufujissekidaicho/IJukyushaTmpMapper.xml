@@ -12,8 +12,6 @@
           *
         FROM 
           "tempKihon"
-        WHERE
-          "区分" = '1'
     </select>
     
     <select resultOrdered="true" id="get明細" 
@@ -110,8 +108,16 @@
           *
         FROM 
           "tempKihon"
-        WHERE
-          "区分" = '2'
+    </select>
+    
+    <select resultOrdered="true" id="get帳票データ" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoSyutuMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoData" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          "tempJukyushaKyufuJissekidaichoData"
+          ${出力順}
     </select>
     
 </mapper>

@@ -276,7 +276,7 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends BatchProcessBase<
         本算定通知書情報.set帳票制御共通(帳票制御共通);
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
         総ページ数 = publish特徴開始通知書(編集後本算定通知書共通情報);
-        TokubetsuChoshuKaishiReport report = new TokubetsuChoshuKaishiReport(tempEntity.get生活保護区分(),
+        TokubetsuChoshuKaishiReport report = new TokubetsuChoshuKaishiReport(
                 tempEntity.get特徴10月開始者区分(), 本算定通知書情報,
                 編集後本算定通知書共通情報, processParameter.get調定年度(),
                 processParameter.get帳票作成日時().getRDateTime(), 地方公共団体.get地方公共団体コード().getColumnValue(),

@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
@@ -23,7 +22,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.dgdK
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820022.KyufuShiharayiMeisaiValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
@@ -497,7 +497,7 @@ public class KyufuShiharayiMeisaiPanel {
         ShomeishoNyuryokuFlag 証明書入力済フラグ = ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        RString 証明書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance().証明書InputCheck(証明書入力済フラグ, 様式番号, サービス年月);
+        ShomeishoNyuryokuKanryoKubunType 証明書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance().証明書InputCheck(証明書入力済フラグ, 様式番号, サービス年月);
 
         if (入力完了.equals(証明書入力済区分)) {
             ViewStateHolder.put(ViewStateKeys.証明書入力完了フラグ, 入力完了);

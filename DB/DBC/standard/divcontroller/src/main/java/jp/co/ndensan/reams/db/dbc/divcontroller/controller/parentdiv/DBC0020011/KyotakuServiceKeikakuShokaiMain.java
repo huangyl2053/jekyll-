@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KyotakuKeikakuTodokedeManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -37,7 +39,9 @@ public class KyotakuServiceKeikakuShokaiMain {
      */
     public ResponseData<KyotakuServiceKeikakuShokaiMainDiv> onLoad(KyotakuServiceKeikakuShokaiMainDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        this.getHander(div).initialize(資格対象者);
+        if (this.getHander(div).initialize(資格対象者).isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
+        }
         return ResponseData.of(div).setState(DBC0020011StateName.初期表示);
     }
 

@@ -1182,6 +1182,12 @@ public class ServiceRiyohyoInfoDivHandler {
             row = new dgServiceRiyohyoBeppyoList_Row();
             row.setRowState(RowState.Added);
             setRowInButtonKakutei(row);
+            if (!get全て同事業者(rowList, row).isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage());
+            }
+            if (!get同事業者(rowList, row).isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.重複サービス.getMessage());
+            }
             rowList.add(row);
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
         } else {
@@ -1192,6 +1198,27 @@ public class ServiceRiyohyoInfoDivHandler {
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
         rowListNew = ソードGrid(rowListNew);
         div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowListNew);
+    }
+    
+    private List<dgServiceRiyohyoBeppyoList_Row> get全て同事業者(List<dgServiceRiyohyoBeppyoList_Row> rowList, dgServiceRiyohyoBeppyoList_Row row) {
+        List<dgServiceRiyohyoBeppyoList_Row> 全て同事業者 = new ArrayList<>();
+        for (dgServiceRiyohyoBeppyoList_Row dgRow : rowList) {
+            if (dgRow.getJigyosha().equals(row.getJigyosha()) && dgRow.getService().equals(row.getService())
+                    && dgRow.getServiceTani().getText().equals(row.getServiceTani().getText())) {
+                全て同事業者.add(dgRow);
+            }
+        }
+        return 全て同事業者;
+    }
+    
+    private List<dgServiceRiyohyoBeppyoList_Row> get同事業者(List<dgServiceRiyohyoBeppyoList_Row> rowList, dgServiceRiyohyoBeppyoList_Row row) {
+        List<dgServiceRiyohyoBeppyoList_Row> 同事業者 = new ArrayList<>();
+        for (dgServiceRiyohyoBeppyoList_Row dgRow : rowList) {
+            if (dgRow.getJigyosha().equals(row.getJigyosha()) && dgRow.getService().equals(row.getService())) {
+                同事業者.add(dgRow);
+            }
+        }
+        return 同事業者;
     }
 
     private void setRowInButtonKakutei(dgServiceRiyohyoBeppyoList_Row row) {

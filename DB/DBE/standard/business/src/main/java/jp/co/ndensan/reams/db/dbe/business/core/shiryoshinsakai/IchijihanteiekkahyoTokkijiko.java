@@ -263,6 +263,9 @@ public class IchijihanteiekkahyoTokkijiko {
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString filename) {
+        if (sharedFileId == null) {
+            return RString.EMPTY;
+        }
         RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(filename),

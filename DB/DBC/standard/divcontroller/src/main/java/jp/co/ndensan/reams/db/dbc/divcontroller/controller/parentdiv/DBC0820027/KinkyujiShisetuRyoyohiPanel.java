@@ -12,6 +12,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
+import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.DBC0820027StateName.削除モード;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.DBC0820027StateName.新規修正モード;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.DBC0820027TransitionEventName;
@@ -19,11 +20,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.Kink
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.dgdKinkyujiShiseturyoyo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820027.KinkyujiShisetuRyoyohiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -39,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -77,19 +80,20 @@ public class KinkyujiShisetuRyoyohiPanel {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         ViewStateHolder.put(ViewStateKeys.申請年月日, 申請日);
-        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.申請検索キー,
-                ShoukanharaihishinseikensakuParameter.class);
-        SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(償還払費申請検索.getYoshikiNo(),
-                償還払費申請検索.getServiceTeikyoYM());
-        ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
+        SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(様式番号, サービス年月);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
 
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
         List<ShokanKinkyuShisetsuRyoyo> list = finder.
                 getKinkyujiShisetsuRyoyoData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-        List<ShokanKinkyuShisetsuRyoyo> updateList = ViewStateHolder.get(ViewStateKeys.償還払請求緊急時施設療養データ, ArrayList.class);
+        ViewStateHolder.put(ViewStateKeys.緊急時施設療養DB, (Serializable) list);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        List<ShokanKinkyuShisetsuRyoyo> updateList = new ArrayList<>();
+        if (dbJoho != null && dbJoho.get償還払請求緊急時施設療養データList() != null) {
+            updateList = getHandler(div).getUpdateList(dbJoho.get償還払請求緊急時施設療養データList(), parameter);
+        }
         Map<RString, RString> map = ViewStateHolder.get(ViewStateKeys.緊急時施設療養_グリッドエリア, Map.class);
-        if (map != null && updateList != null) {
+        if (map != null && !updateList.isEmpty()) {
             List<ShokanKinkyuShisetsuRyoyo> realList = getHandler(div).setRealList(list, updateList, map);
             ViewStateHolder.put(ViewStateKeys.緊急時施設療養, (Serializable) realList);
         } else {
@@ -101,10 +105,8 @@ public class KinkyujiShisetuRyoyohiPanel {
 
         getHandler(div).initPanelHead(被保険者番号, 整理番号, サービス年月, 申請日, 事業者番号,
                 明細番号, 証明書, 様式番号, 識別コード);
-        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー,
-                SikibetuNokennsakuki.class);
         ShikibetsuNoKanri 識別番号管理情報 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
+                .getShikibetsuNoKanri(sikibetuKey.getServiceTeikyoYM(), sikibetuKey.getSikibetuNo());
         if (識別番号管理情報 != null) {
             int count = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShokanKihonCount(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
@@ -222,9 +224,15 @@ public class KinkyujiShisetuRyoyohiPanel {
      * @return response
      */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnConfirm(KinkyujiShisetuRyoyohiPanelDiv div) {
+        for (ValidationMessageControlPairs pairs : getHandler(div).checkKakutei()) {
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+        }
         RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         int maxRenban = ViewStateHolder.get(ViewStateKeys.緊急時施設療養_最大連番, Integer.class);
-        boolean is追加 = getHandler(div).click_Confirm(state, maxRenban);
+        List<ShokanKinkyuShisetsuRyoyo> list = ViewStateHolder.get(ViewStateKeys.緊急時施設療養DB, ArrayList.class);
+        boolean is追加 = getHandler(div).click_Confirm(state, maxRenban, list);
         if (is追加) {
             maxRenban = maxRenban + 1;
             ViewStateHolder.put(ViewStateKeys.緊急時施設療養_最大連番, maxRenban);
@@ -252,6 +260,7 @@ public class KinkyujiShisetuRyoyohiPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                ViewStateHolder.put(ViewStateKeys.償還払請求緊急時施設療養データ, null);
                 return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る).respond();
             } else {
                 ResponseData.of(div).respond();
@@ -286,17 +295,44 @@ public class KinkyujiShisetuRyoyohiPanel {
     }
 
     private ShoukanharaihishinseimeisaikensakuParameter set入力内容保存(KinkyujiShisetuRyoyohiPanelDiv div) {
-        List<ShokanKinkyuShisetsuRyoyo> updateList = ViewStateHolder.get(ViewStateKeys.償還払請求緊急時施設療養データ, ArrayList.class);
         ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
                 ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        if (dbJoho == null) {
+            dbJoho = new DbJohoViewState();
+        }
+        List<ShokanKinkyuShisetsuRyoyo> updateList = new ArrayList<>();
+        if (dbJoho.get償還払請求緊急時施設療養データList() != null) {
+            updateList = getHandler(div).getUpdateList(dbJoho.get償還払請求緊急時施設療養データList(), kensakuParameter);
+        }
+        ShokanKihon kihon = null;
+        int updateNum = 0;
+        List<ShokanKihon> kihonList = dbJoho.get償還払請求基本データList();
+        if (kihonList != null && !kihonList.isEmpty()) {
+            Map<Integer, ShokanKihon> map = getHandler(div).getShokanKihonMap(kihonList, kensakuParameter);
+            for (Map.Entry<Integer, ShokanKihon> mapValue : map.entrySet()) {
+                kihon = mapValue.getValue();
+                updateNum = mapValue.getKey();
+                break;
+            }
+        }
+
         try {
             List<ShokanKinkyuShisetsuRyoyo> list = ViewStateHolder.get(ViewStateKeys.緊急時施設療養, ArrayList.class);
             updateList = getHandler(div).get更新リスト(list, kensakuParameter, updateList);
+            kihon = getHandler(div).set基本情報(kihon);
         } catch (Exception e) {
             throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
-        ViewStateHolder.put(ViewStateKeys.償還払請求緊急時施設療養データ, (Serializable) updateList);
-        if (updateList != null && !updateList.isEmpty()) {
+
+        dbJoho.set償還払請求緊急時施設療養データList(new ArrayList<>(updateList));
+        if (kihon != null) {
+            kihonList.set(updateNum, kihon);
+            dbJoho.set償還払請求基本データList(new ArrayList<>(kihonList));
+        }
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
+
+        if (!updateList.isEmpty()) {
             Map<RString, RString> map = getHandler(div).getDataGridMap();
             ViewStateHolder.put(ViewStateKeys.緊急時施設療養_グリッドエリア, (Serializable) map);
         }

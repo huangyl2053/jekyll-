@@ -40,12 +40,12 @@ public class ShoriKekkaKakuninProcess extends BatchProcessBase<DbWT1801ShoriKekk
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc180050.IKoseiTaishoKyufuJissekiIchiranMapper.get処理結果確認リスト");
     private CsvWriter<ShoriKekkaKakuninCsvEntity> csvWriter;
 
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBU900002"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC900004"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
     private FileSpoolManager manager;
-    private static final RString CSVファイル名 = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private static final RString CSVファイル名 = new RString("DBC900004_ShoriKekkaKakuninList.csv");
     private static final RString 作成 = new RString("作成");
     private static final RString 処理名 = new RString("負担割合情報作成");
     private static final RString エラー内容_削除 = new RString("負担割合データが削除されています。");

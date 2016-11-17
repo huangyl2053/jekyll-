@@ -24,21 +24,9 @@ public enum KarisanteigakuTsuchishoOutPutOrder implements IReportItems {
      */
     町域コード(new RString("0002"), new RString("町域コード"), new RString("\"atesaki_choikiCode\"")),
     /**
-     * 番地コード1
+     * 番地コード
      */
-    番地コード1(new RString("0003"), new RString("番地コード1"), new RString("\"atesaki_banchiCode1\"")),
-    /**
-     * 番地コード2
-     */
-    番地コード2(new RString("0003"), new RString("番地コード2"), new RString("\"atesaki_banchiCode2\"")),
-    /**
-     * 番地コード3
-     */
-    番地コード3(new RString("0003"), new RString("番地コード3"), new RString("\"atesaki_banchiCode3\"")),
-    /**
-     * 番地コード4
-     */
-    番地コード4(new RString("0003"), new RString("番地コード4"), new RString("\"atesaki_banchiCode4\"")),
+    番地コード(new RString("0003"), new RString("番地コード"), new RString("\"atesaki_banchiCode\"")),
     /**
      * 行政区コード
      */
@@ -96,21 +84,9 @@ public enum KarisanteigakuTsuchishoOutPutOrder implements IReportItems {
      */
     生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("\"生活保護区分\"")),
     /**
-     * 調定事由1
+     * 調定事由
      */
-    調定事由1(new RString("0212"), new RString("調定事由1"), new RString("\"dbT2015KeisangoJoho_choteiJiyu1\"")),
-    /**
-     * 調定事由2
-     */
-    調定事由2(new RString("0212"), new RString("調定事由2"), new RString("\"dbT2015KeisangoJoho_choteiJiyu2\"")),
-    /**
-     * 調定事由3
-     */
-    調定事由3(new RString("0212"), new RString("調定事由3"), new RString("\"dbT2015KeisangoJoho_choteiJiyu3\"")),
-    /**
-     * 調定事由4
-     */
-    調定事由4(new RString("0212"), new RString("調定事由4"), new RString("\"dbT2015KeisangoJoho_choteiJiyu4\""));
+    調定事由(new RString("0212"), new RString("調定事由"), new RString("\"dbT2015KeisangoJoho_choteiJiyu\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820024;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoHenkoFlag;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
+import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
@@ -16,17 +19,17 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.ServiceKeikakuHiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.dgdYichiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820024.ServiceKeikakuHiPanelHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
+import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -55,8 +58,9 @@ public class ServiceKeikakuHiPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 修正 = new RString("修正");
-    private static final RString 申請を保存するボタン = new RString("btnUpdate");
-    private static final RString 申請を削除するボタン = new RString("btnDelete");
+    private static final RString 確定するボタン = new RString("Element1");
+    private static final RString 証明書入力未済あり = new RString("2");
+    private static final RString 証明書入力未済ありエラー = new RString("請求額集計情報の未登録のサービス種類が存在します。\n\r請求額集計情報を登録して下さい。");
 
     /**
      * 画面初期化onLoad
@@ -65,8 +69,11 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払い費支給申請決定_サービス提供証明書(サービス計画費)画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onLoad(ServiceKeikakuHiPanelDiv div) {
+        ServiceKeikakuHiPanelHandler handler = getHandler(div);
         ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        DbJohoViewState 開始時点の償還払サービス計画費 = ViewStateHolder.get(ViewStateKeys.開始時点の償還払サービス計画費, DbJohoViewState.class);
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
@@ -74,20 +81,21 @@ public class ServiceKeikakuHiPanel {
         RString 様式番号 = meisaiPar.get様式番号();
         RString 明細番号 = meisaiPar.get明細番号();
         RDate 申請日 = meisaiPar.get申請日();
-        ViewStateHolder.put(ViewStateKeys.サービス年月, サービス年月);
-        ViewStateHolder.put(ViewStateKeys.様式番号, 様式番号);
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
-        ViewStateHolder.put(ViewStateKeys.申請年月日, 申請日);
-        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.申請検索キー,
-                ShoukanharaihishinseikensakuParameter.class);
-        SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(償還払費申請検索.getYoshikiNo(),
-                償還払費申請検索.getServiceTeikyoYM());
-        ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
+        if (null == 償還払ViewStateDB) {
+            償還払ViewStateDB = new DbJohoViewState();
+            ShokanKihon 基本情報 = new ShokanKihon(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+            ArrayList<ShokanKihon> 償還払請求基本データList = new ArrayList<>();
+            償還払請求基本データList.add(基本情報);
+            償還払ViewStateDB.set償還払請求基本データList(償還払請求基本データList);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
+        }
+        if (null == 開始時点の償還払サービス計画費) {
+            開始時点の償還払サービス計画費 = new DbJohoViewState();
+            ViewStateHolder.put(ViewStateKeys.開始時点の償還払サービス計画費, 開始時点の償還払サービス計画費);
+        }
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        ViewStateHolder.put(ViewStateKeys.画面モード, 登録モード);
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        ServiceKeikakuHiPanelHandler handler = getHandler(div);
+        RString 画面モード = 登録モード;
+        ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
         div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         if (明細番号 == null || 明細番号.isEmpty()) {
@@ -98,47 +106,60 @@ public class ServiceKeikakuHiPanel {
         if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
             div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(true);
             div.getPanelServiceKeikakuhiDown().setDisplayNone(true);
-            List<ShokanServicePlan200904Result> entity200904List
-                    = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(
-                            被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            if (checkNull(entity200904List)) {
-                handler.load事業者区分リスト200904();
-                ViewStateHolder.put(ViewStateKeys.サービス計画費データ, null);
-                return createResponse(div);
+            List<ShokanServicePlan200904Result> entity200904ResultList = 償還払ViewStateDB.get償還払請求サービス計画200904データResultList(
+                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+            if (checkNull(entity200904ResultList)) {
+                entity200904ResultList = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(
+                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+                if (checkNull(entity200904ResultList)) {
+                    handler.load事業者区分リスト200904();
+                    return createResponse(div);
+                }
+                償還払ViewStateDB.add償還払請求サービス計画200904データResult(entity200904ResultList);
+                開始時点の償還払サービス計画費.add償還払請求サービス計画200904データResult(entity200904ResultList);
             }
-            ViewStateHolder.put(ViewStateKeys.サービス計画費データ, (Serializable) entity200904List);
-            handler.onLoad200904(entity200904List, 画面モード);
+            handler.onLoad200904(entity200904ResultList, 画面モード);
         } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
             div.getPanelServiceKeikakuhiUp().setDisplayNone(true);
-            List<ShokanServicePlan200604Result> entity200604
-                    = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200604(
-                            被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            if (checkNull(entity200604)) {
-                handler.load事業者区分リスト200904前();
-                ViewStateHolder.put(ViewStateKeys.サービス計画費データ, null);
-                return createResponse(div);
+            ShokanServicePlan200604Result entity200604Result = 償還払ViewStateDB.get償還払請求サービス計画200604データResult(
+                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+            if (null == entity200604Result) {
+                List<ShokanServicePlan200604Result> entity200604ResultList = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200604(
+                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+                if (checkNull(entity200604ResultList)) {
+                    handler.load事業者区分リスト200904前();
+                    return createResponse(div);
+                }
+                entity200604Result = entity200604ResultList.get(0);
+                償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
+                開始時点の償還払サービス計画費.add償還払請求サービス計画200604データResult(entity200604Result);
             }
-            ViewStateHolder.put(ViewStateKeys.サービス計画費データ, entity200604.get(0));
-            handler.onLoad200604(entity200604.get(0), 画面モード);
+            handler.onLoad200604(entity200604Result, 画面モード);
         } else {
             div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().setDisplayNone(true);
             div.getPanelServiceKeikakuhiDown().getTxtTekiyo().setDisplayNone(true);
             div.getPanelServiceKeikakuhiUp().setDisplayNone(true);
-            List<ShokanServicePlan200004Result> entity200004
-                    = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200004(
-                            被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            if (checkNull(entity200004)) {
-                handler.load事業者区分リスト200904前();
-                ViewStateHolder.put(ViewStateKeys.サービス計画費データ, null);
-                return createResponse(div);
+            ShokanServicePlan200004Result entity200004Result = 償還払ViewStateDB.get償還払請求サービス計画200004データResult(
+                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+            if (null == entity200004Result) {
+                List<ShokanServicePlan200004Result> entity200004ResultList
+                        = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200004(
+                                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+                if (checkNull(entity200004ResultList)) {
+                    handler.load事業者区分リスト200904前();
+                    return createResponse(div);
+                }
+                entity200004Result = entity200004ResultList.get(0);
+                償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
+                開始時点の償還払サービス計画費.add償還払請求サービス計画200004データResult(entity200004Result);
             }
-            ViewStateHolder.put(ViewStateKeys.サービス計画費データ, entity200004.get(0));
-            handler.onLoad200004(entity200004.get(0), 画面モード);
+            handler.onLoad200004(entity200004Result, 画面モード);
         }
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
+        ViewStateHolder.put(ViewStateKeys.開始時点の償還払サービス計画費, 開始時点の償還払サービス計画費);
 
-        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
         ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
+                .getShikibetsuNoKanri(サービス年月, 様式番号);
         if (shikibetsuNoKanri == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
@@ -147,8 +168,10 @@ public class ServiceKeikakuHiPanel {
             handler.getボタンを制御(shikibetsuNoKanri, paramter);
         }
         if (削除モード.equals(画面モード)) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(確定するボタン, true);
             return ResponseData.of(div).setState(DBC0820024StateName.削除モード);
         } else {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(確定するボタン, false);
             return ResponseData.of(div).setState(DBC0820024StateName.新規修正モード);
         }
     }
@@ -264,11 +287,12 @@ public class ServiceKeikakuHiPanel {
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnTorikeshi(ServiceKeikakuHiPanelDiv div) {
         ServiceKeikakuHiPanelHandler handler = getHandler(div);
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         if (削除モード.equals(画面モード)) {
             return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
         } else {
-            boolean 変更 = false;
+            boolean 変更;
             ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.
                     get(ViewStateKeys.明細検索キー,
                             ShoukanharaihishinseimeisaikensakuParameter.class);
@@ -276,98 +300,121 @@ public class ServiceKeikakuHiPanel {
             if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
                 変更 = handler.変更チェック処理();
             } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
-                ShokanServicePlan200604Result entity200604 = ViewStateHolder.get(
-                        ViewStateKeys.サービス計画費データ, ShokanServicePlan200604Result.class);
-                変更 = handler.変更チェック処理200604(entity200604);
+                ShokanServicePlan200604Result entity200604Result = 償還払ViewStateDB.get償還払請求サービス計画200604データResult(
+                        meisaiPar.get被保険者番号(),
+                        meisaiPar.getサービス年月(),
+                        meisaiPar.get整理番号(),
+                        meisaiPar.get事業者番号(),
+                        meisaiPar.get様式番号(),
+                        meisaiPar.get明細番号());
+                変更 = handler.変更チェック処理200604(entity200604Result);
             } else {
-                ShokanServicePlan200004Result entity200004 = ViewStateHolder.get(
-                        ViewStateKeys.サービス計画費データ, ShokanServicePlan200004Result.class);
-                変更 = handler.変更チェック処理200004(entity200004);
+                ShokanServicePlan200004Result entity200004Result = 償還払ViewStateDB.get償還払請求サービス計画200004データResult(
+                        meisaiPar.get被保険者番号(),
+                        meisaiPar.getサービス年月(),
+                        meisaiPar.get整理番号(),
+                        meisaiPar.get事業者番号(),
+                        meisaiPar.get様式番号(),
+                        meisaiPar.get明細番号());
+                変更 = handler.変更チェック処理200004(entity200004Result);
             }
             return 登録モード変更処理(変更, div);
         }
     }
 
     /**
-     * 保存ボタンを押下した際に実行します。
+     * 確定ボタンを押下した際に実行します。
      *
      * @param div ServiceKeikakuHiPanelDiv
-     * @return 償還払い費支給申請決定_サービス提供証明書(サービス計画費)画面
+     * @return 償還払支給申請一覧画面
      */
-    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnUpdate(ServiceKeikakuHiPanelDiv div) {
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKakutei(ServiceKeikakuHiPanelDiv div) {
         ServiceKeikakuHiPanelHandler handler = getHandler(div);
-        boolean 変更 = false;
+        boolean 変更;
         ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.
                 get(ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        DbJohoViewState 開始時点の償還払サービス計画費 = ViewStateHolder.get(ViewStateKeys.開始時点の償還払サービス計画費, DbJohoViewState.class);
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
             変更 = handler.変更チェック処理();
         } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
-            ShokanServicePlan200604Result entity200604 = ViewStateHolder.get(
-                    ViewStateKeys.サービス計画費データ, ShokanServicePlan200604Result.class);
-            変更 = handler.変更チェック処理200604(entity200604);
+            ShokanServicePlan200604Result 開始時点のentity200604Result = 開始時点の償還払サービス計画費.get償還払請求サービス計画200604データResult(
+                    meisaiPar.get被保険者番号(),
+                    meisaiPar.getサービス年月(),
+                    meisaiPar.get整理番号(),
+                    meisaiPar.get事業者番号(),
+                    meisaiPar.get様式番号(),
+                    meisaiPar.get明細番号());
+            変更 = handler.変更チェック処理200604(開始時点のentity200604Result);
         } else {
-            ShokanServicePlan200004Result entity200004 = ViewStateHolder.get(
-                    ViewStateKeys.サービス計画費データ, ShokanServicePlan200004Result.class);
-            変更 = handler.変更チェック処理200004(entity200004);
+            ShokanServicePlan200004Result 開始時点のentity200004Result = 開始時点の償還払サービス計画費.get償還払請求サービス計画200004データResult(
+                    meisaiPar.get被保険者番号(),
+                    meisaiPar.getサービス年月(),
+                    meisaiPar.get整理番号(),
+                    meisaiPar.get事業者番号(),
+                    meisaiPar.get様式番号(),
+                    meisaiPar.get明細番号());
+            変更 = handler.変更チェック処理200004(開始時点のentity200004Result);
         }
         if (!変更) {
             return saveOut(div);
         } else {
-            return 保存処理(div);
+            return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.一覧に戻る);
         }
     }
 
-    /**
-     * 「申請を削除する」ボタンを押下した際に実行します。
-     *
-     * @param div ServiceKeikakuHiPanelDiv
-     * @return 償還払い費支給申請決定_サービス提供証明書(サービス計画費)画面
-     */
-    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnDelete(ServiceKeikakuHiPanelDiv div) {
-        // TODO QA712 異常メッセージを実装します。
-        if (!ResponseHolder.isReRequest()) {
-            ShoukanharaihishinseimeisaikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.明細検索キー,
-                    ShoukanharaihishinseimeisaikensakuParameter.class);
-            List<ShokanServicePlan200904Result> entity200904List = ViewStateHolder.get(
-                    ViewStateKeys.サービス計画費データ, List.class);
-            ShokanServicePlan200604Result entity200604Result = ViewStateHolder.get(
-                    ViewStateKeys.サービス計画費データ, ShokanServicePlan200604Result.class);
-            ShokanServicePlan200004Result entity200004Result = ViewStateHolder.get(
-                    ViewStateKeys.サービス計画費データ, ShokanServicePlan200004Result.class);
-            getHandler(div).保存処理(削除モード, parameter, entity200904List, entity200604Result, entity200004Result);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(削除モード.toString())).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除するボタン, true);
-            return ResponseData.of(div).respond();
-        }
-        return createResponse(div);
-    }
-
-    private ResponseData<ServiceKeikakuHiPanelDiv> 保存処理(ServiceKeikakuHiPanelDiv div) {
-        // TODO QA712 異常メッセージを実装します。
+    private ResponseData<ServiceKeikakuHiPanelDiv> 保存処理(ServiceKeikakuHiPanelDiv div, DbJohoViewState 償還払ViewStateDB, DBC0820024TransitionEventName eventName) {
         try {
             if (!ResponseHolder.isReRequest()) {
                 ShoukanharaihishinseimeisaikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                         ShoukanharaihishinseimeisaikensakuParameter.class);
-                List<ShokanServicePlan200904Result> entity200904List = ViewStateHolder.get(
-                        ViewStateKeys.サービス計画費データ, List.class);
-                ShokanServicePlan200604Result entity200604Result = ViewStateHolder.get(
-                        ViewStateKeys.サービス計画費データ, ShokanServicePlan200604Result.class);
-                ShokanServicePlan200004Result entity200004Result = ViewStateHolder.get(
-                        ViewStateKeys.サービス計画費データ, ShokanServicePlan200004Result.class);
-                getHandler(div).保存処理(登録モード, parameter, entity200904List, entity200604Result, entity200004Result);
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(登録.toString())).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存するボタン, true);
-                return ResponseData.of(div).respond();
+                List<ShokanServicePlan200904Result> entity200904ResultList = 償還払ViewStateDB.get償還払請求サービス計画200904データResultList(
+                        parameter.get被保険者番号(),
+                        parameter.getサービス年月(),
+                        parameter.get整理番号(),
+                        parameter.get事業者番号(),
+                        parameter.get様式番号(),
+                        parameter.get明細番号());
+                ShokanServicePlan200604Result entity200604Result = 償還払ViewStateDB.get償還払請求サービス計画200604データResult(
+                        parameter.get被保険者番号(),
+                        parameter.getサービス年月(),
+                        parameter.get整理番号(),
+                        parameter.get事業者番号(),
+                        parameter.get様式番号(),
+                        parameter.get明細番号());
+                ShokanServicePlan200004Result entity200004Result = 償還払ViewStateDB.get償還払請求サービス計画200004データResult(
+                        parameter.get被保険者番号(),
+                        parameter.getサービス年月(),
+                        parameter.get整理番号(),
+                        parameter.get事業者番号(),
+                        parameter.get様式番号(),
+                        parameter.get明細番号());
+                ShomeishoNyuryokuFlag 証明書入力済フラグ = ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class);
+                ShomeishoHenkoFlag 証明書変更済フラグ = ViewStateHolder.get(ViewStateKeys.証明書変更済フラグ, ShomeishoHenkoFlag.class);
+                entity200904ResultList = getHandler(div).saveサービス計画200904(parameter, entity200904ResultList);
+                entity200604Result = getHandler(div).saveサービス計画200604(parameter, entity200604Result);
+                entity200004Result = getHandler(div).saveサービス計画200004(parameter, entity200004Result);
+                証明書入力済フラグ = getHandler(div).set証明書入力済フラグ(証明書入力済フラグ, entity200904ResultList, entity200604Result, entity200004Result);
+                償還払ViewStateDB.add償還払請求サービス計画200904データResult(entity200904ResultList);
+                償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
+                償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
+                ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
+                ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, 証明書入力済フラグ);
+                ViewStateHolder.put(ViewStateKeys.証明書変更済フラグ, 証明書変更済フラグ);
+                if (eventName.equals(DBC0820024TransitionEventName.一覧に戻る)) {
+                    ShomeishoNyuryokuKanryoKubunType 証明書完了フラグ = SyokanbaraihiShikyuShinseiManager.createInstance().証明書InputCheck(
+                            証明書入力済フラグ, parameter.get様式番号(), parameter.getサービス年月());
+                    if (証明書入力未済あり.equals(証明書完了フラグ)) {
+                        throw new ApplicationException(証明書入力未済ありエラー.toString());
+                    }
+                }
+                return ResponseData.of(div).forwardWithEventName(eventName).respond();
             }
         } catch (Exception e) {
             throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(eventName).respond();
     }
 
     private ResponseData<ServiceKeikakuHiPanelDiv> saveOut(ServiceKeikakuHiPanelDiv div) {
@@ -395,14 +442,14 @@ public class ServiceKeikakuHiPanel {
                 ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.
                         get(ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
                 FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
-                List<ShokanServicePlan200904Result> entity200904List = ViewStateHolder.get(
+                List<ShokanServicePlan200904Result> entity200904ResultList = ViewStateHolder.get(
                         ViewStateKeys.サービス計画費データ, List.class);
-                ShokanServicePlan200604Result entity200604 = ViewStateHolder.get(
+                ShokanServicePlan200604Result entity200604Result = ViewStateHolder.get(
                         ViewStateKeys.サービス計画費データ, ShokanServicePlan200604Result.class);
                 ShokanServicePlan200004Result entity200004Result = ViewStateHolder.get(
                         ViewStateKeys.サービス計画費データ, ShokanServicePlan200004Result.class);
                 RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-                getHandler(div).登録モード変更処理(サービス年月, entity200904List, entity200604, entity200004Result, 画面モード);
+                getHandler(div).登録モード変更処理(サービス年月, entity200904ResultList, entity200604Result, entity200004Result, 画面モード);
                 return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
             }
         }
@@ -416,8 +463,8 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（基本情報）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKihonInfo(ServiceKeikakuHiPanelDiv div) {
-        putViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.基本情報).respond();
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.基本情報);
     }
 
     /**
@@ -427,8 +474,8 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（給付費明細）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKyufuhiMeisai(ServiceKeikakuHiPanelDiv div) {
-        putViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.給付費明細).respond();
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.給付費明細);
     }
 
     /**
@@ -438,8 +485,8 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（特定診療費）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnTokuteiShinryo(ServiceKeikakuHiPanelDiv div) {
-        putViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.特定診療費).respond();
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.特定診療費);
     }
 
     /**
@@ -449,8 +496,8 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（特定入所者費用）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnTokuteiNyushosha(ServiceKeikakuHiPanelDiv div) {
-        putViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.特定入所者費用).respond();
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.特定入所者費用);
     }
 
     /**
@@ -460,8 +507,8 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（合計情報）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnGokeiInfo(ServiceKeikakuHiPanelDiv div) {
-        putViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.合計情報).respond();
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.合計情報);
     }
 
     /**
@@ -471,8 +518,8 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（給付費明細（住特）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKyufuhiMeisaiJyuchi(ServiceKeikakuHiPanelDiv div) {
-        putViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.給付費明細_住特).respond();
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.給付費明細_住特);
     }
 
     /**
@@ -482,8 +529,8 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（緊急時・所定疾患）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKinkyujiShoteiShikan(ServiceKeikakuHiPanelDiv div) {
-        putViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.緊急時_所定疾患).respond();
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.緊急時_所定疾患);
     }
 
     /**
@@ -493,8 +540,8 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（緊急時施設療養費）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKinkyujiShisetsu(ServiceKeikakuHiPanelDiv div) {
-        putViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.緊急時施設療養費).respond();
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.緊急時施設療養費);
     }
 
     /**
@@ -504,8 +551,8 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（食事費用）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnShokujiHiyo(ServiceKeikakuHiPanelDiv div) {
-        putViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.食事費用).respond();
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.食事費用);
     }
 
     /**
@@ -515,8 +562,8 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（請求額集計）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnSeikyugakuShukei(ServiceKeikakuHiPanelDiv div) {
-        putViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.請求額集計).respond();
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.請求額集計);
     }
 
     /**
@@ -526,22 +573,8 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（社福軽減額）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnShafukukeigenGaku(ServiceKeikakuHiPanelDiv div) {
-        putViewState(div);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.社福軽減額).respond();
-    }
-
-    private void putViewState(ServiceKeikakuHiPanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
-        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
-        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
-                div.getPanelHead().getTxtShomeisho().getValue(),
-                div.getPanelHead().getTxtMeisayiBango().getValue(),
-                null);
-        ViewStateHolder.put(ViewStateKeys.申請検索キー, paramter);
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        return 保存処理(div, 償還払ViewStateDB, DBC0820024TransitionEventName.社福軽減額);
     }
 
     private boolean checkNull(List list) {

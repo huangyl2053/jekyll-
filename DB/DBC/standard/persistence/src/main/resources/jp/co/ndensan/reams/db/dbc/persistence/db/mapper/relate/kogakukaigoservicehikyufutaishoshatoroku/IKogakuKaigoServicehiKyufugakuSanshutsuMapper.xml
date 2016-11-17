@@ -341,7 +341,7 @@
         TEMP."shotokuHantei_shikibetsuCode",
         TEMP."shotokuHantei_shichosonCode",
         TEMP."serviceTeikyoYM",
-        '21',
+        '02',
         TEMP."shotokuHantei_setaiCode",
         TEMP."shotokuHantei_setaiinShikibetsuCode"
         FROM "TempKyufujissekiTyukannJigyo3" AS TEMP

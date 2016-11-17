@@ -11,16 +11,20 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.ServiceKeikakuHiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.dgdYichiran_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
@@ -40,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(サービス計画費)のハンドラクラスです。
@@ -53,15 +58,14 @@ public class ServiceKeikakuHiPanelHandler {
     private static final RString 連番_1 = new RString("01");
     private static final RString 事業者区分BLANK = new RString("0");
     private static final FlexibleYearMonth サービス年月_200904 = new FlexibleYearMonth("200904");
-    private static final FlexibleYearMonth サービス年月_200903 = new FlexibleYearMonth("200903");
     private static final FlexibleYearMonth サービス年月_200604 = new FlexibleYearMonth("200604");
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("2");
-    private static final RString 登録モード = new RString("登録");
     private static final RString 削除モード = new RString("削除");
     private static final int サービスコード2 = 4;
     private static final int 担当介護支援専門員番号LENGTH = 8;
+    private static final Decimal DECIMAL_100 = new Decimal(100);
 
     /**
      * ServiceKeikakuHiPanelHandlerコンストラクタです
@@ -76,14 +80,14 @@ public class ServiceKeikakuHiPanelHandler {
      * onLoad処理 サービス提供年月が平成２１年4月以降の場合
      *
      * @param 画面モード RString
-     * @param entity200904List List<ShokanServicePlan200904Result>
+     * @param entity200904ResultList List<ShokanServicePlan200904Result>
      */
-    public void onLoad200904(List<ShokanServicePlan200904Result> entity200904List, RString 画面モード) {
+    public void onLoad200904(List<ShokanServicePlan200904Result> entity200904ResultList, RString 画面モード) {
         setサービス計画費共通エリアRequired(true);
         setサービス計画費グリッドエリアRequired(false);
         setサービス計画費Required(false);
-        setサービス計画費共通エリアLoad(entity200904List, 画面モード);
-        setサービス計画費グリッドエリア(entity200904List, 画面モード);
+        setサービス計画費共通エリアLoad(entity200904ResultList, 画面モード);
+        setサービス計画費グリッドエリア(entity200904ResultList, 画面モード);
 
     }
 
@@ -91,24 +95,24 @@ public class ServiceKeikakuHiPanelHandler {
      * onLoad処理 サービス年月が200604～200903の場合
      *
      * @param 画面モード RString
-     * @param entity200604 ShokanServicePlan200604Result
+     * @param entity200604Result ShokanServicePlan200604Result
      */
-    public void onLoad200604(ShokanServicePlan200604Result entity200604, RString 画面モード) {
+    public void onLoad200604(ShokanServicePlan200604Result entity200604Result, RString 画面モード) {
         setサービス計画費共通エリアRequired(false);
         setサービス計画費グリッドエリアRequired(false);
-        setサービス計画費エリア200604(entity200604, 画面モード);
+        setサービス計画費エリア200604(entity200604Result, 画面モード);
     }
 
     /**
      * onLoad処理 サービス年月が200603以前の場合
      *
-     * @param entity200004 ServiceKeikakuHiRealtEntity
+     * @param entity200004Result ServiceKeikakuHiRealtEntity
      * @param 画面モード RString
      */
-    public void onLoad200004(ShokanServicePlan200004Result entity200004, RString 画面モード) {
+    public void onLoad200004(ShokanServicePlan200004Result entity200004Result, RString 画面モード) {
         setサービス計画費共通エリアRequired(false);
         setサービス計画費グリッドエリアRequired(false);
-        setサービス計画費エリア200004(entity200004, 画面モード);
+        setサービス計画費エリア200004(entity200004Result, 画面モード);
     }
 
     /**
@@ -351,12 +355,12 @@ public class ServiceKeikakuHiPanelHandler {
     }
 
     /**
-     * @param entity200604 ShokanServicePlan200604Result
+     * @param 開始時点のentity200604Result ShokanServicePlan200604Result
      * @return サービス年月が200604～200903の場合 画面内容の変更有無
      */
-    public Boolean 変更チェック処理200604(ShokanServicePlan200604Result entity200604) {
+    public Boolean 変更チェック処理200604(ShokanServicePlan200604Result 開始時点のentity200604Result) {
         int flag = 0;
-        if (entity200604 == null) {
+        if (開始時点のentity200604Result == null) {
             return true;
         }
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().getSelectedKey();
@@ -375,26 +379,26 @@ public class ServiceKeikakuHiPanelHandler {
         int 請求金額 = 請求金額Decimal == null ? 0 : 請求金額Decimal.intValue();
         RString 担当介護支援専門員番号 = div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().getValue();
         RString 摘要 = div.getPanelServiceKeikakuhiDown().getTxtTekiyo().getValue();
-        flag = flag + check(指定_基準該当事業者区分コード, entity200604.getEntity().get指定_基準該当事業者区分コード());
-        flag = flag + check(届出日, new RDate(entity200604.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
-        flag = flag + check(審査方法区分コード, entity200604.getEntity().get審査方法区分コード());
-        flag = flag + check(サービスコードBuilder.toRString(), entity200604.getEntity().getサービスコード());
-        flag = flag + check(サービスコード名称, entity200604.getServiceName());
-        flag = flag + checkInt(単位数, entity200604.getEntity().get単位数());
-        flag = flag + checkDecimal(単位数単価, entity200604.getEntity().get単位数単価());
-        flag = flag + checkInt(請求金額, entity200604.getEntity().get請求金額());
-        flag = flag + check担当介護支援専門員番号(担当介護支援専門員番号, entity200604.getEntity().get担当介護支援専門員番号());
-        flag = flag + check(摘要, entity200604.getEntity().get摘要());
+        flag = flag + check(指定_基準該当事業者区分コード, 開始時点のentity200604Result.getEntity().get指定_基準該当事業者区分コード());
+        flag = flag + check(届出日, new RDate(開始時点のentity200604Result.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
+        flag = flag + check(審査方法区分コード, 開始時点のentity200604Result.getEntity().get審査方法区分コード());
+        flag = flag + check(サービスコードBuilder.toRString(), 開始時点のentity200604Result.getEntity().getサービスコード());
+        flag = flag + check(サービスコード名称, 開始時点のentity200604Result.getServiceName());
+        flag = flag + checkInt(単位数, 開始時点のentity200604Result.getEntity().get単位数());
+        flag = flag + checkDecimal(単位数単価, 開始時点のentity200604Result.getEntity().get単位数単価());
+        flag = flag + checkInt(請求金額, 開始時点のentity200604Result.getEntity().get請求金額());
+        flag = flag + check担当介護支援専門員番号(担当介護支援専門員番号, 開始時点のentity200604Result.getEntity().get担当介護支援専門員番号());
+        flag = flag + check(摘要, 開始時点のentity200604Result.getEntity().get摘要());
         return flag != 0;
     }
 
     /**
-     * @param entity200004 ShokanServicePlan200004Result
+     * @param 開始時点のentity200004Result ShokanServicePlan200004Result
      * @return サービス年月が200603以前の場合 画面内容の変更有無
      */
-    public Boolean 変更チェック処理200004(ShokanServicePlan200004Result entity200004) {
+    public Boolean 変更チェック処理200004(ShokanServicePlan200004Result 開始時点のentity200004Result) {
         int flag = 0;
-        if (entity200004 == null) {
+        if (開始時点のentity200004Result == null) {
             return true;
         }
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().getSelectedKey();
@@ -411,115 +415,161 @@ public class ServiceKeikakuHiPanelHandler {
         Decimal 単位数単価 = div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().getValue();
         Decimal 請求金額Decimal = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue();
         int 請求金額 = 請求金額Decimal == null ? 0 : 請求金額Decimal.intValue();
-        flag = flag + check(指定_基準該当事業者区分コード, entity200004.getEntity().get指定_基準該当事業者区分コード());
-        flag = flag + check(届出日, new RDate(entity200004.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
-        flag = flag + check(審査方法区分コード, entity200004.getEntity().get審査方法区分コード());
-        flag = flag + check(サービスコードBuilder.toRString(), entity200004.getEntity().getサービスコード());
-        flag = flag + check(サービスコード名称, entity200004.getServiceName());
-        flag = flag + checkInt(単位数, entity200004.getEntity().get単位数());
-        flag = flag + checkDecimal(単位数単価, entity200004.getEntity().get単位数単価());
-        flag = flag + checkInt(請求金額, entity200004.getEntity().get請求金額());
+        flag = flag + check(指定_基準該当事業者区分コード, 開始時点のentity200004Result.getEntity().get指定_基準該当事業者区分コード());
+        flag = flag + check(届出日, new RDate(開始時点のentity200004Result.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
+        flag = flag + check(審査方法区分コード, 開始時点のentity200004Result.getEntity().get審査方法区分コード());
+        flag = flag + check(サービスコードBuilder.toRString(), 開始時点のentity200004Result.getEntity().getサービスコード());
+        flag = flag + check(サービスコード名称, 開始時点のentity200004Result.getServiceName());
+        flag = flag + checkInt(単位数, 開始時点のentity200004Result.getEntity().get単位数());
+        flag = flag + checkDecimal(単位数単価, 開始時点のentity200004Result.getEntity().get単位数単価());
+        flag = flag + checkInt(請求金額, 開始時点のentity200004Result.getEntity().get請求金額());
         return flag != 0;
     }
 
     /**
-     * 「申請を保存する」ボタン 保存処理 Handler処理
+     * 「確定」ボタン ViewStateにDBを保存処理 Handler処理
      *
      * @param parameter ShoukanharaihishinseimeisaikensakuParameter
-     * @param entity200904List List<ShokanServicePlan200904Result>
-     * @param entity200604Result ShokanServicePlan200604Result
-     * @param entity200004Result ShokanServicePlan200004Result
-     * @param 画面モード RString
+     * @param entity200904ResultList List<ShokanServicePlan200904Result>
+     * @return サービス計画200904
      */
-    public void 保存処理(RString 画面モード,
-            ShoukanharaihishinseimeisaikensakuParameter parameter,
-            List<ShokanServicePlan200904Result> entity200904List,
-            ShokanServicePlan200604Result entity200604Result,
-            ShokanServicePlan200004Result entity200004Result) {
+    public List<ShokanServicePlan200904Result> saveサービス計画200904(ShoukanharaihishinseimeisaikensakuParameter parameter, List<ShokanServicePlan200904Result> entity200904ResultList) {
         HihokenshaNo 被保険者番号 = parameter.get被保険者番号();
         FlexibleYearMonth サービス年月 = parameter.getサービス年月();
         RString 整理番号 = parameter.get整理番号();
         RString 様式番号 = parameter.get様式番号();
         RString 明細番号 = parameter.get明細番号();
+        boolean 明細番号区分 = 明細番号 == null || 明細番号.isEmpty();
         JigyoshaNo 事業者番号 = parameter.get事業者番号();
-        if (削除モード.equals(画面モード)) {
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().
-                    delShokanSyomeisyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        } else if (登録モード.equals(画面モード)) {
-            List<ShokanServicePlan200904> entityList = new ArrayList<>();
-            ShokanServicePlan200604 entity200604 = null;
-            ShokanServicePlan200004 entity200004 = null;
-            if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
-                List<dgdYichiran_Row> rowList = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
-                entityList = 保存_データ_200904(rowList,
-                        entity200904List,
-                        entityList,
-                        被保険者番号,
-                        サービス年月,
-                        事業者番号,
-                        様式番号,
-                        明細番号,
-                        整理番号);
-            } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
-                entity200604 = 保存_データ_200604(entity200604Result,
-                        被保険者番号,
-                        サービス年月,
-                        事業者番号,
-                        様式番号,
-                        明細番号,
-                        整理番号);
-            } else {
-                entity200004 = 保存_データ_200004(entity200004Result,
-                        被保険者番号,
-                        サービス年月,
-                        事業者番号,
-                        様式番号,
-                        明細番号,
-                        整理番号);
+        List<ShokanServicePlan200904Result> newEntity200904ResultList = new ArrayList<>();
+        if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
+            List<dgdYichiran_Row> rowList = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
+            newEntity200904ResultList = 保存_データ_200904(rowList,
+                    entity200904ResultList,
+                    被保険者番号,
+                    サービス年月,
+                    事業者番号,
+                    様式番号,
+                    明細番号,
+                    整理番号);
+            if ((newEntity200904ResultList != null && !newEntity200904ResultList.isEmpty())
+                    && 明細番号区分) {
+                for (ShokanServicePlan200904Result entity200904Result : newEntity200904ResultList) {
+                    if (!EntityDataState.Deleted.equals(entity200904Result.getEntity().toEntity().getState())) {
+                        entity200904Result = new ShokanServicePlan200904Result(entity200904Result.getEntity().added(), entity200904Result.getServiceName());
+                        newEntity200904ResultList.add(entity200904Result);
+                    }
+                }
             }
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanServicePlan(
-                    entityList, entity200604, entity200004, サービス年月, 明細番号);
         }
+        return newEntity200904ResultList;
+    }
+
+    /**
+     * 「確定」ボタン ViewStateにDBを保存処理 Handler処理
+     *
+     * @param parameter ShoukanharaihishinseimeisaikensakuParameter
+     * @param entity200604Result ShokanServicePlan200604Result
+     * @return サービス計画200604
+     */
+    public ShokanServicePlan200604Result saveサービス計画200604(ShoukanharaihishinseimeisaikensakuParameter parameter, ShokanServicePlan200604Result entity200604Result) {
+        HihokenshaNo 被保険者番号 = parameter.get被保険者番号();
+        FlexibleYearMonth サービス年月 = parameter.getサービス年月();
+        RString 整理番号 = parameter.get整理番号();
+        RString 様式番号 = parameter.get様式番号();
+        RString 明細番号 = parameter.get明細番号();
+        boolean 明細番号区分 = 明細番号 == null || 明細番号.isEmpty();
+        JigyoshaNo 事業者番号 = parameter.get事業者番号();
+        if (サービス年月_200604.isBeforeOrEquals(サービス年月) && サービス年月.isBefore(サービス年月_200904)) {
+            ShokanServicePlan200604 entity200604 = 保存_データ_200604(entity200604Result,
+                    被保険者番号,
+                    サービス年月,
+                    事業者番号,
+                    様式番号,
+                    明細番号,
+                    整理番号);
+            if (null != entity200604) {
+                if (明細番号区分) {
+                    entity200604 = entity200604.added();
+                } else {
+                    entity200604 = entity200604.modified();
+                }
+                return new ShokanServicePlan200604Result(entity200604, null == entity200604Result ? RString.EMPTY : entity200604Result.getServiceName());
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 「確定」ボタン ViewStateにDBを保存処理 Handler処理
+     *
+     * @param parameter ShoukanharaihishinseimeisaikensakuParameter
+     * @param entity200004Result ShokanServicePlan200004Result
+     * @return サービス計画200004
+     */
+    public ShokanServicePlan200004Result saveサービス計画200004(ShoukanharaihishinseimeisaikensakuParameter parameter, ShokanServicePlan200004Result entity200004Result) {
+        HihokenshaNo 被保険者番号 = parameter.get被保険者番号();
+        FlexibleYearMonth サービス年月 = parameter.getサービス年月();
+        RString 整理番号 = parameter.get整理番号();
+        RString 様式番号 = parameter.get様式番号();
+        RString 明細番号 = parameter.get明細番号();
+        boolean 明細番号区分 = 明細番号 == null || 明細番号.isEmpty();
+        JigyoshaNo 事業者番号 = parameter.get事業者番号();
+        if (サービス年月.isBefore(サービス年月_200604)) {
+            ShokanServicePlan200004 entity200004 = 保存_データ_200004(entity200004Result,
+                    被保険者番号,
+                    サービス年月,
+                    事業者番号,
+                    様式番号,
+                    明細番号,
+                    整理番号);
+            if (null != entity200004) {
+                if (明細番号区分) {
+                    entity200004 = entity200004.added();
+                } else {
+                    entity200004 = entity200004.modified();
+                }
+                return new ShokanServicePlan200004Result(entity200004, null == entity200004Result ? RString.EMPTY : entity200004Result.getServiceName());
+            }
+        }
+        return null;
     }
 
     /**
      * 入力されたデータをクリアし 内容の破棄
      *
      * @param サービス年月 サービス年月
-     * @param entity200904List List<ShokanServicePlan200904Result>
-     * @param entity200604 ShokanServicePlan200604Result
+     * @param entity200904ResultList List<ShokanServicePlan200904Result>
+     * @param entity200604Result ShokanServicePlan200604Result
      * @param entity200004Result ShokanServicePlan200004Result
      * @param 画面モード RString
      */
     public void 登録モード変更処理(FlexibleYearMonth サービス年月,
-            List<ShokanServicePlan200904Result> entity200904List,
-            ShokanServicePlan200604Result entity200604,
+            List<ShokanServicePlan200904Result> entity200904ResultList,
+            ShokanServicePlan200604Result entity200604Result,
             ShokanServicePlan200004Result entity200004Result,
             RString 画面モード) {
         if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
-            if (entity200904List == null || entity200904List.isEmpty()) {
+            if (entity200904ResultList == null || entity200904ResultList.isEmpty()) {
                 load事業者区分リスト200904();
             } else {
-                onLoad200904(entity200904List, 画面モード);
+                onLoad200904(entity200904ResultList, 画面モード);
             }
-        } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
-            if (entity200604 == null) {
+        } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && サービス年月.isBefore(サービス年月_200904)) {
+            if (entity200604Result == null) {
                 load事業者区分リスト200904前();
             } else {
-                onLoad200604(entity200604, 画面モード);
+                onLoad200604(entity200604Result, 画面モード);
             }
+        } else if (entity200004Result == null) {
+            load事業者区分リスト200904前();
         } else {
-            if (entity200004Result == null) {
-                load事業者区分リスト200904前();
-            } else {
-                onLoad200004(entity200004Result, 画面モード);
-            }
+            onLoad200004(entity200004Result, 画面モード);
         }
     }
 
-    private List<ShokanServicePlan200904> 保存_データ_200904(List<dgdYichiran_Row> rowList,
-            List<ShokanServicePlan200904Result> entity200904List,
-            List<ShokanServicePlan200904> entityList,
+    private List<ShokanServicePlan200904Result> 保存_データ_200904(List<dgdYichiran_Row> rowList,
+            List<ShokanServicePlan200904Result> entity200904ResultList,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
@@ -527,15 +577,14 @@ public class ServiceKeikakuHiPanelHandler {
             RString 明細番号,
             RString 整理番号) {
         int max連番 = 0;
-        max連番 = max連番(entity200904List);
+        max連番 = max連番(entity200904ResultList);
+        List<ShokanServicePlan200904Result> newEntity200904ResultList = new ArrayList<>();
         for (dgdYichiran_Row row : rowList) {
             if (RowState.Modified.equals(row.getRowState())) {
-                ShokanServicePlan200904 entity200904 = entity200904List.get(
-                        Integer.valueOf(row.getRowNum().toString())).getEntity();
-                entity200904 = 保存_データ(row, entity200904);
-                entityList.add(entity200904);
-            } else if (RowState.Deleted.equals(row.getRowState())) {
-                entityList.add(entity200904List.get(Integer.valueOf(row.getRowNum().toString())).getEntity().deleted());
+                ShokanServicePlan200904Result entity200904Result = entity200904ResultList.get(
+                        Integer.valueOf(row.getRowNum().toString()));
+                ShokanServicePlan200904 entity200904 = 保存_データ(row, entity200904Result.getEntity());
+                newEntity200904ResultList.add(new ShokanServicePlan200904Result(entity200904, entity200904Result.getServiceName()));
             } else if (RowState.Added.equals(row.getRowState())) {
                 max連番 = max連番 + 1;
                 ShokanServicePlan200904 entity200904 = new ShokanServicePlan200904(
@@ -547,10 +596,10 @@ public class ServiceKeikakuHiPanelHandler {
                         明細番号,
                         new RString(String.valueOf(max連番)).padZeroToLeft(連番LENGTH));
                 entity200904 = 保存_データ(row, entity200904);
-                entityList.add(entity200904);
+                newEntity200904ResultList.add(new ShokanServicePlan200904Result(entity200904, RString.EMPTY));
             }
         }
-        return entityList;
+        return newEntity200904ResultList;
     }
 
     private ShokanServicePlan200604 保存_データ_200604(
@@ -668,14 +717,14 @@ public class ServiceKeikakuHiPanelHandler {
         }
     }
 
-    private int max連番(List<ShokanServicePlan200904Result> entity200904List) {
+    private int max連番(List<ShokanServicePlan200904Result> entity200904ResultList) {
         int max連番 = 0;
-        if (entity200904List == null) {
+        if (entity200904ResultList == null) {
             return max連番;
         }
-        for (ShokanServicePlan200904Result entity200904 : entity200904List) {
-            if (max連番 < Integer.valueOf(entity200904.getEntity().get連番().toString())) {
-                max連番 = Integer.valueOf(entity200904.getEntity().get連番().toString());
+        for (ShokanServicePlan200904Result entity200904Result : entity200904ResultList) {
+            if (max連番 < Integer.valueOf(entity200904Result.getEntity().get連番().toString())) {
+                max連番 = Integer.valueOf(entity200904Result.getEntity().get連番().toString());
             }
         }
         return max連番;
@@ -774,8 +823,8 @@ public class ServiceKeikakuHiPanelHandler {
         return entity200904;
     }
 
-    private void setサービス計画費共通エリア(ShokanServicePlan200904Result entity200904) {
-        if (entity200904 == null) {
+    private void setサービス計画費共通エリア(ShokanServicePlan200904Result entity200904Result) {
+        if (entity200904Result == null) {
             load事業者区分リスト200904();
             div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().clearValue();
             div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().clearValue();
@@ -785,11 +834,11 @@ public class ServiceKeikakuHiPanelHandler {
             div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setDataSource(事業者区分リスト);
             List<KeyValueDataSource> 審査方法区分リスト = get審査方法リスト();
             div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setDataSource(審査方法区分リスト);
-            FlexibleDate 届出日 = entity200904.getEntity().get居宅サービス計画作成依頼届出年月日();
-            RString 担当介護支援専門員番号 = entity200904.getEntity().get担当介護支援専門員番号();
-            Decimal 単位数単価 = entity200904.getEntity().get単位数単価();
-            RString 事業者区分コード = entity200904.getEntity().get指定_基準該当事業者区分コード();
-            RString 審査方法区分コード = entity200904.getEntity().get審査方法区分コード();
+            FlexibleDate 届出日 = entity200904Result.getEntity().get居宅サービス計画作成依頼届出年月日();
+            RString 担当介護支援専門員番号 = entity200904Result.getEntity().get担当介護支援専門員番号();
+            Decimal 単位数単価 = entity200904Result.getEntity().get単位数単価();
+            RString 事業者区分コード = entity200904Result.getEntity().get指定_基準該当事業者区分コード();
+            RString 審査方法区分コード = entity200904Result.getEntity().get審査方法区分コード();
             if (!事業者区分コード.isNullOrEmpty()) {
                 div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setSelectedKey(事業者区分コード);
             } else {
@@ -889,33 +938,33 @@ public class ServiceKeikakuHiPanelHandler {
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTekiyoUp().setValue(摘要);
     }
 
-    private void setサービス計画費共通エリアLoad(List<ShokanServicePlan200904Result> entity200904List, RString 画面モード) {
-        ShokanServicePlan200904Result entity200904 = entity200904List.get(0);
-        for (int i = 1; i < entity200904List.size(); i++) {
-            if (new Decimal(entity200904.getEntity().get連番().toString())
-                    .compareTo(new Decimal(entity200904List.get(i).getEntity().get連番().toString())) < 0) {
-                entity200904 = entity200904List.get(i);
+    private void setサービス計画費共通エリアLoad(List<ShokanServicePlan200904Result> entity200904ResultList, RString 画面モード) {
+        ShokanServicePlan200904Result entity200904Result = entity200904ResultList.get(0);
+        for (int i = 1; i < entity200904ResultList.size(); i++) {
+            if (new Decimal(entity200904Result.getEntity().get連番().toString())
+                    .compareTo(new Decimal(entity200904ResultList.get(i).getEntity().get連番().toString())) < 0) {
+                entity200904Result = entity200904ResultList.get(i);
             }
         }
         List<KeyValueDataSource> 事業者区分リスト = get事業者区分リスト();
         div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setDataSource(事業者区分リスト);
         List<KeyValueDataSource> 審査方法区分リスト = get審査方法リスト();
         div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setDataSource(審査方法区分リスト);
-        if (!entity200904.getEntity().get指定_基準該当事業者区分コード().isNullOrEmpty()) {
+        if (!entity200904Result.getEntity().get指定_基準該当事業者区分コード().isNullOrEmpty()) {
             div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setSelectedKey(
-                    entity200904.getEntity().get指定_基準該当事業者区分コード());
+                    entity200904Result.getEntity().get指定_基準該当事業者区分コード());
         }
-        if (!entity200904.getEntity().get審査方法区分コード().isNullOrEmpty()) {
+        if (!entity200904Result.getEntity().get審査方法区分コード().isNullOrEmpty()) {
             div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setSelectedKey(
-                    entity200904.getEntity().get審査方法区分コード());
+                    entity200904Result.getEntity().get審査方法区分コード());
         }
-        FlexibleDate 届出日 = entity200904.getEntity().get居宅サービス計画作成依頼届出年月日();
+        FlexibleDate 届出日 = entity200904Result.getEntity().get居宅サービス計画作成依頼届出年月日();
         if (!届出日.isEmpty()) {
             div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().setValue(new RDate(届出日.toString()));
         }
         div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().setValue(
-                entity200904.getEntity().get担当介護支援専門員番号());
-        div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().setValue(entity200904.getEntity().get単位数単価());
+                entity200904Result.getEntity().get担当介護支援専門員番号());
+        div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().setValue(entity200904Result.getEntity().get単位数単価());
         if (削除モード.equals(画面モード)) {
             div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setDisabled(true);
             div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setDisabled(true);
@@ -926,34 +975,35 @@ public class ServiceKeikakuHiPanelHandler {
         }
     }
 
-    private void setサービス計画費グリッドエリア(List<ShokanServicePlan200904Result> entity200904List, RString 画面モード) {
+    private void setサービス計画費グリッドエリア(List<ShokanServicePlan200904Result> entity200904ResultList, RString 画面モード) {
         List<dgdYichiran_Row> dataSource = new ArrayList<>();
         int i = 0;
         Decimal 単位合計 = Decimal.ZERO;
-        for (ShokanServicePlan200904Result entity200904 : entity200904List) {
+        for (ShokanServicePlan200904Result entity200904Result : entity200904ResultList) {
             dgdYichiran_Row row = new dgdYichiran_Row();
+            row.setRowState(getRowState(entity200904Result));
             row.setRowNum(new RString(String.valueOf(i)));
             row.setDefaultDataName1(new RString(
-                    entity200904.getEntity().getサービスコード().getColumnValue().toString()));
-            row.setDefaultDataName6(entity200904.getServiceName());
-            row.getDefaultDataName2().setValue(new Decimal(entity200904.getEntity().get単位数()));
-            row.getDefaultDataName3().setValue(new Decimal(entity200904.getEntity().get回数()));
-            row.getDefaultDataName4().setValue(new Decimal(entity200904.getEntity().getサービス単位数()));
-            row.setDefaultDataName5(entity200904.getEntity().get摘要());
-            row.setDefaultDataName7(entity200904.getEntity().get連番());
-            row.setDefaultDataName8(entity200904.getEntity().get指定_基準該当事業者区分コード());
-            row.setDefaultDataName9(entity200904.getEntity().get審査方法区分コード());
-            FlexibleDate 届出日 = entity200904.getEntity().get居宅サービス計画作成依頼届出年月日();
+                    entity200904Result.getEntity().getサービスコード().getColumnValue().toString()));
+            row.setDefaultDataName6(entity200904Result.getServiceName());
+            row.getDefaultDataName2().setValue(new Decimal(entity200904Result.getEntity().get単位数()));
+            row.getDefaultDataName3().setValue(new Decimal(entity200904Result.getEntity().get回数()));
+            row.getDefaultDataName4().setValue(new Decimal(entity200904Result.getEntity().getサービス単位数()));
+            row.setDefaultDataName5(entity200904Result.getEntity().get摘要());
+            row.setDefaultDataName7(entity200904Result.getEntity().get連番());
+            row.setDefaultDataName8(entity200904Result.getEntity().get指定_基準該当事業者区分コード());
+            row.setDefaultDataName9(entity200904Result.getEntity().get審査方法区分コード());
+            FlexibleDate 届出日 = entity200904Result.getEntity().get居宅サービス計画作成依頼届出年月日();
             if (!届出日.isEmpty()) {
                 row.getDefaultDataName10().setValue(new RDate(届出日.toString()));
             }
-            row.setDefaultDataName11(entity200904.getEntity().get担当介護支援専門員番号());
-            row.getDefaultDataName12().setValue(entity200904.getEntity().get単位数単価());
+            row.setDefaultDataName11(entity200904Result.getEntity().get担当介護支援専門員番号());
+            row.getDefaultDataName12().setValue(entity200904Result.getEntity().get単位数単価());
             i = i + 1;
-            単位合計 = 単位合計.add(new Decimal(entity200904.getEntity().getサービス単位数()));
+            単位合計 = 単位合計.add(new Decimal(entity200904Result.getEntity().getサービス単位数()));
             dataSource.add(row);
         }
-        Decimal 請求額合計 = 単位合計.multiply(entity200904List.get(0).getEntity().get単位数単価());
+        Decimal 請求額合計 = 単位合計.multiply(entity200904ResultList.get(0).getEntity().get単位数単価());
         div.getPanelServiceKeikakuhiUp().getTxtGokeiTanyi().setValue(単位合計);
         div.getPanelServiceKeikakuhiUp().getTxtSeikyugaku().setValue(請求額合計);
         div.getPanelServiceKeikakuhiUp().getDgdYichiran().setDataSource(dataSource);
@@ -962,33 +1012,38 @@ public class ServiceKeikakuHiPanelHandler {
         }
     }
 
-    private void setサービス計画費エリア200604(ShokanServicePlan200604Result entity200604, RString 画面モード) {
+    private void setサービス計画費エリア200604(ShokanServicePlan200604Result entity200604Result, RString 画面モード) {
         load事業者区分リスト200904前();
-        if (!entity200604.getEntity().get指定_基準該当事業者区分コード().isNullOrEmpty()) {
+        if (!entity200604Result.getEntity().get指定_基準該当事業者区分コード().isNullOrEmpty()) {
             div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setSelectedKey(
-                    entity200604.getEntity().get指定_基準該当事業者区分コード());
+                    entity200604Result.getEntity().get指定_基準該当事業者区分コード());
         }
-        if (!entity200604.getEntity().get居宅サービス計画作成依頼届出年月日().isEmpty()) {
+        if (!entity200604Result.getEntity().get居宅サービス計画作成依頼届出年月日().isEmpty()) {
             div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setValue(
-                    new RDate(entity200604.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
+                    new RDate(entity200604Result.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
         }
-        if (!entity200604.getEntity().get審査方法区分コード().isNullOrEmpty()) {
+        if (!entity200604Result.getEntity().get審査方法区分コード().isNullOrEmpty()) {
             div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedKey(
-                    entity200604.getEntity().get審査方法区分コード());
+                    entity200604Result.getEntity().get審査方法区分コード());
         }
         IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div.getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
-        if (entity200604.getEntity().getサービスコード().getColumnValue() != null) {
-            RString サービスコード = new RString(entity200604.getEntity().getサービスコード().getColumnValue().toString());
+        if (entity200604Result.getEntity().getサービスコード().getColumnValue() != null) {
+            RString サービスコード = new RString(entity200604Result.getEntity().getサービスコード().getColumnValue().toString());
             serviceCodeInputDiv.setサービス種類コード(サービスコード.substring(0, 2));
             serviceCodeInputDiv.setサービス項目コード(サービスコード.substring(サービスコード.length() - サービスコード2));
-            serviceCodeInputDiv.setサービス名称(entity200604.getServiceName());
+            serviceCodeInputDiv.setサービス名称(entity200604Result.getServiceName());
         }
-        div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().setValue(new Decimal(entity200604.getEntity().get単位数()));
-        div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setValue(entity200604.getEntity().get単位数単価());
-        div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().setValue(new Decimal(entity200604.getEntity().get請求金額()));
+        div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().setValue(new Decimal(entity200604Result.getEntity().get単位数()));
+        Decimal 単位数単価 = entity200604Result.getEntity().get単位数単価();
+        if (null == 単位数単価) {
+            単位数単価 = new Decimal(DbBusinessConfig.get(ConfigNameDBC.初期表示_単位数単価, RDate.getNowDate(), SubGyomuCode.DBC介護給付).toString());
+            単位数単価 = 単位数単価.divide(DECIMAL_100);
+        }
+        div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setValue(単位数単価);
+        div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().setValue(new Decimal(entity200604Result.getEntity().get請求金額()));
         div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().setValue(
-                entity200604.getEntity().get担当介護支援専門員番号());
-        div.getPanelServiceKeikakuhiDown().getTxtTekiyo().setValue(entity200604.getEntity().get摘要());
+                entity200604Result.getEntity().get担当介護支援専門員番号());
+        div.getPanelServiceKeikakuhiDown().getTxtTekiyo().setValue(entity200604Result.getEntity().get摘要());
         if (削除モード.equals(画面モード)) {
             div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setDisabled(true);
             div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setDisabled(true);
@@ -1002,30 +1057,30 @@ public class ServiceKeikakuHiPanelHandler {
         }
     }
 
-    private void setサービス計画費エリア200004(ShokanServicePlan200004Result entity200004, RString 画面モード) {
+    private void setサービス計画費エリア200004(ShokanServicePlan200004Result entity200004Result, RString 画面モード) {
         load事業者区分リスト200904前();
-        if (!entity200004.getEntity().get指定_基準該当事業者区分コード().isNullOrEmpty()) {
+        if (!entity200004Result.getEntity().get指定_基準該当事業者区分コード().isNullOrEmpty()) {
             div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setSelectedKey(
-                    entity200004.getEntity().get指定_基準該当事業者区分コード());
+                    entity200004Result.getEntity().get指定_基準該当事業者区分コード());
         }
-        if (!entity200004.getEntity().get居宅サービス計画作成依頼届出年月日().isEmpty()) {
+        if (!entity200004Result.getEntity().get居宅サービス計画作成依頼届出年月日().isEmpty()) {
             div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setValue(
-                    new RDate(entity200004.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
+                    new RDate(entity200004Result.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
         }
-        if (!entity200004.getEntity().get審査方法区分コード().isNullOrEmpty()) {
+        if (!entity200004Result.getEntity().get審査方法区分コード().isNullOrEmpty()) {
             div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedKey(
-                    entity200004.getEntity().get審査方法区分コード());
+                    entity200004Result.getEntity().get審査方法区分コード());
         }
         IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div.getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
-        if (entity200004.getEntity().getサービスコード().getColumnValue() != null) {
-            RString サービスコード = new RString(entity200004.getEntity().getサービスコード().getColumnValue().toString());
+        if (entity200004Result.getEntity().getサービスコード().getColumnValue() != null) {
+            RString サービスコード = new RString(entity200004Result.getEntity().getサービスコード().getColumnValue().toString());
             serviceCodeInputDiv.setサービス種類コード(サービスコード.substring(0, 2));
             serviceCodeInputDiv.setサービス項目コード(サービスコード.substring(サービスコード.length() - サービスコード2));
         }
-        serviceCodeInputDiv.setサービス名称(entity200004.getServiceName());
-        div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().setValue(new Decimal(entity200004.getEntity().get単位数()));
-        div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setValue(entity200004.getEntity().get単位数単価());
-        div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().setValue(new Decimal(entity200004.getEntity().get請求金額()));
+        serviceCodeInputDiv.setサービス名称(entity200004Result.getServiceName());
+        div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().setValue(new Decimal(entity200004Result.getEntity().get単位数()));
+        div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setValue(entity200004Result.getEntity().get単位数単価());
+        div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().setValue(new Decimal(entity200004Result.getEntity().get請求金額()));
         if (削除モード.equals(画面モード)) {
             div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setDisabled(true);
             div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setDisabled(true);
@@ -1315,6 +1370,35 @@ public class ServiceKeikakuHiPanelHandler {
         } else if (設定可任意.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigenGaku().setIconNameEnum(IconName.NONE);
         }
+    }
+
+    public ShomeishoNyuryokuFlag set証明書入力済フラグ(ShomeishoNyuryokuFlag 証明書入力済フラグ, List<ShokanServicePlan200904Result> entity200904ResultList, ShokanServicePlan200604Result entity200604Result, ShokanServicePlan200004Result entity200004Result) {
+        ShomeishoNyuryokuKubunType サービス計画費_証明書入力済フラグ = ShomeishoNyuryokuKubunType.入力なし;
+        for (ShokanServicePlan200904Result entity200904Result : entity200904ResultList) {
+            if (EntityDataState.Added.equals(entity200904Result.getEntity().toEntity().getState())) {
+                サービス計画費_証明書入力済フラグ = ShomeishoNyuryokuKubunType.入力あり;
+                break;
+            }
+        }
+        if (null != entity200604Result.getEntity()
+                && EntityDataState.Added.equals(entity200604Result.getEntity().toEntity().getState())) {
+            サービス計画費_証明書入力済フラグ = ShomeishoNyuryokuKubunType.入力あり;
+        }
+        if (null != entity200004Result.getEntity()
+                && EntityDataState.Added.equals(entity200004Result.getEntity().toEntity().getState())) {
+            サービス計画費_証明書入力済フラグ = ShomeishoNyuryokuKubunType.入力あり;
+        }
+        証明書入力済フラグ.setサービス計画費_証明書入力済フラグ(サービス計画費_証明書入力済フラグ);
+        return 証明書入力済フラグ;
+    }
+
+    private RowState getRowState(ShokanServicePlan200904Result entity200904Result) {
+        if (EntityDataState.Added.equals(entity200904Result.getEntity().toEntity().getState())) {
+            return RowState.Added;
+        } else if (EntityDataState.Modified.equals(entity200904Result.getEntity().toEntity().getState())) {
+            return RowState.Modified;
+        }
+        return RowState.Unchanged;
     }
 
 }

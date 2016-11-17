@@ -42,10 +42,10 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1514Shori
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyojokyotokeihyomeisailistsakusei."
             + "IRiyoJokyoTokeihyoMeisaiListSakuseiMapper.select処理結果確認リスト");
-    private final RString csvFileName = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private final RString csvFileName = new RString("DBC900004_ShoriKekkaKakuninList.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU900002");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC900004");
     private RString csvFilePath;
     private FileSpoolManager spoolManager;
     private CsvListWriter csvListWriter;

@@ -211,7 +211,7 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
         }
     }
 
-    private void return給付実績明細ワーク9(RString キー項目, DbWT1510KyufuJissekiKihonEntity entity) {
+    private void return給付実績明細ワーク9(DbWT1510KyufuJissekiKihonEntity entity) {
         RString 入力識別番号上3桁 = entity.getInputShikibetsuNo().value().substring(ZERO, THREE);
         if (入力識別番号上3桁.equals(NyuryokuShikibetsuNoTop3Keta.現物_居宅サービス計画費.getコード())
                 || 入力識別番号上3桁.equals(NyuryokuShikibetsuNoTop3Keta.償還_居宅サービス計画費.getコード())) {
@@ -284,7 +284,7 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
             処理結果確認リスト一時TBL.insert(service.createマスタ構成不正Entity(entity));
             return;
         }
-        return給付実績明細ワーク9(キー項目, entity);
+        return給付実績明細ワーク9(entity);
     }
 
     private boolean isEntity(DbWT1510KyufuJissekiKihonEntity entity, List listEntity) {

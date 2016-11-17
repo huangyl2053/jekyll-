@@ -128,8 +128,12 @@ public class DecideKetteiHenkoTsuchishoProcess extends BatchProcessBase<Honsante
         KitsukiList 仮算定期間 = 期月リスト_普徴.filtered仮算定期間();
         KitsukiList 本算定期間 = 期月リスト_普徴.filtered本算定期間();
         仮算定最終期 = 仮算定期間.getLast().get期AsInt();
-        List<Kitsuki> 仮算定期間List = 仮算定期間.toList();
-        仮算定最初期 = 仮算定期間List.get(仮算定期間List.size() - INT_1).get期AsInt();
+        if (仮算定最終期 == 0) {
+            仮算定最初期 = 0;
+        } else {
+            List<Kitsuki> 仮算定期間List = 仮算定期間.toList();
+            仮算定最初期 = 仮算定期間List.get(仮算定期間List.size() - INT_1).get期AsInt();
+        }
         本算定最終期 = 本算定期間.getLast().get期AsInt();
         List<Kitsuki> 本算定期間List = 本算定期間.toList();
         本算定最初期 = 本算定期間List.get(本算定期間List.size() - INT_1).get期AsInt();

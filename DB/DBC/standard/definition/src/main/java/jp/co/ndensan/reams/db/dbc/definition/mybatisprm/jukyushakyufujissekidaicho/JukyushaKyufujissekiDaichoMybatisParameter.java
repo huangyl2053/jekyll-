@@ -78,7 +78,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
     private final RString 計画作成事業者番号;
     private final RString 給付率区分;
     private final RString 給付率;
-    private final RString 出力順ID;
+    private final long 出力順ID;
     private final RString psmShikibetsuTaisho;
     private final boolean 対象年月flag;
     private final boolean 給付実績区分flag;
@@ -311,7 +311,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
             RString 計画作成事業者番号,
             RString 給付率区分,
             RString 給付率,
-            RString 出力順ID,
+            long 出力順ID,
             RString psmShikibetsuTaisho,
             boolean 対象年月flag,
             boolean 給付実績区分flag,
@@ -364,8 +364,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
             boolean 給付率区分flag1,
             boolean 給付率区分flag2,
             boolean 給付率区分flag3,
-            boolean 給付率flag
-    ) {
+            boolean 給付率flag) {
         this.対象年月 = 対象年月;
         this.年月範囲_開始 = 年月範囲_開始;
         this.年月範囲_終了 = 年月範囲_終了;
@@ -610,7 +609,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
             RString 計画作成事業者番号,
             RString 給付率区分,
             RString 給付率,
-            RString 出力順ID,
+            long 出力順ID,
             RString psmShikibetsuTaisho
     ) {
         boolean 旧措置特定有無flag = false;

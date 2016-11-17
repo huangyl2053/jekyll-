@@ -511,7 +511,9 @@ public class JukyushaKyufuJissekiDaichoHandler {
         if (div.getTabChushutsuJoken().getTxtKyufuritsu().getValue() != null) {
             batchParameter.set給付率(new RString(div.getTxtKyufuritsu().getValue().toString()));
         }
-        batchParameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
+        if (div.getCcdChohyoShutsuryokujun().get出力順ID() != null) {
+            batchParameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
+        }
     }
 
     /**
@@ -855,6 +857,8 @@ public class JukyushaKyufuJissekiDaichoHandler {
         if (!div.getTabChushutsuJoken().getTxtKyufuritsu().getValue().toString().isEmpty()) {
             batchParameter.set給付率(new RString(div.getTxtKyufuritsu().getValue().toString()));
         }
-        batchParameter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
+        if (div.getCcdChohyoShutsuryokujun().get出力順ID() != null) {
+            batchParameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
+        }
     }
 }
