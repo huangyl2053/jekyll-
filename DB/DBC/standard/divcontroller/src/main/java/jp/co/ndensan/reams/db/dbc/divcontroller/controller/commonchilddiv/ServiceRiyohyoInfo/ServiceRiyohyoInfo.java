@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -200,7 +201,14 @@ public class ServiceRiyohyoInfo {
 
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
+//        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisai().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnCancelMeisaiInput().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisaiGokei().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnBeppyoMeisaiKakutei().setDisabled(true);
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
 
@@ -449,6 +457,11 @@ public class ServiceRiyohyoInfo {
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnDelete(ServiceRiyohyoInfoDiv div) {
         ViewStateHolder.put(ViewStateKeys.選択有无, true);
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
+        dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
+        if (row.getRowState().equals(RowState.Added)) {
+            div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource().remove(row);
+            return ResponseData.of(div).respond();
+        }
         handler.setパネルにデータ反映();
         handler.init削除();
         return ResponseData.of(div).respond();
