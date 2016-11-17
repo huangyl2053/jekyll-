@@ -115,9 +115,9 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
             }
             boolean 計算後情報作成区分 = false;
             processParameter = new KarisanteiIdoFukaProcessParameter(new FlexibleYear(parameter.get調定年度()),
-                    new FlexibleYear(parameter.get賦課年度()), 出力帳票一覧, new RDate(parameter.get特徴_発行日().toString()),
-                    new RDate(parameter.get仮算定額変更_発行日().toString()), parameter.get文書番号(), parameter.get納入_出力期(),
-                    parameter.get納入_出力方式(), new RDate(parameter.get納入_発行日().toString()), parameter.get納入_対象者(),
+                    new FlexibleYear(parameter.get賦課年度()), 出力帳票一覧, get発行日(parameter.get特徴_発行日()),
+                    get発行日(parameter.get仮算定額変更_発行日()), parameter.get文書番号(), parameter.get納入_出力期(),
+                    parameter.get納入_出力方式(), get発行日(parameter.get納入_発行日()), parameter.get納入_対象者(),
                     parameter.get納入_生活保護対象者(), parameter.get納入_ページごとに山分け(), parameter.is一括発行起動フラグ(),
                     システム日時, getResult(YMDHMS.class, new RString(最新調定日時の取得), GetChoteiNichijiProcess.KIJUN_TIME));
             if (特別徴収開始通知書仮算定帳票分類ID.equals(出力帳票一覧.get帳票分類ID())) {
@@ -176,6 +176,13 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
         }
     }
 
+    private RDate get発行日(RString 発行日) {
+        if (RString.isNullOrEmpty(発行日)) {
+            return null;
+        }
+        return new RDate(発行日.toString());
+    }
+
     /**
      * 最新調定日時の取得を行います。
      *
@@ -184,9 +191,8 @@ public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB0150
     @Step(最新調定日時の取得)
     protected IBatchFlowCommand getkijunTimestamp() {
         KarisanteiIdoFukaProcessParameter para = new KarisanteiIdoFukaProcessParameter(new FlexibleYear(parameter.get調定年度()),
-                new FlexibleYear(parameter.get賦課年度()), null, new RDate(parameter.get特徴_発行日().toString()),
-                new RDate(parameter.get仮算定額変更_発行日().toString()), parameter.get文書番号(), parameter.get納入_出力期(),
-                parameter.get納入_出力方式(), new RDate(parameter.get納入_発行日().toString()), parameter.get納入_対象者(),
+                new FlexibleYear(parameter.get賦課年度()), null, null, null, parameter.get文書番号(), parameter.get納入_出力期(),
+                parameter.get納入_出力方式(), null, parameter.get納入_対象者(),
                 parameter.get納入_生活保護対象者(), parameter.get納入_ページごとに山分け(), parameter.is一括発行起動フラグ(),
                 システム日時, null);
         return simpleBatch(GetChoteiNichijiProcess.class).arguments(para).define();

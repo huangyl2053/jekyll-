@@ -98,6 +98,7 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
             BreakerCatalog<KaigoHokenryogakuSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KaigoHokenryogakuSource> occuredBreak(
@@ -227,7 +228,7 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
          * 年金コード
          */
         年金コード(new RString("0206"), new RString("年金コード"), FORMAT
-                .concat(new RString("UeT0511after_nenkinCode")).concat(FORMAT)),
+                .concat(new RString("dbT2015KeisangoJoho_honNenkinCode")).concat(FORMAT)),
         /**
          * 納組コード
          */
@@ -239,7 +240,7 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
         /**
          * 生活保護種別
          */
-        生活保護種別(new RString("0116"), new RString("生活保護種別"), FORMAT.concat(new RString("生活保護区分")).concat(FORMAT)),
+        生活保護種別(new RString("0116"), new RString("生活保護種別"), FORMAT.concat(new RString("dbT2015KeisangoJoho_seihofujoShurui")).concat(FORMAT)),
         /**
          * 現金口座区分
          */

@@ -99,7 +99,7 @@ public class ShokanFushikyuKetteiInBodyEditor implements IShokanFushikyuKetteiIn
         } else {
             source.listDBKoshinUmu_1 = RString.EMPTY;
         }
-        if (帳票出力対象データ != null && 帳票出力対象データ.get識別コード() != null) {
+        if (帳票出力対象データ.get識別コード() != null) {
             source.shikibetuCode = 帳票出力対象データ.get識別コード();
         } else {
             source.shikibetuCode = ShikibetsuCode.EMPTY;

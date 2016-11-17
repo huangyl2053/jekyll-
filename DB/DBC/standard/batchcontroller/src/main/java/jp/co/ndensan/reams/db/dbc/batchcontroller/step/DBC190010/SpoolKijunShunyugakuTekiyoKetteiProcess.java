@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsu
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsuchiichiran.KijunShunyugakuTekiyoKetteiTsuchiIchiranReport;
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsuchisho.KijunShunyugakuTekiyoKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsuchisho.KijunShunyugakuTekiyoKetteiTsuchishoReport;
+import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ChushutsuKikan;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunshunyugakutekiyokettei.KijunShunyugakuTekiyoKetteiMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunshunyugakutekiyokettei.SpoolKijunShunyugakuTekiyoKetteiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -69,6 +70,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -120,6 +122,7 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     private static final int 文字切れ対象文字列長 = 40;
     private static final RString なし = new RString("なし");
     private static final RString 年度内連番 = new RString("0000");
+    private static final RString 時刻 = new RString("000000");
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunshunyugakutekiyokettei."
             + "IKijunShunyugakuTekiyoKetteiMapper.select基準収入額適用管理");
@@ -241,8 +244,8 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
                 parameter.get市町村コード(), タイトル, parameter.get抽出期間(), new FlexibleYear(年度内連番), 年度内連番);
         if (処理日付管理マスタ != null) {
             ShoriDateKanriBuilder builder = 処理日付管理マスタ.createBuilderForEdit();
-            builder.set対象開始年月日(parameter.get開始日());
-            builder.set対象終了年月日(parameter.get終了日());
+            builder.set対象開始日時(new YMDHMS(parameter.get開始日().toString().concat(時刻.toString())));
+            builder.set対象終了日時(new YMDHMS(parameter.get終了日().toString().concat(時刻.toString())));
             処理日付管理マスタmanager.save処理日付管理マスタ(builder.build());
         }
         バッチ出力条件リストの出力();
@@ -255,10 +258,17 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter_一覧表.pageCount().value()));
         RString csv出力有無 = なし;
         RString 市町村コード = new RString(parameter.get市町村コード().toString());
+        RString 年月日タイトル;
+        if (ChushutsuKikan.申請年月日.getコード().equals(parameter.get抽出期間())) {
+            年月日タイトル = ChushutsuKikan.申請年月日.get名称();
+        } else {
+            年月日タイトル = ChushutsuKikan.決定年月日.get名称();
+        }
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(new RString("【抽出条件】"));
-        出力条件.add(new RString(" 申請年月日:").concat(parameter.get開始日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString())
+        出力条件.add(RString.HALF_SPACE.concat(年月日タイトル).concat(new RString(":"))
+                .concat(parameter.get開始日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString())
                 .concat(new RString(" ～ ")).concat(parameter.get終了日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString()));
         if (new RString("1").equals(parameter.get印書())) {

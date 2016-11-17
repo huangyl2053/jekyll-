@@ -100,14 +100,12 @@
         UPDATE
         rgdb."DbT3075KogakuGassanKyufuJisseki"
         SET
-        "kyufuJissekiSakuseiKubunCode" ='2',
-        <if test="flag">
-            "jikoFutanSeiriNo" = #{更新後自己負担額証明書整理番号},
-            "shinseiYMD" = #{更新後申請年月日},
-            "ketteiYMD" = #{更新後決定年月日},
-            "jikoFutanSogaku" = #{更新後自己負担総額},
-            "shikyuGaku" = #{更新後支給額},
-        </if>
+        "kyufuJissekiSakuseiKubunCode" =#{更新後給付実績作成区分コード},
+        "jikoFutanSeiriNo" = #{更新後自己負担額証明書整理番号},
+        "shinseiYMD" = #{更新後申請年月日},
+        "ketteiYMD" = #{更新後決定年月日},
+        "jikoFutanSogaku" = #{更新後自己負担総額},
+        "shikyuGaku" = #{更新後支給額},
         "shoKisaiHokenshaNo" = #{更新後証記載保険者番号},
         "lastUpdateReamsLoginId" = #{loginId},
         "updateCount" = "updateCount" + 1,

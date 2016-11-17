@@ -55,7 +55,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
      * 画面初期化のメソッドです。
      *
      * @param 資格対象者 TaishoshaKey
-     * @retrun KyotakuServiceRirekiIchiranEntityResult
+     * @return List<KyotakuServiceRirekiIchiranEntityResult>
      */
     public List<KyotakuServiceRirekiIchiranEntityResult> initialize(TaishoshaKey 資格対象者) {
         div.getCcdKaigoAtenaInfo().initialize(資格対象者.get識別コード());

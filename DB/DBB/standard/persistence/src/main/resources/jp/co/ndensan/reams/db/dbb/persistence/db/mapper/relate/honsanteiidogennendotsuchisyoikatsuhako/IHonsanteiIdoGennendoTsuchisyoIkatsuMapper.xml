@@ -3844,7 +3844,9 @@
     <select id="select特徴仮算定一時" resultMap="resultMap_TmpIdoGennendoKarisantei"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
-            A.*
+            A.*,
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode",
+            "dbT2002Fuka_choteiJiyu1"||"dbT2002Fuka_choteiJiyu2"||"dbT2002Fuka_choteiJiyu3"||"dbT2002Fuka_choteiJiyu4" as "dbT2002Fuka_choteiJiyu"
         FROM
             "TmpIdoGennendoKarisantei" AS A
         ${出力順}

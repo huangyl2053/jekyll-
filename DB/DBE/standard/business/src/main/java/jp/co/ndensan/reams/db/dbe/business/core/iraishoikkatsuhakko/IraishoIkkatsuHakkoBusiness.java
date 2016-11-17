@@ -861,7 +861,6 @@ public class IraishoIkkatsuHakkoBusiness {
         if (!RString.isNullOrEmpty(entity.get意見書作成回数区分())) {
             item.setIkenshoSakuseiKaisuKubun(new Code(entity.get意見書作成回数区分()));
         }
-        IkenshoirairirekiIchiran business = new IkenshoirairirekiIchiran(item);
-        return business;
+        return new IkenshoirairirekiIchiran(item);
     }
 }

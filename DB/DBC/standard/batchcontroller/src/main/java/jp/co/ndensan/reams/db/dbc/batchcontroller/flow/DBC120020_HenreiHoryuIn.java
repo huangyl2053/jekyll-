@@ -9,7 +9,6 @@ import java.io.File;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120020.HenreiHoryuInIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120020.HenreiHoryuInReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
@@ -24,6 +23,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyohikohijukyusha.SogojigyohiKohiJukyushaFlowEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuHihokansyaKanrenManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -44,7 +44,6 @@ public class DBC120020_HenreiHoryuIn extends BatchFlowBase<DBC120020_HenreiHoryu
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
-    private static final String 被保険者関連処理 = "doHihokenshaKanren";
     private static final String 国保連インタフェース管理更新 = "doInterfaceKanriKousin";
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
@@ -100,7 +99,9 @@ public class DBC120020_HenreiHoryuIn extends BatchFlowBase<DBC120020_HenreiHoryu
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
             } else {
-                executeStep(被保険者関連処理);
+                KokuhorenKyoutsuuHihokansyaKanrenManager 被保険者関連処理Manager
+                        = KokuhorenKyoutsuuHihokansyaKanrenManager.createInstance();
+                被保険者関連処理Manager.do被保険者宛名情報取得();
                 executeStep(国保連インタフェース管理更新);
                 executeStep(一覧表作成);
                 executeStep(処理結果リスト作成);
@@ -137,18 +138,6 @@ public class DBC120020_HenreiHoryuIn extends BatchFlowBase<DBC120020_HenreiHoryu
             callReadCsvFileProcess() {
         return loopBatch(HenreiHoryuInReadCsvFileProcess.class
         ).arguments(csvParameter).define();
-    }
-
-    /**
-     * 被保険者関連処理です。
-     *
-     * @return KohifutanshaDoHihokenshaKanrenProcess
-     */
-    @Step(被保険者関連処理)
-    protected IBatchFlowCommand
-            callDoHihokenshaKanrenProcess() {
-        return simpleBatch(KokuhorenkyoutsuDoHihokenshaKanrenProcess.class
-        ).define();
     }
 
     /**
