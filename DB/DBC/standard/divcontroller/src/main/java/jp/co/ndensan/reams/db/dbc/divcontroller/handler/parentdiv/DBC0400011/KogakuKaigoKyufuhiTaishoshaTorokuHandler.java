@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0400011;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020010.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0400011.KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiKyufuTaishoshaToroku;
@@ -89,13 +90,15 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
                 .getTxtShinsaYM().getValue().getYearMonth().toDateString();
         boolean flg = div.getPublishIchiranhyo().isIsPublish();
         Long shuturyokuJunn = div.getCcdChohyoShutsuryokujun().get出力順ID();
-
+        RString menuId = ResponseHolder.getMenuID();
         KogakuKaigoServicehiKyufuTaishoshaToroku business = new KogakuKaigoServicehiKyufuTaishoshaToroku();
         DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter parameter
                 = business.getKogakuKaigoServicehiKyufuTaishoshaTorokuBatchParameter(
                         審査年月,
                         flg,
                         shuturyokuJunn);
+        parameter.setMenuId(menuId);
+        parameter.setShoriStateKubun(ShoriJotaiKubun.再処理前.getコード());
         return parameter;
     }
 
