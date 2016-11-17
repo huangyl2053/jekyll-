@@ -48,6 +48,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private static final RString 印字_広域 = new RString("広域");
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
+    private static final RString 秒 = new RString("秒");
     private static final RString 被保険者区分コード_EMPTY = new RString("");
     private static final RString 被保険者区分コード_NUM1 = new RString("1");
     private static final RString 被保険者区分コード_NUM2 = new RString("2");
@@ -58,6 +59,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private static final RString 本人 = new RString("1");
     private static final RString 世帯員 = new RString("2");
     private static final RString 年度 = new RString("年度");
+    private static final RString 作成 = new RString("作成");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -68,6 +70,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private static final int NUM_8 = 8;
     private static final int NUM_10 = 10;
     private static final int NUM_12 = 12;
+    private static final int NUM_14 = 14;
 
     private final ShotokuShoukaiDataTempEntity 所得照会票発行一覧;
     private final List<KoikiZenShichosonJoho> 構成市町村情報リスト;
@@ -111,12 +114,13 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     @Override
     public ShotokushokaihyoHakkoIchiranSource edit(ShotokushokaihyoHakkoIchiranSource source) {
         YMDHMS システム日時 = YMDHMS.now();
-        RString 作成年月 = new FlexibleDate(システム日時.toString().substring(NUM_0, NUM_8))
-                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(NUM_0, NUM_8);
+        RString 作成年月日 = new FlexibleDate(システム日時.toString().substring(NUM_0, NUM_8))
+                .wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().substring(NUM_0, NUM_8);
         RString 作成時分 = new RString(システム日時.toString().substring(NUM_8, NUM_10).concat(時.toString())
                 .concat(システム日時.toString().substring(NUM_10, NUM_12)).concat(分.toString()));
-        source.printTimeStamp = 作成年月.concat(RString.FULL_SPACE).concat(作成時分);
+        RString 作成秒 = new RString(システム日時.toString().substring(NUM_12, NUM_14).concat(秒.toString()));
+        source.printTimeStamp = 作成年月日.concat(RString.FULL_SPACE).concat(作成時分).concat(作成秒).concat(RString.FULL_SPACE).concat(作成);
         source.title = 所得照会一覧表;
         if (処理年度 != null) {
             source.nendo = 処理年度.wareki().toDateString().concat(年度);
