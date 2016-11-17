@@ -46,14 +46,16 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IKogak
         setCompSofubutsuAtesaki(source);
         setCompNinshosha(source);
         setレイヤ1(source);
-        if (ChohyoMongonYoshiki.フォント小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
-            setレイヤ1通知文(source);
-        } else if (ChohyoMongonYoshiki.フォント大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
-            setレイヤフォント大(source);
-        } else if (ChohyoMongonYoshiki.フォント混在_上小_下大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
-            setレイヤフォント混在(source);
-        } else if (ChohyoMongonYoshiki.フォント混在_上大_下小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
-            setレイヤフォント混在2(source);
+        if (帳票制御共通 != null && 帳票制御共通.get定型文文字サイズ() != null) {
+            if (ChohyoMongonYoshiki.フォント小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
+                setレイヤ1通知文(source);
+            } else if (ChohyoMongonYoshiki.フォント大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
+                setレイヤフォント大(source);
+            } else if (ChohyoMongonYoshiki.フォント混在_上小_下大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
+                setレイヤフォント混在(source);
+            } else if (ChohyoMongonYoshiki.フォント混在_上大_下小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
+                setレイヤフォント混在2(source);
+            }
         }
 
         return source;
