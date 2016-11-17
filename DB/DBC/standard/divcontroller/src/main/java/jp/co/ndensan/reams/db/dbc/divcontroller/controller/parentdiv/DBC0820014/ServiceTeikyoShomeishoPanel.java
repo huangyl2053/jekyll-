@@ -161,7 +161,7 @@ public class ServiceTeikyoShomeishoPanel {
         DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         handler.サービス提供証明書の存在チェック(整理番号, サービス年月, 被保険者番号, 償還払ViewStateDB情報);
         putViewStateDown(処理モード_登録, div);
-        setShomeishoNyuryokuFlag();
+        証明書入力済フラグ初期化();
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払い費支給申請).respond();
     }
 
@@ -173,6 +173,7 @@ public class ServiceTeikyoShomeishoPanel {
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_Modify(ServiceTeikyoShomeishoPanelDiv div) {
         putViewStateDown(処理モード_修正, div);
+        証明書変更済フラグ初期化();
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払い費支給申請).respond();
     }
 
@@ -218,7 +219,7 @@ public class ServiceTeikyoShomeishoPanel {
         ViewStateHolder.put(ViewStateKeys.明細検索キー, parameter);
     }
 
-    private void setShomeishoNyuryokuFlag() {
+    private void 証明書入力済フラグ初期化() {
         ShomeishoNyuryokuFlag 証明書入力済フラグ = new ShomeishoNyuryokuFlag();
         証明書入力済フラグ.setサービス計画費_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
         証明書入力済フラグ.set基本情報_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
@@ -232,6 +233,22 @@ public class ServiceTeikyoShomeishoPanel {
         証明書入力済フラグ.set請求額集計_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
         証明書入力済フラグ.set食事費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
         ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, 証明書入力済フラグ);
+    }
+
+    private void 証明書変更済フラグ初期化() {
+        ShomeishoHenkoFlag 証明書変更済フラグ = new ShomeishoHenkoFlag();
+        証明書変更済フラグ.setサービス計画費_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+        証明書変更済フラグ.set基本情報_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+        証明書変更済フラグ.set特定入所者費用_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+        証明書変更済フラグ.set特定診療費_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+        証明書変更済フラグ.set社福軽減額_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+        証明書変更済フラグ.set給付費明細_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+        証明書変更済フラグ.set給付費明細住特_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+        証明書変更済フラグ.set緊急時所定疾患_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+        証明書変更済フラグ.set緊急時施設療養費_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+        証明書変更済フラグ.set請求額集計_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+        証明書変更済フラグ.set食事費用_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+        ViewStateHolder.put(ViewStateKeys.証明書変更済フラグ, 証明書変更済フラグ);
     }
 
     private void 入力有無フラグ設定() {
