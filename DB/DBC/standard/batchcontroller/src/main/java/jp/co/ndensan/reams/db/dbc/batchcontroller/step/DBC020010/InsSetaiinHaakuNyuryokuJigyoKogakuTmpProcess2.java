@@ -69,11 +69,12 @@ public class InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess2 extends BatchProcessB
         世帯員把握Entity.setShotokuNendo(entity.get世帯員所得情報Entity().getShotokuNendo());
         FlexibleDate 適用年月日 = 被保険者情報.get適用年月日();
         FlexibleDate 解除年月日 = 被保険者情報.get解除年月日();
-        if ((適用年月日 != null && 世帯員基準日 != null && 解除年月日 != null
+        if ((!isNullOrEntity(適用年月日) && !isNullOrEntity(世帯員基準日) && !isNullOrEntity(解除年月日)
                 && 適用年月日.isBeforeOrEquals(世帯員基準日)
                 && 世帯員基準日.isBefore(解除年月日))
-                || (適用年月日 != null && 適用年月日.isBeforeOrEquals(世帯員基準日)
-                && 解除年月日 == null)) {
+                || (!isNullOrEntity(適用年月日) && !isNullOrEntity(世帯員基準日)
+                && 適用年月日.isBeforeOrEquals(世帯員基準日)
+                && (isNullOrEntity(解除年月日)))) {
             世帯員把握Entity.setJushochiTokureiFlag(住所地特例該当_1);
         } else {
             世帯員把握Entity.setJushochiTokureiFlag(住所地特例該当_0);
@@ -86,5 +87,9 @@ public class InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess2 extends BatchProcessB
     @Override
     protected void afterExecute() {
         tempSetaiinShotokuHanteiMeisaiTableWriter.getInsertCount();
+    }
+
+    private boolean isNullOrEntity(FlexibleDate date) {
+        return date == null || date.isEmpty();
     }
 }
