@@ -64,9 +64,9 @@ public class SaiChekkuhyo_292004Process extends BatchProcessBase<HomonChosaIrais
     @Override
     protected void afterExecute() {
         List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList = business.getCheckEntityList();
-    //    for (ChosahyoSaiCheckhyoRelateEntity checkEntity : checkEntityList) {
-    //        SaiChekkuhyoReport report = SaiChekkuhyoReport.createFrom(business.setDBE292004Item(checkEntity));
-    //        report.writeBy(reportSourceWriter);
-    //    }
+        for (ChosahyoSaiCheckhyoRelateEntity checkEntity : checkEntityList) {
+            SaiChekkuhyoReport report = SaiChekkuhyoReport.createFrom(business.setDBE292004Item(checkEntity));
+            report.writeBy(reportSourceWriter);
+        }
     }
 }
