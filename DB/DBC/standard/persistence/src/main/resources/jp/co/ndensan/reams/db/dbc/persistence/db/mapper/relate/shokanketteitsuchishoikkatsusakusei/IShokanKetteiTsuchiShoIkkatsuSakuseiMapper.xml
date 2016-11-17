@@ -1148,7 +1148,7 @@
                  AND ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" <![CDATA[<>]]> ''
                  AND ShokanKetteiTsuchiShoMeisaiTemp."shikyuHushikyuKetteiKubun" = '1')
                 <if test="資格区分 != null"> 
-                AND ShokanKetteiTsuchiShoMeisaiTemp."hihokennshaKubunCode" = #{資格区分}    
+                OR ShokanKetteiTsuchiShoMeisaiTemp."hihokennshaKubunCode" = #{資格区分}    
                 </if>
 
         )

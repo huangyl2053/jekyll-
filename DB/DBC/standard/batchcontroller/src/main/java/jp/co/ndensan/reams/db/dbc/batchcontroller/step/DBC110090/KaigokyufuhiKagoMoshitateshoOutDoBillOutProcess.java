@@ -212,7 +212,7 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
             sogojiWriter = new ReportSourceWriter<>(sogojiReportWriter);
         }
 
-        kaigoManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, eUC_ENTITY_ID,
+        kaigoManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, eUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         kaigoEucFilePath = Path.combinePath(kaigoManager.getEucOutputDirectry(),
                 出力ファイル名);
