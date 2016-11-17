@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKo
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKonkyoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
@@ -77,6 +78,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
+import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -1002,6 +1004,12 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         }
         賦課根拠.setGokeiShotoku(前年度合計所得金額);
         賦課根拠.setKotekiNenkinShunyu(前年度公的年金収入額);
+        List<KazeiKubunHonninKubun> setaiinKazeiKubunList = new ArrayList();
+        KazeiKubunHonninKubun kazeiKubunHonninKubun = new KazeiKubunHonninKubun();
+        kazeiKubunHonninKubun.set本人区分(HonninKubun.本人);
+        kazeiKubunHonninKubun.set課税区分(KazeiKubun.toValue(課税区分));
+        setaiinKazeiKubunList.add(kazeiKubunHonninKubun);
+        賦課根拠.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         HokenryoDankaiHanteiParameter parameter = new HokenryoDankaiHanteiParameter();
         parameter.setFukaNendo(調定年度);
         parameter.setFukaKonkyo(賦課根拠);
