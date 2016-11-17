@@ -8,24 +8,19 @@ package jp.co.ndensan.reams.db.dbc.business.core.dbjoho;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisaiJushochiTokurei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKeigengaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoHenkoFlag;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
-import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
@@ -46,7 +41,7 @@ public class DbJohoViewState implements Serializable {
 
     private ShokanShinsei 償還払支給申請;
     private ArrayList<ShokanKihon> 償還払請求基本データList;
-    private ArrayList<ShokanMeisaiJushochiTokurei> 住所地特例データList;
+    private ArrayList<ShokanMeisaiJushochiTokureiResult> 住所地特例データList;
     private ArrayList<ShokanMeisaiResult> 償還払請求明細データList;
     private ArrayList<ShokanTokuteiShinryohi> 償還払請求特定診療費データList;
     private ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> 特別療養費データList;
@@ -60,9 +55,6 @@ public class DbJohoViewState implements Serializable {
     private ArrayList<ShokanShukeiResult> 償還払請求集計データList;
     private ArrayList<ShokanShokujiHiyo> 償還払請求食事費用データList;
     private ShokanHanteiKekka 償還払支給判定結果;
-    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap;
-    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap;
-    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap;
 
     /**
      * サービス計画200904データを取得する。
@@ -83,9 +75,6 @@ public class DbJohoViewState implements Serializable {
             RString 様式番号,
             RString 明細番号) {
         List<ShokanServicePlan200904Result> entity200904ResultList = new ArrayList<>();
-        if (null == 償還払請求サービス計画200904データResultList) {
-            return entity200904ResultList;
-        }
         for (ShokanServicePlan200904Result entity200904Result : 償還払請求サービス計画200904データResultList) {
             if (被保険者番号.equals(entity200904Result.getEntity().get被保険者番号())
                     && サービス年月.equals(entity200904Result.getEntity().getサービス提供年月())
@@ -105,9 +94,6 @@ public class DbJohoViewState implements Serializable {
      * @param entity200904ResultList 200904データResultList
      */
     public void add償還払請求サービス計画200904データResult(List<ShokanServicePlan200904Result> entity200904ResultList) {
-        if (null == 償還払請求サービス計画200904データResultList) {
-            償還払請求サービス計画200904データResultList = new ArrayList<>();
-        }
         償還払請求サービス計画200904データResultList.addAll(entity200904ResultList);
     }
 
@@ -129,9 +115,6 @@ public class DbJohoViewState implements Serializable {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) {
-        if (null == 償還払請求サービス計画200604データResultList) {
-            return null;
-        }
         for (ShokanServicePlan200604Result entity200604Result : 償還払請求サービス計画200604データResultList) {
             if (被保険者番号.equals(entity200604Result.getEntity().get被保険者番号())
                     && サービス年月.equals(entity200604Result.getEntity().getサービス提供年月())
@@ -151,12 +134,6 @@ public class DbJohoViewState implements Serializable {
      * @param entity200604Result 200604データResult
      */
     public void add償還払請求サービス計画200604データResult(ShokanServicePlan200604Result entity200604Result) {
-        if (null == entity200604Result) {
-            return;
-        }
-        if (null == 償還払請求サービス計画200604データResultList) {
-            償還払請求サービス計画200604データResultList = new ArrayList<>();
-        }
         償還払請求サービス計画200604データResultList.add(entity200604Result);
     }
 
@@ -178,9 +155,6 @@ public class DbJohoViewState implements Serializable {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) {
-        if (null == 償還払請求サービス計画200004データResultList) {
-            return null;
-        }
         for (ShokanServicePlan200004Result entity200004Result : 償還払請求サービス計画200004データResultList) {
             if (被保険者番号.equals(entity200004Result.getEntity().get被保険者番号())
                     && サービス年月.equals(entity200004Result.getEntity().getサービス提供年月())
@@ -200,12 +174,6 @@ public class DbJohoViewState implements Serializable {
      * @param entity200004Result 200004データResult
      */
     public void add償還払請求サービス計画200004データResult(ShokanServicePlan200004Result entity200004Result) {
-        if (null == entity200004Result) {
-            return;
-        }
-        if (null == 償還払請求サービス計画200004データResultList) {
-            償還払請求サービス計画200004データResultList = new ArrayList<>();
-        }
         償還払請求サービス計画200004データResultList.add(entity200004Result);
     }
 }
