@@ -29,10 +29,6 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKan
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * ViewStateクラスです
@@ -67,29 +63,19 @@ public class DbJohoViewState implements Serializable {
     /**
      * サービス計画200904データを取得する。
      *
-     * @param 被保険者番号 HihokenshaNo
-     * @param サービス年月 FlexibleYearMonth
-     * @param 整理番号 RString
-     * @param 事業者番号 JigyoshaNo
-     * @param 様式番号 RString
-     * @param 明細番号 RString
+     * @param 明細キー ShoukanharaihishinseimeisaikensakuParameter
      * @return サービス計画200904データ
      */
     public List<ShokanServicePlan200904Result> get償還払請求サービス計画200904データResultList(
-            HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号,
-            JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 明細番号) {
+            ShoukanharaihishinseimeisaikensakuParameter 明細キー) {
         List<ShokanServicePlan200904Result> entity200904ResultList = new ArrayList<>();
         for (ShokanServicePlan200904Result entity200904Result : 償還払請求サービス計画200904データResultList) {
-            if (被保険者番号.equals(entity200904Result.getEntity().get被保険者番号())
-                    && サービス年月.equals(entity200904Result.getEntity().getサービス提供年月())
-                    && 整理番号.equals(entity200904Result.getEntity().get整理番号())
-                    && 事業者番号.equals(entity200904Result.getEntity().get事業者番号())
-                    && 様式番号.equals(entity200904Result.getEntity().get様式番号())
-                    && 明細番号.equals(entity200904Result.getEntity().get明細番号())) {
+            if (明細キー.get被保険者番号().equals(entity200904Result.getEntity().get被保険者番号())
+                    && 明細キー.getサービス年月().equals(entity200904Result.getEntity().getサービス提供年月())
+                    && 明細キー.get整理番号().equals(entity200904Result.getEntity().get整理番号())
+                    && 明細キー.get事業者番号().equals(entity200904Result.getEntity().get事業者番号())
+                    && 明細キー.get様式番号().equals(entity200904Result.getEntity().get様式番号())
+                    && 明細キー.get明細番号().equals(entity200904Result.getEntity().get明細番号())) {
                 entity200904ResultList.add(entity200904Result);
             }
         }
@@ -108,28 +94,21 @@ public class DbJohoViewState implements Serializable {
     /**
      * サービス計画200604データを取得する。
      *
-     * @param 被保険者番号 HihokenshaNo
-     * @param サービス年月 FlexibleYearMonth
-     * @param 整理番号 RString
-     * @param 事業者番号 JigyoshaNo
-     * @param 様式番号 RString
-     * @param 明細番号 RString
+     * @param 明細キー ShoukanharaihishinseimeisaikensakuParameter
      * @return サービス計画200604データ
      */
     public ShokanServicePlan200604Result get償還払請求サービス計画200604データResult(
-            HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号,
-            JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 明細番号) {
+            ShoukanharaihishinseimeisaikensakuParameter 明細キー) {
+        if (null == 償還払請求サービス計画200604データResultList) {
+            return null;
+        }
         for (ShokanServicePlan200604Result entity200604Result : 償還払請求サービス計画200604データResultList) {
-            if (被保険者番号.equals(entity200604Result.getEntity().get被保険者番号())
-                    && サービス年月.equals(entity200604Result.getEntity().getサービス提供年月())
-                    && 整理番号.equals(entity200604Result.getEntity().get整理番号())
-                    && 事業者番号.equals(entity200604Result.getEntity().get事業者番号())
-                    && 様式番号.equals(entity200604Result.getEntity().get様式番号())
-                    && 明細番号.equals(entity200604Result.getEntity().get明細番号())) {
+            if (明細キー.get被保険者番号().equals(entity200604Result.getEntity().get被保険者番号())
+                    && 明細キー.getサービス年月().equals(entity200604Result.getEntity().getサービス提供年月())
+                    && 明細キー.get整理番号().equals(entity200604Result.getEntity().get整理番号())
+                    && 明細キー.get事業者番号().equals(entity200604Result.getEntity().get事業者番号())
+                    && 明細キー.get様式番号().equals(entity200604Result.getEntity().get様式番号())
+                    && 明細キー.get明細番号().equals(entity200604Result.getEntity().get明細番号())) {
                 return entity200604Result;
             }
         }
@@ -148,28 +127,21 @@ public class DbJohoViewState implements Serializable {
     /**
      * サービス計画200004データを取得する。
      *
-     * @param 被保険者番号 HihokenshaNo
-     * @param サービス年月 FlexibleYearMonth
-     * @param 整理番号 RString
-     * @param 事業者番号 JigyoshaNo
-     * @param 様式番号 RString
-     * @param 明細番号 RString
+     * @param 明細キー ShoukanharaihishinseimeisaikensakuParameter
      * @return サービス計画200004データ
      */
     public ShokanServicePlan200004Result get償還払請求サービス計画200004データResult(
-            HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号,
-            JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 明細番号) {
+            ShoukanharaihishinseimeisaikensakuParameter 明細キー) {
+        if (null == 償還払請求サービス計画200004データResultList) {
+            return null;
+        }
         for (ShokanServicePlan200004Result entity200004Result : 償還払請求サービス計画200004データResultList) {
-            if (被保険者番号.equals(entity200004Result.getEntity().get被保険者番号())
-                    && サービス年月.equals(entity200004Result.getEntity().getサービス提供年月())
-                    && 整理番号.equals(entity200004Result.getEntity().get整理番号())
-                    && 事業者番号.equals(entity200004Result.getEntity().get事業者番号())
-                    && 様式番号.equals(entity200004Result.getEntity().get様式番号())
-                    && 明細番号.equals(entity200004Result.getEntity().get明細番号())) {
+            if (明細キー.get被保険者番号().equals(entity200004Result.getEntity().get被保険者番号())
+                    && 明細キー.getサービス年月().equals(entity200004Result.getEntity().getサービス提供年月())
+                    && 明細キー.get整理番号().equals(entity200004Result.getEntity().get整理番号())
+                    && 明細キー.get事業者番号().equals(entity200004Result.getEntity().get事業者番号())
+                    && 明細キー.get様式番号().equals(entity200004Result.getEntity().get様式番号())
+                    && 明細キー.get明細番号().equals(entity200004Result.getEntity().get明細番号())) {
                 return entity200004Result;
             }
         }
