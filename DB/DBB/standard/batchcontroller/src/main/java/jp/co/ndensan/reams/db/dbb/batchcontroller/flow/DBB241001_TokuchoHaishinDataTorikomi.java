@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB241001.NenkinTokuchoCsvOutputProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB241001.DBB241001_TokuchoHaishinDataTorikomiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb241001.TokuchoHaishinDataTorikomiProcessParameter;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -40,13 +43,23 @@ public class DBB241001_TokuchoHaishinDataTorikomi extends BatchFlowBase<DBB24100
     private RString filePath;
     private RString fileName;
     private FlexibleYearMonth 対象年月 = FlexibleYearMonth.EMPTY;
+    private static final RString FILTER_Z1A = new RString("Z1%");
+    private RDateTime shoriYMDHM;
 
     @Override
     protected void defineFlow() {
-        getParameter().setShoriYMDHM(RDateTime.now());
-        if (!getParameter().getSharedFileEntryDescriptorList().isEmpty() && getParameter().getSharedFileEntryDescriptorList().size() > 0) {
-            for (int i = 0; i < getParameter().getSharedFileEntryDescriptorList().size(); i++) {
-                getFilePath(getParameter().getSharedFileEntryDescriptorList().get(i));
+        List<UzT0885SharedFileEntryEntity> ファイル対象List = SharedFile.searchSharedFile(FILTER_Z1A);
+        List<SharedFileEntryDescriptor> fileEntryList = new ArrayList<>();
+        for (UzT0885SharedFileEntryEntity ファイル対象 : ファイル対象List) {
+            SharedFileEntryDescriptor descriptor = SharedFileEntryDescriptor.fromEntity(ファイル対象);
+            fileEntryList.add(descriptor);
+        }
+        List<SharedFileEntryDescriptor> sharedFileEntryDescriptorList = new ArrayList<>();
+        sharedFileEntryDescriptorList.addAll(fileEntryList);
+        shoriYMDHM = RDateTime.now();
+        if (!sharedFileEntryDescriptorList.isEmpty() && sharedFileEntryDescriptorList.size() > 0) {
+            for (int i = 0; i < sharedFileEntryDescriptorList.size(); i++) {
+                getFilePath(sharedFileEntryDescriptorList.get(i));
                 executeStep(取り込みファイルデータを一時テーブルに登録);
                 executeStep(一覧表の出力および年金特徴回付情報の登録及び件数表の出力);
                 対象年月 = getResult(FlexibleYearMonth.class, new RString(一覧表の出力および年金特徴回付情報の登録及び件数表の出力),
@@ -113,7 +126,7 @@ public class DBB241001_TokuchoHaishinDataTorikomi extends BatchFlowBase<DBB24100
     }
 
     private TokuchoHaishinDataTorikomiProcessParameter getProcessParameter() {
-        return getParameter().toProcessParameter(fileName);
+        return new TokuchoHaishinDataTorikomiProcessParameter(fileName, this.shoriYMDHM);
     }
 
     private UEXT00010NenkinTokuchoJohoTorikomiProcessParameter

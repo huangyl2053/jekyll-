@@ -344,6 +344,8 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
         if (entity.getデータレコードEntity() == null || entity.getトレイラレコードEntity() == null) {
             return;
         }
+        shoriTaishoYM.setValue(get処理対象年月(entity.getトレイラレコードEntity().getTsuchiNaiyoCode(),
+                entity.getトレイラレコードEntity().getSakuseiYMD()));
         if (tmpEntity == null) {
             tmpEntity = entity.getトレイラレコードEntity();
             set合計(entity.getデータレコードEntity());
@@ -370,7 +372,6 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
     protected void afterExecute() {
         if (tmpEntity != null) {
             editOutPutKennSuuCsv();
-            shoriTaishoYM.setValue(get処理対象年月(tmpEntity.getTsuchiNaiyoCode(), tmpEntity.getSakuseiYMD()));
         }
         if (異動処理結果情報 != null) {
             RString 市町村名 = get市町村名(異動処理結果情報.getShichosoCode());
