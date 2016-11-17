@@ -101,7 +101,7 @@ public class RenkeiDataTorikomiHandler {
             div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setSelectedKey(法改正後);
         }
         div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setDisabled(true);
-        div.getRenkeiDataTorikomiBatchParameter().getBtnDataTorikomi().setDisabled(true);
+        div.getUploadArea().getBtnDataTorikomi().setDisabled(true);
         RString 要介護認定申請 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
         RString 認定調査委託先 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
         RString 認定調査員 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
