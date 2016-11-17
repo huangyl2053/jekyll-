@@ -23,7 +23,7 @@
      "layoutName": "DBC0220011",
      "layoutTitle": "受給者異動連絡票変更登録",
      "eventName": "連絡票変更",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0220012",
