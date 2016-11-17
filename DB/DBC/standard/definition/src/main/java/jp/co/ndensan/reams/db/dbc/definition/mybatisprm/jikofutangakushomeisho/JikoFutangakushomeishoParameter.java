@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -28,5 +29,6 @@ public class JikoFutangakushomeishoParameter {
     private RString 介護合算_データ作成区分_国保連取込情報;
     private RString 介護合算_データ作成区分_計算処理時_申請書有;
     private int 履歴番号;
+    private ShikibetsuCode 識別コード;
 
 }

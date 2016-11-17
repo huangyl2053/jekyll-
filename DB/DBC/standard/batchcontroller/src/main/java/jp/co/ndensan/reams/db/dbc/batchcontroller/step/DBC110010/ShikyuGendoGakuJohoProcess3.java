@@ -54,10 +54,10 @@ public class ShikyuGendoGakuJohoProcess3 extends BatchProcessBase<ShikyuGendoGak
     @Override
     protected void initialize() {
         mapper = getMapper(IKyufukanrihyoOutMapper.class);
-        mybatisparamter = paramter.toKyufukanrihyoOutMybatisParameter();
         RString sakiEncodeKeitai = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_支給限度額一本化, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        mybatisparamter.set制度改正施行日支給限度額一本化の年月(sakiEncodeKeitai.substring(0, 値六));
-        mybatisparamter.set居宅サービス区分短期入所のコード(KyotakuServiceKubun.短期入所.getコード());
+        mybatisparamter = paramter.toKyufukanrihyoOutMybatisParameter(RString.EMPTY,
+                sakiEncodeKeitai.substring(0, 値六),
+                KyotakuServiceKubun.短期入所.getコード());
 
     }
 
