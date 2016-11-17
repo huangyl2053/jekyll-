@@ -116,12 +116,12 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         } else {
             div.getTxtTodokedeKubun().setValue(TodokedeKubun.toValue(居宅給付計画届出.get届出区分()).get名称());
         }
-        if (row.getTekiyoKaishiYMD() == null) {
+        if (row.getTekiyoKaishiYMD() == null || row.getTekiyoKaishiYMD().getValue() == null) {
             div.getTxtTekiyoKikan().clearFromValue();
         } else {
             div.getTxtTekiyoKikan().setFromValue(new RDate(row.getTekiyoKaishiYMD().getValue().toString()));
         }
-        if (row.getTekiyoShuryoYMD() == null) {
+        if (row.getTekiyoShuryoYMD() == null || row.getTekiyoShuryoYMD().getValue() == null) {
             div.getTxtTekiyoKikan().clearToValue();
         } else {
             div.getTxtTekiyoKikan().setToValue(new RDate(row.getTekiyoShuryoYMD().getValue().toString()));

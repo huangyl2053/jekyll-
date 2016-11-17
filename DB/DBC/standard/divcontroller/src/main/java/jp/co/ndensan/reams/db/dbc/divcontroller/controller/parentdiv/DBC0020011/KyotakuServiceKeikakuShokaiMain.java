@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KyotakuKeikakuTodokedeManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -56,6 +58,9 @@ public class KyotakuServiceKeikakuShokaiMain {
         int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
         KyotakuKeikakuTodokedeManager manager = new KyotakuKeikakuTodokedeManager();
         KyotakuKeikakuTodokede 居宅給付計画届出 = manager.get居宅給付計画届出(被保険者番号, 対象年月, 履歴番号);
+        if (居宅給付計画届出 == null) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
+        }
         ViewStateHolder.put(ViewStateKeys.居宅給付計画届出, 居宅給付計画届出);
         this.getHander(div).get対象情報一覧(被保険者番号, 居宅給付計画届出);
         return ResponseData.of(div).setState(DBC0020011StateName.届出表示);
