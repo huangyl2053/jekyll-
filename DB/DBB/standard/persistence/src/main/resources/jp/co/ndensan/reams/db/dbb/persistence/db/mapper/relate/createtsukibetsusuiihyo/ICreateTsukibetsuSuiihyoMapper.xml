@@ -530,7 +530,7 @@
             fuka."tsuchishoNo" AS "fuka_tsuchishoNo",
             fuka."rirekiNo" AS "fuka_rirekiNo",
             fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
-            COALESCE(fuka."hokenryoDankai2",fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
+            COALESCE(NULLIF(fuka."hokenryoDankai2",''),fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
             fuka."tkSaishutsuKampuGaku" AS "fuka_tkSaishutsuKampuGaku",
             fuka."fuSaishutsuKampuGaku" AS "fuka_fuSaishutsuKampuGaku",
             kibetsu."choshuHouhou" AS "kibetsu_choshuHouhou",
