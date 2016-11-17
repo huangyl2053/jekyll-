@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanSe
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
@@ -59,8 +60,9 @@ public class DbJohoViewState implements Serializable {
     private ArrayList<ShokanShukeiResult> 償還払請求集計データList;
     private ArrayList<ShokanShokujiHiyo> 償還払請求食事費用データList;
     private ShokanHanteiKekka 償還払支給判定結果;
-    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力完了フラグMap;
+    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap;
     private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap;
+    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap;
 
     /**
      * サービス計画200904データを取得する。
