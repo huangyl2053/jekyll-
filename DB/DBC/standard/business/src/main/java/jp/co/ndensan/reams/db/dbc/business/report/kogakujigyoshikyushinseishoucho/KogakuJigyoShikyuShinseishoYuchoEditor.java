@@ -88,9 +88,7 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         source.seibetsu = Seibetsu.toValue(帳票出力対象データ.getSeibetsuCodeChohyo()).get名称();
-        if (帳票出力対象データ.getJushoChohyo() != null) {
-            source.hihokenJusho = 帳票出力対象データ.getJushoChohyo().getColumnValue();
-        }
+        source.hihokenJusho = 帳票出力対象データ.getEditJusho();
         if (帳票出力対象データ.getTelNoChohyo() != null) {
             source.telNo = 帳票出力対象データ.getTelNoChohyo().getColumnValue();
         }
