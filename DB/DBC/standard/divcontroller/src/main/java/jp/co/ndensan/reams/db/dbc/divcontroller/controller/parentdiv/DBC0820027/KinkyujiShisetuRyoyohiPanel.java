@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.S
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.DBC0820027StateName.削除モード;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.DBC0820027StateName.新規修正モード;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.DBC0820027TransitionEventName;
@@ -34,7 +35,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -253,25 +252,17 @@ public class KinkyujiShisetuRyoyohiPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る).respond();
         }
-        boolean flag = getHandler(div).get内容変更状態();
-        if (flag) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
-                ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
-                return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る).respond();
-            } else {
-                ResponseData.of(div).respond();
-            }
-        } else {
+
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage()).respond();
+        }
+
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
             return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る).respond();
         }
+
         return ResponseData.of(div).respond();
     }
 
@@ -288,12 +279,15 @@ public class KinkyujiShisetuRyoyohiPanel {
         }
         ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
                 ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         ShomeishoNyuryokuFlag nyuryokuFlag = set入力有無フラグ(div, dbJoho, kensakuParameter);
         set入力内容保存(div, dbJoho, kensakuParameter);
-        SyokanbaraihiShikyuShinseiManager manager = SyokanbaraihiShikyuShinseiManager.createInstance();
-        ShomeishoNyuryokuKanryoKubunType 証明書入力済区分 = manager.証明書InputCheck(
-                nyuryokuFlag, kensakuParameter.get様式番号(), kensakuParameter.getサービス年月());
-        set証明書入力完了フラグ(証明書入力済区分, dbJoho, kensakuParameter);
+        if (登録.equals(処理モード)) {
+            SyokanbaraihiShikyuShinseiManager manager = SyokanbaraihiShikyuShinseiManager.createInstance();
+            ShomeishoNyuryokuKanryoKubunType 証明書入力済区分 = manager.証明書InputCheck(
+                    nyuryokuFlag, kensakuParameter.get様式番号(), kensakuParameter.getサービス年月());
+            set証明書入力完了フラグ(証明書入力済区分, dbJoho, kensakuParameter);
+        }
         return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る).respond();
     }
 
@@ -625,7 +619,8 @@ public class KinkyujiShisetuRyoyohiPanel {
     }
 
     private void set証明書入力完了フラグ(
-            ShomeishoNyuryokuKanryoKubunType 証明書入力済区分, DbJohoViewState dbJoho, ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
+            ShomeishoNyuryokuKanryoKubunType 証明書入力済区分, DbJohoViewState dbJoho,
+            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> kanryoFlagMap = dbJoho.get証明書入力完了フラグMap();
         if (kanryoFlagMap == null) {
             kanryoFlagMap = new HashMap<>();

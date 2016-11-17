@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -202,21 +203,43 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         div.getTxtKinkyuJiryoStartYMD2().setValue(row.getDefaultDataName5().getValue());
         div.getTxtKinkyuJiryoStartYMD3().setValue(row.getDefaultDataName6().getValue());
 
-        div.getTxtOshinNissu().setValue(row.getDefaultDataName7().getValue());
+        if (row.getDefaultDataName7().getValue() != null && !row.getDefaultDataName7().getValue().equals(Decimal.ZERO)) {
+            div.getTxtOshinNissu().setValue(row.getDefaultDataName7().getValue());
+        }
         div.getTxtOshinYiryokikanName().setValue(row.getDefaultDataName8());
-        div.getTxtTuyinNissu().setValue(row.getDefaultDataName9().getValue());
+        if (row.getDefaultDataName9().getValue() != null && !row.getDefaultDataName9().getValue().equals(Decimal.ZERO)) {
+            div.getTxtTuyinNissu().setValue(row.getDefaultDataName9().getValue());
+        }
         div.getTxtTuyinYiryokikanName().setValue(row.getDefaultDataName10());
         div.getTxtTikiyo().setValue(row.getDefaultDataName20());
 
-        div.getTxtkinkyuChiryoKanriTanisu().setValue(row.getDefaultDataName11().getValue());
-        div.getTxtkinkyuChiryoKanriNissu().setValue(row.getDefaultDataName12().getValue());
-        div.getTxtkinkyuChiryoKanriSubTotal().setValue(row.getDefaultDataName13().getValue());
-        div.getTxtrehabilitationTanisu().setValue(row.getDefaultDataName15().getValue());
-        div.getTxtShochiTanisu().setValue(row.getDefaultDataName16().getValue());
-        div.getTxtshujutsuTanisu().setValue(row.getDefaultDataName17().getValue());
-        div.getTxtMasuiTanisu().setValue(row.getDefaultDataName18().getValue());
-        div.getTxtHoshasenChiryoTanisu().setValue(row.getDefaultDataName19().getValue());
-        div.getTxtKinkyuShisetsuRyoyohiTotalTanisu().setValue(row.getDefaultDataName14().getValue());
+        if (row.getDefaultDataName11().getValue() != null && !row.getDefaultDataName11().getValue().equals(Decimal.ZERO)) {
+            div.getTxtkinkyuChiryoKanriTanisu().setValue(row.getDefaultDataName11().getValue());
+        }
+        if (row.getDefaultDataName12().getValue() != null && !Decimal.ZERO.equals(row.getDefaultDataName12().getValue())) {
+            div.getTxtkinkyuChiryoKanriNissu().setValue(row.getDefaultDataName12().getValue());
+        }
+        if (row.getDefaultDataName13().getValue() != null && !Decimal.ZERO.equals(row.getDefaultDataName13().getValue())) {
+            div.getTxtkinkyuChiryoKanriSubTotal().setValue(row.getDefaultDataName13().getValue());
+        }
+        if (row.getDefaultDataName15().getValue() != null && !Decimal.ZERO.equals(row.getDefaultDataName15().getValue())) {
+            div.getTxtrehabilitationTanisu().setValue(row.getDefaultDataName15().getValue());
+        }
+        if (row.getDefaultDataName16().getValue() != null && !Decimal.ZERO.equals(row.getDefaultDataName16().getValue())) {
+            div.getTxtShochiTanisu().setValue(row.getDefaultDataName16().getValue());
+        }
+        if (row.getDefaultDataName17().getValue() != null && !Decimal.ZERO.equals(row.getDefaultDataName17().getValue())) {
+            div.getTxtshujutsuTanisu().setValue(row.getDefaultDataName17().getValue());
+        }
+        if (row.getDefaultDataName18().getValue() != null && !Decimal.ZERO.equals(row.getDefaultDataName18().getValue())) {
+            div.getTxtMasuiTanisu().setValue(row.getDefaultDataName18().getValue());
+        }
+        if (row.getDefaultDataName19().getValue() != null && !Decimal.ZERO.equals(row.getDefaultDataName19().getValue())) {
+            div.getTxtHoshasenChiryoTanisu().setValue(row.getDefaultDataName19().getValue());
+        }
+        if (row.getDefaultDataName14().getValue() != null && !Decimal.ZERO.equals(row.getDefaultDataName14().getValue())) {
+            div.getTxtKinkyuShisetsuRyoyohiTotalTanisu().setValue(row.getDefaultDataName14().getValue());
+        }
 
     }
 
@@ -326,36 +349,47 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
     }
 
     private boolean isデータ修正(dgdKinkyujiShiseturyoyo_Row row, List<ShokanKinkyuShisetsuRyoyo> dbList) {
+        RString 摘要 = div.getTxtTikiyo().getValue();
+        if (摘要 == null) {
+            摘要 = RString.EMPTY;
+        }
         for (ShokanKinkyuShisetsuRyoyo ryoyo : dbList) {
-            if ((ryoyo.get連番().equals(row.getDefaultDataName21())
-                    && (isDataHenkouAri1(ryoyo, row)
-                    || ryoyo.get緊急時治療管理単位数() != formatDecimalToInteger(row.getDefaultDataName11().getValue())
-                    || ryoyo.get緊急時治療管理日数() != formatDecimalToInteger(row.getDefaultDataName12().getValue())
-                    || ryoyo.get緊急時治療管理小計() != formatDecimalToInteger(row.getDefaultDataName13().getValue())
-                    || ryoyo.get緊急時施設療養費合計単位数() != formatDecimalToInteger(row.getDefaultDataName14().getValue())
-                    || ryoyo.getリハビリテーション単位数() != formatDecimalToInteger(row.getDefaultDataName15().getValue())
-                    || ryoyo.get処置単位数() != formatDecimalToInteger(row.getDefaultDataName16().getValue())
-                    || ryoyo.get手術単位数() != formatDecimalToInteger(row.getDefaultDataName17().getValue())
-                    || ryoyo.get麻酔単位数() != formatDecimalToInteger(row.getDefaultDataName18().getValue())
-                    || ryoyo.get放射線治療単位数() != formatDecimalToInteger(row.getDefaultDataName19().getValue())
-                    || !get摘要(ryoyo).equals(row.getDefaultDataName20()))) || row.getRowState() != RowState.Modified) {
+            if (ryoyo.get連番().equals(row.getDefaultDataName21())
+                    && (isDataHenkouAri1(ryoyo)
+                    || ryoyo.get緊急時治療管理単位数() != formatDecimalToInteger(div.getTxtkinkyuChiryoKanriTanisu().getValue())
+                    || ryoyo.get緊急時治療管理日数() != formatDecimalToInteger(div.getTxtkinkyuChiryoKanriNissu().getValue())
+                    || ryoyo.get緊急時治療管理小計() != formatDecimalToInteger(div.getTxtkinkyuChiryoKanriSubTotal().getValue())
+                    || ryoyo.get緊急時施設療養費合計単位数() != formatDecimalToInteger(div.getTxtKinkyuShisetsuRyoyohiTotalTanisu().getValue())
+                    || ryoyo.getリハビリテーション単位数() != formatDecimalToInteger(div.getTxtrehabilitationTanisu().getValue())
+                    || ryoyo.get処置単位数() != formatDecimalToInteger(div.getTxtShochiTanisu().getValue())
+                    || ryoyo.get手術単位数() != formatDecimalToInteger(div.getTxtshujutsuTanisu().getValue())
+                    || ryoyo.get麻酔単位数() != formatDecimalToInteger(div.getTxtMasuiTanisu().getValue())
+                    || ryoyo.get放射線治療単位数() != formatDecimalToInteger(div.getTxtHoshasenChiryoTanisu().getValue())
+                    || !get摘要(ryoyo).equals(摘要))) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isDataHenkouAri1(ShokanKinkyuShisetsuRyoyo ryoyo, dgdKinkyujiShiseturyoyo_Row row) {
-        return !ryoyo.get緊急時傷病名１().equals(row.getDefaultDataName1())
-                || !ryoyo.get緊急時傷病名２().equals(row.getDefaultDataName2())
-                || !ryoyo.get緊急時傷病名３().equals(row.getDefaultDataName3())
-                || !ryoyo.get緊急時治療開始年月日１().equals(formatRDateToFlexibleDate(row.getDefaultDataName4().getValue()))
-                || !ryoyo.get緊急時治療開始年月日２().equals(formatRDateToFlexibleDate(row.getDefaultDataName5().getValue()))
-                || !ryoyo.get緊急時治療開始年月日３().equals(formatRDateToFlexibleDate(row.getDefaultDataName6().getValue()))
-                || ryoyo.get往診日数() != formatDecimalToInteger(row.getDefaultDataName7().getValue())
-                || !ryoyo.get往診医療機関名().equals(row.getDefaultDataName8())
-                || ryoyo.get通院日数() != formatDecimalToInteger(row.getDefaultDataName9().getValue())
-                || !ryoyo.get通院医療機関名().equals(row.getDefaultDataName10());
+    private boolean isDataHenkouAri1(ShokanKinkyuShisetsuRyoyo ryoyo) {
+        return !ryoyo.get緊急時傷病名１().equals(getTextBoxValue(div.getTxtKinkyuShobyoName1()))
+                || !ryoyo.get緊急時傷病名２().equals(getTextBoxValue(div.getTxtKinkyuShobyoName2()))
+                || !ryoyo.get緊急時傷病名３().equals(getTextBoxValue(div.getTxtKinkyuShobyoName3()))
+                || !ryoyo.get緊急時治療開始年月日１().equals(formatRDateToFlexibleDate(div.getTxtKinkyuJiryoStartYMD1().getValue()))
+                || !ryoyo.get緊急時治療開始年月日２().equals(formatRDateToFlexibleDate(div.getTxtKinkyuJiryoStartYMD2().getValue()))
+                || !ryoyo.get緊急時治療開始年月日３().equals(formatRDateToFlexibleDate(div.getTxtKinkyuJiryoStartYMD3().getValue()))
+                || ryoyo.get往診日数() != formatDecimalToInteger(div.getTxtOshinNissu().getValue())
+                || !ryoyo.get往診医療機関名().equals(getTextBoxValue(div.getTxtOshinYiryokikanName()))
+                || ryoyo.get通院日数() != formatDecimalToInteger(div.getTxtTuyinNissu().getValue())
+                || !ryoyo.get通院医療機関名().equals(getTextBoxValue(div.getTxtTuyinYiryokikanName()));
+    }
+
+    private RString getTextBoxValue(TextBox textBox) {
+        if (textBox.getValue() == null) {
+            return RString.EMPTY;
+        }
+        return textBox.getValue();
     }
 
     private FlexibleDate formatRDateToFlexibleDate(RDate date) {
@@ -1368,7 +1402,8 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
      */
     public List<ShokanKinkyuShisetsuRyoyo> removeLastData(
             List<ShokanKinkyuShisetsuRyoyo> updateList, ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
-        for (int i = 0; i < updateList.size(); i++) {
+        int size = updateList.size();
+        for (int i = 0; i < size; i++) {
             ShokanKinkyuShisetsuRyoyo ryoyo = updateList.get(i);
             if (ryoyo.get被保険者番号().equals(kensakuParameter.get被保険者番号())
                     && ryoyo.getサービス提供年月().equals(kensakuParameter.getサービス年月())
