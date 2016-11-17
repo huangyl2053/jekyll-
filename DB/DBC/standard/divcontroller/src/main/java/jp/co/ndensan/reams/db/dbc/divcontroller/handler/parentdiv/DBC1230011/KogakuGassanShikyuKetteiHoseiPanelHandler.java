@@ -619,6 +619,9 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
      */
     public ShoriModeHanteiResult get処理モード(HihokenshaNo 被保険者番号, RString モード) {
         ShoriModeHanteiResult shmoResult = new ShoriModeHanteiResult();
+        if (new RString(Boolean.TRUE.toString()).equals(div.get事業分フラグ())) {
+            return shmoResult;
+        }
         FlexibleYearMonth 受取年月 = FlexibleYearMonth.EMPTY;
         if (新規.equals(モード)) {
             shmoResult = KogakuGassanShikyuKetteiHosei.createInstance().shoriModeHantei(

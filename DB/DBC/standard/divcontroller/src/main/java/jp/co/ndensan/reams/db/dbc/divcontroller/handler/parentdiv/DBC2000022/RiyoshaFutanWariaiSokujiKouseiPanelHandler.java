@@ -606,6 +606,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
 
         FutanWariaisho futanWariaisho = FutanWariaisho.createInstance();
         FutanWariaiShoDivParameter parameter = new FutanWariaiShoDivParameter();
+        parameter.set被保険者番号(div.getCcdKaigoShikakuKihon().get被保険者番号());
         parameter.set交付年月日(new FlexibleDate(div.getPanelHosokuItem().getTxtKofubi().getValue().toDateString()));
         parameter.setカナ氏名(div.getCcdKaigoAtenaInfo().get氏名カナ());
         parameter.set住所(div.getCcdKaigoAtenaInfo().get住所().getColumnValue());
