@@ -65,8 +65,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ServiceRiyohyoInfoDivHandler {
 
     private final ServiceRiyohyoInfoDiv div;
-    private static final RString 居宅 = new RString("1");
-    private static final RString 総合事業 = new RString("2");
+    private static final RString 居宅 = new RString("居宅サービス計画");
+    private static final RString 総合事業 = new RString("総合事業費計画");
     private static final RString 定値_01 = new RString("01");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
@@ -1182,6 +1182,13 @@ public class ServiceRiyohyoInfoDivHandler {
             row = new dgServiceRiyohyoBeppyoList_Row();
             row.setRowState(RowState.Added);
             setRowInButtonKakutei(row);
+            if (div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace("事業者"));
+            }
+            if (RString.isNullOrEmpty(div.getCcdServiceTypeInput().getサービス種類コード())) {
+                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace("サービス種類"));
+            }
+            onChange_txtServiceEvent();
             if (!get全て同事業者(rowList, row).isEmpty()) {
                 throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage());
             }

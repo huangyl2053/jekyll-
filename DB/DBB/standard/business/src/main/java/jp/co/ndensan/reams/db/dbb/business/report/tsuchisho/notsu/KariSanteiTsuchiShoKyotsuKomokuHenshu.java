@@ -309,19 +309,19 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
         更正前.set期間_自(isNullOrEmpty(賦課情報_更正前.get月割開始年月1()) ? RString.EMPTY : new FlexibleDate(
                 賦課情報_更正前.get月割開始年月1().getYearValue(), 賦課情報_更正前.get月割開始年月1().getMonthValue(), 1)
-                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD)
                 .fillType(FillType.BLANK).toDateString());
         更正前.set期間_自_西暦(isNullOrEmpty(賦課情報_更正前.get月割開始年月1()) ? RString.EMPTY : new FlexibleDate(
                 賦課情報_更正前.get月割開始年月1().getYearValue(), 賦課情報_更正前.get月割開始年月1().getMonthValue(), 1).seireki()
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
         if (賦課情報_更正前.get月割終了年月2() != null && !賦課情報_更正前.get月割終了年月2().isEmpty()) {
             更正前.set期間_至(new FlexibleDate(賦課情報_更正前.get月割終了年月2().getYearValue(), 賦課情報_更正前.get月割終了年月2()
-                    .getMonthValue(), 賦課情報_更正前.get月割終了年月2().getLastDay()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                    .getMonthValue(), 賦課情報_更正前.get月割終了年月2().getLastDay()).wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
         } else if (賦課情報_更正前.get月割終了年月1() != null && !賦課情報_更正前.get月割終了年月1().isEmpty()) {
             更正前.set期間_至(new FlexibleDate(賦課情報_更正前.get月割終了年月1().getYearValue(), 賦課情報_更正前.get月割終了年月1()
-                    .getMonthValue(), 賦課情報_更正前.get月割終了年月1().getLastDay()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                    .getMonthValue(), 賦課情報_更正前.get月割終了年月1().getLastDay()).wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
         }
         if (賦課情報_更正前.get月割終了年月2() != null && !賦課情報_更正前.get月割終了年月2().isEmpty()) {
             更正前.set期間_至__西暦(new FlexibleDate(賦課情報_更正前.get月割終了年月2().getYearValue(), 賦課情報_更正前
@@ -418,23 +418,23 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
         if (賦課情報_更正後.get月割開始年月1() != null && !賦課情報_更正後.get月割開始年月1().isEmpty()) {
             更正後.set期間_自(new FlexibleDate(賦課情報_更正後.get月割開始年月1().getYearValue(), 賦課情報_更正後.get月割終了年月1()
-                    .getMonthValue(), 賦課情報_更正後.get月割開始年月1().getLastDay()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                    .getMonthValue(), 賦課情報_更正後.get月割開始年月1().getLastDay()).wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
             更正後.set期間_自_西暦(new FlexibleDate(賦課情報_更正後.get月割開始年月1().getYearValue(), 賦課情報_更正後.get月割開始年月1()
                     .getMonthValue(), 賦課情報_更正後.get月割開始年月1().getLastDay()).seireki()
                     .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
         }
         if (賦課情報_更正後.get月割終了年月2() != null && !賦課情報_更正後.get月割終了年月2().isEmpty()) {
             更正後.set期間_至(new FlexibleDate(賦課情報_更正後.get月割終了年月2().getYearValue(), 賦課情報_更正後.get月割終了年月2().getMonthValue(),
-                    賦課情報_更正後.get月割終了年月2().getLastDay()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                    賦課情報_更正後.get月割終了年月2().getLastDay()).wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
             更正後.set期間_至_西暦(new FlexibleDate(賦課情報_更正後.get月割終了年月2().getYearValue(), 賦課情報_更正後.get月割終了年月2().getMonthValue(),
                     賦課情報_更正後.get月割終了年月2().getLastDay()).seireki()
                     .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
         } else if (賦課情報_更正後.get月割終了年月1() != null && !賦課情報_更正後.get月割終了年月1().isEmpty()) {
             更正後.set期間_至(new FlexibleDate(賦課情報_更正後.get月割終了年月1().getYearValue(), 賦課情報_更正後.get月割終了年月1().getMonthValue(),
-                    賦課情報_更正後.get月割終了年月1().getLastDay()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                    賦課情報_更正後.get月割終了年月1().getLastDay()).wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
             更正後.set期間_至_西暦(new FlexibleDate(賦課情報_更正後.get月割終了年月1().getYearValue(), 賦課情報_更正後.get月割終了年月1().getMonthValue(),
                     賦課情報_更正後.get月割終了年月1().getLastDay()).seireki()
                     .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());

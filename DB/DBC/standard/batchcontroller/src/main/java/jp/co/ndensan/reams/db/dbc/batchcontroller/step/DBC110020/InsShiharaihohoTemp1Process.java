@@ -185,7 +185,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return;
         }
         被保険者番号 = entity.get被保険者番号();
-//        if (!被保険者番号.equals(new HihokenshaNo("2015123461"))) {
+//        if (!被保険者番号.equals(new HihokenshaNo("2015123456"))) {
 //            異動一時List.clear();
 //            return;
 //        }
@@ -1304,6 +1304,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.set居宅サービス計画作成区分コード(居宅計画Info.get(ORDER_2));
         entity.setサービス種類コード(居宅計画Info.get(ORDER_3));
         entity.set有効終了日(new FlexibleDate(居宅計画Info.get(ORDER_4)));
+        entity.set居宅計画種類(居宅計画Info.get(ORDER_5));
         entity.set適用終了日(new FlexibleDate(居宅計画Info.get(ORDER_6)));
         entity.set届出年月日(new FlexibleDate(居宅計画Info.get(ORDER_7)));
         entity.set被保険者番号(new HihokenshaNo(居宅計画Info.get(ORDER_8)));

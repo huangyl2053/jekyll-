@@ -122,7 +122,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
             出力順項目リスト.add(item.get項目名());
             if (item.is改頁項目()) {
                 pageBreakKeys.add(item.get項目ID());
-                改ページ項目リスト.add(item.get項目名());
+                改ページ項目リスト.add(item.get項目ID());
             }
         }
     }
