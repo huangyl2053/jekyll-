@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.dbjoho;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisaiJushochiTokurei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKeigengaku;
@@ -16,11 +17,14 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisets
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoHenkoFlag;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
@@ -55,6 +59,8 @@ public class DbJohoViewState implements Serializable {
     private ArrayList<ShokanShukeiResult> 償還払請求集計データList;
     private ArrayList<ShokanShokujiHiyo> 償還払請求食事費用データList;
     private ShokanHanteiKekka 償還払支給判定結果;
+    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap;
+    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap;
 
     /**
      * サービス計画200904データを取得する。
@@ -67,6 +73,7 @@ public class DbJohoViewState implements Serializable {
      * @param 明細番号 RString
      * @return サービス計画200904データ
      */
+
     public List<ShokanServicePlan200904Result> get償還払請求サービス計画200904データResultList(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
