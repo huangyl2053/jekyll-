@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0400011;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020010.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0400011.KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiKyufuTaishoshaToroku;
@@ -77,6 +76,7 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
         KogakuKaigoServicehiKyufuTaishoshaToroku business = new KogakuKaigoServicehiKyufuTaishoshaToroku();
         KokuhorenInterfaceKanri result = business.getSinsaYM(交換情報識別番号);
         div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel().getTxtShinsaYM().setValue(new RDate(result.get処理年月().toString()));
+        div.setHdnShoriJotaiKubun(result.get処理状態区分());
         div.getPublishIchiranhyo().setIsPublish(true);
     }
 
@@ -88,6 +88,7 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
     public DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter getBatchParameter() {
         RString 審査年月 = div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel()
                 .getTxtShinsaYM().getValue().getYearMonth().toDateString();
+        RString 処理状態区分 = div.getHdnShoriJotaiKubun();
         boolean flg = div.getPublishIchiranhyo().isIsPublish();
         Long shuturyokuJunn = div.getCcdChohyoShutsuryokujun().get出力順ID();
         RString menuId = ResponseHolder.getMenuID();
@@ -95,10 +96,10 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
         DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter parameter
                 = business.getKogakuKaigoServicehiKyufuTaishoshaTorokuBatchParameter(
                         審査年月,
+                        処理状態区分,
                         flg,
-                        shuturyokuJunn);
-        parameter.setMenuId(menuId);
-        parameter.setShoriStateKubun(ShoriJotaiKubun.再処理前.getコード());
+                        shuturyokuJunn,
+                        menuId);
         return parameter;
     }
 
