@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.niteicyosaichiran.NiTeiCyoSaiChi
 import jp.co.ndensan.reams.db.dbe.business.core.niteicyosaichiran.NinteichosahyoGaikyoChosaRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.niteicyosaichiran.NiTeiCyoSaiChiRanParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.ChosaKekkaNyuryokuCsvEntity;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.DBE2250001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.NinteishinseibiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.dgNinteiChosaData_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2250001.NinteishinseibiHandler;
@@ -104,7 +105,7 @@ public class Ninteishinseibi {
      */
     public ResponseData<NinteishinseibiDiv> onLoad(NinteishinseibiDiv div) {
         getHandler(div).initializtion();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE2250001StateName.初期表示);
     }
 
     /**
@@ -188,7 +189,7 @@ public class Ninteishinseibi {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
         }
         AccessLogger.log(AccessLogType.照会, personalData);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE2250001StateName.検索結果表示);
     }
 
     /**
@@ -272,7 +273,6 @@ public class Ninteishinseibi {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            getHandler(div).保存状態();
             Models<NinteichosahyoGaikyoChosaIdentifier, NinteichosahyoGaikyoChosa> 概況調査Models
                     = ViewStateHolder.get(ViewStateKeys.認定調査票_概況調査, Models.class);
             Models<GaikyoTokkiIdentifier, GaikyoTokki> 概況特記Models
@@ -328,6 +328,7 @@ public class Ninteishinseibi {
             }
             div.getCcdKanryoMessage().setSuccessMessage(
                     new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+            return ResponseData.of(div).setState(DBE2250001StateName.完了);
         }
         return ResponseData.of(div).respond();
     }
@@ -529,6 +530,11 @@ public class Ninteishinseibi {
         }
         csvReader.close();
         return csvEntityList;
+    }
+    
+    public ResponseData<NinteishinseibiDiv> onClick_btnReSearch(NinteishinseibiDiv div) {
+        getHandler(div).initializtion();
+        return ResponseData.of(div).setState(DBE2250001StateName.初期表示);
     }
 
     private NinteishinseibiHandler getHandler(NinteishinseibiDiv div) {

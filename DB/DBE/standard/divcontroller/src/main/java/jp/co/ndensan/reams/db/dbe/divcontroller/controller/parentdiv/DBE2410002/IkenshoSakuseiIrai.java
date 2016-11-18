@@ -316,18 +316,18 @@ public class IkenshoSakuseiIrai {
         if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY0)) {
             RString 印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (CONFIGVALUE1.equals(印刷タイプ)) {
-                ikenshoPrintService.print(get主治医意見書記入用紙(div, printService), ReportIdDBZ.DBE231001_Katamen_Mono.getReportId());
+                ikenshoPrintService.print(get主治医意見書記入用紙(div), ReportIdDBZ.DBE231001_Katamen_Mono.getReportId());
 
             } else if (CONFIGVALUE2.equals(印刷タイプ)) {
-                ikenshoPrintService.print(get主治医意見書記入用紙(div, printService), ReportIdDBZ.DBE231001_Ryomen_Mono.getReportId());
+                ikenshoPrintService.print(get主治医意見書記入用紙(div), ReportIdDBZ.DBE231001_Ryomen_Mono.getReportId());
             }
         }
         if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY1)) {
             RString 印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (CONFIGVALUE1.equals(印刷タイプ)) {
-                ikenshoPrintService.print(get主治医意見書記入用紙(div, printService), ReportIdDBZ.DBE231011_Katamen_Color.getReportId());
+                ikenshoPrintService.print(get主治医意見書記入用紙(div), ReportIdDBZ.DBE231011_Katamen_Color.getReportId());
             } else if (CONFIGVALUE2.equals(印刷タイプ)) {
-                ikenshoPrintService.print(get主治医意見書記入用紙(div, printService), ReportIdDBZ.DBE231011_Ryomen_Color.getReportId());
+                ikenshoPrintService.print(get主治医意見書記入用紙(div), ReportIdDBZ.DBE231011_Ryomen_Color.getReportId());
             }
         }
         ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
@@ -355,7 +355,7 @@ public class IkenshoSakuseiIrai {
         }
     }
 
-    private List<IkenshokinyuyoshiBusiness> get主治医意見書記入用紙(IkenshoSakuseiIraiDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
+    private List<IkenshokinyuyoshiBusiness> get主治医意見書記入用紙(IkenshoSakuseiIraiDiv div) {
 
         ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                 = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.

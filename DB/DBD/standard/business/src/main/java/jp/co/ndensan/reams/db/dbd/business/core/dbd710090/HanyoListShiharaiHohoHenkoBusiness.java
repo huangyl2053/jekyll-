@@ -275,7 +275,8 @@ public class HanyoListShiharaiHohoHenkoBusiness {
         eucCsvEntity.set特定疾病(entity.get受給者台帳_2号特定疾病コード());
         eucCsvEntity.set受給申請事由(edit受給申請事由(entity.get受給者台帳_受給申請事由(), entity.get受給者台帳_要支援者認定申請区分()));
         eucCsvEntity.set申請理由(entity.get受給者台帳_申請理由());
-        eucCsvEntity.set申請関係者(ShinseishaKankeiCode.toValue(entity.get受給者台帳_申請者関係コード()).get名称());
+        eucCsvEntity.set申請関係者(RString.isNullOrEmpty(entity.get受給者台帳_申請者関係コード()) ? RString.EMPTY
+                : ShinseishaKankeiCode.toValue(entity.get受給者台帳_申請者関係コード()).get名称());
         eucCsvEntity.set本人関係(entity.get受給者台帳_本人との関係());
         eucCsvEntity.set受給申請日(edit年月日_yyyymmdd(entity.get受給者台帳_受給申請年月日(), 日付スラッシュ付加));
         eucCsvEntity.set審査回答日(edit年月日_yyyymmdd(entity.get受給者台帳_認定年月日(), 日付スラッシュ付加));
@@ -736,22 +737,22 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
         StringBuilder builder = new StringBuilder();
 
-        if (!shiteiServiceShurui01.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(shiteiServiceShurui01)) {
             builder.append(shiteiServiceShurui01.subSequence(INDEX_0, INDEX_2));
         }
-        if (!shiteiServiceShurui02.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(shiteiServiceShurui02)) {
             builder.append(shiteiServiceShurui02.subSequence(INDEX_0, INDEX_2));
         }
-        if (!shiteiServiceShurui03.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(shiteiServiceShurui03)) {
             builder.append(shiteiServiceShurui03.subSequence(INDEX_0, INDEX_2));
         }
-        if (!shiteiServiceShurui04.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(shiteiServiceShurui04)) {
             builder.append(shiteiServiceShurui04.subSequence(INDEX_0, INDEX_2));
         }
-        if (!shiteiServiceShurui05.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(shiteiServiceShurui05)) {
             builder.append(shiteiServiceShurui05.subSequence(INDEX_0, INDEX_2));
         }
-        if (!shiteiServiceShurui06.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(shiteiServiceShurui06)) {
             builder.append(ETC);
         }
         return new RString(builder.toString());
