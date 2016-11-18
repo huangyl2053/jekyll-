@@ -41,7 +41,7 @@ public class DBB021051_AtenaSealSakuseiParameter extends BatchParameterBase {
     @BatchParameter(key = "宛先住所設定", name = "宛先住所設定")
     private RString 宛先住所設定;
     @BatchParameter(key = "出力順ID", name = "出力順ID")
-    private RString 出力順ID;
+    private long 出力順ID;
     @BatchParameter(key = "業務コード", name = "業務コード")
     private SubGyomuCode 業務コード;
 
