@@ -511,11 +511,11 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     List<KogakuGassanShikyuKetteiHoseiResult> 決定情報list
                             = ViewStateHolder.get(ViewStateKeys.支給決定情報補正, List.class);
+                    getHandler(div).save決定情報(被保険者番号, 対象年度, 保険者番号,
+                            支給申請書整理番号, 画面モード, 決定情報list, para);
                     AccessLogger.log(AccessLogType.更新,
                             getHandler(div).toPersonalData(識別コード,
                                     被保険者番号.getColumnValue()));
-                    getHandler(div).save決定情報(被保険者番号, 対象年度, 保険者番号,
-                            支給申請書整理番号, 画面モード, 決定情報list, para);
                     getHandler(div).前排他キーの解除(被保険者番号);
                     getHandler(div).clear決定情報();
                     div.getCcdKanryoMessage().setMessage(
@@ -538,11 +538,11 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     List<KogakuGassanShikyuKetteiHoseiResult> 決定情報list
                             = ViewStateHolder.get(ViewStateKeys.支給決定情報補正, List.class);
+                    getHandler(div).save決定情報(被保険者番号, 対象年度, 保険者番号,
+                            支給申請書整理番号, 画面モード, 決定情報list, para);
                     AccessLogger.log(AccessLogType.更新,
                             getHandler(div).toPersonalData(識別コード,
                                     被保険者番号.getColumnValue()));
-                    getHandler(div).save決定情報(被保険者番号, 対象年度, 保険者番号,
-                            支給申請書整理番号, 画面モード, 決定情報list, para);
                     getHandler(div).clear決定情報();
                     getHandler(div).前排他キーの解除(被保険者番号);
                     div.getCcdKanryoMessage().setMessage(
