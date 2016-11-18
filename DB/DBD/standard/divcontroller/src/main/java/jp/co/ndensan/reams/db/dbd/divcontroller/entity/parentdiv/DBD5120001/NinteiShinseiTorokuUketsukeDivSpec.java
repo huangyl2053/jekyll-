@@ -340,4 +340,56 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
                     && !div.getCcdShinseiSonotaJohoInput().get異動事由().isEmpty();
         }
     },
+    前回認定時_サービス指定なし {
+        /**
+         * 前回認定時_サービス指定なしチェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:前回認定時にサービス指定あり、false:前回認定時にサービス指定なしです。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return false;
+        }
+    },
+    特殊処理_対象ではない {
+        /**
+         * 特殊処理_対象ではないチェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:直近フラグが立っていないまたはレコードが有効である、false:直近フラグが立っているかつレコードが有効ではない。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return false;
+        }
+    },
+    申請_対象レコードではない１ {
+        /**
+         * 申請_対象レコードではない１チェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:履歴番号が「0000」でないまたは受給申請事由が「5」である、false:履歴番号が「0000」かつ受給申請事由が「5」以外である。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return false;
+        }
+    },
+    申請_対象レコードではない２ {
+        /**
+         * 申請_対象レコードではない２チェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:履歴番号が「0000」でないまたは受給申請事由が「5」以外である、false:履歴番号が「0000」かつ受給申請事由が「5」である。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return false;
+        }
+    },
 }

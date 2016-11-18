@@ -144,7 +144,8 @@
         T4001."rirekiNo" AS 履歴番号,
         T4001."edaban" AS 枝番,
         T4001."jukyuShinseiJiyu" AS 受給申請事由,
-        T4101."shichosonRenrakuJiko" AS 市町村連絡事項
+        T4101."shichosonRenrakuJiko" AS 市町村連絡事項,
+        T4001."yoshienshaNinteiShinseiFlag" AS 要支援者認定申請区分
         FROM
         (SELECT
         *
@@ -289,7 +290,8 @@
         T4001."rirekiNo" AS 履歴番号,
         T4001."edaban" AS 枝番,
         T4001."jukyuShinseiJiyu" AS 受給申請事由,
-        T4101."shichosonRenrakuJiko" AS 市町村連絡事項
+        T4101."shichosonRenrakuJiko" AS 市町村連絡事項,
+        T4001."yoshienshaNinteiShinseiFlag" AS 要支援者認定申請区分
         FROM
         (SELECT
         *

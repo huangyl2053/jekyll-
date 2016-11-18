@@ -98,5 +98,6 @@ public class NinteiShinseiTorokuUketsukeEntity {
     private Code 受給申請事由;
     
     private RString 市町村連絡事項;
+    private boolean 要支援者認定申請区分;
 
 }

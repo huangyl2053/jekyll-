@@ -19,14 +19,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.Nintei
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel.HyojiMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -57,22 +54,9 @@ public class NinteiShinseiTorokuUketsuke {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         被保険者番号 = taishoshaKey.get被保険者番号();
         識別コード = taishoshaKey.get識別コード();
-        getHandler(div).get表示パターン(被保険者番号);
-        RString nowState = ResponseHolder.getState();
-        if (DBD5120001StateName.区分変更追加.getName().equals(nowState) || DBD5120001StateName.区分変更修正.getName().equals(nowState) 
-                || DBD5120001StateName.区分変更取下.getName().equals(nowState) || DBD5120001StateName.サービス変更追加.getName().equals(nowState) 
-                || DBD5120001StateName.サービス変更修正.getName().equals(nowState) || DBD5120001StateName.サービス変更取下.getName().equals(nowState) 
-                || DBD5120001StateName.受給者転入追加.getName().equals(nowState) || DBD5120001StateName.特殊追加.getName().equals(nowState) 
-                || DBD5120001StateName.特殊修正.getName().equals(nowState) || DBD5120001StateName.特殊削除.getName().equals(nowState) 
-                || DBD5120001StateName.削除回復.getName().equals(nowState) || DBD5120001StateName.職権記載.getName().equals(nowState) 
-                || DBD5120001StateName.職権全喪失.getName().equals(nowState)) {
-            if (validateFor被保険者台帳に該当なし(div)) {
-                Message message;
-                message = UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("被保険者情報");
-                throw new ApplicationException(message);
-            }
-        }
-        nowState = this.getHandler(div).onLoad(被保険者番号, 識別コード);
+        getHandler(div).set事前情報(被保険者番号);
+        RString nowState = getHandler(div).getNowState();
+        this.getHandler(div).onLoad(被保険者番号, 識別コード);
         if (DBD5120001StateName.申請追加.getName().equals(nowState)) {
             return ResponseData.of(div).setState(DBD5120001StateName.申請追加);
         } else if (DBD5120001StateName.申請修正.getName().equals(nowState)) {
@@ -321,7 +305,11 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onClick_btnUpdate(NinteiShinseiTorokuUketsukeDiv div) {
-        validationCheck(div);
+//        ValidationMessageControlPairs pairs = saveValidationErrorCheck(div);
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         getHandler(div).onClick_btnUpdate();
         getHandler(div).edit状態_完了();
         div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
@@ -338,7 +326,7 @@ public class NinteiShinseiTorokuUketsuke {
         return new NinteiShinseiTorokuUketsukeHandler(div);
     }
     
-    private void validationCheck(NinteiShinseiTorokuUketsukeDiv div) {
+    private ValidationMessageControlPairs saveValidationErrorCheck(NinteiShinseiTorokuUketsukeDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())) {
             getValidationHandler().validateFor申請日の必須入力(pairs, div);
@@ -445,13 +433,10 @@ public class NinteiShinseiTorokuUketsuke {
             getValidationHandler().validateFor喪失日の必須入力(pairs, div);
             getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
         }
+        return pairs;
     }
 
     private NinteiShinseiTorokuUketsukeValidationHandler getValidationHandler() {
         return new NinteiShinseiTorokuUketsukeValidationHandler();
-    }
-    
-    private boolean validateFor被保険者台帳に該当なし(NinteiShinseiTorokuUketsukeDiv div) {
-        return !getHandler(div).getKizonDataUmu();
     }
 }
