@@ -111,13 +111,12 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
                     processParameter.set賦課年度(parameter.get賦課年度().plusYear(1));
                 }
                 executeStep(本算定異動_現年度_結果一覧表);
-                break;
+                continue;
             }
             if (帳票ID.equals(entity.get帳票分類ID())) {
                 prtMeisaiIchiranProcessParameter.set出力帳票一覧(entity);
                 prtMeisaiIchiranProcessParameter.set調定日時(システム日時.getRDateTime());
                 executeStep(特別徴収依頼金額明細一覧表);
-                break;
             }
         }
 
@@ -261,7 +260,7 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
         return new DBB003001_KeisangoJohoSakuseiParameter(調定年度.toDateString(),
                 賦課年度.toDateString(),
                 new RString(getResult(YMDHMS.class, new RString(システム日時の取得),
-                                SystemTimeGennendoIdoFukaProcess.SYSTEM_TIME).toString()),
+                        SystemTimeGennendoIdoFukaProcess.SYSTEM_TIME).toString()),
                 ShoriName.異動賦課.get名称(), 帳票分類ID);
     }
 
