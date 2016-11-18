@@ -90,6 +90,7 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
 
     @Override
     protected void initialize() {
+
         IRiyoJokyoTokeihyoMeisaiListSakuseiMapper mapper = getMapper(IRiyoJokyoTokeihyoMeisaiListSakuseiMapper.class);
         給付実績明細 = mapper.select給付実績明細();
         給付実績食事費用 = mapper.select給付実績食事費用();
@@ -226,9 +227,9 @@ public class TokeiyoKyuhuJissekiDataSakuseiProcess extends BatchProcessBase<DbWT
             int 福祉件数 = 給付実績福祉用具販売費ワーク.size();
             int 住宅件数 = 給付実績住宅改修費ワーク.size();
             for (DbT3033KyufujissekiShukeiEntity 集計 : 給付実績集計ワーク) {
-                service.create給付実績データ集計(entity, 集計, 福祉件数, 住宅件数, 給付実績明細ワーク,
+                利用状況統計表一時TBL.insert(service.create給付実績データ集計(entity, 集計, 福祉件数, 住宅件数, 給付実績明細ワーク,
                         給付実績食事費用ワーク, 給付実績特定入所者介護サービス費用ワーク, 給付実績社会福祉法人軽減額ワーク,
-                        処理結果確認リスト一時TBL);
+                        処理結果確認リスト一時TBL));
             }
         }
     }

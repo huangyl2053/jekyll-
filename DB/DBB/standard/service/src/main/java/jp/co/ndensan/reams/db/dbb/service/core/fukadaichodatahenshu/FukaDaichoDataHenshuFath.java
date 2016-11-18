@@ -87,9 +87,10 @@ public class FukaDaichoDataHenshuFath {
      *
      * @param 普徴期月リスト List<Kitsuki>
      * @param 普徴月情報 FutsuChoshuTsuki
+     * @param is本算定 boolean
      * @return FuchoKiInfo 普徴期情報
      */
-    public FutsuChoshuKi create普徴期月情報(List<Kitsuki> 普徴期月リスト, FutsuChoshuTsuki 普徴月情報) {
+    public FutsuChoshuKi create普徴期月情報(List<Kitsuki> 普徴期月リスト, FutsuChoshuTsuki 普徴月情報, boolean is本算定) {
 
         FutsuChoshuKi 普徴期情報 = new FutsuChoshuKi();
         普徴期情報.set普徴期１(RString.EMPTY);
@@ -121,6 +122,9 @@ public class FukaDaichoDataHenshuFath {
         普徴月情報.set普徴月１３(RString.EMPTY);
         普徴月情報.set普徴月１４(RString.EMPTY);
         for (Kitsuki 普徴期月 : 普徴期月リスト) {
+            if (!is本算定 && INT_10 <= 普徴期月.get月AsInt()) {
+                return 普徴期情報;
+            }
             RString 月 = format月(普徴期月.get月().getコード());
             switch (普徴期月.get期AsInt()) {
                 case INT_1:
@@ -204,9 +208,10 @@ public class FukaDaichoDataHenshuFath {
      * @param 年度区分 GennenKanen
      * @param 特徴期月リスト List<Kitsuki>
      * @param 特徴月情報 TokubetsuChoshuTsuki
+     * @param is本算定 boolean
      * @return TokubetsuChoshuKi 特徴期情報
      */
-    public TokubetsuChoshuKi create特徴期月情報(GennenKanen 年度区分, List<Kitsuki> 特徴期月リスト, TokubetsuChoshuTsuki 特徴月情報) {
+    public TokubetsuChoshuKi create特徴期月情報(GennenKanen 年度区分, List<Kitsuki> 特徴期月リスト, TokubetsuChoshuTsuki 特徴月情報, boolean is本算定) {
 
         TokubetsuChoshuKi 特徴期情報 = new TokubetsuChoshuKi();
         特徴期情報.set特徴期１(RString.EMPTY);
@@ -242,6 +247,9 @@ public class FukaDaichoDataHenshuFath {
         }
         for (Kitsuki 特徴期月 : 特徴期月リスト) {
             RString 月 = format月(特徴期月.get月().getコード());
+            if (!is本算定 && INT_10 <= 特徴期月.get月AsInt()) {
+                return 特徴期情報;
+            }
             switch (特徴期月.get期AsInt()) {
                 case INT_1:
                     特徴期情報.set特徴期１(期_1);

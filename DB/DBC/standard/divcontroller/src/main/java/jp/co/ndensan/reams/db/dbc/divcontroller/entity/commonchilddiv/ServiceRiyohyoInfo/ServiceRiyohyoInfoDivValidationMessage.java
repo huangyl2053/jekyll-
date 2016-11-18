@@ -16,6 +16,11 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  * @reamsid_L DBC-1930-050 cuilin
  */
 public enum ServiceRiyohyoInfoDivValidationMessage implements IValidationMessage {
+    
+    /**
+     * 事業者コード必須項目
+     */
+    事業者必須項目(UrErrorMessages.必須項目_追加メッセージあり, "事業者"),
 
     /**
      * サービスコード必須項目

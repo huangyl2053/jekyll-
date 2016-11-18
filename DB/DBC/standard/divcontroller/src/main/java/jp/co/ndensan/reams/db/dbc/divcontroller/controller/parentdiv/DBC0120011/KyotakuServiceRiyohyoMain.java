@@ -109,7 +109,7 @@ public class KyotakuServiceRiyohyoMain {
         KyotakuKeikakuTodokede 居宅給付計画届出
                 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出, KyotakuKeikakuTodokede.class);
         dgKyotakuServiceRirekiIchiran_Row row = div.getDgKyotakuServiceRirekiIchiran().getClickedItem();
-        RString 総合事業区分 = row.getKyotakuJigyo();
+        RString 総合事業区分 = get居宅総合事業区分(row);
         HihokenshaNo 被保険者番号 = 居宅給付計画届出.get被保険者番号();
         FlexibleYearMonth 対象年月 = 居宅給付計画届出.get対象年月();
         int 履歴番号 = 居宅給付計画届出.get履歴番号();
@@ -129,7 +129,7 @@ public class KyotakuServiceRiyohyoMain {
                 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出, KyotakuKeikakuTodokede.class);
         dgKyotakuServiceRirekiIchiran_Row kyotakuRow = div.getDgKyotakuServiceRirekiIchiran().getClickedItem();
         dgRiyoNentstsuIchiran_Row riyoRow = div.getRiyotsukiIchiran().getDgRiyoNentstsuIchiran().getClickedItem();
-        RString 総合事業区分 = kyotakuRow.getKyotakuJigyo();
+        RString 総合事業区分 = get居宅総合事業区分(kyotakuRow);
         HihokenshaNo 被保険者番号 = 居宅給付計画届出.get被保険者番号();
         FlexibleYearMonth 対象年月 = 居宅給付計画届出.get対象年月();
         int 履歴番号 = 居宅給付計画届出.get履歴番号();
@@ -151,7 +151,7 @@ public class KyotakuServiceRiyohyoMain {
                 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出, KyotakuKeikakuTodokede.class);
         dgKyotakuServiceRirekiIchiran_Row kyotakuRow = div.getDgKyotakuServiceRirekiIchiran().getClickedItem();
         dgRiyoNentstsuIchiran_Row riyoRow = div.getRiyotsukiIchiran().getDgRiyoNentstsuIchiran().getClickedItem();
-        RString 総合事業区分 = kyotakuRow.getKyotakuJigyo();
+        RString 総合事業区分 = get居宅総合事業区分(kyotakuRow);
         HihokenshaNo 被保険者番号 = 居宅給付計画届出.get被保険者番号();
         FlexibleYearMonth 対象年月 = 居宅給付計画届出.get対象年月();
         int 履歴番号 = 居宅給付計画届出.get履歴番号();
@@ -160,6 +160,18 @@ public class KyotakuServiceRiyohyoMain {
                 対象年月, 被保険者番号, 総合事業区分, 履歴番号);
         init公開コントロール(div);
         return ResponseData.of(div).setState(DBC0120011StateName.明細表示);
+    }
+    
+    private RString get居宅総合事業区分(dgKyotakuServiceRirekiIchiran_Row kyotakuRow) {
+        RString 総合事業区分 = kyotakuRow.getKyotakuJigyo();
+        switch(総合事業区分.toString()) {
+            case "居宅サービス計画":
+                return new RString("1");
+            case "総合事業費計画" :
+                return new RString("2");
+            default:
+                return RString.EMPTY;
+        }
     }
 
     /**

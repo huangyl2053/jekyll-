@@ -128,9 +128,14 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
         全項目 = cancatYMD(利用者負担.getTekiyoShuryoYMD(), 全項目);
         全項目 = cancatYMD(利用者負担.getShinseiYMD(), 全項目);
         全項目 = cancatYMD(利用者負担.getKetteiYMD(), 全項目);
+        全項目 = 全項目.concat(new RString(利用者負担.getRirekiNo())).concat(SPLIT);
+        if (利用者負担.getKyuhuritsu() == null) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(利用者負担.getKyuhuritsu().toString()).concat(SPLIT);
+        }
         全項目 = 全項目.concat(利用者負担.getShoKisaiHokenshaNo().getColumnValue()).concat(SPLIT)
                 .concat(利用者負担.getHihokenshaNo().getColumnValue()).concat(SPLIT)
-                .concat(new RString(利用者負担.getRirekiNo())).concat(SPLIT)
                 .concat(利用者負担.getInsertDantaiCd()).concat(SPLIT)
                 .concat(利用者負担.getIsDeleted() ? RST_TRUE : RST_FALSE).concat(SPLIT);
         全項目 = cancatRString(利用者負担.getKetteiKubun(), 全項目);

@@ -55,8 +55,8 @@ public final class ShujiiIkenshoTeishutsuIraishoReport extends Report<ShujiiIken
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkenshoTeishutsuIraishoReportSource> reportSourceWriter) {
         if (itemList != null) {
-            for (ShujiiIkenshoTeishutsuIraishoItem shujiiIkenshoTeishutsuIraishoitem : itemList) {
-                ShujiiIkenshoTeishutsuIraishoEditor editor = new ShujiiIkenshoTeishutsuIraishoEditor(shujiiIkenshoTeishutsuIraishoitem);
+            for (ShujiiIkenshoTeishutsuIraishoItem shujiiIkenshoItem : itemList) {
+                ShujiiIkenshoTeishutsuIraishoEditor editor = new ShujiiIkenshoTeishutsuIraishoEditor(shujiiIkenshoItem);
                 IShujiiIkenshoTeishutsuIraishoBuilder builder = new ShujiiIkenshoTeishutsuIraishoBuilderImpl(editor);
                 reportSourceWriter.writeLine(builder);
             }

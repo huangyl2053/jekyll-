@@ -19,11 +19,13 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJisseki
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess2;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess3;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess5;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess7;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess8;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanKogakuTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanKogakuTmpProcess2;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanKogakuTmpProcess3;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanKogakuTmpProcess5;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanKogakuTmpProcess7;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiChukanKogakuTmpProcess8;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess1;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.InsKyufuJissekiKihonJigyoKogakuTmpProcess2;
@@ -58,8 +60,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdKyufuJisseki
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdKyufuJissekiChukanKogakuTmpProcess5;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010.UpdSetaiinHaakuNyuryokuKogakuTmpProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiChukanJigyoKogakuTmpProcess7;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.InsKyufuJissekiChukanKogakuTmpProcess7;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020010.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020010.KogakuKaigoServicehiKyufutaishoshaTorokuProcessParameter;

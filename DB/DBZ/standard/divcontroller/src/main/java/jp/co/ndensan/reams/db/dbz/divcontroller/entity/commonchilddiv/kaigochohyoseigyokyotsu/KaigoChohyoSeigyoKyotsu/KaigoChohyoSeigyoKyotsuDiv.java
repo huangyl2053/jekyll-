@@ -62,6 +62,12 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     private RString hdnIsDisplayInsertTag;
     @JsonProperty("hdnTagList")
     private RString hdnTagList;
+    @JsonProperty("hdShubetsuCodeList")
+    private RString hdShubetsuCodeList;
+    @JsonProperty("hdSelectedShubetsuCode")
+    private RString hdSelectedShubetsuCode;
+    @JsonProperty("hdGyomuCode")
+    private RString hdGyomuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -274,6 +280,60 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
     @JsonProperty("hdnTagList")
     public void setHdnTagList(RString hdnTagList) {
         this.hdnTagList = hdnTagList;
+    }
+
+    /*
+     * gethdShubetsuCodeList
+     * @return hdShubetsuCodeList
+     */
+    @JsonProperty("hdShubetsuCodeList")
+    public RString getHdShubetsuCodeList() {
+        return hdShubetsuCodeList;
+    }
+
+    /*
+     * sethdShubetsuCodeList
+     * @param hdShubetsuCodeList hdShubetsuCodeList
+     */
+    @JsonProperty("hdShubetsuCodeList")
+    public void setHdShubetsuCodeList(RString hdShubetsuCodeList) {
+        this.hdShubetsuCodeList = hdShubetsuCodeList;
+    }
+
+    /*
+     * gethdSelectedShubetsuCode
+     * @return hdSelectedShubetsuCode
+     */
+    @JsonProperty("hdSelectedShubetsuCode")
+    public RString getHdSelectedShubetsuCode() {
+        return hdSelectedShubetsuCode;
+    }
+
+    /*
+     * sethdSelectedShubetsuCode
+     * @param hdSelectedShubetsuCode hdSelectedShubetsuCode
+     */
+    @JsonProperty("hdSelectedShubetsuCode")
+    public void setHdSelectedShubetsuCode(RString hdSelectedShubetsuCode) {
+        this.hdSelectedShubetsuCode = hdSelectedShubetsuCode;
+    }
+
+    /*
+     * gethdGyomuCode
+     * @return hdGyomuCode
+     */
+    @JsonProperty("hdGyomuCode")
+    public RString getHdGyomuCode() {
+        return hdGyomuCode;
+    }
+
+    /*
+     * sethdGyomuCode
+     * @param hdGyomuCode hdGyomuCode
+     */
+    @JsonProperty("hdGyomuCode")
+    public void setHdGyomuCode(RString hdGyomuCode) {
+        this.hdGyomuCode = hdGyomuCode;
     }
 
     /*

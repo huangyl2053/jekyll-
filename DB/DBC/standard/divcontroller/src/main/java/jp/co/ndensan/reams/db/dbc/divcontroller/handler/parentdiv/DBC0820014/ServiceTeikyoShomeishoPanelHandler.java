@@ -155,7 +155,9 @@ public class ServiceTeikyoShomeishoPanelHandler {
             rowDataList.add(row);
         }
         List<DbT3038ShokanKihonEntity> 償還払請求基本データList = new ArrayList<>();
-        if (null != 償還払ViewStateDB情報 && !償還払ViewStateDB情報.get償還払請求基本データList().isEmpty()) {
+        if (null != 償還払ViewStateDB情報
+                && null != 償還払ViewStateDB情報.get償還払請求基本データList()
+                && !償還払ViewStateDB情報.get償還払請求基本データList().isEmpty()) {
             for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.get償還払請求基本データList()) {
                 if (EntityDataState.Added.equals(償還払請求基本.toEntity().getState())) {
                     償還払請求基本データList.add(償還払請求基本.toEntity());
@@ -252,17 +254,28 @@ public class ServiceTeikyoShomeishoPanelHandler {
             List<DbT3047ShokanServicePlan200904Entity> 償還払請求サービス計画200904データList = new ArrayList<>();
             List<DbT3046ShokanServicePlan200604Entity> 償還払請求サービス計画200604データList = new ArrayList<>();
             List<DbT3045ShokanServicePlan200004Entity> 償還払請求サービス計画200004データList = new ArrayList<>();
-            for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.get償還払請求基本データList()) {
-                償還払請求基本データList.add(償還払請求基本.toEntity());
+            if (null != 償還払ViewStateDB情報.get償還払請求基本データList() && !償還払ViewStateDB情報.get償還払請求基本データList().isEmpty()) {
+                for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.get償還払請求基本データList()) {
+                    償還払請求基本データList.add(償還払請求基本.toEntity());
+                }
             }
-            for (ShokanServicePlan200904Result 償還払請求サービス計画200904Result : 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList()) {
-                償還払請求サービス計画200904データList.add(償還払請求サービス計画200904Result.getEntity().toEntity());
+            if (null != 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList()
+                    && !償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList().isEmpty()) {
+                for (ShokanServicePlan200904Result 償還払請求サービス計画200904Result : 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList()) {
+                    償還払請求サービス計画200904データList.add(償還払請求サービス計画200904Result.getEntity().toEntity());
+                }
             }
-            for (ShokanServicePlan200604Result 償還払請求サービス計画200604Result : 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList()) {
-                償還払請求サービス計画200604データList.add(償還払請求サービス計画200604Result.getEntity().toEntity());
+            if (null != 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList()
+                    && !償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList().isEmpty()) {
+                for (ShokanServicePlan200604Result 償還払請求サービス計画200604Result : 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList()) {
+                    償還払請求サービス計画200604データList.add(償還払請求サービス計画200604Result.getEntity().toEntity());
+                }
             }
-            for (ShokanServicePlan200004Result 償還払請求サービス計画200004Result : 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList()) {
-                償還払請求サービス計画200004データList.add(償還払請求サービス計画200004Result.getEntity().toEntity());
+            if (null != 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList()
+                    && !償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList().isEmpty()) {
+                for (ShokanServicePlan200004Result 償還払請求サービス計画200004Result : 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList()) {
+                    償還払請求サービス計画200004データList.add(償還払請求サービス計画200004Result.getEntity().toEntity());
+                }
             }
             int 証明書件数ViewState = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShomeishoKensu(
                     被保険者番号,

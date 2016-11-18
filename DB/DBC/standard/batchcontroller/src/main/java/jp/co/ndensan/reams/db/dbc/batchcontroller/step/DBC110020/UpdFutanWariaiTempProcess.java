@@ -117,14 +117,14 @@ public class UpdFutanWariaiTempProcess extends BatchProcessBase<IdouTempEntity> 
         RString 全項目 = RString.EMPTY;
         全項目 = cancatYMD(二割負担.getYukoKaishiYMD(), 全項目);
         全項目 = cancatYMD(二割負担.getYukoShuryoYMD(), 全項目);
-        全項目 = 全項目.concat(二割負担.getHihokenshaNo().getColumnValue()).concat(SPLIT)
-                .concat(二割負担.getNendo().toDateString()).concat(SPLIT)
+        全項目 = 全項目.concat(二割負担.getHihokenshaNo().getColumnValue()).concat(SPLIT);
+        全項目 = cancatRString(二割負担.getFutanWariaiKubun(), 全項目);
+        全項目 = 全項目.concat(二割負担.getNendo().toDateString()).concat(SPLIT)
                 .concat(new RString(二割負担.getRirekiNo())).concat(SPLIT)
                 .concat(new RString(二割負担.getEdaNo())).concat(SPLIT)
                 .concat(二割負担.getInsertDantaiCd()).concat(SPLIT)
                 .concat(二割負担.getIsDeleted() ? RST_TRUE : RST_FALSE).concat(SPLIT);
         全項目 = cancatRString(二割負担.getShikakuKubun(), 全項目);
-        全項目 = cancatRString(二割負担.getFutanWariaiKubun(), 全項目);
         全項目 = cancatDecimal(二割負担.getHonninGoukeiShotokuGaku(), 全項目);
         全項目 = 全項目.concat(new RString(二割負担.getSetaiIchigouHihokenshaSu())).concat(SPLIT);
         全項目 = cancatDecimal(二割負担.getNenkinShunyuGoukei(), 全項目);

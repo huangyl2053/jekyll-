@@ -91,7 +91,7 @@ public class KogakuShikyuShinseishoHakkoIchiranEditor
         source.listHakkoTaishosha_3 = getパターン51(entity.getServiceTeikyoYMChohyo());
         source.listHakkoTaishosha_4 = getColumnValue(entity.getMeishoChohyo());
         source.listHakkoTaishosha_5 = getColumnValue(entity.getYubinNoChohyo());
-        source.listHakkoTaishosha_6 = getColumnValue(entity.getJushoChohyo());
+        source.listHakkoTaishosha_6 = entity.getEditJusho();
         source.listHakkoTaishosha_7 = getColumnValue(entity.getGyoseikuCodeChohyo());
         source.listHakkoTaishosha_8 = entity.getGyoseikuNameChohyo();
         if (entity.isKyuSochishaFlagChohyo()) {

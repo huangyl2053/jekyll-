@@ -239,10 +239,9 @@ public class PrtKariHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuc
 
         publish変更通知書(仮算定納入通知書情報);
 
-        List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List = new ArrayList<>();
-        編集後仮算定通知書共通情報List.add(編集後仮算定通知書共通情報);
-        KariSanteigakuHenkoTsuchishoHakkoIchiranReport report = new KariSanteigakuHenkoTsuchishoHakkoIchiranReport(編集後仮算定通知書共通情報List,
-                出力順１, 出力順２, 出力順３, 出力順４, 出力順５, processParameter.get帳票作成日時().getRDateTime());
+        KariSanteigakuHenkoTsuchishoHakkoIchiranReport report
+                = new KariSanteigakuHenkoTsuchishoHakkoIchiranReport(仮算定通知書情報, 編集後仮算定通知書共通情報,
+                        出力順１, 出力順２, 出力順３, 出力順４, 出力順５, processParameter.get帳票作成日時().getRDateTime());
         report.writeBy(一覧表ReportSourceWriter);
         List<RString> bodyList = karisanteiSyori.get仮算定額変更通知書発行一覧表bodyList(processParameter.get調定年度(),
                 processParameter.get帳票作成日時().getRDateTime(), 編集後仮算定通知書共通情報);

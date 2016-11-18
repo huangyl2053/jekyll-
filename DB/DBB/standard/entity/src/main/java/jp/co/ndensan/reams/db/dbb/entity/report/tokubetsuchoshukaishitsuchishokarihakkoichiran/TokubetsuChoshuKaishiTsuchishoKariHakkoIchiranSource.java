@@ -122,6 +122,33 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource implements IRe
     @ReportItem(name = "dbT2015KeisangoJoho_choteiJiyu1", length = 100, order = 47)
     public RString dbT2015KeisangoJoho_choteiJiyu1;
 
+    @ReportItem(name = "choikiCode", length = 15, order = 48)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 15, order = 49)
+    public RString gyoseikuCode;
+    @ReportItem(name = "chikuCode1", length = 15, order = 50)
+    public RString chikuCode1;
+    @ReportItem(name = "chikuCode2", length = 15, order = 51)
+    public RString chikuCode2;
+    @ReportItem(name = "chikuCode3", length = 15, order = 52)
+    public RString chikuCode3;
+    @ReportItem(name = "shikibetsuCode", length = 15, order = 53)
+    public RString shikibetsuCode;
+    @ReportItem(name = "kanaMeisho", length = 30, order = 54)
+    public RString kanaMeisho;
+    @ReportItem(name = "hihokenshaNo", length = 15, order = 55)
+    public RString hihokenshaNo;
+    @ReportItem(name = "nenkinCode", length = 15, order = 56)
+    public RString nenkinCode;
+    @ReportItem(name = "nokumiCode", length = 15, order = 57)
+    public RString nokumiCode;
+    @ReportItem(name = "seihoFlag", length = 15, order = 58)
+    public RString seihoFlag;
+    @ReportItem(name = "choteiJiyu", length = 30, order = 59)
+    public RString choteiJiyu;
+    @ReportItem(name = "banchiCode", length = 30, order = 60)
+    public RString banchiCode;
+
     public enum ReportSourceFields {
 
         printTimeStamp,
@@ -170,6 +197,19 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource implements IRe
         nenkinTokuchoKaifuJoho_nenkinCode,
         dbT2015KeisangoJoho_seihofujoShurui,
         caT0714SeikyuHoho_nokumiCode,
-        dbT2015KeisangoJoho_choteiJiyu1
+        dbT2015KeisangoJoho_choteiJiyu1,
+        choikiCode,
+        gyoseikuCode,
+        chikuCode1,
+        chikuCode2,
+        chikuCode3,
+        shikibetsuCode,
+        kanaMeisho,
+        hihokenshaNo,
+        nenkinCode,
+        nokumiCode,
+        seihoFlag,
+        banchiCode,
+        choteiJiyu
     }
 }

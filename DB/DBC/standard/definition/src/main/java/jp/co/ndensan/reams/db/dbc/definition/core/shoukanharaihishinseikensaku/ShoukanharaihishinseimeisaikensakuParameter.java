@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku;
 
 import java.io.Serializable;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -57,5 +58,35 @@ public class ShoukanharaihishinseimeisaikensakuParameter implements Serializable
         this.事業者番号 = 事業者番号;
         this.様式番号 = 様式番号;
         this.明細番号 = 明細番号;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ShoukanharaihishinseimeisaikensakuParameter) {
+            ShoukanharaihishinseimeisaikensakuParameter other明細キー = (ShoukanharaihishinseimeisaikensakuParameter) obj;
+            if (this.被保険者番号.equals(other明細キー.被保険者番号)
+                    && this.サービス年月.equals(other明細キー.サービス年月)
+                    && this.申請日.equals(other明細キー.申請日)
+                    && this.整理番号.equals(other明細キー.整理番号)
+                    && this.事業者番号.equals(other明細キー.事業者番号)
+                    && this.様式番号.equals(other明細キー.様式番号)
+                    && this.明細番号.equals(other明細キー.明細番号)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.被保険者番号);
+        hash = 89 * hash + Objects.hashCode(this.サービス年月);
+        hash = 89 * hash + Objects.hashCode(this.申請日);
+        hash = 89 * hash + Objects.hashCode(this.整理番号);
+        hash = 89 * hash + Objects.hashCode(this.事業者番号);
+        hash = 89 * hash + Objects.hashCode(this.様式番号);
+        hash = 89 * hash + Objects.hashCode(this.明細番号);
+        return hash;
     }
 }

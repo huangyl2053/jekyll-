@@ -47,6 +47,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
     private static final RString THREE = new RString("3");
     private static final RString TAISHOSHASEARCH = new RString("taishoshaSearch");
     private static final RString HIHOKENSHANOSHTEI = new RString("hihokenshaNoShitei");
+    private static final int INT_SIX = 6;
     private static final int INT_SEVEN = 7;
     private static final FlexibleYear 定値_2014 = new FlexibleYear("2014");
 
@@ -123,9 +124,9 @@ public class JigyobunShikyugakuCalcPanelHandler {
             if (宛名識別対象情報 != null && 宛名識別対象情報.get名称() != null && 宛名識別対象情報.get名称().getName() != null
                     && !宛名識別対象情報.get名称().getName().isEmpty()) {
                 div.getChushutsuJoken().getTxtHihokenshaMei().setValue(宛名識別対象情報.get名称().getName().value());
+            } else {
+                div.getChushutsuJoken().getTxtHihokenshaMei().clearValue();
             }
-        } else {
-            div.getChushutsuJoken().getTxtHihokenshaMei().setValue(RString.EMPTY);
         }
     }
 
@@ -199,8 +200,8 @@ public class JigyobunShikyugakuCalcPanelHandler {
             parameter.set年度(null);
             parameter.set出力対象区分(ONE);
             parameter.set被保険者番号(null);
-            RDate date = new RDate(div.getChushutsuJoken().getTxtUketoriYM().getValue().toString());
-            parameter.set受取年月(new FlexibleYearMonth(date.getYearMonth().toDateString()));
+            parameter.set受取年月(new FlexibleYearMonth(div.getChushutsuJoken().getTxtUketoriYM().
+                    getValue().toString().substring(0, INT_SIX)));
         }
         parameter.set処理日(FlexibleDate.getNowDate());
         parameter.set処理時間(RTime.now());

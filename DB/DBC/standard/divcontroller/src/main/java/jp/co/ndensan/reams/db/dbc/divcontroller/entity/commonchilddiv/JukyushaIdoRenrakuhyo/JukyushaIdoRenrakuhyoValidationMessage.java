@@ -169,7 +169,7 @@ public enum JukyushaIdoRenrakuhyoValidationMessage implements IValidationMessage
     /**
      * 二割負担事業適用情報が不正
      */
-    二割負担事業適用情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成27年04月", "より前", "二割負担情報"),
+    二割負担事業適用情報が不正(DbcErrorMessages.受給者異動_制度改正チェック, "平成27年08月", "より前", "二割負担情報"),
     /**
      * 二次予防事業適用情報が不正
      */

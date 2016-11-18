@@ -588,7 +588,7 @@
          AND
                "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
          AND
-               "DbT7022ShoriDateKanri"."shoriName" = '基準収入額適用申請書発行'
+               "DbT7022ShoriDateKanri"."shoriName" = '基準収入額適用申請書異動'
          AND
                "DbT7022ShoriDateKanri"."shoriEdaban" ='0000'
          AND

@@ -55,7 +55,7 @@
         ON DbWT38B1."renban" = TEMP."meisaiRenban"
         WHERE DbWT38B1."shikyuKubunCode" = '1' AND DbWT38B1."shiharaiHohoKubun" = '2') AS 高額合算
         <if test="hasValidKamoku">
-        INNER JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch"/>) AS 口座取得SQL
+        LEFT JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch"/>) AS 口座取得SQL
         ON  高額合算.dbWT0001HihokenshaTemp_shikibetsuCode = 口座取得SQL."uaT0310Koza_shikibetsuCode"
         AND 高額合算.DbWT38B1_kinyuKikanCode = 口座取得SQL."uaT0310Koza_kinyuKikanCode"
         AND 高額合算.DbWT38B1_kinyuKikanShitenCode = 口座取得SQL."uaT0310Koza_kinyuKikanShitenCode"
@@ -127,6 +127,7 @@
     <resultMap id="resultMap_ShikyuFushikyuKetteiKozaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shikyufushikyu.ShikyuFushikyuKetteiKozaEntity" autoMapping="true">
        <id column="DbWT38B1_renban" />
        <association property="支給不支給決定" resultMap="resultMap_DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity"/>
+       <association property="被保険者" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
     </resultMap>
     

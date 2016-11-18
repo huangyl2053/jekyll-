@@ -1514,7 +1514,8 @@
     <select resultOrdered="true" id="select全件賦課情報_変更" resultMap="resultMap_KarisanteiTsuchisho"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter" fetchSize="500">
         SELECT
-            A.*
+            A.*,
+            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
         FROM
             "TmpFukaInfo" AS A
         WHERE
@@ -1525,7 +1526,8 @@
     <select resultOrdered="true" id="select全件賦課情報_納入" resultMap="resultMap_KarisanteiTsuchisho"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter" fetchSize="500">
         SELECT
-            A.*
+            A.*,
+            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
         FROM
             "TmpFukaInfo" AS A
         WHERE 

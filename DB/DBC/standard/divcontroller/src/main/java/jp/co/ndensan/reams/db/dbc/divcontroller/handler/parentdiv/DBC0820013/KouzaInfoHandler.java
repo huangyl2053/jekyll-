@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820013;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseijoho.ShokanShinseiJoho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.KouzaInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
@@ -26,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -38,6 +36,7 @@ public class KouzaInfoHandler {
 
     private final KouzaInfoPanelDiv div;
     private static final RString 受託なし = new RString("1");
+    private static final RString 窓口払い = new RString("1");
     private static final RString 受託あり = new RString("2");
     private static final RString 窓口払_コード = new RString("1");
     private static final RString 口座払_コード = new RString("2");
@@ -133,7 +132,10 @@ public class KouzaInfoHandler {
      */
     public Boolean 変更有無チェック(ShokanShinsei entityView) {
         IShiharaiHohoJyohoDiv 支払方法情報共有DIV = div.getPnlCommon().getCcdShinseiNaiyo();
-        if (checkObject(entityView.get支払方法区分コード(), 支払方法情報共有DIV.getShiharaiHohoRad()) == 1) {
+        if (entityView.get支払方法区分コード() == null && !支払方法情報共有DIV.getShiharaiHohoRad().equals(窓口払い)) {
+            return true;
+        }
+        if (checkObject(entityView.get支払方法区分コード(), 支払方法情報共有DIV.getShiharaiHohoRad()) == 1 && entityView.get支払方法区分コード() != null) {
             return true;
         }
         int i = 0;
@@ -173,13 +175,13 @@ public class KouzaInfoHandler {
     /**
      * 「申請を保存する」ボタン 登録、修正の場合です。
      *
-     * @param entityView ViewStateの償還払い費支給申請決定_口座情報
+     * @param entityView ShokanShinsei
      * @param 整理番号 RString
      * @param サービス年月 FlexibleYearMonth
      * @param 被保険者番号 HihokenshaNo
-     * @return ShokanShinseiJoho 償還払い費支給申請決定用情報
+     * @return ShokanShinsei 償還払い費支給申請決定用情報
      */
-    public ShokanShinseiJoho 保存_修正(ShokanShinsei entityView, RString 整理番号, FlexibleYearMonth サービス年月, HihokenshaNo 被保険者番号) {
+    public ShokanShinsei 保存_修正(ShokanShinsei entityView, RString 整理番号, FlexibleYearMonth サービス年月, HihokenshaNo 被保険者番号) {
         IShiharaiHohoJyohoDiv 支払方法情報共有DIV = div.getPnlCommon().getCcdShinseiNaiyo();
         RString 支払方法区分コード = 支払方法情報共有DIV.getShiharaiHohoRad();
         if (窓口払_コード.equals(支払方法区分コード)) {
@@ -243,7 +245,7 @@ public class KouzaInfoHandler {
                     .set支払方法区分コード(支払方法区分コード)
                     .set受領委任契約番号(受領委任契約番号).build();
         }
-        return SyokanbaraihiShikyuShinseiKetteManager.createInstance().updDbT3034ShokanShinsei1(entityView);
+        return SyokanbaraihiShikyuShinseiKetteManager.createInstance().updDbT3034ShokanShinsei2(entityView);
     }
 
     /**
@@ -273,10 +275,40 @@ public class KouzaInfoHandler {
         List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
         if (支給申請一覧情報リスト.isEmpty()) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnDelete"), false);
             return new ShokanShinsei(被保険者番号, サービス年月, 整理番号);
         }
         return 支給申請一覧情報リスト.get(0);
+    }
+
+    /**
+     * 償還払支給申請詳細データ取得する。
+     *
+     * @param 償還払支給申請 ShokanShinsei
+     * @param 償還払支給申請データ ShokanShinsei
+     */
+    public void 同項目に設定(ShokanShinsei 償還払支給申請, ShokanShinsei 償還払支給申請データ) {
+        if (償還払支給申請データ.get支払方法区分コード() != null) {
+            償還払支給申請.createBuilderForEdit().set支払方法区分コード(償還払支給申請データ.get支払方法区分コード());
+        }
+        if (償還払支給申請データ.get支払場所() != null) {
+            償還払支給申請.createBuilderForEdit().set支払場所(償還払支給申請データ.get支払場所());
+        }
+        if (償還払支給申請データ.get支払期間開始年月日() != null) {
+            償還払支給申請.createBuilderForEdit().set支払期間開始年月日(償還払支給申請データ.get支払期間開始年月日());
+        }
+        if (償還払支給申請データ.get支払期間終了年月日() != null) {
+            償還払支給申請.createBuilderForEdit().set支払期間終了年月日(償還払支給申請データ.get支払期間終了年月日());
+        }
+        if (償還払支給申請データ.get支払窓口開始時間() != null) {
+            償還払支給申請.createBuilderForEdit().set支払窓口開始時間(償還払支給申請データ.get支払窓口開始時間());
+        }
+        if (償還払支給申請データ.get支払窓口終了時間() != null) {
+            償還払支給申請.createBuilderForEdit().set支払窓口終了時間(償還払支給申請データ.get支払窓口終了時間());
+        }
+        償還払支給申請.createBuilderForEdit().set口座ID(償還払支給申請データ.get口座ID());
+        if (償還払支給申請.get受領委任契約番号() != null) {
+            償還払支給申請.createBuilderForEdit().set受領委任契約番号(償還払支給申請データ.get受領委任契約番号());
+        }
     }
 
     private int checkObject(RString obj1, RString obj2) {

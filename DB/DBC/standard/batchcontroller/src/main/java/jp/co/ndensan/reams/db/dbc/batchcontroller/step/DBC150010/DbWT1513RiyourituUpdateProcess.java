@@ -63,7 +63,7 @@ public class DbWT1513RiyourituUpdateProcess extends BatchProcessBase<DbWT1513Riy
             return DecimalFormatter.toRString(単位数Del.divide(数字_100).multiply(限度額Del), ZERO);
         } else if (RiyojokyoTokeihyo_ServiceKubun.在宅.getコード().equals(サービス区分)
                 || RiyojokyoTokeihyo_ServiceKubun.混在.getコード().equals(サービス区分)) {
-            return new RString("0000");
+            return new RString("000");
         } else {
             return RString.EMPTY;
         }

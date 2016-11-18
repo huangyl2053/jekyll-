@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.KihonInfoMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.KihonInfoMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
@@ -243,47 +243,48 @@ public class KihonInfoMainPanelHandler {
     }
 
     /**
-     * データ保存処理を行うのメソッドます。
+     * 修正ボタンを押下する時、データ保存処理を行うのメソッドます。
      *
      * @param meisaiPar 償還払費申請明細検索キー
-     * @param shokanKihon 償還払請求基本データ
+     * @param 償還払請求基本データ ShokanKihon
      * @param 処理モード RString
      * @param list 様式番号List
-     * @return 明細番号 RString
+     * @return 償還払請求基本 ShokanKihon
      */
-    public RString 保存処理(ShoukanharaihishinseimeisaikensakuParameter meisaiPar, ShokanKihon shokanKihon,
+    public ShokanKihon saveModified(ShoukanharaihishinseimeisaikensakuParameter meisaiPar, ShokanKihon 償還払請求基本データ,
+            RString 処理モード, List<RString> list) {
+        FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
+        RString 様式番号 = meisaiPar.get様式番号();
+        償還払請求基本データ = 償還払請求基本データ.modified();
+        return save基本情報(償還払請求基本データ, サービス年月, 様式番号, list);
+    }
+
+    /**
+     * 「申請を追加する」ボタンを押下する時、データ保存処理を行うのメソッドます。
+     *
+     * @param meisaiPar 償還払費申請明細検索キー
+     * @param 償還払請求基本データ ShokanKihon
+     * @param 処理モード RString
+     * @param list 様式番号List
+     * @return 償還払請求基本 ShokanKihon
+     */
+    public ShokanKihon saveAdd(ShoukanharaihishinseimeisaikensakuParameter meisaiPar, ShokanKihon 償還払請求基本データ,
             RString 処理モード, List<RString> list) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
         JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
         RString 様式番号 = meisaiPar.get様式番号();
-        RString 明細番号 = meisaiPar.get明細番号();
-        if (削除.equals(処理モード)) {
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
+        if (償還払請求基本データ == null) {
+            償還払請求基本データ = new ShokanKihon(
                     被保険者番号,
                     サービス年月,
                     整理番号,
                     事業者番号,
                     様式番号,
-                    明細番号);
-        } else {
-            if (shokanKihon == null) {
-                明細番号 = RString.EMPTY;
-                shokanKihon = new ShokanKihon(
-                        被保険者番号,
-                        サービス年月,
-                        整理番号,
-                        事業者番号,
-                        様式番号,
-                        固定明細番号).createBuilderForEdit().build();
-                shokanKihon = save基本情報(shokanKihon, サービス年月, 様式番号, list);
-            } else {
-                shokanKihon = save基本情報(shokanKihon, サービス年月, 様式番号, list);
-            }
-            明細番号 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanKihon(明細番号, shokanKihon);
+                    固定明細番号).createBuilderForEdit().build();
         }
-        return 明細番号;
+        return save基本情報(償還払請求基本データ, サービス年月, 様式番号, list);
     }
 
     private ShokanKihon save基本情報(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月,
@@ -401,6 +402,134 @@ public class KihonInfoMainPanelHandler {
     }
 
     /**
+     * DB情報保存 の処理です。キーが同じデータがある場合、返す。
+     *
+     * @param 請求基本データList ArrayList<ShokanKihon>
+     * @param shokanKihon ShokanKihon
+     * @return 基本データ ShokanKihon
+     */
+    public ShokanKihon judgeIsContained(ArrayList<ShokanKihon> 請求基本データList, ShokanKihon shokanKihon) {
+        for (ShokanKihon 基本データ : 請求基本データList) {
+            if (基本データ.get被保険者番号().equals(shokanKihon.get被保険者番号())
+                    && 基本データ.getサービス提供年月().equals(shokanKihon.getサービス提供年月())
+                    && 基本データ.get整理番号().equals(shokanKihon.get整理番号())
+                    && 基本データ.get事業者番号().equals(shokanKihon.get事業者番号())
+                    && 基本データ.get様式番号().equals(shokanKihon.get様式番号())
+                    && 基本データ.get明細番号().equals(shokanKihon.get明細番号())) {
+                return 基本データ;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 修正ボタンを押下する時、画面内容の変更有無チェックを行うのメソッドます。
+     *
+     * @param originalData ShokanKihon
+     * @param modifiedShokanKihon ShokanKihon
+     * @return boolean True,変更ある、False 変更なし
+     */
+    public boolean judgeIs内容変更(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        if (judge中止年月日IsUnChanged(originalData, modifiedShokanKihon)
+                && judge中止理由_入所_院前の状況コードIsUnChanged(originalData, modifiedShokanKihon)
+                && judge事業者番号IsUnChanged(originalData, modifiedShokanKihon)
+                && judge保険給付率IsUnChanged(originalData, modifiedShokanKihon)
+                && judge入所_院実日数IsUnChanged(originalData, modifiedShokanKihon)
+                && judge入所_院年月日IsUnChanged(originalData, modifiedShokanKihon)
+                && judgeget外泊日数IsUnChanged(originalData, modifiedShokanKihon)
+                && judge居宅サービス計画事業者番号IsUnChanged(originalData, modifiedShokanKihon)
+                && judge居宅サービス計画作成区分コードIsUnChanged(originalData, modifiedShokanKihon)
+                && judge旧措置入所者特例コードIsUnChanged(originalData, modifiedShokanKihon)
+                && judge様式番号IsUnChanged(originalData, modifiedShokanKihon)
+                && judge退所_院年月日IsUnChanged(originalData, modifiedShokanKihon)
+                && judge退所_院後の状態コードIsUnChanged(originalData, modifiedShokanKihon)
+                && judge開始年月日IsUnChanged(originalData, modifiedShokanKihon)) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+    }
+
+    private boolean judge中止年月日IsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get中止年月日() == null && modifiedShokanKihon.get中止年月日() == null)
+                || (originalData.get中止年月日() != null && modifiedShokanKihon.get中止年月日() != null
+                && originalData.get中止年月日().equals(modifiedShokanKihon.get中止年月日()));
+    }
+
+    private boolean judge中止理由_入所_院前の状況コードIsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get中止理由_入所_院前の状況コード() == null && modifiedShokanKihon.get中止理由_入所_院前の状況コード() == null)
+                || (originalData.get中止理由_入所_院前の状況コード() != null && modifiedShokanKihon.get中止理由_入所_院前の状況コード() != null
+                && originalData.get中止理由_入所_院前の状況コード().equals(modifiedShokanKihon.get中止理由_入所_院前の状況コード()));
+    }
+
+    private boolean judge事業者番号IsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get事業者番号() == null && modifiedShokanKihon.get事業者番号() == null)
+                || (originalData.get事業者番号() != null && modifiedShokanKihon.get事業者番号() != null
+                && originalData.get事業者番号().equals(modifiedShokanKihon.get事業者番号()));
+    }
+
+    private boolean judge保険給付率IsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get保険給付率() == null && modifiedShokanKihon.get保険給付率() == null)
+                || (originalData.get保険給付率() != null && modifiedShokanKihon.get保険給付率() != null
+                && originalData.get保険給付率().equals(modifiedShokanKihon.get保険給付率()));
+    }
+
+    private boolean judge入所_院実日数IsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return originalData.get入所_院実日数() == modifiedShokanKihon.get入所_院実日数();
+    }
+
+    private boolean judge入所_院年月日IsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get入所_院年月日() == null && modifiedShokanKihon.get入所_院年月日() == null)
+                || (originalData.get入所_院年月日() != null && modifiedShokanKihon.get入所_院年月日() != null
+                && originalData.get入所_院年月日().equals(modifiedShokanKihon.get入所_院年月日()));
+    }
+
+    private boolean judgeget外泊日数IsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return originalData.get外泊日数() == modifiedShokanKihon.get外泊日数();
+    }
+
+    private boolean judge居宅サービス計画事業者番号IsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get居宅サービス計画事業者番号() == null && modifiedShokanKihon.get居宅サービス計画事業者番号() == null)
+                || (originalData.get居宅サービス計画事業者番号() != null && modifiedShokanKihon.get居宅サービス計画事業者番号() != null
+                && originalData.get居宅サービス計画事業者番号().equals(modifiedShokanKihon.get居宅サービス計画事業者番号()));
+    }
+
+    private boolean judge居宅サービス計画作成区分コードIsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get居宅サービス計画作成区分コード() == null && modifiedShokanKihon.get居宅サービス計画作成区分コード() == null)
+                || (originalData.get居宅サービス計画作成区分コード() != null && modifiedShokanKihon.get居宅サービス計画作成区分コード() != null
+                && originalData.get居宅サービス計画作成区分コード().equals(modifiedShokanKihon.get居宅サービス計画作成区分コード()));
+    }
+
+    private boolean judge旧措置入所者特例コードIsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get旧措置入所者特例コード() == null && modifiedShokanKihon.get旧措置入所者特例コード() == null)
+                || (originalData.get旧措置入所者特例コード() != null && modifiedShokanKihon.get旧措置入所者特例コード() != null
+                && originalData.get旧措置入所者特例コード().equals(modifiedShokanKihon.get旧措置入所者特例コード()));
+    }
+
+    private boolean judge様式番号IsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get様式番号() == null && modifiedShokanKihon.get様式番号() == null)
+                || (originalData.get様式番号() != null && modifiedShokanKihon.get様式番号() != null
+                && originalData.get様式番号().equals(modifiedShokanKihon.get様式番号()));
+    }
+
+    private boolean judge退所_院年月日IsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get退所_院年月日() == null && modifiedShokanKihon.get退所_院年月日() == null)
+                || (originalData.get退所_院年月日() != null && modifiedShokanKihon.get退所_院年月日() != null
+                && originalData.get退所_院年月日().equals(modifiedShokanKihon.get退所_院年月日()));
+    }
+
+    private boolean judge退所_院後の状態コードIsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get退所_院後の状態コード() == null && modifiedShokanKihon.get退所_院後の状態コード() == null)
+                || (originalData.get退所_院後の状態コード() != null && modifiedShokanKihon.get退所_院後の状態コード() != null
+                && originalData.get退所_院後の状態コード().equals(modifiedShokanKihon.get退所_院後の状態コード()));
+    }
+
+    private boolean judge開始年月日IsUnChanged(ShokanKihon originalData, ShokanKihon modifiedShokanKihon) {
+        return (originalData.get開始年月日() == null && modifiedShokanKihon.get開始年月日() == null)
+                || (originalData.get開始年月日() != null && modifiedShokanKihon.get開始年月日() != null
+                && originalData.get開始年月日().equals(modifiedShokanKihon.get開始年月日()));
+    }
+
+    /**
      * 画面内容の変更有無チェックを行うのメソッドます。
      *
      * @param shokanKihon 償還払請求基本データ
@@ -411,7 +540,7 @@ public class KihonInfoMainPanelHandler {
      */
     public boolean get内容変更状態(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月, List<RString> list, RString 様式番号) {
         RString 明細番号 = div.getPanelTwo().getTxtMeisaiBango().getValue();
-        if (shokanKihon != null && 明細番号 != null && !明細番号.isEmpty()) {
+        if (shokanKihon != null && !RString.isNullOrEmpty(明細番号)) {
             if (checkPanelKyotaku(shokanKihon)) {
                 return true;
             }
@@ -616,6 +745,10 @@ public class KihonInfoMainPanelHandler {
             FlexibleYearMonth サービス年月,
             RDate 申請日,
             RString 整理番号) {
+        RString 明細番号 = div.getPanelTwo().getTxtMeisaiBango().getValue();
+        if (RString.isNullOrEmpty(明細番号)) {
+            明細番号 = 固定明細番号;
+        }
         ShoukanharaihishinseimeisaikensakuParameter paramter = new ShoukanharaihishinseimeisaikensakuParameter(
                 被保険者番号,
                 サービス年月,
@@ -623,7 +756,7 @@ public class KihonInfoMainPanelHandler {
                 整理番号,
                 new JigyoshaNo(div.getPanelTwo().getTxtJigyoshaBango().getValue()),
                 div.getPanelTwo().getTxtShomeisho().getValue(),
-                div.getPanelTwo().getTxtMeisaiBango().getValue());
+                明細番号);
         return paramter;
     }
 

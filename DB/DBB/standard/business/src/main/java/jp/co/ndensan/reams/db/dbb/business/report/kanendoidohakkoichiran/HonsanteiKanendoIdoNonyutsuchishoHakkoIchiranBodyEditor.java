@@ -92,7 +92,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements 
 
         RString 生活保護扶助名称 = null;
         if (共通情報.get更正後() != null
-                && 共通情報.get更正後().get生活保護扶助種類() != null) {
+                && !RString.isNullOrEmpty(共通情報.get更正後().get生活保護扶助種類())) {
             生活保護扶助名称 = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
                     URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
                     new Code(共通情報.get更正後().get生活保護扶助種類().toString())).getコード名称();

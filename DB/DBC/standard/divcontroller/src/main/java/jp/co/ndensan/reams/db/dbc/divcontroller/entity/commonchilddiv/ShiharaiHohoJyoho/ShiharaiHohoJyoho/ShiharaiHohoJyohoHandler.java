@@ -53,6 +53,8 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 住宅改修費支給申請 = new RString("DBCUC07100");
     private final RString 住宅改修費事前申請 = new RString("DBCUC07000");
     private final RString 償還払い費支給申請 = new RString("DBCUC08100");
+    private final RString 償還払い費支給申請2 = new RString("DBCUC08211");
+
     private final RString 住宅改修費支給申請一括審査_決定 = new RString("DBCUC07200");
     private final RString 福祉用具購入費支給申請一括審査_決定 = new RString("DBCUC06100");
     private final RString 高額サービス費支給申請 = new RString("DBCUC04400");
@@ -615,7 +617,7 @@ public class ShiharaiHohoJyohoHandler {
         } else {
             div.getDdlKozaID().setSelectedIndex(0);
         }
-        
+
         KinyuKikanCode 金融機関コード = 口座情報.get金融機関コード() == null
                 ? new KinyuKikanCode(RString.EMPTY) : 口座情報.get金融機関コード();
         div.getTxtKinyuKikanCode().setDomain(金融機関コード);
@@ -1036,6 +1038,7 @@ public class ShiharaiHohoJyohoHandler {
                 || 住宅改修費事前申請.equals(uiContainerId)
                 || 償還払い費支給申請.equals(uiContainerId)
                 || 住宅改修費支給申請一括審査_決定.equals(uiContainerId)
+                || 償還払い費支給申請2.equals(uiContainerId)
                 || 福祉用具購入費支給申請一括審査_決定.equals(uiContainerId)) {
 
             return ShunoKamokuShubetsu.介護給付_償還;

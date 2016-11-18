@@ -793,7 +793,11 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 調定計算.get徴収方法の情報().toEntity();
         dbT2001ChoshuHohoEntity.setRirekiNo(調定計算.get徴収方法の情報().get履歴番号() + INT_1);
         dbT2001ChoshuHohoEntity.setState(EntityDataState.Added);
-        徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+        DbT2001ChoshuHohoEntity entity = 徴収方法Dac.selectByKey(dbT2001ChoshuHohoEntity.getFukaNendo(),
+                dbT2001ChoshuHohoEntity.getHihokenshaNo(), 調定計算.get徴収方法の情報().get履歴番号() + INT_1);
+        if (entity == null) {
+            徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+        }
     }
 
     private void create既存の賦課処理(CalculateFukaEntity 賦課計算の情報, FukaKokyoBatchParameter fukaKokyoBatchParameter,
@@ -869,7 +873,11 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報.toEntity();
             dbT2001ChoshuHohoEntity.setRirekiNo(徴収方法の情報.get履歴番号() + INT_1);
             dbT2001ChoshuHohoEntity.setState(EntityDataState.Added);
-            徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+            DbT2001ChoshuHohoEntity entity = 徴収方法Dac.selectByKey(dbT2001ChoshuHohoEntity.getFukaNendo(),
+                    dbT2001ChoshuHohoEntity.getHihokenshaNo(), 徴収方法の情報.get履歴番号() + INT_1);
+            if (entity == null) {
+                徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+            }
         }
 
     }
@@ -1313,7 +1321,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         業務コンフィグ情報.set減免処理区分(INT_2);
         業務コンフィグ情報.set特徴依頼送付状況区分_10月(get特徴依頼送付状況区分(ShoriName.特徴依頼情報作成.get名称(), 年度内連番_0001));
         業務コンフィグ情報.set特徴依頼送付状況区分_12月(get特徴依頼送付状況区分(ShoriName.特徴異動情報作成.get名称(), 年度内連番_0007));
-        業務コンフィグ情報.set特徴依頼送付状況区分_10月(get特徴依頼送付状況区分(ShoriName.特徴異動情報作成.get名称(), 年度内連番_0009));
+        業務コンフィグ情報.set特徴依頼送付状況区分_2月(get特徴依頼送付状況区分(ShoriName.特徴異動情報作成.get名称(), 年度内連番_0009));
         業務コンフィグ情報.set普徴月クラス(get普徴月クラスリスト(現在調定年度));
         業務コンフィグ情報.set特徴月テーブル(get特徴月テーブル());
         kiwariKeisanInput.set業務コンフィグ情報(業務コンフィグ情報);
@@ -1707,7 +1715,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             for (Decimal decimal : 特徴期別金額) {
                 更正後の特別徴収額.add(decimal);
             }
-            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) > 0 || !RString.isNullOrEmpty(特徴停止事由コード)) {
+            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) > 0) {
                 ChoshuHohoBuilder builder = 出力用徴収方法の情報.createBuilderForEdit();
                 builder.set特別徴収停止事由コード(特徴停止事由コード)
                         .set特別徴収停止日時(調定日時);

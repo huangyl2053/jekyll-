@@ -60,5 +60,4 @@ public class KogakuGassanShikyuGakuKeisanKekkaUpdateParameter {
     private RString loginId;
     private boolean 更新前論理削除;
     private boolean 更新後論理削除;
-    private boolean flag;
 }

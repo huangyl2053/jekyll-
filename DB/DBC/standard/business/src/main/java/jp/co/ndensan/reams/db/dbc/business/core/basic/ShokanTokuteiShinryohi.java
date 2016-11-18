@@ -107,6 +107,15 @@ public class ShokanTokuteiShinryohi
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
+     * EntityDataStateを返します。
+     *
+     * @return EntityDataState
+     */
+    public EntityDataState getState() {
+        return entity.getState();
+    }
+
+    /**
      * 被保険者番号を返します。
      *
      * @return 被保険者番号

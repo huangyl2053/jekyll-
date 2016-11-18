@@ -195,7 +195,6 @@ public class PostMainPanelHandler {
             dgShichoson_Row items = new dgShichoson_Row();
             items.setBango(new RString(String.valueOf(bango)));
             if (!市町村識別ID.equals(NUM_00)) {
-//                items.setSelectable(Boolean.FALSE);
                 items.setSelected(Boolean.TRUE);
             }
             if (!RString.isNullOrEmpty(item.get(0))) {

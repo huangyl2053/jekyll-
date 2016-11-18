@@ -104,9 +104,9 @@ public class JikoFutangakuShomeisho {
     public ResponseData<JikoFutangakuShomeishoDiv> onChange_taishoNendoDDL(JikoFutangakuShomeishoDiv div) {
         getHandler(div).onChange_taishoNendoDDLSelect(メニューID, getKey高額合算キークラス().get年度毎キー());
         FlexibleYear 択された年度 = new FlexibleYear(div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().getSelectedKey());
-        if (択された年度.getYearValue() < 年_2008) {
+        if (択された年度.getYearValue() <= 年_2008) {
             return ResponseData.of(div).setState(DBC1170011StateName.帳票発行);
-        } else if (年_2009 < 択された年度.getYearValue()) {
+        } else if (年_2009 <= 択された年度.getYearValue()) {
             return ResponseData.of(div).setState(DBC1170011StateName.帳票発行2009);
         }
         return ResponseData.of(div).respond();

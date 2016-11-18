@@ -371,8 +371,10 @@ public class DBC2000022PanelAll {
         }
         FutanWariaiSokujiKouseiResult result = 利用者負担割合情報再検索(div.getDdlNendo().getSelectedKey(),
                 div.getCcdKaigoShikakuKihon().get被保険者番号());
-        引き継ぎデータ.set利用者負担割合(new RiyoshaFutanWariai(result.toEntity()));
-        引き継ぎデータ.set利用者負担割合明細list(result.get利用者負担割合明細list());
+        if (result != null) {
+            引き継ぎデータ.set利用者負担割合(new RiyoshaFutanWariai(result.toEntity()));
+            引き継ぎデータ.set利用者負担割合明細list(result.get利用者負担割合明細list());
+        }
         引き継ぎデータ.set漢字氏名(div.getCcdKaigoAtenaInfo().get氏名漢字());
         引き継ぎデータ.set登録結果(true);
         ViewStateHolder.put(ViewStateKeys.引き継ぎデータ, 引き継ぎデータ);

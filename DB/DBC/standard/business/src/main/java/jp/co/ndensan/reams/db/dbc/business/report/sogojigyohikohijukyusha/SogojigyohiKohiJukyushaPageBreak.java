@@ -41,6 +41,21 @@ public class SogojigyohiKohiJukyushaPageBreak extends PageBreaker<SogojigyohiKoh
         if (this.breakKeysList.contains(SogojigyohiKohiJukyushaOutPutOrder.公費負担者番号.get項目ID())
                 && !currentSource.getSource().kohiFutanshaNo.equals(nextSource.getSource().kohiFutanshaNo)) {
             flag = true;
+        } else if (this.breakKeysList.contains(SogojigyohiKohiJukyushaOutPutOrder.郵便番号.get項目ID())
+                && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(SogojigyohiKohiJukyushaOutPutOrder.町域コード.get項目ID())
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(SogojigyohiKohiJukyushaOutPutOrder.行政区コード.get項目ID())
+                && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(SogojigyohiKohiJukyushaOutPutOrder.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().shimei50onKana.equals(nextSource.getSource().shimei50onKana)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(SogojigyohiKohiJukyushaOutPutOrder.市町村コード.get項目ID())
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
+            flag = true;
         } else if (this.breakKeysList.contains(SogojigyohiKohiJukyushaOutPutOrder.被保険者番号.get項目ID())
                 && !currentSource.getSource().listUpper_10.equals(nextSource.getSource().listUpper_10)) {
             flag = true;

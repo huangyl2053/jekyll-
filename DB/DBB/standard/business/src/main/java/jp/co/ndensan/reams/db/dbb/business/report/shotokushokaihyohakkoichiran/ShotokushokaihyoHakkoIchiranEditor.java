@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranSource;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
@@ -48,6 +49,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private static final RString 印字_広域 = new RString("広域");
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
+    private static final RString 秒 = new RString("秒");
     private static final RString 被保険者区分コード_EMPTY = new RString("");
     private static final RString 被保険者区分コード_NUM1 = new RString("1");
     private static final RString 被保険者区分コード_NUM2 = new RString("2");
@@ -58,6 +60,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private static final RString 本人 = new RString("1");
     private static final RString 世帯員 = new RString("2");
     private static final RString 年度 = new RString("年度");
+    private static final RString 作成 = new RString("作成");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -68,10 +71,12 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private static final int NUM_8 = 8;
     private static final int NUM_10 = 10;
     private static final int NUM_12 = 12;
+    private static final int NUM_14 = 14;
 
     private final ShotokuShoukaiDataTempEntity 所得照会票発行一覧;
     private final List<KoikiZenShichosonJoho> 構成市町村情報リスト;
     private final List<RString> 出力順項目リスト;
+    private final Map<RString, RString> 改頁項目Map;
     private final List<RString> 改頁項目リスト;
     private final FlexibleDate 照会年月日;
     private final FlexibleYear 処理年度;
@@ -84,6 +89,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
      * @param 所得照会票発行一覧 ShotokuShoukaiDataTempEntity
      * @param 構成市町村情報リスト List<KoikiZenShichosonJoho>
      * @param 出力順項目リスト List<RString>
+     * @param 改頁項目Map Map<RString, RString>
      * @param 改頁項目リスト List<RString>
      * @param 照会年月日 FlexibleDate
      * @param 処理年度 FlexibleDate
@@ -93,6 +99,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     public ShotokushokaihyoHakkoIchiranEditor(ShotokuShoukaiDataTempEntity 所得照会票発行一覧,
             List<KoikiZenShichosonJoho> 構成市町村情報リスト,
             List<RString> 出力順項目リスト,
+            Map<RString, RString> 改頁項目Map,
             List<RString> 改頁項目リスト,
             FlexibleDate 照会年月日,
             FlexibleYear 処理年度,
@@ -101,6 +108,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         this.所得照会票発行一覧 = 所得照会票発行一覧;
         this.構成市町村情報リスト = 構成市町村情報リスト;
         this.出力順項目リスト = 出力順項目リスト;
+        this.改頁項目Map = 改頁項目Map;
         this.改頁項目リスト = 改頁項目リスト;
         this.照会年月日 = 照会年月日;
         this.処理年度 = 処理年度;
@@ -111,12 +119,13 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     @Override
     public ShotokushokaihyoHakkoIchiranSource edit(ShotokushokaihyoHakkoIchiranSource source) {
         YMDHMS システム日時 = YMDHMS.now();
-        RString 作成年月 = new FlexibleDate(システム日時.toString().substring(NUM_0, NUM_8))
-                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(NUM_0, NUM_8);
+        RString 作成年月日 = new FlexibleDate(システム日時.toString().substring(NUM_0, NUM_8))
+                .wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時分 = new RString(システム日時.toString().substring(NUM_8, NUM_10).concat(時.toString())
                 .concat(システム日時.toString().substring(NUM_10, NUM_12)).concat(分.toString()));
-        source.printTimeStamp = 作成年月.concat(RString.FULL_SPACE).concat(作成時分);
+        RString 作成秒 = new RString(システム日時.toString().substring(NUM_12, NUM_14).concat(秒.toString()));
+        source.printTimeStamp = 作成年月日.concat(RString.FULL_SPACE).concat(作成時分).concat(作成秒).concat(RString.FULL_SPACE).concat(作成);
         source.title = 所得照会一覧表;
         if (処理年度 != null) {
             source.nendo = 処理年度.wareki().toDateString().concat(年度);
@@ -230,19 +239,19 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private void set改ページ(ShotokushokaihyoHakkoIchiranSource source) {
         if (改頁項目リスト != null && !改頁項目リスト.isEmpty()) {
             if (改頁項目リスト.size() > NUM_0) {
-                source.kaipage1 = 改頁項目リスト.get(NUM_0);
+                source.kaipage1 = 改頁項目Map.get(改頁項目リスト.get(NUM_0));
             }
             if (改頁項目リスト.size() > NUM_1) {
-                source.kaipage2 = 改頁項目リスト.get(NUM_1);
+                source.kaipage2 = 改頁項目Map.get(改頁項目リスト.get(NUM_1));
             }
             if (改頁項目リスト.size() > NUM_2) {
-                source.kaipage3 = 改頁項目リスト.get(NUM_2);
+                source.kaipage3 = 改頁項目Map.get(改頁項目リスト.get(NUM_2));
             }
             if (改頁項目リスト.size() > NUM_3) {
-                source.kaipage4 = 改頁項目リスト.get(NUM_3);
+                source.kaipage4 = 改頁項目Map.get(改頁項目リスト.get(NUM_3));
             }
             if (改頁項目リスト.size() > NUM_4) {
-                source.kaipage5 = 改頁項目リスト.get(NUM_4);
+                source.kaipage5 = 改頁項目Map.get(改頁項目リスト.get(NUM_3));
             }
         }
     }

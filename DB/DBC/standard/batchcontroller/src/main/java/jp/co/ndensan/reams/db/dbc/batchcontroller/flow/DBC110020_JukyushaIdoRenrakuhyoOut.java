@@ -122,16 +122,16 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
         executeStep(被保険者台帳の情報の抽出);
         executeStep(異動一時１テーブルの作成);
         executeStep(送付エラー一時出力);
-//        executeStep(異動日毎データ抽出);
-//        if (再処理.equals(getParameter().get再処理区分())) {
-//            executeStep(受給者異動送付削除産);
-//        }
-//        executeStep(受給者異動の抽出);
-//        executeStep(データ比較処理);
-//        returnEntity = getResult(JukyushaIdoRenrakuhyoOutFlowEntity.class, new RString(データ比較処理),
-//                DataCompareShoriProcess.PARAMETER_OUT_RETURNENTITY);
+        executeStep(異動日毎データ抽出);
+        if (再処理.equals(getParameter().get再処理区分())) {
+            executeStep(受給者異動送付削除産);
+        }
+        executeStep(受給者異動の抽出);
+        executeStep(データ比較処理);
+        returnEntity = getResult(JukyushaIdoRenrakuhyoOutFlowEntity.class, new RString(データ比較処理),
+                DataCompareShoriProcess.PARAMETER_OUT_RETURNENTITY);
 //        do文字コード変換();
-//        executeStep(国保連インタフェース管理更新);
+        executeStep(国保連インタフェース管理更新);
 
     }
 

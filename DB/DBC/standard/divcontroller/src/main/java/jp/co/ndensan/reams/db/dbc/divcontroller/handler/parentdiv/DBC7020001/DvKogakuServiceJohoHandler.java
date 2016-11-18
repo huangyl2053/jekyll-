@@ -247,8 +247,7 @@ public class DvKogakuServiceJohoHandler {
         }
         batchparam.setShoriJokyo(div
                 .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo().getSelectedKey());
-        batchparam.setShinsaHoho(div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().getSelectedKey());
+        batchparam.setShinsaHoho(RString.EMPTY);
         batchparam.setSanteiKijun(div
                 .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun().getSelectedKey());
         batchparam.setKokuhorenFuicchi(div
