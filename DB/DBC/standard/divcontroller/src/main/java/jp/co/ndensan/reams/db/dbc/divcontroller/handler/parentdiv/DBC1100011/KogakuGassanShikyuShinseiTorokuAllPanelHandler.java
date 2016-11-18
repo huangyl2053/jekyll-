@@ -38,7 +38,6 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -565,13 +564,12 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         EntityDataState 状態 = 高額合算申請書.toEntity().getState();
         if (修正.equals(高額合算申請書状態)) {
             if (EntityDataState.Deleted.equals(状態)) {
-                高額合算申請書.toEntity().setState(EntityDataState.Modified);
                 高額合算申請書.toEntity().setIsDeleted(false);
-                高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ);
+                高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ).modifiedModel();
                 高額合算申請書保持.add高額合算申請書(高額合算申請書);
             } else {
                 高額合算申請書.toEntity().setState(EntityDataState.Modified);
-                高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ);
+                高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ).modifiedModel();
                 高額合算申請書保持.add高額合算申請書(高額合算申請書);
             }
         } else if (追加.equals(高額合算申請書状態)) {
@@ -730,11 +728,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .set対象計算期間終了年月日(rDateToFixibleDate(div.getTxtTaishoKeisanKikanYMD().getToValue()))
                 .set支給申請形態(div.getDdlShikyuShinseiKeitai().getSelectedKey())
                 .set自己負担額証明書交付申請の有無(Collections.EMPTY_LIST.equals(div.getChkKofuShinseiUmu().getSelectedKeys()) ? RSTRING_1 : RSTRING_2)
-                .set申請代表者氏名(div.getTxtDaihyoshaShimei().getValue() == null ? null
-                        : new AtenaMeisho(div.getTxtDaihyoshaShimei().getValue()))
-                .set申請代表者郵便番号(div.getTxtDaihyoshaYubinNo().getValue())
-                .set申請代表者住所(div.getTxtDaihyoshaJusho().getValue())
-                .set申請代表者電話番号(div.getTxtDaihyoshaTelNo().getDomain())
                 .set所得区分(RString.isNullOrEmpty(div.getDdlShotokuKubun().getSelectedValue()) ? null : div.getDdlShotokuKubun().getSelectedKey())
                 .set所得区分_70歳以上の者に係る(div.getDdlOver70ShotokuKubun().getSelectedKey())
                 .set資格喪失年月日(rDateToFixibleDate(div.getTxtShikakuSoshitsuYMD().getValue()))
@@ -754,7 +747,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .set後期被保険者番号(div.getTxtKokiHihokenshaNo().getValue())
                 .set後期加入期間開始年月日(rDateToFixibleDate(div.getTxtKokiKanyuKikanYMD().getFromValue()))
                 .set後期加入期間終了年月日(rDateToFixibleDate(div.getTxtKokiKanyuKikanYMD().getToValue()))
-                .set支払方法区分(div.getCcdShiharaiHohoJoho().getShiharaiHohoRad())
+                .set支払方法区分(RSTRING_2.equals(高額合算申請書保持.get申請状態()) ? RString.EMPTY
+                        : div.getCcdShiharaiHohoJoho().getShiharaiHohoRad())
                 .set支払場所(div.getCcdShiharaiHohoJoho().getShiharaiBasho())
                 .set支払期間開始年月日(rDateToFixibleDate(div.getCcdShiharaiHohoJoho().getStartYMD()))
                 .set支払期間終了年月日(rDateToFixibleDate(div.getCcdShiharaiHohoJoho().getEndYMD()))
@@ -850,7 +844,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     }
 
     private void 申請情報パネル制御(boolean flag) {
-        div.getDdlShinseiTaishoNendo().setReadOnly(flag);
         div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(flag);
         div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(flag);
         div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(flag);
@@ -1205,12 +1198,12 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         pram.setKozaId(口座ID);
         pram.setStartYMD(isNullOrEmptyFlexibleDate(高額合算申請書.get支払期間開始年月日()));
         pram.setStartHHMM(高額合算申請書.get支払期間開始時間() == null ? null
-                : RTime.of(高額合算申請書.get支払期間開始時間().substring(INT_0, INT_2)
+                : new RTime(高額合算申請書.get支払期間開始時間().substring(INT_0, INT_2)
                         .concat(高額合算申請書.get支払期間開始時間().substring(INT_3, INT_5))
                         .concat(高額合算申請書.get支払期間開始時間().substring(INT_6))));
         pram.setEndYMD(isNullOrEmptyFlexibleDate(高額合算申請書.get支払期間終了年月日()));
         pram.setEndHHMM(高額合算申請書.get支払期間終了時間() == null ? null
-                : RTime.of(高額合算申請書.get支払期間終了時間().substring(INT_0, INT_2)
+                : new RTime(高額合算申請書.get支払期間終了時間().substring(INT_0, INT_2)
                         .concat(高額合算申請書.get支払期間終了時間().substring(INT_3, INT_5))
                         .concat(高額合算申請書.get支払期間終了時間().substring(INT_6))));
         pram.setShiharaiBasho(高額合算申請書.get支払場所());
