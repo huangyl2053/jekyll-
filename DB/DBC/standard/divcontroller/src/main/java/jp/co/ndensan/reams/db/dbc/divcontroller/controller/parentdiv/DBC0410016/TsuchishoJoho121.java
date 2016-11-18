@@ -12,7 +12,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderN
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 国保連情報受取データ取込_[121]資格照合表情報のクラスです。
@@ -47,6 +50,8 @@ public class TsuchishoJoho121 {
         FlexibleYearMonth 処理年月 = date == null ? FlexibleYearMonth.EMPTY
                 : new FlexibleYearMonth(date.getYearMonth().toDateString());
         parameter.setShoriYM(処理年月);
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120270_ShikakuShogohyoIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 

@@ -12,7 +12,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderN
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  *
@@ -46,6 +49,8 @@ public class TsuchishoJoho631 {
         DBC120240_SeikyugakuTsuchishoKohiInParameter parameter = new DBC120240_SeikyugakuTsuchishoKohiInParameter();
         RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
         parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120240_SeikyugakuTsuchishoKohiIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 
