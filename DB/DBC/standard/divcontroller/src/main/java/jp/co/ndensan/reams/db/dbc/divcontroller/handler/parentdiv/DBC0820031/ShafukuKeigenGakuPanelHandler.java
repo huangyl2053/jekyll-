@@ -95,6 +95,21 @@ public final class ShafukuKeigenGakuPanelHandler {
         for (ShokanShakaiFukushiHojinKeigengakuResult hojinKeigengakuResult : 法人軽減額リスト) {
             ShokanShakaiFukushiHojinKeigengaku 法人軽減額 = hojinKeigengakuResult.getShokanShakai();
             dgdShafukukeigenngaku_Row row = new dgdShafukukeigenngaku_Row();
+            if (null != 法人軽減額.toEntity().getState()) {
+                switch (法人軽減額.toEntity().getState()) {
+                    case Added:
+                        row.setRowState(RowState.Added);
+                        break;
+                    case Modified:
+                        row.setRowState(RowState.Modified);
+                        break;
+                    case Deleted:
+                        row.setRowState(RowState.Deleted);
+                        break;
+                    default:
+                        break;
+                }
+            }
             row.setDefaultDataName1(hojinKeigengakuResult.getServiceShuruiRyakusho());
             row.setDefaultDataName2(法人軽減額.get軽減率() == null ? RString.EMPTY : new RString(法人軽減額.get軽減率().toString()));
             row.getDefaultDataName3().setValue(new Decimal(法人軽減額.get受領すべき利用者負担の総額()));
@@ -123,6 +138,7 @@ public final class ShafukuKeigenGakuPanelHandler {
      *
      * @param 被保険者番号 被保険者番号
      * @param サービス年月 サービス年月
+     * @param 整理番号 整理番号
      * @param 申請日 申請日
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
@@ -130,11 +146,11 @@ public final class ShafukuKeigenGakuPanelHandler {
      * @return 法人軽減額リスト
      */
     public List<ShokanShakaiFukushiHojinKeigengakuResult> get法人軽減額リスト(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
-            RDate 申請日, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+            RString 整理番号, RDate 申請日, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
         List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト = new ArrayList<>();
         for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource()) {
             ShokanShakaiFukushiHojinKeigengaku 法人軽減額 = new ShokanShakaiFukushiHojinKeigengaku(
-                    被保険者番号, サービス年月, 明細番号, 事業者番号, 様式番号, 明細番号, row.getDefaultDataName7());
+                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, row.getDefaultDataName7());
             法人軽減額 = 法人軽減額.createBuilderForEdit()
                     .setサービス種類コード(new ServiceShuruiCode(row.getServiceShuruiCode()))
                     .set軽減率(new Decimal(row.getDefaultDataName2().toString()))
@@ -521,8 +537,22 @@ public final class ShafukuKeigenGakuPanelHandler {
         dgdShafukukeigenngaku_Row row = getSelectedRow();
         if (RowState.Added == row.getRowState()) {
             div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource().remove(row);
+            reset連番();
         } else {
             row.setRowState(RowState.Deleted);
+        }
+    }
+
+    private void reset連番() {
+        List<dgdShafukukeigenngaku_Row> shafukukeigenngakuRows = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource();
+        if (shafukukeigenngakuRows == null || shafukukeigenngakuRows.isEmpty()) {
+            return;
+        }
+        for (int i = shafukukeigenngakuRows.size(); i > 0; i--) {
+            dgdShafukukeigenngaku_Row row = shafukukeigenngakuRows.get(i - 1);
+            if (RowState.Added == row.getRowState()) {
+                row.setDefaultDataName7(new RString(shafukukeigenngakuRows.size() + 1 - i));
+            }
         }
     }
 
