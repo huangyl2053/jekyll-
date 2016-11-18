@@ -43,6 +43,8 @@ public class TsuchishoJoho632 {
      * @return ResponseData
      */
     public ResponseData<DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter> onClick_btnExcute(TsuchishoJoho632Div div) {
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120900_SogojigyohiSeikyugakuTsuchishoKohiIn");
+        FlowParameterAccessor.merge(fp);
         DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter parameter = setBatchParameter(div);
         return ResponseData.of(parameter).respond();
     }
@@ -66,6 +68,7 @@ public class TsuchishoJoho632 {
         parameter.setSaishoriKubun(再処理区分);
         parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
         parameter.setShutsuryokujunId(出力順ID);
+
         return parameter;
     }
 }

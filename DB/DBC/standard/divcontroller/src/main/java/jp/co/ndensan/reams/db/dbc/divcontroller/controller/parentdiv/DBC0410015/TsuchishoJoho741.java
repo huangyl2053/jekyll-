@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 国保連情報受取データ取込_[741]請求明細・給付管理票返戻（保留）一覧表情報のクラスです。
@@ -54,6 +56,8 @@ public class TsuchishoJoho741 {
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
             parameter.setShoriKubun(SaiShoriKubun.空白);
         }
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120020_HenreiHoryuIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 }
