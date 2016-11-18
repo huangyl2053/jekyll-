@@ -655,9 +655,9 @@
         WHERE fuka."choteiNendo" = #{choteiNendo}
             AND fuka."fukaNendo" = #{choteiNendo}
             AND fuka."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
-            AND (fuka."hokenryoDankai1" IS NULL AND fuka."hokenryoDankai2" IS NULL
+            AND ((NULLIF(fuka."hokenryoDankai1",'') IS NULL) AND (NULLIF(fuka."hokenryoDankai2",'') IS NULL)
                     AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[>=]]> #{調定年度0401} AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[<=]]> #{調定年度0430})
-            OR ((fuka."hokenryoDankai1" IS NOT NULL OR fuka."hokenryoDankai2" IS NOT NULL)
+            OR (((NULLIF(fuka."hokenryoDankai1",'') IS NOT NULL) OR (NULLIF(fuka."hokenryoDankai2",'') IS NOT NULL))
                     AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[>=]]> #{調定年度0401} AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[<=]]> #{調定年度0430})
         ORDER BY fuka."hihokenshaNo", fuka."tsuchishoNo"
     </select>

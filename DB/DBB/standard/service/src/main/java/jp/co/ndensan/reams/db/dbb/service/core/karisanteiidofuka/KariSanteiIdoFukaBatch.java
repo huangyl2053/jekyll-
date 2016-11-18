@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo8Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.TokuchoTeishishaChushutsuMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.csv.KarisanteiIdoKekkaIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
@@ -299,15 +300,36 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     @Transaction
     public void selectTokuchoTeishisha(FlexibleYear 賦課年度, RDateTime 抽出開始日時,
             RDateTime 抽出終了日時) {
-
+        YMDHMS 抽出開始日時Format = new YMDHMS("00000101010000");
+        YMDHMS 抽出終了日時Format = new YMDHMS("99991230235959");
+        if (抽出開始日時 != null) {
+            RString strOne = 抽出開始日時.getDate().toDateString();
+            int hour = 抽出開始日時.getHour();
+            int minute = 抽出開始日時.getMinute();
+            int second = 抽出開始日時.getSecond();
+            RString strTwo = hour < NUM_10 ? RSTRING_0.concat(new RString(hour + "")) : new RString(hour + "");
+            RString strThree = minute < NUM_10 ? RSTRING_0.concat(new RString(minute + "")) : new RString(minute + "");
+            RString strFour = second < NUM_10 ? RSTRING_0.concat(new RString(second + "")) : new RString(second + "");
+            抽出開始日時Format = new YMDHMS(strOne.concat(strTwo).concat(strThree).concat(strFour));
+        }
+        if (抽出終了日時 != null) {
+            RString strOne = 抽出終了日時.getDate().toDateString();
+            int hour = 抽出終了日時.getHour();
+            int minute = 抽出終了日時.getMinute();
+            int second = 抽出終了日時.getSecond();
+            RString strTwo = hour < NUM_10 ? RSTRING_0.concat(new RString(hour + "")) : new RString(hour + "");
+            RString strThree = minute < NUM_10 ? RSTRING_0.concat(new RString(minute + "")) : new RString(minute + "");
+            RString strFour = second < NUM_10 ? RSTRING_0.concat(new RString(second + "")) : new RString(second + "");
+            抽出終了日時Format = new YMDHMS(strOne.concat(strTwo).concat(strThree).concat(strFour));
+        }
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
         builder.setサブ業務コード(SubGyomuCode.DBB介護賦課);
         builder.set業務コード(GyomuCode.DB介護保険);
         IKozaSearchKey searchKey = builder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
-        KariSanteiIdoFukaMybatisParameter parameter = new KariSanteiIdoFukaMybatisParameter(
-                賦課年度, null, 抽出開始日時, 抽出終了日時, searchKey, list, null);
+        TokuchoTeishishaChushutsuMybatisParameter parameter = new TokuchoTeishishaChushutsuMybatisParameter(
+                賦課年度, null, 抽出開始日時Format, 抽出終了日時Format, searchKey, list, null);
         mapper.insert特別徴収停止者(parameter);
     }
 

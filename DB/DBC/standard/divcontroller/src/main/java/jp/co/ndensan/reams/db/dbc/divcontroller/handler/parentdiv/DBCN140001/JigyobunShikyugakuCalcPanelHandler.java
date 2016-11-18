@@ -47,7 +47,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
     private static final RString THREE = new RString("3");
     private static final RString TAISHOSHASEARCH = new RString("taishoshaSearch");
     private static final RString HIHOKENSHANOSHTEI = new RString("hihokenshaNoShitei");
-    private static final int INT_SIX = 7;
+    private static final int INT_SIX = 6;
     private static final int INT_SEVEN = 7;
     private static final FlexibleYear 定値_2014 = new FlexibleYear("2014");
 
