@@ -207,7 +207,7 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set再審査回数1_d(new RString(個人用.get再審査回数1()));
         帳票データ.set過誤回数1_d(new RString(個人用.get過誤回数1()));
         帳票データ.set審査年月1_d(dateFormat年月(個人用.get審査年月1()));
-        帳票データ.setサービスコードﾞ2_d(個人用.getサービスコードﾞ2());
+        帳票データ.setサービスコードﾞ2_d(個人用.getサービスコード2());
         帳票データ.setサービス内容2_d(個人用.getサービス内容2());
         帳票データ.set決定前_単位数2(decToRString(個人用.get決定前_単位数2()));
         帳票データ.set決定後_単位数2(decToRString(個人用.get決定後_単位数2()));
@@ -232,7 +232,7 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set再審査回数2_d(new RString(個人用.get再審査回数2()));
         帳票データ.set過誤回数2_d(new RString(個人用.get過誤回数2()));
         帳票データ.set審査年月2_d(dateFormat年月(個人用.get審査年月2()));
-        帳票データ.setサービスコードﾞ3_d(個人用.getサービスコードﾞ3());
+        帳票データ.setサービスコードﾞ3_d(個人用.getサービスコード3());
         帳票データ.setサービス内容3_d(個人用.getサービス内容3());
         帳票データ.set決定前_単位数3(decToRString(個人用.get決定前_単位数3()));
         帳票データ.set決定後_単位数3(decToRString(個人用.get決定後_単位数3()));
@@ -283,12 +283,12 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set決定後_公費3負担額1(decToRString(個人用.get決定後_公費３負担額1()));
         帳票データ.set決定前_利用者負担額1(decToRString(個人用.get決定前_利用者負担額1()));
         帳票データ.set決定後_利用者負担額1(decToRString(個人用.get決定後_利用者負担額1()));
-        帳票データ.set再審査回数1_k(new RString(個人用.get再審査回数1()));
-        帳票データ.set過誤回数1_k(new RString(個人用.get過誤回数1()));
-        帳票データ.set審査年月1_k(dateFormat年月(個人用.get審査年月1()));
+        帳票データ.set再審査回数1_k(個人用.get特定_再審査回数1());
+        帳票データ.set過誤回数1_k(個人用.get特定_過誤回数1());
+        帳票データ.set審査年月1_k(個人用.get特定_審査年月1());
         帳票データ.set番号2(個人用.get番号2());
         帳票データ.setサービスコードﾞ2_k(個人用.getサービスコードﾞ2());
-        帳票データ.setサービス内容2_k(個人用.getサービス内容2());
+        帳票データ.setサービス内容2_k(個人用.get特定_サービス内容2());
         帳票データ.set決定前_費用単価2(decToRString(個人用.get決定前_費用単価2()));
         帳票データ.set決定後_費用単価2(decToRString(個人用.get決定後_費用単価2()));
         帳票データ.set負担限度額2(decToRString(個人用.get負担限度額2()));
@@ -312,12 +312,12 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set決定後_公費3負担額2(decToRString(個人用.get決定後_公費３負担額2()));
         帳票データ.set決定前_利用者負担額2(decToRString(個人用.get決定前_利用者負担額2()));
         帳票データ.set決定後_利用者負担額2(decToRString(個人用.get決定後_利用者負担額2()));
-        帳票データ.set再審査回数2_k(new RString(個人用.get再審査回数2()));
-        帳票データ.set過誤回数2_k(new RString(個人用.get過誤回数2()));
-        帳票データ.set審査年月2_k(dateFormat年月(個人用.get審査年月2()));
+        帳票データ.set再審査回数2_k(個人用.get特定_再審査回数2());
+        帳票データ.set過誤回数2_k(個人用.get特定_過誤回数2());
+        帳票データ.set審査年月2_k(個人用.get特定_審査年月2());
         帳票データ.set番号3(個人用.get番号3());
         帳票データ.setサービスコードﾞ3_k(個人用.getサービスコードﾞ3());
-        帳票データ.setサービス内容3_k(個人用.getサービス内容3());
+        帳票データ.setサービス内容3_k(個人用.get特定_サービス内容3());
         帳票データ.set決定前_費用単価3(decToRString(個人用.get決定前_費用単価3()));
         帳票データ.set決定後_費用単価3(decToRString(個人用.get決定後_費用単価3()));
         帳票データ.set負担限度額3(decToRString(個人用.get負担限度額3()));
@@ -341,14 +341,14 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set決定後_公費3負担額3(decToRString(個人用.get決定後_公費３負担額3()));
         帳票データ.set決定前_利用者負担額3(decToRString(個人用.get決定前_利用者負担額3()));
         帳票データ.set決定後_利用者負担額3(decToRString(個人用.get決定後_利用者負担額3()));
-        帳票データ.set再審査回数3_k(new RString(個人用.get再審査回数3()));
-        帳票データ.set過誤回数3_k(new RString(個人用.get過誤回数3()));
+        帳票データ.set再審査回数3_k(個人用.get特定_再審査回数3());
+        帳票データ.set過誤回数3_k(個人用.get特定_過誤回数3());
         return 帳票データ;
     }
 
     private static JukyushaKyufuJissekidaichoData set帳票データ3(JukyushaKyufuJissekidaichoData 帳票データ,
             KojinyoTyohyoDataKomoku 個人用) {
-        帳票データ.set審査年月3_k(dateFormat年月(個人用.get審査年月3()));
+        帳票データ.set審査年月3_k(個人用.get特定_審査年月3());
         帳票データ.set決定前_費用額合計_合計情報(decToRString(個人用.get決定前_費用額合計_合計情報()));
         帳票データ.set決定後_費用額合計_合計情報(decToRString(個人用.get決定後_費用額合計_合計情報()));
         帳票データ.set決定前_保険分請求額合計_合計情報(decToRString(個人用.get決定前_保険分請求額合計_合計情報()));
