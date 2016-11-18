@@ -781,7 +781,7 @@ public class HanyoListParamHandler {
         } else {
             para.setCyusyutsuhohokubun(ChushutsuHohoKubun.年度基準日.getコード());
         }
-        if (年度基準日KEY.equals(div.getRadChushutsuJokenA2().getSelectedKey())) {
+        if (年度基準日KEY.equals(div.getRadChushutsuJokenA1().getSelectedKey())) {
             RString 年度 = div.getDdlKijunNendo().getSelectedKey();
             RDate date = div.getTxtKijunDateA().getValue();
             if (!RString.isNullOrEmpty(年度)) {
