@@ -829,41 +829,6 @@ public class TokuteiShinryohiPanelHandler {
         div.getPanelFive().setVisible(false);
     }
 
-//    public ShomeishoNyuryokuKubunType is画面入力あり(FlexibleYearMonth サービス年月) {
-//        if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
-//            for (ddgToteishinryoTokubetushinryo_Row ddgList : div.getDdgToteishinryoTokubetushinryo().getDataSource()) {
-//                if (RowState.Added.equals(ddgList.getRowState())) {
-//                    return ShomeishoNyuryokuKubunType.入力あり;
-//                }
-//            }
-//        }
-//        if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
-//            for (dgdTokuteiShinryohi_Row dgdRow : div.getDgdTokuteiShinryohi().getDataSource()) {
-//                if (RowState.Added.equals(dgdRow.getRowState())) {
-//                    return ShomeishoNyuryokuKubunType.入力あり;
-//                }
-//            }
-//        }
-//        return ShomeishoNyuryokuKubunType.入力なし;
-//    }
-//
-//    public boolean is画面変更あり(FlexibleYearMonth サービス年月) {
-//        if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
-//            for (ddgToteishinryoTokubetushinryo_Row ddgList : div.getDdgToteishinryoTokubetushinryo().getDataSource()) {
-//                if (RowState.Modified.equals(ddgList.getRowState()) || RowState.Deleted.equals(ddgList.getRowState())) {
-//                    return true;
-//                }
-//            }
-//        }
-//        if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
-//            for (dgdTokuteiShinryohi_Row dgdRow : div.getDgdTokuteiShinryohi().getDataSource()) {
-//                if (RowState.Modified.equals(dgdRow.getRowState()) || RowState.Deleted.equals(dgdRow.getRowState())) {
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
     /**
      * 内容変更状態のメソッドます。
      *
