@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  *
@@ -546,8 +547,8 @@ public class NonyuTsuchiShoDataHenshu {
     private void set納付額欄(boolean is現金納付, boolean is口座振替,
             NonyuTsuchiShoKiJoho 納入通知書期情報, Decimal 納付額, NonyuTsuchiShoSeigyoJoho 納入通知書制御情報) {
         if (is現金納付) {
-            納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
-            納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
+            納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
+            納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
         } else if (is口座振替) {
             NofugakuranHyojiKubun 納付書納付額欄 = 納入通知書制御情報.get納付書納付額欄();
             if (NofugakuranHyojiKubun.口座振替を印字する.equals(納付書納付額欄)) {
@@ -560,8 +561,8 @@ public class NonyuTsuchiShoDataHenshu {
                 納入通知書期情報.set領収証書納付額欄(星10);
                 納入通知書期情報.set納付書納付額欄(星10);
             } else if (NofugakuranHyojiKubun.金額出力.equals(納付書納付額欄)) {
-                納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
-                納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
+                納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
+                納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
             }
         }
     }

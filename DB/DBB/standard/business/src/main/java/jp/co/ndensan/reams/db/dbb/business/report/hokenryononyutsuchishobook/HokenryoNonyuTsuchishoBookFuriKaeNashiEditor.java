@@ -52,6 +52,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
     private static final int INT1 = 1;
     private static final int INT2 = 2;
     private static final int INT3 = 3;
+    private static final int INT4 = 4;
+    private static final int INT5 = 5;
     private static final int INT6 = 6;
     private static final int LIST_SIZE_1 = 1;
     private static final int LIST_SIZE_2 = 2;
@@ -483,15 +485,15 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
                 if (特徴収入情報.get期月() == null) {
                     continue;
                 }
-                if (new RString("4").equals(特徴収入情報.get期月().get期())) {
+                if (INT4 == 特徴収入情報.get期月().get期AsInt()) {
                     納期別明細書特徴納付済額１ = 特徴収入情報.get収入額();
                     source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku1 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額１, 0);
                 }
-                if (new RString("5").equals(特徴収入情報.get期月().get期())) {
+                if (INT5 == 特徴収入情報.get期月().get期AsInt()) {
                     納期別明細書特徴納付済額２ = 特徴収入情報.get収入額();
                     source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku2 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額２, 0);
                 }
-                if (new RString("6").equals(特徴収入情報.get期月().get期())) {
+                if (INT6 == 特徴収入情報.get期月().get期AsInt()) {
                     納期別明細書特徴納付済額３ = 特徴収入情報.get収入額();
                     source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku3 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額３, 0);
                 }

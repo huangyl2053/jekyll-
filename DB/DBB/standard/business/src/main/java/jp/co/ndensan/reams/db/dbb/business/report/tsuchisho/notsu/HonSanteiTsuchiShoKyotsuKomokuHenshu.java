@@ -533,10 +533,14 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private List<SpecialIncomeInformation> get特徴収入情報リスト(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
+        List<SpecialIncomeInformation> 特徴収入情報リスト = new ArrayList<>();
         ShunyuJoho 収入情報 = 本算定通知書情報.get収入情報();
+        if (null == 収入情報) {
+            return 特徴収入情報リスト;
+        }
         TokuchoKiUtil fuchoKiUtil = new TokuchoKiUtil();
         KitsukiList 特徴期月リスト = fuchoKiUtil.get期月リスト();
-        List<SpecialIncomeInformation> 特徴収入情報リスト = new ArrayList<>();
+
         for (int i = 1; i <= 特徴期月リスト.getLast().get期AsInt(); i++) {
             SpecialIncomeInformation info = new SpecialIncomeInformation();
             info.set期月(特徴期月リスト.get期の最初月(i));
@@ -555,10 +559,13 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private List<SamantabhadraIncomeInformation> get普徴収入情報リスト(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
+        List<SamantabhadraIncomeInformation> 普徴収入情報リスト = new ArrayList<>();
         ShunyuJoho 収入情報 = 本算定通知書情報.get収入情報();
+        if (null == 収入情報) {
+            return 普徴収入情報リスト;
+        }
         FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
         KitsukiList 普徴期月リスト = fuchoKiUtil.get期月リスト();
-        List<SamantabhadraIncomeInformation> 普徴収入情報リスト = new ArrayList<>();
         for (int i = 1; i <= 普徴期月リスト.getLast().get期AsInt(); i++) {
             SamantabhadraIncomeInformation info = new SamantabhadraIncomeInformation();
             info.set調定年度(収入情報.get調定年度());
