@@ -84,6 +84,7 @@ public class KubunShikyuGendogaku {
         if (div.getBtnTsuika().isDisabled()) {
             onSelect_Back(div);
         }
+        handler.setEnable();
         return ResponseData.of(div).respond();
     }
 
