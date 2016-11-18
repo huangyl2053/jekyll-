@@ -63,7 +63,8 @@ public class FutanGendogakuNinteiShinseisho {
     /**
      * {@link InstanceProvider#create}にて生成した{@link FutanGendogakuNinteiShinseisho}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link FutanGendogakuNinteiShinseisho}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link FutanGendogakuNinteiShinseisho}のインスタンス
      */
     public static FutanGendogakuNinteiShinseisho createInstance() {
         return InstanceProvider.create(FutanGendogakuNinteiShinseisho.class);
@@ -103,7 +104,7 @@ public class FutanGendogakuNinteiShinseisho {
     }
 
     private List<FutangendogakuNinteiShinseishoReport> toReports(HihokenshaKihonBusiness business, ShikibetsuCode 識別コード) {
-        RString 認証者 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate());
+        RString 認証者 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         List<FutangendogakuNinteiShinseishoReport> list = new ArrayList<>();
         RString 申請文 = get帳票文言(1);
         RString 注意文 = get帳票文言(2);
