@@ -121,7 +121,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         YMDHMS システム日時 = YMDHMS.now();
         RString 作成年月日 = new FlexibleDate(システム日時.toString().substring(NUM_0, NUM_8))
                 .wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().substring(NUM_0, NUM_8);
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時分 = new RString(システム日時.toString().substring(NUM_8, NUM_10).concat(時.toString())
                 .concat(システム日時.toString().substring(NUM_10, NUM_12)).concat(分.toString()));
         RString 作成秒 = new RString(システム日時.toString().substring(NUM_12, NUM_14).concat(秒.toString()));
