@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshumidoteiichiran
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshumidoteiichiran.TokubetsuChoshuMidoteiIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -54,6 +55,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     private static final List<RString> 住民種別日本人 = new ArrayList<>();
     private static final List<RString> 住民種別外国人 = new ArrayList<>();
     private final List<RString> 出力順項目リスト;
+    private final Map<RString, RString> 改頁項目Map;
     private final List<RString> 改頁項目リスト;
     private final Association association;
     private final RString 特徴開始月;
@@ -64,6 +66,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
      *
      * @param 特徴対象一覧未同定 TokushoTaishioIchiranMidoteiEntity
      * @param 出力順項目リスト List<RString>
+     * @param 改頁項目Map Map<RString, RString>
      * @param 改頁項目リスト List<RString>
      * @param 特徴開始月 特徴開始月
      * @param association Association
@@ -71,11 +74,13 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     public TokubetsuChoshuMidoteiIchiranEditor(
             TokushoTaishioIchiranMidoteiEntity 特徴対象一覧未同定,
             List<RString> 出力順項目リスト,
+            Map<RString, RString> 改頁項目Map,
             List<RString> 改頁項目リスト,
             RString 特徴開始月,
             Association association) {
         this.特徴対象一覧未同定 = 特徴対象一覧未同定;
         this.出力順項目リスト = 出力順項目リスト;
+        this.改頁項目Map = 改頁項目Map;
         this.改頁項目リスト = 改頁項目リスト;
         this.association = association;
         this.特徴開始月 = 特徴開始月;
@@ -270,18 +275,18 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         if (改頁項目リスト == null || 改頁項目リスト.isEmpty()) {
             return;
         }
-        source.kaiPageArea1 = 改頁項目リスト.get(NUM_0);
+        source.kaiPageArea1 = 改頁項目Map.get(改頁項目リスト.get(NUM_0));
         if (改頁項目リスト.size() > NUM_1) {
-            source.kaiPageArea2 = 改頁項目リスト.get(NUM_1);
+            source.kaiPageArea2 = 改頁項目Map.get(改頁項目リスト.get(NUM_1));
         }
         if (改頁項目リスト.size() > NUM_2) {
-            source.kaiPageArea3 = 改頁項目リスト.get(NUM_2);
+            source.kaiPageArea3 = 改頁項目Map.get(改頁項目リスト.get(NUM_2));
         }
         if (改頁項目リスト.size() > NUM_3) {
-            source.kaiPageArea4 = 改頁項目リスト.get(NUM_3);
+            source.kaiPageArea4 = 改頁項目Map.get(改頁項目リスト.get(NUM_3));
         }
         if (改頁項目リスト.size() > NUM_4) {
-            source.kaiPageArea5 = 改頁項目リスト.get(NUM_4);
+            source.kaiPageArea5 = 改頁項目Map.get(改頁項目リスト.get(NUM_4));
         }
     }
 
