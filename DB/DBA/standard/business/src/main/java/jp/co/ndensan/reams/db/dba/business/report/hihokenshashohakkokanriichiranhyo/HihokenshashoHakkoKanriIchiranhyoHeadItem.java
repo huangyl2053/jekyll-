@@ -20,7 +20,7 @@ import lombok.Setter;
 public class HihokenshashoHakkoKanriIchiranhyoHeadItem {
 
     private final RString printTimeStamp;
-    private final RString pageCount;
+    private final int pageCount;
     private final RString title;
     private final RString shichosonCode;
     private final RString shichosonName;
@@ -56,7 +56,7 @@ public class HihokenshashoHakkoKanriIchiranhyoHeadItem {
      */
     public HihokenshashoHakkoKanriIchiranhyoHeadItem(
             RString printTimeStamp,
-            RString pageCount,
+            int pageCount,
             RString title,
             RString shichosonCode,
             RString shichosonName,

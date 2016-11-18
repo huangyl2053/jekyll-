@@ -76,9 +76,21 @@ public enum ReportIdDBA {
      */
     DBA800003(new ReportId("DBA800003_HihokenshashoSaikoufuShinseisho"), new RString("介護保険被保険者証等再交付申請書")),
     /**
-     * 被保険者証発行管理一覧表の帳票ＩＤです。
+     * 被保険者証発行管理リストの帳票ＩＤです。
      */
-    DBA200004(new ReportId("DBA200004_HihokenshashoHakkoKanriIchiranhyo"), new RString("被保険者証発行管理一覧表")),
+    DBA200004(new ReportId("DBA200004_HihokenshashoHakkoKanriIchiranhyo"), new RString("被保険者証発行管理リスト")),
+    /**
+     * 被保険者証未回収者リストの帳票ＩＤです。
+     */
+    DBA201004(new ReportId("DBA201004_HihokenshashoMikaishushaIchiranhyo"), new RString("被保険者証未回収者リスト")),
+    /**
+     * 資格者証発行管理リストの帳票ＩＤです。
+     */
+    DBA202004(new ReportId("DBA202004_ShikakushashoHakkoKanriIchiranhyo"), new RString("資格者証発行管理リスト")),
+    /**
+     * 資格者証未回収者リストの帳票ＩＤです。
+     */
+    DBA203004(new ReportId("DBA203004_ShikakushashoMikaishushaIchiranhyo"), new RString("資格者証未回収者リスト")),
     /**
      * 介護保険被保険者証等再交付申請書の帳票ＩＤです。
      */

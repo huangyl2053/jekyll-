@@ -6,8 +6,12 @@
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichiranhyo;
 
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakkoKanriboChohyoDataSakuseiEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihokenshashoHakkoKanriIchiranhyoEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 被保険者証発行管理一覧表ヘッダEditorクラスです。
@@ -21,7 +25,7 @@ public class HihokenshashoHakkoKanriIchiranhyoEditor implements IHihokenshashoHa
     /**
      * インスタンスを生成します。
      *
-     * @param entity {@link HihokenshashoHakkoKanriIchiranhyoEntity}
+     * @param entity {@link HihohenshashoHakkoKanriboChohyoDataSakuseiEntity}
      */
     protected HihokenshashoHakkoKanriIchiranhyoEditor(HihohenshashoHakkoKanriboChohyoDataSakuseiEntity entity) {
         this.entity = entity;
@@ -54,44 +58,32 @@ public class HihokenshashoHakkoKanriIchiranhyoEditor implements IHihokenshashoHa
         source.shutsuryokujun5 = entity.getソート順５();
         source.yubinNo = entity.get郵便番号();
 
-//        source.printTimeStamp = entity.getPrintTimeStamp();
-//        source.title = entity.getTitle();
-//        source.shichosonCode = entity.getShichosonCode();
-//        source.shichosonName = entity.getShichosonName();
-//        source.kaipage1 = entity.getKaipage1();
-//        source.kaipage2 = entity.getKaipage2();
-//        source.kaipage3 = entity.getKaipage3();
-//        source.kaipage4 = entity.getKaipage4();
-//        source.kaipage5 = entity.getKaipage5();
-//        source.shutsuryokujun1 = entity.getShutsuryokujun1();
-//        source.shutsuryokujun2 = entity.getShutsuryokujun2();
-//        source.shutsuryokujun3 = entity.getShutsuryokujun3();
-//        source.shutsuryokujun4 = entity.getShutsuryokujun4();
-//        source.shutsuryokujun5 = entity.getShutsuryokujun5();
-//        source.listUpper_1 = entity.getListUpper_1();
-//        source.listUpper_2 = entity.getListUpper_2();
-//        source.listUpper_3 = entity.getListUpper_3();
-//        source.listUpper_4 = entity.getListUpper_4();
-//        source.listUpper_5 = entity.getListUpper_5();
-//        source.listUpper_6 = entity.getListUpper_6();
-//        source.listUpper_7 = entity.getListUpper_7();
-//        source.listUpper_8 = entity.getListUpper_8();
-//        source.listLower_1 = entity.getListLower_1();
-//        source.listLower_2 = entity.getListLower_2();
-//        source.listLower_3 = entity.getListLower_3();
-//        source.listLower_4 = entity.getListLower_4();
-//        source.listLower_5 = entity.getListLower_5();
-//        source.listLower_6 = entity.getListLower_6();
-//        source.listLower_7 = entity.getListLower_7();
-//        source.yubinNo = entity.getYubinNo();
-//        source.choikiCode = entity.getChoikiCode();
-//        source.gyoseikuCode = entity.getGyoseikuCode();
-//        source.kanaMeisho = entity.getKanaMeisho();
+        source.listUpper_1 = entity.get被保険者番号();
+        source.listUpper_2 = entity.get識別コード();
+        source.listUpper_3 = entity.get氏名();
+        source.listUpper_4 = entity.get交付年月日Str();
+        source.listUpper_5 = entity.get交付事由コード();
+        source.listUpper_6 = entity.get交付事由名称();
+        source.listUpper_7 = entity.get有効期限Str();
+        source.listLower_1 = entity.get市町村コードListYou();
+        source.listLower_2 = entity.get郵便番号();
+        source.listLower_3 = entity.get住所();
+        source.listLower_4 = entity.get回収年月日Str();
+        source.listLower_5 = entity.get回収事由コード();
+        source.listLower_6 = entity.get回収事由名称();
+        source.listLower_7 = entity.get様式();
 
-//        source.shikibetuCode = new ShikibetsuCode(entity.getListUpper_2());
-//        if (!RString.isNullOrEmpty(entity.getListUpper_1())) {
-//            source.shinseishoKanriNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), entity.getListUpper_1());
-//        }
+        if (!RString.isNullOrEmpty(entity.get識別コード()) && RStringUtil.isHalfsizeNumberOnly(entity.get識別コード())) {
+            source.shikibetuCode = new ShikibetsuCode(entity.get識別コード());
+        } else {
+            source.shikibetuCode = ShikibetsuCode.EMPTY;
+        }
+        if (!RString.isNullOrEmpty(entity.get被保険者番号())) {
+            source.shinseishoKanriNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), entity.get被保険者番号());
+        }
+
+        source.hiddenPageBreaker = entity.get隠し改頁項目();
+
         return source;
     }
 }
