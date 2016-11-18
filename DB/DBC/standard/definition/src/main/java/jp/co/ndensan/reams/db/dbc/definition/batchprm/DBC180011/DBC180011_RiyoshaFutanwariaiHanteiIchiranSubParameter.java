@@ -40,6 +40,8 @@ public class DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter extends Batch
     private RDateTime chushutsuShuryonichiNichiji;
     @BatchParameter(key = "testMode", name = "テストモード")
     private boolean testMode;
+    @BatchParameter(key = "shoriJotai", name = "処理状態")
+    private boolean shoriJotai;
     @BatchParameter(key = "nendoShuryoNengappi", name = "年度終了年月日")
     private FlexibleDate nendoShuryoNengappi;
     @BatchParameter(key = "shoriNichiji", name = "処理日時")
@@ -48,8 +50,6 @@ public class DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter extends Batch
     private List<RString> hanteiKijunbi;
     @BatchParameter(key = "taishoGetsu", name = "対象月")
     private List<RString> taishoGetsu;
-    @BatchParameter(key = "chushutuKaisu", name = "抽出回数")
-    private Integer chushutuKaisu;
     private List<RString> 対象開始日;
     private List<RString> 対象終了日;
 }

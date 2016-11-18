@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshudoteiichiran;
 
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran.TokushoTaishioIchiranEntity;
@@ -35,12 +36,13 @@ public class TokubetsuChoshuDoteiIchiranPrintService {
      *
      * @param 特別徴収同定一覧情報entityList 特別徴収同定一覧情報entityList
      * @param 出力順リスト 出力順リスト
+     * @param 改頁項目Map 改頁項目Map
      * @param 改頁リスト 改頁リスト
      * @param reportManager ReportManager
      * @param 特徴開始月 特徴開始月
      */
     public void print(List<TokushoTaishioIchiranEntity> 特別徴収同定一覧情報entityList, List<RString> 出力順リスト,
-            List<RString> 改頁リスト, ReportManager reportManager,
+            Map<RString, RString> 改頁項目Map, List<RString> 改頁リスト, ReportManager reportManager,
             RString 特徴開始月) {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         TokubetsuChoshuDoteiIchiranProperty property = new TokubetsuChoshuDoteiIchiranProperty();
@@ -49,7 +51,7 @@ public class TokubetsuChoshuDoteiIchiranPrintService {
                     = new ReportSourceWriter(assembler);
             for (TokushoTaishioIchiranEntity entity : 特別徴収同定一覧情報entityList) {
                 TokubetsuChoshuDoteiIchiranReport report = new TokubetsuChoshuDoteiIchiranReport(
-                        association, 出力順リスト, 改頁リスト, entity, 特徴開始月);
+                        association, 出力順リスト, 改頁項目Map, 改頁リスト, entity, 特徴開始月);
                 report.writeBy(reportSourceWriter);
             }
         }
@@ -60,17 +62,19 @@ public class TokubetsuChoshuDoteiIchiranPrintService {
      *
      * @param 特別徴収同定一覧情報entityList List<TokushoTaishioIchiranEntity>
      * @param 出力順リスト 出力順リスト
+     * @param 改頁項目Map 改頁項目Map
      * @param 改頁リスト 改頁リスト
      * @param 特徴開始月 特徴開始月
      * @return SourceDataCollection
      */
     public SourceDataCollection printChohyo(List<TokushoTaishioIchiranEntity> 特別徴収同定一覧情報entityList,
             List<RString> 出力順リスト,
+            Map<RString, RString> 改頁項目Map,
             List<RString> 改頁リスト,
             RString 特徴開始月) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(特別徴収同定一覧情報entityList, 出力順リスト, 改頁リスト, reportManager, 特徴開始月);
+            print(特別徴収同定一覧情報entityList, 出力順リスト, 改頁項目Map, 改頁リスト, reportManager, 特徴開始月);
             collection = reportManager.publish();
         }
         return collection;
