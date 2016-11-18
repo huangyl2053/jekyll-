@@ -609,7 +609,9 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.setShinseiYMD(new FlexibleDate(利用者負担Info.get(ORDER_2)));
         entity.setKetteiYMD(new FlexibleDate(利用者負担Info.get(ORDER_3)));
         entity.setRirekiNo(Integer.parseInt(利用者負担Info.get(ORDER_4).toString()));
-        entity.setKyuhuritsu(new HokenKyufuRitsu(new Decimal(利用者負担Info.get(ORDER_5).toString())));
+        if (!RString.isNullOrEmpty(利用者負担Info.get(ORDER_5))) {
+            entity.setKyuhuritsu(new HokenKyufuRitsu(new Decimal(利用者負担Info.get(ORDER_5).toString())));
+        }
         return entity;
     }
 
@@ -654,7 +656,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         List<RString> 社福減免Info = 社福減免.split(SPLIT.toString());
         entity.set適用開始日(new FlexibleDate(社福減免Info.get(ORDER_0)));
         entity.set適用終了日(new FlexibleDate(社福減免Info.get(ORDER_1)));
-        entity.set履歴番号(Integer.parseInt(社福減免Info.get(ORDER_3).toString()));
+        entity.set履歴番号(Integer.parseInt(社福減免Info.get(ORDER_4).toString()));
         return entity;
     }
 

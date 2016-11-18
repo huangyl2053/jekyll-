@@ -1161,6 +1161,9 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
     private boolean get総合事業対象者状況(List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List) {
         boolean 総合事業対象者状況 = false;
         for (DbT3105SogoJigyoTaishoshaEntity 総合事業対象者 : 総合事業対象者List) {
+            if (isDateEmpty(総合事業対象者.getTekiyoKaishiYMD())) {
+                continue;
+            }
             if (チェック_DATE.isBefore(総合事業対象者.getTekiyoKaishiYMD())) {
                 総合事業対象者状況 = true;
                 break;

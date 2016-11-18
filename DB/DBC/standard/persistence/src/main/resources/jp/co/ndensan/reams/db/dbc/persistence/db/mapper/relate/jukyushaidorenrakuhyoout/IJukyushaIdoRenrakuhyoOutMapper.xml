@@ -482,7 +482,8 @@
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
         WHERE "DbT1004ShisetsuNyutaisho"."daichoShubetsu" = '1' AND "DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui" IN ('11','12')
-         AND ("DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" <![CDATA[>=]]> '20150401' OR "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" = '')
+         AND ("DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" <![CDATA[>=]]> '20150401' 
+         OR "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" = '' OR "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" IS NULL)
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_住所地特例" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">

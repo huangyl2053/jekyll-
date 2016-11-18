@@ -132,7 +132,7 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
         if (利用者負担.getKyuhuritsu() == null) {
             全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
         } else {
-            全項目 = 全項目.concat(利用者負担.getKyuhuritsu().toString()).concat(SPLIT);
+            全項目 = 全項目.concat(利用者負担.getKyuhuritsu().getColumnValue().toString()).concat(SPLIT);
         }
         全項目 = 全項目.concat(利用者負担.getShoKisaiHokenshaNo().getColumnValue()).concat(SPLIT)
                 .concat(利用者負担.getHihokenshaNo().getColumnValue()).concat(SPLIT)
