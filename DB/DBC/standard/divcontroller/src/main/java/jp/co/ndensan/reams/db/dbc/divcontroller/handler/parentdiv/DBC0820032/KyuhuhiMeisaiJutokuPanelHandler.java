@@ -203,6 +203,8 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             if (flag) {
                 row.setRowState(RowState.Modified);
                 setDgJushochiTokutei(row, state);
+            } else {
+                row.setRowState(RowState.Unchanged);
             }
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(row.getRowState())) {
@@ -320,7 +322,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
     }
 
     private RString getMax連番プラス1(List<dgJushochiTokutei_Row> list) {
-        int 連番 = 0;
+        int 連番 = 1;
         for (dgJushochiTokutei_Row ddgRow : list) {
             if (連番 <= ddgRow.getDefaultDataName7().toInt()) {
                 連番 = ddgRow.getDefaultDataName7().toInt() + 1;
@@ -440,9 +442,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             entity = entity.createBuilderForEdit().set施設所在保険者番号(
                     new ShoKisaiHokenshaNo(row.getDefaultDataName6())).build();
         }
-
         return entity;
-
     }
 
     private ShokanMeisaiJushochiTokurei clearshokanMeisaii(ShokanMeisaiJushochiTokurei entityModified) {

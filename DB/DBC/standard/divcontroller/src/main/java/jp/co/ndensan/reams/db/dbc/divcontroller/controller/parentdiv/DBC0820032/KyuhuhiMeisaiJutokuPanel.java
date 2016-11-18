@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032.DBC0820032StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032.DBC0820032TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032.KyuhuhiMeisaiJutokuPanelDiv;
@@ -58,7 +58,6 @@ public class KyuhuhiMeisaiJutokuPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final RString エーラメッセージ = new RString("請求額集計情報の未登録のサービス種類が存在します。請求額集計情報を登録して下さい。");
 
     /**
      * onLoad事件
@@ -322,16 +321,11 @@ public class KyuhuhiMeisaiJutokuPanel {
             KyuhuhiMeisaiJutokuPanelDiv div, DbJohoViewState dbJoho, ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         ShomeishoNyuryokuFlag nyuryokuFlag = new ShomeishoNyuryokuFlag();
-        ShomeishoHenkoFlag henkoFlag = new ShomeishoHenkoFlag();
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap = get証明書入力済フラグMap(dbJoho);
-        Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = get証明書変更済フラグMap(dbJoho);
         if (null != 証明書入力済フラグMap.get(kensakuParameter)) {
             nyuryokuFlag = 証明書入力済フラグMap.get(kensakuParameter);
         }
-        if (null != 証明書入力済フラグMap.get(kensakuParameter)) {
-            henkoFlag = 証明書変更済フラグMap.get(kensakuParameter);
-        }
-        set証明書フラグ(処理モード, getHandler(div).is内容変更状態(), nyuryokuFlag, 証明書入力済フラグMap, kensakuParameter, dbJoho, henkoFlag, 証明書変更済フラグMap);
+        set証明書フラグ(処理モード, getHandler(div).is内容変更状態(), nyuryokuFlag, 証明書入力済フラグMap, kensakuParameter, dbJoho);
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
         return nyuryokuFlag;
     }
@@ -339,8 +333,8 @@ public class KyuhuhiMeisaiJutokuPanel {
     private void set証明書フラグ(
             RString 処理モード, boolean is変更あり, ShomeishoNyuryokuFlag nyuryokuFlag,
             Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap,
-            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter, DbJohoViewState dbJoho, ShomeishoHenkoFlag henkoFlag,
-            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap) {
+            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter, DbJohoViewState dbJoho
+    ) {
         if (登録.equals(処理モード)) {
             if (is変更あり) {
                 nyuryokuFlag.set特定入所者費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力あり);
@@ -349,15 +343,6 @@ public class KyuhuhiMeisaiJutokuPanel {
             }
             証明書入力済フラグMap.put(kensakuParameter, nyuryokuFlag);
             dbJoho.set証明書入力済フラグMap(証明書入力済フラグMap);
-        }
-        if (修正.equals(処理モード)) {
-            if (is変更あり) {
-                henkoFlag.set特定入所者費用_証明書変更済フラグ(ShomeishoHenkoKubunType.変更あり);
-            } else {
-                henkoFlag.set特定入所者費用_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
-            }
-            証明書変更済フラグMap.put(kensakuParameter, henkoFlag);
-            dbJoho.set証明書変更済フラグMap(証明書変更済フラグMap);
         }
     }
 
@@ -368,7 +353,7 @@ public class KyuhuhiMeisaiJutokuPanel {
             kanryoFlagMap = new HashMap<>();
         }
         if (証明書入力完了区分 == ShomeishoNyuryokuKanryoKubunType.入力未完了) {
-            throw new ApplicationException(エーラメッセージ.toString());
+            throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.toString());
         }
         kanryoFlagMap.put(kensakuParameter, ShomeishoNyuryokuKanryoKubunType.入力完了);
         dbJoho.set証明書入力完了フラグMap(kanryoFlagMap);
