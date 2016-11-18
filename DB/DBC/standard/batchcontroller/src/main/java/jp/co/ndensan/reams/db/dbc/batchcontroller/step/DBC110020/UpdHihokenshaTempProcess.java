@@ -131,9 +131,14 @@ public class UpdHihokenshaTempProcess extends BatchProcessBase<IdouTempEntity> {
         全項目 = 全項目.concat(被保険者台帳.getShichosonCode().getColumnValue()).concat(SPLIT);
         LasdecCode 広住特措置元市町村コード = 被保険者台帳.getKoikinaiTokureiSochimotoShichosonCode();
         if (広住特措置元市町村コード != null) {
-            全項目 = 全項目.concat(広住特措置元市町村コード.getColumnValue());
+            全項目 = 全項目.concat(広住特措置元市町村コード.getColumnValue()).concat(SPLIT);
         } else {
-            全項目 = 全項目.concat(RString.EMPTY);
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        }
+        if (RString.isNullOrEmpty(被保険者台帳.getShikakuShutokuJiyuCode())) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(被保険者台帳.getShikakuShutokuJiyuCode()).concat(SPLIT);
         }
         return 全項目;
     }

@@ -1120,7 +1120,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List,
             List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 二割負担List,
             PSMInfoEntity 宛名情報) {
-        if (受給者台帳List.isEmpty() || 二割負担List.isEmpty() || 総合事業対象者List.isEmpty()) {
+        if (受給者台帳List.isEmpty() || 総合事業対象者List.isEmpty()) {
             return;
         }
         boolean 受給者状況 = get受給者状況(受給者台帳List);
