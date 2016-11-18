@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyoBuild
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_JukyushaIdoJiyu;
-import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_NijiyoboJigyoKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_ShokiboKyotakuServiceRIyoCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TeiseiKubunCode;
@@ -713,6 +712,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         } else if (JukyushaIF_kyotakuServiceSakuseiKubunCode.自己作成.getコード().equals(計画作成区分Key)) {
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setDisabled(true);
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().clearValue();
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().clearValue();
             div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setDisabled(false);
             div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setDisabled(false);
         } else if (JukyushaIF_kyotakuServiceSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(計画作成区分Key)
@@ -754,10 +754,10 @@ public class JukyushaIdoRenrakuhyoHandler {
             return;
         }
         RString 計画作成区分;
-        if (JukyushaIF_KeikakuSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(計画作成区分Key)) {
-            計画作成区分 = JukyushaIF_KeikakuSakuseiKubunCode.居宅介護支援事業所作成.getコード();
+        if (JukyushaIF_kyotakuServiceSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(計画作成区分Key)) {
+            計画作成区分 = JukyushaIF_kyotakuServiceSakuseiKubunCode.居宅介護支援事業所作成.getコード();
         } else {
-            計画作成区分 = JukyushaIF_KeikakuSakuseiKubunCode.介護予防支援事業所_地域包括支援センター作成.getコード();
+            計画作成区分 = JukyushaIF_kyotakuServiceSakuseiKubunCode.介護予防支援事業所作成.getコード();
         }
         FlexibleDate 異動日 = div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().getValue();
         if (異動日 == null) {
