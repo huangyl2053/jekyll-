@@ -40,6 +40,7 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
     private final IdoRiyoshaFutanwariaiHanteiDiv div;
     private static final int ななしち月 = 7;
     private static final int いち年 = 1;
+    private static final int 抽出回数_1 = 1;
     private static final RString 処理区分_異動 = new RString("2");
     private static final int INDEX_処理年度 = 0;
     private static final RString 今回終了日時 = new RString("今回終了日時");
@@ -232,6 +233,7 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
         parameter.setTestMode(div.getChkTest().getSelectedKeys().contains(KEY0));
         parameter.setNendoShuryoNengappi(new FlexibleDate(画面_年度.plusYear(いち年).toString() + 月日.toString()));
         parameter.setShoriNichiji(RDateTime.now());
+        parameter.setChushutuKaisu(抽出回数_1);
         return parameter;
     }
 }
