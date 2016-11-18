@@ -558,17 +558,20 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             if (高額合算決定entity == null) {
                 return;
             }
+            if (修正.equals(画面モード)) {
+                処理モード = TWO;
+            } else {
+                処理モード = THREE;
+            }
             KogakuGassanKyufuJissekiResult kogakuResult = KogakuGassanShikyuKetteiHosei.
                     createInstance().get更新方法と作成区分(被保険者番号, 支給申請書整理番号, 処理モード,
                             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                             getRadShikyuKubunCode().getSelectedValue(), is支給金額フラグ(para),
                             is支給区分フラグ(para), is支給データ(決定情報list, 高額合算決定entity));
             if (修正.equals(画面モード)) {
-                処理モード = TWO;
                 高額合算決定entity = buid高額決定(高額合算決定entity);
                 高額合算決定entity = 高額合算決定entity.modified();
             } else if (削除.equals(画面モード) || 照会.equals(画面モード)) {
-                処理モード = THREE;
                 高額合算決定entity = 高額合算決定entity.deleted();
             }
             KoshinShoriResult result = new KoshinShoriResult();

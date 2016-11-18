@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuhi.ServiceKeikakuHiRealtEntity;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseijoho.ShokanShinseiJoho;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShafukukeigenServiceResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssekihensyu.KyufujissekiEntity;
@@ -87,14 +86,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -420,31 +416,13 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
      * @param shinsei shinsei
      * @return 整理番号
      */
-    public RString insDbT3034ShokanShinsei(ShokanShinsei shinsei) {
-
-        RString 整理番号
-                = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString();
+    public ShokanShinsei insDbT3034ShokanShinsei(ShokanShinsei shinsei) {
 
         DbT3034ShokanShinseiEntity entity = shinsei.toEntity();
-        entity.setSeiriNo(整理番号);
         entity.setState(EntityDataState.Added);
-        償還払支給申請Dac.save(entity);
-        return 整理番号;
-    }
 
-    /**
-     * 支給申請更新1
-     *
-     * @param shinsei shinsei
-     * @return 更新件数
-     */
-    public ShokanShinseiJoho updDbT3034ShokanShinsei1(ShokanShinsei shinsei) {
-
-        DbT3034ShokanShinseiEntity entity = shinsei.toEntity();
-        entity.setState(EntityDataState.Modified);
-        int 更新件数 = 償還払支給申請Dac.save(entity);
         ShokanShinsei shokanShinsei = new ShokanShinsei(entity);
-        return new ShokanShinseiJoho(shokanShinsei, 更新件数);
+        return shokanShinsei;
     }
 
     /**
