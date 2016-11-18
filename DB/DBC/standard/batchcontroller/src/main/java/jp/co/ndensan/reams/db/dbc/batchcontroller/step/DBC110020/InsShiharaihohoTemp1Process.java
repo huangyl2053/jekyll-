@@ -1205,7 +1205,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         }
         抽出対象住所地特例(住所地特例List);
         for (JushochitokureiInfoEntity 住所地特例 : 住所地特例List) {
-            for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
+            for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 抽出対象被保険者台帳) {
                 if (MIN_DATE.equals(住所地特例.get住所地特例適用開始日())) {
                     if (isBeforeOrEqDate(被保険者台帳.getJushochitokureiTekiyoYMD(), 住所地特例.get住所地特例適用開始日())
                             && isBeforeOrEqDate(住所地特例.get住所地特例適用開始日(), 被保険者台帳.getJushochitokureiKaijoYMD())
@@ -1320,6 +1320,8 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         } else {
             entity.setKoikinaiTokureiSochimotoShichosonCode(LasdecCode.EMPTY);
         }
+        entity.setJushochitokureiKaijoYMD(new FlexibleDate(被保険者台帳Info.get(ORDER_8)));
+        entity.setJushochitokureiTekiyoYMD(new FlexibleDate(被保険者台帳Info.get(ORDER_9)));
         return entity;
     }
 
