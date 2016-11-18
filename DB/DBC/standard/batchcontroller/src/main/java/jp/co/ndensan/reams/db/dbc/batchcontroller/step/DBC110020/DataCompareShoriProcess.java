@@ -295,7 +295,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 受給者異動送付List.add(受給者異動送付);
                 受給者異動送付KeyList.add(受給者異動送付Key);
             }
-            国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
+//            国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
         }
     }
 
@@ -393,6 +393,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         List<List<RString>> 違う項目 = get違う項目(異動一時2entity, 受給者異動送付);
         int count_整 = 違う項目.size() / COUNT_10;
         int count_残り = 違う項目.size() % COUNT_10;
+        RString 変更項目total = RString.EMPTY;
         for (int i = 0; i <= count_整; i++) {
             JukyushaIdoRirekiTeiseiIchiranEntity 履歴訂正Entity = new JukyushaIdoRirekiTeiseiIchiranEntity();
             if (受給者異動送付.getHiHokenshaNo() != null) {
@@ -462,10 +463,9 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 履歴訂正Entity.set訂正内容10(違う項目10.get(COUNT_2));
             }
             RString 変更項目 = get変更項目(違う項目);
+            変更項目total = 変更項目total.concat(変更項目);
             csvWriter_DBC200074.writeLine(to明細項目(履歴訂正Entity));
-            csvWriter_DBC200010.writeLine(get送付対象者リスト(異動一時2entity, 変更項目));
             異動連絡票件数++;
-            訂正連絡票件数++;
             JukyushaIdoRirekiTeiseiIchiranReport report_200074
                     = new JukyushaIdoRirekiTeiseiIchiranReport(履歴訂正Entity, 市町村コード, 市町村名称);
             report_200074.writeBy(reportSourceWriter_DBC200074);
@@ -476,6 +476,8 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                     = new JukyushaIdorenrakuhyoSofuTaishoshachiranReport(送付対象者, 市町村コード, 市町村名称);
             report_200010.writeBy(reportSourceWriter_DBC200010);
         }
+        csvWriter_DBC200010.writeLine(get送付対象者リスト(異動一時2entity, 変更項目total));
+        訂正連絡票件数++;
     }
 
     private boolean count_整残りCheck(int i, int count_整, int count_残り, int cout) {
