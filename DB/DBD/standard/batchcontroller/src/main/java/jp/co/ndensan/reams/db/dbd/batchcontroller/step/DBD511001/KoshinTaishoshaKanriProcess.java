@@ -56,7 +56,7 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
 public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishoshaKanriEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinTaishoshaKanri."
+            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshintaishoshakanri."
                     + "IKoshinTaishoshaKanriMapper.get更新申請対象者情報");
     private static final EdabanCode 認定申請枝番コード = new EdabanCode(new RString("000"));
     private static final RString 認定年度内連番 = new RString("0012");
