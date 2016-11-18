@@ -727,7 +727,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(hihokennshaKubunCode, 被保険者区分コード),
                                 leq(ichigoShikakuShutokuYMD, システム日付),
-                                or(isNULL(shikakuSoshitsuYMD), leq(システム日付, shikakuSoshitsuYMD)), eq(shikakuSoshitsuYMD, ""))).
+                                or(isNULL(shikakuSoshitsuYMD), leq(システム日付, shikakuSoshitsuYMD), eq(shikakuSoshitsuYMD, "")))).
                 order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
