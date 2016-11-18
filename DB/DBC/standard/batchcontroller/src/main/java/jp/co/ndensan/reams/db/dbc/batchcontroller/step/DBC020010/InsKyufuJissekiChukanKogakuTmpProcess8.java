@@ -359,10 +359,10 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
         世帯内給付実績中間高額一時.addAll(給付実績中間高額一時取消明細List);
         for (KyufuJissekiChukanKogaku8Entity entity : 世帯内給付実績中間高額一時) {
             TempKyufujissekiTyukannEntity 給付実績中間 = entity.get給付実績中間高額一時();
-            if (金額_145万.compareTo(給付実績中間.getShotokuHantei_kazeiShotokuGaku()) < 0) {
+            if (金額_145万.compareTo(formatByNull(給付実績中間.getShotokuHantei_kazeiShotokuGaku())) < 0) {
                 課税所得145万円以上存在Count++;
             }
-            if (金額_144万.compareTo(給付実績中間.getShotokuHantei_kazeiShotokuGaku()) == 0) {
+            if (金額_144万.compareTo(formatByNull(給付実績中間.getShotokuHantei_kazeiShotokuGaku())) == 0) {
                 課税所得144万円存在Count++;
             }
         }
