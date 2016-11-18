@@ -69,6 +69,9 @@ public class DbJohoViewState implements Serializable {
     public List<ShokanServicePlan200904Result> get償還払請求サービス計画200904データResultList(
             ShoukanharaihishinseimeisaikensakuParameter 明細キー) {
         List<ShokanServicePlan200904Result> entity200904ResultList = new ArrayList<>();
+        if (null == 償還払請求サービス計画200904データResultList) {
+            return entity200904ResultList;
+        }
         for (ShokanServicePlan200904Result entity200904Result : 償還払請求サービス計画200904データResultList) {
             if (明細キー.get被保険者番号().equals(entity200904Result.getEntity().get被保険者番号())
                     && 明細キー.getサービス年月().equals(entity200904Result.getEntity().getサービス提供年月())
@@ -88,6 +91,9 @@ public class DbJohoViewState implements Serializable {
      * @param entity200904ResultList 200904データResultList
      */
     public void add償還払請求サービス計画200904データResult(List<ShokanServicePlan200904Result> entity200904ResultList) {
+        if (null == 償還払請求サービス計画200904データResultList) {
+            償還払請求サービス計画200904データResultList = new ArrayList<>();
+        }
         償還払請求サービス計画200904データResultList.addAll(entity200904ResultList);
     }
 
@@ -121,6 +127,9 @@ public class DbJohoViewState implements Serializable {
      * @param entity200604Result 200604データResult
      */
     public void add償還払請求サービス計画200604データResult(ShokanServicePlan200604Result entity200604Result) {
+        if (null == 償還払請求サービス計画200604データResultList) {
+            償還払請求サービス計画200604データResultList = new ArrayList<>();
+        }
         償還払請求サービス計画200604データResultList.add(entity200604Result);
     }
 
@@ -154,6 +163,9 @@ public class DbJohoViewState implements Serializable {
      * @param entity200004Result 200004データResult
      */
     public void add償還払請求サービス計画200004データResult(ShokanServicePlan200004Result entity200004Result) {
+        if (null == 償還払請求サービス計画200004データResultList) {
+            償還払請求サービス計画200004データResultList = new ArrayList<>();
+        }
         償還払請求サービス計画200004データResultList.add(entity200004Result);
     }
 }
