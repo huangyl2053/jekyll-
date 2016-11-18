@@ -324,11 +324,12 @@
         FROM "TmpSetaiShotoku" AS A
         LEFT OUTER JOIN "NendoNaiyuSikakuMonoTemp" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
+        ORDER BY "shikibetsuCode"
     </select>
     
     <resultMap id="ResultMap_SetaiShotokuTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.SetaiShotokuTempEntity" autoMapping="true">
-        <id column="hihokenshaNo"/>
         <id column="shikibetsuCode"/>
+        <id column="setaiCode"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -419,6 +420,7 @@
         FROM "TmpSetaiShotoku" AS A
         LEFT OUTER JOIN "JukyuusyaTemp" AS B
         ON A."hihokenshaNo"=B."hihokenshaNo"
+        ORDER BY "shikibetsuCode"
     </select>
     
     <select resultOrdered="true" id="select世帯員所得3" resultMap="ResultMap_SetaiShotokuTempEntity" fetchSize="500">
@@ -461,6 +463,7 @@
         "TmpSetaiShotoku2"."hihokennshaKubunCode"
         FROM "TmpSetaiShotoku2" AS "TmpSetaiShotoku2"
         ORDER BY "TmpSetaiShotoku2"."shikibetsuCode" ASC, "TmpSetaiShotoku2"."kijunYMD" DESC)
+        ORDER BY "shikibetsuCode"
     </select>
     
         

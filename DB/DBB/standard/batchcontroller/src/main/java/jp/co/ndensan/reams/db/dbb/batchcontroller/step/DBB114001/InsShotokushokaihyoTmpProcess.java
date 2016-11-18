@@ -36,7 +36,6 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
 
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
-    private static final int INT_2 = 2;
     private static final int INT_6 = 6;
     private static final RString 候補者区分_転入者 = new RString("1");
     private static final RString 候補者区分_住特者 = new RString("2");
@@ -128,8 +127,6 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
         RString shichosonCode = t.getShichosonCode() == null ? RString.EMPTY : t.getShichosonCode().getColumnValue();
         if (shichosonCode.length() >= INT_6) {
             entity.setShichosonCode(shichosonCode.substring(INT_0, INT_6));
-        } else {
-            entity.setShichosonCode(shichosonCode);
         }
         entity.setZenjushoCode(t.getZenjushoCode());
         entity.setYubinNo(t.getYubinNo());
@@ -168,8 +165,8 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
             }
         } else if (導入形態コード.equals(導入形態コード_111)) {
             LasdecCode 市町村コード = LasdecCode.EMPTY;
-            if (所得照会票データ.getShichosonCode().length() >= INT_6) {
-                市町村コード = new LasdecCode(所得照会票データ.getShichosonCode().substring(INT_1, INT_6));
+            if (所得照会票データ.getShichosonCode() != null && 所得照会票データ.getShichosonCode().length() >= INT_6) {
+                市町村コード = new LasdecCode(所得照会票データ.getShichosonCode());
             }
             RString 市町村識別ID = manager.get市町村識別ID(市町村コード);
             KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho
@@ -195,8 +192,8 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
             }
         } else if (導入形態コード.equals(導入形態コード_111)) {
             LasdecCode 市町村コード = LasdecCode.EMPTY;
-            if (所得照会票データ.getShichosonCode().length() >= INT_6) {
-                市町村コード = new LasdecCode(所得照会票データ.getShichosonCode().substring(INT_1, INT_6));
+            if (所得照会票データ.getShichosonCode() != null && 所得照会票データ.getShichosonCode().length() >= INT_6) {
+                市町村コード = new LasdecCode(所得照会票データ.getShichosonCode());
             }
             RString 市町村識別ID = manager.get市町村識別ID(市町村コード);
             RString 都道府県名_構成 = RString.EMPTY;
