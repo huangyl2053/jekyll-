@@ -89,10 +89,12 @@ public class ShotokuDankaiBetsuHihokenshasuIchiranBodyEditor implements IShotoku
         if (this.標準設定段階別被保険者数合計entity != null && null != this.標準設定段階別被保険者数合計entity.get保険者設定人数()) {
             source.list_4 = doカンマ編集(this.標準設定段階別被保険者数合計entity.get保険者設定人数());
         }
-        if (RString.isNullOrEmpty(source.hokenshaNo) && this.標準設定段階別被保険者数合計entity.get市町村コード() != null) {
+        if (RString.isNullOrEmpty(source.hokenshaNo) && this.標準設定段階別被保険者数合計entity != null
+                && this.標準設定段階別被保険者数合計entity.get市町村コード() != null) {
             source.hokenshaNo = new RString(this.標準設定段階別被保険者数合計entity.get市町村コード().toString());
         }
-        if (RString.isNullOrEmpty(source.hokenshaName) && this.標準設定段階別被保険者数合計entity.get市町村名称() != null) {
+        if (RString.isNullOrEmpty(source.hokenshaName) && this.標準設定段階別被保険者数合計entity != null
+                && this.標準設定段階別被保険者数合計entity.get市町村名称() != null) {
             source.hokenshaName = this.標準設定段階別被保険者数合計entity.get市町村名称();
         }
     }
