@@ -1197,15 +1197,18 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         pram.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(高額合算申請書.get支払方法区分()));
         pram.setKozaId(口座ID);
         pram.setStartYMD(isNullOrEmptyFlexibleDate(高額合算申請書.get支払期間開始年月日()));
-        pram.setStartHHMM(高額合算申請書.get支払期間開始時間() == null ? null
+
+        pram.setStartHHMM(RString.isNullOrEmpty(高額合算申請書.get支払期間開始時間()) ? null
                 : new RTime(高額合算申請書.get支払期間開始時間().substring(INT_0, INT_2)
-                        .concat(高額合算申請書.get支払期間開始時間().substring(INT_3, INT_5))
-                        .concat(高額合算申請書.get支払期間開始時間().substring(INT_6))));
+                        .concat(高額合算申請書.get支払期間開始時間().substring(INT_2, INT_4))
+                        .concat(高額合算申請書.get支払期間開始時間().length() < INT_6 ? RSTRING_00
+                                : 高額合算申請書.get支払期間開始時間().substring(INT_4, INT_6))));
         pram.setEndYMD(isNullOrEmptyFlexibleDate(高額合算申請書.get支払期間終了年月日()));
-        pram.setEndHHMM(高額合算申請書.get支払期間終了時間() == null ? null
+        pram.setEndHHMM(RString.isNullOrEmpty(高額合算申請書.get支払期間終了時間()) ? null
                 : new RTime(高額合算申請書.get支払期間終了時間().substring(INT_0, INT_2)
-                        .concat(高額合算申請書.get支払期間終了時間().substring(INT_3, INT_5))
-                        .concat(高額合算申請書.get支払期間終了時間().substring(INT_6))));
+                        .concat(高額合算申請書.get支払期間終了時間().substring(INT_2, INT_4))
+                        .concat(高額合算申請書.get支払期間終了時間().length() < INT_6 ? RSTRING_00
+                                : 高額合算申請書.get支払期間終了時間().substring(INT_4, INT_6))));
         pram.setShiharaiBasho(高額合算申請書.get支払場所());
         div.getCcdShiharaiHohoJoho().initialize(pram, div.getTxtShinseiYMD().isReadOnly() ? 照会 : 修正);
     }
