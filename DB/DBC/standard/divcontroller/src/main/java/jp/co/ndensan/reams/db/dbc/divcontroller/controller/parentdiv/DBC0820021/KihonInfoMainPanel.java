@@ -195,17 +195,10 @@ public class KihonInfoMainPanel {
         List<RString> 様式番号List = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        try {
-            judge画面のチェック(div, 様式番号List, サービス年月, 様式番号);
-            set支給申請(div, 様式番号List, 様式番号, meisaiPar, shokanKihon);
-            //証明書入力済チェック
-            judge証明書入力済のチェック(div, meisaiPar, サービス年月);
-            return ResponseData.of(div);
-        } catch (Exception e) {
-            e.toString();
-            e.printStackTrace();
-            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
-        }
+        judge画面のチェック(div, 様式番号List, サービス年月, 様式番号);
+        set支給申請(div, 様式番号List, 様式番号, meisaiPar, shokanKihon);
+        judge証明書入力済のチェック(div, meisaiPar, サービス年月);
+        return ResponseData.of(div);
     }
 
     private void judge証明書入力済のチェック(KihonInfoMainPanelDiv div, ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
