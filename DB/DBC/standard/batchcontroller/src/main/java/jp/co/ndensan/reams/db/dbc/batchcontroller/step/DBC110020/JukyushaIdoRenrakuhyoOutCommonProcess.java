@@ -679,6 +679,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         List<RString> 住所地特例Info = 住所地特例.split(SPLIT.toString());
         entity.set住所地特例適用開始日(new FlexibleDate(住所地特例Info.get(ORDER_0)));
         entity.set住所地特例適用終了日(new FlexibleDate(住所地特例Info.get(ORDER_1)));
+        entity.set被保険者番号(new HihokenshaNo(住所地特例Info.get(ORDER_2)));
         return entity;
     }
 

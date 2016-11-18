@@ -104,6 +104,7 @@ public class FutanWariaishoIkkatsu {
     private static final RString 定数_年次 = new RString("年次");
     private static final RString 定数_過年度 = new RString("過年度");
     private static final RString 定数_即時 = new RString("即時");
+    private static final RString 該当データがありません = new RString("該当データがありません。");
     private static final int NUM_ONE = 1;
     private static final int NUM_TWO = 2;
     private static final int NUM_THREE = 3;
@@ -151,7 +152,15 @@ public class FutanWariaishoIkkatsu {
         source.set氏名(編集後個人.get名称().getName().getColumnValue());
         source.set生年月日(編集後個人.get生年月日For帳票());
         source.set性別(編集後個人.get性別());
-        source.set負担割合１(entity.get負担割合期間().getFutanWariaiKubun1());
+
+        if (!RString.isNullOrEmpty((entity.get負担割合期間().getFutanWariaiKubun1()))) {
+            source.set負担割合１(FutanwariaiKubun.toValue(entity.get負担割合期間().getFutanWariaiKubun1()).get名称());
+        }
+
+        if (!RString.isNullOrEmpty((entity.get負担割合期間().getFutanWariaiKubun2()))) {
+            source.set負担割合２(FutanwariaiKubun.toValue(entity.get負担割合期間().getFutanWariaiKubun2()).get名称());
+        }
+
         if (entity.get負担割合期間().getYukoKaishiYMD1() != null) {
             source.set適用開始年月日１(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD1())));
         } else {
@@ -162,7 +171,7 @@ public class FutanWariaishoIkkatsu {
         } else {
             source.set適用終了年月日１(RString.EMPTY);
         }
-        source.set負担割合２(entity.get負担割合期間().getFutanWariaiKubun2());
+
         if (entity.get負担割合期間().getYukoKaishiYMD2() != null) {
             source.set適用開始年月日２(開始年月日TITLE.concat(dateFormat基本形１(entity.get負担割合期間().getYukoKaishiYMD2())));
         } else {
@@ -183,7 +192,7 @@ public class FutanWariaishoIkkatsu {
             source.set保険者コード６(hokenshaNo.getColumnValue().substringReturnAsPossible(NUM_FIVE));
         }
         source.set保険者住所(get保険者住所());
-        source.set保険者名(compNinshosha.ninshoshaShimeiKakenai);
+        source.set保険者名(get保険者名称());
         source.set保険者電話番号(get電話番号());
         source.set電子公印(compNinshosha.denshiKoin);
         source.set連番(連番);
@@ -198,6 +207,10 @@ public class FutanWariaishoIkkatsu {
 
     private RString get保険者住所() {
         return DbBusinessConfig.get(ConfigNameDBU.保険者情報_住所, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+    }
+    
+    private RString get保険者名称() {
+        return DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     }
 
     private ShoKisaiHokenshaNo getHokenshaCode(HihokenshaDaicho 被保台帳) {
@@ -329,6 +342,44 @@ public class FutanWariaishoIkkatsu {
             source.set発行済(定数_済);
         }
         getHokenshaCode(new HihokenshaDaicho(利用者負担割合証.get被保台帳()));
+        return source;
+    }
+
+    /**
+     * 負担割合証発行一覧(空白)ソースデータ取得です。
+     *
+     * @param param param
+     * @return FutanWariaiShoHakkoIchiranEntity
+     */
+    public FutanWariaiShoHakkoIchiranEntity getHakkoIchiranSourceInitData(FutanwariaishoHakkoProcessParameter param) {
+        requireNonNull(param, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_バッチパラメータ.toString()));
+        FutanWariaiShoHakkoIchiranEntity source = new FutanWariaiShoHakkoIchiranEntity();
+        source.set年度(dateFormatパターン107(param.get年度()));
+        source.set条件(param.get出力対象());
+        if (定数_ZERO.equals(param.get出力対象())) {
+            source.set条件(定数_全件);
+        } else if (定数_ONE.equals(param.get出力対象())) {
+            source.set条件(定数_異動分);
+        } else if (定数_TWO.equals(param.get出力対象())) {
+            source.set条件(定数_新規認定分);
+        }
+        if (format日時(param.get抽出期間開始日時()).isNullOrEmpty()) {
+            source.set抽出対象期間開始(RString.EMPTY);
+        } else {
+            source.set抽出対象期間開始(format日時(param.get抽出期間開始日時()).concat(TILDE));
+        }
+        source.set抽出対象期間終了(format日時(param.get抽出期間終了日時()));
+        if (定数_ZERO.equals(param.get発行区分())) {
+            source.set発行区分(定数_未発行);
+        } else if (定数_ONE.equals(param.get発行区分())) {
+            source.set発行区分(定数_発行済み);
+        } else if (定数_TWO.equals(param.get発行区分())) {
+            source.set発行区分(定数_全て);
+        }
+        source.set交付日(dateFormat基本形１(param.get交付年月日()));
+        source.set作成日時(format日時(param.getバッチ起動時処理日時()).concat(定数_作成));
+        source.setページ(定数_ONE);
+        source.set送付先住所(該当データがありません);
         return source;
     }
 
