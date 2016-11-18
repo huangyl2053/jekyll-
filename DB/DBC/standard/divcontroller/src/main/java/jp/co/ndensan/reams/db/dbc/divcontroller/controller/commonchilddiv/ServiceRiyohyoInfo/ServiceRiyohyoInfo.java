@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiResult;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDivHandler;
@@ -151,6 +152,13 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoMeisaiNew(ServiceRiyohyoInfoDiv div) {
+        Decimal 区分支給限度額 = div.getTxtKubunShikyuGendogaku().getValue();
+        RDate 限度管理期間F = div.getTxtGendoKanriKikan().getFromValue();
+        RDate 限度管理期間T = div.getTxtGendoKanriKikan().getToValue();
+        if (区分支給限度額 == null && 限度管理期間F == null && 限度管理期間T == null) {
+            throw new ApplicationException(DbcErrorMessages.対象年月入力不正.getMessage().evaluate());
+        }
+        
         div.getTxtRiyoYM().setDisabled(true);
         div.getChkZanteiKubun().setDisabled(true);
         div.getDdlKoshinKbn().setDisabled(true);
@@ -189,6 +197,13 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoGokeiNew(ServiceRiyohyoInfoDiv div) {
+        Decimal 区分支給限度額 = div.getTxtKubunShikyuGendogaku().getValue();
+        RDate 限度管理期間F = div.getTxtGendoKanriKikan().getFromValue();
+        RDate 限度管理期間T = div.getTxtGendoKanriKikan().getToValue();
+        if (区分支給限度額 == null && 限度管理期間F == null && 限度管理期間T == null) {
+            throw new ApplicationException(DbcErrorMessages.対象年月入力不正.getMessage().evaluate());
+        }
+        
         div.setAddType(RSTRING_TWO);
         div.getTxtRiyoYM().setDisabled(true);
         div.getChkZanteiKubun().setDisabled(true);
