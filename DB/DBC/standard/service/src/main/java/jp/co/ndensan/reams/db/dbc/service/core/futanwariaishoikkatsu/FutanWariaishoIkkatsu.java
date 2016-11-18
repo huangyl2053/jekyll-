@@ -150,7 +150,7 @@ public class FutanWariaishoIkkatsu {
         source.set住所(編集後個人.get編集後住所());
         source.setカナ氏名(編集後個人.get名称().getKana().getColumnValue());
         source.set氏名(編集後個人.get名称().getName().getColumnValue());
-        source.set生年月日(編集後個人.get生年月日For帳票());
+        source.set生年月日(編集後個人.get生年月日());
         source.set性別(編集後個人.get性別());
 
         if (!RString.isNullOrEmpty((entity.get負担割合期間().getFutanWariaiKubun1()))) {
