@@ -225,7 +225,7 @@ public class SeikyuGakuShukeiPanelHandler {
         for (ShokanShukeiResult 情報 : 一覧情報) {
             if (情報.getShukei().get連番().equals(row.getDefaultDataName15())
                     && 情報.getShukei().get被保険者番号().getColumnValue().equals(div.getPanelCcd().getCcdKaigoShikakuKihon().get被保険者番号())
-                    && 情報.getShukei().getサービス提供年月().toDateString().equals(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString())
+                    && 情報.getShukei().getサービス提供年月().toDateString().equals(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString().substring(NUM0, NUM6))
                     && 情報.getShukei().get整理番号().equals(div.getSeiriNo())
                     && 情報.getShukei().get事業者番号().getColumnValue().equals(div.getPanelHead().getTxtJigyoshaBango().getValue())
                     && 情報.getShukei().get様式番号().equals(div.getPanelHead().getTxtShomeisho().getValue())
@@ -828,7 +828,7 @@ public class SeikyuGakuShukeiPanelHandler {
         for (ShokanShukeiResult 情報 : 情報List) {
             if (情報.getShukei().get連番().equals(row.getDefaultDataName15())
                     && 情報.getShukei().get被保険者番号().getColumnValue().equals(div.getPanelCcd().getCcdKaigoShikakuKihon().get被保険者番号())
-                    && 情報.getShukei().getサービス提供年月().toDateString().equals(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString())
+                    && 情報.getShukei().getサービス提供年月().toDateString().equals(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString().substring(NUM0, NUM6))
                     && 情報.getShukei().get整理番号().equals(div.getSeiriNo())
                     && 情報.getShukei().get事業者番号().getColumnValue().equals(div.getPanelHead().getTxtJigyoshaBango().getValue())
                     && 情報.getShukei().get様式番号().equals(div.getPanelHead().getTxtShomeisho().getValue())
@@ -842,7 +842,7 @@ public class SeikyuGakuShukeiPanelHandler {
     private ShokanKihon get情報FromViewState1(ArrayList<ShokanKihon> 情報List) {
         for (ShokanKihon 情報 : 情報List) {
             if (情報.get被保険者番号().getColumnValue().equals(div.getPanelCcd().getCcdKaigoShikakuKihon().get被保険者番号())
-                    && 情報.getサービス提供年月().toDateString().equals(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString())
+                    && 情報.getサービス提供年月().toDateString().equals(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString().substring(NUM0, NUM6))
                     && 情報.get整理番号().equals(div.getSeiriNo())
                     && 情報.get事業者番号().getColumnValue().equals(div.getPanelHead().getTxtJigyoshaBango().getValue())
                     && 情報.get様式番号().equals(div.getPanelHead().getTxtShomeisho().getValue())

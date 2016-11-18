@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -101,6 +100,7 @@ public class SeikyuGakuShukeiPanel {
         div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
             div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+            div.setSeiriNo(整理番号);
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
@@ -291,65 +291,11 @@ public class SeikyuGakuShukeiPanel {
      * @return ResponseData
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnSave(SeikyuGakuShukeiPanelDiv div) {
-        画面入力内容の保存(div, null, true);
-        return ResponseData.of(div).respond();
-//        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-//        DbJohoViewState 一覧情報リスト = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-//        ShoukanharaihishinseimeisaikensakuParameter 明細検索キー = ViewStateHolder.get(ViewStateKeys.明細検索キー,
-//                ShoukanharaihishinseimeisaikensakuParameter.class);
-//        boolean flag = getHandler(div).is内容変更状態();
-//        if (flag) {
-//            if (登録.equals(処理モード)) {
-//                Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap
-//                        = 一覧情報リスト.get証明書入力済フラグMap();
-//                ShomeishoNyuryokuFlag 証明書入力済フラグ = 一覧情報リスト.get証明書入力済フラグMap().get(明細検索キー);
-//                証明書入力済フラグ.set請求額集計_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力あり);
-//                証明書入力済フラグMap.put(明細検索キー, 証明書入力済フラグ);
-//                一覧情報リスト.set証明書入力済フラグMap(証明書入力済フラグMap);
-//            } else if (修正.equals(処理モード)) {
-//                Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap
-//                        = 一覧情報リスト.get証明書変更済フラグMap();
-//                ShomeishoHenkoFlag 証明書変更済フラグ = 一覧情報リスト.get証明書変更済フラグMap().get(明細検索キー);
-//                証明書変更済フラグ.set請求額集計_証明書変更済フラグ(ShomeishoHenkoKubunType.変更あり);
-//                証明書変更済フラグMap.put(明細検索キー, 証明書変更済フラグ);
-//                一覧情報リスト.set証明書変更済フラグMap(証明書変更済フラグMap);
-//            }
-//            return 保存処理(div, 一覧情報リスト, 処理モード, 明細検索キー);
-//        } else {
-//            return ResponseData.of(div).respond();
-//        }
+        画面入力内容の保存(div, true);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.一覧に戻る).respond();
     }
 
-//    private ResponseData<SeikyuGakuShukeiPanelDiv> 保存処理(SeikyuGakuShukeiPanelDiv div,
-//            DbJohoViewState 一覧情報リスト, RString 処理モード, ShoukanharaihishinseimeisaikensakuParameter 明細検索キー) {
-//        try {
-//            一覧情報リスト.set償還払請求集計データList(getHandler(div).償還払請求集計_保存処理(一覧情報リスト.get償還払請求集計データList()));
-//            一覧情報リスト.set償還払請求基本データList(getHandler(div).償還払請求基本_保存処理(一覧情報リスト.get償還払請求基本データList()));
-//            一覧情報リスト.set償還払支給申請(getHandler(div).償還払申請_保存処理(一覧情報リスト.get償還払支給申請()));
-//            if (登録.equals(処理モード)) {
-//                ShomeishoNyuryokuKanryoKubunType 証明書入力完了区分 = SyokanbaraihiShikyuShinseiManager
-//                        .createInstance().証明書InputCheck(一覧情報リスト.get証明書入力済フラグMap().get(明細検索キー),
-//                                明細検索キー.get様式番号(), 明細検索キー.getサービス年月());
-//                if (入力完了.equals(証明書入力完了区分.getCode())) {
-//                    Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap
-//                            = 一覧情報リスト.get証明書入力完了フラグMap();
-//                    証明書入力完了フラグMap.put(明細検索キー, ShomeishoNyuryokuKanryoKubunType.入力完了);
-//                    一覧情報リスト.set証明書入力完了フラグMap(証明書入力完了フラグMap);
-//                } else {
-//                    Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap
-//                            = 一覧情報リスト.get証明書入力完了フラグMap();
-//                    証明書入力完了フラグMap.put(明細検索キー, ShomeishoNyuryokuKanryoKubunType.入力未完了);
-//                    一覧情報リスト.set証明書入力完了フラグMap(証明書入力完了フラグMap);
-//                }
-//            }
-//            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 一覧情報リスト);
-//            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
-//                    replace(登録.toString())).respond();
-//        } catch (Exception e) {
-//            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
-//        }
-//    }
-    private void 画面入力内容の保存(SeikyuGakuShukeiPanelDiv div, DBC0820030TransitionEventName eventName, boolean state) {
+    private void 画面入力内容の保存(SeikyuGakuShukeiPanelDiv div, boolean state) {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         DbJohoViewState 一覧情報リスト = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         ShoukanharaihishinseimeisaikensakuParameter 明細検索キー = ViewStateHolder.get(ViewStateKeys.明細検索キー,
@@ -378,12 +324,12 @@ public class SeikyuGakuShukeiPanel {
                 一覧情報リスト.set証明書変更済フラグMap(証明書変更済フラグMap);
             }
         }
-        最終情報を設定する(div, 一覧情報リスト, 処理モード, 明細検索キー, state, eventName);
+        最終情報を設定する(div, 一覧情報リスト, 処理モード, 明細検索キー, state);
     }
 
-    private ResponseData<SeikyuGakuShukeiPanelDiv> 最終情報を設定する(SeikyuGakuShukeiPanelDiv div,
+    private void 最終情報を設定する(SeikyuGakuShukeiPanelDiv div,
             DbJohoViewState 一覧情報リスト, RString 処理モード, ShoukanharaihishinseimeisaikensakuParameter 明細検索キー,
-            boolean state, DBC0820030TransitionEventName eventName) {
+            boolean state) {
 
         一覧情報リスト.set償還払請求集計データList(getHandler(div).償還払請求集計_保存処理(一覧情報リスト.get償還払請求集計データList()));
         一覧情報リスト.set償還払請求基本データList(getHandler(div).償還払請求基本_保存処理(一覧情報リスト.get償還払請求基本データList()));
@@ -406,12 +352,6 @@ public class SeikyuGakuShukeiPanel {
             }
         }
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 一覧情報リスト);
-        if (eventName != null) {
-            return ResponseData.of(div).forwardWithEventName(eventName).respond();
-        } else {
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
-                    replace(登録.toString())).respond();
-        }
     }
 
     /**
@@ -422,8 +362,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnKihonInfo(SeikyuGakuShukeiPanelDiv div) {
         setViewState(div);
-        画面入力内容の保存(div, DBC0820030TransitionEventName.基本情報, false);
-        return ResponseData.of(div).respond();
+        画面入力内容の保存(div, false);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.基本情報).respond();
     }
 
     /**
@@ -434,8 +374,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnKyufuMeisai(SeikyuGakuShukeiPanelDiv div) {
         setViewState(div);
-        画面入力内容の保存(div, DBC0820030TransitionEventName.給付費明細, false);
-        return ResponseData.of(div).respond();
+        画面入力内容の保存(div, false);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.給付費明細).respond();
     }
 
     /**
@@ -446,8 +386,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnTokuteiShinryouhii(SeikyuGakuShukeiPanelDiv div) {
         setViewState(div);
-        画面入力内容の保存(div, DBC0820030TransitionEventName.特定診療費, false);
-        return ResponseData.of(div).respond();
+        画面入力内容の保存(div, false);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.特定診療費).respond();
     }
 
     /**
@@ -458,8 +398,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnServiceKeikakuhi(SeikyuGakuShukeiPanelDiv div) {
         setViewState(div);
-        画面入力内容の保存(div, DBC0820030TransitionEventName.サービス計画費, false);
-        return ResponseData.of(div).respond();
+        画面入力内容の保存(div, false);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.サービス計画費).respond();
     }
 
     /**
@@ -470,8 +410,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnTokuteiNyushosya(SeikyuGakuShukeiPanelDiv div) {
         setViewState(div);
-        画面入力内容の保存(div, DBC0820030TransitionEventName.特定入所者費用, false);
-        return ResponseData.of(div).respond();
+        画面入力内容の保存(div, false);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.特定入所者費用).respond();
     }
 
     /**
@@ -482,8 +422,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnGoukeiInfo(SeikyuGakuShukeiPanelDiv div) {
         setViewState(div);
-        画面入力内容の保存(div, DBC0820030TransitionEventName.合計情報, false);
-        return ResponseData.of(div).respond();
+        画面入力内容の保存(div, false);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.合計情報).respond();
     }
 
     /**
@@ -494,8 +434,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnKyufuhiMeisaiJutoku(SeikyuGakuShukeiPanelDiv div) {
         setViewState(div);
-        画面入力内容の保存(div, DBC0820030TransitionEventName.給付費明細_住特, false);
-        return ResponseData.of(div).respond();
+        画面入力内容の保存(div, false);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.給付費明細_住特).respond();
     }
 
     /**
@@ -506,8 +446,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnKinkyujiShoteiShikan(SeikyuGakuShukeiPanelDiv div) {
         setViewState(div);
-        画面入力内容の保存(div, DBC0820030TransitionEventName.緊急時_所定疾患, false);
-        return ResponseData.of(div).respond();
+        画面入力内容の保存(div, false);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.緊急時_所定疾患).respond();
     }
 
     /**
@@ -518,8 +458,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnKinkyushisetuRyoyouhi(SeikyuGakuShukeiPanelDiv div) {
         setViewState(div);
-        画面入力内容の保存(div, DBC0820030TransitionEventName.緊急時施設療養費, false);
-        return ResponseData.of(div).respond();
+        画面入力内容の保存(div, false);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.緊急時施設療養費).respond();
     }
 
     /**
@@ -530,8 +470,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnShokujihiyo(SeikyuGakuShukeiPanelDiv div) {
         setViewState(div);
-        画面入力内容の保存(div, DBC0820030TransitionEventName.食事費用, false);
-        return ResponseData.of(div).respond();
+        画面入力内容の保存(div, false);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.食事費用).respond();
     }
 
     /**
@@ -542,8 +482,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnShafukukeigenGaku(SeikyuGakuShukeiPanelDiv div) {
         setViewState(div);
-        画面入力内容の保存(div, DBC0820030TransitionEventName.社福軽減額, false);
-        return ResponseData.of(div).respond();
+        画面入力内容の保存(div, false);
+        return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.社福軽減額).respond();
     }
 
     private SeikyuGakuShukeiPanelHandler getHandler(SeikyuGakuShukeiPanelDiv div) {
