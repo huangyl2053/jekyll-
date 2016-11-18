@@ -9,7 +9,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
@@ -23,7 +25,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.Kyuf
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.dgdKyufuhiMeisai_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820022.KyufuShiharayiMeisaiValidationHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
@@ -32,7 +33,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -64,6 +64,7 @@ public class KyufuShiharayiMeisaiPanel {
     private static final RString 変更あり = new RString("1");
     private static final RString 入力完了 = new RString("1");
     private static final RString 入力未完了 = new RString("2");
+    private static final RString エーラメッセージ = new RString("請求額集計情報の未登録のサービス種類が存在します。請求額集計情報を登録して下さい。");
 
     /**
      * onLoad事件
@@ -266,25 +267,12 @@ public class KyufuShiharayiMeisaiPanel {
     }
 
     private ArrayList<ShokanMeisaiResult> set保存処理(KyufuShiharayiMeisaiPanelDiv div) {
-        try {
-            ShoukanharaihishinseimeisaikensakuParameter meisaiPar
-                    = ViewStateHolder.get(ViewStateKeys.明細検索キー,
-                            ShoukanharaihishinseimeisaikensakuParameter.class);
-            List<ShokanMeisaiResult> shkonlist = ViewStateHolder.get(ViewStateKeys.給付費明細登録, List.class);
-            return getHandler(div).set保存処理(meisaiPar, shkonlist);
-        } catch (Exception e) {
-            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
-        }
-    }
 
-    private ResponseData<KyufuShiharayiMeisaiPanelDiv> notChanges(KyufuShiharayiMeisaiPanelDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return createResponse(div);
-        }
-        return createResponse(div);
+        ShoukanharaihishinseimeisaikensakuParameter meisaiPar
+                = ViewStateHolder.get(ViewStateKeys.明細検索キー,
+                        ShoukanharaihishinseimeisaikensakuParameter.class);
+        List<ShokanMeisaiResult> shkonlist = ViewStateHolder.get(ViewStateKeys.給付費明細登録, List.class);
+        return getHandler(div).set保存処理(meisaiPar, shkonlist);
     }
 
     /**
@@ -294,28 +282,25 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnConfirmCommon(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
         set入力内容保存(div);
-        set証明書入力済チェック();
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        ShomeishoNyuryokuFlag nyuryokuFlag = set証明書入力済チェック(div, 償還払ViewStateDB, kensakuParameter);
+        if (登録.equals(処理モード)) {
+            SyokanbaraihiShikyuShinseiManager manager = SyokanbaraihiShikyuShinseiManager.createInstance();
+            ShomeishoNyuryokuKanryoKubunType 証明書入力済区分 = manager.証明書InputCheck(
+                    nyuryokuFlag, kensakuParameter.get様式番号(), kensakuParameter.getサービス年月());
+            set証明書入力完了フラグ(証明書入力済区分, 償還払ViewStateDB, kensakuParameter);
+        }
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.一覧に戻る).respond();
     }
 
     private void set入力内容保存(KyufuShiharayiMeisaiPanelDiv div) {
         DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        if (償還払ViewStateDB == null) {
-            償還払ViewStateDB = new DbJohoViewState();
-        }
         償還払ViewStateDB.set償還払請求明細データList(set保存処理(div));
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
-    }
-
-    private void set入力有無フラグ(KyufuShiharayiMeisaiPanelDiv div) {
-        ShomeishoNyuryokuFlag flag = new ShomeishoNyuryokuFlag();
-        ShomeishoNyuryokuKubunType 入力済フラグ = getHandler(div).is入力済() ? flag.get給付費明細_証明書入力済フラグ().入力あり : flag.get給付費明細_証明書入力済フラグ().入力なし;
-        RString 変更済フラグ = getHandler(div).is変更済() ? 変更あり : 変更なし; // 変更 todo #QA
-        flag.set給付費明細_証明書入力済フラグ(入力済フラグ);
-        ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, flag);
-        ViewStateHolder.put(ViewStateKeys.証明書変更済フラグ, 変更済フラグ);
     }
 
     /**
@@ -325,8 +310,10 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnKihonInfo(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
-        setViewState(div);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        set証明書入力済チェック(div, dbJoho, kensakuParameter);
         set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.基本情報).respond();
     }
@@ -338,8 +325,10 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnTokuteiShinryohi(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
-        setViewState(div);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        set証明書入力済チェック(div, dbJoho, kensakuParameter);
         set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.特定診療費).respond();
     }
@@ -351,8 +340,10 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnServiceKeikakuhi(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
-        setViewState(div);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        set証明書入力済チェック(div, dbJoho, kensakuParameter);
         set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費).respond();
     }
@@ -364,8 +355,10 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnTokuteiNyushosya(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
-        setViewState(div);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        set証明書入力済チェック(div, dbJoho, kensakuParameter);
         set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.特定入所者費用).respond();
     }
@@ -377,8 +370,10 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnGoukeiInfo(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
-        setViewState(div);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        set証明書入力済チェック(div, dbJoho, kensakuParameter);
         set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.合計情報).respond();
     }
@@ -390,8 +385,10 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnKyufuhiMeisaiJyuchi(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
-        setViewState(div);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        set証明書入力済チェック(div, dbJoho, kensakuParameter);
         set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.給付費明細_住特).respond();
     }
@@ -403,8 +400,10 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnKinkyujiShoteiShikan(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
-        setViewState(div);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        set証明書入力済チェック(div, dbJoho, kensakuParameter);
         set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.緊急時_所定疾患).respond();
     }
@@ -416,8 +415,10 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnKinkyujiShisetsuRyoyo(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
-        setViewState(div);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        set証明書入力済チェック(div, dbJoho, kensakuParameter);
         set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.緊急時施設療養費).respond();
     }
@@ -429,8 +430,10 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnShokujiHiyo(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
-        setViewState(div);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        set証明書入力済チェック(div, dbJoho, kensakuParameter);
         set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.食事費用).respond();
     }
@@ -442,8 +445,10 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnSeikyugakuShukei(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
-        setViewState(div);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        set証明書入力済チェック(div, dbJoho, kensakuParameter);
         set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.請求額集計).respond();
     }
@@ -455,8 +460,10 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnShafukukeigengaku(KyufuShiharayiMeisaiPanelDiv div) {
-        set入力有無フラグ(div);
-        setViewState(div);
+        DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter kensakuParameter = ViewStateHolder.get(
+                ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+        set証明書入力済チェック(div, dbJoho, kensakuParameter);
         set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.社福軽減額).respond();
     }
@@ -473,29 +480,83 @@ public class KyufuShiharayiMeisaiPanel {
         return ResponseData.of(div).respond();
     }
 
-    private void setViewState(KyufuShiharayiMeisaiPanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelTwo().getTxtShinseiYMD().getValue());
-        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                new JigyoshaNo(div.getPanelTwo().getTxtJigyoshaBango().getValue()),
-                div.getPanelTwo().getTxtShomeisho().getValue(),
-                div.getPanelTwo().getTxtMeisaiBango().getValue(),
-                null);
-        ViewStateHolder.put(ViewStateKeys.申請検索キー, paramter);
+    private ShomeishoNyuryokuFlag set証明書入力済チェック(
+            KyufuShiharayiMeisaiPanelDiv div, DbJohoViewState dbJoho, ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        ShomeishoNyuryokuFlag nyuryokuFlag = new ShomeishoNyuryokuFlag();
+        Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap = dbJoho.get証明書入力済フラグMap();
+        if (証明書入力済フラグMap == null) {
+            証明書入力済フラグMap = new HashMap<>();
+        }
+        nyuryokuFlag = set証明書入力済フラグMap(証明書入力済フラグMap, kensakuParameter, nyuryokuFlag);
+
+        boolean is変更あり = getHandler(div).is内容変更状態();
+        set証明書フラグ(処理モード, is変更あり, nyuryokuFlag, 証明書入力済フラグMap, kensakuParameter, dbJoho);
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
+        return nyuryokuFlag;
     }
 
-    private void set証明書入力済チェック() {
-        ShomeishoNyuryokuFlag 証明書入力済フラグ = ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        ShomeishoNyuryokuKanryoKubunType 証明書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance().証明書InputCheck(証明書入力済フラグ, 様式番号, サービス年月);
+    private ShomeishoNyuryokuFlag set証明書入力済フラグMap(
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap,
+            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter, ShomeishoNyuryokuFlag nyuryokuFlag) {
+        for (Map.Entry<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> mapValue : 証明書入力済フラグMap.entrySet()) {
+            ShoukanharaihishinseimeisaikensakuParameter parameter = mapValue.getKey();
+            if (is同じキー(parameter, kensakuParameter)) {
+                nyuryokuFlag = mapValue.getValue();
+                証明書入力済フラグMap.remove(parameter);
+            }
+        }
+        return nyuryokuFlag;
+    }
 
-        if (入力完了.equals(証明書入力済区分)) {
-            ViewStateHolder.put(ViewStateKeys.証明書入力完了フラグ, 入力完了);
-        } else {
-            ViewStateHolder.put(ViewStateKeys.証明書入力完了フラグ, 入力未完了);
+    private boolean is同じキー(
+            ShoukanharaihishinseimeisaikensakuParameter parameter, ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
+        return parameter.getサービス年月().equals(kensakuParameter.getサービス年月())
+                && parameter.get事業者番号().equals(kensakuParameter.get事業者番号())
+                && parameter.get整理番号().equals(kensakuParameter.get整理番号())
+                && parameter.get明細番号().equals(kensakuParameter.get明細番号())
+                && parameter.get様式番号().equals(kensakuParameter.get様式番号())
+                && parameter.get被保険者番号().equals(kensakuParameter.get被保険者番号());
+    }
+
+    private void set証明書フラグ(
+            RString 処理モード, boolean is変更あり, ShomeishoNyuryokuFlag nyuryokuFlag,
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap,
+            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter, DbJohoViewState dbJoho) {
+        if (登録.equals(処理モード)) {
+            if (is変更あり) {
+                nyuryokuFlag.set緊急時所定疾患_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力あり);
+            } else {
+                nyuryokuFlag.set緊急時所定疾患_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+            }
+            証明書入力済フラグMap.put(kensakuParameter, nyuryokuFlag);
+            dbJoho.set証明書入力済フラグMap(証明書入力済フラグMap);
+        }
+    }
+
+    private void set証明書入力完了フラグ(
+            ShomeishoNyuryokuKanryoKubunType 証明書入力済区分, DbJohoViewState dbJoho,
+            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
+        Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> kanryoFlagMap = dbJoho.get証明書入力完了フラグMap();
+        if (kanryoFlagMap == null) {
+            kanryoFlagMap = new HashMap<>();
+        }
+        for (Map.Entry<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> mapValue : kanryoFlagMap.entrySet()) {
+            ShoukanharaihishinseimeisaikensakuParameter parameter = mapValue.getKey();
+            if (parameter.getサービス年月().equals(kensakuParameter.getサービス年月())
+                    && parameter.get事業者番号().equals(kensakuParameter.get事業者番号())
+                    && parameter.get整理番号().equals(kensakuParameter.get整理番号())
+                    && parameter.get明細番号().equals(kensakuParameter.get明細番号())
+                    && parameter.get様式番号().equals(kensakuParameter.get様式番号())
+                    && parameter.get被保険者番号().equals(kensakuParameter.get被保険者番号())) {
+                kanryoFlagMap.remove(parameter);
+            }
+        }
+        kanryoFlagMap.put(kensakuParameter, ShomeishoNyuryokuKanryoKubunType.入力完了);
+        dbJoho.set証明書入力完了フラグMap(kanryoFlagMap);
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
+        if (証明書入力済区分 == ShomeishoNyuryokuKanryoKubunType.入力未完了) {
+            throw new ApplicationException(エーラメッセージ.toString());
         }
     }
 
