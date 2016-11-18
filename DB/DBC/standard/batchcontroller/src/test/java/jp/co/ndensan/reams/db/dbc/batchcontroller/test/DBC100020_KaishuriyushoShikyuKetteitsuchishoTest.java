@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.test;
  * and open the template in the editor.
  */
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.flow.DBC100020_KaishuriyushoShikyuKetteitsuchisho;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC100020.DBC100020_KaishuriyushoShikyuKetteitsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.flow.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util._BatchInformation;
@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core._ControlData;
 import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -82,24 +81,36 @@ public class DBC100020_KaishuriyushoShikyuKetteitsuchishoTest extends DbcTestBas
         @Test
         public void バッチデータPrint() throws Exception {
             setExecutionSubGyomuCodeToControlData(SubGyomuCode.DBC介護給付);
-            BatchExitStatus result = flowHelper.executeFlow(new RString("DBC100020_KaishuriyushoShikyuKetteitsuchisho"),
+            BatchExitStatus result = flowHelper.executeFlow(new RString("DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho"),
                     new RString("償還払い支給（不支給）決定通知書一括作成"),
-                    DBC100020_KaishuriyushoShikyuKetteitsuchisho.class, createParamter());
+                    DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho.class, createParamter());
             assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
         }
     }
 
-    private static final DBC100020_KaishuriyushoShikyuKetteitsuchishoParameter createParamter() {
+    private static final DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter createParamter() {
 
-        DBC100020_KaishuriyushoShikyuKetteitsuchishoParameter pram = new DBC100020_KaishuriyushoShikyuKetteitsuchishoParameter();
-        pram.set事業者コード(new RString("1270100181"));
-        pram.set作成日(new FlexibleDate("20160812"));//20160812
-        pram.set出力順ID(1L);
-        pram.set市町村コード(new RString("209007"));
-        pram.set文書情報(new RString("0001"));
-        pram.set指定事業者のみフラグ(true);
-        pram.set決定日_開始日(new FlexibleDate("20160102"));
-        pram.set決定日_終了日(new FlexibleDate("20161002"));
+        DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter pram = new DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter();
+        pram.setテスト出力フラグ(new RString("false"));
+        pram.set利用者向け決定通知書フラグ(new RString("true"));
+        pram.set出力順ID(1);
+        pram.set受領委任者向け決定通知書フラグ(new RString("false"));
+        pram.set抽出モード(new RString("1"));
+        pram.set決定日一括更新区分(new RString("1"));
+        pram.set抽出条件日付From(new RDate("20160101"));
+        pram.set抽出条件日付To(new RDate("20161104"));
+        pram.set振込予定日(new RDate("20161125"));
+//        pram.set決定日付From(new RDate("20161101"));
+//        pram.set決定日付To(new RDate("20161103"));
+        pram.set発行日(new RDate("20161103"));
+        pram.set窓口払い一括更新区分(new RString("2"));
+        pram.set支払期間From(new RDate("20161121"));
+        pram.set支払期間To(new RDate("20161125"));
+//        pram.set決定日付From(決定日付From);
+//        pram.set決定日付To(決定日付To);
+        pram.set開始時間(開始時間);
+         pram.set終了時間(終了時間);
+         pram.set支払場所(new RString("支払場所"));
         return pram;
     }
 

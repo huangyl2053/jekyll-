@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteitsuc
 import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteitsuchihakko.KogakuShikyuFushikyuKetteiTsuchiHakkoReport;
 import jp.co.ndensan.reams.db.dbc.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.KogakuKetteiTsuchiShoSealerReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoReportParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -55,6 +57,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaish
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.DainoRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
@@ -72,6 +77,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
@@ -80,6 +86,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesak
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -97,7 +104,13 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
@@ -142,6 +155,17 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
     private static final RString 定型文文字サイズ_2 = new RString("2");
     private static final RString 定型文文字サイズ_3 = new RString("3");
     private static final RString 定型文文字サイズ_4 = new RString("4");
+    private static final RString 更新しない = new RString("1");
+    private static final int RSTRING_12 = 12;
+    private static final RString 午前 = new RString("午前");
+    private static final RString 午後 = new RString("午後");
+    private static final RString 帳票制御汎用キー_ゆうちょ銀行店名表示 = new RString("ゆうちょ銀行店名表示");
+    private static final RString 帳票制御汎用キー_口座名義人カナ優先区分 = new RString("口座名義人カナ優先区分");
+    private static final RString 印字する = new RString("1");
+    private static final RString カナ氏名 = new RString("2");
+    private static boolean 印字するFLG = false;
+    private static boolean カナ氏名FLG = false;
+    
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -189,6 +213,9 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
     ReportSourceWriter<KogakuKetteiTsuchiShoSealer2Source> reportSourceWriter4;
     BatchReportWriter<KogakuShikyuFushikyuKetteiTsuchiHakkoSource> batchReportWriter5;
     ReportSourceWriter<KogakuShikyuFushikyuKetteiTsuchiHakkoSource> reportSourceWriter5;
+    private List<PersonalData> personalDataList;
+    IOutputOrder 出力順;
+    private ReportOutputJokenhyoProcessCore outputCore;
 
     @Override
     protected void initialize() {
@@ -200,6 +227,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         並び順 = new ArrayList<>();
         改頁リスト = new ArrayList<>();
         pageBreakKeys = new ArrayList<>();
+        personalDataList = new ArrayList<>();
         システム日時 = RDateTime.now();
         service = ServicehiShikyuKetteiTsuchisho.createInstance();
         タイトルlist = service.getタイトル(帳票分類ID);
@@ -223,22 +251,41 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
                 FlexibleYear.MIN, 帳票制御汎用キー_支払方法抽出区分);
         支払方法抽出区分 = キー_支払方法抽出区分 == null ? null : キー_支払方法抽出区分.get設定値();
         帳票タイプ = キー_帳票タイプ == null ? RString.EMPTY : キー_帳票タイプ.get設定値();
+        
+        if (印字する.equals(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_ゆうちょ銀行店名表示))) {
+            印字するFLG = true;
+        }
+        if (カナ氏名.equals(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_口座名義人カナ優先区分))) {
+            カナ氏名FLG = true;
+        }
+        outputCore = new ReportOutputJokenhyoProcessCore();
     }
 
     @Override
     protected BatchDbReader createReader() {
         ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
         IShunoKamoku 介護給付_高額 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護給付_高額);
+        KamokuCode 科目コード;
+        if (介護給付_高額 != null) {
+            科目コード = 介護給付_高額.getコード();
+        } else {
+            科目コード = KamokuCode.EMPTY;
+        }
         IKozaSearchKey kozaSearchKey = new KozaSearchKeyBuilder()
                 .set業務コード(GyomuCode.DB介護保険)
                 .setサブ業務コード(SubGyomuCode.DBC介護給付)
-                .set科目コード(介護給付_高額.getコード())
+                .set科目コード(科目コード)
                 .set基準日(FlexibleDate.getNowDate()).build();
         List<KamokuCode> kamokuList = new ShunoKamokuAuthority().
                 get参照権限科目コード(UrControlDataFactory.createInstance().getLoginInfo().getUserId());
 
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
-        IAtesakiPSMSearchKey atesakiPSMSearchKey = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー).build();
+        AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
+        宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
+        宛先builder.set代納人利用区分(DainoRiyoKubun.利用しない);
+        宛先builder.set基準日(new FlexibleDate(parameter.get発行日().toDateString()));
+        宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
+        IAtesakiPSMSearchKey atesakiPSMSearchKey = 宛先builder.build();
 
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         List<JuminShubetsu> 住民種別 = new ArrayList<>();
@@ -347,8 +394,15 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         支給額給額合計 = 支給額給額合計.add(entity.get一時Entity().getKogakuShikyuGaku() == null ? Decimal.ZERO
                 : entity.get一時Entity().getKogakuShikyuGaku());
 
+        personalDataList.add(toPersonalData(entity));    
     }
 
+     private PersonalData toPersonalData(KogakuServiceReportEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), 
+                new RString("被保険者番号"), new RString(entity.get一時Entity().getHihokenshaNo().toString()));
+        return PersonalData.of(entity.get一時Entity().getShikibetsuCode(), expandedInfo);
+    }
+     
     @Override
     protected void afterExecute() {
         if (dataFlag) {
@@ -375,11 +429,37 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             batchReportWriter4.close();
         }
         batchReportWriter5.close();
+        AccessLogger.log(AccessLogType.照会, personalDataList);
+        eucFileOutputJohoFactory();
+    }
+    private void eucFileOutputJohoFactory() {
+        RString pageCount = RString.EMPTY;
+        if (帳票タイプ_1.equals(帳票タイプ)) {
+            pageCount = new RString(reportSourceWriter1.pageCount().value());
+        } else if (帳票タイプ_2.equals(帳票タイプ)) {
+            pageCount = new RString(reportSourceWriter2.pageCount().value());
+        } else if (帳票タイプ_3.equals(帳票タイプ)) {
+            pageCount = new RString(reportSourceWriter3.pageCount().value());
+        } else if (帳票タイプ_4.equals(帳票タイプ)) {
+            pageCount = new RString(reportSourceWriter4.pageCount().value());
+        }
+        List<RString> 出力条件List = outputCore.get出力条件(parameter, 出力順);
+        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
+                帳票ID,
+                Association.getLasdecCode().value(),
+                AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
+                new RString(parameter.getJobId()),
+                ReportIdDBC.DBC100007.getReportName(),
+                pageCount,
+                new RString("なし"),
+                RString.EMPTY,
+                出力条件List);
+        OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem).print();
     }
 
     private void get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder 出力順 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票分類ID, parameter.get出力順ID());
+        出力順 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票分類ID, parameter.get出力順ID());
         if (出力順 != null) {
             出力順情報 = MyBatisOrderByClauseCreator.create(JigyoKogakuKetteiTsuchishoOutputOrder.class, 出力順);
             for (ISetSortItem item : 出力順.get設定項目リスト()) {
@@ -477,12 +557,29 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         reportEntity.set不支給理由(entity.getFushikyuRiyu());
         reportEntity.set支払方法区分(entity.getShiharaiHohoKubunCode());
         reportEntity.set持ちもの(通知書定型文.get(INT_0));
-        reportEntity.set支払場所(entity.getShiharaiBasho());
+        
         reportEntity.set決定通知書番号(entity.getTsuchishoNo());
-        reportEntity.set支払期間開始年月日(toRDate(entity.getShiharaiKaishiYMD()));
-        reportEntity.set支払期間終了年月日(toRDate(entity.getShiharaiShuryoYMD()));
-        reportEntity.set支払窓口開始時間(entity.getShiharaiKaishiTime());
-        reportEntity.set支払窓口終了時間(entity.getShiharaiShuryoTime());
+        if (!(ShiharaiHohoKubun.窓口払.getコード().equals(entity.getShiharaiHohoKubunCode())
+                && ShikyuFushikyuKubun.支給.getコード().equals(entity.getKetteiShikyuKubunCode()))) {
+            return reportEntity;
+        }
+        if (ShiharaiHohoKubun.窓口払.getコード().equals(entity.getShiharaiHohoKubunCode())
+                && ShikyuFushikyuKubun.支給.getコード().equals(entity.getKetteiShikyuKubunCode())) {
+            if (更新しない.equals(parameter.get窓口払い一括更新区分())) {
+                reportEntity.set支払場所(entity.getShiharaiBasho());
+                reportEntity.set支払期間開始年月日(toRDate(entity.getShiharaiKaishiYMD()));
+                reportEntity.set支払期間終了年月日(toRDate(entity.getShiharaiShuryoYMD()));
+                reportEntity.set支払窓口開始時間(setDataTimeFomart(entity.getShiharaiKaishiTime()));
+                reportEntity.set支払窓口終了時間(setDataTimeFomart(entity.getShiharaiShuryoTime()));
+            } else {
+                reportEntity.set支払場所(parameter.get支払場所());
+                reportEntity.set支払期間開始年月日(parameter.get支払期間From());
+                reportEntity.set支払期間終了年月日(parameter.get支払期間To());
+                reportEntity.set支払窓口開始時間(setDataTimeFomart2(parameter.get開始時間()));
+                reportEntity.set支払窓口終了時間(setDataTimeFomart2(parameter.get終了時間()));
+            }
+        }
+        
         if (口座情報 != null) {
             set口座情報_3(reportEntity, 口座情報);
         }
@@ -513,16 +610,33 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         reportEntity.set不支給理由(entity.getFushikyuRiyu());
         reportEntity.set支払方法区分(entity.getShiharaiHohoKubunCode());
         reportEntity.set持ちもの(通知書定型文.get(INT_0));
-        reportEntity.set支払場所(entity.getShiharaiBasho());
-        reportEntity.set支払期間開始年月日(entity.getShiharaiKaishiYMD());
-        reportEntity.set支払期間終了年月日(entity.getShiharaiShuryoYMD());
-        reportEntity.set支払窓口開始時間(entity.getShiharaiKaishiTime());
-        reportEntity.set支払窓口終了時間(entity.getShiharaiShuryoTime());
+        reportEntity.set決定通知書番号(entity.getTsuchishoNo());
+        reportEntity.set自動償還対象フラグ(entity.isJidoShokanTaishoFlag());
+        if (!(ShiharaiHohoKubun.窓口払.getコード().equals(entity.getShiharaiHohoKubunCode())
+                && ShikyuFushikyuKubun.支給.getコード().equals(entity.getKetteiShikyuKubunCode()))) {
+            return reportEntity;
+        }
+        if (更新しない.equals(parameter.get窓口払い一括更新区分())) {
+            reportEntity.set支払場所(entity.getShiharaiBasho());
+            reportEntity.set支払期間開始年月日(entity.getShiharaiKaishiYMD());
+            reportEntity.set支払期間終了年月日(entity.getShiharaiShuryoYMD());
+            reportEntity.set支払窓口開始時間(setDataTimeFomart(entity.getShiharaiKaishiTime()));
+            reportEntity.set支払窓口終了時間(setDataTimeFomart(entity.getShiharaiShuryoTime()));
+        } else {
+            reportEntity.set支払場所(parameter.get支払場所());
+            if (null != parameter.get支払期間From()) {
+                reportEntity.set支払期間開始年月日(new FlexibleDate(parameter.get支払期間From().toDateString()));
+            }
+            if (null != parameter.get支払期間To()) {
+                reportEntity.set支払期間終了年月日(new FlexibleDate(parameter.get支払期間To().toDateString()));
+            }
+            reportEntity.set支払窓口開始時間(setDataTimeFomart2(parameter.get開始時間()));
+            reportEntity.set支払窓口終了時間(setDataTimeFomart2(parameter.get終了時間()));
+        }
         if (口座情報 != null) {
             set口座情報_2(reportEntity, 口座情報);
         }
-        reportEntity.set決定通知書番号(entity.getTsuchishoNo());
-        reportEntity.set自動償還対象フラグ(entity.isJidoShokanTaishoFlag());
+        
         return reportEntity;
     }
 
@@ -555,32 +669,21 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
 
     private void set口座情報_3(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity reportEntity, IKoza 口座情報) {
         reportEntity.setゆうちょ銀行フラグ(口座情報.isゆうちょ銀行());
-        if (フラグ_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) {
-            if (!口座情報.isゆうちょ銀行()) {
-                reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
-                reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
-                reportEntity.set口座種別(口座情報.get預金種別名称());
-                reportEntity.set口座番号(口座情報.get口座番号());
-            } else {
-                reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
-                reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
-                reportEntity.set通帳記号(口座情報.get通帳記号());
-                reportEntity.set通帳番号(口座情報.get通帳番号());
-            }
-            reportEntity.set口座名義人(口座情報.get口座名義人漢字() == null ? RString.EMPTY : 口座情報.get口座名義人漢字().value());
-        } else if (フラグ_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ())) {
-            if (!口座情報.isゆうちょ銀行()) {
-                reportEntity.set金融機関上段(アスタリスク);
-                reportEntity.set金融機関下段(アスタリスク);
-                reportEntity.set口座種別(アスタリスク);
-                reportEntity.set口座番号(アスタリスク);
-            } else {
-                reportEntity.set金融機関上段(アスタリスク);
-                reportEntity.set金融機関下段(アスタリスク);
-                reportEntity.set通帳記号(アスタリスク);
-                reportEntity.set通帳番号(アスタリスク);
-            }
-            reportEntity.set口座名義人(アスタリスク);
+        reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
+        reportEntity.set口座種別(口座情報.get店番());
+        if (!口座情報.isゆうちょ銀行()) {
+            reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
+            reportEntity.set口座種別(口座情報.get預金種別名称());
+        } else if (印字するFLG) {
+            reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
+        }
+
+        reportEntity.set口座番号(口座情報.get口座番号());
+
+        if (カナ氏名FLG) {
+            reportEntity.set口座名義人(口座情報.get口座名義人().value());
+        } else {
+            reportEntity.set口座名義人(口座情報.get口座名義人漢字().value());
         }
     }
 
@@ -588,32 +691,21 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         reportEntity.setゆうちょ銀行フラグ(口座情報.isゆうちょ銀行());
         reportEntity.set金融機関コード(口座情報.get金融機関コード() == null ? RString.EMPTY
                 : 口座情報.get金融機関コード().getColumnValue());
-        if (フラグ_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) {
-            if (!口座情報.isゆうちょ銀行()) {
-                reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
-                reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
-                reportEntity.set口座種別(口座情報.get預金種別名称());
-                reportEntity.set口座番号(口座情報.get口座番号());
-            } else {
-                reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
-                reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
-                reportEntity.set通帳記号(口座情報.get通帳記号());
-                reportEntity.set通帳番号(口座情報.get通帳番号());
-            }
-            reportEntity.set口座名義人(口座情報.get口座名義人漢字() == null ? RString.EMPTY : 口座情報.get口座名義人漢字().value());
-        } else if (フラグ_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ())) {
-            if (!口座情報.isゆうちょ銀行()) {
-                reportEntity.set金融機関上段(アスタリスク);
-                reportEntity.set金融機関下段(アスタリスク);
-                reportEntity.set口座種別(アスタリスク);
-                reportEntity.set口座番号(アスタリスク);
-            } else {
-                reportEntity.set金融機関上段(アスタリスク);
-                reportEntity.set金融機関下段(アスタリスク);
-                reportEntity.set通帳記号(アスタリスク);
-                reportEntity.set通帳番号(アスタリスク);
-            }
-            reportEntity.set口座名義人(アスタリスク);
+        reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
+        reportEntity.set口座種別(口座情報.get店番());
+        if (!口座情報.isゆうちょ銀行()) {
+            reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
+            reportEntity.set口座種別(口座情報.get預金種別名称());
+        } else if (印字するFLG) {
+            reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
+        }
+
+        reportEntity.set口座番号(口座情報.get口座番号());
+
+        if (カナ氏名FLG) {
+            reportEntity.set口座名義人(口座情報.get口座名義人().value());
+        } else {
+            reportEntity.set口座名義人(口座情報.get口座名義人漢字().value());
         }
     }
 
@@ -621,18 +713,22 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         reportEntity.setゆうちょ銀行フラグ(口座情報.isゆうちょ銀行());
         reportEntity.set金融機関コード(口座情報.get金融機関コード() == null ? RString.EMPTY
                 : 口座情報.get金融機関コード().getColumnValue());
+        reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
+        reportEntity.set口座種別(口座情報.get店番());
         if (!口座情報.isゆうちょ銀行()) {
-            reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
-            reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
+            reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
             reportEntity.set口座種別(口座情報.get預金種別名称());
-            reportEntity.set口座番号(口座情報.get口座番号());
-        } else {
-            reportEntity.set金融機関上段(口座情報.get金融機関() == null ? RString.EMPTY : 口座情報.get金融機関().get金融機関名称());
-            reportEntity.set金融機関下段(口座情報.get支店() == null ? RString.EMPTY : 口座情報.get支店().get支店名称());
-            reportEntity.set通帳記号(口座情報.get通帳記号());
-            reportEntity.set通帳番号(口座情報.get通帳番号());
+        } else if (印字するFLG) {
+            reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
         }
-        reportEntity.set口座名義人(口座情報.get口座名義人漢字() == null ? RString.EMPTY : 口座情報.get口座名義人漢字().value());
+
+        reportEntity.set口座番号(口座情報.get口座番号());
+
+        if (カナ氏名FLG) {
+            reportEntity.set口座名義人(口座情報.get口座名義人().value());
+        } else {
+            reportEntity.set口座名義人(口座情報.get口座名義人漢字().value());
+        }
     }
 
     private KogakuShikyuFushikyuKetteiTsuchiHakkoEntity getFushikyuReportEntity(KogakuServiceReportEntity entity,
@@ -815,5 +911,44 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         list.add(RString.EMPTY);
         list.add(RString.EMPTY);
         list.add(RString.EMPTY);
+    }
+    
+    private RString setDataTimeFomart(RString time) {
+        if (RString.isNullOrEmpty(time)) {
+            return RString.EMPTY;
+        }
+        RTime 支払窓口終了期間 = new RTime(time);
+        return setDataTimeFomart2(支払窓口終了期間);
+    }
+    
+    private RString setDataTimeFomart2(RTime 支払窓口終了期間) {
+        if (null == 支払窓口終了期間) {
+            return RString.EMPTY;
+        }
+        RStringBuilder 支払窓口終了期間Builder = new RStringBuilder();
+        int hour = 支払窓口終了期間.getHour();
+        if (hour < RSTRING_12) {
+            支払窓口終了期間Builder.append(午前);
+        } else {
+            hour = hour - RSTRING_12;
+            支払窓口終了期間Builder.append(午後);
+        }
+        支払窓口終了期間Builder.append(String.format("%02d", hour));
+        支払窓口終了期間Builder.append(new RString("時"));
+        if (0 < 支払窓口終了期間.getMinute()) {
+            支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getMinute()));
+            支払窓口終了期間Builder.append(new RString("分"));
+        }
+        return 支払窓口終了期間Builder.toRString();
+    }
+    
+    private RString get帳票制御汎用(ChohyoSeigyoHanyoManager 帳票制御汎用Manager, RString 項目名) {
+        RString 設定値 = RString.EMPTY;
+        ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                FlexibleYear.MIN, 項目名);
+        if (chohyoSeigyoHanyo != null) {
+            設定値 = chohyoSeigyoHanyo.get設定値();
+        }
+        return 設定値;
     }
 }
