@@ -98,9 +98,7 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
         if (帳票出力対象データ.getYubinNoChohyo() != null) {
             source.listHakkoTaishosha_5 = 帳票出力対象データ.getYubinNoChohyo().getColumnValue();
         }
-        if (帳票出力対象データ.getJushoChohyo() != null) {
-            source.listHakkoTaishosha_6 = 帳票出力対象データ.getJushoChohyo().getColumnValue();
-        }
+        source.listHakkoTaishosha_6 = 帳票出力対象データ.getEditJusho();
         if (帳票出力対象データ.getGyoseikuCodeChohyo() != null) {
             source.listHakkoTaishosha_7 = 帳票出力対象データ.getGyoseikuCodeChohyo().getColumnValue();
         }

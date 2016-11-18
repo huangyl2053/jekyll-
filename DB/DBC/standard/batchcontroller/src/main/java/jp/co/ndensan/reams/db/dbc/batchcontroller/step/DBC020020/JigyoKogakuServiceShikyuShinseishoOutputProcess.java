@@ -16,8 +16,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshi
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyoshikyushinseishoyuchosource.KogakuJigyoShikyuShinseishoYuchoSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakujigyoshikyushinseisho.KogakuJigyoShikyuShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakujigyoshikyushinseisho.KogakuJigyoShikyuShinseishoSource;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbz.service.core.chohyojushoeditor.ChohyoJushoEditor;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -34,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -107,7 +104,7 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
     protected void process(ShinseiJohoChohyoTempEntity entity) {
         if (金融機関コード_9900.equals(entity.getKinyuKikanCodeChohyo())) {
             KogakuJigyoShikyuShinseishoYuchoEntity param = new KogakuJigyoShikyuShinseishoYuchoEntity();
-            entity.setEditJusho(get住所Edit(entity, ReportIdDBC.DBC100070.getReportId().value()));
+            entity.setEditJusho(get住所Edit(entity));
             param.setシステム日付(RDateTime.now());
             param.set注意文(注意文);
             param.set帳票出力対象データ(entity);
@@ -120,7 +117,7 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
             count1 = count1 + 1;
         }
         KogakuJigyoShikyuShinseishoEntity param1 = new KogakuJigyoShikyuShinseishoEntity();
-        entity.setEditJusho(get住所Edit(entity, ReportIdDBC.DBC100070.getReportId().value()));
+        entity.setEditJusho(get住所Edit(entity));
         param1.setシステム日付(RDate.getNowDate());
         param1.set申請情報帳票発行一時(entity);
         param1.set認証者役職名(認証者名);
@@ -133,14 +130,10 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
 
     }
     
-    private RString get住所Edit(ShinseiJohoChohyoTempEntity entity, RString reportId) {
-        ChohyoJushoEditor 住所Editor = new ChohyoJushoEditor(SubGyomuCode.DBC介護給付, reportId, GyomuBunrui.介護事務);
-        RString 管内管外区分 = entity.getKannaiKangaiKubun();
+    private RString get住所Edit(ShinseiJohoChohyoTempEntity entity) {
         RString 住所 = entity.getJushoChohyo() == null ? RString.EMPTY : entity.getJushoChohyo().getColumnValue();
         RString 番地 = entity.getBanchi() == null ? RString.EMPTY : entity.getBanchi().getColumnValue();
         RString 方書 = entity.getKatagaki() == null ? RString.EMPTY : entity.getKatagaki().getColumnValue();
-        RString 行政区名 = entity.getGyoseikuName();
-        LasdecCode 市町村コード = entity.getShichosonCode();
-        return 住所Editor.editJusho(管内管外区分, 住所, 番地, 方書, 行政区名, 市町村コード);
+        return 住所.concat(番地).concat(RString.EMPTY).concat(方書);
     }
 }

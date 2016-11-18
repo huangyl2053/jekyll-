@@ -144,6 +144,7 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
     @Override
     protected void process(ShinseiJohoChohyoTempRelateEntity entity) {
         KogakuJigyoShinseishoHakkoIchiranParamter param = new KogakuJigyoShinseishoHakkoIchiranParamter();
+        entity.get申請情報().setEditJusho(get住所Edit(entity));
         param.set帳票出力対象データ(entity.get申請情報());
         param.set出力順(出力順);
         param.set連番(new RString(count));
@@ -269,4 +270,10 @@ public class ShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<Shin
         return RString.isNullOrEmpty(code) ? RString.EMPTY : ShikakuSoshitsuJiyu.toValue(code).get名称();
     }
 
+    private RString get住所Edit(ShinseiJohoChohyoTempRelateEntity entity) {
+        RString 住所 = entity.get申請情報().getJushoChohyo() == null ? RString.EMPTY : entity.get申請情報().getJushoChohyo().getColumnValue();
+        RString 番地 = entity.get申請情報().getBanchi() == null ? RString.EMPTY : entity.get申請情報().getBanchi().getColumnValue();
+        RString 方書 = entity.get申請情報().getKatagaki() == null ? RString.EMPTY : entity.get申請情報().getKatagaki().getColumnValue();
+        return 住所.concat(番地).concat(RString.EMPTY).concat(方書);
+    }
 }
