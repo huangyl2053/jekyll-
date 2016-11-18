@@ -10,15 +10,15 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKeigengaku;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoHenkoFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShafukukeigenServiceResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.DBC0820031StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.DBC0820031TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.ShafukuKeigenGakuPanelDiv;
@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -39,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -221,19 +219,14 @@ public class ShafukuKeigenGakuPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
         }
-        boolean flag = getHandler(div).is内容変更状態();
-        if (flag) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
-            }
-        } else {
+
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage()).respond();
+        }
+
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
             return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
         }
         return ResponseData.of(div).respond();
@@ -427,39 +420,11 @@ public class ShafukuKeigenGakuPanel {
                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
 
         ShafukuKeigenGakuPanelHandler handler = getHandler(div);
-        法人軽減額リスト.addAll(handler.get法人軽減額リスト(被保険者番号, サービス年月, 申請日, 事業者番号, 様式番号, 明細番号));
+        法人軽減額リスト.addAll(handler.get法人軽減額リスト(被保険者番号, サービス年月, 整理番号, 申請日, 事業者番号, 様式番号, 明細番号));
         dbJohoViewState.set償還払請求社会福祉法人軽減額データList(法人軽減額リスト);
 
         if (確定フラグ) {
-            RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-            if (登録.equals(処理モード)) {
-                Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap
-                        = dbJohoViewState.get証明書入力済フラグMap();
-                ShomeishoNyuryokuFlag 証明書入力済フラグ = 証明書入力済フラグMap.get(明細検索キー);
-                if (handler.is内容変更状態()) {
-                    証明書入力済フラグ.set社福軽減額_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力あり);
-                    証明書入力済フラグMap.put(明細検索キー, 証明書入力済フラグ);
-                    dbJohoViewState.set証明書入力済フラグMap(証明書入力済フラグMap);
-                }
-
-                ShomeishoNyuryokuKanryoKubunType 証明書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance()
-                        .証明書InputCheck(証明書入力済フラグ, 様式番号, サービス年月);
-                Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap
-                        = dbJohoViewState.get証明書入力完了フラグMap();
-                証明書入力完了フラグMap.put(明細検索キー, 証明書入力済区分);
-                dbJohoViewState.set証明書入力完了フラグMap(証明書入力完了フラグMap);
-                if (ShomeishoNyuryokuKanryoKubunType.入力未完了 == 証明書入力済区分) {
-                    // TODO エラー
-                }
-            }
-            if (修正.equals(処理モード) && handler.is内容変更状態()) {
-                Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap
-                        = dbJohoViewState.get証明書変更済フラグMap();
-                ShomeishoHenkoFlag 証明書変更済フラグ = 証明書変更済フラグMap.get(明細検索キー);
-                証明書変更済フラグ.set社福軽減額_証明書変更済フラグ(ShomeishoHenkoKubunType.変更あり);
-                証明書変更済フラグMap.put(明細検索キー, 証明書変更済フラグ);
-                dbJohoViewState.set証明書変更済フラグMap(証明書変更済フラグMap);
-            }
+            set入力有無フラグ(dbJohoViewState, 明細検索キー, handler.is内容変更状態());
         }
 
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJohoViewState);
@@ -485,5 +450,29 @@ public class ShafukuKeigenGakuPanel {
             dbJohoViewList.add(dbJohoView);
         }
         return dbJohoViewList;
+    }
+
+    private void set入力有無フラグ(DbJohoViewState dbJohoViewState, ShoukanharaihishinseimeisaikensakuParameter 明細検索キー,
+            boolean is内容変更あり) {
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        if (登録.equals(処理モード)) {
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap
+                    = dbJohoViewState.get証明書入力済フラグMap();
+            ShomeishoNyuryokuFlag 証明書入力済フラグ = 証明書入力済フラグMap.get(明細検索キー);
+            証明書入力済フラグ.set社福軽減額_証明書入力済フラグ(is内容変更あり
+                    ? ShomeishoNyuryokuKubunType.入力あり : ShomeishoNyuryokuKubunType.入力なし);
+            証明書入力済フラグMap.put(明細検索キー, 証明書入力済フラグ);
+            dbJohoViewState.set証明書入力済フラグMap(証明書入力済フラグMap);
+
+            ShomeishoNyuryokuKanryoKubunType 証明書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance()
+                    .証明書InputCheck(証明書入力済フラグ, 明細検索キー.get様式番号(), 明細検索キー.getサービス年月());
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap
+                    = dbJohoViewState.get証明書入力完了フラグMap();
+            証明書入力完了フラグMap.put(明細検索キー, 証明書入力済区分);
+            dbJohoViewState.set証明書入力完了フラグMap(証明書入力完了フラグMap);
+            if (ShomeishoNyuryokuKanryoKubunType.入力未完了 == 証明書入力済区分) {
+                throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage());
+            }
+        }
     }
 }

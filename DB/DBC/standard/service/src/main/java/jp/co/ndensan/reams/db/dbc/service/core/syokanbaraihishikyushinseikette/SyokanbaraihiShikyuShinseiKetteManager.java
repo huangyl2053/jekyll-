@@ -1416,7 +1416,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             return new ArrayList<>();
         }
         ShoKisaiHokenshaNo 証記載保険者番号 = dbT3034entity.getShoKisaiHokenshaNo();
-
+        dbT3034entity.initializeMd5();
         List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity> entityList
                 = 軽減率Dac.selectByKey(証記載保険者番号, 被保険者番号);
         if (entityList == null || entityList.isEmpty()) {
