@@ -652,7 +652,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         boolean flag = true;
         if (div.getCblOutputTaisho1().getReadOnly() && div.getCblOutputTaisho2().getReadOnly() && div.getCblOutputTaisho3().getReadOnly()
                 && div.getCblOutputTaisho4().getReadOnly() && div.getCblOutputTaisho5().getReadOnly() && div.getCblOutputTaisho6().getReadOnly()
-                && div.getCblOutputTaisho6().getReadOnly()) {
+                && div.getCblOutputTaisho7().getReadOnly()) {
             div.getCblOutputTaishoAll().setReadOnly(true);
             flag = false;
         }
