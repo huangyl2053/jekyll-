@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKan
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * ViewStateクラスです
@@ -57,28 +56,9 @@ public class DbJohoViewState implements Serializable {
     private ArrayList<ShokanShukeiResult> 償還払請求集計データList;
     private ArrayList<ShokanShokujiHiyo> 償還払請求食事費用データList;
     private ShokanHanteiKekka 償還払支給判定結果;
-    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap; // TODO 削除待ち
-    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap; // TODO 削除待ち
-    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap; // TODO 削除待ち
-    private Map<RString, ShomeishoHenkoFlag> 証明書変更済フラグマップ;
-    private Map<RString, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグマップ;
-
-    /**
-     * 明細検索キーより、明細検索キーRStr(Mapのキー)を取得します。
-     *
-     * @param param　明細検索キー
-     * @return 明細検索キーRStr
-     */
-    public static RString get明細検索キーRStr(ShoukanharaihishinseimeisaikensakuParameter param) {
-        RString comma = new RString(",");
-        return param.get被保険者番号().getColumnValue().concat(comma)
-                .concat(param.getサービス年月().toDateString()).concat(comma)
-                .concat(param.get整理番号()).concat(comma)
-                .concat(param.get事業者番号().getColumnValue()).concat(comma)
-                .concat(param.get様式番号()).concat(comma)
-                .concat(param.get明細番号());
-
-    }
+    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap;
+    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap;
+    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap;
 
     /**
      * サービス計画200904データを取得する。
