@@ -1155,7 +1155,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
         NonyuTsuchiShoJohoFactory nonyuTsuchiShoJohoFactory = InstanceProvider.create(NonyuTsuchiShoJohoFactory.class);
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報
-                = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名);
+                = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名,
+                        ReportIdDBB.DBB100045.getReportId().equals(帳票ID));
 
         if (本算定_区分.equals(区分)) {
             publish納入通知書本算定(帳票ID, 本算定納入通知書情報, reportManager);

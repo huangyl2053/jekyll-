@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesak
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 保険料納入通知書（本算定）【期毎タイプ】HokenryoNonyuTsuchishoKigotoEditor
@@ -50,6 +51,8 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     private static final int INDEX_8 = 8;
     private static final int INDEX_9 = 9;
     private static final int INDEX_10 = 10;
+    private static final RString 第 = new RString("第");
+    private static final RString 期 = new RString("期");
 
     /**
      * インスタンスを生成します。
@@ -128,7 +131,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.ryoshushoKanendo = RString.EMPTY;
         source.ryoshushoNendo = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
         source.ryoshushoKanendobun = RString.EMPTY;
-        source.ryoshushoKi = 納入通知書期情報.get期表記();
+        source.ryoshushoKi = new RString(納入通知書期情報.get期());
         source.ryoshushoTsuki = 納入通知書期情報.get月表記();
         source.ryoshushoYubinNo = 納付書共通.get郵便番号();
         source.ryoshushoGyoseikuName = 納付書共通.get行政区名();
@@ -157,7 +160,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.ryoshushohyojicodeName3 = 表示コード.get表示コード名３();
         source.ryoshushoHyojicode3 = 表示コード.get表示コード３();
         source.ryoshushoNokigen = 納入通知書期情報.get納期限表記();
-        source.ryoshushoNofugaku = 納入通知書期情報.get領収証書納付額欄();
+        source.ryoshushoNofugaku = DecimalFormatter.toコンマ区切りRString(new Decimal(納入通知書期情報.get領収証書納付額欄().toLong()), 0);
         source.ryoshushoNofuin = 納入通知書期情報.get領収日付印欄();
         source.ryoshushoRyoshuHizukein = 納入通知書期情報.get領収証書領収印欄();
         source.ryoshushoZuiji = 納入通知書期情報.get随時表記();
@@ -174,18 +177,18 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.nofushoKanendo = RString.EMPTY;
         source.nofushoNendo = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
         source.nofushoKanendobun = RString.EMPTY;
-        source.nofushoKi = 納入通知書期情報.get期表記();
+        source.nofushoKi = new RString(納入通知書期情報.get期());
         source.nofushoTsuki = 納入通知書期情報.get月表記();
         source.nofushoOcr1 = ocr.get(INDEX_1);
         source.nofushoOcr2 = ocr.get(INDEX_2);
         source.nofushoOcr3 = ocr.get(INDEX_3);
         source.nofushoOcr4 = ocr.get(INDEX_4);
-        source.nofushoNofugaku = 納入通知書期情報.get納付書納付額欄();
+        source.nofushoNofugaku = DecimalFormatter.toコンマ区切りRString(new Decimal(納入通知書期情報.get納付書納付額欄().toLong()), 0);
         source.nofushoSofusakiName = 納付書共通.get納付者氏名();
         RString 被代納人氏名 = 納付書共通.get被代納人氏名();
         source.nofushoHonninName1 = 被代納人氏名;
         source.nofushoKakko2 = RString.EMPTY;
-        if (!被代納人氏名.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(被代納人氏名)) {
             source.nofushoKakko1 = new RString("(");
             source.nofushoKakko3 = 納付書共通.get被代納人敬称() == null ? new RString(")") : 納付書共通.get被代納人敬称().concat(")");
         }
@@ -258,41 +261,41 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.nendo = 編集後本算定通知書共通情報.get賦課年度_年度なし();
         source.nendo1 = 編集後本算定通知書共通情報.get賦課年度_年度なし();
         if (更正後.get確定保険料_年額() != null) {
-            source.hokenryoGaku = new RString(更正後.get確定保険料_年額().toString());
+            source.hokenryoGaku = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
         }
         source.kisoKikanKaishi = 更正後.get期間_自();
         source.kisoKikanShuryo = 更正後.get期間_至();
         source.kisoTsukisu = 更正後.get月数_ケ月();
         source.kisoShotokuDankai = RStringUtil.convert半角to全角(更正後.get保険料段階());
         if (更正後.get保険料率() != null) {
-            source.kisoHokenryoRitsu = new RString(更正後.get保険料率().toString());
+            source.kisoHokenryoRitsu = DecimalFormatter.toコンマ区切りRString(更正後.get保険料率(), 0);
         }
         if (更正後.get減免前保険料_年額() != null) {
-            source.kisoCalHokenryoGaku = new RString(更正後.get減免前保険料_年額().toString());
+            source.kisoCalHokenryoGaku = DecimalFormatter.toコンマ区切りRString(更正後.get減免前保険料_年額(), 0);
         }
         if (更正後.get減免額() != null) {
-            source.kisoGenmenGaku = new RString(更正後.get減免額().toString());
+            source.kisoGenmenGaku = DecimalFormatter.toコンマ区切りRString(更正後.get減免額(), 0);
         }
         if (編集後本算定通知書共通情報.get特徴既に納付すべき額() != null) {
-            source.tokuchoNofuSubekiGaku = new RString(編集後本算定通知書共通情報.get特徴既に納付すべき額().toString());
+            source.tokuchoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get特徴既に納付すべき額(), 0);
         }
         if (編集後本算定通知書共通情報.get普徴既に納付すべき額() != null) {
-            source.fuchoNofuSubekiGaku = new RString(編集後本算定通知書共通情報.get普徴既に納付すべき額().toString());
+            source.fuchoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get普徴既に納付すべき額(), 0);
         }
         if (編集後本算定通知書共通情報.get納付済額_未到来期含む() != null) {
-            source.nofuZumiGaku = new RString(編集後本算定通知書共通情報.get納付済額_未到来期含む().toString());
+            source.nofuZumiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get納付済額_未到来期含む(), 0);
         }
         if (編集後本算定通知書共通情報.get今後納付すべき額() != null) {
-            source.kongoNofuSubekiGaku = new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString());
+            source.kongoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額(), 0);
         }
 
         List<UniversalPhase> 普徴期別金額リスト = 更正後.get普徴期別金額リスト();
         int 期 = 納入通知書期情報.get期();
         source.santeiKisoTokiHokenryoGaku = null == get普徴期別金額By期(普徴期別金額リスト, 期) ? new RString("0")
-                : new RString(get普徴期別金額By期(普徴期別金額リスト, 期).toString());
+                : DecimalFormatter.toコンマ区切りRString(get普徴期別金額By期(普徴期別金額リスト, 期), 0);
         source.santeiKisoJikiTitle = new RString("次期以降");
         source.santeiKisoJikoHokenryoGaku = null == get普徴期別金額By期(普徴期別金額リスト, 期 + 1) ? new RString("0")
-                : new RString(get普徴期別金額By期(普徴期別金額リスト, 期 + 1).toString());
+                : DecimalFormatter.toコンマ区切りRString(get普徴期別金額By期(普徴期別金額リスト, 期 + 1), 0);
         if (編集後本算定通知書共通情報.get編集後口座() != null) {
             source.bankName = 編集後本算定通知書共通情報.get編集後口座().get金融機関名CombinedWith支店名();
             source.kozaMeigi = 編集後本算定通知書共通情報.get編集後口座().get口座名義人優先();
@@ -331,29 +334,9 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         AfterEditInformation 普徴納期情報リスト10期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_10);
 
         source.titleNendo = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
-        source.nokiKaishi1 = get納期開始日(普徴納期情報リスト1期);
-        source.nokiShuryo1 = get納期終了日(普徴納期情報リスト1期);
-        source.nokiKaishi2 = get納期開始日(普徴納期情報リスト2期);
-        source.nokiShuryo2 = get納期終了日(普徴納期情報リスト2期);
-        source.nokiKaishi3 = get納期開始日(普徴納期情報リスト3期);
-        source.nokiShuryo3 = get納期終了日(普徴納期情報リスト3期);
-        source.nokiKaishi4 = get納期開始日(普徴納期情報リスト4期);
-        source.nokiShuryo4 = get納期終了日(普徴納期情報リスト4期);
-        source.nokiKaishi5 = get納期開始日(普徴納期情報リスト5期);
-        source.nokiShuryo5 = get納期終了日(普徴納期情報リスト5期);
-        source.nokiKaishi6 = get納期開始日(普徴納期情報リスト6期);
-        source.nokiShuryo6 = get納期終了日(普徴納期情報リスト6期);
-        source.nokiKaishi7 = get納期開始日(普徴納期情報リスト7期);
-        source.nokiShuryo7 = get納期終了日(普徴納期情報リスト7期);
-        source.nokiKaishi8 = get納期開始日(普徴納期情報リスト8期);
-        source.nokiShuryo8 = get納期終了日(普徴納期情報リスト8期);
-        source.nokiKaishi9 = get納期開始日(普徴納期情報リスト9期);
-        source.nokiShuryo9 = get納期終了日(普徴納期情報リスト9期);
-        source.nokiKaishi10 = get納期開始日(普徴納期情報リスト10期);
-        source.nokiShuryo10 = get納期開始日(普徴納期情報リスト10期);
 
         if (is納期限出力方法が0) {
-            source.ki1 = 納入通知書期情報.get期表記();
+            source.ki1 = new RString(納入通知書期情報.get期());
             source.tsuki1 = 納入通知書期情報.get月表記();
             source.ki2 = RString.EMPTY;
             source.tsuki2 = RString.EMPTY;
@@ -373,6 +356,27 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
             source.tsuki9 = RString.EMPTY;
             source.ki10 = RString.EMPTY;
             source.tsuki10 = RString.EMPTY;
+            AfterEditInformation 普徴納期情報 = get普徴納期情報By期(普徴納期情報リスト, 納入通知書期情報.get期());
+            source.nokiKaishi1 = get納期開始日(普徴納期情報);
+            source.nokiShuryo1 = get納期終了日(普徴納期情報);
+            source.nokiKaishi2 = RString.EMPTY;
+            source.nokiShuryo2 = RString.EMPTY;
+            source.nokiKaishi3 = RString.EMPTY;
+            source.nokiShuryo3 = RString.EMPTY;
+            source.nokiKaishi4 = RString.EMPTY;
+            source.nokiShuryo4 = RString.EMPTY;
+            source.nokiKaishi5 = RString.EMPTY;
+            source.nokiShuryo5 = RString.EMPTY;
+            source.nokiKaishi6 = RString.EMPTY;
+            source.nokiShuryo6 = RString.EMPTY;
+            source.nokiKaishi7 = RString.EMPTY;
+            source.nokiShuryo7 = RString.EMPTY;
+            source.nokiKaishi8 = RString.EMPTY;
+            source.nokiShuryo8 = RString.EMPTY;
+            source.nokiKaishi9 = RString.EMPTY;
+            source.nokiShuryo9 = RString.EMPTY;
+            source.nokiKaishi10 = RString.EMPTY;
+            source.nokiShuryo10 = RString.EMPTY;
         } else {
             source.ki1 = edit2ケタ空白埋め(普徴納期情報リストの一番目.get期());
             source.tsuki1 = edit2ケタ空白埋め(普徴納期情報リストの一番目.get月());
@@ -394,8 +398,28 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
             source.tsuki9 = edit2ケタ空白埋め(普徴納期情報リストの九番目.get月());
             source.ki10 = edit2ケタ空白埋め(普徴納期情報リストの十番目.get期());
             source.tsuki10 = edit2ケタ空白埋め(普徴納期情報リストの十番目.get月());
+            source.nokiKaishi1 = get納期開始日(普徴納期情報リスト1期);
+            source.nokiShuryo1 = get納期終了日(普徴納期情報リスト1期);
+            source.nokiKaishi2 = get納期開始日(普徴納期情報リスト2期);
+            source.nokiShuryo2 = get納期終了日(普徴納期情報リスト2期);
+            source.nokiKaishi3 = get納期開始日(普徴納期情報リスト3期);
+            source.nokiShuryo3 = get納期終了日(普徴納期情報リスト3期);
+            source.nokiKaishi4 = get納期開始日(普徴納期情報リスト4期);
+            source.nokiShuryo4 = get納期終了日(普徴納期情報リスト4期);
+            source.nokiKaishi5 = get納期開始日(普徴納期情報リスト5期);
+            source.nokiShuryo5 = get納期終了日(普徴納期情報リスト5期);
+            source.nokiKaishi6 = get納期開始日(普徴納期情報リスト6期);
+            source.nokiShuryo6 = get納期終了日(普徴納期情報リスト6期);
+            source.nokiKaishi7 = get納期開始日(普徴納期情報リスト7期);
+            source.nokiShuryo7 = get納期終了日(普徴納期情報リスト7期);
+            source.nokiKaishi8 = get納期開始日(普徴納期情報リスト8期);
+            source.nokiShuryo8 = get納期終了日(普徴納期情報リスト8期);
+            source.nokiKaishi9 = get納期開始日(普徴納期情報リスト9期);
+            source.nokiShuryo9 = get納期終了日(普徴納期情報リスト9期);
+            source.nokiKaishi10 = get納期開始日(普徴納期情報リスト10期);
+            source.nokiShuryo10 = get納期開始日(普徴納期情報リスト10期);
         }
-        source.santeiKisoTokiTitle = edit2ケタ空白埋め(普徴納期情報リストの一番目.get期());
+        source.santeiKisoTokiTitle = 第.concat(普徴納期情報リストの一番目.get期()).concat(期);
     }
 
     private RString edit2ケタ空白埋め(RString editor) {

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyu
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -42,6 +43,7 @@ public class HokenryoNonyuTsuchishoKigotoReport extends NonyuTsuchisho<HokenryoN
             本算定納入通知書情報 = new HonSanteiNonyuTsuchiShoJoho();
         }
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 本算定納入通知書情報.get納入通知書期情報リスト();
+        int pageCount = 0;
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
             if (納入通知書期情報.get納付額() == null
                     || (納入通知書期情報.get納付額() != null && 納入通知書期情報.get納付額().intValue() <= 0)) {
@@ -51,6 +53,10 @@ public class HokenryoNonyuTsuchishoKigotoReport extends NonyuTsuchisho<HokenryoN
                     = new HokenryoNonyuTsuchishoKigotoEditor(item, 納入通知書期情報, ninshoshaSource);
             IHokenryoNonyuTsuchishoKigotoBuilder builder = new HokenryoNonyuTsuchishoKigotoBuilder(editor);
             writer.writeLine(builder);
+            pageCount++;
+        }
+        if (0 == pageCount) {
+            throw new ApplicationException("選択された全納期の保険料は0円です。出力できません。");
         }
     }
 
