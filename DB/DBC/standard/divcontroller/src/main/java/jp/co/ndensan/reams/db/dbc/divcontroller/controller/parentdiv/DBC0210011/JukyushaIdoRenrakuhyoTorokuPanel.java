@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0210011.Juk
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0210011.JukyushaIdoRenrakuhyoTorokuPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.JukyushaIdoRenrakuhyoManager;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoToroku;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -93,7 +94,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
             div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getOutputJukyushaIdoRenrakuhyo().setDisabled(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(ボタン名, true);
             return ResponseData.of(div).addMessage(
-                    DbcInformationMessages.受給共通_受給者_事業対象者登録なし.getMessage()).respond();
+                    DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage()).respond();
         }
         div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo()
                 .initialize(新規モード, 資格対象者.get識別コード(), 資格対象者.get被保険者番号(), 0, false, FlexibleDate.getNowDate());
