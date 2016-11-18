@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiS
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShukeiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShukeiKekkaDataBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.KyufuJissekiShokaiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.dgKyufuJissekiGokeiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.dgKyufuJissekiMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
@@ -349,7 +348,6 @@ public class KyufuJissekiShokaiHandler {
             }
             for (int i = INT_NJYUNA; i < INT_NJYUNG; i++) {
                 div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i).setVisible(false);
-                div.getDgKyufuJissekiGokeiList().getGridSetting().getColumns().get(i).setVisible(false);
             }
         } else {
             int 列数 = サービス提供年月_終了.getBetweenMonths(サービス提供年月_開始) + INT_ICHI;
@@ -359,7 +357,6 @@ public class KyufuJissekiShokaiHandler {
                 }
                 for (int i = (列数 * INT_NI + INT_SAN); i < INT_NJYUNG; i++) {
                     div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i).setVisible(false);
-                    div.getDgKyufuJissekiGokeiList().getGridSetting().getColumns().get(i).setVisible(false);
                 }
             } else {
                 FlexibleYearMonth 計算後サービス提供年月_開始 = サービス提供年月_開始.plusMonth(列数 - INT_SJYUR);
@@ -373,7 +370,6 @@ public class KyufuJissekiShokaiHandler {
     private void set一覧表示() {
         for (int i = INT_ZERO; i < INT_NJYUNG; i++) {
             div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i).setVisible(true);
-            div.getDgKyufuJissekiGokeiList().getGridSetting().getColumns().get(i).setVisible(true);
         }
     }
 
@@ -1064,9 +1060,9 @@ public class KyufuJissekiShokaiHandler {
     private List<RString> get年度列名(FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了) {
         List<RString> 計算後年 = new ArrayList<>();
         int 列 = サービス提供年月_終了.getBetweenMonths(サービス提供年月_開始) + INT_ICHI;
-        FlexibleYearMonth 計算後年月 = サービス提供年月_開始.minusMonth(INT_ICHI);
+        FlexibleYearMonth 計算後年月 = サービス提供年月_終了.plusMonth(INT_ICHI);
         for (int i = 0; i < 列; i++) {
-            計算後年月 = 計算後年月.plusMonth(INT_ICHI);
+            計算後年月 = 計算後年月.minusMonth(INT_ICHI);
             計算後年.add(計算後年月.wareki().toDateString());
         }
         return 計算後年;
@@ -1224,20 +1220,19 @@ public class KyufuJissekiShokaiHandler {
         return 実績高額集計データ;
     }
 
-    private void set一覧列設定(List<KyufuJissekiKihonShukeiBusiness> 給付明細列一覧データ,
-            List<KyufuJissekiKihonKyotakuServiceBusiness> 計画費集計データ,
-            List<KyufujissekiKogakuKaigoServicehi> 実績高額集計データ, int 列位値) {
-        List<dgKyufuJissekiMeisaiList_Row> 種類明細一覧 = div.getDgKyufuJissekiMeisaiList().getDataSource();
-        List<dgKyufuJissekiGokeiList_Row> 種類合計一覧 = div.getDgKyufuJissekiGokeiList().getDataSource();
-        RString 検索対象 = div.getRadTaisho1().getSelectedKey();
-        for (int i = INT_ZERO; i < 種類明細一覧.size(); i++) {
-            set一覧対象金額データ(種類明細一覧.get(i), 列位値, get行対象金額(i, 給付明細列一覧データ, 計画費集計データ, 検索対象));
-        }
-        for (int i = INT_ZERO; i < 種類合計一覧.size(); i++) {
-            set合計一覧対象金額データ(種類合計一覧.get(i), 列位値, get合計行対象金額(i, 給付明細列一覧データ, 実績高額集計データ, 検索対象));
-        }
-    }
-
+//    private void set一覧列設定(List<KyufuJissekiKihonShukeiBusiness> 給付明細列一覧データ,
+//            List<KyufuJissekiKihonKyotakuServiceBusiness> 計画費集計データ,
+//            List<KyufujissekiKogakuKaigoServicehi> 実績高額集計データ, int 列位値) {
+//        List<dgKyufuJissekiMeisaiList_Row> 種類明細一覧 = div.getDgKyufuJissekiMeisaiList().getDataSource();
+//        List<dgKyufuJissekiGokeiList_Row> 種類合計一覧 = div.getDgKyufuJissekiGokeiList().getDataSource();
+//        RString 検索対象 = div.getRadTaisho1().getSelectedKey();
+//        for (int i = INT_ZERO; i < 種類明細一覧.size(); i++) {
+//            set一覧対象金額データ(種類明細一覧.get(i), 列位値, get行対象金額(i, 給付明細列一覧データ, 計画費集計データ, 検索対象));
+//        }
+//        for (int i = INT_ZERO; i < 種類合計一覧.size(); i++) {
+//            set合計一覧対象金額データ(種類合計一覧.get(i), 列位値, get合計行対象金額(i, 給付明細列一覧データ, 実績高額集計データ, 検索対象));
+//        }
+//    }
     private RString get行対象金額(int 行位値, List<KyufuJissekiKihonShukeiBusiness> 給付明細列一覧データ,
             List<KyufuJissekiKihonKyotakuServiceBusiness> 計画費集計データ, RString 検索対象) {
         switch (行位値) {
@@ -1903,128 +1898,6 @@ public class KyufuJissekiShokaiHandler {
         }
     }
 
-    private void set合計一覧対象金額データ(dgKyufuJissekiGokeiList_Row 合計一覧, int 列, RString 対象金額) {
-        switch (列) {
-            case INT_ICHI:
-                合計一覧.setTxtYM1(対象金額);
-                break;
-            case INT_NI:
-                合計一覧.setTxtYM2(対象金額);
-                break;
-            case INT_SAN:
-                合計一覧.setTxtYM3(対象金額);
-                break;
-            case INT_YON:
-                合計一覧.setTxtYM4(対象金額);
-                break;
-            case INT_GO:
-                合計一覧.setTxtYM5(対象金額);
-                break;
-            case INT_ROKU:
-                合計一覧.setTxtYM6(対象金額);
-                break;
-            case INT_NANA:
-                合計一覧.setTxtYM7(対象金額);
-                break;
-            case INT_HACHI:
-                合計一覧.setTxtYM8(対象金額);
-                break;
-            case INT_KYU:
-                合計一覧.setTxtYM9(対象金額);
-                break;
-            case INT_JYU:
-                合計一覧.setTxtYM10(対象金額);
-                break;
-            case INT_JYUI:
-                合計一覧.setTxtYM11(対象金額);
-                break;
-            case INT_JYUN:
-                合計一覧.setTxtYM12(対象金額);
-                break;
-            case INT_JYUS:
-                合計一覧.setTxtYM13(対象金額);
-                break;
-            case INT_JYUY:
-                合計一覧.setTxtYM14(対象金額);
-                break;
-            case INT_JYUG:
-                合計一覧.setTxtYM15(対象金額);
-                break;
-            case INT_JYUR:
-                合計一覧.setTxtYM16(対象金額);
-                break;
-            case INT_JYUNA:
-                合計一覧.setTxtYM17(対象金額);
-                break;
-            case INT_JYUH:
-                合計一覧.setTxtYM18(対象金額);
-                break;
-            default:
-                set合計一覧対象金額データ１(合計一覧, 列, 対象金額);
-        }
-    }
-
-    private void set合計一覧対象金額データ１(dgKyufuJissekiGokeiList_Row 合計一覧, int 列, RString 対象金額) {
-        switch (列) {
-            case INT_JYUK:
-                合計一覧.setTxtYM19(対象金額);
-                break;
-            case INT_NJYU:
-                合計一覧.setTxtYM20(対象金額);
-                break;
-            case INT_NJYUI:
-                合計一覧.setTxtYM21(対象金額);
-                break;
-            case INT_NJYUN:
-                合計一覧.setTxtYM22(対象金額);
-                break;
-            case INT_NJYUS:
-                合計一覧.setTxtYM23(対象金額);
-                break;
-            case INT_NJYUY:
-                合計一覧.setTxtYM24(対象金額);
-                break;
-            case INT_NJYUG:
-                合計一覧.setTxtYM25(対象金額);
-                break;
-            case INT_NJYUR:
-                合計一覧.setTxtYM26(対象金額);
-                break;
-            case INT_NJYUNA:
-                合計一覧.setTxtYM27(対象金額);
-                break;
-            case INT_NJYUH:
-                合計一覧.setTxtYM28(対象金額);
-                break;
-            case INT_NJYUK:
-                合計一覧.setTxtYM29(対象金額);
-                break;
-            case INT_SJYU:
-                合計一覧.setTxtYM30(対象金額);
-                break;
-            case INT_SJYUI:
-                合計一覧.setTxtYM31(対象金額);
-                break;
-            case INT_SJYUN:
-                合計一覧.setTxtYM32(対象金額);
-                break;
-            case INT_SJYUS:
-                合計一覧.setTxtYM33(対象金額);
-                break;
-            case INT_SJYUY:
-                合計一覧.setTxtYM34(対象金額);
-                break;
-            case INT_SJYUG:
-                合計一覧.setTxtYM35(対象金額);
-                break;
-            case INT_SJYUR:
-                合計一覧.setTxtYM36(対象金額);
-                break;
-            default:
-                break;
-        }
-    }
-
     private static class DateComparator implements Comparator<KeyValueDataSource>, Serializable {
 
         @Override
@@ -2058,7 +1931,7 @@ public class KyufuJissekiShokaiHandler {
     private List<KyufuJissekiShukeiKekka> edit集計結果(List<KyufuJissekiShukeiKekkaDataBusiness> 集計データ,
             FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了) {
         List<KyufuJissekiShukeiKekka> 集計結果List = new ArrayList<>();
-        FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(サービス提供年月_開始.toDateString());
+        FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(サービス提供年月_終了.toDateString());
         int index = 0;
         while (処理対象年月.isBeforeOrEquals(サービス提供年月_終了) && サービス提供年月_開始.isBeforeOrEquals(処理対象年月)) {
             List<KyufuJissekiShukeiKekka> 処理対象年月集計結果List = 初期化処理対象年月集計結果List(処理対象年月);
@@ -2091,7 +1964,7 @@ public class KyufuJissekiShokaiHandler {
                 index++;
             }
             集計結果List.addAll(処理対象年月集計結果List);
-            処理対象年月 = new FlexibleYearMonth(処理対象年月.plusMonth(1).toDateString());
+            処理対象年月 = new FlexibleYearMonth(処理対象年月.minusMonth(1).toDateString());
         }
         return 集計結果List;
     }
@@ -2813,7 +2686,7 @@ public class KyufuJissekiShokaiHandler {
     private void set一覧設定(KyufuJissekiSearchDataBusiness 一覧データ) {
         int 列位値 = 1;
         List<dgKyufuJissekiMeisaiList_Row> 種類明細一覧 = div.getDgKyufuJissekiMeisaiList().getDataSource();
-        List<dgKyufuJissekiGokeiList_Row> 種類合計一覧 = div.getDgKyufuJissekiGokeiList().getDataSource();
+        //List<dgKyufuJissekiGokeiList_Row> 種類合計一覧 = div.getDgKyufuJissekiGokeiList().getDataSource();
 
         //　画面にhiddenInputを追加して、表示データの開始・終了indexを管理する
         int idxST = 0;
@@ -2891,7 +2764,7 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtYM10(対象金額);
                 break;
             case INT_JYUI:
-                明細一覧.getBtnYM12().setDisabled(表示制御);
+                明細一覧.getBtnYM11().setDisabled(表示制御);
                 明細一覧.setTxtYM11(対象金額);
                 break;
             case INT_JYUN:
@@ -3013,168 +2886,4 @@ public class KyufuJissekiShokaiHandler {
         }
     }
 
-    private void set合計対象金額データ(dgKyufuJissekiGokeiList_Row 合計一覧, int 列, RString 対象金額, boolean 表示制御) {
-        switch (列) {
-            case INT_ICHI:
-                合計一覧.getBtnYM1().setDisabled(表示制御);
-                合計一覧.setTxtYM1(対象金額);
-                break;
-            case INT_NI:
-                合計一覧.getBtnYM2().setDisabled(表示制御);
-                合計一覧.setTxtYM2(対象金額);
-                break;
-            case INT_SAN:
-                合計一覧.getBtnYM3().setDisabled(表示制御);
-                合計一覧.setTxtYM3(対象金額);
-                break;
-            case INT_YON:
-                合計一覧.getBtnYM4().setDisabled(表示制御);
-                合計一覧.setTxtYM4(対象金額);
-                break;
-            case INT_GO:
-                合計一覧.getBtnYM5().setDisabled(表示制御);
-                合計一覧.setTxtYM5(対象金額);
-                break;
-            case INT_ROKU:
-                合計一覧.getBtnYM6().setDisabled(表示制御);
-                合計一覧.setTxtYM6(対象金額);
-                break;
-            case INT_NANA:
-                合計一覧.getBtnYM7().setDisabled(表示制御);
-                合計一覧.setTxtYM7(対象金額);
-                break;
-            case INT_HACHI:
-                合計一覧.getBtnYM8().setDisabled(表示制御);
-                合計一覧.setTxtYM8(対象金額);
-                break;
-            case INT_KYU:
-                合計一覧.getBtnYM9().setDisabled(表示制御);
-                合計一覧.setTxtYM9(対象金額);
-                break;
-            case INT_JYU:
-                合計一覧.getBtnYM10().setDisabled(表示制御);
-                合計一覧.setTxtYM10(対象金額);
-                break;
-            case INT_JYUI:
-                合計一覧.getBtnYM12().setDisabled(表示制御);
-                合計一覧.setTxtYM11(対象金額);
-                break;
-            case INT_JYUN:
-                合計一覧.getBtnYM12().setDisabled(表示制御);
-                合計一覧.setTxtYM12(対象金額);
-                break;
-            default:
-                set合計対象金額データ2(合計一覧, 列, 対象金額, 表示制御);
-        }
-    }
-
-    private void set合計対象金額データ2(dgKyufuJissekiGokeiList_Row 合計一覧, int 列, RString 対象金額, boolean 表示制御) {
-        switch (列) {
-            case INT_JYUS:
-                合計一覧.getBtnYM13().setDisabled(表示制御);
-                合計一覧.setTxtYM13(対象金額);
-                break;
-            case INT_JYUY:
-                合計一覧.getBtnYM14().setDisabled(表示制御);
-                合計一覧.setTxtYM14(対象金額);
-                break;
-            case INT_JYUG:
-                合計一覧.getBtnYM15().setDisabled(表示制御);
-                合計一覧.setTxtYM15(対象金額);
-                break;
-            case INT_JYUR:
-                合計一覧.getBtnYM16().setDisabled(表示制御);
-                合計一覧.setTxtYM16(対象金額);
-                break;
-            case INT_JYUNA:
-                合計一覧.getBtnYM17().setDisabled(表示制御);
-                合計一覧.setTxtYM17(対象金額);
-                break;
-            case INT_JYUH:
-                合計一覧.getBtnYM18().setDisabled(表示制御);
-                合計一覧.setTxtYM18(対象金額);
-                break;
-            case INT_JYUK:
-                合計一覧.getBtnYM19().setDisabled(表示制御);
-                合計一覧.setTxtYM19(対象金額);
-                break;
-            case INT_NJYU:
-                合計一覧.getBtnYM20().setDisabled(表示制御);
-                合計一覧.setTxtYM20(対象金額);
-                break;
-            case INT_NJYUI:
-                合計一覧.getBtnYM21().setDisabled(表示制御);
-                合計一覧.setTxtYM21(対象金額);
-                break;
-            case INT_NJYUN:
-                合計一覧.getBtnYM22().setDisabled(表示制御);
-                合計一覧.setTxtYM22(対象金額);
-                break;
-            case INT_NJYUS:
-                合計一覧.getBtnYM23().setDisabled(表示制御);
-                合計一覧.setTxtYM23(対象金額);
-                break;
-            case INT_NJYUY:
-                合計一覧.getBtnYM24().setDisabled(表示制御);
-                合計一覧.setTxtYM24(対象金額);
-                break;
-            default:
-                set合計対象金額データ3(合計一覧, 列, 対象金額, 表示制御);
-        }
-    }
-
-    private void set合計対象金額データ3(dgKyufuJissekiGokeiList_Row 合計一覧, int 列, RString 対象金額, boolean 表示制御) {
-        switch (列) {
-            case INT_NJYUG:
-                合計一覧.getBtnYM25().setDisabled(表示制御);
-                合計一覧.setTxtYM25(対象金額);
-                break;
-            case INT_NJYUR:
-                合計一覧.getBtnYM26().setDisabled(表示制御);
-                合計一覧.setTxtYM26(対象金額);
-                break;
-            case INT_NJYUNA:
-                合計一覧.getBtnYM27().setDisabled(表示制御);
-                合計一覧.setTxtYM27(対象金額);
-                break;
-            case INT_NJYUH:
-                合計一覧.getBtnYM28().setDisabled(表示制御);
-                合計一覧.setTxtYM28(対象金額);
-                break;
-            case INT_NJYUK:
-                合計一覧.getBtnYM29().setDisabled(表示制御);
-                合計一覧.setTxtYM29(対象金額);
-                break;
-            case INT_SJYU:
-                合計一覧.getBtnYM30().setDisabled(表示制御);
-                合計一覧.setTxtYM30(対象金額);
-                break;
-            case INT_SJYUI:
-                合計一覧.getBtnYM31().setDisabled(表示制御);
-                合計一覧.setTxtYM31(対象金額);
-                break;
-            case INT_SJYUN:
-                合計一覧.getBtnYM32().setDisabled(表示制御);
-                合計一覧.setTxtYM32(対象金額);
-                break;
-            case INT_SJYUS:
-                合計一覧.getBtnYM33().setDisabled(表示制御);
-                合計一覧.setTxtYM33(対象金額);
-                break;
-            case INT_SJYUY:
-                合計一覧.getBtnYM34().setDisabled(表示制御);
-                合計一覧.setTxtYM34(対象金額);
-                break;
-            case INT_SJYUG:
-                合計一覧.getBtnYM35().setDisabled(表示制御);
-                合計一覧.setTxtYM35(対象金額);
-                break;
-            case INT_SJYUR:
-                合計一覧.getBtnYM36().setDisabled(表示制御);
-                合計一覧.setTxtYM36(対象金額);
-                break;
-            default:
-                break;
-        }
-    }
 }

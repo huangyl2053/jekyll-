@@ -131,8 +131,8 @@
         <include refid="withDbT3017KyufujissekiKihon" />
 
   SELECT
-      "DbT3017KyufujissekiKihon".*
-      ,"DbT3118ShikibetsuNoKanri".*
+      <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
+      ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper.allColumns_DbT3118ShikibetsuNoKanri" />
       ,"DbT7060KaigoJigyosha"."jigyoshaName" AS "DbT7060_jigyoshaName"
     FROM
       "給付実績" AS "DbT3017KyufujissekiKihon"
@@ -878,6 +878,16 @@ ORDER BY
     </resultMap>
     
     <resultMap id="ResultMap_給付実績基本集計データ" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiKihonShukeiRelateEntity" autoMapping="true">
+        <id property="給付実績基本データ.kokanShikibetsuNo" column="dbT3017_kokanShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+        <id property="給付実績基本データ.inputShikibetsuNo" column="dbT3017_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <id property="給付実績基本データ.recodeShubetsuCode" column="dbT3017_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績基本データ.shokisaiHokenshaNo" column="dbT3017_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="給付実績基本データ.hiHokenshaNo" column="dbT3017_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="給付実績基本データ.serviceTeikyoYM" column="dbT3017_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="給付実績基本データ.jigyoshoNo" column="dbT3017_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="給付実績基本データ.kyufuSakuseiKubunCode" column="dbT3017_kyufuSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績基本データ.kyufuJissekiKubunCode" column="dbT3017_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績基本データ.toshiNo" column="dbT3017_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="事業者名称" column="DbT7060_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <association property="識別番号管理" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper.ResultMap_DbT3118ShikibetsuNoKanriEntity"/>
         <association property="給付実績基本データ" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
