@@ -75,6 +75,8 @@ public class ShikyuShinseiDetail {
     private static final RString 更新は正常に終了しました = new RString("更新は正常に終了しました。");
     private static final RString 削除は正常に終了しました = new RString("削除は正常に終了しました。");
 
+    private static final RString 必要な項目 = new RString("必要な項目");
+
     /**
      * 画面初期化処理です。
      *
@@ -96,7 +98,7 @@ public class ShikyuShinseiDetail {
 
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         if (MODEL_ADD.equals(画面モード)) {
-            整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString();
+            整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString().padLeft("0", 10);
         }
 
         ShikyuShinseiDetailHandler handler = getHandler(div);
@@ -104,11 +106,13 @@ public class ShikyuShinseiDetail {
         handler.load介護資格系基本情報(識別コード);
         RString config = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        ShokanShinsei 償還払支給申請 = handler.load支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, config);
+
         DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         if (dbJohoViewState == null) {
             dbJohoViewState = new DbJohoViewState();
         }
+
+        ShokanShinsei 償還払支給申請 = handler.load支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, config);
         dbJohoViewState.set償還払支給申請(償還払支給申請);
 
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJohoViewState);
@@ -323,8 +327,8 @@ public class ShikyuShinseiDetail {
         }
 
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        if (MODEL_ADD.equals(画面モード) && !getHandler(div).is変更あり_ADD()) {
-            return ResponseData.of(div).respond();
+        if ((メッセージ_登録.equals(画面モード) || MODEL_ADD.equals(画面モード)) && !getHandler(div).is変更あり_ADD()) {
+            throw new ApplicationException(UrErrorMessages.未入力.getMessage().replace(必要な項目.toString()));
         }
 
         DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
@@ -349,8 +353,8 @@ public class ShikyuShinseiDetail {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        if (MODEL_ADD.equals(画面モード) && !getHandler(div).is変更あり_ADD()) {
-            return ResponseData.of(div).respond();
+        if ((メッセージ_登録.equals(画面モード) || MODEL_ADD.equals(画面モード)) && !getHandler(div).is変更あり_ADD()) {
+            throw new ApplicationException(UrErrorMessages.未入力.getMessage().replace(必要な項目.toString()));
         }
         putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.サービス提供証明書).respond();
@@ -368,8 +372,8 @@ public class ShikyuShinseiDetail {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        if (MODEL_ADD.equals(画面モード) && !getHandler(div).is変更あり_ADD()) {
-            return ResponseData.of(div).respond();
+        if ((メッセージ_登録.equals(画面モード) || MODEL_ADD.equals(画面モード)) && !getHandler(div).is変更あり_ADD()) {
+            throw new ApplicationException(UrErrorMessages.未入力.getMessage().replace(必要な項目.toString()));
         }
         putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.償還払決定情報).respond();
@@ -457,7 +461,7 @@ public class ShikyuShinseiDetail {
         if (入力完了.equals(申請書入力完了フラグ) || 決定情報未完了.equals(申請書入力完了フラグ)) {
             DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
 
-            if (!ResponseHolder.isReRequest()) {
+            if (!ResponseHolder.isReRequest() && 決定情報未完了.equals(申請書入力完了フラグ)) {
                 QuestionMessage message = new QuestionMessage(DbcQuestionMessages.償還払い費支給申請決定_決定情報未入力.getMessage().getCode(),
                         DbcQuestionMessages.償還払い費支給申請決定_決定情報未入力.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();

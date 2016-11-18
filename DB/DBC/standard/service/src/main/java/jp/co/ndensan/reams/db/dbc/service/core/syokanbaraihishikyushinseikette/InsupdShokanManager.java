@@ -171,7 +171,7 @@ public class InsupdShokanManager {
      */
     public void 実績編集の処理(RString 修正前支給区分, FlexibleDate 決定日, HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号, RString 画面モード, ShikibetsuCode 識別コード) {
-        if (!決定日.isEmpty()) {
+        if (決定日 != null && !決定日.isEmpty()) {
             KyufujissekiEntity kyufuentity = SyokanbaraihiShikyuShinseiKetteManager.createInstance().
                     getKyufuJissekiData(被保険者番号, サービス提供年月, 整理番号);
             SyokanbaraiShikyuKetteKyufuJssekiHensyuManager manager

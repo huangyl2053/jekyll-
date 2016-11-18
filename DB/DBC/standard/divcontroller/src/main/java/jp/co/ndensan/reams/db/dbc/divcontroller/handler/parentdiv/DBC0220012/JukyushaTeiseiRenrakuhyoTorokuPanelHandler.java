@@ -230,8 +230,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                 受給者訂正連絡票Entity.set軽減率適用終了年月日(受給者訂正情報.get受給者異動送付entity().
                         get軽減率適用終了年月日());
             }
-            if (受給者訂正情報.get小多機能居宅介護利用開始月利用有フラグ() == null
-                    || !受給者訂正情報.get小多機能居宅介護利用開始月利用有フラグ()) {
+            if (受給者訂正情報.get小多機能居宅介護利用開始月利用有フラグ() == null) {
+                受給者訂正連絡票Entity.set小規模居宅ｻｰﾋﾞｽ利用(RString.EMPTY);
+            } else if (!受給者訂正情報.get小多機能居宅介護利用開始月利用有フラグ()) {
                 受給者訂正連絡票Entity.set小規模居宅ｻｰﾋﾞｽ利用(ONE);
             } else {
                 受給者訂正連絡票Entity.set小規模居宅ｻｰﾋﾞｽ利用(TWO);
@@ -759,7 +760,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             受給者訂正連絡票Entity.set標準適用終了年月日(受給者訂正情報.get受給者異動送付entity().
                     get負担額適用終了年月日());
         }
-        if (受給者訂正情報.get公費負担上限額減額有フラグ() == null || !受給者訂正情報.get公費負担上限額減額有フラグ()) {
+        if (受給者訂正情報.get公費負担上限額減額有フラグ() == null) {
+            受給者訂正連絡票Entity.set公費負担上限額減額(RString.EMPTY);
+        } else if (!受給者訂正情報.get公費負担上限額減額有フラグ()) {
             受給者訂正連絡票Entity.set公費負担上限額減額(ONE);
         } else {
             受給者訂正連絡票Entity.set公費負担上限額減額(TWO);

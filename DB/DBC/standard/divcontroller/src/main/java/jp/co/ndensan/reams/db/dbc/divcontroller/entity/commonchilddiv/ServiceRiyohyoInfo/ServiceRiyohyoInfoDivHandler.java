@@ -1200,12 +1200,12 @@ public class ServiceRiyohyoInfoDivHandler {
             row = new dgServiceRiyohyoBeppyoList_Row();
             row.setRowState(RowState.Added);
             setRowInButtonKakutei(row);
-            if (div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace("事業者"));
-            }
-            if (RString.isNullOrEmpty(div.getCcdServiceTypeInput().getサービス種類コード())) {
-                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace("サービス種類"));
-            }
+//            if (div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isEmpty()) {
+//                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace("事業者"));
+//            }
+//            if (RString.isNullOrEmpty(div.getCcdServiceTypeInput().getサービス種類コード())) {
+//                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace("サービス種類"));
+//            }
             onChange_txtServiceEvent();
             if (!get全て同事業者(rowList, row).isEmpty()) {
                 throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage());
