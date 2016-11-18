@@ -57,11 +57,8 @@ public class KubunShikyuGendogakuHandler {
             }
             FlexibleYearMonth teikyoshuryoYM = result.toEntity().getTeikyoshuryoYM();
             if (teikyoshuryoYM != null && !teikyoshuryoYM.isEmpty()) {
-                row.setDeleteButtonState(DataGridButtonState.Disabled);
                 row.setDefaultDataName3(teikyoshuryoYM.wareki()
                         .firstYear(FirstYear.ICHI_NEN).toDateString());
-            } else {
-                row.setDeleteButtonState(DataGridButtonState.Enabled);
             }
             if (result.toEntity().getServiceShuruiMeisho() != null) {
                 row.setDefaultDataName4(result.toEntity().getServiceShuruiMeisho());
