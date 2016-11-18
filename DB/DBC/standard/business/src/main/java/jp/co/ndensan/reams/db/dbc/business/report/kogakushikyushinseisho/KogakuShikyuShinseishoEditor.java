@@ -73,7 +73,6 @@ public class KogakuShikyuShinseishoEditor implements IKogakuShikyuShinseishoEdit
             source.telNo = getColumnValue(帳票出力対象データ.getTelNoChohyo());
             source.hokenshaNo = getColumnValue(帳票出力対象データ.getShoKisaiHokenshaNoChohyo());
             source.hihokenshaNo = getColumnValue(帳票出力対象データ.getHihokenshaNoChohyo());
-            source.kojinNo = getColumnValue(帳票出力対象データ.getKojinNoChohyo());
             source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
             source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.hihokenshaNo);
         }

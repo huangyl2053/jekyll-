@@ -14,11 +14,13 @@
         サービス費申請情報."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo" = #{ 保険者番号 }
         <if test="chushutsuJoken == 0002">
             AND サービス費申請情報."dbT3056KogakuShikyuShinsei_hihokenshaNo" = #{ hihokenshaNo }
+            AND サービス費申請情報."dbT3056KogakuShikyuShinsei_serviceTeikyoYM" = #{ shoriYm }
         </if>
-        <if test="!isJutakuAri">
+        <if test="!isJutakuAri and chushutsuJoken != 0002">
             AND サービス費申請情報."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" = #{ shoriYm }
         </if>
-        <if test="isJutakuAri">
+        
+        <if test="isJutakuAri and chushutsuJoken != 0002">
             AND サービス費申請情報."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM" = #{ shoriYm }
         </if>
         ORDER BY
@@ -35,11 +37,12 @@
         サービス費申請情報."dbT3110JigyoKogakuShikyuShinsei_shoKisaiHokenshaNo" = #{ 保険者番号 }
         <if test="chushutsuJoken == 0002">
             AND サービス費申請情報."dbT3110JigyoKogakuShikyuShinsei_hihokenshaNo" = #{ hihokenshaNo }
+            AND サービス費申請情報."dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM" = #{ shoriYm }
         </if>
-        <if test="事業高額 == 1">
+        <if test="事業高額 == 1 and chushutsuJoken != 0002">
             AND サービス費申請情報."dbT3109JigyoKogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" = #{ shoriYm }
         </if>
-        <if test="事業高額 == 2">
+        <if test="事業高額 == 2 and chushutsuJoken != 0002">
             AND サービス費申請情報."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM" = #{ shoriYm }
         </if>
         ORDER BY
