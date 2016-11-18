@@ -419,10 +419,10 @@ public class NonyuTsuchiShoDataHenshu {
     private Kitsuki find未納付出力期(List<UniversalPhase> 更正後普徴期別金額リスト, List<SamantabhadraIncomeInformation> 普徴収入情報リスト, int 期,
             KitsukiList 期月リスト) {
         for (int i = 期; i <= 整数12; i++) {
-            Decimal 金額 = get金額(更正後普徴期別金額リスト, 期);
-            Decimal 収入額 = get収入額(普徴収入情報リスト, 期);
+            Decimal 金額 = get金額(更正後普徴期別金額リスト, i);
+            Decimal 収入額 = get収入額(普徴収入情報リスト, i);
             if (!Decimal.ZERO.equals(金額) && !金額.equals(収入額)) {
-                return 期月リスト.get期の最初月(期);
+                return 期月リスト.get期の最初月(i);
             }
         }
         return null;
