@@ -288,9 +288,11 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
 
         List<UniversalPhase> 普徴期別金額リスト = 更正後.get普徴期別金額リスト();
         int 期 = 納入通知書期情報.get期();
-        source.santeiKisoTokiHokenryoGaku = new RString(get普徴期別金額By期(普徴期別金額リスト, 期).toString());
+        source.santeiKisoTokiHokenryoGaku = null == get普徴期別金額By期(普徴期別金額リスト, 期) ? new RString("0")
+                : new RString(get普徴期別金額By期(普徴期別金額リスト, 期).toString());
         source.santeiKisoJikiTitle = new RString("次期以降");
-        source.santeiKisoJikoHokenryoGaku = new RString(get普徴期別金額By期(普徴期別金額リスト, 期 + 1).toString());
+        source.santeiKisoJikoHokenryoGaku = null == get普徴期別金額By期(普徴期別金額リスト, 期 + 1) ? new RString("0")
+                : new RString(get普徴期別金額By期(普徴期別金額リスト, 期 + 1).toString());
         if (編集後本算定通知書共通情報.get編集後口座() != null) {
             source.bankName = 編集後本算定通知書共通情報.get編集後口座().get金融機関名CombinedWith支店名();
             source.kozaMeigi = 編集後本算定通知書共通情報.get編集後口座().get口座名義人優先();
