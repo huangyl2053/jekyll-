@@ -1115,7 +1115,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     }
 
     private void 比較追加(List<IdoTblTmpEntity> 異動一時2List, List<JukyushaIdoRenrakuhyoTempTBLEntity> 受給者異動送付List) {
-        for (int i = 受給者異動送付List.size() - COUNT_1; i < 異動一時2List.size(); i++) {
+        for (int i = 受給者異動送付List.size(); i < 異動一時2List.size(); i++) {
             受給者異動連絡票Entity出力処理(異動一時2List.get(i), false);
         }
     }
@@ -1471,7 +1471,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                     return -1;
                 }
                 if (o2.get異動年月日().isBefore(o1.get異動年月日())) {
-                    return -1;
+                    return 1;
                 }
                 return 0;
             }
@@ -1486,7 +1486,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                     return -1;
                 }
                 if (o2.getIdoYMD().isBefore(o1.getIdoYMD())) {
-                    return -1;
+                    return 1;
                 }
                 return 0;
             }
@@ -1760,13 +1760,15 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     private RString get異動一時2Key(IdoTblTmpEntity 異動一時2entity) {
         RStringBuilder key = new RStringBuilder();
-        key.append(異動一時2entity.get被保険者番号()).append(異動一時2entity.get異動年月日()).append(異動一時2entity.get履歴番号());
+        key.append(異動一時2entity.get被保険者番号().getColumnValue())
+                .append(異動一時2entity.get異動年月日().toString()).append(異動一時2entity.get履歴番号());
         return key.toRString();
     }
 
     private RString get受給者異動送付Key(JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
         RStringBuilder key = new RStringBuilder();
-        key.append(受給者異動送付.getHiHokenshaNo()).append(受給者異動送付.getIdoYMD()).append(受給者異動送付.getRirekiNo());
+        key.append(受給者異動送付.getHiHokenshaNo().getColumnValue())
+                .append(受給者異動送付.getIdoYMD().toString()).append(受給者異動送付.getRirekiNo());
         return key.toRString();
     }
 
