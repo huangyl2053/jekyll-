@@ -2227,7 +2227,7 @@
             年金特徴回付情報."dtKojinNo" AS "ueT0511after_dtKojinNo"
         FROM 
           "DbT2015KeisangoJoho" AS 計算後情報
-        INNER JOIN 
+        LEFT JOIN 
               rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
@@ -3226,8 +3226,7 @@
             "fuShunyuGaku14" = B."fuShunyuGaku14",
             "更正前情報有無区分" = '1'
         FROM "DbT2015KeisangoJohoTemp" AS B
-        WHERE A."dbT2015KeisangoJoho_choteiNendo" = B."choteiNendo"
-             AND A."dbT2015KeisangoJoho_fukaNendo" = B."fukaNendo"
+        WHERE A."dbT2015KeisangoJoho_fukaNendo" = B."fukaNendo"
              AND A."dbT2015KeisangoJoho_tsuchishoNo" = B."tsuchishoNo"
              AND B."koseiZengoKubun" = '1'
     </update>

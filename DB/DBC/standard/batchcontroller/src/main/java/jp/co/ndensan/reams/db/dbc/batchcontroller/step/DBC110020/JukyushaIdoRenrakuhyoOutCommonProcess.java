@@ -71,6 +71,9 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
     private static final int ORDER_15 = 15;
     private static final int ORDER_16 = 16;
     private static final int ORDER_17 = 17;
+    private static final int ORDER_18 = 18;
+    private static final int ORDER_19 = 19;
+    private static final int ORDER_20 = 20;
     private static final RString STR_2 = new RString("2");
     private static final RString STR_0 = new RString("0");
     private static final RString STR_01 = new RString("01");
@@ -525,6 +528,9 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.setRirekiNo(受給者台帳Info.get(ORDER_15));
         entity.setShinseiJokyoKubun(受給者台帳Info.get(ORDER_16));
         entity.setNinteiYMD(new FlexibleDate(受給者台帳Info.get(ORDER_17)));
+        entity.setSoshitsuYMD(new FlexibleDate(受給者台帳Info.get(ORDER_18)));
+        entity.setDataKubun(new Code(受給者台帳Info.get(ORDER_19)));
+        entity.setKyuSochishaFlag(STR_1.equals(受給者台帳Info.get(ORDER_20)));
         return entity;
     }
 

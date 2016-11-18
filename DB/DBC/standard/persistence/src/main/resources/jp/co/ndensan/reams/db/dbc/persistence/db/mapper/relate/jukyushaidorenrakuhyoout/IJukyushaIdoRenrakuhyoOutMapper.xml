@@ -1116,6 +1116,7 @@
          "IdouTemp2"."訂正年月日" as "IdouTemp2_teiseiYMD",
          "IdouTemp2"."論理削除フラグ" as "IdouTemp2_logicalDeletedFlag",
          "IdouTemp2"."市町村コード" as "IdouTemp2_市町村コード",
+         "IdouTemp2"."被保険者氏名" as "IdouTemp2_hiHokenshaName",
          "IdouTemp2"."エラーフラグ" as "IdouTemp2_エラーフラグ"
     </sql>
     <resultMap id="resultMap_異動一時2" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdoTblTmpEntity" autoMapping="true">
@@ -1203,6 +1204,7 @@
         <result property="訂正年月日" column="IdouTemp2_teiseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="論理削除フラグ" column="IdouTemp2_logicalDeletedFlag" />
         <result property="市町村コード" column="IdouTemp2_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="IdouTemp2_hiHokenshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="エラーフラグ" column="IdouTemp2_エラーフラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
