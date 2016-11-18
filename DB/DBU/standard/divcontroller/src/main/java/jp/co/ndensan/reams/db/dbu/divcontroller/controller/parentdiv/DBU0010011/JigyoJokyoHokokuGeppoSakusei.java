@@ -27,14 +27,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @reamsid_L DBU-5550-010 dangjingjing
  */
 public class JigyoJokyoHokokuGeppoSakusei {
-
-    private static final RString 一般状況1_11 = new RString("ippan1_11");
-    private static final RString 一般状況12_14_現物分 = new RString("ippan12_14Genbutsu");
-    private static final RString 保険給付決定状況_現物分 = new RString("hokenKyufuGenbutsu");
-    private static final RString 一般状況12_14_償還分 = new RString("ippan12_14Shokan");
-    private static final RString 保険給付決定状況_償還分 = new RString("hokenKyufuShokan");
-    private static final RString 保険給付決定状況_高額分 = new RString("hokenKyufuKogaku");
-    private static final RString 保険給付決定状況_高額合算分 = new RString("hokenKyufuKogakuGassan");
     private static final RString 集計のみ = new RString("shukei");
     private static final RString 集計後に印刷 = new RString("shukeiOutput");
     private static final RString 過去の集計結果を印刷 = new RString("kakoShukeiOutput");
@@ -125,7 +117,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         if (集計のみ.equals(jkkouTani) || 集計後に印刷.equals(jkkouTani)) {
             onLoad(div);
             div.setShichosonList(null);
-            getHandler(div).set日付時刻の空白設定();
+            getHandler(div).set過去処理クリア();
         }
         div.getBtnKakutei().setDisabled(true);
         div.getTxtHokokuYM().setDisabled(true);
@@ -154,8 +146,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         if (!日付.isBefore(報告年月)) {
             return ResponseData.of(div).addValidationMessages(getValidationHandler().check以降の日付を設定()).respond();
         }
-        getHandler(div).set入力された報告年月より各集計年月の設定(報告年月);
-        getHandler(div).setチェックボックス設定();
+        getHandler(div).set確定処理(報告年月);
         div.setKakuteiHokokuYM(div.getTxtHokokuYM().getValue().toDateString());
         return ResponseData.of(div).respond();
     }
@@ -167,6 +158,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_ddlKakoHokokuYM(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        getHandler(div).set過去処理クリア();
         if (!RString.isNullOrEmpty(new RString(div.getTblJikkoTani().getDdlKakoHokokuYM().getSelectedValue().toString()))) {
             getHandler(div).set月報報告_一般状況1_11onClick();
             getHandler(div).set月報報告_一般状況12_14_現物分onClick();
@@ -175,11 +167,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
             getHandler(div).set月報報告_保険給付決定_償還分();
             getHandler(div).set月報報告_保険給付決定_高額分();
             getHandler(div).set月報報告_保険給付決定_高額合算分();
-            getHandler(div).setチェックボックス設定();
-        } else {
-            getHandler(div).set日付時刻の空白設定();
-            onChange_cblOutputTaishoAll(div);
-        }
+            getHandler(div).setすべて選択チェックボックス();
+        } 
         return ResponseData.of(div).respond();
     }
 
@@ -224,74 +213,108 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaishoAll(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        getHandler(div).setすべて選択();
-        onChange_cblOutputTaisho1(div);
-        onChange_cblOutputTaisho2(div);
-        onChange_celOutputTaisho3(div);
-//        onChange_cblOutputTaisho4(div);
-//        onChange_cblOutputTaisho5(div);
+        getHandler(div).setチェックボックスAll();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 作成日時の設定 の処理です。
+     * 一般状況1～11の処理です。
      *
      * @param div 事業状況報告（月報）作成Div
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho1(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        getHandler(div).set作成日時の設定();
-        setすべて選択チェックボックス(div);
+        getHandler(div).setチェックボックス1();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 一般状況12～14【償還分】　チェックボックス の処理です。
+     * 一般状況12～14【現物分】の処理です。
      *
      * @param div 事業状況報告（月報）作成Div
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho2(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        getHandler(div).set一般状況償還分();
-        setすべて選択チェックボックス(div);
+        getHandler(div).setチェックボックス2();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 保険給付決定状況【償還分】　チェックボックス の処理です。
+     * 保険給付決定状況【現物分】の処理です。
      *
      * @param div 事業状況報告（月報）作成Div
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
-    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_celOutputTaisho3(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        getHandler(div).set保険給付償還分();
-        setすべて選択チェックボックス(div);
+    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho3(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        getHandler(div).setチェックボックス3();
         return ResponseData.of(div).respond();
     }
 
-//    /**
-//     * 一般状況１２～１４【償還分】集計年月選択ラジオボタン の処理です。
-//     *
-//     * @param div 事業状況報告（月報）作成Div
-//     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
-//     */
-//    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho4(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-//        getHandler(div).onChange一般状況12to14集計年月();
-//        setすべて選択チェックボックス(div);
-//        return ResponseData.of(div).respond();
-//    }
-//
-//    /**
-//     * 保険給付決定状況【償還分】集計年月選択ラジオボタン の処理です。
-//     *
-//     * @param div 事業状況報告（月報）作成Div
-//     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
-//     */
-//    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho5(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-//        getHandler(div).onChange保険給付決定状況集計年月();
-//        setすべて選択チェックボックス(div);
-//        return ResponseData.of(div).respond();
-//    }
+    /**
+     * 一般状況12～14【償還分】の処理です。
+     *
+     * @param div 事業状況報告（月報）作成Div
+     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho4(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        getHandler(div).setチェックボックス4();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一般状況１２～１４【償還分】集計年月選択ラジオボタンの処理です。
+     *
+     * @param div 事業状況報告（月報）作成Div
+     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_radlblShukeiType4(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        getHandler(div).onChange一般状況12to14集計年月();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 保険給付決定状況【償還分】集計年月選択ラジオボタン の処理です。
+     *
+     * @param div 事業状況報告（月報）作成Div
+     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_radlblShukeiType5(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        getHandler(div).onChange保険給付決定状況集計年月();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 保険給付決定状況【償還分】の処理です。
+     *
+     * @param div 事業状況報告（月報）作成Div
+     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho5(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        getHandler(div).setチェックボックス5();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 保険給付決定状況【高額分】　チェックボックス の処理です。
+     *
+     * @param div 事業状況報告（月報）作成Div
+     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho6(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        getHandler(div).setチェックボックス6();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 保険給付決定状況【高額合算分】の処理です。
+     *
+     * @param div 事業状況報告（月報）作成Div
+     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho7(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        getHandler(div).setチェックボックス7();
+        return ResponseData.of(div).respond();
+    }
 
     /**
      * 「市町村を選択する」ダイアログボタン
@@ -413,20 +436,6 @@ public class JigyoJokyoHokokuGeppoSakusei {
         枝番List.add(new RString("0011"));
         枝番List.add(new RString("0012"));
         return shoriDateKanriManager.get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告, 処理名List, 枝番List).records();
-    }
-
-    private void setすべて選択チェックボックス(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        List<RString> allKey = new ArrayList<>();
-        if (div.getCblOutputTaisho1().getSelectedKeys().contains(一般状況1_11)
-                && div.getCblOutputTaisho2().getSelectedKeys().contains(一般状況12_14_現物分)
-                && div.getCblOutputTaisho3().getSelectedKeys().contains(保険給付決定状況_現物分)
-                && div.getCblOutputTaisho4().getSelectedKeys().contains(一般状況12_14_償還分)
-                && div.getCblOutputTaisho5().getSelectedKeys().contains(保険給付決定状況_償還分)
-                && div.getCblOutputTaisho6().getSelectedKeys().contains(保険給付決定状況_高額分)
-                && div.getCblOutputTaisho7().getSelectedKeys().contains(保険給付決定状況_高額合算分)) {
-            allKey.add(new RString("all"));
-        }
-        div.getCblOutputTaishoAll().setSelectedItemsByKey(allKey);
     }
 
     private JigyoJokyoHokokuGeppoSakuseiHandler getHandler(JigyoJokyoHokokuGeppoSakuseiDiv div) {

@@ -24,10 +24,10 @@ public enum KyufuGengaku1GoDivSpec implements IPredicate<KyufuGengaku1GoDiv> {
                  */
                 @Override
                 public boolean apply(KyufuGengaku1GoDiv div) {
-                    if (!div.getTxtKonkaiKikanKaishiYMD().toString().isEmpty() && !div.getTxtKonkaiKikanShuryoYMD().toString().isEmpty()) {
+                    if (div.getTxtKonkaiKikanKaishiYMD().getValue() != null && !div.getTxtKonkaiKikanKaishiYMD().getValue().toString().isEmpty() && !div.getTxtKonkaiKikanShuryoYMD().getValue().toString().isEmpty()) {
                         return div.getTxtKonkaiKikanKaishiYMD().getValue().isBeforeOrEquals(div.getTxtKonkaiKikanShuryoYMD().getValue());
                     } else {
-                        return !div.getTxtKonkaiKikanKaishiYMD().toString().isEmpty() || !div.getTxtKonkaiKikanShuryoYMD().toString().isEmpty();
+                        return div.getTxtKonkaiKikanKaishiYMD().getValue() == null || !div.getTxtKonkaiKikanKaishiYMD().getValue().toString().isEmpty() || !div.getTxtKonkaiKikanShuryoYMD().getValue().toString().isEmpty();
                     }
                 }
             },
@@ -89,10 +89,10 @@ public enum KyufuGengaku1GoDivSpec implements IPredicate<KyufuGengaku1GoDiv> {
                  */
                 @Override
                 public boolean apply(KyufuGengaku1GoDiv div) {
-                    if (!div.getTxtGengakuTekiyoKikanKaishiYMD().toString().isEmpty() && !div.getTxtGengakuTekiyoKikanShuryoYMD().toString().isEmpty()) {
+                    if (div.getTxtGengakuTekiyoKikanKaishiYMD().getValue() != null && !div.getTxtGengakuTekiyoKikanKaishiYMD().getValue().toString().isEmpty() && !div.getTxtGengakuTekiyoKikanShuryoYMD().getValue().toString().isEmpty()) {
                         return div.getTxtGengakuTekiyoKikanKaishiYMD().getValue().isBeforeOrEquals(div.getTxtGengakuTekiyoKikanShuryoYMD().getValue());
                     } else {
-                        return !div.getTxtGengakuTekiyoKikanKaishiYMD().toString().isEmpty() || !div.getTxtGengakuTekiyoKikanShuryoYMD().toString().isEmpty();
+                        return div.getTxtGengakuTekiyoKikanKaishiYMD().getValue() == null || !div.getTxtGengakuTekiyoKikanKaishiYMD().toString().isEmpty() || !div.getTxtGengakuTekiyoKikanShuryoYMD().toString().isEmpty();
                     }
                 }
             },

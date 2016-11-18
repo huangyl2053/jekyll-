@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class RenkeiDataTorikomiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -156,16 +156,6 @@ public class RenkeiDataTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnDataTorikomi() {
-        return this.getRenkeiDataTorikomiBatchParameter().getBtnDataTorikomi();
-    }
-
-    @JsonIgnore
-    public void  setBtnDataTorikomi(Button btnDataTorikomi) {
-        this.getRenkeiDataTorikomiBatchParameter().setBtnDataTorikomi(btnDataTorikomi);
-    }
-
-    @JsonIgnore
     public IHokenshaListDiv getListHokennsha() {
         return this.getRenkeiDataTorikomiBatchParameter().getListHokennsha();
     }
@@ -188,6 +178,16 @@ public class RenkeiDataTorikomiDiv extends Panel {
     @JsonIgnore
     public void  setUploadTool(UploadPanel uploadTool) {
         this.getUploadArea().setUploadTool(uploadTool);
+    }
+
+    @JsonIgnore
+    public Button getBtnDataTorikomi() {
+        return this.getUploadArea().getBtnDataTorikomi();
+    }
+
+    @JsonIgnore
+    public void  setBtnDataTorikomi(Button btnDataTorikomi) {
+        this.getUploadArea().setBtnDataTorikomi(btnDataTorikomi);
     }
 
     @JsonIgnore

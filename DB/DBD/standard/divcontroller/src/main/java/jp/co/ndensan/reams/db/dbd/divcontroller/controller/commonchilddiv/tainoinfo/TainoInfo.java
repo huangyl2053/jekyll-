@@ -52,6 +52,26 @@ public class TainoInfo {
     }
 
     /**
+     * 「減額情報を表示する」ボタン減額情報ダイアログを開く前に実行されるイベントを設定します。
+     *
+     * @param div TainoInfoDiv
+     * @return ResponseData<TainoInfoDiv>
+     */
+    public ResponseData<TainoInfoDiv> onBeforeOpenDialog_BtnDispGengakuJoho(TainoInfoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 減額情報ダイアログが確定クローズイベントで閉じられたときにダイアログが完全に閉じた後に実行されるイベントを設定します。
+     *
+     * @param div TainoInfoDiv
+     * @return ResponseData<TainoInfoDiv>
+     */
+    public ResponseData<TainoInfoDiv> onOkClose_BtnDispGengakuJoho(TainoInfoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
      * 「確定する」ボタンをクリックする
      *
      * @param div GengakuInfoDiv

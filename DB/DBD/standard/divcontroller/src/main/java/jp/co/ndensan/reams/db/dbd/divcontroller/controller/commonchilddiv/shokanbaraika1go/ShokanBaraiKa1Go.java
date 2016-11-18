@@ -50,7 +50,7 @@ public class ShokanBaraiKa1Go {
      */
     public ResponseData<ShokanBaraiKa1GoDiv> onClick_BtnTorikeshi(ShokanBaraiKa1GoDiv div) {
         IDialogResponse dialogResponse = ResponseData.of(div);
-        if (!ResponseHolder.isReRequest() && getHandler(div).onClick_BtnTorikeshi()) {
+        if (!ResponseHolder.isReRequest()) {
             return dialogResponse.addMessage(UrWarningMessages.未保存情報の破棄確認.getMessage().replace("処理中のデータ")).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {

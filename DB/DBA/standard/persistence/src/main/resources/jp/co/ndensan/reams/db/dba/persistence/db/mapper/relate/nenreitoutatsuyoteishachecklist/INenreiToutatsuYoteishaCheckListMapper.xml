@@ -39,9 +39,9 @@
         DbT1001Hiho."jushochiTokureiFlag" AS "DbT1001Hiho_jushochiTokureiFlag",
         DbT1001Hiho."hihokennshaKubunCode" AS "DbT1001Hiho_hihokennshaKubunCode"
         FROM
-        rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hiho
-        INNER JOIN
         rgua.${psmShikibetsuTaisho} AS PSM
+        LEFT JOIN
+        rgdb."DbV1001HihokenshaDaicho" AS DbT1001Hiho
         ON
         DbT1001Hiho."shikibetsuCode" = PSM."shikibetsuCode"
         WHERE	DbT1001Hiho."shikibetsuCode"  IN
@@ -53,8 +53,10 @@
         )
         AND
         DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+        <if test ="userShutsuryokuSort">
         ORDER BY
         #{shutsuryokuSort}
+        </if>
     </select>
 
     <select resultOrdered="true" id="getTorokuNenreiToutatsuYoteishaCheckList2"
@@ -76,9 +78,9 @@
         DbT1001Hiho."jushochiTokureiFlag" AS "DbT1001Hiho_jushochiTokureiFlag",
         DbT1001Hiho."hihokennshaKubunCode" AS "DbT1001Hiho_hihokennshaKubunCode"
         FROM
-        rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hiho
-        INNER JOIN
         rgua.${psmShikibetsuTaisho} AS PSM
+        LEFT JOIN
+        rgdb."DbV1001HihokenshaDaicho" AS DbT1001Hiho
         ON
         DbT1001Hiho."shikibetsuCode" = PSM."shikibetsuCode"
         WHERE
@@ -89,8 +91,10 @@
         DbT1001Hiho."shikakuSoshitsuYMD" IS NULL
         AND
         DbT1001Hiho."hihokennshaKubunCode" = '2'
+        <if test ="userShutsuryokuSort">
         ORDER BY
         #{shutsuryokuSort}
+        </if>
     </select>
 
     <select resultOrdered="true" id="getZenbuNenreiToutatsuYoteishaCheckList"
@@ -115,20 +119,22 @@
         FROM
         rgua.${psmShikibetsuTaisho} AS PSM
         LEFT JOIN
-        rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hiho
+        rgdb."DbV1001HihokenshaDaicho" AS DbT1001Hiho
         ON
         DbT1001Hiho."shikibetsuCode" = PSM."shikibetsuCode"
         AND
         DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
-        WHERE	DbT1001Hiho."shikibetsuCode"  IN
+        WHERE	PSM."shikibetsuCode"  IN
         (
         SELECT
         "shikibetsuCode"
         FROM
         rgua.${psmShikibetsuTaisho2}
         )
+        <if test ="userShutsuryokuSort">
         ORDER BY
         #{shutsuryokuSort}
+        </if>
     </select>
 
     <select resultOrdered="true" id="getZenbuNenreiToutatsuYoteishaCheckList2"
@@ -153,11 +159,13 @@
         FROM
         rgua.${psmShikibetsuTaisho} AS PSM
         LEFT JOIN
-        rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hiho
+        rgdb."DbV1001HihokenshaDaicho" AS DbT1001Hiho
         ON
         DbT1001Hiho."shikibetsuCode" = PSM."shikibetsuCode"
         WHERE
         DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+        AND
+        DbT1001Hiho."jushochiTokureiFlag" = '0'
         AND
         DbT1001Hiho."hihokennshaKubunCode" = '2'
         UNION
@@ -179,7 +187,7 @@
         FROM
         rgua.${psmShikibetsuTaisho2} AS PSM
         LEFT JOIN
-        rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hiho
+        rgdb."DbV1001HihokenshaDaicho" AS DbT1001Hiho
         ON
         DbT1001Hiho."shikibetsuCode" = PSM."shikibetsuCode"
         WHERE
@@ -207,15 +215,19 @@
         FROM
         rgua.${psmShikibetsuTaisho3} AS PSM
         LEFT JOIN
-        rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hiho
+        rgdb."DbV1001HihokenshaDaicho" AS DbT1001Hiho
         ON
         DbT1001Hiho."shikibetsuCode" = PSM."shikibetsuCode"
         WHERE
         DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
         AND
+        DbT1001Hiho."jushochiTokureiFlag" = '0'
+        AND
         PSM."seinengappiYMD" IS NOT NULL
+        <if test ="userShutsuryokuSort">
         ORDER BY
         #{shutsuryokuSort}
+        </if>
 
     </select>
 

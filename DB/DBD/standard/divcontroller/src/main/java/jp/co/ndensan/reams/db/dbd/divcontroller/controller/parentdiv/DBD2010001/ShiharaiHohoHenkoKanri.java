@@ -130,7 +130,7 @@ public class ShiharaiHohoHenkoKanri {
      * @return レスポンスデータ
      */
     public ResponseData<ShiharaiHohoHenkoKanriDiv> onClick_btnDelete(ShiharaiHohoHenkoKanriDiv div) {
-        if (!div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow().getHdnKanriKubun().isEmpty()) {
+        if (変更状態_追加.equals(div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getActiveRow().getJotai())) {
             getHandler(div).支払変更管理一覧に削除();
         } else {
             ArrayList<ShiharaiHohoHenko> dataList = ViewStateHolder.get(ShiharaiHohoHenkoKanriEnum.支払方法変更の情報リスト, ArrayList.class);

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ikenshojissekiichiran;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IkenshoJissekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IkenshoJissekiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -65,7 +66,7 @@ public final class IkenshoJissekiIchiranChange {
                 在宅_継,
                 施設_新,
                 施設_継,
-                entity.get医師区分コード());
+                IshiKubunCode.toValue(entity.get医師区分コード()).get名称());
         return data;
     }
 

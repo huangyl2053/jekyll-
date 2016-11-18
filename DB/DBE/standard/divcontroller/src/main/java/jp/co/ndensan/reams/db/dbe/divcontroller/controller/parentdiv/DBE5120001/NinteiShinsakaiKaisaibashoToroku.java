@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5120001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -73,6 +74,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
         div.getShinsakaiKaisaibashokensaku().getRadHyojiJoken().setSelectedKey(デフォルト検索条件);
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getShinsakaiKaisaibashokensaku().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         return ResponseData.of(div).respond();
     }
 
@@ -86,6 +88,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
             onClick_btnKensaku(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
         div.getBtnTsuika().setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         return ResponseData.of(div).respond();
     }
 
@@ -111,6 +114,8 @@ public class NinteiShinsakaiKaisaibashoToroku {
         } else {
             getHandler(div).set開催場所一覧の追加();
         }
+        div.getShinsakaiKaisaibashokensaku().setReadOnly(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
         return ResponseData.of(div).respond();
     }
 
@@ -129,7 +134,10 @@ public class NinteiShinsakaiKaisaibashoToroku {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).set開催場所一覧の削除();
+            div.getBtnTsuika().setDisabled(false);
+            div.getShinsakaiKaisaibashokensaku().setReadOnly(false);
         }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         return ResponseData.of(div).respond();
     }
 
@@ -155,7 +163,10 @@ public class NinteiShinsakaiKaisaibashoToroku {
         } else {
             getHandler(div).set修正の場合開催場所編集エリア();
         }
+        div.getBtnTsuika().setDisabled(true);
         div.getTxtKaisaibashoCode().setReadOnly(true);
+        div.getShinsakaiKaisaibashokensaku().setReadOnly(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
         return ResponseData.of(div).respond();
     }
 
@@ -193,6 +204,8 @@ public class NinteiShinsakaiKaisaibashoToroku {
         } else {
             getHandler(div).set開催場所編集エリアを初期化処理();
         }
+        div.getShinsakaiKaisaibashokensaku().setReadOnly(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         return ResponseData.of(div).respond();
     }
 
@@ -207,6 +220,8 @@ public class NinteiShinsakaiKaisaibashoToroku {
         開催地区コードの存在チェック(div);
         getHandler(div).開催場所一覧の更新();
         div.getBtnTsuika().setDisabled(false);
+        div.getShinsakaiKaisaibashokensaku().setReadOnly(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         return ResponseData.of(div).respond();
     }
 

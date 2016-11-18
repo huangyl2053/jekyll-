@@ -92,21 +92,19 @@ public class GemmenGengakuShinseiHandler {
             div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(減免減額申請情報.get申請届出代行事業者番号().getColumnValue());
             div.getCcdShisetsuJoho().setShisetsuMeisho(kaigoJigyosha.get事業者名称().getColumnValue());
         } else {
-
-            div.getDdlJigyoshaKubun().setDataSource(getDdlJigyoshaKubun());
-            if (減免減額申請情報.get事業者区分() != null) {
-                div.getDdlJigyoshaKubun().setSelectedKey(減免減額申請情報.get事業者区分().getCode());
-            } else {
-                div.getDdlJigyoshaKubun().setSelectedKey(空白KEY);
-            }
-            if (減免減額申請情報.get申請届出代行事業者番号() != null && !減免減額申請情報.get申請届出代行事業者番号().isEmpty()) {
-                div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(減免減額申請情報.get申請届出代行事業者番号().getColumnValue());
-            } else {
-                div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(RString.EMPTY);
-            }            
-//          TODO:施設名称の取得方法がわからない。div.getCcdShisetsuJoho().get入所施設名称(JigyoshaNo.EMPTY)がメソッドとして用意されているが
-//            　 台帳種別やその他のコントロールに値が設定されないため、名称を取得できない。
+            div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(RString.EMPTY);
             div.getCcdShisetsuJoho().setShisetsuMeisho(RString.EMPTY);
+        }
+        div.getDdlJigyoshaKubun().setDataSource(getDdlJigyoshaKubun());
+        if (減免減額申請情報.get事業者区分() != null) {
+            div.getDdlJigyoshaKubun().setSelectedKey(減免減額申請情報.get事業者区分().getCode());
+        } else {
+            div.getDdlJigyoshaKubun().setSelectedKey(空白KEY);
+        }
+        if (減免減額申請情報.get申請届出代行事業者番号() != null && !減免減額申請情報.get申請届出代行事業者番号().isEmpty()) {
+            div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(減免減額申請情報.get申請届出代行事業者番号().getColumnValue());
+        } else {
+            div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(RString.EMPTY);
         }
         if (減免減額申請情報.get申請届出代行区分() != null) {
             div.getDdlShinseiDaikoKubun().setSelectedKey(減免減額申請情報.get申請届出代行区分().getCode());
@@ -170,6 +168,7 @@ public class GemmenGengakuShinseiHandler {
         div.getTxtShinseishaJusho().clearDomain();
         div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(RString.EMPTY);
         div.getCcdShisetsuJoho().getTxtNyuryokuShisetsuKodo().setDisabled(true);
+        div.getCcdShisetsuJoho().getTxtNyuryokuShisetsuMeisho().setDisabled(true);
         div.getCcdShisetsuJoho().setShisetsuMeisho(RString.EMPTY);
         div.getCcdShisetsuJoho().getRadKaigoHokenShisetsu().setSelectedValue(介護保険施設);
     }

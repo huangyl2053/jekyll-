@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class RenkeiDataTorikomiBatchParameterDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,8 +27,6 @@ public class RenkeiDataTorikomiBatchParameterDiv extends PanelBatchParameter {
     private RadioButton radHoKaisei;
     @JsonProperty("dgTorikomiTaisho")
     private DataGrid<dgTorikomiTaisho_Row> dgTorikomiTaisho;
-    @JsonProperty("btnDataTorikomi")
-    private Button btnDataTorikomi;
     @JsonProperty("listHokennsha")
     private HokenshaListDiv listHokennsha;
 
@@ -72,24 +70,6 @@ public class RenkeiDataTorikomiBatchParameterDiv extends PanelBatchParameter {
     @JsonProperty("dgTorikomiTaisho")
     public void setDgTorikomiTaisho(DataGrid<dgTorikomiTaisho_Row> dgTorikomiTaisho) {
         this.dgTorikomiTaisho = dgTorikomiTaisho;
-    }
-
-    /*
-     * getbtnDataTorikomi
-     * @return btnDataTorikomi
-     */
-    @JsonProperty("btnDataTorikomi")
-    public Button getBtnDataTorikomi() {
-        return btnDataTorikomi;
-    }
-
-    /*
-     * setbtnDataTorikomi
-     * @param btnDataTorikomi btnDataTorikomi
-     */
-    @JsonProperty("btnDataTorikomi")
-    public void setBtnDataTorikomi(Button btnDataTorikomi) {
-        this.btnDataTorikomi = btnDataTorikomi;
     }
 
     /*

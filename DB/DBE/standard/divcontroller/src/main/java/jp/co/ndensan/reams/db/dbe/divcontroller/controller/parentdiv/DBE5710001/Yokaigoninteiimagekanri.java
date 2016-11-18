@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ImageDisplay.ImageDisplay.ImageDisplayValidationHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710001.DBE5710001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710001.YokaigoninteiimagekanriDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagekanri.YokaigoninteiimagekanriFinder;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -117,7 +119,19 @@ public class Yokaigoninteiimagekanri {
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnChosahyoGaikyo(YokaigoninteiimagekanriDiv div) {
         ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_調査票概況);
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号.value());
+        if (イメージ管理情報.getイメージ共有ファイルID() == null) {
+            ValidationMessageControlPairs validPairs = getValidationHandler().イメージ存在チェック();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
         return ResponseData.of(div).respond();
+    }
+
+    private ImageDisplayValidationHandler getValidationHandler() {
+        return new ImageDisplayValidationHandler();
     }
 
     /**
@@ -128,6 +142,14 @@ public class Yokaigoninteiimagekanri {
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnIkensho(YokaigoninteiimagekanriDiv div) {
         ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_意見書);
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号.value());
+        if (イメージ管理情報.getイメージ共有ファイルID() == null) {
+            ValidationMessageControlPairs validPairs = getValidationHandler().イメージ存在チェック();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -139,6 +161,14 @@ public class Yokaigoninteiimagekanri {
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnSonota(YokaigoninteiimagekanriDiv div) {
         ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_その他資料);
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号.value());
+        if (イメージ管理情報.getイメージ共有ファイルID() == null) {
+            ValidationMessageControlPairs validPairs = getValidationHandler().イメージ存在チェック();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
         return ResponseData.of(div).respond();
     }
 

@@ -73,7 +73,7 @@ public class NinteiShinseiTorokuUketsukeValidationHandler {
         messages.add(ValidateChain.validateStart(div).ifNot(NinteiShinseiTorokuUketsukeDivSpec.申請日が未入力チェック)
                 .thenAdd(NoInputMessages.申請日が未入力チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.申請日が未入力チェック, div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD()).build().check(messages));
+                NoInputMessages.申請日が未入力チェック, div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtShinseiYMD()).build().check(messages));
         return pairs;
     }
 

@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -57,7 +56,7 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
 public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishoshaKanriEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinTaishoshaKanri."
+            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshintaishoshakanri."
                     + "IKoshinTaishoshaKanriMapper.get更新申請対象者情報");
     private static final EdabanCode 認定申請枝番コード = new EdabanCode(new RString("000"));
     private static final RString 認定年度内連番 = new RString("0012");
@@ -225,7 +224,7 @@ public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishosh
     }
 
     private FlexibleYear get年度(FlexibleYear 年度) {
-        if (!parameter.get年度内連番().isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(parameter.get年度内連番())) {
             if (parameter.get年度内連番().equals(認定年度内連番)) {
                 年度 = new FlexibleYear(new RString((parameter.get年度().getYearValue() + 1)));
                 return 年度;
@@ -238,7 +237,7 @@ public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishosh
     }
 
     private RString get年度内連番(RString 年度内連番) {
-        if (!年度内連番.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(年度内連番)) {
             if (年度内連番.equals(認定年度内連番)) {
                 return 新年度内連番;
             }
@@ -298,12 +297,12 @@ public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishosh
             entity.setShoriEdaban(処理枝番);
             entity.setNendo(get年度(parameter.get年度()));
             entity.setNendoNaiRenban(get年度内連番(parameter.get年度内連番()));
-            entity.setKijunYMD(FlexibleDate.EMPTY);
+            entity.setKijunYMD(FlexibleDate.getNowDate());
             entity.setKijunTimestamp(YMDHMS.now());
-            entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);
-            entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get対象月().toString() + RDateTime.now().format西暦("ddHHmmss")));
-            entity.setTaishoShuryoYMD(FlexibleDate.EMPTY);
-            entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.get対象月().toString() + RDateTime.now().format西暦("ddHHmmss")));
+            entity.setTaishoKaishiYMD(new FlexibleDate(parameter.get対象月().toString() + "01"));
+            entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get対象月().toString() + "01000000"));
+            entity.setTaishoShuryoYMD(new FlexibleDate(parameter.get対象月().toString() + "01").plusMonth(1).plusDay(-1));
+            entity.setTaishoShuryoTimestamp(new YMDHMS(new FlexibleDate(parameter.get対象月().toString() + "01").plusMonth(1).plusDay(-1).toString() + "000000"));
             return entity;
         } else {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
@@ -313,12 +312,12 @@ public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishosh
             entity.setShoriEdaban(処理枝番);
             entity.setNendo(get年度(parameter.get年度()));
             entity.setNendoNaiRenban(get年度内連番(parameter.get年度内連番()));
-            entity.setKijunYMD(FlexibleDate.EMPTY);
+            entity.setKijunYMD(FlexibleDate.getNowDate());
             entity.setKijunTimestamp(YMDHMS.now());
-            entity.setTaishoKaishiYMD(FlexibleDate.EMPTY);
-            entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get有効期間終了日To().toString() + RDateTime.now().format西暦("HHmmss")));
-            entity.setTaishoShuryoYMD(FlexibleDate.EMPTY);
-            entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.get有効期間終了日To().toString() + RDateTime.now().format西暦("HHmmss")));
+            entity.setTaishoKaishiYMD(parameter.get有効期間終了日From());
+            entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get有効期間終了日To().toString() + "000000"));
+            entity.setTaishoShuryoYMD(parameter.get有効期間終了日To());
+            entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.get有効期間終了日To().toString() + "000000"));
             return entity;
         }
     }
