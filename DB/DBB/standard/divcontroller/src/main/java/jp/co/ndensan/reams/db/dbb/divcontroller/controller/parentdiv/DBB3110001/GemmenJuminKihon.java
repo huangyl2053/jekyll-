@@ -203,14 +203,13 @@ public class GemmenJuminKihon {
         GemmenJuminKihonHandler handler = getHandler(div);
         GemmenJoho 最新減免の情報 = 年度分賦課減免リスト.get最新減免の情報();
         GemmenJuminKihonValidationHandler validationHandler = new GemmenJuminKihonValidationHandler(div);
-        // TODO ビジネス設計_DBBBZ13001_23_賦課の計算.xlsxの調定計算 が問題があります。
         ValidationMessageControlPairs pairs = validationHandler.決定日の必須入力チェック();
-//        pairs.add(validationHandler.減免額の整合性チェック());
+        pairs.add(validationHandler.減免額の整合性チェック());
         if (handler.isNot取消()) {
             pairs.add(validationHandler.減免額の必須入力チェック());
         }
         pairs.add(validationHandler.減免額の必須入力チェック1());
-//        pairs.add(validationHandler.計算処理の未実行チェック(最新減免の情報));
+        pairs.add(validationHandler.計算処理の未実行チェック(最新減免の情報));
         pairs.add(validationHandler.決定日の必須入力チェック２());
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
