@@ -40,6 +40,7 @@ public class ServiceRiyohyoInfoDivValidationHandler {
 
     private ValidationDictionary create明細計算Dictionary() {
         return new ValidationDictionaryBuilder()
+                .add(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.単位必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtTani())
                 .add(ServiceRiyohyoInfoDivValidationMessage.回数必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu()).build();
