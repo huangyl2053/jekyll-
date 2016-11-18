@@ -181,7 +181,7 @@ public class KyufuJoho {
         KyufujissekiKihon kyufujissekikihon = new KyufujissekiKihon(dbt3017kyufujissekikihonentity);
         List<KyufujissekiKihon> 給付実績基本情報 = new ArrayList();
         給付実績基本情報.add(kyufujissekikihon);
-        kyufujissekiprmbusiness.setCsData_A(給付実績基本情報);
+//        kyufujissekiprmbusiness.setCsData_A(給付実績基本情報);
         KojinKakuteiKey kojinkakuteikey = new KojinKakuteiKey();
         kojinkakuteikey.set被保険者番号(new HihokenshaNo(給付実績基本集計.get(0).get被保険者番号().toString()));
         kyufujissekiprmbusiness.setKojinKakuteiKey(kojinkakuteikey);
