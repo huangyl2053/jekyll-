@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180030;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180011.DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180021.DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180022.DBC180022_RiyoshaFutanwariaiHanteiSubParameter;
@@ -30,10 +31,14 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
 
     private static final String KEY_対象年度 = "対象年度";
     private static final String KEY_基準日 = "市町村コード";
+    private static final String KEY_処理区分 = "処理区分";
     private static final String KEY_抽出開始日時 = "抽出開始日時";
     private static final String KEY_抽出終了日時 = "抽出終了日時";
+    private static final String KEY_テストモード = "テストモード";
     private static final String KEY_年度終了年月日 = "年度終了年月日";
     private static final String KEY_処理日時 = "処理日時";
+    private static final String KEY_判定基準日 = "判定基準日";
+    private static final String KEY_対象月 = "対象月";
     private static final String KEY_抽出回数 = "抽出回数";
     private static final RString 異動 = new RString("2");
     private static final RString 過年度 = new RString("3");
@@ -43,14 +48,22 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
     private FlexibleYear 対象年度;
     @BatchParameter(key = KEY_基準日, name = "基準日")
     private RDate 基準日;
+    @BatchParameter(key = KEY_処理区分, name = "処理区分")
+    private RString 処理区分;
     @BatchParameter(key = KEY_抽出開始日時, name = "抽出開始日時")
     private RDateTime 抽出開始日時;
     @BatchParameter(key = KEY_抽出終了日時, name = "抽出終了日時")
     private RDateTime 抽出終了日時;
+    @BatchParameter(key = KEY_テストモード, name = "テストモード")
+    private boolean テストモード;
     @BatchParameter(key = KEY_年度終了年月日, name = "年度終了年月日")
     private FlexibleDate 年度終了年月日;
     @BatchParameter(key = KEY_処理日時, name = "処理日時")
     private RDateTime 処理日時;
+    @BatchParameter(key = KEY_判定基準日, name = "判定基準日")
+    private List<RString> 判定基準日;
+    @BatchParameter(key = KEY_対象月, name = "対象月")
+    private List<RString> 対象月;
     @BatchParameter(key = KEY_抽出回数, name = "抽出回数")
     private int 抽出回数;
 

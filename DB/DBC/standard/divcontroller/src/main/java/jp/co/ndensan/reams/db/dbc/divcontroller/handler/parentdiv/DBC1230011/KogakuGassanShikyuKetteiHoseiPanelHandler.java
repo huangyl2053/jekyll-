@@ -716,7 +716,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         if (メッセージ != null && !メッセージ.isEmpty() && ResponseHolder.getState().
                 equals(DBC1230011StateName.支給決定情報補正.getName())) {
             if (支給決定情報補正判定MSG1.equals(メッセージ)) {
-                message = DbcInformationMessages.償還決定データなし.getMessage();
+                message = DbcInformationMessages.支給決定情報補正判定Msg1.getMessage();
             } else if (支給決定情報補正判定MSG2.equals(メッセージ)) {
                 message = DbcInformationMessages.支給決定情報補正判定Msg2.getMessage();
             } else if (支給決定情報補正判定MSG3.equals(メッセージ)) {
