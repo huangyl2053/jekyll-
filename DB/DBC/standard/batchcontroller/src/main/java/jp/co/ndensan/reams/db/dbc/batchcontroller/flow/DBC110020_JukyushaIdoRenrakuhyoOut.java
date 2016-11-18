@@ -130,7 +130,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
         executeStep(データ比較処理);
         returnEntity = getResult(JukyushaIdoRenrakuhyoOutFlowEntity.class, new RString(データ比較処理),
                 DataCompareShoriProcess.PARAMETER_OUT_RETURNENTITY);
-        do文字コード変換();
+//        do文字コード変換();
         executeStep(国保連インタフェース管理更新);
 
     }

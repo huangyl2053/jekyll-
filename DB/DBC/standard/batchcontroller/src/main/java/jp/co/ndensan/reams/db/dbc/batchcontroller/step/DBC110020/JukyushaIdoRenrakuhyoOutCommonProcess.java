@@ -69,6 +69,8 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
     private static final int ORDER_13 = 13;
     private static final int ORDER_14 = 14;
     private static final int ORDER_15 = 15;
+    private static final int ORDER_16 = 16;
+    private static final int ORDER_17 = 17;
     private static final RString STR_2 = new RString("2");
     private static final RString STR_0 = new RString("0");
     private static final RString STR_01 = new RString("01");
@@ -521,6 +523,8 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.setJukyuShinseiJiyu(new Code(受給者台帳Info.get(ORDER_13)));
         entity.setJukyuShinseiYMD(new FlexibleDate(受給者台帳Info.get(ORDER_14)));
         entity.setRirekiNo(受給者台帳Info.get(ORDER_15));
+        entity.setShinseiJokyoKubun(受給者台帳Info.get(ORDER_16));
+        entity.setNinteiYMD(new FlexibleDate(受給者台帳Info.get(ORDER_17)));
         return entity;
     }
 
@@ -559,6 +563,13 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.set居宅サービス計画作成区分コード(居宅計画Info.get(ORDER_2));
         entity.setサービス種類コード(居宅計画Info.get(ORDER_3));
         entity.set有効終了日(new FlexibleDate(居宅計画Info.get(ORDER_4)));
+        entity.set居宅計画種類(居宅計画Info.get(ORDER_5));
+        entity.set適用終了日(new FlexibleDate(居宅計画Info.get(ORDER_6)));
+        entity.set届出年月日(new FlexibleDate(居宅計画Info.get(ORDER_7)));
+        entity.set被保険者番号(new HihokenshaNo(居宅計画Info.get(ORDER_8)));
+        entity.setTaishoYM1(new FlexibleYearMonth(居宅計画Info.get(ORDER_9)));
+        entity.setTaishoYM2(new FlexibleYearMonth(居宅計画Info.get(ORDER_10)));
+        entity.set履歴番号(Integer.parseInt(居宅計画Info.get(ORDER_11).toString()));
         return entity;
     }
 
@@ -572,6 +583,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.set適用終了日(new FlexibleDate(居宅計画Info.get(ORDER_1)));
         entity.set申請日(new FlexibleDate(居宅計画Info.get(ORDER_2)));
         entity.set決定年月日(new FlexibleDate(居宅計画Info.get(ORDER_3)));
+        entity.set決定区分(居宅計画Info.get(ORDER_4));
         return entity;
     }
 
@@ -583,6 +595,8 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         List<RString> 利用者負担Info = 利用者負担.split(SPLIT.toString());
         entity.setTekiyoKaishiYMD(new FlexibleDate(利用者負担Info.get(ORDER_0)));
         entity.setTekiyoShuryoYMD(new FlexibleDate(利用者負担Info.get(ORDER_1)));
+        entity.setShinseiYMD(new FlexibleDate(利用者負担Info.get(ORDER_2)));
+        entity.setKetteiYMD(new FlexibleDate(利用者負担Info.get(ORDER_3)));
         return entity;
     }
 
@@ -636,6 +650,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         DbT3105SogoJigyoTaishoshaEntity entity = new DbT3105SogoJigyoTaishoshaEntity();
         List<RString> 総合事業対象者Info = 総合事業対象者.split(SPLIT.toString());
         entity.setTekiyoKaishiYMD(new FlexibleDate(総合事業対象者Info.get(ORDER_0)));
+        entity.setTekiyoShuryoYMD(new FlexibleDate(総合事業対象者Info.get(ORDER_1)));
         return entity;
     }
 
@@ -670,6 +685,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.setYukoKaishiYMD(new FlexibleDate(二割負担Info.get(ORDER_0)));
         entity.setYukoShuryoYMD(new FlexibleDate(二割負担Info.get(ORDER_1)));
         entity.setHihokenshaNo(new HihokenshaNo(二割負担Info.get(ORDER_2)));
+        entity.setFutanWariaiKubun(二割負担Info.get(ORDER_3));
         return entity;
     }
 

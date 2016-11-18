@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -1309,6 +1310,16 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.setJushochiTokureiFlag(被保険者台帳Info.get(ORDER_2));
         entity.setIdoYMD(new FlexibleDate(被保険者台帳Info.get(ORDER_3)));
         entity.setEdaNo(被保険者台帳Info.get(ORDER_4));
+        if (!RString.isNullOrEmpty(被保険者台帳Info.get(ORDER_5))) {
+            entity.setShichosonCode(new LasdecCode(被保険者台帳Info.get(ORDER_5)));
+        } else {
+            entity.setShichosonCode(LasdecCode.EMPTY);
+        }
+        if (!RString.isNullOrEmpty(被保険者台帳Info.get(ORDER_6))) {
+            entity.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode(被保険者台帳Info.get(ORDER_6)));
+        } else {
+            entity.setKoikinaiTokureiSochimotoShichosonCode(LasdecCode.EMPTY);
+        }
         return entity;
     }
 
