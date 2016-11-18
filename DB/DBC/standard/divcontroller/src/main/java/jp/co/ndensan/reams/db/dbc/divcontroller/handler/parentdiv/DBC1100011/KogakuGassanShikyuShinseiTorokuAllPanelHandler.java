@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Shinse
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKeitai;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_SoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ShikyushinseishoTorokugamenTitle;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.KanyuRirekiInputDiv;
@@ -77,19 +78,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final RString DBCMN61010 = new RString("DBCMN61010");
     private static final RString DBCMN61011 = new RString("DBCMN61011");
     private static final RString DBCMN61012 = new RString("DBCMN61012");
-
-    private static final RString タイトル1 = new RString("高額合算支給申請書登録・新規申請");
-    private static final RString タイトル2 = new RString("高額合算支給申請書登録・変更申請");
-    private static final RString タイトル3 = new RString("高額合算支給申請書登録・取下げ申請");
-    private static final RString タイトル4 = new RString("高額合算支給申請書訂正");
-    private static final RString タイトル5 = new RString("高額合算支給申請書（写）・新規申請");
-    private static final RString タイトル6 = new RString("高額合算支給申請書（写）・変更申請");
-    private static final RString タイトル7 = new RString("高額合算支給申請書（写）・取下げ申請");
-    private static final RString タイトル8 = new RString("高額合算支給申請書（写）訂正");
-    private static final RString タイトル9 = new RString("高額合算自己負担額証明書交付申請書登録・新規申請");
-    private static final RString タイトル10 = new RString("高額合算自己負担額証明書交付申請書登録・変更申請");
-    private static final RString タイトル11 = new RString("高額合算自己負担額証明書交付申請書登録・取下げ申請");
-    private static final RString タイトル12 = new RString("高額合算自己負担額証明書交付申請書登録・訂正");
 
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
@@ -206,40 +194,40 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         RString タイトル = RString.EMPTY;
         switch (メニューID.toString()) {
             case "DBCMN61001":
-                タイトル = タイトル1;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書登録_新規申請.get名称();
                 break;
             case "DBCMN61002":
-                タイトル = タイトル2;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書登録_変更申請.get名称();
                 break;
             case "DBCMN61003":
-                タイトル = タイトル3;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書登録_取下げ申請.get名称();
                 break;
             case "DBCMN61004":
-                タイトル = タイトル4;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書訂正.get名称();
                 break;
             case "DBCMN61005":
-                タイトル = タイトル5;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_登録_新規申請.get名称();
                 break;
             case "DBCMN61006":
-                タイトル = タイトル6;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_登録_変更申請.get名称();
                 break;
             case "DBCMN61007":
-                タイトル = タイトル7;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_登録_取下げ申請.get名称();
                 break;
             case "DBCMN61008":
-                タイトル = タイトル8;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_訂正.get名称();
                 break;
             case "DBCMN61009":
-                タイトル = タイトル9;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書登録_新規申請.get名称();
                 break;
             case "DBCMN61010":
-                タイトル = タイトル10;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書登録_変更申請.get名称();
                 break;
             case "DBCMN61011":
-                タイトル = タイトル11;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書登録_取下げ申請.get名称();
                 break;
             case "DBCMN61012":
-                タイトル = タイトル12;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書訂正.get名称();
                 break;
             default:
                 break;
