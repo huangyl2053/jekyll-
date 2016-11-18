@@ -255,7 +255,6 @@ public class KihonInfoMainPanelHandler {
             RString 処理モード, List<RString> list) {
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 様式番号 = meisaiPar.get様式番号();
-        償還払請求基本データ = 償還払請求基本データ.modified();
         return save基本情報(償還払請求基本データ, サービス年月, 様式番号, list);
     }
 
