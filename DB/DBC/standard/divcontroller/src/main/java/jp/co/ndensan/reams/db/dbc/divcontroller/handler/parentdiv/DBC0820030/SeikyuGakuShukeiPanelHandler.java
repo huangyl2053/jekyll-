@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(請求額集計）
@@ -115,12 +114,8 @@ public class SeikyuGakuShukeiPanelHandler {
             row.setDefaultDataName18(shokanshukei.getShukei().
                     get審査方法区分コード());
             row.setDefaultDataName19(shokanshukei.getShukei().getサービス種類コード().value());
-            row.setDataId(DataPassingConverter.serialize(shkanList.get(row.getId()).getShukei().identifier()));
             rowList.add(row);
             Collections.sort(rowList, COMPARABLE);
-        }
-        if (!shkanList.isEmpty()) {
-
         }
         div.getPanelSeikyugakuShukei()
                 .getDgdSeikyugakushukei().setDataSource(rowList);
@@ -237,7 +232,7 @@ public class SeikyuGakuShukeiPanelHandler {
         if (修正.equals(state)) {
             boolean flag = checkState(row, 該当情報);
             if (flag) {
-                row = 追加を判断する(row);
+                row.setRowState(RowState.Modified);
                 setDgdKyufuhiMeisai(row, state);
             }
         } else if (登録.equals(state)) {
@@ -797,16 +792,24 @@ public class SeikyuGakuShukeiPanelHandler {
 
     }
 
-    private dgdSeikyugakushukei_Row 追加を判断する(dgdSeikyugakushukei_Row row) {
-        if (!RowState.Added.equals(row.getRowState())) {
-            row.setRowState(RowState.Modified);
-        }
-        return row;
-    }
-
     private ArrayList<ShokanShukeiResult> add請求集計ToViewState(dgdSeikyugakushukei_Row row, ArrayList<ShokanShukeiResult> 情報List) {
         ShokanShukeiResult 修正後情報 = onClick_最終確定_追加情報(row);
-        情報List.add(修正後情報);
+        boolean isViewDB存在 = false;
+        for (ShokanShukeiResult 情報 : 情報List) {
+            if (情報.getShukei().get被保険者番号().getColumnValue().equals(div.getPanelCcd().getCcdKaigoShikakuKihon().get被保険者番号())
+                    && 情報.getShukei().getサービス提供年月().toDateString().equals(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString().substring(NUM0, NUM6))
+                    && 情報.getShukei().get整理番号().equals(div.getSeiriNo())
+                    && 情報.getShukei().get事業者番号().getColumnValue().equals(div.getPanelHead().getTxtJigyoshaBango().getValue())
+                    && 情報.getShukei().get様式番号().equals(div.getPanelHead().getTxtShomeisho().getValue())
+                    && 情報.getShukei().get明細番号().equals(div.getPanelHead().getTxtMeisaiBango().getValue())
+                    && 情報.getShukei().get連番().equals(row.getDefaultDataName15())) {
+                isViewDB存在 = true;
+                break;
+            }
+        }
+        if (!isViewDB存在) {
+            情報List.add(修正後情報);
+        }
         return 情報List;
     }
 
@@ -819,8 +822,12 @@ public class SeikyuGakuShukeiPanelHandler {
 
     private ArrayList<ShokanShukeiResult> delete請求集計ToViewState(dgdSeikyugakushukei_Row row, ArrayList<ShokanShukeiResult> 情報List) {
         ShokanShukeiResult 該当情報 = get情報FromViewState(row, 情報List);
-        該当情報.getShukei().deleted();
-        set修正後情報(情報List, 該当情報);
+        if (EntityDataState.Added.equals(該当情報.getShukei().toEntity().getState())) {
+            情報List.remove(該当情報);
+        } else {
+            該当情報.getShukei().deleted();
+            set修正後情報(情報List, 該当情報);
+        }
         return 情報List;
     }
 
@@ -854,11 +861,22 @@ public class SeikyuGakuShukeiPanelHandler {
     }
 
     private ShokanShukeiResult onClick_最終確定_修正情報(dgdSeikyugakushukei_Row row, ShokanShukeiResult 該当情報) {
-        該当情報.getShukei().modified();
-        return new ShokanShukeiResult(update償還払請求集計情報(row, 該当情報).build(), RString.EMPTY);
+        RString サービス種類略称 = RString.EMPTY;
+        if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類名称() != null) {
+            サービス種類略称 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類名称();
+        }
+        if (!EntityDataState.Added.equals(該当情報.getShukei().toEntity().getState())) {
+            ShokanShukei 請求集計情報 = 該当情報.getShukei().modified();
+            該当情報 = new ShokanShukeiResult(請求集計情報, サービス種類略称);
+        }
+        return new ShokanShukeiResult(update償還払請求集計情報(row, 該当情報).build(), サービス種類略称);
     }
 
     private ShokanShukeiResult onClick_最終確定_追加情報(dgdSeikyugakushukei_Row row) {
+        RString サービス種類略称 = RString.EMPTY;
+        if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類名称() != null) {
+            サービス種類略称 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類名称();
+        }
         RString 連番 = new RString(row.getDefaultDataName2().getValue().toString());
         HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getPanelCcd().getCcdKaigoShikakuKihon().get被保険者番号());
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString().substring(NUM0, NUM6));
@@ -867,9 +885,9 @@ public class SeikyuGakuShukeiPanelHandler {
         RString 様式番号 = div.getPanelHead().getTxtShomeisho().getValue();
         RString 明細番号 = div.getPanelHead().getTxtMeisaiBango().getValue();
         ShokanShukei 該当請求集計情報 = new ShokanShukei(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 連番);
-        該当請求集計情報.added();
-        ShokanShukeiResult 該当情報 = new ShokanShukeiResult(該当請求集計情報, RString.EMPTY);
-        return new ShokanShukeiResult(update償還払請求集計情報(row, 該当情報).build(), RString.EMPTY);
+        ShokanShukei 請求集計情報 = 該当請求集計情報.added();
+        ShokanShukeiResult 該当情報 = new ShokanShukeiResult(請求集計情報, サービス種類略称);
+        return new ShokanShukeiResult(update償還払請求集計情報(row, 該当情報).build(), サービス種類略称);
     }
 
     private ShokanShukeiBuilder update償還払請求集計情報(dgdSeikyugakushukei_Row row, ShokanShukeiResult 該当情報) {

@@ -160,7 +160,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.ryoshushohyojicodeName3 = 表示コード.get表示コード名３();
         source.ryoshushoHyojicode3 = 表示コード.get表示コード３();
         source.ryoshushoNokigen = 納入通知書期情報.get納期限表記();
-        source.ryoshushoNofugaku = DecimalFormatter.toコンマ区切りRString(new Decimal(納入通知書期情報.get領収証書納付額欄().toLong()), 0);
+        source.ryoshushoNofugaku = 納入通知書期情報.get領収証書納付額欄();
         source.ryoshushoNofuin = 納入通知書期情報.get領収日付印欄();
         source.ryoshushoRyoshuHizukein = 納入通知書期情報.get領収証書領収印欄();
         source.ryoshushoZuiji = 納入通知書期情報.get随時表記();
@@ -183,7 +183,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.nofushoOcr2 = ocr.get(INDEX_2);
         source.nofushoOcr3 = ocr.get(INDEX_3);
         source.nofushoOcr4 = ocr.get(INDEX_4);
-        source.nofushoNofugaku = DecimalFormatter.toコンマ区切りRString(new Decimal(納入通知書期情報.get納付書納付額欄().toLong()), 0);
+        source.nofushoNofugaku = 納入通知書期情報.get納付書納付額欄();
         source.nofushoSofusakiName = 納付書共通.get納付者氏名();
         RString 被代納人氏名 = 納付書共通.get被代納人氏名();
         source.nofushoHonninName1 = 被代納人氏名;

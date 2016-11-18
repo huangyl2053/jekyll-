@@ -213,12 +213,7 @@ public class KihonInfoMainPanel {
         List<RString> 様式番号List = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        judge画面のチェック(div, 様式番号List, サービス年月, 様式番号, eventName);
-        if (null == eventName) {
-            return ResponseData.of(div).respond();
-        } else {
-            return ResponseData.of(div).forwardWithEventName(eventName).respond();
-        }
+        return judge画面のチェック(div, 様式番号List, サービス年月, 様式番号, eventName);
     }
 
     private ResponseData<KihonInfoMainPanelDiv> judge証明書入力済のチェック(KihonInfoMainPanelDiv div,

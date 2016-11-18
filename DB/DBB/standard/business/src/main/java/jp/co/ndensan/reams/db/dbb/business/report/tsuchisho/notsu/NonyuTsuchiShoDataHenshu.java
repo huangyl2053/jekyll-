@@ -421,7 +421,7 @@ public class NonyuTsuchiShoDataHenshu {
         for (int i = 期; i <= 整数12; i++) {
             Decimal 金額 = get金額(更正後普徴期別金額リスト, 期);
             Decimal 収入額 = get収入額(普徴収入情報リスト, 期);
-            if (金額 != Decimal.ZERO && 金額 != 収入額) {
+            if (!Decimal.ZERO.equals(金額) && !金額.equals(収入額)) {
                 return 期月リスト.get期の最初月(期);
             }
         }
