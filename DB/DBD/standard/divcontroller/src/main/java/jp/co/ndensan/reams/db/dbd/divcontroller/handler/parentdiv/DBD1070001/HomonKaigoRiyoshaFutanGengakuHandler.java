@@ -71,6 +71,7 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
     private static final Code CODE_0003 = new Code("0003");
     private static final RString NAME_被保険者番号 = new RString("被保険者番号");
     private static final Decimal DECIMAI_100 = new Decimal("100");
+    private final int Int_6 = 6;
     private final RString 承認する = new RString("1");
     private final RString 承認しない = new RString("0");
     private final RString 漢字承認する = new RString("承認する");
@@ -391,15 +392,25 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             HomonKaigoRiryoshaFutangakuGengakuService service = HomonKaigoRiryoshaFutangakuGengakuService.createIntance();
             div.getTxtYukoKigen().setValue(service.estimate有効期限(div.getTxtTekiyoYmd().getValue()));
         }
-        div.getTxtKohiFutanshaNo().clearValue();
         div.getTxtKohiJyukyshaNo().clearValue();
+        div.getTxtKohiJyukyushaNoCheckDigit().clearValue();
         div.getTxtHiShoninRiyu().clearValue();
         if (申請メニュー.equals(ResponseHolder.getMenuID())) {
             div.getDdlHobetsuKubun().setSelectedKey(RString.EMPTY);
             div.getTxtKyufuRitsu().clearValue();
+            div.getTxtKohiFutanshaNo().clearValue();
         } else {
+            for (dgShinseiList_Row row : div.getDgShinseiList().getDataSource()) {
+                if (row.getKetteiKubun().equals(漢字承認する)) {
+                    div.getDdlHobetsuKubun().setSelectedKey(HobetsuKubun.toValueFromFullName(row.getHobetsuKubun()).getコード());
+                    div.getTxtKyufuRitsu().setValue(row.getTxtKyufuritsu().getValue());
+                    div.getTxtKohiFutanshaNo().setValue(row.getKohiFutanshaNo());
+                    return;
+                }
+            }
             div.getDdlHobetsuKubun().setSelectedKey(HobetsuKubun.障害ヘルプ全額免除.getコード());
             div.getTxtKyufuRitsu().setValue(DECIMAI_100);
+            div.getTxtKohiFutanshaNo().clearValue();
         }
     }
 
@@ -455,6 +466,7 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             div.getTxtKyufuRitsu().clearValue();
             div.getTxtKohiFutanshaNo().clearValue();
             div.getTxtKohiJyukyshaNo().clearValue();
+            div.getTxtKohiJyukyushaNoCheckDigit().clearValue();
             div.getBtnOpenHiShoninRiyu().setDisabled(false);
             div.getTxtHiShoninRiyu().setDisabled(false);
             div.getDdlHobetsuKubun().setDisabled(true);
@@ -519,10 +531,8 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
      *
      */
     public void onBlur_txtTekiyoYmd() {
-        if (div.getTxtYukoKigen() == null || div.getTxtYukoKigen().getValue().isEmpty()) {
-            HomonKaigoRiryoshaFutangakuGengakuService service = HomonKaigoRiryoshaFutangakuGengakuService.createIntance();
-            div.getTxtYukoKigen().setValue(service.estimate有効期限(div.getTxtTekiyoYmd().getValue()));
-        }
+        HomonKaigoRiryoshaFutangakuGengakuService service = HomonKaigoRiryoshaFutangakuGengakuService.createIntance();
+        div.getTxtYukoKigen().setValue(service.estimate有効期限(div.getTxtTekiyoYmd().getValue()));
     }
 
     /**
@@ -532,7 +542,7 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
     public void onBlur_txtKohiJyukyshaNo() {
         HomonKaigoRiryoshaFutangakuGengakuService service = HomonKaigoRiryoshaFutangakuGengakuService.createIntance();
         RString チェックディジットが付与された公費負担者番号
-                = service.appendModulus10(div.getTxtKohiJyukyshaNo().getValue());
+                = service.appendModulus10(div.getTxtKohiJyukyshaNo().getText().padZeroToLeft(Int_6));
         if (チェックディジットが付与された公費負担者番号.isEmpty()) {
             div.getTxtKohiJyukyushaNoCheckDigit().clearValue();
         } else {
@@ -674,19 +684,34 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         } else {
             div.getTxtYukoKigen().clearValue();
         }
-        div.getDdlHobetsuKubun().setSelectedKey(get法別区分Key(情報.get法別区分()));
+        boolean 承認情報有 = false;
+        if (!申請メニュー.equals(ResponseHolder.getMenuID()) && div.getDgShinseiList().getDataSource().size() != 1
+                && (情報.get決定区分() == null || 情報.get決定区分().isEmpty())) {
+            for (dgShinseiList_Row row : div.getDgShinseiList().getDataSource()) {
+                if (row.getKetteiKubun().equals(漢字承認する)) {
+                    div.getDdlHobetsuKubun().setSelectedKey(HobetsuKubun.toValueFromFullName(row.getHobetsuKubun()).getコード());
+                    div.getTxtKyufuRitsu().setValue(row.getTxtKyufuritsu().getValue());
+                    div.getTxtKohiFutanshaNo().setValue(row.getKohiFutanshaNo());
+                    承認情報有 = true;
+                    break;
+                }
+            }
+        }
+        if (!承認情報有) {
+            div.getDdlHobetsuKubun().setSelectedKey(get法別区分Key(情報.get法別区分()));
+        }
         if (情報.get給付率() != null) {
             div.getTxtKyufuRitsu().setValue(情報.get給付率().getColumnValue());
-        } else {
+        } else if (!承認情報有) {
             div.getTxtKyufuRitsu().clearValue();
         }
         if (情報.get公費負担者番号() != null) {
             div.getTxtKohiFutanshaNo().setValue(情報.get公費負担者番号());
-        } else {
+        } else if (!承認情報有) {
             div.getTxtKohiFutanshaNo().clearValue();
         }
         if (!RString.isNullOrEmpty(情報.get公費受給者番号())) {
-            div.getTxtKohiJyukyshaNo().setValue(情報.get公費受給者番号().substring(0, 情報.get公費受給者番号().length()));
+            div.getTxtKohiJyukyshaNo().setValue(情報.get公費受給者番号().substring(0, 情報.get公費受給者番号().length() - 1));
             div.getTxtKohiJyukyushaNoCheckDigit().setValue(情報.get公費受給者番号().substring(情報.get公費受給者番号().length() - 1));
         } else {
             div.getTxtKohiJyukyshaNo().clearValue();
@@ -818,7 +843,7 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
             builder.set法別区分(div.getDdlHobetsuKubun().getSelectedKey());
             builder.set給付率(new HokenKyufuRitsu(div.getTxtKyufuRitsu().getValue()));
             builder.set公費負担者番号(div.getTxtKohiFutanshaNo().getValue());
-            builder.set公費受給者番号(div.getTxtKohiJyukyshaNo().getValue()
+            builder.set公費受給者番号(div.getTxtKohiJyukyshaNo().getText()
                     .concat(div.getTxtKohiJyukyushaNoCheckDigit().getValue()));
         }
         if (!申請メニュー.equals(ResponseHolder.getMenuID())) {
@@ -979,7 +1004,7 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
                 builder.set法別区分(div.getDdlHobetsuKubun().getSelectedKey());
                 builder.set給付率(new HokenKyufuRitsu(div.getTxtKyufuRitsu().getValue()));
                 builder.set公費負担者番号(div.getTxtKohiFutanshaNo().getValue());
-                builder.set公費受給者番号(div.getTxtKohiJyukyshaNo().getValue()
+                builder.set公費受給者番号(div.getTxtKohiJyukyshaNo().getText()
                         .concat(div.getTxtKohiJyukyushaNoCheckDigit().getValue()));
             } else {
                 builder.set決定区分(承認しない);
