@@ -144,6 +144,7 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
             executeStep(統計表作成);
         }
         if (出力する.equals(parameter.get明細リスト出力区分()) || 出力する.equals(parameter.get明細CSV出力区分())) {
+            executeStep(利用状況一覧表作成);
             executeStep(サービス提供年月取得);
             List<FlexibleYearMonth> outData
                     = getResult(List.class, new RString(サービス提供年月取得), ServiceTeikyoYMSelectProcess.データ有無);
@@ -155,7 +156,6 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
             executeStep(事業者名取得);
             //DbWT1513ServiceShuruiNameUpdateProcess
             executeStep(サービス種類名取得);
-            executeStep(利用状況一覧表作成);
             executeStep(利用状況一覧表出力);
         }
         executeStep(処理結果確認リストCSV);

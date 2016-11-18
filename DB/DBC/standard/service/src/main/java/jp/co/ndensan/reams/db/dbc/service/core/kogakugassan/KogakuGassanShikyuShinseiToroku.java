@@ -332,12 +332,12 @@ public class KogakuGassanShikyuShinseiToroku {
                         高額合算申請書加入歴Dac.save(加入歴.deleted().toEntity());
                         kanyurekiEntity.setRirekiNo(kanyurekiEntity.getRirekiNo() + INT_1);
                     }
-                    kanyurekiEntity.setState(EntityDataState.Added);
-                    if (!高額合算申請書.toEntity().getIsDeleted()) {
+                    if (!EntityDataState.Deleted.equals(kanyurekiEntity.getState())) {
+                        kanyurekiEntity.setState(EntityDataState.Added);
                         高額合算申請書加入歴Dac.save(kanyurekiEntity);
                     }
                 }
-                if (!高額合算申請書.toEntity().getIsDeleted()) {
+                if (!EntityDataState.Deleted.equals(高額合算申請書.toEntity().getState())) {
                     高額合算申請書Dac.save(entity);
                 }
             }

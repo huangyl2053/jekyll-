@@ -11,12 +11,10 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.ServiceKeikakuHiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.dgdYichiran_Row;
@@ -300,14 +298,14 @@ public class ServiceKeikakuHiPanelHandler {
         setサービス計画費グリッドエリアRequired(false);
         dgdYichiran_Row row = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getClickedItem();
         RowState state = row.getRowState();
-        if (!RowState.Added.equals(state)) {
-            Boolean flag = 変更チェック(row);
-            if (flag) {
-                登録パネル_グリッド(row);
+        Boolean flag = 変更チェック(row);
+        if (flag) {
+            登録パネル_グリッド(row);
+            if (!RowState.Added.equals(state)) {
                 row.setRowState(RowState.Modified);
-            } else {
-                confirm(row);
             }
+        } else {
+            confirm(row);
         }
     }
 
@@ -1370,26 +1368,6 @@ public class ServiceKeikakuHiPanelHandler {
         } else if (設定可任意.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigenGaku().setIconNameEnum(IconName.NONE);
         }
-    }
-
-    public ShomeishoNyuryokuFlag set証明書入力済フラグ(ShomeishoNyuryokuFlag 証明書入力済フラグ, List<ShokanServicePlan200904Result> entity200904ResultList, ShokanServicePlan200604Result entity200604Result, ShokanServicePlan200004Result entity200004Result) {
-        ShomeishoNyuryokuKubunType サービス計画費_証明書入力済フラグ = ShomeishoNyuryokuKubunType.入力なし;
-        for (ShokanServicePlan200904Result entity200904Result : entity200904ResultList) {
-            if (EntityDataState.Added.equals(entity200904Result.getEntity().toEntity().getState())) {
-                サービス計画費_証明書入力済フラグ = ShomeishoNyuryokuKubunType.入力あり;
-                break;
-            }
-        }
-        if (null != entity200604Result.getEntity()
-                && EntityDataState.Added.equals(entity200604Result.getEntity().toEntity().getState())) {
-            サービス計画費_証明書入力済フラグ = ShomeishoNyuryokuKubunType.入力あり;
-        }
-        if (null != entity200004Result.getEntity()
-                && EntityDataState.Added.equals(entity200004Result.getEntity().toEntity().getState())) {
-            サービス計画費_証明書入力済フラグ = ShomeishoNyuryokuKubunType.入力あり;
-        }
-        証明書入力済フラグ.setサービス計画費_証明書入力済フラグ(サービス計画費_証明書入力済フラグ);
-        return 証明書入力済フラグ;
     }
 
     private RowState getRowState(ShokanServicePlan200904Result entity200904Result) {

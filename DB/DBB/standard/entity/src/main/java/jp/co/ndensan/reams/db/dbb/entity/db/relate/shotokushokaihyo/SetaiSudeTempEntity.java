@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SetaiSudeTempEntity {
 
-    // TODO delete
     @TempTableColumnOrder(1)
     private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(2)

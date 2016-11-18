@@ -95,6 +95,8 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         div.getKogakuServicehiSearch().getRadNengetsuShitei().setDataSource(dataSource_年月);
         div.getKogakuServicehiSearch().getRadHihokenshaShitei().setSelectedKey(TaishoshaKensakuHoho.被保険者指定.getコード());
         div.getKogakuServicehiSearch().getRadNengetsuShitei().clearSelectedItem();
+        List<dgKogakuServicehiRireki_Row> dataSource = new ArrayList<>();
+        div.getKogakuServicehiResult().getDgKogakuServicehiRireki().setDataSource(dataSource);
     }
 
     /**

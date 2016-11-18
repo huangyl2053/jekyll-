@@ -168,12 +168,12 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             JuminIdoRendoShikakuTorokuEntity entity,
             UaFt200FindShikibetsuTaishoEntity 住民異動情報) {
         TemParamter temparamter = new TemParamter();
-        List<DbT1001HihokenshaDaichoEntity> entityList = searchHihodaichoToReturn(entity, 直近);
+        List<DbT1001HihokenshaDaichoEntity> entityList = searchHihodaicho(entity, 直近);
         DbT1001HihokenshaDaichoEntity dbT1001Entity = new DbT1001HihokenshaDaichoEntity();
         if (entityList != null && !entityList.isEmpty()) {
             dbT1001Entity = entityList.get(0);
         }
-        if (被保台帳取得中死亡処理_65歳未到達者に作成されている(naiBushoRyouParamter, dbT1001Entity, entity)) {
+        if (被保台帳取得中死亡処理_65歳未到達者に作成されている(naiBushoRyouParamter, entity, entityList)) {
             return;
         }
         被保台帳取得中死亡処理_２号資格者の年齢到達被保台帳作成(dbT1001Entity, naiBushoRyouParamter, 住民異動情報, entity);
@@ -187,15 +187,20 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         DbT1001HihokenshaDaichoEntity hihokenshaDaicho = 被保台帳取得中死亡処理_喪失_死亡被保取得中(dbT1001Entity, naiBushoRyouParamter, 住民異動情報,
                 temparamter, entity);
         if (flag_ON.equals(hihokenshaDaicho.getJushochiTokureiFlag())) {
-            戻り値の編集(entity, JuminRendoFuseigo.住特_喪失不能_転出日不整合.getコード(), RString.EMPTY);
+            戻り値の編集(entity, JuminRendoFuseigo.住特_喪失不能_転出日不整合.getコード(), RString.EMPTY,
+                    entityList, entity.get適用除外者台帳EntityList(),
+                    entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
             return;
         }
         if (nullToMin(hihokenshaDaicho.getShikakuSoshitsuYMD()).isBefore(nullToMin(hihokenshaDaicho.getShikakuShutokuYMD()))) {
-            戻り値の編集(entity, JuminRendoFuseigo.転出_喪失不能_資格取得日_資格喪失日_不整合.getコード(), RString.EMPTY);
+            戻り値の編集(entity, JuminRendoFuseigo.転出_喪失不能_資格取得日_資格喪失日_不整合.getコード(), RString.EMPTY,
+                    entityList, entity.get適用除外者台帳EntityList(),
+                    entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
             return;
         }
         dbT1001Dac.save(hihokenshaDaicho);
-        戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+        戻り値の編集(entity, RString.EMPTY, RString.EMPTY, entityList, entity.get適用除外者台帳EntityList(),
+                entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
     }
 
     private DbT1001HihokenshaDaichoEntity 被保台帳取得中死亡処理_喪失_死亡被保取得中(DbT1001HihokenshaDaichoEntity dbT1001Entity,
@@ -313,13 +318,14 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
 
     @Transaction
     private boolean 被保台帳取得中死亡処理_65歳未到達者に作成されている(NaiBushoRyouParamter naiBushoRyouParamter,
-            DbT1001HihokenshaDaichoEntity dbT1001Entity,
-            JuminIdoRendoShikakuTorokuEntity entity) {
+            JuminIdoRendoShikakuTorokuEntity entity,
+            List<DbT1001HihokenshaDaichoEntity> entityList) {
+        DbT1001HihokenshaDaichoEntity dbT1001Entity = entityList.get(0);
         if (ShikakuKubun._１号.getコード().equals(dbT1001Entity.getHihokennshaKubunCode())
                 && ShikakuShutokuJiyu.年齢到達.getコード().equals(dbT1001Entity.getShikakuShutokuJiyuCode())
                 && nullToMin(naiBushoRyouParamter.get補正後消除異動日翌日())
                 .isBefore(nullToMin(naiBushoRyouParamter.get補正後65歳到達日()))) {
-            Iterator<DbT1001HihokenshaDaichoEntity> iterator = entity.get被保険者台帳EntityList().iterator();
+            Iterator<DbT1001HihokenshaDaichoEntity> iterator = entityList.iterator();
             while (iterator.hasNext()) {
                 DbT1001HihokenshaDaichoEntity daichoEntity = iterator.next();
                 if (dbT1001Entity.getHihokennshaKubunCode().equals(daichoEntity.getHihokennshaKubunCode())
@@ -331,17 +337,44 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                     iterator.remove();
                 }
             }
-            searchHihodaicho(entity, 直近);
+            List<DbT1001HihokenshaDaichoEntity> dbT1001Entity直近List = searchHihodaicho(entityList, 直近);
             DbT1001HihokenshaDaichoEntity dbT1001 = new DbT1001HihokenshaDaichoEntity();
-            if (entity.get被保険者台帳EntityList() != null && !entity.get被保険者台帳EntityList().isEmpty()) {
-                dbT1001 = entity.get被保険者台帳EntityList().get(0);
+            if (dbT1001Entity直近List != null && !dbT1001Entity直近List.isEmpty()) {
+                dbT1001 = dbT1001Entity直近List.get(0);
             }
             if (dbT1001 != null && !RString.isNullOrEmpty(dbT1001.getShikakuSoshitsuJiyuCode())) {
-                戻り値の編集(entity, JuminRendoFuseigo.被保険者台帳_死亡登録不能_資格取得日_資格喪失日_不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.被保険者台帳_死亡登録不能_資格取得日_資格喪失日_不整合.getコード(), RString.EMPTY,
+                        dbT1001Entity直近List, entity.get適用除外者台帳EntityList(),
+                        entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
                 return true;
             }
         }
         return false;
+    }
+
+    private List<DbT1001HihokenshaDaichoEntity> searchHihodaicho(List<DbT1001HihokenshaDaichoEntity> dbT1001List, RString データ抽出ＰＴＮ) {
+
+        List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
+        HihokenshaNo 被保険者 = HihokenshaNo.EMPTY;
+
+        if (直近.equals(データ抽出ＰＴＮ)) {
+            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
+                if (!被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
+                    list.add(dbT1001Entity);
+                    被保険者 = dbT1001Entity.getHihokenshaNo();
+                }
+            }
+        }
+        if (転出.equals(データ抽出ＰＴＮ)) {
+            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
+                if (ShikakuSoshitsuJiyu.転出.getコード().equals(dbT1001Entity.getIdoJiyuCode())
+                        && !被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
+                    list.add(dbT1001Entity);
+                    被保険者 = dbT1001Entity.getHihokenshaNo();
+                }
+            }
+        }
+        return list;
     }
 
     private DbT1001HihokenshaDaichoEntity 被保台帳取得中死亡処理_削除_死亡被保取得中(DbT1001HihokenshaDaichoEntity dbT1001Entity) {
@@ -366,15 +399,16 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             JuminIdoRendoShikakuTorokuEntity entity,
             UaFt200FindShikibetsuTaishoEntity 住民異動情報) {
         TemParamter temparamter = new TemParamter();
-        searchHihodaicho(entity, 直近);
-        DbT1001HihokenshaDaichoEntity dbT1001Entity = entity.get被保険者台帳EntityList().get(0);
+        List<DbT1001HihokenshaDaichoEntity> dbT1001EntityList = searchHihodaicho(entity, 直近);
+        DbT1001HihokenshaDaichoEntity dbT1001Entity = dbT1001EntityList.get(0);
         if (ShikakuSoshitsuJiyu.死亡.getコード().equals(dbT1001Entity.getShikakuSoshitsuJiyuCode())
                 && nullToMin(dbT1001Entity.getShikakuSoshitsuYMD()).equals(nullToMin(naiBushoRyouParamter.get消除異動日翌日()))
                 && nullToMin(dbT1001Entity.getShikakuSoshitsuTodokedeYMD()).equals(nullToMin(住民異動情報.getShojoTodokedeYMD()))) {
-            戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+            戻り値の編集(entity, RString.EMPTY, RString.EMPTY, dbT1001EntityList, entity.get適用除外者台帳EntityList(),
+                    entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
             return;
         }
-        getMaxKaijoYmd(entity, dbT1001Entity.getShikakuSoshitsuYMD(),
+        JuminIdoRendoShikakuSoshitsu.createInstance().getMaxKaijoYmd(entity, dbT1001Entity.getShikakuSoshitsuYMD(),
                 dbT1001Entity.getShikakuSoshitsuTodokedeYMD(), 住民異動情報, temparamter);
         if (temparamter.get登録届出日() != null && !temparamter.get登録届出日().isEmpty()
                 && nullToMin(住民異動情報.getTorokuIdoYMD()).isBeforeOrEquals(nullToMin(temparamter.get登録異動日()))) {
@@ -382,20 +416,22 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             住民異動情報.setTorokuTodokedeYMD(temparamter.get登録届出日());
         }
         if (被保台帳喪失中死亡処理_被保台帳生成用の項目編集(naiBushoRyouParamter, 住民異動情報,
-                entity, temparamter)) {
+                entity, temparamter, dbT1001EntityList)) {
             return;
         }
-        if (被保台帳喪失中死亡処理_不整合チェック(naiBushoRyouParamter, entity, temparamter)) {
+        if (被保台帳喪失中死亡処理_不整合チェック(naiBushoRyouParamter, entity, temparamter, dbT1001EntityList)) {
             return;
         }
         DbT1001HihokenshaDaichoEntity hihokenshaDaichoShutoku被保台帳生成 = 被保台帳喪失中死亡処理_被保台帳生成(entity, 住民異動情報, temparamter);
         hihokenshaDaichoShutoku被保台帳生成.setState(EntityDataState.Added);
         dbT1001Dac.save(hihokenshaDaichoShutoku被保台帳生成);
-        DbT1001HihokenshaDaichoEntity hihokenshaDaichoSoushisu被保台帳喪失中死亡処理 = 被保台帳喪失中死亡処理_被保台帳喪失中死亡処理(entity, naiBushoRyouParamter, 住民異動情報,
-                temparamter);
+        DbT1001HihokenshaDaichoEntity hihokenshaDaichoSoushisu被保台帳喪失中死亡処理
+                = 被保台帳喪失中死亡処理_被保台帳喪失中死亡処理(entity, naiBushoRyouParamter, 住民異動情報,
+                        temparamter);
         hihokenshaDaichoSoushisu被保台帳喪失中死亡処理.setState(EntityDataState.Added);
         dbT1001Dac.save(hihokenshaDaichoSoushisu被保台帳喪失中死亡処理);
-        戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+        戻り値の編集(entity, RString.EMPTY, RString.EMPTY, dbT1001EntityList, entity.get適用除外者台帳EntityList(),
+                entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
     }
 
     private DbT1001HihokenshaDaichoEntity 被保台帳喪失中死亡処理_被保台帳喪失中死亡処理(JuminIdoRendoShikakuTorokuEntity entity,
@@ -476,9 +512,12 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
 
     private boolean 被保台帳喪失中死亡処理_不整合チェック(NaiBushoRyouParamter naiBushoRyouParamter,
             JuminIdoRendoShikakuTorokuEntity entity,
-            TemParamter temparamter) {
+            TemParamter temparamter,
+            List<DbT1001HihokenshaDaichoEntity> dbT1001EntityList) {
         if (nullToMin(naiBushoRyouParamter.get消除異動日翌日()).isBefore(nullToMin(temparamter.get登録異動日()))) {
-            戻り値の編集(entity, JuminRendoFuseigo.死亡_喪失不能_資格取得日_資格喪失日_不整合.getコード(), RString.EMPTY);
+            戻り値の編集(entity, JuminRendoFuseigo.死亡_喪失不能_資格取得日_資格喪失日_不整合.getコード(), RString.EMPTY,
+                    dbT1001EntityList, entity.get適用除外者台帳EntityList(),
+                    entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
             return true;
         }
         return false;
@@ -487,13 +526,15 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
     private boolean 被保台帳喪失中死亡処理_被保台帳生成用の項目編集(NaiBushoRyouParamter naiBushoRyouParamter,
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             JuminIdoRendoShikakuTorokuEntity entity,
-            TemParamter temparamter) {
+            TemParamter temparamter,
+            List<DbT1001HihokenshaDaichoEntity> dbT1001Entity直近List) {
         if (nullToMin(naiBushoRyouParamter.get補正後消除異動日翌日()).isBeforeOrEquals(temparamter.get登録異動日())) {
             if (nullToMin(住民異動情報.getTorokuIdoYMD()).isBeforeOrEquals(naiBushoRyouParamter.get補正後消除異動日翌日())) {
                 temparamter.setTmp取得事由(ShikakuShutokuJiyu.その他.getコード());
                 temparamter.setTmp日付(住民異動情報.getTorokuIdoYMD());
             } else {
-                戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+                戻り値の編集(entity, RString.EMPTY, RString.EMPTY, dbT1001Entity直近List, entity.get適用除外者台帳EntityList(),
+                        entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
                 return true;
             }
         }
@@ -503,7 +544,8 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                 temparamter.setTmp日付(naiBushoRyouParamter.get到達日_65歳());
                 住民異動情報.setTorokuTodokedeYMD(naiBushoRyouParamter.get補正後65歳到達日());
             } else {
-                戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+                戻り値の編集(entity, RString.EMPTY, RString.EMPTY, dbT1001Entity直近List, entity.get適用除外者台帳EntityList(),
+                        entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
                 return true;
             }
         }
@@ -535,7 +577,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         }
         被保台帳なし死亡処理_被保台帳生成(entity, 住民異動情報, temParamter, storeConfigParamter);
         被保台帳なし死亡処理_被保険者台帳の喪失更新(entity, 住民異動情報, paramter, temParamter, storeConfigParamter);
-        戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+        戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
+                entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
     }
 
     @Transaction
@@ -655,7 +699,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
     private boolean 被保台帳なし死亡処理_不整合チェック(JuminIdoRendoShikakuTorokuEntity entity,
             NaiBushoRyouParamter paramter, TemParamter temParamter) {
         if (nullToMin(paramter.get消除異動日翌日()).isBefore(nullToMin(temParamter.get登録異動日()))) {
-            戻り値の編集(entity, JuminRendoFuseigo.死亡_喪失不能_資格取得日_資格喪失日_不整合.getコード(), RString.EMPTY);
+            戻り値の編集(entity, JuminRendoFuseigo.死亡_喪失不能_資格取得日_資格喪失日_不整合.getコード(), RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                    entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
             return false;
         }
         return true;
@@ -675,7 +721,8 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             }
             if (nullToMin(paramter.get補正後消除異動日翌日()).isBefore(nullToMin(temParamter.get登録異動日()))) {
 
-                戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+                戻り値の編集(entity, RString.EMPTY, RString.EMPTY, entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                        entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
                 return false;
             }
         }
@@ -689,7 +736,8 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             }
             if (nullToMin(paramter.get補正後消除異動日翌日()).isBefore(nullToMin(住民異動情報.getTorokuIdoYMD()))) {
 
-                戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+                戻り値の編集(entity, RString.EMPTY, RString.EMPTY, entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                        entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
                 return false;
             }
         }
@@ -701,7 +749,7 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             TemParamter paramter) {
 
-        getMaxKaijoYmd(entity, FlexibleDate.EMPTY, FlexibleDate.EMPTY, 住民異動情報, paramter);
+        JuminIdoRendoShikakuSoshitsu.createInstance().getMaxKaijoYmd(entity, FlexibleDate.EMPTY, FlexibleDate.EMPTY, 住民異動情報, paramter);
         if (paramter.get登録届出日() != null && !paramter.get登録届出日().isEmpty()
                 && nullToMin(住民異動情報.getTorokuIdoYMD()).isBeforeOrEquals(nullToMin(paramter.get登録異動日()))) {
 
@@ -710,46 +758,41 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         }
     }
 
-    private void 戻り値の編集(
+    /**
+     * 戻り値の編集。
+     *
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     * @param 不整合コード RString
+     * @param 転出保留作成事由コード RString
+     * @param 被保険者台帳EntityList List<DbT1001HihokenshaDaichoEntity>
+     * @param 適用除外者台帳EntityList List<DbT1002TekiyoJogaishaEntity>
+     * @param 他市町村住所地特例EntityList List<DbT1003TashichosonJushochiTokureiEntity>
+     * @param 介護保険施設入退所EntityList List<DbT1004ShisetsuNyutaishoEntity>
+     */
+    public void 戻り値の編集(
             JuminIdoRendoShikakuTorokuEntity entity,
-            RString 不整合コード, RString 転出保留作成事由コード) {
+            RString 不整合コード,
+            RString 転出保留作成事由コード,
+            List<DbT1001HihokenshaDaichoEntity> 被保険者台帳EntityList,
+            List<DbT1002TekiyoJogaishaEntity> 適用除外者台帳EntityList,
+            List<DbT1003TashichosonJushochiTokureiEntity> 他市町村住所地特例EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
         entity.set不整合コード(不整合コード);
         entity.set転出保留作成事由コード(転出保留作成事由コード);
+        entity.set介護保険施設入退所EntityList(介護保険施設入退所EntityList);
+        entity.set他市町村住所地特例EntityList(他市町村住所地特例EntityList);
+        entity.set被保険者台帳EntityList(被保険者台帳EntityList);
+        entity.set適用除外者台帳EntityList(適用除外者台帳EntityList);
     }
 
     /**
-     * 取得した被保険者台帳データから、異動日、枝番が最大のデータを取得する。
+     * 取得した被保険者台帳データから、異動日、枝番が最大のデータを取得する
      *
      * @param entity JuminIdoRendoShikakuTorokuEntity
      * @param データ抽出ＰＴＮ RString
+     * @return List<DbT1001HihokenshaDaichoEntity>
      */
-    public void searchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
-
-        List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
-        List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
-        HihokenshaNo 被保険者 = HihokenshaNo.EMPTY;
-
-        if (直近.equals(データ抽出ＰＴＮ)) {
-            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
-                if (!被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
-                    list.add(dbT1001Entity);
-                    被保険者 = dbT1001Entity.getHihokenshaNo();
-                }
-            }
-        }
-        if (転出.equals(データ抽出ＰＴＮ)) {
-            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
-                if (ShikakuSoshitsuJiyu.転出.getコード().equals(dbT1001Entity.getIdoJiyuCode())
-                        && !被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
-                    list.add(dbT1001Entity);
-                    被保険者 = dbT1001Entity.getHihokenshaNo();
-                }
-            }
-        }
-        entity.set被保険者台帳EntityList(list);
-    }
-
-    private List<DbT1001HihokenshaDaichoEntity> searchHihodaichoToReturn(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
+    public List<DbT1001HihokenshaDaichoEntity> searchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
 
         List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
         List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
@@ -800,11 +843,12 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
      *
      * @param paramter NaiBushoRyouParamter
      * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param 翌日 FlexibleDate
      */
-    public void nenreiCalc(UaFt200FindShikibetsuTaishoEntity 住民異動情報, NaiBushoRyouParamter paramter) {
+    public void nenreiCalc(UaFt200FindShikibetsuTaishoEntity 住民異動情報, NaiBushoRyouParamter paramter, FlexibleDate 翌日) {
         IDateOfBirth dateofbirth = DateOfBirthFactory.createInstance(住民異動情報.getSeinengappiYMD());
         AgeCalculator agecalculator = new AgeCalculator(dateofbirth, JuminJotai.toValue(住民異動情報.getJuminJotaiCode()),
-                住民異動情報.getShojoIdoYMD(), paramter.get転出予定日翌日());
+                住民異動情報.getShojoIdoYMD(), 翌日);
         paramter.set年齢(agecalculator.get年齢());
     }
 
@@ -857,7 +901,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         } else {
             return;
         }
-        戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+        戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
+                entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                dbT1003List, dbT1004List);
     }
 
     @Transaction
@@ -879,11 +925,14 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                     temparamter,
                     entity);
             DbT1004ShisetsuNyutaishoEntity nyutaishoEntity = 他特例者喪失処理_施設入退所_除外転出死亡データの編集(dbT1004Entity, temparamter);
-            if (!他特例者喪失処理_他特例者マスタの更新(tokureiEntity, nyutaishoEntity, entity)) {
+            if (!他特例者喪失処理_他特例者マスタの更新(tokureiEntity, nyutaishoEntity,
+                    entity, 他市町村住所地特例EntityList, 介護保険施設入退所EntityList)) {
 
                 return false;
             }
-            戻り値の編集(entity, 不整合コード_9999, RString.EMPTY);
+            戻り値の編集(entity, 不整合コード_9999, RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                    他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
             return false;
         }
         if (ShikakuSoshitsuJiyu.その他.getコード().equals(資格喪失事由)) {
@@ -899,10 +948,13 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                     temparamter,
                     entity);
             DbT1004ShisetsuNyutaishoEntity nyutaishoEntity = 他特例者喪失処理_施設入退所_除外転出死亡データの編集(dbT1004Entity, temparamter);
-            if (!他特例者喪失処理_他特例者マスタの更新(tokureiEntity, nyutaishoEntity, entity)) {
+            if (!他特例者喪失処理_他特例者マスタの更新(tokureiEntity, nyutaishoEntity,
+                    entity, 他市町村住所地特例EntityList, 介護保険施設入退所EntityList)) {
                 return false;
             }
-            戻り値の編集(entity, 不整合コード_9999, RString.EMPTY);
+            戻り値の編集(entity, 不整合コード_9999, RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                    他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
             return false;
         }
         return true;
@@ -921,7 +973,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
     private boolean 他特例者喪失処理_他特例者マスタの更新(
             DbT1003TashichosonJushochiTokureiEntity tokureiEntity,
             DbT1004ShisetsuNyutaishoEntity nyutaishoEntity,
-            JuminIdoRendoShikakuTorokuEntity entity) {
+            JuminIdoRendoShikakuTorokuEntity entity,
+            List<DbT1003TashichosonJushochiTokureiEntity> 他市町村住所地特例EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
 
         if (tokureiEntity.getTekiyoYMD().isBeforeOrEquals(tokureiEntity.getKaijoYMD())) {
 
@@ -930,8 +984,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             nyutaishoEntity.setState(EntityDataState.Modified);
             dbT1004Dac.save(nyutaishoEntity);
         } else {
-
-            戻り値の編集(entity, JuminRendoFuseigo.他特例者_更新不能_適用日_解除日_不整合.getコード(), RString.EMPTY);
+            戻り値の編集(entity, JuminRendoFuseigo.他特例者_更新不能_適用日_解除日_不整合.getコード(), RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                    他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
             return false;
         }
         return true;
@@ -1036,18 +1091,22 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         if (ShikakuSoshitsuJiyu.転出.getコード().equals(資格喪失事由)
                 || ShikakuSoshitsuJiyu.死亡.getコード().equals(資格喪失事由)) {
 
-            if (!施設退所日がEmpty以外場合(資格喪失事由, entity, 施設入退所直近_施設退所日, temparamter)) {
+            if (!施設退所日がEmpty以外場合(資格喪失事由, entity, 施設入退所直近_施設退所日,
+                    temparamter, 他市町村住所地特例EntityList, 介護保険施設入退所EntityList)) {
 
                 return false;
             }
-            if (!施設退所日がEmptyの場合(資格喪失事由, entity, 施設入退所直近_施設入所日, 施設入退所直近_施設退所日, temparamter)) {
+            if (!施設退所日がEmptyの場合(資格喪失事由, entity, 施設入退所直近_施設入所日, 施設入退所直近_施設退所日,
+                    temparamter, 他市町村住所地特例EntityList, 介護保険施設入退所EntityList)) {
                 return false;
             }
         }
         if (ShikakuSoshitsuJiyu.その他.getコード().equals(資格喪失事由)
                 && 他特例直近_解除事由.equals(temparamter.getLc解除事由())
                 && temparamter.getLc異動日().equals(施設入退所直近_施設退所日)) {
-            戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+            戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                    他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
         }
         return true;
     }
@@ -1057,17 +1116,23 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             JuminIdoRendoShikakuTorokuEntity entity,
             FlexibleDate 施設入退所直近_施設入所日,
             FlexibleDate 施設入退所直近_施設退所日,
-            TemParamter temparamter) {
+            TemParamter temparamter,
+            List<DbT1003TashichosonJushochiTokureiEntity> 他市町村住所地特例EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
         if ((施設入退所直近_施設退所日 == null || 施設入退所直近_施設退所日.isEmpty())
                 && temparamter.getTmp異動日().isBefore(nullToMin(施設入退所直近_施設入所日))
                 && ShikakuSoshitsuJiyu.転出.getコード().equals(資格喪失事由)) {
-            戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_転出日_不整合.getコード(), RString.EMPTY);
+            戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_転出日_不整合.getコード(), RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                    他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
             return false;
         }
         if ((施設入退所直近_施設退所日 == null || 施設入退所直近_施設退所日.isEmpty())
                 && temparamter.getTmp異動日().isBefore(nullToMin(施設入退所直近_施設入所日))
                 && ShikakuSoshitsuJiyu.死亡.getコード().equals(資格喪失事由)) {
-            戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_消除異動日_不整合.getコード(), RString.EMPTY);
+            戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_消除異動日_不整合.getコード(), RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                    他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
             return false;
         }
         return true;
@@ -1077,14 +1142,18 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             RString 資格喪失事由,
             JuminIdoRendoShikakuTorokuEntity entity,
             FlexibleDate 施設入退所直近_施設退所日,
-            TemParamter temparamter) {
+            TemParamter temparamter,
+            List<DbT1003TashichosonJushochiTokureiEntity> 他市町村住所地特例EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
         if (施設入退所直近_施設退所日 != null
                 && !施設入退所直近_施設退所日.isEmpty()
                 && !施設入退所直近_施設退所日.equals(temparamter.getLc異動日())
                 && temparamter.getTmp異動日().isBefore(施設入退所直近_施設退所日)
                 && ShikakuSoshitsuJiyu.転出.getコード().equals(資格喪失事由)) {
 
-            戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_転出日_不整合.getコード(), RString.EMPTY);
+            戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_転出日_不整合.getコード(), RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                    他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
             return false;
         }
         if (施設入退所直近_施設退所日 != null
@@ -1092,7 +1161,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                 && !施設入退所直近_施設退所日.equals(temparamter.getLc異動日())
                 && temparamter.getTmp異動日().isBefore(施設入退所直近_施設退所日)
                 && ShikakuSoshitsuJiyu.死亡.getコード().equals(資格喪失事由)) {
-            戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_消除異動日_不整合.getコード(), RString.EMPTY);
+            戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_消除異動日_不整合.getコード(), RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                    他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
             return false;
         }
         return true;
@@ -1130,7 +1201,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                     他特例直近_解除年月日,
                     他特例直近_解除届出日,
                     temparamter,
-                    住民異動情報_消除届出日)) {
+                    住民異動情報_消除届出日,
+                    他市町村住所地特例EntityList,
+                    介護保険施設入退所EntityList)) {
 
                 return false;
             }
@@ -1139,12 +1212,16 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
 
             if (nullToEmpty(他特例直近_解除事由).equals(temparamter.getLc解除事由())
                     && nullToEmpty(他特例直近_解除年月日).equals(temparamter.getLc異動日())) {
-                戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+                戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
+                        entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                        他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
                 return false;
             }
             if (nullToEmpty(他特例直近_解除事由).equals(temparamter.getLc解除事由())
                     && nullToEmpty(他特例直近_解除届出日).equals(temparamter.getTmp届出日())) {
-                戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+                戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
+                        entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                        他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
                 return false;
             }
             temparamter.setTmp異動日(temparamter.getLc異動日());
@@ -1160,25 +1237,33 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                 資格喪失事由,
                 entity,
                 他特例直近_解除年月日,
-                施設入退所直近_施設退所日);
+                施設入退所直近_施設退所日,
+                他市町村住所地特例EntityList,
+                介護保険施設入退所EntityList);
     }
 
     private boolean 他特例直近_解除年月日の判定(
             RString 資格喪失事由,
             JuminIdoRendoShikakuTorokuEntity entity,
             FlexibleDate 他特例直近_解除年月日,
-            FlexibleDate 施設入退所直近_施設退所日) {
+            FlexibleDate 施設入退所直近_施設退所日,
+            List<DbT1003TashichosonJushochiTokureiEntity> 他市町村住所地特例EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
         if (他特例直近_解除年月日 != null
                 && !他特例直近_解除年月日.isEmpty()
                 && 施設入退所直近_施設退所日 != null
                 && !施設入退所直近_施設退所日.isEmpty()) {
 
             if (ShikakuSoshitsuJiyu.転出.getコード().equals(資格喪失事由)) {
-                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_他特例者_解除登録_施設入退所情報不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_他特例者_解除登録_施設入退所情報不整合.getコード(), RString.EMPTY,
+                        entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                        他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
                 return false;
             }
             if (ShikakuSoshitsuJiyu.死亡.getコード().equals(資格喪失事由)) {
-                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_他特例者_入所中_施設入退所情報不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_他特例者_入所中_施設入退所情報不整合.getコード(), RString.EMPTY,
+                        entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                        他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
                 return false;
             }
         }
@@ -1193,7 +1278,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             FlexibleDate 他特例直近_解除年月日,
             FlexibleDate 他特例直近_解除届出日,
             TemParamter temparamter,
-            FlexibleDate 住民異動情報_消除届出日) {
+            FlexibleDate 住民異動情報_消除届出日,
+            List<DbT1003TashichosonJushochiTokureiEntity> 他市町村住所地特例EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
         if (!RString.isNullOrEmpty(他特例直近_解除事由)) {
 
             if (!nullToMin(temparamter.getLc異動日()).isBefore(nullToMin(介護保険法施行日))) {
@@ -1205,7 +1292,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             if (他特例直近_解除事由.equals(temparamter.getLc解除事由())
                     && temparamter.getTmp異動日().equals(他特例直近_解除年月日)
                     && 他特例直近_解除届出日.equals(temparamter.getTmp届出日())) {
-                戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+                戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
+                        entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                        他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
                 return false;
             }
             if (!(他特例直近_解除事由.equals(temparamter.getLc解除事由())
@@ -1213,7 +1302,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                     && 他特例直近_解除届出日.equals(temparamter.getTmp届出日()))
                     && (nullToMin(temparamter.getTmp異動日()).isBefore(nullToMin(他特例直近_解除年月日))
                     && ShikakuSoshitsuJiyu.転出.getコード().equals(資格喪失事由))) {
-                戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_転出日_不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_転出日_不整合.getコード(), RString.EMPTY,
+                        entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                        他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
                 return false;
             }
             if (!(他特例直近_解除事由.equals(temparamter.getLc解除事由())
@@ -1221,7 +1312,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                     && 他特例直近_解除届出日.equals(temparamter.getTmp届出日()))
                     && (nullToMin(temparamter.getTmp異動日()).isBefore(nullToMin(他特例直近_解除年月日))
                     && ShikakuSoshitsuJiyu.死亡.getコード().equals(資格喪失事由))) {
-                戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_消除異動日_不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.他特例者_解除日_消除異動日_不整合.getコード(), RString.EMPTY,
+                        entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
+                        他市町村住所地特例EntityList, 介護保険施設入退所EntityList);
                 return false;
             }
         }
@@ -1234,20 +1327,21 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
 
         DbT1004ShisetsuNyutaishoEntity dbT1004Entity
                 = searchShisetsu(entity.get介護保険施設入退所EntityList(), DaichoType.他市町村住所地特例者.getコード());
+        DbT1003TashichosonJushochiTokureiEntity dbT1003Entity = entity.get他市町村住所地特例EntityList().get(0);
         if (entity.get他市町村住所地特例EntityList() != null && !entity.get他市町村住所地特例EntityList().isEmpty()) {
             if (dbT1004Entity == null) {
-                dbT1003List.add(entity.get他市町村住所地特例EntityList().get(0));
-                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_他特例者_解除登録_施設入退所情報不整合.getコード(), RString.EMPTY);
-                entity.set他市町村住所地特例EntityList(dbT1003List);
-                entity.set介護保険施設入退所EntityList(null);
+                dbT1003List.add(dbT1003Entity);
+                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_他特例者_解除登録_施設入退所情報不整合.getコード(),
+                        RString.EMPTY, entity.get被保険者台帳EntityList(),
+                        entity.get適用除外者台帳EntityList(), dbT1003List, null);
                 return false;
             }
         } else {
             if (dbT1004Entity != null) {
                 dbT1004List.add(dbT1004Entity);
-                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_他特例者_入所中_施設入退所情報不整合.getコード(), RString.EMPTY);
-                entity.set他市町村住所地特例EntityList(null);
-                entity.set介護保険施設入退所EntityList(dbT1004List);
+                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_他特例者_入所中_施設入退所情報不整合.getコード(),
+                        RString.EMPTY, entity.get被保険者台帳EntityList(),
+                        entity.get適用除外者台帳EntityList(), null, dbT1004List);
                 return false;
             }
         }
@@ -1255,14 +1349,12 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         if ((entity.get他市町村住所地特例EntityList() == null || entity.get他市町村住所地特例EntityList().isEmpty())
                 && dbT1004Entity == null) {
 
-            戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
-            entity.set他市町村住所地特例EntityList(null);
-            entity.set介護保険施設入退所EntityList(null);
+            戻り値の編集(entity, RString.EMPTY, RString.EMPTY, entity.get被保険者台帳EntityList(),
+                    entity.get適用除外者台帳EntityList(), null, null);
             return false;
-        } else {
-            dbT1003List.add(entity.get他市町村住所地特例EntityList().get(0));
-            dbT1004List.add(dbT1004Entity);
         }
+        dbT1003List.add(dbT1003Entity);
+        dbT1004List.add(dbT1004Entity);
         return true;
     }
 
@@ -1387,34 +1479,40 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         if (適用除外者喪失処理_適用除外者の検索(entity, list適用除外者台帳, list施設入退所)) {
             return;
         }
-        if (適用除外者喪失処理_適用除外データ(資格喪失事由, list適用除外者台帳.get(0), pRM,
-                住民異動情報, entity, entity.get介護保険施設入退所EntityList().get(0), temparamter)) {
+        if (適用除外者喪失処理_適用除外データ(資格喪失事由, pRM,
+                住民異動情報, entity, temparamter,
+                list適用除外者台帳, list施設入退所)) {
             return;
         }
-        if (適用除外者喪失処理_施設入退所データ(資格喪失事由, list施設入退所.get(0),
-                entity, entity.get適用除外者台帳EntityList().get(0), temparamter)) {
+        if (適用除外者喪失処理_施設入退所データ(資格喪失事由,
+                entity, temparamter, list適用除外者台帳, list施設入退所)) {
             return;
         }
-        if (適用除外者喪失処理_挿入レコード(資格喪失事由, 住民異動情報, list適用除外者台帳.get(0),
-                list施設入退所.get(0), entity, temparamter)) {
+        if (適用除外者喪失処理_挿入レコード(資格喪失事由, 住民異動情報,
+                entity, temparamter, list適用除外者台帳, list施設入退所)) {
             return;
         }
-        戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+        戻り値の編集(entity, RString.EMPTY, RString.EMPTY, entity.get被保険者台帳EntityList(),
+                list適用除外者台帳, entity.get他市町村住所地特例EntityList(), list施設入退所);
     }
 
     @Transaction
     private boolean 適用除外者喪失処理_挿入レコード(RString 資格喪失事由,
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
-            DbT1002TekiyoJogaishaEntity 適用除外者台帳Entity,
-            DbT1004ShisetsuNyutaishoEntity 施設入退所Entity,
             JuminIdoRendoShikakuTorokuEntity entity,
-            TemParamter temparamter) {
+            TemParamter temparamter,
+            List<DbT1002TekiyoJogaishaEntity> 適用除外者台帳EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
+        DbT1002TekiyoJogaishaEntity 適用除外者台帳Entity = 適用除外者台帳EntityList.get(0);
+        DbT1004ShisetsuNyutaishoEntity 施設入退所Entity = 介護保険施設入退所EntityList.get(0);
         if (資格喪失事由.equals(ShikakuSoshitsuJiyu.転出.getコード())
                 || 資格喪失事由.equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
             DbT1002TekiyoJogaishaEntity 適用除外者 = 適用除外者_除外転出死亡(住民異動情報, 適用除外者台帳Entity, temparamter, entity);
             DbT1004ShisetsuNyutaishoEntity 施設入退所 = 施設入退所_除外転出死亡(施設入退所Entity, temparamter);
             if (nullToMin(適用除外者.getKaijoYMD()).isBefore(nullToMin(適用除外者.getTekiyoYMD()))) {
-                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_更新不能_適用日_解除日_不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_更新不能_適用日_解除日_不整合.getコード(),
+                        RString.EMPTY, entity.get被保険者台帳EntityList(),
+                        適用除外者台帳EntityList, entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
                 return true;
             } else {
                 適用除外者.setState(EntityDataState.Added);
@@ -1422,7 +1520,8 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                 dbT1002Dac.save(適用除外者);
                 dbT1004Dac.save(施設入退所);
             }
-            戻り値の編集(entity, 不整合コード_9999, RString.EMPTY);
+            戻り値の編集(entity, 不整合コード_9999, RString.EMPTY, entity.get被保険者台帳EntityList(),
+                    適用除外者台帳EntityList, entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
             return true;
         }
         if (資格喪失事由.equals(ShikakuSoshitsuJiyu.その他.getコード())) {
@@ -1437,7 +1536,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                     entity);
             DbT1004ShisetsuNyutaishoEntity 施設入退所 = 施設入退所_除外転入通知受理(施設入退所Entity, temparamter);
             if (nullToMin(適用除外者.getKaijoYMD()).isBefore(nullToMin(適用除外者.getTekiyoYMD()))) {
-                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_更新不能_適用日_解除日_不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_更新不能_適用日_解除日_不整合.getコード(), RString.EMPTY,
+                        entity.get被保険者台帳EntityList(),
+                        適用除外者台帳EntityList, entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
                 return true;
             } else {
                 適用除外者.setState(EntityDataState.Added);
@@ -1445,7 +1546,8 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
                 dbT1002Dac.save(適用除外者);
                 dbT1004Dac.save(施設入退所);
             }
-            戻り値の編集(entity, 不整合コード_9999, RString.EMPTY);
+            戻り値の編集(entity, 不整合コード_9999, RString.EMPTY, entity.get被保険者台帳EntityList(),
+                    適用除外者台帳EntityList, entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
             return true;
         }
         return false;
@@ -1578,19 +1680,23 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
     }
 
     private boolean 適用除外者喪失処理_施設入退所データ(RString 資格喪失事由,
-            DbT1004ShisetsuNyutaishoEntity 施設入退所Entity,
             JuminIdoRendoShikakuTorokuEntity entity,
-            DbT1002TekiyoJogaishaEntity 適用除外者台帳Entity,
-            TemParamter temparamter) {
+            TemParamter temparamter,
+            List<DbT1002TekiyoJogaishaEntity> 適用除外者台帳EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
+        DbT1004ShisetsuNyutaishoEntity 施設入退所Entity = 介護保険施設入退所EntityList.get(0);
+        DbT1002TekiyoJogaishaEntity 適用除外者台帳Entity = 適用除外者台帳EntityList.get(0);
         if (資格喪失事由.equals(ShikakuSoshitsuJiyu.転出.getコード())
                 || 資格喪失事由.equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
-            if (施設入退所_資格喪失事由_転出OR死亡(施設入退所Entity, entity, temparamter, 資格喪失事由)) {
+            if (施設入退所_資格喪失事由_転出OR死亡(施設入退所Entity, entity, temparamter,
+                    資格喪失事由, 適用除外者台帳EntityList, 介護保険施設入退所EntityList)) {
                 return true;
             }
         } else if (資格喪失事由.equals(ShikakuSoshitsuJiyu.その他.getコード())
                 && temparamter.getLc解除事由().equals(適用除外者台帳Entity.getTekiyoJogaikaijokaijoJiyuCode())
                 && nullToMin(temparamter.getLc異動日()).equals(nullToMin(施設入退所Entity.getTaishoYMD()))) {
-            戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+            戻り値の編集(entity, RString.EMPTY, RString.EMPTY, entity.get被保険者台帳EntityList(),
+                    適用除外者台帳EntityList, entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
             return true;
         }
         return false;
@@ -1606,30 +1712,40 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
 
     private boolean 施設入退所_資格喪失事由_転出OR死亡(DbT1004ShisetsuNyutaishoEntity 施設入退所Entity,
             JuminIdoRendoShikakuTorokuEntity entity,
-            TemParamter temparamter, RString 資格喪失事由) {
+            TemParamter temparamter, RString 資格喪失事由,
+            List<DbT1002TekiyoJogaishaEntity> 適用除外者台帳EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
         FlexibleDate 退所年月日 = 施設入退所Entity.getTaishoYMD();
         if (退所年月日 != null && !退所年月日.isEmpty()) {
             if (!temparamter.getLc異動日().equals(施設入退所Entity.getTaishoYMD())
                     && nullToMin(temparamter.getTmp異動日()).isBefore(nullToMin(施設入退所Entity.getTaishoYMD()))
                     && 資格喪失事由.equals(ShikakuSoshitsuJiyu.転出.getコード())) {
-                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_転出日_不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_転出日_不整合.getコード(), RString.EMPTY,
+                        entity.get被保険者台帳EntityList(), 適用除外者台帳EntityList,
+                        entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
                 return true;
             }
             if (!temparamter.getLc異動日().equals(施設入退所Entity.getTaishoYMD())
                     && nullToMin(temparamter.getTmp異動日()).isBefore(nullToMin(施設入退所Entity.getTaishoYMD()))
                     && 資格喪失事由.equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
-                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_消除異動日_不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_消除異動日_不整合.getコード(), RString.EMPTY,
+                        entity.get被保険者台帳EntityList(), 適用除外者台帳EntityList,
+                        entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
                 return true;
             }
         }
         if ((退所年月日 == null || 退所年月日.isEmpty())
                 && nullToMin(temparamter.getTmp異動日()).isBefore(nullToMin(施設入退所Entity.getNyushoYMD()))) {
             if (資格喪失事由.equals(ShikakuSoshitsuJiyu.転出.getコード())) {
-                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_転出日_不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_転出日_不整合.getコード(), RString.EMPTY,
+                        entity.get被保険者台帳EntityList(), 適用除外者台帳EntityList,
+                        entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
                 return true;
             }
             if (資格喪失事由.equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
-                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_消除異動日_不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_消除異動日_不整合.getコード(), RString.EMPTY,
+                        entity.get被保険者台帳EntityList(), 適用除外者台帳EntityList,
+                        entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
                 return true;
             }
         }
@@ -1637,19 +1753,24 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
     }
 
     private boolean 適用除外者喪失処理_適用除外データ(RString 資格喪失事由,
-            DbT1002TekiyoJogaishaEntity 適用除外者台帳,
             StoreConfigParamter pRM,
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             JuminIdoRendoShikakuTorokuEntity entity,
-            DbT1004ShisetsuNyutaishoEntity 施設入退所Entity,
-            TemParamter temparamter) {
+            TemParamter temparamter,
+            List<DbT1002TekiyoJogaishaEntity> 適用除外者台帳EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList
+    ) {
+        DbT1002TekiyoJogaishaEntity 適用除外者台帳 = 適用除外者台帳EntityList.get(0);
+        DbT1004ShisetsuNyutaishoEntity 施設入退所Entity = 介護保険施設入退所EntityList.get(0);
         if ((資格喪失事由.equals(ShikakuSoshitsuJiyu.転出.getコード())
                 || 資格喪失事由.equals(ShikakuSoshitsuJiyu.死亡.getコード()))
-                && 資格喪失事由_転出OR死亡(適用除外者台帳, pRM, 住民異動情報, entity, temparamter, 資格喪失事由)) {
+                && 資格喪失事由_転出OR死亡(適用除外者台帳, pRM, 住民異動情報, entity, temparamter,
+                        資格喪失事由, 適用除外者台帳EntityList, 介護保険施設入退所EntityList)) {
             return true;
         }
         if (資格喪失事由.equals(ShikakuSoshitsuJiyu.その他.getコード())
-                && 資格喪失事由_その他(適用除外者台帳, 住民異動情報, entity, pRM, temparamter)) {
+                && 資格喪失事由_その他(適用除外者台帳, 住民異動情報, entity, pRM,
+                        temparamter, 適用除外者台帳EntityList, 介護保険施設入退所EntityList)) {
             return true;
         }
         FlexibleDate 解除年月日 = 適用除外者台帳.getKaijoYMD();
@@ -1657,10 +1778,14 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         if (解除年月日 != null && !解除年月日.isEmpty()
                 && 退所年月日 != null && !退所年月日.isEmpty()) {
             if (資格喪失事由.endsWith(ShikakuSoshitsuJiyu.転出.getコード())) {
-                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_適用除外者_解除登録_施設入退所情報不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_適用除外者_解除登録_施設入退所情報不整合.getコード(),
+                        RString.EMPTY, entity.get被保険者台帳EntityList(),
+                        適用除外者台帳EntityList, entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
                 return true;
             } else if (資格喪失事由.endsWith(ShikakuSoshitsuJiyu.死亡.getコード())) {
-                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_適用除外者_入所中_施設入退所情報不整合.getコード(), RString.EMPTY);
+                戻り値の編集(entity, JuminRendoFuseigo.転出死亡_適用除外者_入所中_施設入退所情報不整合.getコード(),
+                        RString.EMPTY, entity.get被保険者台帳EntityList(),
+                        適用除外者台帳EntityList, entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
                 return true;
             }
         }
@@ -1672,11 +1797,14 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             JuminIdoRendoShikakuTorokuEntity entity,
             StoreConfigParamter pRM,
-            TemParamter temparamter) {
+            TemParamter temparamter,
+            List<DbT1002TekiyoJogaishaEntity> 適用除外者台帳EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
         if (temparamter.getLc解除事由().equals(適用除外者台帳.getTekiyoJogaikaijokaijoJiyuCode())) {
             FlexibleDate 解除届出年月日 = 適用除外者台帳.getKaijoTodokedeYMD();
             if (解除届出年月日 != null && 解除届出年月日.equals(住民異動情報.getShojoTodokedeYMD())) {
-                戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+                戻り値の編集(entity, RString.EMPTY, RString.EMPTY, entity.get被保険者台帳EntityList(), 適用除外者台帳EntityList,
+                        entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
                 return true;
             }
         }
@@ -1699,7 +1827,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             JuminIdoRendoShikakuTorokuEntity entity,
             TemParamter temparamter,
-            RString 資格喪失事由) {
+            RString 資格喪失事由,
+            List<DbT1002TekiyoJogaishaEntity> 適用除外者台帳EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
         RString 適用除外解除事由コード = 適用除外者台帳.getTekiyoJogaikaijokaijoJiyuCode();
         if (適用除外解除事由コード != null && !適用除外解除事由コード.isEmpty()) {
             if (nullToMin(pRM.get介護保険法施行日()).isBeforeOrEquals(nullToMin(temparamter.getLc異動日()))) {
@@ -1711,11 +1841,12 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             if (temparamter.getLc解除事由().equals(適用除外者台帳.getTekiyoJogaikaijokaijoJiyuCode())
                     && temparamter.getTmp異動日().equals(適用除外者台帳.getKaijoYMD())
                     && nullToMin(temparamter.getTmp届出日()).equals(nullToMin(適用除外者台帳.getKaijoTodokedeYMD()))) {
-                戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+                戻り値の編集(entity, RString.EMPTY, RString.EMPTY, entity.get被保険者台帳EntityList(), 適用除外者台帳EntityList,
+                        entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
                 return true;
             } else {
                 if (nullToMin(temparamter.getTmp異動日()).isBefore(nullToMin(適用除外者台帳.getKaijoYMD()))) {
-                    適用除外者喪失処理_適用除外データ_戻り値の編集(資格喪失事由, entity);
+                    適用除外者喪失処理_適用除外データ_戻り値の編集(資格喪失事由, entity, 適用除外者台帳EntityList, 介護保険施設入退所EntityList);
                     return true;
                 }
             }
@@ -1724,11 +1855,17 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
     }
 
     private void 適用除外者喪失処理_適用除外データ_戻り値の編集(RString 資格喪失事由,
-            JuminIdoRendoShikakuTorokuEntity entity) {
+            JuminIdoRendoShikakuTorokuEntity entity,
+            List<DbT1002TekiyoJogaishaEntity> 適用除外者台帳EntityList,
+            List<DbT1004ShisetsuNyutaishoEntity> 介護保険施設入退所EntityList) {
         if (資格喪失事由.equals(ShikakuSoshitsuJiyu.転出.getコード())) {
-            戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_転出日_不整合.getコード(), RString.EMPTY);
+            戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_転出日_不整合.getコード(), RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), 適用除外者台帳EntityList,
+                    entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
         } else {
-            戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_消除異動日_不整合.getコード(), RString.EMPTY);
+            戻り値の編集(entity, JuminRendoFuseigo.適用除外者_解除日_消除異動日_不整合.getコード(), RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), 適用除外者台帳EntityList,
+                    entity.get他市町村住所地特例EntityList(), 介護保険施設入退所EntityList);
         }
     }
 
@@ -1743,136 +1880,23 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         DbT1004ShisetsuNyutaishoEntity 施設入退所Entity
                 = searchShisetsu(entity.get介護保険施設入退所EntityList(), DaichoType.適用除外者.getコード());
         if (適用除外者台帳Entity == null && 施設入退所Entity == null) {
-            戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
-            entity.set適用除外者台帳EntityList(null);
-            entity.set介護保険施設入退所EntityList(null);
+            戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
+                    entity.get被保険者台帳EntityList(), null, entity.get他市町村住所地特例EntityList(), null);
             return true;
         } else if (適用除外者台帳Entity != null && 施設入退所Entity == null) {
-            戻り値の編集(entity, JuminRendoFuseigo.転出死亡_適用除外者_解除登録_施設入退所情報不整合.getコード(), RString.EMPTY);
             list適用除外者台帳.add(適用除外者台帳Entity);
-            entity.set適用除外者台帳EntityList(list適用除外者台帳);
-            entity.set介護保険施設入退所EntityList(null);
+            戻り値の編集(entity, JuminRendoFuseigo.転出死亡_適用除外者_解除登録_施設入退所情報不整合.getコード(),
+                    RString.EMPTY, entity.get被保険者台帳EntityList(), list適用除外者台帳, entity.get他市町村住所地特例EntityList(), null);
             return true;
         } else if (適用除外者台帳Entity == null && 施設入退所Entity != null) {
-            戻り値の編集(entity, JuminRendoFuseigo.転出死亡_適用除外者_入所中_施設入退所情報不整合.getコード(), RString.EMPTY);
             list施設入退所.add(施設入退所Entity);
-            entity.set適用除外者台帳EntityList(null);
-            entity.set介護保険施設入退所EntityList(list施設入退所);
+            戻り値の編集(entity, JuminRendoFuseigo.転出死亡_適用除外者_入所中_施設入退所情報不整合.getコード(),
+                    RString.EMPTY, entity.get被保険者台帳EntityList(), null, entity.get他市町村住所地特例EntityList(), list施設入退所);
             return true;
         }
         list適用除外者台帳.add(適用除外者台帳Entity);
         list施設入退所.add(施設入退所Entity);
         return false;
-    }
-
-    /**
-     * 適用除外解除日、適用除外解除届出日、他特解除日、他特解除届出日 、
-     * 異動年月日、異動届出年月日、資格喪失日、資格喪失届出日の中で最大の異動日、届出日を取得する。
-     *
-     * @param entity JuminIdoRendoShikakuTorokuEntity
-     * @param 資格喪失日 資格喪失日
-     * @param 資格喪失届出日 資格喪失届出日
-     * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
-     * @param paramter TemParamter
-     */
-    public void getMaxKaijoYmd(
-            JuminIdoRendoShikakuTorokuEntity entity,
-            FlexibleDate 資格喪失日,
-            FlexibleDate 資格喪失届出日,
-            UaFt200FindShikibetsuTaishoEntity 住民異動情報,
-            TemParamter paramter) {
-
-        FlexibleDate tmp除外解除日 = FlexibleDate.MIN;
-        FlexibleDate tmp除外解除届出日 = FlexibleDate.MIN;
-        FlexibleDate tmp他特解除日 = FlexibleDate.MIN;
-        FlexibleDate tmp他特解除届出日 = FlexibleDate.MIN;
-        FlexibleDate tmp日付01 = FlexibleDate.MIN;
-        FlexibleDate tmp日付02 = FlexibleDate.MIN;
-        FlexibleDate tmp日付11 = FlexibleDate.MIN;
-        FlexibleDate tmp日付12 = FlexibleDate.MIN;
-        if (entity.get適用除外者台帳EntityList() != null) {
-            DbT1002TekiyoJogaishaEntity dbT1002Entity = entity.get適用除外者台帳EntityList().get(0);
-            if (dbT1002Entity != null) {
-                tmp除外解除日 = nullToMin(dbT1002Entity.getKaijoYMD());
-                tmp除外解除届出日 = nullToMin(dbT1002Entity.getKaijoTodokedeYMD());
-            }
-        }
-        if (entity.get他市町村住所地特例EntityList() != null) {
-            DbT1003TashichosonJushochiTokureiEntity dbT1003Entity = entity.get他市町村住所地特例EntityList().get(0);
-            if (dbT1003Entity != null) {
-                tmp他特解除日 = nullToMin(dbT1003Entity.getKaijoYMD());
-                tmp他特解除届出日 = nullToMin(dbT1003Entity.getKaijoTodokedeYMD());
-            }
-        }
-        FlexibleDate 異動年月日 = nullToMin(住民異動情報.getIdoYMD());
-        FlexibleDate 異動届出年月日 = nullToMin(住民異動情報.getTodokedeYMD());
-        if (tmp除外解除日.isBeforeOrEquals(tmp他特解除日)) {
-
-            tmp日付01 = tmp他特解除日;
-            tmp日付02 = tmp他特解除届出日;
-        }
-        if (tmp他特解除日.isBefore(tmp除外解除日)) {
-
-            tmp日付01 = tmp除外解除日;
-            tmp日付02 = tmp除外解除届出日;
-        }
-        if (nullToMin(異動年月日).isBefore(nullToMin(資格喪失日))) {
-
-            tmp日付11 = 資格喪失日;
-            tmp日付12 = 資格喪失届出日;
-        }
-        if (nullToMin(資格喪失日).isBeforeOrEquals(異動年月日)) {
-            tmp日付11 = 異動年月日;
-            tmp日付12 = 異動届出年月日;
-        }
-        if (tmp日付01.isBefore(tmp日付11) && !tmp日付11.equals(FlexibleDate.MIN)) {
-            paramter.set登録異動日(tmp日付11);
-            paramter.set登録届出日(tmp日付11);
-        }
-        if (nullToMin(tmp日付11).isBefore(tmp日付01) && !tmp日付01.equals(FlexibleDate.MIN)) {
-            paramter.set登録異動日(tmp日付01);
-            paramter.set登録届出日(tmp日付01);
-        }
-        getMaxKaijoYmd_tmp日付02_tmp日付01(paramter, tmp日付02, tmp日付01,
-                tmp日付12, tmp除外解除届出日, tmp他特解除届出日, 異動届出年月日, 資格喪失届出日);
-    }
-
-    private void getMaxKaijoYmd_tmp日付02_tmp日付01(
-            TemParamter paramter,
-            FlexibleDate tmp日付02,
-            FlexibleDate tmp日付01,
-            FlexibleDate tmp日付12,
-            FlexibleDate tmp除外解除届出日,
-            FlexibleDate tmp他特解除届出日,
-            FlexibleDate 異動届出年月日,
-            FlexibleDate 資格喪失届出日) {
-        if (nullToMin(tmp日付02).equals(nullToMin(tmp日付01))) {
-            if (!tmp日付01.equals(FlexibleDate.MIN)) {
-                paramter.set登録異動日(tmp日付01);
-            }
-            if (tmp除外解除届出日.isBefore(tmp他特解除届出日)) {
-
-                tmp日付02 = tmp他特解除届出日;
-            }
-            if (tmp他特解除届出日.isBeforeOrEquals(tmp除外解除届出日)) {
-
-                tmp日付02 = tmp除外解除届出日;
-            }
-            if (nullToMin(異動届出年月日).isBefore(nullToMin(資格喪失届出日))) {
-                tmp日付12 = 資格喪失届出日;
-            }
-            if (nullToMin(資格喪失届出日).isBeforeOrEquals(異動届出年月日)) {
-                tmp日付12 = 異動届出年月日;
-            }
-            if (nullToMin(tmp日付02).isBefore(nullToMin(tmp日付12)) && !tmp日付12.equals(FlexibleDate.MIN)) {
-
-                paramter.set登録届出日(tmp日付12);
-            }
-            if (nullToMin(tmp日付12).isBeforeOrEquals(nullToMin(tmp日付02)) && !tmp日付02.equals(FlexibleDate.MIN)) {
-
-                paramter.set登録届出日(tmp日付02);
-            }
-        }
     }
 
     private FlexibleDate nullToMin(FlexibleDate date) {

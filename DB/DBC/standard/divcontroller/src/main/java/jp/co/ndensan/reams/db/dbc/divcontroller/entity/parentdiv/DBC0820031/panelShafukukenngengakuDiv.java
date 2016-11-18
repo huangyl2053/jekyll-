@@ -4,24 +4,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * panelShafukukenngengaku のクラスファイル
- *
+ * panelShafukukenngengaku のクラスファイル 
+ * 
  * @reamsid_L DBC-1030-080 xuhao
  */
 public class panelShafukukenngengakuDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -124,7 +118,7 @@ public class panelShafukukenngengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlServiceShurui(DropDownList ddlServiceShurui) {
+    public void  setDdlServiceShurui(DropDownList ddlServiceShurui) {
         this.getPanelShakaiFukushiShokai().setDdlServiceShurui(ddlServiceShurui);
     }
 
@@ -134,7 +128,7 @@ public class panelShafukukenngengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKengenritsu(DropDownList ddlKengenritsu) {
+    public void  setDdlKengenritsu(DropDownList ddlKengenritsu) {
         this.getPanelShakaiFukushiShokai().setDdlKengenritsu(ddlKengenritsu);
     }
 
@@ -144,7 +138,7 @@ public class panelShafukukenngengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnCal(Button btnCal) {
+    public void  setBtnCal(Button btnCal) {
         this.getPanelShakaiFukushiShokai().setBtnCal(btnCal);
     }
 
@@ -154,7 +148,7 @@ public class panelShafukukenngengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutangakuTotal(TextBoxNum txtRiyoshaFutangakuTotal) {
+    public void  setTxtRiyoshaFutangakuTotal(TextBoxNum txtRiyoshaFutangakuTotal) {
         this.getPanelShakaiFukushiShokai().setTxtRiyoshaFutangakuTotal(txtRiyoshaFutangakuTotal);
     }
 
@@ -164,7 +158,7 @@ public class panelShafukukenngengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKengengaku(TextBoxNum txtKengengaku) {
+    public void  setTxtKengengaku(TextBoxNum txtKengengaku) {
         this.getPanelShakaiFukushiShokai().setTxtKengengaku(txtKengengaku);
     }
 
@@ -174,7 +168,7 @@ public class panelShafukukenngengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKeigengoRiyoshaFutangaku(TextBoxNum txtKeigengoRiyoshaFutangaku) {
+    public void  setTxtKeigengoRiyoshaFutangaku(TextBoxNum txtKeigengoRiyoshaFutangaku) {
         this.getPanelShakaiFukushiShokai().setTxtKeigengoRiyoshaFutangaku(txtKeigengoRiyoshaFutangaku);
     }
 
@@ -184,7 +178,7 @@ public class panelShafukukenngengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtBikou(TextBox txtBikou) {
+    public void  setTxtBikou(TextBox txtBikou) {
         this.getPanelShakaiFukushiShokai().setTxtBikou(txtBikou);
     }
 
@@ -194,7 +188,7 @@ public class panelShafukukenngengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnConfirm(Button btnConfirm) {
+    public void  setBtnConfirm(Button btnConfirm) {
         this.getPanelShakaiFukushiShokai().setBtnConfirm(btnConfirm);
     }
 
@@ -204,7 +198,7 @@ public class panelShafukukenngengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnCancel(Button btnCancel) {
+    public void  setBtnCancel(Button btnCancel) {
         this.getPanelShakaiFukushiShokai().setBtnCancel(btnCancel);
     }
 
@@ -214,7 +208,7 @@ public class panelShafukukenngengakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnClear(Button btnClear) {
+    public void  setBtnClear(Button btnClear) {
         this.getPanelShakaiFukushiShokai().setBtnClear(btnClear);
     }
 

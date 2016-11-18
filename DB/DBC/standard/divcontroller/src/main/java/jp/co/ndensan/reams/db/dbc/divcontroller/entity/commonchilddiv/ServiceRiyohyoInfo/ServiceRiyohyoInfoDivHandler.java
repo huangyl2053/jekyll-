@@ -969,16 +969,16 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     private void 選択データありの場合(dgServiceRiyohyoBeppyoList_Row row, RString 状態) throws ApplicationException {
-        boolean サービスコードフラグ
-                = row.getHdnServiceShuruiCode().equals(div.getCcdServiceCodeInput().getサービスコード1())
-                && row.getHdnServiceKomokuCode().equals(div.getCcdServiceCodeInput().getサービスコード2());
-        if (row.getHdnJigyoshaCode().equals(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo()) && サービスコードフラグ) {
-            if (row.getServiceTani().equals(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani())) {
-                throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage());
-            } else {
-                throw new ApplicationException(DbcErrorMessages.重複サービス.getMessage());
-            }
-        }
+//        boolean サービスコードフラグ
+//                = row.getHdnServiceShuruiCode().equals(div.getCcdServiceCodeInput().getサービスコード1())
+//                && row.getHdnServiceKomokuCode().equals(div.getCcdServiceCodeInput().getサービスコード2());
+//        if (row.getHdnJigyoshaCode().equals(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo()) && サービスコードフラグ) {
+//            if (row.getServiceTani().equals(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani())) {
+//                throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage());
+//            } else {
+//                throw new ApplicationException(DbcErrorMessages.重複サービス.getMessage());
+//            }
+//        }
         RowState state = row.getRowState();
         if (修正.equals(状態)) {
             row.setRowState(RowState.Modified);
@@ -1341,8 +1341,8 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
-        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
+//        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
+//        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
 
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoGokei().setDisabled(false);

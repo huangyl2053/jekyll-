@@ -44,7 +44,6 @@
                 futanGaku1."sumi_Gokei_70_74JikoFutanGaku",
                 futanGaku1."lastUpdateTimestamp"
             FROM <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ISougouJigyouJyohouMapper.総合事業" /> AS futanGaku1
-                <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ISougouJigyouJyohouMapper.総合事業" /> AS futanGaku1
             INNER JOIN (SELECT 
                             dbT7304."hihokenshaNo",
                             dbT7304."tokuteiKojinJohoMeiCode",
@@ -142,7 +141,7 @@
         WHERE NOT EXISTS(  SELECT 1
                             FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS dbT7304
                            WHERE teikyoKihonJoho."hihokenshaNo" = dbT7304."hihokenshaNo"
-                              AND teikyoKihonJoho."dataSetKey" = dbT7304."dataSetKey"
+                              AND teikyoKihonJoho."dataSetKey" = dbT7304."dataSetNo"
                               AND teikyoKihonJoho."tokuteiKojinJohoMeiCode" = dbT7304."tokuteiKojinJohoMeiCode"
                               AND teikyoKihonJoho."hanNo" = dbT7304."hanNo"
                               AND teikyoKihonJoho."teikyoNaiyo01" = dbT7304."soshinNaiyo01"

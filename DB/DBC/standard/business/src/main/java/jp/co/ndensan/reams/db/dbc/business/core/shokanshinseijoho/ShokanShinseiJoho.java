@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.shokanshinseijoho;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShokanShinseiJoho implements Serializable {
 
     private RString 整理番号;
-    private DbT3034ShokanShinseiEntity entity;
+    private ShokanShinsei entity;
     private int 更新件数;
 
     /**
@@ -26,7 +26,7 @@ public class ShokanShinseiJoho implements Serializable {
      * @param entity 償還払支給申請情報
      * @param 整理番号 整理番号
      */
-    public ShokanShinseiJoho(DbT3034ShokanShinseiEntity entity, RString 整理番号) {
+    public ShokanShinseiJoho(ShokanShinsei entity, RString 整理番号) {
         this.entity = entity;
         this.整理番号 = 整理番号;
     }
@@ -37,7 +37,7 @@ public class ShokanShinseiJoho implements Serializable {
      * @param entity 償還払支給申請情報
      * @param 更新件数 更新件数
      */
-    public ShokanShinseiJoho(DbT3034ShokanShinseiEntity entity, int 更新件数) {
+    public ShokanShinseiJoho(ShokanShinsei entity, int 更新件数) {
         this.entity = entity;
         this.更新件数 = 更新件数;
     }
@@ -47,7 +47,7 @@ public class ShokanShinseiJoho implements Serializable {
      *
      * @return 償還払支給申請情報
      */
-    public DbT3034ShokanShinseiEntity get償還払支給申請情報() {
+    public ShokanShinsei get償還払支給申請情報() {
         return entity;
     }
 

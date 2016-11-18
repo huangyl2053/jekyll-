@@ -139,6 +139,7 @@ public class KyufuShiharayiMeisaiPanel {
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
         getHandler(div).制御(true);
         getHandler(div).clear給付費明細登録();
+        getHandler(div).setDisabled給付費明細登録(false);
         return createResponse(div);
     }
 
@@ -254,57 +255,16 @@ public class KyufuShiharayiMeisaiPanel {
         RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (登録.equals(state)) {
             row = new dgdKyufuhiMeisai_Row();
+            row.setDefaultDataName6(getMax連番(div));
         } else {
             row = getHandler(div).selectRow();
         }
-        // getHandler(div).modifyRow(row, state, emptyList);
+        getHandler(div).modifyRow(row, state, emptyList);
         setRowSort(div);
         getHandler(div).制御(false);
         return createResponse(div);
     }
 
-    /**
-     * onClick_btnSave事件
-     *
-     * @param div KyufuShiharayiMeisaiPanelDiv
-     * @return ResponseData
-     */
-//    public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnSave(KyufuShiharayiMeisaiPanelDiv div) {
-//        boolean flag = getHandler(div).is内容変更状態();
-//        if (flag) {
-//            return 保存処理(div);
-//        } else {
-//            return notChanges(div);
-//        }
-//    }
-    /**
-     * 「申請を削除する」ボタンのメソッドます。
-     *
-     * @param div KyufuShiharayiMeisaiPanelDiv
-     * @return ResponseData
-     */
-//    public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnDelete(KyufuShiharayiMeisaiPanelDiv div) {
-//        try {
-//            if (!ResponseHolder.isReRequest()) {
-//                ShoukanharaihishinseimeisaikensakuParameter meisaiPar
-//                        = ViewStateHolder.get(ViewStateKeys.明細検索キー,
-//                                ShoukanharaihishinseimeisaikensakuParameter.class);
-//                RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-//                List<ShokanMeisaiResult> shkonlist = ViewStateHolder.get(ViewStateKeys.給付費明細登録, List.class);
-//                getHandler(div).保存処理(meisaiPar, 処理モード, shkonlist);
-//                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-//                        .replace(削除.toString())).respond();
-//            }
-//            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除する, true);
-//                return createResponse(div);
-//            }
-//            return ResponseData.of(div).respond();
-//        } catch (Exception e) {
-//            e.toString();
-//            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
-//        }
-//    }
     private ArrayList<ShokanMeisaiResult> set保存処理(KyufuShiharayiMeisaiPanelDiv div) {
         try {
             ShoukanharaihishinseimeisaikensakuParameter meisaiPar
@@ -334,17 +294,28 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnConfirmCommon(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
+        set入力内容保存(div);
+        set証明書入力済チェック();
+        return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.一覧に戻る).respond();
+    }
+
+    private void set入力内容保存(KyufuShiharayiMeisaiPanelDiv div) {
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        if (償還払ViewStateDB == null) {
+            償還払ViewStateDB = new DbJohoViewState();
+        }
+        償還払ViewStateDB.set償還払請求明細データList(set保存処理(div));
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
+    }
+
+    private void set入力有無フラグ(KyufuShiharayiMeisaiPanelDiv div) {
         ShomeishoNyuryokuFlag flag = new ShomeishoNyuryokuFlag();
         ShomeishoNyuryokuKubunType 入力済フラグ = getHandler(div).is入力済() ? flag.get給付費明細_証明書入力済フラグ().入力あり : flag.get給付費明細_証明書入力済フラグ().入力なし;
-        RString 変更済フラグ = getHandler(div).is変更済() ? 変更あり : 変更なし;
+        RString 変更済フラグ = getHandler(div).is変更済() ? 変更あり : 変更なし; // 変更 todo #QA
         flag.set給付費明細_証明書入力済フラグ(入力済フラグ);
         ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, flag);
         ViewStateHolder.put(ViewStateKeys.証明書変更済フラグ, 変更済フラグ);
-        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        償還払ViewStateDB.set償還払請求明細データList(set保存処理(div));
-        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
-        set証明書入力済チェック();
-        return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.一覧に戻る).respond(); //サービス提供証明書 画面へ遷移する。
     }
 
     /**
@@ -354,7 +325,9 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnKihonInfo(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
         setViewState(div);
+        set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.基本情報).respond();
     }
 
@@ -365,7 +338,9 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnTokuteiShinryohi(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
         setViewState(div);
+        set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.特定診療費).respond();
     }
 
@@ -376,7 +351,9 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnServiceKeikakuhi(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
         setViewState(div);
+        set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費).respond();
     }
 
@@ -387,7 +364,9 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnTokuteiNyushosya(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
         setViewState(div);
+        set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.特定入所者費用).respond();
     }
 
@@ -398,7 +377,9 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnGoukeiInfo(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
         setViewState(div);
+        set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.合計情報).respond();
     }
 
@@ -409,7 +390,9 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnKyufuhiMeisaiJyuchi(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
         setViewState(div);
+        set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.給付費明細_住特).respond();
     }
 
@@ -420,7 +403,9 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnKinkyujiShoteiShikan(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
         setViewState(div);
+        set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.緊急時_所定疾患).respond();
     }
 
@@ -431,7 +416,9 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnKinkyujiShisetsuRyoyo(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
         setViewState(div);
+        set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.緊急時施設療養費).respond();
     }
 
@@ -442,7 +429,9 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnShokujiHiyo(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
         setViewState(div);
+        set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.食事費用).respond();
     }
 
@@ -453,7 +442,9 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnSeikyugakuShukei(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
         setViewState(div);
+        set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.請求額集計).respond();
     }
 
@@ -464,7 +455,9 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnShafukukeigengaku(KyufuShiharayiMeisaiPanelDiv div) {
+        set入力有無フラグ(div);
         setViewState(div);
+        set入力内容保存(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.社福軽減額).respond();
     }
 
@@ -504,7 +497,6 @@ public class KyufuShiharayiMeisaiPanel {
         } else {
             ViewStateHolder.put(ViewStateKeys.証明書入力完了フラグ, 入力未完了);
         }
-
     }
 
     private void setRowSort(KyufuShiharayiMeisaiPanelDiv div) {
@@ -520,4 +512,16 @@ public class KyufuShiharayiMeisaiPanel {
         div.getPanelThree().getDgdKyufuhiMeisai().setDataSource(rowList);
     }
 
+    private RString getMax連番(KyufuShiharayiMeisaiPanelDiv div) {
+        int max連番 = 0;
+        for (dgdKyufuhiMeisai_Row meisai_Row : div.getPanelThree().getDgdKyufuhiMeisai().getDataSource()) {
+            if (max連番 < Integer.valueOf(meisai_Row.getDefaultDataName6().toString())) {
+                max連番 = Integer.valueOf(meisai_Row.getDefaultDataName6().toString());
+            }
+        }
+        if (div.getPanelThree().getDgdKyufuhiMeisai().getDataSource().isEmpty()) {
+            return new RString(max連番);
+        }
+        return new RString(++max連番);
+    }
 }

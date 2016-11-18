@@ -443,7 +443,21 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
         DbT3034ShokanShinseiEntity entity = shinsei.toEntity();
         entity.setState(EntityDataState.Modified);
         int 更新件数 = 償還払支給申請Dac.save(entity);
-        return new ShokanShinseiJoho(entity, 更新件数);
+        ShokanShinsei shokanShinsei = new ShokanShinsei(entity);
+        return new ShokanShinseiJoho(shokanShinsei, 更新件数);
+    }
+
+    /**
+     * 支給申請更新2
+     *
+     * @param shinsei shinsei
+     * @return 更新件数
+     */
+    public ShokanShinsei updDbT3034ShokanShinsei2(ShokanShinsei shinsei) {
+        DbT3034ShokanShinseiEntity entity = shinsei.toEntity();
+        entity.setState(EntityDataState.Modified);
+        ShokanShinsei shokanShinsei = new ShokanShinsei(entity);
+        return shokanShinsei;
     }
 
     /**

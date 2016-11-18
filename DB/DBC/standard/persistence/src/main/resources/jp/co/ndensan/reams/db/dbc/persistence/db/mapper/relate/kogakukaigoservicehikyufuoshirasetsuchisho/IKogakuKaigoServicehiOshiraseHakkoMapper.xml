@@ -401,6 +401,12 @@
         "ShikibetsuTaisho"."renrakusaki1" AS "telNoChohyo",
         "ShikibetsuTaisho"."kojinNo" AS "kojinNoChohyo",
         "ShikibetsuTaisho"."choikiCode" AS "choikiCodeChohyo",
+        
+        "ShikibetsuTaisho"."kannaiKangaiKubun" AS "kannaiKangaiKubun",
+        "ShikibetsuTaisho"."banchi" AS "banchi",
+        "ShikibetsuTaisho"."katagaki" AS "katagaki",
+        "ShikibetsuTaisho"."gyoseikuName" AS "gyoseikuName",
+        
         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.allColumns_DbT4021ShiharaiHohoHenko" />
         <if test="hasValidKamoku">
             ,"Koza"."uaT0310Koza_kinyuKikanCode" AS "kinyuKikanCodeChohyo",
@@ -1032,5 +1038,11 @@
         <result property="tsuchoKigoChohyo" column="tsuchoKigoChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tsuchoNoChohyo" column="tsuchoNoChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ininjoTeishutsusakiChohyo" column="ininjoTeishutsusakiChohyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        
+        <result property="kannaiKangaiKubun" column="kannaiKangaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="banchi" column="banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler"/>
+        <result property="katagaki" column="katagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KatagakiTypeHandler"/>
+        <result property="gyoseikuName" column="gyoseikuName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="dbT4001JukyushaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
     </resultMap>
 </mapper>

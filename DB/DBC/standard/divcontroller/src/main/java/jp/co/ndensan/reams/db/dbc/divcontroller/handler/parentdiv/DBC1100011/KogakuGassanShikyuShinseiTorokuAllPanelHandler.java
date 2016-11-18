@@ -582,6 +582,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ);
                 高額合算申請書保持.add高額合算申請書(高額合算申請書);
             } else {
+                高額合算申請書.toEntity().setState(EntityDataState.Modified);
                 高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ);
                 高額合算申請書保持.add高額合算申請書(高額合算申請書);
             }

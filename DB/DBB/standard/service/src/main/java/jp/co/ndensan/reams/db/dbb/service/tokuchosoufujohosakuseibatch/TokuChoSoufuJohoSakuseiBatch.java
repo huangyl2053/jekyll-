@@ -92,8 +92,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
      */
     public static TokuChoSoufuJohoSakuseiBatch createInstance() {
         return InstanceProvider.create(TokuChoSoufuJohoSakuseiBatch.class);
@@ -106,7 +105,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
      */
     public int get最大の連番() {
         ITokuChoSoufuJohoSakuseiMapper mapper = mapperProvider.create(ITokuChoSoufuJohoSakuseiMapper.class);
-        return mapper.selectMaxRenbanUeT1704() + 1;
+        Integer maxRenban = mapper.selectMaxRenbanUeT1704();
+        return (maxRenban == null) ? 1 : (maxRenban + 1);
     }
 
     /**

@@ -78,8 +78,7 @@ public class ShokanShakaiFukushiHojinKeigengaku extends ParentModelBase<
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}より{@link ShokanShakaiFukushiHojinKeigengaku}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}
+     * @param entity DBより取得した{@link DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}
      */
     public ShokanShakaiFukushiHojinKeigengaku(DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求社会福祉法人軽減額"));
@@ -238,8 +237,7 @@ public class ShokanShakaiFukushiHojinKeigengaku extends ParentModelBase<
     /**
      * 償還払請求社会福祉法人軽減額の識別子{@link ShokanShakaiFukushiHojinKeigengakuIdentifier}を返します。
      *
-     * @return
-     * 償還払請求社会福祉法人軽減額の識別子{@link ShokanShakaiFukushiHojinKeigengakuIdentifier}
+     * @return 償還払請求社会福祉法人軽減額の識別子{@link ShokanShakaiFukushiHojinKeigengakuIdentifier}
      */
     @Override
     public ShokanShakaiFukushiHojinKeigengakuIdentifier identifier() {
@@ -247,8 +245,18 @@ public class ShokanShakaiFukushiHojinKeigengaku extends ParentModelBase<
     }
 
     /**
-     * 償還払請求社会福祉法人軽減額のみを変更対象とします。<br/>
-     * {@link DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 償還払請求社会福祉法人軽減額のみを登録対象とします。<br/> {@link DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     *
+     * @return 登録対象処理実施後の{@link ShokanShakaiFukushiHojinKeigengaku}
+     */
+    public ShokanShakaiFukushiHojinKeigengaku added() {
+        DbT3051ShokanShakaiFukushiHojinKeigengakuEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ShokanShakaiFukushiHojinKeigengaku(addedEntity, id);
+    }
+
+    /**
+     * 償還払請求社会福祉法人軽減額のみを変更対象とします。<br/> {@link DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShokanShakaiFukushiHojinKeigengaku}
      */
@@ -263,8 +271,7 @@ public class ShokanShakaiFukushiHojinKeigengaku extends ParentModelBase<
     }
 
     /**
-     * 保持する償還払請求社会福祉法人軽減額を削除対象とします。<br/>
-     * {@link DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払請求社会福祉法人軽減額を削除対象とします。<br/> {@link DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanShakaiFukushiHojinKeigengaku}
      */

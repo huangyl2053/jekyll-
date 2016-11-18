@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -200,7 +201,14 @@ public class ServiceRiyohyoInfo {
 
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
+//        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisai().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnCancelMeisaiInput().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisaiGokei().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnBeppyoMeisaiKakutei().setDisabled(true);
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
 
@@ -356,18 +364,17 @@ public class ServiceRiyohyoInfo {
         }
         if (RSTRING_17.equals(サービス種類Tmp) || RSTRING_67.equals(サービス種類Tmp)
                 || RSTRING_88.equals(サービス種類Tmp)) {
-            ValidationMessageControlPairs サービス種類Pairs = validationhandler.validateサービス種類必須();
-            if (サービス種類Pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(サービス種類Pairs).respond();
-            }
-        } else {
-            ValidationMessageControlPairs サービス単位必須以外Pairs = validationhandler.validateサービス単位必須以外();
-            if (サービス単位必須以外Pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(サービス単位必須以外Pairs).respond();
+            ValidationMessageControlPairs サービス単位Pairs = validationhandler.validateサービス単位必須();
+            if (サービス単位Pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(サービス単位Pairs).respond();
             }
         }
-        RString 利用者負担定率定額区分
-                = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
+        ValidationMessageControlPairs サービス単位必須以外Pairs = validationhandler.validateサービス単位必須以外();
+        if (サービス単位必須以外Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(サービス単位必須以外Pairs).respond();
+        }
+        
+        RString 利用者負担定率定額区分 = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
         if (RSTRING_TWO.equals(利用者負担定率定額区分)) {
             ValidationMessageControlPairs 給付率必須Pairs = validationhandler.validate給付率必須();
             if (給付率必須Pairs.iterator().hasNext()) {
@@ -449,6 +456,11 @@ public class ServiceRiyohyoInfo {
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnDelete(ServiceRiyohyoInfoDiv div) {
         ViewStateHolder.put(ViewStateKeys.選択有无, true);
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
+        dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
+        if (row.getRowState().equals(RowState.Added)) {
+            div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource().remove(row);
+            return ResponseData.of(div).respond();
+        }
         handler.setパネルにデータ反映();
         handler.init削除();
         return ResponseData.of(div).respond();

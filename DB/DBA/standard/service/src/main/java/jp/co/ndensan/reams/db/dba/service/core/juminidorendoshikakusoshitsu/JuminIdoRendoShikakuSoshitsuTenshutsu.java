@@ -5,14 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.juminidorendoshikakusoshitsu;
 
-import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.definition.core.juminidorendoshikakusoshitsu.NaiBushoRyouParamter;
 import jp.co.ndensan.reams.db.dba.definition.core.juminidorendoshikakusoshitsu.StoreConfigParamter;
 import jp.co.ndensan.reams.db.dba.definition.core.juminrendo.JuminRendoFuseigo;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.juminidorendoshikakutoroku.JuminIdoRendoShikakuTorokuEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -78,11 +76,18 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
 
         StoreConfigParamter storeConfigParamter = JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().getStoreConfigParam();
         JuminIdoRendoShikakuTorokuEntity entity = new JuminIdoRendoShikakuTorokuEntity();
+
         JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().get関連テーブル(住民異動情報, 被保険者台帳, entity);
         getCheckJukyushaDaicho(住民異動情報, 被保険者台帳, entity);
         if (受給者.equals(entity.get結果区分())) {
 
-            戻り値の編集(entity, RString.EMPTY, JuminRendoFuseigo.転出_受給者.getコード());
+            JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().
+                    戻り値の編集(entity, RString.EMPTY,
+                            JuminRendoFuseigo.転出_受給者.getコード(),
+                            entity.get被保険者台帳EntityList(),
+                            entity.get適用除外者台帳EntityList(),
+                            entity.get他市町村住所地特例EntityList(),
+                            entity.get介護保険施設入退所EntityList());
             return entity;
         }
         JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance()
@@ -114,19 +119,19 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
 
         NaiBushoRyouParamter paramter = new NaiBushoRyouParamter();
         被保台帳転出処理_到達日転出予定日翌日の算出(住民異動情報, storeConfigParamter, paramter);
-        searchHihodaicho(entity, 直近);
-        if (!被保台帳転出処理_被保険者処理要否判定(entity, paramter, storeConfigParamter)) {
+        List<DbT1001HihokenshaDaichoEntity> 被保険者台帳EntityList = JuminIdoRendoShikakuSoshitsu.
+                createInstance().getSearchHihodaicho(entity, 直近);
+        if (!被保台帳転出処理_被保険者処理要否判定(entity, paramter, storeConfigParamter, 被保険者台帳EntityList)) {
             return;
         }
-        被保台帳転出処理_被保台帳処理の振分け(entity, 住民異動情報, paramter, storeConfigParamter);
+        被保台帳転出処理_被保台帳処理の振分け(entity, 住民異動情報, paramter, storeConfigParamter, 被保険者台帳EntityList);
     }
 
     private void 被保台帳転出処理_被保台帳処理の振分け(JuminIdoRendoShikakuTorokuEntity entity,
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             NaiBushoRyouParamter paramter,
-            StoreConfigParamter storeConfigParamter) {
-
-        List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
+            StoreConfigParamter storeConfigParamter,
+            List<DbT1001HihokenshaDaichoEntity> dbT1001List) {
 
         if (dbT1001List == null || dbT1001List.isEmpty()) {
             JuminIdoRendoShikakuSoshitsu.createInstance().
@@ -157,9 +162,9 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
     }
 
     private boolean 被保台帳転出処理_被保険者処理要否判定(JuminIdoRendoShikakuTorokuEntity entity,
-            NaiBushoRyouParamter paramter, StoreConfigParamter storeConfigParamter) {
+            NaiBushoRyouParamter paramter, StoreConfigParamter storeConfigParamter,
+            List<DbT1001HihokenshaDaichoEntity> dbT1001List) {
 
-        List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
         RString 喪失事由 = RString.EMPTY;
         RString 第２号被保険者基準年齢 = storeConfigParamter.get第２号被保険者基準年齢();
         if (dbT1001List != null && !dbT1001List.isEmpty()) {
@@ -169,36 +174,12 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
         if ((dbT1001List == null || dbT1001List.isEmpty() || !RString.isNullOrEmpty(喪失事由))
                 && Integer.valueOf(paramter.get年齢().toString()) < Integer.valueOf(第２号被保険者基準年齢.toString())) {
 
-            戻り値の編集(entity, RString.EMPTY, RString.EMPTY);
+            JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
+                    dbT1001List, entity.get適用除外者台帳EntityList(),
+                    entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
             return false;
         }
         return true;
-    }
-
-    private void searchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
-
-        List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
-        List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
-        HihokenshaNo 被保険者 = HihokenshaNo.EMPTY;
-
-        if (直近.equals(データ抽出ＰＴＮ)) {
-            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
-                if (!被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
-                    list.add(dbT1001Entity);
-                    被保険者 = dbT1001Entity.getHihokenshaNo();
-                }
-            }
-        }
-        if (転出.equals(データ抽出ＰＴＮ)) {
-            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
-                if (!ShikakuSoshitsuJiyu.転出.getコード().equals(dbT1001Entity.getIdoJiyuCode())
-                        && !被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
-                    list.add(dbT1001Entity);
-                    被保険者 = dbT1001Entity.getHihokenshaNo();
-                }
-            }
-        }
-        entity.set被保険者台帳EntityList(list);
     }
 
     /**
@@ -224,13 +205,6 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
         }
     }
 
-    private void 戻り値の編集(
-            JuminIdoRendoShikakuTorokuEntity entity,
-            RString 不整合コード, RString 転出保留作成事由コード) {
-        entity.set不整合コード(不整合コード);
-        entity.set転出保留作成事由コード(転出保留作成事由コード);
-    }
-
     private void 被保台帳転出処理_到達日転出予定日翌日の算出(UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             StoreConfigParamter storeConfigParamter, NaiBushoRyouParamter paramter) {
 
@@ -248,6 +222,6 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
         }
         paramter.set補正後転出予定日翌日(転出予定日の翌日);
         paramter.set転出予定日翌日(転出予定日の翌日);
-        JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().nenreiCalc(住民異動情報, paramter);
+        JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().nenreiCalc(住民異動情報, paramter, paramter.get転出予定日翌日());
     }
 }

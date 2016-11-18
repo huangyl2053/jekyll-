@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.JukyushaIdoRenrakuhyoCsvControlEnti
 import jp.co.ndensan.reams.db.dbc.entity.csv.JukyushaIdoRenrakuhyoCsvDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.JukyushaIdoRenrakuhyoCsvEndEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -45,8 +46,11 @@ public class JukyushaIdoRenrakuhyoCsvManager {
     private static final RString 定数 = new RString("5311");
     private static final RString 受給者異動情報 = new RString("531");
     private static final RString 改行 = new RString("0x0D0A");
+    private static final int INDEX_TWO = 2;
     private CsvWriter csvWriter;
     private RString filePath;
+    private int 総出力件数;
+    private RString 入力ファイルパス;
 
     /**
      * 帳票設計_DBCZV00001_受給者異動連絡票（CSV）のコンストラクタ。
@@ -62,8 +66,10 @@ public class JukyushaIdoRenrakuhyoCsvManager {
      *
      * @param entityList List<JukyushaIdoRenrakuhyoCsvEntity>
      * @param 処理対象年月 RYearMonth
+     * @return JukyushaIdoRenrakuhyoEntity
      */
-    public void csvの出力(List<JukyushaIdoRenrakuhyoCsvEntity> entityList, RYearMonth 処理対象年月) {
+    public JukyushaIdoRenrakuhyoEntity csvの出力(List<JukyushaIdoRenrakuhyoCsvEntity> entityList, RYearMonth 処理対象年月) {
+        JukyushaIdoRenrakuhyoEntity resultEntity = new JukyushaIdoRenrakuhyoEntity();
         RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 出力ファイル名1 = 定数ファイル名.concat(保険者番号);
@@ -85,6 +91,12 @@ public class JukyushaIdoRenrakuhyoCsvManager {
         }
         csvWriter.writeLine(editorEndRecord());
         csvWriter.close();
+        総出力件数 = entityList.size() + INDEX_TWO;
+        入力ファイルパス = filePath;
+        resultEntity.set出力ファイルパス(filePath);
+        resultEntity.set入力ファイルパス(入力ファイルパス);
+        resultEntity.set総出力件数(総出力件数);
+        return resultEntity;
     }
 
     /**
