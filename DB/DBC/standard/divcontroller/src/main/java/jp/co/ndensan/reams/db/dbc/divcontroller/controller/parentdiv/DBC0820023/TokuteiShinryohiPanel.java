@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.S
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -431,16 +430,6 @@ public class TokuteiShinryohiPanel {
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, viewStateDB);
         }
         return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.一覧に戻る).respond();
-    }
-
-    private ResponseData<TokuteiShinryohiPanelDiv> saveOut(TokuteiShinryohiPanelDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return createResponse(div);
-        }
-        return createResponse(div);
     }
 
     private TokuteiShinryohiPanelHandler getHandler(TokuteiShinryohiPanelDiv div) {
