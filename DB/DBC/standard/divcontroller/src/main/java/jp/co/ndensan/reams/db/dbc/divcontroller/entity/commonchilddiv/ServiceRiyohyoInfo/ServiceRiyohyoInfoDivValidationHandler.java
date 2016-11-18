@@ -151,7 +151,7 @@ public class ServiceRiyohyoInfoDivValidationHandler {
 
     private ValidationDictionary createサービス単位必須以外Dictionary() {
         return new ValidationDictionaryBuilder()
-//                .add(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
+                .add(ServiceRiyohyoInfoDivValidationMessage.サービス種類コード必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.単位必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtTani())
                 .add(ServiceRiyohyoInfoDivValidationMessage.回数必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu())
                 .add(ServiceRiyohyoInfoDivValidationMessage.単位数単価必須項目,
