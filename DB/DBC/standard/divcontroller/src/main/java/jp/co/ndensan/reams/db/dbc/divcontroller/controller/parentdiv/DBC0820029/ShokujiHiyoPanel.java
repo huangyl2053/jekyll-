@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.S
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import static jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.DBC0820029StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.DBC0820029TransitionEventName;
@@ -64,7 +65,6 @@ public class ShokujiHiyoPanel {
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成17年９月 = new FlexibleYearMonth("200509");
     private static final FlexibleYearMonth 平成17年１０月 = new FlexibleYearMonth("200510");
-    private static final RString 証明書入力未済ありエラー = new RString("請求額集計情報の未登録のサービス種類が存在します。\n\r請求額集計情報を登録して下さい。");
 
     /**
      * onLoad
@@ -213,15 +213,15 @@ public class ShokujiHiyoPanel {
         入力内容保存(div);
         ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
         DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        ShomeishoNyuryokuFlag 証明書入力済フラグAll = 償還払ViewStateDB.get証明書入力済フラグMap().get(paramter);
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            ShomeishoNyuryokuFlag 証明書入力済フラグAll = 償還払ViewStateDB.get証明書入力済フラグMap().get(paramter);
             SyokanbaraihiShikyuShinseiManager manager = SyokanbaraihiShikyuShinseiManager.createInstance();
             ShomeishoNyuryokuKanryoKubunType チェック結果 = manager.証明書InputCheck(証明書入力済フラグAll, paramter.get様式番号(), paramter.getサービス年月());
             if (ShomeishoNyuryokuKanryoKubunType.入力完了.equals(チェック結果)) {
                 償還払ViewStateDB.get証明書入力完了フラグMap().put(paramter, チェック結果);
                 ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
             } else {
-                throw new ApplicationException(証明書入力未済ありエラー.toString());
+                throw new ApplicationException(償還払い費支給申請決定_証明書情報未入力.getMessage());
             }
         }
         return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.一覧に戻る).respond();
@@ -616,13 +616,11 @@ public class ShokujiHiyoPanel {
         List<ShokanMeisai> shokanMeisaiList = ViewStateHolder.get(ViewStateKeys.償還払請求食事費用, List.class);
         ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        try {
-            ShokujiHiyoUpdateData 更新用データ = getHandler(div).get更新用データ(paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード);
-            償還払ViewStateDB.set償還払請求食事費用データList((ArrayList) 更新用データ.get償還払請求食事費用データ());
-            償還払ViewStateDB.set償還払請求明細データList((ArrayList) 更新用データ.get償還払請求明細データ());
-        } catch (Exception e) {
-            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
-        }
+
+        ShokujiHiyoUpdateData 更新用データ = getHandler(div).get更新用データ(paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード);
+        償還払ViewStateDB.set償還払請求食事費用データList((ArrayList) 更新用データ.get償還払請求食事費用データ());
+        償還払ViewStateDB.set償還払請求明細データList((ArrayList) 更新用データ.get償還払請求明細データ());
+
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
     }
 

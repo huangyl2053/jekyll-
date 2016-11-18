@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,26 +31,26 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
     private TextBoxNum txtShokuhiFutanGendogaku;
     @JsonProperty("txtFutanGendogakuTekiyoYMD")
     private TextBoxDateRange txtFutanGendogakuTekiyoYMD;
-    @JsonProperty("lblKyojuhiFutanGendogaku")
-    private Label lblKyojuhiFutanGendogaku;
     @JsonProperty("lin1")
     private HorizontalLine lin1;
-    @JsonProperty("txtJuraigataKoshitsuTokuyoFutanGendogaku")
-    private TextBoxNum txtJuraigataKoshitsuTokuyoFutanGendogaku;
-    @JsonProperty("txtKyotakuhiShin1FutanGendogaku")
-    private TextBoxNum txtKyotakuhiShin1FutanGendogaku;
-    @JsonProperty("txtJuraigataKoshitsuRokenRyoyoFutanGendogaku")
-    private TextBoxNum txtJuraigataKoshitsuRokenRyoyoFutanGendogaku;
-    @JsonProperty("txtKyotakuhiShin2FutanGendogaku")
-    private TextBoxNum txtKyotakuhiShin2FutanGendogaku;
-    @JsonProperty("txtTashoshitsu")
-    private TextBoxNum txtTashoshitsu;
-    @JsonProperty("txtKyotakuhiShin3utanGendogaku")
-    private TextBoxNum txtKyotakuhiShin3utanGendogaku;
+    @JsonProperty("lblKyojuhiFutanGendogaku")
+    private Label lblKyojuhiFutanGendogaku;
     @JsonProperty("txtUnitKoshitsuGendogaku")
     private TextBoxNum txtUnitKoshitsuGendogaku;
     @JsonProperty("txtUnitJunKoshitsuFutanGendogaku")
     private TextBoxNum txtUnitJunKoshitsuFutanGendogaku;
+    @JsonProperty("txtJuraigataKoshitsuTokuyoFutanGendogaku")
+    private TextBoxNum txtJuraigataKoshitsuTokuyoFutanGendogaku;
+    @JsonProperty("txtJuraigataKoshitsuRokenRyoyoFutanGendogaku")
+    private TextBoxNum txtJuraigataKoshitsuRokenRyoyoFutanGendogaku;
+    @JsonProperty("txtTashoshitsu")
+    private TextBoxNum txtTashoshitsu;
+    @JsonProperty("txtKyotakuhiShin1FutanGendogaku")
+    private TextBoxNum txtKyotakuhiShin1FutanGendogaku;
+    @JsonProperty("txtKyotakuhiShin2FutanGendogaku")
+    private TextBoxNum txtKyotakuhiShin2FutanGendogaku;
+    @JsonProperty("txtKyotakuhiShin3utanGendogaku")
+    private TextBoxNum txtKyotakuhiShin3utanGendogaku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -149,24 +149,6 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
     }
 
     /*
-     * getlblKyojuhiFutanGendogaku
-     * @return lblKyojuhiFutanGendogaku
-     */
-    @JsonProperty("lblKyojuhiFutanGendogaku")
-    public Label getLblKyojuhiFutanGendogaku() {
-        return lblKyojuhiFutanGendogaku;
-    }
-
-    /*
-     * setlblKyojuhiFutanGendogaku
-     * @param lblKyojuhiFutanGendogaku lblKyojuhiFutanGendogaku
-     */
-    @JsonProperty("lblKyojuhiFutanGendogaku")
-    public void setLblKyojuhiFutanGendogaku(Label lblKyojuhiFutanGendogaku) {
-        this.lblKyojuhiFutanGendogaku = lblKyojuhiFutanGendogaku;
-    }
-
-    /*
      * getlin1
      * @return lin1
      */
@@ -185,111 +167,21 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
     }
 
     /*
-     * gettxtJuraigataKoshitsuTokuyoFutanGendogaku
-     * @return txtJuraigataKoshitsuTokuyoFutanGendogaku
+     * getlblKyojuhiFutanGendogaku
+     * @return lblKyojuhiFutanGendogaku
      */
-    @JsonProperty("txtJuraigataKoshitsuTokuyoFutanGendogaku")
-    public TextBoxNum getTxtJuraigataKoshitsuTokuyoFutanGendogaku() {
-        return txtJuraigataKoshitsuTokuyoFutanGendogaku;
+    @JsonProperty("lblKyojuhiFutanGendogaku")
+    public Label getLblKyojuhiFutanGendogaku() {
+        return lblKyojuhiFutanGendogaku;
     }
 
     /*
-     * settxtJuraigataKoshitsuTokuyoFutanGendogaku
-     * @param txtJuraigataKoshitsuTokuyoFutanGendogaku txtJuraigataKoshitsuTokuyoFutanGendogaku
+     * setlblKyojuhiFutanGendogaku
+     * @param lblKyojuhiFutanGendogaku lblKyojuhiFutanGendogaku
      */
-    @JsonProperty("txtJuraigataKoshitsuTokuyoFutanGendogaku")
-    public void setTxtJuraigataKoshitsuTokuyoFutanGendogaku(TextBoxNum txtJuraigataKoshitsuTokuyoFutanGendogaku) {
-        this.txtJuraigataKoshitsuTokuyoFutanGendogaku = txtJuraigataKoshitsuTokuyoFutanGendogaku;
-    }
-
-    /*
-     * gettxtKyotakuhiShin1FutanGendogaku
-     * @return txtKyotakuhiShin1FutanGendogaku
-     */
-    @JsonProperty("txtKyotakuhiShin1FutanGendogaku")
-    public TextBoxNum getTxtKyotakuhiShin1FutanGendogaku() {
-        return txtKyotakuhiShin1FutanGendogaku;
-    }
-
-    /*
-     * settxtKyotakuhiShin1FutanGendogaku
-     * @param txtKyotakuhiShin1FutanGendogaku txtKyotakuhiShin1FutanGendogaku
-     */
-    @JsonProperty("txtKyotakuhiShin1FutanGendogaku")
-    public void setTxtKyotakuhiShin1FutanGendogaku(TextBoxNum txtKyotakuhiShin1FutanGendogaku) {
-        this.txtKyotakuhiShin1FutanGendogaku = txtKyotakuhiShin1FutanGendogaku;
-    }
-
-    /*
-     * gettxtJuraigataKoshitsuRokenRyoyoFutanGendogaku
-     * @return txtJuraigataKoshitsuRokenRyoyoFutanGendogaku
-     */
-    @JsonProperty("txtJuraigataKoshitsuRokenRyoyoFutanGendogaku")
-    public TextBoxNum getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku() {
-        return txtJuraigataKoshitsuRokenRyoyoFutanGendogaku;
-    }
-
-    /*
-     * settxtJuraigataKoshitsuRokenRyoyoFutanGendogaku
-     * @param txtJuraigataKoshitsuRokenRyoyoFutanGendogaku txtJuraigataKoshitsuRokenRyoyoFutanGendogaku
-     */
-    @JsonProperty("txtJuraigataKoshitsuRokenRyoyoFutanGendogaku")
-    public void setTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku(TextBoxNum txtJuraigataKoshitsuRokenRyoyoFutanGendogaku) {
-        this.txtJuraigataKoshitsuRokenRyoyoFutanGendogaku = txtJuraigataKoshitsuRokenRyoyoFutanGendogaku;
-    }
-
-    /*
-     * gettxtKyotakuhiShin2FutanGendogaku
-     * @return txtKyotakuhiShin2FutanGendogaku
-     */
-    @JsonProperty("txtKyotakuhiShin2FutanGendogaku")
-    public TextBoxNum getTxtKyotakuhiShin2FutanGendogaku() {
-        return txtKyotakuhiShin2FutanGendogaku;
-    }
-
-    /*
-     * settxtKyotakuhiShin2FutanGendogaku
-     * @param txtKyotakuhiShin2FutanGendogaku txtKyotakuhiShin2FutanGendogaku
-     */
-    @JsonProperty("txtKyotakuhiShin2FutanGendogaku")
-    public void setTxtKyotakuhiShin2FutanGendogaku(TextBoxNum txtKyotakuhiShin2FutanGendogaku) {
-        this.txtKyotakuhiShin2FutanGendogaku = txtKyotakuhiShin2FutanGendogaku;
-    }
-
-    /*
-     * gettxtTashoshitsu
-     * @return txtTashoshitsu
-     */
-    @JsonProperty("txtTashoshitsu")
-    public TextBoxNum getTxtTashoshitsu() {
-        return txtTashoshitsu;
-    }
-
-    /*
-     * settxtTashoshitsu
-     * @param txtTashoshitsu txtTashoshitsu
-     */
-    @JsonProperty("txtTashoshitsu")
-    public void setTxtTashoshitsu(TextBoxNum txtTashoshitsu) {
-        this.txtTashoshitsu = txtTashoshitsu;
-    }
-
-    /*
-     * gettxtKyotakuhiShin3utanGendogaku
-     * @return txtKyotakuhiShin3utanGendogaku
-     */
-    @JsonProperty("txtKyotakuhiShin3utanGendogaku")
-    public TextBoxNum getTxtKyotakuhiShin3utanGendogaku() {
-        return txtKyotakuhiShin3utanGendogaku;
-    }
-
-    /*
-     * settxtKyotakuhiShin3utanGendogaku
-     * @param txtKyotakuhiShin3utanGendogaku txtKyotakuhiShin3utanGendogaku
-     */
-    @JsonProperty("txtKyotakuhiShin3utanGendogaku")
-    public void setTxtKyotakuhiShin3utanGendogaku(TextBoxNum txtKyotakuhiShin3utanGendogaku) {
-        this.txtKyotakuhiShin3utanGendogaku = txtKyotakuhiShin3utanGendogaku;
+    @JsonProperty("lblKyojuhiFutanGendogaku")
+    public void setLblKyojuhiFutanGendogaku(Label lblKyojuhiFutanGendogaku) {
+        this.lblKyojuhiFutanGendogaku = lblKyojuhiFutanGendogaku;
     }
 
     /*
@@ -326,6 +218,114 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
     @JsonProperty("txtUnitJunKoshitsuFutanGendogaku")
     public void setTxtUnitJunKoshitsuFutanGendogaku(TextBoxNum txtUnitJunKoshitsuFutanGendogaku) {
         this.txtUnitJunKoshitsuFutanGendogaku = txtUnitJunKoshitsuFutanGendogaku;
+    }
+
+    /*
+     * gettxtJuraigataKoshitsuTokuyoFutanGendogaku
+     * @return txtJuraigataKoshitsuTokuyoFutanGendogaku
+     */
+    @JsonProperty("txtJuraigataKoshitsuTokuyoFutanGendogaku")
+    public TextBoxNum getTxtJuraigataKoshitsuTokuyoFutanGendogaku() {
+        return txtJuraigataKoshitsuTokuyoFutanGendogaku;
+    }
+
+    /*
+     * settxtJuraigataKoshitsuTokuyoFutanGendogaku
+     * @param txtJuraigataKoshitsuTokuyoFutanGendogaku txtJuraigataKoshitsuTokuyoFutanGendogaku
+     */
+    @JsonProperty("txtJuraigataKoshitsuTokuyoFutanGendogaku")
+    public void setTxtJuraigataKoshitsuTokuyoFutanGendogaku(TextBoxNum txtJuraigataKoshitsuTokuyoFutanGendogaku) {
+        this.txtJuraigataKoshitsuTokuyoFutanGendogaku = txtJuraigataKoshitsuTokuyoFutanGendogaku;
+    }
+
+    /*
+     * gettxtJuraigataKoshitsuRokenRyoyoFutanGendogaku
+     * @return txtJuraigataKoshitsuRokenRyoyoFutanGendogaku
+     */
+    @JsonProperty("txtJuraigataKoshitsuRokenRyoyoFutanGendogaku")
+    public TextBoxNum getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku() {
+        return txtJuraigataKoshitsuRokenRyoyoFutanGendogaku;
+    }
+
+    /*
+     * settxtJuraigataKoshitsuRokenRyoyoFutanGendogaku
+     * @param txtJuraigataKoshitsuRokenRyoyoFutanGendogaku txtJuraigataKoshitsuRokenRyoyoFutanGendogaku
+     */
+    @JsonProperty("txtJuraigataKoshitsuRokenRyoyoFutanGendogaku")
+    public void setTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku(TextBoxNum txtJuraigataKoshitsuRokenRyoyoFutanGendogaku) {
+        this.txtJuraigataKoshitsuRokenRyoyoFutanGendogaku = txtJuraigataKoshitsuRokenRyoyoFutanGendogaku;
+    }
+
+    /*
+     * gettxtTashoshitsu
+     * @return txtTashoshitsu
+     */
+    @JsonProperty("txtTashoshitsu")
+    public TextBoxNum getTxtTashoshitsu() {
+        return txtTashoshitsu;
+    }
+
+    /*
+     * settxtTashoshitsu
+     * @param txtTashoshitsu txtTashoshitsu
+     */
+    @JsonProperty("txtTashoshitsu")
+    public void setTxtTashoshitsu(TextBoxNum txtTashoshitsu) {
+        this.txtTashoshitsu = txtTashoshitsu;
+    }
+
+    /*
+     * gettxtKyotakuhiShin1FutanGendogaku
+     * @return txtKyotakuhiShin1FutanGendogaku
+     */
+    @JsonProperty("txtKyotakuhiShin1FutanGendogaku")
+    public TextBoxNum getTxtKyotakuhiShin1FutanGendogaku() {
+        return txtKyotakuhiShin1FutanGendogaku;
+    }
+
+    /*
+     * settxtKyotakuhiShin1FutanGendogaku
+     * @param txtKyotakuhiShin1FutanGendogaku txtKyotakuhiShin1FutanGendogaku
+     */
+    @JsonProperty("txtKyotakuhiShin1FutanGendogaku")
+    public void setTxtKyotakuhiShin1FutanGendogaku(TextBoxNum txtKyotakuhiShin1FutanGendogaku) {
+        this.txtKyotakuhiShin1FutanGendogaku = txtKyotakuhiShin1FutanGendogaku;
+    }
+
+    /*
+     * gettxtKyotakuhiShin2FutanGendogaku
+     * @return txtKyotakuhiShin2FutanGendogaku
+     */
+    @JsonProperty("txtKyotakuhiShin2FutanGendogaku")
+    public TextBoxNum getTxtKyotakuhiShin2FutanGendogaku() {
+        return txtKyotakuhiShin2FutanGendogaku;
+    }
+
+    /*
+     * settxtKyotakuhiShin2FutanGendogaku
+     * @param txtKyotakuhiShin2FutanGendogaku txtKyotakuhiShin2FutanGendogaku
+     */
+    @JsonProperty("txtKyotakuhiShin2FutanGendogaku")
+    public void setTxtKyotakuhiShin2FutanGendogaku(TextBoxNum txtKyotakuhiShin2FutanGendogaku) {
+        this.txtKyotakuhiShin2FutanGendogaku = txtKyotakuhiShin2FutanGendogaku;
+    }
+
+    /*
+     * gettxtKyotakuhiShin3utanGendogaku
+     * @return txtKyotakuhiShin3utanGendogaku
+     */
+    @JsonProperty("txtKyotakuhiShin3utanGendogaku")
+    public TextBoxNum getTxtKyotakuhiShin3utanGendogaku() {
+        return txtKyotakuhiShin3utanGendogaku;
+    }
+
+    /*
+     * settxtKyotakuhiShin3utanGendogaku
+     * @param txtKyotakuhiShin3utanGendogaku txtKyotakuhiShin3utanGendogaku
+     */
+    @JsonProperty("txtKyotakuhiShin3utanGendogaku")
+    public void setTxtKyotakuhiShin3utanGendogaku(TextBoxNum txtKyotakuhiShin3utanGendogaku) {
+        this.txtKyotakuhiShin3utanGendogaku = txtKyotakuhiShin3utanGendogaku;
     }
 
     // </editor-fold>

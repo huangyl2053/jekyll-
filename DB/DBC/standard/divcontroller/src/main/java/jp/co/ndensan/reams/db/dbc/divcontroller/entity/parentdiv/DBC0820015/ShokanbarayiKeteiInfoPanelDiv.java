@@ -4,20 +4,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.IShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShokanbarayiKeteiInfoPanel のクラスファイル
- *
- * @reamsid_L DBC-1030-180 xuhao
+ * ShokanbarayiKeteiInfoPanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShokanbarayiKeteiInfoPanelDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,6 +30,8 @@ public class ShokanbarayiKeteiInfoPanelDiv extends Panel {
     private panelTwoDiv panelTwo;
     @JsonProperty("ccdShokanbaraiketteiJoho")
     private ShokanbaraiketteiJohoDiv ccdShokanbaraiketteiJoho;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -80,6 +82,15 @@ public class ShokanbarayiKeteiInfoPanelDiv extends Panel {
     @JsonProperty("ccdShokanbaraiketteiJoho")
     public IShokanbaraiketteiJohoDiv getCcdShokanbaraiketteiJoho() {
         return ccdShokanbaraiketteiJoho;
+    }
+
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     // </editor-fold>

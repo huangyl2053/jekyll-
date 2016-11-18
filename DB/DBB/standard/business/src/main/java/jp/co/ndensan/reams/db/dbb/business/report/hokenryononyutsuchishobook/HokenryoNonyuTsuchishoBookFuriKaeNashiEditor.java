@@ -27,8 +27,13 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -68,6 +73,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
     private static final RString HOSHI19 = new RString("*******************");
     private static final RString HOSHI20 = new RString("********************");
     private static final RString TSUGIKI_IKOU = new RString("次期以降");
+    private static final RString 波線 = new RString("～");
 
     /**
      * コンストラクタです。
@@ -134,8 +140,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = 編集後本算定通知書共通情報.get更正後();
         if (更正後 != null) {
             source.cover_keisanMeisaishoTsukiSu = 半角to全角(更正後.get月数_ケ月());
-            source.cover_keisanMeisaishoKaishiKi = 更正後.get期間_自();
-            source.cover_kaisanMeisaishoShuryoKi = 更正後.get期間_至();
+            source.cover_keisanMeisaishoKaishiKi = editDate(更正後.get期間_自());
+            source.cover_kaisanMeisaishoShuryoKi = 波線.concat(editDate(更正後.get期間_至()));
             source.cover_keisanMeisaishoShotokuDankai = 半角to全角(更正後.get保険料段階());
             source.cover_kaisanHokenryoRitsu = decimalFormatter_toコンマ区切りRString(更正後.get保険料率(), 0);
             source.cover_keisanMeisaishoCalHokenryoGaku = decimalFormatter_toコンマ区切りRString(更正後.get減免前保険料_年額(), 0);
@@ -167,8 +173,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
             source.cover_keisanMeisaishoKiTitle3 = TSUGIKI_IKOU;
             source.cover_keisanMeisaishoKibetsuNofuGaku3 = 納入通知書期情報リスト.get(LIST_SIZE_1).get調定額表記();
         }
-        source.cover_yen3 = EN;
-        source.cover_yen4 = EN;
+//        source.cover_yen3 = EN;
+//        source.cover_yen4 = EN;
         source.cover_keisanmeisaishoNendo2 = 編集後本算定通知書共通情報.get賦課年度_年度なし();
         source.cover_pagerenban1 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-1")) : new RString("1-1");
         source.cover_pagerenban2 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-2")) : new RString("1-2");
@@ -183,6 +189,14 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
         source.cover_hokenshaName = 編集後本算定通知書共通情報.get保険者名();
         source.cover_pagerenban3 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-3")) : new RString("1-3");
         source.cover_pagerenban4 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-4")) : new RString("1-4");
+    }
+
+    private RString editDate(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return value;
+        }
+        return new RDate(value.toString()).wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private void edit編集後個人And編集後口座(
@@ -206,7 +220,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
 
     private RString decimalFormatter_toコンマ区切りRString(Decimal 額, int count) {
         if (null == 額) {
-            return RString.EMPTY;
+            return new RString("0");
         }
         return DecimalFormatter.toコンマ区切りRString(額, count);
     }
@@ -452,13 +466,17 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
                 }
                 if (new RString("5").equals(特徴期別金額情報.get期())) {
                     納期別明細書特徴納付額２ = 特徴期別金額情報.get金額();
-                    source.cover_nokibetsuMeisaishoTokuchoNofuGaku1 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付額２, 0);
+                    source.cover_nokibetsuMeisaishoTokuchoNofuGaku2 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付額２, 0);
                 }
                 if (new RString("6").equals(特徴期別金額情報.get期())) {
                     納期別明細書特徴納付額３ = 特徴期別金額情報.get金額();
-                    source.cover_nokibetsuMeisaishoTokuchoNofuGaku1 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付額３, 0);
+                    source.cover_nokibetsuMeisaishoTokuchoNofuGaku3 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付額３, 0);
                 }
             }
+        } else {
+            source.cover_nokibetsuMeisaishoTokuchoNofuGaku1 = new RString("0");
+            source.cover_nokibetsuMeisaishoTokuchoNofuGaku2 = new RString("0");
+            source.cover_nokibetsuMeisaishoTokuchoNofuGaku3 = new RString("0");
         }
         if (null != 編集後本算定通知書共通情報.get特徴収入情報リスト()) {
             for (SpecialIncomeInformation 特徴収入情報 : 編集後本算定通知書共通情報.get特徴収入情報リスト()) {
@@ -478,6 +496,10 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
                     source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku3 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額３, 0);
                 }
             }
+        } else {
+            source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku1 = new RString("0");
+            source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku2 = new RString("0");
+            source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku3 = new RString("0");
         }
         納期別明細書特徴納付額１ = null == 納期別明細書特徴納付額１ ? Decimal.ZERO : 納期別明細書特徴納付額１;
         納期別明細書特徴納付額２ = null == 納期別明細書特徴納付額２ ? Decimal.ZERO : 納期別明細書特徴納付額２;

@@ -352,7 +352,7 @@ public class TokkiText1A4Business {
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return Path.combinePath(new RString("/db/dbe/image/"), filename);
+        return Path.combinePath(imagePath, filename);
     }
 
     private RString get特記事項テキスト(Code 厚労省IF識別コード, RString 調査特記事項番号, int 特記事項連番) {

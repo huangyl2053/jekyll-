@@ -31,11 +31,11 @@
     </select>
     
     <select resultOrdered="true" id="get特定入所者介護サービス費用" 
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShoteiShikkanEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.TokuteiServiceHiEntity" fetchSize="500">
         SELECT
           *
         FROM 
-          "tempShoteiShikkan"
+          "tempTokuteiServiceHi"
     </select>
     
     <select resultOrdered="true" id="get施設療養" 

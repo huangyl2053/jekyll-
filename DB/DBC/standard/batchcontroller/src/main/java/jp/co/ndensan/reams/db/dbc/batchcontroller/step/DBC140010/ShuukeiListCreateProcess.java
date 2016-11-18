@@ -107,6 +107,7 @@ public class ShuukeiListCreateProcess extends BatchProcessBase<ShuukeiRelateEnti
         集計データ.set再審査回数(entity.getDbt3033().getSaishinsaKaisu());
         集計データ.set過誤回数(entity.getDbt3033().getKagoKaisu());
         集計データ.set審査年月(entity.getDbt3033().getShinsaYM());
+        集計データ.set短期入所計画日数(entity.getDbt3033().getTankiNyushoPlanNissu());
 
         return 集計データ;
     }

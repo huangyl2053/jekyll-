@@ -75,7 +75,6 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
         source.telNo = getColumnValue(帳票出力対象データ.getTelNoChohyo());
         source.hokenshaNo = getColumnValue(帳票出力対象データ.getShoKisaiHokenshaNoChohyo());
         source.hihokenshaNo = getColumnValue(帳票出力対象データ.getHihokenshaNoChohyo());
-        source.kojinNo = getColumnValue(帳票出力対象データ.getKojinNoChohyo());
         source.ninshoshaYakushokuMei = 認証者役職名;
         source.chuiTitle = 文字_注意;
         source.chuibun = 注意文;

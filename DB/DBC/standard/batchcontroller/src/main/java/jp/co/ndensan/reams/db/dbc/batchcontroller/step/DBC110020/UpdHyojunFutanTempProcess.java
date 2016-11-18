@@ -138,6 +138,11 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
         } else {
             全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
         }
+        if (標準負担.get負担額() == null) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(標準負担.get負担額().toString()).concat(SPLIT);
+        }
         return 全項目;
     }
 

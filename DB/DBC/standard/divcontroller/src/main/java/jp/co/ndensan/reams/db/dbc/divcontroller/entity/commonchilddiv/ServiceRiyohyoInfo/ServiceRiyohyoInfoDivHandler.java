@@ -144,7 +144,7 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final RString 種類区分限度単位指定エラー = new RString(
             "種類限度単位・区分限度単位指定エラー：【サービス単位＝種類超過＋区分超過＋区分限度内】になっていません。");
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
-    private static final RString 適用除外者 = new RString("適用除外者");
+    private static final RString 被保険者 = new RString("被保険者");
 
     /**
      * コンストラクタです。
@@ -212,7 +212,7 @@ public class ServiceRiyohyoInfoDivHandler {
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
-        ViewStateHolder.put(ViewStateKeys.適用除外者, 適用除外者);
+        ViewStateHolder.put(ViewStateKeys.被保険者, 被保険者);
         非活性または活性(false);
         set初期化状態(表示モード);
         画面初期化の値のクリア();
@@ -942,6 +942,17 @@ public class ServiceRiyohyoInfoDivHandler {
         明細パネルを初期化();
         List<dgServiceRiyohyoBeppyoList_Row> rowList
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
+        rowList = ソードGrid(rowList);
+        if (RSTRING_ONE.equals(rowList.get(rowList.size() - 1).getHdnGokeiGyoFlag())) {
+            rowList.remove(rowList.size() - 1);
+        }
+        JigoSakuseiMeisaiTouroku service = JigoSakuseiMeisaiTouroku.createInstance();
+        KyufuJikoSakuseiResult result = service.getMeisaiGoukeiListGridAdjust(rowListToResult(rowList));
+        dgServiceRiyohyoBeppyoList_Row row = setRow(result);
+        row.setHdnGokeiGyoFlag(RSTRING_ONE);
+        setRowButtonState(row);
+        rowList.add(row);
+        rowList = ソードGrid(rowList);
         div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
     }
 
@@ -952,9 +963,16 @@ public class ServiceRiyohyoInfoDivHandler {
         dgServiceRiyohyoBeppyoList_Row row
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
         if (!選択有无) {
+            onChange_txtServiceEvent();
             row = new dgServiceRiyohyoBeppyoList_Row();
             row.setRowState(RowState.Added);
             setRowInButtonMeisaiKakutei(row);
+            if (!get全て同事業者(rowList, row).isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage());
+            }
+            if (!get同事業者(rowList, row).isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.重複サービス.getMessage());
+            }
             rowList.add(row);
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
         } else {

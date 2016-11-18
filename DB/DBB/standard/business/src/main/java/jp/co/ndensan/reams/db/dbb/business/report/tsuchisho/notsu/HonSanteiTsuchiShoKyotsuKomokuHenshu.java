@@ -795,7 +795,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private RString get月数_ケ月(int 月数) {
-        RStringBuilder 月数SB = new RStringBuilder(RStringUtil.convert半角to全角(new RString(月数).padZeroToLeft(2)));
+        RStringBuilder 月数SB = new RStringBuilder(RStringUtil.convert半角to全角(new RString(月数).padLeft(RString.HALF_SPACE, 2)));
         月数SB.append(文字列_ケ月);
         return 月数SB.toRString();
     }

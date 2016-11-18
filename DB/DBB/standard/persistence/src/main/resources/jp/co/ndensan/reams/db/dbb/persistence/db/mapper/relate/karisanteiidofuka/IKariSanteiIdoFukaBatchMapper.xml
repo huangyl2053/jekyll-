@@ -646,7 +646,7 @@
         )
     </insert>
     
-    <insert id="insert特別徴収停止者" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter">
+    <insert id="insert特別徴収停止者" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.TokuchoTeishishaChushutsuMybatisParameter">
         INSERT INTO "TokubetuTyoushuuTeisiTemp"
         SELECT 
         徴収方法."fukaNendo",
@@ -986,7 +986,7 @@
                     rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
             ON
                     資格喪失."shikakuSousitu_shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
-            INNER JOIN
+            LEFT OUTER JOIN
                     rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
             ON
                     "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
@@ -1074,7 +1074,7 @@
                     rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
             ON
                     特別徴収停止."tokubetuTyoushuuTeisi_shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
-            INNER JOIN
+            LEFT OUTER JOIN
                     rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
             ON
                     "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"

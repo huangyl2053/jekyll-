@@ -1413,7 +1413,7 @@
         AND DbWT1513RiyoJokyoTokeihyo."serviceTeikyoYM" = DbWT1513RiyoJokyoTokeihyo."serviceTeikyoYM" )
     </select>
 
-    <select resultOrdered="true" id = "select処理市町村名" resultMap="ResultMap_DbWT1512JukyushaDaicho" fetchSize="500">
+    <select resultOrdered="true" id = "select処理市町村名" resultMap="ResultMap_TEMPDbWT1513RiyoJokyoTokeihyo" fetchSize="500">
         SELECT
         DbWT1513RiyoJokyoTokeihyo."shoriShichosonCode"      AS "dbWT1513RiyoJokyoTokeihyo_shoriShichosonCode"
         ,KYUSHICHOSON."kyuShichosonMeisho"      AS "dbWT1513RiyoJokyoTokeihyo_shoriShichosonName"

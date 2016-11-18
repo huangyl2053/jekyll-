@@ -304,6 +304,13 @@ public class JikoFutangakushomeishoHandler {
                 年度毎キー.put(対象年度, kogakuGassanNendoKeyList);
                 対象年度 = kogakuGassanShinSeisho.get対象年度();
                 kogakuGassanNendoKeyList = new ArrayList<>();
+                KogakuGassanNendoKey kogakuGassanNendoKey = new KogakuGassanNendoKey();
+                kogakuGassanNendoKey.set保険者番号(kogakuGassanShinSeisho.get保険者番号());
+                kogakuGassanNendoKey.set履歴番号(kogakuGassanShinSeisho.get履歴番号());
+                kogakuGassanNendoKey.set支給申請書整理番号(kogakuGassanShinSeisho.get支給申請書整理番号());
+                kogakuGassanNendoKey.set自己負担額証明書整理番号(kogakuGassanShinSeisho.get自己負担額証明書整理番号());
+                kogakuGassanNendoKey.set自己負担額証明書作成年月日(kogakuGassanShinSeisho.get自己負担額証明書作成年月日());
+                kogakuGassanNendoKeyList.add(kogakuGassanNendoKey);
             } else {
                 KogakuGassanNendoKey kogakuGassanNendoKey = new KogakuGassanNendoKey();
                 kogakuGassanNendoKey.set保険者番号(kogakuGassanShinSeisho.get保険者番号());

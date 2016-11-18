@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +18,6 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DataCompareShoriEntity {
 
-    private DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付;
+    private JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付;
     private IdoTblTmpEntity 異動一時2;
 }

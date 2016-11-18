@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  *
@@ -62,6 +64,8 @@ public class TsuchishoJoho162 {
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
             parameter.setSaishoriKubun(SaiShoriKubun.空白);
         }
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120260_SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 

@@ -98,9 +98,6 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
         if (帳票出力対象データ.getHihokenshaNoChohyo() != null) {
             source.hihokenshaNo = 帳票出力対象データ.getHihokenshaNoChohyo().getColumnValue();
         }
-        if (帳票出力対象データ.getKojinNoChohyo() != null) {
-            source.kojinNo = 帳票出力対象データ.getKojinNoChohyo().getColumnValue();
-        }
         source.ninshoshaYakushokuMei = 認証者役職名;
         source.chuiTitle = 定数_注意;
         source.chuibun = 注意文;

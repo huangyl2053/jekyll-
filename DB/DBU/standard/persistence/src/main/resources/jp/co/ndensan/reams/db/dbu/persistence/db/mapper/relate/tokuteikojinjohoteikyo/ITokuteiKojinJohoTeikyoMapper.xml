@@ -175,21 +175,21 @@
         ON teiKyoKihonJoho."shikibetsuCode" = PSM."shikibetsuCode"
         <if test="isShinkiIdo">
             WHERE NOT EXISTS (SELECT 1
-            FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" dbT7304
-            dbT7304."hihokenshaNo" = teiKyoKihonJoho."hihokenshaNo"
+            FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS dbT7304
+            WHERE dbT7304."hihokenshaNo" = teiKyoKihonJoho."hihokenshaNo"
             AND dbT7304."dataSetNo" = teiKyoKihonJoho."dataSetKey"
             AND dbT7304."tokuteiKojinJohoMeiCode" = teiKyoKihonJoho."tokuteiKojinJohoMeiCode"
             AND dbT7304."hanNo" = teiKyoKihonJoho."hanNo"
-            AND dbT7304."teikyoNaiyo01" = teiKyoKihonJoho."soshinNaiyo01"
-            AND dbT7304."teikyoNaiyo02" = teiKyoKihonJoho."soshinNaiyo02"
-            AND dbT7304."teikyoNaiyo03" = teiKyoKihonJoho."soshinNaiyo03"
-            AND dbT7304."teikyoNaiyo04" = teiKyoKihonJoho."soshinNaiyo04"
-            AND dbT7304."teikyoNaiyo05" = teiKyoKihonJoho."soshinNaiyo05"
-            AND dbT7304."teikyoNaiyo06" = teiKyoKihonJoho."soshinNaiyo06"
-            AND dbT7304."teikyoNaiyo07" = teiKyoKihonJoho."soshinNaiyo07"
-            AND dbT7304."teikyoNaiyo08" = teiKyoKihonJoho."soshinNaiyo08"
-            AND dbT7304."teikyoNaiyo09" = teiKyoKihonJoho."soshinNaiyo09"
-            AND dbT7304."teikyoNaiyo10" = teiKyoKihonJoho."soshinNaiyo10")
+            AND dbT7304."soshinNaiyo01" = teiKyoKihonJoho."teikyoNaiyo01"
+            AND dbT7304."soshinNaiyo02" = teiKyoKihonJoho."teikyoNaiyo02"
+            AND dbT7304."soshinNaiyo03" = teiKyoKihonJoho."teikyoNaiyo03"
+            AND dbT7304."soshinNaiyo04" = teiKyoKihonJoho."teikyoNaiyo04"
+            AND dbT7304."soshinNaiyo05" = teiKyoKihonJoho."teikyoNaiyo05"
+            AND dbT7304."soshinNaiyo06" = teiKyoKihonJoho."teikyoNaiyo06"
+            AND dbT7304."soshinNaiyo07" = teiKyoKihonJoho."teikyoNaiyo07"
+            AND dbT7304."soshinNaiyo08" = teiKyoKihonJoho."teikyoNaiyo08"
+            AND dbT7304."soshinNaiyo09" = teiKyoKihonJoho."teikyoNaiyo09"
+            AND dbT7304."soshinNaiyo10" = teiKyoKihonJoho."teikyoNaiyo10")
         </if>
     </select>
 

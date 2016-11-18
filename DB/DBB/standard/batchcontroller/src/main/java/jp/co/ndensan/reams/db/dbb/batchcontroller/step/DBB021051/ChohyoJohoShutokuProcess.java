@@ -83,7 +83,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
         entityList = new ArrayList<>();
         システム日付 = DateConverter.getDate4(RDate.getNowDate());
         出力順情報 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBZ介護共通,
-                ReportIdDBZ.DBZ100001.getReportId(), Long.parseLong(parameter.get出力順ID().toString()));
+                ReportIdDBZ.DBZ100001.getReportId(), parameter.get出力順ID());
         if (出力順情報 == null) {
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(ERROR_出力順.toString()));
         }

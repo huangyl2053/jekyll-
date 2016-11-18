@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -205,6 +206,8 @@ public class JyusinDataBaitaiTorikomu {
             upload共有ファイル情報(共有ファイル名, file);
             set共有ファイル情報to画面Grid(div);
             div.getPanelUpload().setVisible(false);
+        } catch (ApplicationException ex) {
+            throw ex;
         }
         return ResponseData.of(div).respond();
     }

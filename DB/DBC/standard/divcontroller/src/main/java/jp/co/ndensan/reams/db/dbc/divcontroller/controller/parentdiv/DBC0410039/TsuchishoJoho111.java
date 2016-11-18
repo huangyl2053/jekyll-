@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 国保連情報受取データ取込_[111]給付実績情報のクラスです。
@@ -72,6 +74,8 @@ public class TsuchishoJoho111 {
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
             parameter.setSaishoriKubun(SaiShoriKubun.空白);
         }
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120050_KyufuJissekiIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 

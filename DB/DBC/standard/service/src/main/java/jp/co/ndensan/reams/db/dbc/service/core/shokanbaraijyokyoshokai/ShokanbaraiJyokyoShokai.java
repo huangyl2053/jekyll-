@@ -470,6 +470,7 @@ public class ShokanbaraiJyokyoShokai {
                 return new ArrayList<>();
             }
             for (DbT3041ShokanTokuteiShinryohiEntity entity : entityList) {
+                entity.initializeMd5();
                 shokanTokuteiShinryohi.add(new ShokanTokuteiShinryohi(entity));
             }
         } else {
@@ -513,6 +514,7 @@ public class ShokanbaraiJyokyoShokai {
                 return new ArrayList<>();
             }
             for (DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity : entityList) {
+                entity.initializeMd5();
                 shokanTokuteiRyoyo.add(new ShokanTokuteiShinryoTokubetsuRyoyo(entity));
             }
         } else {
@@ -565,8 +567,8 @@ public class ShokanbaraiJyokyoShokai {
         }
         List<ShokanServicePlan200904Result> result = new ArrayList<>();
         for (ShokanServicePlan200904Entity tmp : entityList) {
-            DbT3047ShokanServicePlan200904Entity dbT3047Entity = tmp.getEntity().clone();
-            dbT3047Entity.setState(EntityDataState.Unchanged);
+            DbT3047ShokanServicePlan200904Entity dbT3047Entity = tmp.getEntity();
+            dbT3047Entity.initializeMd5();
             ShokanServicePlan200904Result shokanServicePlan200904Result = new ShokanServicePlan200904Result(
                     new ShokanServicePlan200904(dbT3047Entity), tmp.getServiceName());
             result.add(shokanServicePlan200904Result);
@@ -612,8 +614,8 @@ public class ShokanbaraiJyokyoShokai {
         }
         List<ShokanServicePlan200604Result> result = new ArrayList<>();
         for (ShokanServicePlan200604Entity tmp : entityList) {
-            DbT3046ShokanServicePlan200604Entity dbT3046Entity = tmp.getEntity().clone();
-            dbT3046Entity.setState(EntityDataState.Unchanged);
+            DbT3046ShokanServicePlan200604Entity dbT3046Entity = tmp.getEntity();
+            dbT3046Entity.initializeMd5();
             ShokanServicePlan200604Result shokanServicePlan200604Result = new ShokanServicePlan200604Result(
                     new ShokanServicePlan200604(dbT3046Entity), tmp.getServiceName());
             result.add(shokanServicePlan200604Result);
@@ -659,8 +661,8 @@ public class ShokanbaraiJyokyoShokai {
         }
         List<ShokanServicePlan200004Result> result = new ArrayList<>();
         for (ShokanServicePlan200004Entity tmp : entityList) {
-            DbT3045ShokanServicePlan200004Entity dbT3045Entity = tmp.getEntity().clone();
-            dbT3045Entity.setState(EntityDataState.Unchanged);
+            DbT3045ShokanServicePlan200004Entity dbT3045Entity = tmp.getEntity();
+            dbT3045Entity.initializeMd5();
             ShokanServicePlan200004Result shokanServicePlan200004Result = new ShokanServicePlan200004Result(
                     new ShokanServicePlan200004(dbT3045Entity), tmp.getServiceName());
             result.add(shokanServicePlan200004Result);

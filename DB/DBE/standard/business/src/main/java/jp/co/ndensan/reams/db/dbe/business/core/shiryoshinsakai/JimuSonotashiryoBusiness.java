@@ -181,7 +181,7 @@ public class JimuSonotashiryoBusiness {
                 is存在 = 無し;
             }
             if (is存在 && index < INDEX_5) {
-                ファイルPathList.add(Path.combinePath(new RString("/db/dbe/image/"), ファイル名));
+                ファイルPathList.add(Path.combinePath(imagePath, ファイル名));
                 index = i + 1;
             }
             if (INDEX_5 <= index) {
@@ -300,6 +300,6 @@ public class JimuSonotashiryoBusiness {
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+        return Path.combinePath(imagePath, sharedFileName);
     }
 }

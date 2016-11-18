@@ -79,15 +79,15 @@ public class ServiceTeikyoShomeishoPanel {
             申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
             ViewStateHolder.put(ViewStateKeys.申請日, 申請日.toDateString());
         }
-        ShokanShinsei 償還払支給申請 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
-        ViewStateHolder.put(ViewStateKeys.詳細データ, 償還払支給申請);
+        DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         List<ServiceTeikyoShomeishoResult> 証明書一覧情報 = ShokanbaraiJyokyoShokai
                 .createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号);
-
         handler.load宛名と基本情報(識別コード, 被保険者番号);
-        handler.loadボタンエリア(償還払支給申請.is国保連再送付フラグ());
+        if (null != 償還払ViewStateDB情報) {
+            ShokanShinsei 償還払支給申請 = 償還払ViewStateDB情報.get償還払支給申請();
+            handler.loadボタンエリア(償還払支給申請.is国保連再送付フラグ());
+        }
         handler.load申請共通エリア(画面モード, サービス年月, 整理番号);
-        DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報, 償還払ViewStateDB情報);
         return createResponse(div);
     }

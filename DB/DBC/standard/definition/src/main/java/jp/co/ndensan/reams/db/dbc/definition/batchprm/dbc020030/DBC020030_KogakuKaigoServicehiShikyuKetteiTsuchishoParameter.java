@@ -104,4 +104,8 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter extend
     private static final String SHUTURYOKU_ID = "出力順ID";
     @BatchParameter(key = SHUTURYOKU_ID, name = "出力順ID")
     private long 出力順ID;
+
+    private static final String KOUSINKUBEN = "窓口払い一括更新区分";
+    @BatchParameter(key = KOUSINKUBEN, name = "窓口払い一括更新区分")
+    private RString 窓口払い一括更新区分;
 }

@@ -293,7 +293,7 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
         仮算定特徴開始通知書情報.set宛先情報(宛先);
         総ページ数 = publish特徴開始通知書(出力帳票一覧Entity, 仮算定特徴開始通知書情報, 宛名連番, 仮算定通知書情報);
         TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport report = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(
-                編集後仮算定通知書共通情報, processParameter.get調定年度(), processParameter.get帳票作成日時(),
+                仮算定通知書情報, 編集後仮算定通知書共通情報, processParameter.get調定年度(), processParameter.get帳票作成日時(),
                 地方公共団体, 出力項目リスト, 改頁項目リスト, 連番, entity);
         report.writeBy(reportSourceWriter);
         eucCsvWriter.writeLine(createCSVData(編集後仮算定通知書共通情報));
