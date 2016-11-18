@@ -261,25 +261,25 @@ public class ServiceTeikyoShomeishoPanel {
                 }
             }
         }
-        if (null != 償還払ViewStateDB情報 && null != 償還払ViewStateDB情報.get証明書変更済フラグMap()) {
-            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = 償還払ViewStateDB情報.get証明書変更済フラグMap();
-            for (Map.Entry entry : 証明書変更済フラグMap.entrySet()) {
-                ShomeishoHenkoFlag 証明書変更済フラグ = (ShomeishoHenkoFlag) entry.getValue();
-                if (ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.getサービス計画費_証明書変更済フラグ().getCode())
-                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get基本情報_証明書変更済フラグ().getCode())
-                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get特定入所者費用_証明書変更済フラグ().getCode())
-                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get特定診療費_証明書変更済フラグ().getCode())
-                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get社福軽減額_証明書変更済フラグ().getCode())
-                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get給付費明細_証明書変更済フラグ().getCode())
-                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get給付費明細住特_証明書変更済フラグ().getCode())
-                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get緊急時所定疾患_証明書変更済フラグ().getCode())
-                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get緊急時施設療養費_証明書変更済フラグ().getCode())
-                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get請求額集計_証明書変更済フラグ().getCode())
-                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get食事費用_証明書変更済フラグ().getCode())) {
-                    ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_サービス提供証明書, 変更あり);
-                }
-            }
-        }
+//        if (null != 償還払ViewStateDB情報 && null != 償還払ViewStateDB情報.get証明書変更済フラグMap()) {
+//            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = 償還払ViewStateDB情報.get証明書変更済フラグMap();
+//            for (Map.Entry entry : 証明書変更済フラグMap.entrySet()) {
+//                ShomeishoHenkoFlag 証明書変更済フラグ = (ShomeishoHenkoFlag) entry.getValue();
+//                if (ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.getサービス計画費_証明書変更済フラグ().getCode())
+//                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get基本情報_証明書変更済フラグ().getCode())
+//                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get特定入所者費用_証明書変更済フラグ().getCode())
+//                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get特定診療費_証明書変更済フラグ().getCode())
+//                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get社福軽減額_証明書変更済フラグ().getCode())
+//                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get給付費明細_証明書変更済フラグ().getCode())
+//                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get給付費明細住特_証明書変更済フラグ().getCode())
+//                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get緊急時所定疾患_証明書変更済フラグ().getCode())
+//                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get緊急時施設療養費_証明書変更済フラグ().getCode())
+//                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get請求額集計_証明書変更済フラグ().getCode())
+//                        || ShomeishoHenkoKubunType.変更あり.getCode().equals(証明書変更済フラグ.get食事費用_証明書変更済フラグ().getCode())) {
+//                    ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_サービス提供証明書, 変更あり);
+//                }
+//            }
+//        }
     }
 
     private ServiceTeikyoShomeishoPanelHandler getHandler(ServiceTeikyoShomeishoPanelDiv div) {
