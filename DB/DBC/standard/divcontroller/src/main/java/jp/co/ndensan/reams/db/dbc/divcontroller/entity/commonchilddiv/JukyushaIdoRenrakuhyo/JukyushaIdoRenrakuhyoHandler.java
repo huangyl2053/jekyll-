@@ -141,7 +141,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().
                     setSelectedKey(空KEY);
             div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().setSelectedKey(空KEY);
-//            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun().setSelectedKey(空KEY);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun().setSelectedKey(空KEY);
             div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                     getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().setSelectedKey(空KEY);
             div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
@@ -457,10 +457,10 @@ public class JukyushaIdoRenrakuhyoHandler {
 
     private void set減免_減額エリア(JukyushaIdoRenrakuhyo 受給者異動情報) {
         if (RString.isNullOrEmpty(受給者異動情報.get減免申請中区分コード())) {
-  //          div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun().setSelectedKey(空KEY);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun().setSelectedKey(空KEY);
         } else {
- //           div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan()
- //                   .getRadGemmenShinseichuKubun().setSelectedKey(受給者異動情報.get減免申請中区分コード());
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan()
+                    .getRadGemmenShinseichuKubun().setSelectedKey(受給者異動情報.get減免申請中区分コード());
         }
         if (!星.equals(受給者異動情報.get利用者負担区分コード())) {
             if (RString.isNullOrEmpty(受給者異動情報.get利用者負担区分コード())) {
@@ -917,8 +917,8 @@ public class JukyushaIdoRenrakuhyoHandler {
     }
 
     private void set減免_減額エリアBuilder(JukyushaIdoRenrakuhyoBuilder 受給者異動送付Builder) {
-//        受給者異動送付Builder.set減免申請中区分コード(div.getGemmenGengakuPanel()
-//                .getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun().getSelectedKey());
+        受給者異動送付Builder.set減免申請中区分コード(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan()
+                .getRadGemmenShinseichuKubun().getSelectedKey());
         受給者異動送付Builder.set利用者負担区分コード(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                 getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().getSelectedKey());
         if (div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
@@ -1263,7 +1263,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set居宅適用終了年月日(div.getKyotakuServicePlanPanel().
                 getTxtKyotakuServiceTekiyoYMD().getToValue() == null ? RString.EMPTY : div.getKyotakuServicePlanPanel().
                 getTxtKyotakuServiceTekiyoYMD().getToValue().toDateString());
- //       entity.set減免申請中区分(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun().getSelectedKey());
+        entity.set減免申請中区分(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun().getSelectedKey());
         entity.set利用者負担区分(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                 getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().getSelectedKey());
         entity.set利用給付率(new RString(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
