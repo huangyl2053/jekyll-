@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakujigyoshinseishohakkoich
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicetsuchisho.KogakuJigyoShinseishoHakkoIchiranOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyoshinseishohakkoichiransource.KogakuJigyoShinseishoHakkoIchiranSource;
@@ -77,7 +78,10 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
                 .get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         source.shichosonName = DbBusinessConfig
                 .get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        editIOutputOrder(source);
+        if (帳票出力対象データ.getShoKisaiHokenshaNoChohyo() != null) {
+            source.証記載保険者番号 = 帳票出力対象データ.getShoKisaiHokenshaNoChohyo().getColumnValue();
+        }
+        source.tsuchishoNo = 帳票出力対象データ.getTsuchishoNoChohyo();
         RTime time = システム日付.getTime();
         RString hour = new RString(time.toString()).substringReturnAsPossible(INDEX_0, INDEX_2);
         RString min = new RString(time.toString()).substringReturnAsPossible(INDEX_3, INDEX_5);
@@ -133,6 +137,7 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
         source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
                 ReportKomokuEditorUtil.get非空文字列(source.listHakkoTaishosha_2));
+        editIOutputOrder(source);
         return source;
     }
 
@@ -149,21 +154,27 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
         if (list == null) {
             list = new ArrayList<>();
         }
+        List<RString> list改頁項目ID = new ArrayList();
         if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
-            source.kaipage1 = list.get(INDEX_0).get項目ID();
+            list改頁項目ID.add(list.get(INDEX_0).get項目ID());
         }
         if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
-            source.kaipage2 = list.get(INDEX_1).get項目ID();
+            list改頁項目ID.add(list.get(INDEX_1).get項目ID());
         }
         if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
-            source.kaipage3 = list.get(INDEX_2).get項目ID();
+            list改頁項目ID.add(list.get(INDEX_2).get項目ID());
         }
         if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
-            source.kaipage4 = list.get(INDEX_3).get項目ID();
+            list改頁項目ID.add(list.get(INDEX_3).get項目ID());
         }
         if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
-            source.kaipage5 = list.get(INDEX_4).get項目ID();
+            list改頁項目ID.add(list.get(INDEX_4).get項目ID());
         }
+        set改頁項目1(list改頁項目ID, source);
+        set改頁項目2(list改頁項目ID, source);
+        set改頁項目3(list改頁項目ID, source);
+        set改頁項目4(list改頁項目ID, source);
+        set改頁項目5(list改頁項目ID, source);
 
         if (list.size() > INDEX_0) {
             source.shutsuryokujun1 = list.get(INDEX_0).get項目名();
@@ -179,6 +190,111 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
         }
         if (list.size() > INDEX_4) {
             source.shutsuryokujun5 = list.get(INDEX_4).get項目名();
+        }
+    }
+
+    private void set改頁項目1(List<RString> list改頁項目ID, KogakuJigyoShinseishoHakkoIchiranSource source) {
+        if (list改頁項目ID.size() > INDEX_0) {
+            RString 項目ID = list改頁項目ID.get(INDEX_0);
+            if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.証記載保険者番号.get項目ID())) {
+                source.kaipage1 = source.証記載保険者番号;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.郵便番号.get項目ID())) {
+                source.kaipage1 = source.listHakkoTaishosha_5;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.行政区コード.get項目ID())) {
+                source.kaipage1 = source.listHakkoTaishosha_7;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.氏名５０音カナ.get項目ID())) {
+                source.kaipage1 = source.listHakkoTaishosha_4;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.被保険者番号.get項目ID())) {
+                source.kaipage1 = source.listHakkoTaishosha_2;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.サービス提供年月.get項目ID())) {
+                source.kaipage1 = source.listHakkoTaishosha_3;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.通知書番号.get項目ID())) {
+                source.kaipage1 = source.tsuchishoNo;
+            }
+        }
+    }
+
+    private void set改頁項目2(List<RString> list改頁項目ID, KogakuJigyoShinseishoHakkoIchiranSource source) {
+        if (list改頁項目ID.size() > INDEX_1) {
+            RString 項目ID = list改頁項目ID.get(INDEX_1);
+            if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.証記載保険者番号.get項目ID())) {
+                source.kaipage2 = source.証記載保険者番号;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.郵便番号.get項目ID())) {
+                source.kaipage2 = source.listHakkoTaishosha_5;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.行政区コード.get項目ID())) {
+                source.kaipage2 = source.listHakkoTaishosha_7;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.氏名５０音カナ.get項目ID())) {
+                source.kaipage2 = source.listHakkoTaishosha_4;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.被保険者番号.get項目ID())) {
+                source.kaipage2 = source.listHakkoTaishosha_2;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.サービス提供年月.get項目ID())) {
+                source.kaipage2 = source.listHakkoTaishosha_3;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.通知書番号.get項目ID())) {
+                source.kaipage2 = source.tsuchishoNo;
+            }
+        }
+    }
+
+    private void set改頁項目3(List<RString> list改頁項目ID, KogakuJigyoShinseishoHakkoIchiranSource source) {
+        if (list改頁項目ID.size() > INDEX_2) {
+            RString 項目ID = list改頁項目ID.get(INDEX_2);
+            if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.証記載保険者番号.get項目ID())) {
+                source.kaipage3 = source.証記載保険者番号;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.郵便番号.get項目ID())) {
+                source.kaipage3 = source.listHakkoTaishosha_5;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.行政区コード.get項目ID())) {
+                source.kaipage3 = source.listHakkoTaishosha_7;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.氏名５０音カナ.get項目ID())) {
+                source.kaipage3 = source.listHakkoTaishosha_4;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.被保険者番号.get項目ID())) {
+                source.kaipage3 = source.listHakkoTaishosha_2;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.サービス提供年月.get項目ID())) {
+                source.kaipage3 = source.listHakkoTaishosha_3;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.通知書番号.get項目ID())) {
+                source.kaipage3 = source.tsuchishoNo;
+            }
+        }
+    }
+
+    private void set改頁項目4(List<RString> list改頁項目ID, KogakuJigyoShinseishoHakkoIchiranSource source) {
+        if (list改頁項目ID.size() > INDEX_3) {
+            RString 項目ID = list改頁項目ID.get(INDEX_3);
+            if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.証記載保険者番号.get項目ID())) {
+                source.kaipage4 = source.証記載保険者番号;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.郵便番号.get項目ID())) {
+                source.kaipage4 = source.listHakkoTaishosha_5;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.行政区コード.get項目ID())) {
+                source.kaipage4 = source.listHakkoTaishosha_7;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.氏名５０音カナ.get項目ID())) {
+                source.kaipage4 = source.listHakkoTaishosha_4;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.被保険者番号.get項目ID())) {
+                source.kaipage4 = source.listHakkoTaishosha_2;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.サービス提供年月.get項目ID())) {
+                source.kaipage4 = source.listHakkoTaishosha_3;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.通知書番号.get項目ID())) {
+                source.kaipage4 = source.tsuchishoNo;
+            }
+        }
+    }
+
+    private void set改頁項目5(List<RString> list改頁項目ID, KogakuJigyoShinseishoHakkoIchiranSource source) {
+        if (list改頁項目ID.size() > INDEX_4) {
+            RString 項目ID = list改頁項目ID.get(INDEX_4);
+            if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.証記載保険者番号.get項目ID())) {
+                source.kaipage5 = source.証記載保険者番号;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.郵便番号.get項目ID())) {
+                source.kaipage5 = source.listHakkoTaishosha_5;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.行政区コード.get項目ID())) {
+                source.kaipage5 = source.listHakkoTaishosha_7;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.氏名５０音カナ.get項目ID())) {
+                source.kaipage5 = source.listHakkoTaishosha_4;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.被保険者番号.get項目ID())) {
+                source.kaipage5 = source.listHakkoTaishosha_2;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.サービス提供年月.get項目ID())) {
+                source.kaipage5 = source.listHakkoTaishosha_3;
+            } else if (項目ID.equals(KogakuJigyoShinseishoHakkoIchiranOrder.通知書番号.get項目ID())) {
+                source.kaipage5 = source.tsuchishoNo;
+            }
         }
     }
 }
