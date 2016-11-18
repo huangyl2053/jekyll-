@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020030.DBC020030_Kogaku
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020060.DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 画面設計_DBCMN43002_高額サービス費支給決定通知書作成のクラスです。
@@ -21,7 +23,7 @@ public class ShikyuketteituchishoSakuseiJyoken {
     /**
      * 画面初期化のメソッドです。
      *
-     * @param div HeijunkaKakuteiDiv
+     * @param div 高額サービス費支給決定通知書作成DIV
      * @return ResponseData
      */
     public ResponseData<ShikyuketteituchishoSakuseiJyokenDiv> onLoad(ShikyuketteituchishoSakuseiJyokenDiv div) {
@@ -32,7 +34,7 @@ public class ShikyuketteituchishoSakuseiJyoken {
     /**
      * 「受付日」「決定日」「決定者受付年月」を選択のメソッドです。
      *
-     * @param div HeijunkaKakuteiDiv
+     * @param div 高額サービス費支給決定通知書作成DIV
      * @return ResponseData
      */
     public ResponseData<ShikyuketteituchishoSakuseiJyokenDiv>
@@ -44,12 +46,26 @@ public class ShikyuketteituchishoSakuseiJyoken {
     /**
      * 決定日一括更新区分を選択のメソッドです。
      *
-     * @param div HeijunkaKakuteiDiv
+     * @param div 高額サービス費支給決定通知書作成DIV
      * @return ResponseData
      */
     public ResponseData<ShikyuketteituchishoSakuseiJyokenDiv>
             onClick_radKetteibiIkkatsuKoshinKubun(ShikyuketteituchishoSakuseiJyokenDiv div) {
         getHandler(div).onClick_radKetteibiIkkatsuKoshinKubun();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 操作実施確認　と　入力チェック
+     *
+     * @param div 高額サービス費支給決定通知書作成DIV
+     * @return ResponseData
+     */
+    public ResponseData<ShikyuketteituchishoSakuseiJyokenDiv> onBefore_batchRegister(ShikyuketteituchishoSakuseiJyokenDiv div) {
+        ValidationMessageControlPairs errorMessage = getValidationHandler(div).get入力チェック();
+        if (errorMessage.existsError()) {
+            return ResponseData.of(div).addValidationMessages(errorMessage).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -77,7 +93,22 @@ public class ShikyuketteituchishoSakuseiJyoken {
         return ResponseData.of(parameter).respond();
     }
 
+    /**
+     * テスト出力制御
+     *
+     * @param div 高額サービス費支給決定通知書作成DIV
+     * @return ResponseData
+     */
+    public ResponseData<ShikyuketteituchishoSakuseiJyokenDiv> onclick_chkTesutoShuturyoku(ShikyuketteituchishoSakuseiJyokenDiv div) {
+        getHandler(div).テスト出力制御();
+        return ResponseData.of(div).respond();
+    }
+
     private ShikyuketteituchishoSakuseiJyokenHandler getHandler(ShikyuketteituchishoSakuseiJyokenDiv div) {
         return new ShikyuketteituchishoSakuseiJyokenHandler(div);
+    }
+
+    private ShikyuketteituchishoSakuseiJyokenValidationHandler getValidationHandler(ShikyuketteituchishoSakuseiJyokenDiv div) {
+        return new ShikyuketteituchishoSakuseiJyokenValidationHandler(div);
     }
 }
