@@ -421,9 +421,8 @@ public class NonyuTsuchiShoDataHenshu {
         納入通知書期情報.setブック開始位置(ブック開始位置);
         納入通知書期情報.set期(出力期.get期AsInt());
         納入通知書期情報.set月(出力期.get月());
-        納入通知書期情報.set期表記(new RString(String.valueOf(出力期.get期AsInt()).concat("期").concat(RString.HALF_SPACE.toString())
-                .concat("(").concat(String.valueOf(出力期.get月AsInt())).concat("月分)")).padLeft(RString.HALF_SPACE, 2));
-        納入通知書期情報.set月表記(new RString(String.valueOf(出力期.get月AsInt())).padLeft(RString.HALF_SPACE, 2));
+        納入通知書期情報.set期表記(new RString(出力期.get期AsInt()).padLeft(RString.HALF_SPACE, 2));
+        納入通知書期情報.set月表記(new RString(出力期.get月AsInt()).padLeft(RString.HALF_SPACE, 2));
         納入通知書期情報.set随時表記(KanendoMongon.随時.equals(納入通知書制御情報.get過年度文言1()) ? KanendoMongon.随時.get名称() : RString.EMPTY);
         納入通知書期情報.set納期開始日(納期.get納期開始日());
         納入通知書期情報.set納期開始日表記(納期.get納期開始日().wareki()
