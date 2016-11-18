@@ -942,6 +942,17 @@ public class ServiceRiyohyoInfoDivHandler {
         明細パネルを初期化();
         List<dgServiceRiyohyoBeppyoList_Row> rowList
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
+        rowList = ソードGrid(rowList);
+        if (RSTRING_ONE.equals(rowList.get(rowList.size() - 1).getHdnGokeiGyoFlag())) {
+            rowList.remove(rowList.size() - 1);
+        }
+        JigoSakuseiMeisaiTouroku service = JigoSakuseiMeisaiTouroku.createInstance();
+        KyufuJikoSakuseiResult result = service.getMeisaiGoukeiListGridAdjust(rowListToResult(rowList));
+        dgServiceRiyohyoBeppyoList_Row row = setRow(result);
+        row.setHdnGokeiGyoFlag(RSTRING_ONE);
+        setRowButtonState(row);
+        rowList.add(row);
+        rowList = ソードGrid(rowList);
         div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
     }
 
@@ -952,9 +963,16 @@ public class ServiceRiyohyoInfoDivHandler {
         dgServiceRiyohyoBeppyoList_Row row
                 = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
         if (!選択有无) {
+            onChange_txtServiceEvent();
             row = new dgServiceRiyohyoBeppyoList_Row();
             row.setRowState(RowState.Added);
             setRowInButtonMeisaiKakutei(row);
+            if (!get全て同事業者(rowList, row).isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage());
+            }
+            if (!get同事業者(rowList, row).isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.重複サービス.getMessage());
+            }
             rowList.add(row);
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
         } else {

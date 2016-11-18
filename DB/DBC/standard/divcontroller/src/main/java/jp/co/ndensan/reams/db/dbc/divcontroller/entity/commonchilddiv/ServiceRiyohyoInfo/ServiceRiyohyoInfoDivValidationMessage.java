@@ -29,7 +29,7 @@ public enum ServiceRiyohyoInfoDivValidationMessage implements IValidationMessage
     /**
      * サービス種類コード必須項目
      */
-    サービス種類コード必須項目(UrErrorMessages.必須項目_追加メッセージあり, "サービス種類コード"),
+    サービス種類コード必須項目(UrErrorMessages.必須項目_追加メッセージあり, "サービス種類"),
     /**
      * 単位必須項目
      */
