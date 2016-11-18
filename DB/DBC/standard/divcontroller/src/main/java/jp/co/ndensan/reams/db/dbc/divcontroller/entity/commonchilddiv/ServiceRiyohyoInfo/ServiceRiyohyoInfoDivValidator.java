@@ -35,6 +35,8 @@ public class ServiceRiyohyoInfoDivValidator {
     public IValidationMessages validate明細計算() {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div)
+                .ifNot(ServiceRiyohyoInfoDivSpec.事業者コード必須入力のチェックです)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.サービスコード必須入力チェック)
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.単位必須入力チェック)
