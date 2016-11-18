@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,6 +31,8 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv extends PanelBat
     private PublishIchiranhyoDiv PublishIchiranhyo;
     @JsonProperty("ccdChohyoShutsuryokujun")
     private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
+    @JsonProperty("hdnShoriJotaiKubun")
+    private RString hdnShoriJotaiKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -80,6 +83,24 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv extends PanelBat
     @JsonProperty("ccdChohyoShutsuryokujun")
     public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
         return ccdChohyoShutsuryokujun;
+    }
+
+    /*
+     * gethdnShoriJotaiKubun
+     * @return hdnShoriJotaiKubun
+     */
+    @JsonProperty("hdnShoriJotaiKubun")
+    public RString getHdnShoriJotaiKubun() {
+        return hdnShoriJotaiKubun;
+    }
+
+    /*
+     * sethdnShoriJotaiKubun
+     * @param hdnShoriJotaiKubun hdnShoriJotaiKubun
+     */
+    @JsonProperty("hdnShoriJotaiKubun")
+    public void setHdnShoriJotaiKubun(RString hdnShoriJotaiKubun) {
+        this.hdnShoriJotaiKubun = hdnShoriJotaiKubun;
     }
 
     /*

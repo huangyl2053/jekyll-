@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 国保連情報受取データ取込_[331]高額介護サービス費給付対象者一覧表情報
@@ -60,6 +62,8 @@ public class TsuchishoJoho331 {
             parameter.set再処理区分(SaiShoriKubun.空白.getコード());
         }
         parameter.set出力順ID(出力順ID);
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120070_KogakuKyufuTaishoshaIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 

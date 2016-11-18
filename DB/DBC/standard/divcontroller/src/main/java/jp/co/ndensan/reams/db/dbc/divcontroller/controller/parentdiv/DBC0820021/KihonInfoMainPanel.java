@@ -98,6 +98,14 @@ public class KihonInfoMainPanel {
         ViewStateHolder.put(ViewStateKeys.申請日, 申請日);
         ArrayList<RString> list = getHandler(div).put様式番号ViewState();
         ViewStateHolder.put(ViewStateKeys.様式番号List, list);
+        DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        if (db情報 == null) {
+            db情報 = new DbJohoViewState();
+        }
+        ArrayList<ShokanKihon> 請求基本データList = db情報.get償還払請求基本データList();
+        if (null == 請求基本データList) {
+            請求基本データList = new ArrayList<>();
+        }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
                     被保険者番号, サービス年月, 申請日, 整理番号, 事業者番号, 様式番号, 固定明細番号);
@@ -126,6 +134,8 @@ public class KihonInfoMainPanel {
             }
             getHandler(div).set基本情報(shokanKihon, サービス年月, list, 様式番号);
             ViewStateHolder.put(ViewStateKeys.基本データ, shokanKihon);
+            請求基本データList.add(shokanKihon);
+            db情報.set償還払請求基本データList(請求基本データList);
         }
 
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
@@ -148,7 +158,7 @@ public class KihonInfoMainPanel {
                 ViewStateHolder.put(ViewStateKeys.給付率, 保険給付率.value());
             }
         }
-        DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDBBAK, db情報);
         return ResponseData.of(div).setState(DBC0820021StateName.新規修正モード);
     }
@@ -195,17 +205,10 @@ public class KihonInfoMainPanel {
         List<RString> 様式番号List = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        try {
-            judge画面のチェック(div, 様式番号List, サービス年月, 様式番号);
-            set支給申請(div, 様式番号List, 様式番号, meisaiPar, shokanKihon);
-            //証明書入力済チェック
-            judge証明書入力済のチェック(div, meisaiPar, サービス年月);
-            return ResponseData.of(div);
-        } catch (Exception e) {
-            e.toString();
-            e.printStackTrace();
-            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
-        }
+        judge画面のチェック(div, 様式番号List, サービス年月, 様式番号);
+        set支給申請(div, 様式番号List, 様式番号, meisaiPar, shokanKihon);
+        judge証明書入力済のチェック(div, meisaiPar, サービス年月);
+        return ResponseData.of(div);
     }
 
     private void judge証明書入力済のチェック(KihonInfoMainPanelDiv div, ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
@@ -230,9 +233,6 @@ public class KihonInfoMainPanel {
             List<RString> 様式番号List,
             RString 様式番号, ShoukanharaihishinseimeisaikensakuParameter meisaiPar, ShokanKihon shokanKihon) {
         DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        if (db情報 == null || db情報.get償還払請求基本データList().isEmpty()) {
-            db情報 = new DbJohoViewState();
-        }
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap = db情報.get証明書入力済フラグMap();
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = db情報.get証明書変更済フラグMap();
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap = db情報.get証明書入力完了フラグMap();
@@ -275,7 +275,6 @@ public class KihonInfoMainPanel {
         if (null == 請求基本データList) {
             請求基本データList = new ArrayList<>();
         }
-
         if (請求基本データList.isEmpty()) {
             請求基本データList.add(shokanKihon);
             db情報.set償還払請求基本データList(請求基本データList);

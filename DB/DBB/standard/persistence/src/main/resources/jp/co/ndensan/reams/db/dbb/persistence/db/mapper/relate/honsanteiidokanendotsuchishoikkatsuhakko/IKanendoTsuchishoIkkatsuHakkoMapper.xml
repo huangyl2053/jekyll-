@@ -2227,7 +2227,7 @@
             年金特徴回付情報."dtKojinNo" AS "ueT0511after_dtKojinNo"
         FROM 
           "DbT2015KeisangoJoho" AS 計算後情報
-        INNER JOIN 
+        LEFT JOIN 
               rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
@@ -3226,8 +3226,7 @@
             "fuShunyuGaku14" = B."fuShunyuGaku14",
             "更正前情報有無区分" = '1'
         FROM "DbT2015KeisangoJohoTemp" AS B
-        WHERE A."dbT2015KeisangoJoho_choteiNendo" = B."choteiNendo"
-             AND A."dbT2015KeisangoJoho_fukaNendo" = B."fukaNendo"
+        WHERE A."dbT2015KeisangoJoho_fukaNendo" = B."fukaNendo"
              AND A."dbT2015KeisangoJoho_tsuchishoNo" = B."tsuchishoNo"
              AND B."koseiZengoKubun" = '1'
     </update>
@@ -3339,7 +3338,8 @@
     <select id="select異動賦課情報一時" resultMap="resultMap_IdoFukaJohoTemp"
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
-            A.*
+            A.*,
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "IdoFukaJohoTemp" AS A
         WHERE
@@ -3358,7 +3358,8 @@
     <select id="select通知書発行後異動者" resultMap="resultMap_IdoFukaJohoTemp"
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
-            A.*
+            A.*,
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "IdoFukaJohoTemp" AS A
         WHERE
@@ -3376,7 +3377,8 @@
     <select id="select異動賦課情報一時変更" resultMap="resultMap_IdoFukaJohoTemp"
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
-            A.*
+            A.*,
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "IdoFukaJohoTemp" AS A
         WHERE
@@ -3401,7 +3403,8 @@
     <select id="select変更通知書発行後異動者" resultMap="resultMap_IdoFukaJohoTemp"
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
-            A.*
+            A.*,
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "IdoFukaJohoTemp" AS A
         WHERE
@@ -3425,7 +3428,8 @@
     <select id="select異動賦課情報一時納入" resultMap="resultMap_IdoFukaJohoTemp"
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
-            A.*
+            A.*,
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "ShikibetsuTaisho_banchiCode1"
         FROM
             "IdoFukaJohoTemp" AS A
         WHERE
@@ -3450,7 +3454,8 @@
     <select id="select納入通知書発行後異動者" resultMap="resultMap_IdoFukaJohoTemp"
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
-            A.*
+            A.*，
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "ShikibetsuTaisho_banchiCode1"
         FROM
             "IdoFukaJohoTemp" AS A
         WHERE

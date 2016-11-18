@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 国保連情報受取データ取込_[632]総合事業費等請求額通知書（公費）情報取込のクラスです。
@@ -43,6 +45,8 @@ public class TsuchishoJoho632 {
      * @return ResponseData
      */
     public ResponseData<DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter> onClick_btnExcute(TsuchishoJoho632Div div) {
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120900_SogojigyohiSeikyugakuTsuchishoKohiIn");
+        FlowParameterAccessor.merge(fp);
         DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter parameter = setBatchParameter(div);
         return ResponseData.of(parameter).respond();
     }
@@ -66,6 +70,7 @@ public class TsuchishoJoho632 {
         parameter.setSaishoriKubun(再処理区分);
         parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
         parameter.setShutsuryokujunId(出力順ID);
+
         return parameter;
     }
 }

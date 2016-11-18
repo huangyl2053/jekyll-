@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Shinse
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKeitai;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_SoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ShikyushinseishoTorokugamenTitle;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.KanyuRirekiInputDiv;
@@ -37,7 +38,6 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -77,19 +77,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final RString DBCMN61010 = new RString("DBCMN61010");
     private static final RString DBCMN61011 = new RString("DBCMN61011");
     private static final RString DBCMN61012 = new RString("DBCMN61012");
-
-    private static final RString タイトル1 = new RString("高額合算支給申請書登録・新規申請");
-    private static final RString タイトル2 = new RString("高額合算支給申請書登録・変更申請");
-    private static final RString タイトル3 = new RString("高額合算支給申請書登録・取下げ申請");
-    private static final RString タイトル4 = new RString("高額合算支給申請書訂正");
-    private static final RString タイトル5 = new RString("高額合算支給申請書（写）・新規申請");
-    private static final RString タイトル6 = new RString("高額合算支給申請書（写）・変更申請");
-    private static final RString タイトル7 = new RString("高額合算支給申請書（写）・取下げ申請");
-    private static final RString タイトル8 = new RString("高額合算支給申請書（写）訂正");
-    private static final RString タイトル9 = new RString("高額合算自己負担額証明書交付申請書登録・新規申請");
-    private static final RString タイトル10 = new RString("高額合算自己負担額証明書交付申請書登録・変更申請");
-    private static final RString タイトル11 = new RString("高額合算自己負担額証明書交付申請書登録・取下げ申請");
-    private static final RString タイトル12 = new RString("高額合算自己負担額証明書交付申請書登録・訂正");
 
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
@@ -206,40 +193,40 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         RString タイトル = RString.EMPTY;
         switch (メニューID.toString()) {
             case "DBCMN61001":
-                タイトル = タイトル1;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書登録_新規申請.get名称();
                 break;
             case "DBCMN61002":
-                タイトル = タイトル2;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書登録_変更申請.get名称();
                 break;
             case "DBCMN61003":
-                タイトル = タイトル3;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書登録_取下げ申請.get名称();
                 break;
             case "DBCMN61004":
-                タイトル = タイトル4;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書訂正.get名称();
                 break;
             case "DBCMN61005":
-                タイトル = タイトル5;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_登録_新規申請.get名称();
                 break;
             case "DBCMN61006":
-                タイトル = タイトル6;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_登録_変更申請.get名称();
                 break;
             case "DBCMN61007":
-                タイトル = タイトル7;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_登録_取下げ申請.get名称();
                 break;
             case "DBCMN61008":
-                タイトル = タイトル8;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.高額合算支給申請書_写_訂正.get名称();
                 break;
             case "DBCMN61009":
-                タイトル = タイトル9;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書登録_新規申請.get名称();
                 break;
             case "DBCMN61010":
-                タイトル = タイトル10;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書登録_変更申請.get名称();
                 break;
             case "DBCMN61011":
-                タイトル = タイトル11;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書登録_取下げ申請.get名称();
                 break;
             case "DBCMN61012":
-                タイトル = タイトル12;
+                タイトル = Kaigogassan_ShikyushinseishoTorokugamenTitle.自己負担額証明書交付申請書訂正.get名称();
                 break;
             default:
                 break;
@@ -577,13 +564,12 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         EntityDataState 状態 = 高額合算申請書.toEntity().getState();
         if (修正.equals(高額合算申請書状態)) {
             if (EntityDataState.Deleted.equals(状態)) {
-                高額合算申請書.toEntity().setState(EntityDataState.Modified);
                 高額合算申請書.toEntity().setIsDeleted(false);
-                高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ);
+                高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ).modifiedModel();
                 高額合算申請書保持.add高額合算申請書(高額合算申請書);
             } else {
                 高額合算申請書.toEntity().setState(EntityDataState.Modified);
-                高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ);
+                高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ).modifiedModel();
                 高額合算申請書保持.add高額合算申請書(高額合算申請書);
             }
         } else if (追加.equals(高額合算申請書状態)) {
@@ -742,11 +728,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .set対象計算期間終了年月日(rDateToFixibleDate(div.getTxtTaishoKeisanKikanYMD().getToValue()))
                 .set支給申請形態(div.getDdlShikyuShinseiKeitai().getSelectedKey())
                 .set自己負担額証明書交付申請の有無(Collections.EMPTY_LIST.equals(div.getChkKofuShinseiUmu().getSelectedKeys()) ? RSTRING_1 : RSTRING_2)
-                .set申請代表者氏名(div.getTxtDaihyoshaShimei().getValue() == null ? null
-                        : new AtenaMeisho(div.getTxtDaihyoshaShimei().getValue()))
-                .set申請代表者郵便番号(div.getTxtDaihyoshaYubinNo().getValue())
-                .set申請代表者住所(div.getTxtDaihyoshaJusho().getValue())
-                .set申請代表者電話番号(div.getTxtDaihyoshaTelNo().getDomain())
                 .set所得区分(RString.isNullOrEmpty(div.getDdlShotokuKubun().getSelectedValue()) ? null : div.getDdlShotokuKubun().getSelectedKey())
                 .set所得区分_70歳以上の者に係る(div.getDdlOver70ShotokuKubun().getSelectedKey())
                 .set資格喪失年月日(rDateToFixibleDate(div.getTxtShikakuSoshitsuYMD().getValue()))
@@ -766,7 +747,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .set後期被保険者番号(div.getTxtKokiHihokenshaNo().getValue())
                 .set後期加入期間開始年月日(rDateToFixibleDate(div.getTxtKokiKanyuKikanYMD().getFromValue()))
                 .set後期加入期間終了年月日(rDateToFixibleDate(div.getTxtKokiKanyuKikanYMD().getToValue()))
-                .set支払方法区分(div.getCcdShiharaiHohoJoho().getShiharaiHohoRad())
+                .set支払方法区分(RSTRING_2.equals(高額合算申請書保持.get申請状態()) ? RString.EMPTY
+                        : div.getCcdShiharaiHohoJoho().getShiharaiHohoRad())
                 .set支払場所(div.getCcdShiharaiHohoJoho().getShiharaiBasho())
                 .set支払期間開始年月日(rDateToFixibleDate(div.getCcdShiharaiHohoJoho().getStartYMD()))
                 .set支払期間終了年月日(rDateToFixibleDate(div.getCcdShiharaiHohoJoho().getEndYMD()))
@@ -862,7 +844,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     }
 
     private void 申請情報パネル制御(boolean flag) {
-        div.getDdlShinseiTaishoNendo().setReadOnly(flag);
         div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(flag);
         div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(flag);
         div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(flag);
@@ -1217,12 +1198,12 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         pram.setKozaId(口座ID);
         pram.setStartYMD(isNullOrEmptyFlexibleDate(高額合算申請書.get支払期間開始年月日()));
         pram.setStartHHMM(高額合算申請書.get支払期間開始時間() == null ? null
-                : RTime.of(高額合算申請書.get支払期間開始時間().substring(INT_0, INT_2)
+                : new RTime(高額合算申請書.get支払期間開始時間().substring(INT_0, INT_2)
                         .concat(高額合算申請書.get支払期間開始時間().substring(INT_3, INT_5))
                         .concat(高額合算申請書.get支払期間開始時間().substring(INT_6))));
         pram.setEndYMD(isNullOrEmptyFlexibleDate(高額合算申請書.get支払期間終了年月日()));
         pram.setEndHHMM(高額合算申請書.get支払期間終了時間() == null ? null
-                : RTime.of(高額合算申請書.get支払期間終了時間().substring(INT_0, INT_2)
+                : new RTime(高額合算申請書.get支払期間終了時間().substring(INT_0, INT_2)
                         .concat(高額合算申請書.get支払期間終了時間().substring(INT_3, INT_5))
                         .concat(高額合算申請書.get支払期間終了時間().substring(INT_6))));
         pram.setShiharaiBasho(高額合算申請書.get支払場所());

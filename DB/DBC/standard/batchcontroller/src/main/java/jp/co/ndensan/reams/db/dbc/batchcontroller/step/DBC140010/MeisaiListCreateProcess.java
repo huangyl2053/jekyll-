@@ -88,6 +88,9 @@ public class MeisaiListCreateProcess extends BatchProcessBase<MeisaiRelateEntity
     }
 
     private RString get単位数識別(RString tanisuShikibetsuCode) {
+        if (RString.isNullOrEmpty(tanisuShikibetsuCode)) {
+            return RString.EMPTY;
+        }
         return CodeMaster.getCodeMeisho(DBCCodeShubetsu.単位数識別コード.getコード(), new Code(tanisuShikibetsuCode));
     }
 

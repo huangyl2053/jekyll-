@@ -140,6 +140,7 @@ public class UpdTokuteNyushoTempProcess extends BatchProcessBase<IdouTempEntity>
         全項目 = cancatRString(特定入所者.get旧措置者区分(), 全項目);
         全項目 = cancatRString(特定入所者.get決定区分(), 全項目);
         全項目 = cancatYMD(特定入所者.get申請日(), 全項目);
+        全項目 = 全項目.concat(new RString(特定入所者.get履歴番号())).concat(SPLIT);
         return 全項目;
     }
 

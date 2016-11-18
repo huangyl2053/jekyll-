@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBC-4350-060 chenhui
  */
 public class YokaigoNinteiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class YokaigoNinteiPanelDiv extends Panel {
      */
     @JsonProperty("txtShinseiYMD")
     private TextBoxFlexibleDate txtShinseiYMD;
+    @JsonProperty("spc01")
+    private Space spc01;
     @JsonProperty("radShinseiShubetsu")
     private RadioButton radShinseiShubetsu;
     @JsonProperty("btnYokaigoninteiRireki")
@@ -58,6 +60,24 @@ public class YokaigoNinteiPanelDiv extends Panel {
     @JsonProperty("txtShinseiYMD")
     public void setTxtShinseiYMD(TextBoxFlexibleDate txtShinseiYMD) {
         this.txtShinseiYMD = txtShinseiYMD;
+    }
+
+    /*
+     * getspc01
+     * @return spc01
+     */
+    @JsonProperty("spc01")
+    public Space getSpc01() {
+        return spc01;
+    }
+
+    /*
+     * setspc01
+     * @param spc01 spc01
+     */
+    @JsonProperty("spc01")
+    public void setSpc01(Space spc01) {
+        this.spc01 = spc01;
     }
 
     /*

@@ -65,13 +65,13 @@ public class KogakuJigyoShinseishoHakkoIchiranPageBreak extends PageBreaker<Koga
             ReportLineRecord<KogakuJigyoShinseishoHakkoIchiranSource> nextRecord) {
         boolean flag = false;
         if (!flag && this.keys.contains(KogakuJigyoShinseishoHakkoIchiranOrder.証記載保険者番号.get項目ID())) {
-            flag = !currentRecord.getSource().shichosonNo.equals(nextRecord.getSource().shichosonNo);
+            flag = !currentRecord.getSource().証記載保険者番号.equals(nextRecord.getSource().証記載保険者番号);
         }
         if (!flag && this.keys.contains(KogakuJigyoShinseishoHakkoIchiranOrder.郵便番号.get項目ID())) {
             flag = !currentRecord.getSource().listHakkoTaishosha_5.equals(nextRecord.getSource().listHakkoTaishosha_5);
         }
         if (!flag && this.keys.contains(KogakuJigyoShinseishoHakkoIchiranOrder.行政区コード.get項目ID())) {
-            flag = !currentRecord.getSource().listHakkoTaishosha_6.equals(nextRecord.getSource().listHakkoTaishosha_6);
+            flag = !currentRecord.getSource().listHakkoTaishosha_7.equals(nextRecord.getSource().listHakkoTaishosha_7);
         }
         if (!flag && this.keys.contains(KogakuJigyoShinseishoHakkoIchiranOrder.氏名５０音カナ.get項目ID())) {
             flag = !currentRecord.getSource().listHakkoTaishosha_4.equals(nextRecord.getSource().listHakkoTaishosha_4);

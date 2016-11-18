@@ -79,19 +79,45 @@
         AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = #{更新前被保険者番号}
         AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = #{更新前支給申請書整理番号}
         AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = #{更新前整理番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSeiriNo" = #{更新前自己負担額証明書整理番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."hokenSeidoCode" = #{更新前保険制度コード}
-        AND "DbT3075KogakuGassanKyufuJisseki"."kyufuJissekiSakuseiKubunCode" = #{更新前給付実績作成区分コード}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shoKisaiHokenshaNo" = #{更新前証記載保険者番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."kokuho_HihokenshaShoKigo" = #{更新前国保_被保険者証記号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shinseiYMD" = #{更新前申請年月日}
-        AND "DbT3075KogakuGassanKyufuJisseki"."ketteiYMD" = #{更新前決定年月日}
-        AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSogaku" = #{更新前自己負担総額}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuGaku" = #{更新前支給額}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shoriYM" = #{更新前処理年月}
-        AND "DbT3075KogakuGassanKyufuJisseki"."uketoriYM" = #{更新前受取年月}
-        AND "DbT3075KogakuGassanKyufuJisseki"."sofuYM" = #{更新前送付年月}
-        AND "DbT3075KogakuGassanKyufuJisseki"."dataKubun" = #{更新前データ区分}
+        <if test="更新前自己負担額証明書整理番号 != null and !更新前自己負担額証明書整理番号.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSeiriNo" = #{更新前自己負担額証明書整理番号}
+        </if>
+        <if test="更新前保険制度コード != null and !更新前保険制度コード.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."hokenSeidoCode" = #{更新前保険制度コード}
+        </if>
+        <if test="更新前給付実績作成区分コード != null and !更新前給付実績作成区分コード.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."kyufuJissekiSakuseiKubunCode" = #{更新前給付実績作成区分コード}
+        </if>
+        <if test="更新前証記載保険者番号 != null and !更新前証記載保険者番号.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."shoKisaiHokenshaNo" = #{更新前証記載保険者番号}
+        </if>
+        <if test="更新前国保_被保険者証記号 != null and !更新前国保_被保険者証記号.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."kokuho_HihokenshaShoKigo" = #{更新前国保_被保険者証記号}
+        </if>
+        <if test="更新前申請年月日 != null and !更新前申請年月日.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."shinseiYMD" = #{更新前申請年月日}
+        </if>
+        <if test="更新前決定年月日 != null and !更新前決定年月日.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."ketteiYMD" = #{更新前決定年月日}
+        </if>
+        <if test="更新前自己負担総額 != null">
+            AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSogaku" = #{更新前自己負担総額}
+        </if>
+        <if test="更新前支給額 != null">
+            AND "DbT3075KogakuGassanKyufuJisseki"."shikyuGaku" = #{更新前支給額}
+        </if>
+        <if test="更新前処理年月 != null and !更新前処理年月.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."shoriYM" = #{更新前処理年月}
+        </if>
+        <if test="更新前受取年月 != null and !更新前受取年月.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."uketoriYM" = #{更新前受取年月}
+        </if>
+        <if test="更新前送付年月 != null and !更新前送付年月.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."sofuYM" = #{更新前送付年月}
+        </if>
+        <if test="更新前データ区分 != null and !更新前データ区分.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."dataKubun" = #{更新前データ区分}
+        </if>
         AND "DbT3075KogakuGassanKyufuJisseki"."isDeleted" = #{更新前論理削除}
     </delete>
 
@@ -115,19 +141,45 @@
         AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = #{更新前被保険者番号}
         AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = #{更新前支給申請書整理番号}
         AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = #{更新前整理番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSeiriNo" = #{更新前自己負担額証明書整理番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."hokenSeidoCode" = #{更新前保険制度コード}
-        AND "DbT3075KogakuGassanKyufuJisseki"."kyufuJissekiSakuseiKubunCode" = #{更新前給付実績作成区分コード}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shoKisaiHokenshaNo" = #{更新前証記載保険者番号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."kokuho_HihokenshaShoKigo" = #{更新前国保_被保険者証記号}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shinseiYMD" = #{更新前申請年月日}
-        AND "DbT3075KogakuGassanKyufuJisseki"."ketteiYMD" = #{更新前決定年月日}
-        AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSogaku" = #{更新前自己負担総額}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuGaku" = #{更新前支給額}
-        AND "DbT3075KogakuGassanKyufuJisseki"."shoriYM" = #{更新前処理年月}
-        AND "DbT3075KogakuGassanKyufuJisseki"."uketoriYM" = #{更新前受取年月}
-        AND "DbT3075KogakuGassanKyufuJisseki"."sofuYM" = #{更新前送付年月}
-        AND "DbT3075KogakuGassanKyufuJisseki"."dataKubun" = #{更新前データ区分}
+        <if test="更新前自己負担額証明書整理番号 != null and !更新前自己負担額証明書整理番号.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSeiriNo" = #{更新前自己負担額証明書整理番号}
+        </if>
+        <if test="更新前保険制度コード != null and !更新前保険制度コード.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."hokenSeidoCode" = #{更新前保険制度コード}
+        </if>
+        <if test="更新前給付実績作成区分コード != null and !更新前給付実績作成区分コード.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."kyufuJissekiSakuseiKubunCode" = #{更新前給付実績作成区分コード}
+        </if>
+        <if test="更新前証記載保険者番号 != null and !更新前証記載保険者番号.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."shoKisaiHokenshaNo" = #{更新前証記載保険者番号}
+        </if>
+        <if test="更新前国保_被保険者証記号 != null and !更新前国保_被保険者証記号.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."kokuho_HihokenshaShoKigo" = #{更新前国保_被保険者証記号}
+        </if>
+        <if test="更新前申請年月日 != null and !更新前申請年月日.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."shinseiYMD" = #{更新前申請年月日}
+        </if>
+        <if test="更新前決定年月日 != null and !更新前決定年月日.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."ketteiYMD" = #{更新前決定年月日}
+        </if>
+        <if test="更新前自己負担総額 != null">
+            AND "DbT3075KogakuGassanKyufuJisseki"."jikoFutanSogaku" = #{更新前自己負担総額}
+        </if>
+        <if test="更新前支給額 != null">
+            AND "DbT3075KogakuGassanKyufuJisseki"."shikyuGaku" = #{更新前支給額}
+        </if>
+        <if test="更新前処理年月 != null and !更新前処理年月.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."shoriYM" = #{更新前処理年月}
+        </if>
+        <if test="更新前受取年月 != null and !更新前受取年月.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."uketoriYM" = #{更新前受取年月}
+        </if>
+        <if test="更新前送付年月 != null and !更新前送付年月.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."sofuYM" = #{更新前送付年月}
+        </if>
+        <if test="更新前データ区分 != null and !更新前データ区分.isEmpty()">
+            AND "DbT3075KogakuGassanKyufuJisseki"."dataKubun" = #{更新前データ区分}
+        </if>
         AND "DbT3075KogakuGassanKyufuJisseki"."isDeleted" = #{更新前論理削除}
     </update>
 

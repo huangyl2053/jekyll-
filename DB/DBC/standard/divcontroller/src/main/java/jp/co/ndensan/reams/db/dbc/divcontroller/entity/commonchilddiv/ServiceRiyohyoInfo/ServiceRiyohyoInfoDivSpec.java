@@ -15,7 +15,17 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @reamsid_L DBC-1930-050 cuilin
  */
 public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDiv> {
-
+    
+    /**
+     * 事業者コード必須入力のチェックです。
+     */
+    事業者コード必須入力のチェックです {
+      @Override
+      public boolean apply(ServiceRiyohyoInfoDiv div) {
+          return !div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isEmpty();
+      }
+    },
+    
     /**
      * サービスコード必須入力のチェックです。
      */

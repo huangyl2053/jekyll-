@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  *
@@ -63,6 +65,8 @@ public class TsuchishoJoho171 {
         } else {
             parameter.set再処理区分(SaiShoriKubun.空白);
         }
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120160_KagoKetteiHokenshaIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 }

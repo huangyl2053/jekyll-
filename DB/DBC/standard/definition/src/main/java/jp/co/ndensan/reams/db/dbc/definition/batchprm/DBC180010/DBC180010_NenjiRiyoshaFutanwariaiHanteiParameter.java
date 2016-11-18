@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180010;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -38,6 +39,14 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter extends BatchParam
     private boolean テストモード;
     @BatchParameter(key = "処理状態", name = "処理状態")
     private RString 処理状態;
+    @BatchParameter(key = "抽出開始日時", name = "抽出開始日時")
+    private RDateTime 抽出開始日時;
+    @BatchParameter(key = "抽出終了日時", name = "抽出終了日時")
+    private RDateTime 抽出終了日時;
+    @BatchParameter(key = "判定基準日", name = "判定基準日")
+    private List<RString> 判定基準日;
+    @BatchParameter(key = "対象月", name = "対象月")
+    private List<RString> 対象月;
 
     /**
      * 年次利用者負担割合判定のProcessParameter作成する。

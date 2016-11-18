@@ -470,6 +470,7 @@ public class ShokanbaraiJyokyoShokai {
                 return new ArrayList<>();
             }
             for (DbT3041ShokanTokuteiShinryohiEntity entity : entityList) {
+                entity.initializeMd5();
                 shokanTokuteiShinryohi.add(new ShokanTokuteiShinryohi(entity));
             }
         } else {
@@ -513,6 +514,7 @@ public class ShokanbaraiJyokyoShokai {
                 return new ArrayList<>();
             }
             for (DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity : entityList) {
+                entity.initializeMd5();
                 shokanTokuteiRyoyo.add(new ShokanTokuteiShinryoTokubetsuRyoyo(entity));
             }
         } else {

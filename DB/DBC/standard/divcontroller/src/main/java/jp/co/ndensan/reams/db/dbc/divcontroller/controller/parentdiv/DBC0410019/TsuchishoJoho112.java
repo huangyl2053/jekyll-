@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 国保連情報受取データ取込_[112]給付管理票情報
@@ -62,6 +64,8 @@ public class TsuchishoJoho112 {
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
             parameter.setSaishoriKubun(SaiShoriKubun.空白);
         }
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120010_KyufukanrihyoIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 

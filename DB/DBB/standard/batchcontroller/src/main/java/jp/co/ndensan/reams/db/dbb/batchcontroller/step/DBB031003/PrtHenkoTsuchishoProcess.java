@@ -103,7 +103,7 @@ public class PrtHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
     private static final RString CSVファイル名 = new RString("-");
     private static final RString CSV出力有無_あり = new RString("あり");
     private static final RString CSVファイル名_変更一覧表 = new RString("介護保険料額変更知書発行一覧表");
-    private static final EucEntityId 変更_EUC_ENTITY_ID = new EucEntityId("DBB200028");
+    private static final EucEntityId 変更_EUC_ENTITY_ID = new EucEntityId("DBB200030");
     private static final RString 変更_EUCファイル名 = new RString("KaigoHokenryogakuHenkoTsuchiHakkoIchiranData.csv");
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -175,10 +175,10 @@ public class PrtHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
     @Override
     protected void createWriter() {
 
-        initialize決定通知書();
+        initialize変更通知書();
 
         PageBreaker<KaigoHokenryogakuSource> breaker = new KaigoHokenryogakuPageBreak(pageBreakKeys);
-        一覧表reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200012.getReportId().value()).addBreak(breaker).create();
+        一覧表reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200030.getReportId().value()).addBreak(breaker).create();
         一覧表ReportSourceWriter = new ReportSourceWriter<>(一覧表reportWriter);
 
         fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
@@ -358,7 +358,7 @@ public class PrtHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         出力条件リスト.add(builder.toRString());
     }
 
-    private void initialize決定通知書() {
+    private void initialize変更通知書() {
         if (ReportIdDBB.DBB100042.getReportId().equals(出力帳票一覧.get帳票ID())) {
             dbb100042reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100042.getReportId().value()).create();
             dbb100042ReportSourceWriter = new ReportSourceWriter<>(dbb100042reportWriter);

@@ -65,4 +65,12 @@ public interface IKyufuJohoMapper {
      */
     List<KyufuJohoEntity> getサービス利用状況情報(KyufuJohoParamter paramter);
 
+    /**
+     * ViewStateへ償還払い状況照会の取得します。
+     *
+     * @param paramter KounyukingakuParamter
+     * @return KyufuJohoEntity
+     */
+    KyufuJohoEntity getViewState償還払い状況照会(KounyukingakuParamter paramter);
+
 }

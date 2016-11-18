@@ -194,7 +194,7 @@
             AND "TEMP"."taishouKubun" = '受給者'
         </if>
         ORDER BY
-        "TEMP"."shunoDataKubun" ASC,
+        "TEMP"."kannnouKunbun" ASC,
         "TEMP"."choteiNendo" DESC,
         "TEMP"."fukaNendo" DESC,
         "TEMP"."kamokuCode" ASC,

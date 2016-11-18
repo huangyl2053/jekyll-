@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 国保連情報受取データ取込_[38P]高額合算給付実績情報
@@ -61,6 +63,8 @@ public class TsuchishoJoho38P {
             parameter.set再処理区分(SaiShoriKubun.空白);
         }
         parameter.set処理区分(div.getCcdKokurenJohoTorikomi().get処理区分());
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120150_KogakuGassanKyufuJissekiIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 
