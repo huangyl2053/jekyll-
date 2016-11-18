@@ -81,9 +81,8 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
             source.seibetsu = Seibetsu.toValue(帳票出力対象データ.getSeibetsuCodeChohyo()).get名称();
-            if (帳票出力対象データ.getJushoChohyo() != null) {
-                source.hihokenJusho = 帳票出力対象データ.getJushoChohyo().getColumnValue();
-            }
+            source.hihokenJusho = 帳票出力対象データ.getEditJusho();
+
             if (帳票出力対象データ.getTelNoChohyo() != null) {
                 source.telNo = 帳票出力対象データ.getTelNoChohyo().getColumnValue();
             }
@@ -92,9 +91,6 @@ public class KogakuJigyoShikyuShinseishoEditor implements IKogakuJigyoShikyuShin
             }
             if (帳票出力対象データ.getHihokenshaNoChohyo() != null) {
                 source.hihokenshaNo = 帳票出力対象データ.getHihokenshaNoChohyo().getColumnValue();
-            }
-            if (帳票出力対象データ.getKojinNoChohyo() != null) {
-                source.kojinNo = 帳票出力対象データ.getKojinNoChohyo().getColumnValue();
             }
             source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
             source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, get非空文字列(source.hihokenshaNo));

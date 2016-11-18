@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.DbWT1512JukyushaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -19,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-3500-030 zuotao
  */
-public class DbWT1512HihokenshaSakuseiUpdateProcess extends BatchProcessBase<DbT4001JukyushaDaichoEntity> {
+public class DbWT1512HihokenshaSakuseiUpdateProcess extends BatchProcessBase<DbWT1512JukyushaDaichoEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
             + "relate.riyojokyotokeihyomeisailistsakusei.IRiyoJokyoTokeihyoMeisaiListSakuseiMapper.select被保険者台帳データ");
@@ -40,7 +39,7 @@ public class DbWT1512HihokenshaSakuseiUpdateProcess extends BatchProcessBase<DbT
     }
 
     @Override
-    protected void process(DbT4001JukyushaDaichoEntity entity) {
+    protected void process(DbWT1512JukyushaDaichoEntity entity) {
         受給者台帳一時TBL.update(entity);
     }
 }

@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoHenkoFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.DBC0820021StateName;
@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuR
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
@@ -73,8 +72,6 @@ public class KihonInfoMainPanel {
     private static final RString KEY_3 = new RString("3");
     private static final RString KEY_4 = new RString("4");
 
-    private static final RString 証明書入力未済ありエラー = new RString("請求額集計情報の未登録のサービス種類が存在します。\n\r請求額集計情報を登録して下さい。");
-
     /**
      * 画面初期化処理のメソッドます。
      *
@@ -99,6 +96,14 @@ public class KihonInfoMainPanel {
         ViewStateHolder.put(ViewStateKeys.申請日, 申請日);
         ArrayList<RString> list = getHandler(div).put様式番号ViewState();
         ViewStateHolder.put(ViewStateKeys.様式番号List, list);
+        DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        if (db情報 == null) {
+            db情報 = new DbJohoViewState();
+        }
+        ArrayList<ShokanKihon> 請求基本データList = db情報.get償還払請求基本データList();
+        if (null == 請求基本データList) {
+            請求基本データList = new ArrayList<>();
+        }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
                     被保険者番号, サービス年月, 申請日, 整理番号, 事業者番号, 様式番号, 固定明細番号);
@@ -127,6 +132,8 @@ public class KihonInfoMainPanel {
             }
             getHandler(div).set基本情報(shokanKihon, サービス年月, list, 様式番号);
             ViewStateHolder.put(ViewStateKeys.基本データ, shokanKihon);
+            請求基本データList.add(shokanKihon);
+            db情報.set償還払請求基本データList(請求基本データList);
         }
 
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
@@ -149,7 +156,7 @@ public class KihonInfoMainPanel {
                 ViewStateHolder.put(ViewStateKeys.給付率, 保険給付率.value());
             }
         }
-        DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDBBAK, db情報);
         return ResponseData.of(div).setState(DBC0820021StateName.新規修正モード);
     }
@@ -186,6 +193,12 @@ public class KihonInfoMainPanel {
      * @return ResponseData
      */
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnConfirm(KihonInfoMainPanelDiv div) {
+        List<RString> 様式番号List = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
+        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        if (ResponseHolder.isWarningIgnoredRequest()) {
+            return ResponseData.of(div).respond();
+        }
         return commentEvent(div).forwardWithEventName(DBC0820021TransitionEventName.一覧に戻る).respond();
     }
 
@@ -196,17 +209,12 @@ public class KihonInfoMainPanel {
         List<RString> 様式番号List = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        try {
-            judge画面のチェック(div, 様式番号List, サービス年月, 様式番号);
+        judge画面のチェック(div, 様式番号List, サービス年月, 様式番号);
+        if (!削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             set支給申請(div, 様式番号List, 様式番号, meisaiPar, shokanKihon);
-            //証明書入力済チェック
-            judge証明書入力済のチェック(div, meisaiPar, サービス年月);
-            return ResponseData.of(div);
-        } catch (Exception e) {
-            e.toString();
-            e.printStackTrace();
-            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
+        judge証明書入力済のチェック(div, meisaiPar, サービス年月);
+        return ResponseData.of(div);
     }
 
     private void judge証明書入力済のチェック(KihonInfoMainPanelDiv div, ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
@@ -217,11 +225,12 @@ public class KihonInfoMainPanel {
             ShomeishoNyuryokuKanryoKubunType 証明書入力完了フラグ = SyokanbaraihiShikyuShinseiManager.createInstance()
                     .証明書InputCheck(ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class), 識別コード.getColumnValue(), サービス年月);
             if (証明書入力完了フラグ.equals(ShomeishoNyuryokuKanryoKubunType.入力完了)) {
-                ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, 証明書入力完了フラグ);
                 db情報.get証明書入力完了フラグMap().put(meisaiPar, 証明書入力完了フラグ);
                 ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
             } else if (証明書入力完了フラグ.equals(ShomeishoNyuryokuKanryoKubunType.入力未完了)) {
-                throw new ApplicationException(証明書入力未済ありエラー.toString());
+                db情報.get証明書入力完了フラグMap().put(meisaiPar, 証明書入力完了フラグ);
+                ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
+                throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.toString());
             }
         }
     }
@@ -230,20 +239,17 @@ public class KihonInfoMainPanel {
             List<RString> 様式番号List,
             RString 様式番号, ShoukanharaihishinseimeisaikensakuParameter meisaiPar, ShokanKihon shokanKihon) {
         DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        if (db情報 == null || db情報.get償還払請求基本データList().isEmpty()) {
-            db情報 = new DbJohoViewState();
-        }
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap = db情報.get証明書入力済フラグMap();
-        Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = db情報.get証明書変更済フラグMap();
+//        Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = db情報.get証明書変更済フラグMap();
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap = db情報.get証明書入力完了フラグMap();
 
-        if (証明書入力済フラグMap.isEmpty()) {
+        if (null == 証明書入力済フラグMap) {
             証明書入力済フラグMap = new HashMap<>();
         }
-        if (証明書変更済フラグMap.isEmpty()) {
-            証明書変更済フラグMap = new HashMap<>();
-        }
-        if (証明書入力完了フラグMap.isEmpty()) {
+//        if (null == 証明書変更済フラグMap) {
+//            証明書変更済フラグMap = new HashMap<>();
+//        }
+        if (null == 証明書入力完了フラグMap) {
             証明書入力完了フラグMap = new HashMap<>();
         }
 
@@ -259,25 +265,24 @@ public class KihonInfoMainPanel {
             } else {
                 証明書入力済フラグ.set基本情報_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
             }
-            ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, 証明書入力済フラグ);
             証明書入力済フラグMap.put(meisaiPar, 証明書入力済フラグ);
             db情報.set証明書入力済フラグMap(証明書入力済フラグMap);
         } else {
             shokanKihon = getHandler(div).saveModified(meisaiPar, shokanKihon, 様式番号, 様式番号List);
             if (getHandler(div).judgeIs内容変更(original基本データ, shokanKihon)) {
-                証明書変更済フラグ.set基本情報_証明書変更済フラグ(ShomeishoHenkoKubunType.変更あり);
-            } else {
-                証明書変更済フラグ.set基本情報_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+//                証明書変更済フラグ.set基本情報_証明書変更済フラグ(ShomeishoHenkoKubunType.変更あり);
+                shokanKihon = shokanKihon.modified();
             }
-            ViewStateHolder.put(ViewStateKeys.証明書変更済フラグ, 証明書変更済フラグ);
-            証明書変更済フラグMap.put(meisaiPar, 証明書変更済フラグ);
-            db情報.set証明書変更済フラグMap(証明書変更済フラグMap);
+//            } else {
+//                証明書変更済フラグ.set基本情報_証明書変更済フラグ(ShomeishoHenkoKubunType.変更なし);
+//            }
+//            証明書変更済フラグMap.put(meisaiPar, 証明書変更済フラグ);
+//            db情報.set証明書変更済フラグMap(証明書変更済フラグMap);
         }
         ArrayList<ShokanKihon> 請求基本データList = db情報.get償還払請求基本データList();
         if (null == 請求基本データList) {
             請求基本データList = new ArrayList<>();
         }
-
         if (請求基本データList.isEmpty()) {
             請求基本データList.add(shokanKihon);
             db情報.set償還払請求基本データList(請求基本データList);
@@ -295,41 +300,48 @@ public class KihonInfoMainPanel {
             List<RString> 様式番号List,
             FlexibleYearMonth サービス年月,
             RString 様式番号) {
-        boolean 相違Flag = !new RString(UrWarningMessages.相違.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode());
-        boolean 日数３０日超過Flag = !new RString(DbcWarningMessages.日数３０日超過.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode());
-        if (!ResponseHolder.isWarningIgnoredRequest()
-                && 相違Flag
-                && 日数３０日超過Flag) {
+        if (!ResponseHolder.isWarningIgnoredRequest()) {
             ValidationMessageControlPairs pairs = getHandler(div).get入力チェックメッセージ(
                     様式番号List, サービス年月, 様式番号);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
         }
-        return 保存処理(div, 相違Flag, 日数３０日超過Flag);
+        return 保存処理Check(div);
     }
 
-    private ResponseData<KihonInfoMainPanelDiv> 保存処理(KihonInfoMainPanelDiv div,
-            boolean 相違Flag,
-            boolean 日数３０日超過Flag) {
+    private boolean is日数３０日超過(RDate 入所_院年月日, RDate 退所_院年月日) {
+        int 期間_日数 = 退所_院年月日.plusDay(NUM_1).getBetweenDays(入所_院年月日);
+        return 日数 < 期間_日数;
+    }
+
+    private ResponseData<KihonInfoMainPanelDiv> 保存処理Check(KihonInfoMainPanelDiv div) {
         ShoukanharaihishinseimeisaikensakuParameter 明細検索キー = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         getHandler(div).set明細番号(明細検索キー.get明細番号());
-
         Map<RString, Object> map = getHandler(div).get画面項目();
         RDate 入所_院年月日 = (RDate) map.get(KEY_1);
         RDate 退所_院年月日 = (RDate) map.get(KEY_2);
-        if (相違Flag && 日数３０日超過Flag && (入所_院年月日 != null && 退所_院年月日 != null)) {
-            int 期間_日数 = 退所_院年月日.plusDay(NUM_1).getBetweenDays(入所_院年月日);
-            if (日数 < 期間_日数) {
+        if (!ResponseHolder.isReRequest() && (入所_院年月日 != null && 退所_院年月日 != null)) {
+            if (is日数３０日超過(入所_院年月日, 退所_院年月日)) {
                 WarningMessage message = new WarningMessage(DbcWarningMessages.日数３０日超過.getMessage().getCode(),
                         DbcWarningMessages.日数３０日超過.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message.replace(入所年月日.toString(), 退所年月日.toString())).respond();
             }
+        } else {
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return 保存処理Check2(div, 入所_院年月日, 退所_院年月日);
+            }
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
-        if (相違Flag && (入所_院年月日 != null && 退所_院年月日 != null)) {
+        return 保存処理Check2(div, 入所_院年月日, 退所_院年月日);
+    }
+
+    private ResponseData<KihonInfoMainPanelDiv> 保存処理Check2(KihonInfoMainPanelDiv div, RDate 入所_院年月日, RDate 退所_院年月日) {
+        Map<RString, Object> map = getHandler(div).get画面項目();
+        if (!ResponseHolder.isReRequest() && (入所_院年月日 != null && 退所_院年月日 != null)) {
             int 期間_日数 = 退所_院年月日.plusDay(NUM_1).getBetweenDays(入所_院年月日);
             Decimal 外泊日数 = (Decimal) map.get(KEY_3);
             Decimal 入所_院実日数 = (Decimal) map.get(KEY_4);
@@ -339,27 +351,26 @@ public class KihonInfoMainPanel {
             if (入所_院実日数 == null) {
                 入所_院実日数 = Decimal.ZERO;
             }
-            int 外泊_入所日数 = 外泊日数.add(入所_院実日数).intValue();
-            if (期間_日数 < 外泊_入所日数) {
+            if (check入所日と退所日の期間日数(外泊日数, 入所_院実日数, 期間_日数)) {
                 WarningMessage message = new WarningMessage(UrWarningMessages.相違.getMessage().getCode(),
                         UrWarningMessages.相違.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message.replace(入所院実日数_外泊日数.toString(),
                         期間日数.toString())).respond();
             }
-        }
-        if (new RString(UrWarningMessages.相違.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態.toString()))
-//                    .respond();
-        }
-
-        if (!new RString(UrInformationMessages.正常終了.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() != MessageDialogSelectedResult.No) {
-
+        } else {
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return null;
+            }
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                ResponseData.of(div).respond();
+            }
         }
         return null;
+    }
+
+    private boolean check入所日と退所日の期間日数(Decimal 外泊日数, Decimal 入所_院実日数, int 期間_日数) {
+        int 外泊_入所日数 = 外泊日数.add(入所_院実日数).intValue();
+        return 期間_日数 < 外泊_入所日数;
     }
 
     /**

@@ -40,9 +40,24 @@ public class ServiceRiyohyoInfoDivValidationHandler {
 
     private ValidationDictionary create明細計算Dictionary() {
         return new ValidationDictionaryBuilder()
+//                .add(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.単位必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtTani())
                 .add(ServiceRiyohyoInfoDivValidationMessage.回数必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu()).build();
+    }
+    
+    /**
+     * 事業者必須入力のチェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate事業者必須入力() {
+        IValidationMessages message = new ServiceRiyohyoInfoDivValidator(div).validate事業者必須入力();
+        return create事業者必須入力Dictionary().check(message);
+    }
+
+    private ValidationDictionary create事業者必須入力Dictionary() {
+        return new ValidationDictionaryBuilder().add(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目).build();
     }
 
     /**
@@ -151,7 +166,7 @@ public class ServiceRiyohyoInfoDivValidationHandler {
 
     private ValidationDictionary createサービス単位必須以外Dictionary() {
         return new ValidationDictionaryBuilder()
-//                .add(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
+                .add(ServiceRiyohyoInfoDivValidationMessage.サービス種類コード必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.単位必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtTani())
                 .add(ServiceRiyohyoInfoDivValidationMessage.回数必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu())
                 .add(ServiceRiyohyoInfoDivValidationMessage.単位数単価必須項目,

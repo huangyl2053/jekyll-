@@ -62,8 +62,8 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-     //   ChosahyoGaikyochosaReport report = ChosahyoGaikyochosaReport.createFrom(business.setDBE221011Item(entity));
-     //   report.writeBy(reportSourceWriter);
+        ChosahyoGaikyochosaReport report = ChosahyoGaikyochosaReport.createFrom(business.setDBE221011Item(entity));
+        report.writeBy(reportSourceWriter);
     }
 
     @Override

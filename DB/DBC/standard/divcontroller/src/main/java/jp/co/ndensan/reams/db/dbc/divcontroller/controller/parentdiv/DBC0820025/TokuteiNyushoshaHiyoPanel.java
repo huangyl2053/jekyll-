@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.S
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.DBC0820021TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025.DBC0820025StateName;
@@ -57,7 +58,6 @@ public class TokuteiNyushoshaHiyoPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final RString エーラメッセージ = new RString("請求額集計情報の未登録のサービス種類が存在します。請求額集計情報を登録して下さい。");
 
     /**
      * 画面初期化のメソッドます。
@@ -436,8 +436,9 @@ public class TokuteiNyushoshaHiyoPanel {
             flag = new ShomeishoNyuryokuFlag();
         }
         setDB出力用ViewState(div);
-
-        set証明書入力完了フラグ(証明書入力済区分, dbJoho, kensakuParameter);
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            set証明書入力完了フラグ(証明書入力済区分, dbJoho, kensakuParameter);
+        }
         ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, flag);
         return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.一覧に戻る).respond();
     }
@@ -463,7 +464,7 @@ public class TokuteiNyushoshaHiyoPanel {
         dbJoho.set証明書入力完了フラグMap(kanryoFlagMap);
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
         if (証明書入力済区分 == ShomeishoNyuryokuKanryoKubunType.入力未完了) {
-            throw new ApplicationException(エーラメッセージ.toString());
+            throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage());
         }
     }
 

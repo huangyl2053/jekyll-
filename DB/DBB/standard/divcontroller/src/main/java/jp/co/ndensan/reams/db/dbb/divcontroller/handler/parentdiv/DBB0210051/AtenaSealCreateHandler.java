@@ -181,7 +181,7 @@ public class AtenaSealCreateHandler {
             parameter.set被保番号表示(定数_0);
         }
         if (出力順ID != null) {
-            parameter.set出力順ID(new RString(出力順ID));
+            parameter.set出力順ID(Long.parseLong(出力順ID.toString()));
         }
         if (宛先住所設定 != null) {
             parameter.set宛先住所設定(宛先住所設定.toRString());

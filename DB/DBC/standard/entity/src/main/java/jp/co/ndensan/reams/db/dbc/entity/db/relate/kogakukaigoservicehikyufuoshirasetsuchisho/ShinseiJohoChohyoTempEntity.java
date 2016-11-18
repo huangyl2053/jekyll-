@@ -9,12 +9,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KojinNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -147,5 +149,11 @@ public class ShinseiJohoChohyoTempEntity extends DbTableEntityBase<ShinseiJohoCh
     private RString tsuchoKigoChohyo;
     private RString tsuchoNoChohyo;
 
+    private RString kannaiKangaiKubun;
+    private AtenaBanchi banchi;
+    private Katagaki katagaki;
+    private RString gyoseikuName;
     private RString ininjoTeishutsusakiChohyo;
+    private LasdecCode shichosonCode;
+    private RString editJusho;
 }

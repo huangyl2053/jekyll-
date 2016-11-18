@@ -1517,6 +1517,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getSelectedKey());
         parameter.set納入通知書_出力形式(div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu()
                 .getRadNotsuShuturyokuKeishiki().getSelectedKey());
+        parameter.set納入通知書_出力期リスト(get納入通知書_出力期リスト());
         parameter.set郵振納付書_出力期(div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().getDdlYufuriShuturyokuKi()
                 .getSelectedKey());
         parameter.set特徴開始通知書_発行日(div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu()
@@ -1531,6 +1532,23 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getCcdChoshuYuyoTsuchiBunshoNo().get文書番号());
         AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         return KakushuTsuchishoSakusei.createInstance().publish(parameter);
+    }
+
+    private List<Kitsuki> get納入通知書_出力期リスト() {
+        List<Kitsuki> 納入通知書_出力期リスト = new ArrayList<>();
+        FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
+        int selected期 = Integer.parseInt(
+                div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().getSelectedKey().toString());
+        KitsukiList 期月リスト = fuchoKiUtil.get期月リスト();
+        if (!div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu()
+                .getChkNotsuShuturyokuKi().getSelectedKeys().isEmpty()) {
+            納入通知書_出力期リスト.addAll(期月リスト.get期の月(selected期));
+        } else {
+            for (int i = selected期; i <= NUM_10; i++) {
+                納入通知書_出力期リスト.addAll(期月リスト.get期の月(i));
+            }
+        }
+        return 納入通知書_出力期リスト;
     }
 
     private void clear更正前賦課根拠() {

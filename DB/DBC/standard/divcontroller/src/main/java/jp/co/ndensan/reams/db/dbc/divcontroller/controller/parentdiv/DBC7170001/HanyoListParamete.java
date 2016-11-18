@@ -8,8 +8,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7170001
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710170.DBC710170_HanyoListKogakuGassanShikyugakuKetteiParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7170001.HanyoListParameteDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7170001.HanyoListParameteHandler;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 汎用リスト出力(高額合算支給額決定情報)のクラスです。
@@ -17,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  * @reamsid_L DBC-3101-010 qinzhen
  */
 public class HanyoListParamete {
+    private static final RString MSG_出力順 = new RString("出力順");
 
     /**
      * 画面の初期化メソッドです。
@@ -83,6 +87,9 @@ public class HanyoListParamete {
      * @return ResponseData
      */
     public ResponseData<DBC710170_HanyoListKogakuGassanShikyugakuKetteiParameter> onClick_btnExcute(HanyoListParameteDiv div) {
+        if (!div.getCcdShutsuryokujun().isSelected()) {
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(MSG_出力順.toString()));
+        }
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 

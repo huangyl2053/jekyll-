@@ -50,20 +50,23 @@ public class KarisanteiIdoKekkaIchiranPrintService {
      * printメソッド(単一帳票出力用)
      *
      * @param 更正前後EntityList List<KeisanjohoAtenaKozaKouseizengoEntity>
-     * @param 出力順ID RString
+     * @param 出力順ID Long
      * @param 調定日時 YMDHMS
      * @param 賦課年度 FlexibleYear
      * @return SourceDataCollection
      */
     public SourceDataCollection print仮算定異動一括結果一覧表(List<KeisanjohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
-            RString 出力順ID, YMDHMS 調定日時, FlexibleYear 賦課年度) {
+            Long 出力順ID, YMDHMS 調定日時, FlexibleYear 賦課年度) {
         SourceDataCollection collection;
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
         List<RString> 出力順項目リスト = new ArrayList<>();
         List<RString> 改頁項目リスト = new ArrayList<>();
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), Long.valueOf(出力順ID.toString()));
+        IOutputOrder 並び順 = null;
+        if (出力順ID != null) {
+            並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), 出力順ID);
+        }
         if (並び順 != null) {
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {

@@ -4,6 +4,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaI
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -13,19 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JukyushaIdoRenrakuhyoGemmenGengakuSubDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoRiyoshaFutan")
-    private JukyushaIdoRenrakuhyoRiyoshaFutanDiv JukyushaIdoRenrakuhyoRiyoshaFutan;
-    @JsonProperty("JukyushaIdoRenrakuhyoFukushiHojinKeigen")
-    private JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv JukyushaIdoRenrakuhyoFukushiHojinKeigen;
-    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
-    private JukyushaIdoRenrakuhyoHyojunFutanDiv JukyushaIdoRenrakuhyoHyojunFutan;
+    @JsonProperty("GemmenGengakuRightPanel")
+    private GemmenGengakuRightPanelDiv GemmenGengakuRightPanel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,57 +32,54 @@ public class JukyushaIdoRenrakuhyoGemmenGengakuSubDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getJukyushaIdoRenrakuhyoRiyoshaFutan
-     * @return JukyushaIdoRenrakuhyoRiyoshaFutan
+     * getGemmenGengakuRightPanel
+     * @return GemmenGengakuRightPanel
      */
-    @JsonProperty("JukyushaIdoRenrakuhyoRiyoshaFutan")
+    @JsonProperty("GemmenGengakuRightPanel")
+    public GemmenGengakuRightPanelDiv getGemmenGengakuRightPanel() {
+        return GemmenGengakuRightPanel;
+    }
+
+    /*
+     * setGemmenGengakuRightPanel
+     * @param GemmenGengakuRightPanel GemmenGengakuRightPanel
+     */
+    @JsonProperty("GemmenGengakuRightPanel")
+    public void setGemmenGengakuRightPanel(GemmenGengakuRightPanelDiv GemmenGengakuRightPanel) {
+        this.GemmenGengakuRightPanel = GemmenGengakuRightPanel;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
     public JukyushaIdoRenrakuhyoRiyoshaFutanDiv getJukyushaIdoRenrakuhyoRiyoshaFutan() {
-        return JukyushaIdoRenrakuhyoRiyoshaFutan;
+        return this.getGemmenGengakuRightPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan();
     }
 
-    /*
-     * setJukyushaIdoRenrakuhyoRiyoshaFutan
-     * @param JukyushaIdoRenrakuhyoRiyoshaFutan JukyushaIdoRenrakuhyoRiyoshaFutan
-     */
-    @JsonProperty("JukyushaIdoRenrakuhyoRiyoshaFutan")
-    public void setJukyushaIdoRenrakuhyoRiyoshaFutan(JukyushaIdoRenrakuhyoRiyoshaFutanDiv JukyushaIdoRenrakuhyoRiyoshaFutan) {
-        this.JukyushaIdoRenrakuhyoRiyoshaFutan = JukyushaIdoRenrakuhyoRiyoshaFutan;
+    @JsonIgnore
+    public void  setJukyushaIdoRenrakuhyoRiyoshaFutan(JukyushaIdoRenrakuhyoRiyoshaFutanDiv JukyushaIdoRenrakuhyoRiyoshaFutan) {
+        this.getGemmenGengakuRightPanel().setJukyushaIdoRenrakuhyoRiyoshaFutan(JukyushaIdoRenrakuhyoRiyoshaFutan);
     }
 
-    /*
-     * getJukyushaIdoRenrakuhyoFukushiHojinKeigen
-     * @return JukyushaIdoRenrakuhyoFukushiHojinKeigen
-     */
-    @JsonProperty("JukyushaIdoRenrakuhyoFukushiHojinKeigen")
+    @JsonIgnore
     public JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv getJukyushaIdoRenrakuhyoFukushiHojinKeigen() {
-        return JukyushaIdoRenrakuhyoFukushiHojinKeigen;
+        return this.getGemmenGengakuRightPanel().getJukyushaIdoRenrakuhyoFukushiHojinKeigen();
     }
 
-    /*
-     * setJukyushaIdoRenrakuhyoFukushiHojinKeigen
-     * @param JukyushaIdoRenrakuhyoFukushiHojinKeigen JukyushaIdoRenrakuhyoFukushiHojinKeigen
-     */
-    @JsonProperty("JukyushaIdoRenrakuhyoFukushiHojinKeigen")
-    public void setJukyushaIdoRenrakuhyoFukushiHojinKeigen(JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv JukyushaIdoRenrakuhyoFukushiHojinKeigen) {
-        this.JukyushaIdoRenrakuhyoFukushiHojinKeigen = JukyushaIdoRenrakuhyoFukushiHojinKeigen;
+    @JsonIgnore
+    public void  setJukyushaIdoRenrakuhyoFukushiHojinKeigen(JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv JukyushaIdoRenrakuhyoFukushiHojinKeigen) {
+        this.getGemmenGengakuRightPanel().setJukyushaIdoRenrakuhyoFukushiHojinKeigen(JukyushaIdoRenrakuhyoFukushiHojinKeigen);
     }
 
-    /*
-     * getJukyushaIdoRenrakuhyoHyojunFutan
-     * @return JukyushaIdoRenrakuhyoHyojunFutan
-     */
-    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
+    @JsonIgnore
     public JukyushaIdoRenrakuhyoHyojunFutanDiv getJukyushaIdoRenrakuhyoHyojunFutan() {
-        return JukyushaIdoRenrakuhyoHyojunFutan;
+        return this.getGemmenGengakuRightPanel().getJukyushaIdoRenrakuhyoHyojunFutan();
     }
 
-    /*
-     * setJukyushaIdoRenrakuhyoHyojunFutan
-     * @param JukyushaIdoRenrakuhyoHyojunFutan JukyushaIdoRenrakuhyoHyojunFutan
-     */
-    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
-    public void setJukyushaIdoRenrakuhyoHyojunFutan(JukyushaIdoRenrakuhyoHyojunFutanDiv JukyushaIdoRenrakuhyoHyojunFutan) {
-        this.JukyushaIdoRenrakuhyoHyojunFutan = JukyushaIdoRenrakuhyoHyojunFutan;
+    @JsonIgnore
+    public void  setJukyushaIdoRenrakuhyoHyojunFutan(JukyushaIdoRenrakuhyoHyojunFutanDiv JukyushaIdoRenrakuhyoHyojunFutan) {
+        this.getGemmenGengakuRightPanel().setJukyushaIdoRenrakuhyoHyojunFutan(JukyushaIdoRenrakuhyoHyojunFutan);
     }
 
     // </editor-fold>

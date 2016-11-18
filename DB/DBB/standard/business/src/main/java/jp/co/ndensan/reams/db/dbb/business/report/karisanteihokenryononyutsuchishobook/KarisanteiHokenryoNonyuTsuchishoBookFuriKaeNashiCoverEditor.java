@@ -501,13 +501,13 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverEditor
         boolean is算定の基礎は空白 = true;
         switch (算定の基礎項番) {
             case INT1:
-                is算定の基礎は空白 = null == 算定の基礎.get基礎1();
+                is算定の基礎は空白 = null == 算定の基礎.get基礎1().get基礎1();
                 break;
             case INT2:
-                is算定の基礎は空白 = null == 算定の基礎.get基礎2();
+                is算定の基礎は空白 = null == 算定の基礎.get基礎2().get基礎2();
                 break;
             case INT3:
-                is算定の基礎は空白 = null == 算定の基礎.get基礎3();
+                is算定の基礎は空白 = null == 算定の基礎.get基礎3().get基礎3();
                 break;
             default:
                 break;

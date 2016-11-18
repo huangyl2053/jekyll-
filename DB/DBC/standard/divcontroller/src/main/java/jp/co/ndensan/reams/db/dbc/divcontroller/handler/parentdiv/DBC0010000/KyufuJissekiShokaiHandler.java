@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonKyotakuServiceBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiBusiness;
@@ -30,6 +31,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -201,7 +203,7 @@ public class KyufuJissekiShokaiHandler {
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 一覧データ 一覧データ
      */
-    public void onClick_btnKyufuJissekiSearch(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1,
+    public KyufuJissekiHeader onClick_btnKyufuJissekiSearch(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1,
             FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了,
             KyufuJissekiSearchDataBusiness 一覧データ) {
         div.getTxtKyufuJissekiListHihokenshaNo().setValue(get被保険者番号(給付実績ヘッダ情報1.get被保険者番号()));
@@ -228,6 +230,22 @@ public class KyufuJissekiShokaiHandler {
         set一覧設定(一覧データ);
         setボタン表示非表示の設定(サービス提供年月_開始, サービス提供年月_終了);
         setボタン活性非活性の設定();
+        return get給付実績基本情報子Div(給付実績ヘッダ情報1.get生年月日());
+    }
+
+    private KyufuJissekiHeader get給付実績基本情報子Div(FlexibleDate 生年月日) {
+        KyufuJissekiHeader data = new KyufuJissekiHeader();
+        data.set被保険者番号(div.getTxtKyufuJissekiListHihokenshaNo().getValue());
+        data.set住民種別(div.getTxtKyufuJissekiListJuminShubetsu().getValue());
+        data.set要介護度(div.getTxtKyufuJissekiListYokaigodo().getValue());
+        data.set有効期間開始年月日(div.getTxtKyufuJissekiListNinteiYukoKikan().getFromValue());
+        data.set有効期間終了年月日(div.getTxtKyufuJissekiListNinteiYukoKikan().getToValue());
+        data.set氏名(div.getTxtKyufuJissekiListName().getValue());
+        data.set性別(div.getTxtKyufuJissekiListSeibetsu().getValue());
+        if (生年月日 != null && !生年月日.isEmpty()) {
+            data.set生年月日(new RDate(生年月日.toString()));
+        }
+        return data;
     }
 
     /**
@@ -1046,9 +1064,9 @@ public class KyufuJissekiShokaiHandler {
     private List<RString> get年度列名(FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了) {
         List<RString> 計算後年 = new ArrayList<>();
         int 列 = サービス提供年月_終了.getBetweenMonths(サービス提供年月_開始) + INT_ICHI;
-        FlexibleYearMonth 計算後年月 = サービス提供年月_終了.plusMonth(INT_ICHI);
+        FlexibleYearMonth 計算後年月 = サービス提供年月_開始.minusMonth(INT_ICHI);
         for (int i = 0; i < 列; i++) {
-            計算後年月 = 計算後年月.minusMonth(INT_ICHI);
+            計算後年月 = 計算後年月.plusMonth(INT_ICHI);
             計算後年.add(計算後年月.wareki().toDateString());
         }
         return 計算後年;
@@ -2022,6 +2040,7 @@ public class KyufuJissekiShokaiHandler {
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param is経過措置 is経過措置
      * @param 給付実績情報照会情報 給付実績情報照会情報
+     * @param 被保険者番号 被保険者番号
      */
     public void edit集計データ(FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了,
             boolean is経過措置, KyufuJissekiPrmBusiness 給付実績情報照会情報, HihokenshaNo 被保険者番号) {
@@ -2039,7 +2058,7 @@ public class KyufuJissekiShokaiHandler {
     private List<KyufuJissekiShukeiKekka> edit集計結果(List<KyufuJissekiShukeiKekkaDataBusiness> 集計データ,
             FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了) {
         List<KyufuJissekiShukeiKekka> 集計結果List = new ArrayList<>();
-        FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(サービス提供年月_終了.toDateString());
+        FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(サービス提供年月_開始.toDateString());
         int index = 0;
         while (処理対象年月.isBeforeOrEquals(サービス提供年月_終了) && サービス提供年月_開始.isBeforeOrEquals(処理対象年月)) {
             List<KyufuJissekiShukeiKekka> 処理対象年月集計結果List = 初期化処理対象年月集計結果List(処理対象年月);
@@ -2072,7 +2091,7 @@ public class KyufuJissekiShokaiHandler {
                 index++;
             }
             集計結果List.addAll(処理対象年月集計結果List);
-            処理対象年月 = new FlexibleYearMonth(処理対象年月.minusMonth(1).toDateString());
+            処理対象年月 = new FlexibleYearMonth(処理対象年月.plusMonth(1).toDateString());
         }
         return 集計結果List;
     }
@@ -2806,10 +2825,10 @@ public class KyufuJissekiShokaiHandler {
         for (int i = 0; i < 種類明細一覧.size(); i++) {
             for (int j = idxST; j < idxED; j++) {
                 if (一覧データ.get給付実績集計結果明細データ().get((j) * INT_58 + i).getKensu().equals(Decimal.ZERO)) {
-                    set一覧対象金額データ(種類明細一覧.get(i), 列位値, RString.EMPTY, false);
+                    set一覧対象金額データ(種類明細一覧.get(i), 列位値, RString.EMPTY, true);
                 } else {
                     set一覧対象金額データ(種類明細一覧.get(i), 列位値,
-                            getデータフォマート(一覧データ.get給付実績集計結果明細データ().get((j) * INT_58 + i).getKingaku()), true);
+                            getデータフォマート(一覧データ.get給付実績集計結果明細データ().get((j) * INT_58 + i).getKingaku()), false);
                 }
                 列位値++;
             }

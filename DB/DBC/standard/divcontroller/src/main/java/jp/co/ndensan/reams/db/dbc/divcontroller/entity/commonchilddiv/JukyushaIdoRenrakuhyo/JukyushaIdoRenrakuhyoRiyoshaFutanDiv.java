@@ -14,13 +14,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JukyushaIdoRenrakuhyoRiyoshaFutanDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("radGemmenShinseichuKubun")
+    private RadioButton radGemmenShinseichuKubun;
     @JsonProperty("radRiyoshaFutanKubunCode")
     private RadioButton radRiyoshaFutanKubunCode;
     @JsonProperty("txtKyufuritsu")
@@ -34,6 +36,24 @@ public class JukyushaIdoRenrakuhyoRiyoshaFutanDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradGemmenShinseichuKubun
+     * @return radGemmenShinseichuKubun
+     */
+    @JsonProperty("radGemmenShinseichuKubun")
+    public RadioButton getRadGemmenShinseichuKubun() {
+        return radGemmenShinseichuKubun;
+    }
+
+    /*
+     * setradGemmenShinseichuKubun
+     * @param radGemmenShinseichuKubun radGemmenShinseichuKubun
+     */
+    @JsonProperty("radGemmenShinseichuKubun")
+    public void setRadGemmenShinseichuKubun(RadioButton radGemmenShinseichuKubun) {
+        this.radGemmenShinseichuKubun = radGemmenShinseichuKubun;
+    }
+
     /*
      * getradRiyoshaFutanKubunCode
      * @return radRiyoshaFutanKubunCode

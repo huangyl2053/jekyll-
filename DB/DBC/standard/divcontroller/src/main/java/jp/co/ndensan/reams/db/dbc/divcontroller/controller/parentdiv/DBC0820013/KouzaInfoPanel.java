@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820013;
 
-import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseijoho.ShokanShinseiJoho;
+import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.Kouz
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820013.KouzaInfoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
+import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -83,7 +85,7 @@ public class KouzaInfoPanel {
         handler.loadヘッダエリア(識別コード, 被保険者番号);
         if (登録.equals(画面モード)) {
             handler.load登録(被保険者番号, サービス年月, 整理番号, 支給申請情報.is国保連再送付フラグ());
-            handler.load申請共通エリア(null, null, 新規);
+            handler.load申請共通エリア(サービス年月, 整理番号, 新規);
         } else if (修正.equals(画面モード)) {
             handler.load申請共通エリア(サービス年月, 整理番号, 修正);
         } else if (削除.equals(画面モード)) {
@@ -138,19 +140,35 @@ public class KouzaInfoPanel {
                 ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        getHandler(div).申請既存チェック(整理番号, サービス年月, 被保険者番号);
-        if (!変更有無チェック) {
+        if (変更有無チェック) {
             ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_口座, NUM_1);
         }
-        ShokanShinseiJoho 申請決定用情報 = getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.償還払支給申請データ, 申請決定用情報.get償還払支給申請情報());
+        ShokanShinsei 償還払支給申請データ = getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
+        DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        if (DB == null) {
+            DB = new DbJohoViewState();
+        }
+        ShokanShinsei shokanShinsei = DB.get償還払支給申請();
+        if (shokanShinsei == null) {
+            DB.set償還払支給申請(償還払支給申請データ);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+        } else {
+            getHandler(div).同項目に設定(shokanShinsei, 償還払支給申請データ);
+            DB.set償還払支給申請(shokanShinsei);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+        }
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         if (登録.equals(画面モード)) {
             setViewState(修正);
         } else {
             setViewState(画面モード);
         }
-        return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.申請情報).respond();
+        if (登録.equals(画面モード) && !変更有無チェック) {
+            return ResponseData.of(div).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.申請情報).respond();
+        }
+
     }
 
     /**
@@ -169,13 +187,29 @@ public class KouzaInfoPanel {
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         getHandler(div).申請既存チェック(整理番号, サービス年月, 被保険者番号);
-        if (!変更有無チェック) {
+        if (変更有無チェック) {
             ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_口座, NUM_1);
         }
-        ShokanShinseiJoho 申請決定用情報 = getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.償還払支給申請データ, 申請決定用情報.get償還払支給申請情報());
+        ShokanShinsei 償還払支給申請データ = getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
+        DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        if (DB == null) {
+            DB = new DbJohoViewState();
+        }
+        ShokanShinsei shokanShinsei = DB.get償還払支給申請();
+        if (shokanShinsei == null) {
+            DB.set償還払支給申請(償還払支給申請データ);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+        } else {
+            getHandler(div).同項目に設定(shokanShinsei, 償還払支給申請データ);
+            DB.set償還払支給申請(shokanShinsei);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+        }
         setViewState(画面モード);
-        return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.サービス提供証明書).respond();
+        if (登録.equals(画面モード) && !変更有無チェック) {
+            return ResponseData.of(div).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.サービス提供証明書).respond();
+        }
     }
 
     /**
@@ -194,13 +228,29 @@ public class KouzaInfoPanel {
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         getHandler(div).申請既存チェック(整理番号, サービス年月, 被保険者番号);
-        if (!変更有無チェック) {
+        if (変更有無チェック) {
             ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_口座, NUM_1);
         }
-        ShokanShinseiJoho 申請決定用情報 = getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.償還払支給申請データ, 申請決定用情報.get償還払支給申請情報());
+        ShokanShinsei 償還払支給申請データ = getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
+        DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        if (DB == null) {
+            DB = new DbJohoViewState();
+        }
+        ShokanShinsei shokanShinsei = DB.get償還払支給申請();
+        if (shokanShinsei == null) {
+            DB.set償還払支給申請(償還払支給申請データ);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+        } else {
+            getHandler(div).同項目に設定(shokanShinsei, 償還払支給申請データ);
+            DB.set償還払支給申請(shokanShinsei);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+        }
         setViewState(画面モード);
-        return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.償還払決定情報).respond();
+        if (登録.equals(画面モード) && !変更有無チェック) {
+            return ResponseData.of(div).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.償還払決定情報).respond();
+        }
     }
 
     /**
@@ -253,7 +303,7 @@ public class KouzaInfoPanel {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         getHandler(div).申請既存チェック(整理番号, サービス年月, 被保険者番号);
         Boolean 変更有無チェック = getHandler(div).変更有無チェック(entityView);
-        if (!変更有無チェック) {
+        if (変更有無チェック) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
             }
@@ -264,27 +314,30 @@ public class KouzaInfoPanel {
         }
         try {
             if (!ResponseHolder.isReRequest()) {
+                ShokanShinsei 償還払支給申請データ = getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
+                DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+                if (DB == null) {
+                    DB = new DbJohoViewState();
+                }
+                ShokanShinsei shokanShinsei = DB.get償還払支給申請();
+                if (shokanShinsei == null) {
+                    DB.set償還払支給申請(償還払支給申請データ);
+                    ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+                } else {
+                    getHandler(div).同項目に設定(shokanShinsei, 償還払支給申請データ);
+                    DB.set償還払支給申請(shokanShinsei);
+                    ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+                }
                 RString 申請書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance().
                         shinseishoInputCheck(ViewStateHolder.get(ViewStateKeys.申請書入力済フラグ_口座, RString.class));
                 if (入力完了.equals(申請書入力済区分)) {
                     ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, NUM_1);
                 } else if (申請書入力未済あり.equals(申請書入力済区分)) {
                     ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, NUM_2);
-                    throw new ApplicationException(DbcErrorMessages.種類支給限度額不正.getMessage());
+                    throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_申請情報未入力.getMessage());
                 } else if (決定情報未完了.equals(申請書入力済区分)) {
                     ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, NUM_3);
-                    if (!ResponseHolder.isReRequest()) {
-                        QuestionMessage message = new QuestionMessage("", "償還決定情報が登録されていません。よろしいですか？");
-                        return ResponseData.of(div).addMessage(message).respond();
-                    }
-                    if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-                        // getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
-                        div.getCcdKanryoMessage().setMessage(get完了メッセージ(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class)),
-                                被保険者番号.getColumnValue(),
-                                div.getPanelOne().getCcdKaigoAtenaInfo().get氏名漢字(), true);
-                        return ResponseData.of(div).setState(DBC0110011StateName.完了状態);
-                    }
+                    データ保存処理(div);
                 }
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -349,6 +402,34 @@ public class KouzaInfoPanel {
             return 削除は正常に終了しました;
         }
         return RString.EMPTY;
+    }
+
+    private ResponseData<KouzaInfoPanelDiv> データ保存処理(KouzaInfoPanelDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        FlexibleYearMonth サービス年月;
+        サービス年月 = new FlexibleYearMonth((new RDate(
+                ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
+                toString())).getYearMonth().toDateString());
+        FlexibleDate 決定日 = ViewStateHolder.get(ViewStateKeys.決定日, FlexibleDate.class);
+        //RString 修正前支給区分 = ViewStateHolder.get(ViewStateKeys.修正前支給区分, RString.class);
+        RString 修正前支給区分 = ViewStateHolder.get(ViewStateKeys.修正前支給区分, RString.class);
+        DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage("", "償還決定情報が登録されていません。よろしいですか？");
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            SyokanbaraihiShikyuShinseiKetteManager.createInstance().insupdShokan(DB, 修正前支給区分,
+                    決定日, 被保険者番号, サービス年月, 整理番号, 画面モード, 識別コード);
+            div.getCcdKanryoMessage().setMessage(get完了メッセージ(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class)),
+                    被保険者番号.getColumnValue(),
+                    div.getPanelOne().getCcdKaigoAtenaInfo().get氏名漢字(), true);
+            return ResponseData.of(div).setState(DBC0110011StateName.完了状態);
+        }
+        return createResponse(div);
     }
 
 }

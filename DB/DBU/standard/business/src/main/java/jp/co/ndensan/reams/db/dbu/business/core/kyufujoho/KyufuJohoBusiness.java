@@ -171,4 +171,58 @@ public class KyufuJohoBusiness {
     public int get改修費用合計() {
         return entity.get改修費用合計();
     }
+
+    /**
+     * 被保険者番号を取得します。
+     *
+     * @return 被保険者番号
+     */
+    public RString get被保険者番号() {
+        return entity.get被保険者番号();
+    }
+
+    /**
+     * 整理番号を取得します。
+     *
+     * @return 整理番号
+     */
+    public RString get整理番号() {
+        return entity.get整理番号();
+    }
+
+    /**
+     * 事業所番号を取得します。
+     *
+     * @return 事業所番号
+     */
+    public RString get事業所番号() {
+        return entity.get事業所番号();
+    }
+
+    /**
+     * 様式番号を取得します。
+     *
+     * @return 様式番号
+     */
+    public RString get様式番号() {
+        return entity.get様式番号();
+    }
+
+    /**
+     * 明細番号を取得します。
+     *
+     * @return 明細番号
+     */
+    public RString get明細番号() {
+        return entity.get明細番号();
+    }
+
+    /**
+     * 識別番号を取得します。
+     *
+     * @return 識別番号
+     */
+    public RString get識別番号() {
+        return entity.get識別番号();
+    }
 }

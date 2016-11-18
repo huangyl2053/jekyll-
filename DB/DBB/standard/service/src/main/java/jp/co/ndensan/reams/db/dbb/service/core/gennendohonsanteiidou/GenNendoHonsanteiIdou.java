@@ -793,7 +793,11 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 調定計算.get徴収方法の情報().toEntity();
         dbT2001ChoshuHohoEntity.setRirekiNo(調定計算.get徴収方法の情報().get履歴番号() + INT_1);
         dbT2001ChoshuHohoEntity.setState(EntityDataState.Added);
-        徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+        DbT2001ChoshuHohoEntity entity = 徴収方法Dac.selectByKey(dbT2001ChoshuHohoEntity.getFukaNendo(),
+                dbT2001ChoshuHohoEntity.getHihokenshaNo(), 調定計算.get徴収方法の情報().get履歴番号() + INT_1);
+        if (entity == null) {
+            徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+        }
     }
 
     private void create既存の賦課処理(CalculateFukaEntity 賦課計算の情報, FukaKokyoBatchParameter fukaKokyoBatchParameter,
@@ -869,7 +873,11 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報.toEntity();
             dbT2001ChoshuHohoEntity.setRirekiNo(徴収方法の情報.get履歴番号() + INT_1);
             dbT2001ChoshuHohoEntity.setState(EntityDataState.Added);
-            徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+            DbT2001ChoshuHohoEntity entity = 徴収方法Dac.selectByKey(dbT2001ChoshuHohoEntity.getFukaNendo(),
+                    dbT2001ChoshuHohoEntity.getHihokenshaNo(), 徴収方法の情報.get履歴番号() + INT_1);
+            if (entity == null) {
+                徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+            }
         }
 
     }
@@ -1748,7 +1756,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     public void insert処理日付管理(GennendoIdoFukaProcessParameter processParameter, YMDHMS システム日時, RString 処理枝番,
             RString 年度内連番) {
         RString 年度連番;
-        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select最大年度内連番(processParameter.get賦課年度());
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select最大年度内連番_異動賦課(processParameter.get賦課年度());
         if (entity != null && !RString.isNullOrEmpty(entity.getNendoNaiRenban())) {
             年度連番 = new RString(String.valueOf(Integer.parseInt(entity.getNendoNaiRenban().toString()) + 1)).padZeroToLeft(INT_4);
         } else {

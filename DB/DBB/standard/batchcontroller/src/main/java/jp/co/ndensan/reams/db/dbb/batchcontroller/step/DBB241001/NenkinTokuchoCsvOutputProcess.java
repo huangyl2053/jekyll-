@@ -344,8 +344,8 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
         if (entity.getデータレコードEntity() == null || entity.getトレイラレコードEntity() == null) {
             return;
         }
-        shoriTaishoYM.setValue(get処理対象年月(entity.getトレイラレコードEntity().getTsuchiNaiyoCode(),
-                entity.getトレイラレコードEntity().getSakuseiYMD()));
+        shoriTaishoYM.setValue(get処理対象年月(entity.getデータレコードEntity().getTsuchiNaiyoCode(),
+                entity.getデータレコードEntity().getSakuseiYMD()));
         if (tmpEntity == null) {
             tmpEntity = entity.getトレイラレコードEntity();
             set合計(entity.getデータレコードEntity());

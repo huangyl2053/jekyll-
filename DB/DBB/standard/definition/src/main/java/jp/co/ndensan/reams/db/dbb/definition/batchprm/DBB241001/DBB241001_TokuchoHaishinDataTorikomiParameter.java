@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB241001;
 
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -17,5 +18,23 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBB241001_TokuchoHaishinDataTorikomiParameter extends BatchParameterBase {
+
+    private RString dumy;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param dumy dumy
+     */
+    public DBB241001_TokuchoHaishinDataTorikomiParameter(RString dumy) {
+        this.dumy = dumy;
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     */
+    public DBB241001_TokuchoHaishinDataTorikomiParameter() {
+    }
 
 }

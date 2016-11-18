@@ -295,7 +295,8 @@ public class KanendoFukaKakuteiHandler {
         HonsanteiIdoKanendoFukaKakutei fukaKakutei = InstanceProvider.create(HonsanteiIdoKanendoFukaKakutei.class);
         RDate 年月日 = div.getDgShoriNichiji().getDataSource().get(0).getTxtShoriYMD().getValue();
         RTime 時刻 = div.getDgShoriNichiji().getDataSource().get(0).getTxtShoriTime().getValue();
-        fukaKakutei.confirmFuka(new YMDHMS(年月日, 時刻));
+        FlexibleYear 調定年度 = div.getTxtChoteiNendo().getDomain();
+        fukaKakutei.confirmFuka(new YMDHMS(年月日, 時刻), 調定年度);
         div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource().removeAll(
                 div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(確定処理, true);
@@ -343,11 +344,12 @@ public class KanendoFukaKakuteiHandler {
             fukaKakuteiList.add(fukaKakuteiEntity);
         }
         HonsanteiIdoKanendoFukaKakutei fukaKakutei = InstanceProvider.create(HonsanteiIdoKanendoFukaKakutei.class);
+        FlexibleYear 調定年度 = div.getTxtChoteiNendo().getDomain();
         if (div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getTotalRecords() == div.
                 getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getSelectedItems().size()) {
-            fukaKakutei.deleteFuka(fukaKakuteiList, true);
+            fukaKakutei.deleteFuka(fukaKakuteiList, true, 調定年度);
         } else {
-            fukaKakutei.deleteFuka(fukaKakuteiList, false);
+            fukaKakutei.deleteFuka(fukaKakuteiList, false, 調定年度);
         }
         div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource().removeAll(
                 div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getSelectedItems());

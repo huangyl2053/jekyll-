@@ -6,29 +6,30 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820031;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKeigengaku;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShafukukeigenServiceResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.ShafukuKeigenGakuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.dgdShafukukeigenngaku_Row;
-import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShakaiFukushiHojinRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(社福軽減額）のクラスです。
@@ -44,6 +45,7 @@ public final class ShafukuKeigenGakuPanelHandler {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 確定する = new RString("Element1");
 
     private ShafukuKeigenGakuPanelHandler(ShafukuKeigenGakuPanelDiv div) {
         this.div = div;
@@ -62,27 +64,161 @@ public final class ShafukuKeigenGakuPanelHandler {
     /**
      * initialize
      *
-     * @param hojinKeigengakuEntityList hojinKeigengakuEntityList
+     * @param 法人軽減額リスト List<ShokanShakaiFukushiHojinKeigengakuResult>
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
+     * @param サービス年月 サービス年月
+     * @param 申請日 申請日
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
      */
-    public void initialize(List<ShokanShakaiFukushiHojinKeigengakuResult> hojinKeigengakuEntityList) {
+    public void initialize(List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト, ShikibetsuCode 識別コード,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月, RDate 申請日, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+        initialize法人軽減額リスト(法人軽減額リスト);
+
+        div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.getYearValue(), サービス年月.getMonthValue(), 1));
+        div.getPanelHead().getTxtShinseiYMD().setValue(申請日);
+        div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
+        div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
+        div.getPanelHead().getTxtShomeisho().setValue(様式番号);
+        div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(false);
+    }
+
+    private void initialize法人軽減額リスト(List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト) {
+        if (法人軽減額リスト.isEmpty()) {
+            return;
+        }
         List<dgdShafukukeigenngaku_Row> rowList = new ArrayList<>();
-        for (ShokanShakaiFukushiHojinKeigengakuResult shafukuKeigenGaku : hojinKeigengakuEntityList) {
+        for (ShokanShakaiFukushiHojinKeigengakuResult hojinKeigengakuResult : 法人軽減額リスト) {
+            ShokanShakaiFukushiHojinKeigengaku 法人軽減額 = hojinKeigengakuResult.getShokanShakai();
             dgdShafukukeigenngaku_Row row = new dgdShafukukeigenngaku_Row();
-            row.setDefaultDataName1(shafukuKeigenGaku.getShokanShakai()
-                    .getサービス種類コード().value());
-            row.setDefaultDataName2(new RString(shafukuKeigenGaku.getShokanShakai()
-                    .get軽減率().toString()));
-            row.getDefaultDataName3().setValue(new Decimal(shafukuKeigenGaku.getShokanShakai()
-                    .get受領すべき利用者負担の総額()));
-            row.getDefaultDataName4().setValue(new Decimal(shafukuKeigenGaku.getShokanShakai()
-                    .get軽減額()));
-            row.getDefaultDataName5().setValue(new Decimal(shafukuKeigenGaku.getShokanShakai()
-                    .get軽減後利用者負担額()));
-            row.setDefaultDataName6(shafukuKeigenGaku.getShokanShakai().get備考());
-            row.setDefaultDataName7(shafukuKeigenGaku.getShokanShakai().get連番());
+            if (null != 法人軽減額.toEntity().getState()) {
+                switch (法人軽減額.toEntity().getState()) {
+                    case Added:
+                        row.setRowState(RowState.Added);
+                        break;
+                    case Modified:
+                        row.setRowState(RowState.Modified);
+                        break;
+                    case Deleted:
+                        row.setRowState(RowState.Deleted);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            row.setDefaultDataName1(hojinKeigengakuResult.getServiceShuruiRyakusho());
+            row.setDefaultDataName2(法人軽減額.get軽減率() == null ? RString.EMPTY : new RString(法人軽減額.get軽減率().toString()));
+            row.getDefaultDataName3().setValue(new Decimal(法人軽減額.get受領すべき利用者負担の総額()));
+            row.getDefaultDataName4().setValue(new Decimal(法人軽減額.get軽減額()));
+            row.getDefaultDataName5().setValue(new Decimal(法人軽減額.get軽減後利用者負担額()));
+            row.setDefaultDataName6(法人軽減額.get備考());
+            row.setDefaultDataName7(法人軽減額.get連番());
+            row.setServiceShuruiCode(法人軽減額.getサービス種類コード() == null ? RString.EMPTY : 法人軽減額.getサービス種類コード().value());
             rowList.add(row);
         }
         div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().setDataSource(rowList);
+    }
+
+    /**
+     * 削除初期化
+     */
+    public void init_Delete() {
+        div.getPanelShafukukenngengaku().getBtnAdd().setDisabled(true);
+        div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().setReadOnly(true);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(false);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(確定する, true);
+    }
+
+    /**
+     * 法人軽減額リストを取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス年月 サービス年月
+     * @param 整理番号 整理番号
+     * @param 申請日 申請日
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
+     * @return 法人軽減額リスト
+     */
+    public List<ShokanShakaiFukushiHojinKeigengakuResult> get法人軽減額リスト(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
+            RString 整理番号, RDate 申請日, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+        List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト = new ArrayList<>();
+        for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource()) {
+            ShokanShakaiFukushiHojinKeigengaku 法人軽減額 = new ShokanShakaiFukushiHojinKeigengaku(
+                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, row.getDefaultDataName7());
+            法人軽減額 = 法人軽減額.createBuilderForEdit()
+                    .setサービス種類コード(new ServiceShuruiCode(row.getServiceShuruiCode()))
+                    .set軽減率(new Decimal(row.getDefaultDataName2().toString()))
+                    .set受領すべき利用者負担の総額(row.getDefaultDataName3().getValue().intValue())
+                    .set軽減額(row.getDefaultDataName4().getValue().intValue())
+                    .set軽減後利用者負担額(row.getDefaultDataName5().getValue().intValue())
+                    .set備考(row.getDefaultDataName6())
+                    .build();
+            if (null != row.getRowState()) {
+                switch (row.getRowState()) {
+                    case Added:
+                        法人軽減額 = 法人軽減額.added();
+                        break;
+                    case Modified:
+                        法人軽減額 = 法人軽減額.modifiedModel();
+                        break;
+                    case Deleted:
+                        法人軽減額 = 法人軽減額.deleted();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            ShokanShakaiFukushiHojinKeigengakuResult keigengakuResult
+                    = new ShokanShakaiFukushiHojinKeigengakuResult(法人軽減額, row.getDefaultDataName1());
+            法人軽減額リスト.add(keigengakuResult);
+        }
+        return 法人軽減額リスト;
+    }
+
+    /**
+     * サービス種類DDLを設定する
+     *
+     * @param サービス種類リスト List<ShafukukeigenServiceResult>
+     * @param 追加フラグ 追加フラグ
+     */
+    public void setサービス種類DDL(List<ShafukukeigenServiceResult> サービス種類リスト, boolean 追加フラグ) {
+        List<KeyValueDataSource> サービス種類 = new ArrayList<>();
+        if (追加フラグ) {
+            サービス種類.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        }
+        for (ShafukukeigenServiceResult entity : サービス種類リスト) {
+            サービス種類.add(new KeyValueDataSource(entity.getEntity().getServiceShuruiCode().getColumnValue(),
+                    entity.getEntity().getServiceShuruiMeisho()));
+        }
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui().setDataSource(サービス種類);
+    }
+
+    /**
+     * 軽減率DDLを設定する
+     *
+     * @param 軽減額リスト List<ShakaiFukushiHojinRiyoshaFutanKeigen>
+     * @param 追加フラグ 追加フラグ
+     */
+    public void set軽減率DDL(List<ShakaiFukushiHojinRiyoshaFutanKeigen> 軽減額リスト, boolean 追加フラグ) {
+        List<KeyValueDataSource> 軽減率リスト = new ArrayList<>();
+        if (追加フラグ) {
+            軽減率リスト.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        }
+        for (int i = 0; i < 軽減額リスト.size(); i++) {
+            Decimal 軽減率分子 = 軽減額リスト.get(i).get軽減率分子();
+            Decimal 軽減率分母 = 軽減額リスト.get(i).get軽減率分母();
+            if (軽減率分子 != null && 軽減率分母 != null && !Decimal.ZERO.equals(軽減率分母)) {
+                Decimal 軽減率 = 軽減率分子.divide(軽減率分母).roundHalfUpTo(1);
+                軽減率リスト.add(new KeyValueDataSource(new RString(i), new RString(軽減率.toString())));
+            }
+        }
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu().setDataSource(軽減率リスト);
     }
 
     /**
@@ -285,15 +421,33 @@ public final class ShafukuKeigenGakuPanelHandler {
     /**
      * initializeByModify
      */
-    public void initializeByModify() {
-        dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
-        set選択行(row);
+    public void initializeByAdd() {
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(true);
+        initializeByClean();
         setNotReadOnly();
     }
 
-    private void set選択行(dgdShafukukeigenngaku_Row row) {
+    /**
+     * initializeByModify
+     */
+    public void initializeByModify() {
+        set選択行();
+        setNotReadOnly();
+    }
+
+    /**
+     * initializeByDelete
+     */
+    public void initializeByDelete() {
+        set選択行();
+        setReadOnly();
+    }
+
+    private void set選択行() {
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(true);
+        dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui()
-                .setSelectedValue(row.getDefaultDataName1());
+                .setSelectedKey(row.getServiceShuruiCode());
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu()
                 .setSelectedValue(row.getDefaultDataName2());
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal()
@@ -304,39 +458,26 @@ public final class ShafukuKeigenGakuPanelHandler {
                 .setValue(row.getDefaultDataName5().getValue());
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtBikou()
                 .setValue(row.getDefaultDataName6());
-        div.getPanelShafukukenngengaku().getRowId().setValue(new Decimal(row.getId()));
-    }
-
-    /**
-     * initializeByDelete
-     */
-    public void initializeByDelete() {
-        dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
-        set選択行(row);
-        setReadOnly();
+        div.getPanelShafukukenngengaku().getRowId().setValue(new Decimal(row.getDefaultDataName7().toString()));
     }
 
     /**
      * initializeByCalculation
      */
     public void initializeByCalculation() {
-        if (div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu().getSelectedValue() != null
-                && !div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu().getSelectedValue().isEmpty()
-                && div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal() != null
-                && div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue() != null
-                && div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku() != null
-                && div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().getValue() != null) {
-            Decimal kengengakuData = new Decimal(new Decimal(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                    .getDdlKengenritsu().getSelectedValue().toString())
-                    .multiply(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal()
-                            .getValue()).intValue());
-            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().setValue(kengengakuData);
-            Decimal keigengoRiyoshaFutangakuData = new Decimal(((div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                    .getTxtRiyoshaFutangakuTotal().getValue())
-                    .subtract(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().getValue()))
-                    .intValue());
-            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku()
-                    .setValue(keigengoRiyoshaFutangakuData);
+        if (!RString.isNullOrEmpty(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu().getSelectedValue())
+                && div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue() != null) {
+            Decimal 軽減額 = div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue()
+                    .multiply(new Decimal(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                            .getDdlKengenritsu().getSelectedValue().toString()));
+            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().setValue(軽減額);
+
+            Decimal 軽減後利用者負担額 = div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue()
+                    .subtract(軽減額);
+            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku().setValue(軽減後利用者負担額);
+        } else {
+            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().clearValue();
+            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku().clearValue();
         }
     }
 
@@ -366,131 +507,140 @@ public final class ShafukuKeigenGakuPanelHandler {
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().clearValue();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku().clearValue();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtBikou().clearValue();
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
-    }
-
-    /**
-     * getSelectedRow
-     *
-     * @return dgdShafukukeigenngaku_Row row
-     */
-    public dgdShafukukeigenngaku_Row getSelectedRow() {
-        return div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource()
-                .get(Integer.parseInt(div.getPanelShafukukenngengaku().getRowId().getValue().toString()));
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(false);
     }
 
     /**
      * initializeByConfirm
      *
      * @param state RString
+     * @param 法人軽減額リスト List<ShokanShakaiFukushiHojinKeigengakuResult>
+     * @param サービス種類リスト List<ShafukukeigenServiceResult>
      */
-    public void initializeByConfirm(RString state) {
-        Boolean checkFlag = false;
+    public void initializeByConfirm(RString state, List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト,
+            List<ShafukukeigenServiceResult> サービス種類リスト) {
         if (修正.equals(state)) {
-            checkFlag = serviceChange(checkFlag);
-            if (checkFlag) {
-                RString selectValue = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedValue();
-                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(selectValue.toString()));
-            }
-            dgdShafukukeigenngaku_Row row = getSelectedRow();
-            Boolean 変更チェックFlag = 変更チェック(row);
-            dgdShafukukeigenngaku修正(変更チェックFlag, row);
-            initializeByClean();
-            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
+            checkサービス種類重複For修正();
+            boolean 変更チェックFlag = 変更チェック(法人軽減額リスト);
+            dgdShafukukeigenngaku修正(変更チェックFlag, サービス種類リスト);
         } else if (削除.equals(state)) {
-            dgdShafukukeigenngaku_Row row = getSelectedRow();
-            if (RowState.Added.equals(row.getRowState())) {
-                div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource().remove(row);
-            } else {
-                dgdShafukukeigenngaku削除(row);
-            }
-            initializeByClean();
-            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
+            dgdShafukukeigenngaku削除();
         } else if (登録.equals(state)) {
-            RString serviceValue = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedValue();
-            for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku()
-                    .getDataSource()) {
-                if (serviceValue.equals(row.getDefaultDataName1())) {
-                    checkFlag = true;
-                    break;
-                }
-            }
-            if (checkFlag) {
-                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(serviceValue.toString()));
-            }
-            dgdShafukukeigenngaku_Row newRow = new dgdShafukukeigenngaku_Row();
-            newRow.setRowState(RowState.Added);
-            newRow.setDefaultDataName1(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                    .getDdlServiceShurui().getSelectedValue());
-            newRow.setDefaultDataName2(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                    .getDdlKengenritsu().getSelectedValue());
-            newRow.getDefaultDataName3().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                    .getTxtRiyoshaFutangakuTotal().getValue());
-            newRow.getDefaultDataName4().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                    .getTxtKengengaku().getValue());
-            newRow.getDefaultDataName5().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                    .getTxtKeigengoRiyoshaFutangaku().getValue());
-            newRow.setDefaultDataName6(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                    .getTxtBikou().getValue());
-            div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource().add(newRow);
-            initializeByClean();
-            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
+            checkサービス種類重複For登録();
+            dgdShafukukeigenngaku登録(サービス種類リスト);
         }
+        initializeByClean();
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(false);
     }
 
-    private void dgdShafukukeigenngaku削除(dgdShafukukeigenngaku_Row row) {
-        if (RowState.Added.equals(row.getRowState())) {
-            row.setRowState(RowState.Added);
+    private void dgdShafukukeigenngaku削除() {
+        dgdShafukukeigenngaku_Row row = getSelectedRow();
+        if (RowState.Added == row.getRowState()) {
+            div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource().remove(row);
+            reset連番();
         } else {
             row.setRowState(RowState.Deleted);
         }
     }
 
-    private void dgdShafukukeigenngaku修正(Boolean 変更チェックFlag, dgdShafukukeigenngaku_Row row) {
-        if (変更チェックFlag) {
-            if (RowState.Added.equals(row.getRowState())) {
-                row.setRowState(RowState.Added);
-                row.setDefaultDataName1(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getDdlServiceShurui().getSelectedValue());
-                row.setDefaultDataName2(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getDdlKengenritsu().getSelectedValue());
-                row.getDefaultDataName3().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getTxtRiyoshaFutangakuTotal().getValue());
-                row.getDefaultDataName4().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getTxtKengengaku().getValue());
-                row.getDefaultDataName5().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getTxtKeigengoRiyoshaFutangaku().getValue());
-                row.setDefaultDataName6(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getTxtBikou().getValue());
-            } else {
-                row.setRowState(RowState.Modified);
-                row.setDefaultDataName1(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getDdlServiceShurui().getSelectedValue());
-                row.setDefaultDataName2(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getDdlKengenritsu().getSelectedValue());
-                row.getDefaultDataName3().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getTxtRiyoshaFutangakuTotal().getValue());
-                row.getDefaultDataName4().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getTxtKengengaku().getValue());
-                row.getDefaultDataName5().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getTxtKeigengoRiyoshaFutangaku().getValue());
-                row.setDefaultDataName6(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                        .getTxtBikou().getValue());
+    private void reset連番() {
+        List<dgdShafukukeigenngaku_Row> shafukukeigenngakuRows = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource();
+        if (shafukukeigenngakuRows == null || shafukukeigenngakuRows.isEmpty()) {
+            return;
+        }
+        for (int i = shafukukeigenngakuRows.size(); i > 0; i--) {
+            dgdShafukukeigenngaku_Row row = shafukukeigenngakuRows.get(i - 1);
+            if (RowState.Added == row.getRowState()) {
+                row.setDefaultDataName7(new RString(shafukukeigenngakuRows.size() + 1 - i));
             }
         }
     }
 
-    private Boolean serviceChange(Boolean checkFlag) {
-        Integer id = div.getPanelShafukukenngengaku().getRowId().getValue().intValue();
-        RString serviceValue = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedValue();
-        for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku()
-                .getDataSource()) {
-            if (id != row.getId() && serviceValue.equals(row.getDefaultDataName1())) {
-                checkFlag = true;
-                break;
+    private void dgdShafukukeigenngaku修正(boolean 変更チェックFlag, List<ShafukukeigenServiceResult> サービス種類リスト) {
+        dgdShafukukeigenngaku_Row row = getSelectedRow();
+        if (変更チェックFlag) {
+            if (RowState.Added != row.getRowState()) {
+                row.setRowState(RowState.Modified);
+            }
+        } else {
+            row.setRowState(RowState.Unchanged);
+        }
+        row.setDefaultDataName1(getサービス種類略称(サービス種類リスト));
+        row.setDefaultDataName2(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getDdlKengenritsu().getSelectedValue());
+        row.getDefaultDataName3().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getTxtRiyoshaFutangakuTotal().getValue());
+        row.getDefaultDataName4().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getTxtKengengaku().getValue());
+        row.getDefaultDataName5().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getTxtKeigengoRiyoshaFutangaku().getValue());
+        row.setDefaultDataName6(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getTxtBikou().getValue());
+        row.setServiceShuruiCode(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getDdlServiceShurui().getSelectedKey());
+    }
+
+    private void dgdShafukukeigenngaku登録(List<ShafukukeigenServiceResult> サービス種類リスト) {
+        dgdShafukukeigenngaku_Row newRow = new dgdShafukukeigenngaku_Row();
+        newRow.setRowState(RowState.Added);
+        newRow.setDefaultDataName1(getサービス種類略称(サービス種類リスト));
+        newRow.setDefaultDataName2(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getDdlKengenritsu().getSelectedValue());
+        newRow.getDefaultDataName3().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getTxtRiyoshaFutangakuTotal().getValue());
+        newRow.getDefaultDataName4().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getTxtKengengaku().getValue());
+        newRow.getDefaultDataName5().setValue(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getTxtKeigengoRiyoshaFutangaku().getValue());
+        newRow.setDefaultDataName6(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getTxtBikou().getValue());
+        newRow.setDefaultDataName7(new RString(Integer.parseInt(div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku()
+                .getDataSource().get(0).getDefaultDataName7().toString()) + 1));
+        newRow.setServiceShuruiCode(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getDdlServiceShurui().getSelectedKey());
+        div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource().add(0, newRow);
+    }
+
+    private RString getサービス種類略称(List<ShafukukeigenServiceResult> サービス種類リスト) {
+        RString サービス種類コード = div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
+                .getDdlServiceShurui().getSelectedKey();
+        for (ShafukukeigenServiceResult serviceResult : サービス種類リスト) {
+            if (サービス種類コード.equals(serviceResult.getEntity().getServiceShuruiCode().getColumnValue())) {
+                return serviceResult.getEntity().getServiceShuruiRyakusho();
             }
         }
-        return checkFlag;
+        return RString.EMPTY;
+    }
+
+    private void checkサービス種類重複For修正() {
+        RString rowNo = new RString(div.getPanelShafukukenngengaku().getRowId().getValue().intValue());
+        RString サービス種類コード = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedKey();
+        for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource()) {
+            if (!row.getDefaultDataName7().equals(rowNo) && サービス種類コード.equals(row.getServiceShuruiCode())) {
+                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().
+                        replace(div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedValue().toString()));
+            }
+        }
+    }
+
+    private void checkサービス種類重複For登録() {
+        RString サービス種類コード = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedKey();
+        for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource()) {
+            if (サービス種類コード.equals(row.getServiceShuruiCode())) {
+                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().
+                        replace(div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedValue().toString()));
+            }
+        }
+    }
+
+    private dgdShafukukeigenngaku_Row getSelectedRow() {
+        RString rowId = new RString(div.getPanelShafukukenngengaku().getRowId().getValue().toString());
+        for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource()) {
+            if (rowId.equals(row.getDefaultDataName7())) {
+                return row;
+            }
+        }
+        return null;
     }
 
     /**
@@ -501,9 +651,9 @@ public final class ShafukuKeigenGakuPanelHandler {
     public boolean is内容変更状態() {
         for (dgdShafukukeigenngaku_Row ddgList : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku()
                 .getDataSource()) {
-            if (RowState.Modified.equals(ddgList.getRowState())
-                    || RowState.Added.equals(ddgList.getRowState())
-                    || RowState.Deleted.equals(ddgList.getRowState())) {
+            if (RowState.Modified == ddgList.getRowState()
+                    || RowState.Added == ddgList.getRowState()
+                    || RowState.Deleted == ddgList.getRowState()) {
                 return true;
             }
         }
@@ -511,153 +661,41 @@ public final class ShafukuKeigenGakuPanelHandler {
     }
 
     /**
-     * 内容の破棄
+     * 受領すべき利用者負担の総額の総額を設定します。
      *
-     * @param list List<ShokanShakaiFukushiHojinKeigengakuResult>
+     * @param サービス種類集計情報 List<ShafukukeigenServiceResult>
      */
-    public void 内容の破棄(List<ShokanShakaiFukushiHojinKeigengakuResult> list) {
-        initialize(list);
-    }
-
-    /**
-     * 削除Save
-     *
-     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
-     */
-    public void 削除Save(ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
-        HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
-        FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
-        RString 整理番号 = meisaiPar.get整理番号();
-        JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
-        RString 様式番号 = meisaiPar.get様式番号();
-        RString 明細番号 = meisaiPar.get明細番号();
-        SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(被保険者番号, サービス年月,
-                整理番号, 事業者番号, 様式番号, 明細番号);
-    }
-
-    /**
-     * 登録Save
-     *
-     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
-     * @param hojinKeigengakuEntityList
-     * List<ShokanShakaiFukushiHojinKeigengakuResult>
-     */
-    public void 登録Save(ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
-            List<ShokanShakaiFukushiHojinKeigengakuResult> hojinKeigengakuEntityList) {
-        HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
-        FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
-        JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
-        RString 様式番号 = meisaiPar.get様式番号();
-        RString 明細番号 = meisaiPar.get明細番号();
-        int max連番 = 0;
-        List<ShokanShakaiFukushiHojinKeigengaku> entityList1 = new ArrayList<>();
-        Map<RString, ShokanShakaiFukushiHojinKeigengaku> map = new HashMap<>();
-        for (ShokanShakaiFukushiHojinKeigengakuResult entityModified : hojinKeigengakuEntityList) {
-            map.put(entityModified.getShokanShakai().get連番(),
-                    entityModified.getShokanShakai());
-            if (max連番 < Integer.valueOf(entityModified.getShokanShakai().get連番().toString())) {
-                max連番 = Integer.valueOf(entityModified.getShokanShakai().get連番().toString());
+    public void set受領すべき利用者負担の総額(List<ShafukukeigenServiceResult> サービス種類集計情報) {
+        RString コード = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedKey();
+        for (ShafukukeigenServiceResult entity : サービス種類集計情報) {
+            if (コード.equals(entity.getEntity().getServiceShuruiCode().getColumnValue())) {
+                div.getPanelShafukukenngengaku().getTxtRiyoshaFutangakuTotal()
+                        .setValue(new Decimal(entity.getEntity().getRiyoshaFutangaku()));
+                return;
             }
         }
-        for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku()
-                .getDataSource()) {
-            if (RowState.Modified.equals(row.getRowState())) {
-                ShokanShakaiFukushiHojinKeigengaku entityModified = map.get(row.getDefaultDataName7());
-                entityModified = buildModified(entityModified, row);
-                entityList1.add(entityModified.modifiedModel());
-            } else if (RowState.Deleted.equals(row.getRowState())) {
-                ShokanShakaiFukushiHojinKeigengaku entityDeleted = map.get(row.getDefaultDataName7());
-                entityDeleted = entityDeleted.deleted();
-                entityList1.add(entityDeleted);
-            } else if (RowState.Added.equals(row.getRowState())) {
-                max連番 = max連番 + 1;
-                RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).
-                        nextString();
-                ShokanShakaiFukushiHojinKeigengaku entityAdded = new ShokanShakaiFukushiHojinKeigengaku(
-                        被保険者番号,
-                        サービス年月,
-                        整理番号,
-                        事業者番号,
-                        様式番号,
-                        明細番号,
-                        new RString(String.valueOf(max連番)).padZeroToLeft(2)).createBuilderForEdit().build();
-                entityAdded = buildAdded(entityAdded, row);
-                entityList1.add(entityAdded);
+        div.getPanelShafukukenngengaku().getTxtRiyoshaFutangakuTotal().clearValue();
+    }
+
+    private boolean 変更チェック(List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト) {
+        RString rowNo = new RString(div.getPanelShafukukenngengaku().getRowId().getValue().intValue());
+        for (ShokanShakaiFukushiHojinKeigengakuResult hojinKeigengakuResult : 法人軽減額リスト) {
+            ShokanShakaiFukushiHojinKeigengaku 法人軽減額 = hojinKeigengakuResult.getShokanShakai();
+            if (法人軽減額.get連番().equals(rowNo)) {
+                return !法人軽減額.getサービス種類コード().getColumnValue().equals(div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedKey())
+                        || !法人軽減額.get軽減率().equals(new Decimal(div.getPanelShafukukenngengaku().getDdlKengenritsu().getSelectedValue().toString()))
+                        || !new Decimal(法人軽減額.get受領すべき利用者負担の総額()).equals(div.getTxtRiyoshaFutangakuTotal().getValue())
+                        || !new Decimal(法人軽減額.get軽減額()).equals(div.getTxtKengengaku().getValue())
+                        || !new Decimal(法人軽減額.get軽減後利用者負担額()).equals(div.getTxtKeigengoRiyoshaFutangaku().getValue())
+                        || !法人軽減額.get備考().equals(div.getTxtBikou().getValue());
             }
         }
-        SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShakaiFukushiHojinKeigengaku(entityList1);
-
-    }
-
-    private ShokanShakaiFukushiHojinKeigengaku buildModified(ShokanShakaiFukushiHojinKeigengaku entity,
-            dgdShafukukeigenngaku_Row row) {
-        entity = entity.createBuilderForEdit()
-                .setサービス種類コード(new ServiceShuruiCode(row.getDefaultDataName1()))
-                .set軽減率(new Decimal(row.getDefaultDataName2().toString()))
-                .set受領すべき利用者負担の総額(row.getDefaultDataName3().getValue().intValue())
-                .set軽減額(row.getDefaultDataName4().getValue().intValue())
-                .set軽減後利用者負担額(row.getDefaultDataName5().getValue().intValue())
-                .set備考(row.getDefaultDataName6())
-                .build();
-        return entity;
-    }
-
-    private ShokanShakaiFukushiHojinKeigengaku buildAdded(ShokanShakaiFukushiHojinKeigengaku entity,
-            dgdShafukukeigenngaku_Row row) {
-        if (!row.getDefaultDataName1().isEmpty()) {
-            entity = entity.createBuilderForEdit()
-                    .setサービス種類コード(new ServiceShuruiCode(row.getDefaultDataName1())).build();
-        }
-        if (!row.getDefaultDataName2().isEmpty()) {
-            entity = entity.createBuilderForEdit()
-                    .set軽減率(new Decimal(row.getDefaultDataName2().toString())).build();
-        }
-        if (row.getDefaultDataName3().getValue() != null) {
-            entity = entity.createBuilderForEdit()
-                    .set受領すべき利用者負担の総額(row.getDefaultDataName3().getValue().intValue()).build();
-        }
-        if (row.getDefaultDataName4().getValue() != null) {
-            entity = entity.createBuilderForEdit()
-                    .set軽減額(row.getDefaultDataName4().getValue().intValue()).build();
-        }
-        if (row.getDefaultDataName5().getValue() != null) {
-            entity = entity.createBuilderForEdit()
-                    .set軽減後利用者負担額(row.getDefaultDataName5().getValue().intValue()).build();
-        }
-        if (!row.getDefaultDataName6().isEmpty()) {
-            entity = entity.createBuilderForEdit()
-                    .set備考(row.getDefaultDataName6()).build();
-        }
-        return entity;
-    }
-
-    private Boolean 変更チェック(dgdShafukukeigenngaku_Row row) {
-        Boolean flag = false;
-        if (!row.getDefaultDataName1().equals(div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedValue())) {
-            flag = true;
-        }
-        if (!row.getDefaultDataName2().equals(div.getPanelShafukukenngengaku().getDdlKengenritsu().getSelectedValue())) {
-            flag = true;
-        }
-        if (!row.getDefaultDataName3().getValue().equals(div.getTxtRiyoshaFutangakuTotal().getValue())) {
-            flag = true;
-        }
-        if (!row.getDefaultDataName4().getValue().equals(div.getTxtKengengaku().getValue())) {
-            flag = true;
-        }
-        if (!row.getDefaultDataName5().getValue().equals(div.getTxtKeigengoRiyoshaFutangaku().getValue())) {
-            flag = true;
-        }
-        if (!row.getDefaultDataName6().equals(div.getTxtBikou().getValue())) {
-            flag = true;
-        }
-        return flag;
+        return true;
     }
 
     private void setReadOnly() {
         div.getDdlServiceShurui().setReadOnly(true);
         div.getDdlKengenritsu().setReadOnly(true);
-        div.getTxtRiyoshaFutangakuTotal().setReadOnly(true);
         div.getTxtKengengaku().setReadOnly(true);
         div.getTxtKeigengoRiyoshaFutangaku().setReadOnly(true);
         div.getTxtBikou().setReadOnly(true);
@@ -666,9 +704,9 @@ public final class ShafukuKeigenGakuPanelHandler {
     private void setNotReadOnly() {
         div.getDdlServiceShurui().setReadOnly(false);
         div.getDdlKengenritsu().setReadOnly(false);
-        div.getTxtRiyoshaFutangakuTotal().setReadOnly(false);
         div.getTxtKengengaku().setReadOnly(false);
         div.getTxtKeigengoRiyoshaFutangaku().setReadOnly(false);
         div.getTxtBikou().setReadOnly(false);
     }
+
 }

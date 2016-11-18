@@ -16,6 +16,12 @@
         <result property="自己適用終了" column="自己終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="サービス提供年月" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="サービス分類コード" column="serviceBunrruicode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="整理番号" column="整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業所番号" column="事業所番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="様式番号" column="様式番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="明細番号" column="明細番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="識別番号" column="識別番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="購入金額" column="購入金額"  />
         <result property="保険請求額" column="保険請求額"  />
         <result property="利用者負担額" column="利用者負担額"  />
@@ -68,7 +74,6 @@
              AND #{開始年月} <![CDATA[<=]]> "DbT3048"."serviceTeikyoYM"  
              AND "DbT3048"."serviceTeikyoYM" <![CDATA[<=]]> #{終了年月} 
              AND "DbT3036"."shikyuHushikyuKetteiKubun" = #{支給不支給}
-        
     </select>
     
     <select id="get保険請求負担額"
@@ -177,8 +182,11 @@
             resultMap="getKyufujohoentity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KyufuJohoParamter" resultOrdered="true">
         SELECT
-            "DbT3033"."serviceTeikyoYM" 
+            "DbT3033"."serviceTeikyoYM"
             ,"DbT7130"."serviceBunrruicode"
+            ,"DbT3033"."hiHokenshaNo" AS "被保険者番号"
+            ,"DbT3033"."seiriNo" AS "整理番号"
+            ,"DbT3033"."inputShikibetsuNo" AS "識別番号"
         FROM
             rgdb."DbT3033KyufujissekiShukei" AS "DbT3033" 
         INNER JOIN rgdb."DbT7130KaigoServiceShurui" AS "DbT7130" 
@@ -189,5 +197,29 @@
             AND "DbT7130"."serviceBunrruicode" in 
          <foreach collection="serviceBunrruicodelist" item="code" open="(" separator="," close=")"> #{code} </foreach>
          ORDER BY "DbT3033"."serviceTeikyoYM"
+    </select>
+    
+    <select id="getViewState償還払い状況照会"
+            resultMap="getKyufujohoentity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KyufuJohoParamter" resultOrdered="true">
+        SELECT
+        "DbT3048"."hiHokenshaNo" AS "被保険者番号"
+        , "DbT3048"."serviceTeikyoYM"
+        , "DbT3048"."seiriNo" AS "整理番号"
+        , "DbT3048"."jigyoshaNo" AS "事業所番号"
+        , "DbT3048"."yoshikiNo" AS "様式番号"
+        , "DbT3048"."meisaiNo" AS "明細番号" 
+        FROM
+        rgdb."DbT3048ShokanFukushiYoguHanbaihi" AS "DbT3048" 
+        INNER JOIN rgdb."DbT3036ShokanHanteiKekka" AS "DbT3036" 
+        ON "DbT3048"."hiHokenshaNo" = "DbT3036"."hiHokenshaNo" 
+        AND "DbT3048"."serviceTeikyoYM" = "DbT3036"."serviceTeikyoYM" 
+        AND "DbT3048"."seiriNo" = "DbT3036"."seiriNo" 
+        WHERE
+        "DbT3048"."hiHokenshaNo" = #{被保険者番号} 
+        AND #{サービス提供年月} <![CDATA[<=]]> "DbT3048"."serviceTeikyoYM" 
+        AND "DbT3048"."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月} 
+        AND "DbT3036"."shikyuHushikyuKetteiKubun" = '1'
+        LIMIT 1
     </select>
 </mapper>

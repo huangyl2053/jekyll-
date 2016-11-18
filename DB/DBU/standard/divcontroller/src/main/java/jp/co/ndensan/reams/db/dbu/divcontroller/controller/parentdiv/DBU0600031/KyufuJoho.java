@@ -7,16 +7,26 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0600031
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KojinKakuteiKey;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
+import jp.co.ndensan.reams.db.dbu.business.core.kyufujoho.KyufuJohoBusiness;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KounyukingakuParamter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyufujoho.KyufuJohoParamter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600031.DBU0600031TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600031.KyufuJohoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0600031.KyufuJohoHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.kyufujoho.KyufuJohoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -126,6 +136,17 @@ public class KyufuJoho {
      * @return ResponseData<KyufuJohoDiv>
      */
     public ResponseData<KyufuJohoDiv> onClick_btnShoukanHaraiJoho(KyufuJohoDiv div) {
+        KounyukingakuParamter konnendo = getHandler(div).set今年度抽出範囲(key);
+        KyufuJohoBusiness 償還払請求基本 = kyufujohofinder.getViewState償還払い状況照会(konnendo);
+        ServiceTeiKyoShomeishoParameter parameter = new ServiceTeiKyoShomeishoParameter(new HihokenshaNo(償還払請求基本.get被保険者番号()),
+                new FlexibleYearMonth(償還払請求基本.getサービス提供年月().toString()),
+                償還払請求基本.get整理番号(),
+                new JigyoshaNo(償還払請求基本.get事業所番号()),
+                RString.EMPTY,
+                償還払請求基本.get明細番号(),
+                RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parameter);
+        ViewStateHolder.put(ViewStateKeys.様式番号, 償還払請求基本.get様式番号());
         return ResponseData.of(div).respond();
     }
 
@@ -146,6 +167,25 @@ public class KyufuJoho {
      * @return ResponseData<KaigoSikakuTokusouDiv>
      */
     public ResponseData<KyufuJohoDiv> onClick_btnKyufuZisseki(KyufuJohoDiv div) {
+        RDate date = RDate.getNowDate();
+        List<KyufuJohoBusiness> 給付実績基本集計 = kyufujohofinder.getサービス利用状況情報(KyufuJohoParamter.createParameter(
+                key.get被保険者番号().value(), new RString((date.getYearMonth().minusMonth(YEAR_3).toString())),
+                setサービス分類コード(div))).records();
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 給付実績基本集計.get(0).getサービス提供年月());
+        KyufuJissekiPrmBusiness kyufujissekiprmbusiness = new KyufuJissekiPrmBusiness();
+        DbT3017KyufujissekiKihonEntity dbt3017kyufujissekikihonentity = new DbT3017KyufujissekiKihonEntity();
+        if (給付実績基本集計.size() > 0) {
+            dbt3017kyufujissekikihonentity.setSeiriNo(給付実績基本集計.get(0).get整理番号());
+            dbt3017kyufujissekikihonentity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(給付実績基本集計.get(0).get識別番号()));
+        }
+        KyufujissekiKihon kyufujissekikihon = new KyufujissekiKihon(dbt3017kyufujissekikihonentity);
+        List<KyufujissekiKihon> 給付実績基本情報 = new ArrayList();
+        給付実績基本情報.add(kyufujissekikihon);
+//        kyufujissekiprmbusiness.setCsData_A(給付実績基本情報);
+        KojinKakuteiKey kojinkakuteikey = new KojinKakuteiKey();
+        kojinkakuteikey.set被保険者番号(new HihokenshaNo(給付実績基本集計.get(0).get被保険者番号().toString()));
+        kyufujissekiprmbusiness.setKojinKakuteiKey(kojinkakuteikey);
+        ViewStateHolder.put(ViewStateKeys.給付実績情報照会情報, kyufujissekiprmbusiness);
         return ResponseData.of(div).respond();
     }
 
@@ -176,6 +216,7 @@ public class KyufuJoho {
     private void set利用状況情報(KyufuJohoDiv div) {
         RDate date = RDate.getNowDate();
         getHandler(div).set利用状況情報(kyufujohofinder.getサービス利用状況情報(KyufuJohoParamter.createParameter(
-                key.get被保険者番号().value(), new RString((date.getYearMonth().minusMonth(YEAR_3).toString())), setサービス分類コード(div))).records());
+                key.get被保険者番号().value(), new RString((date.getYearMonth().minusMonth(YEAR_3).toString())),
+                setサービス分類コード(div))).records());
     }
 }

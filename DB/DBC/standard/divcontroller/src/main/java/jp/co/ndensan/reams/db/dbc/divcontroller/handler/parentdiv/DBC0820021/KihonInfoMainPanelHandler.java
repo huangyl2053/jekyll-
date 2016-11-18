@@ -255,7 +255,6 @@ public class KihonInfoMainPanelHandler {
             RString 処理モード, List<RString> list) {
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 様式番号 = meisaiPar.get様式番号();
-        償還払請求基本データ = 償還払請求基本データ.modified();
         return save基本情報(償還払請求基本データ, サービス年月, 様式番号, list);
     }
 
@@ -745,6 +744,10 @@ public class KihonInfoMainPanelHandler {
             FlexibleYearMonth サービス年月,
             RDate 申請日,
             RString 整理番号) {
+        RString 明細番号 = div.getPanelTwo().getTxtMeisaiBango().getValue();
+        if (RString.isNullOrEmpty(明細番号)) {
+            明細番号 = 固定明細番号;
+        }
         ShoukanharaihishinseimeisaikensakuParameter paramter = new ShoukanharaihishinseimeisaikensakuParameter(
                 被保険者番号,
                 サービス年月,
@@ -752,7 +755,7 @@ public class KihonInfoMainPanelHandler {
                 整理番号,
                 new JigyoshaNo(div.getPanelTwo().getTxtJigyoshaBango().getValue()),
                 div.getPanelTwo().getTxtShomeisho().getValue(),
-                div.getPanelTwo().getTxtMeisaiBango().getValue());
+                明細番号);
         return paramter;
     }
 

@@ -241,12 +241,11 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
                 給付実績中間事業高額一時List.add(entity);
             }
         }
-        if (給付実績中間事業高額一時List.isEmpty()) {
-            return;
+        if (!給付実績中間事業高額一時List.isEmpty()) {
+            insert給付実績中間事業高額一時8の新規1(給付実績中間事業高額一時List.get(0));
         }
-        insert給付実績中間事業高額一時8の新規1(給付実績中間事業高額一時List.get(0));
         clear合計();
-        get世帯合算処理(給付実績中間事業高額一時List);
+        get世帯合算処理();
     }
 
     private boolean is明細に存在する(HihokenshaNo 被保険者番号) {
@@ -258,13 +257,13 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         return false;
     }
 
-    private void get世帯合算処理(List<KyufuJissekiChukanKogakuJigyo8Entity> 給付実績中間事業高額一時List) {
+    private void get世帯合算処理() {
         List<KyufuJissekiChukanKogakuJigyo8Entity> 単独分List = new ArrayList<>();
         List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯分List = new ArrayList<>();
-        if (給付実績中間事業高額一時List.size() == INT_1) {
-            単独分List.add(給付実績中間事業高額一時List.get(0));
+        if (給付実績中間事業高額一時明細List.size() == INT_1) {
+            単独分List.add(給付実績中間事業高額一時明細List.get(0));
         } else {
-            for (KyufuJissekiChukanKogakuJigyo8Entity entity : 給付実績中間事業高額一時List) {
+            for (KyufuJissekiChukanKogakuJigyo8Entity entity : 給付実績中間事業高額一時明細List) {
                 TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
                 if (ONE.equals(給付実績中間.getShotokuHantei_jushochiTokureiFlag())
                         && ONE.equals(給付実績中間.getShotokuHantei_shoboKubun())) {

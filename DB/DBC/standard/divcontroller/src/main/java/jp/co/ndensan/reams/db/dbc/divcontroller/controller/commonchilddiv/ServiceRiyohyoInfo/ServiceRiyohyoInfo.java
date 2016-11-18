@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiResult;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDivHandler;
@@ -42,11 +43,13 @@ public class ServiceRiyohyoInfo {
 
     private static final RString RSTRING_ONE = new RString("1");
     private static final RString RSTRING_TWO = new RString("2");
+    private static final RString 総合事業 = new RString("2");
     private static final RString プラス値入力不可 = new RString("単位：プラス値入力不可");
     private static final RString マイナス値入力不可 = new RString("単位：マイナス値入力不可");
 //    private static final RString 給付率値 = new RString(" & viewState.給付率 & ");
     private static final RString 前月の明細情報エラー = new RString("前月の明細は存在しません。");
     private static final RString 前月の明細情報の確認 = new RString("明細行が前月の状態に置き換わります。よろしいですか？");
+    private static final RString 回数の入力値が不正 = new RString("入力値が不正_回数：マイナス値入力不可");
     private static final RString RSTRING_ZERO = new RString("0");
     private static final RString RSTRING_17 = new RString("17");
     private static final RString RSTRING_67 = new RString("67");
@@ -151,6 +154,16 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoMeisaiNew(ServiceRiyohyoInfoDiv div) {
+        RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
+        if (総合事業.equals(居宅総合事業区分)) {
+            Decimal 区分支給限度額 = div.getTxtKubunShikyuGendogaku().getValue();
+            RDate 限度管理期間F = div.getTxtGendoKanriKikan().getFromValue();
+            RDate 限度管理期間T = div.getTxtGendoKanriKikan().getToValue();
+            if (区分支給限度額 == null && 限度管理期間F == null && 限度管理期間T == null) {
+                throw new ApplicationException(DbcErrorMessages.対象年月入力不正.getMessage().evaluate());
+            }
+        }
+        
         div.getTxtRiyoYM().setDisabled(true);
         div.getChkZanteiKubun().setDisabled(true);
         div.getDdlKoshinKbn().setDisabled(true);
@@ -189,6 +202,16 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnBeppyoGokeiNew(ServiceRiyohyoInfoDiv div) {
+        RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
+        if (総合事業.equals(居宅総合事業区分)) {
+            Decimal 区分支給限度額 = div.getTxtKubunShikyuGendogaku().getValue();
+            RDate 限度管理期間F = div.getTxtGendoKanriKikan().getFromValue();
+            RDate 限度管理期間T = div.getTxtGendoKanriKikan().getToValue();
+            if (区分支給限度額 == null && 限度管理期間F == null && 限度管理期間T == null) {
+                throw new ApplicationException(DbcErrorMessages.対象年月入力不正.getMessage().evaluate());
+            }
+        }
+        
         div.setAddType(RSTRING_TWO);
         div.getTxtRiyoYM().setDisabled(true);
         div.getChkZanteiKubun().setDisabled(true);
@@ -331,11 +354,19 @@ public class ServiceRiyohyoInfo {
         if (明細計算Pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(明細計算Pairs).respond();
         }
+        ValidationMessageControlPairs 事業者必須入力Pairs = validationhandler.validate事業者必須入力();
+        if (事業者必須入力Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(事業者必須入力Pairs).respond();
+        }
         ValidationMessageControlPairs 割引適用後率Pairs = validationhandler.validate割引適用後率();
         if (割引適用後率Pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(割引適用後率Pairs).respond();
         }
         明細の計算(div);
+        Decimal 回数 = new Decimal(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getText().toString());
+        if (回数.compareTo(Decimal.ZERO) < 0) {
+            throw new ApplicationException(回数の入力値が不正.toString());
+        }
 
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         handler.onClick_btnBeppyoMeisaiKakutei(状態);
@@ -364,18 +395,17 @@ public class ServiceRiyohyoInfo {
         }
         if (RSTRING_17.equals(サービス種類Tmp) || RSTRING_67.equals(サービス種類Tmp)
                 || RSTRING_88.equals(サービス種類Tmp)) {
-            ValidationMessageControlPairs サービス種類Pairs = validationhandler.validateサービス種類必須();
-            if (サービス種類Pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(サービス種類Pairs).respond();
-            }
-        } else {
-            ValidationMessageControlPairs サービス単位必須以外Pairs = validationhandler.validateサービス単位必須以外();
-            if (サービス単位必須以外Pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(サービス単位必須以外Pairs).respond();
+            ValidationMessageControlPairs サービス単位Pairs = validationhandler.validateサービス単位必須();
+            if (サービス単位Pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(サービス単位Pairs).respond();
             }
         }
-        RString 利用者負担定率定額区分
-                = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
+        ValidationMessageControlPairs サービス単位必須以外Pairs = validationhandler.validateサービス単位必須以外();
+        if (サービス単位必須以外Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(サービス単位必須以外Pairs).respond();
+        }
+        
+        RString 利用者負担定率定額区分 = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
         if (RSTRING_TWO.equals(利用者負担定率定額区分)) {
             ValidationMessageControlPairs 給付率必須Pairs = validationhandler.validate給付率必須();
             if (給付率必須Pairs.iterator().hasNext()) {
@@ -517,8 +547,34 @@ public class ServiceRiyohyoInfo {
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnCalcMeisaiGokei(ServiceRiyohyoInfoDiv div) {
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
-        handler.明細情報クリア();
-        handler.合計情報クリア();
+        ServiceRiyohyoInfoDivValidationHandler validationhandler = getValidatioHandler(div);
+        ValidationMessageControlPairs 明細計算Pairs = validationhandler.validate明細計算();
+        if (明細計算Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(明細計算Pairs).respond();
+        }
+        ValidationMessageControlPairs 事業者必須入力Pairs = validationhandler.validate事業者必須入力();
+        if (事業者必須入力Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(事業者必須入力Pairs).respond();
+        }
+        ValidationMessageControlPairs 割引適用後率Pairs = validationhandler.validate割引適用後率();
+        if (割引適用後率Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(割引適用後率Pairs).respond();
+        }
+        明細の計算(div);
+        Decimal 回数 = new Decimal(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getText().toString());
+        if (回数.compareTo(Decimal.ZERO) < 0) {
+            throw new ApplicationException(回数の入力値が不正.toString());
+        }
+        
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisai().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnCancelMeisaiInput().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisaiGokei().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnBeppyoMeisaiKakutei().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
+        
         div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(false);
         div.getBtnCalcGokei().setDisabled(false);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);

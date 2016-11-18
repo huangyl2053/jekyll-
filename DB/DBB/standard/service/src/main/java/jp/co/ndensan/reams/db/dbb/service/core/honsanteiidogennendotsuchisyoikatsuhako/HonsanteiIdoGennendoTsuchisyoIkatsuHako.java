@@ -156,7 +156,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
     private static final RString 定値_ゼロ = new RString("0");
     private static final RString SIGN = new RString(" ＞ ");
     private static final EucEntityId 決定_EUC_ENTITY_ID = new EucEntityId("DBB200012");
-    private static final EucEntityId 変更_EUC_ENTITY_ID = new EucEntityId("DBB200028");
+    private static final EucEntityId 変更_EUC_ENTITY_ID = new EucEntityId("DBB200030");
     private static final RString 決定_EUCファイル名 = new RString("KaigoHokenryogakuKetteiTsuchiHakkoIchiranData.csv");
     private static final RString 変更_EUCファイル名 = new RString("KaigoHokenryogakuHenkoTsuchiHakkoIchiranData.csv");
     private static final RString FORMAT_LEFT = new RString("【");

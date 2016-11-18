@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCommonHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKihonJyohou;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKyotakuServiceBusiness;
@@ -149,7 +150,13 @@ public class KyotakuServiceKeikakuhi {
     }
 
     private List<KyufujissekiKihon> get給付実績基本情報() {
-        return ViewStateHolder.get(ViewStateKeys.給付実績基本情報, KyufujissekiKihonJyohou.class).getCsData_A();
+        List<KyufuJissekiKihonShukeiRelate> entityList
+                = ViewStateHolder.get(ViewStateKeys.給付実績基本情報, KyufujissekiKihonJyohou.class).getCsData_A();
+        List<KyufujissekiKihon> 給付実績基本情報List = new ArrayList<>();
+        for (KyufuJissekiKihonShukeiRelate entity : entityList) {
+            給付実績基本情報List.add(entity.get給付実績基本データ());
+        }
+        return 給付実績基本情報List;
     }
 
     private List<KyufujissekiKyotakuServiceBusiness> getCsData_F() {

@@ -195,7 +195,7 @@
         "DbT3118ShikibetsuNoKanri"."meisaiSetteiKubun",
         "DbT3118ShikibetsuNoKanri"."shokujiHiyosetteiKubun",
         "DbT3118ShikibetsuNoKanri"."fukushoyouguKonyuSetteiKubun" AS "fukushiyoguKonyuSetteiKubun",
-	"DbT3118ShikibetsuNoKanri"."kyotakuKeikakuSetteiKubun" AS "kyotakuKeikakuSetteiKubun",
+        "DbT3118ShikibetsuNoKanri"."kyotakuKeikakuSetteiKubun" AS "kyotakuKeikakuSetteiKubun",
         "DbT3118ShikibetsuNoKanri"."jutakukaishuSetteiKubun" AS "jutakuKaishuSetteiKubun",
         "DbT3118ShikibetsuNoKanri"."tokuteinyushoshaSetteiKubun" AS "tokuteiNyushoshaSetteiKubun",
         "DbT3118ShikibetsuNoKanri"."shakaifukushiKeigenSetteiKubun" AS "shakaiFukushiKeigenSetteiKubun",
@@ -218,6 +218,7 @@
     <!-- 概要： 出力対象外データを取得するSQLです。 -->
     <select resultOrdered="true" id = "selectAll" resultMap="ResultMap_DbWT1510KyufuJissekiKihonEntity" fetchSize="500">
         SELECT
+        DISTINCT
         <include refid="allColumns_DbWT1510KyufuJissekiKihon" />
         FROM
         "DbWT1510KyufuJissekiKihon" AS "DbWT1510KyufuJissekiKihon"
@@ -229,9 +230,9 @@
         "DbWT1510KyufuJissekiKihon"."toshiNo" ASC
     </select>
 
-
     <select resultOrdered="true" id = "select給付実績明細" resultMap="ResultMap_給付実績明細" fetchSize="500">
         SELECT
+        DISTINCT
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3018KyufujissekiMeisaiMapper.allColumns_DbT3018KyufujissekiMeisai" />
         ,COALESCE(DbT7131KaigoServiceNaiyou."teikyoKaishiYM", '') AS "teikyoKaishiYM"
         ,COALESCE(DbT7131KaigoServiceNaiyou."teikyoShuryoYM", '') AS "teikyoShuryoYM"
@@ -311,6 +312,7 @@
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3022KyufujissekiShokujiHiyoMapper.ResultMap_DbT3022KyufujissekiShokujiHiyoEntity"
             fetchSize="500">
         SELECT
+        DISTINCT
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3022KyufujissekiShokujiHiyoMapper.allColumns_DbT3022KyufujissekiShokujiHiyo" />
         FROM
         rgdb."DbT3022KyufujissekiShokujiHiyo" AS "DbT3022KyufujissekiShokujiHiyo"
@@ -332,6 +334,7 @@
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3025KyufujissekiKyotakuServiceMapper.ResultMap_DbT3025KyufujissekiKyotakuServiceEntity"
             fetchSize="500">
         SELECT
+        DISTINCT
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3025KyufujissekiKyotakuServiceMapper.allColumns_DbT3025KyufujissekiKyotakuService" />
         FROM
         rgdb."DbT3025KyufujissekiKyotakuService" AS "DbT3025KyufujissekiKyotakuService"
@@ -354,6 +357,7 @@
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3026KyufujissekiFukushiYoguHanbaihiMapper.ResultMap_DbT3026KyufujissekiFukushiYoguHanbaihiEntity"
             fetchSize="500">
         SELECT
+        DISTINCT
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3026KyufujissekiFukushiYoguHanbaihiMapper.allColumns_DbT3026KyufujissekiFukushiYoguHanbaihi" />
         FROM
         rgdb."DbT3026KyufujissekiFukushiYoguHanbaihi" AS "DbT3026KyufujissekiFukushiYoguHanbaihi"
@@ -375,6 +379,7 @@
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3027KyufujissekiJutakuKaishuhiMapper.ResultMap_DbT3027KyufujissekiJutakuKaishuhiEntity"
             fetchSize="500">
         SELECT
+        DISTINCT
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3027KyufujissekiJutakuKaishuhiMapper.allColumns_DbT3027KyufujissekiJutakuKaishuhi" />
         FROM
         rgdb."DbT3027KyufujissekiJutakuKaishuhi" AS "DbT3027KyufujissekiJutakuKaishuhi"
@@ -396,6 +401,7 @@
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoMapper.ResultMap_DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity"
             fetchSize="500">
         SELECT
+        DISTINCT
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoMapper.allColumns_DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" />
         FROM
         rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"
@@ -417,6 +423,7 @@
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.ResultMap_DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity"
             fetchSize="500">
         SELECT
+        DISTINCT
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" />
         FROM
         rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"
@@ -438,6 +445,7 @@
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.ResultMap_DbT3033KyufujissekiShukeiEntity"
             fetchSize="500">
         SELECT
+        DISTINCT
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.allColumns_DbT3033KyufujissekiShukei" />
         FROM
         rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei"
@@ -1405,7 +1413,7 @@
         AND DbWT1513RiyoJokyoTokeihyo."serviceTeikyoYM" = DbWT1513RiyoJokyoTokeihyo."serviceTeikyoYM" )
     </select>
 
-    <select resultOrdered="true" id = "select処理市町村名" resultMap="ResultMap_DbWT1512JukyushaDaicho" fetchSize="500">
+    <select resultOrdered="true" id = "select処理市町村名" resultMap="ResultMap_TEMPDbWT1513RiyoJokyoTokeihyo" fetchSize="500">
         SELECT
         DbWT1513RiyoJokyoTokeihyo."shoriShichosonCode"      AS "dbWT1513RiyoJokyoTokeihyo_shoriShichosonCode"
         ,KYUSHICHOSON."kyuShichosonMeisho"      AS "dbWT1513RiyoJokyoTokeihyo_shoriShichosonName"
@@ -1570,11 +1578,11 @@
             fetchSize="500">
         SELECT
         DISTINCT
-        DbWT1513RiyoJokyoTokeihyo."hihokenshaNo"
+        DbWT1513RiyoJokyoTokeihyo."shimei"
         FROM
         "DbWT1513RiyoJokyoTokeihyo" AS DbWT1513RiyoJokyoTokeihyo
         WHERE
-        DbWT1513RiyoJokyoTokeihyo."shimei" IS NULL
+        DbWT1513RiyoJokyoTokeihyo."shimei" IS NULL OR DbWT1513RiyoJokyoTokeihyo."shimei" = ''
     </select>
 
     <select resultOrdered="true" id="selectサービス提供年月"
@@ -2956,6 +2964,9 @@
     </resultMap>
     <resultMap id="resultMap_被保険者宛名情報" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.HihokenshaAtenaJohoEntity" autoMapping="true">
         <id column="dbWT1513RiyoJokyoTokeihyo_hihokenshaNo"/>
+        <id column="dbWT1513RiyoJokyoTokeihyo_dataKubun"/>
+        <id column="dbWT1513RiyoJokyoTokeihyo_serviceTeikyoYM"/>
+        <id column="dbWT1513RiyoJokyoTokeihyo_shinsaYM"/>
         <association property="dbWT1513Entity" resultMap="ResultMap_TEMPDbWT1513RiyoJokyoTokeihyo"/>
         <association property="dbV1001Entity" resultMap="ResultMap_DbV1001HihokenshaDaichoEntity"/>
         <association property="uaFt200Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>

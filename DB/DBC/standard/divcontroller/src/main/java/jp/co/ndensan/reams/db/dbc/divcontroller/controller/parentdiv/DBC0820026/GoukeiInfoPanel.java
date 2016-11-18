@@ -35,8 +35,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class GoukeiInfoPanel {
 
-    private static final int SIX = 6;
-
     /**
      * onLoad
      *
@@ -53,16 +51,7 @@ public class GoukeiInfoPanel {
         RString 様式番号 = meisaiPar.get様式番号();
         RString 明細番号 = meisaiPar.get明細番号();
         RDate 申請日 = meisaiPar.get申請日();
-//        ViewStateHolder.put(ViewStateKeys.サービス年月, サービス年月);
-//        ViewStateHolder.put(ViewStateKeys.様式番号, 様式番号);
-//        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-//        ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
-//        ViewStateHolder.put(ViewStateKeys.申請日, 申請日);
-//        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.申請検索キー,
-//                ShoukanharaihishinseikensakuParameter.class);
-//        SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(償還払費申請検索.getYoshikiNo(),
-//                償還払費申請検索.getServiceTeikyoYM());
-//        ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
+
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
@@ -216,18 +205,4 @@ public class GoukeiInfoPanel {
         return new GoukeiInfoPanelHandler(div);
     }
 
-//    private void putViewState(GoukeiInfoPanelDiv div) {
-//        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
-//        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
-//        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-//                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-//                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString()
-//                        .substring(0, SIX)),
-//                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-//                new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
-//                div.getPanelHead().getTxtShomeisho().getValue(),
-//                div.getPanelHead().getTxtMeisaiBango().getValue(),
-//                null);
-//        ViewStateHolder.put(ViewStateKeys.申請検索キー, paramter);
-//    }
 }

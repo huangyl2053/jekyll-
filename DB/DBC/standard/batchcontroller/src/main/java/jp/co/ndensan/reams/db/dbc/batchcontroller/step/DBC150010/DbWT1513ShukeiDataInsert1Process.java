@@ -67,6 +67,8 @@ public class DbWT1513ShukeiDataInsert1Process extends BatchProcessBase<DbWT1513R
             tempEntity.setServiceKubun(RString.EMPTY);
             tempEntity = service.create集計データ登録1(tempEntity, entity);
         }
+        被保険者番号 = entity.getHihokenshaNo();
+        サービス提供年月 = entity.getServiceTeikyoYM();
     }
 
     @Override

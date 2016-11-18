@@ -132,13 +132,29 @@
 
   SELECT
       "DbT3017KyufujissekiKihon".*
+      ,"DbT3118ShikibetsuNoKanri".*
+      ,"DbT7060KaigoJigyosha"."jigyoshaName" AS "DbT7060_jigyoshaName"
     FROM
       "給付実績" AS "DbT3017KyufujissekiKihon"
-ORDER BY
-  "serviceTeikyoYM" DESC
-  ,"inputShikibetsuNo"
-  , "jigyoshoNo"
-  , "seiriNo" 
+    LEFT JOIN
+      rgdb."DbT3118ShikibetsuNoKanri" as "DbT3118ShikibetsuNoKanri"
+    ON
+      "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3118ShikibetsuNoKanri"."shikibetsuNo"
+      AND  "DbT3118ShikibetsuNoKanri"."shikibetsuNoKubon" = '2'
+      AND  "DbT3118ShikibetsuNoKanri"."tekiyoKaishiYM"  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+      AND  "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> "DbT3118ShikibetsuNoKanri"."tekiyoShuryoYM"
+    LEFT JOIN
+      rgdb."DbT7060KaigoJigyosha" as "DbT7060KaigoJigyosha"
+    ON
+      "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT7060KaigoJigyosha"."jigyoshaNo"
+      AND  substr("DbT7060KaigoJigyosha"."yukoKaishiYMD",1,6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+      AND ("DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substr("DbT7060KaigoJigyosha"."yukoShuryoYMD",1,6)
+      OR  substr("DbT7060KaigoJigyosha"."yukoShuryoYMD",1,6) = '')
+    ORDER BY
+      "serviceTeikyoYM"
+      ,"inputShikibetsuNo"
+      , "jigyoshoNo"
+      , "seiriNo" 
 
     </select>
     
@@ -203,7 +219,7 @@ ORDER BY
             and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3033KyufujissekiShukei"."jigyoshoNo"
             and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3033KyufujissekiShukei"."toshiNo"
         ORDER BY
-           "DbT3033KyufujissekiShukei"."serviceTeikyoYM" DESC
+           "DbT3033KyufujissekiShukei"."serviceTeikyoYM"
             , "DbT3033KyufujissekiShukei"."inputShikibetsuNo"
             , "DbT3033KyufujissekiShukei"."jigyoshoNo"
             , "DbT3033KyufujissekiShukei"."seiriNo"
@@ -235,7 +251,7 @@ ORDER BY
       AND ("DbT3018KyufujissekiMeisai"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
       OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
       ORDER BY
-      "DbT3018KyufujissekiMeisai"."serviceTeikyoYM" DESC
+      "DbT3018KyufujissekiMeisai"."serviceTeikyoYM"
       , "DbT3018KyufujissekiMeisai"."inputShikibetsuNo"
       , "DbT3018KyufujissekiMeisai"."jigyoshoNo"
       , "DbT3018KyufujissekiMeisai"."seiriNo"
@@ -259,7 +275,7 @@ ORDER BY
             and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."jigyoshoNo"
             and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."toshiNo"
         ORDER BY
-           "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM" DESC
+           "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"
            , "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo"
            , "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."jigyoshoNo"
            , "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."seiriNo"
@@ -282,7 +298,7 @@ ORDER BY
             and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."jigyoshoNo"
             and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."toshiNo"
         ORDER BY
-            "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."serviceTeikyoYM" DESC
+            "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."serviceTeikyoYM"
             , "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."inputShikibetsuNo"
             , "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."jigyoshoNo"
             , "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."seiriNo"
@@ -305,7 +321,7 @@ ORDER BY
            and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3020KyufujissekiTokuteiSinryohi"."jigyoshoNo"
            and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3020KyufujissekiTokuteiSinryohi"."toshiNo"
         ORDER BY
-           "DbT3020KyufujissekiTokuteiSinryohi"."serviceTeikyoYM" DESC
+           "DbT3020KyufujissekiTokuteiSinryohi"."serviceTeikyoYM"
            , "DbT3020KyufujissekiTokuteiSinryohi"."inputShikibetsuNo"
            , "DbT3020KyufujissekiTokuteiSinryohi"."jigyoshoNo"
            , "DbT3020KyufujissekiTokuteiSinryohi"."seiriNo"
@@ -351,7 +367,7 @@ ORDER BY
            and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3022KyufujissekiShokujiHiyo"."jigyoshoNo"
            and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3022KyufujissekiShokujiHiyo"."toshiNo"
         ORDER BY
-           "DbT3022KyufujissekiShokujiHiyo"."serviceTeikyoYM" DESC
+           "DbT3022KyufujissekiShokujiHiyo"."serviceTeikyoYM"
            , "DbT3022KyufujissekiShokujiHiyo"."inputShikibetsuNo"
            , "DbT3022KyufujissekiShokujiHiyo"."jigyoshoNo"
            , "DbT3022KyufujissekiShokujiHiyo"."seiriNo"
@@ -381,7 +397,7 @@ ORDER BY
             AND ("DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
             OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
         ORDER BY
-            "DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM" DESC
+            "DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM"
             , "DbT3025KyufujissekiKyotakuService"."inputShikibetsuNo"
             , "DbT3025KyufujissekiKyotakuService"."jigyoshoNo"
             , "DbT3025KyufujissekiKyotakuService"."seiriNo"
@@ -414,7 +430,7 @@ ORDER BY
             AND ("DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
             OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
         ORDER BY
-            "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" DESC
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
             , "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo"
             , "DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo"
             , "DbT3026KyufujissekiFukushiYoguHanbaihi"."seiriNo"
@@ -446,7 +462,7 @@ ORDER BY
             AND ("DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
             OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
         ORDER BY
-            "DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM" DESC
+            "DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM"
             , "DbT3027KyufujissekiJutakuKaishuhi"."inputShikibetsuNo"
             , "DbT3027KyufujissekiJutakuKaishuhi"."jigyoshoNo"
             , "DbT3027KyufujissekiJutakuKaishuhi"."seiriNo"
@@ -481,7 +497,7 @@ ORDER BY
       FROM
         "給付実績1" AS "DbT3028KyufujissekiKogakuKaigoServicehi" 
       ORDER BY
-        "DbT3028KyufujissekiKogakuKaigoServicehi"."serviceTeikyoYM" DESC
+        "DbT3028KyufujissekiKogakuKaigoServicehi"."serviceTeikyoYM"
         ,"DbT3028KyufujissekiKogakuKaigoServicehi"."inputShikibetsuNo"
         , "DbT3028KyufujissekiKogakuKaigoServicehi"."seiriNo" 
     </select>
@@ -513,7 +529,7 @@ ORDER BY
       AND ("DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
       OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
       ORDER BY
-      "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceTeikyoYM" DESC
+      "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceTeikyoYM"
       , "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."inputShikibetsuNo"
       , "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."jigyoshoNo"
       , "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."seiriNo"
@@ -546,7 +562,7 @@ ORDER BY
               AND ("DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM"
               OR  "DbT7130KaigoServiceShurui"."teikyoshuryoYM" = '')
             ORDER BY
-              "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM" DESC
+              "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM"
               , "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."inputShikibetsuNo"
               , "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."jigyoshoNo"
               , "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."seiriNo"
@@ -580,7 +596,7 @@ ORDER BY
             AND ("DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
             OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
         ORDER BY
-            "DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM" DESC
+            "DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM"
             , "DbT3031KyufuJissekiCareManagementHi"."inputShikibetsuNo"
             , "DbT3031KyufuJissekiCareManagementHi"."jigyoshoNo"
             , "DbT3031KyufuJissekiCareManagementHi"."seiriNo"
@@ -614,7 +630,7 @@ ORDER BY
       AND ("DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
       OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
       ORDER BY
-      "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM" DESC
+      "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM"
       , "DbT3106KyufujissekiMeisaiJushochiTokurei"."jigyoshoNo"
       , "DbT3106KyufujissekiMeisaiJushochiTokurei"."inputShikibetsuNo"
       , "DbT3106KyufujissekiMeisaiJushochiTokurei"."seiriNo"
@@ -862,6 +878,8 @@ ORDER BY
     </resultMap>
     
     <resultMap id="ResultMap_給付実績基本集計データ" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiKihonShukeiRelateEntity" autoMapping="true">
+        <result property="事業者名称" column="DbT7060_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <association property="識別番号管理" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper.ResultMap_DbT3118ShikibetsuNoKanriEntity"/>
         <association property="給付実績基本データ" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
     </resultMap>
     
