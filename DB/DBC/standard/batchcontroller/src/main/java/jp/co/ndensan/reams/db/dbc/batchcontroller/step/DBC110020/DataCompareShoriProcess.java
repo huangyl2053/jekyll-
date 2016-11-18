@@ -325,7 +325,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         }
         JukyushaIdoRenrakuhyoCsvEntity csventity = getJukyushaIdoRenrakuhyoCsvEntity(異動一時2entity, 新規Flag);
         entityList.add(csventity);
-        this.dbT3001TableWriter.insert(異動一時2entity.copyTo3001Entity());
+        this.dbT3001TableWriter.insert(異動一時2entity.copyTo3001Entity(RST_2));
     }
 
     private void 国保連受給者異動情報履歴削除(JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
