@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.KyufujissekiKihonResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
@@ -22,7 +20,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0820012.ShikyuShinsei
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteFath;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -57,10 +58,13 @@ public final class ShikyuShinseiDetailHandler {
     private static final RString 受託あり = new RString("2");
     private static final RString 受託なし = new RString("1");
     private static final RString 整理番号_ADD = new RString("0000");
-    private static final RString 証記載保険者番号 = new RString("000011");
     private static final RString 本人 = new RString("本人");
     private static final RString 代理人 = new RString("代理人");
-    
+
+    private static final RDate システム日付 = RDate.getNowDate();
+    private static final RString 証記載保険者番号
+            = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+
     /**
      * コンストラクタです。
      *
@@ -121,9 +125,11 @@ public final class ShikyuShinseiDetailHandler {
             }
             div.getPanelHead().getTxtSeiribango().setValue(整理番号);
             div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
-            //TODO ビジネス設計_DBCKD00007_(共有子Div)受給者異動連絡票（画面）.xlsx の[証記載保険者番号と広域保険者番号取得]シート機能未開発
             div.getPnlShinsei().getTxtKisaiHokensyaBango().setValue(証記載保険者番号);
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(false);
+            div.getPnlShinsei().getTxtShinseiYMD().setValue(システム日付);
+            div.getPnlShinsei().getTxtUketsukeYMD().setValue(システム日付);
+
             return null;
         }
 
@@ -189,7 +195,7 @@ public final class ShikyuShinseiDetailHandler {
                             被保険者番号, サービス年月, 整理番号, KyufuJissekiKubun.償還.getコード());
             if (null == 給付実績基本情報リスト) {
                 set登録(Boolean.TRUE);
-                div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(true);
+                div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(false);
                 div.getPanelHead().getBtnKouzaInfo().setDisabled(false);
                 div.getPanelHead().getBtnServerteikyoShomeisyo().setDisabled(false);
                 div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(false);
@@ -208,7 +214,7 @@ public final class ShikyuShinseiDetailHandler {
                 div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(false);
             } else {
                 set登録(Boolean.TRUE);
-                div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(true);
+                div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(false);
                 div.getPanelHead().getBtnKouzaInfo().setDisabled(false);
                 div.getPanelHead().getBtnServerteikyoShomeisyo().setDisabled(false);
                 div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(false);
@@ -237,13 +243,10 @@ public final class ShikyuShinseiDetailHandler {
      * @param 償還払支給申請 ShokanShinsei
      * @return boolean 整理番号
      */
-    public RString insert(RString 画面モード, ShokanShinsei 償還払支給申請) {
-        RString 整理番号 = InstanceProvider.create(SyokanbaraihiShikyuShinseiKetteManager.class).
+    public ShokanShinsei insert(RString 画面モード, ShokanShinsei 償還払支給申請) {
+        ShokanShinsei shokanShinsei = InstanceProvider.create(SyokanbaraihiShikyuShinseiKetteManager.class).
                 insDbT3034ShokanShinsei(get画面データ(画面モード, 償還払支給申請));
-        if (null != 整理番号 && !整理番号.isEmpty()) {
-            div.getPanelHead().getTxtSeiribango().setValue(整理番号);
-        }
-        return 整理番号;
+        return shokanShinsei;
     }
 
     /**
@@ -253,10 +256,10 @@ public final class ShikyuShinseiDetailHandler {
      * @param 償還払支給申請 ShokanShinsei
      * @return boolean 更新結果
      */
-    public boolean update(RString 画面モード, ShokanShinsei 償還払支給申請) {
-        int i = InstanceProvider.create(SyokanbaraihiShikyuShinseiKetteManager.class).
-                updDbT3034ShokanShinsei(get画面データ(画面モード, 償還払支給申請));
-        return i != 0;
+    public ShokanShinsei update(RString 画面モード, ShokanShinsei 償還払支給申請) {
+        ShokanShinsei shokanShinsei = InstanceProvider.create(SyokanbaraihiShikyuShinseiKetteManager.class).
+                updDbT3034ShokanShinsei2(get画面データ(画面モード, 償還払支給申請));
+        return shokanShinsei;
     }
 
     /**
@@ -417,24 +420,46 @@ public final class ShikyuShinseiDetailHandler {
      */
     public boolean is変更あり_ADD() {
         pnlShinseiDiv pnlDiv = div.getPnlShinsei();
-        if (pnlDiv.getTxtUketsukeYMD().getValue() != null) {
+        if (!システム日付.equals(pnlDiv.getTxtUketsukeYMD().getValue())) {
             return true;
         }
-        if (pnlDiv.getTxtShinseiYMD().getValue() != null) {
+        if (!システム日付.equals(pnlDiv.getTxtShinseiYMD().getValue())) {
             return true;
         }
         if (!ShinseishaKubun.本人.get名称().equals(pnlDiv.getRdoShinseisyaKubun().getSelectedValue())) {
             return true;
         }
-        if (pnlDiv.getTxtKisaiHokensyaBango().getValue() != null && !pnlDiv.getTxtKisaiHokensyaBango().getValue().isEmpty()) {
+        if (pnlDiv.getTxtKisaiHokensyaBango().getValue() != null && !pnlDiv.getTxtKisaiHokensyaBango().getValue().isEmpty()
+                && !証記載保険者番号.equals(pnlDiv.getTxtKisaiHokensyaBango().getValue())) {
             return true;
         }
-        if (pnlDiv.getTxtShimeikana().getDomain() != null && !pnlDiv.getTxtShimeikana().getDomain().isEmpty()) {
+
+        if ((pnlDiv.getTxtShimeikana().getDomain() != null && !pnlDiv.getTxtShimeikana().getDomain().isEmpty())
+                && (div.getPanelUp().getCcdKaigoAtenaInfo().get氏名カナ() == null || div.getPanelUp().getCcdKaigoAtenaInfo().get氏名カナ().isEmpty())) {
             return true;
         }
-        if (pnlDiv.getTxtShimeiKanji().getDomain() != null && !pnlDiv.getTxtShimeiKanji().getDomain().isEmpty()) {
+        if ((pnlDiv.getTxtShimeikana().getDomain() == null || pnlDiv.getTxtShimeikana().getDomain().isEmpty())
+                && (div.getPanelUp().getCcdKaigoAtenaInfo().get氏名カナ() != null && !div.getPanelUp().getCcdKaigoAtenaInfo().get氏名カナ().isEmpty())) {
             return true;
         }
+
+        if (!pnlDiv.getTxtShimeikana().getDomain().equals(new AtenaKanaMeisho(div.getPanelUp().getCcdKaigoAtenaInfo().get氏名カナ()))) {
+            return true;
+        }
+
+        if ((pnlDiv.getTxtShimeiKanji().getDomain() != null && !pnlDiv.getTxtShimeiKanji().getDomain().isEmpty())
+                && (div.getPanelUp().getCcdKaigoAtenaInfo().get氏名漢字() == null || div.getPanelUp().getCcdKaigoAtenaInfo().get氏名漢字().isEmpty())) {
+            return true;
+        }
+        if ((pnlDiv.getTxtShimeiKanji().getDomain() == null || pnlDiv.getTxtShimeiKanji().getDomain().isEmpty())
+                && (div.getPanelUp().getCcdKaigoAtenaInfo().get氏名漢字() != null && !div.getPanelUp().getCcdKaigoAtenaInfo().get氏名漢字().isEmpty())) {
+            return true;
+        }
+
+        if (!pnlDiv.getTxtShimeiKanji().getDomain().equals(new AtenaMeisho(div.getPanelUp().getCcdKaigoAtenaInfo().get氏名漢字()))) {
+            return true;
+        }
+
         if (pnlDiv.getTxtTelNo().getDomain() != null && !pnlDiv.getTxtTelNo().getDomain().isEmpty()) {
             return true;
         }
@@ -505,6 +530,12 @@ public final class ShikyuShinseiDetailHandler {
                 set申請者氏名カナ(div.getPnlShinsei().getTxtShimeikana().getDomain().value()).
                 set支払金額合計(div.getPnlShinsei().getTxtNumShiharaKingakuGk().getValue()).
                 set保険対象費用額(div.getPnlShinsei().getTxtNumShiharaKingakuGk().getValue()).build();
+
+        if (div.getPanelHead().getTxtSeiribango().getValue() != null) {
+            償還払支給申請 = 償還払支給申請.createBuilderForEdit().set整理番号(div.getPanelHead().getTxtSeiribango().getValue()).build();
+        } else {
+            償還払支給申請 = 償還払支給申請.createBuilderForEdit().set整理番号(RString.EMPTY).build();
+        }
 
         if (div.getPnlShinsei().getTxtShinseiYMD().getValue() != null) {
             償還払支給申請 = 償還払支給申請.createBuilderForEdit().set申請年月日(new FlexibleDate(
@@ -598,8 +629,8 @@ public final class ShikyuShinseiDetailHandler {
                 処理モード, null, サービス提供年月, 整理番号, null);
         return parameter;
     }
-    
-     /**
+
+    /**
      * 申請者区分が変更されたときに、本人情報を設定する
      */
     public void set本人情報() {
