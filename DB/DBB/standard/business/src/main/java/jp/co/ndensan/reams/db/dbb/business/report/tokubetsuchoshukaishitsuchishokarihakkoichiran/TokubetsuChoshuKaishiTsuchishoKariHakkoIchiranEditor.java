@@ -332,7 +332,9 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
             source.kanaMeisho = 編集後仮算定通知書共通情報entity.get編集後個人().get氏名５０音カナ();
         }
         source.hihokenshaNo = 編集後仮算定通知書共通情報entity.get被保険者番号().getColumnValue();
-        source.nenkinCode = 仮算定通知書情報.get徴収方法情報_更正後().get本徴収_年金コード();
+        if (仮算定通知書情報.get徴収方法情報_更正後() != null) {
+            source.nenkinCode = 仮算定通知書情報.get徴収方法情報_更正後().get本徴収_年金コード();
+        }    
         if (仮算定通知書情報.get納組情報() != null && 仮算定通知書情報.get納組情報().getNokumi() != null) {
             source.nokumiCode = 仮算定通知書情報.get納組情報().getNokumi().getNokumiCode();
         }
