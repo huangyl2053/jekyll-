@@ -436,8 +436,9 @@ public class TokuteiNyushoshaHiyoPanel {
             flag = new ShomeishoNyuryokuFlag();
         }
         setDB出力用ViewState(div);
-
-        set証明書入力完了フラグ(証明書入力済区分, dbJoho, kensakuParameter);
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            set証明書入力完了フラグ(証明書入力済区分, dbJoho, kensakuParameter);
+        }
         ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, flag);
         return ResponseData.of(div).forwardWithEventName(DBC0820021TransitionEventName.一覧に戻る).respond();
     }
