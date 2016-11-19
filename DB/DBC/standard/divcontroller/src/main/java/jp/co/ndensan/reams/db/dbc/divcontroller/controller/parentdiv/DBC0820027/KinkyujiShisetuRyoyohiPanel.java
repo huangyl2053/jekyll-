@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.S
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.DBC0820027StateName.削除モード;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.DBC0820027StateName.新規修正モード;
@@ -281,7 +280,12 @@ public class KinkyujiShisetuRyoyohiPanel {
             SyokanbaraihiShikyuShinseiManager manager = SyokanbaraihiShikyuShinseiManager.createInstance();
             ShomeishoNyuryokuKanryoKubunType 証明書入力済区分 = manager.証明書InputCheck(
                     nyuryokuFlag, kensakuParameter.get様式番号(), kensakuParameter.getサービス年月());
-            set証明書入力完了フラグ(証明書入力済区分, dbJoho, kensakuParameter);
+            set証明書入力完了フラグ(証明書入力済区分, dbJoho, kensakuParameter, div);
+            for (ValidationMessageControlPairs pairs : getHandler(div).check証明書入力()) {
+                if (pairs.iterator().hasNext()) {
+                    return ResponseData.of(div).addValidationMessages(pairs).respond();
+                }
+            }
         }
         return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る).respond();
     }
@@ -611,7 +615,7 @@ public class KinkyujiShisetuRyoyohiPanel {
 
     private void set証明書入力完了フラグ(
             ShomeishoNyuryokuKanryoKubunType 証明書入力済区分, DbJohoViewState dbJoho,
-            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
+            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter, KinkyujiShisetuRyoyohiPanelDiv div) {
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> kanryoFlagMap = dbJoho.get証明書入力完了フラグMap();
         if (kanryoFlagMap == null) {
             kanryoFlagMap = new HashMap<>();
@@ -630,9 +634,7 @@ public class KinkyujiShisetuRyoyohiPanel {
         kanryoFlagMap.put(kensakuParameter, ShomeishoNyuryokuKanryoKubunType.入力完了);
         dbJoho.set証明書入力完了フラグMap(kanryoFlagMap);
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
-        if (証明書入力済区分 == ShomeishoNyuryokuKanryoKubunType.入力未完了) {
-            throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage());
-        }
+        div.setHdnShomeishoKanryoFlag(証明書入力済区分.getCode());
     }
 
     private KinkyujiShisetuRyoyohiPanelHandler getHandler(KinkyujiShisetuRyoyohiPanelDiv div) {

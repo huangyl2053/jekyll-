@@ -61,4 +61,18 @@ public class KinkyujiShisetuRyoyohiPanelValidator implements IValidatable {
         return messages;
     }
 
+    /**
+     * 証明書チェック
+     *
+     * @return IValidationMessages
+     */
+    public IValidationMessages validate証明書チェック() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(KinkyujiShisetuRyoyohiPanelSpec.証明書入力済チェック)
+                .thenAdd(KinkyujiShisetuRyoyohiPanelValidationMessage.証明書入力済チェック)
+                .messages());
+        return messages;
+    }
+
 }

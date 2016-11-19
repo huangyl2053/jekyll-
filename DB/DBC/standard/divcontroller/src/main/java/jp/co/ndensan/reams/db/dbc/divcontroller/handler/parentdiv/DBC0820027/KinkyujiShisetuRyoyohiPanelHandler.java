@@ -1347,4 +1347,15 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         return ryoyoList;
     }
 
+    /**
+     * 証明書入力チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public List<ValidationMessageControlPairs> check証明書入力() {
+        List<ValidationMessageControlPairs> checkout = new ArrayList<>();
+        KinkyujiShisetuRyoyohiPanelValidationHandler checkHandler = new KinkyujiShisetuRyoyohiPanelValidationHandler(div);
+        checkout.add(checkHandler.validate証明書チェック());
+        return checkout;
+    }
 }

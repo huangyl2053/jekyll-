@@ -32,6 +32,8 @@ public class KinkyujiShisetuRyoyohiPanelDiv extends Panel {
     private panelKinkyujiShisetuRyoyohiDiv panelKinkyujiShisetuRyoyohi;
     @JsonProperty("RowId")
     private RString RowId;
+    @JsonProperty("hdnShomeishoKanryoFlag")
+    private RString hdnShomeishoKanryoFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -109,6 +111,24 @@ public class KinkyujiShisetuRyoyohiPanelDiv extends Panel {
     @JsonProperty("RowId")
     public void setRowId(RString RowId) {
         this.RowId = RowId;
+    }
+
+    /*
+     * gethdnShomeishoKanryoFlag
+     * @return hdnShomeishoKanryoFlag
+     */
+    @JsonProperty("hdnShomeishoKanryoFlag")
+    public RString getHdnShomeishoKanryoFlag() {
+        return hdnShomeishoKanryoFlag;
+    }
+
+    /*
+     * sethdnShomeishoKanryoFlag
+     * @param hdnShomeishoKanryoFlag hdnShomeishoKanryoFlag
+     */
+    @JsonProperty("hdnShomeishoKanryoFlag")
+    public void setHdnShomeishoKanryoFlag(RString hdnShomeishoKanryoFlag) {
+        this.hdnShomeishoKanryoFlag = hdnShomeishoKanryoFlag;
     }
 
     /*
