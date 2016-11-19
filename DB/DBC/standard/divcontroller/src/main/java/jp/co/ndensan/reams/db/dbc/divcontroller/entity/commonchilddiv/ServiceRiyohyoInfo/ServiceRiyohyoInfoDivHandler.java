@@ -456,10 +456,10 @@ public class ServiceRiyohyoInfoDivHandler {
                     || 区分支給限度額情報.get管理期間終了日().isEmpty() ? null
                             : new RDate(区分支給限度額情報.get管理期間終了日().toString()));
         }
-        RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-        if (!照会.equals(表示モード)) {
-            div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
-        }
+//        RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+//        if (!照会.equals(表示モード)) {
+//            div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
+//        }
     }
 
     private void set暫定区分制御(HihokenshaNo 被保険者番号, RString 居宅総合事業区分, FlexibleYearMonth 対象年月,
@@ -490,7 +490,7 @@ public class ServiceRiyohyoInfoDivHandler {
             } else {
                 div.getChkZanteiKubun().setDisabled(false);
             }
-            if (照会.equals(表示モード)) {
+            if (照会.equals(表示モード) || 削除.equals(表示モード)) {
                 div.getChkZanteiKubun().setDisabled(true);
             }
         }
