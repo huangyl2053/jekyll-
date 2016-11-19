@@ -295,7 +295,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 受給者異動送付List.add(受給者異動送付);
                 受給者異動送付KeyList.add(受給者異動送付Key);
             }
-//            国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
         }
     }
 
@@ -1131,6 +1130,9 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     private void すべての項目比較(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
             List<IdoTblTmpEntity> 異動一時2List) {
+        if (エラーあり.equals(異動一時2entity.getエラーフラグ())) {
+            return;
+        }
         RString 異動一時2All項目 = get異動一時2All項目(異動一時2entity, true);
         RString 受給者異動送付All項目 = get受給者異動送付All項目(受給者異動送付, true);
         boolean hasChange = false;
