@@ -166,7 +166,7 @@ public class TokuteiShinryohiPanel {
         getHandler(div).readOnly特定診療費登録(true);
         getHandler(div).clear特定診療費登録();
         getHandler(div).set特定診療費登録();
-        dgdTokuteiShinryohi_Row row = div.getDgdTokuteiShinryohi().getClickedItem();
+        ddgToteishinryoTokubetushinryo_Row row = div.getDdgToteishinryoTokubetushinryo().getClickedItem();
         if (RowState.Added.equals(row.getRowState())) {
             ViewStateHolder.put(ViewStateKeys.状態, 登録_削除);
         } else {
@@ -203,7 +203,8 @@ public class TokuteiShinryohiPanel {
         getHandler(div).set特定診療費_特別診療費登録(
                 ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                 ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
-        ddgToteishinryoTokubetushinryo_Row row = div.getDdgToteishinryoTokubetushinryo().getClickedItem();
+        dgdTokuteiShinryohi_Row row = div.getDgdTokuteiShinryohi().getClickedItem();
+
         if (RowState.Added.equals(row.getRowState())) {
             ViewStateHolder.put(ViewStateKeys.状態, 登録_削除);
         } else {
