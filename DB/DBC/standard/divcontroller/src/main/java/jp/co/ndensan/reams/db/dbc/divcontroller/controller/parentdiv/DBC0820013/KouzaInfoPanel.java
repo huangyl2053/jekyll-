@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0110011.DBC0110011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.DBC0820013StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.DBC0820013TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.KouzaInfoPanelDiv;
@@ -51,8 +50,6 @@ public class KouzaInfoPanel {
     private static final RString 参照 = new RString("参照");
     private static final RString 更新 = new RString("更新");
     private static final RString 照会モード = new RString("照会");
-    private static final RString 申請を保存ボタン = new RString("btnUpdate");
-    private static final RString 申請を削除する = new RString("btnDelete");
     private static final RString NUM_1 = new RString("1");
     private static final RString NUM_2 = new RString("2");
     private static final RString NUM_3 = new RString("3");
@@ -190,14 +187,6 @@ public class KouzaInfoPanel {
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        if (修正.equals(画面モード) || 削除.equals(画面モード)) {
-            getHandler(div).申請既存チェック(整理番号, サービス年月, 被保険者番号);
-        } else {
-            if (DB == null || DB.get償還払支給申請() == null) {
-                throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace(償還払支給申請.toString()));
-            }
-        }
-
         if (変更有無チェック) {
             ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_口座, NUM_1);
         }
@@ -239,13 +228,6 @@ public class KouzaInfoPanel {
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        if (修正.equals(画面モード) || 削除.equals(画面モード)) {
-            getHandler(div).申請既存チェック(整理番号, サービス年月, 被保険者番号);
-        } else {
-            if (DB == null || DB.get償還払支給申請() == null) {
-                throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace(償還払支給申請.toString()));
-            }
-        }
 
         if (変更有無チェック) {
             ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_口座, NUM_1);
@@ -383,7 +365,7 @@ public class KouzaInfoPanel {
             getHandler(div).保存_削除(整理番号, 識別コード, サービス年月, 被保険者番号);
             div.getCcdKanryoMessage().setMessage(get完了メッセージ(削除), 被保険者番号.getColumnValue(),
                     div.getPanelOne().getCcdKaigoAtenaInfo().get氏名漢字(), true);
-            return ResponseData.of(div).setState(DBC0110011StateName.完了状態);
+            return ResponseData.of(div).setState(DBC0820013StateName.処理完了);
         } catch (Exception e) {
             throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
@@ -453,7 +435,7 @@ public class KouzaInfoPanel {
             div.getCcdKanryoMessage().setMessage(get完了メッセージ(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class)),
                     被保険者番号.getColumnValue(),
                     div.getPanelOne().getCcdKaigoAtenaInfo().get氏名漢字(), true);
-            return ResponseData.of(div).setState(DBC0110011StateName.完了状態);
+            return ResponseData.of(div).setState(DBC0820013StateName.処理完了);
         }
         return createResponse(div);
     }

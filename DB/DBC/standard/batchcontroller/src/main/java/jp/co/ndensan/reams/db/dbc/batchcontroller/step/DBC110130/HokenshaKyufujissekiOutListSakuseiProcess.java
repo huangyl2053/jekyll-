@@ -70,6 +70,8 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
             + "IHokenshaKyufujissekiOutMapper.select処理結果リスト一時TBL");
 
     private CsvListWriter csvListWriter;
+    private FileSpoolManager manager;
+    private RString eucFilePath;
 
     @Override
     protected void initialize() {
@@ -124,10 +126,10 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
     @Override
     protected void process(DbWT1002KokuhorenSakuseiErrorTempEntity entity) {
         if (null == csvListWriter) {
-            FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                     EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
             RString spoolWorkPath = manager.getEucOutputDirectry();
-            RString eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
+            eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
             csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                     .setDelimiter(コンマ)
                     .setEnclosure(ダブル引用符)
@@ -188,9 +190,8 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
 
     @Override
     protected void afterExecute() {
-        if (null != csvListWriter) {
-            csvListWriter.close();
-        }
+        csvListWriter.close();
+        manager.spool(eucFilePath);
     }
 
     private RString getColumnValue(IDbColumnMappable column) {

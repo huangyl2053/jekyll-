@@ -18,10 +18,13 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ServiceRiyohyoInfoDivValidationMessage implements IValidationMessage {
     
     /**
+     * 利用年月必須入力のチェックです
+     */
+    利用年月必須項目(UrErrorMessages.必須項目_追加メッセージあり, "利用年月"),
+    /**
      * 事業者コード必須項目
      */
     事業者必須項目(UrErrorMessages.必須項目_追加メッセージあり, "事業者"),
-
     /**
      * サービスコード必須項目
      */

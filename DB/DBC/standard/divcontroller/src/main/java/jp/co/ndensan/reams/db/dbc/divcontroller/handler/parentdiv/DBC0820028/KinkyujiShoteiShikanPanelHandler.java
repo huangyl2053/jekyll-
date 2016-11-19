@@ -1292,6 +1292,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
         div.getPanelDetail().getPanelShobyoName().setDisabled(true);
         div.getPanelDetail().getPanelOshinTuyin().setDisabled(true);
         div.getPanelDetail().getPanelJiryoutensu().setDisabled(true);
+        div.getPanelDetail().getBtnClear().setDisabled(true);
         div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShoteiList().getClickedRowId())));
     }
 

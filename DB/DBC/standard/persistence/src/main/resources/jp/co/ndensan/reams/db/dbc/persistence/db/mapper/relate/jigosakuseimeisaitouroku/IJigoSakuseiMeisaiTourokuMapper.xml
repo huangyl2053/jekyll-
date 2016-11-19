@@ -35,11 +35,11 @@
         C."serviceShuruiCode" = A."serviceShuruiCode"
         AND C."yoKaigoJotaiKubun" = A."yoKaigoJotaiKubun"
         AND C."rirekiNo" = A."rirekiNo"
+        AND ( C."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
+        AND (C."tekiyoShuryoYM" IS NULL OR C."tekiyoShuryoYM" = '' OR C."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月}) )
         WHERE
         A."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
         AND (A."tekiyoShuryoYM" IS NULL OR A."tekiyoShuryoYM" = '' OR A."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
-        AND C."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
-        AND (C."tekiyoShuryoYM" IS NULL OR C."tekiyoShuryoYM" = '' OR C."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
         ORDER BY
         A."serviceShuruiCode" DESC
     </select>

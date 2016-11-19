@@ -1758,8 +1758,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         sort異動一時2データ(allData);
         IdoTblTmpEntity 前履歴データ = null;
         for (IdoTblTmpEntity entity : allData) {
-            System.out.println((entity.get異動年月日() != null && !entity.get異動年月日().isEmpty())
-                    ? entity.get異動年月日().toString() : RString.EMPTY);
+//            System.out.println((entity.get異動年月日() != null && !entity.get異動年月日().isEmpty())
+//                    ? entity.get異動年月日().toString() : RString.EMPTY);
             if (前履歴データ == null) {
                 前履歴データ = entity;
                 continue;

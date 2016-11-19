@@ -1196,6 +1196,10 @@ public class FukaKeisan extends FukaKeisanFath {
     }
 
     private RString get段階Index(HokenryoDankaiList hokenryoDankaiList, RString 保険料段階) {
+
+        if (RString.isNullOrEmpty(保険料段階)) {
+            return RString.EMPTY;
+        }
         HokenryoDankai dankai = hokenryoDankaiList.getBy段階Index(保険料段階);
         if (dankai == null) {
             return RString.EMPTY;

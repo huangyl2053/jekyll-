@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
@@ -30,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 public class ShoriKekkaListProcess extends BatchProcessBase<DBB021051ShoriKekkaListTempEntity> {
 
     private final RString eucエンティティID = new RString("DBZ000001");
-    private final RString eucファイル名 = new RString("処理結果リスト.csv");
+    private final RString eucファイル名 = new RString("処理結果確認リスト.csv");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString カンマ = new RString(",");
 
@@ -82,7 +83,7 @@ public class ShoriKekkaListProcess extends BatchProcessBase<DBB021051ShoriKekkaL
     @Override
     protected void afterExecute() {
         csvWriter.close();
-        spoolManager.spool(eucFilePath);
+        spoolManager.spool(SubGyomuCode.DBZ介護共通, eucFilePath);
     }
 
 }

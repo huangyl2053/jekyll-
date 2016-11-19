@@ -18,7 +18,7 @@ public enum KetteiTsuchiIchiranOutPutOrder implements IReportItems {
     /**
      * 郵便番号
      */
-    郵便番号("0001", "郵便番号", "ShokanKetteiTsuchiShoMeisaiTemp.\"yubinNo\""),
+    郵便番号("0001", "郵便番号", "ShokanKetteiTsuchiShoMeisaiTemp.\"Atesaki_yubinNo\""),
     /**
      * 町域コード
      */

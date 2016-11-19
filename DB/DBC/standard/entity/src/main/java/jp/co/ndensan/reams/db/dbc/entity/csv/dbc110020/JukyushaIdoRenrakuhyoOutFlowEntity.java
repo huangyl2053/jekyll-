@@ -18,8 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JukyushaIdoRenrakuhyoOutFlowEntity {
 
     private int 異動連絡票件数;
-    private int 訂正連絡票件数;
-    private int レコード件数合計;
     private RString 入力ファイルパス;
     private RString 出力ファイルパス;
 

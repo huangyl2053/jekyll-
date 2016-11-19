@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class NinteiShinseiTorokuUketsuke {
 
-    private final RString 表示パターン_新規 = new RString("0");
     private final RString 照会 = new RString("照会");
     private static final RString SELECT_KEY0 = new RString("key0");
     private static final RString 要介護認定申請情報登録 = new RString("要介護認定申請情報登録");

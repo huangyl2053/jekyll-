@@ -337,9 +337,9 @@ public class KyuhuhiMeisaiJutokuPanel {
     ) {
         if (登録.equals(処理モード)) {
             if (is変更あり) {
-                nyuryokuFlag.set特定入所者費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力あり);
+                nyuryokuFlag.set給付費明細住特_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力あり);
             } else {
-                nyuryokuFlag.set特定入所者費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+                nyuryokuFlag.set給付費明細住特_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
             }
             証明書入力済フラグMap.put(kensakuParameter, nyuryokuFlag);
             dbJoho.set証明書入力済フラグMap(証明書入力済フラグMap);

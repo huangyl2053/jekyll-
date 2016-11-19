@@ -415,10 +415,7 @@ public class KinkyujiShoteiShikanPanel {
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (登録.equals(処理モード) || 修正.equals(処理モード)) {
-            boolean flag = getHandler(div).get内容変更状態();
-            if (flag) {
-                return save(div, keys, 処理モード);
-            }
+            return save(div, keys, 処理モード);
         }
         return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る).respond();
     }
