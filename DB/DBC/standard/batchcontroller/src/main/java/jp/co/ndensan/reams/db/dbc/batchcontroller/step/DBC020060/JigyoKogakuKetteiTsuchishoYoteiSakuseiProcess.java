@@ -475,6 +475,10 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
             reportEntity.set支払予定日(new FlexibleDate(parameter.get振込予定日().toDateString()));
         }
         reportEntity.set決定通知書番号(entity.getTsuchishoNo());
+        if (口座情報 != null) {
+            set口座情報(reportEntity, 口座情報);
+        }
+        
         if (!(ShiharaiHohoKubun.窓口払.getコード().equals(entity.getShiharaiHohoKubunCode())
                 && ShikyuFushikyuKubun.支給.getコード().equals(entity.getKetteiShikyuKubunCode()))) {
             return reportEntity;
@@ -496,9 +500,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
             reportEntity.set支払窓口開始時間(setDataTimeFomart2(parameter.get開始時間()));
             reportEntity.set支払窓口終了時間(setDataTimeFomart2(parameter.get終了時間()));
         }
-        if (口座情報 != null) {
-            set口座情報(reportEntity, 口座情報);
-        }
+        
         return reportEntity;
     }
 
@@ -536,7 +538,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         }
         returnEntity.set資格喪失日(formatDate(一時Entity.getShikakuSoshitsuYMD()));
         if (null != 一時Entity.getShikakuSoshitsuJiyuCode() && !一時Entity.getShikakuSoshitsuJiyuCode().isEmpty()) {
-            RString 喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
+            RString 喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
                     new Code(一時Entity.getShikakuSoshitsuJiyuCode()), FlexibleDate.getNowDate());
             returnEntity.set喪失事由(喪失事由);
         }

@@ -559,6 +559,10 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         reportEntity.set持ちもの(通知書定型文.get(INT_0));
         
         reportEntity.set決定通知書番号(entity.getTsuchishoNo());
+        
+        if (口座情報 != null) {
+            set口座情報_3(reportEntity, 口座情報);
+        }
         if (!(ShiharaiHohoKubun.窓口払.getコード().equals(entity.getShiharaiHohoKubunCode())
                 && ShikyuFushikyuKubun.支給.getコード().equals(entity.getKetteiShikyuKubunCode()))) {
             return reportEntity;
@@ -580,9 +584,6 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             }
         }
         
-        if (口座情報 != null) {
-            set口座情報_3(reportEntity, 口座情報);
-        }
         return reportEntity;
     }
 
@@ -612,6 +613,10 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         reportEntity.set持ちもの(通知書定型文.get(INT_0));
         reportEntity.set決定通知書番号(entity.getTsuchishoNo());
         reportEntity.set自動償還対象フラグ(entity.isJidoShokanTaishoFlag());
+        if (口座情報 != null) {
+            set口座情報_2(reportEntity, 口座情報);
+        }
+        
         if (!(ShiharaiHohoKubun.窓口払.getコード().equals(entity.getShiharaiHohoKubunCode())
                 && ShikyuFushikyuKubun.支給.getコード().equals(entity.getKetteiShikyuKubunCode()))) {
             return reportEntity;
@@ -633,9 +638,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             reportEntity.set支払窓口開始時間(setDataTimeFomart2(parameter.get開始時間()));
             reportEntity.set支払窓口終了時間(setDataTimeFomart2(parameter.get終了時間()));
         }
-        if (口座情報 != null) {
-            set口座情報_2(reportEntity, 口座情報);
-        }
+        
         
         return reportEntity;
     }
@@ -771,7 +774,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         }
         returnEntity.set資格喪失日(formatDate(一時Entity.getShikakuSoshitsuYMD()));
         if (一時Entity.getShikakuSoshitsuJiyuCode() != null && !一時Entity.getShikakuSoshitsuJiyuCode().isEmpty()) {
-            RString 喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
+            RString 喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
                     new Code(一時Entity.getShikakuSoshitsuJiyuCode()), FlexibleDate.getNowDate());
             returnEntity.set喪失事由(喪失事由);
         }
