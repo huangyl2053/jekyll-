@@ -25,47 +25,47 @@ public class HihokenshaKankeiCodeTest extends DbzTestBase {
 
     @Test
     public void 引数に1を指定した場合_toValueは_審査請求人を返す() {
-        assertThat(HihokenshaKankeiCode.toValue(new RString("1")), is(HihokenshaKankeiCode.審査請求人));
+        assertThat(HihokenshaKankeiCode.toValue(new RString("1")), is(HihokenshaKankeiCode.本人));
     }
 
     @Test
     public void 引数に2を指定した場合_toValueは_代理人を返す() {
-        assertThat(HihokenshaKankeiCode.toValue(new RString("2")), is(HihokenshaKankeiCode.代理人));
+        assertThat(HihokenshaKankeiCode.toValue(new RString("2")), is(HihokenshaKankeiCode.家族));
     }
 
     @Test
     public void 引数に3を指定した場合_toValueは_総代を返す() {
-        assertThat(HihokenshaKankeiCode.toValue(new RString("3")), is(HihokenshaKankeiCode.総代));
+        assertThat(HihokenshaKankeiCode.toValue(new RString("3")), is(HihokenshaKankeiCode.代理人));
     }
 
     @Test
     public void 審査請求人を指定した場合_getコードは_1を返す() {
-        assertThat(HihokenshaKankeiCode.審査請求人.getコード(), is(new RString("1")));
+        assertThat(HihokenshaKankeiCode.本人.getコード(), is(new RString("1")));
     }
 
     @Test
     public void 代理人を指定した場合_getコードは_2を返す() {
-        assertThat(HihokenshaKankeiCode.代理人.getコード(), is(new RString("2")));
+        assertThat(HihokenshaKankeiCode.家族.getコード(), is(new RString("2")));
     }
 
     @Test
     public void 総代を指定した場合_getコードは_3を返す() {
-        assertThat(HihokenshaKankeiCode.総代.getコード(), is(new RString("3")));
+        assertThat(HihokenshaKankeiCode.代理人.getコード(), is(new RString("3")));
     }
 
     @Test
     public void 審査請求人を指定した場合_get名称は_審査請求人を返す() {
-        assertThat(HihokenshaKankeiCode.審査請求人.get名称(), is(new RString("審査請求人")));
+        assertThat(HihokenshaKankeiCode.本人.get名称(), is(new RString("本人")));
     }
 
     @Test
     public void 代理人を指定した場合_get名称は_代理人を返す() {
-        assertThat(HihokenshaKankeiCode.代理人.get名称(), is(new RString("代理人")));
+        assertThat(HihokenshaKankeiCode.家族.get名称(), is(new RString("家族")));
     }
 
     @Test
     public void 総代を指定した場合_get名称は_総代を返す() {
-        assertThat(HihokenshaKankeiCode.総代.get名称(), is(new RString("総代")));
+        assertThat(HihokenshaKankeiCode.代理人.get名称(), is(new RString("代理人")));
     }
 
 }

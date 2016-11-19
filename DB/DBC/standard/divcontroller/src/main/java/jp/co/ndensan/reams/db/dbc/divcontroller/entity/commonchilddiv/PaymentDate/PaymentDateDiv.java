@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -127,5 +128,10 @@ public class PaymentDateDiv extends Panel implements IPaymentDateDiv {
     @Override
     public RString get窓口払い一括更新区分() {
         return this.getPayToMadoguchi().getRadIkkatsuKoshinKubun().getSelectedKey();
+    }
+
+    @Override
+    public RadioButton get窓口払い一括更新区分RB() {
+        return this.PayToMadoguchi.getRadIkkatsuKoshinKubun();
     }
 }

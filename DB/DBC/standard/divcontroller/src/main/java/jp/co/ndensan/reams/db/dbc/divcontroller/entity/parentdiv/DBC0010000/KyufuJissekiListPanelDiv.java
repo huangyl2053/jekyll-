@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuJissekiListPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,10 +40,6 @@ public class KyufuJissekiListPanelDiv extends Panel {
     private DataIdoPanelDiv DataIdoPanel;
     @JsonProperty("dgKyufuJissekiMeisaiList")
     private DataGrid<dgKyufuJissekiMeisaiList_Row> dgKyufuJissekiMeisaiList;
-    @JsonProperty("dgKyufuJissekiGokeiList")
-    private DataGrid<dgKyufuJissekiGokeiList_Row> dgKyufuJissekiGokeiList;
-    @JsonProperty("btnKyufuJissekiResearch")
-    private Button btnKyufuJissekiResearch;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -211,42 +207,6 @@ public class KyufuJissekiListPanelDiv extends Panel {
     @JsonProperty("dgKyufuJissekiMeisaiList")
     public void setDgKyufuJissekiMeisaiList(DataGrid<dgKyufuJissekiMeisaiList_Row> dgKyufuJissekiMeisaiList) {
         this.dgKyufuJissekiMeisaiList = dgKyufuJissekiMeisaiList;
-    }
-
-    /*
-     * getdgKyufuJissekiGokeiList
-     * @return dgKyufuJissekiGokeiList
-     */
-    @JsonProperty("dgKyufuJissekiGokeiList")
-    public DataGrid<dgKyufuJissekiGokeiList_Row> getDgKyufuJissekiGokeiList() {
-        return dgKyufuJissekiGokeiList;
-    }
-
-    /*
-     * setdgKyufuJissekiGokeiList
-     * @param dgKyufuJissekiGokeiList dgKyufuJissekiGokeiList
-     */
-    @JsonProperty("dgKyufuJissekiGokeiList")
-    public void setDgKyufuJissekiGokeiList(DataGrid<dgKyufuJissekiGokeiList_Row> dgKyufuJissekiGokeiList) {
-        this.dgKyufuJissekiGokeiList = dgKyufuJissekiGokeiList;
-    }
-
-    /*
-     * getbtnKyufuJissekiResearch
-     * @return btnKyufuJissekiResearch
-     */
-    @JsonProperty("btnKyufuJissekiResearch")
-    public Button getBtnKyufuJissekiResearch() {
-        return btnKyufuJissekiResearch;
-    }
-
-    /*
-     * setbtnKyufuJissekiResearch
-     * @param btnKyufuJissekiResearch btnKyufuJissekiResearch
-     */
-    @JsonProperty("btnKyufuJissekiResearch")
-    public void setBtnKyufuJissekiResearch(Button btnKyufuJissekiResearch) {
-        this.btnKyufuJissekiResearch = btnKyufuJissekiResearch;
     }
 
     /*

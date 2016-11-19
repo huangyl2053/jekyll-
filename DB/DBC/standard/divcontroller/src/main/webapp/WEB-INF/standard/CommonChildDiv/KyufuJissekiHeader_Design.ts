@@ -61,10 +61,6 @@ module DBC {
                 return new UZA.TextBoxDate(this.convFiledName("txtSeinengappi"));
             }
 
-            public lin01(): UZA.HorizontalLine {
-                return new UZA.HorizontalLine(this.convFiledName("lin01"));
-            }
-
             public txtTeikyoNengetsu(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtTeikyoNengetsu"));
             }
@@ -89,16 +85,16 @@ module DBC {
                 return new UZA.TextBox(this.convFiledName("txtYoshikiNo"));
             }
 
-            public txtJigyosha(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJigyosha"));
+            public txtYoshikiMeisho(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtYoshikiMeisho"));
             }
 
             public txtJigyoshaNo(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtJigyoshaNo"));
             }
 
-            public txtYoshikiMeisho(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtYoshikiMeisho"));
+            public txtJigyosha(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtJigyosha"));
             }
 
         }

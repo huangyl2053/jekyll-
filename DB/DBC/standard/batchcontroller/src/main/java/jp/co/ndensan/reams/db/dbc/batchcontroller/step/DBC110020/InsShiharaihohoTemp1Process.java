@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntit
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -1451,6 +1452,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         List<RString> 住所地特例Info = 住所地特例.split(SPLIT.toString());
         entity.set住所地特例適用開始日(new FlexibleDate(住所地特例Info.get(ORDER_0)));
         entity.set住所地特例適用終了日(new FlexibleDate(住所地特例Info.get(ORDER_1)));
+        entity.set転出先保険者番号(new HokenshaNo(住所地特例Info.get(ORDER_3)));
         return entity;
     }
 

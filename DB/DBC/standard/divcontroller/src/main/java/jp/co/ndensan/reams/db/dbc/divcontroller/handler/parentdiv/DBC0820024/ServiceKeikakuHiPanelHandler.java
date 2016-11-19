@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820024;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
@@ -15,10 +17,10 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanSe
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.ServiceKeikakuHiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.dgdYichiran_Row;
-import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -26,20 +28,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -64,6 +62,13 @@ public class ServiceKeikakuHiPanelHandler {
     private static final int サービスコード2 = 4;
     private static final int 担当介護支援専門員番号LENGTH = 8;
     private static final Decimal DECIMAL_100 = new Decimal(100);
+    private static final Comparator COMPARABLE = new Comparator<dgdYichiran_Row>() {
+        @Override
+        public int compare(dgdYichiran_Row o1, dgdYichiran_Row o2) {
+            return -(Integer.parseInt(o1.getDefaultDataName7().toString())
+                    - Integer.parseInt(o2.getDefaultDataName7().toString()));
+        }
+    };
 
     /**
      * ServiceKeikakuHiPanelHandlerコンストラクタです
@@ -219,27 +224,6 @@ public class ServiceKeikakuHiPanelHandler {
     }
 
     /**
-     * 「確定する」ボタンを押下した際に実行します。合計の値の設定
-     */
-    public void set合計() {
-        List<dgdYichiran_Row> dataSource = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
-        Decimal 単位合計 = Decimal.ZERO;
-        // TODO ramlファイルの修正は許可されない、
-//        Decimal 請求額合計 = Decimal.ZERO;
-        for (dgdYichiran_Row row : dataSource) {
-            if (RowState.Deleted.equals(row.getRowState())) {
-                continue;
-            }
-            if (row.getDefaultDataName4().getValue() != null) {
-                単位合計 = 単位合計.add(row.getDefaultDataName4().getValue());
-            }
-            // TODO ramlファイルの修正は許可されない、
-//            if ()
-        }
-        div.getPanelServiceKeikakuhiUp().getTxtGokeiTanyi().setValue(単位合計);
-    }
-
-    /**
      * グリッドの修正、追加button Handlerのsetです。
      */
     private void set修正_追加() {
@@ -280,33 +264,45 @@ public class ServiceKeikakuHiPanelHandler {
 
     /**
      * 「確定する」ボタンを押下 登録の場合
+     *
+     * @param maxRenban 最大連番
      */
-    public void 確定_登録() {
+    public void 確定_登録(int maxRenban) {
         setサービス計画費グリッドエリアRequired(false);
         dgdYichiran_Row row = new dgdYichiran_Row();
-        登録パネル_グリッド(row);
+        登録パネル_グリッド(row, maxRenban, true);
         List<dgdYichiran_Row> rowList = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
         row.setRowState(RowState.Added);
         rowList.add(row);
+        Collections.sort(rowList, COMPARABLE);
         div.getPanelServiceKeikakuhiUp().getDgdYichiran().setDataSource(rowList);
     }
 
     /**
      * 「確定する」ボタンを押下 修正の場合
+     *
+     * @param maxRenban 最大連番
+     * @param entity200904ResultList ShokanServicePlan200904Result
      */
-    public void 確定_修正() {
+    public void 確定_修正(int maxRenban,
+            List<ShokanServicePlan200904Result> entity200904ResultList) {
         setサービス計画費グリッドエリアRequired(false);
         dgdYichiran_Row row = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getClickedItem();
         RowState state = row.getRowState();
-        Boolean flag = 変更チェック(row);
-        if (flag) {
-            登録パネル_グリッド(row);
-            if (!RowState.Added.equals(state)) {
-                row.setRowState(RowState.Modified);
-            }
-        } else {
-            confirm(row);
+        Boolean flag = 変更チェック(row, entity200904ResultList);
+        登録パネル_グリッド(row, maxRenban, false);
+        if (RowState.Modified == state && !flag) {
+            row.setRowState(RowState.Unchanged);
+        } else if (RowState.Added != state) {
+            row.setRowState(RowState.Modified);
         }
+    }
+
+    private FlexibleDate formatRDateToFlexible(RDate date) {
+        if (date == null) {
+            return FlexibleDate.EMPTY;
+        }
+        return new FlexibleDate(date.toDateString());
     }
 
     /**
@@ -314,14 +310,37 @@ public class ServiceKeikakuHiPanelHandler {
      */
     public void 確定_削除() {
         setサービス計画費グリッドエリアRequired(false);
+        List<dgdYichiran_Row> list = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
         dgdYichiran_Row row = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getClickedItem();
         RowState state = row.getRowState();
         if (RowState.Added.equals(state)) {
-            div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource().remove(row.getId());
+            list.remove(row.getId());
+            resetRenban(row, list);
         } else {
             row.setRowState(RowState.Deleted);
         }
+        Collections.sort(list, COMPARABLE);
+        div.getPanelServiceKeikakuhiUp().getDgdYichiran().setDataSource(list);
         set修正_追加();
+    }
+
+    private void resetRenban(dgdYichiran_Row row, List<dgdYichiran_Row> list) {
+        int id = row.getId();
+        if (id != 0) {
+            RString deletedRenban = row.getDefaultDataName7();
+            RString mid;
+            for (dgdYichiran_Row resetRow : list) {
+                if (id - resetRow.getId() == 1) {
+                    mid = resetRow.getDefaultDataName7();
+                    resetRow.setDefaultDataName7(deletedRenban);
+                    id = id - 1;
+                    deletedRenban = mid;
+                }
+                if (id == 0) {
+                    break;
+                }
+            }
+        }
     }
 
     /**
@@ -533,39 +552,6 @@ public class ServiceKeikakuHiPanelHandler {
         return null;
     }
 
-    /**
-     * 入力されたデータをクリアし 内容の破棄
-     *
-     * @param サービス年月 サービス年月
-     * @param entity200904ResultList List<ShokanServicePlan200904Result>
-     * @param entity200604Result ShokanServicePlan200604Result
-     * @param entity200004Result ShokanServicePlan200004Result
-     * @param 画面モード RString
-     */
-    public void 登録モード変更処理(FlexibleYearMonth サービス年月,
-            List<ShokanServicePlan200904Result> entity200904ResultList,
-            ShokanServicePlan200604Result entity200604Result,
-            ShokanServicePlan200004Result entity200004Result,
-            RString 画面モード) {
-        if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
-            if (entity200904ResultList == null || entity200904ResultList.isEmpty()) {
-                load事業者区分リスト200904();
-            } else {
-                onLoad200904(entity200904ResultList, 画面モード);
-            }
-        } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && サービス年月.isBefore(サービス年月_200904)) {
-            if (entity200604Result == null) {
-                load事業者区分リスト200904前();
-            } else {
-                onLoad200604(entity200604Result, 画面モード);
-            }
-        } else if (entity200004Result == null) {
-            load事業者区分リスト200904前();
-        } else {
-            onLoad200004(entity200004Result, 画面モード);
-        }
-    }
-
     private List<ShokanServicePlan200904Result> 保存_データ_200904(List<dgdYichiran_Row> rowList,
             List<ShokanServicePlan200904Result> entity200904ResultList,
             HihokenshaNo 被保険者番号,
@@ -574,8 +560,6 @@ public class ServiceKeikakuHiPanelHandler {
             RString 様式番号,
             RString 明細番号,
             RString 整理番号) {
-        int max連番 = 0;
-        max連番 = max連番(entity200904ResultList);
         List<ShokanServicePlan200904Result> newEntity200904ResultList = new ArrayList<>();
         for (dgdYichiran_Row row : rowList) {
             if (RowState.Modified.equals(row.getRowState())) {
@@ -584,7 +568,6 @@ public class ServiceKeikakuHiPanelHandler {
                 ShokanServicePlan200904 entity200904 = 保存_データ(row, entity200904Result.getEntity());
                 newEntity200904ResultList.add(new ShokanServicePlan200904Result(entity200904, entity200904Result.getServiceName()));
             } else if (RowState.Added.equals(row.getRowState())) {
-                max連番 = max連番 + 1;
                 ShokanServicePlan200904 entity200904 = new ShokanServicePlan200904(
                         被保険者番号,
                         サービス年月,
@@ -592,7 +575,7 @@ public class ServiceKeikakuHiPanelHandler {
                         事業者番号,
                         様式番号,
                         明細番号,
-                        new RString(String.valueOf(max連番)).padZeroToLeft(連番LENGTH));
+                        row.getDefaultDataName7());
                 entity200904 = 保存_データ(row, entity200904);
                 newEntity200904ResultList.add(new ShokanServicePlan200904Result(entity200904, RString.EMPTY));
             }
@@ -715,19 +698,6 @@ public class ServiceKeikakuHiPanelHandler {
         }
     }
 
-    private int max連番(List<ShokanServicePlan200904Result> entity200904ResultList) {
-        int max連番 = 0;
-        if (entity200904ResultList == null) {
-            return max連番;
-        }
-        for (ShokanServicePlan200904Result entity200904Result : entity200904ResultList) {
-            if (max連番 < Integer.valueOf(entity200904Result.getEntity().get連番().toString())) {
-                max連番 = Integer.valueOf(entity200904Result.getEntity().get連番().toString());
-            }
-        }
-        return max連番;
-    }
-
     private FlexibleDate get届出日(RDate date) {
         FlexibleDate 届出日 = null;
         if (date != null) {
@@ -736,18 +706,7 @@ public class ServiceKeikakuHiPanelHandler {
         return 届出日;
     }
 
-    private ResponseData<ServiceKeikakuHiPanelDiv> confirm(dgdYichiran_Row row) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            row.setRowState(RowState.Unchanged);
-            return ResponseData.of(div).respond();
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    private void 登録パネル_グリッド(dgdYichiran_Row row) {
+    private void 登録パネル_グリッド(dgdYichiran_Row row, int maxRenban, boolean is登録) {
         IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div
                 .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
         RStringBuilder サービスコードBuilder = new RStringBuilder();
@@ -775,6 +734,9 @@ public class ServiceKeikakuHiPanelHandler {
         row.getDefaultDataName10().setValue(届出日);
         row.setDefaultDataName11(担当介護支援専門員番号);
         row.getDefaultDataName12().setValue(単位数単価);
+        if (is登録) {
+            row.setDefaultDataName7(new RString(maxRenban + 1));
+        }
     }
 
     private ShokanServicePlan200904 保存_データ(dgdYichiran_Row row, ShokanServicePlan200904 entity200904) {
@@ -789,7 +751,6 @@ public class ServiceKeikakuHiPanelHandler {
         RString 摘要 = row.getDefaultDataName5();
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().getSelectedKey();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().getSelectedKey();
-        // TODO 届出日 画面のチックは必要ですが？
         FlexibleDate 届出日 = get届出日(div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().getValue());
         RString 担当介護支援専門員番号 = div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().getValue();
         Decimal 単位数単価Decimal = div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().getValue();
@@ -1004,6 +965,7 @@ public class ServiceKeikakuHiPanelHandler {
         Decimal 請求額合計 = 単位合計.multiply(entity200904ResultList.get(0).getEntity().get単位数単価());
         div.getPanelServiceKeikakuhiUp().getTxtGokeiTanyi().setValue(単位合計);
         div.getPanelServiceKeikakuhiUp().getTxtSeikyugaku().setValue(請求額合計);
+        Collections.sort(dataSource, COMPARABLE);
         div.getPanelServiceKeikakuhiUp().getDgdYichiran().setDataSource(dataSource);
         if (削除モード.equals(画面モード)) {
             div.getPanelServiceKeikakuhiUp().getDgdYichiran().setReadOnly(true);
@@ -1110,7 +1072,14 @@ public class ServiceKeikakuHiPanelHandler {
         div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setRequired(flag);
     }
 
-    private Boolean 変更チェック(dgdYichiran_Row row) {
+    private Boolean 変更チェック(dgdYichiran_Row row, List<ShokanServicePlan200904Result> entity200904ResultList) {
+        ShokanServicePlan200904Result result = null;
+        for (ShokanServicePlan200904Result palnResult : entity200904ResultList) {
+            if (row.getDefaultDataName7().equals(palnResult.getEntity().get連番())) {
+                result = palnResult;
+                break;
+            }
+        }
         int flag = 0;
         IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div
                 .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
@@ -1118,27 +1087,25 @@ public class ServiceKeikakuHiPanelHandler {
         RString serviceCode1 = serviceCodeInputDiv.getサービスコード1();
         サービスコードBuilder.append(serviceCode1);
         サービスコードBuilder.append(serviceCodeInputDiv.getサービスコード2());
-        RString サービスコード名称 = serviceCodeInputDiv.getサービス名称();
         Decimal 単位数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTanyiUp().getValue();
         Decimal 回数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtKaisu().getValue();
         Decimal サービス単位数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtServiceTanyiSu().getValue();
         RString 摘要 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTekiyoUp().getValue();
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().getSelectedKey();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().getSelectedKey();
-        RDate 届出日 = div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().getValue();
+        FlexibleDate 届出日 = formatRDateToFlexible(div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().getValue());
         RString 担当介護支援専門員番号 = div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().getValue();
         Decimal 単位数単価 = div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().getValue();
-        flag = flag + check(サービスコードBuilder.toRString(), row.getDefaultDataName1());
-        flag = flag + check(サービスコード名称, row.getDefaultDataName6());
-        flag = flag + checkDecimal(単位数, row.getDefaultDataName2().getValue());
-        flag = flag + checkDecimal(回数, row.getDefaultDataName3().getValue());
-        flag = flag + checkDecimal(サービス単位数, row.getDefaultDataName4().getValue());
-        flag = flag + check(摘要, row.getDefaultDataName5());
-        flag = flag + check(指定_基準該当事業者区分コード, row.getDefaultDataName8());
-        flag = flag + check(審査方法区分コード, row.getDefaultDataName9());
-        flag = flag + check(届出日, row.getDefaultDataName10().getValue());
-        flag = flag + check担当介護支援専門員番号(担当介護支援専門員番号, row.getDefaultDataName11());
-        flag = flag + checkDecimal(単位数単価, row.getDefaultDataName12().getValue());
+        flag = flag + check(サービスコードBuilder.toRString(), result.getEntity().getサービスコード().value());
+        flag = flag + checkDecimal(単位数, new Decimal(result.getEntity().get単位数()));
+        flag = flag + checkDecimal(回数, new Decimal(result.getEntity().get回数()));
+        flag = flag + checkDecimal(サービス単位数, new Decimal(result.getEntity().getサービス単位数()));
+        flag = flag + check(摘要, result.getEntity().get摘要());
+        flag = flag + check(指定_基準該当事業者区分コード, result.getEntity().get指定_基準該当事業者区分コード());
+        flag = flag + check(審査方法区分コード, result.getEntity().get審査方法区分コード());
+        flag = flag + check(届出日, result.getEntity().get居宅サービス計画作成依頼届出年月日());
+        flag = flag + check担当介護支援専門員番号(担当介護支援専門員番号, result.getEntity().get担当介護支援専門員番号());
+        flag = flag + checkDecimal(単位数単価, result.getEntity().get単位数単価());
         return flag != 0;
     }
 

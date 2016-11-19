@@ -99,14 +99,16 @@ public class NonyuTsuchiShoJohoFactory {
      * @param 本算定納入通知書制御情報 本算定納入通知書制御情報
      * @param 出力期リスト 出力期リスト
      * @param 代納人氏名 代納人氏名
-     * @return 本算定納入通知書情報
+     * @param is期毎タイプ is期毎タイプ
+     * @return 本算定納入通知書情報 本算定納入通知書情報
      * @throws NullPointerException パラメータのいずれかがNullの場合。
      */
     public HonSanteiNonyuTsuchiShoJoho create本算定納入通知書情報(
             HonSanteiTsuchiShoKyotsu 本算定通知書情報,
             HonSanteiNonyuTsuchiShoSeigyoJoho 本算定納入通知書制御情報,
             List<Kitsuki> 出力期リスト,
-            IName 代納人氏名) {
+            IName 代納人氏名,
+            boolean is期毎タイプ) {
         requireNonNull(本算定通知書情報, UrSystemErrorMessages.値がnull.getReplacedMessage("本算定通知書情報"));
         requireNonNull(本算定納入通知書制御情報, UrSystemErrorMessages.値がnull.getReplacedMessage("本算定納入通知書制御情報"));
         requireNonNull(出力期リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("出力期リスト"));
@@ -153,7 +155,8 @@ public class NonyuTsuchiShoJohoFactory {
                 収納科目,
                 代納人氏名,
                 出力期リスト,
-                HenshuHaniKubun.全てのレイアウト);
+                HenshuHaniKubun.全てのレイアウト,
+                is期毎タイプ);
         return 本算定納入通知書情報;
     }
 

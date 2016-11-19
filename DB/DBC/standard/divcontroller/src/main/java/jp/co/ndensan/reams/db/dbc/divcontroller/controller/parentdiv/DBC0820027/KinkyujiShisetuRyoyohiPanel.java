@@ -58,7 +58,6 @@ public class KinkyujiShisetuRyoyohiPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 登録_削除 = new RString("登録_削除");
-    private static final RString エーラメッセージ = new RString("請求額集計情報の未登録のサービス種類が存在します。請求額集計情報を登録して下さい。");
 
     /**
      * 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面初期化
@@ -96,15 +95,10 @@ public class KinkyujiShisetuRyoyohiPanel {
         }
         Map<RString, RString> map = ViewStateHolder.get(ViewStateKeys.緊急時施設療養_グリッドエリア, Map.class);
         if (map != null && !updateList.isEmpty()) {
-            List<ShokanKinkyuShisetsuRyoyo> realList = getHandler(div).setRealList(list, updateList, map);
-            ViewStateHolder.put(ViewStateKeys.緊急時施設療養, (Serializable) realList);
+            getHandler(div).setRealList(list, updateList, map);
         } else {
             getHandler(div).initDgdKinkyujiShiseturyoyo(list);
-            int maxRenban = getHandler(div).get最大連番(list);
-            ViewStateHolder.put(ViewStateKeys.緊急時施設療養_最大連番, maxRenban);
-            ViewStateHolder.put(ViewStateKeys.緊急時施設療養, (Serializable) list);
         }
-
         getHandler(div).initPanelHead(被保険者番号, 整理番号, サービス年月, 申請日, 事業者番号,
                 明細番号, 証明書, 様式番号, 識別コード);
         ShikibetsuNoKanri 識別番号管理情報 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
@@ -232,13 +226,13 @@ public class KinkyujiShisetuRyoyohiPanel {
             }
         }
         RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        int maxRenban = ViewStateHolder.get(ViewStateKeys.緊急時施設療養_最大連番, Integer.class);
-        List<ShokanKinkyuShisetsuRyoyo> list = ViewStateHolder.get(ViewStateKeys.緊急時施設療養DB, ArrayList.class);
-        boolean is追加 = getHandler(div).click_Confirm(state, maxRenban, list);
-        if (is追加) {
-            maxRenban = maxRenban + 1;
-            ViewStateHolder.put(ViewStateKeys.緊急時施設療養_最大連番, maxRenban);
+        int maxRenban = 0;
+        if (div.getDgdKinkyujiShiseturyoyo().getDataSource() != null && !div.getDgdKinkyujiShiseturyoyo().getDataSource().isEmpty()) {
+            maxRenban = Integer.parseInt(div.getDgdKinkyujiShiseturyoyo().getDataSource().get(0).getDefaultDataName21().toString());
         }
+        List<ShokanKinkyuShisetsuRyoyo> list = ViewStateHolder.get(ViewStateKeys.緊急時施設療養DB, ArrayList.class);
+        getHandler(div).click_Confirm(state, maxRenban, list);
+        getHandler(div).clear登録();
         return ResponseData.of(div).respond();
     }
 
@@ -286,7 +280,12 @@ public class KinkyujiShisetuRyoyohiPanel {
             SyokanbaraihiShikyuShinseiManager manager = SyokanbaraihiShikyuShinseiManager.createInstance();
             ShomeishoNyuryokuKanryoKubunType 証明書入力済区分 = manager.証明書InputCheck(
                     nyuryokuFlag, kensakuParameter.get様式番号(), kensakuParameter.getサービス年月());
-            set証明書入力完了フラグ(証明書入力済区分, dbJoho, kensakuParameter);
+            set証明書入力完了フラグ(証明書入力済区分, dbJoho, kensakuParameter, div);
+            for (ValidationMessageControlPairs pairs : getHandler(div).check証明書入力()) {
+                if (pairs.iterator().hasNext()) {
+                    return ResponseData.of(div).addValidationMessages(pairs).respond();
+                }
+            }
         }
         return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る).respond();
     }
@@ -312,13 +311,9 @@ public class KinkyujiShisetuRyoyohiPanel {
             }
         }
 
-        try {
-            List<ShokanKinkyuShisetsuRyoyo> list = ViewStateHolder.get(ViewStateKeys.緊急時施設療養, ArrayList.class);
-            updateList = getHandler(div).get更新リスト(list, kensakuParameter, updateList);
-            kihon = getHandler(div).set基本情報(kihon);
-        } catch (Exception e) {
-            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
-        }
+        List<ShokanKinkyuShisetsuRyoyo> list = ViewStateHolder.get(ViewStateKeys.緊急時施設療養DB, ArrayList.class);
+        updateList = getHandler(div).get更新リスト(list, kensakuParameter, updateList);
+        kihon = getHandler(div).set基本情報(kihon);
 
         dbJoho.set償還払請求緊急時施設療養データList(new ArrayList<>(updateList));
         if (kihon != null && updateNum != null) {
@@ -620,7 +615,7 @@ public class KinkyujiShisetuRyoyohiPanel {
 
     private void set証明書入力完了フラグ(
             ShomeishoNyuryokuKanryoKubunType 証明書入力済区分, DbJohoViewState dbJoho,
-            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
+            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter, KinkyujiShisetuRyoyohiPanelDiv div) {
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> kanryoFlagMap = dbJoho.get証明書入力完了フラグMap();
         if (kanryoFlagMap == null) {
             kanryoFlagMap = new HashMap<>();
@@ -639,9 +634,7 @@ public class KinkyujiShisetuRyoyohiPanel {
         kanryoFlagMap.put(kensakuParameter, ShomeishoNyuryokuKanryoKubunType.入力完了);
         dbJoho.set証明書入力完了フラグMap(kanryoFlagMap);
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
-        if (証明書入力済区分 == ShomeishoNyuryokuKanryoKubunType.入力未完了) {
-            throw new ApplicationException(エーラメッセージ.toString());
-        }
+        div.setHdnShomeishoKanryoFlag(証明書入力済区分.getCode());
     }
 
     private KinkyujiShisetuRyoyohiPanelHandler getHandler(KinkyujiShisetuRyoyohiPanelDiv div) {

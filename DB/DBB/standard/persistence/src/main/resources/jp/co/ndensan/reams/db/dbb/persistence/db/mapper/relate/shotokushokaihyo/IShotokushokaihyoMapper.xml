@@ -36,6 +36,7 @@
         <result property="転入前方書" column="転入前方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="登録事由コード" column="登録事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="min登録異動年月日" column="min登録異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="最新フラグ" column="最新フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
     </resultMap>
 
     <!--候補者転入者を取得します。-->
@@ -72,7 +73,8 @@
         "ShikibetsuTaisho"."tennyumaeBanchi" AS 転入前番地,
         "ShikibetsuTaisho"."tennyumaeKatagaki" AS 転入前方書,
         "ShikibetsuTaisho"."torokuJiyuCode" AS 登録事由コード,
-        min("ShikibetsuTaisho"."torokuIdoYMD") AS min登録異動年月日
+        min("ShikibetsuTaisho"."torokuIdoYMD") AS min登録異動年月日,
+        "ShikibetsuTaisho"."currentFlag" AS 最新フラグ
         FROM   
         rgua."UaFt200FindShikibetsuTaisho"('3','','0','DB','0','','','','','','','','','','','0','0','','','','','',''
         ,'0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0'
@@ -114,7 +116,8 @@
         "ShikibetsuTaisho"."tennyumaeJusho",
         "ShikibetsuTaisho"."tennyumaeBanchi",
         "ShikibetsuTaisho"."tennyumaeKatagaki",
-        "ShikibetsuTaisho"."torokuJiyuCode"
+        "ShikibetsuTaisho"."torokuJiyuCode",
+        "ShikibetsuTaisho"."currentFlag"
         ORDER BY
         "ShikibetsuTaisho"."shikibetsuCode" ASC, min登録異動年月日 ASC)
         UNION ALL
@@ -147,7 +150,8 @@
         "FindShikibetsuTaisho"."tennyumaeBanchi" AS 転入前番地,
         "FindShikibetsuTaisho"."tennyumaeKatagaki" AS 転入前方書,
         "FindShikibetsuTaisho"."torokuJiyuCode" AS 登録事由コード,
-        min("FindShikibetsuTaisho"."torokuIdoYMD") AS min登録異動年月日
+        min("FindShikibetsuTaisho"."torokuIdoYMD") AS min登録異動年月日,
+        "FindShikibetsuTaisho"."currentFlag" AS 最新フラグ
         FROM rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年度_0101},'1','DB','0','','','','','','','','','','','0','0','',''
         ,'','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','',''
         ,'','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','','{  }') AS "FindShikibetsuTaisho"
@@ -181,7 +185,8 @@
         "FindShikibetsuTaisho"."tennyumaeJusho",
         "FindShikibetsuTaisho"."tennyumaeBanchi",
         "FindShikibetsuTaisho"."tennyumaeKatagaki",
-        "FindShikibetsuTaisho"."torokuJiyuCode")) AS MIX
+        "FindShikibetsuTaisho"."torokuJiyuCode",
+        "FindShikibetsuTaisho"."currentFlag")) AS MIX
         ORDER BY MIX."識別コード"
     </select>
     
@@ -324,11 +329,12 @@
         FROM "TmpSetaiShotoku" AS A
         LEFT OUTER JOIN "NendoNaiyuSikakuMonoTemp" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
+        ORDER BY "shikibetsuCode"
     </select>
     
     <resultMap id="ResultMap_SetaiShotokuTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.SetaiShotokuTempEntity" autoMapping="true">
-        <id column="hihokenshaNo"/>
         <id column="shikibetsuCode"/>
+        <id column="setaiCode"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -419,6 +425,7 @@
         FROM "TmpSetaiShotoku" AS A
         LEFT OUTER JOIN "JukyuusyaTemp" AS B
         ON A."hihokenshaNo"=B."hihokenshaNo"
+        ORDER BY "shikibetsuCode"
     </select>
     
     <select resultOrdered="true" id="select世帯員所得3" resultMap="ResultMap_SetaiShotokuTempEntity" fetchSize="500">
@@ -461,6 +468,7 @@
         "TmpSetaiShotoku2"."hihokennshaKubunCode"
         FROM "TmpSetaiShotoku2" AS "TmpSetaiShotoku2"
         ORDER BY "TmpSetaiShotoku2"."shikibetsuCode" ASC, "TmpSetaiShotoku2"."kijunYMD" DESC)
+        ORDER BY "shikibetsuCode"
     </select>
     
         

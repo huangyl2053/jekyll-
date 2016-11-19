@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoK
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
@@ -73,6 +75,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private static final RString 徴収_なし = new RString("徴収なし");
     private static final RString 随時 = new RString("随時");
     private static final RString 現年随時 = new RString("現年随時");
+    private static final List<Integer> 月List = Arrays.asList(期_4, 期_7, 期_6, 期_7, 期_8, 期_9);
 
     /**
      * 仮算定通知書共通情報を作成します。
@@ -274,11 +277,11 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正前.set更正前普徴期別金額リスト(get普徴期別金額リストBy賦課情報(仮算定通知書情報.get普徴納期情報リスト(), 賦課情報_更正前));
         更正前.set更正前特別徴収義務者(仮算定通知書情報.get対象者_追加含む_情報_更正前() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード() == null ? RString.EMPTY
-                        : CodeMaster.getCodeMeisho(UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                        : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                                 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value(), FlexibleDate.getNowDate()));
         更正前.set更正前特別徴収対象年金(仮算定通知書情報.get徴収方法情報_更正前() == null
                 || 仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード() == null ? RString.EMPTY
-                        : CodeMaster.getCodeMeisho(UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                        : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                                 new Code(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード().substring(0, INDEX_3)), FlexibleDate.getNowDate()));
         更正前.set更正前特別徴収義務者コード(new NenkinCode((仮算定通知書情報.get対象者_追加含む_情報_更正前() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード() == null) ? Code.EMPTY
@@ -516,15 +519,16 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         if (納期情報リスト == null || 納期情報リスト.isEmpty()) {
             return Decimal.ZERO;
         }
+        List<Integer> list = new ArrayList<>();
         for (int i = 0; i < 納期情報リスト.size(); i++) {
-            最初期 = 納期情報リスト.get(0).get納期().get期別();
+            最初期 = 納期情報リスト.get(納期情報リスト.size() - 1).get期月().get期AsInt();
             if (納期情報リスト.get(i).get納期().get納期開始日().isBeforeOrEquals(RDate.getNowDate())
                     && RDate.getNowDate().isBeforeOrEquals(納期情報リスト.get(i).get納期().get納期終了日())) {
                 最大期 = 納期情報リスト.get(i).get納期().get期別();
             }
         }
         if (最初期 != 0 && 最大期 != 0) {
-            return get納付額By収入情報(徴収メソッド, 収入情報, 最初期, 最大期);
+            return get納付額By収入情報(徴収メソッド, 収入情報, 最初期, 最大期, getRightKi(納期情報リスト));
         }
         return Decimal.ZERO;
     }
@@ -532,10 +536,20 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private Decimal get納付済額未到来期含む(RString メソッド_収入, List<NokiJoho> 納期情報リスト, ShunyuJoho 収入情報) {
         if (納期情報リスト != null && !納期情報リスト.isEmpty()) {
             return get納付額By収入情報(メソッド_収入, 収入情報,
-                    納期情報リスト.get(0).get期月().get期AsInt(),
-                    納期情報リスト.get(納期情報リスト.size() - 1).get期月().get期AsInt());
+                    納期情報リスト.get(納期情報リスト.size() - 1).get期月().get期AsInt(), 納期情報リスト.get(0).get期月().get期AsInt(),
+                    getRightKi(納期情報リスト));
         }
         return Decimal.ZERO;
+    }
+
+    private List<Integer> getRightKi(List<NokiJoho> 納期情報リスト) {
+        List<Integer> list = new ArrayList<>();
+        for (NokiJoho nokiJoho : 納期情報リスト) {
+            if (月List.contains(nokiJoho.get期月().get月AsInt()) && !list.contains(nokiJoho.get期月().get期AsInt())) {
+                list.add(nokiJoho.get期月().get期AsInt());
+            }
+        }
+        return list;
     }
 
     private Decimal get前年度最終期普徴期別介護保険料(KariSanteiTsuchiShoKyotsu 仮算定通知書情報) {
@@ -605,10 +619,12 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         return 期別金額リスト;
     }
 
-    private Decimal get納付額By収入情報(RString メソッド_収入, ShunyuJoho shunyuJoho, int start, int end) {
+    private Decimal get納付額By収入情報(RString メソッド_収入, ShunyuJoho shunyuJoho, int start, int end, List<Integer> kiList) {
         Decimal 納付済額 = Decimal.ZERO;
         for (int i = start; i <= end; i++) {
-            納付済額 = 納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
+            if (kiList.contains(i)) {
+                納付済額 = 納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
+            }
         }
         return 納付済額;
     }
@@ -626,10 +642,50 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         if (特徴納期情報リスト == null || 特徴納期情報リスト.isEmpty()) {
             return 期月;
         }
-        for (NokiJoho nokiJoho : 特徴納期情報リスト) {
-            期月.add(nokiJoho.get期月());
-        }
+        期月 = sort特徴期月(特徴納期情報リスト);
         return 期月;
+    }
+
+    private List<Kitsuki> sort特徴期月(List<NokiJoho> 特徴納期情報リスト) {
+        TokuchoKiUtil tokuchoKiUtil = new TokuchoKiUtil();
+        KitsukiList 特徴期月リスト = tokuchoKiUtil.get期月リスト();
+        List<Kitsuki> list = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            for (NokiJoho 納期情報 : 特徴納期情報リスト) {
+                if (納期情報.get期月().get期AsInt() == (i)
+                        && 納期情報.get期月().get月AsInt() == 特徴期月リスト.get期の最初月(i).get月AsInt()) {
+                    list.add(納期情報.get期月());
+                }
+            }
+        }
+        return list;
+    }
+
+    private List<UniversalSignDeliveryInformation> sort普徴納期(List<NokiJoho> 普徴納期情報リスト) {
+        List<UniversalSignDeliveryInformation> 普徴納期 = new ArrayList<>();
+        FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
+        KitsukiList 普徴期月リスト = fuchoKiUtil.get期月リスト();
+        for (int i = 1; i <= 普徴期月リスト.getLast().get期AsInt(); i++) {
+            for (NokiJoho nokiJoho : 普徴納期情報リスト) {
+                if (nokiJoho.get期月().get期AsInt() == (i)
+                        && nokiJoho.get期月().get月AsInt() == 普徴期月リスト.get期の最初月(i).get月AsInt()) {
+                    UniversalSignDeliveryInformation information = new UniversalSignDeliveryInformation();
+                    information.set期月(nokiJoho.get期月());
+                    information.set随時(随時期判断(nokiJoho.get期月()));
+                    information.set納期開始日(nokiJoho.get納期().get納期開始日().wareki().eraType(EraType.KANJI)
+                            .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                    information.set納期終了日(nokiJoho.get納期().get納期終了日().wareki().eraType(EraType.KANJI)
+                            .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                    information.set納期限(nokiJoho.get納期().get納期限().wareki().eraType(EraType.KANJI)
+                            .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                    information.set現年過年区分(new RString(nokiJoho.get納期().get現年過年区分().toString()));
+                    information.set通知書発行日(nokiJoho.get納期().get通知書発行日());
+                    普徴納期.add(information);
+                }
+            }
+
+        }
+        return 普徴納期;
     }
 
     private List<UniversalSignDeliveryInformation> get普徴納期情報リスト(List<NokiJoho> 普徴納期情報リスト) {
@@ -637,20 +693,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         if (普徴納期情報リスト == null || 普徴納期情報リスト.isEmpty()) {
             return 普徴納期;
         }
-        for (NokiJoho nokiJoho : 普徴納期情報リスト) {
-            UniversalSignDeliveryInformation information = new UniversalSignDeliveryInformation();
-            information.set期月(nokiJoho.get期月());
-            information.set随時(随時期判断(nokiJoho.get期月()));
-            information.set納期開始日(nokiJoho.get納期().get納期開始日().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            information.set納期終了日(nokiJoho.get納期().get納期終了日().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            information.set納期限(nokiJoho.get納期().get納期限().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            information.set現年過年区分(new RString(nokiJoho.get納期().get現年過年区分().toString()));
-            information.set通知書発行日(nokiJoho.get納期().get通知書発行日());
-            普徴納期.add(information);
-        }
+        普徴納期 = sort普徴納期(普徴納期情報リスト);
         return 普徴納期;
     }
 

@@ -70,9 +70,11 @@ public class KaigoSienSenmonkaToroku {
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, 事業者入力モード);
         getHandler(div).onLoad();
         if (メニューID_追加.equals(メニューID)) {
+            div.getKaigoShienSenmoninIchiran().getBtnTuika().setDisplayNone(false);
             return ResponseData.of(div).rootTitle(追加タイトル).respond();
         }
         if (メニューID_修正.equals(メニューID)) {
+            div.getKaigoShienSenmoninIchiran().getBtnTuika().setDisplayNone(true);
             return ResponseData.of(div).rootTitle(修正タイトル).respond();
         }
         return ResponseData.of(div).respond();

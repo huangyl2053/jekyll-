@@ -723,7 +723,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             仮算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(entity));
         }
 
-        List<Kitsuki> 出力期リスト = get出力期リスト(出力期);
+        List<Kitsuki> 出力期リスト = parameter.get納入通知書_出力期リスト();
         IName 代納人氏名 = null;
         if (AtesakiShubetsu.代納人.equals(通知書共通情報.get宛先情報().get宛先種別())) {
             代納人氏名 = 通知書共通情報.get宛先情報().get宛先名称();
@@ -1137,7 +1137,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             本算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(entity));
         }
 
-        List<Kitsuki> 出力期リスト = get出力期リスト(出力期);
+        List<Kitsuki> 出力期リスト = parameter.get納入通知書_出力期リスト();
         IName 代納人氏名 = null;
         if (AtesakiShubetsu.代納人.equals(通知書共通情報.get宛先情報().get宛先種別())) {
             代納人氏名 = 通知書共通情報.get宛先情報().get宛先名称();
@@ -1155,7 +1155,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
         NonyuTsuchiShoJohoFactory nonyuTsuchiShoJohoFactory = InstanceProvider.create(NonyuTsuchiShoJohoFactory.class);
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報
-                = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名);
+                = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名,
+                        ReportIdDBB.DBB100045.getReportId().equals(帳票ID));
 
         if (本算定_区分.equals(区分)) {
             publish納入通知書本算定(帳票ID, 本算定納入通知書情報, reportManager);

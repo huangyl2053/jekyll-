@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishik
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoReportParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.KogakukaigoKetteiTsuchishoInfoTempParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.SelectShoriDateKanriMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.DbWT0203ShoriKekkaKakuninListTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
@@ -66,5 +67,12 @@ public interface IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper {
      * @return KetteiTsuchishoInfoTempEntity
      */
     DbWT0203ShoriKekkaKakuninListTempEntity select処理結果リスト一時TBL();
+    
+    /**
+     * 事業高額介護サービス費支給申請データ取得するメソッドです。
+     *
+     * @return DbT3110JigyoKogakuShikyuShinseiEntity 事業高額介護サービス費支給申請エンティティ
+     */
+    DbT3110JigyoKogakuShikyuShinseiEntity get事業高額介護サービス費支給申請();
 
 }

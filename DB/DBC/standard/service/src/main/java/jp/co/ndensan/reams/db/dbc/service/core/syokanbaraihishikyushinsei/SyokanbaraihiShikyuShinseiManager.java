@@ -75,7 +75,7 @@ public class SyokanbaraihiShikyuShinseiManager {
         if (!明細住所地特例証明書InputCheck(証明書入力済フラグ.get給付費明細住特_証明書入力済フラグ(), shikibetsuNoKanri)) {
             return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
-        if (!特定診療特別療養証明書InputCheck(証明書入力済フラグ.get緊急時所定疾患_証明書入力済フラグ(), shikibetsuNoKanri)) {
+        if (!所定疾患施設療養証明書InputCheck(証明書入力済フラグ.get緊急時所定疾患_証明書入力済フラグ(), shikibetsuNoKanri)) {
             return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
         if (!緊急時施設療養証明書InputCheck(証明書入力済フラグ.get緊急時施設療養費_証明書入力済フラグ(), shikibetsuNoKanri)) {
@@ -166,12 +166,12 @@ public class SyokanbaraihiShikyuShinseiManager {
         return true;
     }
 
-    private boolean 特定診療特別療養証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+    private boolean 所定疾患施設療養証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
         if (証明書入力済フラグ == null) {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get特定診療特別療養設定区分())) {
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get所定疾患施設療養設定区分())) {
                 return false;
             }
         }

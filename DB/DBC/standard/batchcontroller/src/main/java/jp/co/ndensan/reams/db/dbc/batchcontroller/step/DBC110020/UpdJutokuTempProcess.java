@@ -57,6 +57,14 @@ public class UpdJutokuTempProcess extends BatchProcessBase<IdouTempEntity> {
         全項目 = concatDate(全項目, 住所地特例.get住所地特例適用開始日());
         全項目 = 全項目.concat(SPLIT);
         全項目 = concatDate(全項目, 住所地特例.get住所地特例適用終了日());
+        全項目 = 全項目.concat(SPLIT);
+        全項目 = 全項目.concat(住所地特例.get被保険者番号().getColumnValue());
+        全項目 = 全項目.concat(SPLIT);
+        if (住所地特例.get転出先保険者番号() != null) {
+            全項目 = 全項目.concat(住所地特例.get転出先保険者番号().getColumnValue());
+        } else {
+            全項目 = 全項目.concat(RString.EMPTY);
+        }
         return 全項目;
     }
 

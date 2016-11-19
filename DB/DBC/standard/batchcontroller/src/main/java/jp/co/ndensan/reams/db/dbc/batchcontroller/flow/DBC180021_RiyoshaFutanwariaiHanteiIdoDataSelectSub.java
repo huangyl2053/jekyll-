@@ -43,15 +43,15 @@ public class DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSub
 
     @Override
     protected void defineFlow() {
-        // TODO QA1937待つ 
-        //if (getParameter().getChushutuKaisu() != null && getParameter().getChushutuKaisu().intValue() <= NUM_1) {
+        if (getParameter().getChushutuKaisu() != null && NUM_1 < getParameter().getChushutuKaisu().intValue()) {
+            return;
+        }
         executeStep(受給者台帳異動);
         executeStep(総合事業対象者異動);
         executeStep(被保険者台帳異動);
         executeStep(介護所得異動);
         executeStep(宛名識別対象異動);
         executeStep(生活保護受給者異動);
-        // }
     }
 
     /**

@@ -1212,8 +1212,16 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         insertEntity.set被保険者番号(被保険者番号);
         insertEntity.set異動年月日(異動年月日);
         insertEntity.set住所地特例対象者区分コード(STR_1);
-        insertEntity.set施設所在保険者番号(new RString(住所地特例.get被保険者番号().toString()));
-        insertEntity.set住所地特例適用開始日(new RString(住所地特例.get住所地特例適用開始日().toString()));
+        if (住所地特例 != null) {
+            HihokenshaNo 被保番号 = 住所地特例.get被保険者番号();
+            FlexibleDate 適用開始日 = 住所地特例.get住所地特例適用開始日();
+            if (被保番号 != null && !被保番号.isEmpty()) {
+                insertEntity.set施設所在保険者番号(new RString(住所地特例.get被保険者番号().toString()));
+            }
+            if (適用開始日 != null && !適用開始日.isEmpty()) {
+                insertEntity.set住所地特例適用開始日(new RString(住所地特例.get住所地特例適用開始日().toString()));
+            }
+        }
         insertEntity.setエラーフラグ(エラーなし);
     }
 
@@ -1750,8 +1758,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         sort異動一時2データ(allData);
         IdoTblTmpEntity 前履歴データ = null;
         for (IdoTblTmpEntity entity : allData) {
-            System.out.println((entity.get異動年月日() != null && !entity.get異動年月日().isEmpty())
-                    ? entity.get異動年月日().toString() : RString.EMPTY);
+//            System.out.println((entity.get異動年月日() != null && !entity.get異動年月日().isEmpty())
+//                    ? entity.get異動年月日().toString() : RString.EMPTY);
             if (前履歴データ == null) {
                 前履歴データ = entity;
                 continue;

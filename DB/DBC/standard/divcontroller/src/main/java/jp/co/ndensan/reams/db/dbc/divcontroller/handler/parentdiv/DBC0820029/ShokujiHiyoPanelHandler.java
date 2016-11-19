@@ -259,7 +259,7 @@ public class ShokujiHiyoPanelHandler {
                 食事提供費合計 = 食事提供費合計.add(getData2(row));
             }
             Decimal 標準負担額_日額 = div.getPanelShokuji().getPanelDetailGokei().getTxtHigaku().getValue();
-            Decimal 標準負担_月額 = 食事提供延べ日数.multiply(標準負担額_日額);
+            Decimal 標準負担_月額 = 食事提供延べ日数.multiply(標準負担額_日額 == null ? Decimal.ZERO : 標準負担額_日額);
             Decimal 食事提供費請求額 = 食事提供費合計.subtract(標準負担_月額);
             div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyouHisu().setValue(食事提供延べ日数);
             div.getPanelShokuji().getPanelDetailGokei().getTxtHigaku().setValue(標準負担額_日額);
@@ -539,7 +539,7 @@ public class ShokujiHiyoPanelHandler {
      * @return boolean
      */
     public boolean get内容変更状態_1709(List<ShokanShokujiHiyo> shokanShokujiHiyoList) {
-        if (shokanShokujiHiyoList.isEmpty()) {
+        if (shokanShokujiHiyoList == null || shokanShokujiHiyoList.isEmpty()) {
             return false;
         }
         ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
@@ -675,11 +675,12 @@ public class ShokujiHiyoPanelHandler {
                     被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
             if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
-                if (!shokanShokujiHiyoList.isEmpty()) {
+                if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
                     ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
                     shokanShokujiHiyo = build食事費用登録1(shokanShokujiHiyo);
                     shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
                 } else {
+                    shokanShokujiHiyoList = new ArrayList<>();
                     ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用登録1(paramter);
                     shokanShokujiHiyoList.add(shokanShokujiHiyo);
                 }
@@ -727,21 +728,23 @@ public class ShokujiHiyoPanelHandler {
                         meisaiListForUpd.add(entityUnchanged);
                     }
                 }
-                if (!shokanShokujiHiyoList.isEmpty()) {
+                if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
                     ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
                     shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
                     shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
                 } else {
+                    shokanShokujiHiyoList = new ArrayList<>();
                     ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用合計設定(paramter);
                     shokanShokujiHiyoList.add(shokanShokujiHiyo);
                 }
 
             } else if (!サービス提供年月.isEmpty() && 平成17年１０月.isBeforeOrEquals(サービス提供年月)) {
-                if (!shokanShokujiHiyoList.isEmpty()) {
+                if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
                     ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
                     shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
                     shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
                 } else {
+                    shokanShokujiHiyoList = new ArrayList<>();
                     ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用合計設定(paramter);
                     shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
                     shokanShokujiHiyoList.add(shokanShokujiHiyo);
@@ -754,12 +757,32 @@ public class ShokujiHiyoPanelHandler {
         return 更新用データ;
     }
 
+    /**
+     * 償還払請求明細一覧を取得します。
+     *
+     * @param shokanMeisaiList List<ShokanMeisai>
+     * @return 償還払請求明細一覧　List<ShokanMeisaiResult>
+     */
     public List<ShokanMeisaiResult> toShokanMeisaiResultList(List<ShokanMeisai> shokanMeisaiList) {
         List<ShokanMeisaiResult> shokanMeisaiResultList = new ArrayList();
         for (ShokanMeisai shokanMeisai : shokanMeisaiList) {
             shokanMeisaiResultList.add(new ShokanMeisaiResult(shokanMeisai, null));
         }
         return shokanMeisaiResultList;
+    }
+
+    /**
+     * 償還払明細を取得します。
+     *
+     * @param shokanMeisaiResultList List<ShokanMeisaiResult>
+     * @return 償還払明細　List<ShokanMeisai>
+     */
+    public List<ShokanMeisai> toShokanMeisaiList(List<ShokanMeisaiResult> shokanMeisaiResultList) {
+        List<ShokanMeisai> shokanMeisaiList = new ArrayList();
+        for (ShokanMeisaiResult shokanMeisaiResult : shokanMeisaiResultList) {
+            shokanMeisaiList.add(shokanMeisaiResult.getEntity());
+        }
+        return shokanMeisaiList;
     }
 
     private boolean checkIsRealModified(ShokanMeisai shokanMeisai, dgdShokuji_Row dgd) {

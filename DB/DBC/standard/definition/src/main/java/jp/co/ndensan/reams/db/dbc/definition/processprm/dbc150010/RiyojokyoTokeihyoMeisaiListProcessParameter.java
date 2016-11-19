@@ -137,7 +137,7 @@ public class RiyojokyoTokeihyoMeisaiListProcessParameter implements IBatchProces
         }
 
         List<RString> 地区リスト = new ArrayList<>();
-        for (RString 地区 : 選択地区リスト.values()) {
+        for (RString 地区 : 選択地区リスト.keySet()) {
             地区リスト.add(地区);
         }
         return new CreateRiyojokyoMybatisParameter(居宅利用率指定, 開始居宅利用率, 終了居宅利用率, 訪問利用率指定, 終了訪問利用率,

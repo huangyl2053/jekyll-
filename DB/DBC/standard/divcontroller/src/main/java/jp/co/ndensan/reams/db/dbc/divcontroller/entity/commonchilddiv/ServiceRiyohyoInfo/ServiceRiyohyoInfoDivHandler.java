@@ -144,7 +144,7 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final RString 種類区分限度単位指定エラー = new RString(
             "種類限度単位・区分限度単位指定エラー：【サービス単位＝種類超過＋区分超過＋区分限度内】になっていません。");
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
-    private static final RString 適用除外者 = new RString("適用除外者");
+    private static final RString 被保険者 = new RString("被保険者");
 
     /**
      * コンストラクタです。
@@ -212,7 +212,7 @@ public class ServiceRiyohyoInfoDivHandler {
         ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
-        ViewStateHolder.put(ViewStateKeys.適用除外者, 適用除外者);
+        ViewStateHolder.put(ViewStateKeys.被保険者, 被保険者);
         非活性または活性(false);
         set初期化状態(表示モード);
         画面初期化の値のクリア();
@@ -1200,12 +1200,12 @@ public class ServiceRiyohyoInfoDivHandler {
             row = new dgServiceRiyohyoBeppyoList_Row();
             row.setRowState(RowState.Added);
             setRowInButtonKakutei(row);
-            if (div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace("事業者"));
-            }
-            if (RString.isNullOrEmpty(div.getCcdServiceTypeInput().getサービス種類コード())) {
-                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace("サービス種類"));
-            }
+//            if (div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isEmpty()) {
+//                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace("事業者"));
+//            }
+//            if (RString.isNullOrEmpty(div.getCcdServiceTypeInput().getサービス種類コード())) {
+//                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage().replace("サービス種類"));
+//            }
             onChange_txtServiceEvent();
             if (!get全て同事業者(rowList, row).isEmpty()) {
                 throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage());
