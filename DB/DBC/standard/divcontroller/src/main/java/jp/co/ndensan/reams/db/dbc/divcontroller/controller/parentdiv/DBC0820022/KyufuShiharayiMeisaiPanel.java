@@ -57,6 +57,9 @@ public class KyufuShiharayiMeisaiPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 追加する = new RString("追加する");
+    private static final RString 修正する = new RString("修正する");
+    private static final RString 削除する = new RString("削除する");
     private static final ServiceShuruiCode サービス種類コード_50 = new ServiceShuruiCode("50");
     private static final RString 入力なし = new RString("0");
     private static final RString 入力あり = new RString("1");
@@ -145,6 +148,7 @@ public class KyufuShiharayiMeisaiPanel {
         getHandler(div).制御(true);
         getHandler(div).clear給付費明細登録();
         getHandler(div).setDisabled給付費明細登録(false);
+        div.getPanelThree().getPanelFour().getBtnConfirm().setText(追加する);
         return createResponse(div);
     }
 
@@ -160,6 +164,7 @@ public class KyufuShiharayiMeisaiPanel {
         getHandler(div).set給付費明細登録();
         getHandler(div).制御(true);
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
+        div.getPanelThree().getPanelFour().getBtnConfirm().setText(修正する);
         return createResponse(div);
     }
 
@@ -175,6 +180,7 @@ public class KyufuShiharayiMeisaiPanel {
         getHandler(div).set給付費明細登録();
         getHandler(div).制御(true);
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        div.getPanelThree().getPanelFour().getBtnConfirm().setText(削除する);
         return createResponse(div);
     }
 

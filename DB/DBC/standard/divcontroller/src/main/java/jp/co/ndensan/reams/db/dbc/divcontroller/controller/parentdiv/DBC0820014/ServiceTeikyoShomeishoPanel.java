@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdS
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -83,10 +82,7 @@ public class ServiceTeikyoShomeishoPanel {
         List<ServiceTeikyoShomeishoResult> 証明書一覧情報 = ShokanbaraiJyokyoShokai
                 .createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号);
         handler.load宛名と基本情報(識別コード, 被保険者番号);
-        if (null != 償還払ViewStateDB情報) {
-            ShokanShinsei 償還払支給申請 = 償還払ViewStateDB情報.get償還払支給申請();
-            handler.loadボタンエリア(償還払支給申請.is国保連再送付フラグ());
-        }
+        handler.loadボタンエリア(画面モード);
         handler.load申請共通エリア(画面モード, サービス年月, 整理番号);
         handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報, 償還払ViewStateDB情報);
         return createResponse(div);
@@ -101,9 +97,9 @@ public class ServiceTeikyoShomeishoPanel {
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnShinseiInfo(ServiceTeikyoShomeishoPanelDiv div) {
         入力有無フラグ設定();
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        if (登録モード.equals(画面モード)) {
-            画面モード = 処理モード_修正;
-        }
+//        if (登録モード.equals(画面モード)) {
+//            画面モード = 処理モード_修正;
+//        }
         ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.申請情報).respond();
     }

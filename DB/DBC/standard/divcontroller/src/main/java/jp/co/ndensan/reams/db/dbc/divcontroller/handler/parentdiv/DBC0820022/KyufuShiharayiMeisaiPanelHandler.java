@@ -45,6 +45,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("2");
+    private static final RString コンマ = new RString(",");
     private static final int NUM = 6;
 
     /**
@@ -129,10 +130,10 @@ public class KyufuShiharayiMeisaiPanelHandler {
             div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス項目コード(serviceCodeKoumoku);
 
         }
-        div.getPanelThree().getPanelFour().getTxtTanyi().setValue(new Decimal(row.getDefaultDataName2().toString()));
+        div.getPanelThree().getPanelFour().getTxtTanyi().setValue(new Decimal(row.getDefaultDataName2().replace(コンマ, RString.EMPTY).toString()));
         div.getPanelThree().getPanelFour().getTxtKaisu().setValue(new Decimal(row.getDefaultDataName3().toString()));
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().setValue(new Decimal(
-                row.getDefaultDataName4().toString()));
+                row.getDefaultDataName4().replace(コンマ, RString.EMPTY).toString()));
         div.getPanelThree().getPanelFour().getTxtTeikiyo().setValue(row.getDefaultDataName5());
         div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス名称(row.getDefaultDataName7());
         div.getPanelThree().getRowId().setValue(new Decimal(row.getId()));
