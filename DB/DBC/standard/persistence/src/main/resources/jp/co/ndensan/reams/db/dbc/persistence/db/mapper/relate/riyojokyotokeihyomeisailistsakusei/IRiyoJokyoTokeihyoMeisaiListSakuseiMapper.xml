@@ -1740,7 +1740,7 @@
             AND ICHIJI."dbWT1513RiyoJokyoTokeihyo_serviceShuruiCode" = JIGYOSHA."dbT7063KaigoJigyoshaShiteiService_serviceShuruiCode"
         </if>
         <if test="is給付事業者名">
-            ICHIJI."dbWT1513RiyoJokyoTokeihyo_jigyoshoNo" = JIGYOSHA."dbT7063KaigoJigyoshaShiteiService_jigyoshaNo"
+            ICHIJI."dbWT1513RiyoJokyoTokeihyo_kyotakuServiceJigyoshoNo" = JIGYOSHA."dbT7063KaigoJigyoshaShiteiService_jigyoshaNo"
             AND ICHIJI."dbWT1513RiyoJokyoTokeihyo_kyotakuServiceShuruiCode" = JIGYOSHA."dbT7063KaigoJigyoshaShiteiService_serviceShuruiCode"
         </if>
         WHERE
@@ -1787,7 +1787,7 @@
         <if test="is給付事業者名">
             "DbT7060KaigoJigyosha"."jigyoshaNo" = JIGYOSHA2."jigyoshaNo"
             AND "DbT7060KaigoJigyosha"."yukoKaishiYMD" <![CDATA[<]]> JIGYOSHA2."yukoKaishiYMD")) AS JIGYOSHA
-            ON ICHIJI."dbWT1513RiyoJokyoTokeihyo_jigyoshoNo" = JIGYOSHA."dbT7060KaigoJigyosha_jigyoshaNo"
+            ON ICHIJI."dbWT1513RiyoJokyoTokeihyo_kyotakuServiceJigyoshoNo" = JIGYOSHA."dbT7060KaigoJigyosha_jigyoshaNo"
         </if>
     </select>
 
