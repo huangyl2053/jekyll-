@@ -47,6 +47,21 @@ public class ServiceRiyohyoInfoDivValidationHandler {
     }
     
     /**
+     * 利用年月必須入力のチェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate利用年月必須入力() {
+        IValidationMessages message = new ServiceRiyohyoInfoDivValidator(div).validate利用年月必須入力();
+        return create利用年月必須入力Dictionary().check(message);
+    }
+
+    private ValidationDictionary create利用年月必須入力Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(ServiceRiyohyoInfoDivValidationMessage.利用年月必須項目, div.getTxtRiyoYM()).build();
+    }
+    
+    /**
      * 事業者必須入力のチェックです。
      *
      * @return {@link ValidationMessageControlPairs}

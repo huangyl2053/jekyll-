@@ -17,6 +17,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDiv> {
     
     /**
+     * 利用年月必須入力のチェックです。
+     */
+    利用年月必須入力のチェックです {
+      @Override
+      public boolean apply(ServiceRiyohyoInfoDiv div) {
+          return div.getTxtRiyoYM().getValue() != null;
+      }
+    },
+    
+    /**
      * 事業者コード必須入力のチェックです。
      */
     事業者コード必須入力のチェックです {
