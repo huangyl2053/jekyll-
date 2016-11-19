@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -351,18 +350,16 @@ public class KouzaInfoPanel {
                         shinseishoInputCheck(ViewStateHolder.get(ViewStateKeys.申請書入力済フラグ_口座, RString.class));
                 if (入力完了.equals(申請書入力済区分)) {
                     ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, NUM_1);
-                    データ保存処理(div, false);
+                    return データ保存処理(div, false);
                 } else if (申請書入力未済あり.equals(申請書入力済区分)) {
                     ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, NUM_2);
                     throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_申請情報未入力.getMessage());
                 } else if (決定情報未完了.equals(申請書入力済区分)) {
                     ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, NUM_3);
-                    データ保存処理(div, true);
+                    return データ保存処理(div, true);
                 }
             }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return createResponse(div);
-            }
+
         } catch (Exception e) {
             throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
@@ -384,7 +381,6 @@ public class KouzaInfoPanel {
                     toString())).getYearMonth().toDateString());
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             getHandler(div).保存_削除(整理番号, 識別コード, サービス年月, 被保険者番号);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除する, true);
             div.getCcdKanryoMessage().setMessage(get完了メッセージ(削除), 被保険者番号.getColumnValue(),
                     div.getPanelOne().getCcdKaigoAtenaInfo().get氏名漢字(), true);
             return ResponseData.of(div).setState(DBC0110011StateName.完了状態);
@@ -444,7 +440,6 @@ public class KouzaInfoPanel {
                 ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
         FlexibleDate 決定日 = ViewStateHolder.get(ViewStateKeys.決定日, FlexibleDate.class);
-        //RString 修正前支給区分 = ViewStateHolder.get(ViewStateKeys.修正前支給区分, RString.class);
         RString 修正前支給区分 = ViewStateHolder.get(ViewStateKeys.修正前支給区分, RString.class);
         DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         if (!ResponseHolder.isReRequest() && is決定情報未完了) {
@@ -452,7 +447,7 @@ public class KouzaInfoPanel {
                     DbcQuestionMessages.償還払い費支給申請決定_決定情報未入力.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if ((ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) || !is決定情報未完了) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().insupdShokan(DB, 修正前支給区分,
                     決定日, 被保険者番号, サービス年月, 整理番号, 画面モード, 識別コード);
             div.getCcdKanryoMessage().setMessage(get完了メッセージ(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class)),
