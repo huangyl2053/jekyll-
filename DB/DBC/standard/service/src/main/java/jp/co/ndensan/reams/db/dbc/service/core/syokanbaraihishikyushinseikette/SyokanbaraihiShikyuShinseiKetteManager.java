@@ -1166,6 +1166,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                     = 償還払支給判定結果Dac.selectByKey(parameter.get被保険者番号(),
                             parameter.getサービス提供年月(), parameter.get整理番号());
             if (dbT3036entity == null) {
+                dbT3036entity.initializeMd5();
                 DbT3034ShokanShinseiEntity dbt3034entity = 償還払支給申請Dac.selectByKey(parameter.get被保険者番号(),
                         parameter.getサービス提供年月(), parameter.get整理番号());
                 DbT3036ShokanHanteiKekkaEntity entity = new DbT3036ShokanHanteiKekkaEntity();
@@ -1244,6 +1245,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                     parameter.getサービス提供年月(), parameter.get整理番号());
             if (entityList != null && !entityList.isEmpty()) {
                 for (DbT3053ShokanShukeiEntity entity : entityList) {
+                    entity.initializeMd5();
                     更新件数 = 更新件数 + up償還払請求集計(entity, parameter, 決定情報一覧List, shukeiList);
                 }
             }
@@ -1254,6 +1256,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
 
     private ShokanHanteiKekka update償還払支給判定結果(SyokanbaraihiShikyuShinseiKetteParameter parameter,
             DbT3036ShokanHanteiKekkaEntity dbT3036entity) {
+        dbT3036entity.initializeMd5();
         ShokanHanteiKekka kekaEntity = new ShokanHanteiKekka(dbT3036entity);
         ShokanHanteiKekkaBuilder keka = kekaEntity.createBuilderForEdit();
         keka.set決定年月日(parameter.get決定年月日());
@@ -1338,6 +1341,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3046entity != null) {
+                dbT3046entity.initializeMd5();
                 ShokanServicePlan200604 dbT3046 = new ShokanServicePlan200604(dbT3046entity);
                 ShokanServicePlan200604Builder dbt3046builder = dbT3046.createBuilderForEdit();
                 dbt3046builder.set支給区分コード(parameter.get支給区分());
@@ -1358,6 +1362,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3045entity != null) {
+                dbT3045entity.initializeMd5();
                 ShokanServicePlan200004 dbT3045 = new ShokanServicePlan200004(dbT3045entity);
                 ShokanServicePlan200004Builder dbt3045Builder = dbT3045.createBuilderForEdit();
                 dbt3045Builder.set支給区分コード(parameter.get支給区分());
@@ -1469,6 +1474,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                         parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                         決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
                 if (dbT3053entity != null) {
+                    dbT3053entity.initializeMd5();
                     ShokanShukei shukei = new ShokanShukei(dbT3053entity);
                     ShokanShukeiBuilder shuk = shukei.createBuilderForEdit();
                     shuk.set支給区分コード(parameter.get支給区分());
@@ -1484,6 +1490,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
                     if (dbT3043entity != null) {
+                        dbT3043entity.initializeMd5();
                         ShokanShokujiHiyo shokuj = new ShokanShokujiHiyo(dbT3043entity);
                         ShokanShokujiHiyoBuilder shokujBuilder = shokuj.createBuilderForEdit();
                         shokujBuilder.set差額金額(決定情報一覧.get差額金額());
@@ -1518,6 +1525,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                                     parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                                     決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
                     if (dbT3050entity != null) {
+                        dbT3050entity.initializeMd5();
                         ShokanTokuteiNyushoshaKaigoServiceHiyo service = new ShokanTokuteiNyushoshaKaigoServiceHiyo(dbT3050entity);
                         ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder serviceBuilder = service.createBuilderForEdit();
                         serviceBuilder.set差額金額(決定情報一覧.get差額金額());
@@ -2219,6 +2227,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3047entity != null) {
+                dbT3047entity.initializeMd5();
                 ShokanServicePlan200904 service3047 = new ShokanServicePlan200904(dbT3047entity);
                 ShokanServicePlan200904Builder builder = service3047.createBuilderForEdit();
                 builder.set差額金額(決定情報一覧.get差額金額());
@@ -2254,6 +2263,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3046entity != null) {
+                dbT3046entity.initializeMd5();
                 ShokanServicePlan200604 dbT3046 = new ShokanServicePlan200604(dbT3046entity);
                 ShokanServicePlan200604Builder dbt3046builder = dbT3046.createBuilderForEdit();
                 dbt3046builder.set差額金額(決定情報一覧.get差額金額());
@@ -2289,6 +2299,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3045entity != null) {
+                dbT3045entity.initializeMd5();
                 ShokanServicePlan200004 dbT3045 = new ShokanServicePlan200004(dbT3045entity);
                 ShokanServicePlan200004Builder dbt3045Builder = dbT3045.createBuilderForEdit();
                 dbt3045Builder.set支給区分コード(parameter.get支給区分());
