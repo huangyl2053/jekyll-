@@ -370,8 +370,9 @@ public class ShafukuKeigenGakuPanel {
 
     private List<ShokanShakaiFukushiHojinKeigengakuResult> get法人軽減額リスト(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        List<ShokanShakaiFukushiHojinKeigengakuResult> dbJohoViewList = getDbJohoViewList(被保険者番号, サービス年月, 整理番号,
-                事業者番号, 様式番号, 明細番号);
+        DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        List<ShokanShakaiFukushiHojinKeigengakuResult> dbJohoViewList = getDbJohoViewList(dbJohoViewState,
+                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         if (!dbJohoViewList.isEmpty()) {
             return dbJohoViewList;
         }
@@ -382,10 +383,9 @@ public class ShafukuKeigenGakuPanel {
         return 法人軽減額リスト;
     }
 
-    private List<ShokanShakaiFukushiHojinKeigengakuResult> getDbJohoViewList(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
-            RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        List<ShokanShakaiFukushiHojinKeigengakuResult> dbJohoViewList = new ArrayList<>();
+    private ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> getDbJohoViewList(DbJohoViewState dbJohoViewState, HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+        ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> dbJohoViewList = new ArrayList<>();
         if (dbJohoViewState == null || dbJohoViewState.get償還払請求社会福祉法人軽減額データList() == null
                 || dbJohoViewState.get償還払請求社会福祉法人軽減額データList().isEmpty()) {
             return dbJohoViewList;
@@ -416,12 +416,16 @@ public class ShafukuKeigenGakuPanel {
         RDate 申請日 = 明細検索キー.get申請日();
 
         DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト = getキー以外のDbJohoViewList(dbJohoViewState,
+        ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> 当前の法人軽減額リスト
+                = ViewStateHolder.get(ViewStateKeys.社福軽減額一覧情報, ArrayList.class);
+
+        ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> キー以外の法人軽減額リスト = getキー以外のDbJohoViewList(dbJohoViewState,
                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
 
         ShafukuKeigenGakuPanelHandler handler = getHandler(div);
-        法人軽減額リスト.addAll(handler.get法人軽減額リスト(被保険者番号, サービス年月, 整理番号, 申請日, 事業者番号, 様式番号, 明細番号));
-        dbJohoViewState.set償還払請求社会福祉法人軽減額データList(法人軽減額リスト);
+        キー以外の法人軽減額リスト.addAll(handler.get法人軽減額リスト(当前の法人軽減額リスト, 被保険者番号, サービス年月,
+                整理番号, 申請日, 事業者番号, 様式番号, 明細番号));
+        dbJohoViewState.set償還払請求社会福祉法人軽減額データList(キー以外の法人軽減額リスト);
 
         if (確定フラグ) {
             set入力有無フラグ(dbJohoViewState, 明細検索キー, handler.is内容変更状態());
