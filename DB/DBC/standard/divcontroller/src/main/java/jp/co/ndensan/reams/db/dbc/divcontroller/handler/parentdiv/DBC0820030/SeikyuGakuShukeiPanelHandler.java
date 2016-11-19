@@ -851,7 +851,8 @@ public class SeikyuGakuShukeiPanelHandler {
         if (EntityDataState.Added.equals(該当情報.getShukei().toEntity().getState())) {
             情報List.remove(該当情報);
         } else {
-            該当情報.getShukei().deleted();
+            ShokanShukei 請求集計情報 = 該当情報.getShukei().deleted();
+            該当情報 = new ShokanShukeiResult(請求集計情報, RString.EMPTY);
             set修正後情報(情報List, 該当情報);
         }
         return 情報List;
