@@ -113,13 +113,16 @@ public class ShikyuShinseiDetail {
         }
 
         ShokanShinsei 償還払支給申請 = handler.load支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, config);
-        dbJohoViewState.set償還払支給申請(償還払支給申請);
 
-        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJohoViewState);
         if (!MODEL_ADD.equals(画面モード)) {
             handler.set支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, 償還払支給申請, config);
+            ShokanShinsei shokanShinsei = getHandler(div).update(画面モード, 償還払支給申請);
+            dbJohoViewState.set償還払支給申請(shokanShinsei);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJohoViewState);
+        } else {
+            dbJohoViewState.set償還払支給申請(償還払支給申請);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJohoViewState);
         }
-
         handler.set本人情報();
 
         if (!MODEL_DEL.equals(画面モード)) {
