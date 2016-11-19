@@ -61,13 +61,13 @@ public class UpdSogoJigyoTempProcess extends BatchProcessBase<IdouTempEntity> {
     @Override
     protected void process(IdouTempEntity entity) {
         RString 総合事業対象者Key = 総合事業対象者Key(entity.get総合事業対象者());
-        if (総合事業対象者KeyList.contains(総合事業対象者Key)) {
-            return;
-        }
-        総合事業対象者KeyList.add(総合事業対象者Key);
         RString 総合事業対象者 = 総合事業対象者全項目(entity.get総合事業対象者());
         Decimal 連番 = 連番Map.get(entity.get総合事業対象者().getHihokenshaNo());
         if (連番 == null) {
+            if (総合事業対象者KeyList.contains(総合事業対象者Key)) {
+                return;
+            }
+            総合事業対象者KeyList.add(総合事業対象者Key);
             連番Map.put(entity.get総合事業対象者().getHihokenshaNo(), Decimal.ONE);
             IdouTblEntity update = entity.get異動一時();
             update.set総合事業対象者(総合事業対象者);
@@ -79,6 +79,10 @@ public class UpdSogoJigyoTempProcess extends BatchProcessBase<IdouTempEntity> {
             if (連番temp.intValue() != entity.get異動一時().get連番()) {
                 return;
             }
+            if (総合事業対象者KeyList.contains(総合事業対象者Key)) {
+                return;
+            }
+            総合事業対象者KeyList.add(総合事業対象者Key);
             連番Map.put(entity.get総合事業対象者().getHihokenshaNo(), 連番temp);
             IdouTblEntity update = entity.get異動一時();
             update.set総合事業対象者(総合事業対象者);
@@ -86,6 +90,10 @@ public class UpdSogoJigyoTempProcess extends BatchProcessBase<IdouTempEntity> {
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番.add(Decimal.ONE).intValue()) {
+            if (総合事業対象者KeyList.contains(総合事業対象者Key)) {
+                return;
+            }
+            総合事業対象者KeyList.add(総合事業対象者Key);
             連番Map.put(entity.get総合事業対象者().getHihokenshaNo(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
             insert.set被保険者番号(entity.get総合事業対象者().getHihokenshaNo());

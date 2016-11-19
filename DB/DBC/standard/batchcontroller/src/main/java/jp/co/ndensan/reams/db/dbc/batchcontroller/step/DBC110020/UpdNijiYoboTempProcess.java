@@ -61,13 +61,13 @@ public class UpdNijiYoboTempProcess extends BatchProcessBase<IdouTempEntity> {
     @Override
     protected void process(IdouTempEntity entity) {
         RString 二次予防Key = 二次予防Key(entity.get二次予防());
-        if (二次予防KeyList.contains(二次予防Key)) {
-            return;
-        }
-        二次予防KeyList.add(二次予防Key);
         RString 二次予防 = 二次予防全項目(entity.get二次予防());
         Decimal 連番 = 連番Map.get(entity.get二次予防().getHihokenshaNo());
         if (連番 == null) {
+            if (二次予防KeyList.contains(二次予防Key)) {
+                return;
+            }
+            二次予防KeyList.add(二次予防Key);
             連番Map.put(entity.get二次予防().getHihokenshaNo(), Decimal.ONE);
             IdouTblEntity update = entity.get異動一時();
             update.set二次予防事業対象者(二次予防);
@@ -79,6 +79,10 @@ public class UpdNijiYoboTempProcess extends BatchProcessBase<IdouTempEntity> {
             if (連番temp.intValue() != entity.get異動一時().get連番()) {
                 return;
             }
+            if (二次予防KeyList.contains(二次予防Key)) {
+                return;
+            }
+            二次予防KeyList.add(二次予防Key);
             連番Map.put(entity.get二次予防().getHihokenshaNo(), 連番temp);
             IdouTblEntity update = entity.get異動一時();
             update.set二次予防事業対象者(二次予防);
@@ -86,6 +90,10 @@ public class UpdNijiYoboTempProcess extends BatchProcessBase<IdouTempEntity> {
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番.add(Decimal.ONE).intValue()) {
+            if (二次予防KeyList.contains(二次予防Key)) {
+                return;
+            }
+            二次予防KeyList.add(二次予防Key);
             連番Map.put(entity.get二次予防().getHihokenshaNo(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
             insert.set被保険者番号(entity.get二次予防().getHihokenshaNo());

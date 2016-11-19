@@ -63,12 +63,12 @@ public class UpdGengakuTempProcess extends BatchProcessBase<IdouTempEntity> {
     @Override
     protected void process(IdouTempEntity entity) {
         RString 給付費減額 = 支払方法変更全項目(entity.get支払方法変更_給付費減額());
-        if (給付額減額.contains(給付費減額)) {
-            return;
-        }
-        給付額減額.add(給付費減額);
         Decimal 連番 = 連番Map.get(entity.get支払方法変更_給付費減額().getHihokenshaNo());
         if (連番 == null) {
+            if (給付額減額.contains(給付費減額)) {
+                return;
+            }
+            給付額減額.add(給付費減額);
             連番Map.put(entity.get支払方法変更_給付費減額().getHihokenshaNo(), Decimal.ONE);
             IdouTblEntity update = entity.get異動一時();
             update.set支払方法変更_給付費減額(給付費減額);
@@ -80,6 +80,10 @@ public class UpdGengakuTempProcess extends BatchProcessBase<IdouTempEntity> {
             if (連番temp.intValue() != entity.get異動一時().get連番()) {
                 return;
             }
+            if (給付額減額.contains(給付費減額)) {
+                return;
+            }
+            給付額減額.add(給付費減額);
             連番Map.put(entity.get支払方法変更_給付費減額().getHihokenshaNo(), 連番temp);
             IdouTblEntity update = entity.get異動一時();
             update.set支払方法変更_給付費減額(給付費減額);
@@ -87,6 +91,10 @@ public class UpdGengakuTempProcess extends BatchProcessBase<IdouTempEntity> {
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番temp.intValue()) {
+            if (給付額減額.contains(給付費減額)) {
+                return;
+            }
+            給付額減額.add(給付費減額);
             連番Map.put(entity.get支払方法変更_給付費減額().getHihokenshaNo(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
             insert.set被保険者番号(entity.get支払方法変更_給付費減額().getHihokenshaNo());

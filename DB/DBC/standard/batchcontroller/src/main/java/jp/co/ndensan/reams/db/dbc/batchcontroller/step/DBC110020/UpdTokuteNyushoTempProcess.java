@@ -71,13 +71,13 @@ public class UpdTokuteNyushoTempProcess extends BatchProcessBase<IdouTempEntity>
             return;
         }
         RString 特定入所者Key = get特定入所者Key(entity.get特定入所者());
-        if (特定入所者KeyList.contains(特定入所者Key)) {
-            return;
-        }
-        特定入所者KeyList.add(特定入所者Key);
         RString 全項目 = 特定入所者全項目(entity.get特定入所者());
         Decimal 連番 = 連番Map.get(entity.get特定入所者().get被保険者番号());
         if (連番 == null) {
+            if (特定入所者KeyList.contains(特定入所者Key)) {
+                return;
+            }
+            特定入所者KeyList.add(特定入所者Key);
             連番Map.put(entity.get特定入所者().get被保険者番号(), Decimal.ONE);
             IdouTblEntity update = entity.get異動一時();
             update.set特定入所者(全項目);
@@ -89,6 +89,10 @@ public class UpdTokuteNyushoTempProcess extends BatchProcessBase<IdouTempEntity>
             if (連番temp.intValue() != entity.get異動一時().get連番()) {
                 return;
             }
+            if (特定入所者KeyList.contains(特定入所者Key)) {
+                return;
+            }
+            特定入所者KeyList.add(特定入所者Key);
             連番Map.put(entity.get特定入所者().get被保険者番号(), 連番temp);
             IdouTblEntity update = entity.get異動一時();
             update.set特定入所者(全項目);
@@ -96,6 +100,10 @@ public class UpdTokuteNyushoTempProcess extends BatchProcessBase<IdouTempEntity>
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番.add(Decimal.ONE).intValue()) {
+            if (特定入所者KeyList.contains(特定入所者Key)) {
+                return;
+            }
+            特定入所者KeyList.add(特定入所者Key);
             連番Map.put(entity.get特定入所者().get被保険者番号(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
             insert.set被保険者番号(entity.get特定入所者().get被保険者番号());
