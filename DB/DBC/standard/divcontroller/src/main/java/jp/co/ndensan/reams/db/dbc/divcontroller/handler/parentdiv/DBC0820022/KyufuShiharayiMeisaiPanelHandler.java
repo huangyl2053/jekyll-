@@ -404,13 +404,16 @@ public class KyufuShiharayiMeisaiPanelHandler {
         entity = entity.createBuilderForEdit().setサービス項目コード(
                 new ServiceKomokuCode(serviceCodeKoumoku)).build();
         if (row.getDefaultDataName2() != null) {
-            entity = entity.createBuilderForEdit().set単位数(Integer.parseInt(row.getDefaultDataName2().toString())).build();
+            entity = entity.createBuilderForEdit().set単位数(Integer.parseInt(row.getDefaultDataName2().
+                    replace(コンマ, RString.EMPTY).toString())).build();
         }
         if (row.getDefaultDataName3() != null) {
-            entity = entity.createBuilderForEdit().set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString())).build();
+            entity = entity.createBuilderForEdit().set日数_回数(Integer.parseInt(row.getDefaultDataName3().
+                    replace(コンマ, RString.EMPTY).toString())).build();
         }
         if (row.getDefaultDataName4() != null) {
-            entity = entity.createBuilderForEdit().setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString())).build();
+            entity = entity.createBuilderForEdit().setサービス単位数(Integer.parseInt(row.getDefaultDataName4().
+                    replace(コンマ, RString.EMPTY).toString())).build();
         }
         if (row.getDefaultDataName5() != null) {
             entity = entity.createBuilderForEdit().set摘要(row.getDefaultDataName5()).build();
