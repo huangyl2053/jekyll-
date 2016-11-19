@@ -96,7 +96,9 @@ public class ShikyuShinseiDetail {
 
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         if (MODEL_ADD.equals(画面モード)) {
-            整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString().padLeft("0", 10);
+            if (整理番号 == null || 整理番号.isEmpty()) {
+                整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString().padLeft("0", 10);
+            }
         }
 
         ShikyuShinseiDetailHandler handler = getHandler(div);
