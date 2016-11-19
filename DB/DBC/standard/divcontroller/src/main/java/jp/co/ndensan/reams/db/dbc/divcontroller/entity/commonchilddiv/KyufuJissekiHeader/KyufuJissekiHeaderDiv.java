@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
  */
 public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -61,12 +61,12 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     private TextBox txtShokisaiHokenshaNo;
     @JsonProperty("txtYoshikiNo")
     private TextBox txtYoshikiNo;
-    @JsonProperty("txtJigyosha")
-    private TextBox txtJigyosha;
-    @JsonProperty("txtJigyoshaNo")
-    private TextBox txtJigyoshaNo;
     @JsonProperty("txtYoshikiMeisho")
     private TextBox txtYoshikiMeisho;
+    @JsonProperty("txtJigyoshaNo")
+    private TextBox txtJigyoshaNo;
+    @JsonProperty("Jigyosha")
+    private TextBox Jigyosha;
     @JsonProperty("hiddenJigyoshaCode")
     private RString hiddenJigyoshaCode;
     @JsonProperty("hiddenYoshikiNo")
@@ -333,21 +333,21 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /*
-     * gettxtJigyosha
-     * @return txtJigyosha
+     * gettxtYoshikiMeisho
+     * @return txtYoshikiMeisho
      */
-    @JsonProperty("txtJigyosha")
-    public TextBox getTxtJigyosha() {
-        return txtJigyosha;
+    @JsonProperty("txtYoshikiMeisho")
+    public TextBox getTxtYoshikiMeisho() {
+        return txtYoshikiMeisho;
     }
 
     /*
-     * settxtJigyosha
-     * @param txtJigyosha txtJigyosha
+     * settxtYoshikiMeisho
+     * @param txtYoshikiMeisho txtYoshikiMeisho
      */
-    @JsonProperty("txtJigyosha")
-    public void setTxtJigyosha(TextBox txtJigyosha) {
-        this.txtJigyosha = txtJigyosha;
+    @JsonProperty("txtYoshikiMeisho")
+    public void setTxtYoshikiMeisho(TextBox txtYoshikiMeisho) {
+        this.txtYoshikiMeisho = txtYoshikiMeisho;
     }
 
     /*
@@ -369,21 +369,21 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /*
-     * gettxtYoshikiMeisho
-     * @return txtYoshikiMeisho
+     * getJigyosha
+     * @return Jigyosha
      */
-    @JsonProperty("txtYoshikiMeisho")
-    public TextBox getTxtYoshikiMeisho() {
-        return txtYoshikiMeisho;
+    @JsonProperty("Jigyosha")
+    public TextBox getJigyosha() {
+        return Jigyosha;
     }
 
     /*
-     * settxtYoshikiMeisho
-     * @param txtYoshikiMeisho txtYoshikiMeisho
+     * setJigyosha
+     * @param Jigyosha Jigyosha
      */
-    @JsonProperty("txtYoshikiMeisho")
-    public void setTxtYoshikiMeisho(TextBox txtYoshikiMeisho) {
-        this.txtYoshikiMeisho = txtYoshikiMeisho;
+    @JsonProperty("Jigyosha")
+    public void setJigyosha(TextBox Jigyosha) {
+        this.Jigyosha = Jigyosha;
     }
 
     /*
@@ -759,26 +759,6 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     @Override
     public RString get保険者() {
         return this.getTxtShokisaiHokenshaNo().getValue();
-    }
-
-    /**
-     * 事業者を設定します。
-     *
-     * @param 事業者 事業者
-     */
-    @Override
-    public void set事業者(RString 事業者) {
-        this.getTxtJigyosha().setValue(事業者);
-    }
-
-    /**
-     * 事業者を取得します。
-     *
-     * @return 事業者 事業者
-     */
-    @Override
-    public RString get事業者() {
-        return this.getTxtJigyosha().getValue();
     }
 
     /**

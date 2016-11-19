@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -201,6 +200,7 @@ public class KyufuJissekiShokaiHandler {
      * @param サービス提供年月_開始 サービス提供年月_開始
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 一覧データ 一覧データ
+     * @return 給付実績基本情報子Divデータ
      */
     public KyufuJissekiHeader onClick_btnKyufuJissekiSearch(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1,
             FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了,
@@ -229,20 +229,28 @@ public class KyufuJissekiShokaiHandler {
         set一覧設定(一覧データ);
         setボタン表示非表示の設定(サービス提供年月_開始, サービス提供年月_終了);
         setボタン活性非活性の設定();
-        return get給付実績基本情報子Div(給付実績ヘッダ情報1.get生年月日());
+        return get給付実績基本情報子Div(給付実績ヘッダ情報1);
     }
 
-    private KyufuJissekiHeader get給付実績基本情報子Div(FlexibleDate 生年月日) {
+    private KyufuJissekiHeader get給付実績基本情報子Div(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1) {
         KyufuJissekiHeader data = new KyufuJissekiHeader();
-        data.set被保険者番号(div.getTxtKyufuJissekiListHihokenshaNo().getValue());
-        data.set住民種別(div.getTxtKyufuJissekiListJuminShubetsu().getValue());
-        data.set要介護度(div.getTxtKyufuJissekiListYokaigodo().getValue());
-        data.set有効期間開始年月日(div.getTxtKyufuJissekiListNinteiYukoKikan().getFromValue());
-        data.set有効期間終了年月日(div.getTxtKyufuJissekiListNinteiYukoKikan().getToValue());
-        data.set氏名(div.getTxtKyufuJissekiListName().getValue());
-        data.set性別(div.getTxtKyufuJissekiListSeibetsu().getValue());
-        if (生年月日 != null && !生年月日.isEmpty()) {
-            data.set生年月日(new RDate(生年月日.toString()));
+        data.set被保険者番号(get被保険者番号(給付実績ヘッダ情報1.get被保険者番号()));
+        data.set住民種別(get住民種別(給付実績ヘッダ情報1.get資格取得事由コード()));
+        if (給付実績ヘッダ情報1.get認定年月日() != null && !給付実績ヘッダ情報1.get認定年月日().isEmpty()
+                && !RString.isNullOrEmpty(給付実績ヘッダ情報1.get要介護認定状態区分コード())) {
+            data.set要介護度(YokaigoJotaiKubunSupport.toValue(
+                    給付実績ヘッダ情報1.get認定年月日().getYearMonth(), 給付実績ヘッダ情報1.get要介護認定状態区分コード()).getName());
+        }
+        if (給付実績ヘッダ情報1.get認定有効期間開始年月日() != null && !給付実績ヘッダ情報1.get認定有効期間開始年月日().isEmpty()) {
+            data.set有効期間開始年月日(new RDate(給付実績ヘッダ情報1.get認定有効期間開始年月日().toString()));
+        }
+        if (給付実績ヘッダ情報1.get認定有効期間終了年月日() != null && !給付実績ヘッダ情報1.get認定有効期間終了年月日().isEmpty()) {
+            data.set有効期間終了年月日(new RDate(給付実績ヘッダ情報1.get認定有効期間終了年月日().toString()));
+        }
+        data.set氏名(給付実績ヘッダ情報1.get名称());
+        data.set性別(get性別(給付実績ヘッダ情報1.get性別コード()));
+        if (給付実績ヘッダ情報1.get生年月日() != null && 給付実績ヘッダ情報1.get生年月日().isWareki()) {
+            data.set生年月日(new RDate(給付実績ヘッダ情報1.get生年月日().toString()));
         }
         return data;
     }
@@ -342,7 +350,7 @@ public class KyufuJissekiShokaiHandler {
 //    }
     private void set明細一覧列(FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了) {
         set一覧表示();
-        if (!RString.isNullOrEmpty(div.getRadNendo().getSelectedKey())) {
+        if (!KEY.equals(div.getHiddenSearchKey())) {
             for (int i = INT_SAN; i < INT_NJYUNA; i++) {
                 set列名の設定(i, サービス提供年月_開始, サービス提供年月_終了);
             }
@@ -983,7 +991,7 @@ public class KyufuJissekiShokaiHandler {
                     合計一覧.setTxtServiceGroup1(RString.EMPTY);
                     合計一覧.setTxtServiceGroup2(RString.EMPTY);
                     合計一覧.setTxtServiceShurui(給付費合計);
-                    set選択ボタン表示非表示の設定(合計一覧);
+                    //set選択ボタン表示非表示の設定(合計一覧);
                 }
                 合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
@@ -1002,7 +1010,7 @@ public class KyufuJissekiShokaiHandler {
                 }
                 合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
-                set選択ボタン表示非表示の設定(合計一覧);
+                //set選択ボタン表示非表示の設定(合計一覧);
                 break;
             case INT_GO:
                 合計一覧.setTxtServiceGroup1(RString.EMPTY);
@@ -1010,7 +1018,7 @@ public class KyufuJissekiShokaiHandler {
                 合計一覧.setTxtServiceShurui(new RString("給付費合計（総合事業）"));
                 合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
-                set選択ボタン表示非表示の設定(合計一覧);
+                //set選択ボタン表示非表示の設定(合計一覧);
                 break;
             case INT_ROKU:
                 合計一覧.setTxtServiceGroup1(RString.EMPTY);
@@ -1019,7 +1027,7 @@ public class KyufuJissekiShokaiHandler {
                 合計一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
-                set選択ボタン表示非表示の設定(合計一覧);
+                //set選択ボタン表示非表示の設定(合計一覧);
                 break;
             case INT_NANA:
                 合計一覧.setTxtServiceGroup1(RString.EMPTY);
@@ -1027,7 +1035,7 @@ public class KyufuJissekiShokaiHandler {
                 合計一覧.setTxtServiceShurui(new RString("利用者負担合計（総合事業）"));
                 合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
-                set選択ボタン表示非表示の設定(合計一覧);
+                //set選択ボタン表示非表示の設定(合計一覧);
                 break;
             case INT_HACHI:
                 合計一覧.setTxtServiceGroup1(RString.EMPTY);
@@ -1124,11 +1132,9 @@ public class KyufuJissekiShokaiHandler {
     private void setボタン活性非活性の設定() {
         if (div.getBtnSento().isVisible()) {
             FlexibleYearMonth サービス提供年月_開始
-                    = new FlexibleYearMonth(div.getTxtKyufuJissekiSearchServiceTeikyoYM().
-                            getFromValue().toDateString().substring(INT_ZERO, INT_ROKU));
+                    = new FlexibleYearMonth(div.getHiddenStartYM());
             FlexibleYearMonth サービス提供年月_終了
-                    = new FlexibleYearMonth(div.getTxtKyufuJissekiSearchServiceTeikyoYM().
-                            getToValue().toDateString().substring(INT_ZERO, INT_ROKU));
+                    = new FlexibleYearMonth(div.getHiddenEndYM());
             div.getBtnSento().setDisabled(true);
             div.getBtnMae().setDisabled(true);
             div.getBtnTsugi().setDisabled(true);
@@ -1921,11 +1927,71 @@ public class KyufuJissekiShokaiHandler {
                 = KyufuJissekiShokaiFinder.createInstance().get集計データ(is経過措置, サービス提供年月_開始, サービス提供年月_終了, 被保険者番号);
         List<KyufuJissekiShukeiKekka> 集計結果List;
         if (is経過措置) {
-            集計結果List = null;
+            集計結果List = edit集計結果_経過措置(集計データ, サービス提供年月_開始, サービス提供年月_終了);
         } else {
             集計結果List = edit集計結果(集計データ, サービス提供年月_開始, サービス提供年月_終了);
         }
         給付実績情報照会情報.getSearchData().set給付実績集計結果明細データ(集計結果List);
+    }
+
+    private List<KyufuJissekiShukeiKekka> edit集計結果_経過措置(List<KyufuJissekiShukeiKekkaDataBusiness> 集計データ,
+            FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了) {
+        List<KyufuJissekiShukeiKekka> 集計結果List = new ArrayList<>();
+        FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(サービス提供年月_終了.toDateString());
+        int index = 0;
+        while (処理対象年月.isBeforeOrEquals(サービス提供年月_終了) && サービス提供年月_開始.isBeforeOrEquals(処理対象年月)) {
+            List<KyufuJissekiShukeiKekka> 処理対象年月集計結果List = 初期化処理対象年月集計結果List(処理対象年月, true);
+            while (集計データ.size() > index && 処理対象年月.equals(集計データ.get(index).getServiceTeikyoYM())) {
+                KyufuJissekiShukeiKekkaDataBusiness 処理対象集計データ = 集計データ.get(index);
+                for (int i = 0; i < INT_NJYUI; i++) {
+                    if (isServiceShuruiCodeNullOrEmpty(処理対象集計データ.getServiceSyuruiCode())) {
+                        break;
+                    }
+                    if (chk単位数加算対象_経過措置(i, serviceSyuruiCodeToServiceCategoryShurui(処理対象集計データ.getServiceSyuruiCode()))) {
+                        処理対象年月集計結果List.get(i).setKensu(
+                                処理対象年月集計結果List.get(i).getKensu().add(Decimal.ONE));
+                        処理対象年月集計結果List.get(i).setKingaku(
+                                処理対象年月集計結果List.get(i).getKingaku().add(nullToZero(処理対象集計データ.getTanisu())));
+                    }
+                    if (chk出来高単位数加算対象_経過措置(i, serviceSyuruiCodeToServiceCategoryShurui(処理対象集計データ.getServiceSyuruiCode()))) {
+                        処理対象年月集計結果List.get(i).setKensu(
+                                処理対象年月集計結果List.get(i).getKensu().add(Decimal.ONE));
+                        処理対象年月集計結果List.get(i).setKingaku(
+                                処理対象年月集計結果List.get(i).getKingaku().add(nullToZero(処理対象集計データ.getDekidakaTanisu())));
+                    }
+                }
+                RString パターン番号
+                        = get合計パターン番号_経過措置(serviceSyuruiCodeToServiceCategoryShurui(処理対象集計データ.getServiceSyuruiCode()));
+                edit合計一覧用集計結果_経過措置(パターン番号, 処理対象年月集計結果List, 処理対象集計データ);
+                index++;
+            }
+            集計結果List.addAll(処理対象年月集計結果List);
+            処理対象年月 = new FlexibleYearMonth(処理対象年月.minusMonth(1).toDateString());
+        }
+        return 集計結果List;
+    }
+
+    private void edit合計一覧用集計結果_経過措置(RString パターン番号,
+            List<KyufuJissekiShukeiKekka> 処理対象年月集計結果List,
+            KyufuJissekiShukeiKekkaDataBusiness 処理対象集計データ) {
+        if (GOKEI_PATTERN1_1.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUI), 処理対象集計データ.getTanisu());
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUY), 処理対象集計データ.getSeikyugaku());
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUG), 処理対象集計データ.getRiyoshaFutangaku());
+        } else if (GOKEI_PATTERN1_2.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUI),
+                    nullToZero(処理対象集計データ.getTanisu()).add(nullToZero(処理対象集計データ.getDekidakaTanisu())));
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUY), 処理対象集計データ.getSeikyugaku());
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUG), 処理対象集計データ.getRiyoshaFutangaku());
+        } else if (GOKEI_PATTERN3.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUN), 処理対象集計データ.getTanisu());
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUY), 処理対象集計データ.getSeikyugaku());
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUG), 処理対象集計データ.getRiyoshaFutangaku());
+        } else if (GOKEI_PATTERN4.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUS), 処理対象集計データ.getTanisu());
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUY), 処理対象集計データ.getSeikyugaku());
+            金額単位数加算(処理対象年月集計結果List.get(INT_NJYUG), 処理対象集計データ.getRiyoshaFutangaku());
+        }
     }
 
     private List<KyufuJissekiShukeiKekka> edit集計結果(List<KyufuJissekiShukeiKekkaDataBusiness> 集計データ,
@@ -1934,7 +2000,7 @@ public class KyufuJissekiShokaiHandler {
         FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(サービス提供年月_終了.toDateString());
         int index = 0;
         while (処理対象年月.isBeforeOrEquals(サービス提供年月_終了) && サービス提供年月_開始.isBeforeOrEquals(処理対象年月)) {
-            List<KyufuJissekiShukeiKekka> 処理対象年月集計結果List = 初期化処理対象年月集計結果List(処理対象年月);
+            List<KyufuJissekiShukeiKekka> 処理対象年月集計結果List = 初期化処理対象年月集計結果List(処理対象年月, false);
             while (集計データ.size() > index && 処理対象年月.equals(集計データ.get(index).getServiceTeikyoYM())) {
                 KyufuJissekiShukeiKekkaDataBusiness 処理対象集計データ = 集計データ.get(index);
                 for (int i = 0; i < INT_47; i++) {
@@ -2029,9 +2095,13 @@ public class KyufuJissekiShokaiHandler {
         return ServiceCategoryShurui.toValue(code.getColumnValue());
     }
 
-    private List<KyufuJissekiShukeiKekka> 初期化処理対象年月集計結果List(FlexibleYearMonth 処理対象年月) {
+    private List<KyufuJissekiShukeiKekka> 初期化処理対象年月集計結果List(FlexibleYearMonth 処理対象年月, boolean is経過措置) {
+        int count = INT_58;
+        if (is経過措置) {
+            count = INT_NJYUR;
+        }
         List<KyufuJissekiShukeiKekka> 処理対象年月集計結果List = new ArrayList<>();
-        for (int index = 0; index < INT_58; index++) {
+        for (int index = 0; index < count; index++) {
             処理対象年月集計結果List.add(初期化集計結果(処理対象年月));
         }
         return 処理対象年月集計結果List;
@@ -2686,39 +2756,26 @@ public class KyufuJissekiShokaiHandler {
     private void set一覧設定(KyufuJissekiSearchDataBusiness 一覧データ) {
         int 列位値 = 1;
         List<dgKyufuJissekiMeisaiList_Row> 種類明細一覧 = div.getDgKyufuJissekiMeisaiList().getDataSource();
-        //List<dgKyufuJissekiGokeiList_Row> 種類合計一覧 = div.getDgKyufuJissekiGokeiList().getDataSource();
-
-        //　画面にhiddenInputを追加して、表示データの開始・終了indexを管理する
-        int idxST = 0;
-        int idxED = 35;
-        if (一覧データ.get給付実績集計結果明細データ().size() < 36 * 58) {
-            idxED = 一覧データ.get給付実績集計結果明細データ().size() / 58;
+        int idxST = Integer.parseInt(div.getHiddenStartIndex().toString());
+        int idxED = Integer.parseInt(div.getHiddenEndIndex().toString());
+        int count = INT_58;
+        if (!KEY.equals(div.getHiddenSearchKey())) {
+            count = INT_NJYUR;
         }
 
         for (int i = 0; i < 種類明細一覧.size(); i++) {
-            for (int j = idxST; j < idxED; j++) {
-                if (一覧データ.get給付実績集計結果明細データ().get((j) * INT_58 + i).getKensu().equals(Decimal.ZERO)) {
+            for (int j = idxST; j <= idxED; j++) {
+                if (一覧データ.get給付実績集計結果明細データ().get((j) * count + i).getKensu().equals(Decimal.ZERO)) {
                     set一覧対象金額データ(種類明細一覧.get(i), 列位値, RString.EMPTY, true);
                 } else {
                     set一覧対象金額データ(種類明細一覧.get(i), 列位値,
-                            getデータフォマート(一覧データ.get給付実績集計結果明細データ().get((j) * INT_58 + i).getKingaku()), false);
+                            getデータフォマート(一覧データ.get給付実績集計結果明細データ().get((j) * count + i).getKingaku()), false);
                 }
                 列位値++;
             }
             列位値 = 1;
         }
 
-//        列位値 = 1;
-//        for (int i = 0; i < 種類合計一覧.size(); i++) {
-//            for (int j = idxST; j < idxED; j++) {
-//                if (一覧データ.get給付実績集計結果合計データ().get(j).getKensu().equals(Decimal.ZERO)) {
-//                    set合計対象金額データ(種類合計一覧.get(i), 列位値, RString.EMPTY, false);
-//                } else {
-//                    set合計対象金額データ(種類合計一覧.get(i), 列位値, getデータフォマート(一覧データ.get給付実績集計結果合計データ().get(j).getKingaku()), true);
-//                }
-//                列位値++;
-//            }
-//        }
     }
 
     private void set一覧対象金額データ(dgKyufuJissekiMeisaiList_Row 明細一覧, int 列, RString 対象金額, boolean 表示制御) {

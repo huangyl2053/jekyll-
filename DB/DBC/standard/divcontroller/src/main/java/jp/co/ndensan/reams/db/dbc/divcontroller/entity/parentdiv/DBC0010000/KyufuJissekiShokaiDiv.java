@@ -44,6 +44,16 @@ public class KyufuJissekiShokaiDiv extends Panel {
     private RString hiddenZenBanGo;
     @JsonProperty("hiddenSearchKey")
     private RString hiddenSearchKey;
+    @JsonProperty("hiddenStartYM")
+    private RString hiddenStartYM;
+    @JsonProperty("hiddenEndYM")
+    private RString hiddenEndYM;
+    @JsonProperty("hiddenSearchNendo")
+    private RString hiddenSearchNendo;
+    @JsonProperty("hiddenStartIndex")
+    private RString hiddenStartIndex;
+    @JsonProperty("hiddenEndIndex")
+    private RString hiddenEndIndex;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -175,6 +185,96 @@ public class KyufuJissekiShokaiDiv extends Panel {
     @JsonProperty("hiddenSearchKey")
     public void setHiddenSearchKey(RString hiddenSearchKey) {
         this.hiddenSearchKey = hiddenSearchKey;
+    }
+
+    /*
+     * gethiddenStartYM
+     * @return hiddenStartYM
+     */
+    @JsonProperty("hiddenStartYM")
+    public RString getHiddenStartYM() {
+        return hiddenStartYM;
+    }
+
+    /*
+     * sethiddenStartYM
+     * @param hiddenStartYM hiddenStartYM
+     */
+    @JsonProperty("hiddenStartYM")
+    public void setHiddenStartYM(RString hiddenStartYM) {
+        this.hiddenStartYM = hiddenStartYM;
+    }
+
+    /*
+     * gethiddenEndYM
+     * @return hiddenEndYM
+     */
+    @JsonProperty("hiddenEndYM")
+    public RString getHiddenEndYM() {
+        return hiddenEndYM;
+    }
+
+    /*
+     * sethiddenEndYM
+     * @param hiddenEndYM hiddenEndYM
+     */
+    @JsonProperty("hiddenEndYM")
+    public void setHiddenEndYM(RString hiddenEndYM) {
+        this.hiddenEndYM = hiddenEndYM;
+    }
+
+    /*
+     * gethiddenSearchNendo
+     * @return hiddenSearchNendo
+     */
+    @JsonProperty("hiddenSearchNendo")
+    public RString getHiddenSearchNendo() {
+        return hiddenSearchNendo;
+    }
+
+    /*
+     * sethiddenSearchNendo
+     * @param hiddenSearchNendo hiddenSearchNendo
+     */
+    @JsonProperty("hiddenSearchNendo")
+    public void setHiddenSearchNendo(RString hiddenSearchNendo) {
+        this.hiddenSearchNendo = hiddenSearchNendo;
+    }
+
+    /*
+     * gethiddenStartIndex
+     * @return hiddenStartIndex
+     */
+    @JsonProperty("hiddenStartIndex")
+    public RString getHiddenStartIndex() {
+        return hiddenStartIndex;
+    }
+
+    /*
+     * sethiddenStartIndex
+     * @param hiddenStartIndex hiddenStartIndex
+     */
+    @JsonProperty("hiddenStartIndex")
+    public void setHiddenStartIndex(RString hiddenStartIndex) {
+        this.hiddenStartIndex = hiddenStartIndex;
+    }
+
+    /*
+     * gethiddenEndIndex
+     * @return hiddenEndIndex
+     */
+    @JsonProperty("hiddenEndIndex")
+    public RString getHiddenEndIndex() {
+        return hiddenEndIndex;
+    }
+
+    /*
+     * sethiddenEndIndex
+     * @param hiddenEndIndex hiddenEndIndex
+     */
+    @JsonProperty("hiddenEndIndex")
+    public void setHiddenEndIndex(RString hiddenEndIndex) {
+        this.hiddenEndIndex = hiddenEndIndex;
     }
 
     /*
