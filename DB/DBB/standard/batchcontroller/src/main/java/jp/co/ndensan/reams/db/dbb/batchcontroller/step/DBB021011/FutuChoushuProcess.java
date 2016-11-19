@@ -59,7 +59,6 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
     private static final RString 生年月日終了 = new RString("生年月日終了");
     private static final RString 選択対象 = new RString("選択対象");
     private static final RString 市町村 = new RString("市町村");
-    private static final RString 不明 = new RString("不明");
     private static final int INT_8 = 8;
     private List<KoumokuGoukey> koumokuGoukeyList;
     private List<RString> 表記List;
@@ -80,7 +79,6 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
         HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
         HokenryoDankaiList hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processPrm.getChoteiNendo());
         表記List = hokenryoDankaiList.to表記List();
-        表記List.add(不明);
         koumokuGoukeyList = new ArrayList<>();
     }
 

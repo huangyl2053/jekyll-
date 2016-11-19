@@ -55,7 +55,6 @@ public class GemmenReportProcess extends BatchProcessBase<GemmenJyoho> {
         HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
         HokenryoDankaiList hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processPrm.getChoteiNendo());
         表記List = hokenryoDankaiList.to表記List();
-        表記List.add(不明);
         gemmenJyohoList = new ArrayList<>();
     }
 
