@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513ShukeiD
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513ShukeiDataInsert2Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513ShutsuRyokuTaishoDataInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513TankinyushoShikyugendoGakuUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513kyotakuServiceJigyoshoNameUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1514HokenshaNoErrorInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.OutPutDataUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.ServiceTeikyoYMSakuseiProcess;
@@ -82,10 +83,10 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
     private static final String サービス提供年月取得 = "SERVICETEIKYOYM_SELECT";
     private static final String 世帯コード登録 = "SETAICODE_UPDATE";
     private static final String 事業者名取得 = "JIGYOSHANAME_UPDATE";
+    private static final String 給付事業者名取得 = "KYOTAKUJIGYOSHANAME_UPDATE";
     private static final String 利用状況一覧表出力 = "CREATE_RIYOJOKYOICHIRANHYO";
     private static final String 処理結果確認リストCSV = "ShoriKekkaKakuninList_Order";
     private static final String サービス種類名取得 = "SERVICESHURUINAMEUPDATE";
-
     private static final RString 市町村コード_全て = new RString("000000");
     private static final RString 出力する = new RString("1");
     private static final RString 利用実績区分_集計 = new RString("1");
@@ -154,6 +155,7 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
             }
             //DbWT1513JigyoshoNameUpdateProcess
             executeStep(事業者名取得);
+            executeStep(給付事業者名取得);
             //DbWT1513ServiceShuruiNameUpdateProcess
             executeStep(サービス種類名取得);
             executeStep(利用状況一覧表出力);
@@ -169,6 +171,16 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
     @Step(事業者名取得)
     protected IBatchFlowCommand jigyoshanameUpdate() {
         return loopBatch(DbWT1513JigyoshoNameUpdateProcess.class).define();
+    }
+
+    /**
+     * 給付事業者名取得します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(給付事業者名取得)
+    protected IBatchFlowCommand kyotakuJigyoshanameUpdate() {
+        return loopBatch(DbWT1513kyotakuServiceJigyoshoNameUpdateProcess.class).define();
     }
 
     /**

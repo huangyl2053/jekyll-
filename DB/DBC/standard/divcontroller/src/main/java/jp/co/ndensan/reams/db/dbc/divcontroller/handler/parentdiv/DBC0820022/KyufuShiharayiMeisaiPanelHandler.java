@@ -12,9 +12,9 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.dgdKyufuhiMeisai_Row;
-import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -203,7 +203,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
     private boolean checkState(dgdKyufuhiMeisai_Row ddgRow, List<ShokanMeisaiResult> baseList) {
         ShokanMeisai entity = null;
         for (ShokanMeisaiResult result : baseList) {
-            if (result.getEntity().get連番().equals(ddgRow.getDefaultDataName7())) {
+            if (result.getEntity().get連番().equals(ddgRow.getDefaultDataName6())) {
                 entity = result.getEntity();
             }
         }
@@ -656,6 +656,29 @@ public class KyufuShiharayiMeisaiPanelHandler {
         div.getPanelThree().getPanelFour().getBtnCancel().setDisabled(flag);
         div.getPanelThree().getPanelFour().getBtnConfirm().setDisabled(flag);
         div.getPanelThree().getPanelFour().setDisabled(flag);
+    }
+
+    /**
+     * 該当データを取得します。
+     *
+     * @param allList ShokanMeisaiResult
+     * @param parameter ShoukanharaihishinseimeisaikensakuParameter
+     * @return List<ShokanMeisaiResult>
+     */
+    public List<ShokanMeisaiResult> getUpdateList(
+            List<ShokanMeisaiResult> allList, ShoukanharaihishinseimeisaikensakuParameter parameter) {
+        List<ShokanMeisaiResult> updateList = new ArrayList<>();
+        for (ShokanMeisaiResult ryoyo : allList) {
+            if (ryoyo.getEntity().get被保険者番号().equals(parameter.get被保険者番号())
+                    && ryoyo.getEntity().getサービス提供年月().equals(parameter.getサービス年月())
+                    && ryoyo.getEntity().get整理番号().equals(parameter.get整理番号())
+                    && ryoyo.getEntity().get事業者番号().equals(parameter.get事業者番号())
+                    && ryoyo.getEntity().get様式番号().equals(parameter.get様式番号())
+                    && ryoyo.getEntity().get明細番号().equals(parameter.get明細番号())) {
+                updateList.add(ryoyo);
+            }
+        }
+        return updateList;
     }
 
 }

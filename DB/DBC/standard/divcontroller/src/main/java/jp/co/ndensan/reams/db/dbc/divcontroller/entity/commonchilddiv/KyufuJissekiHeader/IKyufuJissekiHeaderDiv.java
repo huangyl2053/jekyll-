@@ -230,20 +230,6 @@ public interface IKyufuJissekiHeaderDiv extends ICommonChildDivBaseProperties {
     RString get保険者();
 
     /**
-     * 事業者を設定します。
-     *
-     * @param 事業者 事業者
-     */
-    void set事業者(RString 事業者);
-
-    /**
-     * 事業者を取得します。
-     *
-     * @return 事業者 事業者
-     */
-    RString get事業者();
-
-    /**
      * 被保情報を設定します。
      *
      * @param 給付実績基本情報子Divデータ 給付実績基本情報子Divデータ

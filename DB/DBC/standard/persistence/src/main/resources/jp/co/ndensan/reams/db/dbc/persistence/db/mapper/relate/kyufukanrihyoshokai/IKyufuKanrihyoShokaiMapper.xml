@@ -143,6 +143,7 @@
           A."hiHokenshaNo" = #{被保険者番号} 
           AND A."shinsaYM" = #{審査年月}
           AND A."serviceTeikyoYM" = #{サービス提供年月}
+          AND A."kyufuKanrihyoMeisaiLineNo" !='99'
         UNION 
         SELECT
           B.*
@@ -183,5 +184,6 @@
           B."hiHokenshaNo" = #{被保険者番号} 
           AND B."shinsaYM" = #{審査年月}
           AND B."serviceTeikyoYM" = #{サービス提供年月}
+          AND B."kyufuMeisaiLineNo" !='99'
     </select>
 </mapper>

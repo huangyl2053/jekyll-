@@ -192,6 +192,15 @@ public class KyufuJissekiShokai {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
         FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
+        int 列 = サービス提供年月_終了.getBetweenMonths(サービス提供年月_開始) + INT_ICHI;
+        div.setHiddenStartIndex(new RString(0));
+        if (列 > INT_SJYUR) {
+            div.setHiddenEndIndex(new RString(INT_SJYUG));
+        } else {
+            div.setHiddenEndIndex(new RString(列 - 1));
+        }
+        div.setHiddenStartYM(サービス提供年月_開始.toDateString());
+        div.setHiddenEndYM(サービス提供年月_終了.toDateString());
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         List<KyufuJissekiHedajyoho1> 給付実績ヘッダ情報1 = KyufuJissekiShokaiFinder.createInstance().
                 getKyufuJissekiHeaderJoho1(被保険者番号).records();
@@ -1111,8 +1120,10 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnSento(KyufuJissekiShokaiDiv div) {
-        FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
-        FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
+        FlexibleYearMonth サービス提供年月_開始 = new FlexibleYearMonth(div.getHiddenStartYM());
+        FlexibleYearMonth サービス提供年月_終了 = new FlexibleYearMonth(div.getHiddenEndYM());
+        div.setHiddenStartIndex(new RString(0));
+        div.setHiddenEndIndex(new RString(INT_SJYU));
         getHandler(div).onClick_btnSento(サービス提供年月_開始, サービス提供年月_終了, get一覧データ());
         return ResponseData.of(div).respond();
     }
@@ -1124,6 +1135,8 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnMae(KyufuJissekiShokaiDiv div) {
+        div.setHiddenStartIndex(new RString(Integer.parseInt(div.getHiddenStartIndex().toString()) - 1));
+        div.setHiddenEndIndex(new RString(Integer.parseInt(div.getHiddenEndIndex().toString()) - 1));
         getHandler(div).onClick_btnMae(get一覧データ());
         return ResponseData.of(div).respond();
     }
@@ -1135,6 +1148,8 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnTsugi(KyufuJissekiShokaiDiv div) {
+        div.setHiddenStartIndex(new RString(Integer.parseInt(div.getHiddenStartIndex().toString()) + 1));
+        div.setHiddenEndIndex(new RString(Integer.parseInt(div.getHiddenEndIndex().toString()) + 1));
         getHandler(div).onClick_btnTsugi(get一覧データ());
         return ResponseData.of(div).respond();
     }
@@ -1146,8 +1161,11 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnSaigo(KyufuJissekiShokaiDiv div) {
-        FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
-        FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
+        FlexibleYearMonth サービス提供年月_開始 = new FlexibleYearMonth(div.getHiddenStartYM());
+        FlexibleYearMonth サービス提供年月_終了 = new FlexibleYearMonth(div.getHiddenEndYM());
+        int 列 = サービス提供年月_終了.getBetweenMonths(サービス提供年月_開始) + INT_ICHI;
+        div.setHiddenStartIndex(new RString(列 - INT_SJYUR));
+        div.setHiddenEndIndex(new RString(列 - 1));
         getHandler(div).onClick_btnSaigo(サービス提供年月_開始, サービス提供年月_終了, get一覧データ());
         return ResponseData.of(div).respond();
     }

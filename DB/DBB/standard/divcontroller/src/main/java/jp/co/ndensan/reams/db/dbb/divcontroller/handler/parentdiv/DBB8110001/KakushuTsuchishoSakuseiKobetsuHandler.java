@@ -300,7 +300,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             List<RString> 発行する帳票リスト,
             List<YMDHMS> 調定日時List,
             boolean is初期状態) {
-        return set通知書作成パネル(発行する帳票リスト, 調定年度, 賦課年度, 調定日時List, is初期状態);
+        return set通知書作成パネル(発行する帳票リスト, 調定年度, 賦課年度, 調定日時List, is初期状態, 賦課の情報);
     }
 
     private void set調定パネルの共通エリア(FukaJoho 賦課の情報) {
@@ -1075,7 +1075,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             List<YMDHMS> 調定日時List,
-            boolean is初期状態) {
+            boolean is初期状態,
+            FukaJoho 賦課の情報) {
         List<dgChohyoSentaku_Row> rowList = new ArrayList<>();
         dgChohyoSentaku_Row row;
         boolean 特徴開始通知書Flag = false;
@@ -1152,7 +1153,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         div.setHdnPublishFlag(new RString(String.valueOf(publishNumber)));
         div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().setDataSource(dgRowList);
         set通知書(特徴開始通知書Flag, 決定通知書Flag, 変更通知書Flag, 納入通知書Flag, 減免通知書Flag, 徴収猶予通知書Flag,
-                郵振納付書Flag, 賦課台帳Flag, 調定事由Flag, 調定年度, 賦課年度);
+                郵振納付書Flag, 賦課台帳Flag, 調定事由Flag, 調定年度, 賦課年度, 賦課の情報);
         return 帳票略称Map;
     }
 
@@ -1176,7 +1177,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             boolean 賦課台帳Flag,
             boolean 調定事由Flag,
             FlexibleYear 調定年度,
-            FlexibleYear 賦課年度) {
+            FlexibleYear 賦課年度,
+            FukaJoho 賦課の情報) {
         List<RString> key = new ArrayList<>();
         key.add(ISPUBLISH);
         if (!特徴開始通知書Flag) {
@@ -1208,7 +1210,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu().setDisplayNone(true);
             div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setDisplayNone(true);
         } else {
-            set納入通知書(key, 調定年度, 賦課年度);
+            set納入通知書(key, 調定年度, 賦課年度, 賦課の情報);
         }
         if (!減免通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().setDisplayNone(true);
@@ -1291,17 +1293,29 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
     }
 
-    private void set納入通知書(List<RString> key, FlexibleYear 調定年度, FlexibleYear 賦課年度) {
+    private void set納入通知書(List<RString> key, FlexibleYear 調定年度, FlexibleYear 賦課年度, FukaJoho 賦課の情報) {
         KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
         FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
         List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
         Kitsuki 期月 = koseiTsukiHantei.find更正月(RDate.getNowDate());
-        KitsukiList 期月リスト = fuchoKiUtil.get期月リスト().filteredLater期(期月.get期AsInt());
-        for (Kitsuki 期と月 : 期月リスト.toList()) {
-            keyValueDataSource.add(new KeyValueDataSource(期と月.get期(), 期と月.get表記().asX期括弧X月()));
+        KitsukiList 期月リスト = fuchoKiUtil.get期月リスト();
+        boolean isContains期月 = false;
+        for (Kitsuki 出力期 : 期月リスト.toList()) {
+            if (0 == 出力期.get期AsInt()) {
+                continue;
+            }
+            Decimal 金額 = 賦課の情報.get普徴期別金額(出力期.get期AsInt());
+            if (null != 金額 && !Decimal.ZERO.equals(金額)) {
+                isContains期月 = 期月.get期AsInt() == 出力期.get期AsInt() ? true : isContains期月;
+                keyValueDataSource.add(new KeyValueDataSource(出力期.get期(), 出力期.get表記().asX期括弧X月()));
+            }
         }
         div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setDataSource(keyValueDataSource);
-        div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedKey(期月.get期());
+        if (isContains期月) {
+            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedKey(期月.get期());
+        } else {
+            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedIndex(0);
+        }
         if (賦課年度.isBefore(調定年度)) {
             Noki 過年度納期 = FukaNokiResearcher.createInstance().get過年度納期(期月.get期AsInt());
             set発行日(過年度納期.get通知書発行日());

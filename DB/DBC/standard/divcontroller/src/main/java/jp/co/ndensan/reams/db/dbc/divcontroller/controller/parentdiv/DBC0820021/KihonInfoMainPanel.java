@@ -185,8 +185,8 @@ public class KihonInfoMainPanel {
             QuestionMessage message = (QuestionMessage) DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄
                     .getMessage();
             return ResponseData.of(div).addMessage(message).respond();
-        } else {
-            //再リクエストの場合の処理
+        } else //再リクエストの場合の処理
+        {
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
                 ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
@@ -219,18 +219,19 @@ public class KihonInfoMainPanel {
     private ResponseData<KihonInfoMainPanelDiv> judge証明書入力済のチェック(KihonInfoMainPanelDiv div,
             ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
             FlexibleYearMonth サービス年月, DBC0820021TransitionEventName eventName) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             ShomeishoNyuryokuKanryoKubunType 証明書入力完了フラグ = SyokanbaraihiShikyuShinseiManager.createInstance()
-                    .証明書InputCheck(ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class), 識別コード.getColumnValue(), サービス年月);
+                    .証明書InputCheck(db情報.get証明書入力済フラグMap().get(meisaiPar), meisaiPar.get様式番号(), サービス年月);
             if (証明書入力完了フラグ.equals(ShomeishoNyuryokuKanryoKubunType.入力完了)) {
                 db情報.get証明書入力完了フラグMap().put(meisaiPar, 証明書入力完了フラグ);
                 ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
             } else if (証明書入力完了フラグ.equals(ShomeishoNyuryokuKanryoKubunType.入力未完了)) {
                 db情報.get証明書入力完了フラグMap().put(meisaiPar, 証明書入力完了フラグ);
                 ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
-                throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.toString());
+                if (DBC0820021TransitionEventName.一覧に戻る.equals(eventName)) {
+                    throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage().evaluate());
+                }
             }
         }
         return ResponseData.of(div).forwardWithEventName(eventName).respond();

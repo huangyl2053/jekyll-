@@ -221,11 +221,9 @@ public class FutanGendogakuNinteiShinseisho {
             FutanGendogakuNinteiShinseishoParamter param = FutanGendogakuNinteiShinseishoParamter.
                     createParamter(識別コード, 施設入退所情報.get入所施設コード());
             if (ShisetsuType.介護保険施設.getコード().equals(施設入退所情報.get入所施設種類())) {
-                FutanGendogakuNinteiShinseishoEntity 介護事業者 = mapper.get介護事業者(param);
-                return 介護事業者;
+                return mapper.get介護事業者(param);
             } else if (ShisetsuType.住所地特例対象施設.getコード().equals(施設入退所情報.get入所施設種類())) {
-                FutanGendogakuNinteiShinseishoEntity 介護除外住所地特例対象施設 = mapper.get介護除外住所地特例対象施設(param);
-                return 介護除外住所地特例対象施設;
+                return mapper.get介護除外住所地特例対象施設(param);
             }
         }
         return null;

@@ -93,9 +93,9 @@ public class KinkyujiShisetuRyoyohiPanel {
         if (dbJoho != null && dbJoho.get償還払請求緊急時施設療養データList() != null) {
             updateList = getHandler(div).getUpdateList(dbJoho.get償還払請求緊急時施設療養データList(), parameter);
         }
-        Map<RString, RString> map = ViewStateHolder.get(ViewStateKeys.緊急時施設療養_グリッドエリア, Map.class);
-        if (map != null && !updateList.isEmpty()) {
-            getHandler(div).setRealList(list, updateList, map);
+//        Map<RString, RString> map = ViewStateHolder.get(ViewStateKeys.緊急時施設療養_グリッドエリア, Map.class);
+        if (!updateList.isEmpty()) {
+            getHandler(div).setRealList(list, updateList);
         } else {
             getHandler(div).initDgdKinkyujiShiseturyoyo(list);
         }
@@ -322,10 +322,10 @@ public class KinkyujiShisetuRyoyohiPanel {
         }
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
 
-        if (getHandler(div).isデータ変更()) {
-            Map<RString, RString> map = getHandler(div).getDataGridMap();
-            ViewStateHolder.put(ViewStateKeys.緊急時施設療養_グリッドエリア, (Serializable) map);
-        }
+//        if (getHandler(div).isデータ変更()) {
+//            Map<RString, RString> map = getHandler(div).getDataGridMap();
+//            ViewStateHolder.put(ViewStateKeys.緊急時施設療養_グリッドエリア, (Serializable) map);
+//        }
     }
 
     /**

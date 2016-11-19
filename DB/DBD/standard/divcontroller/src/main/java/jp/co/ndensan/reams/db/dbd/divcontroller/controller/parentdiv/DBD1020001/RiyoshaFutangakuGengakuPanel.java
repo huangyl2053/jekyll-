@@ -65,8 +65,8 @@ public class RiyoshaFutangakuGengakuPanel {
     private final RString 文字列_申請一覧を表示する = new RString("申請一覧を表示する");
     private final RString 文字列_申請入力を表示する = new RString("申請入力を表示する");
     private final RString 文字列_承認入力を表示する = new RString("承認入力を表示する");
-    private static final RString 利用者負担額減額申請Title = new RString("利用者負担額減額申請");
-    private static final RString 利用者負担額減額申請承認Title = new RString("利用者負担額減額申請承認");
+    private static final RString 利用者負担額減額申請TITLE = new RString("利用者負担額減額申請");
+    private static final RString 利用者負担額減額申請承認TITLE = new RString("利用者負担額減額申請承認");
 
     /**
      * 利用者負担額減額申請の初期化。(オンロード)
@@ -76,8 +76,8 @@ public class RiyoshaFutangakuGengakuPanel {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onLoad(RiyoshaFutangakuGengakuPanelDiv div) {
         IParentResponse<RiyoshaFutangakuGengakuPanelDiv> response = ResponseData.of(div);
-        response.rootTitle(申請メニュー.equals(ResponseHolder.getMenuID()) ? 利用者負担額減額申請Title : 利用者負担額減額申請承認Title);
-        
+        response.rootTitle(申請メニュー.equals(ResponseHolder.getMenuID()) ? 利用者負担額減額申請TITLE : 利用者負担額減額申請承認TITLE);
+
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 

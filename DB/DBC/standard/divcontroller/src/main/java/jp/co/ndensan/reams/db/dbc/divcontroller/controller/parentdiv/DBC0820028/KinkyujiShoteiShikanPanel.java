@@ -87,7 +87,7 @@ public class KinkyujiShoteiShikanPanel {
 
         DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         ArrayList<ShokanShoteiShikkanShisetsuRyoyo> list = getHandler(div).initPanelHead(
-                被保険者番号, 整理番号, サービス年月, 申請日, 事業者番号, 明細番号, 証明書, 様式番号, 識別コード, 償還払ViewStateDB);
+                被保険者番号, 整理番号, サービス年月, 申請日, 事業者番号, 明細番号, 証明書, 様式番号, 識別コード, 償還払ViewStateDB, parameter);
 
         getHandler(div).initDgdKinkyujiShoteiList(list);
         ViewStateHolder.put(ViewStateKeys.所定疾患施設療養費等データ, list);

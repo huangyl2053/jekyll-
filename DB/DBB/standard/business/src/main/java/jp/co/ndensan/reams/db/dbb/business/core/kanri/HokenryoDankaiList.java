@@ -80,8 +80,7 @@ public class HokenryoDankaiList {
                 return hokenryoDankai;
             }
         }
-        return null;
-//        throw new IllegalArgumentException();
+        throw new IllegalArgumentException();
     }
 
     /**

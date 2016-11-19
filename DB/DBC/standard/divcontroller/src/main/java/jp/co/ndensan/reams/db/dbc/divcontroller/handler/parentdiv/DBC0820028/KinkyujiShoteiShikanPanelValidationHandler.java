@@ -220,19 +220,19 @@ public class KinkyujiShoteiShikanPanelValidationHandler {
                             UrErrorMessages.未入力, 緊急時治療管理日数.toString())));
         }
         if (div.getPanelDetail().getTxtRehabilitationTanisu().getValue() == null
-                && div.getPanelDetail().getTxtShujutsuTanisu().getValue() != null
-                && div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() != null
-                && div.getPanelDetail().getTxtShochiTanisu().getValue() != null
-                && div.getPanelDetail().getTxtMasuiTanisu().getValue() != null) {
+                && (div.getPanelDetail().getTxtShujutsuTanisu().getValue() != null
+                || div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() != null
+                || div.getPanelDetail().getTxtShochiTanisu().getValue() != null
+                || div.getPanelDetail().getTxtMasuiTanisu().getValue() != null)) {
             validPairs.add(new ValidationMessageControlPair(
                     new KinkyujiShoteiShikanPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.未入力, リハビリテーション.toString())));
         }
-        if (div.getPanelDetail().getTxtRehabilitationTanisu().getValue() != null
-                && div.getPanelDetail().getTxtShujutsuTanisu().getValue() == null
-                && div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() != null
-                && div.getPanelDetail().getTxtShochiTanisu().getValue() != null
-                && div.getPanelDetail().getTxtMasuiTanisu().getValue() != null) {
+        if (div.getPanelDetail().getTxtShujutsuTanisu().getValue() == null
+                && (div.getPanelDetail().getTxtRehabilitationTanisu().getValue() != null
+                || div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() != null
+                || div.getPanelDetail().getTxtShochiTanisu().getValue() != null
+                || div.getPanelDetail().getTxtMasuiTanisu().getValue() != null)) {
             validPairs.add(new ValidationMessageControlPair(
                     new KinkyujiShoteiShikanPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.未入力, 手術.toString())));
@@ -242,29 +242,29 @@ public class KinkyujiShoteiShikanPanelValidationHandler {
     }
 
     private ValidationMessageControlPairs check入力_four(ValidationMessageControlPairs validPairs) {
-        if (div.getPanelDetail().getTxtRehabilitationTanisu().getValue() != null
-                && div.getPanelDetail().getTxtShujutsuTanisu().getValue() != null
-                && div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() == null
-                && div.getPanelDetail().getTxtShochiTanisu().getValue() != null
-                && div.getPanelDetail().getTxtMasuiTanisu().getValue() != null) {
+        if (div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() == null
+                && (div.getPanelDetail().getTxtShujutsuTanisu().getValue() != null
+                || div.getPanelDetail().getTxtRehabilitationTanisu().getValue() != null
+                || div.getPanelDetail().getTxtShochiTanisu().getValue() != null
+                || div.getPanelDetail().getTxtMasuiTanisu().getValue() != null)) {
             validPairs.add(new ValidationMessageControlPair(
                     new KinkyujiShoteiShikanPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.未入力, 放射線治療.toString())));
         }
-        if (div.getPanelDetail().getTxtRehabilitationTanisu().getValue() != null
-                && div.getPanelDetail().getTxtShujutsuTanisu().getValue() != null
-                && div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() != null
-                && div.getPanelDetail().getTxtShochiTanisu().getValue() == null
-                && div.getPanelDetail().getTxtMasuiTanisu().getValue() != null) {
+        if (div.getPanelDetail().getTxtShochiTanisu().getValue() == null
+                && (div.getPanelDetail().getTxtShujutsuTanisu().getValue() != null
+                || div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() != null
+                || div.getPanelDetail().getTxtRehabilitationTanisu().getValue() != null
+                || div.getPanelDetail().getTxtMasuiTanisu().getValue() != null)) {
             validPairs.add(new ValidationMessageControlPair(
                     new KinkyujiShoteiShikanPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.未入力, 処置.toString())));
         }
-        if (div.getPanelDetail().getTxtRehabilitationTanisu().getValue() != null
-                && div.getPanelDetail().getTxtShujutsuTanisu().getValue() != null
-                && div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() != null
-                && div.getPanelDetail().getTxtShochiTanisu().getValue() != null
-                && div.getPanelDetail().getTxtMasuiTanisu().getValue() == null) {
+        if (div.getPanelDetail().getTxtMasuiTanisu().getValue() == null
+                && (div.getPanelDetail().getTxtShujutsuTanisu().getValue() != null
+                || div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() != null
+                || div.getPanelDetail().getTxtShochiTanisu().getValue() != null
+                || div.getPanelDetail().getTxtRehabilitationTanisu().getValue() != null)) {
             validPairs.add(new ValidationMessageControlPair(
                     new KinkyujiShoteiShikanPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.未入力, 麻酔.toString())));

@@ -5,9 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceManager;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -44,6 +55,21 @@ public class ServiceRiyohyoInfoDivValidationHandler {
                 .add(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.単位必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtTani())
                 .add(ServiceRiyohyoInfoDivValidationMessage.回数必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu()).build();
+    }
+    
+    /**
+     * 利用年月必須入力のチェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate利用年月必須入力() {
+        IValidationMessages message = new ServiceRiyohyoInfoDivValidator(div).validate利用年月必須入力();
+        return create利用年月必須入力Dictionary().check(message);
+    }
+
+    private ValidationDictionary create利用年月必須入力Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(ServiceRiyohyoInfoDivValidationMessage.利用年月必須項目, div.getTxtRiyoYM()).build();
     }
     
     /**
@@ -190,5 +216,74 @@ public class ServiceRiyohyoInfoDivValidationHandler {
         return new ValidationDictionaryBuilder()
                 .add(ServiceRiyohyoInfoDivValidationMessage.給付率必須項目,
                         div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu()).build();
+    }
+    
+    /**
+     * 「確定する」ボタンボタンクリック時のバリデーションチェック。
+     * 
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs validate事業者サービス種類チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        事業者サービス種類チェックチェックValidate(validPairs);
+        return validPairs;
+    }
+    
+    private void 事業者サービス種類チェックチェックValidate(ValidationMessageControlPairs validPairs) {
+        
+        JigyoshaNo 事業者番号 = new JigyoshaNo(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo());
+        KaigoJigyoshaShiteiServiceManager manager = new KaigoJigyoshaShiteiServiceManager();
+        List<KaigoJigyoshaShiteiService> 介護事業者指定サービスリスト = manager.get介護事業者指定サービス(事業者番号);
+        RString サービス種類コード;
+        if (!div.getCcdServiceCodeInput().isDisplayNone()) {
+            サービス種類コード = div.getCcdServiceCodeInput().getサービスコード1();
+        } else {
+            サービス種類コード = div.getCcdServiceTypeInput().getサービス種類コード();
+        }
+        for (KaigoJigyoshaShiteiService 介護事業者指定サービス : 介護事業者指定サービスリスト) {
+            if (ServiceCategoryShurui.居宅支援.getコード().equals(
+                    介護事業者指定サービス.getサービス種類コード().value())
+                    && ServiceCategoryShurui.居宅支援.getコード().equals(サービス種類コード)) {
+                return;
+            }
+            if (ServiceCategoryShurui.予防支援.getコード().equals(
+                    介護事業者指定サービス.getサービス種類コード().value())
+                    && ServiceCategoryShurui.予防支援.getコード().equals(サービス種類コード)) {
+                return;
+            }
+            if (ServiceCategoryShurui.地小短外.getコード().equals(
+                    介護事業者指定サービス.getサービス種類コード().value())
+                    && ServiceCategoryShurui.地小短外.getコード().equals(サービス種類コード)) {
+                return;
+            }
+            if (ServiceCategoryShurui.地予小外.getコード().equals(
+                    介護事業者指定サービス.getサービス種類コード().value())
+                    && ServiceCategoryShurui.地予小外.getコード().equals(サービス種類コード)) {
+                return;
+            }
+            if (ServiceCategoryShurui.予防ケア.getコード().equals(
+                    介護事業者指定サービス.getサービス種類コード().value())
+                    && ServiceCategoryShurui.予防ケア.getコード().equals(サービス種類コード)) {
+                return;
+            }
+        }
+        validPairs.add(new ValidationMessageControlPair(
+                new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(DbcErrorMessages.事業者サービス種類)));
+    }
+    
+    private static class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages
+            implements IValidationMessage {
+
+        private final Message message;
+
+        KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(IMessageGettable message,
+                String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }

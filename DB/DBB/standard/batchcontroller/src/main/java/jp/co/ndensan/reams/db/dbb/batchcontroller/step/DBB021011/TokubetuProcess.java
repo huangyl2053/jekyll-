@@ -40,7 +40,6 @@ public class TokubetuProcess extends BatchProcessBase<KoumokuGoukey> {
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper"
             + ".relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get特別徴収帳票データの取得");
     private static final ReportId 帳票ID = ReportIdDBB.DBB300002.getReportId();
-    private static final RString 不明 = new RString("不明");
     private List<KoumokuGoukey> koumokuGoukeyList;
     private List<RString> 表記List;
     private CreateTsukibetsuSuiihyoProcessParameter processPrm;
@@ -55,7 +54,6 @@ public class TokubetuProcess extends BatchProcessBase<KoumokuGoukey> {
         HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
         HokenryoDankaiList hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processPrm.getChoteiNendo());
         表記List = hokenryoDankaiList.to表記List();
-        表記List.add(不明);
         koumokuGoukeyList = new ArrayList<>();
     }
 
