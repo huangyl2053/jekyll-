@@ -92,7 +92,6 @@
             resultMap="resultMap_TokubetsuChoshuMidoteiIchiranEntity" resultOrdered="true" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter" 
             fetchSize="500">
-        WITH master as(
         SELECT
             "DbT2019TokuchoMidoteiJoho"."kisoNenkinNo" as "kisoNenkinNo",
             "DbT2019TokuchoMidoteiJoho"."nenkinCode" as "nenkinCode",
@@ -124,20 +123,6 @@
                 <foreach collection="hosokuTsukiList" index="index" item="code" open="(" separator="," close=")">
                     #{code}
                 </foreach>
-       )         
-       SELECT 
-            master.*,
-            "shikibetsuCode"."juminShubetsuCode" as "juminShubetsuCode"
-       FROM
-            master
-       LEFT JOIN
-            rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
-            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',        
-            '{}'      
-            ) AS "shikibetsuCode"       
-       ON
-            "master"."shikibetsuCode" = "shikibetsuCode"."shikibetsuCode"  
        <if test="midoteiOutput!=null and !midoteiOutput.isEmpty()">
             ${midoteiOutput}
        </if>                         
@@ -186,8 +171,6 @@
         <result property="kanjiJusho" column="dtKanjiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="tokubetsuChoshuGimushaCode" column="dtTokubetsuChoshuGimushaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="fuichiRiyuCode" column="fuichiRiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />     
-        <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="genLasdecCode" column="koseiCityCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

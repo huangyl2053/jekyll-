@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.ue.uex.definition.core.DoteiFuitchiRiyu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -30,10 +29,6 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
 
     private static final RString 男性 = new RString("1");
     private static final RString 女性 = new RString("2");
-    private static final RString 外国人 = new RString("2");
-    private static final RString 住登外外国人 = new RString("4");
-    private static final RString 日本人 = new RString("1");
-    private static final RString 住登外日本人 = new RString("3");
     private static final RString 年度 = new RString("年度");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
@@ -52,8 +47,6 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     private static final List<Integer> 仮徴収月リスト = new ArrayList<>();
     private static final List<Integer> 本徴収月リスト = new ArrayList<>();
     private static final List<Integer> 翌年度仮徴収月リスト = new ArrayList<>();
-    private static final List<RString> 住民種別日本人 = new ArrayList<>();
-    private static final List<RString> 住民種別外国人 = new ArrayList<>();
     private final List<RString> 出力順項目リスト;
     private final Map<RString, RString> 改頁項目Map;
     private final List<RString> 改頁項目リスト;
@@ -90,10 +83,6 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         本徴収月リスト.add(NUM_2);
         翌年度仮徴収月リスト.add(NUM_4);
         翌年度仮徴収月リスト.add(NUM_6);
-        住民種別日本人.add(日本人);
-        住民種別日本人.add(住登外日本人);
-        住民種別外国人.add(住登外外国人);
-        住民種別外国人.add(外国人);
     }
 
     @Override
@@ -103,7 +92,6 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         set導入団体コード(source);
         set導入市町村名(source);
         set年金番号と年金コード(source);
-        set識別コード(source);
         set生年月日(source);
         set性別(source);
         setカナ氏名(source);
@@ -171,23 +159,8 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         }
     }
 
-    private void set識別コード(TokubetsuChoshuMidoteiIchiranSource source) {
-        ShikibetsuCode shikibetsuCode = this.特徴対象一覧未同定.getShikibetuCode();
-        if (shikibetsuCode == null) {
-            return;
-        }
-        source.shikibetsuCode = shikibetsuCode;
-        source.listList1_3 = shikibetsuCode.value();
-    }
-
     private void set生年月日(TokubetsuChoshuMidoteiIchiranSource source) {
-        RString 住民種別コード = this.特徴対象一覧未同定.getJuminShubetsuCode();
-        if (住民種別日本人.contains(住民種別コード)) {
-            source.listList2_1 = DateConverter.getDate1(this.特徴対象一覧未同定.getUmareYMD());
-        }
-        if (住民種別外国人.contains(住民種別コード)) {
-            source.listList2_1 = DateConverter.getDate31(this.特徴対象一覧未同定.getUmareYMD());
-        }
+        source.listList2_1 = DateConverter.getDate1(this.特徴対象一覧未同定.getUmareYMD());
     }
 
     private void set性別(TokubetsuChoshuMidoteiIchiranSource source) {
