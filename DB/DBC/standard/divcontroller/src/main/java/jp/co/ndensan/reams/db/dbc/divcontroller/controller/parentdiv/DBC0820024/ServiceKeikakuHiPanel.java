@@ -389,9 +389,18 @@ public class ServiceKeikakuHiPanel {
         ShoukanharaihishinseimeisaikensakuParameter 明細キー = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         List<ShokanServicePlan200904Result> entity200904ResultList = 償還払ViewStateDB.get償還払請求サービス計画200904データResultList(明細キー);
+        if (償還払ViewStateDB.get償還払請求サービス計画200604データResultList() == null) {
+            ArrayList<ShokanServicePlan200604Result> list200604Result = new ArrayList<>();
+            償還払ViewStateDB.set償還払請求サービス計画200604データResultList(list200604Result);
+        }
         ShokanServicePlan200604Result entity200604Result = 償還払ViewStateDB.get償還払請求サービス計画200604データResult(明細キー);
+
+        if (償還払ViewStateDB.get償還払請求サービス計画200004データResultList() == null) {
+            ArrayList<ShokanServicePlan200004Result> list200004Result = new ArrayList<>();
+            償還払ViewStateDB.set償還払請求サービス計画200004データResultList(list200004Result);
+        }
         ShokanServicePlan200004Result entity200004Result = 償還払ViewStateDB.get償還払請求サービス計画200004データResult(明細キー);
-        if (!entity200904ResultList.isEmpty()) {
+        if (entity200004Result != null && !entity200904ResultList.isEmpty()) {
             償還払ViewStateDB.get償還払請求サービス計画200904データResultList().removeAll(entity200904ResultList);
         }
         if (null != entity200604Result) {
