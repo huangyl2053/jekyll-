@@ -351,7 +351,7 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         DbWT1513RiyoJokyoTokeihyoEntity 利用状況統計表一時 = create給付実績データ共通(entity);
         利用状況統計表一時.setServiceKubun(RiyojokyoTokeihyo_ServiceKubun.在宅.getコード());
         ServiceCode サービスコード = 計画費.getServiceCode();
-        if (サービスコード != null && !サービスコード.isEmpty()) {
+        if (サービスコード != null && !サービスコード.isEmpty() && TWO < サービスコード.value().length()) {
             利用状況統計表一時.setServiceShuruiCode(サービスコード.value().substring(ZERO, TWO));
         }
         利用状況統計表一時.setNissuKaisu(new RString("1"));
