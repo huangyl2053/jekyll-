@@ -19,9 +19,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.ShakaiFukushiHojinRiyoshaF
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,7 +44,6 @@ public final class ShafukuKeigenGakuPanelHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 確定する = new RString("Element1");
-    private static final RString エラーメッセージ = new RString("選択されたサービス種類");
     private static final RString 連番_1 = new RString("1");
 
     private ShafukuKeigenGakuPanelHandler(ShafukuKeigenGakuPanelDiv div) {
@@ -537,13 +534,11 @@ public final class ShafukuKeigenGakuPanelHandler {
     public void initializeByConfirm(RString state, List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト,
             List<ShafukukeigenServiceResult> サービス種類リスト) {
         if (修正.equals(state)) {
-            checkサービス種類重複For修正();
             boolean 変更チェックFlag = 変更チェック(法人軽減額リスト);
             dgdShafukukeigenngaku修正(変更チェックFlag, サービス種類リスト);
         } else if (削除.equals(state)) {
             dgdShafukukeigenngaku削除();
         } else if (登録.equals(state)) {
-            checkサービス種類重複For登録();
             dgdShafukukeigenngaku登録(サービス種類リスト);
         }
         initializeByClean();
@@ -634,23 +629,35 @@ public final class ShafukuKeigenGakuPanelHandler {
         return RString.EMPTY;
     }
 
-    private void checkサービス種類重複For修正() {
+    /**
+     * checkサービス種類重複For修正
+     *
+     * @return boolean
+     */
+    public boolean checkサービス種類重複For修正() {
         RString rowNo = new RString(div.getPanelShafukukenngengaku().getRowId().getValue().intValue());
         RString サービス種類コード = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedKey();
         for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource()) {
             if (!row.getDefaultDataName7().equals(rowNo) && サービス種類コード.equals(row.getServiceShuruiCode())) {
-                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(エラーメッセージ.toString()));
+                return false;
             }
         }
+        return true;
     }
 
-    private void checkサービス種類重複For登録() {
+    /**
+     * checkサービス種類重複For登録
+     *
+     * @return boolean
+     */
+    public boolean checkサービス種類重複For登録() {
         RString サービス種類コード = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedKey();
         for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource()) {
             if (サービス種類コード.equals(row.getServiceShuruiCode())) {
-                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(エラーメッセージ.toString()));
+                return false;
             }
         }
+        return true;
     }
 
     private dgdShafukukeigenngaku_Row getSelectedRow() {
