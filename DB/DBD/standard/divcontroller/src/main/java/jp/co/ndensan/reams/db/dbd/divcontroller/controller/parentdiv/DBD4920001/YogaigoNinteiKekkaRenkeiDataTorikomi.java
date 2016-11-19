@@ -76,13 +76,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
                     equalsIgnoreCase(div.getDataGridFile().getDataSource().get(0).getFileName())) {
                 check = true;
             }
-            if (check) {
-                if (div.getRadDataSelect().getSelectedKey().equals(new RString("key0"))) {
-                    throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("日次進捗情報ファイル"));
-                } else {
-                    throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("認定結果情報ファイル"));
-                }
-            }
+            checkerror(check, div);
             RString csvPath = getHandler(div).onClick_appurodo(files);
             ViewStateHolder.put(ViewStateKeys.利用モード, csvPath);
             div.getDataGridFile().getDataSource().get(0).setTotal(div.getNum());
@@ -90,8 +84,6 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
-        } else {
-
         }
         return ResponseData.of(div).setState(DBD4920001StateName.一覧表示);
 
@@ -104,7 +96,6 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
      * @return ResponseData<YogaigoNinteiKekkaRenkeiDataTorikomiDiv>
      */
     public ResponseData<YogaigoNinteiKekkaRenkeiDataTorikomiDiv> after_onClick(YogaigoNinteiKekkaRenkeiDataTorikomiDiv div) {
-
         return ResponseData.of(div).setState(DBD4920001StateName.一覧表示);
     }
 
@@ -145,6 +136,16 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
 
     private YogaigoNinteiKekkaRenkeiDataTorikomiHandler getHandler(YogaigoNinteiKekkaRenkeiDataTorikomiDiv div) {
         return new YogaigoNinteiKekkaRenkeiDataTorikomiHandler(div);
+    }
+
+    private void checkerror(boolean check, YogaigoNinteiKekkaRenkeiDataTorikomiDiv div) {
+        if (check) {
+            if (div.getRadDataSelect().getSelectedKey().equals(new RString("key0"))) {
+                throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("日次進捗情報ファイル"));
+            } else {
+                throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("認定結果情報ファイル"));
+            }
+        }
     }
 
 }
