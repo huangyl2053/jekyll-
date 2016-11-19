@@ -167,7 +167,6 @@ public class KihonInfoMainPanel {
             }
         }
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
-        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDBBAK, db情報);
         return ResponseData.of(div).setState(DBC0820021StateName.新規修正モード);
     }
 
@@ -185,8 +184,7 @@ public class KihonInfoMainPanel {
             QuestionMessage message = (QuestionMessage) DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄
                     .getMessage();
             return ResponseData.of(div).addMessage(message).respond();
-        } else //再リクエストの場合の処理
-        {
+        } else {
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
                 ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
