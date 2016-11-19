@@ -1820,7 +1820,7 @@
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_chikuMei2"
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_chikuCode3"
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_chikuMei3"
-        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />."setaiCode" AS "dbWT1513RiyoJokyoTokeihyo_setaiCode"
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."setaiCode" AS "dbWT1513RiyoJokyoTokeihyo_setaiCode"
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_yoKaigoJotaiKubunCode"
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_ninteiYukoKaishiYMD"
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_ninteiYukoShuryoYMD"
@@ -1928,7 +1928,7 @@
         INNER JOIN
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
         AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_shikibetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />."shikibetsuCode"
+        ON DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_shikibetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
     </select>
 
     <select resultOrdered="true" id = "selectサービス種類名"
