@@ -653,7 +653,7 @@ public class IchijiSashitome2GoHandler {
     }
 
     private FlexibleDate FromRDateToFlexibleDate(RDate rDate) {
-        if (rDate.toString().isEmpty()) {
+        if (rDate==null ||  rDate.toString().isEmpty()) {
             return null;
         } else {
             return new FlexibleDate(rDate.toString());

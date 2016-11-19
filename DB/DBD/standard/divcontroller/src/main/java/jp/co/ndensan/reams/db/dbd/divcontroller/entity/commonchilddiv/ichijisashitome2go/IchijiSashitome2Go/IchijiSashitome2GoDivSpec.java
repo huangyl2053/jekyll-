@@ -148,7 +148,7 @@ public enum IchijiSashitome2GoDivSpec implements IPredicate<IchijiSashitome2GoDi
                  */
                 @Override
                 public boolean apply(IchijiSashitome2GoDiv div) {
-                    if (!div.getTxtTekiyoKaishi().getValue().toString().isEmpty() && !div.getTxtTekiyoShuryo().getValue().toString().isEmpty()) {
+                    if (!div.getTxtTekiyoKaishi().getValue().toString().isEmpty() && div.getTxtTekiyoShuryo().getValue()!=null && !div.getTxtTekiyoShuryo().getValue().toString().isEmpty()) {
                         return div.getTxtTekiyoKaishi().getValue().isBeforeOrEquals(div.getTxtTekiyoShuryo().getValue());
                     } else {
                         return !div.getTxtTekiyoKaishi().getValue().toString().isEmpty() || !div.getTxtTekiyoShuryo().getValue().toString().isEmpty();
