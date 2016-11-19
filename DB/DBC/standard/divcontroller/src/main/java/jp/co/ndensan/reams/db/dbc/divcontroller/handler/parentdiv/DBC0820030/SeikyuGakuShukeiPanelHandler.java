@@ -46,6 +46,7 @@ public class SeikyuGakuShukeiPanelHandler {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 登録_削除 = new RString("登録_削除");
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("2");
@@ -228,7 +229,8 @@ public class SeikyuGakuShukeiPanelHandler {
                 該当情報 = 情報;
             }
         }
-
+        List<dgdSeikyugakushukei_Row> list = div.getPanelSeikyugakuShukei()
+                .getDgdSeikyugakushukei().getDataSource();
         if (修正.equals(state)) {
             boolean flag = checkState(row, 該当情報);
             if (flag) {
@@ -241,7 +243,31 @@ public class SeikyuGakuShukeiPanelHandler {
         } else if (削除.equals(state)) {
             row.setRowState(RowState.Deleted);
             setDgdKyufuhiMeisai(row, state);
+        } else if (登録_削除.equals(state)) {
+            list.remove(row.getId());
+            resetRenban(row, list);
         }
+    }
+
+    private void resetRenban(dgdSeikyugakushukei_Row row, List<dgdSeikyugakushukei_Row> list) {
+        int id = row.getId();
+        if (id != 0) {
+            RString deletedRenban = row.getDefaultDataName15();
+            RString mid;
+            for (dgdSeikyugakushukei_Row resetRow : list) {
+                if (id - resetRow.getId() == 1) {
+                    mid = resetRow.getDefaultDataName15();
+                    resetRow.setDefaultDataName15(deletedRenban);
+                    id = id - 1;
+                    deletedRenban = mid;
+                }
+                if (id == 0) {
+                    break;
+                }
+            }
+        }
+        clear請求額集計登録();
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(false);
     }
 
     private boolean checkState(dgdSeikyugakushukei_Row row, ShokanShukeiResult 該当情報) {
@@ -877,7 +903,7 @@ public class SeikyuGakuShukeiPanelHandler {
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類名称() != null) {
             サービス種類略称 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類名称();
         }
-        RString 連番 = new RString(row.getDefaultDataName2().getValue().toString());
+        RString 連番 = row.getDefaultDataName15();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getPanelCcd().getCcdKaigoShikakuKihon().get被保険者番号());
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString().substring(NUM0, NUM6));
         RString 整理番号 = div.getSeiriNo();
