@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.service.core.chosajisshishajoho;
 
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5910NinteichosaItakusa
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5913ChosainJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.service.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMasterManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,10 +37,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 調査実施者情報の検索処理クラスです。
+ *
  * @reamsid_L DBE-3000-100 dongyabin
  */
 public class ChosaJisshishaJohoFinder {
-    
+
     private final MapperProvider mapperProvider;
     private final DbT5101NinteiShinseiJohoDac dbT5101Dac;
     private final DbT5910NinteichosaItakusakiJohoDac dbT5910Dac;
@@ -59,7 +58,7 @@ public class ChosaJisshishaJohoFinder {
         this.dbT5913Dac = InstanceProvider.create(DbT5913ChosainJohoDac.class);
         this.dbT7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
     }
-    
+
     /**
      * テスト用コンストラクタです。
      *
@@ -79,18 +78,20 @@ public class ChosaJisshishaJohoFinder {
         this.dbT5913Dac = dbT5913Dac;
         this.dbT7051Dac = dbT7051Dac;
     }
-    
+
     /**
      * {@link InstanceProvider#create}にて生成した{@link ChosaJisshishaJohoFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ChosaJisshishaJohoFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ChosaJisshishaJohoFinder}のインスタンス
      */
     public static ChosaJisshishaJohoFinder createInstance() {
         return InstanceProvider.create(ChosaJisshishaJohoFinder.class);
     }
-    
+
     /**
      * 所属機関のデータソースを取得します。
+     *
      * @param shinseishoKanriNo 申請書管理番号
      * @return SearchResult<NinteichosaItakusakiJoho>
      */
@@ -103,9 +104,10 @@ public class ChosaJisshishaJohoFinder {
         }
         return SearchResult.of(ninteichosaItakusakiJohoList, 0, false);
     }
-    
+
     /**
      * 記入者の初期値を取得します。
+     *
      * @param shinseishoKanriNo 申請書管理番号
      * @return SearchResult<NinteichosaItakusakiJoho>
      */
@@ -118,9 +120,10 @@ public class ChosaJisshishaJohoFinder {
         }
         return SearchResult.of(chosainJohoList, 0, false);
     }
-    
+
     /**
      * 所属機関のデータソースを取得します。
+     *
      * @param shinseishoKanriNo 申請書管理番号
      * @return SearchResult<NinteichosaItakusakiJoho>
      */
@@ -133,9 +136,10 @@ public class ChosaJisshishaJohoFinder {
         }
         return SearchResult.of(chosainJohoList, 0, false);
     }
-    
+
     /**
      * 調査区分を取得します。
+     *
      * @param shinseishoKanriNo 申請書管理番号
      * @return SearchResult<NinteiShinseiJoho>
      */
@@ -148,9 +152,10 @@ public class ChosaJisshishaJohoFinder {
         }
         return SearchResult.of(ninteiShinseiJohoList, 0, false);
     }
-    
+
     /**
      * 市町村コードを取得します。
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      * @return SearchResult<NinteiShinseiJoho>
      */
@@ -163,9 +168,10 @@ public class ChosaJisshishaJohoFinder {
         }
         return SearchResult.of(koseiShichosonMasterList, 0, false);
     }
-    
+
     /**
      * 認定申請日を取得します。
+     *
      * @param shinseishoKanriNo 申請書管理番号
      * @return SearchResult<NinteiShinseiJoho>
      */
@@ -178,7 +184,7 @@ public class ChosaJisshishaJohoFinder {
         }
         return SearchResult.of(ninteiShinseiJohoList, 0, false);
     }
-    
+
     /**
      * 所属機関コードtxtのロストフォーカス時の検索します。
      *
