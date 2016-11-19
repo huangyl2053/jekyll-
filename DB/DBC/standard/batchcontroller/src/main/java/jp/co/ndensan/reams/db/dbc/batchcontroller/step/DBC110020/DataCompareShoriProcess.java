@@ -166,8 +166,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString RST_SPACE = new RString("　");
     private static final RString RST_あり = new RString("あり");
     private static final RString RST_なし = new RString("なし");
-    private int 異動連絡票件数;
-    private int 訂正連絡票件数;
     private JukyushaIdoRenrakuhyoOutProcessParameter processParameter;
 
     /**
@@ -205,8 +203,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     @Override
     protected void initialize() {
-        異動連絡票件数 = 0;
-        訂正連絡票件数 = 0;
         市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
         市町村名称 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records().get(COUNT_0).get市町村名称();
         RDateTime sysDate = RDate.getNowDateTime();
@@ -309,9 +305,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         spoolManager_DBC200010.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200010);
         returnEntity = new OutputParameter<>();
         JukyushaIdoRenrakuhyoOutFlowEntity flowEntity = new JukyushaIdoRenrakuhyoOutFlowEntity();
-        flowEntity.set異動連絡票件数(異動連絡票件数);
-        flowEntity.set訂正連絡票件数(訂正連絡票件数);
-        flowEntity.setレコード件数合計(outEntity.get総出力件数());
+        flowEntity.set異動連絡票件数(outEntity.get総出力件数());
         flowEntity.set入力ファイルパス(outEntity.get入力ファイルパス());
         flowEntity.set出力ファイルパス(outEntity.get出力ファイルパス());
         returnEntity.setValue(flowEntity);
@@ -391,7 +385,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         履歴訂正Entity.set訂正内容9(記号);
         履歴訂正Entity.set訂正内容10(記号);
         csvWriter_DBC200074.writeLine(to明細項目(履歴訂正Entity));
-        異動連絡票件数++;
         JukyushaIdoRirekiTeiseiIchiranReport report
                 = new JukyushaIdoRirekiTeiseiIchiranReport(履歴訂正Entity, 市町村コード, 市町村名称);
         report.writeBy(reportSourceWriter_DBC200074);
@@ -473,7 +466,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             RString 変更項目 = get変更項目(違う項目);
             変更項目total = 変更項目total.concat(変更項目);
             csvWriter_DBC200074.writeLine(to明細項目(履歴訂正Entity));
-            異動連絡票件数++;
             JukyushaIdoRirekiTeiseiIchiranReport report_200074
                     = new JukyushaIdoRirekiTeiseiIchiranReport(履歴訂正Entity, 市町村コード, 市町村名称);
             report_200074.writeBy(reportSourceWriter_DBC200074);
@@ -485,7 +477,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             report_200010.writeBy(reportSourceWriter_DBC200010);
         }
         csvWriter_DBC200010.writeLine(get送付対象者リスト(異動一時2entity, 変更項目total));
-        訂正連絡票件数++;
     }
 
     private boolean count_整残りCheck(int i, int count_整, int count_残り, int cout) {
