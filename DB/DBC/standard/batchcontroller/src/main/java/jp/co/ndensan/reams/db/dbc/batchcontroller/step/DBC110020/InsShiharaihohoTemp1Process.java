@@ -276,7 +276,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             被保険者台帳List.add(被保険者台帳);
         }
         if (!被保険者台帳List.isEmpty()) {
-            sort被保険者台帳ListBy異動日(被保険者台帳List);
+            sort被保険者台帳ListBy異動日枝番(被保険者台帳List);
             最新被保険者台帳 = 被保険者台帳List.get(ORDER_0);
         } else {
             最新被保険者台帳 = null;
@@ -1807,6 +1807,12 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         Collections.sort(居宅計画List, new Comparator<KyotakuEntity>() {
             @Override
             public int compare(KyotakuEntity o1, KyotakuEntity o2) {
+                if (o1.getTaishoYM2().isBefore(o2.getTaishoYM2())) {
+                    return -1;
+                }
+                if (o2.getTaishoYM2().isBefore(o1.getTaishoYM2())) {
+                    return 1;
+                }
                 if (o2.get履歴番号() < o1.get履歴番号()) {
                     return -1;
                 }

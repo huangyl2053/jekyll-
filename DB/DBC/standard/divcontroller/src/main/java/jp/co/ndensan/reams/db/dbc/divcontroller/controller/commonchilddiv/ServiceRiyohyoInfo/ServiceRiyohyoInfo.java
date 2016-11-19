@@ -164,6 +164,12 @@ public class ServiceRiyohyoInfo {
             }
         }
         
+        ServiceRiyohyoInfoDivValidationHandler validationhandler = getValidatioHandler(div);
+        ValidationMessageControlPairs 利用年月Pairs = validationhandler.validate利用年月必須入力();
+        if (利用年月Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(利用年月Pairs).respond();
+        }
+        
         div.getTxtRiyoYM().setDisabled(true);
         div.getChkZanteiKubun().setDisabled(true);
         div.getDdlKoshinKbn().setDisabled(true);
@@ -210,6 +216,12 @@ public class ServiceRiyohyoInfo {
             if (区分支給限度額 == null && 限度管理期間F == null && 限度管理期間T == null) {
                 throw new ApplicationException(DbcErrorMessages.対象年月入力不正.getMessage().evaluate());
             }
+        }
+        
+        ServiceRiyohyoInfoDivValidationHandler validationhandler = getValidatioHandler(div);
+        ValidationMessageControlPairs 利用年月Pairs = validationhandler.validate利用年月必須入力();
+        if (利用年月Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(利用年月Pairs).respond();
         }
         
         div.setAddType(RSTRING_TWO);
@@ -405,13 +417,13 @@ public class ServiceRiyohyoInfo {
             return ResponseData.of(div).addValidationMessages(サービス単位必須以外Pairs).respond();
         }
         
-        RString 利用者負担定率定額区分 = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
-        if (RSTRING_TWO.equals(利用者負担定率定額区分)) {
-            ValidationMessageControlPairs 給付率必須Pairs = validationhandler.validate給付率必須();
-            if (給付率必須Pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(給付率必須Pairs).respond();
-            }
+//        RString 利用者負担定率定額区分 = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
+//        if (RSTRING_TWO.equals(利用者負担定率定額区分)) {
+        ValidationMessageControlPairs 給付率必須Pairs = validationhandler.validate給付率必須();
+        if (給付率必須Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(給付率必須Pairs).respond();
         }
+//        }
         ValidationMessageControlPairs 単位数単価Pairs = validationhandler.validate単位数単価();
         if (単位数単価Pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(単位数単価Pairs).respond();
@@ -470,15 +482,17 @@ public class ServiceRiyohyoInfo {
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())
                 || !new RString(DbcQuestionMessages.給付率修正確認
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-
+            
             handler.onClick_btnBeppyoGokeiKakutei();
+            
+            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(true);
+            div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
+            div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
+            div.getServiceRiyohyoBeppyoList().setDisabled(false);
+            div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
+            handler.入力を取り消す();
         }
-        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(true);
-        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
-        div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
-        div.getServiceRiyohyoBeppyoList().setDisabled(false);
-        div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
-        handler.入力を取り消す();
+        
         return ResponseData.of(div).respond();
     }
 

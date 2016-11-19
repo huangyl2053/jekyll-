@@ -42,7 +42,6 @@ public class KouzaInfoHandler {
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_5 = 5;
-    private static final RString 償還払支給申請 = new RString("償還払支給申請");
 
     /**
      * KouzaInfoHandlerのコンストラクタです。
