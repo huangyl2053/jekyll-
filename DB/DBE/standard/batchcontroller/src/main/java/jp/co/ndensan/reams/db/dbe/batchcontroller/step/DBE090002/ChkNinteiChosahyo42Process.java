@@ -445,7 +445,7 @@ public class ChkNinteiChosahyo42Process extends BatchProcessBase<YokaigoninteiEn
         ninteiEntity.set郵便番号(RString.isNullOrEmpty(entity.get郵便番号()) ? RString.EMPTY : new YubinNo(entity.get郵便番号()).getEditedYubinNo());
         ninteiEntity.set電話(entity.get電話());
         ninteiEntity.set現住所(entity.get住所());
-        ninteiEntity.set家族連絡先郵便番号(entity.get連絡先郵便番号());
+        ninteiEntity.set家族連絡先郵便番号(RString.isNullOrEmpty(entity.get連絡先郵便番号()) ? RString.EMPTY : new YubinNo(entity.get連絡先郵便番号()).getEditedYubinNo());
         ninteiEntity.set家族連絡先電話1(entity.get連絡先電話電話());
         ninteiEntity.set家族連絡先電話2(entity.get連絡先携帯電話());
         ninteiEntity.set家族連絡先住所(entity.get連絡先住所());
