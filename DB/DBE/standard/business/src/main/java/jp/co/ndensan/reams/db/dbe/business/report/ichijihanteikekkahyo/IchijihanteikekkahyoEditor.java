@@ -123,8 +123,10 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
                 rstringBuilder.append("、");
                 len = index1 + 1;
             }
-            RString result = rstringBuilder.toRString().substring(0, rstringBuilder.toRString().length() - 1);
-            source.keikokuNo = result;
+            if (!RString.isNullOrEmpty(rstringBuilder.toRString())) {
+                RString result = rstringBuilder.toRString().substring(0, rstringBuilder.toRString().length() - 1);
+                source.keikokuNo = result;
+            }
         }
         source.listChukanhyoka_1 = item.get中間評価項目得点第1群();
         source.listChukanhyoka_2 = item.get中間評価項目得点第2群();

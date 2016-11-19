@@ -206,10 +206,11 @@ public class YokaigoNinteiJohoTeikyoHandler {
      *
      */
     public void chkTokkiJiko() {
-        if (div.getHakkoChohyo().getChkTokkiJiko().getSelectedKeys().contains(キー_1)) {
+        if (div.getHakkoChohyo().getChkTokkiJiko().getSelectedItems().isEmpty()) {
+            div.getHakkoChohyo().getRadTokkiJikoMasking().setDisabled(true);
             div.getHakkoChohyo().getRadTokkiJikoMasking().setSelectedKey(キー_0);
         } else {
-            div.getHakkoChohyo().getRadTokkiJikoMasking().setSelectedKey(キー_1);
+            div.getHakkoChohyo().getRadTokkiJikoMasking().setDisabled(false);
         }
     }
 
@@ -218,10 +219,11 @@ public class YokaigoNinteiJohoTeikyoHandler {
      *
      */
     public void chkShujiiIkensho() {
-        if (div.getHakkoChohyo().getChkShujiiIkensho().getSelectedKeys().contains(キー_2)) {
+        if (div.getHakkoChohyo().getChkShujiiIkensho().getSelectedItems().isEmpty()) {
+            div.getHakkoChohyo().getRadShujii().setDisabled(true);
             div.getHakkoChohyo().getRadShujii().setSelectedKey(キー_0);
         } else {
-            div.getHakkoChohyo().getRadShujii().setSelectedKey(キー_1);
+            div.getHakkoChohyo().getRadShujii().setDisabled(false);
         }
     }
 
@@ -230,10 +232,11 @@ public class YokaigoNinteiJohoTeikyoHandler {
      *
      */
     public void chkSonotaShiryo() {
-        if (div.getHakkoChohyo().getChkSonotaShiryo().getSelectedKeys().contains(キー_3)) {
+        if (div.getHakkoChohyo().getChkSonotaShiryo().getSelectedItems().isEmpty()) {
+            div.getHakkoChohyo().getRadSohotaShiryoMasking().setDisabled(true);
             div.getHakkoChohyo().getRadSohotaShiryoMasking().setSelectedKey(キー_0);
         } else {
-            div.getHakkoChohyo().getRadSohotaShiryoMasking().setSelectedKey(キー_1);
+            div.getHakkoChohyo().getRadSohotaShiryoMasking().setDisabled(false);
         }
     }
 
