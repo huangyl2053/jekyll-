@@ -93,7 +93,8 @@ public class YokaigoNinteiJohoTeikyoHandler {
                 row.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(business.get申請区分_法令().getKey()).get名称());
                 row.getShinseiTorisageDay().setValue(getNull(business.get取下年月日()));
                 row.getNinteiDay().setValue(getNull(business.get二次判定年月日()));
-                if (YokaigoJotaiKubun09.なし.getコード().equals(business.get二次判定区分コード().value())) {
+                if (business.get二次判定区分コード() == null || business.get二次判定区分コード().isEmpty()
+                        || YokaigoJotaiKubun09.なし.getコード().equals(business.get二次判定区分コード().value())) {
                     row.setYoKaigodo(RString.EMPTY);
                 } else {
                     row.setYoKaigodo(YokaigoJotaiKubun09.toValue(business.get二次判定区分コード().getKey()).get名称());
