@@ -53,4 +53,5 @@ public class KouhoshaTenyuEntity {
     private RString 転入前方書;
     private RString 登録事由コード;
     private FlexibleDate min登録異動年月日;
+    private boolean 最新フラグ;
 }

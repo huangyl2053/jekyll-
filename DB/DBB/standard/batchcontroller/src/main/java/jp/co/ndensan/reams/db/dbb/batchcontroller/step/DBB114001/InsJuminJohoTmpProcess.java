@@ -58,10 +58,9 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
 
     @Override
     protected void process(KouhoshaTenyuEntity t) {
-
         if (識別コード.equals(t.get識別コード())) {
             識別コード = t.get識別コード();
-        } else {
+        } else if (t.is最新フラグ()) {
             所得照会候補者writer.insert(creatEntity(t));
             識別コード = t.get識別コード();
         }
