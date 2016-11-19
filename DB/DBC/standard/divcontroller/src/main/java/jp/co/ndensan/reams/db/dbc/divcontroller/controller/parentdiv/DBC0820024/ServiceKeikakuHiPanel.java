@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820024
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
@@ -427,7 +428,13 @@ public class ServiceKeikakuHiPanel {
         }
         if (修正モード.equals(画面モード)) {
             Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = 償還払ViewStateDB.get証明書変更済フラグMap();
+            if (証明書変更済フラグMap == null) {
+                証明書変更済フラグMap = new HashMap<>();
+            }
             ShomeishoHenkoFlag 証明書変更済フラグ = 証明書変更済フラグMap.get(明細キー);
+            if (証明書変更済フラグ == null) {
+                証明書変更済フラグ = new ShomeishoHenkoFlag();
+            }
             証明書変更済フラグ.setサービス計画費_証明書変更済フラグ(is変更 ? ShomeishoHenkoKubunType.変更あり : ShomeishoHenkoKubunType.変更なし);
             証明書変更済フラグMap.put(明細キー, 証明書変更済フラグ);
             償還払ViewStateDB.set証明書変更済フラグMap(証明書変更済フラグMap);

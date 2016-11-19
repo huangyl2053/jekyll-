@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -56,6 +57,7 @@ public class TokuteiShinryohiPanel {
     private static final RString 登録 = new RString("登録");
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成１５年４月 = new FlexibleYearMonth("200304");
+    private static final RString 登録_削除 = new RString("登録_削除");
 
     /**
      * 画面初期化のメソッドます。
@@ -164,7 +166,12 @@ public class TokuteiShinryohiPanel {
         getHandler(div).readOnly特定診療費登録(true);
         getHandler(div).clear特定診療費登録();
         getHandler(div).set特定診療費登録();
-        ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        dgdTokuteiShinryohi_Row row = div.getDgdTokuteiShinryohi().getClickedItem();
+        if (RowState.Added.equals(row.getRowState())) {
+            ViewStateHolder.put(ViewStateKeys.状態, 登録_削除);
+        } else {
+            ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        }
         return createResponse(div);
     }
 
@@ -196,7 +203,12 @@ public class TokuteiShinryohiPanel {
         getHandler(div).set特定診療費_特別診療費登録(
                 ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                 ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
-        ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        ddgToteishinryoTokubetushinryo_Row row = div.getDdgToteishinryoTokubetushinryo().getClickedItem();
+        if (RowState.Added.equals(row.getRowState())) {
+            ViewStateHolder.put(ViewStateKeys.状態, 登録_削除);
+        } else {
+            ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        }
         return createResponse(div);
     }
 

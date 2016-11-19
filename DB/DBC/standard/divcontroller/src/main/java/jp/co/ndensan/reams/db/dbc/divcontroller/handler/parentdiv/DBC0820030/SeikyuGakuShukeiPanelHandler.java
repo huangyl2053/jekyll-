@@ -234,7 +234,7 @@ public class SeikyuGakuShukeiPanelHandler {
         if (修正.equals(state)) {
             boolean flag = checkState(row, 該当情報);
             if (flag) {
-                row.setRowState(RowState.Modified);
+                row = 追加を判断する(row);
                 setDgdKyufuhiMeisai(row, state);
             }
         } else if (登録.equals(state)) {
@@ -247,6 +247,13 @@ public class SeikyuGakuShukeiPanelHandler {
             list.remove(row.getId());
             resetRenban(row, list);
         }
+    }
+
+    private dgdSeikyugakushukei_Row 追加を判断する(dgdSeikyugakushukei_Row row) {
+        if (!RowState.Added.equals(row.getRowState())) {
+            row.setRowState(RowState.Modified);
+        }
+        return row;
     }
 
     private void resetRenban(dgdSeikyugakushukei_Row row, List<dgdSeikyugakushukei_Row> list) {
@@ -547,35 +554,28 @@ public class SeikyuGakuShukeiPanelHandler {
     /**
      * 償還払申請_保存処理
      *
-     * @param shkonlist ShokanShinseit
+     * @param 申請List ShokanShinsei
+     * @param 請求基本List ArrayList<ShokanKihon>
      *
      * @return ShokanShinsei
      */
-    public ShokanShinsei 償還払申請_保存処理(ShokanShinsei shkonlist) {
-        ShokanShinseiBuilder 該当情報builder = shkonlist.createBuilderForEdit();
-        該当情報builder.set保険給付額(請求額合計.intValue());
-        該当情報builder.set利用者負担額(利用者負担額合計.intValue());
-        該当情報builder.set支払金額合計(請求額合計.add(請求額合計));
-        該当情報builder.set保険対象費用額(請求額合計.add(請求額合計));
+    public ShokanShinsei 償還払申請_保存処理(ArrayList<ShokanKihon> 請求基本List, ShokanShinsei 申請List) {
+        Decimal 保険給付額 = Decimal.ZERO;
+        Decimal 利用者負担額 = Decimal.ZERO;
+        for (ShokanKihon shokanKihon : 請求基本List) {
+            if (申請List.get被保険者番号().equals(shokanKihon.get被保険者番号())
+                    && 申請List.getサービス提供年月().equals(shokanKihon.getサービス提供年月())
+                    && 申請List.get整理番号().equals(shokanKihon.get整理番号())) {
+                保険給付額 = 保険給付額.add(shokanKihon.get保険請求額());
+                利用者負担額 = 利用者負担額.add(shokanKihon.get利用者負担額());
+            }
+        }
+        ShokanShinseiBuilder 該当情報builder = 申請List.createBuilderForEdit();
+        該当情報builder.set保険給付額(保険給付額.intValue());
+        該当情報builder.set利用者負担額(利用者負担額.intValue());
+        該当情報builder.set支払金額合計(保険給付額.add(利用者負担額));
+        該当情報builder.set保険対象費用額(保険給付額.add(利用者負担額));
         return 該当情報builder.build();
-    }
-
-    private ShokanShukei clearshokanShukei(ShokanShukei entity) {
-        entity = entity.createBuilderForEdit()
-                .set単位数合計(0)
-                .set単位数単価(null)
-                .set請求額(null)
-                .set利用者負担額(0)
-                .set限度額管理対象単位数(0)
-                .set限度額管理対象外単位数(0)
-                .set短期入所計画日数(0)
-                .set短期入所実日数(0)
-                .set出来高医療費単位数合計(0)
-                .set出来高医療費請求額(null)
-                .set出来高医療費利用者負担額(null)
-                .set計画単位数(0)
-                .setサービス実日数(0).build();
-        return entity;
     }
 
     /**
