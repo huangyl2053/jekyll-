@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
@@ -81,14 +84,7 @@ public class ShokanbarayiKeteiInfoPanel {
                 null, null, null, null));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        if (db情報 == null) {
-            ArrayList<ShokanShukeiResult> shokan = new ArrayList<>();
-            ArrayList<ShokanShokujiHiyo> shokuji = new ArrayList<>();
-            ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> service = new ArrayList<>();
-            db情報.set償還払請求集計データList(shokan);
-            db情報.set償還払請求食事費用データList(shokuji);
-            db情報.set償還払請求特定入所者介護サービス費用データList(service);
-        }
+        データ情報の初期化(db情報);
         div.getPanelOne().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
             div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
@@ -396,6 +392,36 @@ public class ShokanbarayiKeteiInfoPanel {
             return new RString("修正モード：「更新は正常に終了しました。」");
         } else {
             return new RString("削除モード：「削除は正常に終了しました。」");
+        }
+    }
+
+    private void データ情報の初期化(DbJohoViewState db情報) {
+        if (db情報 != null) {
+            if (db情報.get償還払請求集計データList() == null) {
+                ArrayList<ShokanShukeiResult> shokan = new ArrayList<>();
+                db情報.set償還払請求集計データList(shokan);
+            }
+            if (db情報.get償還払請求食事費用データList() == null) {
+                ArrayList<ShokanShokujiHiyo> shokuji = new ArrayList<>();
+                db情報.set償還払請求食事費用データList(shokuji);
+            }
+            if (db情報.get償還払請求特定入所者介護サービス費用データList() == null) {
+                ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> service = new ArrayList<>();
+                db情報.set償還払請求特定入所者介護サービス費用データList(service);
+            }
+            if (db情報.get償還払請求サービス計画200904データResultList() == null) {
+                ArrayList<ShokanServicePlan200904Result> service2009 = new ArrayList<>();
+                db情報.set償還払請求サービス計画200904データResultList(service2009);
+            }
+            if (db情報.get償還払請求サービス計画200604データResultList() == null) {
+                ArrayList<ShokanServicePlan200604Result> service200604 = new ArrayList<>();
+                db情報.set償還払請求サービス計画200604データResultList(service200604);
+            }
+            if (db情報.get償還払請求サービス計画200004データResultList() == null) {
+                ArrayList<ShokanServicePlan200004Result> service200004 = new ArrayList<>();
+                db情報.set償還払請求サービス計画200004データResultList(service200004);
+            }
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
         }
     }
 }
