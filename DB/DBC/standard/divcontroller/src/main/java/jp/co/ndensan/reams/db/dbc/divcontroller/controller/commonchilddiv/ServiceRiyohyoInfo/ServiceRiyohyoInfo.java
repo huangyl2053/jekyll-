@@ -46,7 +46,7 @@ public class ServiceRiyohyoInfo {
     private static final RString 総合事業 = new RString("2");
     private static final RString プラス値入力不可 = new RString("単位：プラス値入力不可");
     private static final RString マイナス値入力不可 = new RString("単位：マイナス値入力不可");
-//    private static final RString 給付率値 = new RString(" & viewState.給付率 & ");
+    private static final RString 照会 = new RString("照会");
     private static final RString 前月の明細情報エラー = new RString("前月の明細は存在しません。");
     private static final RString 前月の明細情報の確認 = new RString("明細行が前月の状態に置き換わります。よろしいですか？");
     private static final RString 回数の入力値が不正 = new RString("入力値が不正_回数：マイナス値入力不可");
@@ -417,13 +417,13 @@ public class ServiceRiyohyoInfo {
             return ResponseData.of(div).addValidationMessages(サービス単位必須以外Pairs).respond();
         }
         
-//        RString 利用者負担定率定額区分 = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
-//        if (RSTRING_TWO.equals(利用者負担定率定額区分)) {
-        ValidationMessageControlPairs 給付率必須Pairs = validationhandler.validate給付率必須();
-        if (給付率必須Pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(給付率必須Pairs).respond();
+        RString 利用者負担定率定額区分 = div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue();
+        if (RSTRING_TWO.equals(利用者負担定率定額区分)) {
+            ValidationMessageControlPairs 給付率必須Pairs = validationhandler.validate給付率必須();
+            if (給付率必須Pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(給付率必須Pairs).respond();
+            }
         }
-//        }
         ValidationMessageControlPairs 単位数単価Pairs = validationhandler.validate単位数単価();
         if (単位数単価Pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(単位数単価Pairs).respond();
@@ -508,6 +508,9 @@ public class ServiceRiyohyoInfo {
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
         if (row.getRowState().equals(RowState.Added)) {
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource().remove(row);
+            if (div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource().size() == 1) {
+                div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource().clear();
+            }
             return ResponseData.of(div).respond();
         }
         handler.setパネルにデータ反映();
@@ -532,6 +535,10 @@ public class ServiceRiyohyoInfo {
             RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
             FlexibleYearMonth 利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
             getHandler(div).set区分支給限度額(被保険者番号, 居宅総合事業区分, 利用年月);
+            RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+            if (!照会.equals(表示モード)) {
+                div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
+            }
         } else {
             div.getChkZanteiKubun().setSelectedItemsByKey(new ArrayList<RString>());
             div.getTxtKubunShikyuGendogaku().clearValue();

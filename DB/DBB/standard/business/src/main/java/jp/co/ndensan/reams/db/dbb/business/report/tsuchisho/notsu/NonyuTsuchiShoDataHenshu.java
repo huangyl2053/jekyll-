@@ -254,6 +254,7 @@ public class NonyuTsuchiShoDataHenshu {
      * @param 代納人氏名 代納人氏名
      * @param 出力期リスト 出力期リスト
      * @param 編集範囲区分 編集範囲区分
+     * @param is期毎タイプ boolean
      * @return 本算定納入通知書情報
      */
     public HonSanteiNonyuTsuchiShoJoho create本算定納入通知書情報(HonSanteiTsuchiShoKyotsu 本算定通知書情報,
@@ -348,6 +349,7 @@ public class NonyuTsuchiShoDataHenshu {
      * @param 請求情報リスト 請求情報リスト
      * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
+     * @param is期毎タイプ boolean
      * @return 納入通知書期情報リスト
      */
     public List<NonyuTsuchiShoKiJoho> create納入通知書期情報(

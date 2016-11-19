@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面のハンドラクラスです
@@ -1192,38 +1193,49 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
      *
      * @param list ShokanKinkyuShisetsuRyoyo
      * @param updateList ShokanKinkyuShisetsuRyoyo
-     * @param map Map
      */
     public void setRealList(
-            List<ShokanKinkyuShisetsuRyoyo> list, List<ShokanKinkyuShisetsuRyoyo> updateList,
-            Map<RString, RString> map) {
+            List<ShokanKinkyuShisetsuRyoyo> list, List<ShokanKinkyuShisetsuRyoyo> updateList) {
         List<dgdKinkyujiShiseturyoyo_Row> rowList = new ArrayList<>();
-        for (Map.Entry<RString, RString> mapValue : map.entrySet()) {
+        List<dgdKinkyujiShiseturyoyo_Row> updateRowList = new ArrayList<>();
+        for (ShokanKinkyuShisetsuRyoyo ryoyo : list) {
             dgdKinkyujiShiseturyoyo_Row row = new dgdKinkyujiShiseturyoyo_Row();
             boolean isModifiedorDeleted = false;
             for (ShokanKinkyuShisetsuRyoyo updateRyoyo : updateList) {
-                if (mapValue.getKey().equals(updateRyoyo.get連番())) {
+                if (updateRyoyo.get連番().equals(ryoyo.get連番())) {
                     setRow(row, updateRyoyo);
-                    RowState rowState = RowState.valueOf(mapValue.getValue().toString());
-                    if (rowState == RowState.Modified || rowState == RowState.Deleted) {
+                    if (updateRyoyo.toEntity().getState() == EntityDataState.Modified) {
                         isModifiedorDeleted = true;
+                        row.setRowState(RowState.Modified);
                     }
-                    row.setRowState(rowState);
+                    if (updateRyoyo.toEntity().getState() == EntityDataState.Deleted) {
+                        isModifiedorDeleted = true;
+                        row.setRowState(RowState.Deleted);
+                    }
                     rowList.add(row);
+                    updateRowList.add(row);
                     break;
                 }
             }
             if (!isModifiedorDeleted) {
-                for (ShokanKinkyuShisetsuRyoyo result : list) {
-                    if (mapValue.getKey().equals(result.get連番())) {
-                        setRow(row, result);
-                        row.setRowState(RowState.valueOf(mapValue.getValue().toString()));
-                        rowList.add(row);
-                        break;
-                    }
+                setRow(row, ryoyo);
+                row.setRowState(RowState.Unchanged);
+                rowList.add(row);
+                updateRowList.add(row);
+            }
+        }
+
+        for (ShokanKinkyuShisetsuRyoyo updateRyoyo : updateList) {
+            for (dgdKinkyujiShiseturyoyo_Row row : updateRowList) {
+                dgdKinkyujiShiseturyoyo_Row addedRow = new dgdKinkyujiShiseturyoyo_Row();
+                if (!updateRyoyo.get連番().equals(row.getDefaultDataName21())) {
+                    setRow(addedRow, updateRyoyo);
+                    addedRow.setRowState(RowState.Added);
+                    rowList.add(addedRow);
                 }
             }
         }
+
         Collections.sort(rowList, COMPARABLE);
         div.getDgdKinkyujiShiseturyoyo().setDataSource(rowList);
     }

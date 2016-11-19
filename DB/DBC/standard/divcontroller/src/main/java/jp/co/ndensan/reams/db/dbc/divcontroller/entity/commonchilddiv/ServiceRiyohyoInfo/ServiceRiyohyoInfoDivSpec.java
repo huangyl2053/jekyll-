@@ -124,8 +124,12 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
     給付率入力値が不正チェック {
         @Override
         public boolean apply(ServiceRiyohyoInfoDiv div) {
+            boolean flag = true;
             Decimal 給付率 = div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue();
-            return Decimal.ONE.compareTo(給付率) < 0;
+            if (給付率 == null || 給付率.compareTo(Decimal.ONE) < 0) {
+                flag = false;
+            }
+            return  flag;
         }
     },
     /**

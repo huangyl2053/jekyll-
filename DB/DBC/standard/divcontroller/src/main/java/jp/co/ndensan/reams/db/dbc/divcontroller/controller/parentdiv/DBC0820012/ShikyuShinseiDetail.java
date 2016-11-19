@@ -73,7 +73,7 @@ public class ShikyuShinseiDetail {
     private static final RString 削除は正常に終了しました = new RString("削除は正常に終了しました。");
 
     private static final RString 必要な項目 = new RString("必要な項目");
-    private static final RString 入力なし = new RString("0");
+    private static final RString 入力あり = new RString("1");
 
     /**
      * 画面初期化処理です。
@@ -454,7 +454,7 @@ public class ShikyuShinseiDetail {
     private void 申請書入力済チェック() {
         RString 申請書入力済フラグ = ViewStateHolder.get(ViewStateKeys.申請書入力済フラグ_サービス提供証明書, RString.class);
         if (申請書入力済フラグ == null || 申請書入力済フラグ.isEmpty()) {
-            申請書入力済フラグ = 入力なし;
+            申請書入力済フラグ = 入力あり;
         }
         RString 申請書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance().shinseishoInputCheck(申請書入力済フラグ);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);

@@ -832,6 +832,7 @@ public class ReportDateHensyu {
             entity.set金額_19段階_歳出還付(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).get歳出還付の金額合計()));
             i = i + 1;
         }
+        boolean is不明が存在 = false;
         for (KoumokuGoukey koumokuGoukey : koumokuGoukeyList) {
             if (不明.equals(koumokuGoukey.getHokenryoDankai())) {
                 entity.set人数_20段階_Title(koumokuGoukey.getHokenryoDankai());
@@ -868,6 +869,7 @@ public class ReportDateHensyu {
                 entity.set金額_20段階_過年度(getNinsuuOrKinkaku(koumokuGoukey.get過年度の金額合計()));
                 entity.set金額_20段階_合計(getNinsuuOrKinkaku(koumokuGoukey.get該当段階の金額合計()));
                 entity.set金額_20段階_歳出還付(getNinsuuOrKinkaku(koumokuGoukey.get歳出還付の金額合計()));
+                is不明が存在 = true;
             }
             if (合計.equals(koumokuGoukey.getHokenryoDankai())) {
                 entity.set人数_合計_Title(koumokuGoukey.getHokenryoDankai());
@@ -905,6 +907,11 @@ public class ReportDateHensyu {
                 entity.set金額_合計_合計(getNinsuuOrKinkaku(koumokuGoukey.get該当段階の金額合計()));
                 entity.set金額_合計_歳出還付(getNinsuuOrKinkaku(koumokuGoukey.get歳出還付の金額合計()));
             }
+            
+        }
+        if(!is不明が存在){
+            entity.set人数_20段階_Title(不明);
+            entity.set金額_20段階_Title(不明);
         }
         return entity;
     }
@@ -1125,6 +1132,7 @@ public class ReportDateHensyu {
             entity.set金額_19段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_19段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
         }
+        boolean is不明が存在 = false;
         for (GemmenJyoho gemmenJyoho : gemmenJyohoList) {
             if (不明.equals(gemmenJyoho.getHokenryoDankai())) {
                 entity.set人数_20段階_Title(gemmenJyoho.getHokenryoDankai());
@@ -1133,6 +1141,7 @@ public class ReportDateHensyu {
                 entity.set金額_20段階_Title(gemmenJyoho.getHokenryoDankai());
                 entity.set金額_20段階_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemmenGaku()));
                 entity.set金額_20段階_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemenGakuGoukei()));
+                is不明が存在 = true;
             }
             if (合計.equals(gemmenJyoho.getHokenryoDankai())) {
                 entity.set人数_合計_Title(gemmenJyoho.getHokenryoDankai());
@@ -1142,6 +1151,10 @@ public class ReportDateHensyu {
                 entity.set金額_合計_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemmenGaku()));
                 entity.set金額_合計_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemenGakuGoukei()));
             }
+        }
+        if(!is不明が存在){
+            entity.set人数_20段階_Title(不明);
+            entity.set金額_20段階_Title(不明);
         }
         return entity;
     }
