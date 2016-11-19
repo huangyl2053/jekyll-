@@ -297,17 +297,24 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     @Override
     protected void afterExecute() {
         被保険者番号マッチング();
-        JukyushaIdoRenrakuhyoEntity outEntity = JukyushaIdoRenrakuhyoCsvManager.
-                createInstance().csvの出力(entityList, processParameter.get処理年月());
+        JukyushaIdoRenrakuhyoEntity outEntity = null;
+        if (!entityList.isEmpty()) {
+            outEntity = JukyushaIdoRenrakuhyoCsvManager.
+                    createInstance().csvの出力(entityList, processParameter.get処理年月());
+        }
         csvWriter_DBC200074.close();
         spoolManager_DBC200074.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200074);
         csvWriter_DBC200010.close();
         spoolManager_DBC200010.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200010);
         returnEntity = new OutputParameter<>();
         JukyushaIdoRenrakuhyoOutFlowEntity flowEntity = new JukyushaIdoRenrakuhyoOutFlowEntity();
-        flowEntity.set異動連絡票件数(outEntity.get総出力件数());
-        flowEntity.set入力ファイルパス(outEntity.get入力ファイルパス());
-        flowEntity.set出力ファイルパス(outEntity.get出力ファイルパス());
+        if (outEntity != null) {
+            flowEntity.set異動連絡票件数(outEntity.get総出力件数());
+            flowEntity.set入力ファイルパス(outEntity.get入力ファイルパス());
+            flowEntity.set出力ファイルパス(outEntity.get出力ファイルパス());
+        } else {
+            flowEntity.set異動連絡票件数(COUNT_0);
+        }
         returnEntity.setValue(flowEntity);
     }
 
