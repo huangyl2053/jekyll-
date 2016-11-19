@@ -60,7 +60,6 @@ public class TokuteiShinryohiPanelHandler {
     private static final RString 回まで = new RString("回まで");
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成１５年４月 = new FlexibleYearMonth("200304");
-    private static final int NUMBER_０ = 0;
     private static final int NUMBER_３２ = 32;
     private static final int NUMBER_６４ = 64;
     private static final int NUMBER_９６ = 96;
@@ -80,8 +79,6 @@ public class TokuteiShinryohiPanelHandler {
     private static final int NUMBER_５４４ = 544;
     private static final int NUMBER_５７６ = 576;
     private static final int NUMBER_６０８ = 608;
-    private static final RString STR_0001 = new RString("0001");
-    private static final RString FORMAT = new RString("%02d");
 
     /**
      * コンストラクタです。
@@ -569,18 +566,14 @@ public class TokuteiShinryohiPanelHandler {
             List<ddgToteishinryoTokubetushinryo_Row> rowList = div.getDdgToteishinryoTokubetushinryo().getDataSource();
             if (!rowList.isEmpty()) {
                 for (ddgToteishinryoTokubetushinryo_Row row : rowList) {
-                    if (max連番 < Integer.valueOf(row.getNumber().toString())) {
-                        max連番 = Integer.valueOf(row.getNumber().toString());
-                    }
+                    max連番 = set平成15年月Max連番(max連番, row);
                 }
             }
         } else {
             List<dgdTokuteiShinryohi_Row> rowList = div.getDgdTokuteiShinryohi().getDataSource();
             if (!rowList.isEmpty()) {
                 for (dgdTokuteiShinryohi_Row row : rowList) {
-                    if (max連番 < Integer.valueOf(row.getDefaultDataName7().toString())) {
-                        max連番 = Integer.valueOf(row.getDefaultDataName7().toString());
-                    }
+                    max連番 = set平成15年月後Max連番(max連番, row);
                 }
             }
         }
@@ -958,7 +951,7 @@ public class TokuteiShinryohiPanelHandler {
             }
             if (!isViewDB存在) {
                 ShokanTokuteiShinryohi joho = new ShokanTokuteiShinryohi(meisaiPar.get被保険者番号(), meisaiPar.getサービス年月(),
-                        meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getNumber()); // TODO整理番号採番
+                        meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getNumber());
                 builder = joho.createBuilderForEdit();
                 特定診療費builder編集(builder, row);
                 特定診療費ViewDBList.add(builder.build());
@@ -1001,7 +994,7 @@ public class TokuteiShinryohiPanelHandler {
             }
             if (!isViewDB存在) {
                 ShokanTokuteiShinryoTokubetsuRyoyo joho = new ShokanTokuteiShinryoTokubetsuRyoyo(meisaiPar.get被保険者番号(), meisaiPar.getサービス年月(),
-                        meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getDefaultDataName7()); // TODO整理番号採番
+                        meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getDefaultDataName7());
                 builder = joho.createBuilderForEdit();
                 特定診療費builder編集(builder, row);
                 特別診療費ViewDBList.add(builder.build());
@@ -1385,5 +1378,19 @@ public class TokuteiShinryohiPanelHandler {
         public int compare(dgdTokuteiShinryohi_Row row1, dgdTokuteiShinryohi_Row row2) {
             return row2.getDefaultDataName7().compareTo(row1.getDefaultDataName7());
         }
+    }
+
+    private int set平成15年月Max連番(int max連番, ddgToteishinryoTokubetushinryo_Row row) {
+        if (max連番 < Integer.valueOf(row.getNumber().toString())) {
+            max連番 = Integer.valueOf(row.getNumber().toString());
+        }
+        return max連番;
+    }
+
+    private int set平成15年月後Max連番(int max連番, dgdTokuteiShinryohi_Row row) {
+        if (max連番 < Integer.valueOf(row.getDefaultDataName7().toString())) {
+            max連番 = Integer.valueOf(row.getDefaultDataName7().toString());
+        }
+        return max連番;
     }
 }
