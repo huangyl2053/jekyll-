@@ -328,6 +328,15 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         if (異動一時2entity.get被保険者氏名カナ().length() > COUNT_25) {
             異動一時2entity.set被保険者氏名カナ(異動一時2entity.get被保険者氏名カナ().substring(COUNT_0, COUNT_25));
         }
+        if (!新規Flag) {
+            異動一時2entity.set異動年月日(異動一時2entity.get異動年月日().plusDay(COUNT_1));
+        }
+        if (!新規Flag && RST_1.equals(異動一時2entity.get異動区分コード())) {
+            異動一時2entity.set異動区分コード(RST_2);
+        }
+        if (!新規Flag && RST_01.equals(異動一時2entity.get受給者異動事由())) {
+            異動一時2entity.set受給者異動事由(RST_99);
+        }
         JukyushaIdoRenrakuhyoCsvEntity csventity = getJukyushaIdoRenrakuhyoCsvEntity(異動一時2entity, 新規Flag);
         entityList.add(csventity);
         this.dbT3001TableWriter.insert(異動一時2entity.copyTo3001Entity(RST_2));
@@ -1586,22 +1595,10 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private JukyushaIdoRenrakuhyoCsvEntity getJukyushaIdoRenrakuhyoCsvEntity(IdoTblTmpEntity 異動一時2entity, boolean 新規Flag) {
         JukyushaIdoRenrakuhyoCsvEntity csventity = new JukyushaIdoRenrakuhyoCsvEntity();
         csventity.set被保険者番号(異動一時2entity.get被保険者番号());
-        if (新規Flag) {
-            csventity.set異動年月日(異動一時2entity.get異動年月日());
-        } else {
-            csventity.set異動年月日(異動一時2entity.get異動年月日().plusDay(COUNT_1));
-        }
+        csventity.set異動年月日(異動一時2entity.get異動年月日());
         csventity.set履歴番号(異動一時2entity.get履歴番号());
-        if (!新規Flag && RST_1.equals(異動一時2entity.get異動区分コード())) {
-            csventity.set異動区分(RST_2);
-        } else {
-            csventity.set異動区分(異動一時2entity.get異動区分コード());
-        }
-        if (!新規Flag && RST_01.equals(異動一時2entity.get受給者異動事由())) {
-            csventity.set異動事由(RST_99);
-        } else {
-            csventity.set異動事由(異動一時2entity.get受給者異動事由());
-        }
+        csventity.set異動区分(異動一時2entity.get異動区分コード());
+        csventity.set異動事由(異動一時2entity.get受給者異動事由());
         csventity.set証記載保険者番号(異動一時2entity.get証記載保険者番号());
         csventity.set被保険者氏名カナ(異動一時2entity.get被保険者氏名カナ());
         csventity.set生年月日(異動一時2entity.get生年月日());
