@@ -379,6 +379,10 @@ public class ServiceRiyohyoInfo {
         if (回数.compareTo(Decimal.ZERO) < 0) {
             throw new ApplicationException(回数の入力値が不正.toString());
         }
+        ValidationMessageControlPairs 事業者サービス種類チェック = validationhandler.validate事業者サービス種類チェック();
+        if (事業者サービス種類チェック.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(事業者サービス種類チェック).respond();
+        }
 
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         handler.onClick_btnBeppyoMeisaiKakutei(状態);
@@ -465,6 +469,11 @@ public class ServiceRiyohyoInfo {
         if (給付率Pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(給付率Pairs).respond();
         }
+        ValidationMessageControlPairs 事業者サービス種類チェック = validationhandler.validate事業者サービス種類チェック();
+        if (事業者サービス種類チェック.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(事業者サービス種類チェック).respond();
+        }
+        
         Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, HokenKyufuRitsu.class) == null
                 ? Decimal.ZERO : ViewStateHolder.get(ViewStateKeys.給付率, HokenKyufuRitsu.class).getColumnValue();
         Decimal 給付率div = div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue() == null
