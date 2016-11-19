@@ -99,7 +99,8 @@ public class NonyuTsuchiShoJohoFactory {
      * @param 本算定納入通知書制御情報 本算定納入通知書制御情報
      * @param 出力期リスト 出力期リスト
      * @param 代納人氏名 代納人氏名
-     * @return 本算定納入通知書情報
+     * @param is期毎タイプ is期毎タイプ
+     * @return 本算定納入通知書情報 本算定納入通知書情報
      * @throws NullPointerException パラメータのいずれかがNullの場合。
      */
     public HonSanteiNonyuTsuchiShoJoho create本算定納入通知書情報(
