@@ -143,8 +143,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 }
             }
 
-            特徴納付済額_未到来期含む = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_納付済期);
-            特徴納付済額_未到来期含まない = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_最大期);
+            特徴納付済額_未到来期含まない = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_納付済期);
+            特徴納付済額_未到来期含む = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_最大期);
             納付済額_未到来期含む = 普徴納付済額_未到来期含む.add(特徴納付済額_未到来期含む);
             納付済額_未到来期含まない = 普徴納付済額_未到来期含まない.add(特徴納付済額_未到来期含まない);
             未到来期の納付済額 = 納付済額_未到来期含む.subtract(納付済額_未到来期含まない);
@@ -169,7 +169,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             普徴今後納付すべき額_収入元に = 納付済額.subtract(普徴納付済額_未到来期含む);
             特徴今後納付すべき額 = get特徴納付済額(賦課情報_更正後, 1, SIZE_6).subtract(特徴既に納付すべき額);
             既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
-            今後納付すべき額 = 普徴今後納付すべき額_調定元に.add(特徴今後納付すべき額);
+//            今後納付すべき額 = 普徴今後納付すべき額_調定元に.add(特徴今後納付すべき額);
+            今後納付すべき額 = 納付済額.add(get特徴納付済額(賦課情報_更正後, 1, SIZE_6)).subtract(納付済額_未到来期含む);
         } else {
             Decimal 普徴納付済額 = get普徴納付済額(本算定通知書情報.get収入情報(), 1, SIZE_14);
             Decimal 特徴納付済額 = get特徴納付済額(本算定通知書情報.get収入情報(), 1, SIZE_6);
@@ -234,6 +235,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         shoKyotsu.set普徴今後納付すべき額_収入元に(普徴今後納付すべき額_収入元に);
         shoKyotsu.set特徴今後納付すべき額(特徴今後納付すべき額);
         edit編集後本算定通知書共通情報(本算定通知書情報, shoKyotsu);
+        shoKyotsu.set特徴収入情報リスト(this.get特徴収入情報リスト(本算定通知書情報));
+        shoKyotsu.set普徴収入情報リスト(this.get普徴収入情報リスト(本算定通知書情報));
         return shoKyotsu;
     }
 
@@ -529,6 +532,58 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         return flag;
     }
 
+    private List<SpecialIncomeInformation> get特徴収入情報リスト(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
+        List<SpecialIncomeInformation> 特徴収入情報リスト = new ArrayList<>();
+        ShunyuJoho 収入情報 = 本算定通知書情報.get収入情報();
+        if (null == 収入情報) {
+            return 特徴収入情報リスト;
+        }
+        TokuchoKiUtil fuchoKiUtil = new TokuchoKiUtil();
+        KitsukiList 特徴期月リスト = fuchoKiUtil.get期月リスト();
+
+        for (int i = 1; i <= 特徴期月リスト.getLast().get期AsInt(); i++) {
+            SpecialIncomeInformation info = new SpecialIncomeInformation();
+            info.set期月(特徴期月リスト.get期の最初月(i));
+            RStringBuilder sb = new RStringBuilder("get特徴収入額");
+            sb.append(new RString(i).padZeroToLeft(2));
+            Class clazz = 収入情報.getClass();
+            try {
+                Method getMethod = clazz.getDeclaredMethod(sb.toString());
+                info.set収入額(nullToZero((Decimal) getMethod.invoke(収入情報)));
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
+                Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            特徴収入情報リスト.add(info);
+        }
+        return 特徴収入情報リスト;
+    }
+
+    private List<SamantabhadraIncomeInformation> get普徴収入情報リスト(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
+        List<SamantabhadraIncomeInformation> 普徴収入情報リスト = new ArrayList<>();
+        ShunyuJoho 収入情報 = 本算定通知書情報.get収入情報();
+        if (null == 収入情報) {
+            return 普徴収入情報リスト;
+        }
+        FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
+        KitsukiList 普徴期月リスト = fuchoKiUtil.get期月リスト();
+        for (int i = 1; i <= 普徴期月リスト.getLast().get期AsInt(); i++) {
+            SamantabhadraIncomeInformation info = new SamantabhadraIncomeInformation();
+            info.set調定年度(収入情報.get調定年度());
+            info.set期月(普徴期月リスト.get期の最初月(i));
+            RStringBuilder sb = new RStringBuilder("get普徴収入額");
+            sb.append(new RString(i).padZeroToLeft(2));
+            Class clazz = 収入情報.getClass();
+            try {
+                Method getMethod = clazz.getDeclaredMethod(sb.toString());
+                info.set収入額(nullToZero((Decimal) getMethod.invoke(収入情報)));
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
+                Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            普徴収入情報リスト.add(info);
+        }
+        return 普徴収入情報リスト;
+    }
+
     private EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection get更正後(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
         FukaJoho 更正後_賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = new EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection();
@@ -716,7 +771,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private List<UniversalPhase> get普徴期別金額リスト(FukaJoho 賦課情報) {
         List<UniversalPhase> 普徴期別金額リスト = new ArrayList<>();
-        for (int i = 期_1; i <= 期_6; i++) {
+        for (int i = 期_1; i <= 期_14; i++) {
             if (期_1 == i) {
                 UniversalPhase universalPhase1 = new UniversalPhase();
                 universalPhase1.set期(期_1);
@@ -794,7 +849,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private RString get月数_ケ月(int 月数) {
-        RStringBuilder 月数SB = new RStringBuilder(RStringUtil.convert半角to全角(new RString(月数).padZeroToLeft(2)));
+        RStringBuilder 月数SB = new RStringBuilder(RStringUtil.convert半角to全角(new RString(月数).padLeft(RString.HALF_SPACE, 2)));
         月数SB.append(文字列_ケ月);
         return 月数SB.toRString();
     }

@@ -63,7 +63,7 @@ public class IdoTblTmpEntity extends DbTableEntityBase<IdoTblTmpEntity> implemen
     private int 短期入所サービス支給限度基準額;
     private FlexibleDate 短期入所サービス上限管理適用期間開始年月日;
     private FlexibleDate 短期入所サービス上限管理適用期間終了年月日;
-    private boolean 公費負担上限額減額有フラグ;
+    private RString 公費負担上限額減額有フラグ;
     private RString 償還払化開始年月日;
     private RString 償還払化終了年月日;
     private RString 給付率引下げ開始年月日;
@@ -115,6 +115,7 @@ public class IdoTblTmpEntity extends DbTableEntityBase<IdoTblTmpEntity> implemen
     private FlexibleDate 訂正年月日;
     private RString 市町村コード;
     private boolean 論理削除フラグ;
+    private RString 被保険者氏名;
     private RString エラーフラグ;
 
     /**
@@ -215,9 +216,10 @@ public class IdoTblTmpEntity extends DbTableEntityBase<IdoTblTmpEntity> implemen
     /**
      * エンティティはコピーです。
      *
+     * @param 公費負担上限額減額有
      * @return IdoTblTmpEntity
      */
-    public DbT3001JukyushaIdoRenrakuhyoEntity copyTo3001Entity() {
+    public DbT3001JukyushaIdoRenrakuhyoEntity copyTo3001Entity(RString 公費負担上限額減額有) {
         DbT3001JukyushaIdoRenrakuhyoEntity entity = new DbT3001JukyushaIdoRenrakuhyoEntity();
         entity.setHiHokenshaNo(被保険者番号);
         entity.setIdoYMD(異動年月日);
@@ -251,7 +253,7 @@ public class IdoTblTmpEntity extends DbTableEntityBase<IdoTblTmpEntity> implemen
         entity.setTankiNyushoServiceShikyuGendoKijungaku(短期入所サービス支給限度基準額);
         entity.setTankinyushoServiceJogenKanriTekiyoKaishiYMD(短期入所サービス上限管理適用期間開始年月日);
         entity.setTankinyushoServiceJogenKanriTekiyoShuryoYMD(短期入所サービス上限管理適用期間終了年月日);
-        entity.setKohiFutanJogenGengakuAriFlag(公費負担上限額減額有フラグ);
+        entity.setKohiFutanJogenGengakuAriFlag(公費負担上限額減額有.equals(公費負担上限額減額有フラグ) ? true : false);
         entity.setShokanbaraikaKaishiYMD(償還払化開始年月日);
         entity.setShokanbaraikaShuryoYMD(償還払化終了年月日);
         entity.setKyufuritsuHikisageKaishiYMD(給付率引下げ開始年月日);

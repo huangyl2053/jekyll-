@@ -109,7 +109,7 @@
             WHERE NOT EXISTS(SELECT 1
                               FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS dbT7304
                              WHERE teikyoKihonJoho."hihokenshaNo" = dbT7304."hihokenshaNo"
-                                AND teikyoKihonJoho."dataSetRecordKey" = dbT7304."dataSetRecordKey"
+                                AND teikyoKihonJoho."dataSetKey" = dbT7304."dataSetNo"
                                 AND teikyoKihonJoho."tokuteiKojinJohoMeiCode" = dbT7304."tokuteiKojinJohoMeiCode"
                                 AND teikyoKihonJoho."hanNo" = dbT7304."hanNo"
                                 AND teikyoKihonJoho."teikyoNaiyo01" = dbT7304."soshinNaiyo01"

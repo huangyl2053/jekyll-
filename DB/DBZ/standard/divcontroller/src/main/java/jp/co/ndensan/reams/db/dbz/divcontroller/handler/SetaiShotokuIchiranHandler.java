@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -21,7 +22,10 @@ import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiShotokuIchiranComparators;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
+import jp.co.ndensan.reams.db.dbz.definition.core.atenapsm.JuminJotaiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysNenreiTotatsuKijunJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidou.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.GekihenkanwaSochi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.TorokuGyomu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInfomations;
@@ -33,6 +37,9 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShoto
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.dgShotokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.view.ShotokuManager;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.Tsuzukigara;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.JukiIdoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -453,6 +460,8 @@ public class SetaiShotokuIchiranHandler {
                 ? new RString(世帯員所得.get住民情報_住定日().wareki().separator(Separator.PERIOD).toDateString().toString())
                 : RString.EMPTY);
         row.setTxtJukiIdoJiyu(世帯員所得.get住民情報_異動事由() != null ? 世帯員所得.get住民情報_異動事由() : RString.EMPTY);
+        row.setHdnHonninKubun(世帯員所得.get本人区分() != null ? 世帯員所得.get本人区分() : RString.EMPTY);
+        row.setHdnJuminhyoHyojijun(new RString(世帯員所得.get住民票表示順()));
     }
 
     /**
@@ -559,25 +568,153 @@ public class SetaiShotokuIchiranHandler {
      * @return
      */
     private SetaiinShotoku createSetaiinShotoku(dgSetaiShotoku_Row row) {
-        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(row.getTxtKetsugo01().split(BR.toString()).get(0));
-        HihokenshaNo hihokenshaNo = new HihokenshaNo(row.getTxtKetsugo01().split(BR.toString()).get(1));
+
         RString カナ氏名 = RString.EMPTY;
         RString 氏名 = RString.EMPTY;
-        RString shimei = row.getTxtShimei();
-        List<RString> shimeiList = shimei.split(BR.toString());
-        if (shimeiList.size() == 2) {
-            カナ氏名 = shimeiList.get(INDEX_0);
-            氏名 = shimeiList.get(INDEX_1);
+        FlexibleDate 生年月日 = FlexibleDate.EMPTY;
+        RString 性別コード = RString.EMPTY;
+        RString 性別 = RString.EMPTY;
+        RString 続柄コード = RString.EMPTY;
+        RString 続柄 = RString.EMPTY;
+        RString 種別コード = RString.EMPTY;
+        Decimal 合計所得金額 = Decimal.ZERO;
+        Decimal 年金収入額 = Decimal.ZERO;
+        Decimal 課税所得額 = Decimal.ZERO;
+        Decimal 年金所得額 = Decimal.ZERO;
+        RString 登録業務 = RString.EMPTY;
+        FlexibleDate 更正日 = FlexibleDate.EMPTY;
+        FlexibleDate 住民情報_異動日 = FlexibleDate.EMPTY;
+        FlexibleDate 住民情報_住定日 = FlexibleDate.EMPTY;
+        RString 住民情報_異動事由コード = RString.EMPTY;
+        RString 本人区分 = RString.EMPTY;
+        RString 世帯コード = RString.EMPTY;
+        RString 種別;
+        RString 課税区分_住民税減免前;
+        RString 課税区分_住民税減免後;
+        RString 激変緩和措置;
+        Boolean 同月サービス有無;
+        RString 住民情報_異動事由;
+        int 住民票表示順;
 
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(row.getTxtKetsugo01().split(BR.toString()).get(INDEX_0));
+        HihokenshaNo hihokenshaNo = new HihokenshaNo(row.getTxtKetsugo01().split(BR.toString()).get(INDEX_1));
+
+        List<RString> shimeiList = new ArrayList<>();
+        if (!RString.isNullOrEmpty(row.getTxtShimei())) {
+            shimeiList = row.getTxtShimei().split(BR.toString());
         }
+        if (shimeiList != null && !shimeiList.isEmpty()) {
+            if (shimeiList.size() == 2) {
+                カナ氏名 = shimeiList.get(INDEX_0);
+                氏名 = shimeiList.get(INDEX_1);
+            }
+        }
+
+        List<RString> ketsugo02List = new ArrayList<>();
+        if (!RString.isNullOrEmpty(row.getTxtKetsugo02())) {
+            ketsugo02List = row.getTxtKetsugo02().split(BR.toString());
+        }
+        if (ketsugo02List != null && !ketsugo02List.isEmpty()) {
+            List<RString> birthYMDList = ketsugo02List.get(INDEX_0).split(RString.FULL_SPACE.toString());
+            if (birthYMDList != null && !birthYMDList.isEmpty()) {
+                if (!RString.isNullOrEmpty(birthYMDList.get(INDEX_0))) {
+                    生年月日 = toFlexibleDataFormat(birthYMDList.get(INDEX_0));
+                }
+                性別 = birthYMDList.get(INDEX_1);
+            }
+            続柄 = ketsugo02List.get(INDEX_1);
+        }
+        if (!RString.isNullOrEmpty(性別)) {
+            Seibetsu gender = Seibetsu.valueOf(性別.toString());
+            性別コード = gender.getコード();
+        }
+        if (!RString.isNullOrEmpty(続柄)) {
+            Tsuzukigara tsuzukigaraCode = Tsuzukigara.valueOf(続柄.toString());
+            続柄コード = tsuzukigaraCode.code();
+        }
+
+        種別 = row.getTxtShubetsu();
+        if (!RString.isNullOrEmpty(種別)) {
+            JuminJotaiCode 住民状態 = JuminJotaiCode.valueOf(種別.toString());
+            種別コード = 住民状態.getコード();
+        }
+
+        課税区分_住民税減免前 = row.getTxtJuminzeiGenmenMae();
+        課税区分_住民税減免後 = row.getTxtJuminzeiGenmenAto();
+        激変緩和措置 = row.getTxtGekihenTaishosha();
+
+        List<RString> ketsugo03List = new ArrayList<>();
+        if (!RString.isNullOrEmpty(row.getTxtKetsugo03())) {
+            ketsugo03List = row.getTxtKetsugo03().split(BR.toString());
+        }
+        if (ketsugo03List != null && !ketsugo03List.isEmpty()) {
+            if (ketsugo03List.size() == 2) {
+                if (!RString.isNullOrEmpty(ketsugo03List.get(INDEX_0))) {
+                    合計所得金額 = toDecimalFormat(ketsugo03List.get(INDEX_0));
+                }
+                if (!RString.isNullOrEmpty(ketsugo03List.get(INDEX_1))) {
+                    課税所得額 = toDecimalFormat(ketsugo03List.get(INDEX_1));
+                }
+            }
+        }
+
+        List<RString> ketsugo04List = new ArrayList<>();
+        if (!RString.isNullOrEmpty(row.getTxtKetsugo04())) {
+            ketsugo04List = row.getTxtKetsugo04().split(BR.toString());
+        }
+        if (ketsugo04List != null && !ketsugo04List.isEmpty()) {
+            if (ketsugo04List.size() == 2) {
+                if (!RString.isNullOrEmpty(ketsugo04List.get(INDEX_0))) {
+                    年金収入額 = toDecimalFormat(ketsugo04List.get(INDEX_0));
+                }
+                if (!RString.isNullOrEmpty(ketsugo04List.get(INDEX_1))) {
+                    年金所得額 = toDecimalFormat(ketsugo04List.get(INDEX_1));
+                }
+            }
+        }
+
+        List<RString> 登録業務List = new ArrayList<>();
+        if (!RString.isNullOrEmpty(row.getTxtTorokuGyomu())) {
+            登録業務List = row.getTxtTorokuGyomu().split(BR.toString());
+        }
+        if (登録業務List != null && !登録業務List.isEmpty()) {
+            if (登録業務List.size() == 2) {
+                登録業務 = 登録業務List.get(INDEX_0);
+                if (!RString.isNullOrEmpty(登録業務List.get(INDEX_1))) {
+                    更正日 = toFlexibleDataFormat(登録業務List.get(INDEX_1));
+                }
+            }
+        }
+
+        同月サービス有無 = !RString.isNullOrEmpty(row.getTxtDougetsuService());
+
+        if (!RString.isNullOrEmpty(row.getTxtJukiIdoYMD())) {
+            住民情報_異動日 = toFlexibleDataFormat(row.getTxtJukiIdoYMD());
+        }
+        if (!RString.isNullOrEmpty(row.getTxtJuteiYMD())) {
+            住民情報_住定日 = toFlexibleDataFormat(row.getTxtJuteiYMD());
+        }
+        住民情報_異動事由 = row.getTxtJukiIdoJiyu();
+        if (!RString.isNullOrEmpty(住民情報_異動事由)) {
+            JukiIdoJiyu 住基異動事由 = JukiIdoJiyu.valueOf(住民情報_異動事由.toString());
+            住民情報_異動事由コード = 住基異動事由.get異動事由コード();
+        }
+        if (!RString.isNullOrEmpty(row.getHdnHonninKubun())) {
+            本人区分 = row.getHdnHonninKubun();
+        }
+        住民票表示順 = Integer.parseInt(row.getHdnJuminhyoHyojijun().toString());
+        if (!RString.isNullOrEmpty(div.getTxtSetaiIchiranSetaiCode().getDomain().getColumnValue())) {
+            世帯コード = div.getTxtSetaiIchiranSetaiCode().getDomain().getColumnValue();
+        }
+
         return new SetaiinShotoku(
                 shikibetsuCode, hihokenshaNo, 氏名, カナ氏名,
-                FlexibleDate.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, Decimal.ZERO, Decimal.ZERO,
-                Decimal.ZERO, Decimal.ZERO, RString.EMPTY, FlexibleDate.EMPTY,
-                false, FlexibleDate.EMPTY, FlexibleDate.EMPTY, RString.EMPTY,
-                RString.EMPTY, 0, RString.EMPTY, RString.EMPTY);
+                生年月日, 性別コード, 性別, 続柄コード,
+                続柄, 種別コード, 種別, 課税区分_住民税減免前,
+                課税区分_住民税減免後, 激変緩和措置, 合計所得金額, 年金収入額,
+                課税所得額, 年金所得額, 登録業務, 更正日,
+                同月サービス有無, 住民情報_異動日, 住民情報_住定日, 住民情報_異動事由コード,
+                住民情報_異動事由, 住民票表示順, 本人区分, 世帯コード);
     }
 
     private void setSetaiIchiranRowUnselectable() {
@@ -613,6 +750,14 @@ public class SetaiShotokuIchiranHandler {
 
     private RString editComma(RString target) {
         return new RString(NumberFormat.getNumberInstance(Locale.JAPAN).format(new BigDecimal(target.toString())));
+    }
+
+    private Decimal toDecimalFormat(RString target) {
+        return new Decimal(target.replace(",", "").toString());
+    }
+
+    private FlexibleDate toFlexibleDataFormat(RString target) {
+        return new FlexibleDate(target.replace(".", ""));
     }
 
     /**

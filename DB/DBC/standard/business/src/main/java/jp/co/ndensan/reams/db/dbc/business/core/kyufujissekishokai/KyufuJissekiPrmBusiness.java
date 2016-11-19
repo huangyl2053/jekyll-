@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShokujiHiyo;
@@ -40,7 +39,7 @@ public class KyufuJissekiPrmBusiness implements Serializable {
     private RString hokenshaNO;
     private FlexibleYearMonth serviceSTYM;
     private FlexibleYearMonth serviceEDYM;
-    private List<KyufujissekiKihon> csData_A;
+    private List<KyufuJissekiKihonShukeiRelate> csData_A;
     private List<KyufujissekiMeisaiBusiness> csData_B;
     private List<KyufujissekiKinkyuShisetsuRyoyo> csData_C;
     private List<KyufujissekiTokuteiSinryohi> csData_D;

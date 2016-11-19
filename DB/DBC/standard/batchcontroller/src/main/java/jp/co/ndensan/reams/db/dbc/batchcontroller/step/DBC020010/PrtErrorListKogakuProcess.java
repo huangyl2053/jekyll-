@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -72,7 +71,6 @@ public class PrtErrorListKogakuProcess extends BatchProcessBase<HanteiEraaResult
     private static final Code EUC_CODE = new Code("0003");
     private static final RString EUC_CODE_NAME = new RString("被保険者番号");
     private static final RString 作成 = new RString("作成");
-    private static final RString 審査分 = new RString("審査分");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -119,7 +117,7 @@ public class PrtErrorListKogakuProcess extends BatchProcessBase<HanteiEraaResult
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200077.getReportId().value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200018.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
@@ -161,7 +159,7 @@ public class PrtErrorListKogakuProcess extends BatchProcessBase<HanteiEraaResult
         高額介護サービス費判定エラーEntity.set識別コード(entity.get識別コード());
         高額介護サービス費判定エラーEntity.setサービス提供年月(entity.getサービス提供年月());
         高額介護サービス費判定エラーEntity.set世帯コード(getColumnValue(entity.get世帯コード()));
-        if (RString.isNullOrEmpty(entity.getエラーコード())) {
+        if (!RString.isNullOrEmpty(entity.getエラーコード())) {
             高額介護サービス費判定エラーEntity.setエラーコード(KogakuServicehiKyufugakuCalc_ErrorKubun.toValue(entity.getエラーコード()).get名称());
         }
         高額介護サービス費判定エラーEntity.set世帯員識別コード(getColumnValue(entity.get世帯員識別コード()));
@@ -215,7 +213,9 @@ public class PrtErrorListKogakuProcess extends BatchProcessBase<HanteiEraaResult
             csvEntity.setサービス提供年月(サービス提供年月.toDateString());
         }
         csvEntity.set被保険者名(getColumnValue(entity.get被保険者名()));
-        csvEntity.setエラーコード(entity.getエラーコード());
+        if (!RString.isNullOrEmpty(entity.getエラーコード())) {
+            csvEntity.setエラーコード(KogakuServicehiKyufugakuCalc_ErrorKubun.toValue(entity.getエラーコード()).get名称());
+        }
         csvEntity.set世帯コード(getColumnValue(entity.get世帯コード()));
         csvEntity.set世帯員識別コード(getColumnValue(entity.get世帯員識別コード()));
 
@@ -238,19 +238,9 @@ public class PrtErrorListKogakuProcess extends BatchProcessBase<HanteiEraaResult
     }
 
     private RString format審査年月(FlexibleYearMonth 審査年月) {
-
-        if (審査年月 != null) {
-            RString format審査年月From = 審査年月.wareki().firstYear(FirstYear.ICHI_NEN)
-                    .separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
-            RString format審査年月To = RDate.getNowDate().getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN)
-                    .separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
-            return format審査年月From.concat(RString.FULL_SPACE)
-                    .concat(format審査年月To).concat(RString.FULL_SPACE)
-                    .concat(審査分);
-        }
-        return RString.EMPTY;
+        return 審査年月.wareki().firstYear(FirstYear.ICHI_NEN)
+                .separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
     }
 
     private void get出力順(RString 出力順ID) {
@@ -266,15 +256,15 @@ public class PrtErrorListKogakuProcess extends BatchProcessBase<HanteiEraaResult
                 if (setSortItem.is改頁項目()) {
                     改頁項目リスト.add(setSortItem.get項目名());
                 }
-                if (i == INT_0) {
+                if (i == INT_1) {
                     並び順の１件目 = setSortItem.get項目名();
-                } else if (i == INT_1) {
-                    並び順の２件目 = setSortItem.get項目名();
                 } else if (i == INT_2) {
-                    並び順の３件目 = setSortItem.get項目名();
+                    並び順の２件目 = setSortItem.get項目名();
                 } else if (i == INT_3) {
-                    並び順の４件目 = setSortItem.get項目名();
+                    並び順の３件目 = setSortItem.get項目名();
                 } else if (i == INT_4) {
+                    並び順の４件目 = setSortItem.get項目名();
+                } else if (i == INT_5) {
                     並び順の５件目 = setSortItem.get項目名();
                 }
             }

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.karisanteifukadaicho.Karisante
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteifukadaicho.KarisanteiFukaDaichoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteifukadaicho.KarisanteiFukaDaichoReport;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteifukadaicho.KarisanteiFukaDaichoSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -664,7 +665,8 @@ public class KarisanteiFukaDaichoPrintService {
         ite.setListSetaiin_4(entity.get世帯員情報リスト().get(i).get世帯員生年月日());
         ite.setListSetaiin_5(entity.get世帯員情報リスト().get(i).get世帯員続柄());
         ite.setListSetaiin_6(entity.get世帯員情報リスト().get(i).get世帯員合計取得金額());
-        ite.setListSetaiin_7(entity.get世帯員情報リスト().get(i).get世帯員課税区分());
+        ite.setListSetaiin_7(RString.isNullOrEmpty(entity.get世帯員情報リスト().get(i).get世帯員課税区分())
+                ? RString.EMPTY : KazeiKubun.toValue(entity.get世帯員情報リスト().get(i).get世帯員課税区分()).get名称());
     }
 
     /**
@@ -681,7 +683,8 @@ public class KarisanteiFukaDaichoPrintService {
         ite.setListSetaiin_11(entity.get世帯員情報リスト().get(i).get世帯員生年月日());
         ite.setListSetaiin_12(entity.get世帯員情報リスト().get(i).get世帯員続柄());
         ite.setListSetaiin_13(entity.get世帯員情報リスト().get(i).get世帯員合計取得金額());
-        ite.setListSetaiin_14(entity.get世帯員情報リスト().get(i).get世帯員課税区分());
+        ite.setListSetaiin_14(RString.isNullOrEmpty(entity.get世帯員情報リスト().get(i).get世帯員課税区分())
+                ? RString.EMPTY : KazeiKubun.toValue(entity.get世帯員情報リスト().get(i).get世帯員課税区分()).get名称());
     }
 
     /**
@@ -752,7 +755,8 @@ public class KarisanteiFukaDaichoPrintService {
             item.setListSetaiin_4(entity.get世帯員情報リスト().get(index).get世帯員生年月日());
             item.setListSetaiin_5(entity.get世帯員情報リスト().get(index).get世帯員続柄());
             item.setListSetaiin_6(entity.get世帯員情報リスト().get(index).get世帯員合計取得金額());
-            item.setListSetaiin_7(entity.get世帯員情報リスト().get(index).get世帯員課税区分());
+            item.setListSetaiin_7(RString.isNullOrEmpty(entity.get世帯員情報リスト().get(index).get世帯員課税区分())
+                    ? RString.EMPTY : KazeiKubun.toValue(entity.get世帯員情報リスト().get(index).get世帯員課税区分()).get名称());
         }
     }
 
@@ -773,7 +777,8 @@ public class KarisanteiFukaDaichoPrintService {
             item.setListSetaiin_11(entity.get世帯員情報リスト().get(index).get世帯員生年月日());
             item.setListSetaiin_12(entity.get世帯員情報リスト().get(index).get世帯員続柄());
             item.setListSetaiin_13(entity.get世帯員情報リスト().get(index).get世帯員合計取得金額());
-            item.setListSetaiin_14(entity.get世帯員情報リスト().get(index).get世帯員課税区分());
+            item.setListSetaiin_14(RString.isNullOrEmpty(entity.get世帯員情報リスト().get(index).get世帯員課税区分())
+                    ? RString.EMPTY : KazeiKubun.toValue(entity.get世帯員情報リスト().get(index).get世帯員課税区分()).get名称());
         }
     }
 

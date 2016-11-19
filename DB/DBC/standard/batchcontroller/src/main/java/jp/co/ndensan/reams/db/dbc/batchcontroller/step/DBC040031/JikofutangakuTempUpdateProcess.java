@@ -55,7 +55,7 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB300019"));
     private static final RString 処理名 = new RString("高額合算自己負担額情報一括補正（サブ処理）");
-    private static final RString ファイル出力 = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private static final RString ファイル出力 = new RString("DBC900004_ShoriKekkaKakuninList.csv");
     private static final RString 当年4月 = new RString("004");
     private static final RString 当年5月 = new RString("005");
     private static final RString 当年6月 = new RString("006");

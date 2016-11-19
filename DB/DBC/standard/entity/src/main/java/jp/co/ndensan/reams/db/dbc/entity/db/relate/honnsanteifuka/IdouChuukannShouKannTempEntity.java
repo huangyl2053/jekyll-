@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
@@ -25,9 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-@OnNextSchema("rgdb")
 public class IdouChuukannShouKannTempEntity extends DbTableEntityBase<IdouChuukannShouKannTempEntity> implements IDbAccessable {
 
+    @PrimaryKey
     private FlexibleDate 異動年月日;
     private RString 異動区分コード;
     private RString 受給者異動事由;

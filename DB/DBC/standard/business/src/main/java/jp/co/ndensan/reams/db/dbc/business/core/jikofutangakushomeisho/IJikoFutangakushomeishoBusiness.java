@@ -20,7 +20,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IJikoFutangakushomeishoBusiness implements Serializable {
 
-    private List<KogakuGassanShinseisho> kogakuGassanShinseishoList;
+    private List<KogakuGassanShinSeisho> kogakuGassanShinseishoList;
 
     /**
      * コンストラクタです。

@@ -260,11 +260,11 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
             source.shikibetsuCode = 編集後本算定通知書共通情報.get編集後個人().get識別コード().value();
             source.kanaMeisho = 編集後本算定通知書共通情報.get編集後個人().get氏名５０音カナ();
         }
-        source.nenkinCode = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金コード();
+        source.nenkinCode = 本算定通知書情報.get徴収方法情報_更正後().get本徴収_年金コード();
         if (本算定通知書情報.get納組情報() != null && 本算定通知書情報.get納組情報().getNokumi() != null) {
             source.nokumiCode = 本算定通知書情報.get納組情報().getNokumi().getNokumiCode();
         }
-        source.seihoFlag = 生活保護区分;
+        source.seihoFlag = 本算定通知書情報.get賦課の情報_更正後().get賦課情報().get生活保護扶助種類();
         source.seihoFlag1 = 生活保護区分;
         source.tokuchoKaishi8 = 特徴8月開始者区分;
         source.tokuchoKaishi10 = 特徴10月開始者区分;

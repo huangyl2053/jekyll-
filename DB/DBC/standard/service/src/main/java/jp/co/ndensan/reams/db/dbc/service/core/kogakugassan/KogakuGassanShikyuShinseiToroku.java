@@ -238,6 +238,7 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setKokuhoShikyuShinseishoSeiriNo(画面項目.get国保支給申請書整理番号());
                 entity.setShikyuShinseiKeitai(画面項目.get支給申請形態());
                 entity.setJikoFutanKofuUmu(画面項目.get自己負担額証明書交付申請の有無());
+                entity.setShinseiYMD(画面項目.get申請年月日());
                 entity.setShinseiDaihyoshaShimei(画面項目.get申請代表者氏名());
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
@@ -253,6 +254,7 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setKokuhoShikyuShinseishoSeiriNo(画面項目.get国保支給申請書整理番号());
                 entity.setShikyuShinseiKeitai(画面項目.get支給申請形態());
                 entity.setJikoFutanKofuUmu(画面項目.get自己負担額証明書交付申請の有無());
+                entity.setShinseiYMD(画面項目.get申請年月日());
                 entity.setShinseiDaihyoshaShimei(画面項目.get申請代表者氏名());
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
@@ -290,6 +292,7 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setKokuhoShikyuShinseishoSeiriNo(画面項目.get国保支給申請書整理番号());
                 entity.setShikyuShinseiKeitai(画面項目.get支給申請形態());
                 entity.setJikoFutanKofuUmu(画面項目.get自己負担額証明書交付申請の有無());
+                entity.setShinseiYMD(画面項目.get申請年月日());
                 entity.setShinseiDaihyoshaShimei(画面項目.get申請代表者氏名());
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
@@ -311,12 +314,13 @@ public class KogakuGassanShikyuShinseiToroku {
                 DbT3068KogakuGassanShinseishoEntity entity = 高額合算申請書.toEntity();
                 if (!EntityDataState.Added.equals(entity.getState())) {
                     高額合算申請書Dac.save(高額合算申請書.deleted().toEntity());
+                    entity.setRirekiNo(entity.getRirekiNo().add(Decimal.ONE));
                 }
                 entity.setState(EntityDataState.Added);
-                entity.setRirekiNo(entity.getRirekiNo().add(Decimal.ONE));
                 entity.setKokuhoShikyuShinseishoSeiriNo(画面項目.get国保支給申請書整理番号());
                 entity.setShikyuShinseiKeitai(画面項目.get支給申請形態());
                 entity.setJikoFutanKofuUmu(画面項目.get自己負担額証明書交付申請の有無());
+                entity.setShinseiYMD(画面項目.get申請年月日());
                 entity.setShinseiDaihyoshaShimei(画面項目.get申請代表者氏名());
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
@@ -326,14 +330,14 @@ public class KogakuGassanShikyuShinseiToroku {
                     DbT3069KogakuGassanShinseishoKanyurekiEntity kanyurekiEntity = 加入歴.toEntity();
                     if (!EntityDataState.Added.equals(kanyurekiEntity.getState())) {
                         高額合算申請書加入歴Dac.save(加入歴.deleted().toEntity());
+                        kanyurekiEntity.setRirekiNo(kanyurekiEntity.getRirekiNo() + INT_1);
                     }
-                    kanyurekiEntity.setRirekiNo(kanyurekiEntity.getRirekiNo() + INT_1);
-                    kanyurekiEntity.setState(EntityDataState.Added);
-                    if (!高額合算申請書.toEntity().getIsDeleted()) {
+                    if (!EntityDataState.Deleted.equals(kanyurekiEntity.getState())) {
+                        kanyurekiEntity.setState(EntityDataState.Added);
                         高額合算申請書加入歴Dac.save(kanyurekiEntity);
                     }
                 }
-                if (!高額合算申請書.toEntity().getIsDeleted()) {
+                if (!EntityDataState.Deleted.equals(高額合算申請書.toEntity().getState())) {
                     高額合算申請書Dac.save(entity);
                 }
             }
@@ -342,12 +346,13 @@ public class KogakuGassanShikyuShinseiToroku {
                 DbT3068KogakuGassanShinseishoEntity entity = 高額合算申請書.toEntity();
                 if (!EntityDataState.Added.equals(entity.getState())) {
                     高額合算申請書Dac.save(高額合算申請書.deleted().toEntity());
+                    entity.setRirekiNo(entity.getRirekiNo().add(Decimal.ONE));
                 }
                 entity.setState(EntityDataState.Added);
-                entity.setRirekiNo(entity.getRirekiNo().add(Decimal.ONE));
                 entity.setKokuhoShikyuShinseishoSeiriNo(画面項目.get国保支給申請書整理番号());
                 entity.setShikyuShinseiKeitai(画面項目.get支給申請形態());
                 entity.setJikoFutanKofuUmu(画面項目.get自己負担額証明書交付申請の有無());
+                entity.setShinseiYMD(画面項目.get申請年月日());
                 entity.setShinseiDaihyoshaShimei(画面項目.get申請代表者氏名());
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
@@ -357,8 +362,8 @@ public class KogakuGassanShikyuShinseiToroku {
                     DbT3069KogakuGassanShinseishoKanyurekiEntity kanyurekiEntity = 加入歴.toEntity();
                     if (!EntityDataState.Added.equals(kanyurekiEntity.getState())) {
                         高額合算申請書加入歴Dac.save(加入歴.deleted().toEntity());
+                        kanyurekiEntity.setRirekiNo(kanyurekiEntity.getRirekiNo() + INT_1);
                     }
-                    kanyurekiEntity.setRirekiNo(kanyurekiEntity.getRirekiNo() + INT_1);
                     kanyurekiEntity.setState(EntityDataState.Added);
                     高額合算申請書加入歴Dac.save(kanyurekiEntity);
                 }

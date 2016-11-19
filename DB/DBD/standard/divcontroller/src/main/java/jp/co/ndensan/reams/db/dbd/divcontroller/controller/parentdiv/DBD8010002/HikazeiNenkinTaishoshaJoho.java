@@ -136,11 +136,7 @@ public class HikazeiNenkinTaishoshaJoho {
                 getValidationHandler(div).validateForアップロード済みファイル名(pairs);
             }
             if (!単一保険者.equals(getHandler(div).広域と市町村判断())) {
-                List<RString> 構成市町村コードリスト = ViewStateHolder.
-                        get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
-                if (構成市町村コードリスト == null || 構成市町村コードリスト.isEmpty()) {
-                    throw new ApplicationException(DbdErrorMessages.処理なし.getMessage());
-                }
+                checkempty();
                 getValidationHandler(div).validateFor処理状態広域(pairs);
                 getValidationHandler(div).validateFor取込チェックボックス(pairs);
             }
@@ -293,5 +289,13 @@ public class HikazeiNenkinTaishoshaJoho {
         div.getFuairuAppurodo().setIsOpen(flg);
         div.getFuairuAppurodo().getUplTaishoFuairu().setDisplayNone(!flg);
         div.getFuairuAppurodo().getBtnAppurodo().setDisplayNone(!flg);
+    }
+
+    private void checkempty() {
+        List<RString> 構成市町村コードリスト = ViewStateHolder.
+                get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
+        if (構成市町村コードリスト == null || 構成市町村コードリスト.isEmpty()) {
+            throw new ApplicationException(DbdErrorMessages.処理なし.getMessage());
+        }
     }
 }

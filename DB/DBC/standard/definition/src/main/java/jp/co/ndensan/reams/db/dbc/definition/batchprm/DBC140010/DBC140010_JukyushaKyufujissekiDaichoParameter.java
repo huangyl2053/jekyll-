@@ -203,7 +203,7 @@ public class DBC140010_JukyushaKyufujissekiDaichoParameter extends BatchParamete
     @BatchParameter(key = KEY_KYUHU_RITU, name = "給付率")
     private RString 給付率;
     @BatchParameter(key = KEY_SHUTURYOKU_JUN_ID, name = "出力順ID")
-    private RString 出力順ID;
+    private long 出力順ID;
 
     /**
      * コンストラクタです。
@@ -336,7 +336,7 @@ public class DBC140010_JukyushaKyufujissekiDaichoParameter extends BatchParamete
             RString 計画作成事業者番号,
             RString 給付率区分,
             RString 給付率,
-            RString 出力順ID) {
+            long 出力順ID) {
         this.対象年月 = 対象年月;
         this.年月範囲_開始 = 年月範囲_開始;
         this.年月範囲_終了 = 年月範囲_終了;

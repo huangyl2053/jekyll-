@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 認定調査依頼一覧表のReportです。
@@ -19,6 +18,7 @@ import lombok.NonNull;
 public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportSource> {
 
     private final List<ChosaIraiIchiranhyoBodyItem> bodyItemList;
+    private final ChosaIraiIchiranhyoBodyItem bodyItem;
 
     /**
      * インスタンスを生成します。
@@ -27,21 +27,34 @@ public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportS
      * @return 認定調査依頼一覧表のReport
      */
     public static ChosaIraiIchiranhyoReport createFrom(
-            @NonNull List<ChosaIraiIchiranhyoBodyItem> bodyItemList) {
-
+            List<ChosaIraiIchiranhyoBodyItem> bodyItemList) {
         return new ChosaIraiIchiranhyoReport(
-                bodyItemList);
+                bodyItemList, null);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param bodyItem 認定調査依頼一覧表ボディのITEM
+     * @return 認定調査依頼一覧表のReport
+     */
+    public static ChosaIraiIchiranhyoReport createFrom(
+            ChosaIraiIchiranhyoBodyItem bodyItem) {
+        return new ChosaIraiIchiranhyoReport(
+                null, bodyItem);
     }
 
     /**
      * インスタンスを生成します。
      *
      * @param bodyItemList 認定調査依頼一覧表ボディのITEMリスト
+     * @param bodyItem 認定調査依頼一覧表ボディのITEM
      */
     protected ChosaIraiIchiranhyoReport(
-            List<ChosaIraiIchiranhyoBodyItem> bodyItemList) {
-
+            List<ChosaIraiIchiranhyoBodyItem> bodyItemList,
+            ChosaIraiIchiranhyoBodyItem bodyItem) {
         this.bodyItemList = bodyItemList;
+        this.bodyItem = bodyItem;
     }
 
     /**
@@ -50,11 +63,16 @@ public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportS
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter) {
-        for (ChosaIraiIchiranhyoBodyItem bodyItem : bodyItemList) {
+        if (bodyItemList != null) {
+            for (ChosaIraiIchiranhyoBodyItem item : bodyItemList) {
+                IChosaIraiIchiranhyoEditor bodyEditor = new ChosaIraiIchiranhyoBodyEditor(item);
+                IChosaIraiIchiranhyoBuilder builder = new ChosaIraiIchiranhyoBuilderImpl(bodyEditor);
+                reportSourceWriter.writeLine(builder);
+            }
+        } else {
             IChosaIraiIchiranhyoEditor bodyEditor = new ChosaIraiIchiranhyoBodyEditor(bodyItem);
             IChosaIraiIchiranhyoBuilder builder = new ChosaIraiIchiranhyoBuilderImpl(bodyEditor);
             reportSourceWriter.writeLine(builder);
         }
     }
-
 }

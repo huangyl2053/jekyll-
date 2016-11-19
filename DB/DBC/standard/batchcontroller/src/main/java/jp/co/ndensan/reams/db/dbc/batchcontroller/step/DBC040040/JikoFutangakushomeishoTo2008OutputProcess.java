@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040040;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassan.KogakuGassanData;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassan.KogakuGassanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho.JikoFutangakushomeishoData;
@@ -18,6 +19,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.JikoFutangakushomei
 import jp.co.ndensan.reams.db.dbc.entity.report.jikofutangakushomeisho.JikoFutangakushomeishoReportSource;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040040.IJikofutanShomeishoMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesakiEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiEditorBuilder;
@@ -44,7 +47,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -66,9 +71,11 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
     private static final RString 保険者印_0001 = new RString("0001");
     private static final RString 対象年度区分_1 = new RString("1");
     private static final RString 定数_10 = new RString("10");
-    private static final RString 定数_自己負担額証明書 = new RString("自己負担額証明書");
     private static final RString 定数_ORDERBY = new RString("order by");
+    private static final ReportId 帳票分類ID = new ReportId("DBC100050_JikoFutangakushomeisho");
+    private static final RString 項目名 = new RString("帳票タイトル");
     private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final int NUM_7 = 7;
@@ -81,6 +88,11 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
     private Association 地方公共団体情報;
     private List<KogakuGassanMeisai> 明細List;
     private ToiawasesakiSource 問合せ先情報;
+    private RString 帳票タイトル = RString.EMPTY;
+    private RString 通知文1 = RString.EMPTY;
+    private RString 通知文2 = RString.EMPTY;
+    private RString 保険者情報 = RString.EMPTY;
+    private RString 備考 = RString.EMPTY;
 
     @BatchWriter
     private BatchReportWriter<JikoFutangakushomeishoReportSource> batchReportWriter;
@@ -108,6 +120,22 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
             }
         } else {
             parameter.set出力順(null);
+        }
+        帳票タイトル = ChohyoSeigyoHanyoManager.createInstance().get帳票制御汎用(SubGyomuCode.DBC介護給付,
+                帳票分類ID, 項目名).get設定値();
+
+        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票分類ID, KamokuCode.EMPTY, NUM_1);
+        if (0 < 通知文.size()) {
+            通知文1 = 通知文.get(NUM_1);
+        }
+        if (1 < 通知文.size()) {
+            保険者情報 = 通知文.get(NUM_2);
+        }
+        if (NUM_2 < 通知文.size()) {
+            通知文2 = 通知文.get(NUM_3);
+        }
+        if (NUM_3 < 通知文.size()) {
+            備考 = 通知文.get(NUM_4);
         }
     }
 
@@ -138,7 +166,11 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
             data.set認証者情報(認証者情報);
             data.set文書番号(parameter.get文書情報());
             data.set高額合算データ(高額合算データ);
-            data.setタイトル(定数_自己負担額証明書);
+            data.setタイトル(帳票タイトル);
+            data.set通知文1(通知文1);
+            data.set通知文2(通知文2);
+            data.set保険者情報(保険者情報);
+            data.set備考(備考);
             JikoFutangakushomeishoReport report = new JikoFutangakushomeishoReport(data);
             report.writeBy(reportSourceWriter);
             明細List = get明細List();
@@ -170,7 +202,7 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
             data.set認証者情報(認証者情報);
             data.set文書番号(parameter.get文書情報());
             data.set高額合算データ(高額合算データ);
-            data.setタイトル(定数_自己負担額証明書);
+            data.setタイトル(帳票タイトル);
             JikoFutangakushomeishoReport report = new JikoFutangakushomeishoReport(data);
             report.writeBy(reportSourceWriter);
         }
@@ -243,5 +275,4 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
         source.naisenNo = toiawasesakiEntity.getNaisenNo();
         return source;
     }
-
 }

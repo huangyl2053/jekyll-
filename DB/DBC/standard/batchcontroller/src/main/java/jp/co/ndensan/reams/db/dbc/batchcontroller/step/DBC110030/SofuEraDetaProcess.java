@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouDetaToriGaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.SofuEraRelateEntity;
@@ -28,6 +29,7 @@ public class SofuEraDetaProcess extends BatchProcessBase<IdouDetaToriGaTempEntit
             + "IHonnSanteiFukaMapper.select異動データ取得");
     private static final RString TABLE_送付エラー一時 = new RString("SofuEraDetaTemp");
     private IHonnSanteiFukaMapper mapper;
+    private List<IdouDetaToriGaTempEntity> entityData;
     private int 連番 = 0;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 送付エラー一時;
@@ -35,6 +37,7 @@ public class SofuEraDetaProcess extends BatchProcessBase<IdouDetaToriGaTempEntit
     @Override
     protected void initialize() {
         mapper = getMapper(IHonnSanteiFukaMapper.class);
+        entityData = new ArrayList<>();
     }
 
     @Override
@@ -51,12 +54,13 @@ public class SofuEraDetaProcess extends BatchProcessBase<IdouDetaToriGaTempEntit
     @Override
     protected void process(IdouDetaToriGaTempEntity entity) {
         連番++;
+        entityData.add(entity);
     }
 
     @Override
     protected void afterExecute() {
         if (0 < 連番) {
-            List<SofuEraRelateEntity> 送付情報 = mapper.select異動データ取得トリガ(mapper.select異動データ取得());
+            List<SofuEraRelateEntity> 送付情報 = mapper.select異動データ取得トリガ(entityData);
             for (SofuEraRelateEntity sofuEntity : 送付情報) {
                 送付エラー一時.insert(sofuEntity);
             }

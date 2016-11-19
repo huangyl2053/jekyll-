@@ -103,6 +103,7 @@ public class KogakuServiceShikyuShinseishoOutputProcess extends BatchProcessBase
     protected void process(ShinseiJohoChohyoTempEntity entity) {
         if (金融機関コード_9900.equals(entity.getKinyuKikanCodeChohyo())) {
             KogakuShikyuShinseishoYuchoEntity param = new KogakuShikyuShinseishoYuchoEntity();
+            entity.setEditJusho(get住所Edit(entity));
             param.setシステム日付(FlexibleDate.getNowDate());
             param.set注意文(注意文);
             param.set申請情報帳票発行一時(entity);
@@ -115,6 +116,7 @@ public class KogakuServiceShikyuShinseishoOutputProcess extends BatchProcessBase
             count1 = count1 + 1;
         } else {
             KogakuShikyuShinseishoEntity param = new KogakuShikyuShinseishoEntity();
+            entity.setEditJusho(get住所Edit(entity));
             param.setシステム日付(FlexibleDate.getNowDate());
             param.set申請情報帳票発行一時(entity);
             param.set認証者役職名(認証者名);
@@ -125,5 +127,12 @@ public class KogakuServiceShikyuShinseishoOutputProcess extends BatchProcessBase
             report.writeBy(shinseishoReportSourceWriter);
             count2 = count2 + 1;
         }
+    }
+
+    private RString get住所Edit(ShinseiJohoChohyoTempEntity entity) {
+        RString 住所 = entity.getJushoChohyo() == null ? RString.EMPTY : entity.getJushoChohyo().getColumnValue();
+        RString 番地 = entity.getBanchi() == null ? RString.EMPTY : entity.getBanchi().getColumnValue();
+        RString 方書 = entity.getKatagaki() == null ? RString.EMPTY : entity.getKatagaki().getColumnValue();
+        return 住所.concat(番地).concat(RString.EMPTY).concat(方書);
     }
 }

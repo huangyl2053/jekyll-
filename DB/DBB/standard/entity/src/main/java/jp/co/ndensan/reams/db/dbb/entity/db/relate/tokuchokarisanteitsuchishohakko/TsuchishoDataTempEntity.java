@@ -27,7 +27,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@SuppressWarnings ("PMD.UnusedPrivateField")
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TsuchishoDataTempEntity extends DbTableEntityBase<TsuchishoDataTempEntity> implements IDbAccessable {
 
     private DbTKeisangoJohoTempTableEntity 計算後情報;
@@ -43,6 +43,7 @@ public class TsuchishoDataTempEntity extends DbTableEntityBase<TsuchishoDataTemp
     private Decimal 前年度特徴期別金額04;
     private Decimal 前年度特徴期別金額05;
     private Decimal 前年度特徴期別金額06;
+    private RString 番地コード;
     private static final Long ZERO = 0L;
 
     /**

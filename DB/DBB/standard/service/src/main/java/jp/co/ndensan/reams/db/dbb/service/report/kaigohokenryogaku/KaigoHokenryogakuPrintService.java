@@ -85,7 +85,7 @@ public class KaigoHokenryogakuPrintService {
         }
 
         if (介護保険料額変更通知書発行一覧表.equals(タイトル)) {
-            KaigoHokenryogakuProperty property = new KaigoHokenryogakuProperty();
+            KaigoHokenryogakuProperty property = new KaigoHokenryogakuProperty(並び順);
             try (ReportAssembler<KaigoHokenryogakuSource> assembler = createAssembler(property, reportManager)) {
                 ReportSourceWriter<KaigoHokenryogakuSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);

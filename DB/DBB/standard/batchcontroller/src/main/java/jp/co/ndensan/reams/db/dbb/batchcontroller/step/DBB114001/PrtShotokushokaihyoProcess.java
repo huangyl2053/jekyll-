@@ -10,11 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho.NushiJuminJohoResult;
 import jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho.SetaiInn;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyo.ShotokuShokaihyoTateReport;
+import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyo.ShotokuShokaihyoYokoReport;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.SaiHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.shotokushokaihyohakko.ShotokuShokaihyoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.shotokushokaihyo.ShotokuShokaihyoTateSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.shotokushokaihyo.ShotokuShokaihyoYokoSource;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoDataHenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesaki;
@@ -35,10 +37,9 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
@@ -50,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -62,7 +64,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-1720-040 lijunjun
  */
-public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukaiDataTempEntity> {
+public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiDataTempEntity> {
 
     /**
      * PARAMETER_OUT_OUTPUTCOUNT
@@ -70,7 +72,6 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
     public static final RString PARAMETER_OUT_OUTPUTCOUNT;
 
     private static final RString INDEX_0 = new RString("0");
-    private static final RString INDEX_1 = new RString("1");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_9 = 9;
@@ -106,9 +107,10 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
             + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.selectAll所得照会票1");
 
-    @BatchWriter
-    private BatchReportWriter<ShotokuShokaihyoTateSource> reportWriter;
-    private ReportSourceWriter<ShotokuShokaihyoTateSource> sourceWriter;
+    private BatchReportWriter<ShotokuShokaihyoTateSource> tateReportWriter;
+    private BatchReportWriter<ShotokuShokaihyoYokoSource> yokoReportWriter;
+    private ReportSourceWriter<ShotokuShokaihyoTateSource> tateSourceWriter;
+    private ReportSourceWriter<ShotokuShokaihyoYokoSource> yokoSourceWriter;
 
     static {
         PARAMETER_OUT_OUTPUTCOUNT = new RString("outputCount");
@@ -116,6 +118,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
 
     private ShotokuShokaihyoHakkoProcessParameter processParameter;
     private ShotokuShoukaiDataTempEntity 所得照会票データ;
+    private ShotokuShoukaiDataTempEntity 所得照会票データbefore;
     private OutputParameter<RString> outputCount;
     private NinshoshaSource sourceBuilder;
     private Association association;
@@ -127,9 +130,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
     private RString 送付先住所コード = RString.EMPTY;
     private SetaiCode 世帯コード = SetaiCode.EMPTY;
     private RString 候補者区分 = RString.EMPTY;
-    private LasdecCode 現住所コード = LasdecCode.EMPTY;
     private List<SetaiInn> 世帯員リスト;
-    private boolean flag;
 
     @Override
     public void initialize() {
@@ -148,7 +149,6 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
         送付先担当課名称 = TokuchoKaishiTsuchishoDataHenshu.createInstance()
                 .load帳票制御汎用ByKey(帳票分類ID, 管理年度, 項目名_送付先担当課名称).get設定値();
         outputCount.setValue(INDEX_0);
-        flag = false;
     }
 
     @Override
@@ -158,74 +158,79 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
 
     @Override
     protected void createWriter() {
-        reportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBB.DBB100001.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
-        sourceWriter = new ReportSourceWriter<>(reportWriter);
-
         if (文字列_001.equals(通知書タイプ)) {
+            yokoReportWriter = BatchReportFactory.createBatchReportWriter(
+                    ReportIdDBB.DBB100001.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
+            yokoSourceWriter = new ReportSourceWriter<>(yokoReportWriter);
+
             sourceBuilder = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100001.getReportId(),
-                    processParameter.get照会年月日(), 種別コード, KenmeiFuyoKubunType.県と郡, sourceWriter);
+                    processParameter.get照会年月日(), 種別コード, KenmeiFuyoKubunType.県と郡, yokoSourceWriter);
         } else {
+            tateReportWriter = BatchReportFactory.createBatchReportWriter(
+                    ReportIdDBB.DBB100002.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
+            tateSourceWriter = new ReportSourceWriter<>(tateReportWriter);
+
             sourceBuilder = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100002.getReportId(),
-                    processParameter.get照会年月日(), 種別コード, KenmeiFuyoKubunType.県と郡, sourceWriter);
+                    processParameter.get照会年月日(), 種別コード, KenmeiFuyoKubunType.県と郡, tateSourceWriter);
         }
     }
 
     @Override
-    protected void keyBreakProcess(ShotokuShoukaiDataTempEntity t) {
-    }
-
-    @Override
-    protected void usualProcess(ShotokuShoukaiDataTempEntity t) {
+    protected void process(ShotokuShoukaiDataTempEntity t) {
         所得照会票データ = t;
-        if (送付先住所コード.equals(RString.EMPTY)
-                && 世帯コード.equals(SetaiCode.EMPTY)
-                && 候補者区分.equals(RString.EMPTY)
-                && 現住所コード.equals(LasdecCode.EMPTY)) {
-            set世帯員();
-            setKey();
-            NushiJuminJohoResult result = creat所得照会票データ();
-            new ShotokuShokaihyoTateReport(result, sourceBuilder, 文書タイトル, 送付先担当課名称).writeBy(sourceWriter);
-            世帯員リスト.clear();
-            flag = true;
-        } else if (送付先住所コード.equals(所得照会票データ.getZenkokuJushoCode())
+        if (送付先住所コード.equals(所得照会票データ.getZenkokuJushoCode())
                 && 世帯コード.equals(所得照会票データ.getSetaiCode())
-                && 候補者区分.equals(所得照会票データ.getKouhoshakubun())
-                && 現住所コード.equals(所得照会票データ.getGenLasdecCode())) {
+                && 候補者区分.equals(所得照会票データ.getKouhoshakubun())) {
             set世帯員();
-            flag = true;
+        } else if (世帯員リスト.isEmpty()) {
+            所得照会票データbefore = t;
+            set世帯員();
+            setKey();
         } else {
-            NushiJuminJohoResult result = creat所得照会票データ();
-            new ShotokuShokaihyoTateReport(result, sourceBuilder, 文書タイトル, 送付先担当課名称).writeBy(sourceWriter);
+            所得照会票Report();
             世帯員リスト.clear();
             set世帯員();
             setKey();
-            flag = false;
+            所得照会票データbefore = t;
         }
-        outputCount.setValue(INDEX_1);
+
     }
 
     @Override
     protected void afterExecute() {
-        if (flag) {
-            NushiJuminJohoResult result = creat所得照会票データ();
-            new ShotokuShokaihyoTateReport(result, sourceBuilder, 文書タイトル, 送付先担当課名称).writeBy(sourceWriter);
+        int 出力ページ数 = 0;
+        出力ページ数 = 所得照会票Report();
+        if (文字列_001.equals(通知書タイプ)) {
+            yokoReportWriter.close();
+        } else {
+            tateReportWriter.close();
         }
-        int 出力ページ数 = sourceWriter.pageCount().value();
         loadバッチ出力条件リスト(出力ページ数, CSV出力有無_有り, CSVファイル名_一覧表);
+    }
+
+    private int 所得照会票Report() {
+        NushiJuminJohoResult result = creat所得照会票データ();
+        if (文字列_001.equals(通知書タイプ)) {
+            new ShotokuShokaihyoYokoReport(result, sourceBuilder, 文書タイトル, 送付先担当課名称).writeBy(yokoSourceWriter);
+            return yokoSourceWriter.pageCount().value();
+        } else {
+            new ShotokuShokaihyoTateReport(result, sourceBuilder, 文書タイトル, 送付先担当課名称).writeBy(tateSourceWriter);
+            return tateSourceWriter.pageCount().value();
+        }
     }
 
     private void setKey() {
         送付先住所コード = 所得照会票データ.getZenkokuJushoCode();
         世帯コード = 所得照会票データ.getSetaiCode();
         候補者区分 = 所得照会票データ.getKouhoshakubun();
-        現住所コード = 所得照会票データ.getGenLasdecCode();
     }
 
     private void set世帯員() {
         SetaiInn setaiInn = new SetaiInn();
         setaiInn.set住民状態コード(所得照会票データ.getJuminJotaiCode());
-        setaiInn.set転出日(processParameter.get照会年月日());
+        FlexibleDate 転入届出日 = 所得照会票データ.getTorokuTodokedeYMD() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(所得照会票データ.getTorokuTodokedeYMD());
+        setaiInn.set転出日(転入届出日);
         setaiInn.set転入異動日(所得照会票データ.getIdoYMD());
         setaiInn.set識別コード(所得照会票データ.getShikibetsuCode());
         setaiInn.setカナ氏名(所得照会票データ.getKanaMeisho().getColumnValue());
@@ -308,17 +313,17 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
         result.set発行日(new RDate(processParameter.get照会年月日().toString()));
         result.set市町村名(association.get市町村名());
         set所得照会先(result);
-        result.set生年月日(所得照会票データ.getSeinengappiYMD());
-        if (!転出者.equals(所得照会票データ.getJuminJotaiCode())) {
-            result.set転入前住所(所得照会票データ.getZenjusho());
+        result.set生年月日(所得照会票データbefore.getSeinengappiYMD());
+        if (!転出者.equals(所得照会票データbefore.getJuminJotaiCode())) {
+            result.set転入前住所(所得照会票データbefore.getZenjusho());
         } else {
-            result.set転出先住所(所得照会票データ.getGenjusho());
+            result.set転出先住所(所得照会票データbefore.getGenjusho());
         }
-        result.set氏名(所得照会票データ.getHihokenshaName());
-        result.set世帯コード(所得照会票データ.getSetaiCode());
-        result.set前住所(所得照会票データ.getZenjusho());
-        result.set現住所(所得照会票データ.getGenjusho());
-        result.set住民状態コード(所得照会票データ.getJuminJotaiCode());
+        result.set氏名(所得照会票データbefore.getHihokenshaName());
+        result.set世帯コード(所得照会票データbefore.getSetaiCode());
+        result.set前住所(所得照会票データbefore.getZenjusho());
+        result.set現住所(所得照会票データbefore.getGenjusho());
+        result.set住民状態コード(所得照会票データbefore.getJuminJotaiCode());
         result.set世帯員リスト(世帯員リスト);
         result.set担当部署名(差出人情報.get部署名());
         result.set担当者名(差出人情報.get担当者名());
@@ -327,7 +332,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
         result.set内線番号(差出人情報.get内線番号());
         result.set差出人_郵便番号(差出人情報.get郵便番号());
         result.set電話番号(差出人情報.get電話番号());
-        result.set住民種別コード(所得照会票データ.getJuminShubetsuCode());
+        result.set住民種別コード(所得照会票データbefore.getJuminShubetsuCode());
         return result;
     }
 

@@ -11,26 +11,31 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonKyotakuServiceBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiSearchDataBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShukeiKekka;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShukeiKekkaDataBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.KyufuJissekiShokaiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.dgKyufuJissekiGokeiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.dgKyufuJissekiMeisaiList_Row;
+import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridColumn;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -91,7 +96,19 @@ public class KyufuJissekiShokaiHandler {
     private static final int INT_YJYUY = 44;
     private static final int INT_YJYUG = 45;
     private static final int INT_YJYUR = 46;
+    private static final int INT_47 = 47;
     private static final int INT_YJYUH = 48;
+    private static final int INT_49 = 49;
+    private static final int INT_50 = 50;
+    private static final int INT_51 = 51;
+    private static final int INT_52 = 52;
+    private static final int INT_53 = 53;
+    private static final int INT_54 = 54;
+    private static final int INT_55 = 55;
+    private static final int INT_56 = 56;
+    private static final int INT_57 = 57;
+    private static final int INT_58 = 58;
+    private static final int INT_59 = 59;
     private static final int INT_NJYUNG = 75;
     private static final RString RS_ZERO = new RString(0);
     private static final RString 指定居宅サービス = new RString("指定居宅サービス");
@@ -110,6 +127,17 @@ public class KyufuJissekiShokaiHandler {
     private static final RString 地域密着型サービス合計単位 = new RString("地域密着型サービス合計単位");
     private static final RString 給付費合計 = new RString("給付費合計");
     private static final RString 利用者負担額合計 = new RString("利用者負担額合計");
+
+    private static final RString GOKEI_PATTERN1_1 = new RString("居宅_単位数");
+    private static final RString GOKEI_PATTERN1_2 = new RString("居宅_単位数＋出来高単位数");
+    private static final RString GOKEI_PATTERN2_1 = new RString("施設_単位数");
+    private static final RString GOKEI_PATTERN2_2 = new RString("施設_単位数＋出来高単位数");
+    private static final RString GOKEI_PATTERN3 = new RString("地域密着型");
+    private static final RString GOKEI_PATTERN4 = new RString("生活支援");
+    private static final RString GOKEI_PATTERN5 = new RString("高額介護");
+    private static final RString GOKEI_PATTERN6_1 = new RString("福祉用具販売");
+    private static final RString GOKEI_PATTERN6_2 = new RString("住宅改修");
+    private static final RString GOKEI_PATTERN_NOTHING = new RString("");
 
     /**
      * コンストラクタです。
@@ -174,7 +202,7 @@ public class KyufuJissekiShokaiHandler {
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 一覧データ 一覧データ
      */
-    public void onClick_btnKyufuJissekiSearch(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1,
+    public KyufuJissekiHeader onClick_btnKyufuJissekiSearch(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1,
             FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了,
             KyufuJissekiSearchDataBusiness 一覧データ) {
         div.getTxtKyufuJissekiListHihokenshaNo().setValue(get被保険者番号(給付実績ヘッダ情報1.get被保険者番号()));
@@ -196,11 +224,27 @@ public class KyufuJissekiShokaiHandler {
             div.getTxtKyufuJissekiListSeinengappi().setValue(給付実績ヘッダ情報1.get生年月日().wareki().toDateString());
         }
         set明細一覧行();
-        set合計一覧行();
+        //set合計一覧行();
         set明細一覧列(サービス提供年月_開始, サービス提供年月_終了);
         set一覧設定(一覧データ);
         setボタン表示非表示の設定(サービス提供年月_開始, サービス提供年月_終了);
         setボタン活性非活性の設定();
+        return get給付実績基本情報子Div(給付実績ヘッダ情報1.get生年月日());
+    }
+
+    private KyufuJissekiHeader get給付実績基本情報子Div(FlexibleDate 生年月日) {
+        KyufuJissekiHeader data = new KyufuJissekiHeader();
+        data.set被保険者番号(div.getTxtKyufuJissekiListHihokenshaNo().getValue());
+        data.set住民種別(div.getTxtKyufuJissekiListJuminShubetsu().getValue());
+        data.set要介護度(div.getTxtKyufuJissekiListYokaigodo().getValue());
+        data.set有効期間開始年月日(div.getTxtKyufuJissekiListNinteiYukoKikan().getFromValue());
+        data.set有効期間終了年月日(div.getTxtKyufuJissekiListNinteiYukoKikan().getToValue());
+        data.set氏名(div.getTxtKyufuJissekiListName().getValue());
+        data.set性別(div.getTxtKyufuJissekiListSeibetsu().getValue());
+        if (生年月日 != null && !生年月日.isEmpty()) {
+            data.set生年月日(new RDate(生年月日.toString()));
+        }
+        return data;
     }
 
     /**
@@ -280,18 +324,22 @@ public class KyufuJissekiShokaiHandler {
         for (int i = 0; i < 種類明細一覧.size(); i++) {
             set明細一覧固定項目(i, 種類明細一覧.get(i), 検索対象);
         }
-        div.getDgKyufuJissekiMeisaiList().setDataSource(種類明細一覧);
-    }
-
-    private void set合計一覧行() {
-        RString 検索対象 = div.getRadTaisho1().getSelectedKey();
-        List<dgKyufuJissekiGokeiList_Row> 合計一覧 = get合計空白一覧(検索対象);
+        List<dgKyufuJissekiMeisaiList_Row> 合計一覧 = get合計空白一覧(検索対象);
         for (int i = 0; i < 合計一覧.size(); i++) {
             set合計一覧固定項目(i, 合計一覧.get(i), 検索対象);
         }
-        div.getDgKyufuJissekiGokeiList().setDataSource(合計一覧);
+        種類明細一覧.addAll(合計一覧);
+        div.getDgKyufuJissekiMeisaiList().setDataSource(種類明細一覧);
     }
 
+//    private void set合計一覧行() {
+//        RString 検索対象 = div.getRadTaisho1().getSelectedKey();
+//        List<dgKyufuJissekiGokeiList_Row> 合計一覧 = get合計空白一覧(検索対象);
+//        for (int i = 0; i < 合計一覧.size(); i++) {
+//            set合計一覧固定項目(i, 合計一覧.get(i), 検索対象);
+//        }
+//        div.getDgKyufuJissekiGokeiList().setDataSource(合計一覧);
+//    }
     private void set明細一覧列(FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了) {
         set一覧表示();
         if (!RString.isNullOrEmpty(div.getRadNendo().getSelectedKey())) {
@@ -300,7 +348,6 @@ public class KyufuJissekiShokaiHandler {
             }
             for (int i = INT_NJYUNA; i < INT_NJYUNG; i++) {
                 div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i).setVisible(false);
-                div.getDgKyufuJissekiGokeiList().getGridSetting().getColumns().get(i).setVisible(false);
             }
         } else {
             int 列数 = サービス提供年月_終了.getBetweenMonths(サービス提供年月_開始) + INT_ICHI;
@@ -310,7 +357,6 @@ public class KyufuJissekiShokaiHandler {
                 }
                 for (int i = (列数 * INT_NI + INT_SAN); i < INT_NJYUNG; i++) {
                     div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i).setVisible(false);
-                    div.getDgKyufuJissekiGokeiList().getGridSetting().getColumns().get(i).setVisible(false);
                 }
             } else {
                 FlexibleYearMonth 計算後サービス提供年月_開始 = サービス提供年月_開始.plusMonth(列数 - INT_SJYUR);
@@ -324,7 +370,6 @@ public class KyufuJissekiShokaiHandler {
     private void set一覧表示() {
         for (int i = INT_ZERO; i < INT_NJYUNG; i++) {
             div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i).setVisible(true);
-            div.getDgKyufuJissekiGokeiList().getGridSetting().getColumns().get(i).setVisible(true);
         }
     }
 
@@ -365,16 +410,16 @@ public class KyufuJissekiShokaiHandler {
         return rowList;
     }
 
-    private List<dgKyufuJissekiGokeiList_Row> get合計空白一覧(RString 検索対象) {
-        List<dgKyufuJissekiGokeiList_Row> rowList = new ArrayList<>();
+    private List<dgKyufuJissekiMeisaiList_Row> get合計空白一覧(RString 検索対象) {
+        List<dgKyufuJissekiMeisaiList_Row> rowList = new ArrayList<>();
         if (KEY.equals(検索対象)) {
             for (int i = 1; i < INT_JYUN; i++) {
-                dgKyufuJissekiGokeiList_Row row = new dgKyufuJissekiGokeiList_Row();
+                dgKyufuJissekiMeisaiList_Row row = new dgKyufuJissekiMeisaiList_Row();
                 rowList.add(row);
             }
         } else {
             for (int i = 1; i < INT_ROKU; i++) {
-                dgKyufuJissekiGokeiList_Row row = new dgKyufuJissekiGokeiList_Row();
+                dgKyufuJissekiMeisaiList_Row row = new dgKyufuJissekiMeisaiList_Row();
                 rowList.add(row);
             }
         }
@@ -886,7 +931,7 @@ public class KyufuJissekiShokaiHandler {
     }
 
     private void set合計一覧固定項目(int 一覧行数,
-            dgKyufuJissekiGokeiList_Row 合計一覧, RString 検索対象) {
+            dgKyufuJissekiMeisaiList_Row 合計一覧, RString 検索対象) {
         switch (一覧行数) {
             case INT_ZERO:
                 if (KEY.equals(検索対象)) {
@@ -1037,7 +1082,7 @@ public class KyufuJissekiShokaiHandler {
         }
     }
 
-    private void set選択ボタン表示非表示の設定(dgKyufuJissekiGokeiList_Row 合計一覧) {
+    private void set選択ボタン表示非表示の設定(dgKyufuJissekiMeisaiList_Row 合計一覧) {
         合計一覧.getBtnYM1().setVisible(false);
         合計一覧.getBtnYM2().setVisible(false);
         合計一覧.getBtnYM3().setVisible(false);
@@ -1121,22 +1166,21 @@ public class KyufuJissekiShokaiHandler {
         return new FlexibleYearMonth(new RDate(列日期.toString()).getYearMonth().toDateString());
     }
 
-    private void set一覧設定(KyufuJissekiSearchDataBusiness 一覧データ) {
-        int 列位値 = 1;
-        for (int i = INT_YON; i < INT_NJYUNG; i++) {
-            if (i % INT_NI == INT_ZERO) {
-                DataGridColumn 列 = div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i);
-                if (列.isVisible()) {
-                    FlexibleYearMonth 列日期 = new FlexibleYearMonth(new RDate(列.getGroupName().toString()).getYearMonth().toDateString());
-                    set一覧列設定(get集計_後_点数合計給付明細列一覧データ(一覧データ, 列日期),
-                            get計画費_後_点数給付明細列一覧データ(一覧データ, 列日期),
-                            get高額明細_支給額一覧データ(一覧データ, 列日期), 列位値);
-                    列位値 = 列位値 + 1;
-                }
-            }
-        }
-    }
-
+//    private void set一覧設定(KyufuJissekiSearchDataBusiness 一覧データ) {
+//        int 列位値 = 1;
+//        for (int i = INT_YON; i < INT_NJYUNG; i++) {
+//            if (i % INT_NI == INT_ZERO) {
+//                DataGridColumn 列 = div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i);
+//                if (列.isVisible()) {
+//                    FlexibleYearMonth 列日期 = new FlexibleYearMonth(new RDate(列.getGroupName().toString()).getYearMonth().toDateString());
+//                    set一覧列設定(get集計_後_点数合計給付明細列一覧データ(一覧データ, 列日期),
+//                            get計画費_後_点数給付明細列一覧データ(一覧データ, 列日期),
+//                            get高額明細_支給額一覧データ(一覧データ, 列日期), 列位値);
+//                    列位値 = 列位値 + 1;
+//                }
+//            }
+//        }
+//    }
     private List<KyufuJissekiKihonShukeiBusiness> get集計_後_点数合計給付明細列一覧データ(
             KyufuJissekiSearchDataBusiness 一覧データ, FlexibleYearMonth 列日期) {
         List<KyufuJissekiKihonShukeiBusiness> 給付明細列一覧データ = new ArrayList<>();
@@ -1176,20 +1220,19 @@ public class KyufuJissekiShokaiHandler {
         return 実績高額集計データ;
     }
 
-    private void set一覧列設定(List<KyufuJissekiKihonShukeiBusiness> 給付明細列一覧データ,
-            List<KyufuJissekiKihonKyotakuServiceBusiness> 計画費集計データ,
-            List<KyufujissekiKogakuKaigoServicehi> 実績高額集計データ, int 列位値) {
-        List<dgKyufuJissekiMeisaiList_Row> 種類明細一覧 = div.getDgKyufuJissekiMeisaiList().getDataSource();
-        List<dgKyufuJissekiGokeiList_Row> 種類合計一覧 = div.getDgKyufuJissekiGokeiList().getDataSource();
-        RString 検索対象 = div.getRadTaisho1().getSelectedKey();
-        for (int i = INT_ZERO; i < 種類明細一覧.size(); i++) {
-            set一覧対象金額データ(種類明細一覧.get(i), 列位値, get行対象金額(i, 給付明細列一覧データ, 計画費集計データ, 検索対象));
-        }
-        for (int i = INT_ZERO; i < 種類合計一覧.size(); i++) {
-            set合計一覧対象金額データ(種類合計一覧.get(i), 列位値, get合計行対象金額(i, 給付明細列一覧データ, 実績高額集計データ, 検索対象));
-        }
-    }
-
+//    private void set一覧列設定(List<KyufuJissekiKihonShukeiBusiness> 給付明細列一覧データ,
+//            List<KyufuJissekiKihonKyotakuServiceBusiness> 計画費集計データ,
+//            List<KyufujissekiKogakuKaigoServicehi> 実績高額集計データ, int 列位値) {
+//        List<dgKyufuJissekiMeisaiList_Row> 種類明細一覧 = div.getDgKyufuJissekiMeisaiList().getDataSource();
+//        List<dgKyufuJissekiGokeiList_Row> 種類合計一覧 = div.getDgKyufuJissekiGokeiList().getDataSource();
+//        RString 検索対象 = div.getRadTaisho1().getSelectedKey();
+//        for (int i = INT_ZERO; i < 種類明細一覧.size(); i++) {
+//            set一覧対象金額データ(種類明細一覧.get(i), 列位値, get行対象金額(i, 給付明細列一覧データ, 計画費集計データ, 検索対象));
+//        }
+//        for (int i = INT_ZERO; i < 種類合計一覧.size(); i++) {
+//            set合計一覧対象金額データ(種類合計一覧.get(i), 列位値, get合計行対象金額(i, 給付明細列一覧データ, 実績高額集計データ, 検索対象));
+//        }
+//    }
     private RString get行対象金額(int 行位値, List<KyufuJissekiKihonShukeiBusiness> 給付明細列一覧データ,
             List<KyufuJissekiKihonKyotakuServiceBusiness> 計画費集計データ, RString 検索対象) {
         switch (行位値) {
@@ -1855,128 +1898,6 @@ public class KyufuJissekiShokaiHandler {
         }
     }
 
-    private void set合計一覧対象金額データ(dgKyufuJissekiGokeiList_Row 合計一覧, int 列, RString 対象金額) {
-        switch (列) {
-            case INT_ICHI:
-                合計一覧.setTxtYM1(対象金額);
-                break;
-            case INT_NI:
-                合計一覧.setTxtYM2(対象金額);
-                break;
-            case INT_SAN:
-                合計一覧.setTxtYM3(対象金額);
-                break;
-            case INT_YON:
-                合計一覧.setTxtYM4(対象金額);
-                break;
-            case INT_GO:
-                合計一覧.setTxtYM5(対象金額);
-                break;
-            case INT_ROKU:
-                合計一覧.setTxtYM6(対象金額);
-                break;
-            case INT_NANA:
-                合計一覧.setTxtYM7(対象金額);
-                break;
-            case INT_HACHI:
-                合計一覧.setTxtYM8(対象金額);
-                break;
-            case INT_KYU:
-                合計一覧.setTxtYM9(対象金額);
-                break;
-            case INT_JYU:
-                合計一覧.setTxtYM10(対象金額);
-                break;
-            case INT_JYUI:
-                合計一覧.setTxtYM11(対象金額);
-                break;
-            case INT_JYUN:
-                合計一覧.setTxtYM12(対象金額);
-                break;
-            case INT_JYUS:
-                合計一覧.setTxtYM13(対象金額);
-                break;
-            case INT_JYUY:
-                合計一覧.setTxtYM14(対象金額);
-                break;
-            case INT_JYUG:
-                合計一覧.setTxtYM15(対象金額);
-                break;
-            case INT_JYUR:
-                合計一覧.setTxtYM16(対象金額);
-                break;
-            case INT_JYUNA:
-                合計一覧.setTxtYM17(対象金額);
-                break;
-            case INT_JYUH:
-                合計一覧.setTxtYM18(対象金額);
-                break;
-            default:
-                set合計一覧対象金額データ１(合計一覧, 列, 対象金額);
-        }
-    }
-
-    private void set合計一覧対象金額データ１(dgKyufuJissekiGokeiList_Row 合計一覧, int 列, RString 対象金額) {
-        switch (列) {
-            case INT_JYUK:
-                合計一覧.setTxtYM19(対象金額);
-                break;
-            case INT_NJYU:
-                合計一覧.setTxtYM20(対象金額);
-                break;
-            case INT_NJYUI:
-                合計一覧.setTxtYM21(対象金額);
-                break;
-            case INT_NJYUN:
-                合計一覧.setTxtYM22(対象金額);
-                break;
-            case INT_NJYUS:
-                合計一覧.setTxtYM23(対象金額);
-                break;
-            case INT_NJYUY:
-                合計一覧.setTxtYM24(対象金額);
-                break;
-            case INT_NJYUG:
-                合計一覧.setTxtYM25(対象金額);
-                break;
-            case INT_NJYUR:
-                合計一覧.setTxtYM26(対象金額);
-                break;
-            case INT_NJYUNA:
-                合計一覧.setTxtYM27(対象金額);
-                break;
-            case INT_NJYUH:
-                合計一覧.setTxtYM28(対象金額);
-                break;
-            case INT_NJYUK:
-                合計一覧.setTxtYM29(対象金額);
-                break;
-            case INT_SJYU:
-                合計一覧.setTxtYM30(対象金額);
-                break;
-            case INT_SJYUI:
-                合計一覧.setTxtYM31(対象金額);
-                break;
-            case INT_SJYUN:
-                合計一覧.setTxtYM32(対象金額);
-                break;
-            case INT_SJYUS:
-                合計一覧.setTxtYM33(対象金額);
-                break;
-            case INT_SJYUY:
-                合計一覧.setTxtYM34(対象金額);
-                break;
-            case INT_SJYUG:
-                合計一覧.setTxtYM35(対象金額);
-                break;
-            case INT_SJYUR:
-                合計一覧.setTxtYM36(対象金額);
-                break;
-            default:
-                break;
-        }
-    }
-
     private static class DateComparator implements Comparator<KeyValueDataSource>, Serializable {
 
         @Override
@@ -1984,4 +1905,985 @@ public class KyufuJissekiShokaiHandler {
             return o2.getKey().compareTo(o1.getKey());
         }
     }
+
+    /**
+     * 集計データを取得する。
+     *
+     * @param サービス提供年月_開始 サービス提供年月_開始
+     * @param サービス提供年月_終了 サービス提供年月_終了
+     * @param is経過措置 is経過措置
+     * @param 給付実績情報照会情報 給付実績情報照会情報
+     * @param 被保険者番号 被保険者番号
+     */
+    public void edit集計データ(FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了,
+            boolean is経過措置, KyufuJissekiPrmBusiness 給付実績情報照会情報, HihokenshaNo 被保険者番号) {
+        List<KyufuJissekiShukeiKekkaDataBusiness> 集計データ
+                = KyufuJissekiShokaiFinder.createInstance().get集計データ(is経過措置, サービス提供年月_開始, サービス提供年月_終了, 被保険者番号);
+        List<KyufuJissekiShukeiKekka> 集計結果List;
+        if (is経過措置) {
+            集計結果List = null;
+        } else {
+            集計結果List = edit集計結果(集計データ, サービス提供年月_開始, サービス提供年月_終了);
+        }
+        給付実績情報照会情報.getSearchData().set給付実績集計結果明細データ(集計結果List);
+    }
+
+    private List<KyufuJissekiShukeiKekka> edit集計結果(List<KyufuJissekiShukeiKekkaDataBusiness> 集計データ,
+            FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了) {
+        List<KyufuJissekiShukeiKekka> 集計結果List = new ArrayList<>();
+        FlexibleYearMonth 処理対象年月 = new FlexibleYearMonth(サービス提供年月_終了.toDateString());
+        int index = 0;
+        while (処理対象年月.isBeforeOrEquals(サービス提供年月_終了) && サービス提供年月_開始.isBeforeOrEquals(処理対象年月)) {
+            List<KyufuJissekiShukeiKekka> 処理対象年月集計結果List = 初期化処理対象年月集計結果List(処理対象年月);
+            while (集計データ.size() > index && 処理対象年月.equals(集計データ.get(index).getServiceTeikyoYM())) {
+                KyufuJissekiShukeiKekkaDataBusiness 処理対象集計データ = 集計データ.get(index);
+                for (int i = 0; i < INT_47; i++) {
+                    if (isServiceShuruiCodeNullOrEmpty(処理対象集計データ.getServiceSyuruiCode())) {
+                        break;
+                    }
+                    if (chk単位数加算対象(i, serviceSyuruiCodeToServiceCategoryShurui(処理対象集計データ.getServiceSyuruiCode()))) {
+                        処理対象年月集計結果List.get(i).setKensu(
+                                処理対象年月集計結果List.get(i).getKensu().add(Decimal.ONE));
+                        処理対象年月集計結果List.get(i).setKingaku(
+                                処理対象年月集計結果List.get(i).getKingaku().add(nullToZero(処理対象集計データ.getTanisu())));
+                    }
+                    if (chk出来高単位数加算対象(i, serviceSyuruiCodeToServiceCategoryShurui(処理対象集計データ.getServiceSyuruiCode()))) {
+                        処理対象年月集計結果List.get(i).setKensu(
+                                処理対象年月集計結果List.get(i).getKensu().add(Decimal.ONE));
+                        処理対象年月集計結果List.get(i).setKingaku(
+                                処理対象年月集計結果List.get(i).getKingaku().add(nullToZero(処理対象集計データ.getDekidakaTanisu())));
+                    }
+                }
+                RString パターン番号;
+                if (isServiceShuruiCodeNullOrEmpty(処理対象集計データ.getServiceSyuruiCode())) {
+                    パターン番号 = GOKEI_PATTERN5;
+                } else {
+                    パターン番号 = get合計パターン番号(serviceSyuruiCodeToServiceCategoryShurui(処理対象集計データ.getServiceSyuruiCode()));
+                }
+                edit合計一覧用集計結果(パターン番号, 処理対象年月集計結果List, 処理対象集計データ);
+                index++;
+            }
+            集計結果List.addAll(処理対象年月集計結果List);
+            処理対象年月 = new FlexibleYearMonth(処理対象年月.minusMonth(1).toDateString());
+        }
+        return 集計結果List;
+    }
+
+    private void edit合計一覧用集計結果(RString パターン番号,
+            List<KyufuJissekiShukeiKekka> 処理対象年月集計結果List,
+            KyufuJissekiShukeiKekkaDataBusiness 処理対象集計データ) {
+        if (GOKEI_PATTERN1_1.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_47), 処理対象集計データ.getTanisu());
+            金額単位数加算(処理対象年月集計結果List.get(INT_51), 処理対象集計データ.getSeikyugaku());
+            金額単位数加算(処理対象年月集計結果List.get(INT_53), 処理対象集計データ.getRiyoshaFutangaku());
+        } else if (GOKEI_PATTERN1_2.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_47),
+                    nullToZero(処理対象集計データ.getTanisu()).add(nullToZero(処理対象集計データ.getDekidakaTanisu())));
+            金額単位数加算(処理対象年月集計結果List.get(INT_51), 処理対象集計データ.getSeikyugaku());
+            金額単位数加算(処理対象年月集計結果List.get(INT_53), 処理対象集計データ.getRiyoshaFutangaku());
+        } else if (GOKEI_PATTERN2_1.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_YJYUH), 処理対象集計データ.getTanisu());
+            金額単位数加算(処理対象年月集計結果List.get(INT_51), 処理対象集計データ.getSeikyugaku());
+            金額単位数加算(処理対象年月集計結果List.get(INT_53), 処理対象集計データ.getRiyoshaFutangaku());
+        } else if (GOKEI_PATTERN2_2.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_YJYUH),
+                    nullToZero(処理対象集計データ.getTanisu()).add(nullToZero(処理対象集計データ.getDekidakaTanisu())));
+            金額単位数加算(処理対象年月集計結果List.get(INT_51), 処理対象集計データ.getSeikyugaku());
+            金額単位数加算(処理対象年月集計結果List.get(INT_53), 処理対象集計データ.getRiyoshaFutangaku());
+        } else if (GOKEI_PATTERN3.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_49),
+                    nullToZero(処理対象集計データ.getTanisu()).add(nullToZero(処理対象集計データ.getDekidakaTanisu())));
+            金額単位数加算(処理対象年月集計結果List.get(INT_51), 処理対象集計データ.getSeikyugaku());
+            金額単位数加算(処理対象年月集計結果List.get(INT_53), 処理対象集計データ.getRiyoshaFutangaku());
+        } else if (GOKEI_PATTERN4.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_50),
+                    nullToZero(処理対象集計データ.getTanisu()).add(nullToZero(処理対象集計データ.getDekidakaTanisu())));
+            金額単位数加算(処理対象年月集計結果List.get(INT_52), 処理対象集計データ.getSeikyugaku());
+            金額単位数加算(処理対象年月集計結果List.get(INT_54), 処理対象集計データ.getRiyoshaFutangaku());
+        } else if (GOKEI_PATTERN5.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_55), 処理対象集計データ.getSeikyugaku());
+        } else if (GOKEI_PATTERN6_1.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_56), 処理対象集計データ.getSeikyugaku());
+        } else if (GOKEI_PATTERN6_2.equals(パターン番号)) {
+            金額単位数加算(処理対象年月集計結果List.get(INT_57), 処理対象集計データ.getSeikyugaku());
+        }
+    }
+
+    private void 金額単位数加算(KyufuJissekiShukeiKekka 集計結果, Decimal 金額) {
+        集計結果.setKensu(集計結果.getKensu().add(Decimal.ONE));
+        集計結果.setKingaku(集計結果.getKingaku().add(nullToZero(金額)));
+    }
+
+    private Decimal nullToZero(Decimal value) {
+        if (null == value) {
+            return Decimal.ZERO;
+        }
+        return value;
+    }
+
+    private boolean isServiceShuruiCodeNullOrEmpty(ServiceShuruiCode code) {
+        return null == code || code.isEmpty();
+    }
+
+    private ServiceCategoryShurui serviceSyuruiCodeToServiceCategoryShurui(ServiceShuruiCode code) {
+        return ServiceCategoryShurui.toValue(code.getColumnValue());
+    }
+
+    private List<KyufuJissekiShukeiKekka> 初期化処理対象年月集計結果List(FlexibleYearMonth 処理対象年月) {
+        List<KyufuJissekiShukeiKekka> 処理対象年月集計結果List = new ArrayList<>();
+        for (int index = 0; index < INT_58; index++) {
+            処理対象年月集計結果List.add(初期化集計結果(処理対象年月));
+        }
+        return 処理対象年月集計結果List;
+    }
+
+    private KyufuJissekiShukeiKekka 初期化集計結果(FlexibleYearMonth 処理対象年月) {
+        KyufuJissekiShukeiKekka 集計結果 = new KyufuJissekiShukeiKekka();
+        集計結果.setServiceTeikyoYM(処理対象年月);
+        集計結果.setKensu(Decimal.ZERO);
+        集計結果.setKingaku(Decimal.ZERO);
+        return 集計結果;
+    }
+
+    private boolean chk単位数加算対象(int i, ServiceCategoryShurui サービス種類) {
+        switch (i) {
+            case 0:
+                switch (サービス種類) {
+                    case 訪問介護:
+                    case 予訪介護:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 1:
+                switch (サービス種類) {
+                    case 訪問入浴:
+                    case 予訪入浴:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 2:
+                switch (サービス種類) {
+                    case 訪問看護:
+                    case 予訪看護:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 3:
+                switch (サービス種類) {
+                    case 訪問リハ:
+                    case 予訪リハ:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 4:
+                switch (サービス種類) {
+                    case 通所介護:
+                    case 予通介護:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 5:
+                switch (サービス種類) {
+                    case 通所リハ:
+                    case 予通リハ:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 6:
+                switch (サービス種類) {
+                    case 用具貸与:
+                    case 予用貸与:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 7:
+                switch (サービス種類) {
+                    case 短期生活:
+                    case 予短介護:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 8:
+                switch (サービス種類) {
+                    case 短期老健:
+                    case 予短老健:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 9:
+                switch (サービス種類) {
+                    case 短期医療:
+                    case 予短医療:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 11:
+                switch (サービス種類) {
+                    case 療養指導:
+                    case 予療養指:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 12:
+                switch (サービス種類) {
+                    case 特施短外:
+                    case 予特施設:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 13:
+                switch (サービス種類) {
+                    case 特施短期:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 14:
+                switch (サービス種類) {
+                    case 地共同介:
+                    case 地予共同:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 15:
+                switch (サービス種類) {
+                    case 地施短外:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 16:
+                switch (サービス種類) {
+                    case 地施短期:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 17:
+                switch (サービス種類) {
+                    case 地共同短:
+                    case 地予共短:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 18:
+                switch (サービス種類) {
+                    case 地夜間訪:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 19:
+                switch (サービス種類) {
+                    case 地通所介:
+                    case 地予通所:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 20:
+                switch (サービス種類) {
+                    case 地小短外:
+                    case 地予小外:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 21:
+                switch (サービス種類) {
+                    case 地小規単:
+                    case 地予小短:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 22:
+                switch (サービス種類) {
+                    case 定期随時:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 23:
+                switch (サービス種類) {
+                    case 看小短外:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 24:
+                switch (サービス種類) {
+                    case 看小規短:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 25:
+                switch (サービス種類) {
+                    case 地域通所:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 26:
+                switch (サービス種類) {
+                    case 居宅支援:
+                    case 予防支援:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 27:
+                switch (サービス種類) {
+                    case 福祉施設:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 28:
+                switch (サービス種類) {
+                    case 老健施設:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 29:
+                switch (サービス種類) {
+                    case 医療施設:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 30:
+                switch (サービス種類) {
+                    case 地福祉生:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 32:
+                switch (サービス種類) {
+                    case 訪問みな:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 33:
+                switch (サービス種類) {
+                    case 訪問独自:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 34:
+                switch (サービス種類) {
+                    case 訪問定率:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 35:
+                switch (サービス種類) {
+                    case 訪問定額:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 36:
+                switch (サービス種類) {
+                    case 通所みな:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 37:
+                switch (サービス種類) {
+                    case 通所独自:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 38:
+                switch (サービス種類) {
+                    case 通所定率:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 39:
+                switch (サービス種類) {
+                    case 通所定額:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 40:
+                switch (サービス種類) {
+                    case 予防ケア:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 41:
+                switch (サービス種類) {
+                    case 配食定率:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 42:
+                switch (サービス種類) {
+                    case 配食定額:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 43:
+                switch (サービス種類) {
+                    case 見守定率:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 44:
+                switch (サービス種類) {
+                    case 見守定額:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 45:
+                switch (サービス種類) {
+                    case その他率:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 46:
+                switch (サービス種類) {
+                    case その他額:
+                        return true;
+                    default:
+                        return false;
+                }
+            default:
+                return false;
+        }
+    }
+
+    private boolean chk出来高単位数加算対象(int i, ServiceCategoryShurui サービス種類) {
+        switch (i) {
+            case 10:
+                switch (サービス種類) {
+                    case 短期老健:
+                    case 予短老健:
+                    case 短期医療:
+                    case 予短医療:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 31:
+                switch (サービス種類) {
+                    case 老健施設:
+                    case 医療施設:
+                        return true;
+                    default:
+                        return false;
+                }
+            default:
+                return false;
+        }
+    }
+
+    private RString get合計パターン番号(ServiceCategoryShurui サービス種類) {
+        switch (サービス種類) {
+            case 訪問介護:
+            case 予訪介護:
+            case 訪問入浴:
+            case 予訪入浴:
+            case 訪問看護:
+            case 予訪看護:
+            case 訪問リハ:
+            case 予訪リハ:
+            case 通所介護:
+            case 予通介護:
+            case 通所リハ:
+            case 予通リハ:
+            case 用具貸与:
+            case 予用貸与:
+            case 短期生活:
+            case 予短介護:
+            case 療養指導:
+            case 予療養指:
+            case 特施短外:
+            case 予特施設:
+            case 特施短期:
+                return GOKEI_PATTERN1_1;
+            case 短期老健:
+            case 予短老健:
+            case 短期医療:
+            case 予短医療:
+                return GOKEI_PATTERN1_2;
+            case 福祉施設:
+                return GOKEI_PATTERN2_1;
+            case 老健施設:
+            case 医療施設:
+                return GOKEI_PATTERN2_2;
+            case 地共同介:
+            case 地予共同:
+            case 地施短外:
+            case 地施短期:
+            case 地共同短:
+            case 地予共短:
+            case 地夜間訪:
+            case 地通所介:
+            case 地予通所:
+            case 地小短外:
+            case 地予小外:
+            case 地小規単:
+            case 地予小短:
+            case 定期随時:
+            case 看小短外:
+            case 看小規短:
+            case 地域通所:
+            case 地福祉生:
+                return GOKEI_PATTERN3;
+            case 訪問みな:
+            case 訪問独自:
+            case 訪問定率:
+            case 訪問定額:
+            case 通所みな:
+            case 通所独自:
+            case 通所定率:
+            case 通所定額:
+            case 予防ケア:
+            case 配食定率:
+            case 配食定額:
+            case 見守定率:
+            case 見守定額:
+            case その他率:
+            case その他額:
+                return GOKEI_PATTERN4;
+            case 用具販売:
+            case 予用販売:
+                return GOKEI_PATTERN6_1;
+            case 住宅改修:
+            case 予住改修:
+                return GOKEI_PATTERN6_2;
+            default:
+                return GOKEI_PATTERN_NOTHING;
+        }
+    }
+
+    private boolean chk単位数加算対象_経過措置(int i, ServiceCategoryShurui サービス種類) {
+        switch (i) {
+            case 0:
+                switch (サービス種類) {
+                    case 総訪予防:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 1:
+                switch (サービス種類) {
+                    case 総訪入浴:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 2:
+                switch (サービス種類) {
+                    case 総訪看護:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 3:
+                switch (サービス種類) {
+                    case 総訪リハ:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 4:
+                switch (サービス種類) {
+                    case 総通予防:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 5:
+                switch (サービス種類) {
+                    case 総通リハ:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 6:
+                switch (サービス種類) {
+                    case 総用貸与:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 7:
+                switch (サービス種類) {
+                    case 総短介護:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 8:
+                switch (サービス種類) {
+                    case 総短老健:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 9:
+                switch (サービス種類) {
+                    case 総短医療:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 11:
+                switch (サービス種類) {
+                    case 総療養指:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 12:
+                switch (サービス種類) {
+                    case 総特施設:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 13:
+                switch (サービス種類) {
+                    case 地総通所:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 14:
+                switch (サービス種類) {
+                    case 地総共短:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 15:
+                switch (サービス種類) {
+                    case 地総共同:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 16:
+                switch (サービス種類) {
+                    case 地総小規:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 17:
+                switch (サービス種類) {
+                    case ケアマネ:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 18:
+                switch (サービス種類) {
+                    case 生活配食:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 19:
+                switch (サービス種類) {
+                    case 生活見守:
+                        return true;
+                    default:
+                        return false;
+                }
+            case 20:
+                switch (サービス種類) {
+                    case 生活他:
+                        return true;
+                    default:
+                        return false;
+                }
+            default:
+                return false;
+        }
+    }
+
+    private boolean chk出来高単位数加算対象_経過措置(int i, ServiceCategoryShurui サービス種類) {
+        switch (i) {
+            case 10:
+                switch (サービス種類) {
+                    case 総短老健:
+                    case 総短医療:
+                        return true;
+                    default:
+                        return false;
+                }
+            default:
+                return false;
+        }
+    }
+
+    private RString get合計パターン番号_経過措置(ServiceCategoryShurui サービス種類) {
+        switch (サービス種類) {
+            case 総訪予防:
+            case 総訪入浴:
+            case 総訪看護:
+            case 総訪リハ:
+            case 総通予防:
+            case 総通リハ:
+            case 総用貸与:
+            case 総短介護:
+            case 総療養指:
+            case 総特施設:
+                return GOKEI_PATTERN1_1;
+            case 総短老健:
+            case 総短医療:
+                return GOKEI_PATTERN1_2;
+            case 地総通所:
+            case 地総共短:
+            case 地総共同:
+            case 地総小規:
+            case ケアマネ:
+                return GOKEI_PATTERN3;
+            case 生活配食:
+            case 生活見守:
+            case 生活他:
+                return GOKEI_PATTERN4;
+            default:
+                return GOKEI_PATTERN_NOTHING;
+        }
+    }
+
+    private void set一覧設定(KyufuJissekiSearchDataBusiness 一覧データ) {
+        int 列位値 = 1;
+        List<dgKyufuJissekiMeisaiList_Row> 種類明細一覧 = div.getDgKyufuJissekiMeisaiList().getDataSource();
+        //List<dgKyufuJissekiGokeiList_Row> 種類合計一覧 = div.getDgKyufuJissekiGokeiList().getDataSource();
+
+        //　画面にhiddenInputを追加して、表示データの開始・終了indexを管理する
+        int idxST = 0;
+        int idxED = 35;
+        if (一覧データ.get給付実績集計結果明細データ().size() < 36 * 58) {
+            idxED = 一覧データ.get給付実績集計結果明細データ().size() / 58;
+        }
+
+        for (int i = 0; i < 種類明細一覧.size(); i++) {
+            for (int j = idxST; j < idxED; j++) {
+                if (一覧データ.get給付実績集計結果明細データ().get((j) * INT_58 + i).getKensu().equals(Decimal.ZERO)) {
+                    set一覧対象金額データ(種類明細一覧.get(i), 列位値, RString.EMPTY, true);
+                } else {
+                    set一覧対象金額データ(種類明細一覧.get(i), 列位値,
+                            getデータフォマート(一覧データ.get給付実績集計結果明細データ().get((j) * INT_58 + i).getKingaku()), false);
+                }
+                列位値++;
+            }
+            列位値 = 1;
+        }
+
+//        列位値 = 1;
+//        for (int i = 0; i < 種類合計一覧.size(); i++) {
+//            for (int j = idxST; j < idxED; j++) {
+//                if (一覧データ.get給付実績集計結果合計データ().get(j).getKensu().equals(Decimal.ZERO)) {
+//                    set合計対象金額データ(種類合計一覧.get(i), 列位値, RString.EMPTY, false);
+//                } else {
+//                    set合計対象金額データ(種類合計一覧.get(i), 列位値, getデータフォマート(一覧データ.get給付実績集計結果合計データ().get(j).getKingaku()), true);
+//                }
+//                列位値++;
+//            }
+//        }
+    }
+
+    private void set一覧対象金額データ(dgKyufuJissekiMeisaiList_Row 明細一覧, int 列, RString 対象金額, boolean 表示制御) {
+        switch (列) {
+            case INT_ICHI:
+                明細一覧.getBtnYM1().setDisabled(表示制御);
+                明細一覧.setTxtYM1(対象金額);
+                break;
+            case INT_NI:
+                明細一覧.getBtnYM2().setDisabled(表示制御);
+                明細一覧.setTxtYM2(対象金額);
+                break;
+            case INT_SAN:
+                明細一覧.getBtnYM3().setDisabled(表示制御);
+                明細一覧.setTxtYM3(対象金額);
+                break;
+            case INT_YON:
+                明細一覧.getBtnYM4().setDisabled(表示制御);
+                明細一覧.setTxtYM4(対象金額);
+                break;
+            case INT_GO:
+                明細一覧.getBtnYM5().setDisabled(表示制御);
+                明細一覧.setTxtYM5(対象金額);
+                break;
+            case INT_ROKU:
+                明細一覧.getBtnYM6().setDisabled(表示制御);
+                明細一覧.setTxtYM6(対象金額);
+                break;
+            case INT_NANA:
+                明細一覧.getBtnYM7().setDisabled(表示制御);
+                明細一覧.setTxtYM7(対象金額);
+                break;
+            case INT_HACHI:
+                明細一覧.getBtnYM8().setDisabled(表示制御);
+                明細一覧.setTxtYM8(対象金額);
+                break;
+            case INT_KYU:
+                明細一覧.getBtnYM9().setDisabled(表示制御);
+                明細一覧.setTxtYM9(対象金額);
+                break;
+            case INT_JYU:
+                明細一覧.getBtnYM10().setDisabled(表示制御);
+                明細一覧.setTxtYM10(対象金額);
+                break;
+            case INT_JYUI:
+                明細一覧.getBtnYM11().setDisabled(表示制御);
+                明細一覧.setTxtYM11(対象金額);
+                break;
+            case INT_JYUN:
+                明細一覧.getBtnYM12().setDisabled(表示制御);
+                明細一覧.setTxtYM12(対象金額);
+                break;
+            default:
+                set一覧対象金額データ2(明細一覧, 列, 対象金額, 表示制御);
+        }
+    }
+
+    private void set一覧対象金額データ2(dgKyufuJissekiMeisaiList_Row 明細一覧, int 列, RString 対象金額, boolean 表示制御) {
+        switch (列) {
+            case INT_JYUS:
+                明細一覧.getBtnYM13().setDisabled(表示制御);
+                明細一覧.setTxtYM13(対象金額);
+                break;
+            case INT_JYUY:
+                明細一覧.getBtnYM14().setDisabled(表示制御);
+                明細一覧.setTxtYM14(対象金額);
+                break;
+            case INT_JYUG:
+                明細一覧.getBtnYM15().setDisabled(表示制御);
+                明細一覧.setTxtYM15(対象金額);
+                break;
+            case INT_JYUR:
+                明細一覧.getBtnYM16().setDisabled(表示制御);
+                明細一覧.setTxtYM16(対象金額);
+                break;
+            case INT_JYUNA:
+                明細一覧.getBtnYM17().setDisabled(表示制御);
+                明細一覧.setTxtYM17(対象金額);
+                break;
+            case INT_JYUH:
+                明細一覧.getBtnYM18().setDisabled(表示制御);
+                明細一覧.setTxtYM18(対象金額);
+                break;
+            case INT_JYUK:
+                明細一覧.getBtnYM19().setDisabled(表示制御);
+                明細一覧.setTxtYM19(対象金額);
+                break;
+            case INT_NJYU:
+                明細一覧.getBtnYM20().setDisabled(表示制御);
+                明細一覧.setTxtYM20(対象金額);
+                break;
+            case INT_NJYUI:
+                明細一覧.getBtnYM21().setDisabled(表示制御);
+                明細一覧.setTxtYM21(対象金額);
+                break;
+            case INT_NJYUN:
+                明細一覧.getBtnYM22().setDisabled(表示制御);
+                明細一覧.setTxtYM22(対象金額);
+                break;
+            case INT_NJYUS:
+                明細一覧.getBtnYM23().setDisabled(表示制御);
+                明細一覧.setTxtYM23(対象金額);
+                break;
+            case INT_NJYUY:
+                明細一覧.getBtnYM24().setDisabled(表示制御);
+                明細一覧.setTxtYM24(対象金額);
+                break;
+            default:
+                set一覧対象金額データ3(明細一覧, 列, 対象金額, 表示制御);
+        }
+    }
+
+    private void set一覧対象金額データ3(dgKyufuJissekiMeisaiList_Row 明細一覧, int 列, RString 対象金額, boolean 表示制御) {
+        switch (列) {
+            case INT_NJYUG:
+                明細一覧.getBtnYM25().setDisabled(表示制御);
+                明細一覧.setTxtYM25(対象金額);
+                break;
+            case INT_NJYUR:
+                明細一覧.getBtnYM26().setDisabled(表示制御);
+                明細一覧.setTxtYM26(対象金額);
+                break;
+            case INT_NJYUNA:
+                明細一覧.getBtnYM27().setDisabled(表示制御);
+                明細一覧.setTxtYM27(対象金額);
+                break;
+            case INT_NJYUH:
+                明細一覧.getBtnYM28().setDisabled(表示制御);
+                明細一覧.setTxtYM28(対象金額);
+                break;
+            case INT_NJYUK:
+                明細一覧.getBtnYM29().setDisabled(表示制御);
+                明細一覧.setTxtYM29(対象金額);
+                break;
+            case INT_SJYU:
+                明細一覧.getBtnYM30().setDisabled(表示制御);
+                明細一覧.setTxtYM30(対象金額);
+                break;
+            case INT_SJYUI:
+                明細一覧.getBtnYM31().setDisabled(表示制御);
+                明細一覧.setTxtYM31(対象金額);
+                break;
+            case INT_SJYUN:
+                明細一覧.getBtnYM32().setDisabled(表示制御);
+                明細一覧.setTxtYM32(対象金額);
+                break;
+            case INT_SJYUS:
+                明細一覧.getBtnYM33().setDisabled(表示制御);
+                明細一覧.setTxtYM33(対象金額);
+                break;
+            case INT_SJYUY:
+                明細一覧.getBtnYM34().setDisabled(表示制御);
+                明細一覧.setTxtYM34(対象金額);
+                break;
+            case INT_SJYUG:
+                明細一覧.getBtnYM35().setDisabled(表示制御);
+                明細一覧.setTxtYM35(対象金額);
+                break;
+            case INT_SJYUR:
+                明細一覧.getBtnYM36().setDisabled(表示制御);
+                明細一覧.setTxtYM36(対象金額);
+                break;
+            default:
+                break;
+        }
+    }
+
 }

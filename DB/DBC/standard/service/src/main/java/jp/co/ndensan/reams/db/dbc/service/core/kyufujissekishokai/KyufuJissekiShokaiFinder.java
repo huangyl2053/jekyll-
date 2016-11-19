@@ -30,9 +30,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiH
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonKyotakuServiceBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiSearchDataBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShakaiFukushiHojinKeigengakuBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShukeiKekkaDataBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiFukushiYoguHanbaihiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiJutakuKaishuhiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKyotakuServiceBusiness;
@@ -51,9 +53,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntit
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiCareManagementHiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiJyohoRelateEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiKihonKyotakuServiceRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiKihonShukeiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiShakaiFukushiHojinKeigengakuRelateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiShukeiKekkaData;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiFukushiYoguHanbaihiBusinessRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiJutakuKaishuhiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiKyotakuServiceRelateEntity;
@@ -320,7 +322,7 @@ public class KyufuJissekiShokaiFinder {
         List<KyufuJissekiKihonShukeiBusiness> 給付実績基本集計表示対象データ = new ArrayList<>();
         List<KyufuJissekiKihonKyotakuServiceBusiness> 給付実績基本居宅サービス計画費表示対象データ = new ArrayList<>();
         List<KyufujissekiKogakuKaigoServicehi> 給付実績基本高額介護サービス費表示対象データ = new ArrayList<>();
-        List<KyufujissekiKihon> 給付実績基本データリスト = new ArrayList<>();
+        List<KyufuJissekiKihonShukeiRelate> 給付実績基本データリスト = new ArrayList<>();
         List<KyufujissekiShukei> 給付実績集計データリスト;
         List<KyufujissekiMeisaiBusiness> 給付実績明細データリスト;
         List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データリスト;
@@ -340,9 +342,9 @@ public class KyufuJissekiShokaiFinder {
         List<KyufuJissekiKihonShukeiRelateEntity> kihonShukeiList = mapper.get給付実績基本集計データ(KyufuJissekiKensakuDataMapperParameter.
                 createParameter_給付実績検索データ(NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
                         サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象));
-        List<KyufuJissekiKihonKyotakuServiceRelateEntity> kihonKyotakuServiceList = mapper.get給付実績基本居宅サービス計画費データ(
-                KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(NyuryokuShikibetsuNo.EMPTY, 被保険者番号,
-                        サービス提供年月_開始, サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象));
+//        List<KyufuJissekiKihonKyotakuServiceRelateEntity> kihonKyotakuServiceList = mapper.get給付実績基本居宅サービス計画費データ(
+//                KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(NyuryokuShikibetsuNo.EMPTY, 被保険者番号,
+//                        サービス提供年月_開始, サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象));
         List<DbT3028KyufujissekiKogakuKaigoServicehiEntity> kihonKogakuKaigoServicehiList = mapper.get給付実績基本高額介護サービス費データ(
                 KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(NyuryokuShikibetsuNo.EMPTY, 被保険者番号,
                         サービス提供年月_開始, サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象));
@@ -351,21 +353,21 @@ public class KyufuJissekiShokaiFinder {
 //            if (集計データ != null && check表示対象データ(集計データ.getShokisaiHokenshaNo())) {
             KyufuJissekiKihonShukeiBusiness 給付実績基本集計データ = new KyufuJissekiKihonShukeiBusiness();
             給付実績基本集計データ.set給付実績基本データ(new KyufujissekiKihon(entity.get給付実績基本データ()));
-            給付実績基本集計データ.set給付実績集計データ(new KyufujissekiShukei(entity.get給付実績集計データ()));
+            //給付実績基本集計データ.set給付実績集計データ(new KyufujissekiShukei(entity.get給付実績集計データ()));
             給付実績基本集計表示対象データ.add(給付実績基本集計データ);
-            給付実績基本データリスト.add(new KyufujissekiKihon(entity.get給付実績基本データ()));
+            給付実績基本データリスト.add(new KyufuJissekiKihonShukeiRelate(entity));
 //            }
         }
-        for (KyufuJissekiKihonKyotakuServiceRelateEntity entity : kihonKyotakuServiceList) {
-            if (check表示対象データ(entity.get給付実績基本居宅サービス計画費データ().getShokisaiHokenshaNo())) {
-                KyufuJissekiKihonKyotakuServiceBusiness 給付実績基本居宅サービス計画費データ = new KyufuJissekiKihonKyotakuServiceBusiness();
-                給付実績基本居宅サービス計画費データ.set給付実績基本居宅サービス計画費データ(
-                        new KyufujissekiKyotakuService(entity.get給付実績基本居宅サービス計画費データ()));
-                給付実績基本居宅サービス計画費データ.set給付実績基本データ(new KyufujissekiKihon(entity.get給付実績基本データ()));
-                給付実績基本居宅サービス計画費表示対象データ.add(給付実績基本居宅サービス計画費データ);
-                給付実績基本データリスト.add(new KyufujissekiKihon(entity.get給付実績基本データ()));
-            }
-        }
+//        for (KyufuJissekiKihonKyotakuServiceRelateEntity entity : kihonKyotakuServiceList) {
+//            if (check表示対象データ(entity.get給付実績基本居宅サービス計画費データ().getShokisaiHokenshaNo())) {
+//                KyufuJissekiKihonKyotakuServiceBusiness 給付実績基本居宅サービス計画費データ = new KyufuJissekiKihonKyotakuServiceBusiness();
+//                給付実績基本居宅サービス計画費データ.set給付実績基本居宅サービス計画費データ(
+//                        new KyufujissekiKyotakuService(entity.get給付実績基本居宅サービス計画費データ()));
+//                給付実績基本居宅サービス計画費データ.set給付実績基本データ(new KyufujissekiKihon(entity.get給付実績基本データ()));
+//                給付実績基本居宅サービス計画費表示対象データ.add(給付実績基本居宅サービス計画費データ);
+//                給付実績基本データリスト.add(new KyufujissekiKihon(entity.get給付実績基本データ()));
+//            }
+//        }
         for (DbT3028KyufujissekiKogakuKaigoServicehiEntity entity : kihonKogakuKaigoServicehiList) {
             if (check表示対象データ(entity.getShokisaiHokenshaNo())) {
                 給付実績基本高額介護サービス費表示対象データ.add(new KyufujissekiKogakuKaigoServicehi(entity));
@@ -444,6 +446,7 @@ public class KyufuJissekiShokaiFinder {
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績集計データ
      */
     public List<KyufujissekiShukei> get給付実績集計データ(NyuryokuShikibetsuNo 入力識別番号, HihokenshaNo 被保険者番号,
@@ -476,6 +479,7 @@ public class KyufuJissekiShokaiFinder {
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績明細データ
      */
     public List<KyufujissekiMeisaiBusiness> get給付実績明細データ(NyuryokuShikibetsuNo 入力識別番号, HihokenshaNo 被保険者番号,
@@ -514,6 +518,7 @@ public class KyufuJissekiShokaiFinder {
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績緊急時施設療養データ
      */
     public List<KyufujissekiKinkyuShisetsuRyoyo> get給付実績緊急時施設療養データ(NyuryokuShikibetsuNo 入力識別番号,
@@ -546,6 +551,7 @@ public class KyufuJissekiShokaiFinder {
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績所定疾患施設療養費等データ
      */
     public List<KyufujissekiShoteiShikkanShisetsuRyoyo> ge給付実績所定疾患施設療養費等データ(NyuryokuShikibetsuNo 入力識別番号,
@@ -578,6 +584,7 @@ public class KyufuJissekiShokaiFinder {
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績特定診療費データ
      */
     public List<KyufujissekiTokuteiSinryohi> get給付実績特定診療費データ(NyuryokuShikibetsuNo 入力識別番号, HihokenshaNo 被保険者番号,
@@ -610,6 +617,7 @@ public class KyufuJissekiShokaiFinder {
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績特定診療費_特別療養費データ
      */
     public List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> get給付実績特定診療費_特別療養費データ(NyuryokuShikibetsuNo 入力識別番号,
@@ -642,6 +650,7 @@ public class KyufuJissekiShokaiFinder {
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績食事費用データ
      */
     public List<KyufujissekiShokujiHiyo> get給付実績食事費用データ(NyuryokuShikibetsuNo 入力識別番号, HihokenshaNo 被保険者番号,
@@ -674,6 +683,7 @@ public class KyufuJissekiShokaiFinder {
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績居宅サービス計画費データ
      */
     public List<KyufujissekiKyotakuServiceBusiness> get給付実績居宅サービス計画費データ(NyuryokuShikibetsuNo 入力識別番号,
@@ -715,6 +725,7 @@ public class KyufuJissekiShokaiFinder {
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績福祉用具販売費データ
      */
     public List<KyufujissekiFukushiYoguHanbaihiBusiness> get給付実績福祉用具販売費データ(NyuryokuShikibetsuNo 入力識別番号,
@@ -756,6 +767,7 @@ public class KyufuJissekiShokaiFinder {
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績住宅改修費データ
      */
     public List<KyufujissekiJutakuKaishuhiBusiness> get給付実績住宅改修費データ(NyuryokuShikibetsuNo 入力識別番号,
@@ -791,6 +803,7 @@ public class KyufuJissekiShokaiFinder {
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月_開始 サービス提供年月_開始
      * @param サービス提供年月_終了 サービス提供年月_終了
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績高額介護サービス費データ
      */
     public List<KyufujissekiKogakuKaigoServicehi> get給付実績高額介護サービス費データ(HihokenshaNo 被保険者番号,
@@ -821,6 +834,7 @@ public class KyufuJissekiShokaiFinder {
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績特定入所者介護サービス費用データ
      */
     public List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> get給付実績特定入所者介護サービス費用データ(
@@ -863,6 +877,7 @@ public class KyufuJissekiShokaiFinder {
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績社会福祉法人軽減額データ
      */
     public List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> get給付実績社会福祉法人軽減額データ(
@@ -904,6 +919,7 @@ public class KyufuJissekiShokaiFinder {
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績ケアマネジメント費データ
      */
     public List<KyufuJissekiCareManagementHiBusiness> get給付実績ケアマネジメント費データ(NyuryokuShikibetsuNo 入力識別番号,
@@ -946,6 +962,7 @@ public class KyufuJissekiShokaiFinder {
      * @param 事業所番号 事業所番号
      * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績明細住所地特例データ
      */
     public List<KyufujissekiMeisaiJushochiTokureiBusiness> get給付実績明細住所地特例データ(NyuryokuShikibetsuNo 入力識別番号,
@@ -1055,5 +1072,34 @@ public class KyufuJissekiShokaiFinder {
             ストアデータ.add(new KyufujissekiKogakuKaigoServicehi(entity));
         }
         return 給付実績基本高額介護サービス費表示対象データ;
+    }
+
+    /**
+     * 給付実績明細住所地特例データの取得処理です。
+     *
+     * @param is経過措置 is経過措置
+     * @param サービス提供年月_開始 サービス提供年月_開始
+     * @param サービス提供年月_終了 サービス提供年月_終了
+     * @param 被保険者番号 被保険者番号
+     * @return 給付実績集計データ
+     */
+    public List<KyufuJissekiShukeiKekkaDataBusiness> get集計データ(boolean is経過措置,
+            FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了, HihokenshaNo 被保険者番号) {
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
+        KyufuJissekiKensakuDataMapperParameter para
+                = KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
+                        NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
+                        サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, !is経過措置);
+        List<KyufuJissekiShukeiKekkaData> entityList;
+        List<KyufuJissekiShukeiKekkaDataBusiness> 集計データList = new ArrayList<>();
+        if (!is経過措置) {
+            entityList = mapper.get集計データ(para);
+        } else {
+            entityList = mapper.get集計データ_経過措置(para);
+        }
+        for (KyufuJissekiShukeiKekkaData entity : entityList) {
+            集計データList.add(new KyufuJissekiShukeiKekkaDataBusiness(entity));
+        }
+        return 集計データList;
     }
 }

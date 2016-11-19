@@ -38,6 +38,11 @@
         <result property="公費分本人負担額集計" column="dbWT6412_kohibunHonninFutangakuShukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="識別コード" column="dbWT0001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="被保険者番号" column="dbWT0001_orgHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="郵便番号" column="dbWT0001_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="町域コード" column="dbWT0001_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区コード" column="dbWT0001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名５０音カナ" column="dbWT0001_shimei50onKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="dbWT0001_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         
     </resultMap>
     
@@ -65,6 +70,11 @@
         DbWT6412."kohiFutanKingakuShukei" As dbWT6412_kohiFutanKingakuShukei,
         DbWT6412."kohibunHonninFutangakuShukei" As dbWT6412_kohibunHonninFutangakuShukei,
         DbWT0001."shikibetsuCode" As dbWT0001_shikibetsuCode,
-        DbWT0001."orgHihokenshaNo" AS dbWT0001_orgHihokenshaNo
+        DbWT0001."orgHihokenshaNo" AS dbWT0001_orgHihokenshaNo,
+        DbWT0001."yubinNo" AS dbWT0001_yubinNo,
+        DbWT0001."choikiCode" AS dbWT0001_choikiCode,
+        DbWT0001."gyoseikuCode" AS dbWT0001_gyoseikuCode,
+        DbWT0001."shimei50onKana" AS dbWT0001_shimei50onKana,
+        DbWT0001."shichosonCode" AS dbWT0001_shichosonCode
     </sql>
 </mapper>

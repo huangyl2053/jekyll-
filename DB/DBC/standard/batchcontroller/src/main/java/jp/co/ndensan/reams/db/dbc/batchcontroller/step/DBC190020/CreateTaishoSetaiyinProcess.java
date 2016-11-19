@@ -526,15 +526,15 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             csvEntity.set処理年度(doFlexibleYear編集(対象世帯員.getShoriNendo()));
             csvEntity.set世帯課税区分(対象世帯員.getSetaikazeiKubun());
             csvEntity.set総収入額(doDecimal編集(対象世帯員.getSoushuu()));
-            csvEntity.setメッセージ(対象世帯員.getMessage());
-            csvEntity.set出力有無(対象世帯員.getShuturyokuUmu());
+//            csvEntity.setメッセージ(対象世帯員.getMessage());
+//            csvEntity.set出力有無(対象世帯員.getShuturyokuUmu());
             csvEntity.set年少扶養控除_16歳未満人数(対象世帯員.getNennshouLess16Num());
             csvEntity.set年少扶養控除_16歳から18歳人数(対象世帯員.getNennshouLess16_18Num());
             csvEntity.setランク市町村コード(対象世帯員.getRannkuShichosonCode());
             csvEntity.set世帯員把握基準日(doFlexibleDate編集(対象世帯員.getShotaikijunDay()));
-            csvEntity.set世帯員把握基準日2(doFlexibleDate編集(対象世帯員.getShotaikijunDay2()));
-            csvEntity.set更新時履歴番号(対象世帯員.getKoushinnNo());
-            csvEntity.set印字文字欠け区分(対象世帯員.getInnjiGirisiamojiKubun());
+//            csvEntity.set世帯員把握基準日2(doFlexibleDate編集(対象世帯員.getShotaikijunDay2()));
+//            csvEntity.set更新時履歴番号(対象世帯員.getKoushinnNo());
+//            csvEntity.set印字文字欠け区分(対象世帯員.getInnjiGirisiamojiKubun());
 
             csvEntity.set被保険者番号(getColumnValue(対象世帯員.getHihokenshaNo()));
             csvEntity.set識別コード(getColumnValue(対象世帯員.getShikibetsuCode()));
@@ -545,7 +545,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             csvEntity.set課税所得_控除後(doDecimal編集(対象世帯員.getKazeiShotokuGakuAfter()));
             csvEntity.set年金収入(doDecimal編集(対象世帯員.getNenkinShunyuGaku()));
             csvEntity.setその他の合計所得(doDecimal編集(対象世帯員.getSonotanoGoukeiShotokuKingakuGoukei()));
-            csvEntity.set編集続柄コード(対象世帯員.getHennshuuZokugaraCode());
+//            csvEntity.set編集続柄コード(対象世帯員.getHennshuuZokugaraCode());
             csvEntity.set宛名データ種別_1231(対象世帯員.getAtenaDateDhubetsu_kijunDay());
             csvEntity.set宛名データ種別_基準日(対象世帯員.getAtenaDateDhubetsu_kijunDay());
             csvEntity.set氏名(対象世帯員.getHihokenshaName());
@@ -559,7 +559,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             csvEntity.set認定終了日(doFlexibleDate編集(対象世帯員.getNinteiYukoKikanShuryoYMD()));
             csvEntity.set適用開始日(doFlexibleDate編集(対象世帯員.getTekiyoKaishiYMD()));
             csvEntity.set適用終了日(doFlexibleDate編集(対象世帯員.getTekiyoShuryoYMD()));
-            csvEntity.set宛名_印字者区分(対象世帯員.getAtenaInnjiKubun());
+//            csvEntity.set宛名_印字者区分(対象世帯員.getAtenaInnjiKubun());
         } else {
             csvEntity.set氏名(MESSAGE_該当データなし);
         }

@@ -147,7 +147,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
      */
     public static HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo createInstance() {
         return InstanceProvider.create(HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo.class);
@@ -159,7 +160,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
      * @param entityList List<HonsanteiTsuchishoTempEntity>
      * @param 口座振替分出力様式 RString
      * @return List<HonsanteiTsuchishoTempResult> 賦課情報リスト
-     * @throws java.lang.reflect.InvocationTargetException 賦課の情報_更正前後が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException
+     * 賦課の情報_更正前後が取得できない場合、Exception
      */
     public List<HonsanteiTsuchishoTempResult> get賦課情報(
             List<HonsanteiTsuchishoTempEntity> entityList, RString 口座振替分出力様式) throws InvocationTargetException {
@@ -178,8 +180,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
                 IAtesaki 宛先代納 = AtesakiFactory.createInstance(entity.get宛先代納());
                 result.set宛先代納(宛先代納);
             }
-            if (entity.get口座() != null && entity.get口座().getUaT0310KozaEntity().getKozaId() != 0) {
-                result.set口座情報(new Koza(entity.get口座()));
+            if (entity.get特定口座() != null && entity.get特定口座().getUaT0310KozaEntity().getKozaId() != 0) {
+                result.set口座情報(new Koza(entity.get特定口座()));
             }
             result.set徴収方法情報_更正前(get徴収方法情報_更正前後(entity, false));
             result.set徴収方法情報_更正後(get徴収方法情報_更正前後(entity, true));

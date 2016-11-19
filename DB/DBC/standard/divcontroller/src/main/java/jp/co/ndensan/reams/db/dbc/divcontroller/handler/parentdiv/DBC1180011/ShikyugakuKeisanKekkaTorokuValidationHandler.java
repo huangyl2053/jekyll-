@@ -8,7 +8,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1180011;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011.ShikyugakuKeisanKekkaTorokuDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -114,5 +120,110 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
     private ValidationDictionary create内訳入力途中チェックDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(ShikyugakuKeisanKekkaTorokuMessage.内訳入力途中).build();
+    }
+
+    /**
+     * 入力チェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate入力チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getDdlHokenSeido().getRequired() && div.getDdlHokenSeido().getSelectedKey().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "保険制度"), div.getDdlHokenSeido()));
+        }
+        if (div.getTxtHokenshaMei().isRequired() && RString.isNullOrEmpty(div.getTxtHokenshaMei().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "保険者番号"), div.getTxtHokenshaMei()));
+        }
+        if (div.getTxtShoKisaiHokenshaNo().isRequired() && RString.isNullOrEmpty(div.getTxtShoKisaiHokenshaNo().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "保険者名"), div.getTxtShoKisaiHokenshaNo()));
+        }
+        if (div.getTxtTaishoshaShimei().isRequired() && RString.isNullOrEmpty(div.getTxtTaishoshaShimei().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "対象者氏名"), div.getTxtTaishoshaShimei()));
+        }
+        if (div.getTxtHiHokenshaShoNo().isRequired() && RString.isNullOrEmpty(div.getTxtHiHokenshaShoNo().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "被保険者(証)番号"), div.getTxtHiHokenshaShoNo()));
+        }
+        if (div.getTxtKokuhoHihokenshaShoKigo().isRequired() && RString.isNullOrEmpty(div.getTxtKokuhoHihokenshaShoKigo().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "被保険者記号"), div.getTxtKokuhoHihokenshaShoKigo()));
+        }
+
+        return validationMessages;
+    }
+
+    /**
+     * 支給額計算結果入力チェック。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate支給額計算結果入力チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getTxtTaishoKeisanKikan().isToRequired() && div.getTxtTaishoKeisanKikan().getToValue() == null) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "対象計算期間"), div.getTxtTaishoKeisanKikan()));
+        }
+        if (div.getTxtHonninShikyugaku().isRequired() && div.getTxtHonninShikyugaku().getValue() == null) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "按分後支給額"), div.getTxtHonninShikyugaku()));
+        }
+        if (div.getTxtTsuchiYMD().isRequired() && div.getTxtTsuchiYMD().getValue() == null) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "通知日"), div.getTxtTsuchiYMD()));
+        }
+        if (div.getTxtRenrakuhyoHakkoshaMei().isRequired() && RString.isNullOrEmpty(div.getTxtRenrakuhyoHakkoshaMei().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "氏名"), div.getTxtRenrakuhyoHakkoshaMei()));
+        }
+        if (div.getTxtRenrakuhyoHakkoshaYubinNo().isRequired()
+                && (div.getTxtRenrakuhyoHakkoshaYubinNo().getValue() == null || div.getTxtRenrakuhyoHakkoshaYubinNo().getValue().isEmpty())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "郵便番号"), div.getTxtRenrakuhyoHakkoshaYubinNo()));
+        }
+        if (div.getTxtRenrakuhyoHakkoshaJusho().isRequired() && RString.isNullOrEmpty(div.getTxtRenrakuhyoHakkoshaJusho().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "住所"), div.getTxtRenrakuhyoHakkoshaJusho()));
+        }
+        if (div.getTxtToiawasesakiMeisho1().isRequired() && RString.isNullOrEmpty(div.getTxtToiawasesakiMeisho1().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "名称１"), div.getTxtToiawasesakiMeisho1()));
+        }
+        if (div.getTxtToiawasesakiYobinNo().isRequired()
+                && (div.getTxtToiawasesakiYobinNo().getValue() == null || div.getTxtToiawasesakiYobinNo().getValue().isEmpty())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "郵便番号"), div.getTxtToiawasesakiYobinNo()));
+        }
+        if (div.getTxtToiawasesakiMeisho2().isRequired() && RString.isNullOrEmpty(div.getTxtToiawasesakiMeisho2().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "名称２"), div.getTxtToiawasesakiMeisho2()));
+        }
+        if (div.getTxtToiawasesakiTelNo().isRequired() && RString.isNullOrEmpty(div.getTxtToiawasesakiTelNo().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "電話番号"), div.getTxtToiawasesakiTelNo()));
+        }
+        if (div.getTxtToiawasesakiJusho().isRequired() && RString.isNullOrEmpty(div.getTxtToiawasesakiJusho().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "住所"), div.getTxtToiawasesakiJusho()));
+        }
+        return validationMessages;
+    }
+
+    private static final class RRVMessages implements IValidationMessage {
+
+        private final Message message;
+
+        private RRVMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }

@@ -36,10 +36,9 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
 
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
-    private static final int INT_2 = 2;
     private static final int INT_6 = 6;
-    private static final RString INDEX_112 = new RString("112");
-    private static final RString INDEX_120 = new RString("120");
+    private static final RString 候補者区分_転入者 = new RString("1");
+    private static final RString 候補者区分_住特者 = new RString("2");
     private static final RString 管内_1 = new RString("1");
     private static final RString 住特者_2 = new RString("2");
     private static final RString 導入形態コード_111 = new RString("111");
@@ -126,7 +125,9 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
         entity.setChoikiCode(t.getChoikiCode());
         entity.setGyoseikuCode(t.getGyoseikuCode());
         RString shichosonCode = t.getShichosonCode() == null ? RString.EMPTY : t.getShichosonCode().getColumnValue();
-        entity.setShichosonCode(shichosonCode);
+        if (shichosonCode.length() >= INT_6) {
+            entity.setShichosonCode(shichosonCode.substring(INT_0, INT_6));
+        }
         entity.setZenjushoCode(t.getZenjushoCode());
         entity.setYubinNo(t.getYubinNo());
         entity.setChikuCode1(t.getChikuCode1());
@@ -164,8 +165,8 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
             }
         } else if (導入形態コード.equals(導入形態コード_111)) {
             LasdecCode 市町村コード = LasdecCode.EMPTY;
-            if (所得照会票データ.getShichosonCode().length() >= INT_6) {
-                市町村コード = new LasdecCode(所得照会票データ.getShichosonCode().substring(INT_1, INT_6));
+            if (所得照会票データ.getShichosonCode() != null && 所得照会票データ.getShichosonCode().length() >= INT_6) {
+                市町村コード = new LasdecCode(所得照会票データ.getShichosonCode());
             }
             RString 市町村識別ID = manager.get市町村識別ID(市町村コード);
             KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho
@@ -190,12 +191,11 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
                 所得照会票データ.setHihokenshajusho(RString.EMPTY);
             }
         } else if (導入形態コード.equals(導入形態コード_111)) {
-            RString 市町村識別ID = RString.EMPTY;
-            if (所得照会票データ.getGenLasdecCode() != null
-                    && INT_2 <= 所得照会票データ.getGenLasdecCode().getColumnValue().length()) {
-                市町村識別ID = 所得照会票データ.getGenLasdecCode().getColumnValue().substring(INT_0, INT_2);
-
+            LasdecCode 市町村コード = LasdecCode.EMPTY;
+            if (所得照会票データ.getShichosonCode() != null && 所得照会票データ.getShichosonCode().length() >= INT_6) {
+                市町村コード = new LasdecCode(所得照会票データ.getShichosonCode());
             }
+            RString 市町村識別ID = manager.get市町村識別ID(市町村コード);
             RString 都道府県名_構成 = RString.EMPTY;
             RString 郡名_構成 = RString.EMPTY;
             KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID);

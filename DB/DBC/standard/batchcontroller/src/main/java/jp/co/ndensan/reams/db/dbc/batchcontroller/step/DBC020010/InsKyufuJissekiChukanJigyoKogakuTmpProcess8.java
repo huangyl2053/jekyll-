@@ -215,6 +215,10 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         Collections.sort(処理対象List, new Comparator<KyufuJissekiChukanKogakuJigyo8Entity>() {
             @Override
             public int compare(KyufuJissekiChukanKogakuJigyo8Entity arg0, KyufuJissekiChukanKogakuJigyo8Entity arg1) {
+                if (arg1.get基準収入額適用管理一時() == null
+                        || arg0.get基準収入額適用管理一時() == null) {
+                    return -1;
+                }
                 if (arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD().
                         compareTo(arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD()) == 0) {
                     return arg0.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue().
@@ -237,12 +241,11 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
                 給付実績中間事業高額一時List.add(entity);
             }
         }
-        if (給付実績中間事業高額一時List.isEmpty()) {
-            return;
+        if (!給付実績中間事業高額一時List.isEmpty()) {
+            insert給付実績中間事業高額一時8の新規1(給付実績中間事業高額一時List.get(0));
         }
-        insert給付実績中間事業高額一時8の新規1(給付実績中間事業高額一時List.get(0));
         clear合計();
-        get世帯合算処理(給付実績中間事業高額一時List);
+        get世帯合算処理();
     }
 
     private boolean is明細に存在する(HihokenshaNo 被保険者番号) {
@@ -254,13 +257,13 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         return false;
     }
 
-    private void get世帯合算処理(List<KyufuJissekiChukanKogakuJigyo8Entity> 給付実績中間事業高額一時List) {
+    private void get世帯合算処理() {
         List<KyufuJissekiChukanKogakuJigyo8Entity> 単独分List = new ArrayList<>();
         List<KyufuJissekiChukanKogakuJigyo8Entity> 世帯分List = new ArrayList<>();
-        if (給付実績中間事業高額一時List.size() == INT_1) {
-            単独分List.add(給付実績中間事業高額一時List.get(0));
+        if (給付実績中間事業高額一時明細List.size() == INT_1) {
+            単独分List.add(給付実績中間事業高額一時明細List.get(0));
         } else {
-            for (KyufuJissekiChukanKogakuJigyo8Entity entity : 給付実績中間事業高額一時List) {
+            for (KyufuJissekiChukanKogakuJigyo8Entity entity : 給付実績中間事業高額一時明細List) {
                 TempKyufujissekiTyukannJigyoEntity 給付実績中間 = entity.get給付実績基本情報事業高額一時();
                 if (ONE.equals(給付実績中間.getShotokuHantei_jushochiTokureiFlag())
                         && ONE.equals(給付実績中間.getShotokuHantei_shoboKubun())) {
@@ -591,18 +594,25 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
                 世帯算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_37200);
             }
         } else {
-            世帯算定基準額 = 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku();
+            世帯算定基準額 = 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku() == null
+                    ? Decimal.ZERO : 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku();
         }
         Decimal 世帯全体の支給予定額 = 利用者負担額合計.subtract(サービス費用額合計).subtract(世帯算定基準額);
         Decimal 総合事業分利用者負担額 = get総合事業分利用者負担額を算出(給付実績中間);
         Decimal 利用者負担額 = get利用者負担額を算出(給付実績中間);
-        Decimal 個人の支給予定額 = new Decimal(世帯全体の支給予定額.multiply(総合事業分利用者負担額).
-                divide(利用者負担額合計_総合事業分).intValue());
+        Decimal 個人の支給予定額 = Decimal.ZERO;
+        if (!Decimal.ZERO.equals(利用者負担額合計_総合事業分)) {
+            個人の支給予定額 = new Decimal(世帯全体の支給予定額.multiply(総合事業分利用者負担額).
+                    divide(利用者負担額合計_総合事業分).intValue());
+        }
         boolean is支給予定額が最大の世帯員 = true;
         for (KyufuJissekiChukanKogakuJigyo8Entity entity : 世帯分List) {
-            Decimal 支給予定額 = new Decimal(世帯全体の支給予定額.multiply(get利用者負担額を算出(
-                    entity.get給付実績基本情報事業高額一時())).
-                    divide(利用者負担額合計_総合事業分).intValue());
+            Decimal 支給予定額 = Decimal.ZERO;
+            if (!Decimal.ZERO.equals(利用者負担額合計_総合事業分)) {
+                支給予定額 = new Decimal(世帯全体の支給予定額.multiply(get利用者負担額を算出(
+                        entity.get給付実績基本情報事業高額一時())).
+                        divide(利用者負担額合計_総合事業分).intValue());
+            }
             if (Decimal.ZERO.compareTo(個人の支給予定額) < 0
                     && 個人の支給予定額.compareTo(世帯全体の支給予定額) < 0
                     && 個人の支給予定額.compareTo(支給予定額) < 0) {
@@ -613,7 +623,9 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         if (is支給予定額が最大の世帯員) {
             個人の支給予定額 = 個人の支給予定額.add(Decimal.ONE);
         }
-        if (給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku().equals(
+        Decimal kogakuServicehiJogengakuGengakugoJogengaku = 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku() == null
+                ? Decimal.ZERO : 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku();
+        if (kogakuServicehiJogengakuGengakugoJogengaku.equals(
                 get算定基準額コンフィグ(高額自己負担上限額_15000))) {
             出力Map.put(KEY_利用者負担第2段階, 利用者負担第2段階);
             出力Map.put(KEY_支給予定額, 個人の支給予定額);
@@ -629,13 +641,16 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
             Decimal 個人の支給予定額) {
         Map 出力Map = new HashMap<>();
         RString 利用者負担第2段階 = RString.EMPTY;
-        Decimal 高額ｻｰﾋﾞｽ費支給額 = 給付実績中間.getKogakuKaigoServicehi();
+        Decimal 高額ｻｰﾋﾞｽ費支給額 = 給付実績中間.getKogakuKaigoServicehi() == null
+                ? Decimal.ZERO : 給付実績中間.getKogakuKaigoServicehi();
         Decimal 実質的な利用者負担額 = 利用者負担額.subtract(高額ｻｰﾋﾞｽ費支給額).subtract(個人の支給予定額);
         Decimal decWKGokeiGK = 給付実績中間.getShotokuHantei_gokeiShotokuGaku().
                 add(給付実績中間.getShotokuHantei_nenkiniShunyuGaku());
+        Decimal kogakuServicehiJogengakuGengakugoJogengaku = 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku() == null
+                ? Decimal.ZERO : 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku();
         if (世帯算定基準額.equals(get算定基準額コンフィグ(高額自己負担上限額_24600))
                 && (TWO.equals(給付実績中間.getShotokuHantei_setaiKazeiKubun())
-                || 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku().equals(
+                || kogakuServicehiJogengakuGengakugoJogengaku.equals(
                         get算定基準額コンフィグ(高額自己負担上限額_24600)))
                 && ONE.equals(給付実績中間.getShotokuHantei_roreiFukushi())
                 && get算定基準額コンフィグ(高額自己負担上限額_15000).compareTo(実質的な利用者負担額) < 0) {
@@ -643,7 +658,7 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
             世帯算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_15000);
         } else if (世帯算定基準額.equals(get算定基準額コンフィグ(高額自己負担上限額_24600))
                 && (TWO.equals(給付実績中間.getShotokuHantei_setaiKazeiKubun())
-                || 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku().equals(
+                || kogakuServicehiJogengakuGengakugoJogengaku.equals(
                         get算定基準額コンフィグ(高額自己負担上限額_24600)))
                 && decWKGokeiGK.compareTo(金額_800000) <= 0
                 && get算定基準額コンフィグ(高額自己負担上限額_15000).compareTo(実質的な利用者負担額) < 0) {

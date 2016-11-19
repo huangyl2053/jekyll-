@@ -11,7 +11,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.servicenokanribangourendou.JigyouKetteiTutisyoResult;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicenokanribangourendou.JigyouKetteiTutisyoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicenokanribangourendou.JigyouKetteiTutisyoEntity;
@@ -90,7 +89,7 @@ public class ServiceNoKanribangouRendou {
     private static final RString 定値_2 = new RString("2");
     private static final RString 定値_3 = new RString("3");
     private static final RString 定値_4 = new RString("4");
-    private static final RString 全角のコンマ = new RString("，");
+    private static final RString 全角のコンマ = new RString("、");
     private static final RString 定値_する = new RString("する");
     private static final RString 定値_しない = new RString("しない");
     private static final RString 定値_支給金額 = new RString("支給金額");
@@ -209,27 +208,27 @@ public class ServiceNoKanribangouRendou {
 
         決定通知書Entity.set文書番号(文書番号);
         決定通知書Entity.set作成年月日(発行日 == null || 発行日.isEmpty() ? RString.EMPTY : 発行日.wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString());
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         決定通知書Entity.set被保険者氏名(氏名 == null ? RString.EMPTY
                 : (氏名.length() <= NUM_30 ? 氏名 : 氏名.substring(1, NUM_30)));
         決定通知書Entity.set対象年月(サービス提供年月 == null || サービス提供年月.isEmpty() ? RString.EMPTY
                 : サービス提供年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString());
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         set被保険者番号(決定通知書Entity, 被保険者番号);
         if (事業高額介護サービス費支給情報 != null) {
             if (定値_0.equals(様式) && 事業高額介護サービス費支給情報.get受付年月日() != null
                     && !事業高額介護サービス費支給情報.get受付年月日().isEmpty()) {
                 決定通知書Entity.set受付年月日(事業高額介護サービス費支給情報.get受付年月日().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString());
+                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             } else if (定値_1.equals(様式)) {
                 決定通知書Entity.set受付年月日(RString.EMPTY);
             }
             決定通知書Entity.set決定年月日(事業高額介護サービス費支給情報.get決定年月日().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             if (事業高額介護サービス費支給情報.get本人支払額() != null) {
                 決定通知書Entity.set本人支払額(toDecimal(事業高額介護サービス費支給情報.get本人支払額()));
             }
-            set給付の種類(決定通知書Entity, 事業高額介護サービス費支給情報.get審査方法区分(), param);
+            set給付の種類(決定通知書Entity, param);
             if (ShikyuKubun.支給.getコード().equals(事業高額介護サービス費支給情報.get支給区分コード())) {
                 決定通知書Entity.set支給(定値_する);
                 決定通知書Entity.set理由ﾀｲﾄﾙ(定値_増減の理由);
@@ -374,14 +373,7 @@ public class ServiceNoKanribangouRendou {
         }
     }
 
-    private void set給付の種類(JigyouKetteiTutisyoEntity 決定通知書Entity,
-            RString 審査方法区分, JigyouKetteiTutisyoParameter param) {
-        if (!ShinsaHohoKubun.審査依頼.getコード().equals(審査方法区分)) {
-            決定通知書Entity.set給付の種類１(RString.EMPTY);
-            決定通知書Entity.set給付の種類２(RString.EMPTY);
-            決定通知書Entity.set給付の種類３(RString.EMPTY);
-            return;
-        }
+    private void set給付の種類(JigyouKetteiTutisyoEntity 決定通知書Entity, JigyouKetteiTutisyoParameter param) {
         IServiceNoKanribangouRendouMapper mapper = mapperProvider.create(IServiceNoKanribangouRendouMapper.class);
         List<DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity> 対象者明細 = mapper.get対象者明細情報(param);
         if (対象者明細 == null || 対象者明細.isEmpty()) {
@@ -687,7 +679,7 @@ public class ServiceNoKanribangouRendou {
             return RString.EMPTY;
         }
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private void setﾀｲﾄﾙ_取消し線用(JigyouKetteiTutisyoEntity 決定通知書Entity,
@@ -737,6 +729,10 @@ public class ServiceNoKanribangouRendou {
     }
 
     private RString trimZero(RString str) {
-        return str.trimStart(ZERO);
+        str = str.trimStart(ZERO);
+        if (str.length() == NUM_1) {
+            str = RString.HALF_SPACE.concat(str);
+        }
+        return str;
     }
 }

@@ -78,6 +78,9 @@ public class KanendoFukaHandler {
     private static final RString 決定変更通知書 = new RString("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final RString 納入通知書 = new RString("DBB100045_HokenryoNonyuTsuchishoDaihyo");
 
+    private static final RString チェックあり_0 = new RString("0");
+    private static final RString チェックあり_1 = new RString("1");
+
     /**
      * 初期化
      *
@@ -117,6 +120,7 @@ public class KanendoFukaHandler {
             口座振替者.add(dataSource);
         }
         div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().setDataSource(口座振替者);
+        チェック_帳票作成個別情報();
         return 処理日付管理マスタ(shdaList);
     }
 
@@ -139,6 +143,29 @@ public class KanendoFukaHandler {
         }
     }
 
+    private void チェック_帳票作成個別情報() {
+        List<RString> key1s = new ArrayList<>();
+        key1s.add(チェックあり_1);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchi().setSelectedItemsByKey(key1s);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().setSelectedItemsByKey(key1s);
+        
+        List<RString> key2s = new ArrayList<>();
+        key2s.add(チェックあり_0);
+        key2s.add(チェックあり_1);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchiTaishoNendo().setSelectedItemsByKey(key2s);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishoFukaNendo().setSelectedItemsByKey(key2s);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishoFukaNedno().setSelectedItemsByKey(key2s);
+        
+        List<RString> 対象者keys = new ArrayList<>();
+        対象者keys.add(NotsuKozaShutsuryokuTaisho.口座振替者.getコード());
+        対象者keys.add(NotsuKozaShutsuryokuTaisho.現金納付者.getコード());
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishosha().setSelectedItemsByKey(対象者keys);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().setSelectedItemsByKey(対象者keys);
+        
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().setSelectedValue(
+                KozaFurikaeOutputType.口座用.get名称());
+    }
+
     /**
      * 抽出開始日時と終了日時
      *
@@ -150,10 +177,10 @@ public class KanendoFukaHandler {
         int 前月末の日 = RDate.getNowDate().minusMonth(1).getLastDay();
         RString 前月まで = RDate.getNowDate().getYearMonth().minusMonth(1).wareki().
                 toDateString().concat(コンマ).concat(String.valueOf(前月末の日)).concat(RString.HALF_SPACE).concat(
-                        RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+                RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         RString 当日を含む = RDate.getNowDate().wareki().
                 toDateString().concat(RString.HALF_SPACE).concat(
-                        RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+                RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         List<dgChushutsuKikan_Row> rowList = new ArrayList<>();
         dgChushutsuKikan_Row row = new dgChushutsuKikan_Row();
         if (shoriDate != null && shoriDate.get基準日時() != null) {
@@ -274,8 +301,8 @@ public class KanendoFukaHandler {
         for (Kitsuki 期月 : 期月リスト.toList()) {
             if (期月.get期().compareTo(最終法定納期.get期()) > 0
                     && 期月.get月().getコード().indexOf(new RString(Integer.valueOf(
-                                            div.getKanendoShoriNaiyo().getDdlShoritsuki().
-                                            getSelectedKey().toString()).toString())) != -1) {
+                            div.getKanendoShoriNaiyo().getDdlShoritsuki().
+                            getSelectedKey().toString()).toString())) != -1) {
                 return 期月;
             }
         }

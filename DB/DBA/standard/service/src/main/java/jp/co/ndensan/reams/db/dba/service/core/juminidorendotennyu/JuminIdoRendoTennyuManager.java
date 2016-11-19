@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.KouikiGappeiJyoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
@@ -62,8 +60,6 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.zenkokujusho.ZenkokuJushoFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -336,7 +332,7 @@ public class JuminIdoRendoTennyuManager {
             登録届出日 = 転入前Entity.get年齢到達日();
             年齢到達日 = 転入前Entity.get年齢到達日();
         }
-        if (直近被保データ.getShikakuSoshitsuJiyuCode().equals(ShikakuSoshitsuJiyu.死亡.getコード())) {
+        if (ShikakuSoshitsuJiyu.死亡.getコード().equals(直近被保データ.getShikakuSoshitsuJiyuCode())) {
             転入処理後Entity.setデータ不整合理由(JuminRendoFuseigo.転入_取得不能_死亡者.getコード());
             転入処理後Entity.set作成事由(TennyuSakuseiJiyu.死亡喪失.getコード());
             return 転入処理後Entity;
@@ -538,7 +534,6 @@ public class JuminIdoRendoTennyuManager {
             List<DbT1001HihokenshaDaichoEntity> 喪失被保険者list) {
         if (直近被保データ.getHihokennshaKubunCode() != null && ShikakuKubun._１号.getコード().equals(直近被保データ.getHihokennshaKubunCode())) {
             転入処理後Entity = set転入処理年齢到達チェック(資格取得フラグ, 直近被保データ, 転入前Entity, 転入処理後Entity);
-            set転入_住特解除(直近被保データ, 転入前Entity, 喪失被保険者list);
         }
         if (!資格取得フラグ) {
             set転入_住特解除(直近被保データ, 転入前Entity, 喪失被保険者list);
@@ -563,7 +558,7 @@ public class JuminIdoRendoTennyuManager {
 
     private void set措置元再転入(boolean is措置元再転入, DbV1001HihokenshaDaichoEntity 直近被保データ,
             UaFt200FindShikibetsuTaishoEntity 処理対象者, TennyuuMaeparametaEntity 転入前Entity) {
-        if (住所地特例フラグ.equals(直近被保データ.getJushochiTokureiFlag())) {
+        if (is措置元再転入) {
             execute転入処理_住特_措置元(処理対象者, 直近被保データ, 転入前Entity, is措置元再転入);
         } else {
             execute転入処理_住特(処理対象者, 直近被保データ, 転入前Entity);
@@ -576,8 +571,6 @@ public class JuminIdoRendoTennyuManager {
             FlexibleDate 登録届出日,
             UaFt200FindShikibetsuTaishoEntity 処理対象者,
             HihokenshaNo 被保険者番号) {
-        HihokenshaDaicho business = new HihokenshaDaicho(被保険者番号, 登録異動日, 枝番);
-        HihokenshaDaichoBuilder builder = business.createBuilderForEdit();
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setState(EntityDataState.Added);
         entity.setHihokenshaNo(被保険者番号);
@@ -597,7 +590,6 @@ public class JuminIdoRendoTennyuManager {
         entity.setJushochiTokureiFlag(特例フラグ);
         entity.setKoikinaiJushochiTokureiFlag(特例フラグ);
         entity.setLogicalDeletedFlag(false);
-        喪失被保険者list.add(builder.build().toEntity());
         dbT1001Dac.save(entity);
         喪失被保険者list.add(entity);
     }
@@ -637,7 +629,7 @@ public class JuminIdoRendoTennyuManager {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setState(EntityDataState.Added);
         entity.setHihokenshaNo(直近被保データ.getHihokenshaNo());
-        entity.setIdoYMD(転入前Entity.get登録異動日());
+        entity.setIdoYMD(転入前Entity.get年齢到達日());
         entity.setEdaNo(枝番);
         entity.setIdoJiyuCode(ShikakuHenkoJiyu._１号到達.getコード());
         entity.setShichosonCode(nullOrEntity(直近被保データ.getShichosonCode()));
@@ -783,7 +775,7 @@ public class JuminIdoRendoTennyuManager {
         entity.setEdaNo(枝番);
         entity.setIdoJiyuCode(ShikakuJutokuKaijoJiyu.自特例転入.getコード());
         entity.setShichosonCode(nullOrEntity(直近被保データ.getShichosonCode()));
-        entity.setShikibetsuCode(new ShikibetsuCode(直近被保データ.getShikakuSoshitsuJiyuCode().toString()));
+        entity.setShikibetsuCode(直近被保データ.getShikibetsuCode());
         entity.setShikakuShutokuJiyuCode(直近被保データ.getShikakuShutokuJiyuCode());
         entity.setShikakuShutokuYMD(直近被保データ.getShikakuShutokuYMD());
         entity.setShikakuShutokuTodokedeYMD(直近被保データ.getShikakuShutokuTodokedeYMD());
@@ -1034,21 +1026,6 @@ public class JuminIdoRendoTennyuManager {
     }
 
     /**
-     * 連動保留特定住所判定です。
-     *
-     * @param 現全国地方公共団体コード 市町村コード
-     * @param 町域コード 住所コード
-     * @param 番地コード1 番地コード１
-     * @param 番地コード2 番地コード2
-     * @param 番地コード3 番地コード3
-     * @return 判定結果
-     */
-    public boolean isRendoHoryuTokuteiJusho(LasdecCode 現全国地方公共団体コード, ChoikiCode 町域コード,
-            BanchiCode 番地コード1, BanchiCode 番地コード2, BanchiCode 番地コード3) {
-        return false;
-    }
-
-    /**
      * execute転入処理です。
      *
      * @param 処理対象者 UaFt200FindShikibetsuTaishoEntity
@@ -1234,13 +1211,13 @@ public class JuminIdoRendoTennyuManager {
         boolean 措置元再転入判定 = get措置元再転入判定(daichoEntity.getKoikinaiJushochiTokureiFlag(),
                 daichoEntity.getKoikinaiTokureiSochimotoShichosonCode(), 処理対象者.getGenLasdecCode());
         if (措置元再転入判定) {
-            DbT1001HihokenshaDaichoEntity 広域内転入
-                    = get広域内転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
-            tennyuEntity.get被保険者台帳list().add(広域内転入);
-        } else {
             DbT1001HihokenshaDaichoEntity 措置元再転入
                     = get措置元再転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
             tennyuEntity.get被保険者台帳list().add(措置元再転入);
+        } else {
+            DbT1001HihokenshaDaichoEntity 広域内転入
+                    = get広域内転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
+            tennyuEntity.get被保険者台帳list().add(広域内転入);
         }
         execute広域内転入_後処理(処理対象者, 識別対象被保険者台帳データ);
     }
@@ -1294,11 +1271,11 @@ public class JuminIdoRendoTennyuManager {
                 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
         daichoEntityList.add(年齢到達Entity);
         if (措置元再転入判定) {
-            DbT1001HihokenshaDaichoEntity 広域内転入 = get広域内転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
-            daichoEntityList.add(広域内転入);
-        } else {
             DbT1001HihokenshaDaichoEntity 措置元再転入 = get措置元再転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
             daichoEntityList.add(措置元再転入);
+        } else {
+            DbT1001HihokenshaDaichoEntity 広域内転入 = get広域内転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
+            daichoEntityList.add(広域内転入);
         }
         entity.set被保険者台帳list(daichoEntityList);
     }
@@ -1314,11 +1291,11 @@ public class JuminIdoRendoTennyuManager {
         boolean 措置元再転入判定 = get措置元再転入判定(daichoEntity.getKoikinaiJushochiTokureiFlag(),
                 daichoEntity.getKoikinaiTokureiSochimotoShichosonCode(), 処理対象者.getGenLasdecCode());
         if (措置元再転入判定) {
-            DbT1001HihokenshaDaichoEntity 広域内転入 = get広域内転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
-            daichoEntityList.add(広域内転入);
-        } else {
             DbT1001HihokenshaDaichoEntity 措置元再転入 = get措置元再転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
             daichoEntityList.add(措置元再転入);
+        } else {
+            DbT1001HihokenshaDaichoEntity 広域内転入 = get広域内転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
+            daichoEntityList.add(広域内転入);
         }
         DbT1001HihokenshaDaichoEntity 年齢到達Entity = get１号年齢到達(処理対象者, daichoEntity,
                 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);

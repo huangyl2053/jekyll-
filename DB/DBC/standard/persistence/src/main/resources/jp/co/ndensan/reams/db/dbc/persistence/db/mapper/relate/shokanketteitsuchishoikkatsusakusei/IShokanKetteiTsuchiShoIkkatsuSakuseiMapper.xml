@@ -1007,7 +1007,7 @@
         "DbT3034ShokanShinsei"."seiriNo" = ShokanKetteiTsuchiShoTemp."seiriNo"
        
         WHERE
-        1=1
+        ShokanKetteiTsuchiShoTemp."shiharaiHohoKubunCode" = '1'
         <if test="isHako">
             AND
             ShokanKetteiTsuchiShoTemp."hihokennshaKubunCode" <![CDATA[<>]]> '2'
@@ -1148,7 +1148,7 @@
                  AND ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" <![CDATA[<>]]> ''
                  AND ShokanKetteiTsuchiShoMeisaiTemp."shikyuHushikyuKetteiKubun" = '1')
                 <if test="資格区分 != null"> 
-                AND ShokanKetteiTsuchiShoMeisaiTemp."hihokennshaKubunCode" <![CDATA[<>]]> #{資格区分}    
+                OR ShokanKetteiTsuchiShoMeisaiTemp."hihokennshaKubunCode" = #{資格区分}    
                 </if>
 
         )

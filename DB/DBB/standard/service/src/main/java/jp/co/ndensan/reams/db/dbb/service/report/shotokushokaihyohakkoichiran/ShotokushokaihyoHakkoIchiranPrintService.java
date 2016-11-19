@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.service.report.shotokushokaihyohakkoichiran;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -66,6 +68,7 @@ public class ShotokushokaihyoHakkoIchiranPrintService {
 
         List<RString> 出力順項目リスト = get出力順(出力順ID);
         List<RString> 改頁項目リスト = get改頁項目(出力順ID);
+        Map<RString, RString> 改頁項目Map = new HashMap<>();
 
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
@@ -75,7 +78,7 @@ public class ShotokushokaihyoHakkoIchiranPrintService {
                     = createAssembler(property, reportManager)) {
                 ReportSourceWriter<ShotokushokaihyoHakkoIchiranSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
-                new ShotokushokaihyoHakkoIchiranReport(所得照会票発行一覧リスト, 構成市町村情報リスト, 出力順項目リスト,
+                new ShotokushokaihyoHakkoIchiranReport(所得照会票発行一覧リスト, 構成市町村情報リスト, 出力順項目リスト, 改頁項目Map,
                         改頁項目リスト, 照会年月日, 処理年度, テストプリント, association).writeBy(reportSourceWriter);
             }
             return reportManager.publish();

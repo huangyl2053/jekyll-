@@ -106,5 +106,58 @@ public class KaigoHokenryogakuSource implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        title,
+        nendo,
+        hokenshaNo,
+        hokenshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        titleChoshugaku,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listUpper_7,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        listLower_4,
+        listLower_5,
+        listLower_6,
+        listLower_7,
+        listLower_8,
+        listLower_9,
+        listLower_10,
+        listLower_11,
+        choikiCode,
+        gyoseikuCode,
+        chikuCode1,
+        chikuCode2,
+        chikuCode3,
+        shikibetsuCode,
+        kanaMeisho,
+        hihokenshaNo,
+        nenkinCode,
+        nokumiCode,
+        seihoFlag,
+        seihoFlag1,
+        tokuchoKaishi8,
+        tokuchoKaishi10,
+        banchiCode
+    }
 // </editor-fold>
 }

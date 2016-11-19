@@ -39,6 +39,9 @@ public class HokenshaSofuListPanelHandler {
     private static final RString 処理状態区分_丸い = new RString("○");
     private static final RString 処理状態区分_横線 = new RString("-");
 
+    private static final RString PREFIX = new RString("【");
+    private static final RString ENDFIX = new RString("】");
+
     /**
      * コンストラクタです。
      *
@@ -63,7 +66,8 @@ public class HokenshaSofuListPanelHandler {
                 kokuhorenSofuJohoInfo.set交換識別番号(国保連送付情報.get交換情報識別番号());
                 kokuhorenSofuJohoInfo.set国保連送付情報(国保連送付情報);
                 kokuhorenSofuJohoInfo.set一覧表示順(ConfigKeysKokuhorenSofu.toValue(国保連送付情報.get交換情報識別番号()).get一覧表示順());
-                kokuhorenSofuJohoInfo.set処理名(ConfigKeysKokuhorenSofu.toValue(国保連送付情報.get交換情報識別番号()).get略称());
+                ConfigKeysKokuhorenSofu config = ConfigKeysKokuhorenSofu.toValue(国保連送付情報.get交換情報識別番号());
+                kokuhorenSofuJohoInfo.set処理名(PREFIX.concat(config.getコード()).concat(ENDFIX).concat(config.get略称()));
                 kokuhorenSofuJohoInfoList.add(kokuhorenSofuJohoInfo);
             }
         }

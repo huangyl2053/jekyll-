@@ -91,6 +91,7 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
         batchParameter.set開始時間(parameter.get開始時間());
         batchParameter.set終了時間(parameter.get終了時間());
         batchParameter.set出力順ID(parameter.get出力順ID());
+        batchParameter.set窓口払い一括更新区分(parameter.get窓口払い一括更新区分());
         return batchParameter;
     }
 
@@ -124,6 +125,7 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
         batchParameter.set開始時間(parameter.get開始時間());
         batchParameter.set終了時間(parameter.get終了時間());
         batchParameter.set出力順ID(parameter.get出力順ID());
+        batchParameter.set窓口払い一括更新区分(parameter.get窓口払い一括更新区分());
         return batchParameter;
     }
 }

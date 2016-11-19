@@ -5,11 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.kogakugassan;
 
+import java.util.ArrayList;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyugakuKeisanKekkaMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShikyuGakuKeisanKekkaRelate;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110070.KogakuGassanShikyuGakuKeisanKekkaRelateEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaDac;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuGassanShikyugakuKeisanKekkaMeisaiManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -127,5 +130,24 @@ public class KogakuGassanShikyuShinseiTorokuManager {
             }
         }
         高額合算支給額計算結果Dac.save(高額合算支給額計算結果情報.deleted().toEntity());
+    }
+
+    /**
+     * get高額合算支給額計算結果追加情報。
+     *
+     * @param 支給額計算結果明細 KogakuGassanShikyugakuKeisanKekkaMeisai
+     * @param 支給額計算結果 KogakuGassanShikyuGakuKeisanKekkaRelate
+     *
+     * @return 高額合算支給額計算結果追加情報
+     */
+    public KogakuGassanShikyuGakuKeisanKekkaRelate get高額合算支給額計算結果追加情報(KogakuGassanShikyugakuKeisanKekkaMeisai 支給額計算結果明細,
+            KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果) {
+        List<DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity> 高額合算支給額計算結果明細リスト = new ArrayList();
+        高額合算支給額計算結果明細リスト.add(支給額計算結果明細.toEntity());
+        KogakuGassanShikyuGakuKeisanKekkaRelateEntity entity = new KogakuGassanShikyuGakuKeisanKekkaRelateEntity();
+        entity.set高額合算支給額計算結果(支給額計算結果.toEntity());
+        entity.set高額合算支給額計算結果明細リスト(高額合算支給額計算結果明細リスト);
+        支給額計算結果 = new KogakuGassanShikyuGakuKeisanKekkaRelate(entity);
+        return 支給額計算結果;
     }
 }

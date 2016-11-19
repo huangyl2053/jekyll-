@@ -92,6 +92,10 @@ public class KogakuServicehiSofuIchiranSource implements IReportSource {
     @ReportExpandedInfo(id = "A")
     public ExpandedInformation 拡張情報;
 
+    @ReportItem(name = "shimei50onKana")
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode")
+    public RString shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

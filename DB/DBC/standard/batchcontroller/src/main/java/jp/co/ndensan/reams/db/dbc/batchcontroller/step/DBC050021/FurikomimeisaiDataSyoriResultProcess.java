@@ -40,10 +40,10 @@ public class FurikomimeisaiDataSyoriResultProcess extends BatchProcessBase<Shori
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050021."
             + "IFurikomimeisaiFurikomiDataMapper.select処理結果確認リスト情報");
     private static final int 先頭_作成日時_アカウント = 1;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU900002");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC900004");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString 出力ファイル名 = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private static final RString 出力ファイル名 = new RString("DBC900004_ShoriKekkaKakuninList.csv");
     private static final RString 作成R = new RString("作成");
     private static final int INT_0 = 0;
 

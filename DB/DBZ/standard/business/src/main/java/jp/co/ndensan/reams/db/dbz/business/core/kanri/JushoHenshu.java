@@ -232,18 +232,23 @@ public final class JushoHenshu {
         if (JushoKannaiEditPattern.町域番地方書.equals(管内住所編集パターン)) {
             if (GyoseikuInjiKubun.括弧付きで印字.equals(行政区印字区分)) {
                 jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.町域番地方書カッコ行政区);
+                return;
             }
             if (GyoseikuInjiKubun.印字しない.equals(行政区印字区分)) {
                 jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.町域番地方書);
+                return;
             }
         }
         if (JushoKannaiEditPattern.町域番地.equals(管内住所編集パターン)) {
             if (GyoseikuInjiKubun.括弧付きで印字.equals(行政区印字区分)) {
                 jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.町域番地カッコ行政区);
+                return;
             }
             if (GyoseikuInjiKubun.印字しない.equals(行政区印字区分)) {
                 jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.町域番地);
+                return;
             }
         }
+        jushoEditorBuilder.set管内住所編集パターン(管内住所編集パターン);
     }
 }

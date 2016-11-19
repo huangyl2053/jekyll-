@@ -22,6 +22,14 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufuKanrihyoSofuIchiranEntity {
 
+    private RString yubinNo;
+    private RString choikiCode;
+    private RString gyoseikuCode;
+    private RString shimei50onKana;
+    private RString shichosonCode;
+    private RString hihokenshaNo;
+    private RString riyoYM;
+    private RString yokaigoJotaiKubunCode;
     private FlexibleYearMonth 処理年月;
     private RDateTime 作成日時;
     private RString 保険者番号;

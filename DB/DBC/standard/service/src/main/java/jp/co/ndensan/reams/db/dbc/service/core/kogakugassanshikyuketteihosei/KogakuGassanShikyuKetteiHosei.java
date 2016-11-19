@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyuGakuKeis
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.AuthorityItemResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.HihokenshaDaichoResult;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanKyufuJissekiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KoshinShoriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
-import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.KaigoGassan_HokenSeido;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter;
@@ -82,6 +82,10 @@ public class KogakuGassanShikyuKetteiHosei {
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
+    private static final RString INSERT = new RString("INSERT");
+    private static final RString UPDATE = new RString("UPDATE");
+    private static final RString DELETE = new RString("DELETE");
+    private static final RString 支給 = new RString("支給");
     private static final KokanShikibetsuNo 定値交換情報識別番号 = new KokanShikibetsuNo("38Q1");
     private static final RString 処理不可 = new RString("処理不可");
     private static final RString 口座修正モード = new RString("口座修正モード");
@@ -304,100 +308,276 @@ public class KogakuGassanShikyuKetteiHosei {
             RString 処理モード) {
         if (画面DIV != null) {
             get更新高額合算支給不支給決定(画面DIV.get高額合算支給不支給決定Entity(), 処理モード);
-            get更新高額合算給付実績(処理モード, 画面DIV);
+            if (!口座修正モード.equals(画面DIV.getWkモード())) {
+                get更新高額合算給付実績(画面DIV);
+            }
         }
         return true;
     }
 
-    private void get更新高額合算給付実績(RString 処理モード, KoshinShoriResult 画面DIV) {
-        if (画面DIV.getUpdate合算給付実績パラメータ() != null) {
-            KogakuGassanKyufuJisseki 更新data = getshoriModeHantei_Two(画面DIV.getUpdate合算給付実績パラメータ().
-                    get更新後被保険者番号(), 画面DIV.getUpdate合算給付実績パラメータ().
-                    get更新後証記載保険者番号(), 画面DIV.getUpdate合算給付実績パラメータ().
-                    get更新後支給申請書整理番号());
-            if (!処理モード.equals(ONE) && 更新data == null) {
-                return;
-            }
-            set更新条件(更新data, 画面DIV.getUpdate合算給付実績パラメータ());
-            IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(
-                    IKogakuGassanShikyuKetteiHoseiMapper.class);
-            if (THREE.equals(処理モード)) {
-                mapper.logicalDelete高額合算給付実績(画面DIV.getUpdate合算給付実績パラメータ());
-            } else if (ONE.equals(処理モード) || TWO.equals(処理モード)) {
-                update給付実績データ(更新data, 画面DIV, mapper);
-            }
+    private void get更新高額合算給付実績(KoshinShoriResult 画面DIV) {
+        画面DIV.getUpdate合算給付実績パラメータ().set更新後給付実績作成区分コード(画面DIV.get作成区分());
+        DbT3075KogakuGassanKyufuJissekiEntity 給付実績データ = 高額合算給付実績dac.
+                selectByMaxSeiriNo(画面DIV.getUpdate合算給付実績パラメータ().
+                        get更新後被保険者番号(), 画面DIV.getUpdate合算給付実績パラメータ().
+                        get更新後支給申請書整理番号());
+        if (!INSERT.equals(画面DIV.get更新方法()) && 給付実績データ == null) {
+            return;
         }
-    }
-
-    private void update給付実績データ(KogakuGassanKyufuJisseki 更新data,
-            KoshinShoriResult 画面DIV,
-            IKogakuGassanShikyuKetteiHoseiMapper mapper) {
-        if (更新data == null && ONE.equals(画面DIV.get高額合算支給不支給決定Entity().get支給区分コード())) {
+        if (INSERT.equals(画面DIV.get更新方法())) {
             RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付,
                     SaibanHanyokeyName.高額合算給付実績整理番号.get名称(), FlexibleDate.
                     getNowDate().getNendo()).nextString();
-            KogakuGassanKyufuJisseki 新規data = new KogakuGassanKyufuJisseki(
-                    定値交換情報識別番号, 画面DIV.getUpdate合算給付実績パラメータ().
-                    get更新後被保険者番号(), 画面DIV.getUpdate合算給付実績パラメータ().
-                    get更新後支給申請書整理番号(), 整理番号);
-            新規data = 新規data.createBuilderForEdit().set自己負担額証明書整理番号(画面DIV.
-                    getUpdate合算給付実績パラメータ().get更新後自己負担額証明書整理番号()).
-                    set保険制度コード(KaigoGassan_HokenSeido.国保.getCode()).
-                    set給付実績作成区分コード(ONE).
-                    set証記載保険者番号(画面DIV.getUpdate合算給付実績パラメータ().get更新後証記載保険者番号()).
-                    set申請年月日(画面DIV.getUpdate合算給付実績パラメータ().get更新後申請年月日()).
-                    set決定年月日(画面DIV.getUpdate合算給付実績パラメータ().get更新後決定年月日()).
-                    set自己負担総額(画面DIV.getUpdate合算給付実績パラメータ().get更新後自己負担総額()).
-                    set支給額(get支給額(画面DIV.getUpdate合算給付実績パラメータ())).
-                    setデータ区分(ZERO).
-                    build().added();
-            高額合算給付実績dac.save(新規data.toEntity());
-        } else if (更新data != null && (ONE.equals(更新data.get給付実績作成区分コード())
-                || TWO.equals(更新data.get給付実績作成区分コード()))
-                && 画面DIV.getUpdate合算給付実績パラメータ().isFlag()) {
-            if (ZERO.equals(画面DIV.get高額合算支給不支給決定Entity().get支給区分コード())) {
-                mapper.physicalDelete高額合算給付実績(画面DIV.getUpdate合算給付実績パラメータ());
+            DbT3075KogakuGassanKyufuJissekiEntity 新規data = new DbT3075KogakuGassanKyufuJissekiEntity();
+            新規data.setKokanJohoShikibetsuNo(定値交換情報識別番号);
+            新規data.setHihokenshaNo(画面DIV.getUpdate合算給付実績パラメータ().get更新後被保険者番号());
+            新規data.setShikyuShinseiSeiriNo(画面DIV.getUpdate合算給付実績パラメータ().get更新後支給申請書整理番号());
+            新規data.setSeiriNo(整理番号);
+            新規data.setJikoFutanSeiriNo(画面DIV.getUpdate合算給付実績パラメータ().get更新後自己負担額証明書整理番号());
+            新規data.setHokenSeidoCode(THREE);
+            新規data.setKyufuJissekiSakuseiKubunCode(画面DIV.getUpdate合算給付実績パラメータ().get更新後給付実績作成区分コード());
+            新規data.setShoKisaiHokenshaNo(画面DIV.getUpdate合算給付実績パラメータ().get更新後証記載保険者番号());
+            新規data.setShinseiYMD(画面DIV.getUpdate合算給付実績パラメータ().get更新後申請年月日());
+            新規data.setKetteiYMD(画面DIV.getUpdate合算給付実績パラメータ().get更新後決定年月日());
+            新規data.setJikoFutanSogaku(画面DIV.getUpdate合算給付実績パラメータ().get更新後自己負担総額());
+            新規data.setShikyuGaku(画面DIV.getUpdate合算給付実績パラメータ().get更新後支給額());
+            新規data.setDataKubun(ZERO);
+            新規data.setState(EntityDataState.Added);
+            高額合算給付実績dac.save(新規data);
+            return;
+        }
+        set更新条件(給付実績データ, 画面DIV.getUpdate合算給付実績パラメータ());
+        IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(
+                IKogakuGassanShikyuKetteiHoseiMapper.class);
+        if (UPDATE.equals(画面DIV.get更新方法())) {
+            mapper.update高額合算給付実績(画面DIV.getUpdate合算給付実績パラメータ());
+        } else if (DELETE.equals(画面DIV.get更新方法())) {
+            mapper.logicalDelete高額合算給付実績(画面DIV.getUpdate合算給付実績パラメータ());
+        }
+    }
+
+    /**
+     * 更新方法と作成区分取得
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 支給申請書整理番号 RString
+     * @param 処理モード RString
+     * @param 更新時の支給区分 RString
+     * @param 支給金額フラグ boolean
+     * @param 支給区分フラグ boolean
+     * @param 支給データフラグ boolean
+     * @return KogakuGassanKyufuJissekiResult
+     */
+    public KogakuGassanKyufuJissekiResult get更新方法と作成区分(
+            HihokenshaNo 被保険者番号,
+            RString 支給申請書整理番号,
+            RString 処理モード,
+            RString 更新時の支給区分,
+            boolean 支給金額フラグ,
+            boolean 支給区分フラグ,
+            boolean 支給データフラグ) {
+        KogakuGassanKyufuJissekiResult result = new KogakuGassanKyufuJissekiResult();
+        DbT3075KogakuGassanKyufuJissekiEntity 給付実績データ = 高額合算給付実績dac.
+                selectByMaxSeiriNo(被保険者番号, 支給申請書整理番号);
+        boolean 処理年月フラグ = 給付実績データ != null && 給付実績データ.getShoriYM() != null
+                && 給付実績データ.getShoriYM().isEmpty();
+        if (ONE.equals(処理モード)) {
+            get追加の状況(給付実績データ, 更新時の支給区分, result, 処理年月フラグ);
+            return result;
+        } else if (TWO.equals(処理モード)) {
+            get修正の状況(給付実績データ, 更新時の支給区分, result, 処理年月フラグ, 支給区分フラグ, 支給金額フラグ);
+            return result;
+        } else if (THREE.equals(処理モード)) {
+            get削除の状況(給付実績データ, 更新時の支給区分, result, 処理年月フラグ, 支給データフラグ);
+            return result;
+        }
+        return result;
+    }
+
+    private void get追加の状況(DbT3075KogakuGassanKyufuJissekiEntity 給付実績データ,
+            RString 更新時の支給区分,
+            KogakuGassanKyufuJissekiResult result,
+            boolean 処理年月フラグ) {
+        if (給付実績データ == null && 支給.equals(更新時の支給区分)) {
+            result.set更新方法(INSERT);
+            result.set作成区分(ONE);
+        } else if (給付実績データ != null && ONE.equals(給付実績データ.getKyufuJissekiSakuseiKubunCode())
+                && 支給.equals(更新時の支給区分)) {
+            if (!処理年月フラグ) {
+                result.set更新方法(UPDATE);
+                result.set作成区分(ONE);
             } else {
-                mapper.update高額合算給付実績(画面DIV.getUpdate合算給付実績パラメータ());
+                result.set更新方法(INSERT);
+                result.set作成区分(TWO);
+            }
+        } else if (給付実績データ != null && TWO.equals(給付実績データ.getKyufuJissekiSakuseiKubunCode())
+                && 支給.equals(更新時の支給区分)) {
+            if (!処理年月フラグ) {
+                result.set更新方法(UPDATE);
+                result.set作成区分(TWO);
+            } else {
+                result.set更新方法(INSERT);
+                result.set作成区分(TWO);
+            }
+        } else if (給付実績データ != null && THREE.equals(給付実績データ.getKyufuJissekiSakuseiKubunCode())
+                && 支給.equals(更新時の支給区分)) {
+            if (!処理年月フラグ) {
+                result.set更新方法(UPDATE);
+                result.set作成区分(TWO);
+            } else {
+                result.set更新方法(INSERT);
+                result.set作成区分(TWO);
             }
         }
     }
 
-    private Decimal get支給額(KogakuGassanShikyuGakuKeisanKekkaUpdateParameter 合算給付実績パラメータ) {
-        Decimal 支給額 = Decimal.ZERO;
-        if (合算給付実績パラメータ.get更新前支給額() != null) {
-            支給額 = 合算給付実績パラメータ.get更新前支給額();
+    private void get修正の状況(DbT3075KogakuGassanKyufuJissekiEntity 給付実績データ,
+            RString 更新時の支給区分,
+            KogakuGassanKyufuJissekiResult result,
+            boolean 処理年月フラグ,
+            boolean 支給区分フラグ,
+            boolean 支給金額フラグ) {
+        if (給付実績データ == null && 支給区分フラグ && 支給.equals(更新時の支給区分)) {
+            result.set更新方法(INSERT);
+            result.set作成区分(ONE);
+        } else if (給付実績データ != null && ONE.equals(
+                給付実績データ.getKyufuJissekiSakuseiKubunCode()) && 支給金額フラグ) {
+            if (!処理年月フラグ) {
+                result.set更新方法(UPDATE);
+                result.set作成区分(ONE);
+            } else {
+                result.set更新方法(INSERT);
+                result.set作成区分(TWO);
+            }
+        } else if (給付実績データ != null && TWO.equals(
+                給付実績データ.getKyufuJissekiSakuseiKubunCode()) && 支給金額フラグ) {
+            if (!処理年月フラグ) {
+                result.set更新方法(UPDATE);
+                result.set作成区分(TWO);
+            } else {
+                result.set更新方法(INSERT);
+                result.set作成区分(TWO);
+            }
+        } else if (給付実績データ != null && THREE.equals(
+                給付実績データ.getKyufuJissekiSakuseiKubunCode()) && 支給金額フラグ) {
+            if (!処理年月フラグ) {
+                result.set更新方法(UPDATE);
+                result.set作成区分(TWO);
+            } else {
+                result.set更新方法(INSERT);
+                result.set作成区分(ONE);
+            }
         }
-        List<DbT3075KogakuGassanKyufuJissekiEntity> 高額合算給付実績データ = 高額合算給付実績dac.
-                get高額合算給付実績データ(合算給付実績パラメータ.get更新後支給申請書整理番号());
-        for (DbT3075KogakuGassanKyufuJissekiEntity entity : 高額合算給付実績データ) {
-            支給額 = 支給額.add(entity.getShikyuGaku());
+    }
+
+    private void get削除の状況(DbT3075KogakuGassanKyufuJissekiEntity 給付実績データ,
+            RString 更新時の支給区分,
+            KogakuGassanKyufuJissekiResult result,
+            boolean 処理年月フラグ,
+            boolean 支給データフラグ) {
+        if (給付実績データ != null && ONE.equals(給付実績データ.
+                getKyufuJissekiSakuseiKubunCode()) && 支給.equals(更新時の支給区分)) {
+            get新規_作成区分の状況(result, 処理年月フラグ, 支給データフラグ);
+        } else if (給付実績データ != null && TWO.equals(給付実績データ.
+                getKyufuJissekiSakuseiKubunCode()) && 支給.equals(更新時の支給区分)) {
+            get修正_作成区分の状況(result, 処理年月フラグ, 支給データフラグ);
+        } else if (給付実績データ != null && THREE.equals(給付実績データ.
+                getKyufuJissekiSakuseiKubunCode()) && 支給.equals(更新時の支給区分)) {
+            get削除_作成区分の状況(result, 処理年月フラグ, 支給データフラグ);
+        }
+    }
+
+    private void get新規_作成区分の状況(
+            KogakuGassanKyufuJissekiResult result,
+            boolean 処理年月フラグ,
+            boolean 支給データフラグ) {
+        if (!支給データフラグ && !処理年月フラグ) {
+            result.set更新方法(DELETE);
+        } else if (!支給データフラグ && 処理年月フラグ) {
+            result.set更新方法(INSERT);
+            result.set作成区分(TWO);
+        } else if (支給データフラグ && !処理年月フラグ) {
+            result.set更新方法(UPDATE);
+            result.set作成区分(ONE);
+        } else if (支給データフラグ && 処理年月フラグ) {
+            result.set更新方法(INSERT);
+            result.set作成区分(TWO);
+        }
+    }
+
+    private void get修正_作成区分の状況(
+            KogakuGassanKyufuJissekiResult result,
+            boolean 処理年月フラグ,
+            boolean 支給データフラグ) {
+        if (!支給データフラグ && !処理年月フラグ) {
+            result.set更新方法(UPDATE);
+            result.set作成区分(TWO);
+        } else if (!支給データフラグ && 処理年月フラグ) {
+            result.set更新方法(INSERT);
+            result.set作成区分(TWO);
+        } else if (支給データフラグ && !処理年月フラグ) {
+            result.set更新方法(UPDATE);
+            result.set作成区分(TWO);
+        } else if (支給データフラグ && 処理年月フラグ) {
+            result.set更新方法(INSERT);
+            result.set作成区分(TWO);
+        }
+    }
+
+    private void get削除_作成区分の状況(
+            KogakuGassanKyufuJissekiResult result,
+            boolean 処理年月フラグ,
+            boolean 支給データフラグ) {
+        if (!支給データフラグ && !処理年月フラグ) {
+            result.set更新方法(UPDATE);
+            result.set作成区分(TWO);
+        } else if (支給データフラグ && !処理年月フラグ) {
+            result.set更新方法(UPDATE);
+            result.set作成区分(TWO);
+        } else if (支給データフラグ && 処理年月フラグ) {
+            result.set更新方法(INSERT);
+            result.set作成区分(ONE);
+        }
+    }
+
+    /**
+     * 支給額取得
+     *
+     * @param 支給申請書整理番号 RString
+     * @return Decimal
+     */
+    public Decimal get支給額(RString 支給申請書整理番号) {
+        Decimal 支給額 = Decimal.ZERO;
+        List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> 高額合算支給不支給決定データ = 高額合算支給不支給決定dac.
+                get高額合算支給不支給決定データ(支給申請書整理番号);
+        for (DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity : 高額合算支給不支給決定データ) {
+            支給額 = 支給額.add(entity.getShikyugaku());
         }
         return 支給額;
     }
 
     private void set更新条件(
-            KogakuGassanKyufuJisseki 更新data,
+            DbT3075KogakuGassanKyufuJissekiEntity 更新data,
             KogakuGassanShikyuGakuKeisanKekkaUpdateParameter 更新para) {
         if (更新para != null) {
-            更新para.set更新前交換情報識別番号(更新data.get交換情報識別番号());
-            更新para.set更新前被保険者番号(更新data.get被保険者番号());
-            更新para.set更新前支給申請書整理番号(更新data.get支給申請書整理番号());
-            更新para.set更新前整理番号(更新data.get整理番号());
-            更新para.set更新前自己負担額証明書整理番号(更新data.get自己負担額証明書整理番号());
-            更新para.set更新前保険制度コード(更新data.get保険制度コード());
-            更新para.set更新前給付実績作成区分コード(更新data.get給付実績作成区分コード());
-            更新para.set更新前証記載保険者番号(更新data.get証記載保険者番号());
-            更新para.set更新前国保_被保険者証記号(更新data.get国保_被保険者証記号());
-            更新para.set更新前申請年月日(更新data.get申請年月日());
-            更新para.set更新前決定年月日(更新data.get決定年月日());
-            更新para.set更新前自己負担総額(更新data.get自己負担総額());
-            更新para.set更新前支給額(更新data.get支給額());
-            更新para.set更新前処理年月(更新data.get処理年月());
-            更新para.set更新前受取年月(更新data.get受取年月());
-            更新para.set更新前送付年月(更新data.get送付年月());
-            更新para.set更新前データ区分(更新data.getデータ区分());
-            更新para.set更新前論理削除(更新data.is論理削除());
+            更新para.set更新前交換情報識別番号(更新data.getKokanJohoShikibetsuNo());
+            更新para.set更新前被保険者番号(更新data.getHihokenshaNo());
+            更新para.set更新前支給申請書整理番号(更新data.getShikyuShinseiSeiriNo());
+            更新para.set更新前整理番号(更新data.getSeiriNo());
+            更新para.set更新前自己負担額証明書整理番号(更新data.getJikoFutanSeiriNo());
+            更新para.set更新前保険制度コード(更新data.getHokenSeidoCode());
+            更新para.set更新前給付実績作成区分コード(更新data.getKyufuJissekiSakuseiKubunCode());
+            更新para.set更新前証記載保険者番号(更新data.getShoKisaiHokenshaNo());
+            更新para.set更新前国保_被保険者証記号(更新data.getKokuho_HihokenshaShoKigo());
+            更新para.set更新前申請年月日(更新data.getShinseiYMD());
+            更新para.set更新前決定年月日(更新data.getKetteiYMD());
+            更新para.set更新前自己負担総額(更新data.getJikoFutanSogaku());
+            更新para.set更新前支給額(更新data.getShikyuGaku());
+            更新para.set更新前処理年月(更新data.getShoriYM());
+            更新para.set更新前受取年月(更新data.getUketoriYM());
+            更新para.set更新前送付年月(更新data.getSofuYM());
+            更新para.set更新前データ区分(更新data.getDataKubun());
+            更新para.set更新前論理削除(更新data.getIsDeleted());
         }
     }
 

@@ -34,6 +34,8 @@ public class UpdJukyushaTempProcess extends BatchProcessBase<IdouTempEntity> {
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select受給者台帳");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
     private static final RString SPLIT = new RString(",");
+    private static final RString RST_1 = new RString("1");
+    private static final RString RST_0 = new RString("0");
 
     private Map<HihokenshaNo, Decimal> 連番Map;
     private List<RString> 受給者台帳List;
@@ -131,10 +133,14 @@ public class UpdJukyushaTempProcess extends BatchProcessBase<IdouTempEntity> {
         全項目 = concatDate(全項目, 受給者台帳.getJukyuShinseiYMD());
         全項目 = 全項目.concat(受給者台帳.getRirekiNo()).concat(SPLIT);
         if (RString.isNullOrEmpty(受給者台帳.getShinseiJokyoKubun())) {
-            全項目 = 全項目.concat(RString.EMPTY);
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
         } else {
-            全項目 = 全項目.concat(受給者台帳.getShinseiJokyoKubun());
+            全項目 = 全項目.concat(受給者台帳.getShinseiJokyoKubun()).concat(SPLIT);
         }
+        全項目 = concatDate(全項目, 受給者台帳.getNinteiYMD());
+        全項目 = concatDate(全項目, 受給者台帳.getSoshitsuYMD());
+        全項目 = concatCode(全項目, 受給者台帳.getDataKubun());
+        全項目 = 全項目.concat(受給者台帳.getKyuSochishaFlag() ? RST_1 : RST_0);
         return 全項目;
     }
 

@@ -87,5 +87,7 @@ public class KogakuJigyoShinseishoHakkoIchiranSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportItem(name = "tsuchishoNo", length = 20, order = 31)
     public RString tsuchishoNo;
+    @ReportItem(name = "証記載保険者番号", length = 20, order = 32)
+    public RString 証記載保険者番号;
 // </editor-fold>
 }

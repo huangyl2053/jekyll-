@@ -74,6 +74,30 @@ public class DbT3075KogakuGassanKyufuJissekiDac implements ISaveable<DbT3075Koga
     }
 
     /**
+     * 最大整理番号のデータを取得する
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 支給申請書整理番号 ShikyuShinseiSeiriNo
+     * @return DbT3075KogakuGassanKyufuJissekiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3075KogakuGassanKyufuJissekiEntity selectByMaxSeiriNo(
+            HihokenshaNo 被保険者番号,
+            RString 支給申請書整理番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3075KogakuGassanKyufuJisseki.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(shikyuShinseiSeiriNo, 支給申請書整理番号))).
+                order(by(seiriNo, Order.DESC)).limit(1).
+                toObject(DbT3075KogakuGassanKyufuJissekiEntity.class);
+    }
+
+    /**
      * 高額合算給付実績を全件返します。
      *
      * @return List<DbT3075KogakuGassanKyufuJissekiEntity>

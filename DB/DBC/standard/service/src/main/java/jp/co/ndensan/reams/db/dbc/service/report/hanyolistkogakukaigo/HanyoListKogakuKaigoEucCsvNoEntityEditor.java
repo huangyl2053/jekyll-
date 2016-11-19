@@ -716,18 +716,14 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             FlexibleDate 決定日 = entity.get決定年月日();
             csvEntity.set決定日(get日付項目(決定日, parameter));
             Decimal 保決定利用負担額 = entity.get本人支払額();
-            csvEntity.set保決定利用負担額(保決定利用負担額 != null
-                    ? numToRString_0(保決定利用負担額)
-                    : RString.EMPTY);
-            csvEntity.set保決定支給区分(
-                    entity.get判定_支給区分コード() != null
-                    && entity.get判定_支給区分コード().toString().equals("1")
-                    ? ShikyuKubun.支給.get名称()
-                    : RString.EMPTY);
+            csvEntity.set保決定利用負担額(numToRString_0(保決定利用負担額));
+            if (!RString.isNullOrEmpty(entity.get判定_支給区分コード())) {
+                csvEntity.set保決定支給区分(ShikyuKubun.toValue(entity.get判定_支給区分コード()).get名称());
+            } else {
+                csvEntity.set保決定支給区分(RString.EMPTY);
+            }
             Decimal 保決定高額支給額 = entity.get支給金額();
-            csvEntity.set保決定高額支給額(保決定高額支給額 != null
-                    ? numToRString_0(保決定高額支給額)
-                    : RString.EMPTY);
+            csvEntity.set保決定高額支給額(numToRString_0(保決定高額支給額));
             csvEntity.set保決定不支給理由(entity.get不支給理由());
             csvEntity.set審査方法(!RString.isNullOrEmpty(entity.get審査方法区分())
                     ? ShinsaHohoKubun.toValue(entity.get審査方法区分()).get名称() : RString.EMPTY);
@@ -749,12 +745,10 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             csvEntity.set国決定通知書ＮＯ(entity.get通知書番号());
             Decimal 国決定利用負担額 = entity.get利用者負担額();
             csvEntity.set国決定利用負担額(numToRString_0(国決定利用負担額));
-            if (entity.get決定_支給区分コード() == null) {
-                csvEntity.set国決定支給区分(RString.EMPTY);
+            if (!RString.isNullOrEmpty(entity.get決定_支給区分コード())) {
+                csvEntity.set国決定支給区分(ShikyuKubun.toValue(entity.get決定_支給区分コード()).get名称());
             } else {
-                csvEntity.set国決定支給区分(entity.get決定_支給区分コード().toString().equals("1")
-                        ? ShikyuKubun.支給.get名称()
-                        : RString.EMPTY);
+                csvEntity.set国決定支給区分(RString.EMPTY);
             }
             Decimal 国決定高額支給額 = entity.get決定_高額支給額();
             csvEntity.set国決定高額支給額(numToRString_0(国決定高額支給額));

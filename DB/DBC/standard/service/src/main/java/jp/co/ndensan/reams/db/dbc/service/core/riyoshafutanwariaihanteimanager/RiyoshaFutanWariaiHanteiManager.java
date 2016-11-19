@@ -724,7 +724,9 @@ public class RiyoshaFutanWariaiHanteiManager {
                     || (判定基準日 != null && !判定基準日.isEmpty()
                     && jukydai.get認定有効期間終了年月日() != null && !jukydai.get認定有効期間終了年月日().isEmpty()
                     && 判定基準日.isBefore(jukydai.get認定有効期間終了年月日())))
-                    && jukydai.get要介護認定状態区分コード().value().equals(ZERO_ONE)) {
+                    && !jukydai.get要介護認定状態区分コード().value().equals(ZERO_ONE)
+                    && !jukydai.is論理削除フラグ()
+                    && jukydai.get有効無効区分().value().equals(ONE)) {
                 result.add(jukydai);
             }
         }

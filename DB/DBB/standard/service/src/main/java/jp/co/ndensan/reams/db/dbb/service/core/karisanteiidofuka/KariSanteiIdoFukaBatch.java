@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKo
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKonkyoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo8Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.TokuchoTeishishaChushutsuMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.csv.KarisanteiIdoKekkaIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
@@ -77,6 +79,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
+import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -297,15 +300,36 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     @Transaction
     public void selectTokuchoTeishisha(FlexibleYear 賦課年度, RDateTime 抽出開始日時,
             RDateTime 抽出終了日時) {
-
+        YMDHMS 抽出開始日時Format = new YMDHMS("00000101010000");
+        YMDHMS 抽出終了日時Format = new YMDHMS("99991230235959");
+        if (抽出開始日時 != null) {
+            RString strOne = 抽出開始日時.getDate().toDateString();
+            int hour = 抽出開始日時.getHour();
+            int minute = 抽出開始日時.getMinute();
+            int second = 抽出開始日時.getSecond();
+            RString strTwo = hour < NUM_10 ? RSTRING_0.concat(new RString(hour + "")) : new RString(hour + "");
+            RString strThree = minute < NUM_10 ? RSTRING_0.concat(new RString(minute + "")) : new RString(minute + "");
+            RString strFour = second < NUM_10 ? RSTRING_0.concat(new RString(second + "")) : new RString(second + "");
+            抽出開始日時Format = new YMDHMS(strOne.concat(strTwo).concat(strThree).concat(strFour));
+        }
+        if (抽出終了日時 != null) {
+            RString strOne = 抽出終了日時.getDate().toDateString();
+            int hour = 抽出終了日時.getHour();
+            int minute = 抽出終了日時.getMinute();
+            int second = 抽出終了日時.getSecond();
+            RString strTwo = hour < NUM_10 ? RSTRING_0.concat(new RString(hour + "")) : new RString(hour + "");
+            RString strThree = minute < NUM_10 ? RSTRING_0.concat(new RString(minute + "")) : new RString(minute + "");
+            RString strFour = second < NUM_10 ? RSTRING_0.concat(new RString(second + "")) : new RString(second + "");
+            抽出終了日時Format = new YMDHMS(strOne.concat(strTwo).concat(strThree).concat(strFour));
+        }
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
         builder.setサブ業務コード(SubGyomuCode.DBB介護賦課);
         builder.set業務コード(GyomuCode.DB介護保険);
         IKozaSearchKey searchKey = builder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
-        KariSanteiIdoFukaMybatisParameter parameter = new KariSanteiIdoFukaMybatisParameter(
-                賦課年度, null, 抽出開始日時, 抽出終了日時, searchKey, list, null);
+        TokuchoTeishishaChushutsuMybatisParameter parameter = new TokuchoTeishishaChushutsuMybatisParameter(
+                賦課年度, null, 抽出開始日時Format, 抽出終了日時Format, searchKey, list, null);
         mapper.insert特別徴収停止者(parameter);
     }
 
@@ -851,7 +875,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                 前年度の保険料段階リスト = HokenryoDankaiSettings.createInstance()
                         .get保険料段階ListIn(調定年度);
                 if (前年度の保険料段階リスト != null && !RString.isNullOrEmpty(編集後賦課の情報.get保険料段階_仮算定時())) {
-                    保険料率 = 前年度の保険料段階リスト.getBy段階区分(編集後賦課の情報.get保険料段階_仮算定時()).get保険料率();
+                    保険料率 = 前年度の保険料段階リスト.getBy段階Index(編集後賦課の情報.get保険料段階_仮算定時()).get保険料率();
                 }
             }
             TokuchoKarisanteiKiwariOutput 特徴仮算定期割 = get特徴仮算定期割(調定年度, 保険料率);
@@ -1002,6 +1026,12 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         }
         賦課根拠.setGokeiShotoku(前年度合計所得金額);
         賦課根拠.setKotekiNenkinShunyu(前年度公的年金収入額);
+        List<KazeiKubunHonninKubun> setaiinKazeiKubunList = new ArrayList();
+        KazeiKubunHonninKubun kazeiKubunHonninKubun = new KazeiKubunHonninKubun();
+        kazeiKubunHonninKubun.set本人区分(HonninKubun.本人);
+        kazeiKubunHonninKubun.set課税区分(KazeiKubun.toValue(課税区分));
+        setaiinKazeiKubunList.add(kazeiKubunHonninKubun);
+        賦課根拠.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         HokenryoDankaiHanteiParameter parameter = new HokenryoDankaiHanteiParameter();
         parameter.setFukaNendo(調定年度);
         parameter.setFukaKonkyo(賦課根拠);
@@ -1084,7 +1114,10 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), 出力順ID);
+        IOutputOrder outputOrder = null;
+        if (出力順ID != null) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), 出力順ID);
+        }
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(KarisanteiIdoKekkaIchiranProperty.BreakerFieldsEnum.class,
@@ -1123,7 +1156,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             更正前後EntityList.add(entity);
         }
 
-        new KarisanteiIdoKekkaIchiranPrintService().print仮算定異動一括結果一覧表(更正前後EntityList, new RString(出力順ID),
+        new KarisanteiIdoKekkaIchiranPrintService().print仮算定異動一括結果一覧表(更正前後EntityList, 出力順ID,
                 調定日時, 賦課年度);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID_仮算定異動一括結果一覧表CSV, UzUDE0831EucAccesslogFileType.Csv);

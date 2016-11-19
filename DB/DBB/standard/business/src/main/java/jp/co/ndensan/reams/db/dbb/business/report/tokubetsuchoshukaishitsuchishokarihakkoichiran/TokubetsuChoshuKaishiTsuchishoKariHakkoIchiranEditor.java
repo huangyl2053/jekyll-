@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchish
 
 import java.util.List;
 import jp.co.ndensan.reams.ca.cax.entity.db.psm.CaFt703FindNokumiEntity;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohakko.TsuchishoDataTempEntity;
@@ -16,7 +17,6 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
@@ -50,6 +50,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
     private static final int NUM2 = 2;
     private static final int NUM3 = 3;
     private static final int NUM4 = 4;
+    private final KariSanteiTsuchiShoKyotsu 仮算定通知書情報;
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity;
     private final FlexibleYear 調定年度;
     private final YMDHMS 帳票作成日時;
@@ -62,6 +63,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
     /**
      * コンストラクタです
      *
+     * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @param 編集後仮算定通知書共通情報entity EditedKariSanteiTsuchiShoKyotsu
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 YMDHMS
@@ -71,10 +73,12 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
      * @param 改頁項目リスト List<RString>
      * @param entity
      */
-    public TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
+    public TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
+            EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
             FlexibleYear 調定年度, YMDHMS 帳票作成日時,
             int 連番, Association association, List<RString> 出力項目リスト, List<RString> 改頁項目リスト,
             TsuchishoDataTempEntity entity) {
+        this.仮算定通知書情報 = 仮算定通知書情報;
         this.編集後仮算定通知書共通情報entity = 編集後仮算定通知書共通情報entity;
         this.調定年度 = 調定年度;
         this.帳票作成日時 = 帳票作成日時;
@@ -132,6 +136,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
             source.listLower_8 = 仮徴収月6月;
             source.listLower_10 = 仮徴収月8月;
         }
+        set改頁(source);
         return source;
     }
 
@@ -142,10 +147,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         source.listUpper_6 = RString.EMPTY;
         source.hokenshaNo = RString.EMPTY;
         source.atesaki_choikiCode = RString.EMPTY;
-        source.atesaki_banchiCode1 = RString.EMPTY;
-        source.atesaki_banchiCode2 = RString.EMPTY;
-        source.atesaki_banchiCode3 = RString.EMPTY;
-        source.atesaki_banchiCode4 = RString.EMPTY;
+        source.atesaki_banchiCode = RString.EMPTY;
         source.atesaki_gyoseikuCode = RString.EMPTY;
         source.atesaki_chikuCode1 = RString.EMPTY;
         source.atesaki_chikuCode2 = RString.EMPTY;
@@ -161,10 +163,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
 
     private void set宛先改頁(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source, UaFt250FindAtesakiEntity 宛先) {
         ChoikiCode 町域コード = 宛先.getChoikiCode();
-        BanchiCode 番地コード1 = 宛先.getBanchiCode1();
-        BanchiCode 番地コード2 = 宛先.getBanchiCode2();
-        BanchiCode 番地コード3 = 宛先.getBanchiCode3();
-        BanchiCode 番地コード4 = 宛先.getBanchiCode4();
+        RString 番地コード = entity.get番地コード();
         GyoseikuCode 行政区コード = 宛先.getGyoseikuCode();
         ChikuCode 地区１ = 宛先.getChikuCode1();
         ChikuCode 地区２ = 宛先.getChikuCode2();
@@ -172,17 +171,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         if (町域コード != null) {
             source.atesaki_choikiCode = 町域コード.value();
         }
-        if (番地コード1 != null) {
-            source.atesaki_banchiCode1 = 番地コード1.value();
-        }
-        if (番地コード2 != null) {
-            source.atesaki_banchiCode2 = 番地コード2.value();
-        }
-        if (番地コード3 != null) {
-            source.atesaki_banchiCode3 = 番地コード3.value();
-        }
-        if (番地コード4 != null) {
-            source.atesaki_banchiCode4 = 番地コード4.value();
+        if (番地コード != null) {
+            source.atesaki_banchiCode = 番地コード;
         }
         if (行政区コード != null) {
             source.atesaki_gyoseikuCode = 行政区コード.value();
@@ -326,5 +316,39 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
                         get更正後特徴期別金額03(), 0);
             }
         }
+    }
+
+    private void set改頁(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
+        if (編集後仮算定通知書共通情報entity.get編集後宛先() != null) {
+            source.banchiCode = 編集後仮算定通知書共通情報entity.get編集後宛先().get編集番地コード();
+            source.choikiCode = 編集後仮算定通知書共通情報entity.get編集後宛先().get町域コード();
+            source.gyoseikuCode = 編集後仮算定通知書共通情報entity.get編集後宛先().get行政区コード().getColumnValue();
+            source.chikuCode1 = 編集後仮算定通知書共通情報entity.get編集後宛先().get地区１();
+            source.chikuCode2 = 編集後仮算定通知書共通情報entity.get編集後宛先().get地区２();
+            source.chikuCode3 = 編集後仮算定通知書共通情報entity.get編集後宛先().get地区３();
+        }
+        if (編集後仮算定通知書共通情報entity.get編集後個人() != null) {
+            source.shikibetsuCode = 編集後仮算定通知書共通情報entity.get編集後個人().get識別コード().value();
+            source.kanaMeisho = 編集後仮算定通知書共通情報entity.get編集後個人().get氏名５０音カナ();
+        }
+        source.hihokenshaNo = 編集後仮算定通知書共通情報entity.get被保険者番号().getColumnValue();
+        if (仮算定通知書情報.get徴収方法情報_更正後() != null) {
+            source.nenkinCode = 仮算定通知書情報.get徴収方法情報_更正後().get本徴収_年金コード();
+        }    
+        if (仮算定通知書情報.get納組情報() != null && 仮算定通知書情報.get納組情報().getNokumi() != null) {
+            source.nokumiCode = 仮算定通知書情報.get納組情報().getNokumi().getNokumiCode();
+        }
+        source.seihoFlag = 仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get生活保護扶助種類();
+        source.choteiJiyu = get調定事由(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由1())
+                .concat(get調定事由(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由2()))
+                .concat(get調定事由(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由3()))
+                .concat(get調定事由(仮算定通知書情報.get賦課の情報_更正後().get賦課情報().get調定事由4()));
+    }
+
+    private RString get調定事由(RString 項目) {
+        if (RString.isNullOrEmpty(項目)) {
+            return RString.EMPTY;
+        }
+        return 項目;
     }
 }

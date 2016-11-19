@@ -17,10 +17,6 @@ import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100011.KarisanteiH
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
-import jp.co.ndensan.reams.ur.urz.business.core.kingaku.IKingakuFormatter;
-import jp.co.ndensan.reams.ur.urz.business.core.kingaku.KingakuFormatter;
-import jp.co.ndensan.reams.ur.urz.definition.core.kingaku.KingakuUnit;
-import jp.co.ndensan.reams.ur.urz.definition.core.kingaku.Sign;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -30,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 仮算定額変更【A4縦タイプ】のReportです。
@@ -48,6 +45,8 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
     private static final int NUM8 = 8;
     private static final int NUM12 = 12;
     private static final int NUM16 = 16;
+    private static final RString 年度 = new RString("年度");
+    private static final RString 介護保険料仮徴収額変更通知書 = new RString("介護保険料仮徴収額変更通知書");
 
     /**
      * コンストラクタです。
@@ -114,6 +113,7 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
         for (int index = 0; index < 行; index++) {
             item = new KarisanteiHenkoTsuchishoA4TateItem();
             setLineData(index, item, 編集後仮算定通知書共通情報, 特徴納期情報リスト, 普徴納期情報リスト);
+            item.setTitle3(介護保険料仮徴収額変更通知書);
             outputItemList.add(item);
         }
 
@@ -126,7 +126,7 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
         item.setBunshoNo(文書番号);
         if (編集後仮算定通知書共通情報.get調定年度() != null) {
             item.setChoteiNendo(編集後仮算定通知書共通情報.get調定年度().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年度));
         }
 
         EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前 = 編集後仮算定通知書共通情報.get更正前();
@@ -151,26 +151,25 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
         item.setShikibetsuCode(編集後仮算定通知書共通情報.get識別コード() != null ? 編集後仮算定通知書共通情報.get識別コード().getColumnValue() : RString.EMPTY);
 
         set期間_自_至(item, 更正前, 更正後);
-        item.setHokenryoGakuMae(更正前.get更正前介護保険料仮徴収額合計() != null ? new RString(更正前.get更正前介護保険料仮徴収額合計().toString()) : RString.EMPTY);
-        item.setHokenryoGakuAto(更正後.get更正後介護保険料仮徴収額合計() != null ? new RString(更正後.get更正後介護保険料仮徴収額合計().toString()) : RString.EMPTY);
+        item.setHokenryoGakuMae(更正前.get更正前介護保険料仮徴収額合計() != null
+                ? DecimalFormatter.toコンマ区切りRString(更正前.get更正前介護保険料仮徴収額合計(), 0) : RString.EMPTY);
+        item.setHokenryoGakuAto(更正後.get更正後介護保険料仮徴収額合計() != null
+                ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後介護保険料仮徴収額合計(), 0) : RString.EMPTY);
 
         if (編集後仮算定通知書共通情報.get増減額() != null) {
-            IKingakuFormatter 増減額formatter = KingakuFormatter.create(編集後仮算定通知書共通情報.get増減額());
-            RString zogenGaku = new RString(増減額formatter.format(KingakuUnit.円).setSignPattern(Sign.マイナス記号使用).setCommaSeparated().toString());
+            RString zogenGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get増減額(), 0);
             item.setZogenGaku(zogenGaku);
         }
 
         item.setKoseigoHokenryoGaku(更正後.get更正後介護保険料仮徴収額合計() != null ? new RString(更正後.get更正後介護保険料仮徴収額合計().toString()) : RString.EMPTY);
 
         if (編集後仮算定通知書共通情報.get納付済額_未到来期含む() != null) {
-            IKingakuFormatter 納付済額formatter = KingakuFormatter.create(編集後仮算定通知書共通情報.get納付済額_未到来期含む());
-            RString nofuzumiGaku = new RString(納付済額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
+            RString nofuzumiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get納付済額_未到来期含む(), 0);
             item.setNofuzumiGaku(nofuzumiGaku);
         }
 
         if (編集後仮算定通知書共通情報.get今後納付すべき額() != null) {
-            IKingakuFormatter 今後納付すべき額formatter = KingakuFormatter.create(編集後仮算定通知書共通情報.get今後納付すべき額());
-            RString kongoNofuSubekiGaku = new RString(今後納付すべき額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
+            RString kongoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get今後納付すべき額(), 0);
             item.setKongoNofuSubekiGaku(kongoNofuSubekiGaku);
         }
 
@@ -214,14 +213,20 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
             item.setListKibetsu_7(RString.EMPTY);
         }
         if (行 == 0) {
-            item.setListKibetsu_8(更正前.get更正前特徴期別金額01() != null ? new RString(更正前.get更正前特徴期別金額01().toString()) : RString.EMPTY);
-            item.setListKibetsu_9(更正後.get更正後特徴期別金額01() != null ? new RString(更正後.get更正後特徴期別金額01().toString()) : RString.EMPTY);
+            item.setListKibetsu_8(更正前.get更正前特徴期別金額01() != null
+                    ? DecimalFormatter.toコンマ区切りRString(更正前.get更正前特徴期別金額01(), 0) : RString.EMPTY);
+            item.setListKibetsu_9(更正後.get更正後特徴期別金額01() != null
+                    ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額01(), 0) : RString.EMPTY);
         } else if (行 == 1) {
-            item.setListKibetsu_8(更正前.get更正前特徴期別金額02() != null ? new RString(更正前.get更正前特徴期別金額02().toString()) : RString.EMPTY);
-            item.setListKibetsu_9(更正後.get更正後特徴期別金額02() != null ? new RString(更正後.get更正後特徴期別金額02().toString()) : RString.EMPTY);
+            item.setListKibetsu_8(更正前.get更正前特徴期別金額02() != null
+                    ? DecimalFormatter.toコンマ区切りRString(更正前.get更正前特徴期別金額02(), 0) : RString.EMPTY);
+            item.setListKibetsu_9(更正後.get更正後特徴期別金額02() != null
+                    ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額02(), 0) : RString.EMPTY);
         } else if (行 == 2) {
-            item.setListKibetsu_8(更正前.get更正前特徴期別金額03() != null ? new RString(更正前.get更正前特徴期別金額03().toString()) : RString.EMPTY);
-            item.setListKibetsu_9(更正後.get更正後特徴期別金額03() != null ? new RString(更正後.get更正後特徴期別金額03().toString()) : RString.EMPTY);
+            item.setListKibetsu_8(更正前.get更正前特徴期別金額03() != null
+                    ? DecimalFormatter.toコンマ区切りRString(更正前.get更正前特徴期別金額03(), 0) : RString.EMPTY);
+            item.setListKibetsu_9(更正後.get更正後特徴期別金額03() != null
+                    ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額03(), 0) : RString.EMPTY);
         }
 
         set普徴(行, item, 普徴納期情報リスト, 更正前, 更正後);
@@ -267,22 +272,18 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
         } else if ((更正前期別金額 == null || Decimal.ZERO.equals(更正前期別金額)) && (更正後期別金額 != null && !Decimal.ZERO.equals(更正後期別金額))) {
             item.setListKibetsu_4(new RString("0"));
 
-            IKingakuFormatter 更正後期別金額formatter = KingakuFormatter.create(更正後期別金額);
-            RString 更正後期別金額RStr = new RString(更正後期別金額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
+            RString 更正後期別金額RStr = DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0);
             item.setListKibetsu_5(更正後期別金額RStr);
         } else if ((更正前期別金額 != null && !Decimal.ZERO.equals(更正前期別金額)) && (更正後期別金額 == null || Decimal.ZERO.equals(更正後期別金額))) {
 
-            IKingakuFormatter 更正前期別金額formatter = KingakuFormatter.create(更正前期別金額);
-            RString 更正前期別金額RStr = new RString(更正前期別金額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
+            RString 更正前期別金額RStr = DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0);
             item.setListKibetsu_4(更正前期別金額RStr);
             item.setListKibetsu_5(new RString("0"));
         } else if (更正前期別金額 != null && !Decimal.ZERO.equals(更正前期別金額) && 更正後期別金額 != null && !Decimal.ZERO.equals(更正後期別金額)) {
-            IKingakuFormatter 更正前期別金額formatter = KingakuFormatter.create(更正前期別金額);
-            RString 更正前期別金額RStr = new RString(更正前期別金額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
+            RString 更正前期別金額RStr = DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0);
             item.setListKibetsu_4(更正前期別金額RStr);
 
-            IKingakuFormatter 更正後期別金額formatter = KingakuFormatter.create(更正後期別金額);
-            RString 更正後期別金額RStr = new RString(更正後期別金額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
+            RString 更正後期別金額RStr = DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0);
             item.setListKibetsu_5(更正後期別金額RStr);
         }
     }

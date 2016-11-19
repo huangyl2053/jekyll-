@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.Kyotaku
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakuserviceriyohyomain.TaishoshaIchiranResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.TodokedeshaKankeiKBN;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.KyotakuServiceKeikakuShokaiMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.dgKyotakuServiceRirekiIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.dgRiyoNentstsuIchiran_Row;
@@ -21,7 +22,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.kyotakuserviceriyohyomain.Kyotaku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.HihokenshaKankeiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.TodokedeKubun;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -54,8 +55,9 @@ public class KyotakuServiceKeikakuShokaiMainHander {
      * 画面初期化のメソッドです。
      *
      * @param 資格対象者 TaishoshaKey
+     * @return List<KyotakuServiceRirekiIchiranEntityResult>
      */
-    public void initialize(TaishoshaKey 資格対象者) {
+    public List<KyotakuServiceRirekiIchiranEntityResult> initialize(TaishoshaKey 資格対象者) {
         div.getCcdKaigoAtenaInfo().initialize(資格対象者.get識別コード());
 
         if (資格対象者.get被保険者番号() == null || RString.EMPTY.equals(資格対象者.get被保険者番号().getColumnValue())) {
@@ -84,6 +86,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
 
         }
         div.getDgKyotakuServiceRirekiIchiran().setDataSource(rowList);
+        return entityLists;
     }
 
     /**
@@ -110,17 +113,17 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         } else {
             div.getTxtTodokedeYmd().setValue(DateConverter.flexibleDateToRDate(居宅給付計画届出.get届出年月日()));
         }
-        if (居宅給付計画届出.get届出区分() == null) {
+        if (RString.isNullOrEmpty(居宅給付計画届出.get届出区分())) {
             div.getTxtTodokedeKubun().clearValue();
         } else {
-            div.getTxtTodokedeKubun().setValue(居宅給付計画届出.get届出区分());
+            div.getTxtTodokedeKubun().setValue(TodokedeKubun.toValue(居宅給付計画届出.get届出区分()).get名称());
         }
-        if (row.getTekiyoKaishiYMD() == null) {
+        if (row.getTekiyoKaishiYMD() == null || row.getTekiyoKaishiYMD().getValue() == null) {
             div.getTxtTekiyoKikan().clearFromValue();
         } else {
             div.getTxtTekiyoKikan().setFromValue(new RDate(row.getTekiyoKaishiYMD().getValue().toString()));
         }
-        if (row.getTekiyoShuryoYMD() == null) {
+        if (row.getTekiyoShuryoYMD() == null || row.getTekiyoShuryoYMD().getValue() == null) {
             div.getTxtTekiyoKikan().clearToValue();
         } else {
             div.getTxtTekiyoKikan().setToValue(new RDate(row.getTekiyoShuryoYMD().getValue().toString()));
@@ -143,7 +146,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().clearValue();
         } else {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().setValue(
-                    HihokenshaKankeiCode.toValue(居宅給付計画届出.get届出者関係区分()).get名称());
+                    TodokedeshaKankeiKBN.toValue(居宅給付計画届出.get届出者関係区分()).get名称());
         }
         if (居宅給付計画届出.get届出者電話番号() == null) {
             div.getTodokedesha().getTxtTodokedeshaTelNo().clearDomain();

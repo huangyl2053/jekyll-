@@ -119,7 +119,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
     private static final int INT_8 = 8;
     private static final RString 文字列_0 = new RString("0");
     private static final RString 文字列_1 = new RString("1");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBU900002"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC900004"));
     private static final RString 出力ファイル名 = new RString("処理結果リスト.csv");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");

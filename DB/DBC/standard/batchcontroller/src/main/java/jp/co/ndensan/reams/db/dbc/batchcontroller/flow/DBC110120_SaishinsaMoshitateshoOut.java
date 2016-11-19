@@ -133,7 +133,9 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
         送付ファイルエントリ情報List = new ArrayList<>();
         parameter = new SaishinsaMoshitateGetSoufuDataProcessParameter();
         parameter.set再処理区分(getParameter().get再処理区分());
-        parameter.set処理年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
+        if (getParameter().get処理年月() != null) {
+            parameter.set処理年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
+        }
         RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
             parameter.set文字コード(Encode.UTF_8);

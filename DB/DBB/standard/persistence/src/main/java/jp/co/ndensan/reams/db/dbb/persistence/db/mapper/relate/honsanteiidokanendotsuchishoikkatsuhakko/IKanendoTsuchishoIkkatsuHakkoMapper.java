@@ -69,6 +69,18 @@ public interface IKanendoTsuchishoIkkatsuHakkoMapper {
     void update異動賦課情報一時テーブル生活保護区分();
 
     /**
+     * 異動賦課情報一時テーブルの特徴8月開始者区分を更新する。
+     *
+     */
+    void update異動賦課情報一時テーブル特徴8月開始者区分();
+
+    /**
+     * 異動賦課情報一時テーブルの特徴10月開始者区分を更新する。
+     *
+     */
+    void update異動賦課情報一時テーブル特徴10月開始者区分();
+
+    /**
      * 異動賦課情報一時抽出です。
      *
      * @param parameter Map<String, Object>

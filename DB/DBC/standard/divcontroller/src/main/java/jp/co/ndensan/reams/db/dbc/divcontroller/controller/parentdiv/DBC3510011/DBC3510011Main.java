@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC3510011.DBC
 import jp.co.ndensan.reams.db.dbc.service.core.hokenshajohosoufu.HokenshaJoHoFindler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -98,6 +99,9 @@ public class DBC3510011Main {
         RString filePath = Path.getRootPath(RString.EMPTY).concat("/home/D209007/shared/sharedFiles/DB/")
                 .concat(entity.getFileName()).concat("/").concat(schemaID.replace(":", "."));
         File file = new File(filePath.toString());
+        if (file.listFiles() == null || file.listFiles().length == 0) {
+            throw new ApplicationException(DbzErrorMessages.ダウンロード失敗.getMessage().evaluate());
+        }
         RString fileName = new RString(file.listFiles()[0].getName());
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(des, new FilesystemPath(filePath), opts);

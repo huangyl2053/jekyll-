@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.report.riyojokyotokeihyo;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.tokeihyo.RiyojokyoTokeihyo_EditPattern;
-import jp.co.ndensan.reams.db.dbc.definition.core.tokeihyo.RiyojokyoTokeihyo_KaisuShukeiPattern;
 import jp.co.ndensan.reams.db.dbc.definition.core.tokeihyo.TokeiServiceShurui;
 import jp.co.ndensan.reams.db.dbc.entity.report.riyojokyotokeihyo.RiyoJokyoTokeihyoShukeiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.riyojokyotokeihyo.RiyoJokyoTokeihyoReportSource;
@@ -54,32 +53,35 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
     }
 
     private RiyoJokyoTokeihyoReportSource editSource(RiyoJokyoTokeihyoReportSource source) {
-
         if (item == null) {
             return source;
         }
+        RString サービス種類コード = item.getリスト_サービス種類集計().get(0).getサービス種類コード();
+        RiyojokyoTokeihyo_EditPattern 利用状況統計表_編集仕様 = RiyojokyoTokeihyo_EditPattern.toValue(サービス種類コード);
         int 集計項目せーズ = item.getリスト_サービス種類集計().size();
         if (item.get処理市町村コード() != null && !RString.EMPTY.equals(item.get処理市町村コード().getColumnValue())) {
             source.kyuShichoson = item.get処理市町村コード().getColumnValue().concat(コロン).concat(item.get処理市町村名());
-        } else if (!RString.EMPTY.equals(item.get旧市町村コード()) || !旧市町村コードフラグ.equals(item.get旧市町村コード())) {
+        } else if (RString.isNullOrEmpty(item.get旧市町村コード()) || 旧市町村コードフラグ.equals(item.get旧市町村コード())) {
+            source.kyuShichoson = RString.EMPTY;
+        } else {
             source.kyuShichoson = item.get旧市町村コード().concat(コロン).concat(item.get旧市町村名());
         }
         source.printTimeStamp = this.get作成年月日時(item.get作成日時()).concat(RString.HALF_SPACE).concat(作成);
         source.hokenshaName = item.get保険者名();
         source.hokenshaNo = item.get保険者番号();
-        source.list1_1 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(0).getサービス種類コード()).get名称();
-        source.list1_2 = this.金額(item.getリスト_サービス種類集計().get(0).get集計項目1_1());
-        source.list1_3 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_2(), 0);
-        source.list1_4 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_3(), 0);
-        source.list1_5 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_4(), 0);
-        source.list1_6 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_5(), 0);
-        source.list1_7 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_6(), 0);
-        source.list1_8 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_7(), 0);
-        source.list1_9 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_8(), 0);
-        source.list1_10 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_9(), 0);
-        source.list1_11 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_10(), 0);
+        source.list1_1 = 利用状況統計表_編集仕様.get集計項目名1();
+        source.list1_2 = 金額(item.getリスト_サービス種類集計().get(0).get集計項目1_1());
+        source.list1_3 = format金額(item.getリスト_サービス種類集計().get(0).get集計項目1_2());
+        source.list1_4 = format金額(item.getリスト_サービス種類集計().get(0).get集計項目1_3());
+        source.list1_5 = format金額(item.getリスト_サービス種類集計().get(0).get集計項目1_4());
+        source.list1_6 = format金額(item.getリスト_サービス種類集計().get(0).get集計項目1_5());
+        source.list1_7 = format金額(item.getリスト_サービス種類集計().get(0).get集計項目1_6());
+        source.list1_8 = format金額(item.getリスト_サービス種類集計().get(0).get集計項目1_7());
+        source.list1_9 = format金額(item.getリスト_サービス種類集計().get(0).get集計項目1_8());
+        source.list1_10 = format金額(item.getリスト_サービス種類集計().get(0).get集計項目1_9());
+        source.list1_11 = format金額(item.getリスト_サービス種類集計().get(0).get集計項目1_10());
         if (1 < 集計項目せーズ && item.getリスト_サービス種類集計().get(1) != null) {
-            RString サービス種類 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(1).getサービス種類コード()).get名称();
+            RString サービス種類 = 利用状況統計表_編集仕様.get名称();
             if (RString.EMPTY.equals(サービス種類)) {
                 source.list2_1 = RString.EMPTY;
                 source.list2_2 = RString.EMPTY;
@@ -94,7 +96,7 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
                 source.list2_9 = RString.EMPTY;
                 source.list2_11 = RString.EMPTY;
             } else {
-                source.list2_1 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(1).getサービス種類コード()).get名称();
+                source.list2_1 = 利用状況統計表_編集仕様.get集計項目名2();
                 source.list2_2 = this.内訳有無(item.getリスト_サービス種類集計().get(1).get集計項目2_1(),
                         item.getリスト_サービス種類集計().get(1).get集計項目2内訳_1());
                 source.list2_10 = this.内訳有無(item.getリスト_サービス種類集計().get(1).get集計項目2_9(),
@@ -118,13 +120,13 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
             }
         }
         if (2 < 集計項目せーズ && item.getリスト_サービス種類集計().get(2) != null) {
-            source.list3_1 = item.getリスト_サービス種類集計().get(2).getサービス種類コード().substring(1).concat("．");
+            source.list3_1 = new RString(new Decimal(item.getリスト_サービス種類集計().get(2).getサービス種類コード().toString()).toString()).concat("．");
             source.list3_10 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_7());
             source.list3_11 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_8());
             source.list3_12 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_9());
             source.list3_13 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_10());
-            source.list3_2 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(2).getサービス種類コード()).get名称();
-            source.list3_3 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(2).getサービス種類コード()).get名称();
+            source.list3_2 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(2).getサービス種類コード()).get統計表印字名称1();
+            source.list3_3 = 利用状況統計表_編集仕様.get集計項目名3();
             source.list3_4 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_1());
             source.list3_5 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_2());
             source.list3_6 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_3());
@@ -133,9 +135,9 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
             source.list3_9 = this.集計項目(item.getリスト_サービス種類集計().get(2).get集計項目3_6());
         }
         if (サイズ_3 < 集計項目せーズ && item.getリスト_サービス種類集計().get(サイズ_3) != null) {
-            source.list4_1 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(サイズ_3).getサービス種類コード()).get名称();
+            source.list4_1 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(サイズ_3).getサービス種類コード()).get統計表印字名称2();
             source.list4_2 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(サイズ_3).
-                    getサービス種類コード()).get名称();
+                    getサービス種類コード()).get集計項目名4();
             source.list4_3 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_3).get集計項目4_1());
             source.list4_4 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_3).get集計項目4_2());
             source.list4_5 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_3).get集計項目4_3());
@@ -148,9 +150,9 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
             source.list4_12 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_3).get集計項目4_10());
         }
         if (サイズ_4 < 集計項目せーズ && item.getリスト_サービス種類集計().get(サイズ_4) != null) {
-            source.list5_1 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(サイズ_4).getサービス種類コード()).get名称();
+            source.list5_1 = TokeiServiceShurui.toValue(item.getリスト_サービス種類集計().get(サイズ_4).getサービス種類コード()).get統計表印字名称3();
             source.list5_2 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(サイズ_4).
-                    getサービス種類コード()).get名称();
+                    getサービス種類コード()).get集計項目名5();
             source.list5_3 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_4).get集計項目5_1());
             source.list5_5 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_4).get集計項目5_2());
             source.list5_5 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_4).get集計項目5_3());
@@ -164,7 +166,7 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
         }
         if (サイズ_5 < 集計項目せーズ && item.getリスト_サービス種類集計().get(サイズ_5) != null) {
             source.list6_1 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(サイズ_5).
-                    getサービス種類コード()).get名称();
+                    getサービス種類コード()).get集計項目名6();
             source.list6_2 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_5).get集計項目6_1());
             source.list6_3 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_5).get集計項目6_2());
             source.list6_6 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_5).get集計項目6_3());
@@ -178,7 +180,7 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
         }
         if (サイズ_6 < 集計項目せーズ && item.getリスト_サービス種類集計().get(サイズ_6) != null) {
             source.list7_1 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().
-                    get(サイズ_6).getサービス種類コード()).get名称();
+                    get(サイズ_6).getサービス種類コード()).get集計項目名7();
             source.list7_2 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_6).get集計項目7_1());
             source.list7_3 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_6).get集計項目7_2());
             source.list7_7 = this.集計項目(item.getリスト_サービス種類集計().get(サイズ_6).get集計項目7_3());
@@ -208,17 +210,18 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
     }
 
     private RString 内訳有無(Decimal 集計項目2, Decimal 集計項目2_2) {
-        RString 内訳あり1 = RiyojokyoTokeihyo_KaisuShukeiPattern.居宅支援_内訳あり_合計加算なし.get名称();
-        RString 内訳あり2 = RiyojokyoTokeihyo_KaisuShukeiPattern.短期入所実日数_内訳あり_合計加算あり.get名称();
-        RString 内訳あり3 = RiyojokyoTokeihyo_KaisuShukeiPattern.短期入所実日数_内訳あり_合計加算なし.get名称();
-        if (RString.EMPTY.equals(内訳あり1) && RString.EMPTY.equals(内訳あり2) && RString.EMPTY.equals(内訳あり3)) {
-            return DecimalFormatter.
-                    toコンマ区切りRString(集計項目2, 0);
+        RiyojokyoTokeihyo_EditPattern 編集仕様 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(0).getサービス種類コード());
+        if (RString.isNullOrEmpty(編集仕様.get集計項目名2())) {
+            return RString.EMPTY;
         } else {
-            return DecimalFormatter.
-                    toコンマ区切りRString(集計項目2, 0).concat("(")
-                    .concat(DecimalFormatter.
-                            toコンマ区切りRString(集計項目2_2, 0)).concat(")");
+            boolean is内訳有無 = 編集仕様.get回数集計パターン().is内訳有無();
+            if (is内訳有無) {
+                return format金額(集計項目2).concat("(")
+                        .concat(format金額(集計項目2_2)).concat(")");
+            } else {
+                return format金額(集計項目2);
+
+            }
         }
     }
 
@@ -227,14 +230,21 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
         if (RString.EMPTY.equals(表示名称)) {
             return new RString(Decimal.ZERO.intValue());
         } else {
-            return DecimalFormatter.
-                    toコンマ区切りRString(金額, 0);
+            return format金額(金額);
         }
     }
 
     private RString 金額(Decimal 金額) {
-        if (Decimal.ZERO != 金額) {
-            return DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_1(), 0);
+        if (金額 != null || Decimal.ZERO.equals(金額)) {
+            return DecimalFormatter.toコンマ区切りRString(金額, 0);
+        } else {
+            return RString.HALF_SPACE;
+        }
+    }
+
+    private RString format金額(Decimal 金額) {
+        if (金額 != null) {
+            return DecimalFormatter.toコンマ区切りRString(金額, 0);
         } else {
             return RString.HALF_SPACE;
         }

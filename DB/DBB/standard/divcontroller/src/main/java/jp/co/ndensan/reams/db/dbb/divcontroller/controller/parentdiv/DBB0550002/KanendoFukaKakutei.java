@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0550002
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidokanendofukakakutei.KanendoIdoFukaKakutei;
+import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbQuestionMessages;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuInput;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.DBB0550002TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.KanendoFukaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgKanendoFukaIchiran_Row;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -76,13 +79,11 @@ public class KanendoFukaKakutei {
         ShoriDateKanri 確定処理日付 = fukaKakutei.getKakuteiKijunbi(div.getTxtChoteiNendo().getDomain());
         if (確定処理日付 == null) {
             getKanendoFukaKakuteiHandler(div).setヘッダ(異動処理日付);
+        } else if (異動処理日付.get基準日時().isBefore(確定処理日付.get基準日時())) {
+            throw new ApplicationException(DbzErrorMessages.理由付き確定不可.getMessage()
+                    .replace(過年度異動賦課.toString()));
         } else {
-            if (異動処理日付.get基準日時().isBefore(確定処理日付.get基準日時())) {
-                throw new ApplicationException(DbzErrorMessages.理由付き確定不可.getMessage()
-                        .replace(過年度異動賦課.toString()));
-            } else {
-                getKanendoFukaKakuteiHandler(div).setヘッダ(異動処理日付);
-            }
+            getKanendoFukaKakuteiHandler(div).setヘッダ(異動処理日付);
         }
         List<KanendoIdoFukaKakutei> 異動賦課対象List = fukaKakutei.getIdoFukaTaisho(異動処理日付.get基準日時());
         if (異動賦課対象List != null && !異動賦課対象List.isEmpty()) {
@@ -135,7 +136,10 @@ public class KanendoFukaKakutei {
      * @return ResponseData<KanendoFukaKakuteiDiv>
      */
     public ResponseData<KanendoFukaKakuteiDiv> onClick_dgKanendoFukaIchiran(KanendoFukaKakuteiDiv div) {
-        setViewState(div);
+        dgKanendoFukaIchiran_Row row = div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getClickedItem();
+        Optional<FukaShokaiKey> 後履歴 = getKanendoFukaKakuteiHandler(div).get後履歴Key(row);
+        Optional<FukaShokaiKey> 前履歴 = getKanendoFukaKakuteiHandler(div).get前履歴Key(row);
+        ViewStateHolder.put(ViewStateKeys.賦課比較キー, FukaHikakuInput.createFor前履歴との比較(後履歴.get(), 前履歴.get()));
         return ResponseData.of(div).forwardWithEventName(DBB0550002TransitionEventName.選択).respond();
     }
 
@@ -154,14 +158,6 @@ public class KanendoFukaKakutei {
             return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
-    }
-
-    private void setViewState(KanendoFukaKakuteiDiv div) {
-        dgKanendoFukaIchiran_Row row = div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getClickedItem();
-        ViewStateHolder.put(ViewStateKeys.調定年度, row.getTxtChoteiNendo().getValue());
-        ViewStateHolder.put(ViewStateKeys.賦課年度, row.getTxtChoteiNendo().getValue());
-        ViewStateHolder.put(ViewStateKeys.通知書番号, row.getTxtChoteiNendo().getValue());
-        ViewStateHolder.put(ViewStateKeys.履歴番号, row.getTxtChoteiNendo().getValue());
     }
 
     private KanendoFukaKakuteiHandler getKanendoFukaKakuteiHandler(KanendoFukaKakuteiDiv div) {

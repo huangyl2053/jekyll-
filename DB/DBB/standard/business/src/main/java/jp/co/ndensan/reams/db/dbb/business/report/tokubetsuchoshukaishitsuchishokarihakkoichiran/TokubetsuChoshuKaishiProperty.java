@@ -100,6 +100,8 @@ public class TokubetsuChoshuKaishiProperty
             BreakerCatalog<TokubetsuChoshuKaishiSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
+
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<TokubetsuChoshuKaishiSource> occuredBreak(
@@ -118,19 +120,43 @@ public class TokubetsuChoshuKaishiProperty
 
         RString 帳票物理名 = RString.EMPTY;
 
-        //QA1854 確認中
-        if (BreakerFieldsEnum.郵便番号.get項目ID().equals(項目ID)) {
+        if (BreakerFieldsEnum.郵便番号.equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listUpper_2.name());
+        } else if (BreakerFieldsEnum.町域コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.choikiCode.name());
+        } else if (BreakerFieldsEnum.番地コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.banchiCode.name());
+        } else if (BreakerFieldsEnum.行政区コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.gyoseikuCode.name());
+        } else if (BreakerFieldsEnum.地区１.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.chikuCode1.name());
+        } else if (BreakerFieldsEnum.地区２.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.chikuCode2.name());
+        } else if (BreakerFieldsEnum.地区３.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.chikuCode3.name());
         } else if (BreakerFieldsEnum.世帯コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listLower_2.name());
+        } else if (BreakerFieldsEnum.識別コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.shikibetsuCode.name());
+        } else if (BreakerFieldsEnum.氏名５０音カナ.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.kanaMeisho.name());
         } else if (BreakerFieldsEnum.生年月日.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listUpper_5.name());
         } else if (BreakerFieldsEnum.性別.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listUpper_6.name());
         } else if (BreakerFieldsEnum.市町村コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.hokenshaNo.name());
+        } else if (BreakerFieldsEnum.被保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.hihokenshaNo.name());
+        } else if (BreakerFieldsEnum.年金コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.nenkinCode.name());
+        } else if (BreakerFieldsEnum.納組コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.nokumiCode.name());
+        } else if (BreakerFieldsEnum.生活保護種別.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.seihoFlag.name());
+        } else if (BreakerFieldsEnum.十月特徴開始者.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.tokuchoKaishi10.name());
         }
-
         return 帳票物理名;
     }
 
@@ -148,21 +174,9 @@ public class TokubetsuChoshuKaishiProperty
          */
         町域コード(new RString("0002"), new RString("町域コード"), FORMAT.concat(new RString("Atesaki_choikiCode")).concat(FORMAT)),
         /**
-         * 番地コード1
+         * 番地コード
          */
-        番地コード1(new RString("0003"), new RString("番地コード1"), new RString("\"Atesaki_banchiCode1\"")),
-        /**
-         * 番地コード2
-         */
-        番地コード2(new RString("0003"), new RString("番地コード2"), new RString("\"Atesaki_banchiCode2\"")),
-        /**
-         * 番地コード3
-         */
-        番地コード3(new RString("0003"), new RString("番地コード3"), new RString("\"Atesaki_banchiCode3\"")),
-        /**
-         * 番地コード4
-         */
-        番地コード4(new RString("0003"), new RString("番地コード4"), new RString("\"Atesaki_banchiCode4\"")),
+        番地コード(new RString("0003"), new RString("番地コード"), new RString("\"Atesaki_banchiCode\"")),
         /**
          * 行政区コード
          */
@@ -213,7 +227,7 @@ public class TokubetsuChoshuKaishiProperty
          * 年金コード
          */
         年金コード(new RString("0206"), new RString("年金コード"), FORMAT
-                .concat(new RString("UeT0511after_nenkinCode")).concat(FORMAT)),
+                .concat(new RString("dbT2015KeisangoJoho_honNenkinCode")).concat(FORMAT)),
         /**
          * 納組コード
          */
@@ -221,13 +235,12 @@ public class TokubetsuChoshuKaishiProperty
         /**
          * 生活保護種別
          */
-        生活保護種別(new RString("0116"), new RString("生活保護種別"), FORMAT.concat(new RString("生活保護区分")).concat(FORMAT)),
+        生活保護種別(new RString("0116"), new RString("生活保護種別"), FORMAT.concat(new RString("dbT2015KeisangoJoho_seihofujoShurui")).concat(FORMAT)),
         /**
          * 10月特徴開始者
          */
-        //QA1854 確認中
-        十月特徴開始者(new RString("0219"), new RString("十月特徴開始者"), FORMAT
-                .concat(new RString("dbT2015KeisangoJoho_sakuseiShoriName")).concat(FORMAT));
+        十月特徴開始者(new RString("0219"), new RString("10月特徴開始者"), FORMAT
+                .concat(new RString("特徴10月開始者区分")).concat(FORMAT));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

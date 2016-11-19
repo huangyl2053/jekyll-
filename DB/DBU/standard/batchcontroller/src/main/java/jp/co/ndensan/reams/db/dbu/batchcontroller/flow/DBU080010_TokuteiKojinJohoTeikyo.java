@@ -239,6 +239,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         SougouJigyouJyohouProcessParameter processParameter = parameter.toSougouJigyouJyohouProcessParameter();
         processParameter.set版番号(版番号);
         processParameter.set特定個人情報名コード(特定個人情報名コード);
+        processParameter.set提供基本情報中間テーブル名(提供基本情報中間テーブル名);
         return loopBatch(SougouJigyouJyohouProcess.class).arguments(processParameter).define();
     }
 
@@ -252,6 +253,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         SougouJigyouJyohouProcessParameter processParameter = parameter.toSougouJigyouJyohouProcessParameter();
         processParameter.set版番号(版番号);
         processParameter.set特定個人情報名コード(特定個人情報名コード);
+        processParameter.set提供基本情報中間テーブル名(提供基本情報中間テーブル名);
         return loopBatch(SougouJigyouJyohouUpdateProcess.class).arguments(processParameter).define();
     }
 
@@ -265,6 +267,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         RiyoshaFutanwariaiProcessParameter processParameter = parameter.toRiyoshaFutanwariaiProcessParameter();
         processParameter.set版番号(版番号);
         processParameter.set特定個人情報名コード(特定個人情報名コード);
+        processParameter.set提供基本情報中間テーブル名(提供基本情報中間テーブル名);
         return loopBatch(RiyoshaFutanwariaiProcess.class).arguments(processParameter).define();
     }
 
@@ -277,7 +280,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
     protected IBatchFlowCommand exeRiyoshaFutanwariaiUpdate() {
         RiyoshaFutanwariaiProcessParameter processParameter = parameter.toRiyoshaFutanwariaiProcessParameter();
         processParameter.set提供基本情報中間テーブル名(提供基本情報中間テーブル名);
-        return loopBatch(RiyoshaFutanwariaiUpdateProcess.class).define();
+        return loopBatch(RiyoshaFutanwariaiUpdateProcess.class).arguments(processParameter).define();
     }
 
     /**
@@ -318,6 +321,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         JogaiTokureiSyaJyohouProcessParameter processParameter = parameter.toJogaiTokureiSyaJyohouProcessParameter();
         processParameter.set版番号(版番号);
         processParameter.set特定個人情報名コード(特定個人情報名コード);
+        processParameter.set提供基本情報中間テーブル名(提供基本情報中間テーブル名);
         return loopBatch(JogaiTokureiSyaJyohouProcess.class).arguments(processParameter).define();
     }
 
@@ -330,6 +334,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
     protected IBatchFlowCommand exeJogaiTokureiSyaJyohouUpdate() {
         JogaiTokureiSyaJyohouProcessParameter processParameter = parameter.toJogaiTokureiSyaJyohouProcessParameter();
         processParameter.set版番号(版番号);
+        processParameter.set提供基本情報中間テーブル名(提供基本情報中間テーブル名);
         processParameter.set特定個人情報名コード(特定個人情報名コード);
         return loopBatch(JogaiTokureiSyaJyohouUpdateProcess.class).arguments(processParameter).define();
     }

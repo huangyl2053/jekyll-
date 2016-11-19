@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor {
 
-    private final RString 生活保護区分;
     private final RString 特徴10月開始者区分;
     private final HonSanteiTsuchiShoKyotsu 本算定通知書情報;
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
@@ -57,7 +56,6 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
     /**
      * インスタンスを生成します。
      *
-     * @param 生活保護区分 RString
      * @param 特徴10月開始者区分 RString
      * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
      * @param 編集後本算定通知書共通情報 List<EditedHonSanteiTsuchiShoKyotsu>
@@ -69,11 +67,10 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
      * @param 市町村名 RString
      * @param 連番 int
      */
-    protected TokubetsuChoshuKaishiEditor(RString 生活保護区分, RString 特徴10月開始者区分, HonSanteiTsuchiShoKyotsu 本算定通知書情報,
+    protected TokubetsuChoshuKaishiEditor(RString 特徴10月開始者区分, HonSanteiTsuchiShoKyotsu 本算定通知書情報,
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             FlexibleYear 賦課年度, List<RString> 出力項目リスト, List<RString> 改頁項目リスト,
             RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名, int 連番) {
-        this.生活保護区分 = 生活保護区分;
         this.特徴10月開始者区分 = 特徴10月開始者区分;
         this.本算定通知書情報 = 本算定通知書情報;
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
@@ -211,11 +208,11 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
             source.kanaMeisho = 編集後本算定通知書共通情報.get編集後個人().get氏名５０音カナ();
         }
         source.hihokenshaNo = 編集後本算定通知書共通情報.get被保険者番号().getColumnValue();
-        source.nenkinCode = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金コード();
+        source.nenkinCode = 本算定通知書情報.get徴収方法情報_更正後().get本徴収_年金コード();
         if (本算定通知書情報.get納組情報() != null && 本算定通知書情報.get納組情報().getNokumi() != null) {
             source.nokumiCode = 本算定通知書情報.get納組情報().getNokumi().getNokumiCode();
         }
-        source.seihoFlag = 生活保護区分;
+        source.seihoFlag = 本算定通知書情報.get賦課の情報_更正後().get賦課情報().get生活保護扶助種類();
         source.tokuchoKaishi10 = 特徴10月開始者区分;
     }
 }

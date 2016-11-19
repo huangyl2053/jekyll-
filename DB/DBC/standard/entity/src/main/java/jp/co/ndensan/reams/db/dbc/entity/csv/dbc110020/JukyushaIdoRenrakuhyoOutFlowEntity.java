@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.csv.dbc110020;
 
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
  * 受給者異動連絡票情報送付対象者リストCSVする。
  *
@@ -16,5 +18,7 @@ package jp.co.ndensan.reams.db.dbc.entity.csv.dbc110020;
 public class JukyushaIdoRenrakuhyoOutFlowEntity {
 
     private int 異動連絡票件数;
-    private int 訂正連絡票件数;
+    private RString 入力ファイルパス;
+    private RString 出力ファイルパス;
+
 }

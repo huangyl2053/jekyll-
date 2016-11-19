@@ -52,6 +52,9 @@ public enum KogakuServicehiTaishoshaKensakuMainSpec implements IPredicate<Kogaku
                     return 決定年月From != null || 決定年月To != null;
                 }
             },
+    /**
+     * 対象データなしチェックです。
+     */
     対象データなしチェック {
                 @Override
                 public boolean apply(KogakuServicehiTaishoshaKensakuMainDiv div) {

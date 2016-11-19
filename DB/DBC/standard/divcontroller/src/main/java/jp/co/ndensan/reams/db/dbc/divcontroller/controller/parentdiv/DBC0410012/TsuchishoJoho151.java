@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  *
@@ -55,6 +57,8 @@ public class TsuchishoJoho151 {
         parameter.setShoriYM(new FlexibleYearMonth(
                 div.getCcdKokurenJohoTorikomi().get処理年月().getYearMonth().toDateString()));
         parameter.setShutsuryokujunId(RString.EMPTY);
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120230_SeikyugakuTsuchishoIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 }

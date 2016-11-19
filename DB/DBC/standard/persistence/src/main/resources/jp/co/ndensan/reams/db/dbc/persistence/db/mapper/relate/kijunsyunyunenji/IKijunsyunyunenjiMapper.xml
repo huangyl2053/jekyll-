@@ -86,7 +86,7 @@
          SELECT *
          FROM
          ( SELECT 
-               *,ROW_NUMBER() OVER(PARTITION BY "hihokenshaNo", "shikibetsuCode" ORDER BY "kijunYMD" DESC) AS rank_number
+               *,ROW_NUMBER() OVER(PARTITION BY "shikibetsuCode" ORDER BY "kijunYMD" DESC) AS rank_number
          FROM
                "TmpSetaiShotoku" ) AS T1 
          WHERE 
@@ -126,7 +126,7 @@
          LEFT JOIN
                "DbV1001HihokenshaDaicho"  AS HIHOKENSHA
          ON    
-               T1."hihokenshaNo"  =  HIHOKENSHA."hihokenshaNo"
+               T1."shikibetsuCode"  =  HIHOKENSHA."shikibetsuCode"
               )
          SELECT 
            T2.*,
@@ -140,7 +140,8 @@
      </select>
      
      <resultMap id="ResultMap_InsTaishoSeitaiyinTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.InsTaishoSeitaiyinTempEntity" autoMapping="true">
-        <id column="hihokenshaNo" />
+        <id property="世帯員所得情報一時.hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <id property="被保険者台帳管理Newest.hihokenshaNo" column="HIHOKENSHA_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <id column="shikibetsuCode" />
         <association property="世帯員所得情報一時" resultMap="ResultMap_SetaiShotokuEntity"/>
         <association property="被保険者台帳管理Newest" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout.IHokenshaKyufujissekiOutMapper.resultMap_DbV1001HihokenshaDaichoEntity"/>
@@ -164,7 +165,10 @@
           WHERE 
                T1."shikakuShutokuYMD" <![CDATA[<=]]>  #{世帯員把握基準日}
           AND 
-              #{世帯員把握基準日}  <![CDATA[<]]> T1."shikakuSoshitsuYMD"      
+             (#{世帯員把握基準日}  <![CDATA[<]]> T1."shikakuSoshitsuYMD"
+              OR T1."shikakuSoshitsuYMD" IS NULL 
+              OR T1."shikakuSoshitsuYMD" = ''
+              )    
           ) AS HIHOKENSHA   
             
          RIGHT JOIN
@@ -585,7 +589,7 @@
          AND
                "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
          AND
-               "DbT7022ShoriDateKanri"."shoriName" = '基準収入額適用申請書発行'
+               "DbT7022ShoriDateKanri"."shoriName" = '基準収入額適用申請書異動'
          AND
                "DbT7022ShoriDateKanri"."shoriEdaban" ='0000'
          AND

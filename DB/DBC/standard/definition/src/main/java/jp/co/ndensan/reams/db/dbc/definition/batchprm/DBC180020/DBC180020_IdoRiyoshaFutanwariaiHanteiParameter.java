@@ -108,8 +108,7 @@ public class DBC180020_IdoRiyoshaFutanwariaiHanteiParameter extends BatchParamet
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter
-     * DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
+     * @return parameter DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
      */
     public DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter toDBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter() {
         DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter parameter
@@ -133,8 +132,7 @@ public class DBC180020_IdoRiyoshaFutanwariaiHanteiParameter extends BatchParamet
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter
-     * DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
+     * @return parameter DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
      */
     public DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter toDBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter() {
         DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter parameter
@@ -158,8 +156,7 @@ public class DBC180020_IdoRiyoshaFutanwariaiHanteiParameter extends BatchParamet
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter
-     * DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
+     * @return parameter DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
      */
     public DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter toDBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter() {
         DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter parameter
@@ -197,7 +194,6 @@ public class DBC180020_IdoRiyoshaFutanwariaiHanteiParameter extends BatchParamet
         parameter.setShoriNichiji(this.getShoriNichiji());
         parameter.setHanteiKijunbi(this.getHanteiKijunbi());
         parameter.setTaishoGetsu(this.getTaishoGetsu());
-        parameter.setChushutuKaisu(this.getChushutuKaisu());
         parameter.set対象開始日(this.get対象開始日());
         parameter.set対象終了日(this.get対象終了日());
         return parameter;

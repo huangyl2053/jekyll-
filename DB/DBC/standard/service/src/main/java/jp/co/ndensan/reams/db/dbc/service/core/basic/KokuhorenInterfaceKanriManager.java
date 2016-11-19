@@ -242,4 +242,29 @@ public class KokuhorenInterfaceKanriManager {
         requireNonNull(国保連インターフェース管理, UrSystemErrorMessages.値がnull.getReplacedMessage("国保連インターフェース管理"));
         return 1 == dac.save(国保連インターフェース管理.toEntity());
     }
+
+    /**
+     * 主キーに合致する国保連インターフェース管理を返します。
+     *
+     * @param 処理状態区分 shoriJotaiKubun
+     * @param 交換情報識別番号 KokanShikibetsuNo
+     * @return KokuhorenInterfaceKanri
+     */
+    @Transaction
+    public KokuhorenInterfaceKanri get処理年月Max(
+            RString 処理状態区分,
+            RString 交換情報識別番号) {
+        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("処理状態区分"));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(交換情報識別番号NEW.toString()));
+
+        DbT3104KokuhorenInterfaceKanriEntity entity = dac.select処理年月Max(
+                処理状態区分,
+                交換情報識別番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new KokuhorenInterfaceKanri(entity);
+    }
+
 }

@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaicho.HihokenshaDaichoIchiranHyoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
@@ -63,9 +62,9 @@ public class HihokenshaDaichoIchiranHyoFinder {
     /**
      * 単体テスト用のコンストラクタです。
      *
-     * @param mapperProvider mapperProvider
+     * @param 被保険者台帳管理Dac 被保険者台帳管理Dac
      */
-    HihokenshaDaichoIchiranHyoFinder(MapperProvider mapperProvider, DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac) {
+    HihokenshaDaichoIchiranHyoFinder(DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac) {
         this.被保険者台帳管理Dac = 被保険者台帳管理Dac;
     }
 

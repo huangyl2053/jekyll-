@@ -6,10 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820021;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.KihonInfoMainPanelDiv;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払支給申請_サービス提供証明書_基本情報の入力チェックSpecです。
@@ -73,8 +76,9 @@ public enum KihonInfoMainPanelSpec implements IPredicate<KihonInfoMainPanelDiv> 
         }
 
         public static boolean is明細番号(KihonInfoMainPanelDiv div) {
-            RString 明細番号 = div.getPanelTwo().getTxtMeisaiBango().getValue();
-            return 明細番号 != null && !明細番号.isEmpty();
+            ShoukanharaihishinseimeisaikensakuParameter parameter
+                    = ViewStateHolder.get(ViewStateKeys.明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
+            return !RString.isNullOrEmpty(parameter.get明細番号());
         }
     }
 }

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100010;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100010.KarisanteiHenkoTsuchishoB5YokoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 仮算定額変更【B5横タイプ】ボディEditorです。
@@ -28,12 +29,12 @@ class KarisanteiHenkoTsuchishoB5YokoEditor implements IKarisanteiHenkoTsuchishoB
     private KarisanteiHenkoTsuchishoB5YokoReportSource editBody(KarisanteiHenkoTsuchishoB5YokoReportSource source) {
 
         source.bunshoNo = item.getBunshoNo();
-        source.listKibetsu_1 = item.getListKibetsu_1();
-        source.listKibetsu_2 = item.getListKibetsu_2();
+        source.listKibetsu_1 = format月と期(item.getListKibetsu_1());
+        source.listKibetsu_2 = format月と期(item.getListKibetsu_2());
         source.listKibetsu_3 = item.getListKibetsu_3();
         source.listKibetsu_4 = item.getListKibetsu_4();
-        source.listKibetsu_5 = item.getListKibetsu_5();
-        source.listKibetsu_6 = item.getListKibetsu_6();
+        source.listKibetsu_5 = format月と期(item.getListKibetsu_5());
+        source.listKibetsu_6 = format月と期(item.getListKibetsu_6());
         source.listKibetsu_7 = item.getListKibetsu_7();
         source.listKibetsu_8 = item.getListKibetsu_8();
         source.birthYMD = item.getBirthYMD();
@@ -129,6 +130,13 @@ class KarisanteiHenkoTsuchishoB5YokoEditor implements IKarisanteiHenkoTsuchishoB
 
         return source;
 
+    }
+
+    private RString format月と期(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return value;
+        }
+        return new RString(Integer.valueOf(value.toString())).padLeft(RString.HALF_SPACE, 2);
     }
 
 }

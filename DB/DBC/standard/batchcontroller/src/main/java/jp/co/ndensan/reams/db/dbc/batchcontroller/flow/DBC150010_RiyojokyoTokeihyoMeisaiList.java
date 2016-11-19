@@ -10,12 +10,33 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.CreateRiyojokyo
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.CreateToukeiHyoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1510KyufuJissekiKihonDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1510KyufuJissekiKihonInsertProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1512HaiigaiDataDeleteProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1512HihokenshaSakuseiUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1512HihokenshaTaishouGaiDeleteProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1512JukyushaDaichoInsertProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1512KikanKaishiYMUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1512KikanShuryoYMUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1512KyotakuUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1512TaishogaiDataDeleteProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513HokenshaAtenaUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513JigyoshoNameUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513JukyushaDaichoUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513RiyourituUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513ServiceShuruiNameUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513SetaiCodeUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513ShikyuGendogakuKaiteiUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513ShoriShichosonNameUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513ShukeiDataInsert1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513ShukeiDataInsert2Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513ShutsuRyokuTaishoDataInsertProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1513TankinyushoShikyugendoGakuUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.DbWT1514HokenshaNoErrorInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.OutPutDataUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.ServiceTeikyoYMSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.ServiceTeikyoYMSelectProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.SetteiKubunUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.ShoriKekkaKakuninListProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150010.TokeiyoKyuhuJissekiDataSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150010.DBC150010_RiyojokyoTokeihyoMeisaiListParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.tokeihyo.RiyojokyoTokeihyo_ShutsuryokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc150010.SedaiUpdateProcessParameter;
@@ -62,6 +83,8 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
     private static final String 世帯コード登録 = "SETAICODE_UPDATE";
     private static final String 事業者名取得 = "JIGYOSHANAME_UPDATE";
     private static final String 利用状況一覧表出力 = "CREATE_RIYOJOKYOICHIRANHYO";
+    private static final String 処理結果確認リストCSV = "ShoriKekkaKakuninList_Order";
+    private static final String サービス種類名取得 = "SERVICESHURUINAMEUPDATE";
 
     private static final RString 市町村コード_全て = new RString("000000");
     private static final RString 出力する = new RString("1");
@@ -121,6 +144,8 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
             executeStep(統計表作成);
         }
         if (出力する.equals(parameter.get明細リスト出力区分()) || 出力する.equals(parameter.get明細CSV出力区分())) {
+            executeStep(利用状況一覧表作成);
+            executeStep(サービス提供年月取得);
             List<FlexibleYearMonth> outData
                     = getResult(List.class, new RString(サービス提供年月取得), ServiceTeikyoYMSelectProcess.データ有無);
             for (FlexibleYearMonth outサービス提供年月 : outData) {
@@ -129,8 +154,51 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
             }
             //DbWT1513JigyoshoNameUpdateProcess
             executeStep(事業者名取得);
-            executeStep(利用状況一覧表作成);
+            //DbWT1513ServiceShuruiNameUpdateProcess
+            executeStep(サービス種類名取得);
+            executeStep(利用状況一覧表出力);
         }
+        executeStep(処理結果確認リストCSV);
+    }
+
+    /**
+     * 事業者名取得します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(事業者名取得)
+    protected IBatchFlowCommand jigyoshanameUpdate() {
+        return loopBatch(DbWT1513JigyoshoNameUpdateProcess.class).define();
+    }
+
+    /**
+     * サービス種類名取得します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(サービス種類名取得)
+    protected IBatchFlowCommand updateServiceShuruiName() {
+        return loopBatch(DbWT1513ServiceShuruiNameUpdateProcess.class).define();
+    }
+
+    /**
+     * 被保険者宛名情報更新します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(被保険者宛名情報更新)
+    protected IBatchFlowCommand updateHokenshaAtena() {
+        return loopBatch(DbWT1513HokenshaAtenaUpdateProcess.class).define();
+    }
+
+    /**
+     * 処理結果確認リストCSVを作成します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(処理結果確認リストCSV)
+    protected IBatchFlowCommand shoriKekkaKakuninListOrder() {
+        return loopBatch(ShoriKekkaKakuninListProcess.class).define();
     }
 
     /**
@@ -140,7 +208,17 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
      */
     @Step(給付実績基本一時テーブル登録)
     protected IBatchFlowCommand insertDbWT1510KyufuJissekiKihon() {
-        return loopBatch(DbWT1510KyufuJissekiKihonInsertProcess.class).define();
+        return loopBatch(DbWT1510KyufuJissekiKihonInsertProcess.class).arguments(getParameter().createProcessParemter()).define();
+    }
+
+    /**
+     * 被保険者宛名情報エラーを登録します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(被保険者宛名情報エラー登録)
+    protected IBatchFlowCommand createHokenshaNoError() {
+        return loopBatch(DbWT1514HokenshaNoErrorInsertProcess.class).define();
     }
 
     /**
@@ -164,13 +242,173 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
     }
 
     /**
+     * 設定区分を取得します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(設定区分取得)
+    protected IBatchFlowCommand updateSetteiKubun() {
+        return loopBatch(SetteiKubunUpdateProcess.class).define();
+    }
+
+    /**
+     * 統計用給付実績データを作成します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(統計用給付実績データ作成)
+    protected IBatchFlowCommand createTokeiyoKyuhuJissekiData() {
+        return loopBatch(TokeiyoKyuhuJissekiDataSakuseiProcess.class).define();
+    }
+
+    /**
+     * 受給者台帳データを作成します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(受給者台帳データ作成)
+    protected IBatchFlowCommand insertJukyushaDaicho() {
+        return loopBatch(DbWT1512JukyushaDaichoInsertProcess.class).arguments(getParameter().createProcessParemter()).define();
+    }
+
+    /**
+     * 有効認定期間開始年月を設定します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(有効認定期間開始年月設定)
+    protected IBatchFlowCommand updateKikanKaishiYM() {
+        return loopBatch(DbWT1512KikanKaishiYMUpdateProcess.class).define();
+    }
+
+    /**
+     * 有効認定期間終了年月を設定します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(認定有効期間終了年月設定)
+    protected IBatchFlowCommand updateKikanShuryoYM() {
+        return loopBatch(DbWT1512KikanShuryoYMUpdateProcess.class).define();
+    }
+
+    /**
+     * 抽出範囲外データを削除します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(抽出範囲外データ削除)
+    protected IBatchFlowCommand deleteHaiigaiData() {
+        return loopBatch(DbWT1512HaiigaiDataDeleteProcess.class).arguments(getParameter().createProcessParemter()).define();
+    }
+
+    /**
+     * サービス提供年月単位を設定します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(サービス提供年月単位登録)
+    protected IBatchFlowCommand createServiceTeikyoYM() {
+        return loopBatch(ServiceTeikyoYMSakuseiProcess.class).arguments(getParameter().createProcessParemter()).define();
+    }
+
+    /**
+     * 元データを削除します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(元データ削除)
+    protected IBatchFlowCommand deleteTaishogaiData() {
+        return loopBatch(DbWT1512TaishogaiDataDeleteProcess.class).define();
+    }
+
+    /**
+     * 被保険者台帳データを取得します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(被保険者台帳データ取得)
+    protected IBatchFlowCommand updateHihokenshaSakusei() {
+        return loopBatch(DbWT1512HihokenshaSakuseiUpdateProcess.class).define();
+    }
+
+    /**
+     * 被保険者台帳出力対象外データを削除します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(被保険者台帳出力対象外データ削除)
+    protected IBatchFlowCommand deleteHihokenshaTaishouGai() {
+        return loopBatch(DbWT1512HihokenshaTaishouGaiDeleteProcess.class).define();
+    }
+
+    /**
+     * 居宅サービス計画データを取得します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(居宅サービス計画データ取得)
+    protected IBatchFlowCommand updateKyotaku() {
+        return loopBatch(DbWT1512KyotakuUpdateProcess.class).define();
+    }
+
+    /**
+     * 受給者台帳情報を登録します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(受給者台帳情報登録)
+    protected IBatchFlowCommand updateJukyushaDaicho() {
+        return loopBatch(DbWT1513JukyushaDaichoUpdateProcess.class).define();
+    }
+
+    /**
+     * 受給者台帳情報を登録します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(集計データ登録1)
+    protected IBatchFlowCommand insertShukeiData1() {
+        return loopBatch(DbWT1513ShukeiDataInsert1Process.class).define();
+    }
+
+    /**
+     * 短期入所支給限度額情報を作成します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(短期入所支給限度額情報作成)
+    protected IBatchFlowCommand updateTankinyushoShikyugendoGaku() {
+        return loopBatch(DbWT1513TankinyushoShikyugendoGakuUpdateProcess.class).define();
+    }
+
+    /**
+     * 支給限度額改訂情報を作成します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(支給限度額改訂情報作成)
+    protected IBatchFlowCommand updateShikyuGendogakuKaitei() {
+        return loopBatch(DbWT1513ShikyuGendogakuKaiteiUpdateProcess.class).define();
+    }
+
+    /**
+     * 利用率を更新します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(利用率更新)
+    protected IBatchFlowCommand updateRiyouritu() {
+        return loopBatch(DbWT1513RiyourituUpdateProcess.class).define();
+    }
+
+    /**
      * 集計データ2を登録します。
      *
      * @return バッチコマンド
      */
     @Step(集計データ2登録)
     protected IBatchFlowCommand insertShukeiData2() {
-        return loopBatch(DbWT1513ShukeiDataInsert2Process.class).define();
+        return loopBatch(DbWT1513ShukeiDataInsert2Process.class).arguments(getParameter().createProcessParemter()).define();
     }
 
     /**
@@ -191,6 +429,16 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
     @Step(統計表作成)
     protected IBatchFlowCommand createToukeiHyo() {
         return loopBatch(CreateToukeiHyoProcess.class).arguments(getParameter().createProcessParemter()).define();
+    }
+
+    /**
+     * サービス提供年月を取得します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(サービス提供年月取得)
+    protected IBatchFlowCommand selectServiceTeikyoYM() {
+        return loopBatch(ServiceTeikyoYMSelectProcess.class).define();
     }
 
     /**

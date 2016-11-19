@@ -482,7 +482,7 @@
                     "shikakuSoshitsuYMD",
                     MAX("idoYMD"||"edaNo") AS max
                  FROM
-                    rgdb."DbT1001HihokenshaDaicho" 
+                    rgdb."DbV1001HihokenshaDaicho" 
                  WHERE
                     "hihokennshaKubunCode" = '1'
                     AND "logicalDeletedFlag" = FALSE

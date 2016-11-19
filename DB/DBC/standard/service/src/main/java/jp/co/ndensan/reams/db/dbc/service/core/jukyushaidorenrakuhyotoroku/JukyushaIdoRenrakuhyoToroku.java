@@ -32,6 +32,12 @@ public class JukyushaIdoRenrakuhyoToroku {
     private static final RString THREE = new RString("3");
     private static final RString 既存の異動日 = new RString("既存の異動日");
     private static final RString 異動区分不正 = new RString("異動区分不正");
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
+    private static final RString 空KEY = new RString(" ");
 
     /**
      * コンストラクタです。
@@ -121,7 +127,6 @@ public class JukyushaIdoRenrakuhyoToroku {
             }
             jukyuEntity.set異動年月日(entity.getIdoYMD());
             jukyuEntity.set異動区分(entity.getIdoKubunCode());
-
             jukyuEntity.set氏名性別生年月日を印字する(チェック場合);
             jukyuEntity.set性別(entity.getSeibetsuCode());
             jukyuEntity.set異動事由(entity.getJukyushaIdoJiyu());
@@ -131,8 +136,34 @@ public class JukyushaIdoRenrakuhyoToroku {
             jukyuEntity.set資格喪失年月日(entity.getShikakuSoshitsuYMD());
             jukyuEntity.setみなし区分(entity.getMinashiYokaigoJotaiKubunCode());
             jukyuEntity.set要介護状態区分(entity.getYokaigoJotaiKubunCode());
-            jukyuEntity.set支給限度基準額1(new RString(entity.getHomonTsushoServiceShikyuGendoKijungaku()));
-            jukyuEntity.set支給限度基準額２(new RString(entity.getTankiNyushoServiceShikyuGendoKijungaku()));
+            RString 支給限度基準額1 = new RString(entity.getHomonTsushoServiceShikyuGendoKijungaku());
+            int countSuu = 支給限度基準額1.length();
+            if (ZERO.equals(支給限度基準額1)) {
+                jukyuEntity.set支給限度基準額1(支給限度基準額1);
+            } else if (INT_1 == countSuu) {
+                jukyuEntity.set支給限度基準額1(空KEY.concat(空KEY).concat(空KEY).concat(空KEY).concat(空KEY).concat(支給限度基準額1));
+            } else if (INT_2 == countSuu) {
+                jukyuEntity.set支給限度基準額1(空KEY.concat(空KEY).concat(空KEY).concat(空KEY).concat(支給限度基準額1));
+            } else if (INT_3 == countSuu) {
+                jukyuEntity.set支給限度基準額1(空KEY.concat(空KEY).concat(空KEY).concat(支給限度基準額1));
+            } else if (INT_4 == countSuu) {
+                jukyuEntity.set支給限度基準額1(空KEY.concat(空KEY).concat(支給限度基準額1));
+            } else if (INT_5 == countSuu) {
+                jukyuEntity.set支給限度基準額1(空KEY.concat(支給限度基準額1));
+            } else {
+                jukyuEntity.set支給限度基準額1(支給限度基準額1);
+            }
+            RString 支給限度基準額2 = new RString(entity.getTankiNyushoServiceShikyuGendoKijungaku());
+            int countSuu2 = 支給限度基準額2.length();
+            if (ZERO.equals(支給限度基準額2)) {
+                jukyuEntity.set支給限度基準額２(支給限度基準額2);
+            } else if (INT_1 == countSuu2) {
+                jukyuEntity.set支給限度基準額２(空KEY.concat(空KEY).concat(支給限度基準額2));
+            } else if (INT_2 == countSuu2) {
+                jukyuEntity.set支給限度基準額２(空KEY.concat(支給限度基準額2));
+            } else {
+                jukyuEntity.set支給限度基準額２(支給限度基準額2);
+            }
             jukyuEntity.set上限管理適用開始年月日２(entity.getTankinyushoServiceJogenKanriTekiyoKaishiYMD());
             jukyuEntity.set上限管理終了年月日２(entity.getTankinyushoServiceJogenKanriTekiyoShuryoYMD());
             jukyuEntity.set計画作成区分(entity.getKyotakuServiceSakuseiKubunCode());
@@ -148,7 +179,11 @@ public class JukyushaIdoRenrakuhyoToroku {
             if (futangaku != null) {
                 jukyuEntity.set標準負担額(new RString(futangaku.toString()));
             }
-            jukyuEntity.set公費負担上限額減額(entity.getKohiFutanJogenGengakuAriFlag());
+            if (entity.getKohiFutanJogenGengakuAriFlag()) {
+                jukyuEntity.set公費負担上限額減額(TWO);
+            } else {
+                jukyuEntity.set公費負担上限額減額(ONE);
+            }
             jukyuEntity.set認定申請中区分(entity.getTokuteiNyushoshaNinteiShinseichuKubunCode());
             jukyuEntity.setｻｰﾋﾞｽ区分(entity.getTokuteiNyushoshaKaigoServiceKubunCode());
             jukyuEntity.set特例減額措置対象(entity.getKaizeisoTokureiGengakuSochiTaishoFlag());
@@ -167,8 +202,26 @@ public class JukyushaIdoRenrakuhyoToroku {
             }
             jukyuEntity.set老人保健市町村番号(entity.getRojinHokenShichosonNo());
             jukyuEntity.set老人保健受給者番号(entity.getRojinHokenJukyushaNo());
-            jukyuEntity.set軽減率(entity.getKeigenritsu());
-            jukyuEntity.set小規模居宅ｻｰﾋﾞｽ利用(entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag());
+            RString 軽減率 = entity.getKeigenritsu();
+            if (null != 軽減率 && !軽減率.isEmpty()) {
+                int count = 軽減率.length();
+                if (INT_1 == count) {
+                    jukyuEntity.set軽減率(ZERO.concat(ZERO).concat(ZERO).concat(軽減率));
+                } else if (INT_2 == count) {
+                    jukyuEntity.set軽減率(ZERO.concat(ZERO).concat(軽減率));
+                } else if (INT_3 == count) {
+                    jukyuEntity.set軽減率(ZERO.concat(軽減率));
+                } else {
+                    jukyuEntity.set軽減率(軽減率);
+                }
+            } else {
+                jukyuEntity.set軽減率(new RString(""));
+            }
+            if (entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag()) {
+                jukyuEntity.set小規模居宅ｻｰﾋﾞｽ利用(TWO);
+            } else {
+                jukyuEntity.set小規模居宅ｻｰﾋﾞｽ利用(ONE);
+            }
             jukyuEntity.set二次予防事業区分(entity.getNijiyoboJigyoKubunCode());
             jukyuEntity.set二次予防有効期間開始年月日(entity.getNijiyoboJigyoYukoKikanKaishiYMD());
             jukyuEntity.set二次予防有効期間終了年月日(entity.getNijiyoboJigyoYukoKikanShuryoYMD());

@@ -33,10 +33,14 @@ public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2 extends BatchProcessB
     private static final RString 審査方法区分_済み = new RString("2");
     private KyufuJissekiKihonKogakuProcessParameter processParameter;
     private IKogakuKaigoServicehiKyufugakuSanshutsuMapper mapper;
+    private TempKyufujissekiTyukannJigyoEntity beforeEntity;
+    private Decimal 高額介護サービス費;
 
     @Override
     protected void initialize() {
         mapper = getMapper(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
+        beforeEntity = null;
+        高額介護サービス費 = Decimal.ZERO;
     }
 
     @Override
@@ -56,37 +60,48 @@ public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2 extends BatchProcessB
         TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時５ = entity.get給付実績中間事業高額一時５();
         DbT3057KogakuShikyuHanteiKekkaEntity 支給判定結果 = entity.get高額介護サービス費支給判定結果();
         DbT3058KogakuShikyuShinsaKetteiEntity 支給審査決定 = entity.get高額介護サービス費支給審査決定();
-        Decimal 高額介護サービス費 = Decimal.ZERO;
-        Decimal 給付実績中間事業高額一時５_高額介護サービス費 = 給付実績中間事業高額一時５.getKogakuKaigoServicehi();
+        if (beforeEntity == null) {
+            beforeEntity = 給付実績中間事業高額一時５;
+        }
+        if (!getキー(beforeEntity).equals(getキー(給付実績中間事業高額一時５))) {
+            beforeEntity.setKogakuKaigoServicehi(高額介護サービス費);
+            mapper.update給付実績中間事業高額一時(beforeEntity);
+            高額介護サービス費 = Decimal.ZERO;
+        }
+        if (支給判定結果 == null || 支給審査決定 == null) {
+            return;
+        }
         Decimal 高額支給額 = Decimal.ZERO;
         Decimal 支給金額 = Decimal.ZERO;
         RString 審査方法区分 = RString.EMPTY;
         FlexibleYearMonth 決定者受取年月 = FlexibleYearMonth.EMPTY;
-        if (支給判定結果 != null) {
-            審査方法区分 = 支給判定結果.getShinsaHohoKubun();
-            支給金額 = 支給判定結果.getShikyuKingaku();
-        }
-        if (支給審査決定 != null) {
-            決定者受取年月 = 支給審査決定.getKetteishaUketoriYM();
-            高額支給額 = 支給審査決定.getKogakuShikyuGaku();
-        }
-        if (RString.isNullOrEmpty(審査方法区分) && 審査方法区分_依頼.equals(審査方法区分)) {
-            if (決定者受取年月 != null && !決定者受取年月.isEmpty() && 高額支給額 != null) {
-                高額介護サービス費 = 給付実績中間事業高額一時５_高額介護サービス費.add(高額支給額);
+        審査方法区分 = 支給判定結果.getShinsaHohoKubun();
+        支給金額 = 支給判定結果.getShikyuKingaku();
+        決定者受取年月 = 支給審査決定.getKetteishaUketoriYM();
+        高額支給額 = 支給審査決定.getKogakuShikyuGaku();
+        if (!RString.isNullOrEmpty(審査方法区分) && 審査方法区分_依頼.equals(審査方法区分)) {
+            if (決定者受取年月 != null && !決定者受取年月.isEmpty()) {
+                高額介護サービス費 = 高額介護サービス費.add(高額支給額 == null ? Decimal.ZERO : 高額支給額);
             } else {
-                if (支給金額 != null && 給付実績中間事業高額一時５_高額介護サービス費 != null) {
-                    高額介護サービス費 = 給付実績中間事業高額一時５_高額介護サービス費.add(支給金額);
-                }
+                高額介護サービス費 = 高額介護サービス費.add(支給金額 == null ? Decimal.ZERO : 支給金額);
             }
-        } else if (RString.isNullOrEmpty(審査方法区分) && 審査方法区分_済み.equals(審査方法区分)
-                && 支給金額 != null) {
-            高額介護サービス費 = 給付実績中間事業高額一時５_高額介護サービス費.add(支給金額);
+        } else if (!RString.isNullOrEmpty(審査方法区分) && 審査方法区分_済み.equals(審査方法区分)) {
+            高額介護サービス費 = 高額介護サービス費.add(支給金額 == null ? Decimal.ZERO : 支給金額);
         }
-        給付実績中間事業高額一時５.setServiceHiyougakuGokei(高額介護サービス費);
-        mapper.update給付実績中間事業高額一時(給付実績中間事業高額一時５);
     }
 
     @Override
     protected void afterExecute() {
+        beforeEntity.setKogakuKaigoServicehi(高額介護サービス費);
+        mapper.update給付実績中間事業高額一時(beforeEntity);
+    }
+
+    private RString getキー(TempKyufujissekiTyukannJigyoEntity entity) {
+        return entity.getInputShikibetsuNo().getColumnValue().
+                concat(entity.getHiHokenshaNo().getColumnValue()).
+                concat(entity.getServiceTeikyoYM().toDateString()).
+                concat(entity.getShokisaiHokenshaNo().getColumnValue()).
+                concat(entity.getJigyoshoNo().getColumnValue()).
+                concat(entity.getToshiNo());
     }
 }

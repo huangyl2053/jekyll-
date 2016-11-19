@@ -116,7 +116,9 @@ public class TokkiTextPage1A4Editor implements ITokkiTextA4Editor {
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 全面.equals(item.get特記パターン())) {
-            source.tokkiText = テキスト全面List.get(index);
+            if (index < テキスト全面List.size()) {
+                source.tokkiText = テキスト全面List.get(index);
+            }
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {
@@ -125,7 +127,9 @@ public class TokkiTextPage1A4Editor implements ITokkiTextA4Editor {
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 全面.equals(item.get特記パターン())) {
-            source.tokkiImg = イメージ全面List.get(index);
+            if (index < イメージ全面List.size()) {
+                source.tokkiImg = イメージ全面List.get(index);
+            }
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {

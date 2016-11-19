@@ -47,6 +47,12 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
     private static final RString 修正モード_THREE = new RString("修正モード3");
     private static final RString 照会モード = new RString("照会モード");
     private static final RString 被保番号 = new RString("被保険者番号");
+    private final int INT_1 = 1;
+    private final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
+    private static final RString 空KEY = new RString(" ");
 
     /**
      * 初期化です。
@@ -116,6 +122,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             if (処理モード.equals(修正モード_TWO)) {
                 RString 訂正区分コード = JukyushaIF_TeiseiKubunCode.修正.getコード();
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
+                        set履歴番号(訂正対象データ.get履歴番号() + 1).build();
+                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
                         set送付年月(new FlexibleYearMonth(システムタイム.getYearMonth().toDateString())).build();
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
                         set訂正年月日(new FlexibleDate(システムタイム.toDateString())).build();
@@ -166,8 +174,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
         if (div.getOutputJukyushaIdoRenrakuhyo().getChkJukyushaIdoRenrakuhyo().isAllSelected()) {
             氏名_性別_生年月日を印字す = ONE;
         }
-        FlexibleDate 作成年月日 = new FlexibleDate(div.getOutputJukyushaIdoRenrakuhyo().
-                getJukyushaIdoRenrakuhyoHenkoPrintSetting().getIssueDate().toDateString());
+        FlexibleDate 作成年月日 = new FlexibleDate(div.getOutputJukyushaIdoRenrakuhyo()
+                .getJukyushaIdoRenrakuhyoHenkoPrintSetting().getIssueDate().toDateString());
         int 変更前履歴番号 = 1;
         if (TWO.equals(div.getOutputJukyushaIdoRenrakuhyo().getRadTeiseiKomokuHantei().getSelectedKey())) {
             変更前履歴番号 = 履歴番号;
@@ -196,8 +204,20 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                     get老人保健受給者番号());
             受給者訂正連絡票Entity.set老人保健公費負担者番号(受給者訂正情報.get受給者異動送付entity().
                     get施設所在保険者番号());
-            受給者訂正連絡票Entity.set軽減率(受給者訂正情報.get受給者異動送付entity().
-                    get軽減率());
+            if (null != 受給者訂正情報.get受給者異動送付entity().get軽減率()
+                    && !受給者訂正情報.get受給者異動送付entity().get軽減率().isEmpty()) {
+                int count = 受給者訂正情報.get受給者異動送付entity().get軽減率().length();
+                if (INT_1 == count) {
+                    受給者訂正連絡票Entity.set軽減率(ZERO.concat(ZERO).concat(ZERO).concat(受給者訂正情報.get受給者異動送付entity().get軽減率()));
+                } else if (INT_2 == count) {
+                    受給者訂正連絡票Entity.set軽減率(ZERO.concat(ZERO).concat(受給者訂正情報.get受給者異動送付entity().get軽減率()));
+                } else if (INT_3 == count) {
+                    受給者訂正連絡票Entity.set軽減率(ZERO.concat(受給者訂正情報.get受給者異動送付entity().get軽減率()));
+                } else {
+                    受給者訂正連絡票Entity.set軽減率(受給者訂正情報.get受給者異動送付entity().get軽減率());
+                }
+            }
+
             if (受給者訂正情報.get受給者異動送付entity().
                     get軽減率適用開始年月日() != null && !受給者訂正情報.get受給者異動送付entity().
                     get軽減率適用開始年月日().isEmpty()) {
@@ -210,7 +230,13 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                 受給者訂正連絡票Entity.set軽減率適用終了年月日(受給者訂正情報.get受給者異動送付entity().
                         get軽減率適用終了年月日());
             }
-            受給者訂正連絡票Entity.set小規模居宅ｻｰﾋﾞｽ利用(受給者訂正情報.get小多機能居宅介護利用開始月利用有フラグ());
+            if (受給者訂正情報.get小多機能居宅介護利用開始月利用有フラグ() == null) {
+                受給者訂正連絡票Entity.set小規模居宅ｻｰﾋﾞｽ利用(RString.EMPTY);
+            } else if (!受給者訂正情報.get小多機能居宅介護利用開始月利用有フラグ()) {
+                受給者訂正連絡票Entity.set小規模居宅ｻｰﾋﾞｽ利用(ONE);
+            } else {
+                受給者訂正連絡票Entity.set小規模居宅ｻｰﾋﾞｽ利用(TWO);
+            }
             受給者訂正連絡票Entity.set二次予防事業区分(受給者訂正情報.get受給者異動送付entity().
                     get二次予防事業区分コード());
             受給者訂正連絡票Entity.set二次予防有効期間開始年月日(受給者訂正情報.get受給者異動送付entity().
@@ -263,6 +289,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div,
             JukyushaIdoRenrakuhyo 訂正対象データ) {
         受給者訂正連絡票登録画面Div = get登録用Entity_one(受給者訂正連絡票登録画面Div, 訂正対象データ);
+
+        受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                createBuilderForEdit().set履歴番号(訂正対象データ.get履歴番号() + 1).build();
         if (!RString.isNullOrEmpty(訂正対象データ.get特定入所者介護サービス区分コード())
                 && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get特定入所者介護サービス区分コード())) {
             受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
@@ -549,8 +578,24 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             受給者訂正連絡票Entity.set有効期間終了年月日(受給者訂正情報.
                     get受給者異動送付entity().get認定有効期間終了年月日());
         }
-        受給者訂正連絡票Entity.set支給限度基準額1(new RString(受給者訂正情報.get受給者異動送付entity().
-                get訪問通所サービス支給限度基準額()));
+        RString 支給限度基準額1 = new RString(受給者訂正情報.get受給者異動送付entity().
+                get訪問通所サービス支給限度基準額());
+        int countSuu = 支給限度基準額1.length();
+        if (ZERO.equals(支給限度基準額1)) {
+            受給者訂正連絡票Entity.set支給限度基準額1(支給限度基準額1);
+        } else if (INT_1 == countSuu) {
+            受給者訂正連絡票Entity.set支給限度基準額1(空KEY.concat(空KEY).concat(空KEY).concat(空KEY).concat(空KEY).concat(支給限度基準額1));
+        } else if (INT_2 == countSuu) {
+            受給者訂正連絡票Entity.set支給限度基準額1(空KEY.concat(空KEY).concat(空KEY).concat(空KEY).concat(支給限度基準額1));
+        } else if (INT_3 == countSuu) {
+            受給者訂正連絡票Entity.set支給限度基準額1(空KEY.concat(空KEY).concat(空KEY).concat(支給限度基準額1));
+        } else if (INT_4 == countSuu) {
+            受給者訂正連絡票Entity.set支給限度基準額1(空KEY.concat(空KEY).concat(支給限度基準額1));
+        } else if (INT_5 == countSuu) {
+            受給者訂正連絡票Entity.set支給限度基準額1(空KEY.concat(支給限度基準額1));
+        } else {
+            受給者訂正連絡票Entity.set支給限度基準額1(支給限度基準額1);
+        }
         受給者訂正連絡票Entity.set上限管理適用開始年月日１(受給者訂正情報.get受給者異動送付entity().
                 get訪問通所サービス上限管理適用期間開始年月日());
         if (受給者訂正情報.get受給者異動送付entity().
@@ -561,8 +606,18 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
         }
         受給者訂正連絡票Entity.set上限管理終了年月日２(受給者訂正情報.get受給者異動送付entity().
                 get短期入所サービス上限管理適用期間終了年月日());
-        受給者訂正連絡票Entity.set支給限度基準額２(new RString(受給者訂正情報.get受給者異動送付entity().
-                get短期入所サービス支給限度基準額()));
+        RString 支給限度基準額2 = new RString(受給者訂正情報.get受給者異動送付entity().
+                get短期入所サービス支給限度基準額());
+        int countSuu2 = 支給限度基準額2.length();
+        if (ZERO.equals(支給限度基準額2)) {
+            受給者訂正連絡票Entity.set支給限度基準額２(支給限度基準額2);
+        } else if (INT_1 == countSuu2) {
+            受給者訂正連絡票Entity.set支給限度基準額２(空KEY.concat(空KEY).concat(支給限度基準額2));
+        } else if (INT_2 == countSuu2) {
+            受給者訂正連絡票Entity.set支給限度基準額２(空KEY.concat(支給限度基準額2));
+        } else {
+            受給者訂正連絡票Entity.set支給限度基準額２(支給限度基準額2);
+        }
         受給者訂正連絡票Entity.set上限管理適用開始年月日２(受給者訂正情報.get受給者異動送付entity().
                 get短期入所サービス上限管理適用期間開始年月日());
         if (受給者訂正情報.get受給者異動送付entity().
@@ -705,7 +760,13 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             受給者訂正連絡票Entity.set標準適用終了年月日(受給者訂正情報.get受給者異動送付entity().
                     get負担額適用終了年月日());
         }
-        受給者訂正連絡票Entity.set公費負担上限額減額(受給者訂正情報.get公費負担上限額減額有フラグ());
+        if (受給者訂正情報.get公費負担上限額減額有フラグ() == null) {
+            受給者訂正連絡票Entity.set公費負担上限額減額(RString.EMPTY);
+        } else if (!受給者訂正情報.get公費負担上限額減額有フラグ()) {
+            受給者訂正連絡票Entity.set公費負担上限額減額(ONE);
+        } else {
+            受給者訂正連絡票Entity.set公費負担上限額減額(TWO);
+        }
         if (受給者訂正情報.get受給者異動送付entity().
                 get償還払化開始年月日() != null && !受給者訂正情報.get受給者異動送付entity().
                 get償還払化開始年月日().isEmpty()) {

@@ -1007,6 +1007,7 @@
             resultMap="resultMap_KinkyuuziShisetuRyouyouRelateEntity" fetchSize="500">
         SELECT
                 DbT3118."ryakusho" AS "dbT3118_ryakusho", 
+                DbT7120."serviceMeisho" AS "dbT7120_serviceMeisho",
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3019KyufujissekiKinkyuShisetsuRyoyoMapper.allColumns_DbT3019KyufujissekiKinkyuShisetsuRyoyo" />
         FROM
@@ -1021,6 +1022,33 @@
                  ON "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo" = DbT3118."shikibetsuNo"
                  AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"
                  AND "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+                LEFT JOIN rgdb."DbT7120TokuteiShinryoServiceCode" AS DbT7120
+                  ON CASE WHEN 
+                  "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo" IN ('2151',
+                        '2152',
+                        '2153',
+                        '2154',
+                        '2191',
+                        '2192',
+                        '2193',
+                        '7151',
+                        '7152',
+                        '7153',
+                        '7154',
+                        '7191',
+                        '7192',
+                        '7193'
+                    )
+                    AND SUBSTR("DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo", 0, 4) IN ('216','21A','716','71A')
+                    THEN DbT7120."serviceShuruiCode" = '60'
+                    ELSE DbT7120."serviceShuruiCode" = '70'
+                  END
+                  AND DbT7120."serviceKomokuCode" = "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo"
+                  AND DbT7120."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"
+                  AND DbT7120."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"
+                  AND ("DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM" <![CDATA[<=]]> DbT7120."tekiyoKaishiYM" 
+                    OR DbT7120."tekiyoKaishiYM" ='' 
+                    OR DbT7120."tekiyoKaishiYM"  IS NULL)
         WHERE
 	'201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
 	<include refid="subsql"/>

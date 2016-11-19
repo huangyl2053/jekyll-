@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -104,8 +105,9 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
         editHihokenshaDaichoEntity(entity, processEntity);
         if (null != 市町村セキュリティ情報 && null != 市町村セキュリティ情報.get導入形態コード()
                 && DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
-            if (ONE.equals(entity.getKoikinaiJushochiTokureiFlag())) {
-                processEntity.setOutPutShichosonCode(ONE);
+            if (ONE.equals(entity.getKoikinaiJushochiTokureiFlag()) && entity.getKoikinaiTokureiSochimotoShichosonCode() != null) {
+                processEntity.setOutPutShichosonCode(new RString(
+                        get広住特措置元市町村コード(entity.getKoikinaiTokureiSochimotoShichosonCode()).toString()));
             } else {
                 processEntity.setOutPutShichosonCode(new RString(市町村セキュリティ情報.get市町村情報().get市町村コード().toString()));
             }
@@ -149,6 +151,10 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
 
     private FlexibleDate getMonthValue(FlexibleDate flexibleDate) {
         return flexibleDate;
+    }
+
+    private LasdecCode get広住特措置元市町村コード(LasdecCode lasdecCode) {
+        return lasdecCode;
     }
 
     private void editHihokenshaDaichoEntity(DbT1001HihokenshaDaichoEntity entity, HihokenshaTaihoTemp processEntity) {

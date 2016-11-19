@@ -10,6 +10,7 @@
                autoMapping="true">
         <result property="serviceShuruiCode" column="serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <result property="serviceShuruiMeisho" column="serviceShuruiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="riyoshaFutangaku" column="riyoshaFutangaku" />
     </resultMap>
     <select id="get社福軽減額サービス種類"
@@ -18,6 +19,7 @@
         SELECT
             A."serviceShuruiCode",
             B."serviceShuruiMeisho",
+            B."serviceShuruiRyakusho",
             A."riyoshaFutangaku"
         FROM
             rgdb."DbT3053ShokanShukei" A

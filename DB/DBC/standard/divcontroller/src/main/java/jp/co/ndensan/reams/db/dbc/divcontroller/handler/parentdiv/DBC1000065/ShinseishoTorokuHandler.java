@@ -195,7 +195,7 @@ public class ShinseishoTorokuHandler {
             div.getTxtSetaiinHaakuKijunYMD().setDisabled(false);
             div.getRadChushutsuTaisho().setDisabled(true);
         } else if (ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())) {
-            div.getTxtShoriNendo().setDisabled(true);
+            div.getTxtShoriNendo().setDisabled(false);
             div.getBtnSearchHihokensha().setDisabled(false);
             div.getTxtHihokenshaNo().setDisabled(false);
             div.getTxtSetaiinHaakuKijunYMD().setDisabled(false);
@@ -230,7 +230,7 @@ public class ShinseishoTorokuHandler {
      * @return boolaean
      */
     public boolean 処理年度判定() {
-        return (Integer.valueOf(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)) <= 平成年度);
+        return (Integer.valueOf(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)) < 平成年度);
     }
 
     private List<KeyValueDataSource> get申請書発行_抽出条件() {
@@ -245,7 +245,7 @@ public class ShinseishoTorokuHandler {
     private List<KeyValueDataSource> get申請書登録_抽出対象() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShinseishoTorokuChushutsuTaisho 申請書登録_抽出対象 : ShinseishoTorokuChushutsuTaisho.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(申請書登録_抽出対象.getコード(), 申請書登録_抽出対象.get名称());
+            KeyValueDataSource dataSource = new KeyValueDataSource(申請書登録_抽出対象.getコード(), 申請書登録_抽出対象.get略称());
             dataSourceList.add(dataSource);
         }
         return dataSourceList;

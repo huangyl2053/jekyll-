@@ -72,6 +72,9 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriEditor implements
     private static final RString 店番 = new RString("店番");
     private static final RString 口座種別 = new RString("口座種別");
     private static final RString 口座番号 = new RString("口座番号");
+    private static final RString 文書番号_第 = new RString("第");
+    private static final RString 文書番号_号 = new RString("号");
+    private static final RString 全角スペース_8 = new RString("　　　　　　　　");
     private RString ワーク窓口払区分;
     private RString ワーク口座払区分;
     private RString ワーク不支給区分;
@@ -156,7 +159,11 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriEditor implements
     private GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSource edit文書(
             GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSource source) {
         if (entity.get文書番号() != null) {
-            source.bunshoNo = entity.get文書番号();
+            if (文書番号_第.concat(文書番号_号).equals(entity.get文書番号())) {
+                source.bunshoNo = 文書番号_第.concat(全角スペース_8).concat(文書番号_号);
+            } else {
+                source.bunshoNo = entity.get文書番号();
+            }
         }
         return source;
     }

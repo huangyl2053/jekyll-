@@ -105,14 +105,14 @@ public class PostMainPanelHandler {
             ShoriDateKanri 処理日付管理マスタ;
             ShoriDateKanriManager manager = new ShoriDateKanriManager();
             if (ResponseHolder.getMenuID().equals(DBCMN82001) && SharedFile.searchSharedFile(単一国保情報) != null
-                    && SharedFile.searchSharedFile(単一国保情報).get(0) != null) {
+                    && SharedFile.searchSharedFile(単一国保情報).size() > 0 && SharedFile.searchSharedFile(単一国保情報).get(0) != null) {
                 処理日付管理マスタ = manager.get処理日付管理マスタ(国保情報取り込み, 処理枝番);
                 処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに国保の情報);
                 List<UzT0885SharedFileEntryEntity> 国保情報List = SharedFile.searchSharedFile(単一国保情報);
                 setTime(国保情報List.get(0).getSharedFileId());
             }
             if (ResponseHolder.getMenuID().equals(DBCMN82002) && SharedFile.searchSharedFile(広域後期情報) != null
-                    && SharedFile.searchSharedFile(広域後期情報).get(0) != null) {
+                    && SharedFile.searchSharedFile(広域後期情報).size() > 0 && SharedFile.searchSharedFile(広域後期情報).get(0) != null) {
                 処理日付管理マスタ = manager.get処理日付管理マスタ(後期高齢者情報取り込み, 処理枝番);
                 処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに後期高齢の情報);
                 List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(広域後期情報);
@@ -195,7 +195,6 @@ public class PostMainPanelHandler {
             dgShichoson_Row items = new dgShichoson_Row();
             items.setBango(new RString(String.valueOf(bango)));
             if (!市町村識別ID.equals(NUM_00)) {
-//                items.setSelectable(Boolean.FALSE);
                 items.setSelected(Boolean.TRUE);
             }
             if (!RString.isNullOrEmpty(item.get(0))) {

@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuControlMa
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ur.urz.definition.core.config.jushoinput.ConfigKeysCodeName;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -177,11 +179,15 @@ public class KaigoChohyoSeigyoKyotsuHandler {
             div.getCcdChohyoShutsuryokujun().setDisplayNone(true);
         }
         setDataSource();
-        set初期表示(subGyomuCode, reportId, 帳票制御共通コントロール.get帳票出力順表示方法(), 帳票制御共通);
+        if (帳票制御共通 != null) {
+            set初期表示(subGyomuCode, reportId, 帳票制御共通コントロール.get帳票出力順表示方法(), 帳票制御共通);
+        }
 
         div.setHdnSubGyomuCode(subGyomuCode.value());
         div.setHdnReportId(reportId.value());
-        div.setHdnReportName(帳票制御共通.get帳票分類名称());
+        if (帳票制御共通 != null) {
+            div.setHdnReportName(帳票制御共通.get帳票分類名称());
+        }
         div.setHdnIsDisplayInsertTag(タグ挿入ボタン表示制御_表示する);
         Map<RString, RString> tagList = new HashMap<>();
         tagList.put(タグ_改行記号, 埋め込み_改行記号);
@@ -196,6 +202,12 @@ public class KaigoChohyoSeigyoKyotsuHandler {
         tagList.put(タグ_部署名, 埋め込み_部署名);
         tagList.put(タグ_担当者名, 埋め込み_担当者名);
         div.setHdnTagList(DataPassingConverter.serialize((Serializable) tagList));
+        List<RString> shubetsuCodeList = NinshoshaFinderFactory.createInstance().get種別コードList(GyomuCode.DB介護保険);;
+        div.setHdGyomuCode(GyomuCode.DB介護保険.value());
+        div.setHdShubetsuCodeList(DataPassingConverter.serialize((Serializable) shubetsuCodeList));
+        if (0 < shubetsuCodeList.size()) {
+            div.setHdSelectedShubetsuCode(shubetsuCodeList.get(0));
+        }
     }
 
     /**

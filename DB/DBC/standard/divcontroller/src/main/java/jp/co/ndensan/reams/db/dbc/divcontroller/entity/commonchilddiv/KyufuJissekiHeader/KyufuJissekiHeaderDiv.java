@@ -4,14 +4,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJiss
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
@@ -22,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
  * @reamsid_L DBC-2970-160 linghuhang
  */
 public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
@@ -43,6 +47,8 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     private TextBox txtSeibetsu;
     @JsonProperty("txtSeinengappi")
     private TextBoxDate txtSeinengappi;
+    @JsonProperty("lin01")
+    private HorizontalLine lin01;
     @JsonProperty("txtTeikyoNengetsu")
     private TextBoxDate txtTeikyoNengetsu;
     @JsonProperty("txtJissekiKubun")
@@ -55,12 +61,12 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     private TextBox txtShokisaiHokenshaNo;
     @JsonProperty("txtYoshikiNo")
     private TextBox txtYoshikiNo;
-    @JsonProperty("txtYoshikiMeisho")
-    private TextBox txtYoshikiMeisho;
-    @JsonProperty("txtJigyoshaNo")
-    private TextBox txtJigyoshaNo;
     @JsonProperty("txtJigyosha")
     private TextBox txtJigyosha;
+    @JsonProperty("txtJigyoshaNo")
+    private TextBox txtJigyoshaNo;
+    @JsonProperty("txtYoshikiMeisho")
+    private TextBox txtYoshikiMeisho;
     @JsonProperty("hiddenJigyoshaCode")
     private RString hiddenJigyoshaCode;
     @JsonProperty("hiddenYoshikiNo")
@@ -201,6 +207,24 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /*
+     * getlin01
+     * @return lin01
+     */
+    @JsonProperty("lin01")
+    public HorizontalLine getLin01() {
+        return lin01;
+    }
+
+    /*
+     * setlin01
+     * @param lin01 lin01
+     */
+    @JsonProperty("lin01")
+    public void setLin01(HorizontalLine lin01) {
+        this.lin01 = lin01;
+    }
+
+    /*
      * gettxtTeikyoNengetsu
      * @return txtTeikyoNengetsu
      */
@@ -309,21 +333,21 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /*
-     * gettxtYoshikiMeisho
-     * @return txtYoshikiMeisho
+     * gettxtJigyosha
+     * @return txtJigyosha
      */
-    @JsonProperty("txtYoshikiMeisho")
-    public TextBox getTxtYoshikiMeisho() {
-        return txtYoshikiMeisho;
+    @JsonProperty("txtJigyosha")
+    public TextBox getTxtJigyosha() {
+        return txtJigyosha;
     }
 
     /*
-     * settxtYoshikiMeisho
-     * @param txtYoshikiMeisho txtYoshikiMeisho
+     * settxtJigyosha
+     * @param txtJigyosha txtJigyosha
      */
-    @JsonProperty("txtYoshikiMeisho")
-    public void setTxtYoshikiMeisho(TextBox txtYoshikiMeisho) {
-        this.txtYoshikiMeisho = txtYoshikiMeisho;
+    @JsonProperty("txtJigyosha")
+    public void setTxtJigyosha(TextBox txtJigyosha) {
+        this.txtJigyosha = txtJigyosha;
     }
 
     /*
@@ -345,21 +369,21 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     }
 
     /*
-     * gettxtJigyosha
-     * @return txtJigyosha
+     * gettxtYoshikiMeisho
+     * @return txtYoshikiMeisho
      */
-    @JsonProperty("txtJigyosha")
-    public TextBox getTxtJigyosha() {
-        return txtJigyosha;
+    @JsonProperty("txtYoshikiMeisho")
+    public TextBox getTxtYoshikiMeisho() {
+        return txtYoshikiMeisho;
     }
 
     /*
-     * settxtJigyosha
-     * @param txtJigyosha txtJigyosha
+     * settxtYoshikiMeisho
+     * @param txtYoshikiMeisho txtYoshikiMeisho
      */
-    @JsonProperty("txtJigyosha")
-    public void setTxtJigyosha(TextBox txtJigyosha) {
-        this.txtJigyosha = txtJigyosha;
+    @JsonProperty("txtYoshikiMeisho")
+    public void setTxtYoshikiMeisho(TextBox txtYoshikiMeisho) {
+        this.txtYoshikiMeisho = txtYoshikiMeisho;
     }
 
     /*
@@ -563,5 +587,217 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     @Override
     public RString get要介護度() {
         return getHandler().get要介護度();
+    }
+
+    /**
+     * 被保番号を設定します。
+     *
+     * @param 被保番号 被保番号
+     */
+    @Override
+    public void set被保番号(RString 被保番号) {
+        this.getTxtHihoNo().setValue(被保番号);
+    }
+
+    /**
+     * 被保番号を取得します。
+     *
+     * @return 被保番号 被保番号
+     */
+    @Override
+    public RString get被保番号() {
+        return this.getTxtHihoNo().getValue();
+    }
+
+    /**
+     * 住民種別を設定します。
+     *
+     * @param 住民種別 住民種別
+     */
+    @Override
+    public void set住民種別(RString 住民種別) {
+        this.getTxtJuminShubetsu().setValue(住民種別);
+    }
+
+    /**
+     * 住民種別を取得します。
+     *
+     * @return 住民種別 住民種別
+     */
+    @Override
+    public RString get住民種別() {
+        return this.getTxtJuminShubetsu().getValue();
+    }
+
+    /**
+     * 有効期間_開始を設定します。
+     *
+     * @param 有効期間_開始 有効期間_開始
+     */
+    @Override
+    public void set有効期間_開始(RDate 有効期間_開始) {
+        if (null == 有効期間_開始) {
+            this.getTxtYukoKikan().clearFromValue();
+            return;
+        }
+        this.getTxtYukoKikan().setFromValue(有効期間_開始);
+    }
+
+    /**
+     * 有効期間_開始を取得します。
+     *
+     * @return 有効期間_開始 有効期間_開始
+     */
+    @Override
+    public RDate get有効期間_開始() {
+        return this.getTxtYukoKikan().getFromValue();
+    }
+
+    /**
+     * 有効期間_終了を設定します。
+     *
+     * @param 有効期間_終了 有効期間_終了
+     */
+    @Override
+    public void set有効期間_終了(RDate 有効期間_終了) {
+        if (null == 有効期間_終了) {
+            this.getTxtYukoKikan().clearToValue();
+            return;
+        }
+        this.getTxtYukoKikan().setToValue(有効期間_終了);
+    }
+
+    /**
+     * 有効期間_終了を取得します。
+     *
+     * @return 有効期間_終了 有効期間_終了
+     */
+    @Override
+    public RDate get有効期間_終了() {
+        return this.getTxtYukoKikan().getToValue();
+    }
+
+    /**
+     * 氏名を設定します。
+     *
+     * @param 氏名 氏名
+     */
+    @Override
+    public void set氏名(RString 氏名) {
+        this.getTxtShimei().setValue(氏名);
+    }
+
+    /**
+     * 氏名を取得します。
+     *
+     * @return 氏名 氏名
+     */
+    @Override
+    public RString get氏名() {
+        return this.getTxtShimei().getValue();
+    }
+
+    /**
+     * 性別を設定します。
+     *
+     * @param 性別 性別
+     */
+    @Override
+    public void set性別(RString 性別) {
+        this.getTxtSeibetsu().setValue(性別);
+    }
+
+    /**
+     * 性別を取得します。
+     *
+     * @return 性別 性別
+     */
+    @Override
+    public RString get性別() {
+        return this.getTxtSeibetsu().getValue();
+    }
+
+    /**
+     * 生年月日を設定します。
+     *
+     * @param 生年月日 生年月日
+     */
+    @Override
+    public void set生年月日(RDate 生年月日) {
+        if (null == this.getTxtSeinengappi()) {
+            this.getTxtSeinengappi().clearValue();
+            return;
+        }
+        this.getTxtSeinengappi().setValue(生年月日);
+    }
+
+    /**
+     * 生年月日を取得します。
+     *
+     * @return 生年月日 生年月日
+     */
+    @Override
+    public RDate get生年月日() {
+        return this.getTxtSeinengappi().getValue();
+    }
+
+    /**
+     * 保険者を設定します。
+     *
+     * @param 保険者 保険者
+     */
+    @Override
+    public void set保険者(RString 保険者) {
+        this.getTxtShokisaiHokenshaNo().setValue(保険者);
+    }
+
+    /**
+     * 保険者を取得します。
+     *
+     * @return 保険者 保険者
+     */
+    @Override
+    public RString get保険者() {
+        return this.getTxtShokisaiHokenshaNo().getValue();
+    }
+
+    /**
+     * 事業者を設定します。
+     *
+     * @param 事業者 事業者
+     */
+    @Override
+    public void set事業者(RString 事業者) {
+        this.getTxtJigyosha().setValue(事業者);
+    }
+
+    /**
+     * 事業者を取得します。
+     *
+     * @return 事業者 事業者
+     */
+    @Override
+    public RString get事業者() {
+        return this.getTxtJigyosha().getValue();
+    }
+
+    /**
+     * 被保情報を設定します。
+     *
+     * @param 給付実績基本情報子Divデータ 給付実績基本情報子Divデータ
+     */
+    @Override
+    public void set被保情報(KyufuJissekiHeader 給付実績基本情報子Divデータ) {
+        getHandler().set被保情報(給付実績基本情報子Divデータ);
+    }
+
+    /**
+     * 被保情報を設定します。
+     *
+     * @param csData_A 給付実績基本情報子Divデータ
+     */
+    @Override
+    public void set被保情報2(KyufuJissekiKihonShukeiRelate csData_A) {
+        getHandler().set被保情報2(csData_A);
     }
 }

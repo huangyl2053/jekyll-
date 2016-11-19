@@ -125,7 +125,8 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
         全項目 = cancatYMD(社福減免.get適用終了日(), 全項目);
         全項目 = 全項目
                 .concat(社福減免.get減免_減額種類()).concat(SPLIT)
-                .concat(社福減免.get軽減率());
+                .concat(社福減免.get軽減率()).concat(SPLIT)
+                .concat(new RString(社福減免.get履歴番号()));
         return 全項目;
     }
 

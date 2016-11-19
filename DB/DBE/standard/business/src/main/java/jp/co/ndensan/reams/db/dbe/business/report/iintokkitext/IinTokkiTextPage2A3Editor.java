@@ -88,9 +88,9 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
     }
 
     private IinTokkiTextA3ReportSource editSource(IinTokkiTextA3ReportSource source) {
-        source.two_hokenshaNo = item.get特記事項保険者番号();
-        source.two_hihokenshaNo = item.get特記事項被保険者番号();
-        source.two_hihokenshaName = item.get名前();
+        source.two_hokenshaNo = RString.EMPTY;
+        source.two_hihokenshaNo = RString.EMPTY;
+        source.two_hihokenshaName = RString.EMPTY;
         source.two_sakuseiGengo = get元号(item.get認定申請年月日());
         source.two_sakuseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()),
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);
@@ -103,7 +103,8 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
         source.two_chosaMM = new RString(システム日付.getMonthValue());
         source.two_chosaDD = new RString(システム日付.getDayValue());
         source.two_shinseiGengo = get元号(item.get認定調査実施年月日());
-        source.two_shinseiYY = get年(item.get認定調査実施年月日());
+        source.two_shinseiYY = get年(item.get認定調査実施年月日()).replace(get元号(item.get認定調査実施年月日()),
+                RString.EMPTY).replace(new RString("年"), RString.EMPTY);
         source.two_shinseiMM = new RString(item.get認定調査実施年月日().getMonthValue());
         source.two_shinseiDD = new RString(item.get認定調査実施年月日().getDayValue());
         source.two_shinsaGengo = get元号(item.get介護認定審査会開催年月日());

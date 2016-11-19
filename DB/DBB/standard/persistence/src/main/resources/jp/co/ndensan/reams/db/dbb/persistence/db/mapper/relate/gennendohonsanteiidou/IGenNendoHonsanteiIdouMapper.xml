@@ -371,7 +371,7 @@
                DISTINCT B."hihokenshaNo",
                B."shikibetsuCode"
             FROM
-                rgdb."DbT1001HihokenshaDaicho" AS B
+                rgdb."DbV1001HihokenshaDaicho" AS B
             WHERE
                 B."shikakuSoshitsuYMD" IS NULL
             OR  B."shikakuSoshitsuYMD" = ''
@@ -514,7 +514,7 @@
            DISTINCT B."hihokenshaNo",
            B."shikibetsuCode"
         FROM
-            rgdb."DbT1001HihokenshaDaicho" AS B
+            rgdb."DbV1001HihokenshaDaicho" AS B
         
         WHERE
            B."shikakuSoshitsuYMD" IS NULL 

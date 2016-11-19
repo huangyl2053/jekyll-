@@ -281,5 +281,7 @@ public class KihonEntity extends DbTableEntityBase<KihonEntity> implements IDbAc
     private RString 高額公費３支給額;
     @TempTableColumnOrder(124)
     private RString 区分;
+    @TempTableColumnOrder(125)
+    private RString 市町村コード;
 
 }

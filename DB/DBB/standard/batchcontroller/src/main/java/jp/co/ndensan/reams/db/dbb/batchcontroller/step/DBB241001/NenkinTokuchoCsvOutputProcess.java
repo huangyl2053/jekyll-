@@ -344,6 +344,8 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
         if (entity.getデータレコードEntity() == null || entity.getトレイラレコードEntity() == null) {
             return;
         }
+        shoriTaishoYM.setValue(get処理対象年月(entity.getデータレコードEntity().getTsuchiNaiyoCode(),
+                entity.getデータレコードEntity().getSakuseiYMD()));
         if (tmpEntity == null) {
             tmpEntity = entity.getトレイラレコードEntity();
             set合計(entity.getデータレコードEntity());
@@ -370,7 +372,6 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
     protected void afterExecute() {
         if (tmpEntity != null) {
             editOutPutKennSuuCsv();
-            shoriTaishoYM.setValue(get処理対象年月(tmpEntity.getTsuchiNaiyoCode(), tmpEntity.getSakuseiYMD()));
         }
         if (異動処理結果情報 != null) {
             RString 市町村名 = get市町村名(異動処理結果情報.getShichosoCode());
@@ -624,8 +625,6 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
                 停止数 = 停止数 + 1;
                 停止金額 = 停止金額.add(entity.getKakushuKingaku1());
             }
-        } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
-            追加候補者情報一覧CsvWriter.writeLine(ichiranCsvEditor.getCsvEntity(entity));
         } else if (TsuchiNaiyoCodeType.特別徴収追加依頼処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
             if (ShoriKekkaCode.Code50.getCode().equals(entity.getShoriKeikka()) || ShoriKekkaCode.Code51.getCode()
                     .equals(entity.getShoriKeikka()) || ShoriKekkaCode.Code52.getCode().equals(entity.getShoriKeikka())) {

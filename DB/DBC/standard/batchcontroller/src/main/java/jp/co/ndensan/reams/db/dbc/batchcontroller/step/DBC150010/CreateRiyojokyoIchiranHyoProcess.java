@@ -120,6 +120,9 @@ public class CreateRiyojokyoIchiranHyoProcess extends BatchKeyBreakBase<DbWT1513
 
     @Override
     protected void initialize() {
+        service = RiyoJokyoTokeihyoMeisaiListSakuseiService.createInstance();
+        出力順List = new ArrayList<>();
+        改頁List = new ArrayList<>();
         保険者情報 = service.get保険者情報(parameter.get導入形態コード(), parameter.get市町村コード(), parameter.get旧市町村コード());
         get出力順項目();
         index = 0;

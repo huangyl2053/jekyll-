@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 国保連情報受取データ取込_[5C3]共同処理用受給者情報更新結果のクラスです。
@@ -64,6 +66,8 @@ public class TsuchishoJoho5C3 {
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
             parameter.set再処理区分(SaiShoriKubun.空白.getコード());
         }
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120040_KyodoJukyushaKoshinKekkaIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 }

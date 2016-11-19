@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000;
 
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517001.DBE517001_ShinsakaiShiryoJImukyokuParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517002.DBE517002_ShinsakaiShiryoIinParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
@@ -277,5 +279,60 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
      */
     public IinItiziHanteiProcessParameter toIinItiziHanteiProcessParameter() {
         return new IinItiziHanteiProcessParameter(shinsakaiKaisaiNo, shuturyokuJun, sakuseiJoken, bangoStart, bangoEnd, gogitaiNo);
+    }
+
+    /**
+     * DBE517001_ShinsakaiShiryoJImukyokuParameterに転換します。
+     *
+     * @return IinItiziHanteiProcessParameter
+     */
+    public DBE517001_ShinsakaiShiryoJImukyokuParameter toDBE517001_ShinsakaiShiryoJImukyokuParameter() {
+        return new DBE517001_ShinsakaiShiryoJImukyokuParameter(shinsakaiKaisaiNo,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaishiYoteiTime,
+                gogitaiNo,
+                gogitaiName,
+                shuturyokuJun,
+                shuturyokuSutairu,
+                printHou,
+                sakuseiJoken,
+                bangoStart,
+                bangoEnd,
+                choyoJimu_taishoushaFalg,
+                choyoJimu_tokkiJikouFalg,
+                choyoJimu_itiziHanteiFalg,
+                choyoJimu_tokkiJikouHanteiFalg,
+                choyoJimu_ikenshoFalg,
+                choyoJimu_sonotaSiryoFalg,
+                choyoJimu_gaikyouTokkiFalg,
+                choyoJimu_hanteiFalg,
+                choyoJimu_gaikyouTokkiIranFalg);
+    }
+
+    /**
+     * DBE517001_ShinsakaiShiryoJImukyokuParameterに転換します。
+     *
+     * @return IinItiziHanteiProcessParameter
+     */
+    public DBE517002_ShinsakaiShiryoIinParameter toDBE517002_ShinsakaiShiryoIinParameter() {
+        return new DBE517002_ShinsakaiShiryoIinParameter(shinsakaiKaisaiNo,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaishiYoteiTime,
+                gogitaiNo,
+                gogitaiName,
+                shuturyokuJun,
+                shuturyokuSutairu,
+                printHou,
+                sakuseiJoken,
+                bangoStart,
+                bangoEnd,
+                chohyoIin_taishoushaFalg,
+                chohyoIin_tokkiJikouFalg,
+                chohyoIin_itiziHanteiFalg,
+                chohyoIin_tokkiJikouHanteiFalg,
+                chohyoIin_ikenshoFalg,
+                chohyoIin_sonotaSiryoFalg,
+                chohyoIin_tuutishoFalg,
+                chohyoIin_hanteiFalg);
     }
 }

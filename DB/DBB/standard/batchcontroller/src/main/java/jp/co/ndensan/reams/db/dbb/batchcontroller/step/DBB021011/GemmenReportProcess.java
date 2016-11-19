@@ -40,6 +40,7 @@ public class GemmenReportProcess extends BatchProcessBase<GemmenJyoho> {
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get減免帳票データの取得");
     private static final ReportId 帳票ID = ReportIdDBB.DBB300002.getReportId();
+    private static final RString 不明 = new RString("不明");
     private List<GemmenJyoho> gemmenJyohoList;
     private List<RString> 表記List;
     private CreateTsukibetsuSuiihyoProcessParameter processPrm;
@@ -54,6 +55,7 @@ public class GemmenReportProcess extends BatchProcessBase<GemmenJyoho> {
         HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
         HokenryoDankaiList hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processPrm.getChoteiNendo());
         表記List = hokenryoDankaiList.to表記List();
+        表記List.add(不明);
         gemmenJyohoList = new ArrayList<>();
     }
 
@@ -76,6 +78,14 @@ public class GemmenReportProcess extends BatchProcessBase<GemmenJyoho> {
 
     @Override
     protected void afterExecute() {
+        for (int i = 0; i < gemmenJyohoList.size(); i++) {
+            GemmenJyoho gemmenJyoho = gemmenJyohoList.get(i);
+            if (RString.isNullOrEmpty(gemmenJyoho.getHokenryoDankai())) {
+                gemmenJyohoList.remove(i);
+                gemmenJyoho.setHokenryoDankai(不明);
+                gemmenJyohoList.add(gemmenJyoho);
+            }
+        }
         TsukibetsuSuiihyoReport report2 = new TsukibetsuSuiihyoReport(getTsukibetsuSuiihyoEntity(gemmenJyohoList));
         report2.writeBy(reportSourceWriter);
     }

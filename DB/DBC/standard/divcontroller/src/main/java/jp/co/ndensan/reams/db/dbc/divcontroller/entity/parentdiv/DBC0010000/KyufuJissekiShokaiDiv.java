@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuJissekiShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,6 +42,8 @@ public class KyufuJissekiShokaiDiv extends Panel {
     private RString hiddenSyuToKenSu;
     @JsonProperty("hiddenZenBanGo")
     private RString hiddenZenBanGo;
+    @JsonProperty("hiddenSearchKey")
+    private RString hiddenSearchKey;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -155,6 +157,24 @@ public class KyufuJissekiShokaiDiv extends Panel {
     @JsonProperty("hiddenZenBanGo")
     public void setHiddenZenBanGo(RString hiddenZenBanGo) {
         this.hiddenZenBanGo = hiddenZenBanGo;
+    }
+
+    /*
+     * gethiddenSearchKey
+     * @return hiddenSearchKey
+     */
+    @JsonProperty("hiddenSearchKey")
+    public RString getHiddenSearchKey() {
+        return hiddenSearchKey;
+    }
+
+    /*
+     * sethiddenSearchKey
+     * @param hiddenSearchKey hiddenSearchKey
+     */
+    @JsonProperty("hiddenSearchKey")
+    public void setHiddenSearchKey(RString hiddenSearchKey) {
+        this.hiddenSearchKey = hiddenSearchKey;
     }
 
     /*
@@ -378,26 +398,6 @@ public class KyufuJissekiShokaiDiv extends Panel {
     @JsonIgnore
     public void  setDgKyufuJissekiMeisaiList(DataGrid<dgKyufuJissekiMeisaiList_Row> dgKyufuJissekiMeisaiList) {
         this.getKyufuJissekiListPanel().setDgKyufuJissekiMeisaiList(dgKyufuJissekiMeisaiList);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgKyufuJissekiGokeiList_Row> getDgKyufuJissekiGokeiList() {
-        return this.getKyufuJissekiListPanel().getDgKyufuJissekiGokeiList();
-    }
-
-    @JsonIgnore
-    public void  setDgKyufuJissekiGokeiList(DataGrid<dgKyufuJissekiGokeiList_Row> dgKyufuJissekiGokeiList) {
-        this.getKyufuJissekiListPanel().setDgKyufuJissekiGokeiList(dgKyufuJissekiGokeiList);
-    }
-
-    @JsonIgnore
-    public Button getBtnKyufuJissekiResearch() {
-        return this.getKyufuJissekiListPanel().getBtnKyufuJissekiResearch();
-    }
-
-    @JsonIgnore
-    public void  setBtnKyufuJissekiResearch(Button btnKyufuJissekiResearch) {
-        this.getKyufuJissekiListPanel().setBtnKyufuJissekiResearch(btnKyufuJissekiResearch);
     }
 
     // </editor-fold>

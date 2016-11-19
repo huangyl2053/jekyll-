@@ -89,6 +89,7 @@ public class KogakuServicehiDetailDivHandler {
     public void 画面初期化(RString 画面モード, RString メニューID, HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号, int 履歴番号, ShikibetsuCode 識別コード) {
         div.getCcdShiharaiHohoJyoho().clear();
+        div.getTxtSetaiSyuyakuBango().setValue(RString.EMPTY);
         set状態(画面モード);
         KougakuSabisuhiShousaiNaiyouResult result = new KougakuSabisuhiShousaiNaiyouResult();
         if (追加モード.equals(画面モード)) {
@@ -135,7 +136,6 @@ public class KogakuServicehiDetailDivHandler {
         if (0 == KougakuSabisuhiShousaiNaiyou.createInstance().getTenshutsuNyuuHantei(被保険者番号, サービス年月)) {
             div.getTplShinseisha().getTxtHokenJyaBango().setDisabled(true);
         }
-        div.getTxtSetaiSyuyakuBango().setValue(RString.EMPTY);
     }
 
     /**
@@ -625,6 +625,8 @@ public class KogakuServicehiDetailDivHandler {
     }
 
     private void set高額決定情報エリア(KougakuSabisuhiShousaiNaiyouResult result) {
+        div.getKokuhorenKetteiJohoPanel1().getTxtShiharaiKingakuGokei().setValue(Decimal.ZERO);
+        div.getKokuhorenKetteiJohoPanel1().getTxtKogakuShikyuGaku().setValue(Decimal.ZERO);
         if (result != null && result.get高額介護サービス費支給審査決定Entity() != null) {
             div.getKokuhorenKetteiJohoPanel1().getTxtTsuchiBango().setValue(
                     result.get高額介護サービス費支給審査決定Entity().get通知書番号());
