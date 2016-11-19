@@ -75,6 +75,12 @@ public class ShomeishoSakuseiParameterHandler {
         }
         div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().setToValue(RDate.getNowDate());
 
+        if (div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().getToValue()
+                .isBefore(div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().getFromValue())) {
+            div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().setFromValue(
+                    div.getJikoFutanShomeishoSakusei().getTxtShinseiDate().getToValue());
+        }
+
         if (実行された最新のデータ != null && (!FlexibleYearMonth.EMPTY.equals(実行された最新のデータ.get処理年月()))) {
             div.getJikoFutanShomeishoSakusei().getTxtUketoriDate().setValue(new RDate(実行された最新のデータ.get処理年月().toString()));
         }
