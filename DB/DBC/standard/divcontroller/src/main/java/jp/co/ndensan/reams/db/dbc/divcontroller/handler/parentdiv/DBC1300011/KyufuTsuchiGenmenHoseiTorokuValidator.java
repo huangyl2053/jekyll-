@@ -43,6 +43,19 @@ public class KyufuTsuchiGenmenHoseiTorokuValidator {
     }
     
     /**
+     * 事業者入力のチェックです。
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validate事業者入力() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+        .ifNot(KyufuTsuchiGenmenHoseiTorokuSpec.事業者入力)
+        .thenAdd(KyufuTsuchiGenmenHoseiTorokuMessage.事業者入力)
+        .messages());
+        return messages;
+    }
+    
+    /**
      * 「補正情報を確定する」ボタン
      * @return エラーメッセージ
      */
