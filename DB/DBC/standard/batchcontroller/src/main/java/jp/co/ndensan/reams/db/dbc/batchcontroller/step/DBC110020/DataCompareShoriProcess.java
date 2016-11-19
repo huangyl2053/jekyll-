@@ -155,6 +155,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString 住特終了日 = new RString("住特終了日");
     private static final RString 二割開始日 = new RString("二割開始日");
     private static final RString 二割終了日 = new RString("二割終了日");
+    private static final RString 受給者異動連絡票情報送付対象者リスト = new RString("受給者異動連絡票情報送付対象者リスト");
     private static final RString 記号 = new RString("*");
     private static final RString エラーあり = new RString("1");
     private static final RString RST_1 = new RString("1");
@@ -1573,6 +1574,10 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     private JukyushaIdorenrakuhyoSofuCsvEntity get送付対象者リスト(IdoTblTmpEntity 異動一時2entity, RString 変更項目) {
         JukyushaIdorenrakuhyoSofuCsvEntity entity = new JukyushaIdorenrakuhyoSofuCsvEntity();
+        entity.set市町村コード(市町村コード);
+        entity.set市町村名称(市町村名称);
+        entity.set作成年月日(作成年月日);
+        entity.setタイトル(受給者異動連絡票情報送付対象者リスト);
         entity.set被保険者番号(異動一時2entity.get被保険者番号().getColumnValue());
         entity.set氏名(異動一時2entity.get被保険者氏名());
         entity.set区分(JukyushaIF_IdoKubunCode.toValue(異動一時2entity.get異動区分コード()).get名称());
