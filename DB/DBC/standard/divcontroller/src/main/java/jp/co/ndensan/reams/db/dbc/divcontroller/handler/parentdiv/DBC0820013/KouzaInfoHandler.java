@@ -15,10 +15,8 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -106,21 +104,6 @@ public class KouzaInfoHandler {
             } else {
                 div.getPanelTwo().getBtnShokanbaraiKeiteInfo().setDisabled(true);
             }
-        }
-    }
-
-    /**
-     * 申請既存チェックです。
-     *
-     * @param 整理番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @param 被保険者番号 HihokenshaNo
-     */
-    public void 申請既存チェック(RString 整理番号, FlexibleYearMonth サービス年月, HihokenshaNo 被保険者番号) {
-        List<ShokanShinsei> entity = ShokanbaraiJyokyoShokai.createInstance()
-                .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
-        if (entity == null || entity.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace(償還払支給申請.toString()));
         }
     }
 
