@@ -951,6 +951,7 @@ public class ShokanbaraiJyokyoShokai {
         for (ShokanShukeiEntity tmp : entityList) {
             DbT3053ShokanShukeiEntity dbT3053ShokanShukeiEntity = tmp.getEntity().clone();
             dbT3053ShokanShukeiEntity.setState(EntityDataState.Unchanged);
+            dbT3053ShokanShukeiEntity.initializeMd5();
             ShokanShukeiResult shokanShukeiResult = new ShokanShukeiResult(
                     new ShokanShukei(dbT3053ShokanShukeiEntity), tmp.getServiceShuruiRyakusho());
             result.add(shokanShukeiResult);
