@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  *
@@ -418,10 +419,10 @@ public class NonyuTsuchiShoDataHenshu {
     private Kitsuki find未納付出力期(List<UniversalPhase> 更正後普徴期別金額リスト, List<SamantabhadraIncomeInformation> 普徴収入情報リスト, int 期,
             KitsukiList 期月リスト) {
         for (int i = 期; i <= 整数12; i++) {
-            Decimal 金額 = get金額(更正後普徴期別金額リスト, 期);
-            Decimal 収入額 = get収入額(普徴収入情報リスト, 期);
-            if (金額 != Decimal.ZERO && 金額 != 収入額) {
-                return 期月リスト.get期の最初月(期);
+            Decimal 金額 = get金額(更正後普徴期別金額リスト, i);
+            Decimal 収入額 = get収入額(普徴収入情報リスト, i);
+            if (!Decimal.ZERO.equals(金額) && !金額.equals(収入額)) {
+                return 期月リスト.get期の最初月(i);
             }
         }
         return null;
@@ -546,8 +547,8 @@ public class NonyuTsuchiShoDataHenshu {
     private void set納付額欄(boolean is現金納付, boolean is口座振替,
             NonyuTsuchiShoKiJoho 納入通知書期情報, Decimal 納付額, NonyuTsuchiShoSeigyoJoho 納入通知書制御情報) {
         if (is現金納付) {
-            納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
-            納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
+            納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
+            納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
         } else if (is口座振替) {
             NofugakuranHyojiKubun 納付書納付額欄 = 納入通知書制御情報.get納付書納付額欄();
             if (NofugakuranHyojiKubun.口座振替を印字する.equals(納付書納付額欄)) {
@@ -560,8 +561,8 @@ public class NonyuTsuchiShoDataHenshu {
                 納入通知書期情報.set領収証書納付額欄(星10);
                 納入通知書期情報.set納付書納付額欄(星10);
             } else if (NofugakuranHyojiKubun.金額出力.equals(納付書納付額欄)) {
-                納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
-                納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
+                納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
+                納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
             }
         }
     }

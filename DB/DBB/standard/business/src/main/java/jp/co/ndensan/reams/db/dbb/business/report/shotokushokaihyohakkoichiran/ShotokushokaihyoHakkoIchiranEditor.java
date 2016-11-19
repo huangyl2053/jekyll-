@@ -186,7 +186,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         set性別コード(source);
         RString 候補者区分 = 所得照会票発行一覧.getKouhoshakubun();
         if (候補者区分 != null && 候補者区分_転入者.equals(候補者区分)) {
-            source.listLower_5 = 所得照会票発行一覧.getTorokuTodokedeYMD();
+            source.listLower_5 = new FlexibleDate(所得照会票発行一覧.getTorokuTodokedeYMD()).wareki().toDateString();;
         } else if (候補者区分 != null && 候補者区分_住特者.equals(候補者区分)) {
             source.listLower_5 = RString.EMPTY;
         }

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.Kaku
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.dgChohyoSentaku_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HonsanteiIkoHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.NonyuTsuchiShoSeigyoJohoLoaderFinder;
 import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.KakushuTsuchishoSakusei;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -262,8 +263,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                     .setSelectedKey(new RString(更正前調定日時List.get(0).toString()));
             FukaJoho 更正後賦課の情報 = 賦課の情報List.get(0);
             FukaJoho 更正前賦課の情報 = 賦課の情報List.get(1);
+            HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
             set更正後賦課根拠(更正後賦課の情報);
-            set更正前賦課根拠(更正前賦課の情報);
+            if (honsanteiIkoHantei.is本算定後(更正前賦課の情報) && 更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度())) {
+                set更正前賦課根拠(更正前賦課の情報);
+            }
             if (!賦課年度.isBefore(調定年度)) {
                 FuchoKiUtil util = new FuchoKiUtil();
                 set特別徴収(更正前賦課の情報, 更正後賦課の情報);
@@ -335,6 +339,9 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private void set更正前賦課根拠(FukaJoho 賦課の情報) {
+        if (null == 賦課の情報) {
+            return;
+        }
         if (賦課の情報.get賦課期日() != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoMae1().setText(DateEditor.to和暦(賦課の情報.get賦課期日()));
@@ -1375,7 +1382,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         clear更正前賦課根拠();
         clear更正前_特徴();
         clear更正前_普徴();
-        set更正前賦課根拠(更正前Info);
+        HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
+        if (honsanteiIkoHantei.is本算定後(更正前Info) && 更正前Info.get賦課年度().equals(更正前Info.get調定年度())) {
+            set更正前賦課根拠(更正前Info);
+        }
         FlexibleYear 賦課年度 = 更正後Info.get賦課年度();
         FlexibleYear 調定年度 = 更正後Info.get調定年度();
         if (!賦課年度.isBefore(調定年度)) {
@@ -1450,7 +1460,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             FukaJoho 更正前Info = map.get(更正前日時);
             clear更正前賦課根拠();
             clear更正後賦課根拠();
-            set更正前賦課根拠(更正前Info);
+            HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
+            if (honsanteiIkoHantei.is本算定後(更正前Info) && 更正前Info.get賦課年度().equals(更正前Info.get調定年度())) {
+                set更正前賦課根拠(更正前Info);
+            }
             set更正後賦課根拠(更正後Info);
             if (!賦課年度.isBefore(調定年度)) {
                 FuchoKiUtil util = new FuchoKiUtil();
@@ -1489,7 +1502,9 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             発行する帳票List.add(帳票Map.get(row.getTxtChohyoSentaku()));
         }
         parameter.set発行する帳票List(発行する帳票List);
-        if (更正前Key != null && !更正前Key.isEmpty()) {
+        HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
+        if (更正前Key != null && !更正前Key.isEmpty()
+                && !(honsanteiIkoHantei.is本算定後(map.get(更正前Key)) && map.get(更正前Key).get賦課年度().equals(map.get(更正前Key).get調定年度()))) {
             parameter.set賦課の情報_更正前(map.get(更正前Key));
         }
         parameter.set賦課の情報_更正後(map.get(更正後Key));
@@ -1536,6 +1551,9 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
 
     private List<Kitsuki> get納入通知書_出力期リスト() {
         List<Kitsuki> 納入通知書_出力期リスト = new ArrayList<>();
+        if (RString.isNullOrEmpty(div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().getSelectedKey())) {
+            return 納入通知書_出力期リスト;
+        }
         FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
         int selected期 = Integer.parseInt(
                 div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().getSelectedKey().toString());

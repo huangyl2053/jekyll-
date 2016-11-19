@@ -341,7 +341,7 @@ public class KihonInfoMainPanel {
             RString 様式番号, ShoukanharaihishinseimeisaikensakuParameter meisaiPar, ShokanKihon shokanKihon) {
         Map<RString, Object> map = getHandler(div).get画面項目();
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        if (!ResponseHolder.isReRequest() && (入所_院年月日 != null && 退所_院年月日 != null)) {
+        if (入所_院年月日 != null && 退所_院年月日 != null) {
             int 期間_日数 = 退所_院年月日.plusDay(NUM_1).getBetweenDays(入所_院年月日);
             Decimal 外泊日数 = (Decimal) map.get(KEY_3);
             Decimal 入所_院実日数 = (Decimal) map.get(KEY_4);

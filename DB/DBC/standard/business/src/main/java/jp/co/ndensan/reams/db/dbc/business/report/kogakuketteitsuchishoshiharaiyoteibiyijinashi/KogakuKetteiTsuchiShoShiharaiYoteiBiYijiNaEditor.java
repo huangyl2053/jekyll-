@@ -21,11 +21,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -60,9 +58,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
     private static final RString 半角アスタリスク = new RString("************");
     private static final RString 半角アスタリスク2 = new RString("**************");
     private static final RString 口座種別 = new RString("口座種別");
-    private static final RString 通帳記号 = new RString("通帳記号");
+    private static final RString 店番 = new RString("店番");
     private static final RString 口座番号 = new RString("口座番号");
-    private static final RString 通帳番号 = new RString("通帳番号");
     private final NinshoshaSource 認証者ソースデータ;
     private final ChohyoSeigyoKyotsu 帳票制御共通情報;
     private final List<RString> titleList;
@@ -173,18 +170,9 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
         set種別And種別タイトル(source);
         if (支給.equals(帳票情報.get支給_不支給決定区分()) && !窓口払い区分.equals(帳票情報.get支払方法区分())
                 && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
-            if (!帳票情報.isゆうちょ銀行フラグ()) {
-                source.kouzaShu = 帳票情報.get口座種別();
-                source.kouzaNo = 帳票情報.get口座番号();
-            } else {
-                source.kouzaShu = 帳票情報.get通帳記号();
-                source.kouzaNo = 帳票情報.get通帳番号();
-            }
+            source.kouzaShu = 帳票情報.get口座種別();
+            source.kouzaNo = 帳票情報.get口座番号();
             source.kouzaMeigi = 帳票情報.get口座名義人();
-        } else {
-            source.kouzaShu = RString.EMPTY;
-            source.kouzaNo = RString.EMPTY;
-            source.kouzaMeigi = RString.EMPTY;
         }
 
         source.tsuchino = 帳票情報.get決定通知書番号();
@@ -212,24 +200,11 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
             source.branchBankName = RString.EMPTY;
         }
 
-        if (支給.equals(帳票情報.get支給_不支給決定区分()) && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
-            if (窓口払い区分.equals(帳票情報.get支払方法区分())) {
-                source.shumokuTitle = 口座種別;
-                source.bangoTitle = 口座番号;
-            } else if (口座払い区分.equals(帳票情報.get支払方法区分()) && コード_9900.equals(金融機関コード)) {
-                source.shumokuTitle = 通帳記号;
-                source.bangoTitle = 通帳番号;
-            } else {
-                source.shumokuTitle = 口座種別;
-                source.bangoTitle = 口座番号;
-            }
-        }
-        if ((支給.equals(帳票情報.get支給_不支給決定区分())
-                && 帳票情報.get支給金額() != null
-                && 帳票情報.get支給金額().compareTo(Decimal.ZERO) < 0)
-                || 不支給.equals(帳票情報.get支給_不支給決定区分())) {
-            source.shumokuTitle = 口座種別;
-            source.bangoTitle = 口座番号;
+        source.shumokuTitle = 口座種別;
+        source.bangoTitle = 口座番号;
+        if (支給.equals(帳票情報.get支給_不支給決定区分()) && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0
+                && 口座払い区分.equals(帳票情報.get支払方法区分()) && コード_9900.equals(金融機関コード)) {
+            source.shumokuTitle = 店番;
         }
     }
 
@@ -317,11 +292,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
-    private RString 時分秒編集(RString 時間) {
-        RTime 時間時分秒 = new RTime(時間);
-        return 時間時分秒.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-    }
-
     private RString doカンマ編集(Decimal decimal) {
         if (null != decimal) {
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
@@ -366,8 +336,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
             source.karaFugo = 記号;
             source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日())
                     .concat(get日本語名略称(帳票情報.get支払期間終了年月日()));
-            source.shiharaiStartHMS = 時分秒編集(帳票情報.get支払窓口開始時間());
-            source.shiharaiEndHMS = 時分秒編集(帳票情報.get支払窓口終了時間());
+            source.shiharaiStartHMS = 帳票情報.get支払窓口開始時間();
+            source.shiharaiEndHMS = 帳票情報.get支払窓口終了時間();
         } else {
             source.mochimono = RString.EMPTY;
             source.shiharaiBasho = RString.EMPTY;

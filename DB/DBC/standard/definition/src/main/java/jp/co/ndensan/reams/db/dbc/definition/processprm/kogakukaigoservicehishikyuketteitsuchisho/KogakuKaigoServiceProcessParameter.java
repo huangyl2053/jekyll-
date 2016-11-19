@@ -46,6 +46,8 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
     private RTime 開始時間;
     private RTime 終了時間;
     private long 出力順ID;
+    private RString 窓口払い一括更新区分;
+    private long jobId;
 
     /**
      * コンストラクタ
@@ -70,6 +72,7 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
      * @param 開始時間 RTime
      * @param 終了時間 RTime
      * @param 出力順ID long
+     * @param 窓口払い一括更新区分 RString
      */
     public KogakuKaigoServiceProcessParameter(RString 抽出モード,
             RDate 抽出条件日付From,
@@ -90,7 +93,9 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
             RDate 支払期間To,
             RTime 開始時間,
             RTime 終了時間,
-            long 出力順ID) {
+            long 出力順ID,
+            RString 窓口払い一括更新区分,
+            long jobId) {
         this.抽出モード = 抽出モード;
         this.抽出条件日付From = 抽出条件日付From;
         this.抽出条件日付To = 抽出条件日付To;
@@ -111,6 +116,8 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
         this.開始時間 = 開始時間;
         this.終了時間 = 終了時間;
         this.出力順ID = 出力順ID;
+        this.窓口払い一括更新区分 = 窓口払い一括更新区分;
+        this.jobId = jobId;
     }
 
     /**

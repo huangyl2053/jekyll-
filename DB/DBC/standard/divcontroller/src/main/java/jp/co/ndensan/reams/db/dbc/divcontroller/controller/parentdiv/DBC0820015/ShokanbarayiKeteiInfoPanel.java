@@ -6,13 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820015;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.DBHozonJoho;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ModoruEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
@@ -76,6 +80,15 @@ public class ShokanbarayiKeteiInfoPanel {
         ViewStateHolder.put(ViewStateKeys.申請検索キー, new ShoukanharaihishinseikensakuParameter(被保険者番号, サービス年月, 整理番号,
                 null, null, null, null));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        if (db情報 == null) {
+            ArrayList<ShokanShukeiResult> shokan = new ArrayList<>();
+            ArrayList<ShokanShokujiHiyo> shokuji = new ArrayList<>();
+            ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> service = new ArrayList<>();
+            db情報.set償還払請求集計データList(shokan);
+            db情報.set償還払請求食事費用データList(shokuji);
+            db情報.set償還払請求特定入所者介護サービス費用データList(service);
+        }
         div.getPanelOne().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
             div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);

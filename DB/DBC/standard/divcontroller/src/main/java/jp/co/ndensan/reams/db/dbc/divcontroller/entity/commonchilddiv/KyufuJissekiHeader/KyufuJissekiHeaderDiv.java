@@ -798,5 +798,6 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
      */
     @Override
     public void set被保情報2(KyufuJissekiKihonShukeiRelate csData_A) {
+        getHandler().set被保情報2(csData_A);
     }
 }

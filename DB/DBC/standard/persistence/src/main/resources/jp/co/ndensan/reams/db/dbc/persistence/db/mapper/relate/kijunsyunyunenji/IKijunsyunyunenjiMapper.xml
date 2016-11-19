@@ -140,7 +140,8 @@
      </select>
      
      <resultMap id="ResultMap_InsTaishoSeitaiyinTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.InsTaishoSeitaiyinTempEntity" autoMapping="true">
-        <id column="hihokenshaNo" />
+        <id property="世帯員所得情報一時.hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <id property="被保険者台帳管理Newest.hihokenshaNo" column="HIHOKENSHA_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <id column="shikibetsuCode" />
         <association property="世帯員所得情報一時" resultMap="ResultMap_SetaiShotokuEntity"/>
         <association property="被保険者台帳管理Newest" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout.IHokenshaKyufujissekiOutMapper.resultMap_DbV1001HihokenshaDaichoEntity"/>
