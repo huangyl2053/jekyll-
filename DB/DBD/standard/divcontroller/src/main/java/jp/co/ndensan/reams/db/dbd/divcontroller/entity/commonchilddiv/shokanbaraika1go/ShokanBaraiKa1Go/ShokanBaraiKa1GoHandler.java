@@ -87,12 +87,27 @@ public class ShokanBaraiKa1GoHandler {
                 && shiharaiHohoHenko.get被保険者番号().value().equals(div.getKey_HihokenshaNo())
                 && shiharaiHohoHenko.get管理区分().equals(ShiharaiHenkoKanriKubun._１号償還払い化.getコード())
                 && 登録区分(div.getKey_Button(), shiharaiHohoHenko.get登録区分())) {
-            if ((ShoriKubun._1号予告者登録.equals(押下ボタン区分) && shiharaiHohoHenko.get予告登録年月日() == null)
-                    || (ShoriKubun.償還払い化登録.equals(押下ボタン区分) && shiharaiHohoHenko.get償還払化決定年月日() == null)) {
-                div.setShinkiKubun(新規登録);
-            } else if (ShoriKubun._1号予告者登録.equals(押下ボタン区分) || ShoriKubun.償還払い化登録.equals(押下ボタン区分)) {
-                div.setShinkiKubun(新規区分_空);
+            
+            if (ShoriKubun._1号予告者登録.equals(押下ボタン区分)){
+                if(shiharaiHohoHenko.get予告登録年月日() == null){
+                    div.setShinkiKubun(新規登録);
+                }else{
+                    div.setShinkiKubun(新規区分_空);
+                }
             }
+            
+            if (ShoriKubun.償還払い化登録.equals(押下ボタン区分)){
+                if(shiharaiHohoHenko.get償還払化決定年月日() == null){
+                    if (ShiharaiHenkoTorokuKubun._１号予告登録者.getコード().equals(shiharaiHohoHenko.get登録区分())){
+                        div.setShinkiKubun(新規区分_空);
+                    }else{
+                        div.setShinkiKubun(新規登録);
+                    }
+                }else{
+                    div.setShinkiKubun(新規区分_空);
+                }
+            }
+            
             支払方法データ.add(shiharaiHohoHenko);
         }
         if (支払方法データ.isEmpty()) {
@@ -420,11 +435,12 @@ public class ShokanBaraiKa1GoHandler {
         }
         ViewStateHolder.put(一号償還払い化ダイアログキー.支払方法変更管理業務概念, builder.build());
     }
-
+   
     private void update支払方法変更_償還払い化登録() {
         ShiharaiHohoHenko 支払方法変更管理業務概念 = ViewStateHolder.get(一号償還払い化ダイアログキー.支払方法変更管理業務概念, ShiharaiHohoHenko.class);
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
-        builder.set適用開始年月日(FromRDateToFlexibleDate(div.getTxtTekiyoKikanKaishi().getValue()))
+        builder.set登録区分(ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード())
+                .set適用開始年月日(FromRDateToFlexibleDate(div.getTxtTekiyoKikanKaishi().getValue()))
                 .set償還払化決定年月日(FromRDateToFlexibleDate(div.getTxtHenkoKetteiYMD().getValue()))
                 .set被保険者証提出期限(FromRDateToFlexibleDate(div.getTxtHokenshoTeishutsuKigenYMD().getValue()));
         if (null != builder.build().getState()

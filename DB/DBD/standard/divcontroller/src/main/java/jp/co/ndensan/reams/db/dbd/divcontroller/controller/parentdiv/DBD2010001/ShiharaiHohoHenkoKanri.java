@@ -635,6 +635,8 @@ public class ShiharaiHohoHenkoKanri {
      * @return レスポンスデータ
      */
     public ResponseData<ShiharaiHohoHenkoKanriDiv> onOkClose_dataPassing(ShiharaiHohoHenkoKanriDiv div) {
+        this.setSelectedRow(div);
+        
         ShiharaiHohoHenko dialog支払方法変更 = DataPassingConverter.deserialize(div.getKey_ShiharaiHohoHenkoKanri(), ShiharaiHohoHenko.class);
         if (dialog支払方法変更 == null) {
             return ResponseData.of(div).respond();
