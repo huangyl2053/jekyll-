@@ -103,10 +103,14 @@ public class KyufuShiharayiMeisaiPanel {
         if (償還払ViewStateDB.get償還払請求明細データList() != null) {
             entityList = 償還払ViewStateDB.get償還払請求明細データList();
         }
-        if (entityList.isEmpty()) {
-            entityList = ShokanbaraiJyokyoShokai.createInstance().
-                    getShokanbarayiSeikyuMeisayiShiteiIgaiList(
-                            被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null, サービス種類コード_50);
+        entityList = getHandler(div).getUpdateList(entityList, meisaiPar);
+        List<ShokanMeisaiResult> list = ShokanbaraiJyokyoShokai.createInstance().
+                getShokanbarayiSeikyuMeisayiShiteiIgaiList(
+                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null, サービス種類コード_50);
+        if (list != null && !list.isEmpty()) {
+            for (ShokanMeisaiResult result : list) {
+                entityList.add(result);
+            }
         }
         div.getPanelThree().getPanelFour().setVisible(false);
         getHandler(div).initialize(entityList);
