@@ -47,6 +47,7 @@ public final class ShafukuKeigenGakuPanelHandler {
     private static final RString 登録 = new RString("登録");
     private static final RString 確定する = new RString("Element1");
     private static final RString エラーメッセージ = new RString("選択されたサービス種類");
+    private static final RString 連番_1 = new RString("1");
 
     private ShafukuKeigenGakuPanelHandler(ShafukuKeigenGakuPanelDiv div) {
         this.div = div;
@@ -610,8 +611,13 @@ public final class ShafukuKeigenGakuPanelHandler {
                 .getTxtKeigengoRiyoshaFutangaku().getValue());
         newRow.setDefaultDataName6(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
                 .getTxtBikou().getValue());
-        newRow.setDefaultDataName7(new RString(Integer.parseInt(div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku()
-                .getDataSource().get(0).getDefaultDataName7().toString()) + 1));
+        if (!div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku()
+                .getDataSource().isEmpty()) {
+            newRow.setDefaultDataName7(new RString(Integer.parseInt(div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku()
+                    .getDataSource().get(0).getDefaultDataName7().toString()) + 1));
+        } else {
+            newRow.setDefaultDataName7(連番_1);
+        }
         newRow.setServiceShuruiCode(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
                 .getDdlServiceShurui().getSelectedKey());
         div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource().add(0, newRow);
