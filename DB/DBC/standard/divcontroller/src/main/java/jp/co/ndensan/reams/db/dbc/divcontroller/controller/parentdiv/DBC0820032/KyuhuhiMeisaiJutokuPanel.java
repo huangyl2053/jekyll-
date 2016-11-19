@@ -96,7 +96,7 @@ public class KyuhuhiMeisaiJutokuPanel {
                     getShokanbarayiSeikyuMeisayiJyutokuList(
                             被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         } else if (null != 償還払ViewStateDB.get住所地特例データList() && !償還払ViewStateDB.get住所地特例データList().isEmpty()) {
-            entityList = 償還払ViewStateDB.get住所地特例データList();
+            entityList = getUpdateList(償還払ViewStateDB.get住所地特例データList(), meisaiPar);
         } else {
             entityList = new ArrayList();
         }
@@ -114,6 +114,22 @@ public class KyuhuhiMeisaiJutokuPanel {
             return ResponseData.of(div).setState(DBC0820032StateName.削除モード);
         }
         return ResponseData.of(div).setState(DBC0820032StateName.新規修正モード);
+    }
+
+    private List<ShokanMeisaiJushochiTokureiResult> getUpdateList(
+            List<ShokanMeisaiJushochiTokureiResult> allList, ShoukanharaihishinseimeisaikensakuParameter parameter) {
+        List<ShokanMeisaiJushochiTokureiResult> updateList = new ArrayList<>();
+        for (ShokanMeisaiJushochiTokureiResult ryoyo : allList) {
+            if (ryoyo.getEntity().get被保険者番号().equals(parameter.get被保険者番号())
+                    && ryoyo.getEntity().getサービス提供年月().equals(parameter.getサービス年月())
+                    && ryoyo.getEntity().get整理番号().equals(parameter.get整理番号())
+                    && ryoyo.getEntity().get事業者番号().equals(parameter.get事業者番号())
+                    && ryoyo.getEntity().get様式番号().equals(parameter.get様式番号())
+                    && ryoyo.getEntity().get明細番号().equals(parameter.get明細番号())) {
+                updateList.add(ryoyo);
+            }
+        }
+        return updateList;
     }
 
     /**
@@ -153,7 +169,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_Delete(KyuhuhiMeisaiJutokuPanelDiv div) {
-        div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().setVisible(true);
+        div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().setVisible(false);
         getHandler(div).readOnly給付費明細登録(true);
         getHandler(div).disabled給付費明細登録(true);
         getHandler(div).set給付費明細();
