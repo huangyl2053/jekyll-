@@ -58,9 +58,6 @@ public class ShikyuShinseiDetail {
     private static final RString MODEL_UPD = new RString("修正");
     private static final RString MODEL_DEL = new RString("削除");
     private static final RString メッセージ_登録 = new RString("登録");
-    private static final RString メッセージ_更新 = new RString("更新");
-    private static final RString 申請を保存する = new RString("btnUpdate");
-    private static final RString 申請を削除する = new RString("btnDelete");
     private static final RString 確認 = new RString("確認");
 
     private static final RString 申請書入力済 = new RString("1");
@@ -76,6 +73,7 @@ public class ShikyuShinseiDetail {
     private static final RString 削除は正常に終了しました = new RString("削除は正常に終了しました。");
 
     private static final RString 必要な項目 = new RString("必要な項目");
+    private static final RString 入力なし = new RString("0");
 
     /**
      * 画面初期化処理です。
@@ -323,13 +321,15 @@ public class ShikyuShinseiDetail {
      * @return ResponseData<ShikyuShinseiDetailDiv>
      */
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnKouzaInfo(ShikyuShinseiDetailDiv div) {
-        ValidationMessageControlPairs validPairs = 申請既存チェック(div);
-
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        if (メッセージ_登録.equals(画面モード) || MODEL_ADD.equals(画面モード)) {
+            ValidationMessageControlPairs validPairs = 申請既存チェック(div);
+
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+
+        }
         if ((メッセージ_登録.equals(画面モード) || MODEL_ADD.equals(画面モード)) && !getHandler(div).is変更あり_ADD()) {
             throw new ApplicationException(UrErrorMessages.未入力.getMessage().replace(必要な項目.toString()));
         }
@@ -351,11 +351,14 @@ public class ShikyuShinseiDetail {
      * @return ResponseData<ShikyuShinseiDetailDiv>
      */
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnServerteikyoShomeisyo(ShikyuShinseiDetailDiv div) {
-        ValidationMessageControlPairs validPairs = 申請既存チェック(div);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        if (メッセージ_登録.equals(画面モード) || MODEL_ADD.equals(画面モード)) {
+            ValidationMessageControlPairs validPairs = 申請既存チェック(div);
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
+
         if ((メッセージ_登録.equals(画面モード) || MODEL_ADD.equals(画面モード)) && !getHandler(div).is変更あり_ADD()) {
             throw new ApplicationException(UrErrorMessages.未入力.getMessage().replace(必要な項目.toString()));
         }
@@ -370,11 +373,15 @@ public class ShikyuShinseiDetail {
      * @return ResponseData<ShikyuShinseiDetailDiv>
      */
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnShokanBaraiKeteiInfo(ShikyuShinseiDetailDiv div) {
-        ValidationMessageControlPairs validPairs = 申請既存チェック(div);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        if (メッセージ_登録.equals(画面モード) || MODEL_ADD.equals(画面モード)) {
+            ValidationMessageControlPairs validPairs = 申請既存チェック(div);
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+
+        }
+
         if ((メッセージ_登録.equals(画面モード) || MODEL_ADD.equals(画面モード)) && !getHandler(div).is変更あり_ADD()) {
             throw new ApplicationException(UrErrorMessages.未入力.getMessage().replace(必要な項目.toString()));
         }
@@ -445,7 +452,10 @@ public class ShikyuShinseiDetail {
     }
 
     private void 申請書入力済チェック() {
-        RString 申請書入力済フラグ = ViewStateHolder.get(ViewStateKeys.申請書入力済フラグ, RString.class);
+        RString 申請書入力済フラグ = ViewStateHolder.get(ViewStateKeys.申請書入力済フラグ_サービス提供証明書, RString.class);
+        if (申請書入力済フラグ == null || 申請書入力済フラグ.isEmpty()) {
+            申請書入力済フラグ = 入力なし;
+        }
         RString 申請書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance().shinseishoInputCheck(申請書入力済フラグ);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
 

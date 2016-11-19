@@ -50,8 +50,6 @@ public class KouzaInfoPanel {
     private static final RString 参照 = new RString("参照");
     private static final RString 更新 = new RString("更新");
     private static final RString 照会モード = new RString("照会");
-    private static final RString 申請を保存ボタン = new RString("btnUpdate");
-    private static final RString 申請を削除する = new RString("btnDelete");
     private static final RString NUM_1 = new RString("1");
     private static final RString NUM_2 = new RString("2");
     private static final RString NUM_3 = new RString("3");
