@@ -1166,13 +1166,13 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                     = 償還払支給判定結果Dac.selectByKey(parameter.get被保険者番号(),
                             parameter.getサービス提供年月(), parameter.get整理番号());
             if (dbT3036entity == null) {
-                dbT3036entity.initializeMd5();
                 DbT3034ShokanShinseiEntity dbt3034entity = 償還払支給申請Dac.selectByKey(parameter.get被保険者番号(),
                         parameter.getサービス提供年月(), parameter.get整理番号());
                 DbT3036ShokanHanteiKekkaEntity entity = new DbT3036ShokanHanteiKekkaEntity();
                 entity.setHiHokenshaNo(parameter.get被保険者番号());
                 entity.setServiceTeikyoYM(parameter.getサービス提供年月());
                 entity.setSeiriNo(parameter.get整理番号());
+                entity.initializeMd5();
                 ShokanHanteiKekka kekaJoho = new ShokanHanteiKekka(entity);
                 ShokanHanteiKekkaBuilder kekajoho = kekaJoho.createBuilderForEdit();
                 kekajoho.set証記載保険者番号(dbt3034entity == null ? new ShoKisaiHokenshaNo(RString.EMPTY)
@@ -1208,7 +1208,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             }
             if (更新件数 > 0 && parameter.is差額金額登録フラグ() && (決定情報一覧List != null && !決定情報一覧List.isEmpty())) {
                 for (SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧 : 決定情報一覧List) {
-                    決定情報登録更新2(parameter, 決定情報一覧, 証明書入力済フラグ, dbJoho, shokujiJouhos, serviceHiyo,
+                    決定情報登録更新2(parameter, 決定情報一覧, 証明書入力済フラグ, modoruEntity, dbJoho, shokujiJouhos, serviceHiyo,
                             償還払請求サービス計画200904データList, 償還払請求サービス計画200604データList, 償還払請求サービス計画200004データList);
                 }
             }
@@ -1220,14 +1220,6 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
 
         }
         return modoruEntity;
-//        if (parameter.get決定年月日() != null && !parameter.get決定年月日().isEmpty()) {
-//            KyufujissekiEntity entity = getKyufuJissekiData(parameter.get被保険者番号(),
-//                    parameter.getサービス提供年月(), parameter.get整理番号());
-//            SyokanbaraiShikyuKetteKyufuJssekiHensyuManager manager
-//                    = SyokanbaraiShikyuKetteKyufuJssekiHensyuManager.createInstance();
-//            manager.dealKyufujisseki(parameter.get画面モード(), parameter.get識別コード(),
-//                    entity, 修正前支給区分);
-//        }
     }
 
     private int get償還請求集計情報(SyokanbaraihiShikyuShinseiKetteParameter parameter, List<SyokanbaraihiShikyuShinseiKetteEntity> 決定情報一覧List,
@@ -1463,8 +1455,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     }
 
     private void 決定情報登録更新2(SyokanbaraihiShikyuShinseiKetteParameter parameter,
-            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧, ShomeishoNyuryokuFlag 証明書入力済フラグ, DbJohoViewState dbJoho,
-            ArrayList<ShokanShokujiHiyo> shokujiJouhos, ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyo,
+            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧, ShomeishoNyuryokuFlag 証明書入力済フラグ, ModoruEntity modoruEntity,
+            DbJohoViewState dbJoho, ArrayList<ShokanShokujiHiyo> shokujiJouhos, ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyo,
             ArrayList<ShokanServicePlan200904> 償還払請求サービス計画200904データList,
             ArrayList<ShokanServicePlan200604> 償還払請求サービス計画200604データList,
             ArrayList<ShokanServicePlan200004> 償還払請求サービス計画200004データList) {
@@ -1481,7 +1473,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                     shuk.set請求額差額金額(決定情報一覧.get差額金額());
                     shuk.set出来高請求額差額金額(決定情報一覧.get差額金額());
                     shukei = shuk.build();
-                    shukei.modified(); //TODO
+                    modoruEntity.get償還払請求集計データList().add(shukei);
                 }
                 break;
             case テーブル区分4:

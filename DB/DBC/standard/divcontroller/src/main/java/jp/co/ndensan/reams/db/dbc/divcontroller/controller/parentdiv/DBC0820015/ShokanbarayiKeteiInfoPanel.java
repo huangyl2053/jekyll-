@@ -47,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払い費支給申請決定_償還払決定情報
@@ -59,7 +60,6 @@ public class ShokanbarayiKeteiInfoPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 証明書 = new RString("証明書");
-    private static final RString 申請書入力済フラグ = new RString("申請書入力済フラグ");
     private static final RString 申請書入力済 = new RString("1");
     private static final RString 申請書入力未済あり = new RString("2");
     private static final RString 決定情報入力未済あり = new RString("3");
@@ -142,7 +142,6 @@ public class ShokanbarayiKeteiInfoPanel {
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_btnKouza(ShokanbarayiKeteiInfoPanelDiv div) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         getDB情報(div);
-        ViewStateHolder.put(申請書入力済フラグ, get申請書入力済フラグ(false));
         ViewStateHolder.put(ViewStateKeys.処理モード, 画面モード);
         if (登録.equals(画面モード) && !get画面有無変化(div)) {
             throw new ApplicationException(UrErrorMessages.未入力.getMessage().replace(必要項目.toString()));
@@ -162,7 +161,6 @@ public class ShokanbarayiKeteiInfoPanel {
             ShokanbarayiKeteiInfoPanelDiv div) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         getDB情報(div);
-        ViewStateHolder.put(申請書入力済フラグ, get申請書入力済フラグ(false));
         ViewStateHolder.put(ViewStateKeys.処理モード, 画面モード);
         ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
@@ -210,12 +208,21 @@ public class ShokanbarayiKeteiInfoPanel {
                 getHandler(div).initialize(被保険者番号, サービス年月, 整理番号, 画面モード);
                 return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.一覧に戻る).respond();
             } else {
-                //TODO
                 return ResponseData.of(div).respond();
             }
         } else {
             return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.一覧に戻る).respond();
         }
+    }
+
+    /**
+     * onClick_CommonsShoriCancel
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
+    public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_CommonsShoriCancel(ShokanbarayiKeteiInfoPanelDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.一覧に戻る).respond();
     }
 
     /**
@@ -235,19 +242,26 @@ public class ShokanbarayiKeteiInfoPanel {
             return ResponseData.of(div).respond();
         }
         try {
-            ViewStateHolder.put(申請書入力済フラグ, get申請書入力済フラグ(get画面有無変化(div)));
             ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.申請検索キー,
                     ShoukanharaihishinseikensakuParameter.class);
             RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
             FlexibleDate 決定日 = ViewStateHolder.get(ViewStateKeys.決定日, FlexibleDate.class);
             DBHozonJoho データ情報 = getDB情報(div);
+            if (情報のチェック(データ情報.getDB情報()) == 3) {
+                if (!ResponseHolder.isReRequest()) {
+                    return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+                }
+                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    return ResponseData.of(div).respond();
+                }
+            }
             RString 申請書入力済区分 = getHandler(div).get申請書入力済区分(get申請書入力済フラグ(get画面有無変化(div)));
             if (申請書入力済.equals(申請書入力済区分)) {
                 ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, 申請書入力済);
                 getHandler(div).登録Save(データ情報.getDB情報(), データ情報.get修正前支給区分(), 決定日, paramter, 画面モード, 識別コード);
-                div.getCcdKanryoMessage().setMessage((ViewStateHolder.get(ViewStateKeys.画面モード, RString.class)),
-                        RString.EMPTY, RString.EMPTY, true);
+                div.getCcdKanryoMessage().setMessage(getKanryoMessage(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class)),
+                        paramter.getHiHokenshaNo().value(), div.getPanelOne().getCcdKaigoAtenaInfo().get氏名漢字(), true);
                 return ResponseData.of(div).setState(DBC0820015StateName.処理完了);
             } else if (申請書入力未済あり.equals(申請書入力済区分)) {
                 ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, 申請書入力未済あり);
@@ -265,21 +279,6 @@ public class ShokanbarayiKeteiInfoPanel {
                     return ResponseData.of(div).setState(DBC0820015StateName.処理完了);
                 }
             }
-//            if (!ResponseHolder.isReRequest()) {
-//                ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.申請検索キー,
-//                        ShoukanharaihishinseikensakuParameter.class);
-//                Decimal 支払金額合計初期 = ViewStateHolder.get(ViewStateKeys.前回支払金額, Decimal.class);
-//                RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-//                ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-//                //getHandler(div).登録Save(paramter, 支払金額合計初期, 画面モード, 識別コード);
-//                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-//                        .replace(登録.toString())).respond();
-//            }
-//            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
-//                return ResponseData.of(div).respond();
-//            }
-//            return ResponseData.of(div).respond();
         } catch (Exception e) {
             e.toString();
             throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
@@ -430,5 +429,39 @@ public class ShokanbarayiKeteiInfoPanel {
             }
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
         }
+    }
+
+    private int 情報のチェック(DbJohoViewState db情報) {
+        int index = 0;
+        if (db情報.get住所地特例データList().isEmpty()
+                && db情報.get償還払請求サービス計画200004データResultList().isEmpty()
+                && db情報.get償還払請求サービス計画200604データResultList().isEmpty()
+                && db情報.get償還払請求サービス計画200904データResultList().isEmpty()
+                && db情報.get償還払請求基本データList().isEmpty()
+                && db情報.get償還払請求所定疾患施設療養費等データList().isEmpty()
+                && db情報.get償還払請求明細データList().isEmpty()
+                && db情報.get償還払請求特定入所者介護サービス費用データList().isEmpty()
+                && db情報.get償還払請求特定診療費データList().isEmpty()
+                && db情報.get償還払請求社会福祉法人軽減額データList().isEmpty()
+                && db情報.get償還払請求緊急時施設療養データList().isEmpty()
+                && db情報.get償還払請求集計データList().isEmpty()
+                && db情報.get償還払請求食事費用データList().isEmpty()
+                && db情報.get特別療養費データList().isEmpty()) {
+            index = index++;
+        }
+        if (db情報.get償還払支給判定結果() != null) {
+            if (EntityDataState.Unchanged.equals(db情報.get償還払支給判定結果().toEntity().getState())
+                    || db情報.get償還払支給判定結果().toEntity().getState() == null) {
+                index++;
+            }
+        }
+        if (db情報.get償還払支給申請() != null) {
+            if (EntityDataState.Unchanged.equals(db情報.get償還払支給申請().toEntity().getState())
+                    || db情報.get償還払支給申請().toEntity().getState() == null) {
+                index++;
+            }
+        }
+        return index;
+
     }
 }
