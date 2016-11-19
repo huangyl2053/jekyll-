@@ -234,6 +234,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
      * @param 画面モード 画面モード
      * @param 識別コード 識別コード
      */
+    @Transaction
     public void insupdShokan(
             DbJohoViewState db情報,
             RString 修正前支給区分,
