@@ -38,7 +38,8 @@ public class KokuhorenKyoutsuuFileGetManager {
 
     private static final RString MSG_交換情報識別番号 = new RString("交換情報識別番号");
     private static final RString MSG_ファイル格納フォルダ名 = new RString("ファイル格納フォルダ名");
-    private static final RString PREFIX = new RString("1_");
+    private static final RString PREFIX = new RString("1\\_");
+    private static final RString パーセント = new RString("%");
     private static final RString FILTER = new RString("1_*.csv");
 
     /**
@@ -72,7 +73,7 @@ public class KokuhorenKyoutsuuFileGetManager {
         List<UzT0885SharedFileEntryEntity> entityList;
         JournalWriter writer = new JournalWriter();
         try {
-            entityList = SharedFile.searchSharedFile(PREFIX.concat(交換情報識別番号));
+            entityList = SharedFile.searchSharedFile(PREFIX.concat(交換情報識別番号).concat(パーセント));
         } catch (Exception ex) {
             writer.writeErrorJournal(RDateTime.now(), new RString(ex.getMessage()));
             throw new BatchInterruptedException(ex.getMessage());
