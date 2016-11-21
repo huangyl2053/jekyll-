@@ -142,14 +142,6 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
         return 基本entity;
     }
 
-    private RString get市町村コード(KyuuhuZissekiKougakuRelateEntity entity) {
-        if (!広域内住所地特例フラグ.equals(entity.getDbt1001_tmp2_koikinaiJushochiTokureiFlag())) {
-            return entity.getDbt1001_tmp2_shichosonCode();
-        } else {
-            return entity.getDbt1001_tmp2_koikinaiTokureiSochimotoShichosonCode();
-        }
-    }
-
     private RString get基本ヘッダー(RString 入力識別番号, RString サービス提供年月, List<RString> 入力識別番号List) {
         if (入力識別番号List.contains(入力識別番号)
                 && new FlexibleYearMonth(サービス提供年月_200510).isBeforeOrEquals(new FlexibleYearMonth(サービス提供年月))) {

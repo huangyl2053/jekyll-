@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1170011.Jiko
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1170011.JikoFutangakushomeishoHandler;
 import jp.co.ndensan.reams.db.dbc.service.report.ijikofutangakushomeishoservice.IJikoFutangakushomeisho2009Service;
 import jp.co.ndensan.reams.db.dbc.service.report.ijikofutangakushomeishoservice.IJikoFutangakushomeishoService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -64,18 +65,26 @@ public class JikoFutangakuShomeisho {
      */
     public ResponseData<JikoFutangakuShomeishoDiv> onLoad(JikoFutangakuShomeishoDiv div) {
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
-        List<KogakuGassanShinSeisho> 対象者データ = getHandler(div).get対象者データ(メニューID, getKey().get被保険者番号());
+        List<KogakuGassanShinSeisho> 対象者データ = null;
+        HihokenshaNo 被保険者番号 = getKey().get被保険者番号();
+        if (null == 被保険者番号 || 被保険者番号.isEmpty()) {
+            if (!ResponseHolder.isReRequest()) {
+                InformationMessage informationMessage = new InformationMessage(
+                        DbcInformationMessages.被保険者でないデータ.getMessage().getCode(),
+                        DbcInformationMessages.被保険者でないデータ.getMessage().evaluate());
+                setButtonDisabled(div);
+                return ResponseData.of(div).addMessage(informationMessage).respond();
+            }
+        } else {
+            対象者データ = getHandler(div).get対象者データ(メニューID, 被保険者番号);
+        }
         InformationMessage message = new InformationMessage(
                 DbcInformationMessages.自己負担額データなし.getMessage().getCode(),
                 DbcInformationMessages.自己負担額データなし.getMessage().evaluate());
-        if (対象者データ.isEmpty()) {
+        if (対象者データ == null || 対象者データ.isEmpty()) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).onLoadhas対象者データ(getKey().get被保険者番号(), getKey().get識別コード());
-                div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setDisabled(true);
-                div.getJikoFutanShomeishoSakuseiPrint().getDdlShikyuShinseishoSeiriNo().setDisabled(true);
-                div.getJikoFutanShomeishoSakuseiPrint().getTxtHakkoDate().setDisabled(true);
-                div.getJikoFutanShomeishoSakuseiPrint().getCcdBunshoNo().setDisabled(true);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(発行, true);
+                setButtonDisabled(div);
                 return ResponseData.of(div).addMessage(message).respond();
             }
         } else {
@@ -93,6 +102,14 @@ public class JikoFutangakuShomeisho {
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void setButtonDisabled(JikoFutangakuShomeishoDiv div) {
+        div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setDisabled(true);
+        div.getJikoFutanShomeishoSakuseiPrint().getDdlShikyuShinseishoSeiriNo().setDisabled(true);
+        div.getJikoFutanShomeishoSakuseiPrint().getTxtHakkoDate().setDisabled(true);
+        div.getJikoFutanShomeishoSakuseiPrint().getCcdBunshoNo().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行, true);
     }
 
     /**

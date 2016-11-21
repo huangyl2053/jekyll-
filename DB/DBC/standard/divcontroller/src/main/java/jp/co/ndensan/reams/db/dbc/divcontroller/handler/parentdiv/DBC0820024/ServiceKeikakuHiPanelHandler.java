@@ -69,6 +69,8 @@ public class ServiceKeikakuHiPanelHandler {
                     - Integer.parseInt(o2.getDefaultDataName7().toString()));
         }
     };
+    private static final int NUM0 = 0;
+    private static final int NUM6 = 6;
 
     /**
      * ServiceKeikakuHiPanelHandlerコンストラクタです
@@ -591,9 +593,30 @@ public class ServiceKeikakuHiPanelHandler {
                         様式番号,
                         明細番号,
                         row.getDefaultDataName7());
-                entity200904 = 保存_データ(row, entity200904);
-                newEntity200904ResultList.add(new ShokanServicePlan200904Result(entity200904, RString.EMPTY));
+                newEntity200904ResultList = isView200904_DB存在(entity200904ResultList, entity200904, newEntity200904ResultList, row);
             }
+        }
+        return newEntity200904ResultList;
+    }
+
+    private List<ShokanServicePlan200904Result> isView200904_DB存在(List<ShokanServicePlan200904Result> entity200904ResultList, ShokanServicePlan200904 entity200904,
+            List<ShokanServicePlan200904Result> newEntity200904ResultList, dgdYichiran_Row row) {
+        boolean isViewDB存在 = false;
+        for (ShokanServicePlan200904Result 情報 : entity200904ResultList) {
+            if (情報.getEntity().get被保険者番号().equals(entity200904.get被保険者番号())
+                    && 情報.getEntity().getサービス提供年月().toDateString().equals(entity200904.getサービス提供年月().toDateString().substring(NUM0, NUM6))
+                    && 情報.getEntity().get整理番号().equals(entity200904.get整理番号())
+                    && 情報.getEntity().get事業者番号().getColumnValue().equals(entity200904.get事業者番号())
+                    && 情報.getEntity().get様式番号().equals(entity200904.get様式番号())
+                    && 情報.getEntity().get明細番号().equals(entity200904.get明細番号())
+                    && 情報.getEntity().get連番().equals(entity200904.get連番())) {
+                isViewDB存在 = true;
+                break;
+            }
+        }
+        if (!isViewDB存在) {
+            entity200904 = 保存_データ(row, entity200904);
+            newEntity200904ResultList.add(new ShokanServicePlan200904Result(entity200904, RString.EMPTY));
         }
         return newEntity200904ResultList;
     }

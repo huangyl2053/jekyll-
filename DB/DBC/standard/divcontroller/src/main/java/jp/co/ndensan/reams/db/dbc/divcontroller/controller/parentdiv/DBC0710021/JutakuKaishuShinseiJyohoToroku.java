@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0710021
 
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.ShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
@@ -675,34 +676,6 @@ public class JutakuKaishuShinseiJyohoToroku {
     }
 
     /**
-     * 「過去の住宅改修費を確認する」ボタン押したするメソッドです。
-     *
-     * @param div 住宅改修費支給申請_申請情報登録DIV
-     * @return ResponseData
-     */
-    public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnRireki(
-            JutakuKaishuShinseiJyohoTorokuDiv div) {
-
-        JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-        ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, RString.FULL_SPACE, null, false).validate住宅改修内容();
-        if (valid.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(valid).respond();
-        }
-        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, null, handler.住宅改修内容一覧チェック(), false).validate住宅改修内容();
-        if (valid2.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(valid2).respond();
-        }
-        JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.申請情報,
-                JutakuGaisuViewStateHolderParameter.class);
-        handler.過去の住宅改修費取得と支払結果の設定(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                param);
-        ViewStateHolder.put(ViewStateKeys.申請情報, param);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 「限度額をチェックする」ボタン押したするメソッドです。
      *
      * @param div 住宅改修費支給申請_申請情報登録DIV
@@ -726,9 +699,18 @@ public class JutakuKaishuShinseiJyohoToroku {
         div.getJutakuKaishuShinseiResetInfo().getTxtHiyoTotalNow().setValue(費用額合計);
         JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager manager
                 = JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.createInstance();
-        FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
+        FlexibleYearMonth 終了サービス提供年月 = new FlexibleYearMonth(
                 div.getTxtTeikyoYM().getValue().getYearMonth().toDateString());
-        boolean 要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(被保険者番号, 画面提供着工年月);
+
+        JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
+        ShiharaiKekkaResult 最新住宅改修費支払結果 = 住宅改修費事前申請.getKakoJutakuKaishuHi(被保険者番号,
+                new FlexibleYearMonth(div.getCommHeadPanel().getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
+        handler.前回まで支払結果の初期化(最新住宅改修費支払結果);
+
+        boolean 要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(
+                被保険者番号,
+                最新住宅改修費支払結果.get開始サービス提供年月(),
+                終了サービス提供年月);
         List<RString> 要介護状態区分３段階変更チェック = div
                 .getJutakuKaishuShinseiResetInfo().getChkResetInfo().getSelectedKeys();
         boolean 限度額リセット対象 = new RString(DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage()
@@ -763,7 +745,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         RString 改修住宅住所 = editor改修住宅住所(div);
         JutakuKaishuJyusyoChofukuHanntei chofukuHanntei = JutakuKaishuJyusyoChofukuHanntei.createInstance();
         boolean is改修住所重複 = chofukuHanntei.checkKaishuJyusyoChofukuToroku(被保険者番号,
-                画面提供着工年月, 改修住宅住所);
+                最新住宅改修費支払結果.get開始サービス提供年月(), 終了サービス提供年月, 改修住宅住所);
         if (is改修住所変更(is改修住所重複, 要介護状態区分３段階変更チェック)) {
             if (is改修住所_限度額リセット対象(改修住所_限度額リセット対象, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(
@@ -781,19 +763,8 @@ public class JutakuKaishuShinseiJyohoToroku {
             }
             to改修住所_限度額リセット対象外(要介護状態区分３段階変更チェック, div, 改修住所_限度額リセット対象外);
         }
-        boolean 限度額チェック = handler.is限度額を超えない(被保険者番号, ViewStateHolder.get(
-                ViewStateKeys.整理番号, RString.class));
-        if (is改修住所_限度額リセット対象(限度額チェック, 住宅改修限度額確認)) {
-            QuestionMessage message = new QuestionMessage(
-                    DbcWarningMessages.住宅改修限度額確認.getMessage().getCode(),
-                    DbcWarningMessages.住宅改修限度額確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(DbcWarningMessages.住宅改修限度額確認.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).respond();
-        }
+        boolean 限度額チェック = is改修住所重複 || 要介護状態３段階変更の判定;
+
         handler.支払結果の設定(被保険者番号, 限度額チェック);
         JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.申請情報,
                 JutakuGaisuViewStateHolderParameter.class);

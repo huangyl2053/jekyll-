@@ -83,7 +83,7 @@ public final class ShafukuKeigenGakuPanelHandler {
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(様式番号);
         div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(false);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setDisplayNone(true);
     }
 
     private void initialize法人軽減額リスト(List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト) {
@@ -128,7 +128,7 @@ public final class ShafukuKeigenGakuPanelHandler {
     public void init_Delete() {
         div.getPanelShafukukenngengaku().getBtnAdd().setDisabled(true);
         div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().setReadOnly(true);
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(false);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setDisplayNone(true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(確定する, true);
     }
 
@@ -436,7 +436,9 @@ public final class ShafukuKeigenGakuPanelHandler {
      * initializeByModify
      */
     public void initializeByAdd() {
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(true);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setDisplayNone(false);
+        div.getBtnClear().setDisabled(false);
+        div.getBtnCal().setDisabled(false);
         initializeByClean();
         setNotReadOnly();
     }
@@ -447,6 +449,8 @@ public final class ShafukuKeigenGakuPanelHandler {
     public void initializeByModify() {
         set選択行();
         setNotReadOnly();
+        div.getBtnClear().setDisabled(false);
+        div.getBtnCal().setDisabled(false);
     }
 
     /**
@@ -455,10 +459,12 @@ public final class ShafukuKeigenGakuPanelHandler {
     public void initializeByDelete() {
         set選択行();
         setReadOnly();
+        div.getBtnClear().setDisabled(true);
+        div.getBtnCal().setDisabled(true);
     }
 
     private void set選択行() {
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(true);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setDisplayNone(false);
         dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui()
                 .setSelectedKey(row.getServiceShuruiCode());
@@ -483,7 +489,7 @@ public final class ShafukuKeigenGakuPanelHandler {
                 && div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue() != null) {
             Decimal 軽減額 = div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue()
                     .multiply(new Decimal(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                            .getDdlKengenritsu().getSelectedValue().toString()));
+                                    .getDdlKengenritsu().getSelectedValue().toString()));
             div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().setValue(軽減額);
 
             Decimal 軽減後利用者負担額 = div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue()
@@ -521,7 +527,7 @@ public final class ShafukuKeigenGakuPanelHandler {
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().clearValue();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku().clearValue();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtBikou().clearValue();
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(false);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setDisplayNone(true);
     }
 
     /**
@@ -542,7 +548,7 @@ public final class ShafukuKeigenGakuPanelHandler {
             dgdShafukukeigenngaku登録(サービス種類リスト);
         }
         initializeByClean();
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setIsOpen(false);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setDisplayNone(true);
     }
 
     private void dgdShafukukeigenngaku削除() {

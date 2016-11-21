@@ -56,32 +56,33 @@ public class JutakuKaishuJyusyoChofukuHanntei {
      * 重複判定
      *
      * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月 サービス提供年月
+     * @param 開始サービス提供年月 FlexibleYearMonth
+     * @param 終了サービス提供年月 FlexibleYearMonth
      * @param 改修住宅住所 改修住宅住所
      * @return 判定
      */
     @Transaction
-    public boolean checkKaishuJyusyoChofukuToroku(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月, RString 改修住宅住所) {
+    public boolean checkKaishuJyusyoChofukuToroku(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth 開始サービス提供年月,
+            FlexibleYearMonth 終了サービス提供年月,
+            RString 改修住宅住所) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(開始サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("開始サービス提供年月"));
+        requireNonNull(終了サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("終了サービス提供年月"));
         requireNonNull(改修住宅住所, UrSystemErrorMessages.値がnull.getReplacedMessage("改修住宅住所"));
         IJutakuKaishuIJyusyoChofukuHannteiMapper mapper = mapperProvider.create(IJutakuKaishuIJyusyoChofukuHannteiMapper.class);
         JutakuKaishuJyusyoChofukuHannteiMapperParameter parameter = JutakuKaishuJyusyoChofukuHannteiMapperParameter
-                .createSelectByKeyParam(被保険者番号, サービス提供年月);
+                .createSelectByKeyParam(被保険者番号, 開始サービス提供年月, 終了サービス提供年月);
         List<JutakuKaishuJyusyoChofukuHannteiEntity> entityList = mapper.selectKaishuJyusyoChofukuToroku(parameter);
         if (null == entityList || entityList.isEmpty()) {
             return false;
         }
         for (JutakuKaishuJyusyoChofukuHannteiEntity entity : entityList) {
-            if (改修住宅住所.equals(entity.getJutakuKaishuJutakuAddress())) {
-                return true;
-            }
-            if (entity.isJutakuJushoHenko()) {
+            if (!改修住宅住所.equals(entity.getJutakuKaishuJutakuAddress())) {
                 return false;
             }
         }
-        return false;
+        return true;
     }
-
 }

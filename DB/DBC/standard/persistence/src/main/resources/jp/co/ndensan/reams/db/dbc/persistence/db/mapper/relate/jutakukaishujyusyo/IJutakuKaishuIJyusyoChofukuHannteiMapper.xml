@@ -4,44 +4,41 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishujyusyo.IJutakuKaishuIJyusyoChofukuHannteiMapper">
-    
+
     <resultMap id="JutakuKaishuJyusyoChofukuHannteiEntity"  type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujyusyo.JutakuKaishuJyusyoChofukuHannteiEntity" autoMapping="true">
-         <result property="jutakuJushoHenko" column="jutakuJushoHenko"/> 
-          <result  property="jutakuKaishuJutakuAddress" column="jutakuKaishuJutakuAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />    
+        <result  property="jutakuKaishuJutakuAddress" column="jutakuKaishuJutakuAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    
-    <select id="selectKaishuJyusyoChofukuToroku" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.JutakuKaishuJyusyoChofukuHannteiMapperParameter" 
-     resultMap="JutakuKaishuJyusyoChofukuHannteiEntity"  fetchSize="500"  resultOrdered="true">
-          SELECT																
-	     shokanShinsei."jutakuJushoHenko"	 AS	"jutakuJushoHenko" ,									
-	     T1."jutakuKaishuJutakuAddress"		AS	"jutakuKaishuJutakuAddress"								
-          FROM	
-             rgdb."DbT3034ShokanShinsei" AS 	shokanShinsei															
-          INNER JOIN 																
-	  ( SELECT															
-		 shokanJutakuKaishu."hiHokenshaNo"	AS	"hiHokenshaNo"	,							
-		 shokanJutakuKaishu."serviceTeikyoYM"	AS	"serviceTeikyoYM",							
-		 shokanJutakuKaishu."seiriNo"		AS	"seiriNo",							
-		 shokanJutakuKaishu."jutakuKaishuJutakuAddress"	AS  "jutakuKaishuJutakuAddress"						
-	   FROM	 rgdb."DbT3049ShokanJutakuKaishu" AS shokanJutakuKaishu															
-	   WHERE															
-		 shokanJutakuKaishu."hiHokenshaNo"=#{hiHokenshaNo}  AND				
-		 shokanJutakuKaishu."serviceTeikyoYM"<![CDATA[<]]>#{serviceTeikyoYM}  AND				
-		 SUBSTRING(shokanJutakuKaishu."yoshikiNo" , 1, 3)='21D'	
-           GROUP BY														
-		 shokanJutakuKaishu."hiHokenshaNo",														
-		 shokanJutakuKaishu."serviceTeikyoYM",														
-		 shokanJutakuKaishu."seiriNo",
-		 shokanJutakuKaishu."jutakuKaishuJutakuAddress"													
-	   )AS T1 ON 
-           T1."hiHokenshaNo"	  =	shokanShinsei."hiHokenshaNo" and								
-           T1."serviceTeikyoYM" = shokanShinsei."serviceTeikyoYM"	and									
-           T1."seiriNo"		=	shokanShinsei."seiriNo"									
-           WHERE																
-	   shokanShinsei."hiHokenshaNo"=#{hiHokenshaNo} AND					
-	   shokanShinsei."serviceTeikyoYM"<![CDATA[<]]>#{serviceTeikyoYM}							
-           ORDER BY																
-	   shokanShinsei."serviceTeikyoYM"  DESC														
+
+    <select id="selectKaishuJyusyoChofukuToroku" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.JutakuKaishuJyusyoChofukuHannteiMapperParameter"
+            resultMap="JutakuKaishuJyusyoChofukuHannteiEntity"  fetchSize="500"  resultOrdered="true">
+        SELECT
+        住宅改修."jutakuKaishuJutakuAddress" AS	"jutakuKaishuJutakuAddress"
+        FROM
+        rgdb."DbT3034ShokanShinsei" 支給申請
+        INNER JOIN
+        ( SELECT
+        "DbT3049ShokanJutakuKaishu"."hiHokenshaNo" AS "hiHokenshaNo",
+        "DbT3049ShokanJutakuKaishu"."serviceTeikyoYM" AS "serviceTeikyoYM",
+        "DbT3049ShokanJutakuKaishu"."seiriNo" AS "seiriNo",
+        "DbT3049ShokanJutakuKaishu"."jutakuKaishuJutakuAddress" AS "jutakuKaishuJutakuAddress"
+        FROM
+        rgdb."DbT3049ShokanJutakuKaishu"
+        WHERE
+        "DbT3049ShokanJutakuKaishu"."hiHokenshaNo" = #{hiHokenshaNo}
+        AND "DbT3049ShokanJutakuKaishu"."serviceTeikyoYM" <![CDATA[<]]> #{kaishiServiceTeikyoYM}
+        AND "DbT3049ShokanJutakuKaishu"."serviceTeikyoYM" <![CDATA[>=]]> #{syuryoServiceTeikyoYM}
+        AND SUBSTRING("yoshikiNo",1,3) = '21D'
+        ) AS 住宅改修 ON
+        支給申請."hiHokenshaNo" = 住宅改修."hiHokenshaNo"
+        AND 支給申請."serviceTeikyoYM" = 住宅改修."serviceTeikyoYM"
+        AND 支給申請."seiriNo" = 住宅改修."seiriNo"
+        INNER JOIN
+        rgdb."DbT3036ShokanHanteiKekka" 判定結果
+        ON
+        判定結果."hiHokenshaNo" = 支給申請."hiHokenshaNo"
+        AND 判定結果."serviceTeikyoYM" = 支給申請."serviceTeikyoYM"
+        AND 判定結果."seiriNo" = 支給申請."seiriNo"
+        AND 判定結果."shikyuHushikyuKetteiKubun" = '1'
 
     </select>
 </mapper>

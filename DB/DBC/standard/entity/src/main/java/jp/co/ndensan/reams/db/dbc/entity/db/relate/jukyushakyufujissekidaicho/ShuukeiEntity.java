@@ -142,4 +142,10 @@ public class ShuukeiEntity extends DbTableEntityBase<ShuukeiEntity> implements I
     private FlexibleYearMonth 審査年月;
     @TempTableColumnOrder(54)
     private Integer 短期入所計画日数;
+    @TempTableColumnOrder(55)
+    private Decimal 公費１_出来高医療費負担額;
+    @TempTableColumnOrder(56)
+    private Decimal 公費２_出来高医療費負担額;
+    @TempTableColumnOrder(57)
+    private Decimal 公費３_出来高医療費負担額;
 }

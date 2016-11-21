@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,5 +33,7 @@ public class DBC120210_KohiJukyushaInParameter extends BatchParameterBase {
     private SaiShoriKubun 再処理区分;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = "出力順ID")
     private long 出力順ID;
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 
 }

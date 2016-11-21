@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SyoriTaisyoShichoson {
 
+    private List<RString> 市町村コードlist = new ArrayList<>();
+
     /**
      * 宛名識別対象異動分取得します。
      *
@@ -135,5 +137,22 @@ public class SyoriTaisyoShichoson {
         entity.setTaishoKaishiTimestamp(new YMDHMS(DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).concat(new RString("000000"))));
         entity.setTaishoShuryoTimestamp(processParameter.getSyorinichiji());
+    }
+
+    /**
+     *
+     * @param entity DbT7022ShoriDateKanriEntity
+     * @return List<RString>
+     */
+    public List<RString> setlist(DbT7022ShoriDateKanriEntity entity) {
+        市町村コードlist.add(entity.getShichosonCode().value());
+        return 市町村コードlist;
+    }
+
+    /**
+     * @return List<RString>
+     */
+    public List<RString> getlist() {
+        return 市町村コードlist;
     }
 }

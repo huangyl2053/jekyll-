@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -24,4 +25,5 @@ public class ShiharaiKekaEntity implements Cloneable, Serializable {
     private Decimal 保険給付額;
     private Decimal 利用者負担額;
     private RString 住宅改修住宅住所;
+    private FlexibleYearMonth 開始サービス提供年月;
 }

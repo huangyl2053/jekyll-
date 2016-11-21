@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
+ * 年度切替のFinderクラスです
  *
- * @author x_yuqz
+ * @reamsid_L DBB-5722-010 yuqingzhang
  */
 public class ShoriDateKanriFinder {
 

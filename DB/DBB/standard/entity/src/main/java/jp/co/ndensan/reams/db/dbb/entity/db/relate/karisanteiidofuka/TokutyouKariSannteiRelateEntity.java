@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -38,7 +38,7 @@ public class TokutyouKariSannteiRelateEntity {
     private DbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity;
     private FukaJohoRelateEntity 賦課情報Entity;
     private DbT2001ChoshuHohoEntity 徴収方法Entity;
-    private KozaRelateEntity 口座Entity;
+    private TokuteiKozaRelateEntity 口座Entity;
     private List<SeikatsuHogoJukyushaRelateEntity> 生保の情報List;
     private List<DbT7006RoreiFukushiNenkinJukyushaEntity> 老齢の情報List;
 }

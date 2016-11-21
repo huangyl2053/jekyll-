@@ -178,6 +178,8 @@ public class SeikyuGakuShukeiPanel {
         getHandler(div).set請求額集計登録(ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class));
         dgdSeikyugakushukei_Row row = div.getPanelSeikyugakuShukei()
                 .getDgdSeikyugakushukei().getClickedItem();
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getBtnClear().setDisabled(true);
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getBtnCal().setDisabled(true);
         if (RowState.Added.equals(row.getRowState())) {
             ViewStateHolder.put(ViewStateKeys.状態, 登録_削除);
         } else {

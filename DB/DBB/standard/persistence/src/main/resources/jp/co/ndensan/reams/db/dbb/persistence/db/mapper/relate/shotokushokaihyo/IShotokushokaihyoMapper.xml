@@ -27,15 +27,14 @@
         <result property="住民状態コード" column="住民状態コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="世帯コード" column="世帯コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="登録異動年月日" column="登録異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="登録届出年月日" column="登録届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="登録異動年月日" column="min登録異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="登録届出年月日" column="min登録届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="性別コード " column="性別コード " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="転入前全国住所コード" column="転入前全国住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
         <result property="転入前住所" column="転入前住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="転入前番地" column="転入前番地" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="転入前方書" column="転入前方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="登録事由コード" column="登録事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="min登録異動年月日" column="min登録異動年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="最新フラグ" column="最新フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
     </resultMap>
 
@@ -74,6 +73,7 @@
         "ShikibetsuTaisho"."tennyumaeKatagaki" AS 転入前方書,
         "ShikibetsuTaisho"."torokuJiyuCode" AS 登録事由コード,
         min("ShikibetsuTaisho"."torokuIdoYMD") AS min登録異動年月日,
+        min("ShikibetsuTaisho"."torokuTodokedeYMD") AS min登録届出年月日,
         "ShikibetsuTaisho"."currentFlag" AS 最新フラグ
         FROM   
         rgua."UaFt200FindShikibetsuTaisho"('3','','0','DB','0','','','','','','','','','','','0','0','','','','','',''
@@ -119,7 +119,7 @@
         "ShikibetsuTaisho"."torokuJiyuCode",
         "ShikibetsuTaisho"."currentFlag"
         ORDER BY
-        "ShikibetsuTaisho"."shikibetsuCode" ASC, min登録異動年月日 ASC)
+        "ShikibetsuTaisho"."shikibetsuCode" ASC, 登録異動年月日 ASC)
         UNION ALL
         (SELECT
         '2'AS 候補者区分,
@@ -151,6 +151,7 @@
         "FindShikibetsuTaisho"."tennyumaeKatagaki" AS 転入前方書,
         "FindShikibetsuTaisho"."torokuJiyuCode" AS 登録事由コード,
         min("FindShikibetsuTaisho"."torokuIdoYMD") AS min登録異動年月日,
+        min("FindShikibetsuTaisho"."torokuTodokedeYMD") AS min登録届出年月日,
         "FindShikibetsuTaisho"."currentFlag" AS 最新フラグ
         FROM rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年度_0101},'1','DB','0','','','','','','','','','','','0','0','',''
         ,'','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','',''

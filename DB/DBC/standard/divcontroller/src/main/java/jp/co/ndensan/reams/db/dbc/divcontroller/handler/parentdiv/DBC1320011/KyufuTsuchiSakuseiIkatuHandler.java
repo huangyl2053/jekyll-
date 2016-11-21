@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -185,6 +186,7 @@ public class KyufuTsuchiSakuseiIkatuHandler {
             parameter.setShutsuryokujunId(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID());
         }
         parameter.set文書番号(div.getKyufuTsuchiSakuseiPrint().getCcdBunsyobango().get文書番号());
+        parameter.setLoginUserId(ControlDataHolder.getUserId());
         return parameter;
     }
 

@@ -56,8 +56,6 @@ public class SeikyuGakuShukeiPanelHandler {
     private static final int NUM2 = 2;
     private static final int NUM6 = 6;
     private static final int NUM100 = 100;
-    private static Decimal 請求額合計 = Decimal.ZERO;
-    private static Decimal 利用者負担額合計 = Decimal.ZERO;
 
     /**
      * 初期化
@@ -538,6 +536,8 @@ public class SeikyuGakuShukeiPanelHandler {
     public ArrayList<ShokanKihon> 償還払請求基本_保存処理(ArrayList<ShokanKihon> shkonlist) {
         List<dgdSeikyugakushukei_Row> rowList = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource();
         ShokanKihon 該当情報 = get情報FromViewState1(shkonlist);
+        Decimal 請求額合計 = Decimal.ZERO;
+        Decimal 利用者負担額合計 = Decimal.ZERO;
         for (dgdSeikyugakushukei_Row row : rowList) {
             if (!RowState.Deleted.equals(row.getRowState())) {
                 請求額合計 = 請求額合計.add(row.getDefaultDataName4().getValue());

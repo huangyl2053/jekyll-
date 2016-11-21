@@ -433,9 +433,13 @@ public class KariSanteiIdoFukaBatchFath {
 
         Decimal 普徴期別金額合計 = get普徴期別金額合計(賦課の情報_設定後, NUM_1, NUM_14);
 
-        if (Decimal.ZERO.compareTo(普徴期別金額合計) == -1 && resultEntity.get口座Entity() != null) {
+        if (Decimal.ZERO.compareTo(普徴期別金額合計) < 0 && resultEntity.get口座Entity() != null
+                && resultEntity.get口座Entity().getUaT0310KozaEntity() != null
+                && resultEntity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0) {
             return KozaKubun.口座振替.getコード();
-        } else if (Decimal.ZERO.compareTo(普徴期別金額合計) == -1 && resultEntity.get口座Entity() == null) {
+        } else if (Decimal.ZERO.compareTo(普徴期別金額合計) < 0 && resultEntity.get口座Entity() != null
+                && resultEntity.get口座Entity().getUaT0310KozaEntity() != null
+                && resultEntity.get口座Entity().getUaT0310KozaEntity().getKozaId() == 0) {
             return KozaKubun.現金納付.getコード();
         } else if (Decimal.ZERO.compareTo(普徴期別金額合計) == 0) {
             return KozaKubun.現金納付.getコード();
@@ -454,11 +458,15 @@ public class KariSanteiIdoFukaBatchFath {
 
         Decimal 普徴期別金額合計 = get普徴期別金額合計(賦課の情報, NUM_1, NUM_14);
 
-        if (Decimal.ZERO.compareTo(普徴期別金額合計) == -1 && 特徴仮算定Entity.get口座Entity() != null) {
+        if (Decimal.ZERO.compareTo(普徴期別金額合計) < 0 && 特徴仮算定Entity.get口座Entity() != null
+                && 特徴仮算定Entity.get口座Entity().getUaT0310KozaEntity() != null
+                && 特徴仮算定Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0) {
             return KozaKubun.口座振替.getコード();
-        } else if (0 < 普徴期別金額合計.doubleValue() && 特徴仮算定Entity.get口座Entity() == null) {
+        } else if (Decimal.ZERO.compareTo(普徴期別金額合計) < 0 && 特徴仮算定Entity.get口座Entity() != null
+                && 特徴仮算定Entity.get口座Entity().getUaT0310KozaEntity() != null
+                && 特徴仮算定Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() == 0) {
             return KozaKubun.現金納付.getコード();
-        } else if (普徴期別金額合計.doubleValue() == 0) {
+        } else if (Decimal.ZERO.compareTo(普徴期別金額合計) == 0) {
             return KozaKubun.現金納付.getコード();
         }
         return RString.EMPTY;
@@ -733,7 +741,16 @@ public class KariSanteiIdoFukaBatchFath {
     }
 
     private RString 口座情報編集(KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity) {
-        IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
+        if (計算後情報_宛名_口座_更正前Entity.get口座Entity() != null
+                && 計算後情報_宛名_口座_更正前Entity.get口座Entity().getUaT0310KozaEntity() != null
+                && 計算後情報_宛名_口座_更正前Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0) {
+            IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
+            return set金融機関コード(koza);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString set金融機関コード(IKoza koza) {
         if (koza.get金融機関コード() != null) {
             if (koza.get金融機関コード().value().length() >= NUM_4 && ゆうちょ銀行
                     .equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4))) {

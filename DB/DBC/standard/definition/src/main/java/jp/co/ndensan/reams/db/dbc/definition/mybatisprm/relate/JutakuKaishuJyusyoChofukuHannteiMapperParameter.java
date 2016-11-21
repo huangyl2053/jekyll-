@@ -18,22 +18,25 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 public final class JutakuKaishuJyusyoChofukuHannteiMapperParameter {
 
     private final HihokenshaNo hiHokenshaNo;
-    private final FlexibleYearMonth serviceTeikyoYM;
+    private final FlexibleYearMonth kaishiServiceTeikyoYM;
+    private final FlexibleYearMonth syuryoServiceTeikyoYM;
 
     /**
      * コンストラクタです。
      *
      * @param 被保険者番号 被保険者番号
-     * @param 主キー2 主キー2
-     * @param サービス提供年月 サービス提供年月
+     * @param 開始サービス提供年月 FlexibleYearMonth
+     * @param 終了サービス提供年月 FlexibleYearMonth
      *
      */
     private JutakuKaishuJyusyoChofukuHannteiMapperParameter(
             HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月
+            FlexibleYearMonth 開始サービス提供年月,
+            FlexibleYearMonth 終了サービス提供年月
     ) {
         this.hiHokenshaNo = 被保険者番号;
-        this.serviceTeikyoYM = サービス提供年月;
+        this.kaishiServiceTeikyoYM = 開始サービス提供年月;
+        this.syuryoServiceTeikyoYM = 終了サービス提供年月;
 
     }
 
@@ -41,13 +44,15 @@ public final class JutakuKaishuJyusyoChofukuHannteiMapperParameter {
      * 住宅改修費改修住所重複判定のパラメータを生成します。
      *
      * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月 サービス提供年月
+     * @param 開始サービス提供年月 FlexibleYearMonth
+     * @param 終了サービス提供年月 FlexibleYearMonth
      * @return パラメータ
      */
     public static JutakuKaishuJyusyoChofukuHannteiMapperParameter createSelectByKeyParam(
             HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月
+            FlexibleYearMonth 開始サービス提供年月,
+            FlexibleYearMonth 終了サービス提供年月
     ) {
-        return new JutakuKaishuJyusyoChofukuHannteiMapperParameter(被保険者番号, サービス提供年月);
+        return new JutakuKaishuJyusyoChofukuHannteiMapperParameter(被保険者番号, 開始サービス提供年月, 終了サービス提供年月);
     }
 }

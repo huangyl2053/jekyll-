@@ -260,10 +260,14 @@ public class SokujiFukaKoseiService {
             koseiParam.set徴収方法の情報(徴収方法の情報);
             List<DbT1001HihokenshaDaichoEntity> daichoEntity = 被保険者台帳管理Dac.select有効な資格の情報(param.get被保険者番号());
             List<HihokenshaDaicho> 資格の情報 = new ArrayList<>();
+            FlexibleDate ichigoShikakuShutokuYMD = null;
+            DbT1001HihokenshaDaichoEntity dbT1001HihokenshaDaichoEntity;
             for (int i = 0; i < daichoEntity.size(); i++) {
-                DbT1001HihokenshaDaichoEntity entity = 被保険者台帳管理Dac.selectByKey(daichoEntity.get(i).getHihokenshaNo(),
-                        daichoEntity.get(i).getIdoYMD(), daichoEntity.get(i).getEdaNo());
-                資格の情報.add(new HihokenshaDaicho(entity));
+                dbT1001HihokenshaDaichoEntity = daichoEntity.get(i);
+                if (ichigoShikakuShutokuYMD == null || !ichigoShikakuShutokuYMD.equals(dbT1001HihokenshaDaichoEntity.getIchigoShikakuShutokuYMD())) {
+                    ichigoShikakuShutokuYMD = dbT1001HihokenshaDaichoEntity.getIchigoShikakuShutokuYMD();
+                    資格の情報.add(new HihokenshaDaicho(dbT1001HihokenshaDaichoEntity));
+                }
             }
             koseiParam.set資格の情報リスト(資格の情報);
 

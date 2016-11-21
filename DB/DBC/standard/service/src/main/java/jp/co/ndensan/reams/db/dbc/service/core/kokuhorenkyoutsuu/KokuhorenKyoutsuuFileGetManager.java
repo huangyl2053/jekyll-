@@ -18,9 +18,11 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.journal.JournalWriter;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SearchSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
@@ -63,17 +65,22 @@ public class KokuhorenKyoutsuuFileGetManager {
      *
      * @param 交換情報識別番号 RString
      * @param ファイル格納フォルダ名 RString
+     * @param currentLoginId currentLoginId
      * @return KokuhorenKyoutsuuFileGetReturnEntity
      */
-    public KokuhorenKyoutsuuFileGetReturnEntity getFile(RString 交換情報識別番号, RString ファイル格納フォルダ名) {
+    public KokuhorenKyoutsuuFileGetReturnEntity getFile(RString 交換情報識別番号, RString ファイル格納フォルダ名, RString currentLoginId) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_交換情報識別番号.toString()));
         requireNonNull(ファイル格納フォルダ名, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_ファイル格納フォルダ名.toString()));
         KokuhorenKyoutsuuFileGetReturnEntity result
                 = new KokuhorenKyoutsuuFileGetReturnEntity();
         List<UzT0885SharedFileEntryEntity> entityList;
         JournalWriter writer = new JournalWriter();
+        RString sharedFileNamePattern = PREFIX.concat(交換情報識別番号).concat(パーセント);
+        SearchSharedFileOpts opts = new SearchSharedFileOpts().
+                loginId(currentLoginId).
+                sharedFilePat(sharedFileNamePattern);
         try {
-            entityList = SharedFile.searchSharedFile(PREFIX.concat(交換情報識別番号).concat(パーセント));
+            entityList = SharedFile.searchSharedFile(opts, GyomuCode.DB介護保険);
         } catch (Exception ex) {
             writer.writeErrorJournal(RDateTime.now(), new RString(ex.getMessage()));
             throw new BatchInterruptedException(ex.getMessage());

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.henreihoryuin.HenreiHory
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 請求明細・給付管理票返戻（保留）一覧表取込のバッチパラメータです。
@@ -34,6 +35,8 @@ public class DBC120020_HenreiHoryuInParameter extends BatchParameterBase {
     private SaiShoriKubun shoriKubun;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
     private Long shutsuryokuJunID;
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 
     /**
      * HenreiHoryuInProcessParameterの取得です。
