@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.mybatisprm.juminkirokuidojohotorokukoiki;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -21,7 +22,7 @@ import lombok.Getter;
 public final class JuminkirokuIdojohoTorokuKoikiMybatisParameter implements IMyBatisParameter {
 
     private final YMDHMS syorinichiji;
-    private final RString shichosonCode;
+    private final List<RString> shichosonCode;
     private static final RString 介護資格 = new RString("DBA");
     private static final RString 年度値 = new RString("0000");
     private final RString サブ業務コード;
@@ -39,7 +40,7 @@ public final class JuminkirokuIdojohoTorokuKoikiMybatisParameter implements IMyB
      */
     private JuminkirokuIdojohoTorokuKoikiMybatisParameter(
             YMDHMS syorinichiji,
-            RString shichosonCode,
+            List<RString> shichosonCode,
             RString サブ業務コード,
             RString 処理名,
             RString 年度) {
@@ -59,7 +60,7 @@ public final class JuminkirokuIdojohoTorokuKoikiMybatisParameter implements IMyB
      */
     public static JuminkirokuIdojohoTorokuKoikiMybatisParameter createMybatisParameter(
             YMDHMS syorinichiji,
-            RString shichosonCode
+            List<RString> shichosonCode
     ) {
         RString サブ業務コード = 介護資格;
         RString 処理名 = ShoriName.広域住基連動.get名称();
