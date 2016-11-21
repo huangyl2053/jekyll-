@@ -554,15 +554,14 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             ShichosonSecurityJoho 市町村セキュリティ情報, RString 合併情報区分) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null
-                && DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
-            if (合併情報区分_合併あり.equals(合併情報区分)) {
-                HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
-                List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格の情報, 賦課年度);
-                TsukibetsuRankuEntity rankuEntity = new TsukibetsuRankuEntity();
-                rankuEntity.setHihokenshaNo(資格の情報.get(0).get被保険者番号());
-                set月別ランク(rankuEntity, 月別ランク情報);
-                mapper.insertTmpTsukibetsuRanku(rankuEntity);
-            }
+                && DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())
+                && 合併情報区分_合併あり.equals(合併情報区分)) {
+            HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
+            List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格の情報, 賦課年度);
+            TsukibetsuRankuEntity rankuEntity = new TsukibetsuRankuEntity();
+            rankuEntity.setHihokenshaNo(資格の情報.get(0).get被保険者番号());
+            set月別ランク(rankuEntity, 月別ランク情報);
+            mapper.insertTmpTsukibetsuRanku(rankuEntity);
         }
     }
 
@@ -623,6 +622,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         List<SetaiHaakuEntity> 世帯員把握情報 = mapper.get世帯員把握情報();
         mapper.createTmpSetaiHaaku();
+        mapper.createDbT2002FukaJohoTemp();
         for (SetaiHaakuEntity setaiHaakuEntity : 世帯員把握情報) {
             mapper.insertTmpSetaiHaaku(setaiHaakuEntity);
         }
@@ -639,7 +639,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             YMDHMS 調定日時,
             RString 算定月) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
-        mapper.createDbT2002FukaJohoTemp();
 
         ShunoKamokuAuthority auth = InstanceProvider.create(ShunoKamokuAuthority.class);
         KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();

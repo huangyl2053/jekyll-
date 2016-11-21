@@ -75,6 +75,9 @@ public class ShotokushokaihyoHakkoIchiranBreakKey extends PageBreaker<Shotokusho
                 && !currentSource.getSource().zenjushoCode.equals(nextSource.getSource().zenjushoCode)) {
             flag = true;
         }
+        if (!currentSource.getSource().kouhoshakubun.equals(nextSource.getSource().kouhoshakubun)) {
+            flag = true;
+        }
         return flag;
     }
 
