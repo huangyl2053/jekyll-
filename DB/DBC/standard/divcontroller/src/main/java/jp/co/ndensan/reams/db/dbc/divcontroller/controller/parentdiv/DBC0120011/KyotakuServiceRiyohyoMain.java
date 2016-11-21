@@ -164,7 +164,7 @@ public class KyotakuServiceRiyohyoMain {
     
     private RString get居宅総合事業区分(dgKyotakuServiceRirekiIchiran_Row kyotakuRow) {
         RString 総合事業区分 = kyotakuRow.getKyotakuJigyo();
-        switch(総合事業区分.toString()) {
+        switch (総合事業区分.toString()) {
             case "居宅サービス計画":
                 return new RString("1");
             case "総合事業費計画" :

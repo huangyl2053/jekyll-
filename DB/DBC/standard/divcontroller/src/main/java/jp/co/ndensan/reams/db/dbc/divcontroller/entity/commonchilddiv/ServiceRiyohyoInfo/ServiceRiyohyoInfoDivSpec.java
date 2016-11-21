@@ -96,7 +96,7 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
         public boolean apply(ServiceRiyohyoInfoDiv div) {
             boolean flag = true;
             Decimal 割引適用後率 = div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue();
-            if (割引適用後率 != null && 割引適用後率.compareTo(SpecHelper.maxPercent) > 0) {
+            if (割引適用後率 != null && 割引適用後率.compareTo(SpecHelper.getMaxPercent()) > 0) {
                 flag = false;
             }
             return flag;
@@ -166,5 +166,9 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
     
     private static class SpecHelper {
         private static final Decimal maxPercent = new Decimal(100);
+        
+        public static Decimal getMaxPercent() {
+            return maxPercent;
+        }
     }
 }
