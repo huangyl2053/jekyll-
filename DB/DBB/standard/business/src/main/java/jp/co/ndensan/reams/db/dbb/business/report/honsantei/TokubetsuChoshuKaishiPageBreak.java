@@ -66,7 +66,7 @@ public class TokubetsuChoshuKaishiPageBreak extends PageBreaker<TokubetsuChoshuK
         return flag;
     }
 
-    public boolean isBreak1(ReportLineRecord<TokubetsuChoshuKaishiSource> currentSource,
+    private boolean isBreak1(ReportLineRecord<TokubetsuChoshuKaishiSource> currentSource,
             ReportLineRecord<TokubetsuChoshuKaishiSource> nextSource) {
         boolean flag;
         if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.世帯コード.get項目ID())
@@ -93,7 +93,7 @@ public class TokubetsuChoshuKaishiPageBreak extends PageBreaker<TokubetsuChoshuK
         return flag;
     }
 
-    public boolean isBreak2(ReportLineRecord<TokubetsuChoshuKaishiSource> currentSource,
+    private boolean isBreak2(ReportLineRecord<TokubetsuChoshuKaishiSource> currentSource,
             ReportLineRecord<TokubetsuChoshuKaishiSource> nextSource) {
         boolean flag = false;
         if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.被保険者番号.get項目ID())

@@ -67,7 +67,7 @@ public class KariHenkoTsuchishoPageBreak extends PageBreaker<KariSanteigakuHenko
 
     }
 
-    public boolean isBreak1(ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> currentSource,
+    private boolean isBreak1(ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> currentSource,
             ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> nextSource) {
         boolean flag;
         if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.世帯コード.get項目ID())
@@ -92,7 +92,7 @@ public class KariHenkoTsuchishoPageBreak extends PageBreaker<KariSanteigakuHenko
 
     }
 
-    public boolean isBreak2(ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> currentSource,
+    private boolean isBreak2(ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> currentSource,
             ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> nextSource) {
         boolean flag = false;
         if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.市町村コード.get項目ID())

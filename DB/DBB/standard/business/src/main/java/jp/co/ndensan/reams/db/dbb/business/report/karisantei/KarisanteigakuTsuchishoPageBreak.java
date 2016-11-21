@@ -67,7 +67,7 @@ public class KarisanteigakuTsuchishoPageBreak extends PageBreaker<TokubetsuChosh
         return flag;
     }
 
-    public boolean isBreak1(ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> currentSource,
+    private boolean isBreak1(ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> currentSource,
             ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> nextSource) {
 
         boolean flag;
@@ -92,7 +92,7 @@ public class KarisanteigakuTsuchishoPageBreak extends PageBreaker<TokubetsuChosh
         return flag;
     }
 
-    public boolean isBreak2(ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> currentSource,
+    private boolean isBreak2(ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> currentSource,
             ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> nextSource) {
 
         boolean flag = false;
