@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU040010;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.euc.juminidorendoshikakutoroku.FuseigoListCsvEntity;
 import jp.co.ndensan.reams.db.dba.service.core.juminidorendoshikakutoroku.JuminIdoRendoShikakuToroku;
@@ -66,7 +65,6 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
     protected void beforeExecute() {
         処理日時 = RDate.getNowDateTime();
         kaigojum = new KaigojuminHyotrukuProcess();
-        市町村コードlist = new ArrayList<>();
     }
 
     @Override
