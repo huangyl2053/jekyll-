@@ -152,7 +152,7 @@ public class NinteiKekkaTsutishoProcess extends BatchProcessBase<YokaigoNinteiIk
     private NinteiKekkaTsuchishoJoho createNinteiKekkaTsuchishoEntity(YokaigoNinteiIkatusHakkoEntity entity) {
         ChohyoSeigyoKyotsu 帳票共通情報 = TsutishoHakkoCommonProcess.get帳票共通情報(REPORT_ID.getReportId());
         FlexibleDate 発行日 = parameter.get発行日();
-        SofubutsuAtesakiSource 送付物宛先情報 = TsutishoHakkoCommonProcess.get送付物宛先情報(帳票共通情報);
+        SofubutsuAtesakiSource 送付物宛先情報 = TsutishoHakkoCommonProcess.get送付物宛先情報(帳票共通情報, entity.get識別コード());
         NinteiKekkaTsuchishoJoho printEntity = new NinteiKekkaTsuchishoJoho();
 
         printEntity.setBunshoNo(TsutishoHakkoCommonProcess.get文書番号(parameter.get文書番号(), REPORT_ID.getReportId(), 発行日));

@@ -156,7 +156,7 @@ public class YokaigoHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
     private YokaigodoHenkoTsuchishoJoho createYokaigodoHenkoTsuchishoEntity() {
         ChohyoSeigyoKyotsu 帳票共通情報 = TsutishoHakkoCommonProcess.get帳票共通情報(REPORT_ID.getReportId());
         FlexibleDate 発行日 = parameter.get発行日();
-        SofubutsuAtesakiSource 送付物宛先情報 = TsutishoHakkoCommonProcess.get送付物宛先情報(帳票共通情報);
+        SofubutsuAtesakiSource 送付物宛先情報 = TsutishoHakkoCommonProcess.get送付物宛先情報(帳票共通情報, 最新Entity.get識別コード());
 
         YokaigodoHenkoTsuchishoJoho printEntity = new YokaigodoHenkoTsuchishoJoho();
 

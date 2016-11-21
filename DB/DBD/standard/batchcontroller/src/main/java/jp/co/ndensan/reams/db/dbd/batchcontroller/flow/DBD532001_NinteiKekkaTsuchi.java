@@ -5,14 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD532001.NinteiKekkaTsutishoProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD532001.ServiceHenkoTsutishoProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD532001.YokaigoHenkoTsutishoProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001.ShutsuryokuTaishoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001.DBD532001_NinteiKekkaTsuchiParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.RirekiSearchType;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -32,7 +38,14 @@ public class DBD532001_NinteiKekkaTsuchi extends BatchFlowBase<DBD532001_NinteiK
 
     @Override
     protected void initialize() {
-        searchKey = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義).build();
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+        List<JuminShubetsu> 住民種別List = new ArrayList<>();
+        List<JuminJotai> 住民状態List = new ArrayList<>();
+        key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        key.set住民種別(住民種別List);
+        key.set住民状態(住民状態List);
+        key.set氏名履歴検索方法(RirekiSearchType.検索する);
+        searchKey = key.build();
     }
 
     @Override
