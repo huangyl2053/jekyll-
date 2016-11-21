@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 特記事項A4版Builderのインターフェースクラスです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-340 lishengli
  */
 public interface ITokkiTextA4Builder extends IReportBuilder<TokkiTextA4ReportSource> {
 
