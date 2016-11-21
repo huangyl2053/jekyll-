@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 委員用特記事項A3版Builderクラスです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-330 lishengli
  */
 public class IinTokkiTextA3Builder implements IIinTokkiTextA3Builder {
 

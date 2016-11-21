@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.KyufujissekiKihonResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
@@ -28,6 +29,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -41,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -129,8 +132,16 @@ public final class ShikyuShinseiDetailHandler {
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(false);
             div.getPnlShinsei().getTxtShinseiYMD().setValue(システム日付);
             div.getPnlShinsei().getTxtUketsukeYMD().setValue(システム日付);
+            DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+            if (dbJohoViewState == null) {
+                dbJohoViewState = new DbJohoViewState();
+            }
+            ShokanShinsei shokanShinsei = dbJohoViewState.get償還払支給申請();
+            if (shokanShinsei == null) {
+                shokanShinsei = new ShokanShinsei(被保険者番号, サービス年月, 整理番号);
+            }
 
-            return null;
+            return insert(画面モード, dbJohoViewState.get償還払支給申請());
         }
 
         List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
@@ -497,9 +508,29 @@ public final class ShikyuShinseiDetailHandler {
         }
         div.getPnlShinsei().getTxtTelNo().setDomain(償還払支給申請.get申請者電話番号());
         div.getPnlShinsei().getTxtMulShinseiRiyu().setValue(償還払支給申請.get申請理由());
-        div.getPnlShinsei().getTxtNumShiharaKingakuGk().setValue(償還払支給申請.get支払金額合計());
-        div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().setValue(new Decimal(償還払支給申請.get保険給付額()));
-        div.getPnlShinsei().getTxtNumHokenKyufuGaku().setValue(new Decimal(償還払支給申請.get利用者負担額()));
+        DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+
+        if (dbJohoViewState != null && dbJohoViewState.get償還払支給申請() != null) {
+            ShokanShinsei 償還払支給申請Data = dbJohoViewState.get償還払支給申請();
+            if (償還払支給申請Data.get支払金額合計() != null) {
+                div.getPnlShinsei().getTxtNumShiharaKingakuGk().setValue(償還払支給申請Data.get支払金額合計());
+            } else {
+                div.getPnlShinsei().getTxtNumShiharaKingakuGk().setValue(償還払支給申請.get支払金額合計());
+            }
+
+            if (償還払支給申請Data.get保険給付額() != 0) {
+                div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().setValue(new Decimal(償還払支給申請Data.get保険給付額()));
+            } else {
+                div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().setValue(new Decimal(償還払支給申請.get保険給付額()));
+            }
+
+            if (償還払支給申請Data.get利用者負担額() != 0) {
+                div.getPnlShinsei().getTxtNumHokenKyufuGaku().setValue(new Decimal(償還払支給申請Data.get利用者負担額()));
+            } else {
+                div.getPnlShinsei().getTxtNumHokenKyufuGaku().setValue(new Decimal(償還払支給申請.get利用者負担額()));
+            }
+        }
+
         div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(false);
         if (償還払支給申請.is国保連再送付フラグ()) {
             List<KeyValueDataSource> items = div.getPnlShinsei().getChkKokuhorenSaiso().getDataSource();

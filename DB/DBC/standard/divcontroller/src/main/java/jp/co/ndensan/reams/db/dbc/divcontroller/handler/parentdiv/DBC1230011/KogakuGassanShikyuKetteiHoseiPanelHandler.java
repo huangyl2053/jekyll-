@@ -166,10 +166,8 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                     && (総合事業対象者データ == null || 総合事業対象者データ.isEmpty())) {
                 throw new ApplicationException(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
             }
-        } else {
-            if (受給者台帳データ == null || 受給者台帳データ.isEmpty()) {
-                throw new ApplicationException(DbcInformationMessages.被保険者でないデータ.getMessage());
-            }
+        } else if (受給者台帳データ == null || 受給者台帳データ.isEmpty()) {
+            throw new ApplicationException(DbcInformationMessages.被保険者でないデータ.getMessage());
         }
     }
 
@@ -335,7 +333,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtKeisanYMD().getToValue().toString()), 事業分フラグ);
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKyufuShurui().setValue(給付の種類);
-        set支払方法タブ(被保険者番号, 新規, 識別コード, null);
+        set支払方法タブ(被保険者番号, 新規, 識別コード, null, null);
     }
 
     /**
@@ -344,8 +342,9 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
      *
      * @param 処理モデル RString
      * @param 識別コード ShikibetsuCode
+     * @param 高額合算情報 支給決定情報実体
      */
-    public void set新規以外の決定情報初期値(RString 処理モデル, ShikibetsuCode 識別コード) {
+    public void set新規以外の決定情報初期値(RString 処理モデル, ShikibetsuCode 識別コード, KogakuGassanShikyuKetteiHoseiResult 高額合算情報) {
         dgKogakuGassanShikyuFushikyuKettei_Row row = div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem();
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtStatusFlg().setValue(処理モデル);
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
@@ -374,7 +373,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                     getTxtJikoFutanSogaku().setValue(row.getTxtJikoFutangaku().getValue());
         }
         set新規以外の決定情報初期値_Two(row);
-        set支払方法タブ(HihokenshaNo.EMPTY, 処理モデル, 識別コード, row);
+        set支払方法タブ(HihokenshaNo.EMPTY, 処理モデル, 識別コード, row, 高額合算情報);
     }
 
     private void set新規以外の決定情報初期値_Two(dgKogakuGassanShikyuFushikyuKettei_Row row) {
@@ -568,20 +567,29 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                             getRadShikyuKubunCode().getSelectedValue(), is支給金額フラグ(para),
                             is支給区分フラグ(para), is支給データ(決定情報list, 高額合算決定entity));
-            if (修正.equals(画面モード)) {
-                高額合算決定entity = buid高額決定(高額合算決定entity);
-                高額合算決定entity = 高額合算決定entity.modified();
-            } else if (削除.equals(画面モード) || 照会.equals(画面モード)) {
-                高額合算決定entity = 高額合算決定entity.deleted();
-            }
-            KoshinShoriResult result = new KoshinShoriResult();
-            result.set高額合算支給不支給決定Entity(高額合算決定entity);
-            result.setUpdate合算給付実績パラメータ(parameter);
-            result.setWkモード(modelResult.getWkモード());
-            result.set更新方法(kogakuResult.get更新方法());
-            result.set作成区分(kogakuResult.get作成区分());
-            KogakuGassanShikyuKetteiHosei.createInstance().isKoshinShori(result, 処理モード);
+            saveData(画面モード, 高額合算決定entity, modelResult, kogakuResult, parameter, 処理モード);
         }
+    }
+
+    private void saveData(RString 画面モード,
+            KogakuGassanShikyuFushikyuKettei 高額合算決定entity,
+            ShoriModeHanteiResult modelResult,
+            KogakuGassanKyufuJissekiResult kogakuResult,
+            KogakuGassanShikyuGakuKeisanKekkaUpdateParameter parameter,
+            RString 処理モード) {
+        if (修正.equals(画面モード)) {
+            高額合算決定entity = buid高額決定(高額合算決定entity);
+            高額合算決定entity = 高額合算決定entity.modified();
+        } else if (削除.equals(画面モード) || 照会.equals(画面モード)) {
+            高額合算決定entity = 高額合算決定entity.deleted();
+        }
+        KoshinShoriResult result = new KoshinShoriResult();
+        result.set高額合算支給不支給決定Entity(高額合算決定entity);
+        result.setUpdate合算給付実績パラメータ(parameter);
+        result.setWkモード(modelResult.getWkモード());
+        result.set更新方法(kogakuResult.get更新方法());
+        result.set作成区分(kogakuResult.get作成区分());
+        KogakuGassanShikyuKetteiHosei.createInstance().isKoshinShori(result, 処理モード);
     }
 
     private boolean is支給データ(List<KogakuGassanShikyuKetteiHoseiResult> 決定情報list,
@@ -589,7 +597,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         boolean 支給データの有無 = false;
         List<KogakuGassanShikyuKetteiHoseiResult> list = new ArrayList<>();
         for (KogakuGassanShikyuKetteiHoseiResult 決定情報 : 決定情報list) {
-            if (!(決定情報.get高額合算決定entity().get保険者番号().equals(高額合算決定entity.get保険者番号())
+            if (!(決定情報.get高額合算決定entity().get被保険者番号().equals(高額合算決定entity.get被保険者番号())
                     && 決定情報.get高額合算決定entity().get対象年度().equals(高額合算決定entity.get対象年度())
                     && 決定情報.get高額合算決定entity().get保険者番号().equals(高額合算決定entity.get保険者番号())
                     && 決定情報.get高額合算決定entity().get支給申請書整理番号().equals(高額合算決定entity.get支給申請書整理番号())
@@ -1149,9 +1157,11 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             HihokenshaNo 被保険者番号,
             RString 処理モデル,
             ShikibetsuCode 識別コード,
-            dgKogakuGassanShikyuFushikyuKettei_Row row) {
+            dgKogakuGassanShikyuFushikyuKettei_Row row,
+            KogakuGassanShikyuKetteiHoseiResult 高額合算情報) {
         SikyuSinseiJyohoParameter para = new SikyuSinseiJyohoParameter();
         para.setShikibetsuCode(識別コード);
+        para = setParameter支払方法(para, 高額合算情報);
         if (新規.equals(処理モデル)) {
             para.setHihokenshaNo(被保険者番号);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 登録);
@@ -1168,4 +1178,44 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         }
     }
 
+    private SikyuSinseiJyohoParameter setParameter支払方法(SikyuSinseiJyohoParameter para, KogakuGassanShikyuKetteiHoseiResult 高額合算情報) {
+        boolean 事業分フラグ = false;
+        事業分フラグ = div.get事業分フラグ().equals(new RString(Boolean.TRUE.toString()));
+        if (高額合算情報 != null && 事業分フラグ) {
+            if (!RString.isNullOrEmpty(高額合算情報.get事業高額合算決定entity().get支払期間終了時間())) {
+                para.setEndHHMM(new RTime(高額合算情報.get事業高額合算決定entity().get支払期間終了時間()));
+            }
+            if (高額合算情報.get事業高額合算決定entity().get支払期間終了年月日() != null
+                    && !高額合算情報.get事業高額合算決定entity().get支払期間終了年月日().toString().isEmpty()) {
+                para.setEndYMD(new RDate(高額合算情報.get事業高額合算決定entity().get支払期間終了年月日().toString()));
+            }
+            if (!RString.isNullOrEmpty(高額合算情報.get事業高額合算決定entity().get支払期間開始時間())) {
+                para.setStartHHMM(new RTime(高額合算情報.get事業高額合算決定entity().get支払期間開始時間()));
+            }
+            if (高額合算情報.get事業高額合算決定entity().get支払期間開始年月日() != null
+                    && !高額合算情報.get事業高額合算決定entity().get支払期間開始年月日().toString().isEmpty()) {
+                para.setStartYMD(new RDate(高額合算情報.get事業高額合算決定entity().get支払期間開始年月日().toString()));
+            }
+            para.setShiharaiBasho(高額合算情報.get事業高額合算決定entity().get支払場所());
+            para.setShikyushinseiSeiriNo(高額合算情報.get事業高額合算決定entity().get支給申請書整理番号());
+        } else if (高額合算情報 != null && !事業分フラグ) {
+            if (!RString.isNullOrEmpty(高額合算情報.get高額合算決定entity().get支払期間終了時間())) {
+                para.setEndHHMM(new RTime(高額合算情報.get高額合算決定entity().get支払期間終了時間()));
+            }
+            if (高額合算情報.get高額合算決定entity().get支払期間終了年月日() != null
+                    && !高額合算情報.get高額合算決定entity().get支払期間終了年月日().toString().isEmpty()) {
+                para.setEndYMD(new RDate(高額合算情報.get高額合算決定entity().get支払期間終了年月日().toString()));
+            }
+            if (!RString.isNullOrEmpty(高額合算情報.get高額合算決定entity().get支払期間開始時間())) {
+                para.setStartHHMM(new RTime(高額合算情報.get高額合算決定entity().get支払期間開始時間()));
+            }
+            if (高額合算情報.get高額合算決定entity().get支払期間開始年月日() != null
+                    && !高額合算情報.get高額合算決定entity().get支払期間開始年月日().toString().isEmpty()) {
+                para.setStartYMD(new RDate(高額合算情報.get高額合算決定entity().get支払期間開始年月日().toString()));
+            }
+            para.setShiharaiBasho(高額合算情報.get高額合算決定entity().get支払場所());
+            para.setShikyushinseiSeiriNo(高額合算情報.get高額合算決定entity().get支給申請書整理番号());
+        }
+        return para;
+    }
 }

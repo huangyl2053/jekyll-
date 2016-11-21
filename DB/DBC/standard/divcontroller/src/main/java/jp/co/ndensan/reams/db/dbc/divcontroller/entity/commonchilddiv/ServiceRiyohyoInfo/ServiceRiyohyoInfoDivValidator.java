@@ -52,6 +52,20 @@ public class ServiceRiyohyoInfoDivValidator {
     }
     
     /**
+     * 利用年月必須入力のチェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validate利用年月必須入力() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(ServiceRiyohyoInfoDivSpec.利用年月必須入力のチェックです)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.利用年月必須項目)
+                .messages());
+        return messages;
+    }
+    
+    /**
      * 事業者必須入力のチェックです。
      *
      * @return エラーメッセージ

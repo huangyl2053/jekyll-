@@ -771,6 +771,20 @@ public class ShokujiHiyoPanelHandler {
         return shokanMeisaiResultList;
     }
 
+    /**
+     * 償還払明細を取得します。
+     *
+     * @param shokanMeisaiResultList List<ShokanMeisaiResult>
+     * @return 償還払明細　List<ShokanMeisai>
+     */
+    public List<ShokanMeisai> toShokanMeisaiList(List<ShokanMeisaiResult> shokanMeisaiResultList) {
+        List<ShokanMeisai> shokanMeisaiList = new ArrayList();
+        for (ShokanMeisaiResult shokanMeisaiResult : shokanMeisaiResultList) {
+            shokanMeisaiList.add(shokanMeisaiResult.getEntity());
+        }
+        return shokanMeisaiList;
+    }
+
     private boolean checkIsRealModified(ShokanMeisai shokanMeisai, dgdShokuji_Row dgd) {
         RString serviceCodeShuruyi = new RString(dgd.getDefaultDataName2().subSequence(ZERO, TWO).toString());
         RString serviceCodeKoumoku = new RString(dgd.getDefaultDataName2().subSequence(THREE, SEVEN).toString());

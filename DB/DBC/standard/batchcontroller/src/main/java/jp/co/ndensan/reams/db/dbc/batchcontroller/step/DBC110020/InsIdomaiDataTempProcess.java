@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 異動日毎データ抽出を実行する。
@@ -1062,7 +1061,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         insertEntity.set利用者負担区分コード(STR_1);
         HokenKyufuRitsu 給付率 = 利用者負担.getKyuhuritsu();
         if (給付率 != null) {
-            insertEntity.set給付率(new Decimal(給付率.toString()));
+            insertEntity.set給付率(給付率.getColumnValue());
         }
         FlexibleDate 適用開始年月日 = 利用者負担.getTekiyoKaishiYMD();
         if (適用開始年月日 != null && !適用開始年月日.isEmpty()) {
@@ -1212,8 +1211,16 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         insertEntity.set被保険者番号(被保険者番号);
         insertEntity.set異動年月日(異動年月日);
         insertEntity.set住所地特例対象者区分コード(STR_1);
-        insertEntity.set施設所在保険者番号(new RString(住所地特例.get被保険者番号().toString()));
-        insertEntity.set住所地特例適用開始日(new RString(住所地特例.get住所地特例適用開始日().toString()));
+        if (住所地特例 != null) {
+            HihokenshaNo 被保番号 = 住所地特例.get被保険者番号();
+            FlexibleDate 適用開始日 = 住所地特例.get住所地特例適用開始日();
+            if (被保番号 != null && !被保番号.isEmpty()) {
+                insertEntity.set施設所在保険者番号(new RString(住所地特例.get被保険者番号().toString()));
+            }
+            if (適用開始日 != null && !適用開始日.isEmpty()) {
+                insertEntity.set住所地特例適用開始日(new RString(住所地特例.get住所地特例適用開始日().toString()));
+            }
+        }
         insertEntity.setエラーフラグ(エラーなし);
     }
 
@@ -1750,8 +1757,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         sort異動一時2データ(allData);
         IdoTblTmpEntity 前履歴データ = null;
         for (IdoTblTmpEntity entity : allData) {
-            System.out.println((entity.get異動年月日() != null && !entity.get異動年月日().isEmpty())
-                    ? entity.get異動年月日().toString() : RString.EMPTY);
+//            System.out.println((entity.get異動年月日() != null && !entity.get異動年月日().isEmpty())
+//                    ? entity.get異動年月日().toString() : RString.EMPTY);
             if (前履歴データ == null) {
                 前履歴データ = entity;
                 continue;

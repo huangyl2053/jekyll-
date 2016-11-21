@@ -47,7 +47,20 @@
                 FROM 
                     rgdb."DbT3110JigyoKogakuShikyuShinsei" AS 支給申請
                 LEFT JOIN
-                    rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" AS 支給判定結果
+                    (SELECT *
+                     FROM rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" AS 事業高額介護サービス費支給判定結果
+                     WHERE 事業高額介護サービス費支給判定結果."isDeleted" = FALSE
+                       AND NOT EXISTS
+                           (SELECT													
+                                1											
+                            FROM													
+                                rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" b													
+                            WHERE													
+                                事業高額介護サービス費支給判定結果."hihokenshaNo" = b."hihokenshaNo" AND													
+                                事業高額介護サービス費支給判定結果."serviceTeikyoYM" = b."serviceTeikyoYM" AND													
+                                事業高額介護サービス費支給判定結果."rirekiNo" = b."rirekiNo" AND													
+                                事業高額介護サービス費支給判定結果."rirekiEdaNo" <![CDATA[<]]> b."rirekiEdaNo")
+                    ) AS 支給判定結果
                     ON 支給申請."hihokenshaNo" = 支給判定結果."hihokenshaNo"
                     AND 支給申請."serviceTeikyoYM" = 支給判定結果."serviceTeikyoYM"
                     AND 支給申請."shoKisaiHokenshaNo" = 支給判定結果."shoKisaiHokenshaNo"
@@ -82,8 +95,8 @@
                             AND t4001."logicalDeletedFlag" = false
                      ) AS SUB受給者台帳
                  ON 支給申請."hihokenshaNo" = SUB受給者台帳."hihokenshaNo" 
-                    AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> 支給申請."serviceTeikyoYM" 
-                    AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanShuryoYMD",1,6) <![CDATA[>=]]> 支給申請."serviceTeikyoYM" 
+                    AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanKaishiYMD",1,8) <![CDATA[<=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd') + INTERVAL '1 month' - INTERVAL '1 day' , 'yyyymmdd')
+                    AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanShuryoYMD",1,8) <![CDATA[>=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd') + INTERVAL '1 month' - INTERVAL '1 day' , 'yyyymmdd')
                 WHERE 1 = 1
                 <if test="抽出モード == 1">              
                     AND 支給申請."uketsukeYMD" <![CDATA[>=]]> #{抽出条件日付From}
@@ -187,7 +200,10 @@
             OR "DbT7130KaigoServiceShurui"."teikyoshuryoYM" IS NULL)
        ORDER BY
             "KetteiTsuchishoInfoTempEntity"."hihokenshaNo" ASC,
-            "KetteiTsuchishoInfoTempEntity"."serviceTeikyoYM" ASC
+            "KetteiTsuchishoInfoTempEntity"."serviceTeikyoYM" ASC,
+            "KetteiTsuchishoInfoTempEntity"."yokaigoJotaiKubunCode" ASC,
+            "KetteiTsuchishoInfoTempEntity"."ninteiYukoKikanKaishiYMD" ASC,
+            "KetteiTsuchishoInfoTempEntity"."uketsukeYMD" ASC
     </select>
     
     <resultMap id="resultMap_KogakuServiceUpdateTempEntity" autoMapping="true"
@@ -328,4 +344,25 @@
         <result property="biko" column="biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
+    
+    <select resultOrdered="true" id="get事業高額介護サービス費支給申請"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3110JigyoKogakuShikyuShinseiMapper.ResultMap_DbT3110JigyoKogakuShikyuShinseiEntity"
+            fetchSize="500">
+        SELECT
+        DISTINCT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3110JigyoKogakuShikyuShinseiMapper.allColumns_DbT3110JigyoKogakuShikyuShinsei" />
+         FROM
+        rgdb."DbT3110JigyoKogakuShikyuShinsei" AS "DbT3110JigyoKogakuShikyuShinsei"
+        INNER JOIN
+        "KetteiTsuchishoInfoTempEntity"
+        ON
+        "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = "KetteiTsuchishoInfoTempEntity"."hihokenshaNo"
+        AND
+        "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = "KetteiTsuchishoInfoTempEntity"."serviceTeikyoYM"
+        AND
+        "DbT3110JigyoKogakuShikyuShinsei"."shoKisaiHokenshaNo" = "KetteiTsuchishoInfoTempEntity"."shoKisaiHokenshaNo"
+        WHERE
+        "KetteiTsuchishoInfoTempEntity"."shiharaiHohoKubunCode" = '1'
+        
+    </select>
 </mapper>

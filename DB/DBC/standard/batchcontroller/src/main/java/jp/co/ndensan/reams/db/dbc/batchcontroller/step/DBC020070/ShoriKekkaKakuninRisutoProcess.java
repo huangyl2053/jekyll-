@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -29,26 +28,9 @@ public class ShoriKekkaKakuninRisutoProcess extends BatchProcessBase<ShikyugakuU
     private static final RString MYBATIS_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc020070."
             + "IJigyobunShikyugakuKeisanMapper.get処理結果確認リスト情報");
     private static final RString TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
-    /**
-     * 総出力件数カウンターとエントリ情報Listです。
-     */
-    public static final RString PARAMETER_OUT_OUTRENTURNENTITY;
-    private OutputParameter<Boolean> outReturnEntity;
-
-    static {
-        PARAMETER_OUT_OUTRENTURNENTITY = new RString("hasData");
-    }
 
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
-
-    private boolean hasData;
-
-    @Override
-    protected void initialize() {
-        hasData = false;
-        outReturnEntity = new OutputParameter<>();
-    }
 
     @Override
     protected IBatchReader createReader() {
@@ -62,7 +44,6 @@ public class ShoriKekkaKakuninRisutoProcess extends BatchProcessBase<ShikyugakuU
 
     @Override
     protected void process(ShikyugakuUpdateTempEntity entity) {
-        hasData = true;
         DbWT0002KokuhorenTorikomiErrorEntity tmpEntity = new DbWT0002KokuhorenTorikomiErrorEntity();
         tmpEntity.setErrorKubun(KaigoGassan_ErrorKubun.宛名取得エラー.getCode());
         tmpEntity.setShoHokanehshaNo(new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo().getColumnValue()));
@@ -78,10 +59,4 @@ public class ShoriKekkaKakuninRisutoProcess extends BatchProcessBase<ShikyugakuU
         tmpEntity.setState(EntityDataState.Added);
         tempDbWriter.insert(tmpEntity);
     }
-
-    @Override
-    protected void afterExecute() {
-        outReturnEntity.setValue(hasData);
-    }
-
 }

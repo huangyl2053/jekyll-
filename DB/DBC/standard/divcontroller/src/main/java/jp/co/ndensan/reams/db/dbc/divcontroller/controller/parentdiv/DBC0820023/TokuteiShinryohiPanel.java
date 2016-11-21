@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -56,8 +57,7 @@ public class TokuteiShinryohiPanel {
     private static final RString 登録 = new RString("登録");
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成１５年４月 = new FlexibleYearMonth("200304");
-    private static final RString 申請を保存する = new RString("btnUpdate");
-    private static final RString 申請を削除する = new RString("btnDelete");
+    private static final RString 登録_削除 = new RString("登録_削除");
 
     /**
      * 画面初期化のメソッドます。
@@ -100,49 +100,11 @@ public class TokuteiShinryohiPanel {
         }
 
         if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
-            getHandler(div).setエリア制御(サービス年月);
-            ArrayList<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList
-                    = getHandler(div).get当特定診療費ViewStateList(meisaiPar, viewStateDB.get償還払請求特定診療費データList());
-
-            if (shokanTokuteiShinryohiList == null || shokanTokuteiShinryohiList.isEmpty()) {
-                shokanTokuteiShinryohiList = (ArrayList<ShokanTokuteiShinryohi>) ShokanbaraiJyokyoShokai.createInstance()
-                        .getTokuteiShinryohiData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-
-                ArrayList<ShokanTokuteiShinryohi> 償還払請求特定診療費データList = viewStateDB.get償還払請求特定診療費データList();
-                if (償還払請求特定診療費データList == null) {
-                    償還払請求特定診療費データList = new ArrayList<>();
-                }
-                償還払請求特定診療費データList.addAll(shokanTokuteiShinryohiList);
-                viewStateDB.set償還払請求特定診療費データList(償還払請求特定診療費データList);
-                ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, viewStateDB);
-
-                特定DBList.addAll(shokanTokuteiShinryohiList);
-                ViewStateHolder.put(ViewStateKeys.償還払請求特定診療費データ, 特定DBList);
-            }
-            getHandler(div).set特定診療費一覧グリッド(shokanTokuteiShinryohiList);
+            平成15年月制御(div, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, viewStateDB, 特定DBList, meisaiPar);
         }
 
         if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
-            getHandler(div).setエリア制御(サービス年月);
-            ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList
-                    = getHandler(div).get当特別診療費ViewStateList(meisaiPar, viewStateDB.get特別療養費データList());
-
-            if (shokanTokuteiShinryoTokubetsuRyoyoList == null || shokanTokuteiShinryoTokubetsuRyoyoList.isEmpty()) {
-                shokanTokuteiShinryoTokubetsuRyoyoList = (ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo>) ShokanbaraiJyokyoShokai.createInstance()
-                        .getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-
-                ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> 特別療養費データList = viewStateDB.get特別療養費データList();
-                if (特別療養費データList == null) {
-                    特別療養費データList = new ArrayList<>();
-                }
-                特別療養費データList.addAll(shokanTokuteiShinryoTokubetsuRyoyoList);
-                viewStateDB.set特別療養費データList(特別療養費データList);
-                ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, viewStateDB);
-
-                特別DBList.addAll(shokanTokuteiShinryoTokubetsuRyoyoList);
-                ViewStateHolder.put(ViewStateKeys.特別療養費一覧, 特別DBList);
-            }
-            getHandler(div).set特定診療費_特別診療費一覧グリッド(shokanTokuteiShinryoTokubetsuRyoyoList);
+            平成15年月後制御(div, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, viewStateDB, 特別DBList, meisaiPar);
         }
 
         ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
@@ -204,7 +166,12 @@ public class TokuteiShinryohiPanel {
         getHandler(div).readOnly特定診療費登録(true);
         getHandler(div).clear特定診療費登録();
         getHandler(div).set特定診療費登録();
-        ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        ddgToteishinryoTokubetushinryo_Row row = div.getDdgToteishinryoTokubetushinryo().getClickedItem();
+        if (RowState.Added.equals(row.getRowState())) {
+            ViewStateHolder.put(ViewStateKeys.状態, 登録_削除);
+        } else {
+            ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        }
         return createResponse(div);
     }
 
@@ -236,7 +203,13 @@ public class TokuteiShinryohiPanel {
         getHandler(div).set特定診療費_特別診療費登録(
                 ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                 ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
-        ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        dgdTokuteiShinryohi_Row row = div.getDgdTokuteiShinryohi().getClickedItem();
+
+        if (RowState.Added.equals(row.getRowState())) {
+            ViewStateHolder.put(ViewStateKeys.状態, 登録_削除);
+        } else {
+            ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        }
         return createResponse(div);
     }
 
@@ -399,37 +372,43 @@ public class TokuteiShinryohiPanel {
 
         boolean flag = getHandler(div).get内容変更状態(明細検索キー.getサービス年月());
         if (flag) {
-            getHandler(div).viewStateDBの編集(明細検索キー.getサービス年月(), viewStateDB, 明細検索キー);
-            if (登録.equals(処理モード)) {
-                ShomeishoNyuryokuKanryoKubunType 出力_証明書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance().証明書InputCheck(
-                        ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class),
-                        明細検索キー.get様式番号(), 明細検索キー.getサービス年月());
-
-                Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap
-                        = viewStateDB.get証明書入力完了フラグMap();
-                if (ShomeishoNyuryokuKanryoKubunType.入力未完了.equals(出力_証明書入力済区分)) {
-                    証明書入力完了フラグMap.put(明細検索キー, ShomeishoNyuryokuKanryoKubunType.入力未完了);
-                    throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage().evaluate());
-                }
-                証明書入力完了フラグMap.put(明細検索キー, ShomeishoNyuryokuKanryoKubunType.入力完了);
-
-            } else if (修正.equals(処理モード)) {
-                Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap
-                        = viewStateDB.get証明書変更済フラグMap();
-                if (証明書変更済フラグMap == null) {
-                    証明書変更済フラグMap = new HashMap<>();
-                }
-                ShomeishoHenkoFlag 証明書変更済フラグ = 証明書変更済フラグMap.get(明細検索キー);
-                if (証明書変更済フラグ == null) {
-                    証明書変更済フラグ = new ShomeishoHenkoFlag();
-                }
-                証明書変更済フラグ.set特定診療費_証明書変更済フラグ(ShomeishoHenkoKubunType.変更あり);
-                証明書変更済フラグMap.put(明細検索キー, 証明書変更済フラグ);
-                viewStateDB.set証明書変更済フラグMap(証明書変更済フラグMap);
-            }
+            viewStateDB = 証明書フラグ設定(div, 明細検索キー, 処理モード, viewStateDB);
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, viewStateDB);
         }
         return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.一覧に戻る).respond();
+    }
+
+    private DbJohoViewState 証明書フラグ設定(TokuteiShinryohiPanelDiv div, ShoukanharaihishinseimeisaikensakuParameter 明細検索キー,
+            RString 処理モード, DbJohoViewState viewStateDB) {
+        getHandler(div).viewStateDBの編集(明細検索キー.getサービス年月(), viewStateDB, 明細検索キー);
+        if (登録.equals(処理モード)) {
+            ShomeishoNyuryokuKanryoKubunType 出力_証明書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance().証明書InputCheck(
+                    ViewStateHolder.get(ViewStateKeys.証明書入力済フラグ, ShomeishoNyuryokuFlag.class),
+                    明細検索キー.get様式番号(), 明細検索キー.getサービス年月());
+
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap
+                    = viewStateDB.get証明書入力完了フラグMap();
+            if (ShomeishoNyuryokuKanryoKubunType.入力未完了.equals(出力_証明書入力済区分)) {
+                証明書入力完了フラグMap.put(明細検索キー, ShomeishoNyuryokuKanryoKubunType.入力未完了);
+                throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage().evaluate());
+            }
+            証明書入力完了フラグMap.put(明細検索キー, ShomeishoNyuryokuKanryoKubunType.入力完了);
+
+        } else if (修正.equals(処理モード)) {
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap
+                    = viewStateDB.get証明書変更済フラグMap();
+            if (証明書変更済フラグMap == null) {
+                証明書変更済フラグMap = new HashMap<>();
+            }
+            ShomeishoHenkoFlag 証明書変更済フラグ = 証明書変更済フラグMap.get(明細検索キー);
+            if (証明書変更済フラグ == null) {
+                証明書変更済フラグ = new ShomeishoHenkoFlag();
+            }
+            証明書変更済フラグ.set特定診療費_証明書変更済フラグ(ShomeishoHenkoKubunType.変更あり);
+            証明書変更済フラグMap.put(明細検索キー, 証明書変更済フラグ);
+            viewStateDB.set証明書変更済フラグMap(証明書変更済フラグMap);
+        }
+        return viewStateDB;
     }
 
     private TokuteiShinryohiPanelHandler getHandler(TokuteiShinryohiPanelDiv div) {
@@ -566,6 +545,7 @@ public class TokuteiShinryohiPanel {
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         DbJohoViewState viewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         getHandler(div).viewStateDBの編集(明細検索キー.getサービス年月(), viewStateDB, 明細検索キー);
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, viewStateDB);
     }
 
     /**
@@ -594,4 +574,53 @@ public class TokuteiShinryohiPanel {
         return createResponse(div);
     }
 
+    private void 平成15年月制御(TokuteiShinryohiPanelDiv div, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
+            RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号, DbJohoViewState viewStateDB,
+            ArrayList<ShokanTokuteiShinryohi> 特定DBList, ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
+        getHandler(div).setエリア制御(サービス年月);
+        ArrayList<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList
+                = getHandler(div).get当特定診療費ViewStateList(meisaiPar, viewStateDB.get償還払請求特定診療費データList());
+
+        if (shokanTokuteiShinryohiList == null || shokanTokuteiShinryohiList.isEmpty()) {
+            shokanTokuteiShinryohiList = (ArrayList<ShokanTokuteiShinryohi>) ShokanbaraiJyokyoShokai.createInstance()
+                    .getTokuteiShinryohiData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+
+            ArrayList<ShokanTokuteiShinryohi> 償還払請求特定診療費データList = viewStateDB.get償還払請求特定診療費データList();
+            if (償還払請求特定診療費データList == null) {
+                償還払請求特定診療費データList = new ArrayList<>();
+            }
+            償還払請求特定診療費データList.addAll(shokanTokuteiShinryohiList);
+            viewStateDB.set償還払請求特定診療費データList(償還払請求特定診療費データList);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, viewStateDB);
+
+            特定DBList.addAll(shokanTokuteiShinryohiList);
+            ViewStateHolder.put(ViewStateKeys.償還払請求特定診療費データ, 特定DBList);
+        }
+        getHandler(div).set特定診療費一覧グリッド(shokanTokuteiShinryohiList);
+    }
+
+    private void 平成15年月後制御(TokuteiShinryohiPanelDiv div, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月, RString 整理番号,
+            JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号, DbJohoViewState viewStateDB,
+            ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> 特別DBList, ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
+        getHandler(div).setエリア制御(サービス年月);
+        ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList
+                = getHandler(div).get当特別診療費ViewStateList(meisaiPar, viewStateDB.get特別療養費データList());
+
+        if (shokanTokuteiShinryoTokubetsuRyoyoList == null || shokanTokuteiShinryoTokubetsuRyoyoList.isEmpty()) {
+            shokanTokuteiShinryoTokubetsuRyoyoList = (ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo>) ShokanbaraiJyokyoShokai.createInstance()
+                    .getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+
+            ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> 特別療養費データList = viewStateDB.get特別療養費データList();
+            if (特別療養費データList == null) {
+                特別療養費データList = new ArrayList<>();
+            }
+            特別療養費データList.addAll(shokanTokuteiShinryoTokubetsuRyoyoList);
+            viewStateDB.set特別療養費データList(特別療養費データList);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, viewStateDB);
+
+            特別DBList.addAll(shokanTokuteiShinryoTokubetsuRyoyoList);
+            ViewStateHolder.put(ViewStateKeys.特別療養費一覧, 特別DBList);
+        }
+        getHandler(div).set特定診療費_特別診療費一覧グリッド(shokanTokuteiShinryoTokubetsuRyoyoList);
+    }
 }

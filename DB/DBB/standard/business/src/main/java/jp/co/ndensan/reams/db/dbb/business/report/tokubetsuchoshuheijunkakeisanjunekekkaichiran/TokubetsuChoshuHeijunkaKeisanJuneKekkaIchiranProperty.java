@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisan
 
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -27,9 +26,8 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends Repor
     /**
      * コンストラクタです。
      *
-     * @param outputOrder IOutputOrder
      */
-    public TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty(IOutputOrder outputOrder) {
+    public TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty() {
         super(SubGyomuCode.DBB介護賦課, ID);
     }
 

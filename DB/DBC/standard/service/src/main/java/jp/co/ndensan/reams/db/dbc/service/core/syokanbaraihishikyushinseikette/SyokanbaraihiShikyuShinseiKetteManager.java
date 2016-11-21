@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette;
 
 import java.util.ArrayList;
 import java.util.List;
-import static jp.co.ndensan.reams.bb.bbx.definition.message.BbErrorMessages.入力なし;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ModoruEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
@@ -41,7 +40,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssek
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteParameter;
-import static jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType.入力あり;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.ShafukukeigenServiceParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
@@ -161,6 +159,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     private static final FlexibleYearMonth サービス年月_200904 = new FlexibleYearMonth("200904");
     private static final RString モード_修正 = new RString("修正");
     private static final RString チェック区分_2 = new RString("2");
+    private static final RString 入力なし = new RString("0");
+    private static final RString 入力あり = new RString("1");
 
     /**
      * コンストラクタです。
@@ -234,6 +234,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
      * @param 画面モード 画面モード
      * @param 識別コード 識別コード
      */
+    @Transaction
     public void insupdShokan(
             DbJohoViewState db情報,
             RString 修正前支給区分,
@@ -1171,6 +1172,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                 entity.setHiHokenshaNo(parameter.get被保険者番号());
                 entity.setServiceTeikyoYM(parameter.getサービス提供年月());
                 entity.setSeiriNo(parameter.get整理番号());
+                entity.initializeMd5();
                 ShokanHanteiKekka kekaJoho = new ShokanHanteiKekka(entity);
                 ShokanHanteiKekkaBuilder kekajoho = kekaJoho.createBuilderForEdit();
                 kekajoho.set証記載保険者番号(dbt3034entity == null ? new ShoKisaiHokenshaNo(RString.EMPTY)
@@ -1206,7 +1208,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             }
             if (更新件数 > 0 && parameter.is差額金額登録フラグ() && (決定情報一覧List != null && !決定情報一覧List.isEmpty())) {
                 for (SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧 : 決定情報一覧List) {
-                    決定情報登録更新2(parameter, 決定情報一覧, 証明書入力済フラグ, dbJoho, shokujiJouhos, serviceHiyo,
+                    決定情報登録更新2(parameter, 決定情報一覧, 証明書入力済フラグ, modoruEntity, dbJoho, shokujiJouhos, serviceHiyo,
                             償還払請求サービス計画200904データList, 償還払請求サービス計画200604データList, 償還払請求サービス計画200004データList);
                 }
             }
@@ -1218,14 +1220,6 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
 
         }
         return modoruEntity;
-//        if (parameter.get決定年月日() != null && !parameter.get決定年月日().isEmpty()) {
-//            KyufujissekiEntity entity = getKyufuJissekiData(parameter.get被保険者番号(),
-//                    parameter.getサービス提供年月(), parameter.get整理番号());
-//            SyokanbaraiShikyuKetteKyufuJssekiHensyuManager manager
-//                    = SyokanbaraiShikyuKetteKyufuJssekiHensyuManager.createInstance();
-//            manager.dealKyufujisseki(parameter.get画面モード(), parameter.get識別コード(),
-//                    entity, 修正前支給区分);
-//        }
     }
 
     private int get償還請求集計情報(SyokanbaraihiShikyuShinseiKetteParameter parameter, List<SyokanbaraihiShikyuShinseiKetteEntity> 決定情報一覧List,
@@ -1243,6 +1237,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                     parameter.getサービス提供年月(), parameter.get整理番号());
             if (entityList != null && !entityList.isEmpty()) {
                 for (DbT3053ShokanShukeiEntity entity : entityList) {
+                    entity.initializeMd5();
                     更新件数 = 更新件数 + up償還払請求集計(entity, parameter, 決定情報一覧List, shukeiList);
                 }
             }
@@ -1253,6 +1248,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
 
     private ShokanHanteiKekka update償還払支給判定結果(SyokanbaraihiShikyuShinseiKetteParameter parameter,
             DbT3036ShokanHanteiKekkaEntity dbT3036entity) {
+        dbT3036entity.initializeMd5();
         ShokanHanteiKekka kekaEntity = new ShokanHanteiKekka(dbT3036entity);
         ShokanHanteiKekkaBuilder keka = kekaEntity.createBuilderForEdit();
         keka.set決定年月日(parameter.get決定年月日());
@@ -1315,6 +1311,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3047entity != null) {
+                dbT3047entity.initializeMd5();
                 ShokanServicePlan200904 dbt3047 = new ShokanServicePlan200904(dbT3047entity);
                 ShokanServicePlan200904Builder dbt3047builder = dbt3047.createBuilderForEdit();
                 dbt3047builder.set支給区分コード(parameter.get支給区分());
@@ -1323,8 +1320,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                 dbt3047builder.set増減理由等(parameter.get増減理由等());
                 dbt3047builder.set不支給理由等(parameter.get不支給理由等1());
                 dbt3047builder.set購入_改修履歴等(parameter.get不支給理由等2());
-                dbt3047 = dbt3047builder.build();
-                dbt3047.modified();
+                dbt3047 = dbt3047builder.build().modified();
+                dbt3047.toEntity();
                 償還払請求サービス計画200904データList.add(dbt3047);
             }
         } else if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth(サービス年月3))
@@ -1336,6 +1333,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3046entity != null) {
+                dbT3046entity.initializeMd5();
                 ShokanServicePlan200604 dbT3046 = new ShokanServicePlan200604(dbT3046entity);
                 ShokanServicePlan200604Builder dbt3046builder = dbT3046.createBuilderForEdit();
                 dbt3046builder.set支給区分コード(parameter.get支給区分());
@@ -1356,6 +1354,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3045entity != null) {
+                dbT3045entity.initializeMd5();
                 ShokanServicePlan200004 dbT3045 = new ShokanServicePlan200004(dbT3045entity);
                 ShokanServicePlan200004Builder dbt3045Builder = dbT3045.createBuilderForEdit();
                 dbt3045Builder.set支給区分コード(parameter.get支給区分());
@@ -1456,8 +1455,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     }
 
     private void 決定情報登録更新2(SyokanbaraihiShikyuShinseiKetteParameter parameter,
-            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧, ShomeishoNyuryokuFlag 証明書入力済フラグ, DbJohoViewState dbJoho,
-            ArrayList<ShokanShokujiHiyo> shokujiJouhos, ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyo,
+            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧, ShomeishoNyuryokuFlag 証明書入力済フラグ, ModoruEntity modoruEntity,
+            DbJohoViewState dbJoho, ArrayList<ShokanShokujiHiyo> shokujiJouhos, ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyo,
             ArrayList<ShokanServicePlan200904> 償還払請求サービス計画200904データList,
             ArrayList<ShokanServicePlan200604> 償還払請求サービス計画200604データList,
             ArrayList<ShokanServicePlan200004> 償還払請求サービス計画200004データList) {
@@ -1467,13 +1466,14 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                         parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                         決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
                 if (dbT3053entity != null) {
+                    dbT3053entity.initializeMd5();
                     ShokanShukei shukei = new ShokanShukei(dbT3053entity);
                     ShokanShukeiBuilder shuk = shukei.createBuilderForEdit();
                     shuk.set支給区分コード(parameter.get支給区分());
                     shuk.set請求額差額金額(決定情報一覧.get差額金額());
                     shuk.set出来高請求額差額金額(決定情報一覧.get差額金額());
                     shukei = shuk.build();
-                    shukei.modified(); //TODO
+                    modoruEntity.get償還払請求集計データList().add(shukei);
                 }
                 break;
             case テーブル区分4:
@@ -1482,6 +1482,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
                     if (dbT3043entity != null) {
+                        dbT3043entity.initializeMd5();
                         ShokanShokujiHiyo shokuj = new ShokanShokujiHiyo(dbT3043entity);
                         ShokanShokujiHiyoBuilder shokujBuilder = shokuj.createBuilderForEdit();
                         shokujBuilder.set差額金額(決定情報一覧.get差額金額());
@@ -1516,6 +1517,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                                     parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                                     決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
                     if (dbT3050entity != null) {
+                        dbT3050entity.initializeMd5();
                         ShokanTokuteiNyushoshaKaigoServiceHiyo service = new ShokanTokuteiNyushoshaKaigoServiceHiyo(dbT3050entity);
                         ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder serviceBuilder = service.createBuilderForEdit();
                         serviceBuilder.set差額金額(決定情報一覧.get差額金額());
@@ -1605,7 +1607,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             return new ArrayList<>();
         }
         ShoKisaiHokenshaNo 証記載保険者番号 = dbT3034entity.getShoKisaiHokenshaNo();
-        dbT3034entity.initializeMd5();
+
         List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity> entityList
                 = 軽減率Dac.selectByKey(証記載保険者番号, 被保険者番号);
         if (entityList == null || entityList.isEmpty()) {
@@ -2217,6 +2219,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3047entity != null) {
+                dbT3047entity.initializeMd5();
                 ShokanServicePlan200904 service3047 = new ShokanServicePlan200904(dbT3047entity);
                 ShokanServicePlan200904Builder builder = service3047.createBuilderForEdit();
                 builder.set差額金額(決定情報一覧.get差額金額());
@@ -2252,6 +2255,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3046entity != null) {
+                dbT3046entity.initializeMd5();
                 ShokanServicePlan200604 dbT3046 = new ShokanServicePlan200604(dbT3046entity);
                 ShokanServicePlan200604Builder dbt3046builder = dbT3046.createBuilderForEdit();
                 dbt3046builder.set差額金額(決定情報一覧.get差額金額());
@@ -2287,6 +2291,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3045entity != null) {
+                dbT3045entity.initializeMd5();
                 ShokanServicePlan200004 dbT3045 = new ShokanServicePlan200004(dbT3045entity);
                 ShokanServicePlan200004Builder dbt3045Builder = dbT3045.createBuilderForEdit();
                 dbt3045Builder.set支給区分コード(parameter.get支給区分());

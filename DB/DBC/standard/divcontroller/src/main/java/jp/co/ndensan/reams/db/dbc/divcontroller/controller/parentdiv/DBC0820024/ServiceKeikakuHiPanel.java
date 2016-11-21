@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820024;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
@@ -148,6 +151,7 @@ public class ServiceKeikakuHiPanel {
             List<ShokanServicePlan200004Result> entity200004ResultList
                     = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200004(
                             被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+            ViewStateHolder.put(ViewStateKeys.サービス年月_200903, (Serializable) entity200004ResultList);
             if (checkNull(entity200004ResultList)) {
                 handler.load事業者区分リスト200904前();
                 return true;
@@ -170,6 +174,7 @@ public class ServiceKeikakuHiPanel {
         if (null == entity200604Result) {
             List<ShokanServicePlan200604Result> entity200604ResultList = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200604(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+            ViewStateHolder.put(ViewStateKeys.サービス年月_200604, (Serializable) entity200604ResultList);
             if (checkNull(entity200604ResultList)) {
                 handler.load事業者区分リスト200904前();
                 return true;
@@ -188,13 +193,14 @@ public class ServiceKeikakuHiPanel {
             DbJohoViewState 開始時点の償還払サービス計画費, RString 画面モード) {
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(true);
         div.getPanelServiceKeikakuhiDown().setDisplayNone(true);
+        handler.load事業者区分リスト200904();
         List<ShokanServicePlan200904Result> entity200904ResultList
                 = 償還払ViewStateDB.get償還払請求サービス計画200904データResultList(明細キー);
         if (checkNull(entity200904ResultList)) {
             entity200904ResultList = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+            ViewStateHolder.put(ViewStateKeys.サービス年月_200904, (Serializable) entity200904ResultList);
             if (checkNull(entity200904ResultList)) {
-                handler.load事業者区分リスト200904();
                 return true;
             }
             償還払ViewStateDB.add償還払請求サービス計画200904データResult(entity200904ResultList);
@@ -284,10 +290,18 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払い費支給申請決定_サービス提供証明書(サービス計画費)画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnConfirm(ServiceKeikakuHiPanelDiv div) {
+        int maxRenban = 0;
+        if (div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource() != null
+                && !div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource().isEmpty()) {
+            maxRenban = Integer.parseInt(div.getPanelServiceKeikakuhiUp()
+                    .getDgdYichiran().getDataSource().get(0).getDefaultDataName7().toString());
+        }
+        List<ShokanServicePlan200904Result> entity200904ResultList
+                = ViewStateHolder.get(ViewStateKeys.サービス年月_200904, ArrayList.class);
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            getHandler(div).確定_登録();
+            getHandler(div).確定_登録(maxRenban);
         } else if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            getHandler(div).確定_修正();
+            getHandler(div).確定_修正(maxRenban, entity200904ResultList);
         } else if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             getHandler(div).確定_削除();
         }
@@ -316,6 +330,7 @@ public class ServiceKeikakuHiPanel {
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnTorikeshi(ServiceKeikakuHiPanelDiv div) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (削除モード.equals(画面モード)) {
+            resetKensakuData();
             return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
         }
         if (!ResponseHolder.isReRequest()) {
@@ -328,6 +343,7 @@ public class ServiceKeikakuHiPanel {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             DbJohoViewState 償還払ViewStateDBBAK = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDBBAK);
+            resetKensakuData();
             return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
         }
         return createResponse(div);
@@ -344,6 +360,7 @@ public class ServiceKeikakuHiPanel {
         if (!is変更) {
             return saveOut(div);
         } else {
+            resetKensakuData();
             return 保存処理(div, DBC0820024TransitionEventName.一覧に戻る);
         }
     }
@@ -372,9 +389,18 @@ public class ServiceKeikakuHiPanel {
         ShoukanharaihishinseimeisaikensakuParameter 明細キー = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         List<ShokanServicePlan200904Result> entity200904ResultList = 償還払ViewStateDB.get償還払請求サービス計画200904データResultList(明細キー);
+        if (償還払ViewStateDB.get償還払請求サービス計画200604データResultList() == null) {
+            ArrayList<ShokanServicePlan200604Result> list200604Result = new ArrayList<>();
+            償還払ViewStateDB.set償還払請求サービス計画200604データResultList(list200604Result);
+        }
         ShokanServicePlan200604Result entity200604Result = 償還払ViewStateDB.get償還払請求サービス計画200604データResult(明細キー);
+
+        if (償還払ViewStateDB.get償還払請求サービス計画200004データResultList() == null) {
+            ArrayList<ShokanServicePlan200004Result> list200004Result = new ArrayList<>();
+            償還払ViewStateDB.set償還払請求サービス計画200004データResultList(list200004Result);
+        }
         ShokanServicePlan200004Result entity200004Result = 償還払ViewStateDB.get償還払請求サービス計画200004データResult(明細キー);
-        if (!entity200904ResultList.isEmpty()) {
+        if (entity200004Result != null && !entity200904ResultList.isEmpty()) {
             償還払ViewStateDB.get償還払請求サービス計画200904データResultList().removeAll(entity200904ResultList);
         }
         if (null != entity200604Result) {
@@ -387,9 +413,15 @@ public class ServiceKeikakuHiPanel {
         entity200604Result = getHandler(div).saveサービス計画200604(明細キー, entity200604Result);
         entity200004Result = getHandler(div).saveサービス計画200004(明細キー, entity200004Result);
         償還払ViewStateDB = set証明書フラグ(div, 償還払ViewStateDB, 明細キー, eventName);
-        償還払ViewStateDB.add償還払請求サービス計画200904データResult(entity200904ResultList);
-        償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
-        償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
+        if (entity200904ResultList != null) {
+            償還払ViewStateDB.add償還払請求サービス計画200904データResult(entity200904ResultList);
+        }
+        if (entity200604Result != null) {
+            償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
+        }
+        if (entity200004Result != null) {
+            償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
+        }
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
         return ResponseData.of(div).forwardWithEventName(eventName).respond();
     }
@@ -411,7 +443,13 @@ public class ServiceKeikakuHiPanel {
         }
         if (修正モード.equals(画面モード)) {
             Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = 償還払ViewStateDB.get証明書変更済フラグMap();
+            if (証明書変更済フラグMap == null) {
+                証明書変更済フラグMap = new HashMap<>();
+            }
             ShomeishoHenkoFlag 証明書変更済フラグ = 証明書変更済フラグMap.get(明細キー);
+            if (証明書変更済フラグ == null) {
+                証明書変更済フラグ = new ShomeishoHenkoFlag();
+            }
             証明書変更済フラグ.setサービス計画費_証明書変更済フラグ(is変更 ? ShomeishoHenkoKubunType.変更あり : ShomeishoHenkoKubunType.変更なし);
             証明書変更済フラグMap.put(明細キー, 証明書変更済フラグ);
             償還払ViewStateDB.set証明書変更済フラグMap(証明書変更済フラグMap);
@@ -447,6 +485,7 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（基本情報）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKihonInfo(ServiceKeikakuHiPanelDiv div) {
+        resetKensakuData();
         return 保存処理(div, DBC0820024TransitionEventName.基本情報);
     }
 
@@ -457,6 +496,7 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（給付費明細）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKyufuhiMeisai(ServiceKeikakuHiPanelDiv div) {
+        resetKensakuData();
         return 保存処理(div, DBC0820024TransitionEventName.給付費明細);
     }
 
@@ -467,6 +507,7 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（特定診療費）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnTokuteiShinryo(ServiceKeikakuHiPanelDiv div) {
+        resetKensakuData();
         return 保存処理(div, DBC0820024TransitionEventName.特定診療費);
     }
 
@@ -477,6 +518,7 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（特定入所者費用）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnTokuteiNyushosha(ServiceKeikakuHiPanelDiv div) {
+        resetKensakuData();
         return 保存処理(div, DBC0820024TransitionEventName.特定入所者費用);
     }
 
@@ -487,6 +529,7 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（合計情報）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnGokeiInfo(ServiceKeikakuHiPanelDiv div) {
+        resetKensakuData();
         return 保存処理(div, DBC0820024TransitionEventName.合計情報);
     }
 
@@ -497,6 +540,7 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（給付費明細（住特）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKyufuhiMeisaiJyuchi(ServiceKeikakuHiPanelDiv div) {
+        resetKensakuData();
         return 保存処理(div, DBC0820024TransitionEventName.給付費明細_住特);
     }
 
@@ -507,6 +551,7 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（緊急時・所定疾患）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKinkyujiShoteiShikan(ServiceKeikakuHiPanelDiv div) {
+        resetKensakuData();
         return 保存処理(div, DBC0820024TransitionEventName.緊急時_所定疾患);
     }
 
@@ -517,6 +562,7 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（緊急時施設療養費）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnKinkyujiShisetsu(ServiceKeikakuHiPanelDiv div) {
+        resetKensakuData();
         return 保存処理(div, DBC0820024TransitionEventName.緊急時施設療養費);
     }
 
@@ -527,6 +573,7 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（食事費用）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnShokujiHiyo(ServiceKeikakuHiPanelDiv div) {
+        resetKensakuData();
         return 保存処理(div, DBC0820024TransitionEventName.食事費用);
     }
 
@@ -537,6 +584,7 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（請求額集計）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnSeikyugakuShukei(ServiceKeikakuHiPanelDiv div) {
+        resetKensakuData();
         return 保存処理(div, DBC0820024TransitionEventName.請求額集計);
     }
 
@@ -547,7 +595,14 @@ public class ServiceKeikakuHiPanel {
      * @return 償還払支給申請_サービス提供証明書（社福軽減額）画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnShafukukeigenGaku(ServiceKeikakuHiPanelDiv div) {
+        resetKensakuData();
         return 保存処理(div, DBC0820024TransitionEventName.社福軽減額);
+    }
+
+    private void resetKensakuData() {
+        ViewStateHolder.put(ViewStateKeys.サービス年月_200904, null);
+        ViewStateHolder.put(ViewStateKeys.サービス年月_200604, null);
+        ViewStateHolder.put(ViewStateKeys.サービス年月_200903, null);
     }
 
     private boolean checkNull(List list) {

@@ -56,4 +56,20 @@ public class KinkyujiShisetuRyoyohiPanelValidationHandler {
                 .build();
     }
 
+    /**
+     * 証明書チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validate証明書チェック() {
+        IValidationMessages message = new KinkyujiShisetuRyoyohiPanelValidator(div).validate証明書チェック();
+        return createDictionary証明書チェック().check(message);
+    }
+
+    private ValidationDictionary createDictionary証明書チェック() {
+        return new ValidationDictionaryBuilder()
+                .add(KinkyujiShisetuRyoyohiPanelValidationMessage.証明書入力済チェック, div.getPanelHead())
+                .build();
+    }
+
 }

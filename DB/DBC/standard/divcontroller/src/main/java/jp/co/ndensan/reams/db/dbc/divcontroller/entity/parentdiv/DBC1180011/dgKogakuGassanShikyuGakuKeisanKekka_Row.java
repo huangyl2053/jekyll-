@@ -3,16 +3,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sun Oct 09 13:14:52 CST 2016
+ * Mon Nov 21 14:07:44 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgKogakuGassanShikyuGakuKeisanKekka_Row のクラスファイル
- *
+ * dgKogakuGassanShikyuGakuKeisanKekka_Row のクラスファイル 
+ * 
  * @reamsid_L DBC-2030-010 huzongcheng
  */
 public class dgKogakuGassanShikyuGakuKeisanKekka_Row extends DataRow {

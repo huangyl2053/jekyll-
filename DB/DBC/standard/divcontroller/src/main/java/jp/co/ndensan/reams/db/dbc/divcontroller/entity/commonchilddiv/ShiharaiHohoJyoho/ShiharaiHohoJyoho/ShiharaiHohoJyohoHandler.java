@@ -106,7 +106,7 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 List<Koza> koza = ShiharaiHohoJyohoFinder.createInstance()
                         .getKozaJyoho(KozaParameter.createParam(支給申請情報.
-                                        getKozaId(), null, null)).records();
+                                getKozaId(), null, null)).records();
                 if (!koza.isEmpty()) {
 
                     口座払いエリアの初期化(koza.get(0), 支給申請情報.getKozaId());
@@ -125,6 +125,8 @@ public class ShiharaiHohoJyohoHandler {
                                         支給申請情報.getKeiyakuNo() == null ? RString.EMPTY : 支給申請情報.getKeiyakuNo()));
                 受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者, new RString("初期"));
             }
+        } else if (状態.equals(登録)) {
+            div.getRadMadoguti().setSelectedKey(ShiharaiHohoKubun.窓口払.getコード());
         }
         if ((業務内区分コード.equals(ShunoKamokuShubetsu.介護給付_償還)
                 || 業務内区分コード.equals(ShunoKamokuShubetsu.介護給付_高額))) {
@@ -275,12 +277,16 @@ public class ShiharaiHohoJyohoHandler {
 
     private void 高額合算の登録モード_支払方法情報エリアの状態処理() {
 
+        div.getRadMadoguti().setDisabled(false);
+        div.getRadKoza().setDisabled(false);
         div.getRadMadoguti().setVisible(true);
         div.getRadKoza().setVisible(true);
     }
 
     private void 高額合算の修正モード_支払方法情報エリアの状態処理() {
 
+        div.getRadMadoguti().setDisabled(false);
+        div.getRadKoza().setDisabled(false);
         div.getRadMadoguti().setVisible(true);
         div.getRadKoza().setVisible(true);
         div.getRadJyryoinin().setVisible(true);
@@ -376,6 +382,8 @@ public class ShiharaiHohoJyohoHandler {
         if (!ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
             div.getTxtTenban().setDisplayNone(true);
         }
+        div.getTxtKinyuKikanShitenCode().setReadOnly(true);
+        div.getTxtYokinShubetsu().setReadOnly(true);
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
         div.getTxtMeigininKana().setReadOnly(true);
@@ -543,6 +551,7 @@ public class ShiharaiHohoJyohoHandler {
 
         if (ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
 
+            div.getDdlKozaID().setDisabled(false);
             div.getBtnKozaToroku().setDisabled(false);
             div.getTxtKinyuKikanCode().setReadOnly(true);
             div.getTxtKinyuKikanName().setReadOnly(true);
@@ -560,6 +569,8 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtMeigininKana().setReadOnly(true);
             div.getTtxtMeigininKanji().setReadOnly(true);
         }
+        div.getTxtKinyuKikanShitenCode().setReadOnly(true);
+        div.getTxtYokinShubetsu().setReadOnly(true);
     }
 
     private void 高額合算の照会モード_窓口払いエリアの状態処理() {

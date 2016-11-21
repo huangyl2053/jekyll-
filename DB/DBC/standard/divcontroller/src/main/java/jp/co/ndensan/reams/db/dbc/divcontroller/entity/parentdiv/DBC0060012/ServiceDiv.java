@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ServiceDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,7 +22,7 @@ public class ServiceDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txt1")
-    private TextBox txt1;
+    private TextBoxFlexibleDate txt1;
     @JsonProperty("txt2")
     private TextBox txt2;
     @JsonProperty("txt4")
@@ -30,7 +30,7 @@ public class ServiceDiv extends Panel {
     @JsonProperty("txt5")
     private TextBox txt5;
     @JsonProperty("txt8")
-    private TextBox txt8;
+    private TextBoxNum txt8;
     @JsonProperty("txt9")
     private TextBoxDateRange txt9;
     @JsonProperty("line1")
@@ -40,15 +40,15 @@ public class ServiceDiv extends Panel {
     @JsonProperty("txt11")
     private TextBox txt11;
     @JsonProperty("txt12")
-    private TextBox txt12;
+    private TextBoxNum txt12;
     @JsonProperty("txt13")
     private TextBox txt13;
     @JsonProperty("txt15")
-    private TextBox txt15;
+    private TextBoxNum txt15;
     @JsonProperty("txt17")
     private TextBox txt17;
     @JsonProperty("txt18")
-    private TextBox txt18;
+    private TextBoxNum txt18;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -61,7 +61,7 @@ public class ServiceDiv extends Panel {
      * @return txt1
      */
     @JsonProperty("txt1")
-    public TextBox getTxt1() {
+    public TextBoxFlexibleDate getTxt1() {
         return txt1;
     }
 
@@ -70,7 +70,7 @@ public class ServiceDiv extends Panel {
      * @param txt1 txt1
      */
     @JsonProperty("txt1")
-    public void setTxt1(TextBox txt1) {
+    public void setTxt1(TextBoxFlexibleDate txt1) {
         this.txt1 = txt1;
     }
 
@@ -133,7 +133,7 @@ public class ServiceDiv extends Panel {
      * @return txt8
      */
     @JsonProperty("txt8")
-    public TextBox getTxt8() {
+    public TextBoxNum getTxt8() {
         return txt8;
     }
 
@@ -142,7 +142,7 @@ public class ServiceDiv extends Panel {
      * @param txt8 txt8
      */
     @JsonProperty("txt8")
-    public void setTxt8(TextBox txt8) {
+    public void setTxt8(TextBoxNum txt8) {
         this.txt8 = txt8;
     }
 
@@ -223,7 +223,7 @@ public class ServiceDiv extends Panel {
      * @return txt12
      */
     @JsonProperty("txt12")
-    public TextBox getTxt12() {
+    public TextBoxNum getTxt12() {
         return txt12;
     }
 
@@ -232,7 +232,7 @@ public class ServiceDiv extends Panel {
      * @param txt12 txt12
      */
     @JsonProperty("txt12")
-    public void setTxt12(TextBox txt12) {
+    public void setTxt12(TextBoxNum txt12) {
         this.txt12 = txt12;
     }
 
@@ -259,7 +259,7 @@ public class ServiceDiv extends Panel {
      * @return txt15
      */
     @JsonProperty("txt15")
-    public TextBox getTxt15() {
+    public TextBoxNum getTxt15() {
         return txt15;
     }
 
@@ -268,7 +268,7 @@ public class ServiceDiv extends Panel {
      * @param txt15 txt15
      */
     @JsonProperty("txt15")
-    public void setTxt15(TextBox txt15) {
+    public void setTxt15(TextBoxNum txt15) {
         this.txt15 = txt15;
     }
 
@@ -295,7 +295,7 @@ public class ServiceDiv extends Panel {
      * @return txt18
      */
     @JsonProperty("txt18")
-    public TextBox getTxt18() {
+    public TextBoxNum getTxt18() {
         return txt18;
     }
 
@@ -304,7 +304,7 @@ public class ServiceDiv extends Panel {
      * @param txt18 txt18
      */
     @JsonProperty("txt18")
-    public void setTxt18(TextBox txt18) {
+    public void setTxt18(TextBoxNum txt18) {
         this.txt18 = txt18;
     }
 

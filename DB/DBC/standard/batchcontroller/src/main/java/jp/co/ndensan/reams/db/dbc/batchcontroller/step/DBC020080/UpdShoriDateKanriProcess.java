@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -38,6 +37,7 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateK
     private static final RString 処理枝番_0000 = new RString("0000");
     private static final RString 年度内連番_0001 = new RString("0001");
     private static final int NUM_4 = 4;
+    private static final int NUM_1 = 1;
     private DBC020080_JigyobunKogakuGassanJikofutangakuKeisanProcessParameter parameter;
     private DBC020080_JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter param;
     private boolean updateFlag;
@@ -77,9 +77,14 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateK
         result.setShoriEdaban(処理枝番_0000);
         result.setNendo(FlexibleYear.MIN);
         result.setNendoNaiRenban(get新規年度内連番(entity.getNendoNaiRenban()));
-        result.setKijunYMD(new FlexibleDate(parameter.get受取年月().getYearValue(), parameter.get受取年月().getMonthValue(), 1));
-        result.setTaishoKaishiTimestamp(new YMDHMS(parameter.get処理日時()));
-        tableWriter.update(result);
+        if (parameter.get受取年月() != null && !parameter.get受取年月().isEmpty()) {
+            result.setKijunYMD(new FlexibleDate(parameter.get受取年月().getYearValue(), parameter.get受取年月().getMonthValue(), NUM_1));
+        } else {
+            result.setKijunYMD(FlexibleDate.EMPTY);
+        }
+        result.setTaishoKaishiYMD(new FlexibleDate(parameter.get処理日時().getDate().toDateString()));
+        result.setTaishoShuryoYMD(FlexibleDate.EMPTY);
+        tableWriter.insert(result);
     }
 
     private RString get新規年度内連番(RString 年度内連番) {
@@ -100,8 +105,13 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateK
             result.setShoriEdaban(処理枝番_0000);
             result.setNendo(FlexibleYear.MIN);
             result.setNendoNaiRenban(get新規年度内連番(null));
-            result.setKijunYMD(new FlexibleDate(parameter.get受取年月().getYearValue(), parameter.get受取年月().getMonthValue(), 1));
-            result.setTaishoKaishiTimestamp(new YMDHMS(parameter.get処理日時()));
+            if (parameter.get受取年月() != null && !parameter.get受取年月().isEmpty()) {
+                result.setKijunYMD(new FlexibleDate(parameter.get受取年月().getYearValue(), parameter.get受取年月().getMonthValue(), NUM_1));
+            } else {
+                result.setKijunYMD(FlexibleDate.EMPTY);
+            }
+            result.setTaishoKaishiYMD(new FlexibleDate(parameter.get処理日時().getDate().toDateString()));
+            result.setTaishoShuryoYMD(FlexibleDate.EMPTY);
             tableWriter.insert(result);
         }
     }

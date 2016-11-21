@@ -132,6 +132,17 @@ public class PanelnlTotal {
     }
 
     /**
+     * テスト出力制御
+     *
+     * @param div 償還払い支給（不支給）決定通知書一括作成DIV
+     * @return ResponseData
+     */
+    public ResponseData<PanelnlTotalDiv> onclick_chkTesutoShuturyoku(PanelnlTotalDiv div) {
+        createHandler(div).テスト出力制御();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * バッチを起動します。
      *
      * @param div 償還払い支給（不支給）決定通知書一括作成DIV

@@ -300,6 +300,18 @@ public class ShokanMeisaiJushochiTokurei
     }
 
     /**
+     * unchanged ShokanMeisaiJushochiTokurei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public ShokanMeisaiJushochiTokurei unchanged() {
+        DbT3107ShokanMeisaiJushochiTokureiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Unchanged);
+        //TODO メッセージの検討
+        return new ShokanMeisaiJushochiTokurei(addedEntity, id);
+    }
+
+    /**
      * {@link ShokanMeisaiJushochiTokurei}のシリアライズ形式を提供します。
      *
      * @return {@link ShokanMeisaiJushochiTokurei}のシリアライズ形式

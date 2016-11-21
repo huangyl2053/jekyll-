@@ -68,6 +68,7 @@ public class ShokanbaraiSashitomeTaishoshaIchiranEditor implements IShokanbaraiS
         source.shoKisaiHokenshaNo = entity.getShoKisaiHokenshaNo();
         source.ketteiTsuchiNo = entity.getKetteiTsuchiNo();
         source.shinseishaKubun = entity.getShinseishaKubun();
+        source.listUpper_6 = entity.getYubinBango();
         return source;
     }
 

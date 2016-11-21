@@ -1175,7 +1175,7 @@ public class TokuchoKariSanteiFukaManagerBatch {
         entity.setFuShunyuGaku14(Decimal.ZERO);
         UaFt200FindShikibetsuTaishoEntity 宛名 = 特徴仮算定計算後賦課情報_特徴停止.get宛名();
         set宛名(宛名, entity);
-        if (特徴仮算定計算後賦課情報_特徴停止.get賦課Newest().getHokenryoDankai2() != null) {
+        if (!RString.isNullOrEmpty(特徴仮算定計算後賦課情報_特徴停止.get賦課Newest().getHokenryoDankai2())) {
             entity.setDbV2002Fuka_hokenryoDankai(特徴仮算定計算後賦課情報_特徴停止.get賦課Newest().getHokenryoDankai2());
         } else {
             entity.setDbV2002Fuka_hokenryoDankai(特徴仮算定計算後賦課情報_特徴停止.get賦課Newest().getHokenryoDankai1());

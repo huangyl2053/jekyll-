@@ -219,13 +219,14 @@
     <!-- 資格の異動を「異動Temp」に追加する-->
     <select resultOrdered="true" id="select資格の異動" resultMap="resultMap_IdoTmpEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter" fetchSize="500">
         SELECT
-        DISTINCT A."hihokenshaNo"
+            DISTINCT A."hihokenshaNo"
         FROM
-        ( <include refid="maxHihokenshaNo_DbT1001HihokenshaDaicho" /> ) AS A
+            rgdb."DbT1001HihokenshaDaicho" AS A
         WHERE
-        A."hihokennshaKubunCode" = '1'
-        AND #{ 抽出開始日時 } <![CDATA[<=]]> A."lastUpdateTimestamp"
-        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{ 抽出終了日時 }
+            A."hihokennshaKubunCode" = '1'
+        AND A."logicalDeletedFlag" = FALSE
+        AND #{抽出開始日時} <![CDATA[<=]]> A."lastUpdateTimestamp"
+        AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
     </select>
     
     <!-- 生保の異動を「異動Temp」に追加する-->
@@ -1416,7 +1417,26 @@
         (
         SELECT A.*
         FROM
-        ( <include refid="maxHihokenshaNo_DbT1001HihokenshaDaicho" /> ) AS A
+           (SELECT 
+                Q.*
+             FROM 
+                rgdb."DbT1001HihokenshaDaicho" AS Q
+                INNER JOIN
+                (SELECT
+                    "hihokenshaNo",
+                    "ichigoShikakuShutokuYMD",
+                    MAX("shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
+                 FROM
+                    rgdb."DbT1001HihokenshaDaicho"
+                 GROUP BY
+                    "hihokenshaNo",
+                    "ichigoShikakuShutokuYMD"
+                )AS T
+                ON
+                    T."hihokenshaNo" = Q."hihokenshaNo"
+                AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
+                AND T."max_shikakuSoshitsuYMD" = Q."shikakuSoshitsuYMD"
+            ) AS A
         INNER JOIN
         ( <include refid="distinct_IdoTmp" /> ) AS B
         ON

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820027;
 
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.KinkyujiShisetuRyoyohiPanelDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -131,6 +132,15 @@ public enum KinkyujiShisetuRyoyohiPanelSpec implements IPredicate<KinkyujiShiset
                     || div.getTxtHoshasenChiryoTanisu().getValue() != null || div.getTxtShochiTanisu().getValue() != null
                     || div.getTxtMasuiTanisu().getValue() != null) && (div.getTxtKinkyuShisetsuRyoyohiTotalTanisu().getValue() == null
                     || div.getTxtKinkyuShisetsuRyoyohiTotalTanisu().getValue().equals(Decimal.ZERO)));
+        }
+    },
+    /**
+     * 証明書入力済チェック
+     */
+    証明書入力済チェック {
+        @Override
+        public boolean apply(KinkyujiShisetuRyoyohiPanelDiv div) {
+            return !div.getHdnShomeishoKanryoFlag().equals(ShomeishoNyuryokuKanryoKubunType.入力未完了.getCode());
         }
 
     };

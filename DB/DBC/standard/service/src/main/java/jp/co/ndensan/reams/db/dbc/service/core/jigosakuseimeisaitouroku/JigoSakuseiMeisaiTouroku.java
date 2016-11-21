@@ -155,8 +155,10 @@ public class JigoSakuseiMeisaiTouroku {
             合計計算情報.set保険対象利用者負担額(合計計算情報.get費用総額().subtract(合計計算情報.get保険給付額()));
         }
 
-        Decimal 全額利用者負担額 = (種類限度超過単位.add(区分限度超過単位)).multiply(nullToZero(単位数単価));
-        合計計算情報.set全額利用者負担額(小数点以下を切り(全額利用者負担額));
+        if (種類限度超過単位 != null && 区分限度超過単位 != null) {
+            Decimal 全額利用者負担額 = (種類限度超過単位.add(区分限度超過単位)).multiply(nullToZero(単位数単価));
+            合計計算情報.set全額利用者負担額(小数点以下を切り(全額利用者負担額));
+        }
 
         return 合計計算情報;
     }
@@ -246,7 +248,7 @@ public class JigoSakuseiMeisaiTouroku {
             stotal.setサービス種類(entity.getサービス種類略称());
             stotal.setサービス種類コード(entity.getサービス種類コード());
             stotal.set合計単位数(null);
-            stotal.set限度超過単位数(null);
+            stotal.set限度超過単位数(Decimal.ZERO);
             stotal.set限度額(entity.get支給限度単位数());
             sList1.add(stotal);
         }
@@ -295,7 +297,8 @@ public class JigoSakuseiMeisaiTouroku {
             result.set単位(entity.get単位() == null ? null : new RString(entity.get単位().toString()));
             result.set割引適用後率(entity.get割引適用後率() == null ? null : new RString(entity.get割引適用後率().getColumnValue().toString()));
             result.set割引適用後単位(entity.get割引適用後単位() == null ? null : new RString(entity.get割引適用後単位().toString()));
-            result.set回数(new RString(entity.get回数().toString()));
+            Decimal 回数 = entity.get回数();
+            result.set回数(回数 == null ? RString.EMPTY : new RString(回数.toString()));
             result.setサービス単位(entity.get給付計画単位数());
             result.set種類限度超過単位(entity.get種類限度超過単位());
             result.set種類限度内単位(entity.get種類限度内単位());

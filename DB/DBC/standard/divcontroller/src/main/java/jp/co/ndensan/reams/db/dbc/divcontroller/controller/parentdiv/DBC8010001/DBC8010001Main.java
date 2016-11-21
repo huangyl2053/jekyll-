@@ -120,6 +120,7 @@ public class DBC8010001Main {
         if (flag1 && flag3) {
             getValidationHandler(div).validateFor再処理対象データ存在(pairs);
         }
+        getValidationHandler(div).validateFor出力順(pairs);
 
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();

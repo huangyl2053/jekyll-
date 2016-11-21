@@ -38,7 +38,7 @@ class DankaiHanteiKingaku implements IHanteiHoho {
             return (0 <= gokeiKingaku.compareTo(getKagen()));
         } else {
             // 下限＜＝合計金額　AND 合計金額＜＝上限
-            return (0 <= gokeiKingaku.compareTo(getKagen()) && gokeiKingaku.compareTo(getJogen()) <= 0);
+            return (0 <= gokeiKingaku.compareTo(getKagen()) && (gokeiKingaku.compareTo(getJogen()) <= 0 || getJogen().compareTo(Decimal.ZERO) == 0));
         }
 
     }

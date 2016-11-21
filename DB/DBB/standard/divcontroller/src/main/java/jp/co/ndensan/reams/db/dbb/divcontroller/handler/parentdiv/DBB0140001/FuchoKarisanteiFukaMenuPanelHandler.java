@@ -247,12 +247,13 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
             帳票作成個別情報Panel.getTxtNotsuShutsuryokukiType2().setValue(別々に出力);
             List<KeyValueDataSource> 出力期のタイプ = get出力期のタイプ(期月リスト, 出力期のタイプ_別々に);
             帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().setDataSource(出力期のタイプ);
+            帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().setSelectedIndex(ゼロ_定値);
         } else if (定値_イチ.equals(出力方法.get設定値())) {
             帳票作成個別情報Panel.getTxtNotsuShutsuryokukiType2().setValue(全件出力);
             List<KeyValueDataSource> 出力期のタイプ = get出力期のタイプ(期月リスト, 出力期のタイプ_全件);
             帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().setDataSource(出力期のタイプ);
+            帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().setSelectedIndex(ゼロ_定値);
         }
-        帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().setSelectedIndex(ゼロ_定値);
         帳票作成個別情報Panel.getChkNotsuTaishosha2().setDataSource(get対象者());
         帳票作成個別情報Panel.getChkNotsuTaishosha2().setSelectedItems(get対象者());
         帳票作成個別情報Panel.getRadNotsuSeikatsuHogo2().setDataSource(get生活保護対象者とページ());

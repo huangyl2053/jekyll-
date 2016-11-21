@@ -19,9 +19,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.ShakaiFukushiHojinRiyoshaF
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,6 +44,7 @@ public final class ShafukuKeigenGakuPanelHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 確定する = new RString("Element1");
+    private static final RString 連番_1 = new RString("1");
 
     private ShafukuKeigenGakuPanelHandler(ShafukuKeigenGakuPanelDiv div) {
         this.div = div;
@@ -136,6 +135,7 @@ public final class ShafukuKeigenGakuPanelHandler {
     /**
      * 法人軽減額リストを取得します。
      *
+     * @param 当前の法人軽減額リスト ArrayList<ShokanShakaiFukushiHojinKeigengakuResult>
      * @param 被保険者番号 被保険者番号
      * @param サービス年月 サービス年月
      * @param 整理番号 整理番号
@@ -145,12 +145,16 @@ public final class ShafukuKeigenGakuPanelHandler {
      * @param 明細番号 明細番号
      * @return 法人軽減額リスト
      */
-    public List<ShokanShakaiFukushiHojinKeigengakuResult> get法人軽減額リスト(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
+    public List<ShokanShakaiFukushiHojinKeigengakuResult> get法人軽減額リスト(
+            ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> 当前の法人軽減額リスト, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, RDate 申請日, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
         List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト = new ArrayList<>();
         for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource()) {
-            ShokanShakaiFukushiHojinKeigengaku 法人軽減額 = new ShokanShakaiFukushiHojinKeigengaku(
-                    被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, row.getDefaultDataName7());
+            ShokanShakaiFukushiHojinKeigengaku 法人軽減額 = get法人軽減額(当前の法人軽減額リスト, row.getDefaultDataName7());
+            if (法人軽減額 == null) {
+                法人軽減額 = new ShokanShakaiFukushiHojinKeigengaku(被保険者番号, サービス年月, 整理番号, 事業者番号,
+                        様式番号, 明細番号, row.getDefaultDataName7());
+            }
             法人軽減額 = 法人軽減額.createBuilderForEdit()
                     .setサービス種類コード(new ServiceShuruiCode(row.getServiceShuruiCode()))
                     .set軽減率(new Decimal(row.getDefaultDataName2().toString()))
@@ -179,6 +183,16 @@ public final class ShafukuKeigenGakuPanelHandler {
             法人軽減額リスト.add(keigengakuResult);
         }
         return 法人軽減額リスト;
+    }
+
+    private ShokanShakaiFukushiHojinKeigengaku get法人軽減額(List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト, RString 連番) {
+        for (ShokanShakaiFukushiHojinKeigengakuResult hojinKeigengakuResult : 法人軽減額リスト) {
+            ShokanShakaiFukushiHojinKeigengaku 法人軽減額 = hojinKeigengakuResult.getShokanShakai();
+            if (法人軽減額.get連番().equals(連番)) {
+                return 法人軽減額;
+            }
+        }
+        return null;
     }
 
     /**
@@ -520,13 +534,11 @@ public final class ShafukuKeigenGakuPanelHandler {
     public void initializeByConfirm(RString state, List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト,
             List<ShafukukeigenServiceResult> サービス種類リスト) {
         if (修正.equals(state)) {
-            checkサービス種類重複For修正();
             boolean 変更チェックFlag = 変更チェック(法人軽減額リスト);
             dgdShafukukeigenngaku修正(変更チェックFlag, サービス種類リスト);
         } else if (削除.equals(state)) {
             dgdShafukukeigenngaku削除();
         } else if (登録.equals(state)) {
-            checkサービス種類重複For登録();
             dgdShafukukeigenngaku登録(サービス種類リスト);
         }
         initializeByClean();
@@ -594,8 +606,13 @@ public final class ShafukuKeigenGakuPanelHandler {
                 .getTxtKeigengoRiyoshaFutangaku().getValue());
         newRow.setDefaultDataName6(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
                 .getTxtBikou().getValue());
-        newRow.setDefaultDataName7(new RString(Integer.parseInt(div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku()
-                .getDataSource().get(0).getDefaultDataName7().toString()) + 1));
+        if (!div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku()
+                .getDataSource().isEmpty()) {
+            newRow.setDefaultDataName7(new RString(Integer.parseInt(div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku()
+                    .getDataSource().get(0).getDefaultDataName7().toString()) + 1));
+        } else {
+            newRow.setDefaultDataName7(連番_1);
+        }
         newRow.setServiceShuruiCode(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
                 .getDdlServiceShurui().getSelectedKey());
         div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource().add(0, newRow);
@@ -612,25 +629,35 @@ public final class ShafukuKeigenGakuPanelHandler {
         return RString.EMPTY;
     }
 
-    private void checkサービス種類重複For修正() {
+    /**
+     * checkサービス種類重複For修正
+     *
+     * @return boolean
+     */
+    public boolean checkサービス種類重複For修正() {
         RString rowNo = new RString(div.getPanelShafukukenngengaku().getRowId().getValue().intValue());
         RString サービス種類コード = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedKey();
         for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource()) {
             if (!row.getDefaultDataName7().equals(rowNo) && サービス種類コード.equals(row.getServiceShuruiCode())) {
-                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().
-                        replace(div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedValue().toString()));
+                return false;
             }
         }
+        return true;
     }
 
-    private void checkサービス種類重複For登録() {
+    /**
+     * checkサービス種類重複For登録
+     *
+     * @return boolean
+     */
+    public boolean checkサービス種類重複For登録() {
         RString サービス種類コード = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedKey();
         for (dgdShafukukeigenngaku_Row row : div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource()) {
             if (サービス種類コード.equals(row.getServiceShuruiCode())) {
-                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().
-                        replace(div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedValue().toString()));
+                return false;
             }
         }
+        return true;
     }
 
     private dgdShafukukeigenngaku_Row getSelectedRow() {

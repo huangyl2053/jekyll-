@@ -168,11 +168,10 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
     }
 
     private void set老齢の情報(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {
-        if (entity != null && (老齢の情報.isEmpty() || isContain(entity))) {
-            if (entity.getShikibetsuCode() != null && entity.getJukyuKaishiYMD() != null) {
-                entity.initializeMd5();
-                老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
-            }
+        if (entity != null && (老齢の情報.isEmpty() || isContain(entity))
+                && entity.getShikibetsuCode() != null && entity.getJukyuKaishiYMD() != null) {
+            entity.initializeMd5();
+            老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
         }
     }
 

@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyoBuilder;
-import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushaatenaayouhou.JukyushaAtenaJyouhouParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaatenaayouhou.JukyushaAtenaJyouhouEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3001JukyushaIdoRenrakuhyoDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushaatenajyouhou.IJukyushaAtenaJyouhouMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_kyotakuServiceSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -307,11 +307,11 @@ public class JukyushaTeiseiRenrakuhyoToroku {
             return null;
         }
         DbT7063KaigoJigyoshaShiteiServiceEntity 介護事業者指定サービスentity = null;
-        if (JukyushaIF_KeikakuSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(計画作成区分)) {
+        if (JukyushaIF_kyotakuServiceSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(計画作成区分)) {
             介護事業者指定サービスentity = dbt7063Dac.select事業者名称(支援事業者番号.value(), サービス種類コード_43, 基準日);
-        } else if (JukyushaIF_KeikakuSakuseiKubunCode.介護予防支援事業所_地域包括支援センター作成.getコード().equals(計画作成区分)) {
+        } else if (JukyushaIF_kyotakuServiceSakuseiKubunCode.介護予防支援事業所作成.getコード().equals(計画作成区分)) {
             介護事業者指定サービスentity = dbt7063Dac.select事業者名称(支援事業者番号.value(), サービス種類コード_46, 基準日);
-        } else if (JukyushaIF_KeikakuSakuseiKubunCode.自己作成.getコード().equals(計画作成区分)) {
+        } else if (JukyushaIF_kyotakuServiceSakuseiKubunCode.自己作成.getコード().equals(計画作成区分)) {
             return new AtenaMeisho(自己作成);
         }
         if (介護事業者指定サービスentity == null) {

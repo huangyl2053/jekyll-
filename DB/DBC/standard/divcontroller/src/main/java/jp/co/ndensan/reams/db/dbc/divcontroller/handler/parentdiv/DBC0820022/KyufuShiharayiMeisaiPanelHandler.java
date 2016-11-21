@@ -12,9 +12,9 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.dgdKyufuhiMeisai_Row;
-import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -45,6 +45,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("2");
+    private static final RString コンマ = new RString(",");
     private static final int NUM = 6;
 
     /**
@@ -129,10 +130,10 @@ public class KyufuShiharayiMeisaiPanelHandler {
             div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス項目コード(serviceCodeKoumoku);
 
         }
-        div.getPanelThree().getPanelFour().getTxtTanyi().setValue(new Decimal(row.getDefaultDataName2().toString()));
+        div.getPanelThree().getPanelFour().getTxtTanyi().setValue(new Decimal(row.getDefaultDataName2().replace(コンマ, RString.EMPTY).toString()));
         div.getPanelThree().getPanelFour().getTxtKaisu().setValue(new Decimal(row.getDefaultDataName3().toString()));
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().setValue(new Decimal(
-                row.getDefaultDataName4().toString()));
+                row.getDefaultDataName4().replace(コンマ, RString.EMPTY).toString()));
         div.getPanelThree().getPanelFour().getTxtTeikiyo().setValue(row.getDefaultDataName5());
         div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス名称(row.getDefaultDataName7());
         div.getPanelThree().getRowId().setValue(new Decimal(row.getId()));
@@ -203,7 +204,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
     private boolean checkState(dgdKyufuhiMeisai_Row ddgRow, List<ShokanMeisaiResult> baseList) {
         ShokanMeisai entity = null;
         for (ShokanMeisaiResult result : baseList) {
-            if (result.getEntity().get連番().equals(ddgRow.getDefaultDataName7())) {
+            if (result.getEntity().get連番().equals(ddgRow.getDefaultDataName6())) {
                 entity = result.getEntity();
             }
         }
@@ -403,13 +404,16 @@ public class KyufuShiharayiMeisaiPanelHandler {
         entity = entity.createBuilderForEdit().setサービス項目コード(
                 new ServiceKomokuCode(serviceCodeKoumoku)).build();
         if (row.getDefaultDataName2() != null) {
-            entity = entity.createBuilderForEdit().set単位数(Integer.parseInt(row.getDefaultDataName2().toString())).build();
+            entity = entity.createBuilderForEdit().set単位数(Integer.parseInt(row.getDefaultDataName2().
+                    replace(コンマ, RString.EMPTY).toString())).build();
         }
         if (row.getDefaultDataName3() != null) {
-            entity = entity.createBuilderForEdit().set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString())).build();
+            entity = entity.createBuilderForEdit().set日数_回数(Integer.parseInt(row.getDefaultDataName3().
+                    replace(コンマ, RString.EMPTY).toString())).build();
         }
         if (row.getDefaultDataName4() != null) {
-            entity = entity.createBuilderForEdit().setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString())).build();
+            entity = entity.createBuilderForEdit().setサービス単位数(Integer.parseInt(row.getDefaultDataName4().
+                    replace(コンマ, RString.EMPTY).toString())).build();
         }
         if (row.getDefaultDataName5() != null) {
             entity = entity.createBuilderForEdit().set摘要(row.getDefaultDataName5()).build();
@@ -656,6 +660,29 @@ public class KyufuShiharayiMeisaiPanelHandler {
         div.getPanelThree().getPanelFour().getBtnCancel().setDisabled(flag);
         div.getPanelThree().getPanelFour().getBtnConfirm().setDisabled(flag);
         div.getPanelThree().getPanelFour().setDisabled(flag);
+    }
+
+    /**
+     * 該当データを取得します。
+     *
+     * @param allList ShokanMeisaiResult
+     * @param parameter ShoukanharaihishinseimeisaikensakuParameter
+     * @return List<ShokanMeisaiResult>
+     */
+    public List<ShokanMeisaiResult> getUpdateList(
+            List<ShokanMeisaiResult> allList, ShoukanharaihishinseimeisaikensakuParameter parameter) {
+        List<ShokanMeisaiResult> updateList = new ArrayList<>();
+        for (ShokanMeisaiResult ryoyo : allList) {
+            if (ryoyo.getEntity().get被保険者番号().equals(parameter.get被保険者番号())
+                    && ryoyo.getEntity().getサービス提供年月().equals(parameter.getサービス年月())
+                    && ryoyo.getEntity().get整理番号().equals(parameter.get整理番号())
+                    && ryoyo.getEntity().get事業者番号().equals(parameter.get事業者番号())
+                    && ryoyo.getEntity().get様式番号().equals(parameter.get様式番号())
+                    && ryoyo.getEntity().get明細番号().equals(parameter.get明細番号())) {
+                updateList.add(ryoyo);
+            }
+        }
+        return updateList;
     }
 
 }

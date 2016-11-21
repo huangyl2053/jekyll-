@@ -288,7 +288,7 @@ public class JikoFutangakuHoseiHandler {
             kanriJohoDiv1.getDdlShotokuKBN().setSelectedKey(result.get所得区分());
         }
         kanriJohoDiv1.getDdl70SaiIjouShotokuKBN().setDataSource(set70歳以上所得区分());
-        if (result.get70歳以上の者に係る所得区分() == null) {
+        if (result.get70歳以上の者に係る所得区分() == null || result.get70歳以上の者に係る所得区分().isEmpty()) {
             kanriJohoDiv1.getDdl70SaiIjouShotokuKBN().setSelectedIndex(0);
         } else {
             kanriJohoDiv1.getDdl70SaiIjouShotokuKBN().setSelectedKey(
@@ -370,7 +370,11 @@ public class JikoFutangakuHoseiHandler {
         List<KeyValueDataSource> h26年度以降 = new ArrayList();
         List<KeyValueDataSource> h27年1月以降 = new ArrayList();
         for (KaigoGassan_ShotokuKbn type : KaigoGassan_ShotokuKbn.values()) {
-            h27年1月以降.add(new KeyValueDataSource(type.getCode(), type.get名称()));
+            if (type.getCode() == null || type.getCode().isEmpty()) {
+                h27年1月以降.add(new KeyValueDataSource(RString.HALF_SPACE, type.get名称()));
+            } else {
+                h27年1月以降.add(new KeyValueDataSource(type.getCode(), type.get名称()));
+            }
             if (KaigoGassan_ShotokuKbn.区分ア.get名称().equals(type.get名称())
                     || KaigoGassan_ShotokuKbn.区分イ.get名称().equals(type.get名称())
                     || KaigoGassan_ShotokuKbn.区分ウ.get名称().equals(type.get名称())

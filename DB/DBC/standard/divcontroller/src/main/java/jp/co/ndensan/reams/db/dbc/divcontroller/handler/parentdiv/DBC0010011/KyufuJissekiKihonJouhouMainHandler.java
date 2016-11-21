@@ -80,6 +80,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
         if (実績基本集計データ.get識別番号管理() != null) {
             set各ボタン活性非活性設定(実績基本集計データ.get識別番号管理());
         }
+        div.getCcdKyufuJissekiHeader().set被保情報2(実績基本集計データ);
         KyufujissekiKihon 給付実績基本 = 実績基本集計データ.get給付実績基本データ();
         if (給付実績基本 != null) {
             set申請内容エリア(給付実績基本);
@@ -107,38 +108,16 @@ public class KyufuJissekiKihonJouhouMainHandler {
     /**
      * 「前事業者」ボタンを押下する場合、画面を表示する。
      *
-     * @param 給付実績ヘッダ情報2 給付実績ヘッダ情報2
-     * @param サービス提供年月 サービス提供年月
-     * @param 事業所番号 事業所番号
-     * @param 後整理番号 後整理番号
-     * @param 識別番号 識別番号
-     * @param 給付実績区分コード 給付実績区分コード
-     * @param 事業者名称 事業者名称
-     * @param 識別番号名称 識別番号名称
-     * @param 給付実績基本 給付実績基本
-     * @param 事業所名称 事業所名称
-     * @param 給付分類区分 給付分類区分
-     * @param 給付実績基本情報 給付実績基本情報
-     * @param 給付実績ヘッダ情報２ 給付実績ヘッダ情報２
+     * @param 該当給付実績基本集計データ 該当給付実績基本集計データ
      */
-    public void onClick_MaeJigyosha(KyufuJissekiHedajyoho2 給付実績ヘッダ情報2, FlexibleYearMonth サービス提供年月,
-            JigyoshaNo 事業所番号, RString 後整理番号, RString 識別番号, RString 給付実績区分コード,
-            RString 事業者名称, RString 識別番号名称, KyufujissekiKihon 給付実績基本,
-            RString 事業所名称, RString 給付分類区分,
-            List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報２) {
-        div.getBtnAtoJigyosha().setDisabled(false);
-        div.getCcdKyufuJissekiHeader().set事業者名称(事業者名称);
-        div.getCcdKyufuJissekiHeader().set実績区分(給付実績区分コード);
-        div.getCcdKyufuJissekiHeader().set整理番号(後整理番号);
-        div.getCcdKyufuJissekiHeader().set識別番号名称(識別番号名称);
-        div.getCcdKyufuJissekiHeader().set事業者番号(事業所番号.value());
-        div.getCcdKyufuJissekiHeader().set様式番号(識別番号);
+    public void setデータ(KyufuJissekiKihonShukeiRelate 該当給付実績基本集計データ) {
+        KyufujissekiKihon 給付実績基本 = 該当給付実績基本集計データ.get給付実績基本データ();
+        div.getCcdKyufuJissekiHeader().set被保情報2(該当給付実績基本集計データ);
         if (給付実績基本 != null) {
             set申請内容エリア(給付実績基本);
             set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
-        set事業者ボタン(給付実績ヘッダ情報２, 後整理番号, サービス提供年月);
     }
 
     /**
@@ -500,7 +479,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
     }
 
     private RString get計画作成区分(RString 居宅サービス計画作成区分コード) {
-        if (!RString.isNullOrEmpty(居宅サービス計画作成区分コード)) {
+        if (!RString.isNullOrEmpty(居宅サービス計画作成区分コード) && !設定不可.equals(居宅サービス計画作成区分コード)) {
             return JukyushaIF_KeikakuSakuseiKubunCode.toValue(居宅サービス計画作成区分コード).get名称();
         }
         return RString.EMPTY;

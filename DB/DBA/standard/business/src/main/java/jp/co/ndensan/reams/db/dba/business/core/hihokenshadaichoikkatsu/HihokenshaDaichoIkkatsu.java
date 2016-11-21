@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshadaichohakkoichiranhyo.HihokenshaDaichoHakkoIchiranhyoBodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshadaichohakkoichiranhyo.HihokenshaDaichoHakkoIchiranhyoHeaderItem;
-import jp.co.ndensan.reams.db.dba.definition.processprm.dba020010.IkkatsuSusakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaicho.HihokenshaDaichoIchiranHyoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.HihokenshaEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShisetsuNyutaishoEntity;
@@ -37,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 保険者台帳発行のビジネスです。
  *
- * @reamsid_L DBB-9060-010 duanzhanli
+ * @reamsid_L DBA-0510-040 duanzhanli
  */
 public class HihokenshaDaichoIkkatsu {
 
@@ -59,7 +58,6 @@ public class HihokenshaDaichoIkkatsu {
     private final List<ShisetsuNyutaishoEntity> 生活保護受給者EntityList;
     private final List<DbT7006RoreiFukushiNenkinJukyushaEntity> 老齢福祉年金受給者EntityList;
     private final List<DbT7037ShoKofuKaishuEntity> 証交付回収EntityList;
-    private final IkkatsuSusakuseiProcessParameter processPrm;
     private final ShutsuryokujunRelateEntity 出力順Entity;
 
     /**
@@ -69,20 +67,17 @@ public class HihokenshaDaichoIkkatsu {
      * @param 生活保護受給者EntityList 生活保護受給者EntityList
      * @param 老齢福祉年金受給者EntityList 老齢福祉年金受給者EntityList
      * @param 証交付回収EntityList 証交付回収EntityList
-     * @param processPrm processPrm
      * @param 出力順Entity 出力順Entity
      */
     public HihokenshaDaichoIkkatsu(List<DbT1001HihokenshaDaichoEntity> 被保険者台帳管理EntityList,
             List<ShisetsuNyutaishoEntity> 生活保護受給者EntityList,
             List<DbT7006RoreiFukushiNenkinJukyushaEntity> 老齢福祉年金受給者EntityList,
             List<DbT7037ShoKofuKaishuEntity> 証交付回収EntityList,
-            IkkatsuSusakuseiProcessParameter processPrm,
             ShutsuryokujunRelateEntity 出力順Entity) {
         this.被保険者台帳管理EntityList = 被保険者台帳管理EntityList;
         this.生活保護受給者EntityList = 生活保護受給者EntityList;
         this.老齢福祉年金受給者EntityList = 老齢福祉年金受給者EntityList;
         this.証交付回収EntityList = 証交付回収EntityList;
-        this.processPrm = processPrm;
         this.出力順Entity = 出力順Entity;
     }
 

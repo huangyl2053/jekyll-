@@ -2331,6 +2331,26 @@
      "eventName": "処理完了",
      "destroy": true,
      "condition": ""
+    },
+    {
+     "id": "168",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0820013",
+     "layoutTitle": "償還払い費支給申請",
+     "eventName": "処理完了",
+     "destroy": true,
+     "condition": ""
+    },
+    {
+     "id": "169",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0820015",
+     "layoutTitle": "償還払い費支給申請決定",
+     "eventName": "処理完了",
+     "destroy": true,
+     "condition": ""
     }
    ]
   }

@@ -60,17 +60,14 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     @Override
     protected void process(IdouTempEntity entity) {
-//        if (!entity.get居宅計画().get被保険者番号().equals(new HihokenshaNo("2015123461"))) {
-//            return;
-//        }
         RString key = 居宅計画Key(entity.get居宅計画());
-        if (居宅計画List.contains(key)) {
-            return;
-        }
-        居宅計画List.add(key);
         RString 全項目 = 居宅計画全項目(entity.get居宅計画());
         Decimal 連番 = 連番Map.get(entity.get居宅計画().get被保険者番号());
         if (連番 == null) {
+            if (居宅計画List.contains(key)) {
+                return;
+            }
+            居宅計画List.add(key);
             連番Map.put(entity.get居宅計画().get被保険者番号(), Decimal.ONE);
             IdouTblEntity update = entity.get異動一時();
             update.set居宅計画(全項目);
@@ -82,6 +79,10 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
             if (連番temp.intValue() != entity.get異動一時().get連番()) {
                 return;
             }
+            if (居宅計画List.contains(key)) {
+                return;
+            }
+            居宅計画List.add(key);
             連番Map.put(entity.get居宅計画().get被保険者番号(), 連番temp);
             IdouTblEntity update = entity.get異動一時();
             update.set居宅計画(全項目);
@@ -89,6 +90,10 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番temp.intValue()) {
+            if (居宅計画List.contains(key)) {
+                return;
+            }
+            居宅計画List.add(key);
             連番Map.put(entity.get居宅計画().get被保険者番号(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
             insert.set被保険者番号(entity.get居宅計画().get被保険者番号());

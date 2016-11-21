@@ -17,6 +17,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDiv> {
     
     /**
+     * 利用年月必須入力のチェックです。
+     */
+    利用年月必須入力のチェックです {
+      @Override
+      public boolean apply(ServiceRiyohyoInfoDiv div) {
+          return div.getTxtRiyoYM().getValue() != null;
+      }
+    },
+    
+    /**
      * 事業者コード必須入力のチェックです。
      */
     事業者コード必須入力のチェックです {
@@ -32,8 +42,12 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
     サービスコード必須入力チェック {
         @Override
         public boolean apply(ServiceRiyohyoInfoDiv div) {
-            return !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード1())
+            boolean flag = true;
+            if (!div.getCcdServiceCodeInput().isDisplayNone()) {
+                return !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード1())
                     && !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード2());
+            }
+            return flag;
         }
     },
     /**
@@ -114,8 +128,12 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
     給付率入力値が不正チェック {
         @Override
         public boolean apply(ServiceRiyohyoInfoDiv div) {
+            boolean flag = true;
             Decimal 給付率 = div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().getValue();
-            return Decimal.ONE.compareTo(給付率) < 0;
+            if (給付率 == null || 給付率.compareTo(Decimal.ONE) < 0) {
+                flag = false;
+            }
+            return  flag;
         }
     },
     /**

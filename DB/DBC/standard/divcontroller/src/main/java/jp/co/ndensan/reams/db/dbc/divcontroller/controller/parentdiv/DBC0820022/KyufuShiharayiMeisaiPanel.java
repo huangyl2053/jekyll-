@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMe
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelDiv;
@@ -34,7 +35,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -57,6 +57,9 @@ public class KyufuShiharayiMeisaiPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 追加する = new RString("追加する");
+    private static final RString 修正する = new RString("修正する");
+    private static final RString 削除する = new RString("削除する");
     private static final ServiceShuruiCode サービス種類コード_50 = new ServiceShuruiCode("50");
     private static final RString 入力なし = new RString("0");
     private static final RString 入力あり = new RString("1");
@@ -103,10 +106,14 @@ public class KyufuShiharayiMeisaiPanel {
         if (償還払ViewStateDB.get償還払請求明細データList() != null) {
             entityList = 償還払ViewStateDB.get償還払請求明細データList();
         }
-        if (entityList.isEmpty()) {
-            entityList = ShokanbaraiJyokyoShokai.createInstance().
-                    getShokanbarayiSeikyuMeisayiShiteiIgaiList(
-                            被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null, サービス種類コード_50);
+        entityList = getHandler(div).getUpdateList(entityList, meisaiPar);
+        List<ShokanMeisaiResult> list = ShokanbaraiJyokyoShokai.createInstance().
+                getShokanbarayiSeikyuMeisayiShiteiIgaiList(
+                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null, サービス種類コード_50);
+        if (list != null && !list.isEmpty()) {
+            for (ShokanMeisaiResult result : list) {
+                entityList.add(result);
+            }
         }
         div.getPanelThree().getPanelFour().setVisible(false);
         getHandler(div).initialize(entityList);
@@ -141,6 +148,7 @@ public class KyufuShiharayiMeisaiPanel {
         getHandler(div).制御(true);
         getHandler(div).clear給付費明細登録();
         getHandler(div).setDisabled給付費明細登録(false);
+        div.getPanelThree().getPanelFour().getBtnConfirm().setText(追加する);
         return createResponse(div);
     }
 
@@ -156,6 +164,7 @@ public class KyufuShiharayiMeisaiPanel {
         getHandler(div).set給付費明細登録();
         getHandler(div).制御(true);
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
+        div.getPanelThree().getPanelFour().getBtnConfirm().setText(修正する);
         return createResponse(div);
     }
 
@@ -171,6 +180,7 @@ public class KyufuShiharayiMeisaiPanel {
         getHandler(div).set給付費明細登録();
         getHandler(div).制御(true);
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        div.getPanelThree().getPanelFour().getBtnConfirm().setText(削除する);
         return createResponse(div);
     }
 
@@ -222,11 +232,11 @@ public class KyufuShiharayiMeisaiPanel {
         boolean flag = getHandler(div).is内容変更状態();
         if (flag) {
             if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                QuestionMessage message = new QuestionMessage(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode(),
+                        DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+            if (new RString(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.一覧に戻る).respond();

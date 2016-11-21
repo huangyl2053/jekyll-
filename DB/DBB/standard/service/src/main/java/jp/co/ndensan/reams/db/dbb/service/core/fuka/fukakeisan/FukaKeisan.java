@@ -1195,6 +1195,18 @@ public class FukaKeisan extends FukaKeisanFath {
         builder.set職権区分(ShokkenKubun.非該当.getコード());
     }
 
+    private RString get段階Index(HokenryoDankaiList hokenryoDankaiList, RString 保険料段階) {
+
+        if (RString.isNullOrEmpty(保険料段階)) {
+            return RString.EMPTY;
+        }
+        HokenryoDankai dankai = hokenryoDankaiList.getBy段階Index(保険料段階);
+        if (dankai == null) {
+            return RString.EMPTY;
+        }
+        return dankai.get段階区分();
+    }
+
     private void set保険料情報(FukaJohoBuilder builder, FlexibleYear 賦課年度, TsukibetsuHokenryoDankai 月別保険料段階) {
         if (月別保険料段階 == null) {
             builder.set保険料算定段階1(null).set算定年額保険料1(null).set月割開始年月1(null).set月割終了年月1(null)
@@ -1205,18 +1217,18 @@ public class FukaKeisan extends FukaKeisanFath {
         List<RString> dankaiList = new ArrayList<>();
         HokenryoDankaiList hokenryoDankaiList = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(賦課年度);
 
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階04月()).get段階区分());
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階05月()).get段階区分());
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階06月()).get段階区分());
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階07月()).get段階区分());
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階08月()).get段階区分());
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階09月()).get段階区分());
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階10月()).get段階区分());
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階11月()).get段階区分());
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階12月()).get段階区分());
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階01月()).get段階区分());
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階02月()).get段階区分());
-        dankaiList.add(hokenryoDankaiList.getBy段階Index(月別保険料段階.get保険料段階03月()).get段階区分());
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階04月()));
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階05月()));
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階06月()));
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階07月()));
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階08月()));
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階09月()));
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階10月()));
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階11月()));
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階12月()));
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階01月()));
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階02月()));
+        dankaiList.add(get段階Index(hokenryoDankaiList, 月別保険料段階.get保険料段階03月()));
 
         RString 保険料算定段階1 = RString.EMPTY;
         RString 保険料算定段階2 = RString.EMPTY;

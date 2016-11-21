@@ -75,6 +75,9 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             if (EntityDataState.Modified.equals(shokan.getEntity().toEntity().getState())) {
                 row.setRowState(RowState.Modified);
             }
+            if (EntityDataState.Unchanged.equals(shokan.getEntity().toEntity().getState())) {
+                row.setRowState(RowState.Unchanged);
+            }
             RStringBuilder builder = new RStringBuilder();
             if (shokan.getEntity().getサービス種類コード() != null) {
                 builder.append(shokan.getEntity().getサービス種類コード().value());
@@ -211,7 +214,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                 div.getPnlBtnDetail().getPnlKyufuhiMeisai().getDgJushochiTokutei().getDataSource().remove(
                         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getRowId().getValue().intValue());
                 clear給付費明細登録();
-                div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().setVisible(true);
+                div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().setVisible(false);
             } else {
                 row.setRowState(RowState.Deleted);
                 setDgJushochiTokutei(row, state);
@@ -405,6 +408,10 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                         new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
                 entityAdded = buildshokanMeisai(entityAdded, row);
                 entityList.add(getResult(row, entityAdded.added()));
+            } else if (RowState.Unchanged.equals(row.getRowState())) {
+                ShokanMeisaiJushochiTokurei entityUnchanged = mapList.get(row.getDefaultDataName7());
+                entityUnchanged = buildshokanMeisai(entityUnchanged, row);
+                entityList.add(getResult(row, entityUnchanged.unchanged()));
             }
         }
         return entityList;

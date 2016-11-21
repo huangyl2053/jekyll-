@@ -165,6 +165,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         source.idoYMD = 所得照会票発行一覧.getIdoYMD() == null ? RString.EMPTY
                 : new RString(所得照会票発行一覧.getIdoYMD().toString());
         source.zenjushoCode = 所得照会票発行一覧.getZenjushoCode();
+        source.kouhoshakubun = 所得照会票発行一覧.getKouhoshakubun();
         return source;
     }
 
@@ -185,8 +186,9 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         source.listLower_3 = 所得照会票発行一覧.getGenjusho();
         set性別コード(source);
         RString 候補者区分 = 所得照会票発行一覧.getKouhoshakubun();
-        if (候補者区分 != null && 候補者区分_転入者.equals(候補者区分)) {
-            source.listLower_5 = 所得照会票発行一覧.getTorokuTodokedeYMD();
+        if (候補者区分 != null && 候補者区分_転入者.equals(候補者区分) && 所得照会票発行一覧.getTorokuTodokedeYMD() != null
+                && !所得照会票発行一覧.getTorokuTodokedeYMD().isEmpty()) {
+            source.listLower_5 = new FlexibleDate(所得照会票発行一覧.getTorokuTodokedeYMD()).wareki().toDateString();;
         } else if (候補者区分 != null && 候補者区分_住特者.equals(候補者区分)) {
             source.listLower_5 = RString.EMPTY;
         }
@@ -282,11 +284,11 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private boolean is広域() {
         RString 市町村コード = RString.EMPTY;
         RString 構成市町村情報_市町村コード = RString.EMPTY;
-        if (所得照会票発行一覧.getZenkokuJushoCode() != null && !所得照会票発行一覧.getZenkokuJushoCode().isEmpty()) {
-            if (NUM_6 <= 所得照会票発行一覧.getZenkokuJushoCode().toString().length()) {
-                市町村コード = new RString(所得照会票発行一覧.getZenkokuJushoCode().toString().substring(NUM_0, NUM_5));
+        if (所得照会票発行一覧.getSoufusenzenkokuJushoCode() != null && !所得照会票発行一覧.getSoufusenzenkokuJushoCode().isEmpty()) {
+            if (NUM_6 <= 所得照会票発行一覧.getSoufusenzenkokuJushoCode().length()) {
+                市町村コード = 所得照会票発行一覧.getSoufusenzenkokuJushoCode().substring(NUM_0, NUM_5);
             } else {
-                市町村コード = new RString(所得照会票発行一覧.getZenkokuJushoCode().toString());
+                市町村コード = 所得照会票発行一覧.getSoufusenzenkokuJushoCode();
             }
         }
         List<RString> 市町村コードリスト = new ArrayList<>();
@@ -311,7 +313,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private boolean is世帯員予(RString 候補者区分,
             RString 本人区分, RString 被保険者区分コード) {
         return 候補者区分_転入者.equals(候補者区分) && 世帯員.equals(本人区分)
-                && 被保険者区分コード_EMPTY.equals(被保険者区分コード);
+                && (被保険者区分コード == null || 被保険者区分コード_EMPTY.equals(被保険者区分コード));
     }
 
     private boolean is世帯員(RString 候補者区分,
@@ -329,7 +331,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private boolean is１号予(RString 候補者区分,
             RString 本人区分, RString 被保険者区分コード) {
         return 候補者区分_転入者.equals(候補者区分) && 本人.equals(本人区分)
-                && 被保険者区分コード_EMPTY.equals(被保険者区分コード);
+                && (被保険者区分コード == null || 被保険者区分コード_EMPTY.equals(被保険者区分コード));
     }
 
     private boolean is１号(RString 候補者区分,

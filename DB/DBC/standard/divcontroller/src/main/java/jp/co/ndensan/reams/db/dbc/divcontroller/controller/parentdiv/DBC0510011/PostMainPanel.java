@@ -84,7 +84,7 @@ public class PostMainPanel {
      * @return ResponseData PostMainPanelDiv
      */
     public ResponseData<PostMainPanelDiv> onClick_btnTorikomi(PostMainPanelDiv div) {
-        div.getFileUpload().setDisabled(false);
+        div.getFileUpload().setVisible(true);
         メニューID = ResponseHolder.getMenuID();
         if (メニューID.equals(DBCMN82001)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, true);
@@ -110,7 +110,7 @@ public class PostMainPanel {
      * @return ResponseData PostMainPanelDiv
      */
     public ResponseData<PostMainPanelDiv> onClick_btnCancel(PostMainPanelDiv div) {
-        div.getFileUpload().setDisabled(true);
+        div.getFileUpload().setVisible(false);
         メニューID = ResponseHolder.getMenuID();
         if (メニューID.equals(DBCMN82001)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, false);
@@ -147,7 +147,7 @@ public class PostMainPanel {
             RDateTime ファイル日時 = aa.getSharedFileId();
             getHandler(div).setTime(ファイル日時);
         }
-        div.getFileUpload().setDisabled(true);
+        div.getFileUpload().setVisible(false);
         メニューID = ResponseHolder.getMenuID();
         if (メニューID.equals(DBCMN82001)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, false);

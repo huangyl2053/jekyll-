@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 事務局審査会資料組み合わせ一覧A4版のReportクラスです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-190 lishengli
  */
 public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4ReportSource> {
 
@@ -93,15 +93,13 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
                 }
             }
         }
-        if (ReportIdDBE.DBE517904.getReportId().value().equals(reportId)) {
-            if (shinsakaiWariateJoho != null) {
-                IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho, reportId);
-                IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
-                reportSourceWriter.writeLine(builder);
-                IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho, reportId);
-                IJimuShinsakaishiryoA4Builder builder1 = new JimuShinsakaishiryoA4Builder(editor1);
-                reportSourceWriter.writeLine(builder1);
-            }
+        if (ReportIdDBE.DBE517904.getReportId().value().equals(reportId) && shinsakaiWariateJoho != null) {
+            IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho, reportId);
+            IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
+            reportSourceWriter.writeLine(builder);
+            IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho, reportId);
+            IJimuShinsakaishiryoA4Builder builder1 = new JimuShinsakaishiryoA4Builder(editor1);
+            reportSourceWriter.writeLine(builder1);
         }
         if (tokkiTextBusiness != null) {
             if (テキスト全面イメージ.equals(tokkiTextBusiness.get特記パターン())) {
@@ -112,15 +110,13 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
                 }
             }
         }
-        if (ReportIdDBE.DBE517901.getReportId().value().equals(reportId)) {
-            if (shinsakaiWariateJoho != null) {
-                IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho, reportId);
-                IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
-                reportSourceWriter.writeLine(builder);
-                IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho, reportId);
-                IJimuShinsakaishiryoA4Builder builder1 = new JimuShinsakaishiryoA4Builder(editor1);
-                reportSourceWriter.writeLine(builder1);
-            }
+        if (ReportIdDBE.DBE517901.getReportId().value().equals(reportId) && shinsakaiWariateJoho != null) {
+            IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho, reportId);
+            IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
+            reportSourceWriter.writeLine(builder);
+            IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho, reportId);
+            IJimuShinsakaishiryoA4Builder builder1 = new JimuShinsakaishiryoA4Builder(editor1);
+            reportSourceWriter.writeLine(builder1);
         }
         if (sonotashiryoBusiness != null) {
             List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();

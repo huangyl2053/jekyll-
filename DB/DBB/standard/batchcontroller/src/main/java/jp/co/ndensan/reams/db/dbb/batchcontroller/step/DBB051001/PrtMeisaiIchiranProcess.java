@@ -202,15 +202,11 @@ public class PrtMeisaiIchiranProcess extends BatchKeyBreakBase<TokubetsuChoshuIr
     protected void afterExecute() {
         eucCsvWriter.close();
         spoolManager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
-        List<RString> 出力条件リスト = new ArrayList<>();
-        if (parameter.get出力帳票一覧() != null
-                && !RString.isNullOrEmpty(parameter.get出力帳票一覧().get出力順ID())) {
-            出力条件リスト = get出力条件リスト(parameter.get出力帳票一覧().get出力順ID());
-        }
+        List<RString> 出力条件リスト = get出力条件リスト();
         loadバッチ出力条件リスト(出力条件リスト, new RString(reportSourceWriter.pageCount().value()));
     }
 
-    private List<RString> get出力条件リスト(RString 出力順Id) {
+    private List<RString> get出力条件リスト() {
         List<RString> 出力条件リスト = new ArrayList<>();
         RStringBuilder rstbuilder = new RStringBuilder();
         rstbuilder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));

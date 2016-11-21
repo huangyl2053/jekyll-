@@ -11,11 +11,12 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihy
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.ServiceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyotakuServiceKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060012.KyotakuServiceKagoMoshitatePanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060012.dgServive_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 居宅サービスの給付管理照会のHandlerです。
@@ -64,7 +65,7 @@ public class KagoMoshitatePanelHandler {
                     servive_Row.setDefaultDataName4(
                             ServiceCategoryShurui.toValue(給付管理明細.getサービス種類コード().value()).get名称());
                 }
-                servive_Row.setDefaultDataName5(new RString(給付管理明細.get給付計画合計単位数_日数()));
+                servive_Row.getDefaultDataName5().setValue(Decimal.valueOf(給付管理明細.get給付計画合計単位数_日数()));
                 rowList.add(servive_Row);
             }
         }
@@ -78,9 +79,11 @@ public class KagoMoshitatePanelHandler {
      */
     public void onLoad(KyufuKanrihyoShokaiDataModel 給付管理票) {
         if (給付管理票.get給付管理票作成年月日() != null) {
-            div.getService().getTxt1().setValue(new RString(給付管理票.get給付管理票作成年月日().toString()));
+            div.getService().getTxt1().setValue(給付管理票.get給付管理票作成年月日());
         }
-        div.getService().getTxt2().setValue(給付管理票.get給付管理票情報作成区分コード());
+        if (給付管理票.get給付管理票情報作成区分コード() != null) {
+            div.getService().getTxt2().setValue(KyufukanrihyoSakuseiKubun.toValue(給付管理票.get給付管理票情報作成区分コード()).get名称());
+        }
         if (給付管理票.get居宅サービス計画作成区分コード() != null) {
             div.getService().getTxt4().setValue(JukyushaIF_KeikakuSakuseiKubunCode.
                     toValue(給付管理票.get居宅サービス計画作成区分コード()).get名称());
@@ -88,7 +91,7 @@ public class KagoMoshitatePanelHandler {
         if (給付管理票.get居宅支援事業所番号() != null) {
             div.getService().getTxt5().setValue(給付管理票.get居宅支援事業所番号().value());
         }
-        div.getService().getTxt8().setValue(new RString(給付管理票.get居宅_介護予防支給限度額()));
+        div.getService().getTxt8().setValue(Decimal.valueOf(給付管理票.get居宅_介護予防支給限度額()));
         if (給付管理票.get限度額適用開始年月() != null) {
             div.getService().getTxt9().setFromValue(new RDate(給付管理票.get限度額適用開始年月().toString()));
         }
@@ -100,8 +103,8 @@ public class KagoMoshitatePanelHandler {
             div.getService().getTxt13().setValue(給付管理票.get委託先の居宅介護支援事業所番号().value());
         }
         div.getService().getTxt17().setValue(給付管理票.get委託先の担当介護支援専門員番号());
-        div.getService().getTxt12().setValue(new RString(給付管理票.get指定サービス分小計()));
-        div.getService().getTxt15().setValue(new RString(給付管理票.get基準該当サービス分小計()));
-        div.getService().getTxt18().setValue(new RString(給付管理票.get給付計画合計単位数_日数()));
+        div.getService().getTxt12().setValue(Decimal.valueOf(給付管理票.get指定サービス分小計()));
+        div.getService().getTxt15().setValue(Decimal.valueOf(給付管理票.get基準該当サービス分小計()));
+        div.getService().getTxt18().setValue(Decimal.valueOf(給付管理票.get給付計画合計単位数_日数()));
     }
 }

@@ -67,6 +67,10 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
     private static final ReportId 帳票分類ID = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
     private static final ReportId 帳票ID = ReportIdDBB.DBB200023.getReportId();
 
+    private static final RString 依頼金額計算_1 = new RString("1");
+    private static final RString 特徴開始月_4 = new RString("特徴開始月：4月（捕捉月：10月）");
+    private static final RString 待機_4 = new RString("特徴開始月：4月（捕捉月：6,8,10月）");
+
     private DBB051001_GennendoIdoFukaParameter parameter;
     private GennendoIdoFukaProcessParameter processParameter;
     private PrtMeisaiIchiranProcessParameter prtMeisaiIchiranProcessParameter;
@@ -95,10 +99,14 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
         executeStep(通知書番号発番);
         executeStep(世帯員把握);
         executeStep(世帯員把握フロー);
-        if (parameter.is通常異動分の依頼金額計算()) {
-            executeStep(賦課計算);
-        } else {
+
+        if (依頼金額計算_1.equals(parameter.get依頼金額計算()) && 特徴開始月_4.equals(parameter.get特徴捕捉分())) {
             executeStep(特徴依頼金計算_４月開始);
+        } else {
+            executeStep(賦課計算);
+            if (特徴開始月_4.equals(parameter.get特徴捕捉分()) || 待機_4.equals(parameter.get特徴捕捉分())) {
+                executeStep(特徴依頼金計算_４月開始);
+            }
         }
         executeStep(賦課の情報登録フロー);
         executeStep(計算後情報テーブル削除);

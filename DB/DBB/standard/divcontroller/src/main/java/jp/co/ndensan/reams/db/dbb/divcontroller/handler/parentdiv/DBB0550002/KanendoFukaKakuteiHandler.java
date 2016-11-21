@@ -261,27 +261,7 @@ public class KanendoFukaKakuteiHandler {
                 row.getTxtShotokuDankaiMae().setValue(entity.getFukaKakuteiEntity().get更正前保険料算定段階１());
                 更正前保険料算定段階 = entity.getFukaKakuteiEntity().get更正前保険料算定段階１();
             }
-            if (!RString.isNullOrEmpty(entity.getFukaKakuteiEntity().get保険料算定段階２())) {
-                row.getTxtShotokuDankaiAto().setValue(entity.getFukaKakuteiEntity().get保険料算定段階２());
-                保険料算定段階 = entity.getFukaKakuteiEntity().get保険料算定段階２();
-            } else if (!RString.isNullOrEmpty(entity.getFukaKakuteiEntity().get保険料算定段階１())) {
-                row.getTxtShotokuDankaiAto().setValue(entity.getFukaKakuteiEntity().get保険料算定段階１());
-                保険料算定段階 = entity.getFukaKakuteiEntity().get保険料算定段階１();
-            }
-            row.getTxtShotokuDankai().setValue(更正前保険料算定段階.concat(改行).concat(保険料算定段階));
-            if (entity.getFukaKakuteiEntity().get調定額() != null) {
-                row.getTxtKanendoGaku().setValue(entity.getFukaKakuteiEntity().get調定額());
-                row.getTxtKanendoGakuAto().setValue(改行.concat(DecimalFormatter.toコンマ区切りRString(entity.getFukaKakuteiEntity().get調定額(), 0)));
-            }
-            if (entity.getFukaKakuteiEntity().get納期限() != null) {
-                row.getTxtKanendoNokiGen().setValue(entity.getFukaKakuteiEntity().get納期限());
-                row.getTxtKanendoNokiGenAto().setValue(改行.concat(entity.getFukaKakuteiEntity().get納期限().wareki()
-                        .eraType(EraType.KANJI_RYAKU)
-                        .firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.PERIOD)
-                        .fillType(FillType.ZERO)
-                        .width(Width.HALF).toDateString()));
-            }
+            setRow(entity, row, 保険料算定段階, 更正前保険料算定段階);
             set項目(row, entity);
             dgKanendoFukaList.add(row);
         }
@@ -295,7 +275,8 @@ public class KanendoFukaKakuteiHandler {
         HonsanteiIdoKanendoFukaKakutei fukaKakutei = InstanceProvider.create(HonsanteiIdoKanendoFukaKakutei.class);
         RDate 年月日 = div.getDgShoriNichiji().getDataSource().get(0).getTxtShoriYMD().getValue();
         RTime 時刻 = div.getDgShoriNichiji().getDataSource().get(0).getTxtShoriTime().getValue();
-        fukaKakutei.confirmFuka(new YMDHMS(年月日, 時刻));
+        FlexibleYear 調定年度 = div.getTxtChoteiNendo().getDomain();
+        fukaKakutei.confirmFuka(new YMDHMS(年月日, 時刻), 調定年度);
         div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource().removeAll(
                 div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(確定処理, true);
@@ -343,11 +324,12 @@ public class KanendoFukaKakuteiHandler {
             fukaKakuteiList.add(fukaKakuteiEntity);
         }
         HonsanteiIdoKanendoFukaKakutei fukaKakutei = InstanceProvider.create(HonsanteiIdoKanendoFukaKakutei.class);
+        FlexibleYear 調定年度 = div.getTxtChoteiNendo().getDomain();
         if (div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getTotalRecords() == div.
                 getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getSelectedItems().size()) {
-            fukaKakutei.deleteFuka(fukaKakuteiList, true);
+            fukaKakutei.deleteFuka(fukaKakuteiList, true, 調定年度);
         } else {
-            fukaKakutei.deleteFuka(fukaKakuteiList, false);
+            fukaKakutei.deleteFuka(fukaKakuteiList, false, 調定年度);
         }
         div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource().removeAll(
                 div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getSelectedItems());
@@ -475,5 +457,29 @@ public class KanendoFukaKakuteiHandler {
                 Boolean.FALSE,
                 AtenaMeisho.EMPTY);
         return Optional.of(前履歴Key);
+    }
+
+    private void setRow(KanendoIdoFukaKakutei entity, dgKanendoFukaIchiran_Row row, RString 保険料算定段階, RString 更正前保険料算定段階) {
+        if (!RString.isNullOrEmpty(entity.getFukaKakuteiEntity().get保険料算定段階２())) {
+            row.getTxtShotokuDankaiAto().setValue(entity.getFukaKakuteiEntity().get保険料算定段階２());
+            保険料算定段階 = entity.getFukaKakuteiEntity().get保険料算定段階２();
+        } else if (!RString.isNullOrEmpty(entity.getFukaKakuteiEntity().get保険料算定段階１())) {
+            row.getTxtShotokuDankaiAto().setValue(entity.getFukaKakuteiEntity().get保険料算定段階１());
+            保険料算定段階 = entity.getFukaKakuteiEntity().get保険料算定段階１();
+        }
+        row.getTxtShotokuDankai().setValue(更正前保険料算定段階.concat(改行).concat(保険料算定段階));
+        if (entity.getFukaKakuteiEntity().get調定額() != null) {
+            row.getTxtKanendoGaku().setValue(entity.getFukaKakuteiEntity().get調定額());
+            row.getTxtKanendoGakuAto().setValue(改行.concat(DecimalFormatter.toコンマ区切りRString(entity.getFukaKakuteiEntity().get調定額(), 0)));
+        }
+        if (entity.getFukaKakuteiEntity().get納期限() != null) {
+            row.getTxtKanendoNokiGen().setValue(entity.getFukaKakuteiEntity().get納期限());
+            row.getTxtKanendoNokiGenAto().setValue(改行.concat(entity.getFukaKakuteiEntity().get納期限().wareki()
+                    .eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD)
+                    .fillType(FillType.ZERO)
+                    .width(Width.HALF).toDateString()));
+        }
     }
 }

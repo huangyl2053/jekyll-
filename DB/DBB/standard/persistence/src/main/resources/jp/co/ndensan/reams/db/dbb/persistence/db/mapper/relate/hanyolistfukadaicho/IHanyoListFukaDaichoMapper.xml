@@ -188,7 +188,7 @@
                     AND	最新被保台帳."shikakuSoshitsuYMD" IS NOT NULL
                     OR	最新被保台帳."shikakuSoshitsuYMD" <![CDATA[!=]]> ''
             </if>
-            <if test="受給者判定 != null and 受給者のみ != null and 資格区分.toString() == 受給者のみ.toString()">
+            <if test="受給者判定 != null and 受給者のみ != null and 受給者判定.toString() == 受給者のみ.toString()">
                     AND	"DbV4001JukyushaDaicho"."hihokenshaNo" IS NOT NULL
                     AND	EXISTS (
                         SELECT 

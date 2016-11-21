@@ -94,10 +94,10 @@ public class KanendoNonyuTsuchishoCVSKakukoPrintService {
         try (ReportAssembler<KanendoNonyuTsuchishoCVSKakukoSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KanendoNonyuTsuchishoCVSKakukoSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                    new FlexibleDate(本算定納入通知書情報List.get(0).get発行日().toDateString()),
+                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
-                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
-                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 KanendoNonyuTsuchishoCVSKakukoReport report
                         = new KanendoNonyuTsuchishoCVSKakukoReport(本算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);

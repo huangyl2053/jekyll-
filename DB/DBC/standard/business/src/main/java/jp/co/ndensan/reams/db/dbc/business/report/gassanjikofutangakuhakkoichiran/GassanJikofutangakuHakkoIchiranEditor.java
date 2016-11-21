@@ -86,11 +86,8 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
             source.list_3 = entity.get被保険者氏名().value();
         }
 
-        source.list_4 = entity.get生年月日().wareki().
-                eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).
-                toDateString();
-        source.list_5 = entity.get性別().toRString();
+        source.list_4 = getDate1(entity.get生年月日());
+        source.list_5 = entity.get性別().getName().getShortJapanese();
 
         source.list_6 = entity.get支給申請書整理番号();
         source.list_7 = entity.get対象年度().wareki().
@@ -128,17 +125,10 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
 
         RStringBuilder sakuseiYMD = new RStringBuilder();
 
-        sakuseiYMD.append(kaishiYMD.wareki().
-                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).
-                toDateString());
+        sakuseiYMD.append(getDate1(kaishiYMD));
         sakuseiYMD.append(接続文字);
         if (shuryoYMD != null && !shuryoYMD.isEmpty()) {
-            sakuseiYMD.append(shuryoYMD.wareki().
-                    eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).
-                    toDateString());
+            sakuseiYMD.append(getDate1(shuryoYMD));
         }
         return sakuseiYMD.toRString();
     }
@@ -210,5 +200,13 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
         source.shutsuryokujun3 = 出力順３;
         source.shutsuryokujun4 = 出力順４;
         source.shutsuryokujun5 = 出力順５;
+    }
+
+    private static RString getDate1(FlexibleDate date) {
+        if (date == null || date.equals(FlexibleDate.MAX) || date.equals(FlexibleDate.MIN)) {
+            return RString.EMPTY;
+        }
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+                .fillType(FillType.ZERO).toDateString();
     }
 }

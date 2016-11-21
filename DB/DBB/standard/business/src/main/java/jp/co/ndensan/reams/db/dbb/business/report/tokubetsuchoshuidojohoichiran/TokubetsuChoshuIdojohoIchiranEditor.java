@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.ue.uex.definition.core.KakushuKubun;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -124,7 +125,8 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
                 source.listLower_5 = new FlexibleDate(発生年月日).wareki().toDateString();
             }
             source.listLower_6 = KakushuKubun.toValue(特徴異動追加情報.getTsuchiNaiyoCode(), 特徴異動追加情報.getDtKakushuKubun()).get各種区分名称();
-            source.listLower_7 = 特徴異動追加情報.getDtYubinNo();
+            source.listLower_7 = 特徴異動追加情報.getDtYubinNo() == null ? RString.EMPTY
+                    : new YubinNo(特徴異動追加情報.getDtYubinNo()).getEditedYubinNo();
             source.listLower_8 = 特徴異動追加情報.getDtKanjiJusho();
         } else {
             source.listUpper_1 = RString.EMPTY;

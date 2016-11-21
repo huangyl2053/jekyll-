@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.InsertKogakuJigyoKetteiTsuchishoInfoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.JigyoKogakuShoriKekkaKakuninListSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.UpdateDbT3110JigyoKogakuShikyuShinseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.UpdateKogakuKaigoServicehiHanteiKekkaProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020060.DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
@@ -30,19 +31,26 @@ public class DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchisho
     private static final String 事業高額一時テーブルの登録 = "insertKogakuJigyoKetteiTsuchishoInfoTempProcess";
     private static final String 事業高額一時テーブルの更新 = "updateKogakuJigyoKetteiTsuchishoInfoTempProcess";
     private static final String 支給判定結果の更新 = "updateHanteiKekka";
+    private static final String 事業高額介護サービス費支給申請の更新 = "updateDbT3110JigyoKogakuShikyuShinseiProcess";
     private static final String 帳票発行 = "doJishokogakuReport";
     private static final String 処理結果確認リスト発行処理 = "doListSakuseiProcess";
     private static final int INDEX_0 = 0;
     private static final int INDEX_6 = 6;
     private static final RString 決定日一括更新区分_2 = new RString("2");
+    private static final RString 更新する = new RString("2");
+    private static long jobId;
 
     @Override
     protected void defineFlow() {
+        jobId = super.getJobId();
         executeStep(事業高額一時テーブルの登録);
         executeStep(事業高額一時テーブルの更新);
         if (決定日一括更新区分_2.equals(getParameter().get決定日一括更新区分()) && getParameter().get決定日() != null
                 && !getParameter().get決定日().toDateString().isEmpty()) {
             executeStep(支給判定結果の更新);
+        }
+        if (更新する.equals(getParameter().get窓口払い一括更新区分())) {
+            executeStep(事業高額介護サービス費支給申請の更新);
         }
         executeStep(帳票発行);
         executeStep(処理結果確認リスト発行処理);
@@ -80,6 +88,15 @@ public class DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchisho
     }
 
     /**
+     * 事業高額介護サービス費支給申請の設定メソッドです
+     *
+     * @return バッチコマンド
+     */
+    @Step(事業高額介護サービス費支給申請の更新)
+    protected IBatchFlowCommand updateDbT3110JigyoKogakuShikyuShinseiProcess() {
+        return loopBatch(UpdateDbT3110JigyoKogakuShikyuShinseiProcess.class).arguments(createParameter()).define();
+    }
+    /**
      * 帳票発行です。
      *
      * @return DoJishokogakuKetteiTsutishoReportProcess
@@ -113,6 +130,6 @@ public class DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchisho
                 parameter.get文書番号(), parameter.getテスト出力フラグ(), parameter.get決定日一括更新区分(), parameter.get決定日(),
                 parameter.get利用者向け決定通知書フラグ(), parameter.get受領委任者向け決定通知書フラグ(),
                 parameter.get振込予定日(), parameter.get支払場所(), parameter.get支払期間From(), parameter.get支払期間To(),
-                parameter.get開始時間(), parameter.get終了時間(), parameter.get出力順ID());
+                parameter.get開始時間(), parameter.get終了時間(), parameter.get出力順ID(), parameter.get窓口払い一括更新区分(), jobId);
     }
 }

@@ -60,7 +60,6 @@ public class TokuteiShinryohiPanelHandler {
     private static final RString 回まで = new RString("回まで");
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成１５年４月 = new FlexibleYearMonth("200304");
-    private static final int NUMBER_０ = 0;
     private static final int NUMBER_３２ = 32;
     private static final int NUMBER_６４ = 64;
     private static final int NUMBER_９６ = 96;
@@ -80,8 +79,7 @@ public class TokuteiShinryohiPanelHandler {
     private static final int NUMBER_５４４ = 544;
     private static final int NUMBER_５７６ = 576;
     private static final int NUMBER_６０８ = 608;
-    private static final RString STR_0001 = new RString("0001");
-    private static final RString FORMAT = new RString("%02d");
+    private static final RString 登録_削除 = new RString("登録_削除");
 
     /**
      * コンストラクタです。
@@ -473,7 +471,7 @@ public class TokuteiShinryohiPanelHandler {
      */
     public void modifyRow(List<ShokanTokuteiShinryohi> 初期の特定診療費登録List, ddgToteishinryoTokubetushinryo_Row ddgRow,
             RString state, ShoukanharaihishinseimeisaikensakuParameter 明細検索キー) {
-
+        List<ddgToteishinryoTokubetushinryo_Row> list = div.getDdgToteishinryoTokubetushinryo().getDataSource();
         if (修正.equals(state)) {
             if (RowState.Added.equals(ddgRow.getRowState())) {
                 ddgRow.setRowState(RowState.Added);
@@ -494,7 +492,31 @@ public class TokuteiShinryohiPanelHandler {
         } else if (登録.equals(state)) {
             ddgRow.setRowState(RowState.Added);
             setDdgToteishinryoTokubetushinryo_Row(ddgRow, state, 明細検索キー.getサービス年月());
+        } else if (登録_削除.equals(state)) {
+            list.remove(ddgRow.getId());
+            resetRenban(ddgRow, list);
         }
+    }
+
+    private void resetRenban(ddgToteishinryoTokubetushinryo_Row row, List<ddgToteishinryoTokubetushinryo_Row> list) {
+        int id = row.getId();
+        if (id != 0) {
+            RString deletedRenban = row.getNumber();
+            RString mid;
+            for (ddgToteishinryoTokubetushinryo_Row resetRow : list) {
+                if (id - resetRow.getId() == 1) {
+                    mid = resetRow.getNumber();
+                    resetRow.setNumber(deletedRenban);
+                    id = id - 1;
+                    deletedRenban = mid;
+                }
+                if (id == 0) {
+                    break;
+                }
+            }
+        }
+        clear特定診療費登録();
+        div.getPanelFour().setVisible(false);
     }
 
     private void modifiedDdgToteishinryoTokubetushinryo(List<ShokanTokuteiShinryohi> 初期の特定診療費登録List,
@@ -569,18 +591,14 @@ public class TokuteiShinryohiPanelHandler {
             List<ddgToteishinryoTokubetushinryo_Row> rowList = div.getDdgToteishinryoTokubetushinryo().getDataSource();
             if (!rowList.isEmpty()) {
                 for (ddgToteishinryoTokubetushinryo_Row row : rowList) {
-                    if (max連番 < Integer.valueOf(row.getNumber().toString())) {
-                        max連番 = Integer.valueOf(row.getNumber().toString());
-                    }
+                    max連番 = set平成15年月Max連番(max連番, row);
                 }
             }
         } else {
             List<dgdTokuteiShinryohi_Row> rowList = div.getDgdTokuteiShinryohi().getDataSource();
             if (!rowList.isEmpty()) {
                 for (dgdTokuteiShinryohi_Row row : rowList) {
-                    if (max連番 < Integer.valueOf(row.getDefaultDataName7().toString())) {
-                        max連番 = Integer.valueOf(row.getDefaultDataName7().toString());
-                    }
+                    max連番 = set平成15年月後Max連番(max連番, row);
                 }
             }
         }
@@ -664,7 +682,7 @@ public class TokuteiShinryohiPanelHandler {
                 UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.算定単位.getコード(),
                         new Code(serviceCode.toEntity().getSanteiTani()), date);
                 RStringBuilder builder1 = new RStringBuilder();
-                builder1.append(code1.getコード名称());
+                builder1.append(code1 == null ? RString.EMPTY : code1.getコード名称());
                 builder1.append(serviceCode.toEntity().getTaniSu());
                 builder1.append(単位);
                 div.getLblComment1().setText(builder1.toRString());
@@ -676,7 +694,7 @@ public class TokuteiShinryohiPanelHandler {
                         DBCCodeShubetsu.算定期間回数制限_期間_時期.getコード(),
                         new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
                 RStringBuilder builder2 = new RStringBuilder();
-                builder2.append(code2.getコード名称());
+                builder2.append(code2 == null ? RString.EMPTY : code2.getコード名称());
                 builder2.append(serviceCode.toEntity().getSanteiSeiyakuKaisu());
                 builder2.append(回まで);
                 div.getLblComment2().setText(builder2.toRString());
@@ -735,7 +753,7 @@ public class TokuteiShinryohiPanelHandler {
      */
     public void modifyRow2(List<ShokanTokuteiShinryoTokubetsuRyoyo> 初期の特別診療費List,
             dgdTokuteiShinryohi_Row row, RString state, ShoukanharaihishinseimeisaikensakuParameter 明細検索キー) {
-
+        List<dgdTokuteiShinryohi_Row> list = div.getDgdTokuteiShinryohi().getDataSource();
         if (修正.equals(state)) {
             if (RowState.Added.equals(row.getRowState())) {
                 row.setRowState(RowState.Added);
@@ -755,7 +773,31 @@ public class TokuteiShinryohiPanelHandler {
         } else if (登録.equals(state)) {
             row.setRowState(RowState.Added);
             setDgdTokuteiShinryohi_Row(row, state, 明細検索キー.getサービス年月());
+        } else if (登録_削除.equals(state)) {
+            list.remove(row.getId());
+            resetRenban2(row, list);
         }
+    }
+
+    private void resetRenban2(dgdTokuteiShinryohi_Row row, List<dgdTokuteiShinryohi_Row> list) {
+        int id = row.getId();
+        if (id != 0) {
+            RString deletedRenban = row.getDefaultDataName7();
+            RString mid;
+            for (dgdTokuteiShinryohi_Row resetRow : list) {
+                if (id - resetRow.getId() == 1) {
+                    mid = resetRow.getDefaultDataName7();
+                    resetRow.setDefaultDataName7(deletedRenban);
+                    id = id - 1;
+                    deletedRenban = mid;
+                }
+                if (id == 0) {
+                    break;
+                }
+            }
+        }
+        clear特定診療費_特別診療費登録();
+        div.getPanelFive().setVisible(false);
     }
 
     private void modifiedDgdTokuteiShinryohi(List<ShokanTokuteiShinryoTokubetsuRyoyo> 初期の特別診療費List,
@@ -958,7 +1000,7 @@ public class TokuteiShinryohiPanelHandler {
             }
             if (!isViewDB存在) {
                 ShokanTokuteiShinryohi joho = new ShokanTokuteiShinryohi(meisaiPar.get被保険者番号(), meisaiPar.getサービス年月(),
-                        meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getNumber()); // TODO整理番号採番
+                        meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getNumber());
                 builder = joho.createBuilderForEdit();
                 特定診療費builder編集(builder, row);
                 特定診療費ViewDBList.add(builder.build());
@@ -1001,7 +1043,7 @@ public class TokuteiShinryohiPanelHandler {
             }
             if (!isViewDB存在) {
                 ShokanTokuteiShinryoTokubetsuRyoyo joho = new ShokanTokuteiShinryoTokubetsuRyoyo(meisaiPar.get被保険者番号(), meisaiPar.getサービス年月(),
-                        meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getDefaultDataName7()); // TODO整理番号採番
+                        meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getDefaultDataName7());
                 builder = joho.createBuilderForEdit();
                 特定診療費builder編集(builder, row);
                 特別診療費ViewDBList.add(builder.build());
@@ -1385,5 +1427,19 @@ public class TokuteiShinryohiPanelHandler {
         public int compare(dgdTokuteiShinryohi_Row row1, dgdTokuteiShinryohi_Row row2) {
             return row2.getDefaultDataName7().compareTo(row1.getDefaultDataName7());
         }
+    }
+
+    private int set平成15年月Max連番(int max連番, ddgToteishinryoTokubetushinryo_Row row) {
+        if (max連番 < Integer.valueOf(row.getNumber().toString())) {
+            max連番 = Integer.valueOf(row.getNumber().toString());
+        }
+        return max連番;
+    }
+
+    private int set平成15年月後Max連番(int max連番, dgdTokuteiShinryohi_Row row) {
+        if (max連番 < Integer.valueOf(row.getDefaultDataName7().toString())) {
+            max連番 = Integer.valueOf(row.getDefaultDataName7().toString());
+        }
+        return max連番;
     }
 }

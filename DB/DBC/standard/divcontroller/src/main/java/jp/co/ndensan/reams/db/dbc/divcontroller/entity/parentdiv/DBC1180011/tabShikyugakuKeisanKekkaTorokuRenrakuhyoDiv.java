@@ -4,17 +4,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 
 /**
- * tabShikyugakuKeisanKekkaTorokuRenrakuhyo のクラスファイル
- *
+ * tabShikyugakuKeisanKekkaTorokuRenrakuhyo のクラスファイル 
+ * 
  * @reamsid_L DBC-2030-010 huzongcheng
  */
 public class tabShikyugakuKeisanKekkaTorokuRenrakuhyoDiv extends TabPanel {
@@ -102,7 +99,7 @@ public class tabShikyugakuKeisanKekkaTorokuRenrakuhyoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtRenrakuhyoHakkoshaMei(TextBox txtRenrakuhyoHakkoshaMei) {
+    public void  setTxtRenrakuhyoHakkoshaMei(TextBox txtRenrakuhyoHakkoshaMei) {
         this.getRenrakuhyoHakkoshaPanel().setTxtRenrakuhyoHakkoshaMei(txtRenrakuhyoHakkoshaMei);
     }
 
@@ -112,7 +109,7 @@ public class tabShikyugakuKeisanKekkaTorokuRenrakuhyoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtRenrakuhyoHakkoshaYubinNo(TextBoxYubinNo txtRenrakuhyoHakkoshaYubinNo) {
+    public void  setTxtRenrakuhyoHakkoshaYubinNo(TextBoxYubinNo txtRenrakuhyoHakkoshaYubinNo) {
         this.getRenrakuhyoHakkoshaPanel().setTxtRenrakuhyoHakkoshaYubinNo(txtRenrakuhyoHakkoshaYubinNo);
     }
 
@@ -122,7 +119,7 @@ public class tabShikyugakuKeisanKekkaTorokuRenrakuhyoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtRenrakuhyoHakkoshaJusho(TextBox txtRenrakuhyoHakkoshaJusho) {
+    public void  setTxtRenrakuhyoHakkoshaJusho(TextBox txtRenrakuhyoHakkoshaJusho) {
         this.getRenrakuhyoHakkoshaPanel().setTxtRenrakuhyoHakkoshaJusho(txtRenrakuhyoHakkoshaJusho);
     }
 
@@ -132,7 +129,7 @@ public class tabShikyugakuKeisanKekkaTorokuRenrakuhyoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtToiawasesakiMeisho1(TextBox txtToiawasesakiMeisho1) {
+    public void  setTxtToiawasesakiMeisho1(TextBox txtToiawasesakiMeisho1) {
         this.getToiawasesakiPanel().setTxtToiawasesakiMeisho1(txtToiawasesakiMeisho1);
     }
 
@@ -142,7 +139,7 @@ public class tabShikyugakuKeisanKekkaTorokuRenrakuhyoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtToiawasesakiYobinNo(TextBoxYubinNo txtToiawasesakiYobinNo) {
+    public void  setTxtToiawasesakiYobinNo(TextBoxYubinNo txtToiawasesakiYobinNo) {
         this.getToiawasesakiPanel().setTxtToiawasesakiYobinNo(txtToiawasesakiYobinNo);
     }
 
@@ -152,7 +149,7 @@ public class tabShikyugakuKeisanKekkaTorokuRenrakuhyoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtToiawasesakiMeisho2(TextBox txtToiawasesakiMeisho2) {
+    public void  setTxtToiawasesakiMeisho2(TextBox txtToiawasesakiMeisho2) {
         this.getToiawasesakiPanel().setTxtToiawasesakiMeisho2(txtToiawasesakiMeisho2);
     }
 
@@ -162,7 +159,7 @@ public class tabShikyugakuKeisanKekkaTorokuRenrakuhyoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtToiawasesakiTelNo(TextBox txtToiawasesakiTelNo) {
+    public void  setTxtToiawasesakiTelNo(TextBox txtToiawasesakiTelNo) {
         this.getToiawasesakiPanel().setTxtToiawasesakiTelNo(txtToiawasesakiTelNo);
     }
 
@@ -172,7 +169,7 @@ public class tabShikyugakuKeisanKekkaTorokuRenrakuhyoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtToiawasesakiJusho(TextBox txtToiawasesakiJusho) {
+    public void  setTxtToiawasesakiJusho(TextBox txtToiawasesakiJusho) {
         this.getToiawasesakiPanel().setTxtToiawasesakiJusho(txtToiawasesakiJusho);
     }
 

@@ -1549,7 +1549,7 @@
         WHERE NOT EXISTS(
         SELECT 'X' FROM rgdb."DbT7056GappeiShichoson" AS slv
         WHERE slv."kyuShichosonCode"= mst."kyuShichosonCode"
-        AND slv."gappeiYMD"<![CDATA[<=]]> mst."gappeiYMD")) AS KYUSHICHOSON
+        AND slv."gappeiYMD"<![CDATA[<]]> mst."gappeiYMD")) AS KYUSHICHOSON
         ON DbWT1513RiyoJokyoTokeihyo."shoriShichosonCode" = KYUSHICHOSON."kyuShichosonCode"
     </select>
 
@@ -1701,7 +1701,7 @@
         </if>
         <if test="is給付事業者名">
             ,ICHIJI."dbWT1513RiyoJokyoTokeihyo_jigyoshoName"
-            ,ICHIJI."dbT7063KaigoJigyoshaShiteiService_jigyoshaName" AS "dbWT1513RiyoJokyoTokeihyo_kyotakuServiceJigyoshoName"
+            ,JIGYOSHA."dbT7063KaigoJigyoshaShiteiService_jigyoshaName" AS "dbWT1513RiyoJokyoTokeihyo_kyotakuServiceJigyoshoName"
         </if>
         FROM
         (
@@ -1730,8 +1730,8 @@
             AND "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" = JIGYOSHA2."serviceShuruiCode"
         </if>
         <if test="is給付事業者名">
-            "DbT7063KaigoJigyoshaShiteiService"."jigyoshaNo" = JIGYOSHA2."kyotakuServiceJigyoshoNo"
-            AND "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" = JIGYOSHA2."kyotakuServiceShuruiCode"
+            "DbT7063KaigoJigyoshaShiteiService"."jigyoshaNo" = JIGYOSHA2."jigyoshaNo"
+            AND "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" = JIGYOSHA2."serviceShuruiCode"
         </if>
         AND "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" <![CDATA[<]]> JIGYOSHA2."yukoKaishiYMD"))AS JIGYOSHA
         ON
@@ -1740,8 +1740,8 @@
             AND ICHIJI."dbWT1513RiyoJokyoTokeihyo_serviceShuruiCode" = JIGYOSHA."dbT7063KaigoJigyoshaShiteiService_serviceShuruiCode"
         </if>
         <if test="is給付事業者名">
-            ICHIJI."dbWT1513RiyoJokyoTokeihyo_jigyoshoNo" = JIGYOSHA."dbT7063KaigoJigyoshaShiteiService_kyotakuServiceJigyoshoNo"
-            AND ICHIJI."dbWT1513RiyoJokyoTokeihyo_serviceShuruiCode" = JIGYOSHA."dbT7063KaigoJigyoshaShiteiService_serviceShuruiCode"
+            ICHIJI."dbWT1513RiyoJokyoTokeihyo_kyotakuServiceJigyoshoNo" = JIGYOSHA."dbT7063KaigoJigyoshaShiteiService_jigyoshaNo"
+            AND ICHIJI."dbWT1513RiyoJokyoTokeihyo_kyotakuServiceShuruiCode" = JIGYOSHA."dbT7063KaigoJigyoshaShiteiService_serviceShuruiCode"
         </if>
         WHERE
         JIGYOSHA."dbT7063KaigoJigyoshaShiteiService_kihonJohoJunkyoKubun" = #{junkyoShinai}
@@ -1756,7 +1756,7 @@
         </if>
         <if test="is給付事業者名">
             ,ICHIJI."dbWT1513RiyoJokyoTokeihyo_jigyoshoName"
-            ,ICHIJI."dbT7060KaigoJigyosha_jigyoshaName" AS "dbWT1513RiyoJokyoTokeihyo_kyotakuServiceJigyoshoName"
+            ,JIGYOSHA."dbT7060KaigoJigyosha_jigyoshaName" AS "dbWT1513RiyoJokyoTokeihyo_kyotakuServiceJigyoshoName"
         </if>
         FROM
         (
@@ -1785,9 +1785,9 @@
             ON ICHIJI."dbWT1513RiyoJokyoTokeihyo_jigyoshoNo" = JIGYOSHA."dbT7060KaigoJigyosha_jigyoshaNo"
         </if>
         <if test="is給付事業者名">
-            "DbT7060KaigoJigyosha"."jigyoshaNo" = JIGYOSHA2."kyotakuServiceJigyoshoNo"
+            "DbT7060KaigoJigyosha"."jigyoshaNo" = JIGYOSHA2."jigyoshaNo"
             AND "DbT7060KaigoJigyosha"."yukoKaishiYMD" <![CDATA[<]]> JIGYOSHA2."yukoKaishiYMD")) AS JIGYOSHA
-            ON ICHIJI."dbWT1513RiyoJokyoTokeihyo_jigyoshoNo" = JIGYOSHA."dbT7060KaigoJigyosha_jigyoshaNo"
+            ON ICHIJI."dbWT1513RiyoJokyoTokeihyo_kyotakuServiceJigyoshoNo" = JIGYOSHA."dbT7060KaigoJigyosha_jigyoshaNo"
         </if>
     </select>
 
@@ -1820,7 +1820,7 @@
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_chikuMei2"
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_chikuCode3"
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_chikuMei3"
-        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />."setaiCode" AS "dbWT1513RiyoJokyoTokeihyo_setaiCode"
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."setaiCode" AS "dbWT1513RiyoJokyoTokeihyo_setaiCode"
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_yoKaigoJotaiKubunCode"
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_ninteiYukoKaishiYMD"
         ,DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_ninteiYukoShuryoYMD"
@@ -1928,7 +1928,7 @@
         INNER JOIN
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
         AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_shikibetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />."shikibetsuCode"
+        ON DbWT1513RiyoJokyoTokeihyo."dbWT1513RiyoJokyoTokeihyo_shikibetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
     </select>
 
     <select resultOrdered="true" id = "selectサービス種類名"
@@ -2956,16 +2956,27 @@
         <result property="shukeiSetteiKubun" column="shukeiSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <resultMap id="ResultMap_給付実績明細" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.KyuhuJissekiMeisaiEntity" autoMapping="true">
-        <result property="teikyoKaishiYM" column="teikyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="teikyoShuryoYM" column="teikyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="gendogakuTaishogaiFlag" column="gendogakuTaishogaiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="serviceShuruiFlag" column="serviceShuruiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="DbT3018KyufujissekiMeisai_hiHokenshaNo"/>
+        <id column="DbT3018KyufujissekiMeisai_serviceTeikyoYM"/>
+        <id column="DbT3018KyufujissekiMeisai_jigyoshoNo"/>
+        <id column="DbT3018KyufujissekiMeisai_inputShikibetsuNo"/>
+        <id column="DbT3018KyufujissekiMeisai_toshiNo"/>
+        <id column="DbT3018KyufujissekiMeisai_serviceShuruiCode"/>
+        <id column="DbT3018KyufujissekiMeisai_serviceKomokuCode"/>
+        <id property="teikyoKaishiYM" column="teikyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="teikyoShuryoYM" column="teikyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="gendogakuTaishogaiFlag" column="gendogakuTaishogaiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="serviceShuruiFlag" column="serviceShuruiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3018KyufujissekiMeisaiMapper.ResultMap_DbT3018KyufujissekiMeisaiEntity"/>
     </resultMap>
     <resultMap id="resultMap_被保険者宛名情報" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.HihokenshaAtenaJohoEntity" autoMapping="true">
         <id column="dbWT1513RiyoJokyoTokeihyo_hihokenshaNo"/>
         <id column="dbWT1513RiyoJokyoTokeihyo_dataKubun"/>
         <id column="dbWT1513RiyoJokyoTokeihyo_serviceTeikyoYM"/>
+        <id column="dbWT1513RiyoJokyoTokeihyo_shinsaYM"/>
+        <id column="dbWT1513RiyoJokyoTokeihyo_inputShikibetsuNo"/>
+        <id column="dbWT1513RiyoJokyoTokeihyo_jigyoshoNo"/>
+        <id column="dbWT1513RiyoJokyoTokeihyo_seiriNo"/>
         <id column="dbWT1513RiyoJokyoTokeihyo_shinsaYM"/>
         <association property="dbWT1513Entity" resultMap="ResultMap_TEMPDbWT1513RiyoJokyoTokeihyo"/>
         <association property="dbV1001Entity" resultMap="ResultMap_DbV1001HihokenshaDaichoEntity"/>
