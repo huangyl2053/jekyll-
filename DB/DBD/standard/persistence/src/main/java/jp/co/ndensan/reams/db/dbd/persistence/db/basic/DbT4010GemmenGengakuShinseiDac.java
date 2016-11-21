@@ -36,6 +36,8 @@ public class DbT4010GemmenGengakuShinseiDac implements ISaveable<DbT4010GemmenGe
     @InjectSession
     private SqlSession session;
 
+    private static final RString 減免減額申請エンティティ = new RString("減免減額申請エンティティ");
+
     /**
      * 主キーで減免減額申請を取得します。
      *
@@ -92,7 +94,7 @@ public class DbT4010GemmenGengakuShinseiDac implements ISaveable<DbT4010GemmenGe
     @Transaction
     @Override
     public int save(DbT4010GemmenGengakuShinseiEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(減免減額申請エンティティ.toString()));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         if (entity.getLastUpdateTimestamp() != null && !EntityDataState.Deleted.equals(entity.getState())) {
@@ -109,7 +111,7 @@ public class DbT4010GemmenGengakuShinseiDac implements ISaveable<DbT4010GemmenGe
      */
     @Transaction
     public int insert(DbT4010GemmenGengakuShinseiEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(減免減額申請エンティティ.toString()));
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
@@ -121,7 +123,7 @@ public class DbT4010GemmenGengakuShinseiDac implements ISaveable<DbT4010GemmenGe
      */
     @Transaction
     public int saveOrDeletePhysicalBy(DbT4010GemmenGengakuShinseiEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(減免減額申請エンティティ.toString()));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 
@@ -133,7 +135,7 @@ public class DbT4010GemmenGengakuShinseiDac implements ISaveable<DbT4010GemmenGe
      */
     @Transaction
     public int delete(DbT4010GemmenGengakuShinseiEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(減免減額申請エンティティ.toString()));
         entity.setState(EntityDataState.Deleted);
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }

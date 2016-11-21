@@ -63,7 +63,7 @@ public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogaku
         } else if (item.getHihokenJusho().length() > NUM_152) {
             source.hiho_jyusho_3 = item.getHihokenJusho().substringReturnAsPossible(NUM_152, NUM_228);
         }
-        source.PageCnt = new RString("1");
+        source.pageCnt = new RString("1");
         source.daihyo = item.getNinshoshaYakushokuMei();
         source.hiho_no = item.getHihokenshaNo();
         source.shisetsu_yubin_no = item.getSisetuYubinNo();
