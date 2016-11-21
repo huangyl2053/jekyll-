@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 委員用特記事項A3版のインターフェースクラスです。,
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-330 lishengli
  */
 public interface IIinTokkiTextA3Editor extends IReportEditor<IinTokkiTextA3ReportSource> {
 

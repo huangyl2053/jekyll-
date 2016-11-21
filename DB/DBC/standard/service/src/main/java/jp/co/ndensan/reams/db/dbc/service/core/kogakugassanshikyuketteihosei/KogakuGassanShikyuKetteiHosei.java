@@ -415,7 +415,7 @@ public class KogakuGassanShikyuKetteiHosei {
         DbT3075KogakuGassanKyufuJissekiEntity 給付実績データ = 高額合算給付実績dac.
                 selectByMaxSeiriNo(被保険者番号, 支給申請書整理番号);
         boolean 処理年月フラグ = 給付実績データ != null && 給付実績データ.getShoriYM() != null
-                && 給付実績データ.getShoriYM().isEmpty();
+                && !給付実績データ.getShoriYM().isEmpty();
         if (ONE.equals(処理モード)) {
             get追加の状況(給付実績データ, 更新時の支給区分, result, 処理年月フラグ);
             return result;
@@ -461,7 +461,7 @@ public class KogakuGassanShikyuKetteiHosei {
                 result.set作成区分(TWO);
             } else {
                 result.set更新方法(INSERT);
-                result.set作成区分(TWO);
+                result.set作成区分(ONE);
             }
         }
     }

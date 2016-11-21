@@ -551,18 +551,30 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
     }
 
     private RString dateFormat32(RDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
         return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
     private RString dateFormat32(FlexibleDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
         return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
     private RString dateFormat308(FlexibleYear year) {
+        if (year == null) {
+            return RString.EMPTY;
+        }
         return year.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString();
     }
 
     private RString 共通ポリシーパターン141(RTime time) {
+        if (time == null) {
+            return RString.EMPTY;
+        }
         return time.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
     }
 

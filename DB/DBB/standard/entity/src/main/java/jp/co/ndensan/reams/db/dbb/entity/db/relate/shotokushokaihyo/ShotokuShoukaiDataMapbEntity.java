@@ -28,7 +28,8 @@ public class ShotokuShoukaiDataMapbEntity {
 
     private ShikibetsuCode shikibetsuCode;
     private LasdecCode genLasdecCode;
-    private ZenkokuJushoCode zenkokuJushoCode;
+    private ZenkokuJushoCode soufusenzenkokuJushoCode;
+    private RString zenkokuJushoCode;
     private SetaiCode setaiCode;
     private HihokenshaNo hihokenshaNo;
     private RString hihokenshaName;

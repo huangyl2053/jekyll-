@@ -39,7 +39,6 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
     private static final int INT_5 = 5;
     private static final int INT_7 = 7;
     private static final int INT_25 = 25;
-    private static final int INT_33 = 33;
     private static final int INT_50 = 50;
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("2");

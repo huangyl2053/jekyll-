@@ -682,7 +682,7 @@ public class TokuteiShinryohiPanelHandler {
                 UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.算定単位.getコード(),
                         new Code(serviceCode.toEntity().getSanteiTani()), date);
                 RStringBuilder builder1 = new RStringBuilder();
-                builder1.append(code1.getコード名称() == null ? RString.EMPTY : code1.getコード名称());
+                builder1.append(code1 == null ? RString.EMPTY : code1.getコード名称());
                 builder1.append(serviceCode.toEntity().getTaniSu());
                 builder1.append(単位);
                 div.getLblComment1().setText(builder1.toRString());
@@ -694,7 +694,7 @@ public class TokuteiShinryohiPanelHandler {
                         DBCCodeShubetsu.算定期間回数制限_期間_時期.getコード(),
                         new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
                 RStringBuilder builder2 = new RStringBuilder();
-                builder2.append(code2.getコード名称() == null ? RString.EMPTY : code2.getコード名称());
+                builder2.append(code2 == null ? RString.EMPTY : code2.getコード名称());
                 builder2.append(serviceCode.toEntity().getSanteiSeiyakuKaisu());
                 builder2.append(回まで);
                 div.getLblComment2().setText(builder2.toRString());
@@ -782,12 +782,12 @@ public class TokuteiShinryohiPanelHandler {
     private void resetRenban2(dgdTokuteiShinryohi_Row row, List<dgdTokuteiShinryohi_Row> list) {
         int id = row.getId();
         if (id != 0) {
-            RString deletedRenban = row.getDefaultDataName6();
+            RString deletedRenban = row.getDefaultDataName7();
             RString mid;
             for (dgdTokuteiShinryohi_Row resetRow : list) {
                 if (id - resetRow.getId() == 1) {
-                    mid = resetRow.getDefaultDataName6();
-                    resetRow.setDefaultDataName6(deletedRenban);
+                    mid = resetRow.getDefaultDataName7();
+                    resetRow.setDefaultDataName7(deletedRenban);
                     id = id - 1;
                     deletedRenban = mid;
                 }

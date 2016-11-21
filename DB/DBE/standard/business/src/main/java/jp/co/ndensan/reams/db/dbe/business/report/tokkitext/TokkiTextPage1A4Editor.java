@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 /**
  * 特記事項A4Editorです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-340 lishengli
  */
 public class TokkiTextPage1A4Editor implements ITokkiTextA4Editor {
 

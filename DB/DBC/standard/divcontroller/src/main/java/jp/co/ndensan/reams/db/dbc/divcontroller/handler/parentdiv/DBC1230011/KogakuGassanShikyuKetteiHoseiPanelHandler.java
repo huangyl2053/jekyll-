@@ -398,7 +398,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         if (row.getTxtUketoriNengetsu().getValue() != null && !row.getTxtUketoriNengetsu().getValue().isEmpty()) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtUketoriYM().setValue(new RDate(row.getTxtUketoriNengetsu().
-                            getValue().getYearMonth().toString()));
+                                    getValue().getYearMonth().toString()));
         }
         if (row.getKetteiTsuchiSakuseiYMD().getValue() != null
                 && !row.getKetteiTsuchiSakuseiYMD().getValue().isEmpty()) {
@@ -567,20 +567,29 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                             getRadShikyuKubunCode().getSelectedValue(), is支給金額フラグ(para),
                             is支給区分フラグ(para), is支給データ(決定情報list, 高額合算決定entity));
-            if (修正.equals(画面モード)) {
-                高額合算決定entity = buid高額決定(高額合算決定entity);
-                高額合算決定entity = 高額合算決定entity.modified();
-            } else if (削除.equals(画面モード) || 照会.equals(画面モード)) {
-                高額合算決定entity = 高額合算決定entity.deleted();
-            }
-            KoshinShoriResult result = new KoshinShoriResult();
-            result.set高額合算支給不支給決定Entity(高額合算決定entity);
-            result.setUpdate合算給付実績パラメータ(parameter);
-            result.setWkモード(modelResult.getWkモード());
-            result.set更新方法(kogakuResult.get更新方法());
-            result.set作成区分(kogakuResult.get作成区分());
-            KogakuGassanShikyuKetteiHosei.createInstance().isKoshinShori(result, 処理モード);
+            saveData(画面モード, 高額合算決定entity, modelResult, kogakuResult, parameter, 処理モード);
         }
+    }
+
+    private void saveData(RString 画面モード,
+            KogakuGassanShikyuFushikyuKettei 高額合算決定entity,
+            ShoriModeHanteiResult modelResult,
+            KogakuGassanKyufuJissekiResult kogakuResult,
+            KogakuGassanShikyuGakuKeisanKekkaUpdateParameter parameter,
+            RString 処理モード) {
+        if (修正.equals(画面モード)) {
+            高額合算決定entity = buid高額決定(高額合算決定entity);
+            高額合算決定entity = 高額合算決定entity.modified();
+        } else if (削除.equals(画面モード) || 照会.equals(画面モード)) {
+            高額合算決定entity = 高額合算決定entity.deleted();
+        }
+        KoshinShoriResult result = new KoshinShoriResult();
+        result.set高額合算支給不支給決定Entity(高額合算決定entity);
+        result.setUpdate合算給付実績パラメータ(parameter);
+        result.setWkモード(modelResult.getWkモード());
+        result.set更新方法(kogakuResult.get更新方法());
+        result.set作成区分(kogakuResult.get作成区分());
+        KogakuGassanShikyuKetteiHosei.createInstance().isKoshinShori(result, 処理モード);
     }
 
     private boolean is支給データ(List<KogakuGassanShikyuKetteiHoseiResult> 決定情報list,
@@ -588,7 +597,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         boolean 支給データの有無 = false;
         List<KogakuGassanShikyuKetteiHoseiResult> list = new ArrayList<>();
         for (KogakuGassanShikyuKetteiHoseiResult 決定情報 : 決定情報list) {
-            if (!(決定情報.get高額合算決定entity().get保険者番号().equals(高額合算決定entity.get保険者番号())
+            if (!(決定情報.get高額合算決定entity().get被保険者番号().equals(高額合算決定entity.get被保険者番号())
                     && 決定情報.get高額合算決定entity().get対象年度().equals(高額合算決定entity.get対象年度())
                     && 決定情報.get高額合算決定entity().get保険者番号().equals(高額合算決定entity.get保険者番号())
                     && 決定情報.get高額合算決定entity().get支給申請書整理番号().equals(高額合算決定entity.get支給申請書整理番号())
@@ -916,7 +925,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 .set自己負担総額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtJikoFutanSogaku().getValue())
                 .set支給区分コード(ShikyuFushikyuKubun.valueOf(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                        getRadShikyuKubunCode().getSelectedValue().toString()).getコード())
+                                getRadShikyuKubunCode().getSelectedValue().toString()).getコード())
                 .set支給額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyugaku().getValue())
                 .set自己負担額証明書整理番号(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtJikoFutanSeiriNo().getText())
@@ -999,7 +1008,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 .set自己負担総額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtJikoFutanSogaku().getValue())
                 .set支給区分コード(ShikyuFushikyuKubun.valueOf(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                        getRadShikyuKubunCode().getSelectedValue().toString()).getコード())
+                                getRadShikyuKubunCode().getSelectedValue().toString()).getコード())
                 .set支給額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyugaku().getValue())
                 .set自己負担額証明書整理番号(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtJikoFutanSeiriNo().getText())

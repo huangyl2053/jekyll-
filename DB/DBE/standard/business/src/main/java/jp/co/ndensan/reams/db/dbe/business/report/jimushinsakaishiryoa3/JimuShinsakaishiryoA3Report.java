@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 事務局審査会資料組み合わせ一覧A3版のReportクラスです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-190 lishengli
  */
 public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3ReportSource> {
 

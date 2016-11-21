@@ -1037,41 +1037,24 @@
             A.*
         FROM
             (SELECT 
-                DbT1001.*
-             FROM
-                rgdb."DbT1001HihokenshaDaicho" AS DbT1001
-             INNER JOIN
-             (SELECT
-                Q."hihokenshaNo",
-                Q."ichigoShikakuShutokuYMD",
-                Q."shikakuSoshitsuYMD",
-                Q."idoYMD",
-                Q."edaNo"
+                Q.*
              FROM 
                 rgdb."DbT1001HihokenshaDaicho" AS Q
                 INNER JOIN
                 (SELECT
                     "hihokenshaNo",
                     "ichigoShikakuShutokuYMD",
-                    "shikakuSoshitsuYMD",
-                    MAX("idoYMD" || "edaNo") AS max1
+                    MAX("shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
                  FROM
                     rgdb."DbT1001HihokenshaDaicho"
                  GROUP BY
                     "hihokenshaNo",
-                    "ichigoShikakuShutokuYMD",
-                    "shikakuSoshitsuYMD"
+                    "ichigoShikakuShutokuYMD"
                 )AS T
                 ON
                     T."hihokenshaNo" = Q."hihokenshaNo"
                 AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
-                AND COALESCE(T."shikakuSoshitsuYMD",'00000000') = COALESCE(Q."shikakuSoshitsuYMD",'00000000')
-                AND T."max1" = (Q."idoYMD" || Q."edaNo")
-                ) AS R
-               ON
-                  R."hihokenshaNo" = DbT1001."hihokenshaNo"
-                AND R."idoYMD" = DbT1001."idoYMD"
-                AND R."edaNo" = DbT1001."edaNo"
+                AND T."max_shikakuSoshitsuYMD" = Q."shikakuSoshitsuYMD"
             ) AS A
             INNER JOIN
                 "TmpIdoTrigger" AS B

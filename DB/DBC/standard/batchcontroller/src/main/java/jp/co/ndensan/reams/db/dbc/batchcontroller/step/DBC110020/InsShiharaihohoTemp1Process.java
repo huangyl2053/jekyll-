@@ -1357,7 +1357,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.set申請日(new FlexibleDate(居宅計画Info.get(ORDER_2)));
         entity.set決定年月日(new FlexibleDate(居宅計画Info.get(ORDER_3)));
         entity.set決定区分(居宅計画Info.get(ORDER_4));
-        entity.set履歴番号(Integer.parseInt(居宅計画Info.get(ORDER_4).toString()));
+        entity.set履歴番号(Integer.parseInt(居宅計画Info.get(ORDER_6).toString()));
         return entity;
     }
 

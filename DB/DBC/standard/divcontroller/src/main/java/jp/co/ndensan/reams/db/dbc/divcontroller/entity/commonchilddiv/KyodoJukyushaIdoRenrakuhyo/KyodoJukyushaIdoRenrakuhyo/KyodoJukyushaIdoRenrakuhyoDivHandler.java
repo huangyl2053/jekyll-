@@ -121,6 +121,9 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             } else if (div.getMode_DisplayMode().equals(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.shokai)) {
                 set初期値_照会(entity);
             }
+        } else {
+            RDate システム日付 = RDate.getNowDate();
+            div.getTxtIdoYMD().setValue(システム日付);
         }
         setRequired();
         return entity;
@@ -524,10 +527,16 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = DataPassingConverter.deserialize(
                 div.getHdnKyodoShoriyoJukyushaIdoEntity(), KyodoshoriyoJukyushaIdoRenrakuhyoParam.class);
         if (entity == null) {
-            return null;
+            entity = new KyodoshoriyoJukyushaIdoRenrakuhyoParam();
+        }
+        if (entity.get共通項目Entity() == null) {
+            KyoutuuEntity 共通項目Entity = new KyoutuuEntity();
+            entity.set共通項目Entity(共通項目Entity);
         }
         entity.get共通項目Entity().set被保険者番号(new HihokenshaNo(div.getTxtHiHokenshaNo().getValue()));
-        entity.get共通項目Entity().set異動年月日(new FlexibleDate(div.getTxtIdoYMD().getValue().toDateString()));
+        if (div.getTxtIdoYMD().getValue() != null) {
+            entity.get共通項目Entity().set異動年月日(new FlexibleDate(div.getTxtIdoYMD().getValue().toDateString()));
+        }
         entity.get共通項目Entity().set証記載保険者番号(new ShoKisaiHokenshaNo(div.getTxtShoKisaiHokenshaNo().getValue()));
         if (JukyushaIF_IdoKubunCode.新規.get名称().equals(div.getRadIdoKubunCode().getSelectedValue())) {
             entity.get共通項目Entity().set異動区分(JukyushaIF_IdoKubunCode.新規.getコード());

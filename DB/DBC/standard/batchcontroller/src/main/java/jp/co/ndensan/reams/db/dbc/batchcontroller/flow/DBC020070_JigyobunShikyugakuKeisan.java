@@ -21,12 +21,10 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.KozaJohoForShik
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.ShikyugakuCalcProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.ShoriDateKanriMasterProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.ShoriKekkaKakuninRisutoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.ShoriKekkaKakuninRisutoPrtProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.UpdateMasterTableProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020070.UpdateShikyugakuUpdateTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020070.DBC020070_JigyobunShikyugakuKeisanParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -174,10 +172,7 @@ public class DBC020070_JigyobunShikyugakuKeisan extends BatchFlowBase<DBC020070_
 
     @Step(処理結果リスト作成)
     IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
-        KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
-                = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
-        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ1);
-        return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
+        return loopBatch(ShoriKekkaKakuninRisutoPrtProcess.class).define();
     }
 
     @Step(更新用一時の情報をマスタにINSERTする)

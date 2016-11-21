@@ -468,6 +468,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         List<SyokanbaraihiShikyuShinseiKetteEntity> entityList = new ArrayList<>();
         List<dgSyokanbaraikete_Row> rowList = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv()
                 .getDgSyokanbaraikete().getDataSource();
+        boolean 差額金額登録フラグ = true;
         if (rowList != null && !rowList.isEmpty()) {
             for (dgSyokanbaraikete_Row row : rowList) {
                 SyokanbaraihiShikyuShinseiKetteEntity entity = SyokanbaraihiShikyuShinseiKetteEntity.createSelectByKeyParam(
@@ -482,30 +483,28 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 entityList.add(entity);
             }
             boolean flag = rowList.get(定数_0).getSagakuKingaku().isDisabled();
-            boolean 差額金額登録フラグ = true;
             if (flag) {
                 差額金額登録フラグ = false;
             }
-            SyokanbaraihiShikyuShinseiKetteParameter parameter = SyokanbaraihiShikyuShinseiKetteParameter.createSelectByKeyParam(
-                    被保険者番号,
-                    サービス提供年月,
-                    整理番号,
-                    決定年月日,
-                    支給区分,
-                    支払金額合計初期,
-                    支払金額合計,
-                    差額金額,
-                    増減理由等,
-                    不支給理由等1,
-                    不支給理由等2,
-                    増減単位,
-                    差額金額登録フラグ,
-                    画面モード,
-                    識別コード,
-                    entityList);
-            return SyokanbaraihiShikyuShinseiKetteManager.createInstance().updKetteJoho(parameter, 証明書入力済フラグ, dbJoho);
         }
-        return null;
+        SyokanbaraihiShikyuShinseiKetteParameter parameter = SyokanbaraihiShikyuShinseiKetteParameter.createSelectByKeyParam(
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                決定年月日,
+                支給区分,
+                支払金額合計初期,
+                支払金額合計,
+                差額金額,
+                増減理由等,
+                不支給理由等1,
+                不支給理由等2,
+                増減単位,
+                差額金額登録フラグ,
+                画面モード,
+                識別コード,
+                entityList);
+        return SyokanbaraihiShikyuShinseiKetteManager.createInstance().updKetteJoho(parameter, 証明書入力済フラグ, dbJoho);
     }
 
     /**
@@ -558,9 +557,21 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             ShokanHanteiKekkaBuilder builder = dbJoho.get償還払支給判定結果().createBuilderForEdit();
             builder.set決定年月日(戻る情報.get償還払支給判定結果().get決定年月日());
             builder.set支給_不支給決定区分(戻る情報.get償還払支給判定結果().get支給_不支給決定区分());
-            builder.set支払金額(戻る情報.get償還払支給判定結果().get支払金額());
-            builder.set前回支払金額(戻る情報.get償還払支給判定結果().get前回支払金額());
-            builder.set差額金額合計(戻る情報.get償還払支給判定結果().get差額金額合計());
+            if (戻る情報.get償還払支給判定結果().get支払金額() != null) {
+                builder.set支払金額(戻る情報.get償還払支給判定結果().get支払金額());
+            } else {
+                builder.set支払金額(Decimal.ZERO);
+            }
+            if (戻る情報.get償還払支給判定結果().get前回支払金額() != null) {
+                builder.set前回支払金額(戻る情報.get償還払支給判定結果().get前回支払金額());
+            } else {
+                builder.set前回支払金額(Decimal.ZERO);
+            }
+            if (戻る情報.get償還払支給判定結果().get差額金額合計() != null) {
+                builder.set差額金額合計(戻る情報.get償還払支給判定結果().get差額金額合計());
+            } else {
+                builder.set差額金額合計(Decimal.ZERO);
+            }
             dbJoho.set償還払支給判定結果(builder.build().modified());
         }
         if (dbJoho.get償還払支給判定結果() == null) {

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -58,7 +57,7 @@ public class KyufukanrihyoOutDoBillOutEntity {
     private FlexibleDate shichosonKanyuYmd;
     private FlexibleDate shichosonDattaiYmd;
     private Decimal renban;
-    private HihokenshaNo hihokenshaNo;
+    private RString hihokenshaNo;
     private FlexibleYearMonth taishoYM;
     private RString rirekiNo;
     private FlexibleYearMonth riyoYM;
