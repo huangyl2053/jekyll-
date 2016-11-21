@@ -86,6 +86,7 @@ public class FukaKonkyoFactory {
             } else {
                 kazeiKubunHonninKubun.set課税区分(KazeiKubun.非課税);
             }
+            課税区分リスト.add(kazeiKubunHonninKubun);
             if (HonninKubun.本人.getCode().equals(世帯員.getHonninKubun())) {
                 賦課根拠.setGokeiShotoku(世帯員.getGokeiShotokuGaku());
                 賦課根拠.setKotekiNenkinShunyu(世帯員.getNenkiniShunyuGaku());
