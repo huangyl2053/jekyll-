@@ -116,20 +116,22 @@ public class UpdShoriHidukeKanriProcess extends SimpleBatchProcessBase {
         dbt7022Entity.setShoriEdaban(処理枝番);
         DbT7022ShoriDateKanriEntity result = ShoriDateKanriManager.createInstance()
                 .select処理日付管理マスタ_所得情報抽出連携異動(処理年度, ShoriName.所得引出.get名称(), 処理枝番, SubGyomuCode.DBB介護賦課);
+        DbT7022ShoriDateKanriEntity result前年度 = ShoriDateKanriManager.createInstance().select処理日付管理マスタ_所得情報抽出連携異動(
+                処理年度.minusYear(INT_1), ShoriName.所得引出.get名称(), 処理枝番, SubGyomuCode.DBB介護賦課);
         if (result != null) {
             最大年度内連番 = new RString((Integer.valueOf(result.getNendoNaiRenban().toString()) + INT_1)).padZeroToLeft(INT_4);
             対象開始日時 = result.getTaishoShuryoTimestamp();
-        } else {
+            dbt7022Entity.setNendoNaiRenban(最大年度内連番);
+            dbt7022Entity.setTaishoKaishiTimestamp(対象開始日時);
+        } else if (result前年度 != null) {
             最大年度内連番 = 枝番_0001;
-            DbT7022ShoriDateKanriEntity result前年度 = ShoriDateKanriManager.createInstance().select処理日付管理マスタ_所得情報抽出連携異動(
-                    処理年度.minusYear(INT_1), ShoriName.所得引出.get名称(), 処理枝番, SubGyomuCode.DBB介護賦課);
             対象開始日時 = result前年度.getTaishoShuryoTimestamp();
+            dbt7022Entity.setNendoNaiRenban(最大年度内連番);
+            dbt7022Entity.setTaishoKaishiTimestamp(対象開始日時);
         }
         dbt7022Entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
         dbt7022Entity.setShoriName(ShoriName.所得引出.get名称());
         dbt7022Entity.setNendo(処理年度);
-        dbt7022Entity.setNendoNaiRenban(最大年度内連番);
-        dbt7022Entity.setTaishoKaishiTimestamp(対象開始日時);
         dbt7022Entity.setKijunTimestamp(バッチ起動処理日時);
         dbt7022Entity.setTaishoShuryoTimestamp(バッチ起動処理日時);
         return dbt7022Entity;

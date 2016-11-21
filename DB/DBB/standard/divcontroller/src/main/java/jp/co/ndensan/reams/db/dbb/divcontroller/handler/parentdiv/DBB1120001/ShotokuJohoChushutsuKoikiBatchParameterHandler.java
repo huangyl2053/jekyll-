@@ -12,14 +12,10 @@ import jp.co.ndensan.reams.db.dbb.business.core.shotokujohochushutsu.ShotokuJoho
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112002.DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.SichousonEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112004.DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter;
-import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.dgShichosonIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeikoiki.ShotokuJohoChushutsuRenkeiKoiki;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
@@ -27,7 +23,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichoson
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -36,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -47,13 +41,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
 
     private final ShotokuJohoChushutsuKoikiBatchParameterDiv div;
-    private static final RString 事務広域 = new RString("111");
     private static final RString 処理区分_3 = new RString("3");
     private static final RString 市町村識別ID_00 = new RString("00");
-    private static final RString 広域保険者でないため = new RString("広域保険者でないため");
-    private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51008");
     private static final RString 当初所得引出 = new RString("当初所得引出");
-    private static final RString 所得引出 = new RString("所得引出");
     private static final RString 広域職員でないため = new RString("広域職員でないため");
     private static final RString なし = new RString("0");
     private static final RString 処理待ち = new RString("処理待ち");
@@ -76,29 +66,6 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
      */
     public static ShotokuJohoChushutsuKoikiBatchParameterHandler of(ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
         return new ShotokuJohoChushutsuKoikiBatchParameterHandler(div);
-    }
-
-    /**
-     * 画面初期化のチェック
-     *
-     * @param currentTime RDate
-     */
-    public void initCheck(RDate currentTime) {
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
-            RString 市町村形態コード = new RString(市町村セキュリティ情報.get導入形態コード().value().toString());
-            if (!事務広域.equals(市町村形態コード)) {
-                throw new ApplicationException(DbzErrorMessages.使用不可.getMessage()
-                        .replace(広域保険者でないため.toString()).evaluate());
-            }
-        }
-        RString メニューID = ResponseHolder.getMenuID();
-        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime, SubGyomuCode.DBB介護賦課);
-        RString 所得年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime, SubGyomuCode.DBB介護賦課);
-        if (所得情報抽出_連携異動.equals(メニューID) && !調定年度.equals(所得年度)) {
-            throw new ApplicationException(DbbErrorMessages.処理不可_関連機能未処理済.getMessage()
-                    .replace(当初所得引出.toString(), 所得引出.toString()).evaluate());
-        }
     }
 
     /**

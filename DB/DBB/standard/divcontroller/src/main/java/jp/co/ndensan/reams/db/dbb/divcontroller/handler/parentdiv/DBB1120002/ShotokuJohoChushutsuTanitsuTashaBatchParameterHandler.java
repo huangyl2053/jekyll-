@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.Shot
 import jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeitanitu.ShotokuJohoChushutsuRenkeitanitu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
@@ -38,19 +37,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
 
     private final ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div;
-    private static final RString 事務単一 = new RString("120");
     private static final RString 処理待ち = new RString("処理待ち");
     private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51009");
     private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51010");
-    private static final RString REAMS以外 = new RString("3");
-    private static final RString 更正なし = new RString("4");
     private static final RString 遷移区分_0 = new RString("0");
     private static final RString 遷移区分_1 = new RString("1");
     private static final RString 処理区分_2 = new RString("2");
     private static final RString 処理区分_3 = new RString("3");
     private static final RString ファイル付箋 = new RString("ShotokuJohoChushutsuTanitsuTasha");
-    private static final RString 単一保険者でないため = new RString("単一保険者でないため");
-    private static final RString 所得引出方法が不正のため = new RString("所得引出方法が不正のため");
     private static final RString 当初所得引出 = new RString("当初所得引出");
     private static final RString 所得引出 = new RString("所得引出");
     private static final RString 所得情報ファイル = new RString("BBKAIGO.CSV");
@@ -72,33 +66,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      */
     public static ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler of(ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
         return new ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler(div);
-    }
-
-    /**
-     * 画面初期化のチェック
-     *
-     * @param currentTime RDate
-     */
-    public void initCheck(RDate currentTime) {
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
-            RString 市町村形態コード = new RString(市町村セキュリティ情報.get導入形態コード().value().toString());
-            if (!事務単一.equals(市町村形態コード)) {
-                throw new ApplicationException(DbzErrorMessages.使用不可.getMessage()
-                        .replace(単一保険者でないため.toString()).evaluate());
-            }
-        }
-        RString メニューID = ResponseHolder.getMenuID();
-        RString config = DbBusinessConfig.get(ConfigNameDBB.所得引出_所得引出方法, currentTime, SubGyomuCode.DBB介護賦課);
-        if (所得情報抽出_連携当初.equals(メニューID)) {
-            if (!REAMS以外.equals(config) && !更正なし.equals(config)) {
-                throw new ApplicationException(DbzErrorMessages.使用不可.getMessage()
-                        .replace(所得引出方法が不正のため.toString()).evaluate());
-            }
-        } else if (所得情報抽出_連携異動.equals(メニューID) && !REAMS以外.equals(config)) {
-            throw new ApplicationException(DbzErrorMessages.使用不可.getMessage()
-                    .replace(所得引出方法が不正のため.toString()).evaluate());
-        }
     }
 
     /**
@@ -131,25 +98,28 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
                         SubGyomuCode.DBB介護賦課);
             }
             if (年度 != null) {
-                RString 処理区分;
-                if (市町村識別ID != null && !市町村識別ID.isEmpty()) {
-                    処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance()
-                            .getShoriKubun(市町村識別ID.get(0).getItemId(), 遷移区分, new FlexibleYear(年度));
-                } else {
-                    処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance()
-                            .getShoriKubun(RString.EMPTY, 遷移区分, new FlexibleYear(年度));
-                }
-                処理区分Handler(メニューID, 処理区分);
+                処理区分Handler(メニューID, edit処理区分(遷移区分, 市町村識別ID, 年度));
             }
         }
+    }
+
+    private RString edit処理区分(RString 遷移区分, List<AuthorityItem> 市町村識別ID, RString 年度) {
+        RString 処理区分;
+        if (市町村識別ID != null && !市町村識別ID.isEmpty()) {
+            処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance()
+                    .getShoriKubun(市町村識別ID.get(0).getItemId(), 遷移区分, new FlexibleYear(年度));
+        } else {
+            処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance()
+                    .getShoriKubun(RString.EMPTY, 遷移区分, new FlexibleYear(年度));
+        }
+        return 処理区分;
     }
 
     /**
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータの設定します。
      *
      * @param 共有ファイルID RDateTime
-     * @return DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter
-     * 所得情報抽出・連携_バッチパラメータクラスです
+     * @return DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter 所得情報抽出・連携_バッチパラメータクラスです
      */
     public DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter getBatchParamter_DBB112001(RDateTime 共有ファイルID) {
         ShotokuJohoChushutsuGamenParameter param = new ShotokuJohoChushutsuGamenParameter();
@@ -166,8 +136,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータの設定します。
      *
      * @param 共有ファイルID RDateTime
-     * @return DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter
-     * 所得情報抽出・連携_バッチパラメータクラスです
+     * @return DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter 所得情報抽出・連携_バッチパラメータクラスです
      */
     public DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter getBatchParameter_DBB112003(RDateTime 共有ファイルID) {
         ShotokuJohoChushutsuGamenParameter param = new ShotokuJohoChushutsuGamenParameter();
