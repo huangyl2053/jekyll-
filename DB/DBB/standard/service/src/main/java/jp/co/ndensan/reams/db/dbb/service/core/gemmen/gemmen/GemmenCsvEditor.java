@@ -52,7 +52,7 @@ public class GemmenCsvEditor {
         if (entity.getTsuchishoNo() != null) {
             csvEntity.set通知書番号(entity.getTsuchishoNo().getColumnValue());
         }
-        csvEntity.set履歴番号(new RString(entity.getRirekiNo()));
+        csvEntity.set履歴番号(new RString(entity.getRirekiNo() + 1));
         if (entity.getHihokenshaNo() != null) {
             csvEntity.set被保険者番号(entity.getHihokenshaNo().getColumnValue());
         }
