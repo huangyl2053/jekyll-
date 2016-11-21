@@ -212,7 +212,11 @@ public class RiyoshaFutanWariaiHanteiManager {
         DbT3113RiyoshaFutanWariaiEntity 利用者負担割合entity = new DbT3113RiyoshaFutanWariaiEntity();
         List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報 = マージResult.get利用者負担割合明細情報();
         List<RiyoshaFutanWariaiKonkyoTempEntity> 利用者負担割合根拠情報 = マージResult.get利用者負担割合根拠情報();
-        get利用者負担割合entity(年度, 被保険者番号, 利用者負担割合entity, 利用者負担割合明細情報.get(0));
+        RString koseiJiyu = RString.EMPTY;
+        if (利用者負担割合明細情報 != null && !利用者負担割合明細情報.isEmpty()) {
+            koseiJiyu = 利用者負担割合明細情報.get(0).getKoseiJiyu();
+        }
+        get利用者負担割合entity(年度, 被保険者番号, 利用者負担割合entity, koseiJiyu);
         判定結果.set利用者負担割合entity(利用者負担割合entity);
         List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細list
                 = get利用者負担割合明細list(年度, 被保険者番号, 利用者負担割合明細情報);
@@ -459,7 +463,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             FlexibleYear 年度,
             HihokenshaNo 被保険者番号,
             DbT3113RiyoshaFutanWariaiEntity 利用者負担割合entity,
-            RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp) {
+            RString koseiJiyu) {
         利用者負担割合entity.setNendo(年度);
         利用者負担割合entity.setHihokenshaNo(被保険者番号);
         DbT3113RiyoshaFutanWariaiEntity entity = 利用者負担割合Dac.selectMax履歴番号(年度, 被保険者番号);
@@ -472,7 +476,11 @@ public class RiyoshaFutanWariaiHanteiManager {
         利用者負担割合entity.setShokenFlag(false);
         利用者負担割合entity.setHanteiYMD(FlexibleDate.getNowDate());
         利用者負担割合entity.setHanteiKubun(FOUR);
-        利用者負担割合entity.setKoseiJiyu(new Code(利用者負担割合明細Temp.getKoseiJiyu()));
+        if (!RString.isNullOrEmpty(koseiJiyu)) {
+            利用者負担割合entity.setKoseiJiyu(new Code(koseiJiyu));
+        } else {
+            利用者負担割合entity.setKoseiJiyu(Code.EMPTY);
+        }
         利用者負担割合entity.setHakoKubun(ZERO);
         利用者負担割合entity.setHakoYMD(FlexibleDate.EMPTY);
         利用者負担割合entity.setKofuYMD(FlexibleDate.EMPTY);
