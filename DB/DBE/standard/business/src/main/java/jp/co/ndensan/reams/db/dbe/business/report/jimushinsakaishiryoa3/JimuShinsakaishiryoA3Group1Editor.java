@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 /**
  * 事務局審査会対象者一覧A3版Editorです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-190 lishengli
  */
 public class JimuShinsakaishiryoA3Group1Editor implements IJimuShinsakaishiryoA3Editor {
 

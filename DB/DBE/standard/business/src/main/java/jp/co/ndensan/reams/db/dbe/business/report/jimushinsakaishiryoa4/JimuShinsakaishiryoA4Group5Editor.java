@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 主治医意見書1枚目A4版Editorです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-190 lishengli
  */
 public class JimuShinsakaishiryoA4Group5Editor implements IJimuShinsakaishiryoA4Editor {
 

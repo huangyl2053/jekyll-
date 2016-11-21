@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 委員用特記事項（2枚目以降）A3版のEditorです。
  *
- * @reamsid_L DBE-0150-290 lishengli
+ * @reamsid_L DBE-0150-330 lishengli
  */
 public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
 

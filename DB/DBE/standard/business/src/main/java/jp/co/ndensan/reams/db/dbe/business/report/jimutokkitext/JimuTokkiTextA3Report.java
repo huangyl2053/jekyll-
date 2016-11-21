@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 特記事項A3版のReportクラスです。
+ * 事務局用一次判定+特記事項A3版のReportクラスです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-320 lishengli
  */
 public class JimuTokkiTextA3Report extends Report<JimuTokkiTextA3ReportSource> {
 
@@ -31,7 +31,7 @@ public class JimuTokkiTextA3Report extends Report<JimuTokkiTextA3ReportSource> {
     /**
      * インスタンスを生成します。
      *
-     * @param data 一次判定特+記事項A3版のEntityクラス
+     * @param data 一次判定+特記事項A3版のEntityクラス
      */
     public JimuTokkiTextA3Report(IchijihanteikekkahyoA3Entity data) {
         this.data = data;
