@@ -50,6 +50,7 @@ public class SyoriTaisyoShichosonProcess extends BatchProcessBase<DbT7022ShoriDa
     private static final RString FILENAME = new RString("fuseigoList.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBA800001");
     private List<RString> 市町村コードlist;
+    private RString 市町村コード;
     private RDateTime 抽出開始日時;
     private DbT7022ShoriDateKanriEntity 処理日付情報;
     private FileSpoolManager manager;
@@ -86,8 +87,9 @@ public class SyoriTaisyoShichosonProcess extends BatchProcessBase<DbT7022ShoriDa
             抽出開始日時 = item.getKijunTimestamp().getRDateTime();
         }
         処理日付情報 = item;
+        市町村コード = item.getShichosonCode().value();
         tableWrite.update(business.データ更新(processParameter, 処理日付情報));
-        宛名識別対象異動分取得PSM(抽出開始日時, processParameter);
+        更新宛名識別対象異動分取得PSM(抽出開始日時, processParameter, 市町村コード);
         市町村コードlist.add(item.getShichosonCode().value());
     }
 
@@ -102,7 +104,21 @@ public class SyoriTaisyoShichosonProcess extends BatchProcessBase<DbT7022ShoriDa
                     && processParameter.getShichosonCode().contains(宛名識別対象.get現地方公共団体コード().value())) {
                 juminidorendoshikakutoroku.to住民異動情報(宛名識別対象, csvWriter);
             }
+        }
+    }
 
+    private void 更新宛名識別対象異動分取得PSM(RDateTime 抽出開始日時, JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter,
+            RString 現地方公共団体コード) {
+        SyoriTaisyoShichoson syoritaisyoshichoson = new SyoriTaisyoShichoson();
+        ShikibetsuTaishoIdoSearchKeyBuilder keyBuilder = syoritaisyoshichoson.宛名識別対象異動分取得PSM(抽出開始日時, processParameter);
+        ShikibetsuTaishoIdoFinder finder = ShikibetsuTaishoIdoFinder.createInstance();
+        List<ShikibetsuTaishoIdoJoho> 宛名累積マスタデータリスト = finder.get宛名識別対象異動(keyBuilder.build());
+        JuminIdoRendoShikakuToroku juminidorendoshikakutoroku = new JuminIdoRendoShikakuToroku();
+        for (ShikibetsuTaishoIdoJoho 宛名識別対象 : 宛名累積マスタデータリスト) {
+            if (異動後.equals(宛名識別対象.get異動前後区分())
+                    && 現地方公共団体コード.equals(宛名識別対象.get現地方公共団体コード().value())) {
+                juminidorendoshikakutoroku.to住民異動情報(宛名識別対象, csvWriter);
+            }
         }
     }
 
@@ -114,8 +130,8 @@ public class SyoriTaisyoShichosonProcess extends BatchProcessBase<DbT7022ShoriDa
                 business.データ登録(processParameter, entity, processParameter.getShichosonCode().get(i));
                 tableWrite.insert(entity);
             }
-            宛名識別対象異動分取得PSM(null, processParameter);
         }
+        宛名識別対象異動分取得PSM(null, processParameter);
         manager.spool(filePath);
     }
 
