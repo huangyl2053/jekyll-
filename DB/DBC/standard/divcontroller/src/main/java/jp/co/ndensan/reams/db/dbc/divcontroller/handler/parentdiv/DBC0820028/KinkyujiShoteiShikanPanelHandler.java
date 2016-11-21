@@ -733,23 +733,18 @@ public final class KinkyujiShoteiShikanPanelHandler {
                 getValue().toDateString().substring(0, SIX));
         RString 整理番号 = keys.get整理番号();
         RString 明細番号 = keys.get明細番号();
-        int max連番 = 0;
         Map<RString, ShokanShoteiShikkanShisetsuRyoyo> map = new HashMap<>();
         for (ShokanShoteiShikkanShisetsuRyoyo entity : shokanShoteiShikkanShisetsuRyoyoList) {
             map.put(entity.get連番(), entity);
-            if (max連番 < Integer.valueOf(entity.get連番().toString())) {
-                max連番 = Integer.valueOf(entity.get連番().toString());
-            }
         }
 
         List<ShokanShoteiShikkanShisetsuRyoyo> list = new ArrayList<>();
 
         for (dgdKinkyujiShoteiList_Row row : div.getDgdKinkyujiShoteiList().getDataSource()) {
             if (RowState.Added == row.getRowState()) {
-                max連番 = max連番 + 1;
                 ShokanShoteiShikkanShisetsuRyoyo entity = new ShokanShoteiShikkanShisetsuRyoyo(
                         被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号,
-                        new RString(String.format(書式.toString(), max連番)));
+                        new RString(String.format(書式.toString(), Integer.valueOf(row.getRenban().toString()))));
                 entity = entity.added();
                 entity = buildEntity(entity, row);
                 list.add(entity);
