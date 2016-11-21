@@ -130,7 +130,7 @@ public class JuminIdoRendoShikakuSoshitsuShibo {
                 || RString.isNullOrEmpty(被保台帳直近List.get(0).getShikakuSoshitsuJiyuCode()))
                 && 年齢.compareTo(storeConfigParamter.get第２号被保険者基準年齢()) < 0) {
             JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
-                    被保台帳直近List, entity.get適用除外者台帳EntityList(),
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
                     entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
             return true;
         }

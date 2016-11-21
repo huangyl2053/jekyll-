@@ -33,7 +33,6 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
     private final RString 非受給者 = new RString("0");
     private final RString 受給者 = new RString("1");
     private final RString 直近 = new RString("1");
-    private final RString 転出 = new RString("2");
     private final RString 不整合コード_9999 = new RString("9999");
 
     /**
@@ -175,7 +174,7 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
                 && Integer.valueOf(paramter.get年齢().toString()) < Integer.valueOf(第２号被保険者基準年齢.toString())) {
 
             JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
-                    dbT1001List, entity.get適用除外者台帳EntityList(),
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
                     entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
             return false;
         }
