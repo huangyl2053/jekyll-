@@ -765,10 +765,10 @@ public class KariSanteiIdoFukaBatchFath {
             } else {
                 通帳番号 = koza.getEdited通帳番号();
             }
-            return 金融機関コード.concat(RString.FULL_SPACE)
+            return 金融機関コード.concat(RString.HALF_SPACE)
                     .concat(通帳記号)
                     .concat(HYPHEN).concat(通帳番号)
-                    .concat(RString.FULL_SPACE).concat(koza.get口座名義人漢字().toString());
+                    .concat(RString.HALF_SPACE).concat(koza.get口座名義人漢字().toString());
         }
         return RString.EMPTY;
     }
@@ -788,9 +788,9 @@ public class KariSanteiIdoFukaBatchFath {
             }
             口座番号 = koza.get口座番号().substringReturnAsPossible(NUM_0, NUM_7);
             return 金融機関コード.concat(HYPHEN)
-                    .concat(支店コード).concat(RString.FULL_SPACE)
+                    .concat(支店コード).concat(RString.HALF_SPACE)
                     .concat(預金種別略称)
-                    .concat(HYPHEN).concat(口座番号).concat(RString.FULL_SPACE)
+                    .concat(HYPHEN).concat(口座番号).concat(RString.HALF_SPACE)
                     .concat(koza.get口座名義人漢字().toString());
         }
         return RString.EMPTY;
