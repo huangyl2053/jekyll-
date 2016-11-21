@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisan
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -25,6 +26,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranReport extends Report<Tokubetsu
 
     private final TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表;
     private final TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表;
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final RString title;
     private final YMDHMS 調定日時;
     private final FlexibleYear 調定年度;
@@ -36,6 +38,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranReport extends Report<Tokubetsu
      *
      * @param 特徴平準化結果対象者一覧表 TokuchoHeijunkaRokuBatchTaishoshaIchiran
      * @param 特徴平準化結果対象外一覧表 TokuchoHeijunkaRokuBatchTaishogaiIchiran
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param 調定日時 YMDHMS
      * @param 調定年度 FlexibleYear
      * @param association Association
@@ -45,6 +48,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranReport extends Report<Tokubetsu
     public TokubetsuChoshuHeijunkaKeisanIchiranReport(
             TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表,
             TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表,
+            ChohyoSeigyoKyotsu 帳票制御共通,
             YMDHMS 調定日時,
             FlexibleYear 調定年度,
             Association association,
@@ -53,6 +57,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranReport extends Report<Tokubetsu
 
         this.特徴平準化結果対象者一覧表 = 特徴平準化結果対象者一覧表;
         this.特徴平準化結果対象外一覧表 = 特徴平準化結果対象外一覧表;
+        this.帳票制御共通 = 帳票制御共通;
         this.調定日時 = 調定日時;
         this.調定年度 = 調定年度;
         this.association = association;
@@ -67,7 +72,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranReport extends Report<Tokubetsu
                 = new TokubetsuChoshuHeijunkaKeisanIchiranHeaderEditor(調定日時, 調定年度, title, outputOrder);
 
         ITokubetsuChoshuHeijunkaKeisanIchiranEditor bodyEditor
-                = new TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor(特徴平準化結果対象者一覧表, 特徴平準化結果対象外一覧表, association);
+                = new TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor(特徴平準化結果対象者一覧表, 特徴平準化結果対象外一覧表, 帳票制御共通, association);
         ITokubetsuChoshuHeijunkaKeisanIchiranBuilder builder
                 = new TokubetsuChoshuHeijunkaKeisanIchiranBuilder(headerEditor, bodyEditor);
         writer.writeLine(builder);

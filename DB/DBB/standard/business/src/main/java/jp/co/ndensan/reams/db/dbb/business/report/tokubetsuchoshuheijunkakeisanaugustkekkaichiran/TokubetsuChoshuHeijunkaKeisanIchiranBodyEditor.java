@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran;
 
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishogaiEntity;
@@ -16,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -44,6 +42,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
 
     private final TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表;
     private final TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表;
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
     private static final int NUM_0 = 0;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
@@ -65,14 +64,17 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
      *
      * @param 特徴平準化結果対象者一覧表 TokuchoHeijunkaRokuBatchTaishoshaIchiran
      * @param 特徴平準化結果対象外一覧表 TokuchoHeijunkaRokuBatchTaishogaiIchiran
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association Association
      */
     public TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor(
             TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表,
             TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表,
+            ChohyoSeigyoKyotsu 帳票制御共通,
             Association association) {
         this.特徴平準化結果対象者一覧表 = 特徴平準化結果対象者一覧表;
         this.特徴平準化結果対象外一覧表 = 特徴平準化結果対象外一覧表;
+        this.帳票制御共通 = 帳票制御共通;
         this.association = association;
     }
 
@@ -80,8 +82,6 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
     public TokubetsuChoshuHeijunkaKeisanIchiranSource edit(TokubetsuChoshuHeijunkaKeisanIchiranSource source) {
         source.hokenshacd = association.get地方公共団体コード().value();
         source.hokenshamei = association.get市町村名();
-        ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager()
-                .get帳票制御共通(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200005.getReportId());
         if (特徴平準化結果対象者一覧表 != null) {
             対象者項目編集(特徴平準化結果対象者一覧表, source, 帳票制御共通, association);
         }
