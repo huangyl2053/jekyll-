@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -80,8 +79,11 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateK
         result.setNendoNaiRenban(get新規年度内連番(entity.getNendoNaiRenban()));
         if (parameter.get受取年月() != null && !parameter.get受取年月().isEmpty()) {
             result.setKijunYMD(new FlexibleDate(parameter.get受取年月().getYearValue(), parameter.get受取年月().getMonthValue(), NUM_1));
+        } else {
+            result.setKijunYMD(FlexibleDate.EMPTY);
         }
-        result.setTaishoKaishiTimestamp(new YMDHMS(parameter.get処理日時()));
+        result.setTaishoKaishiYMD(new FlexibleDate(parameter.get処理日時().getDate().toDateString()));
+        result.setTaishoShuryoYMD(FlexibleDate.EMPTY);
         tableWriter.insert(result);
     }
 
@@ -105,8 +107,11 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateK
             result.setNendoNaiRenban(get新規年度内連番(null));
             if (parameter.get受取年月() != null && !parameter.get受取年月().isEmpty()) {
                 result.setKijunYMD(new FlexibleDate(parameter.get受取年月().getYearValue(), parameter.get受取年月().getMonthValue(), NUM_1));
+            } else {
+                result.setKijunYMD(FlexibleDate.EMPTY);
             }
-            result.setTaishoKaishiTimestamp(new YMDHMS(parameter.get処理日時()));
+            result.setTaishoKaishiYMD(new FlexibleDate(parameter.get処理日時().getDate().toDateString()));
+            result.setTaishoShuryoYMD(FlexibleDate.EMPTY);
             tableWriter.insert(result);
         }
     }
