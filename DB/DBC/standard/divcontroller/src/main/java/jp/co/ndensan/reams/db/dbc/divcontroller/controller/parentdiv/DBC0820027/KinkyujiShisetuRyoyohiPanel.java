@@ -545,40 +545,6 @@ public class KinkyujiShisetuRyoyohiPanel {
         return nyuryokuFlag;
     }
 
-//    private ShomeishoHenkoFlag set証明書変更済フラグMap(
-//            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap,
-//            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter, ShomeishoHenkoFlag henkoFlag) {
-//        for (Map.Entry<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> mapValue : 証明書変更済フラグMap.entrySet()) {
-//            ShoukanharaihishinseimeisaikensakuParameter parameter = mapValue.getKey();
-//            if (is同じキー(parameter, kensakuParameter)) {
-//                henkoFlag = mapValue.getValue();
-//                証明書変更済フラグMap.remove(parameter);
-//            }
-//        }
-//        return henkoFlag;
-//    }
-//
-//    private ShomeishoNyuryokuFlag set証明書入力済フラグMap(
-//            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap,
-//            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter, ShomeishoNyuryokuFlag nyuryokuFlag) {
-//        for (Map.Entry<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> mapValue : 証明書入力済フラグMap.entrySet()) {
-//            ShoukanharaihishinseimeisaikensakuParameter parameter = mapValue.getKey();
-//            if (is同じキー(parameter, kensakuParameter)) {
-//                nyuryokuFlag = mapValue.getValue();
-//                証明書入力済フラグMap.remove(parameter);
-//            }
-//        }
-//        return nyuryokuFlag;
-//    }
-//    private boolean is同じキー(
-//            ShoukanharaihishinseimeisaikensakuParameter parameter, ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
-//        return parameter.getサービス年月().equals(kensakuParameter.getサービス年月())
-//                && parameter.get事業者番号().equals(kensakuParameter.get事業者番号())
-//                && parameter.get整理番号().equals(kensakuParameter.get整理番号())
-//                && parameter.get明細番号().equals(kensakuParameter.get明細番号())
-//                && parameter.get様式番号().equals(kensakuParameter.get様式番号())
-//                && parameter.get被保険者番号().equals(kensakuParameter.get被保険者番号());
-//    }
     private void set証明書フラグ(
             RString 処理モード, boolean is変更あり, ShomeishoNyuryokuFlag nyuryokuFlag,
             Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap,
