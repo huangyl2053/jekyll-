@@ -429,17 +429,16 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     }
 
     private void set生保の情報List(FukaKeisanEntity entity) {
-        if (entity.get生活保護受給者Entity() != null) {
-            if (!entity.get生活保護受給者Entity().getShikibetsuCode().equals(識別コード)
-                    || !entity.get生活保護受給者Entity().getGyomuCode().equals(業務コード)
-                    || !entity.get生活保護受給者Entity().getJukyuKaishiYMD().equals(受給開始日)) {
-                SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
-                生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
-                生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
-                set生保の情報(生活保護受給者RelateEntity);
-                生活保護扶助種類EntityList.clear();
-                set識別コード(entity);
-            }
+        if (entity.get生活保護受給者Entity() != null
+                && !(entity.get生活保護受給者Entity().getShikibetsuCode().equals(識別コード)
+                && entity.get生活保護受給者Entity().getGyomuCode().equals(業務コード)
+                && entity.get生活保護受給者Entity().getJukyuKaishiYMD().equals(受給開始日))) {
+            SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
+            生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
+            生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
+            set生保の情報(生活保護受給者RelateEntity);
+            生活保護扶助種類EntityList.clear();
+            set識別コード(entity);
         }
     }
 
