@@ -75,7 +75,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private static final RString 徴収_なし = new RString("徴収なし");
     private static final RString 随時 = new RString("随時");
     private static final RString 現年随時 = new RString("現年随時");
-    private static final List<Integer> 月List = Arrays.asList(期_4, 期_7, 期_6, 期_7, 期_8, 期_9);
+    private static final List<Integer> 月リスト = Arrays.asList(期_4, 期_7, 期_6, 期_7, 期_8, 期_9);
 
     /**
      * 仮算定通知書共通情報を作成します。
@@ -545,7 +545,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private List<Integer> getRightKi(List<NokiJoho> 納期情報リスト) {
         List<Integer> list = new ArrayList<>();
         for (NokiJoho nokiJoho : 納期情報リスト) {
-            if (月List.contains(nokiJoho.get期月().get月AsInt()) && !list.contains(nokiJoho.get期月().get期AsInt())) {
+            if (月リスト.contains(nokiJoho.get期月().get月AsInt()) && !list.contains(nokiJoho.get期月().get期AsInt())) {
                 list.add(nokiJoho.get期月().get期AsInt());
             }
         }
@@ -650,7 +650,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         TokuchoKiUtil tokuchoKiUtil = new TokuchoKiUtil();
         KitsukiList 特徴期月リスト = tokuchoKiUtil.get期月リスト();
         List<Kitsuki> list = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 1; i <= 期_6; i++) {
             for (NokiJoho 納期情報 : 特徴納期情報リスト) {
                 if (納期情報.get期月().get期AsInt() == (i)
                         && 納期情報.get期月().get月AsInt() == 特徴期月リスト.get期の最初月(i).get月AsInt()) {
