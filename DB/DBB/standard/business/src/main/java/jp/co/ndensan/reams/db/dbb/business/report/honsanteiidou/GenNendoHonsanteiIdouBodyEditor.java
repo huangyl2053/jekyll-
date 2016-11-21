@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.source.gennendohonsanteiidou.Gen
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -650,7 +650,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
     }
 
     private void kozaJoho(GenNendoHonsanteiIdouSource source) {
-        KozaRelateEntity releteEntity = 計算後情報_宛名_口座_更正後Entity.get口座Entity();
+        TokuteiKozaRelateEntity releteEntity = 計算後情報_宛名_口座_更正後Entity.get口座Entity();
         IKoza koza = new Koza(releteEntity);
         if (koza.get金融機関コード() != null) {
             if (ゆうちょ銀行.equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4)) && koza.get金融機関コード().value().length() >= NUM_4) {
