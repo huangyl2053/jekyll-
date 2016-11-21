@@ -258,10 +258,12 @@ public class SokujiFukaKoseiService {
             koseiParam.set通知書番号(param.get通知書番号());
             koseiParam.set年度分賦課リスト(年度分賦課リストList);
             koseiParam.set徴収方法の情報(徴収方法の情報);
-            List<DbT1001HihokenshaDaichoEntity> daichoEntity = 被保険者台帳管理Dac.get被保険者台帳管理情報(param.get被保険者番号());
+            List<DbT1001HihokenshaDaichoEntity> daichoEntity = 被保険者台帳管理Dac.select有効な資格の情報(param.get被保険者番号());
             List<HihokenshaDaicho> 資格の情報 = new ArrayList<>();
             for (int i = 0; i < daichoEntity.size(); i++) {
-                資格の情報.add(new HihokenshaDaicho(daichoEntity.get(i)));
+                DbT1001HihokenshaDaichoEntity entity = 被保険者台帳管理Dac.selectByKey(daichoEntity.get(i).getHihokenshaNo(),
+                        daichoEntity.get(i).getIdoYMD(), daichoEntity.get(i).getEdaNo());
+                資格の情報.add(new HihokenshaDaicho(entity));
             }
             koseiParam.set資格の情報リスト(資格の情報);
 
@@ -527,12 +529,10 @@ public class SokujiFukaKoseiService {
         FukaJohoBuilder builder = 根拠反映後賦課の情報.createBuilderForEdit();
         if (!is普徴期別金額あり(根拠反映後賦課の情報)) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
+        } else if (!get口座の情報(識別コード).isEmpty()) {
+            builder.set口座区分(KozaKubun.口座振替.getコード());
         } else {
-            if (!get口座の情報(識別コード).isEmpty()) {
-                builder.set口座区分(KozaKubun.口座振替.getコード());
-            } else {
-                builder.set口座区分(KozaKubun.現金納付.getコード());
-            }
+            builder.set口座区分(KozaKubun.現金納付.getコード());
         }
         builder.set職権区分(ShokkenKubun.非該当.getコード());
         HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
