@@ -61,6 +61,8 @@ public class InsKogakuKaigoServiceHiProcess extends SimpleBatchProcessBase {
             dbT3054Entity.setServiceTeikyoYM(entity.getServiceTeikyoYM());
             dbT3054Entity.setJigyoshaNo(entity.getJigyoshaNo());
             dbT3054Entity.setServiceShuruiCode(entity.getServiceShuruiCode());
+            dbT3054Entity.setRirekiNo(entity.getRirekiNo());
+            dbT3054Entity.setServiceHiyoGokeiGaku(entity.getServiceHiyoGokeiGaku());
             dbT3054Entity.setRiyoshaFutanGaku(entity.getRiyoshaFutanGaku());
             dbT3054Entity.setKogakuKyufuKonkyo(entity.getKogakuKyufuKonkyo());
             dbT3054Entity.setTaishoshaUketoriYM(FlexibleYearMonth.EMPTY);

@@ -124,19 +124,21 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
     }
 
     @Override
+    protected void createWriter() {
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
+        eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
+        csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
+                .setDelimiter(コンマ)
+                .setEnclosure(ダブル引用符)
+                .setEncode(Encode.UTF_8withBOM)
+                .hasHeader(true).setHeader(headerList)
+                .build();
+    }
+
+    @Override
     protected void process(DbWT1002KokuhorenSakuseiErrorTempEntity entity) {
-        if (null == csvListWriter) {
-            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                    EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-            RString spoolWorkPath = manager.getEucOutputDirectry();
-            eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-            csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
-                    .setDelimiter(コンマ)
-                    .setEnclosure(ダブル引用符)
-                    .setEncode(Encode.UTF_8withBOM)
-                    .hasHeader(true).setHeader(headerList)
-                    .build();
-        }
 
         List<RString> outputList = this.getCSVファイル(entity);
         csvListWriter.writeLine(this.toBodyList(outputList));

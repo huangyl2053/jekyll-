@@ -780,6 +780,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(true);
         div.getBtnKakuteiShintei().setVisible(true);
+        div.getDdlShinseiTaishoNendo().setReadOnly(false);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
     }

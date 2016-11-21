@@ -56,6 +56,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * サービス利用票情報DivのHandlerクラスです。
@@ -821,29 +822,44 @@ public class ServiceRiyohyoInfoDivHandler {
                 || RSTRING_09.equals(利用サービス.get単位数識別().getKey()))) {
             総合事業以外の場合(サービス種類Tmp, 利用サービス);
         }
-
-        if (RSTRING_17.equals(サービス種類Tmp)
-                || RSTRING_67.equals(サービス種類Tmp)
-                || RSTRING_88.equals(サービス種類Tmp)) {
-            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setReadOnly(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setReadOnly(true);
-            div.getBtnCalcMeisai().setVisible(false);
-            div.getBtnCalcGokei().setVisible(false);
-            div.getBtnBeppyoMeisaiKakutei().setVisible(false);
-            div.getBtnBeppyoGokeiKakutei().setDisabled(false);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(false);
-            div.getBtnCancelMeisaiInput().setVisible(false);
-            div.getBtnCalcMeisaiGokei().setVisible(false);
-        }
+        
         if (サービスフラグTmp && 利用サービス
                 != null) {
+            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(false);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setReadOnly(false);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setReadOnly(false);
             div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue(
                     new Decimal(利用サービス.get単位数()));
             div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg()
                     .setValue(利用サービス.get限度額対象外フラグ());
             div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn()
                     .setValue(利用サービス.get利用者負担定率定額区分());
+            div.getBtnCalcMeisai().setDisabled(false);
+            div.getBtnCalcMeisaiGokei().setDisabled(true);
+            div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
+        }
+        if (サービスフラグTmp && 利用サービス
+                == null) {
+            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(false);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setReadOnly(false);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setReadOnly(false);
+            div.getBtnCalcMeisai().setDisabled(false);
+            div.getBtnCalcMeisaiGokei().setDisabled(true);
+            div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
+        }
+        if (RSTRING_17.equals(サービス種類Tmp)
+                || RSTRING_67.equals(サービス種類Tmp)
+                || RSTRING_88.equals(サービス種類Tmp)) {
+            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setReadOnly(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setReadOnly(true);
+//            div.getBtnCalcMeisaiGokei().setDisabled(false);
+//            div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(false);   
+            div.getBtnBeppyoGokeiKakutei().setDisabled(false);
+            div.getBtnCalcMeisai().setDisplayNone(true);
+            div.getBtnCalcGokei().setDisplayNone(true);
+            div.getBtnBeppyoMeisaiKakutei().setDisplayNone(true);
         }
     }
 
@@ -1362,14 +1378,14 @@ public class ServiceRiyohyoInfoDivHandler {
         ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(給付率));
         div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(給付率);
 
-        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
-        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
+//        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
+//        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
+//        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
 //        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
 //        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
 
-        div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoGokei().setDisabled(false);
+//        div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
+//        div.getServiceRiyohyoBeppyoGokei().setDisabled(false);
     }
 
     /**
@@ -1619,7 +1635,15 @@ public class ServiceRiyohyoInfoDivHandler {
      * @param 居宅総合事業区分 RString
      * @param 短期入所情報 TankiNyushoResult
      */
+    @Transaction
     public void DB削除処理(RString 居宅総合事業区分, TankiNyushoResult 短期入所情報) {
+        List<KyufuJikoSakuseiResult> サービス利用票情報 = div.getサービス利用票情報();
+        List<dgServiceRiyohyoBeppyoList_Row> rowList = div.getServiceRiyohyoBeppyoList()
+                .getDgServiceRiyohyoBeppyoList().getDataSource();
+        for (dgServiceRiyohyoBeppyoList_Row row : rowList) {
+            row.setRowState(RowState.Deleted);
+        }
+        div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
         if (総合事業.equals(居宅総合事業区分)) {
             if (短期入所情報 == null || !居宅予防区分_1.equals(短期入所情報.get居宅予防区分())) {
                 return;
@@ -1628,6 +1652,7 @@ public class ServiceRiyohyoInfoDivHandler {
                     .create(YoboKeikakuJikoSakuseiTankiRiyoNissuManager.class);
             if (div.getTxtSofuYM().getValue() == null
                     && KyufukanrihyoSakuseiKubun.新規.getコード().equals(div.getDdlKoshinKbn().getSelectedKey())) {
+                init保存処理(居宅総合事業区分, サービス利用票情報);
                 yoboManager.delete予防短期入所情報(短期入所情報.get予防短期入所情報());
             } else {
                 YoboKeikakuJikoSakuseiTankiRiyoNissuBuilder builder = 短期入所情報.get予防短期入所情報().createBuilderForEdit();
@@ -1648,6 +1673,7 @@ public class ServiceRiyohyoInfoDivHandler {
                     .create(KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuManager.class);
             if (div.getTxtSofuYM().getValue() == null
                     && KyufukanrihyoSakuseiKubun.新規.getコード().equals(div.getDdlKoshinKbn().getSelectedKey())) {
+                init保存処理(居宅総合事業区分, サービス利用票情報);
                 kyoManager.delete居宅短期入所情報(短期入所情報.get居宅短期入所情報());
             } else {
                 KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuBuilder builder = 短期入所情報.get居宅短期入所情報().createBuilderForEdit();

@@ -36,8 +36,6 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
 
     private static final int INT_0 = 0;
     private static final int INT_6 = 6;
-    private static final RString 候補者区分_転入者 = new RString("1");
-    private static final RString 候補者区分_住特者 = new RString("2");
     private static final RString 管内_1 = new RString("1");
     private static final RString 住特者_2 = new RString("2");
     private static final RString 導入形態コード_111 = new RString("111");

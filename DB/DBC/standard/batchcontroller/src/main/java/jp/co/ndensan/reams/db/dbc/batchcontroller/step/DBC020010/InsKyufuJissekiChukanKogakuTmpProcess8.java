@@ -226,6 +226,11 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
                 if (arg0.get基準収入額適用管理一時() == null || arg1.get基準収入額適用管理一時() == null) {
                     return -1;
                 }
+                if (arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD() == null
+                        || arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD() == null) {
+                    return arg0.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue().
+                            compareTo(arg1.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue());
+                }
                 if (arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD().
                         compareTo(arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD()) == 0) {
                     return arg0.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue().
@@ -807,13 +812,12 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
     private RString get利用者負担第２段階(TempKyufujissekiTyukannEntity 給付実績中間) {
         if (年月_200510.compareTo(給付実績中間.getServiceTeikyoYM()) <= 0
                 && !ONE.equals(給付実績中間.getShotokuHantei_shoboKubun())
-                && !ONE.equals(給付実績中間.getKogakuServicehiJogengakuGengakuGaitoFlag())) {
-            if (TWO.equals(給付実績中間.getShotokuHantei_kazeiKubunGemmenGo())
-                    && !ONE.equals(給付実績中間.getShotokuHantei_roreiFukushi())
-                    && 給付実績中間.getShotokuHantei_gokeiShotokuGaku().
-                    add(給付実績中間.getShotokuHantei_nenkiniShunyuGaku()).compareTo(金額_800000) <= 0) {
-                return ONE;
-            }
+                && !ONE.equals(給付実績中間.getKogakuServicehiJogengakuGengakuGaitoFlag())
+                && TWO.equals(給付実績中間.getShotokuHantei_kazeiKubunGemmenGo())
+                && !ONE.equals(給付実績中間.getShotokuHantei_roreiFukushi())
+                && 給付実績中間.getShotokuHantei_gokeiShotokuGaku().
+                add(給付実績中間.getShotokuHantei_nenkiniShunyuGaku()).compareTo(金額_800000) <= 0) {
+            return ONE;
         }
         return RString.EMPTY;
     }

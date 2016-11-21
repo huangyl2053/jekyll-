@@ -5,11 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU040010;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.euc.juminidorendoshikakutoroku.FuseigoListCsvEntity;
 import jp.co.ndensan.reams.db.dba.service.core.juminidorendoshikakutoroku.JuminIdoRendoShikakuToroku;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyotruku.KaigojuminHyotrukuProcess;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojuminhyotruku.KaigojuminHyotrukuProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoJoho;
 import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
@@ -19,8 +22,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -43,15 +49,17 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
     @BatchWriter
     private BatchPermanentTableWriter<DbT7022ShoriDateKanriEntity> tableWrite;
     private static final RString 異動後 = new RString("2");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBA050010");
     private FileSpoolManager manager;
     private RString 市町村コード;
+    private List<RString> 市町村コードlist;
     private RString filePath;
     private RDateTime 抽出開始日時;
     private RDateTime 処理日時;
     private KaigojuminHyotrukuProcess kaigojum;
-    private static final RString FILENAME = new RString("fuseigoList.csv");
     private DbT7022ShoriDateKanriEntity 処理日付情報;
+    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString FILENAME = new RString("fuseigoList.csv");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBA800001");
     @BatchWriter
     private CsvWriter<FuseigoListCsvEntity> csvWriter;
 
@@ -59,13 +67,15 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
     protected void beforeExecute() {
         処理日時 = RDate.getNowDateTime();
         kaigojum = new KaigojuminHyotrukuProcess();
+        市町村コードlist = new ArrayList<>();
     }
 
     @Override
     protected void initialize() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         filePath = Path.combinePath(manager.getEucOutputDirectry(), FILENAME);
-        csvWriter = new CsvWriter.InstanceBuilder(filePath).build();
+        csvWriter = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(getEncode()).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build();
     }
 
     @Override
@@ -85,7 +95,9 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
         }
         市町村コード = item.getShichosonCode().value();
         処理日付情報 = item;
-        宛名識別対象異動分取得PSM(抽出開始日時);
+        tableWrite.update(kaigojum.データ更新(processParameter, 処理日時, 処理日付情報, 市町村コード));
+        更新宛名識別対象異動分取得PSM(抽出開始日時, 市町村コード);
+        市町村コードlist.add(item.getShichosonCode().value());
     }
 
     private void 宛名識別対象異動分取得PSM(RDateTime 抽出開始日時) {
@@ -94,8 +106,21 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
         List<ShikibetsuTaishoIdoJoho> 宛名識別対象list = finder.get宛名識別対象異動(keyBuilder.build());
         JuminIdoRendoShikakuToroku juminidorendoshikakutoroku = new JuminIdoRendoShikakuToroku();
         for (ShikibetsuTaishoIdoJoho 宛名識別対象 : 宛名識別対象list) {
-            if ((異動後.equals(宛名識別対象.get異動前後区分())
-                    && (processParameter.getShichosonCode().contains(宛名識別対象.get現地方公共団体コード().value())))) {
+            if ((異動後.equals(宛名識別対象.get異動前後区分()) && (宛名識別対象.get現地方公共団体コード() != null)
+                    && (processParameter.getShichosonCodelist().contains(宛名識別対象.get現地方公共団体コード().value())))) {
+                juminidorendoshikakutoroku.to住民異動情報((宛名識別対象), csvWriter);
+            }
+        }
+    }
+
+    private void 更新宛名識別対象異動分取得PSM(RDateTime 抽出開始日時, RString 現地方公共団体コード) {
+        ShikibetsuTaishoIdoSearchKeyBuilder keyBuilder = kaigojum.宛名識別対象異動分取得PSM(抽出開始日時);
+        ShikibetsuTaishoIdoFinder finder = ShikibetsuTaishoIdoFinder.createInstance();
+        List<ShikibetsuTaishoIdoJoho> 宛名識別対象list = finder.get宛名識別対象異動(keyBuilder.build());
+        JuminIdoRendoShikakuToroku juminidorendoshikakutoroku = new JuminIdoRendoShikakuToroku();
+        for (ShikibetsuTaishoIdoJoho 宛名識別対象 : 宛名識別対象list) {
+            if ((異動後.equals(宛名識別対象.get異動前後区分()) && (宛名識別対象.get現地方公共団体コード() != null)
+                    && (現地方公共団体コード.equals(宛名識別対象.get現地方公共団体コード().value())))) {
                 juminidorendoshikakutoroku.to住民異動情報((宛名識別対象), csvWriter);
             }
         }
@@ -103,11 +128,26 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
 
     @Override
     protected void afterExecute() {
-        if (市町村コード == null) {
-            tableWrite.insert(kaigojum.データ編集(processParameter, 処理日時, 処理日付情報));
-            宛名識別対象異動分取得PSM(抽出開始日時);
-        } else {
-            tableWrite.update(kaigojum.データ更新(processParameter, 処理日時, 処理日付情報));
+        for (int i = 0; i < processParameter.getShichosonCodelist().size(); i++) {
+            if (!市町村コードlist.contains(processParameter.getShichosonCodelist().get(i))) {
+                DbT7022ShoriDateKanriEntity dateentity = new DbT7022ShoriDateKanriEntity();
+                tableWrite.insert(kaigojum.データ編集(processParameter, 処理日時, dateentity, 市町村コード));
+            }
+            宛名識別対象異動分取得PSM(null);
         }
+        manager.spool(SubGyomuCode.DBA介護資格, filePath);
+    }
+
+    private Encode getEncode() {
+        RString sakiEncodeKeitai = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        Encode encode = Encode.UTF_8withBOM;
+        if (new RString("1").equals(sakiEncodeKeitai)) {
+            encode = Encode.UTF_8withBOM;
+        } else if (new RString("2").equals(sakiEncodeKeitai)) {
+            encode = Encode.SJIS;
+        } else if (new RString("3").equals(sakiEncodeKeitai)) {
+            encode = Encode.SJIS;
+        }
+        return encode;
     }
 }

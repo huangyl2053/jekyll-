@@ -66,7 +66,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
@@ -90,8 +92,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.CountedItem;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -606,9 +606,11 @@ public class FukaKeisan extends FukaKeisanFath {
             FlexibleDate 賦課基準日, CalculateChoteiParameter 調定計算パラメータ) {
         FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
-        CountedItem saiban = Saiban.get(SubGyomuCode.DBB介護賦課, 汎用キー_通知書番号, FlexibleDate.getNowDate().getNendo());
+//        CountedItem saiban = Saiban.get(SubGyomuCode.DBB介護賦課, 汎用キー_通知書番号, FlexibleDate.getNowDate().getNendo());
+        DbT2002FukaDac fukaDac = InstanceProvider.create(DbT2002FukaDac.class);
+        List<DbT2002FukaEntity> 賦課履歴List = fukaDac.select賦課履歴On(param.get賦課年度(), param.get資格の情報().get被保険者番号());
         TsuchishoNo 通知書番号 = create通知書番号(param.get資格の情報().get被保険者番号().getColumnValue(),
-                saiban.nextString().trim());
+                賦課履歴List);
         FukaJoho 新しい賦課の情報 = new FukaJoho(調定年度, param.get賦課年度(), 通知書番号, 0);
 
         賦課根拠パラメータ.set賦課の情報_設定前(新しい賦課の情報);
@@ -679,12 +681,38 @@ public class FukaKeisan extends FukaKeisanFath {
         return 賦課の情報;
     }
 
-    private TsuchishoNo create通知書番号(RString 被保険者番号, RString 枝番号) {
+    private TsuchishoNo create通知書番号(RString 被保険者番号, List<DbT2002FukaEntity> 賦課履歴List) {
         RStringBuilder rst = new RStringBuilder();
-        rst.append(ゼロ_0000);
-        rst.append(被保険者番号);
-        rst.append(枝番号.padZeroToLeft(INT_2));
-        return new TsuchishoNo(rst.toRString());
+        if (null == 賦課履歴List || 賦課履歴List.isEmpty()) {
+            rst.append(ゼロ_0000);
+            rst.append(被保険者番号);
+            rst.append(new RString("01"));
+            return new TsuchishoNo(rst.toRString());
+        } else {
+            rst.append(get通知書番号(賦課履歴List));
+            return new TsuchishoNo(rst.toRString());
+        }
+    }
+
+    private RString get通知書番号(List<DbT2002FukaEntity> 賦課履歴List) {
+        int max番号 = 0;
+        TsuchishoNo max通知書番号 = null;
+        for (DbT2002FukaEntity entity : 賦課履歴List) {
+            if (null != entity.getTsuchishoNo() && !entity.getTsuchishoNo().isEmpty()) {
+                int 下2桁の数値 = Integer.valueOf(entity.getTsuchishoNo().getColumnValue()
+                        .substring(entity.getTsuchishoNo().getColumnValue().length() - 2).toString());
+                if (下2桁の数値 > max番号) {
+                    max番号 = 下2桁の数値;
+                    max通知書番号 = entity.getTsuchishoNo();
+                }
+            }
+        }
+        if (null != max通知書番号) {
+            return max通知書番号.getColumnValue().substring(0, max通知書番号.getColumnValue().length() - 2).concat(
+                    new RString(max番号 + 1).padZeroToLeft(2));
+        }
+        return RString.EMPTY;
+
     }
 
     private KoseiShorikoaResult create既存の賦課処理コア(KoseiShorikoaParameter param, FukaKokyoParameter 賦課根拠パラメータ,

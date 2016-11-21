@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteiidokekkaichiran.KarisanteiIdoKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -77,10 +78,10 @@ public class KarisanteiIdoKekkaIchiranPrintService {
         }
 
         List<RString> 住所編集リスト = new ArrayList<>();
+        ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBB介護賦課, ID);
         for (KeisanjohoAtenaKozaKouseizengoEntity entity : 更正前後EntityList) {
             if (entity.get計算後情報_宛名_口座_更正前Entity() != null && entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity() != null) {
                 IKojin iKojin = ShikibetsuTaishoFactory.createKojin(entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity());
-                ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ID);
                 EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, association);
                 住所編集リスト.add(編集後個人.get編集後住所());
             } else {

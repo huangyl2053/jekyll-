@@ -363,6 +363,10 @@ public final class NonyuTsuchishoTotalHandler {
             }
             帳票制御汎用リスト.add(帳票制御汎用_納付書領収日付欄);
         }
+        set帳票制御汎用(manager, 調定年度DDLの調定年度, 帳票制御汎用リスト);
+    }
+
+    private void set帳票制御汎用(ChohyoSeigyoHanyoManager manager, FlexibleYear 調定年度DDLの調定年度, List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
         ChohyoSeigyoHanyo 帳票制御汎用_領収書日付印欄の期 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 管理年度, キー_領収書日付印欄の期);
         if (帳票制御汎用_領収書日付印欄の期 != null) {
@@ -460,6 +464,11 @@ public final class NonyuTsuchishoTotalHandler {
             }
             帳票制御汎用リスト.add(仮算定_コンビニ納付書発行日表示);
         }
+        set仮算定初期化new(manager, 調定年度DDLの調定年度, 帳票制御汎用リスト);
+    }
+
+    private void set仮算定初期化new(ChohyoSeigyoHanyoManager manager, FlexibleYear 調定年度DDLの調定年度,
+            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
         ChohyoSeigyoHanyo 仮算定_コンビニ納付書取扱期限表示 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(仮算定_帳票分類ID), 管理年度, キー_コンビニ納付書取扱期限表示);
         if (仮算定_コンビニ納付書取扱期限表示 != null) {
@@ -501,6 +510,11 @@ public final class NonyuTsuchishoTotalHandler {
             }
             帳票制御汎用リスト.add(仮算定_算定の基礎1);
         }
+        set仮算定初期化new2(manager, 調定年度DDLの調定年度, 帳票制御汎用リスト);
+    }
+
+    private void set仮算定初期化new2(ChohyoSeigyoHanyoManager manager, FlexibleYear 調定年度DDLの調定年度,
+            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
         ChohyoSeigyoHanyo 仮算定_算定の基礎2 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(仮算定_帳票分類ID), 調定年度DDLの調定年度, キー_算定の基礎2);
         if (仮算定_算定の基礎2 != null) {
@@ -562,7 +576,12 @@ public final class NonyuTsuchishoTotalHandler {
             }
             帳票制御汎用リスト.add(本算定_コンビニ納付書取扱期限表示);
         }
+        set本算定初期化new(manager, 調定年度DDLの調定年度, 帳票制御汎用リスト);
 
+    }
+
+    private void set本算定初期化new(ChohyoSeigyoHanyoManager manager, FlexibleYear 調定年度DDLの調定年度,
+            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト) {
         ChohyoSeigyoHanyo 本算定_当初出力_出力方法 = manager.get帳票制御汎用(SubGyomuCode.DBB介護賦課,
                 new ReportId(帳票分類ID), 調定年度DDLの調定年度, キー_当初出力_出力方法);
         if (本算定_当初出力_出力方法 != null) {
@@ -607,7 +626,6 @@ public final class NonyuTsuchishoTotalHandler {
             }
             帳票制御汎用リスト.add(本算定_過年度文言2);
         }
-
     }
 
     /**

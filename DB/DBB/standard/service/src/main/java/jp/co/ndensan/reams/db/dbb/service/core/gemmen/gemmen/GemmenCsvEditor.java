@@ -52,7 +52,7 @@ public class GemmenCsvEditor {
         if (entity.getTsuchishoNo() != null) {
             csvEntity.set通知書番号(entity.getTsuchishoNo().getColumnValue());
         }
-        csvEntity.set履歴番号(new RString(entity.getRirekiNo()));
+        csvEntity.set履歴番号(new RString(entity.getRirekiNo() + 1));
         if (entity.getHihokenshaNo() != null) {
             csvEntity.set被保険者番号(entity.getHihokenshaNo().getColumnValue());
         }
@@ -66,7 +66,7 @@ public class GemmenCsvEditor {
         }
         HokenryoDankaiSettings hokenryoDankaiSettings = HokenryoDankaiSettings.createInstance();
         HokenryoDankaiList 保険料段階リスト = hokenryoDankaiSettings.get保険料段階ListIn(entity.getFukaNendo());
-        if (entity.getHokenryoDankai() != null) {
+        if (!RString.isNullOrEmpty(entity.getHokenryoDankai())) {
             HokenryoDankai 保険料段階 = 保険料段階リスト.getBy段階区分(entity.getHokenryoDankai());
             if (保険料段階 != null) {
                 csvEntity.set保険料段階(保険料段階.get表記());

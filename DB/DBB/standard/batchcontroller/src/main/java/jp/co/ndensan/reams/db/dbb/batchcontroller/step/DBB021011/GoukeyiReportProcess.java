@@ -40,6 +40,7 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper."
             + "relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get合計帳票データの取得");
     private static final ReportId 帳票ID = ReportIdDBB.DBB300002.getReportId();
+    private static final RString 不明 = new RString("不明");
     private List<KoumokuGoukey> koumokuGoukeyList;
     private List<RString> 表記List;
     private CreateTsukibetsuSuiihyoProcessParameter processPrm;
@@ -76,6 +77,14 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
 
     @Override
     protected void afterExecute() {
+        for (int i = 0; i < koumokuGoukeyList.size(); i++) {
+            KoumokuGoukey koumokuGoukey = koumokuGoukeyList.get(i);
+            if (RString.isNullOrEmpty(koumokuGoukey.getHokenryoDankai())) {
+                koumokuGoukeyList.remove(i);
+                koumokuGoukey.setHokenryoDankai(不明);
+                koumokuGoukeyList.add(koumokuGoukey);
+            }
+        }
         TsukibetsuSuiihyoReport report = new TsukibetsuSuiihyoReport(getTsukibetsuSuiihyoEntity(koumokuGoukeyList));
         report.writeBy(reportSourceWriter);
     }

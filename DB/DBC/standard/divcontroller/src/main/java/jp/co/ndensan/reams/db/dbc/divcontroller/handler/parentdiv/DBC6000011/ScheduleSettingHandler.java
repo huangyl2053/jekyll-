@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBC-2930-010 liuxiaoyu
  */
 public class ScheduleSettingHandler {
-
+    
     private final ScheduleSettingDiv div;
     private final HihokenshaShikakuTeisei hihokenshaShikakuTeisei;
     private final KokuhorenInterfaceKanriManager manger;
@@ -93,7 +93,7 @@ public class ScheduleSettingHandler {
             div.getTxtShoriNengetsu().setValue(処理年月);
         }
         return 履歴情報初期;
-
+        
     }
 
     /**
@@ -117,7 +117,7 @@ public class ScheduleSettingHandler {
         KokuhorenInterfaceKanri 国保連インターフェース管理;
         RString 画面_処理状況;
         ShoriJotaiKubun 処理状態区分;
-
+        
         for (KokuhorenInterfaceKanri kokuhorenInterfaceKanri : 送付List) {
             交換情報識別番号 = kokuhorenInterfaceKanri.get交換情報識別番号();
             送付Map.put(交換情報識別番号, kokuhorenInterfaceKanri);
@@ -126,7 +126,7 @@ public class ScheduleSettingHandler {
             交換情報識別番号 = kokuhorenInterfaceKanri.get交換情報識別番号();
             取込Map.put(交換情報識別番号, kokuhorenInterfaceKanri);
         }
-
+        
         if (送付List.isEmpty()) {
             for (dgDataSofu_Row sofuRow : sList) {
                 画面_処理状況 = sofuRow.getTxtSofuShoriJokyo().getSelectedValue();
@@ -175,7 +175,7 @@ public class ScheduleSettingHandler {
                 国保連インターフェース管理 = 国保連インターフェース管理.modified();
                 manger.save(国保連インターフェース管理);
             }
-
+            
         }
         if (取込List.isEmpty()) {
             for (dgDataTorikomi_Row toriRow : tList) {
@@ -227,7 +227,7 @@ public class ScheduleSettingHandler {
             }
         }
     }
-
+    
     private void スケジュール履歴情報処理(SukejuruRirekiJohoListEntity 履歴情報) {
         List<KokuhorenInterfaceKanri> 送付List = 履歴情報.getスケジュール履歴情報_送付List();
         List<KokuhorenInterfaceKanri> 取込List = 履歴情報.getスケジュール履歴情報_取込List();
@@ -246,13 +246,7 @@ public class ScheduleSettingHandler {
      */
     // CHECKSTYLE IGNORE CyclomaticComplexity FOR NEXT 1 LINES
     public List<dgDataSofu_Row> スケジュール履歴情報処理_送付(List<KokuhorenInterfaceKanri> 送付List) {
-        List<KeyValueDataSource> 初期状態dataSource = new ArrayList<>();
         List<KeyValueDataSource> 追加状態dataSource = new ArrayList<>();
-        初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理なし.getコード(), ShoriJotaiKubun.処理なし.get名称()));
-        初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.終了.getコード(), ShoriJotaiKubun.終了.get名称()));
-        初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.起動.getコード(), ShoriJotaiKubun.起動.get名称()));
-        初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理前.getコード(), ShoriJotaiKubun.処理前.get名称()));
-        初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.再処理前.getコード(), ShoriJotaiKubun.再処理前.get名称()));
         追加状態dataSource.add(new KeyValueDataSource(KEY空白, RString.EMPTY));
         追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理なし.getコード(), ShoriJotaiKubun.処理なし.get名称()));
         追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理前.getコード(), ShoriJotaiKubun.処理前.get名称()));
@@ -343,7 +337,7 @@ public class ScheduleSettingHandler {
                 送付処理実施日時 = entity.get処理実施日時();
                 sofuRow = new dgDataSofu_Row();
                 sofuRow.setTxtSofuShoriMei(送付交換情報識別番号.get名称());
-                sofuRow.getTxtSofuShoriJokyo().setDataSource(初期状態dataSource);
+                sofuRow.getTxtSofuShoriJokyo().setDataSource(get初期状態dataSource(entity.get処理状態区分()));
                 sofuRow.getTxtSofuShoriJokyo().setSelectedValue(ShoriJotaiKubun.toValue(entity.get処理状態区分()).get名称());
                 sofuRow.getTxtSofuShoribi().setValue(送付処理実施日時 == null || 送付処理実施日時.isEmpty() ? null : 送付処理実施日時.getDate());
                 sofuRow.setTxtSofuChushutsuKaishiNitiji(
@@ -358,6 +352,29 @@ public class ScheduleSettingHandler {
         }
         return sList;
     }
+    
+    private List<KeyValueDataSource> get初期状態dataSource(RString 処理状態区分) {
+        List<KeyValueDataSource> 追加状態dataSource = new ArrayList<>();
+        追加状態dataSource.add(new KeyValueDataSource(KEY空白, RString.EMPTY));
+        if (ShoriJotaiKubun.処理前.getコード().equals(処理状態区分)) {
+            追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理前.getコード(), ShoriJotaiKubun.処理前.get名称()));
+            追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理なし.getコード(), ShoriJotaiKubun.処理なし.get名称()));
+        } else if (ShoriJotaiKubun.起動.getコード().equals(処理状態区分)) {
+            追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理なし.getコード(), ShoriJotaiKubun.処理なし.get名称()));
+            追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.再処理前.getコード(), ShoriJotaiKubun.再処理前.get名称()));
+        } else if (ShoriJotaiKubun.終了.getコード().equals(処理状態区分)) {
+            追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.終了.getコード(), ShoriJotaiKubun.終了.get名称()));
+            追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.再処理前.getコード(), ShoriJotaiKubun.再処理前.get名称()));
+        } else if (ShoriJotaiKubun.処理なし.getコード().equals(処理状態区分)) {
+            追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理前.getコード(), ShoriJotaiKubun.処理前.get名称()));
+            追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理なし.getコード(), ShoriJotaiKubun.処理なし.get名称()));
+        } else if (ShoriJotaiKubun.再処理前.getコード().equals(処理状態区分)) {
+            追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.終了.getコード(), ShoriJotaiKubun.終了.get名称()));
+            追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.再処理前.getコード(), ShoriJotaiKubun.再処理前.get名称()));
+        }
+        
+        return 追加状態dataSource;
+    }
 
     /**
      * スケジュール履歴情報処理 取込
@@ -368,12 +385,7 @@ public class ScheduleSettingHandler {
      */
     // CHECKSTYLE IGNORE CyclomaticComplexity FOR NEXT 1 LINES
     public List<dgDataTorikomi_Row> スケジュール履歴情報処理_取込(List<KokuhorenInterfaceKanri> 取込List) {
-        List<KeyValueDataSource> 初期状態dataSource = new ArrayList<>();
         List<KeyValueDataSource> 追加状態dataSource = new ArrayList<>();
-        初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理なし.getコード(), ShoriJotaiKubun.処理なし.get名称()));
-        初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.終了.getコード(), ShoriJotaiKubun.終了.get名称()));
-        初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.起動.getコード(), ShoriJotaiKubun.起動.get名称()));
-        初期状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理前.getコード(), ShoriJotaiKubun.処理前.get名称()));
         追加状態dataSource.add(new KeyValueDataSource(KEY空白, RString.EMPTY));
         追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理なし.getコード(), ShoriJotaiKubun.処理なし.get名称()));
         追加状態dataSource.add(new KeyValueDataSource(ShoriJotaiKubun.処理前.getコード(), ShoriJotaiKubun.処理前.get名称()));
@@ -488,7 +500,7 @@ public class ScheduleSettingHandler {
                 取込交換情報識別番号 = ConfigKeysKokuhorenTorikomi.toValue(entity.get交換情報識別番号());
                 取込処理実施日時 = entity.get処理実施日時();
                 toriRow.setTxtTorikomiShorimei(取込交換情報識別番号.get名称());
-                toriRow.getTxtTorikomiShoriJokyo().setDataSource(初期状態dataSource);
+                toriRow.getTxtTorikomiShoriJokyo().setDataSource(get初期状態dataSource(entity.get処理状態区分()));
                 toriRow.getTxtTorikomiShoriJokyo().setSelectedValue(
                         ShoriJotaiKubun.toValue(entity.get処理状態区分()).get名称());
                 toriRow.getTxtTorikomiShoribi().setValue(取込処理実施日時 == null || 取込処理実施日時.isEmpty() ? null : 取込処理実施日時.getDate());
