@@ -55,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaichoEntity> {
 
     private static final Code YUKOMUKOKUBUN_有効 = new Code("1");
+    private static final int INT_1 = 1;
     private static final int INT_6 = 6;
     private static final Code 申請状況区分_0 = new Code("0");
     private static final Code 申請状況区分_1 = new Code("1");
@@ -228,8 +229,8 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                leq(ninteiYukoKikanKaishiYMD, サービス提供年月),
-                                leq(サービス提供年月, ninteiYukoKikanShuryoYMD),
+                                leq(substr(ninteiYukoKikanKaishiYMD, INT_1, INT_6), サービス提供年月),
+                                leq(サービス提供年月, substr(ninteiYukoKikanShuryoYMD, INT_1, INT_6)),
                                 eq(yukoMukoKubun, YUKOMUKOKUBUN_有効),
                                 not(eq(logicalDeletedFlag, true)))).
                 order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).
