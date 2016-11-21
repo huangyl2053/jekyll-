@@ -92,7 +92,7 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
             source.kyuShichoson = iryoKikanCodeBulider.toRString();
         } else if (RString.isNullOrEmpty(entity.get旧市町村コード()) || new RString("000000").equals(entity.get旧市町村コード())) {
             source.kyuShichoson = RString.EMPTY;
-        } else if (! !RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getKyuShichosonCode())) {
+        } else if (!RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getKyuShichosonCode())) {
             RStringBuilder stringBuilder = new RStringBuilder();
             stringBuilder.append(entity.get旧市町村コード());
             stringBuilder.append(KANA);
