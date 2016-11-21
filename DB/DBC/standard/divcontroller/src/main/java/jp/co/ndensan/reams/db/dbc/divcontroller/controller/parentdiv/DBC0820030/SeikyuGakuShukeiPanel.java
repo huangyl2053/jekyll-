@@ -332,6 +332,15 @@ public class SeikyuGakuShukeiPanel {
             証明書変更済フラグ.set請求額集計_証明書変更済フラグ(ShomeishoHenkoKubunType.変更あり);
             証明書変更済フラグMap.put(明細検索キー, 証明書変更済フラグ);
             一覧情報リスト.set証明書変更済フラグMap(証明書変更済フラグMap);
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap
+                    = 一覧情報リスト.get証明書入力済フラグMap();
+            ShomeishoNyuryokuFlag 証明書入力済フラグ = 一覧情報リスト.get証明書入力済フラグMap().get(明細検索キー);
+            if (証明書入力済フラグ == null) {
+                証明書入力済フラグ = new ShomeishoNyuryokuFlag();
+            }
+            証明書入力済フラグ.set請求額集計_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力あり);
+            証明書入力済フラグMap.put(明細検索キー, 証明書入力済フラグ);
+            一覧情報リスト.set証明書入力済フラグMap(証明書入力済フラグMap);
         }
         return 一覧情報リスト;
     }
