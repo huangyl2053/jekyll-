@@ -503,7 +503,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             TemParamter temparamter) {
         RString 枝番 = getHihokensyadaichoEdaNo(entity,
                 dbT1001Entity直近.getShikibetsuCode(), naiBushoRyouParamter.get転出予定日翌日());
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(new HihokenshaNo(dbT1001Entity直近.getShikibetsuCode().value()),
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(dbT1001Entity直近.getHihokenshaNo(),
                 naiBushoRyouParamter.get転出予定日翌日(),
                 枝番);
         HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
@@ -555,7 +555,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             JuminIdoRendoShikakuTorokuEntity entity) {
         RString 枝番 = getHihokensyadaichoEdaNo(entity, dbT1001Entity直近.getShikibetsuCode(), naiBushoRyouParamter.get到達日_65歳());
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(new HihokenshaNo(dbT1001Entity直近.getShikibetsuCode().value()),
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(dbT1001Entity直近.getHihokenshaNo(),
                 naiBushoRyouParamter.get到達日_65歳(),
                 枝番);
         HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
@@ -680,7 +680,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             NaiBushoRyouParamter naiBushoRyouParamter,
             TemParamter temparamter) {
         RString 枝番 = getHihokensyadaichoEdaNo(entity, dbT1001Entity.getShikibetsuCode(), naiBushoRyouParamter.get転出予定日翌日());
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(new HihokenshaNo(dbT1001Entity.getShikibetsuCode().value()),
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(dbT1001Entity.getHihokenshaNo(),
                 naiBushoRyouParamter.get転出予定日翌日(),
                 枝番);
         HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
@@ -719,7 +719,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             JuminIdoRendoShikakuTorokuEntity entity,
             TemParamter temparamter) {
         RString 枝番 = getHihokensyadaichoEdaNo(entity, dbT1001Entity.getShikibetsuCode(), temparamter.getTmp日付());
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(new HihokenshaNo(dbT1001Entity.getShikibetsuCode().value()),
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(dbT1001Entity.getHihokenshaNo(),
                 temparamter.getTmp日付(),
                 枝番);
         HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
@@ -1215,27 +1215,6 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             return RString.EMPTY;
         }
         return date;
-    }
-
-    private static class ComparatorsHihokenshaNo implements Comparator<DbT1001HihokenshaDaichoEntity>, Serializable {
-
-        @Override
-        public int compare(DbT1001HihokenshaDaichoEntity o1, DbT1001HihokenshaDaichoEntity o2) {
-            return o2.getHihokenshaNo().compareTo(o1.getHihokenshaNo());
-        }
-    }
-
-    private static class ComparatorsIdoYMDAndEdaNo implements Comparator<DbT1001HihokenshaDaichoEntity>, Serializable {
-
-        @Override
-        public int compare(DbT1001HihokenshaDaichoEntity o1, DbT1001HihokenshaDaichoEntity o2) {
-            if (o2.getHihokenshaNo().compareTo(o1.getHihokenshaNo()) == 0) {
-                RString idoYMDEdaNoO1 = new RString(o1.getIdoYMD().toString() + o1.getEdaNo().toString());
-                RString idoYMDEdaNoO2 = new RString(o2.getIdoYMD().toString() + o2.getEdaNo().toString());
-                return idoYMDEdaNoO1.compareTo(idoYMDEdaNoO2);
-            }
-            return 1;
-        }
     }
 
     private static class ComparatorsEdaNo implements Comparator<DbT1001HihokenshaDaichoEntity>, Serializable {

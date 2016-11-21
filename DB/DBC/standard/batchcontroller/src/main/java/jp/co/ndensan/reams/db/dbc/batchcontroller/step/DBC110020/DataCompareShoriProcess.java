@@ -1271,8 +1271,8 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             受給者異動連絡票Entity出力処理(異動一時2entity, 受給者異動送付);
             return;
         }
-        if (checkRString(異動一時2entity.get要介護状態区分コード(), 受給者異動送付.getMinashiYokaigoJotaiKubunCode())
-                || checkRString(異動一時2entity.get認定有効期間終了年月日(), 受給者異動送付.getNinteiYukoKikanShuryoYMD())) {
+        if (!checkRString(異動一時2entity.get要介護状態区分コード(), 受給者異動送付.getYokaigoJotaiKubunCode())
+                || !checkRString(異動一時2entity.get認定有効期間終了年月日(), 受給者異動送付.getNinteiYukoKikanShuryoYMD())) {
             if (!RST_3.equals(異動一時2entity.get変更申請中区分コード())) {
                 受給者異動連絡票Entity出力処理(異動一時2entity, 受給者異動送付);
             }

@@ -1284,7 +1284,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
      *
      * @param allList ShokanKinkyuShisetsuRyoyo
      * @param parameter ShoukanharaihishinseimeisaikensakuParameter
-     * @return List<ShokanKinkyuShisetsuRyoyo>
+     * @return ShokanKinkyuShisetsuRyoyo
      */
     public List<ShokanKinkyuShisetsuRyoyo> getUpdateList(
             List<ShokanKinkyuShisetsuRyoyo> allList, ShoukanharaihishinseimeisaikensakuParameter parameter) {
