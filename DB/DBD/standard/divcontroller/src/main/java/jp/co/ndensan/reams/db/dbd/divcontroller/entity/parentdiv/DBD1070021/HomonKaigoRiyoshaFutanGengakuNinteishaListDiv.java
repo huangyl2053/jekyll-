@@ -4,21 +4,20 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1070021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * HomonKaigoRiyoshaFutanGengakuNinteishaList のクラスファイル
- *
+ * HomonKaigoRiyoshaFutanGengakuNinteishaList のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -61,7 +60,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadTaishoList(RadioButton radTaishoList) {
+    public void  setRadTaishoList(RadioButton radTaishoList) {
         this.getBatchParameter().setRadTaishoList(radTaishoList);
     }
 
@@ -71,7 +70,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLinNendo(HorizontalLine linNendo) {
+    public void  setLinNendo(HorizontalLine linNendo) {
         this.getBatchParameter().setLinNendo(linNendo);
     }
 
@@ -81,17 +80,17 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadTaishoKikanShitei(RadioButton radTaishoKikanShitei) {
+    public void  setRadTaishoKikanShitei(RadioButton radTaishoKikanShitei) {
         this.getBatchParameter().setRadTaishoKikanShitei(radTaishoKikanShitei);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTaishoYM() {
+    public TextBoxDate getTxtTaishoYM() {
         return this.getBatchParameter().getTxtTaishoYM();
     }
 
     @JsonIgnore
-    public void setTxtTaishoYM(TextBoxFlexibleDate txtTaishoYM) {
+    public void  setTxtTaishoYM(TextBoxDate txtTaishoYM) {
         this.getBatchParameter().setTxtTaishoYM(txtTaishoYM);
     }
 
@@ -101,7 +100,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTaishoKikanKaishi(TextBoxFlexibleDate txtTaishoKikanKaishi) {
+    public void  setTxtTaishoKikanKaishi(TextBoxFlexibleDate txtTaishoKikanKaishi) {
         this.getBatchParameter().setTxtTaishoKikanKaishi(txtTaishoKikanKaishi);
     }
 
@@ -111,7 +110,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblTaishoKikan(Label lblTaishoKikan) {
+    public void  setLblTaishoKikan(Label lblTaishoKikan) {
         this.getBatchParameter().setLblTaishoKikan(lblTaishoKikan);
     }
 
@@ -121,37 +120,37 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTaishoKikanShuryo(TextBoxFlexibleDate txtTaishoKikanShuryo) {
+    public void  setTxtTaishoKikanShuryo(TextBoxFlexibleDate txtTaishoKikanShuryo) {
         this.getBatchParameter().setTxtTaishoKikanShuryo(txtTaishoKikanShuryo);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtKijunYMD() {
+    public TextBoxDate getTxtKijunYMD() {
         return this.getBatchParameter().getTxtKijunYMD();
     }
 
     @JsonIgnore
-    public void setTxtKijunYMD(TextBoxFlexibleDate txtKijunYMD) {
+    public void  setTxtKijunYMD(TextBoxDate txtKijunYMD) {
         this.getBatchParameter().setTxtKijunYMD(txtKijunYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShotokuNendo() {
+    public TextBoxDate getTxtShotokuNendo() {
         return this.getBatchParameter().getTxtShotokuNendo();
     }
 
     @JsonIgnore
-    public void setTxtShotokuNendo(TextBoxFlexibleDate txtShotokuNendo) {
+    public void  setTxtShotokuNendo(TextBoxDate txtShotokuNendo) {
         this.getBatchParameter().setTxtShotokuNendo(txtShotokuNendo);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtKazeiHanteiToKijunDate() {
+    public TextBoxDate getTxtKazeiHanteiToKijunDate() {
         return this.getBatchParameter().getTxtKazeiHanteiToKijunDate();
     }
 
     @JsonIgnore
-    public void setTxtKazeiHanteiToKijunDate(TextBoxFlexibleDate txtKazeiHanteiToKijunDate) {
+    public void  setTxtKazeiHanteiToKijunDate(TextBoxDate txtKazeiHanteiToKijunDate) {
         this.getBatchParameter().setTxtKazeiHanteiToKijunDate(txtKazeiHanteiToKijunDate);
     }
 
@@ -161,7 +160,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLinShosaiJoken(HorizontalLine linShosaiJoken) {
+    public void  setLinShosaiJoken(HorizontalLine linShosaiJoken) {
         this.getBatchParameter().setLinShosaiJoken(linShosaiJoken);
     }
 
@@ -171,7 +170,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKyusochishaKubun(RadioButton radKyusochishaKubun) {
+    public void  setRadKyusochishaKubun(RadioButton radKyusochishaKubun) {
         this.getBatchParameter().setRadKyusochishaKubun(radKyusochishaKubun);
     }
 
@@ -181,7 +180,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlHobetsuKubun(DropDownList ddlHobetsuKubun) {
+    public void  setDdlHobetsuKubun(DropDownList ddlHobetsuKubun) {
         this.getBatchParameter().setDdlHobetsuKubun(ddlHobetsuKubun);
     }
 
@@ -191,7 +190,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadJukyushaKubun(RadioButton radJukyushaKubun) {
+    public void  setRadJukyushaKubun(RadioButton radJukyushaKubun) {
         this.getBatchParameter().setRadJukyushaKubun(radJukyushaKubun);
     }
 
@@ -201,7 +200,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadSetaiHyoji(RadioButton radSetaiHyoji) {
+    public void  setRadSetaiHyoji(RadioButton radSetaiHyoji) {
         this.getBatchParameter().setRadSetaiHyoji(radSetaiHyoji);
     }
 
@@ -211,7 +210,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkShoriTaisho(CheckBoxList chkShoriTaisho) {
+    public void  setChkShoriTaisho(CheckBoxList chkShoriTaisho) {
         this.getBatchParameter().setChkShoriTaisho(chkShoriTaisho);
     }
 
@@ -221,7 +220,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLinCsv(HorizontalLine linCsv) {
+    public void  setLinCsv(HorizontalLine linCsv) {
         this.getBatchParameter().setLinCsv(linCsv);
     }
 
@@ -231,7 +230,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkCsvShutsuryoku(CheckBoxList chkCsvShutsuryoku) {
+    public void  setChkCsvShutsuryoku(CheckBoxList chkCsvShutsuryoku) {
         this.getBatchParameter().setChkCsvShutsuryoku(chkCsvShutsuryoku);
     }
 
@@ -241,7 +240,4 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListDiv extends Panel {
     }
 
     // </editor-fold>
-    public Object getCcdShafukuKeigenShutsuryokuJun() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
