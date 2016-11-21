@@ -17,7 +17,7 @@
             AND    "DbT7022ShoriDateKanri"."nendo" = #{年度}
             AND    "DbT7022ShoriDateKanri"."shoriEdaban" = #{処理枝番}
         ORDER BY
-            "DbT7022ShoriDateKanri"."nendoNaiRenban" 
+            "DbT7022ShoriDateKanri"."nendoNaiRenban" DESC
         LIMIT 1
     </select>
     
