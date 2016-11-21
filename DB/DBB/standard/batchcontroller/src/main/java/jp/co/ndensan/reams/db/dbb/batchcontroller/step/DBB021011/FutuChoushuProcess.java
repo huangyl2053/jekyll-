@@ -60,6 +60,7 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
     private static final RString 生年月日終了 = new RString("生年月日終了");
     private static final RString 選択対象 = new RString("選択対象");
     private static final RString 市町村 = new RString("市町村");
+    private static final RString 不明 = new RString("不明");
     private static final int INT_8 = 8;
     private List<KoumokuGoukey> koumokuGoukeyList;
     private List<RString> 表記List;
@@ -105,6 +106,14 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
     @Override
     protected void afterExecute() {
         get合計部分の項目();
+        for (int i = 0; i < koumokuGoukeyList.size(); i++) {
+            KoumokuGoukey koumokuGoukey = koumokuGoukeyList.get(i);
+            if (RString.isNullOrEmpty(koumokuGoukey.getHokenryoDankai())) {
+                koumokuGoukeyList.remove(i);
+                koumokuGoukey.setHokenryoDankai(不明);
+                koumokuGoukeyList.add(koumokuGoukey);
+            }
+        }
         TsukibetsuSuiihyoReport report = new TsukibetsuSuiihyoReport(getTsukibetsuSuiihyoEntity(koumokuGoukeyList));
         outputJokenhyoFactory();
         report.writeBy(reportSourceWriter);
