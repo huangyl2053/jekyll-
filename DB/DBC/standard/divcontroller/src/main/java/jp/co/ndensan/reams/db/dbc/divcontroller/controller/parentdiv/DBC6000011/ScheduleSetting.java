@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.hihokenshashikakuteisei.SukejuruRirekiJohoListEntity;
+import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6000011.DBC6000011StateName;
@@ -118,16 +119,21 @@ public class ScheduleSetting {
                 List<dgDataSofu_Row> sList = getHandler(div).スケジュール履歴情報処理_送付(送付List);
                 div.getDgDataSofu().setDataSource(sList);
             } else if (処理年月.equals(最終処理年月.plusMonth(いち月))) {
-                // CHECKSTYLE IGNORE NestedIfDepth FOR NEXT 1 LINES
+                DbcQuestionMessages questionMessages;
+                if (is処理前あり(取込List)) {
+                    questionMessages = DbcQuestionMessages.国保連連携スケジュール_新規設定確認２;
+                } else {
+                    questionMessages = DbcQuestionMessages.国保連連携スケジュール_新規設定確認;
+                }
                 if (!ResponseHolder.isReRequest()) {
                     QuestionMessage 新規設定確認MESSAGE = new QuestionMessage(
-                            DbcQuestionMessages.国保連連携スケジュール_新規設定確認.getMessage().getCode(),
-                            DbcQuestionMessages.国保連連携スケジュール_新規設定確認.getMessage().evaluate(),
+                            questionMessages.getMessage().getCode(),
+                            questionMessages.getMessage().evaluate(),
                             ButtonSelectPattern.OKCancel);
                     return ResponseData.of(div).addMessage(新規設定確認MESSAGE).respond();
                 }
                 // CHECKSTYLE IGNORE NestedIfDepth FOR NEXT 1 LINES
-                if (new RString(DbcQuestionMessages.国保連連携スケジュール_新規設定確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                if (new RString(questionMessages.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     送付新規Flag = true;
                     List<dgDataSofu_Row> sList = getHandler(div).スケジュール履歴情報処理_送付(new ArrayList<KokuhorenInterfaceKanri>());
@@ -151,16 +157,24 @@ public class ScheduleSetting {
                 List<dgDataTorikomi_Row> tList = getHandler(div).スケジュール履歴情報処理_取込(取込List);
                 div.getDgDataTorikomi().setDataSource(tList);
             } else if (処理年月.equals(最終処理年月.plusMonth(いち月))) {
+
+                DbcQuestionMessages questionMessages;
+                if (is処理前あり(取込List)) {
+                    questionMessages = DbcQuestionMessages.国保連連携スケジュール_新規設定確認２;
+                } else {
+                    questionMessages = DbcQuestionMessages.国保連連携スケジュール_新規設定確認;
+                }
+
                 // CHECKSTYLE IGNORE NestedIfDepth FOR NEXT 1 LINES
                 if (!ResponseHolder.isReRequest()) {
                     QuestionMessage 新規設定確認MESSAGE = new QuestionMessage(
-                            DbcQuestionMessages.国保連連携スケジュール_新規設定確認.getMessage().getCode(),
-                            DbcQuestionMessages.国保連連携スケジュール_新規設定確認.getMessage().evaluate(),
+                            questionMessages.getMessage().getCode(),
+                            questionMessages.getMessage().evaluate(),
                             ButtonSelectPattern.OKCancel);
                     return ResponseData.of(div).addMessage(新規設定確認MESSAGE).respond();
                 }
                 // CHECKSTYLE IGNORE NestedIfDepth FOR NEXT 1 LINES
-                if (new RString(DbcQuestionMessages.国保連連携スケジュール_新規設定確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                if (new RString(questionMessages.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     取込新規Flag = true;
                     List<dgDataTorikomi_Row> tList = getHandler(div).スケジュール履歴情報処理_取込(new ArrayList<KokuhorenInterfaceKanri>());
@@ -184,6 +198,15 @@ public class ScheduleSetting {
         }
         ViewStateHolder.put(ViewStateKeys.スケジュール履歴情報Entity, entity);
         return ResponseData.of(div).respond();
+    }
+
+    private boolean is処理前あり(List<KokuhorenInterfaceKanri> list) {
+        for (KokuhorenInterfaceKanri kanri : list) {
+            if (ShoriJotaiKubun.処理前.getコード().equals(kanri.get処理状態区分())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
