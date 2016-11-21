@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8010001.DBC8
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8010001.DBC8010001MainDivSpec;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
@@ -167,7 +168,7 @@ public class DBC8010001MainValidationHandler {
         NoInputMessages checkMessage = new NoInputMessages(UrErrorMessages.出力順序を指定);
         messages.add(ValidateChain.validateStart(div).ifNot(DBC8010001MainDivSpec.出力順チェック)
                 .thenAdd(checkMessage).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage).build().check(messages));
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage, (ChohyoShutsuryokujunDiv) div.getCcdChohyoShutsuryokujun()).build().check(messages));
         return pairs;
     }
 
