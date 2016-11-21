@@ -210,7 +210,7 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             TemParamter temparamter,
             JuminIdoRendoShikakuTorokuEntity entity) {
         RString 枝番 = getHihokensyadaichoEdaNo(entity, dbT1001Entity.getShikibetsuCode(), naiBushoRyouParamter.get消除異動日翌日());
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(new HihokenshaNo(dbT1001Entity.getShikibetsuCode().value()),
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(dbT1001Entity.getHihokenshaNo(),
                 naiBushoRyouParamter.get消除異動日翌日(),
                 枝番);
         HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
@@ -285,7 +285,7 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             JuminIdoRendoShikakuTorokuEntity entity) {
         RString 枝番 = getHihokensyadaichoEdaNo(entity, dbT1001Entity.getShikibetsuCode(), naiBushoRyouParamter.get到達日_65歳());
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(new HihokenshaNo(dbT1001Entity.getShikibetsuCode().value()),
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(dbT1001Entity.getHihokenshaNo(),
                 naiBushoRyouParamter.get到達日_65歳(),
                 枝番);
         HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
@@ -442,7 +442,7 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
         RString 枝番 = getHihokensyadaichoEdaNo(entity,
                 dbT1001List.get(0).getShikibetsuCode(), naiBushoRyouParamter.get消除異動日翌日());
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(new HihokenshaNo(dbT1001List.get(0).getShikibetsuCode().value()),
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(dbT1001List.get(0).getHihokenshaNo(),
                 naiBushoRyouParamter.get消除異動日翌日(),
                 枝番);
         HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
@@ -479,7 +479,7 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
             TemParamter temparamter) {
         DbT1001HihokenshaDaichoEntity dbT1001Entity = entity.get被保険者台帳EntityList().get(0);
         RString 枝番 = getHihokensyadaichoEdaNo(entity, dbT1001Entity.getShikibetsuCode(), temparamter.getTmp日付());
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(new HihokenshaNo(dbT1001Entity.getShikibetsuCode().value()),
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(dbT1001Entity.getHihokenshaNo(),
                 temparamter.getTmp日付(),
                 枝番);
         HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
@@ -1325,8 +1325,9 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
 
         DbT1004ShisetsuNyutaishoEntity dbT1004Entity
                 = searchShisetsu(entity.get介護保険施設入退所EntityList(), DaichoType.他市町村住所地特例者.getコード());
-        DbT1003TashichosonJushochiTokureiEntity dbT1003Entity = entity.get他市町村住所地特例EntityList().get(0);
+        DbT1003TashichosonJushochiTokureiEntity dbT1003Entity = null;
         if (entity.get他市町村住所地特例EntityList() != null && !entity.get他市町村住所地特例EntityList().isEmpty()) {
+            dbT1003Entity = entity.get他市町村住所地特例EntityList().get(0);
             if (dbT1004Entity == null) {
                 dbT1003List.add(dbT1003Entity);
                 戻り値の編集(entity, JuminRendoFuseigo.転出死亡_他特例者_解除登録_施設入退所情報不整合.getコード(),
