@@ -523,6 +523,9 @@ public final class KinkyujiShoteiShikanPanelHandler {
         if (div.getTxtShujutsuTanisu().getValue() != null) {
             data = data.add(div.getTxtShujutsuTanisu().getValue());
         }
+        if (div.getTxtHoshasenChiryoTanisu().getValue() != null) {
+            data = data.add(div.getTxtShujutsuTanisu().getValue());
+        }
         if (div.getTxtShochiTanisu().getValue() != null) {
             data = data.add(div.getTxtShochiTanisu().getValue());
         }
