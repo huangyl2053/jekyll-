@@ -237,6 +237,9 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_kijunsy
         parameter.set市町村名(getParameter().get市町村名());
         parameter.set文書番号(getParameter().get文書番号());
         parameter.set処理年月日(FlexibleDate.getNowDate());
+        parameter.set被保険者番号(getParameter().get被保険者番号());
+        parameter.set抽出対象(getParameter().get抽出対象());
+        parameter.set提出期限(getParameter().get提出期限());
         return loopBatch(CreateTaishoSetaiyinProcess.class).arguments(parameter).define();
     }
 
