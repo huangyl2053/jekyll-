@@ -57,7 +57,7 @@
         NULL AS "setaiCode"
         ,NULL AS "hihokenshakanamei"
         ,NULL AS "hihokenshamei"
-        ,'データ種別：被保険者台帳' AS "taishojyohoutayitoru"
+        ,'' AS "taishojyohoutayitoru"
         ,1 AS "taishojyohou"
         ,'取得情報' AS "kaishitayitoru"
         ,'喪失情報' AS "shuryotayitoru"
