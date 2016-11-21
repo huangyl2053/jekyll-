@@ -180,10 +180,10 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     @Override
     protected void process(ShotokuShoukaiDataTempEntity t) {
         所得照会票データ = t;
-        if (送付先住所コード.equals(所得照会票データ.getSoufusenzenkokuJushoCode())
+        if (送付先住所コード.equals(所得照会票データ.getSoufusenzenkokuJushoCode() == null ? RString.EMPTY : 所得照会票データ.getSoufusenzenkokuJushoCode())
                 && 世帯コード.equals(所得照会票データ.getSetaiCode())
-                && 候補者区分.equals(所得照会票データ.getKouhoshakubun())
-                && 現住所コード.equals(所得照会票データ.getZenkokuJushoCode())) {
+                && 候補者区分.equals(所得照会票データ.getKouhoshakubun() == null ? RString.EMPTY : 所得照会票データ.getKouhoshakubun())
+                && 現住所コード.equals(所得照会票データ.getZenkokuJushoCode() == null ? RString.EMPTY : 所得照会票データ.getZenkokuJushoCode())) {
             set世帯員();
         } else if (世帯員リスト.isEmpty()) {
             所得照会票データbefore = t;
@@ -223,10 +223,10 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     }
 
     private void setKey() {
-        送付先住所コード = 所得照会票データ.getSoufusenzenkokuJushoCode();
+        送付先住所コード = 所得照会票データ.getSoufusenzenkokuJushoCode() == null ? RString.EMPTY : 所得照会票データ.getSoufusenzenkokuJushoCode();
         世帯コード = 所得照会票データ.getSetaiCode();
-        候補者区分 = 所得照会票データ.getKouhoshakubun();
-        現住所コード = 所得照会票データ.getZenkokuJushoCode();
+        候補者区分 = 所得照会票データ.getKouhoshakubun() == null ? RString.EMPTY : 所得照会票データ.getKouhoshakubun();
+        現住所コード = 所得照会票データ.getZenkokuJushoCode() == null ? RString.EMPTY : 所得照会票データ.getZenkokuJushoCode();
     }
 
     private void set世帯員() {
