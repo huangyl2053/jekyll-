@@ -12,13 +12,20 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.DBHozonJoho;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ModoruEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
@@ -30,6 +37,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.ShokanbarayiKeteiInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820015.ShokanbarayiKeteiInfoPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
@@ -262,6 +270,9 @@ public class ShokanbarayiKeteiInfoPanel {
                 getHandler(div).登録Save(データ情報.getDB情報(), データ情報.get修正前支給区分(), 決定日, paramter, 画面モード, 識別コード);
                 div.getCcdKanryoMessage().setMessage(getKanryoMessage(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class)),
                         paramter.getHiHokenshaNo().value(), div.getPanelOne().getCcdKaigoAtenaInfo().get氏名漢字(), true);
+//                DbJohoViewState db = new DbJohoViewState();
+//                データ情報の初期化(db);
+//                ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db);
                 return ResponseData.of(div).setState(DBC0820015StateName.処理完了);
             } else if (申請書入力未済あり.equals(申請書入力済区分)) {
                 ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, 申請書入力未済あり);
@@ -426,6 +437,38 @@ public class ShokanbarayiKeteiInfoPanel {
             if (db情報.get償還払請求サービス計画200004データResultList() == null) {
                 ArrayList<ShokanServicePlan200004Result> service200004 = new ArrayList<>();
                 db情報.set償還払請求サービス計画200004データResultList(service200004);
+            }
+            if (db情報.get住所地特例データList() == null) {
+                ArrayList<ShokanMeisaiJushochiTokureiResult> tokurei = new ArrayList<>();
+                db情報.set住所地特例データList(tokurei);
+            }
+            if (db情報.get償還払請求基本データList() == null) {
+                ArrayList<ShokanKihon> kihon = new ArrayList<>();
+                db情報.set償還払請求基本データList(kihon);
+            }
+            if (db情報.get償還払請求所定疾患施設療養費等データList() == null) {
+                ArrayList<ShokanShoteiShikkanShisetsuRyoyo> ryoyo = new ArrayList<>();
+                db情報.set償還払請求所定疾患施設療養費等データList(ryoyo);
+            }
+            if (db情報.get償還払請求明細データList() == null) {
+                ArrayList<ShokanMeisaiResult> meisai = new ArrayList<>();
+                db情報.set償還払請求明細データList(meisai);
+            }
+            if (db情報.get償還払請求特定診療費データList() == null) {
+                ArrayList<ShokanTokuteiShinryohi> shinryohi = new ArrayList<>();
+                db情報.set償還払請求特定診療費データList(shinryohi);
+            }
+            if (db情報.get償還払請求社会福祉法人軽減額データList() == null) {
+                ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> keigengaku = new ArrayList<>();
+                db情報.set償還払請求社会福祉法人軽減額データList(keigengaku);
+            }
+            if (db情報.get償還払請求緊急時施設療養データList() == null) {
+                ArrayList<ShokanKinkyuShisetsuRyoyo> shisetsuRyoyo = new ArrayList<>();
+                db情報.set償還払請求緊急時施設療養データList(shisetsuRyoyo);
+            }
+            if (db情報.get特別療養費データList() == null) {
+                ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> tokubetsuRyoyo = new ArrayList<>();
+                db情報.set特別療養費データList(tokubetsuRyoyo);
             }
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
         }
