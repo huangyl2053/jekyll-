@@ -119,8 +119,8 @@ public class GenmenPanel {
         } else {
             parameter.setList地区3コード(null);
         }
-        if (div.getTextBoxSinsei().getValue() != null && !div.getTextBoxSinsei().getValue().toString().isEmpty()) {
-            parameter.setShinseiYMD(new FlexibleDate(new RDate(div.getTextBoxSinsei().getValue().toString()).toString()));
+        if (div.getTextBoxSinsei().getValue() != null) {
+            parameter.setShinseiYMD(new FlexibleDate(div.getTextBoxSinsei().getValue().toString()));
         } else {
             parameter.setShinseiYMD(null);
         }
@@ -135,7 +135,7 @@ public class GenmenPanel {
         } else {
             parameter.setShinseiJiyu(RString.EMPTY);
         }
-        parameter.setKetteiYMD(new FlexibleDate(new RDate(div.getTextBoxKette().getValue().toString()).toString()));
+        parameter.setKetteiYMD(new FlexibleDate(div.getTextBoxKette().getValue().toString()));
         if (!div.getTextBoxMultiLineKetteiRiryuu().getValue().isNull() && !div.getTextBoxMultiLineKetteiRiryuu().
                 getValue().isEmpty()) {
             parameter.setGemmenJiyu(div.getTextBoxMultiLineKetteiRiryuu().getValue());

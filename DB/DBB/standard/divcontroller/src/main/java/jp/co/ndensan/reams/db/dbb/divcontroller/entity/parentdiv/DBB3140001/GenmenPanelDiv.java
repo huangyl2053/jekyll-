@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GenmenPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -217,12 +217,12 @@ public class GenmenPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTextBoxSinsei() {
+    public TextBoxDate getTextBoxSinsei() {
         return this.getPanelGenmenJyouhou().getTextBoxSinsei();
     }
 
     @JsonIgnore
-    public void  setTextBoxSinsei(TextBox TextBoxSinsei) {
+    public void  setTextBoxSinsei(TextBoxDate TextBoxSinsei) {
         this.getPanelGenmenJyouhou().setTextBoxSinsei(TextBoxSinsei);
     }
 
@@ -287,12 +287,12 @@ public class GenmenPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTextBoxKette() {
+    public TextBoxDate getTextBoxKette() {
         return this.getPanelKetteiJyouhou().getTextBoxKette();
     }
 
     @JsonIgnore
-    public void  setTextBoxKette(TextBox TextBoxKette) {
+    public void  setTextBoxKette(TextBoxDate TextBoxKette) {
         this.getPanelKetteiJyouhou().setTextBoxKette(TextBoxKette);
     }
 
