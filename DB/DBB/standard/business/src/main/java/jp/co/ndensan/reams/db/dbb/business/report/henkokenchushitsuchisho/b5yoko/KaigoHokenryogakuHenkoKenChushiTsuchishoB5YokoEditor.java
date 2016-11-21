@@ -109,7 +109,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
         reportSource.soshitsuYmdAto = 更正後.get期間_至();
 
         set調定年度_タイトル_通知文1(reportSource, item.get本算定決定通知書情報());
-        set通知文1と通知区分(reportSource, 編集後本算定通知書共通情報);
+        set通知文2と通知区分(reportSource, 編集後本算定通知書共通情報);
         reportSource.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().value();
         reportSource.tsukisuAto = 更正後.get月数_ケ月();
 
@@ -181,22 +181,19 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
         return is変更;
     }
 
-    private void set通知文1と通知区分(KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource reportSource,
+    private void set通知文2と通知区分(KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource reportSource,
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
         if (GennenKanen.過年度.equals(item.get本算定決定通知書情報().get現年度_過年度区分())) {
-            RStringBuilder tsuchibun1 = new RStringBuilder();
-            tsuchibun1.append(編集後本算定通知書共通情報.get賦課年度().toDateString());
-            tsuchibun1.append(new RString("以前にさかのぼって資格取得・更正した分"));
-            reportSource.tsuchibun1 = tsuchibun1.toRString();
+            RStringBuilder tsuchibun2 = new RStringBuilder();
+            tsuchibun2.append(編集後本算定通知書共通情報.get賦課年度_年度なし());
+            tsuchibun2.append(new RString("以前にさかのぼって資格取得・更正した分"));
+            reportSource.tsuchibun2 = tsuchibun2.toRString();
             reportSource.tsuchiKbn = new RString("（過年度）");
         }
     }
 
     private boolean is特別徴収停止(HonSanteiKetteiTsuchiShoJoho 本算定決定通知書情報) {
-        boolean is特別徴収停止 = false;
-        if (GennenKanen.過年度.equals(本算定決定通知書情報.get現年度_過年度区分())) {
-            is特別徴収停止 = true;
-        }
+        boolean flag = false;
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報
                 = 本算定決定通知書情報.get編集後本算定通知書共通情報();
 
@@ -208,10 +205,10 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
                 && (!RString.isNullOrEmpty(調定事由２) && !調定事由２.startsWith(文字))
                 && (!RString.isNullOrEmpty(調定事由３) && !調定事由３.startsWith(文字))
                 && (!RString.isNullOrEmpty(調定事由４) && !調定事由４.startsWith(文字))) {
-            is特別徴収停止 = true;
+            flag = true;
         }
 
-        return is特別徴収停止;
+        return !(GennenKanen.過年度.equals(本算定決定通知書情報.get現年度_過年度区分()) || flag);
     }
 
     private void set調定年度_タイトル_通知文1(KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource reportSource,
@@ -223,13 +220,13 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
         RStringBuilder 調定年度SB = new RStringBuilder();
         調定年度SB.append(調定年度);
         調定年度SB.append(new RString("年度"));
-        if (is特別徴収停止(本算定決定通知書情報)) {
+        if (!is特別徴収停止(本算定決定通知書情報)) {
             reportSource.choteiNendo = 調定年度SB.toRString();
             reportSource.title1 = RString.EMPTY;
             reportSource.title2 = RString.EMPTY;
             reportSource.title3 = new RString("介護保険料額変更通知書");
             RStringBuilder 通知文1 = new RStringBuilder();
-            通知文1.append(編集後本算定通知書共通情報.get賦課年度().toDateString());
+            通知文1.append(編集後本算定通知書共通情報.get賦課年度_年度なし());
             通知文1.append(new RString("年度分の介護保険料額を右のとおり変更しましたので通知します。"));
             reportSource.tsuchibun1 = 通知文1.toRString();
         } else {
@@ -238,7 +235,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
             reportSource.title2 = new RString("特別徴収中止通知書");
             reportSource.title3 = RString.EMPTY;
             RStringBuilder 通知文1 = new RStringBuilder();
-            通知文1.append(編集後本算定通知書共通情報.get賦課年度().toDateString());
+            通知文1.append(編集後本算定通知書共通情報.get賦課年度_年度なし());
             通知文1.append(new RString("年度分の介護保険料額の特別徴収を中止し、右のとおり普通徴収することとしましたので通知します。"));
             reportSource.tsuchibun1 = 通知文1.toRString();
         }
