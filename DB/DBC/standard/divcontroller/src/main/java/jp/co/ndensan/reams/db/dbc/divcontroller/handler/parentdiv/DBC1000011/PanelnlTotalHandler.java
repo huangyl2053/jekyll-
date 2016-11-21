@@ -38,6 +38,7 @@ public class PanelnlTotalHandler {
     private static final RString フラグ_TRUE = new RString("true");
     private static final RString 利用者向け決定通知書 = new RString("ForRiyosha");
     private static final RString 受領委任者向け決定通知書 = new RString("ForJuryoininsha");
+    private static final RString STR_1 = new RString(1);
 
     /**
      * コンストラクタです。
@@ -215,6 +216,19 @@ public class PanelnlTotalHandler {
                     && div.getTxtUketsukebi().getToValue().isBefore(div.getTxtUketsukebi().getFromValue())) {
                 div.getTxtUketsukebi().setFromValue(div.getTxtUketsukebi().getToValue());
             }
+        }
+    }
+
+    /**
+     * テスト出力制御
+     */
+    public void テスト出力制御() {
+        boolean isチェック = div.getChkTestShutsuryoku().isAllSelected();
+        div.getRadKeteibiIkatsuKoushinnKubun().setDisabled(isチェック);
+        div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get窓口払い一括更新区分RB().setDisabled(isチェック);
+        if (isチェック) {
+            div.getRadKeteibiIkatsuKoushinnKubun().setSelectedKey(キー);
+            div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get窓口払い一括更新区分RB().setSelectedKey(STR_1);
         }
     }
 

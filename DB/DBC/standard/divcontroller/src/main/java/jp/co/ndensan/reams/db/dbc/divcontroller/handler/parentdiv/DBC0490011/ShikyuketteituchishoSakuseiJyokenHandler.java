@@ -211,7 +211,7 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
     public void テスト出力制御() {
         boolean isチェック = div.getChkTesutoShuturyoku().isAllSelected();
         div.getRadKetteibiIkkatsuKoshinKubun().setDisabled(isチェック);
-        div.getCcdShiharaiHoho().get窓口払い一括更新区分RB().setDisplayNone(isチェック);
+        div.getCcdShiharaiHoho().get窓口払い一括更新区分RB().setDisabled(isチェック);
         if (isチェック) {
             div.getRadKetteibiIkkatsuKoshinKubun().setSelectedKey(KEY0);
             div.getCcdShiharaiHoho().get窓口払い一括更新区分RB().setSelectedKey(STR_1);
