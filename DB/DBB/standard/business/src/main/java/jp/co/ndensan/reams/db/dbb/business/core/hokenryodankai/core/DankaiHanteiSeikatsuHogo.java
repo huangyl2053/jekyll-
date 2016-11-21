@@ -56,14 +56,13 @@ class DankaiHanteiSeikatsuHogo implements IDai1DankaiHantei {
     public TsukibetsuHokenryoDankai dai1dankaiSettei(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter,
             TsukibetsuHokenryoDankai tsukibetsuHokenryoDankai) {
 
-        Calendar 生活保護開始月;
+//        Calendar 生活保護開始月;
         Calendar 判定年月 = Calendar.getInstance();
 
-        生活保護開始月 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoStartYMD());
-        生活保護開始月.set(生活保護開始月.get(Calendar.YEAR), 生活保護開始月.get(Calendar.MONTH) + 1, 1);
+//        生活保護開始月 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoStartYMD());
+//        生活保護開始月.set(生活保護開始月.get(Calendar.YEAR), 生活保護開始月.get(Calendar.MONTH) + 1, 1);
         //生活保護開始月.set(hokenryoDankaiHanteiParameter.fukaKonkyo.SeihoStartYMD.getYear(),
         //hokenryoDankaiHanteiParameter.fukaKonkyo.SeihoStartYMD.getMonth(), 1);
-
         Map<RString, RString> hokenryoDankaiMap = tsukibetsuHokenryoDankai.createHokenryoDankaiMap();
         Set<Map.Entry<RString, RString>> set = hokenryoDankaiMap.entrySet();
         Iterator<Map.Entry<RString, RString>> it = set.iterator();
