@@ -152,6 +152,7 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
     private Decimal 合計金額;
     private Decimal 停止金額;
     private static final RString 連番_GENERIC_KEY = new RString("連番_GENERIC_KEY");
+    private FlexibleYearMonth 処理年月;
 
     /**
      * 処理対象年月です。
@@ -166,6 +167,7 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
 
     @Override
     protected void initialize() {
+        処理年月 = FlexibleYearMonth.EMPTY;
         異動処理結果情報 = null;
         合計金額 = Decimal.ZERO;
         停止金額 = Decimal.ZERO;
@@ -344,8 +346,6 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
         if (entity.getデータレコードEntity() == null || entity.getトレイラレコードEntity() == null) {
             return;
         }
-        shoriTaishoYM.setValue(get処理対象年月(entity.getデータレコードEntity().getTsuchiNaiyoCode(),
-                entity.getデータレコードEntity().getSakuseiYMD()));
         if (tmpEntity == null) {
             tmpEntity = entity.getトレイラレコードEntity();
             set合計(entity.getデータレコードEntity());
@@ -359,12 +359,14 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
             set合計(entity.getデータレコードEntity());
             tmpEntity = entity.getトレイラレコードEntity();
         }
+        処理年月 = get処理対象年月(entity.getデータレコードEntity().getTsuchiNaiyoCode(),
+                entity.getデータレコードEntity().getSakuseiYMD());
         editOutPutIchiranCsv(entity.getデータレコードEntity());
+        shoriTaishoYM.setValue(処理年月);
         TokuchoHaishinDataTorikomiMybatisParameter param = setMybatisParameter(entity.getデータレコードEntity());
         ueT0511Writer.insert(insertEditor.get対象者or追加候補者情報CsvEntity(entity.getデータレコードEntity(), param,
                 parameter.getShoriYMDHM(), parameter.getFileName().substring(INT_0, INT_3),
-                get処理対象年月(entity.getデータレコードEntity().getTsuchiNaiyoCode(),
-                        entity.getデータレコードEntity().getSakuseiYMD())));
+                処理年月));
 
     }
 
@@ -428,8 +430,7 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
     }
 
     private void editOutPutKennSuuCsv() {
-        boolean is出力 = is出力(tmpEntity.getTsuchiNaiyoCode(),
-                get処理対象年月(tmpEntity.getTsuchiNaiyoCode(), tmpEntity.getSakuseiYMD()));
+        boolean is出力 = is出力(tmpEntity.getTsuchiNaiyoCode(), 処理年月);
         RString 市町村名 = get市町村名(tmpEntity.getShichosoCode());
         if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode()) && is出力) {
             対象者情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get対象者or追加候補者情報CsvEntity(tmpEntity, 該当件数, 市町村名));

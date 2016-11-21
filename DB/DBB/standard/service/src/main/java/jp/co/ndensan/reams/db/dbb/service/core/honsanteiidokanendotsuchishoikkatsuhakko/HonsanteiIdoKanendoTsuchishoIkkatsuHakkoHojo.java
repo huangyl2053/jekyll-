@@ -251,7 +251,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
                 List<RString> bodyList = new ArrayList<>();
                 bodyList.add(帳票作成日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
                 bodyList.add(帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
-                bodyList.add(new RString(編集本算定通知書共通情報List.indexOf(編集後本算定通知書共通情報) + 1));
+                bodyList.add(new RString(編集本算定通知書共通情報List.indexOf(編集本算定通知書共通情報) + 1));
                 bodyList.add(isNull(編集後本算定通知書共通情報.get通知書番号())
                         ? RString.EMPTY : 編集後本算定通知書共通情報.get通知書番号().getColumnValue());
                 bodyList.add(isNull(編集後本算定通知書共通情報.get被保険者番号())

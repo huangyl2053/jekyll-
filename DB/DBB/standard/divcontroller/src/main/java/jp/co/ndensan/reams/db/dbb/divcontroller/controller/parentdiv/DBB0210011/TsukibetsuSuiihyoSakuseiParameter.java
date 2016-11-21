@@ -93,7 +93,7 @@ public class TsukibetsuSuiihyoSakuseiParameter {
      */
     public ResponseData<TsukibetsuSuiihyoSakuseiParameterDiv> onClick_btnJikkouBefore(TsukibetsuSuiihyoSakuseiParameterDiv div) {
         ValidationMessageControlPairs validationMessages = ValidationMessageControlPairs.NO_ERROR;
-        if(!ResponseHolder.isReRequest()){
+        if (!ResponseHolder.isReRequest()) {
             validationMessages = getValidationHandler(div).validate();
         }
         if (validationMessages.iterator().hasNext()) {
