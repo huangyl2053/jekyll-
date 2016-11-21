@@ -110,7 +110,7 @@ public class DBC5100011MainHandler {
             tempData.set終了居宅利用率(new RString(div.getTxtKyotakuRiyoritsuRange().getToValue().toString()));
         }
         if (div.getTxtTaishoYmRange().getToValue() != null) {
-            tempData.set終了年月(div.getTxtTaishoYmRange().getToValue().seireki().toDateString());
+            tempData.set終了年月(div.getTxtTaishoYmRange().getToValue().getYearMonth().toDateString());
         }
         if (div.getTxtHomonRiyoritsuRange().getToValue() != null) {
             tempData.set終了訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getToValue().toString()));
@@ -128,7 +128,7 @@ public class DBC5100011MainHandler {
             tempData.set開始居宅利用率(new RString(div.getTxtKyotakuRiyoritsuRange().getFromValue().toString()));
         }
         if (div.getTxtTaishoYmRange().getFromValue() != null) {
-            tempData.set開始年月(div.getTxtTaishoYmRange().getFromValue().seireki().toDateString());
+            tempData.set開始年月(div.getTxtTaishoYmRange().getFromValue().getYearMonth().toDateString());
         }
         if (div.getTxtHomonRiyoritsuRange().getFromValue() != null) {
             tempData.set開始訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getFromValue().toString()));
