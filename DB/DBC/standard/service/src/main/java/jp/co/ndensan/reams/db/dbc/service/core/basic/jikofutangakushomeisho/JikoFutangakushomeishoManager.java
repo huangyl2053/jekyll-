@@ -62,8 +62,8 @@ public class JikoFutangakushomeishoManager {
     private static final RString メニューID_DBCMN63001 = new RString("DBCMN63001");
     private static final RString メニューID_DBCMNN2001 = new RString("DBCMNN2001");
     private IJikoFutangakushomeishoMapper mapper;
-    private static final RString 自己負担額証明書作成 = new RString("自己負担額証明書作成");
-    private static final RString 事業分_自己負担額証明書作成 = new RString("事業分・自己負担額証明書作成");
+    private static final RString 自己負担額証明書作成 = new RString("自己負担額証明書");
+    private static final RString 事業分_自己負担額証明書作成 = new RString("事業分・自己負担額証明書");
 
     /**
      * コンストラクタです。

@@ -133,10 +133,10 @@ public class JikoFutangakushomeishoHandler {
         }
         div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setDataSource(dataList);
         if (年度毎キー.keySet().contains(システム日付.getYear())) {
-            if ((月_8 <= システム月 && システム月 <= 月_12) && (日_1 <= システム日 && システム日 <= 日_31)) {
-                div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setSelectedKey(FlexibleDate.getNowDate().getYear().minusYear(年_2).toDateString());
-            } else if ((月_1 <= システム月 && システム月 <= 月_7) && (日_1 <= システム日 && システム日 <= 日_31)) {
-                div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setSelectedKey(FlexibleDate.getNowDate().getYear().minusYear(1).toDateString());
+            if ((月_8 <= システム月 && システム月 <= 月_12) && (日_1 <= システム日 && システム日 <= 日_31) && 年度毎キー.keySet().contains(FlexibleDate.getNowDate().getYear().minusYear(年_2))) {
+                div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setSelectedKey(FlexibleDate.getNowDate().minusYear(年_2).getYear().toDateString());
+            } else if ((月_1 <= システム月 && システム月 <= 月_7) && (日_1 <= システム日 && システム日 <= 日_31) && 年度毎キー.keySet().contains(FlexibleDate.getNowDate().getYear().minusYear(1))) {
+                div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setSelectedKey(FlexibleDate.getNowDate().minusYear(1).getYear().toDateString());
             }
         } else {
             div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().setSelectedKey(dataList.get(0).getKey());
