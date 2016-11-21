@@ -545,6 +545,7 @@ public class TokuteiShinryohiPanel {
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         DbJohoViewState viewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         getHandler(div).viewStateDBの編集(明細検索キー.getサービス年月(), viewStateDB, 明細検索キー);
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, viewStateDB);
     }
 
     /**
