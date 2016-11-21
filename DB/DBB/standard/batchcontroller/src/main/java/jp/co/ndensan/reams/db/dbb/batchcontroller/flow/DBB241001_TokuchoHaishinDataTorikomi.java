@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB241001.NenkinTokuchoCsvOutputProcess;
@@ -121,6 +122,12 @@ public class DBB241001_TokuchoHaishinDataTorikomi extends BatchFlowBase<DBB24100
         fileName = (Directory.getFiles(保存先フォルダのパス.toRString(), descriptor.getSharedFileName().toRString(),
                 false).length > 0 ? Directory.getFiles(保存先フォルダのパス.toRString(), descriptor.getSharedFileName().toRString(),
                         false)[0] : RString.EMPTY);
+        File file = new File(fileName.toString());
+        if (file.isDirectory()) {
+            fileName = (Directory.getFiles(fileName, descriptor.getSharedFileName().toRString(),
+                    false).length > 0 ? Directory.getFiles(fileName, descriptor.getSharedFileName().toRString(),
+                            false)[0] : RString.EMPTY);
+        }
         filePath = Path.combinePath(保存先フォルダのパス.toRString(), fileName);
 
     }
