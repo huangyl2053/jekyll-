@@ -319,6 +319,14 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         ChoteiboShoriHizukeMyBatisParameter myBatisParameter = new ChoteiboShoriHizukeMyBatisParameter(
                 SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), 調定年度);
         DbT7022ShoriDateKanriEntity shoriDateKanriData = choteiboSakuseiMapper.select処理日付(myBatisParameter);
+
+        insert当月末の段階(param, shoriDateKanriData, 調定年度, 賦課年度);
+        insert前月末の段階(param, shoriDateKanriData, 調定年度, 賦課年度);
+    }
+
+    private void insert当月末の段階(Map<String, Object> param, DbT7022ShoriDateKanriEntity shoriDateKanriData,
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度) {
         List<DankaiDataEntity> dogetsudankaiData = choteiboSakuseiMapper.select当月末の段階データ(param);
         for (DankaiDataEntity entity : dogetsudankaiData) {
             DanKaiEntity dankaiEntity = new DanKaiEntity();
@@ -351,7 +359,11 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
             dankaiEntity.setDogetsusueChoteigaku(entity.getChoteigaku());
             choteiboSakuseiMapper.insertTmpDankai(dankaiEntity);
         }
+    }
 
+    private void insert前月末の段階(Map<String, Object> param, DbT7022ShoriDateKanriEntity shoriDateKanriData,
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度) {
         List<DankaiDataEntity> zengetsudankaiData = choteiboSakuseiMapper.select前月末の段階データ(param);
         for (DankaiDataEntity entity : zengetsudankaiData) {
             DanKaiEntity dankaiEntity = new DanKaiEntity();
