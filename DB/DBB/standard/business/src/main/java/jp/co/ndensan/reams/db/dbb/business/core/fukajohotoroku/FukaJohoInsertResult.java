@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.fukajohotoroku;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.FukaJohoTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 賦課の情報登録ビジネスクラスです。
@@ -77,7 +78,8 @@ public class FukaJohoInsertResult {
         dbT2002.setChoteiJiyu2(entity.getChoteiJiyu2());
         dbT2002.setChoteiJiyu3(entity.getChoteiJiyu3());
         dbT2002.setChoteiJiyu4(entity.getChoteiJiyu4());
-        dbT2002.setKoseiM(entity.getKoseiM());
+        dbT2002.setKoseiM(((!RString.isNullOrEmpty(entity.getKoseiM())) && 1 == entity.getKoseiM().length()) ?
+                entity.getKoseiM().padZeroToLeft(1) : entity.getKoseiM());
         dbT2002.setGemmenMaeHokenryo(entity.getGemmenMaeHokenryo());
         dbT2002.setGemmenGaku(entity.getGemmenGaku());
         dbT2002.setKakuteiHokenryo(entity.getKakuteiHokenryo());

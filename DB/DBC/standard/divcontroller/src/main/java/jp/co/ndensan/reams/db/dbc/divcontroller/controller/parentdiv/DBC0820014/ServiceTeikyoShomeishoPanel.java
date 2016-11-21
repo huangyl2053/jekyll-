@@ -171,6 +171,8 @@ public class ServiceTeikyoShomeishoPanel {
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_Modify(ServiceTeikyoShomeishoPanelDiv div) {
         putViewStateDown(処理モード_修正, div);
         証明書変更済フラグ初期化();
+        DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDBBAK, 償還払ViewStateDB情報);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払い費支給申請).respond();
     }
 

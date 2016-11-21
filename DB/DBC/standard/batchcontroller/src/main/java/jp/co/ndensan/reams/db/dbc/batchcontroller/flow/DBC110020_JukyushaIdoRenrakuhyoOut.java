@@ -88,7 +88,6 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     private static final String データ比較処理 = "dataCompareShori";
     private static final String 文字コード変換 = "batchTextFileConvert";
     private static final String 国保連インタフェース管理更新 = "upDoInterfaceKanriKousin";
-    private static final RString 交換情報識別番号 = new RString("531");
     private static final RString SJIS類似 = new RString("SjisRuiji");
     private static final RString ERROR_前 = new RString("errorLogFile_");
     private static final RString ERROR_後 = new RString(".csv");

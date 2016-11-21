@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEntity> {
 
     private static final RString 引数_被保険者番号 = new RString("被保険者番号");
+    private static final RString 引数_交付証種類 = new RString("交付証種類");
     @InjectSession
     private SqlSession session;
 
@@ -61,7 +62,7 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
             RString 交付証種類,
             int 履歴番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_被保険者番号.toString()));
-        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_交付証種類.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -143,7 +144,7 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
             RString 交付証種類,
             HihokenshaNo 被保険者番号,
             YMDHMS 処理日時) throws NullPointerException {
-        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_交付証種類.toString()));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_被保険者番号.toString()));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
@@ -256,7 +257,7 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
             HihokenshaNo 被保険者番号,
             RString 交付証種類) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_被保険者番号.toString()));
-        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_交付証種類.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -285,7 +286,7 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
             HihokenshaNo 被保険者番号,
             RString 交付証種類, FlexibleDate 交付年月日) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_被保険者番号.toString()));
-        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_交付証種類.toString()));
         requireNonNull(交付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("交付年月日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

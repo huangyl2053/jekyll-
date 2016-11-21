@@ -58,8 +58,10 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
+import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
-import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
+import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
+import jp.co.ndensan.reams.ur.urc.service.core.kamoku.shunokamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -71,7 +73,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
@@ -200,15 +201,20 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         IKanendoTsuchishoIkkatsuHakkoMapper mapper = mapperProvider.create(IKanendoTsuchishoIkkatsuHakkoMapper.class);
         YMDHMS 最新の基準日 = get最新調定日時(調定年度);
         IKozaSearchKey kozaSearchKey = get口座Param();
-        ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
-        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
-        RString 科目コード;
-        if (list != null && !list.isEmpty()) {
-            科目コード = get科目コードPrarm(list);
-        } else {
-            RStringBuilder rStringBuilder = new RStringBuilder();
-            科目コード = rStringBuilder.append(LEFT_FORMAT).append(RIGHT_FORMAT).toRString();
+        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
+        IShunoKamoku 介護保険料_普通徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+        List<KamokuCode> list = new ArrayList<>();
+        list.add(介護保険料_普通徴収.getコード());
+        RStringBuilder rStringBuilder = new RStringBuilder();
+        rStringBuilder.append(LEFT_FORMAT);
+        for (int i = 0; i < list.size(); i++) {
+            rStringBuilder.append(list.get(i) == null ? RString.EMPTY : list.get(i).getColumnValue());
+            if (i != list.size() - 1) {
+                rStringBuilder.append(MIDDLE_FORMAT);
+            }
         }
+        rStringBuilder.append(RIGHT_FORMAT);
+        RString 科目コード = rStringBuilder.toRString();
         RString 処理日 = new RString(FlexibleDate.getNowDate().toString());
         IdoFukaJohoParameter parameter1 = IdoFukaJohoParameter.createParameter(
                 調定年度, 調定年度.minusYear(1), 調定年度.minusYear(2), 最新の基準日, 処理日, kozaSearchKey, list, 科目コード, 定値区分_1);
@@ -236,15 +242,20 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         IKanendoTsuchishoIkkatsuHakkoMapper mapper = mapperProvider.create(IKanendoTsuchishoIkkatsuHakkoMapper.class);
         YMDHMS 最新の基準日 = get最新調定日時(調定年度);
         IKozaSearchKey kozaSearchKey = get口座Param();
-        ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
-        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
-        RString 科目コード;
-        if (list != null && !list.isEmpty()) {
-            科目コード = get科目コードPrarm(list);
-        } else {
-            RStringBuilder rStringBuilder = new RStringBuilder();
-            科目コード = rStringBuilder.append(LEFT_FORMAT).append(RIGHT_FORMAT).toRString();
+        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
+        IShunoKamoku 介護保険料_普通徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+        List<KamokuCode> list = new ArrayList<>();
+        list.add(介護保険料_普通徴収.getコード());
+        RStringBuilder rStringBuilder = new RStringBuilder();
+        rStringBuilder.append(LEFT_FORMAT);
+        for (int i = 0; i < list.size(); i++) {
+            rStringBuilder.append(list.get(i) == null ? RString.EMPTY : list.get(i).getColumnValue());
+            if (i != list.size() - 1) {
+                rStringBuilder.append(MIDDLE_FORMAT);
+            }
         }
+        rStringBuilder.append(RIGHT_FORMAT);
+        RString 科目コード = rStringBuilder.toRString();
         RString 処理日 = new RString(FlexibleDate.getNowDate().toString());
         IdoFukaJohoParameter parameter = IdoFukaJohoParameter.createParameter(
                 調定年度, 調定年度.minusYear(1), 調定年度.minusYear(2), 最新の基準日, 処理日, kozaSearchKey, list, 科目コード, 回目);

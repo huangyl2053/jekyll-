@@ -38,8 +38,8 @@ public class DBC5100011Main {
      *
      * @param div DBC5100011MainDiv
      * @return DBC5100011MainDiv
-     * @throws InstantiationException
-     * @throws IllegalAccessException
+     * @throws InstantiationException InstantiationException
+     * @throws IllegalAccessException IllegalAccessException
      */
     public ResponseData<DBC150010_RiyojokyoTokeihyoMeisaiListParameter> onClick_btnBatchRegister(DBC5100011MainDiv div)
             throws InstantiationException, IllegalAccessException {

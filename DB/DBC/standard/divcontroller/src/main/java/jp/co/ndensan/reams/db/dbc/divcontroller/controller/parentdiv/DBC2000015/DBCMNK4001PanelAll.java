@@ -43,12 +43,19 @@ public class DBCMNK4001PanelAll {
         YMDHMS 今回抽出期間終了日時 = new YMDHMS(div.getTxtKonkaiShuryoDate().getValue(),
                 div.getTxtKonkaiShuryoTime().getValue());
         YMDHMS 今回抽出期間開始日時 = new YMDHMS(RString.EMPTY);
+        YMDHMS 前回抽出終了日時 = new YMDHMS(div.getTxtZenkaiShuryoDate().getValue(), div.getTxtZenkaiShuryoTime().getValue());
         if (div.getTxtKonkaiKaishiDate().getValue() != null && div.getTxtKonkaiKaishiTime().getValue() != null) {
             今回抽出期間開始日時 = new YMDHMS(div.getTxtKonkaiKaishiDate().getValue(),
                     div.getTxtKonkaiKaishiTime().getValue());
         }
         if (!今回抽出期間開始日時.isEmpty() && 今回抽出期間終了日時.isBefore(今回抽出期間開始日時)) {
             ValidationMessageControlPairs validPairs = getValidationHandler().大小関係が不正();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
+        if (!前回抽出終了日時.isEmpty() && 前回抽出終了日時.isBefore(今回抽出期間開始日時)) {
+            ValidationMessageControlPairs validPairs = getValidationHandler().期間が不正();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }

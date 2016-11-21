@@ -230,6 +230,9 @@ public class ShokanbarayiKeteiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_CommonsShoriCancel(ShokanbarayiKeteiInfoPanelDiv div) {
+        if (DBC0820015StateName.処理完了.getName().equals(ResponseHolder.getState())) {
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, null);
+        }
         return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.一覧に戻る).respond();
     }
 
@@ -371,19 +374,17 @@ public class ShokanbarayiKeteiInfoPanel {
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         ShomeishoNyuryokuFlag 証明書入力済フラグ = new ShomeishoNyuryokuFlag();
         if (明細キー == null) {
-            証明書入力済フラグ.setサービス計画費_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
-            証明書入力済フラグ.set請求額集計_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
-            証明書入力済フラグ.set食事費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
-            証明書入力済フラグ.set特定入所者費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+            証明書入力済フラグ初期化(証明書入力済フラグ);
         }
         if (明細キー != null && db情報.get証明書入力済フラグMap() == null) {
-            証明書入力済フラグ.setサービス計画費_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
-            証明書入力済フラグ.set請求額集計_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
-            証明書入力済フラグ.set食事費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
-            証明書入力済フラグ.set特定入所者費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+            証明書入力済フラグ初期化(証明書入力済フラグ);
         }
         if (明細キー != null && db情報.get証明書入力済フラグMap() != null) {
             証明書入力済フラグ = db情報.get証明書入力済フラグMap().get(明細キー);
+        }
+        if (証明書入力済フラグ == null) {
+            証明書入力済フラグ = new ShomeishoNyuryokuFlag();
+            証明書入力済フラグ初期化(証明書入力済フラグ);
         }
         ModoruEntity 戻るの対象 = getHandler(div).return登録処理情報(paramter, 支払金額合計初期, 画面モード, 識別コード,
                 証明書入力済フラグ, db情報);
@@ -400,6 +401,13 @@ public class ShokanbarayiKeteiInfoPanel {
             ViewStateHolder.put(ViewStateKeys.修正前支給区分, 修正前支給区分);
             return new DBHozonJoho(db情報, 修正前支給区分);
         }
+    }
+
+    private void 証明書入力済フラグ初期化(ShomeishoNyuryokuFlag 証明書入力済フラグ) {
+        証明書入力済フラグ.setサービス計画費_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set請求額集計_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set食事費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+        証明書入力済フラグ.set特定入所者費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
     }
 
     private RString getKanryoMessage(RString model) {

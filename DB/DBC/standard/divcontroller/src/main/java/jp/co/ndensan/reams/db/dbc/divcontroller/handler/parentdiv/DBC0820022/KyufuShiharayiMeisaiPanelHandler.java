@@ -678,7 +678,8 @@ public class KyufuShiharayiMeisaiPanelHandler {
                     && ryoyo.getEntity().get整理番号().equals(parameter.get整理番号())
                     && ryoyo.getEntity().get事業者番号().equals(parameter.get事業者番号())
                     && ryoyo.getEntity().get様式番号().equals(parameter.get様式番号())
-                    && ryoyo.getEntity().get明細番号().equals(parameter.get明細番号())) {
+                    && ryoyo.getEntity().get明細番号().equals(parameter.get明細番号())
+                    && ryoyo.getEntity().toEntity().getState() == EntityDataState.Added) {
                 updateList.add(ryoyo);
             }
         }

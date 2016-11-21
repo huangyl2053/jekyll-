@@ -34,7 +34,7 @@ public class FukaKakuteiPanelHandler {
     private static final RString 本算定賦課確定 = new RString("本算定賦課確定");
     private static final RString 異動賦課確定 = new RString("異動賦課確定");
     private static final RString 特別徴収仮算定賦課処理の結果を確定します = new RString("特別徴収仮算定賦課処理の結果を確定します。");
-    private static final RString 普通徴収仮算定賦課処理の結果を確定します = new RString("本算定異動（現年度）賦課処理の結果を確定します。");
+    private static final RString 普通徴収仮算定賦課処理の結果を確定します = new RString("普通徴収仮算定賦課処理の結果を確定します。");
     private static final RString 仮算定異動賦課処理の結果を確定します = new RString("仮算定異動賦課処理の結果を確定します。");
     private static final RString 本算定賦課処理の結果を確定します = new RString("本算定賦課処理の結果を確定します。");
     private static final RString 本算定 = new RString("本算定異動（現年度）賦課処理の結果を確定します。");

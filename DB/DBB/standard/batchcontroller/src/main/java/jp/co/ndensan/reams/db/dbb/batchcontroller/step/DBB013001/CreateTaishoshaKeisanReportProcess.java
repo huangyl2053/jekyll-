@@ -196,7 +196,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
         TokuchoHeijunkaRokuBatchTaishoshaIchiran taishosha = new TokuchoHeijunkaRokuBatchTaishoshaIchiran(
                 taishoshaEntity, 今年度保険料率, new Decimal(調整金額));
         TokubetsuChoshuHeijunkaKeisanIchiranReport report = new TokubetsuChoshuHeijunkaKeisanIchiranReport(
-                taishosha, null, parameter.get調定日時(),
+                taishosha, null, 帳票制御共通, parameter.get調定日時(),
                 parameter.get調定年度(), 導入団体クラス, outputOrder, 特徴平準化対象者一覧表);
         report.writeBy(reportSourceWriter);
 

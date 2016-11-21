@@ -568,6 +568,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ).modifiedModel();
                 高額合算申請書保持.add高額合算申請書(高額合算申請書);
             } else {
+                高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ);
                 高額合算申請書 = 変更判定(高額合算申請書);
                 高額合算申請書保持.add高額合算申請書(高額合算申請書);
             }
@@ -779,6 +780,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(true);
         div.getBtnKakuteiShintei().setVisible(true);
+        div.getDdlShinseiTaishoNendo().setReadOnly(false);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
     }

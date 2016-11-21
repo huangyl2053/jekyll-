@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKari
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FukaKeisanEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FukaKeisanTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoTempEntity;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
@@ -116,15 +119,18 @@ public class InsFukaKeisanTempProcess extends BatchKeyBreakBase<FukaKeisanEntity
 
     @Override
     protected void initialize() {
+        FuchoKiUtil 月期対応取得_普徴クラス = new FuchoKiUtil();
+        KitsukiList 期月リスト = 月期対応取得_普徴クラス.get期月リスト();
+        int 期 = 期月リスト.filtered仮算定期間().toList().get(0).get期AsInt();
+        FukaNokiResearcher researcher = FukaNokiResearcher.createInstance();
         KozaSearchKeyBuilder kozabuilder = new KozaSearchKeyBuilder();
         kozabuilder.set業務コード(GyomuCode.DB介護保険);
         kozabuilder.set用途区分(new KozaYotoKubunCodeValue(KozaYotoKubunType.振替口座.getCode()));
-        kozabuilder.set基準日(FlexibleDate.getNowDate());
+        kozabuilder.set基準日(new FlexibleDate(researcher.get普徴納期(期).get納期限().toDateString()));
         IKozaSearchKey kozaSearchKey = kozabuilder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         myBatisParameter = CaluculateFukaParameter.createSelectByKeyParam(kozaSearchKey, list);
-
         賦課計算中間 = new FukaKeisanTempEntity();
         index = 0;
     }
