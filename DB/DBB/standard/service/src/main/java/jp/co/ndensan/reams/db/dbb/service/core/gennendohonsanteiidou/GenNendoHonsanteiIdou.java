@@ -183,6 +183,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private static final RString 特別徴収_厚生労働省 = new RString("1");
     private static final RString 特別徴収_地共済 = new RString("2");
     private static final RString 普通徴収 = new RString("3");
+    private static final RString 処理対象なし = new RString("処理対象なし");
 
     /**
      * コンストラクタです
@@ -376,7 +377,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     public void createIdoTriggerTemp(RString 異動賦課で同時に計算する特徴捕捉分, RString 特徴捕捉対象者の依頼金額計算) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         mapper.createTmpIdoTrigger();
-        if (RString.isNullOrEmpty(異動賦課で同時に計算する特徴捕捉分)) {
+        if (処理対象なし.equals(異動賦課で同時に計算する特徴捕捉分)) {
             mapper.insert異動Tempと口座異動Tempをマージ();
         } else if (HosokushaIraiKingaku.通常の異動賦課に含めて計算する.getコード().equals(特徴捕捉対象者の依頼金額計算)) {
             mapper.insert通常の異動賦課に含めて計算する();
