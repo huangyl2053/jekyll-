@@ -1014,7 +1014,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoFuchoMaeKei().setText(DecimalFormatter.toコンマ区切りRString(更正前合計, 0));
+                .getLblZengoFuchoMaeKei().setText(Decimal.ZERO.equals(更正前合計) ? RString.EMPTY
+                        : DecimalFormatter.toコンマ区切りRString(更正前合計, 0));
     }
 
     private Decimal get普徴期別金額(RString 期, FukaJoho 賦課の情報) {

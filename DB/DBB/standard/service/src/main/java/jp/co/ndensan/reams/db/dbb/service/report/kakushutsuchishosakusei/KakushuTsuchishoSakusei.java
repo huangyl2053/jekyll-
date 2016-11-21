@@ -388,6 +388,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             発行する帳票List.add(TsuchiSho.介護保険料額決定通知書_過年度.get名称());
             発行する帳票List.add(TsuchiSho.介護保険料額変更兼特別徴収中止通知書_過年度.get名称());
             発行する帳票List.add(TsuchiSho.郵便振替納付書.get名称());
+            発行する帳票List.add(TsuchiSho.賦課台帳_本算定.get名称());
         }
         return 発行する帳票List;
     }
@@ -918,8 +919,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
         本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
         本算定通知書情報.set納組情報(通知書共通情報.get納組情報());
-        本算定通知書情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報List());
-        本算定通知書情報.set特徴納期情報リスト(通知書共通情報.get特徴収入情報List());
+        本算定通知書情報.set普徴納期情報リスト(get普徴納期情報List(通知書共通情報));
+        本算定通知書情報.set特徴納期情報リスト(get特徴納期情報List(通知書共通情報));
         本算定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         本算定通知書情報.set口座情報(通知書共通情報.get口座情報());
         本算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
@@ -994,6 +995,28 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         insertリアル発行履歴(通知書共通情報.get賦課の情報_更正後().get賦課情報(), 決定通知書_帳票分類ID);
     }
 
+    private List<NokiJoho> get普徴納期情報List(KakushuTsuchishoCommonInfo 通知書共通情報) {
+        if (GennenKanen.現年度 == 通知書共通情報.get年度区分()) {
+            return 通知書共通情報.get普徴納期情報List();
+        }
+        List<NokiJoho> 普徴納期情報List = new ArrayList<>();
+        for (NokiJoho 普徴納期情報 : 通知書共通情報.get普徴納期情報List()) {
+            Decimal 普徴期別金額 = 通知書共通情報.get賦課の情報_更正後().get賦課情報().get普徴期別金額(普徴納期情報.get期月().get期AsInt());
+            if (!(null == 普徴期別金額 || Decimal.ZERO.equals(普徴期別金額))) {
+                普徴納期情報List.add(普徴納期情報);
+            }
+        }
+        return 普徴納期情報List;
+    }
+
+    private List<NokiJoho> get特徴納期情報List(KakushuTsuchishoCommonInfo 通知書共通情報) {
+        if (GennenKanen.現年度 == 通知書共通情報.get年度区分()) {
+            return 通知書共通情報.get特徴収入情報List();
+        }
+
+        return null;
+    }
+
     /**
      * 介護保険料額変更兼特別徴収中止通知書発行メソッドです。
      *
@@ -1030,8 +1053,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
         本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
         本算定通知書情報.set納組情報(通知書共通情報.get納組情報());
-        本算定通知書情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報List());
-        本算定通知書情報.set特徴納期情報リスト(通知書共通情報.get特徴収入情報List());
+        本算定通知書情報.set普徴納期情報リスト(get普徴納期情報List(通知書共通情報));
+        本算定通知書情報.set特徴納期情報リスト(get特徴納期情報List(通知書共通情報));
         本算定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         本算定通知書情報.set口座情報(通知書共通情報.get口座情報());
         本算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
