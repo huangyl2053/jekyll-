@@ -845,7 +845,11 @@ public class NinteiTsuchishoHakkoHandler {
         row.getBirthYMD().setValue(convertFlexibleDateToRDate(対象者.get生年月日()));
         row.getNinteiShinseiDay().setValue(convertFlexibleDateToRDate(対象者.get認定申請年月日()));
         row.setShinseiji(NinteiShinseiShinseijiKubunCode.toValue(対象者.get認定申請区分申請時コード().value()).get名称());
-        row.setHorei(NinteiShinseiHoreiCode.toValue(対象者.get認定申請区分法令コード().value()).get名称());
+        if (RString.isNullOrEmpty(対象者.get認定申請区分法令コード().value())) {
+            row.setHorei(RString.EMPTY);
+        } else {
+            row.setHorei(NinteiShinseiHoreiCode.toValue(対象者.get認定申請区分法令コード().value()).get名称());
+        }
         row.getNinteiDay().setValue(convertFlexibleDateToRDate(対象者.get認定年月日()));
         row.setYokaigodo(get要介護度名(convertCodeToRString(対象者.get厚労省IF識別コード()),
                 convertCodeToRString(対象者.get要介護認定状態区分コード())));

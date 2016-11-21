@@ -49,19 +49,19 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
 
         source.title = item.getタイトル();
         source.sakuseiGengo = item.get作成日_元号();
-        source.sakuseiYY = item.get作成日_年();
+        source.sakuseiYY = !RString.isNullOrEmpty(item.get作成日_年()) ? item.get作成日_年().substring(2) : RString.EMPTY;
         source.sakuseiMM = item.get作成日_月();
         source.sakuseiDD = item.get作成日_日();
         source.shinseiGengo = item.get申請日_元号();
-        source.shinseiYY = item.get申請日_年();
+        source.shinseiYY = !RString.isNullOrEmpty(item.get申請日_年()) ? item.get申請日_年().substring(2) : RString.EMPTY;
         source.shinseiMM = item.get申請日_月();
         source.shinseiDD = item.get申請日_日();
         source.chosaGengo = item.get調査日_元号();
-        source.chosaYY = item.get調査日_年();
+        source.chosaYY = !RString.isNullOrEmpty(item.get調査日_年()) ? item.get調査日_年().substring(2) : RString.EMPTY;
         source.chosaMM = item.get調査日_月();
         source.chosaDD = item.get調査日_日();
         source.shinsaGengo = item.get審査日_元号();
-        source.shinsaYY = item.get審査日_年();
+        source.shinsaYY = !RString.isNullOrEmpty(item.get審査日_年()) ? item.get審査日_年().substring(2) : RString.EMPTY;
         source.shinsaMM = item.get審査日_月();
         source.shinsaDD = item.get審査日_日();
         source.gogitaiNo = item.get合議体番号();
