@@ -8,10 +8,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0510011;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.PostMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.dgShichoson_Row;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
@@ -124,7 +126,8 @@ public class PostMainPanelValidationHandler {
                     @Override
                     public boolean apply(PostMainPanelDiv div) {
                         List<dgShichoson_Row> rowList = div.getDgShichoson().getDataSource();
-                        if (rowList != null && rowList.size() > 0 && !(rowList.get(0).getShichosonShikibetuID().equals(NUM_00))) {
+                        RString 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(ControlDataHolder.getUserId()).get(0).getItemId();
+                        if (rowList != null && rowList.size() > 0 && !(市町村識別ID.equals(NUM_00))) {
                             for (dgShichoson_Row row : rowList) {
                                 if (!row.getSelected()) {
                                     return row.getSelected();
