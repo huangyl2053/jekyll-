@@ -95,6 +95,8 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
         }
 
         div.getCcdShutsuryokuKoumoku().setDisabled(true);
+        div.getCcdShutsuryokuKoumoku().setDisplayNone(true);
+        div.getCcdShutsuryokuKoumoku().setCanOpenAndClose(false);
 
         List<RString> keyList = new ArrayList<>();
         keyList.add(項目名付加キー);
@@ -223,8 +225,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(false);
-            div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
-            div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
+            div.getChushutsuJokenPanel().getRadDataShurui().setSelectedKey(KEY_1);
         } else if (保険者作成.equals(データ区分)) {
             List<KeyValueDataSource> datasource = new ArrayList<>();
             datasource.add(new KeyValueDataSource(KEY_0, すべて));
@@ -240,8 +241,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtUketoriNengetsu().setDisabled(false);
             div.getChushutsuJokenPanel().getTxtSofuNengetsu().setDisabled(true);
-            div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
-            div.getChushutsuJokenPanel().getRadDataShurui().setDisabled(false);
+            div.getChushutsuJokenPanel().getRadDataShurui().setSelectedKey(KEY_1);
         }
     }
 

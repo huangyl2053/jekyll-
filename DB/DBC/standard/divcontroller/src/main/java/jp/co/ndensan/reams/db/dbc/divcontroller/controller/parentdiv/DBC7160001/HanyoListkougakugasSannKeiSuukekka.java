@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7160001
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710160.DBC710160_HanyoListKogakuGassanKeisanKekkaRenrakuHyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7160001.HanyoListkougakugasSannKeiSuukekkaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7160001.HanyoListkougakugasSannKeiSuukekkaHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7160001.HanyoListkougakugasSannKeiSuukekkaValidationHandler;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 汎用リスト出力(高額合算計算結果連絡票情報)のクラスです。
@@ -64,6 +66,20 @@ public class HanyoListkougakugasSannKeiSuukekka {
     }
 
     /**
+     * 「実行する」ボタンを押した後、入力チェックを行う。
+     *
+     * @param div HanyoListkougakugasSannKeiSuukekkaDiv
+     * @return ResponseData
+     */
+    public ResponseData<HanyoListkougakugasSannKeiSuukekkaDiv> onClick_check(HanyoListkougakugasSannKeiSuukekkaDiv div) {
+        ValidationMessageControlPairs pairsCheck = getValidationHandler(div).validateCheck();
+        if (pairsCheck.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairsCheck).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「実行する」ボタンのメソッドです。
      *
      * @param div HanyoListParamDiv
@@ -76,5 +92,9 @@ public class HanyoListkougakugasSannKeiSuukekka {
 
     private HanyoListkougakugasSannKeiSuukekkaHandler getHandler(HanyoListkougakugasSannKeiSuukekkaDiv div) {
         return new HanyoListkougakugasSannKeiSuukekkaHandler(div);
+    }
+
+    private HanyoListkougakugasSannKeiSuukekkaValidationHandler getValidationHandler(HanyoListkougakugasSannKeiSuukekkaDiv div) {
+        return new HanyoListkougakugasSannKeiSuukekkaValidationHandler(div);
     }
 }
