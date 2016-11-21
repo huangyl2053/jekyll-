@@ -97,7 +97,6 @@ public class KariSanteiTsuchishoProperty extends
             BreakerCatalog<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
-
             pageBreakKeys) {
             @Override
             public ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> occuredBreak(
@@ -114,9 +113,9 @@ public class KariSanteiTsuchishoProperty extends
 
     private RString to帳票物理名(RString 項目ID) {
 
-        RString 帳票物理名 = RString.EMPTY;
+        RString 帳票物理名;
 
-        if (IdoKarisanteigakuTsuchishoOutPutOrder.郵便番号.equals(項目ID)) {
+        if (IdoKarisanteigakuTsuchishoOutPutOrder.郵便番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource.ReportSourceFields.listUpper_2.name());
         } else if (IdoKarisanteigakuTsuchishoOutPutOrder.町域コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource.ReportSourceFields.choikiCode.name());
@@ -136,7 +135,16 @@ public class KariSanteiTsuchishoProperty extends
             帳票物理名 = new RString(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource.ReportSourceFields.shikibetsuCode.name());
         } else if (IdoKarisanteigakuTsuchishoOutPutOrder.氏名５０音カナ.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource.ReportSourceFields.kanaMeisho.name());
-        } else if (IdoKarisanteigakuTsuchishoOutPutOrder.生年月日.get項目ID().equals(項目ID)) {
+        } else {
+            帳票物理名 = to帳票物理名1(項目ID);
+        }
+        return 帳票物理名;
+    }
+
+    private RString to帳票物理名1(RString 項目ID) {
+
+        RString 帳票物理名 = RString.EMPTY;
+        if (IdoKarisanteigakuTsuchishoOutPutOrder.生年月日.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource.ReportSourceFields.listUpper_5.name());
         } else if (IdoKarisanteigakuTsuchishoOutPutOrder.性別.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource.ReportSourceFields.listUpper_6.name());

@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyosofuichiran.Kyuf
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kyufukanrihyosofuichiran.KyufuKanrihyoSofuIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
@@ -221,9 +220,10 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
             kyufukanrihyoOutDoBillOutEntity.set被保険者一時Entity(被保険者一時Entity);
         } else {
             if (!keyRString.equals(getKyufukanrihyoOutDoBillOutEntity値(entity))) {
-                合計件数_新規1 = Decimal.ZERO;
-                合計件数_修正2 = Decimal.ZERO;
-                合計件数_取消3 = Decimal.ZERO;
+                keyRString = getKyufukanrihyoOutDoBillOutEntity値(entity);
+                合計件数_新規 = Decimal.ZERO;
+                合計件数_修正 = Decimal.ZERO;
+                合計件数_取消 = Decimal.ZERO;
             }
             if (!(保険者番号.equals(自己作成管理一時Entity.getHokenshaNo()) && 利用年月.equals(new RString(自己作成管理一時Entity.getRiyoYM().toString()))
                     && 被保険者番号.equals(自己作成管理一時Entity.getHihokenshaNo().getColumnValue())
@@ -488,11 +488,7 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
             Class clazz = entity.getClass();
             try {
                 Method getMethod = clazz.getDeclaredMethod(toUpperCaseFirstOne(rString).toString().trim());
-                if (RString.class.equals(getMethod.getReturnType())) {
-                    集計項目 = new RString(getMethod.invoke(entity).toString());
-                } else if (HihokenshaNo.class.equals(getMethod.getReturnType())) {
-                    集計項目 = new HihokenshaNo(getMethod.invoke(entity).toString()).value();
-                }
+                集計項目 = new RString(getMethod.invoke(entity).toString());
                 rb.append(集計項目);
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(KyufuKanrihyoSofuIchiranDoBillOutProcess.class.getName()).log(Level.SEVERE, null, ex);

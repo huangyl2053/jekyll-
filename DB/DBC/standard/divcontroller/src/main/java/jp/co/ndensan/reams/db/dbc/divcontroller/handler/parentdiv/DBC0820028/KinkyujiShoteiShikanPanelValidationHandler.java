@@ -190,6 +190,16 @@ public class KinkyujiShoteiShikanPanelValidationHandler {
                     new KinkyujiShoteiShikanPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.未入力, 通院医療機関名.toString())));
         }
+        return validPairs;
+    }
+
+    /**
+     * 計算する①のチェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs check計算1() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getPanelDetail().getTxtShoteiShikkanTanisu().getValue() == null
                 && div.getPanelDetail().getTxtShoteiShikkanNissu().getValue() != null) {
             validPairs.add(new ValidationMessageControlPair(
@@ -202,11 +212,16 @@ public class KinkyujiShoteiShikanPanelValidationHandler {
                     new KinkyujiShoteiShikanPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.未入力, 特定疾患施設療養費日数.toString())));
         }
-        check入力_three(validPairs);
         return validPairs;
     }
 
-    private ValidationMessageControlPairs check入力_three(ValidationMessageControlPairs validPairs) {
+    /**
+     * 計算する②のチェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs check計算2() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getPanelDetail().getTxtKinkyuChiryoKanriTanisu().getValue() == null
                 && div.getPanelDetail().getTxtKinkyuChiryoKanriNissu().getValue() != null) {
             validPairs.add(new ValidationMessageControlPair(
@@ -219,6 +234,16 @@ public class KinkyujiShoteiShikanPanelValidationHandler {
                     new KinkyujiShoteiShikanPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.未入力, 緊急時治療管理日数.toString())));
         }
+        return validPairs;
+    }
+
+    /**
+     * 計算する③のチェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs check計算3() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getPanelDetail().getTxtRehabilitationTanisu().getValue() == null
                 && (div.getPanelDetail().getTxtShujutsuTanisu().getValue() != null
                 || div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() != null
@@ -237,11 +262,6 @@ public class KinkyujiShoteiShikanPanelValidationHandler {
                     new KinkyujiShoteiShikanPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.未入力, 手術.toString())));
         }
-        check入力_four(validPairs);
-        return validPairs;
-    }
-
-    private ValidationMessageControlPairs check入力_four(ValidationMessageControlPairs validPairs) {
         if (div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() == null
                 && (div.getPanelDetail().getTxtShujutsuTanisu().getValue() != null
                 || div.getPanelDetail().getTxtRehabilitationTanisu().getValue() != null

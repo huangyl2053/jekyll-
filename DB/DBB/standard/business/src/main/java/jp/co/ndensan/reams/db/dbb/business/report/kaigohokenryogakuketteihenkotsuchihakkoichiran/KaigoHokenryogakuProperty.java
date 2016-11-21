@@ -98,7 +98,6 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
             BreakerCatalog<KaigoHokenryogakuSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
-
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KaigoHokenryogakuSource> occuredBreak(
@@ -115,9 +114,9 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
 
     private RString to帳票物理名(RString 項目ID) {
 
-        RString 帳票物理名 = RString.EMPTY;
+        RString 帳票物理名;
 
-        if (KaigoHokenryogakuProperty.OutputOrderEnum.郵便番号.equals(項目ID)) {
+        if (KaigoHokenryogakuProperty.OutputOrderEnum.郵便番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(KaigoHokenryogakuSource.ReportSourceFields.listUpper_2.name());
         } else if (KaigoHokenryogakuProperty.OutputOrderEnum.町域コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(KaigoHokenryogakuSource.ReportSourceFields.choikiCode.name());
@@ -135,7 +134,17 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
             帳票物理名 = new RString(KaigoHokenryogakuSource.ReportSourceFields.listLower_2.name());
         } else if (KaigoHokenryogakuProperty.OutputOrderEnum.識別コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(KaigoHokenryogakuSource.ReportSourceFields.shikibetsuCode.name());
-        } else if (KaigoHokenryogakuProperty.OutputOrderEnum.氏名５０音カナ.get項目ID().equals(項目ID)) {
+        } else {
+            帳票物理名 = to帳票物理名1(項目ID);
+        }
+        return 帳票物理名;
+    }
+
+    private RString to帳票物理名1(RString 項目ID) {
+
+        RString 帳票物理名 = RString.EMPTY;
+
+        if (KaigoHokenryogakuProperty.OutputOrderEnum.氏名５０音カナ.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(KaigoHokenryogakuSource.ReportSourceFields.kanaMeisho.name());
         } else if (KaigoHokenryogakuProperty.OutputOrderEnum.生年月日.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(KaigoHokenryogakuSource.ReportSourceFields.listUpper_5.name());
