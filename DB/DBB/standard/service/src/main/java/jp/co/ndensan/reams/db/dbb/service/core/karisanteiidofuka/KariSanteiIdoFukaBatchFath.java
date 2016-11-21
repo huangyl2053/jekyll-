@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsu
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -559,7 +560,7 @@ public class KariSanteiIdoFukaBatchFath {
         if (更正前後Entity.get計算後情報_宛名_口座_更正前Entity() != null
                 && 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity() != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity());
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId());
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId());
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             Association association = finder.getAssociation();
             EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, association);
@@ -773,31 +774,19 @@ public class KariSanteiIdoFukaBatchFath {
     }
 
     private RString 金融機関コードHander2(IKoza koza) {
-        RString 金融機関コード;
-        RString 預金種別略称;
+        RString 金融機関コード = RString.EMPTY;
+        RString 預金種別略称 = RString.EMPTY;
         RString 支店コード;
         RString 口座番号;
-        if (koza.get支店コード() != null && koza.get口座番号() != null && koza.get口座名義人漢字() != null) {
-            if (koza.get金融機関コード().value().length() >= NUM_4) {
-                金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
-            } else {
-                金融機関コード = koza.get金融機関コード().value();
+        if (koza.get支店コード() != null && !RString.isNullOrEmpty(koza.get口座番号()) && koza.get口座名義人漢字() != null) {
+            if (koza.get金融機関コード() != null) {
+                金融機関コード = koza.get金融機関コード().value().substringReturnAsPossible(NUM_0, NUM_4);
             }
-            if (koza.get支店コード().value().length() >= NUM_5) {
-                支店コード = koza.get支店コード().value().substring(NUM_0, NUM_5);
-            } else {
-                支店コード = koza.get支店コード().value();
+            支店コード = koza.get支店コード().value().substringReturnAsPossible(NUM_0, NUM_5);
+            if (koza.get預金種別() != null && !RString.isNullOrEmpty(koza.get預金種別().get預金種別略称())) {
+                預金種別略称 = koza.get預金種別().get預金種別略称().substringReturnAsPossible(NUM_0, NUM_2);
             }
-            if (koza.get預金種別() != null && koza.get預金種別().get預金種別略称().length() >= NUM_2) {
-                預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);
-            } else {
-                預金種別略称 = koza.get預金種別().get預金種別略称();
-            }
-            if (koza.get口座番号().length() >= NUM_7) {
-                口座番号 = koza.get口座番号().substring(NUM_0, NUM_7);
-            } else {
-                口座番号 = koza.get口座番号();
-            }
+            口座番号 = koza.get口座番号().substringReturnAsPossible(NUM_0, NUM_7);
             return 金融機関コード.concat(HYPHEN)
                     .concat(支店コード).concat(RString.FULL_SPACE)
                     .concat(預金種別略称)
