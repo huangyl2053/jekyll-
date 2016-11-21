@@ -197,12 +197,12 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         shoKyotsu.set被保険者番号(賦課情報.get被保険者番号());
         shoKyotsu.set調定年度(賦課情報.get調定年度());
         shoKyotsu.set調定年度_年度あり(賦課情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                fillType(FillType.BLANK).toDateString());
+                fillType(FillType.BLANK).toDateString().concat("年度"));
         shoKyotsu.set調定年度_年度なし(賦課情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 fillType(FillType.BLANK).toDateString());
         shoKyotsu.set賦課年度(賦課情報.get賦課年度());
         shoKyotsu.set賦課年度_年度あり(賦課情報.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                fillType(FillType.BLANK).toDateString());
+                fillType(FillType.BLANK).toDateString().concat("年度"));
         shoKyotsu.set賦課年度_年度なし(賦課情報.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 fillType(FillType.BLANK).toDateString());
         shoKyotsu.set識別コード(賦課情報.get識別コード());
