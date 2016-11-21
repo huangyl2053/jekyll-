@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 委員用特記事項A3版のReportSourceです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-330 lishengli
  */
 public class IinTokkiTextA3ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

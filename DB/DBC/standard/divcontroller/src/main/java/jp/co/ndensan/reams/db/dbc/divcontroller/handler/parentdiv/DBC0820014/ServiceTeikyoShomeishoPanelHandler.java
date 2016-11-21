@@ -82,19 +82,17 @@ public class ServiceTeikyoShomeishoPanelHandler {
     /**
      * ボタンエリアの初期化です。
      *
-     * @param 国保連送付フラグ 国保連送付フラグ
+     * @param 画面モード RString
      */
-    public void loadボタンエリア(Boolean 国保連送付フラグ) {
+    public void loadボタンエリア(RString 画面モード) {
         RString config = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (受託なし.equals(config)) {
-            div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(false);
-        } else if (受託あり.equals(config) && 国保連送付フラグ) {
+        if (受託あり.equals(config) && 登録モード.equals(画面モード)) {
             div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(true);
-            div.getPanelShinseiNaiyo().setDisabled(true);
-            div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getGridSetting().setIsShowDeleteButtonColumn(false);
-            div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getGridSetting().setIsShowModifyButtonColumn(false);
+//            div.getPanelShinseiNaiyo().setDisabled(true);
+//            div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getGridSetting().setIsShowDeleteButtonColumn(false);
+//            div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getGridSetting().setIsShowModifyButtonColumn(false);
         } else {
-            div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(true);
+            div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(false);
         }
     }
 
@@ -107,7 +105,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
      */
     public void load申請共通エリア(RString 処理モード, FlexibleYearMonth サービス年月, RString 整理番号) {
         if (登録モード.equals(処理モード)) {
-            set申請共通エリア(画面モード_新規, null, null);
+            set申請共通エリア(画面モード_新規, サービス年月, 整理番号);
         } else if (修正モード.equals(処理モード)) {
             set申請共通エリア(処理モード_修正, サービス年月, 整理番号);
         } else if (削除モード.equals(処理モード)) {

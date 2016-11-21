@@ -205,7 +205,7 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
                 特徴異動情報Entity, parameter.getシステム日時().getRDateTime(),
                 new FlexibleYear(parameter.get賦課年度().toDateString()),
                 保険者情報_保険者番号, 保険者情報_保険者名称,
-                processCore.出力順項(), processCore.get改頁項名());
+                processCore.出力順項(), processCore.改頁項());
         report.writeBy(reportSourceWriter);
         TokubetsuChoshuIdojohoIchiranDataCSVEntity csvEntity = csvEntityの編集(行政区コード, 表示コード,
                 年金保険者名称, t.get特徴異動追加情報());

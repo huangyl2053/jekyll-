@@ -424,7 +424,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
             csvEntity.set前年度情報の確定保険料額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getKakuteiHokenryo().toString()));
             csvEntity.set前年度情報の賦課納期数(get賦課納期数(調定年度開始日, 普徴仮算定計算後賦課Entity.get前年度賦課の情報(), 期, 普徴期月リスト));
         }
-        csvEntity.set仮算定時保険料段階(保険料段階List.getBy段階区分(普徴仮算定計算後賦課Entity.get保険料段階仮算定時()).get表記());
+        csvEntity.set仮算定時保険料段階(保険料段階List.getBy段階Index(普徴仮算定計算後賦課Entity.get保険料段階仮算定時()).get表記());
         csvEntity.set新規資格適用段階対象者(普徴仮算定計算後賦課Entity.get資格適用対象の通知書番号() == null
                 ? RString.EMPTY : DOT);
         csvEntity.set徴収方法(get徴収方法(普徴仮算定計算後賦課Entity));
@@ -551,18 +551,30 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
     }
 
     private RString dateFormat32(RDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
         return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
     private RString dateFormat32(FlexibleDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
         return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
     private RString dateFormat308(FlexibleYear year) {
+        if (year == null) {
+            return RString.EMPTY;
+        }
         return year.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString();
     }
 
     private RString 共通ポリシーパターン141(RTime time) {
+        if (time == null) {
+            return RString.EMPTY;
+        }
         return time.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
     }
 

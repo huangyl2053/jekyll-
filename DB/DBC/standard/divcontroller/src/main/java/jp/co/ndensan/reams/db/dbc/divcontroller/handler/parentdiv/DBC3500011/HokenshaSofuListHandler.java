@@ -358,8 +358,8 @@ public class HokenshaSofuListHandler {
                     return new RString("国保連取込済続行確認");
                 }
             } else if (myBatisParameter.is同月過誤取下分フラグ()
-                    && faceKanri.getコントロール上処理年月() != null
-                    && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
+                    && faceKanri.get過誤コントロール上処理年月() != null
+                    && faceKanri.get過誤コントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
                 if (new RString(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                     return RString.EMPTY;
@@ -452,7 +452,7 @@ public class HokenshaSofuListHandler {
 
     private boolean 二重取込チェック判断2(List<RString> コントロールレコード, KokuhorenInterfaceKanri faceKanri) {
         return !コントロールレコード.get(三).isEmpty()
-                && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
+                && faceKanri.get過誤コントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
                 && !(new RString(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
                 && !(new RString(DbcQuestionMessages.国保連先月処理なし取込漏れ確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
                 && !(new RString(DbcQuestionMessages.国保連取込順序逆転確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))

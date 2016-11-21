@@ -163,7 +163,7 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 検索対象データなし() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(UrErrorMessages.対象データなし)));
+        validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(UrErrorMessages.該当データなし)));
         return validPairs;
     }
 

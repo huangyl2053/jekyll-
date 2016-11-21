@@ -52,7 +52,7 @@ public class TokubetsuChoshuMidoteiIchiranPrintService {
                     = new ReportSourceWriter(assembler);
             for (TokushoTaishioIchiranMidoteiEntity 特別徴収未同定一覧情報 : 特別徴収未同定一覧情報entityList) {
                 TokubetsuChoshuMidoteiIchiranReport report = new TokubetsuChoshuMidoteiIchiranReport(
-                        association, 出力順リスト, 改頁項目Map ,改頁リスト, 特別徴収未同定一覧情報, 特徴開始月);
+                        association, 出力順リスト, 改頁項目Map, 改頁リスト, 特別徴収未同定一覧情報, 特徴開始月);
                 report.writeBy(reportSourceWriter);
             }
         }
@@ -72,7 +72,7 @@ public class TokubetsuChoshuMidoteiIchiranPrintService {
             List<RString> 出力順リスト, Map<RString, RString> 改頁項目Map, List<RString> 改頁リスト, RString 特徴開始月) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(特別徴収未同定一覧情報entityList, 出力順リスト, 改頁項目Map ,改頁リスト, reportManager, 特徴開始月);
+            print(特別徴収未同定一覧情報entityList, 出力順リスト, 改頁項目Map, 改頁リスト, reportManager, 特徴開始月);
             collection = reportManager.publish();
         }
         return collection;

@@ -45,6 +45,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("2");
+    private static final RString コンマ = new RString(",");
     private static final int NUM = 6;
 
     /**
@@ -129,10 +130,10 @@ public class KyufuShiharayiMeisaiPanelHandler {
             div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス項目コード(serviceCodeKoumoku);
 
         }
-        div.getPanelThree().getPanelFour().getTxtTanyi().setValue(new Decimal(row.getDefaultDataName2().toString()));
+        div.getPanelThree().getPanelFour().getTxtTanyi().setValue(new Decimal(row.getDefaultDataName2().replace(コンマ, RString.EMPTY).toString()));
         div.getPanelThree().getPanelFour().getTxtKaisu().setValue(new Decimal(row.getDefaultDataName3().toString()));
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().setValue(new Decimal(
-                row.getDefaultDataName4().toString()));
+                row.getDefaultDataName4().replace(コンマ, RString.EMPTY).toString()));
         div.getPanelThree().getPanelFour().getTxtTeikiyo().setValue(row.getDefaultDataName5());
         div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス名称(row.getDefaultDataName7());
         div.getPanelThree().getRowId().setValue(new Decimal(row.getId()));
@@ -403,13 +404,16 @@ public class KyufuShiharayiMeisaiPanelHandler {
         entity = entity.createBuilderForEdit().setサービス項目コード(
                 new ServiceKomokuCode(serviceCodeKoumoku)).build();
         if (row.getDefaultDataName2() != null) {
-            entity = entity.createBuilderForEdit().set単位数(Integer.parseInt(row.getDefaultDataName2().toString())).build();
+            entity = entity.createBuilderForEdit().set単位数(Integer.parseInt(row.getDefaultDataName2().
+                    replace(コンマ, RString.EMPTY).toString())).build();
         }
         if (row.getDefaultDataName3() != null) {
-            entity = entity.createBuilderForEdit().set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString())).build();
+            entity = entity.createBuilderForEdit().set日数_回数(Integer.parseInt(row.getDefaultDataName3().
+                    replace(コンマ, RString.EMPTY).toString())).build();
         }
         if (row.getDefaultDataName4() != null) {
-            entity = entity.createBuilderForEdit().setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString())).build();
+            entity = entity.createBuilderForEdit().setサービス単位数(Integer.parseInt(row.getDefaultDataName4().
+                    replace(コンマ, RString.EMPTY).toString())).build();
         }
         if (row.getDefaultDataName5() != null) {
             entity = entity.createBuilderForEdit().set摘要(row.getDefaultDataName5()).build();

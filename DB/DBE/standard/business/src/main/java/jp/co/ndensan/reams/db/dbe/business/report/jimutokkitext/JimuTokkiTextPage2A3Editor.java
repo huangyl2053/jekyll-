@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 /**
  * 特記事項（2枚目以降）A3版のEditorです。
  *
- * @reamsid_L DBE-0150-290 lishengli
+ * @reamsid_L DBE-0150-320 lishengli
  */
 public class JimuTokkiTextPage2A3Editor implements IJimuTokkiTextA3Editor {
 

@@ -214,7 +214,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                 div.getPnlBtnDetail().getPnlKyufuhiMeisai().getDgJushochiTokutei().getDataSource().remove(
                         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getRowId().getValue().intValue());
                 clear給付費明細登録();
-                div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().setVisible(true);
+                div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().setVisible(false);
             } else {
                 row.setRowState(RowState.Deleted);
                 setDgJushochiTokutei(row, state);

@@ -93,7 +93,6 @@ public class KinkyujiShisetuRyoyohiPanel {
         if (dbJoho != null && dbJoho.get償還払請求緊急時施設療養データList() != null) {
             updateList = getHandler(div).getUpdateList(dbJoho.get償還払請求緊急時施設療養データList(), parameter);
         }
-//        Map<RString, RString> map = ViewStateHolder.get(ViewStateKeys.緊急時施設療養_グリッドエリア, Map.class);
         if (!updateList.isEmpty()) {
             getHandler(div).setRealList(list, updateList);
         } else {
@@ -322,10 +321,6 @@ public class KinkyujiShisetuRyoyohiPanel {
         }
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
 
-//        if (getHandler(div).isデータ変更()) {
-//            Map<RString, RString> map = getHandler(div).getDataGridMap();
-//            ViewStateHolder.put(ViewStateKeys.緊急時施設療養_グリッドエリア, (Serializable) map);
-//        }
     }
 
     /**
@@ -533,8 +528,6 @@ public class KinkyujiShisetuRyoyohiPanel {
     private ShomeishoNyuryokuFlag set入力有無フラグ(
             KinkyujiShisetuRyoyohiPanelDiv div, DbJohoViewState dbJoho, ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        ShomeishoNyuryokuFlag nyuryokuFlag = new ShomeishoNyuryokuFlag();
-        ShomeishoHenkoFlag henkoFlag = new ShomeishoHenkoFlag();
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap = dbJoho.get証明書入力済フラグMap();
         Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = dbJoho.get証明書変更済フラグMap();
         if (証明書入力済フラグMap == null) {
@@ -543,8 +536,8 @@ public class KinkyujiShisetuRyoyohiPanel {
         if (証明書変更済フラグMap == null) {
             証明書変更済フラグMap = new HashMap<>();
         }
-        nyuryokuFlag = set証明書入力済フラグMap(証明書入力済フラグMap, kensakuParameter, nyuryokuFlag);
-        henkoFlag = set証明書変更済フラグMap(証明書変更済フラグMap, kensakuParameter, henkoFlag);
+        ShomeishoNyuryokuFlag nyuryokuFlag = 証明書入力済フラグMap.get(kensakuParameter);
+        ShomeishoHenkoFlag henkoFlag = 証明書変更済フラグMap.get(kensakuParameter);
 
         boolean is変更あり = getHandler(div).isデータ変更();
         set証明書フラグ(処理モード, is変更あり, nyuryokuFlag, 証明書入力済フラグMap, kensakuParameter, dbJoho, henkoFlag, 証明書変更済フラグMap);
@@ -552,47 +545,17 @@ public class KinkyujiShisetuRyoyohiPanel {
         return nyuryokuFlag;
     }
 
-    private ShomeishoHenkoFlag set証明書変更済フラグMap(
-            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap,
-            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter, ShomeishoHenkoFlag henkoFlag) {
-        for (Map.Entry<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> mapValue : 証明書変更済フラグMap.entrySet()) {
-            ShoukanharaihishinseimeisaikensakuParameter parameter = mapValue.getKey();
-            if (is同じキー(parameter, kensakuParameter)) {
-                henkoFlag = mapValue.getValue();
-                証明書変更済フラグMap.remove(parameter);
-            }
-        }
-        return henkoFlag;
-    }
-
-    private ShomeishoNyuryokuFlag set証明書入力済フラグMap(
-            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap,
-            ShoukanharaihishinseimeisaikensakuParameter kensakuParameter, ShomeishoNyuryokuFlag nyuryokuFlag) {
-        for (Map.Entry<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> mapValue : 証明書入力済フラグMap.entrySet()) {
-            ShoukanharaihishinseimeisaikensakuParameter parameter = mapValue.getKey();
-            if (is同じキー(parameter, kensakuParameter)) {
-                nyuryokuFlag = mapValue.getValue();
-                証明書入力済フラグMap.remove(parameter);
-            }
-        }
-        return nyuryokuFlag;
-    }
-
-    private boolean is同じキー(
-            ShoukanharaihishinseimeisaikensakuParameter parameter, ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
-        return parameter.getサービス年月().equals(kensakuParameter.getサービス年月())
-                && parameter.get事業者番号().equals(kensakuParameter.get事業者番号())
-                && parameter.get整理番号().equals(kensakuParameter.get整理番号())
-                && parameter.get明細番号().equals(kensakuParameter.get明細番号())
-                && parameter.get様式番号().equals(kensakuParameter.get様式番号())
-                && parameter.get被保険者番号().equals(kensakuParameter.get被保険者番号());
-    }
-
     private void set証明書フラグ(
             RString 処理モード, boolean is変更あり, ShomeishoNyuryokuFlag nyuryokuFlag,
             Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap,
             ShoukanharaihishinseimeisaikensakuParameter kensakuParameter, DbJohoViewState dbJoho, ShomeishoHenkoFlag henkoFlag,
             Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap) {
+        if (nyuryokuFlag == null) {
+            nyuryokuFlag = new ShomeishoNyuryokuFlag();
+        }
+        if (henkoFlag == null) {
+            henkoFlag = new ShomeishoHenkoFlag();
+        }
         if (登録.equals(処理モード)) {
             if (is変更あり) {
                 nyuryokuFlag.set緊急時施設療養費_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力あり);

@@ -107,9 +107,6 @@ public class SeikyuGakuShukeiPanel {
         getHandler(div).set申請共通エリア(サービス年月, 事業者番号, 申請日, 明細番号, 様式番号);
         List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
-        if (支給申請一覧情報リスト.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        }
         DbJohoViewState 一覧情報リスト = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         ArrayList<ShokanShukeiResult> entityList = new ArrayList<>();
         if (!一覧情報リスト.get償還払請求集計データList().isEmpty()) {
@@ -141,9 +138,9 @@ public class SeikyuGakuShukeiPanel {
                 .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
         if (shikibetsuNoKanri == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        } else {
-            getHandler(div).get制御(shikibetsuNoKanri, meisaiPar);
         }
+        getHandler(div).get制御(shikibetsuNoKanri, meisaiPar);
+
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPanelSeikyugakuShukei().getBtnAdd().setDisabled(true);
             div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().setReadOnly(true);
@@ -308,12 +305,12 @@ public class SeikyuGakuShukeiPanel {
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         boolean flag = getHandler(div).is内容変更状態();
         if (flag) {
-            一覧情報リスト = 証明書フラグ設定(div, 明細検索キー, 処理モード, 一覧情報リスト);
+            一覧情報リスト = 証明書フラグ設定(明細検索キー, 処理モード, 一覧情報リスト);
         }
         最終情報を設定する(div, 一覧情報リスト, 処理モード, 明細検索キー, state);
     }
 
-    private DbJohoViewState 証明書フラグ設定(SeikyuGakuShukeiPanelDiv div, ShoukanharaihishinseimeisaikensakuParameter 明細検索キー,
+    private DbJohoViewState 証明書フラグ設定(ShoukanharaihishinseimeisaikensakuParameter 明細検索キー,
             RString 処理モード, DbJohoViewState 一覧情報リスト) {
         if (登録.equals(処理モード)) {
             Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap
@@ -345,7 +342,7 @@ public class SeikyuGakuShukeiPanel {
 
         一覧情報リスト.set償還払請求集計データList(getHandler(div).償還払請求集計_保存処理(一覧情報リスト.get償還払請求集計データList()));
         一覧情報リスト.set償還払請求基本データList(getHandler(div).償還払請求基本_保存処理(一覧情報リスト.get償還払請求基本データList()));
-        一覧情報リスト.set償還払支給申請(getHandler(div).償還払申請_保存処理(一覧情報リスト.get償還払支給申請()));
+        一覧情報リスト.set償還払支給申請(getHandler(div).償還払申請_保存処理(一覧情報リスト.get償還払請求基本データList(), 一覧情報リスト.get償還払支給申請()));
         if (登録.equals(処理モード) && state) {
             ShomeishoNyuryokuKanryoKubunType 証明書入力完了区分 = SyokanbaraihiShikyuShinseiManager
                     .createInstance().証明書InputCheck(一覧情報リスト.get証明書入力済フラグMap().get(明細検索キー),

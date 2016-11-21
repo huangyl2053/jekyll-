@@ -87,6 +87,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
@@ -265,7 +266,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                     setEnclosure(ダブル引用符).
                     setEncode(Encode.UTF_8withBOM).
                     setNewLine(NewLine.CRLF).
-                    hasHeader(true).
+                    hasHeader(false).
                     build();
 
         }
@@ -767,7 +768,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         if (null == day) {
             return RString.EMPTY;
         }
-        return new RString(day.toString());
+        return day.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
     private RString doFlexibleYear編集(FlexibleYear year) {

@@ -691,7 +691,8 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
      */
     public void insert証交付回収(RiyoshaFutanWariai 利用者負担割合) {
         ShoKofuKaishuManager 証交付回収manager = new ShoKofuKaishuManager();
-        ShoKofuKaishu max履歴番号証交付回収entity = 証交付回収manager.get証交付回収(利用者負担割合.get被保険者番号(), 交付証種類);
+        ShoKofuKaishu max履歴番号証交付回収entity = 証交付回収manager.get証交付回収By交付年月日(
+                利用者負担割合.get被保険者番号(), 交付証種類, 利用者負担割合.get交付日());
         int 履歴番号 = 1;
         if (max履歴番号証交付回収entity != null) {
             履歴番号 = max履歴番号証交付回収entity.get履歴番号() + 1;
@@ -876,6 +877,10 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             div.getDdlHakkoKubun().setSelectedKey(利用者負担割合.get発行区分());
         }
         if (RSTTWO.equals(処理区分)) {
+            ShoKofuKaishuManager manage = new ShoKofuKaishuManager();
+            ShoKofuKaishu 証交付回収 = manage.get証交付回収By交付年月日(
+                    利用者負担割合.get被保険者番号(), 交付証種類,
+                    利用者負担割合.get交付日());
             set職権変更(利用者負担割合.is職権変更フラグ());
             set証発行不要(利用者負担割合.is発行不要フラグ());
             div.getDdlHakkoKubun().setSelectedKey(利用者負担割合.get発行区分());
@@ -890,6 +895,17 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
                 div.getTxtKofubi().setValue(new RDate(交付日.toString()));
             } else {
                 div.getTxtKofubi().setValue(RDate.getNowDate());
+            }
+            if (FutanWariaiHakkoKubun.未発行.getコード().equals(利用者負担割合.get発行区分())) {
+                div.getTxtKofubi().setValue(RDate.getNowDate());
+                div.getTxtHakkobi().setValue(RDate.getNowDate());
+            } else if (証交付回収 != null) {
+                div.getTxtKofubi().setValue(flexToRDate(利用者負担割合.get交付日()));
+                div.getTxtHakkobi().setValue(flexToRDate(利用者負担割合.get発行日()));
+                div.getDdlKofuJiyu().setSelectedKey(証交付回収.get交付事由());
+            } else {
+                div.getTxtKofubi().setValue(flexToRDate(利用者負担割合.get交付日()));
+                div.getTxtHakkobi().setValue(flexToRDate(利用者負担割合.get発行日()));
             }
         }
     }
@@ -949,5 +965,13 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     private void 前排他キーの解除(RString 被保険者番号) {
         LockingKey 排他キー = new LockingKey(前排他キー.concat(被保険者番号));
         RealInitialLocker.release(排他キー);
+    }
+
+    private RDate flexToRDate(FlexibleDate fromDate) {
+        if (fromDate != null && !fromDate.isEmpty()) {
+            return new RDate(fromDate.getYearValue(),
+                    fromDate.getMonthValue(), fromDate.getDayValue());
+        }
+        return null;
     }
 }

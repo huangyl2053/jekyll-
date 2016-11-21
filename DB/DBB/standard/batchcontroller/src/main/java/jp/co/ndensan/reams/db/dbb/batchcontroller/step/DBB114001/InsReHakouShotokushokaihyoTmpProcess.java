@@ -62,8 +62,9 @@ public class InsReHakouShotokushokaihyoTmpProcess extends BatchProcessBase<Shoto
         ShotokuShoukaiDataTempEntity entity = new ShotokuShoukaiDataTempEntity();
         entity.setShikibetsuCode(所得照会票データ.getShikibetsuCode());
         entity.setGenLasdecCode(所得照会票データ.getGenLasdecCode());
-        if (所得照会票データ.getZenkokuJushoCode() != null) {
-            entity.setZenkokuJushoCode(所得照会票データ.getZenkokuJushoCode().getColumnValue());
+        entity.setZenkokuJushoCode(所得照会票データ.getZenkokuJushoCode());
+        if (所得照会票データ.getSoufusenzenkokuJushoCode() != null) {
+            entity.setSoufusenzenkokuJushoCode(所得照会票データ.getSoufusenzenkokuJushoCode().getColumnValue());
         }
         entity.setSetaiCode(所得照会票データ.getSetaiCode());
         entity.setHihokenshaNo(所得照会票データ.getHihokenshaNo());

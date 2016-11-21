@@ -338,17 +338,19 @@ public final class KinkyujiShoteiShikanPanelHandler {
             row.setRowState(RowState.Deleted);
         } else if (登録.equals(state)) {
             row.setRowState(RowState.Added);
+            int 連番 = 0;
+            for (dgdKinkyujiShoteiList_Row oldRow : list) {
+                if (連番 < Integer.valueOf((oldRow.getRenban().toString()))) {
+                    連番 = Integer.valueOf((oldRow.getRenban().toString()));
+                }
+            }
+            連番 = 連番 + 1;
+            row.setRenban(new RString(String.valueOf(連番)));
         } else if (登録_削除.equals(state)) {
             div.getDgdKinkyujiShoteiList().getDataSource().remove(Integer.parseInt(div.getRowId().toString()));
             return;
         }
-        int 連番 = 0;
-        for (dgdKinkyujiShoteiList_Row oldRow : list) {
-            if (連番 < Integer.valueOf((oldRow.getRenban().toString()))) {
-                連番 = Integer.valueOf((oldRow.getRenban().toString()));
-            }
-        }
-        連番 = 連番 + 1;
+
         row.setShoteiShobyoName1(div.getTxtShoteiShikkanShobyoName1().getValue());
         row.setShoteiShobyoName2(div.getTxtShoteiShikkanShobyoName2().getValue());
         row.setShoteiShobyoName3(div.getTxtShoteiShikkanShobyoName3().getValue());
@@ -380,7 +382,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
         row.getShochiTani().setValue(div.getTxtShochiTanisu().getValue());
         row.getMasuiTani().setValue(div.getTxtMasuiTanisu().getValue());
         row.setTekiyo(div.getTxtTekiyou().getValue());
-        row.setRenban(new RString(String.valueOf(連番)));
+
     }
 
     private boolean checkState(dgdKinkyujiShoteiList_Row ddgRow, List<ShokanShoteiShikkanShisetsuRyoyo> rowList) {
@@ -397,11 +399,11 @@ public final class KinkyujiShoteiShikanPanelHandler {
         boolean 所定疾患施設療養費傷病名２flag = checkEquals(div.getTxtShoteiShikkanShobyoName2().getValue(), result.get所定疾患施設療養費傷病名２());
         boolean 所定疾患施設療養費傷病名３flag = checkEquals(div.getTxtShoteiShikkanShobyoName3().getValue(), result.get所定疾患施設療養費傷病名３());
         boolean 所定疾患施設療養費開始年月日１flag = checkEquals(div.getTxtShoteiShikkanShobyoKaishiYMD1().getValue(),
-                new RDate(result.get所定疾患施設療養費開始年月日１().toString()));
+                result.get所定疾患施設療養費開始年月日１() == null ? null : new RDate(result.get所定疾患施設療養費開始年月日１().toString()));
         boolean 所定疾患施設療養費開始年月日２flag = checkEquals(div.getTxtShoteiShikkanShobyoKaishiYMD2().getValue(),
-                new RDate(result.get所定疾患施設療養費開始年月日２().toString()));
+                result.get所定疾患施設療養費開始年月日２() == null ? null : new RDate(result.get所定疾患施設療養費開始年月日２().toString()));
         boolean 所定疾患施設療養費開始年月日３flag = checkEquals(div.getTxtShoteiShikkanShobyoKaishiYMD3().getValue(),
-                new RDate(result.get所定疾患施設療養費開始年月日３().toString()));
+                result.get所定疾患施設療養費開始年月日３() == null ? null : new RDate(result.get所定疾患施設療養費開始年月日３().toString()));
         boolean 往診日数flag = checkEquals(div.getTxtOshinNissu().getValue(), new Decimal(result.get往診日数()));
         boolean 往診医療機関名flag = checkEquals(div.getTxtOshinIryoKikanName().getValue(), result.get往診医療機関名());
         boolean 通院日数flag = checkEquals(div.getTxtTsuyinNissu().getValue(), new Decimal(result.get通院日数()));
@@ -414,11 +416,11 @@ public final class KinkyujiShoteiShikanPanelHandler {
         boolean 緊急時傷病名２flag = checkEquals(div.getTxtKinkyuShobyoName2().getValue(), result.get緊急時傷病名２());
         boolean 緊急時傷病名３flag = checkEquals(div.getTxtKinkyuShobyoName3().getValue(), result.get緊急時傷病名３());
         boolean 緊急時治療開始年月日１flag = checkEquals(div.getTxtKinkyuChiryoKaishiYMD1().getValue(),
-                new RDate(result.get緊急時治療開始年月日１().toString()));
+                result.get緊急時治療開始年月日１() == null ? null : new RDate(result.get緊急時治療開始年月日１().toString()));
         boolean 緊急時治療開始年月日２flag = checkEquals(div.getTxtKinkyuChiryoKaishiYMD2().getValue(),
-                new RDate(result.get緊急時治療開始年月日２().toString()));
+                result.get緊急時治療開始年月日２() == null ? null : new RDate(result.get緊急時治療開始年月日２().toString()));
         boolean 緊急時治療開始年月日３flag = checkEquals(div.getTxtKinkyuChiryoKaishiYMD3().getValue(),
-                new RDate(result.get緊急時治療開始年月日３().toString()));
+                result.get緊急時治療開始年月日３() == null ? null : new RDate(result.get緊急時治療開始年月日３().toString()));
         boolean 緊急時治療管理単位数flag = checkEquals(div.getTxtKinkyuChiryoKanriTanisu().getValue(), new Decimal(result.get緊急時治療管理単位数()));
         boolean 緊急時治療管理日数flag = checkEquals(div.getTxtKinkyuChiryoKanriNissu().getValue(), new Decimal(result.get緊急時治療管理日数()));
         boolean 緊急時治療管理小計flag = checkEquals(div.getTxtKinkyuChiryoKanriSubTotal().getValue(), new Decimal(result.get緊急時治療管理小計()));
@@ -519,6 +521,9 @@ public final class KinkyujiShoteiShikanPanelHandler {
             data = data.add(div.getTxtRehabilitationTanisu().getValue());
         }
         if (div.getTxtShujutsuTanisu().getValue() != null) {
+            data = data.add(div.getTxtShujutsuTanisu().getValue());
+        }
+        if (div.getTxtHoshasenChiryoTanisu().getValue() != null) {
             data = data.add(div.getTxtShujutsuTanisu().getValue());
         }
         if (div.getTxtShochiTanisu().getValue() != null) {
@@ -728,23 +733,18 @@ public final class KinkyujiShoteiShikanPanelHandler {
                 getValue().toDateString().substring(0, SIX));
         RString 整理番号 = keys.get整理番号();
         RString 明細番号 = keys.get明細番号();
-        int max連番 = 0;
         Map<RString, ShokanShoteiShikkanShisetsuRyoyo> map = new HashMap<>();
         for (ShokanShoteiShikkanShisetsuRyoyo entity : shokanShoteiShikkanShisetsuRyoyoList) {
             map.put(entity.get連番(), entity);
-            if (max連番 < Integer.valueOf(entity.get連番().toString())) {
-                max連番 = Integer.valueOf(entity.get連番().toString());
-            }
         }
 
         List<ShokanShoteiShikkanShisetsuRyoyo> list = new ArrayList<>();
 
         for (dgdKinkyujiShoteiList_Row row : div.getDgdKinkyujiShoteiList().getDataSource()) {
             if (RowState.Added == row.getRowState()) {
-                max連番 = max連番 + 1;
                 ShokanShoteiShikkanShisetsuRyoyo entity = new ShokanShoteiShikkanShisetsuRyoyo(
                         被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号,
-                        new RString(String.format(書式.toString(), max連番)));
+                        new RString(String.format(書式.toString(), Integer.valueOf(row.getRenban().toString()))));
                 entity = entity.added();
                 entity = buildEntity(entity, row);
                 list.add(entity);

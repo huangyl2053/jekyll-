@@ -60,7 +60,6 @@ public class KouzaInfoPanel {
     private static final RString 更新は正常に終了しました = new RString("更新は正常に終了しました。");
     private static final RString 削除は正常に終了しました = new RString("削除は正常に終了しました。");
 
-    private static final RString 償還払支給申請 = new RString("償還払支給申請");
     private static final RString 必要な項目 = new RString("必要な項目");
 
     /**
@@ -263,6 +262,9 @@ public class KouzaInfoPanel {
     public ResponseData<KouzaInfoPanelDiv> onClick_commonButtonFree(KouzaInfoPanelDiv div) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
 
+        if (DBC0820013StateName.処理完了.getName().equals(ResponseHolder.getState())) {
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, null);
+        }
         if (削除.equals(画面モード)) {
             return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.一覧に戻る).respond();
         }

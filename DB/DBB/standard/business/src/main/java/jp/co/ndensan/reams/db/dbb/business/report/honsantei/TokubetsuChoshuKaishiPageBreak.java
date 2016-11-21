@@ -38,7 +38,7 @@ public class TokubetsuChoshuKaishiPageBreak extends PageBreaker<TokubetsuChoshuK
     @Override
     public boolean isBreak(ReportLineRecord<TokubetsuChoshuKaishiSource> currentSource,
             ReportLineRecord<TokubetsuChoshuKaishiSource> nextSource) {
-        boolean flag = false;
+        boolean flag;
         if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.郵便番号.get項目ID())
                 && isBreak(currentSource.getSource().listUpper_2, nextSource.getSource().listUpper_2)) {
             flag = true;
@@ -60,7 +60,16 @@ public class TokubetsuChoshuKaishiPageBreak extends PageBreaker<TokubetsuChoshuK
         } else if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.地区３.get項目ID())
                 && isBreak(currentSource.getSource().chikuCode3, nextSource.getSource().chikuCode3)) {
             flag = true;
-        } else if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.世帯コード.get項目ID())
+        } else {
+            flag = isBreak1(currentSource, nextSource);
+        }
+        return flag;
+    }
+
+    private boolean isBreak1(ReportLineRecord<TokubetsuChoshuKaishiSource> currentSource,
+            ReportLineRecord<TokubetsuChoshuKaishiSource> nextSource) {
+        boolean flag;
+        if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.世帯コード.get項目ID())
                 && isBreak(currentSource.getSource().listLower_2, nextSource.getSource().listLower_2)) {
             flag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.識別コード.get項目ID())
@@ -78,7 +87,16 @@ public class TokubetsuChoshuKaishiPageBreak extends PageBreaker<TokubetsuChoshuK
         } else if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.市町村コード.get項目ID())
                 && isBreak(currentSource.getSource().hokenshaNo, nextSource.getSource().hokenshaNo)) {
             flag = true;
-        } else if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.被保険者番号.get項目ID())
+        } else {
+            flag = isBreak2(currentSource, nextSource);
+        }
+        return flag;
+    }
+
+    private boolean isBreak2(ReportLineRecord<TokubetsuChoshuKaishiSource> currentSource,
+            ReportLineRecord<TokubetsuChoshuKaishiSource> nextSource) {
+        boolean flag = false;
+        if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.被保険者番号.get項目ID())
                 && isBreak(currentSource.getSource().hihokenshaNo, nextSource.getSource().hihokenshaNo)) {
             flag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKaishiPageOutPutOrder.年金コード.get項目ID())

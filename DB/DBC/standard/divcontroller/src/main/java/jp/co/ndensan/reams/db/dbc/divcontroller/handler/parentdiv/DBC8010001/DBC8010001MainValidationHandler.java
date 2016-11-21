@@ -9,10 +9,11 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8010001.DBC8010001MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8010001.DBC8010001MainDivSpec;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -26,6 +27,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBC-2180-010 x_liuwei
  */
 public class DBC8010001MainValidationHandler {
+
+    private static final RString 振込指定日 = new RString("振込指定日");
+    private static final RString 本日 = new RString("本日");
+    private static final RString 修正後の振込指定日 = new RString("修正後の振込指定日");
 
     private DBC8010001MainDiv div;
 
@@ -62,7 +67,7 @@ public class DBC8010001MainValidationHandler {
      */
     public ValidationMessageControlPairs validateFor振込指定日過去日(ValidationMessageControlPairs pairs) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        NoInputMessages checkMessage = new NoInputMessages(DbzErrorMessages.期間が不正_過去日付不可, div.getTxtFurikomiShiteiYMD().getValue().toString(), RDate.getNowDate().toString());
+        NoInputMessages checkMessage = new NoInputMessages(DbzErrorMessages.期間が不正_過去日付不可, 振込指定日.toString(), 本日.toString());
         messages.add(ValidateChain.validateStart(div).ifNot(DBC8010001MainDivSpec.振込指定日過去日チェック)
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
@@ -94,7 +99,7 @@ public class DBC8010001MainValidationHandler {
      */
     public ValidationMessageControlPairs validateFor正振込指定日過去日(ValidationMessageControlPairs pairs) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        NoInputMessages checkMessage = new NoInputMessages(DbzErrorMessages.期間が不正_過去日付不可, div.getTxtCorrectFurikomiShiteiYMD().getValue().toString(), RDate.getNowDate().toString());
+        NoInputMessages checkMessage = new NoInputMessages(DbzErrorMessages.期間が不正_過去日付不可, 修正後の振込指定日.toString(), 本日.toString());
         messages.add(ValidateChain.validateStart(div).ifNot(DBC8010001MainDivSpec.正振込指定日過去日チェック)
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
@@ -149,6 +154,21 @@ public class DBC8010001MainValidationHandler {
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
                 div.getTxtWrongFurikomiShiteiYMD()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 出力順チェック。
+     *
+     * @param pairs ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateFor出力順(ValidationMessageControlPairs pairs) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        NoInputMessages checkMessage = new NoInputMessages(UrErrorMessages.出力順序を指定);
+        messages.add(ValidateChain.validateStart(div).ifNot(DBC8010001MainDivSpec.出力順チェック)
+                .thenAdd(checkMessage).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage, (ChohyoShutsuryokujunDiv) div.getCcdChohyoShutsuryokujun()).build().check(messages));
         return pairs;
     }
 

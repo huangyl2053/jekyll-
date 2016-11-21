@@ -100,8 +100,6 @@ public class TokubetsuChoshuKaishiProperty
             BreakerCatalog<TokubetsuChoshuKaishiSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
-
-
             pageBreakKeys) {
             @Override
             public ReportLineRecord<TokubetsuChoshuKaishiSource> occuredBreak(
@@ -118,9 +116,9 @@ public class TokubetsuChoshuKaishiProperty
 
     private RString to帳票物理名(RString 項目ID) {
 
-        RString 帳票物理名 = RString.EMPTY;
+        RString 帳票物理名;
 
-        if (BreakerFieldsEnum.郵便番号.equals(項目ID)) {
+        if (BreakerFieldsEnum.郵便番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listUpper_2.name());
         } else if (BreakerFieldsEnum.町域コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.choikiCode.name());
@@ -138,7 +136,17 @@ public class TokubetsuChoshuKaishiProperty
             帳票物理名 = new RString(ReportSourceFields.listLower_2.name());
         } else if (BreakerFieldsEnum.識別コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.shikibetsuCode.name());
-        } else if (BreakerFieldsEnum.氏名５０音カナ.get項目ID().equals(項目ID)) {
+        } else {
+            帳票物理名 = to帳票物理名1(項目ID);
+        }
+        return 帳票物理名;
+    }
+
+    private RString to帳票物理名1(RString 項目ID) {
+
+        RString 帳票物理名 = RString.EMPTY;
+
+        if (BreakerFieldsEnum.氏名５０音カナ.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.kanaMeisho.name());
         } else if (BreakerFieldsEnum.生年月日.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listUpper_5.name());

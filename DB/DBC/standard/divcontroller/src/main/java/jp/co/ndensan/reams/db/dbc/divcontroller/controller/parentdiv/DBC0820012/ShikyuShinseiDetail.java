@@ -96,7 +96,9 @@ public class ShikyuShinseiDetail {
 
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         if (MODEL_ADD.equals(画面モード)) {
-            整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString().padLeft("0", 10);
+            if (整理番号 == null || 整理番号.isEmpty()) {
+                整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString().padLeft("0", 10);
+            }
         }
 
         ShikyuShinseiDetailHandler handler = getHandler(div);
@@ -274,10 +276,12 @@ public class ShikyuShinseiDetail {
      * @return ResponseData<ShikyuShinseiDetailDiv>
      */
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnCancel(ShikyuShinseiDetailDiv div) {
+
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikyuShinseiDetailParameter parameter = getHandler(div).btnCancel_SetParameter();
         RString 処理モード = parameter.get処理モード();
         if (DBC0820012StateName.処理完了.getName().equals(ResponseHolder.getState())) {
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, null);
             return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.一覧に戻る).respond();
         }
         if (MODEL_DEL.equals(処理モード)) {

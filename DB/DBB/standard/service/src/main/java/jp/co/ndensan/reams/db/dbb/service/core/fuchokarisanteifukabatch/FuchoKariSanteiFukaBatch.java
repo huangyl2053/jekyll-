@@ -55,6 +55,7 @@ public class FuchoKariSanteiFukaBatch {
     private static final int NUM_1 = 1;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
+    private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_31 = 31;
     private static final int NUM_100 = 100;
@@ -304,13 +305,7 @@ public class FuchoKariSanteiFukaBatch {
     private List<Decimal> set普徴期別金額リスト(List<Decimal> 普徴期別金額リスト, KitsukiList 期月リスト, int 期,
             Decimal 金額リスト0, Decimal 金額リスト1) {
         List<Kitsuki> 期月 = 期月リスト.filtered仮算定期間().toList();
-        if (期月.get(0).get月AsInt() == NUM_4) {
-            普徴期別金額リスト.add(金額リスト0);
-            普徴期別金額リスト.add(金額リスト1);
-            if (期 == NUM_3) {
-                普徴期別金額リスト.add(金額リスト1);
-            }
-        } else {
+        if (期月.get(0).get月AsInt() == NUM_4 || 期月.get(0).get月AsInt() == NUM_5) {
             普徴期別金額リスト.add(金額リスト0);
             普徴期別金額リスト.add(金額リスト1);
             if (期 == NUM_3) {

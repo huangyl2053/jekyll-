@@ -112,10 +112,8 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
             source.two_gaikyotokkiImg = item.get概況調査の特記事項イメージ();
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
-                && 全面.equals(item.get特記パターン())) {
-            if (index < テキスト全面List.size()) {
-                source.two_tokkiText = テキスト全面List.get(index);
-            }
+                && 全面.equals(item.get特記パターン()) && index < テキスト全面List.size()) {
+            source.two_tokkiText = テキスト全面List.get(index);
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {
@@ -123,10 +121,8 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
             set特記事項テキスト(source);
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
-                && 全面.equals(item.get特記パターン())) {
-            if (index < イメージ全面List.size()) {
-                source.two_tokkiImg = イメージ全面List.get(index);
-            }
+                && 全面.equals(item.get特記パターン()) && index < イメージ全面List.size()) {
+            source.two_tokkiImg = イメージ全面List.get(index);
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {

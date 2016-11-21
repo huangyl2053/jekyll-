@@ -140,7 +140,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
             出力順項目リスト.add(item.get項目名());
             if (item.is改頁項目()) {
                 pageBreakKeys.add(item.get項目ID());
-                改ページ項目リスト.add(item.get項目ID());
+                改ページ項目リスト.add(item.get項目名());
             }
         }
     }
@@ -246,8 +246,8 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
     }
 
     private void change改頁項目コード(TokubetsuChoshuMidoteiIchiranEntity entity) {
-        RString kanaMeisho = entity.getKanaShimei() == null ? RString.EMPTY : entity.getKanaShimei();
-        改頁項目Map.put(氏名５０音カナ, kanaMeisho);
+        RString kanaShimei = entity.getKanaShimei() == null ? RString.EMPTY : entity.getKanaShimei();
+        改頁項目Map.put(氏名５０音カナ, kanaShimei);
         RString seinengappiYMD = entity.getBirthDay() == null ? RString.EMPTY : new RString(entity.getBirthDay().toString());
         改頁項目Map.put(生年月日, seinengappiYMD);
         RString seibetsu = entity.getSeibetsu() == null ? RString.EMPTY : new RString(entity.getSeibetsu().toString());

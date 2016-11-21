@@ -70,9 +70,6 @@ public class DBE517001_ShinsakaiShiryoJImukyoku extends BatchFlowBase<DBE517001_
         if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiIranFalg())) {
             executeStep(事務局_概況特記一覧表);
         }
-        if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-            executeStep(事務局_追加資料鑑);
-        }
         if ((選択.equals(getParameter().getChoyoJimu_taishoushaFalg())
                 && 選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())
                 && 選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())
@@ -114,6 +111,9 @@ public class DBE517001_ShinsakaiShiryoJImukyoku extends BatchFlowBase<DBE517001_
         }
         if (選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg())) {
             executeStep(事務局_その他資料);
+        }
+        if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+            executeStep(事務局_追加資料鑑);
         }
     }
 

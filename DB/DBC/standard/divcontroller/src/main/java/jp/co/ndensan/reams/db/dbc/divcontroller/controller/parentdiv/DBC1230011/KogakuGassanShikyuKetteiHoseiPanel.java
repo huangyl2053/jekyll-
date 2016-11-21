@@ -89,7 +89,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         }
         AccessLogger.log(AccessLogType.照会,
                 getHandler(div).toPersonalData(識別コード,
-                被保険者番号.getColumnValue()));
+                        被保険者番号.getColumnValue()));
         div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         getHandler(div).set新規と検索条件登録パネル();
         List<KogakuGassanShikyuKetteiHoseiResult> result = new ArrayList<>();
@@ -555,7 +555,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                             支給申請書整理番号, 画面モード, 決定情報list, para);
                     AccessLogger.log(AccessLogType.更新,
                             getHandler(div).toPersonalData(識別コード,
-                            被保険者番号.getColumnValue()));
+                                    被保険者番号.getColumnValue()));
                     getHandler(div).前排他キーの解除(被保険者番号);
                     getHandler(div).clear決定情報();
                     div.getCcdKanryoMessage().setMessage(
@@ -567,7 +567,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                 } else {
                     return ResponseData.of(div).respond();
                 }
-            } else if (削除.equals(画面モード)) {
+            } else {
                 if (!ResponseHolder.isReRequest()) {
                     QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                             UrQuestionMessages.削除の確認.getMessage().evaluate());
@@ -582,7 +582,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                             支給申請書整理番号, 画面モード, 決定情報list, para);
                     AccessLogger.log(AccessLogType.更新,
                             getHandler(div).toPersonalData(識別コード,
-                            被保険者番号.getColumnValue()));
+                                    被保険者番号.getColumnValue()));
                     getHandler(div).clear決定情報();
                     getHandler(div).前排他キーの解除(被保険者番号);
                     div.getCcdKanryoMessage().setMessage(
@@ -595,7 +595,6 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                     return ResponseData.of(div).respond();
                 }
             }
-            return ResponseData.of(div).respond();
         } catch (Exception e) {
             e.toString();
             if (排他.toString().equals(e.getMessage())) {

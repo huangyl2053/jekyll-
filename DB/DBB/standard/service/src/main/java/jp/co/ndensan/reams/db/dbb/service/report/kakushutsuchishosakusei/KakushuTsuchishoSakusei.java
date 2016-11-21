@@ -945,6 +945,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定決定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         本算定決定通知書情報.set処理区分(ShoriKubun.リアル);
         本算定決定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
+        本算定決定通知書情報.set現年度_過年度区分(通知書共通情報.get年度区分());
 
         RString 通知書定型文 = RString.EMPTY;
         if (帳票制御共通 != null && !nullTOEmpty(帳票制御共通.getTeikeibunMojiSize()).isEmpty()) {
@@ -1056,6 +1057,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定決定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         本算定決定通知書情報.set処理区分(ShoriKubun.リアル);
         本算定決定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
+        本算定決定通知書情報.set現年度_過年度区分(通知書共通情報.get年度区分());
 
         List<KaigoHokenryogakuHenkoKenChushiTsuchishoJoho> entities = new ArrayList<>();
         KaigoHokenryogakuHenkoKenChushiTsuchishoJoho 決定通知書情報 = new KaigoHokenryogakuHenkoKenChushiTsuchishoJoho();

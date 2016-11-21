@@ -230,27 +230,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
         batchReportWriter_DBC200010 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200010.getReportId().value()).create();
         reportSourceWriter_DBC200010 = new ReportSourceWriter<>(batchReportWriter_DBC200010);
-        spoolManager_DBC200074 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200074,
-                UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath_DBC200074 = Path.combinePath(spoolManager_DBC200074.getEucOutputDirectry(),
-                CSV_FILENAME);
-        csvWriter_DBC200074 = new CsvWriter.InstanceBuilder(eucFilePath_DBC200074).setNewLine(NewLine.CRLF)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setEncode(Encode.UTF_8withBOM)
-                .hasHeader(true)
-                .build();
 
-        spoolManager_DBC200010 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200010,
-                UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath_DBC200010 = Path.combinePath(spoolManager_DBC200010.getEucOutputDirectry(),
-                CSV_FILENAME_DBC200010);
-        csvWriter_DBC200010 = new CsvWriter.InstanceBuilder(eucFilePath_DBC200010).setNewLine(NewLine.CRLF)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setEncode(Encode.UTF_8withBOM)
-                .hasHeader(true)
-                .build();
         this.dbT3001TableWriter = new BatchPermanentTableWriter<>(DbT3001JukyushaIdoRenrakuhyoEntity.class);
     }
 
@@ -303,10 +283,18 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             outEntity = JukyushaIdoRenrakuhyoCsvManager.
                     createInstance().csvの出力(entityList, processParameter.get処理年月());
         }
-        csvWriter_DBC200074.close();
-        spoolManager_DBC200074.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200074);
-        csvWriter_DBC200010.close();
-        spoolManager_DBC200010.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200010);
+        if (csvWriter_DBC200074 != null) {
+            csvWriter_DBC200074.close();
+        }
+        if (spoolManager_DBC200074 != null) {
+            spoolManager_DBC200074.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200074);
+        }
+        if (csvWriter_DBC200010 != null) {
+            csvWriter_DBC200010.close();
+        }
+        if (spoolManager_DBC200010 != null) {
+            spoolManager_DBC200010.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200010);
+        }
         returnEntity = new OutputParameter<>();
         JukyushaIdoRenrakuhyoOutFlowEntity flowEntity = new JukyushaIdoRenrakuhyoOutFlowEntity();
         if (outEntity != null) {
@@ -392,7 +380,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         履歴訂正Entity.set訂正内容8(記号);
         履歴訂正Entity.set訂正内容9(記号);
         履歴訂正Entity.set訂正内容10(記号);
-        csvWriter_DBC200074.writeLine(to明細項目(履歴訂正Entity));
+        getDBC200074CsvWriter().writeLine(to明細項目(履歴訂正Entity));
         JukyushaIdoRirekiTeiseiIchiranReport report
                 = new JukyushaIdoRirekiTeiseiIchiranReport(履歴訂正Entity, 市町村コード, 市町村名称);
         report.writeBy(reportSourceWriter_DBC200074);
@@ -473,7 +461,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             }
             RString 変更項目 = get変更項目(違う項目);
             変更項目total = 変更項目total.concat(変更項目);
-            csvWriter_DBC200074.writeLine(to明細項目(履歴訂正Entity));
+            getDBC200074CsvWriter().writeLine(to明細項目(履歴訂正Entity));
             JukyushaIdoRirekiTeiseiIchiranReport report_200074
                     = new JukyushaIdoRirekiTeiseiIchiranReport(履歴訂正Entity, 市町村コード, 市町村名称);
             report_200074.writeBy(reportSourceWriter_DBC200074);
@@ -484,7 +472,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                     = new JukyushaIdorenrakuhyoSofuTaishoshachiranReport(送付対象者, 市町村コード, 市町村名称);
             report_200010.writeBy(reportSourceWriter_DBC200010);
         }
-        csvWriter_DBC200010.writeLine(get送付対象者リスト(異動一時2entity, 変更項目total));
+        getDBC200010CsvWriter().writeLine(get送付対象者リスト(異動一時2entity, 変更項目total));
     }
 
     private boolean count_整残りCheck(int i, int count_整, int count_残り, int cout) {
@@ -599,7 +587,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (!comparaRString(異動一時2entity.get居宅介護支援事業所番号(), 受給者異動送付.getKyotakuServiceSakuseiKubunCode())) {
+        if (!comparaRString(異動一時2entity.get居宅介護支援事業所番号(), 受給者異動送付.getKyotakuKaigoShienJigyoshoNo())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(計画事業所);
             違う.add(受給者異動送付.getKyotakuKaigoShienJigyoshoNo());
@@ -614,7 +602,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う.add(異動一時2entity.get居宅サービス計画適用開始年月日());
             違う項目.add(違う);
         }
-        if (!comparaRString(異動一時2entity.get居宅サービス計画適用終了年月日(), 受給者異動送付.getKyotakuServiceTekiyoShuryoYMD())) {
+        if (!comparaYMByRString(異動一時2entity.get居宅サービス計画適用終了年月日(), 受給者異動送付.getKyotakuServiceTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(サ計終了日);
             違う.add(受給者異動送付.getKyotakuServiceTekiyoShuryoYMD());
@@ -630,7 +618,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (!comparaDate(異動一時2entity.get訪問通所サービス上限管理適用期間開始年月日(),
+        if (!comparaYM(異動一時2entity.get訪問通所サービス上限管理適用期間開始年月日(),
                 受給者異動送付.getHomonTsushoServiceJogenKanriTekiyoKaishiYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(訪問開始日);
@@ -646,7 +634,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     private void get違う項目1(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
             List<List<RString>> 違う項目) {
-        if (!comparaRString(異動一時2entity.get訪問通所サービス上限管理適用期間終了年月日(),
+        if (!comparaYMByRString(異動一時2entity.get訪問通所サービス上限管理適用期間終了年月日(),
                 受給者異動送付.getHomonTsushoServiceJogenKanriTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(訪問終了日);
@@ -662,7 +650,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う.add(new RString(異動一時2entity.get短期入所サービス支給限度基準額()));
             違う項目.add(違う);
         }
-        if (!comparaDate(異動一時2entity.get短期入所サービス上限管理適用期間開始年月日(),
+        if (!comparaYM(異動一時2entity.get短期入所サービス上限管理適用期間開始年月日(),
                 受給者異動送付.getTankinyushoServiceJogenKanriTekiyoKaishiYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(短期開始日);
@@ -671,7 +659,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (!comparaDate(異動一時2entity.get短期入所サービス上限管理適用期間終了年月日(),
+        if (!comparaYM(異動一時2entity.get短期入所サービス上限管理適用期間終了年月日(),
                 受給者異動送付.getTankinyushoServiceJogenKanriTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(短期終了日);
@@ -743,7 +731,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (異動一時2entity.get給付率() != 受給者異動送付.getKyufuritsu()) {
+        if (!comparaDecimal(異動一時2entity.get給付率(), 受給者異動送付.getKyufuritsu())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(利給付率);
             違う.add(getDecimalRString(受給者異動送付.getKyufuritsu()));
@@ -760,6 +748,10 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
+    }
+
+    private void get違う項目2(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
+            List<List<RString>> 違う項目) {
         if (!comparaRString(異動一時2entity.get適用終了年月日(),
                 受給者異動送付.getTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
@@ -778,18 +770,13 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (異動一時2entity.get負担額() != 受給者異動送付.getFutangaku()) {
+        if (!comparaDecimal(異動一時2entity.get負担額(), 受給者異動送付.getFutangaku())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(標準負担額);
             違う.add(getDecimalRString(受給者異動送付.getFutangaku()));
             違う.add(getDecimalRString(異動一時2entity.get負担額()));
             違う項目.add(違う);
         }
-
-    }
-
-    private void get違う項目2(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
-            List<List<RString>> 違う項目) {
         if (!comparaRString(異動一時2entity.get負担額適用開始年月日(),
                 受給者異動送付.getFutangakuTekiyoKaishiYMD())) {
             List<RString> 違う = new ArrayList<>();
@@ -1284,8 +1271,8 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             受給者異動連絡票Entity出力処理(異動一時2entity, 受給者異動送付);
             return;
         }
-        if (checkRString(異動一時2entity.get要介護状態区分コード(), 受給者異動送付.getMinashiYokaigoJotaiKubunCode())
-                || checkRString(異動一時2entity.get認定有効期間終了年月日(), 受給者異動送付.getNinteiYukoKikanShuryoYMD())) {
+        if (!checkRString(異動一時2entity.get要介護状態区分コード(), 受給者異動送付.getYokaigoJotaiKubunCode())
+                || !checkRString(異動一時2entity.get認定有効期間終了年月日(), 受給者異動送付.getNinteiYukoKikanShuryoYMD())) {
             if (!RST_3.equals(異動一時2entity.get変更申請中区分コード())) {
                 受給者異動連絡票Entity出力処理(異動一時2entity, 受給者異動送付);
             }
@@ -1747,6 +1734,45 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         return date1.equals(date2);
     }
 
+    private boolean comparaDecimal(Decimal date1, Decimal date2) {
+        if (date1 == null && date2 == null) {
+            return true;
+        }
+        if (date1 == null) {
+            return false;
+        }
+        if (date2 == null) {
+            return false;
+        }
+        return date1.equals(date2);
+    }
+
+    private boolean comparaYM(FlexibleDate date1, FlexibleDate date2) {
+        if (isDateEmpty(date1) && isDateEmpty(date2)) {
+            return true;
+        }
+        if (isDateEmpty(date1)) {
+            return false;
+        }
+        if (isDateEmpty(date2)) {
+            return false;
+        }
+        return date1.getYearMonth().equals(date2.getYearMonth());
+    }
+
+    private boolean comparaYMByRString(RString date1, RString date2) {
+        if (RString.isNullOrEmpty(date1) && RString.isNullOrEmpty(date2)) {
+            return true;
+        }
+        if (RString.isNullOrEmpty(date1)) {
+            return false;
+        }
+        if (RString.isNullOrEmpty(date2)) {
+            return false;
+        }
+        return (new FlexibleDate(date1).getYearMonth().equals(new FlexibleDate(date2).getYearMonth()));
+    }
+
     private boolean comparaRString(RString date1, RString date2) {
         if (RString.isNullOrEmpty(date1) && RString.isNullOrEmpty(date2)) {
             return true;
@@ -1905,6 +1931,38 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 .append(受給者異動送付.getKokuhoHiHokenshaNo())
                 .append(受給者異動送付.getKokuhoKojinNo());
         return all項目.toRString();
+    }
+
+    private CsvWriter getDBC200074CsvWriter() {
+        if (this.csvWriter_DBC200074 == null) {
+            spoolManager_DBC200074 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200074,
+                    UzUDE0831EucAccesslogFileType.Csv);
+            eucFilePath_DBC200074 = Path.combinePath(spoolManager_DBC200074.getEucOutputDirectry(),
+                    CSV_FILENAME);
+            csvWriter_DBC200074 = new CsvWriter.InstanceBuilder(eucFilePath_DBC200074).setNewLine(NewLine.CRLF)
+                    .setDelimiter(EUC_WRITER_DELIMITER)
+                    .setEnclosure(EUC_WRITER_ENCLOSURE)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .hasHeader(true)
+                    .build();
+        }
+        return this.csvWriter_DBC200074;
+    }
+
+    private CsvWriter getDBC200010CsvWriter() {
+        if (this.csvWriter_DBC200010 == null) {
+            spoolManager_DBC200010 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200010,
+                    UzUDE0831EucAccesslogFileType.Csv);
+            eucFilePath_DBC200010 = Path.combinePath(spoolManager_DBC200010.getEucOutputDirectry(),
+                    CSV_FILENAME_DBC200010);
+            csvWriter_DBC200010 = new CsvWriter.InstanceBuilder(eucFilePath_DBC200010).setNewLine(NewLine.CRLF)
+                    .setDelimiter(EUC_WRITER_DELIMITER)
+                    .setEnclosure(EUC_WRITER_ENCLOSURE)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .hasHeader(true)
+                    .build();
+        }
+        return this.csvWriter_DBC200010;
     }
 
 }

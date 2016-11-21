@@ -27,7 +27,7 @@ public class HokenshaSofuListMybatisParameter implements IMyBatisParameter {
      * コンストラクタです。
      */
     public HokenshaSofuListMybatisParameter() {
-
+        同月過誤取下分フラグ = false;
     }
 
     /**

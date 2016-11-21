@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -37,6 +38,9 @@ import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -50,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -172,6 +177,7 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
             JikoFutangakushomeishoFrom2009Report report = new JikoFutangakushomeishoFrom2009Report(data);
             report.writeBy(reportSourceWriter);
         }
+        バッチ出力条件リストの出力();
     }
 
     private boolean isBreak(JikoFutangakushomeishoEntity currentEntity) {
@@ -242,4 +248,61 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
         return source;
     }
 
+    private void バッチ出力条件リストの出力() {
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
+                ReportIdDBC.DBC100051.getReportId().value(),
+                導入団体クラス.getLasdecCode_().value(),
+                導入団体クラス.get市町村名(),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
+                ReportIdDBC.DBC100051.getReportName(),
+                new RString(String.valueOf(reportSourceWriter.pageCount().value())),
+                new RString("無し"),
+                new RString("－"),
+                get出力条件());
+        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
+        printer.print();
+    }
+
+    /**
+     * 出力条件表Listを取得メッソドです。
+     *
+     * @return List<RString>
+     */
+    public List<RString> get出力条件() {
+        List<RString> 出力条件 = new ArrayList<>();
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(new RString("申請年月日(開始)："));
+        builder.append(parameter.get開始申請年月日().toString());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(new RString("申請年月日(終了)："));
+        builder.append(parameter.get終了申請年月日().toString());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(new RString("受取年月："));
+        builder.append(parameter.get受取年月().toDateString());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(new RString("印書："));
+        builder.append(parameter.get印書().get名称());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(new RString("発行日："));
+        builder.append(parameter.get発行日().toString());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(new RString("出力順ID："));
+        builder.append(parameter.get出力順ID().toString());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(new RString("文書情報："));
+        builder.append(parameter.get文書情報().toString());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(new RString("抽出対象："));
+        builder.append(parameter.get抽出対象().get名称());
+        出力条件.add(builder.toRString());
+        return 出力条件;
+    }
 }

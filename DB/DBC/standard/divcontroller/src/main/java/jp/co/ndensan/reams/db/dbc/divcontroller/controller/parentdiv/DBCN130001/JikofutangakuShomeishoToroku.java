@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuShomeisho;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuShomeishoMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuBusiness;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.DBCN130001StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.DBCN130001TransitionEventName;
@@ -52,6 +53,7 @@ public class JikofutangakuShomeishoToroku {
 
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
     private static final RString BUTTON_BTNBACKSEARCHRESULT_SEARCHGAMEN = new RString("btnBackSearchResult_SearchGamen");
+    private static final RString BUTTON_SAVE = new RString("btnUpdate");
     private static final RString STATUS_新規 = new RString("新規");
     private static final RString STATUS_照会 = new RString("照会");
     private static final RString STATUS_修正 = new RString("修正");
@@ -182,6 +184,22 @@ public class JikofutangakuShomeishoToroku {
         div.getTxtJikofutangakuGokei().setReadOnly(true);
         div.getTxtUchiFutangakuGokei().setReadOnly(true);
         div.setExecutionStatus(STATUS_修正);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onStateTransition
+     *
+     * @param div div
+     * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
+     */
+    public ResponseData<JikofutangakuShomeishoTorokuDiv> onStateTransition(JikofutangakuShomeishoTorokuDiv div) {
+        if (div.getExecutionStatus().equals(STATUS_修正)) {
+            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_修正.toString());
+        }
+        if (div.getExecutionStatus().equals(STATUS_削除)) {
+            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_削除.toString());
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -657,13 +675,23 @@ public class JikofutangakuShomeishoToroku {
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onClick_btnUpdate(JikofutangakuShomeishoTorokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                    UrQuestionMessages.保存の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            if (div.getExecutionStatus().equals(STATUS_新規)) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                        UrQuestionMessages.保存の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (div.getExecutionStatus().equals(STATUS_削除)) {
+                QuestionMessage message = new QuestionMessage(DbcQuestionMessages.確認メッセージ.getMessage().getCode(),
+                        DbcQuestionMessages.確認メッセージ.getMessage().replace(STATUS_削除.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (div.getExecutionStatus().equals(STATUS_修正)) {
+                QuestionMessage message = new QuestionMessage(DbcQuestionMessages.確認メッセージ.getMessage().getCode(),
+                        DbcQuestionMessages.確認メッセージ.getMessage().replace(STATUS_修正.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
         }
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             JikofutangakuShomeishoTorokuBusiness business
                     = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
             if (STATUS_新規.equals(div.getExecutionStatus()) || STATUS_修正.equals(div.getExecutionStatus())) {

@@ -101,8 +101,11 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
             RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
             RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
-            return !(開始年月日.equals(result.get開始年月日())
-                    && 終了年月日.equals(result.get終了年月日()));
+            if (終了年月日 != null) {
+                return !(開始年月日.equals(new RDate(result.get開始年月日().toString()))
+                        && 終了年月日.equals(new RDate(result.get終了年月日().toString())));
+            }
+            return true;
         }
 
         /**
@@ -122,7 +125,7 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
         public static boolean is開始日と終了日の前後順(KaigoHihokenshaInfoPanelDiv div) {
             if (div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue() != null
                     && div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue() != null) {
-                return div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue().isBeforeOrEquals(
+                return div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue().isBefore(
                         div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue());
             }
             return true;

@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.KyotakuservicekeikakuSakuseikubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.KoseiShichosonMasterDac;
@@ -1533,8 +1534,14 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         ariEUCEntity.set地区コード3(entity.getChikuCode3());
         ariEUCEntity.set地区名3(entity.getChikuMei3());
         ariEUCEntity.set世帯コード(entity.getSetaiCode());
-        ariEUCEntity.set要介護状態区分(entity.getYoKaigoJotaiKubunCode());
-        ariEUCEntity.set居宅サービス計画作成区分(entity.getKyotakuServiceSakuseiKubunCode());
+        if (!RString.isNullOrEmpty(entity.getYoKaigoJotaiKubunCode()) && !RString.isNullOrEmpty(entity.getServiceTeikyoYM())) {
+            ariEUCEntity.set要介護状態区分(YokaigoJotaiKubunSupport.toValue(new FlexibleYearMonth(entity.getServiceTeikyoYM()),
+                    entity.getYoKaigoJotaiKubunCode()).getName());
+        }
+        if (!RString.isNullOrEmpty(entity.getKyotakuServiceSakuseiKubunCode())) {
+            ariEUCEntity.set居宅サービス計画作成区分(KyotakuservicekeikakuSakuseikubunCode
+                    .toValue(entity.getKyotakuServiceSakuseiKubunCode()).get名称());
+        }
         ariEUCEntity.set居宅サービス計画事業所番号(entity.getKyotakuServiceJigyoshoNo());
         ariEUCEntity.set居宅サービス計画事業所名(entity.getKyotakuServiceJigyoshoName());
         if (!RString.isNullOrEmpty(entity.getKyuSochishaFlag())) {
@@ -1682,9 +1689,7 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
     }
 
     private RiyoJokyoIchiranSeqNashiEUCEntity createEucNashiEntity(DbT7051KoseiShichosonMasterEntity 保険者情報,
-            DbWT1513RiyoJokyoTokeihyoEntity entity,
-            CreateRiyojokyoIchiranHyoProcessParameter parameter) {
-
+            DbWT1513RiyoJokyoTokeihyoEntity entity, CreateRiyojokyoIchiranHyoProcessParameter parameter) {
         RiyoJokyoIchiranSeqNashiEUCEntity ariEUCEntity = new RiyoJokyoIchiranSeqNashiEUCEntity();
         ariEUCEntity.set保険者番号(保険者情報.getShoKisaiHokenshaNo().value());
         ariEUCEntity.set保険者名(保険者情報.getShichosonMeisho());
@@ -1718,8 +1723,12 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         ariEUCEntity.set居宅サービス計画作成区分(entity.getKyotakuServiceSakuseiKubunCode());
         ariEUCEntity.set居宅サービス計画事業所番号(entity.getKyotakuServiceJigyoshoNo());
         ariEUCEntity.set居宅サービス計画事業所名(entity.getKyotakuServiceJigyoshoName());
-        ariEUCEntity.set旧措置(KyuSochishaKubun.toValue(entity.getKyuSochishaFlag()).get名称());
-        ariEUCEntity.set利用実績(RiyojokyoTokeihyo_RiyoJissekiKubun.toValue(entity.getRiyoJissekiFlag()).get名称());
+        if (!RString.isNullOrEmpty(entity.getKyuSochishaFlag())) {
+            ariEUCEntity.set旧措置(KyuSochishaKubun.toValue(entity.getKyuSochishaFlag()).get名称());
+        }
+        if (!RString.isNullOrEmpty(entity.getRiyoJissekiFlag())) {
+            ariEUCEntity.set利用実績(RiyojokyoTokeihyo_RiyoJissekiKubun.toValue(entity.getRiyoJissekiFlag()).get名称());
+        }
         ariEUCEntity.set公費１負担者番号(entity.getKohi1FutanshaNo());
         ariEUCEntity.set公費１受給者番号(entity.getKohi1JukyushaNo());
         ariEUCEntity.set公費２負担者番号(entity.getKohi2FutanshaNo());
@@ -1734,8 +1743,12 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         ariEUCEntity.set国保被保険者証番号(entity.getKokuhoHihokenshashoNo());
         ariEUCEntity.set国保個人番号(entity.getKokuhoKojinNo());
         ariEUCEntity.set保険給付率(entity.getHokenKyufuritsu());
-        ariEUCEntity.set現物償還の別(KyufuJissekiKubun.toValue(entity.getKyufuJissekiKubunCode()).get名称());
-        ariEUCEntity.setサービスの別(RiyojokyoTokeihyo_ServiceKubun.toValue(entity.getKyufuJissekiKubunCode()).get名称());
+        if (!RString.isNullOrEmpty(entity.getKyufuJissekiKubunCode())) {
+            ariEUCEntity.set現物償還の別(KyufuJissekiKubun.toValue(entity.getKyufuJissekiKubunCode()).get名称());
+        }
+        if (!RString.isNullOrEmpty(entity.getKyufuJissekiKubunCode())) {
+            ariEUCEntity.setサービスの別(RiyojokyoTokeihyo_ServiceKubun.toValue(entity.getKyufuJissekiKubunCode()).get名称());
+        }
         ariEUCEntity.set事業所番号(entity.getJigyoshoNo());
         ariEUCEntity.set事業所名(entity.getJigyoshoName());
         ariEUCEntity.setサービス種類コード(entity.getServiceShuruiCode());
@@ -1804,7 +1817,11 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         ariEUCEntity.set社福受領すべき利用者負担額(entity.getShafukuRiyoshaFutangaku());
         ariEUCEntity.set社福軽減額(entity.getShafukuKeigengaku());
         ariEUCEntity.set社福軽減後利用者負担額(entity.getShafukuKeigengoRiyoshaFutangaku());
-        RString 日付スラッシュ編集 = parameter.get日付スラッシュ編集();
+        return subEUCEntity1(parameter.get日付スラッシュ編集(), ariEUCEntity, entity);
+    }
+
+    private RiyoJokyoIchiranSeqNashiEUCEntity subEUCEntity1(RString 日付スラッシュ編集,
+            RiyoJokyoIchiranSeqNashiEUCEntity ariEUCEntity, DbWT1513RiyoJokyoTokeihyoEntity entity) {
         if (Tokeihyo_CSVEditKubun.する.getコード().equals(日付スラッシュ編集)) {
             ariEUCEntity.setサービス提供年月(formatDate(entity.getServiceTeikyoYM()));
             ariEUCEntity.set審査年月(formatDate(entity.getShinsaYM()));

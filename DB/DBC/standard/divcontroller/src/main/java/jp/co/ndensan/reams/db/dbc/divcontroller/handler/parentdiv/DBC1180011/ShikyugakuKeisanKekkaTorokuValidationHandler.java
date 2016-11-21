@@ -189,6 +189,11 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "住所"), div.getTxtRenrakuhyoHakkoshaJusho()));
         }
+        validate名称チェック(validationMessages);
+        return validationMessages;
+    }
+
+    private void validate名称チェック(ValidationMessageControlPairs validationMessages) {
         if (div.getTxtToiawasesakiMeisho1().isRequired() && RString.isNullOrEmpty(div.getTxtToiawasesakiMeisho1().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "名称１"), div.getTxtToiawasesakiMeisho1()));
@@ -210,7 +215,6 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "住所"), div.getTxtToiawasesakiJusho()));
         }
-        return validationMessages;
     }
 
     private static final class RRVMessages implements IValidationMessage {

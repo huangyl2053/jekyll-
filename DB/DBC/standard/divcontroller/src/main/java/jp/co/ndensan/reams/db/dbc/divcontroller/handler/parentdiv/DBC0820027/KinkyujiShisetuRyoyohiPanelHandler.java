@@ -300,9 +300,6 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         if (div.getTxtshujutsuTanisu().getValue() != null) {
             data = data.add(div.getTxtshujutsuTanisu().getValue());
         }
-        if (div.getTxtHoshasenChiryoTanisu().getValue() != null) {
-            data = data.add(div.getTxtHoshasenChiryoTanisu().getValue());
-        }
         if (div.getTxtShochiTanisu().getValue() != null) {
             data = data.add(div.getTxtShochiTanisu().getValue());
         }
@@ -1102,6 +1099,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
             ShokanKinkyuShisetsuRyoyo ryoyo = new ShokanKinkyuShisetsuRyoyo(
                     被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, addedRow.getDefaultDataName21());
             ryoyo = set償還払請求緊急時施設療養(ryoyo, addedRow);
+            ryoyo = ryoyo.added();
             updateList.add(ryoyo);
         }
         return updateList;
@@ -1197,7 +1195,6 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
     public void setRealList(
             List<ShokanKinkyuShisetsuRyoyo> list, List<ShokanKinkyuShisetsuRyoyo> updateList) {
         List<dgdKinkyujiShiseturyoyo_Row> rowList = new ArrayList<>();
-        List<dgdKinkyujiShiseturyoyo_Row> updateRowList = new ArrayList<>();
         for (ShokanKinkyuShisetsuRyoyo ryoyo : list) {
             dgdKinkyujiShiseturyoyo_Row row = new dgdKinkyujiShiseturyoyo_Row();
             boolean isModifiedorDeleted = false;
@@ -1213,7 +1210,6 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
                         row.setRowState(RowState.Deleted);
                     }
                     rowList.add(row);
-                    updateRowList.add(row);
                     break;
                 }
             }
@@ -1221,21 +1217,16 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
                 setRow(row, ryoyo);
                 row.setRowState(RowState.Unchanged);
                 rowList.add(row);
-                updateRowList.add(row);
             }
         }
-
         for (ShokanKinkyuShisetsuRyoyo updateRyoyo : updateList) {
-            for (dgdKinkyujiShiseturyoyo_Row row : updateRowList) {
-                dgdKinkyujiShiseturyoyo_Row addedRow = new dgdKinkyujiShiseturyoyo_Row();
-                if (!updateRyoyo.get連番().equals(row.getDefaultDataName21())) {
-                    setRow(addedRow, updateRyoyo);
-                    addedRow.setRowState(RowState.Added);
-                    rowList.add(addedRow);
-                }
+            dgdKinkyujiShiseturyoyo_Row addedRow = new dgdKinkyujiShiseturyoyo_Row();
+            if (updateRyoyo.toEntity().getState() == EntityDataState.Added) {
+                setRow(addedRow, updateRyoyo);
+                addedRow.setRowState(RowState.Added);
+                rowList.add(addedRow);
             }
         }
-
         Collections.sort(rowList, COMPARABLE);
         div.getDgdKinkyujiShiseturyoyo().setDataSource(rowList);
     }
@@ -1293,7 +1284,7 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
      *
      * @param allList ShokanKinkyuShisetsuRyoyo
      * @param parameter ShoukanharaihishinseimeisaikensakuParameter
-     * @return List<ShokanKinkyuShisetsuRyoyo>
+     * @return ShokanKinkyuShisetsuRyoyo
      */
     public List<ShokanKinkyuShisetsuRyoyo> getUpdateList(
             List<ShokanKinkyuShisetsuRyoyo> allList, ShoukanharaihishinseimeisaikensakuParameter parameter) {

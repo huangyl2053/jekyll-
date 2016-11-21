@@ -336,6 +336,10 @@ public class KinkyujiShoteiShikanPanel {
      * @return response
      */
     public ResponseData<KinkyujiShoteiShikanPanelDiv> onClick_btnCal1(KinkyujiShoteiShikanPanelDiv div) {
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).check計算1();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         getHandler(div).cal1();
         return ResponseData.of(div).respond();
     }
@@ -347,6 +351,10 @@ public class KinkyujiShoteiShikanPanel {
      * @return response
      */
     public ResponseData<KinkyujiShoteiShikanPanelDiv> onClick_btnCal2(KinkyujiShoteiShikanPanelDiv div) {
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).check計算2();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         getHandler(div).cal2();
         return ResponseData.of(div).respond();
     }
@@ -358,6 +366,10 @@ public class KinkyujiShoteiShikanPanel {
      * @return response
      */
     public ResponseData<KinkyujiShoteiShikanPanelDiv> onClick_btnCal3(KinkyujiShoteiShikanPanelDiv div) {
+        ValidationMessageControlPairs validPairs = getCheckHandler(div).check計算3();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         getHandler(div).cal3();
         return ResponseData.of(div).respond();
     }
