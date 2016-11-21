@@ -419,6 +419,10 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
                 : 氏名５０音カナ.getColumnValue();
         RString 特徴開始月 = 普徴仮算定計算後賦課.get特徴開始月();
         source.特徴開始月 = (特徴開始月 == null || 特徴開始月.isEmpty()) ? RString.EMPTY : 特徴開始月;
+        set出力順Two(source);
+    }
+
+    private void set出力順Two(FutsuChoshuKarisanteiKekkaIchiranSource source) {
         FlexibleDate 生年月日 = 普徴仮算定計算後賦課.get宛名の情報().getSeinengappiYMD();
         source.生年月日 = (生年月日 == null || 生年月日.isEmpty()) ? RString.EMPTY : 生年月日.seireki().toDateString();
         ChoikiCode 町域コード = 普徴仮算定計算後賦課.get宛名の情報().getChoikiCode();
