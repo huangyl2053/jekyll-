@@ -148,7 +148,6 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         if (entity.get連番() != entity.get被保険者番号Max連番()) {
             return;
         }
-//        System.out.println(entity.get被保険者番号().getColumnValue());
         PSMInfoEntity 宛名情報 = JukyushaIdoRenrakuhyoOutCommonProcess.get宛名(異動一時List);
         if (宛名情報 == null) {
             異動一時List.clear();
@@ -156,11 +155,6 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             return;
         }
         被保険者番号 = entity.get被保険者番号();
-//        if (!被保険者番号.equals(new HihokenshaNo("2016111601"))) {
-//            異動一時List.clear();
-//            異動一時Map.clear();
-//            return;
-//        }
         FlexibleYearMonth 処理年月 = new FlexibleYearMonth(processParameter.get処理年月().toDateString());
         List<DbT4001JukyushaDaichoEntity> 受給者台帳List = JukyushaIdoRenrakuhyoOutCommonProcess.get受給者台帳(異動一時List);
         List<KyotakuEntity> 居宅計画List = JukyushaIdoRenrakuhyoOutCommonProcess.get居宅計画(異動一時List);
@@ -843,7 +837,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             FlexibleYearMonth 処理年月) {
         for (DbT4021ShiharaiHohoHenkoEntity 支払方法 : 支払方法変更List) {
             FlexibleDate 適用開始日 = 支払方法.getTekiyoKaishiYMD();
-            FlexibleDate 適用終了日 = 支払方法.getTekiyoKaishiYMD();
+            FlexibleDate 適用終了日 = 支払方法.getTekiyoShuryoYMD();
             if (isDateEmpty(適用開始日)) {
                 continue;
             }
@@ -872,7 +866,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             FlexibleYearMonth 処理年月) {
         for (DbT4021ShiharaiHohoHenkoEntity 支払方法 : 支払方法変更List) {
             FlexibleDate 適用開始日 = 支払方法.getTekiyoKaishiYMD();
-            FlexibleDate 適用終了日 = 支払方法.getTekiyoKaishiYMD();
+            FlexibleDate 適用終了日 = 支払方法.getTekiyoShuryoYMD();
             if (isDateEmpty(適用開始日)) {
                 continue;
             }
