@@ -51,7 +51,7 @@ public class KoroshoShikibetsuCodeProcess extends BatchProcessBase<Yokaigonintei
 
     @Override
     protected void process(YokaigoninteiEntity entity) {
-        shinseishoKanriNoList.add(entity.get前回厚労省IF識別コード());
+        shinseishoKanriNoList.add(entity.get厚労省IF識別コード());
     }
 
     @Override
