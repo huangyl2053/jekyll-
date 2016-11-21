@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -464,20 +463,18 @@ public class KinkyujiShoteiShikanPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode(),
-                    DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().evaluate());
 
-            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class));
-            return ResponseData.of(div).addMessage(message).respond();
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage()).respond();
         }
-        if (new RString(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
             return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る).respond();
-        } else {
-            return ResponseData.of(div).respond();
         }
+
+        return ResponseData.of(div).respond();
     }
 
     private void setRowSort(KinkyujiShoteiShikanPanelDiv div) {

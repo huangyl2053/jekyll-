@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(緊急時・所定疾患）画面のハンドラクラスです
@@ -521,9 +522,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
             data = data.add(div.getTxtRehabilitationTanisu().getValue());
         }
         if (div.getTxtShujutsuTanisu().getValue() != null) {
-            data = data.add(div.getTxtShujutsuTanisu().getValue());
-        }
-        if (div.getTxtHoshasenChiryoTanisu().getValue() != null) {
             data = data.add(div.getTxtShujutsuTanisu().getValue());
         }
         if (div.getTxtShochiTanisu().getValue() != null) {
@@ -1380,7 +1378,8 @@ public final class KinkyujiShoteiShikanPanelHandler {
                     && ryoyo.get整理番号().equals(parameter.get整理番号())
                     && ryoyo.get事業者番号().equals(parameter.get事業者番号())
                     && ryoyo.get様式番号().equals(parameter.get様式番号())
-                    && ryoyo.get明細番号().equals(parameter.get明細番号())) {
+                    && ryoyo.get明細番号().equals(parameter.get明細番号())
+                    && ryoyo.toEntity().getState() == EntityDataState.Added) {
                 updateList.add(ryoyo);
             }
         }
