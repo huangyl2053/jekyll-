@@ -66,14 +66,9 @@ public class JuminIdoRendoShikakuToroku {
         if (住民異動情報 == null || 被保険者台帳 == null) {
             throw new NullPointerException();
         }
-        IDateOfBirth dateofbirth = DateOfBirthFactory.createInstance(住民異動情報.getSeinengappiYMD());
-        AgeCalculator agecalculator = new AgeCalculator(dateofbirth, JuminJotai.toValue(住民異動情報.getJuminJotaiCode()),
-                住民異動情報.getShojoIdoYMD());
-        FlexibleDate 年齢到達日 = agecalculator.get年齢到達日(AGE);
         被保険者台帳.setIdoYMD(住民異動情報.getIdoYMD());
         被保険者台帳.setEdaNo(RString.EMPTY);
         被保険者台帳.setIdoJiyuCode(異動事由転居);
-        被保険者台帳.setIchigoShikakuShutokuYMD(年齢到達日);
         被保険者台帳.setShikakuHenkoJiyuCode(資格変更事由転居);
         被保険者台帳.setShikakuHenkoYMD(住民異動情報.getIdoYMD());
         被保険者台帳.setShikakuHenkoTodokedeYMD(住民異動情報.getTodokedeYMD());
