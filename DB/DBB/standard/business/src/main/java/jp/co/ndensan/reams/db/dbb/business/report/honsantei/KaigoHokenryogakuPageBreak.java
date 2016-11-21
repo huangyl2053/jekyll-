@@ -38,7 +38,7 @@ public class KaigoHokenryogakuPageBreak extends PageBreaker<KaigoHokenryogakuSou
     @Override
     public boolean isBreak(ReportLineRecord<KaigoHokenryogakuSource> currentSource,
             ReportLineRecord<KaigoHokenryogakuSource> nextSource) {
-        boolean flag = false;
+        boolean flag;
         if (this.breakKeysList.contains(KaigoHokenryogakuOutPutOrder.郵便番号.get項目ID())
                 && isBreak(currentSource.getSource().listLower_2, nextSource.getSource().listLower_2)) {
             flag = true;
@@ -60,7 +60,16 @@ public class KaigoHokenryogakuPageBreak extends PageBreaker<KaigoHokenryogakuSou
         } else if (this.breakKeysList.contains(KaigoHokenryogakuOutPutOrder.地区３.get項目ID())
                 && isBreak(currentSource.getSource().chikuCode3, nextSource.getSource().chikuCode3)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KaigoHokenryogakuOutPutOrder.世帯コード.get項目ID())
+        } else {
+            flag = isBreak1(currentSource, nextSource);
+        }
+        return flag;
+    }
+
+    private boolean isBreak1(ReportLineRecord<KaigoHokenryogakuSource> currentSource,
+            ReportLineRecord<KaigoHokenryogakuSource> nextSource) {
+        boolean flag;
+        if (this.breakKeysList.contains(KaigoHokenryogakuOutPutOrder.世帯コード.get項目ID())
                 && isBreak(currentSource.getSource().listUpper_4, nextSource.getSource().listUpper_4)) {
             flag = true;
         } else if (this.breakKeysList.contains(KaigoHokenryogakuOutPutOrder.識別コード.get項目ID())
@@ -81,7 +90,16 @@ public class KaigoHokenryogakuPageBreak extends PageBreaker<KaigoHokenryogakuSou
         } else if (this.breakKeysList.contains(KaigoHokenryogakuOutPutOrder.被保険者番号.get項目ID())
                 && isBreak(currentSource.getSource().listUpper_3, nextSource.getSource().listUpper_3)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KaigoHokenryogakuOutPutOrder.年金コード.get項目ID())
+        } else {
+            flag = isBreak2(currentSource, nextSource);
+        }
+        return flag;
+    }
+
+    private boolean isBreak2(ReportLineRecord<KaigoHokenryogakuSource> currentSource,
+            ReportLineRecord<KaigoHokenryogakuSource> nextSource) {
+        boolean flag = false;
+        if (this.breakKeysList.contains(KaigoHokenryogakuOutPutOrder.年金コード.get項目ID())
                 && isBreak(currentSource.getSource().nenkinCode, nextSource.getSource().nenkinCode)) {
             flag = true;
         } else if (this.breakKeysList.contains(KaigoHokenryogakuOutPutOrder.納組コード.get項目ID())
