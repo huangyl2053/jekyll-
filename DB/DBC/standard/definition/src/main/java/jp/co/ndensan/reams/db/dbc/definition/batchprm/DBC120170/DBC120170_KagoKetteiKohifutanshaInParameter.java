@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護給付費過誤決定通知書情報取込（公費負担者分）のバッチパラメータです。
@@ -33,4 +34,6 @@ public class DBC120170_KagoKetteiKohifutanshaInParameter extends BatchParameterB
     private SaiShoriKubun saishoriKubun;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
     private Long shutsuryokujunId;
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 }

@@ -111,6 +111,7 @@ public class DBC120240_SeikyugakuTsuchishoKohiIn
         KokuhorenkyotsuGetFileProcessParameter parameterOne = new KokuhorenkyotsuGetFileProcessParameter();
         parameterOne.set交換情報識別番号(交換情報識別番号);
         parameterOne.setファイル格納フォルダ名(ファイル格納フォルダ名);
+        parameterOne.setLoginUserID(getParameter().getLoginUserId());
         return simpleBatch(KokuhorenkyoutsuGetFileProcess.class).arguments(parameterOne).define();
     }
 

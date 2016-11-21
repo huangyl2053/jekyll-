@@ -29,5 +29,7 @@ public class DBC120160_KagoKetteiHokenshaInParameter extends BatchParameterBase 
     private SaiShoriKubun 再処理区分;
     @BatchParameter(key = "出力順ID", name = "出力順ID")
     private RString 出力順ID;
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 
 }

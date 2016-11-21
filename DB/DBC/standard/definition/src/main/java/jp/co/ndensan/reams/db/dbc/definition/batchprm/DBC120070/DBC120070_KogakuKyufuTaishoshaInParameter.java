@@ -31,4 +31,7 @@ public class DBC120070_KogakuKyufuTaishoshaInParameter extends BatchParameterBas
     @BatchParameter(key = "出力順ID", name = "出力順ID")
     private Long 出力順ID;
 
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
+
 }

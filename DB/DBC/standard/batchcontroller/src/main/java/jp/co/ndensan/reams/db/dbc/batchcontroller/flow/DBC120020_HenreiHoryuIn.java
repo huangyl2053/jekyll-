@@ -123,7 +123,7 @@ public class DBC120020_HenreiHoryuIn extends BatchFlowBase<DBC120020_HenreiHoryu
         KokuhorenkyotsuGetFileProcessParameter parameter = new KokuhorenkyotsuGetFileProcessParameter();
         parameter.set交換情報識別番号(交換情報識別番号);
         parameter.setファイル格納フォルダ名(ファイル格納フォルダ名);
-
+        parameter.setLoginUserID(getParameter().getLoginUserId());
         return simpleBatch(KokuhorenkyoutsuGetFileProcess.class
         ).arguments(parameter).define();
     }

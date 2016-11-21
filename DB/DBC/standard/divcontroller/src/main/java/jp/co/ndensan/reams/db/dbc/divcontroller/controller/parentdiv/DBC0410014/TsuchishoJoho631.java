@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120240.DBC120240_Seikyu
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410014.TsuchishoJoho631Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -49,6 +50,7 @@ public class TsuchishoJoho631 {
         DBC120240_SeikyugakuTsuchishoKohiInParameter parameter = new DBC120240_SeikyugakuTsuchishoKohiInParameter();
         RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
         parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
+        parameter.setLoginUserId(ControlDataHolder.getUserId());
         FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120240_SeikyugakuTsuchishoKohiIn");
         FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunManagerFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -70,6 +71,7 @@ public class TsuchishoJoho177 {
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
             parameter.setSaishoriKubun(SaiShoriKubun.空白);
         }
+        parameter.setLoginUserId(ControlDataHolder.getUserId());
         FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120840_SogojigyohiKagoKetteiHokenshaIn");
         FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();

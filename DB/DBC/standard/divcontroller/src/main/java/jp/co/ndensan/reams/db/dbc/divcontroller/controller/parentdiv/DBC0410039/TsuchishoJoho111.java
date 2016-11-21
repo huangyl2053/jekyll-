@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -74,6 +75,7 @@ public class TsuchishoJoho111 {
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
             parameter.setSaishoriKubun(SaiShoriKubun.空白);
         }
+        parameter.setLoginUserId(ControlDataHolder.getUserId());
         FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120050_KyufuJissekiIn");
         FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
