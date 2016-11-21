@@ -385,7 +385,7 @@ public class JuminIdoRendoShikakuToroku {
             DbV1001HihokenshaDaichoEntity entity = dbv1001EntityList.get(0);
             FlexibleDate 異動YMD = 住民異動情報.getIdoYMD();
             if (entity.getShikakuShutokuYMD() == null || entity.getShikakuShutokuYMD().isEmpty()
-                    || 異動YMD.isBefore(entity.getShikakuShutokuYMD())) {
+                    || (異動YMD != null && 異動YMD.isBefore(entity.getShikakuShutokuYMD()))) {
                 return false;
             }
             if (entity.getShikakuSoshitsuYMD() != null && !entity.getShikakuSoshitsuYMD().isEmpty()
