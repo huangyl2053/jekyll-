@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package テスト;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.flow.DBD532001_NinteiKekkaTsuchi;
+import jp.co.ndensan.reams.uz.uza.auth.manage.mappers._AuthAuthorityDeputyManageMapperTest.テスト.*;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001.DBD532001_NinteiKekkaTsuchiParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -30,7 +30,7 @@ import org.junit.runner.RunWith;
  * @author n8343
  */
 @RunWith(Enclosed.class)
-public class NinteiTsuchishoHakkoTest extends DbdTestDacBase {
+public class DBD532001_NinteiTsuchishoHakkoTest extends DbdTestDacBase {
 
     private static DbTestHelper dbHelper;
     private static DBD532001_NinteiKekkaTsuchiParameter parameter;
