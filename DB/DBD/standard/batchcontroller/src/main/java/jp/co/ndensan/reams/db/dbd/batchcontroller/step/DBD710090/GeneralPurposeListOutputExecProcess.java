@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710090;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.dbd710090.HanyoListShisetsuNyutaishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
@@ -15,7 +14,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeList
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEucCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputNotContainNoEucCsvEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd710090.HanyoListShiharaiHohoHenkoManager;
-import jp.co.ndensan.reams.db.dbd.service.core.hanyolist.HanyoListManager;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
@@ -35,8 +33,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.config.jushoinput.ConfigKeysCodeName;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
