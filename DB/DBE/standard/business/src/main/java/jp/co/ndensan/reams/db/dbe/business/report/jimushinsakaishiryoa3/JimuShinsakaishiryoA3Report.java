@@ -76,12 +76,10 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
                 reportSourceWriter.writeLine(builder);
             }
         }
-        if (shinsakaiWariateJoho != null) {
-            if (ReportIdDBE.DBE517902.getReportId().value().equals(reportId)) {
-                IJimuShinsakaishiryoA3Editor editor1 = new JimuShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
-                IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
-                reportSourceWriter.writeLine(builder1);
-            }
+        if (shinsakaiWariateJoho != null && ReportIdDBE.DBE517902.getReportId().value().equals(reportId)) {
+            IJimuShinsakaishiryoA3Editor editor1 = new JimuShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
+            IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
+            reportSourceWriter.writeLine(builder1);
         }
         if (jimuTokkiTextA3Entity != null) {
             List<RString> テキスト全面List = jimuTokkiTextA3Entity.get特記事項_tokkiText();
@@ -92,12 +90,10 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
                 短冊Editor(reportSourceWriter, 短冊リスト, 短冊情報リスト);
             }
         }
-        if (shinsakaiWariateJoho != null) {
-            if (ReportIdDBE.DBE517903.getReportId().value().equals(reportId)) {
-                IJimuShinsakaishiryoA3Editor editor1 = new JimuShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
-                IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
-                reportSourceWriter.writeLine(builder1);
-            }
+        if (shinsakaiWariateJoho != null && ReportIdDBE.DBE517903.getReportId().value().equals(reportId)) {
+            IJimuShinsakaishiryoA3Editor editor1 = new JimuShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
+            IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
+            reportSourceWriter.writeLine(builder1);
         }
         if (sonotashiryoBusiness != null) {
             List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
