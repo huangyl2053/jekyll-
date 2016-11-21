@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.Soku
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.SokujikouseiKiwarigakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8120001.SokujiFukaKouseiMainHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8120001.SokujiFukaKouseiMainValidationHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8120001.SokujiFukaKouseiSaveHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparameter.IdoTaishoshaIchiranparameter;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.sokujikosei.SokujiFukaKoseiService;
@@ -233,7 +234,7 @@ public class SokujiFukaKouseiMain {
         NendobunFukaList 更正前 = ViewStateHolder.get(ViewStateKeys.更正前, NendobunFukaList.class);
         NendobunFukaList 更正後 = ViewStateHolder.get(ViewStateKeys.更正後, NendobunFukaList.class);
         set画面入力項目を反映(div, 更正後);
-        SokujiFukaKousei sokujiFukaKousei = handler.set保存処理(is特殊処理(), 更正前, 更正後, 更正前後徴収方法);
+        SokujiFukaKousei sokujiFukaKousei = getSaveHandler().set保存処理(is特殊処理(), 更正前, 更正後, 更正前後徴収方法);
         if (sokujiFukaKousei.get賦課の情報リスト().isEmpty()) {
             throw new ApplicationException(DbbErrorMessages.賦課変更なしで保存不可.getMessage());
         }
@@ -827,6 +828,10 @@ public class SokujiFukaKouseiMain {
 
     private SokujiFukaKouseiMainHandler getHandler(SokujiFukaKouseiMainDiv div) {
         return new SokujiFukaKouseiMainHandler(div);
+    }
+
+    private SokujiFukaKouseiSaveHandler getSaveHandler() {
+        return new SokujiFukaKouseiSaveHandler();
     }
 
     private SokujiFukaKouseiMainValidationHandler getValidationHandler(SokujiFukaKouseiMainDiv div) {

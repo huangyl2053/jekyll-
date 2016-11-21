@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoteishitaisyosyadout
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710001.DBB2710001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710001.TokuchoDoteiShoriDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2710001.TokuchoDoteiShoriHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2710001.TokuchoDoteiShoriValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -67,10 +66,6 @@ public class TokuchoDoteiShori {
 
     private TokuchoDoteiShoriHandler getHandler(TokuchoDoteiShoriDiv div) {
         return TokuchoDoteiShoriHandler.of(div);
-    }
-
-    private TokuchoDoteiShoriValidationHandler getValidationHandler(TokuchoDoteiShoriDiv div) {
-        return new TokuchoDoteiShoriValidationHandler(div);
     }
 
 }

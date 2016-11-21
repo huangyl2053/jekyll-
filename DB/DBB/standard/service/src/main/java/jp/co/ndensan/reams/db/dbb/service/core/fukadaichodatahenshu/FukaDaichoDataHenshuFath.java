@@ -37,34 +37,34 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class FukaDaichoDataHenshuFath {
 
-    private static final int INT_1 = 1;
-    private static final int INT_2 = 2;
-    private static final int INT_3 = 3;
-    private static final int INT_4 = 4;
-    private static final int INT_5 = 5;
-    private static final int INT_6 = 6;
-    private static final int INT_7 = 7;
-    private static final int INT_8 = 8;
-    private static final int INT_9 = 9;
-    private static final int INT_10 = 10;
-    private static final int INT_11 = 11;
-    private static final int INT_12 = 12;
-    private static final int INT_13 = 13;
-    private static final int INT_14 = 14;
-    private static final RString 期_1 = new RString("1");
-    private static final RString 期_2 = new RString("2");
-    private static final RString 期_3 = new RString("3");
-    private static final RString 期_4 = new RString("4");
-    private static final RString 期_5 = new RString("5");
-    private static final RString 期_6 = new RString("6");
-    private static final RString 期_7 = new RString("7");
-    private static final RString 期_8 = new RString("8");
-    private static final RString 期_9 = new RString("9");
-    private static final RString 期_10 = new RString("10");
-    private static final RString 期_11 = new RString("11");
-    private static final RString 期_12 = new RString("12");
-    private static final RString 期_13 = new RString("13");
-    private static final RString 期_14 = new RString("14");
+    private static final int INTNUMBER_1 = 1;
+    private static final int INTNUMBER_2 = 2;
+    private static final int INTNUMBER_3 = 3;
+    private static final int INTNUMBER_4 = 4;
+    private static final int INTNUMBER_5 = 5;
+    private static final int INTNUMBER_6 = 6;
+    private static final int INTNUMBER_7 = 7;
+    private static final int INTNUMBER_8 = 8;
+    private static final int INTNUMBER_9 = 9;
+    private static final int INTNUMBER_10 = 10;
+    private static final int INTNUMBER_11 = 11;
+    private static final int INTNUMBER_12 = 12;
+    private static final int INTNUMBER_13 = 13;
+    private static final int INTNUMBER_14 = 14;
+    private static final RString 定値期_1 = new RString("1");
+    private static final RString 定値期_2 = new RString("2");
+    private static final RString 定値期_3 = new RString("3");
+    private static final RString 定値期_4 = new RString("4");
+    private static final RString 定値期_5 = new RString("5");
+    private static final RString 定値期_6 = new RString("6");
+    private static final RString 定値期_7 = new RString("7");
+    private static final RString 定値期_8 = new RString("8");
+    private static final RString 定値期_9 = new RString("9");
+    private static final RString 定値期_10 = new RString("10");
+    private static final RString 定値期_11 = new RString("11");
+    private static final RString 定値期_12 = new RString("12");
+    private static final RString 定値期_13 = new RString("13");
+    private static final RString 定値期_14 = new RString("14");
     private static final RString FORMAT = new RString("0");
 
     /**
@@ -122,65 +122,65 @@ public class FukaDaichoDataHenshuFath {
         普徴月情報.set普徴月１３(RString.EMPTY);
         普徴月情報.set普徴月１４(RString.EMPTY);
         for (Kitsuki 普徴期月 : 普徴期月リスト) {
-            if (!is本算定 && INT_10 <= 普徴期月.get月AsInt()) {
+            if (!is本算定 && INTNUMBER_10 <= 普徴期月.get月AsInt()) {
                 return 普徴期情報;
             }
             RString 月 = format月(普徴期月.get月().getコード());
             switch (普徴期月.get期AsInt()) {
-                case INT_1:
-                    普徴期情報.set普徴期１(期_1);
+                case INTNUMBER_1:
+                    普徴期情報.set普徴期１(定値期_1);
                     普徴月情報.set普徴月１(月);
                     break;
-                case INT_2:
-                    普徴期情報.set普徴期２(期_2);
+                case INTNUMBER_2:
+                    普徴期情報.set普徴期２(定値期_2);
                     普徴月情報.set普徴月２(月);
                     break;
-                case INT_3:
-                    普徴期情報.set普徴期３(期_3);
+                case INTNUMBER_3:
+                    普徴期情報.set普徴期３(定値期_3);
                     普徴月情報.set普徴月３(月);
                     break;
-                case INT_4:
-                    普徴期情報.set普徴期４(期_4);
+                case INTNUMBER_4:
+                    普徴期情報.set普徴期４(定値期_4);
                     普徴月情報.set普徴月４(月);
                     break;
-                case INT_5:
-                    普徴期情報.set普徴期５(期_5);
+                case INTNUMBER_5:
+                    普徴期情報.set普徴期５(定値期_5);
                     普徴月情報.set普徴月５(月);
                     break;
-                case INT_6:
-                    普徴期情報.set普徴期６(期_6);
+                case INTNUMBER_6:
+                    普徴期情報.set普徴期６(定値期_6);
                     普徴月情報.set普徴月６(月);
                     break;
-                case INT_7:
-                    普徴期情報.set普徴期７(期_7);
+                case INTNUMBER_7:
+                    普徴期情報.set普徴期７(定値期_7);
                     普徴月情報.set普徴月７(月);
                     break;
-                case INT_8:
-                    普徴期情報.set普徴期８(期_8);
+                case INTNUMBER_8:
+                    普徴期情報.set普徴期８(定値期_8);
                     普徴月情報.set普徴月８(月);
                     break;
-                case INT_9:
-                    普徴期情報.set普徴期９(期_9);
+                case INTNUMBER_9:
+                    普徴期情報.set普徴期９(定値期_9);
                     普徴月情報.set普徴月９(月);
                     break;
-                case INT_10:
-                    普徴期情報.set普徴期１０(期_10);
+                case INTNUMBER_10:
+                    普徴期情報.set普徴期１０(定値期_10);
                     普徴月情報.set普徴月１０(月);
                     break;
-                case INT_11:
-                    普徴期情報.set普徴期１１(期_11);
+                case INTNUMBER_11:
+                    普徴期情報.set普徴期１１(定値期_11);
                     普徴月情報.set普徴月１１(月);
                     break;
-                case INT_12:
-                    普徴期情報.set普徴期１２(期_12);
+                case INTNUMBER_12:
+                    普徴期情報.set普徴期１２(定値期_12);
                     普徴月情報.set普徴月１２(月);
                     break;
-                case INT_13:
-                    普徴期情報.set普徴期１３(期_13);
+                case INTNUMBER_13:
+                    普徴期情報.set普徴期１３(定値期_13);
                     普徴月情報.set普徴月１３(月);
                     break;
-                case INT_14:
-                    普徴期情報.set普徴期１４(期_14);
+                case INTNUMBER_14:
+                    普徴期情報.set普徴期１４(定値期_14);
                     普徴月情報.set普徴月１４(月);
                     break;
                 default:
@@ -190,7 +190,7 @@ public class FukaDaichoDataHenshuFath {
     }
 
     private RString format月(RString コード) {
-        if (Integer.parseInt(コード.toString()) < INT_10) {
+        if (Integer.parseInt(コード.toString()) < INTNUMBER_10) {
             return コード.replace(FORMAT.toString(), RString.EMPTY.toString());
         }
         if (コード.equals(Tsuki.翌年度4月.getコード())) {
@@ -247,32 +247,32 @@ public class FukaDaichoDataHenshuFath {
         }
         for (Kitsuki 特徴期月 : 特徴期月リスト) {
             RString 月 = format月(特徴期月.get月().getコード());
-            if (!is本算定 && INT_10 <= 特徴期月.get月AsInt()) {
+            if (!is本算定 && INTNUMBER_10 <= 特徴期月.get月AsInt()) {
                 return 特徴期情報;
             }
             switch (特徴期月.get期AsInt()) {
-                case INT_1:
-                    特徴期情報.set特徴期１(期_1);
+                case INTNUMBER_1:
+                    特徴期情報.set特徴期１(定値期_1);
                     特徴月情報.set特徴月１(月);
                     break;
-                case INT_2:
-                    特徴期情報.set特徴期２(期_2);
+                case INTNUMBER_2:
+                    特徴期情報.set特徴期２(定値期_2);
                     特徴月情報.set特徴月２(月);
                     break;
-                case INT_3:
-                    特徴期情報.set特徴期３(期_3);
+                case INTNUMBER_3:
+                    特徴期情報.set特徴期３(定値期_3);
                     特徴月情報.set特徴月３(月);
                     break;
-                case INT_4:
-                    特徴期情報.set特徴期４(期_4);
+                case INTNUMBER_4:
+                    特徴期情報.set特徴期４(定値期_4);
                     特徴月情報.set特徴月４(月);
                     break;
-                case INT_5:
-                    特徴期情報.set特徴期５(期_5);
+                case INTNUMBER_5:
+                    特徴期情報.set特徴期５(定値期_5);
                     特徴月情報.set特徴月５(月);
                     break;
-                case INT_6:
-                    特徴期情報.set特徴期６(期_6);
+                case INTNUMBER_6:
+                    特徴期情報.set特徴期６(定値期_6);
                     特徴月情報.set特徴月６(月);
                     break;
                 default:
@@ -324,46 +324,46 @@ public class FukaDaichoDataHenshuFath {
             return;
         }
         switch (普徴期月.get期AsInt()) {
-            case INT_1:
+            case INTNUMBER_1:
                 随時情報.set普徴随時１(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_2:
+            case INTNUMBER_2:
                 随時情報.set普徴随時２(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_3:
+            case INTNUMBER_3:
                 随時情報.set普徴随時３(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_4:
+            case INTNUMBER_4:
                 随時情報.set普徴随時４(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_5:
+            case INTNUMBER_5:
                 随時情報.set普徴随時５(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_6:
+            case INTNUMBER_6:
                 随時情報.set普徴随時６(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_7:
+            case INTNUMBER_7:
                 随時情報.set普徴随時７(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_8:
+            case INTNUMBER_8:
                 随時情報.set普徴随時８(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_9:
+            case INTNUMBER_9:
                 随時情報.set普徴随時９(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_10:
+            case INTNUMBER_10:
                 随時情報.set普徴随時１０(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_11:
+            case INTNUMBER_11:
                 随時情報.set普徴随時１１(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_12:
+            case INTNUMBER_12:
                 随時情報.set普徴随時１２(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_13:
+            case INTNUMBER_13:
                 随時情報.set普徴随時１３(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
-            case INT_14:
+            case INTNUMBER_14:
                 随時情報.set普徴随時１４(FuchokiJohoTsukiShoriKubun.随時.get名称());
                 break;
             default:
@@ -374,7 +374,6 @@ public class FukaDaichoDataHenshuFath {
      * 世帯員情報リストを作成するメソッドです。
      *
      * @param 世帯員所得情報リスト List<SetaiinShotoku>
-     * @param 住民種別区分 boolean
      * @return List<SetaInJoho> 世帯員情報リスト
      */
     public List<SetaInJoho> create世帯員情報リスト(List<SetaiinShotoku> 世帯員所得情報リスト) {
@@ -384,7 +383,7 @@ public class FukaDaichoDataHenshuFath {
             return 世帯員情報リスト;
         }
         for (SetaiinShotoku 世帯員所得情報 : 世帯員所得情報リスト) {
-            if (期_2.equals(世帯員所得情報.get本人区分())) {
+            if (定値期_2.equals(世帯員所得情報.get本人区分())) {
                 SetaInJoho 世帯員情報 = new SetaInJoho();
                 世帯員情報.set世帯員識別コード(世帯員所得情報.get識別コード().getColumnValue());
                 世帯員情報.set世帯員氏名(世帯員所得情報.get氏名());
