@@ -271,8 +271,8 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
         改頁項目Map.put(世帯コード, setaiCode);
         RString shikibetsuCode = entity.getShikibetsuCode() == null ? RString.EMPTY : entity.getShikibetsuCode().getColumnValue();
         改頁項目Map.put(識別コード, shikibetsuCode);
-        RString kanaMeisho = entity.getKanaMeisho() == null ? RString.EMPTY : entity.getKanaMeisho().getColumnValue();
-        改頁項目Map.put(氏名５０音カナ, kanaMeisho);
+        RString kanaShimei = entity.getKanaShimei() == null ? RString.EMPTY : entity.getKanaShimei();
+        改頁項目Map.put(氏名５０音カナ, kanaShimei);
         RString seinengappiYMD = entity.getBirthDay() == null ? RString.EMPTY : new RString(entity.getBirthDay().toString());
         改頁項目Map.put(生年月日, seinengappiYMD);
         RString seibetsu = entity.getSeibetsu() == null ? RString.EMPTY : new RString(entity.getSeibetsu().toString());
