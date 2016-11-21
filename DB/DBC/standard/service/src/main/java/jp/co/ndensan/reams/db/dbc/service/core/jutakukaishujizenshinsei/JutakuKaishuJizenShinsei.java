@@ -12,10 +12,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.ShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.hokenkyufuritsuteisu.HokenkyufuritsuTeisu;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGakuEntity;
@@ -29,6 +27,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7112ShokanShuruiShikyu
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishujizenshinsei.IJutakuKaishuJizenShinseiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4014RiyoshaFutangakuGengakuDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -49,6 +48,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShurui
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
+import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
@@ -601,6 +601,41 @@ public class JutakuKaishuJizenShinsei {
             return RString.EMPTY;
         }
         return entity.getServiceShuruiMeisho();
+    }
+
+    /**
+     * 前回までの支払結果を取得する
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return ShiharaiKekkaResult
+     */
+    public ShiharaiKekkaResult getKakoJutakuKaishuHi(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+
+        IJutakuKaishuJizenShinseiMapper mapper = mapperProvider.create(IJutakuKaishuJizenShinseiMapper.class);
+        JutakuKaishuHiParameter parameter
+                = JutakuKaishuHiParameter.createParameter(被保険者番号, サービス提供年月, null, null);
+        List<DbT3034ShokanShinseiEntity> entityList = mapper.get開始サービス提供年月(parameter);
+        FlexibleYearMonth 開始サービス提供年月;
+        if (entityList == null || entityList.isEmpty()) {
+            開始サービス提供年月 = new FlexibleYearMonth("000000");
+        } else {
+            開始サービス提供年月 = entityList.get(0).getServiceTeikyoYM();
+        }
+        parameter = JutakuKaishuHiParameter.createParameter(被保険者番号, サービス提供年月,
+                開始サービス提供年月, null);
+        ShiharaiKekaEntity result = mapper.get前回までの支払結果(parameter);
+        if (result == null) {
+            ShiharaiKekaEntity newResult = new ShiharaiKekaEntity();
+            newResult.set保険対象費用額(Decimal.ZERO);
+            newResult.set保険給付額(Decimal.ZERO);
+            newResult.set利用者負担額(Decimal.ZERO);
+            newResult.set費用額合計(Decimal.ZERO);
+            newResult.set開始サービス提供年月(開始サービス提供年月);
+            return new ShiharaiKekkaResult(newResult);
+        }
+        result.set開始サービス提供年月(開始サービス提供年月);
+        return new ShiharaiKekkaResult(result);
     }
 
     /**

@@ -6,10 +6,6 @@
         <include refid="selectYokaigoJotaiKubunCode" />
     </select>
 
-    <select resultOrdered="true" id="selectサービス提供年月ByParam" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity">
-        <include refid="selectShokanShinsei" />
-    </select>
-
     <sql id="selectYokaigoJotaiKubunCode">
         SELECT
         "JukyushaDaicho"."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode"
@@ -24,41 +20,5 @@
         ORDER BY "JukyushaDaicho"."rirekiNo" DESC,
         "JukyushaDaicho"."edaban" DESC
         LIMIT 1
-    </sql>
-
-    <sql id="selectShokanShinsei">
-        SELECT
-        "ShokanShinsei"."serviceTeikyoYM" AS "serviceTeikyoYM",
-        "ShokanShinsei"."yokaigo3DankaiHenko" AS "yokaigo3DankaiHenko"
-        FROM
-        rgdb."DbT3034ShokanShinsei" "ShokanShinsei"
-        INNER JOIN
-        (<include refid="selectShokanJutakuKaishu" />) AS "T1"
-        ON "T1"."hiHokenshaNo" = "ShokanShinsei"."hiHokenshaNo"
-        AND "T1"."serviceTeikyoYM" = "ShokanShinsei"."serviceTeikyoYM"
-        AND "T1"."seiriNo" = "ShokanShinsei"."seiriNo"
-        WHERE
-        "ShokanShinsei"."isDeleted" = FALSE
-        AND "ShokanShinsei"."hiHokenshaNo" = #{被保険者番号}
-        AND "ShokanShinsei"."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
-        ORDER BY "serviceTeikyoYM" ASC
-        LIMIT(1)
-    </sql>
-
-    <sql id="selectShokanJutakuKaishu">
-        SELECT
-        "ShokanJutakuKaishu"."hiHokenshaNo" AS "hiHokenshaNo",
-        "ShokanJutakuKaishu"."serviceTeikyoYM" AS "serviceTeikyoYM",
-        "ShokanJutakuKaishu"."seiriNo" AS "seiriNo"
-        FROM
-        rgdb."DbT3049ShokanJutakuKaishu" "ShokanJutakuKaishu"
-        WHERE 
-        "ShokanJutakuKaishu"."isDeleted" = FALSE
-        AND SUBSTRING("ShokanJutakuKaishu"."yoshikiNo", 1, 3) = '21D'
-        AND "ShokanJutakuKaishu"."hiHokenshaNo" = #{被保険者番号}
-        AND "ShokanJutakuKaishu"."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
-        GROUP BY "ShokanJutakuKaishu"."hiHokenshaNo",
-        "ShokanJutakuKaishu"."serviceTeikyoYM",
-        "ShokanJutakuKaishu"."seiriNo"
     </sql>
 </mapper>
