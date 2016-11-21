@@ -281,7 +281,6 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
 
     @Override
     protected void usualProcess(DankaibetsuShunoritsuTempEntity entity) {
-        lastEntity = entity;
         DankaibetsuShunoritsuTempEntity beforeEntity = getBefore();
         if (beforeEntity == null) {
             beforeEntity = entity;
@@ -319,7 +318,8 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
                 && beforeEntity.getFukaNendo().equals(entity.getFukaNendo())
                 && beforeEntity.getKibetsu() == entity.getKibetsu()
                 && beforeEntity.getHokenryoDankai().equals(entity.getHokenryoDankai())
-                && beforeEntity.getKamokuCode().equals(entity.getKamokuCode())) {
+                && beforeEntity.getKamokuCode().equals(entity.getKamokuCode())
+                && !is市町村コード改頁) {
             get小計集計(entity);
         } else {
             DankaibetsuShunoritsuIchiran 険料段階別収納率通知書集計Data
@@ -354,6 +354,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         get総合計集計(entity);
         通知書report.writeBy(reportSourceWriter_一覧表);
         before帳票タイトル = 帳票タイトル;
+        lastEntity = entity;
     }
 
     @Override
