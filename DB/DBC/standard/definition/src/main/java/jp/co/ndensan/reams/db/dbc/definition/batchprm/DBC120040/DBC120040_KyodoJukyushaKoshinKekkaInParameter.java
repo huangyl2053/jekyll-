@@ -34,6 +34,9 @@ public class DBC120040_KyodoJukyushaKoshinKekkaInParameter extends BatchParamete
     @BatchParameter(key = OUTPUTORDERID, name = "出力順ID")
     private RString 出力順ID;
 
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
+
     /**
      * CreateTmptableProcessパラメータの取得です。
      *

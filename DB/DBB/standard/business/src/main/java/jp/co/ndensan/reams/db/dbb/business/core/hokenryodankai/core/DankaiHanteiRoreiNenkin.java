@@ -70,12 +70,11 @@ class DankaiHanteiRoreiNenkin implements IDai1DankaiHantei {
     public TsukibetsuHokenryoDankai dai1dankaiSettei(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter,
             TsukibetsuHokenryoDankai tsukibetsuHokenryoDankai) {
 
-        Calendar 老齢年金開始月 = Calendar.getInstance();
+//        Calendar 老齢年金開始月 = Calendar.getInstance();
         Calendar 判定年月 = Calendar.getInstance();
 
-        老齢年金開始月.set(hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoStartYMD().getYearValue(),
-                hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoStartYMD().getMonthValue(), 1);
-
+//        老齢年金開始月.set(hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoStartYMD().getYearValue(),
+//                hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoStartYMD().getMonthValue(), 1);
         Map<RString, RString> hokenryoDankaiMap = tsukibetsuHokenryoDankai.createHokenryoDankaiMap();
         Set<Map.Entry<RString, RString>> set = hokenryoDankaiMap.entrySet();
         Iterator<Map.Entry<RString, RString>> it = set.iterator();

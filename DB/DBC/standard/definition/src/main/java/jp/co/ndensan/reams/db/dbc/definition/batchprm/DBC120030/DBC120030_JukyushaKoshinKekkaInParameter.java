@@ -30,5 +30,7 @@ public class DBC120030_JukyushaKoshinKekkaInParameter extends BatchParameterBase
 
     @BatchParameter(key = "出力順ID", name = "出力順ID")
     private Long 出力順ID;
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 
 }

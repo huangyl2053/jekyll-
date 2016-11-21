@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120270.DBC120270_Shikak
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410016.TsuchishoJoho121Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -50,6 +51,7 @@ public class TsuchishoJoho121 {
         FlexibleYearMonth 処理年月 = date == null ? FlexibleYearMonth.EMPTY
                 : new FlexibleYearMonth(date.getYearMonth().toDateString());
         parameter.setShoriYM(処理年月);
+        parameter.setLoginUserId(ControlDataHolder.getUserId());
         FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120270_ShikakuShogohyoIn");
         FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();

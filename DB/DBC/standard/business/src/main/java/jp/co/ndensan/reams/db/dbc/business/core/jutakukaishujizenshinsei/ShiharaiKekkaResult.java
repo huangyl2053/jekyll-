@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -74,5 +75,14 @@ public class ShiharaiKekkaResult implements Serializable {
      */
     public RString get住宅改修住宅住所() {
         return entity.get住宅改修住宅住所();
+    }
+
+    /**
+     * 開始サービス提供年月の取得メソッド
+     *
+     * @return 開始サービス提供年月
+     */
+    public FlexibleYearMonth get開始サービス提供年月() {
+        return entity.get開始サービス提供年月();
     }
 }

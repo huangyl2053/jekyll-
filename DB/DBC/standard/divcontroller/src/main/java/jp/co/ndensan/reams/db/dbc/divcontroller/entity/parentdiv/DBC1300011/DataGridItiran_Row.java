@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1300011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Oct 14 09:01:47 CST 2016 
+ * Mon Nov 21 19:24:58 CST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class DataGridItiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
 
     private RString txtShokisaiNo;
     private RString txtServiceNengetsu;
@@ -28,6 +28,7 @@ public class DataGridItiran_Row extends DataRow {
     private RString txtServiceShurui;
     private RString txtFutangakuGokei;
     private RString txtServicehiGokei;
+    private RString txtHdnServiceNengetsu;
 
     public DataGridItiran_Row() {
         super();
@@ -38,6 +39,7 @@ public class DataGridItiran_Row extends DataRow {
         this.txtServiceShurui = RString.EMPTY;
         this.txtFutangakuGokei = RString.EMPTY;
         this.txtServicehiGokei = RString.EMPTY;
+        this.txtHdnServiceNengetsu = RString.EMPTY;
         this.setOriginalData("txtShokisaiNo", txtShokisaiNo);
         this.setOriginalData("txtServiceNengetsu", txtServiceNengetsu);
         this.setOriginalData("txtJigyoshaNo", txtJigyoshaNo);
@@ -45,9 +47,10 @@ public class DataGridItiran_Row extends DataRow {
         this.setOriginalData("txtServiceShurui", txtServiceShurui);
         this.setOriginalData("txtFutangakuGokei", txtFutangakuGokei);
         this.setOriginalData("txtServicehiGokei", txtServicehiGokei);
+        this.setOriginalData("txtHdnServiceNengetsu", txtHdnServiceNengetsu);
     }
 
-    public DataGridItiran_Row(RString txtShokisaiNo, RString txtServiceNengetsu, RString txtJigyoshaNo, RString txtJigyoshaName, RString txtServiceShurui, RString txtFutangakuGokei, RString txtServicehiGokei) {
+    public DataGridItiran_Row(RString txtShokisaiNo, RString txtServiceNengetsu, RString txtJigyoshaNo, RString txtJigyoshaName, RString txtServiceShurui, RString txtFutangakuGokei, RString txtServicehiGokei, RString txtHdnServiceNengetsu) {
         super();
         this.setOriginalData("txtShokisaiNo", txtShokisaiNo);
         this.setOriginalData("txtServiceNengetsu", txtServiceNengetsu);
@@ -56,6 +59,7 @@ public class DataGridItiran_Row extends DataRow {
         this.setOriginalData("txtServiceShurui", txtServiceShurui);
         this.setOriginalData("txtFutangakuGokei", txtFutangakuGokei);
         this.setOriginalData("txtServicehiGokei", txtServicehiGokei);
+        this.setOriginalData("txtHdnServiceNengetsu", txtHdnServiceNengetsu);
         this.txtShokisaiNo = txtShokisaiNo;
         this.txtServiceNengetsu = txtServiceNengetsu;
         this.txtJigyoshaNo = txtJigyoshaNo;
@@ -63,6 +67,7 @@ public class DataGridItiran_Row extends DataRow {
         this.txtServiceShurui = txtServiceShurui;
         this.txtFutangakuGokei = txtFutangakuGokei;
         this.txtServicehiGokei = txtServicehiGokei;
+        this.txtHdnServiceNengetsu = txtHdnServiceNengetsu;
     }
 
     public RString getTxtShokisaiNo() {
@@ -91,6 +96,10 @@ public class DataGridItiran_Row extends DataRow {
 
     public RString getTxtServicehiGokei() {
         return txtServicehiGokei;
+    }
+
+    public RString getTxtHdnServiceNengetsu() {
+        return txtHdnServiceNengetsu;
     }
 
     public void setTxtShokisaiNo(RString txtShokisaiNo) {
@@ -126,6 +135,11 @@ public class DataGridItiran_Row extends DataRow {
     public void setTxtServicehiGokei(RString txtServicehiGokei) {
         this.setOriginalData("txtServicehiGokei", txtServicehiGokei);
         this.txtServicehiGokei = txtServicehiGokei;
+    }
+
+    public void setTxtHdnServiceNengetsu(RString txtHdnServiceNengetsu) {
+        this.setOriginalData("txtHdnServiceNengetsu", txtHdnServiceNengetsu);
+        this.txtHdnServiceNengetsu = txtHdnServiceNengetsu;
     }
 
     // </editor-fold>

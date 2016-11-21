@@ -56,7 +56,6 @@ public class JyusinDataBaitaiTorikomu {
     private static final RString CSV = new RString(".csv");
     private static final RString 給付実績情報111 = new RString("111");
     private static final RString 識別番号011 = new RString("011");
-    private static final RString 二 = new RString("2");
     private FlexibleYearMonth 審査年月;
     private FlexibleYearMonth 審査年月の翌月;
     private FlexibleYearMonth 処理年月;

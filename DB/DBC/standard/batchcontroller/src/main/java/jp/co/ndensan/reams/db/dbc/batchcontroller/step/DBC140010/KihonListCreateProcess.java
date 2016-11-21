@@ -93,6 +93,7 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
     private static final RString 広域内住所地特例フラグ = new RString("1");
 
     private static final int 居住サービス計画事業者名_LENGTH = 20;
+    private static final int 居住サービス計画事業者名_LENGTH_40 = 40;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 基本List;
     private JukyushaKyufujissekiDaichoProcessParameter parameter;
@@ -134,7 +135,10 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         基本entity.set通し番号(entity.getDbT3017_toshiNo());
         基本entity.set生年月日(entity.getDbT3017_umareYMD());
         基本entity.set性別コード(entity.getDbT3017_seibetsuCode());
-        基本entity.set要介護度(YokaigoJotaiKubun.toValue(entity.getDbT3017_yoKaigoJotaiKubunCode()).get名称());
+        基本entity.set要介護度(RString.EMPTY);
+        if (!RString.isNullOrEmpty(entity.getDbT3017_yoKaigoJotaiKubunCode())) {
+            基本entity.set要介護度(YokaigoJotaiKubun.toValue(entity.getDbT3017_yoKaigoJotaiKubunCode()).get名称());
+        }
         基本entity.set認定有効期間(get期間(entity.getDbT3017_ninteiYukoKaishiYMD(), entity.getDbT3017_ninteiYukoShuryoYMD()));
         基本entity.set証記載保険者番号(entity.getDbT3017_shokisaiHokenshaNo());
         基本entity.set老人保険市町村番号(entity.getDbT3017_rojinHokenShichosonNo());
@@ -162,9 +166,12 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         if (名称.length() <= 居住サービス計画事業者名_LENGTH) {
             基本entity.set出力様式１(名称);
             基本entity.set出力様式２(RString.EMPTY);
-        } else {
+        } else if (名称.length() <= 居住サービス計画事業者名_LENGTH_40) {
             基本entity.set出力様式１(名称.substring(0, 居住サービス計画事業者名_LENGTH));
             基本entity.set出力様式２(名称.substring(居住サービス計画事業者名_LENGTH));
+        } else {
+            基本entity.set出力様式１(名称.substring(0, 居住サービス計画事業者名_LENGTH));
+            基本entity.set出力様式２(名称.substring(居住サービス計画事業者名_LENGTH, 居住サービス計画事業者名_LENGTH_40));
         }
         基本entity.setサービス事業者番号(entity.getDbT3017_jigyoshoNo());
         基本entity.setサービス事業者名(entity.getDbT7060_jigyoshaName());
@@ -325,9 +332,12 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
             if (事業者名称.length() <= 居住サービス計画事業者名_LENGTH) {
                 住サービス計画事業者名.add(事業者名称);
                 住サービス計画事業者名.add(RString.EMPTY);
-            } else {
+            } else if (事業者名称.length() <= 居住サービス計画事業者名_LENGTH_40) {
                 住サービス計画事業者名.add(事業者名称.substring(0, 居住サービス計画事業者名_LENGTH));
                 住サービス計画事業者名.add(事業者名称.substring(居住サービス計画事業者名_LENGTH));
+            } else {
+                住サービス計画事業者名.add(事業者名称.substring(0, 居住サービス計画事業者名_LENGTH));
+                住サービス計画事業者名.add(事業者名称.substring(居住サービス計画事業者名_LENGTH, 居住サービス計画事業者名_LENGTH_40));
             }
         }
         return 住サービス計画事業者名;

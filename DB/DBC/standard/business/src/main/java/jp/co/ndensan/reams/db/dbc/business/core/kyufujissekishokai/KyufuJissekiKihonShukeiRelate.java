@@ -24,6 +24,7 @@ import lombok.Setter;
 public class KyufuJissekiKihonShukeiRelate implements Serializable {
 
     private AtenaMeisho 事業者名称;
+    private AtenaMeisho 事業者名称2;
     private ShikibetsuNoKanri 識別番号管理;
     private KyufujissekiKihon 給付実績基本データ;
 
@@ -31,11 +32,14 @@ public class KyufuJissekiKihonShukeiRelate implements Serializable {
      * コンストラクタです。
      *
      * @param 事業者名称 事業者名称
+     * @param 事業者名称2 事業者名称2
      * @param 識別番号管理 識別番号管理
      * @param 給付実績基本データ 給付実績基本データ
      */
-    public KyufuJissekiKihonShukeiRelate(AtenaMeisho 事業者名称, ShikibetsuNoKanri 識別番号管理, KyufujissekiKihon 給付実績基本データ) {
+    public KyufuJissekiKihonShukeiRelate(AtenaMeisho 事業者名称, AtenaMeisho 事業者名称2,
+            ShikibetsuNoKanri 識別番号管理, KyufujissekiKihon 給付実績基本データ) {
         this.事業者名称 = 事業者名称;
+        this.事業者名称2 = 事業者名称2;
         this.識別番号管理 = 識別番号管理;
         this.給付実績基本データ = 給付実績基本データ;
     }
@@ -47,6 +51,7 @@ public class KyufuJissekiKihonShukeiRelate implements Serializable {
      */
     public KyufuJissekiKihonShukeiRelate(KyufuJissekiKihonShukeiRelateEntity entity) {
         this.事業者名称 = entity.get事業者名称();
+        this.事業者名称2 = entity.get事業者名称2();
         if (entity.get識別番号管理() != null) {
             this.識別番号管理 = new ShikibetsuNoKanri(entity.get識別番号管理());
         }

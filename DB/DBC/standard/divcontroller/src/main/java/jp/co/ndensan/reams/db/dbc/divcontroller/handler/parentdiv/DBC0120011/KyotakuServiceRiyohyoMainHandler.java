@@ -96,7 +96,7 @@ public class KyotakuServiceRiyohyoMainHandler {
     
     private RString get居宅_総合事業区分(RString 居宅_総合事業区分コード) {
         RString 居宅_総合事業区分 = RString.EMPTY;
-        switch(居宅_総合事業区分コード.toString()) {
+        switch (居宅_総合事業区分コード.toString()) {
             case "1":
                 居宅_総合事業区分 = 居宅サービス計画;
                 break;

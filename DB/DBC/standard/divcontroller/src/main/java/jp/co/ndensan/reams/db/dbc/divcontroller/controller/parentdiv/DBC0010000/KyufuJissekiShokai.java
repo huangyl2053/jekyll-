@@ -205,6 +205,7 @@ public class KyufuJissekiShokai {
         List<KyufuJissekiHedajyoho1> 給付実績ヘッダ情報1 = KyufuJissekiShokaiFinder.createInstance().
                 getKyufuJissekiHeaderJoho1(被保険者番号).records();
         RString 検索対象 = div.getRadTaisho1().getSelectedKey();
+        div.setHiddenSearchKey(検索対象);
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
                 get検索データ(被保険者番号, サービス提供年月_開始, サービス提供年月_終了, KEY.equals(検索対象));
         KyufuJissekiShokaiHandler handler = getHandler(div);
@@ -225,7 +226,6 @@ public class KyufuJissekiShokai {
         setパラメータ(給付実績情報照会情報, 給付実績基本情報子Divデータ);
         div.getKyufuJissekiSearchPanel().setIsOpen(false);
         div.getKyufuJissekiListPanel().setIsOpen(true);
-        div.setHiddenSearchKey(検索対象);
         return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会一覧);
     }
 

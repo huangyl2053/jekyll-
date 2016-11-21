@@ -134,6 +134,8 @@
       <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
       ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper.allColumns_DbT3118ShikibetsuNoKanri" />
       ,"DbT7060KaigoJigyosha"."jigyoshaName" AS "DbT7060_jigyoshaName"
+      ,"DbT7060KaigoJigyosha2"."jigyoshaName" AS "DbT7060_kyotakuKaigoShienJigyoshaName"
+
     FROM
       "給付実績" AS "DbT3017KyufujissekiKihon"
     LEFT JOIN
@@ -150,6 +152,13 @@
       AND  substr("DbT7060KaigoJigyosha"."yukoKaishiYMD",1,6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
       AND ("DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substr("DbT7060KaigoJigyosha"."yukoShuryoYMD",1,6)
       OR  substr("DbT7060KaigoJigyosha"."yukoShuryoYMD",1,6) = '')
+    LEFT JOIN
+      rgdb."DbT7060KaigoJigyosha" as "DbT7060KaigoJigyosha2"
+   ON
+      "DbT3017KyufujissekiKihon"."kyotakuKaigoShienJigyoshoNo" = "DbT7060KaigoJigyosha2"."jigyoshaNo"
+      AND  substr("DbT7060KaigoJigyosha2"."yukoKaishiYMD",1,6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+      AND ("DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substr("DbT7060KaigoJigyosha2"."yukoShuryoYMD",1,6)
+      OR  substr("DbT7060KaigoJigyosha2"."yukoShuryoYMD",1,6) = '')
     ORDER BY
       "serviceTeikyoYM"
       ,"inputShikibetsuNo"
@@ -889,6 +898,7 @@ ORDER BY
         <id property="給付実績基本データ.kyufuJissekiKubunCode" column="dbT3017_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="給付実績基本データ.toshiNo" column="dbT3017_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="事業者名称" column="DbT7060_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="事業者名称2" column="DbT7060_kyotakuKaigoShienJigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <association property="識別番号管理" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper.ResultMap_DbT3118ShikibetsuNoKanriEntity"/>
         <association property="給付実績基本データ" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
     </resultMap>

@@ -19,6 +19,5 @@ import lombok.Setter;
 @Setter
 public class JutakuKaishuJyusyoChofukuHannteiEntity {
 
-    private boolean jutakuJushoHenko;
     private RString jutakuKaishuJutakuAddress;
 }

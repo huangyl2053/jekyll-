@@ -758,7 +758,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 .set徴収方法履歴番号(調定計算.get徴収方法の情報().get履歴番号() + INT_1);
         if (!is普徴期別金額あり(調定計算.get賦課の情報())) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
-        } else if (!賦課計算の情報.get口座().isEmpty()) {
+        } else if (賦課計算の情報.get口座() != null && 賦課計算の情報.get口座().getUaT0310KozaEntity() != null
+                && 賦課計算の情報.get口座().getUaT0310KozaEntity().getKozaId() != 0) {
             builder.set口座区分(KozaKubun.口座振替.getコード());
         } else {
             builder.set口座区分(KozaKubun.現金納付.getコード());
@@ -838,7 +839,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                     .set徴収方法履歴番号(徴収方法の情報.get履歴番号() + INT_1);
             if (!is普徴期別金額あり(賦課の情報_更正後)) {
                 builder.set口座区分(KozaKubun.現金納付.getコード());
-            } else if (!賦課計算の情報.get口座().isEmpty()) {
+            } else if (賦課計算の情報.get口座() != null && 賦課計算の情報.get口座().getUaT0310KozaEntity() != null
+                    && 賦課計算の情報.get口座().getUaT0310KozaEntity().getKozaId() != 0) {
                 builder.set口座区分(KozaKubun.口座振替.getコード());
             } else {
                 builder.set口座区分(KozaKubun.現金納付.getコード());

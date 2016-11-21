@@ -32,4 +32,7 @@ public class DBC120110_KogakuGassanJikofutangakuKakuninInParameter extends Batch
 
     @BatchParameter(key = "処理区分", name = "処理区分")
     private RString 処理区分;
+
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 }

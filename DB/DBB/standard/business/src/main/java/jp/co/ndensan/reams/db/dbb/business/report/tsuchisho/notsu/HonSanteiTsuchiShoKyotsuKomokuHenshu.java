@@ -235,8 +235,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         shoKyotsu.set普徴今後納付すべき額_収入元に(普徴今後納付すべき額_収入元に);
         shoKyotsu.set特徴今後納付すべき額(特徴今後納付すべき額);
         edit編集後本算定通知書共通情報(本算定通知書情報, shoKyotsu);
-        shoKyotsu.set特徴収入情報リスト(this.get特徴収入情報リスト(本算定通知書情報));
-        shoKyotsu.set普徴収入情報リスト(this.get普徴収入情報リスト(本算定通知書情報));
         return shoKyotsu;
     }
 
@@ -272,6 +270,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         shoKyotsu.set普徴期数_現年度(本算定通知書情報.get普徴納期情報リスト().size());
         shoKyotsu.set保険者名(本算定通知書情報.get地方公共団体().get市町村名());
         shoKyotsu.set保険者番号(new HihokenshaNo(本算定通知書情報.get地方公共団体().get地方公共団体コード().value()));
+        shoKyotsu.set特徴収入情報リスト(this.get特徴収入情報リスト(本算定通知書情報));
+        shoKyotsu.set普徴収入情報リスト(this.get普徴収入情報リスト(本算定通知書情報));
     }
 
     private void edit表示コード(HonSanteiTsuchiShoKyotsu 本算定通知書情報, EditedHonSanteiTsuchiShoKyotsu shoKyotsu) {

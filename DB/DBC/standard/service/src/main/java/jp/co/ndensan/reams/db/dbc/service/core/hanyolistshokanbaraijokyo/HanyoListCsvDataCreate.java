@@ -81,16 +81,6 @@ public class HanyoListCsvDataCreate {
     private static final RString 他 = new RString("他");
     private static final int INDEX_13 = 13;
     private static final int INDEX_15 = 15;
-    private final FlexibleDate システム日付;
-
-    /**
-     * コンストラクタ
-     *
-     * @param システム日付 システム日付
-     */
-    public HanyoListCsvDataCreate(FlexibleDate システム日付) {
-        this.システム日付 = システム日付;
-    }
 
     /**
      * createCsvData

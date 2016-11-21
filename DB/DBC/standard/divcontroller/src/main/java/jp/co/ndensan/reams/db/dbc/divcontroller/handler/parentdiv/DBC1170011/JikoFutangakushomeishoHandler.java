@@ -147,10 +147,17 @@ public class JikoFutangakushomeishoHandler {
         List<KeyValueDataSource> dataList_支給申請書整理番号 = new ArrayList<>();
         FlexibleYear 対象年度 = new FlexibleYear(div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().getSelectedKey());
         List<KogakuGassanNendoKey> 高額合算年度キーList = 年度毎キー.get(対象年度);
+        List<RString> list = new ArrayList<>();
         for (KogakuGassanNendoKey kogakuGassanNendoKey : 高額合算年度キーList) {
+            if (list.contains(kogakuGassanNendoKey.get支給申請書整理番号())) {
+                continue;
+            }
+            list.add(kogakuGassanNendoKey.get支給申請書整理番号());
+        }
+        for (RString 支給申請書整理番号 : list) {
             KeyValueDataSource dataSource_支給申請書整理番号 = new KeyValueDataSource();
-            dataSource_支給申請書整理番号.setKey(kogakuGassanNendoKey.get支給申請書整理番号());
-            dataSource_支給申請書整理番号.setValue(kogakuGassanNendoKey.get支給申請書整理番号());
+            dataSource_支給申請書整理番号.setKey(支給申請書整理番号);
+            dataSource_支給申請書整理番号.setValue(支給申請書整理番号);
             dataList_支給申請書整理番号.add(dataSource_支給申請書整理番号);
         }
         div.getJikoFutanShomeishoSakuseiPrint().getDdlShikyuShinseishoSeiriNo().setDataSource(dataList_支給申請書整理番号);
@@ -254,11 +261,7 @@ public class JikoFutangakushomeishoHandler {
         JikoFutangakushomeishoData 高額合算データ = new JikoFutangakushomeishoData();
         KogakuGassanData kogakuGassanData = 高額合算申請書.get高額合算情報(parameter);
         高額合算データ.set高額合算データ(kogakuGassanData);
-        if (is帳票設計DBC100050) {
-            高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(ReportIdDBC.DBC100050.getReportId()));
-        } else if (is帳票設計DBC100051) {
-            高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(ReportIdDBC.DBC100051.getReportId()));
-        }
+        高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(ReportIdDBC.DBC100050.getReportId()));
 
         高額合算データ.set文書番号(高額合算申請書.get文書番号(メニューID));
         高額合算データ.setタイトル(高額合算申請書.getタイトル(メニューID));

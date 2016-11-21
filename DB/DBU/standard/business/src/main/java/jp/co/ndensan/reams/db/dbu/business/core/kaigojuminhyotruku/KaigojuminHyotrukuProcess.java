@@ -36,6 +36,7 @@ public class KaigojuminHyotrukuProcess {
 
     private static final RString 連番用 = new RString("0");
     private static final int 桁目_3 = 4;
+    private List<RString> list = new ArrayList<>();
 
     /**
      *
@@ -153,5 +154,23 @@ public class KaigojuminHyotrukuProcess {
         日時.append(処理日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         dateentity.setTaishoShuryoTimestamp(new YMDHMS(日時.toString().replace(":", "")));
         return dateentity;
+    }
+
+    /**
+     *
+     * @return list
+     */
+    public List<RString> getlist() {
+        return list;
+    }
+
+    /**
+     *
+     * @param entity DbT7022ShoriDateKanriEntity
+     * @return list
+     */
+    public List<RString> setlist(DbT7022ShoriDateKanriEntity entity) {
+        list.add(entity.getShichosonCode().value());
+        return list;
     }
 }
