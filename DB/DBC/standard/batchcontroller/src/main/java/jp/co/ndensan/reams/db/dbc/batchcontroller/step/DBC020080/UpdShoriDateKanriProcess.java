@@ -82,7 +82,7 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateK
             result.setKijunYMD(new FlexibleDate(parameter.get受取年月().getYearValue(), parameter.get受取年月().getMonthValue(), NUM_1));
         }
         result.setTaishoKaishiTimestamp(new YMDHMS(parameter.get処理日時()));
-        tableWriter.update(result);
+        tableWriter.insert(result);
     }
 
     private RString get新規年度内連番(RString 年度内連番) {
