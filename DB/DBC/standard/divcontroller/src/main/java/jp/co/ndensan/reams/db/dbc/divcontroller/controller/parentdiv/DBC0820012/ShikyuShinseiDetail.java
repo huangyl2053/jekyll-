@@ -276,10 +276,12 @@ public class ShikyuShinseiDetail {
      * @return ResponseData<ShikyuShinseiDetailDiv>
      */
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnCancel(ShikyuShinseiDetailDiv div) {
+
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikyuShinseiDetailParameter parameter = getHandler(div).btnCancel_SetParameter();
         RString 処理モード = parameter.get処理モード();
         if (DBC0820012StateName.処理完了.getName().equals(ResponseHolder.getState())) {
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, null);
             return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.一覧に戻る).respond();
         }
         if (MODEL_DEL.equals(処理モード)) {
