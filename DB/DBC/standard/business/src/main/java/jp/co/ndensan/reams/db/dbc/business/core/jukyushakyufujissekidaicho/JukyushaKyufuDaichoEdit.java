@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -80,7 +81,7 @@ public class JukyushaKyufuDaichoEdit {
     private static final RString 入力識別番号_2176 = new RString("2176");
     private static final RString 入力識別番号_7177 = new RString("7177");
     private static final RString 入力識別番号_2177 = new RString("2177");
-    private static final RString 入力識別番号_8124 = new RString("7124");
+    private static final RString 入力識別番号_8124 = new RString("8124");
     private static final RString 入力識別番号_2184 = new RString("2184");
     private static final RString 入力識別番号_8125 = new RString("8125");
     private static final RString 入力識別番号_2185 = new RString("2185");
@@ -242,22 +243,22 @@ public class JukyushaKyufuDaichoEdit {
         個人用帳票データ.setヘッダー1(基本データ.get出力様式());
         個人用帳票データ.setヘッダー2(new RString(" 受付年月日              負担者番号      負担額      支給額      審査年月"));
         個人用帳票データ.setヘッダー3(new RString(" 決定年月日"));
-        個人用帳票データ.set明細1(SPACE_1.concat(基本データ.get高額受付年月日()).concat(SPACE_29)
-                .concat(基本データ.get高額利用者負担額())
-                .concat(SPACE_5).concat(基本データ.get高額支給額()).concat(SPACE_17)
-                .concat(基本データ.get審査年月()));
-        個人用帳票データ.set明細3(SPACE_1.concat(基本データ.get高額決定年月日()).concat(SPACE_6).concat(公費１).concat(SPACE_4)
+        個人用帳票データ.set明細1(SPACE_1.concat(dateFormat(基本データ.get高額受付年月日())).concat(SPACE_29)
+                .concat(kingakuFormat(基本データ.get高額利用者負担額()))
+                .concat(SPACE_5).concat(kingakuFormat(基本データ.get高額支給額())).concat(SPACE_17)
+                .concat(dateFormat年月(基本データ.get審査年月())));
+        個人用帳票データ.set明細3(SPACE_1.concat(dateFormat(基本データ.get高額決定年月日())).concat(SPACE_6).concat(公費１).concat(SPACE_4)
                 .concat(基本データ.get高額公費１負担番号())
-                .concat(SPACE_5).concat(基本データ.get高額公費１負担額()).concat(SPACE_5)
-                .concat(基本データ.get高額公費１支給額()));
+                .concat(SPACE_5).concat(kingakuFormat(基本データ.get高額公費１負担額())).concat(SPACE_5)
+                .concat(kingakuFormat(基本データ.get高額公費１支給額())));
         個人用帳票データ.set明細4(SPACE_17.concat(公費２).concat(SPACE_4)
                 .concat(基本データ.get高額公費２負担番号())
-                .concat(SPACE_5).concat(基本データ.get高額公費２負担額()).concat(SPACE_5)
-                .concat(基本データ.get高額公費２支給額()));
+                .concat(SPACE_5).concat(kingakuFormat(基本データ.get高額公費２負担額())).concat(SPACE_5)
+                .concat(kingakuFormat(基本データ.get高額公費２支給額())));
         個人用帳票データ.set明細6(SPACE_17.concat(公費３).concat(SPACE_4)
                 .concat(基本データ.get高額公費３負担番号())
-                .concat(SPACE_5).concat(基本データ.get高額公費３負担額()).concat(SPACE_5)
-                .concat(基本データ.get高額公費２支給額()));
+                .concat(SPACE_5).concat(kingakuFormat(基本データ.get高額公費３負担額())).concat(SPACE_5)
+                .concat(kingakuFormat(基本データ.get高額公費２支給額())));
         データList.insert(set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, INDEX_3, INDEX_3, 保険者コード, 保険者名));
     }
 
@@ -1133,33 +1134,32 @@ public class JukyushaKyufuDaichoEdit {
             個人用帳票データ.set集計_決定後_単位数合計_公費１(集計.get後公費１点数合計());
             個人用帳票データ.set集計_決定前_請求額_公費１(集計.get公費１請求額());
             個人用帳票データ.set集計_決定後_請求額_公費１(集計.get後公費１請求額());
-            //個人用帳票データ.set負担額_公費１(集計.get公費１公費分本人負担額());
+            個人用帳票データ.set集計_負担額_公費１(集計.get公費１公費分本人負担額());
             個人用帳票データ.set集計_決定前_出来高医療費単位数合計_公費１(集計.get公費１出来高点数合計());
             個人用帳票データ.set集計_決定後_出来高医療費単位数合計_公費１(集計.get後公費１出来高点数合計());
             個人用帳票データ.set集計_決定前_出来高医療費請求額_公費１(集計.get公費１出来高請求額());
             個人用帳票データ.set集計_決定後_出来高医療費請求額_公費１(集計.get後公費１出来高請求額());
-            //個人用帳票データ.set出来高医療費負担額_公費１(集計.get公費１公費分本人負担額());
+            個人用帳票データ.set集計_出来高医療費負担額_公費１(集計.get公費１_出来高医療費負担額());
             個人用帳票データ.set集計_決定前_単位数合計_公費２(集計.get公費２点数合計());
             個人用帳票データ.set集計_決定後_単位数合計_公費２(集計.get後公費２点数合計());
             個人用帳票データ.set集計_決定前_請求額_公費２(集計.get公費２請求額());
             個人用帳票データ.set集計_決定後_請求額_公費２(集計.get後公費２請求額());
-            // 個人用帳票データ.set負担額_公費２(集計.get公費２公費分本人負担額());
+            個人用帳票データ.set集計_負担額_公費２(集計.get公費２公費分本人負担額());
             個人用帳票データ.set集計_決定前_出来高医療費単位数合計_公費２(集計.get公費２出来高点数合計());
             個人用帳票データ.set集計_決定後_出来高医療費単位数合計_公費２(集計.get後公費２出来高点数合計());
             個人用帳票データ.set集計_決定前_出来高医療費請求額_公費２(集計.get公費２出来高請求額());
             個人用帳票データ.set集計_決定後_出来高医療費請求額_公費２(集計.get後公費２出来高請求額());
-            //個人用帳票データ.set出来高医療費負担額_公費２(集計.get公費２公費分本人負担額());
+            個人用帳票データ.set集計_出来高医療費負担額_公費２(集計.get公費２_出来高医療費負担額());
             個人用帳票データ.set集計_決定前_単位数合計_公費３(集計.get公費３点数合計());
             個人用帳票データ.set集計_決定後_単位数合計_公費３(集計.get後公費３点数合計());
             個人用帳票データ.set集計_決定前_請求額_公費３(集計.get公費３請求額());
             個人用帳票データ.set集計_決定後_請求額_公費３(集計.get後公費３請求額());
-            // 個人用帳票データ.set負担額_公費３(集計.get公費３公費分本人負担額());
+            個人用帳票データ.set集計_負担額_公費３(集計.get公費３公費分本人負担額());
             個人用帳票データ.set集計_決定前_出来高医療費単位数合計_公費３(集計.get公費３出来高点数合計());
             個人用帳票データ.set集計_決定後_出来高医療費単位数合計_公費３(集計.get後公費３出来高点数合計());
             個人用帳票データ.set集計_決定前_出来高医療費請求額_公費３(集計.get公費３出来高請求額());
             個人用帳票データ.set集計_決定後_出来高医療費請求額_公費３(集計.get後公費３出来高請求額());
-            // TODO
-            //個人用帳票データ.set出来高医療費負担額_公費３(集計.get後公費３());
+            個人用帳票データ.set集計_出来高医療費負担額_公費３(集計.get公費３_出来高医療費負担額());
             個人用帳票データ.set集計_再審査回数(integerTOInt(集計.get再審査回数()));
             個人用帳票データ.set集計_過誤回数(integerTOInt(集計.get過誤回数()));
             個人用帳票データ.set集計_審査年月(集計.get審査年月());
@@ -1618,13 +1618,11 @@ public class JukyushaKyufuDaichoEdit {
                 }
             }
             if (1 == i % LIST_SIZE_2) {
-                // 順次番号:99のフォーマット、再審査回数と過誤回数:Z9のフォーマットでセット未設定
                 個人用帳票データ.set明細10(SPACE_1.concat(特別療養List.get(i).get順次番号()).concat(SPACE_2)
                         .concat(特別療養List.get(i).get傷病名()).concat(SPACE_4).concat(new RString(特別療養List.get(i).get再審査回数()))
                         .concat("回").concat(SPACE_3).concat(new RString(特別療養List.get(i).get過誤回数())).concat("回").concat(SPACE_3)
                         .concat(dateFormat年月(特別療養List.get(i).get審査年月())));
                 個人用帳票データ.set明細11(SPACE_5.concat(特別療養List.get(i).get傷病名()));
-                //TO 明細3の設定不完備,識別番号:99のフォーマット未設定
                 個人用帳票データ.set明細12(SPACE_1.concat(特別療養List.get(i).get識別番号()).concat(SPACE_2));
                 個人用帳票データ.set明細13(SPACE_4.concat(単位数).concat(SPACE_4).concat(new RString(特別療養List.get(i).get単位数()))
                         .concat(SPACE_14).concat("【決定後】").concat(SPACE_2).concat(単位数).concat(SPACE_2)
@@ -1672,7 +1670,7 @@ public class JukyushaKyufuDaichoEdit {
             List<KojinyoTyohyoDataKomoku> list特定データ,
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
         for (ShoteiShikkanEntity 所定疾患 : 所定疾患List) {
-            //TO ヘッダー1未設定
+            個人用帳票データ.setヘッダー1(所定疾患.get名称());
             個人用帳票データ.setヘッダー2(new RString("番号").concat("  ").concat("１段：緊急時傷病名")
                     .concat(SPACE_24).concat("治療開始年月日"));
             個人用帳票データ.setヘッダー3(SPACE_5.concat("２段：所定疾患施設療養傷病名")
@@ -1800,7 +1798,12 @@ public class JukyushaKyufuDaichoEdit {
                 個人用帳票データ.set明細1(福祉用具.getサービスコード().concat(SPACE_28)
                         .concat(dateFormat年月日(福祉用具.get福祉用具購入年月日())).concat(SPACE_2).concat(福祉用具.get摘要())
                         .concat(SPACE_17).concat(dateFormat年月(福祉用具.get審査年月())));
-                個人用帳票データ.set明細3(ServiceCategoryShurui.toValue(福祉用具.getサービスコード().substring(0, 2)).get名称());
+                if (!RString.isNullOrEmpty(福祉用具.getサービスコード())
+                        && 福祉用具.getサービスコード().length() > 1) {
+                    個人用帳票データ.set明細3(ServiceCategoryShurui.toValue(福祉用具.getサービスコード().substring(0, 2)).get名称());
+                } else {
+                    個人用帳票データ.set明細3(RString.EMPTY);
+                }
                 個人用帳票データ.set適用1(福祉用具.get福祉用具商品名().concat(SPACE_2).concat(福祉用具.get福祉用具種目コード()));
                 個人用帳票データ.set適用2(福祉用具.get福祉用具製造事業者名());
                 個人用帳票データ.set適用3(福祉用具.get福祉用具販売事業者名().concat(SPACE_2).concat(kingakuFormat(福祉用具.get購入金額().intValue())));
@@ -1908,5 +1911,28 @@ public class JukyushaKyufuDaichoEdit {
 
     private boolean is8161(RString 入力識別番号) {
         return 入力識別番号_8161.equals(入力識別番号);
+    }
+
+    private RString dateFormat(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        return new RDate(date.toString()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
+    }
+
+    private RString dateFormat年月(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        return new FlexibleYearMonth(date.toString()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
+    }
+
+    private RString kingakuFormat(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(date.toString()), 0);
     }
 }
