@@ -822,24 +822,7 @@ public class ServiceRiyohyoInfoDivHandler {
                 || RSTRING_09.equals(利用サービス.get単位数識別().getKey()))) {
             総合事業以外の場合(サービス種類Tmp, 利用サービス);
         }
-
-        if (RSTRING_17.equals(サービス種類Tmp)
-                || RSTRING_67.equals(サービス種類Tmp)
-                || RSTRING_88.equals(サービス種類Tmp)) {
-            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setReadOnly(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setReadOnly(true);
-            div.getBtnCalcMeisaiGokei().setVisible(false);
-            div.getBtnCalcMeisaiGokei().setDisabled(false);
-            div.getBtnBeppyoMeisaiKakutei().setVisible(false);
-            div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(false);
-            
-            div.getBtnCalcMeisai().setVisible(false);
-            div.getBtnCalcGokei().setVisible(false);            
-            div.getBtnBeppyoGokeiKakutei().setDisabled(false);            
-            div.getBtnCancelMeisaiInput().setVisible(false);            
-        }
+        
         if (サービスフラグTmp && 利用サービス
                 != null) {
             div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(false);
@@ -863,6 +846,20 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getBtnCalcMeisai().setDisabled(false);
             div.getBtnCalcMeisaiGokei().setDisabled(true);
             div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
+        }
+        if (RSTRING_17.equals(サービス種類Tmp)
+                || RSTRING_67.equals(サービス種類Tmp)
+                || RSTRING_88.equals(サービス種類Tmp)) {
+            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setReadOnly(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setReadOnly(true);
+//            div.getBtnCalcMeisaiGokei().setDisabled(false);
+//            div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(false);   
+            div.getBtnBeppyoGokeiKakutei().setDisabled(false);
+            div.getBtnCalcMeisai().setDisplayNone(true);
+            div.getBtnCalcGokei().setDisplayNone(true);
+            div.getBtnBeppyoMeisaiKakutei().setDisplayNone(true);
         }
     }
 
