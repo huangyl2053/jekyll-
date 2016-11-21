@@ -47,15 +47,4 @@ public class SaihaqkouTaishouTempEntity implements IDbAccessable {
     @TempTableColumnOrder(11)
     private RString torokuGyomu;
 
-//    private ShikibetsuCode 識別コード;
-//    private LasdecCode 照会先地方公共団体コード;
-//    private SetaiCode 世帯コード;
-//    private YMDHMS 作成日時;
-//    private RString 課税区分減免前;
-//    private RString 課税区分減免後;
-//    private Decimal 合計所得金額;
-//    private Decimal 公的年金収入額;
-//    private Decimal 公的年金所得額;
-//    private Decimal 課税所得額;
-//    private RString 登録業務;
 }

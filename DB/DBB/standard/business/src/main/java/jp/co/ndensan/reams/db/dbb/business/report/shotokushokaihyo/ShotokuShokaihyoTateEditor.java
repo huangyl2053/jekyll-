@@ -291,10 +291,10 @@ public class ShotokuShokaihyoTateEditor implements IShotokuShokaihyoTateEditor {
     }
 
     private boolean set生年月日(FlexibleDate 生年月日) {
-        if (生年月日 != null || !生年月日.isEmpty()) {
-            return true;
+        if (生年月日 == null || 生年月日.isEmpty()) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     private boolean is日本人(List<SetaiInn> 世帯員リスト) {
