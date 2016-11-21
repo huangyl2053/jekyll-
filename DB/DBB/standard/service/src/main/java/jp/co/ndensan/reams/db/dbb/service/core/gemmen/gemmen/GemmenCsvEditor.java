@@ -66,7 +66,7 @@ public class GemmenCsvEditor {
         }
         HokenryoDankaiSettings hokenryoDankaiSettings = HokenryoDankaiSettings.createInstance();
         HokenryoDankaiList 保険料段階リスト = hokenryoDankaiSettings.get保険料段階ListIn(entity.getFukaNendo());
-        if (entity.getHokenryoDankai() != null) {
+        if (!RString.isNullOrEmpty(entity.getHokenryoDankai())) {
             HokenryoDankai 保険料段階 = 保険料段階リスト.getBy段階区分(entity.getHokenryoDankai());
             if (保険料段階 != null) {
                 csvEntity.set保険料段階(保険料段階.get表記());
