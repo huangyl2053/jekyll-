@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRi
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
-import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceManager;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
@@ -241,31 +240,34 @@ public class ServiceRiyohyoInfoDivValidationHandler {
             サービス種類コード = div.getCcdServiceTypeInput().getサービス種類コード();
         }
         for (KaigoJigyoshaShiteiService 介護事業者指定サービス : 介護事業者指定サービスリスト) {
-            if (ServiceCategoryShurui.居宅支援.getコード().equals(
-                    介護事業者指定サービス.getサービス種類コード().value())
-                    && ServiceCategoryShurui.居宅支援.getコード().equals(サービス種類コード)) {
+            if (介護事業者指定サービス.getサービス種類コード().value().equals(サービス種類コード)) {
                 return;
             }
-            if (ServiceCategoryShurui.予防支援.getコード().equals(
-                    介護事業者指定サービス.getサービス種類コード().value())
-                    && ServiceCategoryShurui.予防支援.getコード().equals(サービス種類コード)) {
-                return;
-            }
-            if (ServiceCategoryShurui.地小短外.getコード().equals(
-                    介護事業者指定サービス.getサービス種類コード().value())
-                    && ServiceCategoryShurui.地小短外.getコード().equals(サービス種類コード)) {
-                return;
-            }
-            if (ServiceCategoryShurui.地予小外.getコード().equals(
-                    介護事業者指定サービス.getサービス種類コード().value())
-                    && ServiceCategoryShurui.地予小外.getコード().equals(サービス種類コード)) {
-                return;
-            }
-            if (ServiceCategoryShurui.予防ケア.getコード().equals(
-                    介護事業者指定サービス.getサービス種類コード().value())
-                    && ServiceCategoryShurui.予防ケア.getコード().equals(サービス種類コード)) {
-                return;
-            }
+//            if (ServiceCategoryShurui.居宅支援.getコード().equals(
+//                    介護事業者指定サービス.getサービス種類コード().value())
+//                    && ServiceCategoryShurui.居宅支援.getコード().equals(サービス種類コード)) {
+//                return;
+//            }
+//            if (ServiceCategoryShurui.予防支援.getコード().equals(
+//                    介護事業者指定サービス.getサービス種類コード().value())
+//                    && ServiceCategoryShurui.予防支援.getコード().equals(サービス種類コード)) {
+//                return;
+//            }
+//            if (ServiceCategoryShurui.地小短外.getコード().equals(
+//                    介護事業者指定サービス.getサービス種類コード().value())
+//                    && ServiceCategoryShurui.地小短外.getコード().equals(サービス種類コード)) {
+//                return;
+//            }
+//            if (ServiceCategoryShurui.地予小外.getコード().equals(
+//                    介護事業者指定サービス.getサービス種類コード().value())
+//                    && ServiceCategoryShurui.地予小外.getコード().equals(サービス種類コード)) {
+//                return;
+//            }
+//            if (ServiceCategoryShurui.予防ケア.getコード().equals(
+//                    介護事業者指定サービス.getサービス種類コード().value())
+//                    && ServiceCategoryShurui.予防ケア.getコード().equals(サービス種類コード)) {
+//                return;
+//            }
         }
         validPairs.add(new ValidationMessageControlPair(
                 new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(DbcErrorMessages.事業者サービス種類)));

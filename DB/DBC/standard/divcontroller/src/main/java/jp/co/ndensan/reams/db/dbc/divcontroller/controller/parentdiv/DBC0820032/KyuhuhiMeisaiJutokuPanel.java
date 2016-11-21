@@ -169,7 +169,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      * @return ResponseData
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_Delete(KyuhuhiMeisaiJutokuPanelDiv div) {
-        div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().setVisible(false);
+        div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().setVisible(true);
         getHandler(div).readOnly給付費明細登録(true);
         getHandler(div).disabled給付費明細登録(true);
         getHandler(div).set給付費明細();
@@ -229,10 +229,13 @@ public class KyuhuhiMeisaiJutokuPanel {
                 return ResponseData.of(div).addMessage(message).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
+                ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
                 return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る).respond();
             } else {
                 ResponseData.of(div).respond();
             }
+            
         } else {
             return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る).respond();
         }

@@ -125,7 +125,13 @@ public class ShikyuFushikyuKozaKakuninTorokuProcess extends KozaTorokuProcessBas
             DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity 支給不支給決定, DbWT0001HihokenshaTempEntity 被保険者) {
         builder.set口座名義人(new AtenaKanaMeisho(支給不支給決定.get口座名義人_カナ()));
         builder.set口座名義人漢字(AtenaMeisho.EMPTY);
-        builder.set口座名義人識別コード(new ShikibetsuCode(被保険者.get識別コード()));
+        ShikibetsuCode 識別コード;
+        if (!RString.isNullOrEmpty(被保険者.get識別コード())) {
+            識別コード = new ShikibetsuCode(被保険者.get識別コード());
+        } else {
+            識別コード = ShikibetsuCode.EMPTY;
+        }
+        builder.set口座名義人識別コード(識別コード);
         builder.set口座振替通知書発行済フラグ(false);
         builder.set口座番号(支給不支給決定.get口座番号());
         builder.set口座登録区分(new KozaTorokuKubunCodeValue(new RString(1)));
@@ -142,11 +148,7 @@ public class ShikyuFushikyuKozaKakuninTorokuProcess extends KozaTorokuProcessBas
         builder.set業務固有キー(RString.EMPTY);
         builder.set用途区分(new KozaYotoKubunCodeValue(KozaYotoKubunType.振込口座.getCode()));
         builder.set登録連番(1);
-        if (!RString.isNullOrEmpty(被保険者.get識別コード())) {
-            builder.set識別コード(new ShikibetsuCode(被保険者.get識別コード()));
-        } else {
-            builder.set識別コード(ShikibetsuCode.EMPTY);
-        }
+        builder.set識別コード(識別コード);
         if (ゆうちょコード.equals(支給不支給決定.get金融機関コード())
                 && !RString.isNullOrEmpty(支給不支給決定.get金融機関支店コード())) {
             RString 口座種目 = 支給不支給決定.get口座種目();

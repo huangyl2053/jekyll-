@@ -102,5 +102,14 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
                     int size = manager.get口座振込リストBy検索条件(parameter).records().size();
                     return 0 != size;
                 }
+            },
+    /**
+     * 出力順チェック。
+     */
+    出力順チェック {
+                @Override
+                public boolean apply(DBC8010001MainDiv div) {
+                    return div.getCcdChohyoShutsuryokujun().get出力順ID() != null;
+                }
             }
 }

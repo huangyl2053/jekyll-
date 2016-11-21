@@ -413,9 +413,15 @@ public class ServiceKeikakuHiPanel {
         entity200604Result = getHandler(div).saveサービス計画200604(明細キー, entity200604Result);
         entity200004Result = getHandler(div).saveサービス計画200004(明細キー, entity200004Result);
         償還払ViewStateDB = set証明書フラグ(div, 償還払ViewStateDB, 明細キー, eventName);
-        償還払ViewStateDB.add償還払請求サービス計画200904データResult(entity200904ResultList);
-        償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
-        償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
+        if (entity200904ResultList != null) {
+            償還払ViewStateDB.add償還払請求サービス計画200904データResult(entity200904ResultList);
+        }
+        if (entity200604Result != null) {
+            償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
+        }
+        if (entity200004Result != null) {
+            償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
+        }
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
         return ResponseData.of(div).forwardWithEventName(eventName).respond();
     }

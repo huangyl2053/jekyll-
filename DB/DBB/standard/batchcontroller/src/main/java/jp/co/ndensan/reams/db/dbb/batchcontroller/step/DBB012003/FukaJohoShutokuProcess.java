@@ -62,9 +62,10 @@ public class FukaJohoShutokuProcess extends BatchProcessBase<KarisanteiGakuHenko
         RString 作成処理名 = ShoriName.特徴平準化計算_6月分.get名称();
 
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
-        IKozaSearchKey key = builder.build();
         builder.setサブ業務コード(SubGyomuCode.DBB介護賦課);
         builder.set業務コード(GyomuCode.DB介護保険);
+        builder.set基準日(FlexibleDate.getNowDate());
+        IKozaSearchKey key = builder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         RStringBuilder rStringBuilder = new RStringBuilder();

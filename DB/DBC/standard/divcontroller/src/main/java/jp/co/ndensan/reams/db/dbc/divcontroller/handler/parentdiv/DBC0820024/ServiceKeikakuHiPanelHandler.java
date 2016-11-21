@@ -275,6 +275,13 @@ public class ServiceKeikakuHiPanelHandler {
         row.setRowState(RowState.Added);
         rowList.add(row);
         Collections.sort(rowList, COMPARABLE);
+        Decimal 単位合計 = Decimal.ZERO;
+        for (dgdYichiran_Row item : rowList) {
+            単位合計 = 単位合計.add(item.getDefaultDataName4().getValue());
+        }
+        Decimal 請求額合計 = 単位合計.multiply(div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().getValue());
+        div.getPanelServiceKeikakuhiUp().getTxtGokeiTanyi().setValue(単位合計);
+        div.getPanelServiceKeikakuhiUp().getTxtSeikyugaku().setValue(請求額合計);
         div.getPanelServiceKeikakuhiUp().getDgdYichiran().setDataSource(rowList);
     }
 
@@ -296,6 +303,14 @@ public class ServiceKeikakuHiPanelHandler {
         } else if (RowState.Added != state) {
             row.setRowState(RowState.Modified);
         }
+        List<dgdYichiran_Row> list = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
+        Decimal 単位合計 = Decimal.ZERO;
+        for (dgdYichiran_Row item : list) {
+            単位合計 = 単位合計.add(item.getDefaultDataName4().getValue());
+        }
+        Decimal 請求額合計 = 単位合計.multiply(div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().getValue());
+        div.getPanelServiceKeikakuhiUp().getTxtGokeiTanyi().setValue(単位合計);
+        div.getPanelServiceKeikakuhiUp().getTxtSeikyugaku().setValue(請求額合計);
     }
 
     private FlexibleDate formatRDateToFlexible(RDate date) {

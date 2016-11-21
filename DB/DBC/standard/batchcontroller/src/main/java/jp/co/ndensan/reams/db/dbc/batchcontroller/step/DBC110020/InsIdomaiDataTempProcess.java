@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 異動日毎データ抽出を実行する。
@@ -1062,7 +1061,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         insertEntity.set利用者負担区分コード(STR_1);
         HokenKyufuRitsu 給付率 = 利用者負担.getKyuhuritsu();
         if (給付率 != null) {
-            insertEntity.set給付率(new Decimal(給付率.toString()));
+            insertEntity.set給付率(給付率.getColumnValue());
         }
         FlexibleDate 適用開始年月日 = 利用者負担.getTekiyoKaishiYMD();
         if (適用開始年月日 != null && !適用開始年月日.isEmpty()) {

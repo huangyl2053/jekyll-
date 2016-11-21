@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -141,7 +142,7 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
                 帳票ID.value(),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
-                new RString("56"),
+                RString.FULL_SPACE.concat(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBB.DBB300002.getReportName(),
                 new RString(String.valueOf(pageCnt)),
                 new RString("なし"),
@@ -163,8 +164,14 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
         出力条件.add(get条件(年齢開始, mybatisPrm.getAgeStart()));
         出力条件.add(get条件(年齢終了, mybatisPrm.getAgeEnd()));
         出力条件.add(get条件(年齢基準日, mybatisPrm.getAgeKijunNi().wareki().toDateString()));
-        FlexibleDate 開始生年月日 = new FlexibleDate(mybatisPrm.getSeinengappiYMDStart());
-        FlexibleDate 終了生年月日 = new FlexibleDate(mybatisPrm.getSeinengappiYMDEnd());
+        FlexibleDate 開始生年月日 = FlexibleDate.EMPTY;
+        if (!RString.isNullOrEmpty(mybatisPrm.getSeinengappiYMDStart())) {
+            開始生年月日 = new FlexibleDate(mybatisPrm.getSeinengappiYMDStart());
+        }
+        FlexibleDate 終了生年月日 = FlexibleDate.EMPTY;
+        if (!RString.isNullOrEmpty(mybatisPrm.getSeinengappiYMDEnd())) {
+            終了生年月日 = new FlexibleDate(mybatisPrm.getSeinengappiYMDEnd());
+        }
         出力条件.add(get条件(生年月日開始, 開始生年月日.wareki().toDateString()));
         出力条件.add(get条件(生年月日終了, 終了生年月日.wareki().toDateString()));
         出力条件.add(get条件(選択対象, mybatisPrm.getSentakuTaisho()));

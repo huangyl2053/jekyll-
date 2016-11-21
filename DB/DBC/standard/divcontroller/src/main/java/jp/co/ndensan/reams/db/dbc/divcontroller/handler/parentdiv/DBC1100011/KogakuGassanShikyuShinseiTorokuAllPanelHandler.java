@@ -568,8 +568,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ).modifiedModel();
                 高額合算申請書保持.add高額合算申請書(高額合算申請書);
             } else {
-                高額合算申請書.toEntity().setState(EntityDataState.Modified);
-                高額合算申請書 = 高額合算申請書編集(高額合算申請書, 高額合算申請書保持, 引き継ぎデータ).modifiedModel();
+                高額合算申請書 = 変更判定(高額合算申請書);
                 高額合算申請書保持.add高額合算申請書(高額合算申請書);
             }
         } else if (追加.equals(高額合算申請書状態)) {
@@ -747,7 +746,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .set後期被保険者番号(div.getTxtKokiHihokenshaNo().getValue())
                 .set後期加入期間開始年月日(rDateToFixibleDate(div.getTxtKokiKanyuKikanYMD().getFromValue()))
                 .set後期加入期間終了年月日(rDateToFixibleDate(div.getTxtKokiKanyuKikanYMD().getToValue()))
-                .set支払方法区分(RSTRING_2.equals(高額合算申請書保持.get申請状態()) ? RString.EMPTY
+                .set支払方法区分(RSTRING_2.equals(高額合算申請書保持.get申請状況()) ? RString.EMPTY
                         : div.getCcdShiharaiHohoJoho().getShiharaiHohoRad())
                 .set支払場所(div.getCcdShiharaiHohoJoho().getShiharaiBasho())
                 .set支払期間開始年月日(rDateToFixibleDate(div.getCcdShiharaiHohoJoho().getStartYMD()))
@@ -1480,5 +1479,26 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             return RSTRING_1.padZeroToLeft(INT_2);
         }
         return new RString(高額合算申請書加入歴list.size() + INT_1).padZeroToLeft(INT_2);
+    }
+
+    private KogakuGassanShinseishoRelate 変更判定(KogakuGassanShinseishoRelate 高額合算申請書) {
+        if (高額合算申請書.hasChanged() || 加入歴判定(高額合算申請書.get高額合算申請書加入歴list())) {
+            高額合算申請書 = 高額合算申請書.modifiedModel();
+        }
+        return 高額合算申請書;
+    }
+
+    private boolean 加入歴判定(List<KogakuGassanShinseishoKanyureki> 高額合算申請書加入歴list) {
+        if (高額合算申請書加入歴list == null) {
+            return false;
+        }
+        boolean 加入歴変更flg = false;
+        for (KogakuGassanShinseishoKanyureki item : 高額合算申請書加入歴list) {
+            if (item.hasChanged()) {
+                加入歴変更flg = true;
+                return 加入歴変更flg;
+            }
+        }
+        return 加入歴変更flg;
     }
 }

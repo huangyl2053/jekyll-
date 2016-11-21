@@ -98,7 +98,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         NaiBushoRyouParamter paramter = new NaiBushoRyouParamter();
         被保台帳転出処理_到達日転出予定日翌日の算出(住民異動情報, storeConfigParamter, paramter);
         List<DbT1001HihokenshaDaichoEntity> 被保台帳直近List = JuminIdoRendoShikakuSoshitsu.createInstance().getSearchHihodaicho(entity, 直近);
-        if (!被保台帳転出処理_被保険者処理要否判定(entity, paramter, storeConfigParamter, 被保台帳直近List)) {
+        if (!被保台帳転出処理_被保険者処理要否判定(entity, paramter, storeConfigParamter)) {
             return;
         }
         被保台帳転出処理_被保台帳処理の振分け(entity, 住民異動情報, paramter, storeConfigParamter, 被保台帳直近List);
@@ -297,8 +297,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
     private boolean 被保台帳転出処理_被保険者処理要否判定(
             JuminIdoRendoShikakuTorokuEntity entity,
             NaiBushoRyouParamter paramter,
-            StoreConfigParamter storeConfigParamter,
-            List<DbT1001HihokenshaDaichoEntity> 被保台帳直近List) {
+            StoreConfigParamter storeConfigParamter) {
 
         List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
         RString 喪失事由 = RString.EMPTY;
@@ -311,7 +310,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
                 && Integer.valueOf(paramter.get年齢().toString()) < Integer.valueOf(第２号被保険者基準年齢.toString())) {
 
             JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
-                    被保台帳直近List, entity.get適用除外者台帳EntityList(),
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
                     entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
             return false;
         }
@@ -364,7 +363,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
                     && nullToMin(dbT1001Entity.getShikakuSoshitsuYMD()).equals(naiBushoRyouParamter.get転出予定日翌日())
                     && nullToEmpty(住民異動情報.getShojoTodokedeYMD()).equals(nullToEmpty(dbT1001Entity.getShikakuSoshitsuTodokedeYMD()))) {
                 JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
-                        被保険者台帳EntityList, entity.get適用除外者台帳EntityList(),
+                        entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
                         entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
                 return;
             }
@@ -383,7 +382,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             }
             if (nullToMin(naiBushoRyouParamter.get補正後転出予定日翌日()).isBefore(nullToMin(temparamter.get登録異動日()))) {
                 JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
-                        被保険者台帳EntityList, entity.get適用除外者台帳EntityList(),
+                        entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
                         entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
                 return;
             }
@@ -395,7 +394,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
                 住民異動情報.setTorokuTodokedeYMD(naiBushoRyouParamter.get補正後65歳到達日());
             } else {
                 JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
-                        被保険者台帳EntityList, entity.get適用除外者台帳EntityList(),
+                        entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
                         entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
                 return;
             }
@@ -412,7 +411,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         hihokenshaDaicho喪失更新.setState(EntityDataState.Added);
         dbT1001Dac.save(hihokenshaDaicho喪失更新);
         JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
-                被保険者台帳EntityList, entity.get適用除外者台帳EntityList(),
+                entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
                 entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
     }
 
@@ -445,7 +444,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
                 && nullToMin(dbT1001Entity転出.getShikakuSoshitsuTodokedeYMD()).equals(nullToMin(住民異動情報.getShojoTodokedeYMD()))
                 && flag_ON.equals(dbT1001Entity直近.getJushochiTokureiFlag())) {
             JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
-                    dbT1001Entity転出List, entity.get適用除外者台帳EntityList(),
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
                     entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
         }
         if (被保台帳取得中転出処理_不整合チェック(dbT1001Entity直近, entity, dbT1001Entity転出List)) {
@@ -465,7 +464,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
         被保台帳取得中転出処理_被保台帳生成(dbT1001Entity直近, naiBushoRyouParamter, 住民異動情報, entity,
                 temparamter, dbT1001Entity転出List);
         JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
-                dbT1001Entity転出List, entity.get適用除外者台帳EntityList(),
+                entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
                 entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
     }
 
@@ -620,7 +619,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
                 return true;
             }
             JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
-                    dbT1001Entity直近List, entity.get適用除外者台帳EntityList(),
+                    entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
                     entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
             return true;
         }
@@ -921,7 +920,7 @@ public class JuminIdoRendoShikakuSoshitsuTennyuTsuchiJuri {
             }
         }
         JuminIdoRendoShikakuSoshitsuShiboKyoTu.createInstance().戻り値の編集(entity, RString.EMPTY, RString.EMPTY,
-                listEntity, entity.get適用除外者台帳EntityList(),
+                entity.get被保険者台帳EntityList(), entity.get適用除外者台帳EntityList(),
                 entity.get他市町村住所地特例EntityList(), entity.get介護保険施設入退所EntityList());
         return entity;
     }

@@ -12,9 +12,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.hihokenshajohosoufudatasakuseyi.
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhoreninterface.ConfigKeysKokuhorenSofu;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200011.HokenshaSofuListPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200011.dgHokenshaSofuList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.hihokenshajohosoufudatasakuseyi.HihokenshaJohoSoufuDataSakuseyi;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -60,7 +62,12 @@ public class HokenshaSofuListPanelHandler {
         List<KokuhorenSofuJohoInfo> kokuhorenSofuJohoInfoList = new ArrayList<>();
         HihokenshaJohoSoufuDataSakuseyi 保険者情報送付 = HihokenshaJohoSoufuDataSakuseyi.createInstance();
         List<KokuhorenSofuJohoResult> resultList = 保険者情報送付.getKokuhorenSofuJoho(処理年月);
+        if (resultList == null || resultList.isEmpty()) {
+            throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage().evaluate());
+        }
+
         for (KokuhorenSofuJohoResult 国保連送付情報 : resultList) {
+
             if (isｺｰﾄﾞ(国保連送付情報.get交換情報識別番号())) {
                 KokuhorenSofuJohoInfo kokuhorenSofuJohoInfo = new KokuhorenSofuJohoInfo();
                 kokuhorenSofuJohoInfo.set交換識別番号(国保連送付情報.get交換情報識別番号());
@@ -72,7 +79,9 @@ public class HokenshaSofuListPanelHandler {
             }
         }
         List<dgHokenshaSofuList_Row> gHokenshaSofuListDataSource = new ArrayList<>();
+
         for (KokuhorenSofuJohoInfo model : kokuhorenSofuJohoInfoList) {
+
             gHokenshaSofuListDataSource.add(createdgHokenshaSofuListRow(model));
         }
         div.getBtnHyojisuru().setDisabled(false);

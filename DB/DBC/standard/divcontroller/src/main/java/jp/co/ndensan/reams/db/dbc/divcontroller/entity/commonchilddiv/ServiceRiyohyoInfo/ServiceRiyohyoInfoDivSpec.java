@@ -42,8 +42,12 @@ public enum ServiceRiyohyoInfoDivSpec implements IPredicate<ServiceRiyohyoInfoDi
     サービスコード必須入力チェック {
         @Override
         public boolean apply(ServiceRiyohyoInfoDiv div) {
-            return !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード1())
+            boolean flag = true;
+            if (!div.getCcdServiceCodeInput().isDisplayNone()) {
+                return !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード1())
                     && !RString.isNullOrEmpty(div.getCcdServiceCodeInput().getサービスコード2());
+            }
+            return flag;
         }
     },
     /**

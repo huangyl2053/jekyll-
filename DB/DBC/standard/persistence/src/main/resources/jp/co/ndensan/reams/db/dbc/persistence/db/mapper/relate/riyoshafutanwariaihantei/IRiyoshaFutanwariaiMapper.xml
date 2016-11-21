@@ -1624,6 +1624,7 @@
     </sql>
     <sql id="dbt1001LeqIdoYMD">
         SELECT msu.* FROM rgdb."DbT1001HihokenshaDaicho"  msu WHERE msu."idoYMD"<![CDATA[<=]]>#{判定基準日} AND msu."logicalDeletedFlag"=FALSE
+        AND msu."shikakuShutokuYMD" <![CDATA[<=]]> #{判定基準日} AND (msu."shikakuSoshitsuYMD" <![CDATA[>]]> #{判定基準日} OR msu."shikakuSoshitsuYMD" = '' OR msu."shikakuSoshitsuYMD" is null)
     </sql>
     <sql id="dbt1001DoubleMax">
         SELECT mst."hihokenshaNo",

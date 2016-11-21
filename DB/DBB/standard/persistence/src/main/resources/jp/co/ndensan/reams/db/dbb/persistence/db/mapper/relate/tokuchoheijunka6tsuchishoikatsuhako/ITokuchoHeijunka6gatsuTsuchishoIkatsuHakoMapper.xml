@@ -114,7 +114,7 @@
         FROM
         "DbT2015KeisangoJohoTemp" AS "DbT2015KeisangoJohoTemp"
         INNER JOIN
-        rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','true','true','') AS "Atesaki"
+        rgua."UaFt250FindAtesaki"('DB','DBB','','false','false','','true','true','true','true','') AS "Atesaki"
         ON
         "Atesaki"."shikibetsuCode" = "DbT2015KeisangoJohoTemp"."shikibetsuCode"
         LEFT JOIN
@@ -177,7 +177,7 @@
         FROM
         rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
         INNER JOIN
-        rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','true','true','') AS "Atesaki"
+        rgua."UaFt250FindAtesaki"('DB','DBB','','false','false','','true','true','true','true','') AS "Atesaki"
         ON
         "Atesaki"."shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
         LEFT JOIN

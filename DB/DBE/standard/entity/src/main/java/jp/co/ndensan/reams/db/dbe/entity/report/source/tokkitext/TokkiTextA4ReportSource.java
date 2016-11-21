@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 /**
  * 特記事項A4版のReportSourceです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-340 lishengli
  */
 public class TokkiTextA4ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

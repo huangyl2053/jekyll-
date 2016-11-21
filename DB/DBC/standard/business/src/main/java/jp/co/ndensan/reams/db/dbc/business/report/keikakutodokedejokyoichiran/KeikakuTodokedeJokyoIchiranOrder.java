@@ -26,7 +26,7 @@ public enum KeikakuTodokedeJokyoIchiranOrder implements IReportItems {
     /**
      * 番地コード です。
      */
-    番地コード(new RString("0003"), new RString(""), new RString("atesaki_banchiCode")),
+    番地コード(new RString("0003"), new RString(""), new RString("\"atesaki_banchiCode\"")),
     /**
      * 行政区コード です。
      */

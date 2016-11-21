@@ -39,7 +39,6 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
     private static final int INT_5 = 5;
     private static final int INT_7 = 7;
     private static final int INT_25 = 25;
-    private static final int INT_33 = 33;
     private static final int INT_50 = 50;
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("2");
@@ -286,30 +285,28 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
 
     private RString 生年月日のフォーマット(FlexibleDate 生年月日) {
         RString 住民種別コード = 所得照会票.get住民種別コード();
-        if ((RSTRING_1.equals(住民種別コード) || RSTRING_3.equals(住民種別コード)
-                || is日本人(所得照会票.get世帯員リスト())) && set生年月日(生年月日)) {
+        if (is生年月日flag1(住民種別コード) && set生年月日(生年月日)) {
             return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                     .fillType(FillType.ZERO).toDateString();
         }
-        if ((RSTRING_2.equals(住民種別コード) || RSTRING_4.equals(住民種別コード)
-                || is外国人(所得照会票.get世帯員リスト())) && set生年月日TWO(生年月日)) {
+        if (is生年月日flag2(住民種別コード) && set生年月日(生年月日)) {
             return 生年月日.seireki().toDateString();
         }
         return RString.EMPTY;
     }
 
-    private boolean set生年月日TWO(FlexibleDate 生年月日) {
-        if (生年月日 != null && !生年月日.isEmpty()) {
-            return true;
-        }
-        return false;
+    private boolean is生年月日flag2(RString 住民種別コード) {
+        return RSTRING_2.equals(住民種別コード) || RSTRING_4.equals(住民種別コード)
+                || is外国人(所得照会票.get世帯員リスト());
+    }
+
+    private boolean is生年月日flag1(RString 住民種別コード) {
+        return RSTRING_1.equals(住民種別コード) || RSTRING_3.equals(住民種別コード)
+                || is日本人(所得照会票.get世帯員リスト());
     }
 
     private boolean set生年月日(FlexibleDate 生年月日) {
-        if (生年月日 != null && !生年月日.isEmpty()) {
-            return true;
-        }
-        return false;
+        return 生年月日 != null && !生年月日.isEmpty();
     }
 
     private boolean is日本人(List<SetaiInn> 世帯員リスト) {

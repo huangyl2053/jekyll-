@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShoukaiDataMapbEntity> {
 
     private static final int INT_0 = 0;
-    private static final int INT_1 = 1;
     private static final int INT_6 = 6;
     private static final RString 候補者区分_転入者 = new RString("1");
     private static final RString 候補者区分_住特者 = new RString("2");
@@ -107,8 +106,13 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
         ShotokuShoukaiDataTempEntity entity = new ShotokuShoukaiDataTempEntity();
         entity.setShikibetsuCode(t.getShikibetsuCode());
         entity.setGenLasdecCode(t.getGenLasdecCode());
-        if (t.getZenkokuJushoCode() != null) {
-            entity.setZenkokuJushoCode(t.getZenkokuJushoCode().getColumnValue());
+        if (t.getZenkokuJushoCode() != null && !t.getZenkokuJushoCode().isEmpty()) {
+            entity.setZenkokuJushoCode(t.getZenkokuJushoCode());
+        }
+        if (t.getSoufusenzenkokuJushoCode() != null && !t.getSoufusenzenkokuJushoCode().isEmpty()) {
+            entity.setSoufusenzenkokuJushoCode(t.getSoufusenzenkokuJushoCode().getColumnValue());
+        } else {
+            entity.setSoufusenzenkokuJushoCode(RString.EMPTY);
         }
         entity.setSetaiCode(t.getSetaiCode());
         entity.setHihokenshaNo(t.getHihokenshaNo());

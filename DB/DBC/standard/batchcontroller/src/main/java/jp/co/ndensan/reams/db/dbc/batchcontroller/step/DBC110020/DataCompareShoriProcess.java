@@ -286,11 +286,15 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         if (csvWriter_DBC200074 != null) {
             csvWriter_DBC200074.close();
         }
-        spoolManager_DBC200074.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200074);
+        if (spoolManager_DBC200074 != null) {
+            spoolManager_DBC200074.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200074);
+        }
         if (csvWriter_DBC200010 != null) {
             csvWriter_DBC200010.close();
         }
-        spoolManager_DBC200010.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200010);
+        if (spoolManager_DBC200010 != null) {
+            spoolManager_DBC200010.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200010);
+        }
         returnEntity = new OutputParameter<>();
         JukyushaIdoRenrakuhyoOutFlowEntity flowEntity = new JukyushaIdoRenrakuhyoOutFlowEntity();
         if (outEntity != null) {
@@ -583,7 +587,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (!comparaRString(異動一時2entity.get居宅介護支援事業所番号(), 受給者異動送付.getKyotakuServiceSakuseiKubunCode())) {
+        if (!comparaRString(異動一時2entity.get居宅介護支援事業所番号(), 受給者異動送付.getKyotakuKaigoShienJigyoshoNo())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(計画事業所);
             違う.add(受給者異動送付.getKyotakuKaigoShienJigyoshoNo());
@@ -598,7 +602,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う.add(異動一時2entity.get居宅サービス計画適用開始年月日());
             違う項目.add(違う);
         }
-        if (!comparaRString(異動一時2entity.get居宅サービス計画適用終了年月日(), 受給者異動送付.getKyotakuServiceTekiyoShuryoYMD())) {
+        if (!comparaYMByRString(異動一時2entity.get居宅サービス計画適用終了年月日(), 受給者異動送付.getKyotakuServiceTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(サ計終了日);
             違う.add(受給者異動送付.getKyotakuServiceTekiyoShuryoYMD());
@@ -614,7 +618,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (!comparaDate(異動一時2entity.get訪問通所サービス上限管理適用期間開始年月日(),
+        if (!comparaYM(異動一時2entity.get訪問通所サービス上限管理適用期間開始年月日(),
                 受給者異動送付.getHomonTsushoServiceJogenKanriTekiyoKaishiYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(訪問開始日);
@@ -630,7 +634,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     private void get違う項目1(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
             List<List<RString>> 違う項目) {
-        if (!comparaRString(異動一時2entity.get訪問通所サービス上限管理適用期間終了年月日(),
+        if (!comparaYMByRString(異動一時2entity.get訪問通所サービス上限管理適用期間終了年月日(),
                 受給者異動送付.getHomonTsushoServiceJogenKanriTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(訪問終了日);
@@ -646,7 +650,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う.add(new RString(異動一時2entity.get短期入所サービス支給限度基準額()));
             違う項目.add(違う);
         }
-        if (!comparaDate(異動一時2entity.get短期入所サービス上限管理適用期間開始年月日(),
+        if (!comparaYM(異動一時2entity.get短期入所サービス上限管理適用期間開始年月日(),
                 受給者異動送付.getTankinyushoServiceJogenKanriTekiyoKaishiYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(短期開始日);
@@ -655,7 +659,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (!comparaDate(異動一時2entity.get短期入所サービス上限管理適用期間終了年月日(),
+        if (!comparaYM(異動一時2entity.get短期入所サービス上限管理適用期間終了年月日(),
                 受給者異動送付.getTankinyushoServiceJogenKanriTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(短期終了日);
@@ -727,7 +731,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (異動一時2entity.get給付率() != 受給者異動送付.getKyufuritsu()) {
+        if (!comparaDecimal(異動一時2entity.get給付率(), 受給者異動送付.getKyufuritsu())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(利給付率);
             違う.add(getDecimalRString(受給者異動送付.getKyufuritsu()));
@@ -744,6 +748,10 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
+    }
+
+    private void get違う項目2(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
+            List<List<RString>> 違う項目) {
         if (!comparaRString(異動一時2entity.get適用終了年月日(),
                 受給者異動送付.getTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
@@ -762,18 +770,13 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (異動一時2entity.get負担額() != 受給者異動送付.getFutangaku()) {
+        if (!comparaDecimal(異動一時2entity.get負担額(), 受給者異動送付.getFutangaku())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(標準負担額);
             違う.add(getDecimalRString(受給者異動送付.getFutangaku()));
             違う.add(getDecimalRString(異動一時2entity.get負担額()));
             違う項目.add(違う);
         }
-
-    }
-
-    private void get違う項目2(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
-            List<List<RString>> 違う項目) {
         if (!comparaRString(異動一時2entity.get負担額適用開始年月日(),
                 受給者異動送付.getFutangakuTekiyoKaishiYMD())) {
             List<RString> 違う = new ArrayList<>();
@@ -1729,6 +1732,45 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             return false;
         }
         return date1.equals(date2);
+    }
+
+    private boolean comparaDecimal(Decimal date1, Decimal date2) {
+        if (date1 == null && date2 == null) {
+            return true;
+        }
+        if (date1 == null) {
+            return false;
+        }
+        if (date2 == null) {
+            return false;
+        }
+        return date1.equals(date2);
+    }
+
+    private boolean comparaYM(FlexibleDate date1, FlexibleDate date2) {
+        if (isDateEmpty(date1) && isDateEmpty(date2)) {
+            return true;
+        }
+        if (isDateEmpty(date1)) {
+            return false;
+        }
+        if (isDateEmpty(date2)) {
+            return false;
+        }
+        return date1.getYearMonth().equals(date2.getYearMonth());
+    }
+
+    private boolean comparaYMByRString(RString date1, RString date2) {
+        if (RString.isNullOrEmpty(date1) && RString.isNullOrEmpty(date2)) {
+            return true;
+        }
+        if (RString.isNullOrEmpty(date1)) {
+            return false;
+        }
+        if (RString.isNullOrEmpty(date2)) {
+            return false;
+        }
+        return (new FlexibleDate(date1).getYearMonth().equals(new FlexibleDate(date2).getYearMonth()));
     }
 
     private boolean comparaRString(RString date1, RString date2) {

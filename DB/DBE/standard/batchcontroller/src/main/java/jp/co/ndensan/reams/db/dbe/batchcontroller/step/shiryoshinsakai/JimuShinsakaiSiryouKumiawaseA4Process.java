@@ -78,7 +78,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
     private List<ShinsakaiTaiyosyaJohoEntity> shinsakaiTaiyosyaJohoList;
-    private List<JimuShinsakaishiryoBusiness> jimuShinsakaishiryoBusinessList;
+    private List<JimuShinsakaishiryoBusiness> jimuShinsakaishiryoList;
     private List<ItiziHanteiEntity> itiziHanteiEntityList;
     private List<ShinsakaiSiryoKyotsuEntity> shinsakaiSiryoKyotsuEntityList;
     private int no;
@@ -96,7 +96,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         存在ファイルindex = 0;
         shinsakaiIinJohoList = new ArrayList<>();
         shinsakaiTaiyosyaJohoList = new ArrayList<>();
-        jimuShinsakaishiryoBusinessList = new ArrayList<>();
+        jimuShinsakaishiryoList = new ArrayList<>();
         itiziHanteiEntityList = new ArrayList<>();
         shinsakaiSiryoKyotsuEntityList = new ArrayList<>();
         mapper = getMapper(IJimuShiryoShinsakaiIinMapper.class);
@@ -122,6 +122,8 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
+
+
                     JimuShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA4ReportSource> occuredBreak(
@@ -150,7 +152,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
             }
         }
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
-            JimuShinsakaishiryoA4Report report = new JimuShinsakaishiryoA4Report(jimuShinsakaishiryoBusinessList,
+            JimuShinsakaishiryoA4Report report = new JimuShinsakaishiryoA4Report(jimuShinsakaishiryoList,
                     get一次判定結果票情報(shinseishoKanriNo),
                     get特記事項情報(shinseishoKanriNo),
                     get主治医意見書情報(shinseishoKanriNo),
@@ -171,10 +173,10 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         shinsakaiIinJohoList = mapper.get事務局委員氏名(myBatisParameter);
         count = mapper.get事務局情報件数(myBatisParameter);
         shinsakaiTaiyosyaJohoList = mapper.get事務局情報(myBatisParameter);
-        jimuShinsakaishiryoBusinessList = new ArrayList<>();
+        jimuShinsakaishiryoList = new ArrayList<>();
         for (ShinsakaiTaiyosyaJohoEntity entity : shinsakaiTaiyosyaJohoList) {
             entity.setJimukyoku(true);
-            jimuShinsakaishiryoBusinessList.add(new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count));
+            jimuShinsakaishiryoList.add(new JimuShinsakaishiryoBusiness(paramter, entity, shinsakaiIinJohoList, no, count));
         }
     }
 

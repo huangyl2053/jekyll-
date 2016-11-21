@@ -38,7 +38,7 @@ public class KariHenkoTsuchishoPageBreak extends PageBreaker<KariSanteigakuHenko
     @Override
     public boolean isBreak(ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> currentSource,
             ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> nextSource) {
-        boolean flag = false;
+        boolean flag;
         if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.郵便番号.get項目ID())
                 && isBreak(currentSource.getSource().listLower_2, nextSource.getSource().listLower_2)) {
             flag = true;
@@ -60,7 +60,17 @@ public class KariHenkoTsuchishoPageBreak extends PageBreaker<KariSanteigakuHenko
         } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.地区３.get項目ID())
                 && isBreak(currentSource.getSource().chikuCode3, nextSource.getSource().chikuCode3)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.世帯コード.get項目ID())
+        } else {
+            flag = isBreak1(currentSource, nextSource);
+        }
+        return flag;
+
+    }
+
+    private boolean isBreak1(ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> currentSource,
+            ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> nextSource) {
+        boolean flag;
+        if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.世帯コード.get項目ID())
                 && isBreak(currentSource.getSource().listUpper_4, nextSource.getSource().listUpper_4)) {
             flag = true;
         } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.識別コード.get項目ID())
@@ -75,7 +85,17 @@ public class KariHenkoTsuchishoPageBreak extends PageBreaker<KariSanteigakuHenko
         } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.性別.get項目ID())
                 && isBreak(currentSource.getSource().seibetsuCode, nextSource.getSource().seibetsuCode)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.市町村コード.get項目ID())
+        } else {
+            flag = isBreak2(currentSource, nextSource);
+        }
+        return flag;
+
+    }
+
+    private boolean isBreak2(ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> currentSource,
+            ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> nextSource) {
+        boolean flag = false;
+        if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.市町村コード.get項目ID())
                 && isBreak(currentSource.getSource().hokenshaNo, nextSource.getSource().hokenshaNo)) {
             flag = true;
         } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.被保険者番号.get項目ID())

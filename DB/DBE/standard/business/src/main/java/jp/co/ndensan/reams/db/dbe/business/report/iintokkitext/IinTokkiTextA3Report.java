@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 委員用特記事項A3版のReportクラスです。
+ * 委員用一次判定+特記事項A3版のReportクラスです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-330 lishengli
  */
 public class IinTokkiTextA3Report extends Report<IinTokkiTextA3ReportSource> {
 

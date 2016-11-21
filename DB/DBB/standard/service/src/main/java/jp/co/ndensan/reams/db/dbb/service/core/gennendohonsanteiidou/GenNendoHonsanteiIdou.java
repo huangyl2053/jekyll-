@@ -183,6 +183,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private static final RString 特別徴収_厚生労働省 = new RString("1");
     private static final RString 特別徴収_地共済 = new RString("2");
     private static final RString 普通徴収 = new RString("3");
+    private static final RString 処理対象なし = new RString("処理対象なし");
 
     /**
      * コンストラクタです
@@ -376,7 +377,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     public void createIdoTriggerTemp(RString 異動賦課で同時に計算する特徴捕捉分, RString 特徴捕捉対象者の依頼金額計算) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         mapper.createTmpIdoTrigger();
-        if (RString.isNullOrEmpty(異動賦課で同時に計算する特徴捕捉分)) {
+        if (処理対象なし.equals(異動賦課で同時に計算する特徴捕捉分)) {
             mapper.insert異動Tempと口座異動Tempをマージ();
         } else if (HosokushaIraiKingaku.通常の異動賦課に含めて計算する.getコード().equals(特徴捕捉対象者の依頼金額計算)) {
             mapper.insert通常の異動賦課に含めて計算する();
@@ -554,15 +555,14 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             ShichosonSecurityJoho 市町村セキュリティ情報, RString 合併情報区分) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null
-                && DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
-            if (合併情報区分_合併あり.equals(合併情報区分)) {
-                HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
-                List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格の情報, 賦課年度);
-                TsukibetsuRankuEntity rankuEntity = new TsukibetsuRankuEntity();
-                rankuEntity.setHihokenshaNo(資格の情報.get(0).get被保険者番号());
-                set月別ランク(rankuEntity, 月別ランク情報);
-                mapper.insertTmpTsukibetsuRanku(rankuEntity);
-            }
+                && DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())
+                && 合併情報区分_合併あり.equals(合併情報区分)) {
+            HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
+            List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格の情報, 賦課年度);
+            TsukibetsuRankuEntity rankuEntity = new TsukibetsuRankuEntity();
+            rankuEntity.setHihokenshaNo(資格の情報.get(0).get被保険者番号());
+            set月別ランク(rankuEntity, 月別ランク情報);
+            mapper.insertTmpTsukibetsuRanku(rankuEntity);
         }
     }
 
@@ -623,6 +623,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         List<SetaiHaakuEntity> 世帯員把握情報 = mapper.get世帯員把握情報();
         mapper.createTmpSetaiHaaku();
+        mapper.createDbT2002FukaJohoTemp();
         for (SetaiHaakuEntity setaiHaakuEntity : 世帯員把握情報) {
             mapper.insertTmpSetaiHaaku(setaiHaakuEntity);
         }
@@ -639,7 +640,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             YMDHMS 調定日時,
             RString 算定月) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
-        mapper.createDbT2002FukaJohoTemp();
 
         ShunoKamokuAuthority auth = InstanceProvider.create(ShunoKamokuAuthority.class);
         KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();
