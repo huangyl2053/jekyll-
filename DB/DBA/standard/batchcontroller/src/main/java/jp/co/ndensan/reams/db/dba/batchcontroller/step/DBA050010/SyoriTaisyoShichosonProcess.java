@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA050010;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.syoritaisyoshichoson.SyoriTaisyoShichoson;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba050010.JuminkirokuIdojohoTorokuKoikiProcessParameter;
@@ -108,9 +107,9 @@ public class SyoriTaisyoShichosonProcess extends BatchProcessBase<DbT7022ShoriDa
 
     @Override
     protected void afterExecute() {
-        if (business.getlist() == null) {
-            business.getlist() = new ArrayList<>();
-        }
+//        if (business.getlist() == null) {
+//            business.getlist() = new ArrayList<>();
+//        }
         DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
         for (int i = 0; i < processParameter.getShichosonCode().size(); i++) {
             if (!business.getlist().contains(processParameter.getShichosonCode().get(i))) {
