@@ -23,7 +23,6 @@ public class DelSaishoriKogakuTmpProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void beforeExecute() {
-        super.beforeExecute();
         mapper = getMapper(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
     }
 

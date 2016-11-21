@@ -16,11 +16,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutais
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakusogojigyoservicehihanteierrorichiran.KogakuSogoJigyoServicehiHanteiErrorIchiranSource;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakusogojigyoservicehihanteierrorlist.KogakuSogoJigyoServicehiHanteiErrorListEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -29,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -71,12 +66,11 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
     private static final Code EUC_CODE = new Code("0003");
     private static final RString EUC_CODE_NAME = new RString("被保険者番号");
     private static final RString 作成 = new RString("作成");
-    private static final int INT_0 = 0;
-    private static final int INT_1 = 1;
-    private static final int INT_2 = 2;
-    private static final int INT_3 = 3;
-    private static final int INT_4 = 4;
-    private static final int INT_5 = 5;
+    private static final RString TEXT_被保険者番号 = new RString("被保険者番号");
+    private static final RString TEXT_識別コード = new RString("識別コード");
+    private static final RString TEXT_基準年月日 = new RString("基準年月日");
+    private static final RString TEXT_エラーコード = new RString("エラーコード");
+    private static final RString TEXT_世帯コード = new RString("世帯コード");
 
     private CsvWriter<KogakuServicehiHanteiErrorCSVEntity> eucCsvWriter;
     @BatchWriter
@@ -87,7 +81,6 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
     private FileSpoolManager manager;
     private Association 地方公共団体;
     private List<PersonalData> personalDataList;
-    private List<RString> 出力項目リスト;
     private List<RString> 改頁項目リスト;
     private List<KogakuSogoJigyoServicehiHanteiErrorListEntity> errorList;
     private int 連番;
@@ -99,15 +92,16 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
 
     @Override
     protected void initialize() {
+        並び順の１件目 = TEXT_被保険者番号;
+        並び順の２件目 = TEXT_識別コード;
+        並び順の３件目 = TEXT_基準年月日;
+        並び順の４件目 = TEXT_エラーコード;
+        並び順の５件目 = TEXT_世帯コード;
         personalDataList = new ArrayList<>();
         改頁項目リスト = new ArrayList<>();
-        出力項目リスト = new ArrayList<>();
         errorList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         連番 = 1;
-        if (!RString.isNullOrEmpty(parameter.get出力順ID())) {
-            get出力順(parameter.get出力順ID());
-        }
     }
 
     @Override
@@ -176,36 +170,11 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
         csvEntity.set審査年月(format審査年月(parameter.get処理年月()));
         csvEntity.set市町村コード(getColumnValue(entity.get市町村コード()));
         csvEntity.set市町村名称(地方公共団体.get市町村名());
-        if (INT_0 < 出力項目リスト.size()) {
-            csvEntity.set出力順1(出力項目リスト.get(INT_0));
-            if (INT_0 < 改頁項目リスト.size()) {
-                csvEntity.set改ページ1(改頁項目リスト.get(INT_0));
-            }
-        }
-        if (INT_1 < 出力項目リスト.size()) {
-            csvEntity.set出力順2(出力項目リスト.get(INT_1));
-            if (INT_1 < 改頁項目リスト.size()) {
-                csvEntity.set改ページ2(改頁項目リスト.get(INT_1));
-            }
-        }
-        if (INT_2 < 出力項目リスト.size()) {
-            csvEntity.set出力順3(出力項目リスト.get(INT_2));
-            if (INT_2 < 改頁項目リスト.size()) {
-                csvEntity.set改ページ3(改頁項目リスト.get(INT_2));
-            }
-        }
-        if (INT_3 < 出力項目リスト.size()) {
-            csvEntity.set出力順4(出力項目リスト.get(INT_3));
-            if (INT_3 < 改頁項目リスト.size()) {
-                csvEntity.set改ページ4(改頁項目リスト.get(INT_3));
-            }
-        }
-        if (INT_4 < 出力項目リスト.size()) {
-            csvEntity.set出力順5(出力項目リスト.get(INT_4));
-            if (INT_4 < 改頁項目リスト.size()) {
-                csvEntity.set改ページ5(改頁項目リスト.get(INT_4));
-            }
-        }
+        csvEntity.set出力順1(並び順の１件目);
+        csvEntity.set出力順2(並び順の２件目);
+        csvEntity.set出力順3(並び順の３件目);
+        csvEntity.set出力順4(並び順の４件目);
+        csvEntity.set出力順5(並び順の５件目);
         csvEntity.setNo(new RString(連番));
         csvEntity.set被保険者番号(getColumnValue(entity.get被保険者番号()));
         FlexibleYearMonth サービス提供年月 = entity.getサービス提供年月();
@@ -241,35 +210,6 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
         return 審査年月.wareki().firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
-    }
-
-    private void get出力順(RString 出力順ID) {
-        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, 帳票分類ID, Long.valueOf(出力順ID.toString()));
-        if (outputOrder == null || outputOrder.get設定項目リスト() == null) {
-            return;
-        }
-        int i = INT_1;
-        for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
-            if (i <= INT_5) {
-                出力項目リスト.add(setSortItem.get項目名());
-                if (setSortItem.is改頁項目()) {
-                    改頁項目リスト.add(setSortItem.get項目名());
-                }
-                if (i == INT_1) {
-                    並び順の１件目 = setSortItem.get項目名();
-                } else if (i == INT_2) {
-                    並び順の２件目 = setSortItem.get項目名();
-                } else if (i == INT_3) {
-                    並び順の３件目 = setSortItem.get項目名();
-                } else if (i == INT_4) {
-                    並び順の４件目 = setSortItem.get項目名();
-                } else if (i == INT_5) {
-                    並び順の５件目 = setSortItem.get項目名();
-                }
-            }
-            i = i + INT_1;
-        }
     }
 
 }

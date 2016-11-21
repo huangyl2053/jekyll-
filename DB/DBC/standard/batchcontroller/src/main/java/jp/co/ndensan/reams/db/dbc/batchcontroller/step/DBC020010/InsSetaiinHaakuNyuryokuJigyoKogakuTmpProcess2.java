@@ -37,7 +37,7 @@ public class InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess2 extends BatchProcessB
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tableWriter;
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter tempSetaiinShotokuHanteiMeisaiTableWriter;
+    private BatchEntityCreatedTempTableWriter temshotokuHanteiMeisaiTableWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -47,7 +47,7 @@ public class InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess2 extends BatchProcessB
     @Override
     protected void createWriter() {
         tableWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員把握, TempSetaiinHaakuNyuryokuEntity.class);
-        tempSetaiinShotokuHanteiMeisaiTableWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員所得判定明細一時,
+        temshotokuHanteiMeisaiTableWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員所得判定明細一時,
                 TempSetaiinShotokuHanteiEntity.class);
     }
 
@@ -86,7 +86,7 @@ public class InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess2 extends BatchProcessB
 
     @Override
     protected void afterExecute() {
-        tempSetaiinShotokuHanteiMeisaiTableWriter.getInsertCount();
+        temshotokuHanteiMeisaiTableWriter.getInsertCount();
     }
 
     private boolean isNullOrEntity(FlexibleDate date) {

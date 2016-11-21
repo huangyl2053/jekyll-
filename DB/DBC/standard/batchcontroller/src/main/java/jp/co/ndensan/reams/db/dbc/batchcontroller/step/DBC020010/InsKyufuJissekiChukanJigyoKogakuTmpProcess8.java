@@ -219,6 +219,11 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
                         || arg0.get基準収入額適用管理一時() == null) {
                     return -1;
                 }
+                if (arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD() == null
+                        || arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD() == null) {
+                    return arg0.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue().
+                            compareTo(arg1.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue());
+                }
                 if (arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD().
                         compareTo(arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD()) == 0) {
                     return arg0.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue().
@@ -483,23 +488,23 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         if (作成区分_取消.equals(給付実績中間.getKyufuSakuseiKubunCode())) {
             return Decimal.ZERO;
         }
-        return 給付実績中間.getServiceHiyougakuGokei().
-                add(給付実績中間.getServiceHiyougakuGokei()).
-                add(給付実績中間.getHokenSeikyugaku()).
-                add(給付実績中間.getHokenDekidakaSeikyugaku()).
-                add(給付実績中間.getHokenDekidakaIryohiRiyoshaFutangaku()).
-                add(給付実績中間.getKohi1Seikyugaku()).
-                add(給付実績中間.getKohi1HonninFutangaku()).
-                add(給付実績中間.getKohi1DekidakaSeikyugaku()).
-                add(給付実績中間.getKohi1DekidakaIryohiRiyoshaFutangaku()).
-                add(給付実績中間.getKohi2Seikyugaku()).
-                add(給付実績中間.getKohi2HonninFutangaku()).
-                add(給付実績中間.getKohi2DekidakaSeikyugaku()).
-                add(給付実績中間.getKohi2DekidakaIryohiRiyoshaFutangaku()).
-                add(給付実績中間.getKohi3Seikyugaku()).
-                add(給付実績中間.getKohi3HonninFutangaku()).
-                add(給付実績中間.getKohi3DekidakaSeikyugaku()).
-                add(給付実績中間.getKohi3DekidakaIryohiRiyoshaFutangaku());
+        return nullToZero(給付実績中間.getServiceHiyougakuGokei()).
+                add(nullToZero(給付実績中間.getServiceHiyougakuGokei())).
+                add(nullToZero(給付実績中間.getHokenSeikyugaku())).
+                add(nullToZero(給付実績中間.getHokenDekidakaSeikyugaku())).
+                add(nullToZero(給付実績中間.getHokenDekidakaIryohiRiyoshaFutangaku())).
+                add(nullToZero(給付実績中間.getKohi1Seikyugaku())).
+                add(nullToZero(給付実績中間.getKohi1HonninFutangaku())).
+                add(nullToZero(給付実績中間.getKohi1DekidakaSeikyugaku())).
+                add(nullToZero(給付実績中間.getKohi1DekidakaIryohiRiyoshaFutangaku())).
+                add(nullToZero(給付実績中間.getKohi2Seikyugaku())).
+                add(nullToZero(給付実績中間.getKohi2HonninFutangaku())).
+                add(nullToZero(給付実績中間.getKohi2DekidakaSeikyugaku())).
+                add(nullToZero(給付実績中間.getKohi2DekidakaIryohiRiyoshaFutangaku())).
+                add(nullToZero(給付実績中間.getKohi3Seikyugaku())).
+                add(nullToZero(給付実績中間.getKohi3HonninFutangaku())).
+                add(nullToZero(給付実績中間.getKohi3DekidakaSeikyugaku())).
+                add(nullToZero(給付実績中間.getKohi3DekidakaIryohiRiyoshaFutangaku()));
     }
 
     private Decimal get総合事業分サービス費用合計を算出(TempKyufujissekiTyukannJigyoEntity 給付実績中間) {

@@ -76,9 +76,6 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3054KogakuKyufuTaishoshaMeisaiEntity
      */
     public void save高額介護サービス費給付対象者明細(DbT3054KogakuKyufuTaishoshaMeisaiEntity entity) {
-        if (!entity.hasChanged()) {
-            return;
-        }
         this.dbt3054Dac.save(entity);
     }
 
@@ -88,9 +85,6 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3056KogakuShikyuShinseiEntity
      */
     public void save高額介護サービス費支給申請(DbT3056KogakuShikyuShinseiEntity entity) {
-        if (!entity.hasChanged()) {
-            return;
-        }
         this.dbt3056Dac.save(entity);
     }
 
@@ -100,9 +94,6 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3057KogakuShikyuHanteiKekkaEntity
      */
     public void save高額介護サービス費支給判定結果(DbT3057KogakuShikyuHanteiKekkaEntity entity) {
-        if (!entity.hasChanged()) {
-            return;
-        }
         this.dbt3057Dac.save(entity);
     }
 
@@ -112,9 +103,6 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3058KogakuShikyuShinsaKetteiEntity
      */
     public void save高額介護サービス費支給審査決定(DbT3058KogakuShikyuShinsaKetteiEntity entity) {
-        if (!entity.hasChanged()) {
-            return;
-        }
         this.dbt3058Dac.insert(entity);
     }
 
@@ -124,9 +112,6 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3055KogakuKyufuTaishoshaGokeiEntity
      */
     public void save高額介護サービス費給付対象者合計(DbT3055KogakuKyufuTaishoshaGokeiEntity entity) {
-        if (!entity.hasChanged()) {
-            return;
-        }
         this.dbt3055Dac.save(entity);
     }
 
@@ -136,9 +121,6 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity
      */
     public void save事業高額介護サービス費給付対象者明細(DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity) {
-        if (!entity.hasChanged()) {
-            return;
-        }
         this.dbt3108Dac.save(entity);
     }
 
@@ -148,9 +130,6 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3110JigyoKogakuShikyuShinseiEntity
      */
     public void save事業高額介護サービス費支給申請(DbT3110JigyoKogakuShikyuShinseiEntity entity) {
-        if (!entity.hasChanged()) {
-            return;
-        }
         this.dbt3110Dac.save(entity);
     }
 
@@ -160,9 +139,6 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3111JigyoKogakuShikyuHanteiKekkaEntity
      */
     public void save事業高額介護サービス費支給判定結果(DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity) {
-        if (!entity.hasChanged()) {
-            return;
-        }
         this.dbt3111Dac.save(entity);
     }
 
@@ -172,9 +148,6 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3112KogakuShikyuShinsaKetteiEntity
      */
     public void save事業高額介護サービス費支給審査決定(DbT3112KogakuShikyuShinsaKetteiEntity entity) {
-        if (!entity.hasChanged()) {
-            return;
-        }
         this.dbt3112Dac.save(entity);
     }
 
@@ -184,9 +157,6 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity
      */
     public void save事業高額介護サービス費給付対象者合計(DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity entity) {
-        if (!entity.hasChanged()) {
-            return;
-        }
         this.dbt3109Dac.save(entity);
     }
 }
