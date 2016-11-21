@@ -371,76 +371,6 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtKyufuJissekiListHihokenshaNo() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListHihokenshaNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListHihokenshaNo(TextBox txtKyufuJissekiListHihokenshaNo) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListHihokenshaNo(txtKyufuJissekiListHihokenshaNo);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuJissekiListJuminShubetsu() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListJuminShubetsu();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListJuminShubetsu(TextBox txtKyufuJissekiListJuminShubetsu) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListJuminShubetsu(txtKyufuJissekiListJuminShubetsu);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuJissekiListYokaigodo() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListYokaigodo();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListYokaigodo(TextBox txtKyufuJissekiListYokaigodo) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListYokaigodo(txtKyufuJissekiListYokaigodo);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtKyufuJissekiListNinteiYukoKikan() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListNinteiYukoKikan();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListNinteiYukoKikan(TextBoxDateRange txtKyufuJissekiListNinteiYukoKikan) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListNinteiYukoKikan(txtKyufuJissekiListNinteiYukoKikan);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuJissekiListName() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListName();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListName(TextBox txtKyufuJissekiListName) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListName(txtKyufuJissekiListName);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuJissekiListSeibetsu() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListSeibetsu();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListSeibetsu(TextBox txtKyufuJissekiListSeibetsu) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListSeibetsu(txtKyufuJissekiListSeibetsu);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuJissekiListSeinengappi() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListSeinengappi();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListSeinengappi(TextBox txtKyufuJissekiListSeinengappi) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListSeinengappi(txtKyufuJissekiListSeinengappi);
-    }
-
-    @JsonIgnore
     public DataIdoPanelDiv getDataIdoPanel() {
         return this.getKyufuJissekiListPanel().getDataIdoPanel();
     }
@@ -461,16 +391,6 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnMae() {
-        return this.getKyufuJissekiListPanel().getDataIdoPanel().getBtnMae();
-    }
-
-    @JsonIgnore
-    public void  setBtnMae(Button btnMae) {
-        this.getKyufuJissekiListPanel().getDataIdoPanel().setBtnMae(btnMae);
-    }
-
-    @JsonIgnore
     public Button getBtnTsugi() {
         return this.getKyufuJissekiListPanel().getDataIdoPanel().getBtnTsugi();
     }
@@ -478,6 +398,16 @@ public class KyufuJissekiShokaiDiv extends Panel {
     @JsonIgnore
     public void  setBtnTsugi(Button btnTsugi) {
         this.getKyufuJissekiListPanel().getDataIdoPanel().setBtnTsugi(btnTsugi);
+    }
+
+    @JsonIgnore
+    public Button getBtnMae() {
+        return this.getKyufuJissekiListPanel().getDataIdoPanel().getBtnMae();
+    }
+
+    @JsonIgnore
+    public void  setBtnMae(Button btnMae) {
+        this.getKyufuJissekiListPanel().getDataIdoPanel().setBtnMae(btnMae);
     }
 
     @JsonIgnore
