@@ -673,7 +673,7 @@
         SELECT 
          <include refid="allColumns_JukyushaIdoRenrakuhyoTemp"/>,
          <include refid="allColumns_IdouTemp2" />
-         FROM rgdb."IdouTemp2"
+         FROM "IdouTemp2"
          FULL JOIN "JukyushaIdoRenrakuhyoTemp"
          ON "IdouTemp2"."被保険者番号" = "JukyushaIdoRenrakuhyoTemp"."hiHokenshaNo"
          ORDER BY "IdouTemp2". "被保険者番号" ASC
