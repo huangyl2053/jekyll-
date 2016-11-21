@@ -74,6 +74,7 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     private static final RString INDEX_0 = new RString("0");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
+    private static final int INT_6 = 6;
     private static final int INT_9 = 9;
     private static final int INT_10 = 10;
     private static final int INT_15 = 15;
@@ -130,6 +131,7 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     private RString 送付先住所コード = RString.EMPTY;
     private SetaiCode 世帯コード = SetaiCode.EMPTY;
     private RString 候補者区分 = RString.EMPTY;
+    private RString 現住所コード = RString.EMPTY;
     private List<SetaiInn> 世帯員リスト;
 
     @Override
@@ -178,9 +180,10 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     @Override
     protected void process(ShotokuShoukaiDataTempEntity t) {
         所得照会票データ = t;
-        if (送付先住所コード.equals(所得照会票データ.getZenkokuJushoCode())
+        if (送付先住所コード.equals(所得照会票データ.getSoufusenzenkokuJushoCode())
                 && 世帯コード.equals(所得照会票データ.getSetaiCode())
-                && 候補者区分.equals(所得照会票データ.getKouhoshakubun())) {
+                && 候補者区分.equals(所得照会票データ.getKouhoshakubun())
+                && 現住所コード.equals(所得照会票データ.getZenkokuJushoCode())) {
             set世帯員();
         } else if (世帯員リスト.isEmpty()) {
             所得照会票データbefore = t;
@@ -220,9 +223,10 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     }
 
     private void setKey() {
-        送付先住所コード = 所得照会票データ.getZenkokuJushoCode();
+        送付先住所コード = 所得照会票データ.getSoufusenzenkokuJushoCode();
         世帯コード = 所得照会票データ.getSetaiCode();
         候補者区分 = 所得照会票データ.getKouhoshakubun();
+        現住所コード = 所得照会票データ.getZenkokuJushoCode();
     }
 
     private void set世帯員() {
@@ -339,6 +343,12 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     private void set所得照会先(NushiJuminJohoResult result) {
         ICityAtesakiFinder atesakiFinder = CityAtesakiService.createCityAtesakiFinder();
         LasdecCode 全国住所コード = LasdecCode.EMPTY;
+        if (所得照会票データbefore.getZenkokuJushoCode() != null) {
+            RString ZenkokuJushoCode = 所得照会票データbefore.getZenkokuJushoCode().trim();
+            if (ZenkokuJushoCode.length() >= INT_6) {
+                全国住所コード = new LasdecCode(所得照会票データbefore.getZenkokuJushoCode().substring(INT_0, INT_6));
+            }
+        }
         ShichosonAtesaki atesaki = atesakiFinder.get市町村宛先(全国住所コード, SofusakiGroup.所得照会関連.getCode());
         YubinNo 郵便番号 = YubinNo.EMPTY;
         RString 住所 = RString.EMPTY;

@@ -97,6 +97,8 @@ public class ShotokushokaihyoHakkoIchiranSource implements IReportSource {
     public RString idoYMD;
     @ReportItem(name = "zenjushoCode ", length = 10, order = 39)
     public RString zenjushoCode;
+    @ReportItem(name = "kouhoshakubun ", length = 10, order = 39)
+    public RString kouhoshakubun;
 
     /**
      * ReportSourceFields
