@@ -1337,7 +1337,22 @@
         DELETE FROM "UrT0705ChoteiKyotsu_work"
     </delete>
 
+    <delete id="deleteUrT0706ChoteigakuUchiwake_work">
+        drop table if exists "UrT0706ChoteigakuUchiwake_work"
+    </delete>
     
+    <delete id="deleteUrT0772KamokubetsuKoyuJoho_work">
+        drop table if exists "UrT0772KamokubetsuKoyuJoho_work"
+    </delete>
+    
+    <delete id="deleteUrShunoIdWork_2">
+        drop table if exists "ShunoIdWork_2"
+    </delete>
+    
+    <delete id="deleteUrT0707ChoteiJokyo_work">
+        drop table if exists "UrT0707ChoteiJokyo_work"
+    </delete>
+       
     <resultMap id="ResultMap_資格喪失" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.ShikakuFukaResultEntity" autoMapping="true">
         <id  column="shikakuSousitu_hihokenshaNo"/>
         <id  column="dbT2002Fuka_choteiNendo"/>
