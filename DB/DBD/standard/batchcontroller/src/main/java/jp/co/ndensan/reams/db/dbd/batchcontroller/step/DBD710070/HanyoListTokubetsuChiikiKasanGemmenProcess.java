@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710060.HanyoListShakaiFukushiHojinKeigenProcess;
 import jp.co.ndensan.reams.db.dbd.business.report.HanyoListTokubetsuChiikiKasanGemmenOrderby;
 import jp.co.ndensan.reams.db.dbd.definition.core.hanyolisttokubetsuchiikikasangemmen.TokubetsuChiikiKasanGemmenCsvEnumEntity;
-import jp.co.ndensan.reams.db.dbd.definition.core.hanyorisutoshakaifukushihojinkeigen.ShakaiFukushiHojinKeigenCsvEnumEntity;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710070.HanyoListTokubetsuChiikiKasanGemmenProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolisttokubetsuchiikikasangemmen.TokubetsuChiikiKasanGemmenEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolisttokubetsuchiikikasangemmen.TokubetsuChiikiKasanGemmenEucCsvEntity;
@@ -30,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.ShutsuryokuKomok
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.hanyolist.HanyoListReportSource;
-import jp.co.ndensan.reams.db.dbz.service.core.hanyolist.HanyoListReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
@@ -206,7 +203,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         int index = 0;
         for (TokubetsuChiikiKasanGemmenCsvEnumEntity e : TokubetsuChiikiKasanGemmenCsvEnumEntity.values()) {
             RString 項目内容new = RString.EMPTY;
-            RString get項目名称 = e.get名称().substring(3);
+            RString get項目名称 = e.get名称().substring("get".length());
             Class clazz = eucCsvEntity.getClass();
             Method getMethod;
             try {
@@ -250,7 +247,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             // TODO : 出力項目が選択できるようになったら下を採用
             int index = 0;
             for (TokubetsuChiikiKasanGemmenCsvEnumEntity e : TokubetsuChiikiKasanGemmenCsvEnumEntity.values()) {
-                RString get項目名称 = e.get名称().substring(3);
+                RString get項目名称 = e.get名称().substring("get".length());
                 帳票出力とCSV出力編集new(index, hanyoListShutsuryokuKomoku, get項目名称);
                 index++;
             }

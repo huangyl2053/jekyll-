@@ -124,7 +124,10 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         }
         source.listIchiranhyoUpper_7 = item.getShujiiCode();
         source.listIchiranhyoUpper_8 = item.getShujiiKana();
-        RString chosainShikaku = item.getChosainShikaku().replace(" ", "").trim();
+        RString chosainShikaku = item.getChosainShikaku();
+        if (chosainShikaku != null) {
+            chosainShikaku = chosainShikaku.replace(" ", "").trim();
+        }
         source.listIchiranhyoUpper_9 = chosainShikaku;
         if (chosainShikaku != null && !chosainShikaku.isNullOrEmpty()) {
             source.listIchiranhyoUpper_10 = Sikaku.toValue(chosainShikaku).get名称();

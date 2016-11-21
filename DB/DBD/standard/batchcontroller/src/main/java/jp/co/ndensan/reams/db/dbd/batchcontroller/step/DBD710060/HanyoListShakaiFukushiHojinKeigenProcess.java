@@ -201,7 +201,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         int index = 0;
         for (ShakaiFukushiHojinKeigenCsvEnumEntity e : ShakaiFukushiHojinKeigenCsvEnumEntity.values()) {
             RString 項目内容new = RString.EMPTY;
-            RString get項目名称 = e.get名称().substring(3);
+            RString get項目名称 = e.get名称().substring("get".length());
             Class clazz = eucCsvEntity.getClass();
             Method getMethod;
             try {
@@ -245,7 +245,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
             // TODO : 出力項目が選択できるようになったら下を採用
             int index = 0;
             for (ShakaiFukushiHojinKeigenCsvEnumEntity e : ShakaiFukushiHojinKeigenCsvEnumEntity.values()) {
-                RString get項目名称 = e.get名称().substring(3);
+                RString get項目名称 = e.get名称().substring("get".length());
                 帳票出力とCSV出力編集new(index, hanyoListShutsuryokuKomoku, get項目名称);
                 index++;
             }
