@@ -782,12 +782,12 @@ public class TokuteiShinryohiPanelHandler {
     private void resetRenban2(dgdTokuteiShinryohi_Row row, List<dgdTokuteiShinryohi_Row> list) {
         int id = row.getId();
         if (id != 0) {
-            RString deletedRenban = row.getDefaultDataName6();
+            RString deletedRenban = row.getDefaultDataName7();
             RString mid;
             for (dgdTokuteiShinryohi_Row resetRow : list) {
                 if (id - resetRow.getId() == 1) {
-                    mid = resetRow.getDefaultDataName6();
-                    resetRow.setDefaultDataName6(deletedRenban);
+                    mid = resetRow.getDefaultDataName7();
+                    resetRow.setDefaultDataName7(deletedRenban);
                     id = id - 1;
                     deletedRenban = mid;
                 }
