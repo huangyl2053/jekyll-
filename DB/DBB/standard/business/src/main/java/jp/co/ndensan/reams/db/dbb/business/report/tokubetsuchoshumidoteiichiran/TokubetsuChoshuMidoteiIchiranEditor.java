@@ -127,7 +127,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     }
 
     private void set作成日時(TokubetsuChoshuMidoteiIchiranSource source) {
-        source.printTimeStamp = DateConverter.getSakuseiYmhm();
+        source.printTimeStamp = DateConverter.getSakuseiYMD();
     }
 
     private void set導入団体コード(TokubetsuChoshuMidoteiIchiranSource source) {
