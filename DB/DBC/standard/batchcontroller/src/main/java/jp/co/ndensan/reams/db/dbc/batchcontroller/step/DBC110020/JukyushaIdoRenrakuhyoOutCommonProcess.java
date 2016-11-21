@@ -1168,6 +1168,83 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
     }
 
     /**
+     * 異動一時2By二次予防パターン1設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 二次予防 DbT3100NijiYoboJigyoTaishoshaEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By二次予防パターン1(IdoTblTmpEntity insertEntity,
+            DbT3100NijiYoboJigyoTaishoshaEntity 二次予防, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        insertEntity.set二次予防事業区分コード(STR_2);
+        insertEntity.set二次予防事業有効期間開始年月日(二次予防.getTekiyoKaishiYMD());
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
+     * 異動一時2By二次予防パターン2設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 二次予防 DbT3100NijiYoboJigyoTaishoshaEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By二次予防パターン2(IdoTblTmpEntity insertEntity,
+            DbT3100NijiYoboJigyoTaishoshaEntity 二次予防, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        insertEntity.set二次予防事業区分コード(STR_2);
+        insertEntity.set二次予防事業有効期間開始年月日(二次予防.getTekiyoKaishiYMD());
+        insertEntity.set二次予防事業有効期間終了年月日(二次予防.getTekiyoShuryoYMD());
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
+     * 異動一時2By支払方法パターン1設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 支払方法 DbT4021ShiharaiHohoHenkoEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By支払方法パターン1(IdoTblTmpEntity insertEntity,
+            DbT4021ShiharaiHohoHenkoEntity 支払方法, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        FlexibleDate 適用開始年月日 = 支払方法.getTekiyoKaishiYMD();
+        if (適用開始年月日 != null && !適用開始年月日.isEmpty()) {
+            insertEntity.set償還払化開始年月日(new RString(適用開始年月日.toString()));
+        }
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
+     * 異動一時2By支払方法パターン1設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 支払方法 DbT4021ShiharaiHohoHenkoEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By支払方法パターン2(IdoTblTmpEntity insertEntity,
+            DbT4021ShiharaiHohoHenkoEntity 支払方法, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        FlexibleDate 適用開始年月日 = 支払方法.getTekiyoKaishiYMD();
+        if (適用開始年月日 != null && !適用開始年月日.isEmpty()) {
+            insertEntity.set償還払化開始年月日(new RString(適用開始年月日.toString()));
+        }
+        FlexibleDate 適用終了年月日 = 支払方法.getTekiyoShuryoYMD();
+        if (適用終了年月日 != null && !適用終了年月日.isEmpty()) {
+            insertEntity.set償還払化終了年月日(new RString(適用終了年月日.toString()));
+        }
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
      * 再編集一部
      *
      * @param entity IdoTblTmpEntity
