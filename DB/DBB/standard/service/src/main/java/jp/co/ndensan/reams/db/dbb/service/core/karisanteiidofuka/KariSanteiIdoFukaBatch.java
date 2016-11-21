@@ -199,6 +199,8 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private static final int DAY = 31;
     private static final Code エラーコード = new Code("04");
     private static final EucEntityId EUC_ENTITY_ID_仮算定異動一括結果一覧表CSV = new EucEntityId(new RString("DBB200013"));
+    private static final YMDHMS YMDHMS_MIN = new YMDHMS("00000101010000");
+    private static final YMDHMS YMDHMS_MAX = new YMDHMS("99991230235959");
 
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -219,7 +221,8 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     /**
      * {@link InstanceProvider#create}により生成されたインタフェースを返します。
      *
-     * @return {@link InstanceProvider#create}により生成された{@link KariSanteiIdoFukaBatch}
+     * @return
+     * {@link InstanceProvider#create}により生成された{@link KariSanteiIdoFukaBatch}
      */
     public static KariSanteiIdoFukaBatch createInstance() {
         return InstanceProvider.create(KariSanteiIdoFukaBatch.class);
@@ -300,16 +303,16 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     @Transaction
     public void selectTokuchoTeishisha(FlexibleYear 賦課年度, RDateTime 抽出開始日時,
             RDateTime 抽出終了日時) {
-        YMDHMS 抽出開始日時Format = new YMDHMS("00000101010000");
-        YMDHMS 抽出終了日時Format = new YMDHMS("99991230235959");
+        YMDHMS 抽出開始日時Format = YMDHMS_MIN;
+        YMDHMS 抽出終了日時Format = YMDHMS_MAX;
         if (抽出開始日時 != null) {
             RString strOne = 抽出開始日時.getDate().toDateString();
             int hour = 抽出開始日時.getHour();
             int minute = 抽出開始日時.getMinute();
             int second = 抽出開始日時.getSecond();
-            RString strTwo = hour < NUM_10 ? RSTRING_0.concat(new RString(hour + "")) : new RString(hour + "");
-            RString strThree = minute < NUM_10 ? RSTRING_0.concat(new RString(minute + "")) : new RString(minute + "");
-            RString strFour = second < NUM_10 ? RSTRING_0.concat(new RString(second + "")) : new RString(second + "");
+            RString strTwo = hour < NUM_10 ? RSTRING_0.concat(new RString(hour)) : new RString(hour);
+            RString strThree = minute < NUM_10 ? RSTRING_0.concat(new RString(minute)) : new RString(minute);
+            RString strFour = second < NUM_10 ? RSTRING_0.concat(new RString(second)) : new RString(second);
             抽出開始日時Format = new YMDHMS(strOne.concat(strTwo).concat(strThree).concat(strFour));
         }
         if (抽出終了日時 != null) {
@@ -317,9 +320,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             int hour = 抽出終了日時.getHour();
             int minute = 抽出終了日時.getMinute();
             int second = 抽出終了日時.getSecond();
-            RString strTwo = hour < NUM_10 ? RSTRING_0.concat(new RString(hour + "")) : new RString(hour + "");
-            RString strThree = minute < NUM_10 ? RSTRING_0.concat(new RString(minute + "")) : new RString(minute + "");
-            RString strFour = second < NUM_10 ? RSTRING_0.concat(new RString(second + "")) : new RString(second + "");
+            RString strTwo = hour < NUM_10 ? RSTRING_0.concat(new RString(hour)) : new RString(hour);
+            RString strThree = minute < NUM_10 ? RSTRING_0.concat(new RString(minute)) : new RString(minute);
+            RString strFour = second < NUM_10 ? RSTRING_0.concat(new RString(second)) : new RString(second);
             抽出終了日時Format = new YMDHMS(strOne.concat(strTwo).concat(strThree).concat(strFour));
         }
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
