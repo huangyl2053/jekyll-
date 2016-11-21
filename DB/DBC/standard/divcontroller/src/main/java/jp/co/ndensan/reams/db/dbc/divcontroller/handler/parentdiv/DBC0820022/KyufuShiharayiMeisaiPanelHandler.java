@@ -633,6 +633,8 @@ public class KyufuShiharayiMeisaiPanelHandler {
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().setReadOnly(flag);
         div.getPanelThree().getPanelFour().getTxtTeikiyo().setReadOnly(flag);
         div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setReadOnly(flag);
+        div.getPanelThree().getPanelFour().getBtnKeisan().setDisabled(flag);
+        div.getPanelThree().getPanelFour().getBtnClear().setDisabled(flag);
     }
 
     /**
