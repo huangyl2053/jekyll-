@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000015;
 
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -31,6 +32,18 @@ public class DBCMNK4001PanelAllValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                 UrErrorMessages.大小関係が不正, 今回抽出期間.toString())));
+        return validPairs;
+    }
+
+    /**
+     * 大小関係が不正のバリデーションチェックです。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs 期間が不正() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                DbcErrorMessages.抽出期間不正１)));
         return validPairs;
     }
 
