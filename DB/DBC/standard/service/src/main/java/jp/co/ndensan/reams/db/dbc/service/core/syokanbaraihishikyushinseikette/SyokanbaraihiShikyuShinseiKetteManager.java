@@ -1205,21 +1205,18 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                     決定情報登録更新フラグあり(parameter, 決定情報一覧, 証明書入力済フラグ, dbJoho, 償還払請求サービス計画200904データList,
                             償還払請求サービス計画200604データList, 償還払請求サービス計画200004データList);
                 }
-                modoruEntity.set償還払請求サービス計画200904データList(償還払請求サービス計画200904データList);
-                modoruEntity.set償還払請求サービス計画200604データList(償還払請求サービス計画200604データList);
-                modoruEntity.set償還払請求サービス計画200004データList(償還払請求サービス計画200004データList);
             }
             if (更新件数 > 0 && parameter.is差額金額登録フラグ() && (決定情報一覧List != null && !決定情報一覧List.isEmpty())) {
                 for (SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧 : 決定情報一覧List) {
                     決定情報登録更新2(parameter, 決定情報一覧, 証明書入力済フラグ, modoruEntity, dbJoho, shokujiJouhos, serviceHiyo,
                             償還払請求サービス計画200904データList, 償還払請求サービス計画200604データList, 償還払請求サービス計画200004データList);
                 }
-                modoruEntity.set償還払請求サービス計画200904データList(償還払請求サービス計画200904データList);
-                modoruEntity.set償還払請求サービス計画200604データList(償還払請求サービス計画200604データList);
-                modoruEntity.set償還払請求サービス計画200004データList(償還払請求サービス計画200004データList);
-                modoruEntity.set償還払請求食事費用データList(shokujiJouhos);
-                modoruEntity.set償還払請求特定入所者介護サービス費用データList(serviceHiyo);
             }
+            modoruEntity.set償還払請求サービス計画200904データList(償還払請求サービス計画200904データList);
+            modoruEntity.set償還払請求サービス計画200604データList(償還払請求サービス計画200604データList);
+            modoruEntity.set償還払請求サービス計画200004データList(償還払請求サービス計画200004データList);
+            modoruEntity.set償還払請求食事費用データList(shokujiJouhos);
+            modoruEntity.set償還払請求特定入所者介護サービス費用データList(serviceHiyo);
 
         }
         return modoruEntity;
