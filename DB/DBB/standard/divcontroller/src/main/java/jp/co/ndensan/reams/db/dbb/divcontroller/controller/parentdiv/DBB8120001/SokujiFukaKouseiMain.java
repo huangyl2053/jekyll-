@@ -178,6 +178,7 @@ public class SokujiFukaKouseiMain {
         }
         handler.initializeヘッダエリア(is特殊処理(), 賦課年度, 更正前後賦課のリスト, 通知書番号選択, 更正前後徴収方法);
         handler.initialize更正前後データ(is特殊処理(), 更正前賦課リスト, 更正後賦課リスト, 更正前後徴収方法, is本算定処理済フラグ);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, is年間保険料額変更あり(div));
         ViewStateHolder.put(ViewStateKeys.更正前, 更正前賦課リスト);
         ViewStateHolder.put(ViewStateKeys.更正後, 更正後賦課リスト);
         ViewStateHolder.put(ViewStateKeys.更正前後徴収方法, 更正前後徴収方法);
@@ -1369,5 +1370,11 @@ public class SokujiFukaKouseiMain {
             return Decimal.ZERO;
         }
         return new Decimal(金額.replace(読点, RString.EMPTY).trim().toString());
+    }
+
+    private boolean is年間保険料額変更あり(SokujiFukaKouseiMainDiv div) {
+        Decimal 年間保険料額前 = div.getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoMae().getTxtNenkanHokenryo1().getValue();
+        Decimal 年間保険料額後 = div.getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoAto().getTxtNenkanHokenryo2().getValue();
+        return null != 年間保険料額前 && null != 年間保険料額後 && 年間保険料額前.equals(年間保険料額後);
     }
 }
