@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820027;
 
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -64,8 +65,16 @@ public enum KinkyujiShisetuRyoyohiPanelValidationMessage implements IValidationM
     /**
      * 特定治療合計のチェック
      */
-    特定治療合計のチェック(UrErrorMessages.未入力, "特定治療合計");
+    特定治療合計のチェック(UrErrorMessages.未入力, "特定治療合計"),
+    /**
+     * 証明書入力済チェック
+     */
+    証明書入力済チェック(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力);
     private final Message message;
+
+    private KinkyujiShisetuRyoyohiPanelValidationMessage(IMessageGettable message) {
+        this.message = message.getMessage();
+    }
 
     private KinkyujiShisetuRyoyohiPanelValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);

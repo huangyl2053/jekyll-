@@ -10,18 +10,19 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKeigengaku;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoHenkoFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShafukukeigenServiceResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import static jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.DBC0820031StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.DBC0820031TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.ShafukuKeigenGakuPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820031.ShafukuKeigenGakuPanelErrorMessage;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820031.ShafukuKeigenGakuPanelHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
@@ -31,7 +32,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -39,8 +39,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -53,6 +54,7 @@ public class ShafukuKeigenGakuPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString エラーメッセージ = new RString("選択されたサービス種類");
 
     /**
      * onLoad
@@ -205,9 +207,18 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_Confirm(ShafukuKeigenGakuPanelDiv div) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        ShafukuKeigenGakuPanelHandler handler = getHandler(div);
+        if ((修正.equals(状態) && !handler.checkサービス種類重複For修正())
+                || (登録.equals(状態) && !handler.checkサービス種類重複For登録())) {
+            ValidationMessageControlPairs controlPairs = new ValidationMessageControlPairs();
+            controlPairs.add(new ValidationMessageControlPair(new ShafukuKeigenGakuPanelErrorMessage(
+                    UrErrorMessages.既に登録済.getMessage().replace(エラーメッセージ.toString()))));
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }
+
         List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト = ViewStateHolder.get(ViewStateKeys.社福軽減額一覧情報, ArrayList.class);
         List<ShafukukeigenServiceResult> サービス種類リスト = ViewStateHolder.get(ViewStateKeys.サービス種類集計情報, ArrayList.class);
-        getHandler(div).initializeByConfirm(状態, 法人軽減額リスト, サービス種類リスト);
+        handler.initializeByConfirm(状態, 法人軽減額リスト, サービス種類リスト);
         return ResponseData.of(div).respond();
     }
 
@@ -221,19 +232,14 @@ public class ShafukuKeigenGakuPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
         }
-        boolean flag = getHandler(div).is内容変更状態();
-        if (flag) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
-            }
-        } else {
+
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage()).respond();
+        }
+
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
             return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
         }
         return ResponseData.of(div).respond();
@@ -246,7 +252,35 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_CommonConfirm(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, true);
+        ShoukanharaihishinseimeisaikensakuParameter 明細検索キー = ViewStateHolder.get(ViewStateKeys.明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+
+        DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        if (登録.equals(処理モード)) {
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap
+                    = dbJohoViewState.get証明書入力済フラグMap();
+            ShomeishoNyuryokuFlag 証明書入力済フラグ = 証明書入力済フラグMap.get(明細検索キー);
+            証明書入力済フラグ.set社福軽減額_証明書入力済フラグ(getHandler(div).is内容変更状態()
+                    ? ShomeishoNyuryokuKubunType.入力あり : ShomeishoNyuryokuKubunType.入力なし);
+            証明書入力済フラグMap.put(明細検索キー, 証明書入力済フラグ);
+            dbJohoViewState.set証明書入力済フラグMap(証明書入力済フラグMap);
+
+            ShomeishoNyuryokuKanryoKubunType 証明書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance()
+                    .証明書InputCheck(証明書入力済フラグ, 明細検索キー.get様式番号(), 明細検索キー.getサービス年月());
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap
+                    = dbJohoViewState.get証明書入力完了フラグMap();
+            証明書入力完了フラグMap.put(明細検索キー, 証明書入力済区分);
+            dbJohoViewState.set証明書入力完了フラグMap(証明書入力完了フラグMap);
+            if (ShomeishoNyuryokuKanryoKubunType.入力未完了 == 証明書入力済区分) {
+                ValidationMessageControlPairs controlPairs = new ValidationMessageControlPairs();
+                controlPairs.add(new ValidationMessageControlPair(
+                        new ShafukuKeigenGakuPanelErrorMessage(償還払い費支給申請決定_証明書情報未入力.getMessage())));
+                return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+            }
+        }
+
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
     }
 
@@ -257,7 +291,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKihoninfo(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, false);
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.基本情報).respond();
     }
 
@@ -268,7 +302,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKyufuMeisai(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, false);
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.給付費明細).respond();
     }
 
@@ -279,7 +313,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnTokuteiShiryohi(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, false);
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.特定診療費).respond();
     }
 
@@ -290,7 +324,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnServiceKeikakuhi(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, false);
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.サービス計画費).respond();
     }
 
@@ -301,7 +335,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnTokuteinyushosha(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, false);
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.特定入所者費用).respond();
     }
 
@@ -312,7 +346,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnGokeiinfo(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, false);
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.合計情報).respond();
     }
 
@@ -323,7 +357,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKyufuhiMeisaiJutoku(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, false);
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.給付費明細_住特).respond();
     }
 
@@ -334,7 +368,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKinkyujiShoteiShikan(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, false);
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.緊急時_所定疾患).respond();
     }
 
@@ -345,7 +379,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKinkyujiShisetsu(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, false);
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.緊急時施設療養費).respond();
     }
 
@@ -356,7 +390,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnShokujihiyo(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, false);
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.食事費用).respond();
     }
 
@@ -367,7 +401,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnSeikyugaku(ShafukuKeigenGakuPanelDiv div) {
-        putViewState(div, false);
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.請求額集計).respond();
     }
 
@@ -377,8 +411,9 @@ public class ShafukuKeigenGakuPanel {
 
     private List<ShokanShakaiFukushiHojinKeigengakuResult> get法人軽減額リスト(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        List<ShokanShakaiFukushiHojinKeigengakuResult> dbJohoViewList = getDbJohoViewList(被保険者番号, サービス年月, 整理番号,
-                事業者番号, 様式番号, 明細番号);
+        DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        List<ShokanShakaiFukushiHojinKeigengakuResult> dbJohoViewList = getDbJohoViewList(dbJohoViewState,
+                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         if (!dbJohoViewList.isEmpty()) {
             return dbJohoViewList;
         }
@@ -389,10 +424,9 @@ public class ShafukuKeigenGakuPanel {
         return 法人軽減額リスト;
     }
 
-    private List<ShokanShakaiFukushiHojinKeigengakuResult> getDbJohoViewList(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
-            RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        List<ShokanShakaiFukushiHojinKeigengakuResult> dbJohoViewList = new ArrayList<>();
+    private ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> getDbJohoViewList(DbJohoViewState dbJohoViewState, HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
+        ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> dbJohoViewList = new ArrayList<>();
         if (dbJohoViewState == null || dbJohoViewState.get償還払請求社会福祉法人軽減額データList() == null
                 || dbJohoViewState.get償還払請求社会福祉法人軽減額データList().isEmpty()) {
             return dbJohoViewList;
@@ -411,7 +445,7 @@ public class ShafukuKeigenGakuPanel {
         return dbJohoViewList;
     }
 
-    private void putViewState(ShafukuKeigenGakuPanelDiv div, boolean 確定フラグ) {
+    private void putViewState(ShafukuKeigenGakuPanelDiv div) {
         ShoukanharaihishinseimeisaikensakuParameter 明細検索キー = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         HihokenshaNo 被保険者番号 = 明細検索キー.get被保険者番号();
@@ -423,44 +457,16 @@ public class ShafukuKeigenGakuPanel {
         RDate 申請日 = 明細検索キー.get申請日();
 
         DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト = getキー以外のDbJohoViewList(dbJohoViewState,
+        ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> 当前の法人軽減額リスト
+                = ViewStateHolder.get(ViewStateKeys.社福軽減額一覧情報, ArrayList.class);
+
+        ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> キー以外の法人軽減額リスト = getキー以外のDbJohoViewList(dbJohoViewState,
                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
 
         ShafukuKeigenGakuPanelHandler handler = getHandler(div);
-        法人軽減額リスト.addAll(handler.get法人軽減額リスト(被保険者番号, サービス年月, 申請日, 事業者番号, 様式番号, 明細番号));
-        dbJohoViewState.set償還払請求社会福祉法人軽減額データList(法人軽減額リスト);
-
-        if (確定フラグ) {
-            RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-            if (登録.equals(処理モード)) {
-                Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap
-                        = dbJohoViewState.get証明書入力済フラグMap();
-                ShomeishoNyuryokuFlag 証明書入力済フラグ = 証明書入力済フラグMap.get(明細検索キー);
-                if (handler.is内容変更状態()) {
-                    証明書入力済フラグ.set社福軽減額_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力あり);
-                    証明書入力済フラグMap.put(明細検索キー, 証明書入力済フラグ);
-                    dbJohoViewState.set証明書入力済フラグMap(証明書入力済フラグMap);
-                }
-
-                ShomeishoNyuryokuKanryoKubunType 証明書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance()
-                        .証明書InputCheck(証明書入力済フラグ, 様式番号, サービス年月);
-                Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap
-                        = dbJohoViewState.get証明書入力完了フラグMap();
-                証明書入力完了フラグMap.put(明細検索キー, 証明書入力済区分);
-                dbJohoViewState.set証明書入力完了フラグMap(証明書入力完了フラグMap);
-                if (ShomeishoNyuryokuKanryoKubunType.入力未完了 == 証明書入力済区分) {
-                    // TODO エラー
-                }
-            }
-            if (修正.equals(処理モード) && handler.is内容変更状態()) {
-                Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap
-                        = dbJohoViewState.get証明書変更済フラグMap();
-                ShomeishoHenkoFlag 証明書変更済フラグ = 証明書変更済フラグMap.get(明細検索キー);
-                証明書変更済フラグ.set社福軽減額_証明書変更済フラグ(ShomeishoHenkoKubunType.変更あり);
-                証明書変更済フラグMap.put(明細検索キー, 証明書変更済フラグ);
-                dbJohoViewState.set証明書変更済フラグMap(証明書変更済フラグMap);
-            }
-        }
+        キー以外の法人軽減額リスト.addAll(handler.get法人軽減額リスト(当前の法人軽減額リスト, 被保険者番号, サービス年月,
+                整理番号, 申請日, 事業者番号, 様式番号, 明細番号));
+        dbJohoViewState.set償還払請求社会福祉法人軽減額データList(キー以外の法人軽減額リスト);
 
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJohoViewState);
     }
@@ -486,4 +492,5 @@ public class ShafukuKeigenGakuPanel {
         }
         return dbJohoViewList;
     }
+
 }

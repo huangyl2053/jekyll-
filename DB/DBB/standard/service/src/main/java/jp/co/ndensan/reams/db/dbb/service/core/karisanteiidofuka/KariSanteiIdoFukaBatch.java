@@ -875,7 +875,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                 前年度の保険料段階リスト = HokenryoDankaiSettings.createInstance()
                         .get保険料段階ListIn(調定年度);
                 if (前年度の保険料段階リスト != null && !RString.isNullOrEmpty(編集後賦課の情報.get保険料段階_仮算定時())) {
-                    保険料率 = 前年度の保険料段階リスト.getBy段階区分(編集後賦課の情報.get保険料段階_仮算定時()).get保険料率();
+                    保険料率 = 前年度の保険料段階リスト.getBy段階Index(編集後賦課の情報.get保険料段階_仮算定時()).get保険料率();
                 }
             }
             TokuchoKarisanteiKiwariOutput 特徴仮算定期割 = get特徴仮算定期割(調定年度, 保険料率);
@@ -1268,7 +1268,12 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             return Decimal.ZERO;
         }
         HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
-        HokenryoDankai dankai = 保険料段階List.getBy段階区分(保険料段階);
+        HokenryoDankai dankai;
+        if (保険料段階.length() == NUM_2) {
+            dankai = 保険料段階List.getBy段階Index(保険料段階);
+        } else {
+            dankai = 保険料段階List.getBy段階区分(保険料段階);
+        }
         return dankai.get保険料率();
     }
 

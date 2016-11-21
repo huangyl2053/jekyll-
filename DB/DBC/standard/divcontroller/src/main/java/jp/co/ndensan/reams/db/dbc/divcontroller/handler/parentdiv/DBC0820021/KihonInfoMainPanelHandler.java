@@ -255,7 +255,6 @@ public class KihonInfoMainPanelHandler {
             RString 処理モード, List<RString> list) {
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 様式番号 = meisaiPar.get様式番号();
-        償還払請求基本データ = 償還払請求基本データ.modified();
         return save基本情報(償還払請求基本データ, サービス年月, 様式番号, list);
     }
 
@@ -417,6 +416,34 @@ public class KihonInfoMainPanelHandler {
                     && 基本データ.get様式番号().equals(shokanKihon.get様式番号())
                     && 基本データ.get明細番号().equals(shokanKihon.get明細番号())) {
                 return 基本データ;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * DB情報 キーが同じデータがある場合、返す。
+     *
+     * @param 請求基本データList ArrayList<ShokanKihon>
+     * @param 被保険者番号 HihokenshaNo
+     * @param 整理番号 RString
+     * @param サービス年月 FlexibleYearMonth
+     * @param 申請日 RDate
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @return 請求基本データ ShokanKihon
+     */
+    public ShokanKihon judgeIsContained(ArrayList<ShokanKihon> 請求基本データList, HihokenshaNo 被保険者番号, RString 整理番号,
+            FlexibleYearMonth サービス年月, JigyoshaNo 事業者番号, RDate 申請日, RString 明細番号, RString 様式番号) {
+        for (ShokanKihon 請求基本データ : 請求基本データList) {
+            if (請求基本データ.get被保険者番号().equals(被保険者番号)
+                    && 請求基本データ.getサービス提供年月().equals(サービス年月)
+                    && 請求基本データ.get整理番号().equals(整理番号)
+                    && 請求基本データ.get事業者番号().equals(事業者番号)
+                    && 請求基本データ.get様式番号().equals(様式番号)
+                    && 請求基本データ.get明細番号().equals(明細番号)) {
+                return 請求基本データ;
             }
         }
         return null;

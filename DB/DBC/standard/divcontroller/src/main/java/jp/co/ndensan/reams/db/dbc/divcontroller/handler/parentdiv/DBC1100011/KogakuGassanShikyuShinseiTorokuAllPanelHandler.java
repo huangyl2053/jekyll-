@@ -1197,15 +1197,11 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         pram.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(高額合算申請書.get支払方法区分()));
         pram.setKozaId(口座ID);
         pram.setStartYMD(isNullOrEmptyFlexibleDate(高額合算申請書.get支払期間開始年月日()));
-        pram.setStartHHMM(高額合算申請書.get支払期間開始時間() == null ? null
-                : new RTime(高額合算申請書.get支払期間開始時間().substring(INT_0, INT_2)
-                        .concat(高額合算申請書.get支払期間開始時間().substring(INT_3, INT_5))
-                        .concat(高額合算申請書.get支払期間開始時間().substring(INT_6))));
+        pram.setStartHHMM(RString.isNullOrEmpty(高額合算申請書.get支払期間開始時間()) ? null
+                : new RTime(高額合算申請書.get支払期間開始時間()));
         pram.setEndYMD(isNullOrEmptyFlexibleDate(高額合算申請書.get支払期間終了年月日()));
-        pram.setEndHHMM(高額合算申請書.get支払期間終了時間() == null ? null
-                : new RTime(高額合算申請書.get支払期間終了時間().substring(INT_0, INT_2)
-                        .concat(高額合算申請書.get支払期間終了時間().substring(INT_3, INT_5))
-                        .concat(高額合算申請書.get支払期間終了時間().substring(INT_6))));
+        pram.setEndHHMM(RString.isNullOrEmpty(高額合算申請書.get支払期間終了時間()) ? null
+                : new RTime(高額合算申請書.get支払期間終了時間()));
         pram.setShiharaiBasho(高額合算申請書.get支払場所());
         div.getCcdShiharaiHohoJoho().initialize(pram, div.getTxtShinseiYMD().isReadOnly() ? 照会 : 修正);
     }

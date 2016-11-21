@@ -92,7 +92,6 @@ public class HihokenshaDaichoProcess extends BatchProcessBase<ShisetsuNyutaishoE
                 iIkkatsuSakuseiMapper.get生活保護受給者(),
                 iIkkatsuSakuseiMapper.get老齢福祉年金受給者(),
                 iIkkatsuSakuseiMapper.get証交付回収(),
-                processPrm,
                 null);
     }
 

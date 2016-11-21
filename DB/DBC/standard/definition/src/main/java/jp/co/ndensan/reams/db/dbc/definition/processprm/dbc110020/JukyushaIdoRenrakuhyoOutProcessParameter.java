@@ -25,7 +25,6 @@ public class JukyushaIdoRenrakuhyoOutProcessParameter implements IBatchProcessPa
     private RString 抽出条件;
     private RString ファイル名;
     private int 異動連絡票件数;
-    private int 訂正連絡票件数;
 
     /**
      * コンストラクタ

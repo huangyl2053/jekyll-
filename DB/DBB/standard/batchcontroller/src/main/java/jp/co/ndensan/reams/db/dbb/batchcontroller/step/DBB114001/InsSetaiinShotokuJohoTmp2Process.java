@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,6 +28,8 @@ public class InsSetaiinShotokuJohoTmp2Process extends BatchProcessBase<SetaiShot
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 世帯員所得情報writer;
+    private ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+    private SetaiCode 世帯コード = SetaiCode.EMPTY;
 
     @Override
     protected IBatchReader createReader() {
@@ -42,6 +46,11 @@ public class InsSetaiinShotokuJohoTmp2Process extends BatchProcessBase<SetaiShot
         if (t.getShikibetsuCode() == null) {
             return;
         }
-        世帯員所得情報writer.insert(t);
+        if (!識別コード.equals(t.getShikibetsuCode())
+                && !世帯コード.equals(t.getSetaiCode())) {
+            世帯員所得情報writer.insert(t);
+            識別コード = t.getShikibetsuCode();
+            世帯コード = t.getSetaiCode();
+        }
     }
 }

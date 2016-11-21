@@ -175,9 +175,10 @@ public class HonsanteiIdoKanendoFukaKakutei {
      *
      * @param fukaKakuteiList List<KanendoIdoFukaKakutei>
      * @param deleteFlag boolean
+     * @param 調定年度 FlexibleYear
      */
     @Transaction
-    public void deleteFuka(List<KanendoIdoFukaKakutei> fukaKakuteiList, boolean deleteFlag) {
+    public void deleteFuka(List<KanendoIdoFukaKakutei> fukaKakuteiList, boolean deleteFlag, FlexibleYear 調定年度) {
         for (KanendoIdoFukaKakutei fukaKakutei : fukaKakuteiList) {
             DbT2002FukaEntity fukaEntity = fukaDac.selectByKey(
                     fukaKakutei.get調定年度(),
@@ -202,7 +203,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
             }
         }
         if (deleteFlag) {
-            save処理日付管理(fukaKakuteiList.get(0).getFukaKakuteiEntity().get調定年度());
+            save処理日付管理(調定年度);
         }
     }
 
@@ -210,9 +211,10 @@ public class HonsanteiIdoKanendoFukaKakutei {
      * 賦課確定
      *
      * @param 調定日時 YMDHMS
+     * @param 調定年度 FlexibleYear
      */
     @Transaction
-    public void confirmFuka(YMDHMS 調定日時) {
+    public void confirmFuka(YMDHMS 調定日時, FlexibleYear 調定年度) {
         IFukaKakuteiMapper mapper = mapperProvider.create(IFukaKakuteiMapper.class);
         FukaKakuteiParameter parameter = new FukaKakuteiParameter(
                 FlexibleYear.EMPTY,
@@ -230,9 +232,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
                 choteiKyotsuDac.update(choteiKyotsuEntity);
             }
         }
-        RString choteiNendo = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
-                SubGyomuCode.DBB介護賦課);
-        save処理日付管理(new FlexibleYear(choteiNendo.toString()));
+        save処理日付管理(調定年度);
     }
 
     @Transaction

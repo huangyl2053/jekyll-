@@ -15,6 +15,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogakuNinteiShinseishoEditor {
 
+    private static final int NUM_40 = 40;
+    private static final int NUM_76 = 76;
+    private static final int NUM_80 = 80;
+    private static final int NUM_152 = 152;
+    private static final int NUM_228 = 228;
     private final FutangendogakuNinteiShinseishoBodyItem item;
 
     /**
@@ -38,13 +43,13 @@ public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogaku
     }
 
     private FutangendogakuNinteiShinseishoReportSource bodyEdit(FutangendogakuNinteiShinseishoReportSource source) {
-        source.hiho_name_kana_1 = item.getHihokenshaNameKana().substringReturnAsPossible(0, 40);
-        if (item.getHihokenshaNameKana().length() > 40) {
-            source.hiho_name_kana_2 = item.getHihokenshaNameKana().substringReturnAsPossible(40, 80);
+        source.hiho_name_kana_1 = item.getHihokenshaNameKana().substringReturnAsPossible(0, NUM_40);
+        if (item.getHihokenshaNameKana().length() > NUM_40) {
+            source.hiho_name_kana_2 = item.getHihokenshaNameKana().substringReturnAsPossible(NUM_40, NUM_80);
         }
-        source.hiho_name_1 = item.getHihokenshaName().substringReturnAsPossible(0, 40);
-        if (item.getHihokenshaName().length() > 40) {
-            source.hiho_name_2 = item.getHihokenshaName().substringReturnAsPossible(40, 80);
+        source.hiho_name_1 = item.getHihokenshaName().substringReturnAsPossible(0, NUM_40);
+        if (item.getHihokenshaName().length() > NUM_40) {
+            source.hiho_name_2 = item.getHihokenshaName().substringReturnAsPossible(NUM_40, NUM_80);
         }
 
         source.seibetsu = item.getSeibetsu();
@@ -52,24 +57,24 @@ public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogaku
         source.hiho_tel_no = item.getHihokenshaTelNo();
         source.yubin_no = item.getHihokenshaYubinNo();
 
-        source.hiho_jyusho_1 = item.getHihokenJusho().substringReturnAsPossible(0, 76);
-        if (item.getHihokenJusho().length() > 76) {
-            source.hiho_jyusho_2 = item.getHihokenJusho().substringReturnAsPossible(76, 152);
-        } else if (item.getHihokenJusho().length() > 152) {
-            source.hiho_jyusho_3 = item.getHihokenJusho().substringReturnAsPossible(152, 228);
+        source.hiho_jyusho_1 = item.getHihokenJusho().substringReturnAsPossible(0, NUM_76);
+        if (item.getHihokenJusho().length() > NUM_76) {
+            source.hiho_jyusho_2 = item.getHihokenJusho().substringReturnAsPossible(NUM_76, NUM_152);
+        } else if (item.getHihokenJusho().length() > NUM_152) {
+            source.hiho_jyusho_3 = item.getHihokenJusho().substringReturnAsPossible(NUM_152, NUM_228);
         }
         source.PageCnt = new RString("1");
         source.daihyo = item.getNinshoshaYakushokuMei();
         source.hiho_no = item.getHihokenshaNo();
         source.shisetsu_yubin_no = item.getSisetuYubinNo();
         source.shisetsu_tel_no = item.getSisetuTelNo();
-        source.shisetsu_jusho1 = item.getSisetuJusho().substringReturnAsPossible(0, 76);
-        if (item.getSisetuJusho().length() > 76) {
-            source.shisetsu_jusho2 = item.getSisetuJusho().substringReturnAsPossible(76, 152);
+        source.shisetsu_jusho1 = item.getSisetuJusho().substringReturnAsPossible(0, NUM_76);
+        if (item.getSisetuJusho().length() > NUM_76) {
+            source.shisetsu_jusho2 = item.getSisetuJusho().substringReturnAsPossible(NUM_76, NUM_152);
         }
-        source.shisetsu_name_1 = item.getSisetuName().substringReturnAsPossible(0, 76);
-        if (item.getSisetuName().length() > 76) {
-            source.shisetsu_name_2 = item.getSisetuName().substringReturnAsPossible(76, 152);
+        source.shisetsu_name_1 = item.getSisetuName().substringReturnAsPossible(0, NUM_76);
+        if (item.getSisetuName().length() > NUM_76) {
+            source.shisetsu_name_2 = item.getSisetuName().substringReturnAsPossible(NUM_76, NUM_152);
         }
         return source;
     }

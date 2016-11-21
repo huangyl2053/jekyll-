@@ -469,9 +469,11 @@ public class HonsanteiIdoHandler {
             if (!FuchokiJohoTsukiShoriKubun.随時.equals(月の期.get月処理区分())) {
                 div.getHonSanteiIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().setDisplayNone(true);
                 div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtNotsuShutsuryokuKi().setDisplayNone(false);
+                div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtNotsuMsgAboutShutsuryokuYoshiki().setDisplayNone(true);
             } else {
                 div.getHonSanteiIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().setDisplayNone(false);
                 div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtNotsuShutsuryokuKi().setDisplayNone(true);
+                div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtNotsuMsgAboutShutsuryokuYoshiki().setDisplayNone(false);
             }
         } catch (ApplicationException e) {
             throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());

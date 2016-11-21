@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntit
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -186,10 +187,6 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return;
         }
         被保険者番号 = entity.get被保険者番号();
-//        if (!被保険者番号.equals(new HihokenshaNo("2015123456"))) {
-//            異動一時List.clear();
-//            return;
-//        }
         hasCheckErr = false;
         List<DbT4001JukyushaDaichoEntity> 受給者台帳List = get受給者台帳();
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = get被保険者台帳();
@@ -225,7 +222,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             給付額減額適用開始日不整合Check(受給者台帳List, チェック用被保険者台帳List, 給付額減額List, 宛名情報);
             特定入所者減免期間不整合Check(受給者台帳List, チェック用被保険者台帳List, 特定入所者List, 宛名情報);
             特定入所者減免申請日Check(受給者台帳List, チェック用被保険者台帳List, 特定入所者List, 宛名情報);
-            社会福祉法人軽減期間不整合Check(受給者台帳List, チェック用被保険者台帳List, 社福減免List, 宛名情報);
+            社会福祉法人軽減期間不整合Check(チェック用被保険者台帳List, 社福減免List, 宛名情報);
             資格_総合事業対象者整合性Check(受給者台帳List, チェック用被保険者台帳List, 総合事業対象者List, 宛名情報);
             boolean falg = 居宅計画サービス届出日Check(受給者台帳List, 被保険者台帳List, 総合事業対象者List, 居宅計画List, 宛名情報);
             if (falg) {
@@ -275,8 +272,8 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             被保険者台帳List.add(被保険者台帳);
         }
         if (!被保険者台帳List.isEmpty()) {
-            sort被保険者台帳ListBy異動日(被保険者台帳List);
-            最新被保険者台帳 = 被保険者台帳List.get(ORDER_0);
+            sort被保険者台帳ListBy異動日枝番(被保険者台帳List);
+            最新被保険者台帳 = 被保険者台帳List.get(被保険者台帳List.size() - ORDER_1);
         } else {
             最新被保険者台帳 = null;
         }
@@ -310,7 +307,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         }
         if (!居宅計画List.isEmpty()) {
             sort居宅計画List(居宅計画List);
-            最新居宅計画 = 居宅計画List.get(ORDER_0);
+            最新居宅計画 = 居宅計画List.get(居宅計画List.size() - ORDER_1);
         } else {
             最新居宅計画 = null;
         }
@@ -579,7 +576,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                 }
             }
             if (hasError) {
-                送付エラー新規5(最新受給者台帳, 最新被保険者台帳, 居宅計画List.get(ORDER_0), 宛名情報);
+                送付エラー新規5(最新受給者台帳, 最新被保険者台帳, 居宅計画, 宛名情報);
             }
 
         }
@@ -596,7 +593,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                         && isBeforeOrEqDate喪失年月日(居宅計画entity.get適用開始日(), 被保険者台帳.getShikakuSoshitsuYMD())) {
                     continue;
                 }
-                送付エラー新規6(最新受給者台帳, 被保険者台帳, 居宅計画List.get(ORDER_0), 宛名情報);
+                送付エラー新規6(最新受給者台帳, 被保険者台帳, 居宅計画entity, 宛名情報);
             }
         }
     }
@@ -935,9 +932,9 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         return true;
     }
 
-    private void 社会福祉法人軽減期間不整合Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
+    private void 社会福祉法人軽減期間不整合Check(
             List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List, List<ShafukugemmenEntity> 社福減免List, PSMInfoEntity 宛名情報) {
-        if (受給者台帳List.isEmpty() || 被保険者台帳List.isEmpty() || 社福減免List.isEmpty()) {
+        if (被保険者台帳List.isEmpty() || 社福減免List.isEmpty()) {
             return;
         }
         for (ShafukugemmenEntity 社福減免entity : 社福減免List) {
@@ -949,7 +946,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                         && isBeforeOrEqDate喪失年月日(社福減免entity.get適用開始日(), 被保険者台帳.getShikakuSoshitsuYMD())) {
                     continue;
                 }
-                送付エラー新規17(受給者台帳List.get(ORDER_0), 被保険者台帳List.get(ORDER_0), 社福減免List.get(ORDER_0), 宛名情報);
+                送付エラー新規17(最新受給者台帳, 被保険者台帳, 社福減免entity, 宛名情報);
             }
         }
     }
@@ -1360,6 +1357,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.set申請日(new FlexibleDate(居宅計画Info.get(ORDER_2)));
         entity.set決定年月日(new FlexibleDate(居宅計画Info.get(ORDER_3)));
         entity.set決定区分(居宅計画Info.get(ORDER_4));
+        entity.set履歴番号(Integer.parseInt(居宅計画Info.get(ORDER_4).toString()));
         return entity;
     }
 
@@ -1373,6 +1371,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.setTekiyoShuryoYMD(new FlexibleDate(利用者負担Info.get(ORDER_1)));
         entity.setShinseiYMD(new FlexibleDate(利用者負担Info.get(ORDER_2)));
         entity.setKetteiYMD(new FlexibleDate(利用者負担Info.get(ORDER_3)));
+        entity.setRirekiNo(Integer.parseInt(利用者負担Info.get(ORDER_4).toString()));
         return entity;
     }
 
@@ -1416,6 +1415,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         List<RString> 社福減免Info = 社福減免.split(SPLIT.toString());
         entity.set適用開始日(new FlexibleDate(社福減免Info.get(ORDER_0)));
         entity.set適用終了日(new FlexibleDate(社福減免Info.get(ORDER_1)));
+        entity.set履歴番号(Integer.parseInt(社福減免Info.get(ORDER_4).toString()));
         return entity;
     }
 
@@ -1451,6 +1451,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         List<RString> 住所地特例Info = 住所地特例.split(SPLIT.toString());
         entity.set住所地特例適用開始日(new FlexibleDate(住所地特例Info.get(ORDER_0)));
         entity.set住所地特例適用終了日(new FlexibleDate(住所地特例Info.get(ORDER_1)));
+        entity.set転出先保険者番号(new HokenshaNo(住所地特例Info.get(ORDER_3)));
         return entity;
     }
 
@@ -1805,10 +1806,16 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         Collections.sort(居宅計画List, new Comparator<KyotakuEntity>() {
             @Override
             public int compare(KyotakuEntity o1, KyotakuEntity o2) {
-                if (o2.get履歴番号() < o1.get履歴番号()) {
+                if (o1.getTaishoYM2().isBefore(o2.getTaishoYM2())) {
                     return -1;
                 }
+                if (o2.getTaishoYM2().isBefore(o1.getTaishoYM2())) {
+                    return 1;
+                }
                 if (o1.get履歴番号() < o2.get履歴番号()) {
+                    return -1;
+                }
+                if (o2.get履歴番号() < o1.get履歴番号()) {
                     return 1;
                 }
                 return 0;
@@ -1827,6 +1834,9 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                     return 1;
                 }
                 if (o1.get適用開始日().isBefore(o2.get適用開始日())) {
+                    return 1;
+                }
+                if (o2.get適用開始日().isBefore(o1.get適用開始日())) {
                     return -1;
                 }
                 return 1;

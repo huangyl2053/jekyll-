@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbb.entity.csv.TokubetsuChoshuMidoteiIchiranCSVEnt
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuMidoteiIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshumidoteiichiran.TokubetsuChoshuMidoteiIchiranSource;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.NenkinHokenshaHantei;
+import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
@@ -106,6 +107,9 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
     private static final RString 市町村コード = new RString("市町村コード");
     private static final RString 年金コード = new RString("年金コード");
     private static final RString 年金番号 = new RString("年金番号");
+    private static final int 郵便番号桁数 = 7;
+    private static final int 郵便番号区切り文字桁 = 3;
+    private static final RString 郵便番号区切り文字 = new RString("-");
 
     @Override
     protected void initialize() {
@@ -136,7 +140,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
             出力順項目リスト.add(item.get項目名());
             if (item.is改頁項目()) {
                 pageBreakKeys.add(item.get項目ID());
-                改ページ項目リスト.add(item.get項目ID());
+                改ページ項目リスト.add(item.get項目名());
             }
         }
     }
@@ -225,9 +229,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
         TokushoTaishioIchiranMidoteiEntity target = new TokushoTaishioIchiranMidoteiEntity(
                 entity.getKisoNenkinNo(),
                 entity.getNenkinCode(),
-                entity.getShikibetsuCode(),
                 getDate(entity.getBirthDay()),
-                entity.getJuminShubetsuCode(),
                 get性別コード(entity.getSeibetsu()),
                 entity.getKanaShimei(),
                 entity.getKanjiShimei(),
@@ -242,10 +244,10 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
                 導入団体クラス, 出力順項目リスト, 改頁項目Map, 改ページ項目リスト, target, parameter.get特別徴収開始月());
         report.writeBy(reportSourceWriter);
     }
-    
-    private void change改頁項目コード(TokubetsuChoshuMidoteiIchiranEntity entity) {      
-        RString kanaMeisho = entity.getKanaShimei() == null ? RString.EMPTY : entity.getKanaShimei();
-        改頁項目Map.put(氏名５０音カナ, kanaMeisho);
+
+    private void change改頁項目コード(TokubetsuChoshuMidoteiIchiranEntity entity) {
+        RString kanaShimei = entity.getKanaShimei() == null ? RString.EMPTY : entity.getKanaShimei();
+        改頁項目Map.put(氏名５０音カナ, kanaShimei);
         RString seinengappiYMD = entity.getBirthDay() == null ? RString.EMPTY : new RString(entity.getBirthDay().toString());
         改頁項目Map.put(生年月日, seinengappiYMD);
         RString seibetsu = entity.getSeibetsu() == null ? RString.EMPTY : new RString(entity.getSeibetsu().toString());
@@ -269,11 +271,11 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
         eucCsvWriter.writeLine(new TokubetsuChoshuMidoteiIchiranCSVEntity(
                 entity.getKisoNenkinNo(),
                 entity.getNenkinCode(),
-                entity.getBirthDay(),
+                get生年月日(entity.getBirthDay()),
                 get性別名称(entity.getSeibetsu()),
                 entity.getKanaShimei(),
                 entity.getKanjiShimei(),
-                entity.getYubinNo(),
+                get郵便番号(entity.getYubinNo()),
                 entity.getKanjiJusho(),
                 get天引先区分(entity.getTokubetsuChoshuGimushaCode())
         ));
@@ -300,4 +302,17 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
         return 定数_地共済;
     }
 
+    private RString get生年月日(RString umareYMD) {
+        if (RDate.canConvert(umareYMD)) {
+            return DateConverter.getDate32(new RDate(umareYMD.toString()));
+        }
+        return umareYMD;
+    }
+
+    private RString get郵便番号(RString 郵便番号) {
+        if (郵便番号桁数 == 郵便番号.length()) {
+            return 郵便番号.insert(郵便番号区切り文字桁, 郵便番号区切り文字.toString());
+        }
+        return 郵便番号;
+    }
 }

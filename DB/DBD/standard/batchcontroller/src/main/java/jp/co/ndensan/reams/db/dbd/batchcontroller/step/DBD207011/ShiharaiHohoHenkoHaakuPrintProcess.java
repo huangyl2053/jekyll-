@@ -211,6 +211,10 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                 改頁IDList.add(data.get項目ID());
             }
         }
+        return is改頁_1(改頁IDList) || is改頁_2(改頁IDList);
+    }
+
+    private boolean is改頁_1(List<RString> 改頁IDList) {
         return (改頁IDList.contains(ShiharaiHohoHenkoHaakuOrderKey.郵便番号.get項目ID())
                 && !reportData.get郵便番号().equals(reportData1.get郵便番号()))
                 || (改頁IDList.contains(ShiharaiHohoHenkoHaakuOrderKey.町域コード.get項目ID())
@@ -218,8 +222,11 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                 || (改頁IDList.contains(ShiharaiHohoHenkoHaakuOrderKey.行政区コード.get項目ID())
                 && !reportData.get行政区コード().equals(reportData1.get行政区コード()))
                 || (改頁IDList.contains(ShiharaiHohoHenkoHaakuOrderKey.世帯コード.get項目ID())
-                && !reportData.get世帯番号().equals(reportData1.get世帯番号()))
-                || (改頁IDList.contains(ShiharaiHohoHenkoHaakuOrderKey.識別コード.get項目ID())
+                && !reportData.get世帯番号().equals(reportData1.get世帯番号()));
+    }
+
+    private boolean is改頁_2(List<RString> 改頁IDList) {
+        return (改頁IDList.contains(ShiharaiHohoHenkoHaakuOrderKey.識別コード.get項目ID())
                 && !reportData.get識別コード().equals(reportData1.get識別コード()))
                 || (改頁IDList.contains(ShiharaiHohoHenkoHaakuOrderKey.氏名５０音カナ.get項目ID())
                 && !reportData.get被保険者氏名カナ().equals(reportData1.get被保険者氏名カナ()))

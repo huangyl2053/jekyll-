@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiH
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyufuJissekiHeaderHandler {
 
     private final KyufuJissekiHeaderDiv div;
+    private static final int INT_6 = 6;
 
     /**
      * コンストラクタです。
@@ -106,7 +108,7 @@ public class KyufuJissekiHeaderHandler {
      * @param 事業者名称 事業者名称
      */
     public void set事業者名称(RString 事業者名称) {
-        div.getTxtJigyosha().setValue(事業者名称);
+        div.getJigyosha().setValue(事業者名称);
     }
 
     /**
@@ -213,7 +215,7 @@ public class KyufuJissekiHeaderHandler {
         div.getTxtYoshikiNo().setValue(給付実績ヘッダ情報2.get識別番号名称());
         div.setHiddenYoshikiNo(給付実績ヘッダ情報2.get識別番号());
         div.setHiddenJigyoshaCode(get事業所番号(給付実績ヘッダ情報2.get事業所番号()));
-        div.getTxtJigyosha().setValue(給付実績ヘッダ情報2.get事業者名称());
+        div.getJigyosha().setValue(給付実績ヘッダ情報2.get事業者名称());
     }
 
     private RString get住民種別(RString 資格取得事由コード) {
@@ -277,12 +279,29 @@ public class KyufuJissekiHeaderHandler {
         ShikibetsuNoKanri 識別番号管理 = csData_A.get識別番号管理();
         div.getTxtTeikyoNengetsu().setValue(new RDate(
                 給付実績基本データ.getサービス提供年月().getYearValue(), 給付実績基本データ.getサービス提供年月().getMonthValue(), 1));
+        if (!RString.isNullOrEmpty(給付実績基本データ.get給付実績情報作成区分コード())) {
+            div.getTxtSakuseiKubun().setValue(KyufuSakuseiKubun.toValue(給付実績基本データ.get給付実績情報作成区分コード()).get名称());
+        } else {
+            div.getTxtSakuseiKubun().clearValue();
+        }
+        if (null == 給付実績基本データ.get証記載保険者番号() || 給付実績基本データ.get証記載保険者番号().isEmpty()) {
+            div.getTxtShokisaiHokenshaNo().clearValue();
+        } else {
+            div.getTxtShokisaiHokenshaNo()
+                    .setValue(給付実績基本データ.get証記載保険者番号().getColumnValue().padLeft("0", INT_6));
+        }
         set実績区分(給付実績基本データ.get給付実績区分コード());
         set整理番号(給付実績基本データ.get整理番号());
         set識別番号名称(識別番号管理.get識別番号());
-        if (給付実績基本データ.get事業者番号() != null) {
-            set事業者名称(給付実績基本データ.get事業者番号().getColumnValue());
+        if (csData_A.get事業者名称() != null) {
+            div.getTxtYoshikiMeisho().setValue(csData_A.get事業者名称().getColumnValue());
+            div.getJigyosha().setValue(csData_A.get事業者名称().getColumnValue());
+        } else {
+            div.getTxtYoshikiMeisho().clearValue();
+            div.getJigyosha().clearValue();
         }
-        //
+        if (給付実績基本データ.get事業者番号() != null) {
+            div.getTxtJigyoshaNo().setValue(給付実績基本データ.get事業者番号().getColumnValue());
+        }
     }
 }

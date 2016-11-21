@@ -66,7 +66,7 @@ public class TsuchishoJoho641 {
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
             parameter.set再処理区分(SaiShoriKubun.空白);
         }
-        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120010_KyufukanrihyoIn");
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120210_KohiJukyushaIn");
         FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }

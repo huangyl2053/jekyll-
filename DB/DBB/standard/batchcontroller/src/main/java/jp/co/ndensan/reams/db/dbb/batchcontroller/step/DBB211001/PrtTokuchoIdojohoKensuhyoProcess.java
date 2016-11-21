@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -253,6 +254,7 @@ public class PrtTokuchoIdojohoKensuhyoProcess extends BatchKeyBreakBase<TokuChoY
             reportParameter.set特徴異動件数Entity(reportEntity);
             reportParameter.set作成日時(parameter.getシステム日時());
             reportParameter.set処理対象月(parameter.get処理対象月());
+            reportParameter.set賦課年度(new FlexibleYear(parameter.get賦課年度().toDateString()));
             reportParameter.set該当件数の件数の合計(new RString(report件数の合計));
             reportParameter.set資格喪失の件数の合計(new RString(report喪失件数の合計));
             reportParameter.set住所地特例の件数の合計(new RString(report住所地特例件数の合計));

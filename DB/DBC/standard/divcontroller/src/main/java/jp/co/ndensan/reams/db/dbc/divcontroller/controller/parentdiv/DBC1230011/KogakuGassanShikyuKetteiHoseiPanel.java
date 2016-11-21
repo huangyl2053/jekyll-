@@ -59,6 +59,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     private static final RString 排他 = new RString("他のユーザーによって更新が実施されました。お手数をおかけ致しますが、再度更新処理を実施してください。");
     private static final RString 照会 = new RString("照会");
     private static final RString 処理不可 = new RString("処理不可");
+    private static final int NUM_ONE = 1;
     private static final int NUM_THREE = 3;
     private static final int NUM_FIVE = 5;
     private static final int NUM_ELEVEN = 11;
@@ -88,7 +89,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         }
         AccessLogger.log(AccessLogType.照会,
                 getHandler(div).toPersonalData(識別コード,
-                        被保険者番号.getColumnValue()));
+                被保険者番号.getColumnValue()));
         div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         getHandler(div).set新規と検索条件登録パネル();
         List<KogakuGassanShikyuKetteiHoseiResult> result = new ArrayList<>();
@@ -302,7 +303,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         if (処理不可.equals(処理モー.getWkモード())) {
             return ResponseData.of(div).respond();
         }
-        getHandler(div).set新規以外の決定情報初期値(修正, 識別コード);
+        getHandler(div).set新規以外の決定情報初期値(修正, 識別コード, get高額合算情報(div));
         if (口座修正モード.equals(処理モー.getWkモード())) {
             getHandler(div).set状態_Three();
         } else {
@@ -323,7 +324,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onClick_select(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        getHandler(div).set新規以外の決定情報初期値(照会, 識別コード);
+        getHandler(div).set新規以外の決定情報初期値(照会, 識別コード, get高額合算情報(div));
         getHandler(div).set状態_Two(true);
         ViewStateHolder.put(ViewStateKeys.画面モード, 照会);
         return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報補正);
@@ -344,9 +345,9 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             return ResponseData.of(div).respond();
         }
         if (削除照会モード.equals(処理モー.getWkモード())) {
-            getHandler(div).set新規以外の決定情報初期値(照会, 識別コード);
+            getHandler(div).set新規以外の決定情報初期値(照会, 識別コード, get高額合算情報(div));
         } else {
-            getHandler(div).set新規以外の決定情報初期値(削除, 識別コード);
+            getHandler(div).set新規以外の決定情報初期値(削除, 識別コード, get高額合算情報(div));
         }
         getHandler(div).set状態_Two(true);
         ViewStateHolder.put(ViewStateKeys.画面モード, 削除);
@@ -392,6 +393,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             getHandler(div).clear決定情報();
             getHandler(div).set画面tap();
             getHandler(div).release支払方法タブ();
+            div.getCcdShiharaiHohoJoho().clear();
             return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報一覧);
         }
         if (!ResponseHolder.isReRequest()) {
@@ -489,6 +491,44 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         return ResponseData.of(div).respond();
     }
 
+    private KogakuGassanShikyuKetteiHoseiResult get高額合算情報(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+        boolean 事業分フラグ = false;
+        if (div.get事業分フラグ().equals(new RString(Boolean.TRUE.toString()))) {
+            事業分フラグ = true;
+        }
+        HihokenshaNo row被保険者番号 = HihokenshaNo.EMPTY;
+        FlexibleYear row対象年度 = FlexibleYear.EMPTY;
+        HokenshaNo row証記載保険者番号 = HokenshaNo.EMPTY;
+        RString row支給申請書整理番号 = RString.EMPTY;
+        int row履歴番号 = NUM_ONE;
+        if (div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem() != null) {
+
+            if (!RString.isNullOrEmpty(div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem().getHihokenshaNo())) {
+                row被保険者番号 = new HihokenshaNo(div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem().getHihokenshaNo());
+            }
+            if (div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem().getTxtTaishoNendo().getValue() != null) {
+                row対象年度 = new FlexibleYear(div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem().getTxtTaishoNendo().
+                        getValue().getYear().toDateString());
+            }
+            if (!RString.isNullOrEmpty(div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem().getTxtShokisaiNo())) {
+                row証記載保険者番号 = new HokenshaNo(div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem().getTxtShokisaiNo());
+            }
+            if (!RString.isNullOrEmpty(div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem().getTxtRenrakuhyoSeiriNo())) {
+                row支給申請書整理番号 = div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem().getTxtRenrakuhyoSeiriNo();
+            }
+            if (!RString.isNullOrEmpty(div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem().getTxtRirekiNo())) {
+                row履歴番号 = Integer.parseInt(div.getDgKogakuGassanShikyuFushikyuKettei().getClickedItem().getTxtRirekiNo().toString());
+            }
+        }
+        return KogakuGassanShikyuKetteiHosei.createInstance().selectShikyuKetteiHosei(
+                row被保険者番号,
+                row対象年度,
+                row証記載保険者番号,
+                row支給申請書整理番号,
+                row履歴番号,
+                事業分フラグ);
+    }
+
     private ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> save決定情報登録(
             KogakuGassanShikyuKetteiHoseiPanelDiv div, RString 画面モード,
             KogakuGassanShikyuKetteiHoseiDetailParameter para) {
@@ -515,7 +555,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                             支給申請書整理番号, 画面モード, 決定情報list, para);
                     AccessLogger.log(AccessLogType.更新,
                             getHandler(div).toPersonalData(識別コード,
-                                    被保険者番号.getColumnValue()));
+                            被保険者番号.getColumnValue()));
                     getHandler(div).前排他キーの解除(被保険者番号);
                     getHandler(div).clear決定情報();
                     div.getCcdKanryoMessage().setMessage(
@@ -542,7 +582,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                             支給申請書整理番号, 画面モード, 決定情報list, para);
                     AccessLogger.log(AccessLogType.更新,
                             getHandler(div).toPersonalData(識別コード,
-                                    被保険者番号.getColumnValue()));
+                            被保険者番号.getColumnValue()));
                     getHandler(div).clear決定情報();
                     getHandler(div).前排他キーの解除(被保険者番号);
                     div.getCcdKanryoMessage().setMessage(

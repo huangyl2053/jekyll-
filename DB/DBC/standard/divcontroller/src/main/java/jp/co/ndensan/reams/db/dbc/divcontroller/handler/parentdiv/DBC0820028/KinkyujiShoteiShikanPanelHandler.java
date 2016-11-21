@@ -12,12 +12,13 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyoBuilder;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.KinkyujiShoteiShikanPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.dgdKinkyujiShoteiList_Row;
-import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -96,6 +97,8 @@ public final class KinkyujiShoteiShikanPanelHandler {
      * @param 証明書 RString
      * @param 様式番号 RString
      * @param 識別コード ShikibetsuCode
+     * @param 償還払ViewStateDB DbJohoViewState
+     * @param parameter ShoukanharaihishinseimeisaikensakuParameter
      * @return ArrayList<ShokanShoteiShikkanShisetsuRyoyo>
      */
     public ArrayList<ShokanShoteiShikkanShisetsuRyoyo> initPanelHead(HihokenshaNo 被保険者番号,
@@ -106,7 +109,9 @@ public final class KinkyujiShoteiShikanPanelHandler {
             RString 明細番号,
             RString 証明書,
             RString 様式番号,
-            ShikibetsuCode 識別コード) {
+            ShikibetsuCode 識別コード,
+            DbJohoViewState 償還払ViewStateDB,
+            ShoukanharaihishinseimeisaikensakuParameter parameter) {
 
         div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
@@ -118,9 +123,19 @@ public final class KinkyujiShoteiShikanPanelHandler {
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
 
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
-        ArrayList<ShokanShoteiShikkanShisetsuRyoyo> list = (ArrayList<ShokanShoteiShikkanShisetsuRyoyo>) finder.
+        ArrayList<ShokanShoteiShikkanShisetsuRyoyo> list = new ArrayList();
+        if (償還払ViewStateDB != null && 償還払ViewStateDB.get償還払請求所定疾患施設療養費等データList() != null) {
+            list = 償還払ViewStateDB.get償還払請求所定疾患施設療養費等データList();
+        }
+        list = new ArrayList<>(getUpdateList(list, parameter));
+        ArrayList<ShokanShoteiShikkanShisetsuRyoyo> dbList = (ArrayList<ShokanShoteiShikkanShisetsuRyoyo>) finder.
                 getShoteiShikanShisetsuRyoyohiEtcData(被保険者番号, サービス年月, 整理番号, 事業者番号,
                         様式番号, 明細番号, null);
+        if (dbList != null && !dbList.isEmpty()) {
+            for (ShokanShoteiShikkanShisetsuRyoyo row : dbList) {
+                list.add(row);
+            }
+        }
         return list;
     }
 
@@ -187,6 +202,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
             row.getHoshasenTani().setValue(new Decimal(result.get放射線治療単位数()));
             row.setTekiyo(get摘要(result));
             row.setRenban(result.get連番());
+            row.setRowState(RowState.valueOf(result.toEntity().getState().name()));
             lists.add(row);
         }
         div.getDgdKinkyujiShoteiList().setDataSource(lists);
@@ -311,17 +327,30 @@ public final class KinkyujiShoteiShikanPanelHandler {
         return div.getDgdKinkyujiShoteiList().getDataSource().get(Integer.parseInt(div.getRowId().toString()));
     }
 
-    private void confirm(dgdKinkyujiShoteiList_Row row, RString state) {
+    private void confirm(dgdKinkyujiShoteiList_Row row, RString state, List<ShokanShoteiShikkanShisetsuRyoyo> rowList,
+            List<dgdKinkyujiShoteiList_Row> list) {
         if (修正.equals(state)) {
-            row.setRowState(RowState.Modified);
+            boolean flag = checkState(row, rowList);
+            if (flag) {
+                row.setRowState(RowState.Modified);
+            }
         } else if (削除.equals(state)) {
             row.setRowState(RowState.Deleted);
         } else if (登録.equals(state)) {
             row.setRowState(RowState.Added);
+            int 連番 = 0;
+            for (dgdKinkyujiShoteiList_Row oldRow : list) {
+                if (連番 < Integer.valueOf((oldRow.getRenban().toString()))) {
+                    連番 = Integer.valueOf((oldRow.getRenban().toString()));
+                }
+            }
+            連番 = 連番 + 1;
+            row.setRenban(new RString(String.valueOf(連番)));
         } else if (登録_削除.equals(state)) {
             div.getDgdKinkyujiShoteiList().getDataSource().remove(Integer.parseInt(div.getRowId().toString()));
             return;
         }
+
         row.setShoteiShobyoName1(div.getTxtShoteiShikkanShobyoName1().getValue());
         row.setShoteiShobyoName2(div.getTxtShoteiShikkanShobyoName2().getValue());
         row.setShoteiShobyoName3(div.getTxtShoteiShikkanShobyoName3().getValue());
@@ -354,6 +383,107 @@ public final class KinkyujiShoteiShikanPanelHandler {
         row.getMasuiTani().setValue(div.getTxtMasuiTanisu().getValue());
         row.setTekiyo(div.getTxtTekiyou().getValue());
 
+    }
+
+    private boolean checkState(dgdKinkyujiShoteiList_Row ddgRow, List<ShokanShoteiShikkanShisetsuRyoyo> rowList) {
+        ShokanShoteiShikkanShisetsuRyoyo result = null;
+        for (ShokanShoteiShikkanShisetsuRyoyo row : rowList) {
+            if (ddgRow.getRenban().equals(row.get連番())) {
+                result = row;
+            }
+        }
+        if (result == null) {
+            return false;
+        }
+        boolean 所定疾患施設療養費傷病名１flag = checkEquals(div.getTxtShoteiShikkanShobyoName1().getValue(), result.get所定疾患施設療養費傷病名１());
+        boolean 所定疾患施設療養費傷病名２flag = checkEquals(div.getTxtShoteiShikkanShobyoName2().getValue(), result.get所定疾患施設療養費傷病名２());
+        boolean 所定疾患施設療養費傷病名３flag = checkEquals(div.getTxtShoteiShikkanShobyoName3().getValue(), result.get所定疾患施設療養費傷病名３());
+        boolean 所定疾患施設療養費開始年月日１flag = checkEquals(div.getTxtShoteiShikkanShobyoKaishiYMD1().getValue(),
+                result.get所定疾患施設療養費開始年月日１() == null ? null : new RDate(result.get所定疾患施設療養費開始年月日１().toString()));
+        boolean 所定疾患施設療養費開始年月日２flag = checkEquals(div.getTxtShoteiShikkanShobyoKaishiYMD2().getValue(),
+                result.get所定疾患施設療養費開始年月日２() == null ? null : new RDate(result.get所定疾患施設療養費開始年月日２().toString()));
+        boolean 所定疾患施設療養費開始年月日３flag = checkEquals(div.getTxtShoteiShikkanShobyoKaishiYMD3().getValue(),
+                result.get所定疾患施設療養費開始年月日３() == null ? null : new RDate(result.get所定疾患施設療養費開始年月日３().toString()));
+        boolean 往診日数flag = checkEquals(div.getTxtOshinNissu().getValue(), new Decimal(result.get往診日数()));
+        boolean 往診医療機関名flag = checkEquals(div.getTxtOshinIryoKikanName().getValue(), result.get往診医療機関名());
+        boolean 通院日数flag = checkEquals(div.getTxtTsuyinNissu().getValue(), new Decimal(result.get通院日数()));
+        boolean 通院医療機関名flag = checkEquals(div.getTxtTsuinKikanName().getValue(), result.get通院医療機関名());
+        boolean 所定疾患施設療養費単位数flag = checkEquals(div.getTxtShoteiShikkanTanisu().getValue(), new Decimal(result.get所定疾患施設療養費単位数()));
+        boolean 所定疾患施設療養費日数flag = checkEquals(div.getTxtShoteiShikkanNissu().getValue(), new Decimal(result.get所定疾患施設療養費日数()));
+        boolean 所定疾患施設療養費小計flag = checkEquals(div.getTxtShoteiShikkanSubTotal().getValue(), new Decimal(result.get所定疾患施設療養費小計()));
+
+        boolean 緊急時傷病名１flag = checkEquals(div.getTxtKinkyuShobyoName1().getValue(), result.get緊急時傷病名１());
+        boolean 緊急時傷病名２flag = checkEquals(div.getTxtKinkyuShobyoName2().getValue(), result.get緊急時傷病名２());
+        boolean 緊急時傷病名３flag = checkEquals(div.getTxtKinkyuShobyoName3().getValue(), result.get緊急時傷病名３());
+        boolean 緊急時治療開始年月日１flag = checkEquals(div.getTxtKinkyuChiryoKaishiYMD1().getValue(),
+                result.get緊急時治療開始年月日１() == null ? null : new RDate(result.get緊急時治療開始年月日１().toString()));
+        boolean 緊急時治療開始年月日２flag = checkEquals(div.getTxtKinkyuChiryoKaishiYMD2().getValue(),
+                result.get緊急時治療開始年月日２() == null ? null : new RDate(result.get緊急時治療開始年月日２().toString()));
+        boolean 緊急時治療開始年月日３flag = checkEquals(div.getTxtKinkyuChiryoKaishiYMD3().getValue(),
+                result.get緊急時治療開始年月日３() == null ? null : new RDate(result.get緊急時治療開始年月日３().toString()));
+        boolean 緊急時治療管理単位数flag = checkEquals(div.getTxtKinkyuChiryoKanriTanisu().getValue(), new Decimal(result.get緊急時治療管理単位数()));
+        boolean 緊急時治療管理日数flag = checkEquals(div.getTxtKinkyuChiryoKanriNissu().getValue(), new Decimal(result.get緊急時治療管理日数()));
+        boolean 緊急時治療管理小計flag = checkEquals(div.getTxtKinkyuChiryoKanriSubTotal().getValue(), new Decimal(result.get緊急時治療管理小計()));
+        boolean 緊急時施設療養費合計単位数flag = checkEquals(div.getTxtTokuteiJiryoGoukei().getValue(), new Decimal(result.get緊急時施設療養費合計単位数()));
+
+        boolean 単位数flag = checkEquals(div.getTxtRehabilitationTanisu().getValue(), new Decimal(result.getリハビリテーション単位数()));
+        boolean 処置単位数flag = checkEquals(div.getTxtShujutsuTanisu().getValue(), new Decimal(result.get処置単位数()));
+        boolean 放射線治療単位数flag = checkEquals(div.getTxtHoshasenChiryoTanisu().getValue(), new Decimal(result.get放射線治療単位数()));
+        boolean 手術単位数flag = checkEquals(div.getTxtShochiTanisu().getValue(), new Decimal(result.get手術単位数()));
+        boolean 麻酔単位数flag = checkEquals(div.getTxtMasuiTanisu().getValue(), new Decimal(result.get麻酔単位数()));
+        boolean 適用flag = checkEquals(div.getTxtTekiyou().getValue(), get適用(result));
+
+        return 所定疾患施設療養費傷病名１flag || 所定疾患施設療養費傷病名２flag || 所定疾患施設療養費傷病名３flag
+                || 所定疾患施設療養費開始年月日１flag || 所定疾患施設療養費開始年月日２flag || 所定疾患施設療養費開始年月日３flag
+                || 往診日数flag || 往診医療機関名flag || 通院日数flag || 通院医療機関名flag || 所定疾患施設療養費単位数flag
+                || 所定疾患施設療養費日数flag || 所定疾患施設療養費小計flag || 緊急時傷病名１flag || 緊急時傷病名２flag
+                || 緊急時傷病名３flag || 緊急時治療開始年月日１flag || 緊急時治療開始年月日２flag || 緊急時治療開始年月日３flag
+                || 緊急時治療管理単位数flag || 緊急時治療管理日数flag || 緊急時治療管理小計flag || 緊急時施設療養費合計単位数flag
+                || 単位数flag || 処置単位数flag || 放射線治療単位数flag || 手術単位数flag || 麻酔単位数flag || 適用flag;
+
+    }
+
+    private boolean checkEquals(Object newValue, Object oldValue) {
+        if ((newValue == null && oldValue != null) || (newValue != null && oldValue == null)) {
+            return true;
+        } else if (newValue == null && oldValue == null) {
+            return false;
+        } else if (!newValue.equals(oldValue)) {
+            return true;
+        }
+        return false;
+    }
+
+    private RString get適用(ShokanShoteiShikkanShisetsuRyoyo result) {
+        RString 適用 = RString.EMPTY;
+        適用 = concat適用(適用, result.get摘要１());
+        適用 = concat適用(適用, result.get摘要２());
+        適用 = concat適用(適用, result.get摘要３());
+        適用 = concat適用(適用, result.get摘要４());
+        適用 = concat適用(適用, result.get摘要５());
+        適用 = concat適用(適用, result.get摘要６());
+        適用 = concat適用(適用, result.get摘要７());
+        適用 = concat適用(適用, result.get摘要８());
+        適用 = concat適用(適用, result.get摘要９());
+        適用 = concat適用(適用, result.get摘要１０());
+        適用 = concat適用(適用, result.get摘要１１());
+        適用 = concat適用(適用, result.get摘要１２());
+        適用 = concat適用(適用, result.get摘要１３());
+        適用 = concat適用(適用, result.get摘要１４());
+        適用 = concat適用(適用, result.get摘要１５());
+        適用 = concat適用(適用, result.get摘要１６());
+        適用 = concat適用(適用, result.get摘要１７());
+        適用 = concat適用(適用, result.get摘要１８());
+        適用 = concat適用(適用, result.get摘要１９());
+        適用 = concat適用(適用, result.get摘要２０());
+        return 適用;
+    }
+
+    private RString concat適用(RString 適用, RString value) {
+        if (value != null) {
+            適用 = 適用.concat(value);
+        }
+        return 適用;
     }
 
     /**
@@ -586,11 +716,12 @@ public final class KinkyujiShoteiShikanPanelHandler {
      * 申請を保存する設定
      *
      * @param keys ShoukanharaihishinseimeisaikensakuParameter
-     * @param 処理モード RString
      * @param shokanShoteiShikkanShisetsuRyoyoList 償還払請求所定疾患施設療養費データ
+     * @param dbJohoViewState DbJohoViewState
+     * @return DbJohoViewState
      */
-    public void 保存処理(ShoukanharaihishinseimeisaikensakuParameter keys,
-            RString 処理モード, List<ShokanShoteiShikkanShisetsuRyoyo> shokanShoteiShikkanShisetsuRyoyoList) {
+    public DbJohoViewState 保存処理(ShoukanharaihishinseimeisaikensakuParameter keys,
+            List<ShokanShoteiShikkanShisetsuRyoyo> shokanShoteiShikkanShisetsuRyoyoList, DbJohoViewState dbJohoViewState) {
 
         JigyoshaNo 事業者番号 = keys.get事業者番号();
         RString 様式番号 = keys.get様式番号();
@@ -599,52 +730,61 @@ public final class KinkyujiShoteiShikanPanelHandler {
                 getValue().toDateString().substring(0, SIX));
         RString 整理番号 = keys.get整理番号();
         RString 明細番号 = keys.get明細番号();
-        if (削除.equals(処理モード)) {
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
-                    被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        } else {
-            int max連番 = 0;
-            Map<RString, ShokanShoteiShikkanShisetsuRyoyo> map = new HashMap<>();
-            for (ShokanShoteiShikkanShisetsuRyoyo entity : shokanShoteiShikkanShisetsuRyoyoList) {
-                map.put(entity.get連番(), entity);
-                if (max連番 < Integer.valueOf(entity.get連番().toString())) {
-                    max連番 = Integer.valueOf(entity.get連番().toString());
-                }
+        int max連番 = 0;
+        Map<RString, ShokanShoteiShikkanShisetsuRyoyo> map = new HashMap<>();
+        for (ShokanShoteiShikkanShisetsuRyoyo entity : shokanShoteiShikkanShisetsuRyoyoList) {
+            map.put(entity.get連番(), entity);
+            if (max連番 < Integer.valueOf(entity.get連番().toString())) {
+                max連番 = Integer.valueOf(entity.get連番().toString());
             }
-
-            List<ShokanShoteiShikkanShisetsuRyoyo> list = new ArrayList<>();
-
-            for (dgdKinkyujiShoteiList_Row row : div.getDgdKinkyujiShoteiList().getDataSource()) {
-                if (RowState.Added == row.getRowState()) {
-                    max連番 = max連番 + 1;
-                    ShokanShoteiShikkanShisetsuRyoyo entity = new ShokanShoteiShikkanShisetsuRyoyo(
-                            被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号,
-                            new RString(String.format(書式.toString(), max連番)));
-                    entity = entity.added();
-                    entity = buildEntity(entity, row);
-                    list.add(entity);
-                }
-                if (RowState.Modified == row.getRowState()) {
-                    ShokanShoteiShikkanShisetsuRyoyo entityModified = map.get(row.getRenban());
-                    entityModified = entityModified.modified();
-                    entityModified = buildEntity(entityModified, row);
-                    list.add(entityModified);
-                }
-                if (RowState.Deleted == row.getRowState()) {
-                    ShokanShoteiShikkanShisetsuRyoyo entityDeleted = map.get(row.getRenban());
-                    entityDeleted = entityDeleted.deleted();
-                    list.add(entityDeleted);
-                }
-            }
-
-            RString 証明書コード = div.getPanelHead().getTxtShomeisho().getValue();
-
-            ShokanKihonParameter parameter = ShokanKihonParameter.
-                    createSelectByKeyParam(被保険者番号, 提供購入年月, 整理番号, 事業者番号, 証明書コード, 明細番号, 0);
-
-            SyokanbaraihiShikyuShinseiKetteManager manager = SyokanbaraihiShikyuShinseiKetteManager.createInstance();
-            manager.updShokanShoteiShikkanShisetsuRyoyo(parameter, list);
         }
+
+        List<ShokanShoteiShikkanShisetsuRyoyo> list = new ArrayList<>();
+
+        for (dgdKinkyujiShoteiList_Row row : div.getDgdKinkyujiShoteiList().getDataSource()) {
+            if (RowState.Added == row.getRowState()) {
+                max連番 = max連番 + 1;
+                ShokanShoteiShikkanShisetsuRyoyo entity = new ShokanShoteiShikkanShisetsuRyoyo(
+                        被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号,
+                        new RString(String.format(書式.toString(), max連番)));
+                entity = entity.added();
+                entity = buildEntity(entity, row);
+                list.add(entity);
+            }
+            if (RowState.Modified == row.getRowState()) {
+                ShokanShoteiShikkanShisetsuRyoyo entityModified = map.get(row.getRenban());
+                entityModified = entityModified.modified();
+                entityModified = buildEntity(entityModified, row);
+                list.add(entityModified);
+            }
+            if (RowState.Deleted == row.getRowState()) {
+                ShokanShoteiShikkanShisetsuRyoyo entityDeleted = map.get(row.getRenban());
+                entityDeleted = entityDeleted.deleted();
+                list.add(entityDeleted);
+            }
+
+            ShokanKihon kihon = null;
+            Integer updateNum = null;
+            List<ShokanKihon> kihonList = dbJohoViewState.get償還払請求基本データList();
+            if (kihonList == null) {
+                kihonList = new ArrayList<>();
+            }
+            if (!kihonList.isEmpty()) {
+                Map<Integer, ShokanKihon> kihonMap = getShokanKihonMap(kihonList, keys);
+                for (Map.Entry<Integer, ShokanKihon> mapValue : kihonMap.entrySet()) {
+                    kihon = mapValue.getValue();
+                    updateNum = mapValue.getKey();
+                    break;
+                }
+            }
+            kihon = set基本情報(kihon);
+            dbJohoViewState.set償還払請求所定疾患施設療養費等データList(new ArrayList<>(list));
+            if (kihon != null && updateNum != null) {
+                kihonList.set(updateNum, kihon);
+                dbJohoViewState.set償還払請求基本データList(new ArrayList<>(kihonList));
+            }
+        }
+        return dbJohoViewState;
     }
 
     private ShokanShoteiShikkanShisetsuRyoyo buildEntity(ShokanShoteiShikkanShisetsuRyoyo entity,
@@ -1154,6 +1294,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
         div.getPanelDetail().getPanelShobyoName().setDisabled(true);
         div.getPanelDetail().getPanelOshinTuyin().setDisabled(true);
         div.getPanelDetail().getPanelJiryoutensu().setDisabled(true);
+        div.getPanelDetail().getBtnClear().setDisabled(true);
         div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShoteiList().getClickedRowId())));
     }
 
@@ -1169,8 +1310,9 @@ public final class KinkyujiShoteiShikanPanelHandler {
      * 「確定ボタン」押下設置
      *
      * @param state RString
+     * @param rowList ShokanShoteiShikkanShisetsuRyoyo
      */
-    public void click_Confirm(RString state) {
+    public void click_Confirm(RString state, List<ShokanShoteiShikkanShisetsuRyoyo> rowList) {
         div.getBtnAdd().setDisabled(false);
         div.getPanelDetail().setDisplayNone(true);
 
@@ -1178,21 +1320,80 @@ public final class KinkyujiShoteiShikanPanelHandler {
         if (登録.equals(state)) {
             if (!RString.EMPTY.equals(div.getRowId())) {
                 dgdKinkyujiShoteiList_Row row = getSelectedRow();
-                confirm(row, state);
+                confirm(row, state, rowList, list);
                 list.set(Integer.parseInt(div.getRowId().toString()), row);
             } else {
                 dgdKinkyujiShoteiList_Row row = new dgdKinkyujiShoteiList_Row();
-                confirm(row, state);
+                confirm(row, state, rowList, list);
                 list.add(row);
             }
         } else if (登録_削除.equals(state)) {
             dgdKinkyujiShoteiList_Row row = getSelectedRow();
-            confirm(row, state);
+            confirm(row, state, rowList, list);
         } else {
             dgdKinkyujiShoteiList_Row row = getSelectedRow();
-            confirm(row, state);
+            confirm(row, state, rowList, list);
             list.set(Integer.parseInt(div.getRowId().toString()), row);
         }
         div.getDgdKinkyujiShoteiList().setDataSource(list);
     }
+
+    private Map<Integer, ShokanKihon> getShokanKihonMap(
+            List<ShokanKihon> kihonList, ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
+        Map<Integer, ShokanKihon> map = new HashMap<>();
+        for (int i = 0; i < kihonList.size(); i++) {
+            ShokanKihon kihon = kihonList.get(i);
+            if (kensakuParameter.get被保険者番号().equals(kihon.get被保険者番号())
+                    && kensakuParameter.getサービス年月().equals(kihon.getサービス提供年月())
+                    && kensakuParameter.get事業者番号().equals(kihon.get事業者番号())
+                    && kensakuParameter.get整理番号().equals(kihon.get整理番号())
+                    && kensakuParameter.get明細番号().equals(kihon.get明細番号())
+                    && kensakuParameter.get様式番号().equals(kihon.get様式番号())) {
+                map.put(i, kihon);
+            }
+        }
+        return map;
+    }
+
+    private ShokanKihon set基本情報(ShokanKihon kihon) {
+        if (kihon == null) {
+            return null;
+        }
+        Decimal 金額合計 = Decimal.ZERO;
+        List<dgdKinkyujiShoteiList_Row> rowList = div.getDgdKinkyujiShoteiList().getDataSource();
+        for (dgdKinkyujiShoteiList_Row row : rowList) {
+            if (row.getRowState() != RowState.Deleted) {
+                Decimal 緊急時施設療養費合計単位数 = get金額(row.getKinkyuRyoyohiGokeiTaniSu().getValue());
+                Decimal 所定疾患施設療養費小計 = get金額(row.getShoteiTaniGokei().getValue());
+                金額合計 = 緊急時施設療養費合計単位数.add(所定疾患施設療養費小計);
+            }
+        }
+        kihon = kihon.createBuilderForEdit().set緊急時施設療養費請求額(金額合計).build();
+        kihon = kihon.modified();
+        return kihon;
+    }
+
+    private List<ShokanShoteiShikkanShisetsuRyoyo> getUpdateList(
+            List<ShokanShoteiShikkanShisetsuRyoyo> allList, ShoukanharaihishinseimeisaikensakuParameter parameter) {
+        List<ShokanShoteiShikkanShisetsuRyoyo> updateList = new ArrayList<>();
+        for (ShokanShoteiShikkanShisetsuRyoyo ryoyo : allList) {
+            if (ryoyo.get被保険者番号().equals(parameter.get被保険者番号())
+                    && ryoyo.getサービス提供年月().equals(parameter.getサービス年月())
+                    && ryoyo.get整理番号().equals(parameter.get整理番号())
+                    && ryoyo.get事業者番号().equals(parameter.get事業者番号())
+                    && ryoyo.get様式番号().equals(parameter.get様式番号())
+                    && ryoyo.get明細番号().equals(parameter.get明細番号())) {
+                updateList.add(ryoyo);
+            }
+        }
+        return updateList;
+    }
+
+    private Decimal get金額(Decimal 金額) {
+        if (金額 == null) {
+            金額 = Decimal.ZERO;
+        }
+        return 金額;
+    }
+
 }

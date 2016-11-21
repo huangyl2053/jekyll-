@@ -4,6 +4,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /*
@@ -75,4 +76,11 @@ public interface IPaymentDateDiv extends ICommonChildDivBaseProperties {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs getCheckMessage();
+
+    /**
+     * get窓口払い一括更新区分RB
+     *
+     * @return RadioButton
+     */
+    public RadioButton get窓口払い一括更新区分RB();
 }

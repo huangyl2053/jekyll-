@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.DataCompareShoriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.DelJukyushaIdoRenrakuhyoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsIdoTempProcess;
@@ -17,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsJukyushaIdoR
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.SoufuErrorOutProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdAtenaTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdFutanWariaiTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdGengakuTempProcess;
@@ -33,9 +32,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdSeihoTempPro
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdShafukuTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdSogoJigyoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdTokuteNyushoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110020.DBC110020_JukyushaIdoRenrakuhyoOutParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110020.JukyushaIdoRenrakuhyoOutProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110020.JukyushaIdoRenrakuhyoOutFlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -53,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.batch.BatchTextFileConvert;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.batch.BatchTextFileConvertBatchParameter;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -130,7 +127,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
         executeStep(データ比較処理);
         returnEntity = getResult(JukyushaIdoRenrakuhyoOutFlowEntity.class, new RString(データ比較処理),
                 DataCompareShoriProcess.PARAMETER_OUT_RETURNENTITY);
-//        do文字コード変換();
+        do文字コード変換();
         executeStep(国保連インタフェース管理更新);
 
     }
@@ -310,14 +307,14 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
         if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
             文字コード = Encode.UTF_8;
         }
-        if (Encode.UTF_8.equals(文字コード) && returnEntity.getレコード件数合計() != INT_0) {
+        if (Encode.UTF_8.equals(文字コード) && returnEntity.get異動連絡票件数() != INT_0) {
             File file = new File(returnEntity.get出力ファイルパス().toString());
             if ((file.exists() && file.delete()) || !file.exists()) {
                 executeStep(文字コード変換);
             }
             deleteTmpFile(returnEntity.get入力ファイルパス());
         }
-        if (returnEntity.getレコード件数合計() != INT_0) {
+        if (returnEntity.get異動連絡票件数() != INT_0) {
             SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
                     FilesystemName.fromString(returnEntity.get出力ファイルパス().substring(
                                     returnEntity.get出力ファイルパス().lastIndexOf(File.separator) + INT_1)));
@@ -361,16 +358,10 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
 
     @Step(国保連インタフェース管理更新)
     IBatchFlowCommand upDoInterfaceKanriKousin() {
-        KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter parameter
-                = new KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter();
-        FlexibleYearMonth 処理年月 = new FlexibleYearMonth(getParameter().get処理年月().toDateString());
-        parameter.set処理年月(処理年月);
-        parameter.set交換情報識別番号(交換情報識別番号);
-        parameter.set処理対象年月(処理年月);
-        parameter.setレコード件数合計(returnEntity.get異動連絡票件数());
-        List<RString> fileNameList = new ArrayList<>();
-        fileNameList.add(getParameter().getファイル名());
-        parameter.setFileNameList(fileNameList);
-        return simpleBatch(KokuhorenkyoutsuDoInterfaceKanriKousinProcess.class).arguments(parameter).define();
+        JukyushaIdoRenrakuhyoOutProcessParameter processParameter = getParameter().
+                toProcessParameter();
+        processParameter.set異動連絡票件数(returnEntity.get異動連絡票件数());
+        return simpleBatch(UpDoInterfaceKanriKousinProcess.class).arguments(processParameter)
+                .define();
     }
 }

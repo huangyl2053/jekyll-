@@ -140,4 +140,6 @@ public class ShuukeiEntity extends DbTableEntityBase<ShuukeiEntity> implements I
     private Integer 過誤回数;
     @TempTableColumnOrder(53)
     private FlexibleYearMonth 審査年月;
+    @TempTableColumnOrder(54)
+    private Integer 短期入所計画日数;
 }

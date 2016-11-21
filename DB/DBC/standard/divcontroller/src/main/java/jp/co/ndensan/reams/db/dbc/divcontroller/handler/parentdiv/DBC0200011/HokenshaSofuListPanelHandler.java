@@ -12,9 +12,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.hihokenshajohosoufudatasakuseyi.
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhoreninterface.ConfigKeysKokuhorenSofu;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200011.HokenshaSofuListPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200011.dgHokenshaSofuList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.hihokenshajohosoufudatasakuseyi.HihokenshaJohoSoufuDataSakuseyi;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -39,6 +41,9 @@ public class HokenshaSofuListPanelHandler {
     private static final RString 処理状態区分_丸い = new RString("○");
     private static final RString 処理状態区分_横線 = new RString("-");
 
+    private static final RString PREFIX = new RString("【");
+    private static final RString ENDFIX = new RString("】");
+
     /**
      * コンストラクタです。
      *
@@ -57,18 +62,26 @@ public class HokenshaSofuListPanelHandler {
         List<KokuhorenSofuJohoInfo> kokuhorenSofuJohoInfoList = new ArrayList<>();
         HihokenshaJohoSoufuDataSakuseyi 保険者情報送付 = HihokenshaJohoSoufuDataSakuseyi.createInstance();
         List<KokuhorenSofuJohoResult> resultList = 保険者情報送付.getKokuhorenSofuJoho(処理年月);
+        if (resultList == null || resultList.isEmpty()) {
+            throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage().evaluate());
+        }
+
         for (KokuhorenSofuJohoResult 国保連送付情報 : resultList) {
+
             if (isｺｰﾄﾞ(国保連送付情報.get交換情報識別番号())) {
                 KokuhorenSofuJohoInfo kokuhorenSofuJohoInfo = new KokuhorenSofuJohoInfo();
                 kokuhorenSofuJohoInfo.set交換識別番号(国保連送付情報.get交換情報識別番号());
                 kokuhorenSofuJohoInfo.set国保連送付情報(国保連送付情報);
                 kokuhorenSofuJohoInfo.set一覧表示順(ConfigKeysKokuhorenSofu.toValue(国保連送付情報.get交換情報識別番号()).get一覧表示順());
-                kokuhorenSofuJohoInfo.set処理名(ConfigKeysKokuhorenSofu.toValue(国保連送付情報.get交換情報識別番号()).get略称());
+                ConfigKeysKokuhorenSofu config = ConfigKeysKokuhorenSofu.toValue(国保連送付情報.get交換情報識別番号());
+                kokuhorenSofuJohoInfo.set処理名(PREFIX.concat(config.getコード()).concat(ENDFIX).concat(config.get略称()));
                 kokuhorenSofuJohoInfoList.add(kokuhorenSofuJohoInfo);
             }
         }
         List<dgHokenshaSofuList_Row> gHokenshaSofuListDataSource = new ArrayList<>();
+
         for (KokuhorenSofuJohoInfo model : kokuhorenSofuJohoInfoList) {
+
             gHokenshaSofuListDataSource.add(createdgHokenshaSofuListRow(model));
         }
         div.getBtnHyojisuru().setDisabled(false);

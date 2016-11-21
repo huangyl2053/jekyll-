@@ -112,7 +112,10 @@ public class ShinseishoToroku {
                 return ResponseData.of(div).addValidationMessages(valid2).respond();
             }
         }
-        getHandler(div).年次処理が実行済みか確認();
+        if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())
+                || ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())) {
+            getHandler(div).年次処理が実行済みか確認();
+        }
         return ResponseData.of(div).respond();
     }
 

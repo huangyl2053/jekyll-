@@ -370,7 +370,11 @@ public class JikoFutangakuHoseiHandler {
         List<KeyValueDataSource> h26年度以降 = new ArrayList();
         List<KeyValueDataSource> h27年1月以降 = new ArrayList();
         for (KaigoGassan_ShotokuKbn type : KaigoGassan_ShotokuKbn.values()) {
-            h27年1月以降.add(new KeyValueDataSource(type.getCode(), type.get名称()));
+            if (type.getCode() == null || type.getCode().isEmpty()) {
+                h27年1月以降.add(new KeyValueDataSource(RString.HALF_SPACE, type.get名称()));
+            } else {
+                h27年1月以降.add(new KeyValueDataSource(type.getCode(), type.get名称()));
+            }
             if (KaigoGassan_ShotokuKbn.区分ア.get名称().equals(type.get名称())
                     || KaigoGassan_ShotokuKbn.区分イ.get名称().equals(type.get名称())
                     || KaigoGassan_ShotokuKbn.区分ウ.get名称().equals(type.get名称())

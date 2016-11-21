@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -91,7 +92,10 @@ public class TsukibetsuSuiihyoSakuseiParameter {
      * @return ResponseData<TsukibetsuSuiihyoSakuseiParameterDiv>
      */
     public ResponseData<TsukibetsuSuiihyoSakuseiParameterDiv> onClick_btnJikkouBefore(TsukibetsuSuiihyoSakuseiParameterDiv div) {
-        ValidationMessageControlPairs validationMessages = getValidationHandler(div).validate();
+        ValidationMessageControlPairs validationMessages = ValidationMessageControlPairs.NO_ERROR;
+        if(!ResponseHolder.isReRequest()){
+            validationMessages = getValidationHandler(div).validate();
+        }
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }

@@ -35,8 +35,8 @@ public class ServiceRiyohyoInfoDivValidator {
     public IValidationMessages validate明細計算() {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div)
-                .ifNot(ServiceRiyohyoInfoDivSpec.事業者コード必須入力のチェックです)
-                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
+//                .ifNot(ServiceRiyohyoInfoDivSpec.事業者コード必須入力のチェックです)
+//                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.サービスコード必須入力チェック)
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.単位必須入力チェック)
@@ -47,6 +47,34 @@ public class ServiceRiyohyoInfoDivValidator {
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービス単位必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.割引適用後率入力値が不正チェック)
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.割引適用後率入力値が不正チェック)
+                .messages());
+        return messages;
+    }
+    
+    /**
+     * 利用年月必須入力のチェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validate利用年月必須入力() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(ServiceRiyohyoInfoDivSpec.利用年月必須入力のチェックです)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.利用年月必須項目)
+                .messages());
+        return messages;
+    }
+    
+    /**
+     * 事業者必須入力のチェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validate事業者必須入力() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(ServiceRiyohyoInfoDivSpec.事業者コード必須入力のチェックです)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
                 .messages());
         return messages;
     }

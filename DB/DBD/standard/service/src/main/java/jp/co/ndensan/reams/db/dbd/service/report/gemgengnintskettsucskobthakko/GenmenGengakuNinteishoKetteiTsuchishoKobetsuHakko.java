@@ -15,25 +15,23 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmen;
 import jp.co.ndensan.reams.db.dbd.business.report.GemmenGengakuNinteishoKetteiTsuchisho;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.AtesakiPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.ShikibetsuTaishoPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.util.IAtesakiPSMMybatisMapper;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.util.IShikibetsuTaishoPSMMybatisMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenManager;
-import jp.co.ndensan.reams.db.dbd.service.report.dbd100013.FutanGendogakuKetteiTsuchishoPrintService;
-import jp.co.ndensan.reams.db.dbd.service.report.dbd100020.FutanGendogakuNinteishoPrintService;
-import jp.co.ndensan.reams.db.dbd.service.report.dbd100011.HomKaigRiysFutGenmKettTsuchishoPrintService;
-import jp.co.ndensan.reams.db.dbd.service.report.dbd100014.HomKaigRiysFutgGengKettTsuchishoPrintService;
-import jp.co.ndensan.reams.db.dbd.service.report.dbd100017.HomKaigRiysFutgGengNintshoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd100009.RiysFutgGengMenjKettTsuchishoPrintService;
-import jp.co.ndensan.reams.db.dbd.service.report.dbd100015.RiysFutgGengMenjNinteishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.dbd100011.HomKaigRiysFutGenmKettTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd100012.ShakFukusHojRiysFutKeigTaisKetTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.dbd100013.FutanGendogakuKetteiTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.dbd100014.HomKaigRiysFutgGengKettTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.dbd100015.RiysFutgGengMenjNinteishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.dbd100017.HomKaigRiysFutgGengNintshoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.dbd100020.FutanGendogakuNinteishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd100022.TokubChiiKasRiysFutGengKakuninshoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -45,7 +43,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsu
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
@@ -54,10 +51,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.DainoRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
@@ -102,7 +97,8 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
     /**
      * {@link InstanceProvider#create}にて生成した{@link GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko}のインスタンス
      */
     public static GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko createInstance() {
         return InstanceProvider.create(GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.class);
@@ -154,7 +150,7 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
             } else if (GemmenGengakuNinteishoKetteiTsuchisho.負担限度額決定通知書.get名称().equals(帳票タイプ)) {
                 FutanGendogakuNintei 負担限度額認定 = getFutanGendogaKunintei(被保険者番号, GemmenGengakuShurui.負担限度額認定.getコード(), 履歴番号);
                 FutanGendogakuKetteiTsuchishoPrintService service = new FutanGendogakuKetteiTsuchishoPrintService();
-                    service.print(負担限度額認定,
+                service.print(負担限度額認定,
                         ShikibetsuTaishoFactory.createKojin(uaFt200Entity), get宛先情報(識別コード),
                         new ChohyoSeigyoKyotsu(dbT7065Entity), dbT7067EntityList, association, 発行日,
                         文書番号, 通知書定型文List, 帳票分類ID, reportManager);

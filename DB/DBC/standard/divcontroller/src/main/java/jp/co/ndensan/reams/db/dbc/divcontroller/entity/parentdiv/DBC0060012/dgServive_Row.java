@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060012;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Oct 20 16:40:30 CST 2016 
+ * Sat Nov 19 10:41:28 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -19,14 +20,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgServive_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
 
     private RString defaultDataName0;
     private RString defaultDataName1;
     private RString defaultDataName2;
     private RString defaultDataName3;
     private RString defaultDataName4;
-    private RString defaultDataName5;
+    private TextBoxNum defaultDataName5;
 
     public dgServive_Row() {
         super();
@@ -35,7 +36,7 @@ public class dgServive_Row extends DataRow {
         this.defaultDataName2 = RString.EMPTY;
         this.defaultDataName3 = RString.EMPTY;
         this.defaultDataName4 = RString.EMPTY;
-        this.defaultDataName5 = RString.EMPTY;
+        this.defaultDataName5 = new TextBoxNum();
         this.setOriginalData("defaultDataName0", defaultDataName0);
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
@@ -44,7 +45,7 @@ public class dgServive_Row extends DataRow {
         this.setOriginalData("defaultDataName5", defaultDataName5);
     }
 
-    public dgServive_Row(RString defaultDataName0, RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4, RString defaultDataName5) {
+    public dgServive_Row(RString defaultDataName0, RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4, TextBoxNum defaultDataName5) {
         super();
         this.setOriginalData("defaultDataName0", defaultDataName0);
         this.setOriginalData("defaultDataName1", defaultDataName1);
@@ -80,7 +81,7 @@ public class dgServive_Row extends DataRow {
         return defaultDataName4;
     }
 
-    public RString getDefaultDataName5() {
+    public TextBoxNum getDefaultDataName5() {
         return defaultDataName5;
     }
 
@@ -109,7 +110,7 @@ public class dgServive_Row extends DataRow {
         this.defaultDataName4 = defaultDataName4;
     }
 
-    public void setDefaultDataName5(RString defaultDataName5) {
+    public void setDefaultDataName5(TextBoxNum defaultDataName5) {
         this.setOriginalData("defaultDataName5", defaultDataName5);
         this.defaultDataName5 = defaultDataName5;
     }

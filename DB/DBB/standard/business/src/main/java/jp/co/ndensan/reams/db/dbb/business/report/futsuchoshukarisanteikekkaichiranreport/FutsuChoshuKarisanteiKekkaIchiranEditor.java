@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -403,24 +404,35 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
     }
 
     private void set出力順(FutsuChoshuKarisanteiKekkaIchiranSource source) {
-        source.世帯コード = 普徴仮算定計算後賦課.get世帯コード().getColumnValue();
+        SetaiCode 世帯コード = 普徴仮算定計算後賦課.get世帯コード();
+        source.世帯コード = (世帯コード == null || 世帯コード.isEmpty()) ? RString.EMPTY
+                : 世帯コード.getColumnValue();
         LasdecCode 市町村コード = 普徴仮算定計算後賦課.get宛名の情報().getGenLasdecCode();
-        source.市町村コード = 市町村コード == null ? RString.EMPTY : 市町村コード.code市町村RString();
-        source.徴収方法 = 普徴仮算定計算後賦課.get徴収方法();
-        source.性別 = 普徴仮算定計算後賦課.get宛名の情報().getSeibetsuCode();
+        source.市町村コード = (市町村コード == null || 市町村コード.isEmpty()) ? RString.EMPTY
+                : 市町村コード.code市町村RString();
+        RString 徴収方法 = 普徴仮算定計算後賦課.get徴収方法();
+        source.徴収方法 = (徴収方法 == null || 徴収方法.isEmpty()) ? RString.EMPTY : 徴収方法;
+        RString 性別 = 普徴仮算定計算後賦課.get宛名の情報().getSeibetsuCode();
+        source.性別 = (性別 == null || 性別.isEmpty()) ? RString.EMPTY : 性別;
         AtenaKanaMeisho 氏名５０音カナ = 普徴仮算定計算後賦課.get宛名の情報().getKanaShimei();
-        source.氏名５０音カナ = 氏名５０音カナ == null ? RString.EMPTY : 氏名５０音カナ.getColumnValue();
-        source.特徴開始月 = 普徴仮算定計算後賦課.get特徴開始月();
+        source.氏名５０音カナ = (氏名５０音カナ == null || 氏名５０音カナ.isEmpty()) ? RString.EMPTY
+                : 氏名５０音カナ.getColumnValue();
+        RString 特徴開始月 = 普徴仮算定計算後賦課.get特徴開始月();
+        source.特徴開始月 = (特徴開始月 == null || 特徴開始月.isEmpty()) ? RString.EMPTY : 特徴開始月;
         FlexibleDate 生年月日 = 普徴仮算定計算後賦課.get宛名の情報().getSeinengappiYMD();
-        source.生年月日 = 生年月日 == null ? RString.EMPTY : 生年月日.seireki().toDateString();
+        source.生年月日 = (生年月日 == null || 生年月日.isEmpty()) ? RString.EMPTY : 生年月日.seireki().toDateString();
         ChoikiCode 町域コード = 普徴仮算定計算後賦課.get宛名の情報().getChoikiCode();
-        source.町域コード = 町域コード == null ? RString.EMPTY : 町域コード.getColumnValue();
+        source.町域コード = (町域コード == null || 町域コード.isEmpty()) ? RString.EMPTY : 町域コード.getColumnValue();
         GyoseikuCode 行政区コード = 普徴仮算定計算後賦課.get宛名の情報().getGyoseikuCode();
-        source.行政区コード = 行政区コード == null ? RString.EMPTY : 行政区コード.getColumnValue();
-        source.被保険者番号 = 普徴仮算定計算後賦課.get被保険者番号().getColumnValue();
-        source.識別コード = 普徴仮算定計算後賦課.get識別コード().getColumnValue();
-        source.通知書番号 = 普徴仮算定計算後賦課.get通知書番号().getColumnValue();
+        source.行政区コード = (行政区コード == null || 行政区コード.isEmpty()) ? RString.EMPTY : 行政区コード.getColumnValue();
+        RString 被保険者番号 = 普徴仮算定計算後賦課.get被保険者番号().getColumnValue();
+        source.被保険者番号 = (被保険者番号 == null || 被保険者番号.isEmpty()) ? RString.EMPTY : 被保険者番号;
+        RString 識別コード = 普徴仮算定計算後賦課.get識別コード().getColumnValue();
+        source.識別コード = (識別コード == null || 識別コード.isEmpty()) ? RString.EMPTY : 識別コード;
+        RString 通知書番号 = 普徴仮算定計算後賦課.get通知書番号().getColumnValue();
+        source.通知書番号 = (通知書番号 == null || 通知書番号.isEmpty()) ? RString.EMPTY : 通知書番号;
         YubinNo 郵便番号 = 普徴仮算定計算後賦課.get宛名の情報().getYubinNo();
-        source.郵便番号 = 郵便番号 == null ? RString.EMPTY : 郵便番号.getYubinNo();
+        source.郵便番号 = (郵便番号 == null || 郵便番号.isEmpty()) ? RString.EMPTY : 郵便番号.getYubinNo();
     }
+
 }

@@ -39,6 +39,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
     /**
      * コンストラクタです
      *
+     * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @param 編集後仮算定通知書共通情報entity EditedKariSanteiTsuchiShoKyotsu
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 YMDHMS
@@ -48,13 +49,13 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
      * @param 連番 int
      * @param entity TsuchishoDataTempEntity
      */
-    public TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(
+    public TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
             FlexibleYear 調定年度, YMDHMS 帳票作成日時, Association association,
             List<RString> 出力項目リスト,
             List<RString> 改頁項目リスト,
             int 連番, TsuchishoDataTempEntity entity) {
-        this.仮算定通知書情報 = null;
+        this.仮算定通知書情報 = 仮算定通知書情報;
         this.編集後仮算定通知書共通情報entity = 編集後仮算定通知書共通情報entity;
         this.調定年度 = 調定年度;
         this.帳票作成日時 = 帳票作成日時;
@@ -76,7 +77,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
      * @param 出力項目リスト List<RString>
      * @param 改頁項目リスト List<RString>
      * @param 連番 int
-     */
+     */    
     public TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
             FlexibleYear 調定年度, YMDHMS 帳票作成日時, Association association,

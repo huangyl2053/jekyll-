@@ -192,7 +192,7 @@ public class TokkiText1A4Business {
                 短冊情報.set事項番号(get項目番号(kyotsuEntity.getKoroshoIfShikibetsuCode(),
                         entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
                 短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo()));
-                if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
+                if (TokkijikoTextImageKubun.テキスト.getコード().equals(get特記事項テキスト_イメージ区分())) {
                     短冊情報.set特記事項テキスト_イメージ(entity.getTokkiJiko());
                 } else {
                     短冊情報.set特記事項テキスト_イメージ(getFilePath(kyotsuEntity.getImageSharedFileId(),

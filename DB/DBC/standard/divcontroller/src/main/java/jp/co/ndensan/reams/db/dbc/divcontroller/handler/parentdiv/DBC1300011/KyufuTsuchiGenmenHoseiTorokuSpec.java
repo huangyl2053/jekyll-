@@ -64,12 +64,7 @@ public enum KyufuTsuchiGenmenHoseiTorokuSpec implements IPredicate<KyufuTsuchiGe
     事業者入力 {
         @Override
         public boolean apply(KyufuTsuchiGenmenHoseiTorokuDiv div) {
-            boolean flag = false;
-            if (!div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isNull()
-                    && !div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isEmpty()) {
-                flag = true;
-            }
-            return flag;
+            return !div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isEmpty();
         }
     },
     /**

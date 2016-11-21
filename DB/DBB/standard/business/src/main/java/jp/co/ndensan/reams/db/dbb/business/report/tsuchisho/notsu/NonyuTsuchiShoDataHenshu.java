@@ -23,7 +23,9 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.RyoshuinranHyo
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.RyoshushoHizukeranKiHyoji;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.SagakuReishoHakkoShijiKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.SanteiKiso;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -46,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  *
@@ -128,7 +131,7 @@ public class NonyuTsuchiShoDataHenshu {
         }
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト
                 = create納入通知書期情報(普徴納期情報リスト, 更正後普徴期別金額リスト,
-                        口座区分, 請求情報リスト, 納入通知書制御情報, 普徴収入情報リスト, 出力期リスト, 調定年度, 賦課年度);
+                        口座区分, 請求情報リスト, 納入通知書制御情報, 普徴収入情報リスト, 出力期リスト, 調定年度, 賦課年度, false);
         SanteiNoKiso 算定基礎情報 = new SanteiNoKiso();
         SanteiKiso 算定の基礎1 = SanteiKiso.空白;
         SanteiKiso 算定の基礎2 = SanteiKiso.空白;
@@ -251,6 +254,7 @@ public class NonyuTsuchiShoDataHenshu {
      * @param 代納人氏名 代納人氏名
      * @param 出力期リスト 出力期リスト
      * @param 編集範囲区分 編集範囲区分
+     * @param is期毎タイプ boolean
      * @return 本算定納入通知書情報
      */
     public HonSanteiNonyuTsuchiShoJoho create本算定納入通知書情報(HonSanteiTsuchiShoKyotsu 本算定通知書情報,
@@ -259,7 +263,8 @@ public class NonyuTsuchiShoDataHenshu {
             IShunoKamoku 収納科目,
             IName 代納人氏名,
             List<Kitsuki> 出力期リスト,
-            HenshuHaniKubun 編集範囲区分) {
+            HenshuHaniKubun 編集範囲区分,
+            boolean is期毎タイプ) {
         HonSanteiTsuchiShoKyotsuKomokuHenshu 賦課帳票共通項目編集 = new HonSanteiTsuchiShoKyotsuKomokuHenshu();
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 賦課帳票共通項目編集.create本算定通知書共通情報(本算定通知書情報);
         List<UniversalPhase> 普徴期別金額リスト = new ArrayList<>();
@@ -304,7 +309,7 @@ public class NonyuTsuchiShoDataHenshu {
             普徴納期情報リスト = 本算定通知書情報.get普徴納期情報リスト();
         }
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = create納入通知書期情報(普徴納期情報リスト, 普徴期別金額リスト,
-                口座区分, 請求情報リスト, 納入通知書制御情報, 普徴収入情報リスト, 出力期リスト, 調定年度, 賦課年度);
+                口座区分, 請求情報リスト, 納入通知書制御情報, 普徴収入情報リスト, 出力期リスト, 調定年度, 賦課年度, is期毎タイプ);
         NofuShoKyotsu 納付書共通 = create納付書共通(
                 調定年度,
                 賦課年度,
@@ -344,6 +349,7 @@ public class NonyuTsuchiShoDataHenshu {
      * @param 請求情報リスト 請求情報リスト
      * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
+     * @param is期毎タイプ boolean
      * @return 納入通知書期情報リスト
      */
     public List<NonyuTsuchiShoKiJoho> create納入通知書期情報(
@@ -355,13 +361,26 @@ public class NonyuTsuchiShoDataHenshu {
             List<SamantabhadraIncomeInformation> 普徴収入情報リスト,
             List<Kitsuki> 出力期リスト,
             FlexibleYear 調定年度,
-            FlexibleYear 賦課年度) {
+            FlexibleYear 賦課年度,
+            boolean is期毎タイプ) {
+        if (is期毎タイプ) {
+            FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
+            KitsukiList 期月リスト = fuchoKiUtil.get期月リスト();
+            List<Kitsuki> newList = new ArrayList<>();
+            for (Kitsuki 出力期 : 出力期リスト) {
+                Kitsuki 未納付出力期 = find未納付出力期(更正後普徴期別金額リスト, 普徴収入情報リスト, 出力期.get期AsInt(), 期月リスト);
+                if (null != 未納付出力期 && !newList.contains(未納付出力期)) {
+                    newList.add(未納付出力期);
+                }
+            }
+            出力期リスト = newList;
+        }
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = new ArrayList<>();
         for (Kitsuki 出力期 : 出力期リスト) {
             int 期 = 出力期.get期AsInt();
             int 月 = 出力期.get月AsInt();
             Decimal 金額 = get金額(更正後普徴期別金額リスト, 期);
-            Decimal 収入額 = get収入額(普徴収入情報リスト, 出力期);
+            Decimal 収入額 = get収入額(普徴収入情報リスト, 出力期.get期AsInt());
             Decimal 納付額
                     = SagakuReishoHakkoShijiKubun.差額令書で発行する.equals(納入通知書制御情報.get差額令書発行指示()) ? 金額.subtract(収入額) : 金額;
             int 銀振印字位置;
@@ -399,6 +418,18 @@ public class NonyuTsuchiShoDataHenshu {
         return 納入通知書期情報リスト;
     }
 
+    private Kitsuki find未納付出力期(List<UniversalPhase> 更正後普徴期別金額リスト, List<SamantabhadraIncomeInformation> 普徴収入情報リスト, int 期,
+            KitsukiList 期月リスト) {
+        for (int i = 期; i <= 整数12; i++) {
+            Decimal 金額 = get金額(更正後普徴期別金額リスト, i);
+            Decimal 収入額 = get収入額(普徴収入情報リスト, i);
+            if (!Decimal.ZERO.equals(金額) && !金額.equals(収入額)) {
+                return 期月リスト.get期の最初月(i);
+            }
+        }
+        return null;
+    }
+
     private boolean is処理中の期月の物である(List<SeikyuForPrinting> 請求情報リスト, RString 処理中の期) {
         for (SeikyuForPrinting 請求情報 : 請求情報リスト) {
             if (Integer.parseInt(処理中の期.toString()) == 請求情報.get請求対象情報().get請求明細リスト().get(0).get収納期別明細().get期別()) {
@@ -421,9 +452,8 @@ public class NonyuTsuchiShoDataHenshu {
         納入通知書期情報.setブック開始位置(ブック開始位置);
         納入通知書期情報.set期(出力期.get期AsInt());
         納入通知書期情報.set月(出力期.get月());
-        納入通知書期情報.set期表記(new RString(String.valueOf(出力期.get期AsInt()).concat("期").concat(RString.HALF_SPACE.toString())
-                .concat("(").concat(String.valueOf(出力期.get月AsInt())).concat("月分)")).padLeft(RString.HALF_SPACE, 2));
-        納入通知書期情報.set月表記(new RString(String.valueOf(出力期.get月AsInt())).padLeft(RString.HALF_SPACE, 2));
+        納入通知書期情報.set期表記(new RString(出力期.get期AsInt()).padLeft(RString.HALF_SPACE, 2));
+        納入通知書期情報.set月表記(new RString(出力期.get月AsInt()).padLeft(RString.HALF_SPACE, 2));
         納入通知書期情報.set随時表記(KanendoMongon.随時.equals(納入通知書制御情報.get過年度文言1()) ? KanendoMongon.随時.get名称() : RString.EMPTY);
         納入通知書期情報.set納期開始日(納期.get納期開始日());
         納入通知書期情報.set納期開始日表記(納期.get納期開始日().wareki()
@@ -519,8 +549,8 @@ public class NonyuTsuchiShoDataHenshu {
     private void set納付額欄(boolean is現金納付, boolean is口座振替,
             NonyuTsuchiShoKiJoho 納入通知書期情報, Decimal 納付額, NonyuTsuchiShoSeigyoJoho 納入通知書制御情報) {
         if (is現金納付) {
-            納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
-            納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
+            納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
+            納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
         } else if (is口座振替) {
             NofugakuranHyojiKubun 納付書納付額欄 = 納入通知書制御情報.get納付書納付額欄();
             if (NofugakuranHyojiKubun.口座振替を印字する.equals(納付書納付額欄)) {
@@ -533,8 +563,8 @@ public class NonyuTsuchiShoDataHenshu {
                 納入通知書期情報.set領収証書納付額欄(星10);
                 納入通知書期情報.set納付書納付額欄(星10);
             } else if (NofugakuranHyojiKubun.金額出力.equals(納付書納付額欄)) {
-                納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
-                納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : new RString(納付額.toString()));
+                納入通知書期情報.set領収証書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
+                納入通知書期情報.set納付書納付額欄(納付額.compareTo(Decimal.ZERO) <= 0 ? 星10 : DecimalFormatter.toコンマ区切りRString(納付額, 0));
             }
         }
     }
@@ -883,9 +913,9 @@ public class NonyuTsuchiShoDataHenshu {
         return Decimal.ZERO;
     }
 
-    private Decimal get収入額(List<SamantabhadraIncomeInformation> 普徴収入情報リスト, Kitsuki 出力期) {
+    private Decimal get収入額(List<SamantabhadraIncomeInformation> 普徴収入情報リスト, int 期) {
         for (SamantabhadraIncomeInformation 普徴収入情報 : 普徴収入情報リスト) {
-            if (出力期.equals(普徴収入情報.get期月())) {
+            if (期 == 普徴収入情報.get期月().get期AsInt()) {
                 return 普徴収入情報.get収入額() == null ? Decimal.ZERO : 普徴収入情報.get収入額();
             }
         }

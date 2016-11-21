@@ -84,15 +84,15 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
         source.printTimeStamp = systemDateTime.toRString();
         source.hokensahNo = entity.get保険者番号();
         source.hokenshaName = entity.get保険者名();
-        if (!entity.get帳票出力対象データリスト().getShoriShichosonCode().isEmpty()) {
+        if (!RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getShoriShichosonCode())) {
             RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
             iryoKikanCodeBulider.append(entity.get帳票出力対象データリスト().getShoriShichosonCode());
             iryoKikanCodeBulider.append(KANA);
             iryoKikanCodeBulider.append(entity.get帳票出力対象データリスト().getShoriShichosonName());
             source.kyuShichoson = iryoKikanCodeBulider.toRString();
-        } else if (entity.get旧市町村コード().isEmpty() || new RString("000000").equals(entity.get旧市町村コード())) {
+        } else if (RString.isNullOrEmpty(entity.get旧市町村コード()) || new RString("000000").equals(entity.get旧市町村コード())) {
             source.kyuShichoson = RString.EMPTY;
-        } else if (!entity.get帳票出力対象データリスト().getKyuShichosonCode().isEmpty()) {
+        } else if (! !RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getKyuShichosonCode())) {
             RStringBuilder stringBuilder = new RStringBuilder();
             stringBuilder.append(entity.get旧市町村コード());
             stringBuilder.append(KANA);
@@ -161,7 +161,8 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
         } else {
             source.list1Lower_5 = RString.EMPTY;
         }
-        if (区分_1.equals(entity.get帳票出力対象データリスト().getDataKubun())) {
+        if (区分_1.equals(entity.get帳票出力対象データリスト().getDataKubun())
+                && !RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getKyotakuServiceSakuseiKubunCode())) {
             source.list1Lower_5 = KyotakuservicekeikakuSakuseikubunCode.
                     toValue(entity.get帳票出力対象データリスト().getKyotakuServiceSakuseiKubunCode()).get名称();
         } else if (区分_2.equals(entity.get帳票出力対象データリスト().getDataKubun())
@@ -209,7 +210,9 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
         } else if (entity.get帳票出力対象データリスト().getNinteiYukoShuryoYMD().isEmpty()) {
             source.listGokeiJoho_3 = iraiDateTime2.toRString();
         }
-        source.listMeisaiJoho_1 = KyufuJissekiKubun.toValue(entity.get帳票出力対象データリスト().getKyufuJissekiKubunCode()).get名称();
+        if (!RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getKyufuJissekiKubunCode())) {
+            source.listMeisaiJoho_1 = KyufuJissekiKubun.toValue(entity.get帳票出力対象データリスト().getKyufuJissekiKubunCode()).get名称();
+        }
         source.listMeisaiJoho_2 = entity.get帳票出力対象データリスト().getServiceShuruiCode();
         source.listMeisaiJoho_3 = entity.get帳票出力対象データリスト().getServiceShuruiMei();
         source.listRiyoJokyo1_1 = entity.get帳票出力対象データリスト().getNissuKaisu();

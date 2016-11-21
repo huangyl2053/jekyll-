@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -120,6 +121,31 @@ public class ShoKofuKaishuManager {
                 被保険者番号,
                 交付証種類
         );
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new ShoKofuKaishu(entity);
+    }
+
+    /**
+     * 主キー、交付年月日で証交付回収を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 交付証種類 KofuShoShurui
+     * @param 交付年月日 交付年月日
+     * @return ShoKofuKaishu
+     */
+    @Transaction
+    public ShoKofuKaishu get証交付回収By交付年月日(
+            HihokenshaNo 被保険者番号,
+            RString 交付証種類, FlexibleDate 交付年月日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+        requireNonNull(交付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("交付年月日"));
+
+        DbT7037ShoKofuKaishuEntity entity = dac.selectByKeyAndKofu(
+                被保険者番号, 交付証種類, 交付年月日);
         if (entity == null) {
             return null;
         }

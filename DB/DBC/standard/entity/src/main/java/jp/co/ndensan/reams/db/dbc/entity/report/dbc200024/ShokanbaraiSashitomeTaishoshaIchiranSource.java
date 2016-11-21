@@ -81,6 +81,8 @@ public class ShokanbaraiSashitomeTaishoshaIchiranSource implements IReportSource
     public RString ketteiTsuchiNo;
     @ReportItem(name = "shinseishaKubun", length = 10, order = 34)
     public RString shinseishaKubun;
+    @ReportItem(name = "listUpper_6", length = 7, order = 35)
+    public RString listUpper_6;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

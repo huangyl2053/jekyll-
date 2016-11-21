@@ -90,6 +90,7 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final Code CODE = new Code("0003");
     private static final RString DATANAME = new RString("被保険者番号");
+    private static final RString 該当データがありません = new RString("該当データがありません。");
     private static final int NUM_ONE = 1;
     private static final int NUM_TWO = 2;
     private static final int NUM_THREE = 3;
@@ -218,6 +219,15 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
 
     @Override
     protected void afterExecute() {
+        if (連番 == 1) {
+            FutanWariaiShoHakkoIchiranEntity futanWariaiShoHakkoIchiranEntity = service.getHakkoIchiranSourceInitData(parameter);
+            FutanWariaiShoHakkoIchiranReport report = new FutanWariaiShoHakkoIchiranReport(futanWariaiShoHakkoIchiranEntity);
+            report.writeBy(reportSourceWriter);
+
+            FutanwariaiShoHakkoIchiranCSVEntity futanwariaiShoHakkoIchiranCSVEntity = new FutanwariaiShoHakkoIchiranCSVEntity();
+            futanwariaiShoHakkoIchiranCSVEntity.set送付先住所(該当データがありません);
+            futanwariaiShoHakkoIchiranEucCsvWriter.writeLine(futanwariaiShoHakkoIchiranCSVEntity);
+        }
         futanwariaiShoHakkoIchiranEucCsvWriter.close();
         futanwariaiShoHakkoIchiranManager.spool(futanwariaiShoHakkoIchiranEucFilePath);
         AccessLogger.logReport(personalDataList);

@@ -75,7 +75,7 @@ public class ShinseishoTorokuValidationHandler {
     }
 
     /**
-     * 出力対象基準日のバリデーションチェック。
+     * 出力対象チェックのバリデーションチェック。
      *
      * @return バリデーション突合結果
      */
@@ -83,7 +83,7 @@ public class ShinseishoTorokuValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(new ValidationMessageControlPair(
                 new ShinseishoTorokuValidationMessages(
-                        UrErrorMessages.未入力, 出力対象.toString()), div.getChkIchiranhyoCsv(), div.getChkShinseisho(), div.getChkTsuchisho()));
+                        UrErrorMessages.未入力, 出力対象.toString()), div.getChkShinseisho(), div.getChkTsuchisho()));
         return validPairs;
     }
 

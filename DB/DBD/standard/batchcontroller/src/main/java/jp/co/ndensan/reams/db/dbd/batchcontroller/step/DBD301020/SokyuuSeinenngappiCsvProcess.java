@@ -132,7 +132,7 @@ public class SokyuuSeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinT
         csvWriterJunitoJugo.close();
         AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(fileName, id);
-        if (false) {
+        if (flag) {
             File.deleteIfExists(spoolWorkPath);
         }
     }
