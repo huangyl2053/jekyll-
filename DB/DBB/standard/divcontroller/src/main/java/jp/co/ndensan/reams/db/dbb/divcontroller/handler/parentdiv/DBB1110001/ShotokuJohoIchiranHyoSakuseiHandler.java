@@ -229,10 +229,7 @@ public class ShotokuJohoIchiranHyoSakuseiHandler {
         RTime 抽出終了時分秒 = div.getTxtKakuteiEdTime().getValue();
         YMDHMS 抽出開始 = new YMDHMS(抽出開始年月日, 抽出開始時分秒);
         YMDHMS 抽出終了 = new YMDHMS(抽出終了年月日, 抽出終了時分秒);
-        if (!抽出終了.isEmpty() && !抽出開始.isEmpty() && 抽出終了.isBefore(抽出開始)) {
-            return true;
-        }
-        return false;
+        return !抽出終了.isEmpty() && !抽出開始.isEmpty() && 抽出終了.isBefore(抽出開始);
     }
 
     /**
