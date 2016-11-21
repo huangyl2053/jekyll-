@@ -137,11 +137,8 @@ import jp.co.ndensan.reams.ua.uax.service.core.koza.IKozaManager;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaService;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.service.core.NenkinTokuchoKaifuJohoManager;
-import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
-import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
-import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
@@ -1985,14 +1982,14 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
     }
 
-    private List<RString> get検索用科目リスト() {
-        // 科目に国保特徴と国保普徴を指定する場合の例。
-        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
-        IShunoKamoku 介護保険料_特別徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
-        IShunoKamoku 介護保険料_普通徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
-        List<RString> kamokuList = new ArrayList<>();
-        kamokuList.add(介護保険料_特別徴収.get表示用コードwithハイフン());
-        kamokuList.add(介護保険料_普通徴収.get表示用コードwithハイフン());
-        return kamokuList;
-    }
+//    private List<RString> get検索用科目リスト() {
+//        // 科目に国保特徴と国保普徴を指定する場合の例。
+//        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
+//        IShunoKamoku 介護保険料_特別徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
+//        IShunoKamoku 介護保険料_普通徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+//        List<RString> kamokuList = new ArrayList<>();
+//        kamokuList.add(介護保険料_特別徴収.get表示用コードwithハイフン());
+//        kamokuList.add(介護保険料_普通徴収.get表示用コードwithハイフン());
+//        return kamokuList;
+//    }
 }
