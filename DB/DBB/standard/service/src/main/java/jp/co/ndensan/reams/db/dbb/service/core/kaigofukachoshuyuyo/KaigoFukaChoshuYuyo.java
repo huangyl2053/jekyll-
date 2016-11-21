@@ -177,10 +177,7 @@ public class KaigoFukaChoshuYuyo {
             List<ChoshuYuyo> list = 徴収猶予の情報.getChoshuYuyoList();
             if (!登録flag && list != null && !list.isEmpty()) {
                 DbT2006ChoshuYuyoEntity del介護賦課徴収猶予 = list.get(0).toEntity();
-                if (del介護賦課徴収猶予 != null) {
-                    del介護賦課徴収猶予.setState(EntityDataState.Deleted);
-                    介護賦課徴収猶予Dac.delete(del介護賦課徴収猶予);
-                }
+                set介護賦課徴収猶予Dac(del介護賦課徴収猶予);
             }
         }
         DbT2006ChoshuYuyoEntity 介護賦課徴収猶予Entity = new DbT2006ChoshuYuyoEntity();
@@ -200,6 +197,13 @@ public class KaigoFukaChoshuYuyo {
         介護賦課徴収猶予Entity.setYuyoTorikeshiJiyu(画面情報param.get徴収猶予取消事由());
         介護賦課徴収猶予Entity.setState(EntityDataState.Added);
         介護賦課徴収猶予Dac.save(介護賦課徴収猶予Entity);
+    }
+
+    private void set介護賦課徴収猶予Dac(DbT2006ChoshuYuyoEntity del介護賦課徴収猶予) {
+        if (del介護賦課徴収猶予 != null) {
+            del介護賦課徴収猶予.setState(EntityDataState.Deleted);
+            介護賦課徴収猶予Dac.delete(del介護賦課徴収猶予);
+        }
     }
 
     private void 設定登録用賦課情報(ChoshuYuyoJoho 徴収猶予の情報, KaigoFukaChoshuYuyoParam 画面情報param) {
