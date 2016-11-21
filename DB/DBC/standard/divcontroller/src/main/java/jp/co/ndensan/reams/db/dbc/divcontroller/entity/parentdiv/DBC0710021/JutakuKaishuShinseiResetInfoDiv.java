@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JutakuKaishuShinseiResetInfoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -37,8 +38,6 @@ public class JutakuKaishuShinseiResetInfoDiv extends Panel {
     private TextBoxNum txtHokenKyufuAmountMae;
     @JsonProperty("txtRiyoshaFutanAmountMae")
     private TextBoxNum txtRiyoshaFutanAmountMae;
-    @JsonProperty("btnRireki")
-    private Button btnRireki;
     @JsonProperty("txtHiyoTotalNow")
     private TextBoxNum txtHiyoTotalNow;
     @JsonProperty("txtHokenTaishoHiyoNow")
@@ -51,6 +50,8 @@ public class JutakuKaishuShinseiResetInfoDiv extends Panel {
     private Button btnLimitOverCheck;
     @JsonProperty("chkResetInfo")
     private CheckBoxList chkResetInfo;
+    @JsonProperty("hdnResetServiceYM")
+    private RString hdnResetServiceYM;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -203,24 +204,6 @@ public class JutakuKaishuShinseiResetInfoDiv extends Panel {
     }
 
     /*
-     * getbtnRireki
-     * @return btnRireki
-     */
-    @JsonProperty("btnRireki")
-    public Button getBtnRireki() {
-        return btnRireki;
-    }
-
-    /*
-     * setbtnRireki
-     * @param btnRireki btnRireki
-     */
-    @JsonProperty("btnRireki")
-    public void setBtnRireki(Button btnRireki) {
-        this.btnRireki = btnRireki;
-    }
-
-    /*
      * gettxtHiyoTotalNow
      * @return txtHiyoTotalNow
      */
@@ -326,6 +309,24 @@ public class JutakuKaishuShinseiResetInfoDiv extends Panel {
     @JsonProperty("chkResetInfo")
     public void setChkResetInfo(CheckBoxList chkResetInfo) {
         this.chkResetInfo = chkResetInfo;
+    }
+
+    /*
+     * gethdnResetServiceYM
+     * @return hdnResetServiceYM
+     */
+    @JsonProperty("hdnResetServiceYM")
+    public RString getHdnResetServiceYM() {
+        return hdnResetServiceYM;
+    }
+
+    /*
+     * sethdnResetServiceYM
+     * @param hdnResetServiceYM hdnResetServiceYM
+     */
+    @JsonProperty("hdnResetServiceYM")
+    public void setHdnResetServiceYM(RString hdnResetServiceYM) {
+        this.hdnResetServiceYM = hdnResetServiceYM;
     }
 
     // </editor-fold>

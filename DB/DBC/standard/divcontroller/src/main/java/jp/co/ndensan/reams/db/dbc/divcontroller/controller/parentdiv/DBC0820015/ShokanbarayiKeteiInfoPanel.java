@@ -412,11 +412,11 @@ public class ShokanbarayiKeteiInfoPanel {
 
     private RString getKanryoMessage(RString model) {
         if (登録.equals(model)) {
-            return new RString("登録モード：「登録は正常に終了しました。」");
+            return new RString("登録は正常に終了しました。");
         } else if (修正.equals(model)) {
-            return new RString("修正モード：「更新は正常に終了しました。」");
+            return new RString("更新は正常に終了しました。");
         } else {
-            return new RString("削除モード：「削除は正常に終了しました。」");
+            return new RString("削除は正常に終了しました。");
         }
     }
 

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishuyaokaigojyotai;
 
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
@@ -23,12 +22,4 @@ public interface IJutakuKaishuYaokaigoJyotaiSandannkaiHanteiMapper {
      * @return Code
      */
     Code select要介護認定状態区分コードByParam(Map<String, Object> 要介護認定状態区分検索条件);
-
-    /**
-     * サービス提供を返します。
-     *
-     * @param サービス提供年月検索条件 Map<String, Object>
-     * @return DbT3034ShokanShinseiEntity
-     */
-    DbT3034ShokanShinseiEntity selectサービス提供年月ByParam(Map<String, Object> サービス提供年月検索条件);
 }
