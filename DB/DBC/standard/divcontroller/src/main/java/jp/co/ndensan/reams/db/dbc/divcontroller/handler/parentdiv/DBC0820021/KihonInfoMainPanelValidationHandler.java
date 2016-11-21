@@ -5,11 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820021;
 
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.KihonInfoMainPanelDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -68,6 +71,40 @@ public class KihonInfoMainPanelValidationHandler {
     public ValidationMessageControlPairs 入所院前の状況の必須チェックValidate() {
         IValidationMessages messages = new ControlValidator(div).入所院前の状況の必須チェックValidate();
         return 入所院前の状況Dictionary().check(messages);
+    }
+
+    /**
+     * 入所と退所間の日数チェック
+     *
+     * @param pairs ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateFor入所と退所間の日数チェック(ValidationMessageControlPairs pairs) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(KihonInfoMainPanelSpec.入所と退所間の日数チェック)
+                .thenAdd(KihonInfoMainPanelValidationMessages.入所と退所間の日数チェック).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                KihonInfoMainPanelValidationMessages.入所と退所間の日数チェック,
+                div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD(),
+                div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 入所日と退所日の期間日数チェック
+     *
+     * @param pairs ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateFor入所日と退所日の期間日数チェック(ValidationMessageControlPairs pairs) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(KihonInfoMainPanelSpec.入所日と退所日の期間日数チェック)
+                .thenAdd(KihonInfoMainPanelValidationMessages.入所日と退所日の期間日数チェック).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                KihonInfoMainPanelValidationMessages.入所日と退所日の期間日数チェック,
+                div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu(),
+                div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu()).build().check(messages));
+        return pairs;
     }
 
     /**
@@ -174,7 +211,9 @@ public class KihonInfoMainPanelValidationHandler {
         入所年月日必須チェック(UrErrorMessages.必須項目_追加メッセージあり, 入所年月日.toString()),
         入所院実日数必須チェック(UrErrorMessages.必須項目_追加メッセージあり, 入所院実日数_STR.toString()),
         入所院前の状況必須チェック(UrErrorMessages.必須項目_追加メッセージあり, 入所院前の状況_STR.toString()),
-        明細番号チェック(UrErrorMessages.対象データなし_追加メッセージあり, 基本情報_STR.toString());
+        明細番号チェック(UrErrorMessages.対象データなし_追加メッセージあり, 基本情報_STR.toString()),
+        入所と退所間の日数チェック(DbcWarningMessages.日数３０日超過, "入所年月日", "退所年月日"),
+        入所日と退所日の期間日数チェック(UrWarningMessages.相違, "入所(院)実日数＋外泊日数", "入所(院)日・退所(院)日の間に収まる日数");
 
         private final Message message;
 
