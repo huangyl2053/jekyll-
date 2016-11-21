@@ -165,11 +165,11 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
         出力条件.add(get条件(年齢終了, mybatisPrm.getAgeEnd()));
         出力条件.add(get条件(年齢基準日, mybatisPrm.getAgeKijunNi().wareki().toDateString()));
         FlexibleDate 開始生年月日 = FlexibleDate.EMPTY;
-        if(!RString.isNullOrEmpty(mybatisPrm.getSeinengappiYMDStart())){
+        if (!RString.isNullOrEmpty(mybatisPrm.getSeinengappiYMDStart())) {
             開始生年月日 = new FlexibleDate(mybatisPrm.getSeinengappiYMDStart());
         }
         FlexibleDate 終了生年月日 = FlexibleDate.EMPTY;
-        if(!RString.isNullOrEmpty(mybatisPrm.getSeinengappiYMDEnd())){
+        if (!RString.isNullOrEmpty(mybatisPrm.getSeinengappiYMDEnd())) {
             終了生年月日 = new FlexibleDate(mybatisPrm.getSeinengappiYMDEnd());
         }
         出力条件.add(get条件(生年月日開始, 開始生年月日.wareki().toDateString()));

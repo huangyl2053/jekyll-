@@ -909,7 +909,7 @@ public class ReportDateHensyu {
             }
             
         }
-        if(!is不明が存在){
+        if (!is不明が存在) {
             entity.set人数_20段階_Title(不明);
             entity.set金額_20段階_Title(不明);
         }
@@ -1152,7 +1152,7 @@ public class ReportDateHensyu {
                 entity.set金額_合計_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemenGakuGoukei()));
             }
         }
-        if(!is不明が存在){
+        if (!is不明が存在) {
             entity.set人数_20段階_Title(不明);
             entity.set金額_20段階_Title(不明);
         }
