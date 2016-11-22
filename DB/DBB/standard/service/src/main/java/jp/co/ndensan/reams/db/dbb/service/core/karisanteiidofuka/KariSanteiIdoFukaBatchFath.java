@@ -308,8 +308,8 @@ public class KariSanteiIdoFukaBatchFath {
             boolean flag2,
             boolean flag3,
             boolean flag4) {
-        if (!設定前賦課情報.get老年開始日().equals(当初賦課情報.get老年開始日())
-                || !設定前賦課情報.get老年廃止日().equals(当初賦課情報.get老年廃止日())) {
+        if (!nullToDate(設定前賦課情報.get老年開始日()).equals(当初賦課情報.get老年開始日())
+                || !nullToDate(設定前賦課情報.get老年廃止日()).equals(当初賦課情報.get老年廃止日())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.老齢年金による更正.getコード());
                 flag1 = true;
@@ -324,8 +324,8 @@ public class KariSanteiIdoFukaBatchFath {
                 flag4 = true;
             }
         }
-        if (!設定前賦課情報.get生保開始日().equals(当初賦課情報.get生保開始日())
-                || !設定前賦課情報.get生保廃止日().equals(当初賦課情報.get生保廃止日())) {
+        if (!nullToDate(設定前賦課情報.get生保開始日()).equals(当初賦課情報.get生保開始日())
+                || !nullToDate(設定前賦課情報.get生保廃止日()).equals(当初賦課情報.get生保廃止日())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.生活保護による更正.getコード());
                 flag1 = true;
@@ -341,7 +341,7 @@ public class KariSanteiIdoFukaBatchFath {
             }
 
         }
-        if (設定前賦課情報.get減免額() != null && !設定前賦課情報.get減免額().equals(当初賦課情報.get減免額())) {
+        if (!nullTOZero(設定前賦課情報.get減免額()).equals(当初賦課情報.get減免額())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.減免決定による更正.getコード());
                 flag1 = true;
@@ -818,5 +818,12 @@ public class KariSanteiIdoFukaBatchFath {
             return Decimal.ZERO;
         }
         return decimal;
+    }
+
+    private FlexibleDate nullToDate(FlexibleDate date) {
+        if (date == null) {
+            return FlexibleDate.EMPTY;
+        }
+        return date;
     }
 }
