@@ -915,7 +915,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
                 帳票ID.getColumnValue(),
                 導入団体コード,
                 市町村名,
-                RString.FULL_SPACE.concat(String.valueOf(JobContextHolder.getJobId())),
+                RString.EMPTY.concat(String.valueOf(JobContextHolder.getJobId())),
                 帳票名,
                 出力ページ数,
                 csv出力有無,
