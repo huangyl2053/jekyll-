@@ -123,7 +123,7 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
             div.getCcdChikuShichosonSelect().set市町村コード(市町村コード);
         }
         RString 旧市町村コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kyuShichosonCode"));
-        if (!RString.isNullOrEmpty(市町村コード)) {
+        if (!RString.isNullOrEmpty(旧市町村コード)) {
             div.getCcdChikuShichosonSelect().set旧市町村コード(旧市町村コード);
         }
         Map<RString, RString> 選択結果 = restoreBatchParameterMap.getParameterValue(Map.class, new RString("sentakuKekkaList"));
@@ -229,7 +229,7 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
 
     private void set各月資格基準日() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        for (int i = 1; i <= MAX_日 ; i++) {
+        for (int i = 1; i <= MAX_日; i++) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(new RString(i));
             dataSource.setValue(new RString(i));

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB231001.DBB231001_Tokuch
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2310001.TokuchoSeidokanIFSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2310001.TokuchoSeidokanIFSakuseiHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  *
@@ -18,6 +20,9 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  */
 public class TokuchoSeidokanIFSakusei {
 
+    private static final RString DBBMN84002 = new RString("DBBMN84002");
+    private static final RString タイトル_全件 = new RString("特徴制度間Ｉ／Ｆ作成（全件）");
+
     /**
      * 初期化のンメソッドます。
      *
@@ -26,6 +31,10 @@ public class TokuchoSeidokanIFSakusei {
      */
     public ResponseData<TokuchoSeidokanIFSakuseiDiv> onLoad(TokuchoSeidokanIFSakuseiDiv div) {
         getHandler(div).initialize();
+        RString メニューＩＤ = ResponseHolder.getMenuID();
+        if (DBBMN84002.equals(メニューＩＤ)) {
+            return ResponseData.of(div).rootTitle(タイトル_全件).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

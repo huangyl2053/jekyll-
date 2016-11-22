@@ -84,10 +84,11 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
     private RString 提供基本情報中間テーブル名;
     private RString 特定個人情報名コード;
     private RString 版番号;
+    private RDate システム日付;
 
     @Override
     protected void defineFlow() {
-        RDate システム日付 = RDate.getNowDate();
+        システム日付 = RDate.getNowDate();
         if (使用する.equals(DbBusinessConfig.get(ConfigNameDBU.番号制度_使用制御, システム日付, SubGyomuCode.DBU介護統計報告))
                 && 稼働.equals(DbBusinessConfig.get(ConfigNameDBU.番号制度_提供機能使用制御, システム日付, SubGyomuCode.DBU介護統計報告))
                 && new RDate(DbBusinessConfig.get(ConfigNameDBU.番号制度_利用開始日,
@@ -99,51 +100,24 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
             if (!is未来基準日) {
                 setバッチパラメータ();
                 executeStep(処理日付管理マスタの更新);
-                exeバッチ処理(システム日付);
+                exeバッチ処理();
             }
         }
     }
 
-    private void exeバッチ処理(RDate システム日付) {
+    private void exeバッチ処理() {
         hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
         updateProcessParameter = parameter.toTokuteiKojinJohoTeikyoKanriUpdateProcessParameter();
-        RString 連携先団体内統合宛名_連携方式 = DbBusinessConfig.get(
-                ConfigNameDBU.番号制度_連携先団体内統合宛名_連携方式, システム日付, SubGyomuCode.DBU介護統計報告);
         for (RString 提供要個人情報名コード : parameter.get特定個人情報()) {
-            boolean is電文あり = RenkeisakiDantainaiTogoAtena.標準_中間SVBS.getコード().equals(連携先団体内統合宛名_連携方式);
             特定個人情報名コード = 提供要個人情報名コード;
             if (TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード().equals(提供要個人情報名コード)) {
                 exe住所地特例者情報();
-                if (is電文あり) {
-                    set特定個人情報編集標準バッチパラメータ(住所地特例者情報);
-                    executeStep(特定個人情報編集_標準);
-                }
                 exe負担割合();
-                if (is電文あり) {
-                    set特定個人情報編集標準バッチパラメータ(負担割合);
-                    executeStep(特定個人情報編集_標準);
-                }
                 exe給付情報();
-                if (is電文あり) {
-                    set特定個人情報編集標準バッチパラメータ(給付情報);
-                    executeStep(特定個人情報編集_標準);
-                }
                 exe総合事業情報();
-                if (is電文あり) {
-                    set特定個人情報編集標準バッチパラメータ(総合事業情報);
-                    executeStep(特定個人情報編集_標準);
-                }
             }
             exe被保険者();
-            if (is電文あり) {
-                set特定個人情報編集標準バッチパラメータ(被保険者);
-                executeStep(特定個人情報編集_標準);
-            }
             exe受給者基本情報();
-            if (is電文あり) {
-                set特定個人情報編集標準バッチパラメータ(受給者基本情報_提供情報取得);
-                executeStep(特定個人情報編集_標準);
-            }
         }
     }
 
@@ -410,6 +384,13 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
                 executeStep(stepName1);
                 executeStep(stepName2);
                 executeStep(特定個人情報提供管理_更新);
+                RString 連携先団体内統合宛名_連携方式 = DbBusinessConfig.get(
+                        ConfigNameDBU.番号制度_連携先団体内統合宛名_連携方式, システム日付, SubGyomuCode.DBU介護統計報告);
+                boolean is電文あり = RenkeisakiDantainaiTogoAtena.標準_中間SVBS.getコード().equals(連携先団体内統合宛名_連携方式);
+                if (is電文あり) {
+                    set特定個人情報編集標準バッチパラメータ(stepName1);
+                    executeStep(特定個人情報編集_標準);
+                }
             }
         }
     }
@@ -468,7 +449,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
                 // TODO
                 processParameter.set基準日(new FlexibleDate(parameter.get対象終了日時().getDate().toDateString()));
                 break;
-            case 受給者基本情報_中間DB更新:
+            case 受給者基本情報_提供情報取得:
                 processParameter.set特定個人情報名コード(特定個人情報名コード);
                 processParameter.setデータセット番号(DataSetNo._0201受給者基本情報.getコード());
                 // TODO

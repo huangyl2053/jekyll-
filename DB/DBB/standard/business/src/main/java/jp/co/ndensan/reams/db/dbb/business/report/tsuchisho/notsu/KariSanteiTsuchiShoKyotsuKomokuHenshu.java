@@ -3,7 +3,6 @@ package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,7 +74,6 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private static final RString 徴収_なし = new RString("徴収なし");
     private static final RString 随時 = new RString("随時");
     private static final RString 現年随時 = new RString("現年随時");
-    private static final List<Integer> 月リスト = Arrays.asList(期_4, 期_7, 期_6, 期_7, 期_8, 期_9);
 
     /**
      * 仮算定通知書共通情報を作成します。
@@ -160,9 +158,12 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         }
         編集後仮算定通知書.set前年度情報有無(前年度情報有無);
         編集後仮算定通知書.set前年度情報(get前年度情報(仮算定通知書情報.get前年度賦課情報(), 前年度情報有無, 前年度最終期普徴期別介護保険料));
-        編集後仮算定通知書.set更正前(get更正前(仮算定通知書情報, 普徴既に納付すべき額, 特徴既に納付すべき額));
-        編集後仮算定通知書.set更正後(get更正後(仮算定通知書情報, 普徴今後納付すべき額, 更正後特徴期別金額合計));
-        編集後仮算定通知書.set増減額(普徴既に納付すべき額.add(特徴既に納付すべき額).subtract(普徴今後納付すべき額).subtract(更正後特徴期別金額合計));
+        編集後仮算定通知書.set更正前(get更正前(仮算定通知書情報, get普徴期別金額合計(仮算定通知書情報.get賦課の情報_更正前().get賦課情報()),
+                get特徴期別金額合計(仮算定通知書情報.get賦課の情報_更正前().get賦課情報())));
+        編集後仮算定通知書.set更正後(get更正後(仮算定通知書情報, get普徴期別金額合計(仮算定通知書情報.get賦課の情報_更正後().get賦課情報()),
+                get特徴期別金額合計(仮算定通知書情報.get賦課の情報_更正後().get賦課情報())));
+        編集後仮算定通知書.set増減額(getNullToZero(編集後仮算定通知書.get更正後().get更正後介護保険料仮徴収額合計())
+                .subtract(getNullToZero(編集後仮算定通知書.get更正前().get更正前介護保険料仮徴収額合計())));
         編集後仮算定通知書.set納付済額_未到来期含む(普徴納付済額未到来期含む.add(特徴納付済額未到来期含む));
         編集後仮算定通知書.set納付済額_未到来期含まない(普徴納付済額未到来期含まない.add(特徴納付済額未到来期含まない));
         編集後仮算定通知書.set普徴納付済額_未到来期含む(普徴納付済額未到来期含む);
@@ -186,6 +187,27 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         編集後仮算定通知書.set普徴収入情報リスト(get普徴収入情報リスト(仮算定通知書情報.get普徴納期情報リスト(), 仮算定通知書情報.get収入情報()));
         編集後仮算定通知書.set特徴収入情報リスト(get特徴収入情報リスト(仮算定通知書情報.get収入情報()));
         return 編集後仮算定通知書;
+    }
+
+    private Decimal getNullToZero(Decimal value) {
+        if (null == value) {
+            return Decimal.ZERO;
+        }
+        return value;
+    }
+
+    private Decimal get特徴期別金額合計(FukaJoho 賦課情報) {
+        if (null == 賦課情報) {
+            return null;
+        }
+        return get納付額By賦課情報(特徴メソッド_賦課, 賦課情報, 1, new TokuchoKiUtil().get期月リスト().getLast().get期AsInt());
+    }
+
+    private Decimal get普徴期別金額合計(FukaJoho 賦課情報) {
+        if (null == 賦課情報) {
+            return null;
+        }
+        return get納付額By賦課情報(普徴メソッド_賦課, 賦課情報, 1, new FuchoKiUtil().get期月リスト().getLast().get期AsInt());
     }
 
     private RString get調定事由(RString 調定事由) {
@@ -273,6 +295,11 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
             更正前.set生活保護扶助種類(RString.EMPTY);
         } else {
             set更正前ByIsNotEmpty(更正前, 賦課情報_更正前);
+        }
+        if (!仮算定通知書情報.isHas更正前()) {
+            更正前.set期間_自(RString.EMPTY);
+            更正前.set期間_至(RString.EMPTY);
+            更正前.set更正前介護保険料仮徴収額合計(null);
         }
         更正前.set更正前普徴期別金額リスト(get普徴期別金額リストBy賦課情報(仮算定通知書情報.get普徴納期情報リスト(), 賦課情報_更正前));
         更正前.set更正前特別徴収義務者(仮算定通知書情報.get対象者_追加含む_情報_更正前() == null
@@ -520,7 +547,6 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         if (納期情報リスト == null || 納期情報リスト.isEmpty()) {
             return Decimal.ZERO;
         }
-        List<Integer> list = new ArrayList<>();
         for (int i = 0; i < 納期情報リスト.size(); i++) {
             最初期 = 納期情報リスト.get(納期情報リスト.size() - 1).get期月().get期AsInt();
             if (納期情報リスト.get(i).get納期().get納期開始日().isBeforeOrEquals(RDate.getNowDate())
@@ -529,7 +555,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
             }
         }
         if (最初期 != 0 && 最大期 != 0) {
-            return get納付額By収入情報(徴収メソッド, 収入情報, 最初期, 最大期, getRightKi(納期情報リスト));
+            return get納付額By収入情報(徴収メソッド, 収入情報, 最初期, 最大期);
         }
         return Decimal.ZERO;
     }
@@ -537,20 +563,9 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private Decimal get納付済額未到来期含む(RString メソッド_収入, List<NokiJoho> 納期情報リスト, ShunyuJoho 収入情報) {
         if (納期情報リスト != null && !納期情報リスト.isEmpty()) {
             return get納付額By収入情報(メソッド_収入, 収入情報,
-                    納期情報リスト.get(納期情報リスト.size() - 1).get期月().get期AsInt(), 納期情報リスト.get(0).get期月().get期AsInt(),
-                    getRightKi(納期情報リスト));
+                    納期情報リスト.get(納期情報リスト.size() - 1).get期月().get期AsInt(), 納期情報リスト.get(0).get期月().get期AsInt());
         }
         return Decimal.ZERO;
-    }
-
-    private List<Integer> getRightKi(List<NokiJoho> 納期情報リスト) {
-        List<Integer> list = new ArrayList<>();
-        for (NokiJoho nokiJoho : 納期情報リスト) {
-            if (月リスト.contains(nokiJoho.get期月().get月AsInt()) && !list.contains(nokiJoho.get期月().get期AsInt())) {
-                list.add(nokiJoho.get期月().get期AsInt());
-            }
-        }
-        return list;
     }
 
     private Decimal get前年度最終期普徴期別介護保険料(KariSanteiTsuchiShoKyotsu 仮算定通知書情報) {
@@ -592,15 +607,6 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         }
     }
 
-    private Decimal get普徴期別金額合計(FukaJoho 賦課情報) {
-
-        return nullToZero(賦課情報.get普徴期別金額01()).add(nullToZero(賦課情報.get普徴期別金額02())).add(nullToZero(賦課情報.get普徴期別金額03()))
-                .add(nullToZero(賦課情報.get普徴期別金額04())).add(nullToZero(賦課情報.get普徴期別金額05())).add(nullToZero(賦課情報.get普徴期別金額06()))
-                .add(nullToZero(賦課情報.get普徴期別金額07())).add(nullToZero(賦課情報.get普徴期別金額08())).add(nullToZero(賦課情報.get普徴期別金額09()))
-                .add(nullToZero(賦課情報.get普徴期別金額09())).add(nullToZero(賦課情報.get普徴期別金額10())).add(nullToZero(賦課情報.get普徴期別金額11()))
-                .add(nullToZero(賦課情報.get普徴期別金額12())).add(nullToZero(賦課情報.get普徴期別金額13())).add(nullToZero(賦課情報.get普徴期別金額14()));
-    }
-
     private List<UniversalPhase> get普徴期別金額リストBy賦課情報(List<NokiJoho> 納期情報リスト, FukaJoho 賦課情報) {
         List<UniversalPhase> 期別金額リスト = new ArrayList<>();
         if (納期情報リスト == null || 納期情報リスト.isEmpty()) {
@@ -620,12 +626,10 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         return 期別金額リスト;
     }
 
-    private Decimal get納付額By収入情報(RString メソッド_収入, ShunyuJoho shunyuJoho, int start, int end, List<Integer> kiList) {
+    private Decimal get納付額By収入情報(RString メソッド_収入, ShunyuJoho shunyuJoho, int start, int end) {
         Decimal 納付済額 = Decimal.ZERO;
         for (int i = start; i <= end; i++) {
-            if (kiList.contains(i)) {
-                納付済額 = 納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
-            }
+            納付済額 = 納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
         }
         return 納付済額;
     }
