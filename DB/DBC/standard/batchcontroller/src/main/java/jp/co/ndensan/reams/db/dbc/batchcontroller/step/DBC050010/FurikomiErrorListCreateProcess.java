@@ -119,7 +119,7 @@ public class FurikomiErrorListCreateProcess extends BatchProcessBase<FurikomiDet
         eucCsvEntity.set被保険者番号(t.getHihokenshaNo().value());
         eucCsvEntity.set被保険者氏名(t.getShimeiKana().value());
         eucCsvEntity.set郵便番号(t.getYubinNo().getYubinNo());
-        eucCsvEntity.set住所(t.getJusho().value());
+        eucCsvEntity.set住所(t.getJusho());
         eucCsvEntity.set識別コード(t.getShikibetsuCode().value());
         eucCsvEntity.set口座ID(new RString(t.getKozaID()));
         eucCsvEntity.set決定通知番号(t.getKetteiTsuchiNo());
