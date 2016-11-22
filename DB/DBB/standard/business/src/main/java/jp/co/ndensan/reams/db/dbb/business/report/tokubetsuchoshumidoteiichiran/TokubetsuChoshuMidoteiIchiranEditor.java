@@ -29,6 +29,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     private static final RString 男性 = new RString("1");
     private static final RString 女性 = new RString("2");
     private static final RString 年度 = new RString("年度");
+    private static final RString 作成 = new RString("　作成");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -125,7 +126,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     }
 
     private void set作成日時(TokubetsuChoshuMidoteiIchiranSource source) {
-        source.printTimeStamp = DateConverter.getSakuseiYMD();
+        source.printTimeStamp = DateConverter.getSakuseiYMD().concat(作成);
     }
 
     private void set導入団体コード(TokubetsuChoshuMidoteiIchiranSource source) {
