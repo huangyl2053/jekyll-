@@ -950,7 +950,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         }
         insertEntity.set標準負担区分コード(STR_1);
         insertEntity.set負担額(標準負担.get負担額());
-        insertEntity.set負担限度額適用開始年月日(new RString(異動年月日.toString()));
+        FlexibleDate 開始年月日 = get月初(標準負担.get適用開始日());
+        insertEntity.set負担限度額適用開始年月日(new RString(開始年月日.toString()));
         FlexibleDate 終了年月日 = get月初(標準負担.get適用終了日());
         insertEntity.set負担額適用終了年月日(new RString(終了年月日.toString()));
         insertEntity.setエラーフラグ(エラーなし);
@@ -1198,7 +1199,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 if (異動一時Map.containsKey(異動年月日)) {
                     異動年月日 = get翌日異動日(異動年月日);
                 }
-                set異動一時2By負担割合パターン1(insertEntity, 異動年月日);
+                set異動一時2By負担割合パターン1(insertEntity, 負担割合, 異動年月日);
                 異動一時Map.put(異動年月日, insertEntity);
             }
         }
@@ -1223,10 +1224,13 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     }
 
     private void set異動一時2By負担割合パターン1(IdoTblTmpEntity insertEntity,
-            FlexibleDate 異動年月日) {
+            DbT3114RiyoshaFutanWariaiMeisaiEntity 負担割合, FlexibleDate 異動年月日) {
         insertEntity.set被保険者番号(被保険者番号);
         insertEntity.set異動年月日(異動年月日);
-        insertEntity.set利用者負担割合有効開始日(new RString(異動年月日.toString()));
+        FlexibleDate 適用開始年月日 = get月初(負担割合.getYukoKaishiYMD());
+        if (適用開始年月日 != null) {
+            insertEntity.set利用者負担割合有効開始日(new RString(適用開始年月日.toString()));
+        }
         insertEntity.setエラーフラグ(エラーなし);
     }
 
@@ -1238,7 +1242,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         if (適用開始年月日 != null) {
             insertEntity.set利用者負担割合有効開始日(new RString(適用開始年月日.toString()));
         }
-        insertEntity.set利用者負担割合有効終了日(new RString(異動年月日.toString()));
+        FlexibleDate 終了開始年月日 = get月初(負担割合.getYukoShuryoYMD());
+        insertEntity.set利用者負担割合有効終了日(new RString(終了開始年月日.toString()));
         insertEntity.setエラーフラグ(エラーなし);
     }
 
@@ -1503,7 +1508,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
 
     private FlexibleDate get月初(FlexibleDate date) {
         if (date == null || date.isEmpty()) {
-            return null;
+            return FlexibleDate.EMPTY;
         }
         return new FlexibleDate(date.getYearMonth().toDateString().concat(STR_01));
     }
