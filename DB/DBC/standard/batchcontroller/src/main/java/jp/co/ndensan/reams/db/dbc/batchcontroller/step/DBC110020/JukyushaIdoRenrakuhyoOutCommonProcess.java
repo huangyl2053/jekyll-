@@ -75,6 +75,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
     private static final int ORDER_18 = 18;
     private static final int ORDER_19 = 19;
     private static final int ORDER_20 = 20;
+    private static final int ORDER_21 = 21;
     private static final RString STR_2 = new RString("2");
     private static final RString STR_0 = new RString("0");
     private static final RString STR_01 = new RString("01");
@@ -532,6 +533,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.setSoshitsuYMD(new FlexibleDate(受給者台帳Info.get(ORDER_18)));
         entity.setDataKubun(new Code(受給者台帳Info.get(ORDER_19)));
         entity.setKyuSochishaFlag(STR_1.equals(受給者台帳Info.get(ORDER_20)));
+        entity.setToshoNinteiYukoShuryoYMD(new FlexibleDate(受給者台帳Info.get(ORDER_21)));
         return entity;
     }
 
@@ -889,18 +891,15 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             insertEntity.set要介護状態区分コード(要介護状態区分コード.getColumnValue());
         }
         insertEntity.set認定有効期間開始年月日(受給者台帳.getNinteiYukoKikanKaishiYMD());
-        if (後履歴の有効データ != null) {
-            if (コート_4.equals(後履歴の有効データ.getJukyuShinseiJiyu())) {
-                insertEntity.set認定有効期間終了年月日(getRStringDate(受給者台帳.getToshoNinteiYukoShuryoYMD()));
-                insertEntity.set訪問通所サービス上限管理適用期間終了年月日(
-                        getRStringDate(受給者台帳.getToshoNinteiYukoShuryoYMD()));
-            } else {
-                insertEntity.set認定有効期間終了年月日(getRStringDate(受給者台帳.getNinteiYukoKikanKaishiYMD()));
-                insertEntity.set訪問通所サービス上限管理適用期間終了年月日(
-                        getRStringDate(受給者台帳.getShikyuGendoShuryoYMD()));
-            }
+        if (後履歴の有効データ != null && コート_4.equals(後履歴の有効データ.getJukyuShinseiJiyu())) {
+            insertEntity.set認定有効期間終了年月日(getRStringDate(受給者台帳.getToshoNinteiYukoShuryoYMD()));
+            insertEntity.set訪問通所サービス上限管理適用期間終了年月日(
+                    getRStringDate(受給者台帳.getToshoNinteiYukoShuryoYMD()));
+        } else {
+            insertEntity.set認定有効期間終了年月日(getRStringDate(受給者台帳.getNinteiYukoKikanShuryoYMD()));
+            insertEntity.set訪問通所サービス上限管理適用期間終了年月日(
+                    getRStringDate(受給者台帳.getShikyuGendoShuryoYMD()));
         }
-
         insertEntity.set訪問通所サービス支給限度基準額(
                 get支給限度単位数(受給者台帳.getYokaigoJotaiKubunCode(), 異動年月日, 居宅サービス区分支給限度額List));
         insertEntity.set訪問通所サービス上限管理適用期間開始年月日(受給者台帳.getShikyuGendoKaishiYMD());
