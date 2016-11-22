@@ -98,6 +98,24 @@ public class IkenshokinyuyoshiReport extends Report<IkenshokinyuyoshiReportSourc
                 IIkenshokinyuyoshiOCRBuilder uraBuilder = new IkenshokinyuyoshiOCRuraBuilderImpl(uraEditor);
                 reportSourceWriter.writeLine(uraBuilder);
             }
+        } else if (ReportIdDBZ.DBE231012.getReportId().equals(id) || ReportIdDBZ.DBE231014.getReportId().equals(id)) {
+            if (business == null) {
+                for (IkenshokinyuyoshiBusiness ikenshokinyuyoshiBusiness : businessList) {
+                    IIkenshokinyuyoshiEditor editor = new IkenshokinyuyoshiOmoteEditorImpl(ikenshokinyuyoshiBusiness);
+                    IIkenshokinyuyoshiBuilder builder = new IkenshokinyuyoshiOmoteBuilderImpl(editor);
+                    reportSourceWriter.writeLine(builder);
+                    IIkenshokinyuyoshiEditor uraEditor = new IkenshokinyuyoshiUraEditorImpl(ikenshokinyuyoshiBusiness);
+                    IIkenshokinyuyoshiBuilder uraBuilder = new IkenshokinyuyoshiUraBuilderImpl(uraEditor);
+                    reportSourceWriter.writeLine(uraBuilder);
+                }
+            } else {
+                IIkenshokinyuyoshiEditor editor = new IkenshokinyuyoshiOmoteEditorImpl(business);
+                IIkenshokinyuyoshiBuilder builder = new IkenshokinyuyoshiOmoteBuilderImpl(editor);
+                reportSourceWriter.writeLine(builder);
+                IIkenshokinyuyoshiEditor uraEditor = new IkenshokinyuyoshiUraEditorImpl(business);
+                IIkenshokinyuyoshiBuilder uraBuilder = new IkenshokinyuyoshiUraBuilderImpl(uraEditor);
+                reportSourceWriter.writeLine(uraBuilder);
+            }
         }
     }
 }
