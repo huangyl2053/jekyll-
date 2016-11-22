@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.Idou
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -137,10 +138,16 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
         全項目 = cancatYMD(利用者負担.getShinseiYMD(), 全項目);
         全項目 = cancatYMD(利用者負担.getKetteiYMD(), 全項目);
         全項目 = 全項目.concat(new RString(利用者負担.getRirekiNo())).concat(SPLIT);
-        if (利用者負担.getKyuhuritsu() == null) {
+        HokenKyufuRitsu 給付率 = 利用者負担.getKyuhuritsu();
+        if (給付率 == null) {
             全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
         } else {
-            全項目 = 全項目.concat(利用者負担.getKyuhuritsu().getColumnValue().toString()).concat(SPLIT);
+            Decimal 給付率value = 給付率.getColumnValue();
+            if (給付率value == null) {
+                全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+            } else {
+                全項目 = 全項目.concat(給付率value.toString()).concat(SPLIT);
+            }
         }
         全項目 = 全項目.concat(利用者負担.getShoKisaiHokenshaNo().getColumnValue()).concat(SPLIT)
                 .concat(利用者負担.getHihokenshaNo().getColumnValue()).concat(SPLIT)
