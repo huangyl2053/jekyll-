@@ -65,9 +65,9 @@ public final class KyufuKanrihyoShokaiMapperParameter {
             RString 給付対象年月終了) {
         return new KyufuKanrihyoShokaiMapperParameter(
                 被保番号,
-                !(被保番号 == null),
+                (!被保番号.isEmpty()),
                 支援事業者番号,
-                !(支援事業者番号 == null),
+                (!支援事業者番号.isEmpty()),
                 給付対象年月開始,
                 給付対象年月終了,
                 RString.EMPTY,
