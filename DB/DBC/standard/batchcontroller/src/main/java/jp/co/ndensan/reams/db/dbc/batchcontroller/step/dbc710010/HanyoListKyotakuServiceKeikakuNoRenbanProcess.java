@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicek
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkyotakuservicekeikaku.IHanyoListKyotakuServiceKeikakuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
@@ -97,7 +96,6 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
     private FileSpoolManager manager;
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
-    private IHanyoListKyotakuServiceKeikakuMapper mapper;
 
     @BatchWriter
     private CsvWriter<HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity> eucCsvWriter;
@@ -107,7 +105,6 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
         csvEntityEditor = new HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        mapper = getMapper(IHanyoListKyotakuServiceKeikakuMapper.class);
 
     }
 
