@@ -74,8 +74,6 @@
             "KogakuGassanTemp" AS "KogakuGassanTemp"
         ON 
             "DbT1001HihokenshaDaicho"."hihokenshaNo" = "KogakuGassanTemp"."hihokenshaNo"
-        ORDER BY
-            "DbT1001HihokenshaDaicho"."hihokenshaNo" ASC
         )
         SELECT    
              master.*,
@@ -95,6 +93,8 @@
              ) AS "ShikibetsuTaisho" 
         ON
             "master"."dbT1001HihokenshaDaicho_shikibetsuCode" =  "ShikibetsuTaisho"."shikibetsuCode"
+        ORDER BY
+            "dbT1001HihokenshaDaicho_hihokenshaNo" ASC
     </sql> 
     
     <select resultOrdered="true" id="select高額合算一時"
