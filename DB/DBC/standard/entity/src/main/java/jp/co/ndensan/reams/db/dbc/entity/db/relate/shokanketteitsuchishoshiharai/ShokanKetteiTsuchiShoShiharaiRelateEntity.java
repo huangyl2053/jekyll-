@@ -53,6 +53,7 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private KinyuKikanCode kinyuKikanCode;
     private RString kinyuKikanName;
     private RString shideMeisho;
+    // 様式名称
     private RString yokinShubetsuMeisho;
     private RString kozaBango;
     private RString kozaMeigininKanji;
@@ -79,4 +80,20 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private RString sashitomeHiHokenshaNo;
     private RString sashitomeKojoNo;
     private TokuteiKozaRelateEntity 口座;
+    // 支給金額
+    private int kaishuKingaku;
+    // 支給金額集計
+    private int kaishuKingakuTtl;
+    // 差額金額集計
+    private Decimal sagakuKingakuTtl;
+    // 様式金額集計
+    private Decimal yousikiKingakuTtl;
+    // サービス分類
+    private RString sabisufunrui;
+    // 様式番号サブ
+    private RString yousikibangousabu;
+    // 種類１
+    private RString syurui1;
+    // 種類２
+    private RString syurui2;
 }

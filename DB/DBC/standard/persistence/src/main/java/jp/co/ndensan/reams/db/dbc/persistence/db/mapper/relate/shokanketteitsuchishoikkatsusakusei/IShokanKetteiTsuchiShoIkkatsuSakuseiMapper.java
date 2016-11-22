@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanK
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharaiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 償還払い支給（不支給）決定通知書一括作成のマッパーインタフェースです。
@@ -83,4 +85,11 @@ public interface IShokanKetteiTsuchiShoIkkatsuSakuseiMapper {
      * @return 償還払支給差止対象者一覧用帳票データ
      */
     List<ShokanKetteiTsuchiShoShiharaiRelateEntity> get償還払支給差止対象者一覧用帳票データ(ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter paramter);
+    
+    /**
+     * 通知書発行対象フラグの更新
+     * @param 資格区分 資格区分
+     */
+    
+    void upd通知書発行対象フラグ(@Param("資格区分") RString 資格区分);
 }
