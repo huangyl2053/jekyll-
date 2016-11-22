@@ -196,7 +196,7 @@ public class PrtTokuchoIraijohoIchiranhyoProcess extends BatchKeyBreakBase<TokuC
         TokubetsuChoshuIraiJohoIchiranEntity 特徴依頼情報Entity = 特徴依頼情報Entityを作成(行政区コード,
                 表示コード, 年金保険者名称, t.get対象者情報(), t.get市町村名称());
         TokubetsuChoshuIraiJohoIchiranReport report = new TokubetsuChoshuIraiJohoIchiranReport(
-                特徴依頼情報Entity, processCore.出力順項(), processCore.get改頁項名(),
+                特徴依頼情報Entity, processCore.出力順項(), processCore.改頁項(),
                 parameter.getシステム日時().getRDateTime());
         report.writeBy(reportSourceWriter);
         TokubetsuChoshuIraiJohoIchiranDataCSVEntity cSVEntity = csvEntityの編集(行政区コード, 表示コード,
