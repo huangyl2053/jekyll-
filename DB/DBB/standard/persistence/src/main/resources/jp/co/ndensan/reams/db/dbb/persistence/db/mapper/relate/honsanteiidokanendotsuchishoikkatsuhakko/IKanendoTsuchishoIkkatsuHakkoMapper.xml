@@ -3429,7 +3429,7 @@
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
             A.*,
-            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "ShikibetsuTaisho_banchiCode1"
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "IdoFukaJohoTemp" AS A
         WHERE
@@ -3455,7 +3455,7 @@
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
             A.*,
-            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "ShikibetsuTaisho_banchiCode1"
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "IdoFukaJohoTemp" AS A
         WHERE
