@@ -89,6 +89,7 @@ public class KinkyujiShoteiShikanPanel {
                 被保険者番号, 整理番号, サービス年月, 申請日, 事業者番号, 明細番号, 証明書, 様式番号, 識別コード, 償還払ViewStateDB, parameter);
 
         getHandler(div).initDgdKinkyujiShoteiList(list);
+        setRowSort(div);
         ViewStateHolder.put(ViewStateKeys.所定疾患施設療養費等データ, list);
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー,
                 SikibetuNokennsakuki.class);
@@ -584,10 +585,6 @@ public class KinkyujiShoteiShikanPanel {
 
     private KinkyujiShoteiShikanPanelValidationHandler getCheckHandler(KinkyujiShoteiShikanPanelDiv div) {
         return new KinkyujiShoteiShikanPanelValidationHandler(div);
-    }
-
-    private ResponseData<KinkyujiShoteiShikanPanelDiv> createResponse(KinkyujiShoteiShikanPanelDiv div) {
-        return ResponseData.of(div).respond();
     }
 
 }

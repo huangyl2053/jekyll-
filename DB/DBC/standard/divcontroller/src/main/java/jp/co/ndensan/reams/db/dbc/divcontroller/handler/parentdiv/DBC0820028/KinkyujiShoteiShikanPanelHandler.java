@@ -125,16 +125,42 @@ public final class KinkyujiShoteiShikanPanelHandler {
 
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
         ArrayList<ShokanShoteiShikkanShisetsuRyoyo> list = new ArrayList();
+        ArrayList<ShokanShoteiShikkanShisetsuRyoyo> johoList = new ArrayList();
         if (償還払ViewStateDB != null && 償還払ViewStateDB.get償還払請求所定疾患施設療養費等データList() != null) {
-            list = 償還払ViewStateDB.get償還払請求所定疾患施設療養費等データList();
+            johoList = 償還払ViewStateDB.get償還払請求所定疾患施設療養費等データList();
         }
-        list = new ArrayList<>(getUpdateList(list, parameter));
+        johoList = new ArrayList<>(getUpdateList(johoList, parameter));
         ArrayList<ShokanShoteiShikkanShisetsuRyoyo> dbList = (ArrayList<ShokanShoteiShikkanShisetsuRyoyo>) finder.
                 getShoteiShikanShisetsuRyoyohiEtcData(被保険者番号, サービス年月, 整理番号, 事業者番号,
                         様式番号, 明細番号, null);
-        if (dbList != null && !dbList.isEmpty()) {
-            for (ShokanShoteiShikkanShisetsuRyoyo row : dbList) {
-                list.add(row);
+        for (ShokanShoteiShikkanShisetsuRyoyo ryoyo : dbList) {
+            boolean isModifiedorDeleted = false;
+            for (ShokanShoteiShikkanShisetsuRyoyo updateRyoyo : johoList) {
+                if (updateRyoyo.get連番().equals(ryoyo.get連番())) {
+                    if (updateRyoyo.toEntity().getState() == EntityDataState.Modified) {
+                        isModifiedorDeleted = true;
+                        ryoyo.toRealEntity().setState(EntityDataState.Modified);
+                        list.add(ryoyo);
+                        break;
+                    }
+                    if (updateRyoyo.toEntity().getState() == EntityDataState.Deleted) {
+                        isModifiedorDeleted = true;
+                        ryoyo.toRealEntity().setState(EntityDataState.Deleted);
+                        list.add(ryoyo);
+                        break;
+                    }
+
+                }
+            }
+            if (!isModifiedorDeleted) {
+                ryoyo.toRealEntity().setState(EntityDataState.Unchanged);
+                list.add(ryoyo);
+            }
+        }
+        for (ShokanShoteiShikkanShisetsuRyoyo updateRyoyo : johoList) {
+            if (updateRyoyo.toEntity().getState() == EntityDataState.Added) {
+                updateRyoyo.toRealEntity().setState(EntityDataState.Added);
+                list.add(updateRyoyo);
             }
         }
         return list;
@@ -434,14 +460,30 @@ public final class KinkyujiShoteiShikanPanelHandler {
         boolean 麻酔単位数flag = checkEquals(div.getTxtMasuiTanisu().getValue(), new Decimal(result.get麻酔単位数()));
         boolean 適用flag = checkEquals(div.getTxtTekiyou().getValue(), get適用(result));
 
-        return 所定疾患施設療養費傷病名１flag || 所定疾患施設療養費傷病名２flag || 所定疾患施設療養費傷病名３flag
-                || 所定疾患施設療養費開始年月日１flag || 所定疾患施設療養費開始年月日２flag || 所定疾患施設療養費開始年月日３flag
-                || 往診日数flag || 往診医療機関名flag || 通院日数flag || 通院医療機関名flag || 所定疾患施設療養費単位数flag
-                || 所定疾患施設療養費日数flag || 所定疾患施設療養費小計flag || 緊急時傷病名１flag || 緊急時傷病名２flag
-                || 緊急時傷病名３flag || 緊急時治療開始年月日１flag || 緊急時治療開始年月日２flag || 緊急時治療開始年月日３flag
-                || 緊急時治療管理単位数flag || 緊急時治療管理日数flag || 緊急時治療管理小計flag || 緊急時施設療養費合計単位数flag
+        return check1(所定疾患施設療養費傷病名１flag, 所定疾患施設療養費傷病名２flag, 所定疾患施設療養費傷病名３flag,
+                所定疾患施設療養費開始年月日１flag, 所定疾患施設療養費開始年月日２flag, 所定疾患施設療養費開始年月日３flag,
+                往診日数flag, 往診医療機関名flag, 通院日数flag, 通院医療機関名flag) || check2(所定疾患施設療養費単位数flag,
+                        所定疾患施設療養費日数flag, 所定疾患施設療養費小計flag, 緊急時傷病名１flag, 緊急時傷病名２flag, 緊急時傷病名３flag,
+                        緊急時治療開始年月日１flag, 緊急時治療開始年月日２flag, 緊急時治療開始年月日３flag, 緊急時治療管理単位数flag)
+                || 緊急時治療管理日数flag || 緊急時治療管理小計flag || 緊急時施設療養費合計単位数flag
                 || 単位数flag || 処置単位数flag || 放射線治療単位数flag || 手術単位数flag || 麻酔単位数flag || 適用flag;
 
+    }
+
+    private boolean check1(boolean 所定疾患施設療養費傷病名１flag, boolean 所定疾患施設療養費傷病名２flag, boolean 所定疾患施設療養費傷病名３flag,
+            boolean 所定疾患施設療養費開始年月日１flag, boolean 所定疾患施設療養費開始年月日２flag, boolean 所定疾患施設療養費開始年月日３flag,
+            boolean 往診日数flag, boolean 往診医療機関名flag, boolean 通院日数flag, boolean 通院医療機関名flag) {
+        return 所定疾患施設療養費傷病名１flag || 所定疾患施設療養費傷病名２flag || 所定疾患施設療養費傷病名３flag
+                || 所定疾患施設療養費開始年月日１flag || 所定疾患施設療養費開始年月日２flag || 所定疾患施設療養費開始年月日３flag
+                || 往診日数flag || 往診医療機関名flag || 通院日数flag || 通院医療機関名flag;
+    }
+
+    private boolean check2(boolean 所定疾患施設療養費単位数flag, boolean 所定疾患施設療養費日数flag, boolean 所定疾患施設療養費小計flag,
+            boolean 緊急時傷病名１flag, boolean 緊急時傷病名２flag, boolean 緊急時傷病名３flag,
+            boolean 緊急時治療開始年月日１flag, boolean 緊急時治療開始年月日２flag, boolean 緊急時治療開始年月日３flag, boolean 緊急時治療管理単位数flag) {
+        return 所定疾患施設療養費単位数flag || 所定疾患施設療養費日数flag || 所定疾患施設療養費小計flag || 緊急時傷病名１flag
+                || 緊急時傷病名２flag || 緊急時傷病名３flag || 緊急時治療開始年月日１flag || 緊急時治療開始年月日２flag
+                || 緊急時治療開始年月日３flag || 緊急時治療管理単位数flag;
     }
 
     private boolean checkEquals(Object newValue, Object oldValue) {
@@ -449,7 +491,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
             return true;
         } else if (newValue == null && oldValue == null) {
             return false;
-        } else if (!newValue.equals(oldValue)) {
+        } else if (newValue != null && oldValue != null && !newValue.equals(oldValue)) {
             return true;
         }
         return false;
@@ -523,6 +565,9 @@ public final class KinkyujiShoteiShikanPanelHandler {
         }
         if (div.getTxtShujutsuTanisu().getValue() != null) {
             data = data.add(div.getTxtShujutsuTanisu().getValue());
+        }
+        if (div.getTxtHoshasenChiryoTanisu().getValue() != null) {
+            data = data.add(div.getTxtHoshasenChiryoTanisu().getValue());
         }
         if (div.getTxtShochiTanisu().getValue() != null) {
             data = data.add(div.getTxtShochiTanisu().getValue());
@@ -1311,6 +1356,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
     public void click_Confirm(RString state, List<ShokanShoteiShikkanShisetsuRyoyo> rowList) {
         div.getBtnAdd().setDisabled(false);
         div.getPanelDetail().setDisplayNone(true);
+        div.getPanelDetail().getBtnClear().setDisabled(false);
 
         List<dgdKinkyujiShoteiList_Row> list = div.getDgdKinkyujiShoteiList().getDataSource();
         if (登録.equals(state)) {
@@ -1378,8 +1424,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
                     && ryoyo.get整理番号().equals(parameter.get整理番号())
                     && ryoyo.get事業者番号().equals(parameter.get事業者番号())
                     && ryoyo.get様式番号().equals(parameter.get様式番号())
-                    && ryoyo.get明細番号().equals(parameter.get明細番号())
-                    && ryoyo.toEntity().getState() == EntityDataState.Added) {
+                    && ryoyo.get明細番号().equals(parameter.get明細番号())) {
                 updateList.add(ryoyo);
             }
         }
