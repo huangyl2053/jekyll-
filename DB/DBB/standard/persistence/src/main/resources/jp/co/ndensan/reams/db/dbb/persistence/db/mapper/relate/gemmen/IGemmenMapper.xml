@@ -30,7 +30,8 @@
             AND "DbT2004Gemmen"."rirekiNo" = "DbT2002Fuka"."rirekiNo"   
         WHERE
             "DbT2002Fuka"."choteiNendo" = #{choteiNendo} AND 
-            "DbT2002Fuka"."fukaNendo" = #{fukaNendo}
+            "DbT2002Fuka"."fukaNendo" = #{fukaNendo} AND
+            0 <![CDATA[<]]> "DbT2002Fuka"."gemmenMaeHokenryo"
         )
         SELECT
             master.*,
