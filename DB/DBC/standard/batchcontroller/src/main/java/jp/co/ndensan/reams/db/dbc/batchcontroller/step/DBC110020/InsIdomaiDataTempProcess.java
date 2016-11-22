@@ -1883,7 +1883,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 entity.set国民健康保険個人番号(国保資格.getKokuhoKojinNo());
             }
             entity.set送付年月(処理年月);
-            if (宛名情報.get名称() != null) {
+            if (宛名情報 != null && 宛名情報.get名称() != null) {
                 entity.set被保険者氏名(宛名情報.get名称().getColumnValue());
             }
         }
