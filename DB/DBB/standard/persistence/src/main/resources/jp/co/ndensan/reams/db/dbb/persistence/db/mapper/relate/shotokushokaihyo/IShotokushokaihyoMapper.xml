@@ -162,7 +162,6 @@
         rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
         "DbV1001HihokenshaDaicho"."jushochiTokureiFlag"='1'
         AND "DbV1001HihokenshaDaicho"."shikibetsuCode"="FindShikibetsuTaisho"."shikibetsuCode"
-        <!--AND "FindShikibetsuTaisho"."seinengappiYMD"<![CDATA[<=]]>#{処理年度_minus39_0401}-->
         GROUP BY
         "FindShikibetsuTaisho"."shikibetsuCode",
         "FindShikibetsuTaisho"."juminShubetsuCode",
