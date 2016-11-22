@@ -129,7 +129,6 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
     }
     
     private KoumokuGoukey 不明_合計(KoumokuGoukey newKoumokuGoukey, KoumokuGoukey koumokuGoukey){
-        KoumokuGoukey tmp = new KoumokuGoukey();
         newKoumokuGoukey.getYoGetuNinsuuGoukeyi().add(koumokuGoukey.getYoGetuNinsuuGoukeyi());
         newKoumokuGoukey.getGoGetuNinsuuGoukeyi().add(koumokuGoukey.getGoGetuNinsuuGoukeyi());
         newKoumokuGoukey.getRokuGetuNinsuuGoukeyi().add(koumokuGoukey.getRokuGetuNinsuuGoukeyi());
