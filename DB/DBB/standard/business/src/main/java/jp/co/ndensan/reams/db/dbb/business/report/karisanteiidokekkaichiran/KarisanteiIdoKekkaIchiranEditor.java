@@ -8,14 +8,18 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -206,6 +210,26 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
         }
         source.listCenter_15 = 口座異動編集(計算後情報_宛名_口座_更正前Entity);
         source.listCenter_16 = 徴収方法編集(計算後情報_宛名_口座_更正前Entity);
+        if (計算後情報_宛名_口座_更正前Entity.get宛名Entity() != null) {
+            ChoikiCode 町域コード = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getChoikiCode();
+            if (町域コード != null) {
+                source.choikiCode = 町域コード.getColumnValue();
+            }
+            FlexibleDate 生年月日 = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getSeinengappiYMD();
+            if (生年月日 != null) {
+                source.seinengappiYMD = new RString(生年月日.toString());
+            }
+            RString 性別 = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getSeibetsuCode();
+            source.seibetsuCode = 性別;
+            AtenaKanaMeisho 氏名５０音カナ = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getKanaMeisho();
+            if (氏名５０音カナ != null) {
+                source.kanaMeisho = 氏名５０音カナ.getColumnValue();
+            }
+        }
+        HihokenshaNo 被保険者番号 = 計算後情報_宛名_口座_更正前Entity.get被保険者番号();
+        if (被保険者番号 != null) {
+            source.hihokenshaNo = 被保険者番号.getColumnValue();
+        }
     }
 
     private void edit作成日時(KarisanteiIdoKekkaIchiranSource source) {
