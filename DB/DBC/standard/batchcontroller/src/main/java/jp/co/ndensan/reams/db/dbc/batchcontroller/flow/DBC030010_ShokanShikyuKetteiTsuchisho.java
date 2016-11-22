@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShiharaiYoteiBi
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShoHihokenshabunOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShoShiharaiYoteiBiYijiAriOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiItiranTempInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiTempInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess;
@@ -45,9 +46,10 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
     private static final String MEISAI_TEMP_INSERT = "shokanKetteiTsuchiShoMeisaiTempInsertProcess";
     private static final String TEMP_UPDATE_SERVICE = "ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess";
     private static final String TEMP_UPDATE_YOSHIKI = "ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess";
+    private static final String TEMP_INSERT_LTIRAN = "ShokanKetteiTsuchiShoMeisaiItiranTempInsertProcess";
     private static final String DB_UPDATE = "shokanKetteiTsuchiShoIkkatsuDBUpdateProcess";
     private static final String DB_UPDATE2 = "ShokanKetteiTsuchiShokanShinseiDBUpdateProcess";
-
+    
     private static final String DBC100002 = "shiharaiYoteiBiYijiNashiOutputProcess";
     private static final String DBC100003 = "shoShiharaiYoteiBiYijiAriOutputProcess";
     private static final String DBC100004 = "shokanKetteiTsuchiShoSealerOutputProcess";
@@ -66,7 +68,6 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
     private static final RString 更新する = new RString("2");
     private static final RString フラグ_FALSE = new RString("false");
     private static final RString フラグ_TRUE = new RString("true");
-    private static final RString 発行有無_発行しない = new RString("0");
     private static Long jobId = Long.MIN_VALUE;
 
     @Override
@@ -97,20 +98,22 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
         executeStep(MEISAI_TEMP_INSERT);
         executeStep(TEMP_UPDATE_YOSHIKI);
         executeStep(TEMP_UPDATE_SERVICE);
+        
+        executeStep(TEMP_INSERT_LTIRAN);
         if (フラグ_FALSE.equals(getParameter().getテスト出力フラグ())) {
             executeStep(DB_UPDATE);
         }
         if (更新する.equals(getParameter().get窓口払い一括更新区分())) {
             executeStep(DB_UPDATE2);
         }
-        
+
         if (用紙タイプ_A4.equals(用紙タイプ)) {
             if (支払予定日印字有無_印字しない.equals(支払予定日印字有無)) {
                 executeStep(DBC100002);
             } else if (支払予定日印字有無_印字する.equals(支払予定日印字有無)) {
                 executeStep(DBC100003);
             }
-        } 
+        }
         if (フラグ_FALSE.equals(getParameter().get受領委任者向け決定通知書フラグ())
                 && 用紙タイプ_諏訪広域版.equals(用紙タイプ)) {
             executeStep(DBC100006);
@@ -126,15 +129,15 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
         executeStep(DBC200023);
         executeStep(DBC200024);
     }
-
+    
     @Step(TEMP_INSERT)
     IBatchFlowCommand shokanKetteiTsuchiShoTempInsertProcess() {
         return loopBatch(ShokanKetteiTsuchiShoTempInsertProcess.class)
                 .arguments(ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter.createProcessParam(getParameter()))
                 .define();
     }
-    
-     @Step(UPD_HAKKOUTAISYOUFLG)
+
+    @Step(UPD_HAKKOUTAISYOUFLG)
     IBatchFlowCommand updHakkoutaisyouFlgProcess() {
         return simpleBatch(UpdHakkoutaisyouFlgProcess.class)
                 .define();
@@ -147,12 +150,17 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
 
     @Step(TEMP_UPDATE_YOSHIKI)
     IBatchFlowCommand shokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess() {
-        return loopBatch(ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess.class).define();
+        return simpleBatch(ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess.class).define();
     }
 
     @Step(TEMP_UPDATE_SERVICE)
     IBatchFlowCommand shokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess() {
-        return loopBatch(ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess.class).define();
+        return simpleBatch(ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess.class).define();
+    }
+
+    @Step(TEMP_INSERT_LTIRAN)
+    IBatchFlowCommand shokanKetteiTsuchiShoMeisaiItiranTempInsertProcess() {
+        return loopBatch(ShokanKetteiTsuchiShoMeisaiItiranTempInsertProcess.class).define();
     }
 
     @Step(DB_UPDATE)

@@ -14,7 +14,7 @@ public enum KetteiTsuchiIchiranBreakPageItem implements IBreakPageColumnMapping 
     /**
      * 郵便番号
      */
-    yubinBango("yubinBango", "郵便番号", "listUpper_6"),
+    yubinBango("yubinBango", "郵便番号", "yubinBango"),
     /**
      * 町域コード
      */
@@ -38,7 +38,7 @@ public enum KetteiTsuchiIchiranBreakPageItem implements IBreakPageColumnMapping 
     /**
      * 被保険者番号
      */
-    hiHokenshaNo("hiHokenshaNo", "被保険者番号", "listUpper_4"),
+    hiHokenshaNo("hiHokenshaNo", "被保険者番号", "hiHokenshaNo"),
     /**
      * 整理番号
      */
