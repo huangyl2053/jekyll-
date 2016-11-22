@@ -255,7 +255,7 @@ public class HonnSanteiFukaFath {
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         HonsenteiKeisangojohoParameter param = HonsenteiKeisangojohoParameter
                 .createSelectByKeyParam(調定年度, 賦課年度, 調定日時, 出力順, kozaSearchKey, list);
-        List<HonsenteiKeisangojohoEntity> 本算定計算後賦課情報リスト = mapper.select本算定計算後賦課情報(param);
+        List<HonsenteiKeisangojohoEntity> 本算定計算後賦課情報リスト = mapper.select本算定計算後賦課情報has徴収方法(param);
         List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座List = new ArrayList<>();
         SourceDataCollection sourceDataCollection = null;
 
