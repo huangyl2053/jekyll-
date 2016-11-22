@@ -309,11 +309,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         }
         if (回数集計パターン.is加算有無()) {
             集計項目Entity.set集計項目2_1(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
-            集計項目Entity.set集計項目2_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
+            集計項目Entity.set集計項目2_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
         }
         if (回数集計パターン.is内訳有無()) {
             集計項目Entity.set集計項目2内訳_1(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
-            集計項目Entity.set集計項目2内訳_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
+            集計項目Entity.set集計項目2内訳_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
             if (tokeihyo_EditPattern.is施設サービス計加算有無()) {
                 createサービス計2_1(entity, 回数集計パターン.getコード(), RiyojokyoTokeihyo_EditPattern.施設サービス計.getコード(), true);
             }
@@ -341,11 +341,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 施設サービス計Entity = 施設サービス計.get(数字_1);
         if (is内訳) {
             施設サービス計Entity.set集計項目2内訳_1(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
-            施設サービス計Entity.set集計項目2内訳_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
+            施設サービス計Entity.set集計項目2内訳_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
             return;
         }
         施設サービス計Entity.set集計項目2_1(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
-        施設サービス計Entity.set集計項目2_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
+        施設サービス計Entity.set集計項目2_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
     }
 
     private void create集計項目2_2(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
@@ -358,11 +358,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         }
         if (回数集計パターン.is加算有無()) {
             集計項目Entity.set集計項目2_2(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
-            集計項目Entity.set集計項目2_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
+            集計項目Entity.set集計項目2_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
         }
         if (回数集計パターン.is内訳有無()) {
             集計項目Entity.set集計項目2内訳_2(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
-            集計項目Entity.set集計項目2内訳_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
+            集計項目Entity.set集計項目2内訳_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
             if (tokeihyo_EditPattern.is施設サービス計加算有無()) {
                 createサービス計2_2(entity, 回数集計パターン.getコード(), RiyojokyoTokeihyo_EditPattern.施設サービス計.getコード(), true);
             }
@@ -391,11 +391,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 施設サービス計Entity = 施設サービス計.get(数字_1);
         if (is内訳) {
             施設サービス計Entity.set集計項目2内訳_2(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
-            施設サービス計Entity.set集計項目2内訳_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
+            施設サービス計Entity.set集計項目2内訳_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
             return;
         }
         施設サービス計Entity.set集計項目2_2(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
-        施設サービス計Entity.set集計項目2_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
+        施設サービス計Entity.set集計項目2_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
     }
 
     private void create集計項目2_3(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
@@ -408,11 +408,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         }
         if (回数集計パターン.is加算有無()) {
             集計項目Entity.set集計項目2_3(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
-            集計項目Entity.set集計項目2_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
+            集計項目Entity.set集計項目2_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
         }
         if (回数集計パターン.is内訳有無()) {
             集計項目Entity.set集計項目2内訳_3(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
-            集計項目Entity.set集計項目2内訳_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
+            集計項目Entity.set集計項目2内訳_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
             if (tokeihyo_EditPattern.is施設サービス計加算有無()) {
                 createサービス計2_2(entity, 回数集計パターン.getコード(), RiyojokyoTokeihyo_EditPattern.施設サービス計.getコード(), true);
             }
@@ -440,11 +440,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 施設サービス計Entity = 施設サービス計.get(数字_1);
         if (is内訳) {
             施設サービス計Entity.set集計項目2内訳_3(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
-            施設サービス計Entity.set集計項目2内訳_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
+            施設サービス計Entity.set集計項目2内訳_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
             return;
         }
         施設サービス計Entity.set集計項目2_3(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
-        施設サービス計Entity.set集計項目2_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
+        施設サービス計Entity.set集計項目2_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
     }
 
     private void create集計項目2_4(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
@@ -457,11 +457,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         }
         if (回数集計パターン.is加算有無()) {
             集計項目Entity.set集計項目2_4(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
-            集計項目Entity.set集計項目2_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
+            集計項目Entity.set集計項目2_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
         }
         if (回数集計パターン.is内訳有無()) {
             集計項目Entity.set集計項目2内訳_4(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
-            集計項目Entity.set集計項目2内訳_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
+            集計項目Entity.set集計項目2内訳_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
             if (tokeihyo_EditPattern.is施設サービス計加算有無()) {
                 createサービス計2_4(entity, 回数集計パターン.getコード(), RiyojokyoTokeihyo_EditPattern.施設サービス計.getコード(), true);
             }
@@ -489,11 +489,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 施設サービス計Entity = 施設サービス計.get(数字_1);
         if (is内訳) {
             施設サービス計Entity.set集計項目2内訳_4(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
-            施設サービス計Entity.set集計項目2内訳_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
+            施設サービス計Entity.set集計項目2内訳_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
             return;
         }
         施設サービス計Entity.set集計項目2_4(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
-        施設サービス計Entity.set集計項目2_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
+        施設サービス計Entity.set集計項目2_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
     }
 
     private void create集計項目2_5(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
@@ -506,11 +506,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         }
         if (回数集計パターン.is加算有無()) {
             集計項目Entity.set集計項目2_5(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
-            集計項目Entity.set集計項目2_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
+            集計項目Entity.set集計項目2_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
         }
         if (回数集計パターン.is内訳有無()) {
             集計項目Entity.set集計項目2内訳_5(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
-            集計項目Entity.set集計項目2内訳_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
+            集計項目Entity.set集計項目2内訳_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
             if (tokeihyo_EditPattern.is施設サービス計加算有無()) {
                 createサービス計2_5(entity, 回数集計パターン.getコード(), RiyojokyoTokeihyo_EditPattern.施設サービス計.getコード(), true);
             }
@@ -538,11 +538,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 施設サービス計Entity = 施設サービス計.get(数字_1);
         if (is内訳) {
             施設サービス計Entity.set集計項目2内訳_5(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
-            施設サービス計Entity.set集計項目2内訳_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
+            施設サービス計Entity.set集計項目2内訳_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
             return;
         }
         施設サービス計Entity.set集計項目2_5(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
-        施設サービス計Entity.set集計項目2_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
+        施設サービス計Entity.set集計項目2_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
     }
 
     private void create集計項目2_6(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
@@ -555,11 +555,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         }
         if (回数集計パターン.is加算有無()) {
             集計項目Entity.set集計項目2_6(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
-            集計項目Entity.set集計項目2_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
+            集計項目Entity.set集計項目2_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
         }
         if (回数集計パターン.is内訳有無()) {
             集計項目Entity.set集計項目2内訳_6(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
-            集計項目Entity.set集計項目2内訳_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
+            集計項目Entity.set集計項目2内訳_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
             if (tokeihyo_EditPattern.is施設サービス計加算有無()) {
                 createサービス計2_6(entity, 回数集計パターン.getコード(), RiyojokyoTokeihyo_EditPattern.施設サービス計.getコード(), true);
             }
@@ -587,11 +587,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 施設サービス計Entity = 施設サービス計.get(数字_1);
         if (is内訳) {
             施設サービス計Entity.set集計項目2内訳_6(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
-            施設サービス計Entity.set集計項目2内訳_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
+            施設サービス計Entity.set集計項目2内訳_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
             return;
         }
         施設サービス計Entity.set集計項目2_6(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
-        施設サービス計Entity.set集計項目2_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
+        施設サービス計Entity.set集計項目2_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
     }
 
     private void create集計項目2_7(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
@@ -604,11 +604,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         }
         if (回数集計パターン.is加算有無()) {
             集計項目Entity.set集計項目2_7(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
-            集計項目Entity.set集計項目2_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
+            集計項目Entity.set集計項目2_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
         }
         if (回数集計パターン.is内訳有無()) {
             集計項目Entity.set集計項目2内訳_7(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
-            集計項目Entity.set集計項目2内訳_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
+            集計項目Entity.set集計項目2内訳_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
             if (tokeihyo_EditPattern.is施設サービス計加算有無()) {
                 createサービス計2_7(entity, 回数集計パターン.getコード(), RiyojokyoTokeihyo_EditPattern.施設サービス計.getコード(), true);
             }
@@ -636,11 +636,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 施設サービス計Entity = 施設サービス計.get(数字_1);
         if (is内訳) {
             施設サービス計Entity.set集計項目2内訳_7(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
-            施設サービス計Entity.set集計項目2内訳_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
+            施設サービス計Entity.set集計項目2内訳_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
             return;
         }
         施設サービス計Entity.set集計項目2_7(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
-        施設サービス計Entity.set集計項目2_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
+        施設サービス計Entity.set集計項目2_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
     }
 
     private void create集計項目2_8(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
@@ -653,11 +653,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         }
         if (回数集計パターン.is加算有無()) {
             集計項目Entity.set集計項目2_8(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
-            集計項目Entity.set集計項目2_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
+            集計項目Entity.set集計項目2_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
         }
         if (回数集計パターン.is内訳有無()) {
             集計項目Entity.set集計項目2内訳_8(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
-            集計項目Entity.set集計項目2内訳_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
+            集計項目Entity.set集計項目2内訳_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
             if (tokeihyo_EditPattern.is施設サービス計加算有無()) {
                 createサービス計2_8(entity, 回数集計パターン.getコード(), RiyojokyoTokeihyo_EditPattern.施設サービス計.getコード(), true);
             }
@@ -685,11 +685,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 施設サービス計Entity = 施設サービス計.get(数字_1);
         if (is内訳) {
             施設サービス計Entity.set集計項目2内訳_8(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
-            施設サービス計Entity.set集計項目2内訳_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
+            施設サービス計Entity.set集計項目2内訳_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
             return;
         }
         施設サービス計Entity.set集計項目2_8(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
-        施設サービス計Entity.set集計項目2_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
+        施設サービス計Entity.set集計項目2_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
     }
 
     private void create集計項目2_9(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
@@ -702,11 +702,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         }
         if (回数集計パターン.is加算有無()) {
             集計項目Entity.set集計項目2_9(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
-            集計項目Entity.set集計項目2_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
+            集計項目Entity.set集計項目2_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), true, false));
         }
         if (回数集計パターン.is内訳有無()) {
             集計項目Entity.set集計項目2内訳_9(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
-            集計項目Entity.set集計項目2内訳_10(get加算結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
+            集計項目Entity.set集計項目2内訳_10(get加算合計結果(集計項目Entity, entity, 回数集計パターン.getコード(), false, true));
             if (tokeihyo_EditPattern.is施設サービス計加算有無()) {
                 createサービス計2_9(entity, 回数集計パターン.getコード(), RiyojokyoTokeihyo_EditPattern.施設サービス計.getコード(), true);
             }
@@ -734,11 +734,11 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 施設サービス計Entity = 施設サービス計.get(数字_1);
         if (is内訳) {
             施設サービス計Entity.set集計項目2内訳_9(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
-            施設サービス計Entity.set集計項目2内訳_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
+            施設サービス計Entity.set集計項目2内訳_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, false, is内訳));
             return;
         }
         施設サービス計Entity.set集計項目2_9(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
-        施設サービス計Entity.set集計項目2_10(get加算結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
+        施設サービス計Entity.set集計項目2_10(get加算合計結果(施設サービス計Entity, entity, 回数集計パターン, true, is内訳));
     }
 
     private Decimal get加算結果(RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity,
@@ -760,8 +760,8 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         } else if (回数集計パターン.equals(RiyojokyoTokeihyo_KaisuShukeiPattern.日数回数_内訳なし_合計加算あり.getコード())
                 || 回数集計パターン.equals(RiyojokyoTokeihyo_KaisuShukeiPattern.日数回数_内訳なし_合計加算なし.getコード())) {
             if (!is内訳有無) {
-                加算結果1 = new Decimal(entity.getNissuKaisu().toString()).add(get集計項目2内訳(集計項目Entity, entity));
-                加算結果2 = get集計項目2内訳(集計項目Entity, entity);
+                加算結果1 = new Decimal(entity.getNissuKaisu().toString()).add(get集計項目2(集計項目Entity, entity));
+                加算結果2 = get集計項目2(集計項目Entity, entity);
             } else {
                 加算結果1 = new Decimal(entity.getNissuKaisu().toString()).add(get集計項目2内訳(集計項目Entity, entity));
                 加算結果2 = 集計項目Entity.get集計項目2内訳_1();
@@ -769,6 +769,42 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         } else if (回数集計パターン.equals(RiyojokyoTokeihyo_KaisuShukeiPattern.居宅支援_内訳あり_合計加算なし.getコード())) {
             加算結果1 = get居宅支援加算結果(集計項目Entity, entity, true, is内訳有無);
             加算結果2 = get居宅支援加算結果(集計項目Entity, entity, false, is内訳有無);
+        }
+        if (is加算対象1) {
+            return 加算結果1;
+        } else {
+            return 加算結果2;
+        }
+    }
+
+    private Decimal get加算合計結果(RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity,
+            DbWT1513RiyoJokyoTokeihyoEntity entity, RString 回数集計パターン, boolean is加算対象1, boolean is内訳有無) {
+
+        Decimal 加算結果1 = Decimal.ZERO;
+        Decimal 加算結果2 = Decimal.ZERO;
+        if (回数集計パターン.equals(RiyojokyoTokeihyo_KaisuShukeiPattern.短期入所実日数_内訳なし_合計加算あり.getコード())
+                || 回数集計パターン.equals(RiyojokyoTokeihyo_KaisuShukeiPattern.短期入所実日数_内訳あり_合計加算あり.getコード())
+                || 回数集計パターン.equals(RiyojokyoTokeihyo_KaisuShukeiPattern.短期入所実日数_内訳なし_合計加算なし.getコード())
+                || 回数集計パターン.equals(RiyojokyoTokeihyo_KaisuShukeiPattern.短期入所実日数_内訳あり_合計加算なし.getコード())) {
+            if (!is内訳有無) {
+                加算結果1 = new Decimal(entity.getTankiNyushoJitsunissu().toString()).add(nullToZero(集計項目Entity.get集計項目2_10()));
+                加算結果2 = new Decimal(entity.getGaihakuNissu().toString()).add(nullToZero(集計項目Entity.get集計項目2_10()));
+            } else {
+                加算結果1 = new Decimal(entity.getTankiNyushoJitsunissu().toString()).add(nullToZero(集計項目Entity.get集計項目2内訳_10()));
+                加算結果2 = new Decimal(entity.getGaihakuNissu().toString()).add(nullToZero(集計項目Entity.get集計項目2内訳_10()));
+            }
+        } else if (回数集計パターン.equals(RiyojokyoTokeihyo_KaisuShukeiPattern.日数回数_内訳なし_合計加算あり.getコード())
+                || 回数集計パターン.equals(RiyojokyoTokeihyo_KaisuShukeiPattern.日数回数_内訳なし_合計加算なし.getコード())) {
+            if (!is内訳有無) {
+                加算結果1 = new Decimal(entity.getNissuKaisu().toString()).add(nullToZero(集計項目Entity.get集計項目2_10()));
+                加算結果2 = 集計項目Entity.get集計項目2_10();
+            } else {
+                加算結果1 = new Decimal(entity.getNissuKaisu().toString()).add(nullToZero(集計項目Entity.get集計項目2内訳_10()));
+                加算結果2 = 集計項目Entity.get集計項目2内訳_10();
+            }
+        } else if (回数集計パターン.equals(RiyojokyoTokeihyo_KaisuShukeiPattern.居宅支援_内訳あり_合計加算なし.getコード())) {
+            加算結果1 = get加算対象(集計項目Entity, entity, is加算対象1, is内訳有無);
+            加算結果2 = get加算対象(集計項目Entity, entity, is加算対象1, is内訳有無);
         }
         if (is加算対象1) {
             return 加算結果1;
@@ -843,6 +879,47 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
                 return 加算対象2.add(get集計項目2内訳(集計項目Entity, entity));
             }
             return 加算対象2.add(get集計項目2(集計項目Entity, entity));
+        }
+    }
+
+    private Decimal get加算対象(RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity,
+            DbWT1513RiyoJokyoTokeihyoEntity entity, boolean is加算対象1, boolean is内訳有無) {
+        Decimal 加算対象1;
+        Decimal 加算対象2;
+        DbWT1513RiyoJokyoTokeihyoEntity before = getBefore();
+        if (entity.getServiceTeikyoYM().compareTo(制度改正施行年月) < 0) {
+            if (before.getHihokenshaNo().equals(entity.getHihokenshaNo())
+                    && before.getServiceTeikyoYM().equals(entity.getServiceTeikyoYM())
+                    && before.getServiceShuruiCode().equals(entity.getServiceShuruiCode())
+                    && before.getJigyoshoNo().equals(entity.getJigyoshoNo())) {
+                加算対象1 = new Decimal(entity.getNissuKaisu().toString());
+                加算対象2 = Decimal.ZERO;
+            } else {
+                加算対象1 = new Decimal(entity.getNissuKaisu().toString());
+                加算対象2 = Decimal.ONE;
+            }
+        } else {
+            if (before.getHihokenshaNo().equals(entity.getHihokenshaNo())
+                    && before.getServiceTeikyoYM().equals(entity.getServiceTeikyoYM())
+                    && before.getServiceShuruiCode().equals(entity.getServiceShuruiCode())
+                    && before.getJigyoshoNo().equals(entity.getJigyoshoNo())) {
+                加算対象1 = Decimal.ZERO;
+                加算対象2 = Decimal.ZERO;
+            } else {
+                加算対象1 = Decimal.ONE;
+                加算対象2 = Decimal.ONE;
+            }
+        }
+        if (is加算対象1) {
+            if (is内訳有無) {
+                return 加算対象1.add(nullToZero(集計項目Entity.get集計項目2内訳_10()));
+            }
+            return 加算対象1.add(nullToZero(集計項目Entity.get集計項目2_10()));
+        } else {
+            if (is内訳有無) {
+                return 加算対象2.add(nullToZero(集計項目Entity.get集計項目2内訳_10()));
+            }
+            return 加算対象2.add(nullToZero(集計項目Entity.get集計項目2_10()));
         }
     }
 
