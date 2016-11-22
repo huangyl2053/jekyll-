@@ -800,7 +800,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         賦課台帳情報.set支払方法変更リスト(fukaDaityouInfo.get支払方法変更リスト());
         賦課台帳情報.set受給者台帳情報(fukaDaityouInfo.get受給者台帳情報());
         FukaDaichoDataHenshu fukaDaichoDataHenshu = FukaDaichoDataHenshu.createInstance();
-        EditedKariSanteiFukaDaichoJoho 編集後仮算定賦課台帳情報 = fukaDaichoDataHenshu.create編集後仮算定賦課台帳情報(賦課台帳情報);
+        EditedKariSanteiFukaDaichoJoho 編集後仮算定賦課台帳情報 = fukaDaichoDataHenshu.create編集後仮算定賦課台帳情報(賦課台帳情報, parameter.isHas更正前());
         new KarisanteiFukaDaichoPrintService().printSingle(編集後仮算定賦課台帳情報, reportManager);
 
         insertリアル発行履歴(通知書共通情報.get賦課の情報_更正後().get賦課情報(), 賦課台帳仮算定_帳票分類ID);
@@ -1271,7 +1271,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         賦課台帳情報.set支払方法変更リスト(fukaDaityouInfo.get支払方法変更リスト());
         賦課台帳情報.set受給者台帳情報(fukaDaityouInfo.get受給者台帳情報());
         FukaDaichoDataHenshu fukaDaichoDataHenshu = FukaDaichoDataHenshu.createInstance();
-        EditedHonSanteiFukaDaichoJoho 編集後本算定賦課台帳情報 = fukaDaichoDataHenshu.create編集後本算定賦課台帳情報(賦課台帳情報);
+        EditedHonSanteiFukaDaichoJoho 編集後本算定賦課台帳情報 = fukaDaichoDataHenshu.create編集後本算定賦課台帳情報(賦課台帳情報, parameter.isHas更正前());
         new FukaDaichoPrintService().printSingle(編集後本算定賦課台帳情報, reportManager);
 
         insertリアル発行履歴(通知書共通情報.get賦課の情報_更正後().get賦課情報(), 賦課台帳本算定_帳票分類ID);

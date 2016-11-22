@@ -235,8 +235,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
                 entity.getKanjiShimei(),
                 entity.getYubinNo(),
                 entity.getKanjiJusho(),
-                NenkinHokenshaHantei.createInstance().is厚労省(entity.getTokubetsuChoshuGimushaCode()),
-                entity.getFuichiRiyuCode()
+                NenkinHokenshaHantei.createInstance().is厚労省(entity.getTokubetsuChoshuGimushaCode())
         );
         target.setHihokenshaNo(entity.getHihokenshaNo());
         target.setShichosonCode(entity.getGenLasdecCode());

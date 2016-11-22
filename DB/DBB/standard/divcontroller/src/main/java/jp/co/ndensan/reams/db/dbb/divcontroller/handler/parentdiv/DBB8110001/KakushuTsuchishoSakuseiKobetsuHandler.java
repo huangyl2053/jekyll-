@@ -125,6 +125,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     private static final RString 減免通知書帳票_略称 = new RString("減免通知書帳票略称");
     private static final RString 徴収猶予通知書帳票_略称 = new RString("徴収猶予通知書帳票略称");
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
+    private static final RString 有 = new RString("1");
+    private static final RString 無 = new RString("0");
     private static final Code 業務固有 = new Code("0003");
 
     /**
@@ -264,8 +266,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             FukaJoho 更正前賦課の情報 = 賦課の情報List.get(1);
             HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
             set更正後賦課根拠(更正後賦課の情報);
+            div.setHdnKouseizenFlag(無);
             if (honsanteiIkoHantei.is本算定後(更正前賦課の情報) && 更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度())) {
                 set更正前賦課根拠(更正前賦課の情報);
+                div.setHdnKouseizenFlag(有);
             }
             if (!賦課年度.isBefore(調定年度)) {
                 FuchoKiUtil util = new FuchoKiUtil();
@@ -1474,7 +1478,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         parameter.set発行する帳票List(発行する帳票List);
         HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
         if (更正前Key != null && !更正前Key.isEmpty()
-                && !(honsanteiIkoHantei.is本算定後(map.get(更正前Key)) && map.get(更正前Key).get賦課年度().equals(map.get(更正前Key).get調定年度()))) {
+                && honsanteiIkoHantei.is本算定後(map.get(更正前Key)) && map.get(更正前Key).get賦課年度().equals(map.get(更正前Key).get調定年度())) {
             parameter.set賦課の情報_更正前(map.get(更正前Key));
         }
         parameter.set賦課の情報_更正後(map.get(更正後Key));
@@ -1515,6 +1519,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getTxtChoshuYuyoHakkoYMD().getValue());
         parameter.set徴収猶予通知書_文書番号(div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu()
                 .getCcdChoshuYuyoTsuchiBunshoNo().get文書番号());
+        parameter.setHas更正前(有.equals(div.getHdnKouseizenFlag()));
         AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         return KakushuTsuchishoSakusei.createInstance().publish(parameter);
     }

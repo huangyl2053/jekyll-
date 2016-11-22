@@ -27,10 +27,12 @@ import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikett
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.ShokanbarayiKeteiInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.InsupdShokanManager;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekkaBuilder;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -40,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 償還払い費支給申請決定_償還払決定情報
@@ -337,23 +340,23 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     /**
      * 登録Save
      *
-     * @param DB情報 DbJohoViewState
+     * @param db情報 DbJohoViewState
      * @param 修正前支給区分 RString
      * @param 決定日 FlexibleDate
      * @param paramter ShoukanharaihishinseikensakuParameter
      * @param 画面モード RString
      * @param 識別コード ShikibetsuCode
      */
-    public void 登録Save(DbJohoViewState DB情報, RString 修正前支給区分, FlexibleDate 決定日,
+    public void 登録Save(DbJohoViewState db情報, RString 修正前支給区分, FlexibleDate 決定日,
             ShoukanharaihishinseikensakuParameter paramter, RString 画面モード, ShikibetsuCode 識別コード) {
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
         InsupdShokanManager manager = InsupdShokanManager.createInstance();
-        if (DB情報.get償還払支給判定結果() != null) {
-            manager.update償還払支給判定結果(DB情報.get償還払支給判定結果());
+        if (db情報.get償還払支給判定結果() != null) {
+            manager.update償還払支給判定結果(db情報.get償還払支給判定結果());
         }
-        manager.update証明書(DB情報, サービス年月);
+        manager.update証明書(db情報, サービス年月);
     }
 
 //    /**
@@ -510,7 +513,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     /**
      * 申請書入力済区分の取得です。
      *
-     * @param 申請書入力済フラグ
+     * @param 申請書入力済フラグ RString
      * @return 申請書入力済区分
      */
     public RString get申請書入力済区分(RString 申請書入力済フラグ) {
@@ -521,10 +524,10 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     /**
      *
      * @param 戻る情報 保存処理戻るの情報
-     * @param dbJoho DB情報
+     * @param dbJoho db情報
      * @return 更新DB情報
      */
-    public DbJohoViewState DB情報保存(ModoruEntity 戻る情報, DbJohoViewState dbJoho) {
+    public DbJohoViewState db情報保存(ModoruEntity 戻る情報, DbJohoViewState dbJoho) {
         if (戻る情報.get償還払支給判定結果() != null) {
             更新償還払支給判定結果データ(戻る情報, dbJoho);
         }
@@ -547,6 +550,20 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             更新償還払請求特定入所者介護サービス費用データ(戻る情報, dbJoho);
         }
         return dbJoho;
+    }
+
+    /**
+     * 支給申請有無のチェック処理です。
+     *
+     * @param 被保険者番号
+     * @param サービス年月
+     * @param 整理番号
+     * @return 判断結果
+     */
+    public boolean check支給申請(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月, RString 整理番号) {
+        List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
+                .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
+        return !支給申請一覧情報リスト.isEmpty();
     }
 
     private void 更新償還払支給判定結果データ(ModoruEntity 戻る情報, DbJohoViewState dbJoho) {

@@ -118,12 +118,11 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
             RString 処理状態 = result.getEntity().get表示用処理状態();
             if (処理状態 != null) {
                 row.getTxtShoriState().setValue(処理状態);
-                if (処理待ち.equals(処理状態)) {
-                    row.setSelectable(true);
-                    flag = false;
-                } else {
-                    row.setSelectable(false);
-                }
+                row.setSelectable(true);
+                flag = false;
+            } else {
+                row.setSelectable(true);
+                flag = false;
             }
             rowList.add(row);
         }

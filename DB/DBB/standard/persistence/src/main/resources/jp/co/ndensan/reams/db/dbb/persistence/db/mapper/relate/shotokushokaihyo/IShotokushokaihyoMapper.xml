@@ -156,12 +156,12 @@
         FROM rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年度_0101},'1','DB','0','','','','','','','','','','','0','0','',''
         ,'','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','',''
         ,'','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','','{  }') AS "FindShikibetsuTaisho"
-        WHERE
-        ("FindShikibetsuTaisho"."juminJotaiCode"='2' OR "FindShikibetsuTaisho"."juminJotaiCode"='3')
         INNER JOIN
         rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
-        "DbV1001HihokenshaDaicho"."jushochiTokureiFlag"='1'
+        ON "DbV1001HihokenshaDaicho"."jushochiTokureiFlag"='1'
         AND "DbV1001HihokenshaDaicho"."shikibetsuCode"="FindShikibetsuTaisho"."shikibetsuCode"
+        WHERE
+        ("FindShikibetsuTaisho"."juminJotaiCode"='2' OR "FindShikibetsuTaisho"."juminJotaiCode"='3')
         GROUP BY
         "FindShikibetsuTaisho"."shikibetsuCode",
         "FindShikibetsuTaisho"."juminShubetsuCode",

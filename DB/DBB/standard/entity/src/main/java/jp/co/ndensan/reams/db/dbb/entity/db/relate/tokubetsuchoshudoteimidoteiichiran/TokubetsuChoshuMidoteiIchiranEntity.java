@@ -29,8 +29,6 @@ public class TokubetsuChoshuMidoteiIchiranEntity {
     private RString yubinNo;
     private RString kanjiJusho;
     private RString tokubetsuChoshuGimushaCode;
-    private RString fuichiRiyuCode;
-
     private RString hihokenshaNo;
     private RString genLasdecCode;
 }

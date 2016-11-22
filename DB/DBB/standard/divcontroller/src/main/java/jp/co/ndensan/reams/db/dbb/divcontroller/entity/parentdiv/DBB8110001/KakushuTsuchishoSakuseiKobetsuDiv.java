@@ -1,10 +1,10 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class KakushuTsuchishoSakuseiKobetsuDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,6 +34,8 @@ public class KakushuTsuchishoSakuseiKobetsuDiv extends Panel {
     private FukaShokaiGrandsonTsuchishoDiv FukaShokaiGrandsonTsuchisho;
     @JsonProperty("hdnPublishFlag")
     private RString hdnPublishFlag;
+    @JsonProperty("hdnKouseizenFlag")
+    private RString hdnKouseizenFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,7 +43,7 @@ public class KakushuTsuchishoSakuseiKobetsuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * getJuminFukaShokai
      * @return JuminFukaShokai
      */
@@ -111,6 +113,24 @@ public class KakushuTsuchishoSakuseiKobetsuDiv extends Panel {
     @JsonProperty("hdnPublishFlag")
     public void setHdnPublishFlag(RString hdnPublishFlag) {
         this.hdnPublishFlag = hdnPublishFlag;
+    }
+
+    /*
+     * getHdnKouseizenFlag
+     * @return hdnKouseizenFlag
+     */
+    @JsonProperty("hdnKouseizenFlag")
+    public RString getHdnKouseizenFlag() {
+        return hdnKouseizenFlag;
+    }
+
+    /*
+     * hdnKouseizenFlag
+     * @param hdnKouseizenFlag hdnKouseizenFlag
+     */
+    @JsonProperty("hdnKouseizenFlag")
+    public void setHdnKouseizenFlag(RString hdnKouseizenFlag) {
+        this.hdnKouseizenFlag = hdnKouseizenFlag;
     }
 
     /*

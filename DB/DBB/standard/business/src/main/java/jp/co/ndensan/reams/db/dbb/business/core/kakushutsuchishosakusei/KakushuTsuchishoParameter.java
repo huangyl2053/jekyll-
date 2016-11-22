@@ -40,4 +40,5 @@ public class KakushuTsuchishoParameter implements Serializable {
     private FlexibleDate 徴収猶予通知書_発行日;
     private RString 徴収猶予通知書_文書番号;
     private List<Kitsuki> 納入通知書_出力期リスト;
+    private boolean has更正前;
 }

@@ -74,6 +74,7 @@ public class ShokanbarayiKeteiInfoPanel {
     private static final RString 必要項目 = new RString("必要項目");
     private static final int 定数_0 = 0;
     private static final int 定数_6 = 6;
+    private static final int 定数_3 = 3;
 
     /**
      * onLoad
@@ -168,10 +169,16 @@ public class ShokanbarayiKeteiInfoPanel {
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_btnServiceTeikyoShomeisyo(
             ShokanbarayiKeteiInfoPanelDiv div) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.申請検索キー, ShoukanharaihishinseikensakuParameter.class);
         getDB情報(div);
         ViewStateHolder.put(ViewStateKeys.処理モード, 画面モード);
         ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
+        if (登録.equals(画面モード)) {
+            if (!getHandler(div).check支給申請(parameter.getHiHokenshaNo(), paramter.getServiceTeikyoYM(), paramter.getSeiriNp())) {
+                throw new ApplicationException(UrErrorMessages.未入力.getMessage().replace(必要項目.toString()));
+            }
+        }
         if (getHandler(div).isチェック処理(paramter)) {
             putViewState(div);
             if (登録.equals(画面モード) && !get画面有無変化(div)) {
@@ -259,7 +266,7 @@ public class ShokanbarayiKeteiInfoPanel {
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
             FlexibleDate 決定日 = ViewStateHolder.get(ViewStateKeys.決定日, FlexibleDate.class);
             DBHozonJoho データ情報 = getDB情報(div);
-            if (情報のチェック(データ情報.getDB情報()) == 3) {
+            if (情報のチェック(データ情報.getDB情報()) == 定数_3) {
                 if (!ResponseHolder.isReRequest()) {
                     return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
                 }
@@ -273,9 +280,6 @@ public class ShokanbarayiKeteiInfoPanel {
                 getHandler(div).登録Save(データ情報.getDB情報(), データ情報.get修正前支給区分(), 決定日, paramter, 画面モード, 識別コード);
                 div.getCcdKanryoMessage().setMessage(getKanryoMessage(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class)),
                         paramter.getHiHokenshaNo().value(), div.getPanelOne().getCcdKaigoAtenaInfo().get氏名漢字(), true);
-//                DbJohoViewState db = new DbJohoViewState();
-//                データ情報の初期化(db);
-//                ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db);
                 return ResponseData.of(div).setState(DBC0820015StateName.処理完了);
             } else if (申請書入力未済あり.equals(申請書入力済区分)) {
                 ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, 申請書入力未済あり);
@@ -388,14 +392,14 @@ public class ShokanbarayiKeteiInfoPanel {
         }
         ModoruEntity 戻るの対象 = getHandler(div).return登録処理情報(paramter, 支払金額合計初期, 画面モード, 識別コード,
                 証明書入力済フラグ, db情報);
-        DbJohoViewState DB情報;
+        DbJohoViewState データ情報;
         RString 修正前支給区分;
         if (戻るの対象 != null) {
-            DB情報 = getHandler(div).DB情報保存(戻るの対象, db情報);
+            データ情報 = getHandler(div).db情報保存(戻るの対象, db情報);
             修正前支給区分 = 戻るの対象.get修正前支給区分();
             ViewStateHolder.put(ViewStateKeys.修正前支給区分, 戻るの対象.get修正前支給区分());
-            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB情報);
-            return new DBHozonJoho(DB情報, 修正前支給区分);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, データ情報);
+            return new DBHozonJoho(データ情報, 修正前支給区分);
         } else {
             修正前支給区分 = RString.EMPTY;
             ViewStateHolder.put(ViewStateKeys.修正前支給区分, 修正前支給区分);
@@ -482,8 +486,7 @@ public class ShokanbarayiKeteiInfoPanel {
         }
     }
 
-    private int 情報のチェック(DbJohoViewState db情報) {
-        int index = 0;
+    private int 情報のチェック一(DbJohoViewState db情報, int index) {
         if (db情報.get住所地特例データList().isEmpty()
                 && db情報.get償還払請求サービス計画200004データResultList().isEmpty()
                 && db情報.get償還払請求サービス計画200604データResultList().isEmpty()
@@ -498,8 +501,15 @@ public class ShokanbarayiKeteiInfoPanel {
                 && db情報.get償還払請求集計データList().isEmpty()
                 && db情報.get償還払請求食事費用データList().isEmpty()
                 && db情報.get特別療養費データList().isEmpty()) {
-            index = index++;
+            index++;
         }
+        return index;
+
+    }
+
+    private int 情報のチェック(DbJohoViewState db情報) {
+        int index = 0;
+        index = 情報のチェック一(db情報, index);
         if (db情報.get償還払支給判定結果() != null) {
             if (EntityDataState.Unchanged.equals(db情報.get償還払支給判定結果().toEntity().getState())
                     || db情報.get償還払支給判定結果().toEntity().getState() == null) {
