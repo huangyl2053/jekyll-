@@ -79,11 +79,10 @@ public class FukaJohoShutokuIkatsuHakoProcess extends BatchProcessBase<Karisante
             for (int i = 0; i < list.size(); i++) {
                 if (!isEmptyOr016(list.get(i))) {
                     rStringBuilder.append(list.get(i).getColumnValue());
-                }
-                if (i != list.size() - 1) {
                     rStringBuilder.append(MIDDLE_FORMAT);
                 }
             }
+            rStringBuilder.deleteCharAt(rStringBuilder.lastIndexOf(MIDDLE_FORMAT));
         }
         rStringBuilder.append(RIGHT_FORMAT);
         RString 科目コード = rStringBuilder.toRString();

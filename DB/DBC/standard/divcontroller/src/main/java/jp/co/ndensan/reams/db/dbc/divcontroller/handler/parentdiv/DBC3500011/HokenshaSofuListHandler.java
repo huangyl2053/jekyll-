@@ -81,6 +81,7 @@ public class HokenshaSofuListHandler {
     private static final RString データ種別221 = new RString("221");
     private static final RString データ種別222 = new RString("222");
     private static final RString データ種別331 = new RString("331");
+    private static final RString データ種別332 = new RString("332");
     private static final RString データ種別351 = new RString("351");
     private static final RString データ種別533 = new RString("533");
     private static final RString データ種別534 = new RString("534");
@@ -309,7 +310,7 @@ public class HokenshaSofuListHandler {
                 || データ種別.equals(データ種別121) || データ種別.equals(データ種別122) || データ種別.equals(データ種別123)
                 || データ種別.equals(データ種別152) || データ種別.equals(データ種別153) || データ種別.equals(データ種別162)
                 || データ種別.equals(データ種別163) || データ種別.equals(データ種別631) || データ種別.equals(データ種別632)
-                || データ種別.equals(データ種別641) || データ種別.equals(データ種別642)) {
+                || データ種別.equals(データ種別641) || データ種別.equals(データ種別642) || データ種別.equals(データ種別332)) {
             保険者番号 = データレコード.get(四);
         }
         return 保険者番号;
@@ -372,8 +373,6 @@ public class HokenshaSofuListHandler {
         return null;
     }
 
-
-
     /**
      * 審査年月チェックのメソッドです。
      *
@@ -416,8 +415,6 @@ public class HokenshaSofuListHandler {
         }
         return null;
     }
-
-
 
     /**
      * 判断１のメソッドです。

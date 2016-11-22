@@ -264,29 +264,29 @@ public class PostMainPanelCheck {
             File file = new File(path.toString());
             InputStream stream = new FileInputStream(file);
             InputStreamReader read = new InputStreamReader(stream, "SJIS");
-            BufferedReader bufferedReader = new BufferedReader(read);
-            RString hasread = new RString(bufferedReader.readLine());
-            if (hasread.isEmpty()) {
-                if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
-                    throw new ApplicationException(UrErrorMessages.不正.getMessage()
-                            .replace(後期高齢取込ファイルのフォーマット.toString()).evaluate());
-                }
-                if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
-                    throw new ApplicationException(UrErrorMessages.不正.getMessage()
-                            .replace(国保取込ファイルのフォーマット.toString()).evaluate());
-                }
-            } else {
-                if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getMenuID().equals(DBCMN82002)) {
-                    throw new ApplicationException(UrErrorMessages.不正.getMessage()
-                            .replace(後期高齢取込ファイルのフォーマット.toString()).evaluate());
-                }
-                if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getMenuID().equals(DBCMN82001)) {
-                    throw new ApplicationException(UrErrorMessages.不正.getMessage()
-                            .replace(国保取込ファイルのフォーマット.toString()).evaluate());
+            try (BufferedReader bufferedReader = new BufferedReader(read)) {
+                RString hasread = new RString(bufferedReader.readLine());
+                if (hasread.isEmpty()) {
+                    if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
+                        throw new ApplicationException(UrErrorMessages.不正.getMessage()
+                                .replace(後期高齢取込ファイルのフォーマット.toString()).evaluate());
+                    }
+                    if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
+                        throw new ApplicationException(UrErrorMessages.不正.getMessage()
+                                .replace(国保取込ファイルのフォーマット.toString()).evaluate());
+                    }
                 } else {
-                    市町村コード(長さ判定, 導入形態コード, hasread, from, row, 市町村コード);
+                    if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getMenuID().equals(DBCMN82002)) {
+                        throw new ApplicationException(UrErrorMessages.不正.getMessage()
+                                .replace(後期高齢取込ファイルのフォーマット.toString()).evaluate());
+                    }
+                    if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getMenuID().equals(DBCMN82001)) {
+                        throw new ApplicationException(UrErrorMessages.不正.getMessage()
+                                .replace(国保取込ファイルのフォーマット.toString()).evaluate());
+                    } else {
+                        市町村コード(長さ判定, 導入形態コード, hasread, from, row, 市町村コード);
+                    }
                 }
-                bufferedReader.close();
             }
         } catch (IOException e) {
             e.getMessage();

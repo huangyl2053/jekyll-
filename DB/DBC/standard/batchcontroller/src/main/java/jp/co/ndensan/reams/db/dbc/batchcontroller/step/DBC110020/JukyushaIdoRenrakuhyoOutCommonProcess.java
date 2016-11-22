@@ -658,6 +658,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         List<RString> 社福減免Info = 社福減免.split(SPLIT.toString());
         entity.set適用開始日(new FlexibleDate(社福減免Info.get(ORDER_0)));
         entity.set適用終了日(new FlexibleDate(社福減免Info.get(ORDER_1)));
+        entity.set軽減率(社福減免Info.get(ORDER_3));
         entity.set履歴番号(Integer.parseInt(社福減免Info.get(ORDER_4).toString()));
         return entity;
     }

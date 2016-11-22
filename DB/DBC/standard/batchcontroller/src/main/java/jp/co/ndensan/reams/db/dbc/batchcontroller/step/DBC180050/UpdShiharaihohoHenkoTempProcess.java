@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.FutanWariaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.UpdShiharaihohoHenkoTempResultEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * バッチ設計_DBCMNK4001_更正対象給付実績一覧(支払方法変更情報の取得)
@@ -124,8 +126,13 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
             負担割合情報一時表.set給付率12(給付率);
         } else {
             RString 支払給付率 = null;
-            if (entity.get支払方法変更().getKyufuRitsu() != null) {
-                支払給付率 = new RString(entity.get支払方法変更().getKyufuRitsu().value().toString());
+            Decimal 支払方法変更給付率 = null;
+            HokenKyufuRitsu 支払方法 = entity.get支払方法変更().getKyufuRitsu();
+            if (支払方法 != null) {
+                支払方法変更給付率 = 支払方法.value();
+            }
+            if (支払方法変更給付率 != null) {
+                支払給付率 = new RString(支払方法変更給付率.toString());
             }
             set給付率01(entity, 支払給付率);
             set給付率02(entity, 支払給付率);
@@ -267,7 +274,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
         FlexibleYearMonth 対象終了年月 = new FlexibleYearMonth(年度.toDateString().concat(開始月)).plusMonth(十一);
         FlexibleDate tekiyoShuryoYMD = entity.get支払方法変更().getTekiyoShuryoYMD();
         FlexibleDate tekiyoKaishiYMD = entity.get支払方法変更().getTekiyoKaishiYMD();
-        return 対象開始年月 != null && 対象終了年月 != null && tekiyoShuryoYMD != null && tekiyoKaishiYMD != null
+        return tekiyoShuryoYMD != null && tekiyoKaishiYMD != null
                 && 対象終了年月.isBeforeOrEquals(tekiyoShuryoYMD.getYearMonth())
                 && tekiyoKaishiYMD.getYearMonth().isBeforeOrEquals(対象開始年月);
     }
