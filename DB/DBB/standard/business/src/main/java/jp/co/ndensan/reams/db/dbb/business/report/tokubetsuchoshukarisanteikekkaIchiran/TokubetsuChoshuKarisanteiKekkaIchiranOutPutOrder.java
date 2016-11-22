@@ -38,7 +38,7 @@ public enum TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder implements IReportI
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ("0010", "氏名５０音カナ", ""),
+    氏名５０音カナ("0010", "氏名５０音カナ", "\"atena_kanaMeisho\""),
     /**
      * 生年月日
      */
@@ -50,7 +50,7 @@ public enum TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder implements IReportI
     /**
      * 市町村コード
      */
-    市町村コード("0016", "市町村コード", ""),
+    市町村コード("0016", "市町村コード", "\"fukaShichosonCode\""),
     /**
      * 通知書番号
      */

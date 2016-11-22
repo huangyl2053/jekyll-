@@ -1483,7 +1483,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     }
 
     private boolean isBeforeYearMonth(FlexibleDate date1, FlexibleYearMonth date2) {
-        if (date1 == null || date1.isEmpty()) {
+        if (date1 == null || date1.isEmpty() || FlexibleDate.MAX.equals(date1)) {
             return false;
         }
         FlexibleYearMonth yearMonth1 = date1.getYearMonth();
@@ -1620,7 +1620,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     }
 
     private boolean is月末(FlexibleDate date) {
-        if (date == null || date.isEmpty()) {
+        if (date == null || date.isEmpty() || FlexibleDate.MAX.equals(date)) {
             return false;
         }
         int 月末 = date.getYearMonth().getLastDay();
