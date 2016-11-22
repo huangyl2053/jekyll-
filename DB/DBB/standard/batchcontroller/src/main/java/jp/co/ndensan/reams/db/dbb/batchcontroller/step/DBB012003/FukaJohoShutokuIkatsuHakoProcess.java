@@ -50,6 +50,7 @@ public class FukaJohoShutokuIkatsuHakoProcess extends BatchProcessBase<Karisante
     private static final RString LEFT_FORMAT = new RString("'{");
     private static final RString RIGHT_FORMAT = new RString("}'");
     private static final RString MIDDLE_FORMAT = new RString(",");
+    private static final RString 更新権限科目コード_016 = new RString("016");
 
     @Override
     protected void createWriter() {
@@ -76,7 +77,9 @@ public class FukaJohoShutokuIkatsuHakoProcess extends BatchProcessBase<Karisante
         rStringBuilder.append(LEFT_FORMAT);
         if (list != null && !list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
-                rStringBuilder.append(list.get(i) == null ? RString.EMPTY : list.get(i).getColumnValue());
+                if (!isEmptyOr016(list.get(i))) {
+                    rStringBuilder.append(list.get(i).getColumnValue());
+                }
                 if (i != list.size() - 1) {
                     rStringBuilder.append(MIDDLE_FORMAT);
                 }
@@ -87,6 +90,13 @@ public class FukaJohoShutokuIkatsuHakoProcess extends BatchProcessBase<Karisante
         RString 処理日 = new RString(FlexibleDate.getNowDate().toString());
         return new BatchDbReader(MAPPERPATH, new TblDataShutokuMyBatisParameter(parameter.get調定年度(),
                 通知内容コード, 更正前後区分, 作成処理名, 科目コード, 処理日, key, list));
+    }
+
+    private boolean isEmptyOr016(KamokuCode kamokuCode) {
+        if (kamokuCode == null) {
+            return true;
+        }
+        return 更新権限科目コード_016.equals(kamokuCode.getColumnValue());
     }
 
     @Override
