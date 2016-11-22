@@ -865,7 +865,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             FlexibleDate 異動年月日1 = get月初(支払方法.getTekiyoKaishiYMD());
             FlexibleDate 異動年月日2 = get月初(支払方法.getTekiyoShuryoYMD());
             if (異動一時Map.containsKey(異動年月日1)) {
-                if (isDateEmpty(支払方法.getTekiyoKaishiYMD())) {
+                if (RString.isNullOrEmpty(異動一時Map.get(異動年月日1).get償還払化開始年月日())) {
                     insertEntity1 = 異動一時Map.get(異動年月日1);
                 } else {
                     異動年月日1 = get翌日異動日(異動年月日1);
@@ -874,7 +874,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             JukyushaIdoRenrakuhyoOutCommonProcess.set異動一時2By支払方法パターン1(insertEntity1, 支払方法, 異動年月日1, 被保険者番号);
             異動一時Map.put(異動年月日1, insertEntity1);
             if (異動一時Map.containsKey(異動年月日2)) {
-                if (isDateEmpty(支払方法.getTekiyoKaishiYMD())) {
+                if (RString.isNullOrEmpty(異動一時Map.get(異動年月日2).get償還払化開始年月日())) {
                     insertEntity2 = 異動一時Map.get(異動年月日2);
                 } else {
                     異動年月日2 = get翌日異動日(異動年月日2);
@@ -912,7 +912,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             DbT4021ShiharaiHohoHenkoEntity 給付額, FlexibleDate 異動年月日) {
         insertEntity.set被保険者番号(被保険者番号);
         insertEntity.set異動年月日(異動年月日);
-        insertEntity.set給付率引下げ開始年月日(new RString(異動年月日.toString()));
+        FlexibleDate 開始年月日 = get月初(給付額.getTekiyoKaishiYMD());
+        insertEntity.set給付率引下げ開始年月日(new RString(開始年月日.toString()));
         FlexibleDate 終了年月日 = get月初(給付額.getTekiyoShuryoYMD());
         insertEntity.set給付率引下げ終了年月日(new RString(終了年月日.toString()));
         insertEntity.setエラーフラグ(エラーなし);
