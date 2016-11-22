@@ -163,7 +163,8 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
             item.setZogenGaku(zogenGaku);
         }
 
-        item.setKoseigoHokenryoGaku(更正後.get更正後介護保険料仮徴収額合計() != null ? new RString(更正後.get更正後介護保険料仮徴収額合計().toString()) : RString.EMPTY);
+        item.setKoseigoHokenryoGaku(更正後.get更正後介護保険料仮徴収額合計() != null
+                ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後介護保険料仮徴収額合計(), 0) : RString.EMPTY);
 
         if (編集後仮算定通知書共通情報.get納付済額_未到来期含む() != null) {
             RString nofuzumiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get納付済額_未到来期含む(), 0);
