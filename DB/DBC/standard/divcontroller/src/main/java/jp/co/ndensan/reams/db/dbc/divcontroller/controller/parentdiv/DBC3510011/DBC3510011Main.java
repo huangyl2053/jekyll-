@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 
 /**
@@ -135,6 +136,8 @@ public class DBC3510011Main {
         }
         if (処理フラグ_済) {
             div.getHokenshaSofuList().getDgSofuJohoIchiran().getActiveRow().setJotai(処理状態);
+            div.getHokenshaSofuList().getDgSofuJohoIchiran().getActiveRow().setSelectButtonState(DataGridButtonState.Disabled);
+            div.getHokenshaSofuList().getDgSofuJohoIchiran().getActiveRow().setSelectable(false);
         }
         return ResponseData.of(div).setState(DBC3510011StateName.初期表示);
     }
