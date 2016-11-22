@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb211001.InsNenkinTokuchoKaifuJoho1ProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.TokuchoIraiDataEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
@@ -56,9 +55,8 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
 
     private InsNenkinTokuchoKaifuJoho1ProcessParameter parameter;
     private UeT0511NenkinTokuchoKaifuJohoEntity 対象者の情報;
-    private TsuchishoNo 通知書番号;
-    private FlexibleYear 賦課年度;
-    private FlexibleYear 調定年度;
+    private RString 基礎年金番号;
+    private RString 年金コード;
     private DbT2002FukaJohoTempTableEntity 賦課Temp情報;
 
     @BatchWriter
@@ -81,13 +79,9 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
 
     @Override
     protected void process(TokuchoIraiDataEntity t) {
-        if (t.get賦課Newest() == null) {
-            return;
-        }
-        if (!t.get賦課Newest().getTsuchishoNo().equals(通知書番号)
-                || !t.get賦課Newest().getFukaNendo().equals(賦課年度)
-                || !t.get賦課Newest().getChoteiNendo().equals(調定年度)) {
-            if (通知書番号 != null) {
+        if (!t.get対象者情報().getKisoNenkinNo().equals(基礎年金番号)
+                || !t.get対象者情報().getNenkinCode().equals(年金コード)) {
+            if (対象者の情報 != null) {
                 dT各種金額欄１とDT各種金額欄2を編集(対象者の情報);
                 特徴依頼追加Temp.insert(対象者の情報);
                 年金特徴回付情報TableWriter.insert(対象者の情報);
@@ -96,15 +90,14 @@ public class InsNenkinTokuchoKaifuJoho1Process extends BatchProcessBase<TokuchoI
             対象者の情報 = 対象者の情報を編集(t);
         }
         set特徴期期別金額(t.get調定額(), t.get期(), 賦課Temp情報);
-        通知書番号 = t.get賦課Newest().getTsuchishoNo();
-        賦課年度 = t.get賦課Newest().getFukaNendo();
-        調定年度 = t.get賦課Newest().getChoteiNendo();
+        基礎年金番号 = t.get対象者情報().getKisoNenkinNo();
+        年金コード = t.get対象者情報().getNenkinCode();
 
     }
 
     @Override
     protected void afterExecute() {
-        if (通知書番号 != null) {
+        if (対象者の情報 != null) {
             dT各種金額欄１とDT各種金額欄2を編集(対象者の情報);
             特徴依頼追加Temp.insert(対象者の情報);
             年金特徴回付情報TableWriter.insert(対象者の情報);

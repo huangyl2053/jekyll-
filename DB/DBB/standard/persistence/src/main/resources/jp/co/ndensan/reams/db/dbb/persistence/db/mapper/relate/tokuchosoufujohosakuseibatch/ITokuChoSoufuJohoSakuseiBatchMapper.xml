@@ -47,6 +47,8 @@
     LEFT JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通_介護継承
         ON 調定共通_介護継承."choteiId" = 介護期別."choteiId"
     ORDER BY
+        特徴依頼Temp."基礎年金番号",
+        特徴依頼Temp."年金コード",
         賦課Newest."choteiNendo",
         賦課Newest."fukaNendo",
         賦課Newest."tsuchishoNo"
