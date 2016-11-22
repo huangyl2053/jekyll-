@@ -963,7 +963,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             if (isDateEmpty(利用者負担.getTekiyoKaishiYMD())) {
                 continue;
             }
-            if (!isBeforeYearMonth(利用者負担.getTekiyoKaishiYMD(), 処理年月) || 履歴番号 != 利用者負担.getRirekiNo()) {
+            if (!(isBeforeYearMonth(利用者負担.getTekiyoKaishiYMD(), 処理年月) && 履歴番号 != 利用者負担.getRirekiNo())) {
                 continue;
             }
             IdoTblTmpEntity insertEntity = new IdoTblTmpEntity();
@@ -986,7 +986,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             if (isDateEmpty(利用者負担.getShinseiYMD())) {
                 continue;
             }
-            if (!(isBeforeYearMonth(利用者負担.getShinseiYMD(), 処理年月) || 履歴番号 == 利用者負担.getRirekiNo())) {
+            if (!(isBeforeYearMonth(利用者負担.getShinseiYMD(), 処理年月) && 履歴番号 == 利用者負担.getRirekiNo())) {
                 continue;
             }
             IdoTblTmpEntity insertEntity = new IdoTblTmpEntity();
@@ -1039,7 +1039,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             if (isDateEmpty(特定入所者.get適用開始日())) {
                 continue;
             }
-            if (!isBeforeYearMonth(特定入所者.get適用開始日(), 処理年月) || 履歴番号 != 特定入所者.get履歴番号()) {
+            if (!(isBeforeYearMonth(特定入所者.get適用開始日(), 処理年月) && 履歴番号 != 特定入所者.get履歴番号())) {
                 continue;
             }
             IdoTblTmpEntity insertEntity = new IdoTblTmpEntity();
@@ -1062,7 +1062,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             if (isDateEmpty(特定入所者.get申請日())) {
                 continue;
             }
-            if (!(isBeforeYearMonth(特定入所者.get申請日(), 処理年月) || 履歴番号 == 特定入所者.get履歴番号())) {
+            if (!(isBeforeYearMonth(特定入所者.get申請日(), 処理年月) && 履歴番号 == 特定入所者.get履歴番号())) {
                 continue;
             }
             IdoTblTmpEntity insertEntity = new IdoTblTmpEntity();
