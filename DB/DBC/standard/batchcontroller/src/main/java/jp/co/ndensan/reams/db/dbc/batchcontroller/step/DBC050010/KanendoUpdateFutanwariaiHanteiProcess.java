@@ -74,6 +74,7 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
     private static final RString 対象作成日 = new RString("【対象作成日】");
     private static final RString 符号 = new RString("－");
     private static final RString 連携符号 = new RString("～");
+    private static final RString 帳票タイトル = new RString("振込明細一覧表");
 
     private KanendoUpdateFutanwariaiHanteProcessParameter parameter;
     private static final int 検索件数_0 = 0;
@@ -152,7 +153,6 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
 
     private RString get設定値() {
         ChohyoSeigyoHanyo hanyoResult = null;
-        RString 設定値 = RString.EMPTY;
 
         if (Furikomi_ShihraiHohoShitei.口座.equals(parameter.get支払方法())) {
             hanyoResult = ChohyoSeigyoHanyoManager.createInstance()
@@ -163,9 +163,10 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
         }
 
         if (hanyoResult != null) {
-            設定値 = hanyoResult.get設定値();
+            return hanyoResult.get設定値();
+        } else {
+            return 帳票タイトル;
         }
-        return 設定値;
     }
 
     private List<RString> get出力条件表() {
