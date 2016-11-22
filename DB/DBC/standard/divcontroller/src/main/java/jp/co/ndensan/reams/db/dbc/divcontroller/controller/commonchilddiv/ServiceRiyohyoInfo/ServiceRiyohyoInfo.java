@@ -300,6 +300,8 @@ public class ServiceRiyohyoInfo {
         div.getBtnCalcGokei().setDisplayNone(false);
         div.getBtnBeppyoMeisaiKakutei().setDisplayNone(false);
         if (RSTRING_ONE.equals(div.getAddType())) {
+            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
+            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoMeisai().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
@@ -343,6 +345,7 @@ public class ServiceRiyohyoInfo {
             if (利用年月日 != null) {
                 利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
             }
+            handler.onChange_txtServiceEvent();
             handler.onClick_btnKakutei(被保険者番号, 利用年月);
         }
         return ResponseData.of(div).respond();
