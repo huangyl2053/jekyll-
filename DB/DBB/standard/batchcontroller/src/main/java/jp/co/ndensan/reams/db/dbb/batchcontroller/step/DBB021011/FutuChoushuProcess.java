@@ -113,14 +113,16 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
                     || 不明.equals(koumokuGoukey.getHokenryoDankai())) {
                 if (null == newKoumokuGoukey) {
                     newKoumokuGoukey = koumokuGoukeyList.get(i);
-                }else{
+                } else {
                     newKoumokuGoukey = 不明_合計(newKoumokuGoukey, koumokuGoukey);    
                 }
                 koumokuGoukeyList.remove(i);
             }
         }
-        newKoumokuGoukey.setHokenryoDankai(不明);
-        koumokuGoukeyList.add(newKoumokuGoukey);
+        if (null != newKoumokuGoukey) {
+            newKoumokuGoukey.setHokenryoDankai(不明);
+            koumokuGoukeyList.add(newKoumokuGoukey);
+        }
         TsukibetsuSuiihyoReport report = new TsukibetsuSuiihyoReport(getTsukibetsuSuiihyoEntity(koumokuGoukeyList));
         outputJokenhyoFactory();
         report.writeBy(reportSourceWriter);
