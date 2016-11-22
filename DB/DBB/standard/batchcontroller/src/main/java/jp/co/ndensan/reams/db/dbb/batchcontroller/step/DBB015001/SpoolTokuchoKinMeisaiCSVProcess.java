@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB051001.PrtMeisaiIchiranProcessPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranProperty;
@@ -105,6 +106,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
     private Association 地方公共団体;
     private List<RString> 出力項目リスト;
     private List<RString> 改頁項目リスト;
+    private List<RString> breakKeys;
     @BatchWriter
     private BatchReportWriter<TokubetsuChoshuIraikingakuMeisaiIchiranSource> batchReportWriter;
     private ReportSourceWriter<TokubetsuChoshuIraikingakuMeisaiIchiranSource> reportSourceWriter;
@@ -115,6 +117,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
 
         出力項目リスト = new ArrayList();
         改頁項目リスト = new ArrayList();
+        breakKeys = new ArrayList();
         manager = KariSanteiIdoFukaBatch.createInstance();
         if (processParameter.get出力帳票Entity() != null
                 && !RString.isNullOrEmpty(processParameter.get出力帳票Entity().get出力順ID())) {
@@ -132,7 +135,12 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value()).create();
+        if (改頁項目リスト.isEmpty()) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value()).create();
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value())
+                    .addBreak(new PrtMeisaiIchiranProcessPageBreak(breakKeys)).create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
@@ -335,6 +343,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
                 出力項目リスト.add(setSortItem.get項目名());
                 if (setSortItem.is改頁項目()) {
                     改頁項目リスト.add(setSortItem.get項目名());
+                    breakKeys.add(setSortItem.get項目ID());
                 }
             }
             i = i + INT_1;

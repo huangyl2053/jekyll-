@@ -125,7 +125,7 @@ public class NofugakuJohoReportProcess extends BatchProcessBase<NofugakuJohoRepo
                 .addBreak(breaker).create();
         reportSourceWriter_申告用 = new ReportSourceWriter<>(batchReportWriter_申告用);
 
-        batchReportWriter_不明分 = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB300005.getReportId().value())
+        batchReportWriter_不明分 = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB300006.getReportId().value())
                 .addBreak(breaker).create();
         reportSourceWriter_不明分 = new ReportSourceWriter<>(batchReportWriter_不明分);
         filePath = Path.combinePath(Path.getTmpDirectoryPath(), DE940110_DATファイル名);

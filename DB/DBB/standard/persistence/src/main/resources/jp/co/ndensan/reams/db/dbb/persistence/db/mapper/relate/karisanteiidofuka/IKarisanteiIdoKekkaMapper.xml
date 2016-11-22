@@ -72,15 +72,12 @@
     <select resultOrdered="true" id="select特別徴収依頼金額明細"
             resultMap="ResultMap_特別徴収依頼金額明細"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaPsmParameter" fetchSize="500">
-        SELECT
+       WITH master AS (
+	SELECT
         <include refid="allColumns_賦課の情報一時" />,
-        "ShikibetsuTaisho".*,
         徴収方法Newest.*,
         "UeT0511NenkinTokuchoKaifuJoho".*
         FROM "DbT2002FukaJohoTemp" AS "DbT2002FukaJohoTemp"
-        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-        AS "ShikibetsuTaisho"
-        ON "DbT2002FukaJohoTemp"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
         LEFT JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.noDeleted_DbV2001ChoshuHoho"/>) AS 徴収方法Newest
         ON "DbT2002FukaJohoTemp"."fukaNendo" = 徴収方法Newest."dbV2001ChoshuHoho_fukaNendo"
         AND "DbT2002FukaJohoTemp"."hihokenshaNo" = 徴収方法Newest."dbV2001ChoshuHoho_hihokenshaNo"
@@ -94,6 +91,25 @@
         AND "UeT0511NenkinTokuchoKaifuJoho"."shoriTaishoYM" = 徴収方法Newest."dbV2001ChoshuHoho_fukaNendo"||'04'
         AND "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = 徴収方法Newest."dbV2001ChoshuHoho_kariNenkinNo"
         AND "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = 徴収方法Newest."dbV2001ChoshuHoho_kariNenkinCode"
+	)
+	 SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM
+        master
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+        (
+        SELECT
+        ARRAY_AGG(CAST (master."dbT2002Fuka_shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> AS "ShikibetsuTaisho"
+        ON master."dbT2002Fuka_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        <if test="出力順 !=null and !出力順.isEmpty()">
+            ${出力順}
+        </if>
     </select>
     
     <sql id="allColumns_賦課の情報一時">

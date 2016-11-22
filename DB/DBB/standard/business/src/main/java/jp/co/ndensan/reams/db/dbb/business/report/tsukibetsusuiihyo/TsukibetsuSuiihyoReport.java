@@ -62,6 +62,7 @@ public class TsukibetsuSuiihyoReport extends Report<TsukibetsuSuiihyoReportSourc
         bodyList.add(get人数_18段階());
         bodyList.add(get人数_19段階());
         bodyList.add(get人数_20段階());
+        bodyList.add(get人数_21段階());
         bodyList.add(get人数_合計());
         bodyList.add(get金額_1段階());
         bodyList.add(get金額_2段階());
@@ -83,6 +84,7 @@ public class TsukibetsuSuiihyoReport extends Report<TsukibetsuSuiihyoReportSourc
         bodyList.add(get金額_18段階());
         bodyList.add(get金額_19段階());
         bodyList.add(get金額_20段階());
+        bodyList.add(get金額_21段階());
         bodyList.add(get金額_合計());
         return bodyList;
     }
@@ -505,6 +507,27 @@ public class TsukibetsuSuiihyoReport extends Report<TsukibetsuSuiihyoReportSourc
                 reportEntity.get人数_20段階_過年度(),
                 reportEntity.get人数_20段階_合計(),
                 reportEntity.get人数_20段階_歳出還付());
+    }
+
+    private TsukibetsuSuiihyoBody get人数_21段階() {
+        return new TsukibetsuSuiihyoBody(
+                reportEntity.get人数_21段階_Title(),
+                reportEntity.get人数_21段階_4月(),
+                reportEntity.get人数_21段階_5月(),
+                reportEntity.get人数_21段階_6月(),
+                reportEntity.get人数_21段階_7月(),
+                reportEntity.get人数_21段階_8月(),
+                reportEntity.get人数_21段階_9月(),
+                reportEntity.get人数_21段階_10月(),
+                reportEntity.get人数_21段階_11月(),
+                reportEntity.get人数_21段階_12月(),
+                reportEntity.get人数_21段階_1月(),
+                reportEntity.get人数_21段階_2月(),
+                reportEntity.get人数_21段階_3月(),
+                reportEntity.get人数_21段階_現年随時(),
+                reportEntity.get人数_21段階_過年度(),
+                reportEntity.get人数_21段階_合計(),
+                reportEntity.get人数_21段階_歳出還付());
     }
 
     private TsukibetsuSuiihyoBody get人数_合計() {
@@ -946,6 +969,27 @@ public class TsukibetsuSuiihyoReport extends Report<TsukibetsuSuiihyoReportSourc
                 reportEntity.get金額_20段階_過年度(),
                 reportEntity.get金額_20段階_合計(),
                 reportEntity.get金額_20段階_歳出還付());
+    }
+
+    private TsukibetsuSuiihyoBody get金額_21段階() {
+        return new TsukibetsuSuiihyoBody(
+                reportEntity.get金額_21段階_Title(),
+                reportEntity.get金額_21段階_4月(),
+                reportEntity.get金額_21段階_5月(),
+                reportEntity.get金額_21段階_6月(),
+                reportEntity.get金額_21段階_7月(),
+                reportEntity.get金額_21段階_8月(),
+                reportEntity.get金額_21段階_9月(),
+                reportEntity.get金額_21段階_10月(),
+                reportEntity.get金額_21段階_11月(),
+                reportEntity.get金額_21段階_12月(),
+                reportEntity.get金額_21段階_1月(),
+                reportEntity.get金額_21段階_2月(),
+                reportEntity.get金額_21段階_3月(),
+                reportEntity.get金額_21段階_現年随時(),
+                reportEntity.get金額_21段階_過年度(),
+                reportEntity.get金額_21段階_合計(),
+                reportEntity.get金額_21段階_歳出還付());
     }
 
     private TsukibetsuSuiihyoBody get金額_合計() {
