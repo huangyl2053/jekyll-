@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NofuShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NofugakuSanshutsuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NokigenShutsuryokuHoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -265,11 +266,16 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.kisoHokenryoRitsu = getコンマ区切りRString(更正後.get保険料率());
         source.kisoCalHokenryoGaku = getコンマ区切りRString(更正後.get減免前保険料_年額());
         source.kisoGenmenGaku = getコンマ区切りRString(更正後.get減免額());
-        source.tokuchoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get特徴既に納付すべき額());
-        source.fuchoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普徴既に納付すべき額());
-        source.nofuZumiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get納付済額_未到来期含む());
-        source.kongoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額());
-
+        source.tokuchoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get特別徴収額合計());
+        source.fuchoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普通徴収額合計());
+        NofugakuSanshutsuHoho 納付額算出方法 = 本算定納入通知書制御情報.get納入通知書制御情報().get納付額算出方法();
+        if (NofugakuSanshutsuHoho.収入額をもとに算出.equals(納付額算出方法)) {
+            source.nofuZumiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get納付済額_未到来期含む());
+            source.kongoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額());
+        } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(納付額算出方法)) {
+            source.nofuZumiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普徴既に納付すべき額());
+            source.kongoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に());
+        }
         List<UniversalPhase> 普徴期別金額リスト = 更正後.get普徴期別金額リスト();
         int 期 = 納入通知書期情報.get期();
         source.santeiKisoTokiHokenryoGaku = null == get普徴期別金額By期(普徴期別金額リスト, 期) ? new RString("0")
@@ -404,7 +410,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
             source.nokiShuryo9 = get納期終了日(普徴納期情報リスト9期);
             source.nokiShuryo10 = get納期終了日(普徴納期情報リスト10期);
         }
-        source.santeiKisoTokiTitle = 第.concat(普徴納期情報リストの一番目.get期()).concat(期);
+        source.santeiKisoTokiTitle = 第.concat(edit2ケタ空白埋め(普徴納期情報リストの一番目.get期())).concat(期);
     }
 
     private Decimal get普徴期別金額By期(List<UniversalPhase> 普徴期別金額リスト, int 期) {

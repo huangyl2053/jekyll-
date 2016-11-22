@@ -105,6 +105,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         Decimal 特徴今後納付すべき額;
         Decimal 既に納付すべき額;
         Decimal 今後納付すべき額;
+        Decimal 特別徴収額合計;
+        Decimal 普通徴収額合計;
         if (本算定通知書情報.get普徴納期情報リスト() == null) {
             本算定通知書情報.set普徴納期情報リスト(Collections.EMPTY_LIST);
         }
@@ -154,23 +156,16 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             FukaJoho 賦課情報_更正後 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
             RString 月 = new RString(本算定通知書情報.get発行日().getMonthValue());
             RString 特徴現在期 = new TokuchoKiUtil().get期月リスト().get月の期(Tsuki.toValue(月.padZeroToLeft(2))).get期();
-            if (本算定通知書情報.get賦課の情報_更正前() != null) {
-                FukaJoho 賦課情報_更正前 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
-                普徴既に納付すべき額 = get普徴納付済額(賦課情報_更正前, 1, Integer.parseInt(普徴現在期.toString()) - 1);
-                特徴既に納付すべき額 = get特徴納付済額(賦課情報_更正前, 1, Integer.parseInt(特徴現在期.toString()) - 1);
-            } else {
-                普徴既に納付すべき額 = Decimal.ZERO;
-                普徴今後納付すべき額_調定元に = Decimal.ZERO;
-                普徴今後納付すべき額_収入元に = Decimal.ZERO.subtract(普徴納付済額_未到来期含む);
-                特徴既に納付すべき額 = Decimal.ZERO;
-                特徴今後納付すべき額 = Decimal.ZERO;
-            }
+            普徴既に納付すべき額 = get普徴納付済額(賦課情報_更正後, 1, Integer.parseInt(普徴現在期.toString()) - 1);
+            特徴既に納付すべき額 = get特徴納付済額(賦課情報_更正後, 1, Integer.parseInt(特徴現在期.toString()) - 1);
             RString 普徴最終期 = new FuchoKiUtil().get期月リスト().get最終法定納期().get期();
             Decimal 納付済額 = get普徴納付済額(賦課情報_更正後, 1, Integer.parseInt(普徴最終期.toString()));
             普徴今後納付すべき額_調定元に = 納付済額.subtract(普徴既に納付すべき額);
             普徴今後納付すべき額_収入元に = 納付済額.subtract(普徴納付済額_未到来期含む);
             特徴今後納付すべき額 = get特徴納付済額(賦課情報_更正後, 1, SIZE_6).subtract(特徴既に納付すべき額);
             既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
+            特別徴収額合計 = 特徴既に納付すべき額.add(特徴今後納付すべき額);
+            普通徴収額合計 = 普徴既に納付すべき額.add(普徴今後納付すべき額_調定元に);
 //            今後納付すべき額 = 普徴今後納付すべき額_調定元に.add(特徴今後納付すべき額);
             今後納付すべき額 = 納付済額.add(get特徴納付済額(賦課情報_更正後, 1, SIZE_6)).subtract(納付済額_未到来期含む);
         } else {
@@ -193,6 +188,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             特徴今後納付すべき額 = Decimal.ZERO;
             既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
             今後納付すべき額 = 普徴今後納付すべき額_収入元に;
+            特別徴収額合計 = 特徴既に納付すべき額.add(特徴今後納付すべき額);
+            普通徴収額合計 = 普徴既に納付すべき額.add(普徴今後納付すべき額_調定元に);
         }
 
         FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
@@ -237,6 +234,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         shoKyotsu.set普徴今後納付すべき額_調定元に(普徴今後納付すべき額_調定元に);
         shoKyotsu.set普徴今後納付すべき額_収入元に(普徴今後納付すべき額_収入元に);
         shoKyotsu.set特徴今後納付すべき額(特徴今後納付すべき額);
+        shoKyotsu.set特別徴収額合計(特別徴収額合計);
+        shoKyotsu.set普通徴収額合計(普通徴収額合計);
         edit編集後本算定通知書共通情報(本算定通知書情報, shoKyotsu);
         return shoKyotsu;
     }
