@@ -329,7 +329,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         FlexibleDate 翌日異動日 = 異動年月日.plusDay(ORDER_1);
         for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
             if (異動一時Map.containsKey(翌日異動日)) {
-                翌日異動日 = 異動年月日.plusDay(ORDER_1);
+                翌日異動日 = 翌日異動日.plusDay(ORDER_1);
                 continue;
             }
             return 翌日異動日;
