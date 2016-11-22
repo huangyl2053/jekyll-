@@ -131,8 +131,6 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
         Encode 文字コード;
         if (RSTRING_TWO.equals(共通_文字コード)) {
             文字コード = Encode.SJIS;
-        } else if (RSTRING_THREE.equals(共通_文字コード)) {
-            文字コード = Encode.UTF_8withBOM;
         } else {
             文字コード = Encode.UTF_8withBOM;
         }
