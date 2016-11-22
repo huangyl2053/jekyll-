@@ -268,4 +268,33 @@ public class KokuhorenInterfaceKanriManager {
         return new KokuhorenInterfaceKanri(entity);
     }
 
+    /**
+     * 自己負担額確認情報を返します。
+     *
+     * @param 処理年月 処理年月
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 送付取込区分 送付取込区分
+     * @param 処理状態区分 処理状態区分
+     * @return List<KokuhorenInterfaceKanri>
+     */
+    @Transaction
+    public List<KokuhorenInterfaceKanri> get自己負担額確認情報(FlexibleYearMonth 処理年月,
+            RString 交換情報識別番号, RString 送付取込区分, RString 処理状態区分) {
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(送付取込区分, UrSystemErrorMessages.値がnull.getReplacedMessage("送付取込区分"));
+        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("処理状態区分"));
+        List<DbT3104KokuhorenInterfaceKanriEntity> list = dac.select指定された年月の自己負担額確認情報(処理年月, 交換情報識別番号, 送付取込区分, 処理状態区分);
+        if (list == null) {
+            return null;
+        }
+        List<KokuhorenInterfaceKanri> businessList = new ArrayList<>();
+
+        for (DbT3104KokuhorenInterfaceKanriEntity entity : list) {
+            entity.initializeMd5();
+            businessList.add(new KokuhorenInterfaceKanri(entity));
+        }
+
+        return businessList;
+    }
 }

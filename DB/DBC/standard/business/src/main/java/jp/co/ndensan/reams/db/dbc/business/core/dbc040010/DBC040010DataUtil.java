@@ -78,11 +78,15 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class DBC040010DataUtil {
 
     private static final int ERRORLISTINDEX = -1;
+    private static final int NUM_1 = 1;
+
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_8 = 8;
+    private static final int NUM_12 = 12;
+
     private static final int NUM_70 = 70;
     private static final int NUM_75 = 75;
     private static final int INDEX_0 = 0;
@@ -710,7 +714,11 @@ public class DBC040010DataUtil {
         FlexibleDate age = ageCalculator.get年齢到達日(NUM_70);
         Calendar 前到達70翌月;
         前到達70翌月 = getRealDateCalendar(age);
-        前到達70翌月.set(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH) + 1, 1);
+        if (前到達70翌月.get(Calendar.MONTH) == NUM_12) {
+            前到達70翌月.set(前到達70翌月.get(Calendar.YEAR) + 1, NUM_1, 1);
+        } else {
+            前到達70翌月.set(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH) + 1, 1);
+        }
         return new FlexibleDate(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH), 1).getYearMonth();
     }
 

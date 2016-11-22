@@ -35,6 +35,11 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
     @InjectSession
     private SqlSession session;
 
+    private static final RString 定数市町村コード = new RString("市町村コード");
+    private static final RString 定数認定調査委託先コード = new RString("認定調査委託先コード");
+    private static final RString 定数認定調査員コード = new RString("認定調査員コード");
+    private static final RString 定数調査員情報エンティティ = new RString("調査員情報エンティティ");
+
     /**
      * 主キーで調査員情報を取得します。
      *
@@ -49,18 +54,18 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
             LasdecCode 市町村コード,
             ChosaItakusakiCode 認定調査委託先コード,
             ChosainCode 認定調査員コード) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
-        requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数市町村コード.toString()));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数認定調査委託先コード.toString()));
+        requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数認定調査員コード.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT5913ChosainJoho.class).
                 where(and(
-                                eq(shichosonCode, 市町村コード),
-                                eq(ninteiChosaItakusakiCode, 認定調査委託先コード),
-                                eq(ninteiChosainCode, 認定調査員コード))).
+                        eq(shichosonCode, 市町村コード),
+                        eq(ninteiChosaItakusakiCode, 認定調査委託先コード),
+                        eq(ninteiChosainCode, 認定調査員コード))).
                 toObject(DbT5913ChosainJohoEntity.class);
     }
 
@@ -76,16 +81,16 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
     public List<DbT5913ChosainJohoEntity> selectByKey(
             LasdecCode 市町村コード,
             ChosaItakusakiCode 認定調査委託先コード) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数市町村コード.toString()));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数認定調査委託先コード.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT5913ChosainJoho.class).
                 where(and(
-                                eq(shichosonCode, 市町村コード),
-                                eq(ninteiChosaItakusakiCode, 認定調査委託先コード))).
+                        eq(shichosonCode, 市町村コード),
+                        eq(ninteiChosaItakusakiCode, 認定調査委託先コード))).
                 toList(DbT5913ChosainJohoEntity.class);
     }
 
@@ -112,7 +117,7 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
     @Transaction
     @Override
     public int save(DbT5913ChosainJohoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(定数調査員情報エンティティ.toString()));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
@@ -126,7 +131,7 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
      */
     @Transaction
     public int saveOrDelete(DbT5913ChosainJohoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(定数調査員情報エンティティ.toString()));
 
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
@@ -140,15 +145,15 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
      */
     @Transaction
     public int countByShichosonCodeAndNinteichosaItakusakiCode(LasdecCode 市町村コード, RString 認定調査委託先コード) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数市町村コード.toString()));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数認定調査委託先コード.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT5913ChosainJoho.class).
                 where(and(
-                                eq(DbT5913ChosainJoho.shichosonCode, 市町村コード),
-                                eq(DbT5913ChosainJoho.ninteiChosaItakusakiCode, 認定調査委託先コード)))
+                        eq(DbT5913ChosainJoho.shichosonCode, 市町村コード),
+                        eq(DbT5913ChosainJoho.ninteiChosaItakusakiCode, 認定調査委託先コード)))
                 .getCount();
     }
 
@@ -164,17 +169,17 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
     public List<DbT5913ChosainJohoEntity> select調査員情報(
             LasdecCode 市町村コード,
             ChosaItakusakiCode 認定調査委託先コード) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数市町村コード.toString()));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage(定数認定調査委託先コード.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT5913ChosainJoho.class).
                 where(and(
-                                eq(shichosonCode, 市町村コード),
-                                eq(ninteiChosaItakusakiCode, 認定調査委託先コード),
-                                eq(jokyoFlag, true))).
+                        eq(shichosonCode, 市町村コード),
+                        eq(ninteiChosaItakusakiCode, 認定調査委託先コード),
+                        eq(jokyoFlag, true))).
                 toList(DbT5913ChosainJohoEntity.class);
     }
 }

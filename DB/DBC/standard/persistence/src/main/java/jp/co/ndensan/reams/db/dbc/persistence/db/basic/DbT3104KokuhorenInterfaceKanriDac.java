@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.like;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
@@ -108,7 +109,7 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                     where(and(
                                     eq(sofuTorikomiKubun, 送付取込区分),
                                     eq(shoriJotaiKubun, 処理状態区分),
-                                    eq(kokanShikibetsuNo, 交換情報識別番号),
+                                    like(kokanShikibetsuNo, 交換情報識別番号),
                                     eq(isDeleted, 論理削除フラグ))).
                     order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).limit(1).
                     toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
@@ -118,7 +119,7 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                     where(and(
                                     eq(sofuTorikomiKubun, 送付取込区分),
                                     eq(shoriJotaiKubun, 処理状態区分),
-                                    eq(kokanShikibetsuNo, 交換情報識別番号),
+                                    like(kokanShikibetsuNo, 交換情報識別番号),
                                     eq(isDeleted, 論理削除フラグ))).
                     order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.ASC)).limit(1).
                     toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
@@ -406,6 +407,32 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                 where(and(
                                 eq(kokanShikibetsuNo, 交換情報識別番号),
                                 eq(shoriJotaiKubun, 処理状態区分)))
+                .toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 指定された年月の自己負担額確認情報取得返します。
+     *
+     * @param 処理年月 処理年月
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 送付取込区分 送付取込区分
+     * @param 処理状態区分 処理状態区分
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    public List<DbT3104KokuhorenInterfaceKanriEntity> select指定された年月の自己負担額確認情報(FlexibleYearMonth 処理年月,
+            RString 交換情報識別番号, RString 送付取込区分, RString 処理状態区分) {
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(送付取込区分, UrSystemErrorMessages.値がnull.getReplacedMessage("送付取込区分"));
+        requireNonNull(処理状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("処理状態区分"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(eq(sofuTorikomiKubun, 送付取込区分),
+                                eq(shoriJotaiKubun, 処理状態区分),
+                                like(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(shoriYM, 処理年月))
+                )
                 .toList(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
 
