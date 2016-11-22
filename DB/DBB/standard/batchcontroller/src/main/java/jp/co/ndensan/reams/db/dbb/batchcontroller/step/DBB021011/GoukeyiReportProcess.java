@@ -78,26 +78,29 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
     @Override
     protected void afterExecute() {
         KoumokuGoukey newKoumokuGoukey = null;
+        List<KoumokuGoukey> newKoumokuGoukeyList = new ArrayList<>();
         for (int i = 0; i < koumokuGoukeyList.size(); i++) {
             KoumokuGoukey koumokuGoukey = koumokuGoukeyList.get(i);
             if (RString.isNullOrEmpty(koumokuGoukey.getHokenryoDankai())
                     || 不明.equals(koumokuGoukey.getHokenryoDankai())) {
                 if (null == newKoumokuGoukey) {
                     newKoumokuGoukey = koumokuGoukeyList.get(i);
-                }else{
+                } else {
                     newKoumokuGoukey = 不明_合計(newKoumokuGoukey, koumokuGoukey);    
                 }
-                koumokuGoukeyList.remove(i);
+            } else {
+                newKoumokuGoukeyList.add(koumokuGoukey);
             }
         }
-        newKoumokuGoukey.setHokenryoDankai(不明);
-        koumokuGoukeyList.add(newKoumokuGoukey);
-        TsukibetsuSuiihyoReport report = new TsukibetsuSuiihyoReport(getTsukibetsuSuiihyoEntity(koumokuGoukeyList));
+        if (null != newKoumokuGoukey) {
+            newKoumokuGoukey.setHokenryoDankai(不明);
+            newKoumokuGoukeyList.add(newKoumokuGoukey);
+        }
+        TsukibetsuSuiihyoReport report = new TsukibetsuSuiihyoReport(getTsukibetsuSuiihyoEntity(newKoumokuGoukeyList));
         report.writeBy(reportSourceWriter);
     }
     
     private KoumokuGoukey 不明_合計(KoumokuGoukey newKoumokuGoukey, KoumokuGoukey koumokuGoukey){
-        KoumokuGoukey tmp = new KoumokuGoukey();
         newKoumokuGoukey.getYoGetuNinsuuGoukeyi().add(koumokuGoukey.getYoGetuNinsuuGoukeyi());
         newKoumokuGoukey.getGoGetuNinsuuGoukeyi().add(koumokuGoukey.getGoGetuNinsuuGoukeyi());
         newKoumokuGoukey.getRokuGetuNinsuuGoukeyi().add(koumokuGoukey.getRokuGetuNinsuuGoukeyi());

@@ -71,7 +71,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
      * @param association Association
      * @param 出力項目リスト List<RString>
      * @param 改頁項目リスト List<RString>
-     * @param entity
+     * @param entity TsuchishoDataTempEntity
      */
     public TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,

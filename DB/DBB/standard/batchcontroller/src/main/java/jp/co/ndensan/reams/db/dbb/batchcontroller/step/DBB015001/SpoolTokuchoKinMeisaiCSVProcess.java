@@ -241,7 +241,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
                 ReportIdDBB.DBB200023.getReportId().getColumnValue(),
                 導入団体コード,
                 市町村名,
-                RString.FULL_SPACE.concat(String.valueOf(JobContextHolder.getJobId())),
+                RString.EMPTY.concat(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBB.DBB200023.getReportName(),
                 出力ページ数,
                 CSV出力有無_有り,

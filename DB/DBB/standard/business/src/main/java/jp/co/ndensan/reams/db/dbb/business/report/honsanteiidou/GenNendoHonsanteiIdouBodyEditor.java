@@ -175,7 +175,9 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             source.list1_3 = 漢字氏名 == null ? null : 漢字氏名.getColumnValue();
         }
         source.list1_4 = 住所編集;
-        if (計算後情報_宛名_口座_更正後Entity.get口座Entity() != null) {
+        if (計算後情報_宛名_口座_更正後Entity.get口座Entity() != null
+                && 計算後情報_宛名_口座_更正後Entity.get口座Entity().getUaT0310KozaEntity() != null
+                && 計算後情報_宛名_口座_更正後Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0) {
             kozaJoho(source);
         }
     }

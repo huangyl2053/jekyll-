@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsu
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoTempInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShokanShinseiDBUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanbaraiSashitomeTaishoshaIchiranOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.UpdHakkoutaisyouFlgProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanKetteiTsuchiShokanShinsei.ShokanKetteiTsuchiShokanShinseiProcessParameter;
@@ -40,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC030010_ShokanShikyuKetteiTsuchishoParameter> {
 
     private static final String TEMP_INSERT = "shokanKetteiTsuchiShoTempInsertProcess";
+    private static final String UPD_HAKKOUTAISYOUFLG = "updHakkoutaisyouFlgProcess";
     private static final String MEISAI_TEMP_INSERT = "shokanKetteiTsuchiShoMeisaiTempInsertProcess";
     private static final String TEMP_UPDATE_SERVICE = "ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess";
     private static final String TEMP_UPDATE_YOSHIKI = "ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess";
@@ -91,6 +93,7 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
             支払予定日印字有無 = 帳票制御汎支払予定日印字.get設定値();
         }
         executeStep(TEMP_INSERT);
+        executeStep(UPD_HAKKOUTAISYOUFLG);
         executeStep(MEISAI_TEMP_INSERT);
         executeStep(TEMP_UPDATE_YOSHIKI);
         executeStep(TEMP_UPDATE_SERVICE);
@@ -128,6 +131,12 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
     IBatchFlowCommand shokanKetteiTsuchiShoTempInsertProcess() {
         return loopBatch(ShokanKetteiTsuchiShoTempInsertProcess.class)
                 .arguments(ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter.createProcessParam(getParameter()))
+                .define();
+    }
+    
+     @Step(UPD_HAKKOUTAISYOUFLG)
+    IBatchFlowCommand updHakkoutaisyouFlgProcess() {
+        return simpleBatch(UpdHakkoutaisyouFlgProcess.class)
                 .define();
     }
 

@@ -126,11 +126,9 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
 
         List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> 帳票ソースデータ = new ArrayList<>();
-        ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
-        RString kyufuShu = RString.EMPTY;
         for (ShokanKetteiTsuchiShoShiharai shiharai : shiharaiList) {
-            item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
-            kyufuShu = 種類Map.get(getJufukuKey(shiharai)) == null ? RString.EMPTY : 種類Map.get(getJufukuKey(shiharai));
+            ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
+            RString kyufuShu = 種類Map.get(getJufukuKey(shiharai)) == null ? RString.EMPTY : 種類Map.get(getJufukuKey(shiharai));
             item.setBunshoNo(batchPram.get文書番号());
             if (kyufuShu.length() <= 文字数_38) {
                 item.setKyufuShu1(kyufuShu);
@@ -207,10 +205,21 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
             item.setTorikeshi1(記号_星);
             item.setTorikeshi2(RString.EMPTY);
         }
+        if (ShikyuFushikyuKubun.不支給.getコード().equals(shiharai.get支給不支給決定区分())) {
+            item.setTorikeshi1(記号_星);
+            item.setTorikeshi2(記号_星);
+        }
         item.setTorikeshiMochimono1(RString.EMPTY);
         item.setTorikeshiMochimono2(RString.EMPTY);
         item.setTorikeshiShiharaibasho(RString.EMPTY);
         item.setTorikeshiShiharaikikan(RString.EMPTY);
+        setItem(item, ninshoshaSource, shiharai, batchPram, atesaki);
+        return item;
+    }
+
+    private void setItem(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item,
+            NinshoshaSource ninshoshaSource, ShokanKetteiTsuchiShoShiharai shiharai,
+            ShokanKetteiTsuchiShoSealerBatchParameter batchPram, SofubutsuAtesakiSource atesaki) {
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         if (ShiharaiHohoKubun.窓口払.getコード().equals(shiharai.get支払方法区分コード())
                 && ShikyuFushikyuKubun.支給.getコード().equals(shiharai.get支給不支給決定区分())) {
@@ -308,9 +317,7 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         item.setRiyuTitle(増減の理由タイトル);
         item.setShumokuTitle(種別タイトル);
         item.setBangoTitle(番号タイトル_口座番号);
-        return item;
     }
-
     private IKoza do口座マスク編集(TokuteiKozaRelateEntity koza) {
         MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
         return maskedKozaCreator.createマスク編集済口座(new Koza(koza));

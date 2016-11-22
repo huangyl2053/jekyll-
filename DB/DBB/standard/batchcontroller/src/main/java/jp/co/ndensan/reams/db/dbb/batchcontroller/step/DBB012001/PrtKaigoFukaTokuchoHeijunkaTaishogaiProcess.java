@@ -185,7 +185,7 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
                 taishogaiEntity, 今年度保険料率, new Decimal(調整金額));
         TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport report = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport(
                 null, taishogai, parameter.get調定日時(),
-                parameter.get賦課年度(), 導入団体クラス, outputOrder);
+                parameter.get賦課年度(), 導入団体クラス, outputOrder, 帳票制御共通);
         report.writeBy(reportSourceWriter);
 
         IKojin iKojin = ShikibetsuTaishoFactory.createKojin(taishogaiEntity.get宛名の情報());

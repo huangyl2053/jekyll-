@@ -98,7 +98,7 @@ public class FukaErrorReportView {
     private static final RString 個人番号_利用有無名称 = new RString("個人番号利用有無");
     private static final RString 法人番号_利用有無名称 = new RString("法人番号利用有無");
     private static final RString 無し = new RString("無し");
-    private RString TITLE;
+    private RString 名前;
 
     /**
      * 画面初期化処理です。
@@ -109,7 +109,7 @@ public class FukaErrorReportView {
     public ResponseData onLoad(FukaErrorReportViewDiv div) {
         RString batchID = RString.EMPTY;
         RDateTime 基準日時 = RDateTime.MIN;
-        TITLE = RString.EMPTY;
+        名前 = RString.EMPTY;
         RString menuId = getMenuId();
         if (!RString.isNullOrEmpty(menuId)) {
             ShoriDateKanri shori = FukaErrorListService.createInstance().getFukaBatchID(menuId);
@@ -147,7 +147,7 @@ public class FukaErrorReportView {
         } else {
             createHandler(div).initialize(new ArrayList<FukaErrorList>());
         }
-        return ResponseData.of(div).rootTitle(TITLE).respond();
+        return ResponseData.of(div).rootTitle(名前).respond();
     }
 
     /**
@@ -341,31 +341,31 @@ public class FukaErrorReportView {
 
     private RString getMenuId() {
         if (ResponseHolder.getMenuID().equals(DBBMN33004)) {
-            TITLE = 特徴仮算定賦課エラー一覧;
+            名前 = 特徴仮算定賦課エラー一覧;
             return 特徴仮算定賦課;
         }
         if (ResponseHolder.getMenuID().equals(DBBMN34004)) {
-            TITLE = 普徴仮算定賦課エラー一覧;
+            名前 = 普徴仮算定賦課エラー一覧;
             return 普徴仮算定賦課;
         }
         if (ResponseHolder.getMenuID().equals(DBBMN36004)) {
-            TITLE = 仮算定異動賦課エラー一覧;
+            名前 = 仮算定異動賦課エラー一覧;
             return 仮算定異動賦課;
         }
         if (ResponseHolder.getMenuID().equals(DBBMN35006)) {
-            TITLE = 特徴平準化_8月分エラー一覧;
+            名前 = 特徴平準化_8月分エラー一覧;
             return 特徴平準化計算_8月分;
         }
         if (ResponseHolder.getMenuID().equals(DBBMN43004)) {
-            TITLE = 本算定賦課エラー一覧;
+            名前 = 本算定賦課エラー一覧;
             return 本算定賦課;
         }
         if (ResponseHolder.getMenuID().equals(DBBMN44004)) {
-            TITLE = 現年度異動賦課エラー一覧;
+            名前 = 現年度異動賦課エラー一覧;
             return 異動賦課;
         }
         if (ResponseHolder.getMenuID().equals(DBBMN45004)) {
-            TITLE = 過年度異動賦課エラー一覧;
+            名前 = 過年度異動賦課エラー一覧;
             return 過年度賦課;
         }
         return RString.EMPTY;
