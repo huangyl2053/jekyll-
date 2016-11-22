@@ -276,6 +276,9 @@ public class ServiceKeikakuHiPanelHandler {
         Collections.sort(rowList, COMPARABLE);
         Decimal 単位合計 = Decimal.ZERO;
         for (dgdYichiran_Row item : rowList) {
+            if (item.getDefaultDataName4().getValue() == null) {
+                item.getDefaultDataName4().setValue(Decimal.ZERO);
+            }
             単位合計 = 単位合計.add(item.getDefaultDataName4().getValue());
         }
         Decimal 請求額合計 = 単位合計.multiply(div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().getValue());
@@ -672,7 +675,8 @@ public class ServiceKeikakuHiPanelHandler {
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiDown()
                 .getDdlShiteiJigyoshaKubunCode().getSelectedKey();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();
-        FlexibleDate 届出日 = get届出日(div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue());
+        FlexibleDate 届出日;
+        届出日 = get届出日(div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue());
         Decimal 単位数Decimal = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue();
         int 単位数 = 単位数Decimal == null ? 0 : 単位数Decimal.intValue();
         Decimal 単位数単価 = div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().getValue();
@@ -715,7 +719,7 @@ public class ServiceKeikakuHiPanelHandler {
     }
 
     private FlexibleDate get届出日(RDate date) {
-        FlexibleDate 届出日 = null;
+        FlexibleDate 届出日 = FlexibleDate.EMPTY;
         if (date != null) {
             届出日 = new FlexibleDate(date.toString());
         }
