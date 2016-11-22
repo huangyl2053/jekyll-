@@ -5,14 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5120011;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150030.DBC150030_ServicecodeRiyojokyoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150030.KoseiShichosonInfo;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5120011.ServicecodePanelDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * サービスコード別利用状況です
@@ -72,6 +80,20 @@ public class ServicecodePanelHandler {
     private static final RString SEVENTYEIGHT = new RString("78");
     private static final RString SEVENTYNINE = new RString("79");
     private static final RString ZERO = new RString("00");
+    private static final RString KEY_対象年月指定 = new RString("対象年月指定");
+    private static final RString KEY_年月範囲開始 = new RString("年月範囲開始");
+    private static final RString KEY_年月範囲終了 = new RString("年月範囲終了");
+    private static final RString KEY_対象サービス種類 = new RString("対象サービス種類");
+    private static final RString KEY_サービス項目コードのまとめ方 = new RString("サービス項目コードのまとめ方");
+    private static final RString KEY_選択対象 = new RString("選択対象");
+    private static final RString KEY_市町村情報 = new RString("市町村情報");
+    private static final RString KEY_旧市町村情報 = new RString("旧市町村情報");
+    private static final Comparator COMPARABLE = new Comparator<RString>() {
+        @Override
+        public int compare(RString arg0, RString arg1) {
+            return arg0.compareTo(arg1);
+        }
+    };
 
     /**
      * コンストラクタです。
@@ -97,21 +119,14 @@ public class ServicecodePanelHandler {
     /**
      * sort昇順ByKey
      *
-     * @param list List<RString>
-     * @return List<RString>
+     * @param list RString
+     * @return RString
      */
     public List<RString> sort昇順ByKey(List<RString> list) {
         if (list.isEmpty()) {
             return list;
         }
-        Collections.sort(list,
-                new Comparator<RString>() {
-                    @Override
-                    public int compare(RString arg0, RString arg1) {
-                        return arg0.compareTo(arg1);
-                    }
-                }
-        );
+        Collections.sort(list, COMPARABLE);
         return list;
     }
 
@@ -169,5 +184,89 @@ public class ServicecodePanelHandler {
         list.add(new ServiceShuruiCode(SEVENTYNINE));
         return list;
 
+    }
+
+    /**
+     * バッチパラメータをセットする
+     *
+     * @return DBC150030_ServicecodeRiyojokyoParameter
+     */
+    public DBC150030_ServicecodeRiyojokyoParameter getBatchParameter() {
+        DBC150030_ServicecodeRiyojokyoParameter parameter = new DBC150030_ServicecodeRiyojokyoParameter();
+        parameter.set対象年月指定(div.getChusyutsuPanel().getRadtaishoYm().getSelectedKey());
+        if (null != div.getChusyutsuPanel().getTxthani().getFromValue()) {
+            parameter.set年月範囲開始(new FlexibleYearMonth(div.getChusyutsuPanel().getTxthani().getFromValue().getYearMonth().toDateString()));
+        }
+        if (null != div.getChusyutsuPanel().getTxthani().getToValue()) {
+            parameter.set年月範囲終了(new FlexibleYearMonth(div.getChusyutsuPanel().getTxthani().getToValue().getYearMonth().toDateString()));
+        }
+        parameter.set対象サービス種類(div.getChusyutsuPanel().getDdlshurui().getSelectedKey());
+        parameter.setサービス項目コードのまとめ方(div.getSekkeiPanel().getDdlmatome().getSelectedKey());
+        parameter.set選択対象(div.getCcdChikuShichosonSelect().get選択対象());
+        Map<RString, RString> map = div.getCcdChikuShichosonSelect().get選択結果();
+        RString mapValue = DataPassingConverter.serialize((Serializable) map);
+        div.setHdnSelectedMap(mapValue);
+        List<RString> list = new ArrayList<>();
+        if (null != map && !map.isEmpty()) {
+            for (RString key : map.keySet()) {
+                list.add(key);
+            }
+        }
+        parameter.set対象コードリスト(sort昇順ByKey(list));
+        KoseiShichosonInfo 市町村情報 = new KoseiShichosonInfo();
+        市町村情報.setコード(div.getCcdChikuShichosonSelect().get市町村コード());
+        市町村情報.set名称(div.getCcdChikuShichosonSelect().get市町村名称());
+        KoseiShichosonInfo 旧市町村情報 = new KoseiShichosonInfo();
+        旧市町村情報.setコード(div.getCcdChikuShichosonSelect().get旧市町村コード());
+        旧市町村情報.set名称(div.getCcdChikuShichosonSelect().get旧市町村名称());
+        parameter.set市町村情報(市町村情報);
+        parameter.set旧市町村情報(旧市町村情報);
+        return parameter;
+    }
+
+    /**
+     * 条件を復元する
+     */
+    public void setBatchParameterRestore() {
+        BatchParameterMap restoreMap = div.getJokenFukugenHozon().getBtnBatchParameterRestore().getRestoreBatchParameterMap();
+        RString 対象年月指定 = restoreMap.getParameterValue(RString.class, KEY_対象年月指定);
+        FlexibleYearMonth 年月範囲開始 = restoreMap.getParameterValue(FlexibleYearMonth.class, KEY_年月範囲開始);
+        FlexibleYearMonth 年月範囲終了 = restoreMap.getParameterValue(FlexibleYearMonth.class, KEY_年月範囲終了);
+        RString 対象サービス種類 = restoreMap.getParameterValue(RString.class, KEY_対象サービス種類);
+        RString サービス項目コードのまとめ方 = restoreMap.getParameterValue(RString.class, KEY_サービス項目コードのまとめ方);
+        RString 選択対象 = restoreMap.getParameterValue(RString.class, KEY_選択対象);
+        KoseiShichosonInfo 市町村情報 = restoreMap.getParameterValue(KoseiShichosonInfo.class, KEY_市町村情報);
+        KoseiShichosonInfo 旧市町村情報 = restoreMap.getParameterValue(KoseiShichosonInfo.class, KEY_旧市町村情報);
+
+        if (対象年月指定 != null) {
+            div.getChusyutsuPanel().getRadtaishoYm().setSelectedKey(対象年月指定);
+        }
+        if (年月範囲開始 != null) {
+            div.getChusyutsuPanel().getTxthani().setFromValue(new RDate(年月範囲開始.toString()
+                    .concat(String.valueOf(RDate.getNowDate().getDayValue()))));
+        }
+        if (年月範囲終了 != null) {
+            div.getChusyutsuPanel().getTxthani().setToValue(new RDate(年月範囲終了.toString()
+                    .concat(String.valueOf(RDate.getNowDate().getDayValue()))));
+        }
+        if (対象サービス種類 != null) {
+            div.getChusyutsuPanel().getDdlshurui().setSelectedKey(対象サービス種類);
+        }
+        if (サービス項目コードのまとめ方 != null) {
+            div.getSekkeiPanel().getDdlmatome().setSelectedKey(サービス項目コードのまとめ方);
+        }
+        if (選択対象 != null) {
+            div.getCcdChikuShichosonSelect().set選択対象(選択対象);
+        }
+        Map<RString, RString> 選択結果 = DataPassingConverter.deserialize(div.getHdnSelectedMap(), Map.class);
+        if (選択結果 != null) {
+            div.getCcdChikuShichosonSelect().set選択結果(選択結果);
+        }
+        if (市町村情報 != null) {
+            div.getCcdChikuShichosonSelect().set市町村コード(市町村情報.getコード());
+        }
+        if (旧市町村情報 != null) {
+            div.getCcdChikuShichosonSelect().set旧市町村コード(旧市町村情報.getコード());
+        }
     }
 }

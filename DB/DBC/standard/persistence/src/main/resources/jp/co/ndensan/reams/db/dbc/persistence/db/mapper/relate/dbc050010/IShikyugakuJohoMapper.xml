@@ -159,7 +159,7 @@
                 '0' AS sum差額金額
             FROM
                 (
-                    SELECT * FROM  rgdb."DbT3053ShokanShukei" WHERE  "yoshikiNo" NOT IN('21C1','21C2','21D1','21D2')
+                    SELECT * FROM  rgdb."DbT3053ShokanShukei" WHERE  "yoshikiNo" IN('21C1','21C2','21D1','21D2')
                 ) AS 償還払
             INNER JOIN "DbWT0510FurikomiMeisai" AS 一時
             ON 

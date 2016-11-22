@@ -6,7 +6,7 @@
     <select resultOrdered="true" id="updShoKofuKaishuJoho" resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter" >
         SELECT
-        UrT0705Chote."choteiId"
+        UrT0705Chote.*
         FROM
         rgdb."UrT0705ChoteiKyotsu" as UrT0705Chote
         INNER JOIN

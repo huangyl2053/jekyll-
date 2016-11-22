@@ -166,7 +166,8 @@ public class HanyoListParameteHandler {
             }
         }
         RString 対象年度 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_対象年度);
-        panel.getDdlTaishoNendo().setSelectedKey(対象年度);
+        set対象年度(panel, 対象年度);
+
         FlexibleYearMonth 決定情報受取年月From = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_決定情報受取年月FROM);
         FlexibleYearMonth 決定情報受取年月To = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_決定情報受取年月TO);
         panel.getTxtKetteiJohoUketoriNengetsu().clearFromValue();
@@ -179,6 +180,18 @@ public class HanyoListParameteHandler {
         }
         条件を復元Part2(restoreBatchParameterMap);
 
+    }
+
+    private void set対象年度(ChushutsuJokenPanelDiv panel, RString 対象年度) {
+        List<RString> 対象年度KeyList = new ArrayList<>();
+        for (KeyValueDataSource obj : panel.getDdlTaishoNendo().getDataSource()) {
+            対象年度KeyList.add(obj.getKey());
+        }
+        if (対象年度 != null && !対象年度.isEmpty() && 対象年度KeyList.contains(対象年度)) {
+            panel.getDdlTaishoNendo().setSelectedKey(対象年度);
+        } else {
+            panel.getDdlTaishoNendo().setSelectedIndex(0);
+        }
     }
 
     private void 条件を復元Part2(BatchParameterMap restoreBatchParameterMap) {
