@@ -427,7 +427,7 @@ public class ServiceKeikakuHiPanel {
 
             償還払ViewStateDB.add償還払請求サービス計画200904データResult(entity200904ResultList);
             List<ShokanServicePlan200904Result> newDataList = get償還払請求サービス計画200904データ(償還払ViewStateDB);
-            if (償還払ViewStateDB != null && 償還払ViewStateDB.get償還払請求サービス計画200904データResultList() != null) {
+            if (償還払ViewStateDB.get償還払請求サービス計画200904データResultList() != null) {
                 償還払ViewStateDB.get償還払請求サービス計画200904データResultList().clear();
                 償還払ViewStateDB.add償還払請求サービス計画200904データResult(newDataList);
             } else {
@@ -435,7 +435,6 @@ public class ServiceKeikakuHiPanel {
             }
         }
         if (entity200604Result != null) {
-//            償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
             if (!has同様償還払請求サービス計画200604データ(償還払ViewStateDB, entity200604Result)) {
                 償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
             }
@@ -525,9 +524,17 @@ public class ServiceKeikakuHiPanel {
             証明書変更済フラグ.setサービス計画費_証明書変更済フラグ(is変更 ? ShomeishoHenkoKubunType.変更あり : ShomeishoHenkoKubunType.変更なし);
             証明書変更済フラグMap.put(明細キー, 証明書変更済フラグ);
             償還払ViewStateDB.set証明書変更済フラグMap(証明書変更済フラグMap);
+
             Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap = 償還払ViewStateDB.get証明書入力済フラグMap();
-            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap = 償還払ViewStateDB.get証明書入力完了フラグMap();
+            if (償還払ViewStateDB.get証明書入力済フラグMap() == null) {
+                証明書入力済フラグMap = new HashMap<>();
+                償還払ViewStateDB.set証明書入力済フラグMap(証明書入力済フラグMap);
+            }
             ShomeishoNyuryokuFlag 証明書入力済フラグ = 証明書入力済フラグMap.get(明細キー);
+            if (証明書入力済フラグ == null) {
+                証明書入力済フラグ = new ShomeishoNyuryokuFlag();
+            }
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap = 償還払ViewStateDB.get証明書入力完了フラグMap();
             証明書入力済フラグ.setサービス計画費_証明書入力済フラグ(is変更 ? ShomeishoNyuryokuKubunType.入力あり : ShomeishoNyuryokuKubunType.入力なし);
             証明書入力済フラグMap.put(明細キー, 証明書入力済フラグ);
             償還払ViewStateDB.set証明書入力済フラグMap(証明書入力済フラグMap);
