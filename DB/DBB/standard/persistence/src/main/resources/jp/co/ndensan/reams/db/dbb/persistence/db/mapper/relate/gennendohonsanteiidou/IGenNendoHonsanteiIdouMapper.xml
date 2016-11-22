@@ -952,7 +952,7 @@
         FROM
             "TmpFukaJouhou" AS A
         INNER JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS 口座
+            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS 口座
         ON
             口座."uaT0310Koza_shikibetsuCode" = A."shikibetsuCode"
         WHERE
