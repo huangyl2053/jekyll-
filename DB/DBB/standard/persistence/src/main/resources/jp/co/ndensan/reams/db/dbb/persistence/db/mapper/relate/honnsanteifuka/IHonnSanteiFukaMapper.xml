@@ -505,7 +505,6 @@
         ) AS "DbT2002Fuka1"
         ON 資格."dbT1001HihokenshaDaicho_hihokenshaNo"="DbT2002Fuka1"."dbT2002Fuka_hihokenshaNo"
         ORDER BY 資格."dbT1001HihokenshaDaicho_hihokenshaNo", "DbT2002Fuka1"."dbT2002Fuka_tsuchishoNo"
-        limit 100
     </select>
     
     
