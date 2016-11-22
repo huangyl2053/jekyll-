@@ -121,7 +121,9 @@ public class CreateTargetHandler {
             row.getBirthDate().setValue(getNull(list.get生年月日()));
             row.getNinteiShinseibi().setValue(getNull(list.get認定申請年月日()));
             row.setShinseiKubunShin(NinteiShinseiShinseijiKubunCode.toValue(list.get認定申請区分_申請時コード().value()).get名称());
-            row.setShinseiKubunHo(NinteiShinseiHoreiCode.toValue(list.get認定申請区分_法令コード().value()).get名称());
+            if (list.get認定申請区分_法令コード() != null && !list.get認定申請区分_法令コード().value().isEmpty()) {
+                row.setShinseiKubunHo(NinteiShinseiHoreiCode.toValue(list.get認定申請区分_法令コード().value()).get名称());
+            }
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(list.get厚労省IF識別コード().value())) {
                 row.setNijiHanteiKekka(YokaigoJotaiKubun99.toValue(list.get状態区分コード()).get名称());
             }
