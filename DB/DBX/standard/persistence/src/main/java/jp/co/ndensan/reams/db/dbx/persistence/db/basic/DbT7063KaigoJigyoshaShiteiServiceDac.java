@@ -70,9 +70,9 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
         return accessor.select().
                 table(DbT7063KaigoJigyoshaShiteiService.class).
                 where(and(
-                                eq(jigyoshaNo, 事業者番号),
-                                eq(serviceShuruiCode, サービス種類コード),
-                                eq(yukoKaishiYMD, 有効開始日))).
+                        eq(jigyoshaNo, 事業者番号),
+                        eq(serviceShuruiCode, サービス種類コード),
+                        eq(yukoKaishiYMD, 有効開始日))).
                 toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
     }
 
@@ -145,9 +145,9 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
         return accessor.select().
                 table(DbT7063KaigoJigyoshaShiteiService.class).
                 where(and(
-                                eq(jigyoshaNo, 事業者番号),
-                                eq(serviceShuruiCode, サービス種類コード),
-                                eq(yukoKaishiYMD, 有効開始日)))
+                        eq(jigyoshaNo, 事業者番号),
+                        eq(serviceShuruiCode, サービス種類コード),
+                        eq(yukoKaishiYMD, 有効開始日)))
                 .toList(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
     }
 
@@ -173,12 +173,12 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
         return accessor.select().
                 table(DbT7063KaigoJigyoshaShiteiService.class).
                 where(and(
-                                eq(jigyoshaNo, 事業者番号),
-                                leq(DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD, 有効日),
-                                or(leq(有効日, DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD),
-                                        isNULL(DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD), eq(FlexibleDate.EMPTY,
-                                                DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD)),
-                                eq(serviceShuruiCode, サービス種類コード))).
+                        eq(jigyoshaNo, 事業者番号),
+                        leq(DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD, 有効日),
+                        or(leq(有効日, DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD),
+                                isNULL(DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD), eq(FlexibleDate.EMPTY,
+                                DbT7063KaigoJigyoshaShiteiService.yukoShuryoYMD)),
+                        eq(serviceShuruiCode, サービス種類コード))).
                 order(by(DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD, Order.DESC)).limit(1).
                 toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
     }
@@ -226,14 +226,16 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
         return accessor.select().
                 table(DbT7063KaigoJigyoshaShiteiService.class).
                 where(and(
-                                eq(jigyoshaNo, 事業者番号),
-                                or(and(leq(yukoKaishiYMD, 適用開始日),
-                                                leq(適用開始日, yukoShuryoYMD)),
-                                        and(leq(yukoKaishiYMD, 適用開始日),
-                                                isNULL(yukoShuryoYMD))),
-                                or(eq(serviceShuruiCode, DATE_43),
-                                        eq(serviceShuruiCode, DATE_46))
-                        )
+                        eq(jigyoshaNo, 事業者番号),
+                        or(and(leq(yukoKaishiYMD, 適用開始日),
+                                leq(適用開始日, yukoShuryoYMD)),
+                                and(leq(yukoKaishiYMD, 適用開始日),
+                                        isNULL(yukoShuryoYMD)),
+                                and(leq(yukoKaishiYMD, 適用開始日),
+                                        eq(yukoShuryoYMD, FlexibleDate.EMPTY))),
+                        or(eq(serviceShuruiCode, DATE_43),
+                                eq(serviceShuruiCode, DATE_46))
+                )
                 ).toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
 
     }
@@ -257,8 +259,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
         return accessor.select().
                 table(DbT7063KaigoJigyoshaShiteiService.class).
                 where(and(
-                                eq(jigyoshaNo, 計画事業所番号),
-                                eq(serviceShuruiCode, サービス種類コード))).
+                        eq(jigyoshaNo, 計画事業所番号),
+                        eq(serviceShuruiCode, サービス種類コード))).
                 order(by(DbT7063KaigoJigyoshaShiteiService.yukoKaishiYMD, Order.DESC)).limit(1).
                 toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
     }

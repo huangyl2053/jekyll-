@@ -63,8 +63,8 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
         return accessor.select().
                 table(DbT7060KaigoJigyosha.class).
                 where(and(
-                                eq(jigyoshaNo, 事業者番号),
-                                eq(yukoKaishiYMD, 有効開始日))).
+                        eq(jigyoshaNo, 事業者番号),
+                        eq(yukoKaishiYMD, 有効開始日))).
                 toObject(DbT7060KaigoJigyoshaEntity.class);
     }
 
@@ -88,15 +88,15 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
         return accessor.select().
                 table(DbT7060KaigoJigyosha.class).
                 where(and(
-                                eq(jigyoshaNo, 事業者番号),
-                                and(
-                                        leq(yukoKaishiYMD, 基準日),
-                                        or(
-                                                leq(基準日, yukoShuryoYMD),
-                                                eq(yukoShuryoYMD, FlexibleDate.EMPTY)
-                                        )
+                        eq(jigyoshaNo, 事業者番号),
+                        and(
+                                leq(yukoKaishiYMD, 基準日),
+                                or(
+                                        leq(基準日, yukoShuryoYMD),
+                                        eq(yukoShuryoYMD, FlexibleDate.EMPTY)
                                 )
-                        )).
+                        )
+                )).
                 toObject(DbT7060KaigoJigyoshaEntity.class);
     }
 
@@ -203,11 +203,11 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
         return accessor.select().
                 table(DbT7060KaigoJigyosha.class).
                 where(and(
-                                eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
-                                leq(DbT7060KaigoJigyosha.yukoKaishiYMD, 日付),
-                                or(leq(日付, DbT7060KaigoJigyosha.yukoShuryoYMD),
-                                        isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD), eq(FlexibleDate.EMPTY,
-                                                DbT7060KaigoJigyosha.yukoShuryoYMD))))
+                        eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
+                        leq(DbT7060KaigoJigyosha.yukoKaishiYMD, 日付),
+                        or(leq(日付, DbT7060KaigoJigyosha.yukoShuryoYMD),
+                                isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD), eq(FlexibleDate.EMPTY,
+                                DbT7060KaigoJigyosha.yukoShuryoYMD))))
                 .order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1)
                 .toObject(DbT7060KaigoJigyoshaEntity.class);
     }
@@ -247,9 +247,9 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
         return accessor.select().
                 table(DbT7060KaigoJigyosha.class).
                 where(and(
-                                eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
-                                leq(DbT7060KaigoJigyosha.yukoKaishiYMD, システム日付),
-                                eq(DbT7060KaigoJigyosha.isDeleted, false)))
+                        eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
+                        leq(DbT7060KaigoJigyosha.yukoKaishiYMD, システム日付),
+                        eq(DbT7060KaigoJigyosha.isDeleted, false)))
                 .order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).limit(1)
                 .toObject(DbT7060KaigoJigyoshaEntity.class);
     }
@@ -274,9 +274,9 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
         return accessor.select().
                 table(DbT7060KaigoJigyosha.class).
                 where(and(
-                                eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
-                                leq(DbT7060KaigoJigyosha.yukoKaishiYMD, システム日付),
-                                or(leq(システム日付, DbT7060KaigoJigyosha.yukoShuryoYMD), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD)))).
+                        eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
+                        leq(DbT7060KaigoJigyosha.yukoKaishiYMD, システム日付),
+                        or(leq(システム日付, DbT7060KaigoJigyosha.yukoShuryoYMD), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD)))).
                 toList(DbT7060KaigoJigyoshaEntity.class);
     }
 
@@ -296,10 +296,11 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
         return accessor.select().
                 table(DbT7060KaigoJigyosha.class).
                 where(and(
-                                eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
-                                or(and(leq(DbT7060KaigoJigyosha.yukoKaishiYMD, 適用開始日), leq(適用開始日, DbT7060KaigoJigyosha.yukoShuryoYMD)),
-                                        and(leq(DbT7060KaigoJigyosha.yukoKaishiYMD, 適用開始日), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD))
-                                ))
+                        eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
+                        or(and(leq(DbT7060KaigoJigyosha.yukoKaishiYMD, 適用開始日), leq(適用開始日, DbT7060KaigoJigyosha.yukoShuryoYMD)),
+                                and(leq(DbT7060KaigoJigyosha.yukoKaishiYMD, 適用開始日), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD)),
+                                and(leq(DbT7060KaigoJigyosha.yukoKaishiYMD, 適用開始日), eq(DbT7060KaigoJigyosha.yukoShuryoYMD, FlexibleDate.EMPTY))
+                        ))
                 ).toObject(DbT7060KaigoJigyoshaEntity.class);
 
     }
