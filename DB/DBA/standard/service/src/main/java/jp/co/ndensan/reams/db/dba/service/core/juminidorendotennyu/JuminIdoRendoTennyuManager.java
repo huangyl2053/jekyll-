@@ -1213,11 +1213,15 @@ public class JuminIdoRendoTennyuManager {
         if (措置元再転入判定) {
             DbT1001HihokenshaDaichoEntity 措置元再転入
                     = get措置元再転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
-            tennyuEntity.get被保険者台帳list().add(措置元再転入);
+            List<DbT1001HihokenshaDaichoEntity> 措置元再転入List = new ArrayList<>();
+            措置元再転入List.add(措置元再転入);
+            tennyuEntity.set被保険者台帳list(措置元再転入List);
         } else {
             DbT1001HihokenshaDaichoEntity 広域内転入
                     = get広域内転入(処理対象者, daichoEntity, 到達日クラス, 識別対象被保険者台帳データ, 措置元再転入判定);
-            tennyuEntity.get被保険者台帳list().add(広域内転入);
+            List<DbT1001HihokenshaDaichoEntity> 広域内転入List = new ArrayList<>();
+            広域内転入List.add(広域内転入);
+            tennyuEntity.set被保険者台帳list(広域内転入List);
         }
         execute広域内転入_後処理(処理対象者, 識別対象被保険者台帳データ);
     }
@@ -1316,24 +1320,24 @@ public class JuminIdoRendoTennyuManager {
         広域内転入Entity.setIdoJiyuCode(広住特転入);
         広域内転入Entity.setShichosonCode(nullOrEntity(処理対象者.getGenLasdecCode()));
         広域内転入Entity.setShikibetsuCode(nullOrEntity(処理対象者.getShikibetsuCode()));
-        広域内転入Entity.setShikakuShutokuJiyuCode(daichoEntity.getShikakuShutokuJiyuCode());
-        広域内転入Entity.setShikakuShutokuYMD(daichoEntity.getShikakuShutokuYMD());
-        広域内転入Entity.setShikakuShutokuTodokedeYMD(daichoEntity.getShikakuShutokuTodokedeYMD());
-        広域内転入Entity.setIchigoShikakuShutokuYMD(daichoEntity.getIchigoShikakuShutokuYMD());
-        広域内転入Entity.setHihokennshaKubunCode(daichoEntity.getHihokennshaKubunCode());
-        広域内転入Entity.setShikakuSoshitsuJiyuCode(daichoEntity.getShikakuSoshitsuJiyuCode());
-        広域内転入Entity.setShikakuSoshitsuYMD(daichoEntity.getShikakuSoshitsuYMD());
-        広域内転入Entity.setShikakuSoshitsuTodokedeYMD(daichoEntity.getShikakuSoshitsuTodokedeYMD());
+        広域内転入Entity.setShikakuShutokuJiyuCode(nullToEmpty(daichoEntity.getShikakuShutokuJiyuCode()));
+        広域内転入Entity.setShikakuShutokuYMD(nullToEmpty(daichoEntity.getShikakuShutokuYMD()));
+        広域内転入Entity.setShikakuShutokuTodokedeYMD(nullToEmpty(daichoEntity.getShikakuShutokuTodokedeYMD()));
+        広域内転入Entity.setIchigoShikakuShutokuYMD(nullToEmpty(daichoEntity.getIchigoShikakuShutokuYMD()));
+        広域内転入Entity.setHihokennshaKubunCode(nullToEmpty(daichoEntity.getHihokennshaKubunCode()));
+        広域内転入Entity.setShikakuSoshitsuJiyuCode(nullToEmpty(daichoEntity.getShikakuSoshitsuJiyuCode()));
+        広域内転入Entity.setShikakuSoshitsuYMD(nullToEmpty(daichoEntity.getShikakuSoshitsuYMD()));
+        広域内転入Entity.setShikakuSoshitsuTodokedeYMD(nullToEmpty(daichoEntity.getShikakuSoshitsuTodokedeYMD()));
         広域内転入Entity.setShikakuHenkoJiyuCode(広住特転入);
-        広域内転入Entity.setShikakuHenkoYMD(処理対象者.getIdoYMD());
-        広域内転入Entity.setShikakuHenkoTodokedeYMD(処理対象者.getTodokedeYMD());
-        広域内転入Entity.setJushochitokureiTekiyoJiyuCode(daichoEntity.getJushochitokureiTekiyoJiyuCode());
-        広域内転入Entity.setJushochitokureiTekiyoYMD(daichoEntity.getJushochitokureiTekiyoYMD());
-        広域内転入Entity.setJushochitokureiTekiyoTodokedeYMD(daichoEntity.getJushochitokureiTekiyoTodokedeYMD());
-        広域内転入Entity.setJushochitokureiKaijoJiyuCode(daichoEntity.getJushochitokureiKaijoJiyuCode());
-        広域内転入Entity.setJushochitokureiKaijoYMD(daichoEntity.getJushochitokureiKaijoYMD());
-        広域内転入Entity.setJushochitokureiKaijoTodokedeYMD(daichoEntity.getJushochitokureiKaijoTodokedeYMD());
-        広域内転入Entity.setJushochiTokureiFlag(daichoEntity.getJushochiTokureiFlag());
+        広域内転入Entity.setShikakuHenkoYMD(nullToEmpty(処理対象者.getIdoYMD()));
+        広域内転入Entity.setShikakuHenkoTodokedeYMD(nullToEmpty(処理対象者.getTodokedeYMD()));
+        広域内転入Entity.setJushochitokureiTekiyoJiyuCode(nullToEmpty(daichoEntity.getJushochitokureiTekiyoJiyuCode()));
+        広域内転入Entity.setJushochitokureiTekiyoYMD(nullToEmpty(daichoEntity.getJushochitokureiTekiyoYMD()));
+        広域内転入Entity.setJushochitokureiTekiyoTodokedeYMD(nullToEmpty(daichoEntity.getJushochitokureiTekiyoTodokedeYMD()));
+        広域内転入Entity.setJushochitokureiKaijoJiyuCode(nullToEmpty(daichoEntity.getJushochitokureiKaijoJiyuCode()));
+        広域内転入Entity.setJushochitokureiKaijoYMD(nullToEmpty(daichoEntity.getJushochitokureiKaijoYMD()));
+        広域内転入Entity.setJushochitokureiKaijoTodokedeYMD(nullToEmpty(daichoEntity.getJushochitokureiKaijoTodokedeYMD()));
+        広域内転入Entity.setJushochiTokureiFlag(nullToEmpty(daichoEntity.getJushochiTokureiFlag()));
         広域内転入Entity.setKoikinaiJushochiTokureiFlag(new RString("0"));
         広域内転入Entity.setKoikinaiTokureiSochimotoShichosonCode(LasdecCode.EMPTY);
         広域内転入Entity.setKyuShichosonCode(get旧市町村コード取得(処理対象者, 識別対象被保険者台帳データ, 到達日クラス, 措置元再転入判定));
@@ -1356,24 +1360,24 @@ public class JuminIdoRendoTennyuManager {
         措置元再転入Entity.setShikibetsuCode(nullOrEntity(処理対象者.getShikibetsuCode()));
         措置元再転入Entity.setShikakuShutokuJiyuCode(daichoEntity.getShikakuShutokuJiyuCode());
         措置元再転入Entity.setShikakuShutokuYMD(daichoEntity.getShikakuShutokuYMD());
-        措置元再転入Entity.setShikakuShutokuTodokedeYMD(daichoEntity.getShikakuShutokuTodokedeYMD());
-        措置元再転入Entity.setIchigoShikakuShutokuYMD(daichoEntity.getIchigoShikakuShutokuYMD());
-        措置元再転入Entity.setHihokennshaKubunCode(daichoEntity.getHihokennshaKubunCode());
-        措置元再転入Entity.setShikakuSoshitsuJiyuCode(daichoEntity.getShikakuSoshitsuJiyuCode());
-        措置元再転入Entity.setShikakuSoshitsuYMD(daichoEntity.getShikakuSoshitsuYMD());
-        措置元再転入Entity.setShikakuSoshitsuTodokedeYMD(daichoEntity.getShikakuSoshitsuTodokedeYMD());
+        措置元再転入Entity.setShikakuShutokuTodokedeYMD(nullToEmpty(daichoEntity.getShikakuShutokuTodokedeYMD()));
+        措置元再転入Entity.setIchigoShikakuShutokuYMD(nullToEmpty(daichoEntity.getIchigoShikakuShutokuYMD()));
+        措置元再転入Entity.setHihokennshaKubunCode(nullToEmpty(daichoEntity.getHihokennshaKubunCode()));
+        措置元再転入Entity.setShikakuSoshitsuJiyuCode(nullToEmpty(daichoEntity.getShikakuSoshitsuJiyuCode()));
+        措置元再転入Entity.setShikakuSoshitsuYMD(nullToEmpty(daichoEntity.getShikakuSoshitsuYMD()));
+        措置元再転入Entity.setShikakuSoshitsuTodokedeYMD(nullToEmpty(daichoEntity.getShikakuSoshitsuTodokedeYMD()));
         措置元再転入Entity.setShikakuHenkoJiyuCode(広域内転居);
-        措置元再転入Entity.setShikakuHenkoYMD(処理対象者.getIdoYMD());
-        措置元再転入Entity.setShikakuHenkoTodokedeYMD(処理対象者.getTodokedeYMD());
-        措置元再転入Entity.setJushochitokureiTekiyoJiyuCode(daichoEntity.getJushochitokureiTekiyoJiyuCode());
-        措置元再転入Entity.setJushochitokureiTekiyoYMD(daichoEntity.getJushochitokureiTekiyoYMD());
-        措置元再転入Entity.setJushochitokureiTekiyoTodokedeYMD(daichoEntity.getJushochitokureiTekiyoTodokedeYMD());
-        措置元再転入Entity.setJushochitokureiKaijoJiyuCode(daichoEntity.getJushochitokureiKaijoJiyuCode());
-        措置元再転入Entity.setJushochitokureiKaijoYMD(daichoEntity.getJushochitokureiKaijoYMD());
-        措置元再転入Entity.setJushochitokureiKaijoTodokedeYMD(daichoEntity.getJushochitokureiKaijoTodokedeYMD());
-        措置元再転入Entity.setJushochiTokureiFlag(daichoEntity.getJushochiTokureiFlag());
-        措置元再転入Entity.setKoikinaiJushochiTokureiFlag(daichoEntity.getKoikinaiJushochiTokureiFlag());
-        措置元再転入Entity.setKoikinaiTokureiSochimotoShichosonCode(daichoEntity.getKoikinaiTokureiSochimotoShichosonCode());
+        措置元再転入Entity.setShikakuHenkoYMD(nullToEmpty(処理対象者.getIdoYMD()));
+        措置元再転入Entity.setShikakuHenkoTodokedeYMD(nullToEmpty(処理対象者.getTodokedeYMD()));
+        措置元再転入Entity.setJushochitokureiTekiyoJiyuCode(nullToEmpty(daichoEntity.getJushochitokureiTekiyoJiyuCode()));
+        措置元再転入Entity.setJushochitokureiTekiyoYMD(nullToEmpty(daichoEntity.getJushochitokureiTekiyoYMD()));
+        措置元再転入Entity.setJushochitokureiTekiyoTodokedeYMD(nullToEmpty(daichoEntity.getJushochitokureiTekiyoTodokedeYMD()));
+        措置元再転入Entity.setJushochitokureiKaijoJiyuCode(nullToEmpty(daichoEntity.getJushochitokureiKaijoJiyuCode()));
+        措置元再転入Entity.setJushochitokureiKaijoYMD(nullToEmpty(daichoEntity.getJushochitokureiKaijoYMD()));
+        措置元再転入Entity.setJushochitokureiKaijoTodokedeYMD(nullToEmpty(daichoEntity.getJushochitokureiKaijoTodokedeYMD()));
+        措置元再転入Entity.setJushochiTokureiFlag(nullToEmpty(daichoEntity.getJushochiTokureiFlag()));
+        措置元再転入Entity.setKoikinaiJushochiTokureiFlag(nullToEmpty(daichoEntity.getKoikinaiJushochiTokureiFlag()));
+        措置元再転入Entity.setKoikinaiTokureiSochimotoShichosonCode(nullToEmpty(daichoEntity.getKoikinaiTokureiSochimotoShichosonCode()));
         措置元再転入Entity.setKyuShichosonCode(get旧市町村コード取得(処理対象者, 識別対象被保険者台帳データ, 到達日クラス, 措置元再転入判定));
         措置元再転入Entity.setLogicalDeletedFlag(false);
         return 措置元再転入Entity;
@@ -1386,6 +1390,20 @@ public class JuminIdoRendoTennyuManager {
             return FlexibleDate.EMPTY;
         }
         return date;
+    }
+
+    private RString nullToEmpty(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return RString.EMPTY;
+        }
+        return value;
+    }
+
+    private LasdecCode nullToEmpty(LasdecCode value) {
+        if (value == null) {
+            return LasdecCode.EMPTY;
+        }
+        return value;
     }
 
     private DbT1001HihokenshaDaichoEntity get１号年齢到達(
@@ -1401,26 +1419,26 @@ public class JuminIdoRendoTennyuManager {
         年齢到達Entity.setIdoJiyuCode(号到達_1);
         年齢到達Entity.setShichosonCode(nullOrEntity(処理対象者.getGenLasdecCode()));
         年齢到達Entity.setShikibetsuCode(nullOrEntity(処理対象者.getShikibetsuCode()));
-        年齢到達Entity.setShikakuShutokuJiyuCode(daichoEntity.getShikakuShutokuJiyuCode());
-        年齢到達Entity.setShikakuShutokuYMD(daichoEntity.getShikakuShutokuYMD());
-        年齢到達Entity.setShikakuShutokuTodokedeYMD(daichoEntity.getShikakuShutokuTodokedeYMD());
-        年齢到達Entity.setIchigoShikakuShutokuYMD(到達日クラス.get号年齢到達日_1());
-        年齢到達Entity.setHihokennshaKubunCode(daichoEntity.getHihokennshaKubunCode());
-        年齢到達Entity.setShikakuSoshitsuJiyuCode(daichoEntity.getShikakuSoshitsuJiyuCode());
-        年齢到達Entity.setShikakuSoshitsuYMD(daichoEntity.getShikakuSoshitsuYMD());
-        年齢到達Entity.setShikakuSoshitsuTodokedeYMD(daichoEntity.getShikakuSoshitsuTodokedeYMD());
+        年齢到達Entity.setShikakuShutokuJiyuCode(nullToEmpty(daichoEntity.getShikakuShutokuJiyuCode()));
+        年齢到達Entity.setShikakuShutokuYMD(nullToEmpty(daichoEntity.getShikakuShutokuYMD()));
+        年齢到達Entity.setShikakuShutokuTodokedeYMD(nullToEmpty(daichoEntity.getShikakuShutokuTodokedeYMD()));
+        年齢到達Entity.setIchigoShikakuShutokuYMD(nullToEmpty(到達日クラス.get号年齢到達日_1()));
+        年齢到達Entity.setHihokennshaKubunCode(nullToEmpty(daichoEntity.getHihokennshaKubunCode()));
+        年齢到達Entity.setShikakuSoshitsuJiyuCode(nullToEmpty(daichoEntity.getShikakuSoshitsuJiyuCode()));
+        年齢到達Entity.setShikakuSoshitsuYMD(nullToEmpty(daichoEntity.getShikakuSoshitsuYMD()));
+        年齢到達Entity.setShikakuSoshitsuTodokedeYMD(nullToEmpty(daichoEntity.getShikakuSoshitsuTodokedeYMD()));
         年齢到達Entity.setShikakuHenkoJiyuCode(号到達_1);
-        年齢到達Entity.setShikakuHenkoYMD(処理対象者.getIdoYMD());
-        年齢到達Entity.setShikakuHenkoTodokedeYMD(処理対象者.getTodokedeYMD());
-        年齢到達Entity.setJushochitokureiTekiyoJiyuCode(daichoEntity.getJushochitokureiTekiyoJiyuCode());
-        年齢到達Entity.setJushochitokureiTekiyoYMD(daichoEntity.getJushochitokureiTekiyoYMD());
-        年齢到達Entity.setJushochitokureiTekiyoTodokedeYMD(daichoEntity.getJushochitokureiTekiyoTodokedeYMD());
-        年齢到達Entity.setJushochitokureiKaijoJiyuCode(daichoEntity.getJushochitokureiKaijoJiyuCode());
-        年齢到達Entity.setJushochitokureiKaijoYMD(daichoEntity.getJushochitokureiKaijoYMD());
-        年齢到達Entity.setJushochitokureiKaijoTodokedeYMD(daichoEntity.getJushochitokureiKaijoTodokedeYMD());
-        年齢到達Entity.setJushochiTokureiFlag(daichoEntity.getJushochiTokureiFlag());
-        年齢到達Entity.setKoikinaiJushochiTokureiFlag(daichoEntity.getKoikinaiJushochiTokureiFlag());
-        年齢到達Entity.setKoikinaiTokureiSochimotoShichosonCode(daichoEntity.getKoikinaiTokureiSochimotoShichosonCode());
+        年齢到達Entity.setShikakuHenkoYMD(nullToEmpty(処理対象者.getIdoYMD()));
+        年齢到達Entity.setShikakuHenkoTodokedeYMD(nullToEmpty(処理対象者.getTodokedeYMD()));
+        年齢到達Entity.setJushochitokureiTekiyoJiyuCode(nullToEmpty(daichoEntity.getJushochitokureiTekiyoJiyuCode()));
+        年齢到達Entity.setJushochitokureiTekiyoYMD(nullToEmpty(daichoEntity.getJushochitokureiTekiyoYMD()));
+        年齢到達Entity.setJushochitokureiTekiyoTodokedeYMD(nullToEmpty(daichoEntity.getJushochitokureiTekiyoTodokedeYMD()));
+        年齢到達Entity.setJushochitokureiKaijoJiyuCode(nullToEmpty(daichoEntity.getJushochitokureiKaijoJiyuCode()));
+        年齢到達Entity.setJushochitokureiKaijoYMD(nullToEmpty(daichoEntity.getJushochitokureiKaijoYMD()));
+        年齢到達Entity.setJushochitokureiKaijoTodokedeYMD(nullToEmpty(daichoEntity.getJushochitokureiKaijoTodokedeYMD()));
+        年齢到達Entity.setJushochiTokureiFlag(nullToEmpty(daichoEntity.getJushochiTokureiFlag()));
+        年齢到達Entity.setKoikinaiJushochiTokureiFlag(nullToEmpty(daichoEntity.getKoikinaiJushochiTokureiFlag()));
+        年齢到達Entity.setKoikinaiTokureiSochimotoShichosonCode(nullToEmpty(daichoEntity.getKoikinaiTokureiSochimotoShichosonCode()));
         年齢到達Entity.setKyuShichosonCode(get旧市町村コード取得(処理対象者, 識別対象被保険者台帳データ, 到達日クラス, 措置元再転入判定));
         年齢到達Entity.setLogicalDeletedFlag(false);
         return 年齢到達Entity;
