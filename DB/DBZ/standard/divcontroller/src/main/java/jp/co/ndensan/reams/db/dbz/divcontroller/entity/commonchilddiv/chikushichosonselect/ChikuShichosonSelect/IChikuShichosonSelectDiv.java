@@ -37,4 +37,6 @@ public interface IChikuShichosonSelectDiv extends ICommonChildDivBaseProperties 
     void set旧市町村コード(RString 旧市町村コード);
 
     void initialize(Code 導入形態コード);
+
+    void onChange_選択対象DDL();
 }
