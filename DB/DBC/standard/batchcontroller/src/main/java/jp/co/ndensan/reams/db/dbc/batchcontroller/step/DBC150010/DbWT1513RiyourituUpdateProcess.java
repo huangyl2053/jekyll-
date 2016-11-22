@@ -60,7 +60,7 @@ public class DbWT1513RiyourituUpdateProcess extends BatchProcessBase<DbWT1513Riy
         Decimal 単位数Del = new Decimal(単位数.toString());
         if (1 <= 単位数Del.intValue()) {
             Decimal 限度額Del = new Decimal(限度額.toString());
-            return DecimalFormatter.toRString(単位数Del.divide(数字_100).multiply(限度額Del), ZERO);
+            return DecimalFormatter.toRString(単位数Del.divide(限度額Del).multiply(数字_100), ZERO);
         } else if (RiyojokyoTokeihyo_ServiceKubun.在宅.getコード().equals(サービス区分)
                 || RiyojokyoTokeihyo_ServiceKubun.混在.getコード().equals(サービス区分)) {
             return new RString("000");
