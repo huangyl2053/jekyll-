@@ -48,7 +48,7 @@
 </select>
 
 <select resultOrdered="true" id="select基準収入額適用管理マスタ"
-         resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity"
+         resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.taishosetaiinido.KijunShunyugakuTekiyoKanriEntity"
          parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.taishosetaiinido.TaishoSetaiinIdoMybatisParameter">
     SELECT 
         C."insertDantaiCd",
@@ -79,10 +79,12 @@
         C."setaiinSoShunyugaku",
         C."setainushiFlag",
         C."kazeiShotokugaku",
-        C."kazeiShotokugakuKojogo"
+        C."kazeiShotokugakuKojogo",
+        C."shikibetsuCode"
     FROM
         (SELECT A.*,
-               B."shotaiCode" AS 世帯コード
+               B."shotaiCode" AS 世帯コード,
+               B."shikibetsuCode"
         FROM rgdb."DbT3116KijunShunyugakuTekiyoKanri" AS A
         LEFT OUTER JOIN "TaishoSetaiin"  AS B
             ON B."shotaiCode" = A."setaiCode"

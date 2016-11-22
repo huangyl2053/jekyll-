@@ -16,6 +16,7 @@ public class KijunShunyugakuTekiyoShinseishoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     public static final String ITEM_HIHOKENSHANO1 = "hihokenshaNo1";
+    public static final int MAXLENTH = 36;
     @ReportItem(name = "shinsenSakiDaihyo", length = 37, order = 1)
     public RString shinsenSakiDaihyo;
     @ReportItem(name = "hihokenshaKanaName1", order = 2)
@@ -50,7 +51,7 @@ public class KijunShunyugakuTekiyoShinseishoSource implements IReportSource {
     public RString hihokenshaBirthYMD3;
     @ReportItem(name = "pagecnt", length = 9, order = 17)
     public RString pagecnt;
-    @ReportItem(name = "jusho1", length = 36, order = 18)
+    @ReportItem(name = "jusho1", length = MAXLENTH, order = 18)
     public RString jusho1;
     @ReportItem(name = "jusho2", length = 20, order = 19)
     public RString jusho2;
