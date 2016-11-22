@@ -103,8 +103,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTai
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt001FindIdoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.kinyukikan.KinyuKikanEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt001FindIdoFunctionDac;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -1463,8 +1462,9 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                 RString 住所 = get住所(計算後情報_宛名_口座Entity);
 
                 List<RString> bodyList = new ArrayList<>();
-                UaT0310KozaEntity 口座Entity = 計算後情報_宛名_口座Entity.get口座Entity() == null
-                        ? null : 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity();
+                UaT0310KozaEntity 口座Entity = (計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() != null
+                        && 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0)
+                                ? 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() : null;
                 RString 作成年月日 = 調定日時.getRDateTime().getDate().seireki()
                         .separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
                 RString 作成日時 = 調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
@@ -1505,13 +1505,14 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                 bodyList.add(get表記(月別所得段階リスト.get(ジュウイチ_定値)));
                 bodyList.add(formatDecimal(計算後情報_宛名_口座Entity.get特徴歳出還付額()));
                 bodyList.add(formatDecimal(計算後情報_宛名_口座Entity.get普徴歳出還付額()));
-                List<KinyuKikanEntity> 金融機関EntityList = 計算後情報_宛名_口座Entity.get口座Entity() == null
-                        ? null : 計算後情報_宛名_口座Entity.get口座Entity().getKinyuKikanEntity();
-                if (金融機関EntityList != null && !金融機関EntityList.isEmpty() && 金融機関EntityList.get(ゼロ_定値).get金融機関Entity() != null) {
-                    bodyList.add(金融機関EntityList.get(ゼロ_定値).get金融機関Entity().getName());
+                if (計算後情報_宛名_口座Entity.get口座Entity() != null && 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() != null
+                        && 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0
+                        && 計算後情報_宛名_口座Entity.get口座Entity().getKinyuKikanEntity() != null) {
+                    bodyList.add(計算後情報_宛名_口座Entity.get口座Entity().getKinyuKikanEntity().getName());
                 } else {
                     bodyList.add(空);
                 }
+
                 AtenaKanaMeisho 口座名義人 = 口座Entity == null ? null : 口座Entity.getKozaMeiginin();
                 if (口座名義人 != null && !口座名義人.isEmpty()) {
                     bodyList.add(口座名義人.getColumnValue());
@@ -1698,16 +1699,20 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     }
 
     private RString get口座種類(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity) {
-        KozaRelateEntity releteEntity = 計算後情報_宛名_口座_更正前Entity.get口座Entity();
-        if (releteEntity == null) {
+        TokuteiKozaRelateEntity releteEntity = 計算後情報_宛名_口座_更正前Entity.get口座Entity();
+
+        if (releteEntity != null && releteEntity.getUaT0310KozaEntity() != null
+                && releteEntity.getUaT0310KozaEntity().getKozaId() != 0) {
+            IKoza koza = new Koza(releteEntity);
+            RString 口座種類 = koza.get預金種別().get預金種別略称();
+            if (口座種類 != null && イチ_定値 < 口座種類.length()) {
+                return 口座種類.substring(ゼロ_定値, 二_定値);
+            }
+            return 口座種類;
+        } else {
             return 空;
         }
-        IKoza koza = new Koza(releteEntity);
-        RString 口座種類 = koza.get預金種別().get預金種別略称();
-        if (口座種類 != null && イチ_定値 < 口座種類.length()) {
-            return 口座種類.substring(ゼロ_定値, 二_定値);
-        }
-        return 口座種類;
+
     }
 
     private List<RString> get月別所得段階リスト(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_Entity) {
@@ -1796,7 +1801,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         entity.setChoshuHohoRirekiNo(賦課情報.get徴収方法履歴番号());
         if (!is普徴期別金額あり(賦課情報)) {
             entity.setKozaKubun(KozaKubun.現金納付.getコード());
-        } else if (!賦課計算の情報.get口座().isEmpty()) {
+        } else if (賦課計算の情報.get口座() != null && 賦課計算の情報.get口座().getUaT0310KozaEntity() != null
+                && 賦課計算の情報.get口座().getUaT0310KozaEntity().getKozaId() != 0) {
             entity.setKozaKubun(KozaKubun.口座振替.getコード());
         } else {
             entity.setKozaKubun(KozaKubun.現金納付.getコード());
