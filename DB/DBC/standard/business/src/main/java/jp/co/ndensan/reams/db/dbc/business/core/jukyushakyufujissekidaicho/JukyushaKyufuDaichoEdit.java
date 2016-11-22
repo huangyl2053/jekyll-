@@ -1565,7 +1565,7 @@ public class JukyushaKyufuDaichoEdit {
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
         for (int i = 0; i < 特別療養List.size(); i++) {
             if (0 == i % LIST_SIZE_2) {
-                //TO ヘッダー1未設定
+                個人用帳票データ.setヘッダー1(特別療養List.get(i).get略称());
                 個人用帳票データ.setヘッダー2(new RString("番号").concat("  ").concat("傷病名")
                         .concat("　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　")
                         .concat("再審査").concat(SPACE_3).concat("過誤").concat(SPACE_3).concat(審査年月));
@@ -1578,8 +1578,8 @@ public class JukyushaKyufuDaichoEdit {
                         .concat(new RString(特別療養List.get(i).get過誤回数())).concat("回").concat(SPACE_3)
                         .concat(dateFormat年月(特別療養List.get(i).get審査年月())));
                 個人用帳票データ.set明細2(SPACE_5.concat(特別療養List.get(i).get傷病名()));
-                //TO 明細3の設定不完備
-                個人用帳票データ.set明細3(SPACE_1.concat(特別療養List.get(i).get識別番号()).concat(SPACE_2));
+                個人用帳票データ.set明細3(SPACE_1.concat(特別療養List.get(i).get識別番号()).concat(SPACE_2)
+                        .concat(特別療養List.get(i).getサービス名称()));
                 個人用帳票データ.set明細4(SPACE_4.concat(単位数).concat(SPACE_4).concat(kingakuFormat(特別療養List.get(i).get単位数()))
                         .concat(SPACE_14).concat("【決定後】").concat(SPACE_2).concat(単位数).concat(SPACE_2)
                         .concat(kingakuFormat(特別療養List.get(i).get後単位数())).concat(SPACE_2).concat(摘要));
