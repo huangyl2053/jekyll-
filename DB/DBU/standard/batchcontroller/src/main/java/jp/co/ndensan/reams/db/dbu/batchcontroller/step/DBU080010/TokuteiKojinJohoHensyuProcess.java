@@ -163,7 +163,7 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
                 }
             }
         }
-        for (int i = 項目版管理List.size() - 1; i < 項目版管理List.size(); i--) {
+        for (int i = 項目版管理List.size() - 1; i >= 0; i--) {
             if (TokuteiKojinJohoKomokuKubun.繰返し項目.getコード().equals(項目版管理List.get(i).get特定個人情報項目区分())
                     || TokuteiKojinJohoKomokuKubun.情報HD.getコード().equals(項目版管理List.get(i).get特定個人情報項目区分())) {
                 副本データ.concat(文字列_小なり).concat(文字列_スラッシュ).concat(
@@ -282,8 +282,8 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
     }
 
     private RString get電文ファイル名(RString name) {
-        return Path.getTmpDirectoryPath().concat(name).concat(文字列_連結符).concat(processParameter.get特定個人情報名コード()).
+        return Path.combinePath(Path.getTmpDirectoryPath(), name.concat(文字列_連結符).concat(processParameter.get特定個人情報名コード()).
                 concat(文字列_連結符).concat(送信先システムID).concat(文字列_連結符).concat(processParameter.getデータセット番号()).
-                concat(文字列_連結符).concat(new RString(ファイル連番).padZeroToLeft(桁数_3)).concat(文字列_拡張子);
+                concat(文字列_連結符).concat(new RString(ファイル連番).padZeroToLeft(桁数_3)).concat(文字列_拡張子));
     }
 }
