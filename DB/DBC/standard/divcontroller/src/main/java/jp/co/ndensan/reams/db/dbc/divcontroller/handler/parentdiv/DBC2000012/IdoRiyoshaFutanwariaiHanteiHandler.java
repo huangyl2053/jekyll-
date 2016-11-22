@@ -137,9 +137,9 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
             div.setErrorFlag(DataPassingConverter.serialize(ERRORFLAG_ERROR));
             return;
         }
-        RDateTime 年次処理実施日時 = 年次処理実施日時ShoriDateKanri.get基準日時().getRDateTime();
-        div.getTxtNenjiShoriDate().setValue(年次処理実施日時.getDate());
-        div.getTxtNenjiShoriTime().setValue(年次処理実施日時.getTime());
+        RDateTime 年次処理日時 = 年次処理実施日時ShoriDateKanri.get基準日時().getRDateTime();
+        div.getTxtNenjiShoriDate().setValue(年次処理日時.getDate());
+        div.getTxtNenjiShoriTime().setValue(年次処理日時.getTime());
         ShoriDateKanri 異動分処理実施日時ShoriDateKanri = MANAGER
                 .get異動の実施日時(new FlexibleYear(div.getDdlNendo().getSelectedKey()));
         if (異動分処理実施日時ShoriDateKanri != null) {

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020080;
 
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080_JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.DBC020080_JigyobunKogakuGassanJikofutangakuKeisanProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.DBC020080JigyobunKogakuGassanJikofutangakuKeisanProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -38,8 +38,8 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateK
     private static final RString 年度内連番_0001 = new RString("0001");
     private static final int NUM_4 = 4;
     private static final int NUM_1 = 1;
-    private DBC020080_JigyobunKogakuGassanJikofutangakuKeisanProcessParameter parameter;
-    private DBC020080_JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter param;
+    private DBC020080JigyobunKogakuGassanJikofutangakuKeisanProcessParameter parameter;
+    private DBC020080JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter param;
     private boolean updateFlag;
     @BatchWriter
     private IBatchTableWriter<DbT7022ShoriDateKanriEntity> tableWriter;
@@ -49,7 +49,7 @@ public class UpdShoriDateKanriProcess extends BatchProcessBase<DbT7022ShoriDateK
     protected void initialize() {
         市町村コード = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         updateFlag = false;
-        param = new DBC020080_JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter();
+        param = new DBC020080JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter();
         param.setサブ業務コード(SubGyomuCode.DBC介護給付);
         param.set処理名(ShoriName.事業分自己負担額計算.get名称());
         param.set処理枝番(処理枝番_0000);
