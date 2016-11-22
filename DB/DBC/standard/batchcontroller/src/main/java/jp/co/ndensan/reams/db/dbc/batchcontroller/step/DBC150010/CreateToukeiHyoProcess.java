@@ -79,7 +79,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
 
     @Override
     protected void initialize() {
-        service = new RiyoJokyoTokeihyoMeisaiListSakuseiService();
+        service = RiyoJokyoTokeihyoMeisaiListSakuseiService.createInstance();
         利用実人員集計用MAP = new HashMap<>();
         y軸の添え字 = RString.EMPTY;
         利用状況統計表集計結果Map = new TreeMap<>();
@@ -91,11 +91,14 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
 
     @Override
     protected IBatchReader createReader() {
-        service = RiyoJokyoTokeihyoMeisaiListSakuseiService.createInstance();
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toCreateRiyojokyoMybatisParameter());
+    }
+
+    @Override
+    protected void createWriter() {
         利用状況統計表ReportWriter = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBC.DBC300005.getReportId().value(), SubGyomuCode.DBC介護給付).create();
         利用状況統計表SourceWriter = new ReportSourceWriter<>(利用状況統計表ReportWriter);
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toCreateRiyojokyoMybatisParameter());
     }
 
     @Override

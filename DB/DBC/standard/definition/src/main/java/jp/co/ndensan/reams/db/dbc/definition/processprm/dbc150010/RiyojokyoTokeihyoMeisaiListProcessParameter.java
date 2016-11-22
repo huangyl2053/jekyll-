@@ -36,8 +36,8 @@ public class RiyojokyoTokeihyoMeisaiListProcessParameter implements IBatchProces
     private static final RString 地区指定_行政区 = new RString("2");
     private static final RString 地区指定_地区1 = new RString("3");
     private static final RString 地区指定_地区2 = new RString("4");
-    private static final RString 地区指定_地区3 = new RString("4");
-    private static final RString 居宅利用率_指定 = new RString("1");
+    private static final RString 地区指定_地区3 = new RString("5");
+    private static final RString 利用率_指定 = new RString("1");
     private RString 対象年月;
     private FlexibleYearMonth 開始年月;
     private FlexibleYearMonth 終了年月;
@@ -103,22 +103,26 @@ public class RiyojokyoTokeihyoMeisaiListProcessParameter implements IBatchProces
     public CreateRiyojokyoMybatisParameter toCreateRiyojokyoMybatisParameter() {
         boolean has市町村コード = false;
         boolean has旧市町村コード = false;
+        boolean has町域 = !選択地区リスト.isEmpty() && 地区指定_町域.equals(地区指定);
         boolean has行政区 = false;
         boolean has地区1 = false;
         boolean has地区2 = false;
         boolean has地区3 = false;
         boolean is集計 = false;
         boolean is明細 = false;
-        if (地区指定_行政区.equals(地区指定)) {
+        boolean has居宅利用率 = 利用率_指定.equals(居宅利用率指定);
+        boolean has訪問利用率 = 利用率_指定.equals(訪問利用率指定);
+
+        if (!選択地区リスト.isEmpty() && 地区指定_行政区.equals(地区指定)) {
             has行政区 = true;
         }
-        if (地区指定_地区1.equals(地区指定)) {
+        if (!選択地区リスト.isEmpty() && 地区指定_地区1.equals(地区指定)) {
             has地区1 = true;
         }
-        if (地区指定_地区2.equals(地区指定)) {
+        if (!選択地区リスト.isEmpty() && 地区指定_地区2.equals(地区指定)) {
             has地区2 = true;
         }
-        if (地区指定_地区3.equals(地区指定)) {
+        if (!選択地区リスト.isEmpty() && 地区指定_地区3.equals(地区指定)) {
             has地区3 = true;
         }
         if ((RString.isNullOrEmpty(市町村コード) && !RString.isNullOrEmpty(旧市町村コード) && !全て指定.equals(旧市町村コード))
@@ -141,8 +145,8 @@ public class RiyojokyoTokeihyoMeisaiListProcessParameter implements IBatchProces
             地区リスト.add(地区);
         }
         return new CreateRiyojokyoMybatisParameter(居宅利用率指定, 開始居宅利用率, 終了居宅利用率, 訪問利用率指定, 終了訪問利用率,
-                開始訪問利用率, 市町村コード, 旧市町村コード, 地区指定, 地区リスト, !居宅利用率_指定.equals(居宅利用率指定),
-                居宅利用率_指定.equals(居宅利用率指定), has市町村コード, has旧市町村コード,
-                地区指定_町域.equals(訪問利用率指定), has行政区, has地区1, has地区2, has地区3, is集計, is明細, false, false, 利用実績区分);
+                開始訪問利用率, 市町村コード, 旧市町村コード, 地区指定, 地区リスト, has訪問利用率,
+                has居宅利用率, has市町村コード, has旧市町村コード,
+                has町域, has行政区, has地区1, has地区2, has地区3, is集計, is明細, false, false, 利用実績区分);
     }
 }
