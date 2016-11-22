@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
@@ -100,7 +99,7 @@ public class KogakuFurikomiProcess extends BatchProcessBase<GdaekomiDetaiResultE
         data.setGyoseikuCode(GyoseikuCode.EMPTY);
         data.setGyoseikuMei(RString.EMPTY);
         data.setYubinNo(YubinNo.EMPTY);
-        data.setJusho(AtenaJusho.EMPTY);
+        data.setJusho(RString.EMPTY);
         data.setShichosonCode(LasdecCode.EMPTY);
         if (TWO.equals(parameter.get支払方法().getコード())) {
             data.setKozaDataFlag(true);

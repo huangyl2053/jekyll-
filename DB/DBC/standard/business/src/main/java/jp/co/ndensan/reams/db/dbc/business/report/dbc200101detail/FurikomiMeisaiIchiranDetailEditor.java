@@ -273,10 +273,10 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     private void set様式連番_1のLower帳票データ(FurikomiMeisaiIchiranDetailReportSource source) {
         FurikomiDetailTempTableEntity 振込明細一時Data = 一覧表用データ.get振込明細一時TBL();
         if (振込明細一時Data.getJusho() != null) {
-            if (振込明細一時Data.getJusho().value().length() <= LISTINDEX_20) {
-                source.listLower_1 = 振込明細一時Data.getJusho().value();
+            if (振込明細一時Data.getJusho().length() <= LISTINDEX_20) {
+                source.listLower_1 = 振込明細一時Data.getJusho();
             } else {
-                source.listLower_1 = 振込明細一時Data.getJusho().value().substring(0, LISTINDEX_20);
+                source.listLower_1 = 振込明細一時Data.getJusho().substring(0, LISTINDEX_20);
             }
             set様式連番_1のLower支払方法_口座以外情報(source, 振込明細一時Data);
 
