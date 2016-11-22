@@ -146,8 +146,8 @@ public class HanyoListSaishinsaKekkaResult {
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
-            eucEntity.set行政区コード(iKojin.get行政区画().getChugakkoku().getコード());
-            eucEntity.set行政区名(iKojin.get行政区画().getChugakkoku().get名称());
+            eucEntity.set行政区コード(iKojin.get行政区画().getGyoseiku().getコード());
+            eucEntity.set行政区名(iKojin.get行政区画().getGyoseiku().get名称());
             eucEntity.set地区１(iKojin.get行政区画().getChiku1().getコード());
             eucEntity.set地区２(iKojin.get行政区画().getChiku2().getコード());
             eucEntity.set地区３(iKojin.get行政区画().getChiku3().getコード());
@@ -262,8 +262,8 @@ public class HanyoListSaishinsaKekkaResult {
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
-            eucEntity.set行政区コード(iKojin.get行政区画().getChugakkoku().getコード());
-            eucEntity.set行政区名(iKojin.get行政区画().getChugakkoku().get名称());
+            eucEntity.set行政区コード(iKojin.get行政区画().getGyoseiku().getコード());
+            eucEntity.set行政区名(iKojin.get行政区画().getGyoseiku().get名称());
             eucEntity.set地区１(iKojin.get行政区画().getChiku1().getコード());
             eucEntity.set地区２(iKojin.get行政区画().getChiku2().getコード());
             eucEntity.set地区３(iKojin.get行政区画().getChiku3().getコード());
