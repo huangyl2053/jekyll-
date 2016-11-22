@@ -123,6 +123,9 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
 
     @Override
     protected void process(TyukannJigyoKogakuRelateEntity entity) {
+        if (isデータ不整合(entity)) {
+            return;
+        }
         RString 被保険者番号 = getColumnValue(entity.get給付実績中間事業高額Entity().getHiHokenshaNo());
         RString サービス提供年月 = entity.get給付実績中間事業高額Entity().getServiceTeikyoYM() != null
                 ? entity.get給付実績中間事業高額Entity().getServiceTeikyoYM().toDateString() : RString.EMPTY;
@@ -540,4 +543,10 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         return 高額支給額合計;
     }
 
+    private boolean isデータ不整合(TyukannJigyoKogakuRelateEntity entity) {
+        return null == entity.get事業高額判定結果全件Entity()
+                && (null != entity.get事業高額合計全件Entity()
+                || null != entity.get事業高額申請全件Entity()
+                || null != entity.get事業審査決定全件Entity());
+    }
 }

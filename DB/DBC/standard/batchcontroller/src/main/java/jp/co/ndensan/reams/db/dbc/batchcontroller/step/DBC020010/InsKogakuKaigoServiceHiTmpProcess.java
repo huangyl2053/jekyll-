@@ -122,7 +122,9 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
 
     @Override
     protected void process(TyukannKogakuRelateEntity entity) {
-
+        if (isデータ不整合(entity)) {
+            return;
+        }
         RString 被保険者番号 = getColumnValue(entity.get給付実績中間高額Entity().getHiHokenshaNo());
         RString サービス提供年月 = entity.get給付実績中間高額Entity().getServiceTeikyoYM() != null
                 ? entity.get給付実績中間高額Entity().getServiceTeikyoYM().toDateString() : RString.EMPTY;
@@ -536,5 +538,12 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
                 add(結果Entity.get高額合計全件Entity().getKogakuShikyuGaku() == null
                         ? Decimal.ZERO : 結果Entity.get高額合計全件Entity().getKogakuShikyuGaku());
         return 高額支給額合計;
+    }
+
+    private boolean isデータ不整合(TyukannKogakuRelateEntity entity) {
+        return null == entity.get高額判定結果全件Entity()
+                && (null != entity.get高額合計全件Entity()
+                || null != entity.get高額申請全件Entity()
+                || null != entity.get高額審査決定全件Entity());
     }
 }
