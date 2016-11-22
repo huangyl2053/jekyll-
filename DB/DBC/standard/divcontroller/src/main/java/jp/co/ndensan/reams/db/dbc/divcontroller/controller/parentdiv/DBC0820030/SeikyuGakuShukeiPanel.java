@@ -108,7 +108,7 @@ public class SeikyuGakuShukeiPanel {
         List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
         DbJohoViewState 一覧情報リスト = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        ArrayList<ShokanShukeiResult> entityList = new ArrayList<>();
+        ArrayList<ShokanShukeiResult> entityList;
         if (!一覧情報リスト.get償還払請求集計データList().isEmpty()) {
             entityList = 一覧情報リスト.get償還払請求集計データList();
         } else {
@@ -121,6 +121,8 @@ public class SeikyuGakuShukeiPanel {
                     明細番号, null);
             if (entityList != null) {
                 一覧情報リスト.set償還払請求集計データList(entityList);
+            } else {
+                entityList = new ArrayList<>();
             }
             ViewStateHolder.put(ViewStateKeys.請求額集計一覧情報, entityList);
         }
