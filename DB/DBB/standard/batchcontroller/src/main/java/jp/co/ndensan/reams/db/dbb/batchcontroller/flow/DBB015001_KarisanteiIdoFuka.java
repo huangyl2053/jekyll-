@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.CaluculateFukaS
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.CaluculateFukaShikakuSoshitsuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.CaluculateFukaTokuchoTeishiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.CaluculateIraiKinTokuchoHatiKaishiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.DeleteCaxTempTableProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.DeleteTempTableProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.HatiGatuTokuchoKaishiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.IdoFukaKeisanProcess;
@@ -82,6 +83,8 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
     private static final String 八月特徴開始 = "hatiGatuTokuchoKaishi";
     private static final String 仮算定異動通知書一括発行 = "karisanteiIdoTsuchishoIkkatsuHakko";
 
+    private static final String テーブルの削除 = "deleteCaxTempTable";
+
     private static final ReportId 仮算定異動一括結果一覧表ID = new ReportId("DBB200013_KarisanteiIdoKekkaIchiran");
     private static final ReportId 別徴収依頼金額明細一覧表ID = new ReportId("DBB200023_TokubetsuChoshuIraikingakuMeisaiIchiran");
 
@@ -89,6 +92,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
 
     @Override
     protected void defineFlow() {
+
         executeStep(システム日時の取得);
         createKarisanteiIdoKekkaProcessParameter();
         parameter.set調定日時(getResult(YMDHMS.class,
@@ -111,17 +115,22 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
             executeStep(賦課計算_資格喪失);
             executeStep(賦課の情報登録フロー);
             executeStep(一時テーブルの削除);
+            executeStep(テーブルの削除);
+
             executeStep(賦課計算_特別徴収停止);
             executeStep(賦課の情報登録フロー);
             executeStep(一時テーブルの削除);
+            executeStep(テーブルの削除);
 
             executeStep(賦課計算_資格取得);
             executeStep(賦課の情報登録フロー);
             executeStep(一時テーブルの削除);
+            executeStep(テーブルの削除);
 
             executeStep(賦課計算_口座異動のみ反映);
             executeStep(賦課の情報登録フロー);
             executeStep(一時テーブルの削除);
+            executeStep(テーブルの削除);
         }
         executeStep(依頼金額計算区分);
         RString 依頼金計算処理区分 = getResult(RString.class,
@@ -152,11 +161,21 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
     }
 
     /**
+     * Caxテーブルの削除を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step (テーブルの削除)
+    protected IBatchFlowCommand deleteCaxTempTable() {
+        return simpleBatch(DeleteCaxTempTableProcess.class).define();
+    }
+
+    /**
      * システム日時の取得を行います。
      *
      * @return バッチコマンド
      */
-    @Step(システム日時の取得)
+    @Step (システム日時の取得)
     protected IBatchFlowCommand getSystemDate() {
         return simpleBatch(SystemTimeShutokuProcess.class).define();
     }
@@ -166,7 +185,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(一時テーブルの削除)
+    @Step (一時テーブルの削除)
     protected IBatchFlowCommand deleteTempTable() {
         return simpleBatch(DeleteTempTableProcess.class).define();
     }
@@ -176,7 +195,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(資格異動者抽出)
+    @Step (資格異動者抽出)
     protected IBatchFlowCommand getShikakuIdosha() {
         return simpleBatch(ShikakuIdoshaChushutsuProcess.class).arguments(parameter).define();
     }
@@ -186,7 +205,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(特別徴収開始者抽出)
+    @Step (特別徴収開始者抽出)
     protected IBatchFlowCommand getTokuchoKaishishaChushutsu() {
         return simpleBatch(TokuchoKaishishaChushutsuProcess.class).arguments(parameter).define();
     }
@@ -196,7 +215,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(特別徴収停止者抽出)
+    @Step (特別徴収停止者抽出)
     protected IBatchFlowCommand getTokuchoTeishishaChushutsu() {
         return simpleBatch(TokuchoTeishishaChushutsuProcess.class).arguments(parameter).define();
     }
@@ -206,7 +225,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(口座異動者抽出)
+    @Step (口座異動者抽出)
     protected IBatchFlowCommand getKozaIdoshaChushutsu() {
         return simpleBatch(KozaIdoshaChushutsuProcess.class).arguments(parameter).define();
     }
@@ -216,7 +235,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(通知書番号発番)
+    @Step (通知書番号発番)
     protected IBatchFlowCommand getTsuchishoBangoHatuban() {
         return simpleBatch(TsuchishoBangoHatubanProcess.class).arguments(parameter).define();
     }
@@ -226,7 +245,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(世帯員把握)
+    @Step (世帯員把握)
     protected IBatchFlowCommand getSetaiinHaku() {
         return simpleBatch(SetaiinHakuProcess.class).define();
     }
@@ -236,7 +255,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(世帯員把握バッチ)
+    @Step (世帯員把握バッチ)
     protected IBatchFlowCommand callSetaiShotokuKazeiHanteiFlow() {
         return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBB介護賦課,
                 getSetaiShotokuKazeiHanteiBatchParameter()).define();
@@ -247,7 +266,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(賦課計算_資格喪失)
+    @Step (賦課計算_資格喪失)
     protected IBatchFlowCommand caluculateFukaShikakuSoshitsu() {
         return simpleBatch(CaluculateFukaShikakuSoshitsuProcess.class).arguments(parameter).define();
     }
@@ -257,7 +276,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(賦課計算_特別徴収停止)
+    @Step (賦課計算_特別徴収停止)
     protected IBatchFlowCommand caluculateFukaTokuchoTeishi() {
         return simpleBatch(CaluculateFukaTokuchoTeishiProcess.class).arguments(parameter).define();
     }
@@ -267,7 +286,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(賦課計算_資格取得)
+    @Step (賦課計算_資格取得)
     protected IBatchFlowCommand caluculateFukaShikakuShutoku() {
         return simpleBatch(CaluculateFukaShikakuShutokuProcess.class).arguments(parameter).define();
     }
@@ -277,7 +296,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(賦課計算_口座異動のみ反映)
+    @Step (賦課計算_口座異動のみ反映)
     protected IBatchFlowCommand caluculateFukaKozaIdo() {
         return simpleBatch(CaluculateFukaKozaIdoProcess.class).arguments(parameter).define();
     }
@@ -287,7 +306,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(賦課の情報登録フロー)
+    @Step (賦課の情報登録フロー)
     protected IBatchFlowCommand callChoteiToroku() {
         return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
                 new DBB004001_FukaJohoTorokuParameter()).define();
@@ -298,7 +317,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(依頼金額計算区分)
+    @Step (依頼金額計算区分)
     protected IBatchFlowCommand getIraikinKeisanShoriKubun() {
         return simpleBatch(IraikinKeisanShoriKubunProcess.class).arguments(parameter).define();
     }
@@ -308,7 +327,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(依頼金額計算_8月特徴開始)
+    @Step (依頼金額計算_8月特徴開始)
     protected IBatchFlowCommand caluculateIraiKinTokucho8gatuKaishi() {
         return simpleBatch(CaluculateIraiKinTokuchoHatiKaishiProcess.class).arguments(parameter).define();
     }
@@ -318,7 +337,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(計算後情報作成)
+    @Step (計算後情報作成)
     protected IBatchFlowCommand keisangoJohoSakusei() {
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課,
                 getKeisangoJohoSakuseiBatchParamter()).define();
@@ -329,7 +348,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(仮算定異動一括結果一覧表出力)
+    @Step (仮算定異動一括結果一覧表出力)
     protected IBatchFlowCommand spoolKariSanteiIdoKekkaIchiran() {
         return simpleBatch(SpoolKariSanteiIdoKekkaIchiranProcess.class).arguments(parameter).define();
     }
@@ -339,7 +358,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(特別徴収依頼金額明細一覧表出力)
+    @Step (特別徴収依頼金額明細一覧表出力)
     protected IBatchFlowCommand spoolTokuchoKinMeisaiCSV() {
         return loopBatch(SpoolTokuchoKinMeisaiCSVProcess.class).arguments(parameter).define();
     }
@@ -349,7 +368,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(異動賦課計算)
+    @Step (異動賦課計算)
     protected IBatchFlowCommand idoFukaKeisan() {
         return simpleBatch(IdoFukaKeisanProcess.class).arguments(parameter).define();
     }
@@ -359,7 +378,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(八月特徴開始)
+    @Step (八月特徴開始)
     protected IBatchFlowCommand hatiGatuTokuchoKaishi() {
         return simpleBatch(HatiGatuTokuchoKaishiProcess.class).arguments(parameter).define();
     }
@@ -369,7 +388,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
      *
      * @return バッチコマンド
      */
-    @Step(仮算定異動通知書一括発行)
+    @Step (仮算定異動通知書一括発行)
     protected IBatchFlowCommand karisanteiIdoTsuchishoIkkatsuHakko() {
         return otherBatchFlow(仮算定異動通知書一括発行BATCHID, SubGyomuCode.DBB介護賦課,
                 getParameter().toDBB015003_KarisanteiIdoTsuchishoHakkoParameter()).define();

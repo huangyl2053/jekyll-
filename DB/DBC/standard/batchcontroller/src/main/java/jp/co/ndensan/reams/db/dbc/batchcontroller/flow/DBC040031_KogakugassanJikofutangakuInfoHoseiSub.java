@@ -38,12 +38,12 @@ public class DBC040031_KogakugassanJikofutangakuInfoHoseiSub extends BatchFlowBa
     private static final String 実績基本データTO中間DBデータ = "jissekiFutangakuToTyukanDb";
     private static final String 実績基本データ削除 = "clearJissekiFutangakuDataTemp";
     private static final String 中間DBデータTO実績基本データ = "tyukanDbToJissekiFutangaku";
-    private static final String INITJISSEKICHECKPROCESS = "InitJissekiCheckProcess";
-    private static final String INSSHIHARAIHOHOHENKOTEMPBEFOREPROCESS = "InsShiharaihohoHenkoTempBeforeProcess";
-    private static final String INSSHIHARAIHOHOHENKOTEMPPROCESS = "InsShiharaihohoHenkoTempProcess";
-    private static final String UPDSHAFUKUKEIGENTEMPPROCESS = "UpdshafukuKeigenTempProcess";
-    private static final String UPDJISSEKIFUTANGAKUTEMPPROCESS = "UpdJIssekiFutangakuTempProcess";
-    private static final String UPDJISSEKIFUTANGAKUTEMPAFTERPROCESS = "UpdJIssekiFutangakuTempAfterProcess";
+    private static final String INITJISSEKICHECKPROCESS = "initJissekiCheckProcess";
+    private static final String INSSHIHARAIHOHOHENKOPROCESS = "insShiharaihohoHenkoProcess";
+    private static final String INSSHIHARAIHOHOHENKO = "insShiharaihohoHenko";
+    private static final String UPDSHAFUKUKEIGENTEMPPROCESS = "updshafukuKeigenTempProcess";
+    private static final String UPDJISSEKIFUTANGAKUPROCESS = "updJIssekiFutangakuProcess";
+    private static final String UPDJISSEKIFUTANGAKUAFTER = "updJIssekiFutangakuAfter";
 
     @Override
     protected void defineFlow() {
@@ -54,11 +54,11 @@ public class DBC040031_KogakugassanJikofutangakuInfoHoseiSub extends BatchFlowBa
         if (!isデータがあり) {
             return;
         }
-        executeStep(INSSHIHARAIHOHOHENKOTEMPBEFOREPROCESS);
-        executeStep(INSSHIHARAIHOHOHENKOTEMPPROCESS);
+        executeStep(INSSHIHARAIHOHOHENKOPROCESS);
+        executeStep(INSSHIHARAIHOHOHENKO);
         executeStep(UPDSHAFUKUKEIGENTEMPPROCESS);
-        executeStep(UPDJISSEKIFUTANGAKUTEMPPROCESS);
-        executeStep(UPDJISSEKIFUTANGAKUTEMPAFTERPROCESS);
+        executeStep(UPDJISSEKIFUTANGAKUPROCESS);
+        executeStep(UPDJISSEKIFUTANGAKUAFTER);
         executeStep(中間DBデータ削除);
         executeStep(実績基本データTO中間DBデータ);
         executeStep(高額支給額集計処理);
@@ -95,15 +95,15 @@ public class DBC040031_KogakugassanJikofutangakuInfoHoseiSub extends BatchFlowBa
         return simpleBatch(InitJissekiCheckProcess.class).define();
     }
 
-    @Step(INSSHIHARAIHOHOHENKOTEMPBEFOREPROCESS)
-    IBatchFlowCommand insShiharaihohoHenkoTempBeforeProcess() {
+    @Step(INSSHIHARAIHOHOHENKOPROCESS)
+    IBatchFlowCommand insShiharaihohoHenkoProcess() {
         InsShiharaihohoHenkoTempBeforeProcessParameter param
                 = new InsShiharaihohoHenkoTempBeforeProcessParameter(false);
         return loopBatch(InsShiharaihohoHenkoTempBeforeProcess.class).arguments(param).define();
     }
 
-    @Step(INSSHIHARAIHOHOHENKOTEMPPROCESS)
-    IBatchFlowCommand insShiharaihohoHenkoTempProcess() {
+    @Step(INSSHIHARAIHOHOHENKO)
+    IBatchFlowCommand insShiharaihohoHenko() {
         return loopBatch(InsShiharaihohoHenkoTempProcess.class).define();
     }
 
@@ -113,13 +113,13 @@ public class DBC040031_KogakugassanJikofutangakuInfoHoseiSub extends BatchFlowBa
         return loopBatch(UpdshafukuKeigenTempProcess.class).arguments(param).define();
     }
 
-    @Step(UPDJISSEKIFUTANGAKUTEMPPROCESS)
-    IBatchFlowCommand updJIssekiFutangakuTempProcess() {
+    @Step(UPDJISSEKIFUTANGAKUPROCESS)
+    IBatchFlowCommand updJIssekiFutangakuProcess() {
         return loopBatch(UpdJIssekiFutangakuTempProcess.class).define();
     }
 
-    @Step(UPDJISSEKIFUTANGAKUTEMPAFTERPROCESS)
-    IBatchFlowCommand updJIssekiFutangakuTempAfterProcess() {
+    @Step(UPDJISSEKIFUTANGAKUAFTER)
+    IBatchFlowCommand updJIssekiFutangakuAfter() {
         UpdJIssekiFutangakuTempAfterProcessParameter param = new UpdJIssekiFutangakuTempAfterProcessParameter(
                 getParameter().get処理区分(), RDateTime.now());
         return loopBatch(UpdJIssekiFutangakuTempAfterProcess.class).arguments(param).define();

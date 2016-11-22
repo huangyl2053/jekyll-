@@ -75,6 +75,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
     private static final int ORDER_18 = 18;
     private static final int ORDER_19 = 19;
     private static final int ORDER_20 = 20;
+    private static final int ORDER_21 = 21;
     private static final RString STR_2 = new RString("2");
     private static final RString STR_0 = new RString("0");
     private static final RString STR_01 = new RString("01");
@@ -532,6 +533,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.setSoshitsuYMD(new FlexibleDate(受給者台帳Info.get(ORDER_18)));
         entity.setDataKubun(new Code(受給者台帳Info.get(ORDER_19)));
         entity.setKyuSochishaFlag(STR_1.equals(受給者台帳Info.get(ORDER_20)));
+        entity.setToshoNinteiYukoShuryoYMD(new FlexibleDate(受給者台帳Info.get(ORDER_21)));
         return entity;
     }
 
@@ -656,6 +658,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         List<RString> 社福減免Info = 社福減免.split(SPLIT.toString());
         entity.set適用開始日(new FlexibleDate(社福減免Info.get(ORDER_0)));
         entity.set適用終了日(new FlexibleDate(社福減免Info.get(ORDER_1)));
+        entity.set軽減率(社福減免Info.get(ORDER_3));
         entity.set履歴番号(Integer.parseInt(社福減免Info.get(ORDER_4).toString()));
         return entity;
     }
@@ -889,18 +892,15 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             insertEntity.set要介護状態区分コード(要介護状態区分コード.getColumnValue());
         }
         insertEntity.set認定有効期間開始年月日(受給者台帳.getNinteiYukoKikanKaishiYMD());
-        if (後履歴の有効データ != null) {
-            if (コート_4.equals(後履歴の有効データ.getJukyuShinseiJiyu())) {
-                insertEntity.set認定有効期間終了年月日(getRStringDate(受給者台帳.getToshoNinteiYukoShuryoYMD()));
-                insertEntity.set訪問通所サービス上限管理適用期間終了年月日(
-                        getRStringDate(受給者台帳.getToshoNinteiYukoShuryoYMD()));
-            } else {
-                insertEntity.set認定有効期間終了年月日(getRStringDate(受給者台帳.getNinteiYukoKikanKaishiYMD()));
-                insertEntity.set訪問通所サービス上限管理適用期間終了年月日(
-                        getRStringDate(受給者台帳.getShikyuGendoShuryoYMD()));
-            }
+        if (後履歴の有効データ != null && コート_4.equals(後履歴の有効データ.getJukyuShinseiJiyu())) {
+            insertEntity.set認定有効期間終了年月日(getRStringDate(受給者台帳.getToshoNinteiYukoShuryoYMD()));
+            insertEntity.set訪問通所サービス上限管理適用期間終了年月日(
+                    getRStringDate(受給者台帳.getToshoNinteiYukoShuryoYMD()));
+        } else {
+            insertEntity.set認定有効期間終了年月日(getRStringDate(受給者台帳.getNinteiYukoKikanShuryoYMD()));
+            insertEntity.set訪問通所サービス上限管理適用期間終了年月日(
+                    getRStringDate(受給者台帳.getShikyuGendoShuryoYMD()));
         }
-
         insertEntity.set訪問通所サービス支給限度基準額(
                 get支給限度単位数(受給者台帳.getYokaigoJotaiKubunCode(), 異動年月日, 居宅サービス区分支給限度額List));
         insertEntity.set訪問通所サービス上限管理適用期間開始年月日(受給者台帳.getShikyuGendoKaishiYMD());
@@ -1001,9 +1001,24 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         insertEntity.set認定有効期間開始年月日(総合事業対象者.getTekiyoKaishiYMD());
         insertEntity.set訪問通所サービス支給限度基準額(
                 get支給限度単位数(コート_06, 異動年月日, 居宅サービス区分支給限度額List));
-        insertEntity.set訪問通所サービス上限管理適用期間開始年月日(異動年月日);
+        insertEntity.set訪問通所サービス上限管理適用期間開始年月日(get月初(総合事業対象者.getTekiyoKaishiYMD()));
         insertEntity.set短期入所サービス支給限度基準額(0);
         insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    private static FlexibleDate get月初(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return null;
+        }
+        return new FlexibleDate(date.getYearMonth().toDateString().concat(STR_01));
+    }
+
+    private static RString get月末(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return null;
+        }
+        FlexibleYearMonth ym = date.getYearMonth();
+        return date.getYearMonth().toDateString().concat(new RString(ym.getLastDay()));
     }
 
     /**
@@ -1030,7 +1045,8 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         }
         insertEntity.set訪問通所サービス支給限度基準額(
                 get支給限度単位数(コート_06, 異動年月日, 居宅サービス区分支給限度額List));
-        insertEntity.set訪問通所サービス上限管理適用期間開始年月日(異動年月日);
+        insertEntity.set訪問通所サービス上限管理適用期間開始年月日(get月初(総合事業対象者.getTekiyoKaishiYMD()));
+        insertEntity.set訪問通所サービス上限管理適用期間終了年月日(get月末(総合事業対象者.getTekiyoShuryoYMD()));
         insertEntity.set短期入所サービス支給限度基準額(0);
         insertEntity.setエラーフラグ(エラーなし);
     }
@@ -1164,6 +1180,83 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         insertEntity.set居宅介護支援事業所番号(居宅計画.get計画事業者番号().getColumnValue());
         insertEntity.set居宅サービス計画適用開始年月日(new RString(居宅計画.get適用開始日().toString()));
         insertEntity.set居宅サービス計画適用終了年月日(new RString(居宅計画.get適用終了日().toString()));
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
+     * 異動一時2By二次予防パターン1設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 二次予防 DbT3100NijiYoboJigyoTaishoshaEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By二次予防パターン1(IdoTblTmpEntity insertEntity,
+            DbT3100NijiYoboJigyoTaishoshaEntity 二次予防, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        insertEntity.set二次予防事業区分コード(STR_2);
+        insertEntity.set二次予防事業有効期間開始年月日(二次予防.getTekiyoKaishiYMD());
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
+     * 異動一時2By二次予防パターン2設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 二次予防 DbT3100NijiYoboJigyoTaishoshaEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By二次予防パターン2(IdoTblTmpEntity insertEntity,
+            DbT3100NijiYoboJigyoTaishoshaEntity 二次予防, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        insertEntity.set二次予防事業区分コード(STR_2);
+        insertEntity.set二次予防事業有効期間開始年月日(二次予防.getTekiyoKaishiYMD());
+        insertEntity.set二次予防事業有効期間終了年月日(二次予防.getTekiyoShuryoYMD());
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
+     * 異動一時2By支払方法パターン1設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 支払方法 DbT4021ShiharaiHohoHenkoEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By支払方法パターン1(IdoTblTmpEntity insertEntity,
+            DbT4021ShiharaiHohoHenkoEntity 支払方法, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        FlexibleDate 適用開始年月日 = 支払方法.getTekiyoKaishiYMD();
+        if (適用開始年月日 != null && !適用開始年月日.isEmpty()) {
+            insertEntity.set償還払化開始年月日(new RString(適用開始年月日.toString()));
+        }
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
+     * 異動一時2By支払方法パターン1設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 支払方法 DbT4021ShiharaiHohoHenkoEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By支払方法パターン2(IdoTblTmpEntity insertEntity,
+            DbT4021ShiharaiHohoHenkoEntity 支払方法, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        FlexibleDate 適用開始年月日 = 支払方法.getTekiyoKaishiYMD();
+        if (適用開始年月日 != null && !適用開始年月日.isEmpty()) {
+            insertEntity.set償還払化開始年月日(new RString(適用開始年月日.toString()));
+        }
+        FlexibleDate 適用終了年月日 = 支払方法.getTekiyoShuryoYMD();
+        if (適用終了年月日 != null && !適用終了年月日.isEmpty()) {
+            insertEntity.set償還払化終了年月日(new RString(適用終了年月日.toString()));
+        }
         insertEntity.setエラーフラグ(エラーなし);
     }
 

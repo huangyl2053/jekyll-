@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820032;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +43,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
 
     private final KyuhuhiMeisaiJutokuPanelDiv div;
     private static final int NUM = 6;
+    private static final int NUM_ZERO = 0;
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
@@ -317,6 +320,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                     getPnlKyufuhiMeisai().getDgJushochiTokutei().getDataSource();
             ddgRow.setDefaultDataName7(getMax連番プラス1(list));
             list.add(ddgRow);
+            Collections.sort(list, COMPARABLE);
             div.getPnlBtnDetail().
                     getPnlKyufuhiMeisai().getDgJushochiTokutei().setDataSource(list);
         }
@@ -325,14 +329,26 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
     }
 
     private RString getMax連番プラス1(List<dgJushochiTokutei_Row> list) {
-        int 連番 = 1;
-        for (dgJushochiTokutei_Row ddgRow : list) {
-            if (連番 <= ddgRow.getDefaultDataName7().toInt()) {
-                連番 = ddgRow.getDefaultDataName7().toInt() + 1;
-            }
+//        int 連番 = 1;
+//        for (dgJushochiTokutei_Row ddgRow : list) {
+//            if (連番 <= ddgRow.getDefaultDataName7().toInt()) {
+//                連番 = ddgRow.getDefaultDataName7().toInt() + 1;
+//            }
+//        }
+        int 連番Num = 0;
+        if (!list.isEmpty()) {
+            連番Num = Integer.parseInt(list.get(NUM_ZERO).getDefaultDataName7().toString()) + 1;
         }
-        return new RString(連番);
+        return new RString(連番Num);
     }
+
+    private static final Comparator COMPARABLE = new Comparator<dgJushochiTokutei_Row>() {
+        @Override
+        public int compare(dgJushochiTokutei_Row o1, dgJushochiTokutei_Row o2) {
+            return -(Integer.parseInt(o1.getDefaultDataName7().toString())
+                    - Integer.parseInt(o2.getDefaultDataName7().toString()));
+        }
+    };
 
     /**
      * selectRow
@@ -389,6 +405,10 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                 max連番 = Integer.parseInt(shokanMeisaiResult.getEntity().get連番().toString());
             }
         }
+        if (!shkonlist.isEmpty()) {
+            max連番 = Integer.parseInt(shkonlist.get(NUM_ZERO).getEntity().get連番().toString());
+        }
+        List<dgJushochiTokutei_Row> add = new ArrayList<>();
         for (dgJushochiTokutei_Row row : dgrow) {
             if (RowState.Modified.equals(row.getRowState())) {
                 ShokanMeisaiJushochiTokurei entityModified = mapList.get(row.getDefaultDataName7());
@@ -397,7 +417,27 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             } else if (RowState.Deleted.equals(row.getRowState())) {
                 entityList.add(getResult(row, mapList.get(row.getDefaultDataName7()).deleted()));
             } else if (RowState.Added.equals(row.getRowState())) {
-                max連番 = max連番 + 1;
+                add.add(row);
+//                max連番 = max連番 + 1;
+//                ShokanMeisaiJushochiTokurei entityAdded = new ShokanMeisaiJushochiTokurei(
+//                        被保険者番号,
+//                        サービス年月,
+//                        整理番号,
+//                        事業者番号,
+//                        様式番号,
+//                        明細番号,
+//                        new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
+//                entityAdded = buildshokanMeisai(entityAdded, row);
+//                entityList.add(getResult(row, entityAdded.added()));
+            } else if (RowState.Unchanged.equals(row.getRowState())) {
+                ShokanMeisaiJushochiTokurei entityUnchanged = mapList.get(row.getDefaultDataName7());
+                entityUnchanged = buildshokanMeisai(entityUnchanged, row);
+                entityList.add(getResult(row, entityUnchanged.unchanged()));
+            }
+        }
+        if (!add.isEmpty()) {
+            max連番 = max連番 + add.size();
+            for (dgJushochiTokutei_Row row : add) {
                 ShokanMeisaiJushochiTokurei entityAdded = new ShokanMeisaiJushochiTokurei(
                         被保険者番号,
                         サービス年月,
@@ -408,10 +448,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                         new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
                 entityAdded = buildshokanMeisai(entityAdded, row);
                 entityList.add(getResult(row, entityAdded.added()));
-            } else if (RowState.Unchanged.equals(row.getRowState())) {
-                ShokanMeisaiJushochiTokurei entityUnchanged = mapList.get(row.getDefaultDataName7());
-                entityUnchanged = buildshokanMeisai(entityUnchanged, row);
-                entityList.add(getResult(row, entityUnchanged.unchanged()));
+                max連番--;
             }
         }
         return entityList;

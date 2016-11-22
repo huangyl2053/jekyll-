@@ -75,7 +75,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private static final RString 徴収_なし = new RString("徴収なし");
     private static final RString 随時 = new RString("随時");
     private static final RString 現年随時 = new RString("現年随時");
-    private static final List<Integer> 月List = Arrays.asList(期_4, 期_7, 期_6, 期_7, 期_8, 期_9);
+    private static final List<Integer> 月リスト = Arrays.asList(期_4, 期_7, 期_6, 期_7, 期_8, 期_9);
 
     /**
      * 仮算定通知書共通情報を作成します。
@@ -280,14 +280,15 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
                         : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                                 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value(), FlexibleDate.getNowDate()));
         更正前.set更正前特別徴収対象年金(仮算定通知書情報.get徴収方法情報_更正前() == null
-                || 仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード() == null ? RString.EMPTY
-                        : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                                new Code(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード().substring(0, INDEX_3)), FlexibleDate.getNowDate()));
+                || RString.isNullOrEmpty(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード()) ? RString.EMPTY
+                : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                        new Code(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード().substring(0, INDEX_3)), FlexibleDate.getNowDate()));
         更正前.set更正前特別徴収義務者コード(new NenkinCode((仮算定通知書情報.get対象者_追加含む_情報_更正前() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード() == null) ? Code.EMPTY
                         : 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value()));
         更正前.set更正前特別徴収対象年金コード(new TokubetsuChoshuGimushaCode(
-                仮算定通知書情報.get徴収方法情報_更正前() == null ? RString.EMPTY : 仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード()));
+                仮算定通知書情報.get徴収方法情報_更正前() == null || RString.isNullOrEmpty(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード())
+                ? RString.EMPTY : 仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード()));
         更正前.set更正前徴収方法(get徴収方法(更正前普徴期別金額合計, 更正前特徴期別金額合計));
         return 更正前;
     }
@@ -545,7 +546,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private List<Integer> getRightKi(List<NokiJoho> 納期情報リスト) {
         List<Integer> list = new ArrayList<>();
         for (NokiJoho nokiJoho : 納期情報リスト) {
-            if (月List.contains(nokiJoho.get期月().get月AsInt()) && !list.contains(nokiJoho.get期月().get期AsInt())) {
+            if (月リスト.contains(nokiJoho.get期月().get月AsInt()) && !list.contains(nokiJoho.get期月().get期AsInt())) {
                 list.add(nokiJoho.get期月().get期AsInt());
             }
         }
@@ -650,7 +651,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         TokuchoKiUtil tokuchoKiUtil = new TokuchoKiUtil();
         KitsukiList 特徴期月リスト = tokuchoKiUtil.get期月リスト();
         List<Kitsuki> list = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 1; i <= 期_6; i++) {
             for (NokiJoho 納期情報 : 特徴納期情報リスト) {
                 if (納期情報.get期月().get期AsInt() == (i)
                         && 納期情報.get期月().get月AsInt() == 特徴期月リスト.get期の最初月(i).get月AsInt()) {

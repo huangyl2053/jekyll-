@@ -43,13 +43,13 @@ public class JigyoHokokuTokei {
     public LinkedHashMap<RString, RString> get過去報告年月() {
         LinkedHashMap<RString, RString> linkedHashMap = new LinkedHashMap();
         FlexibleYearMonth yearMonth = new FlexibleYearMonth(entity.getHokokuYSeireki().toString() + entity.getHokokuM().toString());
-        if(yearMonth.isValid()){
+        if (yearMonth.isValid()) {
             RString hashMapValue = yearMonth.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                     fillType(FillType.ZERO).width(Width.HALF).toDateString();
             RString hashMapKey = new RString(entity.getHokokuYSeireki().toString() + entity.getHokokuM().toString());
-            linkedHashMap.put(hashMapKey, hashMapValue);  
+            linkedHashMap.put(hashMapKey, hashMapValue);
         }
-        
+
         return linkedHashMap;
 
     }

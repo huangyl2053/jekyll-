@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -40,19 +41,19 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     private final YMDHMS 調定日時;
     private final Association association;
 
-    private static final int NUM_0 = 0;
-    private static final int NUM_1 = 1;
-    private static final int NUM_2 = 2;
-    private static final int NUM_3 = 3;
-    private static final int NUM_4 = 4;
-    private static final int NUM_5 = 5;
-    private static final int NUM_6 = 6;
-    private static final int NUM_7 = 7;
-    private static final int NUM_8 = 8;
-    private static final int NUM_9 = 9;
-    private static final int NUM_10 = 10;
-    private static final int NUM_11 = 11;
-    private static final int NUM_12 = 12;
+    private static final int NUMBER_0 = 0;
+    private static final int NUMBER_1 = 1;
+    private static final int NUMBER_2 = 2;
+    private static final int NUMBER_3 = 3;
+    private static final int NUMBER_4 = 4;
+    private static final int NUMBER_5 = 5;
+    private static final int NUMBER_6 = 6;
+    private static final int NUMBER_7 = 7;
+    private static final int NUMBER_8 = 8;
+    private static final int NUMBER_9 = 9;
+    private static final int NUMBER_10 = 10;
+    private static final int NUMBER_11 = 11;
+    private static final int NUMBER_12 = 12;
     private static final char CHAR_0 = '0';
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
@@ -96,14 +97,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         }
         set出力順And改ページ(source);
         if (null != 計算後情報_宛名_口座_更正前Entity) {
-            if (null != 計算後情報_宛名_口座_更正前Entity.get調定年度()) {
-                source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定年度()
-                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年);
-            }
-            if (null != 計算後情報_宛名_口座_更正前Entity.get賦課年度()) {
-                source.list2_2 = 計算後情報_宛名_口座_更正前Entity.get賦課年度()
-                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年);
-            }
+            source.list2_1 = get年度(計算後情報_宛名_口座_更正後Entity.get調定年度());
+            source.list2_2 = get年度(計算後情報_宛名_口座_更正後Entity.get賦課年度());
             if (null != 計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額()) {
                 source.list2_3 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額());
             }
@@ -116,6 +111,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
             set月別取得段階(計算後情報_宛名_口座_更正前Entity, source);
             set特徴期別金額_更正前(source);
             set普徴期別金額_更正前1(source);
+            source.list4_1 = 計算後情報_宛名_口座_更正前Entity.get調定日時().getDate().wareki().toDateString();
         }
         set宛名口座_更正後(source);
         if (null != 計算後情報_宛名_口座_更正後Entity.get通知書番号()) {
@@ -124,14 +120,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額()) {
             source.list2_18 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額());
         }
-        if (null != 計算後情報_宛名_口座_更正後Entity.get調定年度()) {
-            source.list3_1 = 計算後情報_宛名_口座_更正後Entity.get調定年度()
-                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年);
-        }
-        if (null != 計算後情報_宛名_口座_更正後Entity.get賦課年度()) {
-            source.list3_2 = 計算後情報_宛名_口座_更正後Entity.get賦課年度()
-                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年);
-        }
+        source.list3_1 = get年度(計算後情報_宛名_口座_更正後Entity.get調定年度());
+        source.list3_2 = get年度(計算後情報_宛名_口座_更正後Entity.get賦課年度());
         if (null != 計算後情報_宛名_口座_更正後Entity.get確定介護保険料_年額()) {
             source.list3_3 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get確定介護保険料_年額());
         }
@@ -146,7 +136,6 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
             source.list3_18 = toカンマ編集(計算後情報_宛名_口座_更正後Entity.get普徴歳出還付額());
         }
 
-        source.list4_1 = 計算後情報_宛名_口座_更正前Entity.get調定日時().getDate().wareki().toDateString();
         source.list5_1 = 計算後情報_宛名_口座_更正後Entity.get調定日時().getDate().wareki().toDateString();
         set特徴期別金額_更正後(source);
         set普徴期別金額_更正後1(source);
@@ -162,6 +151,11 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         source.list10_1 = RString.EMPTY;
         set追加項目(source);
         return source;
+    }
+
+    private RString get年度(FlexibleYear 年度) {
+        return null == 年度 ? null
+                : 年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年);
     }
 
     private void set宛名口座_更正後(KanendoIdouKekkaIchiranSource source) {
@@ -182,7 +176,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
                 source.list1_4 = koza.get金融機関コード().value();
             }
             if (null != koza.get預金種別()) {
-                source.list1_5 = koza.get預金種別().get預金種別略称().substringReturnAsPossible(NUM_0, NUM_2);
+                source.list1_5 = koza.get預金種別().get預金種別略称().substringReturnAsPossible(NUMBER_0, NUMBER_2);
             }
             source.list1_6 = koza.get口座番号();
             if (null != koza.get金融機関()) {
@@ -342,7 +336,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         if (null != 月割開始年月1 && !月割開始年月1.isEmpty() && null != 月割終了年月1 && !月割終了年月1.isEmpty()) {
             int 開始月1 = 月割開始年月1.getMonthValue();
             int 終了月1 = 月割終了年月1.getMonthValue();
-            RString 保険料算定段階1 = entity.get保険料算定段階1().substring(NUM_0, NUM_2).trimStart(CHAR_0);
+            RString 保険料算定段階1 = entity.get保険料算定段階1().substring(NUMBER_0, NUMBER_2).trimStart(CHAR_0);
             set月別取得段階(item, 開始月1, 終了月1, 保険料算定段階1, 更正前後区分);
         }
 
@@ -351,7 +345,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         if (null != 月割開始年月2 && !月割開始年月2.isEmpty() && null != 月割終了年月2 && !月割終了年月2.isEmpty()) {
             int 開始月2 = 月割開始年月2.getMonthValue();
             int 終了月2 = 月割終了年月2.getMonthValue();
-            RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2).trimStart(CHAR_0);
+            RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUMBER_0, NUMBER_2).trimStart(CHAR_0);
             if (!月割開始年月2.isEmpty() && !月割終了年月2.isEmpty() && !保険料算定段階2.isEmpty()) {
                 set月別取得段階(item, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
             }
@@ -360,8 +354,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
 
     private void set月別取得段階(KanendoIdouKekkaIchiranSource item, int 開始月, int 終了月,
             RString 保険料算定段階, RString 更正前後区分) {
-        for (int i = 開始月; i <= (開始月 > 終了月 ? (終了月 + NUM_12) : 終了月); i++) {
-            int currentMonth = (i - 1) % NUM_12 + 1;
+        for (int i = 開始月; i <= (開始月 > 終了月 ? (終了月 + NUMBER_12) : 終了月); i++) {
+            int currentMonth = (i - 1) % NUMBER_12 + 1;
             if (更正前後区分_更正前.equals(更正前後区分)) {
                 set更正前_保険料算定段階(item, currentMonth, 保険料算定段階);
             } else if (更正前後区分_更正後.equals(更正前後区分)) {
@@ -373,40 +367,40 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     private void set更正前_保険料算定段階(KanendoIdouKekkaIchiranSource item,
             int currentMonth, RString 保険料算定段階) {
         switch (currentMonth) {
-            case NUM_1:
+            case NUMBER_1:
                 item.list2_15 = 保険料算定段階;
                 break;
-            case NUM_2:
+            case NUMBER_2:
                 item.list2_16 = 保険料算定段階;
                 break;
-            case NUM_3:
+            case NUMBER_3:
                 item.list2_17 = 保険料算定段階;
                 break;
-            case NUM_4:
+            case NUMBER_4:
                 item.list2_6 = 保険料算定段階;
                 break;
-            case NUM_5:
+            case NUMBER_5:
                 item.list2_7 = 保険料算定段階;
                 break;
-            case NUM_6:
+            case NUMBER_6:
                 item.list2_8 = 保険料算定段階;
                 break;
-            case NUM_7:
+            case NUMBER_7:
                 item.list2_9 = 保険料算定段階;
                 break;
-            case NUM_8:
+            case NUMBER_8:
                 item.list2_10 = 保険料算定段階;
                 break;
-            case NUM_9:
+            case NUMBER_9:
                 item.list2_11 = 保険料算定段階;
                 break;
-            case NUM_10:
+            case NUMBER_10:
                 item.list2_12 = 保険料算定段階;
                 break;
-            case NUM_11:
+            case NUMBER_11:
                 item.list2_13 = 保険料算定段階;
                 break;
-            case NUM_12:
+            case NUMBER_12:
                 item.list2_14 = 保険料算定段階;
                 break;
             default:
@@ -417,40 +411,40 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     private void set更正後_保険料算定段階(KanendoIdouKekkaIchiranSource item,
             int currentMonth, RString 保険料算定段階) {
         switch (currentMonth) {
-            case NUM_1:
+            case NUMBER_1:
                 item.list3_15 = 保険料算定段階;
                 break;
-            case NUM_2:
+            case NUMBER_2:
                 item.list3_16 = 保険料算定段階;
                 break;
-            case NUM_3:
+            case NUMBER_3:
                 item.list3_17 = 保険料算定段階;
                 break;
-            case NUM_4:
+            case NUMBER_4:
                 item.list3_6 = 保険料算定段階;
                 break;
-            case NUM_5:
+            case NUMBER_5:
                 item.list3_7 = 保険料算定段階;
                 break;
-            case NUM_6:
+            case NUMBER_6:
                 item.list3_8 = 保険料算定段階;
                 break;
-            case NUM_7:
+            case NUMBER_7:
                 item.list3_9 = 保険料算定段階;
                 break;
-            case NUM_8:
+            case NUMBER_8:
                 item.list3_10 = 保険料算定段階;
                 break;
-            case NUM_9:
+            case NUMBER_9:
                 item.list3_11 = 保険料算定段階;
                 break;
-            case NUM_10:
+            case NUMBER_10:
                 item.list3_12 = 保険料算定段階;
                 break;
-            case NUM_11:
+            case NUMBER_11:
                 item.list3_13 = 保険料算定段階;
                 break;
-            case NUM_12:
+            case NUMBER_12:
                 item.list3_14 = 保険料算定段階;
                 break;
             default:
@@ -465,20 +459,20 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         source.shutsuryokujun4 = 並び順の４件目;
         source.shutsuryokujun5 = 並び順の５件目;
         if (null != 改頁項目List && !改頁項目List.isEmpty()) {
-            if (改頁項目List.size() > NUM_0) {
-                source.kaipage1 = 改頁項目List.get(NUM_0);
+            if (改頁項目List.size() > NUMBER_0) {
+                source.kaipage1 = 改頁項目List.get(NUMBER_0);
             }
-            if (改頁項目List.size() > NUM_1) {
-                source.kaipage2 = 改頁項目List.get(NUM_1);
+            if (改頁項目List.size() > NUMBER_1) {
+                source.kaipage2 = 改頁項目List.get(NUMBER_1);
             }
-            if (改頁項目List.size() > NUM_2) {
-                source.kaipage3 = 改頁項目List.get(NUM_2);
+            if (改頁項目List.size() > NUMBER_2) {
+                source.kaipage3 = 改頁項目List.get(NUMBER_2);
             }
-            if (改頁項目List.size() > NUM_3) {
-                source.kaipage4 = 改頁項目List.get(NUM_3);
+            if (改頁項目List.size() > NUMBER_3) {
+                source.kaipage4 = 改頁項目List.get(NUMBER_3);
             }
-            if (改頁項目List.size() > NUM_4) {
-                source.kaipage5 = 改頁項目List.get(NUM_4);
+            if (改頁項目List.size() > NUMBER_4) {
+                source.kaipage5 = 改頁項目List.get(NUMBER_4);
             }
         }
     }

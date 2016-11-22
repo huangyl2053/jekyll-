@@ -57,7 +57,7 @@ public class FutangendogakuNinteiShinseishoReportSource implements IReportSource
     @ReportItem(name = "shisetsu_name_2", length = 76, order = 22)
     public RString shisetsu_name_2;
     @ReportItem(name = "PageCnt", length = 4, order = 23)
-    public RString PageCnt;
+    public RString pageCnt;
     @ReportItem(name = "bun_1", length = 80, order = 24)
     public RString bun_1;
     @ReportItem(name = "bun_2", length = 80, order = 25)

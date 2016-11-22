@@ -17,15 +17,15 @@
         INNER JOIN
         rgdb."DbT3049ShokanJutakuKaishu" kaishu
         ON
-           kaishu."hiHokenshaNo" = #{hiHokenshaNo}
-           AND kaishu."hiHokenshaNo" = shinsei."hiHokenshaNo"
-           AND kaishu."serviceTeikyoYM" = shinsei."serviceTeikyoYM"
-           AND kaishu."seiriNo" = shinsei."seiriNo"
-           AND SUBSTRING(kaishu."yoshikiNo" ,1,3) = '21D'
+        kaishu."hiHokenshaNo" = #{hiHokenshaNo}
+        AND kaishu."hiHokenshaNo" = shinsei."hiHokenshaNo"
+        AND kaishu."serviceTeikyoYM" = shinsei."serviceTeikyoYM"
+        AND kaishu."seiriNo" = shinsei."seiriNo"
+        AND SUBSTRING(kaishu."yoshikiNo" ,1,3) = '21D'
         ORDER BY
-           shinsei."serviceTeikyoYM" DESC
+        shinsei."serviceTeikyoYM" DESC
     </select>
-   
+
     <select id="get開始サービス提供年月ある"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter"
             resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500" resultOrdered="true">
@@ -33,34 +33,34 @@
         FROM
         rgdb."DbT3034ShokanShinsei" T1
         INNER JOIN
-           ( SELECT
-              T3."hiHokenshaNo"	AS "hiHokenshaNo",
-              T3."serviceTeikyoYM" AS "serviceTeikyoYM",
-              T3."seiriNo" AS "seiriNo"
-             FROM
-             rgdb."DbT3049ShokanJutakuKaishu" T3
-             WHERE
-                 T3."hiHokenshaNo" = #{被保険者番号}
-                 AND T3."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
-                 AND T3."jutakuKaishuJutakuAddress" = #{住宅住所}
-                 AND SUBSTRING("yoshikiNo",1,3) = '21D'
-             GROUP BY
-                T3."hiHokenshaNo",
-                T3."serviceTeikyoYM",
-                T3."seiriNo"
-           ) AS T2 
-           ON
-             T1."hiHokenshaNo" = T2."hiHokenshaNo"
-             AND T1."serviceTeikyoYM" = T2."serviceTeikyoYM"
-             AND T1."seiriNo" = T2."seiriNo"
+        ( SELECT
+        T3."hiHokenshaNo"	AS "hiHokenshaNo",
+        T3."serviceTeikyoYM" AS "serviceTeikyoYM",
+        T3."seiriNo" AS "seiriNo"
+        FROM
+        rgdb."DbT3049ShokanJutakuKaishu" T3
         WHERE
-            (T1."yokaigo3DankaiHenko" = TRUE
-            OR T1."jutakuJushoHenko" = TRUE)
-            AND T1."serviceTeikyoYM"<![CDATA[<]]>#{サービス提供年月}
+        T3."hiHokenshaNo" = #{被保険者番号}
+        AND T3."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
+        AND T3."jutakuKaishuJutakuAddress" = #{住宅住所}
+        AND SUBSTRING("yoshikiNo",1,3) = '21D'
+        GROUP BY
+        T3."hiHokenshaNo",
+        T3."serviceTeikyoYM",
+        T3."seiriNo"
+        ) AS T2
+        ON
+        T1."hiHokenshaNo" = T2."hiHokenshaNo"
+        AND T1."serviceTeikyoYM" = T2."serviceTeikyoYM"
+        AND T1."seiriNo" = T2."seiriNo"
+        WHERE
+        (T1."yokaigo3DankaiHenko" = TRUE
+        OR T1."jutakuJushoHenko" = TRUE)
+        AND T1."serviceTeikyoYM"<![CDATA[<]]>#{サービス提供年月}
         ORDER BY
-            T1."serviceTeikyoYM" DESC
+        T1."serviceTeikyoYM" DESC
     </select>
-    
+
     <select id="get開始サービス提供年月なし"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter"
             resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500" resultOrdered="true">
@@ -68,32 +68,32 @@
         FROM
         rgdb."DbT3034ShokanShinsei" T1
         INNER JOIN
-           ( SELECT
-              T3."hiHokenshaNo"	AS "hiHokenshaNo",
-              T3."serviceTeikyoYM" AS "serviceTeikyoYM",
-              T3."seiriNo" AS "seiriNo"
-             FROM
-             rgdb."DbT3049ShokanJutakuKaishu" T3
-             WHERE
-                 T3."hiHokenshaNo" = #{被保険者番号}
-                 AND T3."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
-                 AND T3."jutakuKaishuJutakuAddress" = #{住宅住所}
-                 AND SUBSTRING("yoshikiNo",1,3) = '21D'
-             GROUP BY
-                T3."hiHokenshaNo",
-                T3."serviceTeikyoYM",
-                T3."seiriNo"
-           ) AS T2 
-           ON
-             T1."hiHokenshaNo" = T2."hiHokenshaNo"
-             AND T1."serviceTeikyoYM" = T2."serviceTeikyoYM"
-             AND T1."seiriNo" = T2."seiriNo"
+        ( SELECT
+        T3."hiHokenshaNo"	AS "hiHokenshaNo",
+        T3."serviceTeikyoYM" AS "serviceTeikyoYM",
+        T3."seiriNo" AS "seiriNo"
+        FROM
+        rgdb."DbT3049ShokanJutakuKaishu" T3
         WHERE
-            T1."serviceTeikyoYM"<![CDATA[<]]>#{サービス提供年月}
+        T3."hiHokenshaNo" = #{被保険者番号}
+        AND T3."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
+        AND T3."jutakuKaishuJutakuAddress" = #{住宅住所}
+        AND SUBSTRING("yoshikiNo",1,3) = '21D'
+        GROUP BY
+        T3."hiHokenshaNo",
+        T3."serviceTeikyoYM",
+        T3."seiriNo"
+        ) AS T2
+        ON
+        T1."hiHokenshaNo" = T2."hiHokenshaNo"
+        AND T1."serviceTeikyoYM" = T2."serviceTeikyoYM"
+        AND T1."seiriNo" = T2."seiriNo"
+        WHERE
+        T1."serviceTeikyoYM"<![CDATA[<]]>#{サービス提供年月}
         ORDER BY
-            T1."serviceTeikyoYM" ASC
+        T1."serviceTeikyoYM" ASC
     </select>
-   
+
     <resultMap id="resultMap_ShiharaiKekkaResult"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity"
                autoMapping="true">
@@ -115,54 +115,143 @@
         FROM
         rgdb."DbT3034ShokanShinsei" T1
         INNER JOIN
-           ( SELECT
-                T3."hiHokenshaNo" AS "hiHokenshaNo",
-                T3."serviceTeikyoYM" AS "serviceTeikyoYM",
-                T3."seiriNo" AS "seiriNo",
-                T3."jutakuKaishuJutakuAddress" AS "jutakuKaishuJutakuAddress"
-             FROM
-             rgdb."DbT3049ShokanJutakuKaishu" T3
-             WHERE
-                 T3."hiHokenshaNo" = #{被保険者番号}
-                 AND T3."jutakuKaishuJutakuAddress" = #{住宅住所}
-                 AND T3."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
-                 AND T3."serviceTeikyoYM" <![CDATA[>=]]> #{開始サービス提供年月}
-                 AND SUBSTRING("yoshikiNo",1,3) = '21D'
-            GROUP BY
-                T3."hiHokenshaNo",
-                T3."serviceTeikyoYM",
-                T3."seiriNo",
-                T3."jutakuKaishuJutakuAddress"
-            ) AS T2 ON
-            T1."hiHokenshaNo" = T2."hiHokenshaNo"
-            AND T1."serviceTeikyoYM" = T2."serviceTeikyoYM"
-            AND T1."seiriNo" = T2."seiriNo"
-        WHERE 
-            T1."hiHokenshaNo"=#{被保険者番号}
-            AND T1."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
-            AND T1."serviceTeikyoYM" <![CDATA[>=]]> #{開始サービス提供年月}
-       GROUP BY "jutakuKaishuJutakuAddress"
-</select>
+        ( SELECT
+        T3."hiHokenshaNo" AS "hiHokenshaNo",
+        T3."serviceTeikyoYM" AS "serviceTeikyoYM",
+        T3."seiriNo" AS "seiriNo",
+        T3."jutakuKaishuJutakuAddress" AS "jutakuKaishuJutakuAddress"
+        FROM
+        rgdb."DbT3049ShokanJutakuKaishu" T3
+        WHERE
+        T3."hiHokenshaNo" = #{被保険者番号}
+        AND T3."jutakuKaishuJutakuAddress" = #{住宅住所}
+        AND T3."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
+        AND T3."serviceTeikyoYM" <![CDATA[>=]]> #{開始サービス提供年月}
+        AND SUBSTRING("yoshikiNo",1,3) = '21D'
+        GROUP BY
+        T3."hiHokenshaNo",
+        T3."serviceTeikyoYM",
+        T3."seiriNo",
+        T3."jutakuKaishuJutakuAddress"
+        ) AS T2 ON
+        T1."hiHokenshaNo" = T2."hiHokenshaNo"
+        AND T1."serviceTeikyoYM" = T2."serviceTeikyoYM"
+        AND T1."seiriNo" = T2."seiriNo"
+        WHERE
+        T1."hiHokenshaNo"=#{被保険者番号}
+        AND T1."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
+        AND T1."serviceTeikyoYM" <![CDATA[>=]]> #{開始サービス提供年月}
+        GROUP BY "jutakuKaishuJutakuAddress"
+    </select>
 
     <select id="getWK給付率"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.KyufuritsuEntity" fetchSize="500" resultOrdered="true">
-        SELECT 
-            futanWariai."rirekiNo" AS "rirekiNo",
-            wariaiMeisai."edaNo" AS "edaNo",
-            wariaiMeisai."futanWariaiKubun" AS "futanWariaiKubun"
+        SELECT
+        futanWariai."rirekiNo" AS "rirekiNo",
+        wariaiMeisai."edaNo" AS "edaNo",
+        wariaiMeisai."futanWariaiKubun" AS "futanWariaiKubun"
         FROM
         rgdb."DbT3113RiyoshaFutanWariai" AS futanWariai
         INNER JOIN
-            rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS wariaiMeisai
-            ON  
-              wariaiMeisai."hihokenshaNo" = #{被保険者番号}
-              AND wariaiMeisai."rirekiNo" = futanWariai."rirekiNo"
-              AND wariaiMeisai."yukoKaishiYMD" <![CDATA[<=]]> #{サービス提供年月}
-              AND wariaiMeisai."yukoShuryoYMD" <![CDATA[>=]]> #{サービス提供年月}
-        ORDER BY 
-           "rirekiNo" DESC,
-           "edaNo" DESC
+        rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS wariaiMeisai
+        ON
+        wariaiMeisai."hihokenshaNo" = #{被保険者番号}
+        AND wariaiMeisai."rirekiNo" = futanWariai."rirekiNo"
+        AND wariaiMeisai."yukoKaishiYMD" <![CDATA[<=]]> #{サービス提供年月}
+        AND wariaiMeisai."yukoShuryoYMD" <![CDATA[>=]]> #{サービス提供年月}
+        ORDER BY
+        "rirekiNo" DESC,
+        "edaNo" DESC
+    </select>
+
+    <select id="get開始サービス提供年月"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500" resultOrdered="true">
+        SELECT *
+        FROM
+        rgdb."DbT3034ShokanShinsei" 支給申請
+        INNER JOIN
+        ( SELECT
+        "DbT3049ShokanJutakuKaishu"."hiHokenshaNo"	AS "hiHokenshaNo",
+        "DbT3049ShokanJutakuKaishu"."serviceTeikyoYM" AS "serviceTeikyoYM",
+        "DbT3049ShokanJutakuKaishu"."seiriNo" AS "seiriNo"
+        FROM
+        rgdb."DbT3049ShokanJutakuKaishu"
+        WHERE
+        "DbT3049ShokanJutakuKaishu"."hiHokenshaNo" = #{被保険者番号}
+        AND "DbT3049ShokanJutakuKaishu"."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
+        AND "DbT3049ShokanJutakuKaishu"."jutakuKaishuJutakuAddress" = #{住宅住所}
+        AND SUBSTRING("yoshikiNo",1,3) = '21D'
+        GROUP BY
+        "DbT3049ShokanJutakuKaishu"."hiHokenshaNo",
+        "DbT3049ShokanJutakuKaishu"."serviceTeikyoYM",
+        "DbT3049ShokanJutakuKaishu"."seiriNo"
+        ) AS 住宅改修
+        ON
+        支給申請."hiHokenshaNo" =住宅改修."hiHokenshaNo"
+        AND 支給申請."serviceTeikyoYM" = 住宅改修."serviceTeikyoYM"
+        AND 支給申請."seiriNo" = 住宅改修."seiriNo"
+        INNER JOIN
+        rgdb."DbT3036ShokanHanteiKekka" 判定結果
+        ON
+        判定結果."hiHokenshaNo" = 支給申請."hiHokenshaNo"
+        AND 判定結果."serviceTeikyoYM" = 支給申請."serviceTeikyoYM"
+        AND 判定結果."seiriNo" = 支給申請."seiriNo"
+        AND 判定結果."shikyuHushikyuKetteiKubun" = '1'
+        WHERE
+        支給申請."yokaigo3DankaiHenko" = TRUE
+        OR 支給申請."jutakuJushoHenko" = TRUE
+        ORDER BY
+        支給申請."serviceTeikyoYM" DESC
+        LIMIT 1
+    </select>
+
+    <resultMap id="resultMap_zenkaiShiharaiKekkaResult"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity"
+               autoMapping="true">
+        <result property="費用額合計" column="shiharaiKingakuTotal" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="保険対象費用額" column="hokenTaishoHiyogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="保険給付額" column="hokenKyufugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="利用者負担額" column="riyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    <select id="get前回までの支払結果"
+            resultMap="resultMap_zenkaiShiharaiKekkaResult"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+        SUM(支給申請."shiharaiKingakuTotal") AS "shiharaiKingakuTotal",
+        SUM(支給申請."hokenTaishoHiyogaku") AS "hokenTaishoHiyogaku",
+        SUM(支給申請."hokenKyufugaku") AS "hokenKyufugaku",
+        SUM(支給申請."riyoshaFutangaku") AS "riyoshaFutangaku"
+        FROM
+        rgdb."DbT3034ShokanShinsei" 支給申請
+        INNER JOIN
+        ( SELECT
+        "DbT3049ShokanJutakuKaishu"."hiHokenshaNo" AS "hiHokenshaNo",
+        "DbT3049ShokanJutakuKaishu"."serviceTeikyoYM" AS "serviceTeikyoYM",
+        "DbT3049ShokanJutakuKaishu"."seiriNo" AS "seiriNo"
+        FROM
+        rgdb."DbT3049ShokanJutakuKaishu"
+        WHERE
+        "DbT3049ShokanJutakuKaishu"."hiHokenshaNo" = #{被保険者番号}
+        AND "DbT3049ShokanJutakuKaishu"."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
+        AND "DbT3049ShokanJutakuKaishu"."serviceTeikyoYM" <![CDATA[>=]]> #{開始サービス提供年月}
+        AND SUBSTRING("yoshikiNo",1,3) = '21D'
+        GROUP BY
+        "DbT3049ShokanJutakuKaishu"."hiHokenshaNo",
+        "DbT3049ShokanJutakuKaishu"."serviceTeikyoYM",
+        "DbT3049ShokanJutakuKaishu"."seiriNo"
+        ) AS 住宅改修 ON
+        支給申請."hiHokenshaNo" = 住宅改修."hiHokenshaNo"
+        AND 支給申請."serviceTeikyoYM" = 住宅改修."serviceTeikyoYM"
+        AND 支給申請."seiriNo" = 住宅改修."seiriNo"
+        INNER JOIN
+        rgdb."DbT3036ShokanHanteiKekka" 判定結果
+        ON
+        判定結果."hiHokenshaNo" = 支給申請."hiHokenshaNo"
+        AND 判定結果."serviceTeikyoYM" = 支給申請."serviceTeikyoYM"
+        AND 判定結果."seiriNo" = 支給申請."seiriNo"
+        AND 判定結果."shikyuHushikyuKetteiKubun" = '1'
     </select>
 
 </mapper>

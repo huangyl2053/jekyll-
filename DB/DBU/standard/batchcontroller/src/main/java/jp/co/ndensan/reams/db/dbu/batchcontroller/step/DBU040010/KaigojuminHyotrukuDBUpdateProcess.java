@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU040010;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.euc.juminidorendoshikakutoroku.FuseigoListCsvEntity;
 import jp.co.ndensan.reams.db.dba.service.core.juminidorendoshikakutoroku.JuminIdoRendoShikakuToroku;
@@ -51,7 +50,6 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
     private static final RString 異動後 = new RString("2");
     private FileSpoolManager manager;
     private RString 市町村コード;
-    private List<RString> 市町村コードlist;
     private RString filePath;
     private RDateTime 抽出開始日時;
     private RDateTime 処理日時;
@@ -67,7 +65,6 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
     protected void beforeExecute() {
         処理日時 = RDate.getNowDateTime();
         kaigojum = new KaigojuminHyotrukuProcess();
-        市町村コードlist = new ArrayList<>();
     }
 
     @Override
@@ -96,18 +93,18 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
         市町村コード = item.getShichosonCode().value();
         処理日付情報 = item;
         tableWrite.update(kaigojum.データ更新(processParameter, 処理日時, 処理日付情報, 市町村コード));
-        宛名識別対象異動分取得PSM(抽出開始日時);
-        市町村コードlist.add(item.getShichosonCode().value());
+        宛名識別対象異動分取得PSM(抽出開始日時, 市町村コード);
+        kaigojum.setlist(item);
     }
 
-    private void 宛名識別対象異動分取得PSM(RDateTime 抽出開始日時) {
+    private void 宛名識別対象異動分取得PSM(RDateTime 抽出開始日時, RString 現地方公共団体コード) {
         ShikibetsuTaishoIdoSearchKeyBuilder keyBuilder = kaigojum.宛名識別対象異動分取得PSM(抽出開始日時);
         ShikibetsuTaishoIdoFinder finder = ShikibetsuTaishoIdoFinder.createInstance();
         List<ShikibetsuTaishoIdoJoho> 宛名識別対象list = finder.get宛名識別対象異動(keyBuilder.build());
         JuminIdoRendoShikakuToroku juminidorendoshikakutoroku = new JuminIdoRendoShikakuToroku();
         for (ShikibetsuTaishoIdoJoho 宛名識別対象 : 宛名識別対象list) {
-            if ((異動後.equals(宛名識別対象.get異動前後区分()) && (宛名識別対象.get現地方公共団体コード() != null)
-                    && (processParameter.getShichosonCodelist().contains(宛名識別対象.get現地方公共団体コード().value())))) {
+            if (異動後.equals(宛名識別対象.get異動前後区分()) && 宛名識別対象.get現地方公共団体コード() != null
+                    && 現地方公共団体コード.equals(宛名識別対象.get現地方公共団体コード().value())) {
                 juminidorendoshikakutoroku.to住民異動情報((宛名識別対象), csvWriter);
             }
         }
@@ -116,10 +113,10 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
     @Override
     protected void afterExecute() {
         for (int i = 0; i < processParameter.getShichosonCodelist().size(); i++) {
-            if (!市町村コードlist.contains(processParameter.getShichosonCodelist().get(i))) {
+            if (!kaigojum.getlist().contains(processParameter.getShichosonCodelist().get(i))) {
                 DbT7022ShoriDateKanriEntity dateentity = new DbT7022ShoriDateKanriEntity();
-                tableWrite.insert(kaigojum.データ編集(processParameter, 処理日時, dateentity, 市町村コード));
-                宛名識別対象異動分取得PSM(null);
+                tableWrite.insert(kaigojum.データ編集(processParameter, 処理日時, dateentity, processParameter.getShichosonCodelist().get(i)));
+                宛名識別対象異動分取得PSM(null, processParameter.getShichosonCodelist().get(i));
             }
         }
         manager.spool(SubGyomuCode.DBA介護資格, filePath);

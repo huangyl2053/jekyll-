@@ -5,18 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0200011;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.hihokenshajohosoufudatasakuseyi.KokuhorenSofuJohoResult;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200011.DBC0200011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200011.HokenshaSofuListPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200011.dgHokenshaSofuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0200011.HokenshaSofuListPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0200011.HokenshaSofuListPanelHandlerValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0200011.KokuhorenDataSofuViewState;
+import jp.co.ndensan.reams.db.dbc.service.core.hihokenshajohosoufudatasakuseyi.HihokenshaJohoSoufuDataSakuseyi;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -40,7 +46,16 @@ public class HokenshaSofuListPanel {
     public ResponseData<HokenshaSofuListPanelDiv> onLoad(HokenshaSofuListPanelDiv div) {
         処理年月 = getHandler(div).get処理年月();
         div.getTxtShoriNengetsu().setValue(new RDate(処理年月.toDateString().toString()));
-        getHandler(div).initialize(処理年月);
+
+        HihokenshaJohoSoufuDataSakuseyi 保険者情報送付 = HihokenshaJohoSoufuDataSakuseyi.createInstance();
+        List<KokuhorenSofuJohoResult> resultList = 保険者情報送付.getKokuhorenSofuJoho(処理年月);
+        if (!ResponseHolder.isReRequest() && (resultList.isEmpty())) {
+            return ResponseData.of(div).addMessage(DbcErrorMessages.国保連送付処理_処理月チェック.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).initialize(処理年月, resultList);
+        }
+        getHandler(div).initialize(処理年月, resultList);
         return ResponseData.of(div).respond();
     }
 
@@ -58,7 +73,16 @@ public class HokenshaSofuListPanel {
             }
         }
         処理年月 = new FlexibleYearMonth(div.getTxtShoriNengetsu().getValue().getYearMonth().toDateString());
-        getHandler(div).initialize(処理年月);
+
+        HihokenshaJohoSoufuDataSakuseyi 保険者情報送付 = HihokenshaJohoSoufuDataSakuseyi.createInstance();
+        List<KokuhorenSofuJohoResult> resultList = 保険者情報送付.getKokuhorenSofuJoho(処理年月);
+        if (!ResponseHolder.isReRequest() && (resultList.isEmpty())) {
+            return ResponseData.of(div).addMessage(DbcErrorMessages.国保連送付処理_処理月チェック.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).initialize(処理年月, resultList);
+        }
+        getHandler(div).initialize(処理年月, resultList);
         return ResponseData.of(div).respond();
     }
 

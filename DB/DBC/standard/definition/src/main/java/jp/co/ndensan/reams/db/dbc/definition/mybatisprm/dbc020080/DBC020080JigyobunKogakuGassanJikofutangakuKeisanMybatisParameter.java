@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * バッチ設計_DBCMNN1001_事業高額合算・事業分自己負担額計算（括）のMyBatisパラメタークラスです。
  *
- * @reamsid_L DBC-4790-030 pengxingyis
+ * @reamsid_L DBC-4790-030 pengxingyi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter implements IMyBatisParameter {
+public class DBC020080JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter implements IMyBatisParameter {
 
     private SubGyomuCode サブ業務コード;
     private RString 処理名;

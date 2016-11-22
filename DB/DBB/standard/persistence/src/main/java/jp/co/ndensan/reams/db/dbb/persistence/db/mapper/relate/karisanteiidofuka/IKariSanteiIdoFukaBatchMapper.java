@@ -236,4 +236,24 @@ public interface IKariSanteiIdoFukaBatchMapper {
      * UrT0705ChoteiKyotsu_workを削除します。
      */
     void deleteUrT0705ChoteiKyotsu_work();
+
+    /**
+     * Cax一時テーブルを削除します。
+     */
+    void deleteUrT0706ChoteigakuUchiwake_work();
+
+    /**
+     * Cax一時テーブルを削除します。
+     */
+    void deleteUrT0772KamokubetsuKoyuJoho_work();
+
+    /**
+     * Cax一時テーブルを削除します。
+     */
+    void deleteUrShunoIdWork_2();
+
+    /**
+     * Cax一時テーブルを削除します。
+     */
+    void deleteUrT0707ChoteiJokyo_work();
 }

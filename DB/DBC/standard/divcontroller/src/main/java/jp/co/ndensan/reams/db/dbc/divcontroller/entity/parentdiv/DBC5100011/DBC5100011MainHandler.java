@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.definition.core.chiku.ChikuShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -31,14 +31,22 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class DBC5100011MainHandler {
 
     private final DBC5100011MainDiv div;
-    private static final RString 対象選択_3 = new RString("3");
     private static final RString 対象選択_2 = new RString("2");
     private static final RString 対象選択_1 = new RString("1");
     private static final RString 対象選択_0 = new RString("0");
     private static final int ENDINDEX = 10;
     private static final RString 被保険者 = new RString("被保険者");
-    private static final int 対象選択SIZE = 2;
-    private IOutputOrder order;
+    private static final RString 文字_全て = new RString("全て");
+    private static final RString 文字_町域 = new RString("町域");
+    private static final RString KEY_全て = new RString("0");
+    private static final RString KEY_町域 = new RString("1");
+    private static final RString KEY_行政区 = new RString("2");
+    private static final RString KEY_地区1 = new RString("3");
+    private static final RString KEY_地区2 = new RString("4");
+    private static final RString KEY_地区3 = new RString("5");
+    private static final RString KEY_1 = new RString("1");
+    private static final RString KEY_2 = new RString("2");
+    private static final RString KEY_3 = new RString("3");
 
     /**
      * コンストラクタです。
@@ -76,7 +84,21 @@ public class DBC5100011MainHandler {
             tempData.set事業者番号(div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo());
         }
         tempData.set利用実績区分(div.getRadRiyoJisseki().getSelectedKey());
-        tempData.set地区指定(div.getCcdChikuShichosonSelect().get選択対象());
+        RString 地区指定 = RString.EMPTY;
+        if (文字_全て.equals(div.getCcdChikuShichosonSelect().get選択対象())) {
+            地区指定 = KEY_全て;
+        } else if (文字_町域.equals(div.getCcdChikuShichosonSelect().get選択対象())) {
+            地区指定 = KEY_町域;
+        } else if (ChikuShubetsu.行政区.getShubetsu().equals(div.getCcdChikuShichosonSelect().get選択対象())) {
+            地区指定 = KEY_行政区;
+        } else if (ChikuShubetsu.地区1.getShubetsu().equals(div.getCcdChikuShichosonSelect().get選択対象())) {
+            地区指定 = KEY_地区1;
+        } else if (ChikuShubetsu.地区2.getShubetsu().equals(div.getCcdChikuShichosonSelect().get選択対象())) {
+            地区指定 = KEY_地区2;
+        } else if (ChikuShubetsu.地区3.getShubetsu().equals(div.getCcdChikuShichosonSelect().get選択対象())) {
+            地区指定 = KEY_地区3;
+        }
+        tempData.set地区指定(地区指定);
         tempData.set市町村コード(div.getCcdChikuShichosonSelect().get市町村コード());
         tempData.set市町村名称(div.getCcdChikuShichosonSelect().get市町村名称());
         tempData.set旧市町村コード(div.getCcdChikuShichosonSelect().get旧市町村コード());
@@ -87,27 +109,25 @@ public class DBC5100011MainHandler {
         tempData.set導入形態コード(DonyuKeitaiCode.toValue(div.getCcdChikuShichosonSelect().get導入形態コード()).getCode());
         tempData.set対象年月(div.getRadTaishoYM().getSelectedKey());
         tempData.set居宅利用率指定(div.getRadKyotakuRiyoritsu().getSelectedKey());
-        if (対象選択SIZE <= div.getChkMeisaiCsvEdit().getSelectedKeys().size()
-                && div.getChkMeisaiCsvEdit().getSelectedKeys().get(2).isNull()) {
+        if (div.getChkMeisaiCsvEdit().getSelectedKeys() != null && div.getChkMeisaiCsvEdit().getSelectedKeys().contains(KEY_3)) {
+            tempData.set日付スラッシュ編集(Tokeihyo_CSVEditKubun.する.getコード());
+        } else {
             tempData.set日付スラッシュ編集(Tokeihyo_CSVEditKubun.しない.getコード());
-        } else {
-            tempData.set日付スラッシュ編集(対象選択_3);
         }
-        if (対象選択SIZE <= div.getChkShutsuryokuTaisho().getSelectedKeys().size()
-                && div.getChkShutsuryokuTaisho().getSelectedKeys().get(2).isNull()) {
+        if (div.getChkShutsuryokuTaisho().getSelectedKeys() != null && div.getChkShutsuryokuTaisho().getSelectedKeys().contains(KEY_3)) {
+            tempData.set明細CSV出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード());
+        } else {
             tempData.set明細CSV出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力しない.getコード());
-        } else {
-            tempData.set明細CSV出力区分(対象選択_3);
         }
-        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(1).isNull()) {
+        if (div.getChkMeisaiCsvEdit().getSelectedKeys() != null && div.getChkMeisaiCsvEdit().getSelectedKeys().contains(KEY_2)) {
+            tempData.set連番付加(Tokeihyo_CSVEditKubun.する.getコード());
+        } else {
             tempData.set連番付加(Tokeihyo_CSVEditKubun.しない.getコード());
-        } else {
-            tempData.set連番付加(対象選択_2);
         }
-        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(1).isNull()) {
-            tempData.set明細リスト出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力しない.getコード());
+        if (div.getChkShutsuryokuTaisho().getSelectedKeys() != null && div.getChkShutsuryokuTaisho().getSelectedKeys().contains(KEY_2)) {
+            tempData.set明細リスト出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード());
         } else {
-            tempData.set明細リスト出力区分(対象選択_2);
+            tempData.set明細リスト出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力しない.getコード());
         }
         if (div.getTxtKyotakuRiyoritsuRange().getToValue() != null) {
             tempData.set終了居宅利用率(new RString(div.getTxtKyotakuRiyoritsuRange().getToValue().toString()));
@@ -118,10 +138,10 @@ public class DBC5100011MainHandler {
         if (div.getTxtHomonRiyoritsuRange().getToValue() != null) {
             tempData.set終了訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getToValue().toString()));
         }
-        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(0).isNull()) {
-            tempData.set統計表出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力しない.getコード());
+        if (div.getChkShutsuryokuTaisho().getSelectedKeys() != null && div.getChkShutsuryokuTaisho().getSelectedKeys().contains(KEY_1)) {
+            tempData.set統計表出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード());
         } else {
-            tempData.set統計表出力区分(対象選択_1);
+            tempData.set統計表出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力しない.getコード());
         }
         if (!RString.EMPTY.equals(div.getTxtHihokenshaNo().getValue())) {
             tempData.set被保険者番号(div.getTxtHihokenshaNo().getValue());
@@ -136,10 +156,10 @@ public class DBC5100011MainHandler {
         if (div.getTxtHomonRiyoritsuRange().getFromValue() != null) {
             tempData.set開始訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getFromValue().toString()));
         }
-        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(0).isNull()) {
-            tempData.set項目名付加(Tokeihyo_CSVEditKubun.しない.getコード());
+        if (div.getChkMeisaiCsvEdit().getSelectedKeys() != null && div.getChkMeisaiCsvEdit().getSelectedKeys().contains(KEY_1)) {
+            tempData.set項目名付加(Tokeihyo_CSVEditKubun.する.getコード());
         } else {
-            tempData.set項目名付加(対象選択_1);
+            tempData.set項目名付加(Tokeihyo_CSVEditKubun.しない.getコード());
         }
         if (div.getCcdChohyoShutsuryokujun().getSelected出力順() != null) {
             tempData.set出力順ID(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID());
@@ -250,7 +270,23 @@ public class DBC5100011MainHandler {
         RString 地区指定 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("地区指定"));
         Map<RString, RString> 選択地区リスト = restoreBatchParameterMap.getParameterValue(Map.class, new RString("選択地区リスト"));
         div.getCcdChikuShichosonSelect().initialize();
-        div.getCcdChikuShichosonSelect().set選択対象(地区指定);
+        RString 選択対象SelectKey = RString.EMPTY;
+        if (!RString.isNullOrEmpty(地区指定)) {
+            if (KEY_全て.equals(地区指定)) {
+                選択対象SelectKey = 文字_全て;
+            } else if (KEY_町域.equals(地区指定)) {
+                選択対象SelectKey = 文字_町域;
+            } else if (KEY_行政区.equals(地区指定)) {
+                選択対象SelectKey = ChikuShubetsu.行政区.getShubetsu();
+            } else if (KEY_地区1.equals(地区指定)) {
+                選択対象SelectKey = ChikuShubetsu.地区1.getShubetsu();
+            } else if (KEY_地区2.equals(地区指定)) {
+                選択対象SelectKey = ChikuShubetsu.地区2.getShubetsu();
+            } else if (KEY_地区3.equals(地区指定)) {
+                選択対象SelectKey = ChikuShubetsu.地区3.getShubetsu();
+            }
+        }
+        div.getCcdChikuShichosonSelect().set選択対象(選択対象SelectKey);
         div.getCcdChikuShichosonSelect().set選択結果(選択地区リスト);
         if (開始訪問居宅利用率 != null && !RString.EMPTY.equals(開始訪問居宅利用率)) {
             div.getTxtHomonRiyoritsuRange().setFromValue(new Decimal(開始訪問居宅利用率.toString()));
@@ -259,24 +295,36 @@ public class DBC5100011MainHandler {
         if (終了訪問居宅利用率 != null && !RString.EMPTY.equals(終了訪問居宅利用率)) {
             div.getTxtHomonRiyoritsuRange().setToValue(new Decimal(終了訪問居宅利用率.toString()));
         }
-        List<RString> 明細list = new ArrayList<>();
+        List<RString> 出力対象SelectedKeys = new ArrayList<>();
         RString 統計表出力区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("統計表出力区分"));
-        明細list.add(統計表出力区分);
         RString 明細リスト出力区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("明細リスト出力区分"));
-        明細list.add(明細リスト出力区分);
         RString 明細CSV出力区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("明細CSV出力区分"));
-        明細list.add(明細CSV出力区分);
-        div.getChkShutsuryokuTaisho().setSelectedItemsByKey(明細list);
+        if (RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード().equals(統計表出力区分)) {
+            出力対象SelectedKeys.add(KEY_1);
+        }
+        if (RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード().equals(明細リスト出力区分)) {
+            出力対象SelectedKeys.add(KEY_2);
+        }
+        if (RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード().equals(明細CSV出力区分)) {
+            出力対象SelectedKeys.add(KEY_3);
+        }
+        div.getChkShutsuryokuTaisho().setSelectedItemsByKey(出力対象SelectedKeys);
         RString 明細合計出力区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("明細合計出力区分"));
         div.getRadMeisaiGokeiOut().setSelectedKey(明細合計出力区分);
-        List<RString> 項目名list = new ArrayList<>();
+        List<RString> 明細CSV編集SelectedKeys = new ArrayList<>();
         RString 項目名付加 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("項目名付加"));
-        項目名list.add(項目名付加);
         RString 連番付加 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("連番付加"));
-        項目名list.add(連番付加);
         RString 日付スラッシュ編集 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("日付スラッシュ編集"));
-        項目名list.add(日付スラッシュ編集);
-        div.getChkMeisaiCsvEdit().setSelectedItemsByKey(項目名list);
+        if (Tokeihyo_CSVEditKubun.する.getコード().equals(連番付加)) {
+            明細CSV編集SelectedKeys.add(KEY_1);
+        }
+        if (Tokeihyo_CSVEditKubun.する.getコード().equals(項目名付加)) {
+            明細CSV編集SelectedKeys.add(KEY_2);
+        }
+        if (Tokeihyo_CSVEditKubun.する.getコード().equals(日付スラッシュ編集)) {
+            明細CSV編集SelectedKeys.add(KEY_3);
+        }
+        div.getChkMeisaiCsvEdit().setSelectedItemsByKey(明細CSV編集SelectedKeys);
         Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("出力順ID"));
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200004.getReportId(), 出力順ID);
     }

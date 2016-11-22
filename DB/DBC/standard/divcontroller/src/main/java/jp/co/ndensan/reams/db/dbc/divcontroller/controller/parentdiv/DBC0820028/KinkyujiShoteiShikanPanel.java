@@ -57,6 +57,8 @@ public class KinkyujiShoteiShikanPanel {
     private static final RString 登録 = new RString("登録");
     private static final RString 登録_削除 = new RString("登録_削除");
     private static final RString エーラメッセージ = new RString("請求額集計情報の未登録のサービス種類が存在します。請求額集計情報を登録して下さい。");
+    private static final RString NUM1 = new RString("1");
+    private static final RString NUM0 = new RString("0");
 
     /**
      * 償還払い費支給申請決定_サービス提供証明書(緊急時・所定疾患)画面初期化
@@ -89,6 +91,7 @@ public class KinkyujiShoteiShikanPanel {
                 被保険者番号, 整理番号, サービス年月, 申請日, 事業者番号, 明細番号, 証明書, 様式番号, 識別コード, 償還払ViewStateDB, parameter);
 
         getHandler(div).initDgdKinkyujiShoteiList(list);
+        setRowSort(div);
         ViewStateHolder.put(ViewStateKeys.所定疾患施設療養費等データ, list);
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー,
                 SikibetuNokennsakuki.class);
@@ -428,6 +431,9 @@ public class KinkyujiShoteiShikanPanel {
         if (登録.equals(処理モード) || 修正.equals(処理モード)) {
             return save(div, keys, 処理モード);
         }
+        if (getHandler(div).get内容変更状態()) {
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM1);
+        }
         return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る).respond();
     }
 
@@ -471,6 +477,7 @@ public class KinkyujiShoteiShikanPanel {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM0);
             return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る).respond();
         }
 
@@ -584,10 +591,6 @@ public class KinkyujiShoteiShikanPanel {
 
     private KinkyujiShoteiShikanPanelValidationHandler getCheckHandler(KinkyujiShoteiShikanPanelDiv div) {
         return new KinkyujiShoteiShikanPanelValidationHandler(div);
-    }
-
-    private ResponseData<KinkyujiShoteiShikanPanelDiv> createResponse(KinkyujiShoteiShikanPanelDiv div) {
-        return ResponseData.of(div).respond();
     }
 
 }

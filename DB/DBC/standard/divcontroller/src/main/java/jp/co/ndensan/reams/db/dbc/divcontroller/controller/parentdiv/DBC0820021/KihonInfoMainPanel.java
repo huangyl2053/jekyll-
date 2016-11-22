@@ -54,17 +54,7 @@ public class KihonInfoMainPanel {
 
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final RString 入所院実日数_外泊日数 = new RString("入所(院)実日数＋外泊日数");
-    private static final RString 期間日数 = new RString("入所(院)日・退所(院)日の間に収まる日数");
     private static final RString 固定明細番号 = new RString("0001");
-    private static final int NUM_1 = 1;
-    private static final int 日数 = 30;
-    private static final RString 入所年月日 = new RString("入所年月日");
-    private static final RString 退所年月日 = new RString("退所年月日");
-    private static final RString KEY_1 = new RString("1");
-    private static final RString KEY_2 = new RString("2");
-    private static final RString KEY_3 = new RString("3");
-    private static final RString KEY_4 = new RString("4");
 
     /**
      * 画面初期化処理のメソッドます。

@@ -7,12 +7,11 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB233001;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb233001.TokuchouSeidoKanIFRenkeiProcessParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb233001.TokuchouSeidoKanIFRenkeiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.csv.TokuchouSeidoKanIFRenkeiDTAEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb233001.TokuchouSeidoKanIFRenkeiEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosofujohorenkei.ITokuchoSofuJohoRenkeiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -21,10 +20,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.fld.FldWriter;
@@ -46,20 +43,40 @@ public class TokuchoSeidokanIFRenkeiProcess extends BatchProcessBase<TokuchouSei
     private static final RString DTA_NAME_SUFFIX = new RString(".DTA");
     private TokuchouSeidoKanIFRenkeiProcessParameter parameter;
     private List<DbT7051KoseiShichosonMasterEntity> 広域市町村情報;
-    private List<RString> ファイル出力List;
+    private List<RString> ファイル出力path;
+    private List<RString> ファイル入力path;
     private Map<RString, FldWriter<TokuchouSeidoKanIFRenkeiDTAEntity>> map;
     private Map<RString, RString> 情報map;
     private static final RString レコード区分_2 = new RString("2");
     private static final RString 通知内容コード_00 = new RString("00");
     private static final RString 特別徴収制度コード_0 = new RString("0");
     private static final RString 金額1_2 = new RString("00000000000");
+    private static final RString COPY = new RString("copy");
+    /**
+     * outputPathです。
+     */
+    public static final RString PARAMETER_OUT_OUTPUTPATH;
+    /**
+     * inputPathです。
+     */
+    public static final RString PARAMETER_IN_INPUTPATH;
 
+    static {
+        PARAMETER_OUT_OUTPUTPATH = new RString("outputPath");
+        PARAMETER_IN_INPUTPATH = new RString("inputPath");
+    }
+
+    private OutputParameter<List<RString>> outputPath;
+    private OutputParameter<List<RString>> inputPath;
     @BatchWriter
     private FldWriter<TokuchouSeidoKanIFRenkeiDTAEntity> writer;
 
     @Override
     protected void initialize() {
-        ファイル出力List = new ArrayList<>();
+        ファイル出力path = new ArrayList<>();
+        ファイル入力path = new ArrayList<>();
+        outputPath = new OutputParameter<>();
+        inputPath = new OutputParameter<>();
         map = new HashMap<>();
         情報map = new HashMap<>();
         広域市町村情報 = getMapper(ITokuchoSofuJohoRenkeiMapper.class).select広域市町村情報();
@@ -84,30 +101,27 @@ public class TokuchoSeidokanIFRenkeiProcess extends BatchProcessBase<TokuchouSei
     protected void createWriter() {
         for (DbT7051KoseiShichosonMasterEntity 情報 : 広域市町村情報) {
             RString ファイル名 = DTA_NAME_PREFIX.concat(情報.getShichosonShokibetsuID()).concat(DTA_NAME_SUFFIX);
-            RString dtaFilePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
-            writer = new FldWriter.InstanceBuilder(dtaFilePath)
-                    .setNewLine(NewLine.CRLF)
-                    .setEncodeJIS().build();
+            RString dtaFilePath_output = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
+            RString dtaFilePath_input = Path.combinePath(Path.getTmpDirectoryPath(), COPY.concat(ファイル名));
+            writer = new FldWriter.InstanceBuilder(dtaFilePath_input)
+                    .setNewLine(NewLine.LF)
+                    .setEncodeUtf8(false).build();
             情報map.put(情報.getShichosonCode().value(), ファイル名);
             map.put(情報.getShichosonCode().value(), writer);
+            ファイル出力path.add(dtaFilePath_output);
+            ファイル入力path.add(dtaFilePath_input);
         }
     }
 
     @Override
     protected void process(TokuchouSeidoKanIFRenkeiEntity entity) {
-        ファイル出力List.add(情報map.get(entity.getDt市町村コード()));
         map.get(entity.getDt市町村コード()).writeLine(getDtaEntity(entity));
-        ファイル出力List = removeDuplicate(ファイル出力List);
     }
 
     @Override
     protected void afterExecute() {
-        for (RString fileName : ファイル出力List) {
-            FilesystemName sharedFileName = new FilesystemName(fileName);
-            SharedFile.defineSharedFile(sharedFileName);
-            FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
-            SharedFile.copyToSharedFile(絶対パス, sharedFileName);
-        }
+        outputPath.setValue(ファイル出力path);
+        inputPath.setValue(ファイル入力path);
     }
 
     private TokuchouSeidoKanIFRenkeiDTAEntity getDtaEntity(TokuchouSeidoKanIFRenkeiEntity t) {
@@ -151,12 +165,5 @@ public class TokuchoSeidokanIFRenkeiProcess extends BatchProcessBase<TokuchouSei
         dTAEntity.set予備4(RString.EMPTY);
 
         return dTAEntity;
-    }
-
-    private List<RString> removeDuplicate(List<RString> list) {
-        HashSet s = new HashSet(list);
-        list.clear();
-        list.addAll(s);
-        return list;
     }
 }

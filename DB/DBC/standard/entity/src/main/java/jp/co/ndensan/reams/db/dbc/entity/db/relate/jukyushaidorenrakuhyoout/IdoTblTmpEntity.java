@@ -216,7 +216,7 @@ public class IdoTblTmpEntity extends DbTableEntityBase<IdoTblTmpEntity> implemen
     /**
      * エンティティはコピーです。
      *
-     * @param 公費負担上限額減額有
+     * @param 公費負担上限額減額有 RString
      * @return IdoTblTmpEntity
      */
     public DbT3001JukyushaIdoRenrakuhyoEntity copyTo3001Entity(RString 公費負担上限額減額有) {

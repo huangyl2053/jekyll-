@@ -173,7 +173,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         if (照会年月日 != null) {
             source.listUpper_5 = 照会年月日.wareki().toDateString();
         }
-        if (所得照会票発行一覧.getIdoYMD() != null) {
+        if (所得照会票発行一覧.getIdoYMD() != null && !所得照会票発行一覧.getIdoYMD().isEmpty()) {
             source.listUpper_6 = new FlexibleDate(所得照会票発行一覧.getIdoYMD().toString()).wareki().toDateString();
         }
         set種別(source);

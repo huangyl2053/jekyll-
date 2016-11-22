@@ -6,8 +6,6 @@
 
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7160001;
 
-import jp.co.ndensan.reams.ca.cac.divcontroller.handler.parentdiv.cace102000.HanyoListkougakugasSannKeiSuukekkaValidationMessage;
-import jp.co.ndensan.reams.ca.cac.divcontroller.handler.parentdiv.cace102000.HanyoListkougakugasSannKeiSuukekkaValidator;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7160001.HanyoListkougakugasSannKeiSuukekkaDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionary;

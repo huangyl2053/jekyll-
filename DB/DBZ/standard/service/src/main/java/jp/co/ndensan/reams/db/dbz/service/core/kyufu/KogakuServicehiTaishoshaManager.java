@@ -29,8 +29,8 @@ public class KogakuServicehiTaishoshaManager {
 
     private static final int 合算判定INDEX_平成17年09月以前 = 3;
     private static final int 合算判定INDEX_平成17年10月以降 = 2;
-    private static final RString 受託あり = new RString("2");
     private static final RString 受託なし = new RString("1");
+    private static final RString 受託あり = new RString("2");
     private static final FlexibleYearMonth 平成17年10月 = new FlexibleYearMonth("200510");
     private static final RString 全角カンマ = new RString("，");
     private final DbT3055KogakuKyufuTaishoshaGokeiDac dac3055;
@@ -82,78 +82,47 @@ public class KogakuServicehiTaishoshaManager {
         if (dbt3055Entity == null) {
             return false;
         }
-        FlexibleYearMonth 対象者受取年月 = dbt3055Entity.getTashoshaUketoriYM() == null || dbt3055Entity.getTashoshaUketoriYM().isEmpty()
-                ? new FlexibleYearMonth("000000")
-                : dbt3055Entity.getTashoshaUketoriYM();
-        
+
         RString 受託区分_高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        return has同月サービス(受託区分_高額, 対象者受取年月, 高額給付根拠);
+        return has同月サービス(受託区分_高額,
+                dbt3055Entity.getTaishoshaHanteiShinsaYM(),
+                dbt3055Entity.getTashoshaUketoriYM(), 高額給付根拠);
     }
 
-    static boolean has同月サービス(RString 受託区分_高額, FlexibleYearMonth 対象者受取年月, RString 高額給付根拠) {
+    static boolean has同月サービス(RString 受託区分_高額,
+            FlexibleYearMonth 対象者判定審査年月, FlexibleYearMonth 対象者受取年月,
+            RString 高額給付根拠) {
         if (RString.isNullOrEmpty(高額給付根拠)) {
             return false;
         }
         List<RString> 高額給付根拠s = 高額給付根拠.split(全角カンマ.toString());
 
-        boolean 同月サービス有無 = false;
+        FlexibleYearMonth 判定年月 = find判定年月(受託区分_高額, 対象者判定審査年月, 対象者受取年月);
+        if (判定年月 == null || 判定年月.isEmpty()) {
+            return false;
+        }
 
-        if (受託あり.equals(受託区分_高額)) {
-            if (平成17年10月.compareTo(対象者受取年月) <= 0) {
-                switch (getOrEMPTY(高額給付根拠s, 合算判定INDEX_平成17年10月以降).toString()) {
-                    case "合":
-                        同月サービス有無 = true;
-                        break;
-                    case "単":
-                        同月サービス有無 = false;
-                        break;
-                    default:
-                        同月サービス有無 = false;
-                        break;
-                }
-            } else if (平成17年10月.compareTo(対象者受取年月) > 0) {
-                switch (getOrEMPTY(高額給付根拠s, 合算判定INDEX_平成17年09月以前).toString()) {
-                    case "合":
-                        同月サービス有無 = true;
-                        break;
-                    case "単":
-                        同月サービス有無 = false;
-                        break;
-                    default:
-                        同月サービス有無 = false;
-                        break;
-                }
+        if (平成17年10月.compareTo(判定年月) <= 0) {
+            switch (getOrEMPTY(高額給付根拠s, 合算判定INDEX_平成17年10月以降).toString()) {
+                case "合":
+                    return true;
+                case "単":
+                    return false;
+                default:
+                    return false;
             }
-
-        } else if (受託なし.equals(受託区分_高額)) {
-            if (平成17年10月.compareTo(対象者受取年月) <= 0) {
-                switch (getOrEMPTY(高額給付根拠s, 合算判定INDEX_平成17年10月以降).toString()) {
-                    case "合":
-                        同月サービス有無 = true;
-                        break;
-                    case "単":
-                        同月サービス有無 = false;
-                        break;
-                    default:
-                        同月サービス有無 = false;
-                        break;
-                }
-            } else if (平成17年10月.compareTo(対象者受取年月) > 0) {
-                switch (getOrEMPTY(高額給付根拠s, 合算判定INDEX_平成17年09月以前).toString()) {
-                    case "合":
-                        同月サービス有無 = true;
-                        break;
-                    case "単":
-                        同月サービス有無 = false;
-                        break;
-                    default:
-                        同月サービス有無 = false;
-                        break;
-                }
+        } else if (平成17年10月.compareTo(判定年月) > 0) {
+            switch (getOrEMPTY(高額給付根拠s, 合算判定INDEX_平成17年09月以前).toString()) {
+                case "合":
+                    return true;
+                case "単":
+                    return false;
+                default:
+                    return false;
             }
         }
-        return 同月サービス有無;
+        return false;
     }
 
     private static RString getOrEMPTY(List<? extends RString> list, int index) {
@@ -161,5 +130,15 @@ public class KogakuServicehiTaishoshaManager {
             return list.get(index);
         }
         return RString.EMPTY;
+    }
+
+    private static FlexibleYearMonth find判定年月(
+            RString 受託区分_高額, FlexibleYearMonth 対象者判定審査年月, FlexibleYearMonth 対象者受取年月) {
+        if (受託なし.equals(受託区分_高額)) {
+            return 対象者判定審査年月;
+        } else if (受託あり.equals(受託区分_高額)) {
+            return 対象者受取年月;
+        }
+        return FlexibleYearMonth.EMPTY;
     }
 }

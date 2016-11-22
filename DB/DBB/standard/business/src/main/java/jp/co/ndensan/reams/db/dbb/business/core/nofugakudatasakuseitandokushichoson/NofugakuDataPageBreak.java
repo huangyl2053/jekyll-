@@ -61,6 +61,12 @@ public class NofugakuDataPageBreak extends PageBreaker<NofugakuIchiranSource> {
         } else if (this.breakKeysList.contains(NofugakuDataOutput.BreakerFieldsEnum.徴収方法.get項目ID())
                 && !currentSource.getSource().list6_4.equals(nextSource.getSource().list6_4)) {
             flg = true;
+        } else if (this.breakKeysList.contains(NofugakuDataOutput.BreakerFieldsEnum.町域コード.get項目ID())
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(NofugakuDataOutput.BreakerFieldsEnum.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().kanaMeisho.equals(nextSource.getSource().kanaMeisho)) {
+            flg = true;
         }
         return flg;
     }

@@ -23,6 +23,24 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBB233001_TokuchoSeidokanIFRenkeiParameter extends BatchParameterBase {
 
+    private RString dumy;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param dumy dumy
+     */
+    public DBB233001_TokuchoSeidokanIFRenkeiParameter(RString dumy) {
+        this.dumy = dumy;
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     */
+    public DBB233001_TokuchoSeidokanIFRenkeiParameter() {
+    }
+
     /**
      * 連携用出力ファイル作成ファイル出力（連携用出力ファイル） のparameter作成する。
      *

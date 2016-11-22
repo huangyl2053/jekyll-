@@ -27,7 +27,14 @@
             DbT7022."shoriName" = #{処理名} 
         AND  
             DbT7022.nendo = #{年度}
-        AND DbT7022."shichosonCode" = #{shichosonCode}
+        AND <foreach  
+            collection="shichosonCode"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+                DbT7022."shichosonCode" = #{item}
+        </foreach>
         AND DbT7022."shoriEdaban" = ( 
     SELECT
       MAX(A."shoriEdaban") 

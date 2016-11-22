@@ -10,18 +10,19 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC060010.DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1310011.KyufuTsuchiGenmenHoseiDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.ILoginInfo;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -104,8 +105,7 @@ public class KyufuTsuchiGenmenHoseiHandler {
             }
         }
         if (is単一()) {
-            LasdecCode 市町村コード = AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_();
-            保険者番号List.add(市町村コード.value());
+            保険者番号List.add(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         }
         paramter.setサービス開始年月(new FlexibleYearMonth(サービス開始年月));
         paramter.setサービス終了年月(new FlexibleYearMonth(サービス終了年月));
@@ -142,7 +142,7 @@ public class KyufuTsuchiGenmenHoseiHandler {
         List<KoikiZenShichosonJoho> 現市町村情報list = finder.getGenShichosonJoho().records();
         for (KoikiZenShichosonJoho business : 現市町村情報list) {
             KeyValueDataSource source = new KeyValueDataSource();
-            source.setKey(business.get市町村コード().value());
+            source.setKey(business.get証記載保険者番号().value());
             StringBuilder strBuilder = new StringBuilder();
             strBuilder.append(business.get市町村コード().value());
             strBuilder.append(RString.HALF_SPACE);

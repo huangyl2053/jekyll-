@@ -23,6 +23,7 @@ public class KyufuJissekiKihonShukeiRelateEntity implements Serializable {
     private static final long serialVersionUID = -4696623917043891214L;
 
     private AtenaMeisho 事業者名称;
+    private AtenaMeisho 事業者名称2;
     private DbT3118ShikibetsuNoKanriEntity 識別番号管理;
     private DbT3017KyufujissekiKihonEntity 給付実績基本データ;
 }

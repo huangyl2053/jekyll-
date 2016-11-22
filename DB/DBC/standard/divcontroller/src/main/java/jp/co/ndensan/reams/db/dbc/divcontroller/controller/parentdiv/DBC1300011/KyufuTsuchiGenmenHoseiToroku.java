@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -185,7 +186,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
         RString jotai = new RString(row.getRowState().toString());
         KyufuhiTuchiHoseiIdentifier key = new KyufuhiTuchiHoseiIdentifier(new HokenshaNo(row.getTxtShokisaiNo()),
                 hiHokenshaNo,
-                new FlexibleYearMonth(row.getTxtServiceNengetsu()),
+                new FlexibleYearMonth(row.getTxtHdnServiceNengetsu()),
                 new JigyoshaNo(row.getTxtJigyoshaNo()),
                 new ServiceShuruiCode(row.getTxtServiceShurui().substring(0, 2)),
                 Decimal.ONE);
@@ -202,8 +203,8 @@ public class KyufuTsuchiGenmenHoseiToroku {
             ViewStateHolder.put(ViewStateKeys.給付費通知補正, models);
             getHandler(div).delete();
         }
-        div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(true);
-        div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(true);
+        row.setModifyButtonState(DataGridButtonState.Disabled);
+        row.setDeleteButtonState(DataGridButtonState.Disabled);
         return ResponseData.of(div).respond();
     }
 

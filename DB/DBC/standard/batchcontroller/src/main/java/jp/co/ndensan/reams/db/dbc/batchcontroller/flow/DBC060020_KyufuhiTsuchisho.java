@@ -70,32 +70,33 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
 
     @Override
     protected void defineFlow() {
-        executeStep(ファイル取得);
-        returnEntity
-                = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
-                        KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
-        for (int i = 0; i < returnEntity.getFileNameList().size(); i++) {
-            String filePath = returnEntity.get保存先フォルダのパス() + File.separator
-                    + returnEntity.getFileNameList().get(i);
-            File path = new File(filePath);
-            csvFullPath = new RString(path.getPath());
-            isFirst = (0 == i);
-            isLast = ((returnEntity.getFileNameList().size() - 1) == i);
-            executeStep(CSVファイル取込);
-            if (flag) {
-                flag = getResult(Boolean.class, new RString(CSVファイル取込),
-                        KyufuhiTsuchishoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
-            } else {
-                executeStep(処理結果リスト作成);
-                executeStep(取込済ファイル削除);
+        if (給付費通知情報が取り込む.equals(getParameter().get福祉用具貸与ページ出力区分())) {
+            executeStep(ファイル取得);
+            returnEntity
+                    = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
+                            KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
+            for (int i = 0; i < returnEntity.getFileNameList().size(); i++) {
+                String filePath = returnEntity.get保存先フォルダのパス() + File.separator
+                        + returnEntity.getFileNameList().get(i);
+                File path = new File(filePath);
+                csvFullPath = new RString(path.getPath());
+                isFirst = (0 == i);
+                isLast = ((returnEntity.getFileNameList().size() - 1) == i);
+                executeStep(CSVファイル取込);
+                if (flag) {
+                    flag = getResult(Boolean.class, new RString(CSVファイル取込),
+                            KyufuhiTsuchishoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+                } else {
+                    executeStep(処理結果リスト作成);
+                    executeStep(取込済ファイル削除);
+                }
+            }
+            RDate now = RDate.getNowDate();
+            if (new RString("1").equals(DbBusinessConfig
+                    .get(ConfigNameDBU.合併情報管理_合併情報区分, now, SubGyomuCode.DBU介護統計報告))) {
+                保険者構成();
             }
         }
-        RDate now = RDate.getNowDate();
-        if (new RString("1").equals(DbBusinessConfig
-                .get(ConfigNameDBU.合併情報管理_合併情報区分, now, SubGyomuCode.DBU介護統計報告))) {
-            保険者構成();
-        }
-
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         RString 帳票タイプ = RString.EMPTY;
         ChohyoSeigyoHanyo 帳票制御汎帳票タイプ = 帳票制御汎用Manager.get帳票制御汎用(
@@ -137,6 +138,7 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
         KokuhorenkyotsuGetFileProcessParameter parameter = new KokuhorenkyotsuGetFileProcessParameter();
         parameter.set交換情報識別番号(交換情報識別番号);
         parameter.setファイル格納フォルダ名(ファイル格納フォルダ名);
+        parameter.setLoginUserID(getParameter().getLoginUserId());
         return simpleBatch(KokuhorenkyoutsuGetFileProcess.class).arguments(parameter).define();
     }
 

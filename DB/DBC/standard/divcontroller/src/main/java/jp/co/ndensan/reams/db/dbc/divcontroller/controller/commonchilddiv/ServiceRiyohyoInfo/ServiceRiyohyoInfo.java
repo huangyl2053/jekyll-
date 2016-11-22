@@ -186,9 +186,11 @@ public class ServiceRiyohyoInfo {
         div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(true);
         div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setDisabled(true);
         div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisai().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisai().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().getBtnCancelMeisaiInput().setDisabled(false);
         div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisaiGokei().setDisabled(true);
         div.getServiceRiyohyoBeppyoMeisai().getBtnBeppyoMeisaiKakutei().setDisabled(true);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnBeppyoMeisaiKakutei().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(true);
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
 
@@ -268,6 +270,7 @@ public class ServiceRiyohyoInfo {
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
 
         div.getServiceRiyohyoBeppyoGokei().getBtnCalcGokei().setDisabled(true);
+        div.getServiceRiyohyoBeppyoGokei().getBtnCalcGokei().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoGokei().getBtnCancelGokeiInput().setDisabled(false);
         div.getServiceRiyohyoBeppyoGokei().getBtnBeppyoGokeiKakutei().setDisabled(true);
         ViewStateHolder.put(ViewStateKeys.選択有无, false);
@@ -293,7 +296,12 @@ public class ServiceRiyohyoInfo {
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnKakutei(ServiceRiyohyoInfoDiv div) {
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
+        div.getBtnCalcMeisai().setDisplayNone(false);
+        div.getBtnCalcGokei().setDisplayNone(false);
+        div.getBtnBeppyoMeisaiKakutei().setDisplayNone(false);
         if (RSTRING_ONE.equals(div.getAddType())) {
+            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
+            div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoMeisai().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
@@ -304,12 +312,9 @@ public class ServiceRiyohyoInfo {
             div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setDisabled(false);
-            div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setVisible(true);
-            div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setVisible(true);
             div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setDisabled(false);
-//            div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(false);
             handler.onChange_txtServiceEvent();
         } else {
             div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
@@ -340,6 +345,7 @@ public class ServiceRiyohyoInfo {
             if (利用年月日 != null) {
                 利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
             }
+            handler.onChange_txtServiceEvent();
             handler.onClick_btnKakutei(被保険者番号, 利用年月);
         }
         return ResponseData.of(div).respond();
@@ -354,6 +360,7 @@ public class ServiceRiyohyoInfo {
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnSelect(ServiceRiyohyoInfoDiv div) {
         ViewStateHolder.put(ViewStateKeys.選択有无, true);
         getHandler(div).setパネルにデータ反映();
+        getHandler(div).init削除();
         return ResponseData.of(div).respond();
     }
 
@@ -652,6 +659,8 @@ public class ServiceRiyohyoInfo {
             利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
         }
         handler.onClick_btnKakutei(被保険者番号, 利用年月);
+        div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoGokei().getBtnBeppyoGokeiKakutei().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 

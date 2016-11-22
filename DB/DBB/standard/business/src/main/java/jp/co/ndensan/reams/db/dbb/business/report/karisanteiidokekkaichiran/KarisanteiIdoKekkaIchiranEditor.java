@@ -8,14 +8,18 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -206,6 +210,26 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
         }
         source.listCenter_15 = 口座異動編集(計算後情報_宛名_口座_更正前Entity);
         source.listCenter_16 = 徴収方法編集(計算後情報_宛名_口座_更正前Entity);
+        if (計算後情報_宛名_口座_更正前Entity.get宛名Entity() != null) {
+            ChoikiCode 町域コード = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getChoikiCode();
+            if (町域コード != null) {
+                source.choikiCode = 町域コード.getColumnValue();
+            }
+            FlexibleDate 生年月日 = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getSeinengappiYMD();
+            if (生年月日 != null) {
+                source.seinengappiYMD = new RString(生年月日.toString());
+            }
+            RString 性別 = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getSeibetsuCode();
+            source.seibetsuCode = 性別;
+            AtenaKanaMeisho 氏名５０音カナ = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getKanaMeisho();
+            if (氏名５０音カナ != null) {
+                source.kanaMeisho = 氏名５０音カナ.getColumnValue();
+            }
+        }
+        HihokenshaNo 被保険者番号 = 計算後情報_宛名_口座_更正前Entity.get被保険者番号();
+        if (被保険者番号 != null) {
+            source.hihokenshaNo = 被保険者番号.getColumnValue();
+        }
     }
 
     private void edit作成日時(KarisanteiIdoKekkaIchiranSource source) {
@@ -232,7 +256,15 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
     }
 
     private void 口座情報編集(KarisanteiIdoKekkaIchiranSource source) {
-        IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
+        if (計算後情報_宛名_口座_更正前Entity.get口座Entity() != null
+                && 計算後情報_宛名_口座_更正前Entity.get口座Entity().getUaT0310KozaEntity() != null
+                && 計算後情報_宛名_口座_更正前Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0) {
+            IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
+            set金融機関コード(koza, source);
+        }
+    }
+
+    private void set金融機関コード(IKoza koza, KarisanteiIdoKekkaIchiranSource source) {
         if (koza.get金融機関コード() != null) {
             if (koza.get金融機関コード().value().length() >= NUM_4 && ゆうちょ銀行
                     .equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4))) {
@@ -263,43 +295,31 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
             } else {
                 通帳番号 = koza.getEdited通帳番号();
             }
-            source.listUpper_4 = 金融機関コード.concat(RString.FULL_SPACE)
+            source.listUpper_4 = 金融機関コード.concat(RString.HALF_SPACE)
                     .concat(通帳記号)
                     .concat(HYPHEN).concat(通帳番号)
-                    .concat(RString.FULL_SPACE).concat(koza.get口座名義人漢字().toString());
+                    .concat(RString.HALF_SPACE).concat(koza.get口座名義人漢字().toString());
         }
     }
 
     private void 金融機関コードHander2(KarisanteiIdoKekkaIchiranSource source, IKoza koza) {
-        RString 金融機関コード;
-        RString 預金種別略称;
+        RString 金融機関コード = RString.EMPTY;
+        RString 預金種別略称 = RString.EMPTY;
         RString 支店コード;
         RString 口座番号;
-        if (koza.get支店コード() != null && koza.get口座番号() != null && koza.get口座名義人漢字() != null) {
-            if (koza.get金融機関コード().value().length() >= NUM_4) {
-                金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
-            } else {
-                金融機関コード = koza.get金融機関コード().value();
+        if (koza.get支店コード() != null && !RString.isNullOrEmpty(koza.get口座番号()) && koza.get口座名義人漢字() != null) {
+            if (koza.get金融機関コード() != null) {
+                金融機関コード = koza.get金融機関コード().value().substringReturnAsPossible(NUM_0, NUM_4);
             }
-            if (koza.get支店コード().value().length() >= NUM_5) {
-                支店コード = koza.get支店コード().value().substring(NUM_0, NUM_5);
-            } else {
-                支店コード = koza.get支店コード().value();
+            支店コード = koza.get支店コード().value().substringReturnAsPossible(NUM_0, NUM_5);
+            if (koza.get預金種別() != null && koza.get預金種別().get預金種別略称() != null) {
+                預金種別略称 = koza.get預金種別().get預金種別略称().substringReturnAsPossible(NUM_0, NUM_2);
             }
-            if (koza.get預金種別() != null && koza.get預金種別().get預金種別略称().length() >= NUM_2) {
-                預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);
-            } else {
-                預金種別略称 = koza.get預金種別().get預金種別略称();
-            }
-            if (koza.get口座番号().length() >= NUM_7) {
-                口座番号 = koza.get口座番号().substring(NUM_0, NUM_7);
-            } else {
-                口座番号 = koza.get口座番号();
-            }
+            口座番号 = koza.get口座番号().substringReturnAsPossible(NUM_0, NUM_7);
             source.listUpper_4 = 金融機関コード.concat(HYPHEN)
-                    .concat(支店コード).concat(RString.FULL_SPACE)
+                    .concat(支店コード).concat(RString.HALF_SPACE)
                     .concat(預金種別略称)
-                    .concat(HYPHEN).concat(口座番号).concat(RString.FULL_SPACE)
+                    .concat(HYPHEN).concat(口座番号).concat(RString.HALF_SPACE)
                     .concat(koza.get口座名義人漢字().toString());
         }
     }

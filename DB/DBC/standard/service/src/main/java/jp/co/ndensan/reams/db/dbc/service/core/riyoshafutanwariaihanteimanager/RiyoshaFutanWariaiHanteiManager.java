@@ -80,10 +80,6 @@ public class RiyoshaFutanWariaiHanteiManager {
     private static final int INDEX_ZERO = 0;
     private static final int LIST_SIZE_ONE = 1;
     private static final int 履歴番号_ONE = 1;
-    private static final int NUM_TWO = 2;
-    private static final int NUM_THREE = 3;
-    private static final int NUM_EIGHT = 8;
-    private static final int NUM_TWELVE = 12;
 
     /**
      * 初期化メソッドです。
@@ -213,13 +209,13 @@ public class RiyoshaFutanWariaiHanteiManager {
         List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報 = マージResult.get利用者負担割合明細情報();
         List<RiyoshaFutanWariaiKonkyoTempEntity> 利用者負担割合根拠情報 = マージResult.get利用者負担割合根拠情報();
         RString koseiJiyu = RString.EMPTY;
+        List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細list = new ArrayList<>();
         if (利用者負担割合明細情報 != null && !利用者負担割合明細情報.isEmpty()) {
             koseiJiyu = 利用者負担割合明細情報.get(0).getKoseiJiyu();
+            利用者負担割合明細list = get利用者負担割合明細list(年度, 被保険者番号, 利用者負担割合明細情報);
         }
         get利用者負担割合entity(年度, 被保険者番号, 利用者負担割合entity, koseiJiyu);
         判定結果.set利用者負担割合entity(利用者負担割合entity);
-        List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細list
-                = get利用者負担割合明細list(年度, 被保険者番号, 利用者負担割合明細情報);
         判定結果.set利用者負担割合明細list(利用者負担割合明細list);
         List<DbT3115RiyoshaFutanWariaiKonkyoEntity> 利用者負担割合根拠list
                 = get利用者負担割合根拠list(年度, 被保険者番号, 利用者負担割合根拠情報);
@@ -545,12 +541,13 @@ public class RiyoshaFutanWariaiHanteiManager {
         Decimal その他の合計所得金額 = Decimal.ZERO;
         if (介護所得情報list != null && !介護所得情報list.isEmpty()) {
             for (DbV2512KaigoShotokuNewestEntity 介護所得情報 : 介護所得情報list) {
-                if (介護所得情報.getNenkiniShotokuGaku() != null && 介護所得情報.getGokeiShotokuGaku() != null
-                        && 介護所得情報.getNenkiniShotokuGaku().compareTo(介護所得情報.getGokeiShotokuGaku()) < 0) {
+                if (isその他の合計所得金額(介護所得情報.getNenkiniShotokuGaku(), 介護所得情報.getGokeiShotokuGaku())) {
                     その他の合計所得金額 = その他の合計所得金額.add(介護所得情報.getGokeiShotokuGaku().
                             subtract(介護所得情報.getNenkiniShotokuGaku()));
                 }
-                年金収入合計 = 年金収入合計.add(介護所得情報.getNenkiniShotokuGaku());
+                if (介護所得情報.getNenkiniShotokuGaku() != null) {
+                    年金収入合計 = 年金収入合計.add(介護所得情報.getNenkiniShotokuGaku());
+                }
             }
             利用者負担割合明細Temp.setSonotanoGoukeiShotokuKingakuGoukei(その他の合計所得金額);
             利用者負担割合明細Temp.setHonninGoukeiShotokuGaku(介護所得情報list.get(0).getGokeiShotokuGaku());
@@ -565,6 +562,16 @@ public class RiyoshaFutanWariaiHanteiManager {
         if (生活保護該当情報Temp.getJukyuKaishiYMD() != null && !生活保護該当情報Temp.getJukyuKaishiYMD().isEmpty()) {
             利用者負担割合明細Temp.setJukyuKaishiYMD(new FlexibleDate(生活保護該当情報Temp.getJukyuKaishiYMD()));
         }
+    }
+
+    private Boolean isその他の合計所得金額(Decimal nenkiniShotokuGaku, Decimal gokeiShotokuGaku) {
+        if (nenkiniShotokuGaku == null || gokeiShotokuGaku == null) {
+            return false;
+        }
+        if (nenkiniShotokuGaku.compareTo(gokeiShotokuGaku) < 0) {
+            return true;
+        }
+        return false;
     }
 
     private void get生活保護該当情報Temp(
@@ -600,9 +607,15 @@ public class RiyoshaFutanWariaiHanteiManager {
             HihokenshaDaicho 被保険者台帳,
             List<SetaiinShikibetsuCd> 世帯員識別コード情報) {
         判定対象者Temp.setHihokenshaNo(被保険者番号);
-        判定対象者Temp.setShikibetsuCode(被保険者台帳.get識別コード());
+        if (被保険者台帳 != null) {
+            if (被保険者台帳.get識別コード() != null) {
+                判定対象者Temp.setShikibetsuCode(被保険者台帳.get識別コード());
+            }
+        }
         if (世帯員識別コード情報 != null && !世帯員識別コード情報.isEmpty()) {
-            判定対象者Temp.setSetaiCode(世帯員識別コード情報.get(0).get世帯コード());
+            if (世帯員識別コード情報.get(0).get世帯コード() != null) {
+                判定対象者Temp.setSetaiCode(世帯員識別コード情報.get(0).get世帯コード());
+            }
         }
         判定対象者Temp.setIdoShubetsu(RString.EMPTY);
 
@@ -787,10 +800,8 @@ public class RiyoshaFutanWariaiHanteiManager {
     }
 
     private List<SetaiinShikibetsuCd> remove重複(List<SetaiinShikibetsuCd> 世帯員識別コード情報list) {
-        if (世帯員識別コード情報list == null) {
+        if (世帯員識別コード情報list == null || 世帯員識別コード情報list.isEmpty()) {
             return new ArrayList<>();
-        } else if (世帯員識別コード情報list.isEmpty()) {
-            return 世帯員識別コード情報list;
         }
         Map<RString, SetaiinShikibetsuCd> 識別コードMap = new HashMap();
         for (SetaiinShikibetsuCd コード : 世帯員識別コード情報list) {

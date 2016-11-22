@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410048.TsuchishoJoho632Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -70,7 +71,7 @@ public class TsuchishoJoho632 {
         parameter.setSaishoriKubun(再処理区分);
         parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
         parameter.setShutsuryokujunId(出力順ID);
-
+        parameter.setLoginUserId(ControlDataHolder.getUserId());
         return parameter;
     }
 }

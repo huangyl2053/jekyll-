@@ -58,6 +58,8 @@ public class TokuteiNyushoshaHiyoPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString NUM1 = new RString("1");
+    private static final RString NUM0 = new RString("0");
 
     /**
      * 画面初期化のメソッドます。
@@ -307,11 +309,7 @@ public class TokuteiNyushoshaHiyoPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.一覧に戻る).respond();
         }
-        if (getHandler(div).isChange()) {
-            return clear入力内容(div);
-        } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.一覧に戻る).respond();
-        }
+        return clear入力内容(div);
     }
 
     private ResponseData<TokuteiNyushoshaHiyoPanelDiv> clear入力内容(TokuteiNyushoshaHiyoPanelDiv div) {
@@ -325,6 +323,7 @@ public class TokuteiNyushoshaHiyoPanel {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM0);
             return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.一覧に戻る).respond();
         } else {
             return ResponseData.of(div).respond();
@@ -525,17 +524,6 @@ public class TokuteiNyushoshaHiyoPanel {
         }
 
         return realData;
-    }
-
-    private ShokanTokuteiNyushoshaKaigoServiceHiyo is存在(ShokanTokuteiNyushoshaKaigoServiceHiyo entity, List<ShokanTokuteiNyushoshaKaigoServiceHiyo> list) {
-
-        for (ShokanTokuteiNyushoshaKaigoServiceHiyo baseEntity : list) {
-
-            if (isUpdated(baseEntity, entity)) {
-                return baseEntity;
-            }
-        }
-        return null;
     }
 
     private List<ShokanTokuteiNyushoshaKaigoServiceHiyo> get償還払請求特定入所者介護サービス費用(TokuteiNyushoshaHiyoPanelDiv div) {

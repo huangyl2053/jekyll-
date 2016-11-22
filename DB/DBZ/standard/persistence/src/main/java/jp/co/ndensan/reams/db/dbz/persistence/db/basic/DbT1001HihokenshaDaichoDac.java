@@ -94,9 +94,9 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(idoYMD, 異動日),
-                                eq(edaNo, 枝番))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(idoYMD, 異動日),
+                        eq(edaNo, 枝番))).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 
@@ -132,10 +132,10 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                leq(substr(idoYMD, 開始桁, 終了桁), サービス年月),
-                                eq(logicalDeletedFlag, false)
-                        )).
+                        eq(hihokenshaNo, 被保険者番号),
+                        leq(substr(idoYMD, 開始桁, 終了桁), サービス年月),
+                        eq(logicalDeletedFlag, false)
+                )).
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
@@ -159,10 +159,10 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                lt(サービス年月, substr(idoYMD, 開始桁, 終了桁)),
-                                eq(logicalDeletedFlag, false)
-                        )).
+                        eq(hihokenshaNo, 被保険者番号),
+                        lt(サービス年月, substr(idoYMD, 開始桁, 終了桁)),
+                        eq(logicalDeletedFlag, false)
+                )).
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.ASC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
@@ -202,13 +202,39 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(shikakuShutokuYMD, 取得日),
-                                not(eq(logicalDeletedFlag, true)),
-                                not(isNULL(jushochitokureiTekiyoYMD)),
-                                not(eq(jushochitokureiTekiyoYMD, ""))
-                        )).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(shikakuShutokuYMD, 取得日),
+                        not(eq(logicalDeletedFlag, true)),
+                        not(isNULL(jushochitokureiTekiyoYMD)),
+                        not(eq(jushochitokureiTekiyoYMD, ""))
+                )).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(jushochitokureiKaijoYMD, Order.DESC, NullsOrder.LAST)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 有効な資格の情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 該当する被保険者台帳情報
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT1001HihokenshaDaichoEntity> select有効な資格の情報(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(hihokennshaKubunCode, new RString("1")),
+                        not(eq(logicalDeletedFlag, true))
+                ))
+                .order(new OrderBy(ichigoShikakuShutokuYMD, Order.DESC, NullsOrder.LAST),
+                        new OrderBy(shikakuSoshitsuYMD, Order.DESC, NullsOrder.LAST),
+                        new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST),
+                        new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
 
@@ -231,12 +257,12 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                eq(shikakuShutokuYMD, 取得日),
-                                not(eq(logicalDeletedFlag, true)),
-                                not(isNULL(jushochitokureiTekiyoYMD)),
-                                not(eq(jushochitokureiTekiyoYMD, ""))
-                        )).
+                        eq(shikibetsuCode, 識別コード),
+                        eq(shikakuShutokuYMD, 取得日),
+                        not(eq(logicalDeletedFlag, true)),
+                        not(isNULL(jushochitokureiTekiyoYMD)),
+                        not(eq(jushochitokureiTekiyoYMD, ""))
+                )).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(jushochitokureiKaijoYMD, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
@@ -263,9 +289,9 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(eq(hihokenshaNo, 被保険者番号),
-                                eq(idoYMD, 異動日),
-                                eq(edaNo, 枝番),
-                                not(eq(logicalDeletedFlag, true))))
+                        eq(idoYMD, 異動日),
+                        eq(edaNo, 枝番),
+                        not(eq(logicalDeletedFlag, true))))
                 .toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 
@@ -321,8 +347,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(makeShuruiCondition).order(by(DbT1001HihokenshaDaicho.hihokenshaNo, Order.DESC),
-                        by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC),
-                        by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
+                by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC),
+                by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
 
@@ -364,9 +390,9 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(shikakuShutokuYMD, 取得日),
-                                eq(logicalDeletedFlag, false))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(shikakuShutokuYMD, 取得日),
+                        eq(logicalDeletedFlag, false))).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
 
@@ -391,8 +417,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(logicalDeletedFlag, 論理削除フラグ),
-                                eq(shikibetsuCode, 識別コード))).
+                        eq(logicalDeletedFlag, 論理削除フラグ),
+                        eq(shikibetsuCode, 識別コード))).
                 order(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST),
                         new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST)).
                 limit(1).
@@ -414,8 +440,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(logicalDeletedFlag, false))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(logicalDeletedFlag, false))).
                 order(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST),
                         new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST)).
                 limit(1).
@@ -490,9 +516,9 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                leq(idoYMD, new FlexibleDate(サービス提供年月.toDateString().toString() + "01")),
-                                not(eq(logicalDeletedFlag, true)))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        leq(idoYMD, new FlexibleDate(サービス提供年月.toDateString().toString() + "01")),
+                        not(eq(logicalDeletedFlag, true)))).
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
@@ -509,8 +535,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                not(eq(logicalDeletedFlag, true)))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        not(eq(logicalDeletedFlag, true)))).
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
@@ -527,8 +553,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(logicalDeletedFlag, false))).order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).limit(1)
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(logicalDeletedFlag, false))).order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).limit(1)
                 .toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 
@@ -548,10 +574,10 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         List<DbT1001HihokenshaDaichoEntity> entityList = accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(isDeleted, false),
-                                leq(shikakuShutokuYMD, 基準年月日)
-                        )).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(isDeleted, false),
+                        leq(shikakuShutokuYMD, 基準年月日)
+                )).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
         for (DbT1001HihokenshaDaichoEntity entity : entityList) {
@@ -582,9 +608,9 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         List<DbT1001HihokenshaDaichoEntity> entityList = accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                eq(isDeleted, false),
-                                leq(shikakuShutokuYMD, 基準年月日))).
+                        eq(shikibetsuCode, 識別コード),
+                        eq(isDeleted, false),
+                        leq(shikakuShutokuYMD, 基準年月日))).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
         for (DbT1001HihokenshaDaichoEntity entity : entityList) {
@@ -613,8 +639,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                eq(isDeleted, false))).
+                        eq(shikibetsuCode, 識別コード),
+                        eq(isDeleted, false))).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(edaNo, Order.DESC, NullsOrder.LAST)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
@@ -676,10 +702,10 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                leq(異動日, idoYMD),
-                                not(eq(shikibetsuCode, 識別コード)),
-                                eq(hihokennshaKubunCode, 被保険者区分コード))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        leq(異動日, idoYMD),
+                        not(eq(shikibetsuCode, 識別コード)),
+                        eq(hihokennshaKubunCode, 被保険者区分コード))).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
@@ -701,8 +727,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.selectSpecific(max(edaNo)).
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(idoYMD, 異動日))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(idoYMD, 異動日))).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 
@@ -724,10 +750,10 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(hihokennshaKubunCode, 被保険者区分コード),
-                                leq(ichigoShikakuShutokuYMD, システム日付),
-                                or(isNULL(shikakuSoshitsuYMD), leq(システム日付, shikakuSoshitsuYMD), eq(shikakuSoshitsuYMD, "")))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(hihokennshaKubunCode, 被保険者区分コード),
+                        leq(ichigoShikakuShutokuYMD, システム日付),
+                        or(isNULL(shikakuSoshitsuYMD), leq(システム日付, shikakuSoshitsuYMD), eq(shikakuSoshitsuYMD, "")))).
                 order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
@@ -746,11 +772,11 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokennshaKubunCode, ShikakuKubun._１号.getコード()),
-                                eq(logicalDeletedFlag, FALSE),
-                                leq(抽出開始日時, lastUpdateTimestamp),
-                                leq(lastUpdateTimestamp, 抽出終了日時)
-                        )).toList(DbT1001HihokenshaDaichoEntity.class);
+                        eq(hihokennshaKubunCode, ShikakuKubun._１号.getコード()),
+                        eq(logicalDeletedFlag, FALSE),
+                        leq(抽出開始日時, lastUpdateTimestamp),
+                        leq(lastUpdateTimestamp, 抽出終了日時)
+                )).toList(DbT1001HihokenshaDaichoEntity.class);
     }
 
     /**
@@ -771,18 +797,18 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokennshaKubunCode, 数字１),
-                                not(isNULL(shikakuSoshitsuYMD)),
-                                not(eq(shikakuSoshitsuYMD, FlexibleDate.EMPTY)),
-                                or(
-                                        and(leq(抽出開始日時の日付, shikakuSoshitsuYMD),
-                                                leq(shikakuSoshitsuYMD, 抽出終了日時の日付)),
-                                        and(leq(抽出開始日時, lastUpdateTimestamp),
-                                                leq(lastUpdateTimestamp, 抽出終了日時),
-                                                leq(普徴仮算定賦課処理日時の日付, shikakuSoshitsuYMD),
-                                                leq(shikakuSoshitsuYMD, 抽出終了日時の日付))
-                                ),
-                                eq(logicalDeletedFlag, false))
+                        eq(hihokennshaKubunCode, 数字１),
+                        not(isNULL(shikakuSoshitsuYMD)),
+                        not(eq(shikakuSoshitsuYMD, FlexibleDate.EMPTY)),
+                        or(
+                                and(leq(抽出開始日時の日付, shikakuSoshitsuYMD),
+                                        leq(shikakuSoshitsuYMD, 抽出終了日時の日付)),
+                                and(leq(抽出開始日時, lastUpdateTimestamp),
+                                        leq(lastUpdateTimestamp, 抽出終了日時),
+                                        leq(普徴仮算定賦課処理日時の日付, shikakuSoshitsuYMD),
+                                        leq(shikakuSoshitsuYMD, 抽出終了日時の日付))
+                        ),
+                        eq(logicalDeletedFlag, false))
                 ).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
@@ -805,18 +831,18 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokennshaKubunCode, 数字１),
-                                or(isNULL(shikakuSoshitsuYMD),
-                                        eq(shikakuSoshitsuYMD, FlexibleDate.EMPTY)),
-                                or(
-                                        and(leq(抽出開始日時の日付, ichigoShikakuShutokuYMD),
-                                                leq(ichigoShikakuShutokuYMD, 抽出終了日時の日付)),
-                                        and(leq(抽出開始日時, lastUpdateTimestamp),
-                                                leq(lastUpdateTimestamp, 抽出終了日時),
-                                                leq(普徴仮算定賦課処理日時の日付, ichigoShikakuShutokuYMD),
-                                                leq(ichigoShikakuShutokuYMD, 抽出終了日時の日付))
-                                ),
-                                eq(logicalDeletedFlag, false))
+                        eq(hihokennshaKubunCode, 数字１),
+                        or(isNULL(shikakuSoshitsuYMD),
+                                eq(shikakuSoshitsuYMD, FlexibleDate.EMPTY)),
+                        or(
+                                and(leq(抽出開始日時の日付, ichigoShikakuShutokuYMD),
+                                        leq(ichigoShikakuShutokuYMD, 抽出終了日時の日付)),
+                                and(leq(抽出開始日時, lastUpdateTimestamp),
+                                        leq(lastUpdateTimestamp, 抽出終了日時),
+                                        leq(普徴仮算定賦課処理日時の日付, ichigoShikakuShutokuYMD),
+                                        leq(ichigoShikakuShutokuYMD, 抽出終了日時の日付))
+                        ),
+                        eq(logicalDeletedFlag, false))
                 ).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
@@ -852,8 +878,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                eq(logicalDeletedFlag, false))).
+                        eq(shikibetsuCode, 識別コード),
+                        eq(logicalDeletedFlag, false))).
                 order(by(hihokenshaNo), by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
     }
@@ -876,9 +902,9 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(idoYMD, 異動日)
-                        )).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(idoYMD, 異動日)
+                )).
                 order(by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);

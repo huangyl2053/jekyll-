@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuJizenShi
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.ShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011StateName.更新完了;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011StateName.照会;
@@ -41,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -283,26 +281,6 @@ public class JutakuKaishuJizenShinseiToroku {
     }
 
     /**
-     * 「過去の住宅改修費を確認する」ボタン
-     *
-     * @param div JutakuKaishuJizenShinseiTorokuDiv
-     * @return ResponseData<JutakuKaishuJizenShinseiTorokuDiv>
-     */
-    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onClick_btnRireki(JutakuKaishuJizenShinseiTorokuDiv div) {
-        JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
-        handler.住宅改修内容のチェック();
-        HihokenshaNo hihokenshaNo = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        ShiharaiKekkaResult 前回までの支払結果 = ViewStateHolder.get(ViewStateKeys.前回までの支払結果, ShiharaiKekkaResult.class);
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
-        RDate サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, RDate.class);
-        ViewStateHolder.put(ViewStateKeys.住宅改修データ, handler.過去の住宅改修費取得(hihokenshaNo, 前回までの支払結果,
-                画面モード, 整理番号, new FlexibleYearMonth(サービス年月.getYearMonth().toDateString())));
-        ViewStateHolder.put(ViewStateKeys.一覧データ, (Serializable) handler.to住宅改修データを画面メモリに保存());
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 「限度額をチェックする」ボタン
      *
      * @param div JutakuKaishuJizenShinseiTorokuDiv
@@ -319,6 +297,7 @@ public class JutakuKaishuJizenShinseiToroku {
 
         handler.住宅改修内容のチェック();
         handler.費用額合計の設定();
+        handler.前回までの支払結果設定(hihokenshaNo);
 
         if (!非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg()) && handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
                 && !selectedItems.contains(要介護状態区分)) {
@@ -364,28 +343,6 @@ public class JutakuKaishuJizenShinseiToroku {
                 return ResponseData.of(div).respond();
             } else {
                 return ResponseData.of(div).addMessage(msg).respond();
-            }
-        }
-
-        boolean 限度額のチェック結果 = handler.限度額チェック(hihokenshaNo, seiriNo);
-        if (!限度額のチェック結果) {
-            if (!非表示用フラグ_TRUE.equals(div.getHidLimitNGMsgDisplayedFlg())) {
-                WarningMessage message = new WarningMessage(
-                        DbcWarningMessages.住宅改修限度額確認.getMessage().getCode(),
-                        DbcWarningMessages.住宅改修限度額確認.getMessage().evaluate());
-                div.setHidLimitNGMsgDisplayedFlg(非表示用フラグ_TRUE);
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(DbcWarningMessages.住宅改修限度額確認.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                selectedItems.remove(住宅住所変更);
-                div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
-                        .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().setSelectedItems(selectedItems);
-                div.setHidLimitNGMsgDisplayedFlg(RString.EMPTY);
-            } else {
-                div.setHidLimitNGMsgDisplayedFlg(RString.EMPTY);
-                return ResponseData.of(div).respond();
             }
         }
         handler.支払結果の設定(hihokenshaNo);

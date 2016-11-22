@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120820;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 受給者情報突合結果情報取込のバッチパラメータです。
@@ -24,4 +25,6 @@ public class DBC120820_JukyushaTotsugoKekkaInParameter extends BatchParameterBas
 
     @BatchParameter(key = "出力順ID", name = "出力順ID")
     private Long 出力順ID;
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 }

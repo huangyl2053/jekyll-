@@ -62,8 +62,8 @@ public class JikoFutangakushomeishoManager {
     private static final RString メニューID_DBCMN63001 = new RString("DBCMN63001");
     private static final RString メニューID_DBCMNN2001 = new RString("DBCMNN2001");
     private IJikoFutangakushomeishoMapper mapper;
-    private static final RString 自己負担額証明書作成 = new RString("自己負担額証明書作成");
-    private static final RString 事業分_自己負担額証明書作成 = new RString("事業分・自己負担額証明書作成");
+    private static final RString 自己負担額証明書作成 = new RString("自己負担額証明書");
+    private static final RString 事業分_自己負担額証明書作成 = new RString("事業分・自己負担額証明書");
 
     /**
      * コンストラクタです。
@@ -169,9 +169,12 @@ public class JikoFutangakushomeishoManager {
     public ToiawasesakiSource get問合せ先(ReportId 帳票分類ID) {
         DbT7069KaigoToiawasesakiEntity dbT7069 = 介護問合せ先dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID);
 
-        KaigoToiawasesaki kaigoToiawasesaki = new KaigoToiawasesaki(dbT7069);
-        ToiawasesakiSource source = new ToiawasesakiSource();
+        KaigoToiawasesaki kaigoToiawasesaki = null;
         if (dbT7069 != null) {
+            kaigoToiawasesaki = new KaigoToiawasesaki(dbT7069);
+        }
+        ToiawasesakiSource source = new ToiawasesakiSource();
+        if (kaigoToiawasesaki != null) {
             if (kaigoToiawasesaki.get郵便番号() != null) {
                 source.yubinBango = kaigoToiawasesaki.get郵便番号().value();
             }

@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.ue.uex.definition.core.DoteiFuitchiRiyu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -30,6 +29,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     private static final RString 男性 = new RString("1");
     private static final RString 女性 = new RString("2");
     private static final RString 年度 = new RString("年度");
+    private static final RString 作成 = new RString("　作成");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -99,7 +99,6 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         set郵便番号(source);
         set住所(source);
         set天引先区分(source);
-        set出力事由(source);
         set出力順(source);
         set改ページ項目名(source);
         set改ページデータ(source);
@@ -127,7 +126,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     }
 
     private void set作成日時(TokubetsuChoshuMidoteiIchiranSource source) {
-        source.printTimeStamp = DateConverter.getSakuseiYMD();
+        source.printTimeStamp = DateConverter.getSakuseiYMD().concat(作成);
     }
 
     private void set導入団体コード(TokubetsuChoshuMidoteiIchiranSource source) {
@@ -209,20 +208,6 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     private void set天引先区分(TokubetsuChoshuMidoteiIchiranSource source) {
         Boolean 厚労省判定 = this.特徴対象一覧未同定.getKoroshoHantei();
         source.listList1_8 = 厚労省判定 ? 厚労省 : 地共済;
-    }
-
-    private void set出力事由(TokubetsuChoshuMidoteiIchiranSource source) {
-        RString 不一致理由コード = this.特徴対象一覧未同定.getFuichiRiyuCode();
-        if (RString.isNullOrEmpty(不一致理由コード)) {
-            return;
-        }
-        for (DoteiFuitchiRiyu type : DoteiFuitchiRiyu.values()) {
-            if (type.getコード().equals(不一致理由コード)) {
-                source.listList1_9 = type.get不一致理由名();
-                return;
-            }
-        }
-        source.listList1_9 = RString.EMPTY;
     }
 
     private void set出力順(TokubetsuChoshuMidoteiIchiranSource source) {

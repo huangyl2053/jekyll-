@@ -905,7 +905,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(高額介護サービス費一時の作成)
     protected IBatchFlowCommand callInsKogakuKaigoServiceHiTmpProcess() {
-        return loopBatch(InsKogakuKaigoServiceHiTmpProcess.class).define();
+        return loopBatch(InsKogakuKaigoServiceHiTmpProcess.class).arguments(getInsKogakuKaigoServiceHiTmpProcessParameter()).define();
     }
 
     /**
@@ -915,7 +915,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
      */
     @Step(事業高額介護サービス費一時の作成)
     protected IBatchFlowCommand callInsJigyoKogakuKaigoServiceHiTmpProcess() {
-        return loopBatch(InsJigyoKogakuKaigoServiceHiTmpProcess.class).define();
+        return loopBatch(InsJigyoKogakuKaigoServiceHiTmpProcess.class).arguments(getInsKogakuKaigoServiceHiTmpProcessParameter()).define();
     }
 
     /**
@@ -1058,6 +1058,12 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
         KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter parameter = new KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter();
         parameter.setSysDate(処理日時);
         parameter.setSysYearMonth(new FlexibleYearMonth(処理日時.getDate().getYearMonth().toDateString()));
+        return parameter;
+    }
+
+    private KyufuJissekiKihonKogakuProcessParameter getInsKogakuKaigoServiceHiTmpProcessParameter() {
+        KyufuJissekiKihonKogakuProcessParameter parameter = new KyufuJissekiKihonKogakuProcessParameter();
+        parameter.set処理年月日(new FlexibleDate(処理日時.getDate().toDateString()));
         return parameter;
     }
 }

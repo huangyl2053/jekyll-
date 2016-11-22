@@ -146,8 +146,8 @@ public class HanyoListSaishinsaKekkaResult {
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
-            eucEntity.set行政区コード(iKojin.get行政区画().getChugakkoku().getコード());
-            eucEntity.set行政区名(iKojin.get行政区画().getChugakkoku().get名称());
+            eucEntity.set行政区コード(iKojin.get行政区画().getGyoseiku().getコード());
+            eucEntity.set行政区名(iKojin.get行政区画().getGyoseiku().get名称());
             eucEntity.set地区１(iKojin.get行政区画().getChiku1().getコード());
             eucEntity.set地区２(iKojin.get行政区画().getChiku2().getコード());
             eucEntity.set地区３(iKojin.get行政区画().getChiku3().getコード());
@@ -262,8 +262,8 @@ public class HanyoListSaishinsaKekkaResult {
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
-            eucEntity.set行政区コード(iKojin.get行政区画().getChugakkoku().getコード());
-            eucEntity.set行政区名(iKojin.get行政区画().getChugakkoku().get名称());
+            eucEntity.set行政区コード(iKojin.get行政区画().getGyoseiku().getコード());
+            eucEntity.set行政区名(iKojin.get行政区画().getGyoseiku().get名称());
             eucEntity.set地区１(iKojin.get行政区画().getChiku1().getコード());
             eucEntity.set地区２(iKojin.get行政区画().getChiku2().getコード());
             eucEntity.set地区３(iKojin.get行政区画().getChiku3().getコード());
@@ -329,8 +329,12 @@ public class HanyoListSaishinsaKekkaResult {
         RString 申請事由 = nullToEmpty(entity.get受給申請事由());
         eucEntity.set受給申請事由(set受給申請事由(申請事由, entity));
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
-        eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(processParameter.getDate(),
-                entity.get要介護認定状態区分コード().value()).getName());
+        if (entity.get要介護認定状態区分コード() != null) {
+            eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(processParameter.getDate(),
+                    entity.get要介護認定状態区分コード().value()).getName());
+        } else {
+            eucEntity.set受給要介護度(RString.EMPTY);
+        }
         eucEntity.set受給認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
         eucEntity.set受給認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
         eucEntity.set受給認定日(set日付編集(entity.get認定年月日()));

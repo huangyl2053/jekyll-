@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseiken
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -49,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
@@ -64,6 +62,7 @@ public class SeikyuGakuShukeiPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString NUM1 = new RString("1");
+    private static final RString NUM0 = new RString("0");
     private static final RString 入力完了 = new RString("1");
     private static final RString 登録_削除 = new RString("登録_削除");
 
@@ -105,10 +104,8 @@ public class SeikyuGakuShukeiPanel {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
         getHandler(div).set申請共通エリア(サービス年月, 事業者番号, 申請日, 明細番号, 様式番号);
-        List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
-                .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
         DbJohoViewState 一覧情報リスト = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        ArrayList<ShokanShukeiResult> entityList = new ArrayList<>();
+        ArrayList<ShokanShukeiResult> entityList;
         if (!一覧情報リスト.get償還払請求集計データList().isEmpty()) {
             entityList = 一覧情報リスト.get償還払請求集計データList();
         } else {
@@ -121,6 +118,8 @@ public class SeikyuGakuShukeiPanel {
                     明細番号, null);
             if (entityList != null) {
                 一覧情報リスト.set償還払請求集計データList(entityList);
+            } else {
+                entityList = new ArrayList<>();
             }
             ViewStateHolder.put(ViewStateKeys.請求額集計一覧情報, entityList);
         }
@@ -178,6 +177,8 @@ public class SeikyuGakuShukeiPanel {
         getHandler(div).set請求額集計登録(ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class));
         dgdSeikyugakushukei_Row row = div.getPanelSeikyugakuShukei()
                 .getDgdSeikyugakushukei().getClickedItem();
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getBtnClear().setDisabled(true);
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getBtnCal().setDisabled(true);
         if (RowState.Added.equals(row.getRowState())) {
             ViewStateHolder.put(ViewStateKeys.状態, 登録_削除);
         } else {
@@ -255,6 +256,7 @@ public class SeikyuGakuShukeiPanel {
         if (new RString(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM0);
             return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.一覧に戻る).respond();
         } else {
             return ResponseData.of(div).respond();
@@ -305,6 +307,7 @@ public class SeikyuGakuShukeiPanel {
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         boolean flag = getHandler(div).is内容変更状態();
         if (flag) {
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM1);
             一覧情報リスト = 証明書フラグ設定(明細検索キー, 処理モード, 一覧情報リスト);
         }
         最終情報を設定する(div, 一覧情報リスト, 処理モード, 明細検索キー, state);
@@ -332,6 +335,15 @@ public class SeikyuGakuShukeiPanel {
             証明書変更済フラグ.set請求額集計_証明書変更済フラグ(ShomeishoHenkoKubunType.変更あり);
             証明書変更済フラグMap.put(明細検索キー, 証明書変更済フラグ);
             一覧情報リスト.set証明書変更済フラグMap(証明書変更済フラグMap);
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap
+                    = 一覧情報リスト.get証明書入力済フラグMap();
+            ShomeishoNyuryokuFlag 証明書入力済フラグ = 一覧情報リスト.get証明書入力済フラグMap().get(明細検索キー);
+            if (証明書入力済フラグ == null) {
+                証明書入力済フラグ = new ShomeishoNyuryokuFlag();
+            }
+            証明書入力済フラグ.set請求額集計_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力あり);
+            証明書入力済フラグMap.put(明細検索キー, 証明書入力済フラグ);
+            一覧情報リスト.set証明書入力済フラグMap(証明書入力済フラグMap);
         }
         return 一覧情報リスト;
     }

@@ -83,18 +83,8 @@ public class HanyoListCsvNoRenbanDataCreate {
     private static final RString 他 = new RString("他");
     private static final int INDEX_13 = 13;
     private static final int INDEX_15 = 15;
-    private static final RString is旧措置者フラグTRUE = new RString("true");
+    private static final RString 旧措置者フラグTRUE = new RString("true");
     private static final RString 旧措置者STR = new RString("旧措置者");
-    private final FlexibleDate システム日付;
-
-    /**
-     * コンストラクタ
-     *
-     * @param システム日付 システム日付
-     */
-    public HanyoListCsvNoRenbanDataCreate(FlexibleDate システム日付) {
-        this.システム日付 = システム日付;
-    }
 
     /**
      * createCsvData
@@ -422,7 +412,7 @@ public class HanyoListCsvNoRenbanDataCreate {
             csvEntity.set保険請求額(new RString(String.valueOf(entity.get支給申請Entity().getHokenKyufugaku())));
             csvEntity.set自己負担額(new RString(String.valueOf(entity.get支給申請Entity().getRiyoshaFutangaku())));
 
-            if (null != entity.get支給申請Entity().getShiharaiHohoKubunCode() && !entity.get支給申請Entity().getShiharaiHohoKubunCode().isEmpty()) {
+            if (!RString.isNullOrEmpty(entity.get支給申請Entity().getShiharaiHohoKubunCode())) {
                 csvEntity.set支払方法(ShiharaiHohoKubun.toValue(entity.get支給申請Entity().getShiharaiHohoKubunCode()).get名称());
             }
 
@@ -520,6 +510,12 @@ public class HanyoListCsvNoRenbanDataCreate {
         }
         csvEntity.set受給申請事由(受給申請事由);
 
+        set被保険者台帳管理2(entity, csvEntity, parameter);
+
+    }
+
+    private void set被保険者台帳管理2(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
+            HanyoListShokanbaraiJokyoProcessParameter parameter) {
         csvEntity.set受給申請日(dataToRString(entity.get受給申請年月日(), parameter));
         if (entity.get要介護認定状態区分コード() == null || entity.get要介護認定状態区分コード().isEmpty()) {
             csvEntity.set受給要介護度(RString.EMPTY);
@@ -529,7 +525,7 @@ public class HanyoListCsvNoRenbanDataCreate {
         csvEntity.set受給認定開始日(dataToRString(entity.get認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.get認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(dataToRString(entity.get受給認定日(), parameter));
-        if (is旧措置者フラグTRUE.equals(entity.get旧措置者フラグ())) {
+        if (旧措置者フラグTRUE.equals(entity.get旧措置者フラグ())) {
             csvEntity.set受給旧措置(旧措置者STR);
         } else {
             csvEntity.set受給旧措置(RString.EMPTY);
@@ -541,7 +537,6 @@ public class HanyoListCsvNoRenbanDataCreate {
         if (entity.get直近異動事由コード() != null && !entity.get直近異動事由コード().isEmpty()) {
             csvEntity.set受給直近事由(get受給直近事由(entity.get直近異動事由コード()));
         }
-
     }
 
     private RString get受給直近事由(Code code) {

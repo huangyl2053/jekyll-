@@ -598,11 +598,11 @@
               </if>
               <if test="給付実績区分flag">
                   AND
-                     DbT3017."kyufuJissekiKubunCode" = '1'
+                     DbT3017."kyufuJissekiKubunCode" = #{給付実績区分}
               </if>
               <if test="!給付実績区分flag">
                   AND
-                     DbT3017."kyufuJissekiKubunCode" = '2'
+                     DbT3017."kyufuJissekiKubunCode" = #{給付実績区分}
               </if>
               <if test="すべて選択flag">
                   AND
@@ -678,7 +678,7 @@
               </if>
               <if test="居宅介護支援flag">
                   AND
-                  DbT3017."inputShikibetsuNo" IN ('8124','21B4')
+                  DbT3017."inputShikibetsuNo" IN ('8124','2184')
               </if>
               <if test="介護老人福祉施設サービスflag">
                   AND
@@ -734,7 +734,7 @@
               </if>
               <if test="予防支援flag">
                   AND
-                  DbT3017."inputShikibetsuNo" IN ('8125','21B5')
+                  DbT3017."inputShikibetsuNo" IN ('8125','2185')
               </if>
               <if test="予防特定福祉用具販売費flag">
                   AND
@@ -790,11 +790,11 @@
               </if>
               <if test="!公費負担者番号flag">
                   AND
-                  DbT3017."kohi1FutanshaNo" = #{公費負担者番号} OR DbT3017."kohi2FutanshaNo" = #{公費負担者番号} OR DbT3017."kohi3FutanshaNo" = #{公費負担者番号}
+                  (DbT3017."kohi1FutanshaNo" = #{公費負担者番号} OR DbT3017."kohi2FutanshaNo" = #{公費負担者番号} OR DbT3017."kohi3FutanshaNo" = #{公費負担者番号})
               </if>
               <if test="!公費受給者番号flag">
                   AND
-                  DbT3017."kohi1JukyushaNo" = #{公費受給者番号} OR DbT3017."kohi2JukyushaNo" = #{公費受給者番号} OR DbT3017."kohi3JukyushaNo" = #{公費受給者番号}
+                  (DbT3017."kohi1JukyushaNo" = #{公費受給者番号} OR DbT3017."kohi2JukyushaNo" = #{公費受給者番号} OR DbT3017."kohi3JukyushaNo" = #{公費受給者番号})
               </if>
               <if test="事業者番号flag">
                   AND
@@ -876,7 +876,7 @@
         </if>
         <if test="居宅介護支援flag">
             AND
-            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('8124','21B4')
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('8124','2184')
         </if>
         <if test="介護老人福祉施設サービスflag">
             AND
@@ -932,7 +932,7 @@
         </if>
         <if test="予防支援flag">
             AND
-            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('8125','21B5')
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('8125','2185')
         </if>
         <if test="予防特定福祉用具販売費flag">
             AND
@@ -1007,7 +1007,6 @@
             resultMap="resultMap_KinkyuuziShisetuRyouyouRelateEntity" fetchSize="500">
         SELECT
                 DbT3118."ryakusho" AS "dbT3118_ryakusho", 
-                DbT7120."serviceMeisho" AS "dbT7120_serviceMeisho",
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3019KyufujissekiKinkyuShisetsuRyoyoMapper.allColumns_DbT3019KyufujissekiKinkyuShisetsuRyoyo" />
         FROM
@@ -1022,33 +1021,6 @@
                  ON "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo" = DbT3118."shikibetsuNo"
                  AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"
                  AND "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
-                LEFT JOIN rgdb."DbT7120TokuteiShinryoServiceCode" AS DbT7120
-                  ON CASE WHEN 
-                  "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo" IN ('2151',
-                        '2152',
-                        '2153',
-                        '2154',
-                        '2191',
-                        '2192',
-                        '2193',
-                        '7151',
-                        '7152',
-                        '7153',
-                        '7154',
-                        '7191',
-                        '7192',
-                        '7193'
-                    )
-                    AND SUBSTR("DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo", 0, 4) IN ('216','21A','716','71A')
-                    THEN DbT7120."serviceShuruiCode" = '60'
-                    ELSE DbT7120."serviceShuruiCode" = '70'
-                  END
-                  AND DbT7120."serviceKomokuCode" = "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo"
-                  AND DbT7120."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"
-                  AND DbT7120."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"
-                  AND ("DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM" <![CDATA[<=]]> DbT7120."tekiyoKaishiYM" 
-                    OR DbT7120."tekiyoKaishiYM" ='' 
-                    OR DbT7120."tekiyoKaishiYM"  IS NULL)
         WHERE
 	'201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
 	<include refid="subsql"/>
@@ -1071,6 +1043,7 @@
             resultMap="resultMap_TokuteiShinryouHiRelateEntity" fetchSize="500">
         SELECT 
                 DbT3118."ryakusho" AS "dbT3118_ryakusho", 
+                DbT7120."serviceMeisho" AS "dbT7120_serviceMeisho",
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoMapper.allColumns_DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo" />
         FROM		
@@ -1085,6 +1058,33 @@
                             ON DbT3118."shikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo" 
                             AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
                             AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+                            LEFT JOIN rgdb."DbT7120TokuteiShinryoServiceCode" AS DbT7120
+                  ON CASE WHEN 
+                  "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo" IN ('2151',
+                        '2152',
+                        '2153',
+                        '2154',
+                        '2191',
+                        '2192',
+                        '2193',
+                        '7151',
+                        '7152',
+                        '7153',
+                        '7154',
+                        '7191',
+                        '7192',
+                        '7193'
+                    )
+                    AND SUBSTR("DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo", 0, 4) IN ('216','21A','716','71A')
+                    THEN DbT7120."serviceShuruiCode" = '60'
+                    ELSE DbT7120."serviceShuruiCode" = '70'
+                    END
+                    AND DbT7120."serviceKomokuCode" = "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."inputShikibetsuNo"
+                    AND DbT7120."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."serviceTeikyoYM"
+                    AND DbT7120."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."serviceTeikyoYM"
+                    AND ("DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."serviceTeikyoYM" <![CDATA[<=]]> DbT7120."tekiyoShuryoYM" 
+                    OR DbT7120."tekiyoShuryoYM" ='' 
+                    OR DbT7120."tekiyoShuryoYM"  IS NULL)
         WHERE
 	'201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
 	<include refid="subsql"/>
@@ -1311,6 +1311,7 @@
     </select>
     
     <resultMap id="resultMap_ShoteiShikkanRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShoteiShikkanRelateEntity" autoMapping="true">
+        <result property="dbT3118_ryakusho" column="dbT3118_ryakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
         <association property="dbt3032" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3032KyufujissekiShoteiShikkanShisetsuRyoyoMapper.ResultMap_DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity"/>
     </resultMap>
@@ -1318,6 +1319,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
             resultMap="resultMap_ShoteiShikkanRelateEntity" fetchSize="500">
         SELECT 
+                DbT3118."meisho" AS "dbT3118_ryakusho", 
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3032KyufujissekiShoteiShikkanShisetsuRyoyoMapper.allColumns_DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo" />
         FROM		
@@ -1328,6 +1330,10 @@
                         AND	"DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
                         AND	"DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
                         AND	"DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+                LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+                            ON DbT3118."shikibetsuNo" = "DbT3017KyufujissekiKihon"."inputShikibetsuNo" 
+                            AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                            AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
         WHERE
             '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
             <include refid="subsql"/>
@@ -1929,11 +1935,11 @@
         </if>
         <if test="給付実績区分flag">
             AND
-               DbT3028."kyufuJissekiKubunCode" = '1'
+               DbT3028."kyufuJissekiKubunCode" = #{給付実績区分}
         </if>
         <if test="!給付実績区分flag">
             AND
-               DbT3028."kyufuJissekiKubunCode" = '2'
+               DbT3028."kyufuJissekiKubunCode" = #{給付実績区分}
         </if>
         <if test="訪問通所他flag">
             AND
@@ -1969,7 +1975,7 @@
         </if>
         <if test="居宅介護支援flag">
             AND
-            DbT3028."inputShikibetsuNo" IN ('8124','21B4')
+            DbT3028."inputShikibetsuNo" IN ('8124','2184')
         </if>
         <if test="介護老人福祉施設サービスflag">
             AND
@@ -2025,7 +2031,7 @@
         </if>
         <if test="予防支援flag">
             AND
-            DbT3028."inputShikibetsuNo" IN ('8125','21B5')
+            DbT3028."inputShikibetsuNo" IN ('8125','2185')
         </if>
         <if test="予防特定福祉用具販売費flag">
             AND
@@ -2053,7 +2059,7 @@
         </if>
         <if test="!公費負担者番号flag">
             AND
-            DbT3028."kohi1FutanNo" = #{公費負担者番号} OR DbT3028."kohi2FutanNo" = #{公費負担者番号} OR DbT3028."kohi3FutanNo" = #{公費負担者番号}
+            (DbT3028."kohi1FutanNo" = #{公費負担者番号} OR DbT3028."kohi2FutanNo" = #{公費負担者番号} OR DbT3028."kohi3FutanNo" = #{公費負担者番号})
         </if>
     ORDER BY
             DbT3028."inputShikibetsuNo" ASC,

@@ -57,37 +57,17 @@ public class SyokanbaraihiShikyuShinseiManager {
     public ShomeishoNyuryokuKanryoKubunType 証明書InputCheck(ShomeishoNyuryokuFlag 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
         ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
 
-        if (!基本証明書InputCheck(証明書入力済フラグ.get基本情報_証明書入力済フラグ(), shikibetsuNoKanri)) {
-            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
-        }
-        if (!明細証明書InputCheck(証明書入力済フラグ.get給付費明細_証明書入力済フラグ(), shikibetsuNoKanri)) {
-            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
-        }
-        if (!特定診療費証明書InputCheck(証明書入力済フラグ.get特定診療費_証明書入力済フラグ(), shikibetsuNoKanri)) {
-            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
-        }
-        if (!居宅計画費証明書InputCheck(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ(), shikibetsuNoKanri)) {
-            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
-        }
-        if (!特定入所者証明書InputCheck(証明書入力済フラグ.get特定入所者費用_証明書入力済フラグ(), shikibetsuNoKanri)) {
-            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
-        }
-        if (!明細住所地特例証明書InputCheck(証明書入力済フラグ.get給付費明細住特_証明書入力済フラグ(), shikibetsuNoKanri)) {
-            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
-        }
-        if (!所定疾患施設療養証明書InputCheck(証明書入力済フラグ.get緊急時所定疾患_証明書入力済フラグ(), shikibetsuNoKanri)) {
-            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
-        }
-        if (!緊急時施設療養証明書InputCheck(証明書入力済フラグ.get緊急時施設療養費_証明書入力済フラグ(), shikibetsuNoKanri)) {
-            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
-        }
-        if (!食事費用証明書InputCheck(証明書入力済フラグ.get食事費用_証明書入力済フラグ(), shikibetsuNoKanri)) {
-            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
-        }
-        if (!集計証明書InputCheck(証明書入力済フラグ.get請求額集計_証明書入力済フラグ(), shikibetsuNoKanri)) {
-            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
-        }
-        if (!社会福祉法人軽減証明書InputCheck(証明書入力済フラグ.get社福軽減額_証明書入力済フラグ(), shikibetsuNoKanri)) {
+        if (!基本証明書InputCheck(証明書入力済フラグ.get基本情報_証明書入力済フラグ(), shikibetsuNoKanri)
+                || !明細証明書InputCheck(証明書入力済フラグ.get給付費明細_証明書入力済フラグ(), shikibetsuNoKanri)
+                || !特定診療費証明書InputCheck(証明書入力済フラグ.get特定診療費_証明書入力済フラグ(), shikibetsuNoKanri)
+                || !居宅計画費証明書InputCheck(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ(), shikibetsuNoKanri)
+                || !特定入所者証明書InputCheck(証明書入力済フラグ.get特定入所者費用_証明書入力済フラグ(), shikibetsuNoKanri)
+                || !明細住所地特例証明書InputCheck(証明書入力済フラグ.get給付費明細住特_証明書入力済フラグ(), shikibetsuNoKanri)
+                || !所定疾患施設療養証明書InputCheck(証明書入力済フラグ.get緊急時所定疾患_証明書入力済フラグ(), shikibetsuNoKanri)
+                || !緊急時施設療養証明書InputCheck(証明書入力済フラグ.get緊急時施設療養費_証明書入力済フラグ(), shikibetsuNoKanri)
+                || !食事費用証明書InputCheck(証明書入力済フラグ.get食事費用_証明書入力済フラグ(), shikibetsuNoKanri)
+                || !集計証明書InputCheck(証明書入力済フラグ.get請求額集計_証明書入力済フラグ(), shikibetsuNoKanri)
+                || !社会福祉法人軽減証明書InputCheck(証明書入力済フラグ.get社福軽減額_証明書入力済フラグ(), shikibetsuNoKanri)) {
             return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
 

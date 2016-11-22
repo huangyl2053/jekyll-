@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB051001.PrtMeisaiIchiranProcessPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranProperty;
@@ -105,6 +106,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
     private Association 地方公共団体;
     private List<RString> 出力項目リスト;
     private List<RString> 改頁項目リスト;
+    private List<RString> breakKeys;
     @BatchWriter
     private BatchReportWriter<TokubetsuChoshuIraikingakuMeisaiIchiranSource> batchReportWriter;
     private ReportSourceWriter<TokubetsuChoshuIraikingakuMeisaiIchiranSource> reportSourceWriter;
@@ -115,6 +117,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
 
         出力項目リスト = new ArrayList();
         改頁項目リスト = new ArrayList();
+        breakKeys = new ArrayList();
         manager = KariSanteiIdoFukaBatch.createInstance();
         if (processParameter.get出力帳票Entity() != null
                 && !RString.isNullOrEmpty(processParameter.get出力帳票Entity().get出力順ID())) {
@@ -132,7 +135,12 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value()).create();
+        if (改頁項目リスト.isEmpty()) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value()).create();
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value())
+                    .addBreak(new PrtMeisaiIchiranProcessPageBreak(breakKeys)).create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
@@ -186,8 +194,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
         HokenryoDankai 保険料段階 = null;
         if (!RString.isNullOrEmpty(賦課の情報一時Entity.getHokenryoDankaiKarisanntei())) {
             HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
-            保険料段階 = 保険料段階List.getBy段階区分(賦課の情報一時Entity.getHokenryoDankaiKarisanntei());
-
+            保険料段階 = 保険料段階List.getBy段階Index(賦課の情報一時Entity.getHokenryoDankaiKarisanntei());
         }
         TokubetsuChoshuIraikingakuMeisaiIchiranReport report = new TokubetsuChoshuIraikingakuMeisaiIchiranReport(賦課の情報一時Entity,
                 宛名, 年金特徴回付情報, 徴収方法, 出力項目リスト,
@@ -242,7 +249,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
                 ReportIdDBB.DBB200023.getReportId().getColumnValue(),
                 導入団体コード,
                 市町村名,
-                RString.FULL_SPACE.concat(String.valueOf(JobContextHolder.getJobId())),
+                RString.EMPTY.concat(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBB.DBB200023.getReportName(),
                 出力ページ数,
                 CSV出力有無_有り,
@@ -259,7 +266,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
 
         if (!RString.isNullOrEmpty(賦課の情報一時Entity.getHokenryoDankaiKarisanntei())) {
             HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
-            HokenryoDankai 保険料段階 = 保険料段階List.getBy段階区分(賦課の情報一時Entity.getHokenryoDankaiKarisanntei());
+            HokenryoDankai 保険料段階 = 保険料段階List.getBy段階Index(賦課の情報一時Entity.getHokenryoDankaiKarisanntei());
             RString 保険料段階表記 = 保険料段階.get表記();
             Decimal 基準年度保険料率 = 保険料段階.get保険料率();
             csvEntity.set保険料段階(保険料段階表記);
@@ -336,6 +343,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
                 出力項目リスト.add(setSortItem.get項目名());
                 if (setSortItem.is改頁項目()) {
                     改頁項目リスト.add(setSortItem.get項目名());
+                    breakKeys.add(setSortItem.get項目ID());
                 }
             }
             i = i + INT_1;

@@ -230,6 +230,9 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getTxtRiyoYM().setDisabled(false);
             div.getDdlKoshinKbn().setSelectedKey(KyufukanrihyoSakuseiKubun.新規.getコード());
             div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
+            div.getServiceRiyohyoBeppyoRiyoNissu().getTxtRuikeiRiyoNissu().setValue(Decimal.ZERO);
+            div.getServiceRiyohyoBeppyoRiyoNissu().getTxtTogetsuRiyoNissu().setValue(Decimal.ZERO);
+            div.getServiceRiyohyoBeppyoRiyoNissu().getTxtZengetsuRiyoNissu().setValue(Decimal.ZERO);
         }
         if (居宅.equals(居宅総合事業区分)) {
             div.getChkZanteiKubun().setVisible(true);
@@ -503,8 +506,8 @@ public class ServiceRiyohyoInfoDivHandler {
 
     private void set短期入所(Decimal 前回迄利用日数, Decimal 今回計画利用日数, FlexibleYearMonth 送付年月,
             RString 更新区分, RString 暫定区分) {
-        div.getServiceRiyohyoBeppyoRiyoNissu().getTxtZengetsuRiyoNissu().setValue(前回迄利用日数);
-        div.getServiceRiyohyoBeppyoRiyoNissu().getTxtTogetsuRiyoNissu().setValue(今回計画利用日数);
+        div.getServiceRiyohyoBeppyoRiyoNissu().getTxtZengetsuRiyoNissu().setValue(前回迄利用日数 == null ? Decimal.ZERO : 前回迄利用日数);
+        div.getServiceRiyohyoBeppyoRiyoNissu().getTxtTogetsuRiyoNissu().setValue(今回計画利用日数 == null ? Decimal.ZERO : 今回計画利用日数);
         div.getServiceRiyohyoBeppyoRiyoNissu().getTxtRuikeiRiyoNissu()
                 .setValue(nullToZero(前回迄利用日数).add(nullToZero(今回計画利用日数)));
         div.getTxtSofuYM().setValue(isFlexibleYearMonthNullOrEmpty(送付年月) ? null
@@ -662,31 +665,38 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setサービス項目コード(row.getHdnServiceKomokuCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(true);
+            div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisai().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnCancelMeisaiInput().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisaiGokei().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnBeppyoMeisaiKakutei().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
         } else {
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
         }
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
 
-        if (!RString.isNullOrEmpty(row.getTani())) {
-            div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue(RString.isNullOrEmpty(row.getTani())
-                    ? null : new Decimal(row.getTani().toString()));
-            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setValue(RString.isNullOrEmpty(row.getWaribikigoRitsu())
-                    ? null : new Decimal(row.getWaribikigoRitsu().toString()));
-            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(RString.isNullOrEmpty(row.getWaribikigoTani())
-                    ? null : new Decimal(row.getWaribikigoTani().toString()));
-            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setValue(RString.isNullOrEmpty(row.getKaisu())
-                    ? null : new Decimal(row.getKaisu().toString()));
-            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(row.getServiceTani().getValue());
-            div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
-            div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setValue(row.getRiyoshaFutangakuTeigaku().getValue());
-            div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setVisible(true);
-            div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setVisible(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().setValue(row.getHdnGendogakuTaishogaiFlag());
-            div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn()
-                    .setValue(row.getHdnRiyoshaFutanTeiritsuTeigakuKbn());
-        }
+        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false); 
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue(RString.isNullOrEmpty(row.getTani())
+                ? null : new Decimal(row.getTani().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setValue(RString.isNullOrEmpty(row.getWaribikigoRitsu())
+                ? null : new Decimal(row.getWaribikigoRitsu().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().setValue(RString.isNullOrEmpty(row.getWaribikigoTani())
+                ? null : new Decimal(row.getWaribikigoTani().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setValue(RString.isNullOrEmpty(row.getKaisu())
+                ? null : new Decimal(row.getKaisu().toString()));
+        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(row.getServiceTani().getValue());
+        div.getServiceRiyohyoBeppyoMeisai().getTxtRiyoushaFutangaku().clearValue();
+        div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setValue(row.getRiyoshaFutangakuTeigaku().getValue());
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setVisible(true);
+        div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setVisible(true);
+        div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().setValue(row.getHdnGendogakuTaishogaiFlag());
+        div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn()
+                .setValue(row.getHdnRiyoshaFutanTeiritsuTeigakuKbn());
 
         if (合計有り.equals(row.getHdnGokeiFlag())) {
             div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
@@ -702,6 +712,15 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setValue(row.getHokenKyufugaku().getValue());
             div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setValue(row.getRiyoshaFutangakuHoken().getValue());
             div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().setValue(row.getRiyoshaFutangakuZengaku().getValue());
+            
+            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisai().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnCancelMeisaiInput().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisaiGokei().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnBeppyoMeisaiKakutei().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
         }
 
         RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
@@ -785,6 +804,7 @@ public class ServiceRiyohyoInfoDivHandler {
             }
         }
         div.getServiceRiyohyoBeppyoMeisai().getBtnBeppyoMeisaiKakutei().setDisabled(false);
+        div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisaiGokei().setDisabled(false);
     }
 
     /**
@@ -822,24 +842,7 @@ public class ServiceRiyohyoInfoDivHandler {
                 || RSTRING_09.equals(利用サービス.get単位数識別().getKey()))) {
             総合事業以外の場合(サービス種類Tmp, 利用サービス);
         }
-
-        if (RSTRING_17.equals(サービス種類Tmp)
-                || RSTRING_67.equals(サービス種類Tmp)
-                || RSTRING_88.equals(サービス種類Tmp)) {
-            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setReadOnly(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setReadOnly(true);
-            div.getBtnCalcMeisaiGokei().setVisible(false);
-            div.getBtnCalcMeisaiGokei().setDisabled(false);
-            div.getBtnBeppyoMeisaiKakutei().setVisible(false);
-            div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(false);
-            
-            div.getBtnCalcMeisai().setVisible(false);
-            div.getBtnCalcGokei().setVisible(false);            
-            div.getBtnBeppyoGokeiKakutei().setDisabled(false);            
-            div.getBtnCancelMeisaiInput().setVisible(false);            
-        }
+        
         if (サービスフラグTmp && 利用サービス
                 != null) {
             div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(false);
@@ -863,6 +866,20 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getBtnCalcMeisai().setDisabled(false);
             div.getBtnCalcMeisaiGokei().setDisabled(true);
             div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
+        }
+        if (RSTRING_17.equals(サービス種類Tmp)
+                || RSTRING_67.equals(サービス種類Tmp)
+                || RSTRING_88.equals(サービス種類Tmp)) {
+            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setReadOnly(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setReadOnly(true);
+//            div.getBtnCalcMeisaiGokei().setDisabled(false);
+//            div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(false);   
+            div.getBtnBeppyoGokeiKakutei().setDisabled(false);
+            div.getBtnCalcMeisai().setDisplayNone(true);
+            div.getBtnCalcGokei().setDisplayNone(true);
+            div.getBtnBeppyoMeisaiKakutei().setDisplayNone(true);
         }
     }
 
@@ -1381,8 +1398,8 @@ public class ServiceRiyohyoInfoDivHandler {
         ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(給付率));
         div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(給付率);
 
-//        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
-//        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
 //        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
 //        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
 //        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
@@ -1450,8 +1467,13 @@ public class ServiceRiyohyoInfoDivHandler {
      */
     public void init削除() {
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
-        row.setRowState(RowState.Deleted);
+        RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+        if (!照会.equals(表示モード)) {
+            row.setRowState(RowState.Deleted);
+            div.getBtnUpdate().setDisabled(false);
+        }
 
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisabled(true);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(row.getHdnJigyoshaCode());
 
@@ -1474,21 +1496,22 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoMeisai().getTxtTeigakuRiyoushaFutangaku().setValue(row.getRiyoshaFutangakuTeigaku().getValue());
 
         div.getServiceRiyohyoBeppyoGokei().setDisabled(true);
-        div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().setValue(row.getShuruiGendoChokaTani().getValue());
-        div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().setValue(row.getShuruiGendonaiTani().getValue());
-        div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().setValue(RString.isNullOrEmpty(row.getTanisuTanka())
-                ? null : new Decimal(row.getTanisuTanka().toString()));
-        div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().setValue(row.getKubunGendoChokaTani().getValue());
-        div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().setValue(row.getKubunGendonaiTani().getValue());
-        div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(RString.isNullOrEmpty(row.getKyufuritsu())
-                ? null : new Decimal(row.getKyufuritsu().toString()));
-        div.getServiceRiyohyoBeppyoGokei().getTxtHiyoSogaku().setValue(row.getHiyoSogaku().getValue());
-        div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setValue(row.getHokenKyufugaku().getValue());
-        div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setValue(row.getRiyoshaFutangakuHoken().getValue());
-        div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().setValue(row.getRiyoshaFutangakuZengaku().getValue());
+        if (合計有り.equals(row.getHdnGokeiFlag())) {
+            div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
+            div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().setValue(row.getShuruiGendoChokaTani().getValue());
+            div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().setValue(row.getShuruiGendonaiTani().getValue());
+            div.getServiceRiyohyoBeppyoGokei().getTxtTanisuTanka().setValue(RString.isNullOrEmpty(row.getTanisuTanka())
+                    ? null : new Decimal(row.getTanisuTanka().toString()));
+            div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().setValue(row.getKubunGendoChokaTani().getValue());
+            div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().setValue(row.getKubunGendonaiTani().getValue());
+            div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(RString.isNullOrEmpty(row.getKyufuritsu())
+                    ? null : new Decimal(row.getKyufuritsu().toString()));
+            div.getServiceRiyohyoBeppyoGokei().getTxtHiyoSogaku().setValue(row.getHiyoSogaku().getValue());
+            div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setValue(row.getHokenKyufugaku().getValue());
+            div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setValue(row.getRiyoshaFutangakuHoken().getValue());
+            div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().setValue(row.getRiyoshaFutangakuZengaku().getValue());
+        }
         
-        div.getBtnUpdate().setDisabled(false);
     }
 
     /**

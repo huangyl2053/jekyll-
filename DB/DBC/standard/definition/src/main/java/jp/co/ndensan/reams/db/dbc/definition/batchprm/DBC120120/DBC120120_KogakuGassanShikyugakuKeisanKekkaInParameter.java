@@ -36,4 +36,6 @@ public class DBC120120_KogakuGassanShikyugakuKeisanKekkaInParameter extends Batc
     private RString 出力順ID;
     @BatchParameter(key = KEY_処理区分, name = "処理区分")
     private RString 処理区分;
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 }

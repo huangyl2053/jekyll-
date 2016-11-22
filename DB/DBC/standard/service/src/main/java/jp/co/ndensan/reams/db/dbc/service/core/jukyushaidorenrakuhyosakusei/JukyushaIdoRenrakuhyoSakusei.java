@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class JukyushaIdoRenrakuhyoSakusei {
 
     private final DbT3001JukyushaIdoRenrakuhyoDac dac;
-    private final RString ONE = new RString("1");
-    private final RString TWO = new RString("2");
 
     /**
      * コンストラクタです。
@@ -316,9 +314,9 @@ public class JukyushaIdoRenrakuhyoSakusei {
         relateEntity.set標準適用開始年月日(変更前Entity.getFutangakuTekiyoKaishiYMD());
         relateEntity.set標準適用終了年月日(変更前Entity.getFutangakuTekiyoShuryoYMD());
         if (変更前Entity.getKohiFutanJogenGengakuAriFlag()) {
-            relateEntity.set公費負担上限額減額(TWO);
+            relateEntity.set公費負担上限額減額(new RString("2"));
         } else {
-            relateEntity.set公費負担上限額減額(ONE);
+            relateEntity.set公費負担上限額減額(new RString("1"));
         }
         relateEntity.set償還払化適用開始年月日(変更前Entity.getShokanbaraikaKaishiYMD());
         relateEntity.set償還払化適用終了年月日(変更前Entity.getShokanbaraikaShuryoYMD());
@@ -351,9 +349,9 @@ public class JukyushaIdoRenrakuhyoSakusei {
         relateEntity.set軽減率適用開始年月日(変更前Entity.getKeigenritsuTekiyoKaishiYMD());
         relateEntity.set軽減率適用終了年月日(変更前Entity.getKeigenritsuTekiyoShuryoYMD());
         if (変更前Entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag()) {
-            relateEntity.set小規模居宅ｻｰﾋﾞｽ利用(TWO);
+            relateEntity.set小規模居宅ｻｰﾋﾞｽ利用(new RString("2"));
         } else {
-            relateEntity.set小規模居宅ｻｰﾋﾞｽ利用(ONE);
+            relateEntity.set小規模居宅ｻｰﾋﾞｽ利用(new RString("1"));
         }
         relateEntity.set二次予防事業区分(変更前Entity.getNijiyoboJigyoKubunCode());
         relateEntity.set二次予防有効期間開始年月日(変更前Entity.getNijiyoboJigyoYukoKikanKaishiYMD());

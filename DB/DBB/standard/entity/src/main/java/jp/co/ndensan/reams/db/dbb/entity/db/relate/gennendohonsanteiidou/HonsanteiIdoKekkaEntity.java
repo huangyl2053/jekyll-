@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
@@ -22,5 +22,5 @@ public class HonsanteiIdoKekkaEntity implements IDbAccessable {
 
     private DbT2015KeisangoJohoEntity 計算後情報;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
-    private KozaRelateEntity 口座;
+    private TokuteiKozaRelateEntity 口座;
 }

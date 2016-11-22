@@ -46,7 +46,6 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
     private static final RString 当初所得引出 = new RString("当初所得引出");
     private static final RString 広域職員でないため = new RString("広域職員でないため");
     private static final RString なし = new RString("0");
-    private static final RString 処理待ち = new RString("処理待ち");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterKoiki");
 
     /**
@@ -100,7 +99,6 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         }
         ShotokuJohoChushutsuKoikiPanelDiv koikiPanelDiv = div.getShotokuJohoChushutsuKoikiPanel();
         List<dgShichosonIchiran_Row> rowList = new ArrayList<>();
-        boolean flag = true;
         for (ShichosonJohoResult result : shichosonJohoList) {
             dgShichosonIchiran_Row row = new dgShichosonIchiran_Row();
             if (result.getEntity().get市町村コード() != null) {
@@ -118,22 +116,12 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
             RString 処理状態 = result.getEntity().get表示用処理状態();
             if (処理状態 != null) {
                 row.getTxtShoriState().setValue(処理状態);
-                if (処理待ち.equals(処理状態)) {
-                    row.setSelectable(true);
-                    flag = false;
-                } else {
-                    row.setSelectable(false);
-                }
             }
             rowList.add(row);
         }
         DataGrid<dgShichosonIchiran_Row> grid = koikiPanelDiv.getDgShichosonIchiran();
         grid.setDataSource(rowList);
-        if (flag) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
-        } else {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
-        }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
     }
 
     /**
@@ -146,7 +134,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         param.set処理年度(new FlexibleYear(div.getTxtShoriNendoKoiki().getValue().getYear().toDateString()));
         param.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunKoiki().get出力順ID()));
         List<SichousonEntity> list = new ArrayList<>();
-        for (int i = 0; i <= div.getDgShichosonIchiran().getClickedRowId(); i++) {
+        for (int i = 0; i < div.getDgShichosonIchiran().getSelectedItems().size(); i++) {
             SichousonEntity entity = new SichousonEntity();
             entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
             entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());
@@ -168,7 +156,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         param.set処理年度(new FlexibleYear(div.getTxtShoriNendoKoiki().getValue().getYear().toDateString()));
         param.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunKoiki().get出力順ID()));
         List<SichousonEntity> list = new ArrayList<>();
-        for (int i = 0; i <= div.getDgShichosonIchiran().getClickedRowId(); i++) {
+        for (int i = 0; i < div.getDgShichosonIchiran().getSelectedItems().size(); i++) {
             SichousonEntity entity = new SichousonEntity();
             entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
             entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());

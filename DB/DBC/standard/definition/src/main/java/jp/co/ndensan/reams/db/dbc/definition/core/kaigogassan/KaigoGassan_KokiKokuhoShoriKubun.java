@@ -16,13 +16,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KaigoGassan_KokiKokuhoShoriKubun {
 
     /**
-     * コード:1 名称:後期分 略称:定義なし
+     * コード:2 名称:後期分 略称:定義なし
      */
-    後期分("1", "後期分"),
+    後期分("2", "後期分"),
     /**
-     * コード:2 名称:国保分 略称:定義なし
+     * コード:1 名称:国保分 略称:定義なし
      */
-    国保分("2", "国保分");
+    国保分("1", "国保分");
 
     private final RString code;
     private final RString fullName;

@@ -90,7 +90,7 @@
     <select resultOrdered="true" id="get再審査結果情報" resultMap="get再審査結果情報Result"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistsaishinsakekka.HanyoListSaishinsaKekkaMybatisParameter" fetchSize="500">
         WITH 抽出対象 AS  (
-            SELECT
+            SELECT DISTINCT   
                 "toriatsukaiYM" AS 取扱年月,
                 "hokenshaKubun" AS 保険者区分,
                 "rirekiNo" AS 履歴番号,
@@ -188,30 +188,22 @@
                 再審査決定明細."hokenshaKubun" = 抽出対象.保険者区分
             AND
                 再審査決定明細."rirekiNo" = 抽出対象.履歴番号
+            AND
+                再審査決定明細."jigyoshoNo"=抽出対象.事業所番号
+            AND
+                再審査決定明細."hiHokenshaNo"=抽出対象.被保険者番号
+            AND
+                再審査決定明細."serviceTeikyoYM"=抽出対象.サービス提供年月
         INNER JOIN
             rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理
             ON
                 被保険者台帳管理."hihokenshaNo" = 再審査決定明細."hiHokenshaNo"
             LEFT JOIN  (
             SELECT
-                    有効履歴.取扱年月,
-                    有効履歴.保険者区分,
-                    有効履歴.履歴番号,
-                    有効履歴."jukyuShinseiJiyu" AS "jukyuShinseiJiyu",
-                    有効履歴."jukyuShinseiYMD" AS "jukyuShinseiYMD",
-                    有効履歴."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode",
-                    有効履歴."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
-                    有効履歴."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
-                    有効履歴."ninteiYMD" AS "ninteiYMD",
-                    有効履歴."kyuSochishaFlag" AS "kyuSochishaFlag",
-                    有効履歴."minashiCode" AS "minashiCode",
-                    有効履歴."chokkinIdoJiyuCode" AS "chokkinIdoJiyuCode",
-                    有効履歴."yoshienshaNinteiShinseiFlag" AS "yoshienshaNinteiShinseiFlag"
+                  *
             FROM(
                 SELECT
-                    抽出対象.取扱年月,
-                    抽出対象.保険者区分,
-                    抽出対象.履歴番号,
+                    抽出対象.*,
                     受給者台帳1."jukyuShinseiJiyu",
                     受給者台帳1."jukyuShinseiYMD",
                     受給者台帳1."yokaigoJotaiKubunCode",
@@ -252,14 +244,12 @@
                         受給者台帳.保険者区分  =  抽出対象.保険者区分
                     AND
                         受給者台帳.履歴番号  =  抽出対象.履歴番号
-              LEFT JOIN
-                    rgdb."DbT7130KaigoServiceShurui" AS サービス種類
-                    ON
-                        サービス種類."serviceShuruiCd" = 再審査決定明細."serviceShuruiCode"
                     AND
-                        再審査決定明細."serviceTeikyoYM" <![CDATA[<=]]> サービス種類."teikyoshuryoYM"
-                    AND 
-                        サービス種類."teikyoKaishiYM" <![CDATA[<=]]> 再審査決定明細."serviceTeikyoYM"
+                        受給者台帳.事業所番号  =  抽出対象.事業所番号
+                    AND
+                        受給者台帳.被保険者番号  =  抽出対象.被保険者番号
+                    AND
+                        受給者台帳.サービス提供年月  =  抽出対象.サービス提供年月
               LEFT JOIN(
                 SELECT
                     dbT7060."jigyoshaNo" AS "jigyoshaNo",

@@ -66,7 +66,10 @@ import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
+import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
+import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
+import jp.co.ndensan.reams.ur.urc.service.core.kamoku.shunokamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -224,16 +227,16 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         builder.set業務コード(GyomuCode.DB介護保険);
         builder.set基準日(FlexibleDate.getNowDate());
         IKozaSearchKey kozaSearchKey = builder.build();
-        ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
-        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
+        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
+        IShunoKamoku 介護保険料_普通徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+        List<KamokuCode> list = new ArrayList<>();
+        list.add(介護保険料_普通徴収.getコード());
         RStringBuilder rStringBuilder = new RStringBuilder();
         rStringBuilder.append(LEFT_FORMAT);
-        if (list != null && !list.isEmpty()) {
-            for (int i = 0; i < list.size(); i++) {
-                rStringBuilder.append(list.get(i) == null ? RString.EMPTY : list.get(i).getColumnValue());
-                if (i != list.size() - 1) {
-                    rStringBuilder.append(MIDDLE_FORMAT);
-                }
+        for (int i = 0; i < list.size(); i++) {
+            rStringBuilder.append(list.get(i) == null ? RString.EMPTY : list.get(i).getColumnValue());
+            if (i != list.size() - 1) {
+                rStringBuilder.append(MIDDLE_FORMAT);
             }
         }
         rStringBuilder.append(RIGHT_FORMAT);
@@ -912,7 +915,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
                 帳票ID.getColumnValue(),
                 導入団体コード,
                 市町村名,
-                RString.FULL_SPACE.concat(String.valueOf(JobContextHolder.getJobId())),
+                RString.EMPTY.concat(String.valueOf(JobContextHolder.getJobId())),
                 帳票名,
                 出力ページ数,
                 csv出力有無,
@@ -1037,10 +1040,12 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         List<Noki> 普徴納期List = fukaNokiResearcher.get普徴納期ALL();
         List<Kitsuki> 本算定期間List = 本算定期間.toList();
         int 最初期;
-        if (RString.isNullOrEmpty(出力期)) {
+        if (RString.isNullOrEmpty(出力期) && 最終期 != 0) {
             最初期 = 本算定期間List.get(本算定期間List.size() - INT_1).get期AsInt();
-        } else {
+        } else if (!RString.isNullOrEmpty(出力期)) {
             最初期 = Integer.parseInt(出力期.toString());
+        } else {
+            最初期 = 0;
         }
         KitsukiList 期月リスト = 期月リスト_普徴.subListBy期(最初期, 最終期);
         List<NokiJoho> 普徴納期情報リスト = new ArrayList<>();

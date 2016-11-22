@@ -460,7 +460,7 @@ public enum ReportIdDBB {
      *
      * 納付額一覧表（確定申告用）の帳票ID
      */
-    DBB300005(new ReportId("DBB300005_NofugakuIchiran"), new RString("納付額一覧表（確定申告用）")),
+    DBB300005(new ReportId("DBB300005_NofugakuIchiranShinkokuyo"), new RString("納付額一覧表（確定申告用）")),
     /**
      *
      * 納付額一覧表（識別コード不明分）の帳票ID

@@ -43,7 +43,7 @@ public class KyufuJissekiGaitoshaValidationHandler {
     public ValidationMessageControlPairs validateFor必須項目() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getSearchToKyufujissekiPanel().getTxtHihoNo().getValue().isEmpty()
-                || RString.isNullOrEmpty(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo())) {
+                && RString.isNullOrEmpty(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo())) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, 必須項目.toString())));
         }

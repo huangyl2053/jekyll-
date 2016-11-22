@@ -973,11 +973,10 @@ public class TokuteiShinryohiPanelHandler {
         }
 
         List<ddgToteishinryoTokubetushinryo_Row> rowList = div.getDdgToteishinryoTokubetushinryo().getDataSource();
-        ShokanTokuteiShinryohiBuilder builder;
         boolean isViewDB存在;
         for (ddgToteishinryoTokubetushinryo_Row row : rowList) {
             isViewDB存在 = false;
-            if (row.getRowState() == null || RowState.Unchanged.equals(row.getRowState()) || RowState.Deleted.equals(row.getRowState())) {
+            if (row.getRowState() == null || RowState.Unchanged.equals(row.getRowState())) {
                 return;
             }
             for (ShokanTokuteiShinryohi 特定診療費ViewDB : 特定診療費ViewDBList) {
@@ -992,18 +991,14 @@ public class TokuteiShinryohiPanelHandler {
                     isViewDB存在 = true;
                     特定診療費ViewDBList.remove(特定診療費ViewDB);
 
-                    builder = 特定診療費ViewDB.createBuilderForEdit();
-                    特定診療費builder編集(builder, row);
-                    特定診療費ViewDBList.add(builder.build());
+                    特定診療費ViewDBList.add(特定診療費builder編集(特定診療費ViewDB, row));
                     break;
                 }
             }
             if (!isViewDB存在) {
                 ShokanTokuteiShinryohi joho = new ShokanTokuteiShinryohi(meisaiPar.get被保険者番号(), meisaiPar.getサービス年月(),
                         meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getNumber());
-                builder = joho.createBuilderForEdit();
-                特定診療費builder編集(builder, row);
-                特定診療費ViewDBList.add(builder.build());
+                特定診療費ViewDBList.add(特定診療費builder編集(joho, row));
             }
         }
         viewStateDB.set償還払請求特定診療費データList(特定診療費ViewDBList);
@@ -1016,7 +1011,7 @@ public class TokuteiShinryohiPanelHandler {
         }
 
         List<dgdTokuteiShinryohi_Row> rowList = div.getDgdTokuteiShinryohi().getDataSource();
-        ShokanTokuteiShinryoTokubetsuRyoyoBuilder builder;
+
         boolean isViewDB存在;
         for (dgdTokuteiShinryohi_Row row : rowList) {
             isViewDB存在 = false;
@@ -1035,24 +1030,25 @@ public class TokuteiShinryohiPanelHandler {
                     isViewDB存在 = true;
                     特別診療費ViewDBList.remove(特別診療費ViewDB);
 
-                    builder = 特別診療費ViewDB.createBuilderForEdit();
-                    特定診療費builder編集(builder, row);
-                    特別診療費ViewDBList.add(builder.build());
+                    特別診療費ViewDBList.add(特別診療費builder編集(特別診療費ViewDB, row));
                     break;
                 }
             }
             if (!isViewDB存在) {
                 ShokanTokuteiShinryoTokubetsuRyoyo joho = new ShokanTokuteiShinryoTokubetsuRyoyo(meisaiPar.get被保険者番号(), meisaiPar.getサービス年月(),
                         meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getDefaultDataName7());
-                builder = joho.createBuilderForEdit();
-                特定診療費builder編集(builder, row);
-                特別診療費ViewDBList.add(builder.build());
+                特別診療費ViewDBList.add(特別診療費builder編集(joho, row));
             }
         }
         viewStateDB.set特別療養費データList(特別診療費ViewDBList);
     }
 
-    private void 特定診療費builder編集(ShokanTokuteiShinryohiBuilder builder, ddgToteishinryoTokubetushinryo_Row row) {
+    private ShokanTokuteiShinryohi 特定診療費builder編集(ShokanTokuteiShinryohi 特定診療費ViewDB, ddgToteishinryoTokubetushinryo_Row row) {
+        ShokanTokuteiShinryohiBuilder builder = 特定診療費ViewDB.createBuilderForEdit();
+        if (RowState.Deleted.equals(row.getRowState())) {
+            ShokanTokuteiShinryohi joho = builder.build().deleted();
+            builder = joho.createBuilderForEdit();
+        }
         builder.set傷病名(row.getShobyouName());
         if (row.getShidouKanri().getValue() != null) {
             builder.set指導管理料等単位数(row.getShidouKanri().getValue().intValue());
@@ -1109,9 +1105,15 @@ public class TokuteiShinryohiPanelHandler {
         builder.set摘要１８(getLenStr(row.getMutiTekiyo(), NUMBER_５４４, NUMBER_３２));
         builder.set摘要１９(getLenStr(row.getMutiTekiyo(), NUMBER_５７６, NUMBER_３２));
         builder.set摘要２０(getLenStr(row.getMutiTekiyo(), NUMBER_６０８, NUMBER_３２));
+        return builder.build();
     }
 
-    private void 特定診療費builder編集(ShokanTokuteiShinryoTokubetsuRyoyoBuilder builder, dgdTokuteiShinryohi_Row row) {
+    private ShokanTokuteiShinryoTokubetsuRyoyo 特別診療費builder編集(ShokanTokuteiShinryoTokubetsuRyoyo 特別診療費ViewDB, dgdTokuteiShinryohi_Row row) {
+        ShokanTokuteiShinryoTokubetsuRyoyoBuilder builder = 特別診療費ViewDB.createBuilderForEdit();
+        if (RowState.Deleted.equals(row.getRowState())) {
+            ShokanTokuteiShinryoTokubetsuRyoyo joho = builder.build().deleted();
+            builder = joho.createBuilderForEdit();
+        }
         builder.set傷病名(row.getDefaultDataName1());
         builder.set識別番号(row.getDefaultDataName2());
         if (row.getDefaultDataName3().getValue() != null) {
@@ -1128,6 +1130,7 @@ public class TokuteiShinryohiPanelHandler {
             builder.set合計単位数(0);
         }
         builder.set摘要(row.getDefaultDataName6());
+        return builder.build();
     }
 
     private RString getLenStr(RString rstr, int startIndex, int len) {
@@ -1299,8 +1302,10 @@ public class TokuteiShinryohiPanelHandler {
             return true;
         } else if (str1 != null) {
             return str1.equals(str2);
+        } else if (str2 != null) {
+            return str2.equals(str1);
         }
-        return str2.equals(str1);
+        return false;
     }
 
     /**

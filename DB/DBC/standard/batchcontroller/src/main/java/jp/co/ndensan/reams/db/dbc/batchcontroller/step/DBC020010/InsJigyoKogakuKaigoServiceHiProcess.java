@@ -60,6 +60,8 @@ public class InsJigyoKogakuKaigoServiceHiProcess extends SimpleBatchProcessBase 
             dbT3108Entity.setServiceTeikyoYM(entity.getServiceTeikyoYM());
             dbT3108Entity.setJigyoshaNo(entity.getJigyoshaNo());
             dbT3108Entity.setServiceShuruiCode(entity.getServiceShuruiCode());
+            dbT3108Entity.setRirekiNo(entity.getRirekiNo());
+            dbT3108Entity.setServiceHiyoGokeiGaku(entity.getServiceHiyoGokeiGaku());
             dbT3108Entity.setRiyoshaFutanGaku(entity.getRiyoshaFutanGaku());
             dbT3108Entity.setJigyoKogakuKyufuKonkyo(entity.getKogakuKyufuKonkyo());
             dbT3108Entity.setTaishoshaUketoriYM(FlexibleYearMonth.EMPTY);

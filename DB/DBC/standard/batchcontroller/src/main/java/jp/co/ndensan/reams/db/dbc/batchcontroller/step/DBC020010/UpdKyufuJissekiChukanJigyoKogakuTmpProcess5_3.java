@@ -55,6 +55,9 @@ public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3 extends BatchProcessB
     protected void process(UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity3 entity) {
         TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時５ = entity.get給付実績中間事業高額一時５();
         DbT3055KogakuKyufuTaishoshaGokeiEntity 給付対象者合計 = entity.get高額介護サービス費給付対象者合計();
+        if (給付対象者合計 == null) {
+            return;
+        }
         if (beforeEntity == null) {
             beforeEntity = 給付実績中間事業高額一時５;
         }

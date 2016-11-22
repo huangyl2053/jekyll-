@@ -57,8 +57,6 @@ public class JukyushaIdoRenrakuhyoHandler {
     private static final RString 居宅サービス_旧訪問通所 = new RString("居宅サービス（旧訪問通所）");
     private static final RString 旧短期入所サービス = new RString("（旧短期入所サービス）");
     private static final RString WIDTH = new RString("220");
-    private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
     private static final int INT_1 = 1;
 
@@ -116,7 +114,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             }
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNo().setValue(被保険者番号.value());
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().setValue(受給者異動情報.get異動年月日());
-            if (受給者異動情報.get性別コード() != null) {
+            if (!RString.isNullOrEmpty(受給者異動情報.get性別コード())) {
                 div.getJukyushaIdoRenrakuhyoKihonJoho().getRadSeibetsu().setSelectedKey(受給者異動情報.get性別コード());
             }
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNameKana().setValue(受給者異動情報.get被保険者氏名カナ());
@@ -171,6 +169,10 @@ public class JukyushaIdoRenrakuhyoHandler {
             return 受給者異動情報;
         }
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().setValue(受給者異動情報.get異動年月日());
+        if (!RString.isNullOrEmpty(受給者異動情報.get異動区分コード())) {
+            div.getJukyushaIdoRenrakuhyoKihonJoho().getRadIdoKubun().setSelectedKey(受給者異動情報.get異動区分コード());
+        }
+
         if (JukyushaTeiseiRenrakuhyoToroku.createInstance().selectBooleanHihokenshaNo(被保険者番号)) {
             div.getJukyushaIdoRenrakuhyoKihonJoho().getRadIdoKubun().setSelectedKey(JukyushaIF_IdoKubunCode.新規.getコード());
         } else {
@@ -184,7 +186,9 @@ public class JukyushaIdoRenrakuhyoHandler {
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNo().setValue(被保険者番号.value());
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNameKana().setValue(受給者異動情報.get被保険者氏名カナ());
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtUmareYMD().setValue(受給者異動情報.get生年月日());
-        div.getJukyushaIdoRenrakuhyoKihonJoho().getRadSeibetsu().setSelectedKey(受給者異動情報.get性別コード());
+        if (!RString.isNullOrEmpty(受給者異動情報.get性別コード())) {
+            div.getJukyushaIdoRenrakuhyoKihonJoho().getRadSeibetsu().setSelectedKey(受給者異動情報.get性別コード());
+        }
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShikakuShutokuYMD().setValue(受給者異動情報.get資格取得年月日());
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShikakuSoshitsuYMD().setValue(受給者異動情報.get資格喪失年月日());
         if (受給者異動情報.get証記載保険者番号() != null) {
@@ -356,7 +360,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         } else {
             div.getYokaigoNinteiPanel().getRadHenkoShinseichuKubun().setSelectedKey(受給者異動情報.get変更申請中区分コード());
         }
-        if (受給者異動情報.get認定有効期間開始年月日() != null) {
+        if (受給者異動情報.get認定有効期間開始年月日() != null && !受給者異動情報.get認定有効期間開始年月日().isEmpty()) {
             div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().setFromValue(
                     new RDate(受給者異動情報.get認定有効期間開始年月日().toString()));
         }
@@ -374,7 +378,7 @@ public class JukyushaIdoRenrakuhyoHandler {
     private void set支給限度基準額エリア(JukyushaIdoRenrakuhyo 受給者異動情報) {
         div.getShikyuGendoKijungakuPanel().getTxtHomonTsushoServiceShikyuGendoKijungaku().setValue(
                 new Decimal(受給者異動情報.get訪問通所サービス支給限度基準額()));
-        if (受給者異動情報.get訪問通所サービス上限管理適用期間開始年月日() != null) {
+        if (受給者異動情報.get訪問通所サービス上限管理適用期間開始年月日() != null && !受給者異動情報.get訪問通所サービス上限管理適用期間開始年月日().isEmpty()) {
             div.getShikyuGendoKijungakuPanel().getTxtHomonTsushoServiceJogenKanriTekiyoYMD().setFromValue(
                     new RDate(受給者異動情報.get訪問通所サービス上限管理適用期間開始年月日().toString()));
         }
@@ -456,6 +460,11 @@ public class JukyushaIdoRenrakuhyoHandler {
                     new RDate(受給者異動情報.get住所地特例適用終了日().toString()));
         }
         div.getJushochiTokureiPanel().getHokenshaJohoPanel().getTxtShisetsuShozaiHokenjaNo().setValue(受給者異動情報.get施設所在保険者番号());
+
+        if (!RString.isNullOrEmpty(受給者異動情報.get施設所在保険者番号())) {
+            Hokensha 保険者 = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(new HokenjaNo(受給者異動情報.get施設所在保険者番号()));
+            div.getJushochiTokureiPanel().getHokenshaJohoPanel().getTxtHokenshaMeisho().setValue(保険者 == null ? RString.EMPTY : 保険者.get保険者名());
+        }
     }
 
     private void set減免_減額エリア(JukyushaIdoRenrakuhyo 受給者異動情報) {

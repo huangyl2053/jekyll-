@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikat
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.KozaYotoKubunType;
+import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
@@ -48,6 +50,7 @@ public class FukaJohoShutokuIkatsuHakoProcess extends BatchProcessBase<Karisante
     private static final RString LEFT_FORMAT = new RString("'{");
     private static final RString RIGHT_FORMAT = new RString("}'");
     private static final RString MIDDLE_FORMAT = new RString(",");
+    private static final RString 更新権限科目コード_016 = new RString("016");
 
     @Override
     protected void createWriter() {
@@ -66,6 +69,7 @@ public class FukaJohoShutokuIkatsuHakoProcess extends BatchProcessBase<Karisante
         builder.setサブ業務コード(SubGyomuCode.DBB介護賦課);
         builder.set業務コード(GyomuCode.DB介護保険);
         builder.set基準日(FlexibleDate.getNowDate());
+        builder.set用途区分(new KozaYotoKubunCodeValue(KozaYotoKubunType.振替口座.getCode()));
         IKozaSearchKey key = builder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
@@ -73,17 +77,25 @@ public class FukaJohoShutokuIkatsuHakoProcess extends BatchProcessBase<Karisante
         rStringBuilder.append(LEFT_FORMAT);
         if (list != null && !list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
-                rStringBuilder.append(list.get(i) == null ? RString.EMPTY : list.get(i).getColumnValue());
-                if (i != list.size() - 1) {
+                if (!isEmptyOr016(list.get(i))) {
+                    rStringBuilder.append(list.get(i).getColumnValue());
                     rStringBuilder.append(MIDDLE_FORMAT);
                 }
             }
+            rStringBuilder.deleteCharAt(rStringBuilder.lastIndexOf(MIDDLE_FORMAT));
         }
         rStringBuilder.append(RIGHT_FORMAT);
         RString 科目コード = rStringBuilder.toRString();
         RString 処理日 = new RString(FlexibleDate.getNowDate().toString());
         return new BatchDbReader(MAPPERPATH, new TblDataShutokuMyBatisParameter(parameter.get調定年度(),
                 通知内容コード, 更正前後区分, 作成処理名, 科目コード, 処理日, key, list));
+    }
+
+    private boolean isEmptyOr016(KamokuCode kamokuCode) {
+        if (kamokuCode == null) {
+            return true;
+        }
+        return 更新権限科目コード_016.equals(kamokuCode.getColumnValue());
     }
 
     @Override

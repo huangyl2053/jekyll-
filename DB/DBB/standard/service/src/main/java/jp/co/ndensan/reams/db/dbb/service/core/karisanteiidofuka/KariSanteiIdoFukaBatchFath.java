@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsu
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -307,8 +308,8 @@ public class KariSanteiIdoFukaBatchFath {
             boolean flag2,
             boolean flag3,
             boolean flag4) {
-        if (!設定前賦課情報.get老年開始日().equals(当初賦課情報.get老年開始日())
-                || !設定前賦課情報.get老年廃止日().equals(当初賦課情報.get老年廃止日())) {
+        if (!nullToDate(設定前賦課情報.get老年開始日()).equals(当初賦課情報.get老年開始日())
+                || !nullToDate(設定前賦課情報.get老年廃止日()).equals(当初賦課情報.get老年廃止日())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.老齢年金による更正.getコード());
                 flag1 = true;
@@ -323,8 +324,8 @@ public class KariSanteiIdoFukaBatchFath {
                 flag4 = true;
             }
         }
-        if (!設定前賦課情報.get生保開始日().equals(当初賦課情報.get生保開始日())
-                || !設定前賦課情報.get生保廃止日().equals(当初賦課情報.get生保廃止日())) {
+        if (!nullToDate(設定前賦課情報.get生保開始日()).equals(当初賦課情報.get生保開始日())
+                || !nullToDate(設定前賦課情報.get生保廃止日()).equals(当初賦課情報.get生保廃止日())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.生活保護による更正.getコード());
                 flag1 = true;
@@ -340,7 +341,7 @@ public class KariSanteiIdoFukaBatchFath {
             }
 
         }
-        if (設定前賦課情報.get減免額() != null && !設定前賦課情報.get減免額().equals(当初賦課情報.get減免額())) {
+        if (!nullTOZero(設定前賦課情報.get減免額()).equals(当初賦課情報.get減免額())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.減免決定による更正.getコード());
                 flag1 = true;
@@ -432,9 +433,13 @@ public class KariSanteiIdoFukaBatchFath {
 
         Decimal 普徴期別金額合計 = get普徴期別金額合計(賦課の情報_設定後, NUM_1, NUM_14);
 
-        if (Decimal.ZERO.compareTo(普徴期別金額合計) == -1 && resultEntity.get口座Entity() != null) {
+        if (Decimal.ZERO.compareTo(普徴期別金額合計) < 0 && resultEntity.get口座Entity() != null
+                && resultEntity.get口座Entity().getUaT0310KozaEntity() != null
+                && resultEntity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0) {
             return KozaKubun.口座振替.getコード();
-        } else if (Decimal.ZERO.compareTo(普徴期別金額合計) == -1 && resultEntity.get口座Entity() == null) {
+        } else if (Decimal.ZERO.compareTo(普徴期別金額合計) < 0 && resultEntity.get口座Entity() != null
+                && resultEntity.get口座Entity().getUaT0310KozaEntity() != null
+                && resultEntity.get口座Entity().getUaT0310KozaEntity().getKozaId() == 0) {
             return KozaKubun.現金納付.getコード();
         } else if (Decimal.ZERO.compareTo(普徴期別金額合計) == 0) {
             return KozaKubun.現金納付.getコード();
@@ -453,11 +458,15 @@ public class KariSanteiIdoFukaBatchFath {
 
         Decimal 普徴期別金額合計 = get普徴期別金額合計(賦課の情報, NUM_1, NUM_14);
 
-        if (Decimal.ZERO.compareTo(普徴期別金額合計) == -1 && 特徴仮算定Entity.get口座Entity() != null) {
+        if (Decimal.ZERO.compareTo(普徴期別金額合計) < 0 && 特徴仮算定Entity.get口座Entity() != null
+                && 特徴仮算定Entity.get口座Entity().getUaT0310KozaEntity() != null
+                && 特徴仮算定Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0) {
             return KozaKubun.口座振替.getコード();
-        } else if (0 < 普徴期別金額合計.doubleValue() && 特徴仮算定Entity.get口座Entity() == null) {
+        } else if (Decimal.ZERO.compareTo(普徴期別金額合計) < 0 && 特徴仮算定Entity.get口座Entity() != null
+                && 特徴仮算定Entity.get口座Entity().getUaT0310KozaEntity() != null
+                && 特徴仮算定Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() == 0) {
             return KozaKubun.現金納付.getコード();
-        } else if (普徴期別金額合計.doubleValue() == 0) {
+        } else if (Decimal.ZERO.compareTo(普徴期別金額合計) == 0) {
             return KozaKubun.現金納付.getコード();
         }
         return RString.EMPTY;
@@ -559,7 +568,7 @@ public class KariSanteiIdoFukaBatchFath {
         if (更正前後Entity.get計算後情報_宛名_口座_更正前Entity() != null
                 && 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity() != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity());
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId());
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId());
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             Association association = finder.getAssociation();
             EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, association);
@@ -732,7 +741,16 @@ public class KariSanteiIdoFukaBatchFath {
     }
 
     private RString 口座情報編集(KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity) {
-        IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
+        if (計算後情報_宛名_口座_更正前Entity.get口座Entity() != null
+                && 計算後情報_宛名_口座_更正前Entity.get口座Entity().getUaT0310KozaEntity() != null
+                && 計算後情報_宛名_口座_更正前Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0) {
+            IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
+            return set金融機関コード(koza);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString set金融機関コード(IKoza koza) {
         if (koza.get金融機関コード() != null) {
             if (koza.get金融機関コード().value().length() >= NUM_4 && ゆうちょ銀行
                     .equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4))) {
@@ -764,44 +782,32 @@ public class KariSanteiIdoFukaBatchFath {
             } else {
                 通帳番号 = koza.getEdited通帳番号();
             }
-            return 金融機関コード.concat(RString.FULL_SPACE)
+            return 金融機関コード.concat(RString.HALF_SPACE)
                     .concat(通帳記号)
                     .concat(HYPHEN).concat(通帳番号)
-                    .concat(RString.FULL_SPACE).concat(koza.get口座名義人漢字().toString());
+                    .concat(RString.HALF_SPACE).concat(koza.get口座名義人漢字().toString());
         }
         return RString.EMPTY;
     }
 
     private RString 金融機関コードHander2(IKoza koza) {
-        RString 金融機関コード;
-        RString 預金種別略称;
+        RString 金融機関コード = RString.EMPTY;
+        RString 預金種別略称 = RString.EMPTY;
         RString 支店コード;
         RString 口座番号;
-        if (koza.get支店コード() != null && koza.get口座番号() != null && koza.get口座名義人漢字() != null) {
-            if (koza.get金融機関コード().value().length() >= NUM_4) {
-                金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
-            } else {
-                金融機関コード = koza.get金融機関コード().value();
+        if (koza.get支店コード() != null && !RString.isNullOrEmpty(koza.get口座番号()) && koza.get口座名義人漢字() != null) {
+            if (koza.get金融機関コード() != null) {
+                金融機関コード = koza.get金融機関コード().value().substringReturnAsPossible(NUM_0, NUM_4);
             }
-            if (koza.get支店コード().value().length() >= NUM_5) {
-                支店コード = koza.get支店コード().value().substring(NUM_0, NUM_5);
-            } else {
-                支店コード = koza.get支店コード().value();
+            支店コード = koza.get支店コード().value().substringReturnAsPossible(NUM_0, NUM_5);
+            if (koza.get預金種別() != null && !RString.isNullOrEmpty(koza.get預金種別().get預金種別略称())) {
+                預金種別略称 = koza.get預金種別().get預金種別略称().substringReturnAsPossible(NUM_0, NUM_2);
             }
-            if (koza.get預金種別() != null && koza.get預金種別().get預金種別略称().length() >= NUM_2) {
-                預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);
-            } else {
-                預金種別略称 = koza.get預金種別().get預金種別略称();
-            }
-            if (koza.get口座番号().length() >= NUM_7) {
-                口座番号 = koza.get口座番号().substring(NUM_0, NUM_7);
-            } else {
-                口座番号 = koza.get口座番号();
-            }
+            口座番号 = koza.get口座番号().substringReturnAsPossible(NUM_0, NUM_7);
             return 金融機関コード.concat(HYPHEN)
-                    .concat(支店コード).concat(RString.FULL_SPACE)
+                    .concat(支店コード).concat(RString.HALF_SPACE)
                     .concat(預金種別略称)
-                    .concat(HYPHEN).concat(口座番号).concat(RString.FULL_SPACE)
+                    .concat(HYPHEN).concat(口座番号).concat(RString.HALF_SPACE)
                     .concat(koza.get口座名義人漢字().toString());
         }
         return RString.EMPTY;
@@ -812,5 +818,12 @@ public class KariSanteiIdoFukaBatchFath {
             return Decimal.ZERO;
         }
         return decimal;
+    }
+
+    private FlexibleDate nullToDate(FlexibleDate date) {
+        if (date == null) {
+            return FlexibleDate.EMPTY;
+        }
+        return date;
     }
 }

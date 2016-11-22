@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishujize
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.KyufuritsuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.NewJutakuKaishuHiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 
 /**
  * 住宅改修事前申請マッパーインタフェースです。
@@ -59,4 +59,21 @@ public interface IJutakuKaishuJizenShinseiMapper {
      * @return ShiharaiKekaEntity
      */
     ShiharaiKekaEntity get住宅改修費支払結果(JutakuKaishuHiParameter parameter);
+
+    /**
+     * 開始サービス提供年月を取得
+     *
+     * @param parameter parameter
+     * @return List<DbT3034ShokanShinseiEntity>
+     */
+    List<DbT3034ShokanShinseiEntity> get開始サービス提供年月(JutakuKaishuHiParameter parameter);
+
+    /**
+     * get前回までの支払結果
+     *
+     * @param parameter parameter
+     * @return ShiharaiKekaEntity
+     */
+    ShiharaiKekaEntity get前回までの支払結果(JutakuKaishuHiParameter parameter);
+
 }

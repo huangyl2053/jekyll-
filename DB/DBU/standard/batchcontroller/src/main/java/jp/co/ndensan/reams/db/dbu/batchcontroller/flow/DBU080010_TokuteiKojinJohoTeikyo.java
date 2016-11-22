@@ -19,18 +19,21 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.RiyoshaFutanwar
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.ShoriDateKanriUpdateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.SougouJigyouJyohouProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.SougouJigyouJyohouUpdateProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.TokuteiKojinJohoHensyuProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.TokuteiKojinJohoTeikyoKanriUpdateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.TokuteiKojinJohoTeikyoSetParameterProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.TokuteiKojinKadouKahiHanteiProcess;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU080010.DBU080010_TokuteiKojinJohoTeikyoParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
+import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.RenkeisakiDantainaiTogoAtena;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohomeiCode;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.HihokenshaJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JogaiTokureiSyaJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JukyushaKihonJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.SougouJigyouJyohouProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinJohoHensyuProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoKanriUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinKadouKahiHanteiProcessParameter;
@@ -40,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -71,9 +75,11 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
     private static final RString 稼働 = new RString("1");
     private static final RString 文字列_特定個人情報 = new RString("TeikyoKihonJoho");
     private static final RString 文字列_TEMP = new RString("Temp");
+    private static final String 特定個人情報編集_標準 = "TokuteiKojinJohoHensyu";
     private DBU080010_TokuteiKojinJohoTeikyoParameter parameter;
     private TokuteiKojinKadouKahiHanteiProcessParameter hanteiProcessParameter;
     private TokuteiKojinJohoTeikyoKanriUpdateProcessParameter updateProcessParameter;
+    private TokuteiKojinJohoHensyuProcessParameter hensyuProcessParameter;
     private List<TokuteiKojinJohoHanKanri> 具合版番号情報List;
     private RString 提供基本情報中間テーブル名;
     private RString 特定個人情報名コード;
@@ -93,24 +99,51 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
             if (!is未来基準日) {
                 setバッチパラメータ();
                 executeStep(処理日付管理マスタの更新);
-                exeバッチ処理();
+                exeバッチ処理(システム日付);
             }
         }
     }
 
-    private void exeバッチ処理() {
+    private void exeバッチ処理(RDate システム日付) {
         hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
         updateProcessParameter = parameter.toTokuteiKojinJohoTeikyoKanriUpdateProcessParameter();
+        RString 連携先団体内統合宛名_連携方式 = DbBusinessConfig.get(
+                ConfigNameDBU.番号制度_連携先団体内統合宛名_連携方式, システム日付, SubGyomuCode.DBU介護統計報告);
         for (RString 提供要個人情報名コード : parameter.get特定個人情報()) {
+            boolean is電文あり = RenkeisakiDantainaiTogoAtena.標準_中間SVBS.getコード().equals(連携先団体内統合宛名_連携方式);
             特定個人情報名コード = 提供要個人情報名コード;
             if (TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード().equals(提供要個人情報名コード)) {
                 exe住所地特例者情報();
+                if (is電文あり) {
+                    set特定個人情報編集標準バッチパラメータ(住所地特例者情報);
+                    executeStep(特定個人情報編集_標準);
+                }
                 exe負担割合();
+                if (is電文あり) {
+                    set特定個人情報編集標準バッチパラメータ(負担割合);
+                    executeStep(特定個人情報編集_標準);
+                }
                 exe給付情報();
+                if (is電文あり) {
+                    set特定個人情報編集標準バッチパラメータ(給付情報);
+                    executeStep(特定個人情報編集_標準);
+                }
                 exe総合事業情報();
+                if (is電文あり) {
+                    set特定個人情報編集標準バッチパラメータ(総合事業情報);
+                    executeStep(特定個人情報編集_標準);
+                }
             }
             exe被保険者();
+            if (is電文あり) {
+                set特定個人情報編集標準バッチパラメータ(被保険者);
+                executeStep(特定個人情報編集_標準);
+            }
             exe受給者基本情報();
+            if (is電文あり) {
+                set特定個人情報編集標準バッチパラメータ(受給者基本情報_提供情報取得);
+                executeStep(特定個人情報編集_標準);
+            }
         }
     }
 
@@ -381,6 +414,16 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         }
     }
 
+    /**
+     * 特定個人情報編集_標準用を行います。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(特定個人情報編集_標準)
+    protected IBatchFlowCommand exeTokuteiKojinJohoHensyu() {
+        return loopBatch(TokuteiKojinJohoHensyuProcess.class).arguments(hensyuProcessParameter).define();
+    }
+
     private void setバッチパラメータ() {
         parameter.set新規異動区分(getResult(RString.class, バッチパラメータの取得,
                 TokuteiKojinJohoTeikyoSetParameterProcess.SHINKIIDOKUBUN));
@@ -390,5 +433,50 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
                 TokuteiKojinJohoTeikyoSetParameterProcess.TAISHOSHURYOTIMESTAMP));
         parameter.set連携先団体内統合宛名_連携方式(getResult(RString.class, バッチパラメータの取得,
                 TokuteiKojinJohoTeikyoSetParameterProcess.RENKEISAKIDANTAINAITOGOATENA));
+    }
+
+    private void set特定個人情報編集標準バッチパラメータ(String processName) {
+        TokuteiKojinJohoHensyuProcessParameter processParameter = new TokuteiKojinJohoHensyuProcessParameter();
+        processParameter.set中間DBテーブル名(提供基本情報中間テーブル名);
+        processParameter.set新規異動区分(parameter.get新規異動区分());
+        processParameter.set版番号(版番号);
+        switch (processName) {
+            case 住所地特例者情報:
+                processParameter.set特定個人情報名コード(TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード());
+                processParameter.setデータセット番号(DataSetNo._0102住所地特例情報.getコード());
+                processParameter.set基準日(new FlexibleDate(parameter.get対象終了日時().getDate().toDateString()));
+                break;
+            case 負担割合:
+                processParameter.set特定個人情報名コード(特定個人情報名コード);
+                processParameter.setデータセット番号(DataSetNo._0202負担割合.getコード());
+                // TODO
+                processParameter.set基準日(new FlexibleDate(parameter.get対象終了日時().getDate().toDateString()));
+                break;
+            case 給付情報:
+                processParameter.set特定個人情報名コード(TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード());
+                processParameter.setデータセット番号(DataSetNo._0300給付情報.getコード());
+                processParameter.set基準日(new FlexibleDate(parameter.get対象終了日時().getDate().toDateString()));
+                break;
+            case 総合事業情報:
+                processParameter.set特定個人情報名コード(TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード());
+                processParameter.setデータセット番号(DataSetNo._0400総合事業.getコード());
+                processParameter.set基準日(new FlexibleDate(parameter.get対象終了日時().getDate().toDateString()));
+                break;
+            case 被保険者:
+                processParameter.set特定個人情報名コード(特定個人情報名コード);
+                processParameter.setデータセット番号(DataSetNo._0101被保険者情報.getコード());
+                // TODO
+                processParameter.set基準日(new FlexibleDate(parameter.get対象終了日時().getDate().toDateString()));
+                break;
+            case 受給者基本情報_中間DB更新:
+                processParameter.set特定個人情報名コード(特定個人情報名コード);
+                processParameter.setデータセット番号(DataSetNo._0201受給者基本情報.getコード());
+                // TODO
+                processParameter.set基準日(new FlexibleDate(parameter.get対象終了日時().getDate().toDateString()));
+                break;
+            default:
+                break;
+        }
+        hensyuProcessParameter = processParameter;
     }
 }

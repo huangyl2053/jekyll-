@@ -259,8 +259,10 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         }
         if (result.getサービス提供年月().isEmpty()) {
             row.setTxtServiceNengetsu(RString.EMPTY);
+            row.setTxtHdnServiceNengetsu(RString.EMPTY);
         } else {
             row.setTxtServiceNengetsu(result.getサービス提供年月().wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+            row.setTxtHdnServiceNengetsu(result.getサービス提供年月().toDateString());
         }
         if (result.get事業者番号().isEmpty()) {
             row.setTxtJigyoshaNo(RString.EMPTY);

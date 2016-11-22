@@ -93,6 +93,7 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
     private static final RString 広域内住所地特例フラグ = new RString("1");
 
     private static final int 居住サービス計画事業者名_LENGTH = 20;
+    private static final int 居住サービス計画事業者名_LENGTH_40 = 40;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 基本List;
     private JukyushaKyufujissekiDaichoProcessParameter parameter;
@@ -134,7 +135,10 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         基本entity.set通し番号(entity.getDbT3017_toshiNo());
         基本entity.set生年月日(entity.getDbT3017_umareYMD());
         基本entity.set性別コード(entity.getDbT3017_seibetsuCode());
-        基本entity.set要介護度(YokaigoJotaiKubun.toValue(entity.getDbT3017_yoKaigoJotaiKubunCode()).get名称());
+        基本entity.set要介護度(RString.EMPTY);
+        if (!RString.isNullOrEmpty(entity.getDbT3017_yoKaigoJotaiKubunCode())) {
+            基本entity.set要介護度(YokaigoJotaiKubun.toValue(entity.getDbT3017_yoKaigoJotaiKubunCode()).get名称());
+        }
         基本entity.set認定有効期間(get期間(entity.getDbT3017_ninteiYukoKaishiYMD(), entity.getDbT3017_ninteiYukoShuryoYMD()));
         基本entity.set証記載保険者番号(entity.getDbT3017_shokisaiHokenshaNo());
         基本entity.set老人保険市町村番号(entity.getDbT3017_rojinHokenShichosonNo());
@@ -162,9 +166,12 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         if (名称.length() <= 居住サービス計画事業者名_LENGTH) {
             基本entity.set出力様式１(名称);
             基本entity.set出力様式２(RString.EMPTY);
-        } else {
+        } else if (名称.length() <= 居住サービス計画事業者名_LENGTH_40) {
             基本entity.set出力様式１(名称.substring(0, 居住サービス計画事業者名_LENGTH));
             基本entity.set出力様式２(名称.substring(居住サービス計画事業者名_LENGTH));
+        } else {
+            基本entity.set出力様式１(名称.substring(0, 居住サービス計画事業者名_LENGTH));
+            基本entity.set出力様式２(名称.substring(居住サービス計画事業者名_LENGTH, 居住サービス計画事業者名_LENGTH_40));
         }
         基本entity.setサービス事業者番号(entity.getDbT3017_jigyoshoNo());
         基本entity.setサービス事業者名(entity.getDbT7060_jigyoshaName());
@@ -191,20 +198,11 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
             基本entity.set前公費３緊急時施設療養費請求額(entity.getDbT3017_maeKohi3KinkyuShisetsuRyoyoSeikyugaku());
             基本entity.set後公費３緊急時施設療養費請求額(entity.getDbT3017_atoKohi3KinkyuShisetsuRyoyoSeikyugaku());
         }
-        List<RString> 入力識別番号List = new ArrayList<>();
-        入力識別番号List.add(入力識別番号_716X);
-        入力識別番号List.add(入力識別番号_216X);
-        入力識別番号List.add(入力識別番号_71AX);
-        入力識別番号List.add(入力識別番号_21AX);
-        入力識別番号List.add(入力識別番号_2155);
-        入力識別番号List.add(入力識別番号_2156);
-        入力識別番号List.add(入力識別番号_2194);
-        入力識別番号List.add(入力識別番号_7155);
-        入力識別番号List.add(入力識別番号_7156);
-        入力識別番号List.add(入力識別番号_7194);
+        List<RString> 入力識別番号List = get入力識別番号List();
         基本entity.set基本ヘッダー１(get基本ヘッダー(入力識別番号, サービス提供年月, 入力識別番号List));
         基本entity.set基本ヘッダー２(new RString("請求額"));
-        if (入力識別番号List.contains(入力識別番号)) {
+        if (入力識別番号List.contains(入力識別番号)
+                && new FlexibleYearMonth(サービス提供年月_200510).isBeforeOrEquals(new FlexibleYearMonth(サービス提供年月))) {
             基本entity.set前特定診療費請求額(entity.getDbT3017_maeHokenTokuteiShinryohiSeikyugaku());
             基本entity.set後特定診療費請求額(entity.getDbT3017_atoHokenTokuteiShinryohiSeikyugaku());
         }
@@ -325,9 +323,12 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
             if (事業者名称.length() <= 居住サービス計画事業者名_LENGTH) {
                 住サービス計画事業者名.add(事業者名称);
                 住サービス計画事業者名.add(RString.EMPTY);
-            } else {
+            } else if (事業者名称.length() <= 居住サービス計画事業者名_LENGTH_40) {
                 住サービス計画事業者名.add(事業者名称.substring(0, 居住サービス計画事業者名_LENGTH));
                 住サービス計画事業者名.add(事業者名称.substring(居住サービス計画事業者名_LENGTH));
+            } else {
+                住サービス計画事業者名.add(事業者名称.substring(0, 居住サービス計画事業者名_LENGTH));
+                住サービス計画事業者名.add(事業者名称.substring(居住サービス計画事業者名_LENGTH, 居住サービス計画事業者名_LENGTH_40));
             }
         }
         return 住サービス計画事業者名;
@@ -380,5 +381,20 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         } else {
             return new RString("食事提供費");
         }
+    }
+
+    private List<RString> get入力識別番号List() {
+        List<RString> 入力識別番号List = new ArrayList<>();
+        入力識別番号List.add(入力識別番号_716X);
+        入力識別番号List.add(入力識別番号_216X);
+        入力識別番号List.add(入力識別番号_71AX);
+        入力識別番号List.add(入力識別番号_21AX);
+        入力識別番号List.add(入力識別番号_2155);
+        入力識別番号List.add(入力識別番号_2156);
+        入力識別番号List.add(入力識別番号_2194);
+        入力識別番号List.add(入力識別番号_7155);
+        入力識別番号List.add(入力識別番号_7156);
+        入力識別番号List.add(入力識別番号_7194);
+        return 入力識別番号List;
     }
 }

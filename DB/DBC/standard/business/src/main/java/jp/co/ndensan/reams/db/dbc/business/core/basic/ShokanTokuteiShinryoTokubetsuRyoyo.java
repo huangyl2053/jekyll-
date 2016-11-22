@@ -23,7 +23,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanTokuteiShinryoTokubetsuRyoyo
-        extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier, DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity, ShokanTokuteiShinryoTokubetsuRyoyo> implements Serializable {
+        extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier,
+        DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity, 
+        ShokanTokuteiShinryoTokubetsuRyoyo> implements Serializable {
 
     private final DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity;
     private final ShokanTokuteiShinryoTokubetsuRyoyoIdentifier id;

@@ -58,6 +58,8 @@ public class EditedHonSanteiTsuchiShoKyotsu {
     private Decimal 普徴今後納付すべき額_調定元に;
     private Decimal 普徴今後納付すべき額_収入元に;
     private Decimal 特徴今後納付すべき額;
+    private Decimal 特別徴収額合計;
+    private Decimal 普通徴収額合計;
     private EditedKoza 編集後口座;
     private RString 調定事由１;
     private RString 調定事由２;

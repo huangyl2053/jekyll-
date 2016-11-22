@@ -58,7 +58,7 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
      */
     public void get利用実人員(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
 
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (!利用状況統計表集計結果Map.containsKey(統計用サービス種類)) {
             return;
         }
@@ -364,7 +364,7 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
      * @param 統計用サービス種類 統計用サービス種類
      */
     public void get単位数(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (!利用状況統計表集計結果Map.containsKey(統計用サービス種類)) {
             return;
         }
@@ -386,23 +386,23 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         Decimal 加算対象 = new Decimal(entity.getHokenTanisu().toString())
                 .add(new Decimal(entity.getHokenDekidakaTanisu().toString()));
         if (YoKaigoJotaiKubun.非該当.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目単位数3_1(entity, 統計用サービス種類, 加算対象);
+            create集計項目単位数3_1(統計用サービス種類, 加算対象);
         } else if (YoKaigoJotaiKubun.要支援1.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目単位数3_2(entity, 統計用サービス種類, 加算対象);
+            create集計項目単位数3_2(統計用サービス種類, 加算対象);
         } else if (YoKaigoJotaiKubun.要支援2.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目単位数3_3(entity, 統計用サービス種類, 加算対象);
+            create集計項目単位数3_3(統計用サービス種類, 加算対象);
         } else if (YoKaigoJotaiKubun.要支援_経過的要介護.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目単位数3_4(entity, 統計用サービス種類, 加算対象);
+            create集計項目単位数3_4(統計用サービス種類, 加算対象);
         } else if (YoKaigoJotaiKubun.要介護1.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目単位数3_5(entity, 統計用サービス種類, 加算対象);
+            create集計項目単位数3_5(統計用サービス種類, 加算対象);
         } else if (YoKaigoJotaiKubun.要介護2.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目単位数3_6(entity, 統計用サービス種類, 加算対象);
+            create集計項目単位数3_6(統計用サービス種類, 加算対象);
         } else if (YoKaigoJotaiKubun.要介護3.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目単位数3_7(entity, 統計用サービス種類, 加算対象);
+            create集計項目単位数3_7(統計用サービス種類, 加算対象);
         } else if (YoKaigoJotaiKubun.要介護4.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目単位数3_8(entity, 統計用サービス種類, 加算対象);
+            create集計項目単位数3_8(統計用サービス種類, 加算対象);
         } else if (YoKaigoJotaiKubun.要介護5.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目単位数3_9(entity, 統計用サービス種類, 加算対象);
+            create集計項目単位数3_9(統計用サービス種類, 加算対象);
         }
     }
 
@@ -420,10 +420,10 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目3_10(nullToZero(集計項目Entity.get集計項目3_10()).add(加算対象));
     }
 
-    private void create集計項目単位数3_1(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
+    private void create集計項目単位数3_1(RString 統計用サービス種類, Decimal 加算対象) {
 
         create集計項目3_1(統計用サービス種類, 加算対象);
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
             create集計項目3_1(RiyojokyoTokeihyo_EditPattern.居宅サービス計.getコード(), 加算対象);
         }
@@ -451,9 +451,9 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目3_10(nullToZero(集計項目Entity.get集計項目3_10()).add(加算対象));
     }
 
-    private void create集計項目単位数3_2(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
+    private void create集計項目単位数3_2(RString 統計用サービス種類, Decimal 加算対象) {
         create集計項目3_2(統計用サービス種類, 加算対象);
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
             create集計項目3_2(RiyojokyoTokeihyo_EditPattern.居宅サービス計.getコード(), 加算対象);
         }
@@ -481,9 +481,9 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目3_10(nullToZero(集計項目Entity.get集計項目3_10()).add(加算対象));
     }
 
-    private void create集計項目単位数3_3(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
+    private void create集計項目単位数3_3(RString 統計用サービス種類, Decimal 加算対象) {
         create集計項目3_3(統計用サービス種類, 加算対象);
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
             create集計項目3_3(RiyojokyoTokeihyo_EditPattern.居宅サービス計.getコード(), 加算対象);
         }
@@ -511,9 +511,9 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目3_10(nullToZero(集計項目Entity.get集計項目3_10()).add(加算対象));
     }
 
-    private void create集計項目単位数3_4(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
+    private void create集計項目単位数3_4(RString 統計用サービス種類, Decimal 加算対象) {
         create集計項目3_4(統計用サービス種類, 加算対象);
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
             create集計項目3_4(RiyojokyoTokeihyo_EditPattern.居宅サービス計.getコード(), 加算対象);
         }
@@ -541,9 +541,9 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目3_10(nullToZero(集計項目Entity.get集計項目3_10()).add(加算対象));
     }
 
-    private void create集計項目単位数3_5(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
+    private void create集計項目単位数3_5(RString 統計用サービス種類, Decimal 加算対象) {
         create集計項目3_5(統計用サービス種類, 加算対象);
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
             create集計項目3_5(RiyojokyoTokeihyo_EditPattern.居宅サービス計.getコード(), 加算対象);
         }
@@ -571,9 +571,9 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目3_10(nullToZero(集計項目Entity.get集計項目3_10()).add(加算対象));
     }
 
-    private void create集計項目単位数3_6(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
+    private void create集計項目単位数3_6(RString 統計用サービス種類, Decimal 加算対象) {
         create集計項目3_6(統計用サービス種類, 加算対象);
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
             create集計項目3_6(RiyojokyoTokeihyo_EditPattern.居宅サービス計.getコード(), 加算対象);
         }
@@ -601,9 +601,9 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目3_10(nullToZero(集計項目Entity.get集計項目3_10()).add(加算対象));
     }
 
-    private void create集計項目単位数3_7(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
+    private void create集計項目単位数3_7(RString 統計用サービス種類, Decimal 加算対象) {
         create集計項目3_7(統計用サービス種類, 加算対象);
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
             create集計項目3_7(RiyojokyoTokeihyo_EditPattern.居宅サービス計.getコード(), 加算対象);
         }
@@ -631,9 +631,9 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目3_10(nullToZero(集計項目Entity.get集計項目3_10()).add(加算対象));
     }
 
-    private void create集計項目単位数3_8(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
+    private void create集計項目単位数3_8(RString 統計用サービス種類, Decimal 加算対象) {
         create集計項目3_8(統計用サービス種類, 加算対象);
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
             create集計項目3_8(RiyojokyoTokeihyo_EditPattern.居宅サービス計.getコード(), 加算対象);
         }
@@ -661,9 +661,9 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目3_10(nullToZero(集計項目Entity.get集計項目3_10()).add(加算対象));
     }
 
-    private void create集計項目単位数3_9(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
+    private void create集計項目単位数3_9(RString 統計用サービス種類, Decimal 加算対象) {
         create集計項目3_9(統計用サービス種類, 加算対象);
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
             create集計項目3_9(RiyojokyoTokeihyo_EditPattern.居宅サービス計.getコード(), 加算対象);
         }
@@ -685,7 +685,7 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
      * @param 統計用サービス種類 統計用サービス種類
      */
     public void get費用総額(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (!利用状況統計表集計結果Map.containsKey(統計用サービス種類)) {
             return;
         }
@@ -718,23 +718,23 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
                     .add(new Decimal(entity.getHokenRiyoshaFutangaku().toString()));
         }
         if (YoKaigoJotaiKubun.非該当.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目費用総額4_1(entity, 統計用サービス種類, 集計対象);
+            create集計項目費用総額4_1(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要支援1.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目費用総額4_2(entity, 統計用サービス種類, 集計対象);
+            create集計項目費用総額4_2(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要支援2.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目費用総額4_3(entity, 統計用サービス種類, 集計対象);
+            create集計項目費用総額4_3(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要支援_経過的要介護.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目費用総額4_4(entity, 統計用サービス種類, 集計対象);
+            create集計項目費用総額4_4(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護1.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目費用総額4_5(entity, 統計用サービス種類, 集計対象);
+            create集計項目費用総額4_5(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護2.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目費用総額4_6(entity, 統計用サービス種類, 集計対象);
+            create集計項目費用総額4_6(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護3.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目費用総額4_7(entity, 統計用サービス種類, 集計対象);
+            create集計項目費用総額4_7(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護4.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目費用総額4_8(entity, 統計用サービス種類, 集計対象);
+            create集計項目費用総額4_8(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護5.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create集計項目費用総額4_9(entity, 統計用サービス種類, 集計対象);
+            create集計項目費用総額4_9(統計用サービス種類, 集計対象);
         }
     }
 
@@ -751,8 +751,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目4_10(nullToZero(集計項目Entity.get集計項目4_10()).add(加算対象));
     }
 
-    private void create集計項目費用総額4_1(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create集計項目費用総額4_1(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目4_1(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -782,8 +782,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目4_10(nullToZero(集計項目Entity.get集計項目4_10()).add(加算対象));
     }
 
-    private void create集計項目費用総額4_2(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create集計項目費用総額4_2(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目4_2(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -813,8 +813,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目4_10(nullToZero(集計項目Entity.get集計項目4_10()).add(加算対象));
     }
 
-    private void create集計項目費用総額4_3(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create集計項目費用総額4_3(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目4_3(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -844,8 +844,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目4_10(nullToZero(集計項目Entity.get集計項目4_10()).add(加算対象));
     }
 
-    private void create集計項目費用総額4_4(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create集計項目費用総額4_4(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目4_4(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -875,8 +875,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目4_10(nullToZero(集計項目Entity.get集計項目4_10()).add(加算対象));
     }
 
-    private void create集計項目費用総額4_5(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create集計項目費用総額4_5(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目4_5(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -906,8 +906,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目4_10(nullToZero(集計項目Entity.get集計項目4_10()).add(加算対象));
     }
 
-    private void create集計項目費用総額4_6(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create集計項目費用総額4_6(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目4_6(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -937,8 +937,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目4_10(nullToZero(集計項目Entity.get集計項目4_10()).add(加算対象));
     }
 
-    private void create集計項目費用総額4_7(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create集計項目費用総額4_7(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目4_7(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -968,8 +968,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目4_10(nullToZero(集計項目Entity.get集計項目4_10()).add(加算対象));
     }
 
-    private void create集計項目費用総額4_8(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create集計項目費用総額4_8(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目4_8(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -999,8 +999,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目4_10(nullToZero(集計項目Entity.get集計項目4_10()).add(加算対象));
     }
 
-    private void create集計項目費用総額4_9(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create集計項目費用総額4_9(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目4_9(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1024,7 +1024,7 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
      * @param 統計用サービス種類 統計用サービス種類
      */
     public void get介護給付費(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (!利用状況統計表集計結果Map.containsKey(統計用サービス種類)) {
             return;
         }
@@ -1047,23 +1047,23 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
                 .add(new Decimal(entity.getHokenDekidakaSeikyugaku().toString()))
                 .add(new Decimal(entity.getShokujiTeikyohiSeikyugaku().toString()));
         if (YoKaigoJotaiKubun.非該当.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create介護給付費5_1(entity, 統計用サービス種類, 集計対象);
+            create介護給付費5_1(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要支援1.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create介護給付費5_2(entity, 統計用サービス種類, 集計対象);
+            create介護給付費5_2(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要支援2.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create介護給付費5_3(entity, 統計用サービス種類, 集計対象);
+            create介護給付費5_3(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要支援_経過的要介護.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create介護給付費5_4(entity, 統計用サービス種類, 集計対象);
+            create介護給付費5_4(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護1.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create介護給付費5_5(entity, 統計用サービス種類, 集計対象);
+            create介護給付費5_5(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護2.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create介護給付費5_6(entity, 統計用サービス種類, 集計対象);
+            create介護給付費5_6(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護3.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create介護給付費5_7(entity, 統計用サービス種類, 集計対象);
+            create介護給付費5_7(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護4.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create介護給付費5_8(entity, 統計用サービス種類, 集計対象);
+            create介護給付費5_8(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護5.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create介護給付費5_9(entity, 統計用サービス種類, 集計対象);
+            create介護給付費5_9(統計用サービス種類, 集計対象);
         }
     }
 
@@ -1080,8 +1080,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目5_10(nullToZero(集計項目Entity.get集計項目5_10()).add(加算対象));
     }
 
-    private void create介護給付費5_1(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create介護給付費5_1(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目5_1(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1111,8 +1111,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目5_10(nullToZero(集計項目Entity.get集計項目5_10()).add(加算対象));
     }
 
-    private void create介護給付費5_2(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create介護給付費5_2(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目5_2(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1142,8 +1142,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目5_10(nullToZero(集計項目Entity.get集計項目5_10()).add(加算対象));
     }
 
-    private void create介護給付費5_3(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create介護給付費5_3(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目5_3(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1173,8 +1173,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目5_10(nullToZero(集計項目Entity.get集計項目5_10()).add(加算対象));
     }
 
-    private void create介護給付費5_4(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create介護給付費5_4(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目5_4(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1204,8 +1204,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目5_10(nullToZero(集計項目Entity.get集計項目5_10()).add(加算対象));
     }
 
-    private void create介護給付費5_5(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create介護給付費5_5(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目5_5(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1235,8 +1235,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目5_10(nullToZero(集計項目Entity.get集計項目5_10()).add(加算対象));
     }
 
-    private void create介護給付費5_6(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create介護給付費5_6(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目5_6(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1266,8 +1266,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目5_10(nullToZero(集計項目Entity.get集計項目5_10()).add(加算対象));
     }
 
-    private void create介護給付費5_7(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create介護給付費5_7(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目5_7(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1297,8 +1297,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目5_10(nullToZero(集計項目Entity.get集計項目5_10()).add(加算対象));
     }
 
-    private void create介護給付費5_8(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create介護給付費5_8(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目5_8(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1328,8 +1328,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目5_10(nullToZero(集計項目Entity.get集計項目5_10()).add(加算対象));
     }
 
-    private void create介護給付費5_9(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create介護給付費5_9(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目5_9(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1353,7 +1353,7 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
      * @param 統計用サービス種類 統計用サービス種類
      */
     public void get特定入所費(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (!利用状況統計表集計結果Map.containsKey(統計用サービス種類)) {
             return;
         }
@@ -1375,23 +1375,23 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         Decimal 集計対象 = new Decimal(entity.getTokuteiNyushoShokuhiSeikyugaku().toString())
                 .add(new Decimal(entity.getTokuteiNyushoKyojuSeikyugaku().toString()));
         if (YoKaigoJotaiKubun.非該当.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create特定入所費6_1(entity, 統計用サービス種類, 集計対象);
+            create特定入所費6_1(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要支援1.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create特定入所費6_2(entity, 統計用サービス種類, 集計対象);
+            create特定入所費6_2(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要支援2.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create特定入所費6_3(entity, 統計用サービス種類, 集計対象);
+            create特定入所費6_3(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要支援_経過的要介護.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create特定入所費6_4(entity, 統計用サービス種類, 集計対象);
+            create特定入所費6_4(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護1.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create特定入所費6_5(entity, 統計用サービス種類, 集計対象);
+            create特定入所費6_5(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護2.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create特定入所費6_6(entity, 統計用サービス種類, 集計対象);
+            create特定入所費6_6(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護3.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create特定入所費6_7(entity, 統計用サービス種類, 集計対象);
+            create特定入所費6_7(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護4.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create特定入所費6_8(entity, 統計用サービス種類, 集計対象);
+            create特定入所費6_8(統計用サービス種類, 集計対象);
         } else if (YoKaigoJotaiKubun.要介護5.getCode().equals(entity.getYoKaigoJotaiKubunCode())) {
-            create特定入所費6_9(entity, 統計用サービス種類, 集計対象);
+            create特定入所費6_9(統計用サービス種類, 集計対象);
         }
     }
 
@@ -1408,8 +1408,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目6_10(nullToZero(集計項目Entity.get集計項目6_10()).add(加算対象));
     }
 
-    private void create特定入所費6_1(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create特定入所費6_1(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目6_1(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1439,8 +1439,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目6_10(nullToZero(集計項目Entity.get集計項目6_10()).add(加算対象));
     }
 
-    private void create特定入所費6_2(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create特定入所費6_2(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目6_2(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1470,8 +1470,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目6_10(nullToZero(集計項目Entity.get集計項目6_10()).add(加算対象));
     }
 
-    private void create特定入所費6_3(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create特定入所費6_3(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目6_3(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1501,8 +1501,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目6_10(nullToZero(集計項目Entity.get集計項目6_10()).add(加算対象));
     }
 
-    private void create特定入所費6_4(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create特定入所費6_4(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目6_4(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1532,8 +1532,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目6_10(nullToZero(集計項目Entity.get集計項目6_10()).add(加算対象));
     }
 
-    private void create特定入所費6_5(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create特定入所費6_5(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目6_5(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1563,8 +1563,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目6_10(nullToZero(集計項目Entity.get集計項目6_10()).add(加算対象));
     }
 
-    private void create特定入所費6_6(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create特定入所費6_6(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目6_6(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1594,8 +1594,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目6_10(nullToZero(集計項目Entity.get集計項目6_10()).add(加算対象));
     }
 
-    private void create特定入所費6_7(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create特定入所費6_7(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目6_7(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1625,8 +1625,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目6_10(nullToZero(集計項目Entity.get集計項目6_10()).add(加算対象));
     }
 
-    private void create特定入所費6_8(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create特定入所費6_8(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目6_8(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {
@@ -1656,8 +1656,8 @@ public class RiyoJokyoTokeihyoMeisaiListTokeiHyoSakuseiService {
         集計項目Entity.set集計項目6_10(nullToZero(集計項目Entity.get集計項目6_10()).add(加算対象));
     }
 
-    private void create特定入所費6_9(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類, Decimal 加算対象) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+    private void create特定入所費6_9(RString 統計用サービス種類, Decimal 加算対象) {
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
 
         create集計項目6_9(統計用サービス種類, 加算対象);
         if (tokeihyo_EditPattern.is居宅サービス計加算有無()) {

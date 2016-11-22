@@ -58,6 +58,8 @@ public class KyuhuhiMeisaiJutokuPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 証明書戻り = new RString("0");
+    private static final RString 確認戻り = new RString("1");
 
     /**
      * onLoad事件
@@ -231,11 +233,12 @@ public class KyuhuhiMeisaiJutokuPanel {
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
                 ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
+                ViewStateHolder.put(ViewStateKeys.証明書戻り, 証明書戻り);
                 return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る).respond();
             } else {
                 ResponseData.of(div).respond();
             }
-            
+
         } else {
             return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る).respond();
         }
@@ -317,6 +320,7 @@ public class KyuhuhiMeisaiJutokuPanel {
                 = SyokanbaraihiShikyuShinseiManager.createInstance();
         ShomeishoNyuryokuKanryoKubunType 証明書入力完了区分 = 償還払い費支給申請.証明書InputCheck(証明書入力済フラグ, sikibetuKey.getSikibetuNo(), サービス年月);
         set証明書入力完了フラグ(証明書入力完了区分, 償還払ViewStateDB, meisaiPar);
+        ViewStateHolder.put(ViewStateKeys.証明書戻り, 確認戻り);
         return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る).respond();
     }
 

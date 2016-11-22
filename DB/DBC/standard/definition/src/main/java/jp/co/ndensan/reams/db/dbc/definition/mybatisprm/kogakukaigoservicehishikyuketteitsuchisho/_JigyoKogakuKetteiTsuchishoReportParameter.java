@@ -25,9 +25,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 
 /**
- * 口座情報検索（IKozaRelateMapper#select）とUaFt200FindShikibetsuTaishoのパラメータクラスです。
+ * 高額サービス費支給（不支給）決定通知書作成の帳票出力用のパラメータです
  *
- * @reamsid_L CA-0250-020 wangwei3
+ * @reamsid_L DBC-2000-030 wangxue
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
