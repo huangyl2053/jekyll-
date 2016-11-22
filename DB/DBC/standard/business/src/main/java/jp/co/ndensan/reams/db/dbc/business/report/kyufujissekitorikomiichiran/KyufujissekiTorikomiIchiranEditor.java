@@ -163,33 +163,8 @@ public class KyufujissekiTorikomiIchiranEditor implements
 
         source.listUpper_10 = entity.get給付実績_整理番号();
 
-        source.listUpper_11 = getレコード種別(entity.get給付実績_レコード件数H1());
-        if (レコード値_1 <= entity.get給付実績_レコード件数D1()) {
-            if (レコード値_1 <= entity.get給付実績_レコード件数DD()) {
-                source.listUpper_12 = 環まる;
-            } else if (entity.get給付実績_レコード件数DD() == レコード値_0) {
-                source.listUpper_12 = 中空まる;
-            }
-        } else if (entity.get給付実績_レコード件数D1() == レコード値_0 && レコード値_1 <= entity.get給付実績_レコード件数DD()) {
-            source.listUpper_12 = ソリッドまる;
+        レコード種別セット(source);
 
-        }
-
-        source.listUpper_13 = getレコード種別(entity.get給付実績_レコード件数D2());
-        source.listUpper_14 = getレコード種別(entity.get給付実績_レコード件数D3());
-        source.listUpper_15 = getレコード種別(entity.get給付実績_レコード件数D4());
-        source.listUpper_16 = getレコード種別(entity.get給付実績_レコード件数D5());
-        source.listUpper_17 = getレコード種別(entity.get給付実績_レコード件数D6());
-        source.listUpper_18 = getレコード種別(entity.get給付実績_レコード件数D7());
-        if (レコード値_1 <= entity.get給付実績_レコード件数D8() || レコード値_1 <= entity.get給付実績_レコード件数DE()) {
-            source.listUpper_19 = 中空まる;
-        }
-
-        source.listUpper_20 = getレコード種別(entity.get給付実績_レコード件数T1());
-        source.listUpper_21 = getレコード種別(entity.get給付実績_レコード件数D9());
-        source.listUpper_22 = getレコード種別(entity.get給付実績_レコード件数DA());
-        source.listUpper_23 = getレコード種別(entity.get給付実績_レコード件数DB());
-        source.listUpper_24 = getレコード種別(entity.get給付実績_レコード件数DC());
         if (!KeikokuKubun.警告なし.getコード().equals(entity.get給付実績_警告区分コード())) {
             source.listUpper_25 = KeikokuKubun.警告あり.get略称();
         }
@@ -228,6 +203,36 @@ public class KyufujissekiTorikomiIchiranEditor implements
                 ReportKomokuEditorUtil.get非空文字列(source.listUpper_5));
         return source;
 
+    }
+
+    private void レコード種別セット(KyufujissekiTorikomiIchiranSource source) {
+        source.listUpper_11 = getレコード種別(entity.get給付実績_レコード件数H1());
+        if (レコード値_1 <= entity.get給付実績_レコード件数D1()) {
+            if (レコード値_1 <= entity.get給付実績_レコード件数DD()) {
+                source.listUpper_12 = 環まる;
+            } else if (entity.get給付実績_レコード件数DD() == レコード値_0) {
+                source.listUpper_12 = 中空まる;
+            }
+        } else if (entity.get給付実績_レコード件数D1() == レコード値_0 && レコード値_1 <= entity.get給付実績_レコード件数DD()) {
+            source.listUpper_12 = ソリッドまる;
+
+        }
+
+        source.listUpper_13 = getレコード種別(entity.get給付実績_レコード件数D2());
+        source.listUpper_14 = getレコード種別(entity.get給付実績_レコード件数D3());
+        source.listUpper_15 = getレコード種別(entity.get給付実績_レコード件数D4());
+        source.listUpper_16 = getレコード種別(entity.get給付実績_レコード件数D5());
+        source.listUpper_17 = getレコード種別(entity.get給付実績_レコード件数D6());
+        source.listUpper_18 = getレコード種別(entity.get給付実績_レコード件数D7());
+        if (レコード値_1 <= entity.get給付実績_レコード件数D8() || レコード値_1 <= entity.get給付実績_レコード件数DE()) {
+            source.listUpper_19 = 中空まる;
+        }
+
+        source.listUpper_20 = getレコード種別(entity.get給付実績_レコード件数T1());
+        source.listUpper_21 = getレコード種別(entity.get給付実績_レコード件数D9());
+        source.listUpper_22 = getレコード種別(entity.get給付実績_レコード件数DA());
+        source.listUpper_23 = getレコード種別(entity.get給付実績_レコード件数DB());
+        source.listUpper_24 = getレコード種別(entity.get給付実績_レコード件数DC());
     }
 
     private RString getSakuseiYmhm(RDateTime datetime) {
