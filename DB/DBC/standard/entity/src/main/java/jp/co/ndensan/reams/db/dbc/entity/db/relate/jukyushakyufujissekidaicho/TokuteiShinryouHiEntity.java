@@ -112,5 +112,7 @@ public class TokuteiShinryouHiEntity extends DbTableEntityBase<TokuteiShinryouHi
     private int 後公費３合計点数;
     @TempTableColumnOrder(39)
     private RString 略称;
+    @TempTableColumnOrder(40)
+    private RString サービス名称;
 
 }
