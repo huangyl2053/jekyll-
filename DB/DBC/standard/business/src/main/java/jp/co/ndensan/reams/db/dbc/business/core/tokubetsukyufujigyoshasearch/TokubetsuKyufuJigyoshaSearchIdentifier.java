@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode
 
 /**
  *
- * @author LDNS liuwei2
+ * 市町村特別給付・サービス事業者を管理するクラスです。
+ *
+ * @reamsid_L DBC-3430-010 liuwei2
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
