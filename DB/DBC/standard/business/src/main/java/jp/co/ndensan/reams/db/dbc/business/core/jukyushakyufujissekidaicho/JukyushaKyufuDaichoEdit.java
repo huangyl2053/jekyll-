@@ -106,13 +106,9 @@ public class JukyushaKyufuDaichoEdit {
     private static final int INDEX_6 = 6;
     private static final int INDEX_7 = 6;
     private static final int INDEX_10 = 10;
-    private static final int INDEX_11 = 11;
     private static final int INDEX_20 = 20;
-    private static final int INDEX_21 = 21;
     private static final int INDEX_30 = 30;
-    private static final int INDEX_31 = 31;
     private static final int INDEX_40 = 40;
-    private static final int INDEX_41 = 41;
     private static final int INDEX_50 = 50;
     private static final int INDEX_64 = 64;
     private static final RString SPACE_1 = new RString("　");
