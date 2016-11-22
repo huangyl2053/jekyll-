@@ -462,8 +462,9 @@ public class NonyuTsuchiShoDataHenshu {
         納入通知書期情報.set納期終了日表記(納期.get納期終了日().wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         納入通知書期情報.set納期限(納期.get納期限());
-        納入通知書期情報.set納期限表記(納付額.compareTo(Decimal.ZERO) <= 0 ? new RString("***********") : 納期.get納期限() != null ? 納期.get納期限().wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString() : new RString("***********"));
+        納入通知書期情報.set納期限表記(納付額.compareTo(Decimal.ZERO) <= 0 ? new RString("***********") : 納期.get納期限() != null
+                ? 納期.get納期限().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString() : new RString("***********"));
         納入通知書期情報.set納付額(納付額);
         納入通知書期情報.set納付額表記(new RString(String.valueOf(納付額)));
         納入通知書期情報.set調定額(金額);

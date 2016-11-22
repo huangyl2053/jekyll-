@@ -166,13 +166,11 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
             特別徴収額合計 = 特徴既に納付すべき額.add(特徴今後納付すべき額);
             普通徴収額合計 = 普徴既に納付すべき額.add(普徴今後納付すべき額_調定元に);
-//            今後納付すべき額 = 普徴今後納付すべき額_調定元に.add(特徴今後納付すべき額);
             今後納付すべき額 = 納付済額.add(get特徴納付済額(賦課情報_更正後, 1, SIZE_6)).subtract(納付済額_未到来期含む);
         } else {
             Decimal 普徴納付済額 = get普徴納付済額(本算定通知書情報.get収入情報(), 1, SIZE_14);
             Decimal 特徴納付済額 = get特徴納付済額(本算定通知書情報.get収入情報(), 1, SIZE_6);
             Decimal 納付済額 = 普徴納付済額.add(特徴納付済額);
-
             普徴納付済額_未到来期含まない = 普徴納付済額;
             普徴納付済額_未到来期含む = 普徴納付済額;
             特徴納付済額_未到来期含む = 特徴納付済額;
@@ -222,7 +220,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         shoKyotsu.set未到来期の納付済額(未到来期の納付済額);
         shoKyotsu.set普徴納付済額_未到来期含む(普徴納付済額_未到来期含む);
         shoKyotsu.set特徴納付済額_未到来期含む(特徴納付済額_未到来期含む);
-
         shoKyotsu.set普徴納付済額_未到来期含まない(普徴納付済額_未到来期含まない);
         shoKyotsu.set特徴納付済額_未到来期含まない(特徴納付済額_未到来期含まない);
         shoKyotsu.set納付済額算出年月日(本算定通知書情報.get発行日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
