@@ -42,10 +42,10 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1514Shori
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyojokyotokeihyomeisailistsakusei."
             + "IRiyoJokyoTokeihyoMeisaiListSakuseiMapper.select処理結果確認リスト");
-    private final RString csvFileName = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private final RString csvFileName = new RString("DBC900004_ShoriKekkaKakuninList.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU900002");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC900004");
     private RString csvFilePath;
     private FileSpoolManager spoolManager;
     private CsvListWriter csvListWriter;
@@ -76,10 +76,6 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1514Shori
     protected void createWriter() {
         処理結果確認リスト一時TBL = new BatchEntityCreatedTempTableWriter(TABLE_処理結果確認リスト一時,
                 DbWT1514ShoriKekkaKakuninListEntity.class);
-    }
-
-    @Override
-    protected void afterExecute() {
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         csvFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(), csvFileName);
@@ -91,6 +87,10 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1514Shori
                 .setHeader(getHeaderList())
                 .setNewLine(NewLine.CRLF)
                 .build();
+    }
+
+    @Override
+    protected void afterExecute() {
         csvListWriter.close();
     }
 
@@ -150,6 +150,8 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1514Shori
             bodyList.add(FlexibleDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().concat(RDate.getNowTime().
                             toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒)).concat(作成_内容));
+        } else {
+            bodyList.add(RString.EMPTY);
         }
         bodyList.add(Tokeihyo_ErrorKubun.toValue(entity.get処理名()).get名称());
         bodyList.add(entity.get証記載保険者番号());

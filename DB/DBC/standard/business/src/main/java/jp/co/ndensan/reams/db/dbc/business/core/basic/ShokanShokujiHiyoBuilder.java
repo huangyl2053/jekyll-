@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -302,6 +302,18 @@ public class ShokanShokujiHiyoBuilder {
     public ShokanShokujiHiyoBuilder set増減点(int 増減点) {
         requireNonNull(増減点, UrSystemErrorMessages.値がnull.getReplacedMessage("増減点"));
         entity.setZougenTen(増減点);
+        return this;
+    }
+
+    /**
+     * 差額金額を設定します。
+     *
+     * @param 差額金額 差額金額
+     * @return {@link ShokanShokujiHiyoBuilder}
+     */
+    public ShokanShokujiHiyoBuilder set差額金額(int 差額金額) {
+        requireNonNull(差額金額, UrSystemErrorMessages.値がnull.getReplacedMessage("差額金額"));
+        entity.setSagakuKingaku(差額金額);
         return this;
     }
 

@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
@@ -13,8 +12,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshika
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * HihokenshaInfo のクラスファイル
- *
+ * HihokenshaInfo のクラスファイル 
+ * 
  * @reamsid_L DBC-2030-010 huzongcheng
  */
 public class HihokenshaInfoDiv extends Panel {

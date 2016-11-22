@@ -16,7 +16,7 @@
         "DbT1001HihokenshaDaicho"."jushochiTokureiFlag"as "setaiHaaku_jushochiTokureiFlag"
         FROM
         "HanteiTaishoshaTemp"
-        LEFT JOIN
+        INNER JOIN
         (<include refid="dbt1001LeqIdoYMDAndDoubleMax" />) AS "DbT1001HihokenshaDaicho"
         ON
         "HanteiTaishoshaTemp"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
@@ -1433,6 +1433,8 @@
         <id column="HanteiTaishoshaTemp_shikibetsuCode"  />
         <id column="HanteiTaishoshaTemp_setaiCode"  />
         <id column="SetainJohoTemp_shikibetsuCode"  />
+        <id column="SetainJohoTemp_taishoTsuki" />
+        <id column="SetainJohoTemp_hihokenshaNo" />
         <result property="判定基準日" column="hanteiKijunYMD"
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <association property="判定対象者" 
@@ -1446,6 +1448,7 @@
         <id column="SetainJohoTemp_taishoTsuki"  />
         <id column="SetainJohoTemp_setaiCode"  />
         <id column="SetainJohoTemp_shikibetsuCode"  />
+        <id column="SetainJohoTemp_hihokenshaNo" />
         <association property="世帯員情報" 
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISetainJohoTempMapper.ResultMap_SetainJohoTempEntity" />
         <association property="介護所得情報" 
@@ -1565,6 +1568,7 @@
         <id column="RiyoshaFutanWariaiMeisaiTemp_nendo" />
         <id column="RiyoshaFutanWariaiMeisaiTemp_hihokenshaNo" />
         <id column="RiyoshaFutanWariaiMeisaiTemp_edaNo" />
+        <id column="RiyoshaFutanWariaiKonkyoTemp_setaiinHihokenshaNo" />
         <association property="利用者負担割合明細" 
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IRiyoshaFutanWariaiMeisaiTempMapper.ResultMap_RiyoshaFutanWariaiMeisaiTempEntity" />
         <association property="利用者負担割合根拠"  
@@ -1602,12 +1606,15 @@
                      resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3105SogoJigyoTaishoshaMapper.ResultMap_DbT3105SogoJigyoTaishoshaEntity" />
     </resultMap>
     <sql id="dbt1001LeqIdoYMDAndDoubleMax">
-        SELECT mst.*
+        Select mst.* FROM
+        (SELECT mst1.*
         FROM
-        (<include refid="dbt1001LeqIdoYMDAndSingleMax"/>)AS mst 
+        (<include refid="dbt1001LeqIdoYMDAndSingleMax"/>)AS mst1 
         WHERE (NOT (EXISTS ( SELECT slw."hihokenshaNo",slw."idoYMD",slw."edaNo"
         FROM (<include refid="dbt1001LeqIdoYMDAndSingleMax"/>) slw
-        WHERE (((mst."hihokenshaNo" = slw."hihokenshaNo") AND (mst."idoYMD" = slw."idoYMD")) AND (mst."edaNo" <![CDATA[<]]> slw."edaNo")))))
+        WHERE (((mst1."hihokenshaNo" = slw."hihokenshaNo") AND (mst1."idoYMD" = slw."idoYMD")) AND (mst1."edaNo" <![CDATA[<]]> slw."edaNo")))))
+        ) AS mst WHERE 
+        mst."shikakuShutokuYMD" <![CDATA[<=]]> #{判定基準日} AND (mst."shikakuSoshitsuYMD" <![CDATA[>]]> #{判定基準日} OR mst."shikakuSoshitsuYMD" = '' OR mst."shikakuSoshitsuYMD" is null)
     </sql>
     <sql id="dbt1001LeqIdoYMDAndSingleMax">
         SELECT

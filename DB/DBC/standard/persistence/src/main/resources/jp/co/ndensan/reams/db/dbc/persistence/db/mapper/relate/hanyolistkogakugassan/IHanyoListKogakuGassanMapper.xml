@@ -16,10 +16,10 @@
         INNER  JOIN
         rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         ON "DbT1001HihokenshaDaicho"."hihokenshaNo" = "DbT3072KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo"
-        LEFT JOIN 
+        LEFT JOIN
         rgdb."DbV4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
         ON "DbT4001JukyushaDaicho"."hihokenshaNo" = "DbT3072KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo"
-        <if test="抽出区分!=null and !抽出区分.isEmpty()">  
+        <if test="抽出区分!=null and !抽出区分.isEmpty()">
         INNER JOIN
           (SELECT 
             DbT3072KogakuGassanShikyuGakuKei."hihokenshaNo",
@@ -182,18 +182,37 @@
          ${出力項目}
         </if>
     </select>
-        
+
     <resultMap id="resultMap_HanyoListKogakuGassanKeisanEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassan.HanyoListKogakuGassanKeisanEntity" autoMapping="true">
-        <id column="dbT3072KogakuGassanShikyuGakuKeisanKekka_hihokenshaNo" />
-        <id column="dbT3072KogakuGassanShikyuGakuKeisanKekka_taishoNendo" />
-        <id column="dbT3072KogakuGassanShikyuGakuKeisanKekka_shoKisaiHokenshaNo" />
-        <id column="dbT3072KogakuGassanShikyuGakuKeisanKekka_shikyuShinseishoSeiriNo" />
-        <id column="dbT3072KogakuGassanShikyuGakuKeisanKekka_rirekiNo" />
+        <id property="高額合算支給額計算結果.hihokenshaNo" column="dbT3072KogakuGassanShikyuGakuKeisanKekka_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="高額合算支給額計算結果.taishoNendo" column="dbT3072KogakuGassanShikyuGakuKeisanKekka_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="高額合算支給額計算結果.shoKisaiHokenshaNo" column="dbT3072KogakuGassanShikyuGakuKeisanKekka_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="高額合算支給額計算結果.shikyuShinseishoSeiriNo" column="dbT3072KogakuGassanShikyuGakuKeisanKekka_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="高額合算支給額計算結果.rirekiNo" column="dbT3072KogakuGassanShikyuGakuKeisanKekka_rirekiNo" />
+        <id property="宛名.shikibetsuCode" column="ShikibetsuTaisho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <id property="宛名.rirekiNo" column="ShikibetsuTaisho_rirekiNo" />
+        <id property="最新被保台帳.hihokenshaNo" column="dbT1001HihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="最新被保台帳.idoYMD" column="dbT1001HihokenshaDaicho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="最新被保台帳.edaNo" column="dbT1001HihokenshaDaicho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="宛先.shikibetsuCode" column="Atesaki_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <id property="宛先.atesakiShubetsu" column="Atesaki_atesakiShubetsu" typeHandler="RStringTypeHandler" />
+        <id property="宛先.gyomubetsuPrimaryKey" column="Atesaki_gyomubetsuPrimaryKey" typeHandler="RStringTypeHandler" />
+        <id property="宛先.gyomuKoyuKey" column="Atesaki_gyomuKoyuKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="宛先.gyomuCode" column="Atesaki_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler" />
+        <id property="宛先.subGyomuCode" column="Atesaki_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler" />
+        <id property="宛先.gyomuGroupCode" column="Atesaki_gyomuGroupCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="宛先.subGyomuGroupCode" column="Atesaki_subGyomuGroupCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="宛先.kamokuCode" column="Atesaki_kamokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KamokuCodeTypeHandler" />
+        <id property="受給者台帳.shichosonCode" column="dbT4001JukyushaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="受給者台帳.hihokenshaNo" column="dbT4001JukyushaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="受給者台帳.rirekiNo" column="dbT4001JukyushaDaicho_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="受給者台帳.edaban" column="dbT4001JukyushaDaicho_edaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="受給者台帳.jukyuShinseiJiyu" column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <association property="高額合算支給額計算結果" resultMap="ResultMap_DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity" />
 	<association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="最新被保台帳" resultMap="NewResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
         <association property="受給者台帳" resultMap="ResultMap_DbT4001JukyushaDaichoEntity"/>
-        <association property="高額合算支給額計算結果" resultMap="ResultMap_DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity" />
     </resultMap>
     
     <sql id="allColumns_DbT1001HihokenshaDaicho">

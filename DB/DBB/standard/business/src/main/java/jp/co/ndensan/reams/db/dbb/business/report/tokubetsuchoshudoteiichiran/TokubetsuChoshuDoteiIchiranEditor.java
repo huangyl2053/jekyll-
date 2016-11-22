@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -51,6 +52,7 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
     private static final List<RString> 住民種別外国人 = new ArrayList<>();
     private final Association association;
     private final List<RString> 出力順項目リスト;
+    private final Map<RString, RString> 改頁項目Map;
     private final List<RString> 改頁項目リスト;
     private final TokushoTaishioIchiranEntity 特徴対象一覧;
     private final RString 特徴開始月;
@@ -60,16 +62,19 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
      *
      * @param 特徴対象一覧 TokushoTaishioIchiranEntity
      * @param 出力順項目リスト List<RString>
+     * @param 改頁項目Map Map<RString, RString>
      * @param 改頁項目リスト List<RString>
      * @param association Association
      * @param 特徴開始月 RString
      */
     public TokubetsuChoshuDoteiIchiranEditor(TokushoTaishioIchiranEntity 特徴対象一覧,
             List<RString> 出力順項目リスト,
+            Map<RString, RString> 改頁項目Map,
             List<RString> 改頁項目リスト,
             Association association,
             RString 特徴開始月) {
         this.出力順項目リスト = 出力順項目リスト;
+        this.改頁項目Map = 改頁項目Map;
         this.改頁項目リスト = 改頁項目リスト;
         this.association = association;
         this.特徴開始月 = 特徴開始月;
@@ -136,7 +141,7 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
     }
 
     private void set作成日時(TokubetsuChoshuDoteiIchiranSource source) {
-        source.printTimeStamp = DateConverter.getSakuseiYmhm();
+        source.printTimeStamp = DateConverter.getSakuseiYMD();
     }
 
     private void set導入団体コード(TokubetsuChoshuDoteiIchiranSource source) {
@@ -259,18 +264,18 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
         if (改頁項目リスト == null || 改頁項目リスト.isEmpty()) {
             return;
         }
-        source.kaiPageArea1 = 改頁項目リスト.get(NUM_0);
+        source.kaiPageArea1 = 改頁項目Map.get(改頁項目リスト.get(NUM_0));
         if (改頁項目リスト.size() > NUM_1) {
-            source.kaiPageArea2 = 改頁項目リスト.get(NUM_1);
+            source.kaiPageArea2 = 改頁項目Map.get(改頁項目リスト.get(NUM_1));
         }
         if (改頁項目リスト.size() > NUM_2) {
-            source.kaiPageArea3 = 改頁項目リスト.get(NUM_2);
+            source.kaiPageArea3 = 改頁項目Map.get(改頁項目リスト.get(NUM_2));
         }
         if (改頁項目リスト.size() > NUM_3) {
-            source.kaiPageArea4 = 改頁項目リスト.get(NUM_3);
+            source.kaiPageArea4 = 改頁項目Map.get(改頁項目リスト.get(NUM_3));
         }
         if (改頁項目リスト.size() > NUM_4) {
-            source.kaiPageArea5 = 改頁項目リスト.get(NUM_4);
+            source.kaiPageArea5 = 改頁項目Map.get(改頁項目リスト.get(NUM_4));
         }
     }
 

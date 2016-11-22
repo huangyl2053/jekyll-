@@ -163,7 +163,7 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 検索対象データなし() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(UrErrorMessages.対象データなし)));
+        validPairs.add(new ValidationMessageControlPair(new ValidationCheckMessages(UrErrorMessages.該当データなし)));
         return validPairs;
     }
 
@@ -263,7 +263,7 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
         if (!uchiFutangakuGokei.equals(nullToZero(div.getTxtUchiFutangakuGokei().getValue()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new ValidationCheckMessages(DbcErrorMessages.合計ボタン未押下),
-                    div.getTxtJikofutangakuGokei()));
+                    div.getTxtUchiFutangakuGokei()));
         }
 
         return validPairs;

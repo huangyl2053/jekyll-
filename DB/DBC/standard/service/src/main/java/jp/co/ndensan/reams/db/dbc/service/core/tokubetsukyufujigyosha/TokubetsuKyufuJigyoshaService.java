@@ -57,6 +57,7 @@ public class TokubetsuKyufuJigyoshaService {
         List<TokubetsuKyufuJigyoshaSearchEntity> 事業者情報 = mapper.select事業者情報(事業者番号, 事業者番号Length, cD);
         if (事業者情報 != null) {
             for (TokubetsuKyufuJigyoshaSearchEntity entity : 事業者情報) {
+                entity.get事業者().initializeMd5();
                 TokubetsuKyufuJigyoshaSearchBusiness business = new TokubetsuKyufuJigyoshaSearchBusiness(entity);
                 businessList.add(business);
             }

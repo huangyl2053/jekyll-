@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.HanyoListParamKyoufuKannrihyouDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 汎用リスト出力(給付管理票)
@@ -45,6 +47,7 @@ public class HanyoListParamKyoufuKannrihyouHandler {
     private static final RString KEY_日付スラッシュ付加 = new RString("日付スラッシュ付加");
     private static final RString KEY_出力順 = new RString("出力順");
     private static final RString KEY_出力項目 = new RString("出力項目");
+    private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
 
     /**
      * コンストラクタです。
@@ -73,7 +76,15 @@ public class HanyoListParamKyoufuKannrihyouHandler {
 
         div.getCcdShutsuryokuKoumoku().setDisabled(true);
         div.getCcdShutsuryokuKoumoku().setVisible(true);
-
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+        div.getChushutsuJokenPanel().getＣｃｄKyotakuSienJigyoshaBango().initialize();
+        div.getChushutsuJokenPanel().getＣｃｄKyotakuSienJigyoshaBango().getRadKaigoHokenShisetsu().setDisplayNone(true);
+        div.getChushutsuJokenPanel().getＣｃｄKyotakuSienJigyoshaBango().getRadOtherTokureiShisetsu().setDisplayNone(true);
+        div.getChushutsuJokenPanel().getＣｃｄKyotakuSienJigyoshaBango().getRadTekiyoJyogaiShisetsu().setDisplayNone(true);
+        div.getChushutsuJokenPanel().getCcdItakusakiSienJigyoshaBango().initialize();
+        div.getChushutsuJokenPanel().getCcdItakusakiSienJigyoshaBango().getRadKaigoHokenShisetsu().setDisplayNone(true);
+        div.getChushutsuJokenPanel().getCcdItakusakiSienJigyoshaBango().getRadOtherTokureiShisetsu().setDisplayNone(true);
+        div.getChushutsuJokenPanel().getCcdItakusakiSienJigyoshaBango().getRadTekiyoJyogaiShisetsu().setDisplayNone(true);
         List<RString> keyList = new ArrayList<>();
         keyList.add(KEY_項目名付加);
         keyList.add(KEY_日付編集);

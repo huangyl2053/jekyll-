@@ -38,12 +38,85 @@ public class KariHenkoTsuchishoPageBreak extends PageBreaker<KariSanteigakuHenko
     @Override
     public boolean isBreak(ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> currentSource,
             ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> nextSource) {
-        boolean flag = false;
-        //TODO QA1859確認中
+        boolean flag;
         if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.郵便番号.get項目ID())
-                && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
+                && isBreak(currentSource.getSource().listLower_2, nextSource.getSource().listLower_2)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.町域コード.get項目ID())
+                && isBreak(currentSource.getSource().choikiCode, nextSource.getSource().choikiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.番地コード.get項目ID())
+                && isBreak(currentSource.getSource().banchiCode, nextSource.getSource().banchiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.行政区コード.get項目ID())
+                && isBreak(currentSource.getSource().gyoseikuCode, nextSource.getSource().gyoseikuCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.地区１.get項目ID())
+                && isBreak(currentSource.getSource().chikuCode1, nextSource.getSource().chikuCode1)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.地区２.get項目ID())
+                && isBreak(currentSource.getSource().chikuCode2, nextSource.getSource().chikuCode2)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.地区３.get項目ID())
+                && isBreak(currentSource.getSource().chikuCode3, nextSource.getSource().chikuCode3)) {
+            flag = true;
+        } else {
+            flag = isBreak1(currentSource, nextSource);
+        }
+        return flag;
+
+    }
+
+    private boolean isBreak1(ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> currentSource,
+            ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> nextSource) {
+        boolean flag;
+        if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.世帯コード.get項目ID())
+                && isBreak(currentSource.getSource().listUpper_4, nextSource.getSource().listUpper_4)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.識別コード.get項目ID())
+                && isBreak(currentSource.getSource().shikibetsuCode, nextSource.getSource().shikibetsuCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.氏名５０音カナ.get項目ID())
+                && isBreak(currentSource.getSource().kanaMeisho, nextSource.getSource().kanaMeisho)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.生年月日.get項目ID())
+                && isBreak(currentSource.getSource().seinengappiYMD, nextSource.getSource().seinengappiYMD)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.性別.get項目ID())
+                && isBreak(currentSource.getSource().seibetsuCode, nextSource.getSource().seibetsuCode)) {
+            flag = true;
+        } else {
+            flag = isBreak2(currentSource, nextSource);
+        }
+        return flag;
+
+    }
+
+    private boolean isBreak2(ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> currentSource,
+            ReportLineRecord<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> nextSource) {
+        boolean flag = false;
+        if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.市町村コード.get項目ID())
+                && isBreak(currentSource.getSource().hokenshaNo, nextSource.getSource().hokenshaNo)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.被保険者番号.get項目ID())
+                && isBreak(currentSource.getSource().hihokenshaNo, nextSource.getSource().hihokenshaNo)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.年金コード.get項目ID())
+                && isBreak(currentSource.getSource().nenkinCode, nextSource.getSource().nenkinCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.納組コード.get項目ID())
+                && isBreak(currentSource.getSource().nokumiCode, nextSource.getSource().nokumiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KariHenkoTsuchishoOutPutOrder.生活保護種別.get項目ID())
+                && isBreak(currentSource.getSource().seihoFlag, nextSource.getSource().seihoFlag)) {
             flag = true;
         }
         return flag;
+
+    }
+
+    private boolean isBreak(RString current, RString next) {
+        return !(RString.isNullOrEmpty(current) && RString.isNullOrEmpty(next)
+                || (!RString.isNullOrEmpty(current) && current.equals(next)));
     }
 }

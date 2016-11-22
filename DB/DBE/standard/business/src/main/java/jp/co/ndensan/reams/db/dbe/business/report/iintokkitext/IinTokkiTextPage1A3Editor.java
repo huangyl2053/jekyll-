@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- * 委員用特記事項A3Editorです。
+ * 委員用一次判定+特記事項A3Editorです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-330 lishengli
  */
 public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
 

@@ -126,18 +126,33 @@ public enum HonsanteiIdoSpec implements IPredicate<HonsanteiIdoDiv> {
         }
 
         public static boolean is決定通知書の発行日(HonsanteiIdoDiv div) {
+            List<RString> 決定通知書チェックボックス = div.getHonsanteiIdoChohyoHakko().getHonSanteiIdoTsuchiKobetsuJoho()
+                    .getChkKetteiTsuchi().getSelectedKeys();
+            if (決定通知書チェックボックス.isEmpty()) {
+                return true;
+            }
             RDate 決定通知書発行日 = div.getHonsanteiIdoChohyoHakko().getHonSanteiIdoTsuchiKobetsuJoho()
                     .getTxtKetteiTsuchiHakkoYMD().getValue();
             return 決定通知書発行日 != null;
         }
 
         public static boolean is変更通知書の対象者(HonsanteiIdoDiv div) {
+            List<RString> 変更通知書チェックボックス = div.getHonsanteiIdoChohyoHakko().getHonSanteiIdoTsuchiKobetsuJoho()
+                    .getChkHenkoTsuchi().getSelectedKeys();
+            if (変更通知書チェックボックス.isEmpty()) {
+                return true;
+            }
             List<RString> 変更通知書対象者 = div.getHonsanteiIdoChohyoHakko().getHonSanteiIdoTsuchiKobetsuJoho()
                     .getChkHenkoTsuchiTaishosha().getSelectedKeys();
             return !変更通知書対象者.isEmpty();
         }
 
         public static boolean is変更通知書の発行日(HonsanteiIdoDiv div) {
+            List<RString> 変更通知書チェックボックス = div.getHonsanteiIdoChohyoHakko().getHonSanteiIdoTsuchiKobetsuJoho()
+                    .getChkHenkoTsuchi().getSelectedKeys();
+            if (変更通知書チェックボックス.isEmpty()) {
+                return true;
+            }
             RDate 変更通知書発行日 = div.getHonsanteiIdoChohyoHakko().getHonSanteiIdoTsuchiKobetsuJoho()
                     .getTxtHenkoTsuchiHakkoYMD().getValue();
             return 変更通知書発行日 != null;
@@ -159,6 +174,9 @@ public enum HonsanteiIdoSpec implements IPredicate<HonsanteiIdoDiv> {
             RString key1 = div.getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
             RString key2 = div.getHonsanteiIdoChohyoHakko().getHonSanteiIdoTsuchiKobetsuJoho()
                     .getDdlNotsuShuturyokuki().getSelectedValue();
+            if (RString.isNullOrEmpty(key2)) {
+                return false;
+            }
             RString 出力期_月 = key2.split(月.toString()).get(NUM_0);
             return key1.equals(出力期_月.substring(出力期_月.length() - NUM_2, 出力期_月.length()));
         }

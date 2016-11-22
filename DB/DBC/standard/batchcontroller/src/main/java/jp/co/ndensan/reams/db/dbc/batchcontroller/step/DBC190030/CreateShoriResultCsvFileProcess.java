@@ -38,7 +38,7 @@ public class CreateShoriResultCsvFileProcess extends BatchProcessBase<DbT3116Kij
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 処理結果確認リスト = new RString("処理結果確認リスト.csv");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU900002");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC900004");
     private static final RString DATA_世帯コード = new RString("世帯コード");
     private static final RString DATA_被保険者番号 = new RString("被保険者番号");
     private static final RString DATA_対象者判定 = new RString("対象者判定");

@@ -11,9 +11,7 @@
         SELECT
           *
         FROM 
-          rgdb."tempKihon"
-        WHERE
-          "区分" = '1'
+          "tempKihon"
     </select>
     
     <select resultOrdered="true" id="get明細" 
@@ -21,7 +19,7 @@
         SELECT
           *
         FROM 
-          rgdb."tempMeisai"
+          "tempMeisai"
     </select>
     
     <select resultOrdered="true" id="get集計" 
@@ -29,15 +27,15 @@
         SELECT
           *
         FROM 
-          rgdb."tempShuukei"
+          "tempShuukei"
     </select>
     
-    <select resultOrdered="true" id="get特定入所" 
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShoteiShikkanEntity" fetchSize="500">
+    <select resultOrdered="true" id="get特定入所者介護サービス費用" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.TokuteiServiceHiEntity" fetchSize="500">
         SELECT
           *
         FROM 
-          rgdb."tempShoteiShikkan"
+          "tempTokuteiServiceHi"
     </select>
     
     <select resultOrdered="true" id="get施設療養" 
@@ -45,7 +43,7 @@
         SELECT
           *
         FROM 
-          rgdb."tempKinkyuuziShisetuRyouyou"
+          "tempKinkyuuziShisetuRyouyou"
     </select>
     
     <select resultOrdered="true" id="get特別療養" 
@@ -53,7 +51,7 @@
         SELECT
           *
         FROM 
-          rgdb."tempTokuteiShinryouHi"
+          "tempTokuteiShinryouHi"
     </select>
     
     <select resultOrdered="true" id="get計画費" 
@@ -61,7 +59,7 @@
         SELECT
           *
         FROM 
-          rgdb."tempKeikakuHi"
+          "tempKeikakuHi"
     </select>
     
     <select resultOrdered="true" id="get福祉用具" 
@@ -69,7 +67,7 @@
         SELECT
           *
         FROM 
-          rgdb."tempHukushiYougu"
+          "tempHukushiYougu"
     </select>
     
     <select resultOrdered="true" id="get住宅改修" 
@@ -77,7 +75,7 @@
         SELECT
           *
         FROM 
-          rgdb."tempJuutakuKaishuu"
+          "tempJuutakuKaishuu"
     </select>
     
     <select resultOrdered="true" id="get社会福祉法人軽減額" 
@@ -85,7 +83,7 @@
         SELECT
           *
         FROM 
-          rgdb."tempShakaiHukushiHouzinKeigen"
+          "tempShakaiHukushiHouzinKeigen"
     </select>
     
     <select resultOrdered="true" id="getケアマネジメント費" 
@@ -93,7 +91,7 @@
         SELECT
           *
         FROM 
-          rgdb."tempCareManagement"
+          "tempCareManagement"
     </select>
     
     <select resultOrdered="true" id="get所定疾患施設療養費" 
@@ -101,7 +99,7 @@
         SELECT
           *
         FROM 
-          rgdb."tempShoteiShikkan"
+          "tempShoteiShikkan"
     </select>
     
     <select resultOrdered="true" id="get給付実績高額" 
@@ -109,9 +107,17 @@
         SELECT
           *
         FROM 
-          rgdb."tempKihon"
-        WHERE
-          "区分" = '2'
+          "tempKihon"
+    </select>
+    
+    <select resultOrdered="true" id="get帳票データ" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoSyutuMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoData" fetchSize="500">
+        SELECT
+          *
+        FROM 
+          "tempJukyushaKyufuJissekidaichoData"
+          ${出力順}
     </select>
     
 </mapper>

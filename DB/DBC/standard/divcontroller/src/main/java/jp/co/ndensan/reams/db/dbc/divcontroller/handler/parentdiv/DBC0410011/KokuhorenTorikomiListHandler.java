@@ -36,11 +36,13 @@ public class KokuhorenTorikomiListHandler {
     private static final RString 再処理可能 = new RString("再処理可能");
     private static final RString 再処理不可 = new RString("再処理不可");
     private static final RString 処理前 = new RString("処理前");
-    private static final RString アンダーライン = new RString("_");
     private static final RString アステリスク = new RString("*");
     private static final RString 処理状態区分_フォーク = new RString("×");
     private static final RString 処理状態区分_丸い = new RString("○");
     private static final RString 処理状態区分_横線 = new RString("-");
+    private final RString searchSharedFile = new RString("1\\_");
+    private final RString パーセント = new RString("%");
+
 
     /**
      * コンストラクタです。
@@ -84,9 +86,9 @@ public class KokuhorenTorikomiListHandler {
             RYearMonth 処理年月) {
         dgKokuhorenTorikomiList_Row row = new dgKokuhorenTorikomiList_Row();
         RStringBuilder rsb = new RStringBuilder();
-        rsb.append(処理年月);
-        rsb.append(アンダーライン);
+        rsb.append(searchSharedFile);
         rsb.append(model.get交換識別番号());
+        rsb.append(パーセント);
         if (SharedFile.searchSharedFile(rsb.toRString()).isEmpty()) {
             row.setTorikomiFlag(アステリスク);
         } else {

@@ -602,6 +602,12 @@ public class GemmenGengakuShoHakkoMainHandler {
         }
     }
 
+    /**
+     * form文書番号を設定します。
+     *
+     * @param 文書番号 文書番号
+     * @return 整形文書番号
+     */
     public RString form文書番号(RString 文書番号) {
         RStringBuilder 整形文書番号 = new RStringBuilder();
         if (RString.isNullOrEmpty(文書番号)) {

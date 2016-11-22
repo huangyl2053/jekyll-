@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.Idou
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -73,12 +74,12 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
             return;
         }
         RString 全項目 = 利用者負担全項目(entity.get利用者負担());
-        if (利用者負担.contains(全項目)) {
-            return;
-        }
-        利用者負担.add(全項目);
         Decimal 連番 = 連番Map.get(entity.get利用者負担().getHihokenshaNo());
         if (連番 == null) {
+            if (利用者負担.contains(全項目)) {
+                return;
+            }
+            利用者負担.add(全項目);
             連番Map.put(entity.get利用者負担().getHihokenshaNo(), Decimal.ONE);
             IdouTblEntity update = entity.get異動一時();
             update.set利用者負担額減額(全項目);
@@ -90,6 +91,10 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
             if (連番temp.intValue() != entity.get異動一時().get連番()) {
                 return;
             }
+            if (利用者負担.contains(全項目)) {
+                return;
+            }
+            利用者負担.add(全項目);
             連番Map.put(entity.get利用者負担().getHihokenshaNo(), 連番temp);
             IdouTblEntity update = entity.get異動一時();
             update.set利用者負担額減額(全項目);
@@ -97,6 +102,10 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番.add(Decimal.ONE).intValue()) {
+            if (利用者負担.contains(全項目)) {
+                return;
+            }
+            利用者負担.add(全項目);
             連番Map.put(entity.get利用者負担().getHihokenshaNo(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
             insert.set被保険者番号(entity.get利用者負担().getHihokenshaNo());
@@ -128,9 +137,20 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
         全項目 = cancatYMD(利用者負担.getTekiyoShuryoYMD(), 全項目);
         全項目 = cancatYMD(利用者負担.getShinseiYMD(), 全項目);
         全項目 = cancatYMD(利用者負担.getKetteiYMD(), 全項目);
+        全項目 = 全項目.concat(new RString(利用者負担.getRirekiNo())).concat(SPLIT);
+        HokenKyufuRitsu 給付率 = 利用者負担.getKyuhuritsu();
+        if (給付率 == null) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            Decimal 給付率value = 給付率.getColumnValue();
+            if (給付率value == null) {
+                全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+            } else {
+                全項目 = 全項目.concat(給付率value.toString()).concat(SPLIT);
+            }
+        }
         全項目 = 全項目.concat(利用者負担.getShoKisaiHokenshaNo().getColumnValue()).concat(SPLIT)
                 .concat(利用者負担.getHihokenshaNo().getColumnValue()).concat(SPLIT)
-                .concat(new RString(利用者負担.getRirekiNo())).concat(SPLIT)
                 .concat(利用者負担.getInsertDantaiCd()).concat(SPLIT)
                 .concat(利用者負担.getIsDeleted() ? RST_TRUE : RST_FALSE).concat(SPLIT);
         全項目 = cancatRString(利用者負担.getKetteiKubun(), 全項目);

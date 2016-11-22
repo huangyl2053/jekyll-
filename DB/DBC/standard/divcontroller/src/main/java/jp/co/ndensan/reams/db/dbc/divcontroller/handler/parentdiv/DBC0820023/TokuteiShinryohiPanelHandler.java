@@ -6,21 +6,23 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820023;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyoBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohiBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023.TokuteiShinryohiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023.ddgToteishinryoTokubetushinryo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023.dgdTokuteiShinryohi_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -37,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -57,7 +60,6 @@ public class TokuteiShinryohiPanelHandler {
     private static final RString 回まで = new RString("回まで");
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成１５年４月 = new FlexibleYearMonth("200304");
-    private static final int NUMBER_０ = 0;
     private static final int NUMBER_３２ = 32;
     private static final int NUMBER_６４ = 64;
     private static final int NUMBER_９６ = 96;
@@ -77,8 +79,7 @@ public class TokuteiShinryohiPanelHandler {
     private static final int NUMBER_５４４ = 544;
     private static final int NUMBER_５７６ = 576;
     private static final int NUMBER_６０８ = 608;
-    private static final RString STR_0001 = new RString("0001");
-    private static final RString FORMAT = new RString("%02d");
+    private static final RString 登録_削除 = new RString("登録_削除");
 
     /**
      * コンストラクタです。
@@ -331,6 +332,13 @@ public class TokuteiShinryohiPanelHandler {
         if (!shokanTokuteiShinryohiList.isEmpty()) {
             for (ShokanTokuteiShinryohi entity : shokanTokuteiShinryohiList) {
                 ddgToteishinryoTokubetushinryo_Row row = new ddgToteishinryoTokubetushinryo_Row();
+                if (EntityDataState.Deleted.equals(entity.getState())) {
+                    row.setRowState(RowState.Deleted);
+                } else if (EntityDataState.Modified.equals(entity.getState())) {
+                    row.setRowState(RowState.Modified);
+                } else if (EntityDataState.Added.equals(entity.getState())) {
+                    row.setRowState(RowState.Added);
+                }
                 row.setShobyouName(entity.get傷病名());
                 row.getShidouKanri().setValue(new Decimal(entity.get指導管理料等単位数()));
                 row.getRihabiri().setValue(new Decimal(entity.getリハビリテーション単位数()));
@@ -365,6 +373,7 @@ public class TokuteiShinryohiPanelHandler {
                 dataSource.add(row);
             }
         }
+        Collections.sort(dataSource, new ToteishinryoTokubetushinryoRowComparator());
         div.getDdgToteishinryoTokubetushinryo().setDataSource(dataSource);
     }
 
@@ -455,17 +464,20 @@ public class TokuteiShinryohiPanelHandler {
     /**
      * 「確定する」ボタンのメソッドます。
      *
+     * @param 初期の特定診療費登録List 初期の特定診療費登録List
      * @param ddgRow ddgToteishinryoTokubetushinryo_Row
      * @param state 状態
+     * @param 明細検索キー 明細検索キー
      */
-    public void modifyRow(ddgToteishinryoTokubetushinryo_Row ddgRow, RString state) {
-
+    public void modifyRow(List<ShokanTokuteiShinryohi> 初期の特定診療費登録List, ddgToteishinryoTokubetushinryo_Row ddgRow,
+            RString state, ShoukanharaihishinseimeisaikensakuParameter 明細検索キー) {
+        List<ddgToteishinryoTokubetushinryo_Row> list = div.getDdgToteishinryoTokubetushinryo().getDataSource();
         if (修正.equals(state)) {
             if (RowState.Added.equals(ddgRow.getRowState())) {
                 ddgRow.setRowState(RowState.Added);
-                setDdgToteishinryoTokubetushinryo_Row(ddgRow, state);
+                setDdgToteishinryoTokubetushinryo_Row(ddgRow, state, 明細検索キー.getサービス年月());
             } else {
-                modifiedDdgToteishinryoTokubetushinryo(ddgRow, state);
+                modifiedDdgToteishinryoTokubetushinryo(初期の特定診療費登録List, ddgRow, state, 明細検索キー);
             }
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(ddgRow.getRowState())) {
@@ -475,20 +487,49 @@ public class TokuteiShinryohiPanelHandler {
                 div.getPanelFour().setVisible(false);
             } else {
                 ddgRow.setRowState(RowState.Deleted);
-                setDdgToteishinryoTokubetushinryo_Row(ddgRow, state);
+                setDdgToteishinryoTokubetushinryo_Row(ddgRow, state, 明細検索キー.getサービス年月());
             }
         } else if (登録.equals(state)) {
             ddgRow.setRowState(RowState.Added);
-            setDdgToteishinryoTokubetushinryo_Row(ddgRow, state);
+            setDdgToteishinryoTokubetushinryo_Row(ddgRow, state, 明細検索キー.getサービス年月());
+        } else if (登録_削除.equals(state)) {
+            list.remove(ddgRow.getId());
+            resetRenban(ddgRow, list);
         }
     }
 
-    private void modifiedDdgToteishinryoTokubetushinryo(ddgToteishinryoTokubetushinryo_Row ddgRow, RString 状態) {
-        boolean flag = checkOfModified(ddgRow);
+    private void resetRenban(ddgToteishinryoTokubetushinryo_Row row, List<ddgToteishinryoTokubetushinryo_Row> list) {
+        int id = row.getId();
+        if (id != 0) {
+            RString deletedRenban = row.getNumber();
+            RString mid;
+            for (ddgToteishinryoTokubetushinryo_Row resetRow : list) {
+                if (id - resetRow.getId() == 1) {
+                    mid = resetRow.getNumber();
+                    resetRow.setNumber(deletedRenban);
+                    id = id - 1;
+                    deletedRenban = mid;
+                }
+                if (id == 0) {
+                    break;
+                }
+            }
+        }
+        clear特定診療費登録();
+        div.getPanelFour().setVisible(false);
+    }
+
+    private void modifiedDdgToteishinryoTokubetushinryo(List<ShokanTokuteiShinryohi> 初期の特定診療費登録List,
+            ddgToteishinryoTokubetushinryo_Row ddgRow, RString 状態,
+            ShoukanharaihishinseimeisaikensakuParameter 明細検索キー) {
+        ShokanTokuteiShinryohi dbData = get特定診療費の初期データ(明細検索キー, 初期の特定診療費登録List);
+        boolean flag = 特定診療費hasChanged(dbData);
         if (flag) {
             ddgRow.setRowState(RowState.Modified);
-            setDdgToteishinryoTokubetushinryo_Row(ddgRow, 状態);
+        } else {
+            ddgRow.setRowState(RowState.Unchanged);
         }
+        setDdgToteishinryoTokubetushinryo_Row(ddgRow, 状態, 明細検索キー.getサービス年月());
     }
 
     private boolean checkOfModified(ddgToteishinryoTokubetushinryo_Row ddgRow) {
@@ -523,36 +564,45 @@ public class TokuteiShinryohiPanelHandler {
         return !ddgRow摘要.equals(div摘要);
     }
 
-    private void setDdgToteishinryoTokubetushinryo_Row(ddgToteishinryoTokubetushinryo_Row ddgRow, RString 状態) {
+    private void setDdgToteishinryoTokubetushinryo_Row(ddgToteishinryoTokubetushinryo_Row ddgRow, RString 状態,
+            FlexibleYearMonth サービス年月) {
         ddgRow.setShobyouName(div.getTxtShobyoMei().getValue());
-        if (div.getTxtShidouKanri().getValue() != null) {
-            ddgRow.getShidouKanri().setValue(div.getTxtShidouKanri().getValue());
-        }
-        if (div.getTxtRibabiriteishon().getValue() != null) {
-            ddgRow.getRihabiri().setValue(div.getTxtRibabiriteishon().getValue());
-        }
-        if (div.getTxtSeishinkaSenmon().getValue() != null) {
-            ddgRow.getSeishinka().setValue(div.getTxtSeishinkaSenmon().getValue());
-        }
-        if (div.getTxtTanjyunXline().getValue() != null) {
-            ddgRow.getEkusuLine().setValue(div.getTxtTanjyunXline().getValue());
-        }
-        if (div.getTxtSochi().getValue() != null) {
-            ddgRow.getSochi().setValue(div.getTxtSochi().getValue());
-        }
-        if (div.getTxtTejyutsu().getValue() != null) {
-            ddgRow.getTejyutsu().setValue(div.getTxtTejyutsu().getValue());
-        }
-        if (div.getTxtGoukei().getValue() != null) {
-            ddgRow.getGoukeyiTanyi().setValue(div.getTxtGoukei().getValue());
-        }
+        ddgRow.getShidouKanri().setValue(div.getTxtShidouKanri().getValue());
+        ddgRow.getRihabiri().setValue(div.getTxtRibabiriteishon().getValue());
+        ddgRow.getSeishinka().setValue(div.getTxtSeishinkaSenmon().getValue());
+        ddgRow.getEkusuLine().setValue(div.getTxtTanjyunXline().getValue());
+        ddgRow.getSochi().setValue(div.getTxtSochi().getValue());
+        ddgRow.getTejyutsu().setValue(div.getTxtTejyutsu().getValue());
+        ddgRow.getGoukeyiTanyi().setValue(div.getTxtGoukei().getValue());
         ddgRow.setMutiTekiyo(div.getTxtMutiTekiyo().getValue());
         if (登録.equals(状態)) {
+            ddgRow.setNumber(new RString(getMax連番plus1(サービス年月)));
             List<ddgToteishinryoTokubetushinryo_Row> list = div.getDdgToteishinryoTokubetushinryo().getDataSource();
             list.add(ddgRow);
+            Collections.sort(list, new ToteishinryoTokubetushinryoRowComparator());
         }
         clear特定診療費登録();
         div.getPanelFour().setVisible(false);
+    }
+
+    private int getMax連番plus1(FlexibleYearMonth サービス年月) {
+        int max連番 = -1;
+        if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
+            List<ddgToteishinryoTokubetushinryo_Row> rowList = div.getDdgToteishinryoTokubetushinryo().getDataSource();
+            if (!rowList.isEmpty()) {
+                for (ddgToteishinryoTokubetushinryo_Row row : rowList) {
+                    max連番 = set平成15年月Max連番(max連番, row);
+                }
+            }
+        } else {
+            List<dgdTokuteiShinryohi_Row> rowList = div.getDgdTokuteiShinryohi().getDataSource();
+            if (!rowList.isEmpty()) {
+                for (dgdTokuteiShinryohi_Row row : rowList) {
+                    max連番 = set平成15年月後Max連番(max連番, row);
+                }
+            }
+        }
+        return max連番 + 1;
     }
 
     /**
@@ -565,6 +615,13 @@ public class TokuteiShinryohiPanelHandler {
         if (!list.isEmpty()) {
             for (ShokanTokuteiShinryoTokubetsuRyoyo entity : list) {
                 dgdTokuteiShinryohi_Row row = new dgdTokuteiShinryohi_Row();
+                if (EntityDataState.Deleted.equals(entity.getState())) {
+                    row.setRowState(RowState.Deleted);
+                } else if (EntityDataState.Modified.equals(entity.getState())) {
+                    row.setRowState(RowState.Modified);
+                } else if (EntityDataState.Added.equals(entity.getState())) {
+                    row.setRowState(RowState.Added);
+                }
                 row.setDefaultDataName1(entity.get傷病名());
                 row.setDefaultDataName2(entity.get識別番号());
                 row.getDefaultDataName3().setValue(new Decimal(entity.get単位数()));
@@ -575,6 +632,7 @@ public class TokuteiShinryohiPanelHandler {
                 dataSource.add(row);
             }
         }
+        Collections.sort(dataSource, new TokuteiShinryohiRowComparator());
         div.getPanelThree().getDgdTokuteiShinryohi().setDataSource(dataSource);
     }
 
@@ -592,6 +650,9 @@ public class TokuteiShinryohiPanelHandler {
         div.getTxtShobyoMeiDown().setValue(row.getDefaultDataName1());
         div.getTxtShikibetsuCode().setValue(row.getDefaultDataName2());
         set識別項目(row.getDefaultDataName2(), サービス年月, 様式番号);
+        if (row.getDefaultDataName3().getValue() != null) {
+            div.getTxtTanyi().setValue(new RString(row.getDefaultDataName3().getValue().toString()));
+        }
         div.getTxtKaiyisuNisu().setValue(row.getDefaultDataName4().getValue());
         div.getTxtGoukeiTanyi().setValue(row.getDefaultDataName5().getValue());
         div.getTxtTekiyoDown().setValue(row.getDefaultDataName6());
@@ -621,7 +682,7 @@ public class TokuteiShinryohiPanelHandler {
                 UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.算定単位.getコード(),
                         new Code(serviceCode.toEntity().getSanteiTani()), date);
                 RStringBuilder builder1 = new RStringBuilder();
-                builder1.append(code1.getコード名称());
+                builder1.append(code1 == null ? RString.EMPTY : code1.getコード名称());
                 builder1.append(serviceCode.toEntity().getTaniSu());
                 builder1.append(単位);
                 div.getLblComment1().setText(builder1.toRString());
@@ -633,7 +694,7 @@ public class TokuteiShinryohiPanelHandler {
                         DBCCodeShubetsu.算定期間回数制限_期間_時期.getコード(),
                         new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
                 RStringBuilder builder2 = new RStringBuilder();
-                builder2.append(code2.getコード名称());
+                builder2.append(code2 == null ? RString.EMPTY : code2.getコード名称());
                 builder2.append(serviceCode.toEntity().getSanteiSeiyakuKaisu());
                 builder2.append(回まで);
                 div.getLblComment2().setText(builder2.toRString());
@@ -685,17 +746,20 @@ public class TokuteiShinryohiPanelHandler {
     /**
      * 「確定する」ボタンのメソッドます。
      *
+     * @param 初期の特別診療費List 初期の特別診療費List
      * @param row dgdTokuteiShinryohi_Row
      * @param state 状態
+     * @param 明細検索キー 明細検索キー
      */
-    public void modifyRow2(dgdTokuteiShinryohi_Row row, RString state) {
-
+    public void modifyRow2(List<ShokanTokuteiShinryoTokubetsuRyoyo> 初期の特別診療費List,
+            dgdTokuteiShinryohi_Row row, RString state, ShoukanharaihishinseimeisaikensakuParameter 明細検索キー) {
+        List<dgdTokuteiShinryohi_Row> list = div.getDgdTokuteiShinryohi().getDataSource();
         if (修正.equals(state)) {
             if (RowState.Added.equals(row.getRowState())) {
                 row.setRowState(RowState.Added);
-                setDgdTokuteiShinryohi_Row(row, state);
+                setDgdTokuteiShinryohi_Row(row, state, 明細検索キー.getサービス年月());
             } else {
-                modifiedDgdTokuteiShinryohi(row, state);
+                modifiedDgdTokuteiShinryohi(初期の特別診療費List, row, state, 明細検索キー);
             }
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(row.getRowState())) {
@@ -704,20 +768,48 @@ public class TokuteiShinryohiPanelHandler {
                 div.getPanelFive().setVisible(false);
             } else {
                 row.setRowState(RowState.Deleted);
-                setDgdTokuteiShinryohi_Row(row, state);
+                setDgdTokuteiShinryohi_Row(row, state, 明細検索キー.getサービス年月());
             }
         } else if (登録.equals(state)) {
             row.setRowState(RowState.Added);
-            setDgdTokuteiShinryohi_Row(row, state);
+            setDgdTokuteiShinryohi_Row(row, state, 明細検索キー.getサービス年月());
+        } else if (登録_削除.equals(state)) {
+            list.remove(row.getId());
+            resetRenban2(row, list);
         }
     }
 
-    private void modifiedDgdTokuteiShinryohi(dgdTokuteiShinryohi_Row row, RString 状態) {
-        boolean flag = checkOfModified2(row);
+    private void resetRenban2(dgdTokuteiShinryohi_Row row, List<dgdTokuteiShinryohi_Row> list) {
+        int id = row.getId();
+        if (id != 0) {
+            RString deletedRenban = row.getDefaultDataName7();
+            RString mid;
+            for (dgdTokuteiShinryohi_Row resetRow : list) {
+                if (id - resetRow.getId() == 1) {
+                    mid = resetRow.getDefaultDataName7();
+                    resetRow.setDefaultDataName7(deletedRenban);
+                    id = id - 1;
+                    deletedRenban = mid;
+                }
+                if (id == 0) {
+                    break;
+                }
+            }
+        }
+        clear特定診療費_特別診療費登録();
+        div.getPanelFive().setVisible(false);
+    }
+
+    private void modifiedDgdTokuteiShinryohi(List<ShokanTokuteiShinryoTokubetsuRyoyo> 初期の特別診療費List,
+            dgdTokuteiShinryohi_Row row, RString 状態, ShoukanharaihishinseimeisaikensakuParameter 明細検索キー) {
+        ShokanTokuteiShinryoTokubetsuRyoyo dbData = get特別診療費の初期データ(明細検索キー, 初期の特別診療費List);
+        boolean flag = 特別診療費hasChanged(dbData);
         if (flag) {
             row.setRowState(RowState.Modified);
-            setDgdTokuteiShinryohi_Row(row, 状態);
+        } else {
+            row.setRowState(RowState.Unchanged);
         }
+        setDgdTokuteiShinryohi_Row(row, 状態, 明細検索キー.getサービス年月());
     }
 
     private boolean checkOfModified2(dgdTokuteiShinryohi_Row row) {
@@ -758,7 +850,7 @@ public class TokuteiShinryohiPanelHandler {
         return !row摘要.equals(div摘要);
     }
 
-    private void setDgdTokuteiShinryohi_Row(dgdTokuteiShinryohi_Row row, RString 状態) {
+    private void setDgdTokuteiShinryohi_Row(dgdTokuteiShinryohi_Row row, RString 状態, FlexibleYearMonth サービス年月) {
         row.setDefaultDataName1(div.getTxtShobyoMeiDown().getValue());
         row.setDefaultDataName2(div.getTxtShikibetsuCode().getValue());
         if (!div.getTxtTanyi().getValue().isEmpty()) {
@@ -766,16 +858,14 @@ public class TokuteiShinryohiPanelHandler {
         } else {
             row.getDefaultDataName3().setValue(null);
         }
-        if (div.getTxtKaiyisuNisu().getValue() != null) {
-            row.getDefaultDataName4().setValue(div.getTxtKaiyisuNisu().getValue());
-        }
-        if (div.getTxtGoukeiTanyi().getValue() != null) {
-            row.getDefaultDataName5().setValue(div.getTxtGoukeiTanyi().getValue());
-        }
+        row.getDefaultDataName4().setValue(div.getTxtKaiyisuNisu().getValue());
+        row.getDefaultDataName5().setValue(div.getTxtGoukeiTanyi().getValue());
         row.setDefaultDataName6(div.getTxtTekiyoDown().getValue());
         if (登録.equals(状態)) {
+            row.setDefaultDataName7(new RString(getMax連番plus1(サービス年月)));
             List<dgdTokuteiShinryohi_Row> list = div.getDgdTokuteiShinryohi().getDataSource();
             list.add(row);
+            Collections.sort(list, new TokuteiShinryohiRowComparator());
         }
         clear特定診療費_特別診療費登録();
         div.getPanelFive().setVisible(false);
@@ -820,548 +910,402 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 保存処理のメソッドます。
+     * ViewStateにDB情報を保存します。
      *
-     * @param meisaiPar 償還払費申請明細検索キー
-     * @param 処理モード RString
-     * @param shokanTokuteiShinryohiList 償還払請求特定診療費データ
-     * @param shokanTokuteiShinryoTokubetsuRyoyoList 償還払請求特定診療費_特別療養費一覧
-     * @return RString
+     * @param サービス年月 サービス年月
+     * @param viewStateDB viewStateDB
+     * @param meisaiPar 明細検索キー
      */
-    public RString 保存処理(ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
-            RString 処理モード,
-            List<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList,
-            List<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList) {
+    public void viewStateDBの編集(FlexibleYearMonth サービス年月,
+            DbJohoViewState viewStateDB, ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
 
-        HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
-        FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
-        RString 整理番号 = meisaiPar.get整理番号();
-        JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
-        RString 様式番号 = meisaiPar.get様式番号();
-        RString 明細番号 = meisaiPar.get明細番号();
-        if (明細番号 == null || 明細番号.isEmpty()) {
-            明細番号 = STR_0001;
+        if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
+            特定診療費ViewStateDBの編集(viewStateDB, meisaiPar);
+        } else if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
+            特別診療費ViewStateDBの編集(viewStateDB, meisaiPar);
         }
-        List<ShokanTokuteiShinryohi> entityList1 = new ArrayList<>();
-        List<ShokanTokuteiShinryoTokubetsuRyoyo> entityList2 = new ArrayList<>();
-        ShokanKihonParameter parameter = ShokanKihonParameter.createSelectByKeyParam(
-                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 0);
-        if (削除.equals(処理モード)) {
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(被保険者番号,
-                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        } else {
-            if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
-                entityList1 = save特定診療費(entityList1, 被保険者番号, サービス年月, 事業者番号, 整理番号, 様式番号,
-                        明細番号, shokanTokuteiShinryohiList);
-            } else if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
-                entityList2 = save特定診療費_特別診療費(entityList2, 被保険者番号, サービス年月, 事業者番号, 整理番号,
-                        様式番号, 明細番号, shokanTokuteiShinryoTokubetsuRyoyoList);
-            }
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(entityList1,
-                    entityList2, parameter);
-        }
-        return 明細番号;
+        償還払請求基本ViewStateDBの編集(サービス年月, viewStateDB, meisaiPar);
     }
 
-    private List<ShokanTokuteiShinryohi> save特定診療費(List<ShokanTokuteiShinryohi> entityList1,
-            HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            JigyoshaNo 事業者番号,
-            RString 整理番号,
-            RString 様式番号,
-            RString 明細番号,
-            List<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList) {
-        int max連番 = 0;
-        Map<RString, ShokanTokuteiShinryohi> map = new HashMap<>();
-        if (!shokanTokuteiShinryohiList.isEmpty()) {
-            for (ShokanTokuteiShinryohi entity : shokanTokuteiShinryohiList) {
-                map.put(entity.get連番(), entity);
-                if (max連番 < Integer.valueOf(entity.get連番().toString())) {
-                    max連番 = Integer.valueOf(entity.get連番().toString());
+    private void 償還払請求基本ViewStateDBの編集(FlexibleYearMonth サービス年月,
+            DbJohoViewState viewStateDB, ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
+        ArrayList<ShokanKihon> 償還払請求基本List = viewStateDB.get償還払請求基本データList();
+        if (償還払請求基本List == null) {
+            償還払請求基本List = new ArrayList<>();
+        }
+        Decimal 合計 = Decimal.ZERO;
+        if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
+            List<ddgToteishinryoTokubetushinryo_Row> rowList = div.getDdgToteishinryoTokubetushinryo().getDataSource();
+            for (ddgToteishinryoTokubetushinryo_Row row : rowList) {
+                if (row.getRowState() != RowState.Deleted && row.getGoukeyiTanyi().getValue() != null) {
+                    合計 = 合計.add(row.getGoukeyiTanyi().getValue());
+                }
+            }
+        } else if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
+            List<dgdTokuteiShinryohi_Row> rowList = div.getDgdTokuteiShinryohi().getDataSource();
+            for (dgdTokuteiShinryohi_Row row : rowList) {
+                if (row.getRowState() != RowState.Deleted && row.getDefaultDataName5().getValue() != null) {
+                    合計 = 合計.add(row.getDefaultDataName5().getValue());
                 }
             }
         }
-        for (ddgToteishinryoTokubetushinryo_Row ddg : div.getDdgToteishinryoTokubetushinryo().getDataSource()) {
-            if (RowState.Modified.equals(ddg.getRowState())) {
-                ShokanTokuteiShinryohi entityModified = map.get(ddg.getNumber());
-                entityModified = buildShokanTokuteiShinryohi(entityModified, ddg);
-                entityList1.add(entityModified);
-            } else if (RowState.Deleted.equals(ddg.getRowState())) {
-                ShokanTokuteiShinryohi entityDeleted = map.get(ddg.getNumber());
-                entityDeleted = entityDeleted.deleted();
-                entityList1.add(entityDeleted);
-            } else if (RowState.Added.equals(ddg.getRowState())) {
-                max連番 = max連番 + 1;
-                ShokanTokuteiShinryohi entityAdded = new ShokanTokuteiShinryohi(
-                        被保険者番号,
-                        サービス年月,
-                        整理番号,
-                        事業者番号,
-                        様式番号,
-                        明細番号,
-                        new RString(String.format(FORMAT.toString(), max連番))).createBuilderForEdit().build();
-                entityAdded = buildShokanTokuteiShinryohi(entityAdded, ddg);
-                entityList1.add(entityAdded);
-            } else {
-                ShokanTokuteiShinryohi entityUnchanged = map.get(ddg.getNumber());
-                entityList1.add(entityUnchanged);
+
+        for (ShokanKihon joho : 償還払請求基本List) {
+            if (meisaiPar.getサービス年月().equals(joho.getサービス提供年月())
+                    && meisaiPar.get事業者番号().equals(joho.get事業者番号())
+                    && meisaiPar.get被保険者番号().equals(joho.get被保険者番号())
+                    && meisaiPar.get整理番号().equals(joho.get整理番号())
+                    && meisaiPar.get明細番号().equals(joho.get明細番号())
+                    && meisaiPar.get様式番号().equals(joho.get様式番号())) {
+                償還払請求基本List.remove(joho);
+                joho = joho.createBuilderForEdit().set特定診療費請求額(合計).build();
+                償還払請求基本List.add(joho);
+                break;
             }
         }
-        return entityList1;
+        viewStateDB.set償還払請求基本データList(償還払請求基本List);
     }
 
-    private List<ShokanTokuteiShinryoTokubetsuRyoyo> save特定診療費_特別診療費(
-            List<ShokanTokuteiShinryoTokubetsuRyoyo> entityList2,
-            HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            JigyoshaNo 事業者番号,
-            RString 整理番号,
-            RString 様式番号,
-            RString 明細番号,
-            List<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList) {
-        int max連番 = 0;
-        Map<RString, ShokanTokuteiShinryoTokubetsuRyoyo> map = new HashMap<>();
-        if (!shokanTokuteiShinryoTokubetsuRyoyoList.isEmpty()) {
-            for (ShokanTokuteiShinryoTokubetsuRyoyo entity : shokanTokuteiShinryoTokubetsuRyoyoList) {
-                map.put(entity.get連番(), entity);
-                if (max連番 < Integer.valueOf(entity.get連番().toString())) {
-                    max連番 = Integer.valueOf(entity.get連番().toString());
+    private void 特定診療費ViewStateDBの編集(DbJohoViewState viewStateDB, ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
+        ArrayList<ShokanTokuteiShinryohi> 特定診療費ViewDBList = viewStateDB.get償還払請求特定診療費データList();
+        if (特定診療費ViewDBList == null) {
+            特定診療費ViewDBList = new ArrayList<>();
+        }
+
+        List<ddgToteishinryoTokubetushinryo_Row> rowList = div.getDdgToteishinryoTokubetushinryo().getDataSource();
+        boolean isViewDB存在;
+        for (ddgToteishinryoTokubetushinryo_Row row : rowList) {
+            isViewDB存在 = false;
+            if (row.getRowState() == null || RowState.Unchanged.equals(row.getRowState())) {
+                return;
+            }
+            for (ShokanTokuteiShinryohi 特定診療費ViewDB : 特定診療費ViewDBList) {
+                if (meisaiPar.getサービス年月().equals(特定診療費ViewDB.getサービス提供年月())
+                        && meisaiPar.get事業者番号().equals(特定診療費ViewDB.get事業者番号())
+                        && meisaiPar.get被保険者番号().equals(特定診療費ViewDB.get被保険者番号())
+                        && meisaiPar.get整理番号().equals(特定診療費ViewDB.get整理番号())
+                        && meisaiPar.get明細番号().equals(特定診療費ViewDB.get明細番号())
+                        && meisaiPar.get様式番号().equals(特定診療費ViewDB.get様式番号())
+                        && row.getNumber().equals(特定診療費ViewDB.get連番())) {
+
+                    isViewDB存在 = true;
+                    特定診療費ViewDBList.remove(特定診療費ViewDB);
+
+                    特定診療費ViewDBList.add(特定診療費builder編集(特定診療費ViewDB, row));
+                    break;
                 }
             }
-        }
-        for (dgdTokuteiShinryohi_Row dgdRow : div.getDgdTokuteiShinryohi().getDataSource()) {
-            if (RowState.Modified.equals(dgdRow.getRowState())) {
-                ShokanTokuteiShinryoTokubetsuRyoyo entityModified = map.get(dgdRow.getDefaultDataName7());
-                entityModified = entityModified.createBuilderForEdit().build();
-                entityModified = buildShokanTokuteiShinryoTokubetsuRyoyo(entityModified, dgdRow);
-                entityList2.add(entityModified);
-            } else if (RowState.Deleted.equals(dgdRow.getRowState())) {
-                ShokanTokuteiShinryoTokubetsuRyoyo entityDeleted = map.get(dgdRow.getDefaultDataName7());
-                entityDeleted = entityDeleted.deleted();
-                entityList2.add(entityDeleted);
-            } else if (RowState.Added.equals(dgdRow.getRowState())) {
-                max連番 = max連番 + 1;
-                ShokanTokuteiShinryoTokubetsuRyoyo entityAdded = new ShokanTokuteiShinryoTokubetsuRyoyo(
-                        被保険者番号,
-                        サービス年月,
-                        整理番号,
-                        事業者番号,
-                        様式番号,
-                        明細番号,
-                        new RString(String.format(FORMAT.toString(), max連番))).createBuilderForEdit().build();
-                entityAdded = buildShokanTokuteiShinryoTokubetsuRyoyo(entityAdded, dgdRow);
-                entityList2.add(entityAdded);
-            } else {
-                ShokanTokuteiShinryoTokubetsuRyoyo entityDeleted = map.get(dgdRow.getDefaultDataName7());
-                entityList2.add(entityDeleted);
+            if (!isViewDB存在) {
+                ShokanTokuteiShinryohi joho = new ShokanTokuteiShinryohi(meisaiPar.get被保険者番号(), meisaiPar.getサービス年月(),
+                        meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getNumber());
+                特定診療費ViewDBList.add(特定診療費builder編集(joho, row));
             }
         }
-        return entityList2;
+        viewStateDB.set償還払請求特定診療費データList(特定診療費ViewDBList);
     }
 
-    private ShokanTokuteiShinryoTokubetsuRyoyo buildShokanTokuteiShinryoTokubetsuRyoyo(
-            ShokanTokuteiShinryoTokubetsuRyoyo entity,
-            dgdTokuteiShinryohi_Row dgdRow) {
-        entity = entity.createBuilderForEdit().set傷病名(dgdRow.getDefaultDataName1())
-                .set識別番号(dgdRow.getDefaultDataName2()).build();
-        if (dgdRow.getDefaultDataName3().getValue() != null) {
-            entity = entity.createBuilderForEdit()
-                    .set単位数(dgdRow.getDefaultDataName3().getValue().intValue())
-                    .setサービス単位数(dgdRow.getDefaultDataName3().getValue().intValue()).build();
+    private void 特別診療費ViewStateDBの編集(DbJohoViewState viewStateDB, ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
+        ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> 特別診療費ViewDBList = viewStateDB.get特別療養費データList();
+        if (特別診療費ViewDBList == null) {
+            特別診療費ViewDBList = new ArrayList<>();
+        }
+
+        List<dgdTokuteiShinryohi_Row> rowList = div.getDgdTokuteiShinryohi().getDataSource();
+
+        boolean isViewDB存在;
+        for (dgdTokuteiShinryohi_Row row : rowList) {
+            isViewDB存在 = false;
+            if (row.getRowState() == null || RowState.Unchanged.equals(row.getRowState())) {
+                return;
+            }
+            for (ShokanTokuteiShinryoTokubetsuRyoyo 特別診療費ViewDB : 特別診療費ViewDBList) {
+                if (meisaiPar.getサービス年月().equals(特別診療費ViewDB.getサービス提供年月())
+                        && meisaiPar.get事業者番号().equals(特別診療費ViewDB.get事業者番号())
+                        && meisaiPar.get被保険者番号().equals(特別診療費ViewDB.get被保険者番号())
+                        && meisaiPar.get整理番号().equals(特別診療費ViewDB.get整理番号())
+                        && meisaiPar.get明細番号().equals(特別診療費ViewDB.get明細番号())
+                        && meisaiPar.get様式番号().equals(特別診療費ViewDB.get様式番号())
+                        && row.getDefaultDataName7().equals(特別診療費ViewDB.get連番())) {
+
+                    isViewDB存在 = true;
+                    特別診療費ViewDBList.remove(特別診療費ViewDB);
+
+                    特別診療費ViewDBList.add(特別診療費builder編集(特別診療費ViewDB, row));
+                    break;
+                }
+            }
+            if (!isViewDB存在) {
+                ShokanTokuteiShinryoTokubetsuRyoyo joho = new ShokanTokuteiShinryoTokubetsuRyoyo(meisaiPar.get被保険者番号(), meisaiPar.getサービス年月(),
+                        meisaiPar.get整理番号(), meisaiPar.get事業者番号(), meisaiPar.get様式番号(), meisaiPar.get明細番号(), row.getDefaultDataName7());
+                特別診療費ViewDBList.add(特別診療費builder編集(joho, row));
+            }
+        }
+        viewStateDB.set特別療養費データList(特別診療費ViewDBList);
+    }
+
+    private ShokanTokuteiShinryohi 特定診療費builder編集(ShokanTokuteiShinryohi 特定診療費ViewDB, ddgToteishinryoTokubetushinryo_Row row) {
+        ShokanTokuteiShinryohiBuilder builder = 特定診療費ViewDB.createBuilderForEdit();
+        if (RowState.Deleted.equals(row.getRowState())) {
+            ShokanTokuteiShinryohi joho = builder.build().deleted();
+            builder = joho.createBuilderForEdit();
+        }
+        builder.set傷病名(row.getShobyouName());
+        if (row.getShidouKanri().getValue() != null) {
+            builder.set指導管理料等単位数(row.getShidouKanri().getValue().intValue());
         } else {
-            entity = entity.createBuilderForEdit().set単位数(0).setサービス単位数(0).build();
+            builder.set指導管理料等単位数(0);
         }
-        if (dgdRow.getDefaultDataName4().getValue() != null) {
-            entity = entity.createBuilderForEdit().set回数(dgdRow.getDefaultDataName4().getValue().intValue()).build();
+        if (row.getEkusuLine().getValue() != null) {
+            builder.set単純エックス線単位数(row.getEkusuLine().getValue().intValue());
         } else {
-            entity = entity.createBuilderForEdit().set回数(0).build();
+            builder.set単純エックス線単位数(0);
         }
-        if (dgdRow.getDefaultDataName5().getValue() != null) {
-            entity = entity.createBuilderForEdit()
-                    .set合計単位数(dgdRow.getDefaultDataName5().getValue().intValue()).build();
+        if (row.getRihabiri().getValue() != null) {
+            builder.setリハビリテーション単位数(row.getRihabiri().getValue().intValue());
         } else {
-            entity = entity.createBuilderForEdit().set合計単位数(0).build();
+            builder.setリハビリテーション単位数(0);
         }
-        entity = entity.createBuilderForEdit().set摘要(dgdRow.getDefaultDataName6()).build();
-        return entity;
-    }
-
-    private ShokanTokuteiShinryohi buildShokanTokuteiShinryohi(
-            ShokanTokuteiShinryohi entityModified,
-            ddgToteishinryoTokubetushinryo_Row ddg) {
-        entityModified = entityModified.createBuilderForEdit().set傷病名(ddg.getShobyouName()).build();
-        entityModified = clearShokanTokuteiShinryohi(entityModified);
-        if (ddg.getShidouKanri().getValue() != null) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set指導管理料等単位数(ddg.getShidouKanri().getValue().intValue()).build();
-        }
-        if (ddg.getEkusuLine().getValue() != null) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set単純エックス線単位数(ddg.getEkusuLine().getValue().intValue()).build();
-        }
-        if (ddg.getRihabiri().getValue() != null) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .setリハビリテーション単位数(ddg.getRihabiri().getValue().intValue()).build();
-        }
-        if (ddg.getSeishinka().getValue() != null) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set精神科専門療法単位数(ddg.getSeishinka().getValue().intValue()).build();
-        }
-        if (ddg.getSochi().getValue() != null) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set措置単位数(ddg.getSochi().getValue().intValue()).build();
-        }
-        if (ddg.getTejyutsu().getValue() != null) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set手術単位数(ddg.getTejyutsu().getValue().intValue()).build();
-        }
-        if (ddg.getGoukeyiTanyi().getValue() != null) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set合計単位数(ddg.getGoukeyiTanyi().getValue().intValue()).build();
-        }
-        RString 摘要 = ddg.getMutiTekiyo();
-        if (!摘要.isEmpty()) {
-            entityModified = set摘要１(entityModified, 摘要);
-        }
-        return entityModified;
-    }
-
-    private ShokanTokuteiShinryohi clearShokanTokuteiShinryohi(ShokanTokuteiShinryohi entityModified) {
-        entityModified = entityModified.createBuilderForEdit()
-                .set指導管理料等単位数(0).set単純エックス線単位数(0).setリハビリテーション単位数(0)
-                .set精神科専門療法単位数(0).set措置単位数(0).set手術単位数(0).set合計単位数(0)
-                .set摘要１(null).set摘要２(null).set摘要３(null).set摘要４(null).set摘要５(null)
-                .set摘要６(null).set摘要７(null).set摘要８(null).set摘要９(null).set摘要１０(null)
-                .set摘要１１(null).set摘要１２(null).set摘要１３(null).set摘要１４(null).set摘要１５(null)
-                .set摘要１６(null).set摘要１７(null).set摘要１８(null).set摘要１９(null).set摘要２０(null).build();
-        return entityModified;
-    }
-
-    private ShokanTokuteiShinryohi set摘要１(ShokanTokuteiShinryohi entityModified, RString 摘要) {
-        int length = 摘要.length();
-        if (length <= NUMBER_３２) {
-            entityModified = entityModified.createBuilderForEdit().set摘要１(摘要).build();
-        }
-        if (length > NUMBER_３２ && length <= NUMBER_６４) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, length))
-                    .build();
-        }
-        if (length > NUMBER_６４ && length <= NUMBER_９６) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, length))
-                    .build();
-        }
-        if (length > NUMBER_９６ && length <= NUMBER_１２８) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, length))
-                    .build();
-        }
-        if (length > NUMBER_１２８ && length <= NUMBER_１６０) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, length))
-                    .build();
-        }
-        if (length > NUMBER_１６０ && length <= NUMBER_１９２) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, length))
-                    .build();
-        }
-        if (length > NUMBER_１９２ && length <= NUMBER_２２４) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, length))
-                    .build();
+        if (row.getSeishinka().getValue() != null) {
+            builder.set精神科専門療法単位数(row.getSeishinka().getValue().intValue());
         } else {
-            entityModified = set摘要２(entityModified, 摘要, length);
+            builder.set精神科専門療法単位数(0);
         }
-        return entityModified;
-    }
-
-    private ShokanTokuteiShinryohi set摘要２(ShokanTokuteiShinryohi entityModified, RString 摘要, int length) {
-        if (length > NUMBER_２２４ && length <= NUMBER_２５６) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, length))
-                    .build();
-        }
-        if (length > NUMBER_２５６ && length <= NUMBER_２８８) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, length))
-                    .build();
-        }
-        if (length > NUMBER_２８８ && length <= NUMBER_３２０) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, NUMBER_２８８))
-                    .set摘要１０(摘要.substring(NUMBER_２８８, length))
-                    .build();
-        }
-        if (length > NUMBER_３２０ && length <= NUMBER_３５２) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, NUMBER_２８８))
-                    .set摘要１０(摘要.substring(NUMBER_２８８, NUMBER_３２０))
-                    .set摘要１１(摘要.substring(NUMBER_３２０, length))
-                    .build();
-        }
-        if (length > NUMBER_３５２ && length <= NUMBER_３８４) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, NUMBER_２８８))
-                    .set摘要１０(摘要.substring(NUMBER_２８８, NUMBER_３２０))
-                    .set摘要１１(摘要.substring(NUMBER_３２０, NUMBER_３５２))
-                    .set摘要１２(摘要.substring(NUMBER_３５２, length))
-                    .build();
-        }
-        if (length > NUMBER_３８４ && length <= NUMBER_４１６) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, NUMBER_２８８))
-                    .set摘要１０(摘要.substring(NUMBER_２８８, NUMBER_３２０))
-                    .set摘要１１(摘要.substring(NUMBER_３２０, NUMBER_３５２))
-                    .set摘要１２(摘要.substring(NUMBER_３５２, NUMBER_３８４))
-                    .set摘要１３(摘要.substring(NUMBER_３８４, length))
-                    .build();
+        if (row.getSochi().getValue() != null) {
+            builder.set措置単位数(row.getSochi().getValue().intValue());
         } else {
-            entityModified = set摘要３(entityModified, 摘要, length);
+            builder.set措置単位数(0);
         }
-        return entityModified;
+        if (row.getTejyutsu().getValue() != null) {
+            builder.set手術単位数(row.getTejyutsu().getValue().intValue());
+        } else {
+            builder.set手術単位数(0);
+        }
+        if (row.getGoukeyiTanyi().getValue() != null) {
+            builder.set合計単位数(row.getGoukeyiTanyi().getValue().intValue());
+        } else {
+            builder.set合計単位数(0);
+        }
+        builder.set摘要１(getLenStr(row.getMutiTekiyo(), 0, NUMBER_３２));
+        builder.set摘要２(getLenStr(row.getMutiTekiyo(), NUMBER_３２, NUMBER_３２));
+        builder.set摘要３(getLenStr(row.getMutiTekiyo(), NUMBER_６４, NUMBER_３２));
+        builder.set摘要４(getLenStr(row.getMutiTekiyo(), NUMBER_９６, NUMBER_３２));
+        builder.set摘要５(getLenStr(row.getMutiTekiyo(), NUMBER_１２８, NUMBER_３２));
+        builder.set摘要６(getLenStr(row.getMutiTekiyo(), NUMBER_１６０, NUMBER_３２));
+        builder.set摘要７(getLenStr(row.getMutiTekiyo(), NUMBER_１９２, NUMBER_３２));
+        builder.set摘要８(getLenStr(row.getMutiTekiyo(), NUMBER_２２４, NUMBER_３２));
+        builder.set摘要９(getLenStr(row.getMutiTekiyo(), NUMBER_２５６, NUMBER_３２));
+        builder.set摘要１０(getLenStr(row.getMutiTekiyo(), NUMBER_２８８, NUMBER_３２));
+        builder.set摘要１１(getLenStr(row.getMutiTekiyo(), NUMBER_３２０, NUMBER_３２));
+        builder.set摘要１２(getLenStr(row.getMutiTekiyo(), NUMBER_３５２, NUMBER_３２));
+        builder.set摘要１３(getLenStr(row.getMutiTekiyo(), NUMBER_３８４, NUMBER_３２));
+        builder.set摘要１４(getLenStr(row.getMutiTekiyo(), NUMBER_４１６, NUMBER_３２));
+        builder.set摘要１５(getLenStr(row.getMutiTekiyo(), NUMBER_４４８, NUMBER_３２));
+        builder.set摘要１６(getLenStr(row.getMutiTekiyo(), NUMBER_４８０, NUMBER_３２));
+        builder.set摘要１７(getLenStr(row.getMutiTekiyo(), NUMBER_５１２, NUMBER_３２));
+        builder.set摘要１８(getLenStr(row.getMutiTekiyo(), NUMBER_５４４, NUMBER_３２));
+        builder.set摘要１９(getLenStr(row.getMutiTekiyo(), NUMBER_５７６, NUMBER_３２));
+        builder.set摘要２０(getLenStr(row.getMutiTekiyo(), NUMBER_６０８, NUMBER_３２));
+        return builder.build();
     }
 
-    private ShokanTokuteiShinryohi set摘要３(ShokanTokuteiShinryohi entityModified, RString 摘要, int length) {
-        if (length > NUMBER_４１６ && length <= NUMBER_４４８) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, NUMBER_２８８))
-                    .set摘要１０(摘要.substring(NUMBER_２８８, NUMBER_３２０))
-                    .set摘要１１(摘要.substring(NUMBER_３２０, NUMBER_３５２))
-                    .set摘要１２(摘要.substring(NUMBER_３５２, NUMBER_３８４))
-                    .set摘要１３(摘要.substring(NUMBER_３８４, NUMBER_４１６))
-                    .set摘要１４(摘要.substring(NUMBER_４１６, length))
-                    .build();
+    private ShokanTokuteiShinryoTokubetsuRyoyo 特別診療費builder編集(ShokanTokuteiShinryoTokubetsuRyoyo 特別診療費ViewDB, dgdTokuteiShinryohi_Row row) {
+        ShokanTokuteiShinryoTokubetsuRyoyoBuilder builder = 特別診療費ViewDB.createBuilderForEdit();
+        if (RowState.Deleted.equals(row.getRowState())) {
+            ShokanTokuteiShinryoTokubetsuRyoyo joho = builder.build().deleted();
+            builder = joho.createBuilderForEdit();
         }
-        if (length > NUMBER_４４８ && length <= NUMBER_４８０) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, NUMBER_２８８))
-                    .set摘要１０(摘要.substring(NUMBER_２８８, NUMBER_３２０))
-                    .set摘要１１(摘要.substring(NUMBER_３２０, NUMBER_３５２))
-                    .set摘要１２(摘要.substring(NUMBER_３５２, NUMBER_３８４))
-                    .set摘要１３(摘要.substring(NUMBER_３８４, NUMBER_４１６))
-                    .set摘要１４(摘要.substring(NUMBER_４１６, NUMBER_４４８))
-                    .set摘要１５(摘要.substring(NUMBER_４４８, length))
-                    .build();
+        builder.set傷病名(row.getDefaultDataName1());
+        builder.set識別番号(row.getDefaultDataName2());
+        if (row.getDefaultDataName3().getValue() != null) {
+            builder.set単位数(row.getDefaultDataName3().getValue().intValue());
+            builder.setサービス単位数(row.getDefaultDataName3().getValue().intValue());
+        } else {
+            builder.set単位数(0);
+            builder.setサービス単位数(0);
         }
-        if (length > NUMBER_４８０ && length <= NUMBER_５１２) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, NUMBER_２８８))
-                    .set摘要１０(摘要.substring(NUMBER_２８８, NUMBER_３２０))
-                    .set摘要１１(摘要.substring(NUMBER_３２０, NUMBER_３５２))
-                    .set摘要１２(摘要.substring(NUMBER_３５２, NUMBER_３８４))
-                    .set摘要１３(摘要.substring(NUMBER_３８４, NUMBER_４１６))
-                    .set摘要１４(摘要.substring(NUMBER_４１６, NUMBER_４４８))
-                    .set摘要１５(摘要.substring(NUMBER_４４８, NUMBER_４８０))
-                    .set摘要１６(摘要.substring(NUMBER_４８０, length))
-                    .build();
+        builder.set回数(row.getDefaultDataName4().getValue().intValue());
+        if (row.getDefaultDataName5().getValue() != null) {
+            builder.set合計単位数(row.getDefaultDataName5().getValue().intValue());
+        } else {
+            builder.set合計単位数(0);
         }
-        if (length > NUMBER_５１２ && length <= NUMBER_５４４) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, NUMBER_２８８))
-                    .set摘要１０(摘要.substring(NUMBER_２８８, NUMBER_３２０))
-                    .set摘要１１(摘要.substring(NUMBER_３２０, NUMBER_３５２))
-                    .set摘要１２(摘要.substring(NUMBER_３５２, NUMBER_３８４))
-                    .set摘要１３(摘要.substring(NUMBER_３８４, NUMBER_４１６))
-                    .set摘要１４(摘要.substring(NUMBER_４１６, NUMBER_４４８))
-                    .set摘要１５(摘要.substring(NUMBER_４４８, NUMBER_４８０))
-                    .set摘要１６(摘要.substring(NUMBER_４８０, NUMBER_５１２))
-                    .set摘要１７(摘要.substring(NUMBER_５１２, length))
-                    .build();
+        builder.set摘要(row.getDefaultDataName6());
+        return builder.build();
+    }
+
+    private RString getLenStr(RString rstr, int startIndex, int len) {
+        if (!RString.isNullOrEmpty(rstr)) {
+            if (rstr.length() >= startIndex + len) {
+                return rstr.substring(startIndex, startIndex + len);
+            } else if (rstr.length() > startIndex) {
+                return rstr.substring(startIndex);
+            }
         }
-        if (length > NUMBER_５４４ && length <= NUMBER_５７６) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, NUMBER_２８８))
-                    .set摘要１０(摘要.substring(NUMBER_２８８, NUMBER_３２０))
-                    .set摘要１１(摘要.substring(NUMBER_３２０, NUMBER_３５２))
-                    .set摘要１２(摘要.substring(NUMBER_３５２, NUMBER_３８４))
-                    .set摘要１３(摘要.substring(NUMBER_３８４, NUMBER_４１６))
-                    .set摘要１４(摘要.substring(NUMBER_４１６, NUMBER_４４８))
-                    .set摘要１５(摘要.substring(NUMBER_４４８, NUMBER_４８０))
-                    .set摘要１６(摘要.substring(NUMBER_４８０, NUMBER_５１２))
-                    .set摘要１７(摘要.substring(NUMBER_５１２, NUMBER_５４４))
-                    .set摘要１８(摘要.substring(NUMBER_５４４, length))
-                    .build();
-        }
-        if (length > NUMBER_５７６ && length <= NUMBER_６０８) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, NUMBER_２８８))
-                    .set摘要１０(摘要.substring(NUMBER_２８８, NUMBER_３２０))
-                    .set摘要１１(摘要.substring(NUMBER_３２０, NUMBER_３５２))
-                    .set摘要１２(摘要.substring(NUMBER_３５２, NUMBER_３８４))
-                    .set摘要１３(摘要.substring(NUMBER_３８４, NUMBER_４１６))
-                    .set摘要１４(摘要.substring(NUMBER_４１６, NUMBER_４４８))
-                    .set摘要１５(摘要.substring(NUMBER_４４８, NUMBER_４８０))
-                    .set摘要１６(摘要.substring(NUMBER_４８０, NUMBER_５１２))
-                    .set摘要１７(摘要.substring(NUMBER_５１２, NUMBER_５４４))
-                    .set摘要１８(摘要.substring(NUMBER_５４４, NUMBER_５７６))
-                    .set摘要１９(摘要.substring(NUMBER_５７６, length))
-                    .build();
-        }
-        if (length > NUMBER_６０８) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set摘要１(摘要.substring(NUMBER_０, NUMBER_３２))
-                    .set摘要２(摘要.substring(NUMBER_３２, NUMBER_６４))
-                    .set摘要３(摘要.substring(NUMBER_６４, NUMBER_９６))
-                    .set摘要４(摘要.substring(NUMBER_９６, NUMBER_１２８))
-                    .set摘要５(摘要.substring(NUMBER_１２８, NUMBER_１６０))
-                    .set摘要６(摘要.substring(NUMBER_１６０, NUMBER_１９２))
-                    .set摘要７(摘要.substring(NUMBER_１９２, NUMBER_２２４))
-                    .set摘要８(摘要.substring(NUMBER_２２４, NUMBER_２５６))
-                    .set摘要９(摘要.substring(NUMBER_２５６, NUMBER_２８８))
-                    .set摘要１０(摘要.substring(NUMBER_２８８, NUMBER_３２０))
-                    .set摘要１１(摘要.substring(NUMBER_３２０, NUMBER_３５２))
-                    .set摘要１２(摘要.substring(NUMBER_３５２, NUMBER_３８４))
-                    .set摘要１３(摘要.substring(NUMBER_３８４, NUMBER_４１６))
-                    .set摘要１４(摘要.substring(NUMBER_４１６, NUMBER_４４８))
-                    .set摘要１５(摘要.substring(NUMBER_４４８, NUMBER_４８０))
-                    .set摘要１６(摘要.substring(NUMBER_４８０, NUMBER_５１２))
-                    .set摘要１７(摘要.substring(NUMBER_５１２, NUMBER_５４４))
-                    .set摘要１８(摘要.substring(NUMBER_５４４, NUMBER_５７６))
-                    .set摘要１９(摘要.substring(NUMBER_５７６, NUMBER_６０８))
-                    .set摘要２０(摘要.substring(NUMBER_６０８, length))
-                    .build();
-        }
-        return entityModified;
+        return RString.EMPTY;
     }
 
     /**
-     * パラメータ設定のメソッドます。
+     * DBの特定診療費データを取得します。
      *
-     * @param 被保険者番号 HihokenshaNo
-     * @param サービス年月 FlexibleYearMonth
-     * @param 整理番号 RString
-     * @return 償還払費申請検索キー
+     * @param 明細検索キー 明細検索キー
+     * @param 初期の特定診療費List 初期の特定診療費List
+     * @return DBの特定診療費データ
      */
-    public ShoukanharaihishinseikensakuParameter putViewState(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                被保険者番号,
-                サービス年月,
-                整理番号,
-                new JigyoshaNo(div.getPanelTwo().getTxtJigyoshaBango().getValue()),
-                div.getPanelTwo().getTxtShomeisho().getValue(),
-                div.getPanelTwo().getTxtMeisaibango().getValue(),
-                null);
-        return paramter;
+    public ShokanTokuteiShinryohi get特定診療費の初期データ(ShoukanharaihishinseimeisaikensakuParameter 明細検索キー,
+            List<ShokanTokuteiShinryohi> 初期の特定診療費List) {
+        ddgToteishinryoTokubetushinryo_Row row = div.getDdgToteishinryoTokubetushinryo().getActiveRow();
+        if (初期の特定診療費List != null) {
+            for (ShokanTokuteiShinryohi joho : 初期の特定診療費List) {
+                if (joho.getサービス提供年月().equals(明細検索キー.getサービス年月())
+                        && joho.get事業者番号().equals(明細検索キー.get事業者番号())
+                        && joho.get被保険者番号().equals(明細検索キー.get被保険者番号())
+                        && joho.get整理番号().equals(明細検索キー.get整理番号())
+                        && joho.get明細番号().equals(明細検索キー.get明細番号())
+                        && joho.get様式番号().equals(明細検索キー.get様式番号())
+                        && joho.get連番().equals(row.getNumber())) {
+                    return joho;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * DBの特別診療費データを取得します。
+     *
+     * @param 明細検索キー 明細検索キー
+     * @param 初期の特別診療費List 初期の特別診療費List
+     * @return DBの特別診療費データ
+     */
+    private ShokanTokuteiShinryoTokubetsuRyoyo get特別診療費の初期データ(ShoukanharaihishinseimeisaikensakuParameter 明細検索キー,
+            List<ShokanTokuteiShinryoTokubetsuRyoyo> 初期の特別診療費List) {
+        dgdTokuteiShinryohi_Row row = div.getDgdTokuteiShinryohi().getActiveRow();
+        if (初期の特別診療費List != null) {
+            for (ShokanTokuteiShinryoTokubetsuRyoyo joho : 初期の特別診療費List) {
+                if (joho.getサービス提供年月().equals(明細検索キー.getサービス年月())
+                        && joho.get事業者番号().equals(明細検索キー.get事業者番号())
+                        && joho.get被保険者番号().equals(明細検索キー.get被保険者番号())
+                        && joho.get整理番号().equals(明細検索キー.get整理番号())
+                        && joho.get明細番号().equals(明細検索キー.get明細番号())
+                        && joho.get様式番号().equals(明細検索キー.get様式番号())
+                        && joho.get連番().equals(row.getDefaultDataName7())) {
+                    return joho;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * ViewStateDBの特別診療費データListを取得します。
+     *
+     * @param 明細検索キー 明細検索キー
+     * @param viewStateList viewStateDBList
+     * @return 特別診療費データList
+     */
+    public ArrayList<ShokanTokuteiShinryohi> get当特定診療費ViewStateList(ShoukanharaihishinseimeisaikensakuParameter 明細検索キー,
+            List<ShokanTokuteiShinryohi> viewStateList) {
+        ArrayList<ShokanTokuteiShinryohi> johoList = new ArrayList<>();
+        if (viewStateList != null) {
+            for (ShokanTokuteiShinryohi joho : viewStateList) {
+                if (明細検索キー.getサービス年月().equals(joho.getサービス提供年月())
+                        && 明細検索キー.get事業者番号().equals(joho.get事業者番号())
+                        && 明細検索キー.get被保険者番号().equals(joho.get被保険者番号())
+                        && 明細検索キー.get整理番号().equals(joho.get整理番号())
+                        && 明細検索キー.get明細番号().equals(joho.get明細番号())
+                        && 明細検索キー.get様式番号().equals(joho.get様式番号())) {
+                    johoList.add(joho);
+                }
+            }
+        }
+        return johoList;
+    }
+
+    /**
+     * ViewStateDBの特別診療費データListを取得します。
+     *
+     * @param 明細検索キー 明細検索キー
+     * @param viewStateList viewStateDBList
+     * @return 特別診療費データList
+     */
+    public ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> get当特別診療費ViewStateList(ShoukanharaihishinseimeisaikensakuParameter 明細検索キー,
+            List<ShokanTokuteiShinryoTokubetsuRyoyo> viewStateList) {
+        ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> johoList = new ArrayList<>();
+        if (viewStateList != null) {
+            for (ShokanTokuteiShinryoTokubetsuRyoyo joho : viewStateList) {
+                if (明細検索キー.getサービス年月().equals(joho.getサービス提供年月())
+                        && 明細検索キー.get事業者番号().equals(joho.get事業者番号())
+                        && 明細検索キー.get被保険者番号().equals(joho.get被保険者番号())
+                        && 明細検索キー.get整理番号().equals(joho.get整理番号())
+                        && 明細検索キー.get明細番号().equals(joho.get明細番号())
+                        && 明細検索キー.get様式番号().equals(joho.get様式番号())) {
+                    johoList.add(joho);
+                }
+            }
+        }
+        return johoList;
+    }
+
+    private boolean 特定診療費hasChanged(ShokanTokuteiShinryohi dbData) {
+        RStringBuilder 摘要builder = new RStringBuilder();
+        摘要builder.append(dbData.get摘要１());
+        摘要builder.append(dbData.get摘要２());
+        摘要builder.append(dbData.get摘要３());
+        摘要builder.append(dbData.get摘要４());
+        摘要builder.append(dbData.get摘要５());
+        摘要builder.append(dbData.get摘要６());
+        摘要builder.append(dbData.get摘要７());
+        摘要builder.append(dbData.get摘要８());
+        摘要builder.append(dbData.get摘要９());
+        摘要builder.append(dbData.get摘要１０());
+        摘要builder.append(dbData.get摘要１１());
+        摘要builder.append(dbData.get摘要１２());
+        摘要builder.append(dbData.get摘要１３());
+        摘要builder.append(dbData.get摘要１４());
+        摘要builder.append(dbData.get摘要１５());
+        摘要builder.append(dbData.get摘要１６());
+        摘要builder.append(dbData.get摘要１７());
+        摘要builder.append(dbData.get摘要１８());
+        摘要builder.append(dbData.get摘要１９());
+        摘要builder.append(dbData.get摘要２０());
+
+        return !div.getTxtShobyoMei().getValue().equals(dbData.get傷病名())
+                || !isInt等しい(div.getTxtShidouKanri().getValue(), dbData.get指導管理料等単位数())
+                || !isInt等しい(div.getTxtRibabiriteishon().getValue(), dbData.getリハビリテーション単位数())
+                || !isInt等しい(div.getTxtSeishinkaSenmon().getValue(), dbData.get精神科専門療法単位数())
+                || !isInt等しい(div.getTxtTanjyunXline().getValue(), dbData.get単純エックス線単位数())
+                || !isInt等しい(div.getTxtSochi().getValue(), dbData.get措置単位数())
+                || !isInt等しい(div.getTxtTejyutsu().getValue(), dbData.get手術単位数())
+                || !isInt等しい(div.getTxtGoukei().getValue(), dbData.get合計単位数())
+                || !isRStr等しい(div.getTxtMutiTekiyo().getValue(), 摘要builder.toRString());
+    }
+
+    private boolean 特別診療費hasChanged(ShokanTokuteiShinryoTokubetsuRyoyo dbData) {
+        return !div.getTxtShobyoMeiDown().getValue().equals(dbData.get傷病名())
+                || !div.getTxtShikibetsuCode().getValue().equals(dbData.get識別番号())
+                || div.getTxtKaiyisuNisu().getValue().intValue() != dbData.get回数()
+                || div.getTxtGoukeiTanyi().getValue().intValue() != dbData.get合計単位数()
+                || !isRStr等しい(div.getTxtTekiyoDown().getValue(), dbData.get摘要());
+    }
+
+    private boolean isInt等しい(Decimal decimal, int inter) {
+        if (decimal == null && inter == 0) {
+            return true;
+        } else if (decimal != null) {
+            return decimal.intValue() == inter;
+        }
+        return false;
+    }
+
+    private boolean isRStr等しい(RString str1, RString str2) {
+        if ((str1 == null || str1.isEmpty()) && (str2 == null || str2.isEmpty())) {
+            return true;
+        } else if (str1 != null) {
+            return str1.equals(str2);
+        } else if (str2 != null) {
+            return str2.equals(str1);
+        }
+        return false;
     }
 
     /**
@@ -1469,11 +1413,38 @@ public class TokuteiShinryohiPanelHandler {
     }
 
     /**
-     * 特明細番号設定のメソッドます。
-     *
-     * @param 明細番号 RString
+     * 特定診療費グリッドデータのComparatorです。（「連番」の降順でソート）
      */
-    public void set明細番号(RString 明細番号) {
-        div.getPanelTwo().getTxtMeisaibango().setValue(明細番号);
+    private static class ToteishinryoTokubetushinryoRowComparator implements Comparator<ddgToteishinryoTokubetushinryo_Row> {
+
+        @Override
+        public int compare(ddgToteishinryoTokubetushinryo_Row row1, ddgToteishinryoTokubetushinryo_Row row2) {
+            return row2.getNumber().compareTo(row1.getNumber());
+        }
+    }
+
+    /**
+     * 特定診療費・特別診療費グリッドデータのComparatorです。（「連番」の降順でソート）
+     */
+    private static class TokuteiShinryohiRowComparator implements Comparator<dgdTokuteiShinryohi_Row> {
+
+        @Override
+        public int compare(dgdTokuteiShinryohi_Row row1, dgdTokuteiShinryohi_Row row2) {
+            return row2.getDefaultDataName7().compareTo(row1.getDefaultDataName7());
+        }
+    }
+
+    private int set平成15年月Max連番(int max連番, ddgToteishinryoTokubetushinryo_Row row) {
+        if (max連番 < Integer.valueOf(row.getNumber().toString())) {
+            max連番 = Integer.valueOf(row.getNumber().toString());
+        }
+        return max連番;
+    }
+
+    private int set平成15年月後Max連番(int max連番, dgdTokuteiShinryohi_Row row) {
+        if (max連番 < Integer.valueOf(row.getDefaultDataName7().toString())) {
+            max連番 = Integer.valueOf(row.getDefaultDataName7().toString());
+        }
+        return max連番;
     }
 }

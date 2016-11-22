@@ -466,9 +466,9 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         SeigyojohoFactory seigyojohoFactory = InstanceProvider.create(SeigyojohoFactory.class);
         SeigyoJoho 月別保険料制御情報 = seigyojohoFactory.createSeigyojoho(
                 保険料段階リスト, 基準年金収入額_01, 基準年金収入額_02, 基準年金収入額_03,
-                基準所得金額_01, 基準所得金額_02, 基準所得金額_03, null, null, null,
-                null, null, null, null, null, null,
-                null, null, null, null,
+                基準所得金額_01, 基準所得金額_02, 基準所得金額_03, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO,
+                Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO,
+                Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, 課税層所得段階,
                 未申告段階使用有無, 未申告段階インデックス, KazeiKubun.toValue(未申告課税区分),
                 所得調査中段階使用有無, 所得調査中段階インデックス, KazeiKubun.toValue(所得調査中課税区分),
                 課税取消段階使用有無, 課税取消段階インデックス, KazeiKubun.toValue(課税取消課税区分));

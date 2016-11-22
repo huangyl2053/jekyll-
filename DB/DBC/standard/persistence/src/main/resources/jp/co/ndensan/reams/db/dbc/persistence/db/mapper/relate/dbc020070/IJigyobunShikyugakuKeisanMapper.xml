@@ -417,6 +417,33 @@
             "ShikyugakuUpdateTemp"."shikyuShinseishoSeiriNo" ASC
     </select>
     
+    <select resultOrdered="true" id="get処理結果確認情報" resultMap="resultMap_ShoriKekkaList" fetchSize="500">
+        SELECT
+            "DbWT0002KokuhorenTorikomiError".*
+        FROM
+            "DbWT0002KokuhorenTorikomiError"
+        ORDER BY 
+            "DbWT0002KokuhorenTorikomiError"."errorKubun" ASC,
+            "DbWT0002KokuhorenTorikomiError"."hihokenshaNo" ASC,
+            "DbWT0002KokuhorenTorikomiError"."key1" ASC,
+            "DbWT0002KokuhorenTorikomiError"."key2" ASC,
+            "DbWT0002KokuhorenTorikomiError"."key3" ASC,
+            "DbWT0002KokuhorenTorikomiError"."key4" ASC,
+            "DbWT0002KokuhorenTorikomiError"."key5" ASC
+    </select>
+    <resultMap id="resultMap_ShoriKekkaList" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity" autoMapping="true">
+        <result property="errorKubun" column="errorKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoHokanehshaNo" column="shoHokanehshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="key1" column="key1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="key2" column="key2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="key3" column="key3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="key4" column="key4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="key5" column="key5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaKanaShimei" column="hihokenshaKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaShimei" column="hihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="biko" column="biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
     <select resultOrdered="true" id="get更新用一時の情報" resultMap="ResultMap_ShikyugakuUpdateTempEntity" fetchSize="500">
         SELECT
             "ShikyugakuUpdateTemp".*

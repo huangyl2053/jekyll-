@@ -962,7 +962,7 @@
             年金特徴回付情報_介護継承."dtTokubetsuChoshuGimushaCode",
             "DbV2002Fuka"."kakuteiHokenryo",
             (case when
-            "DbV2002Fuka"."hokenryoDankai2" is null
+            ("DbV2002Fuka"."hokenryoDankai2" is null or "DbV2002Fuka"."hokenryoDankai2" = '')
             then
             "DbV2002Fuka"."hokenryoDankai1"
             else

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001.DBB0510001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001.HonsanteiIdoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0510001.HonsanteiIdoHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0510001.HonsanteiIdoValidationHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidogennendo.HonsanteiIdoGennendo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -73,10 +72,6 @@ public class HonsanteiIdo {
     public ResponseData<HonsanteiIdoDiv> onClick_onBeforeCheck(HonsanteiIdoDiv div) {
 
         ValidationMessageControlPairs pairs = getHandler(div).getCheckMessage();
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
-        pairs = getValidationHandler(div).処理対象と出力期のValidate();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
@@ -149,9 +144,5 @@ public class HonsanteiIdo {
 
     private HonsanteiIdoHandler getHandler(HonsanteiIdoDiv div) {
         return new HonsanteiIdoHandler(div);
-    }
-
-    private HonsanteiIdoValidationHandler getValidationHandler(HonsanteiIdoDiv div) {
-        return new HonsanteiIdoValidationHandler(div);
     }
 }

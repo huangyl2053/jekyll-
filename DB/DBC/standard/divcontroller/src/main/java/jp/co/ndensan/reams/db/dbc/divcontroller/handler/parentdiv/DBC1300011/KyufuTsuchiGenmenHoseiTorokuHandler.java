@@ -65,6 +65,7 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
      * @param 被保険者番号 被保険者番号
      */
     public void onLoad(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        div.getCcdJigyoshaInput().initialize();
         div.getKyufuTsuchiGenmenHoseiTorokuKihon().initialize(識別コード);
         div.getKyufuTsuchiGenmenHoseiTorokuKaigoKihon().initialize(被保険者番号);
         RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
@@ -227,8 +228,8 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
 
     private void setRow(DataGridItiran_Row row) {
         row.setTxtShokisaiNo(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue());
-        row.setTxtServiceNengetsu(new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString().substring(0, NUM_6))
-        .wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+        row.setTxtServiceNengetsu(new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString()
+                .substring(0, NUM_6)).wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
         row.setTxtJigyoshaNo(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo());
         row.setTxtJigyoshaName(div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho());
         row.setTxtServiceShurui(div.getCcdServiceTypeInput().getサービス種類コード().concat(RString.HALF_SPACE)
@@ -258,8 +259,10 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         }
         if (result.getサービス提供年月().isEmpty()) {
             row.setTxtServiceNengetsu(RString.EMPTY);
+            row.setTxtHdnServiceNengetsu(RString.EMPTY);
         } else {
             row.setTxtServiceNengetsu(result.getサービス提供年月().wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+            row.setTxtHdnServiceNengetsu(result.getサービス提供年月().toDateString());
         }
         if (result.get事業者番号().isEmpty()) {
             row.setTxtJigyoshaNo(RString.EMPTY);

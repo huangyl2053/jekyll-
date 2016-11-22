@@ -65,12 +65,11 @@ public class GenmenPanelValidationHandler {
     private static enum KokuhorenTorikomiListSpec implements IPredicate<GenmenPanelDiv> {
 
         必須設定項目_決定日 {
-                    @Override
-                    public boolean apply(GenmenPanelDiv div) {
-                        return div.getTextBoxKette().getValue() != null
-                        && !div.getTextBoxKette().getValue().isEmpty();
-                    }
-                }
+            @Override
+            public boolean apply(GenmenPanelDiv div) {
+                return div.getTextBoxKette().getValue() != null;
+            }
+        }
     }
 
     private enum IdocheckMessages implements IValidationMessage {

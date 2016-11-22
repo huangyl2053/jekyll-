@@ -516,12 +516,12 @@
                  ) AS 賦課Newest
         ON 賦課Newest."hihokenshaNo" = 特別徴収開始Temp."hihokenshaNo"
         AND 賦課Newest."fukaNendo"::int = 特別徴収開始Temp."fukaNendo"::int -1
-        LEFT OUTER JOIN rgdb."DbT2003Kibetsu" AS 介護期別
+        INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別
         ON 賦課Newest."choteiNendo" = 介護期別."choteiNendo"
         AND 賦課Newest."fukaNendo" = 介護期別."fukaNendo"
         AND 賦課Newest."tsuchishoNo" = 介護期別."tsuchishoNo"
         AND 賦課Newest."rirekiNo" = 介護期別."rirekiNo"
-        LEFT OUTER JOIN rgdb."UrT0705ChoteiKyotsu" AS 介護継承
+        INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 介護継承
         ON 介護期別."choteiId" = 介護継承."choteiId"
     </select>
     
@@ -646,7 +646,7 @@
         )
     </insert>
     
-    <insert id="insert特別徴収停止者" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter">
+    <insert id="insert特別徴収停止者" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.TokuchoTeishishaChushutsuMybatisParameter">
         INSERT INTO "TokubetuTyoushuuTeisiTemp"
         SELECT 
         徴収方法."fukaNendo",
@@ -841,7 +841,7 @@
         koza.*  
         FROM (select * from "FukaJouhouTemp" where "kozaKubun" = '0') AS A 
         INNER JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON koza."uaT0310Koza_shikibetsuCode" = A."shikibetsuCode"
         WHERE 
             coalesce(A."fuChouKibetsuKingaku1",0) + coalesce(A."fuChouKibetsuKingaku2",0)+ coalesce(A."fuChouKibetsuKingaku3",0)+ coalesce(A."fuChouKibetsuKingaku4",0) > 0
@@ -866,7 +866,7 @@
         A."hihokenshaNo" 
         FROM "FukaJouhouTemp" AS A
         INNER JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON koza."uaT0310Koza_shikibetsuCode" = A."shikibetsuCode"
         )
         AND  
@@ -876,30 +876,28 @@
     
     <select  resultOrdered="true" id="select賦課情報" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter"
-            resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo">
-            SELECT 
-                    <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
-                    <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-                    <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
-            FROM (select * FROM rgdb."DbV2002Fuka" 
-                    WHERE "choteiNendo" = #{調定年度}
-                    AND "fukaNendo" = #{賦課年度}) as "DbT2002Fuka"
-            INNER JOIN
-                rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
-            ON
-                "DbT2003Kibetsu"."choteiNendo" = "DbT2002Fuka"."choteiNendo"
-            AND "DbT2003Kibetsu"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
-            AND "DbT2003Kibetsu"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
-            AND "DbT2003Kibetsu"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
-            INNER JOIN
-                rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
-            ON
-                "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
-                  ORDER BY "dbT2002Fuka_choteiNendo" DESC,
-                    "dbT2002Fuka_fukaNendo" DESC,
-                    "dbT2002Fuka_tsuchishoNo" DESC,
-                    "dbT2002Fuka_rirekiNo" DESC
+            resultMap="resultMap_Fuka">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>
+        FROM
+            rgdb."DbV2002Fuka" AS "DbT2002Fuka" 
+        WHERE
+            "DbT2002Fuka"."choteiNendo" = #{調定年度}
+        AND "DbT2002Fuka"."fukaNendo" = #{賦課年度}
+        ORDER BY
+            "DbT2002Fuka"."choteiNendo",
+            "DbT2002Fuka"."fukaNendo",
+            "DbT2002Fuka"."tsuchishoNo",
+            "DbT2002Fuka"."rirekiNo"
     </select>
+    
+    <resultMap id="resultMap_Fuka" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity" autoMapping="true">
+        <id property="介護賦課Entity.choteiNendo" column="dbT2002Fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="介護賦課Entity.fukaNendo" column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="介護賦課Entity.tsuchishoNo" column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id property="介護賦課Entity.rirekiNo" column="dbT2002Fuka_rirekiNo" />
+        <association property="介護賦課Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
+    </resultMap>
     
      <select  resultOrdered="true" id="select資格情報" 
             resultMap="ResultMap_資格取得情報">
@@ -986,7 +984,7 @@
                     rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
             ON
                     資格喪失."shikakuSousitu_shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
-            INNER JOIN
+            LEFT OUTER JOIN
                     rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
             ON
                     "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
@@ -1031,7 +1029,7 @@
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_hihokenshaNo" and
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_rirekiNo" and
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
-            LEFT OUTER JOIN  (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+            LEFT OUTER JOIN  (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
             ON  資格喪失."shikakuSousitu_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
             ORDER BY 賦課Newest."dbT2002Fuka_choteiNendo" DESC,
                     賦課Newest."dbT2002Fuka_fukaNendo" DESC,
@@ -1074,7 +1072,7 @@
                     rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
             ON
                     特別徴収停止."tokubetuTyoushuuTeisi_shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
-            INNER JOIN
+            LEFT OUTER JOIN
                     rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
             ON
                     "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
@@ -1119,7 +1117,7 @@
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_hihokenshaNo" and
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_rirekiNo" and
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
-            LEFT OUTER JOIN  (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+            LEFT OUTER JOIN  (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
             ON  特別徴収停止."tokubetuTyoushuuTeisi_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
             ORDER BY 賦課Newest."dbT2002Fuka_choteiNendo" DESC,
                     賦課Newest."dbT2002Fuka_fukaNendo" DESC,
@@ -1132,43 +1130,46 @@
             resultMap="ResultMap_資格取得">
             SELECT 
                    資格取得.*,
-                   賦課Newest.*,
-                   介護期別.*,
-                   調定共通.*,
+                   賦課情報.*,
                    <include refid="allColumns_UrT0508SeikatsuHogoJukyusha" />,
                    <include refid="allColumns_UrT0526SeikatsuHogoFujoShurui" />,
                    <include refid="allColumns_UrT0528SeikatsuHogoTeishikikan" />,
                    徴収方法.*,
                    老齢情報.*,
-                   世帯員所得情報.*,
+                   <include refid="allColumns_TmpSetaiShotoku" />,
                    DbT1006KyokaisoGaitosha.*,
                    DbT1013KyokaisoSochiShinsei.*,
                    DbT1007KyokaisoHokenryoDankai.*,
                    koza.*
             FROM "ShikakuShutokuTemp" AS 資格取得
-            LEFT OUTER JOIN (select 
+            LEFT OUTER JOIN (SELECT
+                       賦課Newest.*,
+                       介護期別.*,
+                       調定共通.*
+                   FROM(select 
                         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>
                         from rgdb."DbV2002Fuka" AS "DbT2002Fuka"
                         WHERE  "DbT2002Fuka"."choteiNendo" = #{調定年度}
                         AND   "DbT2002Fuka"."fukaNendo" = #{賦課年度}
                     ) AS 賦課Newest
-            ON 資格取得."shikakuShutoku_tsuchishoNo" = 賦課Newest."dbT2002Fuka_tsuchishoNo" 
-            INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS 介護期別
-            ON 賦課Newest."dbT2002Fuka_choteiNendo" = 介護期別."dbT2003Kibetsu_choteiNendo" 
-            AND 賦課Newest."dbT2002Fuka_fukaNendo" = 介護期別."dbT2003Kibetsu_fukaNendo" 
-            AND 賦課Newest."dbT2002Fuka_tsuchishoNo" = 介護期別."dbT2003Kibetsu_tsuchishoNo" 
-            AND 賦課Newest."dbT2002Fuka_rirekiNo" = 介護期別."dbT2003Kibetsu_rirekiNo" 
-            INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.noDeleted_UrT0705ChoteiKyotsu" />) AS 調定共通
-            ON 介護期別."dbT2003Kibetsu_choteiId" = 調定共通."urT0705ChoteiKyotsu_choteiId"
+                    INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS 介護期別
+                    ON 賦課Newest."dbT2002Fuka_choteiNendo" = 介護期別."dbT2003Kibetsu_choteiNendo" 
+                    AND 賦課Newest."dbT2002Fuka_fukaNendo" = 介護期別."dbT2003Kibetsu_fukaNendo" 
+                    AND 賦課Newest."dbT2002Fuka_tsuchishoNo" = 介護期別."dbT2003Kibetsu_tsuchishoNo" 
+                    AND 賦課Newest."dbT2002Fuka_rirekiNo" = 介護期別."dbT2003Kibetsu_rirekiNo" 
+                    INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.noDeleted_UrT0705ChoteiKyotsu" />) AS 調定共通
+                    ON 介護期別."dbT2003Kibetsu_choteiId" = 調定共通."urT0705ChoteiKyotsu_choteiId"
+            ) AS 賦課情報
+            ON 資格取得."shikakuShutoku_tsuchishoNo" = 賦課情報."dbT2002Fuka_tsuchishoNo" 
             INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.noDeleted_DbV2001ChoshuHoho"/>) AS 徴収方法
             ON 資格取得."shikakuShutoku_hihokenshaNo" = 徴収方法."dbV2001ChoshuHoho_hihokenshaNo"
-            INNER JOIN "TmpSetaiShotoku" AS 世帯員所得情報
-            ON 資格取得."shikakuShutoku_hihokenshaNo" = 世帯員所得情報."hihokenshaNo"
+            INNER JOIN "TmpSetaiShotoku" AS "TmpSetaiShotoku"
+            ON 資格取得."shikakuShutoku_hihokenshaNo" = "TmpSetaiShotoku"."hihokenshaNo"
             LEFT OUTER JOIN
                     rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
             ON
                    資格取得."shikakuShutoku_shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
-             INNER JOIN
+            LEFT OUTER JOIN
                     rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
             ON
                     "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
@@ -1213,12 +1214,12 @@
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_hihokenshaNo" and
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_rirekiNo" and
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
-            LEFT OUTER JOIN  (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+            LEFT OUTER JOIN  (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
             ON  資格取得."shikakuShutoku_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
-            ORDER BY 賦課Newest."dbT2002Fuka_choteiNendo"DESC,
-                    賦課Newest."dbT2002Fuka_fukaNendo" DESC,
-                    賦課Newest."dbT2002Fuka_tsuchishoNo" DESC,
-                    賦課Newest."dbT2002Fuka_rirekiNo" DESC
+            ORDER BY 賦課情報."dbT2002Fuka_choteiNendo"DESC,
+                    賦課情報."dbT2002Fuka_fukaNendo" DESC,
+                    賦課情報."dbT2002Fuka_tsuchishoNo" DESC,
+                    賦課情報."dbT2002Fuka_rirekiNo" DESC
     </select>
     
     <select  resultOrdered="true" id="select口座異動" 
@@ -1265,9 +1266,7 @@
                    特徴仮算定."kariSanntei_kazeiKubun",
                    特徴仮算定."kariSanntei_setaikazeiKubun",
                    <include refid="allColumns_DbT1001HihokenshaDaicho" />,
-                   賦課Newest.*,
-                   介護期別.*,
-                   調定共通.*,
+                   賦課情報.*,
                    <include refid="allColumns_UrT0508SeikatsuHogoJukyusha" />,
                    <include refid="allColumns_UrT0526SeikatsuHogoFujoShurui" />,
                    <include refid="allColumns_UrT0528SeikatsuHogoTeishikikan" />,
@@ -1275,20 +1274,25 @@
                    老齢情報.*,
                    koza.*
             FROM "TokutyouKariSannteiTyuushutuTemp" AS 特徴仮算定
-            LEFT OUTER JOIN (select 
+            LEFT OUTER JOIN (SELECT
+                       賦課Newest.*,
+                       介護期別.*,
+                       調定共通.*
+                   FROM(select 
                         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>
                         from rgdb."DbV2002Fuka" AS "DbT2002Fuka"
                         WHERE  "DbT2002Fuka"."choteiNendo" = #{調定年度}
                         AND   "DbT2002Fuka"."fukaNendo" = #{調定年度}
                     ) AS 賦課Newest
-            ON 特徴仮算定."kariSanntei_hihokenshaNo" = 賦課Newest."dbT2002Fuka_hihokenshaNo" 
-            INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS 介護期別
-            ON 賦課Newest."dbT2002Fuka_choteiNendo" = 介護期別."dbT2003Kibetsu_choteiNendo" 
-            AND 賦課Newest."dbT2002Fuka_fukaNendo" = 介護期別."dbT2003Kibetsu_fukaNendo" 
-            AND 賦課Newest."dbT2002Fuka_tsuchishoNo" = 介護期別."dbT2003Kibetsu_tsuchishoNo" 
-            AND 賦課Newest."dbT2002Fuka_rirekiNo" = 介護期別."dbT2003Kibetsu_rirekiNo" 
-            INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.noDeleted_UrT0705ChoteiKyotsu" />) AS 調定共通
-            ON 介護期別."dbT2003Kibetsu_choteiId" = 調定共通."urT0705ChoteiKyotsu_choteiId"
+                    INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS 介護期別
+                    ON 賦課Newest."dbT2002Fuka_choteiNendo" = 介護期別."dbT2003Kibetsu_choteiNendo" 
+                    AND 賦課Newest."dbT2002Fuka_fukaNendo" = 介護期別."dbT2003Kibetsu_fukaNendo" 
+                    AND 賦課Newest."dbT2002Fuka_tsuchishoNo" = 介護期別."dbT2003Kibetsu_tsuchishoNo" 
+                    AND 賦課Newest."dbT2002Fuka_rirekiNo" = 介護期別."dbT2003Kibetsu_rirekiNo" 
+                    INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.noDeleted_UrT0705ChoteiKyotsu" />) AS 調定共通
+                    ON 介護期別."dbT2003Kibetsu_choteiId" = 調定共通."urT0705ChoteiKyotsu_choteiId"
+            ) AS 賦課情報
+            ON 特徴仮算定."kariSanntei_hihokenshaNo" = 賦課情報."dbT2002Fuka_hihokenshaNo" 
             INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
             ON 特徴仮算定."kariSanntei_hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
             INNER JOIN (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.noDeleted_DbV2001ChoshuHoho"/>) AS 徴収方法
@@ -1297,13 +1301,13 @@
                     rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
             ON
                    "DbT1001HihokenshaDaicho"."shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
-             INNER JOIN
+            LEFT OUTER JOIN
                     rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
             ON
                     "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
                 AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0526SeikatsuHogoFujoShurui"."gyomuCode"
                 AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0526SeikatsuHogoFujoShurui"."jukyuKaishiYMD"
-             LEFT OUTER JOIN
+            LEFT OUTER JOIN
                     rgur."UrT0528SeikatsuHogoTeishikikan" AS "UrT0528SeikatsuHogoTeishikikan"
             ON
                     "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0528SeikatsuHogoTeishikikan"."shikibetsuCode"
@@ -1311,12 +1315,12 @@
                 AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0528SeikatsuHogoTeishikikan"."jukyuKaishiYMD"
             LEFT OUTER JOIN (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.noDeleted_DbT7006RoreiFukushiNenkinJukyusha" />) AS 老齢情報
             ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = 老齢情報."dbT7006RoreiFukushiNenkinJukyusha_shikibetsuCode"
-            LEFT OUTER JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+            LEFT OUTER JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
             ON  "DbT1001HihokenshaDaicho"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
-            ORDER BY 賦課Newest."dbT2002Fuka_choteiNendo" DESC,
-                    賦課Newest."dbT2002Fuka_fukaNendo" DESC,
-                    賦課Newest."dbT2002Fuka_tsuchishoNo" DESC,
-                    賦課Newest."dbT2002Fuka_rirekiNo" DESC
+            ORDER BY 賦課情報."dbT2002Fuka_choteiNendo" DESC,
+                    賦課情報."dbT2002Fuka_fukaNendo" DESC,
+                    賦課情報."dbT2002Fuka_tsuchishoNo" DESC,
+                    賦課情報."dbT2002Fuka_rirekiNo" DESC
     </select>
     
     <!-- 賦課の情報一時テーブルを削除します。-->
@@ -1333,7 +1337,22 @@
         DELETE FROM "UrT0705ChoteiKyotsu_work"
     </delete>
 
+    <delete id="deleteUrT0706ChoteigakuUchiwake_work">
+        drop table if exists "UrT0706ChoteigakuUchiwake_work"
+    </delete>
     
+    <delete id="deleteUrT0772KamokubetsuKoyuJoho_work">
+        drop table if exists "UrT0772KamokubetsuKoyuJoho_work"
+    </delete>
+    
+    <delete id="deleteUrShunoIdWork_2">
+        drop table if exists "ShunoIdWork_2"
+    </delete>
+    
+    <delete id="deleteUrT0707ChoteiJokyo_work">
+        drop table if exists "UrT0707ChoteiJokyo_work"
+    </delete>
+       
     <resultMap id="ResultMap_資格喪失" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.ShikakuFukaResultEntity" autoMapping="true">
         <id  column="shikakuSousitu_hihokenshaNo"/>
         <id  column="dbT2002Fuka_choteiNendo"/>
@@ -1344,7 +1363,7 @@
         <association property="賦課情報Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"/>
         <association property="徴収方法Entity" resultMap="ResultMap_徴収方法Newest"/>
         <association property="口座Entity"
-                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
         <collection property="生保の情報List" resultMap="ResultMap_生保情報"/>
         <collection property="老齢の情報List" resultMap="ResultMap_老齢情報"/>
         <collection property="境界層の情報List" resultMap="ResultMap_境界層の情報"/>
@@ -1358,7 +1377,7 @@
         <id  column="dbT2002Fuka_rirekiNo"/>
         <association property="賦課情報Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"/>
         <association property="口座Entity"
-                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
         <collection property="特別徴収停止List" resultMap="ResultMap_特別徴収停止の情報"/>
         <collection property="生保の情報List" resultMap="ResultMap_生保情報"/>
         <collection property="老齢の情報List" resultMap="ResultMap_老齢情報"/>
@@ -1380,7 +1399,7 @@
         <association property="賦課情報Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"/>
         <association property="徴収方法Entity" resultMap="ResultMap_徴収方法Newest"/>
         <association property="口座Entity"
-                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
         <collection property="世帯員所得情報List" resultMap="ResultMap_世帯員所得情報"/>
         <collection property="資格取得List" resultMap="ResultMap_資格取得情報"/>
         <collection property="生保の情報List" resultMap="ResultMap_生保情報"/>
@@ -1416,7 +1435,7 @@
         <association property="賦課情報Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"/>
         <association property="徴収方法Entity" resultMap="ResultMap_徴収方法Newest"/>
         <association property="口座Entity"
-                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
         <collection property="生保の情報List" resultMap="ResultMap_生保情報"/>
         <collection property="老齢の情報List" resultMap="ResultMap_老齢情報"/>
     </resultMap>
@@ -1521,6 +1540,24 @@
          "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
          "DbT1001HihokenshaDaicho"."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
          "DbT1001HihokenshaDaicho"."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag"
+    </sql>
+    
+    <sql id="allColumns_TmpSetaiShotoku">
+        "TmpSetaiShotoku"."hihokenshaNo" AS "TempSetaiShotoku_hihokenshaNo",
+        "TmpSetaiShotoku"."shikibetsuCode" AS "TempSetaiShotoku_shikibetsuCode",
+        "TmpSetaiShotoku"."kijunYMD" AS "TempSetaiShotoku_kijunYMD",
+        "TmpSetaiShotoku"."shotokuNendo" as "TempSetaiShotoku_shotokuNendo",
+        "TmpSetaiShotoku"."jushochiTokureiFlag" as "TempSetaiShotoku_jushochiTokureiFlag",
+        "TmpSetaiShotoku"."setaiCode" as "TempSetaiShotoku_setaiCode",
+        "TmpSetaiShotoku"."honninKubun" as "TempSetaiShotoku_honninKubun",
+        "TmpSetaiShotoku"."kazeiKubun" as "TempSetaiShotoku_kazeiKubun",
+        "TmpSetaiShotoku"."kazeiKubunGemmenGo" as "TempSetaiShotoku_kazeiKubunGemmenGo",
+        "TmpSetaiShotoku"."gekihenKanwaKubun" as "TempSetaiShotoku_gekihenKanwaKubun",
+        "TmpSetaiShotoku"."gokeiShotokuGaku" as "TempSetaiShotoku_gokeiShotokuGaku",
+        "TmpSetaiShotoku"."nenkiniShunyuGaku" AS "TempSetaiShotoku_nenkiniShunyuGaku",
+        "TmpSetaiShotoku"."nenkiniShotokuGaku" AS "TempSetaiShotoku_nenkiniShunyuGaku",
+        "TmpSetaiShotoku"."kazeiShotokuGaku" AS "TempSetaiShotoku_kazeiShotokuGaku",
+        "TmpSetaiShotoku"."torokuGyomu" AS "TempSetaiShotoku_torokuGyomu"
     </sql>
 
     
@@ -1804,21 +1841,21 @@
     </resultMap>
     
     <resultMap id="ResultMap_世帯員所得情報" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity" autoMapping="true">
-        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <result property="jushochiTokureiFlag" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
-        <result property="honninKubun" column="honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kazeiKubun" column="kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kazeiKubunGemmenGo" column="kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="gekihenKanwaKubun" column="gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="gokeiShotokuGaku" column="gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="nenkiniShunyuGaku" column="nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="nenkiniShotokuGaku" column="nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="kazeiShotokuGaku" column="kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="torokuGyomu" column="torokuGyomu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="TempSetaiShotoku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikibetsuCode" column="TempSetaiShotoku_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kijunYMD" column="TempSetaiShotoku_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shotokuNendo" column="TempSetaiShotoku_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="TempSetaiShotoku_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCode" column="TempSetaiShotoku_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="honninKubun" column="TempSetaiShotoku_honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubun" column="TempSetaiShotoku_kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubunGemmenGo" column="TempSetaiShotoku_kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gekihenKanwaKubun" column="TempSetaiShotoku_gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuGaku" column="TempSetaiShotoku_gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShunyuGaku" column="TempSetaiShotoku_nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShotokuGaku" column="TempSetaiShotoku_nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kazeiShotokuGaku" column="TempSetaiShotoku_kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="torokuGyomu" column="TempSetaiShotoku_torokuGyomu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     <resultMap id="ResultMap_口座異動情報" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.KozaIdoEntity" autoMapping="true">

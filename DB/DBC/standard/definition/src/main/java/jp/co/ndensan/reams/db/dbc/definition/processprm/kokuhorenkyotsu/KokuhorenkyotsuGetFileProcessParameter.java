@@ -20,5 +20,6 @@ public class KokuhorenkyotsuGetFileProcessParameter implements IBatchProcessPara
 
     private RString 交換情報識別番号;
     private RString ファイル格納フォルダ名;
+    private RString loginUserID;
 
 }

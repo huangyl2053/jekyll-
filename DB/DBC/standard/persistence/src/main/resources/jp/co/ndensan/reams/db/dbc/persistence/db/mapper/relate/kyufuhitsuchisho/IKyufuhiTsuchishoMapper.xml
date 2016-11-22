@@ -49,7 +49,6 @@
               ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
               <if test = "福祉用具貸与ページ出力区分フラグ" >
               ,<include refid="selectKetteiTsuchiShoMeisai" />
-              <!--,介護給付費福祉用具貸与品目一時TBL."jigyoshoNo"--> 
               </if>
             FROM
               ( 

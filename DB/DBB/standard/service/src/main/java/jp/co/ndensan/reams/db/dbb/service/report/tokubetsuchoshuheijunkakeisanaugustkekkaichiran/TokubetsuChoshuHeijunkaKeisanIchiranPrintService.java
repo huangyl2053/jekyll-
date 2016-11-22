@@ -7,11 +7,15 @@ package jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshuheijunkakeisana
 
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranReport;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanaugustkekkaichiran.TokubetsuChoshuHeijunkaKeisanIchiranSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -86,9 +90,12 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranPrintService {
         try (ReportAssembler<TokubetsuChoshuHeijunkaKeisanIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChoshuHeijunkaKeisanIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager()
+                    .get帳票制御共通(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200005.getReportId());
             new TokubetsuChoshuHeijunkaKeisanIchiranReport(
                     特徴平準化結果対象者一覧表,
                     特徴平準化結果対象外一覧表,
+                    帳票制御共通,
                     調定日時,
                     調定年度,
                     association,

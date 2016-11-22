@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSe
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoChushutsuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.JukiIdoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.JutogaiIdoJiyu;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -31,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SyoriTaisyoShichoson {
 
+    private List<RString> 市町村コードlist = new ArrayList<>();
+
     /**
      * 宛名識別対象異動分取得します。
      *
@@ -40,6 +43,10 @@ public class SyoriTaisyoShichoson {
      */
     public ShikibetsuTaishoIdoSearchKeyBuilder 宛名識別対象異動分取得PSM(RDateTime 抽出開始日時,
             JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter) {
+        if (抽出開始日時 == null) {
+            抽出開始日時 = new YMDHMS(DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).concat(new RString("000000"))).getRDateTime();
+        }
         ShikibetsuTaishoIdoSearchKeyBuilder keyBuilder = new ShikibetsuTaishoIdoSearchKeyBuilder(
                 ShikibetsuTaishoIdoChushutsuKubun.異動処理日時と異動事由で異動前後を抽出,
                 抽出開始日時, processParameter.getSyorinichiji().getRDateTime());
@@ -94,12 +101,19 @@ public class SyoriTaisyoShichoson {
      *
      * @param processParameter JuminkirokuIdojohoTorokuKoikiProcessParameter
      * @param entity DbT7022ShoriDateKanriEntity
+     * @return DbT7022ShoriDateKanriEntity
      */
-    public void データ更新(JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter, DbT7022ShoriDateKanriEntity entity) {
-        entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
-        entity.setShoriName(ShoriName.広域住基連動.get名称());
-        entity.setKijunTimestamp(processParameter.getSyorinichiji());
-        entity.setTaishoShuryoTimestamp(processParameter.getSyorinichiji());
+    public DbT7022ShoriDateKanriEntity データ更新(JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter, DbT7022ShoriDateKanriEntity entity) {
+        DbT7022ShoriDateKanriEntity dbentity = new DbT7022ShoriDateKanriEntity();
+        dbentity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
+        dbentity.setShoriName(ShoriName.広域住基連動.get名称());
+        dbentity.setKijunTimestamp(processParameter.getSyorinichiji());
+        dbentity.setTaishoShuryoTimestamp(processParameter.getSyorinichiji());
+        dbentity.setShoriEdaban(entity.getShoriEdaban());
+        dbentity.setNendoNaiRenban(entity.getNendoNaiRenban());
+        dbentity.setNendo(entity.getNendo());
+        dbentity.setTaishoKaishiTimestamp(entity.getTaishoKaishiTimestamp());
+        return dbentity;
     }
 
     /**
@@ -107,8 +121,10 @@ public class SyoriTaisyoShichoson {
      *
      * @param processParameter JuminkirokuIdojohoTorokuKoikiProcessParameter
      * @param entity DbT7022ShoriDateKanriEntity
+     * @param shichosonCode RString
      */
-    public void データ登録(JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter, DbT7022ShoriDateKanriEntity entity) {
+    public void データ登録(JuminkirokuIdojohoTorokuKoikiProcessParameter processParameter, DbT7022ShoriDateKanriEntity entity, RString shichosonCode) {
+        entity.setShichosonCode(new LasdecCode(shichosonCode));
         entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
         entity.setShoriName(ShoriName.広域住基連動.get名称());
         entity.setShoriEdaban(new RString("01"));
@@ -121,5 +137,22 @@ public class SyoriTaisyoShichoson {
         entity.setTaishoKaishiTimestamp(new YMDHMS(DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).concat(new RString("000000"))));
         entity.setTaishoShuryoTimestamp(processParameter.getSyorinichiji());
+    }
+
+    /**
+     *
+     * @param entity DbT7022ShoriDateKanriEntity
+     * @return List<RString>
+     */
+    public List<RString> setlist(DbT7022ShoriDateKanriEntity entity) {
+        市町村コードlist.add(entity.getShichosonCode().value());
+        return 市町村コードlist;
+    }
+
+    /**
+     * @return List<RString>
+     */
+    public List<RString> getlist() {
+        return 市町村コードlist;
     }
 }

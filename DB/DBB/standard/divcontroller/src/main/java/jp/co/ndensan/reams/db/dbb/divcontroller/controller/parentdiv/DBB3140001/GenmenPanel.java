@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB314001.DBB314001_Gemmen
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3140001.GenmenPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3140001.GenmenPanelHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3140001.GenmenPanelValidationHandler;
+import jp.co.ndensan.reams.ur.urz.definition.core.chiku.ChikuShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -28,10 +29,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class GenmenPanel {
 
     private static final RString 町域 = new RString("町域");
-    private static final RString 行政区 = new RString("行政区");
-    private static final RString 地区１ = new RString("地区１");
-    private static final RString 地区２ = new RString("地区２");
-    private static final RString 地区３ = new RString("地区３");
+    private static final RString 行政区 = ChikuShubetsu.行政区.getShubetsu();
+    private static final RString 地区１ = ChikuShubetsu.地区1.getShubetsu();
+    private static final RString 地区２ = ChikuShubetsu.地区2.getShubetsu();
+    private static final RString 地区３ = ChikuShubetsu.地区3.getShubetsu();
     private static final int NUM_4 = 4;
 
     /**
@@ -118,8 +119,8 @@ public class GenmenPanel {
         } else {
             parameter.setList地区3コード(null);
         }
-        if (div.getTextBoxSinsei().getValue() != null && !div.getTextBoxSinsei().getValue().toString().isEmpty()) {
-            parameter.setShinseiYMD(new FlexibleDate(new RDate(div.getTextBoxSinsei().getValue().toString()).toString()));
+        if (div.getTextBoxSinsei().getValue() != null) {
+            parameter.setShinseiYMD(new FlexibleDate(div.getTextBoxSinsei().getValue().toString()));
         } else {
             parameter.setShinseiYMD(null);
         }
@@ -134,7 +135,7 @@ public class GenmenPanel {
         } else {
             parameter.setShinseiJiyu(RString.EMPTY);
         }
-        parameter.setKetteiYMD(new FlexibleDate(new RDate(div.getTextBoxKette().getValue().toString()).toString()));
+        parameter.setKetteiYMD(new FlexibleDate(div.getTextBoxKette().getValue().toString()));
         if (!div.getTextBoxMultiLineKetteiRiryuu().getValue().isNull() && !div.getTextBoxMultiLineKetteiRiryuu().
                 getValue().isEmpty()) {
             parameter.setGemmenJiyu(div.getTextBoxMultiLineKetteiRiryuu().getValue());

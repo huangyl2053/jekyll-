@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0130002
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012002.DBB012002_TokuchoHeinjunkaKakuteiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.DBB0130002StateName;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.DBB0130002TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.HeijunkaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0130002.HeijunkaKakuteiHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -14,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 画面設計_DBBGM35004_特徴平準化確定のクラスです。
@@ -23,6 +26,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class HeijunkaKakutei {
 
     private final RString 特徴平準化_平準化 = new RString("特徴平準化（6・8月分）確定");
+    private final RString バッチ処理するキー = new RString("branchBatchExecute");
+    private final RString バッチ処理しない = new RString("バッチ処理しない");
+    private final RString バッチ処理する = new RString("バッチ処理する");
 
     /**
      * 画面初期化のメソッドます。
@@ -75,7 +81,9 @@ public class HeijunkaKakutei {
     public ResponseData<HeijunkaKakuteiDiv> onClick_btnKakuteiReal(HeijunkaKakuteiDiv div) {
         ShoriDateKanri 処理日付管理 = ViewStateHolder.get(ViewStateKeys.処理日付管理, ShoriDateKanri.class);
         getHandler(div).更新賦課処理状況更新(処理日付管理);
-        return ResponseData.of(div).respond();
+        FlowParameters wfバッチ処理しない = FlowParameters.of(バッチ処理するキー, バッチ処理しない);
+        FlowParameterAccessor.merge(wfバッチ処理しない);
+        return ResponseData.of(div).forwardWithEventName(DBB0130002TransitionEventName.完了).respond();
     }
 
     /**
@@ -87,6 +95,8 @@ public class HeijunkaKakutei {
     public ResponseData<DBB012002_TokuchoHeinjunkaKakuteiParameter> onClick_btnKakuteiBatch(HeijunkaKakuteiDiv div) {
         ShoriDateKanri 処理日付管理 = ViewStateHolder.get(ViewStateKeys.処理日付管理, ShoriDateKanri.class);
         DBB012002_TokuchoHeinjunkaKakuteiParameter parameter = getHandler(div).creatParameter(処理日付管理.get基準日時());
+        FlowParameters wfバッチ処理する = FlowParameters.of(バッチ処理するキー, バッチ処理する);
+        FlowParameterAccessor.merge(wfバッチ処理する);
         return ResponseData.of(parameter).respond();
     }
 

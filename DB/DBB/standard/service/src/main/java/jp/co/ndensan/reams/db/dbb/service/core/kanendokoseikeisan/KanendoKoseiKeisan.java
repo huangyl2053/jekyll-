@@ -56,21 +56,21 @@ public class KanendoKoseiKeisan {
     private static final RString 関係_メッセージ = new RString("調定年度ー賦課年度　が　0,1,2,3,4,5以外");
     private static final RString 定数_翌年度4月 = new RString("104");
     private static final RString 定数_翌年度5月 = new RString("105");
-    private static final RString 定数_0 = new RString("0");
-    private static final RString 定数_1 = new RString("1");
-    private static final RString 定数_2 = new RString("2");
-    private static final RString 定数_3 = new RString("3");
-    private static final RString 定数_4 = new RString("4");
-    private static final RString 定数_5 = new RString("5");
-    private static final RString 定数_6 = new RString("6");
-    private static final RString 定数_7 = new RString("7");
-    private static final RString 定数_8 = new RString("8");
-    private static final RString 定数_9 = new RString("9");
-    private static final RString 定数_10 = new RString("10");
-    private static final RString 定数_11 = new RString("11");
-    private static final RString 定数_12 = new RString("12");
-    private static final RString 定数_13 = new RString("13");
-    private static final RString 定数_14 = new RString("14");
+    private static final RString NUMBER_0 = new RString("0");
+    private static final RString NUMBER_1 = new RString("1");
+    private static final RString NUMBER_2 = new RString("2");
+    private static final RString NUMBER_3 = new RString("3");
+    private static final RString NUMBER_4 = new RString("4");
+    private static final RString NUMBER_5 = new RString("5");
+    private static final RString NUMBER_6 = new RString("6");
+    private static final RString NUMBER_7 = new RString("7");
+    private static final RString NUMBER_8 = new RString("8");
+    private static final RString NUMBER_9 = new RString("9");
+    private static final RString NUMBER_10 = new RString("10");
+    private static final RString NUMBER_11 = new RString("11");
+    private static final RString NUMBER_12 = new RString("12");
+    private static final RString NUMBER_13 = new RString("13");
+    private static final RString NUMBER_14 = new RString("14");
     private static final RString 重複させない = new RString("00");
     private static final RString 重複させる_01期 = new RString("01");
     private static final RString 重複させる_02期 = new RString("02");
@@ -276,7 +276,7 @@ public class KanendoKoseiKeisan {
                 賦課の情報1 = get賦課の情報(賦課の情報1, 算定日時, 普徴期別額List, 特徴期別額List).build();
                 賦課の情報リスト.add(賦課の情報1);
             }
-        } else if (idx == INT_1 && INT_1 < size) {
+        } else if (is定数(idx, INT_1, size)) {
             if (賦課の情報2 != null) {
                 List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
                 List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
@@ -289,7 +289,7 @@ public class KanendoKoseiKeisan {
                         .set調定年度(賦課の情報1.get賦課年度().plusYear(INT_1)).build();
                 賦課の情報リスト.add(賦課の情報1);
             }
-        } else if (idx == INT_2 && INT_2 < size) {
+        } else if (is定数(idx, INT_2, size)) {
             if (賦課の情報3 != null) {
                 List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
                 List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
@@ -308,7 +308,7 @@ public class KanendoKoseiKeisan {
                         .set調定年度(賦課の情報1.get賦課年度().plusYear(INT_2)).build();
                 賦課の情報リスト.add(賦課の情報1);
             }
-        } else if (idx == INT_3 && INT_3 < size) {
+        } else if (is定数(idx, INT_3, size)) {
             if (賦課の情報4 != null) {
                 List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
                 List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
@@ -333,13 +333,17 @@ public class KanendoKoseiKeisan {
                         .set調定年度(賦課の情報1.get賦課年度().plusYear(INT_3)).build();
                 賦課の情報リスト.add(賦課の情報1);
             }
-        } else if (idx == INT_4 && INT_4 < size) {
+        } else if (is定数(idx, INT_4, size)) {
             set賦課の情報5(賦課の情報リスト, 調定年度期別クラス, idx, 算定日時, 賦課の情報1,
                     賦課の情報2, 賦課の情報3, 賦課の情報4, 賦課の情報5);
-        } else if (idx == INT_5 && INT_5 < size) {
+        } else if (is定数(idx, INT_5, size)) {
             set賦課の情報6(賦課の情報リスト, 調定年度期別クラス, idx, 算定日時, 賦課の情報1,
                     賦課の情報2, 賦課の情報3, 賦課の情報4, 賦課の情報5, 賦課の情報6);
         }
+    }
+
+    private boolean is定数(int idx, int 定数, int size) {
+        return idx == 定数 && 定数 < size;
     }
 
     private void set賦課の情報5(List<FukaJoho> 賦課の情報リスト, List<ChoteiNendoKibetsuClass> 調定年度期別クラス, int idx,
@@ -504,27 +508,27 @@ public class KanendoKoseiKeisan {
         年金支払日List.add(new FlexibleDate(年金支払日_2月));
         業務コンフィグ情報.set年金支払日(年金支払日List);
         RString 特徴開始前普通徴収_8月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_8月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        if (定数_1.equals(特徴開始前普通徴収_8月)) {
-            業務コンフィグ情報.set捕捉分開始前普徴区分(定数_1);
-        } else if (定数_0.equals(特徴開始前普通徴収_8月)) {
-            業務コンフィグ情報.set捕捉分開始前普徴区分(定数_2);
+        if (NUMBER_1.equals(特徴開始前普通徴収_8月)) {
+            業務コンフィグ情報.set捕捉分開始前普徴区分(NUMBER_1);
+        } else if (NUMBER_0.equals(特徴開始前普通徴収_8月)) {
+            業務コンフィグ情報.set捕捉分開始前普徴区分(NUMBER_2);
         }
         RString 特徴開始前普通徴収_10月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_10月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        if (定数_1.equals(特徴開始前普通徴収_10月)) {
-            業務コンフィグ情報.set特徴開始前普徴区分(定数_1);
-        } else if (定数_0.equals(特徴開始前普通徴収_10月)) {
-            業務コンフィグ情報.set特徴開始前普徴区分(定数_2);
+        if (NUMBER_1.equals(特徴開始前普通徴収_10月)) {
+            業務コンフィグ情報.set特徴開始前普徴区分(NUMBER_1);
+        } else if (NUMBER_0.equals(特徴開始前普通徴収_10月)) {
+            業務コンフィグ情報.set特徴開始前普徴区分(NUMBER_2);
         }
 
         set普徴切替時期別区分(業務コンフィグ情報, 適用基準日);
 
-        業務コンフィグ情報.set増額時普調切替区分(定数_0);
-        業務コンフィグ情報.set捕捉計算区分(定数_0);
+        業務コンフィグ情報.set増額時普調切替区分(NUMBER_0);
+        業務コンフィグ情報.set捕捉計算区分(NUMBER_0);
         RString 特徴減額期割方法 = DbBusinessConfig.get(ConfigNameDBB.期割計算_特徴減額期割方法, 適用基準日, SubGyomuCode.DBB介護賦課);
-        if (定数_1.equals(特徴減額期割方法)) {
-            業務コンフィグ情報.set併徴現年減額区分(定数_2);
-        } else if (定数_2.equals(特徴減額期割方法)) {
-            業務コンフィグ情報.set併徴現年減額区分(定数_0);
+        if (NUMBER_1.equals(特徴減額期割方法)) {
+            業務コンフィグ情報.set併徴現年減額区分(NUMBER_2);
+        } else if (NUMBER_2.equals(特徴減額期割方法)) {
+            業務コンフィグ情報.set併徴現年減額区分(NUMBER_0);
         }
         RString 特別徴収_期別端数 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別端数, 適用基準日, SubGyomuCode.DBB介護賦課);
         業務コンフィグ情報.set端数区分特徴期別額(get期別端数区分(特別徴収_期別端数));
@@ -576,7 +580,7 @@ public class KanendoKoseiKeisan {
     private RString get現在月(Kitsuki 過年度期月) {
         if (Tsuki._1月.equals(過年度期月.get月()) || Tsuki._2月.equals(過年度期月.get月())
                 || Tsuki._3月.equals(過年度期月.get月())) {
-            return 定数_1.concat(new RString(過年度期月.get月AsInt()).padZeroToLeft(INT_2));
+            return NUMBER_1.concat(new RString(過年度期月.get月AsInt()).padZeroToLeft(INT_2));
         } else if (Tsuki.翌年度4月.equals(過年度期月.get月())) {
             return 定数_翌年度4月;
         } else if (Tsuki.翌年度5月.equals(過年度期月.get月())) {
@@ -604,9 +608,9 @@ public class KanendoKoseiKeisan {
 
     private RString set期別徴収方法(RString 徴収方法) {
         if (特別徴収_厚生労働省.equals(徴収方法) || 特別徴収_地共済.equals(徴収方法)) {
-            return 定数_1;
+            return NUMBER_1;
         } else {
-            return 定数_0;
+            return NUMBER_0;
         }
     }
 
@@ -684,35 +688,35 @@ public class KanendoKoseiKeisan {
     private void set普徴切替時期別区分(GyomuConfigJohoClass 業務コンフィグ情報, RDate 適用基準日) {
         RString 普徴切替方法 = DbBusinessConfig.get(ConfigNameDBB.期割計算_普徴切替方法, 適用基準日, SubGyomuCode.DBB介護賦課);
         if (重複させない.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_0);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_0);
         } else if (重複させる_01期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_1);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_1);
         } else if (重複させる_02期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_2);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_2);
         } else if (重複させる_03期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_3);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_3);
         } else if (重複させる_04期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_4);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_4);
         } else if (重複させる_05期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_5);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_5);
         } else if (重複させる_06期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_6);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_6);
         } else if (重複させる_07期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_7);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_7);
         } else if (重複させる_08期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_8);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_8);
         } else if (重複させる_09期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_9);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_9);
         } else if (重複させる_10期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_10);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_10);
         } else if (重複させる_11期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_11);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_11);
         } else if (重複させる_12期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_12);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_12);
         } else if (重複させる_13期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_13);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_13);
         } else if (重複させる_14期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_14);
+            業務コンフィグ情報.set普徴切替時期別区分(NUMBER_14);
         }
     }
 

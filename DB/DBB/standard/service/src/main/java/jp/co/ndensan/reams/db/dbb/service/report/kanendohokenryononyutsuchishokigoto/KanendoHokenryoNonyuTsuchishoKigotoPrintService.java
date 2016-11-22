@@ -97,14 +97,14 @@ public class KanendoHokenryoNonyuTsuchishoKigotoPrintService {
         KanendoHokenryoNonyuTsuchishoKigotoProperty property = new KanendoHokenryoNonyuTsuchishoKigotoProperty();
         try (ReportAssembler<KanendoHokenryoNonyuTsuchishoKigotoSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KanendoHokenryoNonyuTsuchishoKigotoSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
+                    SubGyomuCode.DBB介護賦課,
+                    帳票分類ID,
+                    new FlexibleDate(本算定納入通知書情報List.get(0).get発行日().toDateString()),
+                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                    KenmeiFuyoKubunType.付与なし,
+                    reportSourceWriter);
             for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
-                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
-                        SubGyomuCode.DBB介護賦課,
-                        帳票分類ID,
-                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        KenmeiFuyoKubunType.付与なし,
-                        reportSourceWriter);
                 KanendoHokenryoNonyuTsuchishoKigotoReport report
                         = new KanendoHokenryoNonyuTsuchishoKigotoReport(本算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);

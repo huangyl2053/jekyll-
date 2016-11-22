@@ -25,8 +25,13 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -42,6 +47,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor implements IHokenry
     private final HonSanteiNonyuTsuchiShoSeigyoJoho 本算定納入通知書制御情報;
     private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
     private final NinshoshaSource ninshoshaSource;
+    private static final int INT4 = 4;
+    private static final int INT5 = 5;
     private static final int INT6 = 6;
     private static final int LIST_SIZE_1 = 1;
     private static final int LIST_SIZE_2 = 2;
@@ -56,6 +63,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor implements IHokenry
 
     private static final RString EN = new RString("円");
     private static final RString TSUGIKI_IKOU = new RString("次期以降");
+    private static final RString 波線 = new RString("～");
 
     /**
      * コンストラクタです。
@@ -121,8 +129,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor implements IHokenry
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = 編集後本算定通知書共通情報.get更正後();
         if (更正後 != null) {
             source.cover_keisanMeisaishoTsukiSu = 半角to全角(更正後.get月数_ケ月());
-            source.cover_keisanMeisaishoKaishiKi = 更正後.get期間_自();
-            source.cover_kaisanMeisaishoShuryoKi = 更正後.get期間_至();
+            source.cover_keisanMeisaishoKaishiKi = editDate(更正後.get期間_自());
+            source.cover_kaisanMeisaishoShuryoKi = 波線.concat(editDate(更正後.get期間_至()));
             source.cover_keisanMeisaishoShotokuDankai = 半角to全角(更正後.get保険料段階());
             source.cover_kaisanHokenryoRitsu = decimalFormatter_toコンマ区切りRString(更正後.get保険料率(), 0);
             source.cover_keisanMeisaishoCalHokenryoGaku = decimalFormatter_toコンマ区切りRString(更正後.get減免前保険料_年額(), 0);
@@ -147,15 +155,17 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor implements IHokenry
         if (納入通知書期情報リスト.get(0) != null) {
             source.cover_keisanMeisaishoKiTitle1
                     = new RString("第").concat(new RString(納入通知書期情報リスト.get(0).get期())).concat(new RString("期"));
-            source.cover_keisanMeisaishoKibetsuNofuGaku1 = 納入通知書期情報リスト.get(0).get調定額表記();
+            source.cover_keisanMeisaishoKibetsuNofuGaku1 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(0).get調定額表記()), 0);
         }
         if (納入通知書期情報リスト.size() >= LIST_SIZE_2
                 && 納入通知書期情報リスト.get(LIST_SIZE_1).get期() > 0) {
             source.cover_keisanMeisaishoKiTitle3 = TSUGIKI_IKOU;
-            source.cover_keisanMeisaishoKibetsuNofuGaku3 = 納入通知書期情報リスト.get(LIST_SIZE_1).get調定額表記();
+            source.cover_keisanMeisaishoKibetsuNofuGaku3 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_1).get調定額表記()), 0);
         }
-        source.cover_yen3 = EN;
-        source.cover_yen4 = EN;
+//        source.cover_yen3 = EN;
+//        source.cover_yen4 = EN;
         source.cover_keisanmeisaishoNendo2 = 編集後本算定通知書共通情報.get賦課年度_年度なし();
         source.cover_pagerenban1 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-1")) : new RString("1-1");
         source.cover_pagerenban2 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-2")) : new RString("1-2");
@@ -176,9 +186,17 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor implements IHokenry
         source.cover_pagerenban4 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-4")) : new RString("1-4");
     }
 
+    private RString editDate(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return value;
+        }
+        return new RDate(value.toString()).wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
     private RString decimalFormatter_toコンマ区切りRString(Decimal 額, int count) {
         if (null == 額) {
-            return RString.EMPTY;
+            return new RString("0");
         }
         return DecimalFormatter.toコンマ区切りRString(額, count);
     }
@@ -370,13 +388,17 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor implements IHokenry
                 }
                 if (new RString("5").equals(特徴期別金額情報.get期())) {
                     納期別明細書特徴納付額２ = 特徴期別金額情報.get金額();
-                    source.cover_nokibetsuMeisaishoTokuchoNofuGaku1 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付額２, 0);
+                    source.cover_nokibetsuMeisaishoTokuchoNofuGaku2 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付額２, 0);
                 }
                 if (new RString("6").equals(特徴期別金額情報.get期())) {
                     納期別明細書特徴納付額３ = 特徴期別金額情報.get金額();
-                    source.cover_nokibetsuMeisaishoTokuchoNofuGaku1 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付額３, 0);
+                    source.cover_nokibetsuMeisaishoTokuchoNofuGaku3 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付額３, 0);
                 }
             }
+        } else {
+            source.cover_nokibetsuMeisaishoTokuchoNofuGaku1 = new RString("0");
+            source.cover_nokibetsuMeisaishoTokuchoNofuGaku2 = new RString("0");
+            source.cover_nokibetsuMeisaishoTokuchoNofuGaku3 = new RString("0");
         }
         納期別明細書特徴納付額１ = null == 納期別明細書特徴納付額１ ? Decimal.ZERO : 納期別明細書特徴納付額１;
         納期別明細書特徴納付額２ = null == 納期別明細書特徴納付額２ ? Decimal.ZERO : 納期別明細書特徴納付額２;
@@ -386,20 +408,25 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor implements IHokenry
                 if (特徴収入情報.get期月() == null) {
                     continue;
                 }
-                if (new RString("4").equals(特徴収入情報.get期月().get期())) {
+                if (INT4 == 特徴収入情報.get期月().get期AsInt()) {
                     納期別明細書特徴納付済額１ = 特徴収入情報.get収入額();
                     source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku1 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額１, 0);
                 }
-                if (new RString("5").equals(特徴収入情報.get期月().get期())) {
+                if (INT5 == 特徴収入情報.get期月().get期AsInt()) {
                     納期別明細書特徴納付済額２ = 特徴収入情報.get収入額();
                     source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku2 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額２, 0);
                 }
-                if (new RString("6").equals(特徴収入情報.get期月().get期())) {
+                if (INT6 == 特徴収入情報.get期月().get期AsInt()) {
                     納期別明細書特徴納付済額３ = 特徴収入情報.get収入額();
                     source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku3 = decimalFormatter_toコンマ区切りRString(納期別明細書特徴納付済額３, 0);
                 }
             }
+        } else {
+            source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku1 = new RString("0");
+            source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku2 = new RString("0");
+            source.cover_nokibetsuMeisaishoTokuchoNofuZumiGaku3 = new RString("0");
         }
+
         納期別明細書特徴納付済額１ = null == 納期別明細書特徴納付済額１ ? Decimal.ZERO : 納期別明細書特徴納付済額１;
         納期別明細書特徴納付済額２ = null == 納期別明細書特徴納付済額２ ? Decimal.ZERO : 納期別明細書特徴納付済額２;
         納期別明細書特徴納付済額３ = null == 納期別明細書特徴納付済額３ ? Decimal.ZERO : 納期別明細書特徴納付済額３;
@@ -423,55 +450,67 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor implements IHokenry
 
         if (納入通知書期情報リスト.size() >= LIST_SIZE_1) {
             source.cover_nokibetsuMeisaishoKi1 = new RString("第").concat(納入通知書期情報リスト.get(0).get期表記()).concat(new RString("期"));
-            source.cover_nokibetsuMeisaishoFuchoNofuGaku1 = 納入通知書期情報リスト.get(0).get調定額表記();
-            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku1 = 納入通知書期情報リスト.get(0).get収入額表記();
-            source.cover_nokibetsuMeisaishoFuchoSaGaku1 = 納入通知書期情報リスト.get(0).get差額表記();
+            source.cover_nokibetsuMeisaishoFuchoNofuGaku1 = decimalFormatter_toコンマ区切りRString(rstringToDecimal(納入通知書期情報リスト.get(0).get調定額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku1 = decimalFormatter_toコンマ区切りRString(rstringToDecimal(納入通知書期情報リスト.get(0).get収入額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoSaGaku1 = decimalFormatter_toコンマ区切りRString(rstringToDecimal(納入通知書期情報リスト.get(0).get差額表記()), 0);
             source.cover_nokibetsuMeisaishoNokigen1 = 納入通知書期情報リスト.get(0).get納期限表記();
         }
         if (納入通知書期情報リスト.size() >= LIST_SIZE_2) {
             source.cover_nokibetsuMeisaishoKi2 = new RString("第").concat(納入通知書期情報リスト.get(1).get期表記()).concat(new RString("期"));
-            source.cover_nokibetsuMeisaishoFuchoNofuGaku2 = 納入通知書期情報リスト.get(1).get調定額表記();
-            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku2 = 納入通知書期情報リスト.get(1).get収入額表記();
-            source.cover_nokibetsuMeisaishoFuchoSaGaku2 = 納入通知書期情報リスト.get(1).get差額表記();
+            source.cover_nokibetsuMeisaishoFuchoNofuGaku2 = decimalFormatter_toコンマ区切りRString(rstringToDecimal(納入通知書期情報リスト.get(1).get調定額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku2 = decimalFormatter_toコンマ区切りRString(rstringToDecimal(納入通知書期情報リスト.get(1).get収入額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoSaGaku2 = decimalFormatter_toコンマ区切りRString(rstringToDecimal(納入通知書期情報リスト.get(1).get差額表記()), 0);
             source.cover_nokibetsuMeisaishoNokigen2 = 納入通知書期情報リスト.get(1).get納期限表記();
         }
         if (納入通知書期情報リスト.size() >= LIST_SIZE_3) {
             source.cover_nokibetsuMeisaishoKi3 = new RString("第").concat(納入通知書期情報リスト.get(2).get期表記()).concat(new RString("期"));
-            source.cover_nokibetsuMeisaishoFuchoNofuGaku3 = 納入通知書期情報リスト.get(2).get調定額表記();
-            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku3 = 納入通知書期情報リスト.get(2).get収入額表記();
-            source.cover_nokibetsuMeisaishoFuchoSaGaku3 = 納入通知書期情報リスト.get(2).get差額表記();
+            source.cover_nokibetsuMeisaishoFuchoNofuGaku3 = decimalFormatter_toコンマ区切りRString(rstringToDecimal(納入通知書期情報リスト.get(2).get調定額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku3 = decimalFormatter_toコンマ区切りRString(rstringToDecimal(納入通知書期情報リスト.get(2).get収入額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoSaGaku3 = decimalFormatter_toコンマ区切りRString(rstringToDecimal(納入通知書期情報リスト.get(2).get差額表記()), 0);
             source.cover_nokibetsuMeisaishoNokigen3 = 納入通知書期情報リスト.get(2).get納期限表記();
         }
         if (納入通知書期情報リスト.size() >= LIST_SIZE_4) {
             source.cover_nokibetsuMeisaishoKi4 = new RString("第").
                     concat(納入通知書期情報リスト.get(LIST_SIZE_3).get期表記()).concat(new RString("期"));
-            source.cover_nokibetsuMeisaishoFuchoNofuGaku4 = 納入通知書期情報リスト.get(LIST_SIZE_3).get調定額表記();
-            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku4 = 納入通知書期情報リスト.get(LIST_SIZE_3).get収入額表記();
-            source.cover_nokibetsuMeisaishoFuchoSaGaku4 = 納入通知書期情報リスト.get(LIST_SIZE_3).get差額表記();
+            source.cover_nokibetsuMeisaishoFuchoNofuGaku4 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_3).get調定額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku4 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_3).get収入額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoSaGaku4 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_3).get差額表記()), 0);
             source.cover_nokibetsuMeisaishoNokigen4 = 納入通知書期情報リスト.get(LIST_SIZE_3).get納期限表記();
         }
         if (納入通知書期情報リスト.size() >= LIST_SIZE_5) {
             source.cover_nokibetsuMeisaishoKi5 = new RString("第").
                     concat(納入通知書期情報リスト.get(LIST_SIZE_4).get期表記()).concat(new RString("期"));
-            source.cover_nokibetsuMeisaishoFuchoNofuGaku5 = 納入通知書期情報リスト.get(LIST_SIZE_4).get調定額表記();
-            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku5 = 納入通知書期情報リスト.get(LIST_SIZE_4).get収入額表記();
-            source.cover_nokibetsuMeisaishoFuchoSaGaku5 = 納入通知書期情報リスト.get(LIST_SIZE_4).get差額表記();
+            source.cover_nokibetsuMeisaishoFuchoNofuGaku5 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_4).get調定額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku5 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_4).get収入額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoSaGaku5 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_4).get差額表記()), 0);
             source.cover_nokibetsuMeisaishoNokigen5 = 納入通知書期情報リスト.get(LIST_SIZE_4).get納期限表記();
         }
         if (納入通知書期情報リスト.size() >= LIST_SIZE_6) {
             source.cover_nokibetsuMeisaishoKi6 = new RString("第").
                     concat(納入通知書期情報リスト.get(LIST_SIZE_5).get期表記()).concat(new RString("期"));
-            source.cover_nokibetsuMeisaishoFuchoNofuGaku6 = 納入通知書期情報リスト.get(LIST_SIZE_5).get調定額表記();
-            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku6 = 納入通知書期情報リスト.get(LIST_SIZE_5).get収入額表記();
-            source.cover_nokibetsuMeisaishoFuchoSaGaku6 = 納入通知書期情報リスト.get(LIST_SIZE_5).get差額表記();
+            source.cover_nokibetsuMeisaishoFuchoNofuGaku6 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_5).get調定額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku6 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_5).get収入額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoSaGaku6 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_5).get差額表記()), 0);
             source.cover_nokibetsuMeisaishoNokigen6 = 納入通知書期情報リスト.get(LIST_SIZE_5).get納期限表記();
         }
         if (納入通知書期情報リスト.size() >= LIST_SIZE_7) {
             source.cover_nokibetsuMeisaishoKi7 = new RString("第").
                     concat(納入通知書期情報リスト.get(LIST_SIZE_6).get期表記()).concat(new RString("期"));
-            source.cover_nokibetsuMeisaishoFuchoNofuGaku7 = 納入通知書期情報リスト.get(LIST_SIZE_6).get調定額表記();
-            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku7 = 納入通知書期情報リスト.get(LIST_SIZE_6).get収入額表記();
-            source.cover_nokibetsuMeisaishoFuchoSaGaku7 = 納入通知書期情報リスト.get(LIST_SIZE_6).get差額表記();
+            source.cover_nokibetsuMeisaishoFuchoNofuGaku7 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_6).get調定額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku7 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_6).get収入額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoSaGaku7 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_6).get差額表記()), 0);
             source.cover_nokibetsuMeisaishoNokigen7 = 納入通知書期情報リスト.get(LIST_SIZE_6).get納期限表記();
         }
         if (納入通知書期情報リスト.size() >= LIST_SIZE_8) {
@@ -479,63 +518,50 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor implements IHokenry
                 source.cover_nokibetsuMeisaishoKi8 = new RString("第").
                         concat(納入通知書期情報リスト.get(LIST_SIZE_7).get期表記()).concat(new RString("期"));
             }
-            source.cover_nokibetsuMeisaishoFuchoNofuGaku8 = 納入通知書期情報リスト.get(LIST_SIZE_7).get調定額表記();
-            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku8 = 納入通知書期情報リスト.get(LIST_SIZE_7).get収入額表記();
-            source.cover_nokibetsuMeisaishoFuchoSaGaku8 = 納入通知書期情報リスト.get(LIST_SIZE_7).get差額表記();
+            source.cover_nokibetsuMeisaishoFuchoNofuGaku8 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_7).get調定額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku8 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_7).get収入額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoSaGaku8 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_7).get差額表記()), 0);
             source.cover_nokibetsuMeisaishoNokigen8 = 納入通知書期情報リスト.get(LIST_SIZE_7).get納期限表記();
         }
         if (納入通知書期情報リスト.size() >= LIST_SIZE_9) {
             source.cover_nokibetsuMeisaishoKi9 = new RString("第").
                     concat(納入通知書期情報リスト.get(LIST_SIZE_8).get期表記()).concat(new RString("期"));
-            source.cover_nokibetsuMeisaishoFuchoNofuGaku9 = 納入通知書期情報リスト.get(LIST_SIZE_8).get調定額表記();
-            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku9 = 納入通知書期情報リスト.get(LIST_SIZE_8).get収入額表記();
-            source.cover_nokibetsuMeisaishoFuchoSaGaku9 = 納入通知書期情報リスト.get(LIST_SIZE_8).get差額表記();
+            source.cover_nokibetsuMeisaishoFuchoNofuGaku9 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_8).get調定額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku9 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_8).get収入額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoSaGaku9 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_8).get差額表記()), 0);
             source.cover_nokibetsuMeisaishoNokigen9 = 納入通知書期情報リスト.get(LIST_SIZE_8).get納期限表記();
         }
         if (納入通知書期情報リスト.size() >= LIST_SIZE_10) {
             source.cover_nokibetsuMeisaishoKi10 = new RString("第").
                     concat(納入通知書期情報リスト.get(LIST_SIZE_9).get期表記()).concat(new RString("期"));
-            source.cover_nokibetsuMeisaishoFuchoNofuGaku10 = 納入通知書期情報リスト.get(LIST_SIZE_9).get調定額表記();
-            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku10 = 納入通知書期情報リスト.get(LIST_SIZE_9).get収入額表記();
-            source.cover_nokibetsuMeisaishoFuchoSaGaku10 = 納入通知書期情報リスト.get(LIST_SIZE_9).get差額表記();
+            source.cover_nokibetsuMeisaishoFuchoNofuGaku10 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_9).get調定額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku10 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_9).get収入額表記()), 0);
+            source.cover_nokibetsuMeisaishoFuchoSaGaku10 = decimalFormatter_toコンマ区切りRString(
+                    rstringToDecimal(納入通知書期情報リスト.get(LIST_SIZE_9).get差額表記()), 0);
             source.cover_nokibetsuMeisaishoNokigen10 = 納入通知書期情報リスト.get(LIST_SIZE_9).get納期限表記();
         }
-
+        Decimal 調定額Count = Decimal.ZERO;
+        Decimal 収入額Count = Decimal.ZERO;
+        Decimal 差額Count = Decimal.ZERO;
+        for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
+            調定額Count = 調定額Count.add(rstringToDecimal(納入通知書期情報.get調定額表記()));
+            収入額Count = 収入額Count.add(rstringToDecimal(納入通知書期情報.get収入額表記()));
+            差額Count = 差額Count.add(rstringToDecimal(納入通知書期情報.get差額表記()));
+        }
         source.cover_nokibetsuMeisaishoFuchoNofuGaku11
-                = decimalFormatter_toコンマ区切りRString(
-                        rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuGaku1)
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuGaku2))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuGaku3))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuGaku4))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuGaku5))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuGaku6))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuGaku7))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuGaku8))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuGaku9))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuGaku10)), 0);
+                = decimalFormatter_toコンマ区切りRString(調定額Count, 0);
         source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku11
-                = decimalFormatter_toコンマ区切りRString(
-                        rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku1)
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku2))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku3))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku4))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku5))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku6))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku7))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku8))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku9))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoNofuZumiGaku10)), 0);
+                = decimalFormatter_toコンマ区切りRString(収入額Count, 0);
         source.cover_nokibetsuMeisaishoFuchoSaGaku11
-                = decimalFormatter_toコンマ区切りRString(
-                        rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoSaGaku1)
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoSaGaku2))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoSaGaku3))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoSaGaku4))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoSaGaku5))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoSaGaku6))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoSaGaku7))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoSaGaku8))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoSaGaku9))
-                        .add(rstringToDecimal(source.cover_nokibetsuMeisaishoFuchoSaGaku10)), 0);
+                = decimalFormatter_toコンマ区切りRString(差額Count, 0);
     }
+
 }

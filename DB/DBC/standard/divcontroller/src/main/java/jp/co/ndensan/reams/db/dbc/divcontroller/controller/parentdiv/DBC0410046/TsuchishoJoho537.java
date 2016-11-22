@@ -7,19 +7,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410046
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120820.DBC120820_JukyushaTotsugoKekkaInParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410046.TsuchishoJoho537Div;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
-import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 受給者情報突合結果情報取込のクラスです。
@@ -37,10 +38,7 @@ public class TsuchishoJoho537 {
      * @return ResponseData
      */
     public ResponseData<TsuchishoJoho537Div> onLoad(TsuchishoJoho537Div div) {
-        KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
-                KokuhorenDataTorikomiViewStateClass.class);
-
-        div.getCcdKokurenJohoTorikomi().initialize(parmater, SubGyomuCode.DBC介護給付, REPORTID);
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, REPORTID);
         return ResponseData.of(div).respond();
     }
 
@@ -51,6 +49,8 @@ public class TsuchishoJoho537 {
      * @return ResponseData
      */
     public ResponseData<DBC120820_JukyushaTotsugoKekkaInParameter> onClick_btnExcute(TsuchishoJoho537Div div) {
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120820_JukyushaTotsugoKekkaIn");
+        FlowParameterAccessor.merge(fp);
         if (setBatchParameter(div) != null) {
             return ResponseData.of(setBatchParameter(div)).respond();
         }
@@ -59,8 +59,8 @@ public class TsuchishoJoho537 {
 
     private DBC120820_JukyushaTotsugoKekkaInParameter setBatchParameter(TsuchishoJoho537Div div) {
 
-        if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
-            Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
+        if (div.getCcdChohyoShutsuryokujun().get出力順ID() != null) {
+            Long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
             IOutputOrder iOutputOrder = finder.get出力順(
                     SubGyomuCode.DBC介護給付,
@@ -71,9 +71,10 @@ public class TsuchishoJoho537 {
                 manager.save前回出力順(iOutputOrder);
             }
             DBC120820_JukyushaTotsugoKekkaInParameter parameter = new DBC120820_JukyushaTotsugoKekkaInParameter();
-            RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
+            RDate 処理年月 = RDate.getNowDate();
             parameter.set処理年月(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
             parameter.set出力順ID(出力順ID);
+            parameter.setLoginUserId(ControlDataHolder.getUserId());
             return parameter;
         }
         return null;

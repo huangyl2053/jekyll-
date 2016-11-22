@@ -50,9 +50,6 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
 
     @Override
     protected void defineFlow() {
-        if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-            executeStep(委員_追加資料鑑);
-        }
         if (選択.equals(getParameter().getChohyoIin_tuutishoFalg())) {
             executeStep(委員_審査会開催通知書);
         }
@@ -90,6 +87,9 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
                 executeStep(委員_その他資料);
             }
             主治医意見書Flow();
+            if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+                executeStep(委員_追加資料鑑);
+            }
         }
     }
 

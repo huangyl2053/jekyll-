@@ -86,17 +86,7 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
             do旧市町村コードの取得(変換基準日);
         }
 
-        List<HihokenshaAndDaichouAndAtenaEntity> list = mapper.select被保険者And宛名情報();
-        for (HihokenshaAndDaichouAndAtenaEntity entity : list) {
-            if (null != entity.getDaicho() && null != entity.getAtena()
-                    && null != entity.getDaicho().getHihokenshaNo() && null != entity.getAtena().getShikibetsuCode()) {
-                do被保険者宛名情報を被保険者一時TBLに登録(entity);
-            } else if (null == entity.getDaicho() || null == entity.getDaicho().getHihokenshaNo()) {
-                do被保険者情報が取得できなかったデータをエラー登録する(entity.getHihokensha());
-            } else if (null == entity.getAtena() || null == entity.getAtena().getShikibetsuCode()) {
-                do宛名情報が取得できなかったデータをエラー登録する(entity.getHihokensha());
-            }
-        }
+        do被保険者宛名情報取得();
     }
 
     private void do旧市町村コードの取得(FlexibleDate 変換基準日) {
@@ -141,6 +131,23 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
 
     private void do変換被保険者番号の更新() {
         mapper.update被保険者番号WithEmpty変換被保険者番号();
+    }
+
+    /**
+     * 被保険者・宛名情報取得
+     */
+    public void do被保険者宛名情報取得() {
+        List<HihokenshaAndDaichouAndAtenaEntity> list = mapper.select被保険者And宛名情報();
+        for (HihokenshaAndDaichouAndAtenaEntity entity : list) {
+            if (null != entity.getDaicho() && null != entity.getAtena()
+                    && null != entity.getDaicho().getHihokenshaNo() && null != entity.getAtena().getShikibetsuCode()) {
+                do被保険者宛名情報を被保険者一時TBLに登録(entity);
+            } else if (null == entity.getDaicho() || null == entity.getDaicho().getHihokenshaNo()) {
+                do被保険者情報が取得できなかったデータをエラー登録する(entity.getHihokensha());
+            } else if (null == entity.getAtena() || null == entity.getAtena().getShikibetsuCode()) {
+                do宛名情報が取得できなかったデータをエラー登録する(entity.getHihokensha());
+            }
+        }
     }
 
     private void do被保険者宛名情報を被保険者一時TBLに登録(HihokenshaAndDaichouAndAtenaEntity entity) {

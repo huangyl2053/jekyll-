@@ -21,6 +21,7 @@ public class TokuchoInfoFDownloadInfo {
     private RString 情報名;
     private RString ファイル名;
     private RDateTime 作成日時;
+    private boolean ファイル存在;
 
     /**
      * コンストラクタです。
@@ -34,10 +35,13 @@ public class TokuchoInfoFDownloadInfo {
      * @param 情報名 RString
      * @param ファイル名 RString
      * @param 作成日時 RDateTime
+     * @param ファイル存在 boolean
      */
-    public TokuchoInfoFDownloadInfo(RString 情報名, RString ファイル名, RDateTime 作成日時) {
+    public TokuchoInfoFDownloadInfo(RString 情報名, RString ファイル名, RDateTime 作成日時,
+            boolean ファイル存在) {
         this.情報名 = 情報名;
         this.ファイル名 = ファイル名;
         this.作成日時 = 作成日時;
+        this.ファイル存在 = ファイル存在;
     }
 }

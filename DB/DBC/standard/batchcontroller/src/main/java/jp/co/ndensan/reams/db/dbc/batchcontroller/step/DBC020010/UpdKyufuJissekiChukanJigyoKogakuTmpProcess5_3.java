@@ -29,10 +29,14 @@ public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3 extends BatchProcessB
             + "select高額介護サービス費給付対象者合計");
     private KyufuJissekiKihonKogakuProcessParameter processParameter;
     private IKogakuKaigoServicehiKyufugakuSanshutsuMapper mapper;
+    private TempKyufujissekiTyukannJigyoEntity beforeEntity;
+    private Decimal 高額介護サービス費;
 
     @Override
     protected void initialize() {
         mapper = getMapper(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
+        beforeEntity = null;
+        高額介護サービス費 = Decimal.ZERO;
     }
 
     @Override
@@ -51,20 +55,33 @@ public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3 extends BatchProcessB
     protected void process(UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity3 entity) {
         TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時５ = entity.get給付実績中間事業高額一時５();
         DbT3055KogakuKyufuTaishoshaGokeiEntity 給付対象者合計 = entity.get高額介護サービス費給付対象者合計();
-        Decimal 高額介護サービス費 = Decimal.ZERO;
-        Decimal 給付実績中間事業高額一時５_高額介護サービス費 = 給付実績中間事業高額一時５.getKogakuKaigoServicehi();
-        Decimal 高額支給額 = Decimal.ZERO;
-        if (給付対象者合計 != null) {
-            高額支給額 = 給付対象者合計.getKogakuShikyuGaku();
+        if (給付対象者合計 == null) {
+            return;
         }
-        if (給付実績中間事業高額一時５_高額介護サービス費 != null) {
-            高額介護サービス費 = 給付実績中間事業高額一時５_高額介護サービス費.add(高額支給額);
+        if (beforeEntity == null) {
+            beforeEntity = 給付実績中間事業高額一時５;
         }
-        給付実績中間事業高額一時５.setKogakuKaigoServicehi(高額介護サービス費);
-        mapper.update給付実績中間事業高額一時(給付実績中間事業高額一時５);
+        if (!getキー(beforeEntity).equals(getキー(給付実績中間事業高額一時５))) {
+            beforeEntity.setKogakuKaigoServicehi(高額介護サービス費);
+            mapper.update給付実績中間事業高額一時(beforeEntity);
+            高額介護サービス費 = Decimal.ZERO;
+        }
+        Decimal 高額支給額 = 給付対象者合計.getKogakuShikyuGaku();
+        高額介護サービス費 = 高額介護サービス費.add(高額支給額 == null ? Decimal.ZERO : 高額支給額);
     }
 
     @Override
     protected void afterExecute() {
+        beforeEntity.setKogakuKaigoServicehi(高額介護サービス費);
+        mapper.update給付実績中間事業高額一時(beforeEntity);
+    }
+
+    private RString getキー(TempKyufujissekiTyukannJigyoEntity entity) {
+        return entity.getInputShikibetsuNo().getColumnValue().
+                concat(entity.getHiHokenshaNo().getColumnValue()).
+                concat(entity.getServiceTeikyoYM().toDateString()).
+                concat(entity.getShokisaiHokenshaNo().getColumnValue()).
+                concat(entity.getJigyoshoNo().getColumnValue()).
+                concat(entity.getToshiNo());
     }
 }

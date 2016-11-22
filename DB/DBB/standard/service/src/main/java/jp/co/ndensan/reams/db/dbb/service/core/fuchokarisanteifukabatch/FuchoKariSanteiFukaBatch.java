@@ -47,6 +47,7 @@ public class FuchoKariSanteiFukaBatch {
     private static final RString 仮算定賦課方法_03 = new RString("03");
     private static final RString 仮算定賦課方法_04 = new RString("04");
     private static final RString 仮算定賦課方法_05 = new RString("05");
+    private static final RString 仮算定賦課方法_06 = new RString("06");
     private static final RString 仮算定賦課方法_10 = new RString("10");
     private static final RString 仮算定賦課方法_11 = new RString("11");
     private static final RString 境界層区分_非該当 = new RString("0");
@@ -54,6 +55,7 @@ public class FuchoKariSanteiFukaBatch {
     private static final int NUM_1 = 1;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
+    private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_31 = 31;
     private static final int NUM_100 = 100;
@@ -94,6 +96,12 @@ public class FuchoKariSanteiFukaBatch {
         賦課情報.setShikakuShutokuJiyu(資格情報.get資格取得事由コード());
         賦課情報.setShikakuSoshitsuYMD(資格情報.get資格喪失年月日());
         賦課情報.setShikakuSoshitsuJiyu(資格情報.get資格喪失事由コード());
+
+        賦課情報.setSeihofujoShurui(RString.EMPTY);
+        賦課情報.setSeihoKaishiYMD(FlexibleDate.EMPTY);
+        賦課情報.setSeihoHaishiYMD(FlexibleDate.EMPTY);
+        賦課情報.setRonenKaishiYMD(FlexibleDate.EMPTY);
+        賦課情報.setRonenHaishiYMD(FlexibleDate.EMPTY);
         FlexibleDate 賦課年度開始日 = new FlexibleDate(調定年度.getYearValue(), NUM_4, NUM_1);
         FlexibleDate 賦課年度終了日 = new FlexibleDate(調定年度.getYearValue() + NUM_1, NUM_3, NUM_31);
         FlexibleDate 生保情報_受給開始日;
@@ -200,7 +208,9 @@ public class FuchoKariSanteiFukaBatch {
         List<Decimal> 普徴期別金額リスト = 調定計算(調定年度, 更正前賦課情報, 計算用保険料, 区分, 前年度賦課情報);
         賦課情報.setFuKibetsuGaku01(普徴期別金額リスト.get(0));
         賦課情報.setFuKibetsuGaku02(普徴期別金額リスト.get(1));
-        賦課情報.setFuKibetsuGaku03(普徴期別金額リスト.get(2));
+        if (普徴期別金額リスト.size() == NUM_3) {
+            賦課情報.setFuKibetsuGaku03(普徴期別金額リスト.get(2));
+        }
         Decimal 普徴期別金額合計 = sum普徴期別金額(普徴期別金額リスト);
         if (0 < 普徴期別金額合計.intValue() && 口座Entity != null && 口座Entity.getUaT0310KozaEntity() != null
                 && 口座Entity.getUaT0310KozaEntity().getKozaId() != 0L) {
@@ -230,10 +240,13 @@ public class FuchoKariSanteiFukaBatch {
         Decimal 金額リスト0 = Decimal.ZERO;
         Decimal 金額リスト1 = Decimal.ZERO;
         RDate 調定年度開始日 = new RDate(調定年度.getYearValue(), NUM_4, NUM_1);
+        RDate 前年度開始日 = new RDate(調定年度.getYearValue() - NUM_1, NUM_4, NUM_1);
         RString 仮算定端数調整有無 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定端数調整有無, 調定年度開始日, SubGyomuCode.DBB介護賦課);
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度);
         KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
-        int 期 = 期月リスト.filtered仮算定期間().toList().size();
+        int 期 = 期月リスト.get最終法定納期().get期AsInt();
+        Decimal 期別端数 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, 調定年度開始日,
+                SubGyomuCode.DBB介護賦課).toString());
         if (区分_新規.equals(区分)) {
             int 納期数 = 0;
             RString 仮算定賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
@@ -244,19 +257,17 @@ public class FuchoKariSanteiFukaBatch {
                 月期対応取得_普徴 = new FuchoKiUtil(調定年度.minusYear(1));
                 期月リスト = 月期対応取得_普徴.get期月リスト();
                 納期数 = 期月リスト.get最終法定納期().get期AsInt();
-            } else {
-                納期数 = get賦課納期数(納期数, 調定年度開始日, 前年度賦課情報, 期, 期月リスト);
+            } else if (仮算定賦課方法_06.equals(仮算定賦課方法)) {
+                納期数 = get賦課納期数(納期数, 前年度開始日, 前年度賦課情報, 期, 期月リスト);
             }
             if (仮算定賦課方法_01.equals(仮算定賦課方法)) {
-                Decimal 期別端数 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, 調定年度開始日,
-                        SubGyomuCode.DBB介護賦課).toString());
                 Decimal 期別納付額_端数調整 = 計算用保険料.divide(期別端数).roundDownTo(0).multiply(期別端数);
                 金額リスト0 = 仮算定端数調整有無_あり.equals(仮算定端数調整有無) ? 計算用保険料.roundDownTo(0) : 期別納付額_端数調整;
                 金額リスト1 = 期別納付額_端数調整;
             } else {
                 Decimal 納付額 = 計算用保険料.multiply(期).divide(納期数).roundDownTo(0);
                 Decimal 期別納付額 = 納付額.divide(期).roundDownTo(0);
-                Decimal 期別納付額_端数調整 = 期別納付額;
+                Decimal 期別納付額_端数調整 = 期別納付額.divide(期別端数).roundDownTo(0).multiply(期別端数);
                 金額リスト0 = 仮算定端数調整有無_あり.equals(仮算定端数調整有無)
                         ? 期別納付額_端数調整.add(納付額).subtract(期別納付額_端数調整.multiply(期)) : 期別納付額_端数調整;
                 金額リスト1 = 期別納付額_端数調整;
@@ -276,8 +287,6 @@ public class FuchoKariSanteiFukaBatch {
                 }
             }
             Decimal 期別納付額 = 六月より前の普徴仮算定金額.divide(六月より前仮期数);
-            Decimal 期別端数 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, 調定年度開始日,
-                    SubGyomuCode.DBB介護賦課).toString());
             Decimal 期別納付額_端数調整 = 期別納付額.divide(期別端数).roundDownTo(0).multiply(期別端数);
             if (仮算定端数調整有無_あり.equals(仮算定端数調整有無)) {
                 金額リスト0 = 期別納付額_端数調整.add(六月より前の普徴仮算定金額).subtract(期別納付額_端数調整.multiply(六月より前仮期数));
@@ -287,6 +296,8 @@ public class FuchoKariSanteiFukaBatch {
                 金額リスト1 = 期別納付額_端数調整;
             }
         }
+        月期対応取得_普徴 = new FuchoKiUtil(調定年度);
+        期月リスト = 月期対応取得_普徴.get期月リスト();
         普徴期別金額リスト = set普徴期別金額リスト(普徴期別金額リスト, 期月リスト, 期, 金額リスト0, 金額リスト1);
         return 普徴期別金額リスト;
     }
@@ -294,13 +305,7 @@ public class FuchoKariSanteiFukaBatch {
     private List<Decimal> set普徴期別金額リスト(List<Decimal> 普徴期別金額リスト, KitsukiList 期月リスト, int 期,
             Decimal 金額リスト0, Decimal 金額リスト1) {
         List<Kitsuki> 期月 = 期月リスト.filtered仮算定期間().toList();
-        if (期月.get(0).get月AsInt() == NUM_4) {
-            普徴期別金額リスト.add(金額リスト0);
-            普徴期別金額リスト.add(金額リスト1);
-            if (期 == NUM_3) {
-                普徴期別金額リスト.add(金額リスト1);
-            }
-        } else {
+        if (期月.get(0).get月AsInt() == NUM_4 || 期月.get(0).get月AsInt() == NUM_5) {
             普徴期別金額リスト.add(金額リスト0);
             普徴期別金額リスト.add(金額リスト1);
             if (期 == NUM_3) {
@@ -342,14 +347,14 @@ public class FuchoKariSanteiFukaBatch {
         普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku13());
         普徴期別金額list.add(前年度賦課情報.getFuKibetsuGaku14());
         for (int i = 1; i <= 期; i++) {
-            boolean flag = true;
+            boolean flag = false;
             for (Kitsuki kitsuki : 期月リスト.get期の月(i)) {
                 int 月 = kitsuki.get月AsInt();
                 Decimal 月処理区分 = new Decimal(月処理区分list.get(月 - 1).toString());
                 Decimal 普徴期別金額 = 普徴期別金額list.get(i - 1) == null ? Decimal.ZERO : 普徴期別金額list.get(i - 1);
                 if (月処理区分.compareTo(月処理区分_5) <= 0
                         && 普徴期別金額.compareTo(Decimal.ZERO) > 0) {
-                    flag = false;
+                    flag = true;
                 }
             }
             if (flag) {

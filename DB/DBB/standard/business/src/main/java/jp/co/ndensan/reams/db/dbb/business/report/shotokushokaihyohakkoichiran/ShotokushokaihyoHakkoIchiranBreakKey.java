@@ -59,6 +59,12 @@ public class ShotokushokaihyoHakkoIchiranBreakKey extends PageBreaker<Shotokusho
                 && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
             flag = true;
         }
+        flag = setflag(currentSource, nextSource, flag);
+        return flag;
+    }
+
+    private boolean setflag(ReportLineRecord<ShotokushokaihyoHakkoIchiranSource> currentSource,
+            ReportLineRecord<ShotokushokaihyoHakkoIchiranSource> nextSource, boolean flag) {
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.生年月日.get項目ID())
                 && !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4)) {
             flag = true;
@@ -73,6 +79,9 @@ public class ShotokushokaihyoHakkoIchiranBreakKey extends PageBreaker<Shotokusho
         }
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.前住所コード.get項目ID())
                 && !currentSource.getSource().zenjushoCode.equals(nextSource.getSource().zenjushoCode)) {
+            flag = true;
+        }
+        if (!currentSource.getSource().kouhoshakubun.equals(nextSource.getSource().kouhoshakubun)) {
             flag = true;
         }
         return flag;

@@ -867,7 +867,11 @@ public class MainPanelHandler {
                 || ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法データ.get徴収方法3月())) {
             isNeedSet4月から普徴 = true;
         }
+        徴収方法月設定(isNeedSet4月から普徴, 徴収方法データ);
+    }
 
+    private void 徴収方法月設定(boolean isNeedSet4月から普徴,
+            jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho 徴収方法データ) {
         if (isNeedSet4月から普徴) {
             徴収方法翌4月 = コード_3;
             徴収方法翌5月 = コード_3;

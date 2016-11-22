@@ -8,14 +8,14 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求食事費用を管理するクラスです。
@@ -305,6 +305,15 @@ public class ShokanShokujiHiyo
     }
 
     /**
+     * 差額金額を返します。
+     *
+     * @return 差額金額
+     */
+    public int get差額金額() {
+        return entity.getSagakuKingaku();
+    }
+
+    /**
      * {@link DbT3043ShokanShokujiHiyoEntity}のクローンを返します。
      *
      * @return {@link DbT3043ShokanShokujiHiyoEntity}のクローン
@@ -325,8 +334,7 @@ public class ShokanShokujiHiyo
     }
 
     /**
-     * 保持する償還払請求食事費用を削除対象とします。<br/>
-     * {@link DbT3043ShokanShokujiHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払請求食事費用を削除対象とします。<br/> {@link DbT3043ShokanShokujiHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanShokujiHiyo}
      */
@@ -340,6 +348,28 @@ public class ShokanShokujiHiyo
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShokanShokujiHiyo(deletedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求食事費用を削除対象とします。<br/> {@link DbT3043ShokanShokujiHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return modified対象処理実施後の{@link ShokanShukei}
+     */
+    public ShokanShokujiHiyo modified() {
+        DbT3043ShokanShokujiHiyoEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new ShokanShokujiHiyo(modifiedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求食事費用をinsert対象とします。<br/> {@link DbT3043ShokanShokujiHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であればinsert状態にします。
+     *
+     * @return 修正対象処理実施後の{@link ShokanShokujiHiyo}
+     */
+    public ShokanShokujiHiyo added() {
+        DbT3043ShokanShokujiHiyoEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Added);
+        return new ShokanShokujiHiyo(modifiedEntity, id);
     }
 
     /**

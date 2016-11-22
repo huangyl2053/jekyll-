@@ -24,21 +24,9 @@ public enum KaigoHokenryogakuOutPutOrder implements IReportItems {
      */
     町域コード(new RString("0002"), new RString("町域コード"), new RString("\"atesaki_choikiCode\"")),
     /**
-     * 番地コード1
+     * 番地コード
      */
-    番地コード1(new RString("0003"), new RString("番地コード1"), new RString("\"atesaki_banchiCode1\"")),
-    /**
-     * 番地コード2
-     */
-    番地コード2(new RString("0003"), new RString("番地コード2"), new RString("\"atesaki_banchiCode2\"")),
-    /**
-     * 番地コード3
-     */
-    番地コード3(new RString("0003"), new RString("番地コード3"), new RString("\"atesaki_banchiCode3\"")),
-    /**
-     * 番地コード4
-     */
-    番地コード4(new RString("0003"), new RString("番地コード4"), new RString("\"atesaki_banchiCode4\"")),
+    番地コード(new RString("0003"), new RString("番地コード"), new RString("\"atesaki_banchiCode\"")),
     /**
      * 行政区コード
      */
@@ -86,7 +74,7 @@ public enum KaigoHokenryogakuOutPutOrder implements IReportItems {
     /**
      * 年金コード
      */
-    年金コード(new RString("0206"), new RString("年金コード"), new RString("\"ueT0511after_nenkinCode\"")),
+    年金コード(new RString("0206"), new RString("年金コード"), new RString("\"dbT2015KeisangoJoho_honNenkinCode\"")),
     /**
      * 納組コード
      */
@@ -98,7 +86,7 @@ public enum KaigoHokenryogakuOutPutOrder implements IReportItems {
     /**
      * 生活保護種別
      */
-    生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("\"生活保護区分\"")),
+    生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("\"dbT2015KeisangoJoho_seihofujoShurui\"")),
     /**
      * 現金口座区分
      */
@@ -106,13 +94,11 @@ public enum KaigoHokenryogakuOutPutOrder implements IReportItems {
     /**
      * 8月特徴開始者
      */
-    //QA1854 確認中
-    八月特徴開始者(new RString("0220"), new RString("八月特徴開始者"), new RString("\"dbT2015KeisangoJoho_sakuseiShoriName\"")),
+    八月特徴開始者(new RString("0220"), new RString("8月特徴開始者"), new RString("\"特徴8月開始者区分\"")),
     /**
      * 10月特徴開始者
      */
-    //QA1854 確認中
-    十月特徴開始者(new RString("0219"), new RString("十月特徴開始者"), new RString("\"dbT2015KeisangoJoho_sakuseiShoriName\""));
+    十月特徴開始者(new RString("0219"), new RString("10月特徴開始者"), new RString("\"特徴10月開始者区分\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

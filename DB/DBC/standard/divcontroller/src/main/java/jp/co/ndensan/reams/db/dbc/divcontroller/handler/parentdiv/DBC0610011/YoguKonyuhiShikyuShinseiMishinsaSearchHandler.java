@@ -71,7 +71,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         setグリッド(resultList);
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getBtnIkkatsuShinsa().setDisabled(false);
         } else {
             div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getBtnIkkatsuShinsa().setDisabled(true);

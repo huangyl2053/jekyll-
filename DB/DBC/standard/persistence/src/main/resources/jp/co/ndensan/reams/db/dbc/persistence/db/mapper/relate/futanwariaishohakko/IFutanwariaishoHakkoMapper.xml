@@ -196,9 +196,10 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
             resultMap="resultMap_RiyoshaFutanWariaiShoTemp" fetchSize="500">
         SELECT
-            *
+            A.*,
+            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
         FROM
-            "RiyoshaFutanwariaishoTemp"  
+            "RiyoshaFutanwariaishoTemp"  as A
        <if test="出力順!= null">
              ${出力順}
        </if>    
@@ -239,7 +240,7 @@
         <result property="事業対象者受給者区分" column="kubun"
             typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>     
         <result property="証記載保険者番号" column="shokisaiHihokenshaNo"
-            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>    
+            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>      
         <association property="利用者負担割合" resultMap="NewResultMap_DbT3113RiyoshaFutanWariaiEntity"/>
         <association property="被保台帳" resultMap="NewResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="証交付回収" resultMap="NewResultMap_DbT7037ShoKofuKaishuEntity"/>

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 総合事業費公費受給者別一覧情報 のバッチパラメータです
@@ -33,4 +34,6 @@ public class DBC120910_SogojigyohiKohiJukyushaInParameter extends BatchParameter
     private SaiShoriKubun saishoriKubun;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
     private Long shutsuryokujunId;
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 }

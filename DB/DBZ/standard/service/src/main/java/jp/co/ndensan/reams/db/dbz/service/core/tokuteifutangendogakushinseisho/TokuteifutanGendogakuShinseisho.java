@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -155,14 +157,17 @@ public class TokuteifutanGendogakuShinseisho {
             hihokenshaKihonEntity.set電話番号(renrakusaki1.value());
         }
         RStringBuilder jusho = new RStringBuilder();
-        if (uaft200Entity.getJusho() != null) {
-            jusho = jusho.append(uaft200Entity.getJusho().value());
+        AtenaJusho atenaJusho = uaft200Entity.getJusho();
+        if (atenaJusho != null) {
+            jusho = jusho.append(atenaJusho.value());
         }
-        if (uaft200Entity.getBanchi() != null) {
-            jusho = jusho.append(uaft200Entity.getBanchi().value());
+        AtenaBanchi atenaBanchi = uaft200Entity.getBanchi();
+        if (atenaBanchi != null) {
+            jusho = jusho.append(atenaBanchi.value());
         }
-        if (uaft200Entity.getKatagaki() != null) {
-            jusho = jusho.append(uaft200Entity.getKatagaki().value());
+        Katagaki katagakinew = uaft200Entity.getKatagaki();
+        if (katagakinew != null) {
+            jusho = jusho.append(katagakinew.value());
         }
         hihokenshaKihonEntity.set住所(jusho.toRString());
         hihokenshaKihonEntity.set住民種別コード(uaft200Entity.getJuminShubetsuCode());

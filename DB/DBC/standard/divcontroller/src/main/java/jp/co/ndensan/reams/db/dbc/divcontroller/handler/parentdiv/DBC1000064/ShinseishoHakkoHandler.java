@@ -74,7 +74,7 @@ public class ShinseishoHakkoHandler {
         div.getChkShinseisho().setSelectedItems(div.getChkShinseisho().getDataSource());
         div.getChkIchiranhyoCsv().setSelectedItems(div.getChkIchiranhyoCsv().getDataSource());
         div.getCcdBunshoBangoInput().initialize(ReportIdDBC.DBC100064.getReportId(), 作成日);
-        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100064.getReportId());
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100075.getReportId());
     }
 
     private List<KeyValueDataSource> get申請書発行_抽出条件() {

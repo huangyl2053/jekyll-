@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohakko.TsuchishoDataTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -24,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
         Report<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> {
 
+    private final KariSanteiTsuchiShoKyotsu 仮算定通知書情報;
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity;
     private final FlexibleYear 調定年度;
     private final YMDHMS 帳票作成日時;
@@ -31,10 +34,12 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
     private final List<RString> 出力項目リスト;
     private final List<RString> 改頁項目リスト;
     private final int 連番;
+    private final TsuchishoDataTempEntity entity;
 
     /**
      * コンストラクタです
      *
+     * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @param 編集後仮算定通知書共通情報entity EditedKariSanteiTsuchiShoKyotsu
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 YMDHMS
@@ -42,13 +47,15 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
      * @param 出力項目リスト List<RString>
      * @param 改頁項目リスト List<RString>
      * @param 連番 int
+     * @param entity TsuchishoDataTempEntity
      */
-    public TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(
+    public TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
             FlexibleYear 調定年度, YMDHMS 帳票作成日時, Association association,
             List<RString> 出力項目リスト,
             List<RString> 改頁項目リスト,
-            int 連番) {
+            int 連番, TsuchishoDataTempEntity entity) {
+        this.仮算定通知書情報 = 仮算定通知書情報;
         this.編集後仮算定通知書共通情報entity = 編集後仮算定通知書共通情報entity;
         this.調定年度 = 調定年度;
         this.帳票作成日時 = 帳票作成日時;
@@ -56,13 +63,43 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
         this.出力項目リスト = 出力項目リスト;
         this.改頁項目リスト = 改頁項目リスト;
         this.連番 = 連番;
+        this.entity = entity;
+    }
+
+    /**
+     * コンストラクタです
+     *
+     * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
+     * @param 編集後仮算定通知書共通情報entity EditedKariSanteiTsuchiShoKyotsu
+     * @param 調定年度 FlexibleYear
+     * @param 帳票作成日時 YMDHMS
+     * @param association Association
+     * @param 出力項目リスト List<RString>
+     * @param 改頁項目リスト List<RString>
+     * @param 連番 int
+     */    
+    public TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
+            EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
+            FlexibleYear 調定年度, YMDHMS 帳票作成日時, Association association,
+            List<RString> 出力項目リスト,
+            List<RString> 改頁項目リスト,
+            int 連番) {
+        this.仮算定通知書情報 = 仮算定通知書情報;
+        this.編集後仮算定通知書共通情報entity = 編集後仮算定通知書共通情報entity;
+        this.調定年度 = 調定年度;
+        this.帳票作成日時 = 帳票作成日時;
+        this.association = association;
+        this.出力項目リスト = 出力項目リスト;
+        this.改頁項目リスト = 改頁項目リスト;
+        this.連番 = 連番;
+        this.entity = null;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> writer) {
         ITokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor editor
-                = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor(編集後仮算定通知書共通情報entity,
-                        調定年度, 帳票作成日時, 連番, association, 出力項目リスト, 改頁項目リスト);
+                = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor(仮算定通知書情報, 編集後仮算定通知書共通情報entity,
+                        調定年度, 帳票作成日時, 連番, association, 出力項目リスト, 改頁項目リスト, entity);
         ITokubetsuChoshuKaishiTsuchishoKariHakkoIchiranBuilder builder
                 = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranBuilder(editor);
         writer.writeLine(builder);

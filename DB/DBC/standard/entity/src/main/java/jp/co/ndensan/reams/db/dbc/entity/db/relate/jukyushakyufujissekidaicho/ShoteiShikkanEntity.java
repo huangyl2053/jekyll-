@@ -170,5 +170,7 @@ public class ShoteiShikkanEntity extends DbTableEntityBase<ShoteiShikkanEntity> 
     private int 過誤回数;
     @TempTableColumnOrder(68)
     private FlexibleYearMonth 審査年月;
+    @TempTableColumnOrder(69)
+    private RString 名称;
 
 }

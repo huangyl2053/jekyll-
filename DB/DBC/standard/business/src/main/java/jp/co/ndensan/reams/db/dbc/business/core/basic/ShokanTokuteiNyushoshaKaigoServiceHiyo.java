@@ -8,15 +8,15 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -24,8 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBC-9999-012 panhe
  */
-public class ShokanTokuteiNyushoshaKaigoServiceHiyo extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, 
-        DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, ShokanTokuteiNyushoshaKaigoServiceHiyo> implements Serializable {
+public class ShokanTokuteiNyushoshaKaigoServiceHiyo extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, ShokanTokuteiNyushoshaKaigoServiceHiyo>
+        implements Serializable {
 
     private final DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity;
     private final ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier id;
@@ -323,6 +323,32 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyo extends ModelBase<ShokanToku
     @Override
     public DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity toEntity() {
         return this.entity.clone();
+    }
+
+    /**
+     * {@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link ShokanTokuteiNyushoshaKaigoServiceHiyo}
+     */
+    public ShokanTokuteiNyushoshaKaigoServiceHiyo modifiedModel() {
+        DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new ShokanTokuteiNyushoshaKaigoServiceHiyo(
+                modifiedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求特定入所者介護サービス費用データをinsert対象とします。<br/>
+     * {@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であればinsert状態にします。
+     *
+     * @return 修正対象処理実施後の{@link ShokanTokuteiNyushoshaKaigoServiceHiyo}
+     */
+    public ShokanTokuteiNyushoshaKaigoServiceHiyo added() {
+        DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Added);
+        return new ShokanTokuteiNyushoshaKaigoServiceHiyo(modifiedEntity, id);
     }
 
     /**

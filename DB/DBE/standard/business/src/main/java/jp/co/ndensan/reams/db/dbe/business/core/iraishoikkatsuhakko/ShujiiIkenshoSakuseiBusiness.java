@@ -31,7 +31,7 @@ public class ShujiiIkenshoSakuseiBusiness {
                 processParamter.getShujiiIkenshoSakuseiIraisho());
     }
 
-    /*
+    /**
      * 帳票「帳票設計_DBE230002_主治医意見書作成依頼一覧表」Bodyデータを作成するメッソドです。
      *
      * @param entity entity

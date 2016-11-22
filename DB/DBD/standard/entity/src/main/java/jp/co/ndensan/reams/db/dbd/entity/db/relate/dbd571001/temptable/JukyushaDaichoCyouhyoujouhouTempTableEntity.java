@@ -27,7 +27,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JukyushaDaichoCyouhyoujouhouTempTableEntity extends DbTableEntityBase<JukyushaDaichoCyouhyoujouhouTempTableEntity> implements IDbAccessable {
+public class JukyushaDaichoCyouhyoujouhouTempTableEntity
+        extends DbTableEntityBase<JukyushaDaichoCyouhyoujouhouTempTableEntity> implements IDbAccessable {
 
     /**
      * 検索条件一時テーブル名称

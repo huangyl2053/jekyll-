@@ -46,6 +46,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
     private static final String 処理日付管理マスタAND受給管理情報の更新 = "updateDate";
     private static final String 処理結果確認リストCSV出力 = "outPutShoriKekkaKakunin";
     private static final RString 再処理前 = new RString("2");
+    private static final int 抽出回数_1 = 1;
 
     @Override
     protected void defineFlow() {
@@ -120,7 +121,9 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
         parameter.setKijunbi(getParameter().get基準日());
         parameter.setShoriKubun(getParameter().get処理区分());
         parameter.setTestMode(getParameter().isテストモード());
+        parameter.setNendoShuryoNengappi(getParameter().get年度終了年月日());
         parameter.setShoriNichiji(getParameter().get処理日時());
+        parameter.setChushutuKaisu(抽出回数_1);
         return otherBatchFlow(利用者負担割合判定BATCH_ID, SubGyomuCode.DBC介護給付,
                 parameter).define();
     }
@@ -136,8 +139,8 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
         parameter.setTaishoNendo(getParameter().get対象年度());
         parameter.setKijunbi(getParameter().get基準日());
         parameter.setShoriKubun(getParameter().get処理区分());
-        parameter.setTestMode(getParameter().isテストモード());
         parameter.setShoriNichiji(getParameter().get処理日時());
+        parameter.setNendoShuryoNengappi(getParameter().get年度終了年月日());
         return otherBatchFlow(負担割合判定一覧BATCH_ID, SubGyomuCode.DBC介護給付,
                 parameter).define();
     }

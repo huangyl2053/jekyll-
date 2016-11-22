@@ -471,38 +471,43 @@
             parameterType="jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.KeisanTaishoshaParameter" fetchSize="500">
         SELECT
         資格.*,
-        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>
+        "DbT2002Fuka1".*
         FROM (SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
         FROM rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         INNER JOIN
         (SELECT
-                    "hihokenshaNo",
-                    "ichigoShikakuShutokuYMD",
-                    "shikakuSoshitsuYMD",
-                    MAX("idoYMD"||"edaNo") AS max
+                    "DbT1001HihokenshaDaicho"."hihokenshaNo"
+                    ,"DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD"
+                    ,"DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD"
+                    ,MAX (
+                        "DbT1001HihokenshaDaicho"."idoYMD" || "DbT1001HihokenshaDaicho"."edaNo"
+                    ) AS MAX
                  FROM
                     rgdb."DbT1001HihokenshaDaicho" 
-                 WHERE
-                    "hihokennshaKubunCode" = '1'
-                    AND "logicalDeletedFlag" = FALSE
-                    AND ("shikakuSoshitsuYMD" IS NULL OR "shikakuSoshitsuYMD" = ''
-                        OR #{賦課年度_修正後} <![CDATA[<]]> "shikakuSoshitsuYMD")
-                    AND "ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{資格基準日}
-                    GROUP BY "hihokenshaNo", "ichigoShikakuShutokuYMD", "shikakuSoshitsuYMD"
+                        INNER JOIN (
+                        SELECT  *
+                        FROM    rgdb."DbV1001HihokenshaDaicho" AS "DbV1001"
+                        WHERE   "hihokennshaKubunCode" = '1'
+                        AND     "logicalDeletedFlag" = FALSE
+                        AND     ("shikakuSoshitsuYMD" IS NULL OR "shikakuSoshitsuYMD" = ''
+                                OR #{賦課年度_修正後} <![CDATA[<]]> "shikakuSoshitsuYMD")
+                        AND     "ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{資格基準日}
+                        ) AS "DbV1001HihokenshaDaicho" ON "DbT1001HihokenshaDaicho"."hihokenshaNo" = "DbV1001HihokenshaDaicho"."hihokenshaNo"
+                    GROUP BY "DbT1001HihokenshaDaicho"."hihokenshaNo", "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD", "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD"
                     ) AS B
         ON "DbT1001HihokenshaDaicho". "hihokenshaNo" = B. "hihokenshaNo"
         AND COALESCE("DbT1001HihokenshaDaicho" . "ichigoShikakuShutokuYMD",'00000000') = COALESCE(B. "ichigoShikakuShutokuYMD",'00000000')
         AND COALESCE("DbT1001HihokenshaDaicho" . "shikakuSoshitsuYMD",'00000000') = COALESCE(B. "shikakuSoshitsuYMD",'00000000')
         AND ("DbT1001HihokenshaDaicho". "idoYMD" || "DbT1001HihokenshaDaicho". "edaNo") = B.max) AS 資格
         FULL OUTER JOIN
-        (SELECT *
-        FROM rgdb."DbV2002Fuka" AS "DbT2002Fuka1"
-        WHERE "DbT2002Fuka1"."choteiNendo"=#{調定年度}
-        AND "DbT2002Fuka1"."fukaNendo"=#{賦課年度}
-        ) AS "DbT2002Fuka"
-        ON 資格."dbT1001HihokenshaDaicho_hihokenshaNo"="DbT2002Fuka"."hihokenshaNo"
-        ORDER BY 資格."dbT1001HihokenshaDaicho_hihokenshaNo", "DbT2002Fuka"."tsuchishoNo"
+        (SELECT <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>
+        FROM rgdb."DbV2002Fuka" AS "DbT2002Fuka"
+        WHERE "DbT2002Fuka"."choteiNendo"=#{調定年度}
+        AND "DbT2002Fuka"."fukaNendo"=#{賦課年度}
+        ) AS "DbT2002Fuka1"
+        ON 資格."dbT1001HihokenshaDaicho_hihokenshaNo"="DbT2002Fuka1"."dbT2002Fuka_hihokenshaNo"
+        ORDER BY 資格."dbT1001HihokenshaDaicho_hihokenshaNo", "DbT2002Fuka1"."dbT2002Fuka_tsuchishoNo"
     </select>
     
     
@@ -657,6 +662,8 @@
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="tsuchishoNo" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id column="dbT2003Kibetsu_ki" />
+        <id column="dbT2003Kibetsu_choshuHouhou" />
         <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <association property="資格の情報" resultMap="ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="介護賦課Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
@@ -666,7 +673,7 @@
         <association property="月別ランク" resultMap="ResultMap_KuBunnGaTsurakuTempEntity"/>
         <association property="特定口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
     </resultMap>
-    
+
     <!--賦課計算中間一時データを取得します。-->
     <select resultOrdered="true" id="select賦課計算_賦課" parameterType="jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.CaluculateFukaParameter"
             resultMap="resultMap_FukaCalculateEntity" fetchSize="500">
@@ -710,7 +717,12 @@
         ORDER BY
             "DbT2002Fuka"."choteiNendo",
             "DbT2002Fuka"."fukaNendo",
-            "DbT2002Fuka"."tsuchishoNo"
+            "DbT2002Fuka"."tsuchishoNo",
+            "HonSanJonTyuShutuTemp"."hihokenshaNo",
+            "HonSanJonTyuShutuTemp"."idoYMD",
+            "HonSanJonTyuShutuTemp"."edaNo",
+            "DbT2003Kibetsu"."ki",
+            "DbT2003Kibetsu"."choshuHouhou"
     </select>
     
     <resultMap id="resultMap_賦課計算中間Entity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.FukaCalculateTempEntity" autoMapping="true">

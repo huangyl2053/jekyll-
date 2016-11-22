@@ -5,11 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0510011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.PostMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.dgShichoson_Row;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
@@ -29,6 +33,7 @@ public class PostMainPanelValidationHandler {
 
     private final PostMainPanelDiv div;
     private static final RString ファイル日時 = new RString("ファイル日時");
+    private static final RString NUM_00 = new RString("00");
     private static final RString 選択行のファイル日時 = new RString("選択行のファイル日時");
     private static final RString 単一の場合 = new RString("単一の場合");
     private static final RString 広域の場合 = new RString("広域の場合");
@@ -66,6 +71,8 @@ public class PostMainPanelValidationHandler {
                     thenAdd(IdocheckMessages.一覧対象未選択チェック).
                     ifNot(KokuhorenTorikomiListSpec.グリッドのファイル日時が空白).
                     thenAdd(IdocheckMessages.グリッドのファイル日時が空白).
+                    ifNot(KokuhorenTorikomiListSpec.一覧選択解除チェック).
+                    thenAdd(IdocheckMessages.一覧選択解除チェック).
                     messages());
             validPairs.add(createDictionary().check(messages));
         }
@@ -78,6 +85,7 @@ public class PostMainPanelValidationHandler {
                 .add(IdocheckMessages.ファイル日時が空白, div.getTxtFileYMD())
                 .add(IdocheckMessages.一覧対象未選択チェック, div.getDgShichoson())
                 .add(IdocheckMessages.グリッドのファイル日時が空白, div.getDgShichoson())
+                .add(IdocheckMessages.一覧選択解除チェック, div.getDgShichoson())
                 .build();
     }
 
@@ -113,6 +121,21 @@ public class PostMainPanelValidationHandler {
                         }
                         return true;
                     }
+                },
+        一覧選択解除チェック {
+                    @Override
+                    public boolean apply(PostMainPanelDiv div) {
+                        List<dgShichoson_Row> rowList = div.getDgShichoson().getDataSource();
+                        RString 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(ControlDataHolder.getUserId()).get(0).getItemId();
+                        if (rowList != null && rowList.size() > 0 && !(市町村識別ID.equals(NUM_00))) {
+                            for (dgShichoson_Row row : rowList) {
+                                if (!row.getSelected()) {
+                                    return row.getSelected();
+                                }
+                            }
+                        }
+                        return true;
+                    }
                 };
     }
 
@@ -120,7 +143,8 @@ public class PostMainPanelValidationHandler {
 
         ファイル日時が空白(UrErrorMessages.対象データなし_追加メッセージあり, ファイル日時.toString()),
         一覧対象未選択チェック(UrErrorMessages.選択されていない, 取込み対象.toString()),
-        グリッドのファイル日時が空白(UrErrorMessages.対象データなし_追加メッセージあり, 選択行のファイル日時.toString());
+        グリッドのファイル日時が空白(UrErrorMessages.対象データなし_追加メッセージあり, 選択行のファイル日時.toString()),
+        一覧選択解除チェック(DbzErrorMessages.未選択行あり);
         private final Message message;
 
         private IdocheckMessages(IMessageGettable message, String... replacements) {

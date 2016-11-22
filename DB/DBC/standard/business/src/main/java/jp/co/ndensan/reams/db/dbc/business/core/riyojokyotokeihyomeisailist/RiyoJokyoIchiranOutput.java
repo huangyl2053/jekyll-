@@ -25,7 +25,7 @@ public class RiyoJokyoIchiranOutput {
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("DbWT1513RiyoJokyoTokeihyo.\"hiHokenshaNo\"")),
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("DbWT1513RiyoJokyoTokeihyo.\"hihokenshaNo\"")),
         /**
          * 氏名５０音カナ
          */

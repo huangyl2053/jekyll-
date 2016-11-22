@@ -78,6 +78,9 @@ public class KanendoFukaHandler {
     private static final RString 決定変更通知書 = new RString("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final RString 納入通知書 = new RString("DBB100045_HokenryoNonyuTsuchishoDaihyo");
 
+    private static final RString チェックあり_0 = new RString("0");
+    private static final RString チェックあり_1 = new RString("1");
+
     /**
      * 初期化
      *
@@ -117,6 +120,7 @@ public class KanendoFukaHandler {
             口座振替者.add(dataSource);
         }
         div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().setDataSource(口座振替者);
+        チェック_帳票作成個別情報();
         return 処理日付管理マスタ(shdaList);
     }
 
@@ -137,6 +141,29 @@ public class KanendoFukaHandler {
             div.getKanendoShoriNaiyo().getDdlShoritsuki().setDataSource(dataSource);
             div.getKanendoShoriNaiyo().getDdlShoritsuki().setSelectedKey(翌月);
         }
+    }
+
+    private void チェック_帳票作成個別情報() {
+        List<RString> key1s = new ArrayList<>();
+        key1s.add(チェックあり_1);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchi().setSelectedItemsByKey(key1s);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().setSelectedItemsByKey(key1s);
+        
+        List<RString> key2s = new ArrayList<>();
+        key2s.add(チェックあり_0);
+        key2s.add(チェックあり_1);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchiTaishoNendo().setSelectedItemsByKey(key2s);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishoFukaNendo().setSelectedItemsByKey(key2s);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishoFukaNedno().setSelectedItemsByKey(key2s);
+        
+        List<RString> 対象者keys = new ArrayList<>();
+        対象者keys.add(NotsuKozaShutsuryokuTaisho.口座振替者.getコード());
+        対象者keys.add(NotsuKozaShutsuryokuTaisho.現金納付者.getコード());
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishosha().setSelectedItemsByKey(対象者keys);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().setSelectedItemsByKey(対象者keys);
+        
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().setSelectedValue(
+                KozaFurikaeOutputType.口座用.get名称());
     }
 
     /**
@@ -473,8 +500,8 @@ public class KanendoFukaHandler {
                 納入通知書Flag = true;
             }
         }
-        if (過年度異動通知書作成.equals(ResponseHolder.getMenuID())
-                || (納入通知書Flag && 本算定異動_過年度.equals(ResponseHolder.getMenuID()))) {
+
+        if (納入通知書Flag && 本算定異動_過年度.equals(ResponseHolder.getMenuID())) {
             parameter.set一括発行起動フラグ(true);
         } else {
             parameter.set一括発行起動フラグ(false);

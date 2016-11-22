@@ -37,8 +37,6 @@ public class UpDoInterfaceKanriKousinManager {
     private static final RString MESSAGE_処理日時 = new RString("処理日時");
     private static final RString ERROR_MESSAGE = new RString("国保連インターフェース管理に更新対象レコードが存在しません");
     private static final RString 再処理可能 = new RString("1");
-    private static final int INT_2 = 2;
-    private static final int INT_0 = 0;
 
     /**
      * 国保連情報取込共通処理（国保連インタフェース管理TBL更新）のコンストラクタ。
@@ -99,8 +97,7 @@ public class UpDoInterfaceKanriKousinManager {
                 処理実行回数 = 処理実行回数.add(Decimal.ONE);
                 entity.setShoriJikkoKaisu(処理実行回数);
             }
-            entity.setFileKensu1(異動レコード件数 + INT_2);
-            entity.setFileKensu2(INT_0);
+            entity.setFileKensu1(異動レコード件数);
             entity.setCtrlRecordKensu(異動レコード件数);
             entity.setCtrlShoriYM(new FlexibleYearMonth(処理対象年月.toString()));
         } else {

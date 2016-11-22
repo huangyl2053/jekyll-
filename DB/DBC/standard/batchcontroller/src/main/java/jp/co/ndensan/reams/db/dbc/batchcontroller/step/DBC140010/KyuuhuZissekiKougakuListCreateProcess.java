@@ -11,11 +11,16 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJisseki
 import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KyuuhuZissekiKougakuRelateEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -29,42 +34,9 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaKyufujissekiDaichoMapper."
-            + "get基本");
-    private static final RString チルダ = new RString("～");
-    private static final RString 居住サービス計画作成区分コード_1 = new RString("1");
-    private static final RString 居住サービス計画作成区分コード_2 = new RString("2");
-    private static final RString 居住サービス計画作成区分コード_3 = new RString("3");
-    private static final RString 居住サービス計画作成区分コード_4 = new RString("4");
-    private static final RString 入力識別番号_7171 = new RString("7171");
-    private static final RString 入力識別番号_7172 = new RString("7172");
-    private static final RString 入力識別番号_7173 = new RString("7173");
-    private static final RString 入力識別番号_7174 = new RString("7174");
-    private static final RString 入力識別番号_2171 = new RString("2171");
-    private static final RString 入力識別番号_2172 = new RString("2172");
-    private static final RString 入力識別番号_2173 = new RString("2173");
-    private static final RString 入力識別番号_2174 = new RString("2174");
-    private static final RString 入力識別番号_7181 = new RString("7181");
-    private static final RString 入力識別番号_7182 = new RString("7182");
-    private static final RString 入力識別番号_7183 = new RString("7183");
-    private static final RString 入力識別番号_2181 = new RString("2181");
-    private static final RString 入力識別番号_2182 = new RString("2182");
-    private static final RString 入力識別番号_2183 = new RString("2183");
-    private static final RString 入力識別番号_7191 = new RString("7191");
-    private static final RString 入力識別番号_7192 = new RString("7192");
-    private static final RString 入力識別番号_7193 = new RString("7193");
+            + "get給付実績高額");
     private static final RString 入力識別番号_7194 = new RString("7194");
-    private static final RString 入力識別番号_7195 = new RString("7195");
-    private static final RString 入力識別番号_2191 = new RString("2191");
-    private static final RString 入力識別番号_2192 = new RString("2192");
-    private static final RString 入力識別番号_2193 = new RString("2193");
     private static final RString 入力識別番号_2194 = new RString("2194");
-    private static final RString 入力識別番号_2195 = new RString("2195");
-    private static final RString 入力識別番号_71A1 = new RString("71A1");
-    private static final RString 入力識別番号_71A2 = new RString("71A2");
-    private static final RString 入力識別番号_71A3 = new RString("71A3");
-    private static final RString 入力識別番号_21A1 = new RString("21A1");
-    private static final RString 入力識別番号_21A2 = new RString("21A2");
-    private static final RString 入力識別番号_21A3 = new RString("21A3");
     private static final RString 入力識別番号_716X = new RString("716X");
     private static final RString 入力識別番号_216X = new RString("216X");
     private static final RString 入力識別番号_71AX = new RString("71AX");
@@ -74,13 +46,21 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
     private static final RString 入力識別番号_7155 = new RString("7155");
     private static final RString 入力識別番号_7156 = new RString("7156");
     private static final RString サービス提供年月_200510 = new RString("200510");
-    private static final RString 入所_院_前 = new RString("201104");
-    private static final RString 区分_基本 = new RString("1");
-
+    private static final RString 区分_高額 = new RString("2");
+    private static final RString 広域内住所地特例フラグ = new RString("1");
     private static final int 居住サービス計画事業者名_LENGTH = 20;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 基本List;
     private JukyushaKyufujissekiDaichoProcessParameter parameter;
+
+    @Override
+    protected void initialize() {
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        parameter.setPsmShikibetsuTaisho(new RString(uaFt200Psm.getParameterMap().
+                get("psmShikibetsuTaisho").toString()));
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -144,7 +124,7 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
         基本entity.set行政区コード(entity.getPsm_tmp2_gyoseikuCode());
         基本entity.set行政区(entity.getPsm_tmp2_gyoseikuName());
         基本entity.set住民コード(entity.getDbt1001_tmp2_shikibetsuCode());
-        基本entity.set区分(区分_基本);
+        基本entity.set区分(区分_高額);
         基本entity.set高額受付年月日(entity.getDbt3028_uketsukeYMD());
         基本entity.set高額決定年月日(entity.getDbt3028_ketteiYMD());
         基本entity.set高額公費１負担番号(entity.getDbt3028_kohi1FutanNo());
@@ -158,6 +138,7 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
         基本entity.set高額公費１支給額(entity.getDbt3028_kohi1Shikyugaku());
         基本entity.set高額公費２支給額(entity.getDbt3028_kohi2Shikyugaku());
         基本entity.set高額公費３支給額(entity.getDbt3028_kohi3Shikyugaku());
+        基本entity.set市町村コード(名称);
         return 基本entity;
     }
 

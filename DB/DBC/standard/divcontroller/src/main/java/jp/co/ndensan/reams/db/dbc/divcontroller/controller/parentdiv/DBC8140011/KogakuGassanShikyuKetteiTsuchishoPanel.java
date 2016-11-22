@@ -61,7 +61,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
         TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         if ((引き継ぎEntity.get被保険者番号() == null || RString.EMPTY.equals(
                 引き継ぎEntity.get被保険者番号().getColumnValue())) && !ResponseHolder.isReRequest()) {
-            ResponseData.of(div).addMessage(DbcInformationMessages.被保険者でないデータ.getMessage());
+            return ResponseData.of(div).addMessage(DbcInformationMessages.被保険者でないデータ.getMessage()).respond();
         }
         ShikibetsuCode 識別コード = 引き継ぎEntity.get識別コード();
         HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();

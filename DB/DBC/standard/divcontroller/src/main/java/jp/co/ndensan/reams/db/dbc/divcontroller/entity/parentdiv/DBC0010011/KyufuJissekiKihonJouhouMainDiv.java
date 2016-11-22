@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.IKyufuJissekiHeaderDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.KyufuJissekiHeaderDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class KyufuJissekiKihonJouhouMainDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -97,18 +98,24 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     private KyufuJissekiKihonKohiDiv KyufuJissekiKihonKohi;
     @JsonProperty("linButtonArea3")
     private HorizontalLine linButtonArea3;
-    @JsonProperty("btnJigetsu")
-    private Button btnJigetsu;
-    @JsonProperty("btnZengetsu")
-    private Button btnZengetsu;
-    @JsonProperty("btnAtoJigyosha")
-    private Button btnAtoJigyosha;
     @JsonProperty("btnMaeJigyosha")
     private Button btnMaeJigyosha;
+    @JsonProperty("btnAtoJigyosha")
+    private Button btnAtoJigyosha;
+    @JsonProperty("btnZengetsu")
+    private Button btnZengetsu;
+    @JsonProperty("btnJigetsu")
+    private Button btnJigetsu;
     @JsonProperty("KyufuJissekiKihonGokeiPanel")
     private KyufuJissekiKihonGokeiPanelDiv KyufuJissekiKihonGokeiPanel;
     @JsonProperty("ccdKyufuJissekiHeader")
     private KyufuJissekiHeaderDiv ccdKyufuJissekiHeader;
+    @JsonProperty("hdnStartOrder")
+    private RString hdnStartOrder;
+    @JsonProperty("hdnEndOrder")
+    private RString hdnEndOrder;
+    @JsonProperty("hdnCurrentOrder")
+    private RString hdnCurrentOrder;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -711,39 +718,21 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     }
 
     /*
-     * getbtnJigetsu
-     * @return btnJigetsu
+     * getbtnMaeJigyosha
+     * @return btnMaeJigyosha
      */
-    @JsonProperty("btnJigetsu")
-    public Button getBtnJigetsu() {
-        return btnJigetsu;
+    @JsonProperty("btnMaeJigyosha")
+    public Button getBtnMaeJigyosha() {
+        return btnMaeJigyosha;
     }
 
     /*
-     * setbtnJigetsu
-     * @param btnJigetsu btnJigetsu
+     * setbtnMaeJigyosha
+     * @param btnMaeJigyosha btnMaeJigyosha
      */
-    @JsonProperty("btnJigetsu")
-    public void setBtnJigetsu(Button btnJigetsu) {
-        this.btnJigetsu = btnJigetsu;
-    }
-
-    /*
-     * getbtnZengetsu
-     * @return btnZengetsu
-     */
-    @JsonProperty("btnZengetsu")
-    public Button getBtnZengetsu() {
-        return btnZengetsu;
-    }
-
-    /*
-     * setbtnZengetsu
-     * @param btnZengetsu btnZengetsu
-     */
-    @JsonProperty("btnZengetsu")
-    public void setBtnZengetsu(Button btnZengetsu) {
-        this.btnZengetsu = btnZengetsu;
+    @JsonProperty("btnMaeJigyosha")
+    public void setBtnMaeJigyosha(Button btnMaeJigyosha) {
+        this.btnMaeJigyosha = btnMaeJigyosha;
     }
 
     /*
@@ -765,21 +754,39 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     }
 
     /*
-     * getbtnMaeJigyosha
-     * @return btnMaeJigyosha
+     * getbtnZengetsu
+     * @return btnZengetsu
      */
-    @JsonProperty("btnMaeJigyosha")
-    public Button getBtnMaeJigyosha() {
-        return btnMaeJigyosha;
+    @JsonProperty("btnZengetsu")
+    public Button getBtnZengetsu() {
+        return btnZengetsu;
     }
 
     /*
-     * setbtnMaeJigyosha
-     * @param btnMaeJigyosha btnMaeJigyosha
+     * setbtnZengetsu
+     * @param btnZengetsu btnZengetsu
      */
-    @JsonProperty("btnMaeJigyosha")
-    public void setBtnMaeJigyosha(Button btnMaeJigyosha) {
-        this.btnMaeJigyosha = btnMaeJigyosha;
+    @JsonProperty("btnZengetsu")
+    public void setBtnZengetsu(Button btnZengetsu) {
+        this.btnZengetsu = btnZengetsu;
+    }
+
+    /*
+     * getbtnJigetsu
+     * @return btnJigetsu
+     */
+    @JsonProperty("btnJigetsu")
+    public Button getBtnJigetsu() {
+        return btnJigetsu;
+    }
+
+    /*
+     * setbtnJigetsu
+     * @param btnJigetsu btnJigetsu
+     */
+    @JsonProperty("btnJigetsu")
+    public void setBtnJigetsu(Button btnJigetsu) {
+        this.btnJigetsu = btnJigetsu;
     }
 
     /*
@@ -807,6 +814,60 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     @JsonProperty("ccdKyufuJissekiHeader")
     public IKyufuJissekiHeaderDiv getCcdKyufuJissekiHeader() {
         return ccdKyufuJissekiHeader;
+    }
+
+    /*
+     * gethdnStartOrder
+     * @return hdnStartOrder
+     */
+    @JsonProperty("hdnStartOrder")
+    public RString getHdnStartOrder() {
+        return hdnStartOrder;
+    }
+
+    /*
+     * sethdnStartOrder
+     * @param hdnStartOrder hdnStartOrder
+     */
+    @JsonProperty("hdnStartOrder")
+    public void setHdnStartOrder(RString hdnStartOrder) {
+        this.hdnStartOrder = hdnStartOrder;
+    }
+
+    /*
+     * gethdnEndOrder
+     * @return hdnEndOrder
+     */
+    @JsonProperty("hdnEndOrder")
+    public RString getHdnEndOrder() {
+        return hdnEndOrder;
+    }
+
+    /*
+     * sethdnEndOrder
+     * @param hdnEndOrder hdnEndOrder
+     */
+    @JsonProperty("hdnEndOrder")
+    public void setHdnEndOrder(RString hdnEndOrder) {
+        this.hdnEndOrder = hdnEndOrder;
+    }
+
+    /*
+     * gethdnCurrentOrder
+     * @return hdnCurrentOrder
+     */
+    @JsonProperty("hdnCurrentOrder")
+    public RString getHdnCurrentOrder() {
+        return hdnCurrentOrder;
+    }
+
+    /*
+     * sethdnCurrentOrder
+     * @param hdnCurrentOrder hdnCurrentOrder
+     */
+    @JsonProperty("hdnCurrentOrder")
+    public void setHdnCurrentOrder(RString hdnCurrentOrder) {
+        this.hdnCurrentOrder = hdnCurrentOrder;
     }
 
     /*

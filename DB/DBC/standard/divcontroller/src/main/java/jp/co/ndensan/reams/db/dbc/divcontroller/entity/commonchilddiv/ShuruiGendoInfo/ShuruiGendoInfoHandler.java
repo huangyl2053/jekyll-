@@ -66,6 +66,6 @@ public class ShuruiGendoInfoHandler {
     }
 
     private RString get金額のカンマ編集(Decimal 金額) {
-        return 金額 == null ? null : DecimalFormatter.toRString(金額, 0);
+        return 金額 == null ? null : DecimalFormatter.toコンマ区切りRString(金額, 0);
     }
 }

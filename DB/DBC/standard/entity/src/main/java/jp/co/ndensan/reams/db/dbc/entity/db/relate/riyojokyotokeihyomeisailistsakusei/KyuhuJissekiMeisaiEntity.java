@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3018KyufujissekiMeisaiEntity;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyuhuJissekiMeisaiEntity {
 
     private DbT3018KyufujissekiMeisaiEntity entity;
-    private FlexibleDate teikyoKaishiYM;
-    private FlexibleDate teikyoShuryoYM;
+    private FlexibleYearMonth teikyoKaishiYM;
+    private FlexibleYearMonth teikyoShuryoYM;
     private RString gendogakuTaishogaiFlag;
     private RString serviceShuruiFlag;
 }

@@ -3,22 +3,26 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Taishosha
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jul 06 20:56:28 CST 2016
+ * Wed Nov 16 21:37:18 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgJukyushaIdoRenrakuhyoHenkoSearchResultList_Row のクラスファイル
- *
- * @reamsid_L DBC-4471-010 xupeng
+ * dgJukyushaIdoRenrakuhyoHenkoSearchResultList_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgJukyushaIdoRenrakuhyoHenkoSearchResultList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
 
     private TextBoxDate txtResultIdoDate;
     private TextBoxDate txtTaishoNengetsu;

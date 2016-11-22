@@ -164,4 +164,19 @@ public class KyufuJohoFinder {
         return SearchResult.of(サービス利用状況情報, 0, false);
     }
 
+    /**
+     * ViewStateへ償還払い状況照会の取得です。
+     *
+     * @param paramter KounyukingakuParamter
+     * @return KyufuJohoBusiness
+     */
+    @Transaction
+    public KyufuJohoBusiness getViewState償還払い状況照会(KounyukingakuParamter paramter) {
+        IKyufuJohoMapper kyufujohomapper = mapperProvider.create(IKyufuJohoMapper.class);
+        KyufuJohoEntity kyufujoho = kyufujohomapper.getViewState償還払い状況照会(paramter);
+        if (kyufujoho == null) {
+            return null;
+        }
+        return new KyufuJohoBusiness(kyufujoho);
+    }
 }

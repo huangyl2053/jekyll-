@@ -130,7 +130,7 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
                     newRecord.setChoteiNendo(entity.get調定年度());
                     newRecord.setFukaNendo(entity.get賦課年度());
                     newRecord.setPrintTimeStamp(entity.get印刷日時());
-                    newRecord.setPageNo(new RString(Integer.valueOf(pageNow).toString()));
+                    newRecord.setPageNo(new RString(pageNow));
                     newRecord.setPageNoAll(new RString(pageAll.toString()));
                     newRecord.setHokenshaNo(entity.get保険者番号().value());
                     newRecord.setHokenshaName(entity.get保険者名称());

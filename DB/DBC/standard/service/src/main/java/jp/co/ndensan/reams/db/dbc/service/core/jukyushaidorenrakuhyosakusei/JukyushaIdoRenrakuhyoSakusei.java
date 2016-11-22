@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class JukyushaIdoRenrakuhyoSakusei {
 
     private final DbT3001JukyushaIdoRenrakuhyoDac dac;
+    private final RString ONE = new RString("1");
+    private final RString TWO = new RString("2");
 
     /**
      * コンストラクタです。
@@ -43,7 +45,8 @@ public class JukyushaIdoRenrakuhyoSakusei {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JukyushaIdoRenrakuhyoSakusei}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link JukyushaIdoRenrakuhyoSakusei}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link JukyushaIdoRenrakuhyoSakusei}のインスタンス
      */
     public static JukyushaIdoRenrakuhyoSakusei createInstance() {
         return InstanceProvider.create(JukyushaIdoRenrakuhyoSakusei.class);
@@ -218,13 +221,12 @@ public class JukyushaIdoRenrakuhyoSakusei {
         if (!変更前entity.get公費負担上限額減額().equals(変更後entity.get公費負担上限額減額())) {
             relateEntity.get出力用受給者訂正情報Entity().set公費負担上限額減額(変更後entity.get公費負担上限額減額());
         } else {
-            //TODO
-            relateEntity.get出力用受給者訂正情報Entity().set公費負担上限額減額(Boolean.FALSE);
+            relateEntity.get出力用受給者訂正情報Entity().set公費負担上限額減額(変更前entity.get公費負担上限額減額());
         }
         if (!変更前entity.get小規模居宅ｻｰﾋﾞｽ利用().equals(変更後entity.get小規模居宅ｻｰﾋﾞｽ利用())) {
             relateEntity.get出力用受給者訂正情報Entity().set小規模居宅ｻｰﾋﾞｽ利用(変更後entity.get小規模居宅ｻｰﾋﾞｽ利用());
         } else {
-            relateEntity.get出力用受給者訂正情報Entity().set小規模居宅ｻｰﾋﾞｽ利用(Boolean.FALSE);
+            relateEntity.get出力用受給者訂正情報Entity().set小規模居宅ｻｰﾋﾞｽ利用(変更前entity.get小規模居宅ｻｰﾋﾞｽ利用());
         }
         relateEntity.get出力用受給者訂正情報Entity().set軽減率適用開始年月日(compareRStringDate(変更前entity.
                 get軽減率適用開始年月日(), 変更後entity.get軽減率適用開始年月日()));
@@ -313,7 +315,11 @@ public class JukyushaIdoRenrakuhyoSakusei {
         }
         relateEntity.set標準適用開始年月日(変更前Entity.getFutangakuTekiyoKaishiYMD());
         relateEntity.set標準適用終了年月日(変更前Entity.getFutangakuTekiyoShuryoYMD());
-        relateEntity.set公費負担上限額減額(変更前Entity.getKohiFutanJogenGengakuAriFlag());
+        if (変更前Entity.getKohiFutanJogenGengakuAriFlag()) {
+            relateEntity.set公費負担上限額減額(TWO);
+        } else {
+            relateEntity.set公費負担上限額減額(ONE);
+        }
         relateEntity.set償還払化適用開始年月日(変更前Entity.getShokanbaraikaKaishiYMD());
         relateEntity.set償還払化適用終了年月日(変更前Entity.getShokanbaraikaShuryoYMD());
         relateEntity.set給付率引下げ適用開始年月日(変更前Entity.getKyufuritsuHikisageKaishiYMD());
@@ -344,7 +350,11 @@ public class JukyushaIdoRenrakuhyoSakusei {
         relateEntity.set軽減率(変更前Entity.getKeigenritsu());
         relateEntity.set軽減率適用開始年月日(変更前Entity.getKeigenritsuTekiyoKaishiYMD());
         relateEntity.set軽減率適用終了年月日(変更前Entity.getKeigenritsuTekiyoShuryoYMD());
-        relateEntity.set小規模居宅ｻｰﾋﾞｽ利用(変更前Entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag());
+        if (変更前Entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag()) {
+            relateEntity.set小規模居宅ｻｰﾋﾞｽ利用(TWO);
+        } else {
+            relateEntity.set小規模居宅ｻｰﾋﾞｽ利用(ONE);
+        }
         relateEntity.set二次予防事業区分(変更前Entity.getNijiyoboJigyoKubunCode());
         relateEntity.set二次予防有効期間開始年月日(変更前Entity.getNijiyoboJigyoYukoKikanKaishiYMD());
         relateEntity.set二次予防有効期間終了年月日(変更前Entity.getNijiyoboJigyoYukoKikanShuryoYMD());

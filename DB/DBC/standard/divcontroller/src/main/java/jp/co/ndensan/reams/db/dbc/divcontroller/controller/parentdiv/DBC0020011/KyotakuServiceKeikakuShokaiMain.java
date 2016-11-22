@@ -15,9 +15,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KyotakuKeikakuTodokedeManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -37,8 +39,16 @@ public class KyotakuServiceKeikakuShokaiMain {
      */
     public ResponseData<KyotakuServiceKeikakuShokaiMainDiv> onLoad(KyotakuServiceKeikakuShokaiMainDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        this.getHander(div).initialize(資格対象者);
-        return ResponseData.of(div).setState(DBC0020011StateName.初期表示);
+        if (ResponseHolder.isReRequest()
+                && new RString(UrErrorMessages.対象データなし
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).setState(DBC0020011StateName.初期表示);
+        }
+        if (this.getHander(div).initialize(資格対象者).isEmpty()) {
+            return ResponseData.of(div).addMessage(UrErrorMessages.対象データなし.getMessage()).respond();
+        } else {
+            return ResponseData.of(div).setState(DBC0020011StateName.初期表示);
+        }
     }
 
     /**

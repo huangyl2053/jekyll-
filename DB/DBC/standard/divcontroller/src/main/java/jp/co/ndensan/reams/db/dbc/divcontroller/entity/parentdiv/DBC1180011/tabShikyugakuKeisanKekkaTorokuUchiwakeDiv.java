@@ -7,17 +7,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tabShikyugakuKeisanKekkaTorokuUchiwake のクラスファイル
- *
+ * tabShikyugakuKeisanKekkaTorokuUchiwake のクラスファイル 
+ * 
  * @reamsid_L DBC-2030-010 huzongcheng
  */
 public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
@@ -85,7 +80,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setBtnUchiwakeAdd(Button btnUchiwakeAdd) {
+    public void  setBtnUchiwakeAdd(Button btnUchiwakeAdd) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeList().setBtnUchiwakeAdd(btnUchiwakeAdd);
     }
 
@@ -95,7 +90,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setDgKogakuGassanShikyugakuKeisanKekkaMeisai(DataGrid<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> dgKogakuGassanShikyugakuKeisanKekkaMeisai) {
+    public void  setDgKogakuGassanShikyugakuKeisanKekkaMeisai(DataGrid<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> dgKogakuGassanShikyugakuKeisanKekkaMeisai) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeList().setDgKogakuGassanShikyugakuKeisanKekkaMeisai(dgKogakuGassanShikyugakuKeisanKekkaMeisai);
     }
 
@@ -105,7 +100,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setGokeiJohoPanel(GokeiJohoPanelDiv GokeiJohoPanel) {
+    public void  setGokeiJohoPanel(GokeiJohoPanelDiv GokeiJohoPanel) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeList().setGokeiJohoPanel(GokeiJohoPanel);
     }
 
@@ -115,7 +110,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtJohoOver70FutangakuGokei(TextBoxNum txtJohoOver70FutangakuGokei) {
+    public void  setTxtJohoOver70FutangakuGokei(TextBoxNum txtJohoOver70FutangakuGokei) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeList().getGokeiJohoPanel().setTxtJohoOver70FutangakuGokei(txtJohoOver70FutangakuGokei);
     }
 
@@ -125,7 +120,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtJohoOver70ShikyugakuGokei(TextBoxNum txtJohoOver70ShikyugakuGokei) {
+    public void  setTxtJohoOver70ShikyugakuGokei(TextBoxNum txtJohoOver70ShikyugakuGokei) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeList().getGokeiJohoPanel().setTxtJohoOver70ShikyugakuGokei(txtJohoOver70ShikyugakuGokei);
     }
 
@@ -135,7 +130,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtJohoUnder70FutangakuGokei(TextBoxNum txtJohoUnder70FutangakuGokei) {
+    public void  setTxtJohoUnder70FutangakuGokei(TextBoxNum txtJohoUnder70FutangakuGokei) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeList().getGokeiJohoPanel().setTxtJohoUnder70FutangakuGokei(txtJohoUnder70FutangakuGokei);
     }
 
@@ -145,7 +140,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtJohoFutangakuGokei(TextBoxNum txtJohoFutangakuGokei) {
+    public void  setTxtJohoFutangakuGokei(TextBoxNum txtJohoFutangakuGokei) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeList().getGokeiJohoPanel().setTxtJohoFutangakuGokei(txtJohoFutangakuGokei);
     }
 
@@ -155,7 +150,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtJohoUnder70ShikyugakuGokei(TextBoxNum txtJohoUnder70ShikyugakuGokei) {
+    public void  setTxtJohoUnder70ShikyugakuGokei(TextBoxNum txtJohoUnder70ShikyugakuGokei) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeList().getGokeiJohoPanel().setTxtJohoUnder70ShikyugakuGokei(txtJohoUnder70ShikyugakuGokei);
     }
 
@@ -165,7 +160,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtJohoShikyugakuGokei(TextBoxNum txtJohoShikyugakuGokei) {
+    public void  setTxtJohoShikyugakuGokei(TextBoxNum txtJohoShikyugakuGokei) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeList().getGokeiJohoPanel().setTxtJohoShikyugakuGokei(txtJohoShikyugakuGokei);
     }
 
@@ -175,7 +170,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setDdlHokenSeido(DropDownList ddlHokenSeido) {
+    public void  setDdlHokenSeido(DropDownList ddlHokenSeido) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setDdlHokenSeido(ddlHokenSeido);
     }
 
@@ -185,7 +180,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtShoKisaiHokenshaNo(TextBox txtShoKisaiHokenshaNo) {
+    public void  setTxtShoKisaiHokenshaNo(TextBox txtShoKisaiHokenshaNo) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtShoKisaiHokenshaNo(txtShoKisaiHokenshaNo);
     }
 
@@ -195,7 +190,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtHokenshaMei(TextBox txtHokenshaMei) {
+    public void  setTxtHokenshaMei(TextBox txtHokenshaMei) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtHokenshaMei(txtHokenshaMei);
     }
 
@@ -205,7 +200,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setLin3(HorizontalLine lin3) {
+    public void  setLin3(HorizontalLine lin3) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setLin3(lin3);
     }
 
@@ -215,7 +210,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKokuhoHihokenshaShoKigo(TextBox txtKokuhoHihokenshaShoKigo) {
+    public void  setTxtKokuhoHihokenshaShoKigo(TextBox txtKokuhoHihokenshaShoKigo) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtKokuhoHihokenshaShoKigo(txtKokuhoHihokenshaShoKigo);
     }
 
@@ -225,7 +220,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtTaishoshaShimei(TextBox txtTaishoshaShimei) {
+    public void  setTxtTaishoshaShimei(TextBox txtTaishoshaShimei) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtTaishoshaShimei(txtTaishoshaShimei);
     }
 
@@ -235,7 +230,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtHiHokenshaShoNo(TextBox txtHiHokenshaShoNo) {
+    public void  setTxtHiHokenshaShoNo(TextBox txtHiHokenshaShoNo) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtHiHokenshaShoNo(txtHiHokenshaShoNo);
     }
 
@@ -245,7 +240,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtJikoFutanSeiriNom(TextBox txtJikoFutanSeiriNom) {
+    public void  setTxtJikoFutanSeiriNom(TextBox txtJikoFutanSeiriNom) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtJikoFutanSeiriNom(txtJikoFutanSeiriNom);
     }
 
@@ -255,7 +250,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setLin4(HorizontalLine lin4) {
+    public void  setLin4(HorizontalLine lin4) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setLin4(lin4);
     }
 
@@ -265,7 +260,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtOver70Futangaku(TextBoxNum txtOver70Futangaku) {
+    public void  setTxtOver70Futangaku(TextBoxNum txtOver70Futangaku) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtOver70Futangaku(txtOver70Futangaku);
     }
 
@@ -275,7 +270,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtOver70AmbunRitsu(TextBox txtOver70AmbunRitsu) {
+    public void  setTxtOver70AmbunRitsu(TextBox txtOver70AmbunRitsu) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtOver70AmbunRitsu(txtOver70AmbunRitsu);
     }
 
@@ -285,7 +280,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtOver70Shikyugaku(TextBoxNum txtOver70Shikyugaku) {
+    public void  setTxtOver70Shikyugaku(TextBoxNum txtOver70Shikyugaku) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtOver70Shikyugaku(txtOver70Shikyugaku);
     }
 
@@ -295,7 +290,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtUnder70Futangaku(TextBoxNum txtUnder70Futangaku) {
+    public void  setTxtUnder70Futangaku(TextBoxNum txtUnder70Futangaku) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtUnder70Futangaku(txtUnder70Futangaku);
     }
 
@@ -305,7 +300,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtFutangaku(TextBoxNum txtFutangaku) {
+    public void  setTxtFutangaku(TextBoxNum txtFutangaku) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtFutangaku(txtFutangaku);
     }
 
@@ -315,7 +310,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtAmbunRitsu(TextBox txtAmbunRitsu) {
+    public void  setTxtAmbunRitsu(TextBox txtAmbunRitsu) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtAmbunRitsu(txtAmbunRitsu);
     }
 
@@ -325,7 +320,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtUnder70Shikyugaku(TextBoxNum txtUnder70Shikyugaku) {
+    public void  setTxtUnder70Shikyugaku(TextBoxNum txtUnder70Shikyugaku) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtUnder70Shikyugaku(txtUnder70Shikyugaku);
     }
 
@@ -335,7 +330,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtShikyuGaku(TextBoxNum txtShikyuGaku) {
+    public void  setTxtShikyuGaku(TextBoxNum txtShikyuGaku) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtShikyuGaku(txtShikyuGaku);
     }
 
@@ -345,7 +340,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setLin5(HorizontalLine lin5) {
+    public void  setLin5(HorizontalLine lin5) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setLin5(lin5);
     }
 
@@ -355,7 +350,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtOver70Biko(TextBoxNum txtOver70Biko) {
+    public void  setTxtOver70Biko(TextBoxNum txtOver70Biko) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtOver70Biko(txtOver70Biko);
     }
 
@@ -365,7 +360,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtUnder70Biko(TextBoxNum txtUnder70Biko) {
+    public void  setTxtUnder70Biko(TextBoxNum txtUnder70Biko) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtUnder70Biko(txtUnder70Biko);
     }
 
@@ -375,7 +370,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setLin7(HorizontalLine lin7) {
+    public void  setLin7(HorizontalLine lin7) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setLin7(lin7);
     }
 
@@ -385,7 +380,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setBtnUchiwakeKakutei(Button btnUchiwakeKakutei) {
+    public void  setBtnUchiwakeKakutei(Button btnUchiwakeKakutei) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setBtnUchiwakeKakutei(btnUchiwakeKakutei);
     }
 
@@ -395,7 +390,7 @@ public class tabShikyugakuKeisanKekkaTorokuUchiwakeDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setBtnUchiwakeIchiramModoru(Button btnUchiwakeIchiramModoru) {
+    public void  setBtnUchiwakeIchiramModoru(Button btnUchiwakeIchiramModoru) {
         this.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setBtnUchiwakeIchiramModoru(btnUchiwakeIchiramModoru);
     }
 

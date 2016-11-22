@@ -7,22 +7,33 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ModoruEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisaiJushochiTokurei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004Builder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604Builder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904Builder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKeigengaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyoBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
+import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuhi.ServiceKeikakuHiRealtEntity;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseijoho.ShokanShinseiJoho;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShafukukeigenServiceResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssekihensyu.KyufujissekiEntity;
@@ -60,13 +71,14 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3107ShokanMeisaiJushoc
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3118ShikibetsuNoKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7120TokuteiShinryoServiceCodeDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraihishikyushinseikette.ISyokanbaraihiShikyuShinseiKetteMapper;
-import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraishikyukettekyufujssekihensyu.SyokanbaraiShikyuKetteKyufuJssekiHensyuManager;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShakaiFukushiHojinRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekkaBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukeiBuilder;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
@@ -86,14 +98,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.ux.uxx.persistence.db.mapper.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -149,6 +159,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     private static final FlexibleYearMonth サービス年月_200904 = new FlexibleYearMonth("200904");
     private static final RString モード_修正 = new RString("修正");
     private static final RString チェック区分_2 = new RString("2");
+    private static final RString 入力なし = new RString("0");
+    private static final RString 入力あり = new RString("1");
 
     /**
      * コンストラクタです。
@@ -213,7 +225,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     /**
      * 償還払データ登録更新。
      *
-     * @param DB情報 DB情報
+     * @param db情報 DbJohoViewState
      * @param 修正前支給区分 修正前支給区分
      * @param 決定日 決定日
      * @param 被保険者番号 被保険者番号
@@ -222,8 +234,9 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
      * @param 画面モード 画面モード
      * @param 識別コード 識別コード
      */
+    @Transaction
     public void insupdShokan(
-            RString DB情報,
+            DbJohoViewState db情報,
             RString 修正前支給区分,
             FlexibleDate 決定日,
             HihokenshaNo 被保険者番号,
@@ -231,6 +244,17 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             RString 整理番号,
             RString 画面モード,
             ShikibetsuCode 識別コード) {
+        InsupdShokanManager manager = InsupdShokanManager.createInstance();
+
+        if (db情報.get償還払支給申請() != null) {
+            manager.update償還払支給申請(db情報);
+        }
+        manager.update証明書(db情報, サービス提供年月);
+        ShokanHanteiKekka shokanHanteiKekka = db情報.get償還払支給判定結果();
+        if (shokanHanteiKekka != null) {
+            manager.update償還払支給判定結果(shokanHanteiKekka);
+        }
+        manager.実績編集の処理(修正前支給区分, 決定日, 被保険者番号, サービス提供年月, 整理番号, 画面モード, 識別コード);
 
     }
 
@@ -295,6 +319,98 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     }
 
     /**
+     * 証明書（ViewState）件数取得する。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param チェック区分 RString
+     * @param 償還払請求基本データList List<DbT3038ShokanKihonEntity>
+     * @param 償還払請求サービス計画200904データList List<DbT3047ShokanServicePlan200904Entity>
+     * @param 償還払請求サービス計画200604データList List<DbT3046ShokanServicePlan200604Entity>
+     * @param 償還払請求サービス計画200004データList List<DbT3045ShokanServicePlan200004Entity>
+     * @return 取得件数
+     */
+    public int getShomeishoKensu(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString チェック区分,
+            List<DbT3038ShokanKihonEntity> 償還払請求基本データList,
+            List<DbT3047ShokanServicePlan200904Entity> 償還払請求サービス計画200904データList,
+            List<DbT3046ShokanServicePlan200604Entity> 償還払請求サービス計画200604データList,
+            List<DbT3045ShokanServicePlan200004Entity> 償還払請求サービス計画200004データList
+    ) {
+        int 取得件数 = 0;
+        if (チェック区分_2.equals(チェック区分)) {
+            return 取得件数;
+        }
+        for (DbT3038ShokanKihonEntity 償還払請求基本データ : 償還払請求基本データList) {
+            if (被保険者番号.equals(償還払請求基本データ.getHiHokenshaNo())
+                    && サービス提供年月.equals(償還払請求基本データ.getServiceTeikyoYM())
+                    && 整理番号.equals(償還払請求基本データ.getSeiriNo())
+                    && 事業者番号.equals(償還払請求基本データ.getJigyoshaNo())
+                    && 様式番号.equals(償還払請求基本データ.getYoshikiNo())) {
+                取得件数++;
+            }
+        }
+        if (取得件数 > 0) {
+            return 取得件数;
+        }
+        if (new FlexibleYearMonth(サービス年月.toString()).isBeforeOrEquals(サービス提供年月)) {
+            for (DbT3047ShokanServicePlan200904Entity 償還払請求サービス計画200904データ : 償還払請求サービス計画200904データList) {
+                if (被保険者番号.equals(償還払請求サービス計画200904データ.getHiHokenshaNo())
+                        && サービス提供年月.equals(償還払請求サービス計画200904データ.getServiceTeikyoYM())
+                        && 整理番号.equals(償還払請求サービス計画200904データ.getSeiriNo())
+                        && 事業者番号.equals(償還払請求サービス計画200904データ.getJigyoshaNo())
+                        && 様式番号.equals(償還払請求サービス計画200904データ.getYoshikiNo())) {
+                    取得件数++;
+                }
+            }
+            return 取得件数;
+        }
+        return getKeikakuData(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号,
+                償還払請求サービス計画200604データList,
+                償還払請求サービス計画200004データList,
+                取得件数);
+    }
+
+    private int getKeikakuData(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            List<DbT3046ShokanServicePlan200604Entity> 償還払請求サービス計画200604データList,
+            List<DbT3045ShokanServicePlan200004Entity> 償還払請求サービス計画200004データList,
+            int 取得件数) {
+        if (new FlexibleYearMonth(サービス年月1.toString()).isBeforeOrEquals(サービス提供年月)) {
+            for (DbT3046ShokanServicePlan200604Entity 償還払請求サービス計画200604データ : 償還払請求サービス計画200604データList) {
+                if (被保険者番号.equals(償還払請求サービス計画200604データ.getHiHokenshaNo())
+                        && サービス提供年月.equals(償還払請求サービス計画200604データ.getServiceTeikyoYM())
+                        && 整理番号.equals(償還払請求サービス計画200604データ.getSeiriNo())
+                        && 事業者番号.equals(償還払請求サービス計画200604データ.getJigyoshaNo())
+                        && 様式番号.equals(償還払請求サービス計画200604データ.getYoshikiNo())) {
+                    取得件数++;
+                }
+            }
+            return 取得件数;
+        }
+        for (DbT3045ShokanServicePlan200004Entity 償還払請求サービス計画200004データ : 償還払請求サービス計画200004データList) {
+            if (被保険者番号.equals(償還払請求サービス計画200004データ.getHiHokenshaNo())
+                    && サービス提供年月.equals(償還払請求サービス計画200004データ.getServiceTeikyoYM())
+                    && 整理番号.equals(償還払請求サービス計画200004データ.getSeiriNo())
+                    && 事業者番号.equals(償還払請求サービス計画200004データ.getJigyoshaNo())
+                    && 様式番号.equals(償還払請求サービス計画200004データ.getYoshikiNo())) {
+                取得件数++;
+            }
+        }
+        return 取得件数;
+    }
+
+    /**
      * 識別番号管理情報取得する。
      *
      * @param サービス提供年月 サービス提供年月
@@ -316,30 +432,26 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
      * @param shinsei shinsei
      * @return 整理番号
      */
-    public RString insDbT3034ShokanShinsei(ShokanShinsei shinsei) {
-
-        RString 整理番号
-                = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString();
+    public ShokanShinsei insDbT3034ShokanShinsei(ShokanShinsei shinsei) {
 
         DbT3034ShokanShinseiEntity entity = shinsei.toEntity();
-        entity.setSeiriNo(整理番号);
         entity.setState(EntityDataState.Added);
-        償還払支給申請Dac.save(entity);
-        return 整理番号;
+
+        ShokanShinsei shokanShinsei = new ShokanShinsei(entity);
+        return shokanShinsei;
     }
 
     /**
-     * 支給申請更新1
+     * 支給申請更新2
      *
      * @param shinsei shinsei
      * @return 更新件数
      */
-    public ShokanShinseiJoho updDbT3034ShokanShinsei1(ShokanShinsei shinsei) {
-
+    public ShokanShinsei updDbT3034ShokanShinsei2(ShokanShinsei shinsei) {
         DbT3034ShokanShinseiEntity entity = shinsei.toEntity();
         entity.setState(EntityDataState.Modified);
-        int 更新件数 = 償還払支給申請Dac.save(entity);
-        return new ShokanShinseiJoho(entity, 更新件数);
+        ShokanShinsei shokanShinsei = new ShokanShinsei(entity);
+        return shokanShinsei;
     }
 
     /**
@@ -1039,11 +1151,15 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
      * 決定情報登録更新
      *
      * @param parameter parameter
+     * @param 証明書入力済フラグ ShomeishoNyuryokuFlag
+     * @param dbJoho db情報
+     * @return 戻るの情報
      */
     @Transaction
-    public void updKetteJoho(SyokanbaraihiShikyuShinseiKetteParameter parameter) {
-
+    public ModoruEntity updKetteJoho(SyokanbaraihiShikyuShinseiKetteParameter parameter, ShomeishoNyuryokuFlag 証明書入力済フラグ,
+            DbJohoViewState dbJoho) {
         RString 修正前支給区分 = null;
+        ModoruEntity modoruEntity = new ModoruEntity();
         List<SyokanbaraihiShikyuShinseiKetteEntity> 決定情報一覧List = parameter.get決定情報一覧List();
         if (parameter.get決定年月日() != null && !parameter.get決定年月日().isEmpty()) {
             DbT3036ShokanHanteiKekkaEntity dbT3036entity
@@ -1056,215 +1172,386 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                 entity.setHiHokenshaNo(parameter.get被保険者番号());
                 entity.setServiceTeikyoYM(parameter.getサービス提供年月());
                 entity.setSeiriNo(parameter.get整理番号());
-                entity.setShoKisaiHokenshaNo(dbt3034entity == null ? new ShoKisaiHokenshaNo(RString.EMPTY)
+                entity.initializeMd5();
+                ShokanHanteiKekka kekaJoho = new ShokanHanteiKekka(entity);
+                ShokanHanteiKekkaBuilder kekajoho = kekaJoho.createBuilderForEdit();
+                kekajoho.set証記載保険者番号(dbt3034entity == null ? new ShoKisaiHokenshaNo(RString.EMPTY)
                         : dbt3034entity.getShoKisaiHokenshaNo());
-                entity.setKetteiYMD(parameter.get決定年月日());
-                entity.setShikyuHushikyuKetteiKubun(parameter.get支給区分());
-                entity.setShiharaiKingaku(parameter.get支払金額合計());
-                entity.setState(EntityDataState.Added);
-                償還払支給判定結果Dac.save(entity);
+                kekajoho.set決定年月日(parameter.get決定年月日());
+                kekajoho.set支給_不支給決定区分(parameter.get支給区分());
+                kekajoho.set支払金額(parameter.get支払金額合計());
                 修正前支給区分 = ShikyuFushikyuKubun.不支給.getコード();
+                modoruEntity.set償還払支給判定結果(kekajoho.build().added());
+                modoruEntity.set修正前支給区分(修正前支給区分);
 
             } else {
-                insert償還払支給判定結果(parameter, dbT3036entity);
                 修正前支給区分 = parameter.get支給区分();
+                modoruEntity.set償還払支給判定結果(update償還払支給判定結果(parameter, dbT3036entity));
+                modoruEntity.set修正前支給区分(修正前支給区分);
             }
-            List<DbT3053ShokanShukeiEntity> entityList = 償還払請求集計Dac.select住宅改修費(parameter.get被保険者番号(),
-                    parameter.getサービス提供年月(), parameter.get整理番号());
             int 更新件数 = 0;
-            if (entityList != null && !entityList.isEmpty()) {
-                for (DbT3053ShokanShukeiEntity entity : entityList) {
-                    更新件数 = 更新件数 + up償還払請求集計(entity, parameter, 決定情報一覧List);
-                }
-            }
+            ArrayList<ShokanShukei> shukeiList = new ArrayList<>();
+            更新件数 = get償還請求集計情報(parameter, 決定情報一覧List, 証明書入力済フラグ, dbJoho, shukeiList, 更新件数);
+            modoruEntity.set償還払請求集計データList(shukeiList);
+            ArrayList<ShokanServicePlan200904> 償還払請求サービス計画200904データList = new ArrayList<>();
+            ArrayList<ShokanServicePlan200604> 償還払請求サービス計画200604データList = new ArrayList<>();
+            ArrayList<ShokanServicePlan200004> 償還払請求サービス計画200004データList = new ArrayList<>();
+            ArrayList<ShokanShokujiHiyo> shokujiJouhos = new ArrayList<>();
+            ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyo = new ArrayList<>();
             if (更新件数 == 0 && 決定情報一覧List != null && !決定情報一覧List.isEmpty()) {
                 for (SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧 : 決定情報一覧List) {
-                    決定情報登録更新1(parameter, 決定情報一覧);
+                    決定情報登録更新フラグなし(parameter, 決定情報一覧, 証明書入力済フラグ, 償還払請求サービス計画200904データList,
+                            償還払請求サービス計画200604データList, 償還払請求サービス計画200004データList);
+                    決定情報登録更新フラグあり(parameter, 決定情報一覧, 証明書入力済フラグ, dbJoho, 償還払請求サービス計画200904データList,
+                            償還払請求サービス計画200604データList, 償還払請求サービス計画200004データList);
                 }
             }
-        }
-        if (parameter.is差額金額登録フラグ() && (決定情報一覧List != null && !決定情報一覧List.isEmpty())) {
-            for (SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧 : 決定情報一覧List) {
-                決定情報登録更新2(parameter, 決定情報一覧);
+            if (更新件数 > 0 && parameter.is差額金額登録フラグ() && (決定情報一覧List != null && !決定情報一覧List.isEmpty())) {
+                for (SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧 : 決定情報一覧List) {
+                    決定情報登録更新2(parameter, 決定情報一覧, 証明書入力済フラグ, modoruEntity, dbJoho, shokujiJouhos, serviceHiyo,
+                            償還払請求サービス計画200904データList, 償還払請求サービス計画200604データList, 償還払請求サービス計画200004データList);
+                }
             }
+            modoruEntity.set償還払請求サービス計画200904データList(償還払請求サービス計画200904データList);
+            modoruEntity.set償還払請求サービス計画200604データList(償還払請求サービス計画200604データList);
+            modoruEntity.set償還払請求サービス計画200004データList(償還払請求サービス計画200004データList);
+            modoruEntity.set償還払請求食事費用データList(shokujiJouhos);
+            modoruEntity.set償還払請求特定入所者介護サービス費用データList(serviceHiyo);
+
         }
-        if (parameter.get決定年月日() != null && !parameter.get決定年月日().isEmpty()) {
-            KyufujissekiEntity entity = getKyufuJissekiData(parameter.get被保険者番号(),
-                    parameter.getサービス提供年月(), parameter.get整理番号());
-            SyokanbaraiShikyuKetteKyufuJssekiHensyuManager manager
-                    = SyokanbaraiShikyuKetteKyufuJssekiHensyuManager.createInstance();
-            manager.dealKyufujisseki(parameter.get画面モード(), parameter.get識別コード(),
-                    entity, 修正前支給区分);
-        }
+        return modoruEntity;
     }
 
-    private void insert償還払支給判定結果(SyokanbaraihiShikyuShinseiKetteParameter parameter, DbT3036ShokanHanteiKekkaEntity dbT3036entity) {
-        dbT3036entity.setKetteiYMD(parameter.get決定年月日());
-        dbT3036entity.setShikyuHushikyuKetteiKubun(parameter.get支給区分());
-        dbT3036entity.setShiharaiKingaku(parameter.get支払金額合計());
-        if (モード_修正.equals(parameter.get画面モード()) && !parameter.get支払金額合計初期().equals(parameter.get支払金額合計())) {
-            dbT3036entity.setZenkaiShiharaiKingaku(parameter.get支払金額合計初期());
+    private int get償還請求集計情報(SyokanbaraihiShikyuShinseiKetteParameter parameter, List<SyokanbaraihiShikyuShinseiKetteEntity> 決定情報一覧List,
+            ShomeishoNyuryokuFlag 証明書入力済フラグ, DbJohoViewState dbJoho, List<ShokanShukei> shukeiList, int 更新件数) {
+        if (証明書入力済フラグ.get請求額集計_証明書入力済フラグ().getCode().equals(入力あり)) {
+            List<ShokanShukeiResult> shukeiJohos = dbJoho.get償還払請求集計データList();
+            for (ShokanShukeiResult shukei : shukeiJohos) {
+                if (!shukei.getShukei().toEntity().getState().equals(EntityDataState.Deleted)) {
+                    更新件数 = 更新件数 + up償還払請求集計(shukei.getShukei().toEntity(), parameter, 決定情報一覧List, shukeiList);
+                }
+            }
+            return 更新件数;
+        } else {
+            List<DbT3053ShokanShukeiEntity> entityList = 償還払請求集計Dac.select住宅改修費(parameter.get被保険者番号(),
+                    parameter.getサービス提供年月(), parameter.get整理番号());
+            if (entityList != null && !entityList.isEmpty()) {
+                for (DbT3053ShokanShukeiEntity entity : entityList) {
+                    entity.initializeMd5();
+                    更新件数 = 更新件数 + up償還払請求集計(entity, parameter, 決定情報一覧List, shukeiList);
+                }
+            }
+            return 更新件数;
         }
-        dbT3036entity.setSagakuKingakuGokei(parameter.get差額金額());
-        dbT3036entity.setState(EntityDataState.Modified);
-        償還払支給判定結果Dac.save(dbT3036entity);
+
+    }
+
+    private ShokanHanteiKekka update償還払支給判定結果(SyokanbaraihiShikyuShinseiKetteParameter parameter,
+            DbT3036ShokanHanteiKekkaEntity dbT3036entity) {
+        dbT3036entity.initializeMd5();
+        ShokanHanteiKekka kekaEntity = new ShokanHanteiKekka(dbT3036entity);
+        ShokanHanteiKekkaBuilder keka = kekaEntity.createBuilderForEdit();
+        keka.set決定年月日(parameter.get決定年月日());
+        keka.set支給_不支給決定区分(parameter.get支給区分());
+        keka.set支払金額(parameter.get支払金額合計());
+        if (モード_修正.equals(parameter.get画面モード()) && !parameter.get支払金額合計初期().equals(parameter.get支払金額合計())) {
+            keka.set前回支払金額(parameter.get支払金額合計初期());
+        }
+        keka.set差額金額合計(parameter.get差額金額());
+        kekaEntity = keka.build();
+        kekaEntity.modified();
+        return kekaEntity;
     }
 
     private int up償還払請求集計(DbT3053ShokanShukeiEntity entity, SyokanbaraihiShikyuShinseiKetteParameter parameter,
-            List<SyokanbaraihiShikyuShinseiKetteEntity> 決定情報一覧List) {
-
+            List<SyokanbaraihiShikyuShinseiKetteEntity> 決定情報一覧List, List<ShokanShukei> shukeiList) {
         int 更新件数 = 0;
         if (決定情報一覧List != null && !決定情報一覧List.isEmpty()) {
             for (SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧 : 決定情報一覧List) {
                 if (テーブル区分.equals(決定情報一覧.getテーブル区分()) && entity.getJigyoshaNo().equals(決定情報一覧.get事業者番号())
                         && entity.getYoshikiNo().equals(決定情報一覧.get様式番号())
                         && entity.getMeisaiNo().equals(決定情報一覧.get明細番号())
-                        && entity.getRenban().equals(決定情報一覧.get連番())) {
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setShikyuKubunCode(parameter.get支給区分());
-                    entity.setSeikyugakuSagakuKingaku(決定情報一覧.get差額金額());
-                    entity.setDekidakaSeikyugakuSagaku(決定情報一覧.get差額金額());
-                    entity.setZougenRiyu(parameter.get増減理由等());
-                    entity.setHushikyuRiyu(parameter.get不支給理由等1());
-                    entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
-                    entity.setState(EntityDataState.Modified);
-                    更新件数 = 更新件数 + 償還払請求集計Dac.save(entity);
+                        && entity.getRenban().equals(決定情報一覧.get連番())
+                        && entity.getHiHokenshaNo().equals(parameter.get被保険者番号())
+                        && entity.getServiceTeikyoYM().equals(parameter.getサービス提供年月())
+                        && entity.getSeiriNo().equals(parameter.get整理番号())) {
+                    ShokanShukei shukei = new ShokanShukei(entity);
+                    ShokanShukeiBuilder shuke = shukei.createBuilderForEdit();
+                    shuke.set支給区分コード(parameter.get支給区分());
+                    shuke.set請求額差額金額(決定情報一覧.get差額金額());
+                    shuke.set出来高請求額差額金額(決定情報一覧.get差額金額());
+                    shuke.set増減理由等(parameter.get増減理由等());
+                    shuke.set不支給理由等(parameter.get不支給理由等1());
+                    shuke.set購入_改修履歴等(parameter.get不支給理由等2());
+                    shukei = shuke.build();
+                    shukei.modified();
+                    shukeiList.add(shukei);
+                    更新件数 = 更新件数 + Decimal.ONE.intValue();
                 }
             }
         }
         return 更新件数;
     }
 
-    private void 決定情報登録更新1(SyokanbaraihiShikyuShinseiKetteParameter parameter,
-            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧) {
+    private void 決定情報登録更新フラグなし(SyokanbaraihiShikyuShinseiKetteParameter parameter,
+            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧, ShomeishoNyuryokuFlag 証明書入力済フラグ,
+            ArrayList<ShokanServicePlan200904> 償還払請求サービス計画200904データList,
+            ArrayList<ShokanServicePlan200604> 償還払請求サービス計画200604データList,
+            ArrayList<ShokanServicePlan200004> 償還払請求サービス計画200004データList) {
 
         if (!テーブル区分_6.equals(決定情報一覧.getテーブル区分()) && !テーブル区分_7.equals(決定情報一覧.getテーブル区分())
                 && !テーブル区分_8.equals(決定情報一覧.getテーブル区分())) {
             return;
         }
         if (サービス年月_200904.isBeforeOrEquals(parameter.getサービス提供年月())
-                && テーブル区分_6.equals(決定情報一覧.getテーブル区分())) {
+                && テーブル区分_6.equals(決定情報一覧.getテーブル区分())
+                && 入力なし.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())) {
             DbT3047ShokanServicePlan200904Entity dbT3047entity
                     = 償還払請求サービス計画200904Dac.selectByKey(parameter.get被保険者番号(),
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3047entity != null) {
-                dbT3047entity.setShikyuKubunCode(parameter.get支給区分());
-                dbT3047entity.setZougenTen(parameter.get増減単位());
-                dbT3047entity.setSagakuKingaku(決定情報一覧.get差額金額());
-                dbT3047entity.setZougenRiyu(parameter.get増減理由等());
-                dbT3047entity.setFushikyuRiyu(parameter.get不支給理由等1());
-                dbT3047entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
-                dbT3047entity.setState(EntityDataState.Modified);
-                償還払請求サービス計画200904Dac.save(dbT3047entity);
+                dbT3047entity.initializeMd5();
+                ShokanServicePlan200904 dbt3047 = new ShokanServicePlan200904(dbT3047entity);
+                ShokanServicePlan200904Builder dbt3047builder = dbt3047.createBuilderForEdit();
+                dbt3047builder.set支給区分コード(parameter.get支給区分());
+                dbt3047builder.set増減点(parameter.get増減単位());
+                dbt3047builder.set差額金額(決定情報一覧.get差額金額());
+                dbt3047builder.set増減理由等(parameter.get増減理由等());
+                dbt3047builder.set不支給理由等(parameter.get不支給理由等1());
+                dbt3047builder.set購入_改修履歴等(parameter.get不支給理由等2());
+                dbt3047 = dbt3047builder.build().modified();
+                dbt3047.toEntity();
+                償還払請求サービス計画200904データList.add(dbt3047);
             }
         } else if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth(サービス年月3))
                 && new FlexibleYearMonth(サービス年月1).isBeforeOrEquals(parameter.getサービス提供年月())
-                && テーブル区分_7.equals(決定情報一覧.getテーブル区分())) {
+                && テーブル区分_7.equals(決定情報一覧.getテーブル区分())
+                && 入力なし.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())) {
             DbT3046ShokanServicePlan200604Entity dbT3046entity
                     = 償還払請求サービス計画200604Dac.selectByKey(parameter.get被保険者番号(),
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3046entity != null) {
-                dbT3046entity.setShikyuKubunCode(parameter.get支給区分());
-                dbT3046entity.setZougenTen(parameter.get増減単位());
-                dbT3046entity.setSagakuKingaku(決定情報一覧.get差額金額());
-                dbT3046entity.setZougenRiyu(parameter.get増減理由等());
-                dbT3046entity.setFushikyuRiyu(parameter.get不支給理由等1());
-                dbT3046entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
-                dbT3046entity.setState(EntityDataState.Modified);
-                償還払請求サービス計画200604Dac.save(dbT3046entity);
+                dbT3046entity.initializeMd5();
+                ShokanServicePlan200604 dbT3046 = new ShokanServicePlan200604(dbT3046entity);
+                ShokanServicePlan200604Builder dbt3046builder = dbT3046.createBuilderForEdit();
+                dbt3046builder.set支給区分コード(parameter.get支給区分());
+                dbt3046builder.set増減点(parameter.get増減単位());
+                dbt3046builder.set差額金額(決定情報一覧.get差額金額());
+                dbt3046builder.set増減理由等(parameter.get増減理由等());
+                dbt3046builder.set不支給理由等(parameter.get不支給理由等1());
+                dbt3046builder.set購入_改修履歴等(parameter.get不支給理由等2());
+                dbT3046 = dbt3046builder.build();
+                dbT3046.modified();
+                償還払請求サービス計画200604データList.add(dbT3046);
             }
         } else if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth(サービス年月4))
-                && テーブル区分_8.equals(決定情報一覧.getテーブル区分())) {
+                && テーブル区分_8.equals(決定情報一覧.getテーブル区分())
+                && 入力なし.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())) {
             DbT3045ShokanServicePlan200004Entity dbT3045entity
                     = 償還払請求サービス計画200004Dac.selectByKey(parameter.get被保険者番号(),
                             parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                             決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
             if (dbT3045entity != null) {
-                dbT3045entity.setShikyuKubunCode(parameter.get支給区分());
-                dbT3045entity.setZougenTen(parameter.get増減単位());
-                dbT3045entity.setSagakuKingaku(決定情報一覧.get差額金額());
-                dbT3045entity.setZougenRiyu(parameter.get増減理由等());
-                dbT3045entity.setFushikyuRiyu(parameter.get不支給理由等1());
-                dbT3045entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
-                dbT3045entity.setState(EntityDataState.Modified);
-                償還払請求サービス計画200004Dac.save(dbT3045entity);
+                dbT3045entity.initializeMd5();
+                ShokanServicePlan200004 dbT3045 = new ShokanServicePlan200004(dbT3045entity);
+                ShokanServicePlan200004Builder dbt3045Builder = dbT3045.createBuilderForEdit();
+                dbt3045Builder.set支給区分コード(parameter.get支給区分());
+                dbt3045Builder.set増減点(parameter.get増減単位());
+                dbt3045Builder.set差額金額(決定情報一覧.get差額金額());
+                dbt3045Builder.set増減理由等(parameter.get増減理由等());
+                dbt3045Builder.set不支給理由等(parameter.get不支給理由等1());
+                dbt3045Builder.set購入_改修履歴等(parameter.get不支給理由等2());
+                dbT3045 = dbt3045Builder.build();
+                dbT3045.modified();
+                償還払請求サービス計画200004データList.add(dbT3045);
+            }
+        }
+    }
+
+    private void 決定情報登録更新フラグあり(SyokanbaraihiShikyuShinseiKetteParameter parameter,
+            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧, ShomeishoNyuryokuFlag 証明書入力済フラグ,
+            DbJohoViewState dbJoho,
+            ArrayList<ShokanServicePlan200904> 償還払請求サービス計画200904データList,
+            ArrayList<ShokanServicePlan200604> 償還払請求サービス計画200604データList,
+            ArrayList<ShokanServicePlan200004> 償還払請求サービス計画200004データList) {
+
+        if (!テーブル区分_6.equals(決定情報一覧.getテーブル区分()) && !テーブル区分_7.equals(決定情報一覧.getテーブル区分())
+                && !テーブル区分_8.equals(決定情報一覧.getテーブル区分())) {
+            return;
+        }
+        if (サービス年月_200904.isBeforeOrEquals(parameter.getサービス提供年月())
+                && テーブル区分_6.equals(決定情報一覧.getテーブル区分())
+                && 入力あり.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())
+                && !dbJoho.get償還払請求サービス計画200904データResultList().isEmpty()) {
+            for (ShokanServicePlan200904Result dbT3047 : dbJoho.get償還払請求サービス計画200904データResultList()) {
+                if (dbT3047.getEntity().get被保険者番号().equals(parameter.get被保険者番号())
+                        && dbT3047.getEntity().getサービス提供年月().equals(parameter.getサービス提供年月())
+                        && dbT3047.getEntity().get整理番号().equals(parameter.get整理番号())
+                        && dbT3047.getEntity().get事業者番号().equals(決定情報一覧.get事業者番号())
+                        && dbT3047.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
+                        && dbT3047.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
+                        && dbT3047.getEntity().get連番().equals(決定情報一覧.get連番())
+                        && !dbT3047.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                    ShokanServicePlan200904Builder dbt3047Builder = dbT3047.getEntity().createBuilderForEdit();
+                    dbt3047Builder.set支給区分コード(parameter.get支給区分());
+                    dbt3047Builder.set増減点(parameter.get増減単位());
+                    dbt3047Builder.set差額金額(決定情報一覧.get差額金額());
+                    dbt3047Builder.set増減理由等(parameter.get増減理由等());
+                    dbt3047Builder.set不支給理由等(parameter.get不支給理由等1());
+                    dbt3047Builder.set購入_改修履歴等(parameter.get不支給理由等2());
+                    償還払請求サービス計画200904データList.add(dbt3047Builder.build().modified());
+                }
+            }
+        } else if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth(サービス年月3))
+                && new FlexibleYearMonth(サービス年月1).isBeforeOrEquals(parameter.getサービス提供年月())
+                && テーブル区分_7.equals(決定情報一覧.getテーブル区分())
+                && 入力あり.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())
+                && !dbJoho.get償還払請求サービス計画200604データResultList().isEmpty()) {
+            for (ShokanServicePlan200604Result dbT3046 : dbJoho.get償還払請求サービス計画200604データResultList()) {
+                if (dbT3046.getEntity().get被保険者番号().equals(parameter.get被保険者番号())
+                        && dbT3046.getEntity().getサービス提供年月().equals(parameter.getサービス提供年月())
+                        && dbT3046.getEntity().get整理番号().equals(parameter.get整理番号())
+                        && dbT3046.getEntity().get事業者番号().equals(決定情報一覧.get事業者番号())
+                        && dbT3046.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
+                        && dbT3046.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
+                        && dbT3046.getEntity().get連番().equals(決定情報一覧.get連番())
+                        && !dbT3046.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                    ShokanServicePlan200604Builder dbt3046Builder = dbT3046.getEntity().createBuilderForEdit();
+                    dbt3046Builder.set支給区分コード(parameter.get支給区分());
+                    dbt3046Builder.set増減点(parameter.get増減単位());
+                    dbt3046Builder.set差額金額(決定情報一覧.get差額金額());
+                    dbt3046Builder.set増減理由等(parameter.get増減理由等());
+                    dbt3046Builder.set不支給理由等(parameter.get不支給理由等1());
+                    dbt3046Builder.set購入_改修履歴等(parameter.get不支給理由等2());
+                    償還払請求サービス計画200604データList.add(dbt3046Builder.build().modified());
+                }
+            }
+        } else if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth(サービス年月4))
+                && テーブル区分_8.equals(決定情報一覧.getテーブル区分())
+                && 入力あり.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())
+                && !dbJoho.get償還払請求サービス計画200004データResultList().isEmpty()) {
+            for (ShokanServicePlan200004Result dbT3045 : dbJoho.get償還払請求サービス計画200004データResultList()) {
+                if (dbT3045.getEntity().get被保険者番号().equals(parameter.get被保険者番号())
+                        && dbT3045.getEntity().getサービス提供年月().equals(parameter.getサービス提供年月())
+                        && dbT3045.getEntity().get整理番号().equals(parameter.get整理番号())
+                        && dbT3045.getEntity().get事業者番号().equals(決定情報一覧.get事業者番号())
+                        && dbT3045.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
+                        && dbT3045.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
+                        && dbT3045.getEntity().get連番().equals(決定情報一覧.get連番())
+                        && !dbT3045.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                    ShokanServicePlan200004Builder dbt3045Builder = dbT3045.getEntity().createBuilderForEdit();
+                    dbt3045Builder.set支給区分コード(parameter.get支給区分());
+                    dbt3045Builder.set増減点(parameter.get増減単位());
+                    dbt3045Builder.set差額金額(決定情報一覧.get差額金額());
+                    dbt3045Builder.set増減理由等(parameter.get増減理由等());
+                    dbt3045Builder.set不支給理由等(parameter.get不支給理由等1());
+                    dbt3045Builder.set購入_改修履歴等(parameter.get不支給理由等2());
+                    償還払請求サービス計画200004データList.add(dbt3045Builder.build().modified());
+                }
             }
         }
     }
 
     private void 決定情報登録更新2(SyokanbaraihiShikyuShinseiKetteParameter parameter,
-            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧) {
+            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧, ShomeishoNyuryokuFlag 証明書入力済フラグ, ModoruEntity modoruEntity,
+            DbJohoViewState dbJoho, ArrayList<ShokanShokujiHiyo> shokujiJouhos, ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyo,
+            ArrayList<ShokanServicePlan200904> 償還払請求サービス計画200904データList,
+            ArrayList<ShokanServicePlan200604> 償還払請求サービス計画200604データList,
+            ArrayList<ShokanServicePlan200004> 償還払請求サービス計画200004データList) {
         switch (Integer.valueOf(決定情報一覧.getテーブル区分().toString())) {
             case テーブル区分3:
                 DbT3053ShokanShukeiEntity dbT3053entity = 償還払請求集計Dac.selectByKey(parameter.get被保険者番号(),
                         parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                         決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
                 if (dbT3053entity != null) {
-                    dbT3053entity.setShikyuKubunCode(parameter.get支給区分());
-                    dbT3053entity.setSeikyugakuSagakuKingaku(決定情報一覧.get差額金額());
-                    dbT3053entity.setDekidakaSeikyugakuSagaku(決定情報一覧.get差額金額());
-                    dbT3053entity.setState(EntityDataState.Modified);
-                    償還払請求集計Dac.save(dbT3053entity);
+                    dbT3053entity.initializeMd5();
+                    ShokanShukei shukei = new ShokanShukei(dbT3053entity);
+                    ShokanShukeiBuilder shuk = shukei.createBuilderForEdit();
+                    shuk.set支給区分コード(parameter.get支給区分());
+                    shuk.set請求額差額金額(決定情報一覧.get差額金額());
+                    shuk.set出来高請求額差額金額(決定情報一覧.get差額金額());
+                    shukei = shuk.build();
+                    modoruEntity.get償還払請求集計データList().add(shukei);
                 }
                 break;
             case テーブル区分4:
-                DbT3043ShokanShokujiHiyoEntity dbT3043entity = 償還払請求食事費用Dac.selectByKey(parameter.get被保険者番号(),
-                        parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
-                        決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
-                if (dbT3043entity != null) {
-                    dbT3043entity.setSagakuKingaku(決定情報一覧.get差額金額());
-                    dbT3043entity.setState(EntityDataState.Modified);
-                    償還払請求食事費用Dac.save(dbT3043entity);
+                if (入力なし.equals(証明書入力済フラグ.get食事費用_証明書入力済フラグ().getCode())) {
+                    DbT3043ShokanShokujiHiyoEntity dbT3043entity = 償還払請求食事費用Dac.selectByKey(parameter.get被保険者番号(),
+                            parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
+                            決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
+                    if (dbT3043entity != null) {
+                        dbT3043entity.initializeMd5();
+                        ShokanShokujiHiyo shokuj = new ShokanShokujiHiyo(dbT3043entity);
+                        ShokanShokujiHiyoBuilder shokujBuilder = shokuj.createBuilderForEdit();
+                        shokujBuilder.set差額金額(決定情報一覧.get差額金額());
+                        shokuj = shokujBuilder.build();
+                        shokuj.modified();
+                        shokujiJouhos.add(shokuj);
+                    }
+                } else if (入力あり.equals(証明書入力済フラグ.get食事費用_証明書入力済フラグ().getCode())
+                        && !dbJoho.get償還払請求食事費用データList().isEmpty()) {
+                    for (ShokanShokujiHiyo shokuji : dbJoho.get償還払請求食事費用データList()) {
+                        if (shokuji.get被保険者番号().equals(parameter.get被保険者番号())
+                                && shokuji.getサービス提供年月().equals(parameter.getサービス提供年月())
+                                && shokuji.get整理番号().equals(parameter.get整理番号())
+                                && shokuji.get事業者番号().equals(決定情報一覧.get事業者番号())
+                                && shokuji.get様式番号().equals(決定情報一覧.get証明書コード())
+                                && shokuji.get明細番号().equals(決定情報一覧.get明細番号())
+                                && shokuji.get連番().equals(決定情報一覧.get連番())
+                                && !shokuji.toEntity().getState().equals(EntityDataState.Deleted)) {
+                            ShokanShokujiHiyoBuilder shokujiBuilder = shokuji.createBuilderForEdit();
+                            shokujiBuilder.set差額金額(決定情報一覧.get差額金額());
+                            shokuji = shokujiBuilder.build();
+                            shokuji.modified();
+                            shokujiJouhos.add(shokuji);
+                        }
+                    }
                 }
                 break;
             case テーブル区分5:
-                DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity dbT3050entity
-                        = 償還払請求特定入所者介護サービス費用Dac.selectByKey(parameter.get被保険者番号(),
-                                parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
-                                決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
-                if (dbT3050entity != null) {
-                    dbT3050entity.setSagakuKingaku(決定情報一覧.get差額金額());
-                    dbT3050entity.setState(EntityDataState.Modified);
-                    償還払請求特定入所者介護サービス費用Dac.save(dbT3050entity);
+                if (入力なし.equals(証明書入力済フラグ.get特定入所者費用_証明書入力済フラグ().getCode())) {
+                    DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity dbT3050entity
+                            = 償還払請求特定入所者介護サービス費用Dac.selectByKey(parameter.get被保険者番号(),
+                                    parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
+                                    決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
+                    if (dbT3050entity != null) {
+                        dbT3050entity.initializeMd5();
+                        ShokanTokuteiNyushoshaKaigoServiceHiyo service = new ShokanTokuteiNyushoshaKaigoServiceHiyo(dbT3050entity);
+                        ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder serviceBuilder = service.createBuilderForEdit();
+                        serviceBuilder.set差額金額(決定情報一覧.get差額金額());
+                        service = serviceBuilder.build();
+                        service.modifiedModel();
+                        serviceHiyo.add(service);
+                    }
+                } else if (入力あり.equals(証明書入力済フラグ.get特定入所者費用_証明書入力済フラグ().getCode())
+                        && !dbJoho.get償還払請求特定入所者介護サービス費用データList().isEmpty()) {
+                    for (ShokanTokuteiNyushoshaKaigoServiceHiyo serviceHi : dbJoho.get償還払請求特定入所者介護サービス費用データList()) {
+                        if (serviceHi.get被保険者番号().equals(parameter.get被保険者番号())
+                                && serviceHi.getサービス提供年月().equals(parameter.getサービス提供年月())
+                                && serviceHi.get整理番号().equals(parameter.get整理番号())
+                                && serviceHi.get事業者番号().equals(決定情報一覧.get事業者番号())
+                                && serviceHi.get様式番号().equals(決定情報一覧.get証明書コード())
+                                && serviceHi.get明細番号().equals(決定情報一覧.get明細番号())
+                                && serviceHi.get連番().equals(決定情報一覧.get連番())) {
+                            ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder serviceBuilder = serviceHi.createBuilderForEdit();
+                            serviceBuilder.set差額金額(決定情報一覧.get差額金額());
+                            serviceHi = serviceBuilder.build();
+                            serviceHi.modifiedModel();
+                            serviceHiyo.add(serviceHi);
+                        }
+                    }
                 }
                 break;
             case テーブル区分6:
-                DbT3047ShokanServicePlan200904Entity dbT3047entity
-                        = 償還払請求サービス計画200904Dac.selectByKey(parameter.get被保険者番号(),
-                                parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
-                                決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
-                if (dbT3047entity != null) {
-                    dbT3047entity.setSagakuKingaku(決定情報一覧.get差額金額());
-                    dbT3047entity.setState(EntityDataState.Modified);
-                    償還払請求サービス計画200904Dac.save(dbT3047entity);
-                }
+                差額金額処理一(parameter, 決定情報一覧, 証明書入力済フラグ, dbJoho, 償還払請求サービス計画200904データList);
                 break;
             case テーブル区分7:
-                DbT3046ShokanServicePlan200604Entity dbT3046entity
-                        = 償還払請求サービス計画200604Dac.selectByKey(parameter.get被保険者番号(),
-                                parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
-                                決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
-                if (dbT3046entity != null) {
-                    dbT3046entity.setSagakuKingaku(決定情報一覧.get差額金額());
-                    dbT3046entity.setState(EntityDataState.Modified);
-                    償還払請求サービス計画200604Dac.save(dbT3046entity);
-                }
+                差額金額処理二(parameter, 決定情報一覧, 証明書入力済フラグ, dbJoho, 償還払請求サービス計画200604データList);
                 break;
             case テーブル区分8:
-                DbT3045ShokanServicePlan200004Entity dbT3045entity
-                        = 償還払請求サービス計画200004Dac.selectByKey(parameter.get被保険者番号(),
-                                parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
-                                決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
-                if (dbT3045entity != null) {
-                    dbT3045entity.setShikyuKubunCode(parameter.get支給区分());
-                    dbT3045entity.setSagakuKingaku(決定情報一覧.get差額金額());
-                    dbT3045entity.setState(EntityDataState.Modified);
-                    償還払請求サービス計画200004Dac.save(dbT3045entity);
-                }
+                差額金額処理三(parameter, 決定情報一覧, 証明書入力済フラグ, dbJoho, 償還払請求サービス計画200004データList);
                 break;
             default:
                 break;
@@ -1921,4 +2208,115 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
         }
         return 項目;
     }
+
+    private void 差額金額処理一(SyokanbaraihiShikyuShinseiKetteParameter parameter,
+            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧, ShomeishoNyuryokuFlag 証明書入力済フラグ, DbJohoViewState dbJoho,
+            ArrayList<ShokanServicePlan200904> 償還払請求サービス計画200904データList) {
+        if (テーブル区分_6.equals(決定情報一覧.getテーブル区分())
+                && 入力なし.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())) {
+            DbT3047ShokanServicePlan200904Entity dbT3047entity
+                    = 償還払請求サービス計画200904Dac.selectByKey(parameter.get被保険者番号(),
+                            parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
+                            決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
+            if (dbT3047entity != null) {
+                dbT3047entity.initializeMd5();
+                ShokanServicePlan200904 service3047 = new ShokanServicePlan200904(dbT3047entity);
+                ShokanServicePlan200904Builder builder = service3047.createBuilderForEdit();
+                builder.set差額金額(決定情報一覧.get差額金額());
+                償還払請求サービス計画200904データList.add(builder.build().modified());
+            }
+        } else if (テーブル区分_6.equals(決定情報一覧.getテーブル区分())
+                && 入力あり.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())
+                && !dbJoho.get償還払請求サービス計画200904データResultList().isEmpty()) {
+            for (ShokanServicePlan200904Result dbT3047 : dbJoho.get償還払請求サービス計画200904データResultList()) {
+                if (dbT3047.getEntity().get被保険者番号().equals(parameter.get被保険者番号())
+                        && dbT3047.getEntity().getサービス提供年月().equals(parameter.getサービス提供年月())
+                        && dbT3047.getEntity().get整理番号().equals(parameter.get整理番号())
+                        && dbT3047.getEntity().get事業者番号().equals(決定情報一覧.get事業者番号())
+                        && dbT3047.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
+                        && dbT3047.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
+                        && dbT3047.getEntity().get連番().equals(決定情報一覧.get連番())
+                        && !dbT3047.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                    ShokanServicePlan200904Builder dbt3047Builder = dbT3047.getEntity().createBuilderForEdit();
+                    dbt3047Builder.set差額金額(決定情報一覧.get差額金額());
+                    償還払請求サービス計画200904データList.add(dbt3047Builder.build().modified());
+                }
+            }
+        }
+    }
+
+    private void 差額金額処理二(SyokanbaraihiShikyuShinseiKetteParameter parameter,
+            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧, ShomeishoNyuryokuFlag 証明書入力済フラグ, DbJohoViewState dbJoho,
+            ArrayList<ShokanServicePlan200604> 償還払請求サービス計画200604データList) {
+        if (テーブル区分_7.equals(決定情報一覧.getテーブル区分())
+                && 入力なし.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())) {
+            DbT3046ShokanServicePlan200604Entity dbT3046entity
+                    = 償還払請求サービス計画200604Dac.selectByKey(parameter.get被保険者番号(),
+                            parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
+                            決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
+            if (dbT3046entity != null) {
+                dbT3046entity.initializeMd5();
+                ShokanServicePlan200604 dbT3046 = new ShokanServicePlan200604(dbT3046entity);
+                ShokanServicePlan200604Builder dbt3046builder = dbT3046.createBuilderForEdit();
+                dbt3046builder.set差額金額(決定情報一覧.get差額金額());
+                償還払請求サービス計画200604データList.add(dbt3046builder.build().modified());
+            }
+        } else if (テーブル区分_7.equals(決定情報一覧.getテーブル区分())
+                && 入力あり.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())
+                && !dbJoho.get償還払請求サービス計画200604データResultList().isEmpty()) {
+            for (ShokanServicePlan200604Result dbT3046 : dbJoho.get償還払請求サービス計画200604データResultList()) {
+                if (dbT3046.getEntity().get被保険者番号().equals(parameter.get被保険者番号())
+                        && dbT3046.getEntity().getサービス提供年月().equals(parameter.getサービス提供年月())
+                        && dbT3046.getEntity().get整理番号().equals(parameter.get整理番号())
+                        && dbT3046.getEntity().get事業者番号().equals(決定情報一覧.get事業者番号())
+                        && dbT3046.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
+                        && dbT3046.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
+                        && dbT3046.getEntity().get連番().equals(決定情報一覧.get連番())
+                        && !dbT3046.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                    ShokanServicePlan200604Builder dbt3046Builder = dbT3046.getEntity().createBuilderForEdit();
+                    dbt3046Builder.set差額金額(決定情報一覧.get差額金額());
+                    償還払請求サービス計画200604データList.add(dbt3046Builder.build().modified());
+                }
+            }
+        }
+    }
+
+    private void 差額金額処理三(SyokanbaraihiShikyuShinseiKetteParameter parameter,
+            SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧, ShomeishoNyuryokuFlag 証明書入力済フラグ, DbJohoViewState dbJoho,
+            ArrayList<ShokanServicePlan200004> 償還払請求サービス計画200004データList) {
+        if (テーブル区分_8.equals(決定情報一覧.getテーブル区分())
+                && 入力なし.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())) {
+            DbT3045ShokanServicePlan200004Entity dbT3045entity
+                    = 償還払請求サービス計画200004Dac.selectByKey(parameter.get被保険者番号(),
+                            parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
+                            決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
+            if (dbT3045entity != null) {
+                dbT3045entity.initializeMd5();
+                ShokanServicePlan200004 dbT3045 = new ShokanServicePlan200004(dbT3045entity);
+                ShokanServicePlan200004Builder dbt3045Builder = dbT3045.createBuilderForEdit();
+                dbt3045Builder.set支給区分コード(parameter.get支給区分());
+                dbt3045Builder.set差額金額(決定情報一覧.get差額金額());
+                償還払請求サービス計画200004データList.add(dbt3045Builder.build().modified());
+            }
+        } else if (テーブル区分_8.equals(決定情報一覧.getテーブル区分())
+                && 入力あり.equals(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ().getCode())
+                && !dbJoho.get償還払請求サービス計画200004データResultList().isEmpty()) {
+            for (ShokanServicePlan200004Result dbT3045 : dbJoho.get償還払請求サービス計画200004データResultList()) {
+                if (dbT3045.getEntity().get被保険者番号().equals(parameter.get被保険者番号())
+                        && dbT3045.getEntity().getサービス提供年月().equals(parameter.getサービス提供年月())
+                        && dbT3045.getEntity().get整理番号().equals(parameter.get整理番号())
+                        && dbT3045.getEntity().get事業者番号().equals(決定情報一覧.get事業者番号())
+                        && dbT3045.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
+                        && dbT3045.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
+                        && dbT3045.getEntity().get連番().equals(決定情報一覧.get連番())
+                        && !dbT3045.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                    ShokanServicePlan200004Builder dbt3045Builder = dbT3045.getEntity().createBuilderForEdit();
+                    dbt3045Builder.set支給区分コード(parameter.get支給区分());
+                    dbt3045Builder.set差額金額(決定情報一覧.get差額金額());
+                    償還払請求サービス計画200004データList.add(dbt3045Builder.build().modified());
+                }
+            }
+        }
+    }
+
 }

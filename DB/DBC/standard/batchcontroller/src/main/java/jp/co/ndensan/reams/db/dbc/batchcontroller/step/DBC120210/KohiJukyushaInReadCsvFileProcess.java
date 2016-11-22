@@ -194,7 +194,7 @@ public class KohiJukyushaInReadCsvFileProcess extends BatchProcessBase<RString> 
         被保険者一時entity.setOrgHihokenshaKanaShimei(RString.EMPTY);
         被保険者一時entity.setOrgHihokenshaShimei(RString.EMPTY);
         被保険者一時entity.setOldShichosonCode(LasdecCode.EMPTY);
-        被保険者一時entity.setHenkanHihokenshaNo(HihokenshaNo.EMPTY);
+        被保険者一時entity.setHenkanHihokenshaNo(new HihokenshaNo(set字符(meisaEntity.get被保険者番号())));
         被保険者一時entity.setHihokenshaNo(new HihokenshaNo(set字符(meisaEntity.get被保険者番号())));
         被保険者一時entity.setShichosonCode(LasdecCode.EMPTY);
         被保険者一時entity.setKannaiKangaiKubun(RString.EMPTY);

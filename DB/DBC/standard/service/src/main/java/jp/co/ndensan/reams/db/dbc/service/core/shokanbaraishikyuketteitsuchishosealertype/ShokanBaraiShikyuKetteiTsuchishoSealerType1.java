@@ -332,7 +332,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 ketteiTsuchiShoSealer.setShiharaiStartHMS(setDataTimeFomart2(batchPram.get開始時間()));
                 ketteiTsuchiShoSealer.setShiharaiEndHMS(setDataTimeFomart2(batchPram.get終了時間()));
             }
-            if (!RString.isNullOrEmpty(ketteiTsuchiShoSealer.getShiharaiStartHMS()) && !RString.isNullOrEmpty(ketteiTsuchiShoSealer.getShiharaiEndHMS())) {
+            if (!RString.isNullOrEmpty(ketteiTsuchiShoSealer.getShiharaiStartHMS()) 
+                    && !RString.isNullOrEmpty(ketteiTsuchiShoSealer.getShiharaiEndHMS())) {
                 ketteiTsuchiShoSealer.setKaraFugo(KARA);
             }
         }

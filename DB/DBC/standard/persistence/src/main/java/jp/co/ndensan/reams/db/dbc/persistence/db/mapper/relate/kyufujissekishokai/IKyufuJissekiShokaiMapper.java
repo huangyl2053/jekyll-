@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJisse
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiKihonKyotakuServiceRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiKihonShukeiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiShakaiFukushiHojinKeigengakuRelateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiShukeiKekkaData;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiFukushiYoguHanbaihiBusinessRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiJutakuKaishuhiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiKyotakuServiceRelateEntity;
@@ -231,6 +232,24 @@ public interface IKyufuJissekiShokaiMapper {
      * @return List<KyufujissekiMeisaiJushochiTokureiRelateEntity>
      */
     List<KyufujissekiMeisaiJushochiTokureiRelateEntity> get給付実績明細住所地特例データ(
+            KyufuJissekiKensakuDataMapperParameter parameter);
+
+    /**
+     * 給付実績集計データを取得します。
+     *
+     * @param parameter 給付実績情報照会検索データ取得用MyBatisパラメータ
+     * @return List<KyufuJissekiShukeiKekkaData>
+     */
+    List<KyufuJissekiShukeiKekkaData> get集計データ(
+            KyufuJissekiKensakuDataMapperParameter parameter);
+
+    /**
+     * 給付実績集計データ_経過措置を取得します。
+     *
+     * @param parameter 給付実績情報照会検索データ取得用MyBatisパラメータ
+     * @return List<KyufuJissekiShukeiKekkaData>
+     */
+    List<KyufuJissekiShukeiKekkaData> get集計データ_経過措置(
             KyufuJissekiKensakuDataMapperParameter parameter);
 
 }

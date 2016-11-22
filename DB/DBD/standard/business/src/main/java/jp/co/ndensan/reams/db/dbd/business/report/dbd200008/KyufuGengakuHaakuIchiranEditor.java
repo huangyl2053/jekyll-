@@ -960,14 +960,6 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
         }
     }
 
-    //TODO QA「減額情報１」、「減額情報２」などはなんですか。
-//    private void setGengakuTaishoJoho(KyufuGengakuHaakuIchiranReportSource source) {
-//        if (this.減額対象情報リストEntity != null && !this.減額対象情報リストEntity.isEmpty()) {
-//            for (int gengakuIndex = 0; gengakuIndex < 減額対象情報リストEntity.size(); gengakuIndex++) {
-//            }
-//        }
-//
-//    }
     private RString get要介護度() {
         if (this.給付額減額把握リストEntity.get被保険者情報Entity() != null) {
             HihokenshaJohoEntity 被保険者情報Entity = this.給付額減額把握リストEntity.get被保険者情報Entity();

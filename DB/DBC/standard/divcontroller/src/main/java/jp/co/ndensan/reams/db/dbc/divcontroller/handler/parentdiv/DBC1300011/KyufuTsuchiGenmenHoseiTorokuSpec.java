@@ -26,7 +26,8 @@ public enum KyufuTsuchiGenmenHoseiTorokuSpec implements IPredicate<KyufuTsuchiGe
             boolean flag = false;
             Decimal 最大取得件数 = div.getKyufuTsuchiGenmenHoseiTorokuSearch().getTextBoxNumKensuu().getValue();
             if ((最大取得件数.compareTo(Decimal.ONE) > 0 || 最大取得件数.compareTo(Decimal.ONE) == 0)
-                && (最大取得件数.compareTo(new Decimal(SpecHelper.INT_999)) < 0 || 最大取得件数.compareTo(new Decimal(SpecHelper.INT_999)) == 0)) {
+                && (最大取得件数.compareTo(new Decimal(SpecHelper.get最大取得件数())) < 0 
+                    || 最大取得件数.compareTo(new Decimal(SpecHelper.get最大取得件数())) == 0)) {
                 flag = true;
             }
             return flag;
@@ -64,12 +65,7 @@ public enum KyufuTsuchiGenmenHoseiTorokuSpec implements IPredicate<KyufuTsuchiGe
     事業者入力 {
         @Override
         public boolean apply(KyufuTsuchiGenmenHoseiTorokuDiv div) {
-            boolean flag = false;
-            if (!div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isNull()
-                    && !div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isEmpty()) {
-                flag = true;
-            }
-            return flag;
+            return !div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo().isEmpty();
         }
     },
     /**
@@ -115,5 +111,9 @@ public enum KyufuTsuchiGenmenHoseiTorokuSpec implements IPredicate<KyufuTsuchiGe
     
     private static class SpecHelper {
         private static final int INT_999 = 999;
+        
+        public static int get最大取得件数() {
+            return INT_999;
+        }
     }
 }

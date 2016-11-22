@@ -530,7 +530,7 @@
             fuka."tsuchishoNo" AS "fuka_tsuchishoNo",
             fuka."rirekiNo" AS "fuka_rirekiNo",
             fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
-            COALESCE(fuka."hokenryoDankai2",fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
+            COALESCE(NULLIF(fuka."hokenryoDankai2",''),fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
             fuka."tkSaishutsuKampuGaku" AS "fuka_tkSaishutsuKampuGaku",
             fuka."fuSaishutsuKampuGaku" AS "fuka_fuSaishutsuKampuGaku",
             kibetsu."choshuHouhou" AS "kibetsu_choshuHouhou",
@@ -575,7 +575,7 @@
             fuka."tsuchishoNo" AS "fuka_tsuchishoNo",
             fuka."rirekiNo" AS "fuka_rirekiNo",
             fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
-            COALESCE(fuka."hokenryoDankai2",fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
+            COALESCE(NULLIF(fuka."hokenryoDankai2",''),fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
             fuka."tkSaishutsuKampuGaku" AS "fuka_tkSaishutsuKampuGaku",
             fuka."fuSaishutsuKampuGaku" AS "fuka_fuSaishutsuKampuGaku",
             kibetsu."choshuHouhou" AS "kibetsu_choshuHouhou",
@@ -621,7 +621,7 @@
             fuka."tsuchishoNo" AS "fuka_tsuchishoNo",
             fuka."rirekiNo" AS "fuka_rirekiNo",
             fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
-            COALESCE(fuka."hokenryoDankai2",fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
+            COALESCE(NULLIF(fuka."hokenryoDankai2",''),fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
             kibetsu."choshuHouhou" AS "kibetsu_choshuHouhou",
             kibetsu."ki" AS "kibetsu_ki",
             kibetsu."choteiId" AS "kibetsu_choteiId",
@@ -655,9 +655,9 @@
         WHERE fuka."choteiNendo" = #{choteiNendo}
             AND fuka."fukaNendo" = #{choteiNendo}
             AND fuka."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
-            AND (fuka."hokenryoDankai1" IS NULL AND fuka."hokenryoDankai2" IS NULL
+            AND ((NULLIF(fuka."hokenryoDankai1",'') IS NULL) AND (NULLIF(fuka."hokenryoDankai2",'') IS NULL)
                     AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[>=]]> #{調定年度0401} AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[<=]]> #{調定年度0430})
-            OR ((fuka."hokenryoDankai1" IS NOT NULL OR fuka."hokenryoDankai2" IS NOT NULL)
+            OR (((NULLIF(fuka."hokenryoDankai1",'') IS NOT NULL) OR (NULLIF(fuka."hokenryoDankai2",'') IS NOT NULL))
                     AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[>=]]> #{調定年度0401} AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[<=]]> #{調定年度0430})
         ORDER BY fuka."hihokenshaNo", fuka."tsuchishoNo"
     </select>
@@ -670,7 +670,7 @@
             fuka."tsuchishoNo" AS "fuka_tsuchishoNo",
             fuka."rirekiNo" AS "fuka_rirekiNo",
             fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
-            COALESCE(fuka."hokenryoDankai2",fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
+            COALESCE(NULLIF(fuka."hokenryoDankai2",''),fuka."hokenryoDankai1") AS "fuka_hokenryoDankai",
             fuka."gemmenGaku" AS "fuka_gemmenGaku"
         FROM rgdb."DbT2002Fuka" AS fuka
         INNER JOIN (

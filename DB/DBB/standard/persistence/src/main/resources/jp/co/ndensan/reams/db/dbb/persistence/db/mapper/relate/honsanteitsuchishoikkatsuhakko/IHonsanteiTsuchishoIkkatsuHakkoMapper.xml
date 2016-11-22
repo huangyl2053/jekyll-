@@ -772,7 +772,8 @@
     <select id="select特徴開始通知書" resultMap="resultMap_HonsanteiTsuchisho"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.PrtTokuchoKaishiTsuchishoHonsanteiParameter" fetchSize="500">
         SELECT
-            A.*
+            A.*,
+            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
         FROM
             "TmpHonsanteiTsuchisho" AS A
         WHERE 1=1
@@ -1625,7 +1626,8 @@
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.PrtKetteiTsuchishoParameter" 
             fetchSize="500" resultOrdered="true">
         SELECT
-            A.*
+            A.*,
+            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
         FROM
             "TmpHonsanteiTsuchisho" AS A
         WHERE
@@ -1679,7 +1681,8 @@
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.PrtNonyuTsuchishoParameter" 
             fetchSize="500" resultOrdered="true">
         SELECT
-            A.*
+            A.*,
+            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
         FROM
             "TmpHonsanteiTsuchisho" AS A
         WHERE 

@@ -6,23 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110030;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.honnsanteifuka.HonnsanteiFukaMybatisParamter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.honnsanteifuka.HonnsanteiFukaProcessParamter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.IdouChuukannKooGakuTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.JukyushaDaichoRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.ShotaiinHaakuIttokiTempEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.honnsanteifuka.HonnSanteiFukaManager;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -30,11 +23,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2770-050 zhangzhiming
  */
-public class IdouDetaTyuushutuProcess extends BatchProcessBase<JukyushaDaichoRelateEntity> {
+public class IdouDetaTyuushutuProcess extends BatchProcessBase<DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.honnsanteifuka."
-            + "IHonnSanteiFukaMapper.select受給者台帳情報");
+            + "IHonnSanteiFukaMapper.select共同処理高額送付一時");
     private HonnsanteiFukaProcessParamter processParameter;
     private static final RString TABLE_世帯員把握トリガ一時 = new RString("SetaiYinHaAKuToRiGaTemp");
     @BatchWriter
@@ -48,18 +41,11 @@ public class IdouDetaTyuushutuProcess extends BatchProcessBase<JukyushaDaichoRel
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-        key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        HonnsanteiFukaMybatisParamter sqlParam
-                = HonnsanteiFukaMybatisParamter.createParam(processParameter.toSyoriMybitisParamter(),
-                        new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
-        return new BatchDbReader(MYBATIS_SELECT_ID, sqlParam);
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toSofuDataMybitisParamter());
     }
 
     @Override
-    protected void process(JukyushaDaichoRelateEntity entity) {
+    protected void process(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity entity) {
     }
 
     @Override

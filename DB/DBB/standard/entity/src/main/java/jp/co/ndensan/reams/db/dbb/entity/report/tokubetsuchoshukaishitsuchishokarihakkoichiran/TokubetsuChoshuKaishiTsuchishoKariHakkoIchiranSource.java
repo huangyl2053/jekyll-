@@ -85,16 +85,70 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource implements IRe
     public RString listLower_10;
     @ReportItem(name = "listLower_11", length = 7, order = 34)
     public RString listLower_11;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
-
     /**
      * TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSourceのenum
      */
+    @ReportItem(name = "atesaki_choikiCode", length = 100, order = 35)
+    public RString atesaki_choikiCode;
+    @ReportItem(name = "atesaki_banchiCode", length = 200, order = 36)
+    public RString atesaki_banchiCode;
+    @ReportItem(name = "atesaki_gyoseikuCode", length = 100, order = 37)
+    public RString atesaki_gyoseikuCode;
+    @ReportItem(name = "atesaki_chikuCode1", length = 100, order = 38)
+    public RString atesaki_chikuCode1;
+    @ReportItem(name = "atesaki_chikuCode2", length = 100, order = 39)
+    public RString atesaki_chikuCode2;
+    @ReportItem(name = "atesaki_chikuCode3", length = 100, order = 40)
+    public RString atesaki_chikuCode3;
+    @ReportItem(name = "atena_shikibetsuCode", length = 100, order = 41)
+    public RString atena_shikibetsuCode;
+    @ReportItem(name = "atena_kanaMeisho", length = 100, order = 42)
+    public RString atena_kanaMeisho;
+    @ReportItem(name = "dbT2015KeisangoJoho_fukaShichosonCode", length = 100, order = 43)
+    public RString dbT2015KeisangoJoho_fukaShichosonCode;
+    @ReportItem(name = "nenkinTokuchoKaifuJoho_nenkinCode", length = 100, order = 44)
+    public RString nenkinTokuchoKaifuJoho_nenkinCode;
+    @ReportItem(name = "dbT2015KeisangoJoho_seihofujoShurui", length = 100, order = 45)
+    public RString dbT2015KeisangoJoho_seihofujoShurui;
+    @ReportItem(name = "caT0714SeikyuHoho_nokumiCode", length = 100, order = 46)
+    public RString caT0714SeikyuHoho_nokumiCode;
+    @ReportItem(name = "dbT2015KeisangoJoho_choteiJiyu1", length = 100, order = 47)
+    public RString dbT2015KeisangoJoho_choteiJiyu1;
+
+    @ReportItem(name = "choikiCode", length = 15, order = 48)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 15, order = 49)
+    public RString gyoseikuCode;
+    @ReportItem(name = "chikuCode1", length = 15, order = 50)
+    public RString chikuCode1;
+    @ReportItem(name = "chikuCode2", length = 15, order = 51)
+    public RString chikuCode2;
+    @ReportItem(name = "chikuCode3", length = 15, order = 52)
+    public RString chikuCode3;
+    @ReportItem(name = "shikibetsuCode", length = 15, order = 53)
+    public RString shikibetsuCode;
+    @ReportItem(name = "kanaMeisho", length = 30, order = 54)
+    public RString kanaMeisho;
+    @ReportItem(name = "hihokenshaNo", length = 15, order = 55)
+    public RString hihokenshaNo;
+    @ReportItem(name = "nenkinCode", length = 15, order = 56)
+    public RString nenkinCode;
+    @ReportItem(name = "nokumiCode", length = 15, order = 57)
+    public RString nokumiCode;
+    @ReportItem(name = "seihoFlag", length = 15, order = 58)
+    public RString seihoFlag;
+    @ReportItem(name = "choteiJiyu", length = 30, order = 59)
+    public RString choteiJiyu;
+    @ReportItem(name = "banchiCode", length = 30, order = 60)
+    public RString banchiCode;
+
     public enum ReportSourceFields {
 
         printTimeStamp,
@@ -130,6 +184,32 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource implements IRe
         listLower_8,
         listLower_9,
         listLower_10,
-        listLower_11
+        listLower_11,
+        atesaki_choikiCode,
+        atesaki_banchiCode,
+        atesaki_gyoseikuCode,
+        atesaki_chikuCode1,
+        atesaki_chikuCode2,
+        atesaki_chikuCode3,
+        atena_shikibetsuCode,
+        atena_kanaMeisho,
+        dbT2015KeisangoJoho_fukaShichosonCode,
+        nenkinTokuchoKaifuJoho_nenkinCode,
+        dbT2015KeisangoJoho_seihofujoShurui,
+        caT0714SeikyuHoho_nokumiCode,
+        dbT2015KeisangoJoho_choteiJiyu1,
+        choikiCode,
+        gyoseikuCode,
+        chikuCode1,
+        chikuCode2,
+        chikuCode3,
+        shikibetsuCode,
+        kanaMeisho,
+        hihokenshaNo,
+        nenkinCode,
+        nokumiCode,
+        seihoFlag,
+        banchiCode,
+        choteiJiyu
     }
 }

@@ -21,6 +21,7 @@ public class ShafukukeigenServiceEntity implements Cloneable, Serializable {
 
     private ServiceShuruiCode serviceShuruiCode;
     private RString serviceShuruiMeisho;
+    private RString serviceShuruiRyakusho;
     private int riyoshaFutangaku;
 
 }

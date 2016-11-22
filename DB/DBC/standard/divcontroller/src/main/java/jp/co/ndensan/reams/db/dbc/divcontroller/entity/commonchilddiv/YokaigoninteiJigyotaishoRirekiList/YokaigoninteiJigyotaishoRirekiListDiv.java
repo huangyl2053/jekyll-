@@ -4,13 +4,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Yokaigoni
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * YokaigoninteiJigyotaishoRirekiList のクラスファイル
@@ -18,8 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBC-4350-010 wangxingpeng
  */
 public class YokaigoninteiJigyotaishoRirekiListDiv extends Panel implements IYokaigoninteiJigyotaishoRirekiListDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -122,7 +121,7 @@ public class YokaigoninteiJigyotaishoRirekiListDiv extends Panel implements IYok
     }
 
     @JsonIgnore
-    public void setDgNinteiRirekiList(DataGrid<dgNinteiRirekiList_Row> dgNinteiRirekiList) {
+    public void  setDgNinteiRirekiList(DataGrid<dgNinteiRirekiList_Row> dgNinteiRirekiList) {
         this.getPnlYokaigoNintei().setDgNinteiRirekiList(dgNinteiRirekiList);
     }
 
@@ -132,7 +131,7 @@ public class YokaigoninteiJigyotaishoRirekiListDiv extends Panel implements IYok
     }
 
     @JsonIgnore
-    public void setDgJigyoTaishoshaList(DataGrid<dgJigyoTaishoshaList_Row> dgJigyoTaishoshaList) {
+    public void  setDgJigyoTaishoshaList(DataGrid<dgJigyoTaishoshaList_Row> dgJigyoTaishoshaList) {
         this.getPnlJigyoTaishosha().setDgJigyoTaishoshaList(dgJigyoTaishoshaList);
     }
 
@@ -142,10 +141,11 @@ public class YokaigoninteiJigyotaishoRirekiListDiv extends Panel implements IYok
     }
 
     @JsonIgnore
-    public void setBtnClose(Button btnClose) {
+    public void  setBtnClose(Button btnClose) {
         this.getPnlBottonArea().setBtnClose(btnClose);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+
 }

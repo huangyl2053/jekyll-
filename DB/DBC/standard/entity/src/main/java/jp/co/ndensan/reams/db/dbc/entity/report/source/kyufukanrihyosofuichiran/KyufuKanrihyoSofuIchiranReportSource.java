@@ -82,6 +82,22 @@ public class KyufuKanrihyoSofuIchiranReportSource implements IReportSource {
     public RString shuseiGokeiKensu;
     @ReportItem(name = "torikeshiGokeiKensu", length = 6, order = 33)
     public RString torikeshiGokeiKensu;
+    @ReportItem(name = "yubinNo", length = 6, order = 34)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 6, order = 35)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 6, order = 36)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 6, order = 37)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 6, order = 38)
+    public RString shichosonCode;
+    @ReportItem(name = "riyoYM", length = 6, order = 40)
+    public RString riyoYM;
+    @ReportItem(name = "yokaigoJotaiKubunCode", length = 6, order = 41)
+    public RString yokaigoJotaiKubunCode;
+    @ReportItem(name = "hihokenshaNo", length = 6, order = 42)
+    public RString hihokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -92,4 +108,19 @@ public class KyufuKanrihyoSofuIchiranReportSource implements IReportSource {
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hihokennshaNo;
 // </editor-fold>
+
+    /**
+     * enum
+     */
+    public enum ReportSourceFields {
+
+        hokenshaNo,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode,
+        riyoYM,
+        yokaigoJotaiKubunCode
+    }
 }

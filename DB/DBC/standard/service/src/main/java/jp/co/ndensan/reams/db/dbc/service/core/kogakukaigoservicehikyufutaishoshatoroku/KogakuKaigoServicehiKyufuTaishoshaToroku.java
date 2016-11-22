@@ -75,21 +75,29 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
     /**
      * バッチパラメータ取得
      *
-     * @param 審査年月 RString
+     * @param 処理年月 RString
+     * @param 処理状態区分 RString
      * @param 出力フラグ RString
      * @param 出力順ID Long
+     * @param menuId RString
      * @return DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter
      */
     public DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter getKogakuKaigoServicehiKyufuTaishoshaTorokuBatchParameter(
-            RString 審査年月, boolean 出力フラグ, Long 出力順ID) {
+            RString 処理年月, RString 処理状態区分, boolean 出力フラグ, Long 出力順ID, RString menuId) {
         DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter param = new DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter();
-        if (!RString.isNullOrEmpty(審査年月)) {
-            param.setShoriYM(new FlexibleYearMonth(審査年月));
+        if (!RString.isNullOrEmpty(処理年月)) {
+            param.setShoriYM(new FlexibleYearMonth(処理年月));
         } else {
             param.setShoriYM(new FlexibleYearMonth(RString.EMPTY));
         }
+        if (!RString.isNullOrEmpty(処理状態区分)) {
+            param.setShoriStateKubun(処理状態区分);
+        } else {
+            param.setShoriStateKubun(RString.EMPTY);
+        }
         param.setShuturyokuFlg(出力フラグ);
         param.setShuturyokuJunn(出力順ID);
+        param.setMenuId(menuId);
         return param;
     }
 }

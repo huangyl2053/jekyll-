@@ -36,8 +36,8 @@ public class FukaKakutei {
     private static final RString 異動賦課確定 = new RString("異動賦課確定");
     private static final RString 共通ボタン = new RString("btnFukaKakutei");
     private static final RString 現年度異動賦課確定 = new RString("現年度異動賦課確定");
-    private static final RString MenuID_DBBMN33003 = new RString("DBBMN33003");
-    private static final RString MenuID_DBBMN34003 = new RString("DBBMN34003");
+    private static final RString DBBMN33003 = new RString("DBBMN33003");
+    private static final RString DBBMN34003 = new RString("DBBMN34003");
 
     /**
      * コンストラクタです。
@@ -56,11 +56,11 @@ public class FukaKakutei {
         RString menuID = ResponseHolder.getMenuID();
         CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
         getHandler(div).賦課年度の設定();
-        if (MenuID_DBBMN33003.equals(menuID)
+        if (DBBMN33003.equals(menuID)
                 && getHandler(div).処理名_特徴仮算定賦課(基準日時取得(div, 特徴仮算定賦課), 基準日時取得(div, 特徴仮算定賦課確定))) {
             return ResponseData.of(div).rootTitle(特徴仮算定賦課確定).respond();
         }
-        if (MenuID_DBBMN34003.equals(menuID)
+        if (DBBMN34003.equals(menuID)
                 && getHandler(div).処理名_普徴仮算定賦課(基準日時取得(div, 普徴仮算定賦課), 基準日時取得(div, 普徴仮算定賦課確定))) {
             return ResponseData.of(div).rootTitle(普徴仮算定賦課確定).respond();
         }

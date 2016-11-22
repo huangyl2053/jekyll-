@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 共同処理償還送付全件一時テーブルEntity項目定義クラスです。
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-@OnNextSchema("rgdb")
 public class KyodoShoriShouKannTempEntity extends DbTableEntityBase<KyodoShoriShouKannTempEntity> implements IDbAccessable {
 
     private FlexibleDate 異動年月日;

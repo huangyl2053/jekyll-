@@ -44,6 +44,8 @@
         <result property="sashitomeKojoNo" column="sashitomeKojoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kinyuKikanCode" column="uaT0310Koza_kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
         <result property="kozaId" column="uaT0310Koza_kozaId"/>
+        <result property="zenkaiShiharaiKingaku" column="zenkaiShiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hakkoutaisyouFlg" column="hakkoutaisyouFlg" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
     </resultMap>
 
     <resultMap id="resultMap_KetteiTsuchiShoMeisai" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoMeisaiTempTableEntity" autoMapping="true">
@@ -94,6 +96,11 @@
         <result property="zougenRiyu" column="zougenRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yoshikiMeisho" column="yoshikiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaId" column="kozaId"/>
+        <result property="zenkaiShiharaiKingaku" column="zenkaiShiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="hakkoutaisyouFlg" column="hakkoutaisyouFlg" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="sagakuKingaku" column="sagakuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sabisufunrui" column="sabisufunrui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yousikibangousabu" column="yousikibangousabu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <resultMap id="resultMap_chohyoData" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharaiRelateEntity" autoMapping="true">
@@ -177,6 +184,13 @@
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sashitomeHiHokenshaNo" column="sashitomeHiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sashitomeKojoNo" column="sashitomeKojoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaishuKingakuTtl" column="kaishuKingakuTtl" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sagakuKingakuTtl" column="sagakuKingakuTtl" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yousikiKingakuTtl" column="yousikiKingakuTtl" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sabisufunrui" column="sabisufunrui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yousikibangousabu" column="yousikibangousabu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="syurui1" column="syurui1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="syurui2" column="syurui2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="宛名Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
         <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
@@ -222,6 +236,8 @@
         ,ShokanKetteiTsuchiShoTemp."sashitomeHiHokenshaNo"
         ,ShokanKetteiTsuchiShoTemp."sashitomeKojoNo"
         ,ShokanKetteiTsuchiShoTemp."kozaId"
+        ,ShokanKetteiTsuchiShoTemp."zenkaiShiharaiKingaku"
+        ,ShokanKetteiTsuchiShoTemp."hakkoutaisyouFlg"
     </sql>
 
     <sql id="selectKetteiTsuchiShoMeisai">
@@ -268,6 +284,11 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenMeisi"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsuMeisho"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kozaId"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."zenkaiShiharaiKingaku"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."hakkoutaisyouFlg"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."sagakuKingaku"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."sabisufunrui"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."yousikibangousabu"
     </sql>
 
     <sql id="selectChouhyouData">
@@ -316,6 +337,11 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kozaId"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."zenkaiShiharaiKingaku"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."hakkoutaisyouFlg"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."sagakuKingaku"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."sabisufunrui"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."yousikibangousabu"
         
     </sql>
 
@@ -344,6 +370,8 @@
         ,DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun"
         ,DbT3036ShokanHanteiKekka."shiharaiKingaku"
         ,DbT3036ShokanHanteiKekka."sagakuKingakuGokei"
+        ,DbT3036ShokanHanteiKekka."zenkaiShiharaiKingaku"
+        ,true as "hakkoutaisyouFlg"
         ,口座情報."uaT0310Koza_kozaId"
         ,口座情報."uaT0310Koza_kinyuKikanCode"
         ,口座情報."uaT0302KinyuKikan_name"
@@ -547,6 +575,23 @@
 
     </select>
 
+    <select resultOrdered="true" id = "upd通知書発行対象フラグ" 
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        UPDATE
+        "ShokanKetteiTsuchiShoTemp" 
+        SET 
+            "hakkoutaisyouFlg" = false
+        WHERE 
+            ("sashitomeHiHokenshaNo" IS NOT NULL 
+             AND "sashitomeHiHokenshaNo" <![CDATA[<>]]> '') 
+         OR ("shikyuHushikyuKetteiKubun" = '1'
+             AND "shikyuHushikyuKetteiKubun" = '2'
+             AND ("kinyuKikanCode" IS NULL OR "kinyuKikanCode" = ''))
+            <if test="資格区分 != null"> 
+            OR "hihokennshaKubunCode" = #{資格区分}    
+            </if>
+    </select>
+    
     <!--一時テーブルの決定通知書明細情報の取得-->
     <select resultOrdered="true" id="get決定通知書明細情報"
             resultMap="resultMap_KetteiTsuchiShoMeisai"
@@ -555,13 +600,19 @@
         <include refid="selectKetteiTsuchiSho" />
         ,DbT3049ShokanJutakuKaishu."yoshikiNo" AS "yoshikiNo"
         ,DbT3049ShokanJutakuKaishu."serviceCode" AS "serviceCode"
-        ,DbT3049ShokanJutakuKaishu."kaishuKingaku" AS "kaishuKingaku"
+        ,0 AS "kaishuKingaku"
         ,'' AS "zougenRiyu"
         ,'' AS "kinyuKikanCodeName"
         ,'' AS "kinyuKikanShitenName"
         ,'' AS "yokinName"
         ,'' AS "yoshikiMeisho"
         ,'' AS "serviceShuruiName"
+        ,DbT3049ShokanJutakuKaishu."sagakuKingaku" AS "sagakuKingaku"
+        ,CASE WHEN DbT3049ShokanJutakuKaishu."yoshikiNo" IN ('21C1', '21C2') THEN '1'
+              WHEN DbT3049ShokanJutakuKaishu."yoshikiNo" IN ('21D1', '21D2') THEN '2'
+         ELSE '3' END AS "sabisufunrui"
+        ,CASE WHEN DbT3049ShokanJutakuKaishu."yoshikiNo" IN ('21C1', '21C2', '21D1', '21D2') THEN DbT3049ShokanJutakuKaishu."yoshikiNo"
+         ELSE SUBSTR(DbT3049ShokanJutakuKaishu."yoshikiNo", 1, 3) ||'0' END AS "yousikibangousabu"
         FROM
         "ShokanKetteiTsuchiShoTemp" AS ShokanKetteiTsuchiShoTemp
         INNER JOIN
@@ -579,13 +630,19 @@
         <include refid="selectKetteiTsuchiSho" />
         ,DbT3048ShokanFukushiYoguHanbaihi."yoshikiNo" AS "yoshikiNo"
         ,DbT3048ShokanFukushiYoguHanbaihi."serviceCode" AS "serviceCode"
-        ,DbT3048ShokanFukushiYoguHanbaihi."kounyuKingaku" AS "kaishuKingaku"
+        ,0 AS "kaishuKingaku"
         ,'' AS "zougenRiyu"
         ,'' AS "kinyuKikanCodeName"
         ,'' AS "kinyuKikanShitenName"
         ,'' AS "yokinName"
         ,'' AS "yoshikiMeisho"
         ,'' AS "serviceShuruiName"
+        ,DbT3048ShokanFukushiYoguHanbaihi."sagakuKingaku" AS "sagakuKingaku"
+        ,CASE WHEN DbT3048ShokanFukushiYoguHanbaihi."yoshikiNo" IN ('21C1', '21C2') THEN '1'
+              WHEN DbT3048ShokanFukushiYoguHanbaihi."yoshikiNo" IN ('21D1', '21D2') THEN '2'
+         ELSE '3' END AS "sabisufunrui"
+        ,CASE WHEN DbT3048ShokanFukushiYoguHanbaihi."yoshikiNo" IN ('21C1', '21C2', '21D1', '21D2') THEN DbT3048ShokanFukushiYoguHanbaihi."yoshikiNo"
+         ELSE SUBSTR(DbT3048ShokanFukushiYoguHanbaihi."yoshikiNo", 1, 3) ||'0' END AS "yousikibangousabu"
         FROM
         "ShokanKetteiTsuchiShoTemp" AS ShokanKetteiTsuchiShoTemp
         INNER JOIN
@@ -603,13 +660,19 @@
         <include refid="selectKetteiTsuchiSho" />
         ,DbT3043ShokanShokujiHiyo."yoshikiNo" AS "yoshikiNo"
         ,'500000' AS "serviceCode"
-        ,DbT3043ShokanShokujiHiyo."tensuKingaku" AS "kaishuKingaku"
+        ,DbT3043ShokanShokujiHiyo."shikyuKingaku" AS "kaishuKingaku"
         ,'' AS "zougenRiyu"
         ,'' AS "kinyuKikanCodeName"
         ,'' AS "kinyuKikanShitenName"
         ,'' AS "yokinName"
         ,'' AS "yoshikiMeisho"
         ,'' AS "serviceShuruiName"
+        ,DbT3043ShokanShokujiHiyo."sagakuKingaku" AS "sagakuKingaku"
+        ,CASE WHEN DbT3043ShokanShokujiHiyo."yoshikiNo" IN ('21C1', '21C2') THEN '1'
+              WHEN DbT3043ShokanShokujiHiyo."yoshikiNo" IN ('21D1', '21D2') THEN '2'
+         ELSE '3' END AS "sabisufunrui"
+        ,CASE WHEN DbT3043ShokanShokujiHiyo."yoshikiNo" IN ('21C1', '21C2', '21D1', '21D2') THEN DbT3043ShokanShokujiHiyo."yoshikiNo"
+         ELSE SUBSTR(DbT3043ShokanShokujiHiyo."yoshikiNo", 1, 3) ||'0' END AS "yousikibangousabu"
         FROM
         "ShokanKetteiTsuchiShoTemp" AS ShokanKetteiTsuchiShoTemp
         INNER JOIN
@@ -624,17 +687,22 @@
         UNION ALL
 
         SELECT
-        DISTINCT
         <include refid="selectKetteiTsuchiSho" />
         ,DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo."yoshikiNo" AS "yoshikiNo"
         ,DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo."serviceShuruiCode" || DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo."serviceKomokuCode" AS "serviceCode"
-        ,DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo."tensuKingaku" AS "kaishuKingaku"
+        ,DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo."shikyuKingaku" AS "kaishuKingaku"
         ,'' AS "zougenRiyu"
         ,'' AS "kinyuKikanCodeName"
         ,'' AS "kinyuKikanShitenName"
         ,'' AS "yokinName"
         ,'' AS "yoshikiMeisho"
         ,'' AS "serviceShuruiName"
+        ,DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo."sagakuKingaku" AS "sagakuKingaku"
+        ,CASE WHEN DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo."yoshikiNo" IN ('21C1', '21C2') THEN '1'
+              WHEN DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo."yoshikiNo" IN ('21D1', '21D2') THEN '2'
+         ELSE '3' END AS "sabisufunrui"
+        ,CASE WHEN DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo."yoshikiNo" IN ('21C1', '21C2', '21D1', '21D2') THEN DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo."yoshikiNo"
+         ELSE SUBSTR(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo."yoshikiNo", 1, 3) ||'0' END AS "yousikibangousabu"
         FROM
         "ShokanKetteiTsuchiShoTemp" AS ShokanKetteiTsuchiShoTemp
         INNER JOIN
@@ -652,13 +720,19 @@
         <include refid="selectKetteiTsuchiSho" />
         ,DbT3045ShokanServicePlan200004."yoshikiNo" AS "yoshikiNo"
         ,DbT3045ShokanServicePlan200004."serviceCode" AS "serviceCode"
-        ,DbT3045ShokanServicePlan200004."tensuKingaku" AS "kaishuKingaku"
+        ,DbT3045ShokanServicePlan200004."shikyuKingaku" AS "kaishuKingaku"
         ,DbT3045ShokanServicePlan200004."zougenRiyu"  AS "zougenRiyu"
         ,'' AS "kinyuKikanCodeName"
         ,'' AS "kinyuKikanShitenName"
         ,'' AS "yokinName"
         ,'' AS "yoshikiMeisho"
         ,'' AS "serviceShuruiName"
+        ,DbT3045ShokanServicePlan200004."sagakuKingaku" AS "sagakuKingaku"
+        ,CASE WHEN DbT3045ShokanServicePlan200004."yoshikiNo" IN ('21C1', '21C2') THEN '1'
+              WHEN DbT3045ShokanServicePlan200004."yoshikiNo" IN ('21D1', '21D2') THEN '2'
+         ELSE '3' END AS "sabisufunrui"
+        ,CASE WHEN DbT3045ShokanServicePlan200004."yoshikiNo" IN ('21C1', '21C2', '21D1', '21D2') THEN DbT3045ShokanServicePlan200004."yoshikiNo"
+         ELSE SUBSTR(DbT3045ShokanServicePlan200004."yoshikiNo", 1, 3) ||'0' END AS "yousikibangousabu"
         FROM
         "ShokanKetteiTsuchiShoTemp" AS ShokanKetteiTsuchiShoTemp
         INNER JOIN
@@ -676,13 +750,19 @@
         <include refid="selectKetteiTsuchiSho" />
         ,DbT3046ShokanServicePlan200604."yoshikiNo" AS "yoshikiNo"
         ,DbT3046ShokanServicePlan200604."serviceCode" AS "serviceCode"
-        ,DbT3046ShokanServicePlan200604."tensuKingaku" AS "kaishuKingaku"
+        ,DbT3046ShokanServicePlan200604."shikyuKingaku" AS "kaishuKingaku"
         ,DbT3046ShokanServicePlan200604."zougenRiyu" AS "zougenRiyu"
         ,'' AS "kinyuKikanCodeName"
         ,'' AS "kinyuKikanShitenName"
         ,'' AS "yokinName"
         ,'' AS "yoshikiMeisho"
         ,'' AS "serviceShuruiName"
+        ,DbT3046ShokanServicePlan200604."sagakuKingaku" AS "sagakuKingaku"
+        ,CASE WHEN DbT3046ShokanServicePlan200604."yoshikiNo" IN ('21C1', '21C2') THEN '1'
+              WHEN DbT3046ShokanServicePlan200604."yoshikiNo" IN ('21D1', '21D2') THEN '2'
+         ELSE '3' END AS "sabisufunrui"
+        ,CASE WHEN DbT3046ShokanServicePlan200604."yoshikiNo" IN ('21C1', '21C2', '21D1', '21D2') THEN DbT3046ShokanServicePlan200604."yoshikiNo"
+         ELSE SUBSTR(DbT3046ShokanServicePlan200604."yoshikiNo", 1, 3) ||'0' END AS "yousikibangousabu"
         FROM
         "ShokanKetteiTsuchiShoTemp" AS ShokanKetteiTsuchiShoTemp
         INNER JOIN
@@ -707,6 +787,12 @@
         ,'' AS "yokinName"
         ,'' AS "yoshikiMeisho"
         ,'' AS "serviceShuruiName"
+        ,DbT3047ShokanServicePlan200904."sagakuKingaku" AS "sagakuKingaku"
+        ,CASE WHEN DbT3047ShokanServicePlan200904."yoshikiNo" IN ('21C1', '21C2') THEN '1'
+              WHEN DbT3047ShokanServicePlan200904."yoshikiNo" IN ('21D1', '21D2') THEN '2'
+         ELSE '3' END AS "sabisufunrui"
+        ,CASE WHEN DbT3047ShokanServicePlan200904."yoshikiNo" IN ('21C1', '21C2', '21D1', '21D2') THEN DbT3047ShokanServicePlan200904."yoshikiNo"
+         ELSE SUBSTR(DbT3047ShokanServicePlan200904."yoshikiNo", 1, 3) ||'0' END AS "yousikibangousabu"
         FROM
         "ShokanKetteiTsuchiShoTemp" AS ShokanKetteiTsuchiShoTemp
         INNER JOIN
@@ -717,6 +803,38 @@
         ShokanKetteiTsuchiShoTemp."serviceTeikyoYM" = DbT3047ShokanServicePlan200904."serviceTeikyoYM"
         AND
         ShokanKetteiTsuchiShoTemp."seiriNo" = DbT3047ShokanServicePlan200904."seiriNo"
+        
+         UNION ALL
+
+        SELECT
+        <include refid="selectKetteiTsuchiSho" />
+        ,DbT3053ShokanShukei."yoshikiNo" AS "yoshikiNo"
+        ,DbT3053ShokanShukei."serviceShuruiCode" AS "serviceCode"
+        ,DbT3053ShokanShukei."shikyuKingaku" AS "kaishuKingaku"
+        ,DbT3053ShokanShukei."zougenRiyu"  AS "zougenRiyu"
+        ,'' AS "kinyuKikanCodeName"
+        ,'' AS "kinyuKikanShitenName"
+        ,'' AS "yokinName"
+        ,'' AS "yoshikiMeisho"
+        ,'' AS "serviceShuruiName"
+        ,(CASE WHEN DbT3053ShokanShukei."seikyugakuSagakuKingaku" IS NULL THEN 0 ELSE DbT3053ShokanShukei."seikyugakuSagakuKingaku" END)
+        + (CASE WHEN DbT3053ShokanShukei."dekidakaSeikyugakuSagaku" IS NULL THEN 0 ELSE DbT3053ShokanShukei."dekidakaSeikyugakuSagaku" END)
+           AS "sagakuKingaku"
+        ,CASE WHEN DbT3053ShokanShukei."yoshikiNo" IN ('21C1', '21C2') THEN '1'
+              WHEN DbT3053ShokanShukei."yoshikiNo" IN ('21D1', '21D2') THEN '2'
+         ELSE '3' END AS "sabisufunrui"
+        ,CASE WHEN DbT3053ShokanShukei."yoshikiNo" IN ('21C1', '21C2', '21D1', '21D2') THEN DbT3053ShokanShukei."yoshikiNo"
+         ELSE SUBSTR(DbT3053ShokanShukei."yoshikiNo", 1, 3) ||'0' END AS "yousikibangousabu"
+        FROM
+        "ShokanKetteiTsuchiShoTemp" AS ShokanKetteiTsuchiShoTemp
+        INNER JOIN
+        rgdb."DbT3053ShokanShukei" AS DbT3053ShokanShukei
+        ON
+        ShokanKetteiTsuchiShoTemp."hiHokenshaNo" = DbT3053ShokanShukei."hiHokenshaNo"
+        AND
+        ShokanKetteiTsuchiShoTemp."serviceTeikyoYM" = DbT3053ShokanShukei."serviceTeikyoYM"
+        AND
+        ShokanKetteiTsuchiShoTemp."seiriNo" = DbT3053ShokanShukei."seiriNo"
     </select>
 
     <select resultOrdered="true" id="get金融機関と預金種別"
@@ -872,7 +990,7 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
         ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
-        ,DbT3118ShikibetsuNoKanri."ryakusho" AS "yoshikiMeisho"
+        ,DbT3118ShikibetsuNoKanri."meisho2" AS "yoshikiMeisho"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiNo"
         FROM
         "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
@@ -971,20 +1089,7 @@
         "DbT3036ShokanHanteiKekka"."seiriNo" = ShokanKetteiTsuchiShoTemp."seiriNo"
        
         WHERE
-        1=1
-        <if test="isHako">
-            AND
-            ShokanKetteiTsuchiShoTemp."hihokennshaKubunCode" <![CDATA[<>]]> '2'
-        </if>
-         AND
-        (
-            (ShokanKetteiTsuchiShoTemp."sashitomeHiHokenshaNo" IS NULL OR ShokanKetteiTsuchiShoTemp."sashitomeHiHokenshaNo"='')
-            OR (
-                ShokanKetteiTsuchiShoTemp."sashitomeHiHokenshaNo" IS NOT NULL
-                AND ShokanKetteiTsuchiShoTemp."sashitomeHiHokenshaNo"<![CDATA[<>]]>''
-                AND ShokanKetteiTsuchiShoTemp."shikyuHushikyuKetteiKubun"='2'
-            )
-        )
+        ShokanKetteiTsuchiShoTemp."hakkoutaisyouFlg"  = true
     </select>
     
     
@@ -1007,20 +1112,8 @@
         "DbT3034ShokanShinsei"."seiriNo" = ShokanKetteiTsuchiShoTemp."seiriNo"
        
         WHERE
-        1=1
-        <if test="isHako">
-            AND
-            ShokanKetteiTsuchiShoTemp."hihokennshaKubunCode" <![CDATA[<>]]> '2'
-        </if>
-         AND
-        (
-            (ShokanKetteiTsuchiShoTemp."sashitomeHiHokenshaNo" IS NULL OR ShokanKetteiTsuchiShoTemp."sashitomeHiHokenshaNo"='')
-            OR (
-                ShokanKetteiTsuchiShoTemp."sashitomeHiHokenshaNo" IS NOT NULL
-                AND ShokanKetteiTsuchiShoTemp."sashitomeHiHokenshaNo"<![CDATA[<>]]>''
-                AND ShokanKetteiTsuchiShoTemp."shikyuHushikyuKetteiKubun"='2'
-            )
-        )
+        ShokanKetteiTsuchiShoTemp."shiharaiHohoKubunCode" = '1'
+        AND ShokanKetteiTsuchiShoTemp."hakkoutaisyouFlg"  = true
     </select>
     <select resultOrdered="true" id="get最大枝番"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.SelectMaxEdabanParameter"
@@ -1148,7 +1241,7 @@
                  AND ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" <![CDATA[<>]]> ''
                  AND ShokanKetteiTsuchiShoMeisaiTemp."shikyuHushikyuKetteiKubun" = '1')
                 <if test="資格区分 != null"> 
-                AND ShokanKetteiTsuchiShoMeisaiTemp."hihokennshaKubunCode" <![CDATA[<>]]> #{資格区分}    
+                OR ShokanKetteiTsuchiShoMeisaiTemp."hihokennshaKubunCode" = #{資格区分}    
                 </if>
 
         )

@@ -10,10 +10,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc150010.AtenaJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc150010.SedaiUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyojokyotokeihyomeisailistsakusei.DbWT1513RiyoJokyoTokeihyoEntity;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -43,9 +44,8 @@ public class DbWT1513SetaiCodeUpdateProcess extends BatchProcessBase<DbWT1513Riy
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoPSMSearchKeyBuilder key
-                = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
-        key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
         juminShubetsuList.add(JuminShubetsu.日本人);
         juminShubetsuList.add(JuminShubetsu.外国人);
@@ -59,12 +59,13 @@ public class DbWT1513SetaiCodeUpdateProcess extends BatchProcessBase<DbWT1513Riy
         juminJotaiList.add(JuminJotai.転出者);
         juminJotaiList.add(JuminJotai.死亡者);
         key.set住民状態(juminJotaiList);
+        AtenaJohoMybatisParameter parameter = new AtenaJohoMybatisParameter();
         key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
         FlexibleYearMonth サービス提供年月 = processParameter.getサービス提供年月();
         key.set基準日(new FlexibleDate(サービス提供年月.getYearValue(), サービス提供年月.getMonthValue(), 1));
-        IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
-        AtenaJohoMybatisParameter parameter = new AtenaJohoMybatisParameter();
-        parameter.setShikibetsuTaishoPSMSearchKey(shikibetsuTaishoPSMSearchKey);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
+        parameter.setPsmShikibetsuTaisho(psmShikibetsuTaisho);
         parameter.setサービス提供年月(サービス提供年月);
         return new BatchDbReader(MYBATIS_SELECT_ID, parameter);
     }

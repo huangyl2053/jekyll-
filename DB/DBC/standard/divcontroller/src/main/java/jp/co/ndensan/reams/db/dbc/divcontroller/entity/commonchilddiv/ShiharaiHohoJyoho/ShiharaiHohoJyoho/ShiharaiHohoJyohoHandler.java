@@ -53,6 +53,8 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 住宅改修費支給申請 = new RString("DBCUC07100");
     private final RString 住宅改修費事前申請 = new RString("DBCUC07000");
     private final RString 償還払い費支給申請 = new RString("DBCUC08100");
+    private final RString 償還払い費支給申請2 = new RString("DBCUC08211");
+
     private final RString 住宅改修費支給申請一括審査_決定 = new RString("DBCUC07200");
     private final RString 福祉用具購入費支給申請一括審査_決定 = new RString("DBCUC06100");
     private final RString 高額サービス費支給申請 = new RString("DBCUC04400");
@@ -104,7 +106,7 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 List<Koza> koza = ShiharaiHohoJyohoFinder.createInstance()
                         .getKozaJyoho(KozaParameter.createParam(支給申請情報.
-                                        getKozaId(), null, null)).records();
+                                getKozaId(), null, null)).records();
                 if (!koza.isEmpty()) {
 
                     口座払いエリアの初期化(koza.get(0), 支給申請情報.getKozaId());
@@ -123,6 +125,8 @@ public class ShiharaiHohoJyohoHandler {
                                         支給申請情報.getKeiyakuNo() == null ? RString.EMPTY : 支給申請情報.getKeiyakuNo()));
                 受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者, new RString("初期"));
             }
+        } else if (状態.equals(登録)) {
+            div.getRadMadoguti().setSelectedKey(ShiharaiHohoKubun.窓口払.getコード());
         }
         if ((業務内区分コード.equals(ShunoKamokuShubetsu.介護給付_償還)
                 || 業務内区分コード.equals(ShunoKamokuShubetsu.介護給付_高額))) {
@@ -273,12 +277,16 @@ public class ShiharaiHohoJyohoHandler {
 
     private void 高額合算の登録モード_支払方法情報エリアの状態処理() {
 
+        div.getRadMadoguti().setDisabled(false);
+        div.getRadKoza().setDisabled(false);
         div.getRadMadoguti().setVisible(true);
         div.getRadKoza().setVisible(true);
     }
 
     private void 高額合算の修正モード_支払方法情報エリアの状態処理() {
 
+        div.getRadMadoguti().setDisabled(false);
+        div.getRadKoza().setDisabled(false);
         div.getRadMadoguti().setVisible(true);
         div.getRadKoza().setVisible(true);
         div.getRadJyryoinin().setVisible(true);
@@ -374,6 +382,8 @@ public class ShiharaiHohoJyohoHandler {
         if (!ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
             div.getTxtTenban().setDisplayNone(true);
         }
+        div.getTxtKinyuKikanShitenCode().setReadOnly(true);
+        div.getTxtYokinShubetsu().setReadOnly(true);
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
         div.getTxtMeigininKana().setReadOnly(true);
@@ -541,6 +551,7 @@ public class ShiharaiHohoJyohoHandler {
 
         if (ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
 
+            div.getDdlKozaID().setDisabled(false);
             div.getBtnKozaToroku().setDisabled(false);
             div.getTxtKinyuKikanCode().setReadOnly(true);
             div.getTxtKinyuKikanName().setReadOnly(true);
@@ -558,6 +569,8 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtMeigininKana().setReadOnly(true);
             div.getTtxtMeigininKanji().setReadOnly(true);
         }
+        div.getTxtKinyuKikanShitenCode().setReadOnly(true);
+        div.getTxtYokinShubetsu().setReadOnly(true);
     }
 
     private void 高額合算の照会モード_窓口払いエリアの状態処理() {
@@ -615,7 +628,7 @@ public class ShiharaiHohoJyohoHandler {
         } else {
             div.getDdlKozaID().setSelectedIndex(0);
         }
-        
+
         KinyuKikanCode 金融機関コード = 口座情報.get金融機関コード() == null
                 ? new KinyuKikanCode(RString.EMPTY) : 口座情報.get金融機関コード();
         div.getTxtKinyuKikanCode().setDomain(金融機関コード);
@@ -1036,6 +1049,7 @@ public class ShiharaiHohoJyohoHandler {
                 || 住宅改修費事前申請.equals(uiContainerId)
                 || 償還払い費支給申請.equals(uiContainerId)
                 || 住宅改修費支給申請一括審査_決定.equals(uiContainerId)
+                || 償還払い費支給申請2.equals(uiContainerId)
                 || 福祉用具購入費支給申請一括審査_決定.equals(uiContainerId)) {
 
             return ShunoKamokuShubetsu.介護給付_償還;

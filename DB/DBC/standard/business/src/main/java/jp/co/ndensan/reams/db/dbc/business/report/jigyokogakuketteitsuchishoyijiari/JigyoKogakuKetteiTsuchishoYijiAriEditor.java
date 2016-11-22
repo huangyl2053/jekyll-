@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
-import jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijiari.JigyoKogakuKetteiTsuchishoYijiAriSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.jigyokogakuketteitsuchishoyijiari.JigyoKogakuKetteiTsuchishoYijiAriSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -20,11 +20,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -52,9 +50,8 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
     private static final RString 半角アスタリスク = new RString("************");
     private static final RString 半角アスタリスク2 = new RString("**************");
     private static final RString 口座種別 = new RString("口座種別");
-    private static final RString 通帳記号 = new RString("通帳記号");
+    private static final RString 店番 = new RString("店番");
     private static final RString 口座番号 = new RString("口座番号");
-    private static final RString 通帳番号 = new RString("通帳番号");
     private static final RString 接続文字 = new RString("～");
     private static final RString 定型文文字サイズTWO = new RString("2");
     private static final RString 定型文文字サイズTHREE = new RString("3");
@@ -200,19 +197,11 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
     }
 
     private void set種別と番号と口座名義(JigyoKogakuKetteiTsuchishoYijiAriSource source) {
-
-        if (支給.equals(帳票情報.get支給不支給決定区分()) && !窓口払い値.equals(帳票情報.get支払方法区分())
-                && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
-
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && !支払方法区分ONE.equals(帳票情報.get支払方法区分())
+                        && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
             source.kouzaMeigi = 帳票情報.get口座名義人();
-
-            if (!帳票情報.isゆうちょ銀行フラグ()) {
-                source.kouzaShu = 帳票情報.get口座種別();
-                source.kouzaNo = 帳票情報.get口座番号();
-            } else {
-                source.kouzaShu = 帳票情報.get通帳記号();
-                source.kouzaNo = 帳票情報.get通帳番号();
-            }
+            source.kouzaShu = 帳票情報.get口座種別();
+            source.kouzaNo = 帳票情報.get口座番号();
         }
 
     }
@@ -236,10 +225,10 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
             source.karaFugo = 接続文字;
             source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日()).concat(終了週間);
             if (帳票情報.get支払窓口開始時間() != null) {
-                source.shiharaiStartHMS = new RTime(帳票情報.get支払窓口開始時間()).toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+                source.shiharaiStartHMS = 帳票情報.get支払窓口開始時間();
             }
             if (帳票情報.get支払窓口終了時間() != null) {
-                source.shiharaiEndHMS = new RTime(帳票情報.get支払窓口終了時間()).toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+                source.shiharaiEndHMS = 帳票情報.get支払窓口終了時間();
             }
         }
     }
@@ -252,26 +241,12 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
     }
 
     private void setTitle(JigyoKogakuKetteiTsuchishoYijiAriSource source) {
-        if (支給.equals(帳票情報.get支給不支給決定区分())) {
-            if (窓口払い値.equals(帳票情報.get支払方法区分())
-                    && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
-                source.shumokuTitle = 口座種別;
-                source.bangoTitle = 口座番号;
-            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && 金融機関コード.equals(帳票情報.get金融機関コード())
-                    && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
-                source.shumokuTitle = 通帳記号;
-                source.bangoTitle = 通帳番号;
-            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && !金融機関コード.equals(帳票情報.get金融機関コード())
-                    && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
-                source.shumokuTitle = 口座種別;
-                source.bangoTitle = 口座番号;
-            }
-        }
-
-        if (支給.equals(帳票情報.get支給不支給決定区分()) && 帳票情報.get支給金額() != null && 帳票情報.get支給金額().compareTo(Decimal.ZERO) < 0
-                || 不支給.equals(帳票情報.get支給不支給決定区分())) {
-            source.shumokuTitle = 口座種別;
-            source.bangoTitle = 口座番号;
+        source.shumokuTitle = 口座種別;
+        source.bangoTitle = 口座番号;
+        if (支給.equals(帳票情報.get支給不支給決定区分())
+                && 口座払い値.equals(帳票情報.get支払方法区分()) && 金融機関コード.equals(帳票情報.get金融機関コード())
+                && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
+            source.bangoTitle = 店番;
         }
     }
 

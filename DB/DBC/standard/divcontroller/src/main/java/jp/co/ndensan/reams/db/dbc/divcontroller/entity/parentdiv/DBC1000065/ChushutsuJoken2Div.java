@@ -4,22 +4,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000065;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * ChushutsuJoken2 のクラスファイル
- *
- * @reamsid_L DBC-4640-010 qinzhen
+ * ChushutsuJoken2 のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ChushutsuJoken2Div extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,10 +23,10 @@ public class ChushutsuJoken2Div extends Panel {
      */
     @JsonProperty("blank1")
     private Space blank1;
-    @JsonProperty("blank2")
-    private Space blank2;
     @JsonProperty("txtShoriNendo")
     private TextBoxFlexibleDate txtShoriNendo;
+    @JsonProperty("blank2")
+    private Space blank2;
     @JsonProperty("btnSearchHihokensha")
     private Button btnSearchHihokensha;
     @JsonProperty("txtHihokenshaNo")
@@ -62,24 +57,6 @@ public class ChushutsuJoken2Div extends Panel {
     }
 
     /*
-     * getblank2
-     * @return blank2
-     */
-    @JsonProperty("blank2")
-    public Space getBlank2() {
-        return blank2;
-    }
-
-    /*
-     * setblank2
-     * @param blank2 blank2
-     */
-    @JsonProperty("blank2")
-    public void setBlank2(Space blank2) {
-        this.blank2 = blank2;
-    }
-
-    /*
      * gettxtShoriNendo
      * @return txtShoriNendo
      */
@@ -95,6 +72,24 @@ public class ChushutsuJoken2Div extends Panel {
     @JsonProperty("txtShoriNendo")
     public void setTxtShoriNendo(TextBoxFlexibleDate txtShoriNendo) {
         this.txtShoriNendo = txtShoriNendo;
+    }
+
+    /*
+     * getblank2
+     * @return blank2
+     */
+    @JsonProperty("blank2")
+    public Space getBlank2() {
+        return blank2;
+    }
+
+    /*
+     * setblank2
+     * @param blank2 blank2
+     */
+    @JsonProperty("blank2")
+    public void setBlank2(Space blank2) {
+        this.blank2 = blank2;
     }
 
     /*

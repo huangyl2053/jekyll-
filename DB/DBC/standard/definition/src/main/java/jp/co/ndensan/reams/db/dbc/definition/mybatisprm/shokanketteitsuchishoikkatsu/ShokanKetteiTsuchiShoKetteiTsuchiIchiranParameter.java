@@ -132,6 +132,8 @@ public final class ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter extends UaF
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @param key 宛名PSMキー
      * @param atesakiKey 宛先PSMキー
+     * @param kozaKey kozaKey
+     * @param 権限有科目リスト 権限有科目リスト
      * @return 償還払い支給（不支給）決定通知書一括作成_決定通知一覧表帳票データ取得のMyBatisパラメータクラス
      */
     public static ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter toMybatisParameter(RString 出力順, RString 資格区分,

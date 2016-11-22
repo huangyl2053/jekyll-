@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class ChosahyoGaikyochosaReport extends Report<ChosahyoGaikyochosaReportSource> {
 
     private final List<ChosahyoGaikyochosaItem> itemList;
+    private final ChosahyoGaikyochosaItem item;
 
     /**
      * インスタンスを生成します。
@@ -26,16 +27,28 @@ public class ChosahyoGaikyochosaReport extends Report<ChosahyoGaikyochosaReportS
      * @return 要介護認定調査票（概況調査）のReport
      */
     public static ChosahyoGaikyochosaReport createFrom(List<ChosahyoGaikyochosaItem> itemList) {
-        return new ChosahyoGaikyochosaReport(itemList);
+        return new ChosahyoGaikyochosaReport(itemList, null);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 要介護認定調査票（概況調査）のItem
+     * @param item 要介護認定調査票（概況調査）のItem
+     * @return 要介護認定調査票（概況調査）のReport
      */
-    protected ChosahyoGaikyochosaReport(List<ChosahyoGaikyochosaItem> itemList) {
+    public static ChosahyoGaikyochosaReport createFrom(ChosahyoGaikyochosaItem item) {
+        return new ChosahyoGaikyochosaReport(null, item);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param itemList 要介護認定調査票（概況調査）のItemList
+     * @param item 要介護認定調査票（概況調査）のItem
+     */
+    protected ChosahyoGaikyochosaReport(List<ChosahyoGaikyochosaItem> itemList, ChosahyoGaikyochosaItem item) {
         this.itemList = itemList;
+        this.item = item;
     }
 
     /**
@@ -45,7 +58,13 @@ public class ChosahyoGaikyochosaReport extends Report<ChosahyoGaikyochosaReportS
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter) {
-        for (ChosahyoGaikyochosaItem item : itemList) {
+        if (itemList != null) {
+            for (ChosahyoGaikyochosaItem chosahyoGaikyochosaItem : itemList) {
+                IChosahyoGaikyochosaEditor editor = new ChosahyoGaikyochosaEditorImpl(chosahyoGaikyochosaItem);
+                IChosahyoGaikyochosaBuilder builder = new ChosahyoGaikyochosaBuilderImpl(editor);
+                reportSourceWriter.writeLine(builder);
+            }
+        } else {
             IChosahyoGaikyochosaEditor editor = new ChosahyoGaikyochosaEditorImpl(item);
             IChosahyoGaikyochosaBuilder builder = new ChosahyoGaikyochosaBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);

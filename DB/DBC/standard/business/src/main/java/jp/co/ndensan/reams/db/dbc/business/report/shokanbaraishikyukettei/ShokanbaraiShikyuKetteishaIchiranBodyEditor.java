@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbaraiShikyuKetteishaIchiranEditor {
 
     private final ShokanShikyuKetteiChohyoEntity 帳票出力対象データ;
-    private RString 編集住所;
+    private final RString 編集住所;
 
     private static final int 文字20 = 20;
 

@@ -37,6 +37,8 @@ public class DBC120830_KokuhorenKyodoJukyushaInParameter extends BatchParameterB
     private SaiShoriKubun saishoriKubun;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
     private Long shutsuryokujunId;
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 
     /**
      * CreateTmptableProcessパラメータの取得です。

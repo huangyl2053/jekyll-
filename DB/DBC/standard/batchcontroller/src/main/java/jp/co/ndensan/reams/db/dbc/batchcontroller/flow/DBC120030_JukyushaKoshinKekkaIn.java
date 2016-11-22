@@ -118,6 +118,7 @@ public class DBC120030_JukyushaKoshinKekkaIn extends BatchFlowBase<DBC120030_Juk
         KokuhorenkyotsuGetFileProcessParameter parameter = new KokuhorenkyotsuGetFileProcessParameter();
         parameter.set交換情報識別番号(交換情報識別番号);
         parameter.setファイル格納フォルダ名(ファイル格納フォルダ名);
+        parameter.setLoginUserID(getParameter().getLoginUserId());
         return simpleBatch(KokuhorenkyoutsuGetFileProcess.class).arguments(parameter).define();
     }
 

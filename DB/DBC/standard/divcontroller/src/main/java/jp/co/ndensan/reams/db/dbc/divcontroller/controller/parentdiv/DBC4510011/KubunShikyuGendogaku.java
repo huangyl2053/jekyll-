@@ -45,6 +45,8 @@ public class KubunShikyuGendogaku {
     private static final RString MESSAGETAISHO1 = new RString("サービス種類コード：");
     private static final RString MESSAGETAISHO2 = new RString("サービス名称：");
     private static final RString DBCKAIGOSERVICETABLEDBT7130 = new RString("DBCKaigoServiceTableDbT7130");
+    private static final RString COLON = new RString("：");
+    private static final RString ZERO = new RString("0");
 
     /**
      * 画面初期化のメソッドます。
@@ -63,7 +65,11 @@ public class KubunShikyuGendogaku {
         handler.initialDisable(false);
         List<KeyValueDataSource> list = new ArrayList<>();
         for (ServiceBunrui serviceBunrui : ServiceBunrui.values()) {
-            list.add(new KeyValueDataSource(serviceBunrui.getコード(), serviceBunrui.get名称()));
+            RString コード = serviceBunrui.getコード();
+            if (コード.length() == 1) {
+                コード = ZERO.concat(コード);
+            }
+            list.add(new KeyValueDataSource(serviceBunrui.getコード(), コード.concat(COLON).concat(serviceBunrui.get名称())));
         }
         div.getServiceShuruiShousai().getDdlServiceBunruiCode().setDataSource(list);
         handler.setServiceShuruiShousaiEnable(true);
@@ -78,6 +84,7 @@ public class KubunShikyuGendogaku {
         if (div.getBtnTsuika().isDisabled()) {
             onSelect_Back(div);
         }
+        handler.setEnable();
         return ResponseData.of(div).respond();
     }
 

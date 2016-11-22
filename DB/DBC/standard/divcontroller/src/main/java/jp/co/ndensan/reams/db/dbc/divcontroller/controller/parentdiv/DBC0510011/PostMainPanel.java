@@ -53,6 +53,7 @@ public class PostMainPanel {
     private static final RDate DATE = RDate.getNowDate();
     private static final RString BTNJIKOKOKUHO = new RString("btnJikoKokuho");
     private static final RString BTNJIKOKOKIKOEI = new RString("btnJikoKokikorei");
+    private static final RString NUM_00 = new RString("00");
 
     /**
      * 画面初期化のメソッドます。
@@ -83,7 +84,7 @@ public class PostMainPanel {
      * @return ResponseData PostMainPanelDiv
      */
     public ResponseData<PostMainPanelDiv> onClick_btnTorikomi(PostMainPanelDiv div) {
-        div.getFileUpload().setDisabled(false);
+        div.getFileUpload().setVisible(true);
         メニューID = ResponseHolder.getMenuID();
         if (メニューID.equals(DBCMN82001)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, true);
@@ -109,7 +110,7 @@ public class PostMainPanel {
      * @return ResponseData PostMainPanelDiv
      */
     public ResponseData<PostMainPanelDiv> onClick_btnCancel(PostMainPanelDiv div) {
-        div.getFileUpload().setDisabled(true);
+        div.getFileUpload().setVisible(false);
         メニューID = ResponseHolder.getMenuID();
         if (メニューID.equals(DBCMN82001)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, false);
@@ -146,6 +147,7 @@ public class PostMainPanel {
             RDateTime ファイル日時 = aa.getSharedFileId();
             getHandler(div).setTime(ファイル日時);
         }
+        div.getFileUpload().setVisible(false);
         メニューID = ResponseHolder.getMenuID();
         if (メニューID.equals(DBCMN82001)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, false);
@@ -199,7 +201,7 @@ public class PostMainPanel {
                 && !div.getTxtRenkekeishiki().getValue().isNull()) {
             parameter.setInsurerDistinction(STRING_1);
             List<RString> list = new ArrayList<>();
-            list.add(RString.EMPTY);
+            list.add(NUM_00);
             parameter.setShoriShichoson(list);
         } else {
             parameter.setInsurerDistinction(STRING_2);
@@ -240,7 +242,7 @@ public class PostMainPanel {
                 && !div.getTxtRenkekeishiki().getValue().isNull()) {
             parameter.setInsurerDistinction(STRING_1);
             List<RString> list = new ArrayList<>();
-            list.add(RString.EMPTY);
+            list.add(NUM_00);
             parameter.setShoriShichoson(list);
         } else {
             parameter.setInsurerDistinction(STRING_2);

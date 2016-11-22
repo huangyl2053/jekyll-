@@ -277,9 +277,10 @@ public class PrtTokuchoKariTsuchishoProcess extends BatchProcessBase<HonsanteiTs
 
         publish特徴開始通知書(仮算定特徴開始通知書情報, 仮算定通知書情報);
 
-        TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport report = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(
-                編集後仮算定通知書共通情報, processParameter.get調定年度(), processParameter.get帳票作成日時(),
-                地方公共団体, 出力項目リスト, 改頁項目リスト, 連番);
+        TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport report
+                = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(仮算定通知書情報,
+                        編集後仮算定通知書共通情報, processParameter.get調定年度(), processParameter.get帳票作成日時(),
+                        地方公共団体, 出力項目リスト, 改頁項目リスト, 連番);
         report.writeBy(一覧表ReportSourceWriter);
         List<RString> bodyList = karisanteiSyori.get特別徴収開始通知書発行一覧表bodyList(processParameter.get調定年度(),
                 processParameter.get帳票作成日時().getRDateTime(), 編集後仮算定通知書共通情報);

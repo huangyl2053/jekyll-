@@ -8,13 +8,13 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -23,8 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanTokuteiShinryoTokubetsuRyoyo
-extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier,
-        DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity,
+        extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier,
+        DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity, 
         ShokanTokuteiShinryoTokubetsuRyoyo> implements Serializable {
 
     private final DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity;
@@ -79,8 +79,7 @@ extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier,
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}より{@link ShokanTokuteiShinryoTokubetsuRyoyo}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}
+     * @param entity DBより取得した{@link DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}
      */
     public ShokanTokuteiShinryoTokubetsuRyoyo(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求特定診療費・特別療養費"));
@@ -109,6 +108,15 @@ extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier,
     }
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
+    /**
+     * EntityDataStateを返します。
+     *
+     * @return EntityDataState
+     */
+    public EntityDataState getState() {
+        return entity.getState();
+    }
+
     /**
      * 被保険者番号を返します。
      *
@@ -248,8 +256,7 @@ extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier,
     /**
      * 償還払請求特定診療費・特別療養費の識別子{@link ShokanTokuteiShinryoTokubetsuRyoyoIdentifier}を返します。
      *
-     * @return
-     * 償還払請求特定診療費・特別療養費の識別子{@link ShokanTokuteiShinryoTokubetsuRyoyoIdentifier}
+     * @return 償還払請求特定診療費・特別療養費の識別子{@link ShokanTokuteiShinryoTokubetsuRyoyoIdentifier}
      */
     @Override
     public ShokanTokuteiShinryoTokubetsuRyoyoIdentifier identifier() {

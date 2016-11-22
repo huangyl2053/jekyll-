@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.definition.core.juminidorendoshikakusoshitsu.S
 import jp.co.ndensan.reams.db.dba.definition.core.juminidorendoshikakusoshitsu.TemParamter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.juminidorendoshikakutoroku.JuminIdoRendoShikakuTorokuEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -414,10 +415,11 @@ public class JuminIdoRendoShikakuSoshitsu {
      *
      * @param entity JuminIdoRendoShikakuTorokuEntity
      * @param データ抽出ＰＴＮ RString
+     * @return List<DbT1001HihokenshaDaichoEntity>
      */
-    public void getSearchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
+    public List<DbT1001HihokenshaDaichoEntity> getSearchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
 
-        tsuShiboKyoTu.searchHihodaicho(entity, データ抽出ＰＴＮ);
+        return tsuShiboKyoTu.searchHihodaicho(entity, データ抽出ＰＴＮ);
     }
 
     /**
@@ -438,10 +440,11 @@ public class JuminIdoRendoShikakuSoshitsu {
      *
      * @param paramter NaiBushoRyouParamter
      * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param 翌日 FlexibleDate
      */
-    public void nenreiCalc(UaFt200FindShikibetsuTaishoEntity 住民異動情報, NaiBushoRyouParamter paramter) {
+    public void nenreiCalc(UaFt200FindShikibetsuTaishoEntity 住民異動情報, NaiBushoRyouParamter paramter, FlexibleDate 翌日) {
 
-        tsuShiboKyoTu.nenreiCalc(住民異動情報, paramter);
+        tsuShiboKyoTu.nenreiCalc(住民異動情報, paramter, 翌日);
     }
 
     /**
@@ -460,6 +463,6 @@ public class JuminIdoRendoShikakuSoshitsu {
             FlexibleDate 資格喪失届出日,
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             TemParamter paramter) {
-        tsuShiboKyoTu.getMaxKaijoYmd(entity, 資格喪失日, 資格喪失届出日, 住民異動情報, paramter);
+        tsuchiJuri.getMaxKaijoYmd(entity, 資格喪失日, 資格喪失届出日, 住民異動情報, paramter);
     }
 }

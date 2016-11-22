@@ -52,7 +52,7 @@ public class GenNendoHonsanteiIdouProperty extends ReportPropertyBase<GenNendoHo
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("shichosonCode")),
+        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("dbT2015KeisangoJoho_fukaShichosonCode")),
         /**
          * 被保険者番号
          */

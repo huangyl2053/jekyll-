@@ -41,6 +41,7 @@ public class KaigoNinteiShinseiKensakuHandler {
     private static final RString 再検索 = new RString("btnResearch");
     private static final RString 検索 = new RString("btnSearch");
     private static final RString 検索状態 = new RString("検索状態");
+    private static final long NUM = 100L;
 
     /**
      * コンストラクタです。
@@ -57,7 +58,7 @@ public class KaigoNinteiShinseiKensakuHandler {
      */
     public void initialize() {
         div.getCcdNinteiShinseishaFinder().initialize();
-        div.getTxtMaxKensu().setValue(Decimal.valueOf(100L));
+        div.getTxtMaxKensu().setValue(Decimal.valueOf(NUM));
     }
 
     /**
@@ -126,7 +127,7 @@ public class KaigoNinteiShinseiKensakuHandler {
                 }
                 dgJigyoshaItiran.setSeibetsu(性別);
                 if (shinseiJoho.get生年月日() != null
-                    && !shinseiJoho.get生年月日().isEmpty()) {
+                        && !shinseiJoho.get生年月日().isEmpty()) {
                     dgJigyoshaItiran.getBirthYMD().setValue(new RDate(介護認定申請情報受給.
                             records().get(i).get生年月日().toString()));
                 }
@@ -137,7 +138,7 @@ public class KaigoNinteiShinseiKensakuHandler {
                     dgJigyoshaItiran.setJusho(shinseiJoho.get住所().value());
                 }
                 if (shinseiJoho.get申請書管理番号() != null
-                    && !shinseiJoho.get申請書管理番号().isEmpty()) {
+                        && !shinseiJoho.get申請書管理番号().isEmpty()) {
                     dgJigyoshaItiran.setShinseishoKnriNo(shinseiJoho.get申請書管理番号().value());
                 }
                 dgKensakuKekkaIchiranList.add(dgJigyoshaItiran);
@@ -193,7 +194,7 @@ public class KaigoNinteiShinseiKensakuHandler {
                 }
                 dgJigyoshaItiran.setSeibetsu(性別);
                 if (shinseiJoho.get生年月日() != null
-                    && !shinseiJoho.get生年月日().isEmpty()) {
+                        && !shinseiJoho.get生年月日().isEmpty()) {
                     dgJigyoshaItiran.getBirthYMD().setValue(new RDate(介護認定申請情報認定.
                             records().get(i).get生年月日().toString()));
                 }
@@ -204,7 +205,7 @@ public class KaigoNinteiShinseiKensakuHandler {
                     dgJigyoshaItiran.setJusho(shinseiJoho.get住所().value());
                 }
                 if (shinseiJoho.get申請書管理番号() != null
-                    && !shinseiJoho.get申請書管理番号().isEmpty()) {
+                        && !shinseiJoho.get申請書管理番号().isEmpty()) {
                     dgJigyoshaItiran.setShinseishoKnriNo(shinseiJoho.get申請書管理番号().value());
                 }
                 dgKensakuKekkaIchiranList.add(dgJigyoshaItiran);

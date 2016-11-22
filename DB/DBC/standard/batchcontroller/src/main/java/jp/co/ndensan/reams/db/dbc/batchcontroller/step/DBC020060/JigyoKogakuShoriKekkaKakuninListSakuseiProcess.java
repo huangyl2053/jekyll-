@@ -42,7 +42,7 @@ public class JigyoKogakuShoriKekkaKakuninListSakuseiProcess extends BatchProcess
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakusogojigyoservice.IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper.select処理結果リスト一時TBL");
-    private static final RString 出力ファイル名 = new RString("DBU900002_ShoriKekkaKakuninList.csv");
+    private static final RString 出力ファイル名 = new RString("DBC900004_ShoriKekkaKakuninList.csv");
     private static final RString MSG_高額サービス費支給決定通知書_エラー区分 = new RString("高額サービス費支給決定通知書_エラー区分");
     private static final RString HEADER_作成日時 = new RString("作成日時");
     private static final RString HEADER_処理名 = new RString("処理名");
@@ -53,7 +53,7 @@ public class JigyoKogakuShoriKekkaKakuninListSakuseiProcess extends BatchProcess
     private static final RString HEADER_履歴番号 = new RString("履歴番号");
     private static final RString HEADER_エラー内容 = new RString("エラー内容");
     private static final RString HEADER_備考 = new RString("備考");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBU900002"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC900004"));
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString SAKUSEI = new RString("作成");

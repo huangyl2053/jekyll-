@@ -4,17 +4,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ShikyugakuKeisanKekkaTorokuUchiwakeList のクラスファイル
- *
+ * ShikyugakuKeisanKekkaTorokuUchiwakeList のクラスファイル 
+ * 
  * @reamsid_L DBC-2030-010 huzongcheng
  */
 public class ShikyugakuKeisanKekkaTorokuUchiwakeListDiv extends Panel {
@@ -102,7 +99,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtJohoOver70FutangakuGokei(TextBoxNum txtJohoOver70FutangakuGokei) {
+    public void  setTxtJohoOver70FutangakuGokei(TextBoxNum txtJohoOver70FutangakuGokei) {
         this.getGokeiJohoPanel().setTxtJohoOver70FutangakuGokei(txtJohoOver70FutangakuGokei);
     }
 
@@ -112,7 +109,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtJohoOver70ShikyugakuGokei(TextBoxNum txtJohoOver70ShikyugakuGokei) {
+    public void  setTxtJohoOver70ShikyugakuGokei(TextBoxNum txtJohoOver70ShikyugakuGokei) {
         this.getGokeiJohoPanel().setTxtJohoOver70ShikyugakuGokei(txtJohoOver70ShikyugakuGokei);
     }
 
@@ -122,7 +119,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtJohoUnder70FutangakuGokei(TextBoxNum txtJohoUnder70FutangakuGokei) {
+    public void  setTxtJohoUnder70FutangakuGokei(TextBoxNum txtJohoUnder70FutangakuGokei) {
         this.getGokeiJohoPanel().setTxtJohoUnder70FutangakuGokei(txtJohoUnder70FutangakuGokei);
     }
 
@@ -132,7 +129,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtJohoFutangakuGokei(TextBoxNum txtJohoFutangakuGokei) {
+    public void  setTxtJohoFutangakuGokei(TextBoxNum txtJohoFutangakuGokei) {
         this.getGokeiJohoPanel().setTxtJohoFutangakuGokei(txtJohoFutangakuGokei);
     }
 
@@ -142,7 +139,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtJohoUnder70ShikyugakuGokei(TextBoxNum txtJohoUnder70ShikyugakuGokei) {
+    public void  setTxtJohoUnder70ShikyugakuGokei(TextBoxNum txtJohoUnder70ShikyugakuGokei) {
         this.getGokeiJohoPanel().setTxtJohoUnder70ShikyugakuGokei(txtJohoUnder70ShikyugakuGokei);
     }
 
@@ -152,7 +149,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtJohoShikyugakuGokei(TextBoxNum txtJohoShikyugakuGokei) {
+    public void  setTxtJohoShikyugakuGokei(TextBoxNum txtJohoShikyugakuGokei) {
         this.getGokeiJohoPanel().setTxtJohoShikyugakuGokei(txtJohoShikyugakuGokei);
     }
 

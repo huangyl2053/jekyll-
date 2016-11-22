@@ -165,13 +165,28 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
             item.setChoteiNendo(編集後仮算定通知書共通情報.get調定年度().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString());
         }
+        setLineData2(item, 編集後仮算定通知書共通情報, 更正前, 更正後);
+    }
+
+    private void setLineData2(KarisanteiHenjunkaHenkoTsuchishoB5YokoItem item, EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報,
+            EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前, EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後) {
 
         if (編集後仮算定通知書共通情報.get編集後口座() != null) {
             item.setBankCode(編集後仮算定通知書共通情報.get編集後口座().get金融機関コードCombinedWith支店コード());
-            item.setBankName(編集後仮算定通知書共通情報.get編集後口座().get金融機関名CombinedWith支店名());
+
+            if (編集後仮算定通知書共通情報.get編集後口座().isゆうちょ銀行()) {
+                item.setBankName(RString.EMPTY);
+                item.setKozaShurui(RString.EMPTY);
+            } else if (!RString.isNullOrEmpty(編集後仮算定通知書共通情報.get編集後口座().get金融機関コード())
+                    && !RString.isNullOrEmpty(編集後仮算定通知書共通情報.get編集後口座().get支店コード())) {
+                item.setBankName(編集後仮算定通知書共通情報.get編集後口座().get金融機関名CombinedWith支店名());
+                item.setKozaShurui(編集後仮算定通知書共通情報.get編集後口座().get口座種別略称());
+            } else {
+                item.setBankName(RString.EMPTY);
+                item.setKozaShurui(RString.EMPTY);
+            }
             item.setKozaMeigi(編集後仮算定通知書共通情報.get編集後口座().get口座名義人優先());
             item.setKozaNo(編集後仮算定通知書共通情報.get編集後口座().get番号名称());
-            item.setKozaShurui(編集後仮算定通知書共通情報.get編集後口座().get口座種別略称());
         }
         item.setHokenryoGakuMae(更正前.get更正前介護保険料仮徴収額合計() != null ? new RString(更正前.get更正前介護保険料仮徴収額合計().toString()) : RString.EMPTY);
         item.setHokenryoGakuAto(更正後.get更正後介護保険料仮徴収額合計() != null ? new RString(更正後.get更正後介護保険料仮徴収額合計().toString()) : RString.EMPTY);

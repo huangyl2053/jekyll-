@@ -64,6 +64,8 @@ public class DBC060020_KyufuhiTsuchishoParameter extends BatchParameterBase {
     private Long shutsuryokujunId;
     @BatchParameter(key = "文書番号", name = "文書番号")
     private RString 文書番号;
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 
     /**
      * プロセスパラメータを作成します。

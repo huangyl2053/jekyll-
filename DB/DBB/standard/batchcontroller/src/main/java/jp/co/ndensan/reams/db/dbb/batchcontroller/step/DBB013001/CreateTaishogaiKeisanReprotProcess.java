@@ -202,7 +202,7 @@ public class CreateTaishogaiKeisanReprotProcess extends BatchKeyBreakBase<Tokuch
         TokuchoHeijunkaRokuBatchTaishogaiIchiran taishogai = new TokuchoHeijunkaRokuBatchTaishogaiIchiran(
                 taishogaiEntity, 今年度保険料率, new Decimal(調整金額));
         TokubetsuChoshuHeijunkaKeisanIchiranReport report = new TokubetsuChoshuHeijunkaKeisanIchiranReport(
-                null, taishogai, parameter.get調定日時(),
+                null, taishogai, 帳票制御共通, parameter.get調定日時(),
                 parameter.get調定年度(), 導入団体クラス, outputOrder, 特徴平準化対象外一覧表);
         report.writeBy(reportSourceWriter);
 

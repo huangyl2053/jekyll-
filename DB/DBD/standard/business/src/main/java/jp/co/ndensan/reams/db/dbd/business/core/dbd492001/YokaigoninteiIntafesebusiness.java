@@ -146,58 +146,77 @@ public class YokaigoninteiIntafesebusiness {
         一次判定内容 = 一次判定内容.concat(entity.getShikibetsukodo() != null ? entity.getShikibetsukodo() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getHokenshabango() != null ? entity.getHokenshabango() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getHihokenjabango() != null ? entity.getHihokenjabango() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getNinteishinseibi() != null ? new RString(entity.getNinteishinseibi().toString()) : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getEdaban() != null ? entity.getEdaban() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getShinseikubunhorei() != null ? entity.getShinseikubunhorei().value() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getShinseikubunshinseiji() != null ? entity.getShinseikubunshinseiji().value() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getNinteishinseibi() != null ? new RString(entity.getNinteishinseibi().toString()) : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容.concat(entity.getEdaban() != null
+                ? entity.getEdaban() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getShinseikubunhorei() != null ? entity.getShinseikubunhorei().value() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getShinseikubunshinseiji() != null ? entity.getShinseikubunshinseiji().value() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getTorisakubunkodo() != null ? entity.getTorisakubunkodo().value() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getHihokenjakubun() != null ? entity.getHihokenjakubun().value() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getShinseidaikokubun() != null ? entity.getShinseidaikokubun().value() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getSeinengappi() != null ? new RString(entity.getSeinengappi().toString()) : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getShinseidaikokubun() != null ? entity.getShinseidaikokubun().value() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getSeinengappi() != null ? new RString(entity.getSeinengappi().toString()) : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(new RString(entity.getNenrei()).concat(分離文字));
         一次判定内容 = 一次判定内容.concat(entity.getSeibetsukodo() != null ? entity.getSeibetsukodo().value() : RString.EMPTY).concat(分離文字);
     }
 
     private void edit16to32(FairudetaIchijiTeburuEntity entity) {
-        一次判定内容 = 一次判定内容.concat(entity.getHihokenjakanashimei() != null ? entity.getHihokenjakanashimei().value() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getHihokenjakanjishimei() != null ? entity.getHihokenjakanjishimei().value() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getHihokenjakanashimei() != null ? entity.getHihokenjakanashimei().value() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getHihokenjakanjishimei() != null ? entity.getHihokenjakanjishimei().value() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getYubenbango() != null ? entity.getYubenbango() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getJusho() != null ? entity.getJusho().value() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getTenwabango() != null ? entity.getTenwabango() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getByoinshisetsutonomeisho() != null ? entity.getByoinshisetsutonomeisho() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getByoinshisetsutonoshozaichi() != null ? entity.getByoinshisetsutonoshozaichi() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getByoinshisetsutonomeisho() != null ? entity.getByoinshisetsutonomeisho() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getByoinshisetsutonoshozaichi() != null ? entity.getByoinshisetsutonoshozaichi() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkainoninteishinsakaikekka() != null
                 ? entity.getZenkainoninteishinsakaikekka() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkainoninteiyukokigenkaishi() != null
                 ? new RString(entity.getZenkainoninteiyukokigenkaishi().toString()) : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkainoninteiyukokigenshuryo() != null
                 ? new RString(entity.getZenkainoninteiyukokigenshuryo().toString()) : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getShujiiiryokikanbango() != null ? entity.getShujiiiryokikanbango() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getShujiiiryokikanbango() != null ? entity.getShujiiiryokikanbango() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getShujiibango() != null ? entity.getShujiibango() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getLkenshoiraibi() != null ? new RString(entity.getLkenshoiraibi().toString()) : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getLkenshonyushubi() != null ? new RString(entity.getLkenshonyushubi().toString()) : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getLkenshoiraibi() != null ? new RString(entity.getLkenshoiraibi().toString()) : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getLkenshonyushubi() != null ? new RString(entity.getLkenshonyushubi().toString()) : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getLkensho_tankikioku() != null ? entity.getLkensho_tankikioku() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getLkensho_ninchinoryoku() != null ? entity.getLkensho_ninchinoryoku() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getLkensho_dentatsunoryoku() != null ? entity.getLkensho_dentatsunoryoku() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getLkensho_ninchinoryoku() != null ? entity.getLkensho_ninchinoryoku() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getLkensho_dentatsunoryoku() != null ? entity.getLkensho_dentatsunoryoku() : RString.EMPTY).concat(分離文字);
     }
 
     private void edit33to50(FairudetaIchijiTeburuEntity entity) {
         一次判定内容 = 一次判定内容.concat(entity.getLkensho_shokujikoi() != null ? entity.getLkensho_shokujikoi() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getLkensho_ninshishokoreishajiritsudo() != null
                 ? entity.getLkensho_ninshishokoreishajiritsudo() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getChosairaibi() != null ? new RString(entity.getChosairaibi().toString()) : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getChosajisshibi() != null ? new RString(entity.getChosajisshibi().toString()) : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getChosairaibi() != null ? new RString(entity.getChosairaibi().toString()) : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getChosajisshibi() != null ? new RString(entity.getChosajisshibi().toString()) : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getShiteikyotakukaigoshienjigyoshatobango() != null
                 ? entity.getShiteikyotakukaigoshienjigyoshatobango() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getLtakukubun() != null ? entity.getLtakukubun() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getNinteichosainbango() != null ? entity.getNinteichosainbango() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getNinteichosainshikakukodo() != null
                 ? entity.getNinteichosainshikakukodo().value() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getLchijihanteibi() != null ? new RString(entity.getLchijihanteibi().toString()) : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getLchijihanteibi() != null ? new RString(entity.getLchijihanteibi().toString()) : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getLchijihanteikekka() != null ? entity.getLchijihanteikekka() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getLchijihanteikekka_ninshishokasan() != null
                 ? entity.getLchijihanteikekka_ninshishokasan() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getYokaigoninteitokijunjikan() != null ? entity.getYokaigoninteitokijunjikan() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getYokaigoninteitokijunjikan() != null ? entity.getYokaigoninteitokijunjikan() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getYokaigoninteitokijunjikan_shokuji() != null
                 ? entity.getYokaigoninteitokijunjikan_shokuji() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getYokaigoninteitokijunjikan_haisetsu() != null
@@ -229,7 +248,8 @@ public class YokaigoninteiIntafesebusiness {
                 ? entity.getChukanhyokakomokutokuten_dai4gun() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getChukanhyokakomokutokuten_dai5gun() != null
                 ? entity.getChukanhyokakomokutokuten_dai5gun() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getLchijihanteikeikoku() != null ? entity.getLchijihanteikeikoku().value() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getLchijihanteikeikoku() != null ? entity.getLchijihanteikeikoku().value() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getJotainoanteisei() != null ? entity.getJotainoanteisei() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getNinshishojiritsudoijonogaizensei() != null
                 ? entity.getNinshishojiritsudoijonogaizensei() : RString.EMPTY).concat(分離文字);
@@ -244,42 +264,57 @@ public class YokaigoninteiIntafesebusiness {
 
     private void edit66to80(FairudetaIchijiTeburuEntity entity) {
         一次判定内容 = 一次判定内容.concat(entity.getShinsakaishiryobango() != null ? entity.getShinsakaishiryobango() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getNijihanteibi() != null ? new RString(entity.getNijihanteibi().toString()) : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getNijihanteibi() != null ? new RString(entity.getNijihanteibi().toString()) : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getNijihanteikekka() != null ? entity.getNijihanteikekka() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getNinteiyukokigen_kaishi() != null
                 ? new RString(entity.getNinteiyukokigen_kaishi().toString()) : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getNinteiyukokigen_shuryo() != null
                 ? new RString(entity.getNinteiyukokigen_shuryo().toString()) : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getTokuteishippeikodo() != null ? entity.getTokuteishippeikodo().value() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getYokaigo1nobaainojotaizo() != null ? entity.getYokaigo1nobaainojotaizo() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getGenzainosabisukubunkodo() != null ? entity.getGenzainosabisukubunkodo().value() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getTokuteishippeikodo() != null ? entity.getTokuteishippeikodo().value() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getYokaigo1nobaainojotaizo() != null ? entity.getYokaigo1nobaainojotaizo() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getGenzainosabisukubunkodo() != null ? entity.getGenzainosabisukubunkodo().value() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getGenzainojokyo() != null ? entity.getGenzainojokyo() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getHomonkaigo_homuherupusabisu() != null ? entity.getHomonkaigo_homuherupusabisu() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getHomonkaigo_homuherupusabisu() != null ? entity.getHomonkaigo_homuherupusabisu() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getHomonnyuyokukaigo() != null ? entity.getHomonnyuyokukaigo() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getHomonkango() != null ? entity.getHomonkango() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getHomonrihabiriteshon() != null ? entity.getHomonrihabiriteshon() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getKyotakuryoyokanrishido() != null ? entity.getKyotakuryoyokanrishido() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getTsushokaigo_deisabisu() != null ? entity.getTsushokaigo_deisabisu() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getKyotakuryoyokanrishido() != null ? entity.getKyotakuryoyokanrishido() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getTsushokaigo_deisabisu() != null ? entity.getTsushokaigo_deisabisu() : RString.EMPTY).concat(分離文字);
     }
 
     private void edit81to95(FairudetaIchijiTeburuEntity entity) {
-        一次判定内容 = 一次判定内容.concat(entity.getTsushorihabiriteshon() != null ? entity.getTsushorihabiriteshon() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getTsushorihabiriteshon() != null ? entity.getTsushorihabiriteshon() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getTankinyushoseikatsukaigo_shotosutei() != null
                 ? entity.getTankinyushoseikatsukaigo_shotosutei() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getTankinyushoryoyokaigo() != null ? entity.getTankinyushoryoyokaigo() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getTankinyushoryoyokaigo() != null ? entity.getTankinyushoryoyokaigo() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getTokuteishisetsunyukyoshaseikatsukaigo() != null
                 ? entity.getTokuteishisetsunyukyoshaseikatsukaigo() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getFukushiyogutaiyo() != null ? entity.getFukushiyogutaiyo() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getTokuteifukushiyoguhanbai() != null ? entity.getTokuteifukushiyoguhanbai() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getJutakukaishukaigokyufu() != null ? entity.getJutakukaishukaigokyufu() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getYakantaiogatahomonkaigo() != null ? entity.getYakantaiogatahomonkaigo() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getNinchishotaiogatasushokaigo() != null ? entity.getNinchishotaiogatasushokaigo() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getTokuteifukushiyoguhanbai() != null ? entity.getTokuteifukushiyoguhanbai() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getJutakukaishukaigokyufu() != null ? entity.getJutakukaishukaigokyufu() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getYakantaiogatahomonkaigo() != null ? entity.getYakantaiogatahomonkaigo() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getNinchishotaiogatasushokaigo() != null ? entity.getNinchishotaiogatasushokaigo() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getShokibotakinogatakyotakukaigo() != null
                 ? entity.getShokibotakinogatakyotakukaigo() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getNinshishokaigo_gurupuhomu() != null ? entity.getNinshishokaigo_gurupuhomu() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getNinshishokaigo_gurupuhomu() != null ? entity.getNinshishokaigo_gurupuhomu() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getChiikimitchakugataseikatsukaigo() != null
                 ? entity.getChiikimitchakugataseikatsukaigo() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getMitchakugatarojinkaigo() != null ? entity.getMitchakugatarojinkaigo() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getMitchakugatarojinkaigo() != null ? entity.getMitchakugatarojinkaigo() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getTeikijunkai_zuijihomonkaigokango() != null
                 ? entity.getTeikijunkai_zuijihomonkaigokango() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getFukugogatasabisu() != null ? entity.getFukugogatasabisu() : RString.EMPTY).concat(分離文字);
@@ -288,7 +323,8 @@ public class YokaigoninteiIntafesebusiness {
     private void edit96to110(FairudetaIchijiTeburuEntity entity) {
         一次判定内容 = 一次判定内容.concat(entity.getKaigoyobohomonkaigo_homuherupusabisu() != null
                 ? entity.getKaigoyobohomonkaigo_homuherupusabisu() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getKaigoyobohomonnyuyokukaigo() != null ? entity.getKaigoyobohomonnyuyokukaigo() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getKaigoyobohomonnyuyokukaigo() != null ? entity.getKaigoyobohomonnyuyokukaigo() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getKaigoyobohomonkango() != null ? entity.getKaigoyobohomonkango() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getKaigoyobohomonrihabiriteshon() != null
                 ? entity.getKaigoyobohomonrihabiriteshon() : RString.EMPTY).concat(分離文字);
@@ -326,9 +362,12 @@ public class YokaigoninteiIntafesebusiness {
         一次判定内容 = 一次判定内容.concat(entity.getMahi_hidari_kashi01() != null ? entity.getMahi_hidari_kashi01() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getMahi_migi_kashi01() != null ? entity.getMahi_migi_kashi01() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getMahi_sonohoka01() != null ? entity.getMahi_sonohoka01() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getKoshuku_kenkansetsu01() != null ? entity.getKoshuku_kenkansetsu01() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getKoshuku_kokansetsu01() != null ? entity.getKoshuku_kokansetsu01() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getKoshuku_hizakansetsu01() != null ? entity.getKoshuku_hizakansetsu01() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getKoshuku_kenkansetsu01() != null ? entity.getKoshuku_kenkansetsu01() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容.
+                concat(entity.getKoshuku_kokansetsu01() != null ? entity.getKoshuku_kokansetsu01() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getKoshuku_hizakansetsu01() != null ? entity.getKoshuku_hizakansetsu01() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getKoshuku_sonohoka01() != null ? entity.getKoshuku_sonohoka01() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getNegaeri01() != null ? entity.getNegaeri01() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getOkiagari01() != null ? entity.getOkiagari01() : RString.EMPTY).concat(分離文字);
@@ -357,16 +396,19 @@ public class YokaigoninteiIntafesebusiness {
 
     private void edit141to155(FairudetaIchijiTeburuEntity entity) {
         一次判定内容 = 一次判定内容.concat(entity.getUwaginochakudatsu02() != null ? entity.getUwaginochakudatsu02() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZubontonochakudatsu02() != null ? entity.getZubontonochakudatsu02() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZubontonochakudatsu02() != null ? entity.getZubontonochakudatsu02() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getGaishutsuhindo02() != null ? entity.getGaishutsuhindo02() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getLshinodentatsu03() != null ? entity.getLshinodentatsu03() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getMainichinonikkaorikai03() != null ? entity.getMainichinonikkaorikai03() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getMainichinonikkaorikai03() != null ? entity.getMainichinonikkaorikai03() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getSeinengappioiu03() != null ? entity.getSeinengappioiu03() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getTankikioku03() != null ? entity.getTankikioku03() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getJibunnonamaeoiu03() != null ? entity.getJibunnonamaeoiu03() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getImanokisetsuorikai03() != null ? entity.getImanokisetsuorikai03() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getHaikai03() != null ? entity.getHaikai03() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getGaishutsushitemodorenai03() != null ? entity.getGaishutsushitemodorenai03() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getGaishutsushitemodorenai03() != null ? entity.getGaishutsushitemodorenai03() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getHigaiteki04() != null ? entity.getHigaiteki04() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getSakubanashi04() != null ? entity.getSakubanashi04() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getKanjōgafuantei04() != null ? entity.getKanjōgafuantei04() : RString.EMPTY).concat(分離文字);
@@ -382,12 +424,15 @@ public class YokaigoninteiIntafesebusiness {
         一次判定内容 = 一次判定内容.concat(entity.getShushuheki04() != null ? entity.getShushuheki04() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getMonoyairuiokowasu04() != null ? entity.getMonoyairuiokowasu04() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getHidoimonowasure04() != null ? entity.getHidoimonowasure04() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getHitorigotohitoriwarai04() != null ? entity.getHitorigotohitoriwarai04() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getJibungattenikodosuru04() != null ? entity.getJibungattenikodosuru04() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getHitorigotohitoriwarai04() != null ? entity.getHitorigotohitoriwarai04() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getJibungattenikodosuru04() != null ? entity.getJibungattenikodosuru04() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getWagamatomaranai04() != null ? entity.getWagamatomaranai04() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getKusurinonaifuku05() != null ? entity.getKusurinonaifuku05() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getKinsennokanri05() != null ? entity.getKinsennokanri05() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getNichijonoishikettei05() != null ? entity.getNichijonoishikettei05() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getNichijonoishikettei05() != null ? entity.getNichijonoishikettei05() : RString.EMPTY).concat(分離文字);
     }
 
     private void edit171to185(FairudetaIchijiTeburuEntity entity) {
@@ -409,8 +454,10 @@ public class YokaigoninteiIntafesebusiness {
     }
 
     private void edit186to200(FairudetaIchijiTeburuEntity entity) {
-        一次判定内容 = 一次判定内容.concat(entity.getShogaikoreishajiritsudo() != null ? entity.getShogaikoreishajiritsudo() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getNinshishokoreishajiritsudo() != null ? entity.getNinshishokoreishajiritsudo() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getShogaikoreishajiritsudo() != null ? entity.getShogaikoreishajiritsudo() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getNinshishokoreishajiritsudo() != null ? entity.getNinshishokoreishajiritsudo() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_mahi_hidari_joshi01() != null
                 ? entity.getZenkaikekka_mahi_hidari_joshi01() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_mahi_migi_joshi01() != null
@@ -441,25 +488,32 @@ public class YokaigoninteiIntafesebusiness {
 
     private void edit201to215(FairudetaIchijiTeburuEntity entity) {
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_hoko01() != null ? entity.getZenkaikekka_hoko01() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_tachiagari01() != null ? entity.getZenkaikekka_tachiagari01() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_tachiagari01() != null ? entity.getZenkaikekka_tachiagari01() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_kataashidenotagu01() != null
                 ? entity.getZenkaikekka_kataashidenotagu01() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_araimi01() != null ? entity.getZenkaikekka_araimi01() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_tsumekiri01() != null ? entity.getZenkaikekka_tsumekiri01() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_shiryoku01() != null ? entity.getZenkaikekka_shiryoku01() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_choryoku01() != null ? entity.getZenkaikekka_choryoku01() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_tsumekiri01() != null ? entity.getZenkaikekka_tsumekiri01() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_shiryoku01() != null ? entity.getZenkaikekka_shiryoku01() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_choryoku01() != null ? entity.getZenkaikekka_choryoku01() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_ljo02() != null ? entity.getZenkaikekka_ljo02() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_ldo02() != null ? entity.getZenkaikekka_ldo02() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_enge02() != null ? entity.getZenkaikekka_enge02() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_shokujisesshu02() != null ? entity.getZenkaikekka_shokujisesshu02() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_shokujisesshu02() != null ? entity.getZenkaikekka_shokujisesshu02() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_hainyo02() != null ? entity.getZenkaikekka_hainyo02() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_haiben02() != null ? entity.getZenkaikekka_haiben02() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_kokuseiketsu02() != null ? entity.getZenkaikekka_kokuseiketsu02() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_kokuseiketsu02() != null ? entity.getZenkaikekka_kokuseiketsu02() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_sengan02() != null ? entity.getZenkaikekka_sengan02() : RString.EMPTY).concat(分離文字);
     }
 
     private void edit216to230(FairudetaIchijiTeburuEntity entity) {
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_seihatsu02() != null ? entity.getZenkaikekka_seihatsu02() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_seihatsu02() != null ? entity.getZenkaikekka_seihatsu02() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_uwaginochakudatsu02() != null
                 ? entity.getZenkaikekka_uwaginochakudatsu02() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_zubontonochakudatsu02() != null
@@ -528,20 +582,30 @@ public class YokaigoninteiIntafesebusiness {
                 ? entity.getZenkaikekka_nichijonoishikettei05() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_shudanenofutekio05() != null
                 ? entity.getZenkaikekka_shudanenofutekio05() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_kaimono05() != null ? entity.getZenkaikekka_kaimono05() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_kantannachori05() != null ? entity.getZenkaikekka_kantannachori05() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_tentekinokanri() != null ? entity.getZenkaikekka_tentekinokanri() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_kaimono05() != null ? entity.getZenkaikekka_kaimono05() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_kantannachori05() != null ? entity.getZenkaikekka_kantannachori05() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_tentekinokanri() != null ? entity.getZenkaikekka_tentekinokanri() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_chushinjomyakueiyo() != null
                 ? entity.getZenkaikekka_chushinjomyakueiyo() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_sutomanoshochi() != null ? entity.getZenkaikekka_sutomanoshochi() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_sansoryoho() != null ? entity.getZenkaikekka_sansoryoho() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_resupireta() != null ? entity.getZenkaikekka_resupireta() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_sutomanoshochi() != null ? entity.getZenkaikekka_sutomanoshochi() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_sansoryoho() != null ? entity.getZenkaikekka_sansoryoho() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_resupireta() != null ? entity.getZenkaikekka_resupireta() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_kikansekkainoshochitotsunokango() != null
                 ? entity.getZenkaikekka_kikansekkainoshochitotsunokango() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_totsunokango() != null ? entity.getZenkaikekka_totsunokango() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_keikaneiyo() != null ? entity.getZenkaikekka_keikaneiyo() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_monitasokutei() != null ? entity.getZenkaikekka_monitasokutei() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_jiyokusounoshochi() != null ? entity.getZenkaikekka_jiyokusounoshochi() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_totsunokango() != null ? entity.getZenkaikekka_totsunokango() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_keikaneiyo() != null ? entity.getZenkaikekka_keikaneiyo() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_monitasokutei() != null ? entity.getZenkaikekka_monitasokutei() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_jiyokusounoshochi() != null ? entity.getZenkaikekka_jiyokusounoshochi() : RString.EMPTY).concat(分離文字);
     }
 
     private void edit261to275(FairudetaIchijiTeburuEntity entity) {
@@ -554,7 +618,8 @@ public class YokaigoninteiIntafesebusiness {
                 ? entity.getZenkaikekka_ichijihanteikekka() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_ichijihanteikekka_ninshishokasan() != null
                 ? entity.getZenkaikekka_ichijihanteikekka_ninshishokasan() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_yokaigojikan() != null ? entity.getZenkaikekka_yokaigojikan() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_yokaigojikan() != null ? entity.getZenkaikekka_yokaigojikan() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_yokaigojikan_shokuji() != null
                 ? entity.getZenkaikekka_yokaigojikan_shokuji() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_yokaigojikan_haisetsu() != null
@@ -585,7 +650,8 @@ public class YokaigoninteiIntafesebusiness {
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_chukanhyokakomokutokutendai5_gun() != null
                 ? entity.getZenkaikekka_chukanhyokakomokutokutendai5_gun() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_kodo() != null ? entity.getZenkaikekka_kodo().value() : RString.EMPTY).concat(分離文字);
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_jotainoanteisei() != null ? entity.getZenkaikekka_jotainoanteisei() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_jotainoanteisei() != null ? entity.getZenkaikekka_jotainoanteisei() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_ninshishojiritsudo() != null
                 ? entity.getZenkaikekka_ninshishojiritsudo() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_ninchikinokyufukubun() != null
@@ -605,7 +671,8 @@ public class YokaigoninteiIntafesebusiness {
     }
 
     private void edit291to305(FairudetaIchijiTeburuEntity entity) {
-        一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_homonkango() != null ? entity.getZenkaikekka_homonkango() : RString.EMPTY).concat(分離文字);
+        一次判定内容 = 一次判定内容
+                .concat(entity.getZenkaikekka_homonkango() != null ? entity.getZenkaikekka_homonkango() : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_homonrihabiriteshon() != null
                 ? new RString(entity.getZenkaikekka_homonrihabiriteshon().toString()) : RString.EMPTY).concat(分離文字);
         一次判定内容 = 一次判定内容.concat(entity.getZenkaikekka_kyotakuryoyokanrishido() != null

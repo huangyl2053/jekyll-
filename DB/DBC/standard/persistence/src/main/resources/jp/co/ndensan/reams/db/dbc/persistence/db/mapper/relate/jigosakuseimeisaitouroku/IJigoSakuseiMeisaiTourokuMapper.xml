@@ -35,11 +35,11 @@
         C."serviceShuruiCode" = A."serviceShuruiCode"
         AND C."yoKaigoJotaiKubun" = A."yoKaigoJotaiKubun"
         AND C."rirekiNo" = A."rirekiNo"
+        AND ( C."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
+        AND (C."tekiyoShuryoYM" IS NULL OR C."tekiyoShuryoYM" = '' OR C."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月}) )
         WHERE
         A."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
         AND (A."tekiyoShuryoYM" IS NULL OR A."tekiyoShuryoYM" = '' OR A."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
-        AND C."tekiyoKaishiYM" <![CDATA[<=]]> #{利用年月}
-        AND (C."tekiyoShuryoYM" IS NULL OR C."tekiyoShuryoYM" = '' OR C."tekiyoShuryoYM" <![CDATA[>=]]> #{利用年月})
         ORDER BY
         A."serviceShuruiCode" DESC
     </select>
@@ -71,12 +71,12 @@
     <select resultOrdered="true" id="getサービス利用票データ" resultMap="resultMap_KyufuJikoSakuseiEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigosakuseimeisaitouroku.KyufuJikoSakuseiParameter" fetchSize="500">
         SELECT
-        DbT7060KaigoJigyosha."jigyoshaName" AS 事業者,
-        (CASE 
+        distinct (CASE 
         WHEN A.サービス項目コード IS NULL OR A.サービス項目コード = ''
         THEN DbT7130KaigoServiceShurui."serviceShuruiRyakusho"				
         ELSE DbT7131KaigoServiceNaiyou."serviceNameRyaku"
         END ) AS サービス,
+        DbT7060KaigoJigyosha."jigyoshaName" AS 事業者,        
         A.単位 AS 単位,
         A.割引適用後率 AS 割引適用後率,
         A.割引適用後単位 AS 割引適用後単位,

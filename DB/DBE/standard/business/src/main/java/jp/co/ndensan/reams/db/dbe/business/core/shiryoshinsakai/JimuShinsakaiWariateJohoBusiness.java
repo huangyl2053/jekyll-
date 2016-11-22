@@ -198,6 +198,6 @@ public class JimuShinsakaiWariateJohoBusiness {
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+        return Path.combinePath(imagePath, sharedFileName);
     }
 }

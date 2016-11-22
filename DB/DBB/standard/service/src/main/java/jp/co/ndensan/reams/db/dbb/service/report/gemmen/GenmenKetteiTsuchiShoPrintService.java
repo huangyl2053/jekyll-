@@ -78,7 +78,6 @@ public class GenmenKetteiTsuchiShoPrintService {
     private static final int INDEX_TWELVE = 12;
     private static final int INDEX_THIRTEEN = 13;
     private static final int INDEX_FOURTEEN = 14;
-    private static final int INDEX_FIFTEEN = 15;
 
     /**
      * printA4縦タイプメソッドします。

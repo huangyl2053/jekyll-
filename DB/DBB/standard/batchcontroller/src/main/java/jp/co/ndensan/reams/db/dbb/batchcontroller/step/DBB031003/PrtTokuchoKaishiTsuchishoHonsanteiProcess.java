@@ -276,7 +276,9 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends BatchProcessBase<
         本算定通知書情報.set帳票制御共通(帳票制御共通);
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
         総ページ数 = publish特徴開始通知書(編集後本算定通知書共通情報);
-        TokubetsuChoshuKaishiReport report = new TokubetsuChoshuKaishiReport(編集後本算定通知書共通情報, processParameter.get調定年度(),
+        TokubetsuChoshuKaishiReport report = new TokubetsuChoshuKaishiReport(
+                tempEntity.get特徴10月開始者区分(), 本算定通知書情報,
+                編集後本算定通知書共通情報, processParameter.get調定年度(),
                 processParameter.get帳票作成日時().getRDateTime(), 地方公共団体.get地方公共団体コード().getColumnValue(),
                 地方公共団体.get市町村名(), 出力項目リスト, 改頁項目リスト, 連番);
         report.writeBy(一覧表ReportSourceWriter);
@@ -512,7 +514,7 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends BatchProcessBase<
     private int publish特徴開始通知書(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
 
         if (ReportIdDBB.DBB100032.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            new TokubetsuChoshuKaishiTsuchishoB5Report(編集後本算定通知書共通情報, 宛名連番, dbb100032NinshoshaSource)
+            new TokubetsuChoshuKaishiTsuchishoB5Report(編集後本算定通知書共通情報, 宛名連番, 地方公共団体, dbb100032NinshoshaSource)
                     .writeBy(dbb100032ReportSourceWriter);
             return dbb100032ReportSourceWriter.pageCount().value();
         } else if (ReportIdDBB.DBB100033.getReportId().equals(出力帳票一覧.get帳票ID())) {

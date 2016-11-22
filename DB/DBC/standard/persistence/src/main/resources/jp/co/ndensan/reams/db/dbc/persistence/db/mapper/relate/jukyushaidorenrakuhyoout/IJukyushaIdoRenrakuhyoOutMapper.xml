@@ -401,6 +401,8 @@
             B1."sakuseiKubunCode" AS "居宅サービス計画作成区分コード",
             A1."zanteiKubun" AS "暫定区分",
             A1."rirekiNo" AS "履歴番号",
+            A1."taishoYM" AS "taishoYM1",
+            B1."taishoYM" AS "taishoYM2",
             A1."todokedeYMD" AS "届出年月日"
         FROM rgdb."DbT3005KyotakuKeikakuTodokede" A1
             INNER JOIN rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" B1
@@ -416,6 +418,8 @@
             C1."sakuseiKubunCode" AS "居宅サービス計画作成区分コード",
             A2."zanteiKubun" AS "暫定区分",
             A2."rirekiNo" AS "履歴番号",
+            A2."taishoYM" AS "taishoYM1",
+            C1."taishoYM" AS "taishoYM2",
             A2."todokedeYMD" AS "届出年月日"
         FROM rgdb."DbT3005KyotakuKeikakuTodokede" A2
             INNER JOIN rgdb."DbT3007KyotakuKeikakuJikoSakusei" C1
@@ -440,7 +444,11 @@
     <resultMap id="resultMap_居宅計画" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
         <id column="idouTemp_被保険者番号"/>
         <id column="idouTemp_連番"/>
+        <id column="履歴番号"/>
+        <id column="taishoYM1"/>
+        <id column="taishoYM2"/>
         <id column="居宅計画種類"/>
+        <id column="有効終了日"/>
         <association property="居宅計画" resultMap="resultMap_居宅計画Entity"/>
         <association property="異動一時" resultMap="resultMap_IdouTblEntity"/>
     </resultMap>
@@ -474,7 +482,8 @@
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
         WHERE "DbT1004ShisetsuNyutaisho"."daichoShubetsu" = '1' AND "DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui" IN ('11','12')
-         AND ("DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" <![CDATA[>=]]> '20150401' OR "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" = '')
+         AND ("DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" <![CDATA[>=]]> '20150401' 
+         OR "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" = '' OR "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" IS NULL)
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" ASC
     </select>
     <resultMap id="resultMap_住所地特例" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -673,10 +682,10 @@
         <id column="IdouTemp2_hiHokenshaNo"/>
         <id column="IdouTemp2_idoYMD"/>
         <id column="IdouTemp2_rirekiNo"/>
-        <id column="dbT3001JukyushaIdoRenrakuhyo_hiHokenshaNo"/>
-        <id column="dbT3001JukyushaIdoRenrakuhyo_idoYMD"/>
-        <id column="dbT3001JukyushaIdoRenrakuhyo_rirekiNo"/>
-        <association property="受給者異動送付" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3001JukyushaIdoRenrakuhyoMapper.ResultMap_DbT3001JukyushaIdoRenrakuhyoEntity"/>
+        <id column="hiHokenshaNo"/>
+        <id column="idoYMD"/>
+        <id column="rirekiNo"/>
+        <association property="受給者異動送付" resultMap="ResultMap_JukyushaIdoRenrakuhyoTempEntity"/>
         <association property="異動一時2" resultMap="resultMap_異動一時2"/>
     </resultMap>
     
@@ -824,6 +833,8 @@
     </resultMap>
     <resultMap id="resultMap_居宅計画Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.KyotakuEntity" autoMapping="true">
         <result property="居宅計画種類" column="居宅計画種類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taishoYM2" column="taishoYM2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="taishoYM1" column="taishoYM1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="適用開始日" column="適用開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="適用終了日" column="適用終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -838,8 +849,8 @@
     </resultMap>
     <resultMap id="resultMap_住所地特例Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.JushochitokureiInfoEntity" autoMapping="true">
         <result property="転出先保険者番号" column="転出先保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <result property="適用開始日" column="住所地特例適用開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="適用終了日" column="住所地特例適用終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住所地特例適用開始日" column="適用開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住所地特例適用終了日" column="適用終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="入所年月日" column="入所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="退所年月日" column="退所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -936,97 +947,89 @@
     </select>
     
     <sql id="allColumns_JukyushaIdoRenrakuhyoTemp">
-         "JukyushaIdoRenrakuhyoTemp"."hiHokenshaNo" as "dbT3001JukyushaIdoRenrakuhyo_hiHokenshaNo",
-         "JukyushaIdoRenrakuhyoTemp"."idoYMD" as "dbT3001JukyushaIdoRenrakuhyo_idoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."rirekiNo" as "dbT3001JukyushaIdoRenrakuhyo_rirekiNo",
-         "JukyushaIdoRenrakuhyoTemp"."insertDantaiCd" as "dbT3001JukyushaIdoRenrakuhyo_insertDantaiCd",
-         "JukyushaIdoRenrakuhyoTemp"."insertTimestamp" as "dbT3001JukyushaIdoRenrakuhyo_insertTimestamp",
-         "JukyushaIdoRenrakuhyoTemp"."insertReamsLoginId" as "dbT3001JukyushaIdoRenrakuhyo_insertReamsLoginId",
-         "JukyushaIdoRenrakuhyoTemp"."insertContextId" as "dbT3001JukyushaIdoRenrakuhyo_insertContextId",
-         "JukyushaIdoRenrakuhyoTemp"."isDeleted" as "dbT3001JukyushaIdoRenrakuhyo_isDeleted",
-         "JukyushaIdoRenrakuhyoTemp"."updateCount" as "dbT3001JukyushaIdoRenrakuhyo_updateCount",
-         "JukyushaIdoRenrakuhyoTemp"."lastUpdateTimestamp" as "dbT3001JukyushaIdoRenrakuhyo_lastUpdateTimestamp",
-         "JukyushaIdoRenrakuhyoTemp"."lastUpdateReamsLoginId" as "dbT3001JukyushaIdoRenrakuhyo_lastUpdateReamsLoginId",
-         "JukyushaIdoRenrakuhyoTemp"."idoKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_idoKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."jukyushaIdoJiyu" as "dbT3001JukyushaIdoRenrakuhyo_jukyushaIdoJiyu",
-         "JukyushaIdoRenrakuhyoTemp"."shoKisaiHokenshaNo" as "dbT3001JukyushaIdoRenrakuhyo_shoKisaiHokenshaNo",
-         "JukyushaIdoRenrakuhyoTemp"."hiHokenshaNameKana" as "dbT3001JukyushaIdoRenrakuhyo_hiHokenshaNameKana",
-         "JukyushaIdoRenrakuhyoTemp"."umareYMD" as "dbT3001JukyushaIdoRenrakuhyo_umareYMD",
-         "JukyushaIdoRenrakuhyoTemp"."seibetsuCode" as "dbT3001JukyushaIdoRenrakuhyo_seibetsuCode",
-         "JukyushaIdoRenrakuhyoTemp"."shikakuShutokuYMD" as "dbT3001JukyushaIdoRenrakuhyo_shikakuShutokuYMD",
-         "JukyushaIdoRenrakuhyoTemp"."shikakuSoshitsuYMD" as "dbT3001JukyushaIdoRenrakuhyo_shikakuSoshitsuYMD",
-         "JukyushaIdoRenrakuhyoTemp"."rojinHokenShichosonNo" as "dbT3001JukyushaIdoRenrakuhyo_rojinHokenShichosonNo",
-         "JukyushaIdoRenrakuhyoTemp"."rojinHokenJukyushaNo" as "dbT3001JukyushaIdoRenrakuhyo_rojinHokenJukyushaNo",
-         "JukyushaIdoRenrakuhyoTemp"."kohiFutanshaNo" as "dbT3001JukyushaIdoRenrakuhyo_kohiFutanshaNo",
-         "JukyushaIdoRenrakuhyoTemp"."koikiRengoHokenshaNo" as "dbT3001JukyushaIdoRenrakuhyo_koikiRengoHokenshaNo",
-         "JukyushaIdoRenrakuhyoTemp"."shinseiShubetsuCode" as "dbT3001JukyushaIdoRenrakuhyo_shinseiShubetsuCode",
-         "JukyushaIdoRenrakuhyoTemp"."henkoShinseichuKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_henkoShinseichuKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."shinseiYMD" as "dbT3001JukyushaIdoRenrakuhyo_shinseiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."minashiYokaigoJotaiKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_minashiYokaigoJotaiKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."yokaigoJotaiKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_yokaigoJotaiKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."ninteiYukoKikankaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_ninteiYukoKikankaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."ninteiYukoKikanShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_ninteiYukoKikanShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."kyotakuServiceSakuseiKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_kyotakuServiceSakuseiKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."kyotakuKaigoShienJigyoshoNo" as "dbT3001JukyushaIdoRenrakuhyo_kyotakuKaigoShienJigyoshoNo",
-         "JukyushaIdoRenrakuhyoTemp"."kyotakuServiceTekiyoKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_kyotakuServiceTekiyoKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."kyotakuServiceTekiyoShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_kyotakuServiceTekiyoShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."homonTsushoServiceShikyuGendoKijungaku" as "dbT3001JukyushaIdoRenrakuhyo_homonTsushoServiceShikyuGendoKijungaku",
-         "JukyushaIdoRenrakuhyoTemp"."homonTsushoServiceJogenKanriTekiyoKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_homonTsushoServiceJogenKanriTekiyoKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."homonTsushoServiceJogenKanriTekiyoShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_homonTsushoServiceJogenKanriTekiyoShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."tankiNyushoServiceShikyuGendoKijungaku" as "dbT3001JukyushaIdoRenrakuhyo_tankiNyushoServiceShikyuGendoKijungaku",
-         "JukyushaIdoRenrakuhyoTemp"."tankinyushoServiceJogenKanriTekiyoKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_tankinyushoServiceJogenKanriTekiyoKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."tankinyushoServiceJogenKanriTekiyoShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_tankinyushoServiceJogenKanriTekiyoShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."kohiFutanJogenGengakuAriFlag" as "dbT3001JukyushaIdoRenrakuhyo_kohiFutanJogenGengakuAriFlag",
-         "JukyushaIdoRenrakuhyoTemp"."shokanbaraikaKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_shokanbaraikaKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."shokanbaraikaShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_shokanbaraikaShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."kyufuritsuHikisageKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_kyufuritsuHikisageKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."kyufuritsuHikisageShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_kyufuritsuHikisageShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."gemmenShinseichuKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_gemmenShinseichuKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."riyoshaFutanKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_riyoshaFutanKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."kyufuritsu" as "dbT3001JukyushaIdoRenrakuhyo_kyufuritsu",
-         "JukyushaIdoRenrakuhyoTemp"."tekiyoKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_tekiyoKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."tekiyoShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_tekiyoShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."hyojunFutanKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_hyojunFutanKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."futangaku" as "dbT3001JukyushaIdoRenrakuhyo_futangaku",
-         "JukyushaIdoRenrakuhyoTemp"."futangakuTekiyoKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_futangakuTekiyoKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."futangakuTekiyoShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_futangakuTekiyoShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."tokuteiNyushoshaNinteiShinseichuKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_tokuteiNyushoshaNinteiShinseichuKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."tokuteiNyushoshaKaigoServiceKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_tokuteiNyushoshaKaigoServiceKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."kaizeisoTokureiGengakuSochiTaishoFlag" as "dbT3001JukyushaIdoRenrakuhyo_kaizeisoTokureiGengakuSochiTaishoFlag",
-         "JukyushaIdoRenrakuhyoTemp"."shokuhiFutanGendogaku" as "dbT3001JukyushaIdoRenrakuhyo_shokuhiFutanGendogaku",
-         "JukyushaIdoRenrakuhyoTemp"."kyojuhiUnitGataKoshitsuFutanGendogaku" as "dbT3001JukyushaIdoRenrakuhyo_kyojuhiUnitGataKoshitsuFutanGendogaku",
-         "JukyushaIdoRenrakuhyoTemp"."kyojuhiUnitGataJunKoshitsuFutanGendogaku" as "dbT3001JukyushaIdoRenrakuhyo_kyojuhiUnitGataJunKoshitsuFutanGendogaku",
-         "JukyushaIdoRenrakuhyoTemp"."kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku" as "dbT3001JukyushaIdoRenrakuhyo_kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku",
-         "JukyushaIdoRenrakuhyoTemp"."kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku" as "dbT3001JukyushaIdoRenrakuhyo_kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku",
-         "JukyushaIdoRenrakuhyoTemp"."kyujuhiTashoshitsuFutanGendogaku" as "dbT3001JukyushaIdoRenrakuhyo_kyujuhiTashoshitsuFutanGendogaku",
-         "JukyushaIdoRenrakuhyoTemp"."futanGendogakuTekiyoKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_futanGendogakuTekiyoKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."futanGendogakuTekiyoShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_futanGendogakuTekiyoShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."keigenritsu" as "dbT3001JukyushaIdoRenrakuhyo_keigenritsu",
-         "JukyushaIdoRenrakuhyoTemp"."keigenritsuTekiyoKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_keigenritsuTekiyoKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."keigenritsuTekiyoShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_keigenritsuTekiyoShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag" as "dbT3001JukyushaIdoRenrakuhyo_shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag",
-         "JukyushaIdoRenrakuhyoTemp"."kokiKoureiIryoHokenshaNo" as "dbT3001JukyushaIdoRenrakuhyo_kokiKoureiIryoHokenshaNo",
-         "JukyushaIdoRenrakuhyoTemp"."kokikoureiIryoHiHokenshaNo" as "dbT3001JukyushaIdoRenrakuhyo_kokikoureiIryoHiHokenshaNo",
-         "JukyushaIdoRenrakuhyoTemp"."kokuhoHokenshaNo" as "dbT3001JukyushaIdoRenrakuhyo_kokuhoHokenshaNo",
-         "JukyushaIdoRenrakuhyoTemp"."kokuhoHiHokenshaNo" as "dbT3001JukyushaIdoRenrakuhyo_kokuhoHiHokenshaNo",
-         "JukyushaIdoRenrakuhyoTemp"."kokuhoKojinNo" as "dbT3001JukyushaIdoRenrakuhyo_kokuhoKojinNo",
-         "JukyushaIdoRenrakuhyoTemp"."nijiyoboJigyoKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_nijiyoboJigyoKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."nijiyoboJigyoYukoKikanKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_nijiyoboJigyoYukoKikanKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."nijiyoboJigyoYukoKikanShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_nijiyoboJigyoYukoKikanShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."teiseiRenrakuhyoFlag" as "dbT3001JukyushaIdoRenrakuhyo_teiseiRenrakuhyoFlag",
-         "JukyushaIdoRenrakuhyoTemp"."sofuYM" as "dbT3001JukyushaIdoRenrakuhyo_sofuYM",
-         "JukyushaIdoRenrakuhyoTemp"."jushochiTokureiTaishoshaKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_jushochiTokureiTaishoshaKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."shisetsuShozaiHokenjaNo" as "dbT3001JukyushaIdoRenrakuhyo_shisetsuShozaiHokenjaNo",
-         "JukyushaIdoRenrakuhyoTemp"."jushochiTokureiTekiyoKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_jushochiTokureiTekiyoKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."jushochiTokureiTekiyoShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_jushochiTokureiTekiyoShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."kyotakuhiShin1FutanGendogaku" as "dbT3001JukyushaIdoRenrakuhyo_kyotakuhiShin1FutanGendogaku",
-         "JukyushaIdoRenrakuhyoTemp"."kyotakuhiShin2FutanGendogaku" as "dbT3001JukyushaIdoRenrakuhyo_kyotakuhiShin2FutanGendogaku",
-         "JukyushaIdoRenrakuhyoTemp"."kyotakuhiShin3FutanGendogaku" as "dbT3001JukyushaIdoRenrakuhyo_kyotakuhiShin3FutanGendogaku",
-         "JukyushaIdoRenrakuhyoTemp"."riyosyaFutanWariaiYukoKaishiYMD" as "dbT3001JukyushaIdoRenrakuhyo_riyosyaFutanWariaiYukoKaishiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."riyosyaFutanWariaiYukoShuryoYMD" as "dbT3001JukyushaIdoRenrakuhyo_riyosyaFutanWariaiYukoShuryoYMD",
-         "JukyushaIdoRenrakuhyoTemp"."teiseiKubunCode" as "dbT3001JukyushaIdoRenrakuhyo_teiseiKubunCode",
-         "JukyushaIdoRenrakuhyoTemp"."teiseiYMD" as "dbT3001JukyushaIdoRenrakuhyo_teiseiYMD",
-         "JukyushaIdoRenrakuhyoTemp"."logicalDeletedFlag" as "dbT3001JukyushaIdoRenrakuhyo_logicalDeletedFlag"
+         "JukyushaIdoRenrakuhyoTemp"."hiHokenshaNo" as "hiHokenshaNo",
+         "JukyushaIdoRenrakuhyoTemp"."idoYMD" as "idoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."rirekiNo" as "rirekiNo",
+         "JukyushaIdoRenrakuhyoTemp"."idoKubunCode" as "idoKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."jukyushaIdoJiyu" as "jukyushaIdoJiyu",
+         "JukyushaIdoRenrakuhyoTemp"."shoKisaiHokenshaNo" as "shoKisaiHokenshaNo",
+         "JukyushaIdoRenrakuhyoTemp"."hiHokenshaNameKana" as "hiHokenshaNameKana",
+         "JukyushaIdoRenrakuhyoTemp"."umareYMD" as "umareYMD",
+         "JukyushaIdoRenrakuhyoTemp"."seibetsuCode" as "seibetsuCode",
+         "JukyushaIdoRenrakuhyoTemp"."shikakuShutokuYMD" as "shikakuShutokuYMD",
+         "JukyushaIdoRenrakuhyoTemp"."shikakuSoshitsuYMD" as "shikakuSoshitsuYMD",
+         "JukyushaIdoRenrakuhyoTemp"."rojinHokenShichosonNo" as "rojinHokenShichosonNo",
+         "JukyushaIdoRenrakuhyoTemp"."rojinHokenJukyushaNo" as "rojinHokenJukyushaNo",
+         "JukyushaIdoRenrakuhyoTemp"."kohiFutanshaNo" as "kohiFutanshaNo",
+         "JukyushaIdoRenrakuhyoTemp"."koikiRengoHokenshaNo" as "koikiRengoHokenshaNo",
+         "JukyushaIdoRenrakuhyoTemp"."shinseiShubetsuCode" as "shinseiShubetsuCode",
+         "JukyushaIdoRenrakuhyoTemp"."henkoShinseichuKubunCode" as "henkoShinseichuKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."shinseiYMD" as "shinseiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."minashiYokaigoJotaiKubunCode" as "minashiYokaigoJotaiKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."yokaigoJotaiKubunCode" as "yokaigoJotaiKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."ninteiYukoKikankaishiYMD" as "ninteiYukoKikankaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."ninteiYukoKikanShuryoYMD" as "ninteiYukoKikanShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."kyotakuServiceSakuseiKubunCode" as "kyotakuServiceSakuseiKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."kyotakuKaigoShienJigyoshoNo" as "kyotakuKaigoShienJigyoshoNo",
+         "JukyushaIdoRenrakuhyoTemp"."kyotakuServiceTekiyoKaishiYMD" as "kyotakuServiceTekiyoKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."kyotakuServiceTekiyoShuryoYMD" as "kyotakuServiceTekiyoShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."homonTsushoServiceShikyuGendoKijungaku" as "homonTsushoServiceShikyuGendoKijungaku",
+         "JukyushaIdoRenrakuhyoTemp"."homonTsushoServiceJogenKanriTekiyoKaishiYMD" as "homonTsushoServiceJogenKanriTekiyoKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."homonTsushoServiceJogenKanriTekiyoShuryoYMD" as "homonTsushoServiceJogenKanriTekiyoShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."tankiNyushoServiceShikyuGendoKijungaku" as "tankiNyushoServiceShikyuGendoKijungaku",
+         "JukyushaIdoRenrakuhyoTemp"."tankinyushoServiceJogenKanriTekiyoKaishiYMD" as "tankinyushoServiceJogenKanriTekiyoKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."tankinyushoServiceJogenKanriTekiyoShuryoYMD" as "tankinyushoServiceJogenKanriTekiyoShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."kohiFutanJogenGengakuAriFlag" as "kohiFutanJogenGengakuAriFlag",
+         "JukyushaIdoRenrakuhyoTemp"."shokanbaraikaKaishiYMD" as "shokanbaraikaKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."shokanbaraikaShuryoYMD" as "shokanbaraikaShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."kyufuritsuHikisageKaishiYMD" as "kyufuritsuHikisageKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."kyufuritsuHikisageShuryoYMD" as "kyufuritsuHikisageShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."gemmenShinseichuKubunCode" as "gemmenShinseichuKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."riyoshaFutanKubunCode" as "riyoshaFutanKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."kyufuritsu" as "kyufuritsu",
+         "JukyushaIdoRenrakuhyoTemp"."tekiyoKaishiYMD" as "tekiyoKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."tekiyoShuryoYMD" as "tekiyoShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."hyojunFutanKubunCode" as "hyojunFutanKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."futangaku" as "futangaku",
+         "JukyushaIdoRenrakuhyoTemp"."futangakuTekiyoKaishiYMD" as "futangakuTekiyoKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."futangakuTekiyoShuryoYMD" as "futangakuTekiyoShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."tokuteiNyushoshaNinteiShinseichuKubunCode" as "tokuteiNyushoshaNinteiShinseichuKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."tokuteiNyushoshaKaigoServiceKubunCode" as "tokuteiNyushoshaKaigoServiceKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."kaizeisoTokureiGengakuSochiTaishoFlag" as "kaizeisoTokureiGengakuSochiTaishoFlag",
+         "JukyushaIdoRenrakuhyoTemp"."shokuhiFutanGendogaku" as "shokuhiFutanGendogaku",
+         "JukyushaIdoRenrakuhyoTemp"."kyojuhiUnitGataKoshitsuFutanGendogaku" as "kyojuhiUnitGataKoshitsuFutanGendogaku",
+         "JukyushaIdoRenrakuhyoTemp"."kyojuhiUnitGataJunKoshitsuFutanGendogaku" as "kyojuhiUnitGataJunKoshitsuFutanGendogaku",
+         "JukyushaIdoRenrakuhyoTemp"."kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku" as "kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku",
+         "JukyushaIdoRenrakuhyoTemp"."kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku" as "kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku",
+         "JukyushaIdoRenrakuhyoTemp"."kyujuhiTashoshitsuFutanGendogaku" as "kyujuhiTashoshitsuFutanGendogaku",
+         "JukyushaIdoRenrakuhyoTemp"."futanGendogakuTekiyoKaishiYMD" as "futanGendogakuTekiyoKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."futanGendogakuTekiyoShuryoYMD" as "futanGendogakuTekiyoShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."keigenritsu" as "keigenritsu",
+         "JukyushaIdoRenrakuhyoTemp"."keigenritsuTekiyoKaishiYMD" as "keigenritsuTekiyoKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."keigenritsuTekiyoShuryoYMD" as "keigenritsuTekiyoShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag" as "shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag",
+         "JukyushaIdoRenrakuhyoTemp"."kokiKoureiIryoHokenshaNo" as "kokiKoureiIryoHokenshaNo",
+         "JukyushaIdoRenrakuhyoTemp"."kokikoureiIryoHiHokenshaNo" as "kokikoureiIryoHiHokenshaNo",
+         "JukyushaIdoRenrakuhyoTemp"."kokuhoHokenshaNo" as "kokuhoHokenshaNo",
+         "JukyushaIdoRenrakuhyoTemp"."kokuhoHiHokenshaNo" as "kokuhoHiHokenshaNo",
+         "JukyushaIdoRenrakuhyoTemp"."kokuhoKojinNo" as "kokuhoKojinNo",
+         "JukyushaIdoRenrakuhyoTemp"."nijiyoboJigyoKubunCode" as "nijiyoboJigyoKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."nijiyoboJigyoYukoKikanKaishiYMD" as "nijiyoboJigyoYukoKikanKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."nijiyoboJigyoYukoKikanShuryoYMD" as "nijiyoboJigyoYukoKikanShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."teiseiRenrakuhyoFlag" as "teiseiRenrakuhyoFlag",
+         "JukyushaIdoRenrakuhyoTemp"."sofuYM" as "sofuYM",
+         "JukyushaIdoRenrakuhyoTemp"."jushochiTokureiTaishoshaKubunCode" as "jushochiTokureiTaishoshaKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."shisetsuShozaiHokenjaNo" as "shisetsuShozaiHokenjaNo",
+         "JukyushaIdoRenrakuhyoTemp"."jushochiTokureiTekiyoKaishiYMD" as "jushochiTokureiTekiyoKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."jushochiTokureiTekiyoShuryoYMD" as "jushochiTokureiTekiyoShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."kyotakuhiShin1FutanGendogaku" as "kyotakuhiShin1FutanGendogaku",
+         "JukyushaIdoRenrakuhyoTemp"."kyotakuhiShin2FutanGendogaku" as "kyotakuhiShin2FutanGendogaku",
+         "JukyushaIdoRenrakuhyoTemp"."kyotakuhiShin3FutanGendogaku" as "kyotakuhiShin3FutanGendogaku",
+         "JukyushaIdoRenrakuhyoTemp"."riyosyaFutanWariaiYukoKaishiYMD" as "riyosyaFutanWariaiYukoKaishiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."riyosyaFutanWariaiYukoShuryoYMD" as "riyosyaFutanWariaiYukoShuryoYMD",
+         "JukyushaIdoRenrakuhyoTemp"."teiseiKubunCode" as "teiseiKubunCode",
+         "JukyushaIdoRenrakuhyoTemp"."teiseiYMD" as "teiseiYMD",
+         "JukyushaIdoRenrakuhyoTemp"."logicalDeletedFlag" as "logicalDeletedFlag"
     </sql>
     
     <sql id="allColumns_IdouTemp2">
@@ -1114,6 +1117,7 @@
          "IdouTemp2"."訂正年月日" as "IdouTemp2_teiseiYMD",
          "IdouTemp2"."論理削除フラグ" as "IdouTemp2_logicalDeletedFlag",
          "IdouTemp2"."市町村コード" as "IdouTemp2_市町村コード",
+         "IdouTemp2"."被保険者氏名" as "IdouTemp2_hiHokenshaName",
          "IdouTemp2"."エラーフラグ" as "IdouTemp2_エラーフラグ"
     </sql>
     <resultMap id="resultMap_異動一時2" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdoTblTmpEntity" autoMapping="true">
@@ -1149,7 +1153,7 @@
         <result property="短期入所サービス支給限度基準額" column="IdouTemp2_tankiNyushoServiceShikyuGendoKijungaku" />
         <result property="短期入所サービス上限管理適用期間開始年月日" column="IdouTemp2_tankinyushoServiceJogenKanriTekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="短期入所サービス上限管理適用期間終了年月日" column="IdouTemp2_tankinyushoServiceJogenKanriTekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="公費負担上限額減額有フラグ" column="IdouTemp2_kohiFutanJogenGengakuAriFlag" />
+        <result property="公費負担上限額減額有フラグ" column="IdouTemp2_kohiFutanJogenGengakuAriFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="償還払化開始年月日" column="IdouTemp2_shokanbaraikaKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="償還払化終了年月日" column="IdouTemp2_shokanbaraikaShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付率引下げ開始年月日" column="IdouTemp2_kyufuritsuHikisageKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -1201,6 +1205,93 @@
         <result property="訂正年月日" column="IdouTemp2_teiseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="論理削除フラグ" column="IdouTemp2_logicalDeletedFlag" />
         <result property="市町村コード" column="IdouTemp2_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="IdouTemp2_hiHokenshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="エラーフラグ" column="IdouTemp2_エラーフラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMap_JukyushaIdoRenrakuhyoTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.JukyushaIdoRenrakuhyoTempTBLEntity" autoMapping="true">
+        <id property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="idoYMD" column="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="rirekiNo" column="rirekiNo" />
+        <result property="idoKubunCode" column="idoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jukyushaIdoJiyu" column="jukyushaIdoJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="hiHokenshaNameKana" column="hiHokenshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="umareYMD" column="umareYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsuCode" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuYMD" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuYMD" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="rojinHokenShichosonNo" column="rojinHokenShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rojinHokenJukyushaNo" column="rojinHokenJukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kohiFutanshaNo" column="kohiFutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koikiRengoHokenshaNo" column="koikiRengoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="shinseiShubetsuCode" column="shinseiShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="henkoShinseichuKubunCode" column="henkoShinseichuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiYMD" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="minashiYokaigoJotaiKubunCode" column="minashiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokaigoJotaiKubunCode" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiYukoKikankaishiYMD" column="ninteiYukoKikankaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanShuryoYMD" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuServiceSakuseiKubunCode" column="kyotakuServiceSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuKaigoShienJigyoshoNo" column="kyotakuKaigoShienJigyoshoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuServiceTekiyoKaishiYMD" column="kyotakuServiceTekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuServiceTekiyoShuryoYMD" column="kyotakuServiceTekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="homonTsushoServiceShikyuGendoKijungaku" column="homonTsushoServiceShikyuGendoKijungaku" />
+        <result property="homonTsushoServiceJogenKanriTekiyoKaishiYMD" column="homonTsushoServiceJogenKanriTekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="homonTsushoServiceJogenKanriTekiyoShuryoYMD" column="homonTsushoServiceJogenKanriTekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tankiNyushoServiceShikyuGendoKijungaku" column="tankiNyushoServiceShikyuGendoKijungaku" />
+        <result property="tankinyushoServiceJogenKanriTekiyoKaishiYMD" column="tankinyushoServiceJogenKanriTekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tankinyushoServiceJogenKanriTekiyoShuryoYMD" column="tankinyushoServiceJogenKanriTekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kohiFutanJogenGengakuAriFlag" column="kohiFutanJogenGengakuAriFlag" />
+        <result property="shokanbaraikaKaishiYMD" column="shokanbaraikaKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokanbaraikaShuryoYMD" column="shokanbaraikaShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufuritsuHikisageKaishiYMD" column="kyufuritsuHikisageKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufuritsuHikisageShuryoYMD" column="kyufuritsuHikisageShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gemmenShinseichuKubunCode" column="gemmenShinseichuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyoshaFutanKubunCode" column="riyoshaFutanKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufuritsu" column="kyufuritsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tekiyoKaishiYMD" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyoShuryoYMD" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hyojunFutanKubunCode" column="hyojunFutanKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futangaku" column="futangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="futangakuTekiyoKaishiYMD" column="futangakuTekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futangakuTekiyoShuryoYMD" column="futangakuTekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteiNyushoshaNinteiShinseichuKubunCode" column="tokuteiNyushoshaNinteiShinseichuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteiNyushoshaKaigoServiceKubunCode" column="tokuteiNyushoshaKaigoServiceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaizeisoTokureiGengakuSochiTaishoFlag" column="kaizeisoTokureiGengakuSochiTaishoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokuhiFutanGendogaku" column="shokuhiFutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyojuhiUnitGataKoshitsuFutanGendogaku" column="kyojuhiUnitGataKoshitsuFutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyojuhiUnitGataJunKoshitsuFutanGendogaku" column="kyojuhiUnitGataJunKoshitsuFutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku" column="kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku" column="kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyujuhiTashoshitsuFutanGendogaku" column="kyujuhiTashoshitsuFutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanGendogakuTekiyoKaishiYMD" column="futanGendogakuTekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanGendogakuTekiyoShuryoYMD" column="futanGendogakuTekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="keigenritsu" column="keigenritsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="keigenritsuTekiyoKaishiYMD" column="keigenritsuTekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="keigenritsuTekiyoShuryoYMD" column="keigenritsuTekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag" column="shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag" />
+        <result property="kokiKoureiIryoHokenshaNo" column="kokiKoureiIryoHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokikoureiIryoHiHokenshaNo" column="kokikoureiIryoHiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuhoHokenshaNo" column="kokuhoHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuhoHiHokenshaNo" column="kokuhoHiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuhoKojinNo" column="kokuhoKojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiyoboJigyoKubunCode" column="nijiyoboJigyoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiyoboJigyoYukoKikanKaishiYMD" column="nijiyoboJigyoYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiyoboJigyoYukoKikanShuryoYMD" column="nijiyoboJigyoYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="teiseiRenrakuhyoFlag" column="teiseiRenrakuhyoFlag" />
+        <result property="sofuYM" column="sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="jushochiTokureiTaishoshaKubunCode" column="jushochiTokureiTaishoshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shisetsuShozaiHokenjaNo" column="shisetsuShozaiHokenjaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushochiTokureiTekiyoKaishiYMD" column="jushochiTokureiTekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushochiTokureiTekiyoShuryoYMD" column="jushochiTokureiTekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuhiShin1FutanGendogaku" column="kyotakuhiShin1FutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuhiShin2FutanGendogaku" column="kyotakuhiShin2FutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuhiShin3FutanGendogaku" column="kyotakuhiShin3FutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyosyaFutanWariaiYukoKaishiYMD" column="riyosyaFutanWariaiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyosyaFutanWariaiYukoShuryoYMD" column="riyosyaFutanWariaiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teiseiKubunCode" column="teiseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teiseiYMD" column="teiseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="logicalDeletedFlag" column="logicalDeletedFlag" />
     </resultMap>
 </mapper>

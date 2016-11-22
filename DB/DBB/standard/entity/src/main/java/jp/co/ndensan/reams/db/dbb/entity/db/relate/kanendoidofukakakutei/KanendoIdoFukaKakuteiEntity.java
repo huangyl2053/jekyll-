@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidofukakakutei;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,4 +47,13 @@ public class KanendoIdoFukaKakuteiEntity implements IDbAccessable {
     private Decimal 更正前算定年額保険料２;
     private Decimal 更正前減免額;
     private Decimal 更正前確定介護保険料;
+    private int 更正前履歴番号;
+    private HihokenshaNo 被保険者番号;
+    private TsuchishoNo 更正前通知書番号;
+    private HihokenshaNo 更正前被保険者番号;
+    private RString 更正前更正月;
+    private YMDHMS 調定日時;
+    private YMDHMS 更正前調定日時;
+    private FlexibleDate 賦課期日;
+    private FlexibleDate 更正前賦課期日;
 }

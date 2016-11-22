@@ -315,7 +315,6 @@ public class GenNendoHonsanteiIdouFath {
      */
     public void calculateTokuchoIraikin4gatsuKaishi(FlexibleYear 調定年度, YMDHMS 調定日時) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
-        mapper.createDbT2002FukaJohoTemp();
 
         KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();
         kozaBuilder.set業務コード(GyomuCode.DB介護保険);
@@ -415,7 +414,7 @@ public class GenNendoHonsanteiIdouFath {
         RString 特徴仮算定期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_仮算定期数, 適用基準日, SubGyomuCode.DBB介護賦課);
         業務コンフィグ情報.set特徴仮算定期数(Integer.parseInt(特徴仮算定期数.toString()));
         RString 特徴仮算定計算区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_4月開始,
-                new RDate(調定年度.plusYear(INT_1).toString()), SubGyomuCode.DBB介護賦課);
+                NendoUtil.toNendoStartDate(調定年度.plusYear(INT_1)), SubGyomuCode.DBB介護賦課);
         業務コンフィグ情報.set特徴仮算定計算区分(Integer.parseInt(特徴仮算定計算区分.toString()));
         RString 端数区分 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別端数,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);

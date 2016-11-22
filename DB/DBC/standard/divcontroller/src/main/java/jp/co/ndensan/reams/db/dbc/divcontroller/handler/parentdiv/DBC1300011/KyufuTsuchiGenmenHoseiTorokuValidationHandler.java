@@ -47,6 +47,21 @@ public class KyufuTsuchiGenmenHoseiTorokuValidationHandler {
     }
     
     /**
+     *事業者入力のチェックです。
+     * 
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validate事業者入力() {
+        IValidationMessages message = new KyufuTsuchiGenmenHoseiTorokuValidator(div).validate事業者入力();
+        return create事業者入力Dictionary().check(message);
+    }
+
+    private ValidationDictionary create事業者入力Dictionary() {
+        return new ValidationDictionaryBuilder().add(KyufuTsuchiGenmenHoseiTorokuMessage.事業者入力)
+                .build();
+    }
+    
+    /**
      *「補正情報を確定する」ボタン
      * 
      * @return ValidationMessageControlPairs

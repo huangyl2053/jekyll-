@@ -76,8 +76,7 @@ public class KaishiTsuchishoKariHakkoIchiranProperty extends
         /**
          * 番地コード
          */
-        番地コード(new RString("0003"), new RString("番地コード"), new RString("\"atesaki_banchiCode1\",\"atesaki_banchiCode2\","
-                + "\"atesaki_banchiCode3\",\"atesaki_banchiCode4\"")),
+        番地コード(new RString("0003"), new RString("番地コード"), new RString("\"番地コード\"")),
         /**
          * 行政区コード
          */

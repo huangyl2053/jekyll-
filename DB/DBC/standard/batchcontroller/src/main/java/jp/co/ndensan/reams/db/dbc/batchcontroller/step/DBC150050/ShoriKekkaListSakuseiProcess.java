@@ -41,7 +41,7 @@ public class ShoriKekkaListSakuseiProcess
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.servicecodetanimeisaiichiran."
                     + "IServicecodeTaniMeisaiIchiranMapper.get処理結果リスト");
     private FileSpoolManager manager;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU900002");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC900004");
     private CsvWriter<ShoriKekkaCSVEntity> shoriKekkaCsvWriter;
     private RString shoriKekkaFilePath;
     private static final RString コンマ = new RString(",");

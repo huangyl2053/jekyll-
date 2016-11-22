@@ -7,24 +7,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * KogakuShikyuShinseishoIkkatsuHakko のクラスファイル
- *
- * @reamsid_L DBC-4770-010 zhengshenlei
+ * KogakuShikyuShinseishoIkkatsuHakko のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +30,8 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
      */
     @JsonProperty("ShinseishoHakkoParameters")
     private ShinseishoHakkoParametersDiv ShinseishoHakkoParameters;
+    @JsonProperty("hihokenshaNo")
+    private RString hihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -59,6 +58,24 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     /*
+     * gethihokenshaNo
+     * @return hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
+    }
+
+    /*
+     * sethihokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -67,7 +84,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadShinsaYM(RadioButton radShinsaYM) {
+    public void  setRadShinsaYM(RadioButton radShinsaYM) {
         this.getShinseishoHakkoParameters().setRadShinsaYM(radShinsaYM);
     }
 
@@ -77,7 +94,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinsaYM(TextBoxFlexibleDate txtShinsaYM) {
+    public void  setTxtShinsaYM(TextBoxFlexibleDate txtShinsaYM) {
         this.getShinseishoHakkoParameters().setTxtShinsaYM(txtShinsaYM);
     }
 
@@ -87,7 +104,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShokaiShinseiHakuKijunDate(TextBoxFlexibleDate txtShokaiShinseiHakuKijunDate) {
+    public void  setTxtShokaiShinseiHakuKijunDate(TextBoxFlexibleDate txtShokaiShinseiHakuKijunDate) {
         this.getShinseishoHakkoParameters().setTxtShokaiShinseiHakuKijunDate(txtShokaiShinseiHakuKijunDate);
     }
 
@@ -97,7 +114,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadHihokenshaNo(RadioButton radHihokenshaNo) {
+    public void  setRadHihokenshaNo(RadioButton radHihokenshaNo) {
         this.getShinseishoHakkoParameters().setRadHihokenshaNo(radHihokenshaNo);
     }
 
@@ -107,18 +124,18 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+    public void  setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
         this.getShinseishoHakkoParameters().setTxtHihokenshaNo(txtHihokenshaNo);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnHihokenshaSearch() {
-        return this.getShinseishoHakkoParameters().getBtnHihokenshaSearch();
+    public Button getBtniHokenSearch() {
+        return this.getShinseishoHakkoParameters().getBtniHokenSearch();
     }
 
     @JsonIgnore
-    public void setBtnHihokenshaSearch(ButtonDialog btnHihokenshaSearch) {
-        this.getShinseishoHakkoParameters().setBtnHihokenshaSearch(btnHihokenshaSearch);
+    public void  setBtniHokenSearch(Button btniHokenSearch) {
+        this.getShinseishoHakkoParameters().setBtniHokenSearch(btniHokenSearch);
     }
 
     @JsonIgnore
@@ -127,7 +144,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlServiceYM(DropDownList ddlServiceYM) {
+    public void  setDdlServiceYM(DropDownList ddlServiceYM) {
         this.getShinseishoHakkoParameters().setDdlServiceYM(ddlServiceYM);
     }
 
@@ -137,7 +154,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadHakushiInsatsu(RadioButton radHakushiInsatsu) {
+    public void  setRadHakushiInsatsu(RadioButton radHakushiInsatsu) {
         this.getShinseishoHakkoParameters().setRadHakushiInsatsu(radHakushiInsatsu);
     }
 
@@ -147,7 +164,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setShutsuryokuTaisho(ShutsuryokuTaishoDiv ShutsuryokuTaisho) {
+    public void  setShutsuryokuTaisho(ShutsuryokuTaishoDiv ShutsuryokuTaisho) {
         this.getShinseishoHakkoParameters().setShutsuryokuTaisho(ShutsuryokuTaisho);
     }
 
@@ -157,7 +174,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSakuseiDate(TextBoxFlexibleDate txtSakuseiDate) {
+    public void  setTxtSakuseiDate(TextBoxFlexibleDate txtSakuseiDate) {
         this.getShinseishoHakkoParameters().getShutsuryokuTaisho().setTxtSakuseiDate(txtSakuseiDate);
     }
 
@@ -167,7 +184,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkShutsuryokuTaisho(CheckBoxList chkShutsuryokuTaisho) {
+    public void  setChkShutsuryokuTaisho(CheckBoxList chkShutsuryokuTaisho) {
         this.getShinseishoHakkoParameters().getShutsuryokuTaisho().setChkShutsuryokuTaisho(chkShutsuryokuTaisho);
     }
 
@@ -177,7 +194,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKinyoKikanmeiHyoji(RadioButton radKinyoKikanmeiHyoji) {
+    public void  setRadKinyoKikanmeiHyoji(RadioButton radKinyoKikanmeiHyoji) {
         this.getShinseishoHakkoParameters().getShutsuryokuTaisho().setRadKinyoKikanmeiHyoji(radKinyoKikanmeiHyoji);
     }
 
@@ -187,7 +204,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinseishoTeishutsuKigen(TextBoxFlexibleDate txtShinseishoTeishutsuKigen) {
+    public void  setTxtShinseishoTeishutsuKigen(TextBoxFlexibleDate txtShinseishoTeishutsuKigen) {
         this.getShinseishoHakkoParameters().getShutsuryokuTaisho().setTxtShinseishoTeishutsuKigen(txtShinseishoTeishutsuKigen);
     }
 
@@ -197,7 +214,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkHakkoIchiranhyoHakko(CheckBoxList chkHakkoIchiranhyoHakko) {
+    public void  setChkHakkoIchiranhyoHakko(CheckBoxList chkHakkoIchiranhyoHakko) {
         this.getShinseishoHakkoParameters().getShutsuryokuTaisho().setChkHakkoIchiranhyoHakko(chkHakkoIchiranhyoHakko);
     }
 
@@ -212,7 +229,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setJidoShokanTaishoJohoSettei(JidoShokanTaishoJohoSetteiDiv JidoShokanTaishoJohoSettei) {
+    public void  setJidoShokanTaishoJohoSettei(JidoShokanTaishoJohoSetteiDiv JidoShokanTaishoJohoSettei) {
         this.getShinseishoHakkoParameters().setJidoShokanTaishoJohoSettei(JidoShokanTaishoJohoSettei);
     }
 
@@ -222,7 +239,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
+    public void  setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
         this.getShinseishoHakkoParameters().getJidoShokanTaishoJohoSettei().setTxtShinseiDate(txtShinseiDate);
     }
 
@@ -232,7 +249,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtUketsukeDate(TextBoxFlexibleDate txtUketsukeDate) {
+    public void  setTxtUketsukeDate(TextBoxFlexibleDate txtUketsukeDate) {
         this.getShinseishoHakkoParameters().getJidoShokanTaishoJohoSettei().setTxtUketsukeDate(txtUketsukeDate);
     }
 
@@ -242,7 +259,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKetteiDate(TextBoxFlexibleDate txtKetteiDate) {
+    public void  setTxtKetteiDate(TextBoxFlexibleDate txtKetteiDate) {
         this.getShinseishoHakkoParameters().getJidoShokanTaishoJohoSettei().setTxtKetteiDate(txtKetteiDate);
     }
 
