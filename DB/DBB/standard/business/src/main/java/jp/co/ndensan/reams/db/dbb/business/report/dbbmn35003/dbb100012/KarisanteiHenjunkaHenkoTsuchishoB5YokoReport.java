@@ -165,6 +165,11 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
             item.setChoteiNendo(編集後仮算定通知書共通情報.get調定年度().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString());
         }
+        setLineData2(item, 編集後仮算定通知書共通情報, 更正前, 更正後);
+    }
+
+    private void setLineData2(KarisanteiHenjunkaHenkoTsuchishoB5YokoItem item, EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報,
+            EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前, EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後) {
 
         if (編集後仮算定通知書共通情報.get編集後口座() != null) {
             item.setBankCode(編集後仮算定通知書共通情報.get編集後口座().get金融機関コードCombinedWith支店コード());
