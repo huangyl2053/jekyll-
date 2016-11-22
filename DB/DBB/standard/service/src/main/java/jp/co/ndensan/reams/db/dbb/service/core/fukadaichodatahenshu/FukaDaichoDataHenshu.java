@@ -142,9 +142,10 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
      * 編集後仮算定賦課台帳情報を作成するメソッドです。
      *
      * @param 賦課台帳情報 FukaDaichoInfo
+     * @param has更正前 boolean
      * @return 編集後仮算定賦課台帳情報 EditedKariSanteiFukaDaichoJoho
      */
-    public EditedKariSanteiFukaDaichoJoho create編集後仮算定賦課台帳情報(FukaDaichoInfo 賦課台帳情報) {
+    public EditedKariSanteiFukaDaichoJoho create編集後仮算定賦課台帳情報(FukaDaichoInfo 賦課台帳情報, boolean has更正前) {
 
         if (賦課台帳情報 == null || 賦課台帳情報.get賦課の情報_更正後() == null) {
             return null;
@@ -217,7 +218,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
                     new Code(年金コード.substring(0, INT_3)));
             編集後仮算定賦課台帳情報.set本人特徴対象年金(特別徴収対象年金);
         }
-        set編集後仮算定賦課台帳情報(編集後仮算定賦課台帳情報, 賦課台帳情報);
+        set編集後仮算定賦課台帳情報(編集後仮算定賦課台帳情報, 賦課台帳情報, has更正前);
 
         return 編集後仮算定賦課台帳情報;
     }
@@ -226,9 +227,10 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
      * 編集後本算定賦課台帳情報を作成するメソッドです。
      *
      * @param 賦課台帳情報 FukaDaichoInfo
+     * @param has更正前 boolean
      * @return 編集後本算定賦課台帳情報 EditedHonSanteiFukaDaichoJoho
      */
-    public EditedHonSanteiFukaDaichoJoho create編集後本算定賦課台帳情報(FukaDaichoInfo 賦課台帳情報) {
+    public EditedHonSanteiFukaDaichoJoho create編集後本算定賦課台帳情報(FukaDaichoInfo 賦課台帳情報, boolean has更正前) {
 
         if (賦課台帳情報 == null || 賦課台帳情報.get賦課の情報_更正後() == null) {
             return null;
@@ -303,12 +305,12 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(), new Code(年金コード.substring(0, INT_3)));
             編集後本算定賦課台帳情報.set本人特徴対象年金(特別徴収対象年金);
         }
-        set編集後本算定賦課台帳情報(編集後本算定賦課台帳情報, 賦課台帳情報);
+        set編集後本算定賦課台帳情報(編集後本算定賦課台帳情報, 賦課台帳情報, has更正前);
 
         return 編集後本算定賦課台帳情報;
     }
 
-    private void set編集後本算定賦課台帳情報(EditedHonSanteiFukaDaichoJoho 編集後本算定賦課台帳情報, FukaDaichoInfo 賦課台帳情報) {
+    private void set編集後本算定賦課台帳情報(EditedHonSanteiFukaDaichoJoho 編集後本算定賦課台帳情報, FukaDaichoInfo 賦課台帳情報, boolean has更正前) {
 
         if (賦課台帳情報 == null || 賦課台帳情報.get賦課の情報_更正後() == null) {
             return;
@@ -368,11 +370,13 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         編集後本算定賦課台帳情報.set普徴期(普徴期情報);
         編集後本算定賦課台帳情報.set普徴月(普徴月情報);
         編集後本算定賦課台帳情報.set普徴随時(随時情報);
-        set本算定賦課内訳(false, 賦課の情報_更正前, 編集後本算定賦課台帳情報);
+        if (has更正前) {
+            set本算定賦課内訳(false, 賦課の情報_更正前, 編集後本算定賦課台帳情報);
+            set本算定賦課内訳_年額保険料(false, 賦課台帳情報.get基準日時(), 賦課の情報_更正前, 編集後本算定賦課台帳情報);
+            set本算定賦課内訳_所得段階(false, 賦課の情報_更正前, 編集後本算定賦課台帳情報);
+        }
         set本算定賦課内訳(true, 賦課の情報_更正後, 編集後本算定賦課台帳情報);
         set本算定賦課内訳_増減額(編集後本算定賦課台帳情報);
-        set本算定賦課内訳_年額保険料(false, 賦課台帳情報.get基準日時(), 賦課の情報_更正前, 編集後本算定賦課台帳情報);
-        set本算定賦課内訳_所得段階(false, 賦課の情報_更正前, 編集後本算定賦課台帳情報);
         set本算定賦課内訳_年額保険料(true, 賦課台帳情報.get基準日時(), 賦課の情報_更正後, 編集後本算定賦課台帳情報);
         set本算定賦課内訳_所得段階(true, 賦課の情報_更正後, 編集後本算定賦課台帳情報);
         set普通徴収_本算定(false, 賦課の情報_更正前, 賦課台帳情報.get収入情報(), 期月リスト_普徴, 編集後本算定賦課台帳情報);
@@ -609,7 +613,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         return RString.EMPTY;
     }
 
-    private void set編集後仮算定賦課台帳情報(EditedKariSanteiFukaDaichoJoho 編集後仮算定賦課台帳情報, FukaDaichoInfo 賦課台帳情報) {
+    private void set編集後仮算定賦課台帳情報(EditedKariSanteiFukaDaichoJoho 編集後仮算定賦課台帳情報, FukaDaichoInfo 賦課台帳情報, boolean has更正前) {
 
         if (賦課台帳情報 == null || 賦課台帳情報.get賦課の情報_更正後() == null) {
             return;
@@ -674,7 +678,9 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
                 賦課台帳情報.get前年度情報());
         set特別徴収_増減額(編集後仮算定賦課台帳情報);
         set特別徴収_収入額(賦課台帳情報.get収入情報(), 編集後仮算定賦課台帳情報);
-        set仮算定内訳(false, 賦課の情報_更正前, 編集後仮算定賦課台帳情報);
+        if (has更正前) {
+            set仮算定内訳(false, 賦課の情報_更正前, 編集後仮算定賦課台帳情報);
+        }
         set仮算定内訳(true, 賦課の情報_更正後, 編集後仮算定賦課台帳情報);
         編集後仮算定賦課台帳情報.set印刷日時(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.HALF_SPACE)
@@ -1204,8 +1210,6 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         TokubetsuChoshu 特別徴収増減額 = new TokubetsuChoshu();
         特別徴収増減額.set特徴調定月(RString.EMPTY);
         特別徴収増減額.set特徴調定月の期(RString.EMPTY);
-        特別徴収増減額.set特徴納付済額(RString.EMPTY);
-        特別徴収増減額.set特徴今後納付すべき額(RString.EMPTY);
         if (特別徴収更正前 == null) {
             特別徴収増減額.set特徴仮算定保険料(特別徴収更正後.get特徴仮算定保険料());
             特別徴収増減額.set特徴金額１(特別徴収更正後.get特徴金額１());
@@ -1214,6 +1218,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             特別徴収増減額.set特徴金額４(特別徴収更正後.get特徴金額４());
             特別徴収増減額.set特徴金額５(特別徴収更正後.get特徴金額５());
             特別徴収増減額.set特徴金額６(特別徴収更正後.get特徴金額６());
+            特別徴収増減額.set特徴納付済額(特別徴収更正後.get特徴納付済額());
+            特別徴収増減額.set特徴今後納付すべき額(特別徴収更正後.get特徴今後納付すべき額());
         } else {
             特別徴収増減額.set特徴仮算定保険料(get増減額(特別徴収更正後.get特徴仮算定保険料(), 特別徴収更正前.get特徴仮算定保険料()));
             特別徴収増減額.set特徴金額１(get増減額(特別徴収更正後.get特徴金額１(), 特別徴収更正前.get特徴金額１()));
@@ -1222,6 +1228,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             特別徴収増減額.set特徴金額４(get増減額(特別徴収更正後.get特徴金額４(), 特別徴収更正前.get特徴金額４()));
             特別徴収増減額.set特徴金額５(get増減額(特別徴収更正後.get特徴金額５(), 特別徴収更正前.get特徴金額５()));
             特別徴収増減額.set特徴金額６(get増減額(特別徴収更正後.get特徴金額６(), 特別徴収更正前.get特徴金額６()));
+            特別徴収増減額.set特徴納付済額(get増減額(特別徴収更正後.get特徴納付済額(), 特別徴収更正前.get特徴納付済額()));
+            特別徴収増減額.set特徴今後納付すべき額(get増減額(特別徴収更正後.get特徴今後納付すべき額(), 特別徴収更正前.get特徴今後納付すべき額()));
         }
         特別徴収増減額.set特徴金額７(RString.EMPTY);
         特別徴収増減額.set特徴金額８(RString.EMPTY);
