@@ -1487,13 +1487,6 @@ public class DBC040010DataUtil {
         return new HokenshaNo(data);
     }
 
-    private int setintDataFromRString(RString data) {
-        if (RString.isNullOrEmpty(data)) {
-            return 0;
-        }
-        return Integer.parseInt(data.toString());
-    }
-
     private AtenaKanaMeisho setAtenaKanaMeishoDataFromRString(RString data) {
         if (RString.isNullOrEmpty(data)) {
             return null;
