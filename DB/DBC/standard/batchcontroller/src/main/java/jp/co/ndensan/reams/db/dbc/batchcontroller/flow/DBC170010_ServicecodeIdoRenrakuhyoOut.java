@@ -56,7 +56,6 @@ public class DBC170010_ServicecodeIdoRenrakuhyoOut extends BatchFlowBase<DBC1700
     private static final String 送付ファイル作成 = "sofuFileKakutei";
     private static final String DB更新 = "dbUpdate";
     private static final String 文字コード変換 = "batchTextFileConvert";
-    private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final RString SJIS類似 = new RString("SjisRuiji");
     private static final RString 国保連送付外字_変換区分_1 = new RString("1");
