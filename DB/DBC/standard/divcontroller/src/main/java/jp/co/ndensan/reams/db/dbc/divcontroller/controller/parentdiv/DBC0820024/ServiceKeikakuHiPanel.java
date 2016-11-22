@@ -424,16 +424,78 @@ public class ServiceKeikakuHiPanel {
         ViewStateHolder.put(ViewStateKeys.判定結果, false);
         償還払ViewStateDB = set証明書フラグ(div, 償還払ViewStateDB, 明細キー, eventName);
         if (entity200904ResultList != null) {
+
             償還払ViewStateDB.add償還払請求サービス計画200904データResult(entity200904ResultList);
+            List<ShokanServicePlan200904Result> newDataList = get償還払請求サービス計画200904データ(償還払ViewStateDB);
+            if (償還払ViewStateDB != null && 償還払ViewStateDB.get償還払請求サービス計画200904データResultList() != null) {
+                償還払ViewStateDB.get償還払請求サービス計画200904データResultList().clear();
+                償還払ViewStateDB.add償還払請求サービス計画200904データResult(newDataList);
+            } else {
+                償還払ViewStateDB.add償還払請求サービス計画200904データResult(newDataList);
+            }
         }
         if (entity200604Result != null) {
-            償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
+//            償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
+            if (!has同様償還払請求サービス計画200604データ(償還払ViewStateDB, entity200604Result)) {
+                償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
+            }
         }
         if (entity200004Result != null) {
-            償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
+            if (!has同様償還払請求サービス計画200004データ(償還払ViewStateDB, entity200004Result)) {
+                償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
+            }
         }
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
         return ResponseData.of(div).forwardWithEventName(eventName).respond();
+    }
+
+    private List<ShokanServicePlan200904Result> get償還払請求サービス計画200904データ(DbJohoViewState 償還払ViewStateDB) {
+        List<ShokanServicePlan200904Result> newDataList = new ArrayList<>();
+        if (償還払ViewStateDB.get償還払請求サービス計画200904データResultList() != null
+                && !償還払ViewStateDB.get償還払請求サービス計画200904データResultList().isEmpty()) {
+            for (ShokanServicePlan200904Result data : 償還払ViewStateDB.get償還払請求サービス計画200904データResultList()) {
+                if (newDataList.isEmpty()) {
+                    newDataList.add(data);
+                } else if (!hasデータ(newDataList, data)) {
+                    newDataList.add(data);
+                }
+            }
+        }
+        return newDataList;
+    }
+
+    private boolean has同様償還払請求サービス計画200604データ(DbJohoViewState 償還払ViewStateDB,
+            ShokanServicePlan200604Result entity200604Result) {
+        if (償還払ViewStateDB.get償還払請求サービス計画200604データResultList() != null
+                && !償還払ViewStateDB.get償還払請求サービス計画200604データResultList().isEmpty()) {
+            for (ShokanServicePlan200604Result data : 償還払ViewStateDB.get償還払請求サービス計画200604データResultList()) {
+                if (data.getEntity().get連番().equals(entity200604Result.getEntity().get連番())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean has同様償還払請求サービス計画200004データ(DbJohoViewState 償還払ViewStateDB, ShokanServicePlan200004Result entity200004Result) {
+        if (償還払ViewStateDB.get償還払請求サービス計画200004データResultList() != null
+                && !償還払ViewStateDB.get償還払請求サービス計画200004データResultList().isEmpty()) {
+            for (ShokanServicePlan200004Result data : 償還払ViewStateDB.get償還払請求サービス計画200004データResultList()) {
+                if (data.getEntity().get連番().equals(entity200004Result.getEntity().get連番())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean hasデータ(List<ShokanServicePlan200904Result> newDataList, ShokanServicePlan200904Result data) {
+        for (ShokanServicePlan200904Result newData : newDataList) {
+            if (data.getEntity().get連番().equals(newData.getEntity().get連番())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private DbJohoViewState set証明書フラグ(ServiceKeikakuHiPanelDiv div, DbJohoViewState 償還払ViewStateDB,
