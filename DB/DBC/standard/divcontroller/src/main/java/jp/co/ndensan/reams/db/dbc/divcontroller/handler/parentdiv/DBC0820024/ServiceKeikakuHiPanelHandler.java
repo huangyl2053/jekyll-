@@ -300,7 +300,7 @@ public class ServiceKeikakuHiPanelHandler {
         RowState state = row.getRowState();
         Boolean flag = 変更チェック(row, entity200904ResultList);
         登録パネル_グリッド(row, maxRenban, false);
-        if (RowState.Modified == state && !flag) {
+        if (RowState.Added != state && !flag) {
             row.setRowState(RowState.Unchanged);
         } else if (RowState.Added != state) {
             row.setRowState(RowState.Modified);
@@ -473,7 +473,6 @@ public class ServiceKeikakuHiPanelHandler {
         RString 整理番号 = parameter.get整理番号();
         RString 様式番号 = parameter.get様式番号();
         RString 明細番号 = parameter.get明細番号();
-        boolean 明細番号区分 = 明細番号 == null || 明細番号.isEmpty();
         JigyoshaNo 事業者番号 = parameter.get事業者番号();
         List<ShokanServicePlan200904Result> newEntity200904ResultList = new ArrayList<>();
         if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
@@ -486,15 +485,6 @@ public class ServiceKeikakuHiPanelHandler {
                     様式番号,
                     明細番号,
                     整理番号);
-            if ((newEntity200904ResultList != null && !newEntity200904ResultList.isEmpty())
-                    && 明細番号区分) {
-                for (ShokanServicePlan200904Result entity200904Result : newEntity200904ResultList) {
-                    if (!EntityDataState.Deleted.equals(entity200904Result.getEntity().toEntity().getState())) {
-                        entity200904Result = new ShokanServicePlan200904Result(entity200904Result.getEntity().added(), entity200904Result.getServiceName());
-                        newEntity200904ResultList.add(entity200904Result);
-                    }
-                }
-            }
         }
         return newEntity200904ResultList;
     }
@@ -581,7 +571,8 @@ public class ServiceKeikakuHiPanelHandler {
             RString 整理番号) {
         List<ShokanServicePlan200904Result> newEntity200904ResultList = new ArrayList<>();
         for (dgdYichiran_Row row : rowList) {
-            if (RowState.Modified.equals(row.getRowState())) {
+            if (RowState.Modified.equals(row.getRowState()) || RowState.Deleted.equals(row.getRowState())
+                    || RowState.Unchanged.equals(row.getRowState())) {
                 ShokanServicePlan200904Result entity200904Result = entity200904ResultList.get(
                         Integer.valueOf(row.getRowNum().toString()));
                 ShokanServicePlan200904 entity200904 = 保存_データ(row, entity200904Result.getEntity());
@@ -798,6 +789,8 @@ public class ServiceKeikakuHiPanelHandler {
             entity200904 = entity200904.deleted();
         } else if (RowState.Modified.equals(state)) {
             entity200904 = entity200904.modified();
+        } else {
+            entity200904 = entity200904.noChanged();
         }
         return entity200904;
     }
@@ -1362,6 +1355,8 @@ public class ServiceKeikakuHiPanelHandler {
             return RowState.Added;
         } else if (EntityDataState.Modified.equals(entity200904Result.getEntity().toEntity().getState())) {
             return RowState.Modified;
+        } else if (EntityDataState.Deleted.equals(entity200904Result.getEntity().toEntity().getState())) {
+            return RowState.Deleted;
         }
         return RowState.Unchanged;
     }
