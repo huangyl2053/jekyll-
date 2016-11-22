@@ -786,36 +786,34 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
     }
 
     private RString getFilePathBak(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+        return sharedFileName;
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         ReadOnlySharedFileEntryDescriptor descriptor_BAK
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
         } catch (Exception e) {
             try {
-                SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(imagePath));
-                return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName.replace(".png", "_BAK.png"));
+                SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(batchWrite.getImageFolderPath()));
+                return sharedFileName.replace(".png", "_BAK.png");
             } catch (Exception ex) {
                 return RString.EMPTY;
             }
         }
-        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+        return sharedFileName;
     }
 
     private RString get特記事項名称(List<NinteichosaRelateEntity> 特記事項区分, int 連番) {
