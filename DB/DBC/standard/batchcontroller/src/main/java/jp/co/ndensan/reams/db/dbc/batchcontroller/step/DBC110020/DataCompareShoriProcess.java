@@ -1093,17 +1093,18 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 } else {
                     比較追加(異動年月異動一時List, 異動年月受給者異動送付List);
                 }
-
-            } else if (異動年月異動一時Map.containsKey(異動年月)) {
+                continue;
+            }
+            if (異動年月異動一時Map.containsKey(異動年月)) {
                 List<IdoTblTmpEntity> 異動年月異動一時List = 異動年月異動一時Map.get(異動年月);
                 for (IdoTblTmpEntity 異動年月異動一時 : 異動年月異動一時List) {
                     受給者異動連絡票Entity出力処理(異動年月異動一時, null);
                 }
-            } else {
-                List<JukyushaIdoRenrakuhyoTempTBLEntity> 異動年月受給者異動送付List = 異動年月受給者異動送付Map.get(異動年月);
-                for (JukyushaIdoRenrakuhyoTempTBLEntity 異動年月受給者異動送付 : 異動年月受給者異動送付List) {
-                    国保連受給者異動情報履歴削除(異動年月受給者異動送付);
-                }
+                continue;
+            }
+            List<JukyushaIdoRenrakuhyoTempTBLEntity> 異動年月受給者異動送付List = 異動年月受給者異動送付Map.get(異動年月);
+            for (JukyushaIdoRenrakuhyoTempTBLEntity 異動年月受給者異動送付 : 異動年月受給者異動送付List) {
+                国保連受給者異動情報履歴削除(異動年月受給者異動送付);
             }
         }
     }
@@ -1682,7 +1683,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     }
 
     private RString getYMbyRString(RString string) {
-        if (!RString.isNullOrEmpty(string)) {
+        if (!RString.isNullOrEmpty(string) && !星.equals(string)) {
             return string.substring(COUNT_0, COUNT_6);
         }
         return RString.EMPTY;
@@ -1759,7 +1760,19 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         return date1.getYearMonth().equals(date2.getYearMonth());
     }
 
-    private boolean comparaYMByRString(RString date1, RString date2) {
+    private boolean comparaYMByRString(RString checkDate1, RString checkDate2) {
+        RString date1;
+        RString date2;
+        if (星.equals(checkDate1)) {
+            date1 = null;
+        } else {
+            date1 = checkDate1;
+        }
+        if (星.equals(checkDate2)) {
+            date2 = null;
+        } else {
+            date2 = checkDate2;
+        }
         if (RString.isNullOrEmpty(date1) && RString.isNullOrEmpty(date2)) {
             return true;
         }

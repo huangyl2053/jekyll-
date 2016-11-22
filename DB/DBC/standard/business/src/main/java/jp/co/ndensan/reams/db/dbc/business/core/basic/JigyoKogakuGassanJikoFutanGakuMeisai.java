@@ -24,7 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * @reamsid_L DBC-4800-030 xuhao
  */
 public class JigyoKogakuGassanJikoFutanGakuMeisai
-        extends ModelBase<JigyoKogakuGassanJikoFutanGakuMeisaiIdentifier, DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity, JigyoKogakuGassanJikoFutanGakuMeisai>
+        extends ModelBase<JigyoKogakuGassanJikoFutanGakuMeisaiIdentifier, //
+        DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity, JigyoKogakuGassanJikoFutanGakuMeisai>
         implements Serializable {
 
     private final DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity entity;

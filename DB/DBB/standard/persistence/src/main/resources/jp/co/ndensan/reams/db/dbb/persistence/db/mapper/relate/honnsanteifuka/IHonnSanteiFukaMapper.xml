@@ -54,8 +54,8 @@
         <id column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode"/>
         <id column="dbT7006RoreiFukushiNenkinJukyusha_jukyuKaishiYMD"/>
         <id column="dbT1006KyokaisoGaitosha_hihokenshaNo"/>
-        <id column="dbT1006KyokaisoGaitosha_linkNo"/>
         <id column="dbT1006KyokaisoGaitosha_rirekiNo"/>
+        <id column="dbT1006KyokaisoGaitosha_linkNo"/>
         <id column="dbT1007KyokaisoHokenryoDankai_tekiyoKaishiYM"/>
         <result property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -361,11 +361,6 @@
         ON "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
         AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0526SeikatsuHogoFujoShurui"."gyomuCode"
         AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0526SeikatsuHogoFujoShurui"."jukyuKaishiYMD"
-        LEFT JOIN
-        rgur."UrT0528SeikatsuHogoTeishikikan" AS "UrT0528SeikatsuHogoTeishikikan"
-        ON "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0528SeikatsuHogoTeishikikan"."shikibetsuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0528SeikatsuHogoTeishikikan"."gyomuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0528SeikatsuHogoTeishikikan"."jukyuKaishiYMD"
         ON "FukaCalculateTemp"."honSanJon_shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
         LEFT JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS "DbT7006RoreiFukushiNenkinJukyusha"
         ON "FukaCalculateTemp"."honSanJon_shikibetsuCode" = "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode"
@@ -389,12 +384,6 @@
                   AND A."rirekiNo" = B."dbT1006KyokaisoGaitosha_rirekiNo"
                 ) AS DbT1006KyokaisoGaitosha
             LEFT JOIN
-            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.noDeleted_DbT1013KyokaisoSochiShinsei" />) AS DbT1013KyokaisoSochiShinsei
-            ON
-            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_hihokenshaNo" and
-            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_rirekiNo" and
-            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_linkNo"
-            LEFT JOIN
             (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.noDeleted_DbT1007KyokaisoHokenryoDankai" />) AS DbT1007KyokaisoHokenryoDankai
             ON
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_hihokenshaNo"
@@ -404,7 +393,15 @@
             ORDER BY "FukaCalculateTemp"."dbT2002_choteiNendo",
                      "FukaCalculateTemp"."dbT2002_fukaNendo",
                      "FukaCalculateTemp"."dbT2002_tsuchishoNo",
-                     "FukaCalculateTemp"."dbT2002_shikibetsuCode"
+                     "FukaCalculateTemp"."dbT2002_shikibetsuCode",
+                     "UrT0508SeikatsuHogoJukyusha"."UrT0508SeikatsuHogoJukyusha_gyomuCode",
+                     "UrT0508SeikatsuHogoJukyusha"."UrT0508SeikatsuHogoJukyusha_jukyuKaishiYMD",
+                     "UrT0526SeikatsuHogoFujoShurui"."UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode",
+                     "DbT7006RoreiFukushiNenkinJukyusha"."dbT7006RoreiFukushiNenkinJukyusha_jukyuKaishiYMD",
+                      DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo",
+                      DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo",
+                      DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo",
+                      DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_tekiyoKaishiYM"
     </select>
     
    <sql id="allColumns_UrT0526SeikatsuHogoFujoShurui">
@@ -508,6 +505,7 @@
         ) AS "DbT2002Fuka1"
         ON 資格."dbT1001HihokenshaDaicho_hihokenshaNo"="DbT2002Fuka1"."dbT2002Fuka_hihokenshaNo"
         ORDER BY 資格."dbT1001HihokenshaDaicho_hihokenshaNo", "DbT2002Fuka1"."dbT2002Fuka_tsuchishoNo"
+        limit 100
     </select>
     
     
