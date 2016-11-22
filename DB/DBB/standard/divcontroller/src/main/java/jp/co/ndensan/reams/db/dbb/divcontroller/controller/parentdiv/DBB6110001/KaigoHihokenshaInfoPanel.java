@@ -177,7 +177,7 @@ public class KaigoHihokenshaInfoPanel {
         RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
         RentaiGimushaHolder 初期holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報初期, RentaiGimushaHolder.class);
         RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
-        最新履歴番号(div, 被保険者番号, holder);
+        履歴番号 = 最新履歴番号(div, 被保険者番号, holder);
         RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                 被保険者番号, new Decimal(履歴番号.toString()));
         RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
@@ -233,7 +233,7 @@ public class KaigoHihokenshaInfoPanel {
         return 履歴番号;
     }
 
-    private void 最新履歴番号(KaigoHihokenshaInfoPanelDiv div, HihokenshaNo 被保険者番号, RentaiGimushaHolder holder) {
+    private RString 最新履歴番号(KaigoHihokenshaInfoPanelDiv div, HihokenshaNo 被保険者番号, RentaiGimushaHolder holder) {
         RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
         KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
         if (DBB6110001StateName.連帯納付義務者修正.getName().equals(ResponseHolder.getState()) || 履歴番号.isEmpty()) {
@@ -247,6 +247,7 @@ public class KaigoHihokenshaInfoPanel {
                 履歴番号 = 新履歴番号(result, 履歴番号, 最新履歴番号, div);
             }
         }
+        return 履歴番号;
     }
 
     /**
