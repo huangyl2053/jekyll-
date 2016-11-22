@@ -449,7 +449,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
                 // TODO
                 processParameter.set基準日(new FlexibleDate(parameter.get対象終了日時().getDate().toDateString()));
                 break;
-            case 受給者基本情報_中間DB更新:
+            case 受給者基本情報_提供情報取得:
                 processParameter.set特定個人情報名コード(特定個人情報名コード);
                 processParameter.setデータセット番号(DataSetNo._0201受給者基本情報.getコード());
                 // TODO
