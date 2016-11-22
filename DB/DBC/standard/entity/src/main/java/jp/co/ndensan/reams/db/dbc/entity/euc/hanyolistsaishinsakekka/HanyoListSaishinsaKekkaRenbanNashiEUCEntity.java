@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.IIdoJ
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ChugakkokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -60,7 +60,7 @@ public class HanyoListSaishinsaKekkaRenbanNashiEUCEntity implements IHanyoListSa
     @CsvField(order = 16, name = "方書")
     private RString 方書;
     @CsvField(order = 17, name = "行政区コード")
-    private ChugakkokuCode 行政区コード;
+    private GyoseikuCode 行政区コード;
     @CsvField(order = 18, name = "行政区名")
     private RString 行政区名;
     @CsvField(order = 19, name = "地区１")

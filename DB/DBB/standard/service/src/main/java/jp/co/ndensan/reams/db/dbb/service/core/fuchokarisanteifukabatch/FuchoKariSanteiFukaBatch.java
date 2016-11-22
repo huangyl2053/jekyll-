@@ -53,6 +53,7 @@ public class FuchoKariSanteiFukaBatch {
     private static final RString 境界層区分_非該当 = new RString("0");
     private static final Decimal 月処理区分_5 = new Decimal("5");
     private static final int NUM_1 = 1;
+    private static final int NUM_2 = 3;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
@@ -206,9 +207,13 @@ public class FuchoKariSanteiFukaBatch {
         賦課情報.setFuKibetsuGaku14(Decimal.ZERO);
         賦課情報.setFukaYMD(FukaKeisan.createInstance().findOut賦課基準日(調定年度, 資格情報));
         List<Decimal> 普徴期別金額リスト = 調定計算(調定年度, 更正前賦課情報, 計算用保険料, 区分, 前年度賦課情報);
-        賦課情報.setFuKibetsuGaku01(普徴期別金額リスト.get(0));
-        賦課情報.setFuKibetsuGaku02(普徴期別金額リスト.get(1));
-        if (普徴期別金額リスト.size() == NUM_3) {
+        if (NUM_1 <= 普徴期別金額リスト.size()) {
+            賦課情報.setFuKibetsuGaku01(普徴期別金額リスト.get(0));
+        }
+        if (NUM_2 <= 普徴期別金額リスト.size()) {
+            賦課情報.setFuKibetsuGaku02(普徴期別金額リスト.get(1));
+        }
+        if (NUM_3 <= 普徴期別金額リスト.size()) {
             賦課情報.setFuKibetsuGaku03(普徴期別金額リスト.get(2));
         }
         Decimal 普徴期別金額合計 = sum普徴期別金額(普徴期別金額リスト);

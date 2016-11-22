@@ -199,7 +199,7 @@ public class InsFukaKeisanTempProcess extends BatchKeyBreakBase<FukaKeisanEntity
 
     private boolean isBreak(FukaKeisanEntity current, FukaKeisanEntity before) {
         return !current.get普徴仮算定抽出().getChoteiNendo().equals(before.get普徴仮算定抽出().getChoteiNendo())
-                || !current.get普徴仮算定抽出().getFukaYMD().equals(before.get普徴仮算定抽出().getFukaYMD())
+                || !current.get普徴仮算定抽出().getFukaNendo().equals(before.get普徴仮算定抽出().getFukaNendo())
                 || !current.get普徴仮算定抽出().getTsuchishoNo().equals(before.get普徴仮算定抽出().getTsuchishoNo());
     }
 

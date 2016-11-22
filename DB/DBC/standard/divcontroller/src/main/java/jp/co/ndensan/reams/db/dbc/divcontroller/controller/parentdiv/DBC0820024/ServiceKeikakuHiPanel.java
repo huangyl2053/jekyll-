@@ -65,6 +65,8 @@ public class ServiceKeikakuHiPanel {
     private static final RString 登録 = new RString("登録");
     private static final RString 修正 = new RString("修正");
     private static final RString 確定するボタン = new RString("Element1");
+    private static final RString NUM1 = new RString("1");
+    private static final RString NUM0 = new RString("0");
 
     /**
      * 画面初期化onLoad
@@ -93,6 +95,7 @@ public class ServiceKeikakuHiPanel {
             開始時点の償還払サービス計画費 = new DbJohoViewState();
             ViewStateHolder.put(ViewStateKeys.開始時点の償還払サービス計画費, 開始時点の償還払サービス計画費);
         }
+        ViewStateHolder.put(ViewStateKeys.判定結果, false);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
@@ -347,6 +350,7 @@ public class ServiceKeikakuHiPanel {
             DbJohoViewState 償還払ViewStateDBBAK = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDBBAK);
             resetKensakuData();
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM0);
             return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
         }
         return createResponse(div);
@@ -364,6 +368,7 @@ public class ServiceKeikakuHiPanel {
             return saveOut(div);
         } else {
             resetKensakuData();
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM1);
             return 保存処理(div, DBC0820024TransitionEventName.一覧に戻る);
         }
     }
@@ -419,16 +424,78 @@ public class ServiceKeikakuHiPanel {
         ViewStateHolder.put(ViewStateKeys.判定結果, false);
         償還払ViewStateDB = set証明書フラグ(div, 償還払ViewStateDB, 明細キー, eventName);
         if (entity200904ResultList != null) {
+
             償還払ViewStateDB.add償還払請求サービス計画200904データResult(entity200904ResultList);
+            List<ShokanServicePlan200904Result> newDataList = get償還払請求サービス計画200904データ(償還払ViewStateDB);
+            if (償還払ViewStateDB != null && 償還払ViewStateDB.get償還払請求サービス計画200904データResultList() != null) {
+                償還払ViewStateDB.get償還払請求サービス計画200904データResultList().clear();
+                償還払ViewStateDB.add償還払請求サービス計画200904データResult(newDataList);
+            } else {
+                償還払ViewStateDB.add償還払請求サービス計画200904データResult(newDataList);
+            }
         }
         if (entity200604Result != null) {
-            償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
+//            償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
+            if (!has同様償還払請求サービス計画200604データ(償還払ViewStateDB, entity200604Result)) {
+                償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
+            }
         }
         if (entity200004Result != null) {
-            償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
+            if (!has同様償還払請求サービス計画200004データ(償還払ViewStateDB, entity200004Result)) {
+                償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
+            }
         }
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
         return ResponseData.of(div).forwardWithEventName(eventName).respond();
+    }
+
+    private List<ShokanServicePlan200904Result> get償還払請求サービス計画200904データ(DbJohoViewState 償還払ViewStateDB) {
+        List<ShokanServicePlan200904Result> newDataList = new ArrayList<>();
+        if (償還払ViewStateDB.get償還払請求サービス計画200904データResultList() != null
+                && !償還払ViewStateDB.get償還払請求サービス計画200904データResultList().isEmpty()) {
+            for (ShokanServicePlan200904Result data : 償還払ViewStateDB.get償還払請求サービス計画200904データResultList()) {
+                if (newDataList.isEmpty()) {
+                    newDataList.add(data);
+                } else if (!hasデータ(newDataList, data)) {
+                    newDataList.add(data);
+                }
+            }
+        }
+        return newDataList;
+    }
+
+    private boolean has同様償還払請求サービス計画200604データ(DbJohoViewState 償還払ViewStateDB,
+            ShokanServicePlan200604Result entity200604Result) {
+        if (償還払ViewStateDB.get償還払請求サービス計画200604データResultList() != null
+                && !償還払ViewStateDB.get償還払請求サービス計画200604データResultList().isEmpty()) {
+            for (ShokanServicePlan200604Result data : 償還払ViewStateDB.get償還払請求サービス計画200604データResultList()) {
+                if (data.getEntity().get連番().equals(entity200604Result.getEntity().get連番())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean has同様償還払請求サービス計画200004データ(DbJohoViewState 償還払ViewStateDB, ShokanServicePlan200004Result entity200004Result) {
+        if (償還払ViewStateDB.get償還払請求サービス計画200004データResultList() != null
+                && !償還払ViewStateDB.get償還払請求サービス計画200004データResultList().isEmpty()) {
+            for (ShokanServicePlan200004Result data : 償還払ViewStateDB.get償還払請求サービス計画200004データResultList()) {
+                if (data.getEntity().get連番().equals(entity200004Result.getEntity().get連番())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean hasデータ(List<ShokanServicePlan200904Result> newDataList, ShokanServicePlan200904Result data) {
+        for (ShokanServicePlan200904Result newData : newDataList) {
+            if (data.getEntity().get連番().equals(newData.getEntity().get連番())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private DbJohoViewState set証明書フラグ(ServiceKeikakuHiPanelDiv div, DbJohoViewState 償還払ViewStateDB,
@@ -458,6 +525,15 @@ public class ServiceKeikakuHiPanel {
             証明書変更済フラグ.setサービス計画費_証明書変更済フラグ(is変更 ? ShomeishoHenkoKubunType.変更あり : ShomeishoHenkoKubunType.変更なし);
             証明書変更済フラグMap.put(明細キー, 証明書変更済フラグ);
             償還払ViewStateDB.set証明書変更済フラグMap(証明書変更済フラグMap);
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap = 償還払ViewStateDB.get証明書入力済フラグMap();
+            Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuKanryoKubunType> 証明書入力完了フラグMap = 償還払ViewStateDB.get証明書入力完了フラグMap();
+            ShomeishoNyuryokuFlag 証明書入力済フラグ = 証明書入力済フラグMap.get(明細キー);
+            証明書入力済フラグ.setサービス計画費_証明書入力済フラグ(is変更 ? ShomeishoNyuryokuKubunType.入力あり : ShomeishoNyuryokuKubunType.入力なし);
+            証明書入力済フラグMap.put(明細キー, 証明書入力済フラグ);
+            償還払ViewStateDB.set証明書入力済フラグMap(証明書入力済フラグMap);
+            if (DBC0820024TransitionEventName.一覧に戻る == eventName) {
+                set証明書完了フラグ(証明書入力済フラグ, 明細キー, 証明書入力完了フラグMap, 償還払ViewStateDB);
+            }
         }
         return 償還払ViewStateDB;
     }

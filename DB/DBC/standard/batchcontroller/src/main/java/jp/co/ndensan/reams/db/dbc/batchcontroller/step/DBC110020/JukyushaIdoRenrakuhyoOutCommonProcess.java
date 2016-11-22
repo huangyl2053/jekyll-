@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.HyojunFutanEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdoTblTmpEntity;
@@ -658,6 +659,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         List<RString> 社福減免Info = 社福減免.split(SPLIT.toString());
         entity.set適用開始日(new FlexibleDate(社福減免Info.get(ORDER_0)));
         entity.set適用終了日(new FlexibleDate(社福減免Info.get(ORDER_1)));
+        entity.set軽減率(社福減免Info.get(ORDER_3));
         entity.set履歴番号(Integer.parseInt(社福減免Info.get(ORDER_4).toString()));
         return entity;
     }
@@ -1234,6 +1236,331 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             insertEntity.set償還払化開始年月日(new RString(適用開始年月日.toString()));
         }
         insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
+     * 受給者台帳異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get受給者台帳異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            RString 要介護状態区分コード = 異動一時Map.get(翌日異動日).get要介護状態区分コード();
+            if (RString.isNullOrEmpty(要介護状態区分コード)) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
+    }
+
+    /**
+     * 二次予防異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get二次予防異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            if (isDateEmpty(異動一時Map.get(異動年月日).get二次予防事業有効期間開始年月日())) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
+    }
+
+    /**
+     * 総合事業対象者異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get総合事業対象者異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get要介護状態区分コード())) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
+    }
+
+    /**
+     * 被保険者管理異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get被保険者管理異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            if (isDateEmpty(異動一時Map.get(異動年月日).get資格取得年月日())) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
+    }
+
+    /**
+     * 居宅計画異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get居宅計画異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get居宅サービス計画作成区分コード())) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
+    }
+
+    /**
+     * 支払方法変更異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get支払方法変更異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get償還払化開始年月日())) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
+    }
+
+    /**
+     * 給付費減額異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get給付費減額異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get給付率引下げ開始年月日())) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
+    }
+
+    /**
+     * 標準負担異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get標準負担異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get負担額適用開始年月日())) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
+    }
+
+    /**
+     * 利用者負担異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get利用者負担異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get適用開始年月日())) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
+    }
+
+    /**
+     * 特定入所者異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get特定入所者異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get負担限度額適用開始年月日())) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
+    }
+
+    /**
+     * 社福減免異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get社福減免異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get軽減率適用開始年月日())) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
+    }
+
+    /**
+     * 住所地特例異動一時取得
+     *
+     * @param 異動一時Map Map<FlexibleDate, IdoTblTmpEntity>
+     * @param 異動年月日 FlexibleDate
+     * @return IdoTblTmpEntity
+     */
+    public static IdoTblTmpEntity get住所地特例異動一時Entity(Map<FlexibleDate, IdoTblTmpEntity> 異動一時Map, FlexibleDate 異動年月日) {
+        FlexibleDate 翌日異動日 = 異動年月日;
+        for (int i = ORDER_0; i < 異動一時Map.size(); i++) {
+            if (!異動一時Map.containsKey(翌日異動日)) {
+                IdoTblTmpEntity entity = new IdoTblTmpEntity();
+                entity.set異動年月日(翌日異動日);
+                return entity;
+            }
+            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get住所地特例適用開始日())) {
+                IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
+                insertEntity.set異動年月日(翌日異動日);
+                return insertEntity;
+            }
+            翌日異動日 = 翌日異動日.plusDay(ORDER_1);
+        }
+        IdoTblTmpEntity entity = new IdoTblTmpEntity();
+        entity.set異動年月日(翌日異動日);
+        return entity;
     }
 
     /**

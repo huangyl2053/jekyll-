@@ -58,6 +58,8 @@ public class KinkyujiShisetuRyoyohiPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 登録_削除 = new RString("登録_削除");
+    private static final RString NUM1 = new RString("1");
+    private static final RString NUM0 = new RString("0");
 
     /**
      * 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面初期化
@@ -253,6 +255,7 @@ public class KinkyujiShisetuRyoyohiPanel {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM0);
             return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る).respond();
         }
 
@@ -285,6 +288,9 @@ public class KinkyujiShisetuRyoyohiPanel {
                     return ResponseData.of(div).addValidationMessages(pairs).respond();
                 }
             }
+        }
+        if (getHandler(div).isデータ変更()) {
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM1);
         }
         return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.一覧に戻る).respond();
     }

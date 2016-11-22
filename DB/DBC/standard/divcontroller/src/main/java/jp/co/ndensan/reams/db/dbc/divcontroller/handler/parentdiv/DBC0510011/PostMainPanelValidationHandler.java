@@ -127,7 +127,7 @@ public class PostMainPanelValidationHandler {
                     public boolean apply(PostMainPanelDiv div) {
                         List<dgShichoson_Row> rowList = div.getDgShichoson().getDataSource();
                         RString 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(ControlDataHolder.getUserId()).get(0).getItemId();
-                        if (rowList != null && rowList.size() > 0 && !(市町村識別ID.equals(NUM_00))) {
+                        if (rowList != null && !rowList.isEmpty() && !(市町村識別ID.equals(NUM_00))) {
                             for (dgShichoson_Row row : rowList) {
                                 if (!row.getSelected()) {
                                     return row.getSelected();

@@ -28,4 +28,5 @@ public class HonsanteiFukaProcessParameter implements IBatchProcessParameter {
     private YMDHMS バッチ起動時処理日時;
     private HonsanteifukaBatchTyouhyou 出力帳票;
     private FlexibleDate 資格基準日;
+    private boolean contains徴収方法;
 }

@@ -295,6 +295,8 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         if (spoolManager_DBC200010 != null) {
             spoolManager_DBC200010.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200010);
         }
+        batchReportWriter_DBC200074.close();
+        batchReportWriter_DBC200010.close();
         returnEntity = new OutputParameter<>();
         JukyushaIdoRenrakuhyoOutFlowEntity flowEntity = new JukyushaIdoRenrakuhyoOutFlowEntity();
         if (outEntity != null) {

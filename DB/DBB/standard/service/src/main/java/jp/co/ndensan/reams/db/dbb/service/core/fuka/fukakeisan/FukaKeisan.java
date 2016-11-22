@@ -112,7 +112,7 @@ public class FukaKeisan extends FukaKeisanFath {
     private static final int INT_14 = 14;
     private static final int DAY = 31;
     private static final RString エラーメッセージ = new RString("賦課の情報しか存在しない");
-    private static final RString 汎用キー_通知書番号 = new RString("通知書番号");
+//    private static final RString 汎用キー_通知書番号 = new RString("通知書番号");
     private static final RString ゼロ_0000 = new RString("0000");
 
     /**

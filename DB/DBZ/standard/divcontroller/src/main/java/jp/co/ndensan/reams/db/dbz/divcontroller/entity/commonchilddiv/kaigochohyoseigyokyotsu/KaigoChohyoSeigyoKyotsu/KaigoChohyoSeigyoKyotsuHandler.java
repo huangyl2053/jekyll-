@@ -202,7 +202,7 @@ public class KaigoChohyoSeigyoKyotsuHandler {
         tagList.put(タグ_部署名, 埋め込み_部署名);
         tagList.put(タグ_担当者名, 埋め込み_担当者名);
         div.setHdnTagList(DataPassingConverter.serialize((Serializable) tagList));
-        List<RString> shubetsuCodeList = NinshoshaFinderFactory.createInstance().get種別コードList(GyomuCode.DB介護保険);;
+        List<RString> shubetsuCodeList = NinshoshaFinderFactory.createInstance().get種別コードList(GyomuCode.DB介護保険);
         div.setHdGyomuCode(GyomuCode.DB介護保険.value());
         div.setHdShubetsuCodeList(DataPassingConverter.serialize((Serializable) shubetsuCodeList));
         if (0 < shubetsuCodeList.size()) {

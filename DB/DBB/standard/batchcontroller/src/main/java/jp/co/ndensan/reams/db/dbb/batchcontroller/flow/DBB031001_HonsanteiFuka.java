@@ -20,9 +20,14 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031001.DBB031001_Honsan
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031003.DBB031003_HonsanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt4300.HonsanteiFukaProcessParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -56,6 +61,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
     private static final ReportId 帳票分類ID = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
     private static final RString 賦課の情報登録フローBATCHID = new RString("DBB004001_FukaJohoToroku");
     private static final String 賦課情報登録 = "callChoteiToroku";
+    private static final RString 徴収方法R = new RString("徴収方法");
 
     private YMDHMS システム日時;
     private DBB031001_HonsanteiFukaParameter parameter;
@@ -89,7 +95,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
             if (帳票分類ID.equals(entity.get帳票分類ID())) {
                 processParameter.set出力帳票(entity);
                 executeStep(計算後情報作成);
-                executeStep(出力順登録);
+                出力順登録();
                 executeStep(本算定結果一覧表出力);
                 break;
             }
@@ -97,6 +103,14 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
         executeStep(処理日付管理テーブル更新);
         if (getParameter().is画面移動フラグ()) {
             executeStep(本算定通知書一括発行フロー);
+        }
+    }
+
+    private void 出力順登録() {
+        boolean contains徴収方法 = 出力順contains徴収方法();
+        processParameter.setContains徴収方法(contains徴収方法);
+        if (contains徴収方法) {
+            executeStep(出力順登録);
         }
     }
 
@@ -261,6 +275,26 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
         para.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
         para.set画面移動フラグ(parameter.is画面移動フラグ());
         return para;
+    }
+
+    private boolean 出力順contains徴収方法() {
+        IOutputOrder 出力順情報;
+        if (RString.isNullOrEmpty(processParameter.get出力帳票().get出力順ID())) {
+            return false;
+        } else {
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            出力順情報 = finder.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId(),
+                    Long.parseLong(processParameter.get出力帳票().get出力順ID().toString()));
+        }
+        if (出力順情報 == null) {
+            return false;
+        }
+        for (ISetSortItem item : 出力順情報.get設定項目リスト()) {
+            if (徴収方法R.equals(item.get項目名())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

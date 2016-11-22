@@ -70,7 +70,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor implements IToku
         RString 出力順４ = RString.EMPTY;
         RString 出力順５ = RString.EMPTY;
 
-        List<ISetSortItem> list = outputOrder.get設定項目リスト();
+        List<ISetSortItem> list = outputOrder == null ? new ArrayList<ISetSortItem>() : outputOrder.get設定項目リスト();
         if (list == null) {
             list = new ArrayList<>();
         }
