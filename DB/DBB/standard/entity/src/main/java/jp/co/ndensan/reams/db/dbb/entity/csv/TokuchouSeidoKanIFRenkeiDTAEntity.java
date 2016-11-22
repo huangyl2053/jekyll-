@@ -43,21 +43,21 @@ public class TokuchouSeidoKanIFRenkeiDTAEntity {
     private RString 生年月日;
     @FldField(order = 12, length = 1)
     private RString 性別;
-    @FldField(order = 13, length = 25)
+    @FldField(order = 13, length = 75, align = Align.Right, paddingChar = " ")
     private RString カナ氏名;
     @FldField(order = 14, length = 3)
     private RString 氏名1_シフトコード;
-    @FldField(order = 15, length = 25)
+    @FldField(order = 15, length = 75, align = Align.Right, paddingChar = "　")
     private RString 漢字氏名;
     @FldField(order = 16, length = 3)
     private RString 氏名2_シフトコード;
     @FldField(order = 17, length = 7)
     private RString 郵便番号;
-    @FldField(order = 18, length = 80)
+    @FldField(order = 18, length = 240, align = Align.Right, paddingChar = " ")
     private RString カナ住所;
     @FldField(order = 19, length = 3)
     private RString 住所3_シフトコード;
-    @FldField(order = 20, length = 25)
+    @FldField(order = 20, length = 75, align = Align.Right, paddingChar = "　")
     private RString 漢字住所;
     @FldField(order = 21, length = 3)
     private RString 住所4_シフトコード;
