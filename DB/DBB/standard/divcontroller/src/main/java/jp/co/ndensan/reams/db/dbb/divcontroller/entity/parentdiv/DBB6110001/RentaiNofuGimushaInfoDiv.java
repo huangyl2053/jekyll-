@@ -4,25 +4,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxSetaiCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * RentaiNofuGimushaInfo のクラスファイル
- *
- * @reamsid_L DBB-1640-010 jiangzongyue
+ * RentaiNofuGimushaInfo のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class RentaiNofuGimushaInfoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -51,12 +44,12 @@ public class RentaiNofuGimushaInfoDiv extends Panel {
     private TextBox txtZokuGara;
     @JsonProperty("txtJusho")
     private TextBoxJusho txtJusho;
-    @JsonProperty("btnKakutei")
-    private Button btnKakutei;
-    @JsonProperty("btnCancel")
-    private Button btnCancel;
     @JsonProperty("txtRirekiNo")
     private TextBox txtRirekiNo;
+    @JsonProperty("btnCancel")
+    private Button btnCancel;
+    @JsonProperty("btnKakutei")
+    private Button btnKakutei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -263,21 +256,21 @@ public class RentaiNofuGimushaInfoDiv extends Panel {
     }
 
     /*
-     * getbtnKakutei
-     * @return btnKakutei
+     * gettxtRirekiNo
+     * @return txtRirekiNo
      */
-    @JsonProperty("btnKakutei")
-    public Button getBtnKakutei() {
-        return btnKakutei;
+    @JsonProperty("txtRirekiNo")
+    public TextBox getTxtRirekiNo() {
+        return txtRirekiNo;
     }
 
     /*
-     * setbtnKakutei
-     * @param btnKakutei btnKakutei
+     * settxtRirekiNo
+     * @param txtRirekiNo txtRirekiNo
      */
-    @JsonProperty("btnKakutei")
-    public void setBtnKakutei(Button btnKakutei) {
-        this.btnKakutei = btnKakutei;
+    @JsonProperty("txtRirekiNo")
+    public void setTxtRirekiNo(TextBox txtRirekiNo) {
+        this.txtRirekiNo = txtRirekiNo;
     }
 
     /*
@@ -299,21 +292,21 @@ public class RentaiNofuGimushaInfoDiv extends Panel {
     }
 
     /*
-     * gettxtRirekiNo
-     * @return txtRirekiNo
+     * getbtnKakutei
+     * @return btnKakutei
      */
-    @JsonProperty("txtRirekiNo")
-    public TextBox getTxtRirekiNo() {
-        return txtRirekiNo;
+    @JsonProperty("btnKakutei")
+    public Button getBtnKakutei() {
+        return btnKakutei;
     }
 
     /*
-     * settxtRirekiNo
-     * @param txtRirekiNo txtRirekiNo
+     * setbtnKakutei
+     * @param btnKakutei btnKakutei
      */
-    @JsonProperty("txtRirekiNo")
-    public void setTxtRirekiNo(TextBox txtRirekiNo) {
-        this.txtRirekiNo = txtRirekiNo;
+    @JsonProperty("btnKakutei")
+    public void setBtnKakutei(Button btnKakutei) {
+        this.btnKakutei = btnKakutei;
     }
 
     // </editor-fold>
