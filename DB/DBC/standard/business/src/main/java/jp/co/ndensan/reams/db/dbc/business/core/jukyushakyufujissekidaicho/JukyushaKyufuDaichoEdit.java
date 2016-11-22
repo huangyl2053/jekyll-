@@ -57,8 +57,8 @@ public class JukyushaKyufuDaichoEdit {
     private static final RString 入力識別番号_2143 = new RString("2143");
     private static final RString 入力識別番号_7144 = new RString("7144");
     private static final RString 入力識別番号_2144 = new RString("2144");
-    private static final RString 入力識別番号_7138 = new RString("7138");
-    private static final RString 入力識別番号_2138 = new RString("2138");
+    private static final RString 入力識別番号_7183 = new RString("7183");
+    private static final RString 入力識別番号_2183 = new RString("2183");
     private static final RString 入力識別番号_7155 = new RString("7155");
     private static final RString 入力識別番号_2155 = new RString("2155");
     private static final RString 入力識別番号_7156 = new RString("7156");
@@ -106,13 +106,9 @@ public class JukyushaKyufuDaichoEdit {
     private static final int INDEX_6 = 6;
     private static final int INDEX_7 = 6;
     private static final int INDEX_10 = 10;
-    private static final int INDEX_11 = 11;
     private static final int INDEX_20 = 20;
-    private static final int INDEX_21 = 21;
     private static final int INDEX_30 = 30;
-    private static final int INDEX_31 = 31;
     private static final int INDEX_40 = 40;
-    private static final int INDEX_41 = 41;
     private static final int INDEX_50 = 50;
     private static final int INDEX_64 = 64;
     private static final RString SPACE_1 = new RString("　");
@@ -1564,6 +1560,27 @@ public class JukyushaKyufuDaichoEdit {
             List<KojinyoTyohyoDataKomoku> list特定データ,
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
         for (int i = 0; i < 特別療養List.size(); i++) {
+            RString 摘要_Sub = 特別療養List.get(i).get摘要();
+            RString 摘要_10 = RString.EMPTY;
+            RString 摘要_20 = RString.EMPTY;
+            RString 摘要_30 = RString.EMPTY;
+            RString 摘要_40 = RString.EMPTY;
+            RString 摘要_50 = RString.EMPTY;
+            if (RString.isNullOrEmpty(摘要_Sub) && 摘要_Sub.length() >= INDEX_10) {
+                摘要_10 = 特別療養List.get(i).get摘要().substring(0, INDEX_10);
+            }
+            if (RString.isNullOrEmpty(摘要_Sub) && 摘要_Sub.length() >= INDEX_20) {
+                摘要_20 = 特別療養List.get(i).get摘要().substring(INDEX_10, INDEX_20);
+            }
+            if (RString.isNullOrEmpty(摘要_Sub) && 摘要_Sub.length() >= INDEX_30) {
+                摘要_30 = 特別療養List.get(i).get摘要().substring(INDEX_20, INDEX_30);
+            }
+            if (RString.isNullOrEmpty(摘要_Sub) && 摘要_Sub.length() >= INDEX_40) {
+                摘要_40 = 特別療養List.get(i).get摘要().substring(INDEX_30, INDEX_40);
+            }
+            if (RString.isNullOrEmpty(摘要_Sub) && 摘要_Sub.length() >= INDEX_50) {
+                摘要_50 = 特別療養List.get(i).get摘要().substring(INDEX_40, INDEX_50);
+            }
             if (0 == i % LIST_SIZE_2) {
                 個人用帳票データ.setヘッダー1(特別療養List.get(i).get略称());
                 個人用帳票データ.setヘッダー2(new RString("番号").concat("  ").concat("傷病名")
@@ -1585,34 +1602,34 @@ public class JukyushaKyufuDaichoEdit {
                         .concat(kingakuFormat(特別療養List.get(i).get後単位数())).concat(SPACE_2).concat(摘要));
                 個人用帳票データ.set明細5(SPACE_6.concat(回数).concat(SPACE_5).concat(点数)
                         .concat(SPACE_4).concat(合計点数).concat(SPACE_3).concat(回数).concat(SPACE_5).concat(点数).concat(SPACE_4)
-                        .concat(合計点数).concat(SPACE_2).concat(特別療養List.get(i).get摘要().substring(0, INDEX_10)));
+                        .concat(合計点数).concat(SPACE_2).concat(摘要_10));
                 個人用帳票データ.set明細6(SPACE_8.concat(new RString(特別療養List.get(i).get回数())).concat(SPACE_2)
                         .concat(kingakuFormat(特別療養List.get(i).get後サービス点数())).concat(SPACE_2)
                         .concat(kingakuFormat(特別療養List.get(i).get後合計点数())).concat(SPACE_5)
                         .concat(new RString(特別療養List.get(i).get後回数())).concat(SPACE_2).concat(kingakuFormat(特別療養List.get(i).get後サービス点数()))
                         .concat(SPACE_2).concat(kingakuFormat(特別療養List.get(i).get後合計点数())).concat(SPACE_2)
-                        .concat(特別療養List.get(i).get摘要().substring(INDEX_11, INDEX_20)));
+                        .concat(摘要_20));
                 個人用帳票データ.set明細7(公費１.concat(SPACE_2).concat(new RString(特別療養List.get(i).get公費１回数())).concat(SPACE_2)
                         .concat(kingakuFormat(特別療養List.get(i).get公費１サービス点数())).concat(SPACE_2)
                         .concat(kingakuFormat(特別療養List.get(i).get公費１合計点数())).concat(SPACE_5)
                         .concat(new RString(特別療養List.get(i).get後公費１回数())).concat(SPACE_2)
                         .concat(kingakuFormat(特別療養List.get(i).get後公費１サービス点数()))
                         .concat(SPACE_2).concat(kingakuFormat(特別療養List.get(i).get後公費１合計点数())).concat(SPACE_2)
-                        .concat(特別療養List.get(i).get摘要().substring(INDEX_21, INDEX_30)));
+                        .concat(摘要_30));
                 個人用帳票データ.set明細8(公費２.concat(SPACE_2).concat(new RString(特別療養List.get(i).get公費２回数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get公費２サービス点数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get公費２合計点数())).concat(SPACE_5)
                         .concat(new RString(特別療養List.get(i).get後公費２回数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get後公費２サービス点数()))
                         .concat(SPACE_2).concat(new RString(特別療養List.get(i).get後公費２合計点数())).concat(SPACE_2)
-                        .concat(特別療養List.get(i).get摘要().substring(INDEX_31, INDEX_40)));
+                        .concat(摘要_40));
                 個人用帳票データ.set明細9(公費３.concat(SPACE_2).concat(new RString(特別療養List.get(i).get公費３回数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get公費３サービス点数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get公費３合計点数())).concat(SPACE_5)
                         .concat(new RString(特別療養List.get(i).get後公費３回数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get後公費３サービス点数()))
                         .concat(SPACE_2).concat(new RString(特別療養List.get(i).get後公費３合計点数())).concat(SPACE_2)
-                        .concat(特別療養List.get(i).get摘要().substring(INDEX_41, INDEX_50)));
+                        .concat(摘要_50));
                 if (i == 特別療養List.size() - 1) {
                     list特定データ.add(個人用帳票データ);
                 }
@@ -1629,34 +1646,34 @@ public class JukyushaKyufuDaichoEdit {
                         .concat(new RString(特別療養List.get(i).get後単位数())).concat(SPACE_2).concat(摘要));
                 個人用帳票データ.set明細14(SPACE_6.concat(回数).concat(SPACE_5).concat(点数)
                         .concat(SPACE_4).concat(合計点数).concat(SPACE_3).concat(回数).concat(SPACE_5).concat(点数).concat(SPACE_4)
-                        .concat(合計点数).concat(SPACE_2).concat(特別療養List.get(i).get摘要().substring(0, INDEX_10)));
+                        .concat(合計点数).concat(SPACE_2).concat(摘要_10));
                 個人用帳票データ.set明細15(SPACE_8.concat(new RString(特別療養List.get(i).get回数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get後サービス点数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get後サービス点数())).concat(SPACE_5)
                         .concat(new RString(特別療養List.get(i).get後回数())).concat(SPACE_2).concat(new RString(特別療養List.get(i).get後サービス点数()))
                         .concat(SPACE_2).concat(new RString(特別療養List.get(i).get後合計点数())).concat(SPACE_2)
-                        .concat(特別療養List.get(i).get摘要().substring(INDEX_11, INDEX_20)));
+                        .concat(摘要_20));
                 個人用帳票データ.set明細16(公費１.concat(SPACE_2).concat(new RString(特別療養List.get(i).get公費１回数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get公費１サービス点数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get公費１合計点数())).concat(SPACE_5)
                         .concat(new RString(特別療養List.get(i).get後公費１回数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get後公費１サービス点数()))
                         .concat(SPACE_2).concat(new RString(特別療養List.get(i).get後公費１合計点数())).concat(SPACE_2)
-                        .concat(特別療養List.get(i).get摘要().substring(INDEX_21, INDEX_30)));
+                        .concat(摘要_30));
                 個人用帳票データ.set明細17(公費２.concat(SPACE_2).concat(new RString(特別療養List.get(i).get公費２回数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get公費２サービス点数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get公費２合計点数())).concat(SPACE_5)
                         .concat(new RString(特別療養List.get(i).get後公費２回数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get後公費２サービス点数()))
                         .concat(SPACE_2).concat(new RString(特別療養List.get(i).get後公費２合計点数())).concat(SPACE_2)
-                        .concat(特別療養List.get(i).get摘要().substring(INDEX_31, INDEX_40)));
+                        .concat(摘要_40));
                 個人用帳票データ.set明細18(公費３.concat(SPACE_2).concat(new RString(特別療養List.get(i).get公費３回数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get公費３サービス点数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get公費３合計点数())).concat(SPACE_5)
                         .concat(new RString(特別療養List.get(i).get後公費３回数())).concat(SPACE_2)
                         .concat(new RString(特別療養List.get(i).get後公費３サービス点数()))
                         .concat(SPACE_2).concat(new RString(特別療養List.get(i).get後公費３合計点数())).concat(SPACE_2)
-                        .concat(特別療養List.get(i).get摘要().substring(INDEX_41, INDEX_50)));
+                        .concat(摘要_50));
                 if (i == 特別療養List.size() - 1) {
                     list特定データ.add(個人用帳票データ);
                 }
@@ -1843,8 +1860,8 @@ public class JukyushaKyufuDaichoEdit {
                 || 入力識別番号_2143.equals(入力識別番号)
                 || 入力識別番号_7144.equals(入力識別番号)
                 || 入力識別番号_2144.equals(入力識別番号)
-                || 入力識別番号_7138.equals(入力識別番号)
-                || 入力識別番号_2138.equals(入力識別番号);
+                || 入力識別番号_7183.equals(入力識別番号)
+                || 入力識別番号_2183.equals(入力識別番号);
     }
 
     private boolean is7155(RString 入力識別番号) {

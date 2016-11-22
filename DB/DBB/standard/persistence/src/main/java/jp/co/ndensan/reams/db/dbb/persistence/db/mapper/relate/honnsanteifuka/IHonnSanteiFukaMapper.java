@@ -35,12 +35,20 @@ public interface IHonnSanteiFukaMapper {
     List<SetaiHaakuShuturyokuEntity> select世帯員把握();
 
     /**
-     * select本算定計算後賦課情報
+     * select本算定計算後賦課情報has徴収方法
      *
      * @param param HonsenteiKeisangojohoParameter
      * @return List<HonsenteiKeisangojohoEntity>
      */
-    List<HonsenteiKeisangojohoEntity> select本算定計算後賦課情報(HonsenteiKeisangojohoParameter param);
+    List<HonsenteiKeisangojohoEntity> select本算定計算後賦課情報has徴収方法(HonsenteiKeisangojohoParameter param);
+
+    /**
+     * select本算定計算後賦課情報hasnot徴収方法
+     *
+     * @param param HonsenteiKeisangojohoParameter
+     * @return List<HonsenteiKeisangojohoEntity>
+     */
+    List<HonsenteiKeisangojohoEntity> select本算定計算後賦課情報hasnot徴収方法(HonsenteiKeisangojohoParameter param);
 
     /**
      * 徴収方法情報を取得メソッドです。
