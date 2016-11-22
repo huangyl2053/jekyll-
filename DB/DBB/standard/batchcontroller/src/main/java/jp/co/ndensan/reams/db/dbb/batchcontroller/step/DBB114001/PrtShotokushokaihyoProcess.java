@@ -346,7 +346,7 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
         if (所得照会票データbefore.getZenkokuJushoCode() != null) {
             RString zenkokuJushoCode = 所得照会票データbefore.getZenkokuJushoCode().trim();
             if (zenkokuJushoCode.length() >= INT_6) {
-                全国住所コード = new LasdecCode(zenkokuJushoCode);
+                全国住所コード = new LasdecCode(zenkokuJushoCode.substring(INT_0, INT_6));
             }
         }
         ShichosonAtesaki atesaki = atesakiFinder.get市町村宛先(全国住所コード, SofusakiGroup.所得照会関連.getCode());
