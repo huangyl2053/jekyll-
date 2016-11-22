@@ -968,7 +968,9 @@ public class GenNendoHonsanteiIdouFath {
     }
 
     private RString get口座情報(KeisanjohoAtenaKozaEntity 更正後Entity) {
-        if (更正後Entity == null || 更正後Entity.get口座Entity() == null) {
+        if (更正後Entity == null || 更正後Entity.get口座Entity() == null
+                || 更正後Entity.get口座Entity().getUaT0310KozaEntity() == null
+                || 更正後Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() == 0) {
             return RString.EMPTY;
         }
         IKoza 口座_更正後 = new Koza(更正後Entity.get口座Entity());
