@@ -1288,8 +1288,8 @@ public class ReportDateHensyu {
             entity.set金額_19段階_Title(表記List.get(INT_18));
         }
         if (INT_19 < 表記List.size()) {
-            entity.set人数_19段階_Title(表記List.get(INT_19));
-            entity.set金額_19段階_Title(表記List.get(INT_19));
+            entity.set人数_20段階_Title(表記List.get(INT_19));
+            entity.set金額_20段階_Title(表記List.get(INT_19));
         }
         return entity;
     }
