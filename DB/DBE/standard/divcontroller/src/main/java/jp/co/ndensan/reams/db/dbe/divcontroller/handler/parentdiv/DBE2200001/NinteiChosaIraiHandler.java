@@ -625,6 +625,16 @@ public class NinteiChosaIraiHandler {
     }
 
     /**
+     * 委託先基本情報に検索結果を初期化します。
+     *
+     */
+    public void reset委託先基本情報() {
+        div.getTxtChosainCode().clearValue();
+        div.getTxtChosainShimei().clearValue();
+        div.getTxtChosainChiku().clearValue();
+    }
+
+    /**
      * 割付済み申請者一覧Gridと未割付申請者一覧Gridの項番を設定します。
      *
      */
