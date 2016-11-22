@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -17,8 +16,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotok
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
@@ -27,33 +24,24 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
-import jp.co.ndensan.reams.db.dbz.service.core.chosatokkishokai.ChosaTokkiShokaiFinder;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.HenshuKubun;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.core.entities.config._ConfigType;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.cast._CastDataTypeFactory;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
-import org.apache.poi.ss.usermodel.Textbox;
 
 /**
  * 認定調査結果登録3のHandlerクラスです。
@@ -65,21 +53,15 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     private final GaikyoTokkiYichiranNyurokuDiv div;
     private HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> gaikyoTokkiNyurokuMap = new HashMap<>();
     private HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> gaikyoTokkiNyurokuMap_MASK = new HashMap<>();
-    private HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> originalGaikyoTokkiNyurokuMap = new HashMap<>();
-    private HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> originalGaikyoTokkiNyurokuMap_MASK = new HashMap<>();
     private int 総項目数 = 0;
     private int 残数 = 0;
     private int 商 = 0;
     private int 総ページ数 = 1;
     private int 当前ページ数 = 1;
     private static final int INT1 = 1;
-    private static final int INT2 = 2;
-    private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
     private static final int INT8 = 8;
-    private static final RString FILENAME_D1026_BAK = new RString("D1026_BAK.png");
-    private static final RString FILENAME_D1026 = new RString("D1026.png");
 
     /**
      * コンストラクタです。
@@ -200,7 +182,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     /**
      * 「前へ」ボタンの操作処理を行う。
      *
-     * @param temp_申請書管理番号
+     * @param temp_申請書管理番号 temp_申請書管理番号
      */
     public void onClick_btnBeforeTokkiJiko(ShinseishoKanriNo temp_申請書管理番号) {
 
@@ -234,7 +216,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     /**
      * 「次へ」ボタンの操作処理を行う。
      *
-     * @param temp_申請書管理番号
+     * @param temp_申請書管理番号 temp_申請書管理番号
      */
     public void onClick_btnAfterTokkiJiko(ShinseishoKanriNo temp_申請書管理番号) {
 
@@ -285,10 +267,10 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     /**
      * 認定調査特記事項番号を指定のフォームに変換します。
      *
-     * @param 認定調査特記事項番号
+     * @param 認定調査特記事項番号 認定調査特記事項番号
      * @return 指定フォームに変換した認定調査特記事項番号
      */
-    public RString formChange認定調査特記事項番号_表示(TextBox 認定調査特記事項番号) {
+    public RString to認定調査特記事項番号_表示Form(TextBox 認定調査特記事項番号) {
         RStringBuilder 調査項目番号 = new RStringBuilder();
         調査項目番号.append(認定調査特記事項番号.getValue());
         if (調査項目番号.length() == 0) {
@@ -306,10 +288,10 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     /**
      * 認定調査特記事項番号をテキストマスキングダイアログの指定のフォームに変換します。
      *
-     * @param 認定調査特記事項番号
+     * @param 認定調査特記事項番号 認定調査特記事項番号
      * @return 指定フォームに変換した認定調査特記事項番号
      */
-    public RString formChange認定調査特記事項番号_マスキング(TextBox 認定調査特記事項番号) {
+    public RString to認定調査特記事項番号_マスキングForm(TextBox 認定調査特記事項番号) {
         RStringBuilder 調査項目番号 = new RStringBuilder();
         調査項目番号.append(認定調査特記事項番号.getValue());
         調査項目番号.deleteCharAt(INT1);
@@ -659,7 +641,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     /**
      * 「入力内容を取り消し」ボタンの操作処理を行う。
      *
-     * @param temp_申請書管理番号
+     * @param temp_申請書管理番号 temp_申請書管理番号
      */
     public void onClick_btnCancel(ShinseishoKanriNo temp_申請書管理番号) {
 
@@ -718,6 +700,13 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                 .setHiddenGaikyoTokkiNyurokuMap_MASK(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap_MASK));
     }
 
+    /**
+     * 特記事項修正時、修正対象が妥当かどうかチェックします。
+     *
+     * @param key 修正対象の特記事項のKEY
+     * @param 特記事項 修正後特記事項
+     * @return エラーメッセージ 修正対象が妥当であればNull, 妥当でなければエラーメッセージ
+     */
     public ErrorMessage checkChange特記事項(RString key, RString 特記事項) {
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
         ErrorMessage message = new ErrorMessage(null, null);
@@ -731,17 +720,22 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                 message = new ErrorMessage(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode(),
                         DbeErrorMessages.特記事項追加削除不可.getMessage().replace("削除", "最大", "削除").evaluate());
             }
-        } else if (HensyuuKubun.空白.getCode().equals(gaikyoTokkiNyurokuMap.get(key).getTemp_編集区分()) &&
-                !特記事項.equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項())) {
-            if (getNotExists特記事項最小連番(gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号())
-                    .compareTo(new Decimal(gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項連番().toString())) != 0) {
-                message = new ErrorMessage(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode(),
-                        DbeErrorMessages.特記事項追加削除不可.getMessage().replace("追加", "最小", "追加").evaluate());
-            }
+        } else if (HensyuuKubun.空白.getCode().equals(gaikyoTokkiNyurokuMap.get(key).getTemp_編集区分())
+                && !特記事項.equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項())
+                && getNotExists特記事項最小連番(gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号())
+                .compareTo(new Decimal(gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項連番().toString())) != 0) {
+            message = new ErrorMessage(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode(),
+                    DbeErrorMessages.特記事項追加削除不可.getMessage().replace("追加", "最小", "追加").evaluate());
         }
         return message;
     }
 
+    /**
+     * 入力済みの特記事項を取得します。
+     *
+     * @param key 対象となる特記事項のKEYです。
+     * @return 入力済みの特記事項
+     */
     public RString get変更前特記事項(RString key) {
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
         if (gaikyoTokkiNyurokuMap == null || gaikyoTokkiNyurokuMap.isEmpty()) {
@@ -755,10 +749,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         for (GaikyoTokkiYichiranNyurokuBusiness 特記事項情報 : gaikyoTokkiNyurokuMap.values()) {
             if (特記事項情報.getTemp_原本マスク区分().equals(GenponMaskKubun.原本.getコード())
                     && 認定調査特記事項番号.equals(特記事項情報.getTemp_認定調査特記事項番号())
-                    && 特記事項情報.getTemp_特記事項().isEmpty()) {
-                if (最小連番.compareTo(new Decimal(特記事項情報.getTemp_認定調査特記事項連番().toString())) > 0) {
-                    最小連番 = new Decimal(特記事項情報.getTemp_認定調査特記事項連番().toString());
-                }
+                    && 特記事項情報.getTemp_特記事項().isEmpty()
+                    && 最小連番.compareTo(new Decimal(特記事項情報.getTemp_認定調査特記事項連番().toString())) > 0) {
+                最小連番 = new Decimal(特記事項情報.getTemp_認定調査特記事項連番().toString());
             }
         }
         return 最小連番;
@@ -769,10 +762,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         for (GaikyoTokkiYichiranNyurokuBusiness 特記事項情報 : gaikyoTokkiNyurokuMap.values()) {
             if (特記事項情報.getTemp_原本マスク区分().equals(GenponMaskKubun.原本.getコード())
                     && 認定調査特記事項番号.equals(特記事項情報.getTemp_認定調査特記事項番号())
-                    && !特記事項情報.getTemp_特記事項().isEmpty()) {
-                if (最大連番.compareTo(new Decimal(特記事項情報.getTemp_認定調査特記事項連番().toString())) < 0) {
-                    最大連番 = new Decimal(特記事項情報.getTemp_認定調査特記事項連番().toString());
-                }
+                    && !特記事項情報.getTemp_特記事項().isEmpty()
+                    && 最大連番.compareTo(new Decimal(特記事項情報.getTemp_認定調査特記事項連番().toString())) < 0) {
+                最大連番 = new Decimal(特記事項情報.getTemp_認定調査特記事項連番().toString());
             }
         }
         return 最大連番;
@@ -781,8 +773,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     /**
      * マスクした特記事項の変更処理です。
      *
-     * @param key
-     * @param 特記事項
+     * @param key 概況特記一覧から対象となる特記事項を取得するKEY
+     * @param 特記事項 修正後特記事項
      */
     public void changeHiddenTokkiJiko(RString key, RString 特記事項) {
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
@@ -887,6 +879,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                         && (!前回認定調査特記事項番号.equals(returnList.get(k).get認定調査特記事項番号())
                         || 前回認定調査特記事項連番 != returnList.get(k).get認定調査特記事項連番())) {
                     j++;
+                }
+                if (returnList.size() <= 0) {
+                    break outSide;
                 }
                 if (GenponMaskKubun.原本.getコード().equals(returnList.get(k).get原本マスク区分().value())) {
                     GaikyoTokkiYichiranNyurokuBusiness entity = get概況特記一覧Entity(i, j, returnList.get(k));
@@ -1066,7 +1061,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         if (イメージ情報 != null) {
             NinteiShinseiJohoManager manager = InstanceProvider.create(NinteiShinseiJohoManager.class);
             NinteiShinseiJoho entity = manager.get要介護認定申請情報(temp_申請書管理番号);
-            FilesystemName sharedFileName = new FilesystemName(entity.get証記載保険者番号().concat(entity.get被保険者番号()));
+            FilesystemName sharedFileName = new FilesystemName(
+                    entity.get証記載保険者番号().concat(entity.get被保険者番号()).concat(認定調査特記事項番号));
             imagePath = getFilePath(イメージ情報.getイメージ共有ファイルID(), sharedFileName.toRString());
             if (RString.isNullOrEmpty(imagePath)) {
                 imagePath = getFilePath(イメージ情報.getイメージ共有ファイルID(), sharedFileName.toRString());
@@ -1261,11 +1257,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                         gaikyoTokkiNyurokuMap.get(key1).getTemp_認定調査特記事項番号());
                 div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setSrc(path);
             }
-            if (gaikyoTokkiNyurokuMap_MASK.get(key1) != null) {
-                if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(
-                        gaikyoTokkiNyurokuMap_MASK.get(key1).getTemp_特記事項テキストイメージ区分())) {
-                    div.getTokkiNyuryoku().setHiddenFirstTokkiJiko(gaikyoTokkiNyurokuMap_MASK.get(key1).getTemp_特記事項());
-                }
+            if (isExistsテキストマスク特記事項(gaikyoTokkiNyurokuMap_MASK.get(key1))) {
+                div.getTokkiNyuryoku().setHiddenFirstTokkiJiko(gaikyoTokkiNyurokuMap_MASK.get(key1).getTemp_特記事項());
             }
         }
 
@@ -1286,11 +1279,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                         gaikyoTokkiNyurokuMap.get(key2).getTemp_認定調査特記事項番号());
                 div.getTokkiNyuryoku().getTblSecondTokkiJiko().getImgSecondTokkiJiko().setSrc(path);
             }
-            if (gaikyoTokkiNyurokuMap_MASK.get(key2) != null) {
-                if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(
-                        gaikyoTokkiNyurokuMap_MASK.get(key2).getTemp_特記事項テキストイメージ区分())) {
-                    div.getTokkiNyuryoku().setHiddenSecondTokkiJiko(gaikyoTokkiNyurokuMap_MASK.get(key2).getTemp_特記事項());
-                }
+            if (isExistsテキストマスク特記事項(gaikyoTokkiNyurokuMap_MASK.get(key2))) {
+                div.getTokkiNyuryoku().setHiddenSecondTokkiJiko(gaikyoTokkiNyurokuMap_MASK.get(key2).getTemp_特記事項());
             }
         }
 
@@ -1311,11 +1301,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                         gaikyoTokkiNyurokuMap.get(key3).getTemp_認定調査特記事項番号());
                 div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setSrc(path);
             }
-            if (gaikyoTokkiNyurokuMap_MASK.get(key3) != null) {
-                if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(
-                        gaikyoTokkiNyurokuMap_MASK.get(key3).getTemp_特記事項テキストイメージ区分())) {
-                    div.getTokkiNyuryoku().setHiddenThirdTokkiJiko(gaikyoTokkiNyurokuMap_MASK.get(key3).getTemp_特記事項());
-                }
+            if (isExistsテキストマスク特記事項(gaikyoTokkiNyurokuMap_MASK.get(key3))) {
+                div.getTokkiNyuryoku().setHiddenThirdTokkiJiko(gaikyoTokkiNyurokuMap_MASK.get(key3).getTemp_特記事項());
             }
         }
 
@@ -1336,11 +1323,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                         gaikyoTokkiNyurokuMap.get(key4).getTemp_認定調査特記事項番号());
                 div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setSrc(path);
             }
-            if (gaikyoTokkiNyurokuMap_MASK.get(key4) != null) {
-                if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(
-                        gaikyoTokkiNyurokuMap_MASK.get(key4).getTemp_特記事項テキストイメージ区分())) {
-                    div.getTokkiNyuryoku().setHiddenFourthTokkiJiko(gaikyoTokkiNyurokuMap_MASK.get(key4).getTemp_特記事項());
-                }
+            if (isExistsテキストマスク特記事項(gaikyoTokkiNyurokuMap_MASK.get(key4))) {
+                div.getTokkiNyuryoku().setHiddenFourthTokkiJiko(gaikyoTokkiNyurokuMap_MASK.get(key4).getTemp_特記事項());
             }
         }
 
@@ -1361,14 +1345,18 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                         gaikyoTokkiNyurokuMap.get(key5).getTemp_認定調査特記事項番号());
                 div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setSrc(path);
             }
-            if (gaikyoTokkiNyurokuMap_MASK.get(key5) != null) {
-                if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(
-                        gaikyoTokkiNyurokuMap_MASK.get(key5).getTemp_特記事項テキストイメージ区分())) {
-                    div.getTokkiNyuryoku().setHiddenFifthTokkiJiko(gaikyoTokkiNyurokuMap_MASK.get(key5).getTemp_特記事項());
-                }
+            if (isExistsテキストマスク特記事項(gaikyoTokkiNyurokuMap_MASK.get(key5))) {
+                div.getTokkiNyuryoku().setHiddenFifthTokkiJiko(gaikyoTokkiNyurokuMap_MASK.get(key5).getTemp_特記事項());
             }
         }
+    }
 
+    private boolean isExistsテキストマスク特記事項(GaikyoTokkiYichiranNyurokuBusiness 概況特記マスク一覧情報) {
+        if (概況特記マスク一覧情報 != null && (TokkijikoTextImageKubun.テキスト.getコード()).equals(
+                概況特記マスク一覧情報.getTemp_特記事項テキストイメージ区分())) {
+            return true;
+        }
+        return false;
     }
 
     private void save認定調査票_特記情報(ShinseishoKanriNo temp_申請書管理番号,

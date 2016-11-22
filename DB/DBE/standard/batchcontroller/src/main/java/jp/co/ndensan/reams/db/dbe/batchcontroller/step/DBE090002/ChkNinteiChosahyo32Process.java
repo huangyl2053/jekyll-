@@ -600,11 +600,11 @@ public class ChkNinteiChosahyo32Process extends BatchProcessBase<YokaigoninteiEn
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite32.getImageFolderPath()));
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+        return sharedFileName;
     }
 
     private RString get名称24(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {

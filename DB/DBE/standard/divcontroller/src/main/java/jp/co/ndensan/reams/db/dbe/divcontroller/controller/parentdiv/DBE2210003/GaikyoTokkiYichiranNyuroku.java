@@ -11,18 +11,15 @@ import jp.co.ndensan.reams.db.dbe.business.core.gaikyotokkiyichirannyuroku.Gaiky
 import jp.co.ndensan.reams.db.dbe.business.core.textmasking.TextMaskingDataModel;
 import jp.co.ndensan.reams.db.dbe.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
-import jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.TextMasking.TextMasking;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.DBE2210003TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.ValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.HenshuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -32,8 +29,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -54,11 +49,11 @@ public class GaikyoTokkiYichiranNyuroku {
     private HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> gaikyoTokkiNyurokuMap = new HashMap<>();
     private int 当前ページ数 = 1;
 
-    private static final String KEY1 = "1";
-    private static final String KEY2 = "2";
-    private static final String KEY3 = "3";
-    private static final String KEY4 = "4";
-    private static final String KEY5 = "5";
+    private static final RString KEY1 = new RString("1");
+    private static final RString KEY2 = new RString("2");
+    private static final RString KEY3 = new RString("3");
+    private static final RString KEY4 = new RString("4");
+    private static final RString KEY5 = new RString("5");
 
     private enum DBE2210003Keys {
 
@@ -138,7 +133,7 @@ public class GaikyoTokkiYichiranNyuroku {
         RString key = getKey(div, KEY1);
 
         div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().setValue(
-                getHandler(div).formChange認定調査特記事項番号_表示(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo()));
+                getHandler(div).to認定調査特記事項番号_表示Form(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo()));
 
         if ((gaikyoTokkiNyurokuMap.get(key) != null)
                 && gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号()
@@ -170,7 +165,7 @@ public class GaikyoTokkiYichiranNyuroku {
         RString key = getKey(div, KEY2);
 
         div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().setValue(
-                getHandler(div).formChange認定調査特記事項番号_表示(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo()));
+                getHandler(div).to認定調査特記事項番号_表示Form(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo()));
 
         if ((gaikyoTokkiNyurokuMap.get(key) != null)
                 && gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号()
@@ -202,7 +197,7 @@ public class GaikyoTokkiYichiranNyuroku {
         RString key = getKey(div, KEY3);
 
         div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().setValue(
-                getHandler(div).formChange認定調査特記事項番号_表示(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo()));
+                getHandler(div).to認定調査特記事項番号_表示Form(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo()));
 
         if ((gaikyoTokkiNyurokuMap.get(key) != null)
                 && gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号()
@@ -234,7 +229,7 @@ public class GaikyoTokkiYichiranNyuroku {
         RString key = getKey(div, KEY4);
 
         div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().setValue(
-                getHandler(div).formChange認定調査特記事項番号_表示(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo()));
+                getHandler(div).to認定調査特記事項番号_表示Form(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo()));
 
         if ((gaikyoTokkiNyurokuMap.get(key) != null)
                 && gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号()
@@ -266,7 +261,7 @@ public class GaikyoTokkiYichiranNyuroku {
         RString key = getKey(div, KEY5);
 
         div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().setValue(
-                getHandler(div).formChange認定調査特記事項番号_表示(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo()));
+                getHandler(div).to認定調査特記事項番号_表示Form(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo()));
 
         if ((gaikyoTokkiNyurokuMap.get(key) != null)
                 && gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号()
@@ -375,7 +370,7 @@ public class GaikyoTokkiYichiranNyuroku {
         map.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtFirstTokkiJiko().getValue());
         map.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenFirstTokkiJiko());
 
-        RString 調査項目番号 = getHandler(div).formChange認定調査特記事項番号_マスキング(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
+        RString 調査項目番号 = getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
 
         TextMaskingDataModel model = new TextMaskingDataModel();
         model.set調査項目番号(調査項目番号);
@@ -413,7 +408,7 @@ public class GaikyoTokkiYichiranNyuroku {
         map.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue());
         map.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenSecondTokkiJiko());
 
-        RString 調査項目番号 = getHandler(div).formChange認定調査特記事項番号_マスキング(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
+        RString 調査項目番号 = getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
 
         TextMaskingDataModel model = new TextMaskingDataModel();
         model.set調査項目番号(調査項目番号);
@@ -451,7 +446,7 @@ public class GaikyoTokkiYichiranNyuroku {
         map.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
         map.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenThirdTokkiJiko());
 
-        RString 調査項目番号 = getHandler(div).formChange認定調査特記事項番号_マスキング(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
+        RString 調査項目番号 = getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
 
         TextMaskingDataModel model = new TextMaskingDataModel();
         model.set調査項目番号(調査項目番号);
@@ -489,7 +484,7 @@ public class GaikyoTokkiYichiranNyuroku {
         map.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
         map.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenFourthTokkiJiko());
 
-        RString 調査項目番号 = getHandler(div).formChange認定調査特記事項番号_マスキング(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
+        RString 調査項目番号 = getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
 
         TextMaskingDataModel model = new TextMaskingDataModel();
         model.set調査項目番号(調査項目番号);
@@ -527,7 +522,7 @@ public class GaikyoTokkiYichiranNyuroku {
         map.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
         map.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenFifthTokkiJiko());
 
-        RString 調査項目番号 = getHandler(div).formChange認定調査特記事項番号_マスキング(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
+        RString 調査項目番号 = getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
 
         TextMaskingDataModel model = new TextMaskingDataModel();
         model.set調査項目番号(調査項目番号);
@@ -848,9 +843,9 @@ public class GaikyoTokkiYichiranNyuroku {
         return new GaikyoTokkiYichiranNyurokuHandler(div);
     }
 
-    private RString getKey(GaikyoTokkiYichiranNyurokuDiv div, String KEY番号) {
+    private RString getKey(GaikyoTokkiYichiranNyurokuDiv div, RString key) {
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
-        return new RString(String.valueOf(当前ページ数).concat(KEY番号));
+        return new RString(String.valueOf(当前ページ数).concat(key.toString()));
     }
 
 }
