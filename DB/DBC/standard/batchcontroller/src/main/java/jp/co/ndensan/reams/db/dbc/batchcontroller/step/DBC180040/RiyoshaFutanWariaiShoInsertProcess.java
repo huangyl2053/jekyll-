@@ -108,7 +108,9 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
 
     @Override
     protected void process(RiyoshaFutanwariaishoTempEntity entity) {
-        if (entity.get被保台帳() != null && (entity.get被保台帳().getShikakuSoshitsuYMD() == null || entity.get被保台帳().getShikakuSoshitsuYMD().isEmpty())) {
+        if (entity != null
+                && entity.get被保台帳() != null
+                && (entity.get被保台帳().getShikakuSoshitsuYMD() == null || entity.get被保台帳().getShikakuSoshitsuYMD().isEmpty())) {
             RiyoshaFutanwariaishoEntity item = new RiyoshaFutanwariaishoEntity();
             item.setDbT3113RiyoshaFutanWariai_insertDantaiCd(entity.get利用者負担割合().getInsertDantaiCd());
             item.setDbT3113RiyoshaFutanWariai_isDeleted(entity.get利用者負担割合().getIsDeleted());
@@ -174,7 +176,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
             tableWriter.insert(item);
             insertShoKofuKaishu(entity);
         } else {
-            if (entity.get被保台帳() != null) {
+            if (entity != null && entity.get被保台帳() != null) {
                 ExpandedInformation expandedInformation
                         = new ExpandedInformation(CODE, DATANAME, entity.get被保台帳().getHihokenshaNo().getColumnValue());
                 personalDataList.add(PersonalData.of(entity.get被保台帳().getShikibetsuCode(), expandedInformation));

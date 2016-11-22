@@ -224,20 +224,20 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
             @Override
             public int compare(KyufuJissekiChukanKogaku8Entity arg0, KyufuJissekiChukanKogaku8Entity arg1) {
                 if (arg0.get基準収入額適用管理一時() == null || arg1.get基準収入額適用管理一時() == null) {
-                    return -1;
+                    return 0;
                 }
-                if (arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD() == null
-                        || arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD() == null) {
+                FlexibleYearMonth 適用開始年月_1 = arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD();
+                FlexibleYearMonth 適用開始年月_0 = arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD();
+                if (null == 適用開始年月_0
+                        || null == 適用開始年月_1) {
                     return arg0.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue().
                             compareTo(arg1.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue());
                 }
-                if (arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD().
-                        compareTo(arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD()) == 0) {
+                if (適用開始年月_1.compareTo(適用開始年月_0) == 0) {
                     return arg0.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue().
                             compareTo(arg1.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue());
                 }
-                return arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD().
-                        compareTo(arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD());
+                return 適用開始年月_1.compareTo(適用開始年月_0);
             }
         });
         return 処理対象List;

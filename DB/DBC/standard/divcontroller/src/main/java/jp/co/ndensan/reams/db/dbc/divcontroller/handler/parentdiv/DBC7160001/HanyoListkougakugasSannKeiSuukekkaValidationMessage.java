@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.ca.cac.divcontroller.handler.parentdiv.cace102000;
+package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7160001;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;

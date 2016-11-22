@@ -1856,6 +1856,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                         ? RString.EMPTY : 宛名情報.getカナ名称().getColumnValue());
                 entity.set生年月日(宛名情報.get生年月日());
                 entity.set性別コード(宛名情報.get性別());
+                entity.set被保険者氏名(宛名情報.get名称() == null
+                        ? RString.EMPTY : 宛名情報.get名称().getColumnValue());
             }
             if (市町村 != null && DonyuKeitaiCode.事務広域.equals(市町村.get導入形態コード())) {
                 entity.set広域連合_政令市_保険者番号(市町村.get市町村情報().get運用保険者番号());
@@ -1883,9 +1885,6 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 entity.set国民健康保険個人番号(国保資格.getKokuhoKojinNo());
             }
             entity.set送付年月(処理年月);
-            if (宛名情報 != null && 宛名情報.get名称() != null) {
-                entity.set被保険者氏名(宛名情報.get名称().getColumnValue());
-            }
         }
     }
 

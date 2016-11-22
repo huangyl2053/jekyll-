@@ -158,7 +158,10 @@
         ,'','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','','{  }') AS "FindShikibetsuTaisho"
         WHERE
         ("FindShikibetsuTaisho"."juminJotaiCode"='2' OR "FindShikibetsuTaisho"."juminJotaiCode"='3')
-        AND "FindShikibetsuTaisho"."seinengappiYMD"<![CDATA[<=]]>#{処理年度_minus39_0401}
+        INNER JOIN
+        rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
+        "DbV1001HihokenshaDaicho"."jushochiTokureiFlag"='1'
+        AND "DbV1001HihokenshaDaicho"."shikibetsuCode"="FindShikibetsuTaisho"."shikibetsuCode"
         GROUP BY
         "FindShikibetsuTaisho"."shikibetsuCode",
         "FindShikibetsuTaisho"."juminShubetsuCode",
@@ -187,7 +190,8 @@
         "FindShikibetsuTaisho"."tennyumaeBanchi",
         "FindShikibetsuTaisho"."tennyumaeKatagaki",
         "FindShikibetsuTaisho"."torokuJiyuCode",
-        "FindShikibetsuTaisho"."currentFlag")) AS MIX
+        "FindShikibetsuTaisho"."currentFlag"
+        )) AS MIX
         ORDER BY MIX."識別コード"
     </select>
     
