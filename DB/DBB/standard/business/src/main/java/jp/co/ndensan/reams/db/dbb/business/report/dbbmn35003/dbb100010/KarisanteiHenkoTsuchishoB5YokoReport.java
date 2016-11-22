@@ -89,11 +89,11 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
         List<Kitsuki> 特徴納期情報リスト = 編集後仮算定通知書共通情報.get特徴納期情報リスト();
         List<UniversalSignDeliveryInformation> 普徴納期情報リスト = 編集後仮算定通知書共通情報.get普徴納期情報リスト();
 
-        int 行 = 1;
-        if (特徴納期情報リスト != null && !特徴納期情報リスト.isEmpty()) {
+        int 行 = 0;
+        if (特徴納期情報リスト != null && !特徴納期情報リスト.isEmpty() && !is普徴のみ(編集後仮算定通知書共通情報)) {
             行 = 特徴納期情報リスト.size();
         }
-        if (普徴納期情報リスト != null && 普徴納期情報リスト.size() > 行) {
+        if (普徴納期情報リスト != null && 普徴納期情報リスト.size() > 行 && !is特徴のみ(編集後仮算定通知書共通情報)) {
             行 = 普徴納期情報リスト.size();
         }
         if (行 < NUM8) {
@@ -210,7 +210,7 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
         if (更正後 == null) {
             更正後 = new EditedKariSanteiTsuchiShoKyotsuAfterCorrection();
         }
-        if (特別徴収.equals(item.getKoremadeChoshuho())) {
+        if (!is普徴のみ(通知書共通情報)) {
             if (行 <= 2 && 特徴納期情報リスト != null && 特徴納期情報リスト.size() > 行) {
                 Kitsuki kitsuki = 特徴納期情報リスト.get(行);
                 item.setListKibetsu_1(kitsuki.get期());
@@ -236,9 +236,17 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
                         ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額03(), 0) : RString.EMPTY);
             }
         }
-        if (普通徴収.equals(item.getKoremadeChoshuho())) {
+        if (!is特徴のみ(通知書共通情報)) {
             set普徴(行, item, 普徴納期情報リスト, 更正前, 更正後);
         }
+    }
+
+    private boolean is普徴のみ(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報) {
+        return !編集後仮算定通知書共通情報.get更正後().get更正後徴収方法().contains(特別徴収);
+    }
+
+    private boolean is特徴のみ(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報) {
+        return !編集後仮算定通知書共通情報.get更正後().get更正後徴収方法().contains(普通徴収);
     }
 
     private void set普徴(int 行, KarisanteiHenkoTsuchishoB5YokoItem item, List<UniversalSignDeliveryInformation> 普徴納期情報リスト,
