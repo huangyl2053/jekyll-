@@ -50,7 +50,7 @@ public class HokenshaSofuListPanel {
         HihokenshaJohoSoufuDataSakuseyi 保険者情報送付 = HihokenshaJohoSoufuDataSakuseyi.createInstance();
         List<KokuhorenSofuJohoResult> resultList = 保険者情報送付.getKokuhorenSofuJoho(処理年月);
         if (!ResponseHolder.isReRequest() && (resultList.isEmpty())) {
-            return ResponseData.of(div).addMessage(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage()).respond();
+            return ResponseData.of(div).addMessage(DbcErrorMessages.国保連送付処理_処理月チェック.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).initialize(処理年月, resultList);
@@ -77,7 +77,7 @@ public class HokenshaSofuListPanel {
         HihokenshaJohoSoufuDataSakuseyi 保険者情報送付 = HihokenshaJohoSoufuDataSakuseyi.createInstance();
         List<KokuhorenSofuJohoResult> resultList = 保険者情報送付.getKokuhorenSofuJoho(処理年月);
         if (!ResponseHolder.isReRequest() && (resultList.isEmpty())) {
-            return ResponseData.of(div).addMessage(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage()).respond();
+            return ResponseData.of(div).addMessage(DbcErrorMessages.国保連送付処理_処理月チェック.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).initialize(処理年月, resultList);
