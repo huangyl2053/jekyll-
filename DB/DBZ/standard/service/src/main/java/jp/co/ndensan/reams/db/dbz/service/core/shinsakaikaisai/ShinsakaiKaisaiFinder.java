@@ -48,8 +48,7 @@ public class ShinsakaiKaisaiFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiFinder}のインスタンス
      */
     public static ShinsakaiKaisaiFinder createInstance() {
         return InstanceProvider.create(ShinsakaiKaisaiFinder.class);
@@ -62,7 +61,7 @@ public class ShinsakaiKaisaiFinder {
      * @param 表示期間To 表示期間To
      * @param モード モード
      * @param 表示条件 表示条件
-     * @param 最大表示件数
+     * @param 最大表示件数 Decimal
      * @param ダミー審査会 ダミー審査会
      * @return ShinsakaiKaisai 審査会一覧情報 nullが返る可能性があります。
      */

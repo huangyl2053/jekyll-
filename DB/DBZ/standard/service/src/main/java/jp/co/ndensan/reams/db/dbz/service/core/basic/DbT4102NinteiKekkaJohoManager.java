@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.service.core.basic;
 
 import static java.util.Objects.requireNonNull;
@@ -19,8 +18,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @author n3213
  */
 public class DbT4102NinteiKekkaJohoManager {
+
     private final DbT4102NinteiKekkaJohoDac dac;
-    
+
+    /**
+     * コンストラクタです。
+     */
     public DbT4102NinteiKekkaJohoManager() {
         dac = InstanceProvider.create(DbT4102NinteiKekkaJohoDac.class);
     }
@@ -33,10 +36,16 @@ public class DbT4102NinteiKekkaJohoManager {
     DbT4102NinteiKekkaJohoManager(DbT4102NinteiKekkaJohoDac dac) {
         this.dac = dac;
     }
-    
+
+    /**
+     * 主キーに合致する要介護認定申請情報を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return DbT4102NinteiKekkaJoho
+     */
     public DbT4102NinteiKekkaJoho get要介護認定申請情報(ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        
+
         DbT4102NinteiKekkaJohoEntity entity = dac.selectByKey(
                 申請書管理番号);
         if (entity == null) {
