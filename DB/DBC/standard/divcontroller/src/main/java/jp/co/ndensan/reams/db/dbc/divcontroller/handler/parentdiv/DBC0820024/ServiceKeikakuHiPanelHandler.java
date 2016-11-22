@@ -50,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class ServiceKeikakuHiPanelHandler {
 
     private final ServiceKeikakuHiPanelDiv div;
-    private static final int 連番LENGTH = 2;
     private static final RString 連番_1 = new RString("01");
     private static final RString 事業者区分BLANK = new RString("0");
     private static final FlexibleYearMonth サービス年月_200904 = new FlexibleYearMonth("200904");
@@ -502,15 +501,16 @@ public class ServiceKeikakuHiPanelHandler {
      *
      * @param parameter ShoukanharaihishinseimeisaikensakuParameter
      * @param entity200604Result ShokanServicePlan200604Result
+     * @param state boolean
      * @return サービス計画200604
      */
-    public ShokanServicePlan200604Result saveサービス計画200604(ShoukanharaihishinseimeisaikensakuParameter parameter, ShokanServicePlan200604Result entity200604Result) {
+    public ShokanServicePlan200604Result saveサービス計画200604(ShoukanharaihishinseimeisaikensakuParameter parameter,
+            ShokanServicePlan200604Result entity200604Result, boolean state) {
         HihokenshaNo 被保険者番号 = parameter.get被保険者番号();
         FlexibleYearMonth サービス年月 = parameter.getサービス年月();
         RString 整理番号 = parameter.get整理番号();
         RString 様式番号 = parameter.get様式番号();
         RString 明細番号 = parameter.get明細番号();
-        boolean 明細番号区分 = 明細番号 == null || 明細番号.isEmpty();
         JigyoshaNo 事業者番号 = parameter.get事業者番号();
         if (サービス年月_200604.isBeforeOrEquals(サービス年月) && サービス年月.isBefore(サービス年月_200904)) {
             ShokanServicePlan200604 entity200604 = 保存_データ_200604(entity200604Result,
@@ -521,7 +521,7 @@ public class ServiceKeikakuHiPanelHandler {
                     明細番号,
                     整理番号);
             if (null != entity200604) {
-                if (明細番号区分) {
+                if (state) {
                     entity200604 = entity200604.added();
                 } else {
                     entity200604 = entity200604.modified();
@@ -537,15 +537,16 @@ public class ServiceKeikakuHiPanelHandler {
      *
      * @param parameter ShoukanharaihishinseimeisaikensakuParameter
      * @param entity200004Result ShokanServicePlan200004Result
+     * @param state boolean
      * @return サービス計画200004
      */
-    public ShokanServicePlan200004Result saveサービス計画200004(ShoukanharaihishinseimeisaikensakuParameter parameter, ShokanServicePlan200004Result entity200004Result) {
+    public ShokanServicePlan200004Result saveサービス計画200004(ShoukanharaihishinseimeisaikensakuParameter parameter,
+            ShokanServicePlan200004Result entity200004Result, boolean state) {
         HihokenshaNo 被保険者番号 = parameter.get被保険者番号();
         FlexibleYearMonth サービス年月 = parameter.getサービス年月();
         RString 整理番号 = parameter.get整理番号();
         RString 様式番号 = parameter.get様式番号();
         RString 明細番号 = parameter.get明細番号();
-        boolean 明細番号区分 = 明細番号 == null || 明細番号.isEmpty();
         JigyoshaNo 事業者番号 = parameter.get事業者番号();
         if (サービス年月.isBefore(サービス年月_200604)) {
             ShokanServicePlan200004 entity200004 = 保存_データ_200004(entity200004Result,
@@ -556,7 +557,7 @@ public class ServiceKeikakuHiPanelHandler {
                     明細番号,
                     整理番号);
             if (null != entity200004) {
-                if (明細番号区分) {
+                if (state) {
                     entity200004 = entity200004.added();
                 } else {
                     entity200004 = entity200004.modified();

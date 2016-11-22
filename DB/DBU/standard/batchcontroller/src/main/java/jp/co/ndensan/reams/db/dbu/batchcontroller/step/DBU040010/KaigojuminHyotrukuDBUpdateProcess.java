@@ -103,8 +103,8 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
         List<ShikibetsuTaishoIdoJoho> 宛名識別対象list = finder.get宛名識別対象異動(keyBuilder.build());
         JuminIdoRendoShikakuToroku juminidorendoshikakutoroku = new JuminIdoRendoShikakuToroku();
         for (ShikibetsuTaishoIdoJoho 宛名識別対象 : 宛名識別対象list) {
-            if ((異動後.equals(宛名識別対象.get異動前後区分()) && (宛名識別対象.get現地方公共団体コード() != null)
-                    && (現地方公共団体コード.equals(宛名識別対象.get現地方公共団体コード().value())))) {
+            if (異動後.equals(宛名識別対象.get異動前後区分()) && 宛名識別対象.get現地方公共団体コード() != null
+                    && 現地方公共団体コード.equals(宛名識別対象.get現地方公共団体コード().value())) {
                 juminidorendoshikakutoroku.to住民異動情報((宛名識別対象), csvWriter);
             }
         }
@@ -115,7 +115,7 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
         for (int i = 0; i < processParameter.getShichosonCodelist().size(); i++) {
             if (!kaigojum.getlist().contains(processParameter.getShichosonCodelist().get(i))) {
                 DbT7022ShoriDateKanriEntity dateentity = new DbT7022ShoriDateKanriEntity();
-                tableWrite.insert(kaigojum.データ編集(processParameter, 処理日時, dateentity, 市町村コード));
+                tableWrite.insert(kaigojum.データ編集(processParameter, 処理日時, dateentity, processParameter.getShichosonCodelist().get(i)));
                 宛名識別対象異動分取得PSM(null, processParameter.getShichosonCodelist().get(i));
             }
         }
