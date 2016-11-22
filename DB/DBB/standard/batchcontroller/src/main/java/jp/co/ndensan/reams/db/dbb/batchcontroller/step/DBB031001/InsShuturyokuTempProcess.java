@@ -73,14 +73,14 @@ public class InsShuturyokuTempProcess extends BatchProcessBase<DbT2015KeisangoJo
         if (特徴期別金額の合計.compareTo(Decimal.ZERO) == NUM_0
                 && 普徴期期別金額合計.compareTo(Decimal.ZERO) == NUM_0) {
             return RString.EMPTY;
-        } else if (Decimal.ONE.compareTo(特徴期別金額の合計) < NUM_0
+        } else if (Decimal.ONE.compareTo(特徴期別金額の合計) <= NUM_0
                 && 普徴期期別金額合計.compareTo(Decimal.ZERO) == NUM_0) {
             return 徴収方法_特別徴収;
         } else if (特徴期別金額の合計.compareTo(Decimal.ZERO) == NUM_0
-                && Decimal.ONE.compareTo(普徴期期別金額合計) < NUM_0) {
+                && Decimal.ONE.compareTo(普徴期期別金額合計) <= NUM_0) {
             return 徴収方法_普通徴収;
-        } else if (Decimal.ONE.compareTo(特徴期別金額の合計) < NUM_0
-                && Decimal.ONE.compareTo(普徴期期別金額合計) < NUM_0) {
+        } else if (Decimal.ONE.compareTo(特徴期別金額の合計) <= NUM_0
+                && Decimal.ONE.compareTo(普徴期期別金額合計) <= NUM_0) {
             return 徴収方法_併用徴収;
         } else {
             return RString.EMPTY;
