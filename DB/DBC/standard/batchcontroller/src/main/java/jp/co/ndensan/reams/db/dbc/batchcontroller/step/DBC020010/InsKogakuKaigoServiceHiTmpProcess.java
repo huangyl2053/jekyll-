@@ -44,10 +44,10 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
     private static final RString TABLE_高額介護サービス費支給判定結果全件一時 = new RString("TempKogakuShikyuHanteiKekkaZen");
     private static final RString TABLE_高額介護サービス費支給審査決定全件一時 = new RString("TempKogakuShikyuShinsaKetteiZen");
     private static final RString TABLE_高額介護サービス費給付対象者合計全件一時 = new RString("TempKogakuKyufuTaishoshaGokeiZen");
-    private static final RString TABLE_高額介護サービス費支給申請全件一時_新規2_新規3 = new RString("TempKogakuShikyuShinseiZenForInsert");
-    private static final RString TABLE_高額介護サービス費支給判定結果全件一時_新規2_新規3 = new RString("TempKogakuShikyuHanteiKekkaZenForInsert");
-    private static final RString TABLE_高額介護サービス費支給審査決定全件一時_新規2_新規3 = new RString("TempKogakuShikyuShinsaKetteiZenForInsert");
-    private static final RString TABLE_高額介護サービス費給付対象者合計全件一時_新規2_新規3 = new RString("TempKogakuKyufuTaishoshaGokeiZenForInsert");
+    private static final RString TABLE_高額介護サービス費支給申請全件一時_新規 = new RString("TempKogakuShikyuShinseiZenForInsert");
+    private static final RString TABLE_高額介護サービス費支給判定結果全件一時_新規 = new RString("TempKogakuShikyuHanteiKekkaZenForInsert");
+    private static final RString TABLE_高額介護サービス費支給審査決定全件一時_新規 = new RString("TempKogakuShikyuShinsaKetteiZenForInsert");
+    private static final RString TABLE_高額介護サービス費給付対象者合計全件一時_新規 = new RString("TempKogakuKyufuTaishoshaGokeiZenForInsert");
     private static final RString TABLE_高額介護サービス費給付対象者明細全件更新一時 = new RString("TempKogakuKyufuTaishoshaMeisaiZenUpdate");
     private static final RString TABLE_給付実績中間高額一時9 = new RString("TempKyufujissekiTyukann9");
     private static final RString DELIMITER = new RString("～");
@@ -67,13 +67,13 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
     @BatchWriter
     BatchEntityCreatedTempTableWriter 合計全件一時Writer;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 申請全件一時_新規2_新規3Writer;
+    BatchEntityCreatedTempTableWriter 申請全件一時_新規Writer;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 判定結果全件一時_新規2_新規3Writer;
+    BatchEntityCreatedTempTableWriter 判定結果全件一時_新規Writer;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 審査決定全件一時_新規2_新規3Writer;
+    BatchEntityCreatedTempTableWriter 審査決定全件一時_新規Writer;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 合計全件一時_新規2_新規3Writer;
+    BatchEntityCreatedTempTableWriter 合計全件一時_新規Writer;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 中間高額一時Writer;
     @BatchWriter
@@ -106,14 +106,14 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
                 TABLE_高額介護サービス費支給審査決定全件一時, DbT3058KogakuShikyuShinsaKetteiEntity.class);
         合計全件一時Writer = new BatchEntityCreatedTempTableWriter(
                 TABLE_高額介護サービス費給付対象者合計全件一時, DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
-        申請全件一時_新規2_新規3Writer = new BatchEntityCreatedTempTableWriter(
-                TABLE_高額介護サービス費支給申請全件一時_新規2_新規3, DbT3056KogakuShikyuShinseiEntity.class);
-        判定結果全件一時_新規2_新規3Writer = new BatchEntityCreatedTempTableWriter(
-                TABLE_高額介護サービス費支給判定結果全件一時_新規2_新規3, DbT3057KogakuShikyuHanteiKekkaEntity.class);
-        審査決定全件一時_新規2_新規3Writer = new BatchEntityCreatedTempTableWriter(
-                TABLE_高額介護サービス費支給審査決定全件一時_新規2_新規3, DbT3058KogakuShikyuShinsaKetteiEntity.class);
-        合計全件一時_新規2_新規3Writer = new BatchEntityCreatedTempTableWriter(
-                TABLE_高額介護サービス費給付対象者合計全件一時_新規2_新規3, DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
+        申請全件一時_新規Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給申請全件一時_新規, DbT3056KogakuShikyuShinseiEntity.class);
+        判定結果全件一時_新規Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給判定結果全件一時_新規, DbT3057KogakuShikyuHanteiKekkaEntity.class);
+        審査決定全件一時_新規Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給審査決定全件一時_新規, DbT3058KogakuShikyuShinsaKetteiEntity.class);
+        合計全件一時_新規Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費給付対象者合計全件一時_新規, DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
         中間高額一時Writer = new BatchEntityCreatedTempTableWriter(
                 TABLE_給付実績中間高額一時9, TempKyufujissekiTyukannEntity.class);
         明細全件更新一時Writer = new BatchEntityCreatedTempTableWriter(
@@ -227,13 +227,13 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
                 DbT3058KogakuShikyuShinsaKetteiEntity 審査決定全件一時 = get審査決定全件一時(給付実績中間高額Entity);
                 DbT3055KogakuKyufuTaishoshaGokeiEntity 合計全件一時 = get合計全件一時(給付実績中間高額Entity);
                 申請全件一時Writer.insert(申請全件一時);
-                申請全件一時_新規2_新規3Writer.insert(申請全件一時);
+                申請全件一時_新規Writer.insert(申請全件一時);
                 判定結果全件一時Writer.insert(判定結果全件一時);
-                判定結果全件一時_新規2_新規3Writer.insert(判定結果全件一時);
+                判定結果全件一時_新規Writer.insert(判定結果全件一時);
                 審査決定全件一時Writer.insert(審査決定全件一時);
-                審査決定全件一時_新規2_新規3Writer.insert(審査決定全件一時);
+                審査決定全件一時_新規Writer.insert(審査決定全件一時);
                 合計全件一時Writer.insert(合計全件一時);
-                合計全件一時_新規2_新規3Writer.insert(合計全件一時);
+                合計全件一時_新規Writer.insert(合計全件一時);
             } else if (区分コード_1.equals(国保連共同処理受託区分_高額)
                     && 区分コード_2.equals(給付実績中間高額Entity.getDataKubun())) {
                 明細全件更新一時Writer.insert(get明細全件更新一時(給付実績中間高額Entity));
@@ -292,13 +292,13 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
                         TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity 明細全件更新一時 = get明細全件更新一時(給付実績中間高額);
                         明細全件更新一時.setRirekiNo(判定結果全件一時.getRirekiNo());
                         申請全件一時Writer.insert(申請全件一時);
-                        申請全件一時_新規2_新規3Writer.insert(申請全件一時);
+                        申請全件一時_新規Writer.insert(申請全件一時);
                         判定結果全件一時Writer.insert(判定結果全件一時);
-                        判定結果全件一時_新規2_新規3Writer.insert(判定結果全件一時);
+                        判定結果全件一時_新規Writer.insert(判定結果全件一時);
                         審査決定全件一時Writer.insert(審査決定全件一時);
-                        審査決定全件一時_新規2_新規3Writer.insert(審査決定全件一時);
+                        審査決定全件一時_新規Writer.insert(審査決定全件一時);
                         合計全件一時Writer.insert(合計全件一時);
-                        合計全件一時_新規2_新規3Writer.insert(合計全件一時);
+                        合計全件一時_新規Writer.insert(合計全件一時);
                         明細全件更新一時Writer.insert(明細全件更新一時);
                     }
                 }
