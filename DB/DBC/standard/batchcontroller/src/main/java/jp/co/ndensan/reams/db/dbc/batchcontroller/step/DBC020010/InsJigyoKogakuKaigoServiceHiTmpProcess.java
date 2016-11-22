@@ -188,7 +188,7 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         }
         if (!isマッチ) {
             if (!is出力をしない) {
-                insert高額全件一時();
+                insert高額全件一時(結果Entity);
             }
         } else if (is対象者受取年月が設定1件以上) {
             if (区分コード_3.equals(給付実績中間事業高額Entity.getKyufuSakuseiKubunCode())) {
@@ -241,49 +241,17 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
                     明細全件更新一時Writer.insert(get明細全件更新一時(給付実績中間事業高額Entity));
                 }
             } else {
-                for (TyukannJigyoKogakuRelateEntity entity : 結果全件List) {
-                    TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額 = entity.get給付実績中間事業高額Entity();
-                    if (区分コード_1.equals(給付実績中間事業高額.getDataKubun())) {
-                        中間高額一時Writer.insert(給付実績中間事業高額);
-                    }
-                    if (区分コード_1.equals(国保連共同処理受託区分_高額)
-                            && 区分コード_1.equals(給付実績中間事業高額.getDataKubun())) {
-                        DbT3110JigyoKogakuShikyuShinseiEntity 申請全件一時 = get申請全件一時_3(給付実績中間事業高額, entity);
-                        DbT3111JigyoKogakuShikyuHanteiKekkaEntity 判定結果全件一時 = get判定結果全件一時_3(給付実績中間事業高額, entity);
-                        DbT3112KogakuShikyuShinsaKetteiEntity 審査決定全件一時 = get審査決定全件一時_3(給付実績中間事業高額, entity);
-                        DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity 合計全件一時 = get合計全件一時_3(給付実績中間事業高額, entity, 算定済高額金額);
-                        TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity 明細全件更新一時 = get明細全件更新一時(給付実績中間事業高額);
-                        明細全件更新一時.setRirekiNo(判定結果全件一時.getRirekiNo().intValue());
-                        申請全件一時Writer.insert(申請全件一時);
-                        申請全件一時_新規Writer.insert(申請全件一時);
-                        判定結果全件一時Writer.insert(判定結果全件一時);
-                        判定結果全件一時_新規Writer.insert(判定結果全件一時);
-                        審査決定全件一時Writer.insert(審査決定全件一時);
-                        審査決定全件一時_新規Writer.insert(審査決定全件一時);
-                        合計全件一時Writer.insert(合計全件一時);
-                        合計全件一時_新規Writer.insert(合計全件一時);
-                        明細全件更新一時Writer.insert(明細全件更新一時);
-                    }
-                }
-            }
-        }
-    }
-
-    private void insert高額全件一時() {
-        for (TyukannJigyoKogakuRelateEntity 結果Entity : 結果全件List) {
-            TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額Entity = 結果Entity.get給付実績中間事業高額Entity();
-            if (!区分コード_3.equals(給付実績中間事業高額Entity.getKyufuSakuseiKubunCode())
-                    && Decimal.ZERO.compareTo(給付実績中間事業高額Entity.getSikyugaku()) == -1) {
                 if (区分コード_1.equals(給付実績中間事業高額Entity.getDataKubun())) {
-                    給付実績中間事業高額Entity.setKogakuHanteiKekka(RString.EMPTY);
                     中間高額一時Writer.insert(給付実績中間事業高額Entity);
                 }
                 if (区分コード_1.equals(国保連共同処理受託区分_高額)
                         && 区分コード_1.equals(給付実績中間事業高額Entity.getDataKubun())) {
-                    DbT3110JigyoKogakuShikyuShinseiEntity 申請全件一時 = get申請全件一時(給付実績中間事業高額Entity);
-                    DbT3111JigyoKogakuShikyuHanteiKekkaEntity 判定結果全件一時 = get判定結果全件一時(給付実績中間事業高額Entity);
-                    DbT3112KogakuShikyuShinsaKetteiEntity 審査決定全件一時 = get審査決定全件一時(給付実績中間事業高額Entity);
-                    DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity 合計全件一時 = get合計全件一時(給付実績中間事業高額Entity);
+                    DbT3110JigyoKogakuShikyuShinseiEntity 申請全件一時 = get申請全件一時_3(給付実績中間事業高額Entity, 結果Entity);
+                    DbT3111JigyoKogakuShikyuHanteiKekkaEntity 判定結果全件一時 = get判定結果全件一時_3(給付実績中間事業高額Entity, 結果Entity);
+                    DbT3112KogakuShikyuShinsaKetteiEntity 審査決定全件一時 = get審査決定全件一時_3(給付実績中間事業高額Entity, 結果Entity);
+                    DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity 合計全件一時 = get合計全件一時_3(給付実績中間事業高額Entity, 結果Entity, 算定済高額金額);
+                    TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity 明細全件更新一時 = get明細全件更新一時(給付実績中間事業高額Entity);
+                    明細全件更新一時.setRirekiNo(判定結果全件一時.getRirekiNo().intValue());
                     申請全件一時Writer.insert(申請全件一時);
                     申請全件一時_新規Writer.insert(申請全件一時);
                     判定結果全件一時Writer.insert(判定結果全件一時);
@@ -292,10 +260,37 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
                     審査決定全件一時_新規Writer.insert(審査決定全件一時);
                     合計全件一時Writer.insert(合計全件一時);
                     合計全件一時_新規Writer.insert(合計全件一時);
-                } else if (区分コード_1.equals(国保連共同処理受託区分_高額)
-                        && 区分コード_2.equals(給付実績中間事業高額Entity.getDataKubun())) {
-                    明細全件更新一時Writer.insert(get明細全件更新一時(給付実績中間事業高額Entity));
+                    明細全件更新一時Writer.insert(明細全件更新一時);
                 }
+            }
+        }
+    }
+
+    private void insert高額全件一時(TyukannJigyoKogakuRelateEntity 結果Entity) {
+        TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額Entity = 結果Entity.get給付実績中間事業高額Entity();
+        if (!区分コード_3.equals(給付実績中間事業高額Entity.getKyufuSakuseiKubunCode())
+                && Decimal.ZERO.compareTo(給付実績中間事業高額Entity.getSikyugaku()) == -1) {
+            if (区分コード_1.equals(給付実績中間事業高額Entity.getDataKubun())) {
+                給付実績中間事業高額Entity.setKogakuHanteiKekka(RString.EMPTY);
+                中間高額一時Writer.insert(給付実績中間事業高額Entity);
+            }
+            if (区分コード_1.equals(国保連共同処理受託区分_高額)
+                    && 区分コード_1.equals(給付実績中間事業高額Entity.getDataKubun())) {
+                DbT3110JigyoKogakuShikyuShinseiEntity 申請全件一時 = get申請全件一時(給付実績中間事業高額Entity);
+                DbT3111JigyoKogakuShikyuHanteiKekkaEntity 判定結果全件一時 = get判定結果全件一時(給付実績中間事業高額Entity);
+                DbT3112KogakuShikyuShinsaKetteiEntity 審査決定全件一時 = get審査決定全件一時(給付実績中間事業高額Entity);
+                DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity 合計全件一時 = get合計全件一時(給付実績中間事業高額Entity);
+                申請全件一時Writer.insert(申請全件一時);
+                申請全件一時_新規Writer.insert(申請全件一時);
+                判定結果全件一時Writer.insert(判定結果全件一時);
+                判定結果全件一時_新規Writer.insert(判定結果全件一時);
+                審査決定全件一時Writer.insert(審査決定全件一時);
+                審査決定全件一時_新規Writer.insert(審査決定全件一時);
+                合計全件一時Writer.insert(合計全件一時);
+                合計全件一時_新規Writer.insert(合計全件一時);
+            } else if (区分コード_1.equals(国保連共同処理受託区分_高額)
+                    && 区分コード_2.equals(給付実績中間事業高額Entity.getDataKubun())) {
+                明細全件更新一時Writer.insert(get明細全件更新一時(給付実績中間事業高額Entity));
             }
         }
     }

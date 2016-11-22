@@ -1057,7 +1057,7 @@ public class DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku extends BatchFlo
     private KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter getUpdKogakuKokuhorenIFMstProcessParameter() {
         KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter parameter = new KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter();
         parameter.setSysDate(処理日時);
-        parameter.setSysYearMonth(new FlexibleYearMonth(処理日時.getDate().getYearMonth().toDateString()));
+        parameter.setSysYearMonth(getParameter().getShoriYM());
         return parameter;
     }
 
