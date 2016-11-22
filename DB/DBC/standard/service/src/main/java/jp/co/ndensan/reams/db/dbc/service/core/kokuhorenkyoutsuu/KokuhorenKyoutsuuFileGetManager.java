@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SearchSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
-import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -89,7 +87,7 @@ public class KokuhorenKyoutsuuFileGetManager {
             writer.writeErrorJournal(RDateTime.now(), new RString(DbcErrorMessages.取込対象ファイルが存在しない.getMessage()
                     .replace(PREFIX.concat(交換情報識別番号).toString()).toString()));
             throw new BatchInterruptedException(DbcErrorMessages.取込対象ファイルが存在しない.getMessage()
-                    .replace(PREFIX.concat(交換情報識別番号).toString()).toString());
+                    .replace(PREFIX.concat(交換情報識別番号).concat(パーセント).toString()).toString());
         }
         List<SharedFileEntryDescriptor> fileEntryList = new ArrayList<>();
         Set<RString> fileNameSet = new HashSet<>();
@@ -102,7 +100,7 @@ public class KokuhorenKyoutsuuFileGetManager {
             try {
                 FilesystemPath 保存先フォルダのパス = SharedFile.copyToLocal(ro_sfed, localFilePath);
                 result.set保存先フォルダのパス(保存先フォルダのパス);
-                Collections.addAll(fileNameSet, Directory.getFiles(保存先フォルダのパス.toRString(), FILTER, false));
+                fileNameSet.add(entity.getLocalFileName());
             } catch (Exception ex) {
                 Logger.getLogger(KokuhorenKyoutsuuFileGetManager.class.getName()).log(Level.SEVERE, null, ex);
                 throw new BatchInterruptedException(ex.getMessage());
@@ -118,6 +116,7 @@ public class KokuhorenKyoutsuuFileGetManager {
         fileNameList.addAll(fileNameSet);
         result.setEntityList(fileEntryList);
         result.setFileNameList(fileNameList);
+
         return result;
     }
 

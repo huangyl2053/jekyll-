@@ -198,20 +198,11 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
             基本entity.set前公費３緊急時施設療養費請求額(entity.getDbT3017_maeKohi3KinkyuShisetsuRyoyoSeikyugaku());
             基本entity.set後公費３緊急時施設療養費請求額(entity.getDbT3017_atoKohi3KinkyuShisetsuRyoyoSeikyugaku());
         }
-        List<RString> 入力識別番号List = new ArrayList<>();
-        入力識別番号List.add(入力識別番号_716X);
-        入力識別番号List.add(入力識別番号_216X);
-        入力識別番号List.add(入力識別番号_71AX);
-        入力識別番号List.add(入力識別番号_21AX);
-        入力識別番号List.add(入力識別番号_2155);
-        入力識別番号List.add(入力識別番号_2156);
-        入力識別番号List.add(入力識別番号_2194);
-        入力識別番号List.add(入力識別番号_7155);
-        入力識別番号List.add(入力識別番号_7156);
-        入力識別番号List.add(入力識別番号_7194);
+        List<RString> 入力識別番号List = get入力識別番号List();
         基本entity.set基本ヘッダー１(get基本ヘッダー(入力識別番号, サービス提供年月, 入力識別番号List));
         基本entity.set基本ヘッダー２(new RString("請求額"));
-        if (入力識別番号List.contains(入力識別番号)) {
+        if (入力識別番号List.contains(入力識別番号)
+                && new FlexibleYearMonth(サービス提供年月_200510).isBeforeOrEquals(new FlexibleYearMonth(サービス提供年月))) {
             基本entity.set前特定診療費請求額(entity.getDbT3017_maeHokenTokuteiShinryohiSeikyugaku());
             基本entity.set後特定診療費請求額(entity.getDbT3017_atoHokenTokuteiShinryohiSeikyugaku());
         }
@@ -390,5 +381,20 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         } else {
             return new RString("食事提供費");
         }
+    }
+
+    private List<RString> get入力識別番号List() {
+        List<RString> 入力識別番号List = new ArrayList<>();
+        入力識別番号List.add(入力識別番号_716X);
+        入力識別番号List.add(入力識別番号_216X);
+        入力識別番号List.add(入力識別番号_71AX);
+        入力識別番号List.add(入力識別番号_21AX);
+        入力識別番号List.add(入力識別番号_2155);
+        入力識別番号List.add(入力識別番号_2156);
+        入力識別番号List.add(入力識別番号_2194);
+        入力識別番号List.add(入力識別番号_7155);
+        入力識別番号List.add(入力識別番号_7156);
+        入力識別番号List.add(入力識別番号_7194);
+        return 入力識別番号List;
     }
 }

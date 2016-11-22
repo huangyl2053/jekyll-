@@ -1302,8 +1302,10 @@ public class TokuteiShinryohiPanelHandler {
             return true;
         } else if (str1 != null) {
             return str1.equals(str2);
+        } else if (str2 != null) {
+            return str2.equals(str1);
         }
-        return str2.equals(str1);
+        return false;
     }
 
     /**

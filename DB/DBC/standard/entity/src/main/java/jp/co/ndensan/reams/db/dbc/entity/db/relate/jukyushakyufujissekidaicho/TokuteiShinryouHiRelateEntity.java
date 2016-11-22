@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TokuteiShinryouHiRelateEntity {
 
     private RString dbT3118_ryakusho;
+    private RString dbT7120_serviceMeisho;
     private DbT3017KyufujissekiKihonEntity dbt3017;
     private DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity dbt3021;
 

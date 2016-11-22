@@ -4,10 +4,9 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.ca.cac.divcontroller.handler.parentdiv.cace102000;
+package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7160001;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7160001.HanyoListkougakugasSannKeiSuukekkaDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7160001.HanyoListkougakugasSannKeiSuukekkaSpec;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;

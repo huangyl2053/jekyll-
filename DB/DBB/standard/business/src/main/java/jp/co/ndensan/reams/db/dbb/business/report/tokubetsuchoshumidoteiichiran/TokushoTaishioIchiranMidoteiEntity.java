@@ -113,7 +113,6 @@ public class TokushoTaishioIchiranMidoteiEntity {
      * @param yubinNo 郵便番号
      * @param jusho 住所
      * @param koroshoHantei 厚労省判定
-     * @param fuichiRiyuCode 不一致理由コード
      */
     public TokushoTaishioIchiranMidoteiEntity(RString kisoNenkinNo,
             RString nenkinCode,
@@ -123,8 +122,7 @@ public class TokushoTaishioIchiranMidoteiEntity {
             RString kanjiShimei,
             RString yubinNo,
             RString jusho,
-            Boolean koroshoHantei,
-            RString fuichiRiyuCode
+            Boolean koroshoHantei
     ) {
         this.kisoNenkinNo = kisoNenkinNo;
         this.nenkinCode = nenkinCode;
@@ -135,7 +133,6 @@ public class TokushoTaishioIchiranMidoteiEntity {
         this.yubinNo = yubinNo;
         this.jusho = jusho;
         this.koroshoHantei = koroshoHantei;
-        this.fuichiRiyuCode = fuichiRiyuCode;
         flag = true;
     }
 

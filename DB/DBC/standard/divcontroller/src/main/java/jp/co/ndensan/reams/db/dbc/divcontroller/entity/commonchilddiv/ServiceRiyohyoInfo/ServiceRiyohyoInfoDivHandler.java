@@ -665,6 +665,15 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setサービス項目コード(row.getHdnServiceKomokuCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(true);
+            div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisai().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnCancelMeisaiInput().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisaiGokei().setDisabled(false);
+            div.getServiceRiyohyoBeppyoMeisai().getBtnBeppyoMeisaiKakutei().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
         } else {
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
@@ -711,7 +720,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoMeisai().getBtnCancelMeisaiInput().setDisabled(true);
             div.getServiceRiyohyoBeppyoMeisai().getBtnCalcMeisaiGokei().setDisabled(true);
             div.getServiceRiyohyoBeppyoMeisai().getBtnBeppyoMeisaiKakutei().setDisabled(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(true);
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
         }
 
         RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class);
@@ -1389,8 +1398,8 @@ public class ServiceRiyohyoInfoDivHandler {
         ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(給付率));
         div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(給付率);
 
-//        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
-//        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
 //        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
 //        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
 //        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
@@ -1460,6 +1469,7 @@ public class ServiceRiyohyoInfoDivHandler {
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
         row.setRowState(RowState.Deleted);
 
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisabled(true);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(row.getHdnJigyoshaCode());
 

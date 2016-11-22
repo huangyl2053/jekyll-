@@ -40,25 +40,10 @@ public class DBCMNK4001PanelAll {
      * @return ResponseData
      */
     public ResponseData<DBCMNK4001PanelAllDiv> onClick_onBeforeOpenDialog(DBCMNK4001PanelAllDiv div) {
-        YMDHMS 今回抽出期間終了日時 = new YMDHMS(div.getTxtKonkaiShuryoDate().getValue(),
-                div.getTxtKonkaiShuryoTime().getValue());
-        YMDHMS 今回抽出期間開始日時 = new YMDHMS(RString.EMPTY);
-        YMDHMS 前回抽出終了日時 = new YMDHMS(div.getTxtZenkaiShuryoDate().getValue(), div.getTxtZenkaiShuryoTime().getValue());
-        if (div.getTxtKonkaiKaishiDate().getValue() != null && div.getTxtKonkaiKaishiTime().getValue() != null) {
-            今回抽出期間開始日時 = new YMDHMS(div.getTxtKonkaiKaishiDate().getValue(),
-                    div.getTxtKonkaiKaishiTime().getValue());
-        }
-        if (!今回抽出期間開始日時.isEmpty() && 今回抽出期間終了日時.isBefore(今回抽出期間開始日時)) {
-            ValidationMessageControlPairs validPairs = getValidationHandler().大小関係が不正();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
-        }
-        if (!前回抽出終了日時.isEmpty() && 前回抽出終了日時.isBefore(今回抽出期間開始日時)) {
-            ValidationMessageControlPairs validPairs = getValidationHandler().期間が不正();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
+        ValidationMessageControlPairs validationPairs = new ValidationMessageControlPairs();
+        validationPairs.add(getValidationHandler(div).大小関係が不正());
+        if (validationPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationPairs).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -86,7 +71,7 @@ public class DBCMNK4001PanelAll {
         return new DBCMNK4001PanelAllHandler(div);
     }
 
-    private DBCMNK4001PanelAllValidationHandler getValidationHandler() {
-        return new DBCMNK4001PanelAllValidationHandler();
+    private DBCMNK4001PanelAllValidationHandler getValidationHandler(DBCMNK4001PanelAllDiv div) {
+        return new DBCMNK4001PanelAllValidationHandler(div);
     }
 }

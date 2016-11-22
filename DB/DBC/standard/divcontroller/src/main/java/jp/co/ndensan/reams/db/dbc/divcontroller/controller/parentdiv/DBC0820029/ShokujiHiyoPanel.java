@@ -270,6 +270,8 @@ public class ShokujiHiyoPanel {
             }
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
             return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.一覧に戻る).respond();
         } else {
             return ResponseData.of(div).respond();

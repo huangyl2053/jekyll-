@@ -221,7 +221,7 @@ public class KariSanteiIdoFuka {
                 return new TyouhyouResult(特徴開始通知書);
             }
         } else if (仮算定額変更通知書_帳票分類ＩＤ.equals(帳票分類ID.value())) {
-            TyouhyouEntity 決定変更通知書 = get仮算定額変更通知書_帳票ID(調定年度, 帳票分類ID, 出力順ID);
+            TyouhyouEntity 決定変更通知書 = get仮算定額変更通知書_帳票ID(帳票分類ID, 出力順ID);
             if (決定変更通知書 != null) {
                 return new TyouhyouResult(決定変更通知書);
             }
@@ -296,13 +296,12 @@ public class KariSanteiIdoFuka {
      * 仮算定額変更通知書の帳票IDを取得します。
      *
      * @param 出力順ID 出力順ID
-     * @param 調定年度 調定年度
      * @param 帳票分類ID 帳票分類ID
      * @return TyouhyouEntity
      */
-    private TyouhyouEntity get仮算定額変更通知書_帳票ID(FlexibleYear 調定年度, ReportId 帳票分類ID, RString 出力順ID) {
+    private TyouhyouEntity get仮算定額変更通知書_帳票ID(ReportId 帳票分類ID, RString 出力順ID) {
         ChohyoSeigyoHanyo 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID,
-                調定年度, 項目名_通知書タイプ);
+                管理年度, 項目名_通知書タイプ);
         if (帳票タイプ == null) {
             return null;
         }

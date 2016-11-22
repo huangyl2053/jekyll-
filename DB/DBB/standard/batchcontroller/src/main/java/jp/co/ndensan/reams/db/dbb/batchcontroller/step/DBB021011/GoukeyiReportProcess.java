@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -78,6 +79,7 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
     @Override
     protected void afterExecute() {
         KoumokuGoukey newKoumokuGoukey = null;
+        List<KoumokuGoukey> newKoumokuGoukeyList = new ArrayList<>();
         for (int i = 0; i < koumokuGoukeyList.size(); i++) {
             KoumokuGoukey koumokuGoukey = koumokuGoukeyList.get(i);
             if (RString.isNullOrEmpty(koumokuGoukey.getHokenryoDankai())
@@ -87,53 +89,98 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
                 } else {
                     newKoumokuGoukey = 不明_合計(newKoumokuGoukey, koumokuGoukey);    
                 }
-                koumokuGoukeyList.remove(i);
+            } else {
+                newKoumokuGoukeyList.add(koumokuGoukey);
             }
         }
         if (null != newKoumokuGoukey) {
             newKoumokuGoukey.setHokenryoDankai(不明);
-            koumokuGoukeyList.add(newKoumokuGoukey);
+            newKoumokuGoukeyList.add(newKoumokuGoukey);
         }
-        TsukibetsuSuiihyoReport report = new TsukibetsuSuiihyoReport(getTsukibetsuSuiihyoEntity(koumokuGoukeyList));
+        TsukibetsuSuiihyoReport report = new TsukibetsuSuiihyoReport(getTsukibetsuSuiihyoEntity(newKoumokuGoukeyList));
         report.writeBy(reportSourceWriter);
     }
     
     private KoumokuGoukey 不明_合計(KoumokuGoukey newKoumokuGoukey, KoumokuGoukey koumokuGoukey){
-        newKoumokuGoukey.getYoGetuNinsuuGoukeyi().add(koumokuGoukey.getYoGetuNinsuuGoukeyi());
-        newKoumokuGoukey.getGoGetuNinsuuGoukeyi().add(koumokuGoukey.getGoGetuNinsuuGoukeyi());
-        newKoumokuGoukey.getRokuGetuNinsuuGoukeyi().add(koumokuGoukey.getRokuGetuNinsuuGoukeyi());
-        newKoumokuGoukey.getNanaGetuNinsuuGoukeyi().add(koumokuGoukey.getNanaGetuNinsuuGoukeyi());
-        newKoumokuGoukey.getHatiGetuNinsuuGoukeyi().add(koumokuGoukey.getHatiGetuNinsuuGoukeyi());
-        newKoumokuGoukey.getKyuGetuNinsuuGoukeyi().add(koumokuGoukey.getKyuGetuNinsuuGoukeyi());
-        newKoumokuGoukey.getJyuGetuNinsuuGoukeyi().add(koumokuGoukey.getJyuGetuNinsuuGoukeyi());
-        newKoumokuGoukey.getJyuitiGetuNinsuuGoukeyi().add(koumokuGoukey.getJyuitiGetuNinsuuGoukeyi());
-        newKoumokuGoukey.getJyuniGetuNinsuuGoukeyi().add(koumokuGoukey.getJyuniGetuNinsuuGoukeyi());
-        newKoumokuGoukey.getItiGetuNinsuuGoukeyi().add(koumokuGoukey.getItiGetuNinsuuGoukeyi());
-        newKoumokuGoukey.getNiGetuNinsuuGoukeyi().add(koumokuGoukey.getNiGetuNinsuuGoukeyi());
-        newKoumokuGoukey.getSanGetuNinsuuGoukeyi().add(koumokuGoukey.getSanGetuNinsuuGoukeyi());
-        newKoumokuGoukey.get現年随時の人数合計().add(koumokuGoukey.get現年随時の人数合計());
-        newKoumokuGoukey.get過年度の人数合計().add(koumokuGoukey.get過年度の人数合計());
-        newKoumokuGoukey.get歳出還付の人数合計().add(koumokuGoukey.get歳出還付の人数合計());
-        newKoumokuGoukey.get該当段階の人数合計().add(koumokuGoukey.get該当段階の人数合計());
-        newKoumokuGoukey.get総人数合計().add(koumokuGoukey.get総人数合計());
-        newKoumokuGoukey.getYoGetuKinkakuGoukeyi().add(koumokuGoukey.getYoGetuKinkakuGoukeyi());
-        newKoumokuGoukey.getGoGetuKinkakuGoukeyi().add(koumokuGoukey.getGoGetuKinkakuGoukeyi());
-        newKoumokuGoukey.getRokuGetuKinkakuGoukeyi().add(koumokuGoukey.getRokuGetuKinkakuGoukeyi());
-        newKoumokuGoukey.getNanaGetuKinkakuGoukeyi().add(koumokuGoukey.getNanaGetuKinkakuGoukeyi());
-        newKoumokuGoukey.getHatiGetuKinkakuGoukeyi().add(koumokuGoukey.getHatiGetuKinkakuGoukeyi());
-        newKoumokuGoukey.getKyuGetuKinkakuGoukeyi().add(koumokuGoukey.getKyuGetuKinkakuGoukeyi());
-        newKoumokuGoukey.getJyuGetuKinkakuGoukeyi().add(koumokuGoukey.getJyuGetuKinkakuGoukeyi());
-        newKoumokuGoukey.getJyuitiGetuKinkakuGoukeyi().add(koumokuGoukey.getJyuitiGetuKinkakuGoukeyi());
-        newKoumokuGoukey.getJyuniGetuKinkakuGoukeyi().add(koumokuGoukey.getJyuniGetuKinkakuGoukeyi());
-        newKoumokuGoukey.getItiGetuKinkakuGoukeyi().add(koumokuGoukey.getItiGetuKinkakuGoukeyi());
-        newKoumokuGoukey.getNiGetuKinkakuGoukeyi().add(koumokuGoukey.getNiGetuKinkakuGoukeyi());
-        newKoumokuGoukey.getSanGetuKinkakuGoukeyi().add(koumokuGoukey.getSanGetuKinkakuGoukeyi());
-        newKoumokuGoukey.get現年随時の金額合計().add(koumokuGoukey.get現年随時の金額合計());
-        newKoumokuGoukey.get過年度の金額合計().add(koumokuGoukey.get過年度の金額合計());
-        newKoumokuGoukey.get歳出還付の金額合計().add(koumokuGoukey.get歳出還付の金額合計());
-        newKoumokuGoukey.get該当段階の金額合計().add(koumokuGoukey.get該当段階の金額合計());
-        newKoumokuGoukey.get総金額合計().add(koumokuGoukey.get総金額合計());
+        newKoumokuGoukey.setYoGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getYoGetuNinsuuGoukeyi(), koumokuGoukey.getYoGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.setGoGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getGoGetuNinsuuGoukeyi(), koumokuGoukey.getGoGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.setRokuGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getRokuGetuNinsuuGoukeyi(), koumokuGoukey.getRokuGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.setNanaGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getNanaGetuNinsuuGoukeyi(), koumokuGoukey.getNanaGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.setHatiGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getHatiGetuNinsuuGoukeyi(), koumokuGoukey.getHatiGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.setKyuGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getKyuGetuNinsuuGoukeyi(), koumokuGoukey.getKyuGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.setJyuGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getJyuGetuNinsuuGoukeyi(), koumokuGoukey.getJyuGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.setJyuitiGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getJyuitiGetuNinsuuGoukeyi(), koumokuGoukey.getJyuitiGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.setJyuniGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getJyuniGetuNinsuuGoukeyi(), koumokuGoukey.getJyuniGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.setItiGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getItiGetuNinsuuGoukeyi(), koumokuGoukey.getItiGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.setNiGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getNiGetuNinsuuGoukeyi(), koumokuGoukey.getNiGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.setSanGetuNinsuuGoukeyi(
+                getDecimal(newKoumokuGoukey.getSanGetuNinsuuGoukeyi(), koumokuGoukey.getSanGetuNinsuuGoukeyi()));
+        newKoumokuGoukey.set現年随時の人数合計(
+                getDecimal(newKoumokuGoukey.get現年随時の人数合計(), koumokuGoukey.get現年随時の人数合計()));
+        newKoumokuGoukey.set過年度の人数合計(
+                getDecimal(newKoumokuGoukey.get過年度の人数合計(), koumokuGoukey.get過年度の人数合計()));
+        newKoumokuGoukey.set歳出還付の人数合計(
+                getDecimal(newKoumokuGoukey.get歳出還付の人数合計(), koumokuGoukey.get歳出還付の人数合計()));
+        newKoumokuGoukey.set該当段階の人数合計(
+                getDecimal(newKoumokuGoukey.get該当段階の人数合計(), koumokuGoukey.get該当段階の人数合計()));
+        newKoumokuGoukey.set総人数合計(
+                getDecimal(newKoumokuGoukey.get総人数合計(), koumokuGoukey.get総人数合計()));
+        newKoumokuGoukey.setYoGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getYoGetuKinkakuGoukeyi(), koumokuGoukey.getYoGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.setGoGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getGoGetuKinkakuGoukeyi(), koumokuGoukey.getGoGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.setRokuGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getRokuGetuKinkakuGoukeyi(), koumokuGoukey.getRokuGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.setNanaGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getNanaGetuKinkakuGoukeyi(), koumokuGoukey.getNanaGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.setHatiGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getHatiGetuKinkakuGoukeyi(), koumokuGoukey.getHatiGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.setKyuGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getKyuGetuKinkakuGoukeyi(), koumokuGoukey.getKyuGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.setJyuGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getJyuGetuKinkakuGoukeyi(), koumokuGoukey.getJyuGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.setJyuitiGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getJyuitiGetuKinkakuGoukeyi(), koumokuGoukey.getJyuitiGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.setJyuniGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getJyuniGetuKinkakuGoukeyi(), koumokuGoukey.getJyuniGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.setItiGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getItiGetuKinkakuGoukeyi(), koumokuGoukey.getItiGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.setNiGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getNiGetuKinkakuGoukeyi(), koumokuGoukey.getNiGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.setSanGetuKinkakuGoukeyi(
+                getDecimal(newKoumokuGoukey.getSanGetuKinkakuGoukeyi(), koumokuGoukey.getSanGetuKinkakuGoukeyi()));
+        newKoumokuGoukey.set現年随時の金額合計(
+                getDecimal(newKoumokuGoukey.get現年随時の金額合計(), koumokuGoukey.get現年随時の金額合計()));
+        newKoumokuGoukey.set過年度の金額合計(
+                getDecimal(newKoumokuGoukey.get過年度の金額合計(), koumokuGoukey.get過年度の金額合計()));
+        newKoumokuGoukey.set歳出還付の金額合計(
+                getDecimal(newKoumokuGoukey.get歳出還付の金額合計(), koumokuGoukey.get歳出還付の金額合計()));
+        newKoumokuGoukey.set該当段階の金額合計(
+                getDecimal(newKoumokuGoukey.get該当段階の金額合計(), koumokuGoukey.get該当段階の金額合計()));
+        newKoumokuGoukey.set総金額合計(
+                getDecimal(newKoumokuGoukey.get総金額合計(), koumokuGoukey.get総金額合計()));
         return newKoumokuGoukey;
+    }
+    
+    private Decimal getDecimal(Decimal decimal1, Decimal decimal2){
+        if (null == decimal1) {
+            decimal1 = Decimal.ZERO;
+        }
+        if (null == decimal2) {
+            decimal2 = Decimal.ZERO;
+        }
+        return decimal1.add(decimal2);
     }
 
     private TsukibetsuSuiihyoEntity getTsukibetsuSuiihyoEntity(List<KoumokuGoukey> list) {

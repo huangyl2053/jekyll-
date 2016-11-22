@@ -118,7 +118,6 @@ public class KarisanteiHenjunkaHenkoTsuchishoA4TateReport extends Report<Karisan
             setLineData(index, item, 編集後仮算定通知書共通情報, 特徴納期情報リスト, 普徴納期情報リスト);
             outputItemList.add(item);
         }
-
     }
 
     private void setLineData(int index, KarisanteiHenjunkaHenkoTsuchishoA4TateItem item, EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報,
@@ -178,6 +177,11 @@ public class KarisanteiHenjunkaHenkoTsuchishoA4TateReport extends Report<Karisan
 
         item.setKorekaraChoshuho(更正後.get更正後徴収方法());
         setListKibetsu(index, item, 特徴納期情報リスト, 普徴納期情報リスト, 編集後仮算定通知書共通情報);
+        setLineData2(item, 編集後仮算定通知書共通情報, 更正後);
+    }
+
+    private void setLineData2(KarisanteiHenjunkaHenkoTsuchishoA4TateItem item,
+            EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報, EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後) {
 
         if (編集後仮算定通知書共通情報.get編集後口座() != null) {
             item.setBankCode(編集後仮算定通知書共通情報.get編集後口座().get金融機関コードCombinedWith支店コード());

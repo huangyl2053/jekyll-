@@ -255,7 +255,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
      * @param 出力順 出力順
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      */
-    public JukyushaKyufujissekiIchiranMybatisParameter(boolean flag,
+    protected JukyushaKyufujissekiIchiranMybatisParameter(boolean flag,
             RString 対象年月,
             boolean 対象年月flag,
             RString 年月範囲_開始,
