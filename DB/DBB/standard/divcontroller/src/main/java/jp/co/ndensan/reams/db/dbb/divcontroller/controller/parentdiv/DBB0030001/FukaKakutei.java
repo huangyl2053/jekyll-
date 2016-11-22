@@ -85,6 +85,7 @@ public class FukaKakutei {
     public ResponseData<FukaKakuteiDiv> onClick_Kakuninjiko(FukaKakuteiDiv div) {
         基準日時登録更新(div);
         賦課処理状況更新(div);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
         return ResponseData.of(div).respond();
     }
 
