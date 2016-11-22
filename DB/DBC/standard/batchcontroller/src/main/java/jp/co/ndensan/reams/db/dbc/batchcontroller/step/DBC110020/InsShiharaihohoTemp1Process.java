@@ -1100,8 +1100,8 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                 if (isEqYearMonth(総合事業対象者entity.getTekiyoKaishiYMD(), 居宅計画.get適用開始日())
                         && isEqYearMonth(総合事業対象者entity.getTekiyoKaishiYMD(), 届出年月日)
                         && 区分_4.equals(居宅計画.get居宅サービス計画作成区分コード())
-                        && MAX_DATE.equals(適用終了日)
-                        && isBeforeOrEqDate(居宅計画.get届出年月日(), 総合事業対象者entity.getTekiyoShuryoYMD())) {
+                        && (MAX_DATE.equals(適用終了日)
+                        || isBeforeOrEqDate(居宅計画.get届出年月日(), 総合事業対象者entity.getTekiyoShuryoYMD()))) {
                     総合事業対象者entity.setTekiyoKaishiYMD(届出年月日);
                     continue;
                 }
@@ -1147,7 +1147,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         boolean 受給者状況 = false;
         for (DbT4001JukyushaDaichoEntity 受給者台帳 : 受給者台帳List) {
             if (コート_1.equals(受給者台帳.getYukoMukoKubun())
-                    && チェック_DATE.isBefore(受給者台帳.getNinteiYukoKikanKaishiYMD())) {
+                    && チェック_DATE.isBeforeOrEquals(受給者台帳.getNinteiYukoKikanKaishiYMD())) {
                 受給者状況 = true;
                 break;
             }
@@ -1185,7 +1185,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         RYearMonth 処理年月 = processParameter.get処理年月();
         FlexibleDate 処理年月日 = new FlexibleDate(処理年月.toDateString().concat(RST_01));
         for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
-            if (isBeforeDate喪失年月日(処理年月日, 被保険者台帳.getShikakuSoshitsuYMD())) {
+            if (isBeforeOrEqDate喪失年月日(処理年月日, 被保険者台帳.getShikakuSoshitsuYMD())) {
                 資格状況 = true;
                 break;
             }
