@@ -898,10 +898,12 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
         List<Noki> 普徴納期List = fukaNokiResearcher.get普徴納期ALL();
         List<Kitsuki> 仮算定期間List = 仮算定期間.toList();
         int 最初期;
-        if (RString.isNullOrEmpty(出力期)) {
+        if (RString.isNullOrEmpty(出力期) && 最終期 != 0) {
             最初期 = 仮算定期間List.get(仮算定期間List.size() - INT_1).get期AsInt();
-        } else {
+        } else if (!RString.isNullOrEmpty(出力期)) {
             最初期 = Integer.parseInt(出力期.toString());
+        } else {
+            最初期 = 0;
         }
         KitsukiList 期月リスト = 期月リスト_普徴.subListBy期(最初期, 最終期);
         List<NokiJoho> 普徴納期情報リスト = new ArrayList<>();
