@@ -1000,9 +1000,24 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         insertEntity.set認定有効期間開始年月日(総合事業対象者.getTekiyoKaishiYMD());
         insertEntity.set訪問通所サービス支給限度基準額(
                 get支給限度単位数(コート_06, 異動年月日, 居宅サービス区分支給限度額List));
-        insertEntity.set訪問通所サービス上限管理適用期間開始年月日(異動年月日);
+        insertEntity.set訪問通所サービス上限管理適用期間開始年月日(get月初(総合事業対象者.getTekiyoKaishiYMD()));
         insertEntity.set短期入所サービス支給限度基準額(0);
         insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    private static FlexibleDate get月初(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return null;
+        }
+        return new FlexibleDate(date.getYearMonth().toDateString().concat(STR_01));
+    }
+
+    private static RString get月末(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return null;
+        }
+        FlexibleYearMonth ym = date.getYearMonth();
+        return date.getYearMonth().toDateString().concat(new RString(ym.getLastDay()));
     }
 
     /**
@@ -1029,7 +1044,8 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         }
         insertEntity.set訪問通所サービス支給限度基準額(
                 get支給限度単位数(コート_06, 異動年月日, 居宅サービス区分支給限度額List));
-        insertEntity.set訪問通所サービス上限管理適用期間開始年月日(異動年月日);
+        insertEntity.set訪問通所サービス上限管理適用期間開始年月日(get月初(総合事業対象者.getTekiyoKaishiYMD()));
+        insertEntity.set訪問通所サービス上限管理適用期間終了年月日(get月末(総合事業対象者.getTekiyoShuryoYMD()));
         insertEntity.set短期入所サービス支給限度基準額(0);
         insertEntity.setエラーフラグ(エラーなし);
     }
