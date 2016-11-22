@@ -4,7 +4,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper">
     
     <select id="select処理日付管理"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080_JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" resultOrdered="true" fetchSize="500">
         SELECT 
             *

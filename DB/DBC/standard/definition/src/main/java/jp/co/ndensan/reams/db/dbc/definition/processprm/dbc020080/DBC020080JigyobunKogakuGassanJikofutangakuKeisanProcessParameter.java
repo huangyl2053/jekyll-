@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisanProcessParameter implements IBatchProcessParameter {
+public class DBC020080JigyobunKogakuGassanJikofutangakuKeisanProcessParameter implements IBatchProcessParameter {
 
     private RDateTime 処理日時;
     private FlexibleYearMonth 受取年月;
