@@ -291,7 +291,7 @@ public class NofugakuIchiranCodeFumeiEditor implements
             if (納付額情報.get賦課年度().compareTo(new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4)).minusYear(NUM_1)) == NUM_0) {
                 source.list11_14 = doカンマ編集(middle2.divide(doNullDecimal(納付額情報.get特徴収入額06())), NUM_7);
             }
-            if ((対象年 != null && 納付額情報.get調定年度() != null)
+            if ((納付額情報.get調定年度() != null)
                     && (!new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4)).minusYear(NUM_1).isBefore(納付額情報.get賦課年度()))) {
                 source.list13_14 = doカンマ編集(middle5.add(doNullDecimal(納付額情報.get普徴収入額07()))
                         .add(doNullDecimal(納付額情報.get普徴収入額08()))
@@ -304,7 +304,7 @@ public class NofugakuIchiranCodeFumeiEditor implements
                         .add(doNullDecimal(納付額情報.get普徴収入額11()))
                         .add(doNullDecimal(納付額情報.get普徴収入額12())), NUM_7);
             }
-            if ((対象年 != null && 納付額情報.get調定年度() != null)
+            if ((納付額情報.get調定年度() != null)
                     && (納付額情報.get賦課年度().isBefore(new FlexibleYear(対象年.toDateString().substring(NUM_0, NUM_4))))) {
                 source.list11_14 = doカンマ編集(middle2, NUM_7);
                 source.list13_14 = doカンマ編集(doNullDecimal(納付額情報.get普徴収入額10())
