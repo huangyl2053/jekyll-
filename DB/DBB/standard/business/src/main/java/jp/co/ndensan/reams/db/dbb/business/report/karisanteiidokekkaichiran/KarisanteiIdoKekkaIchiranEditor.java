@@ -232,7 +232,15 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
     }
 
     private void 口座情報編集(KarisanteiIdoKekkaIchiranSource source) {
-        IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
+        if (計算後情報_宛名_口座_更正前Entity.get口座Entity() != null
+                && 計算後情報_宛名_口座_更正前Entity.get口座Entity().getUaT0310KozaEntity() != null
+                && 計算後情報_宛名_口座_更正前Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0) {
+            IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
+            set金融機関コード(koza, source);
+        }
+    }
+
+    private void set金融機関コード(IKoza koza, KarisanteiIdoKekkaIchiranSource source) {
         if (koza.get金融機関コード() != null) {
             if (koza.get金融機関コード().value().length() >= NUM_4 && ゆうちょ銀行
                     .equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4))) {

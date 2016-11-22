@@ -112,7 +112,7 @@ public class DBC120040_KyodoJukyushaKoshinKekkaIn extends BatchFlowBase<DBC12004
 
     private void getファイル(RString 交換情報識別番号) {
         KokuhorenKyoutsuuFileGetReturnEntity entity = KokuhorenKyoutsuuFileGetManager.createInstance()
-                .getFile(交換情報識別番号, new RString("DBC120040"));
+                .getFile(交換情報識別番号, new RString("DBC120040"), getParameter().getLoginUserId());
         保存先フォルダのパス = entity.get保存先フォルダのパス().toRString();
         ファイル名List = entity.getFileNameList();
         entityList = entity.getEntityList();

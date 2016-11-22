@@ -344,9 +344,9 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
         ICityAtesakiFinder atesakiFinder = CityAtesakiService.createCityAtesakiFinder();
         LasdecCode 全国住所コード = LasdecCode.EMPTY;
         if (所得照会票データbefore.getZenkokuJushoCode() != null) {
-            RString ZenkokuJushoCode = 所得照会票データbefore.getZenkokuJushoCode().trim();
-            if (ZenkokuJushoCode.length() >= INT_6) {
-                全国住所コード = new LasdecCode(所得照会票データbefore.getZenkokuJushoCode().substring(INT_0, INT_6));
+            RString zenkokuJushoCode = 所得照会票データbefore.getZenkokuJushoCode().trim();
+            if (zenkokuJushoCode.length() >= INT_6) {
+                全国住所コード = new LasdecCode(zenkokuJushoCode);
             }
         }
         ShichosonAtesaki atesaki = atesakiFinder.get市町村宛先(全国住所コード, SofusakiGroup.所得照会関連.getCode());

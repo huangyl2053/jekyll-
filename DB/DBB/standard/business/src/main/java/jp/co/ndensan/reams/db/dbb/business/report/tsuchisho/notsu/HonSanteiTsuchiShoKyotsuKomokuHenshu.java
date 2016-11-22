@@ -18,12 +18,14 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.definition.core.kanendo.KanendoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
@@ -183,7 +185,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             納付済額_未到来期含む = 納付済額;
             納付済額_未到来期含まない = 納付済額;
             未到来期の納付済額 = Decimal.ZERO;
-            普徴既に納付すべき額 = 普徴納付済額;
+            FukaJoho 賦課情報_更正後 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
+            普徴既に納付すべき額 = get普徴納付済額(賦課情報_更正後, 1, SIZE_14);
             普徴今後納付すべき額_調定元に = 普徴既に納付すべき額.subtract(普徴納付済額);
             普徴今後納付すべき額_収入元に = 普徴既に納付すべき額.subtract(普徴納付済額);
             特徴既に納付すべき額 = 特徴納付済額;
@@ -976,11 +979,17 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
     /**
      * 普徴期リストを作成します。
      *
+     * @param 現年過年区分 現年過年区分
      * @return 普徴期リスト
      */
-    public List<RString> create普徴期リスト() {
+    public List<RString> create普徴期リスト(GennenKanen 現年過年区分) {
         List<RString> 普徴期リスト = new ArrayList<>();
-        List<Kitsuki> kitsukiList = new FuchoKiUtil().get期月リスト().toList();
+        List<Kitsuki> kitsukiList;
+        if (GennenKanen.現年度 == 現年過年区分) {
+            kitsukiList = new FuchoKiUtil().get期月リスト().toList();
+        } else {
+            kitsukiList = new KanendoKiUtil().get期月リスト().toList();
+        }
         for (Kitsuki kitsuki : kitsukiList) {
             普徴期リスト.add(kitsuki.get期());
         }
@@ -1183,8 +1192,9 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
      * @return 判断結果(trueの場合、随時です。falseの場合、随時ではありません)
      */
     public boolean is随時期(Kitsuki kitsuki) {
-        return (FuchokiJohoTsukiShoriKubun.随時.equals(kitsuki.get月処理区分())
-                || FuchokiJohoTsukiShoriKubun.現年随時.equals(kitsuki.get月処理区分()));
+        return FuchokiJohoTsukiShoriKubun.随時.equals(kitsuki.get月処理区分())
+                || FuchokiJohoTsukiShoriKubun.現年随時.equals(kitsuki.get月処理区分())
+                || KanendoTsukiShoriKubun.随時.equals(kitsuki.get月処理区分());
     }
 
     private boolean isYearMonthNullOrEmpty(FlexibleYearMonth data) {

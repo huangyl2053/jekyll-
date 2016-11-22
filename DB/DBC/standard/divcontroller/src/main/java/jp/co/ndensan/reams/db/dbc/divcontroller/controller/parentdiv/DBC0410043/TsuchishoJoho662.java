@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -93,6 +94,7 @@ public class TsuchishoJoho662 {
             parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
             parameter.setSaishoriKubun(再処理区分);
             parameter.setShutsuryokujunId(出力順ID);
+            parameter.setLoginUserId(ControlDataHolder.getUserId());
             return parameter;
         }
         return null;

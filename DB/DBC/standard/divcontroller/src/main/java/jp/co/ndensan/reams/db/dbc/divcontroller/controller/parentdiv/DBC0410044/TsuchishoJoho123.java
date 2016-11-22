@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410044.TsuchishoJoho123Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -59,6 +60,7 @@ public class TsuchishoJoho123 {
             parameter.setSaishorikubun(SaiShoriKubun.空白);
         }
         parameter.setShutsuryokujunID(null);
+        parameter.setLoginUserId(ControlDataHolder.getUserId());
         FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120880_SogojigyohiShikakuShogohyoIn");
         FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();

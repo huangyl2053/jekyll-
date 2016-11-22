@@ -180,6 +180,7 @@ public class DBC120140_KogakuGassanShikyuFushikyuKetteiIn
         KokuhorenkyotsuGetFileProcessParameter parameter = new KokuhorenkyotsuGetFileProcessParameter();
         parameter.set交換情報識別番号(交換情報識別番号38B);
         parameter.setファイル格納フォルダ名(ファイル格納フォルダ名);
+        parameter.setLoginUserID(getParameter().getLoginUserId());
         return simpleBatch(KokuhorenkyoutsuGetFileProcess.class).arguments(parameter).define();
     }
 
@@ -193,6 +194,7 @@ public class DBC120140_KogakuGassanShikyuFushikyuKetteiIn
         KokuhorenkyotsuGetFileProcessParameter parameter = new KokuhorenkyotsuGetFileProcessParameter();
         parameter.set交換情報識別番号(交換情報識別番号38G);
         parameter.setファイル格納フォルダ名(ファイル格納フォルダ名);
+        parameter.setLoginUserID(getParameter().getLoginUserId());
         return simpleBatch(KokuhorenkyoutsuGetFileProcess.class).arguments(parameter).define();
     }
 

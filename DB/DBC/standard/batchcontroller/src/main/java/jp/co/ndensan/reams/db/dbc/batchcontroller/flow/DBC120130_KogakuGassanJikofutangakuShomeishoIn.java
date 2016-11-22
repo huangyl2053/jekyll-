@@ -134,6 +134,7 @@ public class DBC120130_KogakuGassanJikofutangakuShomeishoIn extends BatchFlowBas
         KokuhorenkyotsuGetFileProcessParameter processparameter = new KokuhorenkyotsuGetFileProcessParameter();
         processparameter.set交換情報識別番号(交換情報識別番号);
         processparameter.setファイル格納フォルダ名(ファイル格納フォルダ名);
+        processparameter.setLoginUserID(getParameter().getLoginUserId());
         return simpleBatch(KokuhorenkyoutsuGetFileProcess.class).arguments(processparameter).define();
     }
 

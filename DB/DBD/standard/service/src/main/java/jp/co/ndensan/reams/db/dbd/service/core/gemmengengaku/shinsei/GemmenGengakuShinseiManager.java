@@ -27,6 +27,8 @@ public class GemmenGengakuShinseiManager {
 
     private final DbT4010GemmenGengakuShinseiDac dac;
 
+    private static final RString 定数減免減額申請 = new RString("減免減額申請");
+
     /**
      * コンストラクタです。
      */
@@ -100,7 +102,7 @@ public class GemmenGengakuShinseiManager {
      */
     @Transaction
     public boolean save減免減額申請(GemmenGengakuShinsei 減免減額申請) {
-        requireNonNull(減免減額申請, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請"));
+        requireNonNull(減免減額申請, UrSystemErrorMessages.値がnull.getReplacedMessage(定数減免減額申請.toString()));
         if (!減免減額申請.hasChanged()) {
             return false;
         }
@@ -115,7 +117,7 @@ public class GemmenGengakuShinseiManager {
      */
     @Transaction
     public boolean insert減免減額申請(GemmenGengakuShinsei 減免減額申請) {
-        requireNonNull(減免減額申請, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請"));
+        requireNonNull(減免減額申請, UrSystemErrorMessages.値がnull.getReplacedMessage(定数減免減額申請.toString()));
         if (!減免減額申請.hasChanged()) {
             return false;
         }
@@ -130,7 +132,7 @@ public class GemmenGengakuShinseiManager {
      */
     @Transaction
     public boolean saveOrDeletePhysicalBy減免減額申請(GemmenGengakuShinsei 減免減額申請) {
-        requireNonNull(減免減額申請, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請"));
+        requireNonNull(減免減額申請, UrSystemErrorMessages.値がnull.getReplacedMessage(定数減免減額申請.toString()));
         if (!減免減額申請.hasChanged()) {
             return false;
         }
@@ -145,7 +147,7 @@ public class GemmenGengakuShinseiManager {
      */
     @Transaction
     public boolean delete減免減額申請(GemmenGengakuShinsei 減免減額申請) {
-        requireNonNull(減免減額申請, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請"));
+        requireNonNull(減免減額申請, UrSystemErrorMessages.値がnull.getReplacedMessage(定数減免減額申請.toString()));
         return 1 == dac.delete(減免減額申請.toEntity());
     }
 }

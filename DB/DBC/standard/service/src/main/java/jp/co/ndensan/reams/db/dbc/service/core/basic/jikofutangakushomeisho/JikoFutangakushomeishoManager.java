@@ -169,9 +169,12 @@ public class JikoFutangakushomeishoManager {
     public ToiawasesakiSource get問合せ先(ReportId 帳票分類ID) {
         DbT7069KaigoToiawasesakiEntity dbT7069 = 介護問合せ先dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID);
 
-        KaigoToiawasesaki kaigoToiawasesaki = new KaigoToiawasesaki(dbT7069);
-        ToiawasesakiSource source = new ToiawasesakiSource();
+        KaigoToiawasesaki kaigoToiawasesaki = null;
         if (dbT7069 != null) {
+            kaigoToiawasesaki = new KaigoToiawasesaki(dbT7069);
+        }
+        ToiawasesakiSource source = new ToiawasesakiSource();
+        if (kaigoToiawasesaki != null) {
             if (kaigoToiawasesaki.get郵便番号() != null) {
                 source.yubinBango = kaigoToiawasesaki.get郵便番号().value();
             }

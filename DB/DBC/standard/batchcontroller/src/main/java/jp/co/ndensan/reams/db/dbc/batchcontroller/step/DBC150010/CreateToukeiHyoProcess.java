@@ -136,8 +136,8 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         createService().get介護給付費(entity, 統計用サービス種類);
         createService().get特定入所費(entity, 統計用サービス種類);
         createShukeiService().get社福軽減額(entity, 統計用サービス種類);
-        createShukeiService().get特定入所者介護サービス(entity, RiyojokyoTokeihyo_EditPattern.特定入所者.getコード());
-        createShukeiService().get社会福祉法人軽減額(entity, RiyojokyoTokeihyo_EditPattern.社福.getコード());
+        createShukeiService().get特定入所者介護サービス(entity, 統計用サービス種類);
+        createShukeiService().get社会福祉法人軽減額(entity, 統計用サービス種類);
         被保険者番号 = entity.getHihokenshaNo();
         isData = true;
     }
@@ -260,7 +260,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     }
 
     private void get回数件数日数外泊数(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         if (!利用状況統計表集計結果Map.containsKey(統計用サービス種類)) {
             return;
         }
@@ -297,7 +297,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     }
 
     private void create集計項目2_1(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         RiyojokyoTokeihyo_KaisuShukeiPattern 回数集計パターン = tokeihyo_EditPattern.get回数集計パターン();
         RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity = 利用状況統計表集計結果Map.get(統計用サービス種類);
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity = 利用状況統計表集計結果Entity.getリスト_サービス種類集計().get(数字_1);
@@ -346,7 +346,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     }
 
     private void create集計項目2_2(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         RiyojokyoTokeihyo_KaisuShukeiPattern 回数集計パターン = tokeihyo_EditPattern.get回数集計パターン();
         RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity = 利用状況統計表集計結果Map.get(統計用サービス種類);
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity = 利用状況統計表集計結果Entity.getリスト_サービス種類集計().get(数字_1);
@@ -396,7 +396,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     }
 
     private void create集計項目2_3(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         RiyojokyoTokeihyo_KaisuShukeiPattern 回数集計パターン = tokeihyo_EditPattern.get回数集計パターン();
         RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity = 利用状況統計表集計結果Map.get(統計用サービス種類);
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity = 利用状況統計表集計結果Entity.getリスト_サービス種類集計().get(数字_1);
@@ -445,7 +445,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     }
 
     private void create集計項目2_4(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         RiyojokyoTokeihyo_KaisuShukeiPattern 回数集計パターン = tokeihyo_EditPattern.get回数集計パターン();
         RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity = 利用状況統計表集計結果Map.get(統計用サービス種類);
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity = 利用状況統計表集計結果Entity.getリスト_サービス種類集計().get(数字_1);
@@ -494,7 +494,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     }
 
     private void create集計項目2_5(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         RiyojokyoTokeihyo_KaisuShukeiPattern 回数集計パターン = tokeihyo_EditPattern.get回数集計パターン();
         RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity = 利用状況統計表集計結果Map.get(統計用サービス種類);
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity = 利用状況統計表集計結果Entity.getリスト_サービス種類集計().get(数字_1);
@@ -543,7 +543,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     }
 
     private void create集計項目2_6(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         RiyojokyoTokeihyo_KaisuShukeiPattern 回数集計パターン = tokeihyo_EditPattern.get回数集計パターン();
         RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity = 利用状況統計表集計結果Map.get(統計用サービス種類);
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity = 利用状況統計表集計結果Entity.getリスト_サービス種類集計().get(数字_1);
@@ -592,7 +592,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     }
 
     private void create集計項目2_7(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         RiyojokyoTokeihyo_KaisuShukeiPattern 回数集計パターン = tokeihyo_EditPattern.get回数集計パターン();
         RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity = 利用状況統計表集計結果Map.get(統計用サービス種類);
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity = 利用状況統計表集計結果Entity.getリスト_サービス種類集計().get(数字_1);
@@ -641,7 +641,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     }
 
     private void create集計項目2_8(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         RiyojokyoTokeihyo_KaisuShukeiPattern 回数集計パターン = tokeihyo_EditPattern.get回数集計パターン();
         RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity = 利用状況統計表集計結果Map.get(統計用サービス種類);
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity = 利用状況統計表集計結果Entity.getリスト_サービス種類集計().get(数字_1);
@@ -690,7 +690,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     }
 
     private void create集計項目2_9(DbWT1513RiyoJokyoTokeihyoEntity entity, RString 統計用サービス種類) {
-        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(entity.getYoKaigoJotaiKubunCode());
+        RiyojokyoTokeihyo_EditPattern tokeihyo_EditPattern = RiyojokyoTokeihyo_EditPattern.toValue(統計用サービス種類);
         RiyojokyoTokeihyo_KaisuShukeiPattern 回数集計パターン = tokeihyo_EditPattern.get回数集計パターン();
         RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity = 利用状況統計表集計結果Map.get(統計用サービス種類);
         RiyoJokyoTokeihyoServiceShuruiShukeiEntity 集計項目Entity = 利用状況統計表集計結果Entity.getリスト_サービス種類集計().get(数字_1);

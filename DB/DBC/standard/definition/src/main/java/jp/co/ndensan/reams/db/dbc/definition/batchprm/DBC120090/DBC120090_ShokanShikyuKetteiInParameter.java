@@ -35,7 +35,8 @@ public class DBC120090_ShokanShikyuKetteiInParameter extends BatchParameterBase 
     private RString saishoriKubun;
     @BatchParameter(key = KEY_SHUTSURYO_KUJUN, name = "出力順")
     private RString shutsuryokujun;
-
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
     /**
      *
      * @return プロセス用パラメータ。

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410015.TsuchishoJoho741Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -56,6 +57,7 @@ public class TsuchishoJoho741 {
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
             parameter.setShoriKubun(SaiShoriKubun.空白);
         }
+        parameter.setLoginUserId(ControlDataHolder.getUserId());
         FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120020_HenreiHoryuIn");
         FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();

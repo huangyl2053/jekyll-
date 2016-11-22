@@ -13,6 +13,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.DBB8110001TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.KakushuTsuchishoSakuseiKobetsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8110001.KakushuTsuchishoSakuseiKobetsuCheckHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8110001.KakushuTsuchishoSakuseiKobetsuHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparameter.IdoTaishoshaIchiranparameter;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
@@ -160,7 +161,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
     public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_radKobetsuHakkoChoteiJiyu(
             KakushuTsuchishoSakuseiKobetsuDiv div) {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
-        getHandler(div).onChange調定事由印字方法(RString.EMPTY, map);
+        getCheckHandler(div).onChange調定事由印字方法(RString.EMPTY, map);
         return ResponseData.of(div).respond();
     }
 
@@ -217,7 +218,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
     public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapTokuKaishiTsuchiKobetsu(
             KakushuTsuchishoSakuseiKobetsuDiv div) {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
-        getHandler(div).check特徴開始通知書(map);
+        getCheckHandler(div).check特徴開始通知書(map);
         return ResponseData.of(div).respond();
     }
 
@@ -230,7 +231,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
     public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapKetteiTsuchiKobetsu(
             KakushuTsuchishoSakuseiKobetsuDiv div) {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
-        getHandler(div).check決定通知書(map);
+        getCheckHandler(div).check決定通知書(map);
         return ResponseData.of(div).respond();
     }
 
@@ -243,7 +244,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
     public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapNotsuKobetsu(
             KakushuTsuchishoSakuseiKobetsuDiv div) {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
-        getHandler(div).check納入通知書(map);
+        getCheckHandler(div).check納入通知書(map);
         return ResponseData.of(div).respond();
     }
 
@@ -257,7 +258,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
             KakushuTsuchishoSakuseiKobetsuDiv div) {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
         RString 変更通知書略称 = ViewStateHolder.get(ViewStateKeys.変更通知書帳票略称, RString.class);
-        getHandler(div).check変更通知書(map, 変更通知書略称);
+        getCheckHandler(div).check変更通知書(map, 変更通知書略称);
         return ResponseData.of(div).respond();
     }
 
@@ -270,7 +271,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
     public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapYufuriKobetsu(
             KakushuTsuchishoSakuseiKobetsuDiv div) {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
-        getHandler(div).check郵便納付書(map);
+        getCheckHandler(div).check郵便納付書(map);
         return ResponseData.of(div).respond();
     }
 
@@ -284,7 +285,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
             KakushuTsuchishoSakuseiKobetsuDiv div) {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
         RString 減免通知書略称 = ViewStateHolder.get(ViewStateKeys.減免通知書帳票略称, RString.class);
-        getHandler(div).check減免通知書(map, 減免通知書略称);
+        getCheckHandler(div).check減免通知書(map, 減免通知書略称);
         return ResponseData.of(div).respond();
     }
 
@@ -298,7 +299,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
             KakushuTsuchishoSakuseiKobetsuDiv div) {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
         RString 徴収猶予通知書略称 = ViewStateHolder.get(ViewStateKeys.徴収猶予通知書帳票略称, RString.class);
-        getHandler(div).check徴収猶予通知書(map, 徴収猶予通知書略称);
+        getCheckHandler(div).check徴収猶予通知書(map, 徴収猶予通知書略称);
         return ResponseData.of(div).respond();
     }
 
@@ -311,7 +312,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
     public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapFukadaichoKobetsu(
             KakushuTsuchishoSakuseiKobetsuDiv div) {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
-        getHandler(div).check賦課台帳(map);
+        getCheckHandler(div).check賦課台帳(map);
         return ResponseData.of(div).respond();
     }
 
@@ -332,5 +333,9 @@ public class KakushuTsuchishoSakuseiKobetsu {
 
     private KakushuTsuchishoSakuseiKobetsuHandler getHandler(KakushuTsuchishoSakuseiKobetsuDiv div) {
         return new KakushuTsuchishoSakuseiKobetsuHandler(div);
+    }
+
+    private KakushuTsuchishoSakuseiKobetsuCheckHandler getCheckHandler(KakushuTsuchishoSakuseiKobetsuDiv div) {
+        return new KakushuTsuchishoSakuseiKobetsuCheckHandler(div);
     }
 }

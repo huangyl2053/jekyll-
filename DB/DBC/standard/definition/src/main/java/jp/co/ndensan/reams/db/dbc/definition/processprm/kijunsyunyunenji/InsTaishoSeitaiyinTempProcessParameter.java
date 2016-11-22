@@ -37,5 +37,7 @@ public class InsTaishoSeitaiyinTempProcessParameter implements IBatchProcessPara
     private Boolean 一覧表CSV出力フラグ;
     private Boolean 申請書出力フラグ;
     private FlexibleDate 処理年月日;
-
+    private RString 被保険者番号;
+    private RString 抽出対象;
+    private RString 提出期限;
 }

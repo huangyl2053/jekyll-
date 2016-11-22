@@ -16,7 +16,7 @@
         "DbT1001HihokenshaDaicho"."jushochiTokureiFlag"as "setaiHaaku_jushochiTokureiFlag"
         FROM
         "HanteiTaishoshaTemp"
-        LEFT JOIN
+        INNER JOIN
         (<include refid="dbt1001LeqIdoYMDAndDoubleMax" />) AS "DbT1001HihokenshaDaicho"
         ON
         "HanteiTaishoshaTemp"."hihokenshaNo"="DbT1001HihokenshaDaicho"."hihokenshaNo"
@@ -1606,12 +1606,15 @@
                      resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3105SogoJigyoTaishoshaMapper.ResultMap_DbT3105SogoJigyoTaishoshaEntity" />
     </resultMap>
     <sql id="dbt1001LeqIdoYMDAndDoubleMax">
-        SELECT mst.*
+        Select mst.* FROM
+        (SELECT mst1.*
         FROM
-        (<include refid="dbt1001LeqIdoYMDAndSingleMax"/>)AS mst 
+        (<include refid="dbt1001LeqIdoYMDAndSingleMax"/>)AS mst1 
         WHERE (NOT (EXISTS ( SELECT slw."hihokenshaNo",slw."idoYMD",slw."edaNo"
         FROM (<include refid="dbt1001LeqIdoYMDAndSingleMax"/>) slw
-        WHERE (((mst."hihokenshaNo" = slw."hihokenshaNo") AND (mst."idoYMD" = slw."idoYMD")) AND (mst."edaNo" <![CDATA[<]]> slw."edaNo")))))
+        WHERE (((mst1."hihokenshaNo" = slw."hihokenshaNo") AND (mst1."idoYMD" = slw."idoYMD")) AND (mst1."edaNo" <![CDATA[<]]> slw."edaNo")))))
+        ) AS mst WHERE 
+        mst."shikakuShutokuYMD" <![CDATA[<=]]> #{判定基準日} AND (mst."shikakuSoshitsuYMD" <![CDATA[>]]> #{判定基準日} OR mst."shikakuSoshitsuYMD" = '' OR mst."shikakuSoshitsuYMD" is null)
     </sql>
     <sql id="dbt1001LeqIdoYMDAndSingleMax">
         SELECT
@@ -1624,7 +1627,6 @@
     </sql>
     <sql id="dbt1001LeqIdoYMD">
         SELECT msu.* FROM rgdb."DbT1001HihokenshaDaicho"  msu WHERE msu."idoYMD"<![CDATA[<=]]>#{判定基準日} AND msu."logicalDeletedFlag"=FALSE
-        AND msu."shikakuShutokuYMD" <![CDATA[<=]]> #{判定基準日} AND (msu."shikakuSoshitsuYMD" <![CDATA[>]]> #{判定基準日} OR msu."shikakuSoshitsuYMD" = '' OR msu."shikakuSoshitsuYMD" is null)
     </sql>
     <sql id="dbt1001DoubleMax">
         SELECT mst."hihokenshaNo",

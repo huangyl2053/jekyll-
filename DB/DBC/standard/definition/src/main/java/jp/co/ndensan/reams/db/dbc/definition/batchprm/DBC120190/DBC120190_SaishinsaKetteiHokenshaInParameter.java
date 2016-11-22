@@ -29,4 +29,7 @@ public class DBC120190_SaishinsaKetteiHokenshaInParameter extends BatchParameter
 
     @BatchParameter (key = "出力順ID", name = "出力順ID")
     private RString 出力順ID;
+
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 }

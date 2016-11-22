@@ -116,6 +116,7 @@ public class ShoteiShikkanListCreateProcess extends BatchProcessBase<ShoteiShikk
         所定疾患施設療養費.set再審査回数(entity.getDbt3032().getSaishinsaKaisu());
         所定疾患施設療養費.set過誤回数(entity.getDbt3032().getKagoKaisu());
         所定疾患施設療養費.set審査年月(entity.getDbt3032().getShinsaYM());
+        所定疾患施設療養費.set名称(entity.getDbT3118_ryakusho());
         return 所定疾患施設療養費;
     }
 }
