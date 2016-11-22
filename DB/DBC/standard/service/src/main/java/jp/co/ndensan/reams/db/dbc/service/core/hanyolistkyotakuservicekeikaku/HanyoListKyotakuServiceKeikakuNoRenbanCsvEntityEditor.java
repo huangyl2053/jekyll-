@@ -154,11 +154,13 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
         }
         csvEntity.set生年月日(dataToRString(entity.get宛名Entity().getSeinengappiYMD(), parameter));
 
-        AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(),
-                宛名.get消除異動年月日());
-        csvEntity.set年齢(ageCalculator.get年齢());
-        if (宛名.get性別() != null) {
-            csvEntity.set性別(宛名.get性別().getName().getShortJapanese());
+        if (宛名 != null) {
+            AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(),
+                    宛名.get消除異動年月日());
+            csvEntity.set年齢(ageCalculator.get年齢());
+            if (宛名.get性別() != null) {
+                csvEntity.set性別(宛名.get性別().getName().getShortJapanese());
+            }
         }
         TsuzukigaraCode tsuzukigaraCode = entity.get宛名Entity().getTsuzukigaraCode();
         if (tsuzukigaraCode != null) {
