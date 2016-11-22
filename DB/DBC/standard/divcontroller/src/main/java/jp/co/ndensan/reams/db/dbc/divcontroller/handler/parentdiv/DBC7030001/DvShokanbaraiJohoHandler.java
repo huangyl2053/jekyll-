@@ -370,30 +370,7 @@ public class DvShokanbaraiJohoHandler {
         if (!RString.isNullOrEmpty(金融機関コード) && !RString.isNullOrEmpty(金融機関名称)) {
             set金融機関(金融機関コード, 支店コード);
         }
-        FlexibleDate 申請日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_申請日開始);
-        if (申請日From != null && !申請日From.isEmpty()) {
-            div.getTxtShokanShinseiDate().setFromValue(new RDate(申請日From.toString()));
-        }
-        FlexibleDate 申請日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_申請日終了);
-        if (申請日To != null && !申請日To.isEmpty()) {
-            div.getTxtShokanShinseiDate().setToValue(new RDate(申請日To.toString()));
-        }
-        FlexibleDate 住宅改修支給届出日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_住宅改修支給届出日開始);
-        if (住宅改修支給届出日From != null && !住宅改修支給届出日From.isEmpty()) {
-            div.getTxtShokanHokenshaKetteiDate().setFromValue(new RDate(住宅改修支給届出日From.toString()));
-        }
-        FlexibleDate 住宅改修支給届出日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_住宅改修支給届出日終了);
-        if (住宅改修支給届出日To != null && !住宅改修支給届出日To.isEmpty()) {
-            div.getTxtShokanHokenshaKetteiDate().setToValue(new RDate(住宅改修支給届出日To.toString()));
-        }
-        FlexibleDate 決定日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_決定日開始);
-        if (決定日From != null && !決定日From.isEmpty()) {
-            div.getTxtShokanKetteiDate().setFromValue(new RDate(決定日From.toString()));
-        }
-        FlexibleDate 決定日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_決定日終了);
-        if (決定日To != null && !決定日To.isEmpty()) {
-            div.getTxtShokanKetteiDate().setToValue(new RDate(決定日To.toString()));
-        }
+
         pamaRestorePart2(restoreBatchParameterMap);
     }
 
@@ -419,6 +396,31 @@ public class DvShokanbaraiJohoHandler {
 
     private void pamaRestorePart2(BatchParameterMap restoreBatchParameterMap) {
 
+        FlexibleDate 申請日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_申請日開始);
+        if (申請日From != null && !申請日From.isEmpty()) {
+            div.getTxtShokanShinseiDate().setFromValue(new RDate(申請日From.toString()));
+        }
+        FlexibleDate 申請日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_申請日終了);
+        if (申請日To != null && !申請日To.isEmpty()) {
+            div.getTxtShokanShinseiDate().setToValue(new RDate(申請日To.toString()));
+        }
+        FlexibleDate 住宅改修支給届出日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_住宅改修支給届出日開始);
+        if (住宅改修支給届出日From != null && !住宅改修支給届出日From.isEmpty()) {
+            div.getTxtShokanHokenshaKetteiDate().setFromValue(new RDate(住宅改修支給届出日From.toString()));
+        }
+        FlexibleDate 住宅改修支給届出日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_住宅改修支給届出日終了);
+        if (住宅改修支給届出日To != null && !住宅改修支給届出日To.isEmpty()) {
+            div.getTxtShokanHokenshaKetteiDate().setToValue(new RDate(住宅改修支給届出日To.toString()));
+        }
+        FlexibleDate 決定日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_決定日開始);
+        if (決定日From != null && !決定日From.isEmpty()) {
+            div.getTxtShokanKetteiDate().setFromValue(new RDate(決定日From.toString()));
+        }
+        FlexibleDate 決定日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_決定日終了);
+        if (決定日To != null && !決定日To.isEmpty()) {
+            div.getTxtShokanKetteiDate().setToValue(new RDate(決定日To.toString()));
+        }
+
         FlexibleYearMonth 国保連送付年月From = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_国保連送付年月開始);
         if (国保連送付年月From != null && !国保連送付年月From.isEmpty()) {
             div.getTxtShokanKokuhorenSofuYM().setFromValue(new RDate(国保連送付年月From.getYearValue(), 国保連送付年月From.getMonthValue(), 国保連送付年月From.getLastDay()));
@@ -427,6 +429,12 @@ public class DvShokanbaraiJohoHandler {
         if (国保連送付年月To != null && !国保連送付年月To.isEmpty()) {
             div.getTxtShokanKokuhorenSofuYM().setToValue(new RDate(国保連送付年月To.getYearValue(), 国保連送付年月To.getMonthValue(), 国保連送付年月To.getLastDay()));
         }
+        pamaRestorePart3(restoreBatchParameterMap);
+        onChange支払先RDB();
+    }
+
+    private void pamaRestorePart3(BatchParameterMap restoreBatchParameterMap) {
+
         RString 様式番号 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_様式番号);
         List<dgYoshikiNo_Row> 様式番号選択リスト = new ArrayList<>();
         if (様式番号 != null && !様式番号.isEmpty()) {
@@ -467,7 +475,6 @@ public class DvShokanbaraiJohoHandler {
             div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().load(SubGyomuCode.DBC介護給付, REPORTID,
                     Long.valueOf(出力順.toString()));
         }
-        onChange支払先RDB();
     }
 
     private void set金融機関(RString 金融機関コード, KinyuKikanShitenCode 支店コード) {
