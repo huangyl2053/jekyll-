@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
@@ -159,6 +160,11 @@ public class NofugakuIchiranShinkokuyoEditor implements
         ChoikiCode 町域コード = 宛名Entity.getChoikiCode();
         if (町域コード != null) {
             source.list4_1 = 町域コード.value();
+            source.choikiCode = 町域コード.value();
+        }
+        AtenaKanaMeisho 氏名５０音カナ = 宛名Entity.getKanaMeisho();
+        if (氏名５０音カナ != null) {
+            source.kanaMeisho = 氏名５０音カナ.value();
         }
 
         GyoseikuCode 行政区コード = 宛名Entity.getGyoseikuCode();
