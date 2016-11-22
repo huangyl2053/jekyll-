@@ -527,17 +527,6 @@ public class TokuteiNyushoshaHiyoPanel {
         return realData;
     }
 
-    private ShokanTokuteiNyushoshaKaigoServiceHiyo is存在(ShokanTokuteiNyushoshaKaigoServiceHiyo entity, List<ShokanTokuteiNyushoshaKaigoServiceHiyo> list) {
-
-        for (ShokanTokuteiNyushoshaKaigoServiceHiyo baseEntity : list) {
-
-            if (isUpdated(baseEntity, entity)) {
-                return baseEntity;
-            }
-        }
-        return null;
-    }
-
     private List<ShokanTokuteiNyushoshaKaigoServiceHiyo> get償還払請求特定入所者介護サービス費用(TokuteiNyushoshaHiyoPanelDiv div) {
 
         ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.明細検索キー,
