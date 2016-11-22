@@ -5,8 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC3500011;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.hokenshasofulist.HokenshaSofuResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.config.ConfigKeysKokuhorenTorikomi;
@@ -61,6 +69,8 @@ public class JyusinDataBaitaiTorikomu {
     private FlexibleYearMonth 処理年月;
     private FlexibleYearMonth 処理年月の前月;
     private RString 識別番号;
+    private static final int 配列 = 1024000;
+
 
     /**
      * 画面初期化のメソッドです。
@@ -242,11 +252,17 @@ public class JyusinDataBaitaiTorikomu {
     }
 
     private void upload共有ファイル情報(RString fileName, FileData file) {
-        file.setFileName(fileName);
+        File from = new File(file.getFilePath().toString());
+        File to = new File(from.getParent() + File.separator + fileName.toString());
+        try {
+            copyFile(from, to);
+        } catch (IOException ex) {
+            Logger.getLogger(JyusinDataBaitaiTorikomu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(fileName));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(file.getFilePath()), opts);
+        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(to.getPath()), opts);
     }
 
     private void set共有ファイル情報to画面Grid(JyusinDataBaitaiTorikomuDiv div) {
@@ -259,5 +275,28 @@ public class JyusinDataBaitaiTorikomu {
 
     private HokenshaSofuListHandler getHandler(JyusinDataBaitaiTorikomuDiv div) {
         return new HokenshaSofuListHandler(div);
+    }
+
+    private void copyFile(File sourceFile, File targetFile) throws IOException {
+        BufferedInputStream inBuff = null;
+        BufferedOutputStream outBuff = null;
+        try {
+            inBuff = new BufferedInputStream(new FileInputStream(sourceFile));
+            outBuff = new BufferedOutputStream(new FileOutputStream(targetFile));
+            //CHECKSTYLE IGNORE IllegalToken FOR NEXT 1 LINES
+            byte[] b = new byte[配列];
+            int len;
+            while ((len = inBuff.read(b)) != -1) {
+                outBuff.write(b, 0, len);
+            }
+            outBuff.flush();
+        } finally {
+            if (inBuff != null) {
+                inBuff.close();
+            }
+            if (outBuff != null) {
+                outBuff.close();
+            }
+        }
     }
 }

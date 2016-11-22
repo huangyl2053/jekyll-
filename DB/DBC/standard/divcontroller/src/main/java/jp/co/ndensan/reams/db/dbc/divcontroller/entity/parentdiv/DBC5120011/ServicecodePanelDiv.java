@@ -4,27 +4,29 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5120011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect.ChikuShichosonSelectDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect.IChikuShichosonSelectDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * ServicecodePanel のクラスファイル
- *
- * @reamsid_L DBC-3340-010 lihang
+ * ServicecodePanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
-public class ServicecodePanelDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+public class ServicecodePanelDiv extends PanelBatchParameter {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("jokenFukugenHozon")
+    private jokenFukugenHozonDiv jokenFukugenHozon;
     @JsonProperty("chusyutsuPanel")
     private chusyutsuPanelDiv chusyutsuPanel;
     @JsonProperty("sekkeiPanel")
@@ -39,6 +41,8 @@ public class ServicecodePanelDiv extends Panel {
     private Label lblComment4;
     @JsonProperty("ccdChikuShichosonSelect")
     private ChikuShichosonSelectDiv ccdChikuShichosonSelect;
+    @JsonProperty("hdnSelectedMap")
+    private RString hdnSelectedMap;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +50,24 @@ public class ServicecodePanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getjokenFukugenHozon
+     * @return jokenFukugenHozon
+     */
+    @JsonProperty("jokenFukugenHozon")
+    public jokenFukugenHozonDiv getJokenFukugenHozon() {
+        return jokenFukugenHozon;
+    }
+
+    /*
+     * setjokenFukugenHozon
+     * @param jokenFukugenHozon jokenFukugenHozon
+     */
+    @JsonProperty("jokenFukugenHozon")
+    public void setJokenFukugenHozon(jokenFukugenHozonDiv jokenFukugenHozon) {
+        this.jokenFukugenHozon = jokenFukugenHozon;
+    }
+
     /*
      * getchusyutsuPanel
      * @return chusyutsuPanel
@@ -161,6 +183,47 @@ public class ServicecodePanelDiv extends Panel {
     @JsonProperty("ccdChikuShichosonSelect")
     public IChikuShichosonSelectDiv getCcdChikuShichosonSelect() {
         return ccdChikuShichosonSelect;
+    }
+
+    /*
+     * gethdnSelectedMap
+     * @return hdnSelectedMap
+     */
+    @JsonProperty("hdnSelectedMap")
+    public RString getHdnSelectedMap() {
+        return hdnSelectedMap;
+    }
+
+    /*
+     * sethdnSelectedMap
+     * @param hdnSelectedMap hdnSelectedMap
+     */
+    @JsonProperty("hdnSelectedMap")
+    public void setHdnSelectedMap(RString hdnSelectedMap) {
+        this.hdnSelectedMap = hdnSelectedMap;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public ButtonBatchParameterSave getBtnBatchParameterSave() {
+        return this.getJokenFukugenHozon().getBtnBatchParameterSave();
+    }
+
+    @JsonIgnore
+    public void  setBtnBatchParameterSave(ButtonBatchParameterSave btnBatchParameterSave) {
+        this.getJokenFukugenHozon().setBtnBatchParameterSave(btnBatchParameterSave);
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterRestore getBtnBatchParameterRestore() {
+        return this.getJokenFukugenHozon().getBtnBatchParameterRestore();
+    }
+
+    @JsonIgnore
+    public void  setBtnBatchParameterRestore(ButtonBatchParameterRestore btnBatchParameterRestore) {
+        this.getJokenFukugenHozon().setBtnBatchParameterRestore(btnBatchParameterRestore);
     }
 
     // </editor-fold>

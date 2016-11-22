@@ -2920,7 +2920,7 @@
                  "TempKyufujissekiTyukann"."serviceTeikyoYM" ASC,
                  "TempKyufujissekiTyukann"."dataKubun" ASC,
                  "TempKyufujissekiTyukann"."serviceSyuruiCode" ASC,
-                 "DbT3057KogakuShikyuHanteiKekka"."rirekiNo" ASC
+                 "DbT3057KogakuShikyuHanteiKekka"."rirekiNo" DESC
     </select> 
 
     <resultMap id="ResultMap_事業高額介護データ一時" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannJigyoKogakuRelateEntity" autoMapping="true">
@@ -2963,7 +2963,7 @@
                  "TempKyufujissekiTyukannJigyo"."serviceTeikyoYM" ASC,
                  "TempKyufujissekiTyukannJigyo"."dataKubun" ASC,
                  "TempKyufujissekiTyukannJigyo"."serviceSyuruiCode" ASC,
-                 "DbT3111JigyoKogakuShikyuHanteiKekka"."rirekiNo" ASC
+                 "DbT3111JigyoKogakuShikyuHanteiKekka"."rirekiNo" DESC
     </select> 
 
      <resultMap id="ResultMap_HanteiEraaResultEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.HanteiEraaResultEntity" autoMapping="true">
