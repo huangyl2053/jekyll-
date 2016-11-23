@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5810001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581000.DBD581000_TokeiHyoHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581001.DBD581001_YokaigoNinteiJisshiJokyoHyoParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5810001.JissiJyokyohyoDiv;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -126,7 +126,7 @@ public class JissiJyokyohyoHandler {
      * @param div JissiJyokyohyoDiv
      * @param parameter YokaigoJissiJyokyohyoParameter
      */
-    public void onCilck_btnBatchRegister(JissiJyokyohyoDiv div, DBD581000_TokeiHyoHakkoParameter parameter) {
+    public void onCilck_btnBatchRegister(JissiJyokyohyoDiv div, DBD581001_YokaigoNinteiJisshiJokyoHyoParameter parameter) {
         if (div.getCyouhyouPanel().getRdoCyouhyou().getSelectedKey().equals(帳票キー0)) {
             parameter.set出力帳票(要介護認定実施状況表);
         } else {
@@ -198,7 +198,7 @@ public class JissiJyokyohyoHandler {
         div.getJokenPanel().getCcdGyouseiEnd().setVisible(isCcdGyouseiEndVisible);
     }
 
-    private void set地区(DBD581000_TokeiHyoHakkoParameter parameter,
+    private void set地区(DBD581001_YokaigoNinteiJisshiJokyoHyoParameter parameter,
             RString 地区区分, Code 開始地区コード, Code 終了地区コード) {
         parameter.set地区区分(地区区分);
         parameter.set開始地区コード(開始地区コード);

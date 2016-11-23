@@ -241,46 +241,90 @@ public class JigyoJokyoHokokuNempoSakuei {
     }
 
     /**
-     * 一般状況チェックボックスを変更する場合、画面を表示する。
+     * 様式12チェックボックスを変更する場合、画面を表示する。
      *
      * @param div 画面情報
      * @return ResponseData<JigyoJokyoHokokuNempoSakueiDiv>
      */
-    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChangeIppan(JigyoJokyoHokokuNempoSakueiDiv div) {
-        getHandler(div).onClick_onChangeIppan();
+    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChange1(JigyoJokyoHokokuNempoSakueiDiv div) {
+        getHandler(div).onClick_onChange1();
         return ResponseData.of(div).respond();
     }
-
+    
+    /**
+     * 一般状況1～11チェックボックスを変更する場合、画面を表示する。
+     *
+     * @param div 画面情報
+     * @return ResponseData<JigyoJokyoHokokuNempoSakueiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChange2(JigyoJokyoHokokuNempoSakueiDiv div) {
+        getHandler(div).onClick_onChange2();
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 一般状況12～14【現物分】チェックボックスを変更する場合、画面を表示する。
+     *
+     * @param div 画面情報
+     * @return ResponseData<JigyoJokyoHokokuNempoSakueiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChange3(JigyoJokyoHokokuNempoSakueiDiv div) {
+        getHandler(div).onClick_onChange3();
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 保険給付決定状況【現物分】チェックボックスを変更する場合、画面を表示する。
+     *
+     * @param div 画面情報
+     * @return ResponseData<JigyoJokyoHokokuNempoSakueiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChange4(JigyoJokyoHokokuNempoSakueiDiv div) {
+        getHandler(div).onClick_onChange4();
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 一般状況12～14【償還分】チェックボックスを変更する場合、画面を表示する。
      *
      * @param div 画面情報
      * @return ResponseData<JigyoJokyoHokokuNempoSakueiDiv>
      */
-    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChangeIppanShokan(JigyoJokyoHokokuNempoSakueiDiv div) {
-        getHandler(div).onClick_onChangeIppanShokan(RString.EMPTY);
+    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChange5(JigyoJokyoHokokuNempoSakueiDiv div) {
+        getHandler(div).onClick_onChange5();
         return ResponseData.of(div).respond();
     }
-
+    
     /**
      * 保険給付決定状況【償還分】チェックボックスを変更する場合、画面を表示する。
      *
      * @param div 画面情報
      * @return ResponseData<JigyoJokyoHokokuNempoSakueiDiv>
      */
-    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChangeHokenShokan(JigyoJokyoHokokuNempoSakueiDiv div) {
-        getHandler(div).onClick_onChangeIppanShokan(new RString("償還分"));
+    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChange6(JigyoJokyoHokokuNempoSakueiDiv div) {
+        getHandler(div).onClick_onChange6();
         return ResponseData.of(div).respond();
     }
-
+    
+    /**
+     * 保険給付決定状況【高額分】チェックボックスを変更する場合、画面を表示する。
+     *
+     * @param div 画面情報
+     * @return ResponseData<JigyoJokyoHokokuNempoSakueiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChange7(JigyoJokyoHokokuNempoSakueiDiv div) {
+        getHandler(div).onClick_onChange7();
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 保険給付決定状況【高額合算分】チェックボックスを変更する場合、画面を表示する。
      *
      * @param div 画面情報
      * @return ResponseData<JigyoJokyoHokokuNempoSakueiDiv>
      */
-    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChangeGassan(JigyoJokyoHokokuNempoSakueiDiv div) {
-        getHandler(div).onClick_onChangeGassan();
+    public ResponseData<JigyoJokyoHokokuNempoSakueiDiv> onClick_onChange8(JigyoJokyoHokokuNempoSakueiDiv div) {
+        getHandler(div).onClick_onChange8();
         return ResponseData.of(div).respond();
     }
 

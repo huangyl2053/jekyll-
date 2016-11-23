@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class uploadAreaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class uploadAreaDiv extends Panel {
      */
     @JsonProperty("uploadTool")
     private UploadPanel uploadTool;
+    @JsonProperty("btnDataTorikomi")
+    private Button btnDataTorikomi;
     @JsonProperty("btnUpload")
     private Button btnUpload;
 
@@ -48,6 +50,24 @@ public class uploadAreaDiv extends Panel {
     @JsonProperty("uploadTool")
     public void setUploadTool(UploadPanel uploadTool) {
         this.uploadTool = uploadTool;
+    }
+
+    /*
+     * getbtnDataTorikomi
+     * @return btnDataTorikomi
+     */
+    @JsonProperty("btnDataTorikomi")
+    public Button getBtnDataTorikomi() {
+        return btnDataTorikomi;
+    }
+
+    /*
+     * setbtnDataTorikomi
+     * @param btnDataTorikomi btnDataTorikomi
+     */
+    @JsonProperty("btnDataTorikomi")
+    public void setBtnDataTorikomi(Button btnDataTorikomi) {
+        this.btnDataTorikomi = btnDataTorikomi;
     }
 
     /*

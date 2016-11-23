@@ -165,7 +165,7 @@
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe090001.YouKaiGoNinTeiKekTesuChiMybitisParamter" fetchSize="500" >
         SELECT
-        rgdb."DbT5051KoseiShichosonMaster"."shichosonMeisho" AS dbT5051KoseiShichosonMaster_shichosonMeisho,
+        rgdb."DbT7051KoseiShichosonMaster"."shichosonMeisho" AS dbT7051KoseiShichosonMaster_shichosonMeisho,
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaName"  AS dbT5101NinteiShinseiJoho_hihokenshaName,
         rgdb."DbT5101NinteiShinseiJoho".jusho  AS youKaiGoNinTeiKekTesuChiRelateEntity_jusho,
         rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD"  AS dbT5102NinteiKekkaJoho_nijiHanteiYMD,
@@ -178,8 +178,8 @@
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo" AS dbT5101NinteiShinseiJoho_hihokenshaNo
         FROM
         rgdb."DbT5101NinteiShinseiJoho"
-        INNER JOIN  rgdb."DbT5051KoseiShichosonMaster"
-        ON  rgdb."DbT5051KoseiShichosonMaster"."shoKisaiHokenshaNo" = rgdb."DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
+        INNER JOIN  rgdb."DbT7051KoseiShichosonMaster"
+        ON  rgdb."DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = rgdb."DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
         INNER JOIN  rgdb."DbT5102NinteiKekkaJoho"
         ON  rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"

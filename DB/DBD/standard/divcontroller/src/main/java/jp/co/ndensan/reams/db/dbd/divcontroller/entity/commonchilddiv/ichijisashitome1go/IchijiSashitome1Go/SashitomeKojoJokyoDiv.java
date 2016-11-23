@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SashitomeKojoJokyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,21 +25,21 @@ public class SashitomeKojoJokyoDiv extends Panel {
     @JsonProperty("txtSashitomeTorokuKubun")
     private TextBox txtSashitomeTorokuKubun;
     @JsonProperty("txtSashitomeTorokuYMD")
-    private TextBoxFlexibleDate txtSashitomeTorokuYMD;
+    private TextBoxDate txtSashitomeTorokuYMD;
     @JsonProperty("txtSashitomeTorokuTsuchiHakkoYMD")
     private TextBoxFlexibleDate txtSashitomeTorokuTsuchiHakkoYMD;
     @JsonProperty("txtSashitomeNofuKigenYMD")
-    private TextBoxFlexibleDate txtSashitomeNofuKigenYMD;
+    private TextBoxDate txtSashitomeNofuKigenYMD;
     @JsonProperty("txtSashitomeKaijoYMD")
-    private TextBoxFlexibleDate txtSashitomeKaijoYMD;
+    private TextBoxDate txtSashitomeKaijoYMD;
     @JsonProperty("txtKojoTorokuKubun")
     private TextBox txtKojoTorokuKubun;
     @JsonProperty("txtKojoKetteiYMD")
-    private TextBoxFlexibleDate txtKojoKetteiYMD;
+    private TextBoxDate txtKojoKetteiYMD;
     @JsonProperty("txtKojoTorokuTsuchiHakkoYMD")
     private TextBoxFlexibleDate txtKojoTorokuTsuchiHakkoYMD;
     @JsonProperty("txtHokenshoTeishutsuKigenYMD")
-    private TextBoxFlexibleDate txtHokenshoTeishutsuKigenYMD;
+    private TextBoxDate txtHokenshoTeishutsuKigenYMD;
     @JsonProperty("ddlTorokuKojoNo")
     private DropDownList ddlTorokuKojoNo;
     @JsonProperty("SashitomeToroku")
@@ -78,7 +78,7 @@ public class SashitomeKojoJokyoDiv extends Panel {
      * @return txtSashitomeTorokuYMD
      */
     @JsonProperty("txtSashitomeTorokuYMD")
-    public TextBoxFlexibleDate getTxtSashitomeTorokuYMD() {
+    public TextBoxDate getTxtSashitomeTorokuYMD() {
         return txtSashitomeTorokuYMD;
     }
 
@@ -87,7 +87,7 @@ public class SashitomeKojoJokyoDiv extends Panel {
      * @param txtSashitomeTorokuYMD txtSashitomeTorokuYMD
      */
     @JsonProperty("txtSashitomeTorokuYMD")
-    public void setTxtSashitomeTorokuYMD(TextBoxFlexibleDate txtSashitomeTorokuYMD) {
+    public void setTxtSashitomeTorokuYMD(TextBoxDate txtSashitomeTorokuYMD) {
         this.txtSashitomeTorokuYMD = txtSashitomeTorokuYMD;
     }
 
@@ -114,7 +114,7 @@ public class SashitomeKojoJokyoDiv extends Panel {
      * @return txtSashitomeNofuKigenYMD
      */
     @JsonProperty("txtSashitomeNofuKigenYMD")
-    public TextBoxFlexibleDate getTxtSashitomeNofuKigenYMD() {
+    public TextBoxDate getTxtSashitomeNofuKigenYMD() {
         return txtSashitomeNofuKigenYMD;
     }
 
@@ -123,7 +123,7 @@ public class SashitomeKojoJokyoDiv extends Panel {
      * @param txtSashitomeNofuKigenYMD txtSashitomeNofuKigenYMD
      */
     @JsonProperty("txtSashitomeNofuKigenYMD")
-    public void setTxtSashitomeNofuKigenYMD(TextBoxFlexibleDate txtSashitomeNofuKigenYMD) {
+    public void setTxtSashitomeNofuKigenYMD(TextBoxDate txtSashitomeNofuKigenYMD) {
         this.txtSashitomeNofuKigenYMD = txtSashitomeNofuKigenYMD;
     }
 
@@ -132,7 +132,7 @@ public class SashitomeKojoJokyoDiv extends Panel {
      * @return txtSashitomeKaijoYMD
      */
     @JsonProperty("txtSashitomeKaijoYMD")
-    public TextBoxFlexibleDate getTxtSashitomeKaijoYMD() {
+    public TextBoxDate getTxtSashitomeKaijoYMD() {
         return txtSashitomeKaijoYMD;
     }
 
@@ -141,7 +141,7 @@ public class SashitomeKojoJokyoDiv extends Panel {
      * @param txtSashitomeKaijoYMD txtSashitomeKaijoYMD
      */
     @JsonProperty("txtSashitomeKaijoYMD")
-    public void setTxtSashitomeKaijoYMD(TextBoxFlexibleDate txtSashitomeKaijoYMD) {
+    public void setTxtSashitomeKaijoYMD(TextBoxDate txtSashitomeKaijoYMD) {
         this.txtSashitomeKaijoYMD = txtSashitomeKaijoYMD;
     }
 
@@ -168,7 +168,7 @@ public class SashitomeKojoJokyoDiv extends Panel {
      * @return txtKojoKetteiYMD
      */
     @JsonProperty("txtKojoKetteiYMD")
-    public TextBoxFlexibleDate getTxtKojoKetteiYMD() {
+    public TextBoxDate getTxtKojoKetteiYMD() {
         return txtKojoKetteiYMD;
     }
 
@@ -177,7 +177,7 @@ public class SashitomeKojoJokyoDiv extends Panel {
      * @param txtKojoKetteiYMD txtKojoKetteiYMD
      */
     @JsonProperty("txtKojoKetteiYMD")
-    public void setTxtKojoKetteiYMD(TextBoxFlexibleDate txtKojoKetteiYMD) {
+    public void setTxtKojoKetteiYMD(TextBoxDate txtKojoKetteiYMD) {
         this.txtKojoKetteiYMD = txtKojoKetteiYMD;
     }
 
@@ -204,7 +204,7 @@ public class SashitomeKojoJokyoDiv extends Panel {
      * @return txtHokenshoTeishutsuKigenYMD
      */
     @JsonProperty("txtHokenshoTeishutsuKigenYMD")
-    public TextBoxFlexibleDate getTxtHokenshoTeishutsuKigenYMD() {
+    public TextBoxDate getTxtHokenshoTeishutsuKigenYMD() {
         return txtHokenshoTeishutsuKigenYMD;
     }
 
@@ -213,7 +213,7 @@ public class SashitomeKojoJokyoDiv extends Panel {
      * @param txtHokenshoTeishutsuKigenYMD txtHokenshoTeishutsuKigenYMD
      */
     @JsonProperty("txtHokenshoTeishutsuKigenYMD")
-    public void setTxtHokenshoTeishutsuKigenYMD(TextBoxFlexibleDate txtHokenshoTeishutsuKigenYMD) {
+    public void setTxtHokenshoTeishutsuKigenYMD(TextBoxDate txtHokenshoTeishutsuKigenYMD) {
         this.txtHokenshoTeishutsuKigenYMD = txtHokenshoTeishutsuKigenYMD;
     }
 

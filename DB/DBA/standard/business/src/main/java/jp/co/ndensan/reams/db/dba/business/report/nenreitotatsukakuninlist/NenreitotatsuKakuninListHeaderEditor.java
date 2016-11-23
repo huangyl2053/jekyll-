@@ -29,6 +29,8 @@ class NenreitotatsuKakuninListHeaderEditor implements INenreitotatsuKakuninListE
     private NenreitotatsuKakuninListReportSource editHeader(NenreitotatsuKakuninListReportSource source) {
         source.taishoJohotitle = item.getTaishoJohotitle();
         source.printTimeStamp = item.getPrintTimeStamp();
+        source.tyusyutsukikanF = item.getTyusyutsukikanF();
+        source.tyusyutsukikanT = item.getTyusyutsukikanT();
         return source;
     }
 

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushatorokusha.NenreiTotatsuTorokushaListEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushatorokusha.NenreiTotatsushaJouhouEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsukakuninlist.NenreitotatsuKakuninListReportSource;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitoutatsuyoteishachecklist.INenreiToutatsuYoteishaCheckListMapper;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitotatsutorokushalist.NenreiTotatsushaTorokuListBatch;
 import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.BreakPageCreator;
 import jp.co.ndensan.reams.db.dbz.business.report.reportitem.KaigoReportItems;
@@ -94,6 +95,7 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
     private ReportSourceWriter<NenreitotatsuKakuninListReportSource> reportSourceWriter;
     @BatchWriter
     BatchPermanentTableWriter<DbT7022ShoriDateKanriEntity> tableWriter;
+    private INenreiToutatsuYoteishaCheckListMapper nenreiCheckListMapper;
 
     @Override
     protected void initialize() {
@@ -103,6 +105,7 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
         old識別コード = new ShikibetsuCode("");
         出力順リスト = new ArrayList<>();
         改頁リスト = new ArrayList<>();
+        nenreiCheckListMapper = getMapper(INenreiToutatsuYoteishaCheckListMapper.class);
         IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
         if (processParameter.getShutsuryokujunID() != null) {
             chohyoShuturyokujun = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
@@ -254,25 +257,13 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
     }
 
     private void 処理日付管理マスタ更新() {
-        DbT7022ShoriDateKanriEntity shoriDateKanriEntity = new DbT7022ShoriDateKanriEntity();
-        shoriDateKanriEntity.setTaishoKaishiYMD(new FlexibleDate(processParameter.getKonkaikaishiYMDHMS()
+        DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanri = new DbT7022ShoriDateKanriEntity();
+        dbT7022ShoriDateKanri.setTaishoKaishiYMD(new FlexibleDate(processParameter.getKonkaikaishiYMDHMS()
                 .replace("-", "").substring(0, 日付桁数)));
-        shoriDateKanriEntity.setTaishoShuryoYMD(new FlexibleDate(processParameter.getKonkaishuryoYMDHMS()
+        dbT7022ShoriDateKanri.setTaishoShuryoYMD(new FlexibleDate(processParameter.getKonkaishuryoYMDHMS()
                 .replace("-", "").substring(0, 日付桁数)));
-        if (RString.isNullOrEmpty(processParameter.getZenkaikaishiYMDHMS()) && RString.isNullOrEmpty(processParameter.getZenkaishuryoYMDHMS())) {
-            shoriDateKanriEntity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
-            shoriDateKanriEntity.setShichosonCode(AssociationFinderFactory.createInstance().getAssociation()
-                    .get地方公共団体コード());
-            shoriDateKanriEntity.setShoriName(処理名);
-            shoriDateKanriEntity.setShoriEdaban(処理枝番);
-            shoriDateKanriEntity.setNendo(年度);
-            shoriDateKanriEntity.setNendoNaiRenban(年度内連番);
-            tableWriter.insert(shoriDateKanriEntity);
-        } else {
-            shoriDateKanriEntity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
-            shoriDateKanriEntity.setShoriName(処理名);
-            tableWriter.update(shoriDateKanriEntity);
-        }
+        dbT7022ShoriDateKanri.setShoriName(処理名);
+        nenreiCheckListMapper.getInsert(dbT7022ShoriDateKanri);
     }
 
     private void bak() {

@@ -9,11 +9,8 @@ import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.Ikenshokinyuyo
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
-import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog.SimpleLayoutBreaker;
 import jp.co.ndensan.reams.uz.uza.report.Breakers;
-import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
-import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 要介護認定主治医意見書記入用紙-片面-白黒のプロパティです。
@@ -34,21 +31,6 @@ public class IkenshokinyuyoshiProperty extends ReportPropertyBase<Ikenshokinyuyo
     @Override
     public Breakers<IkenshokinyuyoshiReportSource> defineBreakers(Breakers<IkenshokinyuyoshiReportSource> breakers,
             BreakerCatalog<IkenshokinyuyoshiReportSource> catalog) {
-        return breakers.add(catalog.new SimpleLayoutBreaker(
-
-            IkenshokinyuyoshiReportSource.LAYOUT_BREAK_KEYS) {
-            @Override
-            public ReportLineRecord<IkenshokinyuyoshiReportSource> occuredBreak(ReportLineRecord<IkenshokinyuyoshiReportSource> currentRecord,
-                    ReportLineRecord<IkenshokinyuyoshiReportSource> nextRecord,
-                    ReportDynamicChart dynamicChart) {
-                int layout = currentRecord.getSource().layout.index();
-                currentRecord.setFormGroupIndex(layout);
-                if (nextRecord != null && nextRecord.getSource() != null) {
-                    layout = nextRecord.getSource().layout.index();
-                    nextRecord.setFormGroupIndex(layout);
-                }
-                return currentRecord;
-            }
-        }).fixed();
+        return breakers.add(catalog.simpleLayoutBreaker(IkenshokinyuyoshiReportSource.LAYOUT_BREAK_KEYS)).fixed();
     }
 }

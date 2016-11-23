@@ -135,8 +135,10 @@ public class HomonKaigoRiryoshaFutangakuGengakuService {
      * @param 法別区分 法別区分
      * @param 適用開始日 適用開始日
      * @return 給付率
-     * @throws NullPointerException パラメータのいずれかがnullの場合、NullPointerExceptionをスローする。
-     * @throws IllegalArgumentException 適用開始日.isEmpty() の場合、IllegalArgumentExceptionをスローする。
+     * @throws NullPointerException
+     * パラメータのいずれかがnullの場合、NullPointerExceptionをスローする。
+     * @throws IllegalArgumentException
+     * 適用開始日.isEmpty()の場合、IllegalArgumentExceptionをスローする。
      */
     public int decide給付率(HobetsuKubun 法別区分, FlexibleDate 適用開始日) {
         requireNonNull(適用開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始日"));
@@ -169,10 +171,10 @@ public class HomonKaigoRiryoshaFutangakuGengakuService {
         if (null == 適用日 || 適用日.isEmpty()) {
             return FlexibleDate.EMPTY;
         }
-        RString 減免期限_特別減免 = RString.EMPTY;
+        RString 減免期限_特別減免;
         try {
-            DbBusinessConfig.get(ConfigNameDBD.減免期限_特別減免, new RDate(適用日.toString()), SubGyomuCode.DBD介護受給);
-        } catch (Exception e) {
+            減免期限_特別減免 = DbBusinessConfig.get(ConfigNameDBD.減免期限_特別減免, new RDate(適用日.toString()), SubGyomuCode.DBD介護受給);
+        } catch (IllegalArgumentException e) {
             return FlexibleDate.EMPTY;
         }
         if (!減免期限_特別減免.isEmpty()) {
@@ -213,54 +215,27 @@ public class HomonKaigoRiryoshaFutangakuGengakuService {
     @Transaction
     public void 更新処理(ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList,
             boolean is申請メニューID, List<HomonKaigoRiyoshaFutangakuGengaku> 最初申請一覧情報) {
-        boolean isすべて履歴番号変更 = false;
-        if (!is申請メニューID && !情報と状態ArrayList.isEmpty()) {
-            HomonKaigoRiyoshaFutangakuGengakuToJotai 情報と状態 = 情報と状態ArrayList.get(情報と状態ArrayList.size() - 1);
-            if (!情報と状態.get状態().isEmpty() && 情報と状態.get新履歴番号() == 0) {
-                isすべて履歴番号変更 = true;
-            }
-        }
+
         RString 訪問介護利用者負担額減額コード = GemmenGengakuShurui.訪問介護利用者負担額減額.getコード();
         HomonKaigoRiyoshaFutangakuGengakuManager manager = HomonKaigoRiyoshaFutangakuGengakuManager.createInstance();
+
+        for (HomonKaigoRiyoshaFutangakuGengakuToJotai 情報と状態 : 情報と状態ArrayList) {
+            RString 状態 = 情報と状態.get状態();
+            HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額情報 = 情報と状態.get訪問介護利用者負担額減額情報();
+            if (!状態_追加.equals(状態)) {
+                manager.delete訪問介護利用者負担額減額情報By減免減額種類(
+                        get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
+            }
+        }
+
         for (HomonKaigoRiyoshaFutangakuGengakuToJotai 情報と状態 : 情報と状態ArrayList) {
             RString 状態 = 情報と状態.get状態();
             HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額情報 = 情報と状態.get訪問介護利用者負担額減額情報();
             int 履歴番号 = 情報と状態.get新履歴番号();
-            if (isすべて履歴番号変更) {
-                履歴番号 = 履歴番号 + 1;
-                if (状態_削除.equals(状態)) {
-                    manager.delete訪問介護利用者負担額減額情報By減免減額種類(
-                            get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
-                } else if (状態_追加.equals(状態)) {
-                    manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報, 履歴番号, null));
-                } else if (状態_修正.equals(状態)) {
-                    manager.delete訪問介護利用者負担額減額情報By減免減額種類(
-                            get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
-                    manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報, 履歴番号, null));
-                } else {
-                    manager.delete訪問介護利用者負担額減額情報By減免減額種類(
-                            get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
-                    manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報,
-                            履歴番号, get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報)));
-                }
-                continue;
-            }
-            if (状態_削除.equals(状態)) {
-                manager.delete訪問介護利用者負担額減額情報By減免減額種類(
-                        get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
-            } else if (状態_修正.equals(状態)) {
-                if (履歴番号 == 訪問介護利用者負担額減額情報.get履歴番号()) {
-                    manager.save(訪問介護利用者負担額減額情報.updateModel());
-                } else {
-                    manager.delete訪問介護利用者負担額減額情報By減免減額種類(
-                            get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
-                    manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報, 履歴番号, null));
-                }
-            } else if (状態_追加.equals(状態)) {
+
+            if (状態_追加.equals(状態) || 状態_修正.equals(状態)) {
                 manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報, 履歴番号, null));
-            } else if (履歴番号 != 訪問介護利用者負担額減額情報.get履歴番号()) {
-                manager.delete訪問介護利用者負担額減額情報By減免減額種類(
-                        get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報), 訪問介護利用者負担額減額コード);
+            } else if (!状態_削除.equals(状態)) {
                 manager.save(get訪問介護利用者負担額減額情報ByChange履歴番号(訪問介護利用者負担額減額情報,
                         履歴番号, get最初情報(最初申請一覧情報, 訪問介護利用者負担額減額情報)));
             }

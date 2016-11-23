@@ -39,28 +39,28 @@ public class IkenshokinyuyoshiOCRuraEditorImpl implements IIkenshokinyuyoshiOCRE
     }
 
     private IkenshokinyuyoshiReportSource editSource(IkenshokinyuyoshiReportSource source) {
-        source.oCR4_shinseiYY1 = business.getShinseiYY1();
-        source.oCR4_shinseiYY2 = business.getShinseiYY2();
-        source.oCR4_shinseiMM1 = business.getShinseiMM1();
-        source.oCR4_shinseiMM2 = business.getShinseiMM2();
-        source.oCR4_shinseiDD1 = business.getShinseiDD1();
-        source.oCR4_shinseiDD2 = business.getShinseiDD2();
-        source.oCR4_hokenshaNo1 = business.getHokenshaNo1();
-        source.oCR4_hokenshaNo2 = business.getHokenshaNo2();
-        source.oCR4_hokenshaNo3 = business.getHokenshaNo3();
-        source.oCR4_hokenshaNo4 = business.getHokenshaNo4();
-        source.oCR4_hokenshaNo5 = business.getHokenshaNo5();
-        source.oCR4_hokenshaNo6 = business.getHokenshaNo6();
-        source.oCR4_hihokenshaNo1 = business.getHihokenshaNo1();
-        source.oCR4_hihokenshaNo2 = business.getHihokenshaNo2();
-        source.oCR4_hihokenshaNo3 = business.getHihokenshaNo3();
-        source.oCR4_hihokenshaNo4 = business.getHihokenshaNo4();
-        source.oCR4_hihokenshaNo5 = business.getHihokenshaNo5();
-        source.oCR4_hihokenshaNo6 = business.getHihokenshaNo6();
-        source.oCR4_hihokenshaNo7 = business.getHihokenshaNo7();
-        source.oCR4_hihokenshaNo8 = business.getHihokenshaNo8();
-        source.oCR4_hihokenshaNo9 = business.getHihokenshaNo9();
-        source.oCR4_hihokenshaNo10 = business.getHihokenshaNo10();
+        source.shinseiYY1 = business.getShinseiYY1();
+        source.shinseiYY2 = business.getShinseiYY2();
+        source.shinseiMM1 = business.getShinseiMM1();
+        source.shinseiMM2 = business.getShinseiMM2();
+        source.shinseiD1 = business.getShinseiDD1();
+        source.shinseiDD2 = business.getShinseiDD2();
+        source.hokenshaNo1 = business.getHokenshaNo1();
+        source.hokenshaNo2 = business.getHokenshaNo2();
+        source.hokenshaNo3 = business.getHokenshaNo3();
+        source.hokenshaNo4 = business.getHokenshaNo4();
+        source.hokenshaNo5 = business.getHokenshaNo5();
+        source.hokenshaNo6 = business.getHokenshaNo6();
+        source.hihokenshaNo1 = business.getHihokenshaNo1();
+        source.hihokenshaNo2 = business.getHihokenshaNo2();
+        source.hihokenshaNo3 = business.getHihokenshaNo3();
+        source.hihokenshaNo4 = business.getHihokenshaNo4();
+        source.hihokenshaNo5 = business.getHihokenshaNo5();
+        source.hihokenshaNo6 = business.getHihokenshaNo6();
+        source.hihokenshaNo7 = business.getHihokenshaNo7();
+        source.hihokenshaNo8 = business.getHihokenshaNo8();
+        source.hihokenshaNo9 = business.getHihokenshaNo9();
+        source.hihokenshaNo10 = business.getHihokenshaNo10();
         source.layout = Layouts.必須;
         return source;
     }

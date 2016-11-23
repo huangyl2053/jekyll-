@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5010001.DBD5
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5010001.KoshinTaishoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5010001.KoshinTaishoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5010001.KoshinTaishoValidationHandler;
-import jp.co.ndensan.reams.db.dbd.service.core.koshintaisho.KoshinTaishoManager;
+import jp.co.ndensan.reams.db.dbd.service.core.dbd5010001.KoshinTaishoManager;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

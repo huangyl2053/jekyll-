@@ -78,19 +78,19 @@
         , DbT5910."jigyoshaMeisho" AS ninteichosaItakusakiMeisho
         , DbT5911."iryoKikanMeisho" AS shujiiIryokikanMeisho
         , DbT5914."kikanMeisho" AS sonotaKikanMeisho
-        , DbT5051."shoKisaiHokenshaNo"
-        , DbT5051."shichosonMeisho"
-        , DbT5051."shichosonCode"
+        , DbT7051."shoKisaiHokenshaNo"
+        , DbT7051."shichosonMeisho"
+        , DbT7051."shichosonCode"
         FROM
         rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" DbT5595
-        LEFT JOIN rgdb."DbT5051KoseiShichosonMaster" DbT5051
-        ON DbT5595."shoKisaiHokenshaNo" = DbT5051."shoKisaiHokenshaNo"
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON DbT5595."shoKisaiHokenshaNo" = DbT7051."shoKisaiHokenshaNo"
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
         ON DbT5595."ninteichosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
-        AND DbT5910."shichosonCode" = DbT5051."shichosonCode"
+        AND DbT5910."shichosonCode" = DbT7051."shichosonCode"
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
         ON DbT5595."shujiiIryokikanCode" = DbT5911."shujiiIryokikanCode"
-        AND DbT5911."shichosonCode" = DbT5051."shichosonCode"
+        AND DbT5911."shichosonCode" = DbT7051."shichosonCode"
         LEFT JOIN rgdb."DbT5914SonotaKikanJoho" DbT5914
         ON DbT5595."sonotaKikanCode" = DbT5914."sonotaKikanCode"
         AND DbT5595."shoKisaiHokenshaNo" = DbT5914."shoKisaiHokenshaNo"

@@ -112,8 +112,6 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
     @Override
     public int save(DbT4021ShiharaiHohoHenkoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("支払方法変更エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 

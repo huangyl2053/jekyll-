@@ -45,7 +45,7 @@ public final class Yoshiki1To2ComMybatisParameter implements IMyBatisParameter {
     private final boolean is前回処理結果;
     private final boolean is市町村特別給付;
 
-    private static final RString 年月_99 = new RString("99");
+    private static final RString 年月_00 = new RString("00");
     private static final RString 月日_0331 = new RString("0331");
 
     /**
@@ -106,7 +106,7 @@ public final class Yoshiki1To2ComMybatisParameter implements IMyBatisParameter {
         FlexibleYear 年度 = new FlexibleYear(集計年度);
         return new Yoshiki1To2ComMybatisParameter(
                 年度, FlexibleDate.EMPTY,
-                年月_99,
+                年月_00,
                 new Code(表番号),
                 new Code(ShukeiNo.一般状況_4_所得段階別第１号被保険者数.getコード()), null,
                 FlexibleYear.EMPTY,
@@ -132,7 +132,7 @@ public final class Yoshiki1To2ComMybatisParameter implements IMyBatisParameter {
         list.add(new Code(ShukeiNoyoshiki2.市町村特別給付_給付額.getコード()));
         return new Yoshiki1To2ComMybatisParameter(
                 年度, FlexibleDate.EMPTY,
-                年月_99, new Code(表番号),
+                年月_00, new Code(表番号),
                 Code.EMPTY, list, FlexibleYear.EMPTY,
                 RString.EMPTY,
                 Decimal.ONE, Decimal.ONE, Decimal.ONE,
@@ -157,7 +157,7 @@ public final class Yoshiki1To2ComMybatisParameter implements IMyBatisParameter {
         list.add(new Code(ShukeiNo.一般状況_2_第2号被保険者増減内訳_当月中減.getコード()));
         return new Yoshiki1To2ComMybatisParameter(
                 年度, FlexibleDate.EMPTY,
-                年月_99, new Code(表番号),
+                年月_00, new Code(表番号),
                 Code.EMPTY, list, FlexibleYear.EMPTY,
                 RString.EMPTY,
                 Decimal.ONE, Decimal.ONE, Decimal.ONE,
@@ -184,8 +184,8 @@ public final class Yoshiki1To2ComMybatisParameter implements IMyBatisParameter {
             Decimal 縦番号,
             Decimal 横番号, Decimal 集計結果値, RString 集計項目名称, RString 市町村コード) {
         return new Yoshiki1To2ComMybatisParameter(new FlexibleYear(集計年度),
-                FlexibleDate.EMPTY, 年月_99, 表番号,
-                集計番号, null, new FlexibleYear(報告年度), 年月_99,
+                FlexibleDate.EMPTY, 年月_00, 表番号,
+                集計番号, null, new FlexibleYear(報告年度), 年月_00,
                 縦番号, 横番号, 集計結果値, 集計項目名称, new LasdecCode(市町村コード), true, true);
     }
 }

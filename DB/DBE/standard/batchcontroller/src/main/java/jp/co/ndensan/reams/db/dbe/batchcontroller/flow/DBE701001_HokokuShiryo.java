@@ -4,6 +4,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.CsvKenHokokuShi
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.JigyoJyokyoHokokuDataSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.JigyoJyokyoHokokuProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.JisshiJokyoTokeiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.JokenhyoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.JotaikubunbetsuhanteiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.ShinsahanteinoHenkojokyoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.ShinsakaiShukeiGenzainojokyoProcess;
@@ -32,6 +33,7 @@ public class DBE701001_HokokuShiryo extends BatchFlowBase<DBE701001_HokokuShiryo
     private static final String 審査会集計表申請区分別 = "shinsakaiShukeihyoShinseiBetsu";
     private static final String 審査会集計表現在状況別 = "shinsakaiShukeiGenzainojokyo";
     private static final String 県報告用資料情報作成 = "csvKenHokokuShiryoSakusei";
+    private static final String 条件表 = "jokenhyo";
 
     @Override
     protected void defineFlow() {
@@ -55,6 +57,7 @@ public class DBE701001_HokokuShiryo extends BatchFlowBase<DBE701001_HokokuShiryo
         if (getParameter().isCsvShutsuryoku()) {
             executeStep(県報告用資料情報作成);
         }
+
     }
 
     /**
@@ -165,5 +168,16 @@ public class DBE701001_HokokuShiryo extends BatchFlowBase<DBE701001_HokokuShiryo
     protected IBatchFlowCommand selectCsvKenHokokuShiryo() {
         return loopBatch(CsvKenHokokuShiryoSakuseiProcess.class)
                 .arguments(getParameter().toCsvKenHokokuShiryoSakuseiProcessParameter()).define();
+    }
+
+    /**
+     * 条件表の作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(条件表)
+    protected IBatchFlowCommand selectJokenhyo() {
+        return simpleBatch(JokenhyoProcess.class)
+                .arguments(getParameter().toSinsakaiHanteiJyokyoProcessParameter()).define();
     }
 }

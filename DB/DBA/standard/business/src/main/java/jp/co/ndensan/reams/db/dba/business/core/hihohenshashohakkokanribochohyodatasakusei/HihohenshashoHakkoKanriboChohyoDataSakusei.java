@@ -13,9 +13,10 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.Aka
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakkoKanriboChohyoDataSakuseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoYoshikiKubun;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -40,47 +41,34 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
     private static final RString DATE_作成 = new RString("作成");
-//    private static final RString 改頁 = new RString("被保険者証発行管理簿");
-    private static final RString 被保険者証発行 = new RString("介護保険　被保険者証発行管理一覧表");
-    private static final RString 資格者証発行 = new RString("介護保険　資格者証発行管理一覧表");
+    private static final RString 証発行モード_被保険者 = new RString("001");
+    private static final RString 証発行モード_資格者 = new RString("002");
     private static final RString ハイフン = new RString("-");
     private static final int 郵便番号_0桁 = 0;
     private static final int 郵便番号_3桁 = 3;
     private final RStringBuilder 郵便番号 = new RStringBuilder();
 
+    private static final int ソート順1 = 1;
+    private static final int ソート順2 = 2;
+    private static final int ソート順3 = 3;
+    private static final int ソート順4 = 4;
+    private static final int ソート順5 = 5;
+
     /**
      * 証発行管理帳票データリスト作成します。
      *
      * @param relateEntityList 証発行管理リスト情報EntityList
+     * @param order ソート順
      * @return List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity>
      * 証発行管理リスト帳票用データリスト
      */
-    public List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> getShohakkoKanriChohyoDataList(AkasiHakouKanriRelateEntity relateEntityList) {
+    public List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> getShohakkoKanriChohyoDataList(
+            AkasiHakouKanriRelateEntity relateEntityList, List<ISetSortItem> order) {
         List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> chohyoDataEntityList = new ArrayList<>();
         if (!relateEntityList.getAkasiHakouKanriEntityList().isEmpty()) {
             for (AkasiHakouKanriEntity entity : relateEntityList.getAkasiHakouKanriEntityList()) {
-                HihohenshashoHakkoKanriboChohyoDataSakuseiEntity chohyoDataEntity = new HihohenshashoHakkoKanriboChohyoDataSakuseiEntity();
-                chohyoDataEntity.set印刷日時(get印刷日時());
-                chohyoDataEntity.set帳票タイトル(relateEntityList.getChouhouTitle());
-                chohyoDataEntity.set市町村コード(relateEntityList.getShichosonCode().value());
-                chohyoDataEntity.set市町村名(relateEntityList.getShichosonMeisho());
-                // TODO ソート順/改頁　技術点問題あり。   2016/01/20まで。
-                //chohyoDataEntity.setソート順１(NarabiJunType.toValue(relateEntityList.getSortJun()).toRString());
-                chohyoDataEntity.setソート順２(RString.EMPTY);
-                chohyoDataEntity.setソート順３(RString.EMPTY);
-                chohyoDataEntity.setソート順４(RString.EMPTY);
-                chohyoDataEntity.setソート順５(RString.EMPTY);
-                //            if (NextPageType.委託先コード.code().equals(relateEntityList.getKayiPeji())) {
-                //                chohyoDataEntity.set改頁１(改頁);
-                //            } else {
-                //                chohyoDataEntity.set改頁１(RString.EMPTY);
-                //            }
-                chohyoDataEntity.set改頁２(RString.EMPTY);
-                chohyoDataEntity.set改頁３(RString.EMPTY);
-                chohyoDataEntity.set改頁４(RString.EMPTY);
-                chohyoDataEntity.set改頁５(RString.EMPTY);
-                int ページ数 = 1;
-                chohyoDataEntity.setページ数(ページ数);
+
+                HihohenshashoHakkoKanriboChohyoDataSakuseiEntity chohyoDataEntity = craeteEntity(relateEntityList, entity, order);
                 chohyoDataEntity.set被保険者番号(entity.getHihokenshaNo());
                 chohyoDataEntity.set識別コード(entity.getShikibetsuCode().value());
                 if (!(RString.isNullOrEmpty(entity.getYubinNo()))) {
@@ -90,16 +78,14 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
                     chohyoDataEntity.set郵便番号(郵便番号.toRString());
                     郵便番号.delete(郵便番号_0桁, 郵便番号.length());
                 } else {
-                    chohyoDataEntity.set郵便番号(entity.getYubinNo());
+                    chohyoDataEntity.set郵便番号(YubinNo.EMPTY.getColumnValue());
                 }
                 chohyoDataEntity.set氏名(entity.getMeisho());
                 chohyoDataEntity.set住所(entity.getJusho());
                 chohyoDataEntity.set市町村コードListYou(entity.getShichosonCode().value());
-                chohyoDataEntity.set交付年月日(entity.getKofuYMD() != null ? entity.getKofuYMD().wareki().eraType(
-                        EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(
-                                Separator.PERIOD).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
+
                 chohyoDataEntity.set交付事由コード(entity.getKofuJiyu());
-                if (被保険者証発行.equals(relateEntityList.getChouhouTitle())) {
+                if (証発行モード_被保険者.equals(relateEntityList.getAkasihakoumode())) {
                     chohyoDataEntity.set交付事由略称(CodeMaster.getCodeRyakusho(
                             SubGyomuCode.DBA介護資格,
                             DBACodeShubetsu.被保険者証交付事由.getコード(),
@@ -115,7 +101,7 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
                             DBACodeShubetsu.被保険者証回収事由.getコード(),
                             new Code(entity.getKaishuJiyu()),
                             FlexibleDate.getNowDate()));
-                } else if (資格者証発行.equals(relateEntityList.getChouhouTitle())) {
+                } else if (証発行モード_資格者.equals(relateEntityList.getAkasihakoumode())) {
                     chohyoDataEntity.set交付事由略称(CodeMaster.getCodeRyakusho(
                             SubGyomuCode.DBA介護資格,
                             DBACodeShubetsu.資格者証交付事由.getコード(),
@@ -132,68 +118,105 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
                             new Code(entity.getKaishuJiyu()),
                             FlexibleDate.getNowDate()));
                 }
-                chohyoDataEntity.set回収年月日(entity.getKaishuYMD() != null ? entity.getKaishuYMD().wareki().eraType(
+                chohyoDataEntity.set回収年月日Str(entity.getKaishuYMD() != null ? entity.getKaishuYMD().wareki().eraType(
                         EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(
                                 Separator.PERIOD).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
+                chohyoDataEntity.set回収年月日(entity.getKaishuYMD() != null ? entity.getKaishuYMD() : FlexibleDate.EMPTY);
                 chohyoDataEntity.set回収事由コード(entity.getKaishuJiyu());
-                chohyoDataEntity.set有効期限(entity.getYukoKigenYMD() != null ? entity.getYukoKigenYMD().wareki().eraType(
+
+                chohyoDataEntity.set交付年月日Str(entity.getKofuYMD() != null ? entity.getKofuYMD().wareki().eraType(
                         EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(
                                 Separator.PERIOD).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
+                chohyoDataEntity.set交付年月日(entity.getKofuYMD() != null ? entity.getKofuYMD() : FlexibleDate.EMPTY);
+
+                chohyoDataEntity.set有効期限Str(entity.getYukoKigenYMD() != null ? entity.getYukoKigenYMD().wareki().eraType(
+                        EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(
+                                Separator.PERIOD).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
+                chohyoDataEntity.set有効期限(entity.getYukoKigenYMD() != null ? entity.getYukoKigenYMD() : FlexibleDate.EMPTY);
+
                 chohyoDataEntity.set様式(RString.isNullOrEmpty(entity.getShoYoshikiKubunCode())
                         ? RString.EMPTY : ShoYoshikiKubun.toValue(entity.getShoYoshikiKubunCode()).get名称());
+                chohyoDataEntity.set連番(entity.getRenban());
+
                 chohyoDataEntityList.add(chohyoDataEntity);
             }
         } else {
-            HihohenshashoHakkoKanriboChohyoDataSakuseiEntity chohyoDataEntity = new HihohenshashoHakkoKanriboChohyoDataSakuseiEntity();
-            chohyoDataEntity.set印刷日時(get印刷日時());
-            chohyoDataEntity.set帳票タイトル(relateEntityList.getChouhouTitle());
-            chohyoDataEntity.set市町村コード(relateEntityList.getShichosonCode().value());
-            chohyoDataEntity.set市町村名(relateEntityList.getShichosonMeisho());
-            // TODO ソート順/改頁　技術点問題あり。   2016/01/20まで。
-            //chohyoDataEntity.setソート順１(NarabiJunType.toValue(relateEntityList.getSortJun()).toRString());
-            chohyoDataEntity.setソート順２(RString.EMPTY);
-            chohyoDataEntity.setソート順３(RString.EMPTY);
-            chohyoDataEntity.setソート順４(RString.EMPTY);
-            chohyoDataEntity.setソート順５(RString.EMPTY);
-//            if (NextPageType.委託先コード.code().equals(relateEntityList.getKayiPeji())) {
-//                chohyoDataEntity.set改頁１(改頁);
-//            } else {
-//                chohyoDataEntity.set改頁１(RString.EMPTY);
-//            }
-            chohyoDataEntity.set改頁２(RString.EMPTY);
-            chohyoDataEntity.set改頁３(RString.EMPTY);
-            chohyoDataEntity.set改頁４(RString.EMPTY);
-            chohyoDataEntity.set改頁５(RString.EMPTY);
-            chohyoDataEntity.setページ数(1);
-            chohyoDataEntityList.add(chohyoDataEntity);
+            chohyoDataEntityList.add(craeteEntity(relateEntityList, null, order));
         }
         return chohyoDataEntityList;
+    }
+
+    private HihohenshashoHakkoKanriboChohyoDataSakuseiEntity craeteEntity(AkasiHakouKanriRelateEntity relateEntityList,
+            AkasiHakouKanriEntity entity, List<ISetSortItem> order) {
+        HihohenshashoHakkoKanriboChohyoDataSakuseiEntity chohyoDataEntity = new HihohenshashoHakkoKanriboChohyoDataSakuseiEntity();
+        chohyoDataEntity.set印刷日時(get印刷日時());
+        chohyoDataEntity.set帳票タイトル(relateEntityList.getChouhouTitle());
+        chohyoDataEntity.set市町村コード(relateEntityList.getShichosonCode().value());
+        chohyoDataEntity.set市町村名(relateEntityList.getShichosonMeisho());
+
+        int limit = order.size() < ソート順5 ? order.size() : ソート順5;
+
+        for (int i = 0; i < limit; i++) {
+            ISetSortItem sortItem = order.get(i);
+            if (i + 1 == ソート順1) {
+                chohyoDataEntity.setソート順１(sortItem.get項目名());
+                if (sortItem.is改頁項目() && entity != null) {
+                    chohyoDataEntity.set改頁１(entity.getPageBreakItem1());
+                }
+            } else if (i + 1 == ソート順2) {
+                chohyoDataEntity.setソート順２(sortItem.get項目名());
+                if (sortItem.is改頁項目() && entity != null) {
+                    chohyoDataEntity.set改頁２(entity.getPageBreakItem2());
+                }
+            } else if (i + 1 == ソート順3) {
+                chohyoDataEntity.setソート順３(sortItem.get項目名());
+                if (sortItem.is改頁項目() && entity != null) {
+                    chohyoDataEntity.set改頁３(entity.getPageBreakItem3());
+                }
+            } else if (i + 1 == ソート順4) {
+                chohyoDataEntity.setソート順４(sortItem.get項目名());
+                if (sortItem.is改頁項目() && entity != null) {
+                    chohyoDataEntity.set改頁４(entity.getPageBreakItem4());
+                }
+            } else if (i + 1 == ソート順5) {
+                chohyoDataEntity.setソート順５(sortItem.get項目名());
+                if (sortItem.is改頁項目() && entity != null) {
+                    chohyoDataEntity.set改頁５(entity.getPageBreakItem5());
+                }
+            }
+        }
+        chohyoDataEntity.set隠し改頁項目(RString.EMPTY);
+
+        return chohyoDataEntity;
     }
 
     /**
      * 証発行管理帳票ボディデータリスト作成します。
      *
      * @param relateEntityList 証発行管理リスト情報EntityList
+     * @param order ソート順
      * @return List<HihokenshashoHakkoKanriIchiranhyoBodyItem>
      * 証発行管理リスト帳票用ボディデータリスト
      */
-    public List<HihokenshashoHakkoKanriIchiranhyoBodyItem> setShohakkoKanriChohyoDataList(AkasiHakouKanriRelateEntity relateEntityList) {
+    public List<HihokenshashoHakkoKanriIchiranhyoBodyItem> setShohakkoKanriChohyoDataList(
+            AkasiHakouKanriRelateEntity relateEntityList, List<ISetSortItem> order) {
         List<HihokenshashoHakkoKanriIchiranhyoBodyItem> list = new ArrayList();
-        List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> chohyoDataEntityList = getShohakkoKanriChohyoDataList(relateEntityList);
+        List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> chohyoDataEntityList
+                = getShohakkoKanriChohyoDataList(relateEntityList, order);
         for (HihohenshashoHakkoKanriboChohyoDataSakuseiEntity entity : chohyoDataEntityList) {
             HihokenshashoHakkoKanriIchiranhyoBodyItem bodyItem = new HihokenshashoHakkoKanriIchiranhyoBodyItem(
                     entity.get被保険者番号(),
                     entity.get識別コード(),
                     entity.get氏名(),
-                    entity.get交付年月日(),
+                    entity.get交付年月日Str(),
                     entity.get交付事由コード(),
                     entity.get交付事由名称(),
                     entity.get交付事由略称(),
-                    entity.get有効期限(),
+                    entity.get有効期限Str(),
                     entity.get市町村コードListYou(),
                     entity.get郵便番号(),
                     entity.get住所(),
-                    entity.get回収年月日(),
+                    entity.get回収年月日Str(),
                     entity.get回収事由コード(),
                     entity.get回収事由名称(),
                     entity.get様式());
@@ -220,81 +243,5 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_作成);
         return printTimeStampSb.toRString();
-    }
-
-    /**
-     * 帳票分類ID「DBA200004_HihokenshashoHakkoKanriIchiranhyo」（被保険者証発行管理一覧表）出力順設定可能項目です。
-     */
-    public enum ShutsuryokujunEnum implements IReportItems {
-
-        /**
-         * 郵便番号
-         */
-        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("\"ShikibetsuTaisho_yubinNo\"")),
-        /**
-         * 町域コード
-         */
-        町域コード(new RString("0002"), new RString("choikiCode"), new RString("\"ShikibetsuTaisho_choikiCode\"")),
-        /**
-         * 行政区コード
-         */
-        行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
-        /**
-         * 被保険者番号
-         */
-        被保険者番号(new RString("0104"), new RString("listUpper_1"), new RString("\"shoKofuKaishu_hihokenshaNo\"")),
-        /**
-         * 市町村コード
-         */
-        市町村コード(new RString("0016"), new RString("listLower_1"), new RString("\"shoKofuKaishu_shichosonCode\"")),
-        /**
-         * 氏名５０音カナ
-         */
-        氏名５０音カナ(new RString("0010"), new RString("kanaMeisho"), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
-        /**
-         * 交付年月日
-         */
-        交付年月日(new RString("0122"), new RString("listUpper_4"), new RString("\"shoKofuKaishu_kofuYMD\"")),
-        /**
-         * 交付事由
-         */
-        交付事由(new RString("0123"), new RString("listUpper_5"), new RString("\"shoKofuKaishu_kofuJiyu\"")),
-        /**
-         * 回収年月日
-         */
-        回収年月日(new RString("0124"), new RString("listLower_4"), new RString("\"shoKofuKaishu_kaishuYMD\"")),
-        /**
-         * 回収事由
-         */
-        回収事由(new RString("0125"), new RString("listLower_5"), new RString("\"shoKofuKaishu_kaishuJiyu\"")),
-        /**
-         * 有効期限
-         */
-        有効期限(new RString("0126"), new RString("listUpper_8"), new RString("\"shoKofuKaishu_yukoKigenYMD\""));
-
-        private final RString 項目ID;
-        private final RString フォームフィールド名;
-        private final RString myBatis項目名;
-
-        private ShutsuryokujunEnum(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
-            this.項目ID = 項目ID;
-            this.フォームフィールド名 = フォームフィールド名;
-            this.myBatis項目名 = myBatis項目名;
-        }
-
-        @Override
-        public RString get項目ID() {
-            return 項目ID;
-        }
-
-        @Override
-        public RString getフォームフィールド名() {
-            return フォームフィールド名;
-        }
-
-        @Override
-        public RString getMyBatis項目名() {
-            return myBatis項目名;
-        }
     }
 }

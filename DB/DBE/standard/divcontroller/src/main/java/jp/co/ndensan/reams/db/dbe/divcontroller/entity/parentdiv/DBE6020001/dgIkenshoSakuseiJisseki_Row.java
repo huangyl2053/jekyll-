@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jul 06 15:19:48 CST 2016 
+ * Thu Nov 17 16:34:18 JST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgIkenshoSakuseiJisseki_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
 
     private RString hokensha;
     private RString code;

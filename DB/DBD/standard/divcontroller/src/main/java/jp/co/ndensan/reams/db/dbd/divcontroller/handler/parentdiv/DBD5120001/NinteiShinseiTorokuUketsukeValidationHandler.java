@@ -44,7 +44,7 @@ public class NinteiShinseiTorokuUketsukeValidationHandler {
     }
 
     /**
-     * 開始日の必須入力チェックを行います。
+     * 終了日の必須入力チェックを行います。
      *
      * @param pairs バリデーションコントロール
      * @param div NinteiShinseiTorokuUketsukeDiv
@@ -73,7 +73,7 @@ public class NinteiShinseiTorokuUketsukeValidationHandler {
         messages.add(ValidateChain.validateStart(div).ifNot(NinteiShinseiTorokuUketsukeDivSpec.申請日が未入力チェック)
                 .thenAdd(NoInputMessages.申請日が未入力チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.申請日が未入力チェック, div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD()).build().check(messages));
+                NoInputMessages.申請日が未入力チェック, div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtShinseiYMD()).build().check(messages));
         return pairs;
     }
 
@@ -271,7 +271,7 @@ public class NinteiShinseiTorokuUketsukeValidationHandler {
     }
 
     /**
-     * 変更元が_自立チェックを行います。
+     * 職権取消_記載_修正_変更申請中のデータありチェックを行います。
      *
      * @param pairs バリデーションコントロール
      * @param div NinteiShinseiTorokuUketsukeDiv
@@ -317,7 +317,7 @@ public class NinteiShinseiTorokuUketsukeValidationHandler {
             ValidationMessageControlPairs pairs, NinteiShinseiTorokuUketsukeDiv div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(NinteiShinseiTorokuUketsukeDivSpec.削除回復の対象ではないチェック)
+        messages.add(ValidateChain.validateStart(div).ifNot(NinteiShinseiTorokuUketsukeDivSpec.旧措置者ではなく_自立チェック)
                 .thenAdd(NoInputMessages.旧措置者ではなく_自立チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.旧措置者ではなく_自立チェック, div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo()).build().check(messages));
@@ -380,6 +380,50 @@ public class NinteiShinseiTorokuUketsukeValidationHandler {
                 div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo()).build().check(messages));
         return pairs;
     }
+    
+    public ValidationMessageControlPairs validateFor前回認定時_サービス指定なし(
+            ValidationMessageControlPairs pairs, NinteiShinseiTorokuUketsukeDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(NinteiShinseiTorokuUketsukeDivSpec.前回認定時_サービス指定なし)
+                .thenAdd(NoInputMessages.前回認定時_サービス指定なし).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.前回認定時_サービス指定なし).build().check(messages));
+        return pairs;
+    }
+    
+    public ValidationMessageControlPairs validateFor特殊処理_対象ではない(
+            ValidationMessageControlPairs pairs, NinteiShinseiTorokuUketsukeDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(NinteiShinseiTorokuUketsukeDivSpec.特殊処理_対象ではない)
+                .thenAdd(NoInputMessages.特殊処理_対象ではない).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.特殊処理_対象ではない).build().check(messages));
+        return pairs;
+    }
+    
+    public ValidationMessageControlPairs validateFor申請_対象レコードではない１(
+            ValidationMessageControlPairs pairs, NinteiShinseiTorokuUketsukeDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(NinteiShinseiTorokuUketsukeDivSpec.申請_対象レコードではない１)
+                .thenAdd(NoInputMessages.申請_対象レコードではない１).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.申請_対象レコードではない１).build().check(messages));
+        return pairs;
+    }
+    
+    public ValidationMessageControlPairs validateFor申請_対象レコードではない２(
+            ValidationMessageControlPairs pairs, NinteiShinseiTorokuUketsukeDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(NinteiShinseiTorokuUketsukeDivSpec.申請_対象レコードではない２)
+                .thenAdd(NoInputMessages.申請_対象レコードではない２).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.申請_対象レコードではない２).build().check(messages));
+        return pairs;
+    }
 
     private static enum NoInputMessages implements IValidationMessage {
 
@@ -403,6 +447,10 @@ public class NinteiShinseiTorokuUketsukeValidationHandler {
         旧措置者ではなく_自立で有効期間記入ありチェック(UrErrorMessages.入力値が不正_追加メッセージあり, "旧措置でない「自立」かつ有効期間の記入あり"),
         自立_かつサービス指定ありチェック(UrErrorMessages.入力値が不正_追加メッセージあり, "要介護区分が「自立」かつサービス指定あり"),
         却下かつ_自立で異動理由ありチェック(UrErrorMessages.両方の指定は不可, "却下かつ自立", "異動理由が存在"),
+        前回認定時_サービス指定なし(UrErrorMessages.項目に対する制約, "サービス変更申請", "前回認定結果で指定サービス1個以上"),
+        特殊処理_対象ではない(DbdErrorMessages.特殊処理対象外),
+        申請_対象レコードではない１(UrErrorMessages.既に存在, "申請中のデータ"),
+        申請_対象レコードではない２(UrErrorMessages.既に存在, "サービス変更申請中のデータ"),
         減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複);
 
         private final Message message;

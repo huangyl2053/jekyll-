@@ -41,4 +41,10 @@ public class AkasiHakouKanriEntity {
     private Code kaishuJiyuCode;
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
 
+    private RString pageBreakItem1;
+    private RString pageBreakItem2;
+    private RString pageBreakItem3;
+    private RString pageBreakItem4;
+    private RString pageBreakItem5;
+
 }

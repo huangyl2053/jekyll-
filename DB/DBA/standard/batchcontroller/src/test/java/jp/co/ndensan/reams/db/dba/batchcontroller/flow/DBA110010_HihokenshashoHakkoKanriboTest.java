@@ -21,6 +21,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  *
@@ -55,7 +57,7 @@ public class DBA110010_HihokenshashoHakkoKanriboTest {
             BatchFlowTestHelper testhelper = new BatchFlowTestHelper();
             BatchSettings bs = new BatchSettings();
             result = testhelper.executeFlow(batchID, batchName, DBA110010_HihokenshashoHakkoKanribo.class, parameter, bs);
-//            assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
+            assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
         }
 
         @AfterClass
@@ -83,7 +85,7 @@ public class DBA110010_HihokenshashoHakkoKanriboTest {
             parameter.setRenbanfukaflg(false);
             parameter.setSeyisinjyohoflg(false);
             parameter.setSiyuturiyokudaysyou(new RString("1"));
-//            parameter.setSyuturyokujunid(RString.EMPTY);
+            parameter.setSyuturyokujunid(1L);
 
         }
     }

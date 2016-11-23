@@ -24,9 +24,9 @@ public class TorokuJokyoDiv extends Panel {
     @JsonProperty("txtTorokuJokyo")
     private TextBox txtTorokuJokyo;
     @JsonProperty("txtTekiyoKikanKaishi")
-    private TextBoxFlexibleDate txtTekiyoKikanKaishi;
+    private TextBoxDate txtTekiyoKikanKaishi;
     @JsonProperty("txtTekiyoKikanShuryo")
-    private TextBoxFlexibleDate txtTekiyoKikanShuryo;
+    private TextBoxDate txtTekiyoKikanShuryo;
     @JsonProperty("ddlShuryoJokyo")
     private DropDownList ddlShuryoJokyo;
 
@@ -59,7 +59,7 @@ public class TorokuJokyoDiv extends Panel {
      * @return txtTekiyoKikanKaishi
      */
     @JsonProperty("txtTekiyoKikanKaishi")
-    public TextBoxFlexibleDate getTxtTekiyoKikanKaishi() {
+    public TextBoxDate getTxtTekiyoKikanKaishi() {
         return txtTekiyoKikanKaishi;
     }
 
@@ -68,7 +68,7 @@ public class TorokuJokyoDiv extends Panel {
      * @param txtTekiyoKikanKaishi txtTekiyoKikanKaishi
      */
     @JsonProperty("txtTekiyoKikanKaishi")
-    public void setTxtTekiyoKikanKaishi(TextBoxFlexibleDate txtTekiyoKikanKaishi) {
+    public void setTxtTekiyoKikanKaishi(TextBoxDate txtTekiyoKikanKaishi) {
         this.txtTekiyoKikanKaishi = txtTekiyoKikanKaishi;
     }
 
@@ -77,7 +77,7 @@ public class TorokuJokyoDiv extends Panel {
      * @return txtTekiyoKikanShuryo
      */
     @JsonProperty("txtTekiyoKikanShuryo")
-    public TextBoxFlexibleDate getTxtTekiyoKikanShuryo() {
+    public TextBoxDate getTxtTekiyoKikanShuryo() {
         return txtTekiyoKikanShuryo;
     }
 
@@ -86,7 +86,7 @@ public class TorokuJokyoDiv extends Panel {
      * @param txtTekiyoKikanShuryo txtTekiyoKikanShuryo
      */
     @JsonProperty("txtTekiyoKikanShuryo")
-    public void setTxtTekiyoKikanShuryo(TextBoxFlexibleDate txtTekiyoKikanShuryo) {
+    public void setTxtTekiyoKikanShuryo(TextBoxDate txtTekiyoKikanShuryo) {
         this.txtTekiyoKikanShuryo = txtTekiyoKikanShuryo;
     }
 

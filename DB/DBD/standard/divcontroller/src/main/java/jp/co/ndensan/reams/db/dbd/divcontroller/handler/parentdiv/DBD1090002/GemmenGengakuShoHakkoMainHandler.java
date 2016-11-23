@@ -576,7 +576,7 @@ public class GemmenGengakuShoHakkoMainHandler {
             div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().setIsPublish(true);
             div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().setDisabled(false);
             div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().
-                    setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
+                    setValue(RDate.getNowDate());
         } else {
             div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().setDisabledPublishCheckBox(true);
             div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().setIsPublish(false);
@@ -592,13 +592,13 @@ public class GemmenGengakuShoHakkoMainHandler {
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setTitle(通知書title);
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsPublish(true);
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().
-                    setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
+                    setValue(RDate.getNowDate());
         } catch (ApplicationException e) {
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setTitle(通知書title);
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsPublish(true);
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().
-                    setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
+                    setValue(RDate.getNowDate());
         }
     }
 

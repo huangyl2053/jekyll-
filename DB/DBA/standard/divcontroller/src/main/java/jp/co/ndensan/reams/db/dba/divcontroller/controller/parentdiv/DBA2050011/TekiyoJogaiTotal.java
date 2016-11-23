@@ -108,6 +108,18 @@ public class TekiyoJogaiTotal {
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(requestDiv).forwardWithEventName(DBA2050011TransitionEventName.検索に戻る).respond();
     }
+    
+        /**
+     * 「検索結果一覧に戻る」ボタンを押下して、対象者検索結果一覧画面に戻る。
+     *
+     * @param requestDiv 適用除外者管理Div
+     * @return レスポンス
+     */
+    public ResponseData<TekiyoJogaiTotalDiv> onClick_btnSearchResult(TekiyoJogaiTotalDiv requestDiv) {
+        RealInitialLocker.release(前排他ロックキー);
+        return ResponseData.of(requestDiv).forwardWithEventName(DBA2050011TransitionEventName.検索一覧).respond();
+    }
+    
 
     /**
      * 「適用除外情報を保存する」ボタンを押下します。

@@ -58,7 +58,7 @@ public class NenreiTotatsuTorokushaList {
                 div.getBatchParamterInfo().getTxtzenkaishuryo()
                         .setValue(business.getTaishoShuryoYMD());
                 div.getBatchParamterInfo().getTxtkonkaikaishi()
-                        .setValue(business.getTaishoShuryoYMD());
+                        .setValue(business.getTaishoShuryoYMD().plusDay(1));
                 div.getBatchParamterInfo().getTxtkonkaishuryo()
                         .setValue(business.getTaishoShuryoYMD());
 
@@ -68,7 +68,7 @@ public class NenreiTotatsuTorokushaList {
                 div.getBatchParamterInfo().getTxtzenkaishuryo()
                         .setValue(business.getTaishoShuryoYMD());
                 div.getBatchParamterInfo().getTxtkonkaikaishi()
-                        .setValue(business.getTaishoShuryoYMD());
+                        .setValue(business.getTaishoShuryoYMD().plusDay(1));
                 div.getBatchParamterInfo().getTxtkonkaishuryo()
                         .setValue(nowDate);
             }

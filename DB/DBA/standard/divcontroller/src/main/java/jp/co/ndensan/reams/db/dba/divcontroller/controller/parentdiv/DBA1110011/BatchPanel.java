@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1110011;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KayiSyuuJiyuu;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KouFuJiyuu;
@@ -36,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class BatchPanel {
 
-    private static final RString 未回収者リスト = new RString("key1");
     private static final RString エラーメッセージ = new RString("開始日および終了日");
 
     /**
@@ -56,12 +54,7 @@ public class BatchPanel {
             throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
         }
         getHandler(div).initialize(kouFuJiyuuList, kayiSyuuJiyuuList);
-        List<RString> selectedKey = new ArrayList<>();
-        RString 項目名付加 = new RString("key1");
-        selectedKey.add(項目名付加);
-        div.getChkHenshuHoho().setSelectedItemsByKey(selectedKey);
-        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA200004.getReportId());
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).rootTitle(getHandler(div).get画面名()).respond();
     }
 
     /**
@@ -104,32 +97,15 @@ public class BatchPanel {
     }
 
     /**
-     * 被保険者証発行管理簿を「連動」する。<br/>
+     * radShutsuTaishoコントロールの設定値が変更された際に実行します。<br/>
+     * 選択した対象帳票（発行管理リスト or 未回収者リスト）に合わせて、画面の表示を変更します。
      *
      * @param div {@link BatchPanelDiv 被保険者証発行管理簿Div}
      * @return 被保険者証発行管理簿Divを持つResponseData
      */
     public ResponseData<BatchPanelDiv> onClick_btnChange(BatchPanelDiv div) {
 
-        if (未回収者リスト.equals(div.getRadShutsuTaisho().getSelectedKey())) {
-            div.getTxtKoufubiRange().clearFromValue();
-            div.getTxtKoufubiRange().clearToValue();
-            div.getTxtKaishubiRange().clearFromValue();
-            div.getTxtKaishubiRange().clearToValue();
-            List<RString> selectedKey = new ArrayList<>();
-            div.getChkSaishinJoho().setSelectedItemsByKey(selectedKey);
-            div.getTxtKaishubiRange().setReadOnly(true);
-            div.getChkSaishinJoho().setReadOnly(true);
-            div.getDgKaishuJiyu().setDisabled(true);
-        } else {
-            div.getTxtKoufubiRange().clearFromValue();
-            div.getTxtKoufubiRange().clearToValue();
-            div.getTxtKaishubiRange().clearFromValue();
-            div.getTxtKaishubiRange().clearToValue();
-            div.getTxtKaishubiRange().setReadOnly(false);
-            div.getChkSaishinJoho().setReadOnly(false);
-            div.getDgKaishuJiyu().setDisabled(false);
-        }
+        getHandler(div).onChange_radShutsuTaisho();
         return ResponseData.of(div).respond();
     }
 

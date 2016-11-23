@@ -104,7 +104,6 @@
                AND D."ninteichosaIraiRirekiNo" = G."ninteichosaRirekiNo"
         WHERE
             C."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND C."ninteichosaIraiKanryoYMD" IS NOT NULL
             AND C."ninteiShinsakaiWariateKanryoYMD" IS NULL
             AND C."ninteiShinsakaiKanryoYMD" IS NULL
             AND C."centerSoshinYMD" IS NULL

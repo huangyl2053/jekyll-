@@ -12,6 +12,14 @@ module DBD {
                 return "onClick_btnKensaku";
             }
 
+            public static onOkClose_BtnDispGengakuJoho(): string {
+                return "onOkClose_BtnDispGengakuJoho";
+            }
+
+            public static onBeforeOpenDialog_BtnDispGengakuJoho(): string {
+                return "onBeforeOpenDialog_BtnDispGengakuJoho";
+            }
+
             public static onClick_btnReturn(): string {
                 return "onClick_btnReturn";
             }

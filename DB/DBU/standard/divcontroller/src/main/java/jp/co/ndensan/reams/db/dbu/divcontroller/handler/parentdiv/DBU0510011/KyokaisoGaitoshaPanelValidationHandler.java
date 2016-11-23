@@ -249,7 +249,7 @@ public class KyokaisoGaitoshaPanelValidationHandler {
             } else {
                 if (!RString.isNullOrEmpty(適用終了日) && !new RDate(適用終了日.toString())
                         .isBeforeOrEquals(new RDate(境界層該当一覧情報.get(i).getKaishiDate().toString()))) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック, div.getTxtShuryobi()));
                 }
             }
             適用終了日 = 境界層該当一覧情報.get(i).getShuryoDate();

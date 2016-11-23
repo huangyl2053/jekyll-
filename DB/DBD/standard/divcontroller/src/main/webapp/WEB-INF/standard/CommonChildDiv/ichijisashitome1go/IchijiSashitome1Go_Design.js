@@ -116,7 +116,7 @@ var DBD;
             };
 
             Controls.prototype.txtSashitomeTorokuYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtSashitomeTorokuYMD"));
             };
 
             Controls.prototype.txtSashitomeTorokuTsuchiHakkoYMD = function () {
@@ -124,11 +124,11 @@ var DBD;
             };
 
             Controls.prototype.txtSashitomeNofuKigenYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeNofuKigenYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtSashitomeNofuKigenYMD"));
             };
 
             Controls.prototype.txtSashitomeKaijoYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKaijoYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtSashitomeKaijoYMD"));
             };
 
             Controls.prototype.txtKojoTorokuKubun = function () {
@@ -136,7 +136,7 @@ var DBD;
             };
 
             Controls.prototype.txtKojoKetteiYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoKetteiYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtKojoKetteiYMD"));
             };
 
             Controls.prototype.txtKojoTorokuTsuchiHakkoYMD = function () {
@@ -144,7 +144,7 @@ var DBD;
             };
 
             Controls.prototype.txtHokenshoTeishutsuKigenYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHokenshoTeishutsuKigenYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtHokenshoTeishutsuKigenYMD"));
             };
 
             Controls.prototype.ddlTorokuKojoNo = function () {
