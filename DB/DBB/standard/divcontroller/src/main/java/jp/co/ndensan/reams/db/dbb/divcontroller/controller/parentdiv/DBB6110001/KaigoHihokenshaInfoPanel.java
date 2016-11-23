@@ -387,8 +387,10 @@ public class KaigoHihokenshaInfoPanel {
         for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
             if (entity.hasChanged() && entity.isModified()) {
                 manager.saveNewModify(entity);
-            } else if (entity.hasChanged() && (entity.isAdded() || entity.isDeleted())) {
+            } else if (entity.hasChanged() && entity.isDeleted()) {
                 manager.save(entity);
+            } else if (entity.hasChanged() && entity.isAdded()) {
+                manager.saveNew(entity);
             }
         }
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),

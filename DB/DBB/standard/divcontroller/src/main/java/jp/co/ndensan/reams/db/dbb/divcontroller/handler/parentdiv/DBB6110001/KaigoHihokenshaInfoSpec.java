@@ -184,7 +184,7 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
                 RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
                 for (RentaiGimusha result : list) {
                     if (result.equals(curResult)) {
-                        return true;
+                        continue;
                     }
                     return !(開始年月日.isBeforeOrEquals(new RDate(result.get開始年月日().toString()))
                             && 終了年月日.isAfterOrEquals(new RDate(result.get開始年月日().toString())))
@@ -232,7 +232,7 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
                 RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
                 for (RentaiGimusha result : list) {
                     if (result.equals(curResult)) {
-                        return true;
+                        continue;
                     }
                     return !(開始年月日.isBefore(new RDate(result.get開始年月日().toString())));
                 }
