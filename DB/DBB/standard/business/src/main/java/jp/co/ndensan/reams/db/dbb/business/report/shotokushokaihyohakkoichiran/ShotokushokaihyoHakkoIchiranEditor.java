@@ -257,7 +257,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
                 source.kaipage4 = 改頁項目Map.get(改頁項目リスト.get(NUM_3));
             }
             if (改頁項目リスト.size() > NUM_4) {
-                source.kaipage5 = 改頁項目Map.get(改頁項目リスト.get(NUM_3));
+                source.kaipage5 = 改頁項目Map.get(改頁項目リスト.get(NUM_4));
             }
         }
     }
