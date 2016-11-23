@@ -137,12 +137,12 @@ module DBD {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtGengakuTsuchiHakkoYMD"));
             }
 
-            public txtKonkaiKikanKaishiYMD(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKonkaiKikanKaishiYMD"));
+            public txtKonkaiKikanKaishiYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtKonkaiKikanKaishiYMD"));
             }
 
-            public txtKonkaiKikanShuryoYMD(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKonkaiKikanShuryoYMD"));
+            public txtKonkaiKikanShuryoYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtKonkaiKikanShuryoYMD"));
             }
 
             public btnKakutei(): UZA.Button {

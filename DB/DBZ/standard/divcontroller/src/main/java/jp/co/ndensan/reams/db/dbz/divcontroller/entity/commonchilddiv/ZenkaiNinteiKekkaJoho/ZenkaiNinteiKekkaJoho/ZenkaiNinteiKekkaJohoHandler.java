@@ -193,8 +193,12 @@ public class ZenkaiNinteiKekkaJohoHandler {
         passModel.set審査会意見(result.get介護認定審査会意見());
         model.setRiyu(result.get直近異動事由コード());
         model.setTorisageDay(result.get取下年月日());
-        model.setShinseiKubunShinsei(NinteiShinseiShinseijiKubunCode.toValue(result.get認定申請区分_申請時_コード()).get名称());
-        model.setShinseiKubunLaw(NinteiShinseiHoreiCode.toValue(result.get認定申請区分_法令_コード()).get名称());
+        if (!RString.isNullOrEmpty(result.get認定申請区分_申請時_コード())) {
+            model.setShinseiKubunShinsei(NinteiShinseiShinseijiKubunCode.toValue(result.get認定申請区分_申請時_コード()).get名称());
+        }
+        if (!RString.isNullOrEmpty(result.get認定申請区分_法令_コード())) {
+            model.setShinseiKubunLaw(NinteiShinseiHoreiCode.toValue(result.get認定申請区分_法令_コード()).get名称());
+        }
         if (受給flag) {
             passModel.setSubGyomuCode(SubGyomuCode.DBD介護受給.value());
             model.setIdoJiyuCode(result.get直近異動事由コード());
@@ -220,15 +224,17 @@ public class ZenkaiNinteiKekkaJohoHandler {
         RString 要介護度 = RString.EMPTY;
         RString 要介護度コード = result.get二次判定要介護状態区分コード();
         RString 厚労省IF識別コード = result.get厚労省IF識別コード();
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
-            要介護度 = YokaigoJotaiKubun99.toValue(要介護度コード).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
-            要介護度 = YokaigoJotaiKubun02.toValue(要介護度コード).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
-            要介護度 = YokaigoJotaiKubun06.toValue(要介護度コード).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード)) {
-            要介護度 = YokaigoJotaiKubun09.toValue(要介護度コード).get名称();
+        if (!RString.isNullOrEmpty(要介護度コード)) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
+                要介護度 = YokaigoJotaiKubun99.toValue(要介護度コード).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
+                要介護度 = YokaigoJotaiKubun02.toValue(要介護度コード).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
+                要介護度 = YokaigoJotaiKubun06.toValue(要介護度コード).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)
+                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード)) {
+                要介護度 = YokaigoJotaiKubun09.toValue(要介護度コード).get名称();
+            }
         }
         return 要介護度;
     }

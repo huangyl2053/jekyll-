@@ -70,7 +70,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     private static final RString RSTRING_TWO = new RString("2");
     private static final RString RSTRING_THREE = new RString("3");
     private static final RString 排他情報 = new RString("DBCHihokenshaNo");
-    private static final RString 申請情報を保存する = new RString("btnSaveHenkoTorisage");
     private static final RString 申請情報を保存する_申請登録 = new RString("btnSaveShinseiToroku");
     private static final int INT_6 = 6;
     private static final RString 完了メッセージ = new RString("高額合算支給申請情報の登録が完了しました。");
@@ -142,6 +141,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
                 ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 修正);
             }
             div.getDdlShinseiTaishoNendo().setReadOnly(true);
+            if (照会モード != null) {
+                div.getTxtKaigoShikyuShinseishoSeiriBango4().setReadOnly(true);
+                return ResponseData.of(div).setState(DBC1100011StateName.変更取下げ);
+            }
             if (RSTRING_THREE.equals(高額合算申請書保持.get申請状態())) {
                 div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(true);
                 div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(true);
@@ -168,10 +171,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString メニューID = controlData.getMenuID();
         RString タイトル = handler.画面タイトルを設定(メニューID);
-        if (DBC1100011StateName.変更取下げ.getName().equals(ResponseHolder.getState())
-                && !div.getBtnAddShinsei().isVisible()) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請情報を保存する, true);
-        }
         KogakuGassanShinseishoHoji 高額合算申請書保持
                 = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
         if (DBC1100011StateName.申請登録加入履歴一覧.getName().equals(ResponseHolder.getState())
@@ -273,6 +272,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShinseishoHoji 高額合算申請書保持
                 = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
         handler.onClick_btnShinseiJohoModoru();
+        handler.画面内共有子DIV初期化処理新規場合(対象者);
         if (申請登録状態(メニューID)) {
             handler.申請登録状態初期設定();
             handler.onChange_ddlShinseiTaisyoNendo();
@@ -281,7 +281,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
             div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
             div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
-            handler.画面内共有子DIV初期化処理新規場合(対象者);
             handler.新規初期値取得設定();
             onChange_chkKofuShinseiUmu(div);
             FlexibleYear 対象年度 = new FlexibleYear(div.getDdlShinseiTaishoNendo().getSelectedKey());
@@ -363,7 +362,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShinseishoDataResult 引き継ぎデータ
                 = ViewStateHolder.get(ViewStateKeys.高額介護申請書用データ, KogakuGassanShinseishoDataResult.class);
         KogakuGassanShinseishoHoji 高額合算申請書保持New = handler.高額合算申請書編集(
-                高額合算申請書, 高額合算申請書保持, 削除, 引き継ぎデータ);
+                高額合算申請書, 高額合算申請書保持, 削除, 引き継ぎデータ, 被保険者番号);
         handler.申請情報グリッドへ反映(高額合算申請書保持New, false);
         ViewStateHolder.put(ViewStateKeys.高額合算申請書保持Entity, 高額合算申請書保持New);
         return ResponseData.of(div).respond();
@@ -391,6 +390,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShinseishoRelate 高額合算申請書 = 高額合算申請書保持.get高額合算申請書(identifier);
         handler.onClick_dgShinseiJohoSelect(高額合算申請書, 高額合算申請書保持.get申請状況());
         ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 照会);
+        div.getBtnBackShinseiIchiran().setVisible(false);
+        div.getBtnKakuteiShintei().setVisible(false);
         return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴一覧);
     }
 
@@ -564,7 +565,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShinseishoDataResult 引き継ぎデータ
                 = ViewStateHolder.get(ViewStateKeys.高額介護申請書用データ, KogakuGassanShinseishoDataResult.class);
         KogakuGassanShinseishoHoji 高額合算申請書保持New = handler.高額合算申請書編集(
-                高額合算申請書, 高額合算申請書保持, 高額合算申請書状態, 引き継ぎデータ);
+                高額合算申請書, 高額合算申請書保持, 高額合算申請書状態, 引き継ぎデータ, null);
         handler.申請情報グリッドへ反映(高額合算申請書保持New, false);
         handler.onClick_btnShinseiJohoModoru();
         ViewStateHolder.put(ViewStateKeys.高額合算申請書保持Entity, 高額合算申請書保持New);

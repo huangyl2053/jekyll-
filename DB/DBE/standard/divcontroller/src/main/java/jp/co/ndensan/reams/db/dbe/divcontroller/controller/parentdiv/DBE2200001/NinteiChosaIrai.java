@@ -180,6 +180,24 @@ public class NinteiChosaIrai {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 認定調査員一覧の選択処理で調査員を選択せず、「調査対象者選択に進む」BTNをクリックした場合に行う処理を定義します。
+     *
+     * @param div NinteiChosaIraiDiv
+     * @return ResponseData<NinteiChosaIraiDiv>
+     */
+    public ResponseData<NinteiChosaIraiDiv> onClick_btnNextChosaTaishoshaSelect(NinteiChosaIraiDiv div) {
+        getHandler(div).reset委託先基本情報();
+
+        ViewStateHolder.put(ViewStateKeys.調査員コード, RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.調査員割付可能人数_月, RString.EMPTY);
+        setData(div, null);
+        getHandler(div).init印刷条件DIV();
+        div.getChoisaItakusakiIchiran().setIsOpen(false);
+        div.getChosainIchiran().setIsOpen(false);
+        return ResponseData.of(div).respond();
+    }
+
     private void setData(NinteiChosaIraiDiv div, ChosainCode chosainCode) {
         ChosaItakusakiCode chosaItakusakiCode = new ChosaItakusakiCode(ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class));
         RString shishoCode = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);

@@ -56,7 +56,8 @@ public class NendoKirikaeHandler {
         if (null != 当年度 && (!RString.isNullOrEmpty(当年度))) {
             新年度管理情報作成_終了チェック(当年度);
             特徴対象者同定_6月開始分_終了チェック(当年度);
-            年度切替処理_終了チェック(当年度);RYear tokyo当年度 = new RYear(当年度.toString());
+            年度切替処理_終了チェック(当年度);
+            RYear tokyo当年度 = new RYear(当年度.toString());
             RYear tokyo新年度 = tokyo当年度.plusYear(NUM_1);
             div.getDcLblTonendo().setValue(new RDate(tokyo当年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().toString()));
             div.getDcLblShinnendo().setValue(new RDate(tokyo新年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().toString()));

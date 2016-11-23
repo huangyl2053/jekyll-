@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufugakuGengakuTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -46,9 +46,9 @@ public class KyufugakuGengakuTorokuDiv extends Panel {
     @JsonProperty("txtGengakuTsuchiHakkoYMD")
     private TextBoxFlexibleDate txtGengakuTsuchiHakkoYMD;
     @JsonProperty("txtKonkaiKikanKaishiYMD")
-    private TextBoxFlexibleDate txtKonkaiKikanKaishiYMD;
+    private TextBoxDate txtKonkaiKikanKaishiYMD;
     @JsonProperty("txtKonkaiKikanShuryoYMD")
-    private TextBoxFlexibleDate txtKonkaiKikanShuryoYMD;
+    private TextBoxDate txtKonkaiKikanShuryoYMD;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
     @JsonProperty("btnTorikeshi")
@@ -281,7 +281,7 @@ public class KyufugakuGengakuTorokuDiv extends Panel {
      * @return txtKonkaiKikanKaishiYMD
      */
     @JsonProperty("txtKonkaiKikanKaishiYMD")
-    public TextBoxFlexibleDate getTxtKonkaiKikanKaishiYMD() {
+    public TextBoxDate getTxtKonkaiKikanKaishiYMD() {
         return txtKonkaiKikanKaishiYMD;
     }
 
@@ -290,7 +290,7 @@ public class KyufugakuGengakuTorokuDiv extends Panel {
      * @param txtKonkaiKikanKaishiYMD txtKonkaiKikanKaishiYMD
      */
     @JsonProperty("txtKonkaiKikanKaishiYMD")
-    public void setTxtKonkaiKikanKaishiYMD(TextBoxFlexibleDate txtKonkaiKikanKaishiYMD) {
+    public void setTxtKonkaiKikanKaishiYMD(TextBoxDate txtKonkaiKikanKaishiYMD) {
         this.txtKonkaiKikanKaishiYMD = txtKonkaiKikanKaishiYMD;
     }
 
@@ -299,7 +299,7 @@ public class KyufugakuGengakuTorokuDiv extends Panel {
      * @return txtKonkaiKikanShuryoYMD
      */
     @JsonProperty("txtKonkaiKikanShuryoYMD")
-    public TextBoxFlexibleDate getTxtKonkaiKikanShuryoYMD() {
+    public TextBoxDate getTxtKonkaiKikanShuryoYMD() {
         return txtKonkaiKikanShuryoYMD;
     }
 
@@ -308,7 +308,7 @@ public class KyufugakuGengakuTorokuDiv extends Panel {
      * @param txtKonkaiKikanShuryoYMD txtKonkaiKikanShuryoYMD
      */
     @JsonProperty("txtKonkaiKikanShuryoYMD")
-    public void setTxtKonkaiKikanShuryoYMD(TextBoxFlexibleDate txtKonkaiKikanShuryoYMD) {
+    public void setTxtKonkaiKikanShuryoYMD(TextBoxDate txtKonkaiKikanShuryoYMD) {
         this.txtKonkaiKikanShuryoYMD = txtKonkaiKikanShuryoYMD;
     }
 

@@ -79,13 +79,7 @@ public class NinteishinseibiHandler {
      *
      */
     public void initializtion() {
-        RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        RString 最大上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        div.getTxtMaxKensu().setValue(new Decimal(最大表示件数.toString()));
-        div.getTxtMaxKensu().setMaxValue(new Decimal(最大上限.toString()));
-        初期状態();
+        clear();
     }
 
     /**
@@ -97,33 +91,9 @@ public class NinteishinseibiHandler {
         div.getTxtNinteishinseibi().clearToValue();
         div.getTxtiraibi().clearFromValue();
         div.getTxtiraibi().clearToValue();
-        div.getTxtMaxKensu().clearValue();
-    }
-
-    private void 初期状態() {
-        div.getNinteiIchiran().setDisplayNone(true);
-        div.getCcdKanryoMessage().setDisplayNone(true);
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取込, true);
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存, true);
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了, true);
-    }
-
-    /**
-     * 保存状態の遷移。
-     *
-     */
-    public void 保存状態() {
-
-        div.getCcdKanryoMessage().setDisplayNone(false);
-        div.getTxtNinteishinseibi().setDisplayNone(true);
-        div.getTxtiraibi().setDisplayNone(true);
-        div.getBtnKensakuClear().setDisplayNone(true);
-        div.getNinteiIchiran().setDisplayNone(true);
-        div.getBtnKensaku().setDisplayNone(true);
-        div.getTxtMaxKensu().setDisplayNone(true);
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取込, true);
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存, true);
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了, false);
+        RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        div.getTxtMaxKensu().setValue(new Decimal(最大表示件数.toString()));
     }
 
     /**
@@ -133,16 +103,7 @@ public class NinteishinseibiHandler {
      * @param personalData PersonalData
      */
     public void 検索処理(List<NiTeiCyoSaiChiRanBusiness> 認定調査一覧, PersonalData personalData) {
-        データ一覧状態(認定調査一覧);
         一覧の編集(認定調査一覧, personalData);
-    }
-
-    private void データ一覧状態(List<NiTeiCyoSaiChiRanBusiness> 認定調査一覧) {
-        div.getNinteiIchiran().setDisplayNone(false);
-        if (!認定調査一覧.isEmpty()) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取込, false);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存, false);
-        }
     }
 
     private void 一覧の編集(List<NiTeiCyoSaiChiRanBusiness> 認定調査一覧, PersonalData personalData) {

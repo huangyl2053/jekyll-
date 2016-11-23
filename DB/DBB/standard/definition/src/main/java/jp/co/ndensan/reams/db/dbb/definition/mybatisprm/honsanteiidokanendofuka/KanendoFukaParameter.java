@@ -31,6 +31,9 @@ public class KanendoFukaParameter implements IMyBatisParameter {
     private FlexibleYear 調定年度minus1;
     private FlexibleYear 調定年度minus2;
 
+    private RString 資格喪失日From;
+    private RString 資格喪失日To;
+
     private FlexibleYear 賦課年度;
     private RString 年度サイクル;
 

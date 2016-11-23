@@ -34,6 +34,7 @@ public class KougakuKetteiTuutisyoHandler {
     private static final RString 定数_初回申請用 = new RString("key0");
     private static final RString 画面_初回申請用様式 = new RString("0");
     private static final RString 画面_自動償還用様式 = new RString("1");
+    private static final RString 決定通知リアル発行区分_発行済 = new RString("1");
 
     /**
      * サービス提供年月ドロップダウンリストを設定する。
@@ -106,6 +107,7 @@ public class KougakuKetteiTuutisyoHandler {
                 Integer.valueOf(div.getDdlKanliBanngou().getSelectedValue().toString()));
         kogakuShikyuHanteiKekka = kogakuShikyuHanteiKekka.createBuilderForEdit()
                 .set決定通知書作成年月日(new FlexibleDate(div.getTxtHakkoubi().getValue().toDateString()))
+                .set決定通知リアル発行区分(決定通知リアル発行区分_発行済)
                 .build()
                 .modified();
         manager.save(kogakuShikyuHanteiKekka);

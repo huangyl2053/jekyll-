@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TokubetsuChilkiKasanGenmenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,8 @@ public class TokubetsuChilkiKasanGenmenDiv extends Panel {
     private TextBox txtTokubetsuChilkiKasanGenmenKetteiKubun;
     @JsonProperty("txtTokubetsuChilkiKasanGenmenKeigenritsu")
     private TextBox txtTokubetsuChilkiKasanGenmenKeigenritsu;
+    @JsonProperty("lbl2")
+    private Label lbl2;
     @JsonProperty("txtTokubetsuChilkiKasanGenmenKakuninNo")
     private TextBoxCode txtTokubetsuChilkiKasanGenmenKakuninNo;
     @JsonProperty("txtTokubetsuChilkiKasanGenmenShinseibi")
@@ -78,6 +80,24 @@ public class TokubetsuChilkiKasanGenmenDiv extends Panel {
     @JsonProperty("txtTokubetsuChilkiKasanGenmenKeigenritsu")
     public void setTxtTokubetsuChilkiKasanGenmenKeigenritsu(TextBox txtTokubetsuChilkiKasanGenmenKeigenritsu) {
         this.txtTokubetsuChilkiKasanGenmenKeigenritsu = txtTokubetsuChilkiKasanGenmenKeigenritsu;
+    }
+
+    /*
+     * getlbl2
+     * @return lbl2
+     */
+    @JsonProperty("lbl2")
+    public Label getLbl2() {
+        return lbl2;
+    }
+
+    /*
+     * setlbl2
+     * @param lbl2 lbl2
+     */
+    @JsonProperty("lbl2")
+    public void setLbl2(Label lbl2) {
+        this.lbl2 = lbl2;
     }
 
     /*

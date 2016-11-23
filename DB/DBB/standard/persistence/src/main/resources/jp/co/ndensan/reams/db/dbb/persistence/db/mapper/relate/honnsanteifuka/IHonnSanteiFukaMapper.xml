@@ -488,7 +488,7 @@
                         WHERE   "hihokennshaKubunCode" = '1'
                         AND     "logicalDeletedFlag" = FALSE
                         AND     ("shikakuSoshitsuYMD" IS NULL OR "shikakuSoshitsuYMD" = ''
-                                OR #{賦課年度_修正後} <![CDATA[<]]> "shikakuSoshitsuYMD")
+                                OR #{調定年度_修正後} <![CDATA[<]]> "shikakuSoshitsuYMD")
                         AND     "ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{資格基準日}
                         ) AS "DbV1001HihokenshaDaicho" ON "DbT1001HihokenshaDaicho"."hihokenshaNo" = "DbV1001HihokenshaDaicho"."hihokenshaNo"
                     GROUP BY "DbT1001HihokenshaDaicho"."hihokenshaNo", "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD", "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD"
@@ -712,12 +712,10 @@
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON "HonSanJonTyuShutuTemp"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
         ORDER BY
+            "HonSanJonTyuShutuTemp"."hihokenshaNo",
             "DbT2002Fuka"."choteiNendo",
             "DbT2002Fuka"."fukaNendo",
             "DbT2002Fuka"."tsuchishoNo",
-            "HonSanJonTyuShutuTemp"."hihokenshaNo",
-            "HonSanJonTyuShutuTemp"."idoYMD",
-            "HonSanJonTyuShutuTemp"."edaNo",
             "DbT2003Kibetsu"."ki",
             "DbT2003Kibetsu"."choshuHouhou"
     </select>

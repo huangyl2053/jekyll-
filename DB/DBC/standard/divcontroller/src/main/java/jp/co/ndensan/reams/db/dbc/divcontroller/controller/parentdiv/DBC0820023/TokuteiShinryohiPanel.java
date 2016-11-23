@@ -342,13 +342,12 @@ public class TokuteiShinryohiPanel {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode(),
                     DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().evaluate());
-
-            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class));
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class));
             ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM0);
             return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.一覧に戻る).respond();
         } else {
@@ -560,6 +559,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onBeforeOpenDialog_btnJigyosha(TokuteiShinryohiPanelDiv div) {
         getHandler(div).set識別コード(
+                ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
                 ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                 ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
         return createResponse(div);

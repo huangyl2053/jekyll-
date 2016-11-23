@@ -21,16 +21,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshoirairirekiichiran.IkenshoirairirekiIchiranReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.syujiyikensho.IkenshoSakuseiIraiHakkoIchiranhyoReportSource;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiDBE231012Property;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiDBE231014Property;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiKatamenColorProperty;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiKatamenMonoProperty;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiReport;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiRyomenColorProperty;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiRyomenMonoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReport;
@@ -45,7 +35,6 @@ import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIke
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
-import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoReportSource;
@@ -56,7 +45,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -196,125 +184,6 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
                     主治医意見書作成依頼一覧表ItemList, ninshosha)));
             for (IkenshoSakuseiIraiIchiranhyoReport report : list) {
                 report.writeBy(reportSourceWriter);
-            }
-        }
-    }
-
-    /**
-     * 主治医意見書記入用紙を出力します。
-     *
-     * @param 主治医意見書記入用紙List 主治医意見書記入用紙List
-     * @param reportManager 帳票印刷Manager
-     * @param reportID 帳票ID
-     */
-    public void print主治医意見書記入用紙(List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙List, ReportManager reportManager, RString reportID) {
-        List<IkenshokinyuyoshiReport> list = new ArrayList<>();
-        RDate date = RDate.getNowDate();
-        if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面, date, SubGyomuCode.DBE認定支援))) {
-            IkenshokinyuyoshiRyomenMonoProperty property = new IkenshokinyuyoshiRyomenMonoProperty();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙List));
-            try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-                for (IkenshokinyuyoshiReport report : list) {
-                    ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportSourceWriter);
-                }
-            }
-        }
-        if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面, date, SubGyomuCode.DBE認定支援))) {
-            IkenshokinyuyoshiKatamenMonoProperty property = new IkenshokinyuyoshiKatamenMonoProperty();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙List));
-            try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-                for (IkenshokinyuyoshiReport report : list) {
-                    ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportSourceWriter);
-                }
-            }
-        }
-    }
-
-    public void print主治医意見書記入用紙(List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙List, ReportManager reportManager) {
-//        List<IkenshokinyuyoshiReport> list = new ArrayList<>();
-//        IkenshokinyuyoshiProperty property = new IkenshokinyuyoshiProperty();
-//        list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙List));
-//        try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-//            for (IkenshokinyuyoshiReport report : list) {
-//                ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-//                report.writeBy(reportSourceWriter);
-//            }
-//        }
-    }
-
-    /**
-     * 主治医意見書記入用紙OCRを出力します。
-     *
-     * @param 主治医意見書記入用紙OCRList 主治医意見書記入用紙OCRList
-     * @param reportManager 帳票印刷Manager
-     * @param reportID 帳票ID
-     */
-    public void print主治医意見書記入用紙OCR(List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙OCRList,
-            ReportManager reportManager, RString reportID) {
-        List<IkenshokinyuyoshiReport> list = new ArrayList<>();
-        RDate date = RDate.getNowDate();
-        if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面, date, SubGyomuCode.DBE認定支援))) {
-            IkenshokinyuyoshiRyomenColorProperty property = new IkenshokinyuyoshiRyomenColorProperty();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙OCRList));
-            try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-                for (IkenshokinyuyoshiReport report : list) {
-                    ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportSourceWriter);
-                }
-            }
-        }
-        if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面, date, SubGyomuCode.DBE認定支援))) {
-            IkenshokinyuyoshiKatamenColorProperty property = new IkenshokinyuyoshiKatamenColorProperty();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙OCRList));
-            try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-                for (IkenshokinyuyoshiReport report : list) {
-                    ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportSourceWriter);
-                }
-            }
-        }
-    }
-
-    /**
-     * 主治医意見書記入用紙を出力します。
-     *
-     * @param 主治医意見書記入用紙DList 主治医意見書記入用紙List
-     * @param reportManager 帳票印刷Manager
-     * @param reportID 帳票ID
-     */
-    public void print主治医意見書記入用紙D(List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙DList, ReportManager reportManager, RString reportID) {
-        List<IkenshokinyuyoshiReport> list = new ArrayList<>();
-        RDate date = RDate.getNowDate();
-        if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date, SubGyomuCode.DBE認定支援))) {
-            IkenshokinyuyoshiDBE231012Property property = new IkenshokinyuyoshiDBE231012Property();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙DList));
-            try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-                for (IkenshokinyuyoshiReport report : list) {
-                    ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportSourceWriter);
-                }
-            }
-        }
-        if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面2, date, SubGyomuCode.DBE認定支援))) {
-            IkenshokinyuyoshiDBE231014Property property = new IkenshokinyuyoshiDBE231014Property();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙DList));
-            try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-                for (IkenshokinyuyoshiReport report : list) {
-                    ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportSourceWriter);
-                }
-            }
-        }
-        if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面, date, SubGyomuCode.DBE認定支援))) {
-            IkenshokinyuyoshiDBE231012Property property = new IkenshokinyuyoshiDBE231012Property();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙DList));
-            try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-                for (IkenshokinyuyoshiReport report : list) {
-                    ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportSourceWriter);
-                }
             }
         }
     }

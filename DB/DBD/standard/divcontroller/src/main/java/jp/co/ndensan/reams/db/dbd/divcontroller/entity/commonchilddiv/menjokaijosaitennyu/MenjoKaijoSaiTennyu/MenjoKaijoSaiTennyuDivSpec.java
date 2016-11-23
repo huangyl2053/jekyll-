@@ -24,10 +24,10 @@ public enum MenjoKaijoSaiTennyuDivSpec implements IPredicate<MenjoKaijoSaiTennyu
                  */
                 @Override
                 public boolean apply(MenjoKaijoSaiTennyuDiv div) {
-                    if (!div.getTxtKonkaiKikanKaishiYMD().getValue().isEmpty() && !div.getTxtKonkaiKikanShuryoYMD().getValue().isEmpty()) {
+                    if (!div.getTxtKonkaiKikanKaishiYMD().toString().isEmpty() && !div.getTxtKonkaiKikanShuryoYMD().toString().isEmpty()) {
                         return div.getTxtKonkaiKikanKaishiYMD().getValue().isBeforeOrEquals(div.getTxtKonkaiKikanShuryoYMD().getValue());
                     } else {
-                        return !div.getTxtKonkaiKikanKaishiYMD().getValue().isEmpty() || !div.getTxtKonkaiKikanShuryoYMD().getValue().isEmpty();
+                        return !div.getTxtKonkaiKikanKaishiYMD().toString().isEmpty() || !div.getTxtKonkaiKikanShuryoYMD().toString().isEmpty();
                     }
                 }
             }

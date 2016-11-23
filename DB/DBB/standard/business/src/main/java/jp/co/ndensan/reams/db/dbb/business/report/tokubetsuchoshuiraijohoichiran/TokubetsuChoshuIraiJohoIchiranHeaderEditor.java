@@ -8,9 +8,12 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraijohoichira
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokubetsuchoshuiraijohoichiran.TokubetsuChoshuIraiJohoIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tokubetsuchoshuiraijohoichiran.TokubetsuChoshuIraiJohoIchiranSource;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -24,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class TokubetsuChoshuIraiJohoIchiranHeaderEditor implements ITokubetsuChoshuIraiJohoIchiranEditor {
 
     private final TokubetsuChoshuIraiJohoIchiranEntity 帳票出力対象データ;
+    private final UaFt200FindShikibetsuTaishoEntity 宛名情報;
     private final List<RString> 出力順;
     private final List<RString> 改頁項目;
     private final RDateTime 作成日時;
@@ -40,16 +44,19 @@ public class TokubetsuChoshuIraiJohoIchiranHeaderEditor implements ITokubetsuCho
      * コンストラクタです
      *
      * @param 帳票出力対象データ ShokanFushikyuKetteiInEntity
+     * @param 宛名情報 UaFt200FindShikibetsuTaishoEntity
      * @param 出力順 List<RString>
      * @param 改頁項目 List<RString>
      * @param 作成日時 RDateTime
      */
     protected TokubetsuChoshuIraiJohoIchiranHeaderEditor(
             TokubetsuChoshuIraiJohoIchiranEntity 帳票出力対象データ,
+            UaFt200FindShikibetsuTaishoEntity 宛名情報,
             List<RString> 出力順,
             List<RString> 改頁項目,
             RDateTime 作成日時) {
         this.帳票出力対象データ = 帳票出力対象データ;
+        this.宛名情報 = 宛名情報;
         this.出力順 = 出力順;
         this.改頁項目 = 改頁項目;
         this.作成日時 = 作成日時;
@@ -86,6 +93,59 @@ public class TokubetsuChoshuIraiJohoIchiranHeaderEditor implements ITokubetsuCho
     }
 
     private RString get改頁(int index) {
-        return 改頁項目.size() > index ? 改頁項目.get(index) : RString.EMPTY;
+        RString 改頁コード = index < 改頁項目.size() ? 改頁項目.get(index) : RString.EMPTY;
+        if (RString.isNullOrEmpty(改頁コード)) {
+            return RString.EMPTY;
+        }
+
+        RString 性別 = RString.EMPTY;
+        RString 氏名５０音カナ = RString.EMPTY;
+        RString 生年月日 = RString.EMPTY;
+        if (宛名情報 != null) {
+            性別 = 宛名情報.getSeibetsuCode() == null ? RString.EMPTY : 宛名情報.getSeibetsuCode();
+            氏名５０音カナ = get氏名５０音カナ();
+            生年月日 = get生年月日();
+        }
+
+        if (DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.市町村コード.get項目ID().equals(改頁コード)) {
+            return 帳票出力対象データ.get市町村コード();
+        } else if (DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.年金コード.get項目ID().equals(改頁コード)) {
+            return 帳票出力対象データ.get年金コード();
+        } else if (DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.年金番号.get項目ID().equals(改頁コード)) {
+            return 帳票出力対象データ.get年金番号();
+        } else if (DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.性別.get項目ID().equals(改頁コード)) {
+            return 性別;
+        } else if (DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.氏名５０音カナ.get項目ID().equals(改頁コード)) {
+            return 氏名５０音カナ;
+        } else if (DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.生年月日.get項目ID().equals(改頁コード)) {
+            return 生年月日;
+        } else if (DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.行政区コード.get項目ID().equals(改頁コード)) {
+            return 帳票出力対象データ.get行政区コード();
+        } else if (DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.被保険者番号.get項目ID().equals(改頁コード)) {
+            return 帳票出力対象データ.get被保険者番号();
+        } else if (DBB200019_TokubetsuChoshuIraiJohoIchiranEnum.識別コード.get項目ID().equals(改頁コード)) {
+            return 帳票出力対象データ.get識別コード();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get氏名５０音カナ() {
+        if (宛名情報.getKanaMeisho() != null) {
+            AtenaKanaMeisho 氏名 = 宛名情報.getKanaMeisho();
+            if (氏名 != null) {
+                return 氏名.getColumnValue();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get生年月日() {
+        if (宛名情報.getSeinengappiYMD() != null) {
+            FlexibleDate 生年月日 = 宛名情報.getSeinengappiYMD();
+            if (生年月日 != null) {
+                return new RString(生年月日.toString());
+            }
+        }
+        return RString.EMPTY;
     }
 }

@@ -69,7 +69,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class Imageinput {
 
-    private static final RString 初期状態_メニューから = new RString("DBEMN32003");
     private static final RString チェックOK = new RString("OK");
     private static final RString チェックNG = new RString("NG");
     private static final RString ファイル名 = new RString("OCRIKEN.CSV");
@@ -82,14 +81,7 @@ public class Imageinput {
      * @return ResponseData<ImageinputDiv>
      */
     public ResponseData<ImageinputDiv> onLoad(ImageinputDiv div) {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
-        if (初期状態_メニューから.equals(menuID)) {
-            return ResponseData.of(div).setState(DBE2260001StateName.初期状態_メニューから);
-        } else {
-            return ResponseData.of(div).setState(DBE2260001StateName.初期状態_完了処理から);
-        }
-
+        return ResponseData.of(div).respond();
     }
 
     /**

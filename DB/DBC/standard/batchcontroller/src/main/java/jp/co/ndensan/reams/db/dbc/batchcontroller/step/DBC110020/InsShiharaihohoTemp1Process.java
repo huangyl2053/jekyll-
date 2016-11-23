@@ -1161,7 +1161,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             if (isDateEmpty(総合事業対象者.getTekiyoKaishiYMD())) {
                 continue;
             }
-            if (チェック_DATE.isBefore(総合事業対象者.getTekiyoKaishiYMD())) {
+            if (チェック_DATE.isBeforeOrEquals(総合事業対象者.getTekiyoKaishiYMD())) {
                 総合事業対象者状況 = true;
                 break;
             }
@@ -1763,16 +1763,6 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
 
     private boolean isBeforeDate(FlexibleDate date1, FlexibleDate date2) {
         if (isDateEmpty(date1) || isDateEmpty(date2)) {
-            return false;
-        }
-        return date1.isBefore(date2);
-    }
-
-    private boolean isBeforeDate喪失年月日(FlexibleDate date1, FlexibleDate date2) {
-        if (isDateEmpty(date2)) {
-            return true;
-        }
-        if (isDateEmpty(date1)) {
             return false;
         }
         return date1.isBefore(date2);

@@ -6,10 +6,9 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IKozaJohoMapper">
     
     <resultMap id="resultMap_KozaJohoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.KozaJohoEntity" autoMapping="true">
-        
+        <id property="振込明細一時Entity.hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <association property="振込明細一時Entity" resultMap="resultMap_FurikomiDetailTempTableEntity"/>
-        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
-        
+        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>    
     </resultMap>
     
     <select resultOrdered="true" id="get償還口座払の口座情報" resultMap="resultMap_KozaJohoEntity" fetchSize="500" 

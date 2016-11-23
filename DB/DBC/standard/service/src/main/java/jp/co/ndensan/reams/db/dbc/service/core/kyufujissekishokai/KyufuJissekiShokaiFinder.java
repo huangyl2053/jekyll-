@@ -127,7 +127,6 @@ public class KyufuJissekiShokaiFinder {
     private static final RString 交換情報識別番号の先頭３桁 = new RString("111");
     private static final RString 給付実績情報作成区分コード_削除 = new RString("3");
     private static final int INDEX_3 = 3;
-    private static final int INDEX_6 = 6;
 
     /**
      * コンストラクタです。
@@ -202,6 +201,7 @@ public class KyufuJissekiShokaiFinder {
                 給付実績ヘッダ情報.set名称(個人情報.get名称().getName().value());
                 給付実績ヘッダ情報.set性別コード(個人情報.get性別().getCode());
                 給付実績ヘッダ情報.set生年月日(個人情報.get生年月日().toFlexibleDate());
+                給付実績ヘッダ情報.set住民種別(個人情報.get住民種別().toRString());
             }
         }
         給付実績ヘッダ情報1.add(給付実績ヘッダ情報);
@@ -309,6 +309,35 @@ public class KyufuJissekiShokaiFinder {
      * @param サービス提供年月_開始 サービス提供年月_開始
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param isKey0検索対象 isKey0検索対象
+     * @param 検索条件番目 検索条件番目
+     * @param サービス種類コードList サービス種類コードList
+     * @return 給付実績基本データ
+     */
+    @Transaction
+    public List<KyufuJissekiKihonShukeiRelate> get給付実績基本データ(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了,
+            boolean isKey0検索対象, RString 検索条件番目, List<RString> サービス種類コードList) {
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
+        List<KyufuJissekiKihonShukeiRelateEntity> 給付実績基本データ
+                = mapper.get給付実績基本データ(
+                        KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
+                                NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
+                                サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY,
+                                FlexibleYearMonth.EMPTY, isKey0検索対象, 検索条件番目, サービス種類コードList));
+        List<KyufuJissekiKihonShukeiRelate> 給付実績基本データList = new ArrayList<>();
+        for (KyufuJissekiKihonShukeiRelateEntity 給付実績基本 : 給付実績基本データ) {
+            給付実績基本データList.add(new KyufuJissekiKihonShukeiRelate(給付実績基本));
+        }
+        return 給付実績基本データList;
+    }
+
+    /**
+     * 給付実績情報照会用データの取得処理です。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月_開始 サービス提供年月_開始
+     * @param サービス提供年月_終了 サービス提供年月_終了
+     * @param isKey0検索対象 isKey0検索対象
      * @return 給付実績情報照会用データ
      */
     @Transaction
@@ -341,10 +370,10 @@ public class KyufuJissekiShokaiFinder {
 
         List<KyufuJissekiKihonShukeiRelateEntity> kihonShukeiList = mapper.get給付実績基本集計データ(KyufuJissekiKensakuDataMapperParameter.
                 createParameter_給付実績検索データ(NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
-                        サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象));
+                        サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象, null, null));
         List<DbT3028KyufujissekiKogakuKaigoServicehiEntity> kihonKogakuKaigoServicehiList = mapper.get給付実績基本高額介護サービス費データ(
                 KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(NyuryokuShikibetsuNo.EMPTY, 被保険者番号,
-                        サービス提供年月_開始, サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象));
+                        サービス提供年月_開始, サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象, null, null));
         for (KyufuJissekiKihonShukeiRelateEntity entity : kihonShukeiList) {
             KyufuJissekiKihonShukeiBusiness 給付実績基本集計データ = new KyufuJissekiKihonShukeiBusiness();
             給付実績基本集計データ.set給付実績基本データ(new KyufujissekiKihon(entity.get給付実績基本データ()));
@@ -1072,7 +1101,7 @@ public class KyufuJissekiShokaiFinder {
         KyufuJissekiKensakuDataMapperParameter para
                 = KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
                         NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
-                        サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, !is経過措置);
+                        サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, !is経過措置, null, null);
         List<KyufuJissekiShukeiKekkaData> entityList;
         List<KyufuJissekiShukeiKekkaDataBusiness> 集計データList = new ArrayList<>();
         if (!is経過措置) {

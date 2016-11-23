@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
@@ -313,13 +314,37 @@ public class ShiharaiHenkoTsuchiHakko {
         for (int i = 0; i < shiharaiHohoHenkonoJouhouList.size(); i++) {
             row.setTxtTorokuJokyo(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get登録区分());
             row.setTxtShuryoJokyo(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get終了区分());
-            row.getTxtTekiyoKaishi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get適用開始年月日().toString()));
-            row.getTxtTekiyoShuryo().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get適用終了年月日().toString()));
-            row.getTxtYokokuTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get予告通知書発行年月日().toString()));
-            row.getTxtHenkoTshuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get償還払化通知書発行年月日().toString()));
-            row.getTxtSashitomeTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get差止通知書発行年月日().toString()));
-            row.getTxtKojoTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get控除通知書発行年月日().toString()));
-            row.getTxtGengakuTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get減額通知書発行年月日().toString()));
+            if (shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get適用開始年月日() != null &&
+                    !shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get適用開始年月日().isEmpty()) {
+                row.getTxtTekiyoKaishi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get適用開始年月日().toString()));
+            }
+            if (shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get適用終了年月日() != null &&
+                    !shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get適用終了年月日().isEmpty()) {
+                row.getTxtTekiyoShuryo().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get適用終了年月日().toString()));
+            }
+            if (shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get予告通知書発行年月日() != null &&
+                    !shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get予告通知書発行年月日().isEmpty()) {
+                row.getTxtYokokuTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get予告通知書発行年月日().toString()));
+            }
+            if (shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get償還払化通知書発行年月日() != null &&
+                    !shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get償還払化通知書発行年月日().isEmpty()) {
+                row.getTxtHenkoTshuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get償還払化通知書発行年月日().toString()));
+            }
+            if (!shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().isEmpty()) {
+                if (shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get差止通知書発行年月日() != null &&
+                        !shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get差止通知書発行年月日().isEmpty()) {
+                    row.getTxtSashitomeTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get差止通知書発行年月日().toString()));
+                }
+            
+                if (shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get控除通知書発行年月日() != null &&
+                        !shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get控除通知書発行年月日().isEmpty()) {
+                    row.getTxtKojoTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().getShiharaiHohoHenkoSashitomeList().get(0).get控除通知書発行年月日().toString()));
+                }
+            }
+            if (shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get減額通知書発行年月日() != null &&
+                    !shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get減額通知書発行年月日().isEmpty()) {
+                row.getTxtGengakuTsuchi().setValue(new RDate(shiharaiHohoHenkonoJouhouList.get(i).getShiharaiHohoHenko().get減額通知書発行年月日().toString()));
+            }
             row.setId(i);
             rowList.add(row);
         }

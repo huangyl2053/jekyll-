@@ -24,12 +24,19 @@ import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShich
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanriBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -41,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -422,25 +430,35 @@ public class TaishoShoriHandler {
 
     private void create市町村指定DDL() {
         List<KeyValueDataSource> dataList = new ArrayList();
-        RString ログインユーザID = ControlDataHolder.getUserId();
-        RString 市町村識別ID = RString.EMPTY;
-
-        List<AuthorityItem> authorityItemList = ShichosonSecurityJoho.getShichosonShikibetsuId(ログインユーザID);
-        if (null != authorityItemList && !authorityItemList.isEmpty()) {
-            市町村識別ID = authorityItemList.get(0).getItemId();
+        ShichosonSecurityJohoFinder finder = ShichosonSecurityJohoFinder.createInstance();
+        jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho shichosonJoho = finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (shichosonJoho == null || KaigoDonyuKubun.未導入.code().equals(shichosonJoho.get介護導入区分().code())) {
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("市町村セキュリティ情報"));
         }
-
-        if (市町村識別ID.equals(new RString("00"))) {
-            List<KoseiShichosonMaster> 現市町村情報 = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
-            for (KoseiShichosonMaster target : 現市町村情報) {
-                dataList.add(new KeyValueDataSource(target.get市町村コード().value(),
-                        get市町村値(target.get市町村コード(), target.get市町村名称())));
-            }
+        if (!shichosonJoho.get導入形態コード().equals(DonyuKeitaiCode.事務広域)) {
+            Association association = AssociationFinderFactory.createInstance().getAssociation();
+            dataList.add(new KeyValueDataSource(association.getLasdecCode_().value(),
+                    get市町村値(association.getLasdecCode_(), association.get市町村名())));
         } else {
-            KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID);
-            dataList.add(new KeyValueDataSource(構成市町村情報.get市町村コード().value(),
-                    get市町村値(構成市町村情報.get市町村コード(), 構成市町村情報.get市町村名称())));
+            RString ログインユーザID = ControlDataHolder.getUserId();
+            RString 市町村識別ID = RString.EMPTY;
+            List<AuthorityItem> authorityItemList = ShichosonSecurityJoho.getShichosonShikibetsuId(ログインユーザID);
+            if (null != authorityItemList && !authorityItemList.isEmpty()) {
+                市町村識別ID = authorityItemList.get(0).getItemId();
+            }
+            if (市町村識別ID.equals(new RString("00"))) {
+                List<KoseiShichosonMaster> 現市町村情報 = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
+                for (KoseiShichosonMaster target : 現市町村情報) {
+                    dataList.add(new KeyValueDataSource(target.get市町村コード().value(),
+                            get市町村値(target.get市町村コード(), target.get市町村名称())));
+                }
+            } else {
+                KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID);
+                dataList.add(new KeyValueDataSource(構成市町村情報.get市町村コード().value(),
+                        get市町村値(構成市町村情報.get市町村コード(), 構成市町村情報.get市町村名称())));
+            }
         }
+
         div.getDdlShichosonshitei().setDataSource(dataList);
         div.getDdlShichosonshitei().setSelectedIndex(0);
 

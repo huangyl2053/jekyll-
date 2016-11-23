@@ -55,7 +55,7 @@ public class ShinsakaiIinJohoToroku {
     private static final RString KEY_廃止 = new RString("key0");
     private static final RString 審査員 = new RString("001");
     private static final RString 調査員モード = new RString("Chosain");
-    private static final RString 主治医モード = new RString("ShujiiMode");
+    private static final RString 主治医モード = new RString("IryoKikanMode");
     private final ShinsakaiIinJohoManager manager;
     private final ShozokuKikanIchiranFinder finder;
     private final KoikiShichosonJohoFinder shichosonJohoFinder;

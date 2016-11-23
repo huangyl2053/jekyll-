@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1070001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengaku;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuIdentifier;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuToJotai;
 import jp.co.ndensan.reams.db.dbd.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
@@ -160,7 +159,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 申請一覧の修正ボタンを押下する。
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onSelectByModifyButton(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -175,7 +175,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 申請一覧の削除ボタンを押下する。
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onSelectByDeleteButton(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -196,7 +197,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
 
     private boolean 削除処理(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
         dgShinseiList_Row row = div.getDgShinseiList().getActiveRow();
-        if (row.getKetteiKubun() != null && !row.getKetteiKubun().isEmpty() && !状態_追加.equals(row.getJotai())) {
+        if (申請メニュー.equals(ResponseHolder.getMenuID()) && row.getKetteiKubun() != null
+                && !row.getKetteiKubun().isEmpty() && !状態_追加.equals(row.getJotai())) {
             return false;
         }
         ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
@@ -217,7 +219,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 訪問介護利用者負担額減額申請画面「申請情報を追加する」（また「承認情報を追加する」）を押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onClick_btnAddShinsei(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -229,7 +232,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 「申請情報を確定する」（また「承認情報を確定する」）ボタンを押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onClick_btnConfirm(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -243,34 +247,19 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
-            HomonKaigoRiyoshaFutangakuGengakuToJotai 編集情報
+            HomonKaigoRiyoshaFutangakuGengakuToJotai 編集前情報
                     = ViewStateHolder.get(ViewStateKeys.編集訪問介護利用者負担額減額申請の情報, HomonKaigoRiyoshaFutangakuGengakuToJotai.class);
             Integer 追加履歴番号 = ViewStateHolder.get(ViewStateKeys.追加履歴番号, Integer.class);
             if (null == 追加履歴番号 || 追加履歴番号 == 0) {
                 追加履歴番号 = -1;
             }
-            HomonKaigoRiyoshaFutangakuGengakuToJotai 最初情報 = null;
-            if (編集情報 != null) {
-                最初情報 = get最初情報(編集情報);
-            }
             ArrayList<HomonKaigoRiyoshaFutangakuGengakuToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
-            getHandler(div).onClick_btnConfirm(情報と状態ArrayList, 編集情報, 追加履歴番号, 最初情報, get被保険者番号FromViewState());
+            getHandler(div).onClick_btnConfirm(情報と状態ArrayList, 編集前情報, 追加履歴番号, /*最初情報,*/ get被保険者番号FromViewState());
             ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, 情報と状態ArrayList);
             ViewStateHolder.put(ViewStateKeys.追加履歴番号, 追加履歴番号 - 1);
             return ResponseData.of(div).setState(申請一覧);
         }
         return ResponseData.of(div).respond();
-    }
-
-    private HomonKaigoRiyoshaFutangakuGengakuToJotai get最初情報(HomonKaigoRiyoshaFutangakuGengakuToJotai 編集情報) {
-        HomonKaigoRiyoshaFutangakuGengakuIdentifier id = 編集情報.get訪問介護利用者負担額減額情報().identifier();
-        ArrayList<HomonKaigoRiyoshaFutangakuGengaku> 最初申請一覧情報 = ViewStateHolder.get(ViewStateKeys.申請一覧情報, ArrayList.class);
-        for (HomonKaigoRiyoshaFutangakuGengaku 最初情報 : 最初申請一覧情報) {
-            if (id.equals(最初情報.identifier())) {
-                return new HomonKaigoRiyoshaFutangakuGengakuToJotai(最初情報, RString.EMPTY, 編集情報.get新履歴番号());
-            }
-        }
-        return 編集情報;
     }
 
     private void 情報を確定チェック(ValidationMessageControlPairs pairs, HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -297,7 +286,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 「申請一覧に戻る」ボタンを押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onClick_btnReturnShinseiIchiran(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -309,6 +299,7 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
             HomonKaigoRiyoshaFutanGengakuHandler handler = getHandler(div);
             handler.close申請一覧エリア(false);
             handler.close情報エリア(true);
+            handler.ボタン制御();
             return ResponseData.of(div).setState(申請一覧);
         }
         return ResponseData.of(div).respond();
@@ -376,7 +367,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 訪問介護利用者負担額減額申請画面「決定区分」を押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onChange_ddlKettaiKubun(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -387,7 +379,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 訪問介護利用者負担額減額申請画面「検索結果一覧へ」を押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onClick_btnToSearchResult(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -398,7 +391,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 訪問介護利用者負担額減額申請画面「再検索する」を押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onClick_btnReSearch(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -409,7 +403,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 訪問介護利用者負担額減額申請画面「障害者手帳有無」を押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onChange_radShogaishaTechoUmu(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -420,7 +415,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 訪問介護利用者負担額減額申請画面「法別区分ddl」を押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onChange_ddlHobetsuKubun(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -431,7 +427,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 訪問介護利用者負担額減額申請画面「適用日」を押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onBlur_txtTekiyoYmd(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
@@ -442,7 +439,8 @@ public class HomonKaigoRiyoshaFutanGengakuMain {
     /**
      * 訪問介護利用者負担額減額申請画面「公費受給者番号」を押下する。<br/>
      *
-     * @param div {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
+     * @param div
+     * {@link HomonKaigoRiyoshaFutanGengakuMainDiv 訪問介護利用者負担額減額申請画面Div}
      * @return 訪問介護利用者負担額減額申請Divを持つResponseData
      */
     public ResponseData<HomonKaigoRiyoshaFutanGengakuMainDiv> onBlur_txtKohiJyukyshaNo(HomonKaigoRiyoshaFutanGengakuMainDiv div) {

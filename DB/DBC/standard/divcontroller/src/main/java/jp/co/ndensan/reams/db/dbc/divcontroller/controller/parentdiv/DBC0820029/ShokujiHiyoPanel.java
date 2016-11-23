@@ -262,12 +262,10 @@ public class ShokujiHiyoPanel {
 
     private ResponseData<ShokujiHiyoPanelDiv> clear入力内容(ShokujiHiyoPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode(),
-                        DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+            QuestionMessage message = new QuestionMessage(
+                    DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode(),
+                    DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);

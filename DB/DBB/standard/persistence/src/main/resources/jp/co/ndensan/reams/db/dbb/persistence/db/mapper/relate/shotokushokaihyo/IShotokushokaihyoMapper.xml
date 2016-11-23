@@ -89,6 +89,7 @@
         </if>
         AND "ShikibetsuTaisho"."seinengappiYMD"<![CDATA[<=]]>#{処理年度_minus18_0102}
         AND "ShikibetsuTaisho"."juminShubetsuCode" IN('1','2','3','4')
+        AND "ShikibetsuTaisho"."currentFlag" = TRUE
 	GROUP BY
         "ShikibetsuTaisho"."shikibetsuCode",
         "ShikibetsuTaisho"."juminShubetsuCode",
@@ -162,6 +163,7 @@
         AND "DbV1001HihokenshaDaicho"."shikibetsuCode"="FindShikibetsuTaisho"."shikibetsuCode"
         WHERE
         ("FindShikibetsuTaisho"."juminJotaiCode"='2' OR "FindShikibetsuTaisho"."juminJotaiCode"='3')
+        AND "FindShikibetsuTaisho"."currentFlag" = TRUE
         GROUP BY
         "FindShikibetsuTaisho"."shikibetsuCode",
         "FindShikibetsuTaisho"."juminShubetsuCode",
@@ -308,6 +310,7 @@
         ,'','','','','','','','','','','','','','','','','', '{  }' ) AS "ShikibetsuTaisho"
         WHERE
         "ShikibetsuTaisho"."juminJotaiCode"='1'
+        AND "ShikibetsuTaisho"."currentFlag" = TRUE
         AND "ShikibetsuTaisho"."seinengappiYMD"<![CDATA[<]]>#{処理年度_minus64_0401}) AS MIX 
         ORDER BY MIX."shikibetsuCode"
     </select>

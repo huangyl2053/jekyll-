@@ -268,7 +268,8 @@ public class IkenshoSakuseiIraiHandler {
         List<RString> 保険者番号リスト = get被保険者番号(business.get保険者番号());
         List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
         RString 生年月日 = business.get生年月日();
-        RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
+        FlexibleDate birth = new FlexibleDate(生年月日);
+        RString 年号 = birth.wareki().eraType(EraType.KANJI).toDateString();
         IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
         item.setHokenshaNo1(保険者番号リスト.get(数字_0));
         item.setHokenshaNo2(保険者番号リスト.get(数字_1));
@@ -296,10 +297,14 @@ public class IkenshoSakuseiIraiHandler {
         item.setIryokikanAdress(business.get医療機関住所());
         item.setIryokikanNameTel(business.get医療機関電話番号());
         item.setIryokikanFax(business.get医療機関FAX番号());
-        item.setYubinNo(business.get郵便番号());
-        item.setBirthYY(年号.substring(数字_3, 数字_5));
-        item.setBirthMM(年号.substring(数字_6, 数字_8));
-        item.setBirthDD(年号.substring(数字_9));
+        RString 郵便番号 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(business.get郵便番号())) {
+            郵便番号 = new YubinNo(business.get郵便番号()).getEditedYubinNo();
+        }
+        item.setYubinNo(郵便番号);
+        item.setBirthYY(birth.wareki().firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear().substring(数字_2));
+        item.setBirthMM(birth.wareki().fillType(FillType.BLANK).getMonth());
+        item.setBirthDD(birth.wareki().fillType(FillType.BLANK).getDay());
         RString ninteiShinseiDay = new FlexibleDate(business.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
@@ -308,11 +313,11 @@ public class IkenshoSakuseiIraiHandler {
         item.setShinseiMM2(ninteiShinseiDay.substring(数字_5, 数字_6));
         item.setShinseiDD1(ninteiShinseiDay.substring(数字_7, 数字_8));
         item.setShinseiDD2(ninteiShinseiDay.substring(数字_8));
-        item.setSeibetsuMan(Seibetsu.男.get名称().equals(business.get性別()) ? 記号_CHECKED : RString.EMPTY);
-        item.setSeibetsuWoman(Seibetsu.女.get名称().equals(business.get性別()) ? 記号_CHECKED : RString.EMPTY);
-        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? 記号_CHECKED : RString.EMPTY);
-        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? 記号_CHECKED : RString.EMPTY);
-        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? 記号_CHECKED : RString.EMPTY);
+        item.setSeibetsuMan(Seibetsu.男.getコード().equals(business.get性別()) ? RString.EMPTY : 星);
+        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(business.get性別()) ? RString.EMPTY : 星);
+        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? RString.EMPTY : 星);
+        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : 星);
+        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 星);
         itemList.add(item);
         return itemList;
     }

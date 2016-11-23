@@ -59,7 +59,7 @@
         "DbT2003Kibetsu"."rirekiNo" AS "DbT2003_rirekiNo",
         "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
         FROM
-        "NenkinTokuchoKaifuJohoTemp" AS "UeT0511NenkinTokuchoKaifuJoho"
+        (<include refid="NenkinTokuchoKaifuJohoTemp" />) AS "UeT0511NenkinTokuchoKaifuJoho"
         LEFT JOIN 
         rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
         ON 
@@ -116,7 +116,7 @@
         "DbT2003Kibetsu"."rirekiNo" AS "DbT2003_rirekiNo",
         "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
         FROM
-        "NenkinTokuchoKaifuJohoTemp" as "UeT0511NenkinTokuchoKaifuJoho"
+        (<include refid="NenkinTokuchoKaifuJohoTemp" />) as "UeT0511NenkinTokuchoKaifuJoho"
         LEFT JOIN 
         rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
         ON 
@@ -168,7 +168,7 @@
         "DbT2003Kibetsu"."rirekiNo" AS "DbT2003_rirekiNo",
         "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
         FROM
-        "NenkinTokuchoKaifuJohoTemp" AS "UeT0511NenkinTokuchoKaifuJoho"
+        (<include refid="NenkinTokuchoKaifuJohoTemp" />) AS "UeT0511NenkinTokuchoKaifuJoho"
         LEFT JOIN rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
         ON "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = "DbT2001ChoshuHoho"."fukaNendo"
         AND "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."kariNenkinNo"
@@ -204,6 +204,30 @@
         "DbT2003Kibetsu"."ki",
         "DbT2003_choteiId"
     </select>
+    
+    <sql id="NenkinTokuchoKaifuJohoTemp">
+        <if test='selectSQL.toString() == "select"'>
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.IUeT0511Mapper.select" />
+        </if>
+        <if test='selectSQL.toString() == "selectFeb"'>
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.IUeT0511Mapper.selectFeb" />
+        </if>
+        <if test='selectSQL.toString() == "selectApr"'>
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.IUeT0511Mapper.selectApr" />
+        </if>
+        <if test='selectSQL.toString() == "selectJun"'>
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.IUeT0511Mapper.selectJun" />
+        </if>
+        <if test='selectSQL.toString() == "selectAug"'>
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.IUeT0511Mapper.selectAug" />
+        </if>
+        <if test='selectSQL.toString() == "selectOct"'>
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.IUeT0511Mapper.selectOct" />
+        </if>
+        <if test='selectSQL.toString() == "selectDec"'>
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.IUeT0511Mapper.selectDec" />
+        </if>
+        </sql>
 
     <select  resultOrdered="true" id="selectUeT0515KaigohokenNenkinTokuchoTaishoshaJoho550tempAll"  resultMap ="ResultMap_UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity">
         SELECT

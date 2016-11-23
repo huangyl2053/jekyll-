@@ -96,17 +96,17 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, 高額合算決定通知書);
         RString 支払予定日印字有無 = get支払予定日印字有無();
         List<KeyValueDataSource> list = new ArrayList<>();
-        KeyValueDataSource 単票発行分を除く = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.単票発行分を除く.getコード(),
-                KaigoGassan_JikoFutanShomeisho_Insho.単票発行分を除く.get名称());
-        KeyValueDataSource 単票発行分も含める = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.単票発行分も含める.getコード(),
-                KaigoGassan_JikoFutanShomeisho_Insho.単票発行分も含める.get名称());
+        KeyValueDataSource 単票発行済を除く = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.単票発行済を除く.getコード(),
+                KaigoGassan_JikoFutanShomeisho_Insho.単票発行済を除く.get名称());
+        KeyValueDataSource 単票発行済も含める = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.単票発行済も含める.getコード(),
+                KaigoGassan_JikoFutanShomeisho_Insho.単票発行済も含める.get名称());
         KeyValueDataSource 未発行分のみ = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.未発行分のみ.getコード(),
                 KaigoGassan_JikoFutanShomeisho_Insho.未発行分のみ.get名称());
-        list.add(単票発行分を除く);
-        list.add(単票発行分も含める);
+        list.add(単票発行済を除く);
+        list.add(単票発行済も含める);
         list.add(未発行分のみ);
         div.getDdlInsho().setDataSource(list);
-        div.getDdlInsho().setSelectedKey(KaigoGassan_JikoFutanShomeisho_Insho.単票発行分を除く.getコード());
+        div.getDdlInsho().setSelectedKey(KaigoGassan_JikoFutanShomeisho_Insho.単票発行済を除く.getコード());
         if (支払予定日印字有無.equals(NUM_0)) {
             div.getTxtShiharaiYoteiYMD().setDisplayNone(true);
         }
@@ -133,7 +133,7 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
             最新受取年月 = 国保連インターフェース管理.get処理年月();
         }
         市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
-        RString 処理名 = ShoriName.高額合算自己負担額計算登録.get名称();
+        RString 処理名 = ShoriName.高額合算支給決定通知書_一括.get名称();
         RString 処理枝番 = NUM_0001;
         ShoriDateKanri 処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(SubGyomuCode.DBC介護給付,
                 市町村コード, 処理名, 処理枝番);
@@ -289,8 +289,7 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
     /**
      * getバッチのメソッドです。
      *
-     * @return ResponseData
-     * DBC040050_KogakugassanShikyuKetteitsuchishoBatchParameter
+     * @return ResponseData DBC040050_KogakugassanShikyuKetteitsuchishoBatchParameter
      */
     public DBC040050_KogakugassanShikyuKetteitsuchishoParameter setバッチ() {
         DBC040050_KogakugassanShikyuKetteitsuchishoParameter parameter = new DBC040050_KogakugassanShikyuKetteitsuchishoParameter();

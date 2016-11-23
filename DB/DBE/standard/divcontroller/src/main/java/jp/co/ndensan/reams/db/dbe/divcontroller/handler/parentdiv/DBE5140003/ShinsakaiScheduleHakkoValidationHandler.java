@@ -66,7 +66,7 @@ public class ShinsakaiScheduleHakkoValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<RString> selectKey = div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys();
         if (!selectKey.isEmpty() && 介護認定審査会スケジュール表鑑.equals(selectKey.get(0))
-                && div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys().isEmpty()) {
+                && div.getDgShinsakaiScheduleKagami().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
                     UrErrorMessages.選択されていない, NIIN.toString()), div.getDgShinsakaiScheduleKagami()));
         }

@@ -111,8 +111,8 @@ public enum HomonKaigoRiyoshaFutanGengakuSpec implements IPredicate<HomonKaigoRi
                  */
                 @Override
                 public boolean apply(HomonKaigoRiyoshaFutanGengakuMainDiv div) {
-                    return div.getTxtKohiJyukyshaNo().getValue() != null
-                    && !div.getTxtKohiJyukyshaNo().getValue().isEmpty();
+                    return div.getTxtKohiJyukyshaNo().getText() != null
+                    && !div.getTxtKohiJyukyshaNo().getText().isEmpty();
                 }
             },
     法別区分の非空チェック {

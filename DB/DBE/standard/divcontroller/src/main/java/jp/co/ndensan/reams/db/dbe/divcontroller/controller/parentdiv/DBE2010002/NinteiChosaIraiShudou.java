@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -53,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 認定調査依頼(手動)のコントローラです。
@@ -149,7 +149,10 @@ public class NinteiChosaIraiShudou {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
             saveData(div);
-            RealInitialLocker.release(get排他キー());
+            ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+            List<NinteiShinseiJoho> 更新用認定調査依頼List = NinnteiChousairaiShudouFinder.createInstance().get更新用認定調査依頼情報(
+                    NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value())).records();
+            ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(更新用認定調査依頼List));
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
@@ -264,7 +267,9 @@ public class NinteiChosaIraiShudou {
             response.data = reportManager.publish();
         }
         updateData(div);
-        RealInitialLocker.release(get排他キー());
+        List<NinteiShinseiJoho> 更新用認定調査依頼List = NinnteiChousairaiShudouFinder.createInstance().get更新用認定調査依頼情報(
+                NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value())).records();
+        ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(更新用認定調査依頼List));
         return response;
     }
 
@@ -481,6 +486,7 @@ public class NinteiChosaIraiShudou {
             } else {
                 ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, CONFIGVALUE1);
             }
+            RealInitialLocker.release(get排他キー());
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理")).respond();
         }
         return ResponseData.of(div).respond();

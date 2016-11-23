@@ -191,6 +191,8 @@ public class HanyoListSeikatsuhogoJukyushaResult {
             eucCsvEntity.set医療保険番号(entity.get医療保険番号());
             eucCsvEntity.set医療保険者名(entity.get医療保険者名());
             eucCsvEntity.set医療保険記号番号(entity.get医療保険記号番号());
+        } else {
+           eucCsvEntity.set識別コード(new RString("該当データ無し"));
         }
         return eucCsvEntity;
     }
@@ -320,6 +322,8 @@ public class HanyoListSeikatsuhogoJukyushaResult {
             renbanEucCsvEntity.set医療保険番号(entity.get医療保険番号());
             renbanEucCsvEntity.set医療保険者名(entity.get医療保険者名());
             renbanEucCsvEntity.set医療保険記号番号(entity.get医療保険記号番号());
+        } else {
+           renbanEucCsvEntity.set識別コード(new RString("該当データ無し"));
         }
         return renbanEucCsvEntity;
     }

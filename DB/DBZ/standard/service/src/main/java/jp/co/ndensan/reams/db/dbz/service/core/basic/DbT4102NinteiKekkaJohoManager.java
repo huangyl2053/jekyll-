@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4102NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
@@ -43,6 +44,7 @@ public class DbT4102NinteiKekkaJohoManager {
      * @param 申請書管理番号 申請書管理番号
      * @return DbT4102NinteiKekkaJoho
      */
+    @Transaction
     public DbT4102NinteiKekkaJoho get要介護認定申請情報(ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
 

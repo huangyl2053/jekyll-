@@ -211,12 +211,13 @@
             resultMap="ResultMap_DbT7022ShoriDateKanriEntity">
         SELECT B.*
         FROM (SELECT A.*,
-                     row_number() OVER (PARTITION BY A."subGyomuCode",A."shichosonCode",A."shoriName",A."shoriEdaban" ORDER BY A."nendo" DESC, A."nendoNaiRenban" DESC) AS "rowNo"
+                     row_number() OVER (PARTITION BY A."subGyomuCode",A."shichosonCode",A."shoriName",A."shoriEdaban",A."nendo" ORDER BY A."nendoNaiRenban" DESC) AS "rowNo"
               FROM rgdb."DbT7022ShoriDateKanri" AS A
               WHERE A."subGyomuCode" = #{サブ業務コード}
               AND A."shichosonCode" = #{市町村コード}
               AND A."shoriName" = #{処理名}
               AND A."shoriEdaban" = #{処理枝番}
+              AND A."nendo" = "0000"
              ) AS B
         WHERE B."rowNo" = 1
     </select>

@@ -519,21 +519,27 @@ public class FukaKeisanFath {
     private FlexibleDate get年金支払い日(int 月) {
         switch (月) {
             case INT_4:
+            case INT_5:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_4月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             case INT_6:
+            case INT_7:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_6月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             case INT_8:
+            case INT_9:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_8月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             case INT_10:
+            case INT_11:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_10月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             case INT_12:
+            case INT_1:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_12月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             case INT_2:
+            case INT_3:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_2月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             default:

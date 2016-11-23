@@ -618,10 +618,19 @@ public class JutakuKaishuJizenShinsei {
         List<DbT3034ShokanShinseiEntity> entityList = mapper.get開始サービス提供年月(parameter);
         FlexibleYearMonth 開始サービス提供年月;
         if (entityList == null || entityList.isEmpty()) {
-            開始サービス提供年月 = new FlexibleYearMonth("000000");
+            開始サービス提供年月 = null;
         } else {
             開始サービス提供年月 = entityList.get(0).getServiceTeikyoYM();
         }
+        if (null == 開始サービス提供年月 || 開始サービス提供年月.isEmpty()) {
+            entityList = mapper.get初回の申請データ(parameter);
+            if (entityList == null || entityList.isEmpty()) {
+                開始サービス提供年月 = new FlexibleYearMonth("000000");
+            } else {
+                開始サービス提供年月 = entityList.get(0).getServiceTeikyoYM();
+            }
+        }
+
         parameter = JutakuKaishuHiParameter.createParameter(被保険者番号, サービス提供年月,
                 開始サービス提供年月, null);
         ShiharaiKekaEntity result = mapper.get前回までの支払結果(parameter);

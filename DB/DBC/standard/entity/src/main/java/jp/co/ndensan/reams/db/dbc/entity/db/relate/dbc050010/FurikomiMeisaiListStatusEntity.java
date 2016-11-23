@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,5 +22,5 @@ public class FurikomiMeisaiListStatusEntity {
 
     private FurikomiDetailTempTableEntity 振込明細一時Entity;
     private DbT4001JukyushaDaichoEntity 受給者台帳Entity;
-    private DbT4101NinteiShinseiJohoEntity 要介護認定申請情報Entity;
+    private Code 認定申請区分申請時コード;
 }

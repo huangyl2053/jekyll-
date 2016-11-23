@@ -478,7 +478,11 @@ public enum ReportIdDBE {
     /**
      * 介護認定審査会事前審査結果一覧表の帳票ID。
      */
-    DBE520001(new ReportId("DBE520001_ShinsakaiJizenshinsakekkaIchiranhyo"), new RString("介護認定審査会事前審査結果一覧表"));
+    DBE520001(new ReportId("DBE520001_ShinsakaiJizenshinsakekkaIchiranhyo"), new RString("介護認定審査会事前審査結果一覧表")),
+    /**
+     * 要介護認定個人進捗状況票の帳票ＩＤです。
+     */
+    DBE521001(new ReportId("DBE521001_KojinShinchokuJokyohyo"), new RString("要介護認定個人進捗状況票"));
 
     private final ReportId reportId;
 

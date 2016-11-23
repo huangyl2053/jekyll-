@@ -85,6 +85,24 @@ public class DbT4150RenrakusakiJohoEntity extends DbTableEntityBase<DbT4150Renra
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+    
+    /**
+     * updateCountのgetメソッドです。
+     * 
+     * @return updateCount
+     */
+    public int getUpdateCount() {
+        return updateCount;
+    }
+    
+    /**
+     * updateCountのsetメソッドです。
+     * 
+     * @param updateCount updateCount
+     */
+    public void setUpdateCount(int updateCount) {
+        this.updateCount = updateCount;
+    }
 
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。

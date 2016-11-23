@@ -83,7 +83,7 @@ public enum TaishoShoriSpec implements IPredicate<TaishoShoriPanelDiv> {
                 @Override
                 public boolean apply(TaishoShoriPanelDiv div) {
                     RString line = div.getHdnLine();
-                    if (null == line || line.isEmpty()) {
+                    if (null == line || line.isEmpty() || line.length() < 提出元終了位置) {
                         return false;
                     }
                     RString 提出元ID = line.substring(提出元開始位置, 提出元終了位置);
@@ -102,7 +102,7 @@ public enum TaishoShoriSpec implements IPredicate<TaishoShoriPanelDiv> {
                     }
 
                     RString line = div.getHdnLine();
-                    if (null == line || line.isEmpty()) {
+                    if (null == line || line.isEmpty() || line.length() < 通知内容コード終了位置) {
                         return false;
                     }
 
@@ -123,7 +123,7 @@ public enum TaishoShoriSpec implements IPredicate<TaishoShoriPanelDiv> {
                     }
 
                     RString line = div.getHdnLine();
-                    if (null == line || line.isEmpty()) {
+                    if (null == line || line.isEmpty() || line.length() < 通知内容コード終了位置) {
                         return false;
                     }
 

@@ -61,7 +61,7 @@ public class YokaigoninteiimageShutsuryokuFinder {
             if (info.getFilesEntity() == null) {
                 continue;
             }
-            存在したイメージファイル名.add(info.getFilesEntity().getPathname());
+            存在したイメージファイル名.add(info.getFileEntryEntity().getLocalFileName());
         }
         return 存在したイメージファイル名;
     }

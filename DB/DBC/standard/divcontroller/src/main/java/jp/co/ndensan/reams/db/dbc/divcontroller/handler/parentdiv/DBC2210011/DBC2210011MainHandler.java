@@ -214,7 +214,7 @@ public class DBC2210011MainHandler {
      */
     public void onSelect_byListSelect(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getDdlKenCode().setDataSource(get県コードDDLSource());
-        set事業者情報(事業者サービス情報List, row);
+        set事業者情報(事業者サービス情報List);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().
                 getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().
@@ -232,7 +232,7 @@ public class DBC2210011MainHandler {
      */
     public void onSelect_byListModify(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getDdlKenCode().setDataSource(get県コードDDLSource());
-        set事業者情報(事業者サービス情報List, row);
+        set事業者情報(事業者サービス情報List);
         setReadOnly(true);
         div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().setReadOnly(false);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().getDgTokubetsuKyufuJigyoshaDetailServiceList().
@@ -250,7 +250,7 @@ public class DBC2210011MainHandler {
      */
     public void onSelect_byListDelete(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getDdlKenCode().setDataSource(get県コードDDLSource());
-        set事業者情報(事業者サービス情報List, row);
+        set事業者情報(事業者サービス情報List);
         setReadOnly(true);
         div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().setReadOnly(true);
         setServiceListReadOnly(true);
@@ -674,7 +674,7 @@ public class DBC2210011MainHandler {
 
     private TokubetsuKyufuJigyoshaSearchBuilder update市町村特別給付サービス事業者情報(TokubetsuKyufuJigyoshaSearchBusiness 更新情報) {
 
-        TokubetsuKyufuJigyoshaSearchBuilder tokubetsuKyufuJigyoshaSearchBuilder = 更新情報.createBuilderForEdit();
+        TokubetsuKyufuJigyoshaSearchBuilder tokubetsuBuilder = 更新情報.createBuilderForEdit();
         RString 異動区分 = div.getTokubetsuKyufuJigyoshaDetail().getRadIdoKubun().getSelectedKey();
         FlexibleDate 異動年月日 = new FlexibleDate(div.getTokubetsuKyufuJigyoshaDetail().getTxtIdoYMD().getValue().toDateString());
         RString 法人種別 = div.getTokubetsuKyufuJigyoshaDetail().getDdlHojinShubetsu().getSelectedKey();
@@ -745,45 +745,45 @@ public class DBC2210011MainHandler {
         }
         boolean 論理削除フラグ = false;
 
-        tokubetsuKyufuJigyoshaSearchBuilder.set介護国保連ＩＦ異動区分(異動区分);
-        tokubetsuKyufuJigyoshaSearchBuilder.set介護国保連ＩＦ異動年月日(異動年月日);
-        tokubetsuKyufuJigyoshaSearchBuilder.set介護国保連ＩＦ法人種別(法人種別);
-        tokubetsuKyufuJigyoshaSearchBuilder.set申請者氏名_漢字(申請者氏名);
-        tokubetsuKyufuJigyoshaSearchBuilder.set申請者氏名_カナ(申請者氏名カナ);
-        tokubetsuKyufuJigyoshaSearchBuilder.set申請者住所(申請者住所);
-        tokubetsuKyufuJigyoshaSearchBuilder.set申請者住所_カナ(申請者住所カナ);
-        tokubetsuKyufuJigyoshaSearchBuilder.set申請者郵便番号(申請者郵便番号);
-        tokubetsuKyufuJigyoshaSearchBuilder.set申請者電話番号(申請者電話番号);
-        tokubetsuKyufuJigyoshaSearchBuilder.set申請者FAX番号(申請者FAX番号);
-        tokubetsuKyufuJigyoshaSearchBuilder.set事業所代表者役職(事業所代表者役職);
-        tokubetsuKyufuJigyoshaSearchBuilder.set事業所代表者氏名(事業所代表者氏名);
-        tokubetsuKyufuJigyoshaSearchBuilder.set事業所代表者氏名カナ(事業所代表者氏名カナ);
-        tokubetsuKyufuJigyoshaSearchBuilder.set事業所代表者住所(事業所代表者住所);
-        tokubetsuKyufuJigyoshaSearchBuilder.set事業所代表者住所カナ(事業所代表者住所カナ);
-        tokubetsuKyufuJigyoshaSearchBuilder.set事業所代表者郵便番号(事業所代表者郵便番号);
-        tokubetsuKyufuJigyoshaSearchBuilder.set事業所管理者住所(事業所管理者住所);
-        tokubetsuKyufuJigyoshaSearchBuilder.set事業所管理者住所カナ(事業所管理者住所カナ);
-        tokubetsuKyufuJigyoshaSearchBuilder.set事業所管理者氏名(事業所管理者氏名);
-        tokubetsuKyufuJigyoshaSearchBuilder.set事業所管理者氏名カナ(事業所管理者氏名カナ);
-        tokubetsuKyufuJigyoshaSearchBuilder.set事業所管理者郵便番号(事業所管理者郵便番号);
-        tokubetsuKyufuJigyoshaSearchBuilder.setサービス事業所名(サービス事業所名);
-        tokubetsuKyufuJigyoshaSearchBuilder.setサービス事業所名カナ(サービス事業所名カナ);
-        tokubetsuKyufuJigyoshaSearchBuilder.setサービス事業所住所(サービス事業所住所);
-        tokubetsuKyufuJigyoshaSearchBuilder.setサービス事業所住所カナ(サービス事業所住所カナ);
-        tokubetsuKyufuJigyoshaSearchBuilder.setサービス事業所郵便番号(サービス事業所郵便番号);
-        tokubetsuKyufuJigyoshaSearchBuilder.setサービス事業所電話番号(サービス事業所電話番号);
-        tokubetsuKyufuJigyoshaSearchBuilder.setサービス事業所FAX番号(サービス事業所FAX番号);
-        tokubetsuKyufuJigyoshaSearchBuilder.setサービス事業所事業開始年月日(サービス事業所事業開始年月日);
-        tokubetsuKyufuJigyoshaSearchBuilder.setサービス事業所事業休止年月日(サービス事業所事業休止年月日);
-        tokubetsuKyufuJigyoshaSearchBuilder.setサービス事業所事業廃止年月日(サービス事業所事業廃止年月日);
-        tokubetsuKyufuJigyoshaSearchBuilder.setサービス事業所事業再開年月日(サービス事業所事業再開年月日);
-        tokubetsuKyufuJigyoshaSearchBuilder.set受領委任区分(受領委任区分);
-        tokubetsuKyufuJigyoshaSearchBuilder.set市町村特別給付登録開始年月日(市町村特別給付登録開始年月日);
-        tokubetsuKyufuJigyoshaSearchBuilder.set市町村特別給付登録終了年月日(市町村特別給付登録終了年月日);
-        tokubetsuKyufuJigyoshaSearchBuilder.set生活保護法による指定の有(生活保護法による指定の有);
-        tokubetsuKyufuJigyoshaSearchBuilder.set論理削除フラグ(論理削除フラグ);
+        tokubetsuBuilder.set介護国保連ＩＦ異動区分(異動区分);
+        tokubetsuBuilder.set介護国保連ＩＦ異動年月日(異動年月日);
+        tokubetsuBuilder.set介護国保連ＩＦ法人種別(法人種別);
+        tokubetsuBuilder.set申請者氏名_漢字(申請者氏名);
+        tokubetsuBuilder.set申請者氏名_カナ(申請者氏名カナ);
+        tokubetsuBuilder.set申請者住所(申請者住所);
+        tokubetsuBuilder.set申請者住所_カナ(申請者住所カナ);
+        tokubetsuBuilder.set申請者郵便番号(申請者郵便番号);
+        tokubetsuBuilder.set申請者電話番号(申請者電話番号);
+        tokubetsuBuilder.set申請者FAX番号(申請者FAX番号);
+        tokubetsuBuilder.set事業所代表者役職(事業所代表者役職);
+        tokubetsuBuilder.set事業所代表者氏名(事業所代表者氏名);
+        tokubetsuBuilder.set事業所代表者氏名カナ(事業所代表者氏名カナ);
+        tokubetsuBuilder.set事業所代表者住所(事業所代表者住所);
+        tokubetsuBuilder.set事業所代表者住所カナ(事業所代表者住所カナ);
+        tokubetsuBuilder.set事業所代表者郵便番号(事業所代表者郵便番号);
+        tokubetsuBuilder.set事業所管理者住所(事業所管理者住所);
+        tokubetsuBuilder.set事業所管理者住所カナ(事業所管理者住所カナ);
+        tokubetsuBuilder.set事業所管理者氏名(事業所管理者氏名);
+        tokubetsuBuilder.set事業所管理者氏名カナ(事業所管理者氏名カナ);
+        tokubetsuBuilder.set事業所管理者郵便番号(事業所管理者郵便番号);
+        tokubetsuBuilder.setサービス事業所名(サービス事業所名);
+        tokubetsuBuilder.setサービス事業所名カナ(サービス事業所名カナ);
+        tokubetsuBuilder.setサービス事業所住所(サービス事業所住所);
+        tokubetsuBuilder.setサービス事業所住所カナ(サービス事業所住所カナ);
+        tokubetsuBuilder.setサービス事業所郵便番号(サービス事業所郵便番号);
+        tokubetsuBuilder.setサービス事業所電話番号(サービス事業所電話番号);
+        tokubetsuBuilder.setサービス事業所FAX番号(サービス事業所FAX番号);
+        tokubetsuBuilder.setサービス事業所事業開始年月日(サービス事業所事業開始年月日);
+        tokubetsuBuilder.setサービス事業所事業休止年月日(サービス事業所事業休止年月日);
+        tokubetsuBuilder.setサービス事業所事業廃止年月日(サービス事業所事業廃止年月日);
+        tokubetsuBuilder.setサービス事業所事業再開年月日(サービス事業所事業再開年月日);
+        tokubetsuBuilder.set受領委任区分(受領委任区分);
+        tokubetsuBuilder.set市町村特別給付登録開始年月日(市町村特別給付登録開始年月日);
+        tokubetsuBuilder.set市町村特別給付登録終了年月日(市町村特別給付登録終了年月日);
+        tokubetsuBuilder.set生活保護法による指定の有(生活保護法による指定の有);
+        tokubetsuBuilder.set論理削除フラグ(論理削除フラグ);
 
-        return tokubetsuKyufuJigyoshaSearchBuilder;
+        return tokubetsuBuilder;
     }
 
     private void set県コードDDL() {
@@ -882,7 +882,7 @@ public class DBC2210011MainHandler {
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getBtnSetCheckDigit().setDisabled(flag);
     }
 
-    private void set事業者情報(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List, dgTokubetsuKyufuJigyoshaList_Row row) {
+    private void set事業者情報(List<TokubetsuKyufuJigyoshaSearchBusiness> 事業者サービス情報List) {
         TokubetsuKyufuJigyoshaSearchBusiness 事業者情報 = 事業者サービス情報List.get(0);
         RString 県コード = 事業者情報.get市町村特別給付用事業者番号().getColumnValue().substring(0, 2);
         div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaCode().getDdlKenCode()
