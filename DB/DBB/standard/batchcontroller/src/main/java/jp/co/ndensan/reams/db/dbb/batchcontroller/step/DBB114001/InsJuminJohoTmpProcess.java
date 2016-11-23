@@ -46,10 +46,10 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
     private ShotokuShokaihyoHakkoProcessParameter processParameter;
     private ShotokuNendoParameter myBatisParameter;
     private KouhoshaTenyuEntity 所得照会候補者Entity;
-    private int index = 1;
 
     @Override
     protected void createWriter() {
+        所得照会候補者Entity = null;
         所得照会候補者writer = new BatchEntityCreatedTempTableWriter(所得照会候補者TEMP, ShotokuShoukaiKouhoshaTempEntity.class);
     }
 
@@ -61,7 +61,7 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
 
     @Override
     protected void process(KouhoshaTenyuEntity t) {
-        if (index == 1) {
+        if (null == 所得照会候補者Entity) {
             所得照会候補者Entity = t;
             識別コード = t.get識別コード();
         } else if (識別コード.equals(t.get識別コード())) {
@@ -70,12 +70,12 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
             } else {
                 所得照会候補者writer.insert(creatEntity(所得照会候補者Entity));
             }
+            所得照会候補者Entity = null;
         } else {
             所得照会候補者writer.insert(creatEntity(所得照会候補者Entity));
             所得照会候補者Entity = t;
             識別コード = t.get識別コード();
         }
-        index++;
     }
 
     private ShotokuShoukaiKouhoshaTempEntity creatEntity(KouhoshaTenyuEntity t) {
@@ -108,6 +108,13 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
         tempEntity.setTenyuzenbanchi(t.get転入前番地());
         tempEntity.setTenyuzenkatagaki(t.get転入前方書());
         return tempEntity;
+    }
+
+    @Override
+    protected void afterExecute() {
+        if (null != 所得照会候補者Entity) {
+            所得照会候補者writer.insert(creatEntity(所得照会候補者Entity));
+        }
     }
 
     private ShotokuNendoParameter creatParameter() {
