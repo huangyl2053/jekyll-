@@ -1768,16 +1768,6 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         return date1.isBefore(date2);
     }
 
-    private boolean isBeforeDate喪失年月日(FlexibleDate date1, FlexibleDate date2) {
-        if (isDateEmpty(date2)) {
-            return true;
-        }
-        if (isDateEmpty(date1)) {
-            return false;
-        }
-        return date1.isBefore(date2);
-    }
-
     private boolean isBeforeOrEqDate喪失年月日(FlexibleDate date1, FlexibleDate date2) {
         if (isDateEmpty(date2)) {
             return true;
