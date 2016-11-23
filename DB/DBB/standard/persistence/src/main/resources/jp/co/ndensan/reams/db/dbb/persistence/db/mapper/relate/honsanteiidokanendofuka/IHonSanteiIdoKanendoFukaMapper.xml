@@ -1418,14 +1418,20 @@
         SELECT A.*
         FROM
            (SELECT 
-                Q.*
+             L.*
              FROM 
+                 rgdb."DbT1001HihokenshaDaicho" AS  L
+             INNER JOIN  
+            (SELECT 
+                Q."hihokenshaNo",
+                Q."idoYMD",
+                MAX(Q."edaNo") AS "edaNo"
+               FROM 
                 rgdb."DbT1001HihokenshaDaicho" AS Q
                 INNER JOIN
                 (SELECT "hihokenshaNo", "ichigoShikakuShutokuYMD", MAX("shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
                    FROM rgdb."DbT1001HihokenshaDaicho"  AS "ORG"
                    WHERE "hihokennshaKubunCode"='1' AND "logicalDeletedFlag"=FALSE
-                   <!--以下「法施行時（2000/4/1）に住所地特例者で～除外する」考慮-->
                    AND NOT (EXISTS 
                       (SELECT 'X' FROM 
                              (SELECT 
@@ -1443,13 +1449,17 @@
                               WHERE "法施行時住特得喪レコード_hihokenshaNo"="ORG"."hihokenshaNo"
                               AND "法施行時住特得喪レコード_idoYMD"="ORG"."idoYMD"
                               AND "法施行時住特得喪レコード_edaNo"="ORG"."edaNo" ))
-                   <!--以上-->
                    GROUP BY "hihokenshaNo", "ichigoShikakuShutokuYMD"
                 )AS T
                 ON
                     T."hihokenshaNo" = Q."hihokenshaNo"
                 AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
                 AND T."max_shikakuSoshitsuYMD" = Q."shikakuSoshitsuYMD"
+               GROUP BY Q."hihokenshaNo", Q."idoYMD") as M
+               ON
+                 M."hihokenshaNo" = L."hihokenshaNo"
+                 AND M."idoYMD" = L."idoYMD"
+                 AND M."edaNo" = L."edaNo"
             ) AS A
         INNER JOIN
         ( <include refid="distinct_IdoTmp" /> ) AS B
