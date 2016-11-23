@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -212,7 +211,6 @@ public class KyufuJissekiShokaiHandler {
     private KyufuJissekiHeader get給付実績基本情報子Div(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1) {
         KyufuJissekiHeader data = new KyufuJissekiHeader();
         data.set被保険者番号(get被保険者番号(給付実績ヘッダ情報1.get被保険者番号()));
-        data.set住民種別(get住民種別(給付実績ヘッダ情報1.get資格取得事由コード()));
         if (給付実績ヘッダ情報1.get認定年月日() != null && !給付実績ヘッダ情報1.get認定年月日().isEmpty()
                 && !RString.isNullOrEmpty(給付実績ヘッダ情報1.get要介護認定状態区分コード())) {
             data.set要介護度(YokaigoJotaiKubunSupport.toValue(
@@ -229,6 +227,7 @@ public class KyufuJissekiShokaiHandler {
         if (給付実績ヘッダ情報1.get生年月日() != null && 給付実績ヘッダ情報1.get生年月日().isWareki()) {
             data.set生年月日(new RDate(給付実績ヘッダ情報1.get生年月日().toString()));
         }
+        data.set住民種別(給付実績ヘッダ情報1.get住民種別());
         return data;
     }
 
@@ -348,13 +347,6 @@ public class KyufuJissekiShokaiHandler {
         return RString.EMPTY;
     }
 
-    private RString get住民種別(RString 資格取得事由コード) {
-        if (!RString.isNullOrEmpty(資格取得事由コード)) {
-            return ShikakuShutokuJiyu.toValue(資格取得事由コード).get名称();
-        }
-        return RString.EMPTY;
-    }
-
     private RString get性別(RString 性別コード) {
         if (!RString.isNullOrEmpty(性別コード)) {
             return Seibetsu.toValue(性別コード).get名称();
@@ -419,6 +411,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceGroup2(RString.EMPTY);
                     明細一覧.setTxtServiceShurui(new RString("総合訪問入浴介護"));
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_NI:
@@ -433,6 +426,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceShurui(new RString("総合訪問看護"));
                     明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_SAN:
@@ -445,6 +439,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceGroup2(RString.EMPTY);
                     明細一覧.setTxtServiceShurui(new RString("総合訪問リハビリテーション"));
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             default:
@@ -467,6 +462,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceShurui(new RString("総合通所型予防サービス"));
                     明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_GO:
@@ -479,6 +475,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceGroup2(RString.EMPTY);
                     明細一覧.setTxtServiceShurui(new RString("総合通所リハビリテーション"));
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_ROKU:
@@ -493,6 +490,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceShurui(new RString("総合福祉用具貸与"));
                     明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_NANA:
@@ -505,6 +503,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceGroup2(短期入所);
                     明細一覧.setTxtServiceShurui(new RString("総合短期入所生活介護"));
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             default:
@@ -527,6 +526,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceShurui(new RString("総合短期入所療養介護(老健)"));
                     明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_KYU:
@@ -539,13 +539,14 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceGroup2(RString.EMPTY);
                     明細一覧.setTxtServiceShurui(new RString("総合短期入所療養介護(医療)"));
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_JYU:
                 if (KEY.equals(検索対象)) {
                     明細一覧.setTxtServiceGroup1(RString.EMPTY);
                     明細一覧.setTxtServiceGroup2(RString.EMPTY);
-                    明細一覧.setTxtServiceShurui(new RString("出来高請求額（短期入所療養介護）"));
+                    明細一覧.setTxtServiceShurui(new RString("出来高請求額"));
                     明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 } else {
                     明細一覧.setTxtServiceGroup1(RString.EMPTY);
@@ -553,6 +554,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceShurui(new RString("出来高請求額"));
                     明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_JYUI:
@@ -565,6 +567,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceGroup2(RString.EMPTY);
                     明細一覧.setTxtServiceShurui(new RString("総合居宅療養管理指導"));
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             default:
@@ -587,6 +590,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceShurui(new RString("総合特定施設入居者生活介護"));
                     明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_JYUS:
@@ -599,6 +603,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceGroup2(地域密着);
                     明細一覧.setTxtServiceShurui(new RString("総合認知症型共同生活介護"));
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_JYUY:
@@ -613,6 +618,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceShurui(new RString("総合認知症型共同生活(短期)"));
                     明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             default:
@@ -633,6 +639,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceGroup2(RString.EMPTY);
                     明細一覧.setTxtServiceShurui(new RString("総合認知症対応型通所介護"));
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_JYUR:
@@ -647,6 +654,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceShurui(new RString("総合小規模多機能型居宅介護"));
                     明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_JYUNA:
@@ -659,6 +667,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceGroup2(RString.EMPTY);
                     明細一覧.setTxtServiceShurui(new RString("ケアマネジメント"));
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_JYUH:
@@ -673,6 +682,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceShurui(new RString("生活支援サービス(配食)"));
                     明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_JYUK:
@@ -685,6 +695,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceGroup2(RString.EMPTY);
                     明細一覧.setTxtServiceShurui(new RString("生活支援サービス(見守り)"));
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_NJYU:
@@ -699,6 +710,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceShurui(new RString("生活支援サービス(その他)"));
                     明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 }
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             default:
@@ -713,6 +725,7 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("小規模多機能型居宅介護（短期）"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_NJYUN:
@@ -720,12 +733,14 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("定期巡回・随時対応型訪問介護看護"));
                 明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_NJYUS:
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("複合型（看護小規模多機能型居宅介護・短期以外）"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_NJYUY:
@@ -733,6 +748,7 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("複合型（看護小規模多機能型居宅介護・短期）"));
                 明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             default:
@@ -747,6 +763,7 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("地域密着型通所介護"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_NJYUR:
@@ -766,6 +783,7 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("介護保健施設サービス"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_NJYUK:
@@ -773,12 +791,14 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("介護療養施設サービス"));
                 明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_SJYU:
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(地域密着);
                 明細一覧.setTxtServiceShurui(new RString("地域密着型介護老人福祉施設"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_SJYUI:
@@ -786,6 +806,7 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("出来高請求額"));
                 明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_SJYUN:
@@ -806,6 +827,7 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("訪問型サービス（独自）"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             case INT_SJYUY:
@@ -813,6 +835,7 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("訪問型サービス（独自／定率）"));
                 明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightYellow);
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             case INT_SJYUG:
@@ -825,6 +848,7 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("通所型サービス（みなし）"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
@@ -832,6 +856,7 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("通所型サービス（独自）"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             case INT_SJYUH:
@@ -839,12 +864,14 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("通所型サービス（独自／定率）"));
                 明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightYellow);
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             case INT_SJYUK:
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("通所型サービス（独自／定額）"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             case INT_YJYU:
@@ -852,12 +879,14 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("介護予防ケアマネジメント"));
                 明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightYellow);
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             case INT_YJYUI:
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("その他の生活支援（配食／定率）"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             case INT_YJYUN:
@@ -865,12 +894,14 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("その他の生活支援（配食／定額）"));
                 明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightYellow);
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             case INT_YJYUS:
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("その他の生活支援（見守り／定率）"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             case INT_YJYUY:
@@ -878,12 +909,14 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("その他の生活支援（見守り／定額）"));
                 明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightYellow);
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             case INT_YJYUG:
                 明細一覧.setTxtServiceGroup1(RString.EMPTY);
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("その他の生活支援（その他／定率）"));
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             case INT_YJYUR:
@@ -891,6 +924,7 @@ public class KyufuJissekiShokaiHandler {
                 明細一覧.setTxtServiceGroup2(RString.EMPTY);
                 明細一覧.setTxtServiceShurui(new RString("その他の生活支援（その他／定額）"));
                 明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightYellow);
+                明細一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
                 明細一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
                 break;
             default:
@@ -900,6 +934,13 @@ public class KyufuJissekiShokaiHandler {
 
     private void set合計一覧固定項目(int 一覧行数,
             dgKyufuJissekiMeisaiList_Row 合計一覧, RString 検索対象) {
+        if (KEY.equals(検索対象)) {
+            合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
+            合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
+        } else {
+            合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightYellow);
+            合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightYellow);
+        }
         switch (一覧行数) {
             case INT_ZERO:
                 if (KEY.equals(検索対象)) {
@@ -911,7 +952,7 @@ public class KyufuJissekiShokaiHandler {
                     合計一覧.setTxtServiceGroup1(RString.EMPTY);
                     合計一覧.setTxtServiceGroup2(RString.EMPTY);
                     合計一覧.setTxtServiceShurui(居宅サービス合計単位);
-                    合計一覧.setRowBgColor(DataGridCellBgColor.bgColorLightBlue);
+                    合計一覧.setRowBgColor(DataGridCellBgColor.bgColorLightYellow);
                 }
                 break;
             case INT_ICHI:
@@ -924,8 +965,6 @@ public class KyufuJissekiShokaiHandler {
                     合計一覧.setTxtServiceGroup2(RString.EMPTY);
                     合計一覧.setTxtServiceShurui(地域密着型サービス合計単位);
                 }
-                合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_NI:
                 if (KEY.equals(検索対象)) {
@@ -937,10 +976,8 @@ public class KyufuJissekiShokaiHandler {
                     合計一覧.setTxtServiceGroup1(RString.EMPTY);
                     合計一覧.setTxtServiceGroup2(RString.EMPTY);
                     合計一覧.setTxtServiceShurui(new RString("生活支援サービス合計単位"));
-                    合計一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
+                    合計一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightYellow);
                 }
-                合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_SAN:
                 if (KEY.equals(検索対象)) {
@@ -952,8 +989,6 @@ public class KyufuJissekiShokaiHandler {
                     合計一覧.setTxtServiceGroup2(RString.EMPTY);
                     合計一覧.setTxtServiceShurui(給付費合計);
                 }
-                合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_YON:
                 if (KEY.equals(検索対象)) {
@@ -965,55 +1000,41 @@ public class KyufuJissekiShokaiHandler {
                     合計一覧.setTxtServiceGroup1(RString.EMPTY);
                     合計一覧.setTxtServiceGroup2(RString.EMPTY);
                     合計一覧.setTxtServiceShurui(利用者負担合計);
-                    合計一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
+                    合計一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightYellow);
                 }
-                合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_GO:
                 合計一覧.setTxtServiceGroup1(RString.EMPTY);
                 合計一覧.setTxtServiceGroup2(RString.EMPTY);
                 合計一覧.setTxtServiceShurui(new RString("給付費合計（総合事業）"));
-                合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_ROKU:
                 合計一覧.setTxtServiceGroup1(RString.EMPTY);
                 合計一覧.setTxtServiceGroup2(RString.EMPTY);
                 合計一覧.setTxtServiceShurui(利用者負担合計);
                 合計一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_NANA:
                 合計一覧.setTxtServiceGroup1(RString.EMPTY);
                 合計一覧.setTxtServiceGroup2(RString.EMPTY);
                 合計一覧.setTxtServiceShurui(new RString("利用者負担合計（総合事業）"));
-                合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_HACHI:
                 合計一覧.setTxtServiceGroup1(RString.EMPTY);
                 合計一覧.setTxtServiceGroup2(RString.EMPTY);
                 合計一覧.setTxtServiceShurui(new RString("高額介護費"));
                 合計一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_KYU:
                 合計一覧.setTxtServiceGroup1(RString.EMPTY);
                 合計一覧.setTxtServiceGroup2(RString.EMPTY);
                 合計一覧.setTxtServiceShurui(new RString("福祉用具販売"));
-                合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             case INT_JYU:
                 合計一覧.setTxtServiceGroup1(RString.EMPTY);
                 合計一覧.setTxtServiceGroup2(RString.EMPTY);
                 合計一覧.setTxtServiceShurui(new RString("住宅改修"));
                 合計一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組１.toString(), DataGridCellBgColor.bgColorLightBlue);
-                合計一覧.setCellBgColor(サービス組２.toString(), DataGridCellBgColor.bgColorLightBlue);
                 break;
             default:
                 break;

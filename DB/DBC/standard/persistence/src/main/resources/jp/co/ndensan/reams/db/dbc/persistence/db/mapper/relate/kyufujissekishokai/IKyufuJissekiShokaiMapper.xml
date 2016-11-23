@@ -105,7 +105,6 @@
       "mst"."hiHokenshaNo" = #{被保険者番号}
       AND #{サービス提供年月_開始} <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
       AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月_終了}
-      AND "mst"."shinsaYM" <![CDATA[<>]]> ''
       <if test="isKey0検索対象">
             AND "mst"."inputShikibetsuNo" not in ('71P1','8161') 
       </if>
@@ -119,12 +118,95 @@
             AND "mst"."serviceTeikyoYM" = "slv"."serviceTeikyoYM"
             AND "mst"."jigyoshoNo" = "slv"."jigyoshoNo"
             AND "mst"."seiriNo" = "slv"."seiriNo"
-            AND "slv"."shinsaYM" <![CDATA[<>]]> ''
             AND (("mst"."shinsaYM" <![CDATA[<]]> "slv"."shinsaYM")
             or   ("mst"."shinsaYM" = "slv"."shinsaYM"
              and  "slv"."kyufuSakuseiKubunCode" <![CDATA[<]]> "mst"."kyufuSakuseiKubunCode")))
     )
     </sql>
+    
+    <select resultOrdered="true" id="get給付実績基本データ" resultMap="ResultMap_給付実績基本集計データ" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiHeaderJohoMapperParameter" fetchSize="500">
+
+      with "給付実績基本" AS (
+        SELECT * FROM
+           (SELECT * FROM
+             rgdb."DbT3017KyufujissekiKihon" AS "mst" 
+           WHERE
+             "mst"."hiHokenshaNo" = #{被保険者番号}
+             AND #{サービス提供年月_開始} <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
+             AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月_終了}
+             AND NOT EXISTS (SELECT 'X'FROM rgdb."DbT3017KyufujissekiKihon" AS "slv" 
+                             WHERE "mst"."inputShikibetsuNo" = "slv"."inputShikibetsuNo" 
+                                   AND "mst"."hiHokenshaNo" = "slv"."hiHokenshaNo" 
+                                   AND "mst"."serviceTeikyoYM" = "slv"."serviceTeikyoYM" 
+                                   AND "mst"."jigyoshoNo" = "slv"."jigyoshoNo" 
+                                   AND "mst"."seiriNo" = "slv"."seiriNo" 
+                                   AND (("mst"."shinsaYM" <![CDATA[<]]> "slv"."shinsaYM") 
+                                   OR  ("mst"."shinsaYM" = "slv"."shinsaYM" 
+                                   AND   "slv"."kyufuSakuseiKubunCode" <![CDATA[<]]> "mst"."kyufuSakuseiKubunCode"))
+           )) as "基本"
+         <if test="検索条件番目 == 1">
+            WHERE  substr("基本"."inputShikibetsuNo" ,1,3)in ('21B','812')
+         </if>
+         <if test="検索条件番目 == 2">
+            WHERE  substr("基本"."inputShikibetsuNo",1,3) in('816')
+         </if>
+         <if test="検索条件番目 == 3">
+            WHERE EXISTS (select 'x' from rgdb."DbT3033KyufujissekiShukei" as "DbT3033KyufujissekiShukei"
+                          WHERE "DbT3033KyufujissekiShukei"."hiHokenshaNo" = "基本"."hiHokenshaNo"
+                                AND "DbT3033KyufujissekiShukei"."serviceTeikyoYM" = "基本"."serviceTeikyoYM"
+                                AND "DbT3033KyufujissekiShukei"."inputShikibetsuNo" = "基本"."inputShikibetsuNo"
+                                AND "DbT3033KyufujissekiShukei"."jigyoshoNo" = "基本"."jigyoshoNo"
+                                AND "DbT3033KyufujissekiShukei"."toshiNo" = "基本"."toshiNo"
+                                AND "DbT3033KyufujissekiShukei"."serviceSyuruiCode" in
+                                     <foreach item="サービス種類コード" index="index" collection="サービス種類コード" open="(" separator="," close=")">			
+                                        #{サービス種類コード}			
+                                     </foreach>	
+                          )		
+         </if>
+         <if test="検索条件番目 == 4">
+            WHERE substr("基本"."inputShikibetsuNo",1,3)  not in ('71R','817','71P','816','21B','812') 
+         </if>
+         <if test="検索条件番目 == 5">
+            WHERE substr("基本"."inputShikibetsuNo",1,3)  in ('71R','817') 
+         </if>
+         <if test="検索条件番目 == 6">
+            WHERE substr("基本"."inputShikibetsuNo",1,3)  in ('71P') 
+         </if>
+         )
+
+         SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
+            ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper.allColumns_DbT3118ShikibetsuNoKanri" />
+            ,"DbT7060KaigoJigyosha"."jigyoshaName" AS "DbT7060_jigyoshaName" 
+            ,"DbT7060KaigoJigyosha2"."jigyoshaName" AS "DbT7060_kyotakuKaigoShienJigyoshaName"
+         FROM
+            "給付実績基本" AS "DbT3017KyufujissekiKihon" 
+         LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" as "DbT3118ShikibetsuNoKanri" 
+             ON "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3118ShikibetsuNoKanri"."shikibetsuNo" 
+             AND "DbT3118ShikibetsuNoKanri"."shikibetsuNoKubon" = '2' 
+             AND "DbT3118ShikibetsuNoKanri"."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM" 
+             AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> "DbT3118ShikibetsuNoKanri"."tekiyoShuryoYM" 
+         LEFT JOIN rgdb."DbT7060KaigoJigyosha" as "DbT7060KaigoJigyosha" 
+             ON "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT7060KaigoJigyosha"."jigyoshaNo" 
+             AND substr("DbT7060KaigoJigyosha"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+             AND ( 
+                  "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substr("DbT7060KaigoJigyosha"."yukoShuryoYMD", 1, 6)
+                  OR substr("DbT7060KaigoJigyosha"."yukoShuryoYMD", 1, 6) = ''
+                 ) 
+         LEFT JOIN
+             rgdb."DbT7060KaigoJigyosha" as "DbT7060KaigoJigyosha2"
+           ON
+             "DbT3017KyufujissekiKihon"."kyotakuKaigoShienJigyoshoNo" = "DbT7060KaigoJigyosha2"."jigyoshaNo"
+             AND  substr("DbT7060KaigoJigyosha2"."yukoKaishiYMD",1,6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+             AND ("DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substr("DbT7060KaigoJigyosha2"."yukoShuryoYMD",1,6)
+             OR  substr("DbT7060KaigoJigyosha2"."yukoShuryoYMD",1,6) = '')
+        ORDER BY
+             "DbT3017KyufujissekiKihon"."serviceTeikyoYM" 
+             ,"DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+             ,"DbT3017KyufujissekiKihon"."jigyoshoNo"
+             ,"DbT3017KyufujissekiKihon"."seiriNo"
+    </select>
     
     <select resultOrdered="true" id="get給付実績基本集計データ" resultMap="ResultMap_給付実績基本集計データ" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiHeaderJohoMapperParameter" fetchSize="500">
@@ -487,7 +569,6 @@ ORDER BY
             "mst"."hiHokenshaNo" = #{被保険者番号}
             AND #{サービス提供年月_開始} <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
             AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月_終了}
-            AND "mst"."shinsaYM" <![CDATA[<>]]> ''
             AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS "slv"
          WHERE
              "mst"."inputShikibetsuNo" = "slv"."inputShikibetsuNo"
@@ -495,7 +576,6 @@ ORDER BY
             AND "mst"."serviceTeikyoYM" = "slv"."serviceTeikyoYM"
             AND "mst"."toshiNo" = "slv"."toshiNo"
             AND "mst"."seiriNo" = "slv"."seiriNo"
-            AND "slv"."shinsaYM" <![CDATA[<>]]> ''
             AND (("mst"."shinsaYM" <![CDATA[<]]> "slv"."shinsaYM")
             or   ("mst"."shinsaYM" = "slv"."shinsaYM"
              and  "slv"."kyufuSakuseiKubunCode" <![CDATA[<]]> "mst"."kyufuSakuseiKubunCode")))
@@ -676,21 +756,36 @@ FROM
              THEN 0 
              ELSE "DbT3033KyufujissekiShukei"."atoHokenDekidakaTanisuTotal" END
         END as "dekidakaTanisu"
-      , CASE "DbT3033KyufujissekiShukei"."atoHokenSeikyugaku"
+      , ((CASE "DbT3033KyufujissekiShukei"."atoHokenSeikyugaku"
         WHEN null THEN 0 
         WHEN ''   THEN 0 
         ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
              WHEN '3' 
              THEN 0 
              ELSE "DbT3033KyufujissekiShukei"."atoHokenSeikyugaku" :: integer END
-        END as "seikyugaku"
-      , CASE "DbT3033KyufujissekiShukei"."hokenRiyoshaFutangaku"
+             END) +
+             (CASE "DbT3033KyufujissekiShukei"."atoHokenDekidakaSeikyugaku"
+              WHEN null THEN 0 
+              WHEN ''   THEN 0 
+              ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+                   WHEN '3' 
+                   THEN 0 
+                   ELSE "DbT3033KyufujissekiShukei"."atoHokenDekidakaSeikyugaku" :: integer END
+                   END)) as "seikyugaku"
+      , ((CASE "DbT3033KyufujissekiShukei"."hokenRiyoshaFutangaku"
         WHEN null THEN 0 
         ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
              WHEN '3' 
              THEN 0 
              ELSE "DbT3033KyufujissekiShukei"."hokenRiyoshaFutangaku" END
-        END as "riyoshaFutangaku"
+        END ) +
+          (CASE "DbT3033KyufujissekiShukei"."hokenDekidakaIryohiRiyoshaFutangaku"
+           WHEN null THEN 0 
+           ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3033KyufujissekiShukei"."hokenDekidakaIryohiRiyoshaFutangaku" END
+             END))  as "riyoshaFutangaku"
     FROM
       "給付実績" AS "DbT3017KyufujissekiKihon"
     INNER JOIN
@@ -751,17 +846,15 @@ FROM
      FROM
           rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS "mst"
      WHERE
-          "mst"."hiHokenshaNo" = '0000562408' 
-      AND '200004' <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
-      AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> '201703'
-      AND "mst"."shinsaYM" <![CDATA[<>]]> ''
+          "mst"."hiHokenshaNo" = #{被保険者番号} 
+      AND #{サービス提供年月_開始} <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
+      AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月_終了}
       AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS "slv"
           WHERE
                 "mst"."inputShikibetsuNo" = "slv"."inputShikibetsuNo"
             AND "mst"."hiHokenshaNo" = "slv"."hiHokenshaNo"
             AND "mst"."serviceTeikyoYM" = "slv"."serviceTeikyoYM"
             AND "mst"."seiriNo" = "slv"."seiriNo"
-            AND "slv"."shinsaYM" <![CDATA[<>]]> ''
             AND (("mst"."shinsaYM" <![CDATA[<]]> "slv"."shinsaYM")
              OR  ("mst"."shinsaYM" = "slv"."shinsaYM"
             AND   "slv"."kyufuSakuseiKubunCode" <![CDATA[<]]> "mst"."kyufuSakuseiKubunCode")))
@@ -772,7 +865,7 @@ GROUP BY
    , "serviceSyuruiCode"
 ORDER BY
      "serviceTeikyoYM" DESC
-   , "serviceSyuruiCode" 
+   , "serviceSyuruiCode"
 
     </select>
     
