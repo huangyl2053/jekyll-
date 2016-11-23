@@ -277,6 +277,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShinseishoHoji 高額合算申請書保持
                 = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
         handler.onClick_btnShinseiJohoModoru();
+        handler.画面内共有子DIV初期化処理新規場合(対象者);
         if (申請登録状態(メニューID)) {
             handler.申請登録状態初期設定();
             handler.onChange_ddlShinseiTaisyoNendo();
@@ -285,7 +286,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
             div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
             div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
-            handler.画面内共有子DIV初期化処理新規場合(対象者);
             handler.新規初期値取得設定();
             onChange_chkKofuShinseiUmu(div);
             FlexibleYear 対象年度 = new FlexibleYear(div.getDdlShinseiTaishoNendo().getSelectedKey());
