@@ -89,6 +89,7 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
         if (高額サービス費支給決定通知書作成メニューID.equals(ResponseHolder.getMenuID())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 高額サービス帳票ID);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(実行するボタン2, false);
+            div.getChushutsuJoken().getTxtKetteishaUketukeNengetsu().setVisible(true);
             div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().initialize(new ReportId(高額サービス費支給決定通知書作成帳票ID));
         } else if (高額総合事業サービス費支給決定通知書メニューID.equals(ResponseHolder.getMenuID())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 高額総合事業サービス帳票ID);
@@ -130,13 +131,13 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
                 div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(false);
                 div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(true);
                 div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setFromValue(前回対象日Toの次日.plusDay(INT_1));
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setFromValue(前回対象日Toの次日);
                 div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setToValue(システム日付);
             } else if (KEY1.equals(選択Key)) {
                 div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
                 div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(false);
                 div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setFromValue(前回対象日Toの次日.plusDay(INT_1));
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setFromValue(前回対象日Toの次日);
                 div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setToValue(システム日付);
             } else if (KEY2.equals(選択Key)) {
                 div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
@@ -231,7 +232,8 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
         RString 文書番号 = div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().get文書番号();
         if (文書番号 != null && !文書番号.isEmpty()) {
             parameter.set文書番号(div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().get文書番号());
-        } else if (new RString("第号").equals(文書番号)) {
+        }
+        if (new RString("第号").equals(文書番号)) {
             parameter.set文書番号(new RString("第　　　　　　　号"));
         }
         if (div.getShikyuKetteiTsuchisho().getChkTesutoShuturyoku().getSelectedKeys().isEmpty()) {
