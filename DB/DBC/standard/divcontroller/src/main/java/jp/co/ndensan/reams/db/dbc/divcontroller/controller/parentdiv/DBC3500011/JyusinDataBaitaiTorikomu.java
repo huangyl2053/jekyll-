@@ -55,7 +55,6 @@ public class JyusinDataBaitaiTorikomu {
 
     private static final int ゼロ = 0;
     private final RString sharedFileStr = new RString("1_");
-    private final RString searchSharedFileStr = new RString("1\\_");
     private final RString searchSharedFile = new RString("1\\_%");
     private static final int 一1 = 1;
     private static final int 四 = 4;
@@ -264,14 +263,8 @@ public class JyusinDataBaitaiTorikomu {
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(fileName));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
 
-        List<UzT0885SharedFileEntryEntity> uzt0885EntityList
-                = SharedFile.searchSharedFile(fileName.replace(sharedFileStr, searchSharedFileStr));
-        if (uzt0885EntityList == null || uzt0885EntityList.isEmpty()) {
-            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(to.getPath()), opts);
-        } else {
-            SharedFile.copyToSharedFile(FilesystemPath.fromString(to.getPath()), FilesystemName.fromString(fileName));
-        }
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(to.getPath()), opts);
     }
 
     private void set共有ファイル情報to画面Grid(JyusinDataBaitaiTorikomuDiv div) {
