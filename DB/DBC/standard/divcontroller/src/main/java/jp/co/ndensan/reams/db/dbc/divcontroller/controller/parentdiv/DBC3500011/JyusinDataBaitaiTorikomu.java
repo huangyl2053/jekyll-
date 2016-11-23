@@ -55,7 +55,7 @@ public class JyusinDataBaitaiTorikomu {
 
     private static final int ゼロ = 0;
     private final RString sharedFileStr = new RString("1_");
-    private final RString searchSharedFileStr = new RString("1_\\");
+    private final RString searchSharedFileStr = new RString("1\\_");
     private final RString searchSharedFile = new RString("1\\_%");
     private static final int 一1 = 1;
     private static final int 四 = 4;
@@ -68,7 +68,7 @@ public class JyusinDataBaitaiTorikomu {
     private FlexibleYearMonth 審査年月;
     private FlexibleYearMonth 審査年月の翌月;
     private FlexibleYearMonth 処理年月;
-    private int 処理年月index = 10;
+    private static final int 処理年月INDEX = 10;
     private FlexibleYearMonth 処理年月の前月;
     private RString 識別番号;
     private static final int 配列 = 1024000;
@@ -196,7 +196,7 @@ public class JyusinDataBaitaiTorikomu {
             RString 二重取込チェック = getHandler(div).二重取込チェック(file, データ種別, myBatisParameter, コントロールレコード, entity);
                
             if (二重取込チェック != null) {
-                return 二重取込message(二重取込チェック, コントロールレコード.get(処理年月index), データ種別, div);
+                return 二重取込message(二重取込チェック, コントロールレコード.get(処理年月INDEX), データ種別, div);
             }
 
             entity = HokenshaSofuFinder.createInstance().get国保連管理2(データ種別, 処理年月の前月);
