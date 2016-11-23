@@ -97,7 +97,7 @@ public class HokenryoDankaiHanteiCore {
         Map<RString, RString> hokenryoDankaiMap = tsukibetsuHokenryoDankai.createHokenryoDankaiMap();
         for (RString hokenryoDankai : hokenryoDankaiMap.values()) {
             //取得した段階の判定方法を取得
-            return;
+            hokenryoDankai.isEmpty();
         }
     }
 
