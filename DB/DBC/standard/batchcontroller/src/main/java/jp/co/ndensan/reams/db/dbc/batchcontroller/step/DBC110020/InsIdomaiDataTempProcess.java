@@ -1555,101 +1555,50 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
 
     private void 引き継ぎ処理(List<IdoTblTmpEntity> allData) {
         sort異動一時2データ(allData);
-        IdoTblTmpEntity 前履歴データ = null;
-        for (IdoTblTmpEntity entity : allData) {
-            if (前履歴データ == null) {
-                前履歴データ = entity;
+        for (int i = ORDER_0; i < allData.size(); i++) {
+            if (i == ORDER_0) {
                 continue;
             }
-            if (entity.get証記載保険者番号() == null) {
+            IdoTblTmpEntity entity = allData.get(i);
+            IdoTblTmpEntity 前履歴データ = allData.get(i - ORDER_1);
+            if (entity.get証記載保険者番号() == null || entity.get証記載保険者番号().isEmpty()) {
                 entity.set証記載保険者番号(前履歴データ.get証記載保険者番号());
-            } else {
-                前履歴データ.set証記載保険者番号(entity.get証記載保険者番号());
             }
-            if (entity.get資格取得年月日() == null) {
+            if (isDateEmpty(entity.get資格取得年月日())) {
                 entity.set資格取得年月日(前履歴データ.get資格取得年月日());
-            } else {
-                前履歴データ.set資格取得年月日(entity.get資格取得年月日());
             }
-            if (entity.get申請種別コード() == null) {
+            if (RString.isNullOrEmpty(entity.get要介護状態区分コード()) || STR_01.equals(entity.get要介護状態区分コード())) {
                 entity.set申請種別コード(前履歴データ.get申請種別コード());
-            } else {
-                前履歴データ.set申請種別コード(entity.get申請種別コード());
-            }
-            if (entity.get変更申請中区分コード() == null) {
-                entity.set変更申請中区分コード(前履歴データ.get変更申請中区分コード());
-            } else {
-                前履歴データ.set変更申請中区分コード(entity.get変更申請中区分コード());
-            }
-            if (entity.get申請年月日() == null) {
-                entity.set申請年月日(前履歴データ.get申請年月日());
-            } else {
-                前履歴データ.set申請年月日(entity.get申請年月日());
-            }
-            if (entity.getみなし要介護状態区分コード() == null) {
                 entity.setみなし要介護状態区分コード(前履歴データ.getみなし要介護状態区分コード());
-            } else {
-                前履歴データ.setみなし要介護状態区分コード(entity.getみなし要介護状態区分コード());
             }
-            if (entity.get要介護状態区分コード() == null) {
+            if (isDateEmpty(entity.get申請年月日())) {
+                entity.set変更申請中区分コード(前履歴データ.get変更申請中区分コード());
+                entity.set申請年月日(前履歴データ.get申請年月日());
+            }
+            if (RString.isNullOrEmpty(entity.get要介護状態区分コード())) {
                 entity.set要介護状態区分コード(前履歴データ.get要介護状態区分コード());
-            } else {
-                前履歴データ.set要介護状態区分コード(entity.get要介護状態区分コード());
-            }
-            if (entity.get認定有効期間開始年月日() == null) {
                 entity.set認定有効期間開始年月日(前履歴データ.get認定有効期間開始年月日());
-            } else {
-                前履歴データ.set認定有効期間開始年月日(entity.get認定有効期間開始年月日());
-            }
-            if (entity.get認定有効期間終了年月日() == null) {
                 entity.set認定有効期間終了年月日(前履歴データ.get認定有効期間終了年月日());
-            } else {
-                前履歴データ.set認定有効期間終了年月日(entity.get認定有効期間終了年月日());
             }
-            if (entity.get居宅サービス計画作成区分コード() == null) {
+            if (RString.isNullOrEmpty(entity.get居宅サービス計画作成区分コード())) {
                 entity.set居宅サービス計画作成区分コード(前履歴データ.get居宅サービス計画作成区分コード());
-            } else {
-                前履歴データ.set居宅サービス計画作成区分コード(entity.get居宅サービス計画作成区分コード());
-            }
-            if (entity.get居宅介護支援事業所番号() == null) {
                 entity.set居宅介護支援事業所番号(前履歴データ.get居宅介護支援事業所番号());
-            } else {
-                前履歴データ.set居宅介護支援事業所番号(entity.get居宅介護支援事業所番号());
-            }
-            if (entity.get居宅サービス計画適用開始年月日() == null) {
                 entity.set居宅サービス計画適用開始年月日(前履歴データ.get居宅サービス計画適用開始年月日());
-            } else {
-                前履歴データ.set居宅サービス計画適用開始年月日(entity.get居宅サービス計画適用開始年月日());
-            }
-            if (entity.get居宅サービス計画適用終了年月日() == null) {
                 entity.set居宅サービス計画適用終了年月日(前履歴データ.get居宅サービス計画適用終了年月日());
-            } else {
-                前履歴データ.set居宅サービス計画適用終了年月日(entity.get居宅サービス計画適用終了年月日());
             }
-            if (entity.get要介護状態区分コード() == null) {
+            if (RString.isNullOrEmpty(entity.get要介護状態区分コード())) {
                 entity.set訪問通所サービス支給限度基準額(前履歴データ.get訪問通所サービス支給限度基準額());
                 entity.set訪問通所サービス上限管理適用期間開始年月日(前履歴データ.get訪問通所サービス上限管理適用期間開始年月日());
                 entity.set訪問通所サービス上限管理適用期間終了年月日(前履歴データ.get訪問通所サービス上限管理適用期間終了年月日());
                 entity.set短期入所サービス支給限度基準額(前履歴データ.get短期入所サービス支給限度基準額());
                 entity.set短期入所サービス上限管理適用期間開始年月日(前履歴データ.get短期入所サービス上限管理適用期間開始年月日());
                 entity.set短期入所サービス上限管理適用期間終了年月日(前履歴データ.get短期入所サービス上限管理適用期間終了年月日());
-            } else {
-                前履歴データ.set訪問通所サービス支給限度基準額(entity.get訪問通所サービス支給限度基準額());
-                前履歴データ.set訪問通所サービス上限管理適用期間開始年月日(entity.get訪問通所サービス上限管理適用期間開始年月日());
-                前履歴データ.set訪問通所サービス上限管理適用期間終了年月日(entity.get訪問通所サービス上限管理適用期間終了年月日());
-                前履歴データ.set短期入所サービス支給限度基準額(entity.get短期入所サービス支給限度基準額());
-                前履歴データ.set短期入所サービス上限管理適用期間開始年月日(entity.get短期入所サービス上限管理適用期間開始年月日());
-                前履歴データ.set短期入所サービス上限管理適用期間終了年月日(entity.get短期入所サービス上限管理適用期間終了年月日());
             }
             if (RString.isNullOrEmpty(entity.get公費負担上限額減額有フラグ())) {
                 entity.set公費負担上限額減額有フラグ(前履歴データ.get公費負担上限額減額有フラグ());
-            } else {
-                前履歴データ.set公費負担上限額減額有フラグ(entity.get公費負担上限額減額有フラグ());
             }
-            if (entity.get償還払化開始年月日() == null) {
+            if (RString.isNullOrEmpty(entity.get償還払化開始年月日())) {
                 entity.set償還払化開始年月日(前履歴データ.get償還払化開始年月日());
-            } else {
-                前履歴データ.set償還払化開始年月日(entity.get償還払化開始年月日());
             }
             JukyushaIdoRenrakuhyoOutCommonProcess.引き継ぎデータ処理(entity, 前履歴データ);
         }
@@ -1673,7 +1622,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     private void 再編集(List<IdoTblTmpEntity> allData, PSMInfoEntity 宛名情報, FlexibleYearMonth 処理年月,
             DbT7124KokiKoreishaInfoEntity 後期高齢者, DbT7123KokuhoShikakuInfoEntity 国保資格) {
         IdoTblTmpEntity 最古の異動日の異動 = allData.get(ORDER_0);
-        if (STR_3.equals(最古の異動日の異動.get異動区分コード())
+        if (!isDateEmpty(最古の異動日の異動.get資格喪失年月日())
                 && is年月同じ(最古の異動日の異動.get認定有効期間開始年月日(), 最古の異動日の異動.get資格喪失年月日())) {
             IdoTblTmpEntity cloneEntity = 最古の異動日の異動.clone();
             最古の異動日の異動.set異動区分コード(STR_1);
@@ -1746,10 +1695,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             if (isDateEmpty(entity.get認定有効期間開始年月日())) {
                 continue;
             }
-            if (isDateEmpty(entity.get認定有効期間開始年月日())) {
-                continue;
-            }
-            if (!isBeforeOreqDate(entity.get認定有効期間開始年月日(), entity.get資格喪失年月日())) {
+            if (!(isDateEmpty(entity.get資格喪失年月日())
+                    || isBeforeOreqDate(entity.get認定有効期間開始年月日(), entity.get資格喪失年月日()))) {
                 continue;
             }
             FlexibleYearMonth 同じ年月 = entity.get認定有効期間開始年月日().getYearMonth();
