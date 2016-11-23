@@ -84,6 +84,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaihyoSource implements IReportSour
     public RString gokeiRiyoshaFutangaku;
     @ReportItem(name = "gokeiKohiFutangaku", length = 15, order = 36)
     public RString gokeiKohiFutangaku;
+    public RString serviceShuruiCode;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
