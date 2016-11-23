@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.Juky
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200010.JukyushaIdorenrakuhyoSofuTaishoshachiranSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200074.JukyushaIdoRirekiTeiseiIchiranSource;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoCsvManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -169,6 +171,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString RST_あり = new RString("あり");
     private static final RString RST_なし = new RString("なし");
     private static final RString COM = new RString("/");
+    private static final RString 国保連送付外字_変換区分_1 = new RString("1");
     private JukyushaIdoRenrakuhyoOutProcessParameter processParameter;
 
     /**
@@ -281,9 +284,15 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     protected void afterExecute() {
         被保険者番号マッチング();
         JukyushaIdoRenrakuhyoEntity outEntity = null;
+        Encode 文字コード = Encode.SJIS;
+        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(
+                ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
+            文字コード = Encode.UTF_8;
+        }
         if (!entityList.isEmpty()) {
             outEntity = JukyushaIdoRenrakuhyoCsvManager.
-                    createInstance().csvの出力(entityList, processParameter.get処理年月());
+                    createInstance().csvの出力(entityList, processParameter.get処理年月(), 文字コード);
         }
         if (csvWriter_DBC200074 != null) {
             csvWriter_DBC200074.close();
