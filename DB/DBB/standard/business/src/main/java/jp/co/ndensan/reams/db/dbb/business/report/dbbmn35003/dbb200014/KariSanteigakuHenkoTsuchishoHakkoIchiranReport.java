@@ -52,10 +52,12 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
     private final RDateTime 帳票作成日時;
     private final KariSanteiTsuchiShoKyotsu 仮算定通知書情報;
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報;
+    private final int 連番;
 
     /**
      * コンストラクタです。
      *
+     * @param 連番 int
      * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @param 編集後仮算定通知書共通情報 EditedKariSanteiTsuchiShoKyotsu
      * @param 出力順１ RString
@@ -65,9 +67,10 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
      * @param 出力順５ RString
      * @param 帳票作成日時 RDateTime
      */
-    public KariSanteigakuHenkoTsuchishoHakkoIchiranReport(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
+    public KariSanteigakuHenkoTsuchishoHakkoIchiranReport(int 連番, KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報,
             RString 出力順１, RString 出力順２, RString 出力順３, RString 出力順４, RString 出力順５, RDateTime 帳票作成日時) {
+        this.連番 = 連番;
         this.仮算定通知書情報 = 仮算定通知書情報;
         this.編集後仮算定通知書共通情報 = 編集後仮算定通知書共通情報;
         this.出力順１ = 出力順１;
@@ -80,7 +83,6 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
 
     @Override
     public void writeBy(ReportSourceWriter<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> reportSourceWriter) {
-        int 連番 = 1;
         KariSanteigakuHenkoTsuchishoHakkoIchiranItem item = new KariSanteigakuHenkoTsuchishoHakkoIchiranItem();
         setHeader(仮算定通知書情報, 編集後仮算定通知書共通情報, item);
         setBody(編集後仮算定通知書共通情報, item, 連番);
@@ -90,7 +92,6 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
         IKariSanteigakuHenkoTsuchishoHakkoIchiranBuilder builder
                 = new KariSanteigakuHenkoTsuchishoHakkoIchiranBuilderImpl(headerEditor, hyojiBodyEditor);
         reportSourceWriter.writeLine(builder);
-        連番++;
     }
 
     private void setHeader(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
