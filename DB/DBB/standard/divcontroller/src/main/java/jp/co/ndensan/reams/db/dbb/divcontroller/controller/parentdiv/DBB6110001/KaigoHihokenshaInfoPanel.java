@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB6110001;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.RentaiGimusha;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.RentaiGimushaHolder;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.RentaiGimushaIdentifier;
@@ -367,32 +369,36 @@ public class KaigoHihokenshaInfoPanel {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         List<RentaiGimusha> list = rentaiNofuGimusha.getRentaiNofuGimushaInfo(被保険者番号);
         RentaiGimushaHolder 初期holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報初期, RentaiGimushaHolder.class);
+        Map<Decimal, RentaiGimusha> initEntity = new HashMap<>();
+        for (RentaiGimusha entity3 : 初期holder.getRentaiGimushaList()) {
+            initEntity.put(entity3.get履歴番号(), entity3);
+        }
         for (RentaiGimusha entity1 : list) {
-            for (RentaiGimusha entity2 : 初期holder.getRentaiGimushaList()) {
-                if (entity1.get履歴番号() == entity2.get履歴番号()) {
-                    if (!entity1.get識別コード().equals(entity2.get識別コード())
-                            || !entity1.get開始年月日().equals(entity2.get開始年月日())
-                            || !entity1.get終了年月日().equals(entity2.get終了年月日())) {
-                        return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止.getMessage()).respond();
-                    }
-                    break;
-                }
+            RentaiGimusha entity2 = initEntity.get(entity1.get履歴番号());
+            if (entity2 == null) {
+                continue;
+            }
+            if (!entity1.get識別コード().equals(entity2.get識別コード())
+                    || !entity1.get開始年月日().equals(entity2.get開始年月日())
+                    || !entity1.get終了年月日().equals(entity2.get終了年月日())) {
+                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止.getMessage()).respond();
             }
         }
-        List<RentaiGimushaAtenaJouhou> rentaiList = rentaiNofuGimusha.getRentaiNofuGimushaAtenaInfo(list);
-        if (初期holder.getRentaiGimushaList().size() != rentaiList.size()) {
+        int count = rentaiNofuGimusha.delRentaiNofuGimushaInfo(list);
+        if (初期holder.getRentaiGimushaList().size() != count) {
             return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止.getMessage()).respond();
         }
-        KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
-        for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
-            if (entity.hasChanged() && entity.isModified()) {
-                manager.saveNewModify(entity);
-            } else if (entity.hasChanged() && entity.isDeleted()) {
-                manager.save(entity);
-            } else if (entity.hasChanged() && entity.isAdded()) {
-                manager.saveNew(entity);
-            }
-        }
+        rentaiNofuGimusha.insRentaiNofuGimushaInfo(holder.getRentaiGimushaList(), 被保険者番号);
+//        KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
+//        for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
+//            if (entity.hasChanged() && entity.isModified()) {
+//                manager.saveNewModify(entity);
+//            } else if (entity.hasChanged() && entity.isDeleted()) {
+//                manager.save(entity);
+//            } else if (entity.hasChanged() && entity.isAdded()) {
+//                manager.saveNew(entity);
+//            }
+//        }
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
                 名称_被保険者番号, 被保険者番号.getColumnValue());
         PersonalData personalData = PersonalData.of(taishoshaKey.get識別コード(), expandedInfo);
