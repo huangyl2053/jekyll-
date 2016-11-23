@@ -76,7 +76,7 @@ public class JutakuKaishuJyusyoChofukuHanntei {
                 .createSelectByKeyParam(被保険者番号, 開始サービス提供年月, 終了サービス提供年月);
         List<JutakuKaishuJyusyoChofukuHannteiEntity> entityList = mapper.selectKaishuJyusyoChofukuToroku(parameter);
         if (null == entityList || entityList.isEmpty()) {
-            return false;
+            return true;
         }
         for (JutakuKaishuJyusyoChofukuHannteiEntity entity : entityList) {
             if (!改修住宅住所.equals(entity.getJutakuKaishuJutakuAddress())) {
