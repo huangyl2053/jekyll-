@@ -194,10 +194,8 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
             throw new ApplicationException(DbzErrorMessages.期間が不正_過去日付不可.getMessage()
                     .replace(今回開始日時.toString(), 年次処理実施日時.toString()));
         }
-        if (今回_終了年月日 != null && 今回_終了時分秒 != null) {
-            if (今回開始時間.isAfter(今回終了時間)) {
-                throw new ApplicationException(UrErrorMessages.終了日が開始日以前.getMessage());
-            }
+        if (今回_終了年月日 != null && 今回_終了時分秒 != null && 今回開始時間.isAfter(今回終了時間)) {
+            throw new ApplicationException(UrErrorMessages.終了日が開始日以前.getMessage());
         }
         if (画面起動時_今回終了時間.isBefore(今回終了時間)) {
             throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage()
