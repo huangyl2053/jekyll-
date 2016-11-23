@@ -131,7 +131,7 @@ public class IraiJohoDataTorikomi {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         IraiJohoDataTorikomiCsvData csvData = new IraiJohoDataTorikomiCsvData();
-//        csvData.setCsvEntityList(csvEntityList);
+        csvData.setCsvEntityList(csvEntityList);
         ViewStateHolder.put(ViewStateKeys.要介護認定主治医意見書情報, csvData);
         getHandler(div).set一覧エリア(csvEntityList);
         return ResponseData.of(div).setState(DBE2920001StateName.一覧表示);
@@ -173,28 +173,28 @@ public class IraiJohoDataTorikomi {
      */
     public ResponseData<SourceDataCollection> onClick_Insatu(IraiJohoDataTorikomiDiv div) {
         IraiJohoDataTorikomiCsvData csvData = ViewStateHolder.get(ViewStateKeys.要介護認定主治医意見書情報, IraiJohoDataTorikomiCsvData.class);
-//        List<IraiJohoDataTorikomiCsvEntity> csvEntityList = csvData.getCsvEntityList();
-//        List<dgTorikomiFileIchiran_Row> rowList = div.getDgTorikomiFileIchiran().getDataSource();
-//        List<IkenshokinyuyoshiBusiness> businessList = new ArrayList<>();
-//        for (dgTorikomiFileIchiran_Row row : rowList) {
-//            if (row.getCheckBox().isAllSelected()) {
-//                for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
-//                    if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())
-//                            && csvEntity.get申請日().equals(row.getShinseibi())) {
-//                        businessList.add(getHandler(div).帳票出力用情報の編集(csvEntity));
-//                    }
-//                }
-//            }
-//        }
+        List<IraiJohoDataTorikomiCsvEntity> csvEntityList = csvData.getCsvEntityList();
+        List<dgTorikomiFileIchiran_Row> rowList = div.getDgTorikomiFileIchiran().getDataSource();
+        List<IkenshokinyuyoshiBusiness> businessList = new ArrayList<>();
+        for (dgTorikomiFileIchiran_Row row : rowList) {
+            if (row.getCheckBox().isAllSelected()) {
+                for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
+                    if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())
+                            && csvEntity.get申請日().equals(row.getShinseibi())) {
+                        businessList.add(getHandler(div).帳票出力用情報の編集(csvEntity));
+                    }
+                }
+            }
+        }
         ResponseData<SourceDataCollection> response = new ResponseData<>();
-//        try (ReportManager reportManager = new ReportManager()) {
-//            Ikenshokinyuyoshi01PrintService printService = new Ikenshokinyuyoshi01PrintService(reportManager);
-//            for (IkenshokinyuyoshiBusiness business : businessList) {
-//                printService.print主治医意見書01(business);
-//                printService.print主治医意見書02(business);
-//            }
-//            response.data = reportManager.publish();
-//        }
+        try (ReportManager reportManager = new ReportManager()) {
+            Ikenshokinyuyoshi01PrintService printService = new Ikenshokinyuyoshi01PrintService(reportManager);
+            for (IkenshokinyuyoshiBusiness business : businessList) {
+                printService.print主治医意見書01(business);
+                printService.print主治医意見書02(business);
+            }
+            response.data = reportManager.publish();
+        }
         return response;
     }
 
@@ -234,12 +234,12 @@ public class IraiJohoDataTorikomi {
     private IkenshokinyuyoshiBusiness getBusiness(List<IraiJohoDataTorikomiCsvEntity> csvEntityList,
             dgTorikomiFileIchiran_Row row, IraiJohoDataTorikomiDiv div) {
         IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
-//        for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
-//            if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())
-//                    && csvEntity.get申請日().equals(row.getShinseibi())) {
-//                business = getHandler(div).帳票出力用情報の編集(csvEntity);
-//            }
-//        }
+        for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
+            if (csvEntity.get保険者番号().equals(row.getHokenshaBango()) && csvEntity.get被保険者番号().equals(row.getHihokenshaBango())
+                    && csvEntity.get申請日().equals(row.getShinseibi())) {
+                business = getHandler(div).帳票出力用情報の編集(csvEntity);
+            }
+        }
         return business;
     }
 
