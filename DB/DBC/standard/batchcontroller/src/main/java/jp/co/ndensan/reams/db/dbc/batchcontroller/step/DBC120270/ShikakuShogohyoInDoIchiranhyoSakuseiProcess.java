@@ -415,7 +415,9 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
             if (entity.get資格照合表一時().getTokuteiNyushoshaKaigoServiceGaku() != null) {
                 csvEntity1.set特定入所者介護サービス費等(decimal_to_string(entity.get資格照合表一時().getTokuteiNyushoshaKaigoServiceGaku()));
             }
-            csvEntity1.set要介護区分コード(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
+            if (entity.get資格照合表一時().getYokaigoKubunCode() != null) {
+                csvEntity1.set要介護区分コード(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
+            }
             if (entity.get資格照合表一時().getServiceTeikyoYM() != null
                     && RString.isNullOrEmpty(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue())) {
                 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(entity.get資格照合表一時().getServiceTeikyoYM(),
