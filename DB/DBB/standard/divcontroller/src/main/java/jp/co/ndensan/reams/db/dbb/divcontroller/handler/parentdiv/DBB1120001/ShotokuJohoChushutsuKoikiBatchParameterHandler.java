@@ -47,6 +47,8 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
     private static final RString 広域職員でないため = new RString("広域職員でないため");
     private static final RString なし = new RString("0");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterKoiki");
+    private static final RString COMMON_BUTTON_FIELD_NAME_当初 = new RString("btnBatchRegisterDousyo");
+    private static final RString EMPTY = new RString(" ");
 
     /**
      * コンストラクタです。
@@ -111,7 +113,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
                 YMDHMS 基準日時 = result.getEntity().get処理日時();
                 RString 年月日 = 基準日時.getRDateTime().getDate().wareki().toDateString();
                 RString 時刻 = 基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
-                row.getTxtSaishinShoriNitiji().setValue(年月日.concat(時刻));
+                row.getTxtSaishinShoriNitiji().setValue(年月日.concat(EMPTY).concat(時刻));
             }
             RString 処理状態 = result.getEntity().get表示用処理状態();
             if (処理状態 != null) {
@@ -122,6 +124,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         DataGrid<dgShichosonIchiran_Row> grid = koikiPanelDiv.getDgShichosonIchiran();
         grid.setDataSource(rowList);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME_当初, true);
     }
 
     /**
@@ -139,7 +142,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
             entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
             entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());
             entity.set処理状態(div.getDgShichosonIchiran().getDataSource().get(i).getTxtShoriState().getValue());
-            entity.set処理日時(new YMDHMS(div.getDgShichosonIchiran().getDataSource().get(i).getTxtSaishinShoriNitiji().getValue()));
+            entity.set処理日時(new YMDHMS(div.getDgShichosonIchiran().getDataSource().get(i).getTxtSaishinShoriNitiji().getValue().toString()));
             list.add(entity);
         }
         param.set市町村情報List(list);
@@ -161,7 +164,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
             entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
             entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());
             entity.set処理状態(div.getDgShichosonIchiran().getDataSource().get(i).getTxtShoriState().getValue());
-            entity.set処理日時(new YMDHMS(div.getDgShichosonIchiran().getDataSource().get(i).getTxtSaishinShoriNitiji().getValue()));
+            entity.set処理日時(new YMDHMS(div.getDgShichosonIchiran().getDataSource().get(i).getTxtSaishinShoriNitiji().getValue().toString()));
             list.add(entity);
         }
         param.set市町村情報List(list);
