@@ -84,7 +84,8 @@ public class HekinRiyoGakuTokehyo {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HekinRiyoGakuTokehyo}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HekinRiyoGakuTokehyo}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HekinRiyoGakuTokehyo}のインスタンス
      */
     public static HekinRiyoGakuTokehyo createInstance() {
         return InstanceProvider.create(HekinRiyoGakuTokehyo.class);
@@ -255,7 +256,8 @@ public class HekinRiyoGakuTokehyo {
     ) {
         for (List<ShukeinaiyouEntity> list : shukeinaiyouEntityList) {
             for (ShukeinaiyouEntity shukeinaiyouEntity : list) {
-                if (所得段階.equals(shukeinaiyouEntity.get所得段階()) && 要介護状態区分コード.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                if (所得段階.equals(shukeinaiyouEntity.get所得段階())
+                        && !RString.isNullOrEmpty(要介護状態区分コード) && 要介護状態区分コード.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
                     shukeinaiyouEntity.setページNo(レコード.getServiceBunrui());
                     if (人数 <= 2) {
                         shukeinaiyouEntity.set人数(shukeinaiyouEntity.get人数() + 1);
