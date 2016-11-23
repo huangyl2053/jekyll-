@@ -43,10 +43,10 @@ public class DbT3170JigyoKogakuGassanJikoFutanGakuDac implements ISaveable<DbT31
     @InjectSession
     private SqlSession session;
 
-    public static final RString 被保険者番号STR = new RString("被保険者番号");
-    public static final RString 対象年度STR = new RString("対象年度");
-    public static final RString 保険者番号STR = new RString("保険者番号");
-    public static final RString 支給申請書整理番号STR = new RString("支給申請書整理番号");
+    private static final RString 被保険者番号STR = new RString("被保険者番号");
+    private static final RString 対象年度STR = new RString("対象年度");
+    private static final RString 保険者番号STR = new RString("保険者番号");
+    private static final RString 支給申請書整理番号STR = new RString("支給申請書整理番号");
 
     /**
      * 主キーで事業高額合算申請書を取得します。
