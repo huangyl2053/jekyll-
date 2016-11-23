@@ -492,13 +492,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                     = new JukyushaIdoRirekiTeiseiIchiranReport(履歴訂正Entity, 市町村コード, 市町村名称);
             report_200074.writeBy(reportSourceWriter_DBC200074);
         }
-        RString 変更項目 = get変更項目(違う項目);
-        getDBC200010CsvWriter().writeLine(get送付対象者リスト(異動一時2entity, 変更項目));
-        JukyushaIdorenrakuhyoSofuTaishoshachiranEntity 送付対象者
-                = get送付対象者(異動一時2entity, 変更項目);
-        JukyushaIdorenrakuhyoSofuTaishoshachiranReport report_200010
-                = new JukyushaIdorenrakuhyoSofuTaishoshachiranReport(送付対象者, 市町村コード, 市町村名称);
-        report_200010.writeBy(reportSourceWriter_DBC200010);
     }
 
     private boolean count_整残りCheck(int i, int count_整, int count_残り, int cout) {
@@ -1151,6 +1144,14 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         if (!hasChange && !申請中区分コード変更) {
             return;
         }
+        List<List<RString>> 違う項目 = get違う項目(異動一時2entity, 受給者異動送付);
+        RString 変更項目 = get変更項目(違う項目);
+        getDBC200010CsvWriter().writeLine(get送付対象者リスト(異動一時2entity, 変更項目));
+        JukyushaIdorenrakuhyoSofuTaishoshachiranEntity 送付対象者
+                = get送付対象者(異動一時2entity, 変更項目);
+        JukyushaIdorenrakuhyoSofuTaishoshachiranReport report_200010
+                = new JukyushaIdorenrakuhyoSofuTaishoshachiranReport(送付対象者, 市町村コード, 市町村名称);
+        report_200010.writeBy(reportSourceWriter_DBC200010);
         if (dateChangeCheck(異動一時2entity.get資格喪失年月日(), 受給者異動送付.getShikakuSoshitsuYMD())) {
             資格喪失年月日変更(異動一時2entity, 受給者異動送付, 申請中区分コード変更);
             return;
