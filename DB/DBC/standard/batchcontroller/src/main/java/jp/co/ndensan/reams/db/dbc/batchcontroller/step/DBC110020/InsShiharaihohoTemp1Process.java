@@ -1161,7 +1161,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             if (isDateEmpty(総合事業対象者.getTekiyoKaishiYMD())) {
                 continue;
             }
-            if (チェック_DATE.isBefore(総合事業対象者.getTekiyoKaishiYMD())) {
+            if (チェック_DATE.isBeforeOrEquals(総合事業対象者.getTekiyoKaishiYMD())) {
                 総合事業対象者状況 = true;
                 break;
             }

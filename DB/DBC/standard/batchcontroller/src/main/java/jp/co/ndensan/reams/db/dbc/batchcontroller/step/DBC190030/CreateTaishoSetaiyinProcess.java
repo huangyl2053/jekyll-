@@ -248,7 +248,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), this.parameter.get作成日());
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         通知文64 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100064.getReportId(), KamokuCode.EMPTY, INT_1).get(INT_1);
-        maxLenth = KijunShunyugakuTekiyoShinseishoSource.MAXLENTH;
+        maxLenth = KijunShunyugakuTekiyoShinseishoSource.JUSHO1_MAXLENGTH;
     }
 
     @Override

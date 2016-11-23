@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.Juky
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200010.JukyushaIdorenrakuhyoSofuTaishoshachiranSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200074.JukyushaIdoRirekiTeiseiIchiranSource;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoCsvManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -158,6 +160,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString 受給者異動連絡票情報送付対象者リスト = new RString("受給者異動連絡票情報送付対象者リスト");
     private static final RString 記号 = new RString("*");
     private static final RString エラーあり = new RString("1");
+    private static final RString RST_0 = new RString("0");
     private static final RString RST_1 = new RString("1");
     private static final RString RST_2 = new RString("2");
     private static final RString RST_3 = new RString("3");
@@ -167,6 +170,8 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString RST_SPACE = new RString("　");
     private static final RString RST_あり = new RString("あり");
     private static final RString RST_なし = new RString("なし");
+    private static final RString COM = new RString("/");
+    private static final RString 国保連送付外字_変換区分_1 = new RString("1");
     private JukyushaIdoRenrakuhyoOutProcessParameter processParameter;
 
     /**
@@ -279,9 +284,15 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     protected void afterExecute() {
         被保険者番号マッチング();
         JukyushaIdoRenrakuhyoEntity outEntity = null;
+        Encode 文字コード = Encode.SJIS;
+        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(
+                ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
+            文字コード = Encode.UTF_8;
+        }
         if (!entityList.isEmpty()) {
             outEntity = JukyushaIdoRenrakuhyoCsvManager.
-                    createInstance().csvの出力(entityList, processParameter.get処理年月());
+                    createInstance().csvの出力(entityList, processParameter.get処理年月(), 文字コード);
         }
         if (csvWriter_DBC200074 != null) {
             csvWriter_DBC200074.close();
@@ -328,6 +339,18 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 異動一時2entity.set受給者異動事由(RST_99);
             }
         }
+        RString 軽減率 = 異動一時2entity.get軽減率();
+        if (!RString.isNullOrEmpty(軽減率) && !RST_0.equals(軽減率)) {
+            List<RString> 軽減率List = 軽減率.split(COM.toString());
+            if (軽減率List.size() == COUNT_2) {
+                Decimal 軽減率Decim = new Decimal(軽減率List.get(COUNT_0).toString())
+                        .divide(new Decimal(軽減率List.get(COUNT_1).toString()));
+                軽減率 = new RString(軽減率Decim.toString()).substring(COUNT_0, COUNT_4);
+            } else {
+                軽減率 = RST_0;
+            }
+        }
+        異動一時2entity.set軽減率(軽減率);
         JukyushaIdoRenrakuhyoCsvEntity csventity = getJukyushaIdoRenrakuhyoCsvEntity(異動一時2entity);
         entityList.add(csventity);
         RString 異動一時2Key = get異動一時2Key(異動一時2entity);
