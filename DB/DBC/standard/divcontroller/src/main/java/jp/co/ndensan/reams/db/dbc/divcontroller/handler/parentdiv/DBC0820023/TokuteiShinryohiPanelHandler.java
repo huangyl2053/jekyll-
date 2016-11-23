@@ -1384,14 +1384,14 @@ public class TokuteiShinryohiPanelHandler {
     /**
      * 識別コード入力補助ボタンのメソッドます。
      *
+     * @param 識別コード ShikibetsuCode
      * @param サービス年月 FlexibleYearMonth
      * @param 様式番号 RString
      */
-    public void set識別コード(FlexibleYearMonth サービス年月, RString 様式番号) {
-        RString 識別コード = div.getPanelFive().getTxtShikibetsuCode().getValue();
+    public void set識別コード(ShikibetsuCode 識別コード, FlexibleYearMonth サービス年月, RString 様式番号) {
         div.setHiddenYoshikiNo(DataPassingConverter.serialize(様式番号));
         div.setHiddenServiceTeikyoYM(DataPassingConverter.serialize(new RString(サービス年月.toString())));
-        div.setHiddenShikibetsuCode(DataPassingConverter.serialize(識別コード));
+        div.setHiddenShikibetsuCode(DataPassingConverter.serialize(識別コード.getColumnValue()));
     }
 
     /**
