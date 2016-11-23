@@ -73,7 +73,7 @@ public class InsNendoNaiYuSikakushaTmpProcess extends BatchProcessBase<NendoNaiy
 
     @Override
     protected void afterExecute() {
-        if(null != 年度内有資格者Entity){
+        if (null != 年度内有資格者Entity) {
             年度内有資格者writer.insert(年度内有資格者Entity);
         }
     }
