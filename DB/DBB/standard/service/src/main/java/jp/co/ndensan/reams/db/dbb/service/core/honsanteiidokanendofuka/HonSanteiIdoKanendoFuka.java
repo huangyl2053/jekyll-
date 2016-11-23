@@ -261,6 +261,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     private static final RString タイトル_普徴額13期 = new RString("普徴額13期");
     private static final RString タイトル_普徴額14期 = new RString("普徴額14期");
     private static final RString タイトル_調定事由 = new RString("調定事由");
+    private static final RString 定値_0331 = new RString("0331");
+    private static final RString 定値_0401 = new RString("0401");
 
     private final MapperProvider mapperProvider;
     private final DbT2010FukaErrorListDac 賦課エラーDac;
@@ -381,6 +383,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     public void createTsuchishoBango(KanendoFukaParameter param) {
         IHonSanteiIdoKanendoFukaMapper mapper = mapperProvider.create(IHonSanteiIdoKanendoFukaMapper.class);
         param.set賦課年度(param.get調定年度().minusYear(INT_1));
+        param.set資格喪失日From(param.get調定年度().minusYear(INT_1).toDateString().concat(定値_0331));
+        param.set資格喪失日To(param.get調定年度().toDateString().concat(定値_0401));
 
         List<DbT1001AndFukaJohoEntity> daichoEntityList = mapper.select被保険者台帳管理と賦課(param);
         List<HihokenshaDaicho> 資格の情報年度minus1 = new ArrayList<>();
@@ -398,6 +402,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         mapper.createTsukibetsuRankuTmp();
         dbの処理(資格の情報年度minus1, 賦課の情報年度minus1, param);
         param.set賦課年度(param.get調定年度().minusYear(INT_2));
+        param.set資格喪失日From(param.get調定年度().minusYear(INT_2).toDateString().concat(定値_0331));
+        param.set資格喪失日To(param.get調定年度().minusYear(INT_1).toDateString().concat(定値_0401));
         daichoEntityList = mapper.select被保険者台帳管理と賦課(param);
         List<HihokenshaDaicho> 資格の情報年度minus2 = new ArrayList<>();
         List<FukaJoho> 賦課の情報年度minus2 = new ArrayList<>();
