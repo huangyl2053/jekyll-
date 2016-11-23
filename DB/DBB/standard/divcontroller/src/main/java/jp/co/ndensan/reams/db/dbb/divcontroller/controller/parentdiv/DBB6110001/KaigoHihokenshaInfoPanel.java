@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.DBB6
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.KaigoHihokenshaInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.dgRentaiNofuGimushaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.dgSetaiIchiran_Row;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB6110001.ErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB6110001.KaigoHihokenshaInfoPanelHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB6110001.KaigoHihokenshaInfoValidationHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB6110001.QuestionMessage;
@@ -161,9 +162,16 @@ public class KaigoHihokenshaInfoPanel {
         FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
         RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        履歴番号 = 最新履歴番号(div, 被保険者番号, holder);
-        RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
-                被保険者番号, new Decimal(履歴番号.toString()));
+        RentaiGimushaIdentifier identifier = null;
+        if (履歴番号.isEmpty()) {
+            履歴番号 = 最新履歴番号(div, 被保険者番号, holder);
+            identifier = new RentaiGimushaIdentifier(
+                    被保険者番号, new Decimal(履歴番号.toString()));
+        } else {
+            identifier = new RentaiGimushaIdentifier(
+                    被保険者番号, new Decimal(履歴番号.toString()));
+            履歴番号 = 最新履歴番号(div, 被保険者番号, holder);
+        }
         ValidationMessageControlPairs pairs = validationHander.validate();
         if (pairs.iterator().hasNext() && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -193,8 +201,8 @@ public class KaigoHihokenshaInfoPanel {
         RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
         ShikibetsuCode 識別コード = div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().getDomain();
         RentaiGimushaHolder 初期holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報初期, RentaiGimushaHolder.class);
-        RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
         RentaiGimusha 初期result = 初期holder.getKogakuGassanJikoFutanGaku(identifier);
+        RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
         if (result == null) {
             result = new RentaiGimusha(
                     被保険者番号, new Decimal(履歴番号.toString()));
@@ -305,6 +313,9 @@ public class KaigoHihokenshaInfoPanel {
         KaigoHihokenshaInfoPanelHandler handler = getHandler(div);
         FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
         if (taishoshaKey.get識別コード() == taishoshaKey.get識別コード()) {
+            if (div.getTxtOutShikibetsuCode().equals(new RString(taishoshaKey.get識別コード().toString()))) {
+                return ResponseData.of(div).addMessage(ErrorMessages.連帯納付義務者として登録.getMessage()).respond();
+            }
             ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                     KensakuYusenKubun.住登外優先)
                     .set世帯コード(new SetaiCode(div.getTxtOutSetaiCode()))
@@ -395,16 +406,6 @@ public class KaigoHihokenshaInfoPanel {
             return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止.getMessage()).respond();
         }
         rentaiNofuGimusha.insRentaiNofuGimushaInfo(holder.getRentaiGimushaList(), 被保険者番号);
-//        KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
-//        for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
-//            if (entity.hasChanged() && entity.isModified()) {
-//                manager.saveNewModify(entity);
-//            } else if (entity.hasChanged() && entity.isDeleted()) {
-//                manager.save(entity);
-//            } else if (entity.hasChanged() && entity.isAdded()) {
-//                manager.saveNew(entity);
-//            }
-//        }
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
                 名称_被保険者番号, 被保険者番号.getColumnValue());
         PersonalData personalData = PersonalData.of(taishoshaKey.get識別コード(), expandedInfo);

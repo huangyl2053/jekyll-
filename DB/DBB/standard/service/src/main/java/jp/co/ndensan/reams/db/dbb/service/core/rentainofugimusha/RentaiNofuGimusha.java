@@ -170,7 +170,7 @@ public class RentaiNofuGimusha {
         if (連帯納付義務者情報リスト != null && !連帯納付義務者情報リスト.isEmpty()) {
             for (RentaiGimusha 連帯納付義務者 : 連帯納付義務者情報リスト) {
                 DbT2009RentaiGimushaEntity 連帯納付義務者Entity = 連帯納付義務者.toEntity();
-                if (連帯納付義務者.isAdded() || 連帯納付義務者.isModified()) {
+                if (連帯納付義務者.isAdded() || 連帯納付義務者.isModified() || 連帯納付義務者.isUnchanged()) {
                     連帯納付義務者Entity.setHihokenshaNo(被保険者番号);
                     連帯納付義務者Entity.setRirekiNo(連帯納付義務者Entity.getRirekiNo());
                     連帯納付義務者Entity.setShikibetuCode(連帯納付義務者.get識別コード());
