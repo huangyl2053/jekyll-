@@ -52,7 +52,6 @@ public class InsJigyoKogakuProcess extends BatchProcessBase<FurikomimeisaiFuriko
     private static final int INT_6 = 6;
     private static final int INT_10 = 10;
     private static final RString TWO = new RString("2");
-    private static final RString RSTRING_0000 = new RString("0000");
     private static final RString RSTRING_21ZERO = new RString("000000000000000000000");
     private static final RString RSTRING_01 = new RString("01");
     private static final RString 振込明細一時NAME = new RString("DbWT0510FurikomiMeisai");
