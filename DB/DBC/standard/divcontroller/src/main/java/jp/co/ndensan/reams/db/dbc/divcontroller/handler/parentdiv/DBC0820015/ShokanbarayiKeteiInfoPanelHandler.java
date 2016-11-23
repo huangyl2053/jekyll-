@@ -190,7 +190,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      */
     private Boolean equal償還払決定一覧(List<dgSyokanbaraikete_Row> rowList, Map<RString, Decimal> 償還払決定一覧) {
         for (int i = 0; i < rowList.size(); i++) {
-            if (償還払決定一覧 != null && 償還払決定一覧.get(rowList.get(i).getNo()) != rowList.get(i).getSagakuKingaku().getValue()) {
+            if (償還払決定一覧 != null && !償還払決定一覧.get(rowList.get(i).getNo()).equals(rowList.get(i).getSagakuKingaku().getValue())) {
                 return true;
             }
         }
