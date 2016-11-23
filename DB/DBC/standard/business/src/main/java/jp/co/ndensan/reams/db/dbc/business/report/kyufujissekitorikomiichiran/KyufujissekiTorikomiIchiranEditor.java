@@ -185,7 +185,7 @@ public class KyufujissekiTorikomiIchiranEditor implements
             source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(new Decimal(合計件数), 0).concat(件タイトル);
         }
 
-        if (entity != null && entity.get識別コード() != null) {
+        if (entity.get識別コード() != null) {
             source.shikibetsuCode = entity.get識別コード();
         } else {
             source.shikibetsuCode = RString.EMPTY;
