@@ -364,14 +364,14 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
             for (JigyoKogakuShikyuFushikyuKetteTsuchiEntity entity : itemList) {
                 Decimal 該当レコード支給金額集計 = entity.get支給額() == null ? Decimal.ZERO : entity.get支給額();
                 Decimal 該当レコード本人支払額 = entity.get本人支払額() == null ? Decimal.ZERO : entity.get本人支払額();
-                if (ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給_不支給_決定区分())) {
+                if (ShikyuFushikyuKubun.支給.get名称().equals(entity.get支給_不支給_決定区分())) {
                     支給額給額合計_支給 = 支給額給額合計_支給.add(該当レコード支給金額集計);
                     本人支給額合計_支給 = 本人支給額合計_支給.add(該当レコード本人支払額);
                     支給件数 = 支給件数 + 1;
                     支給List.add(entity);
                     continue;
                 }
-                if (ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給_不支給_決定区分())) {
+                if (ShikyuFushikyuKubun.不支給.get名称().equals(entity.get支給_不支給_決定区分())) {
                     支給額給額合計_不支給 = 支給額給額合計_不支給.add(該当レコード支給金額集計);
                     本人支給額合計_不支給 = 本人支給額合計_不支給.add(該当レコード本人支払額);
                     不支給件数 = 不支給件数 + 1;
