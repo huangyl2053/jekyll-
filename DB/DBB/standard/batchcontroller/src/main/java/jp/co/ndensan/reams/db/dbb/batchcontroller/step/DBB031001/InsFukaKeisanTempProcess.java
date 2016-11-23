@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.CaluculateFukaP
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.FukaCalculateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.FukaCalculateTempEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.honnsanteifuka.CreatCalCulateEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.KozaYotoKubunType;
@@ -48,6 +49,7 @@ public class InsFukaKeisanTempProcess extends BatchProcessBase<FukaCalculateEnti
     private TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
     private FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
     private FlexibleYear 調定年度 = FlexibleYear.EMPTY;
+    private HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
 
     @Override
     public void initialize() {
@@ -76,7 +78,8 @@ public class InsFukaKeisanTempProcess extends BatchProcessBase<FukaCalculateEnti
     protected void process(FukaCalculateEntity entity) {
         if (通知書番号.equals(entity.getTsuchishoNo())
                 && 賦課年度.equals(entity.getFukaNendo())
-                && 調定年度.equals(entity.getChoteiNendo())) {
+                && 調定年度.equals(entity.getChoteiNendo())
+                && 被保険者番号.equals(entity.get資格の情報().getHihokenshaNo())) {
             tempEntity = manager.creat期別金額Entity(tempEntity, entity);
             setKey(entity);
         } else {
@@ -91,17 +94,11 @@ public class InsFukaKeisanTempProcess extends BatchProcessBase<FukaCalculateEnti
         }
     }
 
-    @Override
-    protected void afterExecute() {
-        if (tempEntity != null) {
-            tableWriter.insert(tempEntity);
-        }
-    }
-
     private void setKey(FukaCalculateEntity entity) {
         賦課年度 = entity.getFukaNendo();
         調定年度 = entity.getChoteiNendo();
         通知書番号 = entity.getTsuchishoNo();
+        被保険者番号 = entity.get資格の情報().getHihokenshaNo();
     }
 
 }

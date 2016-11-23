@@ -443,14 +443,12 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         賦課根拠param.set世帯員所得情報List(世帯員所得情報List);
         FukaKonkyoFactory factory = new FukaKonkyoFactory();
         FukaKonkyo 賦課根拠 = factory.create(賦課根拠param);
-
         HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
         HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
         保険料段階パラメータ.setFukaNendo(entity.getFukaNendo());
         保険料段階パラメータ.setFukaKonkyo(賦課根拠);
         保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
         TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
-
         NengakuHokenryoKeisanParameter 年額保険料パラメータ = new NengakuHokenryoKeisanParameter();
         年額保険料パラメータ.set賦課年度(processParameter.get賦課年度());
         NengakuFukaKonkyoFactory nengakuFukaKonkyo = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
@@ -473,12 +471,10 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
                     月別ランク.getRankKubun10Gatsu(), 月別ランク.getRankKubun11Gatsu(), 月別ランク.getRankKubun12Gatsu(),
                     月別ランク.getRankKubun1Gatsu(), 月別ランク.getRankKubun2Gatsu(), 月別ランク.getRankKubun3Gatsu());
         }
-
         年額保険料パラメータ.set年額賦課根拠(年額賦課根拠);
         年額保険料パラメータ.set年額制御情報(年額制御情報);
         NengakuHokenryoKeisan keisan = InstanceProvider.create(NengakuHokenryoKeisan.class);
         NengakuHokenryo 年額保険料 = keisan.calculate年額保険料(年額保険料パラメータ);
-
         FukaKokyoBatchParameter fukaKokyoBatchParameter = new FukaKokyoBatchParameter();
         fukaKokyoBatchParameter.set賦課年度(processParameter.get賦課年度());
         fukaKokyoBatchParameter.set資格の情報(資格の情報);
@@ -580,12 +576,10 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
                 .set減免額(Decimal.ONE);
         if (manager.is普徴期別がZERO(賦課の情報_更正後)) {
             fukaBuilder.set口座区分(KozaKubun.現金納付.getコード());
+        } else if (!口座List.isEmpty()) {
+            fukaBuilder.set口座区分(KozaKubun.口座振替.getコード());
         } else {
-            if (!口座List.isEmpty()) {
-                fukaBuilder.set口座区分(KozaKubun.口座振替.getコード());
-            } else {
-                fukaBuilder.set口座区分(KozaKubun.現金納付.getコード());
-            }
+            fukaBuilder.set口座区分(KozaKubun.現金納付.getコード());
         }
         HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
         List<HihokenshaDaicho> 資格の情報リスト = new ArrayList<>();
@@ -624,12 +618,10 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         }
         if (manager.is普徴期別がZERO(賦課の情報_更正後)) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
+        } else if (!口座List.isEmpty()) {
+            builder.set口座区分(KozaKubun.口座振替.getコード());
         } else {
-            if (!口座List.isEmpty()) {
-                builder.set口座区分(KozaKubun.口座振替.getコード());
-            } else {
-                builder.set口座区分(KozaKubun.現金納付.getコード());
-            }
+            builder.set口座区分(KozaKubun.現金納付.getコード());
         }
         builder.set職権区分(ShokkenKubun.非該当.getコード());
         HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
@@ -638,6 +630,7 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格の情報リスト, 賦課年度);
         builder.set賦課市町村コード(manager.get最終月の市町村コード(月別ランク情報));
         if (賦課の情報_更正前 != null) {
+            builder.set保険料段階_仮算定時(賦課の情報_更正前.get保険料段階_仮算定時());
             builder.set特徴歳出還付額(賦課の情報_更正前.get特徴歳出還付額());
             builder.set普徴歳出還付額(賦課の情報_更正前.get普徴歳出還付額());
             builder.set減免額(賦課の情報_更正前.get減免額());
