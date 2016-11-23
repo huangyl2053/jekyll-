@@ -60,15 +60,6 @@ public enum ShikyugakuKeisanKekkaTorokuMessage implements IValidationMessage {
      */
     高額合算支給不支給決定データの存在(DbcWarningMessages.高額合算支給額計算結果削除確認_支給決定情報あり),
     /**
-     * 自己負担額証明書整理番号桁数が不正
-     */
-    自己負担額証明書整理番号桁数が不正(UrErrorMessages.桁数が不正, "自己負担額証明書整理番号", "20"),
-    /**
-     * 自己負担額証明書整理番号が不正
-     */
-    自己負担額証明書整理番号が不正(UrErrorMessages.入力値が不正_追加メッセージあり,
-            "保険制度が3：介護の場合、自己負担額証明書整理番号の保険者番号部分の先頭2桁は99となります。"),
-    /**
      * 自己負担額証明書整理番号既に存在
      */
     自己負担額証明書整理番号既に存在(UrErrorMessages.既に存在, "自己負担額証明書整理番号"),

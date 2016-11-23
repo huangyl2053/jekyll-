@@ -35,6 +35,7 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
     private static final int 三月 = 3;
     private static final int 四月 = 4;
     private static final int 七月 = 7;
+    private static final RString INDEX_1 = new RString("1");
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
             + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.select候補者転入者");
     private static final RString 所得照会候補者TEMP = new RString("ShotokuShoukaiKouhoshaTemp");
@@ -44,6 +45,8 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
     private BatchEntityCreatedTempTableWriter 所得照会候補者writer;
     private ShotokuShokaihyoHakkoProcessParameter processParameter;
     private ShotokuNendoParameter myBatisParameter;
+    private KouhoshaTenyuEntity 所得照会候補者Entity;
+    private int index = 1;
 
     @Override
     protected void createWriter() {
@@ -58,12 +61,21 @@ public class InsJuminJohoTmpProcess extends BatchProcessBase<KouhoshaTenyuEntity
 
     @Override
     protected void process(KouhoshaTenyuEntity t) {
-        if (識別コード.equals(t.get識別コード())) {
+        if (index == 1) {
+            所得照会候補者Entity = t;
             識別コード = t.get識別コード();
-        } else if (t.is最新フラグ()) {
-            所得照会候補者writer.insert(creatEntity(t));
+        } else if (識別コード.equals(t.get識別コード())) {
+            if (INDEX_1.equals(t.get候補者区分())) {
+                所得照会候補者writer.insert(creatEntity(t));
+            } else {
+                所得照会候補者writer.insert(creatEntity(所得照会候補者Entity));
+            }
+        } else {
+            所得照会候補者writer.insert(creatEntity(所得照会候補者Entity));
+            所得照会候補者Entity = t;
             識別コード = t.get識別コード();
         }
+        index++;
     }
 
     private ShotokuShoukaiKouhoshaTempEntity creatEntity(KouhoshaTenyuEntity t) {

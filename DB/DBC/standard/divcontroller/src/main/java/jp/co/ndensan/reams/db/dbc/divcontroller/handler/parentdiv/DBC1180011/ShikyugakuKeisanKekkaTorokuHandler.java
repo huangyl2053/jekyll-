@@ -89,8 +89,8 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
      * @param 対象者 TaishoshaKey
      */
     public void initialize(TaishoshaKey 対象者) {
-        div.getDgKogakuGassanShikyuGakuKeisanKekka().init();
-        div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().init();
+        div.getDgKogakuGassanShikyuGakuKeisanKekka().setDataSource(Collections.EMPTY_LIST);
+        div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().setDataSource(Collections.EMPTY_LIST);
         div.getCcdKaigoAtenaInfo().initialize(対象者.get識別コード());
         div.getCcdKaigoShikakuKihon().initialize(対象者.get被保険者番号());
         RDate システム日付 = RDate.getNowDate();
@@ -104,6 +104,19 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
             div.getTxtKensakuTaishoNendo().setToValue(new RDate(システム年度 - INT_2));
         }
         ドロップダウンリスト項目セット();
+    }
+
+    /**
+     * set照会制御。
+     */
+    public void set照会制御() {
+        div.getCcdKaigoShikakuKihon().set被保履歴ボタンDisable(true);
+        div.getCcdKaigoShikakuKihon().set認定履歴ボタンDisable(true);
+        div.getTxtKensakuTaishoNendo().setDisabled(true);
+        div.getChkRirekiHyoji().setDisabled(true);
+        div.getTxtShikyuShinseishoSeiriNoInput().setDisabled(true);
+        div.getBtnAddKeisanKekka().setDisabled(true);
+        div.getBtnKensaku().setDisabled(true);
     }
 
     /**
@@ -157,7 +170,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
      */
     public void 支給額結果明細グリッド(List<KogakuGassanShikyugakuKeisanKekkaMeisai> meisaiList) {
         if (meisaiList == null) {
-            div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getDataSource().clear();
+            div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().setDataSource(Collections.EMPTY_LIST);
             return;
         }
         List<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> rowList = new ArrayList();
@@ -249,7 +262,6 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         div.getTxtRenrakuhyoHakkoshaJusho().setRequired(!flg);
         div.getTxtToiawasesakiMeisho1().setRequired(!flg);
         div.getTxtToiawasesakiYobinNo().setRequired(!flg);
-        div.getTxtToiawasesakiMeisho2().setRequired(!flg);
         div.getTxtToiawasesakiTelNo().setRequired(!flg);
         div.getTxtToiawasesakiJusho().setRequired(!flg);
     }
@@ -258,7 +270,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
      * 画面項目クリアのメソッドです。
      */
     public void 画面項目クリア() {
-        div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().init();
+        div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().setDataSource(Collections.EMPTY_LIST);
         支給額計算結果登録入力パネルクリア();
         計算内訳情報パネルクリア();
         支給額情報パネルクリア();
@@ -644,7 +656,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     }
 
     private void 計算内訳情報パネルクリア() {
-        div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getDataSource().clear();
+        div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().setDataSource(Collections.EMPTY_LIST);
         合計情報パネルクリア();
         内訳入力パネルクリア();
     }
@@ -655,15 +667,16 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         div.getTxtJikoFutanSeiriNo().clearValue();
         div.getDdlShotokuKubun().setSelectedIndex(INT_0);
         div.getDdlOver70ShotokuKubun().setSelectedIndex(INT_0);
-        div.getTxtSetaiFutanSogaku().clearValue();
-        div.getTxtSetaiShikyuSogaku().clearValue();
-        div.getTxtOver70SetaiShikyuSogaku().clearValue();
-        div.getTxtSetaiGassanGaku().clearValue();
-        div.getTxtOver70SetaiGassanGaku().clearValue();
-        div.getTxtHonninShikyugaku().clearValue();
-        div.getTxtOver70HonninShikyugaku().clearValue();
-        div.getTxtSanteiKijunGaku().clearValue();
-        div.getTxtOver70SanteiKijyunGaku().clearValue();
+
+        div.getTxtSetaiFutanSogaku().setValue(Decimal.ZERO);
+        div.getTxtSetaiShikyuSogaku().setValue(Decimal.ZERO);
+        div.getTxtOver70SetaiShikyuSogaku().setValue(Decimal.ZERO);
+        div.getTxtSetaiGassanGaku().setValue(Decimal.ZERO);
+        div.getTxtOver70SetaiGassanGaku().setValue(Decimal.ZERO);
+        div.getTxtHonninShikyugaku().setValue(Decimal.ZERO);
+        div.getTxtOver70HonninShikyugaku().setValue(Decimal.ZERO);
+        div.getTxtSanteiKijunGaku().setValue(Decimal.ZERO);
+        div.getTxtOver70SanteiKijyunGaku().setValue(Decimal.ZERO);
         div.getCblTeiShotoku1SaiKeisanUmu().setSelectedItemsByKey(Collections.EMPTY_LIST);
         div.getTxtBiko().clearValue();
     }
@@ -768,15 +781,15 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
             div.getDdlOver70ShotokuKubun().setSelectedIndex(INT_0);
         }
 
-        div.getTxtSetaiFutanSogaku().setValue(支給額計算結果.get世帯負担総額());
-        div.getTxtSetaiShikyuSogaku().setValue(支給額計算結果.get世帯支給総額());
-        div.getTxtOver70SetaiShikyuSogaku().setValue(支給額計算結果.getうち70歳以上分世帯支給総額());
-        div.getTxtSetaiGassanGaku().setValue(支給額計算結果.get介護等合算一部負担金等世帯合算額());
-        div.getTxtOver70SetaiGassanGaku().setValue(支給額計算結果.get70歳以上介護等合算一部負担金等世帯合算額());
-        div.getTxtHonninShikyugaku().setValue(支給額計算結果.get按分後支給額());
-        div.getTxtOver70HonninShikyugaku().setValue(支給額計算結果.getうち70歳以上分按分後支給額());
-        div.getTxtSanteiKijunGaku().setValue(支給額計算結果.get介護等合算算定基準額());
-        div.getTxtOver70SanteiKijyunGaku().setValue(支給額計算結果.get70歳以上介護等合算算定基準額());
+        div.getTxtSetaiFutanSogaku().setValue(nvlDecimal(支給額計算結果.get世帯負担総額()));
+        div.getTxtSetaiShikyuSogaku().setValue(nvlDecimal(支給額計算結果.get世帯支給総額()));
+        div.getTxtOver70SetaiShikyuSogaku().setValue(nvlDecimal(支給額計算結果.getうち70歳以上分世帯支給総額()));
+        div.getTxtSetaiGassanGaku().setValue(nvlDecimal(支給額計算結果.get介護等合算一部負担金等世帯合算額()));
+        div.getTxtOver70SetaiGassanGaku().setValue(nvlDecimal(支給額計算結果.get70歳以上介護等合算一部負担金等世帯合算額()));
+        div.getTxtHonninShikyugaku().setValue(nvlDecimal(支給額計算結果.get按分後支給額()));
+        div.getTxtOver70HonninShikyugaku().setValue(nvlDecimal(支給額計算結果.getうち70歳以上分按分後支給額()));
+        div.getTxtSanteiKijunGaku().setValue(nvlDecimal(支給額計算結果.get介護等合算算定基準額()));
+        div.getTxtOver70SanteiKijyunGaku().setValue(nvlDecimal(支給額計算結果.get70歳以上介護等合算算定基準額()));
         if (RSTRING_ONE.equals(支給額計算結果.get介護低所得者Ⅰ再計算実施の有無())) {
             div.getCblTeiShotoku1SaiKeisanUmu().setSelectedItemsByKey(Collections.EMPTY_LIST);
         } else {
@@ -785,6 +798,10 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
             div.getCblTeiShotoku1SaiKeisanUmu().setSelectedItemsByKey(keyList);
         }
         div.getTxtBiko().setValue(支給額計算結果.get備考());
+    }
+
+    private Decimal nvlDecimal(Decimal obj) {
+        return obj == null ? Decimal.ZERO : obj;
     }
 
     private void 連絡票情報パネル項目設定(KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果) {

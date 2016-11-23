@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1230011
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
@@ -21,11 +22,13 @@ import jp.co.ndensan.reams.db.dbc.service.core.kogakugassanshikyuketteihosei.Kog
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -83,25 +86,37 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         if (識別コード != null && !識別コード.isEmpty()) {
             div.getCcdKaigoAtenaInfo().initialize(識別コード);
         }
-        getHandler(div).getデータ存在チェック(被保険者番号);
         if (!getHandler(div).is前排他キーのセット(被保険者番号)) {
             throw new PessimisticLockingException();
         }
         AccessLogger.log(AccessLogType.照会,
                 getHandler(div).toPersonalData(識別コード,
-                        被保険者番号.getColumnValue()));
+                被保険者番号.getColumnValue()));
         div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         getHandler(div).set新規と検索条件登録パネル();
-        List<KogakuGassanShikyuKetteiHoseiResult> result = new ArrayList<>();
-        getHandler(div).set決定情報一覧グリッド(result);
+
+        List<JukyushaDaicho> 受給者台帳データ = KogakuGassanShikyuKetteiHosei.
+                createInstance().get受給者台帳データ(被保険者番号);
+        List<SogoJigyoTaishosha> 総合事業対象者データ = KogakuGassanShikyuKetteiHosei.
+                createInstance().get総合事業対象者データ(被保険者番号);
+        ValidationMessageControlPairs データ存在validPairs = getCheckHandler(div).getデータ存在チェック(受給者台帳データ, 総合事業対象者データ);
+        IResponse<KogakuGassanShikyuKetteiHoseiPanelDiv> response = ResponseData.of(
+                ResponseData.of(div).setState(DBC1230011StateName.支給決定情報一覧).data);
         if (div.get事業分フラグ().equals(new RString(Boolean.FALSE.toString()))) {
-            return ResponseData.of(ResponseData.of(div).setState(
-                    DBC1230011StateName.支給決定情報一覧).data).rootTitle(高額合算支給決定情報補正).
-                    focusId(フォーカスを).respond();
+            response = response.rootTitle(高額合算支給決定情報補正).focusId(フォーカスを);
         } else {
-            return ResponseData.of(ResponseData.of(div).setState(
-                    DBC1230011StateName.支給決定情報一覧).data).rootTitle(事業高額合算支給決定情報補正).
-                    focusId(フォーカスを).respond();
+            response = response.rootTitle(事業高額合算支給決定情報補正).focusId(フォーカスを);
+        }
+        if (データ存在validPairs.iterator().hasNext()) {
+            div.getBtnKetteiJohoAdd().setDisabled(true);
+            div.getBtnKensaku().setDisabled(true);
+            return response.addValidationMessages(データ存在validPairs).respond();
+        } else {
+            div.getBtnKetteiJohoAdd().setDisabled(false);
+            div.getBtnKensaku().setDisabled(false);
+            List<KogakuGassanShikyuKetteiHoseiResult> result = new ArrayList<>();
+            getHandler(div).set決定情報一覧グリッド(result);
+            return response.respond();
         }
     }
 
@@ -555,7 +570,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                             支給申請書整理番号, 画面モード, 決定情報list, para);
                     AccessLogger.log(AccessLogType.更新,
                             getHandler(div).toPersonalData(識別コード,
-                                    被保険者番号.getColumnValue()));
+                            被保険者番号.getColumnValue()));
                     getHandler(div).前排他キーの解除(被保険者番号);
                     getHandler(div).clear決定情報();
                     div.getCcdKanryoMessage().setMessage(
@@ -582,7 +597,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                             支給申請書整理番号, 画面モード, 決定情報list, para);
                     AccessLogger.log(AccessLogType.更新,
                             getHandler(div).toPersonalData(識別コード,
-                                    被保険者番号.getColumnValue()));
+                            被保険者番号.getColumnValue()));
                     getHandler(div).clear決定情報();
                     getHandler(div).前排他キーの解除(被保険者番号);
                     div.getCcdKanryoMessage().setMessage(

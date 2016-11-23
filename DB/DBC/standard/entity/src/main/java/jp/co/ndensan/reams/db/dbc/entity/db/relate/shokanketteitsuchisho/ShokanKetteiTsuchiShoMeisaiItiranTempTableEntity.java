@@ -62,9 +62,12 @@ public class ShokanKetteiTsuchiShoMeisaiItiranTempTableEntity
     private HihokenshaNo sashitomeHiHokenshaNo;
     private RString sashitomeKojoNo;
     // 様式名称
-    private RString yokinShubetsuMeisho;
+    private RString yoshikiMeisho;
+    // 支給金額
+    private int kaishuKingaku;
+    private Decimal zenkaiShiharaiKingaku;
     // 支給金額集計
-    private int kaishuKingakuTtl;
+    private Decimal kaishuKingakuTtl;
     // 通知書発行対象フラグ
     private boolean hakkoutaisyouFlg;
     // 差額金額集計

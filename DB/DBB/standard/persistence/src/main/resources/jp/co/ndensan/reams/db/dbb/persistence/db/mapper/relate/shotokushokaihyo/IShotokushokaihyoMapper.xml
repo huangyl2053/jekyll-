@@ -629,7 +629,7 @@
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataTempEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "ShotokuShoukaiDataTemp" AS TEMP
-        ${出力順},"kouhoshakubun"
+        ${出力順}
     </select>
     
     <resultMap id="ResultMap_ShotokuShoukaiDataTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataTempEntity" autoMapping="true">

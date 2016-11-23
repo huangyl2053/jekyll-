@@ -69,6 +69,7 @@ public class ShinseishoTorokuHandler {
     public void initialize(ShinseishoTorokuDiv div) {
         div.getRadChushutsuJoken().setDataSource(get申請書発行_抽出条件());
         div.getRadChushutsuTaisho().setDataSource(get申請書登録_抽出対象());
+        div.getRadChushutsuTaisho().setSelectedKey(零);
         div.getRadChushutsuJoken().setSelectedKey(零);
         set抽出条件表示制御処理();
         set処理年度の初期値();
@@ -171,9 +172,9 @@ public class ShinseishoTorokuHandler {
         parameter.set世帯員把握基準日2(世帯員把握基準日2);
         parameter.set提出期限(div.getTxtTeishutsuKigen().getValue());
         parameter.set作成日(div.getTxtSakuseiYMD().getValue());
-        parameter.set申請書出力フラグ(!(div.getChkShinseisho().getSelectedKeys().isEmpty()));
-        parameter.setお知らせ通知書出力フラグ(!(div.getChkShinseisho().getSelectedKeys().isEmpty()));
-        parameter.set一覧表CSV出力フラグ(!(div.getChkShinseisho().getSelectedKeys().isEmpty()));
+        parameter.set申請書出力フラグ(div.getChkShinseisho().getSelectedKeys().contains(new RString("0")));
+        parameter.setお知らせ通知書出力フラグ(div.getChkTsuchisho().getSelectedKeys().contains(new RString("1")));
+        parameter.set一覧表CSV出力フラグ(div.getChkIchiranhyoCsv().getSelectedKeys().contains(new RString("2")));
         parameter.set文書番号(div.getCcdBunshoBangoInput().get文書番号());
         parameter.set帳票出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
         parameter.set市町村コード(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());

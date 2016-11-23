@@ -112,6 +112,9 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     private static final RString CSVファイル名_一覧表 = new RString("所得照会票発行一覧表");
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
             + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.selectAll所得照会票2");
+    private static final RString 候補者_KEY = new RString("候補者");
+    private static final RString ORDERBY_候補者 = new RString("order by \"kouhoshakubun\"");
+    private static final RString ORDERBY = new RString("order by");
 
     @BatchWriter
     private BatchReportWriter<ShotokushokaihyoHakkoIchiranSource> reportWriter;
@@ -164,6 +167,11 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
 
     @Override
     protected IBatchReader createReader() {
+        if (RString.isNullOrEmpty(出力順)) {
+            出力順 = ORDERBY_候補者;
+        } else {
+            出力順 = ORDERBY_候補者.concat(カンマ.concat(出力順.replace(ORDERBY, RString.EMPTY)));
+        }
         myBatisParameter = new PrtShotokushokaihyoListParameter();
         myBatisParameter.set出力順(出力順);
         return new BatchDbReader(SELECTPATH, myBatisParameter);
@@ -172,6 +180,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     @Override
     protected void createWriter() {
 
+        pageBreakKeys.add(候補者_KEY);
         if (pageBreakKeys == null || pageBreakKeys.isEmpty()) {
             reportWriter = BatchReportFactory.createBatchReportWriter(
                     ReportIdDBB.DBB200024.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
@@ -203,10 +212,11 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     @Override
     protected void usualProcess(ShotokuShoukaiDataTempEntity t) {
         change改頁項目コード(t);
-        new ShotokushokaihyoHakkoIchiranBatchReport(t, creat構成市町村情報リスト(), 出力順項目リスト, 改頁項目Map, 改頁項目リスト,
+        List<KoikiZenShichosonJoho> 構成市町村情報リスト = creat構成市町村情報リスト();
+        new ShotokushokaihyoHakkoIchiranBatchReport(t, 構成市町村情報リスト, 出力順項目リスト, 改頁項目Map, 改頁項目リスト,
                 processParameter.get照会年月日(), processParameter.get処理年度(), processParameter.isテストプリント(), association)
                 .writeBy(sourceWriter);
-        publish所得情報一覧表(t);
+        publish所得情報一覧表(t, 構成市町村情報リスト);
     }
 
     private void change改頁項目コード(ShotokuShoukaiDataTempEntity entity) {
@@ -299,7 +309,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
         printer.print();
     }
 
-    private void publish所得情報一覧表(ShotokuShoukaiDataTempEntity tempEntity) {
+    private void publish所得情報一覧表(ShotokuShoukaiDataTempEntity tempEntity, List<KoikiZenShichosonJoho> 構成市町村情報リスト) {
         ShotokuShoukaiDataCSVEntity entity = new ShotokuShoukaiDataCSVEntity();
         entity.set世帯コード(tempEntity.getSetaiCode());
         entity.setカナ氏名(tempEntity.getKanaMeisho());
@@ -307,7 +317,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
         entity.set生年月日(tempEntity.getSeinengappiYMD());
         entity.set照会日(processParameter.get照会年月日());
         entity.set転入日(tempEntity.getIdoYMD());
-        entity.set種別(editor種別(tempEntity));
+        entity.set種別(editor種別(tempEntity, 構成市町村情報リスト));
         entity.set識別コード(tempEntity.getShikibetsuCode());
         entity.set氏名(tempEntity.getMeisho());
         entity.set現住所(tempEntity.getGenjusho());
@@ -328,7 +338,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
         }
     }
 
-    private RString editor種別(ShotokuShoukaiDataTempEntity tempEntity) {
+    private RString editor種別(ShotokuShoukaiDataTempEntity tempEntity, List<KoikiZenShichosonJoho> 構成市町村情報リスト) {
         RString 種別 = RString.EMPTY;
         RString 候補者区分 = tempEntity.getKouhoshakubun();
         RString 被保険者区分コード = tempEntity.getHihokennshaKubunCode();
@@ -347,7 +357,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
             種別 = 印字_１号住特;
         } else if (is２号住特(候補者区分, 被保険者区分コード)) {
             種別 = 印字_２号住特;
-        } else if (is広域(creat構成市町村情報リスト(), tempEntity)) {
+        } else if (is広域(構成市町村情報リスト, tempEntity)) {
             種別 = 印字_広域;
         }
         return 種別;

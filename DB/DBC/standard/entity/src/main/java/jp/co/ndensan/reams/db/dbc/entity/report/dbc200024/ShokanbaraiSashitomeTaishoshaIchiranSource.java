@@ -67,22 +67,26 @@ public class ShokanbaraiSashitomeTaishoshaIchiranSource implements IReportSource
     @ReportItem(name = "List2_4", length = 14, order = 27)
     public RString List2_4;
     
-    @ReportItem(name = "choikiCode", length = 10, order = 28)
+    @ReportItem(name = "yubinBango", length = 10, order = 28)
+    public RString yubinBango;
+    @ReportItem(name = "choikiCode", length = 10, order = 29)
     public RString choikiCode;
-    @ReportItem(name = "gyoseikuCode", length = 10, order = 29)
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 30)
     public RString gyoseikuCode;
-    @ReportItem(name = "kanaMeisho", length = 10, order = 30)
+    @ReportItem(name = "kanaMeisho", length = 10, order = 31)
     public RString kanaMeisho;
-    @ReportItem(name = "shoKisaiHokenshaNo", length = 10, order = 31)
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 10, order = 32)
     public RString shoKisaiHokenshaNo;
-    @ReportItem(name = "seiriNo", length = 10, order = 32)
+    @ReportItem(name = "seiriNo", length = 10, order = 33)
     public RString seiriNo;
-    @ReportItem(name = "ketteiTsuchiNo", length = 10, order = 33)
+    @ReportItem(name = "ketteiTsuchiNo", length = 10, order = 34)
     public RString ketteiTsuchiNo;
-    @ReportItem(name = "shinseishaKubun", length = 10, order = 34)
+    @ReportItem(name = "shinseishaKubun", length = 10, order = 35)
     public RString shinseishaKubun;
-    @ReportItem(name = "listUpper_6", length = 7, order = 35)
-    public RString listUpper_6;
+    @ReportItem(name = "hidHokenshaNo", length = 6, order = 36)
+    public RString hidHokenshaNo;
+    @ReportItem(name = "hiHokenshaNo", length = 10, order = 37)
+    public RString hiHokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -53,7 +53,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
     @BatchParameter(key = CHIKUSHITEI, name = "地区指定")
     private RString chikuShitei;
     @BatchParameter(key = SELECTORCHIKULIST, name = "選択地区Map")
-    private Map<RString, RString> 選択地区Map;
+    private Map<RString, RString> selectorChikulist;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
     private RString shichosonCode;
     @BatchParameter(key = SHICHOSONMEI, name = "市町村名称")
@@ -138,7 +138,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
         this.kaishiYM = kaishiYM;
         this.shuryoYM = shuryoYM;
         this.chikuShitei = chikuShitei;
-        this.選択地区Map = 選択地区Map;
+        this.selectorChikulist = 選択地区Map;
         this.shichosonCode = shichosonCode;
         this.shichosonMei = shichosonMei;
         this.kyuShichosonCode = kyuShichosonCode;
@@ -186,12 +186,12 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
     }
 
     private List<RString> setselectorChikulist() {
-        List<RString> selectorChikulist = new ArrayList<>();
-        if (0 < 選択地区Map.size()) {
-            for (RString 選択結果 : 選択地区Map.keySet()) {
-                selectorChikulist.add(選択結果);
+        List<RString> chikulist = new ArrayList<>();
+        if (0 < selectorChikulist.size()) {
+            for (RString 選択結果 : selectorChikulist.keySet()) {
+                chikulist.add(選択結果);
             }
         }
-        return selectorChikulist;
+        return chikulist;
     }
 }

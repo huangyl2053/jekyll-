@@ -143,6 +143,9 @@ public class KogakuGassanShikyuShinseiTorokuManager {
     public KogakuGassanShikyuGakuKeisanKekkaRelate get高額合算支給額計算結果追加情報(KogakuGassanShikyugakuKeisanKekkaMeisai 支給額計算結果明細,
             KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果) {
         List<DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity> 高額合算支給額計算結果明細リスト = new ArrayList();
+        for (KogakuGassanShikyugakuKeisanKekkaMeisai 高額合算支給額計算結果 : 支給額計算結果.get高額合算支給額計算結果list()) {
+            高額合算支給額計算結果明細リスト.add(高額合算支給額計算結果.toEntity());
+        }
         高額合算支給額計算結果明細リスト.add(支給額計算結果明細.toEntity());
         KogakuGassanShikyuGakuKeisanKekkaRelateEntity entity = new KogakuGassanShikyuGakuKeisanKekkaRelateEntity();
         entity.set高額合算支給額計算結果(支給額計算結果.toEntity());

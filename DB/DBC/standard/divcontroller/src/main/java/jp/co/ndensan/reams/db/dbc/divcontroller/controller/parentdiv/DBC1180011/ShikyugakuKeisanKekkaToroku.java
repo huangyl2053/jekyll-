@@ -75,9 +75,12 @@ public class ShikyugakuKeisanKekkaToroku {
      * @return ResponseData
      */
     public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onLoad(ShikyugakuKeisanKekkaTorokuDiv div) {
+        ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
         if (ResponseHolder.isReRequest()
                 && new RString(DbcInformationMessages.被保険者でないデータ
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            handler.set照会制御();
             return ResponseData.of(div).respond();
         }
         TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
@@ -94,7 +97,6 @@ public class ShikyugakuKeisanKekkaToroku {
         }
         div.setReadOnly(false);
         アクセスログを出力_照会(対象者);
-        ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
         handler.initialize(対象者);
         return ResponseData.of(div).respond();
     }
@@ -210,9 +212,9 @@ public class ShikyugakuKeisanKekkaToroku {
         );
         KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果 = 支給額計算結果情報.get高額合算支給額計算結果(identifier);
         ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
+        handler.onClick_dgShikyuGakuKeisanKekkaSelect(支給額計算結果);
         div.getTxtStatusFlg().setValue(照会);
         handler.照会状態設定(true);
-        handler.onClick_dgShikyuGakuKeisanKekkaSelect(支給額計算結果);
         div.getChkSaiso().setReadOnly(true);
         div.getBtnUchiwakeAdd().setDisabled(true);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowSelectButtonColumn(true);
@@ -247,9 +249,9 @@ public class ShikyugakuKeisanKekkaToroku {
         );
         KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果 = 支給額計算結果情報.get高額合算支給額計算結果(identifier);
         ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
+        handler.onClick_dgShikyuGakuKeisanKekkaSelect(支給額計算結果);
         div.getTxtStatusFlg().setValue(修正);
         handler.照会状態設定(false);
-        handler.onClick_dgShikyuGakuKeisanKekkaSelect(支給額計算結果);
         if (支給額計算結果.get送付年月() != null && !RString.isNullOrEmpty(支給額計算結果.get送付年月().toDateString())) {
             div.getChkSaiso().setReadOnly(false);
         } else {
@@ -288,9 +290,9 @@ public class ShikyugakuKeisanKekkaToroku {
         );
         KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果 = 支給額計算結果情報.get高額合算支給額計算結果(identifier);
         ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
+        handler.onClick_dgShikyuGakuKeisanKekkaSelect(支給額計算結果);
         div.getTxtStatusFlg().setValue(削除);
         handler.照会状態設定(true);
-        handler.onClick_dgShikyuGakuKeisanKekkaSelect(支給額計算結果);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowSelectButtonColumn(true);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowModifyButtonColumn(false);
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getGridSetting().setIsShowDeleteButtonColumn(false);
@@ -445,7 +447,7 @@ public class ShikyugakuKeisanKekkaToroku {
     public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onClick_btnUchiwakeIchiramModoru(ShikyugakuKeisanKekkaTorokuDiv div) {
         ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
         handler.onClick_btnUchiwakeIchiramModoru();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC1180011StateName.計算結果入力);
     }
 
     /**

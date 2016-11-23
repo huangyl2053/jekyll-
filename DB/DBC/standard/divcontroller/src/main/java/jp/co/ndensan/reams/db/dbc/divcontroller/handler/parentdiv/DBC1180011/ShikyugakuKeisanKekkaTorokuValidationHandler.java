@@ -101,8 +101,6 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
 
     private ValidationDictionary create内訳を確定するDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号桁数が不正, div.getTxtJikoFutanSeiriNom())
-                .add(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号が不正, div.getTxtJikoFutanSeiriNom())
                 .add(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号既に存在, div.getTxtJikoFutanSeiriNom())
                 .build();
     }
@@ -202,10 +200,6 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
                 && (div.getTxtToiawasesakiYobinNo().getValue() == null || div.getTxtToiawasesakiYobinNo().getValue().isEmpty())) {
             validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "郵便番号"), div.getTxtToiawasesakiYobinNo()));
-        }
-        if (div.getTxtToiawasesakiMeisho2().isRequired() && RString.isNullOrEmpty(div.getTxtToiawasesakiMeisho2().getValue())) {
-            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "名称２"), div.getTxtToiawasesakiMeisho2()));
         }
         if (div.getTxtToiawasesakiTelNo().isRequired() && RString.isNullOrEmpty(div.getTxtToiawasesakiTelNo().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
