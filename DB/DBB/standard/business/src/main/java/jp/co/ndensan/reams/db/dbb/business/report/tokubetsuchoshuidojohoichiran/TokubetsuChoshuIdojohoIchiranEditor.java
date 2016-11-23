@@ -9,8 +9,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tokubetsuchoshuidojohoichiran.TokubetsuChoshuIdojohoIchiranSource;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.KakushuKubun;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -35,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdojohoIchiranEditor {
 
     private final TokuChoYidoIchiranEntity 特徴異動情報;
+    private final UaFt200FindShikibetsuTaishoEntity 宛名情報;
     private final RDateTime 作成日時;
     private final FlexibleYear 賦課年度;
     private final RString 保険者番号;
@@ -57,6 +60,7 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
      * コンストラクタです
      *
      * @param 特徴異動情報 TokuChoYidoIchiranEntity
+     * @param 宛名情報 UaFt200FindShikibetsuTaishoEntity
      * @param 作成日時 RDateTime
      * @param 賦課年度 FlexibleYear
      * @param 保険者番号 RString
@@ -66,6 +70,7 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
      */
     public TokubetsuChoshuIdojohoIchiranEditor(
             TokuChoYidoIchiranEntity 特徴異動情報,
+            UaFt200FindShikibetsuTaishoEntity 宛名情報,
             RDateTime 作成日時,
             FlexibleYear 賦課年度,
             RString 保険者番号,
@@ -73,6 +78,7 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
             List<RString> 出力順リスト,
             List<RString> 改頁リスト) {
         this.特徴異動情報 = 特徴異動情報;
+        this.宛名情報 = 宛名情報;
         this.作成日時 = 作成日時;
         this.賦課年度 = 賦課年度;
         this.保険者番号 = 保険者番号;
@@ -171,7 +177,79 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
     }
 
     private RString get改頁(int index) {
-        return index < 改頁リスト.size() ? 改頁リスト.get(index) : RString.EMPTY;
+        RString 改頁コード = index < 改頁リスト.size() ? 改頁リスト.get(index) : RString.EMPTY;
+        if (RString.isNullOrEmpty(改頁コード)) {
+            return RString.EMPTY;
+        }
+
+        UeT0511NenkinTokuchoKaifuJohoEntity 特徴異動追加情報 = 特徴異動情報.get特徴異動追加情報();
+        RString 性別 = RString.EMPTY;
+        RString 氏名５０音カナ = RString.EMPTY;
+        RString 生年月日 = RString.EMPTY;
+        RString 行政区コード = RString.EMPTY;
+        RString 識別コード = RString.EMPTY;
+
+        if (宛名情報 != null) {
+            性別 = 宛名情報.getSeibetsuCode() == null ? RString.EMPTY : 宛名情報.getSeibetsuCode();
+            氏名５０音カナ = get氏名５０音カナ();
+            生年月日 = get生年月日();
+            識別コード = get識別コード();
+        }
+        if (null != 特徴異動情報.get編集後宛先()) {
+            行政区コード = 特徴異動情報.get編集後宛先().get行政区コード() == null ? RString.EMPTY
+                    : 特徴異動情報.get編集後宛先().get行政区コード().getColumnValue();
+        }
+
+        if (DBB200021_TokubetsuChoshuIdojohoIchiranEnum.市町村コード.get項目ID().equals(改頁コード)) {
+            return 特徴異動追加情報.getKoseiCityCode();
+        } else if (DBB200021_TokubetsuChoshuIdojohoIchiranEnum.年金コード.get項目ID().equals(改頁コード)) {
+            return 特徴異動追加情報.getNenkinCode();
+        } else if (DBB200021_TokubetsuChoshuIdojohoIchiranEnum.年金番号.get項目ID().equals(改頁コード)) {
+            return 特徴異動追加情報.getKisoNenkinNo();
+        } else if (DBB200021_TokubetsuChoshuIdojohoIchiranEnum.性別.get項目ID().equals(改頁コード)) {
+            return 性別;
+        } else if (DBB200021_TokubetsuChoshuIdojohoIchiranEnum.氏名５０音カナ.get項目ID().equals(改頁コード)) {
+            return 氏名５０音カナ;
+        } else if (DBB200021_TokubetsuChoshuIdojohoIchiranEnum.生年月日.get項目ID().equals(改頁コード)) {
+            return 生年月日;
+        } else if (DBB200021_TokubetsuChoshuIdojohoIchiranEnum.行政区コード.get項目ID().equals(改頁コード)) {
+            return 行政区コード;
+        } else if (DBB200021_TokubetsuChoshuIdojohoIchiranEnum.被保険者番号.get項目ID().equals(改頁コード)) {
+            return 特徴異動追加情報.getHihokenshaNo();
+        } else if (DBB200021_TokubetsuChoshuIdojohoIchiranEnum.識別コード.get項目ID().equals(改頁コード)) {
+            return 識別コード;
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get氏名５０音カナ() {
+        if (宛名情報.getKanaMeisho() != null) {
+            AtenaKanaMeisho 氏名 = 宛名情報.getKanaMeisho();
+            if (氏名 != null) {
+                return 氏名.getColumnValue();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get生年月日() {
+        if (宛名情報.getSeinengappiYMD() != null) {
+            FlexibleDate 生年月日 = 宛名情報.getSeinengappiYMD();
+            if (生年月日 != null) {
+                return new RString(生年月日.toString());
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get識別コード() {
+        if (宛名情報.getShikibetsuCode() != null) {
+            ShikibetsuCode 識別コード = 宛名情報.getShikibetsuCode();
+            if (識別コード != null) {
+                return 識別コード.getColumnValue();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private RString getDT各種金額欄(RString dT各種金額欄) {
