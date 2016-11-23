@@ -57,6 +57,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -118,6 +119,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final RString DATE_0731 = new RString("0731");
     private static final RString DATE_0801 = new RString("0801");
     private static final RString 排他情報 = new RString("DBCHihokenshaNo");
+    private static final RString 申請情報を保存する = new RString("btnSaveHenkoTorisage");
 
     /**
      * コンストラクタです。
@@ -165,6 +167,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             }
             if (引き継ぎデータ != null) {
                 高額合算申請書保持 = 高額合算申請書保持Entity作成(高額合算申請書保持, 引き継ぎデータ);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請情報を保存する, true);
             }
             if (照会WK) {
                 照会状態を初期化設定();
