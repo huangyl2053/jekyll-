@@ -514,21 +514,19 @@ public final class ShikyuShinseiDetailHandler {
             ShokanShinsei 償還払支給申請Data = dbJohoViewState.get償還払支給申請();
             if (償還払支給申請Data.get支払金額合計() != null) {
                 div.getPnlShinsei().getTxtNumShiharaKingakuGk().setValue(償還払支給申請Data.get支払金額合計());
-            } else {
-                div.getPnlShinsei().getTxtNumShiharaKingakuGk().setValue(償還払支給申請.get支払金額合計());
             }
 
             if (償還払支給申請Data.get保険給付額() != 0) {
                 div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().setValue(new Decimal(償還払支給申請Data.get保険給付額()));
-            } else {
-                div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().setValue(new Decimal(償還払支給申請.get保険給付額()));
             }
 
             if (償還払支給申請Data.get利用者負担額() != 0) {
                 div.getPnlShinsei().getTxtNumHokenKyufuGaku().setValue(new Decimal(償還払支給申請Data.get利用者負担額()));
-            } else {
-                div.getPnlShinsei().getTxtNumHokenKyufuGaku().setValue(new Decimal(償還払支給申請.get利用者負担額()));
             }
+        } else {
+            div.getPnlShinsei().getTxtNumShiharaKingakuGk().setValue(償還払支給申請.get支払金額合計());
+            div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().setValue(new Decimal(償還払支給申請.get保険給付額()));
+            div.getPnlShinsei().getTxtNumHokenKyufuGaku().setValue(new Decimal(償還払支給申請.get利用者負担額()));
         }
 
         div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(false);
