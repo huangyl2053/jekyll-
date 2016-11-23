@@ -33,6 +33,20 @@ public class ShokiShokanJoho implements Serializable {
     private RString 不支給理由等一;
     private RString 不支給理由等二;
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 画面モード 画面モード
+     * @param 被保番号 被保番号
+     * @param 前回支払金額合計 前回支払金額合計
+     * @param 決定日 決定日
+     * @param 支給区分 支給区分
+     * @param 増減理由等 増減理由等
+     * @param 不支給理由等一 不支給理由等一
+     * @param 不支給理由等二 不支給理由等二
+     */
     public ShokiShokanJoho(FlexibleYearMonth サービス提供年月, RString 整理番号, RString 画面モード, HihokenshaNo 被保番号, Decimal 前回支払金額合計,
             RDate 決定日, RString 支給区分, RString 増減理由等, RString 不支給理由等一, RString 不支給理由等二) {
         this.サービス提供年月 = サービス提供年月;
