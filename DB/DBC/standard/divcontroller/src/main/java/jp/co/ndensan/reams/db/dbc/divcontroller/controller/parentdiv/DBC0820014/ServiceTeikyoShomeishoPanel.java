@@ -97,7 +97,7 @@ public class ServiceTeikyoShomeishoPanel {
         handler.load宛名と基本情報(識別コード, 被保険者番号);
         handler.loadボタンエリア(画面モード);
         handler.load申請共通エリア(画面モード, サービス年月, 整理番号);
-        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報, 償還払ViewStateDB情報);
+        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報, 償還払ViewStateDB情報, サービス年月);
         return createResponse(div);
     }
 

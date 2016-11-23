@@ -99,7 +99,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
 import jp.co.ndensan.reams.ux.uxx.persistence.db.mapper.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -140,6 +142,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     private final DbT7131KaigoServiceNaiyouDac 介護サービスDac;
     private final DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac 軽減率Dac;
     private final DbT4012HyojunFutangakuGemmenDac 標準負担額減免Dac;
+    private final DbT7060KaigoJigyoshaDac 介護事業者Dac;
     private static final RString テーブル区分 = new RString("3");
     private static final RString テーブル区分_6 = new RString("6");
     private static final RString テーブル区分_7 = new RString("7");
@@ -194,6 +197,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
         this.介護サービスDac = InstanceProvider.create(DbT7131KaigoServiceNaiyouDac.class);
         this.軽減率Dac = InstanceProvider.create(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac.class);
         this.標準負担額減免Dac = InstanceProvider.create(DbT4012HyojunFutangakuGemmenDac.class);
+        this.介護事業者Dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
     }
 
     /**
@@ -342,21 +346,21 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString チェック区分,
-            List<DbT3038ShokanKihonEntity> 償還払請求基本データList,
-            List<DbT3047ShokanServicePlan200904Entity> 償還払請求サービス計画200904データList,
-            List<DbT3046ShokanServicePlan200604Entity> 償還払請求サービス計画200604データList,
-            List<DbT3045ShokanServicePlan200004Entity> 償還払請求サービス計画200004データList
+            List<ShokanKihon> 償還払請求基本データList,
+            List<ShokanServicePlan200904Result> 償還払請求サービス計画200904データList,
+            List<ShokanServicePlan200604Result> 償還払請求サービス計画200604データList,
+            List<ShokanServicePlan200004Result> 償還払請求サービス計画200004データList
     ) {
         int 取得件数 = 0;
         if (チェック区分_2.equals(チェック区分)) {
             return 取得件数;
         }
-        for (DbT3038ShokanKihonEntity 償還払請求基本データ : 償還払請求基本データList) {
-            if (被保険者番号.equals(償還払請求基本データ.getHiHokenshaNo())
-                    && サービス提供年月.equals(償還払請求基本データ.getServiceTeikyoYM())
-                    && 整理番号.equals(償還払請求基本データ.getSeiriNo())
-                    && 事業者番号.equals(償還払請求基本データ.getJigyoshaNo())
-                    && 様式番号.equals(償還払請求基本データ.getYoshikiNo())) {
+        for (ShokanKihon 償還払請求基本データ : 償還払請求基本データList) {
+            if (被保険者番号.equals(償還払請求基本データ.toEntity().getHiHokenshaNo())
+                    && サービス提供年月.equals(償還払請求基本データ.toEntity().getServiceTeikyoYM())
+                    && 整理番号.equals(償還払請求基本データ.toEntity().getSeiriNo())
+                    && 事業者番号.equals(償還払請求基本データ.toEntity().getJigyoshaNo())
+                    && 様式番号.equals(償還払請求基本データ.toEntity().getYoshikiNo())) {
                 取得件数++;
             }
         }
@@ -364,12 +368,12 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             return 取得件数;
         }
         if (new FlexibleYearMonth(サービス年月.toString()).isBeforeOrEquals(サービス提供年月)) {
-            for (DbT3047ShokanServicePlan200904Entity 償還払請求サービス計画200904データ : 償還払請求サービス計画200904データList) {
-                if (被保険者番号.equals(償還払請求サービス計画200904データ.getHiHokenshaNo())
-                        && サービス提供年月.equals(償還払請求サービス計画200904データ.getServiceTeikyoYM())
-                        && 整理番号.equals(償還払請求サービス計画200904データ.getSeiriNo())
-                        && 事業者番号.equals(償還払請求サービス計画200904データ.getJigyoshaNo())
-                        && 様式番号.equals(償還払請求サービス計画200904データ.getYoshikiNo())) {
+            for (ShokanServicePlan200904Result 償還払請求サービス計画200904データ : 償還払請求サービス計画200904データList) {
+                if (被保険者番号.equals(償還払請求サービス計画200904データ.getEntity().toEntity().getHiHokenshaNo())
+                        && サービス提供年月.equals(償還払請求サービス計画200904データ.getEntity().toEntity().getServiceTeikyoYM())
+                        && 整理番号.equals(償還払請求サービス計画200904データ.getEntity().toEntity().getSeiriNo())
+                        && 事業者番号.equals(償還払請求サービス計画200904データ.getEntity().toEntity().getJigyoshaNo())
+                        && 様式番号.equals(償還払請求サービス計画200904データ.getEntity().toEntity().getYoshikiNo())) {
                     取得件数++;
                 }
             }
@@ -386,27 +390,27 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
-            List<DbT3046ShokanServicePlan200604Entity> 償還払請求サービス計画200604データList,
-            List<DbT3045ShokanServicePlan200004Entity> 償還払請求サービス計画200004データList,
+            List<ShokanServicePlan200604Result> 償還払請求サービス計画200604データList,
+            List<ShokanServicePlan200004Result> 償還払請求サービス計画200004データList,
             int 取得件数) {
         if (new FlexibleYearMonth(サービス年月1.toString()).isBeforeOrEquals(サービス提供年月)) {
-            for (DbT3046ShokanServicePlan200604Entity 償還払請求サービス計画200604データ : 償還払請求サービス計画200604データList) {
-                if (被保険者番号.equals(償還払請求サービス計画200604データ.getHiHokenshaNo())
-                        && サービス提供年月.equals(償還払請求サービス計画200604データ.getServiceTeikyoYM())
-                        && 整理番号.equals(償還払請求サービス計画200604データ.getSeiriNo())
-                        && 事業者番号.equals(償還払請求サービス計画200604データ.getJigyoshaNo())
-                        && 様式番号.equals(償還払請求サービス計画200604データ.getYoshikiNo())) {
+            for (ShokanServicePlan200604Result 償還払請求サービス計画200604データ : 償還払請求サービス計画200604データList) {
+                if (被保険者番号.equals(償還払請求サービス計画200604データ.getEntity().toEntity().getHiHokenshaNo())
+                        && サービス提供年月.equals(償還払請求サービス計画200604データ.getEntity().toEntity().getServiceTeikyoYM())
+                        && 整理番号.equals(償還払請求サービス計画200604データ.getEntity().toEntity().getSeiriNo())
+                        && 事業者番号.equals(償還払請求サービス計画200604データ.getEntity().toEntity().getJigyoshaNo())
+                        && 様式番号.equals(償還払請求サービス計画200604データ.getEntity().toEntity().getYoshikiNo())) {
                     取得件数++;
                 }
             }
             return 取得件数;
         }
-        for (DbT3045ShokanServicePlan200004Entity 償還払請求サービス計画200004データ : 償還払請求サービス計画200004データList) {
-            if (被保険者番号.equals(償還払請求サービス計画200004データ.getHiHokenshaNo())
-                    && サービス提供年月.equals(償還払請求サービス計画200004データ.getServiceTeikyoYM())
-                    && 整理番号.equals(償還払請求サービス計画200004データ.getSeiriNo())
-                    && 事業者番号.equals(償還払請求サービス計画200004データ.getJigyoshaNo())
-                    && 様式番号.equals(償還払請求サービス計画200004データ.getYoshikiNo())) {
+        for (ShokanServicePlan200004Result 償還払請求サービス計画200004データ : 償還払請求サービス計画200004データList) {
+            if (被保険者番号.equals(償還払請求サービス計画200004データ.getEntity().toEntity().getHiHokenshaNo())
+                    && サービス提供年月.equals(償還払請求サービス計画200004データ.getEntity().toEntity().getServiceTeikyoYM())
+                    && 整理番号.equals(償還払請求サービス計画200004データ.getEntity().toEntity().getSeiriNo())
+                    && 事業者番号.equals(償還払請求サービス計画200004データ.getEntity().toEntity().getJigyoshaNo())
+                    && 様式番号.equals(償還払請求サービス計画200004データ.getEntity().toEntity().getYoshikiNo())) {
                 取得件数++;
             }
         }
@@ -2450,6 +2454,21 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             }
         }
         return 償還払ViewStateDB情報;
+    }
+
+    /**
+     * 介護事業者名を取得する
+     *
+     * @param 事業者番号　JigyoshaNo
+     * @param 有効開始日　FlexibleDate
+     * @return 介護事業者名
+     */
+    public RString get介護事業者(JigyoshaNo 事業者番号, FlexibleDate 有効開始日) {
+        DbT7060KaigoJigyoshaEntity entity = 介護事業者Dac.selectByKey(事業者番号, 有効開始日);
+        if (null != entity && null != entity.getJigyoshaName()) {
+            return entity.getJigyoshaName().value();
+        }
+        return RString.EMPTY;
     }
 
     /**

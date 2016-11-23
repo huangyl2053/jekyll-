@@ -27,23 +27,19 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.S
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdServiceTeikyoShomeisyo_Row;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604Entity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -70,6 +66,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
     private static final RString チェック区分 = new RString("1");
     private static final RString 処理区分_0 = new RString("0");
     private static final RString 処理_削除 = new RString("削除");
+    private static final RString 一日時点 = new RString("01");
 
     /**
      * コンストラクタです。
@@ -130,12 +127,14 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * @param 証明書リスト 証明書リスト
      * @param 証明書一覧情報 証明書一覧情報
      * @param 償還払ViewStateDB情報 償還払ViewStateDB情報
+     * @param サービス年月 サービス年月
      */
     public void load申請明細エリア(RString 処理モード,
             RDate 申請日,
             List<ShikibetsuNoKanri> 証明書リスト,
             List<ServiceTeikyoShomeishoResult> 証明書一覧情報,
-            DbJohoViewState 償還払ViewStateDB情報) {
+            DbJohoViewState 償還払ViewStateDB情報,
+            FlexibleYearMonth サービス年月) {
         div.getPanelShinseiNaiyo().getTxtShinseibi().setValue(申請日);
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(証明書BLANK, RString.EMPTY);
@@ -153,7 +152,8 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 dgdServiceTeikyoShomeisyo_Row row = new dgdServiceTeikyoShomeisyo_Row();
                 row.setShori(shomeishoGrid.get処理());
                 row.setData1(shomeishoGrid.get事業者番号());
-                row.setData2(shomeishoGrid.get事業者名());
+                row.setData2(SyokanbaraihiShikyuShinseiKetteManager.createInstance()
+                        .get介護事業者(new JigyoshaNo(shomeishoGrid.get事業者番号()), new FlexibleDate(サービス年月.toDateString().concat(一日時点))));
                 row.setData3(shomeishoGrid.get明細());
                 row.setData4(shomeishoGrid.getサービス提供証明書());
                 row.setShoriKubun(shomeishoGrid.get処理区分());
@@ -166,10 +166,8 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 JigyoshaNo jigyoshaNo = 証明書情報.getServiceTeikyoShomeisho().getJigyoshaNo();
                 if (jigyoshaNo != null) {
                     row.setData1(jigyoshaNo.getColumnValue());
-                }
-                AtenaMeisho jigyoshaName = 証明書情報.getServiceTeikyoShomeisho().getJigyoshaName();
-                if (jigyoshaName != null) {
-                    row.setData2(jigyoshaName.getColumnValue());
+                    row.setData2(SyokanbaraihiShikyuShinseiKetteManager.createInstance()
+                            .get介護事業者(jigyoshaNo, new FlexibleDate(サービス年月.toDateString().concat(一日時点))));
                 }
                 row.setData3(証明書情報.getServiceTeikyoShomeisho().getMeisanNo());
                 row.setData4(証明書情報.getServiceTeikyoShomeisho().getYoshikiNo());
@@ -255,32 +253,24 @@ public class ServiceTeikyoShomeishoPanelHandler {
                     .getMessage().replace(証明書.toString()).evaluate());
         }
         if (null != 償還払ViewStateDB情報) {
-            List<DbT3038ShokanKihonEntity> 償還払請求基本データList = new ArrayList<>();
-            List<DbT3047ShokanServicePlan200904Entity> 償還払請求サービス計画200904データList = new ArrayList<>();
-            List<DbT3046ShokanServicePlan200604Entity> 償還払請求サービス計画200604データList = new ArrayList<>();
-            List<DbT3045ShokanServicePlan200004Entity> 償還払請求サービス計画200004データList = new ArrayList<>();
+            List<ShokanKihon> 償還払請求基本データList = new ArrayList<>();
+            List<ShokanServicePlan200904Result> 償還払請求サービス計画200904データList = new ArrayList<>();
+            List<ShokanServicePlan200604Result> 償還払請求サービス計画200604データList = new ArrayList<>();
+            List<ShokanServicePlan200004Result> 償還払請求サービス計画200004データList = new ArrayList<>();
             if (null != 償還払ViewStateDB情報.get償還払請求基本データList() && !償還払ViewStateDB情報.get償還払請求基本データList().isEmpty()) {
-                for (ShokanKihon 償還払請求基本 : 償還払ViewStateDB情報.get償還払請求基本データList()) {
-                    償還払請求基本データList.add(償還払請求基本.toEntity());
-                }
+                償還払請求基本データList = 償還払ViewStateDB情報.get償還払請求基本データList();
             }
             if (null != 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList()
                     && !償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList().isEmpty()) {
-                for (ShokanServicePlan200904Result 償還払請求サービス計画200904Result : 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList()) {
-                    償還払請求サービス計画200904データList.add(償還払請求サービス計画200904Result.getEntity().toEntity());
-                }
+                償還払請求サービス計画200904データList = 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList();
             }
             if (null != 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList()
                     && !償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList().isEmpty()) {
-                for (ShokanServicePlan200604Result 償還払請求サービス計画200604Result : 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList()) {
-                    償還払請求サービス計画200604データList.add(償還払請求サービス計画200604Result.getEntity().toEntity());
-                }
+                償還払請求サービス計画200604データList = 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList();
             }
             if (null != 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList()
                     && !償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList().isEmpty()) {
-                for (ShokanServicePlan200004Result 償還払請求サービス計画200004Result : 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList()) {
-                    償還払請求サービス計画200004データList.add(償還払請求サービス計画200004Result.getEntity().toEntity());
-                }
+                償還払請求サービス計画200004データList = 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList();
             }
             int 証明書件数ViewState = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShomeishoKensu(
                     被保険者番号,
@@ -346,15 +336,23 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 償還払ViewStateDB情報.get償還払請求基本データList().remove(償還払請求基本データ);
             }
         }
-        償還払ViewStateDB情報 = remove証明書明細(償還払ViewStateDB情報, removeKey);
-        償還払ViewStateDB情報 = remove特定診療費明細(償還払ViewStateDB情報, removeKey);
-        償還払ViewStateDB情報 = removeサービス計画明細(償還払ViewStateDB情報, removeKey);
-        償還払ViewStateDB情報 = removeサービス費用明細(償還払ViewStateDB情報, removeKey);
-        償還払ViewStateDB情報 = remove緊急時施設療養明細(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = remove住所地特例データ(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = remove償還払請求明細データ(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = remove償還払請求特定診療費データ(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = remove特別療養費データ(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = removeサービス計画明細200904(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = removeサービス計画明細200604(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = removeサービス計画明細200004(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = remove償還払請求特定入所者介護サービス費用データ(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = remove償還払請求社会福祉法人軽減額データ(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = remove償還払請求所定疾患施設療養費等データ(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = remove償還払請求緊急時施設療養データ(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = remove償還払請求集計データ(償還払ViewStateDB情報, removeKey);
+        償還払ViewStateDB情報 = remove償還払請求食事費用データ(償還払ViewStateDB情報, removeKey);
         return 償還払ViewStateDB情報;
     }
 
-    private DbJohoViewState remove証明書明細(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
+    private DbJohoViewState remove住所地特例データ(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get住所地特例データList() && !償還払ViewStateDB情報.get住所地特例データList().isEmpty()) {
             ArrayList<ShokanMeisaiJushochiTokureiResult> 住所地特例データremove = new ArrayList<>();
             for (ShokanMeisaiJushochiTokureiResult 住所地特例データ : 償還払ViewStateDB情報.get住所地特例データList()) {
@@ -371,6 +369,11 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 償還払ViewStateDB情報.get住所地特例データList().remove(住所地特例データ);
             }
         }
+
+        return 償還払ViewStateDB情報;
+    }
+
+    private DbJohoViewState remove償還払請求明細データ(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get償還払請求明細データList() && !償還払ViewStateDB情報.get償還払請求明細データList().isEmpty()) {
             ArrayList<ShokanMeisaiResult> 償還払請求明細データremove = new ArrayList<>();
             for (ShokanMeisaiResult 償還払請求明細データ : 償還払ViewStateDB情報.get償還払請求明細データList()) {
@@ -390,7 +393,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
         return 償還払ViewStateDB情報;
     }
 
-    private DbJohoViewState remove特定診療費明細(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
+    private DbJohoViewState remove償還払請求特定診療費データ(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get償還払請求特定診療費データList() && !償還払ViewStateDB情報.get償還払請求特定診療費データList().isEmpty()) {
             ArrayList<ShokanTokuteiShinryohi> 償還払請求特定診療費データremove = new ArrayList<>();
             for (ShokanTokuteiShinryohi 償還払請求特定診療費データ : 償還払ViewStateDB情報.get償還払請求特定診療費データList()) {
@@ -407,6 +410,11 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 償還払ViewStateDB情報.get償還払請求特定診療費データList().remove(償還払請求特定診療費データ);
             }
         }
+
+        return 償還払ViewStateDB情報;
+    }
+
+    private DbJohoViewState remove特別療養費データ(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get特別療養費データList() && !償還払ViewStateDB情報.get特別療養費データList().isEmpty()) {
             ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> 特別療養費データremove = new ArrayList<>();
             for (ShokanTokuteiShinryoTokubetsuRyoyo 特別療養費データ : 償還払ViewStateDB情報.get特別療養費データList()) {
@@ -426,9 +434,9 @@ public class ServiceTeikyoShomeishoPanelHandler {
         return 償還払ViewStateDB情報;
     }
 
-    private DbJohoViewState removeサービス計画明細(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
+    private DbJohoViewState removeサービス計画明細200904(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList() && !償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList().isEmpty()) {
-            ArrayList<ShokanServicePlan200904Result> 償還払請求サービス計画200904データResultremove = new ArrayList<>();
+            ArrayList<ShokanServicePlan200904Result> 償還払請求サービス計画200904データremove = new ArrayList<>();
             for (ShokanServicePlan200904Result 償還払請求サービス計画200904データ : 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList()) {
                 if (removeKey.get被保険者番号().equals(償還払請求サービス計画200904データ.getEntity().get被保険者番号())
                         && removeKey.getサービス年月().equals(償還払請求サービス計画200904データ.getEntity().getサービス提供年月())
@@ -436,15 +444,20 @@ public class ServiceTeikyoShomeishoPanelHandler {
                         && removeKey.get整理番号().equals(償還払請求サービス計画200904データ.getEntity().get整理番号())
                         && removeKey.get明細番号().equals(償還払請求サービス計画200904データ.getEntity().get明細番号())
                         && removeKey.get様式番号().equals(償還払請求サービス計画200904データ.getEntity().get様式番号())) {
-                    償還払請求サービス計画200904データResultremove.add(償還払請求サービス計画200904データ);
+                    償還払請求サービス計画200904データremove.add(償還払請求サービス計画200904データ);
                 }
             }
-            for (ShokanServicePlan200904Result 償還払請求サービス計画200904データ : 償還払請求サービス計画200904データResultremove) {
+            for (ShokanServicePlan200904Result 償還払請求サービス計画200904データ : 償還払請求サービス計画200904データremove) {
                 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList().remove(償還払請求サービス計画200904データ);
             }
         }
+
+        return 償還払ViewStateDB情報;
+    }
+
+    private DbJohoViewState removeサービス計画明細200604(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList() && !償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList().isEmpty()) {
-            ArrayList<ShokanServicePlan200604Result> 償還払請求サービス計画200604データResultremove = new ArrayList<>();
+            ArrayList<ShokanServicePlan200604Result> 償還払請求サービス計画200604データremove = new ArrayList<>();
             for (ShokanServicePlan200604Result 償還払請求サービス計画200604データ : 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList()) {
                 if (removeKey.get被保険者番号().equals(償還払請求サービス計画200604データ.getEntity().get被保険者番号())
                         && removeKey.getサービス年月().equals(償還払請求サービス計画200604データ.getEntity().getサービス提供年月())
@@ -452,15 +465,19 @@ public class ServiceTeikyoShomeishoPanelHandler {
                         && removeKey.get整理番号().equals(償還払請求サービス計画200604データ.getEntity().get整理番号())
                         && removeKey.get明細番号().equals(償還払請求サービス計画200604データ.getEntity().get明細番号())
                         && removeKey.get様式番号().equals(償還払請求サービス計画200604データ.getEntity().get様式番号())) {
-                    償還払請求サービス計画200604データResultremove.add(償還払請求サービス計画200604データ);
+                    償還払請求サービス計画200604データremove.add(償還払請求サービス計画200604データ);
                 }
             }
-            for (ShokanServicePlan200604Result 償還払請求サービス計画200604データ : 償還払請求サービス計画200604データResultremove) {
+            for (ShokanServicePlan200604Result 償還払請求サービス計画200604データ : 償還払請求サービス計画200604データremove) {
                 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList().remove(償還払請求サービス計画200604データ);
             }
         }
+        return 償還払ViewStateDB情報;
+    }
+
+    private DbJohoViewState removeサービス計画明細200004(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList() && !償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList().isEmpty()) {
-            ArrayList<ShokanServicePlan200004Result> 償還払請求サービス計画200004データResultremove = new ArrayList<>();
+            ArrayList<ShokanServicePlan200004Result> 償還払請求サービス計画200004データremove = new ArrayList<>();
             for (ShokanServicePlan200004Result 償還払請求サービス計画200004データ : 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList()) {
                 if (removeKey.get被保険者番号().equals(償還払請求サービス計画200004データ.getEntity().get被保険者番号())
                         && removeKey.getサービス年月().equals(償還払請求サービス計画200004データ.getEntity().getサービス提供年月())
@@ -468,17 +485,17 @@ public class ServiceTeikyoShomeishoPanelHandler {
                         && removeKey.get整理番号().equals(償還払請求サービス計画200004データ.getEntity().get整理番号())
                         && removeKey.get明細番号().equals(償還払請求サービス計画200004データ.getEntity().get明細番号())
                         && removeKey.get様式番号().equals(償還払請求サービス計画200004データ.getEntity().get様式番号())) {
-                    償還払請求サービス計画200004データResultremove.add(償還払請求サービス計画200004データ);
+                    償還払請求サービス計画200004データremove.add(償還払請求サービス計画200004データ);
                 }
             }
-            for (ShokanServicePlan200004Result 償還払請求サービス計画200004データ : 償還払請求サービス計画200004データResultremove) {
+            for (ShokanServicePlan200004Result 償還払請求サービス計画200004データ : 償還払請求サービス計画200004データremove) {
                 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList().remove(償還払請求サービス計画200004データ);
             }
         }
         return 償還払ViewStateDB情報;
     }
 
-    private DbJohoViewState removeサービス費用明細(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
+    private DbJohoViewState remove償還払請求特定入所者介護サービス費用データ(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get償還払請求特定入所者介護サービス費用データList() && !償還払ViewStateDB情報.get償還払請求特定入所者介護サービス費用データList().isEmpty()) {
             ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> 償還払請求特定入所者介護サービス費用データremove = new ArrayList<>();
             for (ShokanTokuteiNyushoshaKaigoServiceHiyo 償還払請求特定入所者介護サービス費用データ : 償還払ViewStateDB情報.get償還払請求特定入所者介護サービス費用データList()) {
@@ -495,6 +512,10 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 償還払ViewStateDB情報.get償還払請求特定入所者介護サービス費用データList().remove(償還払請求特定入所者介護サービス費用データ);
             }
         }
+        return 償還払ViewStateDB情報;
+    }
+
+    private DbJohoViewState remove償還払請求社会福祉法人軽減額データ(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get償還払請求社会福祉法人軽減額データList() && !償還払ViewStateDB情報.get償還払請求社会福祉法人軽減額データList().isEmpty()) {
             ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> 償還払請求社会福祉法人軽減額データremove = new ArrayList<>();
             for (ShokanShakaiFukushiHojinKeigengakuResult 償還払請求社会福祉法人軽減額データ : 償還払ViewStateDB情報.get償還払請求社会福祉法人軽減額データList()) {
@@ -511,6 +532,10 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 償還払ViewStateDB情報.get償還払請求社会福祉法人軽減額データList().remove(償還払請求社会福祉法人軽減額データ);
             }
         }
+        return 償還払ViewStateDB情報;
+    }
+
+    private DbJohoViewState remove償還払請求所定疾患施設療養費等データ(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get償還払請求所定疾患施設療養費等データList() && !償還払ViewStateDB情報.get償還払請求所定疾患施設療養費等データList().isEmpty()) {
             ArrayList<ShokanShoteiShikkanShisetsuRyoyo> 償還払請求所定疾患施設療養費等データremove = new ArrayList<>();
             for (ShokanShoteiShikkanShisetsuRyoyo 償還払請求所定疾患施設療養費等データ : 償還払ViewStateDB情報.get償還払請求所定疾患施設療養費等データList()) {
@@ -530,7 +555,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
         return 償還払ViewStateDB情報;
     }
 
-    private DbJohoViewState remove緊急時施設療養明細(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
+    private DbJohoViewState remove償還払請求緊急時施設療養データ(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get償還払請求緊急時施設療養データList() && !償還払ViewStateDB情報.get償還払請求緊急時施設療養データList().isEmpty()) {
             ArrayList<ShokanKinkyuShisetsuRyoyo> 償還払請求緊急時施設療養データremove = new ArrayList<>();
             for (ShokanKinkyuShisetsuRyoyo 償還払請求緊急時施設療養データ : 償還払ViewStateDB情報.get償還払請求緊急時施設療養データList()) {
@@ -547,6 +572,11 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 償還払ViewStateDB情報.get償還払請求緊急時施設療養データList().remove(償還払請求緊急時施設療養データ);
             }
         }
+
+        return 償還払ViewStateDB情報;
+    }
+
+    private DbJohoViewState remove償還払請求集計データ(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get償還払請求集計データList() && !償還払ViewStateDB情報.get償還払請求集計データList().isEmpty()) {
             ArrayList<ShokanShukeiResult> 償還払請求集計データremove = new ArrayList<>();
             for (ShokanShukeiResult 償還払請求集計データ : 償還払ViewStateDB情報.get償還払請求集計データList()) {
@@ -563,6 +593,10 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 償還払ViewStateDB情報.get償還払請求集計データList().remove(償還払請求集計データ);
             }
         }
+        return 償還払ViewStateDB情報;
+    }
+
+    private DbJohoViewState remove償還払請求食事費用データ(DbJohoViewState 償還払ViewStateDB情報, ShoukanharaihishinseimeisaikensakuParameter removeKey) {
         if (null != 償還払ViewStateDB情報.get償還払請求食事費用データList() && !償還払ViewStateDB情報.get償還払請求食事費用データList().isEmpty()) {
             ArrayList<ShokanShokujiHiyo> 償還払請求食事費用データremove = new ArrayList<>();
             for (ShokanShokujiHiyo 償還払請求食事費用データ : 償還払ViewStateDB情報.get償還払請求食事費用データList()) {
