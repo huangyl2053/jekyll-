@@ -41,6 +41,8 @@ import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -115,6 +117,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final RString DATE_0401 = new RString("0401");
     private static final RString DATE_0731 = new RString("0731");
     private static final RString DATE_0801 = new RString("0801");
+    private static final RString 排他情報 = new RString("DBCHihokenshaNo");
 
     /**
      * コンストラクタです。
@@ -556,11 +559,12 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
      * @param 高額合算申請書保持 KogakuGassanShinseishoHoji
      * @param 高額合算申請書状態 RString
      * @param 引き継ぎデータ KogakuGassanShinseishoDataResult
+     * @param 被保険者番号 被保険者番号
      * @return KogakuGassanShinseishoHoji
      */
     public KogakuGassanShinseishoHoji 高額合算申請書編集(KogakuGassanShinseishoRelate 高額合算申請書,
             KogakuGassanShinseishoHoji 高額合算申請書保持, RString 高額合算申請書状態,
-            KogakuGassanShinseishoDataResult 引き継ぎデータ) {
+            KogakuGassanShinseishoDataResult 引き継ぎデータ, HihokenshaNo 被保険者番号) {
         EntityDataState 状態 = 高額合算申請書.toEntity().getState();
         if (修正.equals(高額合算申請書状態)) {
             if (EntityDataState.Deleted.equals(状態)) {
@@ -578,12 +582,22 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         } else if (削除.equals(高額合算申請書状態)) {
             if (EntityDataState.Added.equals(状態)) {
                 高額合算申請書保持.delete高額合算申請書(高額合算申請書);
+                排他解除(被保険者番号);
             } else if (EntityDataState.Unchanged.equals(状態) || EntityDataState.Modified.equals(状態)) {
                 高額合算申請書 = 高額合算申請書.deleted();
                 高額合算申請書保持.add高額合算申請書(高額合算申請書);
             }
         }
         return 高額合算申請書保持;
+    }
+
+    private void 排他解除(HihokenshaNo 被保険者番号) {
+        if (null == 被保険者番号) {
+            return;
+        }
+        RString 前排他キー = 排他情報.concat(被保険者番号.getColumnValue());
+        LockingKey key = new LockingKey(前排他キー);
+        RealInitialLocker.release(key);
     }
 
     /**
@@ -1195,7 +1209,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         }
         div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         pram.setHihokenshaNo(被保険者番号);
-        pram.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(高額合算申請書.get支払方法区分()));
+        if (!RString.isNullOrEmpty(高額合算申請書.get支払方法区分())) {
+            pram.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(高額合算申請書.get支払方法区分()));
+        }
         pram.setKozaId(口座ID);
         pram.setStartYMD(isNullOrEmptyFlexibleDate(高額合算申請書.get支払期間開始年月日()));
         pram.setStartHHMM(RString.isNullOrEmpty(高額合算申請書.get支払期間開始時間()) ? null
