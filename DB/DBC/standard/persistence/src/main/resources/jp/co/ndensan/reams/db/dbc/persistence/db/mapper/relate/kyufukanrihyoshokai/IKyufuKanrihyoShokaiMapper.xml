@@ -196,7 +196,7 @@
                   AND A1."serviceTeikyoYM" = #{サービス提供年月}
                   AND SUBSTRING(C."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> A1."serviceTeikyoYM" 
                   AND CASE 
-                    WHEN C."yukoShuryoYMD" != NULL 
+                    WHEN C."yukoShuryoYMD" IS NOT NULL 
                     THEN SUBSTRING(C."yukoShuryoYMD", 1, 6) <![CDATA[>=]]> A1."serviceTeikyoYM" 
                     END 
                 GROUP BY
@@ -237,7 +237,7 @@
                   AND B1."serviceTeikyoYM" = #{サービス提供年月}
                   AND substring(F."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> B1."serviceTeikyoYM" 
                   AND CASE 
-                    WHEN F."yukoShuryoYMD" != NULL 
+                    WHEN F."yukoShuryoYMD" IS NOT NULL 
                     THEN substring(F."yukoShuryoYMD", 1, 6) <![CDATA[>=]]> B1."serviceTeikyoYM" 
                     END 
                 GROUP BY
