@@ -641,6 +641,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         仮算定通知書情報.set対象者_追加含む_情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
         仮算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
         仮算定通知書情報.set収入情報(通知書共通情報.get収入情報());
+        仮算定通知書情報.setHas更正前(parameter.isHas更正前());
         DbT7065ChohyoSeigyoKyotsuEntity entity = load帳票制御共通(仮算定額変更通知書_帳票分類ID);
         if (entity != null) {
             仮算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(entity));
@@ -966,28 +967,6 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
                 parameter.get賦課の情報_更正後().get被保険者番号().getColumnValue());
         save帳票発行履歴(reportSourceDataCollection, 帳票ID, parameter.get決定通知書_発行日(), 業務固有情報, 識別コードList);
         insertリアル発行履歴(通知書共通情報.get賦課の情報_更正後().get賦課情報(), 決定通知書_帳票分類ID);
-    }
-
-    private List<NokiJoho> get普徴納期情報List(KakushuTsuchishoCommonInfo 通知書共通情報) {
-        if (GennenKanen.現年度 == 通知書共通情報.get年度区分()) {
-            return 通知書共通情報.get普徴納期情報List();
-        }
-        List<NokiJoho> 普徴納期情報List = new ArrayList<>();
-        for (NokiJoho 普徴納期情報 : 通知書共通情報.get普徴納期情報List()) {
-            Decimal 普徴期別金額 = 通知書共通情報.get賦課の情報_更正後().get賦課情報().get普徴期別金額(普徴納期情報.get期月().get期AsInt());
-            if (!(null == 普徴期別金額 || Decimal.ZERO.equals(普徴期別金額))) {
-                普徴納期情報List.add(普徴納期情報);
-            }
-        }
-        return 普徴納期情報List;
-    }
-
-    private List<NokiJoho> get特徴納期情報List(KakushuTsuchishoCommonInfo 通知書共通情報) {
-        if (GennenKanen.現年度 == 通知書共通情報.get年度区分()) {
-            return 通知書共通情報.get特徴収入情報List();
-        }
-
-        return null;
     }
 
     /**

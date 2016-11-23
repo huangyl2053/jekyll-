@@ -415,11 +415,13 @@ public class GemmenGengakuShoHakkoMain {
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
 
         RDate 交付日 = null;
-        if (!div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().getValue().isEmpty()) {
+        if (div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().getValue() != null && 
+                !div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().getValue().toString().isEmpty()) {
             交付日 = new RDate(div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().getValue().toString());
         }
         RDate 発行日 = null;
-        if (!div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue().isEmpty()) {
+        if (div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue() != null && 
+                !div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue().toString().isEmpty()) {
             発行日 = new RDate(div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue().toString());
         }
         RString 文書番号 = getHandler(div).form文書番号(div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoNo().get文書番号());

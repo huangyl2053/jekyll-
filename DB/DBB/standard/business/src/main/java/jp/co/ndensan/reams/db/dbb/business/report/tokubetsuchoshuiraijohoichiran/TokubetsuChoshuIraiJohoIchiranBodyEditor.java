@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokubetsuchoshuiraijohoichira
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tokubetsuchoshuiraijohoichiran.TokubetsuChoshuIraiJohoIchiranSource;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -108,7 +109,7 @@ public class TokubetsuChoshuIraiJohoIchiranBodyEditor implements ITokubetsuChosh
             source.listLower_4 = RString.EMPTY;
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get郵便番号())) {
-            source.listLower_5 = 帳票出力対象データ.get郵便番号();
+            source.listLower_5 = new YubinNo(帳票出力対象データ.get郵便番号()).getEditedYubinNo();
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get住所())) {
             source.listLower_6 = 帳票出力対象データ.get住所();

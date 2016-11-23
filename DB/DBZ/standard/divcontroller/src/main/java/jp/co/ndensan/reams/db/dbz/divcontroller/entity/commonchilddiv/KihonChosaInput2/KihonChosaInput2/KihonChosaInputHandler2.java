@@ -86,9 +86,11 @@ public class KihonChosaInputHandler2 {
         if (!this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
             div.getZenkaiHyojiTeiji().setDisplayNone(true);
         }
-        List<RString> 認定調査特記情報List = get特記事項番号List(申請書管理番号);
-        ArrayList<RString> 認定調査特記情報ArrayList = new ArrayList<>(認定調査特記情報List);
+        List<RString> 認定調査特記事項番号List = get特記事項番号List(申請書管理番号);
+        ArrayList<RString> 認定調査特記情報ArrayList = new ArrayList<>(認定調査特記事項番号List);
         div.getSeikatsuKinou().setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(認定調査特記情報ArrayList));
+        KihonChosaInputFinder finder = KihonChosaInputFinder.createInstance();
+        List<KihonChosaSpecial> 認定調査特記情報List = finder.get認定調査特記情報(申請書管理番号);        
         onLoad第二群生活機能(認定調査基本情報リスト, 認定調査前回結果表示);
     }
 
@@ -101,7 +103,7 @@ public class KihonChosaInputHandler2 {
         }
         return 特記事項番号List;
     }
-
+    
     private void onLoad第二群生活機能(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 移乗Keys = new ArrayList<>();
         List<RString> 前回移乗Keys = new ArrayList<>();

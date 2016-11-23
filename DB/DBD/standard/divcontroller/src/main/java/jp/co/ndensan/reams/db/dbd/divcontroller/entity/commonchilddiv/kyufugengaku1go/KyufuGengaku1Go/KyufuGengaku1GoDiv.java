@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuGengaku1GoDiv extends Panel implements IKyufuGengaku1GoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,9 +28,9 @@ public class KyufuGengaku1GoDiv extends Panel implements IKyufuGengaku1GoDiv {
     @JsonProperty("txtKyufugakuGengakuKikan")
     private TextBoxNum txtKyufugakuGengakuKikan;
     @JsonProperty("txtGengakuTekiyoKikanKaishiYMD")
-    private TextBoxFlexibleDate txtGengakuTekiyoKikanKaishiYMD;
+    private TextBoxDate txtGengakuTekiyoKikanKaishiYMD;
     @JsonProperty("txtGengakuTekiyoKikanShuryoYMD")
-    private TextBoxFlexibleDate txtGengakuTekiyoKikanShuryoYMD;
+    private TextBoxDate txtGengakuTekiyoKikanShuryoYMD;
     @JsonProperty("txtChoshukenShometsuKikan")
     private TextBoxNum txtChoshukenShometsuKikan;
     @JsonProperty("txtNofuzumiKikan")
@@ -111,7 +111,7 @@ public class KyufuGengaku1GoDiv extends Panel implements IKyufuGengaku1GoDiv {
      * @return txtGengakuTekiyoKikanKaishiYMD
      */
     @JsonProperty("txtGengakuTekiyoKikanKaishiYMD")
-    public TextBoxFlexibleDate getTxtGengakuTekiyoKikanKaishiYMD() {
+    public TextBoxDate getTxtGengakuTekiyoKikanKaishiYMD() {
         return txtGengakuTekiyoKikanKaishiYMD;
     }
 
@@ -120,7 +120,7 @@ public class KyufuGengaku1GoDiv extends Panel implements IKyufuGengaku1GoDiv {
      * @param txtGengakuTekiyoKikanKaishiYMD txtGengakuTekiyoKikanKaishiYMD
      */
     @JsonProperty("txtGengakuTekiyoKikanKaishiYMD")
-    public void setTxtGengakuTekiyoKikanKaishiYMD(TextBoxFlexibleDate txtGengakuTekiyoKikanKaishiYMD) {
+    public void setTxtGengakuTekiyoKikanKaishiYMD(TextBoxDate txtGengakuTekiyoKikanKaishiYMD) {
         this.txtGengakuTekiyoKikanKaishiYMD = txtGengakuTekiyoKikanKaishiYMD;
     }
 
@@ -129,7 +129,7 @@ public class KyufuGengaku1GoDiv extends Panel implements IKyufuGengaku1GoDiv {
      * @return txtGengakuTekiyoKikanShuryoYMD
      */
     @JsonProperty("txtGengakuTekiyoKikanShuryoYMD")
-    public TextBoxFlexibleDate getTxtGengakuTekiyoKikanShuryoYMD() {
+    public TextBoxDate getTxtGengakuTekiyoKikanShuryoYMD() {
         return txtGengakuTekiyoKikanShuryoYMD;
     }
 
@@ -138,7 +138,7 @@ public class KyufuGengaku1GoDiv extends Panel implements IKyufuGengaku1GoDiv {
      * @param txtGengakuTekiyoKikanShuryoYMD txtGengakuTekiyoKikanShuryoYMD
      */
     @JsonProperty("txtGengakuTekiyoKikanShuryoYMD")
-    public void setTxtGengakuTekiyoKikanShuryoYMD(TextBoxFlexibleDate txtGengakuTekiyoKikanShuryoYMD) {
+    public void setTxtGengakuTekiyoKikanShuryoYMD(TextBoxDate txtGengakuTekiyoKikanShuryoYMD) {
         this.txtGengakuTekiyoKikanShuryoYMD = txtGengakuTekiyoKikanShuryoYMD;
     }
 
@@ -434,12 +434,12 @@ public class KyufuGengaku1GoDiv extends Panel implements IKyufuGengaku1GoDiv {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtGengakuKetteiYMD() {
+    public TextBoxDate getTxtGengakuKetteiYMD() {
         return this.getGengakuTorokuOrMenjoShinsei().getTxtGengakuKetteiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtGengakuKetteiYMD(TextBoxFlexibleDate txtGengakuKetteiYMD) {
+    public void  setTxtGengakuKetteiYMD(TextBoxDate txtGengakuKetteiYMD) {
         this.getGengakuTorokuOrMenjoShinsei().setTxtGengakuKetteiYMD(txtGengakuKetteiYMD);
     }
 
@@ -474,22 +474,22 @@ public class KyufuGengaku1GoDiv extends Panel implements IKyufuGengaku1GoDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtKonkaiKikanKaishiYMD() {
+    public TextBoxDate getTxtKonkaiKikanKaishiYMD() {
         return this.getGengakuTorokuOrMenjoShinsei().getTxtKonkaiKikanKaishiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtKonkaiKikanKaishiYMD(TextBoxFlexibleDate txtKonkaiKikanKaishiYMD) {
+    public void  setTxtKonkaiKikanKaishiYMD(TextBoxDate txtKonkaiKikanKaishiYMD) {
         this.getGengakuTorokuOrMenjoShinsei().setTxtKonkaiKikanKaishiYMD(txtKonkaiKikanKaishiYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtKonkaiKikanShuryoYMD() {
+    public TextBoxDate getTxtKonkaiKikanShuryoYMD() {
         return this.getGengakuTorokuOrMenjoShinsei().getTxtKonkaiKikanShuryoYMD();
     }
 
     @JsonIgnore
-    public void  setTxtKonkaiKikanShuryoYMD(TextBoxFlexibleDate txtKonkaiKikanShuryoYMD) {
+    public void  setTxtKonkaiKikanShuryoYMD(TextBoxDate txtKonkaiKikanShuryoYMD) {
         this.getGengakuTorokuOrMenjoShinsei().setTxtKonkaiKikanShuryoYMD(txtKonkaiKikanShuryoYMD);
     }
 
@@ -504,22 +504,22 @@ public class KyufuGengaku1GoDiv extends Panel implements IKyufuGengaku1GoDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtMenjoShinseiUketsukeYMD() {
+    public TextBoxDate getTxtMenjoShinseiUketsukeYMD() {
         return this.getGengakuTorokuOrMenjoShinsei().getTxtMenjoShinseiUketsukeYMD();
     }
 
     @JsonIgnore
-    public void  setTxtMenjoShinseiUketsukeYMD(TextBoxFlexibleDate txtMenjoShinseiUketsukeYMD) {
+    public void  setTxtMenjoShinseiUketsukeYMD(TextBoxDate txtMenjoShinseiUketsukeYMD) {
         this.getGengakuTorokuOrMenjoShinsei().setTxtMenjoShinseiUketsukeYMD(txtMenjoShinseiUketsukeYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtMenjoShinseiYMD() {
+    public TextBoxDate getTxtMenjoShinseiYMD() {
         return this.getGengakuTorokuOrMenjoShinsei().getTxtMenjoShinseiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtMenjoShinseiYMD(TextBoxFlexibleDate txtMenjoShinseiYMD) {
+    public void  setTxtMenjoShinseiYMD(TextBoxDate txtMenjoShinseiYMD) {
         this.getGengakuTorokuOrMenjoShinsei().setTxtMenjoShinseiYMD(txtMenjoShinseiYMD);
     }
 
@@ -534,12 +534,12 @@ public class KyufuGengaku1GoDiv extends Panel implements IKyufuGengaku1GoDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtMenjoNaiyoKetteiYMD() {
+    public TextBoxDate getTxtMenjoNaiyoKetteiYMD() {
         return this.getGengakuTorokuOrMenjoShinsei().getTxtMenjoNaiyoKetteiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtMenjoNaiyoKetteiYMD(TextBoxFlexibleDate txtMenjoNaiyoKetteiYMD) {
+    public void  setTxtMenjoNaiyoKetteiYMD(TextBoxDate txtMenjoNaiyoKetteiYMD) {
         this.getGengakuTorokuOrMenjoShinsei().setTxtMenjoNaiyoKetteiYMD(txtMenjoNaiyoKetteiYMD);
     }
 

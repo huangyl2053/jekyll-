@@ -173,11 +173,11 @@
             DbT1006Kyo."tekiyoShuryoYMD"  <![CDATA[<=]]> #{date_TO}
         </if>
         </where>
-         <if test = "isDate_TOFlag">
+         <if test = "order_ID != null and order_ID.length() > 0">
              ${order_ID},
              DbT1006Kyo."hihokenshaNo"
          </if>
-         <if test = "isDate_TOFlag">
+         <if test = "order_ID == null or 0 > order_ID.length()">
             ORDER BY
              DbT1006Kyo."hihokenshaNo"
          </if>

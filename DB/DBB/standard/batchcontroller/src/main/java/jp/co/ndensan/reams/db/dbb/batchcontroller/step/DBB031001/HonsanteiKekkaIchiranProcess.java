@@ -60,7 +60,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -92,13 +91,14 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKeisangojohoEntity> {
 
-    private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
-            + ".honnsanteifuka.IHonnSanteiFukaMapper.select本算定計算後賦課情報");
+    private static final RString SELECTPATH_HAS = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
+            + ".honnsanteifuka.IHonnSanteiFukaMapper.select本算定計算後賦課情報has徴収方法");
+    private static final RString SELECTPATH_HASNOT = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
+            + ".honnsanteifuka.IHonnSanteiFukaMapper.select本算定計算後賦課情報hasnot徴収方法");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200009");
     private static final RString 本算定_EUCファイル名 = new RString("HonsanteiKekkaIcihiranData.csv");
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final ReportId 帳票ID = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
     private static final RString 区分_管内 = new RString("1");
     private static final RString 区分_管外 = new RString("2");
     private static final RString HYPHEN = new RString("-");
@@ -176,7 +176,7 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
         if (RString.isNullOrEmpty(processParameter.get出力帳票().get出力順ID())) {
             return;
         } else {
-            出力順情報 = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票ID,
+            出力順情報 = finder.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId(),
                     Long.parseLong(processParameter.get出力帳票().get出力順ID().toString()));
             出力順 = MyBatisOrderByClauseCreator.create(HonsanteiKekkaIcihiranOutPutOrder.class, 出力順情報);
         }
@@ -197,7 +197,10 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECTPATH, myBatisParameter);
+        if (processParameter.isContains徴収方法()) {
+            return new BatchDbReader(SELECTPATH_HAS, myBatisParameter);
+        }
+        return new BatchDbReader(SELECTPATH_HASNOT, myBatisParameter);
     }
 
     @Override

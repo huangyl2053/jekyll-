@@ -17,23 +17,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteishinseibiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtNinteishinseibi")
-    private TextBoxDateRange txtNinteishinseibi;
-    @JsonProperty("txtiraibi")
-    private TextBoxDateRange txtiraibi;
-    @JsonProperty("txtMaxKensu")
-    private TextBoxNum txtMaxKensu;
-    @JsonProperty("btnKensaku")
-    private Button btnKensaku;
-    @JsonProperty("btnKensakuClear")
-    private Button btnKensakuClear;
+    @JsonProperty("jyoken")
+    private jyokenDiv jyoken;
     @JsonProperty("NinteiIchiran")
     private NinteiIchiranDiv NinteiIchiran;
     @JsonProperty("ccdKanryoMessage")
@@ -46,93 +38,21 @@ public class NinteishinseibiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtNinteishinseibi
-     * @return txtNinteishinseibi
+     * getjyoken
+     * @return jyoken
      */
-    @JsonProperty("txtNinteishinseibi")
-    public TextBoxDateRange getTxtNinteishinseibi() {
-        return txtNinteishinseibi;
+    @JsonProperty("jyoken")
+    public jyokenDiv getJyoken() {
+        return jyoken;
     }
 
     /*
-     * settxtNinteishinseibi
-     * @param txtNinteishinseibi txtNinteishinseibi
+     * setjyoken
+     * @param jyoken jyoken
      */
-    @JsonProperty("txtNinteishinseibi")
-    public void setTxtNinteishinseibi(TextBoxDateRange txtNinteishinseibi) {
-        this.txtNinteishinseibi = txtNinteishinseibi;
-    }
-
-    /*
-     * gettxtiraibi
-     * @return txtiraibi
-     */
-    @JsonProperty("txtiraibi")
-    public TextBoxDateRange getTxtiraibi() {
-        return txtiraibi;
-    }
-
-    /*
-     * settxtiraibi
-     * @param txtiraibi txtiraibi
-     */
-    @JsonProperty("txtiraibi")
-    public void setTxtiraibi(TextBoxDateRange txtiraibi) {
-        this.txtiraibi = txtiraibi;
-    }
-
-    /*
-     * gettxtMaxKensu
-     * @return txtMaxKensu
-     */
-    @JsonProperty("txtMaxKensu")
-    public TextBoxNum getTxtMaxKensu() {
-        return txtMaxKensu;
-    }
-
-    /*
-     * settxtMaxKensu
-     * @param txtMaxKensu txtMaxKensu
-     */
-    @JsonProperty("txtMaxKensu")
-    public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
-        this.txtMaxKensu = txtMaxKensu;
-    }
-
-    /*
-     * getbtnKensaku
-     * @return btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public Button getBtnKensaku() {
-        return btnKensaku;
-    }
-
-    /*
-     * setbtnKensaku
-     * @param btnKensaku btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public void setBtnKensaku(Button btnKensaku) {
-        this.btnKensaku = btnKensaku;
-    }
-
-    /*
-     * getbtnKensakuClear
-     * @return btnKensakuClear
-     */
-    @JsonProperty("btnKensakuClear")
-    public Button getBtnKensakuClear() {
-        return btnKensakuClear;
-    }
-
-    /*
-     * setbtnKensakuClear
-     * @param btnKensakuClear btnKensakuClear
-     */
-    @JsonProperty("btnKensakuClear")
-    public void setBtnKensakuClear(Button btnKensakuClear) {
-        this.btnKensakuClear = btnKensakuClear;
+    @JsonProperty("jyoken")
+    public void setJyoken(jyokenDiv jyoken) {
+        this.jyoken = jyoken;
     }
 
     /*
@@ -165,6 +85,46 @@ public class NinteishinseibiDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public TextBoxDateRange getTxtNinteishinseibi() {
+        return this.getJyoken().getTxtNinteishinseibi();
+    }
+
+    @JsonIgnore
+    public void  setTxtNinteishinseibi(TextBoxDateRange txtNinteishinseibi) {
+        this.getJyoken().setTxtNinteishinseibi(txtNinteishinseibi);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtiraibi() {
+        return this.getJyoken().getTxtiraibi();
+    }
+
+    @JsonIgnore
+    public void  setTxtiraibi(TextBoxDateRange txtiraibi) {
+        this.getJyoken().setTxtiraibi(txtiraibi);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaxKensu() {
+        return this.getJyoken().getTxtMaxKensu();
+    }
+
+    @JsonIgnore
+    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
+        this.getJyoken().setTxtMaxKensu(txtMaxKensu);
+    }
+
+    @JsonIgnore
+    public Button getBtnKensakuClear() {
+        return this.getJyoken().getBtnKensakuClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnKensakuClear(Button btnKensakuClear) {
+        this.getJyoken().setBtnKensakuClear(btnKensakuClear);
+    }
+
     @JsonIgnore
     public TextBox getTxtNinzu() {
         return this.getNinteiIchiran().getTxtNinzu();

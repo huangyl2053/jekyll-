@@ -18,11 +18,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBHozonJoho {
 
-    private DbJohoViewState DB情報;
+    private DbJohoViewState db情報;
     private RString 修正前支給区分;
 
-    public DBHozonJoho(DbJohoViewState DB情報, RString 修正前支給区分) {
-        this.DB情報 = DB情報;
+    /**
+     * インスタンスを生成します。
+     *
+     * @param db情報 db情報
+     * @param 修正前支給区分 修正前支給区分
+     */
+    public DBHozonJoho(DbJohoViewState db情報, RString 修正前支給区分) {
+        this.db情報 = db情報;
         this.修正前支給区分 = 修正前支給区分;
     }
 }

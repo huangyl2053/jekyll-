@@ -46,13 +46,13 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListHandler {
         HomonKaigoRiyoshaFutangakuGengakuNinteishaList homokaigoriyosha
                 = new HomonKaigoRiyoshaFutangakuGengakuNinteishaList();
         div.getCcdChohyoShuturyokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200003.getReportId());
-        div.getTxtTaishoYM().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
+        div.getTxtTaishoYM().setValue(RDate.getNowDate());
         Range<FlexibleDate> range = homokaigoriyosha.estimate対象期間(
                 new FlexibleYear(div.getTxtTaishoYM().getValue().toString().substring(NO_0, NO_4)));
         div.getTxtTaishoKikanKaishi().setValue(range.getFrom());
         div.getTxtTaishoKikanShuryo().setValue(range.getTo());
-        div.getTxtShotokuNendo().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
-        div.getTxtKijunYMD().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
+        div.getTxtShotokuNendo().setValue(RDate.getNowDate());
+        div.getTxtKijunYMD().setValue(RDate.getNowDate());
         if (div.getRadTaishoList().getSelectedKey().equals(該当者リスト)) {
             set表示と非表示();
         }
@@ -84,7 +84,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListHandler {
             div.getLblTaishoKikan().setDisplayNone(true);
             div.getTxtKijunYMD().setDisplayNone(false);
             div.getTxtKazeiHanteiToKijunDate().setDisplayNone(true);
-            div.getTxtKijunYMD().setValue(FlexibleDate.getNowDate());
+            div.getTxtKijunYMD().setValue(RDate.getNowDate());
 
         } else {
             div.getTxtTaishoYM().setDisplayNone(false);

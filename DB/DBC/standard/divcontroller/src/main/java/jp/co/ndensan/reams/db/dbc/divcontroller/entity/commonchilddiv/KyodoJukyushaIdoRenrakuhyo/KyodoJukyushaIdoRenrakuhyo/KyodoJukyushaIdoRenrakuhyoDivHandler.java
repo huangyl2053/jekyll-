@@ -768,22 +768,6 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             div.getChkShokanSofuAdd().setDisplayNone(false);
             div.getChkKogakuSofuAdd().setDisabled(false);
             div.getChkKogakuSofuAdd().setDisplayNone(false);
-
-            if (entity.get基本情報Entity() != null) {
-                List<KeyValueDataSource> add_基本 = div.getChkKihonSofuAdd().getDataSource();
-                div.getChkKihonSofuAdd().setSelectedItems(add_基本);
-            }
-            if (entity.get償還情報Entity() != null) {
-                List<KeyValueDataSource> add_償還 = div.getChkShokanSofuAdd().getDataSource();
-                div.getChkShokanSofuAdd().setSelectedItems(add_償還);
-            }
-            if (entity.get高額情報Entity() != null) {
-                List<KeyValueDataSource> add_高額 = div.getChkKogakuSofuAdd().getDataSource();
-                div.getChkKogakuSofuAdd().setSelectedItems(add_高額);
-            }
-            div.getChkKihonSofuDelete().setSelectedItems(空);
-            div.getChkShokanSofuDelete().setSelectedItems(空);
-            div.getChkKogakuSofuDelete().setSelectedItems(空);
             div.getChkKihonSofuDelete().setDisplayNone(true);
             div.getChkShokanSofuDelete().setDisplayNone(true);
             div.getChkKogakuSofuDelete().setDisplayNone(true);
@@ -794,7 +778,6 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             div.getChkShokanSofuDelete().setDisplayNone(false);
             div.getChkKogakuSofuDelete().setDisabled(false);
             div.getChkKogakuSofuDelete().setDisplayNone(false);
-
             if (entity.get基本情報Entity() != null) {
                 List<KeyValueDataSource> delete_基本 = div.getChkKihonSofuDelete().getDataSource();
                 div.getChkKihonSofuDelete().setSelectedItems(delete_基本);
@@ -807,10 +790,6 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
                 List<KeyValueDataSource> delete_高額 = div.getChkKogakuSofuDelete().getDataSource();
                 div.getChkKogakuSofuDelete().setSelectedItems(delete_高額);
             }
-
-            div.getChkKihonSofuAdd().setSelectedItems(空);
-            div.getChkShokanSofuAdd().setSelectedItems(空);
-            div.getChkKogakuSofuAdd().setSelectedItems(空);
             div.getChkKihonSofuAdd().setDisplayNone(true);
             div.getChkShokanSofuAdd().setDisplayNone(true);
             div.getChkKogakuSofuAdd().setDisplayNone(true);

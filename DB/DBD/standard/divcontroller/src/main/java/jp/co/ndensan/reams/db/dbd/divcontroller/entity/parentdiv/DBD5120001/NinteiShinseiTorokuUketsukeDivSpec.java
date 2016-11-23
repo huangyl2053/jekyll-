@@ -68,7 +68,7 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
     },
     要介護度が未入力チェック {
         /**
-         * 申請日が未入力チェックです。
+         * 要介護度が未入力チェックです。
          *
          * @param div 要介護認定申請受付Div
          * @return true:要介護度が非空です、false:要介護度が空です。
@@ -82,7 +82,7 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
     },
     喪失日が未入力チェック {
         /**
-         * 申請日が未入力チェックです。
+         * 喪失日が未入力チェックです。
          *
          * @param div 要介護認定申請受付Div
          * @return true:喪失日が非空です、false:喪失日が空です。
@@ -105,9 +105,8 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
 
             JukyushaDaichoManager manager = new JukyushaDaichoManager();
-            List<JukyushaDaicho> resultList = manager.get受給者台帳(
-                    new HihokenshaNo(div.getHdnHihokenshaNo()),
-                    new ShikibetsuCode(div.getHdnShikibetsuCode()));
+            List<JukyushaDaicho> resultList = manager.get受給者台帳情報(
+                    new HihokenshaNo(div.getHdnHihokenshaNo()));
 
             return resultList == null || resultList.isEmpty();
         }
@@ -167,14 +166,14 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
          * 医療保険情報なしチェックです。
          *
          * @param div 要介護認定申請受付Div
-         * @return true:前回有効終了日＜今回有効開始日です、false:前回有効終了日≧今回有効開始日です。
+         * @return true:2号被保険者でないまたは2号被保険者かつ医療保険情報あり、false:2号被保険者かつ医療保険情報なし。
          */
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
 
-            return HihokenshaKubunCode.第２号被保険者.getコード().
+            return !(HihokenshaKubunCode.第２号被保険者.getコード().
                     equals(div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey())
-                    && !IconName.Complete.equals(div.getBtnIryohokenGuide().getIconNameEnum());
+                    && !IconName.Complete.equals(div.getBtnIryohokenGuide().getIconNameEnum()));
         }
     },
     特定疾病なしチェック {
@@ -182,14 +181,14 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
          * 有効認定期間の重複チェックです。
          *
          * @param div 要介護認定申請受付Div
-         * @return true:前回有効終了日＜今回有効開始日です、false:前回有効終了日≧今回有効開始日です。
+         * @return true:2号被保険者でないまたは2号被保険者かつ特定疾病あり、false:2号被保険者かつ特定疾病がない。
          */
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
 
-            return HihokenshaKubunCode.第２号被保険者.getコード().
+            return !(HihokenshaKubunCode.第２号被保険者.getコード().
                     equals(div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey())
-                    && div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getIsBlankLine();
+                    && div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getIsBlankLine());
         }
     },
     _６０日以前の申請チェック {
@@ -215,27 +214,27 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
          * 変更元が_要支援チェックです。
          *
          * @param div 要介護認定申請受付Div
-         * @return true:今回申請日が前回有効期限終了日の61日以前でない、false:今回申請日が前回有効期限終了日の61日以前です。
+         * @return true:前回認定（変更元）データの要介護状態区分が「要支援」でない、false:前回認定（変更元）データの要介護状態区分が「要支援」である。
          */
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
 
-            return YokaigoJotaiKubun.要支援1.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue())
+            return !(YokaigoJotaiKubun.要支援1.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue())
                     || YokaigoJotaiKubun.要支援2.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue())
-                    || YokaigoJotaiKubun.要支援_経過的要介護.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
+                    || YokaigoJotaiKubun.要支援_経過的要介護.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue()));
         }
     },
     変更元が_自立チェック {
         /**
-         * 変更元が_要支援チェックです。
+         * 変更元が_自立チェックです。
          *
          * @param div 要介護認定申請受付Div
-         * @return true:今回申請日が前回有効期限終了日の61日以前でない、false:今回申請日が前回有効期限終了日の61日以前です。
+         * @return true:前回認定（変更元）データの要介護状態区分が「自立」でない、false:前回認定（変更元）データの要介護状態区分が「自立」である。
          */
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
 
-            return YokaigoJotaiKubun.非該当.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue());
+            return !(YokaigoJotaiKubun.非該当.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue()));
         }
     },
     職権取消_記載_修正_変更申請中のデータありチェック {
@@ -243,7 +242,7 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
          * 職権取消_記載_修正_変更申請中のデータありチェックです。
          *
          * @param div 要介護認定申請受付Div
-         * @return true:今回申請日が前回有効期限終了日の61日以前でない、false:今回申請日が前回有効期限終了日の61日以前です。
+         * @return true:履歴番号＝「0000」でないまたは申請事由「要介護度変更申請」かつ「指定サービス変更申請」でない、false:履歴番号＝「0000」かつ、申請事由「要介護度変更申請」または「指定サービス変更申請」である。
          */
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
@@ -254,7 +253,7 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
                     new ShikibetsuCode(div.getHdnShikibetsuCode()));
 
             if (resultList != null && !resultList.isEmpty()) {
-
+                
             }
             return true;
 
@@ -339,6 +338,58 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
             return new RString("1").equals(div.getCcdNinteiInput().getNaiyo().get認定区分())
                     && !YokaigoJotaiKubun.非該当.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue())
                     && !div.getCcdShinseiSonotaJohoInput().get異動事由().isEmpty();
+        }
+    },
+    前回認定時_サービス指定なし {
+        /**
+         * 前回認定時_サービス指定なしチェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:前回認定時にサービス指定あり、false:前回認定時にサービス指定なしです。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return false;
+        }
+    },
+    特殊処理_対象ではない {
+        /**
+         * 特殊処理_対象ではないチェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:直近フラグが立っていないまたはレコードが有効である、false:直近フラグが立っているかつレコードが有効ではない。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return false;
+        }
+    },
+    申請_対象レコードではない１ {
+        /**
+         * 申請_対象レコードではない１チェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:履歴番号が「0000」でないまたは受給申請事由が「5」である、false:履歴番号が「0000」かつ受給申請事由が「5」以外である。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return false;
+        }
+    },
+    申請_対象レコードではない２ {
+        /**
+         * 申請_対象レコードではない２チェックです。
+         *
+         * @param div 要介護認定申請受付Div
+         * @return true:履歴番号が「0000」でないまたは受給申請事由が「5」以外である、false:履歴番号が「0000」かつ受給申請事由が「5」である。
+         */
+        @Override
+        public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
+
+            return false;
         }
     },
 }

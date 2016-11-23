@@ -143,13 +143,36 @@
         T4001."shichosonCode" AS t4001市町村コード,
         T4001."rirekiNo" AS 履歴番号,
         T4001."edaban" AS 枝番,
-        T4001."jukyuShinseiJiyu" AS 受給申請事由
+        T4001."jukyuShinseiJiyu" AS 受給申請事由,
+        T4101."shichosonRenrakuJiko" AS 市町村連絡事項,
+        T4001."yoshienshaNinteiShinseiFlag" AS 要支援者認定申請区分
         FROM
-        rgdb."DbV4001JukyushaDaicho" AS V4001
+        (SELECT
+        *
+        FROM
+        rgdb."DbV4001JukyushaDaicho" AS V4001_1
+        WHERE
+        (#{表示パターン }='0'
+        AND V4001_1."hihokenshaNo" = #{被保険者番号}
+        AND V4001_1."shikibetsuCode" = #{識別コード})) AS V4001
         INNER JOIN
-        rgdb."DbT1001HihokenshaDaicho" AS T1001
+        (SELECT
+        *
+        FROM
+        rgdb."DbT1001HihokenshaDaicho" AS T1001_1
+        WHERE
+        T1001_1."logicalDeletedFlag" = FALSE
+        AND
+        (T1001_1."idoYMD",T1001_1."edaNo") =
+        (select
+        max("idoYMD"),max("edaNo")
+        FROM
+        rgdb."DbT1001HihokenshaDaicho" AS T1001_2
+        WHERE
+        (#{表示パターン }='0'
+        AND T1001_2."hihokenshaNo" = #{被保険者番号}
+        AND T1001_2."shikibetsuCode" = #{識別コード}))) AS T1001
         ON V4001."shichosonCode" = T1001."shichosonCode"
-        AND T1001."logicalDeletedFlag"=false
         LEFT JOIN rgdb."DbT4001JukyushaDaicho" T4001
         ON V4001."shichosonCode" = T4001."shichosonCode"
         AND V4001."hihokenshaNo" = T4001."hihokenshaNo"
@@ -266,13 +289,36 @@
         T4001."shichosonCode" AS t4001市町村コード,
         T4001."rirekiNo" AS 履歴番号,
         T4001."edaban" AS 枝番,
-        T4001."jukyuShinseiJiyu" AS 受給申請事由
+        T4001."jukyuShinseiJiyu" AS 受給申請事由,
+        T4101."shichosonRenrakuJiko" AS 市町村連絡事項,
+        T4001."yoshienshaNinteiShinseiFlag" AS 要支援者認定申請区分
         FROM
-        rgdb."DbT4001JukyushaDaicho" AS T4001
+        (SELECT
+        *
+        FROM
+        rgdb."DbT4001JukyushaDaicho" AS T4001_1
+        WHERE
+        T4001_1."hihokenshaNo" = #{被保険者番号}
+        AND T4001_1."shikibetsuCode" = #{識別コード}
+        AND T4001_1."shinseishoKanriNo" = #{申請書管理番号}
+        AND T4001_1."rirekiNo" = '0000'
+        AND T4001_1."logicalDeletedFlag" = false) AS T4001
         INNER JOIN
-        rgdb."DbT1001HihokenshaDaicho" AS T1001
+        (SELECT
+        *
+        FROM
+        rgdb."DbT1001HihokenshaDaicho" AS T1001_1
+        WHERE
+        T1001_1."logicalDeletedFlag" = FALSE
+        AND
+        (T1001_1."idoYMD",T1001_1."edaNo") =
+        (select
+        max("idoYMD"),max("edaNo")
+        FROM
+        rgdb."DbT1001HihokenshaDaicho" AS T1001_2
+        WHERE
+        T1001_2."hihokenshaNo" = #{被保険者番号})) AS T1001
         ON T4001."shichosonCode" = T1001."shichosonCode"
-        AND T1001."logicalDeletedFlag"=false
         LEFT JOIN rgdb."DbT4101NinteiShinseiJoho" T4101
         ON T4001."shinseishoKanriNo" = T4101."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT4120ShinseitodokedeJoho" T4120

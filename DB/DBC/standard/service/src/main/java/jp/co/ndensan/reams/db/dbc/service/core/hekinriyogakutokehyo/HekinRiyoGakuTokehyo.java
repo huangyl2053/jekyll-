@@ -72,6 +72,7 @@ public class HekinRiyoGakuTokehyo {
     private static final RString 所得段階_号 = new RString("２号");
     private static final RString 所得段階_合計 = new RString("合計");
     private static final RString 総合計_ページ = new RString("36");
+    private Decimal 費用総額59 = Decimal.ZERO;
 
     /**
      * コンストラクタです。
@@ -98,33 +99,33 @@ public class HekinRiyoGakuTokehyo {
 
         IHekinRiyoGakuTokehyoMapper mapper = mapperProvider.create(IHekinRiyoGakuTokehyoMapper.class);
         List<KyufujissekiTempTblEntity> entityList = mapper.get給付実績データ取得処理();
-        List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList = new ArrayList<>();
+        List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList;
         if (!entityList.isEmpty()) {
             shukeinaiyouEntityList = createntitylist();
             サービス分類 = entityList.get(0).getServiceBunrui();
             被保険者番号 = entityList.get(0).getHiHokenshaNo();
             サービス提供年月 = entityList.get(0).getServiceTeikyoYM();
             要介護状態区分コード = entityList.get(0).getYoKaigoJotaiKubunCode();
-        }
-        int 人数 = 1;
-        for (int i = 0; i < entityList.size(); i++) {
-            KyufujissekiTempTblEntity レコード = entityList.get(i);
-            if (被保険者番号.equals(レコード.getHiHokenshaNo())
-                    && サービス提供年月.toString().equals(レコード.getServiceTeikyoYM().toString())
-                    && 要介護状態区分コード.equals(レコード.getYoKaigoJotaiKubunCode()) && サービス分類.equals(レコード.getServiceBunrui())) {
-                被保険者番号 = レコード.getHiHokenshaNo();
-                サービス提供年月 = レコード.getServiceTeikyoYM();
-                要介護状態区分コード = レコード.getYoKaigoJotaiKubunCode();
-                サービス分類 = レコード.getServiceBunrui();
-                人数++;
-            } else {
-                人数 = 1;
-            }
-            edit対象レコード(shukeinaiyouEntityList, レコード, mapper, 人数);
-            if (!サービス分類.equals(entityList.get(i).getServiceBunrui())) {
-                updateDB出力出力用一時TBL(shukeinaiyouEntityList, mapper);
-                shukeinaiyouEntityList = createntitylist();
-                サービス分類 = entityList.get(i).getServiceBunrui();
+            int 人数 = 1;
+            for (int i = 0; i < entityList.size(); i++) {
+                KyufujissekiTempTblEntity レコード = entityList.get(i);
+                if (被保険者番号.equals(レコード.getHiHokenshaNo())
+                        && サービス提供年月.toString().equals(レコード.getServiceTeikyoYM().toString())
+                        && 要介護状態区分コード.equals(レコード.getYoKaigoJotaiKubunCode()) && サービス分類.equals(レコード.getServiceBunrui())) {
+                    被保険者番号 = レコード.getHiHokenshaNo();
+                    サービス提供年月 = レコード.getServiceTeikyoYM();
+                    要介護状態区分コード = レコード.getYoKaigoJotaiKubunCode();
+                    サービス分類 = レコード.getServiceBunrui();
+                    人数++;
+                } else {
+                    人数 = 1;
+                }
+                edit対象レコード(shukeinaiyouEntityList, レコード, mapper, 人数);
+                if (!サービス分類.equals(entityList.get(i).getServiceBunrui())) {
+                    updateDB出力出力用一時TBL(shukeinaiyouEntityList, mapper);
+                    shukeinaiyouEntityList = createntitylist();
+                    サービス分類 = entityList.get(i).getServiceBunrui();
+                }
             }
         }
     }
@@ -232,7 +233,10 @@ public class HekinRiyoGakuTokehyo {
         } else if (サービス種類コード59.equals(サービス種類コード)) {
             if (被保険者番号.equals(レコード.getHiHokenshaNo()) && サービス提供年月.equals(レコード.getServiceTeikyoYM())
                     && 要介護状態区分コード.equals(レコード.getYoKaigoJotaiKubunCode())) {
-                費用金額 = new Decimal(レコード.getHiyosogaku().toString());
+                費用総額59 = 費用総額59.add(new Decimal(レコード.getHiyosogaku().toString()));
+            } else {
+                費用金額 = 費用総額59;
+                費用総額59 = Decimal.ZERO;
             }
         } else {
             if (!RString.isNullOrEmpty(保険単位数) && !RString.isNullOrEmpty(保険単位単価数) && !RString.isNullOrEmpty(保険出来高点数)) {
@@ -252,7 +256,8 @@ public class HekinRiyoGakuTokehyo {
     ) {
         for (List<ShukeinaiyouEntity> list : shukeinaiyouEntityList) {
             for (ShukeinaiyouEntity shukeinaiyouEntity : list) {
-                if (所得段階.equals(shukeinaiyouEntity.get所得段階()) && 要介護状態区分コード.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
+                if (所得段階.equals(shukeinaiyouEntity.get所得段階())
+                        && !RString.isNullOrEmpty(要介護状態区分コード) && 要介護状態区分コード.equals(shukeinaiyouEntity.get要介護状態区分コード())) {
                     shukeinaiyouEntity.setページNo(レコード.getServiceBunrui());
                     if (人数 <= 2) {
                         shukeinaiyouEntity.set人数(shukeinaiyouEntity.get人数() + 1);

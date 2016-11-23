@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ue.uex.definition.core.NenkinCode;
@@ -363,7 +364,8 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
 
     private FutyoKarisanteiKekkaIcihiranDataCSVEntity getCsvEntity(FuchoKariKeisanGoFukaEntity 普徴仮算定計算後賦課Entity, int 連番) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(普徴仮算定計算後賦課Entity.get宛名の情報());
-        ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, 帳票分類ID);
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        ChohyoSeigyoKyotsu 帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課, 帳票分類ID);
         EditedKojin 編集後個人 = new EditedKojin(kojin, 帳票制御共通, null);
         FutyoKarisanteiKekkaIcihiranDataCSVEntity csvEntity = new FutyoKarisanteiKekkaIcihiranDataCSVEntity();
         csvEntity.set作成年月日(dateFormat32(parameter.getバッチ起動日時().getDate()));

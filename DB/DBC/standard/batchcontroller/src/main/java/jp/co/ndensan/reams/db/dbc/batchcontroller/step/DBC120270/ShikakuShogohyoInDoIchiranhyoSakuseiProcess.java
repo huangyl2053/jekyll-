@@ -328,13 +328,13 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
             csvEntity.set保険者名(entity.get資格照合表一時().getHokenshaName());
             csvEntity.set保険者番号(entity.get資格照合表一時().getHokenshaNo().getColumnValue());
             csvEntity.set居宅サービス計画作成区分コード(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue());
-            if (entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue() != null) {
+            if (RString.isNullOrEmpty(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue())) {
                 csvEntity.set居宅サービス計画作成区分(JukyushaIF_KeikakuSakuseiKubunCode.
                         toValue(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue()).get名称());
             }
             csvEntity.set支援事業者番号(entity.get資格照合表一時().getShienJigyoshoNo().getColumnValue());
             csvEntity.set旧措置入所者特例コード(entity.get資格照合表一時().getKyusochiTokureiCode());
-            if (entity.get資格照合表一時().getKyusochiTokureiCode() != null) {
+            if (RString.isNullOrEmpty(entity.get資格照合表一時().getKyusochiTokureiCode())) {
                 csvEntity.set旧措置入所者特例有無(KyuSochiNyushoshaTokureiCode.
                         toValue(entity.get資格照合表一時().getKyusochiTokureiCode()).get名称());
             }
@@ -343,7 +343,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
             }
             csvEntity.set要介護区分コード(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
             if (entity.get資格照合表一時().getServiceTeikyoYM() != null
-                    && entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue() != null) {
+                    && RString.isNullOrEmpty(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue())) {
                 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(entity.get資格照合表一時().getServiceTeikyoYM(),
                         entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
                 csvEntity.set要介護度(要介護状態区分.getName());
@@ -353,7 +353,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
             }
             csvEntity.set認定有効期間_終了(パターン4(entity.get資格照合表一時().getNinteiYukoKikanShuryoYMD()));
             csvEntity.set認定有効期間_開始(パターン4(entity.get資格照合表一時().getNinteiYukoKikanKaishiYMD()));
-            if (entity.get資格照合表一時().getShubetsu() != null) {
+            if (RString.isNullOrEmpty(entity.get資格照合表一時().getShubetsu())) {
                 csvEntity.set警告種別(ShikakuShogohyoKeikokuShubetsu.toValue(entity.get資格照合表一時().getShubetsu()).get名称());
             }
             csvEntity.set限度額適用期間_終了(パターン4(entity.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD()));
@@ -402,22 +402,24 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
 
             csvEntity1.set居宅サービス計画作成区分コード(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue());
 
-            if (entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue() != null) {
+            if (RString.isNullOrEmpty(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue())) {
                 csvEntity1.set居宅サービス計画作成区分(JukyushaIF_KeikakuSakuseiKubunCode.
                         toValue(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue()).get名称());
             }
             csvEntity1.set支援事業者番号(entity.get資格照合表一時().getShienJigyoshoNo().getColumnValue());
             csvEntity1.set旧措置入所者特例コード(entity.get資格照合表一時().getKyusochiTokureiCode());
-            if (entity.get資格照合表一時().getKyusochiTokureiCode() != null) {
+            if (RString.isNullOrEmpty(entity.get資格照合表一時().getKyusochiTokureiCode())) {
                 csvEntity1.set旧措置入所者特例有無(KyuSochiNyushoshaTokureiCode.
                         toValue(entity.get資格照合表一時().getKyusochiTokureiCode()).get名称());
             }
             if (entity.get資格照合表一時().getTokuteiNyushoshaKaigoServiceGaku() != null) {
                 csvEntity1.set特定入所者介護サービス費等(decimal_to_string(entity.get資格照合表一時().getTokuteiNyushoshaKaigoServiceGaku()));
             }
-            csvEntity1.set要介護区分コード(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
+            if (entity.get資格照合表一時().getYokaigoKubunCode() != null) {
+                csvEntity1.set要介護区分コード(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
+            }
             if (entity.get資格照合表一時().getServiceTeikyoYM() != null
-                    && entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue() != null) {
+                    && RString.isNullOrEmpty(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue())) {
                 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(entity.get資格照合表一時().getServiceTeikyoYM(),
                         entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
                 csvEntity1.set要介護度(要介護状態区分.getName());
@@ -427,7 +429,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
             }
             csvEntity1.set認定有効期間_終了(パターン4(entity.get資格照合表一時().getNinteiYukoKikanShuryoYMD()));
             csvEntity1.set認定有効期間_開始(パターン4(entity.get資格照合表一時().getNinteiYukoKikanKaishiYMD()));
-            if (entity.get資格照合表一時().getShubetsu() != null) {
+            if (RString.isNullOrEmpty(entity.get資格照合表一時().getShubetsu())) {
                 csvEntity1.set警告種別(ShikakuShogohyoKeikokuShubetsu.toValue(entity.get資格照合表一時().getShubetsu()).get名称());
             }
             csvEntity1.set限度額適用期間_終了(パターン4(entity.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD()));

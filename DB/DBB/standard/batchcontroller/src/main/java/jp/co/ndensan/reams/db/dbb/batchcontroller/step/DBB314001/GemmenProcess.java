@@ -299,7 +299,7 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
                 減免Entity.setShinseiJiyu(processParameter.getShinseiJiyu());
                 減免Entity.setGemmenJiyuCode(processParameter.getGemmenJiyuCode());
             }
-            減免Entity.setGemmenJiyu(RString.EMPTY);
+            減免Entity.setGemmenJiyu(processParameter.getGemmenJiyuCode().getColumnValue());
             減免Entity.setGemmenTorikeshiJiyuCode(null);
             減免Entity.setGemmenTorikeshiJiyu(RString.EMPTY);
             減免Entity.setShinseiGemmenGaku(賦課の情報一時処理後Data.getGemmenGaku());

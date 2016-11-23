@@ -48,4 +48,5 @@ public class KariSanteiTsuchiShoKyotsu {
     private NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正後;
     private ShunyuJoho 収入情報;
     private ChohyoSeigyoKyotsu 帳票制御共通;
+    private boolean has更正前;
 }

@@ -231,7 +231,7 @@ public class ShokanbaraiSashitomeTaishoshaIchiranOutputProcess extends BatchKeyB
         ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo ichiranhyo = new ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo();
         List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> itemList
                 = ichiranhyo.
-                getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(帳票データリスト, batchPram, 並び順List, 改頁List, 種類Map, 帳票制御共通情報);
+                shokanbaraiSashitomeTaishoshaIchiranReportData(帳票データリスト, batchPram, 並び順List, 改頁List, 種類Map, 帳票制御共通情報);
 
         ShokanbaraiSashitomeTaishoshaIchiranReport report = ShokanbaraiSashitomeTaishoshaIchiranReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);

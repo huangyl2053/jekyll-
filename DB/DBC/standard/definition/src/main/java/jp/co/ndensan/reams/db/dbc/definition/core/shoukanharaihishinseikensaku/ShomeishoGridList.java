@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,10 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class ShomeishoGridList {
+public class ShomeishoGridList implements Serializable {
 
     private RString 処理;
-    private JigyoshaNo 事業者番号;
+    private RString 事業者番号;
     private RString 事業者名;
     private RString 明細;
     private RString サービス提供証明書;

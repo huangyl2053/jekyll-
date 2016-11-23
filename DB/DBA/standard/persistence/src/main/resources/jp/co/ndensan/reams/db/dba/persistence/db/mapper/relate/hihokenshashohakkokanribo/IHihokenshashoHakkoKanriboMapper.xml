@@ -17,16 +17,22 @@
         <result property="yubinNo" column="psm_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jusho" column="psm_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
 
+        <result property="pageBreakItem1" column="pageBreakItem1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="pageBreakItem2" column="pageBreakItem2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="pageBreakItem3" column="pageBreakItem3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="pageBreakItem4" column="pageBreakItem4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="pageBreakItem5" column="pageBreakItem5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
+
     <select resultOrdered="true" id="get証発行管理リスト情報"
             resultMap="resultMap_get証発行管理リスト情報"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboMybatisParameter" fetchSize="500">
-        SELECT 
-            *, 
+        SELECT
+            *,
             PSM."meisho" AS "psm_meisho",
             PSM."yubinNo" AS "psm_yubinNo",
-            PSM."jusho" || PSM."banchi" || '('||PSM."gyoseikuName"||')' AS "psm_jusho"              
+            PSM."jusho" || PSM."banchi" || '('||PSM."gyoseikuName"||')' AS "psm_jusho"
+            ${pageBreakItems}
         FROM (
             SELECT
             ShoKofuKaishu."hihokenshaNo" AS "shoKofuKaishu_hihokenshaNo",
@@ -38,7 +44,7 @@
             ShoKofuKaishu."kaishuYMD" AS "shoKofuKaishu_kaishuYMD",
             ShoKofuKaishu."kaishuJiyu" AS "shoKofuKaishu_kaishuJiyu",
             ShoKofuKaishu."shoYoshikiKubunCode" AS "shoKofuKaishu_shoYoshikiKubunCode",
-            row_number() over(partition by "hihokenshaNo" order by "kofuYMD" desc) as rank_number
+            row_number() over(partition by "hihokenshaNo" order by "kofuYMD" desc, "lastUpdateTimestamp" desc) as rank_number
             FROM
             rgdb."DbT7037ShoKofuKaishu" AS ShoKofuKaishu
             WHERE
@@ -90,8 +96,9 @@
             </foreach>
         </if>
         <if test="isMikaisyushaList">
-            AND 
+            AND
             "shoKofuKaishu_kaishuYMD" = ''
         </if>
+        ${shutsuryokujunOrderBy}
     </select>
 </mapper>

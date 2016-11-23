@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikk
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoUpdateParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanShinseiUpdataParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoMeisaiItiranTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoMeisaiTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharaiRelateEntity;
@@ -61,7 +63,7 @@ public interface IShokanKetteiTsuchiShoIkkatsuSakuseiMapper {
      *
      * @return List<ShokanKetteiTsuchiShoMeisaiTempTableEntity>
      */
-    List<ShokanKetteiTsuchiShoMeisaiTempTableEntity> get様式名称();
+    void get様式名称();
 
     /**
      * サービス種類を取得します。
@@ -90,6 +92,13 @@ public interface IShokanKetteiTsuchiShoIkkatsuSakuseiMapper {
      * 通知書発行対象フラグの更新
      * @param 資格区分 資格区分
      */
-    
     void upd通知書発行対象フラグ(@Param("資格区分") RString 資格区分);
+    
+    /**
+     * 決定通知書明細情報一時TBL
+     *
+     * @param paramter 検索用パラメータ
+     * @return 決定通知書明細情報一時TBL
+     */
+    List<ShokanKetteiTsuchiShoMeisaiItiranTempTableEntity> get決定通知書明細情報一時TBL(ShokanShinseiUpdataParameter paramter);
 }

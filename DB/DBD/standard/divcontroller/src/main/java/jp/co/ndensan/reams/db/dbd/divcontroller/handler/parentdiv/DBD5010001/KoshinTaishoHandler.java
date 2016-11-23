@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511002.DBD511002_KoshinOshiraseTsuchiParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5010001.KoshinTaishoDiv;
-import jp.co.ndensan.reams.db.dbd.service.core.koshintaisho.KoshinTaishoFinder;
+import jp.co.ndensan.reams.db.dbd.service.core.dbd5010001.KoshinKanriManager;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -39,7 +39,7 @@ public class KoshinTaishoHandler {
                 申請書管理番号.add(row.getShinseishoKanriNo());
             }
         }
-        return KoshinTaishoFinder.createInstance().get調査データの取得(申請書管理番号);
+        return KoshinKanriManager.createInstance().get調査データの取得(申請書管理番号);
     }
 
     /**
@@ -49,7 +49,7 @@ public class KoshinTaishoHandler {
      */
     public void koushiDb(KoshinTaishoDiv div) {
         for (dgNinteiTaskList_Row row : div.getCcdKoshinTaisho().getCheckbox()) {
-            KoshinTaishoFinder.createInstance().get認定調査依頼情報の取得(row.getShinseishoKanriNo());
+            KoshinKanriManager.createInstance().get認定調査依頼情報の取得(row.getShinseishoKanriNo());
         }
     }
 
@@ -98,8 +98,8 @@ public class KoshinTaishoHandler {
      */
     public void youKihoKoushiDb(KoshinTaishoDiv div) {
         for (dgNinteiTaskList_Row row : div.getCcdKoshinTaisho().getCheckbox()) {
-            KoshinTaishoFinder.createInstance().get要介護認定申請情報の取得(row.getShinseishoKanriNo());
-            KoshinTaishoFinder.createInstance().insert受給者台帳情報(row.getShinseishoKanriNo());
+            KoshinKanriManager.createInstance().get要介護認定申請情報の取得(row.getShinseishoKanriNo());
+            KoshinKanriManager.createInstance().insert受給者台帳情報(row.getShinseishoKanriNo());
         }
     }
 

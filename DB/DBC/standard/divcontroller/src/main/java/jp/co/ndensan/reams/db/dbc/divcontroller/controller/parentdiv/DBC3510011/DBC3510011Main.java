@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3510011.DBC3
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3510011.DBC3510011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3510011.dgSofuDataIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC3510011.DBC3510011MainHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC3510011.DBC3510011MainValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.hokenshajohosoufu.HokenshaJoHoFindler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -38,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 保険者情報送付のコントローラクラスです。
@@ -77,6 +79,20 @@ public class DBC3510011Main {
     public ResponseData<DBC3510011MainDiv> onClick_Sentaku(DBC3510011MainDiv div) {
         getHandler(div).set送付データ一覧();
         return ResponseData.of(div).setState(DBC3510011StateName.媒体作成);
+    }
+
+    /**
+     * 「ダウンロード」ボタンを押した後、入力チェックを行う。
+     *
+     * @param div DBC3510011MainDiv
+     * @return ResponseData
+     */
+    public ResponseData<DBC3510011MainDiv> onClick_check(DBC3510011MainDiv div) {
+        ValidationMessageControlPairs pairsCheck = getValidationHandler(div).validateCheck();
+        if (pairsCheck.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairsCheck).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -191,5 +207,9 @@ public class DBC3510011Main {
 
     private DBC3510011MainHandler getHandler(DBC3510011MainDiv div) {
         return new DBC3510011MainHandler(div);
+    }
+
+    private DBC3510011MainValidationHandler getValidationHandler(DBC3510011MainDiv div) {
+        return new DBC3510011MainValidationHandler(div);
     }
 }

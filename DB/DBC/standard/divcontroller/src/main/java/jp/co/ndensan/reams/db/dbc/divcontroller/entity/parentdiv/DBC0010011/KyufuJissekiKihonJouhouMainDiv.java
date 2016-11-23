@@ -62,8 +62,6 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     private Button btnShafukuKeigen;
     @JsonProperty("linButtonArea2")
     private HorizontalLine linButtonArea2;
-    @JsonProperty("txtKyufuJissekiKihonSakuseiKubun")
-    private TextBox txtKyufuJissekiKihonSakuseiKubun;
     @JsonProperty("txtKyufuJissekiKihonYokaigodo")
     private TextBox txtKyufuJissekiKihonYokaigodo;
     @JsonProperty("txtYukoKaishiYMD")
@@ -76,8 +74,6 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     private TextBoxDate txtKyufuJissekiKihonShinsaYM;
     @JsonProperty("txtKyufuJissekiKihonKeikokuKubun")
     private TextBox txtKyufuJissekiKihonKeikokuKubun;
-    @JsonProperty("btnKyufuJissekiKihonGokei")
-    private Button btnKyufuJissekiKihonGokei;
     @JsonProperty("KyufuJissekiKihonHihokensha")
     private KyufuJissekiKihonHihokenshaDiv KyufuJissekiKihonHihokensha;
     @JsonProperty("KyufuJissekiKihonKokiKorei")
@@ -394,24 +390,6 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     }
 
     /*
-     * gettxtKyufuJissekiKihonSakuseiKubun
-     * @return txtKyufuJissekiKihonSakuseiKubun
-     */
-    @JsonProperty("txtKyufuJissekiKihonSakuseiKubun")
-    public TextBox getTxtKyufuJissekiKihonSakuseiKubun() {
-        return txtKyufuJissekiKihonSakuseiKubun;
-    }
-
-    /*
-     * settxtKyufuJissekiKihonSakuseiKubun
-     * @param txtKyufuJissekiKihonSakuseiKubun txtKyufuJissekiKihonSakuseiKubun
-     */
-    @JsonProperty("txtKyufuJissekiKihonSakuseiKubun")
-    public void setTxtKyufuJissekiKihonSakuseiKubun(TextBox txtKyufuJissekiKihonSakuseiKubun) {
-        this.txtKyufuJissekiKihonSakuseiKubun = txtKyufuJissekiKihonSakuseiKubun;
-    }
-
-    /*
      * gettxtKyufuJissekiKihonYokaigodo
      * @return txtKyufuJissekiKihonYokaigodo
      */
@@ -517,24 +495,6 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     @JsonProperty("txtKyufuJissekiKihonKeikokuKubun")
     public void setTxtKyufuJissekiKihonKeikokuKubun(TextBox txtKyufuJissekiKihonKeikokuKubun) {
         this.txtKyufuJissekiKihonKeikokuKubun = txtKyufuJissekiKihonKeikokuKubun;
-    }
-
-    /*
-     * getbtnKyufuJissekiKihonGokei
-     * @return btnKyufuJissekiKihonGokei
-     */
-    @JsonProperty("btnKyufuJissekiKihonGokei")
-    public Button getBtnKyufuJissekiKihonGokei() {
-        return btnKyufuJissekiKihonGokei;
-    }
-
-    /*
-     * setbtnKyufuJissekiKihonGokei
-     * @param btnKyufuJissekiKihonGokei btnKyufuJissekiKihonGokei
-     */
-    @JsonProperty("btnKyufuJissekiKihonGokei")
-    public void setBtnKyufuJissekiKihonGokei(Button btnKyufuJissekiKihonGokei) {
-        this.btnKyufuJissekiKihonGokei = btnKyufuJissekiKihonGokei;
     }
 
     /*
@@ -1571,16 +1531,6 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     @JsonIgnore
     public TextBoxNum getTxtGoKohi3TokuteiNyushosha() {
         return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi3TokuteiNyushosha();
-    }
-
-    @JsonIgnore
-    public Button getBtnKyufuJissekiKihonGokeiClose() {
-        return this.getKyufuJissekiKihonGokeiPanel().getBtnKyufuJissekiKihonGokeiClose();
-    }
-
-    @JsonIgnore
-    public void setBtnKyufuJissekiKihonGokeiClose(Button btnKyufuJissekiKihonGokeiClose) {
-        this.getKyufuJissekiKihonGokeiPanel().setBtnKyufuJissekiKihonGokeiClose(btnKyufuJissekiKihonGokeiClose);
     }
 
     // </editor-fold>

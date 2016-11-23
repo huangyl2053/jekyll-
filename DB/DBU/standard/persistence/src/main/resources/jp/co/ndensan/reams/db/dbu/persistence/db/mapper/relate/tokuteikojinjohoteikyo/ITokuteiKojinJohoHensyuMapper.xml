@@ -44,7 +44,7 @@
         WHERE
             提供候補."teikyoKubun" = #{提供区分}
         AND
-            提供候補."teikyoKubun" = #{特定個人情報名コード}
+            提供候補."tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
     </select>
 
 </mapper>

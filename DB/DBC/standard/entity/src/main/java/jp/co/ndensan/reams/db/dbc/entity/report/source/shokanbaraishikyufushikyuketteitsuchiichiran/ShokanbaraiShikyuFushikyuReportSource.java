@@ -82,15 +82,16 @@ public class ShokanbaraiShikyuFushikyuReportSource implements IReportSource {
     public RString listLower_4;
     @ReportItem(name = "listLower_5", length = 14, order = 32)
     public RString listLower_5;
-    @ReportItem(name = "listLower_6", length = 1, order = 33)
+    @ReportItem(name = "listLower_6", length = 14, order = 33)
     public RString listLower_6;
-    @ReportItem(name = "listLower_7", length = 14, order = 34)
+    @ReportItem(name = "listLower_7", length = 4, order = 34)
     public RString listLower_7;
-    @ReportItem(name = "listLower_8", length = 1, order = 35)
+    @ReportItem(name = "listLower_8", length = 7, order = 35)
     public RString listLower_8;
-    @ReportItem(name = "listLower_9", length = 10, order = 36)
-    public RString listLower_9;
 
+    
+    @ReportItem(name = "yubinBango", length = 10, order = 36)
+    public RString yubinBango;
     @ReportItem(name = "choikiCode", length = 10, order = 37)
     public RString choikiCode;
     @ReportItem(name = "gyoseikuCode", length = 10, order = 38)
@@ -105,6 +106,10 @@ public class ShokanbaraiShikyuFushikyuReportSource implements IReportSource {
     public RString ketteiTsuchiNo;
     @ReportItem(name = "shinseishaKubun", length = 10, order = 43)
     public RString shinseishaKubun;
+    @ReportItem(name = "hidHokenshaNo", length = 6, order = 44)
+    public RString hidHokenshaNo;
+    @ReportItem(name = "hiHokenshaNo", length = 10, order = 45)
+    public RString hiHokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

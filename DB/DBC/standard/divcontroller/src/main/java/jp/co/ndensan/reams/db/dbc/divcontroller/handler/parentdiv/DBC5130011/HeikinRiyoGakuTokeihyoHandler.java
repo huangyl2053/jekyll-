@@ -51,7 +51,7 @@ public class HeikinRiyoGakuTokeihyoHandler {
         RString 地区指定 = div.getChikuShitei().getCcdChikuShichosonSelect().get選択対象();
         parameter.setChikuShitei(地区指定);
         Map<RString, RString> 選択地区Map = div.getChikuShitei().getCcdChikuShichosonSelect().get選択結果();
-        parameter.set選択地区Map(選択地区Map);
+        parameter.setSelectorChikulist(選択地区Map);
         parameter.setShichosonCode(div.getChikuShitei().getCcdChikuShichosonSelect().get市町村コード());
         parameter.setShichosonMei(div.getChikuShitei().getCcdChikuShichosonSelect().get市町村名称());
         parameter.setKyuShichosonCode(div.getChikuShitei().getCcdChikuShichosonSelect().get旧市町村コード());
@@ -84,6 +84,7 @@ public class HeikinRiyoGakuTokeihyoHandler {
 
         RString 地区指定 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("chikuShitei"));
         div.getChikuShitei().getCcdChikuShichosonSelect().set選択対象(地区指定);
+        div.getChikuShitei().getCcdChikuShichosonSelect().onChange_選択対象DDL();
         Map<RString, RString> 選択地区Map = restoreBatchParameterMap.getParameterValue(Map.class, new RString("selectorChikulist"));
         div.getChikuShitei().getCcdChikuShichosonSelect().set選択結果(選択地区Map);
         RString 市町村コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shichosonCode"));

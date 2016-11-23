@@ -485,7 +485,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setZenkaiChosain(business.get前回調査員氏名() == null ? RString.EMPTY : business.get前回調査員氏名());
             row.setZenzenkaiChosaItakusaki(business.get前前回調査委託先() == null ? RString.EMPTY : business.get前前回調査委託先());
             row.setZenzenkaiChosain(business.get前前回調査員氏名() == null ? RString.EMPTY : business.get前前回調査員氏名());
-            row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().value());
+            row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().getEditedYubinNo());
             row.setJusho(business.get住所() == null ? RString.EMPTY : business.get住所().value());
             row.setNyushoShisetsu(business.get入所施設() == null ? RString.EMPTY : business.get入所施設().value());
             row.setChosaTokusokuHoho(business.get認定調査督促方法() == null ? RString.EMPTY
@@ -574,7 +574,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setKonkaiShujii(business.get今回主治医() == null ? RString.EMPTY : business.get今回主治医());
             row.setZenkaiIryokikan(business.get前回医療機関() == null ? RString.EMPTY : business.get前回医療機関());
             row.setZenkaiShujii(business.get前回主治医() == null ? RString.EMPTY : business.get前回主治医());
-            row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().value());
+            row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().getEditedYubinNo());
             row.setJusho(business.get住所() == null ? RString.EMPTY : business.get住所().value());
             row.setNyushoShisetsu(business.get入所施設() == null ? RString.EMPTY : business.get入所施設().value());
             row.setIkenshoTokusokuHoho(

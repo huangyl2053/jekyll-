@@ -1422,17 +1422,17 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
 
     private FlexibleDate get特別徴収_年金支払い日(Tsuki 月, RDate 適用基準日) {
         RString 特別徴収_年金支払い日 = RString.EMPTY;
-        if (Tsuki._2月.getコード().equals(月.getコード())) {
+        if (Tsuki._2月.getコード().equals(月.getコード()) || Tsuki._3月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_2月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._4月.getコード().equals(月.getコード())) {
+        } else if (Tsuki._4月.getコード().equals(月.getコード()) || Tsuki._5月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_4月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._6月.getコード().equals(月.getコード())) {
+        } else if (Tsuki._6月.getコード().equals(月.getコード()) || Tsuki._7月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_6月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._8月.getコード().equals(月.getコード())) {
+        } else if (Tsuki._8月.getコード().equals(月.getコード()) || Tsuki._9月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_8月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._10月.getコード().equals(月.getコード())) {
+        } else if (Tsuki._10月.getコード().equals(月.getコード()) || Tsuki._11月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_10月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._12月.getコード().equals(月.getコード())) {
+        } else if (Tsuki._12月.getコード().equals(月.getコード()) || Tsuki._1月.getコード().equals(月.getコード())) {
             特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_12月, 適用基準日, SubGyomuCode.DBB介護賦課);
         }
         if (特別徴収_年金支払い日.isEmpty()) {

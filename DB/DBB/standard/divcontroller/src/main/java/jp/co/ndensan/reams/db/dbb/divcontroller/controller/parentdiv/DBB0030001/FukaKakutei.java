@@ -38,6 +38,9 @@ public class FukaKakutei {
     private static final RString 現年度異動賦課確定 = new RString("現年度異動賦課確定");
     private static final RString DBBMN33003 = new RString("DBBMN33003");
     private static final RString DBBMN34003 = new RString("DBBMN34003");
+    private static final RString DBBMN36003 = new RString("DBBMN36003");
+    private static final RString DBBMN43003 = new RString("DBBMN43003");
+    private static final RString DBBMN44003 = new RString("DBBMN44003");
 
     /**
      * コンストラクタです。
@@ -64,13 +67,16 @@ public class FukaKakutei {
                 && getHandler(div).処理名_普徴仮算定賦課(基準日時取得(div, 普徴仮算定賦課), 基準日時取得(div, 普徴仮算定賦課確定))) {
             return ResponseData.of(div).rootTitle(普徴仮算定賦課確定).respond();
         }
-        if (getHandler(div).処理名_仮算定異動賦課(基準日時取得(div, 仮算定異動賦課), 基準日時取得(div, 仮算定異動賦課確定))) {
+        if (DBBMN36003.equals(menuID)
+                && getHandler(div).処理名_仮算定異動賦課(基準日時取得(div, 仮算定異動賦課), 基準日時取得(div, 仮算定異動賦課確定))) {
             return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
         }
-        if (getHandler(div).処理名_本算定賦課(基準日時取得(div, 本算定賦課), 基準日時取得(div, 本算定賦課確定))) {
+        if (DBBMN43003.equals(menuID)
+                && getHandler(div).処理名_本算定賦課(基準日時取得(div, 本算定賦課), 基準日時取得(div, 本算定賦課確定))) {
             return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
         }
-        if (getHandler(div).処理名_異動賦課(基準日時取得(div, 異動賦課), 基準日時取得(div, 異動賦課確定))) {
+        if (DBBMN44003.equals(menuID)
+                && getHandler(div).処理名_異動賦課(基準日時取得(div, 異動賦課), 基準日時取得(div, 異動賦課確定))) {
             return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
         }
         return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();

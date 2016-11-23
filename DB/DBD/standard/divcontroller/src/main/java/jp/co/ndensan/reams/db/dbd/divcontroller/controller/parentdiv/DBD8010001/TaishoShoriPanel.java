@@ -154,19 +154,6 @@ public class TaishoShoriPanel {
     }
 
     /**
-     * 「アップロード」ボタンの処理です。
-     *
-     * @param div TaishoShoriPanelDiv
-     * @return ResponseData
-     */
-    public ResponseData<TaishoShoriPanelDiv> onClick_afterUpload(TaishoShoriPanelDiv div) {
-
-        div.getCcdKaigoKanryoMessage().setSuccessMessage(
-                new RString(UrInformationMessages.正常終了.getMessage().replace("アップロード処理").evaluate()));
-        return ResponseData.of(div).setState(DBD8010001StateName.処理完了);
-    }
-
-    /**
      * 「戻る」ボタンの処理です。
      *
      * @param div TaishoShoriPanelDiv

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanShikyuFushikyuKettei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyuFushikyuKettei;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.HihokenshaDaichoResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanKyufuJissekiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
@@ -27,10 +26,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011.Koga
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011.dgKogakuGassanShikyuFushikyuKettei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc1230011.KogakuGassanShikyuKetteiHoseiDetailParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHosei;
-import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -39,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -66,6 +62,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     private static final RString 事業分支給決定情報補正 = new RString("DBCMNN1005");
     private static final RString 決定情報を = new RString("btnSave");
     private static final RString CODE_ミ = new RString("003");
+    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
@@ -94,6 +91,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     private static final int NUM_0 = 0;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
     private static final int NUM_8 = 8;
     private static final int NUM_7 = 7;
@@ -152,26 +150,6 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     }
 
     /**
-     * データ存在チェックです。
-     *
-     * @param 被保険者番号 HihokenshaNo
-     */
-    public void getデータ存在チェック(HihokenshaNo 被保険者番号) {
-        List<JukyushaDaicho> 受給者台帳データ = KogakuGassanShikyuKetteiHosei.
-                createInstance().get受給者台帳データ(被保険者番号);
-        if (div.get事業分フラグ().equals(new RString(Boolean.TRUE.toString()))) {
-            List<SogoJigyoTaishosha> 総合事業対象者データ = KogakuGassanShikyuKetteiHosei.
-                    createInstance().get総合事業対象者データ(被保険者番号);
-            if ((受給者台帳データ == null || 受給者台帳データ.isEmpty())
-                    && (総合事業対象者データ == null || 総合事業対象者データ.isEmpty())) {
-                throw new ApplicationException(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
-            }
-        } else if (受給者台帳データ == null || 受給者台帳データ.isEmpty()) {
-            throw new ApplicationException(DbcInformationMessages.被保険者でないデータ.getMessage());
-        }
-    }
-
-    /**
      * 新規と検索条件登録パネル設定です。
      */
     public void set新規と検索条件登録パネル() {
@@ -208,11 +186,13 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                         get対象年度().toString()));
                 row.setTxtShokisaiNo(entity.get事業高額合算決定entity().get保険者番号().value());
                 row.setTxtRenrakuhyoSeiriNo(entity.get事業高額合算決定entity().get支給申請書整理番号());
-                row.setTxtRirekiNo(new RString(entity.get事業高額合算決定entity().get履歴番号()));
+                row.setTxtRirekiNo(new RString(entity.get事業高額合算決定entity().get履歴番号()).padLeft(ZERO, NUM_4));
                 if (entity.get事業高額合算決定entity().get自己負担総額() != null) {
                     row.getTxtJikoFutangaku().setValue(entity.get事業高額合算決定entity().get自己負担総額());
                 }
-                row.setTxtShikyuKubun(entity.get事業高額合算決定entity().get支給区分コード());
+                if (!RString.isNullOrEmpty(entity.get事業高額合算決定entity().get支給区分コード())) {
+                    row.setTxtShikyuKubun(ShikyuFushikyuKubun.toValue(entity.get事業高額合算決定entity().get支給区分コード()).get名称());
+                }
                 if (entity.get事業高額合算決定entity().get支給額() != null) {
                     row.getTxtShikyugaku().setValue(entity.get事業高額合算決定entity().get支給額());
                 }
@@ -378,17 +358,19 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
 
     private void set新規以外の決定情報初期値_Two(dgKogakuGassanShikyuFushikyuKettei_Row row) {
         if (row.getTxtShikyuKubun() != null && !row.getTxtShikyuKubun().isEmpty()
-                && ShikyuFushikyuKubun.支給.getコード().equals(row.getTxtShikyuKubun())) {
+                && ShikyuFushikyuKubun.支給.get名称().equals(row.getTxtShikyuKubun())) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getRadShikyuKubunCode().setSelectedValue(支給);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getLabel2().setText(備考);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtBiko().setValue(row.getBiko());
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKyufuShurui().setDisabled(false);
+            div.getTxtShikyugaku().setDisabled(false);
         } else if (row.getTxtShikyuKubun() != null && !row.getTxtShikyuKubun().isEmpty()
-                && ShikyuFushikyuKubun.不支給.getコード().equals(row.getTxtShikyuKubun())) {
+                && ShikyuFushikyuKubun.不支給.get名称().equals(row.getTxtShikyuKubun())) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getRadShikyuKubunCode().setSelectedValue(不支給);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getLabel2().setText(不支給の理由);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtBiko().setValue(row.getFushikyuRiyu());
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKyufuShurui().setDisabled(true);
+            div.getTxtShikyugaku().setDisabled(true);
         }
         if (row.getTxtShikyugaku().getValue() != null) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
@@ -398,7 +380,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         if (row.getTxtUketoriNengetsu().getValue() != null && !row.getTxtUketoriNengetsu().getValue().isEmpty()) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtUketoriYM().setValue(new RDate(row.getTxtUketoriNengetsu().
-                                    getValue().getYearMonth().toString()));
+                            getValue().getYearMonth().toString()));
         }
         if (row.getKetteiTsuchiSakuseiYMD().getValue() != null
                 && !row.getKetteiTsuchiSakuseiYMD().getValue().isEmpty()) {
@@ -797,10 +779,12 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getRadShikyuKubunCode().getSelectedValue())) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getLabel2().setText(備考);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKyufuShurui().setDisabled(false);
+            div.getTxtShikyugaku().setDisabled(false);
         } else if (ShikyuFushikyuKubun.不支給.get名称().equals(
                 div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getRadShikyuKubunCode().getSelectedValue())) {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getLabel2().setText(不支給の理由);
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKyufuShurui().setDisabled(true);
+            div.getTxtShikyugaku().setDisabled(true);
         }
     }
 
@@ -925,7 +909,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 .set自己負担総額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtJikoFutanSogaku().getValue())
                 .set支給区分コード(ShikyuFushikyuKubun.valueOf(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                                getRadShikyuKubunCode().getSelectedValue().toString()).getコード())
+                        getRadShikyuKubunCode().getSelectedValue().toString()).getコード())
                 .set支給額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyugaku().getValue())
                 .set自己負担額証明書整理番号(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtJikoFutanSeiriNo().getText())
@@ -1008,7 +992,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 .set自己負担総額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtJikoFutanSogaku().getValue())
                 .set支給区分コード(ShikyuFushikyuKubun.valueOf(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                                getRadShikyuKubunCode().getSelectedValue().toString()).getコード())
+                        getRadShikyuKubunCode().getSelectedValue().toString()).getコード())
                 .set支給額(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtShikyugaku().getValue())
                 .set自己負担額証明書整理番号(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtJikoFutanSeiriNo().getText())

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class RiyoshaFutangakuGenmenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,8 @@ public class RiyoshaFutangakuGenmenDiv extends Panel {
     private TextBox txtRiyoshaFutanGendogakuKetteiKubun;
     @JsonProperty("txtRiyoshaFutanGendogakuKyufuRitsu")
     private TextBox txtRiyoshaFutanGendogakuKyufuRitsu;
+    @JsonProperty("labRiyoshaFutanGendogakuKyufuRitsu")
+    private Label labRiyoshaFutanGendogakuKyufuRitsu;
     @JsonProperty("txtRiyoshaFutanGendogakuShinseibi")
     private TextBoxFlexibleDate txtRiyoshaFutanGendogakuShinseibi;
     @JsonProperty("txtRiyoshaFutanGendogakuKetteibi")
@@ -76,6 +78,24 @@ public class RiyoshaFutangakuGenmenDiv extends Panel {
     @JsonProperty("txtRiyoshaFutanGendogakuKyufuRitsu")
     public void setTxtRiyoshaFutanGendogakuKyufuRitsu(TextBox txtRiyoshaFutanGendogakuKyufuRitsu) {
         this.txtRiyoshaFutanGendogakuKyufuRitsu = txtRiyoshaFutanGendogakuKyufuRitsu;
+    }
+
+    /*
+     * getlabRiyoshaFutanGendogakuKyufuRitsu
+     * @return labRiyoshaFutanGendogakuKyufuRitsu
+     */
+    @JsonProperty("labRiyoshaFutanGendogakuKyufuRitsu")
+    public Label getLabRiyoshaFutanGendogakuKyufuRitsu() {
+        return labRiyoshaFutanGendogakuKyufuRitsu;
+    }
+
+    /*
+     * setlabRiyoshaFutanGendogakuKyufuRitsu
+     * @param labRiyoshaFutanGendogakuKyufuRitsu labRiyoshaFutanGendogakuKyufuRitsu
+     */
+    @JsonProperty("labRiyoshaFutanGendogakuKyufuRitsu")
+    public void setLabRiyoshaFutanGendogakuKyufuRitsu(Label labRiyoshaFutanGendogakuKyufuRitsu) {
+        this.labRiyoshaFutanGendogakuKyufuRitsu = labRiyoshaFutanGendogakuKyufuRitsu;
     }
 
     /*

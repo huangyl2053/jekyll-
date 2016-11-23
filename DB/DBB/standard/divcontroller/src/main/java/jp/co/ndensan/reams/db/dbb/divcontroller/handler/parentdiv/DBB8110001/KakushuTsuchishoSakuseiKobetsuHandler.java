@@ -267,7 +267,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
             set更正後賦課根拠(更正後賦課の情報);
             div.setHdnKouseizenFlag(無);
-            if (honsanteiIkoHantei.is本算定後(更正前賦課の情報) && 更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度())) {
+            if (!更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度())
+                    || (更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度()) && honsanteiIkoHantei.is本算定後(更正前賦課の情報))) {
                 set更正前賦課根拠(更正前賦課の情報);
                 div.setHdnKouseizenFlag(有);
             }
@@ -1476,9 +1477,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             発行する帳票List.add(帳票Map.get(row.getTxtChohyoSentaku()));
         }
         parameter.set発行する帳票List(発行する帳票List);
-        HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
-        if (更正前Key != null && !更正前Key.isEmpty()
-                && honsanteiIkoHantei.is本算定後(map.get(更正前Key)) && map.get(更正前Key).get賦課年度().equals(map.get(更正前Key).get調定年度())) {
+        if (更正前Key != null && !更正前Key.isEmpty()) {
             parameter.set賦課の情報_更正前(map.get(更正前Key));
         }
         parameter.set賦課の情報_更正後(map.get(更正後Key));

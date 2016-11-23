@@ -4,20 +4,17 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * WrapFukadaichoKobetsu のクラスファイル
- *
- * @reamsid_L DBB-0740-010 wangkanglei
+ * WrapFukadaichoKobetsu のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class WrapFukadaichoKobetsuDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

@@ -81,7 +81,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -255,9 +254,8 @@ public class HonnSanteiFukaFath {
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         HonsenteiKeisangojohoParameter param = HonsenteiKeisangojohoParameter
                 .createSelectByKeyParam(調定年度, 賦課年度, 調定日時, 出力順, kozaSearchKey, list);
-        List<HonsenteiKeisangojohoEntity> 本算定計算後賦課情報リスト = mapper.select本算定計算後賦課情報(param);
+        List<HonsenteiKeisangojohoEntity> 本算定計算後賦課情報リスト = mapper.select本算定計算後賦課情報has徴収方法(param);
         List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座List = new ArrayList<>();
-        SourceDataCollection sourceDataCollection = null;
 
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();

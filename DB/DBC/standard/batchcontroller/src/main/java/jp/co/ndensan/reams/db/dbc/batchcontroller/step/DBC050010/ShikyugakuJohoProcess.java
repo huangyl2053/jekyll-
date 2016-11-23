@@ -191,6 +191,11 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
 
 
+
+
+
+
+
                     FurikomiMeisaiIchiranDetailReportSource.LAYOUT_BREAK_KEYS) {
             @Override
                     public ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> occuredBreak(
@@ -290,9 +295,9 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
             flag = is支給金額計(t);
 
             if (t.get振込明細一時Entity().getServiceTeikyoYM().isBefore(制度改正施行日)) {
-                set件数加算before制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode().value(), flag, 印字様式番号別金額);
+                set件数加算before制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode(), flag, 印字様式番号別金額);
             } else {
-                set件数加算after制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode().value(), flag, 印字様式番号別金額);
+                set件数加算after制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode(), flag, 印字様式番号別金額);
             }
         }
     }
@@ -349,7 +354,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         }
     }
 
-    private void set件数加算before制度改正施行日(RString code, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+    private void set件数加算before制度改正施行日(Code code, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
         RString 印字様式番号 = 印字様式番号別金額.get印字様式番号();
         if (印字様式番号.equals(識別番号2131)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM0), flag, 印字様式番号別金額);
@@ -386,7 +391,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         }
     }
 
-    private void set件数加算after制度改正施行日(RString code, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+    private void set件数加算after制度改正施行日(Code code, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
         RString 印字様式番号 = 印字様式番号別金額.get印字様式番号();
         if (印字様式番号.equals(識別番号2131)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM0), flag, 印字様式番号別金額);
@@ -423,7 +428,11 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         }
     }
 
-    private void set認定状態区分before施行日(RString code, GokeiDataEntity entity, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+    private void set認定状態区分before施行日(Code jotaiKubunCode, GokeiDataEntity entity, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+        RString code = RString.EMPTY;
+        if (jotaiKubunCode != null) {
+            code = jotaiKubunCode.value();
+        }
         if (code.equals(要介護1) || code.equals(要介護2) || code.equals(要介護3)
                 || code.equals(要介護4) || code.equals(要介護5)) {
             entity.set要介護件数(entity.get要介護件数().add(NUM1));
@@ -449,7 +458,11 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         }
     }
 
-    private void set認定状態区分after施行日(RString code, GokeiDataEntity entity, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+    private void set認定状態区分after施行日(Code jotaiKubunCode, GokeiDataEntity entity, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+        RString code = RString.EMPTY;
+        if (jotaiKubunCode != null) {
+            code = jotaiKubunCode.value();
+        }
         if (code.equals(要介護1) || code.equals(要介護2) || code.equals(要介護3)
                 || code.equals(要介護4) || code.equals(要介護5) || code.equals(経過的要介護)) {
             entity.set要介護件数(entity.get要介護件数().add(NUM1));

@@ -404,4 +404,10 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
         }
     }
 
+    @Override
+    @JsonIgnore
+    public void onChange_選択対象DDL() {
+        ChikuShichosonSelectHandler.of(this).onChange_選択対象DDL();
+    }
+
 }

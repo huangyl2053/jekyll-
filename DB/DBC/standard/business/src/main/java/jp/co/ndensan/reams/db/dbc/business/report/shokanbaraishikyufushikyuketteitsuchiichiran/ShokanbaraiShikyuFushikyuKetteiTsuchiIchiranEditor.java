@@ -38,6 +38,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
     }
 
     private ShokanbaraiShikyuFushikyuReportSource editSource(ShokanbaraiShikyuFushikyuReportSource source) {
+        
         source.printTimeStamp = item.getPrintTimeStamp();
         source.hokenshaNo = item.getHokenshaNo();
         source.hokenshaName = item.getHokenshaName();
@@ -52,9 +53,9 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
         source.kaipage4 = item.getKaipage4();
         source.kaipage5 = item.getKaipage5();
         source.listUpper_1 = item.getRenban();
-        source.listUpper_2 = item.getSeiriNo();
+        
         source.listUpper_3 = item.getKeteiTsuchiNo();
-        source.listUpper_4 = item.getHihokenshaNo();
+        
         RString hihokenshanamelenthMax = item.getHihokenshaName() == null ? RString.EMPTY : item.getHihokenshaName();
         byte[] hihokenshaname = hihokenshanamelenthMax.toString().getBytes(Charset.forName(ENCODE.toString()));
         byte[] getHihokenshaName = new byte[hihokenshaname.length <= MAX ? hihokenshaname.length : MAX];
@@ -67,7 +68,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
         System.arraycopy(jusho, MIN, getJusho, MIN, jusho.length <= MAX ? jusho.length : MAX);
         source.listLower_1 = new RString(new String(getJusho, Charset.forName(ENCODE.toString())));
 
-        source.listUpper_6 = item.getYubinBango();
+        
         source.listUpper_7 = item.getTeikyo();
         source.listLower_2 = item.getYoKaigodo();
         source.listUpper_8 = item.getNinteiKaishibi();
@@ -75,21 +76,34 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
         source.listUpper_9 = item.getUketsukeYMD();
         source.listLower_4 = item.getKeteiYMD();
         source.listUpper_10 = item.getHonjinShiharaigaku();
-        source.listUpper_11 = item.getShikyugaku();
+        source.listUpper_11 = item.getShikyugaku().concat(RString.HALF_SPACE);
         source.listLower_5 = item.getYoshikigotoKingaku();
-        source.listLower_6 = new RString("(");
-        source.listLower_7 = item.getKingaku();
-        source.listLower_8 = new RString(")");
+        if (null != item.getKingaku()) {
+            source.listLower_6 = new RString("(").concat(item.getKingaku()).concat(new RString(") "));
+        }
+        source.listLower_7 = item.getShurui2();
         source.listUpper_12 = item.getTuika();
-        source.listUpper_13 = item.getShurui();
+        source.listUpper_13 = item.getShurui1();
         source.listUpper_14 = item.getKeteiKubun();
-        source.listLower_9 = item.getShiharaiHoho();
+        source.listLower_8 = item.getShiharaiHoho();
+        
+        source.yubinBango = item.getYubinBango();
         source.choikiCode = item.getChoikiCode();
         source.gyoseikuCode = item.getGyoseikuCode();
         source.kanaMeisho = item.getKanaMeisho();
+        source.hidHokenshaNo = item.getHokenshaNo();
         source.shoKisaiHokenshaNo = item.getShoKisaiHokenshaNo();
+        source.hiHokenshaNo = item.getHihokenshaNo();
+        source.seiriNo = item.getSeiriNo();
         source.ketteiTsuchiNo = item.getKetteiTsuchiNo();
         source.shinseishaKubun = item.getShinseishaKubun();
+        if (item.isBreakKeyFlg()) {
+            return source;
+        } else {
+            source.listUpper_6 = item.getYubinBango();
+            source.listUpper_4 = item.getHihokenshaNo();
+            source.listUpper_2 = item.getSeiriNo();
+        }
         return source;
     }
 }

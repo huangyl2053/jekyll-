@@ -96,5 +96,8 @@ public class NinteiShinseiTorokuUketsukeEntity {
     private RString 履歴番号;
     private RString 枝番;
     private Code 受給申請事由;
+    
+    private RString 市町村連絡事項;
+    private boolean 要支援者認定申請区分;
 
 }

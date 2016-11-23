@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -185,7 +184,7 @@ public class KyufuJissekiHeaderHandler {
 
     private void set給付実績ヘッダ情報1(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1) {
         div.getTxtHihoNo().setValue(get被保険者番号(給付実績ヘッダ情報1.get被保険者番号()));
-        div.getTxtJuminShubetsu().setValue(get住民種別(給付実績ヘッダ情報1.get資格取得事由コード()));
+        div.getTxtJuminShubetsu().setValue(給付実績ヘッダ情報1.get住民種別());
         if (給付実績ヘッダ情報1.get認定年月日() != null && !給付実績ヘッダ情報1.get認定年月日().isEmpty()
                 && !RString.isNullOrEmpty(給付実績ヘッダ情報1.get要介護認定状態区分コード())) {
             div.getTxtYoKaigodo().setValue(YokaigoJotaiKubunSupport.toValue(
@@ -202,7 +201,6 @@ public class KyufuJissekiHeaderHandler {
         if (給付実績ヘッダ情報1.get生年月日() != null && !給付実績ヘッダ情報1.get生年月日().isEmpty()) {
             div.getTxtSeinengappi().setValue(new RDate(給付実績ヘッダ情報1.get生年月日().toString()));
         }
-        //div.getTxtHokensha().setValue(給付実績ヘッダ情報1.get名称());
     }
 
     private void set給付実績ヘッダ情報2(KyufuJissekiHedajyoho2 給付実績ヘッダ情報2) {
@@ -216,13 +214,6 @@ public class KyufuJissekiHeaderHandler {
         div.setHiddenYoshikiNo(給付実績ヘッダ情報2.get識別番号());
         div.setHiddenJigyoshaCode(get事業所番号(給付実績ヘッダ情報2.get事業所番号()));
         div.getJigyosha().setValue(給付実績ヘッダ情報2.get事業者名称());
-    }
-
-    private RString get住民種別(RString 資格取得事由コード) {
-        if (!RString.isNullOrEmpty(資格取得事由コード)) {
-            return ShikakuShutokuJiyu.toValue(資格取得事由コード).get名称();
-        }
-        return RString.EMPTY;
     }
 
     private RString get性別(RString 性別コード) {
@@ -293,11 +284,10 @@ public class KyufuJissekiHeaderHandler {
         set実績区分(給付実績基本データ.get給付実績区分コード());
         set整理番号(給付実績基本データ.get整理番号());
         set識別番号名称(識別番号管理.get識別番号());
+        div.getTxtYoshikiMeisho().setValue(識別番号管理.get名称());
         if (csData_A.get事業者名称() != null) {
-            div.getTxtYoshikiMeisho().setValue(csData_A.get事業者名称().getColumnValue());
             div.getJigyosha().setValue(csData_A.get事業者名称().getColumnValue());
         } else {
-            div.getTxtYoshikiMeisho().clearValue();
             div.getJigyosha().clearValue();
         }
         if (給付実績基本データ.get事業者番号() != null) {

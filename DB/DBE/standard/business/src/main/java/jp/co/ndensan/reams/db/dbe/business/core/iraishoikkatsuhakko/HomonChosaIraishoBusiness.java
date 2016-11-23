@@ -281,7 +281,7 @@ public class HomonChosaIraishoBusiness {
                 entity.get事業者番号(),
                 通知文Map.get(1),
                 通知文Map.get(2),
-                new RString(String.valueOf(連番++)),
+                new RString(String.valueOf(連番)),
                 entity.get調査員氏名(),
                 entity.get被保険者番号(),
                 entity.get認定申請年月日(),

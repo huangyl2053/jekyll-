@@ -50,7 +50,7 @@ public class ImagePanelValidationHandler {
             List<RString> 存在するその他資料) {
         if (div.getChkImage().getSelectedKeys().isEmpty()) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.出力項目を指定));
+            validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.出力項目を指定, div.getChkImage()));
             return validationMessages;
         }
         return doチェックByイメージ対象(存在するファイル, 存在する調査票概況特記, 存在する調査票概況, 存在する主治医意見書, 存在するその他資料);

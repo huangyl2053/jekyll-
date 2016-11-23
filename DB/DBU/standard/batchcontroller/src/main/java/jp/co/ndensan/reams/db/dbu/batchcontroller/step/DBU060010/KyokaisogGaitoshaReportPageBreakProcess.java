@@ -84,7 +84,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void createWriter() {
-        if (出力順Entity != null) {
+        if (出力順Entity != null && 出力順Entity.getPageBreakKeys() != null) {
             pageBreakKeys = Collections.unmodifiableList(出力順Entity.getPageBreakKeys());
         }
         if (pageBreakKeys != null && !pageBreakKeys.isEmpty()) {
@@ -161,7 +161,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
     }
 
     private ShutsuryokujunRelateEntity get出力順項目() {
-        if (parameter.getOrder_ID() != null) {
+        if (!parameter.getOrder_ID().isNull() && !parameter.getOrder_ID().isEmpty()) {
             return ReportUtil.get出力順情報(KyokaisoKanriMasterListBusiness.ShutsuryokujunEnum.class, SubGyomuCode.DBU介護統計報告,
                     ReportIdDBU.DBA200005.getReportId(),
                     Long.valueOf(parameter.getOrder_ID().toString()));

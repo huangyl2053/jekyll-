@@ -108,7 +108,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set申請内容エリア(給付実績基本);
             set合計内容エリア(給付実績基本);
         }
-        set合計エリア閉();
     }
 
     /**
@@ -144,7 +143,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set申請内容エリア(給付実績基本);
             set合計内容エリア(給付実績基本);
         }
-        set合計エリア閉();
         set事業者ボタン(給付実績ヘッダ情報２, 後整理番号, サービス提供年月);
     }
 
@@ -171,7 +169,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set申請内容エリア(給付実績基本);
             set合計内容エリア(給付実績基本);
         }
-        set合計エリア閉();
         set月ボタン(サービス提供年月リスト, サービス提供年月);
         set事業者ボタン(給付実績ヘッダ情報２, 整理番号, サービス提供年月);
     }
@@ -199,7 +196,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set申請内容エリア(給付実績基本);
             set合計内容エリア(給付実績基本);
         }
-        set合計エリア閉();
         set月ボタン(サービス提供年月リスト, サービス提供年月);
         set事業者ボタン(給付実績ヘッダ情報２, 整理番号, サービス提供年月);
     }
@@ -288,7 +284,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
     }
 
     private void set申請内容エリア(KyufujissekiKihon 給付実績基本情報) {
-        div.getTxtKyufuJissekiKihonSakuseiKubun().setValue(get作成区分(給付実績基本情報.get給付実績情報作成区分コード()));
         if (!RString.isNullOrEmpty(給付実績基本情報.get要介護状態区分コード())) {
             div.getTxtKyufuJissekiKihonYokaigodo().setValue(YokaigoJotaiKubunSupport.toValue(給付実績基本情報.getサービス提供年月(),
                     給付実績基本情報.get要介護状態区分コード()).getName());
@@ -504,12 +499,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             return new RString(給付率.value().intValue());
         }
         return RString.EMPTY;
-    }
-
-    private void set合計エリア閉() {
-        if (div.getKyufuJissekiKihonGokeiPanel().isIsOpen()) {
-            div.getKyufuJissekiKihonGokeiPanel().setIsOpen(false);
-        }
     }
 
     private int get事業者番号の位置(List<KyufuJissekiHedajyoho2> 事業者番号リスト,

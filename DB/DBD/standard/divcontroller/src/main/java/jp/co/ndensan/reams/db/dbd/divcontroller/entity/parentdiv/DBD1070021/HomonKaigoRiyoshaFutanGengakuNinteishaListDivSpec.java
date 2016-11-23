@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1070021;
 
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 訪問介護利用者負担額減額認定者リスト画面のチェックです。
@@ -24,7 +24,7 @@ public enum HomonKaigoRiyoshaFutanGengakuNinteishaListDivSpec implements IPredic
                  */
                 @Override
                 public boolean apply(HomonKaigoRiyoshaFutanGengakuNinteishaListDiv div) {
-                    return div.getTxtTaishoYM().getValue() != null && !div.getTxtTaishoYM().getValue().isEmpty();
+                    return div.getTxtTaishoYM().getValue() != null && !div.getTxtTaishoYM().getValue().toDateString().isEmpty();
                 }
             },
     所得年度の未入力チェック {
@@ -36,7 +36,7 @@ public enum HomonKaigoRiyoshaFutanGengakuNinteishaListDivSpec implements IPredic
                  */
                 @Override
                 public boolean apply(HomonKaigoRiyoshaFutanGengakuNinteishaListDiv div) {
-                    return div.getTxtShotokuNendo().getValue() != null && !div.getTxtShotokuNendo().getValue().isEmpty();
+                    return div.getTxtShotokuNendo().getValue() != null && !div.getTxtShotokuNendo().getValue().toDateString().isEmpty();
                 }
             },
     基準日の未入力チェック {
@@ -48,8 +48,8 @@ public enum HomonKaigoRiyoshaFutanGengakuNinteishaListDivSpec implements IPredic
                  */
                 @Override
                 public boolean apply(HomonKaigoRiyoshaFutanGengakuNinteishaListDiv div) {
-                    FlexibleDate txtKijunYMD = div.getTxtKijunYMD().getValue();
-                    return txtKijunYMD != null && !txtKijunYMD.isEmpty();
+                    RDate txtKijunYMD = div.getTxtKijunYMD().getValue();
+                    return txtKijunYMD != null && !txtKijunYMD.toDateString().isEmpty();
                 }
             },
     課税判定等基準日の未入力チェック {
@@ -61,8 +61,8 @@ public enum HomonKaigoRiyoshaFutanGengakuNinteishaListDivSpec implements IPredic
                  */
                 @Override
                 public boolean apply(HomonKaigoRiyoshaFutanGengakuNinteishaListDiv div) {
-                    FlexibleDate txtKazeiHanteiToKijunDate = div.getTxtKazeiHanteiToKijunDate().getValue();
-                    return txtKazeiHanteiToKijunDate != null && !txtKazeiHanteiToKijunDate.isEmpty();
+                    RDate txtKazeiHanteiToKijunDate = div.getTxtKazeiHanteiToKijunDate().getValue();
+                    return txtKazeiHanteiToKijunDate != null && !txtKazeiHanteiToKijunDate.toDateString().isEmpty();
                 }
             },
     旧措置者区分の未入力チェック {

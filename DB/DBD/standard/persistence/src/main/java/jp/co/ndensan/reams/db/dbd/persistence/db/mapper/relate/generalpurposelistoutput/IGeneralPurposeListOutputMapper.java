@@ -20,7 +20,7 @@ public interface IGeneralPurposeListOutputMapper {
      * 汎用リスト出力(施設入退所)情報を取得します．
      *
      * @param parameter パラメター
-     * @return 汎用リスト出力(施設入退所)情報
+     * @return List<GeneralPurposeListOutputEntity>
      */
     List<GeneralPurposeListOutputEntity> getGeneralPurposeListOutputInfo(GeneralPurposeListOutputMybatisParameter parameter);
 }

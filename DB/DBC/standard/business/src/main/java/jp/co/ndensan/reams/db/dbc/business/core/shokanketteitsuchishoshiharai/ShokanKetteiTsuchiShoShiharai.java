@@ -488,7 +488,45 @@ public class ShokanKetteiTsuchiShoShiharai {
         return entity.getSagakuKingakuGokei();
     }
     
+    /**
+     * 口座を取得します。
+     * @return 口座
+     */
     public TokuteiKozaRelateEntity get口座() {
         return entity.get口座();
+    }
+    
+    /**
+     * 通知書発行対象フラグを取得します。
+     * @return  通知書発行対象フラグ
+     */
+    public boolean is通知書発行対象フラグ() {
+        return entity.isHakkoutaisyouFlg();
+    }
+        
+    /**
+     * 様式金額集計を取得します。
+     *
+     * @return 支給額
+     */
+    public Decimal get様式金額集計() {
+        return entity.getYousikiKingakuTtl();
+    }
+    
+     /**
+     * 種類1を取得します。
+     *
+     * @return 種類1
+     */
+    public RString get種類1() {
+        return entity.getSyurui1();
+    }
+    /**
+     * 種類2を取得します。
+     *
+     * @return 種類2
+     */
+    public RString get種類2() {
+        return entity.getSyurui2();
     }
 }
