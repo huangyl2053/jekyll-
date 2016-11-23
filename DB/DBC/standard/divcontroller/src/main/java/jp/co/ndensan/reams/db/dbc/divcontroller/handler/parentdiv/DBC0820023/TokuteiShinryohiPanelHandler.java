@@ -1300,9 +1300,11 @@ public class TokuteiShinryohiPanelHandler {
     private boolean isRStr等しい(RString str1, RString str2) {
         if ((str1 == null || str1.isEmpty()) && (str2 == null || str2.isEmpty())) {
             return true;
-        } else if (str1 != null) {
-            return str1.equals(str2);
-        } else if (str2 != null) {
+        } else if (str1 != null && str2 == null) {
+            return false;
+        } else if (str1 == null && str2 != null) {
+            return false;
+        } else if (str1 != null && str2 != null) {
             return str2.equals(str1);
         }
         return false;

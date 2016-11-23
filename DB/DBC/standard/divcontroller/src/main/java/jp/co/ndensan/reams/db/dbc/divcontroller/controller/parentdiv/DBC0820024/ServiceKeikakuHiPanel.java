@@ -433,15 +433,11 @@ public class ServiceKeikakuHiPanel {
                 償還払ViewStateDB.add償還払請求サービス計画200904データResult(newDataList);
             }
         }
-        if (entity200604Result != null) {
-            if (!has同様償還払請求サービス計画200604データ(償還払ViewStateDB, entity200604Result)) {
-                償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
-            }
+        if (entity200604Result != null && !has同様償還払請求サービス計画200604データ(償還払ViewStateDB, entity200604Result)) {
+            償還払ViewStateDB.add償還払請求サービス計画200604データResult(entity200604Result);
         }
-        if (entity200004Result != null) {
-            if (!has同様償還払請求サービス計画200004データ(償還払ViewStateDB, entity200004Result)) {
-                償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
-            }
+        if (entity200004Result != null && !has同様償還払請求サービス計画200004データ(償還払ViewStateDB, entity200004Result)) {
+            償還払ViewStateDB.add償還払請求サービス計画200004データResult(entity200004Result);
         }
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
         return ResponseData.of(div).forwardWithEventName(eventName).respond();
