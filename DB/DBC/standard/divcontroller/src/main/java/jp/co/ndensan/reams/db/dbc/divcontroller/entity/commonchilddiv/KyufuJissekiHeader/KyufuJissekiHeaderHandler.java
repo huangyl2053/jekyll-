@@ -343,11 +343,11 @@ public class KyufuJissekiHeaderHandler {
         div.getTxtSakuseiKubun().setValue(給付実績基本情報.get作成区分());
         div.getTxtShokisaiHokenshaNo()
                 .setValue(給付実績基本情報.get証記載保険者番号());
-        set実績区分(給付実績基本情報.get実績区分());
+        div.getTxtJissekiKubun().setValue(給付実績基本情報.get実績区分());
         set整理番号(給付実績基本情報.get整理番号());
         set識別番号名称(給付実績基本情報.get様式番号());
         div.getTxtYoshikiMeisho().setValue(給付実績基本情報.get様式番号_Name());
-        div.getJigyosha().setValue(給付実績基本情報.get事業者());
-        div.getTxtJigyoshaNo().setValue(給付実績基本情報.get事業者_Name());
+        div.getTxtJigyoshaNo().setValue(給付実績基本情報.get事業者());
+        div.getJigyosha().setValue(給付実績基本情報.get事業者_Name());
     }
 }

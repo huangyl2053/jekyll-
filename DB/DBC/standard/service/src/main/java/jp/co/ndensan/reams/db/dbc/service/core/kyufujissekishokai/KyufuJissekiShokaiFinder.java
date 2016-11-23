@@ -126,6 +126,8 @@ public class KyufuJissekiShokaiFinder {
     private static final RString 宛名情報KEY = new RString("psmShikibetsuTaisho");
     private static final RString 交換情報識別番号の先頭３桁 = new RString("111");
     private static final RString 給付実績情報作成区分コード_削除 = new RString("3");
+    private static final RString サービス提供年月_文字列 = new RString("サービス提供年月");
+    private static final RString 通し番号文字列 = new RString("通し番号");
     private static final int INDEX_3 = 3;
 
     /**
@@ -1113,5 +1115,125 @@ public class KyufuJissekiShokaiFinder {
             集計データList.add(new KyufuJissekiShukeiKekkaDataBusiness(entity));
         }
         return 集計データList;
+    }
+
+    /**
+     * 給付実績情報照会用データの取得処理です。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 入力識別番号 NyuryokuShikibetsuNo
+     * @param 事業所番号 JigyoshaNo
+     * @param 通し番号 RString
+     * @return 給付実績情報照会用データ
+     */
+    @Transaction
+    public KyufuJissekiPrmBusiness get検索集計と明細と住所地データ(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 入力識別番号, JigyoshaNo 事業所番号, RString 通し番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
+        requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
+        KyufuJissekiPrmBusiness 給付実績情報照会用データ = new KyufuJissekiPrmBusiness();
+        List<KyufujissekiShukei> 給付実績集計データリスト;
+        List<KyufujissekiMeisaiBusiness> 給付実績明細データリスト;
+        List<KyufujissekiMeisaiJushochiTokureiBusiness> 給付実績明細住所地特例データリスト;
+
+        給付実績集計データリスト = get給付実績集計データ(入力識別番号, 被保険者番号, サービス提供年月,
+                事業所番号, 通し番号);
+        給付実績明細データリスト = get給付実績明細データ(入力識別番号, 被保険者番号, サービス提供年月,
+                事業所番号, 通し番号);
+        給付実績明細住所地特例データリスト = get給付実績明細住所地特例データ(入力識別番号, 被保険者番号, サービス提供年月,
+                事業所番号, 通し番号);
+        給付実績情報照会用データ.setCsData_Z(給付実績集計データリスト);
+        給付実績情報照会用データ.setCsData_B(給付実績明細データリスト);
+        給付実績情報照会用データ.setCsData_N(給付実績明細住所地特例データリスト);
+        return 給付実績情報照会用データ;
+    }
+
+    /**
+     * 給付実績集計データの取得処理です。
+     *
+     * @param 入力識別番号 入力識別番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 事業所番号 事業所番号
+     * @param 通し番号 整理番号
+     * @return 給付実績集計データ
+     */
+    public List<KyufujissekiShukei> get給付実績集計データ(NyuryokuShikibetsuNo 入力識別番号, HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
+        List<KyufujissekiShukei> 給付実績集計データリスト = new ArrayList<>();
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
+        List<DbT3033KyufujissekiShukeiEntity> entityList = mapper.get給付実績集計データ(KyufuJissekiKensakuDataMapperParameter.
+                createParameter_給付実績検索データ(入力識別番号, 被保険者番号, サービス提供年月,
+                        事業所番号, 通し番号));
+        for (DbT3033KyufujissekiShukeiEntity entity : entityList) {
+            KyufujissekiShukei 給付実績集計データ = new KyufujissekiShukei(entity);
+            給付実績集計データリスト.add(給付実績集計データ);
+        }
+        return 給付実績集計データリスト;
+    }
+
+    /**
+     * 給付実績明細データの取得処理です。
+     *
+     * @param 入力識別番号 入力識別番号
+     * @param 被保険者番号 被保険者番号
+     * @param 事業所番号 事業所番号
+     * @param 通し番号 整理番号
+     * @param サービス提供年月 サービス提供年月
+     * @return 給付実績明細データ
+     */
+    public List<KyufujissekiMeisaiBusiness> get給付実績明細データ(NyuryokuShikibetsuNo 入力識別番号, HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
+        List<KyufujissekiMeisaiBusiness> 給付実績明細データリスト = new ArrayList<>();
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
+        List<KyufujissekiMeisaiRelateEntity> entityList = mapper.get給付実績明細データ(KyufuJissekiKensakuDataMapperParameter.
+                createParameter_給付実績検索データ(入力識別番号, 被保険者番号, サービス提供年月,
+                        事業所番号, 通し番号));
+        for (KyufujissekiMeisaiRelateEntity entity : entityList) {
+            KyufujissekiMeisaiBusiness 給付実績明細データ = new KyufujissekiMeisaiBusiness();
+            給付実績明細データ.set給付実績明細(new KyufujissekiMeisai(entity.get給付実績明細データ()));
+            if (entity.getServiceShuruiRyakusho() != null) {
+                給付実績明細データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            } else {
+                給付実績明細データ.setサービス種類略称(RString.EMPTY);
+            }
+            給付実績明細データリスト.add(給付実績明細データ);
+        }
+        return 給付実績明細データリスト;
+    }
+
+    /**
+     * 給付実績明細住所地特例データの取得処理です。
+     *
+     * @param 入力識別番号 入力識別番号
+     * @param 被保険者番号 被保険者番号
+     * @param 事業所番号 事業所番号
+     * @param 通し番号 整理番号
+     * @param サービス提供年月 サービス提供年月
+     * @return 給付実績明細住所地特例データ
+     */
+    public List<KyufujissekiMeisaiJushochiTokureiBusiness> get給付実績明細住所地特例データ(NyuryokuShikibetsuNo 入力識別番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
+        List<KyufujissekiMeisaiJushochiTokureiBusiness> 給付実績明細住所地特例データリスト = new ArrayList<>();
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
+        List<KyufujissekiMeisaiJushochiTokureiRelateEntity> entityList = mapper.get給付実績明細住所地特例データ(
+                KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
+                        入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
+        for (KyufujissekiMeisaiJushochiTokureiRelateEntity entity : entityList) {
+            KyufujissekiMeisaiJushochiTokureiBusiness 給付実績明細住所地特例データ = new KyufujissekiMeisaiJushochiTokureiBusiness();
+            if (entity.getServiceShuruiRyakusho() != null) {
+                給付実績明細住所地特例データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            } else {
+                給付実績明細住所地特例データ.setサービス種類略称(RString.EMPTY);
+            }
+            給付実績明細住所地特例データ.set給付実績明細住所地特例情報(new KyufujissekiMeisaiJushochiTokurei(
+                    entity.get給付実績明細住所地特例データ()));
+            給付実績明細住所地特例データリスト.add(給付実績明細住所地特例データ);
+        }
+        return 給付実績明細住所地特例データリスト;
     }
 }
