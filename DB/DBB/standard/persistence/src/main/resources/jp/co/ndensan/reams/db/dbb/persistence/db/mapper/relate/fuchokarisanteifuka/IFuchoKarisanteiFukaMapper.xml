@@ -213,7 +213,11 @@
             "FuchoKarisanteiTemp"."hihokenshaNo" = "DbT2001ChoshuHoho"."hihokenshaNo"
         LEFT JOIN
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
-        ON "FuchoKarisanteiTemp"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"            
+        ON "FuchoKarisanteiTemp"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode" 
+        ORDER BY
+            "fuchoKarisanteiTemp_tsuchishoNo",
+            "fuchoKarisanteiTemp_fukaNendo",
+            "fuchoKarisanteiTemp_choteiNendo"
     </select>
     
     <resultMap id="resultMap_FukaKeisanTemp" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FukaKeisanEntity" autoMapping="true">
