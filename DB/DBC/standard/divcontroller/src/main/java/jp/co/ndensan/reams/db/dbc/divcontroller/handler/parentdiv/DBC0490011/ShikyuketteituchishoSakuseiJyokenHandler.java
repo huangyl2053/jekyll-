@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0490011;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.ketteitsuchishosakusei.param.KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020060.DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
@@ -17,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuuketteitsuch
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -38,9 +36,6 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
     private static final RString 高額総合事業サービス費支給決定通知書メニューID = new RString("DBCMNL3002");
     private static final RString 高額サービス費支給決定通知書作成帳票ID = new RString("DBC100007_KogakuKetteiTsuchiSho");
     private static final RString 高額総合事業サービス費支給決定通知書帳票ID = new RString("DBC100061_JigyoKogakuKetteiTsuchisho");
-    private static final RString 処理枝番_01 = new RString("01");
-    private static final RString 処理枝番_02 = new RString("02");
-    private static final RString 処理枝番_03 = new RString("03");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
     private static final RString KEY2 = new RString("key2");
@@ -72,26 +67,19 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
      */
     public void initialize() {
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        List<ShoriDateKanri> 前回対象日List
-                = KougakuSabisuhiShikyuuKetteiTsuchishoSakusei.createInstance().getZenkaiTaisyobiData(導入団体クラス.get地方公共団体コード());
-        RDate 前回対象日From = null;
-        RDate 前回対象日To = null;
-        if (!前回対象日List.isEmpty() && 処理枝番_01.equals(前回対象日List.get(0).get処理枝番())) {
-            if (前回対象日List.get(0).get対象開始年月日() != null) {
-                前回対象日From = new RDate(前回対象日List.get(0).get対象開始年月日().toString());
-            }
-            if (前回対象日List.get(0).get対象終了年月日() != null) {
-                前回対象日To = new RDate(前回対象日List.get(0).get対象終了年月日().toString());
-                div.getChushutsuJoken().getTxtUketukebi().setFromValue(前回対象日To.plusDay(INT_1));
-            }
-        }
-        if (前回対象日To != null) {
-            RDate 前回対象日Toの次日 = 前回対象日To.plusDay(INT_1);
+        ShoriDateKanri 前回対象日 = KougakuSabisuhiShikyuuKetteiTsuchishoSakusei.createInstance().
+                getZenkaiTaisyobiData(
+                        ShoriName.事業高額サービス等支給不支給決定通知書一括作成_受付日.get名称(),
+                        導入団体クラス.get地方公共団体コード());
+        if (前回対象日 != null) {
+            div.getChushutsuJoken().getTxtZenkaiTaishobi().setFromValue(new RDate(前回対象日.get対象開始年月日().toString()));
+            div.getChushutsuJoken().getTxtZenkaiTaishobi().setToValue(new RDate(前回対象日.get対象終了年月日().toString()));
+
+            RDate 前回対象日Toの次日 = new RDate(前回対象日.get対象開始年月日().toString()).plusDay(INT_1);
             div.getChushutsuJoken().getTxtUketukebi().setFromValue(前回対象日Toの次日);
             div.getChushutsuJoken().getTxtKetteibi().setFromValue(前回対象日Toの次日);
         }
-        div.getChushutsuJoken().getTxtZenkaiTaishobi().setFromValue(前回対象日From);
-        div.getChushutsuJoken().getTxtZenkaiTaishobi().setToValue(前回対象日To);
+
         RDate システム日付 = RDate.getNowDate();
         div.getChushutsuJoken().getTxtUketukebi().setToValue(システム日付);
         div.getChushutsuJoken().getTxtKetteibi().setToValue(システム日付);
@@ -118,52 +106,45 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
      */
     public void onClick_radHizukeSentaku() {
         RString 選択Key = div.getChushutsuJoken().getRadHizukeSentaku().getSelectedKey();
-        RDate 前回対象日From = null;
-        RDate 前回対象日To = null;
+        RString 処理名;
+        if (KEY0.equals(選択Key)) {
+            処理名 = ShoriName.事業高額サービス等支給不支給決定通知書一括作成_受付日.get名称();
+        } else if (KEY1.equals(選択Key)) {
+            処理名 = ShoriName.事業高額サービス等支給不支給決定通知書一括作成_決定日.get名称();
+        } else {
+            処理名 = ShoriName.事業高額サービス等支給不支給決定通知書一括作成_決定者受付年月.get名称();
+        }
+
         RDate システム日付 = RDate.getNowDate();
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        List<ShoriDateKanri> 前回対象日List
-                = KougakuSabisuhiShikyuuKetteiTsuchishoSakusei.createInstance().getZenkaiTaisyobiData(導入団体クラス.get地方公共団体コード());
-        Map<RString, ShoriDateKanri> 前回対象日Map = new HashMap<>();
-        for (ShoriDateKanri 前回対象日 : 前回対象日List) {
-            前回対象日Map.put(前回対象日.get処理枝番(), 前回対象日);
+        ShoriDateKanri 前回対象日 = KougakuSabisuhiShikyuuKetteiTsuchishoSakusei.createInstance().
+                getZenkaiTaisyobiData(処理名, 導入団体クラス.get地方公共団体コード());
+
+        if (前回対象日 != null) {
+            div.getChushutsuJoken().getTxtZenkaiTaishobi().setFromValue(new RDate(前回対象日.get対象開始年月日().toString()));
+            div.getChushutsuJoken().getTxtZenkaiTaishobi().setToValue(new RDate(前回対象日.get対象終了年月日().toString()));
+
+            RDate 前回対象日Toの次日 = new RDate(前回対象日.get対象開始年月日().toString()).plusDay(INT_1);
+
+            if (KEY0.equals(選択Key)) {
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(false);
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(true);
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setFromValue(前回対象日Toの次日.plusDay(INT_1));
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setToValue(システム日付);
+            } else if (KEY1.equals(選択Key)) {
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(false);
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setFromValue(前回対象日Toの次日.plusDay(INT_1));
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setToValue(システム日付);
+            } else if (KEY2.equals(選択Key)) {
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(true);
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(false);
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setValue(システム日付);
+            }
         }
-        if (KEY0.equals(選択Key)) {
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(false);
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(true);
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
-            if (前回対象日Map.containsKey(処理枝番_01)) {
-                前回対象日From = new RDate(前回対象日Map.get(処理枝番_01).get対象開始年月日().toString());
-                前回対象日To = new RDate(前回対象日Map.get(処理枝番_01).get対象終了年月日().toString());
-            }
-            if (前回対象日To != null) {
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setFromValue(前回対象日To.plusDay(INT_1));
-            }
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setToValue(システム日付);
-        } else if (KEY1.equals(選択Key)) {
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(false);
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
-            if (前回対象日Map.containsKey(処理枝番_02)) {
-                前回対象日From = new RDate(前回対象日Map.get(処理枝番_02).get対象開始年月日().toString());
-                前回対象日To = new RDate(前回対象日Map.get(処理枝番_02).get対象終了年月日().toString());
-            }
-            if (前回対象日To != null) {
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setFromValue(前回対象日To.plusDay(INT_1));
-            }
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setToValue(システム日付);
-        } else if (KEY2.equals(選択Key)) {
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(true);
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(false);
-            if (前回対象日Map.containsKey(処理枝番_03)) {
-                前回対象日From = new RDate(前回対象日Map.get(処理枝番_03).get対象開始年月日().toString());
-                前回対象日To = new RDate(前回対象日Map.get(処理枝番_03).get対象終了年月日().toString());
-            }
-            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setValue(システム日付);
-        }
-        div.getChushutsuJoken().getTxtZenkaiTaishobi().setFromValue(前回対象日From);
-        div.getChushutsuJoken().getTxtZenkaiTaishobi().setToValue(前回対象日To);
     }
 
     /**
@@ -250,6 +231,8 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
         RString 文書番号 = div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().get文書番号();
         if (文書番号 != null && !文書番号.isEmpty()) {
             parameter.set文書番号(div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().get文書番号());
+        } else if (new RString("第号").equals(文書番号)) {
+            parameter.set文書番号(new RString("第　　　　　　　号"));
         }
         if (div.getShikyuKetteiTsuchisho().getChkTesutoShuturyoku().getSelectedKeys().isEmpty()) {
             parameter.setテスト出力フラグ(フラグ_FALSE);

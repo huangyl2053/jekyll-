@@ -38,7 +38,9 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity {
     private RString 口座払;
     private RString 金融機関;
     private RString 支給_不支給区分;
-    private RString 持ちもの;
+    private RString お持ちいただくもの１;
+    private RString お持ちいただくもの２;
+    private RString お持ちいただくもの３;
     private RString 支払方法区分;
     private RString 支払場所;
     private RDate 支払期間;

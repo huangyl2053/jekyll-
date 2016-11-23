@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakuketteitsuchishoyiji
 import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakuketteitsuchishoyijinashi.JigyoKogakuKetteiTsuchishoYijiNashiReport;
 import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakushikyufushikyukettetsuchiich.JigyoKogakuShikyuFushikyuKetteTsuchiPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakushikyufushikyukettetsuchiich.JigyoKogakuShikyuFushikyuKetteTsuchiReport;
+import jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran.KetteiTsuchiIchiranBreakPageItem;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
@@ -30,11 +32,10 @@ import jp.co.ndensan.reams.db.dbc.entity.report.jigyokogakushikyufushikyukettets
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.servicehishikyuketteitsuchisho.ServicehiShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.BreakPageCreator;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -93,7 +94,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -147,6 +147,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
     private static final RString 定型文文字サイズ_3 = new RString("3");
     private static final RString 定型文文字サイズ_4 = new RString("4");
     private static final RString 更新しない = new RString("1");
+    private static final RString 更新する = new RString("2");
     private static final int RSTRING_12 = 12;
     private static final RString 午前 = new RString("午前");
     private static final RString 午後 = new RString("午後");
@@ -165,6 +166,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
     private KogakuKaigoServiceProcessParameter parameter;
     private JigyoKogakuKetteiTsuchishoReportParameter mybatisParameter;
     ServicehiShikyuKetteiTsuchisho service;
+    List<JigyoKogakuShikyuFushikyuKetteTsuchiEntity> itemList = new ArrayList<>();
 
     private IOutputOrder 出力順;
     private List<RString> 改頁リスト;
@@ -176,18 +178,18 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
     private RString 設定値2;
     private RString 設定値3;
     private Association 導入団体情報;
-    private boolean dataFlag;
     private RDateTime システム日時;
-    private Decimal 本人支給額合計;
-    private Decimal 支給額給額合計;
     private int 連番;
     private ChohyoSeigyoKyotsu 帳票制御共通情報;
     private NinshoshaSource ninshoshaSource1;
     private NinshoshaSource ninshoshaSource2;
-    private RString 帳票ID;
     private RString 支払方法抽出区分;
     private RString 帳票タイプ;
-    private JigyoKogakuShikyuFushikyuKetteTsuchiEntity lastReportEntity;
+    private RString 改頁1 = RString.EMPTY;
+    private RString 改頁2 = RString.EMPTY;
+    private RString 改頁3 = RString.EMPTY;
+    private RString 改頁4 = RString.EMPTY;
+    private RString 改頁5 = RString.EMPTY;
 
     BatchReportWriter<JigyoKogakuKetteiTsuchishoYijiNashiSource> batchReportWriter1;
     ReportSourceWriter<JigyoKogakuKetteiTsuchishoYijiNashiSource> reportSourceWriter1;
@@ -195,7 +197,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
     ReportSourceWriter<JigyoKogakuKetteiTsuchishoYijiAriSource> reportSourceWriter2;
     BatchReportWriter<JigyoKogakuShikyuFushikyuKetteTsuchiSource> batchReportWriter3;
     ReportSourceWriter<JigyoKogakuShikyuFushikyuKetteTsuchiSource> reportSourceWriter3;
-    
+
     private List<PersonalData> personalDataList;
     private ReportOutputJokenhyoProcessCore outputCore;
 
@@ -203,9 +205,6 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
     protected void initialize() {
 
         連番 = INT_0;
-        dataFlag = true;
-        本人支給額合計 = Decimal.ZERO;
-        支給額給額合計 = Decimal.ZERO;
         並び順 = new ArrayList<>();
         改頁リスト = new ArrayList<>();
         pageBreakKeys = new ArrayList<>();
@@ -219,8 +218,6 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         導入団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID);
         通知書定型文 = get通知書定型文();
-        帳票ID = DbBusinessConfig.get(ConfigNameDBC.事業高額決定通知書_帳票ID,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         ChohyoSeigyoHanyo キー_支払方法抽出区分 = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100007.getReportId(),
                 FlexibleYear.MIN, 帳票制御汎用キー_支払方法抽出区分);
@@ -228,7 +225,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
                 FlexibleYear.MIN, 帳票制御汎用キー_帳票タイプ);
         支払方法抽出区分 = キー_支払方法抽出区分 == null ? null : キー_支払方法抽出区分.get設定値();
         帳票タイプ = キー_帳票タイプ == null ? RString.EMPTY : キー_帳票タイプ.get設定値();
-        
+
         if (印字する.equals(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_ゆうちょ銀行店名表示))) {
             印字するFLG = true;
         }
@@ -332,38 +329,66 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
                     reportEntity, ninshoshaSource2, parameter.get文書番号(), 通知書定型文, 帳票制御共通情報, 連番);
             report2.writeBy(reportSourceWriter2);
         }
-        dataFlag = false;
         JigyoKogakuShikyuFushikyuKetteTsuchiEntity fushikyuReportEntity = getFushikyuReportEntity(entity, 宛名情報, 住所);
-        lastReportEntity = fushikyuReportEntity;
-        JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(fushikyuReportEntity, 連番, false);
-        report.writeBy(reportSourceWriter3);
-        本人支給額合計 = 本人支給額合計.add(entity.get一時Entity().getRiyoshaFutanGaku() == null ? Decimal.ZERO
-                : entity.get一時Entity().getRiyoshaFutanGaku());
-        支給額給額合計 = 支給額給額合計.add(entity.get一時Entity().getKogakuShikyuGaku() == null ? Decimal.ZERO
-                : entity.get一時Entity().getKogakuShikyuGaku());
-        personalDataList.add(toPersonalData(entity));    
+        itemList.add(fushikyuReportEntity);
+        personalDataList.add(toPersonalData(entity));
 
     }
-     private PersonalData toPersonalData(KogakuServiceReportEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), 
+
+    private PersonalData toPersonalData(KogakuServiceReportEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"),
                 new RString("被保険者番号"), new RString(entity.get一時Entity().getHihokenshaNo().toString()));
         return PersonalData.of(entity.get一時Entity().getShikibetsuCode(), expandedInfo);
     }
 
     @Override
     protected void afterExecute() {
-        if (dataFlag) {
-            JigyoKogakuShikyuFushikyuKetteTsuchiEntity afterEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
-            set出力順と改頁(afterEntity);
-            afterEntity.set被保険者氏名(被保険者氏名_出力ない);
-            JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(afterEntity, 連番, false);
-            report.writeBy(reportSourceWriter3);
+
+        Decimal 支給額給額合計_支給 = Decimal.ZERO;
+        Decimal 本人支給額合計_支給 = Decimal.ZERO;
+        int 支給件数 = 0;
+        Decimal 支給額給額合計_不支給 = Decimal.ZERO;
+        Decimal 本人支給額合計_不支給 = Decimal.ZERO;
+        int 不支給件数 = 0;
+
+        if (itemList == null || itemList.isEmpty()) {
+            List<JigyoKogakuShikyuFushikyuKetteTsuchiEntity> emptyList = new ArrayList<>();
+            JigyoKogakuShikyuFushikyuKetteTsuchiEntity emptyEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
+            emptyList.add(emptyEntity作成(emptyEntity));
+
+            JigyoKogakuShikyuFushikyuKetteTsuchiReport 支給report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(emptyList);
+            支給report.writeBy(reportSourceWriter3);
         } else {
-            lastReportEntity.set支給総件数(new RString(連番));
-            lastReportEntity.set本人支給額合計(doカンマ編集(本人支給額合計));
-            lastReportEntity.set支給額給額合計(doカンマ編集(支給額給額合計));
-            JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(lastReportEntity, 連番, true);
-            report.writeBy(reportSourceWriter3);
+            List<JigyoKogakuShikyuFushikyuKetteTsuchiEntity> 支給List = new ArrayList<>();
+            List<JigyoKogakuShikyuFushikyuKetteTsuchiEntity> 不支給List = new ArrayList<>();
+            for (JigyoKogakuShikyuFushikyuKetteTsuchiEntity entity : itemList) {
+                Decimal 該当レコード支給金額集計 = entity.get支給額() == null ? Decimal.ZERO : entity.get支給額();
+                Decimal 該当レコード本人支払額 = entity.get本人支払額() == null ? Decimal.ZERO : entity.get本人支払額();
+                if (ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給_不支給_決定区分())) {
+                    支給額給額合計_支給 = 支給額給額合計_支給.add(該当レコード支給金額集計);
+                    本人支給額合計_支給 = 本人支給額合計_支給.add(該当レコード本人支払額);
+                    支給件数 = 支給件数 + 1;
+                    支給List.add(entity);
+                    continue;
+                }
+                if (ShikyuFushikyuKubun.支給.getコード().equals(entity.get支給_不支給_決定区分())) {
+                    支給額給額合計_不支給 = 支給額給額合計_不支給.add(該当レコード支給金額集計);
+                    本人支給額合計_不支給 = 本人支給額合計_不支給.add(該当レコード本人支払額);
+                    不支給件数 = 不支給件数 + 1;
+                    不支給List.add(entity);
+                }
+            }
+            JigyoKogakuShikyuFushikyuKetteTsuchiEntity 支給合計entity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
+            支給List.add(合計レコード作成(支給件数, 支給額給額合計_支給, 本人支給額合計_支給, new RString("支給計"), 支給合計entity));
+
+            JigyoKogakuShikyuFushikyuKetteTsuchiEntity 不支給合計entity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
+            不支給List.add(合計レコード作成(不支給件数, 支給額給額合計_不支給, 本人支給額合計_不支給, new RString("不支給計"), 不支給合計entity));
+
+            JigyoKogakuShikyuFushikyuKetteTsuchiReport 支給report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(支給List);
+            支給report.writeBy(reportSourceWriter3);
+
+            JigyoKogakuShikyuFushikyuKetteTsuchiReport 不支給report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(不支給List);
+            不支給report.writeBy(reportSourceWriter3);
         }
         if (帳票タイプ_1.equals(帳票タイプ)) {
             batchReportWriter1.close();
@@ -374,16 +399,17 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         AccessLogger.log(AccessLogType.照会, personalDataList);
         eucFileOutputJohoFactory();
     }
+
     private void eucFileOutputJohoFactory() {
         RString pageCount = RString.EMPTY;
         if (帳票タイプ_1.equals(帳票タイプ)) {
             pageCount = new RString(reportSourceWriter1.pageCount().value());
         } else if (帳票タイプ_2.equals(帳票タイプ)) {
             pageCount = new RString(reportSourceWriter2.pageCount().value());
-        } 
+        }
         List<RString> 出力条件List = outputCore.get出力条件(parameter, 出力順);
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                帳票ID,
+                ReportIdDBC.DBC100061.getReportId().getColumnValue(),
                 Association.getLasdecCode().value(),
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
                 new RString(parameter.getJobId()),
@@ -407,6 +433,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
                     改頁リスト.add(item.get項目名());
                 }
             }
+            出力順情報 = 出力順情報.replace("order by", "");
         } else {
             出力順情報 = RString.EMPTY;
         }
@@ -462,7 +489,11 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         reportEntity.set被保険者氏名(宛名情報.get名称().getName().getColumnValue());
         reportEntity.set被保険者番号(entity.getHihokenshaNo());
         reportEntity.set受付年月日(entity.getUketsukeYMD());
-        reportEntity.set決定年月日(entity.getKetteiYMD());
+        if (更新しない.equals(parameter.get決定日一括更新区分())) {
+            reportEntity.set決定年月日(entity.getKetteiYMD());
+        } else if (更新する.equals(parameter.get決定日一括更新区分())) {
+            reportEntity.set決定年月日(new FlexibleDate(parameter.get決定日().toDateString()));
+        }
         reportEntity.set本人支払額(entity.getRiyoshaFutanGaku());
         reportEntity.set対象年月(entity.getServiceTeikyoYM());
         reportEntity.set給付の種類(entity.getServiceShuruiName());
@@ -470,7 +501,13 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         reportEntity.set支給金額(entity.getKogakuShikyuGaku());
         reportEntity.set不支給理由(entity.getFushikyuRiyu());
         reportEntity.set支払方法区分(entity.getShiharaiHohoKubunCode());
-        reportEntity.set持ちもの(通知書定型文.get(INT_0));
+        ChohyoSeigyoHanyoManager manager = ChohyoSeigyoHanyoManager.createInstance();
+        RString 持ち物内容文言１ = get帳票制御汎用(manager, new RString("持ち物内容文言１"));
+        RString 持ち物内容文言２ = get帳票制御汎用(manager, new RString("持ち物内容文言２"));
+        RString 持ち物内容文言３ = get帳票制御汎用(manager, new RString("持ち物内容文言３"));
+        reportEntity.setお持ちいただくもの１(持ち物内容文言１);
+        reportEntity.setお持ちいただくもの２(持ち物内容文言２);
+        reportEntity.setお持ちいただくもの３(持ち物内容文言３);
         if (parameter.get振込予定日() != null) {
             reportEntity.set支払予定日(new FlexibleDate(parameter.get振込予定日().toDateString()));
         }
@@ -478,7 +515,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         if (口座情報 != null) {
             set口座情報(reportEntity, 口座情報);
         }
-        
+
         if (!(ShiharaiHohoKubun.窓口払.getコード().equals(entity.getShiharaiHohoKubunCode())
                 && ShikyuFushikyuKubun.支給.getコード().equals(entity.getKetteiShikyuKubunCode()))) {
             return reportEntity;
@@ -500,7 +537,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
             reportEntity.set支払窓口開始時間(setDataTimeFomart2(parameter.get開始時間()));
             reportEntity.set支払窓口終了時間(setDataTimeFomart2(parameter.get終了時間()));
         }
-        
+
         return reportEntity;
     }
 
@@ -530,8 +567,8 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         returnEntity.set認定終了日(formatDate(一時Entity.getNinteiYukoKikanShuryoYMD()));
         returnEntity.set受付年月日(formatDate(一時Entity.getUketsukeYMD()));
         returnEntity.set決定年月日(formatDate(一時Entity.getKetteiYMD()));
-        returnEntity.set本人支払額(doカンマ編集(一時Entity.getRiyoshaFutanGaku()));
-        returnEntity.set支給額(doカンマ編集(一時Entity.getKogakuShikyuGaku()));
+        returnEntity.set本人支払額(一時Entity.getRiyoshaFutanGaku());
+        returnEntity.set支給額(一時Entity.getKogakuShikyuGaku());
         if (null != 一時Entity.getKetteiShikyuKubunCode() && !一時Entity.getKetteiShikyuKubunCode().isEmpty()) {
             ShikyuKubun 支給不支給区分 = ShikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
             returnEntity.set支給_不支給_決定区分(支給不支給区分.get名称());
@@ -553,6 +590,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         returnEntity.set証記載保険者番号(一時Entity.getShoKisaiHokenshaNo() == null ? RString.EMPTY
                 : 一時Entity.getShoKisaiHokenshaNo().getColumnValue());
         returnEntity.set資格状態区分(一時Entity.getShikakuJyotaiKubun() == null ? RString.EMPTY : 一時Entity.getShikakuJyotaiKubun());
+        returnEntity.set連番(new RString(String.valueOf(連番)));
         return returnEntity;
     }
 
@@ -598,6 +636,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = システム日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         returnEntity.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI));
+        getPageBreakKeys();
     }
 
     private RString formatDate(FlexibleDate date) {
@@ -695,7 +734,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         list.add(RString.EMPTY);
         list.add(RString.EMPTY);
     }
-    
+
     private RString setDataTimeFomart(RString time) {
         if (RString.isNullOrEmpty(time)) {
             return RString.EMPTY;
@@ -703,7 +742,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         RTime 支払窓口終了期間 = new RTime(time);
         return setDataTimeFomart2(支払窓口終了期間);
     }
-    
+
     private RString setDataTimeFomart2(RTime 支払窓口終了期間) {
         if (null == 支払窓口終了期間) {
             return RString.EMPTY;
@@ -724,14 +763,55 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         }
         return 支払窓口終了期間Builder.toRString();
     }
-    
+
     private RString get帳票制御汎用(ChohyoSeigyoHanyoManager 帳票制御汎用Manager, RString 項目名) {
         RString 設定値 = RString.EMPTY;
-        ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+        ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100061.getReportId(),
                 FlexibleYear.MIN, 項目名);
         if (chohyoSeigyoHanyo != null) {
             設定値 = chohyoSeigyoHanyo.get設定値();
         }
         return 設定値;
+    }
+
+    private JigyoKogakuShikyuFushikyuKetteTsuchiEntity emptyEntity作成(JigyoKogakuShikyuFushikyuKetteTsuchiEntity emptyEntity) {
+
+        set出力順と改頁(emptyEntity);
+        emptyEntity.set被保険者氏名(被保険者氏名_出力ない);
+
+        return emptyEntity;
+    }
+
+    private JigyoKogakuShikyuFushikyuKetteTsuchiEntity 合計レコード作成(int 支給件数, Decimal 支給額給額合計, Decimal 本人支給額合計,
+            RString タイトル,
+            JigyoKogakuShikyuFushikyuKetteTsuchiEntity 合計entity) {
+
+        set出力順と改頁(合計entity);
+        合計entity.set受付年月日(doカンマ編集(new Decimal(支給件数)));
+        合計entity.set支給額給額合計(支給額給額合計);
+        合計entity.set支給額(本人支給額合計);
+        合計entity.set認定開始日(タイトル);
+
+        return 合計entity;
+    }
+
+    private void getPageBreakKeys() {
+        List<RString> pageBreakKeyList = new ArrayList<>();
+        if (!RString.isNullOrEmpty(改頁1)) {
+            pageBreakKeyList.add(BreakPageCreator.getBreakPageName(KetteiTsuchiIchiranBreakPageItem.class, 改頁1));
+        }
+        if (!RString.isNullOrEmpty(改頁2)) {
+            pageBreakKeyList.add(BreakPageCreator.getBreakPageName(KetteiTsuchiIchiranBreakPageItem.class, 改頁2));
+        }
+        if (!RString.isNullOrEmpty(改頁3)) {
+            pageBreakKeyList.add(BreakPageCreator.getBreakPageName(KetteiTsuchiIchiranBreakPageItem.class, 改頁3));
+        }
+        if (!RString.isNullOrEmpty(改頁4)) {
+            pageBreakKeyList.add(BreakPageCreator.getBreakPageName(KetteiTsuchiIchiranBreakPageItem.class, 改頁4));
+        }
+        if (!RString.isNullOrEmpty(改頁5)) {
+            pageBreakKeyList.add(BreakPageCreator.getBreakPageName(KetteiTsuchiIchiranBreakPageItem.class, 改頁5));
+        }
+        pageBreakKeys = Collections.unmodifiableList(pageBreakKeyList);
     }
 }

@@ -60,6 +60,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
     private static final RString 口座種別 = new RString("口座種別");
     private static final RString 店番 = new RString("店番");
     private static final RString 口座番号 = new RString("口座番号");
+    private static final RString 改行 = new RString("\n");
     private final NinshoshaSource 認証者ソースデータ;
     private final ChohyoSeigyoKyotsu 帳票制御共通情報;
     private final List<RString> titleList;
@@ -283,11 +284,17 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
     }
 
     private RString 年月日編集(RDate 日付) {
+        if (日付 == null) {
+            return RString.EMPTY;
+        }
         return 日付.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString 年月編集(FlexibleYearMonth 日付) {
+        if (日付 == null) {
+            return RString.EMPTY;
+        }
         return 日付.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
@@ -299,8 +306,11 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
         return RString.EMPTY;
     }
 
-    private String get日本語名略称(RDate 日付) {
-        return 日付.getDayOfWeek().getInFullParentheses();
+    private RString get日本語名略称(RDate 日付) {
+        if (日付 == null) {
+            return RString.EMPTY;
+        }
+        return new RString(日付.getDayOfWeek().getInFullParentheses());
     }
 
     private void set窓口払口座払取り消し持ちもの(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
@@ -329,7 +339,9 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
         if (帳票情報.get支給_不支給決定区分() != null && 支給.equals(帳票情報.get支給_不支給決定区分())
                 && 窓口払い区分.equals(帳票情報.get支払方法区分())
                 && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
-            source.mochimono = 帳票情報.get持ちもの();
+            source.mochimono = 帳票情報.getお持ちいただくもの１().
+                    concat(改行).concat(帳票情報.getお持ちいただくもの２()).
+                    concat(改行).concat(帳票情報.getお持ちいただくもの３());
             source.shiharaiBasho = 帳票情報.get支払場所();
             source.shiharaiStartYMD = 年月日編集(帳票情報.get支払期間開始年月日()).
                     concat(get日本語名略称(帳票情報.get支払期間開始年月日())).concat(記号);
