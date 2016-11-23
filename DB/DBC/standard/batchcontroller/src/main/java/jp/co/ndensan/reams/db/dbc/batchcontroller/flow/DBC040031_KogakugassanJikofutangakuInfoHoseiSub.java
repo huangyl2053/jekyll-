@@ -38,27 +38,27 @@ public class DBC040031_KogakugassanJikofutangakuInfoHoseiSub extends BatchFlowBa
     private static final String 実績基本データTO中間DBデータ = "jissekiFutangakuToTyukanDb";
     private static final String 実績基本データ削除 = "clearJissekiFutangakuDataTemp";
     private static final String 中間DBデータTO実績基本データ = "tyukanDbToJissekiFutangaku";
-    private static final String INITJISSEKICHECKPROCESS = "initJissekiCheckProcess";
-    private static final String INSSHIHARAIHOHOHENKOPROCESS = "insShiharaihohoHenkoProcess";
-    private static final String INSSHIHARAIHOHOHENKO = "insShiharaihohoHenko";
-    private static final String UPDSHAFUKUKEIGENTEMPPROCESS = "updshafukuKeigenTempProcess";
-    private static final String UPDJISSEKIFUTANGAKUPROCESS = "updJIssekiFutangakuProcess";
-    private static final String UPDJISSEKIFUTANGAKUAFTER = "updJIssekiFutangakuAfter";
+    private static final String 実績負担額更新登録 = "initJissekiCheckProcess";
+    private static final String 負担額ワークエリア登録 = "insShiharaihohoHenkoProcess";
+    private static final String 負担額ワークエリア登録後 = "insShiharaihohoHenko";
+    private static final String 自己負担額ワークエリア更新 = "updshafukuKeigenTempProcess";
+    private static final String 実績負担額更新 = "updJIssekiFutangakuProcess";
+    private static final String 実績負担額更新後 = "updJIssekiFutangakuAfter";
 
     @Override
     protected void defineFlow() {
         executeStep(実績基本データ削除);
         executeStep(中間DBデータTO実績基本データ);
-        executeStep(INITJISSEKICHECKPROCESS);
-        boolean isデータがあり = getResult(Boolean.class, new RString(INITJISSEKICHECKPROCESS), InitJissekiCheckProcess.OUTPUTNAME);
+        executeStep(実績負担額更新登録);
+        boolean isデータがあり = getResult(Boolean.class, new RString(実績負担額更新登録), InitJissekiCheckProcess.OUTPUTNAME);
         if (!isデータがあり) {
             return;
         }
-        executeStep(INSSHIHARAIHOHOHENKOPROCESS);
-        executeStep(INSSHIHARAIHOHOHENKO);
-        executeStep(UPDSHAFUKUKEIGENTEMPPROCESS);
-        executeStep(UPDJISSEKIFUTANGAKUPROCESS);
-        executeStep(UPDJISSEKIFUTANGAKUAFTER);
+        executeStep(負担額ワークエリア登録);
+        executeStep(負担額ワークエリア登録後);
+        executeStep(自己負担額ワークエリア更新);
+        executeStep(実績負担額更新);
+        executeStep(実績負担額更新後);
         executeStep(中間DBデータ削除);
         executeStep(実績基本データTO中間DBデータ);
         executeStep(高額支給額集計処理);
@@ -90,35 +90,35 @@ public class DBC040031_KogakugassanJikofutangakuInfoHoseiSub extends BatchFlowBa
         return loopBatch(TyukanDbDataToJissekiFutangakuData.class).define();
     }
 
-    @Step(INITJISSEKICHECKPROCESS)
+    @Step(実績負担額更新登録)
     IBatchFlowCommand initJissekiCheckProcess() {
         return simpleBatch(InitJissekiCheckProcess.class).define();
     }
 
-    @Step(INSSHIHARAIHOHOHENKOPROCESS)
+    @Step(負担額ワークエリア登録)
     IBatchFlowCommand insShiharaihohoHenkoProcess() {
         InsShiharaihohoHenkoTempBeforeProcessParameter param
                 = new InsShiharaihohoHenkoTempBeforeProcessParameter(false);
         return loopBatch(InsShiharaihohoHenkoTempBeforeProcess.class).arguments(param).define();
     }
 
-    @Step(INSSHIHARAIHOHOHENKO)
+    @Step(負担額ワークエリア登録後)
     IBatchFlowCommand insShiharaihohoHenko() {
         return loopBatch(InsShiharaihohoHenkoTempProcess.class).define();
     }
 
-    @Step(UPDSHAFUKUKEIGENTEMPPROCESS)
+    @Step(自己負担額ワークエリア更新)
     IBatchFlowCommand updshafukuKeigenTempProcess() {
         UpdshafukuKeigenTempProcessParameter param = new UpdshafukuKeigenTempProcessParameter(false);
         return loopBatch(UpdshafukuKeigenTempProcess.class).arguments(param).define();
     }
 
-    @Step(UPDJISSEKIFUTANGAKUPROCESS)
+    @Step(実績負担額更新)
     IBatchFlowCommand updJIssekiFutangakuProcess() {
         return loopBatch(UpdJIssekiFutangakuTempProcess.class).define();
     }
 
-    @Step(UPDJISSEKIFUTANGAKUAFTER)
+    @Step(実績負担額更新後)
     IBatchFlowCommand updJIssekiFutangakuAfter() {
         UpdJIssekiFutangakuTempAfterProcessParameter param = new UpdJIssekiFutangakuTempAfterProcessParameter(
                 getParameter().get処理区分(), RDateTime.now());

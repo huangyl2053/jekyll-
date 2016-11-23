@@ -201,7 +201,10 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
 
     @Override
     protected void afterExecute() {
-        int 出力ページ数 = 所得照会票Report();
+        int 出力ページ数 = 0;
+        if (所得照会票データbefore != null) {
+            出力ページ数 = 所得照会票Report();
+        }
         if (文字列_001.equals(通知書タイプ)) {
             yokoReportWriter.close();
         } else {

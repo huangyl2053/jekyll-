@@ -1396,7 +1396,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             DbT4001JukyushaDaichoEntity 受給者台帳) {
         List<DbT4001JukyushaDaichoEntity> 小さいList = new ArrayList<>();
         for (DbT4001JukyushaDaichoEntity 受給者台帳Entity : 受給者台帳List) {
-            if (!コート_1.equals(受給者台帳.getYukoMukoKubun())) {
+            if (!コート_1.equals(受給者台帳Entity.getYukoMukoKubun())) {
                 continue;
             }
             if (受給者台帳Entity.getRirekiNo().compareTo(受給者台帳.getRirekiNo()) < 0) {
@@ -1414,7 +1414,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             DbT4001JukyushaDaichoEntity 受給者台帳) {
         List<DbT4001JukyushaDaichoEntity> 大きいList = new ArrayList<>();
         for (DbT4001JukyushaDaichoEntity 受給者台帳Entity : 受給者台帳List) {
-            if (!コート_1.equals(受給者台帳.getYukoMukoKubun())) {
+            if (!コート_1.equals(受給者台帳Entity.getYukoMukoKubun())) {
                 continue;
             }
             if (受給者台帳.getRirekiNo().compareTo(受給者台帳Entity.getRirekiNo()) < 0) {

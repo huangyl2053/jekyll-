@@ -1201,6 +1201,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
      * バッチ出力条件リストの出力メソッドです。
      *
      * @param 出力条件リスト List<RString>
+     * @param 出力ページ数 RString
      */
     public void loadバッチ出力条件リスト(List<RString> 出力条件リスト, RString 出力ページ数) {
 

@@ -78,8 +78,8 @@ public class FukaJohoInsertResult {
         dbT2002.setChoteiJiyu2(entity.getChoteiJiyu2());
         dbT2002.setChoteiJiyu3(entity.getChoteiJiyu3());
         dbT2002.setChoteiJiyu4(entity.getChoteiJiyu4());
-        dbT2002.setKoseiM(((!RString.isNullOrEmpty(entity.getKoseiM())) && 1 == entity.getKoseiM().length()) ?
-                entity.getKoseiM().padZeroToLeft(1) : entity.getKoseiM());
+        dbT2002.setKoseiM(((!RString.isNullOrEmpty(entity.getKoseiM())) && 1 == entity.getKoseiM().length())
+                ? entity.getKoseiM().padZeroToLeft(1) : entity.getKoseiM());
         dbT2002.setGemmenMaeHokenryo(entity.getGemmenMaeHokenryo());
         dbT2002.setGemmenGaku(entity.getGemmenGaku());
         dbT2002.setKakuteiHokenryo(entity.getKakuteiHokenryo());

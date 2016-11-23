@@ -246,8 +246,6 @@ public class KaigoHihokenshaInfoPanel {
     private RString 新履歴番号(RentaiGimusha result, RString 履歴番号, Decimal 最新履歴番号, KaigoHihokenshaInfoPanelDiv div) {
         if (result == null || ONE.equals(div.getHdnFlag())) {
             履歴番号 = new RString(最新履歴番号.intValue() + 1);
-        } else {
-            履歴番号 = new RString(最新履歴番号.intValue());
         }
         return 履歴番号;
     }
@@ -388,8 +386,8 @@ public class KaigoHihokenshaInfoPanel {
         KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
         for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
             if (entity.hasChanged() && entity.isModified()) {
-                manager.saveModify(entity);
-            } else if (entity.hasChanged() && entity.isAdded()) {
+                manager.saveNewModify(entity);
+            } else if (entity.hasChanged() && (entity.isAdded() || entity.isDeleted())) {
                 manager.save(entity);
             }
         }

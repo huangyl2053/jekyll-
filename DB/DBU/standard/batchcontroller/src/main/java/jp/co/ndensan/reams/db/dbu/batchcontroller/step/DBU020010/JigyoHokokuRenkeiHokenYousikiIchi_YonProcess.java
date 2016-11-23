@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoH
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokurenkei.JigyoHokokuRenkeiEntity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei4EucCsvEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -94,17 +92,6 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
     protected void afterExecute() {
         get様式１の４のCSV出力(processParameter.get保険者番号());
         eucCsvWriter.close();
-    }
-
-    private void setFilePath(RStringBuilder filePath) {
-        eucFilePath = Path.combinePath(processParameter.getSpoolWorkPath(), filePath.toRString());
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                setEncode(Encode.SJIS)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(true).
-                build();
     }
 
     private void get様式１の４のCSV出力(RString 保険者番号) {
@@ -507,19 +494,5 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
         }
         FlexibleDate flexibleDate = new FlexibleDate(date);
         return flexibleDate.wareki().toDateString().substring(1, 桁_3);
-    }
-
-    private RString get旧保険者番号(HokenshaNo date) {
-        if (date == null || date.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return date.value();
-    }
-
-    private RString get証記載保険者番号(ShoKisaiHokenshaNo date) {
-        if (date == null || date.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return date.value();
     }
 }

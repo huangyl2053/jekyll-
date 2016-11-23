@@ -238,32 +238,48 @@ public enum JikoFutangakuHoseiJohoDgSpec implements IPredicate<JikoFutangakuJoho
         }
 
         public static boolean is対象計算期間大小関係(JikoFutangakuJohoHoseiJohoDgDiv div) {
-            return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(
-                    div.getTxtTaishouKeisanKikan().getToValue());
+            if (div.getTxtTaishouKeisanKikan().getFromValue() != null
+                    && div.getTxtTaishouKeisanKikan().getToValue() != null) {
+                return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(
+                        div.getTxtTaishouKeisanKikan().getToValue());
+            }
+            return true;
         }
 
         public static boolean is被保険者期間大小関係(JikoFutangakuJohoHoseiJohoDgDiv div) {
-            return div.getTxtHihokenshaKikan().getFromValue().isBeforeOrEquals(
-                    div.getTxtHihokenshaKikan().getToValue());
+            if (div.getTxtHihokenshaKikan().getFromValue() != null
+                    && div.getTxtHihokenshaKikan().getToValue() != null) {
+                return div.getTxtHihokenshaKikan().getFromValue().isBeforeOrEquals(
+                        div.getTxtHihokenshaKikan().getToValue());
+            }
+            return true;
         }
 
         public static boolean is対象計算と被保険者期間大小関係開始(JikoFutangakuJohoHoseiJohoDgDiv div) {
-            return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(
-                    div.getTxtHihokenshaKikan().getFromValue());
+            if (div.getTxtTaishouKeisanKikan().getFromValue() != null
+                    && div.getTxtTaishouKeisanKikan().getToValue() != null) {
+                return div.getTxtTaishouKeisanKikan().getFromValue().isBeforeOrEquals(
+                        div.getTxtHihokenshaKikan().getFromValue());
+            }
+            return true;
         }
 
         public static boolean is対象計算と被保険者期間大小関係終了(JikoFutangakuJohoHoseiJohoDgDiv div) {
-            return div.getTxtHihokenshaKikan().getToValue().isBeforeOrEquals(
-                    div.getTxtTaishouKeisanKikan().getToValue());
+            if (div.getTxtHihokenshaKikan().getFromValue() != null
+                    && div.getTxtHihokenshaKikan().getToValue() != null) {
+                return div.getTxtHihokenshaKikan().getToValue().isBeforeOrEquals(
+                        div.getTxtTaishouKeisanKikan().getToValue());
+            }
+            return true;
         }
 
         public static boolean is窓口払情報年月日大小関係(JikoFutangakuJohoHoseiJohoDgDiv div) {
-            if (div.getTxtMadoguchiKaishiYMD().getValue() == null
-                    || div.getTxtMadoguchiShuryoYMD().getValue() == null) {
-                return true;
+            if (div.getTxtMadoguchiKaishiYMD().getValue() != null
+                    && div.getTxtMadoguchiShuryoYMD().getValue() != null) {
+                return div.getTxtMadoguchiKaishiYMD().getValue().isBeforeOrEquals(
+                        div.getTxtMadoguchiShuryoYMD().getValue());
             }
-            return div.getTxtMadoguchiKaishiYMD().getValue().isBeforeOrEquals(
-                    div.getTxtMadoguchiShuryoYMD().getValue());
+            return true;
         }
 
         public static boolean is対象計算期間開始の年度チェック(JikoFutangakuJohoHoseiJohoDgDiv div) {
@@ -278,7 +294,10 @@ public enum JikoFutangakuHoseiJohoDgSpec implements IPredicate<JikoFutangakuJoho
             RYearMonth 被保険者終了年月 = div.getTxtHihokenshaKikan().getToValue().getYearMonth();
             RYearMonth 開始年月 = new RYearMonth(対象年度.toDateString().concat(MONTH_EIGHT));
             RYearMonth 終了年月 = new RYearMonth(対象年度.plusYear(1).toDateString().concat(MONTH_SEVEN));
-            return 被保険者開始年月.isBeforeOrEquals(開始年月) && 終了年月.isBeforeOrEquals(被保険者終了年月);
+            if (被保険者開始年月 != null && 被保険者終了年月 != null) {
+                return 被保険者開始年月.isBeforeOrEquals(開始年月) && 終了年月.isBeforeOrEquals(被保険者終了年月);
+            }
+            return true;
         }
 
         public static boolean is対象計算期間終了の年度チェック(JikoFutangakuJohoHoseiJohoDgDiv div) {

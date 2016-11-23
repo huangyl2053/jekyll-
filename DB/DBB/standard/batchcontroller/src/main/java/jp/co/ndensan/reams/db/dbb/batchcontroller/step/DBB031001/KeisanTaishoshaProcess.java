@@ -52,8 +52,9 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
     private static final int INDEX_1 = 1;
     private static final int INDEX_14 = 14;
     private static final int INDEX_16 = 16;
-    private static final int 一日 = 1;
+    private static final int INDEX_31 = 31;
     private static final int 四月 = 4;
+    private static final int 三月 = 3;
     private static final RString FROMAT = new RString("%02d");
     private static final RString ゼロ_0000 = new RString("0000");
     private static final RString 合併情報区分_合併あり = new RString("1");
@@ -77,9 +78,13 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
     private TsuchishoNo 通知書番号;
     private RString 導入形態コード;
     private int count;
+    private boolean flag;
 
     @Override
     public void initialize() {
+        flag = false;
+        被保険者番号 = HihokenshaNo.EMPTY;
+        通知書番号 = TsuchishoNo.EMPTY;
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         導入形態コード = 市町村セキュリティ情報.get導入形態コード().getKey();
         資格の情報List = new ArrayList<>();
@@ -101,29 +106,26 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
 
     @Override
     protected void process(KeisanTaishoshaEntity entity) {
-        if (INDEX_1 <= count) {
-            if (entity.get資格の情報() == null && entity.get賦課の情報() != null) {
-                set賦課情報Error(entity);
-            } else if (entity.get資格の情報() != null && entity.get賦課の情報() != null) {
-                HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
-                set資格情報Entity(entity.get資格の情報(), tempEntity, myBatisParameter);
-                editor賦課は空にしない(entity, tempEntity);
-            } else if (entity.get資格の情報() != null && entity.get賦課の情報() == null) {
-                HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
-                set資格情報Entity(entity.get資格の情報(), tempEntity, myBatisParameter);
-                tempEntity.setChoteiNendo(myBatisParameter.get調定年度());
-                tempEntity.setFukaNendo(myBatisParameter.get賦課年度());
-                tempEntity.setTsuchishoNo(create通知書番号(entity.get資格の情報().getHihokenshaNo().getColumnValue(), 1));
-                本算定抽出writer.insert(tempEntity);
-                editor賦課は空(entity);
-            }
-            get被保険者番号(entity);
-            get通知書番号(entity);
-        } else {
-            資格の情報List.add(entity.get資格の情報());
-            get被保険者番号(entity);
-            get通知書番号(entity);
+        if (entity.get資格の情報() == null && entity.get賦課の情報() != null) {
+            set賦課情報Error(entity);
+            flag = true;
+        } else if (entity.get資格の情報() != null && entity.get賦課の情報() != null) {
+            HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
+            set資格情報Entity(entity.get資格の情報(), tempEntity, myBatisParameter);
+            editor賦課は空にしない(entity, tempEntity);
+            flag = false;
+        } else if (entity.get資格の情報() != null && entity.get賦課の情報() == null) {
+            HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
+            set資格情報Entity(entity.get資格の情報(), tempEntity, myBatisParameter);
+            tempEntity.setChoteiNendo(myBatisParameter.get調定年度());
+            tempEntity.setFukaNendo(myBatisParameter.get賦課年度());
+            tempEntity.setTsuchishoNo(create通知書番号(entity.get資格の情報().getHihokenshaNo().getColumnValue(), 1));
+            本算定抽出writer.insert(tempEntity);
+            editor賦課は空(entity);
+            flag = false;
         }
+        get被保険者番号(entity);
+        get通知書番号(entity);
         計算対象者抽出Entity = entity;
         count++;
     }
@@ -142,24 +144,7 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
         if (計算対象者抽出Entity == null) {
             return;
         }
-        if (計算対象者抽出Entity.get資格の情報() == null && count == 1) {
-            set賦課情報Error(計算対象者抽出Entity);
-        } else if (計算対象者抽出Entity.get賦課の情報() == null && count == 1) {
-            HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
-            set資格情報Entity(計算対象者抽出Entity.get資格の情報(), tempEntity, myBatisParameter);
-            tempEntity.setChoteiNendo(myBatisParameter.get調定年度());
-            tempEntity.setFukaNendo(myBatisParameter.get賦課年度());
-            tempEntity.setTsuchishoNo(create通知書番号(計算対象者抽出Entity.get資格の情報().getHihokenshaNo().getColumnValue(), 1));
-            本算定抽出writer.insert(tempEntity);
-            load月別ランク情報();
-        } else if (計算対象者抽出Entity.get賦課の情報() != null && count == 1) {
-            HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
-            set資格情報Entity(計算対象者抽出Entity.get資格の情報(), tempEntity, myBatisParameter);
-            tempEntity.setChoteiNendo(計算対象者抽出Entity.get賦課の情報().getChoteiNendo());
-            tempEntity.setChoteiNendo(計算対象者抽出Entity.get賦課の情報().getChoteiNendo());
-            tempEntity.setFukaNendo(計算対象者抽出Entity.get賦課の情報().getFukaNendo());
-            tempEntity.setTsuchishoNo(計算対象者抽出Entity.get賦課の情報().getTsuchishoNo());
-            本算定抽出writer.insert(tempEntity);
+        if (!flag) {
             load月別ランク情報();
         }
     }
@@ -186,29 +171,30 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
     private void editor賦課は空(KeisanTaishoshaEntity entity) {
         if (被保険者番号.equals(entity.get資格の情報().getHihokenshaNo())) {
             資格の情報List.add(entity.get資格の情報());
-        } else {
+            return;
+        } else if (count != 0 && !flag) {
             load月別ランク情報();
-            資格の情報List.clear();
-            資格の情報List.add(entity.get資格の情報());
         }
+        資格の情報List.clear();
+        資格の情報List.add(entity.get資格の情報());
     }
 
     private void editor賦課は空にしない(KeisanTaishoshaEntity entity, HonSanJonTyuShutuTempEntity tempEntity) {
         if (被保険者番号.equals(entity.get賦課の情報().getHihokenshaNo())) {
-            tempEntity.setChoteiNendo(entity.get賦課の情報().getChoteiNendo());
             tempEntity.setChoteiNendo(entity.get賦課の情報().getChoteiNendo());
             tempEntity.setFukaNendo(entity.get賦課の情報().getFukaNendo());
             int 番号 = Integer.parseInt(通知書番号.getColumnValue().substringReturnAsPossible(INDEX_14, INDEX_16).toString()) + 1;
             tempEntity.setTsuchishoNo(create通知書番号(entity.get賦課の情報().getHihokenshaNo().getColumnValue(), 番号));
             本算定抽出writer.insert(tempEntity);
             資格の情報List.add(entity.get資格の情報());
-        } else if (!被保険者番号.equals(entity.get賦課の情報().getHihokenshaNo())) {
-            tempEntity.setChoteiNendo(entity.get賦課の情報().getChoteiNendo());
+        } else {
             tempEntity.setChoteiNendo(entity.get賦課の情報().getChoteiNendo());
             tempEntity.setFukaNendo(entity.get賦課の情報().getFukaNendo());
             tempEntity.setTsuchishoNo(entity.get賦課の情報().getTsuchishoNo());
             本算定抽出writer.insert(tempEntity);
-            load月別ランク情報();
+            if (count != 0 && !flag) {
+                load月別ランク情報();
+            }
             資格の情報List.clear();
             資格の情報List.add(entity.get資格の情報());
         }
@@ -334,9 +320,9 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
         FlexibleYear 調定年度 = processParameter.get調定年度();
         FlexibleYear 賦課年度 = processParameter.get賦課年度();
         FlexibleDate 資格基準日 = processParameter.get資格基準日();
-        FlexibleDate 賦課年度_修正後 = new FlexibleDate(賦課年度.getYearValue(), 四月, 一日);
+        FlexibleDate 調定年度_修正後 = new FlexibleDate(調定年度.getYearValue(), 三月, INDEX_31);
         KeisanTaishoshaParameter parameter = KeisanTaishoshaParameter
-                .createSelectByKeyParam(調定年度, 賦課年度, 資格基準日, 賦課年度_修正後);
+                .createSelectByKeyParam(調定年度, 賦課年度, 資格基準日, 調定年度_修正後);
         return parameter;
     }
 

@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -35,6 +37,8 @@ public class UpdateDbT7022Process extends BatchProcessBase<DbT7022ShoriDateKanri
     private static final RString 処理枝番_申請年月日 = new RString("0002");
     private static final RString 処理枝番_決定年月日 = new RString("0003");
     private static final RString 日_01 = new RString("01");
+    private static final RString INSERT_RENBAN = new RString("0001");
+    private static DbT7022ShoriDateKanriEntity tempEntity;
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakugassanshikyuketteitsuchisho.IKogakugassanShikyuKetteitsuchishoMapper.update処理日付管理マスタ");
@@ -51,7 +55,7 @@ public class UpdateDbT7022Process extends BatchProcessBase<DbT7022ShoriDateKanri
         if (地方公共団体 != null) {
             updateParameter.set市町村コード(地方公共団体.get地方公共団体コード());
         }
-        updateParameter.set処理名(ShoriName.高額合算自己負担額計算登録.get名称());
+        updateParameter.set処理名(ShoriName.高額合算支給決定通知書_一括.get名称());
         if (日付選択区分_受取年月.equals(processParameter.get日付選択区分())) {
             updateParameter.set処理枝番(処理枝番_受取年月);
         } else if (日付選択区分_申請年月日.equals(processParameter.get日付選択区分())) {
@@ -69,6 +73,36 @@ public class UpdateDbT7022Process extends BatchProcessBase<DbT7022ShoriDateKanri
 
     @Override
     protected void process(DbT7022ShoriDateKanriEntity entity) {
+        tempEntity = entity;
+        entity = entityUpdate(entity);
+        tempDbWriter.update(entity);
+    }
+
+    @Override
+    protected void afterExecute() {
+        if (tempEntity == null) {
+            DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
+            entity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
+            entity.setShichosonCode(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード());
+            entity.setShoriName(ShoriName.高額合算支給決定通知書_一括.get名称());
+            entity = entityUpdate(entity);
+            if (日付選択区分_受取年月.equals(processParameter.get日付選択区分())) {
+                entity.setShoriEdaban(処理枝番_受取年月);
+            } else if (日付選択区分_申請年月日.equals(processParameter.get日付選択区分())) {
+                entity.setShoriEdaban(処理枝番_申請年月日);
+            } else {
+                entity.setShoriEdaban(処理枝番_決定年月日);
+            }
+            entity.setKijunYMD(FlexibleDate.EMPTY);
+            entity.setNendo(new FlexibleYear("0000"));
+            entity.setNendoNaiRenban(INSERT_RENBAN);
+            entity.setTaishoKaishiTimestamp(new YMDHMS(""));
+            entity.setTaishoShuryoTimestamp(new YMDHMS(""));
+            tempDbWriter.insert(entity);
+        }
+    }
+
+    private DbT7022ShoriDateKanriEntity entityUpdate(DbT7022ShoriDateKanriEntity entity) {
         if (日付選択区分_受取年月.equals(processParameter.get日付選択区分())) {
             entity.setTaishoKaishiYMD(new FlexibleDate(processParameter.get受取年月().toDateString().concat(日_01)));
         } else if (日付選択区分_申請年月日.equals(processParameter.get日付選択区分())) {
@@ -78,7 +112,7 @@ public class UpdateDbT7022Process extends BatchProcessBase<DbT7022ShoriDateKanri
             entity.setTaishoKaishiYMD(processParameter.get決定開始年月日());
             entity.setTaishoShuryoYMD(processParameter.get決定終了年月日());
         }
-        tempDbWriter.update(entity);
+        return entity;
     }
 
 }
