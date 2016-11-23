@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBC040031_KogakugassanJikofutangakuInfoHoseiSub extends BatchFlowBase<DBC040031_KogakugassanJikofutangakuInfoHoseiSubParameter> {
 
+    private static final RString 償還受託あり = new RString("2");
     private static final String 高額支給額集計処理 = "sumJikofutangaku";
     private static final String 中間DBデータ削除 = " clearJikofutangakuInfoHoseiTemp";
     private static final String 実績基本データTO中間DBデータ = "jissekiFutangakuToTyukanDb";
@@ -47,22 +48,23 @@ public class DBC040031_KogakugassanJikofutangakuInfoHoseiSub extends BatchFlowBa
 
     @Override
     protected void defineFlow() {
-        executeStep(実績基本データ削除);
-        executeStep(中間DBデータTO実績基本データ);
-        executeStep(実績負担額更新登録);
-        boolean isデータがあり = getResult(Boolean.class, new RString(実績負担額更新登録), InitJissekiCheckProcess.OUTPUTNAME);
-        if (!isデータがあり) {
-            return;
+        if (!償還受託あり.equals(getParameter().get処理区分())) {
+            executeStep(実績基本データ削除);
+            executeStep(中間DBデータTO実績基本データ);
+            executeStep(実績負担額更新登録);
+            boolean isデータがあり = getResult(Boolean.class, new RString(実績負担額更新登録), InitJissekiCheckProcess.OUTPUTNAME);
+            if (!isデータがあり) {
+                return;
+            }
+            executeStep(負担額ワークエリア登録);
+            executeStep(負担額ワークエリア登録後);
+            executeStep(自己負担額ワークエリア更新);
+            executeStep(実績負担額更新);
+            executeStep(実績負担額更新後);
+            executeStep(中間DBデータ削除);
+            executeStep(実績基本データTO中間DBデータ);
         }
-        executeStep(負担額ワークエリア登録);
-        executeStep(負担額ワークエリア登録後);
-        executeStep(自己負担額ワークエリア更新);
-        executeStep(実績負担額更新);
-        executeStep(実績負担額更新後);
-        executeStep(中間DBデータ削除);
-        executeStep(実績基本データTO中間DBデータ);
         executeStep(高額支給額集計処理);
-
     }
 
     @Step(高額支給額集計処理)
