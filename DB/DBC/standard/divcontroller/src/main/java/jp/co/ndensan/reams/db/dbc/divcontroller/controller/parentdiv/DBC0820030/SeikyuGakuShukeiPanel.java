@@ -249,13 +249,12 @@ public class SeikyuGakuShukeiPanel {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode(),
                     DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().evaluate());
-
-            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class));
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class));
             ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM0);
             return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.一覧に戻る).respond();
         } else {
@@ -318,6 +317,10 @@ public class SeikyuGakuShukeiPanel {
         if (登録.equals(処理モード)) {
             Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap
                     = 一覧情報リスト.get証明書入力済フラグMap();
+            if (一覧情報リスト.get証明書入力済フラグMap() == null) {
+                証明書入力済フラグMap = new HashMap<>();
+                一覧情報リスト.set証明書入力済フラグMap(証明書入力済フラグMap);
+            }
             ShomeishoNyuryokuFlag 証明書入力済フラグ = 一覧情報リスト.get証明書入力済フラグMap().get(明細検索キー);
             if (証明書入力済フラグ == null) {
                 証明書入力済フラグ = new ShomeishoNyuryokuFlag();
@@ -328,6 +331,10 @@ public class SeikyuGakuShukeiPanel {
         } else if (修正.equals(処理モード)) {
             Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap
                     = 一覧情報リスト.get証明書変更済フラグMap();
+            if (一覧情報リスト.get証明書変更済フラグMap() == null) {
+                証明書変更済フラグMap = new HashMap<>();
+                一覧情報リスト.set証明書変更済フラグMap(証明書変更済フラグMap);
+            }
             ShomeishoHenkoFlag 証明書変更済フラグ = 一覧情報リスト.get証明書変更済フラグMap().get(明細検索キー);
             if (証明書変更済フラグ == null) {
                 証明書変更済フラグ = new ShomeishoHenkoFlag();
@@ -337,6 +344,10 @@ public class SeikyuGakuShukeiPanel {
             一覧情報リスト.set証明書変更済フラグMap(証明書変更済フラグMap);
             Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoNyuryokuFlag> 証明書入力済フラグMap
                     = 一覧情報リスト.get証明書入力済フラグMap();
+            if (一覧情報リスト.get証明書入力済フラグMap() == null) {
+                証明書入力済フラグMap = new HashMap<>();
+                一覧情報リスト.set証明書入力済フラグMap(証明書入力済フラグMap);
+            }
             ShomeishoNyuryokuFlag 証明書入力済フラグ = 一覧情報リスト.get証明書入力済フラグMap().get(明細検索キー);
             if (証明書入力済フラグ == null) {
                 証明書入力済フラグ = new ShomeishoNyuryokuFlag();
