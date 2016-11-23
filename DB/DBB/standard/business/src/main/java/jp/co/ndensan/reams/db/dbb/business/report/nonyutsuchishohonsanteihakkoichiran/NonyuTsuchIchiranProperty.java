@@ -106,13 +106,13 @@ public class NonyuTsuchIchiranProperty extends ReportPropertyBase<NonyuTsuchIchi
         /**
          * 8月特徴開始者
          */
-        八月特徴開始者(new RString("0220"), new RString("八月特徴開始者"), FORMAT
-                .concat(new RString("dbT2015KeisangoJoho_sakuseiShoriName")).concat(FORMAT)),
+        八月特徴開始者(new RString("0220"), new RString("8月特徴開始者"), FORMAT
+                .concat(new RString("特徴8月開始者区分")).concat(FORMAT)),
         /**
          * 10月特徴開始者
          */
-        十月特徴開始者(new RString("0219"), new RString("十月特徴開始者"), FORMAT
-                .concat(new RString("dbT2015KeisangoJoho_sakuseiShoriName")).concat(FORMAT));
+        十月特徴開始者(new RString("0219"), new RString("10月特徴開始者"), FORMAT
+                .concat(new RString("特徴10月開始者区分")).concat(FORMAT));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;
