@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSant
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200014.KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -83,7 +82,7 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
     public void writeBy(ReportSourceWriter<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> reportSourceWriter) {
         int 連番 = 1;
         KariSanteigakuHenkoTsuchishoHakkoIchiranItem item = new KariSanteigakuHenkoTsuchishoHakkoIchiranItem();
-        setHeader(編集後仮算定通知書共通情報, item);
+        setHeader(仮算定通知書情報, 編集後仮算定通知書共通情報, item);
         setBody(編集後仮算定通知書共通情報, item, 連番);
         set改頁(仮算定通知書情報, 編集後仮算定通知書共通情報, item);
         IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor headerEditor = new KariSanteigakuHenkoTsuchishoHakkoIchiranHeaderEditor(item);
@@ -94,7 +93,8 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
         連番++;
     }
 
-    private void setHeader(EditedKariSanteiTsuchiShoKyotsu editedData, KariSanteigakuHenkoTsuchishoHakkoIchiranItem item) {
+    private void setHeader(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
+            EditedKariSanteiTsuchiShoKyotsu editedData, KariSanteigakuHenkoTsuchishoHakkoIchiranItem item) {
         RTime time = 帳票作成日時.getTime();
         RString hour = new RString(time.toString()).substring(INDEX_0, INDEX_2);
         RString min = new RString(time.toString()).substring(INDEX_3, INDEX_5);
@@ -107,8 +107,8 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
 
         item.setPrintTimeStamp(printTimeStamp);
         item.setNendo(editedData.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString());
-        item.setHokenshaNo(Association.getLasdecCode().getColumnValue());
-        item.setHokenshaName(Association.getShichosonName());
+        item.setHokenshaNo(仮算定通知書情報.get地方公共団体().get地方公共団体コード().getColumnValue());
+        item.setHokenshaName(仮算定通知書情報.get地方公共団体().get市町村名());
         item.setShutsuryokujun1(出力順１);
         item.setShutsuryokujun2(出力順２);
         item.setShutsuryokujun3(出力順３);
