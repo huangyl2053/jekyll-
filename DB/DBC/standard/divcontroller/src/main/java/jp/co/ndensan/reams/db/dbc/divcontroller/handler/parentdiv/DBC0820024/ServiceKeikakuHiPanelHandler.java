@@ -223,6 +223,25 @@ public class ServiceKeikakuHiPanelHandler {
     }
 
     /**
+     * グリッドの修正ボタン Handlerのsetです。
+     */
+    public void set修正() {
+        div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setReadOnly(false);
+        div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setReadOnly(false);
+        div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().setReadOnly(false);
+        div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().setReadOnly(false);
+        div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().setReadOnly(false);
+        IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div
+                .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
+        serviceCodeInputDiv.setReadOnly(false);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTanyiUp().setReadOnly(false);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtKaisu().setReadOnly(false);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTekiyoUp().setReadOnly(false);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getBtnClear().setDisabled(false);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getBtnKeisan().setDisabled(false);
+    }
+
+    /**
      * グリッドの修正、追加button Handlerのsetです。
      */
     private void set修正_追加() {
