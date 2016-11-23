@@ -30,9 +30,12 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuhi.ServiceKeikakuHiRealtEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShafukukeigenServiceResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
@@ -752,11 +755,14 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
      * @param 明細番号 明細番号
+     * @param 償還払ViewStateDB情報 償還払ViewStateDB情報
+     * @return DbJohoViewState
      */
     @Transaction
-    public void delShokanSyomeisyo(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
-            RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        delete証明書(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+    public DbJohoViewState delShokanSyomeisyo(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
+            RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号, DbJohoViewState 償還払ViewStateDB情報) {
+        delete証明書明細(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 償還払ViewStateDB情報);
+        return 償還払ViewStateDB情報;
     }
 
     /**
@@ -1393,7 +1399,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                         && dbT3047.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
                         && dbT3047.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
                         && dbT3047.getEntity().get連番().equals(決定情報一覧.get連番())
-                        && !dbT3047.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                        && !dbT3047.getEntity().toEntity().getState().equals(EntityDataState.Deleted)
+                        && !dbT3047.getEntity().toEntity().getState().equals(EntityDataState.Added)) {
                     ShokanServicePlan200904Builder dbt3047Builder = dbT3047.getEntity().createBuilderForEdit();
                     dbt3047Builder.set支給区分コード(parameter.get支給区分());
                     dbt3047Builder.set増減点(parameter.get増減単位());
@@ -1417,7 +1424,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                         && dbT3046.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
                         && dbT3046.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
                         && dbT3046.getEntity().get連番().equals(決定情報一覧.get連番())
-                        && !dbT3046.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                        && !dbT3046.getEntity().toEntity().getState().equals(EntityDataState.Deleted)
+                        && !dbT3046.getEntity().toEntity().getState().equals(EntityDataState.Added)) {
                     ShokanServicePlan200604Builder dbt3046Builder = dbT3046.getEntity().createBuilderForEdit();
                     dbt3046Builder.set支給区分コード(parameter.get支給区分());
                     dbt3046Builder.set増減点(parameter.get増減単位());
@@ -1440,7 +1448,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                         && dbT3045.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
                         && dbT3045.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
                         && dbT3045.getEntity().get連番().equals(決定情報一覧.get連番())
-                        && !dbT3045.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                        && !dbT3045.getEntity().toEntity().getState().equals(EntityDataState.Deleted)
+                        && !dbT3045.getEntity().toEntity().getState().equals(EntityDataState.Added)) {
                     ShokanServicePlan200004Builder dbt3045Builder = dbT3045.getEntity().createBuilderForEdit();
                     dbt3045Builder.set支給区分コード(parameter.get支給区分());
                     dbt3045Builder.set増減点(parameter.get増減単位());
@@ -2017,6 +2026,103 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
         return count;
     }
 
+    @Transaction
+    private DbJohoViewState delete証明書明細(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
+            RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号, DbJohoViewState 償還払ViewStateDB情報) {
+        償還払ViewStateDB情報 = 償還払情報非空判断(償還払ViewStateDB情報);
+        int count = 0;
+        List<DbT3038ShokanKihonEntity> entityList1
+                = 償還払請求基本Dac.select証明書削除(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        if (entityList1 != null && !entityList1.isEmpty()) {
+            for (DbT3038ShokanKihonEntity dbt3038entity : entityList1) {
+                dbt3038entity.setState(EntityDataState.Deleted);
+                count = count + 償還払請求基本Dac.delete(dbt3038entity);
+                償還払ViewStateDB情報.get償還払請求基本データList().add(new ShokanKihon(dbt3038entity));
+            }
+        }
+        List<DbT3107ShokanMeisaiJushochiTokureiEntity> entityList2
+                = 住所地特例Dac.select証明書削除(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        if (entityList2 != null && !entityList2.isEmpty()) {
+            for (DbT3107ShokanMeisaiJushochiTokureiEntity dbt3107entity : entityList2) {
+                dbt3107entity.setState(EntityDataState.Deleted);
+                count = count + 住所地特例Dac.delete(dbt3107entity);
+                償還払ViewStateDB情報.get住所地特例データList().add(new ShokanMeisaiJushochiTokureiResult(
+                        new ShokanMeisaiJushochiTokurei(dbt3107entity), RString.EMPTY, RString.EMPTY));
+            }
+        }
+        List<DbT3039ShokanMeisaiEntity> entityList3
+                = 償還払請求明細Dac.select証明書削除(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        if (entityList3 != null && !entityList3.isEmpty()) {
+            for (DbT3039ShokanMeisaiEntity dbt3039entity : entityList3) {
+                dbt3039entity.setState(EntityDataState.Deleted);
+                count = count + 償還払請求明細Dac.delete(dbt3039entity);
+                償還払ViewStateDB情報.get償還払請求明細データList().add(new ShokanMeisaiResult(new ShokanMeisai(dbt3039entity), RString.EMPTY));
+            }
+        }
+        償還払ViewStateDB情報 = delete証明書_特定診療費明細(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 償還払ViewStateDB情報);
+        償還払ViewStateDB情報 = delete証明書_サービス計画明細(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 償還払ViewStateDB情報);
+        償還払ViewStateDB情報 = delete証明書_サービス費用明細(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 償還払ViewStateDB情報);
+        償還払ViewStateDB情報 = delete証明書_緊急時施設療養明細(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 償還払ViewStateDB情報);
+        return 償還払ViewStateDB情報;
+    }
+
+    private DbJohoViewState 償還払情報非空判断(DbJohoViewState 償還払ViewStateDB情報) {
+        if (null == 償還払ViewStateDB情報.get住所地特例データList()) {
+            ArrayList<ShokanMeisaiJushochiTokureiResult> 住所地特例データList = new ArrayList<>();
+            償還払ViewStateDB情報.set住所地特例データList(住所地特例データList);
+        }
+        if (null == 償還払ViewStateDB情報.get償還払請求明細データList()) {
+            ArrayList<ShokanMeisaiResult> 償還払請求明細データList = new ArrayList<>();
+            償還払ViewStateDB情報.set償還払請求明細データList(償還払請求明細データList);
+        }
+        if (null == 償還払ViewStateDB情報.get償還払請求特定診療費データList()) {
+            ArrayList<ShokanTokuteiShinryohi> 償還払請求特定診療費データList = new ArrayList<>();
+            償還払ViewStateDB情報.set償還払請求特定診療費データList(償還払請求特定診療費データList);
+        }
+        if (null == 償還払ViewStateDB情報.get特別療養費データList()) {
+            ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> 特別療養費データList = new ArrayList<>();
+            償還払ViewStateDB情報.set特別療養費データList(特別療養費データList);
+        }
+        if (null == 償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList()) {
+            ArrayList<ShokanServicePlan200904Result> 償還払請求サービス計画200904データResultList = new ArrayList<>();
+            償還払ViewStateDB情報.set償還払請求サービス計画200904データResultList(償還払請求サービス計画200904データResultList);
+        }
+        if (null == 償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList()) {
+            ArrayList<ShokanServicePlan200604Result> 償還払請求サービス計画200604データResultList = new ArrayList<>();
+            償還払ViewStateDB情報.set償還払請求サービス計画200604データResultList(償還払請求サービス計画200604データResultList);
+        }
+        if (null == 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList()) {
+            ArrayList<ShokanServicePlan200004Result> 償還払請求サービス計画200004データResultList = new ArrayList<>();
+            償還払ViewStateDB情報.set償還払請求サービス計画200004データResultList(償還払請求サービス計画200004データResultList);
+        }
+        if (null == 償還払ViewStateDB情報.get償還払請求特定入所者介護サービス費用データList()) {
+            ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> 償還払請求特定入所者介護サービス費用データList = new ArrayList<>();
+            償還払ViewStateDB情報.set償還払請求特定入所者介護サービス費用データList(償還払請求特定入所者介護サービス費用データList);
+        }
+        if (null == 償還払ViewStateDB情報.get償還払請求社会福祉法人軽減額データList()) {
+            ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> 償還払請求社会福祉法人軽減額データList = new ArrayList<>();
+            償還払ViewStateDB情報.set償還払請求社会福祉法人軽減額データList(償還払請求社会福祉法人軽減額データList);
+
+        }
+        if (null == 償還払ViewStateDB情報.get償還払請求所定疾患施設療養費等データList()) {
+            ArrayList<ShokanShoteiShikkanShisetsuRyoyo> 償還払請求所定疾患施設療養費等データList = new ArrayList<>();
+            償還払ViewStateDB情報.set償還払請求所定疾患施設療養費等データList(償還払請求所定疾患施設療養費等データList);
+        }
+        if (null == 償還払ViewStateDB情報.get償還払請求緊急時施設療養データList()) {
+            ArrayList<ShokanKinkyuShisetsuRyoyo> 償還払請求緊急時施設療養データList = new ArrayList<>();
+            償還払ViewStateDB情報.set償還払請求緊急時施設療養データList(償還払請求緊急時施設療養データList);
+        }
+        if (null == 償還払ViewStateDB情報.get償還払請求集計データList()) {
+            ArrayList<ShokanShukeiResult> 償還払請求集計データList = new ArrayList<>();
+            償還払ViewStateDB情報.set償還払請求集計データList(償還払請求集計データList);
+        }
+        if (null == 償還払ViewStateDB情報.get償還払請求食事費用データList()) {
+            ArrayList<ShokanShokujiHiyo> 償還払請求食事費用データList = new ArrayList<>();
+            償還払ViewStateDB情報.set償還払請求食事費用データList(償還払請求食事費用データList);
+        }
+        return 償還払ViewStateDB情報;
+    }
+
     /**
      * 証明書の削除処理を行う
      *
@@ -2054,6 +2160,36 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             }
         }
         return count;
+    }
+
+    @Transaction
+    private DbJohoViewState delete証明書_特定診療費明細(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
+            RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号, DbJohoViewState 償還払ViewStateDB情報) {
+        int count = 0;
+        if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth(サービス年月2.toString()))) {
+            List<DbT3041ShokanTokuteiShinryohiEntity> entityList4
+                    = 償還払請求特定診療費Dac.select証明書削除(被保険者番号, サービス提供年月,
+                            整理番号, 事業者番号, 様式番号, 明細番号);
+            if (entityList4 != null && !entityList4.isEmpty()) {
+                for (DbT3041ShokanTokuteiShinryohiEntity dbt3041entity : entityList4) {
+                    dbt3041entity.setState(EntityDataState.Deleted);
+                    count = count + 償還払請求特定診療費Dac.delete(dbt3041entity);
+                    償還払ViewStateDB情報.get償還払請求特定診療費データList().add(new ShokanTokuteiShinryohi(dbt3041entity));
+                }
+            }
+        } else {
+            List<DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity> entityList5
+                    = 特別療養費Dac.select証明書削除(被保険者番号, サービス提供年月, 整理番号,
+                            事業者番号, 様式番号, 明細番号);
+            if (entityList5 != null && !entityList5.isEmpty()) {
+                for (DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity dbt3042entity : entityList5) {
+                    dbt3042entity.setState(EntityDataState.Deleted);
+                    count = count + 特別療養費Dac.delete(dbt3042entity);
+                    償還払ViewStateDB情報.get特別療養費データList().add(new ShokanTokuteiShinryoTokubetsuRyoyo(dbt3042entity));
+                }
+            }
+        }
+        return 償還払ViewStateDB情報;
     }
 
     /**
@@ -2106,6 +2242,51 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
         return count;
     }
 
+    @Transaction
+    private DbJohoViewState delete証明書_サービス計画明細(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
+            RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号, DbJohoViewState 償還払ViewStateDB情報) {
+        int count = 0;
+        if (new FlexibleYearMonth(サービス年月.toString()).isBeforeOrEquals(サービス提供年月)) {
+            List<DbT3047ShokanServicePlan200904Entity> entityList6
+                    = 償還払請求サービス計画200904Dac.select証明書削除(被保険者番号, サービス提供年月,
+                            整理番号, 事業者番号, 様式番号, 明細番号);
+            if (entityList6 != null && !entityList6.isEmpty()) {
+                for (DbT3047ShokanServicePlan200904Entity dbt3047entity : entityList6) {
+                    dbt3047entity.setState(EntityDataState.Deleted);
+                    count = count + 償還払請求サービス計画200904Dac.delete(dbt3047entity);
+                    償還払ViewStateDB情報.get償還払請求サービス計画200904データResultList().add(new ShokanServicePlan200904Result(
+                            new ShokanServicePlan200904(dbt3047entity), RString.EMPTY));
+                }
+            }
+        } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth(サービス年月3.toString()))
+                && new FlexibleYearMonth(サービス年月1.toString()).isBeforeOrEquals(サービス提供年月)) {
+            List<DbT3046ShokanServicePlan200604Entity> entityList7
+                    = 償還払請求サービス計画200604Dac.select証明書削除(被保険者番号, サービス提供年月,
+                            整理番号, 事業者番号, 様式番号, 明細番号);
+            if (entityList7 != null && !entityList7.isEmpty()) {
+                for (DbT3046ShokanServicePlan200604Entity dbt3046entity : entityList7) {
+                    dbt3046entity.setState(EntityDataState.Deleted);
+                    count = count + 償還払請求サービス計画200604Dac.delete(dbt3046entity);
+                    償還払ViewStateDB情報.get償還払請求サービス計画200604データResultList().add(new ShokanServicePlan200604Result(
+                            new ShokanServicePlan200604(dbt3046entity), RString.EMPTY));
+                }
+            }
+        } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth(サービス年月4.toString()))) {
+            List<DbT3045ShokanServicePlan200004Entity> entityList8
+                    = 償還払請求サービス計画200004Dac.select証明書削除(被保険者番号, サービス提供年月,
+                            整理番号, 事業者番号, 様式番号, 明細番号);
+            if (entityList8 != null && !entityList8.isEmpty()) {
+                for (DbT3045ShokanServicePlan200004Entity dbt3045entity : entityList8) {
+                    dbt3045entity.setState(EntityDataState.Deleted);
+                    count = count + 償還払請求サービス計画200004Dac.delete(dbt3045entity);
+                    償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList().add(new ShokanServicePlan200004Result(
+                            new ShokanServicePlan200004(dbt3045entity), RString.EMPTY));
+                }
+            }
+        }
+        return 償還払ViewStateDB情報;
+    }
+
     /**
      * 証明書の削除処理を行う
      *
@@ -2151,6 +2332,44 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
         return count;
     }
 
+    @Transaction
+    private DbJohoViewState delete証明書_サービス費用明細(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
+            RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号, DbJohoViewState 償還払ViewStateDB情報) {
+        int count = 0;
+        List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> entityList9
+                = 償還払請求特定入所者介護サービス費用Dac.select証明書削除(被保険者番号, サービス提供年月,
+                        整理番号, 事業者番号, 様式番号, 明細番号);
+        if (entityList9 != null && !entityList9.isEmpty()) {
+            for (DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity dbt3050entity : entityList9) {
+                dbt3050entity.setState(EntityDataState.Deleted);
+                count = count + 償還払請求特定入所者介護サービス費用Dac.delete(dbt3050entity);
+                償還払ViewStateDB情報.get償還払請求特定入所者介護サービス費用データList().add(new ShokanTokuteiNyushoshaKaigoServiceHiyo(dbt3050entity));
+            }
+        }
+        List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> entityList10
+                = 償還払請求社会福祉法人軽減額Dac.select証明書削除(被保険者番号, サービス提供年月,
+                        整理番号, 事業者番号, 様式番号, 明細番号);
+        if (entityList10 != null && !entityList10.isEmpty()) {
+            for (DbT3051ShokanShakaiFukushiHojinKeigengakuEntity dbt3051entity : entityList10) {
+                dbt3051entity.setState(EntityDataState.Deleted);
+                count = count + 償還払請求社会福祉法人軽減額Dac.delete(dbt3051entity);
+                償還払ViewStateDB情報.get償還払請求社会福祉法人軽減額データList().add(new ShokanShakaiFukushiHojinKeigengakuResult(
+                        new ShokanShakaiFukushiHojinKeigengaku(dbt3051entity), RString.EMPTY));
+            }
+        }
+        List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> entityList11
+                = 償還払請求所定疾患施設療養費等Dac.select証明書削除(被保険者番号, サービス提供年月,
+                        整理番号, 事業者番号, 様式番号, 明細番号);
+        if (entityList11 != null && !entityList11.isEmpty()) {
+            for (DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity dbt3052entity : entityList11) {
+                dbt3052entity.setState(EntityDataState.Deleted);
+                count = count + 償還払請求所定疾患施設療養費等Dac.delete(dbt3052entity);
+                償還払ViewStateDB情報.get償還払請求所定疾患施設療養費等データList().add(new ShokanShoteiShikkanShisetsuRyoyo(dbt3052entity));
+            }
+        }
+        return 償還払ViewStateDB情報;
+    }
+
     /**
      * 証明書の削除処理を行う
      *
@@ -2194,6 +2413,43 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             }
         }
         return count;
+    }
+
+    @Transaction
+    private DbJohoViewState delete証明書_緊急時施設療養明細(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
+            RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号, DbJohoViewState 償還払ViewStateDB情報) {
+        int count = 0;
+        List<DbT3040ShokanKinkyuShisetsuRyoyoEntity> entityList12
+                = 償還払請求緊急時施設療養Dac.select証明書削除(被保険者番号, サービス提供年月,
+                        整理番号, 事業者番号, 様式番号, 明細番号);
+        if (entityList12 != null && !entityList12.isEmpty()) {
+            for (DbT3040ShokanKinkyuShisetsuRyoyoEntity dbt3040entity : entityList12) {
+                dbt3040entity.setState(EntityDataState.Deleted);
+                count = count + 償還払請求緊急時施設療養Dac.delete(dbt3040entity);
+                償還払ViewStateDB情報.get償還払請求緊急時施設療養データList().add(new ShokanKinkyuShisetsuRyoyo(dbt3040entity));
+            }
+        }
+        List<DbT3053ShokanShukeiEntity> entityList13
+                = 償還払請求集計Dac.select証明書削除(被保険者番号, サービス提供年月, 整理番号,
+                        事業者番号, 様式番号, 明細番号);
+        if (entityList13 != null && !entityList13.isEmpty()) {
+            for (DbT3053ShokanShukeiEntity dbt3053entity : entityList13) {
+                dbt3053entity.setState(EntityDataState.Deleted);
+                count = count + 償還払請求集計Dac.delete(dbt3053entity);
+                償還払ViewStateDB情報.get償還払請求集計データList().add(new ShokanShukeiResult(new ShokanShukei(dbt3053entity), RString.EMPTY));
+            }
+        }
+        List<DbT3043ShokanShokujiHiyoEntity> entityList14
+                = 償還払請求食事費用Dac.select証明書削除(被保険者番号, サービス提供年月, 整理番号,
+                        事業者番号, 様式番号, 明細番号);
+        if (entityList14 != null && !entityList14.isEmpty()) {
+            for (DbT3043ShokanShokujiHiyoEntity dbt3043entity : entityList14) {
+                dbt3043entity.setState(EntityDataState.Deleted);
+                count = count + 償還払請求食事費用Dac.delete(dbt3043entity);
+                償還払ViewStateDB情報.get償還払請求食事費用データList().add(new ShokanShokujiHiyo(dbt3043entity));
+            }
+        }
+        return 償還払ViewStateDB情報;
     }
 
     /**

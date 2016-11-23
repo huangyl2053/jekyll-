@@ -267,7 +267,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
             set更正後賦課根拠(更正後賦課の情報);
             div.setHdnKouseizenFlag(無);
-            if (honsanteiIkoHantei.is本算定後(更正前賦課の情報) && 更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度())) {
+            if (!更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度())
+                    || (更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度()) && honsanteiIkoHantei.is本算定後(更正前賦課の情報))) {
                 set更正前賦課根拠(更正前賦課の情報);
                 div.setHdnKouseizenFlag(有);
             }

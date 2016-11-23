@@ -360,6 +360,8 @@ public final class KinkyujiShoteiShikanPanelHandler {
             boolean flag = checkState(row, rowList);
             if (flag) {
                 row.setRowState(RowState.Modified);
+            } else {
+                row.setRowState(RowState.Unchanged);
             }
         } else if (削除.equals(state)) {
             row.setRowState(RowState.Deleted);

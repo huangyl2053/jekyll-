@@ -205,9 +205,6 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalZogenriyu(RString zogenriyu, KetteJoho 決定情報) {
-        if (決定情報 == null && zogenriyu == null) {
-            return false;
-        }
         if (決定情報 == null && zogenriyu != null && zogenriyu.isEmpty()) {
             return false;
         }
@@ -217,12 +214,11 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         if (決定情報 != null && zogenriyu != null && zogenriyu.isEmpty() && 決定情報.getZougenRiyu() != null && 決定情報.getZougenRiyu().isEmpty()) {
             return false;
         }
-        if (決定情報 != null && zogenriyu != null) {
-            if (!zogenriyu.isEmpty() && zogenriyu.equals(決定情報.getZougenRiyu())) {
-                return false;
-            }
+        if (決定情報 != null && zogenriyu != null
+                && !zogenriyu.isEmpty() && zogenriyu.equals(決定情報.getZougenRiyu())) {
+            return false;
         }
-        return true;
+        return 決定情報 != null || zogenriyu != null;
     }
 
     /**
@@ -240,12 +236,11 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         if (決定情報 != null && fuSyikyuriyu1 != null && fuSyikyuriyu1.isEmpty() && 決定情報.getHushikyuRiyu() == null) {
             return false;
         }
-        if (決定情報 != null && fuSyikyuriyu1 != null) {
-            if (!fuSyikyuriyu1.isEmpty() && fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
-                return false;
-            }
+        if (決定情報 != null && fuSyikyuriyu1 != null
+                && !fuSyikyuriyu1.isEmpty() && fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
+            return false;
         }
-        return true;
+        return 決定情報 != null || fuSyikyuriyu1 != null;
     }
 
     /**
@@ -262,12 +257,11 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         if (決定情報 != null && fushikyuriyu2 != null && fushikyuriyu2.isEmpty() && 決定情報 == null) {
             return false;
         }
-        if (決定情報 != null && fushikyuriyu2 != null) {
-            if (!fushikyuriyu2.isEmpty() && fushikyuriyu2.equals(決定情報.getKounyuKaishuRireki())) {
-                return false;
-            }
+        if (決定情報 != null && fushikyuriyu2 != null
+                && !fushikyuriyu2.isEmpty() && fushikyuriyu2.equals(決定情報.getKounyuKaishuRireki())) {
+            return false;
         }
-        return true;
+        return 決定情報 != null || fushikyuriyu2 != null;
     }
 
     /**
@@ -349,9 +343,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      */
     public void 登録Save(DbJohoViewState db情報, RString 修正前支給区分, FlexibleDate 決定日,
             ShoukanharaihishinseikensakuParameter paramter, RString 画面モード, ShikibetsuCode 識別コード) {
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
-        RString 整理番号 = paramter.getSeiriNp();
         InsupdShokanManager manager = InsupdShokanManager.createInstance();
         if (db情報.get償還払支給判定結果() != null) {
             manager.update償還払支給判定結果(db情報.get償還払支給判定結果());
@@ -555,9 +547,9 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     /**
      * 支給申請有無のチェック処理です。
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
      * @return 判断結果
      */
     public boolean check支給申請(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月, RString 整理番号) {

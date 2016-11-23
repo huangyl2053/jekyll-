@@ -679,7 +679,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
                 .set保険料段階_仮算定時(計算後情報_更正前後.getHokenryoDankaiKarisanntei())
                 .set徴収方法履歴番号(計算後情報_更正前後.getChoshuHohoRirekiNo())
                 .set異動基準日時(計算後情報_更正前後.getIdoKijunNichiji())
-                .set口座区分(KozaKubun.口座振替.getコード().equals(口座振替分出力様式) ? KozaKubun.口座振替.getコード() : 計算後情報_更正前後.getKozaKubun())
+                .set口座区分(KozaKubun.現金納付.getコード().equals(口座振替分出力様式) ? KozaKubun.現金納付.getコード() : 計算後情報_更正前後.getKozaKubun())
                 .set境界層区分(計算後情報_更正前後.getKyokaisoKubun()).set職権区分(計算後情報_更正前後.getShokkenKubun())
                 .set賦課市町村コード(計算後情報_更正前後.getFukaShichosonCode()).set特徴歳出還付額(計算後情報_更正前後.getTkSaishutsuKampuGaku())
                 .set普徴歳出還付額(計算後情報_更正前後.getFuSaishutsuKampuGaku()).set月割開始年月1(計算後情報_更正前後.getTsukiwariStartYM1())
