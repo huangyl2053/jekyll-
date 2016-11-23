@@ -70,7 +70,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     private static final RString RSTRING_TWO = new RString("2");
     private static final RString RSTRING_THREE = new RString("3");
     private static final RString 排他情報 = new RString("DBCHihokenshaNo");
-    private static final RString 申請情報を保存する = new RString("btnSaveHenkoTorisage");
     private static final RString 申請情報を保存する_申請登録 = new RString("btnSaveShinseiToroku");
     private static final int INT_6 = 6;
     private static final RString 完了メッセージ = new RString("高額合算支給申請情報の登録が完了しました。");
@@ -172,10 +171,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString メニューID = controlData.getMenuID();
         RString タイトル = handler.画面タイトルを設定(メニューID);
-        if (DBC1100011StateName.変更取下げ.getName().equals(ResponseHolder.getState())
-                && !div.getBtnAddShinsei().isVisible()) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請情報を保存する, true);
-        }
         KogakuGassanShinseishoHoji 高額合算申請書保持
                 = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
         if (DBC1100011StateName.申請登録加入履歴一覧.getName().equals(ResponseHolder.getState())
@@ -395,6 +390,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShinseishoRelate 高額合算申請書 = 高額合算申請書保持.get高額合算申請書(identifier);
         handler.onClick_dgShinseiJohoSelect(高額合算申請書, 高額合算申請書保持.get申請状況());
         ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 照会);
+        div.getBtnBackShinseiIchiran().setVisible(false);
+        div.getBtnKakuteiShintei().setVisible(false);
         return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴一覧);
     }
 
