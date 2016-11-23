@@ -174,10 +174,9 @@ public class ShokanbarayiKeteiInfoPanel {
         ViewStateHolder.put(ViewStateKeys.処理モード, 画面モード);
         ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
-        if (登録.equals(画面モード)) {
-            if (!getHandler(div).check支給申請(parameter.getHiHokenshaNo(), paramter.getServiceTeikyoYM(), paramter.getSeiriNp())) {
-                throw new ApplicationException(UrErrorMessages.未入力.getMessage().replace(必要項目.toString()));
-            }
+        if (登録.equals(画面モード)
+                && !getHandler(div).check支給申請(parameter.getHiHokenshaNo(), paramter.getServiceTeikyoYM(), paramter.getSeiriNp())) {
+            throw new ApplicationException(UrErrorMessages.未入力.getMessage().replace(必要項目.toString()));
         }
         if (getHandler(div).isチェック処理(paramter)) {
             putViewState(div);
@@ -525,17 +524,15 @@ public class ShokanbarayiKeteiInfoPanel {
     private int 情報のチェック(DbJohoViewState db情報) {
         int index = 0;
         index = 情報のチェック一(db情報, index);
-        if (db情報.get償還払支給判定結果() != null) {
-            if (EntityDataState.Unchanged.equals(db情報.get償還払支給判定結果().toEntity().getState())
-                    || db情報.get償還払支給判定結果().toEntity().getState() == null) {
-                index++;
-            }
+        if (db情報.get償還払支給判定結果() != null
+                && (EntityDataState.Unchanged.equals(db情報.get償還払支給判定結果().toEntity().getState())
+                || db情報.get償還払支給判定結果().toEntity().getState() == null)) {
+            index++;
         }
-        if (db情報.get償還払支給申請() != null) {
-            if (EntityDataState.Unchanged.equals(db情報.get償還払支給申請().toEntity().getState())
-                    || db情報.get償還払支給申請().toEntity().getState() == null) {
-                index++;
-            }
+        if (db情報.get償還払支給申請() != null
+                && (EntityDataState.Unchanged.equals(db情報.get償還払支給申請().toEntity().getState())
+                || db情報.get償還払支給申請().toEntity().getState() == null)) {
+            index++;
         }
         return index;
 
