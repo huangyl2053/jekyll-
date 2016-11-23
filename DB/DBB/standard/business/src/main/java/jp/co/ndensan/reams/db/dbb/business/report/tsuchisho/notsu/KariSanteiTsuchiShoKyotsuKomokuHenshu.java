@@ -158,10 +158,14 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         }
         編集後仮算定通知書.set前年度情報有無(前年度情報有無);
         編集後仮算定通知書.set前年度情報(get前年度情報(仮算定通知書情報.get前年度賦課情報(), 前年度情報有無, 前年度最終期普徴期別介護保険料));
-        編集後仮算定通知書.set更正前(get更正前(仮算定通知書情報, get普徴期別金額合計(仮算定通知書情報.get賦課の情報_更正前().get賦課情報()),
-                get特徴期別金額合計(仮算定通知書情報.get賦課の情報_更正前().get賦課情報())));
-        編集後仮算定通知書.set更正後(get更正後(仮算定通知書情報, get普徴期別金額合計(仮算定通知書情報.get賦課の情報_更正後().get賦課情報()),
-                get特徴期別金額合計(仮算定通知書情報.get賦課の情報_更正後().get賦課情報())));
+        編集後仮算定通知書.set更正前(get更正前(仮算定通知書情報, get普徴期別金額合計(仮算定通知書情報.get賦課の情報_更正前() == null
+                ? null : 仮算定通知書情報.get賦課の情報_更正前().get賦課情報()),
+                get特徴期別金額合計(仮算定通知書情報.get賦課の情報_更正前() == null
+                        ? null : 仮算定通知書情報.get賦課の情報_更正前().get賦課情報())));
+        編集後仮算定通知書.set更正後(get更正後(仮算定通知書情報, get普徴期別金額合計(仮算定通知書情報.get賦課の情報_更正後() == null
+                ? null : 仮算定通知書情報.get賦課の情報_更正後().get賦課情報()),
+                get特徴期別金額合計(仮算定通知書情報.get賦課の情報_更正後() == null 
+                        ? null : 仮算定通知書情報.get賦課の情報_更正後().get賦課情報())));
         編集後仮算定通知書.set増減額(getNullToZero(編集後仮算定通知書.get更正後().get更正後介護保険料仮徴収額合計())
                 .subtract(getNullToZero(編集後仮算定通知書.get更正前().get更正前介護保険料仮徴収額合計())));
         編集後仮算定通知書.set納付済額_未到来期含む(普徴納付済額未到来期含む.add(特徴納付済額未到来期含む));
@@ -198,14 +202,14 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private Decimal get特徴期別金額合計(FukaJoho 賦課情報) {
         if (null == 賦課情報) {
-            return null;
+            return Decimal.ZERO;
         }
         return get納付額By賦課情報(特徴メソッド_賦課, 賦課情報, 1, new TokuchoKiUtil().get期月リスト().getLast().get期AsInt());
     }
 
     private Decimal get普徴期別金額合計(FukaJoho 賦課情報) {
         if (null == 賦課情報) {
-            return null;
+            return Decimal.ZERO;
         }
         return get納付額By賦課情報(普徴メソッド_賦課, 賦課情報, 1, new FuchoKiUtil().get期月リスト().getLast().get期AsInt());
     }
