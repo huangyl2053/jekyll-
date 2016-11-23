@@ -124,6 +124,7 @@ public class RiyojokyoTokeihyoHandler {
         RString 選択対象区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("sentakuTaisyoKubun"));
         if (!RString.isNullOrEmpty(選択対象区分)) {
             div.getChikushichosonSelect().set選択対象(選択対象区分);
+            div.getChikushichosonSelect().onChange_選択対象DDL();
         }
         Code 市町村コード = restoreBatchParameterMap.getParameterValue(Code.class, new RString("shichosonCode"));
         if (市町村コード != null && !市町村コード.isEmpty()) {
