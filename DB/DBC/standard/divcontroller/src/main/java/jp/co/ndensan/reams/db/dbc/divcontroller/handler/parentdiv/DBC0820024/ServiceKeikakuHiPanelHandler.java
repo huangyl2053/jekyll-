@@ -1214,8 +1214,10 @@ public class ServiceKeikakuHiPanelHandler {
     private int checkDecimal(Decimal dec1, Decimal dec2) {
         if (dec1 == null && dec2 != null) {
             return 1;
-        } else if (dec1 != null) {
+        } else if (dec1 != null && dec2 != null) {
             return dec1.compareTo(dec2) == 0 ? 0 : 1;
+        } else if (dec1 != null && dec2 == null) {
+            return 1;
         }
         return 0;
     }
