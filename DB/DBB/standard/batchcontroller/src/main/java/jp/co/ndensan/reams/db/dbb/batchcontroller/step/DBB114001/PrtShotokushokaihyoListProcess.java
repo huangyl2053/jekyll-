@@ -181,15 +181,10 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     protected void createWriter() {
 
         pageBreakKeys.add(候補者_KEY);
-        if (pageBreakKeys == null || pageBreakKeys.isEmpty()) {
-            reportWriter = BatchReportFactory.createBatchReportWriter(
-                    ReportIdDBB.DBB200024.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
-        } else {
-            PageBreaker<ShotokushokaihyoHakkoIchiranSource> breakPage
-                    = new ShotokushokaihyoHakkoIchiranBreakKey(pageBreakKeys);
-            reportWriter = BatchReportFactory.createBatchReportWriter(
-                    ReportIdDBB.DBB200024.getReportId().value(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
-        }
+        PageBreaker<ShotokushokaihyoHakkoIchiranSource> breakPage
+                = new ShotokushokaihyoHakkoIchiranBreakKey(pageBreakKeys);
+        reportWriter = BatchReportFactory.createBatchReportWriter(
+                ReportIdDBB.DBB200024.getReportId().value(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
         sourceWriter = new ReportSourceWriter<>(reportWriter);
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
