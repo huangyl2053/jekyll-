@@ -65,6 +65,7 @@ public class KaigoHihokenshaInfoPanel {
     private static final RString DBBHIHOKENSHANO = new RString("DBBHihokenshaNo");
     private static final RString CODE_003 = new RString("003");
     private static final RString 名称_被保険者番号 = new RString("被保険者番号");
+    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString MESSAGETAISHO = new RString("更新は正常に終了しました。");
     private static final RString 終了年月日NULL = new RString("99991231");
@@ -201,6 +202,7 @@ public class KaigoHihokenshaInfoPanel {
                     .set開始年月日(new FlexibleDate(開始年月日.toString()))
                     .set終了年月日(終了年月日 == null ? new FlexibleDate(終了年月日NULL)
                             : new FlexibleDate(終了年月日.toString()))
+                    .set履歴番号(new Decimal(履歴番号.toString()))
                     .set識別コード(識別コード).build();
             result = result.added();
             holder.addKogakuGassanJikoFutanGaku(result);
@@ -212,6 +214,7 @@ public class KaigoHihokenshaInfoPanel {
                         .set開始年月日(new FlexibleDate(開始年月日.toString()))
                         .set終了年月日(終了年月日 == null ? new FlexibleDate(終了年月日NULL)
                                 : new FlexibleDate(終了年月日.toString()))
+                        .set履歴番号(new Decimal(履歴番号.toString()))
                         .build();
                 holder.addKogakuGassanJikoFutanGaku(judgeResultState(初期result, result));
             }
@@ -245,28 +248,31 @@ public class KaigoHihokenshaInfoPanel {
         return result;
     }
 
-    private RString 新履歴番号(RentaiGimusha result, RString 履歴番号, Decimal 最新履歴番号, KaigoHihokenshaInfoPanelDiv div) {
-        if (result == null || ONE.equals(div.getHdnFlag())) {
-            履歴番号 = new RString(最新履歴番号.intValue() + 1);
-        }
-        return 履歴番号;
-    }
-
     private RString 最新履歴番号(KaigoHihokenshaInfoPanelDiv div, HihokenshaNo 被保険者番号, RentaiGimushaHolder holder) {
         RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
         KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
         if (DBB6110001StateName.連帯納付義務者修正.getName().equals(ResponseHolder.getState()) || 履歴番号.isEmpty()) {
-            Decimal 最新履歴番号 = manager.getNoIsDeleted最新履歴番号(被保険者番号);
-            if (最新履歴番号 == null) {
-                履歴番号 = ONE;
+            Decimal 最新履歴番号 = manager.get最新履歴番号(被保険者番号);
+            List<RentaiGimusha> list = holder.getRentaiGimushaList();
+            if (最新履歴番号 == null && (list == null || list.isEmpty())) {
+                履歴番号 = ZERO;
             } else {
-                RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
-                        被保険者番号, new Decimal(最新履歴番号.toString()));
-                RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
-                履歴番号 = 新履歴番号(result, 履歴番号, 最新履歴番号, div);
+                int 番号 = list.get(0).get履歴番号().intValue();
+                for (RentaiGimusha rentai : list) {
+                    int 新番号 = rentai.get履歴番号().intValue();
+                    番号 = max番号(番号, 新番号);
+                }
+                履歴番号 = new RString(番号 + 1);
             }
         }
         return 履歴番号;
+    }
+
+    private int max番号(int 番号, int 新番号) {
+        if (新番号 > 番号) {
+            番号 = 新番号;
+        }
+        return 番号;
     }
 
     /**
