@@ -13,10 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
  * @reamsid_L DBC-4640-040 lijian
  */
 public class KijunShunyugakuTekiyoShinseishoSource implements IReportSource {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-    public static final String ITEM_HIHOKENSHANO1 = "hihokenshaNo1";
-    public static final int MAXLENTH = 36;
+// <editor-fold defaultstate="collapsed" desc="Generated Code">
     @ReportItem(name = "shinsenSakiDaihyo", length = 37, order = 1)
     public RString shinsenSakiDaihyo;
     @ReportItem(name = "hihokenshaKanaName1", order = 2)
@@ -51,9 +49,9 @@ public class KijunShunyugakuTekiyoShinseishoSource implements IReportSource {
     public RString hihokenshaBirthYMD3;
     @ReportItem(name = "pagecnt", length = 9, order = 17)
     public RString pagecnt;
-    @ReportItem(name = "jusho1", length = MAXLENTH, order = 18)
+    @ReportItem(name = "jusho1", length = JUSHO1_MAXLENGTH, order = 18)
     public RString jusho1;
-    @ReportItem(name = "jusho2", length = 20, order = 19)
+    @ReportItem(name = "jusho2", length = JUSHO2_MAXLENGTH, order = 19)
     public RString jusho2;
     @ReportItem(name = "renrakusaki", length = 15, order = 20)
     public RString renrakusaki;
@@ -72,14 +70,19 @@ public class KijunShunyugakuTekiyoShinseishoSource implements IReportSource {
     @ReportPerson(id = "C")
     @ReportItem(name = "shikibetsuCode3", length = 15)
     public RString shikibetsuCode3;
-    @ReportItem(name = "jusho", length = 36, order = 24)
+    @ReportItem(name = "jusho", length = JUSHO_MAXLENGTH, order = 24)
     public RString jusho;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
-// </editor-fold>
+
+    public static final String ITEM_HIHOKENSHANO1 = "hihokenshaNo1";
+    public static final int JUSHO1_MAXLENGTH = 36;
+    public static final int JUSHO2_MAXLENGTH = 20;
+    private static final int JUSHO_MAXLENGTH = JUSHO1_MAXLENGTH + JUSHO2_MAXLENGTH;
+
     @ReportExpandedInfo(id = "A")
     public ExpandedInformation 拡張情報A1;
     @ReportExpandedInfo(id = "A")
@@ -92,4 +95,6 @@ public class KijunShunyugakuTekiyoShinseishoSource implements IReportSource {
     public ExpandedInformation 拡張情報C1;
     @ReportExpandedInfo(id = "C")
     public ExpandedInformation 拡張情報C2;
+
+    // </editor-fold>
 }
