@@ -334,7 +334,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         }
         PageBreaker<KogakuShikyuFushikyuKetteiTsuchiHakkoSource> breaker
                 = new KogakuShikyuFushikyuKetteiTsuchiHakkoPageBreak(pageBreakKeys);
-        batchReportWriter5 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200022.getReportId().getColumnValue())
+        batchReportWriter5 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200020.getReportId().getColumnValue())
                 .addBreak(breaker).create();
         reportSourceWriter5 = new ReportSourceWriter<>(batchReportWriter5);
     }
