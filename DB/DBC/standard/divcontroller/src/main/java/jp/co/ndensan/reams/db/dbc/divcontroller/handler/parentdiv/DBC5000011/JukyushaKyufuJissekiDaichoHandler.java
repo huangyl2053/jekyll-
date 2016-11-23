@@ -65,6 +65,9 @@ public class JukyushaKyufuJissekiDaichoHandler {
     private static final RString 総合事業ケアマネジメント = new RString("key28");
     private static final RString MENUID_DBCMNJ1001 = new RString("DBCMNJ1001");
     private static final RString MENUID_DBCMNJ1002 = new RString("DBCMNJ1002");
+    private static final int SELECT_KEY_4 = 4;
+    private static final int SELECT_KEY_7 = 7;
+    private static final int SELECT_KEY_15 = 15;
 
     /**
      * コンストラクタです。
@@ -134,35 +137,41 @@ public class JukyushaKyufuJissekiDaichoHandler {
         List<RString> 出力様式_3 = new ArrayList<>();
         List<RString> 出力様式_4 = new ArrayList<>();
         List<RString> 出力様式_5 = new ArrayList<>();
-        出力様式_1.add(訪問通所他_サービス_全て_償還);
-        出力様式_1.add(短期入所生活介護_審査年月_現物);
-        出力様式_1.add(短期入所療養介護_老健施設);
-        出力様式_1.add(短期入所療養介護_医療施設);
-        出力様式_1.add(認知症対応型共同生活);
-        出力様式_1.add(特定施設入居者生活介護);
-        出力様式_1.add(認知症対応型共同生活_短期);
-        出力様式_1.add(特定施設入居生活介護_短期);
-        出力様式_1.add(居宅介護支援);
-        出力様式_1.add(介護老人福祉施設サービス);
-        出力様式_1.add(介護老人保健施設サービス);
-        出力様式_1.add(介護療養型医療施設サービス);
-        出力様式_1.add(特定福祉用具販売費);
-        出力様式_1.add(住宅改修費);
-        出力様式_1.add(高額介護サービス費);
-        出力様式_2.add(予防訪問通所他);
-        出力様式_2.add(予防短期入所生活介護);
-        出力様式_2.add(予防短期入所療養介護_老健施設);
-        出力様式_2.add(予防短期入所療養介護_医療施設);
-        出力様式_2.add(予防認知症対応型共同生活);
-        出力様式_2.add(予防特定施設入居者生活介護);
-        出力様式_2.add(予防認知症対応型共同生活_短期);
-        出力様式_3.add(予防支援);
-        出力様式_4.add(予防特定福祉用具販売費);
-        出力様式_4.add(予防住宅改修費);
-        出力様式_5.add(介護予防_生活支援_経過);
-        出力様式_5.add(経過措置ケアマネジメント);
-        出力様式_5.add(介護予防_生活支援総合事業);
-        出力様式_5.add(総合事業ケアマネジメント);
+        if (div.getTabChushutsuJoken().getChkShutsuryokuYoshiki1().getSelectedKeys().size() != SELECT_KEY_15
+                || div.getTabChushutsuJoken().getChkShutsuryokuYoshiki2().getSelectedKeys().size() != SELECT_KEY_7
+                || div.getTabChushutsuJoken().getChkShutsuryokuYoshiki3().getSelectedKeys().size() != 1
+                || div.getTabChushutsuJoken().getChkShutsuryokuYoshiki4().getSelectedKeys().size() != 2
+                || div.getTabChushutsuJoken().getChkShutsuryokuYoshiki5().getSelectedKeys().size() != SELECT_KEY_4) {
+            出力様式_1.add(訪問通所他_サービス_全て_償還);
+            出力様式_1.add(短期入所生活介護_審査年月_現物);
+            出力様式_1.add(短期入所療養介護_老健施設);
+            出力様式_1.add(短期入所療養介護_医療施設);
+            出力様式_1.add(認知症対応型共同生活);
+            出力様式_1.add(特定施設入居者生活介護);
+            出力様式_1.add(認知症対応型共同生活_短期);
+            出力様式_1.add(特定施設入居生活介護_短期);
+            出力様式_1.add(居宅介護支援);
+            出力様式_1.add(介護老人福祉施設サービス);
+            出力様式_1.add(介護老人保健施設サービス);
+            出力様式_1.add(介護療養型医療施設サービス);
+            出力様式_1.add(特定福祉用具販売費);
+            出力様式_1.add(住宅改修費);
+            出力様式_1.add(高額介護サービス費);
+            出力様式_2.add(予防訪問通所他);
+            出力様式_2.add(予防短期入所生活介護);
+            出力様式_2.add(予防短期入所療養介護_老健施設);
+            出力様式_2.add(予防短期入所療養介護_医療施設);
+            出力様式_2.add(予防認知症対応型共同生活);
+            出力様式_2.add(予防特定施設入居者生活介護);
+            出力様式_2.add(予防認知症対応型共同生活_短期);
+            出力様式_3.add(予防支援);
+            出力様式_4.add(予防特定福祉用具販売費);
+            出力様式_4.add(予防住宅改修費);
+            出力様式_5.add(介護予防_生活支援_経過);
+            出力様式_5.add(経過措置ケアマネジメント);
+            出力様式_5.add(介護予防_生活支援総合事業);
+            出力様式_5.add(総合事業ケアマネジメント);
+        }
         div.getTabChushutsuJoken().getChkShutsuryokuYoshiki1().setSelectedItemsByKey(出力様式_1);
         div.getTabChushutsuJoken().getChkShutsuryokuYoshiki2().setSelectedItemsByKey(出力様式_2);
         div.getTabChushutsuJoken().getChkShutsuryokuYoshiki3().setSelectedItemsByKey(出力様式_3);
