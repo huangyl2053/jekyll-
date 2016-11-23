@@ -108,12 +108,10 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             response = response.rootTitle(事業高額合算支給決定情報補正).focusId(フォーカスを);
         }
         if (データ存在validPairs.iterator().hasNext()) {
-            div.getBtnKetteiJohoAdd().setDisabled(true);
-            div.getBtnKensaku().setDisabled(true);
+            getHandler(div).set決定情報の操作性(false);
             return response.addValidationMessages(データ存在validPairs).respond();
         } else {
-            div.getBtnKetteiJohoAdd().setDisabled(false);
-            div.getBtnKensaku().setDisabled(false);
+            getHandler(div).set決定情報の操作性(true);
             List<KogakuGassanShikyuKetteiHoseiResult> result = new ArrayList<>();
             getHandler(div).set決定情報一覧グリッド(result);
             return response.respond();

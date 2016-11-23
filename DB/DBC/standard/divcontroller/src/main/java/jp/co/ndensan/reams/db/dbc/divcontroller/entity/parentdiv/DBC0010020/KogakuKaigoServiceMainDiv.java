@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010020;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.IKyufuJissekiHeaderDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.KyufuJissekiHeaderDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  */
 public class KogakuKaigoServiceMainDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -105,6 +106,10 @@ public class KogakuKaigoServiceMainDiv extends Panel {
     private Button btnZengetsu;
     @JsonProperty("ccdKyufuJissekiHeader")
     private KyufuJissekiHeaderDiv ccdKyufuJissekiHeader;
+    @JsonProperty("hiddenCurrentIndex")
+    private RString hiddenCurrentIndex;
+    @JsonProperty("hiddenTotalIndex")
+    private RString hiddenTotalIndex;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -784,7 +789,43 @@ public class KogakuKaigoServiceMainDiv extends Panel {
      */
     @JsonProperty("ccdKyufuJissekiHeader")
     public IKyufuJissekiHeaderDiv getCcdKyufuJissekiHeader() {
-        return (IKyufuJissekiHeaderDiv) ccdKyufuJissekiHeader;
+        return ccdKyufuJissekiHeader;
+    }
+
+    /*
+     * gethiddenCurrentIndex
+     * @return hiddenCurrentIndex
+     */
+    @JsonProperty("hiddenCurrentIndex")
+    public RString getHiddenCurrentIndex() {
+        return hiddenCurrentIndex;
+    }
+
+    /*
+     * sethiddenCurrentIndex
+     * @param hiddenCurrentIndex hiddenCurrentIndex
+     */
+    @JsonProperty("hiddenCurrentIndex")
+    public void setHiddenCurrentIndex(RString hiddenCurrentIndex) {
+        this.hiddenCurrentIndex = hiddenCurrentIndex;
+    }
+
+    /*
+     * gethiddenTotalIndex
+     * @return hiddenTotalIndex
+     */
+    @JsonProperty("hiddenTotalIndex")
+    public RString getHiddenTotalIndex() {
+        return hiddenTotalIndex;
+    }
+
+    /*
+     * sethiddenTotalIndex
+     * @param hiddenTotalIndex hiddenTotalIndex
+     */
+    @JsonProperty("hiddenTotalIndex")
+    public void setHiddenTotalIndex(RString hiddenTotalIndex) {
+        this.hiddenTotalIndex = hiddenTotalIndex;
     }
 
     // </editor-fold>

@@ -1197,10 +1197,24 @@ public class KyufuJissekiShokai {
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(new RDate(div.getDgKyufuJissekiMeisaiList().getGridSetting().
                 getColumns().get(列 * INT_NI + INT_ICHI).getGroupName().toString()).getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス提供年月);
-        List<KyufuJissekiKihonShukeiRelate> 給付実績基本データ = get給付実績基本データ(div, 列);
-        KyufujissekiKihonJyohou kyufujissekiKihonJyohou = new KyufujissekiKihonJyohou();
-        kyufujissekiKihonJyohou.setCsData_A(給付実績基本データ);
-        ViewStateHolder.put(ViewStateKeys.給付実績基本情報, kyufujissekiKihonJyohou);
+        int rowId = div.getDgKyufuJissekiMeisaiList().getClickedRowId();
+        if (rowId == INT_55) {
+            TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            FlexibleYearMonth サービス提供年月_開始 = new FlexibleYearMonth(div.getHiddenStartYM());
+            FlexibleYearMonth サービス提供年月_終了 = new FlexibleYearMonth(div.getHiddenEndYM());
+            HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
+            List<KyufujissekiKogakuKaigoServicehi> 給付実績高額介護サービス費データリスト
+                    = KyufuJissekiShokaiFinder.createInstance().get給付実績高額介護サービス費データ(
+                            被保険者番号, サービス提供年月_開始, サービス提供年月_終了, KEY.equals(div.getHiddenSearchKey()));
+            KyufujissekiKogakuKaigoServicehiJyohou servicehiJyohou = new KyufujissekiKogakuKaigoServicehiJyohou();
+            servicehiJyohou.setCsData_I(給付実績高額介護サービス費データリスト);
+            ViewStateHolder.put(ViewStateKeys.給付実績高額明細管理情報, servicehiJyohou);
+        } else {
+            List<KyufuJissekiKihonShukeiRelate> 給付実績基本データ = get給付実績基本データ(div, 列);
+            KyufujissekiKihonJyohou kyufujissekiKihonJyohou = new KyufujissekiKihonJyohou();
+            kyufujissekiKihonJyohou.setCsData_A(給付実績基本データ);
+            ViewStateHolder.put(ViewStateKeys.給付実績基本情報, kyufujissekiKihonJyohou);
+        }
     }
 
     private List<KyufuJissekiKihonShukeiRelate> get給付実績基本データ(KyufuJissekiShokaiDiv div, int 列) {
@@ -1237,7 +1251,6 @@ public class KyufuJissekiShokai {
     }
 
     private List<RString> getサービス種類コードList(KyufuJissekiShokaiDiv div) {
-        int rowId = div.getDgKyufuJissekiMeisaiList().getClickedRowId();
         if (KEY.equals(div.getHiddenSearchKey())) {
             return getサービス種類コード_日常生活支援総合事業(div);
         } else {

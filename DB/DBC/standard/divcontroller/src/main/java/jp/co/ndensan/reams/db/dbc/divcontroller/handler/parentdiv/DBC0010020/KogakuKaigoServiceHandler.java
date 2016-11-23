@@ -45,25 +45,9 @@ public class KogakuKaigoServiceHandler {
     /**
      * 高額介護サービス費等選別
      *
-     * @param 高額介護サービス費等 高額介護サービス費等
-     * @param サービス提供年月 サービス提供年月
+     * @param 高額介護サービス費 高額介護サービス費
      */
-    public void set給付実績高額介護サービス費データ(List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費等, FlexibleYearMonth サービス提供年月) {
-        List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費リスト = new ArrayList<>();
-        if (高額介護サービス費等 != null && !高額介護サービス費等.isEmpty()) {
-            this.setGetsuBtn(高額介護サービス費等, サービス提供年月);
-            for (KyufujissekiKogakuKaigoServicehi 高額介護サービス費 : 高額介護サービス費等) {
-                if (サービス提供年月 != null && サービス提供年月.compareTo(高額介護サービス費.getサービス提供年月()) == 0) {
-                    高額介護サービス費リスト.add(高額介護サービス費);
-                }
-            }
-        }
-        if (!高額介護サービス費リスト.isEmpty()) {
-            this.setData(高額介護サービス費リスト.get(INT_ZERO));
-        }
-    }
-
-    private void setData(KyufujissekiKogakuKaigoServicehi 高額介護サービス費) {
+    public void set給付実績高額介護サービス費データ(KyufujissekiKogakuKaigoServicehi 高額介護サービス費) {
         div.getTxtKogakuKaigoServicehiKetteiYMD().setValue(to日期変換(高額介護サービス費.get決定年月日()));
         div.getTxtKogakuKaigoServicehiUketsukeYMD().setValue(to日期変換(高額介護サービス費.get受付年月日()));
         div.getTxtKogakuKaigoServicehiShinsaYM().setValue(to日期変換(高額介護サービス費.get審査年月()));
@@ -166,7 +150,7 @@ public class KogakuKaigoServiceHandler {
         FlexibleYearMonth 今提供年月 = get今提供年月(data, 高額介護サービス費リスト, サービス提供年月);
         if (!今提供年月.isEmpty()) {
             div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-            set給付実績高額介護サービス費データ(高額介護サービス費リスト, 今提供年月);
+            //set給付実績高額介護サービス費データ(高額介護サービス費リスト, 今提供年月);
             setGetsuBtn(高額介護サービス費リスト, 今提供年月);
         }
     }

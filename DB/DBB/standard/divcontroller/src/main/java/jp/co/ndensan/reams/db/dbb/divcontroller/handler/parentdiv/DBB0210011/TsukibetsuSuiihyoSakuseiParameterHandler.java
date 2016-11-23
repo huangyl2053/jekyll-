@@ -117,6 +117,7 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
         RString 選択対象 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("sentakuTaisho"));
         if (!RString.isNullOrEmpty(選択対象)) {
             div.getCcdChikuShichosonSelect().set選択対象(選択対象);
+            div.getCcdChikuShichosonSelect().onChange_選択対象DDL();
         }
         RString 市町村コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shichosonCode"));
         if (!RString.isNullOrEmpty(市町村コード)) {

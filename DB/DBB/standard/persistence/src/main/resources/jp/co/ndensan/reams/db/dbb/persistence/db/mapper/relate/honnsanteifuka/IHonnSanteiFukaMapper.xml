@@ -454,7 +454,7 @@
          "DbT7006RoreiFukushiNenkinJukyusha"."hihokenshaNo" as "dbT7006RoreiFukushiNenkinJukyusha_hihokenshaNo"
     </sql>
     
-    <resultMap id="result_KeisanTaishoshaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KeisanTaishoshaEntity">
+    <resultMap id="result_KeisanTaishoshaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KeisanTaishoshaEntity" autoMapping="false">
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo" />
         <id column="dbT1001HihokenshaDaicho_idoYMD" />
         <id column="dbT1001HihokenshaDaicho_edaNo" />
@@ -463,50 +463,142 @@
         <association property="賦課の情報" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
     </resultMap>
     
+    <sql id="allColumns_計算対象者抽出">
+         "MSG"."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
+         "MSG"."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",
+         "MSG"."edaNo" as "dbT1001HihokenshaDaicho_edaNo",
+         "MSG"."insertDantaiCd" as "dbT1001HihokenshaDaicho_insertDantaiCd",
+         "MSG"."insertTimestamp" as "dbT1001HihokenshaDaicho_insertTimestamp",
+         "MSG"."insertReamsLoginId" as "dbT1001HihokenshaDaicho_insertReamsLoginId",
+         "MSG"."insertContextId" as "dbT1001HihokenshaDaicho_insertContextId",
+         "MSG"."isDeleted" as "dbT1001HihokenshaDaicho_isDeleted",
+         "MSG"."updateCount" as "dbT1001HihokenshaDaicho_updateCount",
+         "MSG"."lastUpdateTimestamp" as "dbT1001HihokenshaDaicho_lastUpdateTimestamp",
+         "MSG"."lastUpdateReamsLoginId" as "dbT1001HihokenshaDaicho_lastUpdateReamsLoginId",
+         "MSG"."idoJiyuCode" as "dbT1001HihokenshaDaicho_idoJiyuCode",
+         "MSG"."shichosonCode" as "dbT1001HihokenshaDaicho_shichosonCode",
+         "MSG"."shikibetsuCode" as "dbT1001HihokenshaDaicho_shikibetsuCode",
+         "MSG"."shikakuShutokuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+         "MSG"."shikakuShutokuYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuYMD",
+         "MSG"."shikakuShutokuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
+         "MSG"."ichigoShikakuShutokuYMD" as "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
+         "MSG"."hihokennshaKubunCode" as "dbT1001HihokenshaDaicho_hihokennshaKubunCode",
+         "MSG"."shikakuSoshitsuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
+         "MSG"."shikakuSoshitsuYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+         "MSG"."shikakuSoshitsuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+         "MSG"."shikakuHenkoJiyuCode" as "dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
+         "MSG"."shikakuHenkoYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoYMD",
+         "MSG"."shikakuHenkoTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
+         "MSG"."jushochitokureiTekiyoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+         "MSG"."jushochitokureiTekiyoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
+         "MSG"."jushochitokureiTekiyoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
+         "MSG"."jushochitokureiKaijoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+         "MSG"."jushochitokureiKaijoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD",
+         "MSG"."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
+         "MSG"."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
+         "MSG"."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
+         "MSG"."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+         "MSG"."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
+         "MSG"."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag"
+    </sql>
+    
     <!--賦課の情報と資格の情報を取得します。-->
     <select resultOrdered="true" id="select計算対象者抽出" resultMap="result_KeisanTaishoshaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.KeisanTaishoshaParameter" fetchSize="500">
-        SELECT
-        資格.*,
-        "DbT2002Fuka1".*
-        FROM (SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
-        FROM rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
-        INNER JOIN
-        (SELECT
-                    "DbT1001HihokenshaDaicho"."hihokenshaNo"
-                    ,"DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD"
-                    ,"DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD"
-                    ,MAX (
-                        "DbT1001HihokenshaDaicho"."idoYMD" || "DbT1001HihokenshaDaicho"."edaNo"
-                    ) AS MAX
-                 FROM
-                    rgdb."DbT1001HihokenshaDaicho" 
-                        INNER JOIN (
-                        SELECT  *
-                        FROM    rgdb."DbV1001HihokenshaDaicho" AS "DbV1001"
-                        WHERE   "hihokennshaKubunCode" = '1'
-                        AND     "logicalDeletedFlag" = FALSE
-                        AND     ("shikakuSoshitsuYMD" IS NULL OR "shikakuSoshitsuYMD" = ''
-                                OR #{調定年度_修正後} <![CDATA[<]]> "shikakuSoshitsuYMD")
-                        AND     "ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{資格基準日}
-                        ) AS "DbV1001HihokenshaDaicho" ON "DbT1001HihokenshaDaicho"."hihokenshaNo" = "DbV1001HihokenshaDaicho"."hihokenshaNo"
-                    GROUP BY "DbT1001HihokenshaDaicho"."hihokenshaNo", "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD", "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD"
-                    ) AS B
-        ON "DbT1001HihokenshaDaicho". "hihokenshaNo" = B. "hihokenshaNo"
-        AND COALESCE("DbT1001HihokenshaDaicho" . "ichigoShikakuShutokuYMD",'00000000') = COALESCE(B. "ichigoShikakuShutokuYMD",'00000000')
-        AND COALESCE("DbT1001HihokenshaDaicho" . "shikakuSoshitsuYMD",'00000000') = COALESCE(B. "shikakuSoshitsuYMD",'00000000')
-        AND ("DbT1001HihokenshaDaicho". "idoYMD" || "DbT1001HihokenshaDaicho". "edaNo") = B.max) AS 資格
-        FULL OUTER JOIN
-        (SELECT <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>
-        FROM rgdb."DbV2002Fuka" AS "DbT2002Fuka"
-        WHERE "DbT2002Fuka"."choteiNendo"=#{調定年度}
-        AND "DbT2002Fuka"."fukaNendo"=#{賦課年度}
-        ) AS "DbT2002Fuka1"
-        ON 資格."dbT1001HihokenshaDaicho_hihokenshaNo"="DbT2002Fuka1"."dbT2002Fuka_hihokenshaNo"
-        ORDER BY 資格."dbT1001HihokenshaDaicho_hihokenshaNo", "DbT2002Fuka1"."dbT2002Fuka_tsuchishoNo"
+      WITH leader AS 
+      (WITH master AS
+            (SELECT <include refid="allColumns_計算対象者抽出"/>
+            FROM rgdb."DbT1001HihokenshaDaicho" AS "MSG"
+            INNER JOIN(
+                SELECT
+                "hihokenshaNo"
+                ,"ichigoShikakuShutokuYMD"
+                ,MAX("shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
+                FROM
+                    rgdb."DbT1001HihokenshaDaicho" AS "ORG"
+                WHERE
+                    "hihokennshaKubunCode" = '1'
+                    AND "logicalDeletedFlag" = FALSE
+                    AND NOT (
+                        EXISTS (
+                            SELECT
+                                'X'
+                            FROM
+                                (
+                                    SELECT
+                                        "HIHO"."hihokenshaNo" AS "法施行時住特得喪レコード_hihokenshaNo"
+                                        ,"HIHO"."idoYMD" AS "法施行時住特得喪レコード_idoYMD"
+                                        ,"HIHO"."edaNo" AS "法施行時住特得喪レコード_edaNo"
+                                    FROM
+                                        rgdb."DbT1001HihokenshaDaicho" AS "HIHO"
+                                        INNER JOIN (
+                                            SELECT
+                                                "hihokenshaNo"
+                                                ,"idoYMD"
+                                                ,"edaNo"
+                                            FROM
+                                                rgdb."DbT1001HihokenshaDaicho"
+                                            WHERE
+                                                "hihokennshaKubunCode" = '1'
+                                                AND "logicalDeletedFlag" = FALSE
+                                                AND "jushochiTokureiFlag" = '1'
+                                                AND "jushochitokureiTekiyoYMD" = '20000401'
+                                        ) AS "法施行時住特レコード"
+                                            ON "法施行時住特レコード"."hihokenshaNo" = "HIHO"."hihokenshaNo"
+                                            AND "HIHO"."ichigoShikakuShutokuYMD" = '20000401'
+                                            AND "HIHO"."shikakuSoshitsuYMD" = '20000401'
+                                ) AS "法施行時住特得喪レコード"
+                            WHERE
+                                "法施行時住特得喪レコード_hihokenshaNo" = "ORG"."hihokenshaNo"
+                                AND "法施行時住特得喪レコード_idoYMD" = "ORG"."idoYMD"
+                                AND "法施行時住特得喪レコード_edaNo" = "ORG"."edaNo"
+                        )
+                    )
+                GROUP BY
+                    "hihokenshaNo"
+                    ,"ichigoShikakuShutokuYMD"
+            ) AS "TONEN_HIHO" 
+            ON "TONEN_HIHO" ."hihokenshaNo" = "MSG"."hihokenshaNo"
+            AND "TONEN_HIHO"."ichigoShikakuShutokuYMD" = "MSG"."ichigoShikakuShutokuYMD"
+            AND "TONEN_HIHO"."max_shikakuSoshitsuYMD" = "MSG"."shikakuSoshitsuYMD"
+            WHERE
+            (
+                "TONEN_HIHO"."max_shikakuSoshitsuYMD" = ''
+                OR "TONEN_HIHO"."max_shikakuSoshitsuYMD" IS NULL
+                OR #{調定年度_修正後} <![CDATA[<]]> "TONEN_HIHO"."max_shikakuSoshitsuYMD"
+                AND "TONEN_HIHO"."ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{資格基準日}
+            ))
+            SELECT "CNT".* 
+            FROM master AS "CNT"
+            INNER JOIN(
+            SELECT
+            "dbT1001HihokenshaDaicho_hihokenshaNo"
+            ,"dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD"
+            ,"dbT1001HihokenshaDaicho_shikakuSoshitsuYMD"
+            ,MAX ("dbT1001HihokenshaDaicho_idoYMD" || "dbT1001HihokenshaDaicho_edaNo") AS MAX
+            FROM master
+            GROUP BY
+                "dbT1001HihokenshaDaicho_hihokenshaNo"
+                ,"dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD"
+                ,"dbT1001HihokenshaDaicho_shikakuSoshitsuYMD"
+            ) AS "FCG"
+            ON "CNT"."dbT1001HihokenshaDaicho_hihokenshaNo"="FCG"."dbT1001HihokenshaDaicho_hihokenshaNo"
+            AND "FCG".MAX = ("CNT"."dbT1001HihokenshaDaicho_idoYMD" || "CNT"."dbT1001HihokenshaDaicho_edaNo")
+            )
+            SELECT  B.*,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
+            FROM leader AS B
+            FULL OUTER JOIN (
+            SELECT "DbT2002Fuka1".*
+            FROM rgdb."DbV2002Fuka" AS "DbT2002Fuka1"
+            WHERE
+            "DbT2002Fuka1"."choteiNendo" = #{調定年度}
+            AND "DbT2002Fuka1"."fukaNendo" = #{賦課年度}
+            ) AS "DbT2002Fuka"
+            ON "DbT2002Fuka"."hihokenshaNo" = B."dbT1001HihokenshaDaicho_hihokenshaNo"
+            ORDER BY "dbT1001HihokenshaDaicho_hihokenshaNo"
     </select>
-    
+
     
     <resultMap id="ResultMap_DbT2001ChoshuHohoEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity" autoMapping="true">
         <id property="fukaNendo" column="dbT2001ChoshuHoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>

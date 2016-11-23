@@ -55,8 +55,10 @@ public class JikofutangakuShomeishoToroku {
     private static final RString BUTTON_BTNBACKSEARCHRESULT_SEARCHGAMEN = new RString("btnBackSearchResult_SearchGamen");
     private static final RString BUTTON_SAVE = new RString("btnUpdate");
     private static final RString STATUS_新規 = new RString("新規");
+    private static final RString STATUS_保存 = new RString("保存");
     private static final RString STATUS_照会 = new RString("照会");
     private static final RString STATUS_修正 = new RString("修正");
+    private static final RString STATUS_更新 = new RString("更新");
     private static final RString STATUS_削除 = new RString("削除");
 
     /**
@@ -199,6 +201,9 @@ public class JikofutangakuShomeishoToroku {
         }
         if (div.getExecutionStatus().equals(STATUS_削除)) {
             CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_削除.toString());
+        }
+        if (div.getExecutionStatus().equals(STATUS_新規)) {
+            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_保存.toString());
         }
         return ResponseData.of(div).respond();
     }
@@ -687,7 +692,7 @@ public class JikofutangakuShomeishoToroku {
             }
             if (div.getExecutionStatus().equals(STATUS_修正)) {
                 QuestionMessage message = new QuestionMessage(DbcQuestionMessages.確認メッセージ.getMessage().getCode(),
-                        DbcQuestionMessages.確認メッセージ.getMessage().replace(STATUS_修正.toString()).evaluate());
+                        DbcQuestionMessages.確認メッセージ.getMessage().replace(STATUS_更新.toString()).evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }

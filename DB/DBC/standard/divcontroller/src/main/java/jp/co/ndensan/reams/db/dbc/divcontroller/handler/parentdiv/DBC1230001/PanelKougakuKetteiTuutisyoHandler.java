@@ -62,6 +62,7 @@ public final class PanelKougakuKetteiTuutisyoHandler {
     private static final RString 画面_初回申請用様式 = new RString("0");
     private static final RString 画面_自動償還用様式 = new RString("1");
     private static final RString 支払予定日印字有無_有 = new RString("1");
+    private static final RString 決定通知リアル発行区分 = new RString("1");
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
     private static final RString コード_ログコード = new RString("0003");
     private static final int INT_4 = 4;
@@ -241,6 +242,8 @@ public final class PanelKougakuKetteiTuutisyoHandler {
         for (JigyoKogakuShikyuHanteiKekka jigyoKogakuShikyuHanteiKekka : 事業高額介護サービス費支給判定結果) {
             jigyoKogakuShikyuHanteiKekka = jigyoKogakuShikyuHanteiKekka.createBuilderForEdit()
                     .set決定通知書作成年月日(決定通知書作成年月日).build();
+            jigyoKogakuShikyuHanteiKekka = jigyoKogakuShikyuHanteiKekka.createBuilderForEdit()
+                    .set決定通知リアル発行区分(決定通知リアル発行区分).build();
             事業高額介護サービス費支給判定結果Mgr.update事業高額介護サービス費支給判定結果(jigyoKogakuShikyuHanteiKekka);
         }
         RealInitialLocker.release(key);
