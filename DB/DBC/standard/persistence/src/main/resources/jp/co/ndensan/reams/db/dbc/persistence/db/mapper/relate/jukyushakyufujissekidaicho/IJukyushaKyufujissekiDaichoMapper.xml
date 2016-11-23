@@ -1060,7 +1060,7 @@
                             AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
                             LEFT JOIN rgdb."DbT7120TokuteiShinryoServiceCode" AS DbT7120
                   ON CASE WHEN 
-                  "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo" IN ('2151',
+                  "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."inputShikibetsuNo" IN ('2151',
                         '2152',
                         '2153',
                         '2154',
@@ -1075,7 +1075,7 @@
                         '7192',
                         '7193'
                     )
-                    AND SUBSTR("DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo", 0, 4) IN ('216','21A','716','71A')
+                    AND SUBSTR("DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."inputShikibetsuNo", 0, 4) IN ('216','21A','716','71A')
                     THEN DbT7120."serviceShuruiCode" = '60'
                     ELSE DbT7120."serviceShuruiCode" = '70'
                     END
