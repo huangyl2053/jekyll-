@@ -488,8 +488,8 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             KogakuShikyuFushikyuKetteiTsuchiHakkoEntity 合計entity) {
 
         set出力順と改頁(合計entity);
-        合計entity.set受付年月日(doカンマ編集(new Decimal(支給件数)));
-        合計entity.set支給額給額合計(支給額給額合計);
+        合計entity.set受付年月日(doカンマ編集(new Decimal(支給件数)).concat(new RString("件")));
+        合計entity.set本人支払額(支給額給額合計);
         合計entity.set支給額(本人支給額合計);
         合計entity.set認定開始日(タイトル);
 
