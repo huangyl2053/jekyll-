@@ -60,9 +60,7 @@ public class KaiGoJuminHyokouKiuDBUpdateProcess extends BatchProcessBase<DbT7022
     @Override
     protected void afterExecute() {
         if (isEmpty) {
-            DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
-            entity = business.set追加(parameter);
-            tableWrite.insert(entity);
+            tableWrite.insert(business.set追加(parameter));
         }
     }
 }

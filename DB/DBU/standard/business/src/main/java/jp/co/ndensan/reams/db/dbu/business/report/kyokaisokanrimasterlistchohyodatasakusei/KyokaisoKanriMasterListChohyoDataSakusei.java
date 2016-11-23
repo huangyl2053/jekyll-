@@ -60,9 +60,9 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             KyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity, KyokaisogGaitoshaRelateEntity entity) {
         KyokaisoKanriMasterListChohyoDataSakuseiEntity 帳票ソースデータ = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
         if (entity == null) {
-            帳票ソースデータ = 帳票用データリスト(kyokaisogGaitoshaListEntity);
+            帳票用データリスト(kyokaisogGaitoshaListEntity, 帳票ソースデータ);
         } else {
-            帳票ソースデータ = get境界層管理マスタリスト分割処理(entity);
+            get境界層管理マスタリスト分割処理(entity, 帳票ソースデータ);
             帳票ソースデータ.set印刷日時(get印刷日時());
             帳票ソースデータ.setページ数(RString.EMPTY);
             帳票ソースデータ.set市町村コード(kyokaisogGaitoshaListEntity.get市町村コード());
@@ -106,9 +106,8 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         return systemDateTime.toRString();
     }
 
-    private KyokaisoKanriMasterListChohyoDataSakuseiEntity
-            帳票用データリスト(KyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity) {
-        KyokaisoKanriMasterListChohyoDataSakuseiEntity chohyoDataEntity = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
+    private void 帳票用データリスト(KyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity,
+            KyokaisoKanriMasterListChohyoDataSakuseiEntity chohyoDataEntity) {
         chohyoDataEntity.set印刷日時(get印刷日時());
         chohyoDataEntity.setページ数(new RString("1"));
         chohyoDataEntity.set市町村コード(kyokaisogGaitoshaListEntity.get市町村コード());
@@ -123,17 +122,10 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         chohyoDataEntity.set改頁3(kyokaisogGaitoshaListEntity.get改頁().get(改頁3));
         chohyoDataEntity.set改頁4(kyokaisogGaitoshaListEntity.get改頁().get(改頁4));
         chohyoDataEntity.set改頁5(kyokaisogGaitoshaListEntity.get改頁().get(改頁5));
-        return chohyoDataEntity;
     }
 
-    /**
-     *
-     * 境界層管理マスタリスト分割処理です。
-     *
-     */
-    private KyokaisoKanriMasterListChohyoDataSakuseiEntity get境界層管理マスタリスト分割処理(
-            KyokaisogGaitoshaRelateEntity entity) {
-        KyokaisoKanriMasterListChohyoDataSakuseiEntity 帳票用データ = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
+    private void get境界層管理マスタリスト分割処理(
+            KyokaisogGaitoshaRelateEntity entity, KyokaisoKanriMasterListChohyoDataSakuseiEntity 帳票用データ) {
         帳票用データ.set被保険者番号(entity.getHihokenshaNo().value());
         帳票用データ.set識別コード(nullToEmpty(entity.getShikibetsuCode().value()));
         帳票用データ.setカナ氏名(nullToEmpty(entity.getKanaShimei()));
@@ -176,8 +168,6 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             帳票用データ.set居住費軽減後居室種類(RString.EMPTY);
         }
         setlist(entity, 帳票用データ);
-
-        return 帳票用データ;
     }
 
     private void setlist(KyokaisogGaitoshaRelateEntity entity, KyokaisoKanriMasterListChohyoDataSakuseiEntity 帳票用データ) {
