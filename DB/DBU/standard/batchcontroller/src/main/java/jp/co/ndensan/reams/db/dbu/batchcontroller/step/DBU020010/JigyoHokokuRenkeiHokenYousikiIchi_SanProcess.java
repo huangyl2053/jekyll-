@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoH
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokurenkei.JigyoHokokuRenkeiEntity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei2or3EucCsvEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -21,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -51,9 +48,6 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
     private static final RString 番号_12 = new RString("12");
     private static final int 桁_4 = 4;
     private static final int 桁_3 = 3;
-    private static final RString 番号 = new RString("保険者番号");
-    private static final RString 名称 = new RString("保険者名称");
-    private final RDate 基準日 = RDate.getNowDate();
     private RString eucFilePath;
     private JigyoHokokuRenkeiProcessParameter processParameter;
     private JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity = new JigyoHokokuRenkeiEntity();
@@ -628,19 +622,5 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
         }
         FlexibleDate flexibleDate = new FlexibleDate(date);
         return flexibleDate.wareki().toDateString().substring(1, 桁_3);
-    }
-
-    private RString get旧保険者番号(HokenshaNo date) {
-        if (date == null || date.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return date.value();
-    }
-
-    private RString get証記載保険者番号(ShoKisaiHokenshaNo date) {
-        if (date == null || date.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return date.value();
     }
 }

@@ -177,8 +177,11 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
     protected void usualProcess(TokuchoHeijunkaRokuBatchTaishogaiEntity entity) {
         TokuchoHeijyunkaTaishogaiEntity taishogaiEntity = get特徴平準化計算対象外entity(
                 entity.get対象外データTemp(), entity);
-        Optional<HokenryoDankai> 保険料段階 = 保険料段階取得.get保険料段階(parameter.get賦課年度(),
-                taishogaiEntity.get保険料段階仮算定時());
+
+        FlexibleYear 賦課年度 = parameter.get賦課年度() == null ? FlexibleYear.EMPTY : parameter.get賦課年度();
+        RString 保険料段階仮算定時
+                = taishogaiEntity.get保険料段階仮算定時() == null ? RString.EMPTY : taishogaiEntity.get保険料段階仮算定時();
+        Optional<HokenryoDankai> 保険料段階 = 保険料段階取得.get保険料段階(賦課年度, 保険料段階仮算定時);
         Decimal 今年度保険料率 = 今年度保険料率取得(保険料段階);
         int 調整金額 = 調整金額取得(今年度保険料率, parameter.get賦課年度());
         TokuchoHeijunkaRokuBatchTaishogaiIchiran taishogai = new TokuchoHeijunkaRokuBatchTaishogaiIchiran(

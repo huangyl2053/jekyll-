@@ -158,6 +158,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString 受給者異動連絡票情報送付対象者リスト = new RString("受給者異動連絡票情報送付対象者リスト");
     private static final RString 記号 = new RString("*");
     private static final RString エラーあり = new RString("1");
+    private static final RString RST_0 = new RString("0");
     private static final RString RST_1 = new RString("1");
     private static final RString RST_2 = new RString("2");
     private static final RString RST_3 = new RString("3");
@@ -167,6 +168,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString RST_SPACE = new RString("　");
     private static final RString RST_あり = new RString("あり");
     private static final RString RST_なし = new RString("なし");
+    private static final RString COM = new RString("/");
     private JukyushaIdoRenrakuhyoOutProcessParameter processParameter;
 
     /**
@@ -328,6 +330,18 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 異動一時2entity.set受給者異動事由(RST_99);
             }
         }
+        RString 軽減率 = 異動一時2entity.get軽減率();
+        if (!RString.isNullOrEmpty(軽減率) && !RST_0.equals(軽減率)) {
+            List<RString> 軽減率List = 軽減率.split(COM.toString());
+            if (軽減率List.size() == COUNT_2) {
+                Decimal 軽減率Decim = new Decimal(軽減率List.get(COUNT_0).toString())
+                        .divide(new Decimal(軽減率List.get(COUNT_1).toString()));
+                軽減率 = new RString(軽減率Decim.toString()).substring(COUNT_0, COUNT_4);
+            } else {
+                軽減率 = RST_0;
+            }
+        }
+        異動一時2entity.set軽減率(軽減率);
         JukyushaIdoRenrakuhyoCsvEntity csventity = getJukyushaIdoRenrakuhyoCsvEntity(異動一時2entity);
         entityList.add(csventity);
         RString 異動一時2Key = get異動一時2Key(異動一時2entity);

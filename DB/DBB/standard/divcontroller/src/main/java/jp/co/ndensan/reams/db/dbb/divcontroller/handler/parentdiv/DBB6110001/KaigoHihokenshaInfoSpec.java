@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.RentaiGimushaIdentifier;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.DBB6110001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.KaigoHihokenshaInfoPanelDiv;
+import jp.co.ndensan.reams.db.dbb.service.core.kaigohihokenshainfo.KaigoHihokenshaInfoPanelManger;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * {@link KaigoHihokenshaInfoDiv}の仕様クラスです。 <br> {@link KaigoHihokenshaInfoDiv}における画面としての仕様を定義しています。
@@ -92,6 +94,8 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
 
     private static class SpecHelper {
 
+        private static final RString ONE = new RString("1");
+
         /**
          * 連帯納付義務者が選択されていない場合です。
          *
@@ -108,7 +112,7 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
          */
         public static boolean is初期状態からの変更有無(KaigoHihokenshaInfoPanelDiv div) {
             FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
-            RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
+            RentaiGimushaHolder 初期holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報初期, RentaiGimushaHolder.class);
             HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
             RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
             if (履歴番号.isNull() || 履歴番号.isEmpty()) {
@@ -116,10 +120,10 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             }
             RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
-            RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
+            RentaiGimusha result = 初期holder.getKogakuGassanJikoFutanGaku(identifier);
             RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
             RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
-            if (終了年月日 != null) {
+            if (終了年月日 != null && result != null) {
                 return !(開始年月日.equals(new RDate(result.get開始年月日().toString()))
                         && 終了年月日.equals(new RDate(result.get終了年月日().toString())));
             }
@@ -158,10 +162,19 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
             HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
             RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
-            if (履歴番号.isNull() || 履歴番号.isEmpty()) {
-                return true;
-            }
             RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
+            KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
+            if (DBB6110001StateName.連帯納付義務者修正.getName().equals(ResponseHolder.getState()) || 履歴番号.isEmpty()) {
+                Decimal 最新履歴番号 = manager.getNoIsDeleted最新履歴番号(被保険者番号);
+                if (最新履歴番号 == null) {
+                    履歴番号 = ONE;
+                } else {
+                    RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
+                            被保険者番号, new Decimal(最新履歴番号.toString()));
+                    RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
+                    履歴番号 = 新履歴番号(result, 履歴番号, 最新履歴番号, div);
+                }
+            }
             List<RentaiGimusha> list = holder.getRentaiGimushaList();
             RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
@@ -175,11 +188,20 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
                     }
                     return !(開始年月日.isBeforeOrEquals(new RDate(result.get開始年月日().toString()))
                             && 終了年月日.isAfterOrEquals(new RDate(result.get開始年月日().toString())))
-                            || !(開始年月日.isBeforeOrEquals(new RDate(result.get終了年月日().toString()))
+                            && !(開始年月日.isBeforeOrEquals(new RDate(result.get終了年月日().toString()))
                             && 終了年月日.isAfterOrEquals(new RDate(result.get終了年月日().toString())));
                 }
             }
             return true;
+        }
+
+        private static RString 新履歴番号(RentaiGimusha result, RString 履歴番号, Decimal 最新履歴番号, KaigoHihokenshaInfoPanelDiv div) {
+            if (result == null || ONE.equals(div.getHdnFlag())) {
+                履歴番号 = new RString(最新履歴番号.intValue() + 1);
+            } else {
+                履歴番号 = new RString(最新履歴番号.intValue());
+            }
+            return 履歴番号;
         }
 
         /**
@@ -191,10 +213,19 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
             HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
             RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
-            if (履歴番号.isNull() || 履歴番号.isEmpty()) {
-                return true;
-            }
             RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
+            KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
+            if (DBB6110001StateName.連帯納付義務者修正.getName().equals(ResponseHolder.getState()) || 履歴番号.isEmpty()) {
+                Decimal 最新履歴番号 = manager.getNoIsDeleted最新履歴番号(被保険者番号);
+                if (最新履歴番号 == null) {
+                    履歴番号 = ONE;
+                } else {
+                    RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
+                            被保険者番号, new Decimal(最新履歴番号.toString()));
+                    RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
+                    履歴番号 = 新履歴番号(result, 履歴番号, 最新履歴番号, div);
+                }
+            }
             List<RentaiGimusha> list = holder.getRentaiGimushaList();
             RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
@@ -205,11 +236,10 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
                     if (result.equals(curResult)) {
                         return true;
                     }
-                    return !開始年月日.isBefore(new RDate(result.get開始年月日().toString()));
+                    return !(開始年月日.isBefore(new RDate(result.get開始年月日().toString())));
                 }
             }
             return true;
         }
-
     }
 }

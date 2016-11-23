@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1300011.Kyu
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1300011.KyufuTsuchiGenmenHoseiTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KyufuhiTuchiHoseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufuhigenmenjyouhouregister.KyufuhigenmenjyouhouRegisterManager;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -58,6 +59,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
 //    private static final RString 被保険者 = new RString("被保険者");
     private static final RString 完了メッセージ = new RString("給付費通知減免情報の更新が正常に行われました");
+    private static final RString ALL_SHICHOSON_KEY = new RString("000000");
 
     /**
      * 画面初期化処理です。
@@ -335,12 +337,14 @@ public class KyufuTsuchiGenmenHoseiToroku {
     }
 
     private boolean kakutei(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        HokenshaSummary hokenshaSummary = div.getCcdHokenshaList().getSelectedItem();
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo hiHokenshaNo = 資格対象者.get被保険者番号();
         KyufuhigenmenjyouhouRegisterManager manager = KyufuhigenmenjyouhouRegisterManager.createInstance();
         GenmenJyouhouParameter parameter = GenmenJyouhouParameter.createByKeyParam(
                 hiHokenshaNo,
-                new HokenshaNo(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value()),
+                !hokenshaSummary.get証記載保険者番号().value().isEmpty() ? new HokenshaNo(hokenshaSummary.get証記載保険者番号().value())
+                : new HokenshaNo(ALL_SHICHOSON_KEY),
                 new FlexibleYearMonth(div.getTextBoxDateSaabisu().getValue().toDateString().substring(0, NUM_6)),
                 new JigyoshaNo(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo()),
                 new ServiceShuruiCode(div.getCcdServiceTypeInput().getサービス種類コード()),
@@ -357,11 +361,14 @@ public class KyufuTsuchiGenmenHoseiToroku {
         RString イベント状態 = div.getKyufuTsuchiGenmenHoseiTorokuDetail().getState();
         Models<KyufuhiTuchiHoseiIdentifier, KyufuhiTuchiHosei> models
                 = ViewStateHolder.get(ViewStateKeys.給付費通知補正, Models.class);
+        HokenshaSummary hokenshaSummary = div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdHokenshaList().getSelectedItem();
         if (状態_追加.equals(イベント状態)) {
-            KyufuhiTuchiHosei kyufuhiTuchiHosei = new KyufuhiTuchiHosei(new HokenshaNo(div.getKyufuTsuchiGenmenHoseiTorokuDetail().
-                    getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value()),
+            KyufuhiTuchiHosei kyufuhiTuchiHosei = new KyufuhiTuchiHosei(
+                    !hokenshaSummary.get証記載保険者番号().value().isEmpty() ? new HokenshaNo(hokenshaSummary.get証記載保険者番号().value())
+                    : new HokenshaNo(ALL_SHICHOSON_KEY),
                     hiHokenshaNo,
-                    new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString().substring(0, NUM_6)),
+                    new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString().substring(0,
+                                    NUM_6)),
                     new JigyoshaNo(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().getNyuryokuShisetsuKodo()),
                     new ServiceShuruiCode(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdServiceTypeInput().getサービス種類コード()),
                     Decimal.ONE);
@@ -372,10 +379,12 @@ public class KyufuTsuchiGenmenHoseiToroku {
             }
             models.add(kyufuhiTuchiHosei);
         } else if (状態_修正.equals(イベント状態)) {
-            KyufuhiTuchiHoseiIdentifier key = new KyufuhiTuchiHoseiIdentifier(new HokenshaNo(div.getKyufuTsuchiGenmenHoseiTorokuDetail().
-                    getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value()),
+            KyufuhiTuchiHoseiIdentifier key = new KyufuhiTuchiHoseiIdentifier(
+                    !hokenshaSummary.get証記載保険者番号().value().isEmpty() ? new HokenshaNo(hokenshaSummary.get証記載保険者番号().value())
+                    : new HokenshaNo(ALL_SHICHOSON_KEY),
                     hiHokenshaNo,
-                    new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString().substring(0, NUM_6)),
+                    new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString().substring(0,
+                                    NUM_6)),
                     new JigyoshaNo(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().getNyuryokuShisetsuKodo()),
                     new ServiceShuruiCode(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdServiceTypeInput().getサービス種類コード()),
                     Decimal.ONE);
@@ -383,10 +392,12 @@ public class KyufuTsuchiGenmenHoseiToroku {
             models.deleteOrRemove(key);
             models.add(kyufuhiTuchiHosei);
         } else if (状態_削除.equals(イベント状態)) {
-            KyufuhiTuchiHoseiIdentifier key = new KyufuhiTuchiHoseiIdentifier(new HokenshaNo(div.getKyufuTsuchiGenmenHoseiTorokuDetail().
-                    getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value()),
+            KyufuhiTuchiHoseiIdentifier key = new KyufuhiTuchiHoseiIdentifier(
+                    !hokenshaSummary.get証記載保険者番号().value().isEmpty() ? new HokenshaNo(hokenshaSummary.get証記載保険者番号().value())
+                    : new HokenshaNo(ALL_SHICHOSON_KEY),
                     hiHokenshaNo,
-                    new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString().substring(0, NUM_6)),
+                    new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString().substring(0,
+                                    NUM_6)),
                     new JigyoshaNo(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().getNyuryokuShisetsuKodo()),
                     new ServiceShuruiCode(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdServiceTypeInput().getサービス種類コード()),
                     Decimal.ONE);
