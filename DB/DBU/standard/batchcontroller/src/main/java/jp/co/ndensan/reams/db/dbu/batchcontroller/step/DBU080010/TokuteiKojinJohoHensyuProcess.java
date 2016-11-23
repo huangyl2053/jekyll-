@@ -81,7 +81,7 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
     private RString 副本データ;
     private RString 識別項目コード;
     private List<TokuteiKojinJohoKoumokuHanKanriBusiness> 項目版管理List;
-    private List<DBM20113AttachToBsEntity> dBM20113AttachToBsEntityList;
+    private DBM20113AttachToBsEntity dBM20113AttachToBsEntity;
     private List<DBM20113AttachToBsBeanEntity> dBM20113AttachToBsBeanEntityList;
 
     @Override
@@ -90,7 +90,8 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
         ファイル連番 = -1;
         レコード識別番号 = 0;
         ログインユーザＩＤ = ControlDataHolder.getUserId();
-        dBM20113AttachToBsEntityList = new ArrayList();
+        dBM20113AttachToBsEntity = new DBM20113AttachToBsEntity();
+        dBM20113AttachToBsBeanEntityList = new ArrayList();
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (DonyuKeitaiCode.事務広域 == DonyuKeitaiCode.toValue(市町村セキュリティ情報.get導入形態コード().value())) {
             行政区コード = RString.EMPTY;
@@ -109,8 +110,8 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
         }
         特定個人情報分割件数 = DbBusinessConfig.get(ConfigNameDBU.番号制度_特定個人情報分割件数, システム日付, SubGyomuCode.DBU介護統計報告);
         // TODO #108855の回答により、該当箇所はTODOとし、ダミー値を利用しての確認で問題ありません。
-        送信元システムID = new RString("sourceSystemID");
-        送信先システムID = new RString("destinationSystemID");
+        送信元システムID = new RString("K000000001");
+        送信先システムID = new RString("T000000001");
         項目版管理List = TokuteiKojinJohoTeikyoManager.createInstance()
                 .get項目バージョン(processParameter.get特定個人情報名コード(), processParameter.getデータセット番号(),
                         processParameter.get版番号(), processParameter.get基準日());
@@ -128,11 +129,12 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
 
     @Override
     protected void process(TeikyoKihonJohoNNTempEntity t) {
-        if (特定個人情報分割件数.compareTo(new RString(添付データ件数)) != -1) {
+        if (特定個人情報分割件数.compareTo(new RString(添付データ件数)) != 1) {
             ファイル連番 = ファイル連番 + 1;
             添付データ件数 = 0;
-            JAXB.marshal(setDBM20113ToBsEntity(), get電文ファイル名(登録依頼電文ファイル名).toString());
-            JAXB.marshal(dBM20113AttachToBsEntityList, get電文ファイル名(登録依頼添付電文ファイル名).toString());
+            DBM20113ToBsEntity entity = setDBM20113ToBsEntity();
+            JAXB.marshal(entity, get電文ファイル名(登録依頼電文ファイル名).toString());
+            JAXB.marshal(dBM20113AttachToBsEntity, get電文ファイル名(登録依頼添付電文ファイル名).toString());
         }
         添付データ件数 = 添付データ件数 + 1;
         レコード識別番号 = レコード識別番号 + 1;
@@ -174,7 +176,7 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
         if (添付データ件数 != 0) {
             ファイル連番 = ファイル連番 + 1;
             JAXB.marshal(setDBM20113ToBsEntity(), get電文ファイル名(登録依頼電文ファイル名).toString());
-            JAXB.marshal(dBM20113AttachToBsEntityList, get電文ファイル名(登録依頼添付電文ファイル名).toString());
+            JAXB.marshal(dBM20113AttachToBsEntity, get電文ファイル名(登録依頼添付電文ファイル名).toString());
         }
     }
 
@@ -203,12 +205,9 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
         entity.setPublishedEndDate(RString.EMPTY);
         entity.setAdministrativeRegionCode(行政区コード);
         entity.setDuplicateCopyData(副本データ);
-        dBM20113AttachToBsBeanEntityList = new ArrayList();
         dBM20113AttachToBsBeanEntityList.add(entity);
-        DBM20113AttachToBsEntity attachToBsEntity = new DBM20113AttachToBsEntity();
-        attachToBsEntity.setInformationOfSPIRegistrationDelete(dBM20113AttachToBsBeanEntityList);
-        attachToBsEntity.setSegmentOfRegistrationDelete(new RString("1"));
-        dBM20113AttachToBsEntityList.add(attachToBsEntity);
+        dBM20113AttachToBsEntity.setInformationOfSPIRegistrationDelete(dBM20113AttachToBsBeanEntityList);
+        dBM20113AttachToBsEntity.setSegmentOfRegistrationDelete(new RString("1"));
     }
 
     private MessageHeaderEntity setMessageHeaderEntity() {
