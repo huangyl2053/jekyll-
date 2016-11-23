@@ -1393,7 +1393,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                         && dbT3047.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
                         && dbT3047.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
                         && dbT3047.getEntity().get連番().equals(決定情報一覧.get連番())
-                        && !dbT3047.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                        && !dbT3047.getEntity().toEntity().getState().equals(EntityDataState.Deleted)
+                        && !dbT3047.getEntity().toEntity().getState().equals(EntityDataState.Added)) {
                     ShokanServicePlan200904Builder dbt3047Builder = dbT3047.getEntity().createBuilderForEdit();
                     dbt3047Builder.set支給区分コード(parameter.get支給区分());
                     dbt3047Builder.set増減点(parameter.get増減単位());
@@ -1417,7 +1418,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                         && dbT3046.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
                         && dbT3046.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
                         && dbT3046.getEntity().get連番().equals(決定情報一覧.get連番())
-                        && !dbT3046.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                        && !dbT3046.getEntity().toEntity().getState().equals(EntityDataState.Deleted)
+                        && !dbT3046.getEntity().toEntity().getState().equals(EntityDataState.Added)) {
                     ShokanServicePlan200604Builder dbt3046Builder = dbT3046.getEntity().createBuilderForEdit();
                     dbt3046Builder.set支給区分コード(parameter.get支給区分());
                     dbt3046Builder.set増減点(parameter.get増減単位());
@@ -1440,7 +1442,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                         && dbT3045.getEntity().get様式番号().equals(決定情報一覧.get証明書コード())
                         && dbT3045.getEntity().get明細番号().equals(決定情報一覧.get明細番号())
                         && dbT3045.getEntity().get連番().equals(決定情報一覧.get連番())
-                        && !dbT3045.getEntity().toEntity().getState().equals(EntityDataState.Deleted)) {
+                        && !dbT3045.getEntity().toEntity().getState().equals(EntityDataState.Deleted)
+                        && !dbT3045.getEntity().toEntity().getState().equals(EntityDataState.Added)) {
                     ShokanServicePlan200004Builder dbt3045Builder = dbT3045.getEntity().createBuilderForEdit();
                     dbt3045Builder.set支給区分コード(parameter.get支給区分());
                     dbt3045Builder.set増減点(parameter.get増減単位());

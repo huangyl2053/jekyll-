@@ -390,6 +390,21 @@ public class ShokanbarayiKeteiInfoPanel {
             証明書入力済フラグ = new ShomeishoNyuryokuFlag();
             証明書入力済フラグ初期化(証明書入力済フラグ);
         }
+        if (証明書入力済フラグ != null) {
+            if (証明書入力済フラグ.getサービス計画費_証明書入力済フラグ() == null) {
+                証明書入力済フラグ.setサービス計画費_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+            }
+            if (証明書入力済フラグ.get請求額集計_証明書入力済フラグ() == null) {
+                証明書入力済フラグ.set請求額集計_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+            }
+            if (証明書入力済フラグ.get食事費用_証明書入力済フラグ() == null) {
+                証明書入力済フラグ.set食事費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+            }
+            if (証明書入力済フラグ.get特定入所者費用_証明書入力済フラグ() == null) {
+                証明書入力済フラグ.set特定入所者費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
+            }
+
+        }
         ModoruEntity 戻るの対象 = getHandler(div).return登録処理情報(paramter, 支払金額合計初期, 画面モード, 識別コード,
                 証明書入力済フラグ, db情報);
         DbJohoViewState データ情報;
