@@ -884,20 +884,6 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         return builder.build();
     }
 
-    private RString get科目コードPrarm(List<KamokuCode> list) {
-        RStringBuilder rStringBuilder = new RStringBuilder();
-        rStringBuilder.append(LEFT_FORMAT);
-        if (list != null && !list.isEmpty()) {
-            for (int i = 0; i < list.size(); i++) {
-                rStringBuilder.append(list.get(i) == null ? RString.EMPTY : list.get(i).getColumnValue());
-                if (i != list.size() - 1) {
-                    rStringBuilder.append(MIDDLE_FORMAT);
-                }
-            }
-        }
-        return rStringBuilder.append(RIGHT_FORMAT).toRString();
-    }
-
     private RString get印字位置(int 月) {
         RString 設定値 = RString.EMPTY;
         RDate 運用日 = RDate.getNowDate();
