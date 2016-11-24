@@ -492,35 +492,31 @@ ORDER BY
     
     <select resultOrdered="true" id="get給付実績福祉用具販売費データ" resultMap="ResultMap_KyufujissekiFukushiYoguHanbaihi" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        
-        <include refid="withDbT3017KyufujissekiKihon" />
-        
-            SELECT
+        SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3026KyufujissekiFukushiYoguHanbaihiMapper.allColumns_DbT3026KyufujissekiFukushiYoguHanbaihi" />
             , "DbT7131KaigoServiceNaiyou"."serviceName" AS "serviceShuruiRyakusho" 
         FROM
-            "給付実績" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN
-            rgdb."DbT3026KyufujissekiFukushiYoguHanbaihi" AS "DbT3026KyufujissekiFukushiYoguHanbaihi" 
-        ON
-            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo"
-            and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3026KyufujissekiFukushiYoguHanbaihi"."hiHokenshaNo"
-            and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
-            and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo"
-            and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo"
+            rgdb."DbT3026KyufujissekiFukushiYoguHanbaihi" AS "DbT3026KyufujissekiFukushiYoguHanbaihi"
         LEFT JOIN
             rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
-        ON
-            "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceCode" = "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" || "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd"
-            AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
-            AND ("DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
-            OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+         ON
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceCode" 
+            = "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" || "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd"
+        AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
+        AND ("DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
+         OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+        WHERE 
+            #{サービス提供年月} <![CDATA[<=]]> "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
+        AND
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."hiHokenshaNo" = #{被保険者番号}
+        AND
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo" = #{通し番号}
+        AND
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo" = #{事業所番号}
+        AND
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo" = #{入力識別番号}
         ORDER BY
-            "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
-            , "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo"
-            , "DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo"
-            , "DbT3026KyufujissekiFukushiYoguHanbaihi"."seiriNo"
-            , "DbT3026KyufujissekiFukushiYoguHanbaihi"."meisaiNo"
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."meisaiNo"
     </select>
     
     <select resultOrdered="true" id="get給付実績住宅改修費データ" resultMap="ResultMap_KyufujissekiJutakuKaishuhi" 

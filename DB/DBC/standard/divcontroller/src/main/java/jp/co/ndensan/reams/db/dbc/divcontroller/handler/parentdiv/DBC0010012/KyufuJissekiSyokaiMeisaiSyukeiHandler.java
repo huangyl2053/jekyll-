@@ -63,16 +63,13 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param 集計情報リスト List<KyufujissekiShukei>
      * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
      * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokureiBusiness>
-     * @param 通し番号 RString
      * @param サービス提供年月 FlexibleYearMonth
      * @param 様式番号 RString
-     * @param 事業者番号 RString
      * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
      */
     public void onLoad(List<KyufujissekiShukei> 集計情報リスト, List<KyufujissekiMeisaiBusiness> 明細情報リスト,
-            List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト, RString 通し番号,
-            FlexibleYearMonth サービス提供年月, RString 様式番号, RString 事業者番号,
-            List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
+            List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト, FlexibleYearMonth サービス提供年月,
+            RString 様式番号, List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         set明細情報の表示制御(様式番号, サービス提供年月);
         set明細情報特例の表示制御(様式番号, サービス提供年月);
         setDataGrid総計(集計情報リスト, 明細情報リスト, 明細情報特例リスト, 保険者情報);
