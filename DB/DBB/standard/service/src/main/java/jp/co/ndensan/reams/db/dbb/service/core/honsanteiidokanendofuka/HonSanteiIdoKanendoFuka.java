@@ -1495,7 +1495,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                 RString 住所 = get住所(計算後情報_宛名_口座Entity);
 
                 List<RString> bodyList = new ArrayList<>();
-                UaT0310KozaEntity 口座Entity = (計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() != null
+                UaT0310KozaEntity 口座Entity = (計算後情報_宛名_口座Entity.get口座Entity() != null
+                        && 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() != null
                         && 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0)
                                 ? 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() : null;
                 RString 作成年月日 = 調定日時.getRDateTime().getDate().seireki()
