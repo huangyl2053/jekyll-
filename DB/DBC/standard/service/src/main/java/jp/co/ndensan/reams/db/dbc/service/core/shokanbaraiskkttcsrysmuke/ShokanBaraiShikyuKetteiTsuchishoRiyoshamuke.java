@@ -141,7 +141,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             key = getJufukuKey(shoShiharai);
             支給金額 = shoShiharai.get支給額();
             給付の種類 = 種類Map.get(key) == null ? RString.EMPTY : 種類Map.get(key);
-            増減理由等 = shoShiharai.get増減理由等();
+            増減理由等 = shoShiharai.get増減理由等() == null ? RString.EMPTY : shoShiharai.get増減理由等();
             if (給付の種類.length() <= 文字数_38) {
                 item.setKyufuShu1(給付の種類);
             } else if (給付の種類.length() <= 文字数_76) {
