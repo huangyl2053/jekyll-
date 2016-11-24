@@ -261,10 +261,9 @@ public class SeikyuShinsaShuseiToroku {
     }
 
     private void 出力決定削除(JutakuKaishuRiyushoTesuryoKetteiManager 出力決定MANAGER, SeikyuShinsaShuseiTorokuBusiness businessResult) {
-        if (DBCMNE_1005.equals(ResponseHolder.getMenuID())) {
-            if (businessResult.getDbT3094() != null) {
-                出力決定MANAGER.save住宅改修理由書作成手数料請求決定(businessResult.getDbT3094().deleted());
-            }
+        if (DBCMNE_1005.equals(ResponseHolder.getMenuID())
+                && businessResult.getDbT3094() != null) {
+            出力決定MANAGER.save住宅改修理由書作成手数料請求決定(businessResult.getDbT3094().deleted());
         }
     }
 

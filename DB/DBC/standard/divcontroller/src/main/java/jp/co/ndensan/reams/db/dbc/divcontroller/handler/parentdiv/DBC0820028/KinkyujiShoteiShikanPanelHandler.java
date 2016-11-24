@@ -209,11 +209,11 @@ public final class KinkyujiShoteiShikanPanelHandler {
                         result.get緊急時治療開始年月日１().wareki().toDateString().toString()));
             }
             if (result.get緊急時治療開始年月日２() != null) {
-                row.getKinkyuKaishiDate1().setValue(new RDate(
+                row.getKinkyuKaishiDate2().setValue(new RDate(
                         result.get緊急時治療開始年月日２().wareki().toDateString().toString()));
             }
             if (result.get緊急時治療開始年月日３() != null) {
-                row.getKinkyuKaishiDate1().setValue(new RDate(
+                row.getKinkyuKaishiDate3().setValue(new RDate(
                         result.get緊急時治療開始年月日３().wareki().toDateString().toString()));
             }
 
@@ -414,13 +414,18 @@ public final class KinkyujiShoteiShikanPanelHandler {
 
     }
 
-    private boolean checkState(dgdKinkyujiShoteiList_Row ddgRow, List<ShokanShoteiShikkanShisetsuRyoyo> rowList) {
+    private ShokanShoteiShikkanShisetsuRyoyo getRyo(dgdKinkyujiShoteiList_Row ddgRow, List<ShokanShoteiShikkanShisetsuRyoyo> rowList) {
         ShokanShoteiShikkanShisetsuRyoyo result = null;
         for (ShokanShoteiShikkanShisetsuRyoyo row : rowList) {
             if (ddgRow.getRenban().equals(row.get連番())) {
                 result = row;
             }
         }
+        return result;
+    }
+
+    private boolean checkState(dgdKinkyujiShoteiList_Row ddgRow, List<ShokanShoteiShikkanShisetsuRyoyo> rowList) {
+        ShokanShoteiShikkanShisetsuRyoyo result = getRyo(ddgRow, rowList);
         if (result == null) {
             return false;
         }
