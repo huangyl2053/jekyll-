@@ -6,7 +6,13 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IKozaJohoMapper">
     
     <resultMap id="resultMap_KozaJohoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.KozaJohoEntity" autoMapping="true">
+        <id property="振込明細一時Entity.dataKubun" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="振込明細一時Entity.hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="振込明細一時Entity.serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="振込明細一時Entity.seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="振込明細一時Entity.rirekiNo" column="rirekiNo"/>
+        <id property="振込明細一時Entity.shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="口座.koza.kozaId" column="uaT0310Koza_kozaId"/>
         <association property="振込明細一時Entity" resultMap="resultMap_FurikomiDetailTempTableEntity"/>
         <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>    
     </resultMap>
