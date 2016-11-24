@@ -109,8 +109,8 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     private static final RString 対象者_現金 = new RString("現金納付者");
     private static final RString 対象者_口座 = new RString("口座振替者");
     private static final RString 月日 = new RString("0401");
-    private static final RString 帳票グループコード_普徴仮算定賦課メニュー = new RString("0140001");
-    private static final RString 帳票グループコード_普徴仮算定通知書一括発行メニュー = new RString("0140003");
+    private static final RString 帳票グループコード_普徴仮算定賦課メニュー = new RString("DBB0140001");
+    private static final RString 帳票グループコード_普徴仮算定通知書一括発行メニュー = new RString("DBB0140003");
     private static final RString 保険料納入通知書_仮算定_帳票分類ID = new RString("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
 
     /**
