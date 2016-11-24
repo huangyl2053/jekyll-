@@ -189,6 +189,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private ReportSourceWriter<JukyushaIdorenrakuhyoSofuTaishoshachiranSource> reportSourceWriter_DBC200010;
     private Map<HihokenshaNo, List<IdoTblTmpEntity>> 異動一時2Map;
     private Map<HihokenshaNo, List<JukyushaIdoRenrakuhyoTempTBLEntity>> 受給者異動送付Map;
+    private Map<HihokenshaNo, Integer> 履歴番号Map;
     private List<HihokenshaNo> 被保険者番号List;
     private RString 市町村コード = RString.EMPTY;
     private RString 市町村名称 = RString.EMPTY;
@@ -224,6 +225,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         entityList = new ArrayList<>();
         異動一時2KeyList = new ArrayList<>();
         受給者異動送付KeyList = new ArrayList<>();
+        履歴番号Map = new HashMap<>();
     }
 
     @Override
@@ -358,6 +360,13 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             }
         }
         異動一時2entity.set軽減率(軽減率);
+        Integer 履歴番号 = 履歴番号Map.get(異動一時2entity.get被保険者番号());
+        if (履歴番号 == null) {
+            履歴番号 = COUNT_0;
+        }
+        履歴番号++;
+        履歴番号Map.put(異動一時2entity.get被保険者番号(), 履歴番号);
+        異動一時2entity.set履歴番号(履歴番号);
         JukyushaIdoRenrakuhyoCsvEntity csventity = getJukyushaIdoRenrakuhyoCsvEntity(異動一時2entity);
         entityList.add(csventity);
         RString 異動一時2Key = get異動一時2Key(異動一時2entity);
