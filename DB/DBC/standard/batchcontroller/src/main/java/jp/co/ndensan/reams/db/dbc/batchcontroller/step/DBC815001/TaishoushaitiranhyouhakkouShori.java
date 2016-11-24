@@ -49,7 +49,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 public class TaishoushaitiranhyouhakkouShori extends BatchKeyBreakBase<TaishoushaitiranhyouhakkouShorientity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
-            + "relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper.get給付実績基本TBLデータ");
+            + "relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper.get対象者一覧表発行処理");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC200100"));
     private FileSpoolManager manager;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -67,6 +67,8 @@ public class TaishoushaitiranhyouhakkouShori extends BatchKeyBreakBase<Taishoush
     @BatchWriter
     private BatchReportWriter<KogakuServicehiTaishoshaIchiranSokyubunReportSource> batchReportWriter;
     private ReportSourceWriter<KogakuServicehiTaishoshaIchiranSokyubunReportSource> reportSourceWriter;
+    @BatchWriter
+    private CsvWriter<KougakukaigoSabishiEucEntity> eucCsvWriterJunitoJugo;
 
     @Override
     protected void initialize() {
@@ -104,8 +106,6 @@ public class TaishoushaitiranhyouhakkouShori extends BatchKeyBreakBase<Taishoush
                 hasHeader(false).
                 build();
     }
-    @BatchWriter
-    private CsvWriter<KougakukaigoSabishiEucEntity> eucCsvWriterJunitoJugo;
 
     @Override
     protected void keyBreakProcess(TaishoushaitiranhyouhakkouShorientity entity) {

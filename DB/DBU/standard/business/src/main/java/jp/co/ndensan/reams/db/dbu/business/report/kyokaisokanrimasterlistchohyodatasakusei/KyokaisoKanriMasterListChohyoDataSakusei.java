@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlistchohyodatasakusei;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoKanriMasterListChohyoDataSakuseiEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisogGaitoshaListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisogGaitoshaRelateEntity;
@@ -173,7 +172,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                     DBZCodeShubetsu.居室種類.getコード(), new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode()), FlexibleDate.getNowDate());
             if (居室種類 != null) {
                 帳票用データ.set居住費軽減後居室種類(new RString(居室種類.getコード名称().toString()));
-            } 
+            }
         } else {
             帳票用データ.set居住費軽減後居室種類(RString.EMPTY);
         }

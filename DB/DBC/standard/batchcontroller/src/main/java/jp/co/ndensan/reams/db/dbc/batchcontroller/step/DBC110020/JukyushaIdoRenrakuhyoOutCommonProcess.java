@@ -780,7 +780,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             entity.set二次予防事業有効期間開始年月日(前履歴データ.get二次予防事業有効期間開始年月日());
             entity.set二次予防事業有効期間終了年月日(前履歴データ.get二次予防事業有効期間終了年月日());
         }
-        if (entity.get二次予防事業有効期間開始年月日() == null || entity.get二次予防事業有効期間開始年月日().isEmpty()) {
+        if (entity.get住所地特例適用開始日() == null || entity.get住所地特例適用開始日().isEmpty()) {
             entity.set住所地特例対象者区分コード(前履歴データ.get住所地特例対象者区分コード());
             entity.set施設所在保険者番号(前履歴データ.get施設所在保険者番号());
             entity.set住所地特例適用開始日(前履歴データ.get住所地特例適用開始日());

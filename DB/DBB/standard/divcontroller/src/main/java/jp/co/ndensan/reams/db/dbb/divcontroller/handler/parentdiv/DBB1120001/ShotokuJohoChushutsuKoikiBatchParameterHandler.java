@@ -49,6 +49,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterKoiki");
     private static final RString COMMON_BUTTON_FIELD_NAME_当初 = new RString("btnBatchRegisterDousyo");
     private static final RString EMPTY = new RString(" ");
+    private static final int INT_ONE = 1;
 
     /**
      * コンストラクタです。
@@ -137,13 +138,24 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         param.set処理年度(new FlexibleYear(div.getTxtShoriNendoKoiki().getValue().getYear().toDateString()));
         param.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunKoiki().get出力順ID()));
         List<SichousonEntity> list = new ArrayList<>();
-        for (int i = 0; i < div.getDgShichosonIchiran().getSelectedItems().size(); i++) {
-            SichousonEntity entity = new SichousonEntity();
-            entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
-            entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());
-            entity.set処理状態(div.getDgShichosonIchiran().getDataSource().get(i).getTxtShoriState().getValue());
-            entity.set処理日時(new YMDHMS(div.getDgShichosonIchiran().getDataSource().get(i).getTxtSaishinShoriNitiji().getValue().toString()));
-            list.add(entity);
+        if (div.getDgShichosonIchiran().getClickedRowId() == div.getDgShichosonIchiran().getSelectedItems().size() - INT_ONE) {
+            for (int i = div.getDgShichosonIchiran().getClickedRowId(); i > div.getDgShichosonIchiran().getSelectedItems().size(); i--) {
+                SichousonEntity entity = new SichousonEntity();
+                entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
+                entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());
+                entity.set処理状態(div.getDgShichosonIchiran().getDataSource().get(i).getTxtShoriState().getValue());
+                entity.set処理日時(new YMDHMS(div.getDgShichosonIchiran().getDataSource().get(i).getTxtSaishinShoriNitiji().getValue().toString()));
+                list.add(entity);
+            }
+        } else {
+            for (int i = 0; i < div.getDgShichosonIchiran().getSelectedItems().size(); i++) {
+                SichousonEntity entity = new SichousonEntity();
+                entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
+                entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());
+                entity.set処理状態(div.getDgShichosonIchiran().getDataSource().get(i).getTxtShoriState().getValue());
+                entity.set処理日時(new YMDHMS(div.getDgShichosonIchiran().getDataSource().get(i).getTxtSaishinShoriNitiji().getValue().toString()));
+                list.add(entity);
+            }
         }
         param.set市町村情報List(list);
         return ShotokuJohoChushutsuRenkeiKoiki.createInstance().createShotokuJoho_DBB112002Parameter(param);
@@ -159,13 +171,24 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         param.set処理年度(new FlexibleYear(div.getTxtShoriNendoKoiki().getValue().getYear().toDateString()));
         param.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunKoiki().get出力順ID()));
         List<SichousonEntity> list = new ArrayList<>();
-        for (int i = 0; i < div.getDgShichosonIchiran().getSelectedItems().size(); i++) {
-            SichousonEntity entity = new SichousonEntity();
-            entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
-            entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());
-            entity.set処理状態(div.getDgShichosonIchiran().getDataSource().get(i).getTxtShoriState().getValue());
-            entity.set処理日時(new YMDHMS(div.getDgShichosonIchiran().getDataSource().get(i).getTxtSaishinShoriNitiji().getValue().toString()));
-            list.add(entity);
+        if (div.getDgShichosonIchiran().getClickedRowId() == div.getDgShichosonIchiran().getSelectedItems().size() - INT_ONE) {
+            for (int i = div.getDgShichosonIchiran().getClickedRowId(); i > div.getDgShichosonIchiran().getSelectedItems().size(); i--) {
+                SichousonEntity entity = new SichousonEntity();
+                entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
+                entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());
+                entity.set処理状態(div.getDgShichosonIchiran().getDataSource().get(i).getTxtShoriState().getValue());
+                entity.set処理日時(new YMDHMS(div.getDgShichosonIchiran().getDataSource().get(i).getTxtSaishinShoriNitiji().getValue().toString()));
+                list.add(entity);
+            }
+        } else {
+            for (int i = 0; i < div.getDgShichosonIchiran().getSelectedItems().size(); i++) {
+                SichousonEntity entity = new SichousonEntity();
+                entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
+                entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());
+                entity.set処理状態(div.getDgShichosonIchiran().getDataSource().get(i).getTxtShoriState().getValue());
+                entity.set処理日時(new YMDHMS(div.getDgShichosonIchiran().getDataSource().get(i).getTxtSaishinShoriNitiji().getValue().toString()));
+                list.add(entity);
+            }
         }
         param.set市町村情報List(list);
         return ShotokuJohoChushutsuRenkeiKoiki.createInstance().createShotokuJoho_DBB112004Parameter(param);

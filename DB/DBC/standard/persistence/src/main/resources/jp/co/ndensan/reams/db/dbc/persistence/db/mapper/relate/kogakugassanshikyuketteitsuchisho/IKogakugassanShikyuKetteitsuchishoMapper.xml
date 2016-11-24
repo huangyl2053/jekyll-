@@ -217,7 +217,7 @@
               AND A."shichosonCode" = #{市町村コード}
               AND A."shoriName" = #{処理名}
               AND A."shoriEdaban" = #{処理枝番}
-              AND A."nendo" = "0000"
+              AND A."nendo" = '0000'
              ) AS B
         WHERE B."rowNo" = 1
     </select>

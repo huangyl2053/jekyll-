@@ -327,6 +327,9 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         if (エラーあり.equals(異動一時2entity.getエラーフラグ())) {
             return;
         }
+        if (異動一時2entity.get証記載保険者番号() == null) {
+            return;
+        }
         if (異動一時2entity.get被保険者氏名カナ().length() > COUNT_25) {
             異動一時2entity.set被保険者氏名カナ(異動一時2entity.get被保険者氏名カナ().substring(COUNT_0, COUNT_25));
         }
@@ -525,7 +528,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     private List get違う項目(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
         List<List<RString>> 違う項目 = new ArrayList<>();
-        if (!異動一時2entity.get証記載保険者番号().equals(受給者異動送付.getShoKisaiHokenshaNo())) {
+        if (異動一時2entity.get証記載保険者番号() != null && !異動一時2entity.get証記載保険者番号().equals(受給者異動送付.getShoKisaiHokenshaNo())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(証保険番号);
             違う.add(受給者異動送付.getShoKisaiHokenshaNo().getColumnValue());
