@@ -1945,119 +1945,119 @@
         </if>
         AND (
               <if test="訪問通所他flag">
-                     DbT3017."inputShikibetsuNo" IN ('7131','2131')
+                  DbT3028."inputShikibetsuNo" IN ('7131','2131')
                   OR
               </if>
               <if test="短期入所生活介護flag">
-                     DbT3017."inputShikibetsuNo" IN ('7143','2143')
+                     DbT3028."inputShikibetsuNo" IN ('7143','2143')
                   OR
               </if>
               <if test="短期入所療養介護_老健施設flag">
-                  DbT3017."inputShikibetsuNo" IN ('7155','2155')
+                  DbT3028."inputShikibetsuNo" IN ('7155','2155')
                   OR
               </if>
               <if test="短期入所療養介護_医療施設flag">
-                  DbT3017."inputShikibetsuNo" IN ('7164','2164')
+                  DbT3028."inputShikibetsuNo" IN ('7164','2164')
                   OR
               </if>
               <if test="認知症対応型共同生活flag">
-                  DbT3017."inputShikibetsuNo" IN ('7171','2171')
+                  DbT3028."inputShikibetsuNo" IN ('7171','2171')
                   OR
               </if>
               <if test="特定施設入居者生活介護flag">
-                  DbT3017."inputShikibetsuNo" IN ('7173','2173')
+                  DbT3028."inputShikibetsuNo" IN ('7173','2173')
                   OR
               </if>
               <if test="認知症対応型共同生活_短期flag">
-                  DbT3017."inputShikibetsuNo" IN ('7175','2175')
+                  DbT3028."inputShikibetsuNo" IN ('7175','2175')
                   OR
               </if>
               <if test="特定施設入居生活介護_短期flag">
-                  DbT3017."inputShikibetsuNo" IN ('7177','2177')
+                  DbT3028."inputShikibetsuNo" IN ('7177','2177')
                   OR
               </if>
               <if test="居宅介護支援flag">
-                  DbT3017."inputShikibetsuNo" IN ('8124','2184')
+                  DbT3028."inputShikibetsuNo" IN ('8124','2184')
                   OR
               </if>
               <if test="介護老人福祉施設サービスflag">
-                  DbT3017."inputShikibetsuNo" IN ('7183','2183')
+                  DbT3028."inputShikibetsuNo" IN ('7183','2183')
                   OR
               </if>
               <if test="介護老人保健施設サービスflag">
-                  DbT3017."inputShikibetsuNo" IN ('7195','2195')
+                  DbT3028."inputShikibetsuNo" IN ('7195','2195')
                   OR
               </if>
               <if test="介護療養型医療施設サービスflag">
-                  DbT3017."inputShikibetsuNo" IN ('71A3','21A3')
+                  DbT3028."inputShikibetsuNo" IN ('71A3','21A3')
                   OR
               </if>
               <if test="特定福祉用具販売費flag">
-                  DbT3017."inputShikibetsuNo" IN ('21C1')
+                  DbT3028."inputShikibetsuNo" IN ('21C1')
                   OR
               </if>
               <if test="住宅改修費flag">
-                  DbT3017."inputShikibetsuNo" IN ('21D1')
+                  DbT3028."inputShikibetsuNo" IN ('21D1')
                   OR
               </if>
               <if test="高額介護サービス費flag">
-                  DbT3017."inputShikibetsuNo" IN ('3411')
+                  DbT3028."inputShikibetsuNo" IN ('3411')
                   OR
               </if>
               <if test="予防訪問通所他flag">
-                  DbT3017."inputShikibetsuNo" IN ('7132','2132')
+                  DbT3028."inputShikibetsuNo" IN ('7132','2132')
                   OR
               </if>
               <if test="予防短期入所生活介護flag">
-                  DbT3017."inputShikibetsuNo" IN ('7144','2144')
+                  DbT3028."inputShikibetsuNo" IN ('7144','2144')
                   OR
               </if>
               <if test="予防短期入所療養介護_老健施設flag">
-                  DbT3017."inputShikibetsuNo" IN ('7156','2156')
+                  DbT3028."inputShikibetsuNo" IN ('7156','2156')
                   OR
               </if>
               <if test="予防短期入所療養介護_医療施設flag">
-                  DbT3017."inputShikibetsuNo" IN ('7165','2165')
+                  DbT3028."inputShikibetsuNo" IN ('7165','2165')
                   OR
               </if>
               <if test="予防認知症対応型共同生活flag">
-                  DbT3017."inputShikibetsuNo" IN ('7172','2172')
+                  DbT3028."inputShikibetsuNo" IN ('7172','2172')
                   OR
               </if>
               <if test="予防特定施設入居者生活介護flag">
-                  DbT3017."inputShikibetsuNo" IN ('7174','2174')
+                  DbT3028."inputShikibetsuNo" IN ('7174','2174')
                   OR
               </if>
                <if test="予防認知症対応型共同生活_短期flag">
-                  DbT3017."inputShikibetsuNo" IN ('7176','2176')
+                  DbT3028."inputShikibetsuNo" IN ('7176','2176')
                    OR
               </if>
               <if test="予防支援flag">
-                  DbT3017."inputShikibetsuNo" IN ('8125','2185')
+                  DbT3028."inputShikibetsuNo" IN ('8125','2185')
                   OR
               </if>
               <if test="予防特定福祉用具販売費flag">
-                  DbT3017."inputShikibetsuNo" IN ('21C2')
+                  DbT3028."inputShikibetsuNo" IN ('21C2')
                   OR
               </if>
               <if test="予防住宅改修費flag">
-                  DbT3017."inputShikibetsuNo" IN ('21D2')
+                  DbT3028."inputShikibetsuNo" IN ('21D2')
                   OR
               </if>
               <if test="介護予防_生活支援_経過flag">
-                  DbT3017."inputShikibetsuNo" IN ('71P1')
+                  DbT3028."inputShikibetsuNo" IN ('71P1')
                   OR
               </if>
               <if test="経過措置ケアマネジメントflag">
-                  DbT3017."inputShikibetsuNo" IN ('8161')
+                  DbT3028."inputShikibetsuNo" IN ('8161')
                   OR
               </if>
               <if test="介護予防_生活支援総合事業flag">
-                  DbT3017."inputShikibetsuNo" IN ('71R1')
+                  DbT3028."inputShikibetsuNo" IN ('71R1')
                   OR
               </if>
               <if test="総合事業ケアマネジメントflag">
-                  DbT3017."inputShikibetsuNo" IN ('8171')
+                  DbT3028."inputShikibetsuNo" IN ('8171')
                   OR
               </if>
               1 = 1) 
