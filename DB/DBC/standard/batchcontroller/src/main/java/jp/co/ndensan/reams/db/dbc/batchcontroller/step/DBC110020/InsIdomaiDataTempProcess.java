@@ -214,12 +214,11 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
 
     private void 受給者台帳処理(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
             FlexibleYearMonth 処理年月, List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List) {
-        boolean 無効データFlag = false;
         異動一時2By受給者台帳パターン1Check(受給者台帳List, 総合事業対象者List, 処理年月);
         異動一時2By受給者台帳パターン2Check(受給者台帳List, 処理年月);
-        異動一時2By受給者台帳パターン3Check(受給者台帳List, 処理年月, 無効データFlag);
-        異動一時2By受給者台帳パターン4Check(受給者台帳List, 処理年月, 無効データFlag);
-        異動一時2By受給者台帳パターン5Check(受給者台帳List, 処理年月, 無効データFlag);
+        boolean 無効データFlag = 異動一時2By受給者台帳パターン3Check(受給者台帳List, 処理年月);
+        無効データFlag = 異動一時2By受給者台帳パターン4Check(受給者台帳List, 処理年月, 無効データFlag);
+        無効データFlag = 異動一時2By受給者台帳パターン5Check(受給者台帳List, 処理年月, 無効データFlag);
         異動一時2By総合事業対象者パターン5Check(受給者台帳List, 総合事業対象者List, 無効データFlag, 処理年月);
     }
 
@@ -352,12 +351,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         }
     }
 
-    private void 異動一時2By受給者台帳パターン3Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
-            FlexibleYearMonth 処理年月, boolean 無効データFlag) {
+    private boolean 異動一時2By受給者台帳パターン3Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
+            FlexibleYearMonth 処理年月) {
         for (DbT4001JukyushaDaichoEntity 受給者台帳 : 受給者台帳List) {
-            if (無効データFlag) {
-                break;
-            }
             if (!コート_2.equals(受給者台帳.getYukoMukoKubun())) {
                 continue;
             }
@@ -378,21 +374,18 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 }
                 JukyushaIdoRenrakuhyoOutCommonProcess.set異動一時2By受給者台帳パターン3(insertEntity, 異動年月日, 被保険者番号);
                 異動一時Map.put(異動年月日, insertEntity);
-                無効データFlag = true;
-                break;
+                return true;
             }
         }
+        return false;
     }
 
-    private void 異動一時2By受給者台帳パターン4Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
+    private boolean 異動一時2By受給者台帳パターン4Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
             FlexibleYearMonth 処理年月, boolean 無効データFlag) {
         if (無効データFlag) {
-            return;
+            return 無効データFlag;
         }
         for (DbT4001JukyushaDaichoEntity 受給者台帳 : 受給者台帳List) {
-            if (無効データFlag) {
-                break;
-            }
             if (!コート_2.equals(受給者台帳.getYukoMukoKubun())) {
                 continue;
             }
@@ -414,16 +407,16 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 JukyushaIdoRenrakuhyoOutCommonProcess.set異動一時2By受給者台帳パターン3(
                         insertEntity, 異動年月日, 被保険者番号);
                 異動一時Map.put(異動年月日, insertEntity);
-                無効データFlag = true;
-                break;
+                return true;
             }
         }
+        return false;
     }
 
-    private void 異動一時2By受給者台帳パターン5Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
+    private boolean 異動一時2By受給者台帳パターン5Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
             FlexibleYearMonth 処理年月, boolean 無効データFlag) {
         if (無効データFlag) {
-            return;
+            return 無効データFlag;
         }
         for (DbT4001JukyushaDaichoEntity 受給者台帳 : 受給者台帳List) {
             if (無効データFlag) {
@@ -450,22 +443,19 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 JukyushaIdoRenrakuhyoOutCommonProcess.set異動一時2By受給者台帳パターン3(
                         insertEntity, 異動年月日, 被保険者番号);
                 異動一時Map.put(異動年月日, insertEntity);
-                無効データFlag = true;
-                break;
+                return true;
             }
         }
+        return false;
     }
 
-    private void 異動一時2By総合事業対象者パターン5Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
+    private boolean 異動一時2By総合事業対象者パターン5Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
             List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List,
             boolean 無効データFlag, FlexibleYearMonth 処理年月) {
         if (無効データFlag) {
-            return;
+            return 無効データFlag;
         }
         for (DbT4001JukyushaDaichoEntity 受給者台帳 : 受給者台帳List) {
-            if (無効データFlag) {
-                break;
-            }
             if (!コート_0.equals(受給者台帳.getYukoMukoKubun())) {
                 continue;
             }
@@ -482,13 +472,12 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                     IdoTblTmpEntity insertEntity = new IdoTblTmpEntity();
                     FlexibleDate 異動年月日 = get月初(受給者台帳.getJukyuShinseiYMD());
                     if (異動一時Map.containsKey(異動年月日)) {
-                        異動年月日 = get翌日異動日(異動年月日);
+                        insertEntity = 異動一時Map.get(異動年月日);
                     }
                     JukyushaIdoRenrakuhyoOutCommonProcess.set異動一時2By総合事業対象者パターン5(
                             insertEntity, 受給者台帳, 異動年月日, 被保険者番号);
                     異動一時Map.put(異動年月日, insertEntity);
-                    無効データFlag = true;
-                    break;
+                    return true;
                 }
                 if (!isDateEmpty(総合事業対象者.getTekiyoShuryoYMD())
                         && isBeforeOreqDate(総合事業対象者.getTekiyoKaishiYMD(), 受給者台帳.getJukyuShinseiYMD())
@@ -496,16 +485,16 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                     IdoTblTmpEntity insertEntity = new IdoTblTmpEntity();
                     FlexibleDate 異動年月日 = get月初(受給者台帳.getJukyuShinseiYMD());
                     if (異動一時Map.containsKey(異動年月日)) {
-                        異動年月日 = get翌日異動日(異動年月日);
+                        insertEntity = 異動一時Map.get(異動年月日);
                     }
                     JukyushaIdoRenrakuhyoOutCommonProcess.set異動一時2By総合事業対象者パターン5(
                             insertEntity, 受給者台帳, 異動年月日, 被保険者番号);
                     異動一時Map.put(異動年月日, insertEntity);
-                    無効データFlag = true;
-                    break;
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     private boolean 前後履歴の有効Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
