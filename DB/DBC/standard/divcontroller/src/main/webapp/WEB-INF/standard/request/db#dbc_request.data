@@ -1201,9 +1201,7 @@ dbc/db/dbc/KyufuJissekiGaitoshaListPanel/onClick_btnSettle
 dbc/db/dbc/KyufuJissekiJoho/onClick_Execute
 dbc/db/dbc/KyufuJissekiJoho/onLoad
 dbc/db/dbc/KyufuJissekiKihonJouhouMain/onClick_AtoJigyosha
-dbc/db/dbc/KyufuJissekiKihonJouhouMain/onClick_Close
 dbc/db/dbc/KyufuJissekiKihonJouhouMain/onClick_Jigetsu
-dbc/db/dbc/KyufuJissekiKihonJouhouMain/onClick_KihonGokei
 dbc/db/dbc/KyufuJissekiKihonJouhouMain/onClick_MaeJigyosha
 dbc/db/dbc/KyufuJissekiKihonJouhouMain/onClick_Zengetsu
 dbc/db/dbc/KyufuJissekiKihonJouhouMain/onLoad
@@ -1288,10 +1286,6 @@ dbc/db/dbc/KyufuJissekiShokai/onClick_btnSaigo
 dbc/db/dbc/KyufuJissekiShokai/onClick_btnSento
 dbc/db/dbc/KyufuJissekiShokai/onClick_btnTsugi
 dbc/db/dbc/KyufuJissekiShokai/onLoad
-dbc/db/dbc/KyufuJissekiSyokaiMeisaiSyukei/onClick_btnAtoJigyosha
-dbc/db/dbc/KyufuJissekiSyokaiMeisaiSyukei/onClick_btnJigetsu
-dbc/db/dbc/KyufuJissekiSyokaiMeisaiSyukei/onClick_btnMaeJigyosha
-dbc/db/dbc/KyufuJissekiSyokaiMeisaiSyukei/onClick_btnZengetsu
 dbc/db/dbc/KyufuJissekiSyokaiMeisaiSyukei/onLoad
 dbc/db/dbc/KyufuJissekiTorikomi/onSelectKokuhorenTorikomiList
 dbc/db/dbc/KyufuJissekiTorikomiKekkaList/onSelectKokuhorenTorikomiList
@@ -1489,6 +1483,8 @@ dbc/db/dbc/PtnTotal/onClick_selectButton
 dbc/db/dbc/PtnTotal/onLoad
 dbc/db/dbc/RiyojokyoTokeihyo/onClick_Check
 dbc/db/dbc/RiyojokyoTokeihyo/onClick_Jikkou
+dbc/db/dbc/RiyojokyoTokeihyo/onClick_btnParameterRestore
+dbc/db/dbc/RiyojokyoTokeihyo/onClick_btnParameterSave
 dbc/db/dbc/RiyojokyoTokeihyo/onLoad
 dbc/db/dbc/RiyoshaFutanWariaiKoushiConf/onClick_btnListSearchResult
 dbc/db/dbc/RiyoshaFutanWariaiKoushiConf/onClick_btnPrint
@@ -1624,6 +1620,8 @@ dbc/db/dbc/ServiceTeikyohyoBeppyoPrintMain/onClick_btnReportPublish
 dbc/db/dbc/ServiceTeikyohyoBeppyoPrintMain/onClick_btnReportPublishCheck
 dbc/db/dbc/ServiceTeikyohyoBeppyoPrintMain/onLoad
 dbc/db/dbc/ServicecodePanel/onBeforeOpenDialog
+dbc/db/dbc/ServicecodePanel/onClick_btnBatchParamRestore
+dbc/db/dbc/ServicecodePanel/onClick_btnBatchParamSave
 dbc/db/dbc/ServicecodePanel/onClick_btnExcute
 dbc/db/dbc/ServicecodePanel/onLoad
 dbc/db/dbc/SetaiJoho/getOnLoadData
@@ -1716,6 +1714,9 @@ dbc/db/dbc/ShikyuShinseiDetail/onClick_btnShokanBaraiKeteiInfo
 dbc/db/dbc/ShikyuShinseiDetail/onClick_btnUpdate
 dbc/db/dbc/ShikyuShinseiDetail/onLoad
 dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onBlur_txtOver70Futangaku
+dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onBlur_txtOver70Shikyugaku
+dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onBlur_txtUnder70Futangaku
+dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onBlur_txtUnder70Shikyugaku
 dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onChange_tab
 dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onChange_txtTaishoKeisanKikan
 dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onClick_btnBackToIchiran

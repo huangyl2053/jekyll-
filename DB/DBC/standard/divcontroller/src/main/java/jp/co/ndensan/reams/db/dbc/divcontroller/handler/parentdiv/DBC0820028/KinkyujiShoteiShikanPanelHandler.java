@@ -1418,7 +1418,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
             }
         }
         kihon = kihon.createBuilderForEdit().set緊急時施設療養費請求額(金額合計).build();
-        kihon = kihon.modified();
         return kihon;
     }
 

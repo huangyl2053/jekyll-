@@ -48,7 +48,6 @@ public class DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishosha
     private static final String 月別判定対象者の作成 = "tsukibetsuHanteiTaishoshaTempProcess";
     private static final String 月別判定対象者の作成二回目 = "tsukibetsuHanteiTaishoshaTempNigaimeProcess";
 
-    private DBC180020ProcessParameter processPrm;
     private int kijunbiSize;
     private DBC180020ProcessParameter loopProcessPrm;
     private RiyoshaFutanWariaiHanteiUtil util;
@@ -66,7 +65,6 @@ public class DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishosha
         getParameter().set対象終了日(service.getTaishoShuryobi(nendo));
         List<RString> hanteiKijunbi = getParameter().getHanteiKijunbi();
         kijunbiSize = hanteiKijunbi == null ? 0 : hanteiKijunbi.size();
-        processPrm = util.toProcessParameter(getParameter().toDBC180022_RiyoshaFutanwariaiHanteiSubParameter());
     }
 
     @Override
@@ -98,17 +96,17 @@ public class DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishosha
 
     @Step(CLEAR世帯員所得情報)
     IBatchFlowCommand clearTmpSetaiShotokuProcess() {
-        return loopBatch(ClearTmpSetaiShotokuProcess.class).arguments(processPrm).define();
+        return simpleBatch(ClearTmpSetaiShotokuProcess.class).define();
     }
 
     @Step(CLEAR世帯員把握入力)
     IBatchFlowCommand clearSetainHakuNyuryokuTempProcess() {
-        return loopBatch(ClearSetainHakuNyuryokuTempProcess.class).arguments(processPrm).define();
+        return simpleBatch(ClearSetainHakuNyuryokuTempProcess.class).define();
     }
 
     @Step(CLEAR被保険者番号)
     IBatchFlowCommand clearHanteiHihonkenshaNoTempProcess() {
-        return loopBatch(ClearHanteiHihonkenshaNoTempProcess.class).arguments(processPrm).define();
+        return simpleBatch(ClearHanteiHihonkenshaNoTempProcess.class).define();
     }
 
     @Step(世帯員把握入力)
@@ -118,7 +116,7 @@ public class DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishosha
 
     @Step(世帯員把握FLOW)
     IBatchFlowCommand setaiShotokuKazeiHanteiFlow() {
-        return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBB介護賦課,
+        return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBZ介護共通,
                 new DBB002001_SetaiinHaakuParameter(管理識別区分)).define();
     }
 

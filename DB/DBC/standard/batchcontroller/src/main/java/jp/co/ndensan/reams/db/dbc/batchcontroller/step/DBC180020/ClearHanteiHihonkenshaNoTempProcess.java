@@ -5,39 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.HihokenshaNoEntity;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper;
+import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
  * 被保険者番号Tempの削除プロセスです。
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
-public class ClearHanteiHihonkenshaNoTempProcess extends BatchProcessBase<HihokenshaNoEntity> {
-
-    private static final RString TABLENAME = new RString("HanteiHihonkenshaNoTemp");
-    private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select被保険者番号Temp");
-    @BatchWriter
-    private BatchEntityCreatedTempTableWriter 被保険者番号Temp;
+public class ClearHanteiHihonkenshaNoTempProcess extends SimpleBatchProcessBase {
 
     @Override
-    protected void createWriter() {
-        被保険者番号Temp = new BatchEntityCreatedTempTableWriter(TABLENAME, HihokenshaNoEntity.class);
+    protected void process() {
+        IRiyoshaFutanwariaiMapper mapper = getMapper(IRiyoshaFutanwariaiMapper.class);
+        mapper.delete被保険者番号Temp();
     }
 
-    @Override
-    protected void process(HihokenshaNoEntity entity) {
-        被保険者番号Temp.delete(entity);
-    }
-
-    @Override
-    protected IBatchReader createReader() {
-        return new BatchDbReader(PATH);
-    }
 }

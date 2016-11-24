@@ -3,21 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.processprm.shokanKetteiTsuchiShokanShinsei;
+package jp.co.ndensan.reams.db.dbc.definition.processprm.shokanketteitsuchishokanshinsei;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 償還払い支給（不支給）償還払支給申請DB更新処理のProcess用パラメータクラスです。
  *
  * @reamsid_L DBC-1000-020 zuotao
  */
-@lombok.Getter
-@lombok.Setter
+@Getter
+@Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanKetteiTsuchiShokanShinseiProcessParameter implements IBatchProcessParameter {
 

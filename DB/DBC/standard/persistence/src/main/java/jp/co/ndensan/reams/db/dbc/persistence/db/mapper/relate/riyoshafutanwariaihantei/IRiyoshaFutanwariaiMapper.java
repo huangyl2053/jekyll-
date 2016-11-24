@@ -325,4 +325,38 @@ public interface IRiyoshaFutanwariaiMapper {
      */
     List<SetaiShotokuEntity> select世帯員所得情報Temp();
 
+    /**
+     * 被保険者番号一時テーブルを削除します。
+     */
+    void delete被保険者番号Temp();
+
+    /**
+     * 今回利用者負担割合情報一時テーブルを削除します。
+     */
+    void delete今回利用者負担割合情報Temp();
+
+    /**
+     * 世帯員所得情報一時テーブルを削除します。
+     */
+    void delete世帯員所得情報Temp();
+
+    /**
+     * 世帯員情報一時テーブルを削除します。
+     */
+    void delete世帯員情報Temp();
+
+    /**
+     * 世帯員把握入力一時テーブルを削除します。
+     */
+    void delete世帯員把握入力Temp();
+
+    /**
+     * 利用者負担割合明細01一時テーブルを削除します。
+     */
+    void delete利用者負担割合明細01Temp();
+
+    /**
+     * 利用者負担割合明細02一時テーブルを削除します。
+     */
+    void delete利用者負担割合明細02Temp();
 }

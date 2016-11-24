@@ -1400,7 +1400,7 @@
     WHERE
         (ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" IS NULL 
                 OR ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" = '')
-    <if test="hakkoutaisyouFlg == true"> 
+     <if test="isHako">
           AND ShokanKetteiTsuchiShoMeisaiTemp."hihokennshaKubunCode" <![CDATA[<>]]> '2'
     </if>
     GROUP BY 
@@ -1477,5 +1477,6 @@
             ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
             ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
             ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+            ,ShokanKetteiTsuchiShoMeisaiTemp."yousikibangousabu"
     </select>
 </mapper>

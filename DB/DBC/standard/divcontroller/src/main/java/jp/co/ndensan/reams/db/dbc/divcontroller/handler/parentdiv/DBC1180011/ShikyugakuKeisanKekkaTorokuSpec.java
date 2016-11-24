@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -150,6 +151,7 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
         private static final int INT_0 = 0;
         private static final int INT_1 = 1;
         private static final int INT_3 = 3;
+        private static final RString DATE_0110 = new RString(".1.10");
         private static final RString DATE_0401 = new RString("0401");
         private static final RString DATE_0731 = new RString("0731");
         private static final RString DATE_0801 = new RString("0801");
@@ -158,11 +160,10 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
 
         public static boolean is重複チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            HihokenshaNo 被保険者番号 = 対象者.get被保険者番号();
             RString 支給申請書整理番号 = div.getTxtShikyuShinseishoSeiriNoInput().getValue();
             KogakuGassanShikyuGakuKeisanKekkaManager manager = new KogakuGassanShikyuGakuKeisanKekkaManager();
             List<KogakuGassanShikyuGakuKeisanKekka> resultList
-                    = manager.get高額合算支給額計算結果(被保険者番号, 支給申請書整理番号);
+                    = manager.get高額合算支給額計算結果(支給申請書整理番号);
             boolean flg1 = resultList.isEmpty();
             List<dgKogakuGassanShikyuGakuKeisanKekka_Row> rowList
                     = div.getDgKogakuGassanShikyuGakuKeisanKekka().getDataSource();
@@ -178,7 +179,11 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
 
         public static boolean is年度チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 支給申請書整理番号 = div.getTxtShikyuShinseishoSeiriNoInput().getValue();
-            return RDate.canConvert(支給申請書整理番号.substring(INT_0, INT_3));
+            if (!RDate.canConvert(支給申請書整理番号.substring(INT_0, INT_3))) {
+                return false;
+            }
+            RYear 整理番号Year = new RDate(支給申請書整理番号.substring(INT_0, INT_3).concat(DATE_0110).toString()).getYear();
+            return 整理番号Year.isBeforeOrEquals(RDate.getNowDate().getYear());
         }
 
         public static boolean is明細グリッドチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
@@ -186,7 +191,7 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
         }
 
         public static boolean is按分後支給額チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
-            return !Decimal.ZERO.equals(div.getTxtHonninShikyugaku().getValue());
+            return div.getTxtHonninShikyugaku().getValue() != null;
         }
 
         public static boolean isうち70歳以上分チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
