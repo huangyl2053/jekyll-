@@ -170,7 +170,13 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         } else {
             Decimal 普徴納付済額 = get普徴納付済額(本算定通知書情報.get収入情報(), 1, SIZE_14);
             Decimal 特徴納付済額 = get特徴納付済額(本算定通知書情報.get収入情報(), 1, SIZE_6);
-            Decimal 納付済額 = 普徴納付済額.add(特徴納付済額);
+            Decimal 普徴納付済額_現年度 = Decimal.ZERO;
+            Decimal 特徴納付済額_現年度 = Decimal.ZERO;
+            if (null != 本算定通知書情報.get現年度収入情報()) {
+                普徴納付済額_現年度 = get普徴納付済額(本算定通知書情報.get現年度収入情報(), 1, SIZE_14);
+                特徴納付済額_現年度 = get特徴納付済額(本算定通知書情報.get現年度収入情報(), 1, SIZE_6);
+            }
+            Decimal 納付済額 = 普徴納付済額.add(特徴納付済額).add(普徴納付済額_現年度).add(特徴納付済額_現年度);
             普徴納付済額_未到来期含まない = 普徴納付済額;
             普徴納付済額_未到来期含む = 普徴納付済額;
             特徴納付済額_未到来期含む = 特徴納付済額;

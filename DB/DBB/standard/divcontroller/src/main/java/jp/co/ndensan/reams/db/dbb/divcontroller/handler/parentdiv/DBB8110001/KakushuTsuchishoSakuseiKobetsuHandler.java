@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
@@ -156,7 +157,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 return 0;
             }
         });
-        Map<RString, FukaJoho> map = new HashMap<>();
+        Map<RString, FukaJoho> map = new LinkedHashMap<>();
         for (FukaJoho info : 賦課の情報List) {
             YMDHMS 調定日時 = info.get調定日時();
             if (調定日時 != null) {
@@ -1548,6 +1549,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         parameter.set徴収猶予通知書_文書番号(div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu()
                 .getCcdChoshuYuyoTsuchiBunshoNo().get文書番号());
         parameter.setHas更正前(有.equals(div.getHdnKouseizenFlag()));
+        parameter.set賦課の情報マップ(map);
         AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         return KakushuTsuchishoSakusei.createInstance().publish(parameter);
     }

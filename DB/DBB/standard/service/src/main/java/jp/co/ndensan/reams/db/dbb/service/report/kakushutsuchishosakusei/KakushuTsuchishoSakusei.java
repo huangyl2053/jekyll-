@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
+import java.util.Set;
 import jp.co.ndensan.reams.ca.cax.business.search.CaFt702FindTotalShunyuFunction;
 import jp.co.ndensan.reams.ca.cax.business.search.TotalShunyuSearchKeyBuilder;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.SearchSaishutsuKubun;
@@ -905,6 +906,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定通知書情報.set対象者_追加含む_情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
         本算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
         本算定通知書情報.set収入情報(通知書共通情報.get収入情報());
+        本算定通知書情報.set現年度収入情報(通知書共通情報.get現年度収入情報());
         DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = load帳票制御共通(決定通知書_帳票分類ID);
         if (帳票制御共通 != null) {
             本算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(帳票制御共通));
@@ -920,6 +922,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定決定通知書情報.set処理区分(ShoriKubun.リアル);
         本算定決定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
         本算定決定通知書情報.set現年度_過年度区分(通知書共通情報.get年度区分());
+        本算定決定通知書情報.setHas更正前(parameter.isHas更正前());
         RString 通知書定型文 = RString.EMPTY;
         if (帳票制御共通 != null && !nullTOEmpty(帳票制御共通.getTeikeibunMojiSize()).isEmpty()) {
             int パターン番号 = Integer.parseInt(nullTOEmpty(帳票制御共通.getTeikeibunMojiSize()).toString());
@@ -954,7 +957,6 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         介護保険料額決定通知書.set調定事由リスト(調定事由リスト);
         介護保険料額決定通知書.set通知書定型文(通知書定型文);
         entities.add(介護保険料額決定通知書);
-
         if (ReportIdDBB.DBB100039.getReportId().equals(帳票ID)) {
             new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printB5Yoko(entities, reportManager);
         } else {
@@ -1013,6 +1015,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定通知書情報.set対象者_追加含む_情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
         本算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
         本算定通知書情報.set収入情報(通知書共通情報.get収入情報());
+        本算定通知書情報.set現年度収入情報(通知書共通情報.get現年度収入情報());
         DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = load帳票制御共通(決定通知書_帳票分類ID);
         if (帳票制御共通 != null) {
             本算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(帳票制御共通));
@@ -1028,6 +1031,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定決定通知書情報.set処理区分(ShoriKubun.リアル);
         本算定決定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
         本算定決定通知書情報.set現年度_過年度区分(通知書共通情報.get年度区分());
+        本算定決定通知書情報.setHas更正前(parameter.isHas更正前());
         List<KaigoHokenryogakuHenkoKenChushiTsuchishoJoho> entities = new ArrayList<>();
         KaigoHokenryogakuHenkoKenChushiTsuchishoJoho 決定通知書情報 = new KaigoHokenryogakuHenkoKenChushiTsuchishoJoho();
         決定通知書情報.set文書番号(parameter.get変更通知書_文書番号());
@@ -1125,7 +1129,6 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報
                 = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名,
                         ReportIdDBB.DBB100045.getReportId().equals(帳票ID));
-
         if (本算定_区分.equals(区分)) {
             publish納入通知書本算定(帳票ID, 本算定納入通知書情報, reportManager);
         } else {
@@ -1652,7 +1655,43 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             通知書共通情報.set収入情報(get収入情報(賦課の情報更正後.get賦課情報(), entity, 更正後entity));
         }
         通知書共通情報.set年度区分(年度区分);
+        if (GennenKanen.過年度.equals(年度区分)) {
+            通知書共通情報.set現年度収入情報(find現年度収入情報(parameter.get賦課の情報マップ(), 処理日, kozaSearchKey, list, 科目コード));
+        }
         return 通知書共通情報;
+    }
+
+    private ShunyuJoho find現年度収入情報(Map<RString, FukaJoho> 賦課の情報マップ, RString 処理日, IKozaSearchKey kozaSearchKey,
+            List<KamokuCode> list, RString 科目コード) {
+        Set<Map.Entry<RString, FukaJoho>> map = 賦課の情報マップ.entrySet();
+        FukaJoho 賦課情報 = null;
+        for (Map.Entry<RString, FukaJoho> 賦課の情報 : map) {
+            FukaJoho fukajoho = 賦課の情報.getValue();
+            if (fukajoho.get賦課年度().equals(fukajoho.get調定年度())) {
+                賦課情報 = fukajoho;
+                break;
+            }
+        }
+        if (null == 賦課情報) {
+            return null;
+        }
+        IKakushuTsuchishoSakuseiMapper mapper = mapperProvider.create(IKakushuTsuchishoSakuseiMapper.class);
+        MapperProvider mapperProvider = InstanceProvider.create(MapperProvider.class);
+        ICaFt702FindTotalShunyuFunctionMapper findTotalShunyuMapper = mapperProvider.create(ICaFt702FindTotalShunyuFunctionMapper.class);
+        KakushuTsuchishoEntityParameter 更正後
+                = KakushuTsuchishoEntityParameter.createSelectByKeyParam(賦課情報.get調定年度(),
+                        賦課情報.get賦課年度(), 賦課情報.get通知書番号(),
+                        賦課情報.get履歴番号(), 賦課情報.get調定日時(),
+                        psmShikibetsuTaisho, 処理日, kozaSearchKey, list, 科目コード,
+                        賦課情報.get識別コード(), RString.EMPTY,
+                        賦課情報.get調定日時().getDate().toDateString());
+        KakushuTsuchishoEntity 更正後entity = mapper.get更正前後賦課の情報(更正後);
+        更正後entity.set収入情報取得PSM(get収入情報(更正後entity, findTotalShunyuMapper));
+        FukaJohoRelateEntity entity = new FukaJohoRelateEntity();
+        entity.set介護賦課Entity(更正後entity.get介護賦課());
+        entity.set介護期別RelateEntity(更正後entity.get介護期別RelateEntity());
+        FukaAtena 賦課の情報更正後 = get賦課の情報_宛名(更正後entity);
+        return get収入情報(賦課の情報更正後.get賦課情報(), entity, 更正後entity);
     }
 
     private RString buildShikibetsuTaishoSearchKey(FukaJoho 賦課の情報_更正後) {

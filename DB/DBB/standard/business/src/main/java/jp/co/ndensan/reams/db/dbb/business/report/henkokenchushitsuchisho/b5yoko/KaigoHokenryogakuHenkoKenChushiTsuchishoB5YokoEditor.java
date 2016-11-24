@@ -116,20 +116,22 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
         reportSource.zogenGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get増減額(), 0);
 
         if (更正前 != null) {
-            reportSource.genmenMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免額() == null ? Decimal.ZERO : 更正前.get減免額(), 0);
-            reportSource.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(
-                    更正前.get確定保険料_年額() == null ? Decimal.ZERO : 更正前.get確定保険料_年額(), 0);
-            reportSource.hokenRitsuMae = DecimalFormatter.toコンマ区切りRString(
-                    更正前.get保険料率() == null ? Decimal.ZERO : 更正前.get保険料率(), 0);
-            reportSource.hokenSanshutsuMae = DecimalFormatter.toコンマ区切りRString(
-                    更正前.get減免前保険料_年額() == null ? Decimal.ZERO : 更正前.get減免前保険料_年額(), 0);
             reportSource.koremadeChoshuho = 更正前.get徴収方法();
             reportSource.koremadeTokuchoGimusha = 更正前.get特別徴収義務者();
             reportSource.koremadeTokuchoTaishoNenkin = 更正前.get特別徴収対象年金();
-            reportSource.shotokuKbnMae = 更正前.get保険料段階();
-            reportSource.shutokuYmdMae = 更正前.get期間_自();
-            reportSource.soshitsuYmdMae = 更正前.get期間_至();
-            reportSource.tsukisuMae = 更正前.get月数_ケ月();
+            if (item.get本算定決定通知書情報().isHas更正前()) {
+                reportSource.shotokuKbnMae = 更正前.get保険料段階();
+                reportSource.shutokuYmdMae = 更正前.get期間_自();
+                reportSource.soshitsuYmdMae = 更正前.get期間_至();
+                reportSource.tsukisuMae = 更正前.get月数_ケ月();
+                reportSource.genmenMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免額() == null ? Decimal.ZERO : 更正前.get減免額(), 0);
+                reportSource.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(
+                        更正前.get確定保険料_年額() == null ? Decimal.ZERO : 更正前.get確定保険料_年額(), 0);
+                reportSource.hokenRitsuMae = DecimalFormatter.toコンマ区切りRString(
+                        更正前.get保険料率() == null ? Decimal.ZERO : 更正前.get保険料率(), 0);
+                reportSource.hokenSanshutsuMae = DecimalFormatter.toコンマ区切りRString(
+                        更正前.get減免前保険料_年額() == null ? Decimal.ZERO : 更正前.get減免前保険料_年額(), 0);
+            }
         }
         return reportSource;
     }

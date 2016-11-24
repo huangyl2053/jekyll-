@@ -122,7 +122,7 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
 
         reportSource.zogenGaku = decimalToRString(編集後本算定通知書共通情報.get増減額());
 
-        if (更正前 != null) {
+        if (更正前 != null && item.get本算定決定通知書情報().isHas更正前()) {
             reportSource.genmenMae = edit金額(更正前.get減免額());
             reportSource.hokenGakuMae = edit金額(更正前.get確定保険料_年額());
             reportSource.hokenRitsuMae = edit金額(更正前.get保険料率());
