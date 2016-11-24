@@ -89,8 +89,6 @@
         LEFT OUTER JOIN "TaishoSetaiin"  AS B
             ON B."shotaiCode" = A."setaiCode"
         WHERE A."nendo" = #{処理年度}) AS C
-    WHERE
-         C."世帯コード" IS NULL
 </select>
 
 <resultMap id="resultMap_TaishoSetaiinEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.TaishoSetaiinEntity" autoMapping="true">
