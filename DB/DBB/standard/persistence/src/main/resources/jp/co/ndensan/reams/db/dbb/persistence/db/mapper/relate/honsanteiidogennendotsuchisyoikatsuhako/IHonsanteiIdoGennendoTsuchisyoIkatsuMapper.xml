@@ -4846,7 +4846,7 @@
                         ))
             </if>
             <if test="処理対象 == 2 and 通知書プリント条件 == 3"> 
-                    AND A."dbT2015KeisangoJoho_kakuteiHokenryo" <![CDATA[!=]]> A."kakuteiHokenryo"
+                    AND COALESCE(A."dbT2015KeisangoJoho_kakuteiHokenryo",0) <![CDATA[!=]]> COALESCE(A."kakuteiHokenryo",0)
             </if>
         ${出力順}
     </select>
