@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.shichosonkado;
 
+import java.io.Serializable;
+
 /**
  * 市町村情報entity ShichosonKado
  *
@@ -13,7 +15,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.shichosonkado;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShichosonJohoResult {
+public class ShichosonJohoResult implements Serializable {
 
     private final ShichosonJoho entity;
 
