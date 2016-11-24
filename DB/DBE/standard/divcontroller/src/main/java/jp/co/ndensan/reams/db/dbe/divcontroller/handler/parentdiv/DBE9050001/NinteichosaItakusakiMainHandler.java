@@ -48,6 +48,7 @@ public class NinteichosaItakusakiMainHandler {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString ハイフン = new RString("-");
     private static final int INDEX_3 = 3;
+    private static final RString SELECTKEY_空白 = RString.EMPTY;
     private static final RString 調査委託区分_3 = new RString("3");
     private static final RString 調査委託区分_4 = new RString("4");
     private static final RString 調査委託区分_5 = new RString("5");
@@ -85,7 +86,9 @@ public class NinteichosaItakusakiMainHandler {
         div.getTxtSaidaiHyojiKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getDdlitakukubun().setDataSource(setItakukubun());
+        div.getDdlitakukubun().setSelectedKey(SELECTKEY_空白);
         div.getDdlkikankubun().setDataSource(setKikankubun());
+        div.getDdlkikankubun().setSelectedKey(SELECTKEY_空白);
     }
 
     /**
@@ -95,6 +98,7 @@ public class NinteichosaItakusakiMainHandler {
      */
     public List<KeyValueDataSource> setItakukubun() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
+        dataSource.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
         for (ChosaItakuKubunCode kubunCode : ChosaItakuKubunCode.values()) {
             KeyValueDataSource kukubunDataSource = new KeyValueDataSource(kubunCode.getコード(),
                     kubunCode.get名称());
@@ -110,6 +114,7 @@ public class NinteichosaItakusakiMainHandler {
      */
     public List<KeyValueDataSource> setKikankubun() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
+        dataSource.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
         for (ChosaKikanKubun kubun : ChosaKikanKubun.values()) {
             KeyValueDataSource kukubunDataSource = new KeyValueDataSource(kubun.getコード(),
                     kubun.get名称());
@@ -122,15 +127,16 @@ public class NinteichosaItakusakiMainHandler {
      * 検索条件入力項目をクリアします。
      */
     public void clearKensakuJoken() {
-        div.getCcdhokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getRadSearchHaisiFlag().setSelectedKey(KEY0);
         div.getTxtSearchSonotaKikanCodeFrom().clearValue();
         div.getTxtSearchSonotaKikanCodeTo().clearValue();
         div.getTxtSearchSonotaKikanMeisho().clearValue();
         div.getTxtSearchSonotaKikanKanaMeisho().clearValue();
-        div.getDdlitakukubun().getDataSource().clear();
-        div.getDdlkikankubun().getDataSource().clear();
+        div.getDdlitakukubun().setSelectedKey(SELECTKEY_空白);
+        div.getDdlkikankubun().setSelectedKey(SELECTKEY_空白);
         div.getTxtSaidaiHyojiKensu().clearValue();
+        div.getCcdhokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getTxtSaidaiHyojiKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
