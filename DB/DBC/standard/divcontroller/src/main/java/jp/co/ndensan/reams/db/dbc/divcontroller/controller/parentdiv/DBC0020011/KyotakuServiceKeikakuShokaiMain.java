@@ -67,7 +67,7 @@ public class KyotakuServiceKeikakuShokaiMain {
         KyotakuKeikakuTodokedeManager manager = new KyotakuKeikakuTodokedeManager();
         KyotakuKeikakuTodokede 居宅給付計画届出 = manager.get居宅給付計画届出(被保険者番号, 対象年月, 履歴番号);
         ViewStateHolder.put(ViewStateKeys.居宅給付計画届出, 居宅給付計画届出);
-        this.getHander(div).get対象情報一覧(被保険者番号, 居宅給付計画届出);
+        this.getHander(div).get対象情報一覧(被保険者番号, 対象年月, 居宅給付計画届出);
         return ResponseData.of(div).setState(DBC0020011StateName.届出表示);
     }
 
