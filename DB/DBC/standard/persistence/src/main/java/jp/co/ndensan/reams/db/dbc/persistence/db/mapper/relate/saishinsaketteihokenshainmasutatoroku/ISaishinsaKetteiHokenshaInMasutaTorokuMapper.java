@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsaketteihokenshainmasutatoroku;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3063SaishinsaKetteiShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3064SaishinsaKetteiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshainmasutatoroku.DbWT0001Hihokensha;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshainmasutatoroku.DbWT3064SaishinsaKetteiMeisai;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshainmasutatoroku.SaiShinsaKetteiMeisaiTempEntity;
@@ -31,6 +33,21 @@ public interface ISaishinsaKetteiHokenshaInMasutaTorokuMapper {
      * @return 再審査決定集計一時テーブルのエンティティ
      */
     List<SaiShinsaKetteiShukeiTempEntity> getSaiShinsaKetteiShukeiTempTBLData();
+
+    /**
+     * 再審査決定集計TBLの全データ
+     *
+     * @return 再審査決定集計テーブルのエンティティ
+     */
+    List<DbT3063SaishinsaKetteiShukeiEntity> getDbT3063SaishinsaKetteiShukei();
+
+    /**
+     * 再審査決定明細TBLの全データ
+     *
+     * @return 再審査決定明細テーブルのエンティティ
+     */
+    List<DbT3064SaishinsaKetteiMeisaiEntity> getDbT3064SaishinsaKetteiMeisai();
+
 
     /**
      * 再審査決定集計一時テーブルを作成します
