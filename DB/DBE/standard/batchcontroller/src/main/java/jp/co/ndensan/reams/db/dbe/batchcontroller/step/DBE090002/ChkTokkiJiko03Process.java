@@ -177,7 +177,7 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         特記事項リスト = mapper.get特記事項リスト(processPrm.toYokaigoBatchMybitisParamter());
         for (NinteichosaRelateEntity list : 特記事項リスト) {
             if (TokkijikoTextImageKubun.イメージ.getコード().equals(list.get特記事項区分())
-                    && コマ割り.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(),
+                    && コマ割り.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(),
                                     SubGyomuCode.DBE認定支援))) {
                 特記事項区分.add(list);
             }

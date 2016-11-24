@@ -96,7 +96,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
             executeStep(特記事項の区分);
             List<RString> noList = getResult(List.class, new RString(特記事項の区分), NinteichosaProcess.OUT_DATA_LIST);
             if (noList.contains(TokkijikoTextImageKubun.イメージ.getコード())
-                    && コマ割り.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(),
+                    && コマ割り.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(),
                                     SubGyomuCode.DBE認定支援))) {
                 executeStep(特記事項の作成03);
             } else {

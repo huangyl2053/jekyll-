@@ -256,13 +256,13 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
                 特記事項番号リスト.add(tokki);
             }
             if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())
-                    && 全イメージ.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項イメージ, RDate.getNowDate(),
+                    && 全イメージ.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(),
                                     SubGyomuCode.DBE認定支援))) {
                 RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
                 ninteiEntity.set特記事項イメージ(共有ファイルを引き出す(イメージID));
             }
             if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())
-                    && 短冊.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項イメージ, RDate.getNowDate(),
+                    && 短冊.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(),
                                     SubGyomuCode.DBE認定支援))) {
                 TokkiTextEntity tokki = new TokkiTextEntity();
                 tokki.set特記事項(entity.get(i).get特記事項());
