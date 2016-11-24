@@ -76,6 +76,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     private static final RString エラーなし = new RString("0");
     private static final int ORDER_0 = 0;
     private static final int ORDER_1 = 1;
+    private static final int ORDER_2 = 2;
     private static final Code コート_0 = new Code("0");
     private static final Code コート_1 = new Code("1");
     private static final Code コート_01 = new Code("01");
@@ -1475,7 +1476,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                     まとめるList.add(生活保護受給者);
                 }
             }
-            if (i == 生活保護受給者List.size() - ORDER_1) {
+            if (i == 生活保護受給者List.size() - ORDER_2) {
                 まとめるList.add(後履歴生活保護受給者);
             }
         }
