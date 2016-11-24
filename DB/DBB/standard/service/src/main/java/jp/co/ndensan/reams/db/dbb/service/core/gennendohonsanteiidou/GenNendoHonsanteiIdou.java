@@ -713,7 +713,10 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                         new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人識別コード：")
                                 .concat(setaiShotokuEntity.getShikibetsuCode() == null
                                         ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
+                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人課税区分：")
+                                .concat(setaiShotokuEntity.getKazeiKubun()));
                     }
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));
                 }
             }
 
