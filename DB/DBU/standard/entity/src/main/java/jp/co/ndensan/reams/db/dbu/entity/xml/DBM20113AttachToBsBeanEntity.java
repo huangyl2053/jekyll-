@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.entity.xml;
 
 import javax.xml.bind.annotation.XmlElement;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * DBM20113AttachToBsBeanエンティティです。
@@ -15,33 +14,33 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBM20113AttachToBsBeanEntity {
 
-    private RString recordIdentificationNumber;
+    private String recordIdentificationNumber;
 
-    private RString integratedAddressNumber;
+    private String integratedAddressNumber;
 
-    private RString systemShikibetsuCode;
+    private String systemShikibetsuCode;
 
-    private RString shikibetsuCode;
+    private String shikibetsuCode;
 
-    private RString kojinNo;
+    private String kojinNo;
 
-    private RString specificPersonalInformationCode;
+    private String specificPersonalInformationCode;
 
-    private RString dataSetIdentificationItemCode;
+    private String dataSetIdentificationItemCode;
 
-    private RString dataSetRecordKey;
+    private String dataSetRecordKey;
 
-    private RString spiMajorVersion;
+    private String spiMajorVersion;
 
-    private RString parentDataSetRecordKey;
+    private String parentDataSetRecordKey;
 
-    private RString publicationDate;
+    private String publicationDate;
 
-    private RString publishedEndDate;
+    private String publishedEndDate;
 
-    private RString administrativeRegionCode;
+    private String administrativeRegionCode;
 
-    private RString duplicateCopyData;
+    private String duplicateCopyData;
 
     /**
      * システム識別コードの値を取得します。
@@ -49,7 +48,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return システム識別コード
      *
      */
-    public RString getSystemShikibetsuCode() {
+    public String getSystemShikibetsuCode() {
         return systemShikibetsuCode;
     }
 
@@ -60,7 +59,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "SystemShikibetsuCode", nillable = true)
-    public void setSystemShikibetsuCode(RString systemShikibetsuCode) {
+    public void setSystemShikibetsuCode(String systemShikibetsuCode) {
         this.systemShikibetsuCode = systemShikibetsuCode;
     }
 
@@ -70,7 +69,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return 識別コード
      *
      */
-    public RString getShikibetsuCode() {
+    public String getShikibetsuCode() {
         return shikibetsuCode;
     }
 
@@ -81,7 +80,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "ShikibetsuCode", nillable = true)
-    public void setShikibetsuCode(RString shikibetsuCode) {
+    public void setShikibetsuCode(String shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
@@ -91,7 +90,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return 個人番号
      *
      */
-    public RString getKojinNo() {
+    public String getKojinNo() {
         return kojinNo;
     }
 
@@ -102,7 +101,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "KojinNo", nillable = true)
-    public void setKojinNo(RString kojinNo) {
+    public void setKojinNo(String kojinNo) {
         this.kojinNo = kojinNo;
     }
 
@@ -112,7 +111,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return レコード識別番号
      *
      */
-    public RString getRecordIdentificationNumber() {
+    public String getRecordIdentificationNumber() {
         return recordIdentificationNumber;
     }
 
@@ -123,7 +122,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "RecordIdentificationNumber", required = true, nillable = true)
-    public void setRecordIdentificationNumber(RString recordIdentificationNumber) {
+    public void setRecordIdentificationNumber(String recordIdentificationNumber) {
         this.recordIdentificationNumber = recordIdentificationNumber;
     }
 
@@ -133,7 +132,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return 団体内統合宛名番号
      *
      */
-    public RString getIntegratedAddressNumber() {
+    public String getIntegratedAddressNumber() {
         return integratedAddressNumber;
     }
 
@@ -144,7 +143,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "IntegratedAddressNumber", required = true, nillable = true)
-    public void setIntegratedAddressNumber(RString integratedAddressNumber) {
+    public void setIntegratedAddressNumber(String integratedAddressNumber) {
         this.integratedAddressNumber = integratedAddressNumber;
     }
 
@@ -154,7 +153,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return 特定個人情報名コード
      *
      */
-    public RString getSpecificPersonalInformationCode() {
+    public String getSpecificPersonalInformationCode() {
         return specificPersonalInformationCode;
     }
 
@@ -165,7 +164,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "SpecificPersonalInformationCode", required = true, nillable = true)
-    public void setSpecificPersonalInformationCode(RString specificPersonalInformationCode) {
+    public void setSpecificPersonalInformationCode(String specificPersonalInformationCode) {
         this.specificPersonalInformationCode = specificPersonalInformationCode;
     }
 
@@ -175,7 +174,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return データセットの識別項目コード
      *
      */
-    public RString getDataSetIdentificationItemCode() {
+    public String getDataSetIdentificationItemCode() {
         return dataSetIdentificationItemCode;
     }
 
@@ -186,7 +185,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "DataSetIdentificationItemCode", required = true, nillable = true)
-    public void setDataSetIdentificationItemCode(RString dataSetIdentificationItemCode) {
+    public void setDataSetIdentificationItemCode(String dataSetIdentificationItemCode) {
         this.dataSetIdentificationItemCode = dataSetIdentificationItemCode;
     }
 
@@ -196,7 +195,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return データセットレコードのキー
      *
      */
-    public RString getDataSetRecordKey() {
+    public String getDataSetRecordKey() {
         return dataSetRecordKey;
     }
 
@@ -207,7 +206,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "DataSetRecordKey", nillable = true)
-    public void setDataSetRecordKey(RString dataSetRecordKey) {
+    public void setDataSetRecordKey(String dataSetRecordKey) {
         this.dataSetRecordKey = dataSetRecordKey;
     }
 
@@ -217,7 +216,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return 特定個人情報の版番号
      *
      */
-    public RString getSPIMajorVersion() {
+    public String getSPIMajorVersion() {
         return spiMajorVersion;
     }
 
@@ -228,7 +227,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "SPIMajorVersion", required = true, nillable = true)
-    public void setSPIMajorVersion(RString spiMajorVersion) {
+    public void setSPIMajorVersion(String spiMajorVersion) {
         this.spiMajorVersion = spiMajorVersion;
     }
 
@@ -238,7 +237,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return 親データセットのレコードキー
      *
      */
-    public RString getParentDataSetRecordKey() {
+    public String getParentDataSetRecordKey() {
         return parentDataSetRecordKey;
     }
 
@@ -249,7 +248,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "ParentDataSetRecordKey", nillable = true)
-    public void setParentDataSetRecordKey(RString parentDataSetRecordKey) {
+    public void setParentDataSetRecordKey(String parentDataSetRecordKey) {
         this.parentDataSetRecordKey = parentDataSetRecordKey;
     }
 
@@ -259,7 +258,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return 公開開始日
      *
      */
-    public RString getPublicationDate() {
+    public String getPublicationDate() {
         return publicationDate;
     }
 
@@ -270,7 +269,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "PublicationDate", nillable = true)
-    public void setPublicationDate(RString publicationDate) {
+    public void setPublicationDate(String publicationDate) {
         this.publicationDate = publicationDate;
     }
 
@@ -280,7 +279,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return 公開終了日
      *
      */
-    public RString getPublishedEndDate() {
+    public String getPublishedEndDate() {
         return publishedEndDate;
     }
 
@@ -291,7 +290,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "PublishedEndDate", nillable = true)
-    public void setPublishedEndDate(RString publishedEndDate) {
+    public void setPublishedEndDate(String publishedEndDate) {
         this.publishedEndDate = publishedEndDate;
     }
 
@@ -301,7 +300,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return 行政区コード
      *
      */
-    public RString getAdministrativeRegionCode() {
+    public String getAdministrativeRegionCode() {
         return administrativeRegionCode;
     }
 
@@ -312,7 +311,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "AdministrativeRegionCode", nillable = true)
-    public void setAdministrativeRegionCode(RString administrativeRegionCode) {
+    public void setAdministrativeRegionCode(String administrativeRegionCode) {
         this.administrativeRegionCode = administrativeRegionCode;
     }
 
@@ -322,7 +321,7 @@ public class DBM20113AttachToBsBeanEntity {
      * @return 副本データ
      *
      */
-    public RString getDuplicateCopyData() {
+    public String getDuplicateCopyData() {
         return duplicateCopyData;
     }
 
@@ -333,7 +332,7 @@ public class DBM20113AttachToBsBeanEntity {
      *
      */
     @XmlElement(name = "DuplicateCopyData", nillable = true)
-    public void setDuplicateCopyData(RString duplicateCopyData) {
+    public void setDuplicateCopyData(String duplicateCopyData) {
         this.duplicateCopyData = duplicateCopyData;
     }
 }

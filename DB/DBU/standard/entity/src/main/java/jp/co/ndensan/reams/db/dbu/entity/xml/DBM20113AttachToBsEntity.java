@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbu.entity.xml;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 特定個人情報ファイルのentityクラスです。
@@ -20,7 +19,7 @@ public class DBM20113AttachToBsEntity {
 
     private List<DBM20113AttachToBsBeanEntity> spiRegistrationDeleteList;
 
-    private RString segmentOfRegistrationDelete;
+    private String segmentOfRegistrationDelete;
 
     /**
      * 特定個人情報登録削除情報の値を取得します。
@@ -49,7 +48,7 @@ public class DBM20113AttachToBsEntity {
      * @return 登録削除区分
      *
      */
-    public RString getSegmentOfRegistrationDelete() {
+    public String getSegmentOfRegistrationDelete() {
         return segmentOfRegistrationDelete;
     }
 
@@ -60,7 +59,7 @@ public class DBM20113AttachToBsEntity {
      *
      */
     @XmlElement(name = "SegmentOfRegistrationDelete", nillable = true)
-    public void setSegmentOfRegistrationDelete(RString segmentOfRegistrationDelete) {
+    public void setSegmentOfRegistrationDelete(String segmentOfRegistrationDelete) {
         this.segmentOfRegistrationDelete = segmentOfRegistrationDelete;
     }
 }
