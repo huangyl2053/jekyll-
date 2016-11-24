@@ -79,6 +79,8 @@ public class JikofutangakuShomeishoToroku {
         div.setDisabled(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNBACKSEARCHRESULT_SEARCHGAMEN, false);
         getHandler(div).onLoad(被保険者番号, 識別コード);
+        getHandler(div).うち70_74歳に係る負担額合計の計算();
+        getHandler(div).自己負担額合計の計算();
         AccessLogger.log(AccessLogType.照会, toPersonalData(被保険者番号, 識別コード));
         return ResponseData.of(div).respond();
     }
