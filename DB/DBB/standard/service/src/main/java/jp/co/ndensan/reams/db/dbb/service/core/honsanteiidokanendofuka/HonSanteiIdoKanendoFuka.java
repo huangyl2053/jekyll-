@@ -700,11 +700,17 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
 
             if (月別保険料段階 == null) {
                 for (KazeiKubunHonninKubun kazeiKubunHonninKubun : 賦課根拠.getSetaiinKazeiKubunList()) {
-                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("識別コード：").concat(賦課計算の情報.get資格の情報().getShikibetsuCode().getColumnValue()));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("世帯：")
+                            .concat((賦課計算の情報.get世帯員所得情報() == null || 賦課計算の情報.get世帯員所得情報().isEmpty())
+                                    ? new RString("null") : 賦課計算の情報.get世帯員所得情報().get(0).getSetaiCode().getColumnValue()));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("識別コード：")
+                            .concat(賦課計算の情報.get資格の情報().getShikibetsuCode().getColumnValue()));
                     new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人区分：").concat(kazeiKubunHonninKubun.get本人区分().getCode()));
                     new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("課税区分：").concat(kazeiKubunHonninKubun.get課税区分().get名称()));
-                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：").concat(new RString(賦課根拠.getKotekiNenkinShunyu().toString())));
-                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：").concat(new RString(賦課根拠.getGokeiShotoku().toString())));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：")
+                            .concat(賦課根拠.getKotekiNenkinShunyu() == null ? new RString("null") : new RString(賦課根拠.getKotekiNenkinShunyu().toString())));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：")
+                            .concat(賦課根拠.getGokeiShotoku() == null ? new RString("null") : new RString(賦課根拠.getGokeiShotoku().toString())));
                 }
             }
 
