@@ -60,17 +60,14 @@ public interface IShokanKetteiTsuchiShoIkkatsuSakuseiMapper {
 
     /**
      * 様式名称を取得します。
-     *
-     * @return List<ShokanKetteiTsuchiShoMeisaiTempTableEntity>
      */
     void get様式名称();
 
     /**
      * サービス種類を取得します。
      *
-     * @return List<ShokanKetteiTsuchiShoMeisaiTempTableEntity>
      */
-    List<ShokanKetteiTsuchiShoMeisaiTempTableEntity> getサービス種類();
+    void getサービス種類();
 
     /**
      * サブ業務コード、市町村コード、処理名のグループ内での枝番の最大値を取得します。

@@ -5,12 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010;
 
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanHanteiKekkaUpdataParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho.ShokanKetteiTsuchiShoMeisaiItiranTempTableEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -46,6 +53,9 @@ public class ShokanKetteiTsuchiShoMeisaiItiranTempInsertProcess extends BatchPro
     private static final RString サービス分類2 = new RString("2");
     
     private static final RString サービス分類3 = new RString("3");
+    private static final RString 発行有無_2 = new RString("２号発行有無");
+
+    ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter parameter;
     
     
     @BatchWriter
@@ -53,7 +63,16 @@ public class ShokanKetteiTsuchiShoMeisaiItiranTempInsertProcess extends BatchPro
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(決定通知書明細情報取得SQL);
+        ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
+        RString 発行有無 = RString.EMPTY;
+        ChohyoSeigyoHanyo 帳票制御汎発行有無 = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                FlexibleYear.MIN, 発行有無_2);
+        if (帳票制御汎発行有無 != null) {
+            発行有無 = 帳票制御汎発行有無.get設定値();
+        }
+        ShokanHanteiKekkaUpdataParameter sqlParam = ShokanHanteiKekkaUpdataParameter.createParam(parameter.getChusyuMode(),
+                parameter.getInsho(), parameter.getDataFrom(), parameter.getDataTo(), parameter.getKetteishaUketsukeYM(), 発行有無);
+        return new BatchDbReader(決定通知書明細情報取得SQL, sqlParam);
     }
 
     @Override
