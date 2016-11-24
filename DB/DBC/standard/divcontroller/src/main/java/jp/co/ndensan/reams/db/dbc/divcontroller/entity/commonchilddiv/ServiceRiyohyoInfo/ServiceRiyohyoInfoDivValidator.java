@@ -157,6 +157,8 @@ public class ServiceRiyohyoInfoDivValidator {
     public IValidationMessages validateサービスコード必須() {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div)
+                .ifNot(ServiceRiyohyoInfoDivSpec.事業者コード必須入力のチェックです)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.サービスコード必須入力チェック)
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
                 .messages());
@@ -171,6 +173,8 @@ public class ServiceRiyohyoInfoDivValidator {
     public IValidationMessages validateサービス種類必須() {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div)
+                .ifNot(ServiceRiyohyoInfoDivSpec.事業者コード必須入力のチェックです)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.サービス種類必須入力チェック)
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービス種類コード必須項目)
                 .messages());

@@ -296,10 +296,10 @@ public class ServiceRiyohyoInfo {
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnKakutei(ServiceRiyohyoInfoDiv div) {
         ServiceRiyohyoInfoDivValidationHandler validationhandler = getValidatioHandler(div);
-        ValidationMessageControlPairs 事業者必須入力Pairs = validationhandler.validate事業者必須入力();
-        if (事業者必須入力Pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(事業者必須入力Pairs).respond();
-        }
+//        ValidationMessageControlPairs 事業者必須入力Pairs = validationhandler.validate事業者必須入力();
+//        if (事業者必須入力Pairs.iterator().hasNext()) {
+//            return ResponseData.of(div).addValidationMessages(事業者必須入力Pairs).respond();
+//        }
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         div.getBtnCalcMeisai().setDisplayNone(false);
         div.getBtnCalcGokei().setDisplayNone(false);

@@ -161,6 +161,7 @@ public class ServiceRiyohyoInfoDivValidationHandler {
 
     private ValidationDictionary createvalidateサービスコード必須Dictionary() {
         return new ValidationDictionaryBuilder()
+                .add(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目).build();
     }
 
@@ -176,6 +177,7 @@ public class ServiceRiyohyoInfoDivValidationHandler {
 
     private ValidationDictionary createvalidateサービス種類必須Dictionary() {
         return new ValidationDictionaryBuilder()
+                .add(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.サービス種類コード必須項目).build();
     }
     /**
