@@ -4,217 +4,217 @@
 <!-- @reamsid_L DBC-2000-030 xicongwang -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservice.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper">
-                    
+
     <select id="select高額サービス情報"
             resultMap="resultMap_KetteiTsuchishoInfoTempResult"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.InsertKetteiTsuchishoInfoTempMybatisParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.InsertKetteiTsuchishoInfoTempMybatisParameter"
             fetchSize="500" resultOrdered="true">
-            WITH master AS (
-                SELECT 
-                    支給申請."hihokenshaNo" as "被保険者番号",
-                    支給申請."serviceTeikyoYM" as "サービス提供年月",
-                    支給申請."rirekiNo" as "履歴番号",
-                    支給申請."shoKisaiHokenshaNo" as "証記載保険者番号",
-                    支給申請."uketsukeYMD" as "受付年月日",
-                    支給申請."shiharaiHohoKubunCode" as "支払方法区分コード",
-                    支給申請."shiharaiBasho" as "支払場所",
-                    支給申請."shiharaiKaishiYMD" as "支払期間開始年月日",
-                    支給申請."shiharaiShuryoYMD" as "支払期間終了年月日",
-                    支給申請."shiharaiKaishiTime" as "支払窓口開始時間",
-                    支給申請."shiharaiShuryoTime" as "支払窓口終了期間",
-                    支給申請."kozaID" as "口座ID",
-                    支給判定結果."ketteiYMD" as "決定年月日",
-                    支給審査決定."tsuchishoNo" as "決定通知No",
-                    支給判定結果."fushikyuRiyu" as "不支給理由",
-                    支給判定結果."shikyuKubunCode" as "判定支給区分コード",
-                    支給判定結果."shikyuKingaku" as "支給金額",
-                    支給判定結果."shinsaHohoKubun" as "審査方法区分",
-                    支給判定結果."honninShiharaiGaku" as "本人支払額",
-                    SUB給付対象者合計."jidoShokanTaishoFlag" as "自動償還対象フラグ",
-                    SUB給付対象者合計."rirekiNo" as "給付対象者合計履歴番号",
-                    支給審査決定."shikyuKubunCode" as "支給区分コード",
-                    支給審査決定."kogakuShikyuGaku" as "高額支給額",
-                    支給審査決定."riyoshaFutanGaku" as "利用者負担額",
-                    SUB被保険者台帳管理."shikakuSoshitsuYMD" as "資格喪失年月日",
-                    SUB被保険者台帳管理."shikibetsuCode" as "識別コード",
-                    SUB被保険者台帳管理."shikakuSoshitsuJiyuCode" as "資格喪失事由コード",
-                    (CASE SUB被保険者台帳管理."koikinaiJushochiTokureiFlag" 
-                    WHEN '1' THEN SUB被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode"
-                    ELSE SUB被保険者台帳管理."shichosonCode" END) AS "市町村コード",
-                    SUB受給者台帳."yokaigoJotaiKubunCode" as "要介護認定状態区分コード",
-                    SUB受給者台帳."ninteiYukoKikanKaishiYMD" as "認定有効期間開始年月日",
-                    SUB受給者台帳."ninteiYukoKikanShuryoYMD" as "認定有効期間終了年月日"
-                FROM 
-                    rgdb."DbT3056KogakuShikyuShinsei" AS 支給申請
-                LEFT JOIN
-                    (SELECT *
-                     FROM rgdb."DbT3057KogakuShikyuHanteiKekka" AS 高額介護サービス費支給判定結果
-                     WHERE 高額介護サービス費支給判定結果."isDeleted" = FALSE
-                       AND NOT EXISTS
-                           (SELECT													
-                                1											
-                            FROM													
-                                rgdb."DbT3057KogakuShikyuHanteiKekka" AS b													
-                            WHERE													
-                                高額介護サービス費支給判定結果."hihokenshaNo" = b."hihokenshaNo" AND													
-                                高額介護サービス費支給判定結果."serviceTeikyoYM" = b."serviceTeikyoYM" AND													
-                                高額介護サービス費支給判定結果."rirekiNo" = b."rirekiNo" AND													
-                                高額介護サービス費支給判定結果."rirekiEdaNo" <![CDATA[<]]> b."rirekiEdaNo")
-                    ) AS 支給判定結果
-                    ON 支給申請."hihokenshaNo" = 支給判定結果."hihokenshaNo"
-                    AND 支給申請."serviceTeikyoYM" = 支給判定結果."serviceTeikyoYM"
-                    AND 支給申請."shoKisaiHokenshaNo" = 支給判定結果."shoKisaiHokenshaNo"
-                    AND 支給申請."rirekiNo" = 支給判定結果."rirekiNo"
-                LEFT JOIN
-                    rgdb."DbT3058KogakuShikyuShinsaKettei" AS 支給審査決定
-                    ON 支給判定結果."hihokenshaNo" = 支給審査決定."hihokenshaNo"
-                    AND 支給判定結果."serviceTeikyoYM" = 支給審査決定."serviceTeikyoYM"
-                    AND 支給判定結果."shoKisaiHokenshaNo" = 支給審査決定."shoKisaiHokenshaNo"
-                    AND SUBSTRING(支給判定結果."ketteiYMD",1,6) = 支給審査決定."ketteishaUketoriYM"
-                    AND 支給判定結果."rirekiNo" = 支給審査決定."rirekiNo"
-                LEFT JOIN
-                    (
-                     SELECT *
-                     FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" dbt3055
-                     WHERE NOT (EXISTS (SELECT 'X'
-                                        FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" dbt3055KogakuKyufuTaishoshaGokei
-                                        WHERE dbt3055KogakuKyufuTaishoshaGokei."hihokenshaNo" = dbt3055."hihokenshaNo"
-                                        AND dbt3055KogakuKyufuTaishoshaGokei."serviceTeikyoYM" = dbt3055."serviceTeikyoYM"
-                                        AND dbt3055."rirekiNo" <![CDATA[<]]> dbt3055KogakuKyufuTaishoshaGokei."rirekiNo"))
-                     ) AS SUB給付対象者合計
-                     ON 支給判定結果."hihokenshaNo" = SUB給付対象者合計."hihokenshaNo"
-                     AND 支給判定結果."serviceTeikyoYM" = SUB給付対象者合計."serviceTeikyoYM"
-                LEFT JOIN
-                    (
-                        SELECT *
-                        FROM(
-                            SELECT *
-                                ,row_number () OVER (PARTITION BY t1001. "hihokenshaNo" ORDER BY t1001. "idoYMD" DESC, t1001. "edaNo" DESC) AS rrkno
-                            FROM rgdb. "DbT1001HihokenshaDaicho" t1001
-                            WHERE t1001. "logicalDeletedFlag" = FALSE
-                            ) iv
-                        WHERE iv.rrkno = 1
-                    ) AS SUB被保険者台帳管理
-                ON 支給申請."hihokenshaNo" = SUB被保険者台帳管理."hihokenshaNo"
-                LEFT JOIN
-                    (
-                     SELECT *
-                     FROM rgdb."DbT4001JukyushaDaicho" t4001
-                     WHERE t4001."yukoMukoKubun" = '1'
-                        AND t4001."logicalDeletedFlag" = false) AS SUB受給者台帳
-                ON 支給申請."hihokenshaNo" = SUB受給者台帳."hihokenshaNo" 
-                  AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanKaishiYMD",1,8) <![CDATA[<=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd') + INTERVAL '1 month' - INTERVAL '1 day' , 'yyyymmdd')
-                  AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanShuryoYMD",1,8) <![CDATA[>=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd') + INTERVAL '1 month' - INTERVAL '1 day' , 'yyyymmdd')
-                WHERE 1 = 1
-                <if test="抽出モード == 1">              
-                    AND 支給申請."uketsukeYMD" <![CDATA[>=]]> #{抽出条件日付From}
-                    AND 支給申請."uketsukeYMD" <![CDATA[<=]]> #{抽出条件日付To}
-                </if>
-                <if test="抽出モード == 2">              
-                    AND 支給判定結果."ketteiYMD" <![CDATA[>=]]> #{抽出条件日付From}
-                    AND 支給判定結果."ketteiYMD" <![CDATA[<=]]> #{抽出条件日付To}
-                </if>       
-                <if test="抽出モード == 3">              
-                    AND 支給審査決定."ketteishaUketoriYM" = #{決定者受付年月}
-                </if>   
-                <if test="印書 == 1">              
-                    AND 支給判定結果."ketteiTsuchishoSakuseiYMD" <![CDATA[<>]]> ''
-                    AND 支給判定結果."ketteiTsuchishoSakuseiYMD" IS NOT NULL
-                </if> 
-                <if test="印書 == 3">              
-                    AND (支給判定結果."ketteiTsuchishoSakuseiYMD" = ''
-                    OR 支給判定結果."ketteiTsuchishoSakuseiYMD" IS NULL)
-                </if> 
-                <if test="高額自動償還 == 2">              
-                    AND SUB給付対象者合計."jidoShokanTaishoFlag" = true
-                </if> 
-                <if test="高額自動償還 == 3">              
-                    AND SUB給付対象者合計."jidoShokanTaishoFlag" = false
-                </if> 
-                AND ((支給判定結果."ketteiYMD" <![CDATA[<>]]> ''
-                      AND 支給判定結果."ketteiYMD" IS NOT NULL
-                      AND 支給判定結果."shinsaHohoKubun" = '2')
-                     OR(支給判定結果."ketteiYMD" <![CDATA[<>]]> ''
-                      AND 支給判定結果."ketteiYMD" IS NOT NULL
-                      AND 支給判定結果."shinsaHohoKubun" = '1'
-                      AND 支給審査決定."ketteishaUketoriYM" <![CDATA[<>]]> ''
-                      AND 支給審査決定."ketteishaUketoriYM" IS NOT NULL))
-            )
-            SELECT master.*,
-                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
-            FROM master
-            LEFT JOIN 
-               rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',FALSE,'','','','','','','','','','','',true,
-                   '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',(
-                    SELECT ARRAY_AGG(CAST (master."識別コード" AS TEXT))
-                    FROM master
-                )) AS "ShikibetsuTaisho"
-              ON "ShikibetsuTaisho"."shikibetsuCode" = "master"."識別コード"
+        WITH master AS (
+        SELECT
+        支給申請."hihokenshaNo" as "被保険者番号",
+        支給申請."serviceTeikyoYM" as "サービス提供年月",
+        支給申請."rirekiNo" as "履歴番号",
+        支給申請."shoKisaiHokenshaNo" as "証記載保険者番号",
+        支給申請."uketsukeYMD" as "受付年月日",
+        支給申請."shiharaiHohoKubunCode" as "支払方法区分コード",
+        支給申請."shiharaiBasho" as "支払場所",
+        支給申請."shiharaiKaishiYMD" as "支払期間開始年月日",
+        支給申請."shiharaiShuryoYMD" as "支払期間終了年月日",
+        支給申請."shiharaiKaishiTime" as "支払窓口開始時間",
+        支給申請."shiharaiShuryoTime" as "支払窓口終了期間",
+        支給申請."kozaID" as "口座ID",
+        支給判定結果."ketteiYMD" as "決定年月日",
+        支給審査決定."tsuchishoNo" as "決定通知No",
+        支給判定結果."fushikyuRiyu" as "不支給理由",
+        支給判定結果."shikyuKubunCode" as "判定支給区分コード",
+        支給判定結果."shikyuKingaku" as "支給金額",
+        支給判定結果."shinsaHohoKubun" as "審査方法区分",
+        支給判定結果."honninShiharaiGaku" as "本人支払額",
+        SUB給付対象者合計."jidoShokanTaishoFlag" as "自動償還対象フラグ",
+        SUB給付対象者合計."rirekiNo" as "給付対象者合計履歴番号",
+        支給審査決定."shikyuKubunCode" as "支給区分コード",
+        支給審査決定."kogakuShikyuGaku" as "高額支給額",
+        支給審査決定."riyoshaFutanGaku" as "利用者負担額",
+        SUB被保険者台帳管理."shikakuSoshitsuYMD" as "資格喪失年月日",
+        SUB被保険者台帳管理."shikibetsuCode" as "識別コード",
+        SUB被保険者台帳管理."shikakuSoshitsuJiyuCode" as "資格喪失事由コード",
+        (CASE SUB被保険者台帳管理."koikinaiJushochiTokureiFlag"
+        WHEN '1' THEN SUB被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode"
+        ELSE SUB被保険者台帳管理."shichosonCode" END) AS "市町村コード",
+        SUB受給者台帳."yokaigoJotaiKubunCode" as "要介護認定状態区分コード",
+        SUB受給者台帳."ninteiYukoKikanKaishiYMD" as "認定有効期間開始年月日",
+        SUB受給者台帳."ninteiYukoKikanShuryoYMD" as "認定有効期間終了年月日"
+        FROM
+        rgdb."DbT3056KogakuShikyuShinsei" AS 支給申請
+        LEFT JOIN
+        (SELECT *
+        FROM rgdb."DbT3057KogakuShikyuHanteiKekka" AS 高額介護サービス費支給判定結果
+        WHERE 高額介護サービス費支給判定結果."isDeleted" = FALSE
+        AND NOT EXISTS
+        (SELECT
+        1
+        FROM
+        rgdb."DbT3057KogakuShikyuHanteiKekka" AS b
+        WHERE
+        高額介護サービス費支給判定結果."hihokenshaNo" = b."hihokenshaNo" AND
+        高額介護サービス費支給判定結果."serviceTeikyoYM" = b."serviceTeikyoYM" AND
+        高額介護サービス費支給判定結果."rirekiNo" = b."rirekiNo" AND
+        高額介護サービス費支給判定結果."rirekiEdaNo" <![CDATA[<]]> b."rirekiEdaNo")
+        ) AS 支給判定結果
+        ON 支給申請."hihokenshaNo" = 支給判定結果."hihokenshaNo"
+        AND 支給申請."serviceTeikyoYM" = 支給判定結果."serviceTeikyoYM"
+        AND 支給申請."shoKisaiHokenshaNo" = 支給判定結果."shoKisaiHokenshaNo"
+        AND 支給申請."rirekiNo" = 支給判定結果."rirekiNo"
+        LEFT JOIN
+        rgdb."DbT3058KogakuShikyuShinsaKettei" AS 支給審査決定
+        ON 支給判定結果."hihokenshaNo" = 支給審査決定."hihokenshaNo"
+        AND 支給判定結果."serviceTeikyoYM" = 支給審査決定."serviceTeikyoYM"
+        AND 支給判定結果."shoKisaiHokenshaNo" = 支給審査決定."shoKisaiHokenshaNo"
+        AND SUBSTRING(支給判定結果."ketteiYMD",1,6) = 支給審査決定."ketteishaUketoriYM"
+        AND 支給判定結果."rirekiNo" = 支給審査決定."rirekiNo"
+        LEFT JOIN
+        (
+        SELECT *
+        FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" dbt3055
+        WHERE NOT (EXISTS (SELECT 'X'
+        FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" dbt3055KogakuKyufuTaishoshaGokei
+        WHERE dbt3055KogakuKyufuTaishoshaGokei."hihokenshaNo" = dbt3055."hihokenshaNo"
+        AND dbt3055KogakuKyufuTaishoshaGokei."serviceTeikyoYM" = dbt3055."serviceTeikyoYM"
+        AND dbt3055."rirekiNo" <![CDATA[<]]> dbt3055KogakuKyufuTaishoshaGokei."rirekiNo"))
+        ) AS SUB給付対象者合計
+        ON 支給判定結果."hihokenshaNo" = SUB給付対象者合計."hihokenshaNo"
+        AND 支給判定結果."serviceTeikyoYM" = SUB給付対象者合計."serviceTeikyoYM"
+        LEFT JOIN
+        (
+        SELECT *
+        FROM(
+        SELECT *
+        ,row_number () OVER (PARTITION BY t1001. "hihokenshaNo" ORDER BY t1001. "idoYMD" DESC, t1001. "edaNo" DESC) AS rrkno
+        FROM rgdb. "DbT1001HihokenshaDaicho" t1001
+        WHERE t1001. "logicalDeletedFlag" = FALSE
+        ) iv
+        WHERE iv.rrkno = 1
+        ) AS SUB被保険者台帳管理
+        ON 支給申請."hihokenshaNo" = SUB被保険者台帳管理."hihokenshaNo"
+        LEFT JOIN
+        (
+        SELECT *
+        FROM rgdb."DbT4001JukyushaDaicho" t4001
+        WHERE t4001."yukoMukoKubun" = '1'
+        AND t4001."logicalDeletedFlag" = false) AS SUB受給者台帳
+        ON 支給申請."hihokenshaNo" = SUB受給者台帳."hihokenshaNo"
+        AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanKaishiYMD",1,8) <![CDATA[<=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd') + INTERVAL '1 month' - INTERVAL '1 day' , 'yyyymmdd')
+        AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanShuryoYMD",1,8) <![CDATA[>=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd') + INTERVAL '1 month' - INTERVAL '1 day' , 'yyyymmdd')
+        WHERE 1 = 1
+        <if test="抽出モード == 1">
+            AND 支給申請."uketsukeYMD" <![CDATA[>=]]> #{抽出条件日付From}
+            AND 支給申請."uketsukeYMD" <![CDATA[<=]]> #{抽出条件日付To}
+        </if>
+        <if test="抽出モード == 2">
+            AND 支給判定結果."ketteiYMD" <![CDATA[>=]]> #{抽出条件日付From}
+            AND 支給判定結果."ketteiYMD" <![CDATA[<=]]> #{抽出条件日付To}
+        </if>
+        <if test="抽出モード == 3">
+            AND 支給審査決定."ketteishaUketoriYM" = #{決定者受付年月}
+        </if>
+        <if test="印書 == 1">
+            AND 支給判定結果."ketteiTsuchiHakkoKubun" ='0'
+        </if>
+        <if test="印書 == 3">
+            AND (支給判定結果."ketteiTsuchishoSakuseiYMD" = ''
+            OR 支給判定結果."ketteiTsuchishoSakuseiYMD" IS NULL)
+        </if>
+        <if test="高額自動償還 == 2">
+            AND SUB給付対象者合計."jidoShokanTaishoFlag" = true
+        </if>
+        <if test="高額自動償還 == 3">
+            AND SUB給付対象者合計."jidoShokanTaishoFlag" = false
+        </if>
+        AND ((支給判定結果."ketteiYMD" <![CDATA[<>]]> ''
+        AND 支給判定結果."ketteiYMD" IS NOT NULL
+        AND 支給判定結果."shinsaHohoKubun" = '2')
+        OR(支給判定結果."ketteiYMD" <![CDATA[<>]]> ''
+        AND 支給判定結果."ketteiYMD" IS NOT NULL
+        AND 支給判定結果."shinsaHohoKubun" = '1'
+        AND 支給審査決定."ketteishaUketoriYM" <![CDATA[<>]]> ''
+        AND 支給審査決定."ketteishaUketoriYM" IS NOT NULL))
+        )
+        SELECT master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM master
+        LEFT JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',(
+        SELECT ARRAY_AGG(CAST (master."識別コード" AS TEXT))
+        FROM master
+        )) AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = "master"."識別コード"
     </select>
-        
+
     <resultMap id="resultMap_KetteiTsuchishoInfoTempResult" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity">
-       <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
-       <result property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
-       <result property="履歴番号" column="履歴番号" />
-       <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
-       <result property="受付年月日" column="受付年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-       <result property="支払方法区分コード" column="支払方法区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-       <result property="支払場所" column="支払場所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-       <result property="支払期間開始年月日" column="支払期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-       <result property="支払期間終了年月日" column="支払期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-       <result property="支払窓口開始時間" column="支払窓口開始時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-       <result property="支払窓口終了期間" column="支払窓口終了期間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-       <result property="決定年月日" column="決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-       <result property="決定通知No" column="決定通知No" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-       <result property="不支給理由" column="不支給理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-       <result property="判定支給区分コード" column="判定支給区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-       <result property="支給金額" column="支給金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-       <result property="審査方法区分" column="審査方法区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-       <result property="本人支払額" column="本人支払額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-       <result property="自動償還対象フラグ" column="自動償還対象フラグ" />
-       <result property="給付対象者合計履歴番号" column="給付対象者合計履歴番号" />
-       <result property="支給区分コード" column="支給区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-       <result property="高額支給額" column="高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-       <result property="利用者負担額" column="利用者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-       <result property="資格喪失年月日" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-       <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
-       <result property="資格喪失事由コード" column="資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-       <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
-       <result property="要介護認定状態区分コード" column="要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-       <result property="認定有効期間開始年月日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-       <result property="認定有効期間終了年月日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-       <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="履歴番号" column="履歴番号" />
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
+        <result property="受付年月日" column="受付年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="支払方法区分コード" column="支払方法区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="支払場所" column="支払場所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="支払期間開始年月日" column="支払期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="支払期間終了年月日" column="支払期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="支払窓口開始時間" column="支払窓口開始時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="支払窓口終了期間" column="支払窓口終了期間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="決定年月日" column="決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="決定通知No" column="決定通知No" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="不支給理由" column="不支給理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="判定支給区分コード" column="判定支給区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="支給金額" column="支給金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="審査方法区分" column="審査方法区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="本人支払額" column="本人支払額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="自動償還対象フラグ" column="自動償還対象フラグ" />
+        <result property="給付対象者合計履歴番号" column="給付対象者合計履歴番号" />
+        <result property="支給区分コード" column="支給区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="高額支給額" column="高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="利用者負担額" column="利用者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="資格喪失年月日" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="資格喪失事由コード" column="資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="要介護認定状態区分コード" column="要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="認定有効期間開始年月日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定有効期間終了年月日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
-    
+
     <select resultOrdered="true" id="selectサービス種類名称情報"
             resultMap="resultMap_KogakuServiceUpdateTempEntity" fetchSize="500">
         SELECT
-            <include refid="allColumns_KetteiTsuchishoInfoTempEntity" />,
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3054KogakuKyufuTaishoshaMeisaiMapper.allColumns_DbT3054KogakuKyufuTaishoshaMeisai" />,
-            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.allColumns_DbT7130KaigoServiceShurui" />
+        <include refid="allColumns_KetteiTsuchishoInfoTempEntity" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3054KogakuKyufuTaishoshaMeisaiMapper.allColumns_DbT3054KogakuKyufuTaishoshaMeisai" />,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.allColumns_DbT7130KaigoServiceShurui" />
         FROM "KetteiTsuchishoInfoTempEntity"
         INNER JOIN rgdb."DbT3054KogakuKyufuTaishoshaMeisai"
         ON "KetteiTsuchishoInfoTempEntity"."hihokenshaNo" = "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo"
-         AND "KetteiTsuchishoInfoTempEntity"."serviceTeikyoYM" = "DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM"
-         AND "KetteiTsuchishoInfoTempEntity"."rirekiNo" = "DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"
+        AND "KetteiTsuchishoInfoTempEntity"."serviceTeikyoYM" = "DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM"
+        AND "KetteiTsuchishoInfoTempEntity"."rirekiNo" = "DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"
         LEFT JOIN rgdb."DbT7130KaigoServiceShurui"
         ON "DbT3054KogakuKyufuTaishoshaMeisai"."serviceShuruiCode" = "DbT7130KaigoServiceShurui"."serviceShuruiCd"
-         AND "DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM" <![CDATA[>=]]> "DbT7130KaigoServiceShurui"."teikyoKaishiYM"
-         AND ( "DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM"
-            OR "DbT7130KaigoServiceShurui"."teikyoshuryoYM" = ''
-            OR "DbT7130KaigoServiceShurui"."teikyoshuryoYM" IS NULL)
-       ORDER BY
-            "KetteiTsuchishoInfoTempEntity"."hihokenshaNo" ASC,
-            "KetteiTsuchishoInfoTempEntity"."serviceTeikyoYM" ASC,
-            "KetteiTsuchishoInfoTempEntity"."yokaigoJotaiKubunCode" ASC,
-            "KetteiTsuchishoInfoTempEntity"."ninteiYukoKikanKaishiYMD" ASC,
-            "KetteiTsuchishoInfoTempEntity"."uketsukeYMD" ASC
+        AND "DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM" <![CDATA[>=]]> "DbT7130KaigoServiceShurui"."teikyoKaishiYM"
+        AND ( "DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM"
+        OR "DbT7130KaigoServiceShurui"."teikyoshuryoYM" = ''
+        OR "DbT7130KaigoServiceShurui"."teikyoshuryoYM" IS NULL)
+        ORDER BY
+        "KetteiTsuchishoInfoTempEntity"."ketteiShikyuKubunCode" ASC,
+        "KetteiTsuchishoInfoTempEntity"."hihokenshaNo" ASC,
+        "KetteiTsuchishoInfoTempEntity"."serviceTeikyoYM" ASC,
+        "KetteiTsuchishoInfoTempEntity"."yokaigoJotaiKubunCode" ASC,
+        "KetteiTsuchishoInfoTempEntity"."ninteiYukoKikanKaishiYMD" ASC,
+        "KetteiTsuchishoInfoTempEntity"."uketsukeYMD" ASC
     </select>
-    
+
     <resultMap id="resultMap_KogakuServiceUpdateTempEntity" autoMapping="true"
-                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KogakuServiceUpdateTempEntity">
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KogakuServiceUpdateTempEntity">
         <id column="hihokenshaNo" />
         <id column="serviceTeikyoYM" />
         <id column="rirekiNo" />
@@ -231,86 +231,94 @@
         <association property="一時Entity" resultMap="resultMap_KetteiTsuchishoInfoTempEntity"/>
         <association property="介護サービス種類Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.ResultMap_DbT7130KaigoServiceShuruiEntity"/>
     </resultMap>
-    
-    <select resultOrdered="true" id="select支給判定結果" 
+
+    <select resultOrdered="true" id="select支給判定結果"
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.KogakukaigoKetteiTsuchishoInfoTempParameter"
             fetchSize="500" >
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.allColumns_DbT3057KogakuShikyuHanteiKekka" />
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.allColumns_DbT3057KogakuShikyuHanteiKekka" />
         FROM
-            rgdb."DbT3057KogakuShikyuHanteiKekka"
-        <if test="抽出モード == 1"> 
-        INNER JOIN rgdb."DbT3056KogakuShikyuShinsei" AS bdt3056
-        ON bdt3056."hihokenshaNo" = "DbT3057KogakuShikyuHanteiKekka"."hihokenshaNo"
+        rgdb."DbT3057KogakuShikyuHanteiKekka"
+        <if test="抽出モード == 1">
+            INNER JOIN rgdb."DbT3056KogakuShikyuShinsei" AS bdt3056
+            ON bdt3056."hihokenshaNo" = "DbT3057KogakuShikyuHanteiKekka"."hihokenshaNo"
             AND bdt3056."serviceTeikyoYM" = "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM"
-        WHERE
+            WHERE
             bdt3056."uketsukeYMD" <![CDATA[>=]]> #{抽出条件日付From}
             AND bdt3056."uketsukeYMD" <![CDATA[<=]]> #{抽出条件日付To}
         </if>
-        <if test="抽出モード == 2"> 
-        WHERE             
+        <if test="抽出モード == 2">
+            WHERE
             "DbT3057KogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[>=]]> #{抽出条件日付From}
             AND "DbT3057KogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{抽出条件日付To}
-        </if>       
+        </if>
         <if test="抽出モード == 3">
-        WHERE             
+            WHERE
             "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM" = #{決定者受付年月}
-        </if> 
+        </if>
     </select>
-    
+
     <select resultOrdered="true" id="get高額サービス帳票出力データ"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoReportParameter"
             resultMap="resultMap_KogakuServiceReportEntity" fetchSize="500">
-         WITH master AS (
-            SELECT 
-                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservice.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper.allColumns_KetteiTsuchishoInfoTempEntity" />,
-                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
-                "koza".*
-            FROM "KetteiTsuchishoInfoTempEntity"
-            LEFT JOIN
-                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmParamClassAtesaki"/> AS "Atesaki"
-            ON "Atesaki"."shikibetsuCode" = "KetteiTsuchishoInfoTempEntity"."shikibetsuCode"
-            LEFT JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "koza"
-            ON "KetteiTsuchishoInfoTempEntity"."kozaID" = "koza"."uaT0310Koza_kozaId"
-            WHERE 1 = 1
-            <if test="支払方法抽出区分 != null and 支払方法抽出区分 == 1">
-                AND "KetteiTsuchishoInfoTempEntity"."shiharaiHohoKubunCode" = '2'
-                AND "KetteiTsuchishoInfoTempEntity"."ketteiShikyuKubunCode" = '1'
-            </if>
+        WITH master AS (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservice.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper.allColumns_KetteiTsuchishoInfoTempEntity" />,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
+        "koza".*
+        FROM "KetteiTsuchishoInfoTempEntity"
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmParamClassAtesaki"/> AS "Atesaki"
+        ON "Atesaki"."shikibetsuCode" = "KetteiTsuchishoInfoTempEntity"."shikibetsuCode"
+        LEFT JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "koza"
+        ON "KetteiTsuchishoInfoTempEntity"."kozaID" = "koza"."uaT0310Koza_kozaId"
+        WHERE 1 = 1
+        <if test="支払方法抽出区分 != null and 支払方法抽出区分 == 1">
+            AND "KetteiTsuchishoInfoTempEntity"."shiharaiHohoKubunCode" = '2'
+            AND "KetteiTsuchishoInfoTempEntity"."ketteiShikyuKubunCode" = '1'
+        </if>
         )
         SELECT sub.*
         FROM (
-            SELECT master.*,
-                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-                "ShikibetsuTaisho" . "yubinNo" AS "yubinNo",
-                "ShikibetsuTaisho" . "choikiCode" AS "choikiCode",
-                "ShikibetsuTaisho" . "gyoseikuCode" AS "gyoseikuCode",
-                "ShikibetsuTaisho" . "kanaMeisho" AS "kanaMeisho"
-            FROM master
-            INNER JOIN 
-                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
-            ON "ShikibetsuTaisho"."shikibetsuCode" = "master"."shikibetsuCode"
+        SELECT master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+        "ShikibetsuTaisho" . "yubinNo" AS "yubinNo",
+        "ShikibetsuTaisho" . "choikiCode" AS "choikiCode",
+        "ShikibetsuTaisho" . "gyoseikuCode" AS "gyoseikuCode",
+        "ShikibetsuTaisho" . "kanaMeisho" AS "kanaMeisho"
+        FROM master
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = "master"."shikibetsuCode"
         ) AS sub
-        ${出力順}
+        ORDER BY
+        "ketteiShikyuKubunCode",
+        <if test="出力順 != ''">
+            ${出力順},
+        </if>
+        "hihokenshaNo",
+        "serviceTeikyoYM"
+
+
     </select>
-    
+
     <resultMap id="resultMap_KogakuServiceReportEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KogakuServiceReportEntity">
-       <id column="hihokenshaNo" />
-       <id column="serviceTeikyoYM" />
-       <id column="rirekiNo" />
-       <id column="shoKisaiHokenshaNo" />
-       <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
-       <result property="町域コード" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler" />
-       <result property="行政区コード" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler" />
-       <result property="カナ名称" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
-       <association property="一時Entity" resultMap="resultMap_KetteiTsuchishoInfoTempEntity"/>
-       <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-       <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
-       <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
+        <id column="hihokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="rirekiNo" />
+        <id column="shoKisaiHokenshaNo" />
+        <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="町域コード" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler" />
+        <result property="行政区コード" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler" />
+        <result property="カナ名称" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <association property="一時Entity" resultMap="resultMap_KetteiTsuchishoInfoTempEntity"/>
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
     </resultMap>
-    
+
     <sql id="allColumns_KetteiTsuchishoInfoTempEntity">
         "KetteiTsuchishoInfoTempEntity"."hihokenshaNo",
         "KetteiTsuchishoInfoTempEntity"."serviceTeikyoYM",
@@ -346,9 +354,9 @@
         "KetteiTsuchishoInfoTempEntity"."gokeiRirekiNo",
         "KetteiTsuchishoInfoTempEntity"."serviceShuruiName"
     </sql>
-    
+
     <resultMap id="resultMap_KetteiTsuchishoInfoTempEntity" autoMapping="true"
-                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempEntity">
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempEntity">
         <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <id property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
         <id property="rirekiNo" column="rirekiNo" />
@@ -383,15 +391,15 @@
         <result property="gokeiRirekiNo" column="gokeiRirekiNo" />
         <result property="serviceShuruiName" column="serviceShuruiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    
-    
+
+
     <select resultOrdered="true" id="get高額介護サービス費支給申請"
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.ResultMap_DbT3056KogakuShikyuShinseiEntity"
             fetchSize="500">
         SELECT
         DISTINCT
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.allColumns_DbT3056KogakuShikyuShinsei" />
-         FROM
+        FROM
         rgdb."DbT3056KogakuShikyuShinsei" AS "DbT3056KogakuShikyuShinsei"
         INNER JOIN
         "KetteiTsuchishoInfoTempEntity"
@@ -403,6 +411,6 @@
         "DbT3056KogakuShikyuShinsei"."shoKisaiHokenshaNo" = "KetteiTsuchishoInfoTempEntity"."shoKisaiHokenshaNo"
         WHERE
         "KetteiTsuchishoInfoTempEntity"."shiharaiHohoKubunCode" = '1'
-        
+
     </select>
 </mapper>

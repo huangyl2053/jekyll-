@@ -85,8 +85,7 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
             parameter.setKijunbi(new FlexibleDate(基準日.toDateString()));
         }
         if (1 < 抽出回数) {
-            RString 前回終了date = 対象年度.minusYear(抽出回数 - 1).toDateString().concat(new RString("0731"));
-            parameter.setKijunbi(new FlexibleDate(前回終了date));
+            parameter.setKijunbi(get基準日(抽出回数));
         }
         parameter.setShoriKubun(異動);
         parameter.setChushutsuKaishiNichiji(抽出開始日時);
@@ -145,6 +144,6 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
     }
 
     private FlexibleDate get基準日(int ループ回数) {
-        return new FlexibleDate(対象年度.minusYear(ループ回数).toDateString().concat(new RString("0731")));
+        return new FlexibleDate(対象年度.minusYear(ループ回数 - 1).toDateString().concat(new RString("0731")));
     }
 }

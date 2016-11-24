@@ -80,8 +80,9 @@ public class DBC5100011MainHandler {
     public DBC150010_RiyojokyoTokeihyoMeisaiListParameter getTempData() {
         DBC150010_RiyojokyoTokeihyoMeisaiListParameter tempData = new DBC150010_RiyojokyoTokeihyoMeisaiListParameter();
 
-        if (!div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo().isNull()) {
+        if (div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo() != null) {
             tempData.set事業者番号(div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo());
+            tempData.set事業者名称(div.getCcdJigyoshaNo().getNyuryokuShisetsuMeisho());
         }
         tempData.set利用実績区分(div.getRadRiyoJisseki().getSelectedKey());
         RString 地区指定 = RString.EMPTY;
@@ -185,6 +186,12 @@ public class DBC5100011MainHandler {
             div.getTxtHomonRiyoritsuRange().clearToValue();
         } else {
             div.getRiyojokyoJoken().setDisabled(false);
+            if (対象選択_0.equals(div.getRadKyotakuRiyoritsu().getSelectedKey())) {
+                div.getTxtKyotakuRiyoritsuRange().setDisabled(true);
+            }
+            if (対象選択_0.equals(div.getRadHomonRiyoritsu().getSelectedKey())) {
+                div.getTxtHomonRiyoritsuRange().setDisabled(true);
+            }
         }
     }
 
@@ -231,42 +238,62 @@ public class DBC5100011MainHandler {
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
         RString 対象年月 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("対象年月"));
         div.getRadTaishoYM().setSelectedKey(対象年月);
+        if (div.getRadTaishoYM().getSelectedKey().equals(対象選択_2)) {
+            div.getRiyojokyoJoken().setDisabled(true);
+        } else {
+            div.getRiyojokyoJoken().setDisabled(false);
+        }
         RString 開始年月 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("開始年月"));
-        div.getTxtTaishoYmRange().setFromValue(new RDate(開始年月.toString()));
+        div.getTxtTaishoYmRange().setFromValue(RString.isNullOrEmpty(開始年月) ? null : new RDate(開始年月.toString()));
         RString 終了年月 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("終了年月"));
-        div.getTxtTaishoYmRange().setToValue(new RDate(終了年月.toString()));
+        div.getTxtTaishoYmRange().setToValue(RString.isNullOrEmpty(終了年月) ? null : new RDate(終了年月.toString()));
         RString 被保険者番号 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("被保険者番号"));
         div.getTxtHihokenshaNo().setValue(被保険者番号);
         RString 事業者番号 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("事業者番号"));
         div.getCcdJigyoshaNo().setNyuryokuShisetsuKodo(事業者番号);
         div.getCcdJigyoshaNo().get入所施設名称(new JigyoshaNo(事業者番号));
+        RString 事業者名称 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("事業者名称"));
+        div.getCcdJigyoshaNo().setShisetsuMeisho(事業者名称);
         RString 利用実績区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("利用実績区分"));
         div.getRadRiyoJisseki().setSelectedKey(利用実績区分);
         RString 居宅利用率指定 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("居宅利用率指定"));
         div.getRadKyotakuRiyoritsu().setSelectedKey(居宅利用率指定);
-        RString 開始居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("開始居宅利用率"));
-        if (対象選択_0.equals(開始居宅利用率)) {
-            div.getTxtKyotakuRiyoritsuRange().setDisabled(false);
-        } else {
+        if (対象選択_0.equals(居宅利用率指定)) {
             div.getTxtKyotakuRiyoritsuRange().setDisabled(true);
-        }
-        if (開始居宅利用率 != null && !RString.EMPTY.equals(開始居宅利用率)) {
-            div.getTxtKyotakuRiyoritsuRange().setFromValue(new Decimal(開始居宅利用率.toString()));
-        }
-        RString 終了居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("終了居宅利用率"));
-        if (終了居宅利用率 != null && !RString.EMPTY.equals(終了居宅利用率)) {
-            div.getTxtKyotakuRiyoritsuRange().setToValue(new Decimal(終了居宅利用率.toString()));
-        }
-        RString 訪問利用率指定 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("訪問利用率指定"));
-        if (対象選択_0.equals(訪問利用率指定)) {
-            div.getTxtHomonRiyoritsuRange().setDisabled(true);
+            div.getTxtKyotakuRiyoritsuRange().clearFromValue();
+            div.getTxtKyotakuRiyoritsuRange().clearToValue();
         } else {
-            div.getTxtHomonRiyoritsuRange().setDisabled(false);
+            RString 開始居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("開始居宅利用率"));
+            div.getTxtKyotakuRiyoritsuRange().setDisabled(false);
+            if (開始居宅利用率 != null && !RString.EMPTY.equals(開始居宅利用率)) {
+                div.getTxtKyotakuRiyoritsuRange().setFromValue(new Decimal(開始居宅利用率.toString()));
+            }
+            RString 終了居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("終了居宅利用率"));
+            if (終了居宅利用率 != null && !RString.EMPTY.equals(終了居宅利用率)) {
+                div.getTxtKyotakuRiyoritsuRange().setToValue(new Decimal(終了居宅利用率.toString()));
+            }
         }
+
+        RString 訪問利用率指定 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("訪問利用率指定"));
         if (訪問利用率指定 != null && !RString.EMPTY.equals(訪問利用率指定)) {
             div.getRadHomonRiyoritsu().setSelectedKey(訪問利用率指定);
         }
-        RString 開始訪問居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("開始訪問居宅利用率"));
+        if (対象選択_0.equals(訪問利用率指定)) {
+            div.getTxtHomonRiyoritsuRange().setDisabled(true);
+            div.getTxtHomonRiyoritsuRange().clearFromValue();
+            div.getTxtHomonRiyoritsuRange().clearToValue();
+        } else {
+            RString 開始訪問居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("開始訪問居宅利用率"));
+            div.getTxtHomonRiyoritsuRange().setDisabled(false);
+            if (開始訪問居宅利用率 != null && !RString.EMPTY.equals(開始訪問居宅利用率)) {
+                div.getTxtHomonRiyoritsuRange().setFromValue(new Decimal(開始訪問居宅利用率.toString()));
+            }
+            RString 終了訪問居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("終了訪問居宅利用率"));
+            if (終了訪問居宅利用率 != null && !RString.EMPTY.equals(終了訪問居宅利用率)) {
+                div.getTxtHomonRiyoritsuRange().setToValue(new Decimal(終了訪問居宅利用率.toString()));
+            }
+        }
+
         RString 地区指定 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("地区指定"));
         Map<RString, RString> 選択地区リスト = restoreBatchParameterMap.getParameterValue(Map.class, new RString("選択地区リスト"));
         div.getCcdChikuShichosonSelect().initialize();
@@ -286,15 +313,11 @@ public class DBC5100011MainHandler {
                 選択対象SelectKey = ChikuShubetsu.地区3.getShubetsu();
             }
         }
+        div.getCcdChikuShichosonSelect().initialize();
         div.getCcdChikuShichosonSelect().set選択対象(選択対象SelectKey);
+        div.getCcdChikuShichosonSelect().onChange_選択対象DDL();
         div.getCcdChikuShichosonSelect().set選択結果(選択地区リスト);
-        if (開始訪問居宅利用率 != null && !RString.EMPTY.equals(開始訪問居宅利用率)) {
-            div.getTxtHomonRiyoritsuRange().setFromValue(new Decimal(開始訪問居宅利用率.toString()));
-        }
-        RString 終了訪問居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("終了訪問居宅利用率"));
-        if (終了訪問居宅利用率 != null && !RString.EMPTY.equals(終了訪問居宅利用率)) {
-            div.getTxtHomonRiyoritsuRange().setToValue(new Decimal(終了訪問居宅利用率.toString()));
-        }
+
         List<RString> 出力対象SelectedKeys = new ArrayList<>();
         RString 統計表出力区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("統計表出力区分"));
         RString 明細リスト出力区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("明細リスト出力区分"));
@@ -315,10 +338,10 @@ public class DBC5100011MainHandler {
         RString 項目名付加 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("項目名付加"));
         RString 連番付加 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("連番付加"));
         RString 日付スラッシュ編集 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("日付スラッシュ編集"));
-        if (Tokeihyo_CSVEditKubun.する.getコード().equals(連番付加)) {
+        if (Tokeihyo_CSVEditKubun.する.getコード().equals(項目名付加)) {
             明細CSV編集SelectedKeys.add(KEY_1);
         }
-        if (Tokeihyo_CSVEditKubun.する.getコード().equals(項目名付加)) {
+        if (Tokeihyo_CSVEditKubun.する.getコード().equals(連番付加)) {
             明細CSV編集SelectedKeys.add(KEY_2);
         }
         if (Tokeihyo_CSVEditKubun.する.getコード().equals(日付スラッシュ編集)) {

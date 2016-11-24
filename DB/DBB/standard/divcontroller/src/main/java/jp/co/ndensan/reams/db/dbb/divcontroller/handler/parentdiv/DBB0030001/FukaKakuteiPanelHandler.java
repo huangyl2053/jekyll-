@@ -226,4 +226,12 @@ public class FukaKakuteiPanelHandler {
         }
         return false;
     }
+    
+    /**
+     * エラー場合の処理。
+     */
+    public void 処理エラー() {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
+        throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace((確定処理).toString()).evaluate());
+    }
 }

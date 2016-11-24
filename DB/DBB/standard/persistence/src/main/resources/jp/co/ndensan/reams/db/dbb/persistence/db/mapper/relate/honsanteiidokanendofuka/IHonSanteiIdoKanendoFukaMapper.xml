@@ -115,8 +115,8 @@
         rgdb."DbV2502KaigoShotoku" AS A
         WHERE
         A."shotokuNendo" in (#{ 調定年度minus1 }, #{ 調定年度minus2 })
-        AND to_char(to_date(#{ 抽出開始日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",0,8)
-        AND substring(A."shoriTimeStamp",0,8) <![CDATA[<=]]> to_char(to_date(#{ 抽出終了日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
+        AND to_char(to_date(#{ 抽出開始日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",1,8)
+        AND substring(A."shoriTimeStamp",1,8) <![CDATA[<=]]> to_char(to_date(#{ 抽出終了日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
     </select>
     
     <!-- 所得異動の取得に被保険者本人異動の判断 -->

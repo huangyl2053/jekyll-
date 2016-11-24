@@ -81,7 +81,7 @@ public class DBB233001_TokuchoSeidokanIFRenkei extends BatchFlowBase<DBB233001_T
             ファイルパス_IN = 入力ファイルパス.get(i);
             executeStep(文字コード変換);
             deleteEmptyFile(ファイルパス_IN);
-            FilesystemName sharedFileName = new FilesystemName(ファイルパス_OUT);
+            FilesystemName sharedFileName = new FilesystemName(new File(ファイルパス_OUT.toString()).getName());
             SharedFile.defineSharedFile(sharedFileName);
             FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
             SharedFile.copyToSharedFile(絶対パス, sharedFileName);

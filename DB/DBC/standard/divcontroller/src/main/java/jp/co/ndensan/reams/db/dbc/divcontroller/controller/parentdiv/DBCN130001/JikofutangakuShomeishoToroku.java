@@ -197,7 +197,7 @@ public class JikofutangakuShomeishoToroku {
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onStateTransition(JikofutangakuShomeishoTorokuDiv div) {
         if (div.getExecutionStatus().equals(STATUS_修正)) {
-            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_修正.toString());
+            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_更新.toString());
         }
         if (div.getExecutionStatus().equals(STATUS_削除)) {
             CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_削除.toString());

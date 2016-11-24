@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoHenkoFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseijoho.ShokujiHiyoUpdateData;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
@@ -102,7 +101,6 @@ public class ShokujiHiyoPanel {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
         getHandler(div).setヘッダーエリア(サービス提供年月, 申請日, 事業者番号, 明細番号, 様式番号);
-        ArrayList<ShokanMeisaiResult> 償還払請求明細データList = 償還払ViewStateDB.get償還払請求明細データList();
         ArrayList<ShokanShokujiHiyo> 償還払請求食事費用データList = 償還払ViewStateDB.get償還払請求食事費用データList();
         if (!サービス提供年月.isEmpty() && サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
             getHandler(div).set平成１５年３月_状態();

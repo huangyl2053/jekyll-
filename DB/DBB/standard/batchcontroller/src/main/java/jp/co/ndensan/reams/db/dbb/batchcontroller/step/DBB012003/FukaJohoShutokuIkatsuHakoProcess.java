@@ -51,6 +51,7 @@ public class FukaJohoShutokuIkatsuHakoProcess extends BatchProcessBase<Karisante
     private static final RString RIGHT_FORMAT = new RString("}'");
     private static final RString MIDDLE_FORMAT = new RString(",");
     private static final RString 更新権限科目コード_016 = new RString("016");
+    private static final RString 更新権限科目コード_017 = new RString("017");
 
     @Override
     protected void createWriter() {
@@ -70,6 +71,7 @@ public class FukaJohoShutokuIkatsuHakoProcess extends BatchProcessBase<Karisante
         builder.set業務コード(GyomuCode.DB介護保険);
         builder.set基準日(FlexibleDate.getNowDate());
         builder.set用途区分(new KozaYotoKubunCodeValue(KozaYotoKubunType.振替口座.getCode()));
+        builder.set科目コード(new KamokuCode(更新権限科目コード_017));
         IKozaSearchKey key = builder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());

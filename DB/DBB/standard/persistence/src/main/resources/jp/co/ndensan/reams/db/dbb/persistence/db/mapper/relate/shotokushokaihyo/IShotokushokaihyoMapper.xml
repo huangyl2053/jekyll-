@@ -275,8 +275,8 @@
      WHERE
      "hihokennshaKubunCode"='1'
      AND "ichigoShikakuShutokuYMD"<![CDATA[<=]]>#{処理年度_0401}
-     AND ("shikakuSoshitsuYMD"='' OR #{処理年度_0401}<![CDATA[<=]]>"shikakuSoshitsuYMD")
-     AND substring("ichigoShikakuShutokuYMD",0,6)<![CDATA[<>]]>substring("shikakuSoshitsuYMD",0,6)
+     AND ("shikakuSoshitsuYMD"='' OR "shikakuSoshitsuYMD" IS NULL OR #{処理年度_0401}<![CDATA[<=]]>"shikakuSoshitsuYMD")
+     AND SUBSTRING("ichigoShikakuShutokuYMD", 0, 7)<![CDATA[<>]]>SUBSTRING(COALESCE("shikakuSoshitsuYMD",'00000000'), 0, 7)
      AND "logicalDeletedFlag" IS FALSE
      UNION ALL
      SELECT
@@ -897,7 +897,7 @@
          TEMP."fukaKijunYMD",
          #{処理年度} AS 所得年度,
          CASE WHEN (TEMP."fukaKijunYMD"<![CDATA[<=]]>TEMP."jushochitokureiTekiyoYMD"
-         AND (TEMP."jushochitokureiKaijoYMD"='' OR TEMP."fukaKijunYMD"<![CDATA[<=]]>TEMP."jushochitokureiKaijoYMD"))
+         AND (TEMP."jushochitokureiKaijoYMD"='' OR TEMP."jushochitokureiKaijoYMD" IS NULL OR TEMP."fukaKijunYMD"<![CDATA[<=]]>TEMP."jushochitokureiKaijoYMD"))
          THEN '1'
          ELSE TEMP."jushochiTokureiFlag"
          END AS 住所地特例該当

@@ -559,7 +559,6 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onBeforeOpenDialog_btnJigyosha(TokuteiShinryohiPanelDiv div) {
         getHandler(div).set識別コード(
-                ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
                 ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                 ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
         return createResponse(div);

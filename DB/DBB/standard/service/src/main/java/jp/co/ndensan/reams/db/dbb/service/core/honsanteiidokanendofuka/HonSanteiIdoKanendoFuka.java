@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKo
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKonkyoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyojohoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidokanendofuka.FukaJohoToChoshuHoho;
@@ -119,6 +120,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFa
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
+import jp.co.ndensan.reams.uz.uza.batch.journal.JournalWriter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -142,6 +144,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
@@ -694,6 +697,17 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             月別保険料制御情報 = get月別保険料制御情報(保険料段階List);
             保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
             TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
+
+            if (月別保険料段階 == null) {
+                for (KazeiKubunHonninKubun kazeiKubunHonninKubun : 賦課根拠.getSetaiinKazeiKubunList()) {
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("識別コード：").concat(賦課計算の情報.get資格の情報().getShikibetsuCode().getColumnValue()));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人区分：").concat(kazeiKubunHonninKubun.get本人区分().getCode()));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("課税区分：").concat(kazeiKubunHonninKubun.get課税区分().get名称()));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：").concat(new RString(賦課根拠.getKotekiNenkinShunyu().toString())));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：").concat(new RString(賦課根拠.getGokeiShotoku().toString())));
+                }
+            }
+
             NengakuHokenryoKeisanParameter 年額保険料パラメータ = new NengakuHokenryoKeisanParameter();
             年額保険料パラメータ.set賦課年度(賦課計算の情報.get賦課年度());
             TsukibetsuRankuTmpEntity 月別ランク = 賦課計算の情報.get月別ランク();
@@ -722,6 +736,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             } else {
                 年額保険料パラメータ.set年額制御情報(年額制御情報2);
             }
+
             NengakuHokenryo 年額保険料 = keisan.calculate年額保険料(年額保険料パラメータ);
             FukaKokyoBatchParameter fukaKokyoBatchParameter = new FukaKokyoBatchParameter();
             fukaKokyoBatchParameter.set賦課年度(賦課計算の情報.get賦課年度());

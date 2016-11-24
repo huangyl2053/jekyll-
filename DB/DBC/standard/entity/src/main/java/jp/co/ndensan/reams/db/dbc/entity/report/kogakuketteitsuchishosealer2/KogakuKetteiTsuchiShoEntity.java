@@ -44,7 +44,9 @@ public class KogakuKetteiTsuchiShoEntity {
     private RString 窓口払;
     private RString 口座払;
     private RString 金融機関;
-    private RString 持ちもの;
+    private RString お持ちいただくもの１;
+    private RString お持ちいただくもの２;
+    private RString お持ちいただくもの３;
     private RString 支払場所;
     private FlexibleDate 支払期間;
     private FlexibleDate 支払期間開始年月日;

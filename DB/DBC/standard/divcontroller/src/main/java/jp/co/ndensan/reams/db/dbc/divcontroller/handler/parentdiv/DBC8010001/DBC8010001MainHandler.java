@@ -53,6 +53,7 @@ public class DBC8010001MainHandler {
     private static final int INDEXSTART = 0;
     private static final int INDEXEND = 6;
     private static final int INDEX_4 = 4;
+    private static final RString 受託あり = new RString("2");
 
     /**
      * コンストラクターです。
@@ -187,21 +188,26 @@ public class DBC8010001MainHandler {
     }
 
     private void init表示制御(RString メニューID, RString 振込単位, DBC8010001 dbc) {
+        RString 国保連共同処理受託区分_高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        boolean is決定者受取年月表示 = 国保連共同処理受託区分_高額.equals(受託あり);
         if (メニューID.equals(new RString("DBCMN43003"))) {
             if (振込単位.equals(new RString("1"))) {
                 div.getDdlShoriTaisho().setSelectedKey(Furikomi_ShoriTaisho.償還高額.getコード());
                 div.getDdlShoriTaisho().setDisabled(false);
                 div.getTxtKetteishaUketoriYmRange().setDisabled(false);
+                div.getTxtKetteishaUketoriYmRange().setVisible(is決定者受取年月表示);
             } else if (振込単位.equals(new RString("2"))) {
                 div.getDdlShoriTaisho().setSelectedKey(Furikomi_ShoriTaisho.高額.getコード());
                 div.getDdlShoriTaisho().setDisabled(true);
                 div.getTxtKetteishaUketoriYmRange().setDisabled(false);
+                div.getTxtKetteishaUketoriYmRange().setVisible(is決定者受取年月表示);
             }
         } else if (メニューID.equals(new RString("DBCMN54002"))) {
             if (振込単位.equals(new RString("1"))) {
                 div.getDdlShoriTaisho().setSelectedKey(Furikomi_ShoriTaisho.償還高額.getコード());
                 div.getDdlShoriTaisho().setDisabled(false);
                 div.getTxtKetteishaUketoriYmRange().setDisabled(false);
+                div.getTxtKetteishaUketoriYmRange().setVisible(is決定者受取年月表示);
             } else if (振込単位.equals(new RString("2"))) {
                 div.getDdlShoriTaisho().setSelectedKey(Furikomi_ShoriTaisho.償還.getコード());
                 div.getDdlShoriTaisho().setDisabled(true);

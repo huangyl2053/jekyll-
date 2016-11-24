@@ -289,56 +289,63 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                     : RString.EMPTY);
             FlexibleDate 生年月日 = entity.get宛名().getSeinengappiYMD();
             csvEntity.set生年月日(get日付項目(生年月日, parameter));
-            AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(),
-                    宛名.get消除異動年月日());
-            csvEntity.set年齢(ageCalculator.get年齢());
-            if (宛名.get性別() != null) {
+            if (宛名 != null) {
+                AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(),
+                        宛名.get消除異動年月日());
+                csvEntity.set年齢(ageCalculator.get年齢());
+            }
+            if (宛名 != null && 宛名.get性別() != null) {
                 csvEntity.set性別(宛名.get性別().getName().getShortJapanese());
             }
-            TsuzukigaraCode 続柄コード = entity.get宛名().getTsuzukigaraCode();
-            csvEntity.set続柄コード(続柄コード != null
-                    ? 続柄コード.getColumnValue()
-                    : RString.EMPTY);
-            SetaiCode 世帯コード = entity.get宛名().getSetaiCode();
-            csvEntity.set世帯コード(世帯コード != null
-                    ? 世帯コード.getColumnValue()
-                    : RString.EMPTY);
-            AtenaMeisho 世帯主名 = entity.get宛名().getSetainushiMei();
-            csvEntity.set世帯主名(世帯主名 != null
-                    ? 世帯主名.getColumnValue()
-                    : RString.EMPTY);
-            ZenkokuJushoCode 住所コード = entity.get宛名().getZenkokuJushoCode();
-            csvEntity.set住所コード(住所コード != null
-                    ? 住所コード.getColumnValue()
-                    : RString.EMPTY);
-            YubinNo 郵便番号 = entity.get宛名().getYubinNo();
-            csvEntity.set郵便番号(郵便番号 != null
-                    ? 郵便番号.getColumnValue()
-                    : RString.EMPTY);
-            AtenaJusho 住所 = entity.get宛名().getJusho();
-            csvEntity.set住所(住所 != null
-                    ? 住所.getColumnValue()
-                    : RString.EMPTY);
-            AtenaBanchi 番地 = entity.get宛名().getBanchi();
-            csvEntity.set番地(番地 != null
-                    ? 番地.getColumnValue()
-                    : RString.EMPTY);
-            Katagaki 方書 = entity.get宛名().getKatagaki();
-            csvEntity.set方書(方書 != null
-                    ? 方書.getColumnValue()
-                    : RString.EMPTY);
-            csvEntity.set住所と番地と方書((住所 != null
-                    ? 住所.getColumnValue()
-                    : RString.EMPTY)
-                    .concat(番地 != null
-                            ? 番地.getColumnValue()
-                            : RString.EMPTY)
-                    .concat(RString.FULL_SPACE)
-                    .concat(方書 != null
-                            ? 方書.getColumnValue()
-                            : RString.EMPTY));
+            set続柄から(entity, csvEntity);
             set宛名(entity, csvEntity);
         }
+    }
+
+    private void set続柄から(HanyouRisutoSyuturyokuEntity entity,
+            HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
+        TsuzukigaraCode 続柄コード = entity.get宛名().getTsuzukigaraCode();
+        csvEntity.set続柄コード(続柄コード != null
+                ? 続柄コード.getColumnValue()
+                : RString.EMPTY);
+        SetaiCode 世帯コード = entity.get宛名().getSetaiCode();
+        csvEntity.set世帯コード(世帯コード != null
+                ? 世帯コード.getColumnValue()
+                : RString.EMPTY);
+        AtenaMeisho 世帯主名 = entity.get宛名().getSetainushiMei();
+        csvEntity.set世帯主名(世帯主名 != null
+                ? 世帯主名.getColumnValue()
+                : RString.EMPTY);
+        ZenkokuJushoCode 住所コード = entity.get宛名().getZenkokuJushoCode();
+        csvEntity.set住所コード(住所コード != null
+                ? 住所コード.getColumnValue()
+                : RString.EMPTY);
+        YubinNo 郵便番号 = entity.get宛名().getYubinNo();
+        csvEntity.set郵便番号(郵便番号 != null
+                ? 郵便番号.getColumnValue()
+                : RString.EMPTY);
+        AtenaJusho 住所 = entity.get宛名().getJusho();
+        csvEntity.set住所(住所 != null
+                ? 住所.getColumnValue()
+                : RString.EMPTY);
+        AtenaBanchi 番地 = entity.get宛名().getBanchi();
+        csvEntity.set番地(番地 != null
+                ? 番地.getColumnValue()
+                : RString.EMPTY);
+        Katagaki 方書 = entity.get宛名().getKatagaki();
+        csvEntity.set方書(方書 != null
+                ? 方書.getColumnValue()
+                : RString.EMPTY);
+        csvEntity.set住所と番地と方書((住所 != null
+                ? 住所.getColumnValue()
+                : RString.EMPTY)
+                .concat(番地 != null
+                        ? 番地.getColumnValue()
+                        : RString.EMPTY)
+                .concat(RString.FULL_SPACE)
+                .concat(方書 != null
+                        ? 方書.getColumnValue()
+                        : RString.EMPTY));
     }
 
     private void set宛名(HanyouRisutoSyuturyokuEntity entity,

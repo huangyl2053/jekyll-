@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC815001.Taishoushaitira
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020010.DBC020010_KogakuKaigoServicehiKyufutaishoshaTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC815001.DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.KogakuFlowReturnEntity;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -68,9 +69,9 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubun
     private static final String 世帯員所得判定明細事業高額一時の作成２ = "callInsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess2";
     private static final String 世帯員所得判定明細事業高額一時の作成３ = "callInsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess3";
     private static final String 事業高額エラーリストの発行 = "callPrtErrorListJigyoProcess";
-//    private static final String 給付実績中間事業高額一時の作成8 = "callInsKyufuJissekiChukanJigyoKogakuTmpProcess8";
-//    private static final String 高額介護サービス費一時の作成 = "callInsKogakuKaigoServiceHiTmpProcess";
-//    private static final String 事業高額介護サービス費一時の作成 = "callInsJigyoKogakuKaigoServiceHiTmpProcess";
+    private static final String 給付実績中間事業高額一時の作成8 = "callInsKyufuJissekiChukanJigyoKogakuTmpProcess8";
+    private static final String 事業高額介護サービス費追加 = "callInsJigyoKogakuKaigoServiceHiProcess";
+    private static final String 事業高額介護サービス費一時の作成 = "callInsJigyoKogakuKaigoServiceHiTmpProcess";
     private static final String 処理日付管理マスタ更新 = "GaibuRenkeiDataoutputJohoDBUpdateProcess";
     private static final String 対象者一覧表発行処理 = "TaishoushaitiranhyouhakkouShori";
     private static final String 高額介護サービス費支給申請のバックアップ = "backupKogakuShikyuShinsei";
@@ -91,14 +92,9 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubun
     private static final String 高額介護サービス費給付対象者登録フロー = "ShotokuKazeiHanteiFlow";
     private static final RString 高額介護サービス費給付対象者登録BATCHID = new RString("DBC020010_KogakuKaigoServicehiKyufutaishoshaToroku");
     private static final RString メニューID_高額介護サービス = new RString("DBCMN41002");
-    //private KogakuFlowReturnEntity kogakuFlowReturnEntity;
+    private KogakuFlowReturnEntity kogakuFlowReturnEntity;
     private int カウントアップ;
     private static final RString 日付_1231 = new RString("1231");
-
-    @Override
-    protected void initialize() {
-        //dbcparameter.setMenuId(メニューID_高額介護サービス);
-    }
 
     @Override
     protected void defineFlow() {
@@ -115,39 +111,39 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubun
         executeStep(過去分実績基本抽出7);
         executeStep(過去分実績基本抽出8);
         executeStep(給付実績基本データ抽出);
-//        executeStep(高額介護サービス費給付対象者登録フロー);
-//        executeStep(世帯員把握フロー);
-//        executeStep(世帯員把握入力高額一時の作成2);
-//        executeStep(世帯員把握フロー);
-//        executeStep(世帯員所得判定明細一時の作成);
-//        executeStep(世帯員所得判定明細事業高額一時１の作成);
-//        kogakuFlowReturnEntity = getResult(KogakuFlowReturnEntity.class, new RString(世帯員所得判定明細事業高額一時１の作成),
-//                InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess1.FLOWENTITY);
-//        executeStep(給付実績中間事業高額一時の作成１);
-//        executeStep(給付実績中間事業高額一時の作成2);
-//        executeStep(給付実績中間事業高額一時の作成3);
-//        executeStep(給付実績中間高額一時の作成7);
-//        executeStep(世帯員把握入力一時の更新);
-//        executeStep(世帯員把握フロー);
-//        executeStep(世帯員所得判定明細一時の作成);
-//        executeStep(世帯員所得判定明細事業高額一時の作成２);
-//        if (kogakuFlowReturnEntity != null && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最小続柄コード参照年())
-//                && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最大続柄コード参照年())) {
-//            int 最小続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最小続柄コード参照年().toString().trim());
-//            int 最大続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最大続柄コード参照年().toString().trim());
-//            for (int i = 最小続柄コード参照年; i <= 最大続柄コード参照年; i++) {
-//                カウントアップ = i;
-//                executeStep(世帯員所得判定明細事業高額一時の作成３);
-//            }
-//        }
-//            executeStep(給付実績中間事業高額一時の作成8);
-//            executeStep(事業高額介護サービス費一時の作成);
+        executeStep(高額介護サービス費給付対象者登録フロー);
+        executeStep(世帯員把握フロー);
+        executeStep(世帯員把握入力高額一時の作成2);
+        executeStep(世帯員把握フロー);
+        executeStep(世帯員所得判定明細一時の作成);
+        executeStep(世帯員所得判定明細事業高額一時１の作成);
+        kogakuFlowReturnEntity = getResult(KogakuFlowReturnEntity.class, new RString(世帯員所得判定明細事業高額一時１の作成),
+                InsSetaiinShotokuHanteiMeisaiJigyoKogakuTmpProcess1.FLOWENTITY);
+        executeStep(給付実績中間事業高額一時の作成１);
+        executeStep(給付実績中間事業高額一時の作成2);
+        executeStep(給付実績中間事業高額一時の作成3);
+        executeStep(給付実績中間高額一時の作成7);
+        executeStep(世帯員把握入力一時の更新);
+        executeStep(世帯員把握フロー);
+        executeStep(世帯員所得判定明細一時の作成);
+        executeStep(世帯員所得判定明細事業高額一時の作成２);
+        if (kogakuFlowReturnEntity != null && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最小続柄コード参照年())
+                && !RString.isNullOrEmpty(kogakuFlowReturnEntity.get最大続柄コード参照年())) {
+            int 最小続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最小続柄コード参照年().toString().trim());
+            int 最大続柄コード参照年 = Integer.valueOf(kogakuFlowReturnEntity.get最大続柄コード参照年().toString().trim());
+            for (int i = 最小続柄コード参照年; i <= 最大続柄コード参照年; i++) {
+                カウントアップ = i;
+                executeStep(世帯員所得判定明細事業高額一時の作成３);
+            }
+        }
+        executeStep(給付実績中間事業高額一時の作成8);
+        executeStep(事業高額介護サービス費一時の作成);
 
         if (getParameter().isテスト出力()) {
             executeStep(対象者一覧表発行処理);
         }
-        //       executeStep(事業高額エラーリストの発行);
-//            executeStep(事業高額介護サービス費追加);
+        executeStep(事業高額エラーリストの発行);
+        executeStep(事業高額介護サービス費追加);
 
         executeStep(処理日付管理マスタ更新);
     }
