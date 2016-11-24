@@ -72,7 +72,7 @@ public class RentaiNofuGimusha {
             世帯宛名情報Entity.set氏名(entity.getMeisho());
             世帯宛名情報Entity.set生年月日(entity.getSeinengappiYMD());
             世帯宛名情報Entity.set性別(entity.getSeibetsuCode());
-            世帯宛名情報Entity.set住民種別(entity.getJuminJotaiCode());
+            世帯宛名情報Entity.set住民種別(entity.getJuminShubetsuCode());
             世帯宛名情報Entity.set続柄(entity.getTsuzukigara());
             世帯宛名情報Entity.set世帯コード(entity.getSetaiCode());
             世帯宛名情報Entity.set住所(entity.getJusho());
