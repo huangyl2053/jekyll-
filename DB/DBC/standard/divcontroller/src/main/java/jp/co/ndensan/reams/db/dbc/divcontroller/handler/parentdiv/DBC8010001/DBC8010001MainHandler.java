@@ -103,9 +103,13 @@ public class DBC8010001MainHandler {
         div.getItakusha().getTxtItakushaCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaCode());
         div.getItakusha().getTxtItakushamei().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushamei());
         div.getItakusha().setItakushaId(new RString(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaId().toString()));
+        RString 振込委託者 = RString.EMPTY;
+        KinyuKikanCode 振込委託者コード = entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode();
+        if (null != 振込委託者コード && !振込委託者コード.isEmpty()) {
+            振込委託者 = 振込委託者コード.value();
+        }
         div.getItakusha().getTxtFurikomiGroupCode().setValue(
-                entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode().value()
-                .concat(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode()));
+                振込委託者.concat(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode()));
         div.getItakusha().getTxtFurikomiGroupMeisho().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupMeisho());
         List<KeyValueDataSource> list1 = new ArrayList<>();
         KeyValueDataSource source1 = new KeyValueDataSource();
