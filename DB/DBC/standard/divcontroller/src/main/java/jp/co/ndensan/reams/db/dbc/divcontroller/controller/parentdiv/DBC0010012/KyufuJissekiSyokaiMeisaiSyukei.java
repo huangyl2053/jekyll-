@@ -31,8 +31,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KyufuJissekiSyokaiMeisaiSyukei {
 
-    private static final int INT_ZERO = 0;
-
     /**
      * 画面の初期化メソッドです。
      *
@@ -54,9 +52,7 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
         List<KyufujissekiMeisaiBusiness> 明細データ = 給付実績情報照会情報.getCsData_B();
         List<KyufujissekiMeisaiJushochiTokureiBusiness> 住所地特例データ = 給付実績情報照会情報.getCsData_N();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
-        handler.onLoad(集計データ, 明細データ, 住所地特例データ,
-                para.get通し番号(), サービス提供年月, 様式番号, 事業者番号,
+        handler.onLoad(集計データ, 明細データ, 住所地特例データ, サービス提供年月, 様式番号,
                 KyufuJissekiSyokaiMeisaiSyukeiFinder.createInstance().get保険者情報().records());
         List<ShikibetsuNoKanri> 識別番号管理リスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, para.get入力識別番号()).records();

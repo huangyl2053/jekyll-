@@ -1236,4 +1236,40 @@ public class KyufuJissekiShokaiFinder {
         }
         return 給付実績明細住所地特例データリスト;
     }
+
+    /**
+     * 給付実績福祉用具販売費データの取得処理です。
+     *
+     * @param 入力識別番号 入力識別番号
+     * @param 被保険者番号 被保険者番号
+     * @param 事業所番号 事業所番号
+     * @param 通し番号 RString
+     * @param サービス提供年月 サービス提供年月
+     * @return 給付実績福祉用具販売費データ
+     */
+    public List<KyufujissekiFukushiYoguHanbaihiBusiness> get給付実績福祉用具販売費データ(NyuryokuShikibetsuNo 入力識別番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
+        requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
+        List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売費データリスト = new ArrayList<>();
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
+        List<KyufujissekiFukushiYoguHanbaihiBusinessRelateEntity> entityList = mapper.get給付実績福祉用具販売費データ(
+                KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
+                        入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
+        for (KyufujissekiFukushiYoguHanbaihiBusinessRelateEntity entity : entityList) {
+            KyufujissekiFukushiYoguHanbaihiBusiness 給付実績福祉用具販売費データ = new KyufujissekiFukushiYoguHanbaihiBusiness();
+            if (entity.getServiceShuruiRyakusho() != null) {
+                給付実績福祉用具販売費データ.setサービス種類略称(entity.getServiceShuruiRyakusho().getServiceShuruiRyakusho());
+            } else {
+                給付実績福祉用具販売費データ.setサービス種類略称(RString.EMPTY);
+            }
+            給付実績福祉用具販売費データ.set給付実績福祉用具販売費基本情報(
+                    new KyufujissekiFukushiYoguHanbaihi(entity.get給付実績福祉用具販売費データ()));
+            給付実績福祉用具販売費データリスト.add(給付実績福祉用具販売費データ);
+        }
+        return 給付実績福祉用具販売費データリスト;
+    }
 }
