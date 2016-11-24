@@ -627,7 +627,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             if (isDateEmpty(適用終了年月日)) {
                 continue;
             }
-            if (!is受給者台帳総合事業対象者check(受給者台帳, 総合事業対象者, 適用終了年月日)) {
+            if (!is受給者台帳総合事業対象者check(受給者台帳, 総合事業対象者)) {
                 continue;
             }
             if (is月末(総合事業対象者.getTekiyoShuryoYMD())) {
@@ -649,12 +649,11 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         }
     }
 
-    private boolean is受給者台帳総合事業対象者check(DbT4001JukyushaDaichoEntity 受給者台帳, DbT3105SogoJigyoTaishoshaEntity 総合事業対象者,
-            FlexibleDate 適用終了年月日) {
+    private boolean is受給者台帳総合事業対象者check(DbT4001JukyushaDaichoEntity 受給者台帳, DbT3105SogoJigyoTaishoshaEntity 総合事業対象者) {
         if ((isBeforeOreqDate(受給者台帳.getNinteiYukoKikanKaishiYMD(), 総合事業対象者.getTekiyoKaishiYMD())
                 && isBeforeOreqDate(総合事業対象者.getTekiyoKaishiYMD(), 受給者台帳.getNinteiYukoKikanShuryoYMD()))
                 || (isBeforeOreqDate(総合事業対象者.getTekiyoKaishiYMD(), 受給者台帳.getNinteiYukoKikanKaishiYMD())
-                && isBeforeOreqDate(受給者台帳.getNinteiYukoKikanShuryoYMD(), 適用終了年月日))) {
+                && isBeforeOreqDate(受給者台帳.getNinteiYukoKikanShuryoYMD(), 受給者台帳.getNinteiYukoKikanShuryoYMD()))) {
             return true;
         }
         return false;
