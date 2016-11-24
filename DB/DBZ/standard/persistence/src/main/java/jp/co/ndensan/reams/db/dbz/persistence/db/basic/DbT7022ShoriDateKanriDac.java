@@ -2029,6 +2029,25 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                         eq(nendo, 調定年度))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
+    
+     /**
+     * 処理日付管理マスタテーブルから、最大年度内連番を取得する。
+     *
+     * @param 調定年度 調定年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select最大年度内連番_処理名(FlexibleYear 調定年度, RString 処理名) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(max(nendoNaiRenban)).
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, 処理名),
+                                eq(nendo, 調定年度))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 
 
 }
