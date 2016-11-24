@@ -134,7 +134,6 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFiveKiEditor implements IKanend
         source.samaBun3 = 送付物宛先ソース.samaBun1;
         source.kakkoRight3 = 送付物宛先ソース.kakkoRight1;
         source.customerBarCode1 = 送付物宛先ソース.customerBarCode;
-        //TODO 世帯主名  様方
     }
 
     private void editCompSofubutsuAtesaki1(KanendoHokenryoNonyuTsuchishoGinfuriFiveKiSource source, SofubutsuAtesakiSource 送付物宛先ソース) {
@@ -169,7 +168,6 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFiveKiEditor implements IKanend
         source.samaBun1 = 送付物宛先ソース.samaBun1;
         source.kakkoRight1 = 送付物宛先ソース.kakkoRight1;
         source.customerBarCode1 = 送付物宛先ソース.customerBarCode;
-        //TODO 世帯主名  様方
     }
 
     private void editDBBCompNofushoItem(KanendoHokenryoNonyuTsuchishoGinfuriFiveKiSource source,

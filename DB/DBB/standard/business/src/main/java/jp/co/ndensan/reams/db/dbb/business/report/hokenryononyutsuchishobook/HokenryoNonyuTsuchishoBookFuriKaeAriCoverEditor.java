@@ -298,8 +298,6 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor implements IHokenry
                 source.cover_shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
                 source.cover_shimeiText = sofubutsuAtesakiSource.shimeiText;
                 source.cover_yubinNo = sofubutsuAtesakiSource.yubinNo;
-                // TODO 世帯主名 setainusimei 共通部品から設定する
-                // TODO 様方 samaKata 共通部品から設定する
             }
         }
     }
