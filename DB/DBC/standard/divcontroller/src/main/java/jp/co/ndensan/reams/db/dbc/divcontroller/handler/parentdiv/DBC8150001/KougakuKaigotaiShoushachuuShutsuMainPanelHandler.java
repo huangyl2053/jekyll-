@@ -250,6 +250,9 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
     }
 
     private RDateTime get抽出期間日時(RString 日, RString 時) {
+        if (時.length() == 5) {
+           return RDateTime.of(日, new RString("0").concat(時));
+        }
         return RDateTime.of(日, 時);
     }
 }
