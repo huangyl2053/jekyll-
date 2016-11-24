@@ -121,18 +121,18 @@ public class TokuchoKarisanteiFukaKakuteiManager {
             dbT7022ShoriDateKanriEntity.setNendoNaiRenban(セル);
             if (null == 登録_処理リスト || 0 == 登録_処理リスト.size() || null == 登録_処理リスト.get(0).getNendoNaiRenban()) {
                 登録_処理リスト.add(dbT7022ShoriDateKanriEntity);
-                IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
-                登録_処理リスト.get(0).setSubGyomuCode(SubGyomuCode.DBB介護賦課);
-                登録_処理リスト.get(0).setShichosonCode(association.get地方公共団体コード());
-                登録_処理リスト.get(0).setShoriName(処理名);
-                登録_処理リスト.get(0).setShoriEdaban(処理枝番);
-                登録_処理リスト.get(0).setNendo(賦課年度);
-                登録_処理リスト.get(0).setNendoNaiRenban(
-                        new RString(String.valueOf(Integer.valueOf(登録_処理リスト.get(0).getNendoNaiRenban().toString()) + 1)).padZeroToLeft(格式));
-                登録_処理リスト.get(0).setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
-                登録_処理リスト.get(0).setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
-                登録_処理リスト.get(0).setState(EntityDataState.Added);
             }
+            IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
+            登録_処理リスト.get(0).setSubGyomuCode(SubGyomuCode.DBB介護賦課);
+            登録_処理リスト.get(0).setShichosonCode(association.get地方公共団体コード());
+            登録_処理リスト.get(0).setShoriName(処理名);
+            登録_処理リスト.get(0).setShoriEdaban(処理枝番);
+            登録_処理リスト.get(0).setNendo(賦課年度);
+            登録_処理リスト.get(0).setNendoNaiRenban(
+                    new RString(String.valueOf(Integer.valueOf(登録_処理リスト.get(0).getNendoNaiRenban().toString()) + 1)).padZeroToLeft(格式));
+            登録_処理リスト.get(0).setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
+            登録_処理リスト.get(0).setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
+            登録_処理リスト.get(0).setState(EntityDataState.Added);
             return 介護賦課Dac.save(登録_処理リスト.get(0));
             
         }
