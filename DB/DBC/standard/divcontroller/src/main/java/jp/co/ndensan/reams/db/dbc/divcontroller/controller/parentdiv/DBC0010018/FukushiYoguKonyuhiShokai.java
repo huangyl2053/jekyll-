@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010018
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeaderAll;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiParam;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiFukushiYoguHanbaihiBusiness;
@@ -17,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010018.Fuk
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -34,21 +32,15 @@ public class FukushiYoguKonyuhiShokai {
      * @return ResponseData<FukushiYoguKonyuhiShokaiDiv>
      */
     public ResponseData<FukushiYoguKonyuhiShokaiDiv> onLoad(FukushiYoguKonyuhiShokaiDiv div) {
-        KyufuJissekiHeader 給付実績基本情報子Divデータ
-                = ViewStateHolder.get(ViewStateKeys.給付実績基本情報子Div, KyufuJissekiHeader.class);
-        div.getCcdKyufuJissekiHeader().set被保情報(給付実績基本情報子Divデータ);
-        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufuJissekiParam para = ViewStateHolder.get(ViewStateKeys.給付実績データパラメータ, KyufuJissekiParam.class);
         KyufuJissekiHeaderAll 給付実績基本情報 = ViewStateHolder.get(ViewStateKeys.給付実績基本情報データ, KyufuJissekiHeaderAll.class);
         div.getCcdKyufuJissekiHeader().set給付実績基本情報データ(給付実績基本情報);
         List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具情報 = KyufuJissekiShokaiFinder.createInstance()
-                .get給付実績福祉用具販売費データ(para.get入力識別番号(), para.get被保険者番号(), サービス提供年月, para.get事業所番号(), para.get通し番号());
+                .get給付実績福祉用具販売費データ(
+                        para.get入力識別番号(), para.get被保険者番号(), para.getサービス提供年月(), para.get事業所番号(), para.get通し番号());
         getHandler(div).onLoad(給付実績福祉用具情報);
-        List<ShikibetsuNoKanri> 識別番号管理データリスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
-                サービス提供年月, para.get入力識別番号()).records();
-        if (!識別番号管理データリスト.isEmpty()) {
-            getHandler(div).setButton(識別番号管理データリスト.get(0));
-        }
+        ShikibetsuNoKanri 識別番号管理データ = ViewStateHolder.get(ViewStateKeys.識別番号管理, ShikibetsuNoKanri.class);
+        getHandler(div).setButton(識別番号管理データ);
         return ResponseData.of(div).respond();
     }
 

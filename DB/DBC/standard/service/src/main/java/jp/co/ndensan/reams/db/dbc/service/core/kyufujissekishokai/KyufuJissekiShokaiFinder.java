@@ -1272,4 +1272,148 @@ public class KyufuJissekiShokaiFinder {
         }
         return 給付実績福祉用具販売費データリスト;
     }
+
+    /**
+     * 給付実績緊急時施設療養データの取得処理です。
+     *
+     * @param 入力識別番号 NyuryokuShikibetsuNo
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 事業所番号 JigyoshaNo
+     * @param 通し番号 RString
+     * @return 給付実績緊急時施設療養データ
+     */
+    public List<KyufujissekiKinkyuShisetsuRyoyo> get給付実績緊急時施設療養データ(NyuryokuShikibetsuNo 入力識別番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
+        requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
+        List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データリスト = new ArrayList<>();
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
+        List<DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity> entityList = mapper.get給付実績緊急時施設療養データ(
+                KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
+                        入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
+        for (DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity entity : entityList) {
+            KyufujissekiKinkyuShisetsuRyoyo 給付実績緊急時施設療養データ = new KyufujissekiKinkyuShisetsuRyoyo(entity);
+            給付実績緊急時施設療養データリスト.add(給付実績緊急時施設療養データ);
+        }
+        return 給付実績緊急時施設療養データリスト;
+    }
+
+    /**
+     * 給付実績所定疾患施設療養費等データの取得処理です。
+     *
+     * @param 入力識別番号 NyuryokuShikibetsuNo
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 事業所番号 JigyoshaNo
+     * @param 通し番号 RString
+     * @return 給付実績所定疾患施設療養費等データ
+     */
+    public List<KyufujissekiShoteiShikkanShisetsuRyoyo> ge給付実績所定疾患施設療養費等データ(NyuryokuShikibetsuNo 入力識別番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
+        requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
+        List<KyufujissekiShoteiShikkanShisetsuRyoyo> 給付実績所定疾患施設療養費等データリスト = new ArrayList<>();
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
+        List<DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity> entityList = mapper.get給付実績所定疾患施設療養費等データ(
+                KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
+                        入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
+        for (DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity entity : entityList) {
+            KyufujissekiShoteiShikkanShisetsuRyoyo 給付実績所定疾患施設療養費等データ = new KyufujissekiShoteiShikkanShisetsuRyoyo(entity);
+            給付実績所定疾患施設療養費等データリスト.add(給付実績所定疾患施設療養費等データ);
+        }
+        return 給付実績所定疾患施設療養費等データリスト;
+    }
+
+    /**
+     * 給付実績特定診療費データの取得処理です。
+     *
+     * @param 入力識別番号 NyuryokuShikibetsuNo
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 事業所番号 JigyoshaNo
+     * @param 通し番号 toString
+     * @return 給付実績特定診療費データ
+     */
+    public List<KyufujissekiTokuteiSinryohi> get給付実績特定診療費データ(NyuryokuShikibetsuNo 入力識別番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
+        requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
+        List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費データリスト = new ArrayList<>();
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
+        List<DbT3020KyufujissekiTokuteiSinryohiEntity> entityList = mapper.get給付実績特定診療費データ(
+                KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
+                        入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
+        for (DbT3020KyufujissekiTokuteiSinryohiEntity entity : entityList) {
+            KyufujissekiTokuteiSinryohi 給付実績特定診療費データ = new KyufujissekiTokuteiSinryohi(entity);
+            給付実績特定診療費データリスト.add(給付実績特定診療費データ);
+        }
+        return 給付実績特定診療費データリスト;
+    }
+
+    /**
+     * 給付実績特定診療費データの取得処理です。
+     *
+     * @param 入力識別番号 NyuryokuShikibetsuNo
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 事業所番号 JigyoshaNo
+     * @param 通し番号 toString
+     * @return 給付実績特定診療費_特別療養費データ
+     */
+    public List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> get給付実績特定診療費_特別療養費データ(NyuryokuShikibetsuNo 入力識別番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
+        requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
+        List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費データリスト = new ArrayList<>();
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
+        List<DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity> entityList = mapper.get給付実績特定診療費_特別療養費データ(
+                KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
+                        入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
+        for (DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity entity : entityList) {
+            KyufujissekiTokuteiSinryoTokubetsuRyoyo 給付実績特定診療費_特別療養費データ = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(entity);
+            給付実績特定診療費_特別療養費データリスト.add(給付実績特定診療費_特別療養費データ);
+        }
+        return 給付実績特定診療費_特別療養費データリスト;
+    }
+
+    /**
+     * 給付実績食事費用データの取得処理です。
+     *
+     * @param 入力識別番号 NyuryokuShikibetsuNo
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 事業所番号 JigyoshaNo
+     * @param 通し番号 toString
+     * @return 給付実績食事費用データ
+     */
+    public List<KyufujissekiShokujiHiyo> get給付実績食事費用データ(NyuryokuShikibetsuNo 入力識別番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
+        requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
+        List<KyufujissekiShokujiHiyo> 給付実績食事費用データリスト = new ArrayList<>();
+        IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
+        List<DbT3022KyufujissekiShokujiHiyoEntity> entityList = mapper.get給付実績食事費用データ(KyufuJissekiKensakuDataMapperParameter.
+                createParameter_給付実績検索データ(入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
+        for (DbT3022KyufujissekiShokujiHiyoEntity entity : entityList) {
+            KyufujissekiShokujiHiyo 給付実績食事費用データ = new KyufujissekiShokujiHiyo(entity);
+            給付実績食事費用データリスト.add(給付実績食事費用データ);
+        }
+        return 給付実績食事費用データリスト;
+    }
 }
