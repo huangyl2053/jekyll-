@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShokanKetteiTsuchiShokanShinseiProcessParameter implements IBatchProcessParameter {
+public final class ShokanKetteiTsuchiShokanShinseiProcessParameter implements IBatchProcessParameter {
 
     private RString 支払場所;
     private RDate 支払期間From;
