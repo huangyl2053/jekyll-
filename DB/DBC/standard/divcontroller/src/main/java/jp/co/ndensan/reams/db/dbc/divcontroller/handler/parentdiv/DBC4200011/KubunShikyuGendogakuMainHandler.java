@@ -7,15 +7,15 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4200011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseKubunShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.kubunshikyugendogaku.KubunShikyuGendogakuData;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyugendogaku.KubunShikyuGendogakuYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyugendogaku.ShikyuGendogakuTableKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.KubunShikyuGendogakuMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.dgShikyuGendogaku_Row;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.KubunShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.UwanoseKubunShikyuGendoGakuManager;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.KubunShikyuGendoGakuManager;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -208,11 +208,12 @@ public class KubunShikyuGendogakuMainHandler {
         List<dgShikyuGendogaku_Row> rowList = new ArrayList();
         for (KubunShikyuGendogakuData result : resultList) {
             dgShikyuGendogaku_Row row = new dgShikyuGendogaku_Row();
-            row.setModifyButtonState(DataGridButtonState.Enabled);
             if (RS_1.equals(result.getHdnSaishinFlag())) {
+                row.setModifyButtonState(DataGridButtonState.Enabled);
                 row.setDeleteButtonState(DataGridButtonState.Enabled);
             } else {
                 row.setDeleteButtonState(DataGridButtonState.Disabled);
+                row.setModifyButtonState(DataGridButtonState.Disabled);
             }
             row.getTekiyoKaishiYM().setValue(flexibleDateToRDate(result.getTekiyoKaishiYM()));
             row.getTekiyoShuryoYm().setValue(flexibleDateToRDate(result.getTekiyoShuryoYM()));

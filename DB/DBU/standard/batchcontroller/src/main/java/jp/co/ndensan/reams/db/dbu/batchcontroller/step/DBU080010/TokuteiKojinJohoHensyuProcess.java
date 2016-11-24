@@ -57,9 +57,9 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
     private static final RString 転義符 = new RString("\"");
     private static final RString 本番モード = new RString("0");
     private static final RString テストモード = new RString("1");
-    private static final RString 文字列_大なり = new RString("&gt:");
-    private static final RString 文字列_小なり = new RString("&lt:");
-    private static final RString 文字列_二重引用符 = new RString("&quot:");
+    private static final RString 文字列_大なり = new RString("&gt");
+    private static final RString 文字列_小なり = new RString("&lt");
+    private static final RString 文字列_二重引用符 = new RString("&quot");
     private static final RString 文字列_スラッシュ = new RString("/");
     private static final RString 文字列_連結符 = new RString("_");
     private static final RString 文字列_拡張子 = new RString(".xml");
@@ -86,6 +86,7 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
 
     @Override
     protected void initialize() {
+        識別項目コード = RString.EMPTY;
         添付データ件数 = 0;
         ファイル連番 = -1;
         レコード識別番号 = 0;
@@ -129,7 +130,7 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
 
     @Override
     protected void process(TeikyoKihonJohoNNTempEntity t) {
-        if (特定個人情報分割件数.compareTo(new RString(添付データ件数)) != 1) {
+        if (Integer.parseInt(特定個人情報分割件数.toString()) <= 添付データ件数) {
             ファイル連番 = ファイル連番 + 1;
             添付データ件数 = 0;
             DBM20113ToBsEntity entity = setDBM20113ToBsEntity();
@@ -192,39 +193,39 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
 
     private void setDBM20113AttachToBsEntityList(TeikyoKihonJohoNNTempEntity t) {
         DBM20113AttachToBsBeanEntity entity = new DBM20113AttachToBsBeanEntity();
-        entity.setSystemShikibetsuCode(RString.EMPTY);
-        entity.setShikibetsuCode(RString.EMPTY);
-        entity.setKojinNo(t.getKojinNo());
-        entity.setRecordIdentificationNumber(new RString(レコード識別番号));
-        entity.setIntegratedAddressNumber(RString.EMPTY);
-        entity.setSpecificPersonalInformationCode(processParameter.get特定個人情報名コード());
-        entity.setDataSetIdentificationItemCode(識別項目コード);
-        entity.setDataSetRecordKey(t.getDataSetKey());
-        entity.setSPIMajorVersion(processParameter.get版番号());
-        entity.setPublicationDate(getデータ作成日(システム日付));
-        entity.setPublishedEndDate(RString.EMPTY);
-        entity.setAdministrativeRegionCode(行政区コード);
-        entity.setDuplicateCopyData(副本データ);
+        entity.setSystemShikibetsuCode(RString.EMPTY.toString());
+        entity.setShikibetsuCode(RString.EMPTY.toString());
+        entity.setKojinNo(t.getKojinNo().toString());
+        entity.setRecordIdentificationNumber(new RString(レコード識別番号).toString());
+        entity.setIntegratedAddressNumber(RString.EMPTY.toString());
+        entity.setSpecificPersonalInformationCode(processParameter.get特定個人情報名コード().toString());
+        entity.setDataSetIdentificationItemCode(識別項目コード.toString());
+        entity.setDataSetRecordKey(t.getDataSetKey().toString());
+        entity.setSPIMajorVersion(processParameter.get版番号().toString());
+        entity.setPublicationDate(getデータ作成日(システム日付).toString());
+        entity.setPublishedEndDate(RString.EMPTY.toString());
+        entity.setAdministrativeRegionCode(行政区コード.toString());
+        entity.setDuplicateCopyData(副本データ.toString());
         dBM20113AttachToBsBeanEntityList.add(entity);
         dBM20113AttachToBsEntity.setInformationOfSPIRegistrationDelete(dBM20113AttachToBsBeanEntityList);
-        dBM20113AttachToBsEntity.setSegmentOfRegistrationDelete(new RString("1"));
+        dBM20113AttachToBsEntity.setSegmentOfRegistrationDelete("1");
     }
 
     private MessageHeaderEntity setMessageHeaderEntity() {
         MessageHeaderEntity entity = new MessageHeaderEntity();
-        entity.setMsgId(RString.EMPTY);
-        entity.setMsgTypeId(new RString("IF_DBM_20113_R01"));
-        entity.setMsgMode(電文実行モード);
-        entity.setSourceSystemID(送信元システムID);
-        entity.setDestinationSystemID(送信先システムID);
-        entity.setMsgResult(RString.EMPTY);
+        entity.setMsgId(RString.EMPTY.toString());
+        entity.setMsgTypeId("IF_DBM_20113_R01");
+        entity.setMsgMode(電文実行モード.toString());
+        entity.setSourceSystemID(送信元システムID.toString());
+        entity.setDestinationSystemID(送信先システムID.toString());
+        entity.setMsgResult(RString.EMPTY.toString());
         return entity;
     }
 
     private DBM20113ToBsBeanEntity setDBM20113ToBsBeanEntity() {
         DBM20113ToBsBeanEntity entity = new DBM20113ToBsBeanEntity();
-        entity.setRequestSourceUnitCode(依頼元部署コード);
-        entity.setRequestSourceUserID(ログインユーザＩＤ);
+        entity.setRequestSourceUnitCode(依頼元部署コード.toString());
+        entity.setRequestSourceUserID(ログインユーザＩＤ.toString());
         return entity;
     }
 

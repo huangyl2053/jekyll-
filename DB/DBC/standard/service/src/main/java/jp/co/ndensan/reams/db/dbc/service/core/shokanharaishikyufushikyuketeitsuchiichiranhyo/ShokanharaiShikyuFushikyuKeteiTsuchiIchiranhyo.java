@@ -44,8 +44,8 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
     private static final int 数字_5 = 5;
     private static final int 数字_4 = 4;
     private static final int 数字_3 = 3;
-    private static final int 数字_22 = 22;
-    private static final int 数字_24 = 24;
+    private static final int 数字_19 = 19;
+    private static final int 数字_20 = 20;
     private static final int ZERO = 0;
     private static final int TEN = 10;
     private static final RString 差止中 = new RString("差止中");
@@ -111,14 +111,14 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             if (!key.equals(indexKey)) {
                 ichiranItem.setRenban(new RString(String.valueOf(++renban)));
                 setItem(ichiranItem, shoShiharaiList, 帳票制御共通情報);
-                if (shoShiharaiList.is通知書発行対象フラグ() && ShikyuFushikyuKubun.支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())) {
+                if (ShikyuFushikyuKubun.支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())) {
                     Decimal 該当レコード支給金額集計 = shoShiharaiList.get支給額() == null ? Decimal.ZERO : shoShiharaiList.get支給額();
                     Decimal 該当レコード本人支払額 = shoShiharaiList.get本人支払額() == null ? Decimal.ZERO : shoShiharaiList.get本人支払額();
                     支給本人支払額集計 = 支給本人支払額集計.add(該当レコード本人支払額);
                     支給金額集計 = 支給金額集計.add(該当レコード支給金額集計);
                     支給件数 = 支給件数 + 1;
                 }
-                if (shoShiharaiList.is通知書発行対象フラグ() && ShikyuFushikyuKubun.不支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())) {
+                if (ShikyuFushikyuKubun.不支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())) {
                     Decimal 該当レコード本人支払額 = shoShiharaiList.get本人支払額() == null ? Decimal.ZERO : shoShiharaiList.get本人支払額();
                     不支給本人支払額集計 = 不支給本人支払額集計.add(該当レコード本人支払額);
                     不支給件数 = 不支給件数 + 1;
@@ -253,8 +253,8 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
         ichiranItem.setHihokenshaName(shoShiharaiList.get被保険者氏名());
 
         RString 編集住所 = get編集住所(shoShiharaiList, 帳票制御共通情報);
-        if (編集住所.length() > 数字_24) {
-            編集住所 = 編集住所.substring(0, 数字_22).concat(new RString("＊"));
+        if (編集住所.length() > 数字_20) {
+            編集住所 = 編集住所.substring(0, 数字_19).concat(new RString("＊"));
         }
         ichiranItem.setJusho(編集住所);
 

@@ -1738,8 +1738,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         if (releteEntity != null && releteEntity.getUaT0310KozaEntity() != null
                 && releteEntity.getUaT0310KozaEntity().getKozaId() != 0) {
             IKoza koza = new Koza(releteEntity);
-            RString 口座種類 = koza.get預金種別().get預金種別略称();
-            if (口座種類 != null && イチ_定値 < 口座種類.length()) {
+            RString 口座種類 = koza.get預金種別() == null ? 空 : koza.get預金種別().get預金種別略称();
+            if (!RString.isNullOrEmpty(口座種類) && イチ_定値 < 口座種類.length()) {
                 return 口座種類.substring(ゼロ_定値, 二_定値);
             }
             return 口座種類;

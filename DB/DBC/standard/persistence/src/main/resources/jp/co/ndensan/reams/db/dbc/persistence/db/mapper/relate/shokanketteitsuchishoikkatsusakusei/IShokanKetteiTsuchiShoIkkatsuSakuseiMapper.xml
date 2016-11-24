@@ -43,7 +43,7 @@
         <result property="sashitomeHiHokenshaNo" column="sashitomeHiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="sashitomeKojoNo" column="sashitomeKojoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kinyuKikanCode" column="uaT0310Koza_kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
-        <result property="kozaId" column="uaT0310Koza_kozaId"/>
+        <result property="kingaku_kozaId" column="uaT0310Koza_kozaId"/>
         <result property="zenkaiShiharaiKingaku" column="zenkaiShiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="hakkoutaisyouFlg" column="hakkoutaisyouFlg" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
     </resultMap>
@@ -95,7 +95,7 @@
         <result property="kaishuKingaku" column="kaishuKingaku"/>
         <result property="zougenRiyu" column="zougenRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yoshikiMeisho" column="yoshikiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kozaId" column="kozaId"/>
+        <result property="kingaku_kozaId" column="kingaku_kozaId"/>
         <result property="zenkaiShiharaiKingaku" column="zenkaiShiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="hakkoutaisyouFlg" column="hakkoutaisyouFlg" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="sagakuKingaku" column="sagakuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -341,7 +341,7 @@
         ,ShokanKetteiTsuchiShoTemp."meisho"
         ,ShokanKetteiTsuchiShoTemp."sashitomeHiHokenshaNo"
         ,ShokanKetteiTsuchiShoTemp."sashitomeKojoNo"
-        ,ShokanKetteiTsuchiShoTemp."kozaId"
+        ,ShokanKetteiTsuchiShoTemp."kingaku_kozaId"
         ,ShokanKetteiTsuchiShoTemp."zenkaiShiharaiKingaku"
         ,ShokanKetteiTsuchiShoTemp."hakkoutaisyouFlg"
     </sql>
@@ -389,7 +389,7 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."zougenRiyu"
         ,ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenMeisi"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsuMeisho"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."kozaId"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kingaku_kozaId"
         ,ShokanKetteiTsuchiShoMeisaiTemp."zenkaiShiharaiKingaku"
         ,ShokanKetteiTsuchiShoMeisaiTemp."hakkoutaisyouFlg"
         ,ShokanKetteiTsuchiShoMeisaiTemp."sagakuKingaku"
@@ -442,7 +442,7 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."yokinShubetsuMeisho"
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceShuruiName"
         ,ShokanKetteiTsuchiShoMeisaiTemp."yoshikiMeisho"
-        ,ShokanKetteiTsuchiShoMeisaiTemp."kozaId"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."kingaku_kozaId"
         ,ShokanKetteiTsuchiShoMeisaiTemp."zenkaiShiharaiKingaku"
         ,ShokanKetteiTsuchiShoMeisaiTemp."hakkoutaisyouFlg"
         ,ShokanKetteiTsuchiShoMeisaiTemp."sagakuKingaku"
@@ -1067,7 +1067,6 @@
     </select>
 
     <select resultOrdered="true" id="get様式名称"
-            resultMap="resultMap_KetteiTsuchiShoMeisai"
             fetchSize="500">
         with update_yoshikiMeisho as (
         SELECT
@@ -1129,9 +1128,7 @@
     </select>
 
     <select resultOrdered="true" id="getサービス種類"
-            resultMap="resultMap_KetteiTsuchiShoMeisai"
             fetchSize="500">
-
        with update_yoshikiMeisho as (
         SELECT
         ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo" as "updhiHokenshaNo"
@@ -1301,7 +1298,7 @@
                  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />
                 ) AS 口座情報    
                 ON
-                ShokanKetteiTsuchiShoMeisaiTemp."kozaId" = 口座情報."uaT0310Koza_kozaId"
+                ShokanKetteiTsuchiShoMeisaiTemp."kingaku_kozaId" = 口座情報."uaT0310Koza_kozaId"
             WHERE 
                 ((ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" IS NULL 
                  OR ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" = '') 
@@ -1357,7 +1354,7 @@
                  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />
                 ) AS 口座情報    
                 ON
-                ShokanKetteiTsuchiShoMeisaiTemp."kozaId" = 口座情報."uaT0310Koza_kozaId"
+                ShokanKetteiTsuchiShoMeisaiTemp."kingaku_kozaId" = 口座情報."uaT0310Koza_kozaId"
             WHERE 
                 (ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" IS NOT NULL 
                  AND ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" <![CDATA[<>]]> ''
