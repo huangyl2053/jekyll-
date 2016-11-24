@@ -280,7 +280,9 @@ public class ServiceTeikyoShomeishoPanel {
         }
         RString 明細番号 = null;
         if (!処理モード_登録.equals(処理モード) || 処理_追加修正.equals(処理モード)) {
-            処理モード = 処理モード_修正;
+            if (処理_追加修正.equals(処理モード)) {
+                処理モード = 処理モード_修正;
+            }
             明細番号 = row.getData3();
         }
         ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
