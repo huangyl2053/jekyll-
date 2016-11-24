@@ -67,7 +67,8 @@ public class JokenhyoProcess extends SimpleBatchProcessBase {
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 get帳票タイトル(),
-                new RString(reportSourceWriter.pageCount().value()),
+                //                new RString(reportSourceWriter.pageCount().value()),
+                RString.EMPTY,
                 new RString(paramter.isCsvShutsuryoku() ? "有り" : "無し"),
                 new RString(paramter.isCsvShutsuryoku() ? "D__県報告資料ファイル.CSV" : "ー"),
                 contribute());
