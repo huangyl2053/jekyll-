@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.koseishi
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
@@ -40,11 +41,11 @@ public class KoseiShiChosonSelectorHandler {
 
     /**
      * 画面初期化処理です。
-     * @param koseiShichosonList 一覧検索情報
+     * @param hokenshaList 一覧検索情報
      */
-    public void onLoad(List<KoseiShichoson> koseiShichosonList) {
+    public void onLoad(List<HokenshaSummary> hokenshaList) {
         List<dgKoseiShichosonList_Row> rowList = new ArrayList<>();
-        for (KoseiShichoson koseiShichoson : koseiShichosonList) {
+        for (HokenshaSummary koseiShichoson : hokenshaList) {
             dgKoseiShichosonList_Row row = new dgKoseiShichosonList_Row(koseiShichoson.get市町村名称(),
                     koseiShichoson.get市町村コード().getColumnValue());
             rowList.add(row);
