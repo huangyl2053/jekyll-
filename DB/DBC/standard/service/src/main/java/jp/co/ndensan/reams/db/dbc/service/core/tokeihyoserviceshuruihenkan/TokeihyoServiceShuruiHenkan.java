@@ -74,7 +74,7 @@ public class TokeihyoServiceShuruiHenkan {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokeihyoServiceShuruiHenkan}のインスタンスを返します。
      *
-     * @return{@link InstanceProvider#create}にて生成した{@link TokeihyoServiceShuruiHenkan}のインスタンス
+     * @return InstanceProvider
      */
     public static TokeihyoServiceShuruiHenkan creatInstance() {
         return InstanceProvider.create(TokeihyoServiceShuruiHenkan.class);
