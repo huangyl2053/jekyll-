@@ -115,6 +115,14 @@ public class JissiJyokyohyoHandler {
             div.getJokenPanel().getCcdGyouseiStart().setReadOnly(false);
             div.getJokenPanel().getCcdGyouseiEnd().setReadOnly(false);
             ddlChiku(div, false, false, false, false, false, false, true, true, true);
+        } else if (div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー0)) {
+            div.getJokenPanel().getCcdChikuEnd().setReadOnly(true);
+            div.getJokenPanel().getCcdChikuStart().setReadOnly(true);
+            div.getJokenPanel().getCcdGyouseiEnd().setReadOnly(true);
+            div.getJokenPanel().getCcdGyouseiStart().setReadOnly(true);
+            div.getJokenPanel().getCcdJyuusyoEnd().setReadOnly(true);
+            div.getJokenPanel().getCcdJyuusyoStart().setReadOnly(true);
+            ddlChiku(div, true, true, true, true, true, true, true, true, true);
         } else {
             ddlChiku(div, false, false, false, false, false, false, false, false, false);
         }
