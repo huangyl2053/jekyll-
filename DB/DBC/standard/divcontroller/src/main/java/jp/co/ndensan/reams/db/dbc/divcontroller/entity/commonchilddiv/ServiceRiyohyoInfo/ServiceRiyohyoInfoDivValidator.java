@@ -37,14 +37,14 @@ public class ServiceRiyohyoInfoDivValidator {
         messages.add(ValidateChain.validateStart(div)
 //                .ifNot(ServiceRiyohyoInfoDivSpec.事業者コード必須入力のチェックです)
 //                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
-                .ifNot(ServiceRiyohyoInfoDivSpec.サービスコード必須入力チェック)
-                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
+//                .ifNot(ServiceRiyohyoInfoDivSpec.サービスコード必須入力チェック)
+//                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.単位必須入力チェック)
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.単位必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.回数必須入力チェック)
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.回数必須項目)
-                .ifNot(ServiceRiyohyoInfoDivSpec.サービス単位必須入力チェック)
-                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービス単位必須項目)
+//                .ifNot(ServiceRiyohyoInfoDivSpec.サービス単位必須入力チェック)
+//                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービス単位必須項目)
                 .ifNot(ServiceRiyohyoInfoDivSpec.割引適用後率入力値が不正チェック)
                 .thenAdd(ServiceRiyohyoInfoDivValidationMessage.割引適用後率入力値が不正チェック)
                 .messages());
@@ -149,6 +149,20 @@ public class ServiceRiyohyoInfoDivValidator {
         return messages;
     }
 
+    /**
+     * サービスコード必須のチェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validateサービスコード必須() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(ServiceRiyohyoInfoDivSpec.サービスコード必須入力チェック)
+                .thenAdd(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
+                .messages());
+        return messages;
+    }
+    
     /**
      * サービス種類必須のチェックです。
      *
