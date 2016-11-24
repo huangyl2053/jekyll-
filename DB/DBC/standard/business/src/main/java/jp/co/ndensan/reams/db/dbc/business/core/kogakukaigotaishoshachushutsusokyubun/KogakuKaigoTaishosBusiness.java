@@ -23,19 +23,19 @@ public class KogakuKaigoTaishosBusiness {
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("\"郵便番号\"")),
+        郵便番号(new RString("0001"), new RString("listTaishosha_12"), new RString("\"郵便番号\"")),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString("choikiCode"), new RString("\"町域コード\"")),
+        町域コード(new RString("0002"), new RString("listTaishosha_13"), new RString("\"町域コード\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("\"行政区コード\"")),
+        行政区コード(new RString("0004"), new RString("listTaishosha_14"), new RString("\"行政区コード\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("kanaMeisho"), new RString("\"カナ名称\"")),
+        氏名５０音カナ(new RString("0010"), new RString("listTaishosha_15"), new RString("\"カナ名称\"")),
         /**
          * 市町村コード
          */
@@ -43,7 +43,7 @@ public class KogakuKaigoTaishosBusiness {
         /**
          * 証記載保険者番号
          */
-        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("証記載保険者番号\"")),
+        証記載保険者番号(new RString("0103"), new RString("listTaishosha_16"), new RString("証記載保険者番号\"")),
         /**
          * 被保険者番号
          */
@@ -51,7 +51,7 @@ public class KogakuKaigoTaishosBusiness {
         /**
          * 要介護度
          */
-        要介護度(new RString("0403"), new RString("yokaigoKubun"), new RString("要介護認定状態区分コード\"")),
+        要介護度(new RString("0403"), new RString("listTaishosha_17"), new RString("要介護認定状態区分コード\"")),
         /**
          * サービス年月
          */

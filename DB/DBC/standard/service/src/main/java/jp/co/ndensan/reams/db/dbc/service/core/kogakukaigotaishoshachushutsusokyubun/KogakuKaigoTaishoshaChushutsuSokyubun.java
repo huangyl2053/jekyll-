@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 高額介護対象者抽出（遡及分）
@@ -669,19 +670,21 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
         eucentity.set要介護度(IchijiHanteiKekkaCode99.toValue(entity.get要介護認定状態区分コード()).get名称());
         eucentity.set認定開始日(entity.get認定有効期間開始年月日());
         eucentity.set認定終了日(entity.get認定有効期間終了年月日());
+        if (new RString("t").equals(entity.get旧措置者フラグ())) {
+            eucentity.set旧措置区分(new RString("「旧措置」"));
+        }
         eucentity.set旧措置区分(entity.get旧措置者フラグ());
         eucentity.set世帯番号(entity.get世帯コード());
         eucentity.set単独合算(単);
-        eucentity.set自己負担額(entity.get利用者負担額());
-        eucentity.set支給予定金額(entity.get支給予定金額());
-        // TODO QA1975提出する
-//        if (new RString("2").equals(entity.get備考欄個人所得区分())) {
-//            eucentity.set所得区分(new RString("非課税"));
-//            eucentity.set世帯所得区分(new RString("非課税"));
-//        } else {
-//            eucentity.set所得区分(new RString("課税"));
-//            eucentity.set世帯所得区分(new RString("課税"));
-//        }
+        set備考list(eucentity, entity);
+        if (entity.get利用者負担額() != null) {
+            eucentity.set自己負担額(DecimalFormatter.
+                    toコンマ区切りRString(new Decimal(Long.valueOf(entity.get利用者負担額().toString())), 0));
+        }
+        if (entity.get支給予定金額() != null) {
+            eucentity.set支給予定金額(DecimalFormatter.
+                    toコンマ区切りRString(new Decimal(Long.valueOf(entity.get支給予定金額().toString())), 0));
+        }
         eucentity.set郵便番号(entity.get郵便番号());
         eucentity.set町域コード(entity.get町域コード());
         eucentity.set住所番地方書(entity.get住所番地方書());
@@ -723,6 +726,83 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
         }
         return 連番++;
 
+    }
+
+    private void set備考list(KougakukaigoSabishiEucEntity eucentity, TaishoushaitiranhyouhakkouShorientity entity) {
+        List<RString> 備考list = new ArrayList<>();
+        if (entity.get備考欄個人所得区分() != null) {
+            備考list = entity.get備考欄個人所得区分().split("、");
+        }
+        if (備考list.size() > 1) {
+            if (new RString("本").equals(備考list.get(0))) {
+                eucentity.set所得区分(new RString("非課税"));
+
+            } else {
+                eucentity.set所得区分(new RString("課税"));
+            }
+        }
+        if (備考list.size() > 2) {
+            if (new RString("世").equals(備考list.get(1))) {
+                eucentity.set世帯所得区分(new RString("非課税"));
+            } else {
+                eucentity.set世帯所得区分(new RString("課税"));
+            }
+        }
+        if (備考list.size() > SAN) {
+            if (new RString("生").equals(備考list.get(2))) {
+                eucentity.set生保区分(new RString("生活保護あり"));
+            } else {
+                eucentity.set生保区分(new RString("生活保護なし"));
+            }
+        }
+        if (備考list.size() > YON) {
+            if (new RString("緩１").equals(備考list.get(SAN))) {
+                eucentity.set生保区分(new RString("激変緩和１"));
+            } else if (new RString("緩２").equals(備考list.get(SAN))) {
+                eucentity.set生保区分(new RString("激変緩和２"));
+            } else if (new RString("老").equals(備考list.get(SAN))) {
+                eucentity.set生保区分(new RString("老齢福祉年金"));
+            } else if (new RString("2").equals(備考list.get(SAN))) {
+                eucentity.set生保区分(new RString("第２段階"));
+            }
+        } else {
+            eucentity.set生保区分(RString.EMPTY);
+        }
+        set備考(備考list, eucentity);
+    }
+
+    private void set備考(List<RString> 備考list, KougakukaigoSabishiEucEntity eucentity) {
+        if (備考list.size() > GO) {
+            if (new RString("決").equals(備考list.get(YON))) {
+                eucentity.setデータの状態(new RString("高額決定済"));
+            } else if (new RString("連").equals(備考list.get(YON))) {
+                eucentity.setデータの状態(new RString("国保連データ取込済"));
+            } else if (new RString("減").equals(備考list.get(YON))) {
+                eucentity.setデータの状態(new RString("高額減少"));
+            } else if (new RString("外").equals(備考list.get(YON))) {
+                eucentity.setデータの状態(new RString("高額対象外"));
+            }
+        } else {
+            eucentity.setデータの状態(RString.EMPTY);
+        }
+        if (備考list.size() > ROKU) {
+            eucentity.set算定基準額(DecimalFormatter
+                    .toコンマ区切りRString(new Decimal(Long.valueOf(備考list.get(GO).toString())), 0));
+        }
+        if (備考list.size() > NANA) {
+            eucentity.set高額支給額(DecimalFormatter
+                    .toコンマ区切りRString(new Decimal(Long.valueOf(備考list.get(GO).toString())), 0));
+        }
+        if (備考list.size() > HACHI) {
+            if (new RString("社").equals(備考list.get(NANA))) {
+                eucentity.set社福軽減(new RString("社福軽減"));
+            }
+        }
+        if (備考list.size() == KU) {
+            if (new RString("境").equals(備考list.get(HACHI))) {
+                eucentity.set社福軽減(new RString("境界層"));
+            }
+        }
     }
 
     /**
