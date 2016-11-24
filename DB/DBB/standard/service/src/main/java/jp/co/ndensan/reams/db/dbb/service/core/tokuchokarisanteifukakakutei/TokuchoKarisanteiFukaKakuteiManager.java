@@ -116,7 +116,9 @@ public class TokuchoKarisanteiFukaKakuteiManager {
             List<RString> 処理名リスト = new ArrayList<>();
             処理名リスト.add(処理名);
             List<DbT7022ShoriDateKanriEntity> 登録_処理リスト = 介護賦課Dac.select処理状況(賦課年度, 処理名リスト, SubGyomuCode.DBB介護賦課);
-            if (登録_処理リスト.get(0).getNendoNaiRenban() == null) {
+            DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity = new DbT7022ShoriDateKanriEntity();
+            if (null == 登録_処理リスト || 0 == 登録_処理リスト.size() || null == 登録_処理リスト.get(0).getNendoNaiRenban()) {
+                登録_処理リスト.add(dbT7022ShoriDateKanriEntity);
                 IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
                 登録_処理リスト.get(0).setSubGyomuCode(SubGyomuCode.DBB介護賦課);
                 登録_処理リスト.get(0).setShichosonCode(association.get地方公共団体コード());
@@ -129,7 +131,6 @@ public class TokuchoKarisanteiFukaKakuteiManager {
                 登録_処理リスト.get(0).setState(EntityDataState.Added);
                 return 介護賦課Dac.save(登録_処理リスト.get(0));
             } else {
-
                 IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
                 登録_処理リスト.get(0).setSubGyomuCode(SubGyomuCode.DBB介護賦課);
                 登録_処理リスト.get(0).setShichosonCode(association.get地方公共団体コード());
