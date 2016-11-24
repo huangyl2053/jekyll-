@@ -5,13 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010020;
 
-import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKihonJyohou;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiJyohou;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010020.DBC0010020TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010020.KogakuKaigoServiceMainDiv;
@@ -229,20 +225,10 @@ public class KogakuKaigoServiceMain {
         return ResponseData.of(div).respond();
     }
 
-    private List<KyufujissekiKihon> getCsData_A() {
-        List<KyufuJissekiKihonShukeiRelate> entityList
-                = ViewStateHolder.get(ViewStateKeys.給付実績基本情報, KyufujissekiKihonJyohou.class).getCsData_A();
-        List<KyufujissekiKihon> 給付実績基本情報List = new ArrayList<>();
-        for (KyufuJissekiKihonShukeiRelate entity : entityList) {
-            給付実績基本情報List.add(entity.get給付実績基本データ());
-        }
-        return 給付実績基本情報List;
-    }
-
     private KyufujissekiKogakuKaigoServicehi get給付実績高額介護サービス費データ(FlexibleYearMonth サービス提供年月, KogakuKaigoServiceMainDiv div) {
         List<KyufujissekiKogakuKaigoServicehi> csData_I
                 = ViewStateHolder.get(ViewStateKeys.給付実績高額明細管理情報, KyufujissekiKogakuKaigoServicehiJyohou.class).getCsData_I();
-        div.setHiddenTotalIndex(new RString(csData_I.size()));
+        div.setHiddenTotalIndex(new RString(csData_I.size() - 1));
         int index = 0;
         for (KyufujissekiKogakuKaigoServicehi csData : csData_I) {
             if (サービス提供年月.equals(csData.getサービス提供年月())) {

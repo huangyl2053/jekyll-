@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010011
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeaderAll;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
@@ -47,6 +48,7 @@ public class KyufuJissekiKihonJouhouMain {
             setHidden(サービス提供年月, csData_A, div);
             set事業者_月制御(csData_A, div);
             set検索用パラメータ(該当月給付実績基本集計データ.get(0).get給付実績基本データ());
+            set給付実績ボタン制御(該当月給付実績基本集計データ.get(0).get識別番号管理());
         } else {
             div.getBtnMaeJigyosha().setDisabled(true);
             div.getBtnAtoJigyosha().setDisabled(true);
@@ -55,6 +57,10 @@ public class KyufuJissekiKihonJouhouMain {
         }
         set給付実績基本情報データ(div);
         return ResponseData.of(div).respond();
+    }
+
+    private void set給付実績ボタン制御(ShikibetsuNoKanri 識別番号管理データ) {
+        ViewStateHolder.put(ViewStateKeys.識別番号管理, 識別番号管理データ);
     }
 
     private void set給付実績基本情報データ(KyufuJissekiKihonJouhouMainDiv div) {
