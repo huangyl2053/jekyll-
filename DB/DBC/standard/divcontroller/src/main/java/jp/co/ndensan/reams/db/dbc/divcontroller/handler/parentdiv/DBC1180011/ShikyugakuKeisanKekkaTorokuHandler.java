@@ -251,7 +251,6 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         div.getDdlHokenSeido().setRequired(!flg);
         div.getTxtShoKisaiHokenshaNo().setRequired(!flg);
         div.getTxtHokenshaMei().setRequired(!flg);
-        div.getTxtKokuhoHihokenshaShoKigo().setRequired(!flg);
         div.getTxtTaishoshaShimei().setRequired(!flg);
         div.getTxtHiHokenshaShoNo().setRequired(!flg);
         div.getTxtTaishoKeisanKikan().setToRequired(!flg);
@@ -880,9 +879,31 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         }
         Decimal 以上負担額 = div.getTxtOver70Futangaku().getValue() == null ? Decimal.ZERO : div.getTxtOver70Futangaku().getValue();
         Decimal 負担額 = div.getTxtFutangaku().getValue() == null ? Decimal.ZERO : div.getTxtFutangaku().getValue();
-        div.getTxtOver70AmbunRitsu().setValue(Decimal.ZERO.equals(以上負担額) || Decimal.ZERO.equals(以上負担額合計)
-                ? 横線 : new RString(以上負担額.toString()).concat(スラッシュ).concat(new RString(負担額合計.toString())));
-        div.getTxtAmbunRitsu().setValue(Decimal.ZERO.equals(負担額) || Decimal.ZERO.equals(負担額合計)
-                ? 横線 : new RString(負担額.toString()).concat(スラッシュ).concat(new RString(負担額合計.toString())));
+        set以上負担額分率(以上負担額, 以上負担額合計);
+        set負担額分率(負担額, 負担額合計);
+    }
+
+    private void set負担額分率(Decimal 負担額, Decimal 負担額合計) {
+        if (!Decimal.ZERO.equals(負担額) && Decimal.ZERO.equals(負担額合計)) {
+            div.getTxtAmbunRitsu().setValue(new RString(負担額.toString()).concat(スラッシュ).concat(new RString(負担額.toString())));
+        } else if (Decimal.ZERO.equals(負担額) && !Decimal.ZERO.equals(負担額合計)) {
+            div.getTxtAmbunRitsu().setValue(横線);
+        } else if (Decimal.ZERO.equals(負担額) && Decimal.ZERO.equals(負担額合計)) {
+            div.getTxtAmbunRitsu().setValue(横線);
+        } else {
+            div.getTxtAmbunRitsu().setValue(new RString(負担額.toString()).concat(スラッシュ).concat(new RString(負担額合計.toString())));
+        }
+    }
+
+    private void set以上負担額分率(Decimal 以上負担額, Decimal 以上負担額合計) {
+        if (!Decimal.ZERO.equals(以上負担額) && Decimal.ZERO.equals(以上負担額合計)) {
+            div.getTxtOver70AmbunRitsu().setValue(new RString(以上負担額.toString()).concat(スラッシュ).concat(new RString(以上負担額.toString())));
+        } else if (Decimal.ZERO.equals(以上負担額) && !Decimal.ZERO.equals(以上負担額合計)) {
+            div.getTxtOver70AmbunRitsu().setValue(横線);
+        } else if (Decimal.ZERO.equals(以上負担額) && Decimal.ZERO.equals(以上負担額合計)) {
+            div.getTxtOver70AmbunRitsu().setValue(横線);
+        } else {
+            div.getTxtOver70AmbunRitsu().setValue(new RString(以上負担額.toString()).concat(スラッシュ).concat(new RString(以上負担額合計.toString())));
+        }
     }
 }
