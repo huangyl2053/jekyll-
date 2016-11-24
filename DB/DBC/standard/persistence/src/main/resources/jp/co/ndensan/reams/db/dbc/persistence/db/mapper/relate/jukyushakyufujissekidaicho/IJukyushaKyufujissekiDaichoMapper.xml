@@ -788,11 +788,11 @@
                 AND
                     DbT3017."rojinhokenJukyushaNo" <![CDATA[<=]]> #{老人保健受給者番号有_終了}
               </if>
-              <if test="!公費負担者番号flag">
+              <if test="公費負担者番号flag">
                   AND
                   (DbT3017."kohi1FutanshaNo" = #{公費負担者番号} OR DbT3017."kohi2FutanshaNo" = #{公費負担者番号} OR DbT3017."kohi3FutanshaNo" = #{公費負担者番号})
               </if>
-              <if test="!公費受給者番号flag">
+              <if test="公費受給者番号flag">
                   AND
                   (DbT3017."kohi1JukyushaNo" = #{公費受給者番号} OR DbT3017."kohi2JukyushaNo" = #{公費受給者番号} OR DbT3017."kohi3JukyushaNo" = #{公費受給者番号})
               </if>
@@ -802,11 +802,11 @@
                   AND 
                   DbT3017."jigyoshoNo" <![CDATA[<=]]> #{事業者番号_終了}
               </if>
-              <if test="!計画作成事業者番号flag">
+              <if test="計画作成事業者番号flag">
                   AND
                   DbT3017."kyotakuKaigoShienJigyoshoNo" = #{計画作成事業者番号}
               </if>
-              <if test="!給付率flag">
+              <if test="給付率flag">
                   <if test="給付率区分flag1">
                       AND
                       DbT3017."hokenKyufuritsu" = #{給付率}
@@ -2061,7 +2061,7 @@
                   OR
               </if>
               1 = 1) 
-        <if test="!公費負担者番号flag">
+        <if test="公費負担者番号flag">
             AND
             (DbT3028."kohi1FutanNo" = #{公費負担者番号} OR DbT3028."kohi2FutanNo" = #{公費負担者番号} OR DbT3028."kohi3FutanNo" = #{公費負担者番号})
         </if>
