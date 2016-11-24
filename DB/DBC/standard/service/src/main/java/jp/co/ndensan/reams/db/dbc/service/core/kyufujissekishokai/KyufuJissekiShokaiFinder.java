@@ -361,13 +361,8 @@ public class KyufuJissekiShokaiFinder {
         List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費データリスト;
         List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費データリスト;
         List<KyufujissekiShokujiHiyo> 給付実績食事費用データリスト;
-        List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費データリスト;
         List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売費データリスト;
-        List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費データリスト;
         List<KyufujissekiKogakuKaigoServicehi> 給付実績高額介護サービス費データリスト;
-        List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> 給付実績特定入所者介護サービス費用データリスト;
-        List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績社会福祉法人軽減額データリスト;
-        List<KyufuJissekiCareManagementHiBusiness> 給付実績ケアマネジメント費データリスト;
         List<KyufujissekiMeisaiJushochiTokureiBusiness> 給付実績明細住所地特例データリスト;
 
         List<KyufuJissekiKihonShukeiRelateEntity> kihonShukeiList = mapper.get給付実績基本集計データ(KyufuJissekiKensakuDataMapperParameter.
@@ -404,26 +399,11 @@ public class KyufuJissekiShokaiFinder {
         給付実績食事費用データリスト = get給付実績食事費用データ(
                 NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
                 サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, isKey0検索対象);
-        給付実績居宅サービス計画費データリスト = get給付実績居宅サービス計画費データ(
-                NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
-                サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象);
         給付実績福祉用具販売費データリスト = get給付実績福祉用具販売費データ(
-                NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
-                サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象);
-        給付実績住宅改修費データリスト = get給付実績住宅改修費データ(
                 NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
                 サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象);
         給付実績高額介護サービス費データリスト
                 = get給付実績高額介護サービス費データ(被保険者番号, サービス提供年月_開始, サービス提供年月_終了, isKey0検索対象);
-        給付実績特定入所者介護サービス費用データリスト = get給付実績特定入所者介護サービス費用データ(
-                NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
-                サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象);
-        給付実績社会福祉法人軽減額データリスト = get給付実績社会福祉法人軽減額データ(
-                NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
-                サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象);
-        給付実績ケアマネジメント費データリスト = get給付実績ケアマネジメント費データ(
-                NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
-                サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象);
         給付実績明細住所地特例データリスト = get給付実績明細住所地特例データ(
                 NyuryokuShikibetsuNo.EMPTY, 被保険者番号, サービス提供年月_開始,
                 サービス提供年月_終了, JigyoshaNo.EMPTY, RString.EMPTY, FlexibleYearMonth.EMPTY, isKey0検索対象);
@@ -438,14 +418,9 @@ public class KyufuJissekiShokaiFinder {
         給付実績情報照会用データ.setCsData_C(給付実績緊急時施設療養データリスト);
         給付実績情報照会用データ.setCsData_D(給付実績特定診療費データリスト);
         給付実績情報照会用データ.setCsData_E(給付実績食事費用データリスト);
-        給付実績情報照会用データ.setCsData_F(給付実績居宅サービス計画費データリスト);
         給付実績情報照会用データ.setCsData_G(給付実績福祉用具販売費データリスト);
-        給付実績情報照会用データ.setCsData_H(給付実績住宅改修費データリスト);
         給付実績情報照会用データ.setCsData_I(給付実績高額介護サービス費データリスト);
         給付実績情報照会用データ.setCsData_J(給付実績特定診療費_特別療養費データリスト);
-        給付実績情報照会用データ.setCsData_K(給付実績特定入所者介護サービス費用データリスト);
-        給付実績情報照会用データ.setCsData_L(給付実績社会福祉法人軽減額データリスト);
-        給付実績情報照会用データ.setCsData_M(給付実績ケアマネジメント費データリスト);
         給付実績情報照会用データ.setCsData_N(給付実績明細住所地特例データリスト);
         給付実績情報照会用データ.setCsData_P(給付実績所定疾患施設療養費等データリスト);
         return 給付実績情報照会用データ;
@@ -692,29 +667,23 @@ public class KyufuJissekiShokaiFinder {
      *
      * @param 入力識別番号 入力識別番号
      * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月_開始 サービス提供年月_開始
-     * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
-     * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
-     * @param isKey0検索対象 isKey0検索対象
+     * @param 通し番号 通し番号
      * @return 給付実績居宅サービス計画費データ
      */
     public List<KyufujissekiKyotakuServiceBusiness> get給付実績居宅サービス計画費データ(NyuryokuShikibetsuNo 入力識別番号,
-            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月_開始,
-            FlexibleYearMonth サービス提供年月_終了, JigyoshaNo 事業所番号,
-            RString 整理番号, FlexibleYearMonth サービス提供年月, boolean isKey0検索対象) {
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
-        requireNonNull(サービス提供年月_開始, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_開始文字列.toString()));
-        requireNonNull(サービス提供年月_終了, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_終了文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号文字列.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
         List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費データリスト = new ArrayList<>();
         IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
         List<KyufujissekiKyotakuServiceRelateEntity> entityList = mapper.get給付実績居宅サービス計画費データ(
-                KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(入力識別番号, 被保険者番号,
-                        サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号, サービス提供年月));
+                KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
+                        入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
         for (KyufujissekiKyotakuServiceRelateEntity entity : entityList) {
             KyufujissekiKyotakuServiceBusiness 給付実績居宅サービス計画費データ = new KyufujissekiKyotakuServiceBusiness();
             if (entity.getServiceShuruiRyakusho() != null) {
@@ -776,28 +745,22 @@ public class KyufuJissekiShokaiFinder {
      *
      * @param 入力識別番号 入力識別番号
      * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月_開始 サービス提供年月_開始
-     * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
-     * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
-     * @param isKey0検索対象 isKey0検索対象
+     * @param 通し番号 通し番号
      * @return 給付実績住宅改修費データ
      */
     public List<KyufujissekiJutakuKaishuhiBusiness> get給付実績住宅改修費データ(NyuryokuShikibetsuNo 入力識別番号,
-            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了,
-            JigyoshaNo 事業所番号, RString 整理番号, FlexibleYearMonth サービス提供年月, boolean isKey0検索対象) {
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
-        requireNonNull(サービス提供年月_開始, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_開始文字列.toString()));
-        requireNonNull(サービス提供年月_終了, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_終了文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号文字列.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
         List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費データリスト = new ArrayList<>();
         IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
         List<KyufujissekiJutakuKaishuhiRelateEntity> entityList = mapper.get給付実績住宅改修費データ(KyufuJissekiKensakuDataMapperParameter.
-                createParameter_給付実績検索データ(入力識別番号, 被保険者番号, サービス提供年月_開始,
-                        サービス提供年月_終了, 事業所番号, 整理番号, サービス提供年月));
+                createParameter_給付実績検索データ(入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
         for (KyufujissekiJutakuKaishuhiRelateEntity entity : entityList) {
             KyufujissekiJutakuKaishuhiBusiness 給付実績住宅改修費データ = new KyufujissekiJutakuKaishuhiBusiness();
             if (entity.getServiceShuruiRyakusho() != null) {
@@ -843,29 +806,23 @@ public class KyufuJissekiShokaiFinder {
      *
      * @param 入力識別番号 入力識別番号
      * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月_開始 サービス提供年月_開始
-     * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
-     * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
-     * @param isKey0検索対象 isKey0検索対象
+     * @param 通し番号 通し番号
      * @return 給付実績特定入所者介護サービス費用データ
      */
-    public List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> get給付実績特定入所者介護サービス費用データ(
-            NyuryokuShikibetsuNo 入力識別番号, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月_開始,
-            FlexibleYearMonth サービス提供年月_終了, JigyoshaNo 事業所番号,
-            RString 整理番号, FlexibleYearMonth サービス提供年月, boolean isKey0検索対象) {
+    public List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> get給付実績特定入所者介護サービス費用データ(NyuryokuShikibetsuNo 入力識別番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
-        requireNonNull(サービス提供年月_開始, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_開始文字列.toString()));
-        requireNonNull(サービス提供年月_終了, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_終了文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号文字列.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
         List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> 給付実績特定入所者介護サービス費用データリスト = new ArrayList<>();
         IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
         List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoRelateEntity> entityList = mapper.get給付実績特定入所者介護サービス費用データ(
                 KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
-                        入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号, サービス提供年月));
+                        入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
         for (KyufujissekiTokuteiNyushosyaKaigoServiceHiyoRelateEntity entity : entityList) {
             KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness 給付実績特定入所者介護サービス費用データ
                     = new KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness();
@@ -886,29 +843,23 @@ public class KyufuJissekiShokaiFinder {
      *
      * @param 入力識別番号 入力識別番号
      * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月_開始 サービス提供年月_開始
-     * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
-     * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
-     * @param isKey0検索対象 isKey0検索対象
+     * @param 通し番号 通し番号
      * @return 給付実績社会福祉法人軽減額データ
      */
-    public List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> get給付実績社会福祉法人軽減額データ(
-            NyuryokuShikibetsuNo 入力識別番号, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月_開始,
-            FlexibleYearMonth サービス提供年月_終了, JigyoshaNo 事業所番号,
-            RString 整理番号, FlexibleYearMonth サービス提供年月, boolean isKey0検索対象) {
+    public List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> get給付実績社会福祉法人軽減額データ(NyuryokuShikibetsuNo 入力識別番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
-        requireNonNull(サービス提供年月_開始, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_開始文字列.toString()));
-        requireNonNull(サービス提供年月_終了, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_終了文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号文字列.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
         List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績社会福祉法人軽減額データリスト = new ArrayList<>();
         IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
         List<KyufuJissekiShakaiFukushiHojinKeigengakuRelateEntity> entityList = mapper.get給付実績社会福祉法人軽減額データ(
                 KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
-                        入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了, 事業所番号, 整理番号, サービス提供年月));
+                        入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
         for (KyufuJissekiShakaiFukushiHojinKeigengakuRelateEntity entity : entityList) {
             KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績集計データ = new KyufuJissekiShakaiFukushiHojinKeigengakuBusiness();
             if (entity.getServiceShuruiRyakusho() != null) {
@@ -928,30 +879,23 @@ public class KyufuJissekiShokaiFinder {
      *
      * @param 入力識別番号 入力識別番号
      * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月_開始 サービス提供年月_開始
-     * @param サービス提供年月_終了 サービス提供年月_終了
      * @param 事業所番号 事業所番号
-     * @param 整理番号 整理番号
      * @param サービス提供年月 サービス提供年月
-     * @param isKey0検索対象 isKey0検索対象
+     * @param 通し番号 通し番号
      * @return 給付実績ケアマネジメント費データ
      */
     public List<KyufuJissekiCareManagementHiBusiness> get給付実績ケアマネジメント費データ(NyuryokuShikibetsuNo 入力識別番号,
-            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月_開始,
-            FlexibleYearMonth サービス提供年月_終了, JigyoshaNo 事業所番号,
-            RString 整理番号, FlexibleYearMonth サービス提供年月, boolean isKey0検索対象) {
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, JigyoshaNo 事業所番号, RString 通し番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号文字列.toString()));
-        requireNonNull(サービス提供年月_開始, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_開始文字列.toString()));
-        requireNonNull(サービス提供年月_終了, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_終了文字列.toString()));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_文字列.toString()));
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業所番号文字列.toString()));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(整理番号文字列.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月文字列.toString()));
+        requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通し番号文字列.toString()));
+        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(識別番号文字列.toString()));
         List<KyufuJissekiCareManagementHiBusiness> 給付実績ケアマネジメント費データリスト = new ArrayList<>();
         IKyufuJissekiShokaiMapper mapper = mapperProvider.create(IKyufuJissekiShokaiMapper.class);
         List<KyufuJissekiCareManagementHiRelateEntity> entityList = mapper.get給付実績ケアマネジメント費データ(
                 KyufuJissekiKensakuDataMapperParameter.createParameter_給付実績検索データ(
-                        入力識別番号, 被保険者番号, サービス提供年月_開始, サービス提供年月_終了,
-                        事業所番号, 整理番号, サービス提供年月));
+                        入力識別番号, 被保険者番号, サービス提供年月, 事業所番号, 通し番号));
         for (KyufuJissekiCareManagementHiRelateEntity entity : entityList) {
             KyufuJissekiCareManagementHiBusiness 給付実績ケアマネジメント費データ = new KyufuJissekiCareManagementHiBusiness();
             if (entity.getServiceShuruiRyakusho() != null) {
