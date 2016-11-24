@@ -186,9 +186,7 @@ public class KaigoHihokenshaInfoPanel {
                 .equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).respond();
         }
-        if (!(住民種別.isNull() || 住民種別.isEmpty()
-                || 住民種別.equals(外国人) || 住民種別.equals(住登外日本人)
-                || 住民種別.equals(住登外外国人)) && !ResponseHolder.isReRequest()) {
+        if (!(is住民種別不合法(住民種別)) && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(QuestionMessage.連帯納付義務者の住民種別.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No
@@ -233,6 +231,12 @@ public class KaigoHihokenshaInfoPanel {
         handler.setDgRentaiNofuGimushaIchiran(rentaiList, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.連帯納付義務者情報, holder);
         return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者情報一覧);
+    }
+
+    private boolean is住民種別不合法(RString 住民種別) {
+        return 住民種別.isNull() || 住民種別.isEmpty()
+                || 住民種別.equals(外国人) || 住民種別.equals(住登外日本人)
+                || 住民種別.equals(住登外外国人);
     }
 
     private RentaiGimusha judgeResult削除State(RentaiGimusha 初期result,
