@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Sep 08 14:05:35 JST 2016 
+ * Thu Nov 24 16:16:26 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgShinseiJoho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
 
     private RString hokensha;
     private RString hihokenshaNo;
