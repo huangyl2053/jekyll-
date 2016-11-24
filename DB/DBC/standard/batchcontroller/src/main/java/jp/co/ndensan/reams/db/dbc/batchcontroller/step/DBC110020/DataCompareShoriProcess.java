@@ -351,9 +351,10 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             if (軽減率List.size() == COUNT_2) {
                 Decimal 軽減率Decim = new Decimal(軽減率List.get(COUNT_0).toString())
                         .divide(new Decimal(軽減率List.get(COUNT_1).toString()));
-                軽減率 = new RString(軽減率Decim.toString()).substring(COUNT_0, COUNT_4);
-            } else {
-                軽減率 = RST_0;
+                軽減率 = new RString(軽減率Decim.toString());
+            }
+            if (軽減率.length() > COUNT_4) {
+                軽減率 = 軽減率.substring(COUNT_0, COUNT_4);
             }
         }
         異動一時2entity.set軽減率(軽減率);
@@ -1272,7 +1273,8 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         if (!checkRString(異動一時2entity.get居宅サービス計画作成区分コード(), 受給者異動送付.getKyotakuServiceSakuseiKubunCode())
                 || !checkRString(異動一時2entity.get居宅介護支援事業所番号(), 受給者異動送付.getKyotakuKaigoShienJigyoshoNo())
                 || !checkRString(異動一時2entity.get居宅サービス計画適用開始年月日(), 受給者異動送付.getKyotakuServiceTekiyoKaishiYMD())
-                || !checkRString(異動一時2entity.get居宅サービス計画適用終了年月日(), 受給者異動送付.getKyotakuServiceTekiyoShuryoYMD())) {
+                || !checkRString(getYMbyRString(異動一時2entity.get居宅サービス計画適用終了年月日()),
+                        getYMbyRString(受給者異動送付.getKyotakuServiceTekiyoShuryoYMD()))) {
             return false;
         }
         return true;
