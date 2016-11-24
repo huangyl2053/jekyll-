@@ -276,7 +276,7 @@
      "hihokennshaKubunCode"='1'
      AND "ichigoShikakuShutokuYMD"<![CDATA[<=]]>#{処理年度_0401}
      AND ("shikakuSoshitsuYMD"='' OR "shikakuSoshitsuYMD" IS NULL OR #{処理年度_0401}<![CDATA[<=]]>"shikakuSoshitsuYMD")
-     AND SUBSTRING("ichigoShikakuShutokuYMD", 0, 7)<![CDATA[<>]]>SUBSTRING(COALESCE("shikakuSoshitsuYMD",'00000000'), 0, 7)
+     AND SUBSTRING("ichigoShikakuShutokuYMD", 1, 6)<![CDATA[<>]]>SUBSTRING(COALESCE("shikakuSoshitsuYMD",'00000000'), 1, 6)
      AND "logicalDeletedFlag" IS FALSE
      UNION ALL
      SELECT
@@ -563,11 +563,7 @@
         master."hihokennshaKubunCode",
         master."juminShubetsuCode",
         master."torokuTodokedeYMD",
-        master."seibetsuCode",
-        CASE WHEN master."kouhoshakubun"='1' THEN master."tenyuzenzenkokuJushoCode"
-        WHEN master."kouhoshakubun"='2' THEN master."tenshutsuKakuteiZenkokuJushoCode"
-        ELSE ''
-        END AS "shichosonCode"
+        master."seibetsuCode"
         FROM master
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
@@ -592,7 +588,6 @@
         <result property="genLasdecCode" column="genLasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="soufusenzenkokuJushoCode" column="soufusenzenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
         <result property="zenkokuJushoCode" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
         <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
