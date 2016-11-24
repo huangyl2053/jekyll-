@@ -108,14 +108,24 @@ public class JissiJyokyohyoHandler {
             div.getJokenPanel().getCcdJyuusyoEnd().setReadOnly(false);
             ddlChiku(div, true, true, true, false, false, false, false, false, false);
         } else if (div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー2)) {
+            div.getJokenPanel().getCcdJyuusyoStart().setDisplayNone(true);
+            div.getJokenPanel().getCcdJyuusyoEnd().setDisplayNone(true);
             div.getJokenPanel().getCcdChikuStart().setReadOnly(false);
             div.getJokenPanel().getCcdChikuEnd().setReadOnly(false);
             ddlChiku(div, false, false, false, true, true, true, false, false, false);
         } else if (div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー3)) {
+            div.getJokenPanel().getCcdJyuusyoStart().setDisplayNone(true);
+            div.getJokenPanel().getCcdJyuusyoEnd().setDisplayNone(true);
+            div.getJokenPanel().getCcdChikuStart().setDisplayNone(true);
+            div.getJokenPanel().getCcdChikuEnd().setDisplayNone(true);
             div.getJokenPanel().getCcdGyouseiStart().setReadOnly(false);
             div.getJokenPanel().getCcdGyouseiEnd().setReadOnly(false);
             ddlChiku(div, false, false, false, false, false, false, true, true, true);
         } else if (div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー0)) {
+            div.getJokenPanel().getCcdJyuusyoStart().setDisplayNone(false);
+            div.getJokenPanel().getCcdJyuusyoEnd().setDisplayNone(false);
+            div.getJokenPanel().getCcdChikuStart().setDisplayNone(false);
+            div.getJokenPanel().getCcdChikuEnd().setDisplayNone(false);
             div.getJokenPanel().getCcdChikuEnd().setReadOnly(true);
             div.getJokenPanel().getCcdChikuStart().setReadOnly(true);
             div.getJokenPanel().getCcdGyouseiEnd().setReadOnly(true);
