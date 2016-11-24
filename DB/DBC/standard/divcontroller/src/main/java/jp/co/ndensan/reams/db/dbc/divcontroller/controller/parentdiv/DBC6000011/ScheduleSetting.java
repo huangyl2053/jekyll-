@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBC-2930-010 liuxiaoyu
  */
 public class ScheduleSetting {
-
+    
     private final HihokenshaShikakuTeisei hihokenshaShikakuTeisei = InstanceProvider.create(HihokenshaShikakuTeisei.class);
     private static final int INDEX_ZERO = 0;
     private static final int いち月 = 1;
@@ -122,7 +122,7 @@ public class ScheduleSetting {
                 div.getDgDataSofu().setDataSource(sList);
             } else if (処理年月.equals(最終処理年月.plusMonth(いち月))) {
                 送付Flag = true;
-
+                
             } else {
                 throw new ApplicationException(DbcErrorMessages.国保連連携スケジュール_新規設定不可.getMessage().evaluate());
             }
@@ -141,19 +141,14 @@ public class ScheduleSetting {
                 div.getDgDataTorikomi().setDataSource(tList);
             } else if (処理年月.equals(最終処理年月.plusMonth(いち月))) {
                 取込Flag = true;
-
+                
             } else {
                 throw new ApplicationException(DbcErrorMessages.国保連連携スケジュール_新規設定不可.getMessage().evaluate());
             }
         }
-
+        
         if (送付Flag || 取込Flag) {
-            DbcQuestionMessages questionMessages;
-            if (is処理前あり(送付List) || is処理前あり(取込List)) {
-                questionMessages = DbcQuestionMessages.国保連連携スケジュール_新規設定確認２;
-            } else {
-                questionMessages = DbcQuestionMessages.国保連連携スケジュール_新規設定確認;
-            }
+            DbcQuestionMessages questionMessages = getDbcQuestionMessages(送付List, 取込List);
 
             // CHECKSTYLE IGNORE NestedIfDepth FOR NEXT 1 LINES
             if (!ResponseHolder.isReRequest()) {
@@ -165,23 +160,36 @@ public class ScheduleSetting {
             }
             // CHECKSTYLE IGNORE NestedIfDepth FOR NEXT 1 LINES
             if (new RString(questionMessages.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-                if (送付Flag) {
-                    送付新規Flag = true;
-                    List<dgDataSofu_Row> sList = getHandler(div).スケジュール履歴情報処理_送付(new ArrayList<KokuhorenInterfaceKanri>());
-                    sList = getHandler(div).set送付処理状況(sList, 送付List);
-                    div.getDgDataSofu().setDataSource(sList);
-                }
-                if (取込Flag) {
-                    取込新規Flag = true;
-                    List<dgDataTorikomi_Row> tList = getHandler(div).スケジュール履歴情報処理_取込(new ArrayList<KokuhorenInterfaceKanri>());
-                    tList = getHandler(div).set取込処理状況(tList, 取込List);
-                    div.getDgDataTorikomi().setDataSource(tList);
-                }
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && 送付Flag) {
+                
+                送付新規Flag = true;
+                List<dgDataSofu_Row> sList = getHandler(div).スケジュール履歴情報処理_送付(new ArrayList<KokuhorenInterfaceKanri>());
+                sList = getHandler(div).set送付処理状況(sList, 送付List);
+                div.getDgDataSofu().setDataSource(sList);
+            }
+            if (new RString(questionMessages.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && 取込Flag) {
+                取込新規Flag = true;
+                List<dgDataTorikomi_Row> tList = getHandler(div).スケジュール履歴情報処理_取込(new ArrayList<KokuhorenInterfaceKanri>());
+                tList = getHandler(div).set取込処理状況(tList, 取込List);
+                div.getDgDataTorikomi().setDataSource(tList);
             }
         }
-
+        setスケジュール履歴情報(送付新規Flag, 送付List, 取込新規Flag, 取込List);
+        return ResponseData.of(div).respond();
+    }
+    
+    private DbcQuestionMessages getDbcQuestionMessages(List<KokuhorenInterfaceKanri> 送付List, List<KokuhorenInterfaceKanri> 取込List) {
+        DbcQuestionMessages questionMessages;
+        if (is処理前あり(送付List) || is処理前あり(取込List)) {
+            questionMessages = DbcQuestionMessages.国保連連携スケジュール_新規設定確認２;
+        } else {
+            questionMessages = DbcQuestionMessages.国保連連携スケジュール_新規設定確認;
+        }
+        return questionMessages;
+    }
+    
+    private void setスケジュール履歴情報(boolean 送付新規Flag, List<KokuhorenInterfaceKanri> 送付List, boolean 取込新規Flag, List<KokuhorenInterfaceKanri> 取込List) {
         SukejuruRirekiJohoListEntity entity = new SukejuruRirekiJohoListEntity();
         if (送付新規Flag) {
             entity.setスケジュール履歴情報_送付List(new ArrayList<KokuhorenInterfaceKanri>());
@@ -194,9 +202,8 @@ public class ScheduleSetting {
             entity.setスケジュール履歴情報_取込List(取込List);
         }
         ViewStateHolder.put(ViewStateKeys.スケジュール履歴情報Entity, entity);
-        return ResponseData.of(div).respond();
     }
-
+    
     private boolean is処理前あり(List<KokuhorenInterfaceKanri> list) {
         for (KokuhorenInterfaceKanri kanri : list) {
             if (ShoriJotaiKubun.処理前.getコード().equals(kanri.get処理状態区分())) {
@@ -247,7 +254,7 @@ public class ScheduleSetting {
         }
         return ResponseData.of(div).respond();
     }
-
+    
     private ScheduleSettingHandler getHandler(ScheduleSettingDiv div) {
         return ScheduleSettingHandler.of(div);
     }

@@ -78,15 +78,10 @@ public class UnyoKanri {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
 
             if (CODE_処理済.equals(div.getHdnNenjiFutanWariaiShoriJotai())
-                    && CODE_再処理前.equals(div.getDdlNenjiFutanWariaiShoriJotai().getSelectedKey())) {
-                if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-                    return ResponseData.of(div).addMessage(DbcQuestionMessages.年次負担割合再処理.getMessage().
-                            replace(handler.getパターン102(div.getTxtNenjiFutanWariaiShoriZumiNendo().getValue().getYear()).toString())).respond();
-                }
-                if (new RString(DbcQuestionMessages.年次負担割合再処理.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                    return ResponseData.of(div).respond();
-                }
+                    && CODE_再処理前.equals(div.getDdlNenjiFutanWariaiShoriJotai().getSelectedKey())
+                    && (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
+                return ResponseData.of(div).addMessage(DbcQuestionMessages.年次負担割合再処理.getMessage().
+                        replace(handler.getパターン102(div.getTxtNenjiFutanWariaiShoriZumiNendo().getValue().getYear()).toString())).respond();
             }
             RString メニューID = ResponseHolder.getMenuID();
             RString 変更理由 = メニューID.concat(を使用して更新);
