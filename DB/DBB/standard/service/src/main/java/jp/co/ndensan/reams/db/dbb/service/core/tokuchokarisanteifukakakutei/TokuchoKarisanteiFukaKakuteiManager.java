@@ -38,6 +38,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     private final DbT7022ShoriDateKanriDac 介護賦課Dac;
     private static final RString 最大年度内連番 = new RString("0001");
     private static final RString 処理枝番 = new RString("0001");
+    private static final RString セル = new RString("0");
     private final MapperProvider mapperProvider;
     private static final int 格式 = 4;
     private final UrT0705ChoteiKyotsuDac urT0705;
@@ -117,20 +118,9 @@ public class TokuchoKarisanteiFukaKakuteiManager {
             処理名リスト.add(処理名);
             List<DbT7022ShoriDateKanriEntity> 登録_処理リスト = 介護賦課Dac.select処理状況(賦課年度, 処理名リスト, SubGyomuCode.DBB介護賦課);
             DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity = new DbT7022ShoriDateKanriEntity();
+            dbT7022ShoriDateKanriEntity.setNendoNaiRenban(セル);
             if (null == 登録_処理リスト || 0 == 登録_処理リスト.size() || null == 登録_処理リスト.get(0).getNendoNaiRenban()) {
                 登録_処理リスト.add(dbT7022ShoriDateKanriEntity);
-                IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
-                登録_処理リスト.get(0).setSubGyomuCode(SubGyomuCode.DBB介護賦課);
-                登録_処理リスト.get(0).setShichosonCode(association.get地方公共団体コード());
-                登録_処理リスト.get(0).setShoriName(処理名);
-                登録_処理リスト.get(0).setShoriEdaban(処理枝番);
-                登録_処理リスト.get(0).setNendo(賦課年度);
-                登録_処理リスト.get(0).setNendoNaiRenban(最大年度内連番);
-                登録_処理リスト.get(0).setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
-                登録_処理リスト.get(0).setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
-                登録_処理リスト.get(0).setState(EntityDataState.Added);
-                return 介護賦課Dac.save(登録_処理リスト.get(0));
-            } else {
                 IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
                 登録_処理リスト.get(0).setSubGyomuCode(SubGyomuCode.DBB介護賦課);
                 登録_処理リスト.get(0).setShichosonCode(association.get地方公共団体コード());
@@ -142,8 +132,9 @@ public class TokuchoKarisanteiFukaKakuteiManager {
                 登録_処理リスト.get(0).setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
                 登録_処理リスト.get(0).setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
                 登録_処理リスト.get(0).setState(EntityDataState.Added);
-                return 介護賦課Dac.save(登録_処理リスト.get(0));
             }
+            return 介護賦課Dac.save(登録_処理リスト.get(0));
+            
         }
         return 0;
     }
