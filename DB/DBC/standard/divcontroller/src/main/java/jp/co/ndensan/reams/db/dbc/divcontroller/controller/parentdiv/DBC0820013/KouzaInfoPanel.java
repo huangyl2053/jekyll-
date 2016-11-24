@@ -48,7 +48,6 @@ public class KouzaInfoPanel {
     private static final RString 登録 = new RString("登録");
     private static final RString 新規 = new RString("新規");
     private static final RString 参照 = new RString("参照");
-    private static final RString 更新 = new RString("更新");
     private static final RString 照会モード = new RString("照会");
     private static final RString NUM_1 = new RString("1");
     private static final RString NUM_2 = new RString("2");
@@ -143,18 +142,18 @@ public class KouzaInfoPanel {
             ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_口座, NUM_1);
         }
         ShokanShinsei 償還払支給申請データ = getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
-        DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-        if (DB == null) {
-            DB = new DbJohoViewState();
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        if (償還払ViewStateDB == null) {
+            償還払ViewStateDB = new DbJohoViewState();
         }
-        ShokanShinsei shokanShinsei = DB.get償還払支給申請();
+        ShokanShinsei shokanShinsei = 償還払ViewStateDB.get償還払支給申請();
         if (shokanShinsei == null) {
-            DB.set償還払支給申請(償還払支給申請データ);
-            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+            償還払ViewStateDB.set償還払支給申請(償還払支給申請データ);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
         } else {
             getHandler(div).同項目に設定(shokanShinsei, 償還払支給申請データ);
-            DB.set償還払支給申請(shokanShinsei);
-            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+            償還払ViewStateDB.set償還払支給申請(shokanShinsei);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
         }
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         if (登録.equals(画面モード)) {
@@ -185,23 +184,23 @@ public class KouzaInfoPanel {
                 ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         if (変更有無チェック) {
             ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_口座, NUM_1);
         }
         ShokanShinsei 償還払支給申請データ = getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
 
-        if (DB == null) {
-            DB = new DbJohoViewState();
+        if (償還払ViewStateDB == null) {
+            償還払ViewStateDB = new DbJohoViewState();
         }
-        ShokanShinsei shokanShinsei = DB.get償還払支給申請();
+        ShokanShinsei shokanShinsei = 償還払ViewStateDB.get償還払支給申請();
         if (shokanShinsei == null) {
-            DB.set償還払支給申請(償還払支給申請データ);
-            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+            償還払ViewStateDB.set償還払支給申請(償還払支給申請データ);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
         } else {
             getHandler(div).同項目に設定(shokanShinsei, 償還払支給申請データ);
-            DB.set償還払支給申請(shokanShinsei);
-            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+            償還払ViewStateDB.set償還払支給申請(shokanShinsei);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
         }
         setViewState(画面モード);
         if (登録.equals(画面モード) && !変更有無チェック) {
@@ -226,24 +225,24 @@ public class KouzaInfoPanel {
                 ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
 
         if (変更有無チェック) {
             ViewStateHolder.put(ViewStateKeys.申請書入力済フラグ_口座, NUM_1);
         }
         ShokanShinsei 償還払支給申請データ = getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
 
-        if (DB == null) {
-            DB = new DbJohoViewState();
+        if (償還払ViewStateDB == null) {
+            償還払ViewStateDB = new DbJohoViewState();
         }
-        ShokanShinsei shokanShinsei = DB.get償還払支給申請();
+        ShokanShinsei shokanShinsei = 償還払ViewStateDB.get償還払支給申請();
         if (shokanShinsei == null) {
-            DB.set償還払支給申請(償還払支給申請データ);
-            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+            償還払ViewStateDB.set償還払支給申請(償還払支給申請データ);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
         } else {
             getHandler(div).同項目に設定(shokanShinsei, 償還払支給申請データ);
-            DB.set償還払支給申請(shokanShinsei);
-            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+            償還払ViewStateDB.set償還払支給申請(shokanShinsei);
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
         }
         setViewState(画面モード);
         if (登録.equals(画面モード) && !変更有無チェック) {
@@ -294,10 +293,7 @@ public class KouzaInfoPanel {
      * @return 償還払い費支給申請決定_口座情報画面
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_btnSave(KouzaInfoPanelDiv div) {
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        if (修正.equals(画面モード)) {
-            画面モード = 更新;
-        }
+
         ShokanShinsei entityView = ViewStateHolder.get(ViewStateKeys.口座情報, ShokanShinsei.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
@@ -317,18 +313,18 @@ public class KouzaInfoPanel {
         try {
             if (!ResponseHolder.isReRequest()) {
                 ShokanShinsei 償還払支給申請データ = getHandler(div).保存_修正(entityView, 整理番号, サービス年月, 被保険者番号);
-                DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
-                if (DB == null) {
-                    DB = new DbJohoViewState();
+                DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+                if (償還払ViewStateDB == null) {
+                    償還払ViewStateDB = new DbJohoViewState();
                 }
-                ShokanShinsei shokanShinsei = DB.get償還払支給申請();
+                ShokanShinsei shokanShinsei = 償還払ViewStateDB.get償還払支給申請();
                 if (shokanShinsei == null) {
-                    DB.set償還払支給申請(償還払支給申請データ);
-                    ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+                    償還払ViewStateDB.set償還払支給申請(償還払支給申請データ);
+                    ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
                 } else {
                     getHandler(div).同項目に設定(shokanShinsei, 償還払支給申請データ);
-                    DB.set償還払支給申請(shokanShinsei);
-                    ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, DB);
+                    償還払ViewStateDB.set償還払支給申請(shokanShinsei);
+                    ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB);
                 }
                 RString 申請書入力済区分 = SyokanbaraihiShikyuShinseiManager.createInstance().
                         shinseishoInputCheck(ViewStateHolder.get(ViewStateKeys.申請書入力済フラグ_口座, RString.class));
@@ -425,14 +421,14 @@ public class KouzaInfoPanel {
                 toString())).getYearMonth().toDateString());
         FlexibleDate 決定日 = ViewStateHolder.get(ViewStateKeys.決定日, FlexibleDate.class);
         RString 修正前支給区分 = ViewStateHolder.get(ViewStateKeys.修正前支給区分, RString.class);
-        DbJohoViewState DB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         if (!ResponseHolder.isReRequest() && is決定情報未完了) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.償還払い費支給申請決定_決定情報未入力.getMessage().getCode(),
                     DbcQuestionMessages.償還払い費支給申請決定_決定情報未入力.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if ((ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) || !is決定情報未完了) {
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().insupdShokan(DB, 修正前支給区分,
+            SyokanbaraihiShikyuShinseiKetteManager.createInstance().insupdShokan(償還払ViewStateDB, 修正前支給区分,
                     決定日, 被保険者番号, サービス年月, 整理番号, 画面モード, 識別コード);
             div.getCcdKanryoMessage().setMessage(get完了メッセージ(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class)),
                     被保険者番号.getColumnValue(),
