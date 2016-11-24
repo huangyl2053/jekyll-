@@ -54,7 +54,6 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
     private static final RString KEY_0 = new RString("key0");
     private static final RString KEY_1 = new RString("key1");
     private static final RString SPACE = new RString("空");
-    private static final List<KeyValueDataSource> 空 = new ArrayList<>();
     private static final int NUM_ONE = 1;
 
     private KyodoJukyushaIdoRenrakuhyoDivHandler(KyodoJukyushaIdoRenrakuhyoDiv div) {
