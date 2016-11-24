@@ -1623,8 +1623,16 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         entity.set区分(JukyushaIF_IdoKubunCode.toValue(異動一時2entity.get異動区分コード()).get名称());
         entity.set異動年月日(new RString(異動一時2entity.get異動年月日().toString()));
         entity.set要介護度(get要介護度Map().get(異動一時2entity.get要介護状態区分コード()));
-        entity.set開始認定日(new RString(異動一時2entity.get認定有効期間開始年月日().toString()));
-        entity.set終了認定日(異動一時2entity.get認定有効期間終了年月日());
+        if (異動一時2entity.get認定有効期間開始年月日() == null) {
+            entity.set開始認定日(RString.EMPTY);
+        } else {
+            entity.set開始認定日(new RString(異動一時2entity.get認定有効期間開始年月日().toString()));
+        }
+        if (異動一時2entity.get認定有効期間終了年月日() == null) {
+            entity.set終了認定日(RString.EMPTY);
+        } else {
+            entity.set終了認定日(new RString(異動一時2entity.get認定有効期間終了年月日().toString()));
+        }
         entity.set変更項目(変更項目);
         return entity;
     }
