@@ -1326,12 +1326,15 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     private boolean checkRString(RString data1, RString data2) {
         if (RString.isNullOrEmpty(data1) && RString.isNullOrEmpty(data2)) {
+            return true;
+        }
+        if (RString.isNullOrEmpty(data1)) {
             return false;
         }
-        if (!RString.isNullOrEmpty(data1)) {
-            return data1.equals(data2);
+        if (RString.isNullOrEmpty(data2)) {
+            return false;
         }
-        return true;
+        return data1.equals(data2);
     }
 
     private boolean dateChangeCheck(FlexibleDate date1, FlexibleDate date2) {
