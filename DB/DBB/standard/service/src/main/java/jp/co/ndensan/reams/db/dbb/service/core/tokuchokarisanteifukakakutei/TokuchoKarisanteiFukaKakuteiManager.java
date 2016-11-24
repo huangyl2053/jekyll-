@@ -114,26 +114,22 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     @Transaction
     private int insertKijunDateTime_登録(FlexibleYear 賦課年度, RString 処理名) {
         if (処理名.equals(ShoriName.仮算定異動賦課確定.get名称()) || 処理名.equals(ShoriName.異動賦課確定.get名称())) {
-            List<RString> 処理名リスト = new ArrayList<>();
-            処理名リスト.add(処理名);
-            List<DbT7022ShoriDateKanriEntity> 登録_処理リスト = 介護賦課Dac.select処理状況(賦課年度, 処理名リスト, SubGyomuCode.DBB介護賦課);
-            DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity = new DbT7022ShoriDateKanriEntity();
-            dbT7022ShoriDateKanriEntity.setNendoNaiRenban(セル);
-            if (null == 登録_処理リスト || 0 == 登録_処理リスト.size() || null == 登録_処理リスト.get(0).getNendoNaiRenban()) {
-                登録_処理リスト.add(dbT7022ShoriDateKanriEntity);
+            DbT7022ShoriDateKanriEntity 登録_処理Entity = 介護賦課Dac.select最大年度内連番_処理名(賦課年度, 処理名);
+            if (null == 登録_処理Entity || null == 登録_処理Entity.getNendoNaiRenban()) {
+                登録_処理Entity = new DbT7022ShoriDateKanriEntity();
             }
             IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
-            登録_処理リスト.get(0).setSubGyomuCode(SubGyomuCode.DBB介護賦課);
-            登録_処理リスト.get(0).setShichosonCode(association.get地方公共団体コード());
-            登録_処理リスト.get(0).setShoriName(処理名);
-            登録_処理リスト.get(0).setShoriEdaban(処理枝番);
-            登録_処理リスト.get(0).setNendo(賦課年度);
-            登録_処理リスト.get(0).setNendoNaiRenban(
-                    new RString(String.valueOf(Integer.valueOf(登録_処理リスト.get(0).getNendoNaiRenban().toString()) + 1)).padZeroToLeft(格式));
-            登録_処理リスト.get(0).setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
-            登録_処理リスト.get(0).setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
-            登録_処理リスト.get(0).setState(EntityDataState.Added);
-            return 介護賦課Dac.save(登録_処理リスト.get(0));
+            登録_処理Entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
+            登録_処理Entity.setShichosonCode(association.get地方公共団体コード());
+            登録_処理Entity.setShoriName(処理名);
+            登録_処理Entity.setShoriEdaban(処理枝番);
+            登録_処理Entity.setNendo(賦課年度);
+            登録_処理Entity.setNendoNaiRenban(
+                    new RString(String.valueOf(Integer.valueOf(登録_処理Entity.getNendoNaiRenban().toString()) + 1)).padZeroToLeft(格式));
+            登録_処理Entity.setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
+            登録_処理Entity.setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
+            登録_処理Entity.setState(EntityDataState.Added);
+            return 介護賦課Dac.save(登録_処理Entity);
             
         }
         return 0;

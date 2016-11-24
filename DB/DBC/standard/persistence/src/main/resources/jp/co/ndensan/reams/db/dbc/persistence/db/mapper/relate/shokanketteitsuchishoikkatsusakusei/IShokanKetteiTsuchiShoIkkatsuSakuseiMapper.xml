@@ -691,7 +691,7 @@
             ("sashitomeHiHokenshaNo" IS NOT NULL 
              AND "sashitomeHiHokenshaNo" <![CDATA[<>]]> '') 
          OR ("shikyuHushikyuKetteiKubun" = '1'
-             AND "shikyuHushikyuKetteiKubun" = '2'
+             AND "shiharaiHohoKubunCode" = '2'
              AND ("kinyuKikanCode" IS NULL OR "kinyuKikanCode" = ''))
             <if test="資格区分 != null"> 
             OR "hihokennshaKubunCode" = #{資格区分}    

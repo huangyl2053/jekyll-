@@ -412,7 +412,7 @@ public class DBC8010001MainHandler {
         }
         parameter.set処理対象(Furikomi_ShoriTaisho.toValue(div.getDdlShoriTaisho().getSelectedKey()));
         parameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
-        parameter.set委託者コード(div.getTxtItakushaCode().getValue());
+        parameter.set委託者コード(div.getItakusha().getItakushaId());
         if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
             parameter.set対象作成年月日(new FlexibleDate(div.getTxtTaishoSakuseiYMD().getValue().toDateString()));
         }

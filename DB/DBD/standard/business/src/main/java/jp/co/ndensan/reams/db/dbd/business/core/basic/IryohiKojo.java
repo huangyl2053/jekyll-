@@ -81,7 +81,6 @@ public class IryohiKojo extends ModelBase<IryohiKojoIdentifier, DbT4401IryohiKoj
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 被保険者番号を返します。
      *

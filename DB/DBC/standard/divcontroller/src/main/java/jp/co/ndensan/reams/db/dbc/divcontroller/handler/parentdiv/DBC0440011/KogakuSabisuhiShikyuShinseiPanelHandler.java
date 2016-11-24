@@ -155,19 +155,16 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
 
     private FlexibleYear get所得年度(RDate date) {
         FlexibleYear 所得年度 = new FlexibleYear(date.getYear().toDateString());
-        if (date.getYearMonth() != null && date.getYearMonth().isBeforeOrEquals(定値所得年度1)) {
-            if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_5) {
-                所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
-            }
+        if (date.getYearMonth() != null && date.getYearMonth().isBeforeOrEquals(定値所得年度1)
+                && NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_5) {
+            所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
         } else if (date.getYearMonth() != null && date.getYearMonth().isBeforeOrEquals(定値所得年度2)
-                && 定値所得年度1.isBefore(date.getYearMonth())) {
-            if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_6) {
-                所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
-            }
-        } else if (定値所得年度2.isBefore(date.getYearMonth())) {
-            if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_7) {
-                所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
-            }
+                && 定値所得年度1.isBefore(date.getYearMonth()) && NUM_1 < date.getMonthValue()
+                && date.getMonthValue() <= NUM_6) {
+            所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
+        } else if (定値所得年度2.isBefore(date.getYearMonth())
+                && NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_7) {
+            所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
         }
         return 所得年度;
     }
