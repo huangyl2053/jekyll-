@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShoukaiDataMapbEntity> {
 
-    private static final int INT_0 = 0;
     private static final int INT_6 = 6;
     private static final RString 管内_1 = new RString("1");
     private static final RString 住特者_2 = new RString("2");

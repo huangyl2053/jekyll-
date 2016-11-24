@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class InsReHakouShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShoukaiDataMapaEntity> {
 
-    private static final int INT_0 = 0;
-    private static final int INT_6 = 6;
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
             + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.select所得照会票データ再発行");
     private static final RString 所得照会票データTEMP = new RString("ShotokuShoukaiDataTemp");
