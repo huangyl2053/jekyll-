@@ -4450,26 +4450,26 @@
                 AND A."dbT2015KeisangoJoho_kozaKubun" <![CDATA[!=]]> A."kozaKubun" 
                 AND ( A."dbT2015KeisangoJoho_kakuteiHokenryo" = A."kakuteiHokenryo" 
                      AND(
-                       A."dbT2015KeisangoJoho_tkKibetsuGaku01" = A."tkKibetsuGaku01" 
-                       AND A."dbT2015KeisangoJoho_tkKibetsuGaku02" = A."tkKibetsuGaku02" 
-                       AND A."dbT2015KeisangoJoho_tkKibetsuGaku03" = A."tkKibetsuGaku03" 
-                       AND A."dbT2015KeisangoJoho_tkKibetsuGaku04" = A."tkKibetsuGaku04" 
-                       AND A."dbT2015KeisangoJoho_tkKibetsuGaku05" = A."tkKibetsuGaku05" 
-                       AND A."dbT2015KeisangoJoho_tkKibetsuGaku06" = A."tkKibetsuGaku06"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku01" = A."fuKibetsuGaku01"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku02" = A."fuKibetsuGaku02"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku03" = A."fuKibetsuGaku03"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku04" = A."fuKibetsuGaku04"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku05" = A."fuKibetsuGaku05"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku06" = A."fuKibetsuGaku06"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku07" = A."fuKibetsuGaku07"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku08" = A."fuKibetsuGaku08"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku09" = A."fuKibetsuGaku09"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku10" = A."fuKibetsuGaku10"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku11" = A."fuKibetsuGaku11"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku12" = A."fuKibetsuGaku12"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku13" = A."fuKibetsuGaku13"
-                       AND A."dbT2015KeisangoJoho_fuKibetsuGaku14" = A."fuKibetsuGaku14"
+                           COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku01",0) = COALESCE(A."tkKibetsuGaku01",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku02",0) = COALESCE(A."tkKibetsuGaku02",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku03",0) = COALESCE(A."tkKibetsuGaku03",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku04",0) = COALESCE(A."tkKibetsuGaku04",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku05",0) = COALESCE(A."tkKibetsuGaku05",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku06",0) = COALESCE(A."tkKibetsuGaku06",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku01",0) = COALESCE(A."fuKibetsuGaku01",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0) = COALESCE(A."fuKibetsuGaku02",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) = COALESCE(A."fuKibetsuGaku03",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) = COALESCE(A."fuKibetsuGaku04",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) = COALESCE(A."fuKibetsuGaku05",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) = COALESCE(A."fuKibetsuGaku06",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) = COALESCE(A."fuKibetsuGaku07",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) = COALESCE(A."fuKibetsuGaku08",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) = COALESCE(A."fuKibetsuGaku09",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) = COALESCE(A."fuKibetsuGaku10",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) = COALESCE(A."fuKibetsuGaku11",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) = COALESCE(A."fuKibetsuGaku12",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) = COALESCE(A."fuKibetsuGaku13",0) 
+                       AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) = COALESCE(A."fuKibetsuGaku14",0) 
                      )
                   )
             </if>
@@ -4481,26 +4481,26 @@
                         B."dbT2015KeisangoJoho_kozaKubun" <![CDATA[<>]]> B."kozaKubun" 
                        AND ( B."dbT2015KeisangoJoho_kakuteiHokenryo" = B."kakuteiHokenryo" 
                            AND(
-                             B."dbT2015KeisangoJoho_tkKibetsuGaku01" = B."tkKibetsuGaku01" 
-                             AND B."dbT2015KeisangoJoho_tkKibetsuGaku02" = B."tkKibetsuGaku02" 
-                             AND B."dbT2015KeisangoJoho_tkKibetsuGaku03" = B."tkKibetsuGaku03" 
-                             AND B."dbT2015KeisangoJoho_tkKibetsuGaku04" = B."tkKibetsuGaku04" 
-                             AND B."dbT2015KeisangoJoho_tkKibetsuGaku05" = B."tkKibetsuGaku05" 
-                             AND B."dbT2015KeisangoJoho_tkKibetsuGaku06" = B."tkKibetsuGaku06"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku01" = B."fuKibetsuGaku01"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku02" = B."fuKibetsuGaku02"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku03" = B."fuKibetsuGaku03"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku04" = B."fuKibetsuGaku04"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku05" = B."fuKibetsuGaku05"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku06" = B."fuKibetsuGaku06"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku07" = B."fuKibetsuGaku07"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku08" = B."fuKibetsuGaku08"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku09" = B."fuKibetsuGaku09"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku10" = B."fuKibetsuGaku10"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku11" = B."fuKibetsuGaku11"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku12" = B."fuKibetsuGaku12"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku13" = B."fuKibetsuGaku13"
-                             AND B."dbT2015KeisangoJoho_fuKibetsuGaku14" = B."fuKibetsuGaku14"
+                                  COALESCE(B."dbT2015KeisangoJoho_tkKibetsuGaku01",0) = COALESCE(B."tkKibetsuGaku01",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_tkKibetsuGaku02",0) = COALESCE(B."tkKibetsuGaku02",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_tkKibetsuGaku03",0) = COALESCE(B."tkKibetsuGaku03",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_tkKibetsuGaku04",0) = COALESCE(B."tkKibetsuGaku04",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_tkKibetsuGaku05",0) = COALESCE(B."tkKibetsuGaku05",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_tkKibetsuGaku06",0) = COALESCE(B."tkKibetsuGaku06",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku01",0) = COALESCE(B."fuKibetsuGaku01",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku02",0) = COALESCE(B."fuKibetsuGaku02",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku03",0) = COALESCE(B."fuKibetsuGaku03",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku04",0) = COALESCE(B."fuKibetsuGaku04",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku05",0) = COALESCE(B."fuKibetsuGaku05",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku06",0) = COALESCE(B."fuKibetsuGaku06",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku07",0) = COALESCE(B."fuKibetsuGaku07",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku08",0) = COALESCE(B."fuKibetsuGaku08",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku09",0) = COALESCE(B."fuKibetsuGaku09",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku10",0) = COALESCE(B."fuKibetsuGaku10",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku11",0) = COALESCE(B."fuKibetsuGaku11",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku12",0) = COALESCE(B."fuKibetsuGaku12",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku13",0) = COALESCE(B."fuKibetsuGaku13",0) 
+                              AND COALESCE(B."dbT2015KeisangoJoho_fuKibetsuGaku14",0) = COALESCE(B."fuKibetsuGaku14",0) 
                            ))
                     AND B."dbT2015KeisangoJoho_choteiNendo" = A."dbT2015KeisangoJoho_choteiNendo"
                     AND B."dbT2015KeisangoJoho_fukaNendo" = A."dbT2015KeisangoJoho_fukaNendo"
