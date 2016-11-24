@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsu
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.TaishoushaitiranhyouhakkouShorientity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.UaFt001FindEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehitaishoshaichiransokyubun.KogakuServicehiTaishoshaIchiranSokyubunEntity;
-import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
@@ -83,22 +82,11 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
     private static final RString 抽出_マスタ_1 = new RString("51");
     private static final RString 日 = new RString("01");
     private final RString 単 = new RString("単");
-    private MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
      */
     KogakuKaigoTaishoshaChushutsuSokyubun() {
-        mapperProvider = InstanceProvider.create(MapperProvider.class);
-    }
-
-    /**
-     * コンストラクタです。
-     *
-     * @param mapperProvider {@link MapperProvider}
-     */
-    KogakuKaigoTaishoshaChushutsuSokyubun(MapperProvider mapperProvider) {
-        mapperProvider = this.mapperProvider;
     }
 
     /**
@@ -655,13 +643,13 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
      *
      * @param entity TaishoushaitiranhyouhakkouShorientity
      * @param eucentity KougakukaigoSabishiEucEntity
-     * @param 連番 int
-     * @return i
+     * @param 連番Map Map
      */
-    public int get給付実績基本データ抽出(TaishoushaitiranhyouhakkouShorientity entity,
-            KougakukaigoSabishiEucEntity eucentity, int 連番) {
+    public void get給付実績基本データ抽出(TaishoushaitiranhyouhakkouShorientity entity,
+            KougakukaigoSabishiEucEntity eucentity, Map<RString, Integer> 連番Map) {
         eucentity = new KougakukaigoSabishiEucEntity();
-        eucentity.setNo(new RString(Integer.toString(連番)));
+        int 連番 = 連番Map.get(new RString("連番"));
+        eucentity.setNo(new RString(連番));
         eucentity.set被保険者番号(entity.get被保険者番号());
         eucentity.set氏名カナ(entity.get被保険者名());
         eucentity.set氏名(entity.getカナ名称());
@@ -724,8 +712,8 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
         if (連番 == JYUU) {
             eucentity.set異動内容10(異動内容);
         }
-        return 連番++;
-
+        連番++;
+        連番Map.put(new RString("連番"), 連番);
     }
 
     private void set備考list(KougakukaigoSabishiEucEntity eucentity, TaishoushaitiranhyouhakkouShorientity entity) {
@@ -793,15 +781,11 @@ public class KogakuKaigoTaishoshaChushutsuSokyubun {
             eucentity.set高額支給額(DecimalFormatter
                     .toコンマ区切りRString(new Decimal(Long.valueOf(備考list.get(GO).toString())), 0));
         }
-        if (備考list.size() > HACHI) {
-            if (new RString("社").equals(備考list.get(NANA))) {
-                eucentity.set社福軽減(new RString("社福軽減"));
-            }
+        if (備考list.size() > HACHI && new RString("社").equals(備考list.get(NANA))) {
+            eucentity.set社福軽減(new RString("社福軽減"));
         }
-        if (備考list.size() == KU) {
-            if (new RString("境").equals(備考list.get(HACHI))) {
-                eucentity.set社福軽減(new RString("境界層"));
-            }
+        if (備考list.size() == KU && new RString("境").equals(備考list.get(HACHI))) {
+            eucentity.set社福軽減(new RString("境界層"));
         }
     }
 

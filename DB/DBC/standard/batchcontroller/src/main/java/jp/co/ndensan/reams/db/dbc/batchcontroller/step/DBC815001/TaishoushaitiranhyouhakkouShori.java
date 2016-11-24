@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC815001;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakukaigotaishoshachushutsusokyubun.KogakuKaigoTaishosBusiness;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakukaigotaishoshachushutsusokyubun.KakobunJissekiKihonBusiness;
 import jp.co.ndensan.reams.db.dbc.business.report.kyufukanrihyo.kogakuservicehitaishoshaichiransokyubun.KogakuServicehiTaishoshaIchiranSokyubunReport;
@@ -63,7 +65,7 @@ public class TaishoushaitiranhyouhakkouShori extends BatchKeyBreakBase<Taishoush
     private LasdecCode 団体コード;
     private KakobunJissekiKihonBusiness business;
     private KougakukaigoSabishiEucEntity eucentity;
-    private int 連番;
+    private Map<RString, Integer> 連番Map;
     @BatchWriter
     private BatchReportWriter<KogakuServicehiTaishoshaIchiranSokyubunReportSource> batchReportWriter;
     private ReportSourceWriter<KogakuServicehiTaishoshaIchiranSokyubunReportSource> reportSourceWriter;
@@ -80,7 +82,8 @@ public class TaishoushaitiranhyouhakkouShori extends BatchKeyBreakBase<Taishoush
         RString 対象者一覧CSV名 = new RString("DBC200100_KogakuTaishoshaIchiranSokyubun.csv");
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 対象者一覧CSV名);
         business = new KakobunJissekiKihonBusiness();
-        連番 = 1;
+        連番Map = new HashMap<>();
+        連番Map.put(new RString("連番"), new Integer("1"));
     }
 
     @Override
@@ -114,7 +117,7 @@ public class TaishoushaitiranhyouhakkouShori extends BatchKeyBreakBase<Taishoush
 
     @Override
     protected void usualProcess(TaishoushaitiranhyouhakkouShorientity entity) {
-        連番 = sokyubun.get給付実績基本データ抽出(entity, eucentity, 連番);
+        sokyubun.get給付実績基本データ抽出(entity, eucentity, 連番Map);
         eucCsvWriterJunitoJugo.writeLine(eucentity);
         sokyubunentity = sokyubun.get高額介護サービス費対象者一覧表(entity, 出力順Entity);
         KogakuServicehiTaishoshaIchiranSokyubunReport report = new KogakuServicehiTaishoshaIchiranSokyubunReport(sokyubunentity);
