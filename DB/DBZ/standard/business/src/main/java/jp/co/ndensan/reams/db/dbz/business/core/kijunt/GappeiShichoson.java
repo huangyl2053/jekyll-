@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.kijunt;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.GappeiShichosonEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -59,8 +60,9 @@ public class GappeiShichoson implements IKoseiShichosonMaster {
      */
     @Override
     public ShoKisaiHokenshaNo get証記載保険者番号() {
-        if (entity.getKyuHokenshaNo() != null) {
-            return new ShoKisaiHokenshaNo(entity.getKyuHokenshaNo().value());
+        HokenshaNo 証記載保険者番号 = entity.getKyuHokenshaNo();
+        if (証記載保険者番号 != null) {
+            return new ShoKisaiHokenshaNo(証記載保険者番号.value());
         }
         return ShoKisaiHokenshaNo.EMPTY;
     }
