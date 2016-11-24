@@ -125,6 +125,7 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
         source.list1Lower_2 = entity.get帳票出力対象データリスト().getShimei();
         editSource1(source);
         editSource2(source);
+        editSource3(source);
         return source;
     }
 
@@ -180,6 +181,10 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
                     fillType(FillType.BLANK).toDateString());
             source.listGokeiJoho_1 = iraiDateTime1.toRString();
         }
+        return source;
+    }
+
+    private RiyoJokyoIchiranReportSource editSource2(RiyoJokyoIchiranReportSource source) {
         source.listGokeiJoho_2 = YokaigoJotaiKubunSupport.toValue(new FlexibleYearMonth(entity.get帳票出力対象データリスト().getServiceTeikyoYM()),
                 entity.get帳票出力対象データリスト().getYoKaigoJotaiKubunCode()).getName();
         RStringBuilder iraiDateTime2 = new RStringBuilder();
@@ -235,7 +240,7 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
         return source;
     }
 
-    private RiyoJokyoIchiranReportSource editSource2(RiyoJokyoIchiranReportSource source) {
+    private RiyoJokyoIchiranReportSource editSource3(RiyoJokyoIchiranReportSource source) {
         source.listRiyoJokyo3_1 = entity.get帳票出力対象データリスト().getShafukuKeigenritsu();
         if (is制度改正以降()) {
             source.listRiyoJokyo3_2 = DecimalFormatter.
