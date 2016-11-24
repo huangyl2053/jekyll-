@@ -311,7 +311,7 @@ public class CreateTarget {
         }
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
         try (CsvWriter<CreateTargetCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             for (CreateTargetDataBusiness business : dataMap.values()) {
                 csvWriter.writeLine(getCsvData(business, 連番));

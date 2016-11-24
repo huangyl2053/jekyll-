@@ -47,12 +47,12 @@ public class CreateTargetValidationHandler {
         if (キー_0.equals(div.getRdoShinseiNintei().getSelectedKey())
                 && (div.getTxtShinseiYMD().getFromValue() == null || div.getTxtShinseiYMD().getToValue() == null)) {
             validationMessages.add(new ValidationMessageControlPair(
-                    new CreateTargetValidationHandler.CreateTargetMessages(UrErrorMessages.必須項目)));
+                    new CreateTargetMessages(UrErrorMessages.必須項目), div.getTxtShinseiYMD()));
         }
         if (キー_1.equals(div.getRdoShinseiNintei().getSelectedKey())
                 && (div.getNinteiYMD().getFromValue() == null || div.getNinteiYMD().getToValue() == null)) {
             validationMessages.add(new ValidationMessageControlPair(
-                    new CreateTargetValidationHandler.CreateTargetMessages(UrErrorMessages.必須項目)));
+                    new CreateTargetMessages(UrErrorMessages.必須項目), div.getNinteiYMD()));
         }
         return validationMessages;
     }
