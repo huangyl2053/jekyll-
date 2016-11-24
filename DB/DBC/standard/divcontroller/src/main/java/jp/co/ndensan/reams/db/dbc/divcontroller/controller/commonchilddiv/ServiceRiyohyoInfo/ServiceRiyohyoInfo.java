@@ -295,11 +295,20 @@ public class ServiceRiyohyoInfo {
      * @return ResponseData<ServiceRiyohyoInfoDiv>
      */
     public ResponseData<ServiceRiyohyoInfoDiv> onClick_btnKakutei(ServiceRiyohyoInfoDiv div) {
+        ServiceRiyohyoInfoDivValidationHandler validationhandler = getValidatioHandler(div);
+//        ValidationMessageControlPairs 事業者必須入力Pairs = validationhandler.validate事業者必須入力();
+//        if (事業者必須入力Pairs.iterator().hasNext()) {
+//            return ResponseData.of(div).addValidationMessages(事業者必須入力Pairs).respond();
+//        }
         ServiceRiyohyoInfoDivHandler handler = getHandler(div);
         div.getBtnCalcMeisai().setDisplayNone(false);
         div.getBtnCalcGokei().setDisplayNone(false);
         div.getBtnBeppyoMeisaiKakutei().setDisplayNone(false);
         if (RSTRING_ONE.equals(div.getAddType())) {
+            ValidationMessageControlPairs サービスコード = validationhandler.validateサービスコード必須();
+            if (サービスコード.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(サービスコード).respond();
+            }
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(false);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoMeisai().setDisabled(false);
@@ -315,8 +324,12 @@ public class ServiceRiyohyoInfo {
             div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setDisabled(false);
-            handler.onChange_txtServiceEvent();
+//            handler.onChange_txtServiceEvent();
         } else {
+            ValidationMessageControlPairs サービス種類 = validationhandler.validateサービス種類必須();
+            if (サービス種類.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(サービス種類).respond();
+            }
             div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
             div.getServiceRiyohyoBeppyoMeisai().setDisabled(false);
             div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(true);
@@ -345,9 +358,14 @@ public class ServiceRiyohyoInfo {
             if (利用年月日 != null) {
                 利用年月 = new FlexibleYearMonth(利用年月日.getYearMonth().toDateString());
             }
-            handler.onChange_txtServiceEvent();
+//            handler.onChange_txtServiceEvent();
             handler.onClick_btnKakutei(被保険者番号, 利用年月);
         }
+        ValidationMessageControlPairs 事業者サービス種類チェック = validationhandler.validate事業者サービス種類チェック();
+        if (事業者サービス種類チェック.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(事業者サービス種類チェック).respond();
+        }
+        handler.onChange_txtServiceEvent();
         return ResponseData.of(div).respond();
     }
 

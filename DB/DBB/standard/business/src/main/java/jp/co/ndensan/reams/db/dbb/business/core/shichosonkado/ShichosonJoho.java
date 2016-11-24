@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.shichosonkado;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShichosonJoho {
+public class ShichosonJoho implements Serializable {
 
     private LasdecCode 市町村コード;
     private RString 市町村名;
