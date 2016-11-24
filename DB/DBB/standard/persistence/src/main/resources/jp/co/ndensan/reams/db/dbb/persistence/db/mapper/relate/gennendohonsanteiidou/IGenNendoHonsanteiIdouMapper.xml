@@ -455,8 +455,8 @@
             rgdb."DbV2502KaigoShotoku" AS A
         WHERE
             A."shotokuNendo" = #{調定年度}
-        AND to_char(to_date(#{抽出開始日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",0,8)
-        AND substring(A."shoriTimeStamp",0,8) <![CDATA[<=]]> to_char(to_date(#{抽出終了日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
+        AND to_char(to_date(#{抽出開始日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",1,8)
+        AND substring(A."shoriTimeStamp",1,8) <![CDATA[<=]]> to_char(to_date(#{抽出終了日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
     </select>
     
     <!-- 所得異動一時テーブルを作成します。 -->
