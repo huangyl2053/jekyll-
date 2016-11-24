@@ -311,8 +311,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
                 .toDateString());
         builder.append(RString.HALF_SPACE);
         builder.append(now.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        RString 印刷日時 = builder.append(RString.FULL_SPACE).append(STRING_SAKUSEI).toRString();
-        return 印刷日時;
+        return builder.append(RString.FULL_SPACE).append(STRING_SAKUSEI).toRString();
     }
 
 }
