@@ -56,6 +56,10 @@ public final class KyufukanrihyoOutMybatisParameter implements IMyBatisParameter
      * @param is再処理区分 is再処理区分
      * @param 出力順ID 出力順ID
      * @param 最終更新年月日 最終更新年月日
+     * @param 出力順 RString
+     * @param 制度改正施行日支給限度額一本化の年月 RString
+     * @param 居宅サービス区分短期入所のコード RString
+     * @return KyufukanrihyoOutMybatisParameter
      */
     public static KyufukanrihyoOutMybatisParameter createParam(
             FlexibleYearMonth 処理年月,
