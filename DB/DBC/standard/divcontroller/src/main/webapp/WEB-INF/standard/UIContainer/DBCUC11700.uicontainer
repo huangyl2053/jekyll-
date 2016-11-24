@@ -37,7 +37,7 @@
      "layoutName": "DBC1170011",
      "layoutTitle": "自己負担額証明書作成",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
