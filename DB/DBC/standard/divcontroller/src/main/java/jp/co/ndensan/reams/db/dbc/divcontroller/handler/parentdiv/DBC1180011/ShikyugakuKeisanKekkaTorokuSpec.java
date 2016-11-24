@@ -252,16 +252,8 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
         }
 
         public static boolean is既に存在のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
-            RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細状態, RString.class);
-            if (追加.equals(状態)) {
-                return true;
-            }
             RString 証明書整理番号 = div.getTxtJikoFutanSeiriNom().getText();
             if (RString.isNullOrEmpty(証明書整理番号)) {
-                return true;
-            }
-            RString 選択行証明書整理番号 = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem().getTxtJikoFutanSeiriNo();
-            if (証明書整理番号.equals(選択行証明書整理番号)) {
                 return true;
             }
             List<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> rowList
@@ -269,6 +261,13 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
             if (rowList == null || rowList.isEmpty()) {
                 return true;
             }
+            if (div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem() != null) {
+                RString 選択行証明書整理番号 = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem().getTxtJikoFutanSeiriNo();
+                if (証明書整理番号.equals(選択行証明書整理番号)) {
+                    return true;
+                }
+            }
+            
             for (dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row row : rowList) {
                 if (証明書整理番号.equals(row.getTxtJikoFutanSeiriNo())) {
                     return false;

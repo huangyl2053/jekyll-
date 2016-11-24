@@ -509,8 +509,14 @@ public class ShikyugakuKeisanKekkaToroku {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         ValidationMessageControlPairs 確定Pairs = validationhandler.validate内訳を確定する();
-        if (確定Pairs.iterator().hasNext()) {
+        if (確定Pairs.iterator().hasNext() && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addValidationMessages(確定Pairs).respond();
+        }
+
+        if (!ResponseHolder.isWarningIgnoredRequest()
+                && new RString(DbcWarningMessages.高額合算支給額計算結果登録
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).respond();
         }
         KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果
                 = ViewStateHolder.get(ViewStateKeys.支給額計算結果, KogakuGassanShikyuGakuKeisanKekkaRelate.class);
