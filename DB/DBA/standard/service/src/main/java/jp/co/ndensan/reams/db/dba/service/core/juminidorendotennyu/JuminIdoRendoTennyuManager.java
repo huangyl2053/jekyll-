@@ -242,7 +242,7 @@ public class JuminIdoRendoTennyuManager {
         HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
         if (転入前Entity.is広域()) {
             ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                    ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
+                    ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
             key.setデータ取得区分(DataShutokuKubun.直近レコード);
             UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
             JuminIdoRendoTennyuManagerMybatisParameter param = JuminIdoRendoTennyuManagerMybatisParameter

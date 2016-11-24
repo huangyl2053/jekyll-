@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBCN130001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.JikofutangakuShomeishoTorokuDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -228,44 +227,6 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
                     new ValidationCheckMessages(UrErrorMessages.使用不可文字), div.getTxtRenrakusakiMei2()));
 
         }
-
-        Decimal jikofutangakuGokei = nullToZero(div.getTxtJikofutangaku8().getValue())
-                .add(nullToZero(div.getTxtJikofutangaku9().getValue()))
-                .add(nullToZero(div.getTxtJikofutangaku10().getValue()))
-                .add(nullToZero(div.getTxtJikofutangaku11().getValue()))
-                .add(nullToZero(div.getTxtJikofutangaku12().getValue()))
-                .add(nullToZero(div.getTxtJikofutangaku1().getValue()))
-                .add(nullToZero(div.getTxtJikofutangaku2().getValue()))
-                .add(nullToZero(div.getTxtJikofutangaku3().getValue()))
-                .add(nullToZero(div.getTxtJikofutangaku4().getValue()))
-                .add(nullToZero(div.getTxtJikofutangaku5().getValue()))
-                .add(nullToZero(div.getTxtJikofutangaku6().getValue()))
-                .add(nullToZero(div.getTxtJikofutangaku7().getValue()));
-
-        if (!jikofutangakuGokei.equals(nullToZero(div.getTxtJikofutangakuGokei().getValue()))) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new ValidationCheckMessages(DbcErrorMessages.合計ボタン未押下),
-                    div.getTxtJikofutangakuGokei()));
-        }
-        Decimal uchiFutangakuGokei = nullToZero(div.getTxtUchiFutangaku8().getValue())
-                .add(nullToZero(div.getTxtUchiFutangaku9().getValue()))
-                .add(nullToZero(div.getTxtUchiFutangaku10().getValue()))
-                .add(nullToZero(div.getTxtUchiFutangaku11().getValue()))
-                .add(nullToZero(div.getTxtUchiFutangaku12().getValue()))
-                .add(nullToZero(div.getTxtUchiFutangaku1().getValue()))
-                .add(nullToZero(div.getTxtUchiFutangaku2().getValue()))
-                .add(nullToZero(div.getTxtUchiFutangaku3().getValue()))
-                .add(nullToZero(div.getTxtUchiFutangaku4().getValue()))
-                .add(nullToZero(div.getTxtUchiFutangaku5().getValue()))
-                .add(nullToZero(div.getTxtUchiFutangaku6().getValue()))
-                .add(nullToZero(div.getTxtUchiFutangaku7().getValue()));
-
-        if (!uchiFutangakuGokei.equals(nullToZero(div.getTxtUchiFutangakuGokei().getValue()))) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new ValidationCheckMessages(DbcErrorMessages.合計ボタン未押下),
-                    div.getTxtUchiFutangakuGokei()));
-        }
-
         return validPairs;
     }
 

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.choteiNendo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.choteiNichiji;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.fuSaishutsuKampuGaku;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.fukaNendo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.rirekiNo;
@@ -108,7 +109,7 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
                         eq(tsuchishoNo, 通知書番号),
                         not(eq(choteiNendo, 賦課年度)),
                         (or(lt(0, tkSaishutsuKampuGaku),
-                                lt(0, tkSaishutsuKampuGaku)))
+                                lt(0, fuSaishutsuKampuGaku)))
                 )).
                 order(by(choteiNendo), by(fukaNendo), by(tsuchishoNo)).
                 toList(DbT2002FukaEntity.class);

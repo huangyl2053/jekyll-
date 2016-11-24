@@ -82,7 +82,9 @@ public class FurikomiDataProcess extends BatchProcessBase<FurikomiDataEntity> {
 
         KozaFurikomiTempTableEntity tempTable1 = new KozaFurikomiTempTableEntity();
         tempTable1.setFurikomiId(Long.valueOf("0"));
-        tempTable1.setItakushaId(Decimal.ZERO);
+        if (Decimal.canConvert(parameter.get委託者コード())) {
+            tempTable1.setItakushaId(new Decimal(parameter.get委託者コード().toString()));
+        }
         tempTable1.setFurikomiYMD(parameter.get振込指定年月日());
         tempTable1.setSakuseiKaisu(Decimal.ONE);
         tempTable1.setSubGyomuCode(SubGyomuCode.DBC介護給付);

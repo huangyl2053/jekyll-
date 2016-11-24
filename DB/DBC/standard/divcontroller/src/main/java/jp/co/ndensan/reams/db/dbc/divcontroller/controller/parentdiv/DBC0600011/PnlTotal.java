@@ -39,7 +39,6 @@ public class PnlTotal {
     private static final RString 差止控除区分_21 = new RString("21");
     private static final RString 差止控除区分_10 = new RString("10");
 
-
     /**
      * 画面初期化
      *
@@ -59,16 +58,6 @@ public class PnlTotal {
         RDate 認定開始年月日 = div.getKaigoCommonPanel().getCcdShikakuKihon().get認定開始年月日();
         RDate 認定終了年月日 = div.getKaigoCommonPanel().getCcdShikakuKihon().get認定終了年月日();
         if (RString.isNullOrEmpty(要介護状態区分名称)) {
-            div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
-        }
-        
-        if (認定開始年月日 != null && 認定終了年月日 != null 
-                && !(認定開始年月日.compareTo(RDate.getNowDate()) <= 0
-                    && RDate.getNowDate().compareTo(認定終了年月日) <= 0)) {
-            div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
-        }
-        
-        if (認定開始年月日 == null && 認定終了年月日 == null) {
             div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
         }
         PnlTotalHandler handler = getHandler(div);

@@ -1264,6 +1264,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         減免決定通知書情報.set宛先(通知書共通情報.get宛先情報());
         減免決定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
         減免決定通知書情報.set納組情報(通知書共通情報.get納組情報());
+        減免決定通知書情報.set年度区分(通知書共通情報.get年度区分());
         if (帳票制御共通 != null) {
             減免決定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(帳票制御共通));
         }
@@ -1340,6 +1341,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         減免取消通知書情報.set宛先(通知書共通情報.get宛先情報());
         減免取消通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
         減免取消通知書情報.set納組情報(通知書共通情報.get納組情報());
+        減免取消通知書情報.set年度区分(通知書共通情報.get年度区分());
         if (帳票制御共通 != null) {
             減免取消通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(帳票制御共通));
         }
@@ -1427,6 +1429,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         徴収猶予決定通知書情報.set宛先(通知書共通情報.get宛先情報());
         徴収猶予決定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
         徴収猶予決定通知書情報.set納組情報(通知書共通情報.get納組情報());
+        徴収猶予決定通知書情報.set年度区分(通知書共通情報.get年度区分());
         if (帳票制御共通 != null) {
             徴収猶予決定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(帳票制御共通));
         }
@@ -1503,6 +1506,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         徴収猶予取消通知書情報.set宛先(通知書共通情報.get宛先情報());
         徴収猶予取消通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
         徴収猶予取消通知書情報.set納組情報(通知書共通情報.get納組情報());
+        徴収猶予取消通知書情報.set年度区分(通知書共通情報.get年度区分());
         if (帳票制御共通 != null) {
             徴収猶予取消通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(帳票制御共通));
         }

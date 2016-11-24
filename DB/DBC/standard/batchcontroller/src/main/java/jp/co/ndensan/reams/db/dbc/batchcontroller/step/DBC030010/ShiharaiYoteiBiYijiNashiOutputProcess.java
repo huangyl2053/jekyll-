@@ -358,6 +358,6 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
                 item.getSamaBun1(),
                 item.getKakkoRight1(),
                 item.getSamabunShimeiSmall1(),
-                null);
+                item.getCustomerBarCode());
     }
 }

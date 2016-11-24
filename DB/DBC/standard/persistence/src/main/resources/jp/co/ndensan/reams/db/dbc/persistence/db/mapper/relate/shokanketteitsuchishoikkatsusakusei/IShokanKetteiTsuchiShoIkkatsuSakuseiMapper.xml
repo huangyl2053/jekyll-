@@ -691,7 +691,7 @@
             ("sashitomeHiHokenshaNo" IS NOT NULL 
              AND "sashitomeHiHokenshaNo" <![CDATA[<>]]> '') 
          OR ("shikyuHushikyuKetteiKubun" = '1'
-             AND "shikyuHushikyuKetteiKubun" = '2'
+             AND "shiharaiHohoKubunCode" = '2'
              AND ("kinyuKikanCode" IS NULL OR "kinyuKikanCode" = ''))
             <if test="資格区分 != null"> 
             OR "hihokennshaKubunCode" = #{資格区分}    
@@ -1400,7 +1400,7 @@
     WHERE
         (ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" IS NULL 
                 OR ShokanKetteiTsuchiShoMeisaiTemp."sashitomeHiHokenshaNo" = '')
-    <if test="hakkoutaisyouFlg == true"> 
+     <if test="isHako">
           AND ShokanKetteiTsuchiShoMeisaiTemp."hihokennshaKubunCode" <![CDATA[<>]]> '2'
     </if>
     GROUP BY 
@@ -1477,5 +1477,6 @@
             ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
             ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
             ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+            ,ShokanKetteiTsuchiShoMeisaiTemp."yousikibangousabu"
     </select>
 </mapper>

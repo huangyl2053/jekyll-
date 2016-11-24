@@ -74,6 +74,7 @@ public class ShikyuShinseiDetail {
 
     private static final RString 必要な項目 = new RString("必要な項目");
     private static final RString 入力あり = new RString("1");
+    private static final int 桁数_10 = 10;
 
     /**
      * 画面初期化処理です。
@@ -95,10 +96,8 @@ public class ShikyuShinseiDetail {
                 toString())).getYearMonth().toDateString());
 
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
-        if (MODEL_ADD.equals(画面モード)) {
-            if (整理番号 == null || 整理番号.isEmpty()) {
-                整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString().padLeft("0", 10);
-            }
+        if (MODEL_ADD.equals(画面モード) && (整理番号 == null || 整理番号.isEmpty())) {
+            整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString().padLeft("0", 桁数_10);
         }
 
         ShikyuShinseiDetailHandler handler = getHandler(div);
@@ -115,7 +114,7 @@ public class ShikyuShinseiDetail {
         ShokanShinsei 償還払支給申請 = handler.load支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, config);
 
         if (!MODEL_ADD.equals(画面モード)) {
-            handler.set支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, 償還払支給申請, config);
+            handler.set支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, 償還払支給申請, config, dbJohoViewState);
             ShokanShinsei shokanShinsei = getHandler(div).update(画面モード, 償還払支給申請);
             dbJohoViewState.set償還払支給申請(shokanShinsei);
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJohoViewState);

@@ -136,6 +136,7 @@ public class ShokanKetteiTsuchiShoSealer2HeadEditor implements IShokanKetteiTsuc
         source.samaBun1 = item.getSamaBun1();
         source.kakkoRight1 = item.getKakkoRight1();
         source.samabunShimeiSmall1 = item.getSamabunShimeiSmall1();
+        source.customerBarCode = item.getCustomerBarCode();
         return source;
     }
 }

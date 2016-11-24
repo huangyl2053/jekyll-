@@ -8,6 +8,15 @@
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>
     
+    <!-- 宛名識別対象異動分取得PSMから異動データを取得する -->
+    <select resultOrdered="true" id="select住基異動" resultMap="resultMap_ShukiIdoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter" fetchSize="500">
+        SELECT
+        DISTINCT "宛名異動"."shikibetsuCode"
+        FROM
+        rgua."UaFt001FindIdo"('1',#{抽出開始日時},#{抽出終了日時},TRUE, '{}' ,'0', '{}' ,'0','','0','','0', '{}' , '{}','','','','','','','','','','','','','','','','')AS "宛名異動"
+    </select>
+        
     <!-- 賦課根拠異動抽出に被保険者本人異動の判断 -->
     <select resultOrdered="true" id="select住基異動_被保険者本人異動" resultMap="resultMap_ShukiIdoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter" fetchSize="500">

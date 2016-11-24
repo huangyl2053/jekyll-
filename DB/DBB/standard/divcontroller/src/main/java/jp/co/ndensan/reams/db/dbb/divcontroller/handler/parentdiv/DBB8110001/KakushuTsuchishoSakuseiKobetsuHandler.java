@@ -1347,10 +1347,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             }
         }
         div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setDataSource(keyValueDataSource);
-        if (isContains期月) {
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedKey(期月.get期());
-        } else {
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedIndex(0);
+        if (!keyValueDataSource.isEmpty()) {
+            if (isContains期月) {
+                div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedKey(期月.get期());
+            } else {
+                div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedIndex(0);
+            }
         }
         if (賦課年度.isBefore(調定年度)) {
             Noki 過年度納期 = FukaNokiResearcher.createInstance().get過年度納期(期月.get期AsInt());

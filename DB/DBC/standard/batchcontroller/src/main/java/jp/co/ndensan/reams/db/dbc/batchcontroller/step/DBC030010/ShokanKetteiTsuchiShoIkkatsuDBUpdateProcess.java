@@ -45,8 +45,6 @@ public class ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess extends BatchProcessBas
     private static final RString 更新する = new RString("2");
     private static final RString 初期連番 = new RString("0001");
     private static final RString 初期年度 = new RString("0000");
-    private static final int MAXLENGTH = 4;
-    private static final RString ZERO = new RString("0");
     private static final RString 発行有無_2 = new RString("２号発行有無");
 
     @BatchWriter

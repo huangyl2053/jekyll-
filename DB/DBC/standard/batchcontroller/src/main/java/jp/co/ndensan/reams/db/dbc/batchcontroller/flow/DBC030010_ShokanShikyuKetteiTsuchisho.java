@@ -22,8 +22,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanbaraiSash
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.UpdHakkoutaisyouFlgProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanKetteiTsuchiShokanShinsei.ShokanKetteiTsuchiShokanShinseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanketteitsuchishokanshinsei.ShokanKetteiTsuchiShokanShinseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
@@ -160,7 +160,9 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
 
     @Step(TEMP_INSERT_LTIRAN)
     IBatchFlowCommand shokanKetteiTsuchiShoMeisaiItiranTempInsertProcess() {
-        return loopBatch(ShokanKetteiTsuchiShoMeisaiItiranTempInsertProcess.class).define();
+        return loopBatch(ShokanKetteiTsuchiShoMeisaiItiranTempInsertProcess.class)
+                .arguments(ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter.createProcessParam(getParameter()))
+                .define();
     }
 
     @Step(DB_UPDATE)

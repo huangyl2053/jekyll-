@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseiken
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
+import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteFath;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -124,7 +125,7 @@ public class KihonInfoMainPanel {
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             getHandler(div).set削除状態();
-            db情報 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
+            db情報 = SyokanbaraihiShikyuShinseiKetteFath.createInstance()
                     .delShokanSyomeisyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, db情報);
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
             return ResponseData.of(div).setState(DBC0820021StateName.削除モード);

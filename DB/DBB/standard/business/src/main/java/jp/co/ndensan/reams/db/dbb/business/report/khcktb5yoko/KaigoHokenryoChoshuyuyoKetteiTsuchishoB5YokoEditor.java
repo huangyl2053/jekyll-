@@ -15,16 +15,19 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.kanendo.KanendoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
+import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -116,8 +119,13 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
         KitsukiList 期月リスト_普徴;
         TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
         期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
-        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
-        期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
+        if (徴収猶予決定通知書情報.get年度区分() == GennenKanen.現年度) {
+            FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
+            期月リスト_普徴 = fuchoKiUtil.get期月リスト();
+        } else {
+            KanendoKiUtil kanendoKiUtil = new KanendoKiUtil();
+            期月リスト_普徴 = kanendoKiUtil.get期月リスト();
+        }
         KibetsuChoshyuYuyoKikan 期別徴収猶予期間 = get期別徴収猶予期間リストを生成する(
                 徴収猶予決定通知書情報, 期月リスト_特徴, 期月リスト_普徴, index);
         List<RString> 随時リスト = get随時リストを生成する(期月リスト_普徴, index);
@@ -296,7 +304,8 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
         List<RString> 随時リスト = new ArrayList<>();
         Kitsuki 普徴期月 = 期月リスト_普徴.get期の最初月(index);
         if (FuchokiJohoTsukiShoriKubun.随時.equals(普徴期月.get月処理区分())
-                || FuchokiJohoTsukiShoriKubun.現年随時.equals(普徴期月.get月処理区分())) {
+                || FuchokiJohoTsukiShoriKubun.現年随時.equals(普徴期月.get月処理区分())
+                || KanendoTsukiShoriKubun.随時 == 普徴期月.get月処理区分()) {
             随時リスト.add(FuchokiJohoTsukiShoriKubun.随時.get名称());
         } else {
             随時リスト.add(RString.EMPTY);

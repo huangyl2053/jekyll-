@@ -164,7 +164,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
                         ? null : 仮算定通知書情報.get賦課の情報_更正前().get賦課情報())));
         編集後仮算定通知書.set更正後(get更正後(仮算定通知書情報, get普徴期別金額合計(仮算定通知書情報.get賦課の情報_更正後() == null
                 ? null : 仮算定通知書情報.get賦課の情報_更正後().get賦課情報()),
-                get特徴期別金額合計(仮算定通知書情報.get賦課の情報_更正後() == null 
+                get特徴期別金額合計(仮算定通知書情報.get賦課の情報_更正後() == null
                         ? null : 仮算定通知書情報.get賦課の情報_更正後().get賦課情報())));
         編集後仮算定通知書.set増減額(getNullToZero(編集後仮算定通知書.get更正後().get更正後介護保険料仮徴収額合計())
                 .subtract(getNullToZero(編集後仮算定通知書.get更正前().get更正前介護保険料仮徴収額合計())));
@@ -514,9 +514,10 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         PrecedingFiscalYearInformation 前年度情報 = new PrecedingFiscalYearInformation();
         if (前年度情報有無) {
             前年度情報.set前年度賦課年度(前年度賦課情報.get賦課年度().toDateString());
-            前年度情報.set前年度保険料段階(!RString.isNullOrEmpty(前年度賦課情報.get保険料算定段階2())
-                    ? 前年度賦課情報.get保険料算定段階2() : 前年度賦課情報.get保険料算定段階1());
+            前年度情報.set前年度保険料段階(format保険料段階(!RString.isNullOrEmpty(前年度賦課情報.get保険料算定段階2())
+                    ? 前年度賦課情報.get保険料算定段階2() : 前年度賦課情報.get保険料算定段階1()));
             前年度情報.set前年度保険料率(前年度賦課情報.get算定年額保険料2() != null
+                    && !前年度賦課情報.get算定年額保険料2().equals(Decimal.ZERO)
                     ? 前年度賦課情報.get算定年額保険料2() : 前年度賦課情報.get算定年額保険料1());
             前年度情報.set前年度減免前介護保険料_年額(前年度賦課情報.get減免前介護保険料_年額());
             前年度情報.set前年度確定介護保険料_年額(前年度賦課情報.get確定介護保険料_年額());
@@ -543,6 +544,14 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
             前年度情報.set前年度最終期特徴期別介護保険料(Decimal.ZERO);
         }
         return 前年度情報;
+    }
+
+    private RString format保険料段階(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return value;
+        }
+        return new RString("第").concat(
+                new RString(Integer.parseInt(value.substring(0, 2).toString()))).concat(new RString("段階"));
     }
 
     private Decimal get納付済額未到来期含まない(RString 徴収メソッド, List<NokiJoho> 納期情報リスト, ShunyuJoho 収入情報) {

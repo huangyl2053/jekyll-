@@ -55,11 +55,9 @@ public class ShinNendoKanriJohoSakuseiManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンスを
-     * 返します。
+     * {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンスを 返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンス
      */
     public static ShinNendoKanriJohoSakuseiManager createInstance() {
         return InstanceProvider.create(ShinNendoKanriJohoSakuseiManager.class);
@@ -152,6 +150,9 @@ public class ShinNendoKanriJohoSakuseiManager {
     }
 
     private RDate 日付取得(RDate 日付) {
+        if (RDate.MAX.isBeforeOrEquals(日付)) {
+            return RDate.MAX;
+        }
         IBusinessDayDealable businessDay = BusinessDayFactory.createInstance(HolidayCategoryFactory.createJpHoliday(),
                 BusinessDayIncludesHoliday.休日を含む, BusinessDayConvention.休みの直前);
         if (businessDay.isOpen(日付)) {

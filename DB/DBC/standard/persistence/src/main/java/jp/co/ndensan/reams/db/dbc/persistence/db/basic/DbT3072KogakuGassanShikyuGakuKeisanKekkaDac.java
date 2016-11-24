@@ -129,25 +129,21 @@ public class DbT3072KogakuGassanShikyuGakuKeisanKekkaDac implements ISaveable<Db
     /**
      * 支給申請書整理番号で高額合算支給額計算結果を取得します。
      *
-     * @param 被保険者番号 HihokenshaNo
      * @param 支給申請書整理番号 ShikyuShinseishoSeiriNo
      * @return DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity> selectBySeiriNo(
-            HihokenshaNo 被保険者番号,
             RString 支給申請書整理番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT3072KogakuGassanShikyuGakuKeisanKekka.class).
-                where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(shikyuShinseishoSeiriNo, 支給申請書整理番号)))
+                where(
+                        eq(shikyuShinseishoSeiriNo, 支給申請書整理番号))
                 .toList(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity.class);
     }
 

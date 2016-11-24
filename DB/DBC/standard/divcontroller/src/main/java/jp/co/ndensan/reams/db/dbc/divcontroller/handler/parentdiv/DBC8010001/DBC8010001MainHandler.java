@@ -103,9 +103,13 @@ public class DBC8010001MainHandler {
         div.getItakusha().getTxtItakushaCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaCode());
         div.getItakusha().getTxtItakushamei().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushamei());
         div.getItakusha().setItakushaId(new RString(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaId().toString()));
+        RString 振込委託者 = RString.EMPTY;
+        KinyuKikanCode 振込委託者コード = entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode();
+        if (null != 振込委託者コード && !振込委託者コード.isEmpty()) {
+            振込委託者 = 振込委託者コード.value();
+        }
         div.getItakusha().getTxtFurikomiGroupCode().setValue(
-                entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode().value()
-                .concat(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode()));
+                振込委託者.concat(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode()));
         div.getItakusha().getTxtFurikomiGroupMeisho().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupMeisho());
         List<KeyValueDataSource> list1 = new ArrayList<>();
         KeyValueDataSource source1 = new KeyValueDataSource();
@@ -408,7 +412,7 @@ public class DBC8010001MainHandler {
         }
         parameter.set処理対象(Furikomi_ShoriTaisho.toValue(div.getDdlShoriTaisho().getSelectedKey()));
         parameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
-        parameter.set委託者コード(div.getTxtItakushaCode().getValue());
+        parameter.set委託者コード(div.getItakusha().getItakushaId());
         if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
             parameter.set対象作成年月日(new FlexibleDate(div.getTxtTaishoSakuseiYMD().getValue().toDateString()));
         }
