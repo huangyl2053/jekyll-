@@ -94,7 +94,6 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
 
     private static class SpecHelper {
 
-        private static final RString ONE = new RString("1");
         private static final RString ZERO = new RString("0");
 
         /**

@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt200FindShikibetsuTaishoFunctionDac;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -110,7 +109,7 @@ public class RentaiNofuGimusha {
                 連帯納付義務者宛名情報.set氏名(宛名entity.getMeisho());
                 連帯納付義務者宛名情報.set生年月日(宛名entity.getSeinengappiYMD());
                 連帯納付義務者宛名情報.set性別(宛名entity.getSeibetsuCode());
-                連帯納付義務者宛名情報.set住民種別(宛名entity.getJuminJotaiCode());
+                連帯納付義務者宛名情報.set住民種別(宛名entity.getJuminShubetsuCode());
                 連帯納付義務者宛名情報.set続柄(宛名entity.getTsuzukigara());
                 連帯納付義務者宛名情報.set住所(宛名entity.getJusho());
                 連帯納付義務者宛名情報.set履歴番号(連帯納付義務者entity.getRirekiNo().intValue());
@@ -166,7 +165,6 @@ public class RentaiNofuGimusha {
     public void insRentaiNofuGimushaInfo(
             List<RentaiGimusha> 連帯納付義務者情報リスト,
             HihokenshaNo 被保険者番号) {
-        Decimal 履歴番号;
         if (連帯納付義務者情報リスト != null && !連帯納付義務者情報リスト.isEmpty()) {
             for (RentaiGimusha 連帯納付義務者 : 連帯納付義務者情報リスト) {
                 DbT2009RentaiGimushaEntity 連帯納付義務者Entity = 連帯納付義務者.toEntity();
