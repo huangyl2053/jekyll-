@@ -41,7 +41,7 @@ public class FurikomiMeisaiListStatusProcess extends BatchProcessBase<FurikomiMe
     @Override
     protected void process(FurikomiMeisaiListStatusEntity t) {
         FurikomiDetailTempTableEntity data = t.get振込明細一時Entity();
-        data.setShinseiKubunCode(t.get要介護認定申請情報Entity().getNinteiShinseiShinseijiKubunCode());
+        data.setShinseiKubunCode(t.get認定申請区分申請時コード());
         data.setYokaigoJotaiKubunCode(t.get受給者台帳Entity().getYokaigoJotaiKubunCode());
         data.setNinteiYukoKikanKaishiYMD(t.get受給者台帳Entity().getNinteiYukoKikanKaishiYMD());
         data.setNinteiYukoKikanShuryoYMD(t.get受給者台帳Entity().getNinteiYukoKikanShuryoYMD());

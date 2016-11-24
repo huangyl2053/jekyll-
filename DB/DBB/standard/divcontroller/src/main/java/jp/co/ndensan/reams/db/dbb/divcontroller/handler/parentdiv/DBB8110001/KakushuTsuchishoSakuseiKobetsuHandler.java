@@ -226,6 +226,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 KanendoKiUtil kanendoKi = new KanendoKiUtil();
                 set普通徴収(null, 賦課の情報, kanendoKi.get期月リスト());
             }
+            set歳出還付額(賦課の情報);
         } else {
             List<KeyValueDataSource> 更正後Data = new ArrayList<>();
             List<KeyValueDataSource> 更正前Data = new ArrayList<>();
@@ -267,7 +268,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
             set更正後賦課根拠(更正後賦課の情報);
             div.setHdnKouseizenFlag(無);
-            if (honsanteiIkoHantei.is本算定後(更正前賦課の情報) && 更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度())) {
+            if (!更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度())
+                    || (更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度()) && honsanteiIkoHantei.is本算定後(更正前賦課の情報))) {
                 set更正前賦課根拠(更正前賦課の情報);
                 div.setHdnKouseizenFlag(有);
             }
@@ -279,11 +281,37 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 KanendoKiUtil kanendoKi = new KanendoKiUtil();
                 set普通徴収(更正前賦課の情報, 更正後賦課の情報, kanendoKi.get期月リスト());
             }
+            set歳出還付額(更正後賦課の情報);
         }
         Map<RString, FlexibleYear> 年度Map = new HashMap<>();
         年度Map.put(調定年度_KEY, 調定年度);
         年度Map.put(賦課年度_KEY, 賦課年度);
         return 年度Map;
+    }
+
+    private void set歳出還付額(FukaJoho 更正後賦課の情報) {
+        Decimal 特徴歳出還付額 = getNullToZero(更正後賦課の情報.get特徴歳出還付額());
+        Decimal 普徴歳出還付額 = getNullToZero(更正後賦課の情報.get普徴歳出還付額());
+        if (特徴歳出還付額.compareTo(Decimal.ZERO) > 0 || 普徴歳出還付額.compareTo(Decimal.ZERO) > 0) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblSaishutsuKampu()
+                    .getLblTokuchoSaishutsuKampuGaku().setText(null == 更正後賦課の情報.get特徴歳出還付額()
+                            ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(特徴歳出還付額, 0));
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblSaishutsuKampu()
+                    .getLblFuchoSaishutsuKampuGaku().setText(null == 更正後賦課の情報.get普徴歳出還付額()
+                            ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(普徴歳出還付額, 0));
+        } else {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblSaishutsuKampu()
+                    .getLblTokuchoSaishutsuKampuGaku().setText(RString.EMPTY);
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblSaishutsuKampu()
+                    .getLblFuchoSaishutsuKampuGaku().setText(RString.EMPTY);
+        }
+    }
+
+    private Decimal getNullToZero(Decimal value) {
+        if (null == value) {
+            return Decimal.ZERO;
+        }
+        return value;
     }
 
     /**

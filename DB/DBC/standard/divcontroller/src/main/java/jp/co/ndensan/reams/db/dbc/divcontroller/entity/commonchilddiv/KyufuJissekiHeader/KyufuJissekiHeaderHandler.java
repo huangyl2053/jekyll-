@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeaderAll;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -185,7 +185,7 @@ public class KyufuJissekiHeaderHandler {
 
     private void set給付実績ヘッダ情報1(KyufuJissekiHedajyoho1 給付実績ヘッダ情報1) {
         div.getTxtHihoNo().setValue(get被保険者番号(給付実績ヘッダ情報1.get被保険者番号()));
-        div.getTxtJuminShubetsu().setValue(get住民種別(給付実績ヘッダ情報1.get資格取得事由コード()));
+        div.getTxtJuminShubetsu().setValue(給付実績ヘッダ情報1.get住民種別());
         if (給付実績ヘッダ情報1.get認定年月日() != null && !給付実績ヘッダ情報1.get認定年月日().isEmpty()
                 && !RString.isNullOrEmpty(給付実績ヘッダ情報1.get要介護認定状態区分コード())) {
             div.getTxtYoKaigodo().setValue(YokaigoJotaiKubunSupport.toValue(
@@ -202,7 +202,6 @@ public class KyufuJissekiHeaderHandler {
         if (給付実績ヘッダ情報1.get生年月日() != null && !給付実績ヘッダ情報1.get生年月日().isEmpty()) {
             div.getTxtSeinengappi().setValue(new RDate(給付実績ヘッダ情報1.get生年月日().toString()));
         }
-        //div.getTxtHokensha().setValue(給付実績ヘッダ情報1.get名称());
     }
 
     private void set給付実績ヘッダ情報2(KyufuJissekiHedajyoho2 給付実績ヘッダ情報2) {
@@ -216,13 +215,6 @@ public class KyufuJissekiHeaderHandler {
         div.setHiddenYoshikiNo(給付実績ヘッダ情報2.get識別番号());
         div.setHiddenJigyoshaCode(get事業所番号(給付実績ヘッダ情報2.get事業所番号()));
         div.getJigyosha().setValue(給付実績ヘッダ情報2.get事業者名称());
-    }
-
-    private RString get住民種別(RString 資格取得事由コード) {
-        if (!RString.isNullOrEmpty(資格取得事由コード)) {
-            return ShikakuShutokuJiyu.toValue(資格取得事由コード).get名称();
-        }
-        return RString.EMPTY;
     }
 
     private RString get性別(RString 性別コード) {
@@ -293,15 +285,69 @@ public class KyufuJissekiHeaderHandler {
         set実績区分(給付実績基本データ.get給付実績区分コード());
         set整理番号(給付実績基本データ.get整理番号());
         set識別番号名称(識別番号管理.get識別番号());
+        div.getTxtYoshikiMeisho().setValue(識別番号管理.get名称());
         if (csData_A.get事業者名称() != null) {
-            div.getTxtYoshikiMeisho().setValue(csData_A.get事業者名称().getColumnValue());
             div.getJigyosha().setValue(csData_A.get事業者名称().getColumnValue());
         } else {
-            div.getTxtYoshikiMeisho().clearValue();
             div.getJigyosha().clearValue();
         }
         if (給付実績基本データ.get事業者番号() != null) {
             div.getTxtJigyoshaNo().setValue(給付実績基本データ.get事業者番号().getColumnValue());
+        } else {
+            div.getTxtJigyoshaNo().clearValue();
         }
+    }
+
+    /**
+     * 給付実績基本情報データを取得します。
+     *
+     * @return 給付実績基本情報データ 給付実績基本情報データ
+     */
+    public KyufuJissekiHeaderAll get給付実績基本情報データ() {
+        KyufuJissekiHeaderAll 給付実績基本情報 = new KyufuJissekiHeaderAll();
+        給付実績基本情報.set被保険者番号(div.getTxtHihoNo().getValue());
+        給付実績基本情報.set住民種別(div.getTxtJuminShubetsu().getValue());
+        給付実績基本情報.set要介護度(div.getTxtYoKaigodo().getValue());
+        給付実績基本情報.set氏名(div.getTxtShimei().getValue());
+        給付実績基本情報.set性別(div.getTxtSeibetsu().getValue());
+        給付実績基本情報.set有効期間開始年月日(div.getTxtYukoKikan().getFromValue());
+        給付実績基本情報.set有効期間終了年月日(div.getTxtYukoKikan().getToValue());
+        給付実績基本情報.set生年月日(div.getTxtSeinengappi().getValue());
+        給付実績基本情報.set提供年月(div.getTxtTeikyoNengetsu().getValue());
+        給付実績基本情報.set実績区分(div.getTxtJissekiKubun().getValue());
+        給付実績基本情報.set作成区分(div.getTxtSakuseiKubun().getValue());
+        給付実績基本情報.set整理番号(div.getTxtSeiriNo().getValue());
+        給付実績基本情報.set証記載保険者番号(div.getTxtShokisaiHokenshaNo().getValue());
+        給付実績基本情報.set様式番号(div.getTxtYoshikiNo().getValue());
+        給付実績基本情報.set様式番号_Name(div.getTxtYoshikiMeisho().getValue());
+        給付実績基本情報.set事業者(div.getTxtJigyoshaNo().getValue());
+        給付実績基本情報.set事業者_Name(div.getJigyosha().getValue());
+        return 給付実績基本情報;
+    }
+
+    /**
+     * 給付実績基本情報を設定します。
+     *
+     * @param 給付実績基本情報 給付実績基本情報子Divデータ
+     */
+    public void set給付実績基本情報データ(KyufuJissekiHeaderAll 給付実績基本情報) {
+        div.getTxtHihoNo().setValue(給付実績基本情報.get被保険者番号());
+        div.getTxtJuminShubetsu().setValue(給付実績基本情報.get住民種別());
+        div.getTxtYoKaigodo().setValue(給付実績基本情報.get要介護度());
+        div.getTxtYukoKikan().setFromValue(給付実績基本情報.get有効期間開始年月日());
+        div.getTxtYukoKikan().setToValue(給付実績基本情報.get有効期間終了年月日());
+        div.getTxtShimei().setValue(給付実績基本情報.get氏名());
+        div.getTxtSeibetsu().setValue(給付実績基本情報.get性別());
+        div.getTxtSeinengappi().setValue(給付実績基本情報.get生年月日());
+        div.getTxtTeikyoNengetsu().setValue(給付実績基本情報.get提供年月());
+        div.getTxtSakuseiKubun().setValue(給付実績基本情報.get作成区分());
+        div.getTxtShokisaiHokenshaNo()
+                .setValue(給付実績基本情報.get証記載保険者番号());
+        div.getTxtJissekiKubun().setValue(給付実績基本情報.get実績区分());
+        set整理番号(給付実績基本情報.get整理番号());
+        set識別番号名称(給付実績基本情報.get様式番号());
+        div.getTxtYoshikiMeisho().setValue(給付実績基本情報.get様式番号_Name());
+        div.getTxtJigyoshaNo().setValue(給付実績基本情報.get事業者());
+        div.getJigyosha().setValue(給付実績基本情報.get事業者_Name());
     }
 }

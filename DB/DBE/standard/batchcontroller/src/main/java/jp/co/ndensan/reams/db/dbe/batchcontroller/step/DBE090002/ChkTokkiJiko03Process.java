@@ -42,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -784,36 +786,34 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
     }
 
     private RString getFilePathBak(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+        return sharedFileName;
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         ReadOnlySharedFileEntryDescriptor descriptor_BAK
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
         } catch (Exception e) {
             try {
-                SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(imagePath));
-                return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName.replace(".png", "_BAK.png"));
+                SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(batchWrite.getImageFolderPath()));
+                return sharedFileName.replace(".png", "_BAK.png");
             } catch (Exception ex) {
                 return RString.EMPTY;
             }
         }
-        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+        return sharedFileName;
     }
 
     private RString get特記事項名称(List<NinteichosaRelateEntity> 特記事項区分, int 連番) {
@@ -903,37 +903,37 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         ninteiEntity.set被保険者番号(entity.get被保険者番号());
         ninteiEntity.set被保険者氏名(entity.get被保険者氏名());
         ninteiEntity.set申請日_元号(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
-                .wareki().eraType(EraType.KANJI).getEra());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
         ninteiEntity.set申請日_年(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
-                .wareki().eraType(EraType.KANJI).getYear());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
         ninteiEntity.set申請日_月(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
-                .wareki().eraType(EraType.KANJI).getMonth());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
         ninteiEntity.set申請日_日(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
-                .wareki().eraType(EraType.KANJI).getDay());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         ninteiEntity.set作成日_元号(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
-                .wareki().eraType(EraType.KANJI).getEra());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
         ninteiEntity.set作成日_年(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
-                .wareki().eraType(EraType.KANJI).getYear());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
         ninteiEntity.set作成日_月(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
-                .wareki().eraType(EraType.KANJI).getMonth());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
         ninteiEntity.set作成日_日(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
-                .wareki().eraType(EraType.KANJI).getDay());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         ninteiEntity.set調査日_元号(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
-                .wareki().eraType(EraType.KANJI).getEra());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
         ninteiEntity.set調査日_年(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
-                .wareki().eraType(EraType.KANJI).getYear());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
         ninteiEntity.set調査日_月(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
-                .wareki().eraType(EraType.KANJI).getMonth());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
         ninteiEntity.set調査日_日(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
-                .wareki().eraType(EraType.KANJI).getDay());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         ninteiEntity.set審査日_元号(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
-                .wareki().eraType(EraType.KANJI).getEra());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
         ninteiEntity.set審査日_年(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
-                .wareki().eraType(EraType.KANJI).getYear());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
         ninteiEntity.set審査日_月(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
-                .wareki().eraType(EraType.KANJI).getMonth());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
         ninteiEntity.set審査日_日(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
-                .wareki().eraType(EraType.KANJI).getDay());
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         ninteiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
         int page = (特記事項区分.size() + 連番23) / 連番24;
         ninteiEntity.set総ページ数(new RString(page));

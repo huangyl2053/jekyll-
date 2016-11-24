@@ -440,7 +440,7 @@ public class ShinseiKensakuHandler {
             parameter.setUseShishoCode(true);
         }
 
-        RString 被保険者氏名 = finderDiv.getTxtHihokenshaName().getValue();
+        RString 被保険者氏名 = finderDiv.getTxtHihokenshaName().getValue().replace(RString.FULL_SPACE, RString.EMPTY);
         if (!RString.isNullOrEmpty(被保険者氏名)) {
             RString hihokenshaNameMatchType = finderDiv.getDdlHihokenshaNameMatchType().getSelectedKey();
             if (KEY0.equals(hihokenshaNameMatchType)) {

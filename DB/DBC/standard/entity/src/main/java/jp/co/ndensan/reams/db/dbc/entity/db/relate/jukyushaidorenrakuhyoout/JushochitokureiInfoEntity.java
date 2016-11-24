@@ -25,8 +25,6 @@ public class JushochitokureiInfoEntity {
     private HihokenshaNo 被保険者番号;
     private FlexibleDate 住所地特例適用開始日;
     private FlexibleDate 住所地特例適用終了日;
-    private FlexibleDate 入所年月日;
-    private FlexibleDate 退所年月日;
     private HokenshaNo 転出先保険者番号;
     private ShikibetsuCode 識別コード;
     private int 履歴番号;

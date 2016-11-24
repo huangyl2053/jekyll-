@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010000;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShokujiHiyo;
@@ -52,6 +54,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.Kyuf
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010000.KyufuJissekiShokaiHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010000.KyufuJissekiShokaiValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
@@ -117,7 +120,27 @@ public class KyufuJissekiShokai {
     private static final int INT_SJYUY = 34;
     private static final int INT_SJYUG = 35;
     private static final int INT_SJYUR = 36;
+    private static final int INT_37 = 37;
+    private static final int INT_38 = 38;
+    private static final int INT_39 = 39;
+    private static final int INT_40 = 40;
+    private static final int INT_41 = 41;
+    private static final int INT_42 = 42;
+    private static final int INT_43 = 43;
+    private static final int INT_44 = 44;
+    private static final int INT_45 = 45;
+    private static final int INT_46 = 46;
     private static final int INT_47 = 47;
+    private static final int INT_48 = 48;
+    private static final int INT_49 = 49;
+    private static final int INT_50 = 50;
+    private static final int INT_51 = 51;
+    private static final int INT_52 = 52;
+    private static final int INT_53 = 53;
+    private static final int INT_54 = 54;
+    private static final int INT_55 = 55;
+    private static final int INT_56 = 56;
+    private static final int INT_57 = 57;
     private static final int INT_NJYUNG = 75;
     private static final RString KEY = new RString("key0");
     private static final RString サービス提供月_開始 = new RString("04");
@@ -259,7 +282,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM1(div);
         }
-        setパラメータサービス提供年月(div, INT_ICHI);
+        setパラメータ(div, INT_ICHI);
         return response_Meisai(div);
     }
 
@@ -273,7 +296,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM2(div);
         }
-        setパラメータサービス提供年月(div, INT_NI);
+        setパラメータ(div, INT_NI);
         return response_Meisai(div);
     }
 
@@ -287,7 +310,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM3(div);
         }
-        setパラメータサービス提供年月(div, INT_SAN);
+        setパラメータ(div, INT_SAN);
         return response_Meisai(div);
     }
 
@@ -301,7 +324,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM4(div);
         }
-        setパラメータサービス提供年月(div, INT_YON);
+        setパラメータ(div, INT_YON);
         return response_Meisai(div);
     }
 
@@ -315,7 +338,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM5(div);
         }
-        setパラメータサービス提供年月(div, INT_GO);
+        setパラメータ(div, INT_GO);
         return response_Meisai(div);
     }
 
@@ -329,7 +352,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM6(div);
         }
-        setパラメータサービス提供年月(div, INT_ROKU);
+        setパラメータ(div, INT_ROKU);
         return response_Meisai(div);
     }
 
@@ -343,7 +366,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM7(div);
         }
-        setパラメータサービス提供年月(div, INT_NANA);
+        setパラメータ(div, INT_NANA);
         return response_Meisai(div);
     }
 
@@ -357,7 +380,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM8(div);
         }
-        setパラメータサービス提供年月(div, INT_HACHI);
+        setパラメータ(div, INT_HACHI);
         return response_Meisai(div);
     }
 
@@ -371,7 +394,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM9(div);
         }
-        setパラメータサービス提供年月(div, INT_KYU);
+        setパラメータ(div, INT_KYU);
         return response_Meisai(div);
     }
 
@@ -385,7 +408,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM10(div);
         }
-        setパラメータサービス提供年月(div, INT_JYU);
+        setパラメータ(div, INT_JYU);
         return response_Meisai(div);
     }
 
@@ -399,7 +422,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM11(div);
         }
-        setパラメータサービス提供年月(div, INT_JYUI);
+        setパラメータ(div, INT_JYUI);
         return response_Meisai(div);
     }
 
@@ -413,7 +436,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM12(div);
         }
-        setパラメータサービス提供年月(div, INT_JYUN);
+        setパラメータ(div, INT_JYUN);
         return response_Meisai(div);
     }
 
@@ -427,7 +450,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM13(div);
         }
-        setパラメータサービス提供年月(div, INT_JYUS);
+        setパラメータ(div, INT_JYUS);
         return response_Meisai(div);
     }
 
@@ -441,7 +464,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM4(div);
         }
-        setパラメータサービス提供年月(div, INT_JYUY);
+        setパラメータ(div, INT_JYUY);
         return response_Meisai(div);
     }
 
@@ -455,7 +478,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM15(div);
         }
-        setパラメータサービス提供年月(div, INT_JYUG);
+        setパラメータ(div, INT_JYUG);
         return response_Meisai(div);
     }
 
@@ -469,7 +492,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM16(div);
         }
-        setパラメータサービス提供年月(div, INT_JYUR);
+        setパラメータ(div, INT_JYUR);
         return response_Meisai(div);
     }
 
@@ -483,7 +506,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM17(div);
         }
-        setパラメータサービス提供年月(div, INT_JYUNA);
+        setパラメータ(div, INT_JYUNA);
         return response_Meisai(div);
     }
 
@@ -497,7 +520,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM18(div);
         }
-        setパラメータサービス提供年月(div, INT_JYUH);
+        setパラメータ(div, INT_JYUH);
         return response_Meisai(div);
     }
 
@@ -511,7 +534,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM19(div);
         }
-        setパラメータサービス提供年月(div, INT_JYUK);
+        setパラメータ(div, INT_JYUK);
         return response_Meisai(div);
     }
 
@@ -525,7 +548,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM20(div);
         }
-        setパラメータサービス提供年月(div, INT_NJYU);
+        setパラメータ(div, INT_NJYU);
         return response_Meisai(div);
     }
 
@@ -539,7 +562,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM21(div);
         }
-        setパラメータサービス提供年月(div, INT_NJYUI);
+        setパラメータ(div, INT_NJYUI);
         return response_Meisai(div);
     }
 
@@ -553,7 +576,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM22(div);
         }
-        setパラメータサービス提供年月(div, INT_NJYUN);
+        setパラメータ(div, INT_NJYUN);
         return response_Meisai(div);
     }
 
@@ -567,7 +590,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM23(div);
         }
-        setパラメータサービス提供年月(div, INT_NJYUS);
+        setパラメータ(div, INT_NJYUS);
         return response_Meisai(div);
     }
 
@@ -581,7 +604,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM24(div);
         }
-        setパラメータサービス提供年月(div, INT_NJYUY);
+        setパラメータ(div, INT_NJYUY);
         return response_Meisai(div);
     }
 
@@ -595,7 +618,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM25(div);
         }
-        setパラメータサービス提供年月(div, INT_NJYUG);
+        setパラメータ(div, INT_NJYUG);
         return response_Meisai(div);
     }
 
@@ -609,7 +632,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM26(div);
         }
-        setパラメータサービス提供年月(div, INT_NJYUR);
+        setパラメータ(div, INT_NJYUR);
         return response_Meisai(div);
     }
 
@@ -623,7 +646,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM27(div);
         }
-        setパラメータサービス提供年月(div, INT_NJYUNA);
+        setパラメータ(div, INT_NJYUNA);
         return response_Meisai(div);
     }
 
@@ -637,7 +660,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM28(div);
         }
-        setパラメータサービス提供年月(div, INT_NJYUH);
+        setパラメータ(div, INT_NJYUH);
         return response_Meisai(div);
     }
 
@@ -651,7 +674,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM29(div);
         }
-        setパラメータサービス提供年月(div, INT_NJYUK);
+        setパラメータ(div, INT_NJYUK);
         return response_Meisai(div);
     }
 
@@ -665,7 +688,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM30(div);
         }
-        setパラメータサービス提供年月(div, INT_SJYU);
+        setパラメータ(div, INT_SJYU);
         return response_Meisai(div);
     }
 
@@ -679,7 +702,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM31(div);
         }
-        setパラメータサービス提供年月(div, INT_SJYUI);
+        setパラメータ(div, INT_SJYUI);
         return response_Meisai(div);
     }
 
@@ -693,7 +716,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM32(div);
         }
-        setパラメータサービス提供年月(div, INT_SJYUN);
+        setパラメータ(div, INT_SJYUN);
         return response_Meisai(div);
     }
 
@@ -707,7 +730,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM33(div);
         }
-        setパラメータサービス提供年月(div, INT_SJYUS);
+        setパラメータ(div, INT_SJYUS);
         return response_Meisai(div);
     }
 
@@ -721,7 +744,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM34(div);
         }
-        setパラメータサービス提供年月(div, INT_SJYUY);
+        setパラメータ(div, INT_SJYUY);
         return response_Meisai(div);
     }
 
@@ -735,7 +758,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM35(div);
         }
-        setパラメータサービス提供年月(div, INT_SJYUG);
+        setパラメータ(div, INT_SJYUG);
         return response_Meisai(div);
     }
 
@@ -749,7 +772,7 @@ public class KyufuJissekiShokai {
         if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
             return onClick_Gokei_btnYM36(div);
         }
-        setパラメータサービス提供年月(div, INT_SJYUR);
+        setパラメータ(div, INT_SJYUR);
         return response_Meisai(div);
     }
 
@@ -1123,7 +1146,7 @@ public class KyufuJissekiShokai {
         FlexibleYearMonth サービス提供年月_開始 = new FlexibleYearMonth(div.getHiddenStartYM());
         FlexibleYearMonth サービス提供年月_終了 = new FlexibleYearMonth(div.getHiddenEndYM());
         div.setHiddenStartIndex(new RString(0));
-        div.setHiddenEndIndex(new RString(INT_SJYU));
+        div.setHiddenEndIndex(new RString(INT_SJYUG));
         getHandler(div).onClick_btnSento(サービス提供年月_開始, サービス提供年月_終了, get一覧データ());
         return ResponseData.of(div).respond();
     }
@@ -1170,11 +1193,408 @@ public class KyufuJissekiShokai {
         return ResponseData.of(div).respond();
     }
 
-    private void setパラメータサービス提供年月(KyufuJissekiShokaiDiv div, int 列) {
-        RString サービス提供年月 = div.getDgKyufuJissekiMeisaiList().getGridSetting().
-                getColumns().get(列 * INT_NI + INT_ICHI).getGroupName();
-        ViewStateHolder.put(ViewStateKeys.サービス提供年月,
-                new FlexibleYearMonth(new RDate(サービス提供年月.toString()).getYearMonth().toDateString()));
+    private void setパラメータ(KyufuJissekiShokaiDiv div, int 列) {
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(new RDate(div.getDgKyufuJissekiMeisaiList().getGridSetting().
+                getColumns().get(列 * INT_NI + INT_ICHI).getGroupName().toString()).getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス提供年月);
+        int rowId = div.getDgKyufuJissekiMeisaiList().getClickedRowId();
+        if (rowId == INT_55) {
+            TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            FlexibleYearMonth サービス提供年月_開始 = new FlexibleYearMonth(div.getHiddenStartYM());
+            FlexibleYearMonth サービス提供年月_終了 = new FlexibleYearMonth(div.getHiddenEndYM());
+            HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
+            List<KyufujissekiKogakuKaigoServicehi> 給付実績高額介護サービス費データリスト
+                    = KyufuJissekiShokaiFinder.createInstance().get給付実績高額介護サービス費データ(
+                            被保険者番号, サービス提供年月_開始, サービス提供年月_終了, KEY.equals(div.getHiddenSearchKey()));
+            KyufujissekiKogakuKaigoServicehiJyohou servicehiJyohou = new KyufujissekiKogakuKaigoServicehiJyohou();
+            servicehiJyohou.setCsData_I(給付実績高額介護サービス費データリスト);
+            ViewStateHolder.put(ViewStateKeys.給付実績高額明細管理情報, servicehiJyohou);
+        } else {
+            List<KyufuJissekiKihonShukeiRelate> 給付実績基本データ = get給付実績基本データ(div, 列);
+            KyufujissekiKihonJyohou kyufujissekiKihonJyohou = new KyufujissekiKihonJyohou();
+            kyufujissekiKihonJyohou.setCsData_A(給付実績基本データ);
+            ViewStateHolder.put(ViewStateKeys.給付実績基本情報, kyufujissekiKihonJyohou);
+        }
+    }
+
+    private List<KyufuJissekiKihonShukeiRelate> get給付実績基本データ(KyufuJissekiShokaiDiv div, int 列) {
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        FlexibleYearMonth サービス提供年月_開始 = new FlexibleYearMonth(div.getHiddenStartYM());
+        FlexibleYearMonth サービス提供年月_終了 = new FlexibleYearMonth(div.getHiddenEndYM());
+        HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
+        List<RString> サービス種類コードList = new ArrayList<>();
+        RString 検索条件番目;
+        int rowId = div.getDgKyufuJissekiMeisaiList().getClickedRowId();
+        if (KEY.equals(div.getHiddenSearchKey())) {
+            if (rowId == INT_NJYUR) {
+                検索条件番目 = new RString(INT_ICHI);
+            } else if (rowId == INT_51 || rowId == INT_53) {
+                検索条件番目 = new RString(INT_YON);
+            } else if (rowId == INT_52 || rowId == INT_54) {
+                検索条件番目 = new RString(INT_GO);
+            } else {
+                検索条件番目 = new RString(INT_SAN);
+                サービス種類コードList = getサービス種類コードList(div);
+            }
+        } else {
+            if (rowId == INT_JYUNA) {
+                検索条件番目 = new RString(INT_NI);
+            } else if (rowId == INT_NJYUY || rowId == INT_NJYUG) {
+                検索条件番目 = new RString(INT_NANA);
+            } else {
+                検索条件番目 = new RString(INT_SAN);
+                サービス種類コードList = getサービス種類コードList(div);
+            }
+        }
+        return KyufuJissekiShokaiFinder.createInstance().get給付実績基本データ(被保険者番号, サービス提供年月_開始,
+                サービス提供年月_終了, KEY.equals(div.getHiddenSearchKey()), 検索条件番目, サービス種類コードList);
+    }
+
+    private List<RString> getサービス種類コードList(KyufuJissekiShokaiDiv div) {
+        if (KEY.equals(div.getHiddenSearchKey())) {
+            return getサービス種類コード_日常生活支援総合事業(div);
+        } else {
+            return getサービス種類コード_経過措置(div);
+        }
+    }
+
+    private List<RString> getサービス種類コード_日常生活支援総合事業(KyufuJissekiShokaiDiv div) {
+        List<RString> サービス種類コード_日常生活支援総合事業 = new ArrayList<>();
+        int rowId = div.getDgKyufuJissekiMeisaiList().getClickedRowId();
+        if (rowId == INT_56) {
+            サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.用具販売.getコード());
+            サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予用販売.getコード());
+        } else if (rowId == INT_57) {
+            サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.住宅改修.getコード());
+            サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予住改修.getコード());
+        } else {
+            List<Integer> rowIdList = new ArrayList<>();
+            if (rowId <= INT_46) {
+                rowIdList.add(rowId);
+            } else {
+                List<Integer> 合計Index = get合計Index(rowId);
+                for (int index = 合計Index.get(0); index <= 合計Index.get(1); index++) {
+                    rowIdList.add(index);
+                }
+            }
+            サービス種類コード_日常生活支援総合事業.addAll(getサービス種類コード_日常生活支援総合事業(rowIdList));
+        }
+        Set<RString> サービス種類コード = new HashSet(サービス種類コード_日常生活支援総合事業);
+        サービス種類コード_日常生活支援総合事業 = new ArrayList<>(サービス種類コード);
+        return サービス種類コード_日常生活支援総合事業;
+    }
+
+    private List<Integer> get合計Index(int 合計一覧のINDEX) {
+        List<Integer> 合計Index = new ArrayList<>();
+        if (合計一覧のINDEX == INT_47) {
+            合計Index.add(INT_ZERO);
+            合計Index.add(INT_JYUS);
+        } else if (合計一覧のINDEX == INT_48) {
+            合計Index.add(INT_NJYUNA);
+            合計Index.add(INT_SJYUI);
+        } else if (合計一覧のINDEX == INT_49) {
+            合計Index.add(INT_JYUY);
+            合計Index.add(INT_NJYUG);
+        } else if (合計一覧のINDEX == INT_50) {
+            合計Index.add(INT_SJYUN);
+            合計Index.add(INT_46);
+        }
+        return 合計Index;
+    }
+
+    private List<RString> getサービス種類コード_日常生活支援総合事業(List<Integer> rowIdList) {
+        List<RString> サービス種類コード_日常生活支援総合事業 = new ArrayList<>();
+        for (int rowId : rowIdList) {
+            switch (rowId) {
+                case INT_ZERO:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.訪問介護.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予訪介護.getコード());
+                    break;
+                case INT_ICHI:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.訪問入浴.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予訪入浴.getコード());
+                    break;
+                case INT_NI:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.訪問看護.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予訪看護.getコード());
+                    break;
+                case INT_SAN:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.訪問リハ.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予訪リハ.getコード());
+                    break;
+                case INT_YON:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.通所介護.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予通介護.getコード());
+                    break;
+                case INT_GO:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.通所リハ.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予通リハ.getコード());
+                    break;
+                case INT_ROKU:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.用具貸与.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予用貸与.getコード());
+                    break;
+                case INT_NANA:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.短期生活.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予短介護.getコード());
+                    break;
+                case INT_HACHI:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.短期老健.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予短老健.getコード());
+                    break;
+                case INT_KYU:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.短期医療.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予短医療.getコード());
+                    break;
+                case INT_JYU:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.短期老健.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予短老健.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.短期医療.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予短医療.getコード());
+                    break;
+                case INT_JYUI:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.療養指導.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予療養指.getコード());
+                    break;
+                case INT_JYUN:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.特施短外.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予特施設.getコード());
+                    break;
+                case INT_JYUS:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.特施短期.getコード());
+                    break;
+                case INT_JYUY:
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地共同介.getコード());
+                    サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地予共同.getコード());
+                    break;
+                default:
+                    getサービス種類コード_日常生活支援総合事業_1(rowId, サービス種類コード_日常生活支援総合事業);
+                    break;
+            }
+        }
+        return サービス種類コード_日常生活支援総合事業;
+    }
+
+    private void getサービス種類コード_日常生活支援総合事業_1(int rowId, List<RString> サービス種類コード_日常生活支援総合事業) {
+        switch (rowId) {
+            case INT_JYUG:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地施短外.getコード());
+                break;
+            case INT_JYUR:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地施短期.getコード());
+                break;
+            case INT_JYUNA:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地共同短.getコード());
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地予共短.getコード());
+                break;
+            case INT_JYUH:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地夜間訪.getコード());
+                break;
+            case INT_JYUK:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地通所介.getコード());
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地予通所.getコード());
+                break;
+            case INT_NJYU:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地小短外.getコード());
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地予小外.getコード());
+                break;
+            case INT_NJYUI:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地小規単.getコード());
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地予小短.getコード());
+                break;
+            case INT_NJYUN:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.定期随時.getコード());
+                break;
+            case INT_NJYUS:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.看小短外.getコード());
+                break;
+            case INT_NJYUY:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.看小規短.getコード());
+                break;
+            case INT_NJYUG:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地域通所.getコード());
+                break;
+            case INT_NJYUR:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.居宅支援.getコード());
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予防支援.getコード());
+                break;
+            case INT_NJYUNA:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.福祉施設.getコード());
+                break;
+            case INT_NJYUH:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.老健施設.getコード());
+                break;
+            case INT_NJYUK:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.医療施設.getコード());
+                break;
+            case INT_SJYU:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.地福祉生.getコード());
+                break;
+            case INT_SJYUI:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.老健施設.getコード());
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.医療施設.getコード());
+                break;
+            default:
+                getサービス種類コード_日常生活支援総合事業_2(rowId, サービス種類コード_日常生活支援総合事業);
+                break;
+        }
+    }
+
+    private void getサービス種類コード_日常生活支援総合事業_2(int rowId, List<RString> サービス種類コード_日常生活支援総合事業) {
+        switch (rowId) {
+            case INT_SJYUN:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.訪問みな.getコード());
+                break;
+            case INT_SJYUS:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.訪問独自.getコード());
+                break;
+            case INT_SJYUY:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.訪問定率.getコード());
+                break;
+            case INT_SJYUG:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.訪問定額.getコード());
+                break;
+            case INT_SJYUR:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.通所みな.getコード());
+                break;
+            case INT_37:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.通所独自.getコード());
+                break;
+            case INT_38:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.通所定率.getコード());
+                break;
+            case INT_39:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.通所定額.getコード());
+                break;
+            case INT_40:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.予防ケア.getコード());
+                break;
+            case INT_41:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.配食定率.getコード());
+                break;
+            case INT_42:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.配食定額.getコード());
+                break;
+            case INT_43:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.見守定率.getコード());
+                break;
+            case INT_44:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.見守定額.getコード());
+                break;
+            case INT_45:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.その他率.getコード());
+                break;
+            case INT_46:
+                サービス種類コード_日常生活支援総合事業.add(ServiceCategoryShurui.その他額.getコード());
+                break;
+            default:
+                break;
+        }
+    }
+
+    private List<RString> getサービス種類コード_経過措置(KyufuJissekiShokaiDiv div) {
+        int rowId = div.getDgKyufuJissekiMeisaiList().getClickedRowId();
+        List<Integer> rowIdList = new ArrayList<>();
+        if (rowId <= INT_NJYU) {
+            rowIdList.add(rowId);
+        } else {
+            int beginInde;
+            int endIndex;
+            if (rowId == INT_NJYUI) {
+                beginInde = INT_ZERO;
+                endIndex = INT_JYUN;
+            } else if (rowId == INT_NJYUN) {
+                beginInde = INT_JYUS;
+                endIndex = INT_JYUR;
+            } else {
+                beginInde = INT_JYUH;
+                endIndex = INT_NJYU;
+            }
+            for (int index = beginInde; index <= endIndex; index++) {
+                rowIdList.add(index);
+            }
+        }
+        List<RString> サービス種類コード_経過措置 = new ArrayList<>();
+        getサービス種類コード_経過措置(rowIdList, サービス種類コード_経過措置);
+        return サービス種類コード_経過措置;
+    }
+
+    private void getサービス種類コード_経過措置(List<Integer> rowIdList, List<RString> サービス種類コード_経過措置) {
+        for (int rowId : rowIdList) {
+            switch (rowId) {
+                case INT_ZERO:
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総訪予防.getコード());
+                    break;
+                case INT_ICHI:
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総訪入浴.getコード());
+                    break;
+                case INT_NI:
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総訪看護.getコード());
+                    break;
+                case INT_SAN:
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総訪リハ.getコード());
+                    break;
+                case INT_YON:
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総通予防.getコード());
+                    break;
+                case INT_GO:
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総通リハ.getコード());
+                    break;
+                case INT_ROKU:
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総用貸与.getコード());
+                    break;
+                case INT_NANA:
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総短介護.getコード());
+                    break;
+                case INT_HACHI:
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総短老健.getコード());
+                    break;
+                case INT_KYU:
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総短医療.getコード());
+                    break;
+                case INT_JYU:
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総短老健.getコード());
+                    サービス種類コード_経過措置.add(ServiceCategoryShurui.総短医療.getコード());
+                    break;
+                default:
+                    getサービス種類コード_経過措置_1(rowId, サービス種類コード_経過措置);
+                    break;
+            }
+        }
+    }
+
+    private void getサービス種類コード_経過措置_1(int rowId, List<RString> サービス種類コード_経過措置) {
+        switch (rowId) {
+            case INT_JYUI:
+                サービス種類コード_経過措置.add(ServiceCategoryShurui.総療養指.getコード());
+                break;
+            case INT_JYUN:
+                サービス種類コード_経過措置.add(ServiceCategoryShurui.総特施設.getコード());
+                break;
+            case INT_JYUS:
+                サービス種類コード_経過措置.add(ServiceCategoryShurui.地総通所.getコード());
+                break;
+            case INT_JYUY:
+                サービス種類コード_経過措置.add(ServiceCategoryShurui.地総共短.getコード());
+                break;
+            case INT_JYUG:
+                サービス種類コード_経過措置.add(ServiceCategoryShurui.地総共同.getコード());
+                break;
+            case INT_JYUR:
+                サービス種類コード_経過措置.add(ServiceCategoryShurui.地総小規.getコード());
+                break;
+            case INT_JYUH:
+                サービス種類コード_経過措置.add(ServiceCategoryShurui.生活配食.getコード());
+                break;
+            case INT_JYUK:
+                サービス種類コード_経過措置.add(ServiceCategoryShurui.生活見守.getコード());
+                break;
+            case INT_NJYU:
+                サービス種類コード_経過措置.add(ServiceCategoryShurui.生活他.getコード());
+                break;
+            default:
+                break;
+        }
     }
 
     private KyufuJissekiShokaiHandler getHandler(KyufuJissekiShokaiDiv div) {
@@ -1227,15 +1647,11 @@ public class KyufuJissekiShokai {
     }
 
     private ResponseData<KyufuJissekiShokaiDiv> response_Gokei(KyufuJissekiShokaiDiv div, int ボタン列) {
+        setパラメータ(div, ボタン列);
         if (KEY.equals(div.getHiddenSearchKey())) {
-            setパラメータサービス提供年月(div, ボタン列);
             int 選択行 = div.getDgKyufuJissekiMeisaiList().getClickedRowId();
             if (INT_HACHI + INT_47 == 選択行) {
                 return response_GokeiKogakuKaigoService(div);
-            } else if (INT_KYU + INT_47 == 選択行) {
-                return response_GokeiFukushiYogu(div);
-            } else if (INT_JYU + INT_47 == 選択行) {
-                return response_GokeiJyutakuKayisyu(div);
             }
         }
         return response_Meisai(div);
@@ -1243,14 +1659,6 @@ public class KyufuJissekiShokai {
 
     private ResponseData<KyufuJissekiShokaiDiv> response_GokeiKogakuKaigoService(KyufuJissekiShokaiDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.高額介護サービス費).respond();
-    }
-
-    private ResponseData<KyufuJissekiShokaiDiv> response_GokeiFukushiYogu(KyufuJissekiShokaiDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.福祉用具購入費).respond();
-    }
-
-    private ResponseData<KyufuJissekiShokaiDiv> response_GokeiJyutakuKayisyu(KyufuJissekiShokaiDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.住宅改修費).respond();
     }
 
     private KyufuJissekiSearchDataBusiness get一覧データ() {

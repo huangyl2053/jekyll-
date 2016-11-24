@@ -63,8 +63,7 @@ public class JikofutangakuShomeishoTorokuManager {
     /**
      * {@link InstanceProvider#create}により生成されたインタフェースを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}により生成された{@link JikofutangakuShomeishoTorokuManager}
+     * @return {@link InstanceProvider#create}により生成された{@link JikofutangakuShomeishoTorokuManager}
      */
     public static JikofutangakuShomeishoTorokuManager createInstance() {
         return InstanceProvider.create(JikofutangakuShomeishoTorokuManager.class);
@@ -222,8 +221,10 @@ public class JikofutangakuShomeishoTorokuManager {
                 .get事業高額合算支給申請書情報(parameter);
 
         List<JikofutangakuShomeishoTorokuBusiness> list = new ArrayList<>();
-        JikofutangakuShomeishoTorokuBusiness business = new JikofutangakuShomeishoTorokuBusiness(torokuEntity);
-        list.add(business);
+        if (torokuEntity != null) {
+            JikofutangakuShomeishoTorokuBusiness business = new JikofutangakuShomeishoTorokuBusiness(torokuEntity);
+            list.add(business);
+        }
         return SearchResult.of(list, 0, false);
     }
 

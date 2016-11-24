@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.ShutsuryokuKomok
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.hanyolist.HanyoListReportSource;
-import jp.co.ndensan.reams.db.dbz.service.core.hanyolist.HanyoListReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
@@ -124,17 +123,18 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
         出力文字の開始位置 = 0;
         出力桁数 = 0;
         csvContent = new ArrayList<>();
+        // TODO : 出力項目の設定ができるようになったら下を採用
+        hanyoListShutsuryokuKomoku = null;
+//        hanyoListShutsuryokuKomoku = HanyoListReportUtil.createInstance()
+//                .get汎用リスト出力項目(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給,
+//                        new ReportId(processParamter.getCyohyoid()), Long.parseLong(processParamter.getSyutsuryokukomoku().toString()));
         set帳表CSV出力();
-        hanyoListShutsuryokuKomoku = HanyoListReportUtil.createInstance()
-                .get汎用リスト出力項目(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給,
-                        new ReportId(processParamter.getCyohyoid()), Long.parseLong(processParamter.getSyutsuryokukomoku().toString()));
     }
 
     @Override
     protected IBatchReader createReader() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        outputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
-                Long.valueOf(processParamter.getSyutsuryokujun().toString()));
+        outputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()), processParamter.getSyutsuryokujun());
         RString 出力順 = get出力順();
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         List<JuminShubetsu> 住民種別List = new ArrayList<>();
@@ -182,43 +182,70 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
         HanyoRisutoKokiKoreishaEucCsvEntity eucCsvEntity = new HanyoRisutoKokiKoreishaEucCsvEntity();
         HanyoListKokiKoreishaManager.createInstance().get情報設定(eucCsvEntity, entity, association,
                 hokenshaList, processParamter.isCsvhitsukesurasyuhensyu());
+        eucCsvEntity.set連番(new RString(String.valueOf(連番)));
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));
         boolean flag = false;
-        if (hanyoListShutsuryokuKomoku != null) {
-            for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
-                RString 項目内容new = RString.EMPTY;
-                RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
-                if (get項目名称 != null && !get項目名称.isEmpty()) {
-                    Class clazz = eucCsvEntity.getClass();
-                    Method getMethod;
-                    try {
-                        getMethod = clazz.getDeclaredMethod(KokiKoreishaCsvEnumEntity
-                                .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
-                                                        .get(i).get項目位置()))).get名称().toString());
-                        項目内容new = get項目内容(getMethod, 項目内容new, eucCsvEntity, i);
-                    } catch (NoSuchMethodException | SecurityException ex) {
-                        Logger.getLogger(HanyoListKokiKoreishaProcess.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    flag = flag判定(flag, 項目内容new);
-                    帳票出力とCSV出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
-                }
+        // TODO : 出力項目を設定できるようになったら下を採用
+        int index = 0;
+        for (KokiKoreishaCsvEnumEntity e : KokiKoreishaCsvEnumEntity.values()) {
+            RString 項目内容new = RString.EMPTY;
+            RString get項目名称 = e.get名称().substring("get".length());
+            Class clazz = eucCsvEntity.getClass();
+            Method getMethod;
+            try {
+                getMethod = clazz.getDeclaredMethod(e.get名称().toString());
+                項目内容new = get項目内容(getMethod, 項目内容new, eucCsvEntity, index);
+            } catch (NoSuchMethodException | SecurityException ex) {
+                Logger.getLogger(HanyoListKokiKoreishaProcess.class.getName()).log(Level.SEVERE, null, ex);
             }
-            帳票出力とCSV出力(entity, flag);
+            flag = flag ? flag : flag判定(flag, 項目内容new);
+            帳票出力とCSV出力編集(index, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
+            index++;
         }
+        帳票出力とCSV出力(entity, flag);
+//        if (hanyoListShutsuryokuKomoku != null) {
+//            for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
+//                RString 項目内容new = RString.EMPTY;
+//                RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
+//                if (get項目名称 != null && !get項目名称.isEmpty()) {
+//                    Class clazz = eucCsvEntity.getClass();
+//                    Method getMethod;
+//                    try {
+//                        getMethod = clazz.getDeclaredMethod(KokiKoreishaCsvEnumEntity
+//                                .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
+//                                                        .get(i).get項目位置()))).get名称().toString());
+//                        項目内容new = get項目内容(getMethod, 項目内容new, eucCsvEntity, i);
+//                    } catch (NoSuchMethodException | SecurityException ex) {
+//                        Logger.getLogger(HanyoListKokiKoreishaProcess.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                    flag = flag判定(flag, 項目内容new);
+//                    帳票出力とCSV出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
+//                }
+//            }
+//            帳票出力とCSV出力(entity, flag);
+//        }
     }
 
     @Override
     protected void afterExecute() {
         if (eucCsvWriter.getCount() == 0) {
             eucCsvWriter.writeLine(HanyoListKokiKoreishaManager.createInstance().setBlank());
-            if (hanyoListShutsuryokuKomoku != null) {
-                for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
-                    RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
-                    帳票出力とCSV出力編集new(i, hanyoListShutsuryokuKomoku, get項目名称);
-                }
-                帳票出力とCSV出力();
+            // TODO : 出力項目が選択できるようになったら下を採用
+            int index = 0;
+            for (KokiKoreishaCsvEnumEntity e : KokiKoreishaCsvEnumEntity.values()) {
+                RString get項目名称 = e.get名称().substring("get".length());
+                帳票出力とCSV出力編集new(index, hanyoListShutsuryokuKomoku, get項目名称);
+                index++;
             }
+            帳票出力とCSV出力();
+//            if (hanyoListShutsuryokuKomoku != null) {
+//                for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
+//                    RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
+//                    帳票出力とCSV出力編集new(i, hanyoListShutsuryokuKomoku, get項目名称);
+//                }
+//                帳票出力とCSV出力();
+//            }
         }
         eucCsvWriter.close();
         eucCsvWriter1.close();
@@ -352,8 +379,7 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
 
     private RString get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
-                Long.valueOf(processParamter.getSyutsuryokujun().toString()));
+        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()), processParamter.getSyutsuryokujun());
         RString 出力順 = MyBatisOrderByClauseCreator.create(HanyoListKokiKoreishaOrderby.class, order);
         return 出力順.concat(",後期高齢者情報_識別コード,後期高齢者情報_履歴番号");
     }

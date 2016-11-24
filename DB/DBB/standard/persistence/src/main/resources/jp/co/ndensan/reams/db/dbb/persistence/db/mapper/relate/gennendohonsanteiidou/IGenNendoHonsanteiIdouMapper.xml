@@ -1033,36 +1033,96 @@
     <!-- 資格の情報として取得 -->
     <select resultOrdered="true" id="get資格の情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.TsuchishoNoCreateParameter" fetchSize="500">
-        SELECT 
-            A.*
-        FROM
-            (SELECT 
-                Q.*
-             FROM 
-                rgdb."DbT1001HihokenshaDaicho" AS Q
-                INNER JOIN
-                (SELECT
-                    "hihokenshaNo",
-                    "ichigoShikakuShutokuYMD",
-                    MAX("shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
-                 FROM
-                    rgdb."DbT1001HihokenshaDaicho"
-                 GROUP BY
-                    "hihokenshaNo",
-                    "ichigoShikakuShutokuYMD"
-                )AS T
-                ON
-                    T."hihokenshaNo" = Q."hihokenshaNo"
-                AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
-                AND T."max_shikakuSoshitsuYMD" = Q."shikakuSoshitsuYMD"
-            ) AS A
+        WITH master AS (
+            SELECT
+                "ORG".*
+            FROM
+                rgdb."DbT1001HihokenshaDaicho" AS "ORG"
+                INNER JOIN (
+                    SELECT
+                        A."hihokenshaNo"
+                        ,A."ichigoShikakuShutokuYMD"
+                        ,MAX(A."shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
+                    FROM
+                        rgdb."DbT1001HihokenshaDaicho" AS A
+                    WHERE
+                        A."hihokennshaKubunCode" = '1'
+                        AND A."logicalDeletedFlag" = FALSE
+                        AND NOT (
+                            EXISTS (
+                                SELECT
+                                    'X'
+                                FROM
+                                    (
+                                        SELECT
+                                            "HIHO"."hihokenshaNo" AS "法施行時住特得喪レコード_hihokenshaNo"
+                                            ,"HIHO"."idoYMD" AS "法施行時住特得喪レコード_idoYMD"
+                                            ,"HIHO"."edaNo" AS "法施行時住特得喪レコード_edaNo"
+                                        FROM
+                                            rgdb."DbT1001HihokenshaDaicho" AS "HIHO"
+                                            INNER JOIN (
+                                                SELECT
+                                                    "hihokenshaNo"
+                                                    ,"idoYMD"
+                                                    ,"edaNo"
+                                                FROM
+                                                    rgdb."DbT1001HihokenshaDaicho"
+                                                WHERE
+                                                    "hihokennshaKubunCode" = '1'
+                                                    AND "logicalDeletedFlag" = FALSE
+                                                    AND "jushochiTokureiFlag" = '1'
+                                                    AND "jushochitokureiTekiyoYMD" = '20000401'
+                                            ) AS "法施行時住特レコード"
+                                                ON "法施行時住特レコード"."hihokenshaNo" = "HIHO"."hihokenshaNo"
+                                                AND "HIHO"."ichigoShikakuShutokuYMD" = '20000401'
+                                                AND "HIHO"."shikakuSoshitsuYMD" = '20000401'
+                                    ) AS "法施行時住特得喪レコード"
+                                WHERE
+                                    "法施行時住特得喪レコード"."法施行時住特得喪レコード_hihokenshaNo" = A."hihokenshaNo"
+                                    AND "法施行時住特得喪レコード"."法施行時住特得喪レコード_idoYMD" = A."idoYMD"
+                                    AND "法施行時住特得喪レコード"."法施行時住特得喪レコード_edaNo" = A."edaNo"
+                            )
+                        )
+                    GROUP BY
+                        A."hihokenshaNo"
+                        ,A."ichigoShikakuShutokuYMD"
+                ) AS "TONEN_HIHO"
+                    ON "TONEN_HIHO"."hihokenshaNo" = "ORG"."hihokenshaNo"
+                    AND "TONEN_HIHO"."ichigoShikakuShutokuYMD" = "ORG"."ichigoShikakuShutokuYMD"
+                    AND "TONEN_HIHO"."max_shikakuSoshitsuYMD" = "ORG"."shikakuSoshitsuYMD"
             INNER JOIN
-                "TmpIdoTrigger" AS B
+                (SELECT DISTINCT "hihokenshaNo" FROM "TmpIdoTrigger") AS B
             ON
-                A."hihokenshaNo" = B."hihokenshaNo"
-         WHERE
-            A."hihokennshaKubunCode" = '1'
-        AND A."logicalDeletedFlag" = FALSE
+                "ORG"."hihokenshaNo" = B."hihokenshaNo"
+            WHERE
+                (
+                    "ORG"."shikakuSoshitsuYMD" = ''
+                    OR "ORG"."shikakuSoshitsuYMD" IS NULL
+                    OR #{調定年度} || '0331' <![CDATA[<]]> "ORG"."shikakuSoshitsuYMD"
+                )
+                AND "ORG"."ichigoShikakuShutokuYMD" <![CDATA[<]]> ((CAST(CAST(#{調定年度} AS integer ) +1 AS character(4))) || '0401')
+        ) 
+        SELECT
+            dbt1001.*
+        FROM
+            master AS dbt1001
+            INNER JOIN (
+                SELECT
+                    "hihokenshaNo"
+                    ,"ichigoShikakuShutokuYMD"
+                    ,"shikakuSoshitsuYMD"
+                    ,MAX (
+                        "idoYMD" || "edaNo"
+                    ) AS max1
+                FROM
+                    master
+                GROUP BY
+                    "hihokenshaNo"
+                    ,"ichigoShikakuShutokuYMD"
+                    ,"shikakuSoshitsuYMD"
+            ) AS "ORGENG"
+                ON dbt1001."hihokenshaNo" = "ORGENG"."hihokenshaNo"
+                AND (dbt1001."idoYMD" || dbt1001."edaNo") = "ORGENG"."max1"
     </select>
     
     <!-- 賦課の情報として取得 -->
@@ -1610,13 +1670,13 @@
         ON "TmpHonsantei"."hihokenshaNo" = "DbT2001ChoshuHoho"."hihokenshaNo"
         AND "TmpHonsantei"."fukaNendo" = "DbT2001ChoshuHoho"."fukaNendo"
         LEFT JOIN rgdb."DbV2002Fuka" AS "DbT2002Fuka"
-            INNER JOIN 
+            LEFT JOIN 
            (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS "DbT2003Kibetsu"
             ON  "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."dbT2003Kibetsu_fukaNendo"
             AND "DbT2002Fuka"."choteiNendo" = "DbT2003Kibetsu"."dbT2003Kibetsu_choteiNendo"
             AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."dbT2003Kibetsu_tsuchishoNo"
             AND "DbT2002Fuka"."rirekiNo" = "DbT2003Kibetsu"."dbT2003Kibetsu_rirekiNo"
-            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
+            LEFT JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
             ON "DbT2003Kibetsu"."dbT2003Kibetsu_choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
         ON "TmpHonsantei"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
         AND "TmpHonsantei"."choteiNendo" = "DbT2002Fuka"."choteiNendo"

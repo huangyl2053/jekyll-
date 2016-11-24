@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshutsuryo
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.KekkatsuchiTaishoshaIchiranReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import static jp.co.ndensan.reams.db.dbz.definition.core.hokensha.UnyoKeitaiKubun.広域連合;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -70,7 +70,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
         bodyItem = setBodyItem(entity);
         gokai++;
         headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
-                DbBusinessConfig.get(広域連合, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
+                DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
                 processPrm.getNijiHanteiYMDFrom(),
                 processPrm.getNijiHanteiYMDTo(),
                 RDate.getNowDate().toDateString(),

@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuuketteitsuchishosakusei;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.ketteitsuchishosakusei.param.KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020060.DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
@@ -14,6 +12,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -44,21 +45,25 @@ public class KougakuSabisuhiShikyuuKetteiTsuchishoSakusei {
     /**
      * 前回対象日のデータの取得のメソッドです。
      *
+     * @param 処理名 RString
      * @param 市町村コード LasdecCode
      *
      * @return List<ShoriDateKanri>
      *
      */
-    public List<ShoriDateKanri> getZenkaiTaisyobiData(LasdecCode 市町村コード) {
-        List<DbT7022ShoriDateKanriEntity> entityList = dbt7022Dac.select前回対象日(市町村コード);
-        if (entityList == null || entityList.isEmpty()) {
-            return new ArrayList<>();
+    public ShoriDateKanri getZenkaiTaisyobiData(RString 処理名, LasdecCode 市町村コード) {
+
+        DbT7022ShoriDateKanriEntity entity = dbt7022Dac.selectByKey(
+                SubGyomuCode.DBC介護給付,
+                市町村コード,
+                処理名,
+                new RString("0000"),
+                new FlexibleYear("0000"),
+                new RString("0000"));
+        if (entity == null) {
+            return null;
         }
-        List<ShoriDateKanri> kanriList = new ArrayList<>();
-        for (DbT7022ShoriDateKanriEntity entity : entityList) {
-            kanriList.add(new ShoriDateKanri(entity));
-        }
-        return kanriList;
+        return new ShoriDateKanri(entity);
     }
 
     /**

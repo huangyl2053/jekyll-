@@ -121,36 +121,36 @@ module DBD {
                 return new UZA.TextBox(this.convFiledName("txtSashitomeTorokuKubun"));
             }
 
-            public txtSashitomeTorokuYMD(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuYMD"));
+            public txtSashitomeTorokuYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtSashitomeTorokuYMD"));
             }
 
             public txtSashitomeTorokuTsuchiHakkoYMD(): UZA.TextBoxFlexibleDate {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeTorokuTsuchiHakkoYMD"));
             }
 
-            public txtSashitomeNofuKigenYMD(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeNofuKigenYMD"));
+            public txtSashitomeNofuKigenYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtSashitomeNofuKigenYMD"));
             }
 
-            public txtSashitomeKaijoYMD(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSashitomeKaijoYMD"));
+            public txtSashitomeKaijoYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtSashitomeKaijoYMD"));
             }
 
             public txtKojoTorokuKubun(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtKojoTorokuKubun"));
             }
 
-            public txtKojoKetteiYMD(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoKetteiYMD"));
+            public txtKojoKetteiYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtKojoKetteiYMD"));
             }
 
             public txtKojoTorokuTsuchiHakkoYMD(): UZA.TextBoxFlexibleDate {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKojoTorokuTsuchiHakkoYMD"));
             }
 
-            public txtHokenshoTeishutsuKigenYMD(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHokenshoTeishutsuKigenYMD"));
+            public txtHokenshoTeishutsuKigenYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtHokenshoTeishutsuKigenYMD"));
             }
 
             public ddlTorokuKojoNo(): UZA.DropDownList {

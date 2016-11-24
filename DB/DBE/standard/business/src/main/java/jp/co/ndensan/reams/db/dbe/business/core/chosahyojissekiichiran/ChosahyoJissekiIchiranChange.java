@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.chosahyojissekiichiran;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.ChosahyoJissekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.ChosahyoJissekiIchiranRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1691-020 dangjingjing
  */
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 public final class ChosahyoJissekiIchiranChange {
 
     private ChosahyoJissekiIchiranChange() {
@@ -34,8 +36,8 @@ public final class ChosahyoJissekiIchiranChange {
                 entity.get被保険者番号(),
                 entity.get被保険者氏名(),
                 dateFormat(entity.get認定調査実施年月日()),
-                entity.get認定調査区分コード(),
-                entity.get認定調査依頼区分コード());
+                ChosaKubun.toValue(entity.get認定調査区分コード()).get名称(),
+                NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
         return data;
     }
 

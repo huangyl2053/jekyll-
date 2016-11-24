@@ -50,10 +50,44 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufukanrihyoshokai.KyufuKanrihyoShokaiMapperParameter" fetchSize="500" resultOrdered="true" >
         WITH Temp AS ( 
           SELECT
-            A.*
+            A."insertDantaiCd"
+            , A."insertTimestamp"
+            , A."insertReamsLoginId"
+            , A."insertContextId"
+            , A."isDeleted"
+            , A."updateCount"
+            , A."lastUpdateTimestamp"
+            , A."lastUpdateReamsLoginId"
+            , A."shinsaYM"
+            , A."serviceTeikyoYM"
+            , A."hiHokenshaNo"
+            , A."kyufuKanrihyoShubetsuKubunCode"
+            , A."kyufuKanrihyoMeisaiLineNo"
+            , A."shokisaiHokenshaNo"
+            , A."kyotakushienJigyoshoNo"
+            , A."kyufuKanrihyoSakuseiKubunCode"
+            , A."kyufuKanrihyoSakuseiYMD"
+            , A."hokenshaNo"
+            , A."hiHokenshaUmareYMD"
+            , A."seibetsuCode"
+            , A."yoKaigoJotaiKubunCode"
+            , A."gendogakuTekiyoKaishiYM"
+            , A."gendogakuTekiyoShuryoYM"
+            , A."kyotakuKaigoYoboShikyuGendogaku"
+            , A."kyotakuServicePlanSakuseiKubunCode"
+            , A."serviceJigyoshoNo"
+            , A."shiteiKijungaitoChiikimitchakuServiceShikibetsuCode"
+            , A."serviceShuruiCode"
+            , A."kyufuKeikakuTanisuNissu"
+            , A."kyufuKeikakuNissu"
+            , A."shiteiServiceSubTotal"
+            , A."kijyunGaitoServiceSubTotal"
+            , A."kyufuKeikakuTotalTanisuNissu"
             , '' AS 担当介護支援専門員番号
             , '' AS 委託先の居宅介護支援事業所番号
-            , '' AS 委託先の担当介護支援専門員番号 
+            , '' AS 委託先の担当介護支援専門員番号
+            , A."toshoTorokuYMD"
+            , A."torikomiYM"
           FROM
             rgdb."DbT3014KyufuKanrihyo200004" A 
           WHERE
@@ -102,10 +136,44 @@
     <select id="select給付管理明細一覧" resultMap="resultMap_select給付管理票一覧"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufukanrihyoshokai.KyufuKanrihyoShokaiMapperParameter" fetchSize="500" resultOrdered="true" >
         SELECT
-          A.*
-          , '' AS 担当介護支援専門員番号
-          , '' AS 委託先の居宅介護支援事業所番号
-          , '' AS 委託先の担当介護支援専門員番号
+          A."insertDantaiCd"
+            , A."insertTimestamp"
+            , A."insertReamsLoginId"
+            , A."insertContextId"
+            , A."isDeleted"
+            , A."updateCount"
+            , A."lastUpdateTimestamp"
+            , A."lastUpdateReamsLoginId"
+            , A."shinsaYM"
+            , A."serviceTeikyoYM"
+            , A."hiHokenshaNo"
+            , A."kyufuKanrihyoShubetsuKubunCode"
+            , A."kyufuKanrihyoMeisaiLineNo"
+            , A."shokisaiHokenshaNo"
+            , A."kyotakushienJigyoshoNo"
+            , A."kyufuKanrihyoSakuseiKubunCode"
+            , A."kyufuKanrihyoSakuseiYMD"
+            , A."hokenshaNo"
+            , A."hiHokenshaUmareYMD"
+            , A."seibetsuCode"
+            , A."yoKaigoJotaiKubunCode"
+            , A."gendogakuTekiyoKaishiYM"
+            , A."gendogakuTekiyoShuryoYM"
+            , A."kyotakuKaigoYoboShikyuGendogaku"
+            , A."kyotakuServicePlanSakuseiKubunCode"
+            , A."serviceJigyoshoNo"
+            , A."shiteiKijungaitoChiikimitchakuServiceShikibetsuCode"
+            , A."serviceShuruiCode"
+            , A."kyufuKeikakuTanisuNissu"
+            , A."kyufuKeikakuNissu"
+            , A."shiteiServiceSubTotal"
+            , A."kijyunGaitoServiceSubTotal"
+            , A."kyufuKeikakuTotalTanisuNissu"
+            , '' AS 担当介護支援専門員番号
+            , '' AS 委託先の居宅介護支援事業所番号
+            , '' AS 委託先の担当介護支援専門員番号
+            , A."toshoTorokuYMD"
+            , A."torikomiYM"
           , 介護事業B."jigyoshaName" AS サービス事業者名 
         FROM
           rgdb."DbT3014KyufuKanrihyo200004" A 
@@ -128,7 +196,7 @@
                   AND A1."serviceTeikyoYM" = #{サービス提供年月}
                   AND SUBSTRING(C."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> A1."serviceTeikyoYM" 
                   AND CASE 
-                    WHEN C."yukoShuryoYMD" != NULL 
+                    WHEN C."yukoShuryoYMD" IS NOT NULL 
                     THEN SUBSTRING(C."yukoShuryoYMD", 1, 6) <![CDATA[>=]]> A1."serviceTeikyoYM" 
                     END 
                 GROUP BY
@@ -169,7 +237,7 @@
                   AND B1."serviceTeikyoYM" = #{サービス提供年月}
                   AND substring(F."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> B1."serviceTeikyoYM" 
                   AND CASE 
-                    WHEN F."yukoShuryoYMD" != NULL 
+                    WHEN F."yukoShuryoYMD" IS NOT NULL 
                     THEN substring(F."yukoShuryoYMD", 1, 6) <![CDATA[>=]]> B1."serviceTeikyoYM" 
                     END 
                 GROUP BY

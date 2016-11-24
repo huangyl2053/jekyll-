@@ -50,7 +50,8 @@ public class ChosaKekkaInfoGaikyoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ChosaKekkaInfoGaikyoFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ChosaKekkaInfoGaikyoFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ChosaKekkaInfoGaikyoFinder}のインスタンス
      */
     public static ChosaKekkaInfoGaikyoFinder createInstance() {
         return InstanceProvider.create(ChosaKekkaInfoGaikyoFinder.class);
@@ -117,6 +118,9 @@ public class ChosaKekkaInfoGaikyoFinder {
     public Image get5115Image(ChosaKekkaInfoGaikyoParameter イメージ共有ファイルID検索条件) {
         IChosaKekkaInfoGaikyoMapper mapper = mapperProvider.create(IChosaKekkaInfoGaikyoMapper.class);
         DbT5115ImageEntity ninteiEntity = mapper.getChosaKekkaInfoGaikyoList4(イメージ共有ファイルID検索条件);
+        if (ninteiEntity == null) {
+            return null;
+        }
         return new Image(ninteiEntity);
     }
 }

@@ -60,8 +60,10 @@ public class TokubetsuKyufuJigyoshaSearchBusiness extends
             ServiceCode 市町村特別給付用サービスコード,
             int 履歴番号) {
         entity = new TokubetsuKyufuJigyoshaSearchEntity();
-        entity.set事業者((new ShichosonTokubetsuKyufuJigyosha(
-                市町村特別給付用事業者番号, 市町村特別給付用サービスコード, 履歴番号)).toEntity());
+        ShichosonTokubetsuKyufuJigyosha shichosonEntity
+                = new ShichosonTokubetsuKyufuJigyosha(市町村特別給付用事業者番号, 市町村特別給付用サービスコード, 履歴番号);
+        DbT3065ShichosonTokubetsuKyufuJigyoshaEntity dbT3065Entity = shichosonEntity.toEntity();
+        entity.set事業者(dbT3065Entity);
         this.id = new TokubetsuKyufuJigyoshaSearchIdentifier(
                 entity.get事業者().getJigyoshaNo(),
                 entity.get事業者().getServiceCode(),
@@ -515,9 +517,6 @@ public class TokubetsuKyufuJigyoshaSearchBusiness extends
             this.id = id;
         }
 
-        private Object readResolve() {
-            return new TokubetsuKyufuJigyoshaSearchBusiness(this.entity, this.id);
-        }
     }
 
     /**

@@ -28,7 +28,7 @@ public final class Yoshiki1To2ReportDataMybatisParameter implements IMyBatisPara
     private final List<RString> 市町村コードList;
     private final RString 集計年月;
 
-    private static final RString 年月_99 = new RString("99");
+    private static final RString 年月_00 = new RString("00");
     private static final RString 過去集計分市町村区分_市町村 = new RString("2");
     private static final RString 過去集計分市町村区分_旧市町村 = new RString("1");
     private static final RString 集計番号フラグ_被保険者数 = new RString("1");
@@ -76,7 +76,7 @@ public final class Yoshiki1To2ReportDataMybatisParameter implements IMyBatisPara
             表番号List.add(HyoNo.現物_一般状況_旧市町村.getコード());
         }
         return new Yoshiki1To2ReportDataMybatisParameter(get集計番号List(集計番号フラグ),
-                表番号List, 市町村コードList, 集計年度.concat(年月_99));
+                表番号List, 市町村コードList, 集計年度.concat(年月_00));
     }
 
     private static List<RString> get集計番号List(RString 集計番号フラグ) {

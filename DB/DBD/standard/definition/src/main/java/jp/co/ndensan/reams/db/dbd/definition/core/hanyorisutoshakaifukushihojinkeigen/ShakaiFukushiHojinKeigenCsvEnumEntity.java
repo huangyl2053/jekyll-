@@ -154,7 +154,7 @@ public enum ShakaiFukushiHojinKeigenCsvEnumEntity {
     /**
      * コード:360 名称:get前住所番地方書 略称:定義なし
      */
-    get前住所番地方書("360", "get前住＋所番地＋方書"),
+    get前住所番地方書("360", "get前住所番地方書"),
     /**
      * コード:370 名称:get前住所 略称:定義なし
      */
@@ -206,7 +206,7 @@ public enum ShakaiFukushiHojinKeigenCsvEnumEntity {
     /**
      * コード:490 名称:get送付先住所番地方書 略称:定義なし
      */
-    get送付先住所番地方書("490", "get送付先住所＋番地＋方書"),
+    get送付先住所番地方書("490", "get送付先住所番地方書"),
     /**
      * コード:500 名称:get送付先住所 略称:定義なし
      */
@@ -292,9 +292,9 @@ public enum ShakaiFukushiHojinKeigenCsvEnumEntity {
      */
     get受給申請事由("700", "get受給申請事由"),
     /**
-     * コード:710 名称:get申請事由 略称:定義なし
+     * コード:710 名称:get申請理由 略称:定義なし
      */
-    get申請事由("700", "get申請事由"),
+    get申請事由("710", "get申請理由"),
     /**
      * コード:720 名称:get申請事由 略称:定義なし
      */
@@ -702,7 +702,7 @@ public enum ShakaiFukushiHojinKeigenCsvEnumEntity {
     /**
      * コード:1730 名称:前々回当初認定有効終了日 略称:定義なし
      */
-    get前々回当初認定有効終了日("1730", "前々回当初認定有効終了日"),
+    get前々回当初認定有効終了日("1730", "get前々回当初認定有効終了日"),
     /**
      * コード:1740 名称:get前々回支援申請事由 略称:定義なし
      */
@@ -910,7 +910,7 @@ public enum ShakaiFukushiHojinKeigenCsvEnumEntity {
     /**
      * コード:2250 名称:get居住費／食費限定区分 略称:定義なし
      */
-    get居住費食費限定区分("2250", "get居住費／食費限定区分"),
+    get居住費食費限定区分("2250", "get居住費_食費限定区分"),
     /**
      * コード:2260 名称:get旧措置ユニット型個室限定区分 略称:定義なし
      */

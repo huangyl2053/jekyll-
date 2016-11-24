@@ -108,7 +108,7 @@ public class NenreiTotatsuYoteishaCheckListChohyo {
             RString 住民種別 = RString.EMPTY;
             if (JuminShubetsu.日本人.getCode().equals(checkList.getJuminShubetsuCode())
                 || JuminShubetsu.住登外個人_日本人.getCode().equals(checkList.getJuminShubetsuCode())) {
-                住民種別 = JuminShubetsu.日本人.toRString();
+                住民種別 = RString.EMPTY;
             } else if (JuminShubetsu.外国人.getCode().equals(checkList.getJuminShubetsuCode())
                        || JuminShubetsu.住登外個人_外国人.getCode().equals(checkList.getJuminShubetsuCode())) {
                 住民種別 = JuminShubetsu.外国人.toRString();

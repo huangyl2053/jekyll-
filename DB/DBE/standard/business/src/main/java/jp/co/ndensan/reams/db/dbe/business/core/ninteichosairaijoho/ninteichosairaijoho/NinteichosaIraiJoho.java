@@ -10,13 +10,13 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -55,7 +55,7 @@ public class NinteichosaIraiJoho
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT5201NinteichosaIraiJohoEntity}より{@link NinteichosaIraiJoho}を生成します。
      *
-     * @param entity DBより取得した{@link DbT5201NinteichosaIraiJohoEntity}
+     * @param entity DBより取得した{@link DbT5201NinteichosaIraiJohoEntity}ｄｂ
      */
     public NinteichosaIraiJoho(DbT5201NinteichosaIraiJohoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼情報"));
@@ -261,7 +261,8 @@ public class NinteichosaIraiJoho
     }
 
     /**
-     * 認定調査依頼情報のみを変更対象とします。<br/> {@link DbT5201NinteichosaIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査依頼情報のみを変更対象とします。<br/>
+     * {@link DbT5201NinteichosaIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosaIraiJoho}
      */
@@ -275,7 +276,8 @@ public class NinteichosaIraiJoho
     }
 
     /**
-     * 保持する認定調査依頼情報を削除対象とします。<br/> {@link DbT5201NinteichosaIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査依頼情報を削除対象とします。<br/>
+     * {@link DbT5201NinteichosaIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteichosaIraiJoho}
      */

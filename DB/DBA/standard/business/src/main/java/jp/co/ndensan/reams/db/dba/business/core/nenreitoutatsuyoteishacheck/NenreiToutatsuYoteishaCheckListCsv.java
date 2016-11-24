@@ -30,7 +30,7 @@ public class NenreiToutatsuYoteishaCheckListCsv {
     private static final RString 住登内外国人 = new RString("2");
     private static final RString 住登外日本人 = new RString("3");
     private static final RString 住登外外国人 = new RString("4");
-    private static final RString 住民種別_日本人のみ = new RString("日本人");
+    //private static final RString 住民種別_日本人のみ = new RString("日本人");
     private static final RString 住民種別_外国人のみ = new RString("外国人");
 
     /**
@@ -81,7 +81,7 @@ public class NenreiToutatsuYoteishaCheckListCsv {
     private void setData(NenreiToutatsuYoteishaCheckListJyohoEntity nenCheckListJyohoEntity,
             List<NenreiToutatsuYoteishaCheckListEucCsvEntity> csvDataList, NenreiToutatsuYoteishaCheckListEntity entity,
             NenreiToutatsuYoteishaCheckListEucCsvEntity csvDataEntity) {
-        csvDataEntity.setHihokenshaNo(new RString(entity.getHihokenshaNo().value().toString()));
+        csvDataEntity.setHihokenshaNo(entity.getHihokenshaNo() != null ? new RString(entity.getHihokenshaNo().value().toString()) : RString.EMPTY);
         csvDataEntity.setShikibetsuCode(new RString(entity.getShikibetsuCode().value().toString()));
         csvDataEntity.setKanaMeisho(entity.getKanaMeisho());
         csvDataEntity.setMeisho(entity.getMeisho());
@@ -115,7 +115,7 @@ public class NenreiToutatsuYoteishaCheckListCsv {
         csvDataEntity.setGyoseikuName(entity.getGyoseikuName());
         if (住登内日本人.equals(entity.getJuminShubetsuCode()) || 住登外日本人.equals(
                 entity.getJuminShubetsuCode())) {
-            csvDataEntity.setJuminShubetsu(住民種別_日本人のみ);
+            csvDataEntity.setJuminShubetsu(RString.EMPTY);
         } else if (住登内外国人.equals(entity.getJuminShubetsuCode()) || 住登外外国人.equals(
                 entity.getJuminShubetsuCode())) {
             csvDataEntity.setJuminShubetsu(住民種別_外国人のみ);

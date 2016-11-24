@@ -49,7 +49,8 @@ public enum GemmenGengakuShoHakkoMainDivSpec implements IPredicate<GemmenGengaku
                  */
                 @Override
                 public boolean apply(GemmenGengakuShoHakkoMainDiv div) {
-                    return !div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().getValue().isEmpty();
+                    return div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().getValue() != null && 
+                            !div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().getValue().toString().isEmpty();
                 }
             },
     発行日の非空チェック {
@@ -61,7 +62,8 @@ public enum GemmenGengakuShoHakkoMainDivSpec implements IPredicate<GemmenGengaku
                  */
                 @Override
                 public boolean apply(GemmenGengakuShoHakkoMainDiv div) {
-                    return !div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue().isEmpty();
+                    return div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue() != null && 
+                            !div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue().toString().isEmpty();
                 }
             },
     文書番号の非空チェック {

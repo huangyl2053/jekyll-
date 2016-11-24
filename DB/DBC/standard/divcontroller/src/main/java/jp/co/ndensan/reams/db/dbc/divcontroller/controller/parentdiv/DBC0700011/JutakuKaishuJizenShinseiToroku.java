@@ -299,7 +299,15 @@ public class JutakuKaishuJizenShinseiToroku {
         handler.費用額合計の設定();
         handler.前回までの支払結果設定(hihokenshaNo);
 
-        if (!非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg()) && handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
+        boolean 要介護状態３段階変更の判定 = true;
+        if (ResponseHolder.isReRequest()) {
+            要介護状態３段階変更の判定 = ViewStateHolder.get(ViewStateKeys.要介護状態３段階変更, Boolean.class);
+        } else {
+            要介護状態３段階変更の判定 = handler.要介護状態３段階変更の有効性チェック(hihokenshaNo);
+            ViewStateHolder.put(ViewStateKeys.要介護状態３段階変更, 要介護状態３段階変更の判定);
+        }
+
+        if (!非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg()) && 要介護状態３段階変更の判定
                 && !selectedItems.contains(要介護状態区分)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
@@ -317,7 +325,7 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.setHidSandannkaiMsgFlg(RString.EMPTY);
                 return ResponseData.of(div).respond();
             }
-        } else if (!非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg()) && !handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
+        } else if (!非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg()) && !要介護状態３段階変更の判定
                 && selectedItems.contains(要介護状態区分)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
@@ -339,9 +347,7 @@ public class JutakuKaishuJizenShinseiToroku {
         }
         QuestionMessage msg = 限度額リセットチェック(div, hihokenshaNo);
         if (msg != null) {
-            if (QuestionMessage.NO_MESSAGE.getCode().equals(msg.getCode())) {
-                return ResponseData.of(div).respond();
-            } else {
+            if (!QuestionMessage.NO_MESSAGE.getCode().equals(msg.getCode())) {
                 return ResponseData.of(div).addMessage(msg).respond();
             }
         }

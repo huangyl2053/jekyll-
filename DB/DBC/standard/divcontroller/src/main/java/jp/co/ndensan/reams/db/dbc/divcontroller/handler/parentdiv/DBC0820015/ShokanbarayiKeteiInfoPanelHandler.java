@@ -190,7 +190,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      */
     private Boolean equal償還払決定一覧(List<dgSyokanbaraikete_Row> rowList, Map<RString, Decimal> 償還払決定一覧) {
         for (int i = 0; i < rowList.size(); i++) {
-            if (償還払決定一覧 != null && 償還払決定一覧.get(rowList.get(i).getNo()) != rowList.get(i).getSagakuKingaku().getValue()) {
+            if (償還払決定一覧 != null && !償還払決定一覧.get(rowList.get(i).getNo()).equals(rowList.get(i).getSagakuKingaku().getValue())) {
                 return true;
             }
         }
@@ -251,10 +251,10 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalfushikyuriyu2(RString fushikyuriyu2, KetteJoho 決定情報) {
-        if (決定情報 != null && fushikyuriyu2 != null && fushikyuriyu2.isEmpty() && 決定情報 != null && 決定情報.getZougenRiyu().isEmpty()) {
+        if (決定情報 != null && fushikyuriyu2 != null && fushikyuriyu2.isEmpty() && 決定情報.getKounyuKaishuRireki().isEmpty()) {
             return false;
         }
-        if (決定情報 != null && fushikyuriyu2 != null && fushikyuriyu2.isEmpty() && 決定情報 == null) {
+        if (fushikyuriyu2 != null && fushikyuriyu2.isEmpty() && 決定情報 == null) {
             return false;
         }
         if (決定情報 != null && fushikyuriyu2 != null
@@ -606,8 +606,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                shukeiJoho.added();
-                dbJoho.get償還払請求集計データList().add(new ShokanShukeiResult(shukeiJoho, RString.EMPTY));
+                dbJoho.get償還払請求集計データList().add(new ShokanShukeiResult(shukeiJoho.added(), RString.EMPTY));
             }
         }
     }
@@ -638,8 +637,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                service200904Joho.added();
-                dbJoho.get償還払請求サービス計画200904データResultList().add(new ShokanServicePlan200904Result(service200904Joho,
+                dbJoho.get償還払請求サービス計画200904データResultList().add(new ShokanServicePlan200904Result(service200904Joho.added(),
                         RString.EMPTY));
             }
         }
@@ -670,8 +668,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                service200604Joho.added();
-                dbJoho.get償還払請求サービス計画200604データResultList().add(new ShokanServicePlan200604Result(service200604Joho,
+                dbJoho.get償還払請求サービス計画200604データResultList().add(new ShokanServicePlan200604Result(service200604Joho.added(),
                         RString.EMPTY));
             }
         }
@@ -702,8 +699,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                service200004Joho.added();
-                dbJoho.get償還払請求サービス計画200004データResultList().add(new ShokanServicePlan200004Result(service200004Joho,
+                dbJoho.get償還払請求サービス計画200004データResultList().add(new ShokanServicePlan200004Result(service200004Joho.added(),
                         RString.EMPTY));
             }
         }
@@ -726,8 +722,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                shokujiHiyo.added();
-                dbJoho.get償還払請求食事費用データList().add(shokujiHiyo);
+                dbJoho.get償還払請求食事費用データList().add(shokujiHiyo.added());
             }
         }
     }
@@ -749,8 +744,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                serviceHiyo.added();
-                dbJoho.get償還払請求特定入所者介護サービス費用データList().add(serviceHiyo);
+                dbJoho.get償還払請求特定入所者介護サービス費用データList().add(serviceHiyo.added());
             }
         }
     }

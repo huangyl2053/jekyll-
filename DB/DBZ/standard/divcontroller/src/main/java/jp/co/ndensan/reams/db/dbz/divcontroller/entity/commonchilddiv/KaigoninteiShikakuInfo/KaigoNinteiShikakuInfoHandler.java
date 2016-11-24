@@ -90,14 +90,14 @@ public class KaigoNinteiShikakuInfoHandler {
         } else {
             div.getTxtJutokuKubun().setValue(RString.EMPTY);
         }
-        if (ninteiShikakuInfoBusiness.get要介護認定状態区分コード() != null) {
+        if (ninteiShikakuInfoBusiness.get要介護認定状態区分コード() != null && !ninteiShikakuInfoBusiness.get要介護認定状態区分コード().isEmpty()) {
             div.getTxtYokaigoJotaiKubun().setValue(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(),
                     new RString(ninteiShikakuInfoBusiness.get要介護認定状態区分コード().toString())).getName());
         }
-        if (ninteiShikakuInfoBusiness.get認定有効期間開始年月日() != null) {
+        if (ninteiShikakuInfoBusiness.get認定有効期間開始年月日() != null && !ninteiShikakuInfoBusiness.get認定有効期間開始年月日().isEmpty()) {
             div.getTxtNinteiKaishiYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間開始年月日().toString()));
         }
-        if (ninteiShikakuInfoBusiness.get認定有効期間終了年月日() != null) {
+        if (ninteiShikakuInfoBusiness.get認定有効期間終了年月日() != null && !ninteiShikakuInfoBusiness.get認定有効期間終了年月日().isEmpty()) {
             div.getTxtNinteiShuryoYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間終了年月日().toString()));
         }
         if (hdnShinchsonCode.equals(BANGO)) {

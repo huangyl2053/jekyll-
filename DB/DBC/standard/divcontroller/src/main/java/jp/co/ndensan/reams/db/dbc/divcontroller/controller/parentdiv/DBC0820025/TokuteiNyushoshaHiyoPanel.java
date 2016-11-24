@@ -58,7 +58,6 @@ public class TokuteiNyushoshaHiyoPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final RString NUM1 = new RString("1");
     private static final RString NUM0 = new RString("0");
 
     /**

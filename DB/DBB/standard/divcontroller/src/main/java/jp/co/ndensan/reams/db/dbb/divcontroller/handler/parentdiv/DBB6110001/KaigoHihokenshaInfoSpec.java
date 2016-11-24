@@ -95,6 +95,7 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
     private static class SpecHelper {
 
         private static final RString ONE = new RString("1");
+        private static final RString ZERO = new RString("0");
 
         /**
          * 連帯納付義務者が選択されていない場合です。
@@ -164,18 +165,20 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
             RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
             KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
-            if (DBB6110001StateName.連帯納付義務者修正.getName().equals(ResponseHolder.getState()) || 履歴番号.isEmpty()) {
-                Decimal 最新履歴番号 = manager.getNoIsDeleted最新履歴番号(被保険者番号);
-                if (最新履歴番号 == null) {
-                    履歴番号 = ONE;
+            List<RentaiGimusha> list = holder.getRentaiGimushaList();
+            if (履歴番号.isEmpty()) {
+                Decimal 最新履歴番号 = manager.get最新履歴番号(被保険者番号);
+                if (最新履歴番号 == null && (list == null || list.isEmpty())) {
+                    履歴番号 = ZERO;
                 } else {
-                    RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
-                            被保険者番号, new Decimal(最新履歴番号.toString()));
-                    RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
-                    履歴番号 = 新履歴番号(result, 履歴番号, 最新履歴番号, div);
+                    int 番号 = list.get(0).get履歴番号().intValue();
+                    for (RentaiGimusha rentai : list) {
+                        int 新番号 = rentai.get履歴番号().intValue();
+                        番号 = max番号(番号, 新番号);
+                    }
+                    履歴番号 = new RString(番号 + 1);
                 }
             }
-            List<RentaiGimusha> list = holder.getRentaiGimushaList();
             RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
             RentaiGimusha curResult = holder.getKogakuGassanJikoFutanGaku(identifier);
@@ -184,7 +187,7 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
                 RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
                 for (RentaiGimusha result : list) {
                     if (result.equals(curResult)) {
-                        return true;
+                        continue;
                     }
                     return !(開始年月日.isBeforeOrEquals(new RDate(result.get開始年月日().toString()))
                             && 終了年月日.isAfterOrEquals(new RDate(result.get開始年月日().toString())))
@@ -195,13 +198,11 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             return true;
         }
 
-        private static RString 新履歴番号(RentaiGimusha result, RString 履歴番号, Decimal 最新履歴番号, KaigoHihokenshaInfoPanelDiv div) {
-            if (result == null || ONE.equals(div.getHdnFlag())) {
-                履歴番号 = new RString(最新履歴番号.intValue() + 1);
-            } else {
-                履歴番号 = new RString(最新履歴番号.intValue());
+        private static int max番号(int 番号, int 新番号) {
+            if (新番号 > 番号) {
+                番号 = 新番号;
             }
-            return 履歴番号;
+            return 番号;
         }
 
         /**
@@ -215,18 +216,20 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
             RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
             KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
-            if (DBB6110001StateName.連帯納付義務者修正.getName().equals(ResponseHolder.getState()) || 履歴番号.isEmpty()) {
-                Decimal 最新履歴番号 = manager.getNoIsDeleted最新履歴番号(被保険者番号);
-                if (最新履歴番号 == null) {
-                    履歴番号 = ONE;
+            List<RentaiGimusha> list = holder.getRentaiGimushaList();
+            if (履歴番号.isEmpty()) {
+                Decimal 最新履歴番号 = manager.get最新履歴番号(被保険者番号);
+                if (最新履歴番号 == null && (list == null || list.isEmpty())) {
+                    履歴番号 = ZERO;
                 } else {
-                    RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
-                            被保険者番号, new Decimal(最新履歴番号.toString()));
-                    RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
-                    履歴番号 = 新履歴番号(result, 履歴番号, 最新履歴番号, div);
+                    int 番号 = list.get(0).get履歴番号().intValue();
+                    for (RentaiGimusha rentai : list) {
+                        int 新番号 = rentai.get履歴番号().intValue();
+                        番号 = max番号(番号, 新番号);
+                    }
+                    履歴番号 = new RString(番号 + 1);
                 }
             }
-            List<RentaiGimusha> list = holder.getRentaiGimushaList();
             RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
             RentaiGimusha curResult = holder.getKogakuGassanJikoFutanGaku(identifier);
@@ -234,7 +237,7 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
                 RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
                 for (RentaiGimusha result : list) {
                     if (result.equals(curResult)) {
-                        return true;
+                        continue;
                     }
                     return !(開始年月日.isBefore(new RDate(result.get開始年月日().toString())));
                 }

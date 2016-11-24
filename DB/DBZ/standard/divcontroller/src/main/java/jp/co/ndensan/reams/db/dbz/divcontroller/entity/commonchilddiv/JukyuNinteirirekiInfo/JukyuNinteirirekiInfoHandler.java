@@ -78,7 +78,7 @@ public class JukyuNinteirirekiInfoHandler {
             if (list.is旧措置者フラグ()) {
                 row.setKyusotuSya(KyusochishaKubun.toValue(list.is旧措置者フラグ()).get名称());
             }
-            if (!list.get２号特定疾病コード().getKey().isNullOrEmpty()) {
+            if (list.get２号特定疾病コード() != null && !RString.isNullOrEmpty(list.get２号特定疾病コード().getKey())) {
                 row.setTokuteiShippei(TokuteiShippei.toValue(list.get２号特定疾病コード().getKey()).get名称());
             }
 

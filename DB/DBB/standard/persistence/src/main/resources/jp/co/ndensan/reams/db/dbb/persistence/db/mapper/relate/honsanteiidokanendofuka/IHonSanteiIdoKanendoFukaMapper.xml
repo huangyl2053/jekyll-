@@ -115,8 +115,8 @@
         rgdb."DbV2502KaigoShotoku" AS A
         WHERE
         A."shotokuNendo" in (#{ 調定年度minus1 }, #{ 調定年度minus2 })
-        AND to_char(to_date(#{ 抽出開始日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",0,8)
-        AND substring(A."shoriTimeStamp",0,8) <![CDATA[<=]]> to_char(to_date(#{ 抽出終了日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
+        AND to_char(to_date(#{ 抽出開始日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",1,8)
+        AND substring(A."shoriTimeStamp",1,8) <![CDATA[<=]]> to_char(to_date(#{ 抽出終了日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
     </select>
     
     <!-- 所得異動の取得に被保険者本人異動の判断 -->
@@ -1418,24 +1418,48 @@
         SELECT A.*
         FROM
            (SELECT 
-                Q.*
+             L.*
              FROM 
+                 rgdb."DbT1001HihokenshaDaicho" AS  L
+             INNER JOIN  
+            (SELECT 
+                Q."hihokenshaNo",
+                Q."idoYMD",
+                MAX(Q."edaNo") AS "edaNo"
+               FROM 
                 rgdb."DbT1001HihokenshaDaicho" AS Q
                 INNER JOIN
-                (SELECT
-                    "hihokenshaNo",
-                    "ichigoShikakuShutokuYMD",
-                    MAX("shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
-                 FROM
-                    rgdb."DbT1001HihokenshaDaicho"
-                 GROUP BY
-                    "hihokenshaNo",
-                    "ichigoShikakuShutokuYMD"
+                (SELECT "hihokenshaNo", "ichigoShikakuShutokuYMD", MAX("shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
+                   FROM rgdb."DbT1001HihokenshaDaicho"  AS "ORG"
+                   WHERE "hihokennshaKubunCode"='1' AND "logicalDeletedFlag"=FALSE
+                   AND NOT (EXISTS 
+                      (SELECT 'X' FROM 
+                             (SELECT 
+                              "HIHO"."hihokenshaNo" AS "法施行時住特得喪レコード_hihokenshaNo",
+                              "HIHO"."idoYMD" AS "法施行時住特得喪レコード_idoYMD", 	
+                              "HIHO"."edaNo" AS "法施行時住特得喪レコード_edaNo" 	 
+                              FROM rgdb."DbT1001HihokenshaDaicho" AS "HIHO"
+                              INNER JOIN 
+                              (SELECT "hihokenshaNo","idoYMD","edaNo"
+                              FROM rgdb."DbT1001HihokenshaDaicho" 
+                              WHERE "hihokennshaKubunCode"='1' AND "logicalDeletedFlag"=FALSE
+                              AND "jushochiTokureiFlag"='1' AND "jushochitokureiTekiyoYMD"='20000401') AS "法施行時住特レコード"
+                              ON "法施行時住特レコード"."hihokenshaNo"="HIHO"."hihokenshaNo"
+                              AND "HIHO"."ichigoShikakuShutokuYMD"='20000401' AND "HIHO"."shikakuSoshitsuYMD"='20000401') AS "法施行時住特得喪レコード"
+                              WHERE "法施行時住特得喪レコード_hihokenshaNo"="ORG"."hihokenshaNo"
+                              AND "法施行時住特得喪レコード_idoYMD"="ORG"."idoYMD"
+                              AND "法施行時住特得喪レコード_edaNo"="ORG"."edaNo" ))
+                   GROUP BY "hihokenshaNo", "ichigoShikakuShutokuYMD"
                 )AS T
                 ON
                     T."hihokenshaNo" = Q."hihokenshaNo"
                 AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
                 AND T."max_shikakuSoshitsuYMD" = Q."shikakuSoshitsuYMD"
+               GROUP BY Q."hihokenshaNo", Q."idoYMD") as M
+               ON
+                 M."hihokenshaNo" = L."hihokenshaNo"
+                 AND M."idoYMD" = L."idoYMD"
+                 AND M."edaNo" = L."edaNo"
             ) AS A
         INNER JOIN
         ( <include refid="distinct_IdoTmp" /> ) AS B
@@ -1443,7 +1467,8 @@
         A."hihokenshaNo" = B."hihokenshaNo"
         WHERE
         A."hihokennshaKubunCode" = '1'
-        AND A."isDeleted" = FALSE
+        AND (A."shikakuSoshitsuYMD" = '' OR A."shikakuSoshitsuYMD" IS NULL OR (A."shikakuSoshitsuYMD" <![CDATA[>]]> #{資格喪失日From}
+             AND A."shikakuSoshitsuYMD" <![CDATA[<]]> #{資格喪失日To}))
         )AS 資格
         LEFT OUTER  JOIN
         (  SELECT

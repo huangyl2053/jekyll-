@@ -240,10 +240,10 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     }
 
     private RString setChosaAnser01(RString chosakekkaNo) {
-        RString chosaAnser;
+        RString chosaAnser = RString.EMPTY;
         if (ChosaAnser01.あり.getコード().equals(chosakekkaNo)) {
             chosaAnser = ChosaAnser01.あり.get名称();
-        } else {
+        } else if (ChosaAnser01.なし.getコード().equals(chosakekkaNo)) {
             chosaAnser = ChosaAnser01.なし.get名称();
         }
         return chosaAnser;

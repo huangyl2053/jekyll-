@@ -246,7 +246,7 @@ public class HanyoListRiyoshaFutanwariaiBusiness {
             eucCsvEntity.set送付先行政区名(atesaki.get宛先行政区().get名称());
         }
         eucCsvEntity.set職権フラグ(entity.is利用者負担割合_職権変更フラグ() ? 職権変更 : RString.EMPTY);
-        eucCsvEntity.set資格区分(ShikakuKubun.toValue(entity.get利用者負担割合明細_資格区分()).get名称());
+        eucCsvEntity.set資格区分(ShikakuKubun.toValue(entity.get利用者負担割合明細_資格区分().substring(entity.get利用者負担割合明細_資格区分().length()-1)).get名称());
         eucCsvEntity.set負担割合区分((entity.get利用者負担割合明細_負担割合区分() != null && !entity.get利用者負担割合明細_負担割合区分().isEmpty())
                 ? FutanwariaiKubun.toValue(entity.get利用者負担割合明細_負担割合区分()).get名称() : RString.EMPTY);
         eucCsvEntity.set判定区分(entity.get利用者負担割合_判定区分());

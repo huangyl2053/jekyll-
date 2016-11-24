@@ -69,4 +69,19 @@ public enum HobetsuKubun {
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("法別区分"));
     }
 
+    /**
+     * 法別区分の正式名称と一致する内容を探します。
+     *
+     * @param fullname 法別区分の正式名称
+     * @return {
+     * @fullname fullname} に対応する法別区分
+     */
+    public static HobetsuKubun toValueFromFullName(RString fullname) {
+        for (HobetsuKubun hobetsuKubun : HobetsuKubun.values()) {
+            if (hobetsuKubun.fullName.equals(fullname)) {
+                return hobetsuKubun;
+            }
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("法別区分"));
+    }
 }

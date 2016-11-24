@@ -54,7 +54,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JyusinDataBaitaiTorikomu {
 
     private static final int ゼロ = 0;
-    private final RString searchSharedFileStr = new RString("1_");
+    private final RString sharedFileStr = new RString("1_");
     private final RString searchSharedFile = new RString("1\\_%");
     private static final int 一1 = 1;
     private static final int 四 = 4;
@@ -67,6 +67,7 @@ public class JyusinDataBaitaiTorikomu {
     private FlexibleYearMonth 審査年月;
     private FlexibleYearMonth 審査年月の翌月;
     private FlexibleYearMonth 処理年月;
+    private static final int 処理年月INDEX = 10;
     private FlexibleYearMonth 処理年月の前月;
     private RString 識別番号;
     private static final int 配列 = 1024000;
@@ -181,7 +182,7 @@ public class JyusinDataBaitaiTorikomu {
             } else {
                 識別番号 = データ種別;
             }
-            RString 共有ファイル名 = searchSharedFileStr.concat(識別番号).concat(コントロールレコード.get(六)).concat(CSV);
+            RString 共有ファイル名 = sharedFileStr.concat(識別番号).concat(コントロールレコード.get(六)).concat(CSV);
 
             getHandler(div).コントロールレコード配列内容チェック(コントロールレコード, file, データレコード, データ種別);
 
@@ -192,9 +193,9 @@ public class JyusinDataBaitaiTorikomu {
             }
             HokenshaSofuResult entity = HokenshaSofuFinder.createInstance().get国保連管理(データ種別, 処理年月);
             RString 二重取込チェック = getHandler(div).二重取込チェック(file, データ種別, myBatisParameter, コントロールレコード, entity);
-
-            if (二重取込チェック != null && 処理年月 != null) {
-                return 二重取込message(二重取込チェック, 処理年月, データ種別, div);
+               
+            if (二重取込チェック != null) {
+                return 二重取込message(二重取込チェック, コントロールレコード.get(処理年月INDEX), データ種別, div);
             }
 
             entity = HokenshaSofuFinder.createInstance().get国保連管理2(データ種別, 処理年月の前月);
@@ -221,7 +222,7 @@ public class JyusinDataBaitaiTorikomu {
     }
 
     private ResponseData<JyusinDataBaitaiTorikomuDiv> 二重取込message(RString 二重取込チェック,
-            FlexibleYearMonth 処理年月, RString データ種別, JyusinDataBaitaiTorikomuDiv div) {
+            RString 処理年月, RString データ種別, JyusinDataBaitaiTorikomuDiv div) {
         switch (二重取込チェック.toString()) {
             case "国保連取込済続行確認":
                 return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込済続行確認.getMessage()
@@ -261,6 +262,7 @@ public class JyusinDataBaitaiTorikomu {
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(fileName));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
+
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(to.getPath()), opts);
     }

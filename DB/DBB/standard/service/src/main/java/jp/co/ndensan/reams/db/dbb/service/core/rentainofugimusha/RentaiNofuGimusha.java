@@ -170,20 +170,15 @@ public class RentaiNofuGimusha {
         if (連帯納付義務者情報リスト != null && !連帯納付義務者情報リスト.isEmpty()) {
             for (RentaiGimusha 連帯納付義務者 : 連帯納付義務者情報リスト) {
                 DbT2009RentaiGimushaEntity 連帯納付義務者Entity = 連帯納付義務者.toEntity();
-                DbT2009RentaiGimushaEntity 連帯納付義務者_履歴番号Entity = 連帯納付義務者Dac
-                        .selectBy連帯納付義務者_履歴番号(被保険者番号);
-                if (連帯納付義務者_履歴番号Entity != null) {
-                    履歴番号 = 連帯納付義務者_履歴番号Entity.getRirekiNo();
-                } else {
-                    履歴番号 = Decimal.ZERO;
+                if (連帯納付義務者.isAdded() || 連帯納付義務者.isModified() || 連帯納付義務者.isUnchanged()) {
+                    連帯納付義務者Entity.setHihokenshaNo(被保険者番号);
+                    連帯納付義務者Entity.setRirekiNo(連帯納付義務者Entity.getRirekiNo());
+                    連帯納付義務者Entity.setShikibetuCode(連帯納付義務者.get識別コード());
+                    連帯納付義務者Entity.setStartYMD(連帯納付義務者.get開始年月日());
+                    連帯納付義務者Entity.setEndYMD(連帯納付義務者.get終了年月日());
+                    連帯納付義務者Entity.setState(EntityDataState.Added);
+                    連帯納付義務者Dac.save(連帯納付義務者Entity);
                 }
-                連帯納付義務者Entity.setHihokenshaNo(被保険者番号);
-                連帯納付義務者Entity.setRirekiNo(履歴番号.add(Decimal.ONE));
-                連帯納付義務者Entity.setShikibetuCode(連帯納付義務者.get識別コード());
-                連帯納付義務者Entity.setStartYMD(連帯納付義務者.get開始年月日());
-                連帯納付義務者Entity.setEndYMD(連帯納付義務者.get終了年月日());
-                連帯納付義務者Entity.setState(EntityDataState.Added);
-                連帯納付義務者Dac.save(連帯納付義務者Entity);
             }
         }
     }

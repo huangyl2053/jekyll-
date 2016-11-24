@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeaderAll;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
@@ -242,4 +243,18 @@ public interface IKyufuJissekiHeaderDiv extends ICommonChildDivBaseProperties {
      * @param csData_A 給付実績基本情報子Divデータ
      */
     void set被保情報2(KyufuJissekiKihonShukeiRelate csData_A);
+
+    /**
+     * 給付実績基本情報データを取得します。
+     *
+     * @return 給付実績基本情報データ 給付実績基本情報データ
+     */
+    KyufuJissekiHeaderAll get給付実績基本情報データ();
+
+    /**
+     * 給付実績基本情報を設定します。
+     *
+     * @param 給付実績基本情報 給付実績基本情報子Divデータ
+     */
+    void set給付実績基本情報データ(KyufuJissekiHeaderAll 給付実績基本情報);
 }

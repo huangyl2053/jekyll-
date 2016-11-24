@@ -21,16 +21,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -63,7 +58,6 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     private static final RString 広域保険者でないため = new RString("広域保険者でないため");
     private static final RString 当初所得引出 = new RString("当初所得引出");
     private static final RString 所得引出 = new RString("所得引出");
-    private static final RString SRC = new RString("/home/D209007/sharedFiles/DEE01F001");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -135,10 +129,6 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> onclick_checkRegister(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(DEC05F001));
-        sfd = SharedFile.defineSharedFile(sfd); //世代管理無し、権限グループによるアクセス制限なし
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1)); //保存期限1ヶ月
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(SRC), opts);
         List<UzT0885SharedFileEntryEntity> 国保List = SharedFile.searchSharedFile(DEC05F001);
         List<UzT0885SharedFileEntryEntity> 国保情報List = SharedFile.searchSharedFile(DEE01F001);
         for (UzT0885SharedFileEntryEntity entity : 国保List) {

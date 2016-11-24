@@ -68,6 +68,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     private static final RString 構成市町村分 = new RString("koseiShichoson");
     private static final RString 旧市町村分コード = new RString("0");
     private static final RString 構成市町村分コード = new RString("1");
+    private static final RString すべて選択 = new RString("all");
     private static final RString 年報報告様式12KEY = new RString("yoshiki12");
     private static final RString 年報報告一般状況111KEY = new RString("ippan1_11");
     private static final RString 年報報告一般状況1214現物分KEY = new RString("ippan12_14Genbutsu");
@@ -116,8 +117,133 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         set作成日時(システム日付, システム時刻);
         div.getDdlKakoHokokuNendo().setDisabled(true);
         div.setHiddenJikkoTaniZen(実行単位選択集計のみ);
+        set初期化();
+    }
+
+    private List<KeyValueDataSource> get報告年度(RDate システム日付) {
+        List<KeyValueDataSource> keyValue = new ArrayList<>();
+        for (int 年度 = 年度始; 年度 <= システム日付.getYearValue(); 年度++) {
+            KeyValueDataSource dataSource = new KeyValueDataSource();
+            dataSource.setKey(new RString(年度));
+            dataSource.setValue(new RDate(年度).wareki().getYear());
+            keyValue.add(dataSource);
+        }
+        Collections.sort(keyValue, new DateComparator());
+        return keyValue;
+    }
+
+    private void set初期化() {
+        set報告年月非活性();
         setチェックボックスクリア();
-        set集計と作成非活性();
+        setすべてのチェックボックス非活性();
+        set集計年月クリア();
+        set集計方法と作成日時非活性();
+    }
+
+    private void set報告年月非活性() {
+        div.getDdlShukeiFromYM().setDisabled(true);
+        div.getDdlShukeiToYM().setDisabled(true);
+    }
+
+    private void setすべてのチェックボックス非活性() {
+        div.getCblShutsuryokuTaishoAll().setReadOnly(true);
+        div.getCblShutsuryokuTaishoYoshiki1().setReadOnly(true);
+        div.getCblShutsuryokuTaishoIppan1to11().setReadOnly(true);
+        div.getCblShutsuryokuTaishoIppanGembutsu().setReadOnly(true);
+        div.getCblShutsuryokuTaishoHokenGembutsu().setReadOnly(true);
+        div.getCblShutsuryokuTaishoIppanShokan().setReadOnly(true);
+        div.getCblShutsuryokuTaishoHokenShokan().setReadOnly(true);
+        div.getCblShutsuryokuTaishoHokenKogaku().setReadOnly(true);
+        div.getCblShutsuryokuTaishoHokenKogakuGassan().setReadOnly(true);
+    }
+
+    private void setチェックボックスクリア() {
+        List<RString> key = new ArrayList<>();
+        div.getCblShutsuryokuTaishoAll().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(key);
+    }
+
+    private void set集計方法と作成日時非活性() {
+        div.getTxttxtShukeiNendo1().setReadOnly(true);
+        div.getTxtShukeiFromYM1().setReadOnly(true);
+        div.getTxtShukeiToYM1().setReadOnly(true);
+        div.getTxtSakuseiYMD1().setReadOnly(true);
+        div.getTxtSakuseiTime1().setReadOnly(true);
+        div.getTxtShukeiNendo2().setReadOnly(true);
+        div.getTxtShukeiFromYM2().setReadOnly(true);
+        div.getTxtShukeiToYM2().setReadOnly(true);
+        div.getTxtSakuseiYMD2().setReadOnly(true);
+        div.getTxtSakuseiTime2().setReadOnly(true);
+        div.getTxtShukeiNendo3().setReadOnly(true);
+        div.getTxtShukeiFromYM3().setReadOnly(true);
+        div.getTxtShukeiToYM3().setReadOnly(true);
+        div.getTxtSakuseiYMD3().setReadOnly(true);
+        div.getTxtSakuseiTime3().setReadOnly(true);
+        div.getTxtShukeiNendo4().setReadOnly(true);
+        div.getTxtShukeiFromYM4().setReadOnly(true);
+        div.getTxtShukeiToYM4().setReadOnly(true);
+        div.getTxtSakuseiYMD4().setReadOnly(true);
+        div.getTxtSakuseiTime4().setReadOnly(true);
+        div.getTxtShukeiNendo5().setReadOnly(true);
+        div.getTxtShukeiFromYM5().setReadOnly(true);
+        div.getTxtShukeiToYM5().setReadOnly(true);
+        div.getTxtSakuseiYMD5().setReadOnly(true);
+        div.getTxtSakuseiTime5().setReadOnly(true);
+        div.getRadlblShukeiType4().setReadOnly(true);
+        div.getTxtShukeiNendo6().setReadOnly(true);
+        div.getTxtShukeiFromYM6().setReadOnly(true);
+        div.getTxtShukeiToYM6().setReadOnly(true);
+        div.getTxtSakuseiYMD6().setReadOnly(true);
+        div.getTxtSakuseiTime6().setReadOnly(true);
+        div.getRadlblShukeiType5().setReadOnly(true);
+        div.getTxtShukeiNendo7().setReadOnly(true);
+        div.getTxtShukeiFromYM7().setReadOnly(true);
+        div.getTxtShukeiToYM7().setReadOnly(true);
+        div.getTxtSakuseiYMD7().setReadOnly(true);
+        div.getTxtSakuseiTime7().setReadOnly(true);
+        div.getTxtShukeiNendo8().setReadOnly(true);
+        div.getTxtShukeiFromYM8().setReadOnly(true);
+        div.getTxtShukeiToYM8().setReadOnly(true);
+        div.getTxtSakuseiYMD8().setReadOnly(true);
+        div.getTxtSakuseiTime8().setReadOnly(true);
+    }
+
+    private void set集計年月クリア() {
+        div.getTxttxtShukeiNendo1().clearValue();
+        div.getTxtShukeiNendo2().clearValue();
+        div.getTxtShukeiNendo3().clearValue();
+        div.getTxtShukeiNendo4().clearValue();
+        div.getTxtShukeiNendo5().clearValue();
+        div.getTxtShukeiNendo6().clearValue();
+        div.getTxtShukeiNendo7().clearValue();
+        div.getTxtShukeiNendo8().clearValue();
+        div.getTxtShukeiFromYM1().clearValue();
+        div.getTxtShukeiFromYM2().clearValue();
+        div.getTxtShukeiFromYM3().clearValue();
+        div.getTxtShukeiFromYM4().clearValue();
+        div.getTxtShukeiFromYM5().clearValue();
+        div.setHiddenShukeiFromYM5(RString.EMPTY);
+        div.getTxtShukeiFromYM6().clearValue();
+        div.setHiddenShukeiFromYM6(RString.EMPTY);
+        div.getTxtShukeiFromYM7().clearValue();
+        div.getTxtShukeiFromYM8().clearValue();
+        div.getTxtShukeiToYM1().clearValue();
+        div.getTxtShukeiToYM2().clearValue();
+        div.getTxtShukeiToYM3().clearValue();
+        div.getTxtShukeiToYM4().clearValue();
+        div.getTxtShukeiToYM5().clearValue();
+        div.setHiddenShukeiToYM5(RString.EMPTY);
+        div.getTxtShukeiToYM6().clearValue();
+        div.setHiddenShukeiToYM6(RString.EMPTY);
+        div.getTxtShukeiToYM7().clearValue();
+        div.getTxtShukeiToYM8().clearValue();
     }
 
     /**
@@ -138,9 +264,8 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getDdlShukeiFromYM().setSelectedKey(RString.EMPTY);
             div.getDdlShukeiToYM().setSelectedKey(RString.EMPTY);
             set実行単位選択変更();
-            set市町村選択ボタン活性();
-            set作成日時();
-            set集計エリア();
+            set作成日時クリア();
+            set初期化();
         }
         if (実行単位選択過去の集計.equals(実行単位選択前)
                 && (実行単位選択集計のみ.equals(実行単位選択) || 実行単位選択集計後に印刷.equals(実行単位選択))) {
@@ -167,33 +292,86 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
                 div.getBtnShichosonSelect().setDisabled(true);
             }
             set作成日時(システム日付, システム時刻);
-            set集計エリア();
+            set初期化();
         }
         div.setHiddenJikkoTaniZen(実行単位選択);
-        setチェックボックスクリア();
-        set集計と作成非活性();
+    }
+
+    private void set実行単位選択変更() {
+        if (!RString.isNullOrEmpty(div.getHiddenGappei())) {
+            div.getDdlKakoHokokuNendo().setDisabled(false);
+            div.getRadGappeiShichoson().setDisabled(false);
+            div.getDdlKakoHokokuNendo().setSelectedKey(RString.EMPTY);
+            div.getRadGappeiShichoson().setSelectedKey(new RString("gappei"));
+            div.getBtnShichosonSelect().setDisabled(true);
+        } else if (!RString.isNullOrEmpty(div.getHiddenKouiki())) {
+            div.getDdlKakoHokokuNendo().setDisabled(false);
+            div.getRadKoikiRengo().setDisabled(false);
+            div.getDdlKakoHokokuNendo().setSelectedKey(RString.EMPTY);
+            div.getRadKoikiRengo().setSelectedKey(new RString("koiki"));
+            div.getBtnShichosonSelect().setDisabled(true);
+        } else if (!RString.isNullOrEmpty(div.getHiddenTanitsu())) {
+            div.getDdlKakoHokokuNendo().setDisabled(false);
+            div.getDdlKakoHokokuNendo().setSelectedKey(RString.EMPTY);
+            div.getRadGappeiShichoson().setDisplayNone(true);
+            div.getRadKoikiRengo().setDisplayNone(true);
+            div.getBtnShichosonSelect().setDisplayNone(true);
+        }
     }
 
     /**
      * 報告年度を変更する場合、画面を表示する。
      */
     public void onClick_onChangeHokokuNendo() {
+        set初期化();
+        div.getDdlShukeiFromYM().setSelectedKey(RString.EMPTY);
+        div.getDdlShukeiToYM().setSelectedKey(RString.EMPTY);
         if (!RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedKey())) {
             div.getDdlShukeiFromYM().setDataSource(get報告年月(RString.EMPTY));
             div.getDdlShukeiToYM().setDataSource(get報告年月(new RString("報告終了年月")));
+            div.getDdlShukeiFromYM().setDisabled(false);
+            div.getDdlShukeiToYM().setDisabled(false);
+            set集計年度();
         }
-        setチェックボックス状況14();
-        setチェックボックス非活性();
-        set一般状況集計年月選択ラジオ非活性();
-        set保険給付決定集計年月選択ラジオ非活性();
-        clean集計年月();
-        set集計年度();
-        div.getDdlShukeiFromYM().setSelectedKey(RString.EMPTY);
-        div.getDdlShukeiToYM().setSelectedKey(RString.EMPTY);
-        if (!div.getCblShutsuryokuTaishoHokenKogakuGassan().isDisabled()) {
-            List<RString> 年報報告様式 = new ArrayList<>();
-            年報報告様式.add(年報報告一般状況高額合算分KEY);
-            div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(年報報告様式);
+    }
+
+    private List<KeyValueDataSource> get報告年月(RString 報告年月) {
+        int month;
+        int year = Integer.parseInt(div.getDdlHokokuNendo().getSelectedKey().toString());
+        List<KeyValueDataSource> keyValue = new ArrayList<>();
+        for (int i = INT_YOU; i < 年度報告月; i++) {
+            month = i;
+            if (i > INT_JUNI) {
+                month = month - INT_JUNI;
+            }
+            KeyValueDataSource dataSource = new KeyValueDataSource();
+            dataSource.setKey(new RString(month).padZeroToLeft(INT_NI));
+            dataSource.setValue(new RString(month).padZeroToLeft(INT_NI).insert(0, toWareki(year, month) + "."));
+            keyValue.add(dataSource);
+        }
+        if (!RString.isNullOrEmpty(報告年月)) {
+            Collections.reverse(keyValue);
+        }
+        return keyValue;
+    }
+
+    private String toWareki(int year, int month) {
+        if (month < INT_YOU) {
+            year++;
+        }
+        return new RString(year - INT_1988).padZeroToLeft(INT_NI).insert(0, "平").toString();
+    }
+
+    private void set集計年度() {
+        if (!RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedKey())) {
+            div.getTxttxtShukeiNendo1().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
+            div.getTxtShukeiNendo2().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
+            div.getTxtShukeiNendo3().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
+            div.getTxtShukeiNendo4().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
+            div.getTxtShukeiNendo5().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
+            div.getTxtShukeiNendo6().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
+            div.getTxtShukeiNendo7().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
+            div.getTxtShukeiNendo8().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
         }
     }
 
@@ -203,6 +381,22 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
      * @param システム日付 システム日付
      */
     public void onClick_onChangeShukeiFromYM(RDate システム日付) {
+        set集計開始年月(システム日付);
+        boolean flag = is両報告年月();
+        if (flag) {
+            set各項目活性非活性();
+        }
+    }
+
+    private boolean is両報告年月() {
+        boolean flag = true;
+        if (RString.isNullOrEmpty(div.getDdlShukeiFromYM().getSelectedKey()) || RString.isNullOrEmpty(div.getDdlShukeiToYM().getSelectedKey())) {
+            flag = false;
+        }
+        return flag;
+    }
+
+    private void set集計開始年月(RDate システム日付) {
         RString 状況集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_一般状況集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
         RString 給付集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_保険給付集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
         if (!RString.isNullOrEmpty(div.getDdlShukeiFromYM().getSelectedKey())) {
@@ -227,22 +421,116 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getTxtShukeiFromYM4().setValue(集計開始年月);
             div.getTxtShukeiFromYM7().setValue(集計開始年月);
             div.getTxtShukeiFromYM8().setValue(集計開始年月);
-        } else {
-            div.getTxtShukeiFromYM1().clearValue();
-            div.getTxtShukeiFromYM2().clearValue();
-            div.getTxtShukeiFromYM3().clearValue();
-            div.getTxtShukeiFromYM4().clearValue();
-            div.getTxtShukeiFromYM5().clearValue();
-            div.setHiddenShukeiFromYM5(RString.EMPTY);
-            div.getTxtShukeiFromYM6().clearValue();
-            div.setHiddenShukeiFromYM6(RString.EMPTY);
-            div.getTxtShukeiFromYM7().clearValue();
-            div.getTxtShukeiFromYM8().clearValue();
         }
-        setチェックボックス状況14();
-        setチェックボックス非活性();
-        set一般状況集計年月選択ラジオ非活性();
-        set保険給付決定集計年月選択ラジオ非活性();
+    }
+
+    private void set各項目活性非活性() {
+        RString 報告年度 = div.getDdlHokokuNendo().getSelectedKey();
+        RString 過去報告年度 = div.getDdlKakoHokokuNendo().getSelectedKey();
+        if (!RString.isNullOrEmpty(報告年度)) {
+            set活性条件(報告年度);
+        } else if (!RString.isNullOrEmpty(過去報告年度)) {
+            set活性条件(過去報告年度);
+        }
+    }
+
+    private void set活性条件(RString 年度) {
+        List<RString> 様式12 = new ArrayList<>();
+        List<RString> 一般状況1_11_List = new ArrayList<>();
+        List<RString> 一般状況12_14_現物分_List = new ArrayList<>();
+        List<RString> 保険給付決定状況_現物分_List = new ArrayList<>();
+        List<RString> 一般状況12_14_償還分_List = new ArrayList<>();
+        List<RString> 保険給付決定状況_償還分_List = new ArrayList<>();
+        List<RString> 保険給付決定状況_高額分_List = new ArrayList<>();
+        List<RString> 保険給付決定状況_高額合算分_List = new ArrayList<>();
+        int 報告年度数値 = Integer.parseInt(年度.toString());
+        if (報告年度数値 >= 平成17年度) {
+            div.getCblShutsuryokuTaishoYoshiki1().setReadOnly(false);
+            様式12.add(年報報告様式12KEY);
+        }
+        div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(様式12);
+        onClick_onChange1();
+        一般状況1_11_List.add(年報報告一般状況111KEY);
+        div.getCblShutsuryokuTaishoIppan1to11().setReadOnly(false);
+        div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(一般状況1_11_List);
+        onClick_onChange2();
+        一般状況12_14_現物分_List.add(年報報告一般状況1214現物分KEY);
+        div.getCblShutsuryokuTaishoIppanGembutsu().setReadOnly(false);
+        div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(一般状況12_14_現物分_List);
+        onClick_onChange3();
+        保険給付決定状況_現物分_List.add(年報報告保険給付決定現物分KEY);
+        div.getCblShutsuryokuTaishoHokenGembutsu().setReadOnly(false);
+        div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(保険給付決定状況_現物分_List);
+        onClick_onChange4();
+        一般状況12_14_償還分_List.add(年報報告一般状況1214償還分KEY);
+        div.getCblShutsuryokuTaishoIppanShokan().setReadOnly(false);
+        div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(一般状況12_14_償還分_List);
+        onClick_onChange5();
+        保険給付決定状況_償還分_List.add(年報報告一般状況償還分KEY);
+        div.getCblShutsuryokuTaishoHokenShokan().setReadOnly(false);
+        div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(保険給付決定状況_償還分_List);
+        onClick_onChange6();
+        if (報告年度数値 >= 平成18年度) {
+            div.getCblShutsuryokuTaishoHokenKogaku().setReadOnly(false);
+            保険給付決定状況_高額分_List.add(年報報告一般状況高額分KEY);
+        }
+        div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(保険給付決定状況_高額分_List);
+        onClick_onChange7();
+        if (報告年度数値 >= 平成20年度) {
+            div.getCblShutsuryokuTaishoHokenKogakuGassan().setReadOnly(false);
+            保険給付決定状況_高額合算分_List.add(年報報告一般状況高額合算分KEY);
+        }
+        div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(保険給付決定状況_高額合算分_List);
+        onClick_onChange8();
+        if (実行単位選択過去の集計.equals(div.getHiddenJikkoTaniZen())) {
+            set過去集計処理による各項目活性非活性();
+        }
+        setすべて選択チェックボックス();
+    }
+
+    private void set過去集計処理による各項目活性非活性() {
+        set過去集計処理による各項目活性非活性＿前半();
+        set過去集計処理による各項目活性非活性＿後半();
+    }
+
+    private void set過去集計処理による各項目活性非活性＿前半() {
+        List<RString> key = new ArrayList<>();
+        if (div.getTxttxtShukeiNendo1().getValue().isEmpty() || div.getTxtShukeiFromYM1().getValue().isEmpty() || div.getTxtShukeiToYM1().getValue().isEmpty()) {
+            div.getCblShutsuryokuTaishoYoshiki1().setReadOnly(true);
+            div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(key);
+        }
+        if (div.getTxtShukeiNendo2().getValue().isEmpty() || div.getTxtShukeiFromYM2().getValue().isEmpty() || div.getTxtShukeiToYM2().getValue().isEmpty()) {
+            div.getCblShutsuryokuTaishoIppan1to11().setReadOnly(true);
+            div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(key);
+        }
+        if (div.getTxtShukeiNendo3().getValue().isEmpty() || div.getTxtShukeiFromYM3().getValue().isEmpty() || div.getTxtShukeiToYM3().getValue().isEmpty()) {
+            div.getCblShutsuryokuTaishoIppanGembutsu().setReadOnly(true);
+            div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(key);
+        }
+        if (div.getTxtShukeiNendo4().getValue().isEmpty() || div.getTxtShukeiFromYM4().getValue().isEmpty() || div.getTxtShukeiToYM4().getValue().isEmpty()) {
+            div.getCblShutsuryokuTaishoHokenGembutsu().setReadOnly(true);
+            div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(key);
+        }
+    }
+
+    private void set過去集計処理による各項目活性非活性＿後半() {
+        List<RString> key = new ArrayList<>();
+        if (div.getTxtShukeiNendo5().getValue().isEmpty() || div.getTxtShukeiFromYM5().getValue().isEmpty() || div.getTxtShukeiToYM5().getValue().isEmpty()) {
+            div.getCblShutsuryokuTaishoIppanShokan().setReadOnly(true);
+            div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(key);
+        }
+        if (div.getTxtShukeiNendo6().getValue().isEmpty() || div.getTxtShukeiFromYM6().getValue().isEmpty() || div.getTxtShukeiToYM6().getValue().isEmpty()) {
+            div.getCblShutsuryokuTaishoHokenShokan().setReadOnly(true);
+            div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(key);
+        }
+        if (div.getTxtShukeiNendo7().getValue().isEmpty() || div.getTxtShukeiFromYM7().getValue().isEmpty() || div.getTxtShukeiToYM7().getValue().isEmpty()) {
+            div.getCblShutsuryokuTaishoHokenKogaku().setReadOnly(true);
+            div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(key);
+        }
+        if (div.getTxtShukeiNendo8().getValue().isEmpty() || div.getTxtShukeiFromYM8().getValue().isEmpty() || div.getTxtShukeiToYM8().getValue().isEmpty()) {
+            div.getCblShutsuryokuTaishoHokenKogakuGassan().setReadOnly(true);
+            div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(key);
+        }
     }
 
     /**
@@ -251,6 +539,14 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
      * @param システム日付 システム日付
      */
     public void onClick_onChangeShukeiToYM(RDate システム日付) {
+        set集計終了年月(システム日付);
+        boolean flag = is両報告年月();
+        if (flag) {
+            set各項目活性非活性();
+        }
+    }
+
+    private void set集計終了年月(RDate システム日付) {
         RString 状況集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_一般状況集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
         RString 給付集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_保険給付集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
         if (!RString.isNullOrEmpty(div.getDdlShukeiToYM().getSelectedKey())) {
@@ -275,22 +571,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getTxtShukeiToYM4().setValue(報告終了年月);
             div.getTxtShukeiToYM7().setValue(報告終了年月);
             div.getTxtShukeiToYM8().setValue(報告終了年月);
-        } else {
-            div.getTxtShukeiToYM1().clearValue();
-            div.getTxtShukeiToYM2().clearValue();
-            div.getTxtShukeiToYM3().clearValue();
-            div.getTxtShukeiToYM4().clearValue();
-            div.getTxtShukeiToYM5().clearValue();
-            div.setHiddenShukeiToYM5(RString.EMPTY);
-            div.getTxtShukeiToYM6().clearValue();
-            div.setHiddenShukeiToYM6(RString.EMPTY);
-            div.getTxtShukeiToYM7().clearValue();
-            div.getTxtShukeiToYM8().clearValue();
         }
-        setチェックボックス状況14();
-        setチェックボックス非活性();
-        set一般状況集計年月選択ラジオ非活性();
-        set保険給付決定集計年月選択ラジオ非活性();
     }
 
     private FlexibleDate getSyukeiFromData(JigyoJokyoHokokuNempoSakueiDiv div) {
@@ -342,8 +623,8 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             ShoriDateKanri 給付決定高額合算分処理日付管理情報, RDate システム日付) {
         RString 状況集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_一般状況集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
         RString 給付集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_保険給付集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
-        set集計エリア();
-        set作成日時();
+        set作成日時クリア();
+        set初期化();
         if (様式12処理日付管理情報 != null) {
             div.getTxttxtShukeiNendo1().setValue(new FlexibleDate(様式12処理日付管理情報.get年度().toDateString().concat(集計)));
             div.getTxtShukeiFromYM1().setValue(様式12処理日付管理情報.get対象開始年月日());
@@ -390,10 +671,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getTxtSakuseiYMD8().setValue(new FlexibleDate(給付決定高額合算分処理日付管理情報.get基準日時().getDate().toDateString()));
             div.getTxtSakuseiTime8().setValue(給付決定高額合算分処理日付管理情報.get基準日時().getRDateTime().getTime());
         }
-        setチェックボックス状況14();
-        setチェックボックス非活性();
-        set一般状況集計年月選択ラジオ非活性();
-        set保険給付決定集計年月選択ラジオ非活性();
+        set各項目活性非活性();
     }
 
     /**
@@ -426,50 +704,249 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
      * （すべて選択）チェックボックスを変更する場合、画面を表示する。
      */
     public void onClick_onChangeAll() {
-        if (div.getCblShutsuryokuTaishoAll().isAllSelected()) {
-            if (!div.getCblShutsuryokuTaishoYoshiki1().isDisabled()) {
-                List<RString> 年報報告様式 = new ArrayList<>();
-                年報報告様式.add(年報報告様式12KEY);
-                div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(年報報告様式);
-            }
-            if (!div.getCblShutsuryokuTaishoIppan1to11().isDisabled()) {
-                List<RString> 年報報告様式 = new ArrayList<>();
-                年報報告様式.add(年報報告一般状況111KEY);
-                div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(年報報告様式);
-            }
-            if (!div.getCblShutsuryokuTaishoIppanGembutsu().isDisabled()) {
-                List<RString> 年報報告様式 = new ArrayList<>();
-                年報報告様式.add(年報報告一般状況1214現物分KEY);
-                div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(年報報告様式);
-            }
-            if (!div.getCblShutsuryokuTaishoHokenGembutsu().isDisabled()) {
-                List<RString> 年報報告様式 = new ArrayList<>();
-                年報報告様式.add(年報報告保険給付決定現物分KEY);
-                div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(年報報告様式);
-            }
-            if (!div.getCblShutsuryokuTaishoIppanShokan().isDisabled()) {
-                List<RString> 年報報告様式 = new ArrayList<>();
-                年報報告様式.add(年報報告一般状況1214償還分KEY);
-                div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(年報報告様式);
-            }
-            if (!div.getCblShutsuryokuTaishoHokenShokan().isDisabled()) {
-                List<RString> 年報報告様式 = new ArrayList<>();
-                年報報告様式.add(年報報告一般状況償還分KEY);
-                div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(年報報告様式);
-            }
-            if (!div.getCblShutsuryokuTaishoHokenKogaku().isDisabled()) {
-                List<RString> 年報報告様式 = new ArrayList<>();
-                年報報告様式.add(年報報告一般状況高額分KEY);
-                div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(年報報告様式);
-            }
-            if (!div.getCblShutsuryokuTaishoHokenKogakuGassan().isDisabled()) {
-                List<RString> 年報報告様式 = new ArrayList<>();
-                年報報告様式.add(年報報告一般状況高額合算分KEY);
-                div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(年報報告様式);
-            }
-        } else {
-            setチェックボックスクリア();
+        List<RString> 様式12 = new ArrayList<>();
+        List<RString> 一般状況1_11_List = new ArrayList<>();
+        List<RString> 一般状況12_14_現物分_List = new ArrayList<>();
+        List<RString> 保険給付決定状況_現物分_List = new ArrayList<>();
+        List<RString> 一般状況12_14_償還分_List = new ArrayList<>();
+        List<RString> 保険給付決定状況_償還分_List = new ArrayList<>();
+        List<RString> 保険給付決定状況_高額分_List = new ArrayList<>();
+        List<RString> 保険給付決定状況_高額合算分_List = new ArrayList<>();
+        div.getCblShutsuryokuTaishoAll().setReadOnly(false);
+        boolean flag = div.getCblShutsuryokuTaishoAll().getSelectedKeys().contains(すべて選択);
+        if (!div.getCblShutsuryokuTaishoYoshiki1().getReadOnly() && flag) {
+            様式12.add(年報報告様式12KEY);
         }
+        div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(様式12);
+        onClick_onChange1();
+
+        if (!div.getCblShutsuryokuTaishoIppan1to11().getReadOnly() && flag) {
+            一般状況1_11_List.add(年報報告一般状況111KEY);
+        }
+        div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(一般状況1_11_List);
+        onClick_onChange2();
+
+        if (!div.getCblShutsuryokuTaishoIppanGembutsu().getReadOnly() && flag) {
+            一般状況12_14_現物分_List.add(年報報告一般状況1214現物分KEY);
+        }
+        div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(一般状況12_14_現物分_List);
+        onClick_onChange3();
+
+        if (!div.getCblShutsuryokuTaishoHokenGembutsu().getReadOnly() && flag) {
+            保険給付決定状況_現物分_List.add(年報報告保険給付決定現物分KEY);
+        }
+        div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(保険給付決定状況_現物分_List);
+        onClick_onChange4();
+
+        if (!div.getCblShutsuryokuTaishoIppanShokan().getReadOnly() && flag) {
+            一般状況12_14_償還分_List.add(年報報告一般状況1214償還分KEY);
+        }
+        div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(一般状況12_14_償還分_List);
+        onClick_onChange5();
+        if (!div.getCblShutsuryokuTaishoHokenShokan().getReadOnly() && flag) {
+            保険給付決定状況_償還分_List.add(年報報告一般状況償還分KEY);
+        }
+        div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(保険給付決定状況_償還分_List);
+        onClick_onChange6();
+
+        if (!div.getCblShutsuryokuTaishoHokenKogaku().getReadOnly() && flag) {
+            保険給付決定状況_高額分_List.add(年報報告一般状況高額分KEY);
+        }
+        div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(保険給付決定状況_高額分_List);
+        onClick_onChange7();
+
+        if (!div.getCblShutsuryokuTaishoHokenKogakuGassan().getReadOnly() && flag) {
+            保険給付決定状況_高額合算分_List.add(年報報告一般状況高額合算分KEY);
+        }
+        div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(保険給付決定状況_高額合算分_List);
+        onClick_onChange8();
+
+        setすべて選択チェックボックス();
+    }
+
+    private void setすべて選択チェックボックス() {
+        div.getCblShutsuryokuTaishoAll().setReadOnly(false);
+        boolean flag = true;
+        List<RString> allKey = new ArrayList<>();
+        if (!div.getCblShutsuryokuTaishoYoshiki1().getReadOnly() && !div.getCblShutsuryokuTaishoYoshiki1().getSelectedKeys().contains(年報報告様式12KEY)) {
+            flag = false;
+        }
+        if (!div.getCblShutsuryokuTaishoIppan1to11().getReadOnly() && !div.getCblShutsuryokuTaishoIppan1to11().getSelectedKeys().contains(年報報告一般状況111KEY)) {
+            flag = false;
+        }
+        if (!div.getCblShutsuryokuTaishoIppanGembutsu().getReadOnly() && !div.getCblShutsuryokuTaishoIppanGembutsu().getSelectedKeys().contains(年報報告一般状況1214現物分KEY)) {
+            flag = false;
+        }
+        if (!div.getCblShutsuryokuTaishoHokenGembutsu().getReadOnly() && !div.getCblShutsuryokuTaishoHokenGembutsu().getSelectedKeys().contains(年報報告保険給付決定現物分KEY)) {
+            flag = false;
+        }
+        if (!div.getCblShutsuryokuTaishoIppanShokan().getReadOnly() && !div.getCblShutsuryokuTaishoIppanShokan().getSelectedKeys().contains(年報報告一般状況1214償還分KEY)) {
+            flag = false;
+        }
+        if (!div.getCblShutsuryokuTaishoHokenShokan().getReadOnly() && !div.getCblShutsuryokuTaishoHokenShokan().getSelectedKeys().contains(年報報告一般状況償還分KEY)) {
+            flag = false;
+        }
+        if (!div.getCblShutsuryokuTaishoHokenKogaku().getReadOnly() && !div.getCblShutsuryokuTaishoHokenKogaku().getSelectedKeys().contains(年報報告一般状況高額分KEY)) {
+            flag = false;
+        }
+        if (!div.getCblShutsuryokuTaishoHokenKogakuGassan().getReadOnly() && !div.getCblShutsuryokuTaishoHokenKogakuGassan().getSelectedKeys().contains(年報報告一般状況高額合算分KEY)) {
+            flag = false;
+        }
+        flag = is全部チェックボックス非活性判定(flag);
+        if (flag) {
+            allKey.add(new RString("all"));
+        }
+        div.getCblShutsuryokuTaishoAll().setSelectedItemsByKey(allKey);
+    }
+
+    private boolean is全部チェックボックス非活性判定(boolean flag) {
+        if (div.getCblShutsuryokuTaishoYoshiki1().getReadOnly() && div.getCblShutsuryokuTaishoIppan1to11().getReadOnly() && div.getCblShutsuryokuTaishoIppanGembutsu().getReadOnly()
+                && div.getCblShutsuryokuTaishoHokenGembutsu().getReadOnly() && div.getCblShutsuryokuTaishoIppanShokan().getReadOnly() && div.getCblShutsuryokuTaishoHokenShokan().getReadOnly()
+                && div.getCblShutsuryokuTaishoHokenKogaku().getReadOnly() && div.getCblShutsuryokuTaishoHokenKogakuGassan().getReadOnly()) {
+            div.getCblShutsuryokuTaishoAll().setReadOnly(true);
+            flag = false;
+        }
+        return flag;
+    }
+
+    /**
+     * 一般状況チェックボックスを変更する場合、画面を表示する。
+     */
+    public void onClick_onChange1() {
+        RString jkkouTani = div.getHiddenJikkoTaniZen();
+        if (!実行単位選択過去の集計.equals(jkkouTani)) {
+            if (div.getCblShutsuryokuTaishoYoshiki1().getSelectedKeys().contains(年報報告様式12KEY)) {
+                div.getTxtSakuseiYMD1().setReadOnly(false);
+                div.getTxtSakuseiTime1().setReadOnly(false);
+            } else {
+                div.getTxtSakuseiYMD1().setReadOnly(true);
+                div.getTxtSakuseiTime1().setReadOnly(true);
+            }
+        }
+        setすべて選択チェックボックス();
+    }
+
+    /**
+     * 一般状況チェックボックスを変更する場合、画面を表示する。
+     */
+    public void onClick_onChange2() {
+        RString jkkouTani = div.getHiddenJikkoTaniZen();
+        if (!実行単位選択過去の集計.equals(jkkouTani)) {
+            if (div.getCblShutsuryokuTaishoIppan1to11().getSelectedKeys().contains(年報報告一般状況111KEY)) {
+                div.getTxtSakuseiYMD2().setReadOnly(false);
+                div.getTxtSakuseiTime2().setReadOnly(false);
+            } else {
+                div.getTxtSakuseiYMD2().setReadOnly(true);
+                div.getTxtSakuseiTime2().setReadOnly(true);
+            }
+        }
+        setすべて選択チェックボックス();
+    }
+
+    /**
+     * 一般状況チェックボックスを変更する場合、画面を表示する。
+     */
+    public void onClick_onChange3() {
+        RString jkkouTani = div.getHiddenJikkoTaniZen();
+        if (!実行単位選択過去の集計.equals(jkkouTani)) {
+            if (div.getCblShutsuryokuTaishoIppanGembutsu().getSelectedKeys().contains(年報報告一般状況1214現物分KEY)) {
+                div.getTxtSakuseiYMD3().setReadOnly(false);
+                div.getTxtSakuseiTime3().setReadOnly(false);
+            } else {
+                div.getTxtSakuseiYMD3().setReadOnly(true);
+                div.getTxtSakuseiTime3().setReadOnly(true);
+            }
+        }
+        setすべて選択チェックボックス();
+    }
+
+    /**
+     * 一般状況チェックボックスを変更する場合、画面を表示する。
+     */
+    public void onClick_onChange4() {
+        RString jkkouTani = div.getHiddenJikkoTaniZen();
+        if (!実行単位選択過去の集計.equals(jkkouTani)) {
+            if (div.getCblShutsuryokuTaishoHokenGembutsu().getSelectedKeys().contains(年報報告保険給付決定現物分KEY)) {
+                div.getTxtSakuseiYMD4().setReadOnly(false);
+                div.getTxtSakuseiTime4().setReadOnly(false);
+            } else {
+                div.getTxtSakuseiYMD4().setReadOnly(true);
+                div.getTxtSakuseiTime4().setReadOnly(true);
+            }
+        }
+        setすべて選択チェックボックス();
+    }
+
+    /**
+     * 一般状況チェックボックスを変更する場合、画面を表示する。
+     */
+    public void onClick_onChange5() {
+        RString jkkouTani = div.getHiddenJikkoTaniZen();
+        if (!実行単位選択過去の集計.equals(jkkouTani)) {
+            if (div.getCblShutsuryokuTaishoIppanShokan().getSelectedKeys().contains(年報報告一般状況1214償還分KEY)) {
+                div.getTxtSakuseiYMD5().setReadOnly(false);
+                div.getTxtSakuseiTime5().setReadOnly(false);
+                div.getRadlblShukeiType4().setReadOnly(false);
+            } else {
+                div.getTxtSakuseiYMD5().setReadOnly(true);
+                div.getTxtSakuseiTime5().setReadOnly(true);
+                div.getRadlblShukeiType4().setReadOnly(true);
+            }
+        }
+        setすべて選択チェックボックス();
+    }
+
+    /**
+     * 一般状況チェックボックスを変更する場合、画面を表示する。
+     */
+    public void onClick_onChange6() {
+        RString jkkouTani = div.getHiddenJikkoTaniZen();
+        if (!実行単位選択過去の集計.equals(jkkouTani)) {
+            if (div.getCblShutsuryokuTaishoHokenShokan().getSelectedKeys().contains(年報報告一般状況償還分KEY)) {
+                div.getTxtSakuseiYMD6().setReadOnly(false);
+                div.getTxtSakuseiTime6().setReadOnly(false);
+                div.getRadlblShukeiType5().setReadOnly(false);
+            } else {
+                div.getTxtSakuseiYMD6().setReadOnly(true);
+                div.getTxtSakuseiTime6().setReadOnly(true);
+                div.getRadlblShukeiType5().setReadOnly(true);
+            }
+        }
+        setすべて選択チェックボックス();
+    }
+
+    /**
+     * 一般状況チェックボックスを変更する場合、画面を表示する。
+     */
+    public void onClick_onChange7() {
+        RString jkkouTani = div.getHiddenJikkoTaniZen();
+        if (!実行単位選択過去の集計.equals(jkkouTani)) {
+            if (div.getCblShutsuryokuTaishoHokenKogaku().getSelectedKeys().contains(年報報告一般状況高額分KEY)) {
+                div.getTxtSakuseiYMD7().setReadOnly(false);
+                div.getTxtSakuseiTime7().setReadOnly(false);
+            } else {
+                div.getTxtSakuseiYMD7().setReadOnly(true);
+                div.getTxtSakuseiTime7().setReadOnly(true);
+            }
+        }
+        setすべて選択チェックボックス();
+    }
+
+    /**
+     * 一般状況チェックボックスを変更する場合、画面を表示する。
+     */
+    public void onClick_onChange8() {
+        RString jkkouTani = div.getHiddenJikkoTaniZen();
+        if (!実行単位選択過去の集計.equals(jkkouTani)) {
+            if (div.getCblShutsuryokuTaishoHokenKogakuGassan().getSelectedKeys().contains(年報報告一般状況高額合算分KEY)) {
+                div.getTxtSakuseiYMD8().setReadOnly(false);
+                div.getTxtSakuseiTime8().setReadOnly(false);
+            } else {
+                div.getTxtSakuseiYMD8().setReadOnly(true);
+                div.getTxtSakuseiTime8().setReadOnly(true);
+            }
+        }
+        setすべて選択チェックボックス();
     }
 
     /**
@@ -647,42 +1124,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         return set出力区分(parameter);
     }
 
-    private void set実行単位選択変更() {
-        if (!RString.isNullOrEmpty(div.getHiddenGappei())) {
-            div.getDdlKakoHokokuNendo().setDisabled(false);
-            div.getRadGappeiShichoson().setDisabled(false);
-            div.getDdlKakoHokokuNendo().setSelectedKey(RString.EMPTY);
-            div.getRadGappeiShichoson().setSelectedKey(new RString("gappei"));
-            div.getBtnShichosonSelect().setDisabled(true);
-        } else if (!RString.isNullOrEmpty(div.getHiddenKouiki())) {
-            div.getDdlKakoHokokuNendo().setDisabled(false);
-            div.getRadKoikiRengo().setDisabled(false);
-            div.getDdlKakoHokokuNendo().setSelectedKey(RString.EMPTY);
-            div.getRadKoikiRengo().setSelectedKey(new RString("koiki"));
-            div.getBtnShichosonSelect().setDisabled(true);
-        } else if (!RString.isNullOrEmpty(div.getHiddenTanitsu())) {
-            div.getDdlKakoHokokuNendo().setDisabled(false);
-            div.getDdlKakoHokokuNendo().setSelectedKey(RString.EMPTY);
-            div.getRadGappeiShichoson().setDisplayNone(true);
-            div.getRadKoikiRengo().setDisplayNone(true);
-            div.getBtnShichosonSelect().setDisplayNone(true);
-        }
-    }
-
-    private void set市町村選択ボタン活性() {
-        if (!RString.isNullOrEmpty(div.getHiddenGappei())) {
-            div.getRadGappeiShichoson().setDisabled(false);
-            if (旧市町村分.equals(div.getRadGappeiShichoson().getSelectedKey())) {
-                div.getBtnShichosonSelect().setDisabled(false);
-            }
-        } else if (!RString.isNullOrEmpty(div.getHiddenKouiki())) {
-            div.getRadKoikiRengo().setDisabled(false);
-            if (構成市町村分.equals(div.getRadKoikiRengo().getSelectedKey())) {
-                div.getBtnShichosonSelect().setDisabled(false);
-            }
-        }
-    }
-
     private void set過去の集計結果表示非表示(boolean is合併あり, boolean is単一, boolean is広域) {
         if (is合併あり) {
             div.getRadGappeiShichoson().setDisplayNone(false);
@@ -703,18 +1144,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         }
     }
 
-    private List<KeyValueDataSource> get報告年度(RDate システム日付) {
-        List<KeyValueDataSource> keyValue = new ArrayList<>();
-        for (int 年度 = 年度始; 年度 <= システム日付.getYearValue(); 年度++) {
-            KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(new RString(年度));
-            dataSource.setValue(new RDate(年度).wareki().getYear());
-            keyValue.add(dataSource);
-        }
-        Collections.sort(keyValue, new DateComparator());
-        return keyValue;
-    }
-
     private List<KeyValueDataSource> get過去集計年度(List<ShoriDateKanri> 過去集計年度データ) {
         List<KeyValueDataSource> keyValue = new ArrayList<>();
         List<RString> key = new ArrayList<>();
@@ -729,33 +1158,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         }
         Collections.sort(keyValue, new DateComparator());
         return keyValue;
-    }
-
-    private List<KeyValueDataSource> get報告年月(RString 報告終了年月) {
-        int month;
-        int year = Integer.parseInt(div.getDdlHokokuNendo().getSelectedKey().toString());
-        List<KeyValueDataSource> keyValue = new ArrayList<>();
-        for (int i = INT_YOU; i < 年度報告月; i++) {
-            month = i;
-            if (i > INT_JUNI) {
-                month = month - INT_JUNI;
-            }
-            KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(new RString(month).padZeroToLeft(INT_NI));
-            dataSource.setValue(new RString(month).padZeroToLeft(INT_NI).insert(0, toWareki(year, month) + "."));
-            keyValue.add(dataSource);
-        }
-        if (!RString.isNullOrEmpty(報告終了年月)) {
-            Collections.reverse(keyValue);
-        }
-        return keyValue;
-    }
-
-    private String toWareki(int year, int month) {
-        if (month < INT_YOU) {
-            year++;
-        }
-        return new RString(year - INT_1988).padZeroToLeft(INT_NI).insert(0, "平").toString();
     }
 
     private void set審査年月と決定年月(RDate システム日付) {
@@ -793,7 +1195,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         div.getTxtSakuseiTime8().setValue(システム時刻);
     }
 
-    private void set作成日時() {
+    private void set作成日時クリア() {
         div.getTxtSakuseiYMD1().clearValue();
         div.getTxtSakuseiTime1().clearValue();
         div.getTxtSakuseiYMD2().clearValue();
@@ -810,238 +1212,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         div.getTxtSakuseiTime7().clearValue();
         div.getTxtSakuseiYMD8().clearValue();
         div.getTxtSakuseiTime8().clearValue();
-    }
-
-    private void setチェックボックス状況14() {
-        boolean is年報報告様式12 = false;
-        boolean is年報報告一般状況111 = false;
-        boolean is年報報告一般状況1214現物分 = false;
-        boolean is年報報告保険給付決定現物分 = false;
-        boolean is年報報告一般状況1214償還分 = false;
-        boolean is年報報告一般状況償還分 = false;
-        boolean is年報報告一般状況高額分 = false;
-        boolean is年報報告一般状況高額合算分 = false;
-        div.getCblShutsuryokuTaishoAll().setDisabled(true);
-        div.getCblShutsuryokuTaishoYoshiki1().setDisabled(true);
-        div.getCblShutsuryokuTaishoIppan1to11().setDisabled(true);
-        div.getCblShutsuryokuTaishoIppanGembutsu().setDisabled(true);
-        div.getCblShutsuryokuTaishoHokenGembutsu().setDisabled(true);
-        div.getCblShutsuryokuTaishoIppanShokan().setDisabled(true);
-        div.getCblShutsuryokuTaishoHokenShokan().setDisabled(true);
-        div.getCblShutsuryokuTaishoHokenKogaku().setDisabled(true);
-        div.getCblShutsuryokuTaishoHokenKogakuGassan().setDisabled(true);
-        div.getTxtSakuseiYMD1().setDisabled(true);
-        div.getTxtSakuseiTime1().setDisabled(true);
-        div.getTxtSakuseiYMD2().setDisabled(true);
-        div.getTxtSakuseiTime2().setDisabled(true);
-        div.getTxtSakuseiYMD3().setDisabled(true);
-        div.getTxtSakuseiTime3().setDisabled(true);
-        div.getTxtSakuseiYMD4().setDisabled(true);
-        div.getTxtSakuseiTime4().setDisabled(true);
-        div.getTxtSakuseiYMD5().setDisabled(true);
-        div.getTxtSakuseiTime5().setDisabled(true);
-        div.getTxtSakuseiYMD6().setDisabled(true);
-        div.getTxtSakuseiTime6().setDisabled(true);
-        div.getTxtSakuseiYMD7().setDisabled(true);
-        div.getTxtSakuseiTime7().setDisabled(true);
-        div.getTxtSakuseiYMD8().setDisabled(true);
-        div.getTxtSakuseiTime8().setDisabled(true);
-        List<RString> key = new ArrayList<>();
-        if (div.getTxtShukeiFromYM1().getValue() != null && !div.getTxtShukeiFromYM1().getValue().isEmpty()
-                && div.getTxtShukeiToYM1().getValue() != null && !div.getTxtShukeiToYM1().getValue().isEmpty()) {
-            div.getCblShutsuryokuTaishoYoshiki1().setDisabled(is年報報告様式12);
-            div.getTxtSakuseiYMD1().setDisabled(is年報報告様式12);
-            div.getTxtSakuseiTime1().setDisabled(is年報報告様式12);
-            is年報報告様式12 = true;
-            List<RString> 年報報告様式 = new ArrayList<>();
-            年報報告様式.add(年報報告様式12KEY);
-            div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(年報報告様式);
-        } else {
-            div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(key);
-        }
-        if (div.getTxtShukeiFromYM2().getValue() != null && !div.getTxtShukeiFromYM2().getValue().isEmpty()
-                && div.getTxtShukeiToYM2().getValue() != null && !div.getTxtShukeiToYM2().getValue().isEmpty()) {
-            div.getCblShutsuryokuTaishoIppan1to11().setDisabled(is年報報告一般状況111);
-            div.getTxtSakuseiYMD2().setDisabled(is年報報告一般状況111);
-            div.getTxtSakuseiTime2().setDisabled(is年報報告一般状況111);
-            is年報報告一般状況111 = true;
-            List<RString> 年報報告様式 = new ArrayList<>();
-            年報報告様式.add(年報報告一般状況111KEY);
-            div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(年報報告様式);
-        } else {
-            div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(key);
-        }
-        if (div.getTxtShukeiFromYM3().getValue() != null && !div.getTxtShukeiFromYM3().getValue().isEmpty()
-                && div.getTxtShukeiToYM3().getValue() != null && !div.getTxtShukeiToYM3().getValue().isEmpty()) {
-            div.getCblShutsuryokuTaishoIppanGembutsu().setDisabled(is年報報告一般状況1214現物分);
-            div.getTxtSakuseiYMD3().setDisabled(is年報報告一般状況1214現物分);
-            div.getTxtSakuseiTime3().setDisabled(is年報報告一般状況1214現物分);
-            is年報報告一般状況1214現物分 = true;
-            List<RString> 年報報告様式 = new ArrayList<>();
-            年報報告様式.add(年報報告一般状況1214現物分KEY);
-            div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(年報報告様式);
-        } else {
-            div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(key);
-        }
-        if (div.getTxtShukeiFromYM4().getValue() != null && !div.getTxtShukeiFromYM4().getValue().isEmpty()
-                && div.getTxtShukeiToYM4().getValue() != null && !div.getTxtShukeiToYM4().getValue().isEmpty()) {
-            div.getCblShutsuryokuTaishoHokenGembutsu().setDisabled(is年報報告保険給付決定現物分);
-            div.getTxtSakuseiYMD4().setDisabled(is年報報告保険給付決定現物分);
-            div.getTxtSakuseiTime4().setDisabled(is年報報告保険給付決定現物分);
-            is年報報告保険給付決定現物分 = true;
-            List<RString> 年報報告様式 = new ArrayList<>();
-            年報報告様式.add(年報報告保険給付決定現物分KEY);
-            div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(年報報告様式);
-        } else {
-            div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(key);
-        }
-        setチェックボックス状況58(is年報報告様式12,
-                is年報報告一般状況111,
-                is年報報告一般状況1214現物分,
-                is年報報告保険給付決定現物分,
-                is年報報告一般状況1214償還分,
-                is年報報告一般状況償還分,
-                is年報報告一般状況高額分,
-                is年報報告一般状況高額合算分);
-    }
-
-    private void setチェックボックス状況58(boolean is年報報告様式12,
-            boolean is年報報告一般状況111,
-            boolean is年報報告一般状況1214現物分,
-            boolean is年報報告保険給付決定現物分,
-            boolean is年報報告一般状況1214償還分,
-            boolean is年報報告一般状況償還分,
-            boolean is年報報告一般状況高額分,
-            boolean is年報報告一般状況高額合算分) {
-        List<RString> key = new ArrayList<>();
-        if (div.getTxtShukeiFromYM5().getValue() != null && !div.getTxtShukeiFromYM5().getValue().isEmpty()
-                && div.getTxtShukeiToYM5().getValue() != null && !div.getTxtShukeiToYM5().getValue().isEmpty()) {
-            div.getCblShutsuryokuTaishoIppanShokan().setDisabled(is年報報告一般状況1214償還分);
-            div.getTxtSakuseiYMD5().setDisabled(is年報報告一般状況1214償還分);
-            div.getTxtSakuseiTime5().setDisabled(is年報報告一般状況1214償還分);
-            is年報報告一般状況1214償還分 = true;
-            List<RString> 年報報告様式 = new ArrayList<>();
-            年報報告様式.add(年報報告一般状況1214償還分KEY);
-            div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(年報報告様式);
-        } else {
-            div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(key);
-        }
-        if (div.getTxtShukeiFromYM6().getValue() != null && !div.getTxtShukeiFromYM6().getValue().isEmpty()
-                && div.getTxtShukeiToYM6().getValue() != null && !div.getTxtShukeiToYM6().getValue().isEmpty()) {
-            div.getCblShutsuryokuTaishoHokenShokan().setDisabled(is年報報告一般状況償還分);
-            div.getTxtSakuseiYMD6().setDisabled(is年報報告一般状況償還分);
-            div.getTxtSakuseiTime6().setDisabled(is年報報告一般状況償還分);
-            is年報報告一般状況償還分 = true;
-            List<RString> 年報報告様式 = new ArrayList<>();
-            年報報告様式.add(年報報告一般状況償還分KEY);
-            div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(年報報告様式);
-        } else {
-            div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(key);
-        }
-        if (div.getTxtShukeiFromYM7().getValue() != null && !div.getTxtShukeiFromYM7().getValue().isEmpty()
-                && div.getTxtShukeiToYM7().getValue() != null && !div.getTxtShukeiToYM7().getValue().isEmpty()) {
-            div.getCblShutsuryokuTaishoHokenKogaku().setDisabled(is年報報告一般状況高額分);
-            div.getTxtSakuseiYMD7().setDisabled(is年報報告一般状況高額分);
-            div.getTxtSakuseiTime7().setDisabled(is年報報告一般状況高額分);
-            is年報報告一般状況高額分 = true;
-            List<RString> 年報報告様式 = new ArrayList<>();
-            年報報告様式.add(年報報告一般状況高額分KEY);
-            div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(年報報告様式);
-        } else {
-            div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(key);
-        }
-        if (div.getTxtShukeiFromYM8().getValue() != null && !div.getTxtShukeiFromYM8().getValue().isEmpty()
-                && div.getTxtShukeiToYM8().getValue() != null && !div.getTxtShukeiToYM8().getValue().isEmpty()) {
-            div.getCblShutsuryokuTaishoHokenKogakuGassan().setDisabled(is年報報告一般状況高額合算分);
-            div.getTxtSakuseiYMD8().setDisabled(is年報報告一般状況高額合算分);
-            div.getTxtSakuseiTime8().setDisabled(is年報報告一般状況高額合算分);
-            is年報報告一般状況高額合算分 = true;
-            List<RString> 年報報告様式 = new ArrayList<>();
-            年報報告様式.add(年報報告一般状況高額合算分KEY);
-            div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(年報報告様式);
-        } else {
-            div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(key);
-        }
-        setチェックボックス状況全(is年報報告様式12,
-                is年報報告一般状況111,
-                is年報報告一般状況1214現物分,
-                is年報報告保険給付決定現物分,
-                is年報報告一般状況1214償還分,
-                is年報報告一般状況償還分,
-                is年報報告一般状況高額分,
-                is年報報告一般状況高額合算分);
-    }
-
-    private void setチェックボックス状況全(boolean is年報報告様式12,
-            boolean is年報報告一般状況111,
-            boolean is年報報告一般状況1214現物分,
-            boolean is年報報告保険給付決定現物分,
-            boolean is年報報告一般状況1214償還分,
-            boolean is年報報告一般状況償還分,
-            boolean is年報報告一般状況高額分,
-            boolean is年報報告一般状況高額合算分) {
-        if (is年報報告様式12 || is年報報告一般状況111 || is年報報告一般状況1214現物分 || is年報報告保険給付決定現物分
-                || is年報報告一般状況1214償還分 || is年報報告一般状況償還分 || is年報報告一般状況高額分 || is年報報告一般状況高額合算分) {
-            div.getCblShutsuryokuTaishoAll().setDisabled(false);
-        }
-        setチェックボックス();
-    }
-
-    private void setチェックボックス非活性() {
-        if ((!RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedKey())
-                && Integer.parseInt(div.getDdlHokokuNendo().getSelectedKey().toString()) < 平成17年度)
-                || (!RString.isNullOrEmpty(div.getDdlKakoHokokuNendo().getSelectedKey())
-                && Integer.parseInt(div.getDdlKakoHokokuNendo().getSelectedKey().toString()) < 平成17年度)) {
-            div.getCblShutsuryokuTaishoYoshiki1().setDisabled(true);
-            div.getTxttxtShukeiNendo1().setDisabled(true);
-            div.getTxtShukeiFromYM1().setDisabled(true);
-            div.getTxtShukeiToYM1().setDisabled(true);
-            div.getTxtSakuseiYMD1().setDisabled(true);
-            div.getTxtSakuseiTime1().setDisabled(true);
-        } else {
-            div.getCblShutsuryokuTaishoYoshiki1().setDisabled(false);
-            div.getTxttxtShukeiNendo1().setDisabled(false);
-            div.getTxtShukeiFromYM1().setDisabled(false);
-            div.getTxtShukeiToYM1().setDisabled(false);
-            div.getTxtSakuseiYMD1().setDisabled(false);
-            div.getTxtSakuseiTime1().setDisabled(false);
-        }
-        if ((!RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedKey())
-                && Integer.parseInt(div.getDdlHokokuNendo().getSelectedKey().toString()) < 平成18年度)
-                || (!RString.isNullOrEmpty(div.getDdlKakoHokokuNendo().getSelectedKey())
-                && Integer.parseInt(div.getDdlKakoHokokuNendo().getSelectedKey().toString()) < 平成18年度)) {
-            div.getCblShutsuryokuTaishoHokenKogaku().setDisabled(true);
-            div.getTxtShukeiNendo7().setDisabled(true);
-            div.getTxtShukeiFromYM7().setDisabled(true);
-            div.getTxtShukeiToYM7().setDisabled(true);
-            div.getTxtSakuseiYMD7().setDisabled(true);
-            div.getTxtSakuseiTime7().setDisabled(true);
-        } else {
-            div.getCblShutsuryokuTaishoHokenKogaku().setDisabled(false);
-            div.getTxtShukeiNendo7().setDisabled(false);
-            div.getTxtShukeiFromYM7().setDisabled(false);
-            div.getTxtShukeiToYM7().setDisabled(false);
-            div.getTxtSakuseiYMD7().setDisabled(false);
-            div.getTxtSakuseiTime7().setDisabled(false);
-        }
-        if ((!RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedKey())
-                && Integer.parseInt(div.getDdlHokokuNendo().getSelectedKey().toString()) < 平成20年度)
-                || (!RString.isNullOrEmpty(div.getDdlKakoHokokuNendo().getSelectedKey())
-                && Integer.parseInt(div.getDdlKakoHokokuNendo().getSelectedKey().toString()) < 平成20年度)) {
-            div.getCblShutsuryokuTaishoHokenKogakuGassan().setDisabled(true);
-            div.getTxtShukeiNendo8().setDisabled(true);
-            div.getTxtShukeiFromYM8().setDisabled(true);
-            div.getTxtShukeiToYM8().setDisabled(true);
-            div.getTxtSakuseiYMD8().setDisabled(true);
-            div.getTxtSakuseiTime8().setDisabled(true);
-        } else {
-            div.getCblShutsuryokuTaishoHokenKogakuGassan().setDisabled(false);
-            div.getTxtShukeiNendo8().setDisabled(false);
-            div.getTxtShukeiFromYM8().setDisabled(false);
-            div.getTxtShukeiToYM8().setDisabled(false);
-            div.getTxtSakuseiYMD8().setDisabled(false);
-            div.getTxtSakuseiTime8().setDisabled(false);
-        }
     }
 
     private void set一般状況集計年月選択ラジオ非活性() {
@@ -1143,75 +1313,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getTxtSakuseiYMD6().setValue(new FlexibleDate(給付決定償還分決定処理日付管理情報.get基準日時().getDate().toDateString()));
             div.getTxtSakuseiTime6().setValue(給付決定償還分決定処理日付管理情報.get基準日時().getRDateTime().getTime());
             div.getRadlblShukeiType5().setSelectedKey(決定年月);
-        }
-    }
-
-    private void clean集計年月() {
-        div.getTxtShukeiFromYM1().clearValue();
-        div.getTxtShukeiToYM1().clearValue();
-        div.getTxtShukeiFromYM2().clearValue();
-        div.getTxtShukeiToYM2().clearValue();
-        div.getTxtShukeiFromYM3().clearValue();
-        div.getTxtShukeiToYM3().clearValue();
-        div.getTxtShukeiFromYM4().clearValue();
-        div.getTxtShukeiToYM4().clearValue();
-        div.getTxtShukeiFromYM5().clearValue();
-        div.getTxtShukeiToYM5().clearValue();
-        div.setHiddenShukeiFromYM5(RString.EMPTY);
-        div.setHiddenShukeiToYM5(RString.EMPTY);
-        div.getTxtShukeiFromYM6().clearValue();
-        div.getTxtShukeiToYM6().clearValue();
-        div.setHiddenShukeiFromYM6(RString.EMPTY);
-        div.setHiddenShukeiToYM6(RString.EMPTY);
-        div.getTxtShukeiFromYM7().clearValue();
-        div.getTxtShukeiToYM7().clearValue();
-        div.getTxtShukeiFromYM8().clearValue();
-        div.getTxtShukeiToYM8().clearValue();
-        List<RString> key = new ArrayList<>();
-        div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(key);
-    }
-
-    private void set集計年度() {
-        if (!RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedKey())) {
-            div.getTxttxtShukeiNendo1().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
-            div.getTxtShukeiNendo2().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
-            div.getTxtShukeiNendo3().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
-            div.getTxtShukeiNendo4().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
-            div.getTxtShukeiNendo5().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
-            div.getTxtShukeiNendo6().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
-            div.getTxtShukeiNendo7().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
-            div.getTxtShukeiNendo8().setValue(new FlexibleDate(div.getDdlHokokuNendo().getSelectedKey().concat(集計)));
-        } else {
-            div.getTxttxtShukeiNendo1().clearValue();
-            div.getTxtShukeiNendo2().clearValue();
-            div.getTxtShukeiNendo3().clearValue();
-            div.getTxtShukeiNendo4().clearValue();
-            div.getTxtShukeiNendo5().clearValue();
-            div.getTxtShukeiNendo6().clearValue();
-            div.getTxtShukeiNendo7().clearValue();
-            div.getTxtShukeiNendo8().clearValue();
-        }
-    }
-
-    private void setチェックボックス() {
-        if (div.getCblShutsuryokuTaishoYoshiki1().isAllSelected()
-                && div.getCblShutsuryokuTaishoIppan1to11().isAllSelected()
-                && div.getCblShutsuryokuTaishoIppanGembutsu().isAllSelected()
-                && div.getCblShutsuryokuTaishoHokenGembutsu().isAllSelected()
-                && div.getCblShutsuryokuTaishoIppanShokan().isAllSelected()
-                && div.getCblShutsuryokuTaishoHokenShokan().isAllSelected()
-                && div.getCblShutsuryokuTaishoHokenKogaku().isAllSelected()
-                && div.getCblShutsuryokuTaishoHokenKogakuGassan().isAllSelected()) {
-            List<RString> 年報報告様式 = new ArrayList<>();
-            年報報告様式.add(new RString("all"));
-            div.getCblShutsuryokuTaishoAll().setSelectedItemsByKey(年報報告様式);
         }
     }
 
@@ -1346,7 +1447,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         return parameter;
     }
 
-
     private RString get集計年度(FlexibleDate 日期) {
         if (日期 != null && !日期.isEmpty()) {
             return new RString(日期.toString().substring(INT_ZEO, INT_YOU));
@@ -1399,105 +1499,6 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             }
         }
         return new RString("2");
-    }
-
-    private void set集計エリア() {
-        div.getTxttxtShukeiNendo1().clearValue();
-        div.getTxtShukeiNendo2().clearValue();
-        div.getTxtShukeiNendo3().clearValue();
-        div.getTxtShukeiNendo4().clearValue();
-        div.getTxtShukeiNendo5().clearValue();
-        div.getTxtShukeiNendo6().clearValue();
-        div.getTxtShukeiNendo7().clearValue();
-        div.getTxtShukeiNendo8().clearValue();
-        div.getTxtShukeiFromYM1().clearValue();
-        div.getTxtShukeiFromYM2().clearValue();
-        div.getTxtShukeiFromYM3().clearValue();
-        div.getTxtShukeiFromYM4().clearValue();
-        div.getTxtShukeiFromYM5().clearValue();
-        div.setHiddenShukeiFromYM5(RString.EMPTY);
-        div.getTxtShukeiFromYM6().clearValue();
-        div.setHiddenShukeiFromYM6(RString.EMPTY);
-        div.getTxtShukeiFromYM7().clearValue();
-        div.getTxtShukeiFromYM8().clearValue();
-        div.getTxtShukeiToYM1().clearValue();
-        div.getTxtShukeiToYM2().clearValue();
-        div.getTxtShukeiToYM3().clearValue();
-        div.getTxtShukeiToYM4().clearValue();
-        div.getTxtShukeiToYM5().clearValue();
-        div.setHiddenShukeiToYM5(RString.EMPTY);
-        div.getTxtShukeiToYM6().clearValue();
-        div.setHiddenShukeiToYM6(RString.EMPTY);
-        div.getTxtShukeiToYM7().clearValue();
-        div.getTxtShukeiToYM8().clearValue();
-    }
-
-    private void set集計と作成非活性() {
-        div.getTxtSakuseiYMD1().setDisabled(false);
-        div.getTxtSakuseiYMD2().setDisabled(false);
-        div.getTxtSakuseiYMD3().setDisabled(false);
-        div.getTxtSakuseiYMD4().setDisabled(false);
-        div.getTxtSakuseiYMD5().setDisabled(false);
-        div.getTxtSakuseiYMD6().setDisabled(false);
-        div.getTxtSakuseiYMD7().setDisabled(false);
-        div.getTxtSakuseiYMD8().setDisabled(false);
-        div.getRadlblShukeiType4().setDisabled(false);
-        div.getRadlblShukeiType5().setDisabled(false);
-        div.getTxtSakuseiTime1().setDisabled(false);
-        div.getTxtSakuseiTime2().setDisabled(false);
-        div.getTxtSakuseiTime3().setDisabled(false);
-        div.getTxtSakuseiTime4().setDisabled(false);
-        div.getTxtSakuseiTime5().setDisabled(false);
-        div.getTxtSakuseiTime6().setDisabled(false);
-        div.getTxtSakuseiTime7().setDisabled(false);
-        div.getTxtSakuseiTime8().setDisabled(false);
-        if (!div.getCblShutsuryokuTaishoYoshiki1().isDisabled()) {
-            div.getTxtSakuseiYMD1().setDisabled(true);
-            div.getTxtSakuseiTime1().setDisabled(true);
-        }
-        if (!div.getCblShutsuryokuTaishoIppan1to11().isDisabled()) {
-            div.getTxtSakuseiYMD2().setDisabled(true);
-            div.getTxtSakuseiTime2().setDisabled(true);
-        }
-        if (!div.getCblShutsuryokuTaishoIppanGembutsu().isDisabled()) {
-            div.getTxtSakuseiYMD3().setDisabled(true);
-            div.getTxtSakuseiTime3().setDisabled(true);
-        }
-        if (!div.getCblShutsuryokuTaishoHokenGembutsu().isDisabled()) {
-            div.getTxtSakuseiYMD4().setDisabled(true);
-            div.getTxtSakuseiTime4().setDisabled(true);
-        }
-        if (!div.getCblShutsuryokuTaishoIppanShokan().isDisabled()) {
-            div.getTxtSakuseiYMD5().setDisabled(true);
-            div.getTxtSakuseiTime5().setDisabled(true);
-            div.getRadlblShukeiType4().setDisabled(true);
-        }
-        if (!div.getCblShutsuryokuTaishoHokenShokan().isDisabled()) {
-            div.getTxtSakuseiYMD6().setDisabled(true);
-            div.getTxtSakuseiTime6().setDisabled(true);
-            div.getRadlblShukeiType5().setDisabled(true);
-        }
-        if (!div.getCblShutsuryokuTaishoHokenKogaku().isDisabled()) {
-            div.getTxtSakuseiYMD7().setDisabled(true);
-            div.getTxtSakuseiTime7().setDisabled(true);
-        }
-        if (!div.getCblShutsuryokuTaishoHokenKogakuGassan().isDisabled()) {
-            div.getTxtSakuseiYMD8().setDisabled(true);
-            div.getTxtSakuseiTime8().setDisabled(true);
-        }
-    }
-
-    private void setチェックボックスクリア() {
-        List<RString> key = new ArrayList<>();
-        div.getCblShutsuryokuTaishoAll().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(key);
     }
 
     private static class DateComparator implements Comparator<KeyValueDataSource>, Serializable {

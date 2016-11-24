@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
@@ -87,8 +89,8 @@ public class MenjoKaijoSaiTennyuHandler {
         div.getTxtZenkaiKikanKaishiYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get確定減額期間開始年月日());
         div.getTxtZenkaiKikanShuryoYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get確定減額期間終了年月日());
         div.getTxtGengakuTsuchiHakkoYMD().setValue(支払方法変更管理業務概念.get減額通知書発行年月日());
-        div.getTxtKonkaiKikanKaishiYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get確定減額期間開始年月日());
-        div.getTxtKonkaiKikanShuryoYMD().setValue(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get確定減額期間終了年月日());
+        div.getTxtKonkaiKikanKaishiYMD().setValue(FromFlexibleDateToRDate(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get確定減額期間開始年月日()));
+        div.getTxtKonkaiKikanShuryoYMD().setValue(FromFlexibleDateToRDate(支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index).get確定減額期間終了年月日()));
         div.getTxtTainoJokyo().setDisabled(false);
         div.getBtnTorikeshi().setDisabled(false);
         div.getBtnKakutei().setDisabled(false);
@@ -210,8 +212,8 @@ public class MenjoKaijoSaiTennyuHandler {
         ShiharaiHohoHenkoBuilder builder = 支払方法変更管理業務概念.createBuilderForEdit();
         ShiharaiHohoHenkoGengaku shiharaiHohoHenkoGengaku = 支払方法変更管理業務概念.getShiharaiHohoHenkoGengakuList().get(index);
         builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit()
-                .set確定減額期間終了年月日(div.getTxtKonkaiKikanShuryoYMD().getValue())
-                .set確定減額期間開始年月日(div.getTxtKonkaiKikanKaishiYMD().getValue()).build());
+                .set確定減額期間終了年月日(FromRDateToFlexibleDate(div.getTxtKonkaiKikanShuryoYMD().getValue()))
+                .set確定減額期間開始年月日(FromRDateToFlexibleDate(div.getTxtKonkaiKikanKaishiYMD().getValue())).build());
         if (!shiharaiHohoHenkoGengaku.toEntity().getState().equals(EntityDataState.Added)) {
             builder.setShiharaiHohoHenkoGengaku(shiharaiHohoHenkoGengaku.createBuilderForEdit().setState(EntityDataState.Modified).build());
         }
@@ -230,5 +232,21 @@ public class MenjoKaijoSaiTennyuHandler {
         }
         return valueNum;
 
+    }
+    
+    private RDate FromFlexibleDateToRDate(FlexibleDate fDate) {
+        if (fDate == null || fDate.toString().isEmpty()) {
+            return null;
+        } else {
+            return new RDate(fDate.toString());
+        }
+    }
+
+    private FlexibleDate FromRDateToFlexibleDate(RDate rDate) {
+        if (rDate.toString().isEmpty()) {
+            return null;
+        } else {
+            return new FlexibleDate(rDate.toString());
+        }
     }
 }

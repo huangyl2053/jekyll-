@@ -337,16 +337,16 @@ public enum JikoFutangakuHosei2Spec implements IPredicate<JikoFutangakuHosei2Div
         }
 
         public static boolean is補正後チェック１(JikoFutangakuHosei2Div div) {
-            Decimal 自己負担額_8月分 = div.getJikoFutangakuHosei2a().getCelJikofutangaku8GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_8月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuGo().getValue();
-            Decimal 自己負担額_9月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangaku9GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_9月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuGo().getValue();
-            Decimal 自己負担額_10月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangaku10GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_10月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuGo().getValue();
-            Decimal 自己負担額_11月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangaku11GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_11月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuGo().getValue();
-            Decimal 自己負担額_12月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangaku12GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_12月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuGo().getValue();
+            Decimal 自己負担額_8月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getCelJikofutangaku8GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_8月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuGo().getValue());
+            Decimal 自己負担額_9月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangaku9GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_9月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuGo().getValue());
+            Decimal 自己負担額_10月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangaku10GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_10月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuGo().getValue());
+            Decimal 自己負担額_11月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangaku11GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_11月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuGo().getValue());
+            Decimal 自己負担額_12月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangaku12GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_12月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuGo().getValue());
             if ((!うち70_74歳に係る負担額_8月分.equals(Decimal.ZERO) && !自己負担額_8月分.equals(うち70_74歳に係る負担額_8月分))
                     || (!うち70_74歳に係る負担額_9月分.equals(Decimal.ZERO) && !自己負担額_9月分.equals(うち70_74歳に係る負担額_9月分))
                     || (!うち70_74歳に係る負担額_10月分.equals(Decimal.ZERO) && !自己負担額_10月分.equals(うち70_74歳に係る負担額_10月分))
@@ -355,6 +355,13 @@ public enum JikoFutangakuHosei2Spec implements IPredicate<JikoFutangakuHosei2Div
                 return false;
             }
             return is補正後チェック１_翌年(div);
+        }
+
+        private static Decimal toZeroIfNull(Decimal 金額) {
+            if (金額 != null) {
+                return 金額;
+            }
+            return Decimal.ZERO;
         }
 
         private static boolean is補正後チェック１_翌年(JikoFutangakuHosei2Div div) {

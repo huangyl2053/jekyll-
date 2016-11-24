@@ -15,8 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosai
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
@@ -37,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -48,7 +48,6 @@ public class NinteiShinseiJoho
 
     private final DbT5101NinteiShinseiJohoEntity entity;
     private final NinteiShinseiJohoIdentifier id;
-
     private final Models<NinteichosaIraiJohoIdentifier, NinteichosaIraiJoho> ninteichosaIraiJoho;
 
     /**
@@ -815,8 +814,10 @@ public class NinteiShinseiJoho
     }
 
     /**
-     * 要介護認定申請情報配下の要素を削除対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 要介護認定申請情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link NinteiShinseiJoho}を返します。
+     * 要介護認定申請情報配下の要素を削除対象とします。<br/>
+     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 要介護認定申請情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
+     * 削除処理結果となる{@link NinteiShinseiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link NinteiShinseiJoho}
      * @throws IllegalStateException DbT5101NinteiShinseiJohoEntityのデータ状態が変更の場合
@@ -842,7 +843,8 @@ public class NinteiShinseiJoho
     }
 
     /**
-     * 要介護認定申請情報のみを変更対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定申請情報のみを変更対象とします。<br/>
+     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiShinseiJoho}
      */
@@ -891,6 +893,7 @@ public class NinteiShinseiJoho
     }
 
     private static final class _SerializationProxy implements Serializable {
+
         private static final long serialVersionUID = 1315750448731743867L;
 
         private final DbT5101NinteiShinseiJohoEntity entity;

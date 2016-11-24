@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity
 public class KoshinTaishoshaKanriEntity {
 
     private DbT4101NinteiShinseiJohoEntity dbT4101NinteiShinseiJohoEntity;
-    private DbT4121ShinseiRirekiJohoEntity dbT4121ShinseiRirekJohoEntity;
     private DbT4001JukyushaDaichoEntity dbT4001JukyushaDaichoEntity;
+    private DbT4121ShinseiRirekiJohoEntity dbT4121ShinseiRirekJohoEntity;
     private DbT4101NinteiShinseiJohoEntity seihoDbT4101NinteiShinseiJohoEntity;
 }

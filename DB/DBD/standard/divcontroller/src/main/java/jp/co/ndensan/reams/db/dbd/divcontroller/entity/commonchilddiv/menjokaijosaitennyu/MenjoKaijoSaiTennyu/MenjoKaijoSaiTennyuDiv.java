@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class MenjoKaijoSaiTennyuDiv extends Panel implements IMenjoKaijoSaiTennyuDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -534,22 +534,22 @@ public class MenjoKaijoSaiTennyuDiv extends Panel implements IMenjoKaijoSaiTenny
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtKonkaiKikanKaishiYMD() {
+    public TextBoxDate getTxtKonkaiKikanKaishiYMD() {
         return this.getKyufugakuGengakuToroku().getTxtKonkaiKikanKaishiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtKonkaiKikanKaishiYMD(TextBoxFlexibleDate txtKonkaiKikanKaishiYMD) {
+    public void  setTxtKonkaiKikanKaishiYMD(TextBoxDate txtKonkaiKikanKaishiYMD) {
         this.getKyufugakuGengakuToroku().setTxtKonkaiKikanKaishiYMD(txtKonkaiKikanKaishiYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtKonkaiKikanShuryoYMD() {
+    public TextBoxDate getTxtKonkaiKikanShuryoYMD() {
         return this.getKyufugakuGengakuToroku().getTxtKonkaiKikanShuryoYMD();
     }
 
     @JsonIgnore
-    public void  setTxtKonkaiKikanShuryoYMD(TextBoxFlexibleDate txtKonkaiKikanShuryoYMD) {
+    public void  setTxtKonkaiKikanShuryoYMD(TextBoxDate txtKonkaiKikanShuryoYMD) {
         this.getKyufugakuGengakuToroku().setTxtKonkaiKikanShuryoYMD(txtKonkaiKikanShuryoYMD);
     }
 

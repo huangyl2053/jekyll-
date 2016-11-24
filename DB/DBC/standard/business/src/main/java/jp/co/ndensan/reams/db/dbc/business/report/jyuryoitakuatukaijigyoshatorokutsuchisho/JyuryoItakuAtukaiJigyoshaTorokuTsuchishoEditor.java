@@ -32,7 +32,10 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor implements IJyuryoIt
     private final HokenJuryoIninHaraiToriatsukaiEntity entity;
     private final NinshoshaSource sourceBuilder;
     private static final int THREE = 3;
+    private static final int FIVE = 5;
+    private static final int SIX = 6;
     private static final int SEVEN = 7;
+    private static final int EIGHT = 8;
     private final RString 文書番号;
     private final RString 通知書定型文１;
     private final RString 通知書定型文2;
@@ -67,11 +70,9 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor implements IJyuryoIt
     public JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource edit(JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource source) {
         if (entity != null) {
             source.bunshoNo = 文書番号;
-
             YubinNo 送付先郵便番号 = entity.get送付先郵便番号();
             if (送付先郵便番号 != null) {
-                source.sofusakiYubinNo = new RString(送付先郵便番号.toString().
-                        substring(0, THREE).concat("-").concat(送付先郵便番号.toString().substring(THREE, SEVEN)));
+                set送付先郵便番号(送付先郵便番号, source);
             }
 
             AtenaJusho 送付先住所 = entity.get送付先住所();
@@ -100,8 +101,7 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor implements IJyuryoIt
 
             YubinNo 契約事業者郵便番号 = entity.get契約事業者郵便番号();
             if (契約事業者郵便番号 != null) {
-                source.jigyoshoYubinNo = new RString(契約事業者郵便番号.toString().
-                        substring(0, THREE).concat("-").concat(契約事業者郵便番号.toString().substring(THREE, SEVEN)));
+                set契約事業者郵便番号(契約事業者郵便番号, source);
             }
 
             AtenaJusho 契約事業者住所 = entity.get契約事業者住所();
@@ -160,5 +160,29 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoEditor implements IJyuryoIt
             }
         }
         return source;
+    }
+
+    private void set送付先郵便番号(YubinNo 送付先郵便番号, JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource source) {
+        if (送付先郵便番号.value().length() == EIGHT) {
+            source.sofusakiYubinNo = new RString(送付先郵便番号.toString().
+                    substring(0, THREE).concat("-").concat(送付先郵便番号.toString().substring(THREE, SEVEN)));
+        } else if (送付先郵便番号.value().length() == SIX) {
+            source.sofusakiYubinNo = new RString(送付先郵便番号.toString().
+                    substring(0, THREE).concat("-").concat(送付先郵便番号.toString().substring(THREE, FIVE)));
+        } else if (送付先郵便番号.value().length() == THREE) {
+            source.sofusakiYubinNo = new RString(送付先郵便番号.toString());
+        }
+    }
+
+    private void set契約事業者郵便番号(YubinNo 契約事業者郵便番号, JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource source) {
+        if (契約事業者郵便番号.value().length() == EIGHT) {
+            source.jigyoshoYubinNo = new RString(契約事業者郵便番号.toString().
+                    substring(0, THREE).concat("-").concat(契約事業者郵便番号.toString().substring(THREE, SEVEN)));
+        } else if (契約事業者郵便番号.value().length() == SIX) {
+            source.jigyoshoYubinNo = new RString(契約事業者郵便番号.toString().
+                    substring(0, THREE).concat("-").concat(契約事業者郵便番号.toString().substring(THREE, FIVE)));
+        } else if (契約事業者郵便番号.value().length() == THREE) {
+            source.jigyoshoYubinNo = new RString(契約事業者郵便番号.toString());
+        }
     }
 }

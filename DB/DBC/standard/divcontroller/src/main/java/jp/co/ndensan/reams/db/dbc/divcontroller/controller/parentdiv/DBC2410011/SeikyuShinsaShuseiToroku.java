@@ -18,11 +18,13 @@ import jp.co.ndensan.reams.db.dbc.service.core.basic.JutakuKaishuRiyushoTesuryoM
 import jp.co.ndensan.reams.db.dbc.service.core.basic.JutakuKaishuRiyushoTesuryoShukeiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.seikyushinsashuseitoroku.SeikyuShinsaShuseiTorokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -77,6 +79,9 @@ public class SeikyuShinsaShuseiToroku {
                 createSelectByKeyParam(事業者番号, 請求情報作成年月, div.getChkSerchKetteiZumi().isAllSelected());
         SeikyuShinsaShuseiTorokuFinder seikyushinsashuseitorokufinder = SeikyuShinsaShuseiTorokuFinder.createInstance();
         List<SeikyuShinsaShuseiTorokuBusiness> 一覧情報 = seikyushinsashuseitorokufinder.getKoikinaiTenkyoList(parameter).records();
+        if (一覧情報.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
         SeikyuShinsaShuseiTorokuCollect collectList = new SeikyuShinsaShuseiTorokuCollect();
         collectList.set事業者情報List(一覧情報);
         ViewStateHolder.put(ViewStateKeys.住宅改修理由書事業者情報, collectList);

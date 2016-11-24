@@ -80,7 +80,7 @@
         DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
         DbT5912ShujiiJoho."shujiiName",
         <if test="useShujiiIkenshoIraiJoho">
-            DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo"
+            DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
         </if>
         DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo"
     <!-- FROM -->

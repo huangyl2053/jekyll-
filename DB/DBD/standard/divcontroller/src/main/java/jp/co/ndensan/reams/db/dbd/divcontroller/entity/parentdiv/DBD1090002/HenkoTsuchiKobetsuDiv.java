@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
  * @author 自動生成
  */
 public class HenkoTsuchiKobetsuDiv extends PanelPublish {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +24,7 @@ public class HenkoTsuchiKobetsuDiv extends PanelPublish {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtHenkoTsuchiHakkoYMD")
-    private TextBoxFlexibleDate txtHenkoTsuchiHakkoYMD;
+    private TextBoxDate txtHenkoTsuchiHakkoYMD;
     @JsonProperty("ccdBunshoNo")
     private BunshoBangoInputDiv ccdBunshoNo;
 
@@ -39,7 +39,7 @@ public class HenkoTsuchiKobetsuDiv extends PanelPublish {
      * @return txtHenkoTsuchiHakkoYMD
      */
     @JsonProperty("txtHenkoTsuchiHakkoYMD")
-    public TextBoxFlexibleDate getTxtHenkoTsuchiHakkoYMD() {
+    public TextBoxDate getTxtHenkoTsuchiHakkoYMD() {
         return txtHenkoTsuchiHakkoYMD;
     }
 
@@ -48,7 +48,7 @@ public class HenkoTsuchiKobetsuDiv extends PanelPublish {
      * @param txtHenkoTsuchiHakkoYMD txtHenkoTsuchiHakkoYMD
      */
     @JsonProperty("txtHenkoTsuchiHakkoYMD")
-    public void setTxtHenkoTsuchiHakkoYMD(TextBoxFlexibleDate txtHenkoTsuchiHakkoYMD) {
+    public void setTxtHenkoTsuchiHakkoYMD(TextBoxDate txtHenkoTsuchiHakkoYMD) {
         this.txtHenkoTsuchiHakkoYMD = txtHenkoTsuchiHakkoYMD;
     }
 

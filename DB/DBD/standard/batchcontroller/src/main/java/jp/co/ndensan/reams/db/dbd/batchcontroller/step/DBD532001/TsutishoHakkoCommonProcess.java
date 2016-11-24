@@ -175,7 +175,7 @@ public final class TsutishoHakkoCommonProcess {
         builder.set代納人利用区分(DainoRiyoKubun.利用する);
         builder.set法人代表者利用区分(HojinDaihyoshaRiyoKubun.利用しない);
         IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
-
+        
         EditedAtesaki 編集後宛先 = EditedAtesakiBuilder.create編集後宛先(宛先, get地方公共団体(), 帳票共通情報);
         SofubutsuAtesakiSource sofubutsuAtesakiSource;
         try {
@@ -186,7 +186,36 @@ public final class TsutishoHakkoCommonProcess {
 
         return sofubutsuAtesakiSource;
     }
+    
+    /**
+     * 送付物宛先情報の取得。
+     *
+     * @param 帳票共通情報 ChohyoSeigyoKyotsu
+     * @param 識別コード ShikibetsuCode
+     * @return 送付物宛先情報 送付物宛先情報
+     */
+    public static SofubutsuAtesakiSource get送付物宛先情報(ChohyoSeigyoKyotsu 帳票共通情報, ShikibetsuCode 識別コード) {
+        IAtesakiGyomuHanteiKey key = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給);
+        AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(key);
+        builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
+        builder.set識別コード(識別コード);
+        builder.set基準日(FlexibleDate.getNowDate());
+        builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
+        builder.set世帯主利用区分(SetainushiRiyoKubun.利用しない);
+        builder.set代納人利用区分(DainoRiyoKubun.利用する);
+        builder.set法人代表者利用区分(HojinDaihyoshaRiyoKubun.利用しない);
+        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
+        
+        EditedAtesaki 編集後宛先 = EditedAtesakiBuilder.create編集後宛先(宛先, get地方公共団体(), 帳票共通情報);
+        SofubutsuAtesakiSource sofubutsuAtesakiSource;
+        try {
+            sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
+        } catch (Exception e) {
+            sofubutsuAtesakiSource = new SofubutsuAtesakiSource();
+        }
 
+        return sofubutsuAtesakiSource;
+    }
     /**
      * 地方公共団体の取得。
      *

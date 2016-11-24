@@ -37,7 +37,7 @@
      "layoutName": "DBE5140002",
      "layoutTitle": "介護認定審査会委員割付",
      "eventName": "開催予定登録に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5100001",

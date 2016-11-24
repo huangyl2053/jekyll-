@@ -50,7 +50,7 @@
              OR A."shikakuSoshitsuYMD" IS NULL 
              OR A."shikakuSoshitsuYMD" = ''
             )
-        ORDER BY A."hihokenshaNo"
+        AND A."hihokenshaNo" = #{被保険者番号}
     </select>
     
     <select resultOrdered="true" id="get被保険者台帳3"

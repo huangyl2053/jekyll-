@@ -80,7 +80,9 @@ public class JushotiTokureiIdouFinder {
         FlexibleDate 解除年月日 = hihokenshaShutokuJyoho.get解除年月日();
         if (DBAMN25001_届出により適用.equals(UrControlDataFactory.createInstance().getMenuID())) {
             適用解除日の存在性チェック(異動日, 適用日, 適用);
-            適用期間が重複チェック(解除年月日, 適用日);
+            if (!(解除年月日 == null || 解除年月日.isEmpty())) {
+                適用期間が重複チェック(解除年月日, 適用日);
+            }
         }
         if (DBAMN25002_届出により解除.equals(UrControlDataFactory.createInstance().getMenuID())) {
             適用解除日の存在性チェック(異動日, 解除日, 解除);

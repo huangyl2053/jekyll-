@@ -59,12 +59,10 @@ public class HihokenshashoHakkoKanriIchiranhyoReportSource implements IReportSou
     public RString listUpper_4;
     @ReportItem(name = "listUpper_5", length = 2, order = 19)
     public RString listUpper_5;
-    @ReportItem(name = "listUpper_6", length = 20, order = 20)
+    @ReportItem(name = "listUpper_6", length = 40, order = 21)
     public RString listUpper_6;
-    @ReportItem(name = "listUpper_7", length = 40, order = 21)
+    @ReportItem(name = "listUpper_7", length = 10, order = 22)
     public RString listUpper_7;
-    @ReportItem(name = "listUpper_8", length = 10, order = 22)
-    public RString listUpper_8;
     @ReportItem(name = "listLower_1", length = 6, order = 23)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 12, order = 24)
@@ -93,6 +91,9 @@ public class HihokenshashoHakkoKanriIchiranhyoReportSource implements IReportSou
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    @ReportItem(name = "hiddenPageBreaker", length = 1, order = 999)
+    public RString hiddenPageBreaker;
 
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;

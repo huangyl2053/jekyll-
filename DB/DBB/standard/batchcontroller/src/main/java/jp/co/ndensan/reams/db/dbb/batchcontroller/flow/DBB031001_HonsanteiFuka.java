@@ -95,7 +95,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
             if (帳票分類ID.equals(entity.get帳票分類ID())) {
                 processParameter.set出力帳票(entity);
                 executeStep(計算後情報作成);
-                出力順登録();
+                executeStep出力順登録();
                 executeStep(本算定結果一覧表出力);
                 break;
             }
@@ -106,7 +106,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
         }
     }
 
-    private void 出力順登録() {
+    private void executeStep出力順登録() {
         boolean contains徴収方法 = 出力順contains徴収方法();
         processParameter.setContains徴収方法(contains徴収方法);
         if (contains徴収方法) {

@@ -917,7 +917,7 @@ public class ShujiiIkenshoSakuseiIrai {
     private void toPrint(ReportManager reportManager) {
         RDate date = RDate.getNowDate();
         ShujiiIkenshoSakuseiIraiReportOutputService outputService = ShujiiIkenshoSakuseiIraiReportOutputService.createInstance();
-        IkenshokinyuyoshiPrintService printService = new IkenshokinyuyoshiPrintService();
+        IkenshokinyuyoshiPrintService printService = new IkenshokinyuyoshiPrintService(reportManager);
         if (!主治医意見書作成依頼情報ItemList.isEmpty()) {
             outputService.print主治医意見書作成依頼情報(主治医意見書作成依頼情報ItemList, reportManager);
         }
@@ -935,37 +935,23 @@ public class ShujiiIkenshoSakuseiIrai {
         }
         if (!主治医意見書記入用紙List.isEmpty()) {
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-//                outputService.print主治医意見書記入用紙(主治医意見書記入用紙List, reportManager,
-//                        DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面, date, SubGyomuCode.DBE認定支援));
                 printService.print(主治医意見書記入用紙List, ReportIdDBZ.DBE231001_Katamen_Mono.getReportId());
-
             } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-//                outputService.print主治医意見書記入用紙(主治医意見書記入用紙List, reportManager,
-//                        DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面, date, SubGyomuCode.DBE認定支援));
                 printService.print(主治医意見書記入用紙List, ReportIdDBZ.DBE231001_Ryomen_Mono.getReportId());
             }
         }
         if (!主治医意見書記入用紙OCRList.isEmpty()) {
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-//                outputService.print主治医意見書記入用紙OCR(主治医意見書記入用紙OCRList, reportManager,
-//                        DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面, date, SubGyomuCode.DBE認定支援));
-                printService.print(主治医意見書記入用紙List, ReportIdDBZ.DBE231011_Katamen_Color.getReportId());
+                printService.print(主治医意見書記入用紙OCRList, ReportIdDBZ.DBE231011_Katamen_Color.getReportId());
             } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-//                outputService.print主治医意見書記入用紙OCR(主治医意見書記入用紙OCRList, reportManager,
-//                        DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面, date, SubGyomuCode.DBE認定支援));
-                printService.print(主治医意見書記入用紙List, ReportIdDBZ.DBE231011_Ryomen_Color.getReportId());
+                printService.print(主治医意見書記入用紙OCRList, ReportIdDBZ.DBE231011_Ryomen_Color.getReportId());
             }
         }
-
         if (!主治医意見書記入用紙DList.isEmpty()) {
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-                outputService.print主治医意見書記入用紙D(主治医意見書記入用紙DList, reportManager,
-                        DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date, SubGyomuCode.DBE認定支援));
-                outputService.print主治医意見書記入用紙D(主治医意見書記入用紙DList, reportManager,
-                        DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date, SubGyomuCode.DBE認定支援));
+                printService.print(主治医意見書記入用紙DList, ReportIdDBZ.DBE231012.getReportId());
             } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-                outputService.print主治医意見書記入用紙D(主治医意見書記入用紙DList, reportManager,
-                        DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面, date, SubGyomuCode.DBE認定支援));
+                printService.print(主治医意見書記入用紙DList, ReportIdDBZ.DBE231014.getReportId());
             }
         }
     }
