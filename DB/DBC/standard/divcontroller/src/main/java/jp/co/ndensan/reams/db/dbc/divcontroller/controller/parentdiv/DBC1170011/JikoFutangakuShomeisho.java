@@ -154,10 +154,9 @@ public class JikoFutangakuShomeisho {
             }
         }
         FlexibleDate 前回発行日 = div.getJikoFutanShomeishoSakuseiPrint().getTxtZenkaiHakkoDate().getValue();
-        if (!前回発行日.isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(DbcWarningMessages.発行済み負担額証明書.getMessage()).respond();
-            }
+        if (!前回発行日.isEmpty()
+                && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbcWarningMessages.発行済み負担額証明書.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }

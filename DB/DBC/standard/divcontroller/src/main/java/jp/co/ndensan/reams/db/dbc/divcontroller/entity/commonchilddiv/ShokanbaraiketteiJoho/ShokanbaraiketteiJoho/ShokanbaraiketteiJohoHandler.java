@@ -170,7 +170,7 @@ public class ShokanbaraiketteiJohoHandler {
         Decimal 支払金額合計 = Decimal.ZERO;
         Decimal 残上限金額 = 上限金額;
         Decimal 保険対象費用額;
-        int count = 1;
+//        int count = 1;
         for (SyokanbaraiketteJoho syokanbaraiketteJoho : 償還払決定一覧情報) {
             dgSyokanbaraikete_Row row = new dgSyokanbaraikete_Row();
             row.setNo(syokanbaraiketteJoho.getServiceCode().isEmpty() ? RString.EMPTY : new RString(index.toString()));
