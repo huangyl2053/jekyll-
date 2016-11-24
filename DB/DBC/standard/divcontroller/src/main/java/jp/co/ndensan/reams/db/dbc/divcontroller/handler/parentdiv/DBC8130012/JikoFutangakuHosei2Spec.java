@@ -365,20 +365,20 @@ public enum JikoFutangakuHosei2Spec implements IPredicate<JikoFutangakuHosei2Div
         }
 
         private static boolean is補正後チェック１_翌年(JikoFutangakuHosei2Div div) {
-            Decimal 自己負担額_1月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku1GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_1月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuGo().getValue();
-            Decimal 自己負担額_2月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku2GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_2月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuGo().getValue();
-            Decimal 自己負担額_3月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku3GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_3月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuGo().getValue();
-            Decimal 自己負担額_4月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku4GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_4月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuGo().getValue();
-            Decimal 自己負担額_5月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku5GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_5月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuGo().getValue();
-            Decimal 自己負担額_6月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku6GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_6月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuGo().getValue();
-            Decimal 自己負担額_7月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku7GatsuGo().getValue();
-            Decimal うち70_74歳に係る負担額_7月分 = div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuGo().getValue();
+            Decimal 自己負担額_1月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku1GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_1月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuGo().getValue());
+            Decimal 自己負担額_2月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku2GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_2月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuGo().getValue());
+            Decimal 自己負担額_3月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku3GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_3月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuGo().getValue());
+            Decimal 自己負担額_4月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku4GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_4月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuGo().getValue());
+            Decimal 自己負担額_5月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku5GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_5月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuGo().getValue());
+            Decimal 自己負担額_6月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku6GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_6月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuGo().getValue());
+            Decimal 自己負担額_7月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku7GatsuGo().getValue());
+            Decimal うち70_74歳に係る負担額_7月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuGo().getValue());
             return (うち70_74歳に係る負担額_1月分.equals(Decimal.ZERO) || 自己負担額_1月分.equals(うち70_74歳に係る負担額_1月分))
                     && (うち70_74歳に係る負担額_2月分.equals(Decimal.ZERO) || 自己負担額_2月分.equals(うち70_74歳に係る負担額_2月分))
                     && (うち70_74歳に係る負担額_3月分.equals(Decimal.ZERO) || 自己負担額_3月分.equals(うち70_74歳に係る負担額_3月分))
@@ -445,7 +445,7 @@ public enum JikoFutangakuHosei2Spec implements IPredicate<JikoFutangakuHosei2Div
             Decimal 自己負担額_12月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangaku12GatsuGo().getValue();
             Decimal 高額総合事業サービス費_12月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehi12GatsuGo().getValue();
             if ((Decimal.ZERO.equals(自己負担額_8月分) && !Decimal.ZERO.equals(高額総合事業サービス費_8月分))
-                    || (Decimal.ZERO.equals(自己負担額_9月分)  && !Decimal.ZERO.equals(高額総合事業サービス費_9月分))
+                    || (Decimal.ZERO.equals(自己負担額_9月分) && !Decimal.ZERO.equals(高額総合事業サービス費_9月分))
                     || (Decimal.ZERO.equals(自己負担額_10月分) && !Decimal.ZERO.equals(高額総合事業サービス費_10月分))
                     || (Decimal.ZERO.equals(自己負担額_11月分) && !Decimal.ZERO.equals(高額総合事業サービス費_11月分))
                     || (Decimal.ZERO.equals(自己負担額_12月分) && !Decimal.ZERO.equals(高額総合事業サービス費_12月分))) {
@@ -512,30 +512,42 @@ public enum JikoFutangakuHosei2Spec implements IPredicate<JikoFutangakuHosei2Div
         }
 
         public static boolean is高額総合事業サービス費チェック(JikoFutangakuHosei2Div div) {
-            Decimal 自己負担額_8月分 = div.getJikoFutangakuHosei2a().getCelJikofutangaku8GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_8月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehi8GatsuGo().getValue();
-            Decimal 自己負担額_9月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangaku9GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_9月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehi9GatsuGo().getValue();
-            Decimal 自己負担額_10月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangaku10GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_10月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehi10GatsuGo().getValue();
-            Decimal 自己負担額_11月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangaku11GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_11月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehi11GatsuGo().getValue();
-            Decimal 自己負担額_12月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangaku12GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_12月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehi12GatsuGo().getValue();
-            Decimal 自己負担額_1月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku1GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_1月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiYoku1GatsuGo().getValue();
-            Decimal 自己負担額_2月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku2GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_2月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiYoku2GatsuGo().getValue();
-            Decimal 自己負担額_3月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku3GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_3月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiYoku3GatsuGo().getValue();
-            Decimal 自己負担額_4月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku4GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_4月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiYoku4GatsuGo().getValue();
-            Decimal 自己負担額_5月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku5GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_5月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiYoku5GatsuGo().getValue();
-            Decimal 自己負担額_6月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku6GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_6月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiYoku6GatsuGo().getValue();
-            Decimal 自己負担額_7月分 = div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku7GatsuGo().getValue();
-            Decimal 高額総合事業サービス費_7月分 = div.getJikoFutangakuHosei2a().getTxtKougakuSogoJigyoServicehiYoku7GatsuGo().getValue();
+            Decimal 自己負担額_8月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getCelJikofutangaku8GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_8月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehi8GatsuGo().getValue());
+            Decimal 自己負担額_9月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangaku9GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_9月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehi9GatsuGo().getValue());
+            Decimal 自己負担額_10月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangaku10GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_10月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehi10GatsuGo().getValue());
+            Decimal 自己負担額_11月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangaku11GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_11月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehi11GatsuGo().getValue());
+            Decimal 自己負担額_12月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangaku12GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_12月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehi12GatsuGo().getValue());
+            Decimal 自己負担額_1月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku1GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_1月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehiYoku1GatsuGo().getValue());
+            Decimal 自己負担額_2月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku2GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_2月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehiYoku2GatsuGo().getValue());
+            Decimal 自己負担額_3月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku3GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_3月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehiYoku3GatsuGo().getValue());
+            Decimal 自己負担額_4月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku4GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_4月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehiYoku4GatsuGo().getValue());
+            Decimal 自己負担額_5月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku5GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_5月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehiYoku5GatsuGo().getValue());
+            Decimal 自己負担額_6月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku6GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_6月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehiYoku6GatsuGo().getValue());
+            Decimal 自己負担額_7月分 = toZeroIfNull(div.getJikoFutangakuHosei2a().getTxtJikofutangakuYoku7GatsuGo().getValue());
+            Decimal 高額総合事業サービス費_7月分 = toZeroIfNull(div.getJikoFutangakuHosei2a()
+                    .getTxtKougakuSogoJigyoServicehiYoku7GatsuGo().getValue());
             return 高額総合事業サービス費_8月分.compareTo(自己負担額_8月分) != 整数_ONE
                     && 高額総合事業サービス費_9月分.compareTo(自己負担額_9月分) != 整数_ONE
                     && 高額総合事業サービス費_10月分.compareTo(自己負担額_10月分) != 整数_ONE
