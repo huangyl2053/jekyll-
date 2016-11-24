@@ -82,7 +82,7 @@ public class FutanWariaiLoginProcess extends BatchKeyBreakBase<FutanWariaiRelate
 
     @Override
     protected void createWriter() {
-        this.manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        this.manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = this.manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSVFILENAME);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
