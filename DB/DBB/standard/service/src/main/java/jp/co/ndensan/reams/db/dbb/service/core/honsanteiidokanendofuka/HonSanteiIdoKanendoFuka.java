@@ -93,17 +93,13 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntit
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
-import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoChushutsuKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt001FindIdoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt001FindIdoFunctionDac;
@@ -309,14 +305,11 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
      */
     public void selectKanendoIdoData(KanendoFukaParameter param) {
         IHonSanteiIdoKanendoFukaMapper mapper = mapperProvider.create(IHonSanteiIdoKanendoFukaMapper.class);
-        ShikibetsuTaishoIdoSearchKey searchKey = new ShikibetsuTaishoIdoSearchKeyBuilder(
-                ShikibetsuTaishoIdoChushutsuKubun.異動年月日で抽出, param.get抽出開始日時(), param.get抽出終了日時()).build();
-        List<UaFt001FindIdoEntity> 宛名識別異動分取得PSM = 宛名識別異動分Dac.select(searchKey);
+
+        List<ShotokuIdoTmpEntity> 宛名識別対象異動分 = mapper.select住基異動(param);
         mapper.createJukiChushutsuTmp();
-        for (UaFt001FindIdoEntity uaFt001FindIdoEntity : 宛名識別異動分取得PSM) {
-            ShotokuIdoTmpEntity entity = new ShotokuIdoTmpEntity();
-            entity.setShikibetsuCode(uaFt001FindIdoEntity.getShikibetsuCode());
-            mapper.insertJukiChushutsuTmp(entity);
+        for (ShotokuIdoTmpEntity shotokuIdoTmpEntity : 宛名識別対象異動分) {
+            mapper.insertJukiChushutsuTmp(shotokuIdoTmpEntity);
         }
         mapper.createJukiIdoTmp();
         List<ShotokuIdoTmpEntity> 被保険者本人異動s = mapper.select住基異動_被保険者本人異動(param);
