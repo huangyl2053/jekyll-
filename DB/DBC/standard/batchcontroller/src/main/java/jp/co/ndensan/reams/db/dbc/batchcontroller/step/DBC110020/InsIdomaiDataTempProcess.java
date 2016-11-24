@@ -459,6 +459,9 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             if (!コート_0.equals(受給者台帳.getYukoMukoKubun())) {
                 continue;
             }
+            if (isDateEmpty(受給者台帳.getJukyuShinseiYMD())) {
+                continue;
+            }
             if (!isBeforeYearMonth(受給者台帳.getJukyuShinseiYMD(), 処理年月)) {
                 continue;
             }
