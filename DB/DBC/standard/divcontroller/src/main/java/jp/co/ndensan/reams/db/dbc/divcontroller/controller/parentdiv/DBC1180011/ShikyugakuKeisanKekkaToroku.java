@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.kogakugassan.KogakuGassanShikyuga
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -67,6 +68,11 @@ public class ShikyugakuKeisanKekkaToroku {
     private static final RString 削除 = new RString("削除");
     private static final RString 計算結果を保存する = new RString("btnSave");
     private static final RString 完了メッセージ = new RString("高額合算支給額計算結果の更新が正常に行われました");
+    private static final RString 按分後支給額が０円です = new RString("按分後支給額が０円です。");
+    private static final RString 以上負担額 = new RString("txtOver70Futangaku");
+    private static final RString 係る支給額 = new RString("txtOver70Shikyugaku");
+    private static final RString 未満負担額 = new RString("txtUnder70Futangaku");
+    private static final RString 支給額 = new RString("txtUnder70Shikyugaku");
 
     /**
      * 画面の初期化メソッドです。
@@ -435,7 +441,46 @@ public class ShikyugakuKeisanKekkaToroku {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細状態, RString.class);
         ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
         handler.再計算処理(状態);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).focusId(以上負担額).respond();
+    }
+
+    /**
+     * [③ ①に係る支給額]変更時のイベントです。
+     *
+     * @param div ShikyugakuKeisanKekkaTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onBlur_txtOver70Shikyugaku(ShikyugakuKeisanKekkaTorokuDiv div) {
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細状態, RString.class);
+        ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
+        handler.再計算処理(状態);
+        return ResponseData.of(div).focusId(係る支給額).respond();
+    }
+
+    /**
+     * [④ 70歳未満負担額]変更時のイベントです。
+     *
+     * @param div ShikyugakuKeisanKekkaTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onBlur_txtUnder70Futangaku(ShikyugakuKeisanKekkaTorokuDiv div) {
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細状態, RString.class);
+        ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
+        handler.再計算処理(状態);
+        return ResponseData.of(div).focusId(未満負担額).respond();
+    }
+
+    /**
+     * [⑦ ⑤に係る支給額]変更時のイベントです。
+     *
+     * @param div ShikyugakuKeisanKekkaTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onBlur_txtUnder70Shikyugaku(ShikyugakuKeisanKekkaTorokuDiv div) {
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細状態, RString.class);
+        ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
+        handler.再計算処理(状態);
+        return ResponseData.of(div).focusId(支給額).respond();
     }
 
     /**
@@ -579,6 +624,12 @@ public class ShikyugakuKeisanKekkaToroku {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果状態, RString.class);
+        if (!ResponseHolder.isReRequest() && Decimal.ZERO.equals(div.getTxtHonninShikyugaku().getValue())
+                && !削除.equals(状態)) {
+            return ResponseData.of(div).addMessage(DbzWarningMessages.確認.getMessage().
+                    replace(按分後支給額が０円です.toString())).respond();
+        }
+
         if (追加.equals(状態) || 修正.equals(状態)) {
             ValidationMessageControlPairs 保存Pairs = validationhandler.validate計算結果を保存する();
             if (保存Pairs.iterator().hasNext()) {
@@ -596,7 +647,9 @@ public class ShikyugakuKeisanKekkaToroku {
                 .getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).respond();
         }
-        if (!ResponseHolder.isReRequest() || ResponseHolder.isWarningIgnoredRequest()) {
+        if (!ResponseHolder.isReRequest() || ResponseHolder.isWarningIgnoredRequest()
+                || (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && new RString(DbzWarningMessages.確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
@@ -604,23 +657,28 @@ public class ShikyugakuKeisanKekkaToroku {
             ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
             KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果
                     = ViewStateHolder.get(ViewStateKeys.支給額計算結果, KogakuGassanShikyuGakuKeisanKekkaRelate.class);
-            KogakuGassanShikyuShinseiTorokuManager maneger = KogakuGassanShikyuShinseiTorokuManager.createInstance();
-            if (修正.equals(状態)) {
-                支給額計算結果 = handler.支給額計算結果編集(支給額計算結果, 状態);
-                maneger.saveModify(支給額計算結果);
-            } else if (削除.equals(状態)) {
-                maneger.saveDelete(支給額計算結果);
-            } else {
-                支給額計算結果 = handler.支給額計算結果編集(支給額計算結果, 状態);
-                maneger.saveAdd(支給額計算結果);
-            }
-            前排他解除();
-            アクセスログを出力_更新(対象者);
+            do計算結果保存(状態, 支給額計算結果, handler, 対象者);
             div.getCcdKanryoMessage().setMessage(完了メッセージ,
                     対象者.get被保険者番号().getColumnValue(), div.getCcdKaigoAtenaInfo().get氏名漢字(), true);
             return ResponseData.of(div).setState(DBC1180011StateName.処理完了);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void do計算結果保存(RString 状態, KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果,
+            ShikyugakuKeisanKekkaTorokuHandler handler, TaishoshaKey 対象者) {
+        KogakuGassanShikyuShinseiTorokuManager maneger = KogakuGassanShikyuShinseiTorokuManager.createInstance();
+        if (修正.equals(状態)) {
+            支給額計算結果 = handler.支給額計算結果編集(支給額計算結果, 状態);
+            maneger.saveModify(支給額計算結果);
+        } else if (削除.equals(状態)) {
+            maneger.saveDelete(支給額計算結果);
+        } else {
+            支給額計算結果 = handler.支給額計算結果編集(支給額計算結果, 状態);
+            maneger.saveAdd(支給額計算結果);
+        }
+        前排他解除();
+        アクセスログを出力_更新(対象者);
     }
 
     /**
