@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB6110001;
 
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -30,7 +30,7 @@ public enum ErrorMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private ErrorMessages(int no, String message) {
-        this.message = new ErrorMessage(toCode("DBBE", no), message);
+        this.message = new ErrorMessage(RString.EMPTY.toString(), message);
     }
 
     @Override

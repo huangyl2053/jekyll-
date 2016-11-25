@@ -66,36 +66,17 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
      * 画面初期化のメソッドです。
      */
     public void initialize() {
-        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        ShoriDateKanri 前回対象日 = KougakuSabisuhiShikyuuKetteiTsuchishoSakusei.createInstance().
-                getZenkaiTaisyobiData(
-                        ShoriName.事業高額サービス等支給不支給決定通知書一括作成_受付日.get名称(),
-                        導入団体クラス.get地方公共団体コード());
-        if (前回対象日 != null) {
-            div.getChushutsuJoken().getTxtZenkaiTaishobi().setFromValue(new RDate(前回対象日.get対象開始年月日().toString()));
-            div.getChushutsuJoken().getTxtZenkaiTaishobi().setToValue(new RDate(前回対象日.get対象終了年月日().toString()));
-
-            RDate 前回対象日Toの次日 = new RDate(前回対象日.get対象開始年月日().toString()).plusDay(INT_1);
-            div.getChushutsuJoken().getTxtUketukebi().setFromValue(前回対象日Toの次日);
-            div.getChushutsuJoken().getTxtKetteibi().setFromValue(前回対象日Toの次日);
-        }
-
-        RDate システム日付 = RDate.getNowDate();
-        div.getChushutsuJoken().getTxtUketukebi().setToValue(システム日付);
-        div.getChushutsuJoken().getTxtKetteibi().setToValue(システム日付);
-        div.getChushutsuJoken().getTxtKetteishaUketukeNengetsu().setValue(システム日付);
-        div.getShikyuKetteiTsuchisho().getTxtHakkobi().setValue(システム日付);
+        div.getShikyuKetteiTsuchisho().getTxtHakkobi().setValue(RDate.getNowDate());
         onClick_radKetteibiIkkatsuKoshinKubun();
+        onClick_radHizukeSentaku(KEY0);
         if (高額サービス費支給決定通知書作成メニューID.equals(ResponseHolder.getMenuID())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 高額サービス帳票ID);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(実行するボタン2, false);
-            div.getChushutsuJoken().getTxtKetteishaUketukeNengetsu().setVisible(true);
             div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().initialize(new ReportId(高額サービス費支給決定通知書作成帳票ID));
         } else if (高額総合事業サービス費支給決定通知書メニューID.equals(ResponseHolder.getMenuID())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 高額総合事業サービス帳票ID);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(実行するボタン1, false);
-            div.getChushutsuJoken().getRadHizukeSentaku().getDataSource().remove(INT_2);
-            div.getChushutsuJoken().getTxtKetteishaUketukeNengetsu().setVisible(false);
+
             div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().initialize(new ReportId(高額総合事業サービス費支給決定通知書帳票ID));
         }
         div.getCcdShiharaiHoho().initialize(ShiharaiHohoKinoKubun.高額介護.getコード());
@@ -104,9 +85,10 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
 
     /**
      * 「受付日」「決定日」「決定者受付年月」を選択のメソッドです。
+     *
+     * @param 選択Key RString
      */
-    public void onClick_radHizukeSentaku() {
-        RString 選択Key = div.getChushutsuJoken().getRadHizukeSentaku().getSelectedKey();
+    public void onClick_radHizukeSentaku(RString 選択Key) {
         RString 処理名;
         if (KEY0.equals(選択Key)) {
             処理名 = ShoriName.事業高額サービス等支給不支給決定通知書一括作成_受付日.get名称();
@@ -121,6 +103,8 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
         ShoriDateKanri 前回対象日 = KougakuSabisuhiShikyuuKetteiTsuchishoSakusei.createInstance().
                 getZenkaiTaisyobiData(処理名, 導入団体クラス.get地方公共団体コード());
 
+        div.getChushutsuJoken().getTxtZenkaiTaishobi().clearFromValue();
+        div.getChushutsuJoken().getTxtZenkaiTaishobi().clearToValue();
         if (前回対象日 != null) {
             div.getChushutsuJoken().getTxtZenkaiTaishobi().setFromValue(new RDate(前回対象日.get対象開始年月日().toString()));
             div.getChushutsuJoken().getTxtZenkaiTaishobi().setToValue(new RDate(前回対象日.get対象終了年月日().toString()));
@@ -128,23 +112,38 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
             RDate 前回対象日Toの次日 = new RDate(前回対象日.get対象開始年月日().toString()).plusDay(INT_1);
 
             if (KEY0.equals(選択Key)) {
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(false);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(true);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setFromValue(前回対象日Toの次日);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setToValue(システム日付);
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().
+                        getTxtUketukebi().setFromValue(前回対象日Toの次日);
             } else if (KEY1.equals(選択Key)) {
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(false);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setFromValue(前回対象日Toの次日);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setToValue(システム日付);
-            } else if (KEY2.equals(選択Key)) {
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(true);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(false);
-                div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setValue(システム日付);
+                div.getChushutsuJoken().getChushutsubiNyuryokuEria().
+                        getTxtKetteibi().setFromValue(前回対象日Toの次日);
             }
+        }
+        if (KEY0.equals(選択Key)) {
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(false);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(true);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setToValue(システム日付);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().clearFromValue();
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().clearToValue();
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().clearValue();
+        } else if (KEY1.equals(選択Key)) {
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(false);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(true);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setToValue(システム日付);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().clearFromValue();
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().clearToValue();
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().clearValue();
+        } else if (KEY2.equals(選択Key)) {
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().setReadOnly(true);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().setReadOnly(true);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setReadOnly(false);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteishaUketukeNengetsu().setValue(システム日付);
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().clearFromValue();
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtUketukebi().clearToValue();
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().clearFromValue();
+            div.getChushutsuJoken().getChushutsubiNyuryokuEria().getTxtKetteibi().clearToValue();
         }
     }
 
@@ -182,9 +181,11 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
     }
 
     private void 決定者受付年月TXT制御() {
-        RString configValue = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        div.getTxtKetteishaUketukeNengetsu().setDisplayNone(STR_1.equals(configValue));
-        div.getTxtKetteishaUketukeNengetsu().setDisabled(STR_1.equals(configValue));
+        RString configValue = DbBusinessConfig.get(ConfigNameDBC.高額決定通知書_初期選択抽出条件, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (!STR_3.equals(configValue)) {
+            div.getTxtKetteishaUketukeNengetsu().setDisplayNone(true);
+            div.getChushutsuJoken().getRadHizukeSentaku().getDataSource().remove(INT_2);
+        }
     }
 
     /**

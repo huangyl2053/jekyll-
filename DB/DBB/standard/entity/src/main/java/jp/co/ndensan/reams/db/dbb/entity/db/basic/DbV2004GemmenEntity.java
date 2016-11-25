@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 import java.util.UUID;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -39,9 +40,9 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
     private RString jotaiKubun;
     private RString sakuseiKubun;
     private RString shinseiJiyu;
-    private RString gemmenJiyuCode;
+    private Code gemmenJiyuCode;
     private RString gemmenJiyu;
-    private RString gemmenTorikeshiJiyuCode;
+    private Code gemmenTorikeshiJiyuCode;
     private RString gemmenTorikeshiJiyu;
     private Decimal shinseiGemmenGaku;
     private Decimal ketteiGemmenGaku;
@@ -288,7 +289,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
      * @return gemmenJiyuCode
      */
     @CheckForNull
-    public RString getGemmenJiyuCode() {
+    public Code getGemmenJiyuCode() {
         return gemmenJiyuCode;
     }
 
@@ -297,7 +298,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
      *
      * @param gemmenJiyuCode gemmenJiyuCode
      */
-    public void setGemmenJiyuCode(RString gemmenJiyuCode) {
+    public void setGemmenJiyuCode(Code gemmenJiyuCode) {
         this.gemmenJiyuCode = gemmenJiyuCode;
     }
 
@@ -326,7 +327,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
      * @return gemmenTorikeshiJiyuCode
      */
     @CheckForNull
-    public RString getGemmenTorikeshiJiyuCode() {
+    public Code getGemmenTorikeshiJiyuCode() {
         return gemmenTorikeshiJiyuCode;
     }
 
@@ -335,7 +336,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
      *
      * @param gemmenTorikeshiJiyuCode gemmenTorikeshiJiyuCode
      */
-    public void setGemmenTorikeshiJiyuCode(RString gemmenTorikeshiJiyuCode) {
+    public void setGemmenTorikeshiJiyuCode(Code gemmenTorikeshiJiyuCode) {
         this.gemmenTorikeshiJiyuCode = gemmenTorikeshiJiyuCode;
     }
 

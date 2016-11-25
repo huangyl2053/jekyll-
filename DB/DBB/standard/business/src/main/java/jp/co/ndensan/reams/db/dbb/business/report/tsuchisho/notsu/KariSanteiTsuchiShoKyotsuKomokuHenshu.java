@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -797,10 +796,6 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private boolean isNullOrEmpty(FlexibleDate 日期) {
-        return 日期 == null || 日期.isEmpty();
-    }
-
-    private boolean isNullOrEmpty(FlexibleYearMonth 日期) {
         return 日期 == null || 日期.isEmpty();
     }
 }

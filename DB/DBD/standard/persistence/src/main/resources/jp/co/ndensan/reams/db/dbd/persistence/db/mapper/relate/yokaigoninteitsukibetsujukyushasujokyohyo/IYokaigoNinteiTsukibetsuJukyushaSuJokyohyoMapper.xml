@@ -24,11 +24,11 @@
         <result property="職権他" column="職権他"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="職権他旧措置" column="職権他（旧措置）"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
     </resultMap>
-    
+
     <select id="get印刷対象" fetchSize="500" resultOrdered="true" resultMap="ResultMap_YokaigoNintei"
-        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd582001.YokaigoNinteiTsukibetsuJukyushaMybatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd582001.YokaigoNinteiTsukibetsuJukyushaMybatisParameter">
         WITH master2 AS(
-        
+
         WITH master AS (
         (<include refid="select認定件数の場合_月別04" />)
         UNION
@@ -272,1113 +272,1113 @@
         ORDER BY 市町村コード,取得条件
         )
         SELECT
-            master.*
+        master.*
         FROM
-            master
+        master
         INNER JOIN
-                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
-            ( 
-                SELECT
-                    ARRAY_AGG(CAST ("dbT4001JukyushaDaicho_shikibetsuCode" AS TEXT))
-                FROM 
-                    master
-            ) 
-                 <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
-            AS "ShikibetsuTaisho"							
-                ON "dbT4001JukyushaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-            WHERE
-                1 = 1
-                <include refid="条件3" />
-                <include refid="条件4" />
-            )
-            SELECT
-                master2.取得条件,
-                master2.市町村コード,
-                master2.市町村名称,
-                SUM(master2."件数") AS "件数",
-                SUM(master2."件数（旧措置）") AS "件数（旧措置）",
-                SUM(master2."新規") AS "新規",
-                SUM(master2."新規（旧措置）") AS "新規（旧措置）",
-                SUM(master2."（要支援）") AS "（要支援）",
-                SUM(master2."（要支援）（旧措置）") AS "（要支援）（旧措置）",
-                SUM(master2."更新") AS "更新",
-                SUM(master2."更新（旧措置）") AS "更新（旧措置）",
-                SUM(master2."区分変更") AS "区分変更",
-                SUM(master2."区分変更（旧措置）") AS "区分変更（旧措置）",
-                SUM(master2."転入") AS "転入",
-                SUM(master2."転入（旧措置）") AS "転入（旧措置）",
-                SUM(master2."職権他") AS "職権他",
-                SUM(master2."職権他（旧措置）") AS "職権他（旧措置）"
-            FROM
-                master2
-            GROUP BY 
-                市町村コード,取得条件,市町村名称
-            ORDER BY
-                市町村コード,取得条件
-    
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+        (
+        SELECT
+        ARRAY_AGG(CAST ("dbT4001JukyushaDaicho_shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS "ShikibetsuTaisho"
+        ON "dbT4001JukyushaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        WHERE
+        1 = 1
+        <include refid="条件3" />
+        <include refid="条件4" />
+        )
+        SELECT
+        master2.取得条件,
+        master2.市町村コード,
+        master2.市町村名称,
+        SUM(master2."件数") AS "件数",
+        SUM(master2."件数（旧措置）") AS "件数（旧措置）",
+        SUM(master2."新規") AS "新規",
+        SUM(master2."新規（旧措置）") AS "新規（旧措置）",
+        SUM(master2."（要支援）") AS "（要支援）",
+        SUM(master2."（要支援）（旧措置）") AS "（要支援）（旧措置）",
+        SUM(master2."更新") AS "更新",
+        SUM(master2."更新（旧措置）") AS "更新（旧措置）",
+        SUM(master2."区分変更") AS "区分変更",
+        SUM(master2."区分変更（旧措置）") AS "区分変更（旧措置）",
+        SUM(master2."転入") AS "転入",
+        SUM(master2."転入（旧措置）") AS "転入（旧措置）",
+        SUM(master2."職権他") AS "職権他",
+        SUM(master2."職権他（旧措置）") AS "職権他（旧措置）"
+        FROM
+        master2
+        GROUP BY
+        市町村コード,取得条件,市町村名称
+        ORDER BY
+        市町村コード,取得条件
+
     </select>
-    
+
     <sql id = "selectSql1">
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名称,
-            A."shikibetsuCode" AS "dbT4001JukyushaDaicho_shikibetsuCode",
-            SUM(A."件数") AS "件数",
-            SUM(A."件数（旧措置）") AS "件数（旧措置）",
-            SUM(A."新規") AS "新規",
-            SUM(A."新規（旧措置）") AS "新規（旧措置）",
-            SUM(A."（要支援）") AS "（要支援）",
-            SUM(A."（要支援）（旧措置）") AS "（要支援）（旧措置）",
-            SUM(A."更新") AS "更新",
-            SUM(A."更新（旧措置）") AS "更新（旧措置）",
-            SUM(A."区分変更") AS "区分変更",
-            SUM(A."区分変更（旧措置）") AS "区分変更（旧措置）",
-            SUM(A."転入") AS "転入",
-            SUM(A."転入（旧措置）") AS "転入（旧措置）",
-            SUM(A."職権他") AS "職権他",
-            SUM(A."職権他（旧措置）") AS "職権他（旧措置）"
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名称,
+        A."shikibetsuCode" AS "dbT4001JukyushaDaicho_shikibetsuCode",
+        SUM(A."件数") AS "件数",
+        SUM(A."件数（旧措置）") AS "件数（旧措置）",
+        SUM(A."新規") AS "新規",
+        SUM(A."新規（旧措置）") AS "新規（旧措置）",
+        SUM(A."（要支援）") AS "（要支援）",
+        SUM(A."（要支援）（旧措置）") AS "（要支援）（旧措置）",
+        SUM(A."更新") AS "更新",
+        SUM(A."更新（旧措置）") AS "更新（旧措置）",
+        SUM(A."区分変更") AS "区分変更",
+        SUM(A."区分変更（旧措置）") AS "区分変更（旧措置）",
+        SUM(A."転入") AS "転入",
+        SUM(A."転入（旧措置）") AS "転入（旧措置）",
+        SUM(A."職権他") AS "職権他",
+        SUM(A."職権他（旧措置）") AS "職権他（旧措置）"
         FROM(
-            SELECT
-                T7051."shichosonCode",
-                T7051."shichosonMeisho",
-                T4001."shikibetsuCode",
-                COUNT(0) AS "件数",
-                CASE WHEN T4001."kyuSochishaFlag" = TRUE THEN COUNT(0) ELSE 0 END AS "件数（旧措置）",
-                CASE WHEN ( T4001."jukyuShinseiJiyu" = '1' 
-                OR T4001."jukyuShinseiJiyu" = '3'
-                OR ( T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE )
-                OR T4001."jukyuShinseiJiyu" = '6'
-                ) THEN COUNT(0) ELSE 0 END AS "新規",
-                CASE WHEN ( T4001."jukyuShinseiJiyu" = '1' 
-                OR T4001."jukyuShinseiJiyu" = '3'
-                OR ( T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE )
-                OR T4001."jukyuShinseiJiyu" = '6'
-                ) AND T4001."kyuSochishaFlag" = TRUE THEN COUNT(0) ELSE 0 END AS "新規（旧措置）",
-                CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE THEN 
-                COUNT(0) ELSE 0 END AS "（要支援）",
-                CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE AND T4001."kyuSochishaFlag" = TRUE THEN 
-                COUNT(0) ELSE 0 END AS "（要支援）（旧措置）",
-                CASE WHEN T4001."jukyuShinseiJiyu" = '2' THEN COUNT(0) ELSE 0 END AS "更新",
-                CASE WHEN T4001."jukyuShinseiJiyu" = '2' AND T4001."kyuSochishaFlag" = TRUE THEN COUNT(0) ELSE 0 END AS "更新（旧措置）",
-                CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" != TRUE THEN 
-                COUNT(0) ELSE 0 END AS "区分変更",
-                CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" != TRUE AND T4001."kyuSochishaFlag" = TRUE THEN 
-                COUNT(0) ELSE 0 END AS "区分変更（旧措置）",
-                CASE WHEN T4001."jukyuShinseiJiyu" = '7' AND ( T4001."dataKubun" IS NULL OR T4001."dataKubun" = '' ) THEN 
-                COUNT(0) ELSE 0 END AS "転入",
-                CASE WHEN T4001."jukyuShinseiJiyu" = '7' AND ( T4001."dataKubun" IS NULL OR T4001."dataKubun" = '' ) 
-                AND T4001."kyuSochishaFlag" = TRUE THEN 
-                COUNT(0) ELSE 0 END AS "転入（旧措置）",
-                CASE WHEN T4001."jukyuShinseiJiyu" = '7'
-                AND ( SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1' ) THEN 
-                COUNT(0) ELSE 0 END AS "職権他",
-                CASE WHEN T4001."jukyuShinseiJiyu" = '7'
-                AND ( SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1' ) 
-                AND T4001."kyuSochishaFlag" = TRUE THEN 
-                COUNT(0) ELSE 0 END AS "職権他（旧措置）"
-            FROM
-                rgdb."DbT4001JukyushaDaicho" AS T4001
-            INNER JOIN
-                rgdb."DbT4101NinteiShinseiJoho" AS T4101
-            ON 
-                T4001."shinseishoKanriNo" = T4101."shinseishoKanriNo"
-            AND
-                T4101."logicalDeletedFlag" = FALSE
-            INNER JOIN
-                rgdb."DbT7051KoseiShichosonMaster" AS T7051
-            ON
-                T7051."shoKisaiHokenshaNo" = T4101."shoKisaiHokenshaNo"
-            WHERE
-            
+        SELECT
+        T7051."shichosonCode",
+        T7051."shichosonMeisho",
+        T4001."shikibetsuCode",
+        COUNT(0) AS "件数",
+        CASE WHEN T4001."kyuSochishaFlag" = TRUE THEN COUNT(0) ELSE 0 END AS "件数（旧措置）",
+        CASE WHEN ( T4001."jukyuShinseiJiyu" = '1'
+        OR T4001."jukyuShinseiJiyu" = '3'
+        OR ( T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE )
+        OR T4001."jukyuShinseiJiyu" = '6'
+        ) THEN COUNT(0) ELSE 0 END AS "新規",
+        CASE WHEN ( T4001."jukyuShinseiJiyu" = '1'
+        OR T4001."jukyuShinseiJiyu" = '3'
+        OR ( T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE )
+        OR T4001."jukyuShinseiJiyu" = '6'
+        ) AND T4001."kyuSochishaFlag" = TRUE THEN COUNT(0) ELSE 0 END AS "新規（旧措置）",
+        CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE THEN
+        COUNT(0) ELSE 0 END AS "（要支援）",
+        CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" = TRUE AND T4001."kyuSochishaFlag" = TRUE THEN
+        COUNT(0) ELSE 0 END AS "（要支援）（旧措置）",
+        CASE WHEN T4001."jukyuShinseiJiyu" = '2' THEN COUNT(0) ELSE 0 END AS "更新",
+        CASE WHEN T4001."jukyuShinseiJiyu" = '2' AND T4001."kyuSochishaFlag" = TRUE THEN COUNT(0) ELSE 0 END AS "更新（旧措置）",
+        CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" != TRUE THEN
+        COUNT(0) ELSE 0 END AS "区分変更",
+        CASE WHEN T4001."jukyuShinseiJiyu" = '4' AND T4001."yoshienshaNinteiShinseiFlag" != TRUE AND T4001."kyuSochishaFlag" = TRUE THEN
+        COUNT(0) ELSE 0 END AS "区分変更（旧措置）",
+        CASE WHEN T4001."jukyuShinseiJiyu" = '7' AND ( T4001."dataKubun" IS NULL OR T4001."dataKubun" = '' ) THEN
+        COUNT(0) ELSE 0 END AS "転入",
+        CASE WHEN T4001."jukyuShinseiJiyu" = '7' AND ( T4001."dataKubun" IS NULL OR T4001."dataKubun" = '' )
+        AND T4001."kyuSochishaFlag" = TRUE THEN
+        COUNT(0) ELSE 0 END AS "転入（旧措置）",
+        CASE WHEN T4001."jukyuShinseiJiyu" = '7'
+        AND ( SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1' ) THEN
+        COUNT(0) ELSE 0 END AS "職権他",
+        CASE WHEN T4001."jukyuShinseiJiyu" = '7'
+        AND ( SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1' )
+        AND T4001."kyuSochishaFlag" = TRUE THEN
+        COUNT(0) ELSE 0 END AS "職権他（旧措置）"
+        FROM
+        rgdb."DbT4001JukyushaDaicho" AS T4001
+        INNER JOIN
+        rgdb."DbT4101NinteiShinseiJoho" AS T4101
+        ON
+        T4001."shinseishoKanriNo" = T4101."shinseishoKanriNo"
+        AND
+        T4101."logicalDeletedFlag" = FALSE
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" AS T7051
+        ON
+        T7051."shoKisaiHokenshaNo" = T4101."shoKisaiHokenshaNo"
+        WHERE
+
     </sql>
-    
+
     <sql id="selectSql2">
         GROUP BY
-                T4001."jukyuShinseiJiyu",
-                T4001."kyuSochishaFlag",
-                T4001."dataKubun",
-                T4001."yoshienshaNinteiShinseiFlag",
-                T7051."shichosonCode",
-                T7051."shichosonMeisho",
-                T4001."shikibetsuCode"
+        T4001."jukyuShinseiJiyu",
+        T4001."kyuSochishaFlag",
+        T4001."dataKubun",
+        T4001."yoshienshaNinteiShinseiFlag",
+        T7051."shichosonCode",
+        T7051."shichosonMeisho",
+        T4001."shikibetsuCode"
         ) AS A
         GROUP BY
-            A."shichosonCode",
-            A."shichosonMeisho",
-            A."shikibetsuCode"
+        A."shichosonCode",
+        A."shichosonMeisho",
+        A."shikibetsuCode"
         ORDER BY
-            A."shichosonCode"
+        A."shichosonCode"
     </sql>
-    
+
     <sql id="select認定件数の場合_月別04">
         SELECT
-            '01004' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別04" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01004' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別04" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select認定件数の場合_月別05">
         SELECT
-            '01005' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別05" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01005' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別05" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select認定件数の場合_月別06">
         SELECT
-            '01006' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別06" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01006' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別06" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select認定件数の場合_月別07">
         SELECT
-            '01007' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別07" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01007' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別07" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select認定件数の場合_月別08">
         SELECT
-            '01008' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別08" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01008' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別08" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select認定件数の場合_月別09">
         SELECT
-            '01009' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別09" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01009' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別09" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select認定件数の場合_月別10">
         SELECT
-            '01010' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別10" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01010' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別10" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select認定件数の場合_月別11">
         SELECT
-            '01011' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別11" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01011' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別11" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select認定件数の場合_月別12">
         SELECT
-            '01012' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別12" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01012' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別12" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select認定件数の場合_月別01">
         SELECT
-            '01101' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別01" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01101' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別01" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select認定件数の場合_月別02">
         SELECT
-            '01102' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別02" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01102' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別02" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select認定件数の場合_月別03">
         SELECT
-            '01103' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="認定件数の場合_月別03" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '01103' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="認定件数の場合_月別03" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
-    
+
     <sql id="select要介護度１の場合_月別04">
         SELECT
-            '02004' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別04" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02004' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別04" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度１の場合_月別05">
         SELECT
-            '02005' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別05" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02005' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別05" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度１の場合_月別06">
         SELECT
-            '02006' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別06" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02006' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別06" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度１の場合_月別07">
         SELECT
-            '02007' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別07" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02007' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別07" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度１の場合_月別08">
         SELECT
-            '02008' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別08" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02008' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別08" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度１の場合_月別09">
         SELECT
-            '02009' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別09" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02009' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別09" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度１の場合_月別10">
         SELECT
-            '02010' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別10" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02010' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別10" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度１の場合_月別11">
         SELECT
-            '02011' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別11" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02011' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別11" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度１の場合_月別12">
         SELECT
-            '02012' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別12" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02012' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別12" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度１の場合_月別01">
         SELECT
-            '02101' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別01" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02101' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別01" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度１の場合_月別02">
         SELECT
-            '02102' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別02" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02102' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別02" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度１の場合_月別03">
         SELECT
-            '02103' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度１の場合_月別03" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '02103' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度１の場合_月別03" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
-    
+
     <sql id="select要介護度２の場合_月別04">
         SELECT
-            '03004' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別04" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03004' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別04" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度２の場合_月別05">
         SELECT
-            '03005' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別05" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03005' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別05" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度２の場合_月別06">
         SELECT
-            '03006' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別06" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03006' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別06" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度２の場合_月別07">
         SELECT
-            '03007' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別07" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03007' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別07" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度２の場合_月別08">
         SELECT
-            '03008' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別08" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03008' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別08" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度２の場合_月別09">
         SELECT
-            '03009' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別09" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03009' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別09" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度２の場合_月別10">
         SELECT
-            '03010' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別10" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03010' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別10" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度２の場合_月別11">
         SELECT
-            '03011' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別11" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03011' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別11" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度２の場合_月別12">
         SELECT
-            '03012' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別12" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03012' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別12" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度２の場合_月別01">
         SELECT
-            '03101' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別01" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03101' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別01" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度２の場合_月別02">
         SELECT
-            '03102' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別02" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03102' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別02" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度２の場合_月別03">
         SELECT
-            '03103' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度２の場合_月別03" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '03103' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度２の場合_月別03" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
-    
+
     <sql id="select要介護度３の場合_月別04">
         SELECT
-            '04004' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別04" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '04004' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別04" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度３の場合_月別05">
         SELECT
-            '04005' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別05" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '04005' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別05" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度３の場合_月別06">
         SELECT
-            '04006' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別06" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '04006' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別06" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度３の場合_月別07">
         SELECT
-            '04007' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別07" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '04007' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別07" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度３の場合_月別08">
         SELECT
-            '04008' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別08" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '04008' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別08" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度３の場合_月別09">
         SELECT
-            '04009' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別09" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '04009' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別09" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度３の場合_月別10">
         SELECT
-            '04010' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別10" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '04010' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別10" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度３の場合_月別11">
         SELECT
-            '04011' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別11" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '04011' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別11" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度３の場合_月別12">
         SELECT
-            '04012' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別12" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '04012' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別12" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度３の場合_月別01">
         SELECT
-            '04101' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別01" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '04101' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別01" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度３の場合_月別02">
         SELECT
-            '040102' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別02" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '040102' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別02" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度３の場合_月別03">
         SELECT
-            '04103' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度３の場合_月別03" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '04103' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度３の場合_月別03" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
-    
+
     <sql id="select要介護度４の場合_月別04">
         SELECT
-            '05004' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別04" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05004' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別04" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度４の場合_月別05">
         SELECT
-            '05005' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別05" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05005' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別05" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度４の場合_月別06">
         SELECT
-            '05006' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別06" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05006' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別06" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度４の場合_月別07">
         SELECT
-            '05007' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別07" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05007' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別07" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度４の場合_月別08">
         SELECT
-            '05008' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別08" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05008' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別08" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度４の場合_月別09">
         SELECT
-            '05009' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別09" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05009' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別09" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度４の場合_月別10">
         SELECT
-            '05010' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別10" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05010' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別10" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度４の場合_月別11">
         SELECT
-            '05011' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別11" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05011' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別11" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度４の場合_月別12">
         SELECT
-            '05012' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別12" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05012' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別12" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度４の場合_月別01">
         SELECT
-            '05101' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別01" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05101' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別01" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度４の場合_月別02">
         SELECT
-            '05102' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別02" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05102' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別02" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度４の場合_月別03">
         SELECT
-            '05103' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度４の場合_月別03" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '05103' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度４の場合_月別03" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
-    
+
     <sql id="select要介護度５の場合_月別04">
         SELECT
-            '06004' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別04" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06004' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別04" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度５の場合_月別05">
         SELECT
-            '06005' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別05" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06005' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別05" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度５の場合_月別06">
         SELECT
-            '06006' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別06" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06006' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別06" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度５の場合_月別07">
         SELECT
-            '06007' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別07" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06007' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別07" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度５の場合_月別08">
         SELECT
-            '06008' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別08" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06008' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別08" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度５の場合_月別09">
         SELECT
-            '06009' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別09" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06009' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別09" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度５の場合_月別10">
         SELECT
-            '06010' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別10" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06010' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別10" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度５の場合_月別11">
         SELECT
-            '06011' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別11" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06011' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別11" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度５の場合_月別12">
         SELECT
-            '06012' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別12" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06012' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別12" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度５の場合_月別01">
         SELECT
-            '06101' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別01" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06101' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別01" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度５の場合_月別02">
         SELECT
-            '06102' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別02" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06102' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別02" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要介護度５の場合_月別03">
         SELECT
-            '06103' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要介護度５の場合_月別03" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '06103' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要介護度５の場合_月別03" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
-    
+
     <sql id="select要支援１の場合_月別04">
         SELECT
-            '07004' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別04" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07004' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別04" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援１の場合_月別05">
         SELECT
-            '07005' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別05" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07005' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別05" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援１の場合_月別06">
         SELECT
-            '07006' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別06" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07006' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別06" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援１の場合_月別07">
         SELECT
-            '07007' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別07" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07007' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別07" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援１の場合_月別08">
         SELECT
-            '07008' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別08" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07008' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別08" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援１の場合_月別09">
         SELECT
-            '07009' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別09" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07009' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別09" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援１の場合_月別10">
         SELECT
-            '07010' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別10" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07010' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別10" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援１の場合_月別11">
         SELECT
-            '07011' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別11" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07011' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別11" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援１の場合_月別12">
         SELECT
-            '07012' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別12" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07012' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別12" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援１の場合_月別01">
         SELECT
-            '07101' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別01" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07101' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別01" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援１の場合_月別02">
         SELECT
-            '07102' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別02" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07102' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別02" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援１の場合_月別03">
         SELECT
-            '07103' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援１の場合_月別03" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '07103' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援１の場合_月別03" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
-    
+
     <sql id="select要支援２の場合_月別04">
         SELECT
-            '08004' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別04" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08004' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別04" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援２の場合_月別05">
         SELECT
-            '08005' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別05" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08005' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別05" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援２の場合_月別06">
         SELECT
-            '08006' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別06" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08006' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別06" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援２の場合_月別07">
         SELECT
-            '08007' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別07" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08007' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別07" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援２の場合_月別08">
         SELECT
-            '08008' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別08" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08008' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別08" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援２の場合_月別09">
         SELECT
-            '08009' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別09" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08009' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別09" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援２の場合_月別10">
         SELECT
-            '08010' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別10" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08010' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別10" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援２の場合_月別11">
         SELECT
-            '08011' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別11" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08011' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別11" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援２の場合_月別12">
         SELECT
-            '08012' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別12" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08012' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別12" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援２の場合_月別01">
         SELECT
-            '08101' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別01" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08101' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別01" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援２の場合_月別02">
         SELECT
-            '08102' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別02" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08102' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別02" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援２の場合_月別03">
         SELECT
-            '08103' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援２の場合_月別03" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '08103' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援２の場合_月別03" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
-    
+
     <sql id="select要支援の場合_月別04">
         SELECT
-            '09004' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別04" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09004' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別04" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援の場合_月別05">
         SELECT
-            '09005' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別05" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09005' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別05" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援の場合_月別06">
         SELECT
-            '09006' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別06" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09006' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別06" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援の場合_月別07">
         SELECT
-            '09007' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別07" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09007' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別07" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援の場合_月別08">
         SELECT
-            '09008' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別08" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09008' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別08" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援の場合_月別09">
         SELECT
-            '09009' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別09" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09009' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別09" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援の場合_月別10">
         SELECT
-            '09010' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別10" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09010' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別10" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援の場合_月別11">
         SELECT
-            '09011' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別11" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09011' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別11" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援の場合_月別12">
         SELECT
-            '09012' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別12" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09012' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別12" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援の場合_月別01">
         SELECT
-            '09101' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別01" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09101' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別01" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援の場合_月別02">
         SELECT
-            '09102' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別02" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09102' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別02" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select要支援の場合_月別03">
         SELECT
-            '09103' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="要支援の場合_月別03" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '09103' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="要支援の場合_月別03" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
-    
+
     <sql id="select自立の場合_月別04">
         SELECT
-            '10004' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別04" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10004' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別04" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select自立の場合_月別05">
         SELECT
-            '10005' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別05" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10005' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別05" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select自立の場合_月別06">
         SELECT
-            '10006' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別06" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10006' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別06" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select自立の場合_月別07">
         SELECT
-            '10007' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別07" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10007' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別07" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select自立の場合_月別08">
         SELECT
-            '10008' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別08" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10008' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別08" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select自立の場合_月別09">
         SELECT
-            '10009' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別09" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10009' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別09" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select自立の場合_月別10">
         SELECT
-            '10010' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別10" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10010' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別10" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select自立の場合_月別11">
         SELECT
-            '10011' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別11" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10011' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別11" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select自立の場合_月別12">
         SELECT
-            '10012' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別12" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10012' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別12" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select自立の場合_月別01">
         SELECT
-            '10101' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別01" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10101' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別01" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select自立の場合_月別02">
         SELECT
-            '10102' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別02" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10102' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別02" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select自立の場合_月別03">
         SELECT
-            '10103' as 取得条件,
-           <include refid="selectSql1" />
-           <include refid="自立の場合_月別03" />
-           <include refid="条件5" />
-           <include refid="selectSql2" />
+        '10103' as 取得条件,
+        <include refid="selectSql1" />
+        <include refid="自立の場合_月別03" />
+        <include refid="条件5" />
+        <include refid="selectSql2" />
     </sql>
-  
+
     <sql id="認定件数の場合_月別04">
         (T4001."dataKubun" IS NULL OR SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1')
         AND (T4001."yukoMukoKubun" = '1' OR T4001."yukoMukoKubun" = '2')
@@ -1451,7 +1451,7 @@
         AND T4001."yokaigoJotaiKubunCode" = '01'
         <include refid="条件2の基準フラグ1_月別03" />
     </sql>
-     
+
     <sql id="要介護度１の場合_月別04">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '21'
@@ -1512,7 +1512,7 @@
         AND T4001."yokaigoJotaiKubunCode" = '21'
         <include refid="条件2の基準フラグ2_月別03" />
     </sql>
-    
+
     <sql id="要介護度２の場合_月別04">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '22'
@@ -1573,7 +1573,7 @@
         AND T4001."yokaigoJotaiKubunCode" = '22'
         <include refid="条件2の基準フラグ2_月別03" />
     </sql>
-    
+
     <sql id="要介護度３の場合_月別04">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '23'
@@ -1633,8 +1633,8 @@
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '23'
         <include refid="条件2の基準フラグ2_月別03" />
-    </sql> 
-    
+    </sql>
+
     <sql id="要介護度４の場合_月別04">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '24'
@@ -1694,8 +1694,8 @@
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '24'
         <include refid="条件2の基準フラグ2_月別03" />
-    </sql> 
-    
+    </sql>
+
     <sql id="要介護度５の場合_月別04">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '25'
@@ -1755,8 +1755,8 @@
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '25'
         <include refid="条件2の基準フラグ2_月別03" />
-    </sql> 
-    
+    </sql>
+
     <sql id="要支援１の場合_月別04">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
@@ -1766,58 +1766,58 @@
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
         <include refid="条件2の基準フラグ2_月別05" />
-    </sql> 
+    </sql>
     <sql id="要支援１の場合_月別06">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
         <include refid="条件2の基準フラグ2_月別06" />
-    </sql> 
+    </sql>
     <sql id="要支援１の場合_月別07">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
         <include refid="条件2の基準フラグ2_月別07" />
-    </sql> 
+    </sql>
     <sql id="要支援１の場合_月別08">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
         <include refid="条件2の基準フラグ2_月別08" />
-    </sql> 
+    </sql>
     <sql id="要支援１の場合_月別09">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
         <include refid="条件2の基準フラグ2_月別09" />
-    </sql> 
+    </sql>
     <sql id="要支援１の場合_月別10">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
         <include refid="条件2の基準フラグ2_月別10" />
-    </sql> 
+    </sql>
     <sql id="要支援１の場合_月別11">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
         <include refid="条件2の基準フラグ2_月別11" />
-    </sql> 
+    </sql>
     <sql id="要支援１の場合_月別12">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
         <include refid="条件2の基準フラグ2_月別12" />
-    </sql> 
+    </sql>
     <sql id="要支援１の場合_月別01">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
         <include refid="条件2の基準フラグ2_月別01" />
-    </sql> 
+    </sql>
     <sql id="要支援１の場合_月別02">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
         <include refid="条件2の基準フラグ2_月別02" />
-    </sql> 
+    </sql>
     <sql id="要支援１の場合_月別03">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '12'
         <include refid="条件2の基準フラグ2_月別03" />
-    </sql>  
-    
+    </sql>
+
     <sql id="要支援２の場合_月別04">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '13'
@@ -1878,7 +1878,7 @@
         AND T4001."yokaigoJotaiKubunCode" = '13'
         <include refid="条件2の基準フラグ2_月別03" />
     </sql>
-    
+
     <sql id="要支援の場合_月別04">
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '11'
@@ -1938,8 +1938,8 @@
         <include refid="条件1の場合１" />
         AND T4001."yokaigoJotaiKubunCode" = '11'
         <include refid="条件2の基準フラグ2_月別03" />
-    </sql> 
-    
+    </sql>
+
     <sql id="自立の場合_月別04">
         (T4001."dataKubun" IS NULL OR SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1')
         AND T4001."yokaigoJotaiKubunCode" = '01'
@@ -1989,7 +1989,7 @@
         (T4001."dataKubun" IS NULL OR SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1')
         AND T4001."yokaigoJotaiKubunCode" = '01'
         <include refid="条件2の基準フラグ1_月別01" />
-    </sql> 
+    </sql>
     <sql id="自立の場合_月別02">
         (T4001."dataKubun" IS NULL OR SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1')
         AND T4001."yokaigoJotaiKubunCode" = '01'
@@ -2000,18 +2000,18 @@
         AND T4001."yokaigoJotaiKubunCode" = '01'
         <include refid="条件2の基準フラグ1_月別03" />
     </sql>
-    
+
     <sql id="条件1の場合１">
         (T4001."dataKubun" IS NULL OR SUBSTRING ( T4001."dataKubun",1,1 ) = '0' OR SUBSTRING ( T4001."dataKubun",1,1 ) = '1')
         AND T4001."yukoMukoKubun" = '1'
     </sql>
-    
+
     <sql id="条件2の基準フラグ1_月別04">
         <if test = "is基準フラグ0">
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日04}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月04}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月04}
         </if>
     </sql>
     <sql id="条件2の基準フラグ1_月別05">
@@ -2019,7 +2019,7 @@
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日05}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月05}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月05}
         </if>
     </sql>
     <sql id="条件2の基準フラグ1_月別06">
@@ -2027,7 +2027,7 @@
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日06}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月06}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月06}
         </if>
     </sql>
     <sql id="条件2の基準フラグ1_月別07">
@@ -2035,7 +2035,7 @@
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日07}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月07}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月07}
         </if>
     </sql>
     <sql id="条件2の基準フラグ1_月別08">
@@ -2043,7 +2043,7 @@
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日08}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月08}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月08}
         </if>
     </sql>
     <sql id="条件2の基準フラグ1_月別09">
@@ -2051,7 +2051,7 @@
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日09}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月09}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月09}
         </if>
     </sql>
     <sql id="条件2の基準フラグ1_月別10">
@@ -2059,7 +2059,7 @@
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日10}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月10}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月10}
         </if>
     </sql>
     <sql id="条件2の基準フラグ1_月別11">
@@ -2067,7 +2067,7 @@
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日11}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月11}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月11}
         </if>
     </sql>
     <sql id="条件2の基準フラグ1_月別12">
@@ -2075,7 +2075,7 @@
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日12}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月12}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月12}
         </if>
     </sql>
     <sql id="条件2の基準フラグ1_月別01">
@@ -2083,7 +2083,7 @@
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日01}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月01}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月01}
         </if>
     </sql>
     <sql id="条件2の基準フラグ1_月別02">
@@ -2091,7 +2091,7 @@
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日02}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月02}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月02}
         </if>
     </sql>
     <sql id="条件2の基準フラグ1_月別03">
@@ -2099,19 +2099,19 @@
             AND T4001."ninteiYMD" <![CDATA[<=]]> #{基準年月日03}
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月03}
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月03}
         </if>
     </sql>
-    
+
     <sql id="条件2の基準フラグ2_月別04">
         <if test = "is基準フラグ0">
             AND T4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準年月日04}
             AND #{基準年月日04} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月04}
-            AND #{基準年月04} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月04}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月04}
+            AND #{基準年月04} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月04}
         </if>
     </sql>
     <sql id="条件2の基準フラグ2_月別05">
@@ -2120,9 +2120,9 @@
             AND #{基準年月日05} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月05}
-            AND #{基準年月05} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月05}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月05}
+            AND #{基準年月05} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月05}
         </if>
     </sql>
     <sql id="条件2の基準フラグ2_月別06">
@@ -2131,20 +2131,20 @@
             AND #{基準年月日06} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月06}
-            AND #{基準年月06} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月06}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月06}
+            AND #{基準年月06} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月06}
         </if>
     </sql>
-   <sql id="条件2の基準フラグ2_月別07">
+    <sql id="条件2の基準フラグ2_月別07">
         <if test = "is基準フラグ0">
             AND T4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準年月日07}
             AND #{基準年月日07} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月07}
-            AND #{基準年月07} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月07}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月07}
+            AND #{基準年月07} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月07}
         </if>
     </sql>
     <sql id="条件2の基準フラグ2_月別08">
@@ -2153,9 +2153,9 @@
             AND #{基準年月日08} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月08}
-            AND #{基準年月08} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月08}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月08}
+            AND #{基準年月08} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月08}
         </if>
     </sql>
     <sql id="条件2の基準フラグ2_月別09">
@@ -2164,9 +2164,9 @@
             AND #{基準年月日09} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月09}
-            AND #{基準年月09} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月09}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月09}
+            AND #{基準年月09} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月09}
         </if>
     </sql>
     <sql id="条件2の基準フラグ2_月別10">
@@ -2175,9 +2175,9 @@
             AND #{基準年月日10} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月10}
-            AND #{基準年月10} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月10}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月10}
+            AND #{基準年月10} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月10}
         </if>
     </sql>
     <sql id="条件2の基準フラグ2_月別11">
@@ -2186,9 +2186,9 @@
             AND #{基準年月日11} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月11}
-            AND #{基準年月11} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月11}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月11}
+            AND #{基準年月11} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月11}
         </if>
     </sql>
     <sql id="条件2の基準フラグ2_月別12">
@@ -2197,9 +2197,9 @@
             AND #{基準年月日12} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月12}
-            AND #{基準年月12} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月12}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月12}
+            AND #{基準年月12} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月12}
         </if>
     </sql>
     <sql id="条件2の基準フラグ2_月別01">
@@ -2208,9 +2208,9 @@
             AND #{基準年月日01} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月01}
-            AND #{基準年月01} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月01}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月01}
+            AND #{基準年月01} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月01}
         </if>
     </sql>
     <sql id="条件2の基準フラグ2_月別02">
@@ -2219,9 +2219,9 @@
             AND #{基準年月日02} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月02}
-            AND #{基準年月02} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月02}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月02}
+            AND #{基準年月02} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月02}
         </if>
     </sql>
     <sql id="条件2の基準フラグ2_月別03">
@@ -2230,19 +2230,19 @@
             AND #{基準年月日03} <![CDATA[<=]]> T4001."ninteiYukoKikanShuryoYMD"
         </if>
         <if test = "is基準フラグ1">
-            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月03}
-            AND #{基準年月03} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",0,6)
-            AND SUBSTRING ( T4001."ninteiYMD",0,6 ) <![CDATA[<=]]> #{基準年月03}
+            AND SUBSTRING(T4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月03}
+            AND #{基準年月03} <![CDATA[<=]]> SUBSTRING(T4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING ( T4001."ninteiYMD",1,6 ) <![CDATA[<=]]> #{基準年月03}
         </if>
     </sql>
-    
+
     <sql id="条件3">
         <if test = "年齢基準日 != null and !年齢基準日.isEmpty()">
             <if test = "生年月日From2 != null and !生年月日From2.isEmpty()">
                 AND #{生年月日From2} <![CDATA[<=]]> "ShikibetsuTaisho"."seinengappiYMD"
             </if>
             <if test = "生年月日To2 != null and !生年月日To2.isEmpty()">
-            AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日To2}
+                AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日To2}
             </if>
         </if>
         <if test = "生年月日From != null and !生年月日From.isEmpty()">
@@ -2252,7 +2252,7 @@
             AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日To}
         </if>
     </sql>
-    
+
     <sql id="条件4">
         <if test= "is住所">
             <if test = "開始地区コード != null and !開始地区コード.isEmpty()">
@@ -2279,31 +2279,31 @@
             </if>
         </if>
     </sql>
-    
+
     <sql id="条件5">
         <if test = "is受給申請事由">
             AND T4001."jukyuShinseiJiyu" IS NOT NULL
         </if>
         <if test = "is申請区分申請時">
-            AND ((T4101."ninteiShinseiHoreiKubunCode" = '1' 
-                    AND T4001."jukyuShinseiJiyu" IN('1','3','6'))
-                OR (T4101."ninteiShinseiHoreiKubunCode" = '2' 
-                    AND T4001."jukyuShinseiJiyu" = '2')
-                OR (T4101."ninteiShinseiHoreiKubunCode" = '3' 
-                    AND T4001."jukyuShinseiJiyu" = '4')
-                OR ((T4101."ninteiShinseiHoreiKubunCode" = '4' 
-                    OR T4101."ninteiShinseiHoreiKubunCode" = '5') 
-                    AND T4001."jukyuShinseiJiyu" = '7'))
+            AND ((T4101."ninteiShinseiHoreiKubunCode" = '1'
+            AND T4001."jukyuShinseiJiyu" IN('1','3','6'))
+            OR (T4101."ninteiShinseiHoreiKubunCode" = '2'
+            AND T4001."jukyuShinseiJiyu" = '2')
+            OR (T4101."ninteiShinseiHoreiKubunCode" = '3'
+            AND T4001."jukyuShinseiJiyu" = '4')
+            OR ((T4101."ninteiShinseiHoreiKubunCode" = '4'
+            OR T4101."ninteiShinseiHoreiKubunCode" = '5')
+            AND T4001."jukyuShinseiJiyu" = '7'))
         </if>
         <if test = "is申請区分法令">
-            AND ((T4101."ninteiShinseiHoreiKubunCode" = '1' 
-                    AND T4001."jukyuShinseiJiyu" IN('1','3','6'))
-                OR (T4101."ninteiShinseiHoreiKubunCode" = '2' 
-                    AND T4001."jukyuShinseiJiyu" = '2')
-                OR (T4101."ninteiShinseiHoreiKubunCode" = '3' 
-                    AND T4001."jukyuShinseiJiyu" = '4')
-                OR (T4101."ninteiShinseiHoreiKubunCode" = '4' 
-                    AND T4001."jukyuShinseiJiyu" = '7'))
+            AND ((T4101."ninteiShinseiHoreiKubunCode" = '1'
+            AND T4001."jukyuShinseiJiyu" IN('1','3','6'))
+            OR (T4101."ninteiShinseiHoreiKubunCode" = '2'
+            AND T4001."jukyuShinseiJiyu" = '2')
+            OR (T4101."ninteiShinseiHoreiKubunCode" = '3'
+            AND T4001."jukyuShinseiJiyu" = '4')
+            OR (T4101."ninteiShinseiHoreiKubunCode" = '4'
+            AND T4001."jukyuShinseiJiyu" = '7'))
         </if>
     </sql>
 </mapper>

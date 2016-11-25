@@ -162,11 +162,10 @@ public class JukyushaIdoRenrakuhyoHandler {
             return 受給者異動情報;
         }
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().setValue(受給者異動情報.get異動年月日());
-        if (JukyushaTeiseiRenrakuhyoToroku.createInstance().selectBooleanHihokenshaNo(被保険者番号)) {
-            div.getJukyushaIdoRenrakuhyoKihonJoho().getRadIdoKubun().setSelectedKey(JukyushaIF_IdoKubunCode.新規.getコード());
-        } else {
-            div.getJukyushaIdoRenrakuhyoKihonJoho().getRadIdoKubun().setSelectedKey(JukyushaIF_IdoKubunCode.変更.getコード());
+        if (!RString.isNullOrEmpty(受給者異動情報.get異動区分コード())) {
+            div.getJukyushaIdoRenrakuhyoKihonJoho().getRadIdoKubun().setSelectedKey(受給者異動情報.get異動区分コード());
         }
+
         if (RString.isNullOrEmpty(受給者異動情報.get受給者異動事由())) {
             div.getJukyushaIdoRenrakuhyoKihonJoho().getDdlJukyushaIdoJiyu().setSelectedKey(空KEY);
         } else {

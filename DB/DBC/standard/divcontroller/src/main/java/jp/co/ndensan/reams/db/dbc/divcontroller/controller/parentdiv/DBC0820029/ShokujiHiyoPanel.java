@@ -66,6 +66,8 @@ public class ShokujiHiyoPanel {
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成17年９月 = new FlexibleYearMonth("200509");
     private static final FlexibleYearMonth 平成17年１０月 = new FlexibleYearMonth("200510");
+    private static final RString 証明書戻り_0 = new RString("0");
+    private static final RString 証明書戻り_1 = new RString("1");
 
     /**
      * onLoad
@@ -241,6 +243,7 @@ public class ShokujiHiyoPanel {
                 return ResponseData.of(div).addValidationMessages(controlPairs).respond();
             }
         }
+        ViewStateHolder.put(ViewStateKeys.証明書戻り, 証明書戻り_1);
         return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.一覧に戻る).respond();
     }
 
@@ -254,6 +257,7 @@ public class ShokujiHiyoPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.一覧に戻る).respond();
         }
+        ViewStateHolder.put(ViewStateKeys.証明書戻り, 証明書戻り_0);
         return clear入力内容(div);
 
     }

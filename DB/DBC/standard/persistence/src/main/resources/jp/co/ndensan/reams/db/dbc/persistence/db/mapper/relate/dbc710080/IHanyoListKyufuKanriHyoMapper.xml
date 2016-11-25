@@ -237,7 +237,6 @@
     
     <resultMap id="resultMap_HanyoListKyufuKanriHyoEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710080.HanyoListKyufuKanriHyoEntity">
-        <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>  
         <association property="給付管理票" resultMap="ResultMap_KyufuKanrihyo"/>
         <association property="最新被保台帳" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="宛名" resultMap = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>

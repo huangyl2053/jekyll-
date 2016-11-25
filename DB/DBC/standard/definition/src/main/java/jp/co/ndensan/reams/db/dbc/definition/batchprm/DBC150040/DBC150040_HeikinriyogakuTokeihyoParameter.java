@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParameterBase {
+public class DBC150040_HeikinriyogakuTokeihyoParameter extends BatchParameterBase {
 
     private static final String TAISHONENDOYM = "taishoNendoYM";
     private static final String KAISHIYM = "kaishiYM";
@@ -44,6 +44,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
     private static final String ISCHIKU1 = "ischiku1";
     private static final String ISCHIKU2 = "ischiku2";
     private static final String ISCHIKU3 = "ischiku3";
+    private static final long serialVersionUID = 1L;
     @BatchParameter(key = TAISHONENDOYM, name = "対象年月")
     private RString taishoNendoYM;
     @BatchParameter(key = KAISHIYM, name = "開始年月")
@@ -86,7 +87,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
     /**
      * コンストラクタです。
      */
-    public DBC150040_HeikinriyogakuTokeihyoBatchParameter() {
+    public DBC150040_HeikinriyogakuTokeihyoParameter() {
 
     }
 
@@ -113,7 +114,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
      * @param ischiku2 is地区2
      * @param ischiku3 is地区3
      */
-    public DBC150040_HeikinriyogakuTokeihyoBatchParameter(
+    public DBC150040_HeikinriyogakuTokeihyoParameter(
             RString taishoNendoYM,
             RString kaishiYM,
             RString shuryoYM,

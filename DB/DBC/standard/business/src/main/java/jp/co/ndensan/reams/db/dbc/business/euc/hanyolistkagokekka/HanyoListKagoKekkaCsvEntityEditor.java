@@ -305,8 +305,14 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         if (entity.get受給者台帳() != null) {
             csvEntity.set受給申請事由(get受給申請事由(entity.get受給者台帳().getJukyuShinseiJiyu().getColumnValue()));
             csvEntity.set受給申請日(format日付項目(entity.get受給者台帳().getJukyuShinseiYMD()));
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
-                    toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+            if (entity.get受給者台帳() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode().isEmpty()) {
+                csvEntity.set受給要介護度(RString.EMPTY);
+            } else {
+                csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
+                        toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+            }
             csvEntity.set受給認定開始日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanKaishiYMD()));
             csvEntity.set受給認定終了日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanShuryoYMD()));
             csvEntity.set受給認定日(format日付項目(entity.get受給者台帳().getNinteiYMD()));
@@ -470,8 +476,14 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         if (entity.get受給者台帳() != null) {
             csvEntity.set受給申請事由(get受給申請事由(entity.get受給者台帳().getJukyuShinseiJiyu().getColumnValue()));
             csvEntity.set受給申請日(format日付項目(entity.get受給者台帳().getJukyuShinseiYMD()));
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
-                    toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+            if (entity.get受給者台帳() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode().isEmpty()) {
+                csvEntity.set受給要介護度(RString.EMPTY);
+            } else {
+                csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
+                        toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+            }
             csvEntity.set受給認定開始日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanKaishiYMD()));
             csvEntity.set受給認定終了日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanShuryoYMD()));
             csvEntity.set受給認定日(format日付項目(entity.get受給者台帳().getNinteiYMD()));

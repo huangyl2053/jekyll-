@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -145,6 +146,7 @@ public class KaigoHihokenshaInfoPanel {
     public ResponseData<KaigoHihokenshaInfoPanelDiv> onClick_Cancelled(
             KaigoHihokenshaInfoPanelDiv div) {
         div.setHdnFlag(RString.EMPTY);
+        div.getRentaiNofuGimushaInfo().getTxtRirekiNo().clearValue();
         return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者情報一覧);
     }
 
@@ -170,7 +172,6 @@ public class KaigoHihokenshaInfoPanel {
         } else {
             identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
-            履歴番号 = 最新履歴番号(div, 被保険者番号, holder);
         }
         ValidationMessageControlPairs pairs = validationHander.validate();
         if (pairs.iterator().hasNext() && !ResponseHolder.isReRequest()) {
@@ -230,6 +231,7 @@ public class KaigoHihokenshaInfoPanel {
         List<RentaiGimushaAtenaJouhou> rentaiList = rentaiNofuGimusha.getRentaiNofuGimushaAtenaInfo(list);
         handler.setDgRentaiNofuGimushaIchiran(rentaiList, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.連帯納付義務者情報, holder);
+        div.getRentaiNofuGimushaInfo().getTxtRirekiNo().clearValue();
         return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者情報一覧);
     }
 
@@ -269,7 +271,7 @@ public class KaigoHihokenshaInfoPanel {
             if (最新履歴番号 == null && (list == null || list.isEmpty())) {
                 履歴番号 = ZERO;
             } else {
-                int 番号 = list.get(0).get履歴番号().intValue();
+                int 番号 = 0;
                 for (RentaiGimusha rentai : list) {
                     int 新番号 = rentai.get履歴番号().intValue();
                     番号 = max番号(番号, 新番号);
@@ -318,7 +320,7 @@ public class KaigoHihokenshaInfoPanel {
         FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
         if (taishoshaKey.get識別コード() == taishoshaKey.get識別コード()) {
             if (div.getTxtOutShikibetsuCode().equals(new RString(taishoshaKey.get識別コード().toString()))) {
-                return ResponseData.of(div).addMessage(ErrorMessages.連帯納付義務者として登録.getMessage()).respond();
+                throw new ApplicationException(ErrorMessages.連帯納付義務者として登録.getMessage());
             }
             ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                     KensakuYusenKubun.住登外優先)
@@ -329,7 +331,7 @@ public class KaigoHihokenshaInfoPanel {
             IShikibetsuTaisho 宛名情報 = manager.get宛名情報(searchKey);
             handler.setRentaiNofuGimushaInfo(宛名情報);
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者修正);
     }
 
     /**
@@ -402,14 +404,23 @@ public class KaigoHihokenshaInfoPanel {
             if (!entity1.get識別コード().equals(entity2.get識別コード())
                     || !entity1.get開始年月日().equals(entity2.get開始年月日())
                     || !entity1.get終了年月日().equals(entity2.get終了年月日())) {
-                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止.getMessage()).respond();
+                throw new ApplicationException(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止.getMessage());
             }
         }
         int count = rentaiNofuGimusha.delRentaiNofuGimushaInfo(list);
         if (初期holder.getRentaiGimushaList().size() != count) {
-            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止.getMessage()).respond();
+            throw new ApplicationException(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止.getMessage());
         }
-        rentaiNofuGimusha.insRentaiNofuGimushaInfo(holder.getRentaiGimushaList(), 被保険者番号);
+        RentaiGimushaHolder new_holder = new RentaiGimushaHolder();
+        int rirekiNo = 0;
+        for (RentaiGimusha rentaiGimusha : holder.getRentaiGimushaList()) {
+            if (!rentaiGimusha.isDeleted()) {
+                rentaiGimusha = rentaiGimusha.createBuilderForEdit().set履歴番号(new Decimal(rirekiNo)).build();
+                new_holder.addKogakuGassanJikoFutanGaku(rentaiGimusha);
+                rirekiNo++;
+            }
+        }
+        rentaiNofuGimusha.insRentaiNofuGimushaInfo(new_holder.getRentaiGimushaList(), 被保険者番号);
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
                 名称_被保険者番号, 被保険者番号.getColumnValue());
         PersonalData personalData = PersonalData.of(taishoshaKey.get識別コード(), expandedInfo);

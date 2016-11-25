@@ -9,44 +9,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKinkyuShisetsuRyoyo;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShokujiHiyo;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShoteiShikkanShisetsuRyoyo;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShukei;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiSinryoTokubetsuRyoyo;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiSinryohi;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.JukyushaDaichoJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KojinKakuteiKey;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCareManagementHiBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCareManagementHiJyohou;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiSearchDataBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShakaiFukushiHojinKeigengakuBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShakaiFukushiHojinKeigengakuJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiFukushiYoguHanbaihiBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiFukushiYoguHanbaihiJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiJutakuKaishuhiBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiJutakuKaishuhiJyohou;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShukeiKekkaDataBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKihonJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKinkyuShisetsuRyoyoJyohou;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKyotakuServiceBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKyotakuServiceJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiJushochiTokureiBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiJushochiTokureiJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiShokujiHiyoJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiShoteiShikkanShisetsuRyoyoJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiShukeiJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiTokuteiNyushosyaKaigoServiceHiyoJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiTokuteiSinryoTokubetsuRyoyoJyohou;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiTokuteiSinryohiJyohou;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiRelate;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.DBC0010000StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.DBC0010000TransitionEventName;
@@ -57,10 +27,8 @@ import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiSh
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -229,11 +197,11 @@ public class KyufuJissekiShokai {
                 getKyufuJissekiHeaderJoho1(被保険者番号).records();
         RString 検索対象 = div.getRadTaisho1().getSelectedKey();
         div.setHiddenSearchKey(検索対象);
-        KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
-                get検索データ(被保険者番号, サービス提供年月_開始, サービス提供年月_終了, KEY.equals(検索対象));
         KyufuJissekiShokaiHandler handler = getHandler(div);
-        handler.edit集計データ(サービス提供年月_開始, サービス提供年月_終了, !KEY.equals(検索対象), 給付実績情報照会情報, 被保険者番号);
-        ValidationMessageControlPairs validationMessages = getValidationHandler(div).do検索チェック(給付実績情報照会情報, 検索対象);
+        KyufuJissekiSearchDataBusiness 一覧データ = new KyufuJissekiSearchDataBusiness();
+        List<KyufuJissekiShukeiKekkaDataBusiness> 集計データ
+                = handler.edit集計データ(サービス提供年月_開始, サービス提供年月_終了, !KEY.equals(検索対象), 一覧データ, 被保険者番号);
+        ValidationMessageControlPairs validationMessages = getValidationHandler(div).do検索チェック(集計データ);
         if (validationMessages.iterator().hasNext()) {
             div.getKyufuJissekiSearchPanel().setIsOpen(true);
             div.getKyufuJissekiListPanel().setIsOpen(false);
@@ -242,11 +210,11 @@ public class KyufuJissekiShokai {
         for (int i = INT_ZERO; i < INT_NJYUNG; i++) {
             div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i).setVisible(true);
         }
-        KyufuJissekiSearchDataBusiness 一覧データ = 給付実績情報照会情報.getSearchData();
         KyufuJissekiHeader 給付実績基本情報子Divデータ
                 = handler.onClick_btnKyufuJissekiSearch(給付実績ヘッダ情報1.get(INT_ZERO),
                         サービス提供年月_開始, サービス提供年月_終了, 一覧データ);
-        setパラメータ(給付実績情報照会情報, 給付実績基本情報子Divデータ);
+        ViewStateHolder.put(ViewStateKeys.給付実績情報照会検索一覧, 一覧データ);
+        ViewStateHolder.put(ViewStateKeys.給付実績基本情報子Div, 給付実績基本情報子Divデータ);
         div.getKyufuJissekiSearchPanel().setIsOpen(false);
         div.getKyufuJissekiListPanel().setIsOpen(true);
         return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会一覧);
@@ -1203,21 +1171,21 @@ public class KyufuJissekiShokai {
             FlexibleYearMonth サービス提供年月_開始 = new FlexibleYearMonth(div.getHiddenStartYM());
             FlexibleYearMonth サービス提供年月_終了 = new FlexibleYearMonth(div.getHiddenEndYM());
             HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
-            List<KyufujissekiKogakuKaigoServicehi> 給付実績高額介護サービス費データリスト
+            List<KyufujissekiKogakuKaigoServicehiRelate> 給付実績高額介護サービス費データリスト
                     = KyufuJissekiShokaiFinder.createInstance().get給付実績高額介護サービス費データ(
                             被保険者番号, サービス提供年月_開始, サービス提供年月_終了, KEY.equals(div.getHiddenSearchKey()));
             KyufujissekiKogakuKaigoServicehiJyohou servicehiJyohou = new KyufujissekiKogakuKaigoServicehiJyohou();
             servicehiJyohou.setCsData_I(給付実績高額介護サービス費データリスト);
             ViewStateHolder.put(ViewStateKeys.給付実績高額明細管理情報, servicehiJyohou);
         } else {
-            List<KyufuJissekiKihonShukeiRelate> 給付実績基本データ = get給付実績基本データ(div, 列);
+            List<KyufuJissekiKihonShukeiRelate> 給付実績基本データ = get給付実績基本データ(div);
             KyufujissekiKihonJyohou kyufujissekiKihonJyohou = new KyufujissekiKihonJyohou();
             kyufujissekiKihonJyohou.setCsData_A(給付実績基本データ);
             ViewStateHolder.put(ViewStateKeys.給付実績基本情報, kyufujissekiKihonJyohou);
         }
     }
 
-    private List<KyufuJissekiKihonShukeiRelate> get給付実績基本データ(KyufuJissekiShokaiDiv div, int 列) {
+    private List<KyufuJissekiKihonShukeiRelate> get給付実績基本データ(KyufuJissekiShokaiDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         FlexibleYearMonth サービス提供年月_開始 = new FlexibleYearMonth(div.getHiddenStartYM());
         FlexibleYearMonth サービス提供年月_終了 = new FlexibleYearMonth(div.getHiddenEndYM());
@@ -1663,116 +1631,5 @@ public class KyufuJissekiShokai {
 
     private KyufuJissekiSearchDataBusiness get一覧データ() {
         return ViewStateHolder.get(ViewStateKeys.給付実績情報照会検索一覧, KyufuJissekiSearchDataBusiness.class);
-    }
-
-    private void setパラメータ(KyufuJissekiPrmBusiness 給付実績情報照会情報, KyufuJissekiHeader 給付実績基本情報子Divデータ) {
-        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
-        ShikibetsuCode 識別コード = 資格対象者.get識別コード();
-        SetaiCode 世帯コード = 資格対象者.get世帯コード();
-        KojinKakuteiKey key = new KojinKakuteiKey();
-        key.set識別コード(識別コード);
-        key.set被保険者番号(被保険者番号);
-        key.set世帯コード(世帯コード);
-        給付実績情報照会情報.setKojinKakuteiKey(key);
-        ViewStateHolder.put(ViewStateKeys.給付実績情報照会検索一覧, 給付実績情報照会情報.getSearchData());
-        KyufujissekiKihonJyohou kyufujissekiKihonJyohou = new KyufujissekiKihonJyohou();
-        kyufujissekiKihonJyohou.setCsData_A(給付実績情報照会情報.getCsData_A());
-        ViewStateHolder.put(ViewStateKeys.給付実績基本情報, kyufujissekiKihonJyohou);
-        KyufujissekiMeisaiJyohou kyufujissekiMeisaiJyohou = new KyufujissekiMeisaiJyohou();
-        kyufujissekiMeisaiJyohou.setCsData_B(給付実績情報照会情報.getCsData_B());
-        ViewStateHolder.put(ViewStateKeys.給付実績サービス明細情報, kyufujissekiMeisaiJyohou);
-        KyufujissekiKinkyuShisetsuRyoyoJyohou kyufujissekiJyohou = new KyufujissekiKinkyuShisetsuRyoyoJyohou();
-        kyufujissekiJyohou.setCsData_C(給付実績情報照会情報.getCsData_C());
-        ViewStateHolder.put(ViewStateKeys.給付実績施設療養情報, kyufujissekiJyohou);
-        KyufujissekiTokuteiSinryohiJyohou tokuteiSinryohiJyohou = new KyufujissekiTokuteiSinryohiJyohou();
-        tokuteiSinryohiJyohou.setCsData_D(給付実績情報照会情報.getCsData_D());
-        ViewStateHolder.put(ViewStateKeys.給付実績特定診療費情報, tokuteiSinryohiJyohou);
-        KyufujissekiTokuteiSinryoTokubetsuRyoyoJyohou tokubetsuRyoyoJyohou
-                = new KyufujissekiTokuteiSinryoTokubetsuRyoyoJyohou();
-        tokubetsuRyoyoJyohou.setCsData_J(給付実績情報照会情報.getCsData_J());
-        ViewStateHolder.put(ViewStateKeys.給付実績特定診療費_特別療養費, tokubetsuRyoyoJyohou);
-        KyufujissekiShokujiHiyoJyohou shokujiHiyoJyohou = new KyufujissekiShokujiHiyoJyohou();
-        shokujiHiyoJyohou.setCsData_E(給付実績情報照会情報.getCsData_E());
-        ViewStateHolder.put(ViewStateKeys.給付実績食事費用情報, shokujiHiyoJyohou);
-        KyufujissekiKyotakuServiceJyohou kyotakuServiceJyohou = new KyufujissekiKyotakuServiceJyohou();
-        kyotakuServiceJyohou.setCsData_F(給付実績情報照会情報.getCsData_F());
-        ViewStateHolder.put(ViewStateKeys.給付実績計画費情報, kyotakuServiceJyohou);
-        KyufujissekiFukushiYoguHanbaihiJyohou yoguHanbaihiJyohou = new KyufujissekiFukushiYoguHanbaihiJyohou();
-        yoguHanbaihiJyohou.setCsData_G(給付実績情報照会情報.getCsData_G());
-        ViewStateHolder.put(ViewStateKeys.給付実績福祉用具情報, yoguHanbaihiJyohou);
-        KyufujissekiJutakuKaishuhiJyohou kaishuhiJyohou = new KyufujissekiJutakuKaishuhiJyohou();
-        kaishuhiJyohou.setCsData_H(給付実績情報照会情報.getCsData_H());
-        ViewStateHolder.put(ViewStateKeys.給付実績住宅改修情報, kaishuhiJyohou);
-        KyufujissekiKogakuKaigoServicehiJyohou servicehiJyohou = new KyufujissekiKogakuKaigoServicehiJyohou();
-        servicehiJyohou.setCsData_I(給付実績情報照会情報.getCsData_I());
-        ViewStateHolder.put(ViewStateKeys.給付実績高額明細管理情報, servicehiJyohou);
-        KyufujissekiTokuteiNyushosyaKaigoServiceHiyoJyohou serviceHiyoJyohou
-                = new KyufujissekiTokuteiNyushosyaKaigoServiceHiyoJyohou();
-        serviceHiyoJyohou.setCsData_K(給付実績情報照会情報.getCsData_K());
-        ViewStateHolder.put(ViewStateKeys.給付実績特定入所者介護サービス費用情報, serviceHiyoJyohou);
-        KyufuJissekiShakaiFukushiHojinKeigengakuJyohou keigengakuJyohou
-                = new KyufuJissekiShakaiFukushiHojinKeigengakuJyohou();
-        keigengakuJyohou.setCsData_L(給付実績情報照会情報.getCsData_L());
-        ViewStateHolder.put(ViewStateKeys.給付実績社会福祉法人軽減額情報, keigengakuJyohou);
-        KyufuJissekiCareManagementHiJyohou managementHiJyohou = new KyufuJissekiCareManagementHiJyohou();
-        managementHiJyohou.setCsData_M(給付実績情報照会情報.getCsData_M());
-        ViewStateHolder.put(ViewStateKeys.給付実績ケアマネジメント費情報, managementHiJyohou);
-        KyufujissekiMeisaiJushochiTokureiJyohou jushochiTokureiJyohou
-                = new KyufujissekiMeisaiJushochiTokureiJyohou();
-        jushochiTokureiJyohou.setCsData_N(給付実績情報照会情報.getCsData_N());
-        ViewStateHolder.put(ViewStateKeys.給付実績明細_住所地特例, jushochiTokureiJyohou);
-        KyufujissekiShukeiJyohou shukeiJyohou = new KyufujissekiShukeiJyohou();
-        shukeiJyohou.setCsData_Z(給付実績情報照会情報.getCsData_Z());
-        ViewStateHolder.put(ViewStateKeys.給付実績集計情報, shukeiJyohou);
-        KyufujissekiShoteiShikkanShisetsuRyoyoJyohou shisetsuRyoyoJyohou
-                = new KyufujissekiShoteiShikkanShisetsuRyoyoJyohou();
-        shisetsuRyoyoJyohou.setCsData_P(給付実績情報照会情報.getCsData_P());
-        ViewStateHolder.put(ViewStateKeys.給付実績所定疾患施設療養費, shisetsuRyoyoJyohou);
-        JukyushaDaichoJyohou jukyushaDaichoJyohou = new JukyushaDaichoJyohou();
-        jukyushaDaichoJyohou.setJukyushaData(給付実績情報照会情報.getJukyushaData());
-        ViewStateHolder.put(ViewStateKeys.受給者台帳情報, jukyushaDaichoJyohou);
-        clearパラメータ(給付実績情報照会情報);
-        ViewStateHolder.put(ViewStateKeys.給付実績基本情報子Div, 給付実績基本情報子Divデータ);
-    }
-
-    private void clearパラメータ(KyufuJissekiPrmBusiness 給付実績情報照会情報) {
-        KyufuJissekiSearchDataBusiness searchData = new KyufuJissekiSearchDataBusiness();
-        給付実績情報照会情報.setSearchData(searchData);
-        List<KyufuJissekiKihonShukeiRelate> csData_A = new ArrayList<>();
-        給付実績情報照会情報.setCsData_A(csData_A);
-        List<KyufujissekiMeisaiBusiness> csData_B = new ArrayList<>();
-        給付実績情報照会情報.setCsData_B(csData_B);
-        List<KyufujissekiKinkyuShisetsuRyoyo> csData_C = new ArrayList<>();
-        給付実績情報照会情報.setCsData_C(csData_C);
-        List<KyufujissekiTokuteiSinryohi> csData_D = new ArrayList<>();
-        給付実績情報照会情報.setCsData_D(csData_D);
-        List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> csData_J = new ArrayList<>();
-        給付実績情報照会情報.setCsData_J(csData_J);
-        List<KyufujissekiShokujiHiyo> csData_E = new ArrayList<>();
-        給付実績情報照会情報.setCsData_E(csData_E);
-        List<KyufujissekiKyotakuServiceBusiness> csData_F = new ArrayList<>();
-        給付実績情報照会情報.setCsData_F(csData_F);
-        List<KyufujissekiFukushiYoguHanbaihiBusiness> csData_G = new ArrayList<>();
-        給付実績情報照会情報.setCsData_G(csData_G);
-        List<KyufujissekiJutakuKaishuhiBusiness> csData_H = new ArrayList<>();
-        給付実績情報照会情報.setCsData_H(csData_H);
-        List<KyufujissekiKogakuKaigoServicehi> csData_I = new ArrayList<>();
-        給付実績情報照会情報.setCsData_I(csData_I);
-        List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> csData_K = new ArrayList<>();
-        給付実績情報照会情報.setCsData_K(csData_K);
-        List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> csData_L = new ArrayList<>();
-        給付実績情報照会情報.setCsData_L(csData_L);
-        List<KyufuJissekiCareManagementHiBusiness> csData_M = new ArrayList<>();
-        給付実績情報照会情報.setCsData_M(csData_M);
-        List<KyufujissekiMeisaiJushochiTokureiBusiness> csData_N = new ArrayList<>();
-        給付実績情報照会情報.setCsData_N(csData_N);
-        List<KyufujissekiShukei> csData_Z = new ArrayList<>();
-        給付実績情報照会情報.setCsData_Z(csData_Z);
-        List<KyufujissekiShoteiShikkanShisetsuRyoyo> csData_P = new ArrayList<>();
-        給付実績情報照会情報.setCsData_P(csData_P);
-        List<JukyushaDaicho> jukyushaData = new ArrayList<>();
-        給付実績情報照会情報.setJukyushaData(jukyushaData);
-        ViewStateHolder.put(ViewStateKeys.給付実績情報照会情報, 給付実績情報照会情報);
     }
 }

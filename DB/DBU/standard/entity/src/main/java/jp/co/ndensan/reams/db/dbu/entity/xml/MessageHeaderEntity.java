@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @reamsid_L DBU-4880-100 dingyi
  */
+@SuppressWarnings("checkstyle:illegaltype")
 @XmlType(propOrder = {"msgId", "msgTypeId", "msgMode", "sourceSystemID", "destinationSystemID", "receptionNumber", "msgResult"})
 public class MessageHeaderEntity {
 

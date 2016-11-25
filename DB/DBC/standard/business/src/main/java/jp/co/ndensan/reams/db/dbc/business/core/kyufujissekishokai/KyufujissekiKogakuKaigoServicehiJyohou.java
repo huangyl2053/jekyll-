@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,5 +20,5 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufujissekiKogakuKaigoServicehiJyohou implements Serializable {
 
-    private List<KyufujissekiKogakuKaigoServicehi> csData_I;
+    private List<KyufujissekiKogakuKaigoServicehiRelate> csData_I;
 }

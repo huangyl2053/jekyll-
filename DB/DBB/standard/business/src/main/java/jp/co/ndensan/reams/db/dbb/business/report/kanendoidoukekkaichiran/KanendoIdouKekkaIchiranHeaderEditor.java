@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranSource;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -61,17 +61,12 @@ public class KanendoIdouKekkaIchiranHeaderEditor implements IKanendoIdouKekkaIch
         RString time = inputEntity.get調定日時().getRDateTime().getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = date.concat(RString.HALF_SPACE).concat(time);
-        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+        KanendoKiUtil 月期対応取得_普徴 = new KanendoKiUtil();
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         List<Kitsuki> 表記リスト = 期月リスト_普徴.toList();
-        Kitsuki 最終法定納期 = 期月リスト_普徴.get最終法定納期();
         List<RString> 期の表記 = new ArrayList<>();
         for (Kitsuki 期 : 表記リスト) {
-            if (期.get期AsInt() <= 最終法定納期.get期AsInt()) {
-                期の表記.add(期.get表記().asX期());
-            } else {
-                期の表記.add(RString.EMPTY);
-            }
+            期の表記.add(期.get表記().asX期());
         }
         Collections.reverse(期の表記);
         source.listFuchoKi_1 = 期の表記.get(NUM_0);

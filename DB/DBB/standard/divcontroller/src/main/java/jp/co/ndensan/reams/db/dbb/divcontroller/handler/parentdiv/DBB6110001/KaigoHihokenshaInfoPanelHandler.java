@@ -250,6 +250,8 @@ public class KaigoHihokenshaInfoPanelHandler {
      * @param 宛名情報 IShikibetsuTaisho
      */
     public void setRentaiNofuGimushaInfo(IShikibetsuTaisho 宛名情報) {
+        div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().setValue(RDate.getNowDate());
+        div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().setValue(null);
         div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().setDomain(宛名情報.get識別コード() == null ? null
                 : 宛名情報.get識別コード());
         div.getRentaiNofuGimushaInfo().getTxtSetaiCode().setDomain(宛名情報.get世帯コード() == null ? null

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nendokirikae.NendoKirikaeMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.nendokirikae.NendoKirikaeProcessParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -28,15 +29,6 @@ public class InsetDbT7022ShoriDateKanriProcess extends BatchProcessBase<DbT7022S
     private NendoKirikaeMybatisParameter parameter;
     private static final int INT_1 = 1;
     private static final RString 連番_0001 = new RString("0001");
-    private static final RString 処理名_異動賦課 = new RString("異動賦課");
-    private static final RString 処理名_異動賦課確定 = new RString("異動賦課確定");
-    private static final RString 処理名_仮算定異動賦課 = new RString("仮算定異動賦課");
-    private static final RString 処理名_仮算定異動賦課確定 = new RString("仮算定異動賦課確定");
-    private static final RString 処理名_所得引出 = new RString("所得引出");
-    private static final RString 処理名_所得情報一覧表作成 = new RString("所得情報一覧表作成");
-    private static final RString 処理名_調定簿作成 = new RString("調定簿作成");
-    private static final RString 処理名_過年度賦課確定 = new RString("過年度賦課確定");
-    private static final RString 処理名_過年度賦課 = new RString("過年度賦課");
 
     private List<DbT7022ShoriDateKanriEntity> 異動賦課EntityList;
     private List<DbT7022ShoriDateKanriEntity> 過年度賦課EntityList;
@@ -68,11 +60,11 @@ public class InsetDbT7022ShoriDateKanriProcess extends BatchProcessBase<DbT7022S
 
     @Override
     protected void process(DbT7022ShoriDateKanriEntity entity) {
-        if (is新年度分を作成しない(entity) || 処理名_過年度賦課.equals(entity.getShoriName())) {
-            if (処理名_異動賦課.equals(entity.getShoriName())) {
+        if (is新年度分を作成しない(entity) || ShoriName.過年度賦課.get名称().equals(entity.getShoriName())) {
+            if (ShoriName.異動賦課.get名称().equals(entity.getShoriName())) {
                 異動賦課EntityList.add(entity);
             }
-            if (処理名_過年度賦課.equals(entity.getShoriName())) {
+            if (ShoriName.過年度賦課.get名称().equals(entity.getShoriName())) {
                 過年度賦課EntityList.add(entity);
             }
         } else {
@@ -88,14 +80,14 @@ public class InsetDbT7022ShoriDateKanriProcess extends BatchProcessBase<DbT7022S
     }
 
     private boolean is新年度分を作成しない(DbT7022ShoriDateKanriEntity entity) {
-        return 処理名_異動賦課.equals(entity.getShoriName())
-                || 処理名_異動賦課確定.equals(entity.getShoriName())
-                || 処理名_仮算定異動賦課.equals(entity.getShoriName())
-                || 処理名_仮算定異動賦課確定.equals(entity.getShoriName())
-                || 処理名_所得引出.equals(entity.getShoriName())
-                || 処理名_所得情報一覧表作成.equals(entity.getShoriName())
-                || 処理名_調定簿作成.equals(entity.getShoriName())
-                || 処理名_過年度賦課確定.equals(entity.getShoriName());
+        return ShoriName.異動賦課.get名称().equals(entity.getShoriName())
+                || ShoriName.異動賦課確定.get名称().equals(entity.getShoriName())
+                || ShoriName.仮算定異動賦課.get名称().equals(entity.getShoriName())
+                || ShoriName.仮算定異動賦課確定.get名称().equals(entity.getShoriName())
+                || ShoriName.所得引出.get名称().equals(entity.getShoriName())
+                || ShoriName.所得情報一覧表作成.get名称().equals(entity.getShoriName())
+                || ShoriName.調定簿作成.get名称().equals(entity.getShoriName())
+                || ShoriName.過年度賦課確定.get名称().equals(entity.getShoriName());
     }
 
     @Override
@@ -127,12 +119,18 @@ public class InsetDbT7022ShoriDateKanriProcess extends BatchProcessBase<DbT7022S
         new過年度賦課Entity.setNendo(最終の過年度賦課Entity.getNendo().plusYear(INT_1));
         new過年度賦課Entity.setNendoNaiRenban(連番_0001);
         if (is最終の過年度賦課基準日時Before最終の異動賦課基準日時(最終の異動賦課Entity, 最終の過年度賦課Entity)) {
+            new過年度賦課Entity.setKijunYMD(最終の過年度賦課Entity.getKijunYMD());
             new過年度賦課Entity.setKijunTimestamp(最終の過年度賦課Entity.getKijunTimestamp());
+            new過年度賦課Entity.setTaishoKaishiYMD(最終の過年度賦課Entity.getTaishoKaishiYMD());
             new過年度賦課Entity.setTaishoKaishiTimestamp(最終の過年度賦課Entity.getTaishoKaishiTimestamp());
+            new過年度賦課Entity.setTaishoShuryoYMD(最終の過年度賦課Entity.getTaishoShuryoYMD());
             new過年度賦課Entity.setTaishoShuryoTimestamp(最終の過年度賦課Entity.getTaishoShuryoTimestamp());
         } else {
+            new過年度賦課Entity.setKijunYMD(最終の異動賦課Entity.getKijunYMD());
             new過年度賦課Entity.setKijunTimestamp(最終の異動賦課Entity.getKijunTimestamp());
+            new過年度賦課Entity.setTaishoKaishiYMD(最終の異動賦課Entity.getTaishoKaishiYMD());
             new過年度賦課Entity.setTaishoKaishiTimestamp(最終の異動賦課Entity.getTaishoKaishiTimestamp());
+            new過年度賦課Entity.setTaishoShuryoYMD(最終の異動賦課Entity.getTaishoShuryoYMD());
             new過年度賦課Entity.setTaishoShuryoTimestamp(最終の異動賦課Entity.getTaishoShuryoTimestamp());
         }
         writer.insert(new過年度賦課Entity);

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifukakakutei;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteifukakakutei.ITokuchokarisanteiMapper;
@@ -38,7 +37,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     private final DbT7022ShoriDateKanriDac 介護賦課Dac;
     private static final RString 最大年度内連番 = new RString("0001");
     private static final RString 処理枝番 = new RString("0001");
-    private static final RString セル = new RString("0");
+    private static final RString 零 = new RString("0");
     private final MapperProvider mapperProvider;
     private static final int 格式 = 4;
     private final UrT0705ChoteiKyotsuDac urT0705;
@@ -115,8 +114,12 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     private int insertKijunDateTime_登録(FlexibleYear 賦課年度, RString 処理名) {
         if (処理名.equals(ShoriName.仮算定異動賦課確定.get名称()) || 処理名.equals(ShoriName.異動賦課確定.get名称())) {
             DbT7022ShoriDateKanriEntity 登録_処理Entity = 介護賦課Dac.select最大年度内連番_処理名(賦課年度, 処理名);
-            if (null == 登録_処理Entity || null == 登録_処理Entity.getNendoNaiRenban()) {
+            if (null == 登録_処理Entity) {
                 登録_処理Entity = new DbT7022ShoriDateKanriEntity();
+            }
+            if (null == 登録_処理Entity.getNendoNaiRenban())
+            {
+                登録_処理Entity.setNendoNaiRenban(零);
             }
             IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
             登録_処理Entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);

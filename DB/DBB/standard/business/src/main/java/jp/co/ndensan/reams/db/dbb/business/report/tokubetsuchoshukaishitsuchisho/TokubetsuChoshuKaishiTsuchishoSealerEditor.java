@@ -37,7 +37,6 @@ public class TokubetsuChoshuKaishiTsuchishoSealerEditor implements ITokubetsuCho
     private static final RString 特徴期別金額4期 = new RString("4");
     private static final RString 特徴期別金額5期 = new RString("5");
     private static final RString 特徴期別金額6期 = new RString("6");
-    private static final int MULTIPLY = 3;
     private static final RString TOKEN = new RString("～");
 
     /**

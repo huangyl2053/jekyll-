@@ -302,7 +302,8 @@ public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishosh
             entity.setTaishoKaishiYMD(new FlexibleDate(parameter.get対象月().toString() + "01"));
             entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get対象月().toString() + "01000000"));
             entity.setTaishoShuryoYMD(new FlexibleDate(parameter.get対象月().toString() + "01").plusMonth(1).plusDay(-1));
-            entity.setTaishoShuryoTimestamp(new YMDHMS(new FlexibleDate(parameter.get対象月().toString() + "01").plusMonth(1).plusDay(-1).toString() + "000000"));
+            entity.setTaishoShuryoTimestamp(new YMDHMS(new FlexibleDate(
+                    parameter.get対象月().toString() + "01").plusMonth(1).plusDay(-1).toString() + "000000"));
             return entity;
         } else {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();

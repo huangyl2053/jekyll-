@@ -3889,12 +3889,12 @@
             "TmpHonsanteiIdoGennendoTsuchisyoIkatsuHako" AS A
         WHERE 1=1
            <if test="出力対象 == 2">
-            AND A."dbT2015KeisangoJoho_tkKibetsuGaku04" = '0'
-            AND A."dbT2015KeisangoJoho_tkKibetsuGaku05" <![CDATA[>]]> '0'
+            AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku04",0) = '0'
+            AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku05",0) <![CDATA[>]]> '0'
            </if>
            <if test="出力対象 == 3">
-            AND A."dbT2015KeisangoJoho_tkKibetsuGaku05" = '0'
-            AND A."dbT2015KeisangoJoho_tkKibetsuGaku06" <![CDATA[>]]> '0'
+            AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku05",0) = '0'
+            AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku06",0) <![CDATA[>]]> '0'
            </if>
         ${出力順}
     </select>

@@ -623,9 +623,11 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         }
         output.set受給申請事由(get受給申請事由(受給者台帳));
         output.set受給申請日(get日付項目(受給者台帳.getJukyuShinseiYMD()));
-        IYokaigoJotaiKubun 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(
-                システム日付, getColumnValue(受給者台帳.getYokaigoJotaiKubunCode()));
-        output.set受給要介護度(要介護状態区分 != null ? 要介護状態区分.getName() : RString.EMPTY);
+        if (受給者台帳.getYokaigoJotaiKubunCode() != null && !受給者台帳.getYokaigoJotaiKubunCode().isEmpty()) {
+            IYokaigoJotaiKubun 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(
+                    システム日付, getColumnValue(受給者台帳.getYokaigoJotaiKubunCode()));
+            output.set受給要介護度(要介護状態区分 != null ? 要介護状態区分.getName() : RString.EMPTY);
+        }
         output.set受給認定開始日(get日付項目(受給者台帳.getNinteiYukoKikanKaishiYMD()));
         output.set受給認定終了日(get日付項目(受給者台帳.getNinteiYukoKikanShuryoYMD()));
         output.set受給認定日(get日付項目(受給者台帳.getNinteiYMD()));

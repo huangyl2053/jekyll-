@@ -79,8 +79,6 @@ public class JikofutangakuShomeishoToroku {
         div.setDisabled(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNBACKSEARCHRESULT_SEARCHGAMEN, false);
         getHandler(div).onLoad(被保険者番号, 識別コード);
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
-        getHandler(div).自己負担額合計の計算();
         AccessLogger.log(AccessLogType.照会, toPersonalData(被保険者番号, 識別コード));
         return ResponseData.of(div).respond();
     }
@@ -158,6 +156,8 @@ public class JikofutangakuShomeishoToroku {
         if (!list.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
+            getHandler(div).うち70_74歳に係る負担額合計の計算();
+            getHandler(div).自己負担額合計の計算();
         }
         getHandler(div).set証明書登録To読取専用(true);
         div.setExecutionStatus(STATUS_照会);
@@ -179,6 +179,8 @@ public class JikofutangakuShomeishoToroku {
         if (!list.isEmpty() && list.get(0) != null) {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
+            getHandler(div).うち70_74歳に係る負担額合計の計算();
+            getHandler(div).自己負担額合計の計算();
         }
         getHandler(div).set証明書登録To読取専用(false);
         div.getTxtTorokuTaishoNendo().setReadOnly(true);
@@ -225,6 +227,8 @@ public class JikofutangakuShomeishoToroku {
         if (!list.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
+            getHandler(div).うち70_74歳に係る負担額合計の計算();
+            getHandler(div).自己負担額合計の計算();
         }
         getHandler(div).set証明書登録To読取専用(true);
         div.setExecutionStatus(STATUS_削除);

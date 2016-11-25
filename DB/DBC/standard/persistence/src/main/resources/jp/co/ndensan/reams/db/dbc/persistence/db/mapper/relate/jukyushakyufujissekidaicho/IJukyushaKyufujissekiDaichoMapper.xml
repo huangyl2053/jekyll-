@@ -604,7 +604,9 @@
                   AND
                      DbT3017."kyufuJissekiKubunCode" = #{給付実績区分}
               </if>
+              <if test="!すべて選択flag">
               AND (
+              </if>
               <if test="要介護1flag">
                      DbT3017."yoKaigoJotaiKubunCode" IN ('21')
                   OR
@@ -641,7 +643,9 @@
                      DbT3017."yoKaigoJotaiKubunCode" IN ('06')
                   OR
               </if>
-                  1 = 1)
+              <if test="!すべて選択flag">
+                  1 = 2)
+              </if>
               AND (
               <if test="訪問通所他flag">
                      DbT3017."inputShikibetsuNo" IN ('7131','2131')
@@ -759,7 +763,7 @@
                   DbT3017."inputShikibetsuNo" IN ('8171')
                   OR
               </if>
-              1 = 1) 
+              1 = 2) 
               <if test="旧措置特定有無flag">
                   AND
                   DbT3017."kyuSochiNyushoshaTokureiCode" = '1'
@@ -959,7 +963,7 @@
                   "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('8171')
                   OR
               </if>
-              1 = 1) 
+              1 = 2) 
     </sql>
     
     <resultMap id="resultMap_MeisaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.MeisaiRelateEntity" autoMapping="true">
@@ -2060,7 +2064,7 @@
                   DbT3028."inputShikibetsuNo" IN ('8171')
                   OR
               </if>
-              1 = 1) 
+              1 = 2) 
         <if test="公費負担者番号flag">
             AND
             (DbT3028."kohi1FutanNo" = #{公費負担者番号} OR DbT3028."kohi2FutanNo" = #{公費負担者番号} OR DbT3028."kohi3FutanNo" = #{公費負担者番号})

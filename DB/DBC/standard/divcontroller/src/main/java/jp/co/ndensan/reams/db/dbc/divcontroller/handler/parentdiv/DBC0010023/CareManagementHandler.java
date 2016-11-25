@@ -12,10 +12,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCareManagementHiBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010023.CareManagementMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010023.dgCareManagement_Row;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -158,27 +156,6 @@ public class CareManagementHandler {
     private RString to日期変換(FlexibleYearMonth 日期) {
         if (日期 != null && !日期.isEmpty()) {
             return 日期.wareki().toDateString();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString to変換(FlexibleYearMonth 日期) {
-        if (日期 != null && !日期.isEmpty()) {
-            return 日期.toDateString();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString to変換(RDate 日期) {
-        if (日期 != null) {
-            return 日期.getYearMonth().toDateString();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString to事業所番号(JigyoshaNo 事業所番号) {
-        if (事業所番号 != null && !事業所番号.isEmpty()) {
-            return 事業所番号.value();
         }
         return RString.EMPTY;
     }
