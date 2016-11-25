@@ -786,6 +786,20 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         AND "nendoNaiRenban" = #{年度内連番}
 </update>
 
+<select id="get基準日時"
+    parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.UpdateTableMyBatisParameter"
+    resultType="jp.co.ndensan.reams.uz.uza.biz.YMDHMS" fetchSize="1">
+    SELECT
+        処理日付管理マスタ."kijunTimestamp" 
+    FROM
+        rgdb."DbT7022ShoriDateKanri" AS 処理日付管理マスタ
+    WHERE
+        "subGyomuCode" = 'DBB'
+        AND "shoriName" = #{処理名}
+        AND "nendo" = #{賦課年度}
+        AND "nendoNaiRenban" = #{年度内連番}
+</select>
+
 <sql id="処理対象期間取得">
     WITH master AS (
         SELECT

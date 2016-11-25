@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * DBB-1840-040バッチ設計_DBBBT82001_特徴送付情報作成のMapperクラスです。
@@ -228,5 +229,13 @@ public interface ITokuChoSoufuJohoSakuseiBatchMapper {
      * @param parameter UpdateTableMyBatisParameter
      */
     void 処理日付管理テーブル更新(UpdateTableMyBatisParameter parameter);
+
+    /**
+     * 処理日付管理テーブルから基準日時を取得する。
+     *
+     * @param parameter UpdateTableMyBatisParameter
+     * @return YMDHMS 基準日時
+     */
+    YMDHMS get基準日時(UpdateTableMyBatisParameter parameter);
 
 }
