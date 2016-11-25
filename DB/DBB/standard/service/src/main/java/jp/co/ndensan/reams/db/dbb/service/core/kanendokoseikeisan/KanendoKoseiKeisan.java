@@ -7,13 +7,17 @@ package jp.co.ndensan.reams.db.dbb.service.core.kanendokoseikeisan;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.kanendokoseikeisan.KoseigoFukaResult;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.GennenZuijiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.SuitoSeiriTaishoNendo;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ZogakuGengakuKubun;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendokoseikeisan.KanendoKoseiKeisanEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -23,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.ChoteiNendoKibetsuClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FuchoTsukiClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FukaKoseiJohoClass;
@@ -277,58 +282,46 @@ public class KanendoKoseiKeisan {
                 賦課の情報リスト.add(賦課の情報1);
             }
         } else if (is定数(idx, INT_1, size)) {
+            List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
+            List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
             if (賦課の情報2 != null) {
-                List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
-                List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
                 賦課の情報2 = get賦課の情報(賦課の情報2, 算定日時, 普徴期別額List, 特徴期別額List).build();
                 賦課の情報リスト.add(賦課の情報2);
             } else if (賦課の情報1 != null) {
-                List<Decimal> 普徴期別額List = 調定年度期別クラス.get(0).get普徴期別額();
-                List<Decimal> 特徴期別額List = 調定年度期別クラス.get(0).get特徴期別額();
-                賦課の情報1 = get賦課の情報(賦課の情報1, 算定日時, 普徴期別額List, 特徴期別額List)
+                賦課の情報2 = get賦課の情報(賦課の情報1, 算定日時, 普徴期別額List, 特徴期別額List)
                         .set調定年度(賦課の情報1.get賦課年度().plusYear(INT_1)).build();
-                賦課の情報リスト.add(賦課の情報1);
+                賦課の情報リスト.add(賦課の情報2);
             }
         } else if (is定数(idx, INT_2, size)) {
+            List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
+            List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
             if (賦課の情報3 != null) {
-                List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
-                List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
                 賦課の情報3 = get賦課の情報(賦課の情報3, 算定日時, 普徴期別額List, 特徴期別額List).build();
                 賦課の情報リスト.add(賦課の情報3);
             } else if (賦課の情報2 != null) {
-                List<Decimal> 普徴期別額List = 調定年度期別クラス.get(INT_1).get普徴期別額();
-                List<Decimal> 特徴期別額List = 調定年度期別クラス.get(INT_1).get特徴期別額();
                 賦課の情報2 = get賦課の情報(賦課の情報2, 算定日時, 普徴期別額List, 特徴期別額List)
                         .set調定年度(賦課の情報2.get賦課年度().plusYear(INT_1)).build();
                 賦課の情報リスト.add(賦課の情報2);
             } else if (賦課の情報1 != null) {
-                List<Decimal> 普徴期別額List = 調定年度期別クラス.get(0).get普徴期別額();
-                List<Decimal> 特徴期別額List = 調定年度期別クラス.get(0).get特徴期別額();
                 賦課の情報1 = get賦課の情報(賦課の情報1, 算定日時, 普徴期別額List, 特徴期別額List)
                         .set調定年度(賦課の情報1.get賦課年度().plusYear(INT_2)).build();
                 賦課の情報リスト.add(賦課の情報1);
             }
         } else if (is定数(idx, INT_3, size)) {
+            List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
+            List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
             if (賦課の情報4 != null) {
-                List<Decimal> 普徴期別額List = 調定年度期別クラス.get(idx).get普徴期別額();
-                List<Decimal> 特徴期別額List = 調定年度期別クラス.get(idx).get特徴期別額();
                 賦課の情報4 = get賦課の情報(賦課の情報4, 算定日時, 普徴期別額List, 特徴期別額List).build();
                 賦課の情報リスト.add(賦課の情報4);
             } else if (賦課の情報3 != null) {
-                List<Decimal> 普徴期別額List = 調定年度期別クラス.get(INT_2).get普徴期別額();
-                List<Decimal> 特徴期別額List = 調定年度期別クラス.get(INT_2).get特徴期別額();
                 賦課の情報3 = get賦課の情報(賦課の情報3, 算定日時, 普徴期別額List, 特徴期別額List)
                         .set調定年度(賦課の情報3.get賦課年度().plusYear(INT_1)).build();
                 賦課の情報リスト.add(賦課の情報3);
             } else if (賦課の情報2 != null) {
-                List<Decimal> 普徴期別額List = 調定年度期別クラス.get(INT_1).get普徴期別額();
-                List<Decimal> 特徴期別額List = 調定年度期別クラス.get(INT_1).get特徴期別額();
                 賦課の情報2 = get賦課の情報(賦課の情報2, 算定日時, 普徴期別額List, 特徴期別額List)
                         .set調定年度(賦課の情報2.get賦課年度().plusYear(INT_2)).build();
                 賦課の情報リスト.add(賦課の情報2);
             } else if (賦課の情報1 != null) {
-                List<Decimal> 普徴期別額List = 調定年度期別クラス.get(0).get普徴期別額();
-                List<Decimal> 特徴期別額List = 調定年度期別クラス.get(0).get特徴期別額();
                 賦課の情報1 = get賦課の情報(賦課の情報1, 算定日時, 普徴期別額List, 特徴期別額List)
                         .set調定年度(賦課の情報1.get賦課年度().plusYear(INT_3)).build();
                 賦課の情報リスト.add(賦課の情報1);
@@ -423,7 +416,8 @@ public class KanendoKoseiKeisan {
     }
 
     private FukaJohoBuilder get賦課の情報(FukaJoho 賦課の情報, YMDHMS 算定日時, List<Decimal> 普徴期別額List, List<Decimal> 特徴期別額List) {
-        return 賦課の情報.createBuilderForEdit().set特徴期別金額01(特徴期別額List.get(0))
+        FukaJoho fuka = 賦課の情報クローン(賦課の情報);
+        return fuka.createBuilderForEdit().set特徴期別金額01(特徴期別額List.get(0))
                 .set特徴期別金額02(特徴期別額List.get(INT_1)).set特徴期別金額03(特徴期別額List.get(INT_2))
                 .set特徴期別金額04(特徴期別額List.get(INT_3)).set特徴期別金額05(特徴期別額List.get(INT_4))
                 .set特徴期別金額06(特徴期別額List.get(INT_5)).set普徴期別金額01(普徴期別額List.get(0))
@@ -434,6 +428,70 @@ public class KanendoKoseiKeisan {
                 .set普徴期別金額10(普徴期別額List.get(INT_9)).set普徴期別金額11(普徴期別額List.get(INT_10))
                 .set普徴期別金額12(普徴期別額List.get(INT_11)).set普徴期別金額13(普徴期別額List.get(INT_12))
                 .set普徴期別金額14(普徴期別額List.get(INT_13)).set調定日時(算定日時);
+    }
+
+    private FukaJoho 賦課の情報クローン(FukaJoho 賦課の情報) {
+        if (賦課の情報 == null) {
+            return null;
+        }
+        FukaJohoRelateEntity 賦課RelateEntity = new FukaJohoRelateEntity();
+        賦課RelateEntity.set介護賦課Entity(賦課の情報.toEntity());
+        List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
+
+//        if (!賦課の情報.getKibetsuList().isEmpty()) {
+        for (Kibetsu kibetsu : 賦課の情報.getKibetsuList()) {
+            KibetsuEntity entity = new KibetsuEntity();
+            List<UrT0705ChoteiKyotsuEntity> 調定共通Entity = new ArrayList<>();
+            for (ChoteiKyotsu choteiKyotsu : kibetsu.getChoteiKyotsuList()) {
+                調定共通Entity.add(choteiKyotsu.toEntity());
+            }
+            entity.set介護期別Entity(kibetsu.toEntity());
+            entity.set調定共通Entity(調定共通Entity);
+            介護期別RelateEntity.add(entity);
+        }
+//        } else {
+//            for (int i = 0; i < INT_6; i++) {
+//                KibetsuEntity entity = new KibetsuEntity();
+//                Long 調定ID = create調定ID(ChoshuHohoKibetsu.特別徴収.getコード(), i + 1);
+//                Kibetsu kibetsu = new Kibetsu(
+//                        賦課の情報.get調定年度(),
+//                        賦課の情報.get賦課年度(),
+//                        賦課の情報.get通知書番号(),
+//                        賦課の情報.get履歴番号(),
+//                        ChoshuHohoKibetsu.特別徴収.getコード(),
+//                        調定ID.intValue());
+//                kibetsu = kibetsu.createBuilderForEdit().set調定ID(Decimal.ZERO).build();
+//                List<UrT0705ChoteiKyotsuEntity> choteiEntity = new ArrayList<>();
+//                ChoteiKyotsu 調定共通 = new ChoteiKyotsu(調定ID);
+//                調定共通 = 調定共通.createBuilderForEdit().set調定額(Decimal.ZERO).build();
+//                choteiEntity.add(調定共通.toEntity());
+//                entity.set調定共通Entity(choteiEntity);
+//                entity.set介護期別Entity(kibetsu.toEntity());
+//                介護期別RelateEntity.add(entity);
+//            }
+//            for (int i = 0; i < INT_14; i++) {
+//                KibetsuEntity entity = new KibetsuEntity();
+//                Long 調定ID = create調定ID(ChoshuHohoKibetsu.普通徴収.getコード(), i + 1);
+//                Kibetsu kibetsu = new Kibetsu(
+//                        賦課の情報.get調定年度(),
+//                        賦課の情報.get賦課年度(),
+//                        賦課の情報.get通知書番号(),
+//                        賦課の情報.get履歴番号(),
+//                        ChoshuHohoKibetsu.普通徴収.getコード(),
+//                        調定ID.intValue());
+//                kibetsu = kibetsu.createBuilderForEdit().set調定ID(Decimal.ZERO).build();
+//                List<UrT0705ChoteiKyotsuEntity> choteiEntity = new ArrayList<>();
+//                ChoteiKyotsu 調定共通 = new ChoteiKyotsu(調定ID);
+//                調定共通 = 調定共通.createBuilderForEdit().set調定額(Decimal.ZERO).build();
+//                choteiEntity.add(調定共通.toEntity());
+//                entity.set調定共通Entity(choteiEntity);
+//                entity.set介護期別Entity(kibetsu.toEntity());
+//                介護期別RelateEntity.add(entity);
+//            }
+
+//        }
+        賦課RelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
+        return new FukaJoho(賦課RelateEntity);
     }
 
     private void set現在期月(KiwariKeisanInput kiwariKeisanInput, Kitsuki 出納整理期間増額用期月, Kitsuki 出納整理期間減額用期月,
