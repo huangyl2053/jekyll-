@@ -502,7 +502,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
         }
         output.set受給申請事由(get受給申請事由(受給者台帳));
         output.set受給申請日(get日付項目(受給者台帳.getJukyuShinseiYMD()));
-        if (受給者台帳.getYokaigoJotaiKubunCode() != null) {
+        if (受給者台帳.getYokaigoJotaiKubunCode() != null && !受給者台帳.getYokaigoJotaiKubunCode().isEmpty()) {
             IYokaigoJotaiKubun 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(
                     システム日付, getColumnValue(受給者台帳.getYokaigoJotaiKubunCode()));
             output.set受給要介護度(要介護状態区分 != null ? 要介護状態区分.getName() : RString.EMPTY);

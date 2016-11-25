@@ -560,6 +560,7 @@
     </select>
 
     <select resultOrdered="true" id="get認定調査依頼履歴一覧" resultMap="resultMap_getHomonChosaIraisho"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoMybatisParameter"
             fetchSize="500">
         SELECT
         A.直近区分 AS 直近区分
@@ -611,10 +612,9 @@
         AND T7051."shichosonCode" = T5913."shichosonCode"
         AND T5913."jokyoFlag" = True
         WHERE
-        <!-- TODO 内部QA:1982 Redmine#  パラメータはなんだわかりません。-->
-        <!--T5101."hihokenshaNo" IN ('')
-        AND T5101."logicalDeletedFlag" = FALSE -->
-        T5101."logicalDeletedFlag" = FALSE
+        T5101."hihokenshaNo" IN 
+        <foreach collection="被保険者番号リスト" item="被保険者番号" open="(" separator="," close=")">#{被保険者番号}</foreach>
+        AND T5101."logicalDeletedFlag" = FALSE
         ORDER BY
         T5101."ninteiShinseiYMD" DESC
         LIMIT
@@ -633,7 +633,7 @@
         , T5101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分申請時コード
         FROM
         rgdb."DbT5101NinteiShinseiJoho" T5101
-        INNER JOIN (
+        LEFT JOIN (
         SELECT
         T5121."zenkaiShinseishoKanriNo"
         , T5101_2."hihokenshaNo"
@@ -641,8 +641,8 @@
         rgdb."DbT5121ShinseiRirekiJoho" T5121
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" T5101_2
         ON T5101_2."shinseishoKanriNo" = T5121."zenkaiShinseishoKanriNo"
-        <!-- TODO 内部QA:1982 Redmine#  パラメータはなんだわかりません。-->
-        AND T5101_2."hihokenshaNo" IN ('')
+        AND T5101_2."hihokenshaNo" IN 
+        <foreach collection="被保険者番号リスト" item="被保険者番号" open="(" separator="," close=")">#{被保険者番号}</foreach>
         ) D
         ON D."zenkaiShinseishoKanriNo" = T5101."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051

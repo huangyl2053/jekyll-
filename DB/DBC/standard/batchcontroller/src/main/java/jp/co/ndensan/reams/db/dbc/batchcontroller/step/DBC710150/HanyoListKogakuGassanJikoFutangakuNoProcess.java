@@ -439,7 +439,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
         csvEntity.set住所地特例状態(entity.is住所地特例フラグ() ? 住特_表示 : RString.EMPTY);
         csvEntity.set受給申請事由(get受給申請事由(entity));
         csvEntity.set受給申請日(dataToRString(entity.get受給申請年月日()));
-        if (entity.get要介護認定状態区分コード() != null) {
+        if (!RString.isNullOrEmpty(entity.get要介護認定状態区分コード())) {
             csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, entity.get要介護認定状態区分コード()).getName());
         }
         csvEntity.set受給認定開始日(dataToRString(entity.get認定有効期間開始年月日()));

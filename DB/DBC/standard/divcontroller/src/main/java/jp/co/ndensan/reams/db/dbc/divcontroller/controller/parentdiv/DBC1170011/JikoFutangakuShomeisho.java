@@ -16,9 +16,11 @@ import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho.JikoFut
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.JikoFutangakushomeishoFromData;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1170011.DBC1170011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1170011.JikoFutangakuShomeishoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1170011.JikoFutangakushomeishoHandler;
+import jp.co.ndensan.reams.db.dbc.service.core.basic.jikofutangakushomeisho.JikoFutangakushomeishoManager;
 import jp.co.ndensan.reams.db.dbc.service.report.ijikofutangakushomeishoservice.IJikoFutangakushomeisho2009Service;
 import jp.co.ndensan.reams.db.dbc.service.report.ijikofutangakushomeishoservice.IJikoFutangakushomeishoService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -174,9 +176,30 @@ public class JikoFutangakuShomeisho {
             JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(is帳票設計DBC100050, is帳票設計DBC100051, getKey().get識別コード(), getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), メニューID);
             AccessLogger.log(AccessLogType.照会, toPersonalData(data));
             printData(data, reportManager);
+            JikoFutangakushomeishoManager.createInstance().upDate高額合算情報更新(getParameter(div),
+                    div.getJikoFutanShomeishoSakuseiPrint().getTxtHakkoDate().getValue());
             response.data = reportManager.publish();
         }
         return response;
+    }
+
+    private JikoFutangakushomeishoParameter getParameter(JikoFutangakuShomeishoDiv div) {
+        JikoFutangakushomeishoParameter parameter = new JikoFutangakushomeishoParameter();
+        parameter.set被保険者番号(getKey().get被保険者番号().value());
+        FlexibleYear 対象年度 = new FlexibleYear(div.getJikoFutanShomeishoSakuseiPrint().getDdlTaishoNendo().getSelectedKey());
+        RString 支給申請書整理番号 = div.getJikoFutanShomeishoSakuseiPrint().getDdlShikyuShinseishoSeiriNo().getSelectedKey();
+        List<KogakuGassanNendoKey> 高額合算年度キーList = getKey高額合算キークラス().get年度毎キー().get(対象年度);
+        for (KogakuGassanNendoKey kogakuGassanNendoKey : 高額合算年度キーList) {
+            if (支給申請書整理番号.equals(kogakuGassanNendoKey.get支給申請書整理番号())) {
+                parameter.set保険者番号(kogakuGassanNendoKey.get保険者番号().value());
+                parameter.set履歴番号(kogakuGassanNendoKey.get履歴番号());
+            }
+        }
+        parameter.set対象年度(対象年度);
+        parameter.set支給申請書整理番号(支給申請書整理番号);
+        parameter.setメニューID(メニューID);
+        parameter.set識別コード(getKey().get識別コード());
+        return parameter;
     }
 
     /**
@@ -192,6 +215,8 @@ public class JikoFutangakuShomeisho {
             JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(is帳票設計DBC100050, is帳票設計DBC100051, getKey().get識別コード(), getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), メニューID);
             AccessLogger.log(AccessLogType.照会, toPersonalData(data));
             printyouData(data, div, reportManager);
+            JikoFutangakushomeishoManager.createInstance().upDate高額合算情報更新(getParameter(div),
+                    div.getJikoFutanShomeishoSakuseiPrint().getTxtHakkoDate().getValue());
             response.data = reportManager.publish();
         }
         return response;

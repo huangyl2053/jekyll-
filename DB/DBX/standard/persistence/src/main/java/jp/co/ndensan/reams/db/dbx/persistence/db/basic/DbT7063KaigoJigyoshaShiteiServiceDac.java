@@ -44,8 +44,6 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
     private static final RString 有効の開始日 = new RString("有効開始日");
     private static final RString 有効の日 = new RString("有効日");
     private static final RString 介護事業者指定サービス = new RString("介護事業者指定サービス");
-    private static final RString DATE_43 = new RString("43");
-    private static final RString DATE_46 = new RString("46");
 
     /**
      * 主キーで介護事業者指定サービスを取得します。

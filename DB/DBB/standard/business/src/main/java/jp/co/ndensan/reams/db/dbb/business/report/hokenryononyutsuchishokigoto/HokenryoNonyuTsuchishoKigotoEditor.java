@@ -416,7 +416,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     private Decimal get普徴期別金額By期(List<UniversalPhase> 普徴期別金額リスト, int 期) {
         for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
             if (期 == 普徴期別金額.get期()) {
-                return 普徴期別金額.get金額();
+                return nullToDemical(普徴期別金額.get金額());
             }
         }
         return Decimal.ZERO;
@@ -452,6 +452,13 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
 
     private RString get納期終了日(AfterEditInformation data) {
         return null == data ? RString.EMPTY : data.get納期終了日();
+    }
+
+    private Decimal nullToDemical(Decimal 項目) {
+        if (項目 == null) {
+            return Decimal.ZERO;
+        }
+        return 項目;
     }
 
 }

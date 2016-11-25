@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.PrtTokuchoIdojo
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.PrtTokuchoIdojohoKensuhyoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.PrtTokuchoIraijohoIchiranhyoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.PrtTokuchoIraijohoKensuhyoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.SelShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.UpdShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB211001.DBB211001_TokuchoSofuJohoSakuseiParameter;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -74,6 +75,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
     private static final String 特別徴収異動情報一覧表の発行 = "prtTokuchoIdojohoIchiranhyoProcess";
     private static final String 特徴異動情報件数表の発行 = "prtTokuchoIdojohoKensuhyoProcess";
     private static final String 処理日付管理テーブル更新 = "updShoriDateKanriProcess";
+    private static final String 基準日時の取得 = "getShoriDateKanriProcess";
 
     private static final RString 処理対象月_01月 = new RString("01");
     private static final RString 処理対象月_1月 = new RString("1");
@@ -108,6 +110,9 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
 
     @Override
     protected void defineFlow() {
+
+        executeStep(基準日時の取得);
+
         if (is処理対象月が7月()) {
             executeStep(年金特徴回付情報追加用データ作成);
             executeStep(介護徴収方法の追加);
@@ -142,6 +147,23 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
         }
 
         executeStep(処理日付管理テーブル更新);
+    }
+
+    /**
+     * 基準日時の取得の取得を行います。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(基準日時の取得)
+    protected IBatchFlowCommand getShoriDateKanriProcess() {
+        return simpleBatch(SelShoriDateKanriProcess.class)
+                .arguments(getParameter().toUpdShoriDateKanriProcessParameter(
+                                システム日時, is処理対象月が1月(), is処理対象月が2月(),
+                                is処理対象月が3月(), is処理対象月が4月(), is処理対象月が5月(),
+                                is処理対象月が6月(), is処理対象月が7月(), is処理対象月が8月(),
+                                is処理対象月が9月(), is処理対象月が10月(), is処理対象月が11月(),
+                                is処理対象月が12月()))
+                .define();
     }
 
     /**

@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParameterBase {
+public class DBC150040_HeikinriyogakuTokeihyoParameter extends BatchParameterBase {
 
     private static final String TAISHONENDOYM = "taishoNendoYM";
     private static final String KAISHIYM = "kaishiYM";
@@ -44,6 +44,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
     private static final String ISCHIKU1 = "ischiku1";
     private static final String ISCHIKU2 = "ischiku2";
     private static final String ISCHIKU3 = "ischiku3";
+    private static final long serialVersionUID = 1L;
     @BatchParameter(key = TAISHONENDOYM, name = "対象年月")
     private RString taishoNendoYM;
     @BatchParameter(key = KAISHIYM, name = "開始年月")
@@ -53,7 +54,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
     @BatchParameter(key = CHIKUSHITEI, name = "地区指定")
     private RString chikuShitei;
     @BatchParameter(key = SELECTORCHIKULIST, name = "選択地区Map")
-    private Map<RString, RString> selectorChikulist;
+    private Map<String, String> selectorChikulist;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
     private RString shichosonCode;
     @BatchParameter(key = SHICHOSONMEI, name = "市町村名称")
@@ -86,7 +87,7 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
     /**
      * コンストラクタです。
      */
-    public DBC150040_HeikinriyogakuTokeihyoBatchParameter() {
+    public DBC150040_HeikinriyogakuTokeihyoParameter() {
 
     }
 
@@ -113,12 +114,12 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
      * @param ischiku2 is地区2
      * @param ischiku3 is地区3
      */
-    public DBC150040_HeikinriyogakuTokeihyoBatchParameter(
+    public DBC150040_HeikinriyogakuTokeihyoParameter(
             RString taishoNendoYM,
             RString kaishiYM,
             RString shuryoYM,
             RString chikuShitei,
-            Map<RString, RString> 選択地区Map,
+            Map<String, String> 選択地区Map,
             RString shichosonCode,
             RString shichosonMei,
             RString kyuShichosonCode,
@@ -188,8 +189,8 @@ public class DBC150040_HeikinriyogakuTokeihyoBatchParameter extends BatchParamet
     private List<RString> setselectorChikulist() {
         List<RString> chikulist = new ArrayList<>();
         if (0 < selectorChikulist.size()) {
-            for (RString 選択結果 : selectorChikulist.keySet()) {
-                chikulist.add(選択結果);
+            for (String 選択結果 : selectorChikulist.keySet()) {
+                chikulist.add(new RString(選択結果));
             }
         }
         return chikulist;

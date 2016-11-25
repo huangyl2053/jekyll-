@@ -635,8 +635,7 @@ public class JigyoKogakuGassanJikoFutanGaku extends
     }
 
     /**
-     * 保持する高額合算自己負担額を削除対象とします。<br/>
-     * {@link DbT3070KogakuGassanJikoFutanGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する高額合算自己負担額を削除対象とします。<br/> {@link DbT3070KogakuGassanJikoFutanGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KogakuGassanJikoFutanGaku}
      */
@@ -649,6 +648,18 @@ public class JigyoKogakuGassanJikoFutanGaku extends
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new JigyoKogakuGassanJikoFutanGaku(deletedEntity, id);
+    }
+
+    /**
+     * 修正JigyoKogakuGassanJikoFutanGaku
+     *
+     * @return JigyoKogakuGassanJikoFutanGaku {@link ShokanMeisai}のクローン
+     */
+    public JigyoKogakuGassanJikoFutanGaku modified() {
+        DbT3170JigyoKogakuGassanJikoFutanGakuEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new JigyoKogakuGassanJikoFutanGaku(modifiedEntity, id);
     }
 
     /**

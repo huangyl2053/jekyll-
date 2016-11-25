@@ -127,12 +127,18 @@ public class InsetDbT7022ShoriDateKanriProcess extends BatchProcessBase<DbT7022S
         new過年度賦課Entity.setNendo(最終の過年度賦課Entity.getNendo().plusYear(INT_1));
         new過年度賦課Entity.setNendoNaiRenban(連番_0001);
         if (is最終の過年度賦課基準日時Before最終の異動賦課基準日時(最終の異動賦課Entity, 最終の過年度賦課Entity)) {
+            new過年度賦課Entity.setKijunYMD(最終の過年度賦課Entity.getKijunYMD());
             new過年度賦課Entity.setKijunTimestamp(最終の過年度賦課Entity.getKijunTimestamp());
+            new過年度賦課Entity.setTaishoKaishiYMD(最終の過年度賦課Entity.getTaishoKaishiYMD());
             new過年度賦課Entity.setTaishoKaishiTimestamp(最終の過年度賦課Entity.getTaishoKaishiTimestamp());
+            new過年度賦課Entity.setTaishoShuryoYMD(最終の過年度賦課Entity.getTaishoShuryoYMD());
             new過年度賦課Entity.setTaishoShuryoTimestamp(最終の過年度賦課Entity.getTaishoShuryoTimestamp());
         } else {
+            new過年度賦課Entity.setKijunYMD(最終の異動賦課Entity.getKijunYMD());
             new過年度賦課Entity.setKijunTimestamp(最終の異動賦課Entity.getKijunTimestamp());
+            new過年度賦課Entity.setTaishoKaishiYMD(最終の異動賦課Entity.getTaishoKaishiYMD());
             new過年度賦課Entity.setTaishoKaishiTimestamp(最終の異動賦課Entity.getTaishoKaishiTimestamp());
+            new過年度賦課Entity.setTaishoShuryoYMD(最終の異動賦課Entity.getTaishoShuryoYMD());
             new過年度賦課Entity.setTaishoShuryoTimestamp(最終の異動賦課Entity.getTaishoShuryoTimestamp());
         }
         writer.insert(new過年度賦課Entity);

@@ -88,9 +88,11 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
         if (taishogai == null) {
             title = タイトル_特徴平準化対象者一覧表;
         }
-        ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor headerEditor
-                = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor(調定日時, 賦課年度, title, outputOrder);
         if (taishosha != null) {
+            ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor headerEditor
+                    = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor(調定日時,
+                            賦課年度, title, outputOrder, taishosha.get特徴平準化結果対象者(), null);
+
             ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor taishoshaBodyEditor
                     = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(taishosha,
                             null, association, 帳票制御共通);
@@ -98,6 +100,10 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
                     headerEditor, taishoshaBodyEditor);
             writer.writeLine(taishoshaBuilder);
         } else {
+            ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor headerEditor
+                    = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor(調定日時,
+                            賦課年度, title, outputOrder, null, taishogai.get特徴平準化結果対象外());
+
             ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor bodyEditor
                     = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(null,
                             taishogai, association, 帳票制御共通);
