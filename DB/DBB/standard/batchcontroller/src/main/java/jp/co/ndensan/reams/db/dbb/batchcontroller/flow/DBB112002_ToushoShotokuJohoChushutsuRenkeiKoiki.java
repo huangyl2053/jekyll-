@@ -72,7 +72,6 @@ public class DBB112002_ToushoShotokuJohoChushutsuRenkeiKoiki extends BatchFlowBa
                 }
             }
         }
-        executeStep(CSVファイル読み込み);
         executeStep(所得情報をチェックとEUCファイル出力);
         executeStep(介護所得TEMPテーブルに登録);
         executeStep(帳票とEUCファイル出力);

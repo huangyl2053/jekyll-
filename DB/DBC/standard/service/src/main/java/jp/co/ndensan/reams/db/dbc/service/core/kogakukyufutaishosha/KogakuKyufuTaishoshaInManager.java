@@ -363,7 +363,7 @@ public class KogakuKyufuTaishoshaInManager {
                     List<RString> data = csvReader.readLine();
                     if (data != null && !data.isEmpty()) {
                         if (エンドレコード種別.equals(data.get(INDEX_0))) {
-                            continue;
+                            break;
                         }
                         if (レコード種別.equals(data.get(INDEX_0))) {
                             controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -88,6 +89,9 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
     前履歴より前の期間指定 {
                 @Override
                 public boolean apply(KaigoHihokenshaInfoPanelDiv div) {
+                    if (DBB6110001StateName.連帯納付義務者削除.getName().equals(ResponseHolder.getState())) {
+                        return true;
+                    }
                     return SpecHelper.is前履歴より前の期間指定(div);
                 }
             };
@@ -185,13 +189,15 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
                 RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
                 RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
                 for (RentaiGimusha result : list) {
-                    if (result.equals(curResult)) {
+                    if (result.equals(curResult) || result.isDeleted()) {
                         continue;
                     }
                     return !(開始年月日.isBeforeOrEquals(new RDate(result.get開始年月日().toString()))
                             && 終了年月日.isAfterOrEquals(new RDate(result.get開始年月日().toString())))
                             && !(開始年月日.isBeforeOrEquals(new RDate(result.get終了年月日().toString()))
-                            && 終了年月日.isAfterOrEquals(new RDate(result.get終了年月日().toString())));
+                            && 終了年月日.isAfterOrEquals(new RDate(result.get終了年月日().toString())))
+                            && !(開始年月日.isAfterOrEquals(new RDate(result.get開始年月日().toString()))
+                            && 終了年月日.isBeforeOrEquals(new RDate(result.get終了年月日().toString())));
                 }
             }
             return true;
@@ -231,15 +237,36 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             }
             RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
+            int cur履歴 = 履歴番号.toInt();
             RentaiGimusha curResult = holder.getKogakuGassanJikoFutanGaku(identifier);
-            if (list != null) {
-                RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
+            if (list != null && !list.isEmpty()) {
+                FlexibleDate minDate = null;
                 for (RentaiGimusha result : list) {
-                    if (result.equals(curResult)) {
-                        continue;
+                    if (!result.isDeleted() && curResult == null) {
+                        minDate = result.get開始年月日();
+                    } else if (!result.isDeleted() && curResult != null
+                            && cur履歴 > result.get履歴番号().intValue()) {
+                        minDate = result.get開始年月日();
                     }
-                    return !(開始年月日.isBefore(new RDate(result.get開始年月日().toString())));
                 }
+                if (minDate != null) {
+                    return is前履歴より前の期間(div, list, curResult, minDate);
+                }
+            }
+            return true;
+        }
+
+        private static boolean is前履歴より前の期間(KaigoHihokenshaInfoPanelDiv div, List<RentaiGimusha> list,
+                RentaiGimusha curResult, FlexibleDate minDate) {
+            RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
+            for (RentaiGimusha result : list) {
+                if (list.get(0).equals(curResult)) {
+                    return true;
+                }
+                if (result.equals(curResult) || result.isDeleted()) {
+                    continue;
+                }
+                return !(開始年月日.isBefore(new RDate(minDate.toString())));
             }
             return true;
         }

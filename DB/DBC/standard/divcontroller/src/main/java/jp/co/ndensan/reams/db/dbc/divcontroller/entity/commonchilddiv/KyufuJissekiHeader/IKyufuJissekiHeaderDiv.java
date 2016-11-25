@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJiss
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeaderAll;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiRelate;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -257,4 +258,11 @@ public interface IKyufuJissekiHeaderDiv extends ICommonChildDivBaseProperties {
      * @param 給付実績基本情報 給付実績基本情報子Divデータ
      */
     void set給付実績基本情報データ(KyufuJissekiHeaderAll 給付実績基本情報);
+
+    /**
+     * 被保情報を設定します。
+     *
+     * @param 給付実績高額介護サービス費データ 給付実績高額介護サービス費データ
+     */
+    void set被保情報2_1(KyufujissekiKogakuKaigoServicehiRelate 給付実績高額介護サービス費データ);
 }

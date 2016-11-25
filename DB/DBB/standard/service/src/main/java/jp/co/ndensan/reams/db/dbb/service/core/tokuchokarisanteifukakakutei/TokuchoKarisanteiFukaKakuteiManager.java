@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifukakakutei;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteifukakakutei.ITokuchokarisanteiMapper;
@@ -118,8 +117,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
             if (null == 登録_処理Entity) {
                 登録_処理Entity = new DbT7022ShoriDateKanriEntity();
             }
-            if (null == 登録_処理Entity.getNendoNaiRenban())
-            {
+            if (null == 登録_処理Entity.getNendoNaiRenban()) {
                 登録_処理Entity.setNendoNaiRenban(零);
             }
             IAssociation association = AssociationFinderFactory.createInstance().getAssociation();

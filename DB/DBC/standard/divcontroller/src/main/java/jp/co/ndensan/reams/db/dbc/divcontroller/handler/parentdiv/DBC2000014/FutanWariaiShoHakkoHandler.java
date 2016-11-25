@@ -215,7 +215,9 @@ public class FutanWariaiShoHakkoHandler {
     }
 
     private RString get当初発行チェック(FlexibleYear 年度, RString 出力対象) {
-        if (manager.select当初発行チェック(年度, 処理枝番_0000) == null) {
+        if (manager.select当初発行チェック(年度, 処理枝番_0000) == null
+                || manager.select当初発行チェック(年度, 処理枝番_0000).get基準日時() == null
+                || manager.select当初発行チェック(年度, 処理枝番_0000).get基準日時().isEmpty()) {
             return ONE;
         } else if (ONE.equals(出力対象)) {
             if (manager.select当初発行チェック(年度, 処理枝番_0001) != null) {
@@ -246,12 +248,7 @@ public class FutanWariaiShoHakkoHandler {
                 div.getPanelKikan().getTxtKonkaiKaishiDate().clearValue();
                 div.getPanelKikan().getTxtKonkaiKaishiTime().clearValue();
             } else {
-                div.getPanelKikan().getTxtZenkaiKaishiDate().setValue(shoriDateKanri.get対象開始日時().getRDateTime().getDate());
-                div.getPanelKikan().getTxtZenkaiKaishiTime().setValue(shoriDateKanri.get対象開始日時().getRDateTime().getTime());
-                div.getPanelKikan().getTxtZenkaiShuryoDate().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getDate());
-                div.getPanelKikan().getTxtZenkaiShuryoTime().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime());
-                div.getPanelKikan().getTxtKonkaiKaishiDate().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getDate());
-                div.getPanelKikan().getTxtKonkaiKaishiTime().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime());
+                setDate(shoriDateKanri);
             }
             div.getPanelKikan().getTxtKonkaiShuryoDate().setValue(dateTime.getDate());
             div.getPanelKikan().getTxtKonkaiShuryoTime().setValue(dateTime.getTime());
@@ -269,7 +266,7 @@ public class FutanWariaiShoHakkoHandler {
             ShoriDateKanri shoriDateKanri = manager.select当初発行チェック(年度, 処理枝番_0000);
             div.getPanelKikan().getTxtZenkaiKaishiDate().clearValue();
             div.getPanelKikan().getTxtZenkaiKaishiTime().clearValue();
-            if (shoriDateKanri == null) {
+            if (shoriDateKanri == null || shoriDateKanri.get基準日時() == null || shoriDateKanri.get基準日時().isEmpty()) {
                 div.getPanelKikan().getTxtZenkaiShuryoDate().clearValue();
                 div.getPanelKikan().getTxtZenkaiShuryoTime().clearValue();
                 div.getPanelKikan().getTxtKonkaiKaishiDate().clearValue();
@@ -290,6 +287,27 @@ public class FutanWariaiShoHakkoHandler {
             div.getPanelKikan().getTxtKonkaiKaishiTime().setReadOnly(false);
             div.getPanelKikan().getTxtKonkaiShuryoDate().setReadOnly(true);
             div.getPanelKikan().getTxtKonkaiShuryoTime().setReadOnly(true);
+        }
+    }
+
+    private void setDate(ShoriDateKanri shoriDateKanri) {
+        if (shoriDateKanri.get対象開始日時() != null && !shoriDateKanri.get対象開始日時().isEmpty()) {
+            div.getPanelKikan().getTxtZenkaiKaishiDate().setValue(shoriDateKanri.get対象開始日時().getRDateTime().getDate());
+            div.getPanelKikan().getTxtZenkaiKaishiTime().setValue(shoriDateKanri.get対象開始日時().getRDateTime().getTime());
+        } else {
+            div.getPanelKikan().getTxtZenkaiKaishiDate().clearValue();
+            div.getPanelKikan().getTxtZenkaiKaishiTime().clearValue();
+        }
+        if (shoriDateKanri.get対象終了日時() != null && !shoriDateKanri.get対象終了日時().isEmpty()) {
+            div.getPanelKikan().getTxtZenkaiShuryoDate().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getDate());
+            div.getPanelKikan().getTxtZenkaiShuryoTime().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime());
+            div.getPanelKikan().getTxtKonkaiKaishiDate().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getDate());
+            div.getPanelKikan().getTxtKonkaiKaishiTime().setValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime());
+        } else {
+            div.getPanelKikan().getTxtZenkaiShuryoDate().clearValue();
+            div.getPanelKikan().getTxtZenkaiShuryoTime().clearValue();
+            div.getPanelKikan().getTxtKonkaiKaishiDate().clearValue();
+            div.getPanelKikan().getTxtKonkaiKaishiTime().clearValue();
         }
     }
 

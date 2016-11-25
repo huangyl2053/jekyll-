@@ -490,7 +490,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     private void set認定状態区分before施行日高額(Code code, GokeiDataEntity entity, Decimal 金額) {
         RString 認定状態区分 = RString.EMPTY;
-        if (認定状態区分 != null && !認定状態区分.isEmpty()) {
+        if (code != null && !code.isEmpty()) {
             認定状態区分 = code.value();
         }
         if (認定状態区分.equals(要介護1) || 認定状態区分.equals(要介護2) || 認定状態区分.equals(要介護3)
@@ -508,7 +508,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     private void set認定状態区分after施行日高額(Code code, GokeiDataEntity entity, Decimal 金額) {
         RString 認定状態区分 = RString.EMPTY;
-        if (認定状態区分 != null && !認定状態区分.isEmpty()) {
+        if (code != null && !code.isEmpty()) {
             認定状態区分 = code.value();
         }
         if (認定状態区分.equals(要介護1) || 認定状態区分.equals(要介護2) || 認定状態区分.equals(要介護3)

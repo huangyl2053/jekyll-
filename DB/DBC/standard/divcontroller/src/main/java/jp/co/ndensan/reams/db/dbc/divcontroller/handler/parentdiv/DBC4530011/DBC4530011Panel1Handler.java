@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4530011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4530011.DBC4530011Panel1Div;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,7 +41,11 @@ public class DBC4530011Panel1Handler {
     }
 
     private RString getConfig値(Enum key) {
-        return DbBusinessConfig.get(key, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        RString cofig = BusinessConfig.get(key, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (RString.isNullOrEmpty(cofig)) {
+            return RString.EMPTY;
+        }
+        return cofig;
     }
 
     /**

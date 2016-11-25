@@ -29,6 +29,9 @@ import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.TodokedeKubun;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -157,8 +160,11 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         } else {
             div.getTxtTekiyoKikan().setToValue(new RDate(row.getTekiyoShuryoYMD().getValue().toString()));
         }
-        div.getTxtKyotakuSogoJigyoKubun().setValue(居宅サービス履歴.get居宅総合事業区分());
-        div.getTxtKeikakuSakuseiKubun().setValue(JukyushaIF_KeikakuSakuseiKubunCode.toValue(居宅サービス履歴.get作成区分コード()).get名称());
+        div.getTxtKyotakuSogoJigyoKubun().clearValue();
+        div.getTxtKeikakuSakuseiKubun().clearValue();
+        div.getTxtKyotakuSogoJigyoKubun().setValue(居宅サービス履歴.get居宅総合事業区分() != null ? 居宅サービス履歴.get居宅総合事業区分() : RString.EMPTY);
+        div.getTxtKeikakuSakuseiKubun().setValue(居宅サービス履歴.get作成区分コード() != null
+                ? JukyushaIF_KeikakuSakuseiKubunCode.toValue(居宅サービス履歴.get作成区分コード()).get名称() : RString.EMPTY);
         set届出者情報(居宅給付計画届出);
         set計画事業者エリア(居宅サービス履歴);
     }
@@ -203,8 +209,20 @@ public class KyotakuServiceKeikakuShokaiMainHander {
             jigyoshaDiv.setDisplayNone(true);
         } else {
             jigyoshaDiv.setDisplayNone(false);
-            jigyoshaDiv.getTxtJigyoshaNo().setValue(居宅サービス履歴.get事業者番号());
-            jigyoshaDiv.getTxtJigyoshaName().setValue(居宅サービス履歴.get事業者名());
+            jigyoshaDiv.getTxtJigyoshaNo().clearValue();
+            jigyoshaDiv.getTxtJigyoshaName().clearValue();
+            jigyoshaDiv.getTxtServiceShuruiMeisho().clearValue();
+            jigyoshaDiv.getTxtJigyoshaYubinNo().clearValue();
+            jigyoshaDiv.getTxtJigyoshaJusho().clearValue();
+            jigyoshaDiv.getTxtJigyoshaTelNo().clearDomain();
+            jigyoshaDiv.getTxtKanrishaName().clearDomain();
+            jigyoshaDiv.getTxtItakusakiJigyoshaNo().clearValue();
+            jigyoshaDiv.getTxtItakusakiJigyoshaName().clearValue();
+            jigyoshaDiv.getTxtHenkoYMD().clearValue();
+            jigyoshaDiv.getTxtHenkoJiyu().clearValue();
+
+            jigyoshaDiv.getTxtJigyoshaNo().setValue(居宅サービス履歴.get事業者番号() != null ? 居宅サービス履歴.get事業者番号() : RString.EMPTY);
+            jigyoshaDiv.getTxtJigyoshaName().setValue(居宅サービス履歴.get事業者名() != null ? 居宅サービス履歴.get事業者名() : RString.EMPTY);
             RString サービス種類コード = 居宅サービス履歴.getサービス種類コード().getColumnValue();
             RString サービス種類 = RString.EMPTY;
             if (ServiceCategoryShurui.居宅支援.getコード().equals(サービス種類コード)) {
@@ -219,16 +237,20 @@ public class KyotakuServiceKeikakuShokaiMainHander {
                 サービス種類 = サービス種類_ケアマネジメント;
             }
             jigyoshaDiv.getTxtServiceShuruiMeisho().setValue(サービス種類);
-            jigyoshaDiv.getTxtJigyoshaYubinNo().setValue(居宅サービス履歴.get事業者郵便番号());
-            jigyoshaDiv.getTxtJigyoshaJusho().setValue(居宅サービス履歴.get事業者住所().getColumnValue());
-            jigyoshaDiv.getTxtJigyoshaTelNo().setDomain(居宅サービス履歴.get事業者電話番号());
-            jigyoshaDiv.getTxtKanrishaName().setDomain(居宅サービス履歴.get管理者名());
-            jigyoshaDiv.getTxtItakusakiJigyoshaNo().setValue(居宅サービス履歴.get委託先情報者コード());
-            jigyoshaDiv.getTxtItakusakiJigyoshaName().setValue(居宅サービス履歴.get委託先情報者名());
+            jigyoshaDiv.getTxtJigyoshaYubinNo().setValue(居宅サービス履歴.get事業者郵便番号() != null ? 居宅サービス履歴.get事業者郵便番号()
+                    : YubinNo.EMPTY);
+            jigyoshaDiv.getTxtJigyoshaJusho().setValue(居宅サービス履歴.get事業者住所() != null ? 居宅サービス履歴.get事業者住所().getColumnValue()
+                    : RString.EMPTY);
+            jigyoshaDiv.getTxtJigyoshaTelNo().setDomain(居宅サービス履歴.get事業者電話番号() != null ? 居宅サービス履歴.get事業者電話番号() : TelNo.EMPTY);
+            jigyoshaDiv.getTxtKanrishaName().setDomain(居宅サービス履歴.get管理者名() != null ? 居宅サービス履歴.get管理者名() : AtenaMeisho.EMPTY);
+            jigyoshaDiv.getTxtItakusakiJigyoshaNo().setValue(居宅サービス履歴.get委託先情報者コード() != null ? 居宅サービス履歴.get委託先情報者コード()
+                    : RString.EMPTY);
+            jigyoshaDiv.getTxtItakusakiJigyoshaName().setValue(居宅サービス履歴.get委託先情報者名() != null ? 居宅サービス履歴.get委託先情報者名()
+                    : RString.EMPTY);
             if (居宅サービス履歴.get事業者変更年月日() != null && !居宅サービス履歴.get事業者変更年月日().isEmpty()) {
                 jigyoshaDiv.getTxtHenkoYMD().setValue(new RDate(居宅サービス履歴.get事業者変更年月日().toString()));
             }
-            jigyoshaDiv.getTxtHenkoJiyu().setValue(居宅サービス履歴.get事業者変更事由());
+            jigyoshaDiv.getTxtHenkoJiyu().setValue(居宅サービス履歴.get事業者変更事由() != null ? 居宅サービス履歴.get事業者変更事由() : RString.EMPTY);
         }
     }
 

@@ -80,7 +80,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranPageBreak extends PageBreaker<T
                 && !currentRecord.getSource().listLower_3.equals(nextRecord.getSource().listLower_3)) {
             flag = true;
         } else if (!flag && this.keys.contains(DBB200005_HeijunkaKeisanIchiran.市町村コード.get項目ID())
-                && !currentRecord.getSource().hokenshacd.equals(nextRecord.getSource().hokenshacd)) {
+                && !currentRecord.getSource().shichosonCode.equals(nextRecord.getSource().shichosonCode)) {
             flag = true;
         }
         return flag;

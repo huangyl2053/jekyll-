@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB514001.DBB514001_NofugakuDataSakuseiTandokuShichosonParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB514001.NofugakuDataTsushutsuJoken;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001.NoufuGakuDataSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001.dgKoikiShoriTaishoSelect_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB5140001.dgTanitsuShoriJoken_Row;
@@ -25,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -51,6 +51,7 @@ public class NoufuGakuDataSakuseiHandler {
     private static final RString 収入日 = new RString("収入日");
     private static final RString SPACE = new RString(" ");
     private static final RString 変更理由 = new RString("納付額データ作成実行時に設定");
+    private static final ReportId 定値_帳票ID = new ReportId("DBB300005_NofugakuIchiranDaihyo");
     private static final int INT_1 = 1;
     private static final int SUBCONTRACT_1 = -1;
     private static final int INT_12 = 12;
@@ -87,7 +88,7 @@ public class NoufuGakuDataSakuseiHandler {
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
         div.getShoriNaiyo().getTxtTaishoNendo().setValue(new RDate(調定年度.toString()));
-        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB300005.getReportId());
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBB介護賦課, 定値_帳票ID);
         return 画面の状態;
     }
 

@@ -521,7 +521,7 @@ ORDER BY
             "DbT3027KyufujissekiJutakuKaishuhi"."meisaiNo"
     </select>
     
-    <select resultOrdered="true" id="get給付実績高額介護サービス費データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity" 
+    <select resultOrdered="true" id="get給付実績高額介護サービス費データ" resultMap="ResultMap_給付実績高額介護サービス費データ" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
         with "給付実績1" AS (
           SELECT *
@@ -543,14 +543,38 @@ ORDER BY
          )
 
       SELECT
-        "DbT3028KyufujissekiKogakuKaigoServicehi".*
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3028KyufujissekiKogakuKaigoServicehiMapper.allColumns_DbT3028KyufujissekiKogakuKaigoServicehi" />
+        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper.allColumns_DbT3118ShikibetsuNoKanri" />
       FROM
         "給付実績1" AS "DbT3028KyufujissekiKogakuKaigoServicehi" 
+      LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" as "DbT3118ShikibetsuNoKanri" 
+        ON "DbT3028KyufujissekiKogakuKaigoServicehi"."inputShikibetsuNo" = "DbT3118ShikibetsuNoKanri"."shikibetsuNo" 
+        AND "DbT3118ShikibetsuNoKanri"."shikibetsuNoKubon" = '2' 
+        AND "DbT3118ShikibetsuNoKanri"."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3028KyufujissekiKogakuKaigoServicehi"."serviceTeikyoYM" 
+        AND "DbT3028KyufujissekiKogakuKaigoServicehi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT3118ShikibetsuNoKanri"."tekiyoShuryoYM" 
       ORDER BY
         "DbT3028KyufujissekiKogakuKaigoServicehi"."serviceTeikyoYM"
         ,"DbT3028KyufujissekiKogakuKaigoServicehi"."inputShikibetsuNo"
         , "DbT3028KyufujissekiKogakuKaigoServicehi"."seiriNo" 
     </select>
+    
+    <resultMap id="ResultMap_給付実績高額介護サービス費データ" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiRelateEntity" autoMapping="true">
+        <id property="給付実績高額介護サービス費Entity.kokanJohoShikibetsuNo" column="dbT3028KyufujissekiKogakuKaigoServicehi_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+        <id property="給付実績高額介護サービス費Entity.inputShikibetsuNo" column="dbT3028KyufujissekiKogakuKaigoServicehi_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <id property="給付実績高額介護サービス費Entity.recodeShubetsuCode" column="dbT3028KyufujissekiKogakuKaigoServicehi_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績高額介護サービス費Entity.shokisaiHokenshaNo" column="dbT3028KyufujissekiKogakuKaigoServicehi_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="給付実績高額介護サービス費Entity.hiHokenshaNo" column="dbT3028KyufujissekiKogakuKaigoServicehi_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="給付実績高額介護サービス費Entity.serviceTeikyoYM" column="dbT3028KyufujissekiKogakuKaigoServicehi_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="給付実績高額介護サービス費Entity.kyufuSakuseiKubunCode" column="dbT3028KyufujissekiKogakuKaigoServicehi_kyufuSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績高額介護サービス費Entity.kyufuJissekiKubunCode" column="dbT3028KyufujissekiKogakuKaigoServicehi_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績高額介護サービス費Entity.toshiNo" column="dbT3028KyufujissekiKogakuKaigoServicehi_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="給付実績高額介護サービス費Entity.uketsukeYMD" column="dbT3028KyufujissekiKogakuKaigoServicehi_uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="給付実績高額介護サービス費Entity.ketteiYMD" column="dbT3028KyufujissekiKogakuKaigoServicehi_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="識別番号管理Entity.shikibetsuNo" column="dbT3118ShikibetsuNoKanri_shikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="識別番号管理Entity.tekiyoKaishiYM" column="dbT3118ShikibetsuNoKanri_tekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <association property="識別番号管理Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper.ResultMap_DbT3118ShikibetsuNoKanriEntity"/>
+        <association property="給付実績高額介護サービス費Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3028KyufujissekiKogakuKaigoServicehiMapper.ResultMap_DbT3028KyufujissekiKogakuKaigoServicehiEntity"/>
+    </resultMap>
     
     <select resultOrdered="true" id="get給付実績特定入所者介護サービス費用データ" resultMap="ResultMap_KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">

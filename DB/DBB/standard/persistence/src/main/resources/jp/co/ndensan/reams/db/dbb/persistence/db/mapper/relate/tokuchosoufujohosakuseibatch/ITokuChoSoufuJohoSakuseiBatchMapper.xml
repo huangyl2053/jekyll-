@@ -3,6 +3,14 @@
 <!-- @reamsid_L DBB-1840-040 xuzhao -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper">
 
+<delete id="年金特徴回付情報削除" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.DeleteTokuchoKaifuJohoMyBatisParameter">
+    DELETE FROM
+    rgdb."UeT0511NenkinTokuchoKaifuJoho" AS T
+    WHERE
+    T."gyomuCode" = 'DB' AND
+    T."shoriTaishoYM" = #{処理対象年月}
+</delete>
+    
 <sql id="特徴依頼のデータ抽出">
     SELECT
     <include refid="allColumns_UeT0511NenkinTokuchoKaifuJoho" />
@@ -785,6 +793,20 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         AND "nendo" = #{賦課年度}
         AND "nendoNaiRenban" = #{年度内連番}
 </update>
+
+<select id="get基準日時"
+    parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.UpdateTableMyBatisParameter"
+    resultType="jp.co.ndensan.reams.uz.uza.biz.YMDHMS" fetchSize="1">
+    SELECT
+        処理日付管理マスタ."kijunTimestamp" 
+    FROM
+        rgdb."DbT7022ShoriDateKanri" AS 処理日付管理マスタ
+    WHERE
+        "subGyomuCode" = 'DBB'
+        AND "shoriName" = #{処理名}
+        AND "nendo" = #{賦課年度}
+        AND "nendoNaiRenban" = #{年度内連番}
+</select>
 
 <sql id="処理対象期間取得">
     WITH master AS (

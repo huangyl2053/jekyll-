@@ -47,7 +47,6 @@
         <id column="dbT2002_choteiNendo" />
         <id column="dbT2002_fukaNendo" />
         <id column="dbT2002_tsuchishoNo" />
-        <id column="dbT2002_shikibetsuCode" />
         <id column="UrT0508SeikatsuHogoJukyusha_shikibetsuCode"/>
         <id column="UrT0508SeikatsuHogoJukyusha_gyomuCode"/>
         <id column="UrT0508SeikatsuHogoJukyusha_jukyuKaishiYMD"/>
@@ -393,7 +392,7 @@
             ORDER BY "FukaCalculateTemp"."dbT2002_choteiNendo",
                      "FukaCalculateTemp"."dbT2002_fukaNendo",
                      "FukaCalculateTemp"."dbT2002_tsuchishoNo",
-                     "FukaCalculateTemp"."dbT2002_shikibetsuCode",
+                     "FukaCalculateTemp"."honSanJon_hihokenshaNo",
                      "UrT0508SeikatsuHogoJukyusha"."gyomuCode",
                      "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD",
                      "UrT0526SeikatsuHogoFujoShurui"."fujoShuruiCode",
@@ -596,7 +595,7 @@
             AND "DbT2002Fuka1"."fukaNendo" = #{賦課年度}
             ) AS "DbT2002Fuka"
             ON "DbT2002Fuka"."hihokenshaNo" = B."dbT1001HihokenshaDaicho_hihokenshaNo"
-            ORDER BY "dbT1001HihokenshaDaicho_hihokenshaNo"
+            ORDER BY "dbT1001HihokenshaDaicho_hihokenshaNo", "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD"
     </select>
 
     
@@ -786,6 +785,7 @@
         INNER JOIN
             rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
         ON "HonSanJonTyuShutuTemp"."hihokenshaNo" = "DbT2001ChoshuHoho"."hihokenshaNo"
+        AND "HonSanJonTyuShutuTemp"."fukaNendo" = "DbT2001ChoshuHoho"."fukaNendo"
         LEFT JOIN
             rgdb."DbV2002Fuka" AS "DbT2002Fuka"
         INNER JOIN
@@ -808,8 +808,8 @@
             "DbT2002Fuka"."choteiNendo",
             "DbT2002Fuka"."fukaNendo",
             "DbT2002Fuka"."tsuchishoNo",
-            "DbT2003Kibetsu"."ki",
-            "DbT2003Kibetsu"."choshuHouhou"
+            "DbT2003Kibetsu"."choshuHouhou",
+            "DbT2003Kibetsu"."ki"
     </select>
     
     <resultMap id="resultMap_賦課計算中間Entity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.FukaCalculateTempEntity" autoMapping="true">
@@ -1774,6 +1774,7 @@
     </resultMap>
     
     <resultMap id="resultMap_FukaCalculateSetaiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.FukaCalculateSetaiEntity" autoMapping="true">
+        <id column="TmpSetaiShotoku_shikibetsuCode" />
         <result property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="tsuchishoNo" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
@@ -1783,6 +1784,7 @@
     </resultMap>
     
     <resultMap id="resultMap_SetaiShotokuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity" autoMapping="true">
+        <id column="TmpSetaiShotoku_shikibetsuCode" />
         <result property="kijunYMD" column="TmpSetaiShotoku_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jushochiTokureiFlag" column="TmpSetaiShotoku_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="setaiCode" column="TmpSetaiShotoku_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
@@ -1808,9 +1810,11 @@
         FROM "FukaCalculateTemp" AS "FukaCalculateTemp"
         LEFT JOIN "TmpSetaiShotoku" AS "TmpSetaiShotoku"
         ON "FukaCalculateTemp"."honSanJon_hihokenshaNo"="TmpSetaiShotoku"."hihokenshaNo"
-        ORDER BY "FukaCalculateTemp"."choteiNendo",
+        ORDER BY "TmpSetaiShotoku"."hihokenshaNo",
+                 "FukaCalculateTemp"."choteiNendo",
                  "FukaCalculateTemp"."fukaNendo",
-                 "FukaCalculateTemp"."tsuchishoNo"
+                 "FukaCalculateTemp"."tsuchishoNo",
+                 "TmpSetaiShotoku"."shikibetsuCode"
     </select>
     
     <sql id="allColumns_SetaiShotoku" >
@@ -1869,7 +1873,8 @@
         WITH master AS (
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.allColumns_DbT2015KeisangoJoho"/>,
-        koza.*
+        koza.*,
+        "ShuturyokuTemp"."choshuHoho" as "ShuturyokuTemp_choshuHoho"
         FROM rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
         LEFT JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON koza."uaT0310Koza_shikibetsuCode"="DbT2015KeisangoJoho"."shikibetsuCode"
@@ -1933,6 +1938,7 @@
         <id column="dbT2015KeisangoJoho_tsuchishoNo" />
         <id column="dbT2015KeisangoJoho_koseiZengoKubun" />
         <id column="dbT2015KeisangoJoho_sakuseiShoriName" />
+        <result property="徴収方法" column="ShuturyokuTemp_choshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="計算後情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.ResultMap_DbT2015KeisangoJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="特定口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>

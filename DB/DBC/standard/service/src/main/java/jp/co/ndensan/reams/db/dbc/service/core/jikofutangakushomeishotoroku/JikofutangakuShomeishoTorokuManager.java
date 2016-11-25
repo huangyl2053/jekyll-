@@ -116,10 +116,11 @@ public class JikofutangakuShomeishoTorokuManager {
             meisaiEntity.setRirekiNo(履歴番号);
             dbT3181Dac.save(meisaiEntity);
         }
-        dbT3180Dac.save(updShomeisho.modifiedModel().toEntity());
-        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : updMeisaiList) {
-            dbT3181Dac.save(meisai.modifiedModel().toEntity());
-        }
+//        dbT3180Dac.save(updShomeisho.modifiedModel().toEntity());
+//        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : updMeisaiList) {
+//            dbT3181Dac.save(meisai.modifiedModel().toEntity());
+//        }
+        delete事業高額合算自己負担額証明書and明細(updShomeisho, updMeisaiList);
     }
 
     /**

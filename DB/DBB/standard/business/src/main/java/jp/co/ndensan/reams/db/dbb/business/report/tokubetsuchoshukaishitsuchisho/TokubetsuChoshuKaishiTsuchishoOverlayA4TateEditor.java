@@ -44,7 +44,6 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
     private static final RString 特徴期別金額4期 = new RString("4期");
     private static final RString 特徴期別金額5期 = new RString("5期");
     private static final RString 特徴期別金額6期 = new RString("6期");
-    private static final int MULTIPLY = 3;
     private static final RString TOKEN = new RString("～");
     private static final Code DATA_3 = new Code("0003");
     private static final RString 被保険者番号 = new RString("被保険者番号");

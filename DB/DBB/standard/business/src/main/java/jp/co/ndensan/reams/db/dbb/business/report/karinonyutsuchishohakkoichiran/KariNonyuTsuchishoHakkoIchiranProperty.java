@@ -89,13 +89,13 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
          * 世帯コード
          */
         世帯コード(new RString("0008"), new RString("世帯コード"),
-                ENCLOSURE.concat(new RString("dbT2015KeisangoJoho_setaiCode").concat(
+                ENCLOSURE.concat(new RString("shikibetsuTaisho_setaiCode").concat(
                                 ENCLOSURE))),
         /**
          * 識別コード
          */
         識別コード(new RString("0009"), new RString("識別コード"),
-                ENCLOSURE.concat(new RString("dbT2015KeisangoJoho_shikibetsuCode").concat(ENCLOSURE))),
+                ENCLOSURE.concat(new RString("shikibetsuTaisho_shikibetsuCode").concat(ENCLOSURE))),
         /**
          * 氏名５０音カナ
          */
