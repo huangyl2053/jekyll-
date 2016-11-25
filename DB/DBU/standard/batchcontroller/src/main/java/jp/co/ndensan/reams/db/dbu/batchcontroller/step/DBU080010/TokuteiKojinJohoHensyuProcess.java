@@ -57,9 +57,9 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
     private static final RString 転義符 = new RString("\"");
     private static final RString 本番モード = new RString("0");
     private static final RString テストモード = new RString("1");
-    private static final RString 文字列_大なり = new RString("&gt");
-    private static final RString 文字列_小なり = new RString("&lt");
-    private static final RString 文字列_二重引用符 = new RString("&quot");
+    private static final RString 文字列_大なり = new RString("\\&gt;");
+    private static final RString 文字列_小なり = new RString("\\&lt;");
+    private static final RString 文字列_二重引用符 = new RString("\\&quot;");
     private static final RString 文字列_スラッシュ = new RString("/");
     private static final RString 文字列_連結符 = new RString("_");
     private static final RString 文字列_拡張子 = new RString(".xml");
@@ -118,8 +118,8 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
                         processParameter.get版番号(), processParameter.get基準日());
         mybatisParameter = TokuteiKojinJohoHensyuMybatisParamater.createParamter中間DB提供基本情報取得_標準(
                 転義符.concat(processParameter.get中間DBテーブル名()).concat(転義符), processParameter.get特定個人情報名コード());
-        副本データ = 文字列_小なり.concat(new RString("?xml version=")).concat(文字列_二重引用符).concat(new RString("1.0")).
-                concat(文字列_二重引用符).concat(new RString(" encoding=")).concat(文字列_二重引用符).
+        副本データ = 文字列_小なり.concat(new RString("![CDATA[")).concat(文字列_小なり).concat(new RString("?xml version=")).concat(文字列_二重引用符).
+                concat(new RString("1.0")).concat(文字列_二重引用符).concat(new RString(" encoding=")).concat(文字列_二重引用符).
                 concat(new RString("utf-8")).concat(文字列_二重引用符).concat(new RString("?")).concat(文字列_大なり);
     }
 
@@ -142,21 +142,21 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
         get提供内容リスト(t);
         for (TokuteiKojinJohoKoumokuHanKanriBusiness business : 項目版管理List) {
             if (TokuteiKojinJohoKomokuKubun.情報HD.getコード().equals(business.get特定個人情報項目区分())) {
-                副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(文字列_大なり);
+                副本データ = 副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(文字列_大なり);
             } else if (TokuteiKojinJohoKomokuKubun.繰返し項目.getコード().equals(business.get特定個人情報項目区分())) {
                 識別項目コード = business.get特定個人情報項目コード();
-                副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(new RString(" Version=")).concat(文字列_二重引用符).
+                副本データ = 副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(new RString(" Version=")).concat(文字列_二重引用符).
                         concat(business.getバージョン情報()).concat(文字列_二重引用符).concat(new RString(" TimeAndDateOfUpdate=")).
                         concat(文字列_二重引用符).concat(getデータ作成日(システム日付)).concat(文字列_二重引用符).concat(文字列_大なり);
             } else if (TokuteiKojinJohoKomokuKubun.日付項目.getコード().equals(business.get特定個人情報項目区分())
                     || TokuteiKojinJohoKomokuKubun.個別項目.getコード().equals(business.get特定個人情報項目区分())) {
                 int index = Integer.parseInt(business.get提供内容項目番号().toString()) - 1;
                 if (MukokaFlag.有効.getコード().equals(business.get無効化フラグ())) {
-                    副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(new RString(" Version=")).
+                    副本データ = 副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(new RString(" Version=")).
                             concat(文字列_二重引用符).concat(business.getバージョン情報()).concat(文字列_二重引用符);
                 }
                 if (RString.isNullOrEmpty(提供内容.get(index).get提供内容())) {
-                    副本データ.concat(new RString("ReasonOfNull=")).concat(文字列_二重引用符).concat(提供内容.get(index).get未設定事由()).
+                    副本データ = 副本データ.concat(new RString("ReasonOfNull=")).concat(文字列_二重引用符).concat(提供内容.get(index).get未設定事由()).
                             concat(文字列_二重引用符).concat(new RString(" xsi:nil=")).concat(文字列_二重引用符).concat(new RString("true")).
                             concat(文字列_二重引用符).concat(new RString(" xmlns:xsi=")).concat(文字列_二重引用符).
                             concat(new RString("http://www.w3.org/2001/XMLSchema-instance")).concat(文字列_二重引用符).
@@ -169,10 +169,11 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
         for (int i = 項目版管理List.size() - 1; i >= 0; i--) {
             if (TokuteiKojinJohoKomokuKubun.繰返し項目.getコード().equals(項目版管理List.get(i).get特定個人情報項目区分())
                     || TokuteiKojinJohoKomokuKubun.情報HD.getコード().equals(項目版管理List.get(i).get特定個人情報項目区分())) {
-                副本データ.concat(文字列_小なり).concat(文字列_スラッシュ).concat(
+                副本データ = 副本データ.concat(文字列_小なり).concat(文字列_スラッシュ).concat(
                         項目版管理List.get(i).get特定個人情報項目コード()).concat(文字列_大なり);
             }
         }
+        副本データ = 副本データ.concat(new RString("]"));
         setDBM20113AttachToBsEntityList(t);
         if (添付データ件数 != 0) {
             ファイル連番 = ファイル連番 + 1;
