@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC5130011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150040.DBC150040_HeikinriyogakuTokeihyoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150040.DBC150040_HeikinriyogakuTokeihyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5130011.HeikinRiyoGakuTokeihyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5130011.HeikinRiyoGakuTokeihyoHandler;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
@@ -59,7 +59,7 @@ public class HeikinRiyoGakuTokeihyo {
      * @param div HeikinRiyoGakuTokeihyoDiv
      * @return ResponseData<DBC150040_HeikinriyogakuTokeihyoBatchParameter>
      */
-    public ResponseData<DBC150040_HeikinriyogakuTokeihyoBatchParameter> onClick_btnBatchRegister(HeikinRiyoGakuTokeihyoDiv div) {
+    public ResponseData<DBC150040_HeikinriyogakuTokeihyoParameter> onClick_btnBatchRegister(HeikinRiyoGakuTokeihyoDiv div) {
         return ResponseData.of(getHandler(div).getBatchParameter()).respond();
     }
 

@@ -778,7 +778,7 @@
             "TmpHonsanteiTsuchisho" AS A
         WHERE 1=1
            <if test="出力対象 == 1">
-            AND A."dbT2015KeisangoJoho_tkKibetsuGaku04" <![CDATA[>]]> '0'
+            AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku04",0) <![CDATA[>]]> '0'
            </if>
              ${出力順}
     </select>
@@ -1686,48 +1686,138 @@
         FROM
             "TmpHonsanteiTsuchisho" AS A
         WHERE 
-             1 = 1
             <if test="出力期 == 1">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku01" <![CDATA[>]]> '0'   
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku01",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'  
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="2 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku02" <![CDATA[>]]> '0'   
+            <if test="2 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'  
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="3 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku03" <![CDATA[>]]> '0'   
+            <if test="3 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'  
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="4 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku04" <![CDATA[>]]> '0'   
+            <if test="4 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'  
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="5 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku05" <![CDATA[>]]> '0'   
+            <if test="5 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'  
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="6 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku06" <![CDATA[>]]> '0'   
+            <if test="6 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="7 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku07" <![CDATA[>]]> '0'   
+            <if test="7 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="8 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku08" <![CDATA[>]]> '0'   
+            <if test="8 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="9 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku09" <![CDATA[>]]> '0'   
+            <if test="9 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="10 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku10" <![CDATA[>]]> '0'   
+            <if test="10 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="11 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku11" <![CDATA[>]]> '0'   
+            <if test="11 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="12 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku12" <![CDATA[>]]> '0'   
+            <if test="12 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="13 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku13" <![CDATA[>]]> '0'   
+            <if test="13 == 出力期">              
+                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
+                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
             </if>
-            <if test="14 >= 出力期">              
-                OR A."dbT2015KeisangoJoho_fuKibetsuGaku14" <![CDATA[>]]> '0'   
+            <if test="14 == 出力期">              
+                COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0'
             </if>
             <if test="口座区分 != null">              
                 AND A."dbT2015KeisangoJoho_kozaKubun" = #{口座区分} 

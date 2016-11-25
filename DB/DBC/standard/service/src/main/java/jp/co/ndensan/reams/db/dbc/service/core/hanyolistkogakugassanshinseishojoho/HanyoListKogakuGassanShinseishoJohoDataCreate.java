@@ -503,7 +503,7 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
         csvEntity.set受給申請事由(get受給申請事由(entity));
 
         csvEntity.set受給申請日(dataToRString(entity.get受給者台帳_受給申請年月日(), parameter));
-        if (entity.get受給者台帳_要介護認定状態区分コード() != null) {
+        if (!RString.isNullOrEmpty(entity.get受給者台帳_要介護認定状態区分コード())) {
             csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(
                     システム日付, entity.get受給者台帳_要介護認定状態区分コード()).getName());
         }
