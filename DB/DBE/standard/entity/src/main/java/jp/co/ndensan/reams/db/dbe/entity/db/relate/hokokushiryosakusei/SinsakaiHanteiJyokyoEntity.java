@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SinsakaiHanteiJyokyoEntity {
 
-    private Code ichijiHanteiKekkaCode;
+    private Code ichijiHanteiKekkaNinchishoKasanCode;
     private Code nijiHanteiYokaigoJotaiKubunCode;
     private Code ninteiShinseiShinseijiKubunCode;
     private Code ninteiShinseiHoreiKubunCode;

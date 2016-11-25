@@ -312,7 +312,7 @@ public class CreateTarget {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
         try (CsvWriter<CreateTargetCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
             for (CreateTargetDataBusiness business : dataMap.values()) {
                 csvWriter.writeLine(getCsvData(business, 連番));
                 連番 = 連番 + 1;
