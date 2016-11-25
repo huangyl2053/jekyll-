@@ -30,6 +30,7 @@ public class InsetDbT2001ChoshuHohoProcess extends BatchProcessBase<DbV2001Chosh
     private NendoKirikaeMybatisParameter parameter;
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
+    private static final YMDHMS EMPTY_YMDHMS = new YMDHMS("");
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.nendokirikae."
             + "INendoKirikaeMapper.select徴収方法Newest");
@@ -137,12 +138,16 @@ public class InsetDbT2001ChoshuHohoProcess extends BatchProcessBase<DbV2001Chosh
             newEntity.setKariNenkinCode(RString.EMPTY);
             newEntity.setKariHosokuM(RString.EMPTY);
         }
-        if (ChoshuHoho.資格なし.getコード().equals(entity.getChoshuHoho3gatsu())
-                && null == entity.getTokuchoTeishiNichiji()) {
+        if ((RString.isNullOrEmpty(entity.getChoshuHoho3gatsu())
+                || ChoshuHoho.資格なし.getコード().equals(entity.getChoshuHoho3gatsu()))
+                && (null == entity.getTokuchoTeishiNichiji()
+                || EMPTY_YMDHMS.equals(entity.getTokuchoTeishiNichiji()))) {
             newEntity = null;
         }
-        if (ChoshuHoho.資格なし.getコード().equals(entity.getChoshuHoho3gatsu())
-                && null != entity.getTokuchoTeishiNichiji()) {
+        if ((RString.isNullOrEmpty(entity.getChoshuHoho3gatsu())
+                || ChoshuHoho.資格なし.getコード().equals(entity.getChoshuHoho3gatsu()))
+                && null != entity.getTokuchoTeishiNichiji()
+                && (!EMPTY_YMDHMS.equals(entity.getTokuchoTeishiNichiji()))) {
             newEntity.setChoshuHoho4gatsu(ChoshuHoho.資格なし.getコード());
             newEntity.setChoshuHoho5gatsu(ChoshuHoho.資格なし.getコード());
             newEntity.setChoshuHoho6gatsu(ChoshuHoho.資格なし.getコード());
