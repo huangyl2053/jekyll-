@@ -35,6 +35,7 @@ public class DBC5100011MainHandler {
     private static final RString 対象選択_1 = new RString("1");
     private static final RString 対象選択_0 = new RString("0");
     private static final int ENDINDEX = 10;
+    private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
     private static final RString 被保険者 = new RString("被保険者");
     private static final RString 文字_全て = new RString("全て");
     private static final RString 文字_町域 = new RString("町域");
@@ -61,7 +62,8 @@ public class DBC5100011MainHandler {
      * 画面初期化処理です。
      */
     public void onLoad() {
-        ViewStateHolder.put(ViewStateKeys.台帳種別表示, 被保険者);
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+        ViewStateHolder.put(ViewStateKeys.被保険者, 被保険者);
         div.getCcdJigyoshaNo().initialize();
         div.getCcdChikuShichosonSelect().initialize();
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200004.getReportId());
