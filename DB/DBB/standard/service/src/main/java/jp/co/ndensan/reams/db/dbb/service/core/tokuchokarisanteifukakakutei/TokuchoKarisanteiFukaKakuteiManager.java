@@ -117,8 +117,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
             if (null == 登録_処理Entity) {
                 登録_処理Entity = new DbT7022ShoriDateKanriEntity();
             }
-            if (null == 登録_処理Entity.getNendoNaiRenban())
-            {
+            if (null == 登録_処理Entity.getNendoNaiRenban()) {
                 登録_処理Entity.setNendoNaiRenban(零);
             }
             IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
