@@ -30,6 +30,7 @@ public class DBC5140011Main {
     private static final int 十 = 10;
     private static final RString 十個ゼロ = new RString("0000000000");
     private static final RString 台帳種別表示有り = new RString("台帳種別表示有り");
+    private static final RString 地域密着型介護老人福祉施設 = new RString("地域密着型介護老人福祉施設");
 
     /**
      * 画面初期化のメソッドです。
@@ -121,7 +122,7 @@ public class DBC5140011Main {
         List<dgServiceShuruiList_Row> rowList = div.getChushutsuJoken2().getDgServiceShuruiList().getDataSource();
         for (dgServiceShuruiList_Row row : rowList) {
             if (row.getHdnServiceBunruiCode().equals(ServiceBunrui.施設サービス.getコード().padZeroToLeft(2))
-                    || row.getHdnServiceBunruiCode().equals(ServiceBunrui.地域密着型サービス.getコード().padZeroToLeft(2))) {
+                    || row.getServiceShuruiName().equals(地域密着型介護老人福祉施設)) {
                 rselectList.add(row);
             }
         }
