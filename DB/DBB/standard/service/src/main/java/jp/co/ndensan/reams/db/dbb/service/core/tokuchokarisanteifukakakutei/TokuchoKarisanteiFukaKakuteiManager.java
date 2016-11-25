@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifukakakutei;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteifukakakutei.ITokuchokarisanteiMapper;
