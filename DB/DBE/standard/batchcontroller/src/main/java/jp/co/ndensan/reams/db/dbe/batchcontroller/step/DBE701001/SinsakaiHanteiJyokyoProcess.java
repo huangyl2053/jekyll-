@@ -863,7 +863,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
             RString 要介護認定一次判定結果コード,
             RString 二次判定要介護状態区分コード) {
         for (SinsakaiHanteiJyokyoEntity sinsakaiHanteiJyokyoEntity : 審査判定状況) {
-            if (sinsakaiHanteiJyokyoEntity.getIchijiHanteiKekkaCode().value().equals(要介護認定一次判定結果コード)
+            if (sinsakaiHanteiJyokyoEntity.getIchijiHanteiKekkaNinchishoKasanCode().value().equals(要介護認定一次判定結果コード)
                     && sinsakaiHanteiJyokyoEntity.getNijiHanteiYokaigoJotaiKubunCode().value().equals(二次判定要介護状態区分コード)) {
                 return sinsakaiHanteiJyokyoEntity.getHihokenshaCount();
             }
