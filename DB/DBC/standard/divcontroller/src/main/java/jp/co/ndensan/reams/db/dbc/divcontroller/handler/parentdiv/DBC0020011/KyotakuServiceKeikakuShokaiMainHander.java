@@ -157,6 +157,8 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         } else {
             div.getTxtTekiyoKikan().setToValue(new RDate(row.getTekiyoShuryoYMD().getValue().toString()));
         }
+        div.getTxtKyotakuSogoJigyoKubun().clearValue();
+        div.getTxtKeikakuSakuseiKubun().clearValue();
         div.getTxtKyotakuSogoJigyoKubun().setValue(居宅サービス履歴.get居宅総合事業区分());
         div.getTxtKeikakuSakuseiKubun().setValue(JukyushaIF_KeikakuSakuseiKubunCode.toValue(居宅サービス履歴.get作成区分コード()).get名称());
         set届出者情報(居宅給付計画届出);
