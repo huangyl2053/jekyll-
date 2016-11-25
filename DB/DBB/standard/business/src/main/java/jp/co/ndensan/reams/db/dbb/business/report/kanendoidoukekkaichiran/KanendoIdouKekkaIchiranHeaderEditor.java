@@ -61,9 +61,9 @@ public class KanendoIdouKekkaIchiranHeaderEditor implements IKanendoIdouKekkaIch
         RString time = inputEntity.get調定日時().getRDateTime().getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = date.concat(RString.HALF_SPACE).concat(time);
-        KanendoKiUtil 月期対応取得_普徴 = new KanendoKiUtil();
-        KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
-        List<Kitsuki> 表記リスト = 期月リスト_普徴.toList();
+        KanendoKiUtil 月期対応取得_過年度 = new KanendoKiUtil();
+        KitsukiList 期月リスト_過年度 = 月期対応取得_過年度.get期月リスト();
+        List<Kitsuki> 表記リスト = 期月リスト_過年度.toList();
         List<RString> 期の表記 = new ArrayList<>();
         for (Kitsuki 期 : 表記リスト) {
             期の表記.add(期.get表記().asX期());
@@ -81,8 +81,6 @@ public class KanendoIdouKekkaIchiranHeaderEditor implements IKanendoIdouKekkaIch
         source.listFuchoKi_10 = 期の表記.get(NUM_9);
         source.listFuchoKi_11 = 期の表記.get(NUM_10);
         source.listFuchoKi_12 = 期の表記.get(NUM_11);
-        source.listFuchoKi_13 = 期の表記.get(NUM_12);
-        source.listFuchoKi_14 = 期の表記.get(NUM_13);
         return source;
     }
 
