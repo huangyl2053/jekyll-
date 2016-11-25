@@ -97,7 +97,8 @@ public class DBC5140011Main {
         }
         List<dgServiceShuruiList_Row> rowList = div.getChushutsuJoken2().getDgServiceShuruiList().getDataSource();
         for (dgServiceShuruiList_Row row : rowList) {
-            if (row.getHdnServiceBunruiCode().equals(ServiceBunrui.居宅サービス.getコード().padZeroToLeft(2))) {
+            if (row.getHdnServiceBunruiCode().equals(ServiceBunrui.居宅サービス.getコード().padZeroToLeft(2))
+                    || row.getHdnServiceBunruiCode().equals(ServiceBunrui.介護予防サービス.getコード().padZeroToLeft(2))) {
                 rselectList.add(row);
             }
         }
@@ -119,7 +120,8 @@ public class DBC5140011Main {
         }
         List<dgServiceShuruiList_Row> rowList = div.getChushutsuJoken2().getDgServiceShuruiList().getDataSource();
         for (dgServiceShuruiList_Row row : rowList) {
-            if (row.getHdnServiceBunruiCode().equals(ServiceBunrui.施設サービス.getコード().padZeroToLeft(2))) {
+            if (row.getHdnServiceBunruiCode().equals(ServiceBunrui.施設サービス.getコード().padZeroToLeft(2))
+                    || row.getHdnServiceBunruiCode().equals(ServiceBunrui.地域密着型サービス.getコード().padZeroToLeft(2))) {
                 rselectList.add(row);
             }
         }
