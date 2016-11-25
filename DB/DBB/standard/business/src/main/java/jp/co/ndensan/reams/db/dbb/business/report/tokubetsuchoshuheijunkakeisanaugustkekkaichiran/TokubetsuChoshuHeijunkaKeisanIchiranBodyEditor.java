@@ -201,14 +201,14 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         if (!ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法4月())
                 && !ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法4月())
                 && (ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法6月())
-                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法4月()))) {
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法6月()))) {
 
             source.listCenter_4 = 編集コード_6月特徴開始者;
         }
         if (!ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法6月())
                 && !ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法6月())
-                && (ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法8月()))
-                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法8月())) {
+                && (ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法8月())
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法8月()))) {
             source.listCenter_4 = 編集コード_8月特徴開始者;
         }
     }
