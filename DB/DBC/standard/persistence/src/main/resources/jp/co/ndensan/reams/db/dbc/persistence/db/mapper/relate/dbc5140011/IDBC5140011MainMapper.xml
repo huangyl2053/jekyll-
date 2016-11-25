@@ -11,6 +11,7 @@
         AND mst."serviceShuruiCd" = slv."serviceShuruiCd"
         AND mst."teikyoKaishiYM" <![CDATA[ < ]]> slv."teikyoKaishiYM"))
         AND mst."isDeleted" = FALSE
+        ORDER BY mst."serviceShuruiCd"
     </select>
 
     <resultMap id="resultMap_DbT7130KaigoServiceShuruiEntity" 
