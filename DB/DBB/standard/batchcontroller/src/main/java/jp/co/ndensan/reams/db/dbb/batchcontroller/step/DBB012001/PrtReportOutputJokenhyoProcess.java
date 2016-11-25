@@ -44,6 +44,7 @@ public class PrtReportOutputJokenhyoProcess extends SimpleBatchProcessBase {
     private static final RString 英数字ファイル名 = new RString("TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranData.csv");
     private static final RString 平準化しない = new RString("0");
     private static final RString 平準化するを判定し = new RString("1");
+    private static final RString SPACE = new RString("　　　　　　　");
     private TokuchoHeinjunka6GatsuProcessParameter parameter;
     private LasdecCode 市町村コード;
     private RString 市町村名;
@@ -84,6 +85,9 @@ public class PrtReportOutputJokenhyoProcess extends SimpleBatchProcessBase {
         } else if (平準化するを判定し.equals(増額コンフィグ)) {
             増額 = TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConfig.
                     get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称();
+        }
+        if (!増額.isEmpty()) {
+            増額 = SPACE.concat(増額);
         }
 
         出力条件リスト.add(減額);

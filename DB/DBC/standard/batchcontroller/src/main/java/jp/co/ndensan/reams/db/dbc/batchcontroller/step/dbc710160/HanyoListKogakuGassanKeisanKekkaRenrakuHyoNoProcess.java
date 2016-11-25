@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_KarisanteiData;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassan.HanyoListKogakuGassanKeisanProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassan.HanyoListKogakuGassanKeisanNoCSVEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassan.HanyoListKogakuGassanKeisanEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
@@ -527,52 +526,48 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
 
     private void set高額合算支給額計算結果(HanyoListKogakuGassanKeisanEntity entity,
             HanyoListKogakuGassanKeisanNoCSVEntity output) {
-        DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity 高額合算支給額計算結果
-                = entity.get高額合算支給額計算結果();
-        if (高額合算支給額計算結果 == null) {
-            return;
-        }
-        output.set対象年度(get対象年度(高額合算支給額計算結果.getTaishoNendo()));
-        output.set保険者番号(getColumnValue(高額合算支給額計算結果.getShoKisaiHokenshaNo()));
-        output.set連絡票整理番号(高額合算支給額計算結果.getShikyuShinseishoSeiriNo());
-        output.set履歴番号(new RString(高額合算支給額計算結果.getRirekiNo()));
-        output.set自己負担額証明書整理番号(高額合算支給額計算結果.getJikoFutanSeiriNo());
-        output.set対象計算期間_開始(get日付項目(高額合算支給額計算結果.getTaishoKeisanKaishiYMD()));
-        output.set対象計算期間_終了(get日付項目(高額合算支給額計算結果.getTaishoKeisanShuryoYMD()));
-        output.set世帯負担総額(doカンマ編集(高額合算支給額計算結果.getSetaiFutanSogaku()));
-        output.set介護一部世帯負担(doカンマ編集(高額合算支給額計算結果.getSetaiGassanGaku()));
-        output.set介護一部世帯負担_７０(doカンマ編集(高額合算支給額計算結果.getOver70_SetaiGassanGaku()));
-        if (高額合算支給額計算結果.getShotokuKubun() != null) {
-            KaigoGassan_ShotokuKbn 所得区分 = KaigoGassan_ShotokuKbn.toValue(高額合算支給額計算結果.getShotokuKubun());
+
+        output.set対象年度(get対象年度(entity.getTaishoNendo()));
+        output.set保険者番号(getColumnValue(entity.getShoKisaiHokenshaNo()));
+        output.set連絡票整理番号(entity.getShikyuShinseishoSeiriNo());
+        output.set履歴番号(new RString(entity.getRirekiNo()));
+        output.set自己負担額証明書整理番号(entity.getJikoFutanSeiriNo());
+        output.set対象計算期間_開始(get日付項目(entity.getTaishoKeisanKaishiYMD()));
+        output.set対象計算期間_終了(get日付項目(entity.getTaishoKeisanShuryoYMD()));
+        output.set世帯負担総額(doカンマ編集(entity.getSetaiFutanSogaku()));
+        output.set介護一部世帯負担(doカンマ編集(entity.getSetaiGassanGaku()));
+        output.set介護一部世帯負担_７０(doカンマ編集(entity.getOver70_SetaiGassanGaku()));
+        if (entity.getShotokuKubun() != null) {
+            KaigoGassan_ShotokuKbn 所得区分 = KaigoGassan_ShotokuKbn.toValue(entity.getShotokuKubun());
             if (所得区分 != null) {
                 output.set所得区分(所得区分.get名称());
             }
         }
-        if (高額合算支給額計算結果.getOver70_ShotokuKubun() != null) {
-            KaigoGassan_Over70_ShotokuKbn 区分_70歳以上 = KaigoGassan_Over70_ShotokuKbn.toValue(高額合算支給額計算結果.getOver70_ShotokuKubun());
+        if (!RString.isNullOrEmpty(entity.getOver70_ShotokuKubun())) {
+            KaigoGassan_Over70_ShotokuKbn 区分_70歳以上 = KaigoGassan_Over70_ShotokuKbn.toValue(entity.getOver70_ShotokuKubun());
             output.set係る所得区分_70歳以上の者に(区分_70歳以上 != null ? 区分_70歳以上.get名称() : RString.EMPTY);
         }
-        output.set介護等合算算定基準額(doカンマ編集(高額合算支給額計算結果.getSanteiKijunGaku()));
-        output.set合算算定基準額_70歳以上介護等(doカンマ編集(高額合算支給額計算結果.getOver70_SanteiKijyunGaku()));
-        output.set世帯支給総額(doカンマ編集(高額合算支給額計算結果.getSetaiShikyuSogaku()));
-        output.setうち70歳以上分世帯支給総額(doカンマ編集(高額合算支給額計算結果.getOver70_SetaiShikyuSogaku()));
-        output.set按分後支給額(doカンマ編集(高額合算支給額計算結果.getHonninShikyugaku()));
-        output.setうち70歳以上分按分後支給額(doカンマ編集(高額合算支給額計算結果.getOver70_honninShikyugaku()));
-        output.set介護低所得者Ⅰ再計算実施の有無(高額合算支給額計算結果.getTeiShotoku_1_SaiKeisanUmu());
-        output.set負担額合計_70歳以上(doカンマ編集(高額合算支給額計算結果.getOver70_FutangakuGokei()));
-        output.setかかる支給額合計(doカンマ編集(高額合算支給額計算結果.getOver70_ShikyugakuGokei()));
-        output.set負担額合計_70歳未満(doカンマ編集(高額合算支給額計算結果.getUnder70_FutangakuGokei()));
-        output.set未満支給額合計_70歳(doカンマ編集(高額合算支給額計算結果.getUnder70_ShikyugakuGokei()));
-        output.set負担額の合計額(doカンマ編集(高額合算支給額計算結果.getFutangakuGokei()));
-        output.set支給額合計額(doカンマ編集(高額合算支給額計算結果.getShikyugakuGokei()));
-        if (高額合算支給額計算結果.getDataKubun() != null) {
-            Kaigogassan_DataKubun データ区分名称 = Kaigogassan_DataKubun.toValue(高額合算支給額計算結果.getDataKubun());
+        output.set介護等合算算定基準額(doカンマ編集(entity.getSanteiKijunGaku()));
+        output.set合算算定基準額_70歳以上介護等(doカンマ編集(entity.getOver70_SanteiKijyunGaku()));
+        output.set世帯支給総額(doカンマ編集(entity.getSetaiShikyuSogaku()));
+        output.setうち70歳以上分世帯支給総額(doカンマ編集(entity.getOver70_SetaiShikyuSogaku()));
+        output.set按分後支給額(doカンマ編集(entity.getHonninShikyugaku()));
+        output.setうち70歳以上分按分後支給額(doカンマ編集(entity.getOver70_honninShikyugaku()));
+        output.set介護低所得者Ⅰ再計算実施の有無(entity.getTeiShotoku_1_SaiKeisanUmu());
+        output.set負担額合計_70歳以上(doカンマ編集(entity.getOver70_FutangakuGokei()));
+        output.setかかる支給額合計(doカンマ編集(entity.getOver70_ShikyugakuGokei()));
+        output.set負担額合計_70歳未満(doカンマ編集(entity.getUnder70_FutangakuGokei()));
+        output.set未満支給額合計_70歳(doカンマ編集(entity.getUnder70_ShikyugakuGokei()));
+        output.set負担額の合計額(doカンマ編集(entity.getFutangakuGokei()));
+        output.set支給額合計額(doカンマ編集(entity.getShikyugakuGokei()));
+        if (entity.getDataKubun() != null) {
+            Kaigogassan_DataKubun データ区分名称 = Kaigogassan_DataKubun.toValue(entity.getDataKubun());
             output.setデータ区分(データ区分名称 != null ? データ区分名称.get名称() : RString.EMPTY);
         }
-        output.set受取年月(get日付項目(高額合算支給額計算結果.getUketoriYM()));
-        output.set送付年月(get日付項目(高額合算支給額計算結果.getSofuYM()));
-        output.set支給額計算結果連絡票作成年月日(get日付項目(高額合算支給額計算結果.getTsuchiYMD()));
-        output.setデータ種類(getColumnValue(高額合算支給額計算結果.getKekkaRenrakusakiYubinNo()));
+        output.set受取年月(get日付項目(entity.getUketoriYM()));
+        output.set送付年月(get日付項目(entity.getSofuYM()));
+        output.set支給額計算結果連絡票作成年月日(get日付項目(entity.getTsuchiYMD()));
+        output.setデータ種類(getColumnValue(entity.getKekkaRenrakusakiYubinNo()));
 
     }
 
@@ -725,7 +720,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
 
     private PersonalData toPersonalData(HanyoListKogakuGassanKeisanEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(CODE, 被保険者番号,
-                entity.get高額合算支給額計算結果().getHihokenshaNo().value());
+                entity.getHihokenshaNo().value());
         return PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInfo);
     }
 

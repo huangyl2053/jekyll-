@@ -125,9 +125,11 @@ public class GenmenPanel {
             parameter.setShinseiYMD(null);
         }
         if (div.getTextBoxGenmenSyurui().getValue() != null && !div.getTextBoxGenmenSyurui().getValue().isEmpty()) {
-            parameter.setGemmenJiyuCode(get減免種類コード(div.getTextBoxGenmenSyurui().getValue()));
+            parameter.setGemmenJiyuCode(get減免事由コード(div.getTextBoxGenmenSyurui().getValue()));
+            parameter.setGemmenJiyu(get減免事由(div.getTextBoxGenmenSyurui().getValue()));
         } else {
-            parameter.setGemmenJiyuCode(null);
+            parameter.setGemmenJiyuCode(Code.EMPTY);
+            parameter.setGemmenJiyu(RString.EMPTY);
         }
         if (!div.getTextBoxMultiLineSinseiRiryuu().getValue().isNull() && !div.getTextBoxMultiLineSinseiRiryuu().
                 getValue().isEmpty()) {
@@ -154,9 +156,14 @@ public class GenmenPanel {
         return list;
     }
 
-    private Code get減免種類コード(RString 減免種類文言) {
-        List<RString> 減免種類文言List = 減免種類文言.split(RString.FULL_SPACE.toString());
-        return new Code(減免種類文言List.get(0), 減免種類文言List.get(1));
+    private Code get減免事由コード(RString 減免種類) {
+        List<RString> 減免種類List = 減免種類.split(RString.FULL_SPACE.toString());
+        return new Code(減免種類List.get(0));
+    }
+
+    private RString get減免事由(RString 減免種類) {
+        List<RString> 減免種類List = 減免種類.split(RString.FULL_SPACE.toString());
+        return 減免種類List.get(1);
     }
 
     private GenmenPanelHandler getHandler(GenmenPanelDiv div) {
