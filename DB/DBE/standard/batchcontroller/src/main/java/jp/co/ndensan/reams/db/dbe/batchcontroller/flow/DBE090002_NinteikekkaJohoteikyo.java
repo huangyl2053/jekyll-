@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkShujiiIkensh
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkSonotaShiryoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkTokkiJiko03Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkTokkiJiko31Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkTokkiJiko31TextProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkTokkiJiko34Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkTokkiJiko34TextProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.KoroshoShikibetsuCodeProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.NinteichosaProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.UpdateDataProcess;
@@ -50,7 +52,9 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     private static final String 特記事項の区分 = "ninteichosaReport";
     private static final String 特記事項の作成03 = "chkTokkiJikoReport03";
     private static final String 特記事項の作成31 = "chkTokkiJikoReport31";
-    private static final String 特記事項の作成34 = "chkTokkiJikoReport34";
+    private static final String 特記事項の作成35 = "chkTokkiJikoReport35";
+    private static final String 特記事項の作成31_TEXT = "chkTokkiJikoReport31_Text";
+    private static final String 特記事項の作成35_TEXT = "chkTokkiJikoReport35_Text";
     private static final String 主治医意見書の作成 = "chkShujiiIkenshoReport";
     private static final String その他資料の作成 = "chkSonotaShiryoReport";
     private static final String 一次判定結果の作成 = "chkIchijiHanteiKekkaReport";
@@ -96,12 +100,14 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
             executeStep(特記事項の区分);
             List<RString> noList = getResult(List.class, new RString(特記事項の区分), NinteichosaProcess.OUT_DATA_LIST);
             if (noList.contains(TokkijikoTextImageKubun.イメージ.getコード())
-                    && コマ割り.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(),
-                                    SubGyomuCode.DBE認定支援))) {
+                    && コマ割り.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
                 executeStep(特記事項の作成03);
-            } else {
+            } else if (noList.contains(TokkijikoTextImageKubun.イメージ.getコード())) {
                 executeStep(特記事項の作成31);
-                executeStep(特記事項の作成34);
+                executeStep(特記事項の作成35);
+            } else if (noList.contains(TokkijikoTextImageKubun.テキスト.getコード())) {
+                executeStep(特記事項の作成31_TEXT);
+                executeStep(特記事項の作成35_TEXT);
             }
         }
         if (主治医意見書_選択された.equals(getParameter().getChkShujiiIkensho().toString())) {
@@ -217,8 +223,8 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
      *
      * @return バッチコマンド
      */
-    @Step(特記事項の作成34)
-    protected IBatchFlowCommand chkTokkiJikoReport34() {
+    @Step(特記事項の作成35)
+    protected IBatchFlowCommand chkTokkiJikoReport35() {
         return loopBatch(ChkTokkiJiko34Process.class)
                 .arguments(getParameter().toYokaigoBatchProcessParamter())
                 .define();
@@ -232,6 +238,30 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(特記事項の作成31)
     protected IBatchFlowCommand chkTokkiJikoReport31() {
         return loopBatch(ChkTokkiJiko31Process.class)
+                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .define();
+    }
+
+    /**
+     * 特記事項（テキスト）の作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(特記事項の作成35_TEXT)
+    protected IBatchFlowCommand chkTokkiJikoReport35_Text() {
+        return loopBatch(ChkTokkiJiko34TextProcess.class)
+                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .define();
+    }
+
+    /**
+     * 特記事項（テキスト）の作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(特記事項の作成31_TEXT)
+    protected IBatchFlowCommand chkTokkiJikoReport31_Text() {
+        return loopBatch(ChkTokkiJiko31TextProcess.class)
                 .arguments(getParameter().toYokaigoBatchProcessParamter())
                 .define();
     }
