@@ -35,6 +35,7 @@ public class GemmenProcessParameter implements IBatchProcessParameter {
     private List<RString> list地区3コード;
     private FlexibleDate shinseiYMD;
     private Code gemmenJiyuCode;
+    private RString gemmenJiyu;
     private RString shinseiJiyu;
     private FlexibleDate ketteiYMD;
     private RString ketteiJiyu;
@@ -61,13 +62,14 @@ public class GemmenProcessParameter implements IBatchProcessParameter {
      * @param list地区3コード List<RString>
      * @param shinseiYMD FlexibleDate
      * @param gemmenJiyuCode Code
+     * @param gemmenJiyu RString
      * @param shinseiJiyu RString
      * @param ketteiYMD FlexibleDate
      * @param ketteiJiyu RString
      */
     public GemmenProcessParameter(FlexibleYear choteiNendo, FlexibleYear fukaNendo, List<RString> list町域コード,
             List<RString> list行政区コード, List<RString> list地区1コード, List<RString> list地区2コード, List<RString> list地区3コード,
-            FlexibleDate shinseiYMD, Code gemmenJiyuCode, RString shinseiJiyu, FlexibleDate ketteiYMD, RString ketteiJiyu) {
+            FlexibleDate shinseiYMD, Code gemmenJiyuCode, RString gemmenJiyu, RString shinseiJiyu, FlexibleDate ketteiYMD, RString ketteiJiyu) {
         this.choteiNendo = choteiNendo;
         this.fukaNendo = fukaNendo;
         this.list町域コード = list町域コード;
@@ -77,6 +79,7 @@ public class GemmenProcessParameter implements IBatchProcessParameter {
         this.list地区3コード = list地区3コード;
         this.shinseiYMD = shinseiYMD;
         this.gemmenJiyuCode = gemmenJiyuCode;
+        this.gemmenJiyu = gemmenJiyu;
         this.shinseiJiyu = shinseiJiyu;
         this.ketteiYMD = ketteiYMD;
         this.ketteiJiyu = ketteiJiyu;
