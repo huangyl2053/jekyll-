@@ -5,10 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010012;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiMeisaiJushochiTokurei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShukei;
@@ -45,7 +42,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     private static final RString TEXT_公費３ = new RString("公費３");
     private static final int INT_ZERO = 0;
     private static final RString 介護保険 = new RString("08");
-
     private final KyufuJissekiSyokaiMeisaiSyukeiDiv div;
 
     /**
@@ -63,16 +59,13 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param 集計情報リスト List<KyufujissekiShukei>
      * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
      * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokureiBusiness>
-     * @param 通し番号 RString
      * @param サービス提供年月 FlexibleYearMonth
      * @param 様式番号 RString
-     * @param 事業者番号 RString
      * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
      */
     public void onLoad(List<KyufujissekiShukei> 集計情報リスト, List<KyufujissekiMeisaiBusiness> 明細情報リスト,
-            List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト, RString 通し番号,
-            FlexibleYearMonth サービス提供年月, RString 様式番号, RString 事業者番号,
-            List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
+            List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト, FlexibleYearMonth サービス提供年月,
+            RString 様式番号, List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         set明細情報の表示制御(様式番号, サービス提供年月);
         set明細情報特例の表示制御(様式番号, サービス提供年月);
         setDataGrid総計(集計情報リスト, 明細情報リスト, 明細情報特例リスト, 保険者情報);
@@ -132,9 +125,8 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * ボタン状態の設定です。
      *
      * @param 識別番号管理 ShikibetsuNoKanri
-     * @param サービス提供年月 FlexibleYearMonth
      */
-    public void setButton(ShikibetsuNoKanri 識別番号管理, FlexibleYearMonth サービス提供年月) {
+    public void setButton(ShikibetsuNoKanri 識別番号管理) {
         if (非活性.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
         } else {
@@ -253,7 +245,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
 
     private List<dgKyufuJissekiShukei_Row> set集計情報(KyufujissekiShukei 集計情報) {
         List<dgKyufuJissekiShukei_Row> rowList = new ArrayList<>();
-
         dgKyufuJissekiShukei_Row row_保険 = new dgKyufuJissekiShukei_Row();
         row_保険.setTxtServiceShurui(setサービス種類(集計情報.getサービス種類コード()));
         row_保険.setTxtJitsuNissu(checkInteger(集計情報.getサービス実日数()));
@@ -275,7 +266,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_保険.setTxtKagoKaisu(checkInteger(集計情報.get過誤回数()));
         row_保険.setTxtShinsaYM(checkDate(集計情報.get審査年月()));
         rowList.add(row_保険);
-
         dgKyufuJissekiShukei_Row row_後_保険 = new dgKyufuJissekiShukei_Row();
         row_後_保険.setTxtServiceShurui(RString.EMPTY);
         row_後_保険.setTxtJitsuNissu(RString.EMPTY);
@@ -297,7 +287,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_保険.setTxtKagoKaisu(RString.EMPTY);
         row_後_保険.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_後_保険);
-
         dgKyufuJissekiShukei_Row row_公費１ = new dgKyufuJissekiShukei_Row();
         row_公費１.setTxtServiceShurui(RString.EMPTY);
         row_公費１.setTxtJitsuNissu(RString.EMPTY);
@@ -319,7 +308,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費１.setTxtKagoKaisu(RString.EMPTY);
         row_公費１.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_公費１);
-
         dgKyufuJissekiShukei_Row row_後_公費１ = new dgKyufuJissekiShukei_Row();
         row_後_公費１.setTxtServiceShurui(RString.EMPTY);
         row_後_公費１.setTxtJitsuNissu(RString.EMPTY);
@@ -347,7 +335,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
 
     private List<dgKyufuJissekiShukei_Row> addSet集計情報(KyufujissekiShukei 集計情報) {
         List<dgKyufuJissekiShukei_Row> rowList = new ArrayList<>();
-
         dgKyufuJissekiShukei_Row row_公費２ = new dgKyufuJissekiShukei_Row();
         row_公費２.setTxtServiceShurui(RString.EMPTY);
         row_公費２.setTxtJitsuNissu(RString.EMPTY);
@@ -369,7 +356,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費２.setTxtKagoKaisu(RString.EMPTY);
         row_公費２.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_公費２);
-
         dgKyufuJissekiShukei_Row row_後_公費２ = new dgKyufuJissekiShukei_Row();
         row_後_公費２.setTxtServiceShurui(RString.EMPTY);
         row_後_公費２.setTxtJitsuNissu(RString.EMPTY);
@@ -391,7 +377,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_公費２.setTxtKagoKaisu(RString.EMPTY);
         row_後_公費２.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_後_公費２);
-
         dgKyufuJissekiShukei_Row row_公費３ = new dgKyufuJissekiShukei_Row();
         row_公費３.setTxtServiceShurui(RString.EMPTY);
         row_公費３.setTxtJitsuNissu(RString.EMPTY);
@@ -413,7 +398,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費３.setTxtKagoKaisu(RString.EMPTY);
         row_公費３.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_公費３);
-
         dgKyufuJissekiShukei_Row row_後_公費３ = new dgKyufuJissekiShukei_Row();
         row_後_公費３.setTxtServiceShurui(RString.EMPTY);
         row_後_公費３.setTxtJitsuNissu(RString.EMPTY);
@@ -554,13 +538,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         return data.wareki().toDateString();
     }
 
-    private RString checkDateToRString(FlexibleYearMonth data) {
-        if (data == null) {
-            return RString.EMPTY;
-        }
-        return data.toDateString();
-    }
-
     private RString checkInteger(Integer data) {
         if (data == null) {
             return RString.EMPTY;
@@ -580,44 +557,5 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(data, INT_ZERO);
-    }
-
-    private static class DateComparatorServiceTeikyoYM implements Comparator<FlexibleYearMonth>, Serializable {
-
-        private static final long serialVersionUID = 3519678578744079048L;
-
-        @Override
-        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
-            return o2.compareTo(o1);
-        }
-    }
-
-    private static class DateComparatorServiceYM implements Comparator<FlexibleYearMonth>, Serializable {
-
-        @Override
-        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
-            return o1.compareTo(o2);
-        }
-    }
-
-    private FlexibleYearMonth get前月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト,
-            FlexibleYearMonth サービス提供年月) {
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
-            if (サービス年月.isBefore(サービス提供年月)) {
-                return サービス年月;
-            }
-        }
-        return FlexibleYearMonth.EMPTY;
-    }
-
-    private FlexibleYearMonth get次月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceYM());
-        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
-            if (サービス提供年月.isBefore(サービス年月)) {
-                return サービス年月;
-            }
-        }
-        return FlexibleYearMonth.EMPTY;
     }
 }

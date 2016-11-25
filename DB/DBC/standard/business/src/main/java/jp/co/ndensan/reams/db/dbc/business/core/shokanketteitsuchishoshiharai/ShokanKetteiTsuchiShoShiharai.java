@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -112,10 +113,14 @@ public class ShokanKetteiTsuchiShoShiharai {
      * @return 郵便番号
      */
     public RString get郵便番号() {
-        if (null == entity.get宛先Entity() || entity.get宛先Entity().getYubinNo() == null) {
+        if (null == entity.get宛先Entity()) {
             return RString.EMPTY;
         }
-        return new RString(entity.get宛先Entity().getYubinNo().toString());
+        YubinNo 郵便番号 = entity.get宛先Entity().getYubinNo();
+        if (null != 郵便番号) {
+            return new RString(郵便番号.toString());
+        }
+        return RString.EMPTY;
     }
 
     /**

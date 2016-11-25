@@ -62,7 +62,7 @@ public enum ShikyugakuKeisanKekkaTorokuMessage implements IValidationMessage {
     /**
      * 自己負担額証明書整理番号既に存在
      */
-    自己負担額証明書整理番号既に存在(UrErrorMessages.既に存在, "自己負担額証明書整理番号"),
+    自己負担額証明書整理番号既に存在(DbcWarningMessages.高額合算支給額計算結果登録),
     /**
      * 内訳入力途中
      */

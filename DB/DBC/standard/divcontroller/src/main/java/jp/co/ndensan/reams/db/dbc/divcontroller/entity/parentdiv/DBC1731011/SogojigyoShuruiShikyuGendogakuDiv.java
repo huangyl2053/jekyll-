@@ -7,23 +7,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1731011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * SogojigyoShuruiShikyuGendogaku のクラスファイル
- *
- * @reamsid_L DBC-3364-010 xuxin
+ * SogojigyoShuruiShikyuGendogaku のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,6 +31,8 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
     private DataGrid<dgShikyuGendogaku_Row> dgShikyuGendogaku;
     @JsonProperty("ShuruiShikyuGendogakuShosai")
     private ShuruiShikyuGendogakuShosaiDiv ShuruiShikyuGendogakuShosai;
+    @JsonProperty("KanryoMessagePanel")
+    private KanryoMessagePanelDiv KanryoMessagePanel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -98,6 +95,24 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
     }
 
     /*
+     * getKanryoMessagePanel
+     * @return KanryoMessagePanel
+     */
+    @JsonProperty("KanryoMessagePanel")
+    public KanryoMessagePanelDiv getKanryoMessagePanel() {
+        return KanryoMessagePanel;
+    }
+
+    /*
+     * setKanryoMessagePanel
+     * @param KanryoMessagePanel KanryoMessagePanel
+     */
+    @JsonProperty("KanryoMessagePanel")
+    public void setKanryoMessagePanel(KanryoMessagePanelDiv KanryoMessagePanel) {
+        this.KanryoMessagePanel = KanryoMessagePanel;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -106,7 +121,7 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTekiyoKaishiYM(TextBoxDate txtTekiyoKaishiYM) {
+    public void  setTxtTekiyoKaishiYM(TextBoxDate txtTekiyoKaishiYM) {
         this.getShuruiShikyuGendogakuShosai().setTxtTekiyoKaishiYM(txtTekiyoKaishiYM);
     }
 
@@ -116,7 +131,7 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTekiyoShuryoYM(TextBoxDate txtTekiyoShuryoYM) {
+    public void  setTxtTekiyoShuryoYM(TextBoxDate txtTekiyoShuryoYM) {
         this.getShuruiShikyuGendogakuShosai().setTxtTekiyoShuryoYM(txtTekiyoShuryoYM);
     }
 
@@ -126,7 +141,7 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlServiceShurui(DropDownList ddlServiceShurui) {
+    public void  setDdlServiceShurui(DropDownList ddlServiceShurui) {
         this.getShuruiShikyuGendogakuShosai().setDdlServiceShurui(ddlServiceShurui);
     }
 
@@ -136,7 +151,7 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLinShosai(HorizontalLine linShosai) {
+    public void  setLinShosai(HorizontalLine linShosai) {
         this.getShuruiShikyuGendogakuShosai().setLinShosai(linShosai);
     }
 
@@ -146,7 +161,7 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblMassage1(Label lblMassage1) {
+    public void  setLblMassage1(Label lblMassage1) {
         this.getShuruiShikyuGendogakuShosai().setLblMassage1(lblMassage1);
     }
 
@@ -156,7 +171,7 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTblGendogaku(tblGendogakuDiv tblGendogaku) {
+    public void  setTblGendogaku(tblGendogakuDiv tblGendogaku) {
         this.getShuruiShikyuGendogakuShosai().setTblGendogaku(tblGendogaku);
     }
 
@@ -198,6 +213,11 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
     @JsonIgnore
     public TextBoxNum getTxtNijiYobo() {
         return this.getShuruiShikyuGendogakuShosai().getTblGendogaku().getTxtNijiYobo();
+    }
+
+    @JsonIgnore
+    public IKanryoMessageDiv getCcdKanryoMessage() {
+        return this.getKanryoMessagePanel().getCcdKanryoMessage();
     }
 
     // </editor-fold>

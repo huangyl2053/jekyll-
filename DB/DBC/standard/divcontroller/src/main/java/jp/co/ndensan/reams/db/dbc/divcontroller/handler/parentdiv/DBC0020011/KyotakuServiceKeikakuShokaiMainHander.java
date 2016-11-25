@@ -10,24 +10,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyotakuServiceRirekiIchiranEntityResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyotakuServiceRirekiIchiranJoho;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakuserviceriyohyomain.TaishoshaIchiranResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.TodokedeshaKankeiKBN;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.KeikakuJigyoshaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.KyotakuServiceKeikakuShokaiMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.dgKyotakuServiceRirekiIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011.dgRiyoNentstsuIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.jigosakuseimeisaitouroku.JigoSakuseiMeisaiTouroku;
 import jp.co.ndensan.reams.db.dbc.service.core.kyotakuserviceriyohyomain.KyotakuServiceRiyohyoMainFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.TodokedeKubun;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBC0020011_居宅サービス計画照会のハンドラクラスです。
@@ -41,6 +47,11 @@ public class KyotakuServiceKeikakuShokaiMainHander {
     private static final RString キー_被保険者番号 = new RString("被保険者番号");
     private static final RString キー_対象年月 = new RString("対象年月");
     private static final RString キー_履歴番号 = new RString("履歴番号");
+    private static final RString サービス種類_居宅介護 = new RString("居宅介護");
+    private static final RString サービス種類_居宅予防 = new RString("居宅予防");
+    private static final RString サービス種類_小規模介護 = new RString("小規模介護");
+    private static final RString サービス種類_小規模予防 = new RString("小規模予防");
+    private static final RString サービス種類_ケアマネジメント = new RString("ケアマネジメント");
 
     /**
      * コンストラクタです。
@@ -86,6 +97,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
 
         }
         div.getDgKyotakuServiceRirekiIchiran().setDataSource(rowList);
+        ViewStateHolder.put(ViewStateKeys.居宅サービス履歴一覧, new KyotakuServiceRirekiIchiranJoho(entityLists));
         return entityLists;
     }
 
@@ -93,20 +105,37 @@ public class KyotakuServiceKeikakuShokaiMainHander {
      * 対象情報一覧を取得
      *
      * @param 被保険者番号 HihokenshaNo
+     * @param 対象年月 対象年月
+     * @param 作成区分 作成区分
      * @param 居宅給付計画届出 KyotakuKeikakuTodokede
      */
-    public void get対象情報一覧(HihokenshaNo 被保険者番号, KyotakuKeikakuTodokede 居宅給付計画届出) {
+    public void get対象情報一覧(HihokenshaNo 被保険者番号, FlexibleYearMonth 対象年月, RString 作成区分, KyotakuKeikakuTodokede 居宅給付計画届出) {
         Map<String, Object> parameter = new HashMap<>();
         parameter.put(キー_被保険者番号.toString(), 被保険者番号);
         parameter.put(キー_対象年月.toString(), 居宅給付計画届出.get対象年月());
         parameter.put(キー_履歴番号.toString(), 居宅給付計画届出.get履歴番号());
         KyotakuServiceRiyohyoMainFinder finder = KyotakuServiceRiyohyoMainFinder.createInstance();
         List<TaishoshaIchiranResult> 対象情報一覧 = finder.selectTaishoshaIchiran(parameter).records();
-        set自己作成情報エリア(居宅給付計画届出);
-        set対象情報一覧(対象情報一覧);
+        KyotakuServiceRirekiIchiranEntityResult 居宅サービス履歴 = get居宅サービス履歴(対象年月, 作成区分);
+        RString 作成区分コード = 居宅サービス履歴.get作成区分コード();
+        set居宅サービス届出情報エリア(居宅給付計画届出, 居宅サービス履歴);
+        set対象情報一覧(対象情報一覧, 作成区分コード);
     }
 
-    private void set自己作成情報エリア(KyotakuKeikakuTodokede 居宅給付計画届出) {
+    private KyotakuServiceRirekiIchiranEntityResult get居宅サービス履歴(FlexibleYearMonth 対象年月, RString 作成区分) {
+        KyotakuServiceRirekiIchiranJoho ichiranJoho = ViewStateHolder.get(ViewStateKeys.居宅サービス履歴一覧, KyotakuServiceRirekiIchiranJoho.class);
+        if (ichiranJoho != null) {
+            for (KyotakuServiceRirekiIchiranEntityResult entityResult : ichiranJoho.getRirekiIchiran()) {
+                if (対象年月.equals(entityResult.get対象年月())
+                        && 作成区分.equals(JukyushaIF_KeikakuSakuseiKubunCode.toValue(entityResult.get作成区分コード()).get名称())) {
+                    return entityResult;
+                }
+            }
+        }
+        return null;
+    }
+
+    private void set居宅サービス届出情報エリア(KyotakuKeikakuTodokede 居宅給付計画届出, KyotakuServiceRirekiIchiranEntityResult 居宅サービス履歴) {
         dgKyotakuServiceRirekiIchiran_Row row = div.getDgKyotakuServiceRirekiIchiran().getClickedItem();
         if (居宅給付計画届出.get届出年月日() == null) {
             div.getTxtTodokedeYmd().clearValue();
@@ -128,7 +157,10 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         } else {
             div.getTxtTekiyoKikan().setToValue(new RDate(row.getTekiyoShuryoYMD().getValue().toString()));
         }
+        div.getTxtKyotakuSogoJigyoKubun().setValue(居宅サービス履歴.get居宅総合事業区分());
+        div.getTxtKeikakuSakuseiKubun().setValue(JukyushaIF_KeikakuSakuseiKubunCode.toValue(居宅サービス履歴.get作成区分コード()).get名称());
         set届出者情報(居宅給付計画届出);
+        set計画事業者エリア(居宅サービス履歴);
     }
 
     private void set届出者情報(KyotakuKeikakuTodokede 居宅給付計画届出) {
@@ -165,21 +197,61 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         }
     }
 
-    private void set対象情報一覧(List<TaishoshaIchiranResult> 対象情報一覧) {
-        div.getDgRiyoNentstsuIchiran().init();
-        List<dgRiyoNentstsuIchiran_Row> rowList = new ArrayList();
-        for (TaishoshaIchiranResult result : 対象情報一覧) {
-            dgRiyoNentstsuIchiran_Row row = new dgRiyoNentstsuIchiran_Row();
-            row.getRiyoYM().setValue(new RDate(result.get利用年月().toString()));
-            if (!RString.isNullOrEmpty(result.get更新区分())) {
-                row.setKoshinKubun(KyufukanrihyoSakuseiKubun.toValue(result.get更新区分()).get名称());
+    private void set計画事業者エリア(KyotakuServiceRirekiIchiranEntityResult 居宅サービス履歴) {
+        KeikakuJigyoshaDiv jigyoshaDiv = div.getKeikakuJigyosha();
+        if (JukyushaIF_KeikakuSakuseiKubunCode.自己作成.getコード().equals(居宅サービス履歴.get作成区分コード())) {
+            jigyoshaDiv.setDisplayNone(true);
+        } else {
+            jigyoshaDiv.setDisplayNone(false);
+            jigyoshaDiv.getTxtJigyoshaNo().setValue(居宅サービス履歴.get事業者番号());
+            jigyoshaDiv.getTxtJigyoshaName().setValue(居宅サービス履歴.get事業者名());
+            RString サービス種類コード = 居宅サービス履歴.getサービス種類コード().getColumnValue();
+            RString サービス種類 = RString.EMPTY;
+            if (ServiceCategoryShurui.居宅支援.getコード().equals(サービス種類コード)) {
+                サービス種類 = サービス種類_居宅介護;
+            } else if (ServiceCategoryShurui.予防支援.getコード().equals(サービス種類コード)) {
+                サービス種類 = サービス種類_居宅予防;
+            } else if (ServiceCategoryShurui.地小短外.getコード().equals(サービス種類コード)) {
+                サービス種類 = サービス種類_小規模介護;
+            } else if (ServiceCategoryShurui.地予小外.getコード().equals(サービス種類コード)) {
+                サービス種類 = サービス種類_小規模予防;
+            } else if (ServiceCategoryShurui.予防ケア.getコード().equals(サービス種類コード)) {
+                サービス種類 = サービス種類_ケアマネジメント;
             }
-            row.getKoshinYMD().setValue(DateConverter.flexibleDateToRDate(result.get更新年月日()));
-            row.getSofuYM().setValue(result.get送付年月() == null
-                    || RString.EMPTY.equals(result.get送付年月().toDateString()) ? null
-                    : new RDate(result.get送付年月().toString()));
-            rowList.add(row);
+            jigyoshaDiv.getTxtServiceShuruiMeisho().setValue(サービス種類);
+            jigyoshaDiv.getTxtJigyoshaYubinNo().setValue(居宅サービス履歴.get事業者郵便番号());
+            jigyoshaDiv.getTxtJigyoshaJusho().setValue(居宅サービス履歴.get事業者住所().getColumnValue());
+            jigyoshaDiv.getTxtJigyoshaTelNo().setDomain(居宅サービス履歴.get事業者電話番号());
+            jigyoshaDiv.getTxtKanrishaName().setDomain(居宅サービス履歴.get管理者名());
+            jigyoshaDiv.getTxtItakusakiJigyoshaNo().setValue(居宅サービス履歴.get委託先情報者コード());
+            jigyoshaDiv.getTxtItakusakiJigyoshaName().setValue(居宅サービス履歴.get委託先情報者名());
+            if (居宅サービス履歴.get事業者変更年月日() != null && !居宅サービス履歴.get事業者変更年月日().isEmpty()) {
+                jigyoshaDiv.getTxtHenkoYMD().setValue(new RDate(居宅サービス履歴.get事業者変更年月日().toString()));
+            }
+            jigyoshaDiv.getTxtHenkoJiyu().setValue(居宅サービス履歴.get事業者変更事由());
         }
-        div.getDgRiyoNentstsuIchiran().setDataSource(rowList);
+    }
+
+    private void set対象情報一覧(List<TaishoshaIchiranResult> 対象情報一覧, RString 作成区分コード) {
+        if (JukyushaIF_KeikakuSakuseiKubunCode.自己作成.getコード().equals(作成区分コード)) {
+            div.getRiyoNengetsuIchiran().setDisplayNone(false);
+            div.getDgRiyoNentstsuIchiran().init();
+            List<dgRiyoNentstsuIchiran_Row> rowList = new ArrayList();
+            for (TaishoshaIchiranResult result : 対象情報一覧) {
+                dgRiyoNentstsuIchiran_Row row = new dgRiyoNentstsuIchiran_Row();
+                row.getRiyoYM().setValue(new RDate(result.get利用年月().toString()));
+                if (!RString.isNullOrEmpty(result.get更新区分())) {
+                    row.setKoshinKubun(KyufukanrihyoSakuseiKubun.toValue(result.get更新区分()).get名称());
+                }
+                row.getKoshinYMD().setValue(DateConverter.flexibleDateToRDate(result.get更新年月日()));
+                row.getSofuYM().setValue(result.get送付年月() == null
+                        || RString.EMPTY.equals(result.get送付年月().toDateString()) ? null
+                        : new RDate(result.get送付年月().toString()));
+                rowList.add(row);
+            }
+            div.getDgRiyoNentstsuIchiran().setDataSource(rowList);
+        } else {
+            div.getRiyoNengetsuIchiran().setDisplayNone(true);
+        }
     }
 }

@@ -44,8 +44,6 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
     private static final RString 有効の開始日 = new RString("有効開始日");
     private static final RString 有効の日 = new RString("有効日");
     private static final RString 介護事業者指定サービス = new RString("介護事業者指定サービス");
-    private static final RString DATE_43 = new RString("43");
-    private static final RString DATE_46 = new RString("46");
 
     /**
      * 主キーで介護事業者指定サービスを取得します。
@@ -215,13 +213,15 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
      *
      * @param 適用開始日 FlexibleDate
      * @param 事業者番号 JigyoshaNo
+     * @param サービス種類コード ServiceShuruiCode
      * @return DbT7063KaigoJigyoshaShiteiServiceEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
-    public DbT7063KaigoJigyoshaShiteiServiceEntity select_事業者名称(FlexibleDate 適用開始日, JigyoshaNo 事業者番号
-    ) throws NullPointerException {
+    public DbT7063KaigoJigyoshaShiteiServiceEntity select_事業者名称(FlexibleDate 適用開始日, JigyoshaNo 事業者番号,
+            ServiceShuruiCode サービス種類コード) throws NullPointerException {
         requireNonNull(適用開始日, UrSystemErrorMessages.値がnull.getReplacedMessage(適用開始日.toString()));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(事業者番号.toString()));
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス種類コード.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7063KaigoJigyoshaShiteiService.class).
@@ -233,8 +233,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
                                         isNULL(yukoShuryoYMD)),
                                 and(leq(yukoKaishiYMD, 適用開始日),
                                         eq(yukoShuryoYMD, FlexibleDate.EMPTY))),
-                        or(eq(serviceShuruiCode, DATE_43),
-                                eq(serviceShuruiCode, DATE_46))
+                        eq(serviceShuruiCode, サービス種類コード)
                 )
                 ).toObject(DbT7063KaigoJigyoshaShiteiServiceEntity.class);
 

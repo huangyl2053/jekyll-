@@ -96,8 +96,8 @@ public class UpdateDbT7022Process extends BatchProcessBase<DbT7022ShoriDateKanri
             entity.setKijunYMD(FlexibleDate.EMPTY);
             entity.setNendo(new FlexibleYear("0000"));
             entity.setNendoNaiRenban(INSERT_RENBAN);
-            entity.setTaishoKaishiTimestamp(new YMDHMS(""));
-            entity.setTaishoShuryoTimestamp(new YMDHMS(""));
+            entity.setTaishoKaishiTimestamp(new YMDHMS(RString.EMPTY));
+            entity.setTaishoShuryoTimestamp(new YMDHMS(RString.EMPTY));
             tempDbWriter.insert(entity);
         }
     }

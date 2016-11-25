@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010012
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeaderAll;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiParam;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
@@ -20,7 +19,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiSh
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekisyokaimeisaisyukei.KyufuJissekiSyokaiMeisaiSyukeiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -31,8 +29,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KyufuJissekiSyokaiMeisaiSyukei {
 
-    private static final int INT_ZERO = 0;
-
     /**
      * 画面の初期化メソッドです。
      *
@@ -40,29 +36,21 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
      * @return 給付実績照会_明細集計画面
      */
     public ResponseData<KyufuJissekiSyokaiMeisaiSyukeiDiv> onLoad(KyufuJissekiSyokaiMeisaiSyukeiDiv div) {
-        KyufuJissekiHeader 給付実績基本情報子Divデータ
-                = ViewStateHolder.get(ViewStateKeys.給付実績基本情報子Div, KyufuJissekiHeader.class);
-        div.getCcdKyufuJissekiHeader().set被保情報(給付実績基本情報子Divデータ);
-        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufuJissekiParam para = ViewStateHolder.get(ViewStateKeys.給付実績データパラメータ, KyufuJissekiParam.class);
         KyufuJissekiHeaderAll 給付実績基本情報 = ViewStateHolder.get(ViewStateKeys.給付実績基本情報データ, KyufuJissekiHeaderAll.class);
         div.getCcdKyufuJissekiHeader().set給付実績基本情報データ(給付実績基本情報);
         KyufuJissekiSyokaiMeisaiSyukeiHandler handler = getHandler(div);
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
-                get検索集計と明細と住所地データ(para.get被保険者番号(), サービス提供年月, para.get入力識別番号(), para.get事業所番号(), para.get通し番号());
+                get検索集計と明細と住所地データ(
+                        para.get被保険者番号(), para.getサービス提供年月(), para.get入力識別番号(), para.get事業所番号(), para.get通し番号());
         List<KyufujissekiShukei> 集計データ = 給付実績情報照会情報.getCsData_Z();
         List<KyufujissekiMeisaiBusiness> 明細データ = 給付実績情報照会情報.getCsData_B();
         List<KyufujissekiMeisaiJushochiTokureiBusiness> 住所地特例データ = 給付実績情報照会情報.getCsData_N();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
-        handler.onLoad(集計データ, 明細データ, 住所地特例データ,
-                para.get通し番号(), サービス提供年月, 様式番号, 事業者番号,
+        handler.onLoad(集計データ, 明細データ, 住所地特例データ, para.getサービス提供年月(), 様式番号,
                 KyufuJissekiSyokaiMeisaiSyukeiFinder.createInstance().get保険者情報().records());
-        List<ShikibetsuNoKanri> 識別番号管理リスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
-                サービス提供年月, para.get入力識別番号()).records();
-        if (識別番号管理リスト != null && !識別番号管理リスト.isEmpty()) {
-            handler.setButton(識別番号管理リスト.get(0), サービス提供年月);
-        }
+        ShikibetsuNoKanri 識別番号管理データ = ViewStateHolder.get(ViewStateKeys.識別番号管理, ShikibetsuNoKanri.class);
+        handler.setButton(識別番号管理データ);
         return ResponseData.of(div).respond();
     }
 

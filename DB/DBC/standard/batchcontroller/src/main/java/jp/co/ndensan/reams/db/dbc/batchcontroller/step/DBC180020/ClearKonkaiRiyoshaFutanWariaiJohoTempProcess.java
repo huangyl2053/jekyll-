@@ -5,39 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.KonkaiRiyoshaFutanWariaiJohoTempEntity;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper;
+import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
  * 今回利用者負担割合情報Tempの削除プロセスです。
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
-public class ClearKonkaiRiyoshaFutanWariaiJohoTempProcess extends BatchProcessBase<KonkaiRiyoshaFutanWariaiJohoTempEntity> {
-
-    private static final RString TABLENAME = new RString("KonkaiRiyoshaFutanWariaiJohoTemp");
-    private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select今回利用者負担割合情報Temp");
-    @BatchWriter
-    private BatchEntityCreatedTempTableWriter 月別負担割合新Temp;
+public class ClearKonkaiRiyoshaFutanWariaiJohoTempProcess extends SimpleBatchProcessBase {
 
     @Override
-    protected void createWriter() {
-        月別負担割合新Temp = new BatchEntityCreatedTempTableWriter(TABLENAME, KonkaiRiyoshaFutanWariaiJohoTempEntity.class);
+    protected void process() {
+        IRiyoshaFutanwariaiMapper mapper = getMapper(IRiyoshaFutanwariaiMapper.class);
+        mapper.delete今回利用者負担割合情報Temp();
     }
 
-    @Override
-    protected void process(KonkaiRiyoshaFutanWariaiJohoTempEntity entity) {
-        月別負担割合新Temp.delete(entity);
-    }
-
-    @Override
-    protected IBatchReader createReader() {
-        return new BatchDbReader(PATH);
-    }
 }

@@ -442,16 +442,24 @@ public class NonyuTsuchiShoJohoFactory {
             パターンOCR.put(new ReportId("DBB100015_KarisanteiHokenryoNonyuTsuchishoKigotoRencho"), OcrPattern.期別納付書_OCRID300);
             パターンOCR.put(new ReportId("DBB100018_KarisanteiHokenryoNonyuTsuchishoGinfuri"), OcrPattern.期別納付書_OCRID300);
             パターンOCR.put(new ReportId("DBB100019_KarisanteiHokenryoNonyuTsuchishoGinfuriRencho"), OcrPattern.期別納付書_OCRID300);
+            パターンOCR.put(new ReportId("DBB100066_KanendoHokenryoNonyuTsuchishoKigoto"), OcrPattern.期別納付書_OCRID300);
+            パターンOCR.put(new ReportId("DBB100069_KanendoHokenryoNonyuTsuchishoGinfuriFourKi"), OcrPattern.期別納付書_OCRID300);
+            パターンOCR.put(new ReportId("DBB100070_KanendoHokenryoNonyuTsuchishoGinfuriFiveKi"), OcrPattern.期別納付書_OCRID300);
             パターンOCR.put(new ReportId("DBB100020_KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAri"), OcrPattern.期別納付書_ブックタイプ_OCRID318);
             パターンOCR.put(new ReportId("DBB100021_KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashi"), OcrPattern.期別納付書_ブックタイプ_OCRID318);
             パターンOCR.put(new ReportId("DBB100022_KarisanteiNonyuTsuchishoBookFuriKaeAriRencho"), OcrPattern.期別納付書_ブックタイプ_OCRID318);
             パターンOCR.put(new ReportId("DBB100023_KarisanteiNonyuTsuchishoBookFuriKaeNashiRencho"), OcrPattern.期別納付書_ブックタイプ_OCRID318);
+            パターンOCR.put(new ReportId("DBB100071_KanendoNonyuTsuchishoBookFuriKaeAri"), OcrPattern.期別納付書_ブックタイプ_OCRID318);
+            パターンOCR.put(new ReportId("DBB100072_KanendoNonyuTsuchishoBookFuriKaeNashi"), OcrPattern.期別納付書_ブックタイプ_OCRID318);
             パターンOCR.put(new ReportId("DBB100026_KarisanteiNonyuTsuchishoCVSMulti"), OcrPattern.マルペイ納付書_手書き_OCRID378);
             パターンOCR.put(new ReportId("DBB100027_KarisanteiNonyuTsuchishoCVSMultiRencho"), OcrPattern.マルペイ納付書_手書き_OCRID378);
             パターンOCR.put(new ReportId("DBB100028_KarisanteiNonyuTsuchishoCVSKigoto"), OcrPattern.マルペイ納付書_手書き_OCRID378);
             パターンOCR.put(new ReportId("DBB100029_KarisanteiNonyuTsuchishoCVSKigotoRencho"), OcrPattern.マルペイ納付書_手書き_OCRID378);
+            パターンOCR.put(new ReportId("DBB100075_KanendoNonyuTsuchishoCVSMulti"), OcrPattern.マルペイ納付書_手書き_OCRID378);
+            パターンOCR.put(new ReportId("DBB100076_KanendoNonyuTsuchishoCVSKigoto"), OcrPattern.マルペイ納付書_手書き_OCRID378);
             パターンOCR.put(new ReportId("DBB100024_KarisanteiNonyuTsuchishoCVSKakuko"), OcrPattern.マルペイ納付書_ＭＴ_OCRID375);
             パターンOCR.put(new ReportId("DBB100025_KarisanteiNonyuTsuchishoCVSKakukoRencho"), OcrPattern.マルペイ納付書_ＭＴ_OCRID375);
+            パターンOCR.put(new ReportId("DBB100073_KanendoNonyuTsuchishoCVSKakuko"), OcrPattern.マルペイ納付書_ＭＴ_OCRID375);
         }
         return パターンOCR.get(帳票ID);
     }

@@ -44,8 +44,8 @@ public class JikoFutangakushomeishoFrom2009BodyEditor implements IJikoFutangakus
 
     private RString toRString(Decimal 金額) {
         if (金額 != null) {
-            return DecimalFormatter.toRString(金額, 0);
+            return DecimalFormatter.toコンマ区切りRString(金額, 0);
         }
-        return RString.EMPTY;
+        return new RString(Decimal.ZERO.toString());
     }
 }

@@ -88,12 +88,12 @@ public class DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuika
 
     @Step(CLEAR世帯員情報)
     IBatchFlowCommand clearSetaiinJohoTempProcess() {
-        return loopBatch(ClearSetaiinJohoTempProcess.class).arguments(processPrm).define();
+        return simpleBatch(ClearSetaiinJohoTempProcess.class).define();
     }
 
     @Step(CLEAR世帯員把握入力)
     IBatchFlowCommand clearSetainHakuNyuryokuTempProcess() {
-        return loopBatch(ClearSetainHakuNyuryokuTempProcess.class).arguments(processPrm).define();
+        return simpleBatch(ClearSetainHakuNyuryokuTempProcess.class).define();
     }
 
     @Step(世帯員把握入力)

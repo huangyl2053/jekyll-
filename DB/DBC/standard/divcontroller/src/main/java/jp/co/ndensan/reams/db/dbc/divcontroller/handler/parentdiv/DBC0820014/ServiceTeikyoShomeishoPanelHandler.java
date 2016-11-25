@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.S
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdServiceTeikyoShomeisyo_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
-import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteFath;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -152,7 +152,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 dgdServiceTeikyoShomeisyo_Row row = new dgdServiceTeikyoShomeisyo_Row();
                 row.setShori(shomeishoGrid.get処理());
                 row.setData1(shomeishoGrid.get事業者番号());
-                row.setData2(SyokanbaraihiShikyuShinseiKetteManager.createInstance()
+                row.setData2(SyokanbaraihiShikyuShinseiKetteFath.createInstance()
                         .get介護事業者(new JigyoshaNo(shomeishoGrid.get事業者番号()), new FlexibleDate(サービス年月.toDateString().concat(一日時点))));
                 row.setData3(shomeishoGrid.get明細());
                 row.setData4(shomeishoGrid.getサービス提供証明書());
@@ -166,7 +166,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 JigyoshaNo jigyoshaNo = 証明書情報.getServiceTeikyoShomeisho().getJigyoshaNo();
                 if (jigyoshaNo != null) {
                     row.setData1(jigyoshaNo.getColumnValue());
-                    row.setData2(SyokanbaraihiShikyuShinseiKetteManager.createInstance()
+                    row.setData2(SyokanbaraihiShikyuShinseiKetteFath.createInstance()
                             .get介護事業者(jigyoshaNo, new FlexibleDate(サービス年月.toDateString().concat(一日時点))));
                 }
                 row.setData3(証明書情報.getServiceTeikyoShomeisho().getMeisanNo());
@@ -241,7 +241,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
             HihokenshaNo 被保険者番号, DbJohoViewState 償還払ViewStateDB情報) {
         JigyoshaNo 事業者番号 = new JigyoshaNo(div.getPanelShinseiNaiyo().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
         RString 様式番号 = div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedKey();
-        int 証明書件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(
+        int 証明書件数 = SyokanbaraihiShikyuShinseiKetteFath.createInstance().getShikibetsuNoKanri(
                 被保険者番号,
                 サービス年月,
                 整理番号,
@@ -272,7 +272,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
                     && !償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList().isEmpty()) {
                 償還払請求サービス計画200004データList = 償還払ViewStateDB情報.get償還払請求サービス計画200004データResultList();
             }
-            int 証明書件数ViewState = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShomeishoKensu(
+            int 証明書件数ViewState = SyokanbaraihiShikyuShinseiKetteFath.createInstance().getShomeishoKensu(
                     被保険者番号,
                     サービス年月,
                     整理番号,

@@ -62,7 +62,7 @@ public class TsuchishoJoho652 {
         parameter.setShutsuryokujunId(出力順ID);
         if (SaiShoriKubun.再処理.get名称().equals(再処理区分)) {
             parameter.setSaishoriKubun(SaiShoriKubun.再処理);
-        } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
+        } else {
             parameter.setSaishoriKubun(SaiShoriKubun.空白);
         }
         parameter.setLoginUserId(ControlDataHolder.getUserId());

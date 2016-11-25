@@ -240,7 +240,7 @@
         AND 判定結果."seiriNo" = 支給申請."seiriNo"
         AND 判定結果."shikyuHushikyuKetteiKubun" = '1'
         ORDER BY
-        支給申請."serviceTeikyoYM" DESC
+        支給申請."serviceTeikyoYM" ASC
         LIMIT 1
     </select>
 

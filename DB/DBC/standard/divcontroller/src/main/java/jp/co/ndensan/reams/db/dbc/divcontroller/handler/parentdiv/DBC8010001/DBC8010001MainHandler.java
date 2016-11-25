@@ -53,6 +53,7 @@ public class DBC8010001MainHandler {
     private static final int INDEXSTART = 0;
     private static final int INDEXEND = 6;
     private static final int INDEX_4 = 4;
+    private static final RString 受託あり = new RString("2");
 
     /**
      * コンストラクターです。
@@ -102,9 +103,13 @@ public class DBC8010001MainHandler {
         div.getItakusha().getTxtItakushaCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaCode());
         div.getItakusha().getTxtItakushamei().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushamei());
         div.getItakusha().setItakushaId(new RString(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaId().toString()));
+        RString 振込委託者 = RString.EMPTY;
+        KinyuKikanCode 振込委託者コード = entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode();
+        if (null != 振込委託者コード && !振込委託者コード.isEmpty()) {
+            振込委託者 = 振込委託者コード.value();
+        }
         div.getItakusha().getTxtFurikomiGroupCode().setValue(
-                entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode().value()
-                .concat(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode()));
+                振込委託者.concat(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode()));
         div.getItakusha().getTxtFurikomiGroupMeisho().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupMeisho());
         List<KeyValueDataSource> list1 = new ArrayList<>();
         KeyValueDataSource source1 = new KeyValueDataSource();
@@ -187,21 +192,26 @@ public class DBC8010001MainHandler {
     }
 
     private void init表示制御(RString メニューID, RString 振込単位, DBC8010001 dbc) {
+        RString 国保連共同処理受託区分_高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        boolean is決定者受取年月表示 = 国保連共同処理受託区分_高額.equals(受託あり);
         if (メニューID.equals(new RString("DBCMN43003"))) {
             if (振込単位.equals(new RString("1"))) {
                 div.getDdlShoriTaisho().setSelectedKey(Furikomi_ShoriTaisho.償還高額.getコード());
                 div.getDdlShoriTaisho().setDisabled(false);
                 div.getTxtKetteishaUketoriYmRange().setDisabled(false);
+                div.getTxtKetteishaUketoriYmRange().setVisible(is決定者受取年月表示);
             } else if (振込単位.equals(new RString("2"))) {
                 div.getDdlShoriTaisho().setSelectedKey(Furikomi_ShoriTaisho.高額.getコード());
                 div.getDdlShoriTaisho().setDisabled(true);
                 div.getTxtKetteishaUketoriYmRange().setDisabled(false);
+                div.getTxtKetteishaUketoriYmRange().setVisible(is決定者受取年月表示);
             }
         } else if (メニューID.equals(new RString("DBCMN54002"))) {
             if (振込単位.equals(new RString("1"))) {
                 div.getDdlShoriTaisho().setSelectedKey(Furikomi_ShoriTaisho.償還高額.getコード());
                 div.getDdlShoriTaisho().setDisabled(false);
                 div.getTxtKetteishaUketoriYmRange().setDisabled(false);
+                div.getTxtKetteishaUketoriYmRange().setVisible(is決定者受取年月表示);
             } else if (振込単位.equals(new RString("2"))) {
                 div.getDdlShoriTaisho().setSelectedKey(Furikomi_ShoriTaisho.償還.getコード());
                 div.getDdlShoriTaisho().setDisabled(true);
@@ -402,7 +412,7 @@ public class DBC8010001MainHandler {
         }
         parameter.set処理対象(Furikomi_ShoriTaisho.toValue(div.getDdlShoriTaisho().getSelectedKey()));
         parameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
-        parameter.set委託者コード(div.getTxtItakushaCode().getValue());
+        parameter.set委託者コード(div.getItakusha().getItakushaId());
         if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
             parameter.set対象作成年月日(new FlexibleDate(div.getTxtTaishoSakuseiYMD().getValue().toDateString()));
         }

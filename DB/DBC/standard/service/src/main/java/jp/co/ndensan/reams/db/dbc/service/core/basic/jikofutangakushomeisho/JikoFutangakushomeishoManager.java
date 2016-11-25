@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic.jikofutangakushomeisho;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseisho;
 import jp.co.ndensan.reams.db.dbc.business.core.jikofutangakushomeisho.KogakuGassanShinSeisho;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassan.KogakuGassanData;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3170JigyoKogakuGassanJikoFu
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.KogakuGassanJohoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.TaisyousyaEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3170JigyoKogakuGassanJikoFutanGakuDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jikofutangakushomeisho.IJikoFutangakushomeishoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -49,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 自己負担額証明書作成のManagerクラスです。
@@ -59,6 +62,7 @@ public class JikoFutangakushomeishoManager {
 
     private DbT7069KaigoToiawasesakiDac 介護問合せ先dac;
     private final MapperProvider mapperProvider;
+    private final DbT3170JigyoKogakuGassanJikoFutanGakuDac 高額合算情報dac;
     private static final RString メニューID_DBCMN63001 = new RString("DBCMN63001");
     private static final RString メニューID_DBCMNN2001 = new RString("DBCMNN2001");
     private IJikoFutangakushomeishoMapper mapper;
@@ -71,6 +75,7 @@ public class JikoFutangakushomeishoManager {
     public JikoFutangakushomeishoManager() {
         this.介護問合せ先dac = InstanceProvider.create(DbT7069KaigoToiawasesakiDac.class);
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.高額合算情報dac = InstanceProvider.create(DbT3170JigyoKogakuGassanJikoFutanGakuDac.class);
     }
 
     /**
@@ -212,6 +217,32 @@ public class JikoFutangakushomeishoManager {
             }
         }
         return kogakuGassanData;
+    }
+
+    /**
+     * 高額合算情報更新です。
+     *
+     * @param parameter JikoFutangakushomeishoParameter
+     * @param 自己負担額証明書作成年月日 FlexibleDate
+     */
+    public void upDate高額合算情報更新(JikoFutangakushomeishoParameter parameter, FlexibleDate 自己負担額証明書作成年月日) {
+        mapper = mapperProvider.create(IJikoFutangakushomeishoMapper.class);
+        if (メニューID_DBCMNN2001.equals(parameter.getメニューID())) {
+            List<DbT3170JigyoKogakuGassanJikoFutanGakuEntity> 高額合算情報 = mapper.get高額合算情報更新用(parameter);
+            if (高額合算情報 != null && !高額合算情報.isEmpty()) {
+                for (DbT3170JigyoKogakuGassanJikoFutanGakuEntity entity : 高額合算情報) {
+                    JigyoKogakuGassanJikoFutanGaku jigyoKogakuGassanJikoFutanGaku = new JigyoKogakuGassanJikoFutanGaku(entity);
+                    jigyoKogakuGassanJikoFutanGaku = jigyoKogakuGassanJikoFutanGaku.createBuilderForEdit().set自己負担額証明書作成年月日(自己負担額証明書作成年月日)
+                            .build().modified();
+                    save高額合算情報更新(jigyoKogakuGassanJikoFutanGaku);
+                }
+            }
+        }
+    }
+
+    @Transaction
+    private void save高額合算情報更新(JigyoKogakuGassanJikoFutanGaku jigyoKogakuGassanJikoFutanGaku) {
+        高額合算情報dac.save(jigyoKogakuGassanJikoFutanGaku.toEntity());
     }
 
     private void editKogakuGassanData1(KogakuGassanJohoEntity 高額合算情報,

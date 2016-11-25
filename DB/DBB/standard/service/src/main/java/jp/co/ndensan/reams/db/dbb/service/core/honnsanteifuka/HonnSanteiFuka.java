@@ -825,14 +825,12 @@ public class HonnSanteiFuka {
         } else if (INDEX_3 < 算定月 && 算定月 <= INDEX_12) {
             現在月 = new RString(算定月).padZeroToLeft(INDEX_3);
             kiwariKeisanInput.set現在月(現在月);
-        } else {
-            if (INDEX_14 == 算定月) {
-                現在月 = 定数_104;
-                kiwariKeisanInput.set現在月(現在月);
-            } else if (INDEX_15 == 算定月) {
-                現在月 = 定数_105;
-                kiwariKeisanInput.set現在月(現在月);
-            }
+        } else if (INDEX_14 == 算定月) {
+            現在月 = 定数_104;
+            kiwariKeisanInput.set現在月(現在月);
+        } else if (INDEX_15 == 算定月) {
+            現在月 = 定数_105;
+            kiwariKeisanInput.set現在月(現在月);
         }
     }
 
@@ -909,12 +907,10 @@ public class HonnSanteiFuka {
             kiwariKeisanInput.set特徴開始停止区分(INDEX_8);
             set特徴停止とする期(kiwariKeisanInput, 資格の情報.get資格喪失事由コード(), 資格喪失日,
                     特徴喪失日の特徴期, 特別徴収_年金支払い日);
-        } else {
-            if (is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法9月())
-                    && is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法10月())) {
-                kiwariKeisanInput.set特徴開始停止区分(INDEX_1);
-                kiwariKeisanInput.set特徴開始停止期(INDEX_3);
-            }
+        } else if (is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法9月())
+                && is徴収方法が特別徴収(徴収方法の情報_更正前.get徴収方法10月())) {
+            kiwariKeisanInput.set特徴開始停止区分(INDEX_1);
+            kiwariKeisanInput.set特徴開始停止期(INDEX_3);
         }
     }
 
@@ -947,24 +943,18 @@ public class HonnSanteiFuka {
 
     private FlexibleDate get特別徴収_年金支払い日(Tsuki 月, RDate 適用基準日) {
         RString 特別徴収_年金支払い日 = RString.EMPTY;
-        if (Tsuki._2月 == 月) {
-            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_2月,
-                    適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._4月 == 月) {
-            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_4月,
-                    適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._6月 == 月) {
-            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_6月,
-                    適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._8月 == 月) {
-            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_8月,
-                    適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._10月 == 月) {
-            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_10月,
-                    適用基準日, SubGyomuCode.DBB介護賦課);
-        } else if (Tsuki._12月 == 月) {
-            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_12月,
-                    適用基準日, SubGyomuCode.DBB介護賦課);
+        if (Tsuki._2月.getコード().equals(月.getコード()) || Tsuki._3月.getコード().equals(月.getコード())) {
+            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_2月, 適用基準日, SubGyomuCode.DBB介護賦課);
+        } else if (Tsuki._4月.getコード().equals(月.getコード()) || Tsuki._5月.getコード().equals(月.getコード())) {
+            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_4月, 適用基準日, SubGyomuCode.DBB介護賦課);
+        } else if (Tsuki._6月.getコード().equals(月.getコード()) || Tsuki._7月.getコード().equals(月.getコード())) {
+            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_6月, 適用基準日, SubGyomuCode.DBB介護賦課);
+        } else if (Tsuki._8月.getコード().equals(月.getコード()) || Tsuki._9月.getコード().equals(月.getコード())) {
+            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_8月, 適用基準日, SubGyomuCode.DBB介護賦課);
+        } else if (Tsuki._10月.getコード().equals(月.getコード()) || Tsuki._11月.getコード().equals(月.getコード())) {
+            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_10月, 適用基準日, SubGyomuCode.DBB介護賦課);
+        } else if (Tsuki._12月.getコード().equals(月.getコード()) || Tsuki._1月.getコード().equals(月.getコード())) {
+            特別徴収_年金支払い日 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_12月, 適用基準日, SubGyomuCode.DBB介護賦課);
         }
         if (特別徴収_年金支払い日.isEmpty()) {
             return FlexibleDate.EMPTY;
@@ -1263,24 +1253,22 @@ public class HonnSanteiFuka {
             if (!RString.isNullOrEmpty(設定前賦課情報.get資格喪失事由())) {
                 調定事由２ = 設定前賦課情報.get資格喪失事由();
             }
-        } else {
-            if (is特別徴収停止事由コード(徴収方法情報) && is調定事由(当初賦課情報, 徴収方法情報)) {
-                if (RString.isNullOrEmpty(当初賦課情報.get調定事由2())) {
-                    調定事由２ = 徴収方法情報.get特別徴収停止事由コード();
-                } else if (RString.isNullOrEmpty(当初賦課情報.get調定事由3())) {
-                    調定事由３ = 徴収方法情報.get特別徴収停止事由コード();
+        } else if (is特別徴収停止事由コード(徴収方法情報) && is調定事由(当初賦課情報, 徴収方法情報)) {
+            if (RString.isNullOrEmpty(当初賦課情報.get調定事由2())) {
+                調定事由２ = 徴収方法情報.get特別徴収停止事由コード();
+            } else if (RString.isNullOrEmpty(当初賦課情報.get調定事由3())) {
+                調定事由３ = 徴収方法情報.get特別徴収停止事由コード();
 
-                } else if (RString.isNullOrEmpty(当初賦課情報.get調定事由4())) {
-                    調定事由４ = 徴収方法情報.get特別徴収停止事由コード();
-                }
-            } else if (!RString.isNullOrEmpty(設定前賦課情報.get資格喪失事由())) {
-                if (RString.isNullOrEmpty(当初賦課情報.get調定事由2())) {
-                    調定事由２ = 設定前賦課情報.get資格喪失事由();
-                } else if (RString.isNullOrEmpty(当初賦課情報.get調定事由3())) {
-                    調定事由３ = 設定前賦課情報.get資格喪失事由();
-                } else if (RString.isNullOrEmpty(当初賦課情報.get調定事由4())) {
-                    調定事由４ = 設定前賦課情報.get資格喪失事由();
-                }
+            } else if (RString.isNullOrEmpty(当初賦課情報.get調定事由4())) {
+                調定事由４ = 徴収方法情報.get特別徴収停止事由コード();
+            }
+        } else if (!RString.isNullOrEmpty(設定前賦課情報.get資格喪失事由())) {
+            if (RString.isNullOrEmpty(当初賦課情報.get調定事由2())) {
+                調定事由２ = 設定前賦課情報.get資格喪失事由();
+            } else if (RString.isNullOrEmpty(当初賦課情報.get調定事由3())) {
+                調定事由３ = 設定前賦課情報.get資格喪失事由();
+            } else if (RString.isNullOrEmpty(当初賦課情報.get調定事由4())) {
+                調定事由４ = 設定前賦課情報.get資格喪失事由();
             }
         }
         FukaJohoRelateEntity relateEntity = new FukaJohoRelateEntity();

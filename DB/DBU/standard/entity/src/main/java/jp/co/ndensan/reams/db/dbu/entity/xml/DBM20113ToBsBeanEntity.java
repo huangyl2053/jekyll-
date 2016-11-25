@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.entity.xml;
 
 import javax.xml.bind.annotation.XmlElement;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 特定個人情報ファイルのentityクラスです。
@@ -15,95 +14,95 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBM20113ToBsBeanEntity {
 
-    private RString requestSourceUnitCode;
+    private String requestSourceUnitCode;
 
-    private RString requestSourceUserID;
+    private String requestSourceUserID;
 
-    private RString attachedFileName;
+    private String attachedFileName;
 
-    private RString attachmentID;
+    private String attachmentID;
 
     /**
      * requestSourceUnitCodeプロパティの値を取得します。
      *
-     * @return possible object is {@link RString }
+     * @return possible object is {@link String }
      *
      */
     @XmlElement(name = "RequestSourceUnitCode", required = true, nillable = true)
-    public RString getRequestSourceUnitCode() {
+    public String getRequestSourceUnitCode() {
         return requestSourceUnitCode;
     }
 
     /**
      * requestSourceUnitCodeプロパティの値を設定します。
      *
-     * @param value allowed object is {@link RString }
+     * @param value allowed object is {@link String }
      *
      */
-    public void setRequestSourceUnitCode(RString value) {
+    public void setRequestSourceUnitCode(String value) {
         this.requestSourceUnitCode = value;
     }
 
     /**
      * requestSourceUserIDプロパティの値を取得します。
      *
-     * @return possible object is {@link RString }
+     * @return possible object is {@link String }
      *
      */
     @XmlElement(name = "RequestSourceUserID", required = true, nillable = true)
-    public RString getRequestSourceUserID() {
+    public String getRequestSourceUserID() {
         return requestSourceUserID;
     }
 
     /**
      * requestSourceUserIDプロパティの値を設定します。
      *
-     * @param value allowed object is {@link RString }
+     * @param value allowed object is {@link String }
      *
      */
-    public void setRequestSourceUserID(RString value) {
+    public void setRequestSourceUserID(String value) {
         this.requestSourceUserID = value;
     }
 
     /**
      * attachedFileNameプロパティの値を取得します。
      *
-     * @return possible object is {@link RString }
+     * @return possible object is {@link String }
      *
      */
     @XmlElement(name = "AttachedFileName", nillable = true)
-    public RString getAttachedFileName() {
+    public String getAttachedFileName() {
         return attachedFileName;
     }
 
     /**
      * attachedFileNameプロパティの値を設定します。
      *
-     * @param value allowed object is {@link RString }
+     * @param value allowed object is {@link String }
      *
      */
-    public void setAttachedFileName(RString value) {
+    public void setAttachedFileName(String value) {
         this.attachedFileName = value;
     }
 
     /**
      * attachmentIDプロパティの値を取得します。
      *
-     * @return possible object is {@link RString }
+     * @return possible object is {@link String }
      *
      */
     @XmlElement(name = "AttachmentID", nillable = true)
-    public RString getAttachmentID() {
+    public String getAttachmentID() {
         return attachmentID;
     }
 
     /**
      * attachmentIDプロパティの値を設定します。
      *
-     * @param value allowed object is {@link RString }
+     * @param value allowed object is {@link String }
      *
      */
-    public void setAttachmentID(RString value) {
+    public void setAttachmentID(String value) {
         this.attachmentID = value;
     }
 }

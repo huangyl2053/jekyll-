@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB114001;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.shotokushokaihyohakko.ShotokuShokaihyoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataMapaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataTempEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -25,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class InsReHakouShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShoukaiDataMapaEntity> {
 
-    private static final RString INDEX_112 = new RString("112");
-    private static final RString INDEX_120 = new RString("120");
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
             + ".mapper.relate.shotokushokaihyo.IShotokushokaihyoMapper.select所得照会票データ再発行");
     private static final RString 所得照会票データTEMP = new RString("ShotokuShoukaiDataTemp");
@@ -80,10 +79,11 @@ public class InsReHakouShotokushokaihyoTmpProcess extends BatchProcessBase<Shoto
         entity.setHonninKubun(所得照会票データ.getHonninKubun());
         entity.setChoikiCode(所得照会票データ.getChoikiCode());
         entity.setGyoseikuCode(所得照会票データ.getGyoseikuCode());
-        if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
+        if (DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード)
+                || DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード)) {
             entity.setShichosonCode(導入団体コード.getColumnValue());
-        } else {
-            RString shichosonCode = 所得照会票データ.getGenLasdecCode() == null
+        } else if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
+            RString shichosonCode = 所得照会票データ.getGenLasdecCode() == null || 所得照会票データ.getGenLasdecCode().isEmpty()
                     ? RString.EMPTY : 所得照会票データ.getGenLasdecCode().getColumnValue();
             entity.setShichosonCode(shichosonCode);
         }

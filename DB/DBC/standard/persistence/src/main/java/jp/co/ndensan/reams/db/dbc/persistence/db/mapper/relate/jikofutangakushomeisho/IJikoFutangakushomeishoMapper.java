@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jikofutangakusho
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseishoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3170JigyoKogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.KogakuGassanJohoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.TaisyousyaEntity;
 
@@ -33,6 +34,14 @@ public interface IJikoFutangakushomeishoMapper {
      * @return KogakuGassanJoho
      */
     KogakuGassanJohoEntity get高額合算情報2(JikoFutangakushomeishoParameter parameter);
+
+    /**
+     * get高額合算情報更新用
+     *
+     * @param parameter JikoFutangakushomeishoParameter
+     * @return DbT3170JigyoKogakuGassanJikoFutanGakuEntity
+     */
+    List<DbT3170JigyoKogakuGassanJikoFutanGakuEntity> get高額合算情報更新用(JikoFutangakushomeishoParameter parameter);
 
     /**
      * get宛名から被保険者の個人情報

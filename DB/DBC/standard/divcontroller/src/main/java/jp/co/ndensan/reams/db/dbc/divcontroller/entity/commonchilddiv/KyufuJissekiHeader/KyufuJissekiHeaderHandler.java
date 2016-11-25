@@ -279,8 +279,10 @@ public class KyufuJissekiHeaderHandler {
         if (null == 給付実績基本データ.get証記載保険者番号() || 給付実績基本データ.get証記載保険者番号().isEmpty()) {
             div.getTxtShokisaiHokenshaNo().clearValue();
         } else {
-            div.getTxtShokisaiHokenshaNo()
-                    .setValue(給付実績基本データ.get証記載保険者番号().getColumnValue().padLeft("0", INT_6));
+            RString 証記載保険者番号 = 給付実績基本データ.get証記載保険者番号().getColumnValue();
+            証記載保険者番号 = (証記載保険者番号.length() <= INT_6
+                    ? 証記載保険者番号 : 証記載保険者番号.substring(証記載保険者番号.length() - INT_6)).replace("0", "");
+            div.getTxtShokisaiHokenshaNo().setValue(証記載保険者番号);
         }
         set実績区分(給付実績基本データ.get給付実績区分コード());
         set整理番号(給付実績基本データ.get整理番号());
@@ -292,9 +294,16 @@ public class KyufuJissekiHeaderHandler {
             div.getJigyosha().clearValue();
         }
         if (給付実績基本データ.get事業者番号() != null) {
-            div.getTxtJigyoshaNo().setValue(給付実績基本データ.get事業者番号().getColumnValue());
+            RString 事業者番号 = 給付実績基本データ.get事業者番号().getColumnValue();
+            if (事業者番号.isEmpty() || Integer.parseInt(事業者番号.toString()) == 0) {
+                div.getTxtJigyoshaNo().clearValue();
+                div.getJigyosha().clearValue();
+            } else {
+                div.getTxtJigyoshaNo().setValue(給付実績基本データ.get事業者番号().getColumnValue());
+            }
         } else {
             div.getTxtJigyoshaNo().clearValue();
+            div.getJigyosha().clearValue();
         }
     }
 

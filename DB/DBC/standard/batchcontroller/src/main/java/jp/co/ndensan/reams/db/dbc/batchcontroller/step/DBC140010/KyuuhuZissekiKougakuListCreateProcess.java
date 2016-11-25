@@ -47,7 +47,6 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
     private static final RString 入力識別番号_7156 = new RString("7156");
     private static final RString サービス提供年月_200510 = new RString("200510");
     private static final RString 区分_高額 = new RString("2");
-    private static final RString 広域内住所地特例フラグ = new RString("1");
     private static final int 居住サービス計画事業者名_LENGTH = 20;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 基本List;
@@ -93,7 +92,10 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
         基本entity.set審査年月(entity.getDbt3028_shinsaYM());
         基本entity.set整理番号(entity.getDbt3028_seiriNo());
         基本entity.set出力様式(entity.getDbT3118_ryakusho());
-        RString 名称 = entity.getDbT3118_meisho();
+        RString 名称 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(名称)) {
+            名称 = entity.getDbT3118_meisho();
+        }
         if (名称.length() <= 居住サービス計画事業者名_LENGTH) {
             基本entity.set出力様式１(名称);
             基本entity.set出力様式２(RString.EMPTY);

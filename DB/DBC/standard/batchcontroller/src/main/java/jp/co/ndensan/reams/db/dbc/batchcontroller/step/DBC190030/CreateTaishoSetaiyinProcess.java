@@ -340,12 +340,15 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             RString 年度 = parameter.get処理年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString();
             kijunEntity1.set収入元号(年度.substringReturnAsPossible(INT_0, INT_2));
             kijunEntity1.set収入年(年度.substringReturnAsPossible(INT_2));
-
-            KijunShunyugakuTekiyoOshiraseTsuchishoReport kijunReport
-                    = new KijunShunyugakuTekiyoOshiraseTsuchishoReport(kijunEntity);
-            kijunReport.writeBy(dBC100063SourceWriter0);
-            KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
-            dbc64Report.writeBy(dBC100064SourceWriter0);
+            if (parameter.getお知らせ通知書出力フラグ()) {
+                KijunShunyugakuTekiyoOshiraseTsuchishoReport kijunReport
+                        = new KijunShunyugakuTekiyoOshiraseTsuchishoReport(kijunEntity);
+                kijunReport.writeBy(dBC100063SourceWriter0);
+            }
+            if (parameter.get申請書出力フラグ()) {
+                KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
+                dbc64Report.writeBy(dBC100064SourceWriter0);
+            }
 
         } else if (対象世帯員fla) {
             if (文字切れflag) {
@@ -415,6 +418,10 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             eucCsvWriter.close();
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         }
+        出力条件表();
+    }
+
+    private void 出力条件表() {
         if (parameter.getお知らせ通知書出力フラグ()) {
             RString 帳票ID = ReportIdDBC.DBC100063.getReportId().value();
             RString 帳票名 = ReportInfo.getReportName(SubGyomuCode.DBC介護給付, 帳票ID);

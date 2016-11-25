@@ -219,10 +219,10 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         }
         div.getTxtUketoriYM().setDisabled(true);
         div.getTxtShinseiYMD().setDisabled(false);
-        if (前回申請年月終了 == null || 前回申請年月終了.isEmpty()) {
+        if (前回申請年月開始 == null || 前回申請年月開始.isEmpty()) {
             div.getTxtShinseiYMD().setFromValue(null);
         } else {
-            div.getTxtShinseiYMD().setFromValue(new RDate(前回申請年月終了.toString()).plusDay(1));
+            div.getTxtShinseiYMD().setFromValue(new RDate(前回申請年月開始.toString()).plusDay(1));
         }
         RDate システム日付 = RDate.getNowDate();
         div.getTxtShinseiYMD().setToValue(システム日付);
@@ -262,10 +262,10 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         div.getTxtShinseiYMD().setDisabled(true);
         div.getTxtKetteiYMD().setDisabled(false);
         div.getRadKetteiYMD().setSelectedKey(KEY_0);
-        if (前回決定年月終了 == null || 前回決定年月終了.isEmpty()) {
+        if (前回決定年月開始 == null || 前回決定年月開始.isEmpty()) {
             div.getTxtKetteiYMD().setFromValue(null);
         } else {
-            div.getTxtKetteiYMD().setFromValue(new RDate(前回決定年月終了.toString()).plusDay(1));
+            div.getTxtKetteiYMD().setFromValue(new RDate(前回決定年月開始.toString()).plusDay(1));
         }
         RDate システム日付 = RDate.getNowDate();
         div.getTxtKetteiYMD().setToValue(システム日付);

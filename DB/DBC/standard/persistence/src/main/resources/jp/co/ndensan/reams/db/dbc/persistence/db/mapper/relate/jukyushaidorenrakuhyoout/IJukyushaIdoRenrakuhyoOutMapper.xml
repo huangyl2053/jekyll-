@@ -938,6 +938,8 @@
          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3001JukyushaIdoRenrakuhyoMapper.allColumns_DbT3001JukyushaIdoRenrakuhyo" />
      FROM
          rgdb."DbT3001JukyushaIdoRenrakuhyo"
+    WHERE
+         rgdb."DbT3001JukyushaIdoRenrakuhyo"."logicalDeletedFlag" = FALSE
     </select>
     
     <sql id="allColumns_JukyushaIdoRenrakuhyoTemp">

@@ -40,8 +40,8 @@
          "DbT3111JigyoKogakuShikyuHanteiKekka"."hanteiKekkaSofuFuyoFlag" as "dbT3111JigyoKogakuShikyuHanteiKekka_hanteiKekkaSofuFuyoFlag",
          "DbT3111JigyoKogakuShikyuHanteiKekka"."shinsaKekkaHaneiKubun" as "dbT3111JigyoKogakuShikyuHanteiKekka_shinsaKekkaHaneiKubun",
          "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiTsuchishoSakuseiYMD" as "dbT3111JigyoKogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD",
-         "DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" as "dbT3111JigyoKogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD"
-        "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiTsuchiHakkoKubun" as "dbT3111JigyoKogakuShikyuHanteiKekka_ketteiTsuchiHakkoKubun"
+         "DbT3111JigyoKogakuShikyuHanteiKekka"."furikomiMeisaishoSakuseiYMD" as "dbT3111JigyoKogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD",
+         "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiTsuchiHakkoKubun" as "dbT3111JigyoKogakuShikyuHanteiKekka_ketteiTsuchiHakkoKubun"
     </sql>
 
 
