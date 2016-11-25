@@ -660,7 +660,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         NengakuSeigyoJoho 年額制御情報1 = get年額制御情報(調定年度.minusYear(INT_1));
         NengakuSeigyoJoho 年額制御情報2 = get年額制御情報(調定年度.minusYear(INT_2));
         NengakuFukaKonkyoFactory nengakuFukaKonkyo = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
-        NengakuHokenryoKeisan keisan = InstanceProvider.create(NengakuHokenryoKeisan.class);
+        NengakuHokenryoKeisan keisan = new NengakuHokenryoKeisan();
 
         mapper.createDbT2002FukaJohoTemp();
         for (CalculateFukaEntity 賦課計算の情報 : 賦課計算) {
