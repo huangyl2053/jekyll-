@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -228,14 +227,6 @@ public class JikofutangakuShomeishoTorokuValidationHandler {
 
         }
         return validPairs;
-    }
-
-    private Decimal nullToZero(Decimal obj) {
-        if (obj == null) {
-            return Decimal.ZERO;
-        } else {
-            return obj;
-        }
     }
 
     private static class ValidationCheckMessages implements IValidationMessage {
