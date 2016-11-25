@@ -701,7 +701,7 @@ public final class JukyushaKyufuDaichoData {
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0013"), new RString("shichousonCode"), new RString("市町村コード")),
+        市町村コード(new RString("0016"), new RString("shichousonCode"), new RString("市町村コード")),
         /**
          * 被保険者番号
          */

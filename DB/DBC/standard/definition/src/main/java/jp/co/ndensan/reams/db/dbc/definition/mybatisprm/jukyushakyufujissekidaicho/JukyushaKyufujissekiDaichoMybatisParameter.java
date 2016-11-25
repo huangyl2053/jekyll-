@@ -630,6 +630,18 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
         } else if (new RString("3").equals(老人保健受給者番号有無)) {
             老人保健受給者番号有無flag = false;
         }
+        boolean すべてflag = true;
+        if (new RString("1").equals(要介護1)
+                || new RString("1").equals(要介護2)
+                || new RString("1").equals(要介護3)
+                || new RString("1").equals(要介護4)
+                || new RString("1").equals(要介護5)
+                || new RString("1").equals(要支援1)
+                || new RString("1").equals(要支援2)
+                || new RString("1").equals(経過的要介護)
+                || new RString("1").equals(事業対象者)) {
+            すべてflag = false;
+        }
         return new JukyushaKyufujissekiDaichoMybatisParameter(
                 対象年月,
                 年月範囲_開始,
@@ -695,7 +707,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
                 psmShikibetsuTaisho,
                 new RString("1").equals(対象年月),
                 new RString("1").equals(給付実績区分),
-                new RString("1").equals(すべて選択),
+                すべてflag,
                 new RString("1").equals(要介護1),
                 new RString("1").equals(要介護2),
                 new RString("1").equals(要介護3),
@@ -744,8 +756,6 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
                 new RString("1").equals(給付率区分),
                 new RString("2").equals(給付率区分),
                 new RString("3").equals(給付率区分),
-                !RString.isNullOrEmpty(給付率)
-        );
+                !RString.isNullOrEmpty(給付率));
     }
-
 }
