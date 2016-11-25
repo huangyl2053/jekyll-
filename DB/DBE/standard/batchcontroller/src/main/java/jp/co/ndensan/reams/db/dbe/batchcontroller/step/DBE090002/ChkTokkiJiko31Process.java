@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -78,8 +77,6 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
     private static final RString 総合事業開始区分 = new RString("【総合事業開始区分】");
     private static final RString 全イメージ = new RString("2");
     private static final RString 短冊 = new RString("3");
-    private static final RString すべて = new RString("1");
-    private static final RString 一つずつ = new RString("3");
     private static final RString 特記事項番号_101 = new RString("101");
     private static final RString 特記事項番号_102 = new RString("102");
     private static final RString 特記事項番号_103 = new RString("103");
@@ -163,6 +160,7 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
     private static final RString 特記事項番号_6056 = new RString("6056");
     private static final RString 特記事項番号_701 = new RString("701");
     private static final RString 特記事項番号_702 = new RString("702");
+    private static final RString 拡張子_PNG = new RString(".png");
     List<NinteichosaRelateEntity> 特記事項リスト;
 
     @Override
@@ -183,7 +181,12 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517131.getReportId().value()).create();
+        if (全イメージ.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(),
+                SubGyomuCode.DBE認定支援))) {
+            batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517133.getReportId().value()).create();
+        } else {
+            batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517134.getReportId().value()).create();
+        }
         reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
 
@@ -237,24 +240,6 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         List<TokkiTextEntity> 特記事項番号リスト = new ArrayList<>();
         List<TokkiTextEntity> イメージリスト = new ArrayList<>();
         for (int i = 0; i < entity.size(); i++) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.get(i).get特記事項区分())
-                    && すべて.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                TokkiTextEntity tokki = new TokkiTextEntity();
-                tokki.set特記事項(entity.get(i).get特記事項());
-                tokki.set特記事項番号(entity.get(i).get特記事項番号());
-                tokki.set特記事項名称(get特記事項名称(entity, i, ninteiEntity));
-                tokki.set特記事項連番(entity.get(i).get特記事項連番());
-                特記事項List.add(tokki);
-            }
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.get(i).get特記事項区分())
-                    && 一つずつ.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                TokkiTextEntity tokki = new TokkiTextEntity();
-                tokki.set特記事項(entity.get(i).get特記事項());
-                tokki.set特記事項番号(entity.get(i).get特記事項番号());
-                tokki.set特記事項名称(get特記事項名称(entity, i, ninteiEntity));
-                tokki.set特記事項連番(entity.get(i).get特記事項連番());
-                特記事項番号リスト.add(tokki);
-            }
             if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())
                     && 全イメージ.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(),
                                     SubGyomuCode.DBE認定支援))) {
@@ -294,79 +279,78 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
     }
 
     private RString get共有ファイル(RString 特記事項番号, RString 特記事項連番, TokkiText1A4Entity ninteiEntity) {
-        RString imageName = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         if (特記事項番号_101.equals(特記事項番号)) {
             builder.append(new RString("C3001-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_102.equals(特記事項番号)) {
             builder.append(new RString("C3006-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_103.equals(特記事項番号)) {
             builder.append(new RString("C3010-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_104.equals(特記事項番号)) {
             builder.append(new RString("C3011-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_105.equals(特記事項番号)) {
             builder.append(new RString("C3012-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_106.equals(特記事項番号)) {
             builder.append(new RString("C3013-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_107.equals(特記事項番号)) {
             builder.append(new RString("C3014-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_108.equals(特記事項番号)) {
             builder.append(new RString("C3015-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_109.equals(特記事項番号)) {
             builder.append(new RString("C3016-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_110.equals(特記事項番号)) {
             builder.append(new RString("C3017-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_111.equals(特記事項番号)) {
             builder.append(new RString("C3018-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_112.equals(特記事項番号)) {
             builder.append(new RString("C3019-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         if (特記事項番号_113.equals(特記事項番号)) {
             builder.append(new RString("C3020-"));
             builder.append(特記事項連番);
-            imageName = builder.toRString();
+            builder.append(拡張子_PNG);
         }
         builder.append(get特記事項2(特記事項番号, 特記事項連番));
         builder.append(get特記事項3(特記事項番号, 特記事項連番));
         builder.append(get特記事項4(特記事項番号, 特記事項連番, ninteiEntity));
         builder.append(get特記事項5(特記事項番号, 特記事項連番, ninteiEntity));
         builder.append(get特記事項6(特記事項番号, 特記事項連番, ninteiEntity));
-        return imageName;
+        return builder.toRString();
     }
 
     private RString get特記事項2(RString 特記事項番号, RString 特記事項連番) {
@@ -375,76 +359,91 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         if (特記事項番号_201.equals(特記事項番号)) {
             builder.append(new RString("C3021-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_202.equals(特記事項番号)) {
             builder.append(new RString("C3022-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_203.equals(特記事項番号)) {
             builder.append(new RString("C3023-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_204.equals(特記事項番号)) {
             builder.append(new RString("C3024-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_205.equals(特記事項番号)) {
             builder.append(new RString("C3025-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_206.equals(特記事項番号)) {
             builder.append(new RString("C3026-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_207.equals(特記事項番号)) {
             builder.append(new RString("C3027-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_208.equals(特記事項番号)) {
             builder.append(new RString("C3028-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_209.equals(特記事項番号)) {
             builder.append(new RString("C3029-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_210.equals(特記事項番号)) {
             builder.append(new RString("C3030-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_211.equals(特記事項番号)) {
             builder.append(new RString("C3031-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_212.equals(特記事項番号)) {
             builder.append(new RString("C3032-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_301.equals(特記事項番号)) {
             builder.append(new RString("C3033-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_302.equals(特記事項番号)) {
             builder.append(new RString("C3034-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_303.equals(特記事項番号)) {
             builder.append(new RString("C3035-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         return imageName;
@@ -456,81 +455,97 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         if (特記事項番号_304.equals(特記事項番号)) {
             builder.append(new RString("C3036-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_305.equals(特記事項番号)) {
             builder.append(new RString("C3037-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_306.equals(特記事項番号)) {
             builder.append(new RString("C3038-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_307.equals(特記事項番号)) {
             builder.append(new RString("C3039-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_308.equals(特記事項番号)) {
             builder.append(new RString("C3040-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_309.equals(特記事項番号)) {
             builder.append(new RString("C3041-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_408.equals(特記事項番号)) {
             builder.append(new RString("C3049-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_409.equals(特記事項番号)) {
             builder.append(new RString("C3050-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_410.equals(特記事項番号)) {
             builder.append(new RString("C3051-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_411.equals(特記事項番号)) {
             builder.append(new RString("C3052-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_412.equals(特記事項番号)) {
             builder.append(new RString("C3053-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_413.equals(特記事項番号)) {
             builder.append(new RString("C3054-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_414.equals(特記事項番号)) {
             builder.append(new RString("C3055-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_415.equals(特記事項番号)) {
             builder.append(new RString("C3056-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_701.equals(特記事項番号)) {
             builder.append(new RString("C3075-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_702.equals(特記事項番号)) {
             builder.append(new RString("C3076-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         return imageName;
@@ -545,36 +560,43 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             if (特記事項番号_401.equals(特記事項番号)) {
                 builder.append(new RString("C3042-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_402.equals(特記事項番号)) {
                 builder.append(new RString("C3043-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_403.equals(特記事項番号)) {
                 builder.append(new RString("C3044-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_404.equals(特記事項番号)) {
                 builder.append(new RString("C3045-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_405.equals(特記事項番号)) {
                 builder.append(new RString("C3046-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_406.equals(特記事項番号)) {
                 builder.append(new RString("C3047-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_407.equals(特記事項番号)) {
                 builder.append(new RString("C3048-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
         }
@@ -589,36 +611,43 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             if (特記事項番号_4011.equals(特記事項番号)) {
                 builder.append(new RString("C3042-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_4012.equals(特記事項番号)) {
                 builder.append(new RString("C3043-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_402.equals(特記事項番号)) {
                 builder.append(new RString("C3044-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_403.equals(特記事項番号)) {
                 builder.append(new RString("C3045-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_404.equals(特記事項番号)) {
                 builder.append(new RString("C3046-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_406.equals(特記事項番号)) {
                 builder.append(new RString("C3047-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_407.equals(特記事項番号)) {
                 builder.append(new RString("C3048-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
         }
@@ -626,36 +655,43 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             if (特記事項番号_4011.equals(特記事項番号)) {
                 builder.append(new RString("C3042-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_4012.equals(特記事項番号)) {
                 builder.append(new RString("C3043-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_402.equals(特記事項番号)) {
                 builder.append(new RString("C3044-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_403.equals(特記事項番号)) {
                 builder.append(new RString("C3045-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_404.equals(特記事項番号)) {
                 builder.append(new RString("C3046-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_405.equals(特記事項番号)) {
                 builder.append(new RString("C3047-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_406.equals(特記事項番号)) {
                 builder.append(new RString("C3048-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
         }
@@ -672,31 +708,37 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             if (特記事項番号_501.equals(特記事項番号)) {
                 builder.append(new RString("C3057-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_502.equals(特記事項番号)) {
                 builder.append(new RString("C3058-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_503.equals(特記事項番号)) {
                 builder.append(new RString("C3059-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_504.equals(特記事項番号)) {
                 builder.append(new RString("C3060-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_505.equals(特記事項番号)) {
                 builder.append(new RString("C3061-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_506.equals(特記事項番号)) {
                 builder.append(new RString("C3062-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
         }
@@ -704,31 +746,37 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             if (特記事項番号_5011.equals(特記事項番号)) {
                 builder.append(new RString("C3057-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_5012.equals(特記事項番号)) {
                 builder.append(new RString("C3058-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_5013.equals(特記事項番号)) {
                 builder.append(new RString("C3059-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_5014.equals(特記事項番号)) {
                 builder.append(new RString("C3060-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_5021.equals(特記事項番号)) {
                 builder.append(new RString("C3061-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_5022.equals(特記事項番号)) {
                 builder.append(new RString("C3062-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
         }
@@ -741,31 +789,37 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         if (特記事項番号_601.equals(特記事項番号)) {
             builder.append(new RString("C3063-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_602.equals(特記事項番号)) {
             builder.append(new RString("C3064-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_603.equals(特記事項番号)) {
             builder.append(new RString("C3065-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_604.equals(特記事項番号)) {
             builder.append(new RString("C3066-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_611.equals(特記事項番号)) {
             builder.append(new RString("C3073-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         if (特記事項番号_612.equals(特記事項番号)) {
             builder.append(new RString("C3074-"));
             builder.append(特記事項連番);
+            builder.append(拡張子_PNG);
             imageName = builder.toRString();
         }
         return imageName;
@@ -782,31 +836,37 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             if (特記事項番号_605.equals(特記事項番号)) {
                 builder.append(new RString("C3067-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_606.equals(特記事項番号)) {
                 builder.append(new RString("C3068-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_607.equals(特記事項番号)) {
                 builder.append(new RString("C3069-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_608.equals(特記事項番号)) {
                 builder.append(new RString("C3070-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_609.equals(特記事項番号)) {
                 builder.append(new RString("C3071-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_610.equals(特記事項番号)) {
                 builder.append(new RString("C3072-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
         }
@@ -814,31 +874,37 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             if (特記事項番号_6051.equals(特記事項番号)) {
                 builder.append(new RString("C3067-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_6052.equals(特記事項番号)) {
                 builder.append(new RString("C3068-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_6053.equals(特記事項番号)) {
                 builder.append(new RString("C3069-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_6054.equals(特記事項番号)) {
                 builder.append(new RString("C3070-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_6055.equals(特記事項番号)) {
                 builder.append(new RString("C3071-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
             if (特記事項番号_6056.equals(特記事項番号)) {
                 builder.append(new RString("C3072-"));
                 builder.append(特記事項連番);
+                builder.append(拡張子_PNG);
                 imageName = builder.toRString();
             }
         }
