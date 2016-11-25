@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservi
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.InsertKetteiTsuchishoInfoTempMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoReportParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.KogakukaigoKetteiTsuchishoInfoTempParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KogakuServiceReportEntity;
@@ -50,4 +51,11 @@ public interface IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper {
      * @return KogakuServiceReportEntity 帳票出力情報エンティティ
      */
     KogakuServiceReportEntity get高額サービス帳票出力データ(JigyoKogakuKetteiTsuchishoReportParameter parameter);
+    
+    /**
+     * 高額介護サービス費支給申請の更新処理情報取得するメソッドです。
+     *
+     * @return DbT3056KogakuShikyuShinseiEntity　高額介護サービス費支給申請情報エンティティ
+     */
+    DbT3056KogakuShikyuShinseiEntity get高額介護サービス費支給申請();
 }

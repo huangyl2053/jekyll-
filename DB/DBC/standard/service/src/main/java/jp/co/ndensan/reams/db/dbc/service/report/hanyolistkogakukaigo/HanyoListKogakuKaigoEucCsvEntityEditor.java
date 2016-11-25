@@ -512,16 +512,24 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             if (口座.isゆうちょ銀行()) {
                 csvEntity.set銀行郵便区分(銀行_2);
                 csvEntity.set支店コード(口座.get店番());
+                csvEntity.set支店名カナ(RString.EMPTY);
+                csvEntity.set支店名(口座.get店名());
             } else {
                 csvEntity.set銀行郵便区分(銀行_1);
                 KinyuKikanShitenCode 支店コード = 口座.get支店コード();
+                KinyuKikanShiten 支店 = 口座.get支店();
                 csvEntity.set支店コード(支店コード != null
                         ? 支店コード.getColumnValue()
+                        : RString.EMPTY);
+                csvEntity.set支店名カナ(支店 != null
+                        ? 支店.get支店カナ名称()
+                        : RString.EMPTY);
+                csvEntity.set支店名(支店 != null
+                        ? 支店.get支店名称()
                         : RString.EMPTY);
             }
             KinyuKikanCode 銀行コード = 口座.get金融機関コード();
             KinyuKikan 金融機関 = 口座.get金融機関();
-            KinyuKikanShiten 支店 = 口座.get支店();
             csvEntity.set銀行コード(銀行コード != null
                     ? 銀行コード.getColumnValue()
                     : RString.EMPTY);
@@ -530,12 +538,6 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                     : RString.EMPTY);
             csvEntity.set銀行名(金融機関 != null
                     ? 金融機関.get金融機関名称()
-                    : RString.EMPTY);
-            csvEntity.set支店名カナ(支店 != null
-                    ? 支店.get支店カナ名称()
-                    : RString.EMPTY);
-            csvEntity.set支店名(支店 != null
-                    ? 支店.get支店名称()
                     : RString.EMPTY);
             YokinShubetsuPattern 口座種目 = 口座.get預金種別();
             csvEntity.set口座種目(口座種目 != null
@@ -714,18 +716,15 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             FlexibleDate 決定日 = entity.get決定年月日();
             csvEntity.set決定日(get日付項目(決定日, parameter));
             Decimal 保決定利用負担額 = entity.get本人支払額();
-            csvEntity.set保決定利用負担額(保決定利用負担額 != null
-                    ? numToRString_0(保決定利用負担額)
-                    : RString.EMPTY);
-            csvEntity.set保決定支給区分(
-                    entity.get判定_支給区分コード() != null
-                    && entity.get判定_支給区分コード().toString().equals("1")
-                    ? ShikyuKubun.支給.get名称()
-                    : RString.EMPTY);
+            csvEntity.set保決定利用負担額(numToRString_0(保決定利用負担額));
+            if (!RString.isNullOrEmpty(entity.get判定_支給区分コード())) {
+                csvEntity.set保決定支給区分(ShikyuKubun.toValue(entity.get判定_支給区分コード()).get名称());
+            } else {
+                csvEntity.set保決定支給区分(RString.EMPTY);
+            }
+
             Decimal 保決定高額支給額 = entity.get支給金額();
-            csvEntity.set保決定高額支給額(保決定高額支給額 != null
-                    ? numToRString_0(保決定高額支給額)
-                    : RString.EMPTY);
+            csvEntity.set保決定高額支給額(numToRString_0(保決定高額支給額));
             csvEntity.set保決定不支給理由(entity.get不支給理由());
             csvEntity.set審査方法(!RString.isNullOrEmpty(entity.get審査方法区分())
                     ? ShinsaHohoKubun.toValue(entity.get審査方法区分()).get名称() : RString.EMPTY);
@@ -747,11 +746,12 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set国決定通知書ＮＯ(entity.get通知書番号());
             Decimal 国決定利用負担額 = entity.get利用者負担額();
             csvEntity.set国決定利用負担額(numToRString_0(国決定利用負担額));
-            csvEntity.set国決定支給区分(
-                    entity.get決定_支給区分コード() != null
-                    && entity.get決定_支給区分コード().toString().equals("1")
-                    ? ShikyuKubun.支給.get名称()
-                    : RString.EMPTY);
+            if (!RString.isNullOrEmpty(entity.get決定_支給区分コード())) {
+                csvEntity.set国決定支給区分(ShikyuKubun.toValue(entity.get決定_支給区分コード()).get名称());
+            } else {
+                csvEntity.set国決定支給区分(RString.EMPTY);
+            }
+
             Decimal 国決定高額支給額 = entity.get決定_高額支給額();
             csvEntity.set国決定高額支給額(numToRString_0(国決定高額支給額));
             FlexibleYearMonth 国決定受取年月 = entity.get決定者受取年月();

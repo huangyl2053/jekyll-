@@ -85,8 +85,12 @@ public class YokaigoninteiJigyotaishoRirekiListHandler {
             FlexibleDate 決定日 = 総合事業対象者情報.get(i).get決定日();
             FlexibleDate 実施日 = 総合事業対象者情報.get(i).getチェックリスト実施日();
             dgJigyoTaishoshaList.getTekiyoKaishiYMD().setValue(適用開始日);
-            dgJigyoTaishoshaList.getTekiyoShuryoYMD().setValue(適用終了日);
-            dgJigyoTaishoshaList.getKetteiYMD().setValue(決定日);
+            if (適用終了日 != null && !適用終了日.isEmpty() && !FlexibleDate.MAX.equals(適用終了日)) {
+                dgJigyoTaishoshaList.getTekiyoShuryoYMD().setValue(適用終了日);
+            }
+            if (決定日 != null && !決定日.isEmpty() && !FlexibleDate.MAX.equals(決定日)) {
+                dgJigyoTaishoshaList.getKetteiYMD().setValue(決定日);
+            }
             dgJigyoTaishoshaList.getChecklistJisshiYMD().setValue(実施日);
             総合事業対象者.add(dgJigyoTaishoshaList);
         }
@@ -100,6 +104,9 @@ public class YokaigoninteiJigyotaishoRirekiListHandler {
      * @return RString
      */
     public RString get状態区分(FlexibleDate 有効開始日, RString 介護認定状態区分) {
+        if (!有効開始日.isValid()) {
+            return NULL;
+        }
         FlexibleYearMonth 有効開始年月 = 有効開始日.getYearMonth();
         if (有効開始年月.isBefore(有効開始0004)) {
             return NULL;

@@ -183,6 +183,15 @@ public class ShokanHanteiKekka
     }
 
     /**
+     * 前回支払金額を返します。
+     *
+     * @return 前回支払金額
+     */
+    public Decimal get前回支払金額() {
+        return entity.getZenkaiShiharaiKingaku();
+    }
+
+    /**
      * {@link DbT3036ShokanHanteiKekkaEntity}のクローンを返します。
      *
      * @return {@link DbT3036ShokanHanteiKekkaEntity}のクローン

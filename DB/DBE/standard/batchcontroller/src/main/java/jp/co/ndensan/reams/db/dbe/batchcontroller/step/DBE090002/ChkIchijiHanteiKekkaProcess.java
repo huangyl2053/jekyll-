@@ -246,7 +246,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
     protected void process(YokaigoninteiEntity entity) {
         bodyItem = setBodyItem(entity);
         bodyItem.set意見書認知症高齢者自立度(ChkIchijiHanteiKekkaBusiness.set意見書認知症(意見書項目, bodyItem));
-        bodyItem.set現在のサービス状況(ChkIchijiHanteiKekkaBusiness.setサービス状況(dbt5207Entity, dbt5208Entity, bodyItem));
+        ChkIchijiHanteiKekkaBusiness.setサービス状況(dbt5207Entity, dbt5208Entity, bodyItem);
         bodyItem.set身体機能_起居動作リスト(ChkIchijiHanteiKekkaBusiness.set身体機能_起居動作リスト(list, bodyItem));
         bodyItem.set生活機能リスト(ChkIchijiHanteiKekkaBusiness.set生活機能リスト(list, bodyItem));
         bodyItem.set認知機能リスト(ChkIchijiHanteiKekkaBusiness.set認知機能リスト(list, bodyItem));

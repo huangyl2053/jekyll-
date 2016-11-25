@@ -1,5 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader;
 
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -114,4 +116,130 @@ public interface IKyufuJissekiHeaderDiv extends ICommonChildDivBaseProperties {
      * @return 要介護度 要介護度
      */
     RString get要介護度();
+
+    /**
+     * 被保番号を設定します。
+     *
+     * @param 被保番号 被保番号
+     */
+    void set被保番号(RString 被保番号);
+
+    /**
+     * 被保番号を取得します。
+     *
+     * @return 被保番号 被保番号
+     */
+    RString get被保番号();
+
+    /**
+     * 住民種別を設定します。
+     *
+     * @param 住民種別 住民種別
+     */
+    void set住民種別(RString 住民種別);
+
+    /**
+     * 住民種別を取得します。
+     *
+     * @return 住民種別 住民種別
+     */
+    RString get住民種別();
+
+    /**
+     * 有効期間_開始を設定します。
+     *
+     * @param 有効期間_開始 有効期間_開始
+     */
+    void set有効期間_開始(RDate 有効期間_開始);
+
+    /**
+     * 有効期間_開始を取得します。
+     *
+     * @return 有効期間_開始 有効期間_開始
+     */
+    RDate get有効期間_開始();
+
+    /**
+     * 有効期間_終了を設定します。
+     *
+     * @param 有効期間_終了 有効期間_終了
+     */
+    void set有効期間_終了(RDate 有効期間_終了);
+
+    /**
+     * 有効期間_終了を取得します。
+     *
+     * @return 有効期間_終了 有効期間_終了
+     */
+    RDate get有効期間_終了();
+
+    /**
+     * 氏名を設定します。
+     *
+     * @param 氏名 氏名
+     */
+    void set氏名(RString 氏名);
+
+    /**
+     * 氏名を取得します。
+     *
+     * @return 氏名 氏名
+     */
+    RString get氏名();
+
+    /**
+     * 性別を設定します。
+     *
+     * @param 性別 性別
+     */
+    void set性別(RString 性別);
+
+    /**
+     * 性別を取得します。
+     *
+     * @return 性別 性別
+     */
+    RString get性別();
+
+    /**
+     * 生年月日を設定します。
+     *
+     * @param 生年月日 生年月日
+     */
+    void set生年月日(RDate 生年月日);
+
+    /**
+     * 生年月日を取得します。
+     *
+     * @return 生年月日 生年月日
+     */
+    RDate get生年月日();
+
+    /**
+     * 保険者を設定します。
+     *
+     * @param 保険者 保険者
+     */
+    void set保険者(RString 保険者);
+
+    /**
+     * 保険者を取得します。
+     *
+     * @return 保険者 保険者
+     */
+    RString get保険者();
+
+    /**
+     * 被保情報を設定します。
+     *
+     * @param 給付実績基本情報子Divデータ 給付実績基本情報子Divデータ
+     */
+    void set被保情報(KyufuJissekiHeader 給付実績基本情報子Divデータ);
+
+    /**
+     * 被保情報を設定します。
+     *
+     * @param csData_A 給付実績基本情報子Divデータ
+     */
+    void set被保情報2(KyufuJissekiKihonShukeiRelate csData_A);
 }

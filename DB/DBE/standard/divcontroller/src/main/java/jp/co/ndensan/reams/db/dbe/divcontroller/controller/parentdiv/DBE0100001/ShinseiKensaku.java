@@ -115,7 +115,6 @@ public class ShinseiKensaku {
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
         div.getBtnClear().setDisabled(true);
         div.getTxtMaxDisp().setDisabled(true);
-        div.getBtnKensaku().setDisabled(true);
         div.getBtnModoru().setDisabled(false);
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
@@ -125,7 +124,6 @@ public class ShinseiKensaku {
         if (searchResult.records().size() == 1) {
             div.getBtnClear().setDisabled(false);
             div.getTxtMaxDisp().setDisabled(false);
-            div.getBtnKensaku().setDisabled(false);
             return forwardNextOrStay(div, Events.検索結果1件);
         }
         return ResponseData.of(div).setState(DBE0100001StateName.検索結果一覧);
@@ -147,13 +145,16 @@ public class ShinseiKensaku {
         }
 
         RString 申請書管理番号 = row.getShinseishoKanriNo();
+        int 認定調査履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
         if (MENUID_DBEMN11001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
         if (MENUID_DBEMN11003.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
@@ -182,7 +183,7 @@ public class ShinseiKensaku {
                     //            ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
                     //            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号,
                     //>>>>>>> origin/sync
-                    Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
+                    認定調査履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
         } else if (MENUID_DBEMN31001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
@@ -207,7 +208,6 @@ public class ShinseiKensaku {
     public ResponseData<ShinseiKensakuDiv> onSelect_dgShinseiJoho(ShinseiKensakuDiv div) {
         div.getBtnClear().setDisabled(false);
         div.getTxtMaxDisp().setDisabled(false);
-        div.getBtnKensaku().setDisabled(false);
         return forwardNextOrStay(div, Events.対象選択);
     }
 
@@ -221,7 +221,6 @@ public class ShinseiKensaku {
         div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
         div.getBtnClear().setDisabled(false);
         div.getTxtMaxDisp().setDisabled(false);
-        div.getBtnKensaku().setDisabled(false);
         div.getBtnModoru().setDisabled(true);
         return ResponseData.of(div).setState(findStateAt条件指定());
     }

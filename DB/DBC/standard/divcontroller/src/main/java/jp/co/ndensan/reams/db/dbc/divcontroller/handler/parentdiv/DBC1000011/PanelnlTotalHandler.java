@@ -38,6 +38,7 @@ public class PanelnlTotalHandler {
     private static final RString フラグ_TRUE = new RString("true");
     private static final RString 利用者向け決定通知書 = new RString("ForRiyosha");
     private static final RString 受領委任者向け決定通知書 = new RString("ForJuryoininsha");
+    private static final RString STR_1 = new RString(1);
 
     /**
      * コンストラクタです。
@@ -219,6 +220,19 @@ public class PanelnlTotalHandler {
     }
 
     /**
+     * テスト出力制御
+     */
+    public void テスト出力制御() {
+        boolean isチェック = div.getChkTestShutsuryoku().isAllSelected();
+        div.getRadKeteibiIkatsuKoushinnKubun().setDisabled(isチェック);
+        div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get窓口払い一括更新区分RB().setDisabled(isチェック);
+        if (isチェック) {
+            div.getRadKeteibiIkatsuKoushinnKubun().setSelectedKey(キー);
+            div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get窓口払い一括更新区分RB().setSelectedKey(STR_1);
+        }
+    }
+
+    /**
      * バッチパラメータを引き渡し、バッチを起動します。
      *
      * @return ShoukanBaraiSuuchiShoIkatsuBatchParamter
@@ -269,11 +283,10 @@ public class PanelnlTotalHandler {
             paramter.set利用者向け決定通知書フラグ(フラグ_FALSE);
         }
         if (div.getPnlShokanbaraiShikyuKeteiTuchisho().getChkOutputTargetKubun().getSelectedKeys().contains(受領委任者向け決定通知書)) {
-            paramter.set利用者向け決定通知書フラグ(フラグ_TRUE);
+            paramter.set受領委任者向け決定通知書フラグ(フラグ_TRUE);
         } else {
-            paramter.set利用者向け決定通知書フラグ(フラグ_FALSE);
+            paramter.set受領委任者向け決定通知書フラグ(フラグ_FALSE);
         }
-        paramter.set受領委任者向け決定通知書フラグ(受託区分_2);
         paramter.set振込予定日(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get振込予定日());
         paramter.set支払場所(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get支払場所());
         paramter.set支払期間From(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get支払期間FROM());

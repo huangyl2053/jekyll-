@@ -158,7 +158,7 @@ public class KaigoKyufuJuryoininKeiyakuToroku {
                 ? RString.EMPTY : 償還受領委任契約者データ.get決定年月日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString());
         利用者向けEntity.set不承認理由(ShoninKubun.承認しない.getコード().equals(償還受領委任契約者データ.get承認結果区分())
-                ? RString.EMPTY : 償還受領委任契約者データ.get不承認理由());
+                ? 償還受領委任契約者データ.get不承認理由() : RString.EMPTY);
         利用者向けEntity.set給付の種類(KeiyakuServiceShurui.toValue(償還受領委任契約者データ.get契約サービス種類()).get名称());
         利用者向けEntity.set事業所名(受領委任契約事業者データ.get契約事業者名称());
         利用者向けEntity.set代表者氏名(受領委任契約事業者データ.get契約代表者氏名());
@@ -242,7 +242,7 @@ public class KaigoKyufuJuryoininKeiyakuToroku {
                 ? RString.EMPTY : 償還受領委任契約者データ.get決定年月日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString());
         事業者用Entity.set不承認理由(ShoninKubun.承認しない.getコード().equals(償還受領委任契約者データ.get承認結果区分())
-                ? RString.EMPTY : 償還受領委任契約者データ.get不承認理由());
+                ? 償還受領委任契約者データ.get不承認理由() : RString.EMPTY);
         事業者用Entity.set給付の種類(KeiyakuServiceShurui.toValue(償還受領委任契約者データ.get契約サービス種類()).get名称());
         事業者用Entity.set事業所名(受領委任契約事業者データ.get契約事業者名称());
         事業者用Entity.set代表者氏名(受領委任契約事業者データ.get契約代表者氏名());

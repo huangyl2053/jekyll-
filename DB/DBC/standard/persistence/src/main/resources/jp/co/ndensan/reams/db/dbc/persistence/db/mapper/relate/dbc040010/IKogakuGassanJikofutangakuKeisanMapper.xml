@@ -100,14 +100,14 @@
         ,"dbt3070"."hokenshaNo"
         ,"dbt3070"."shikyuShinseishoSeiriNo"
         ,MAX("dbt3070"."rirekiNo")  AS "rirekiNo"
-        FROM rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS "dbt3070"
+        FROM rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "dbt3070"
         WHERE "dbt3070"."isDeleted"= False
         GROUP BY
         "dbt3070"."hihokenshaNo"
         ,"dbt3070"."taishoNendo"
         ,"dbt3070"."hokenshaNo"
         ,"dbt3070"."shikyuShinseishoSeiriNo" ) AS "K"
-        INNER JOIN  rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS "B"
+        INNER JOIN  rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "B"
         ON  "K"."hihokenshaNo" = "B"."hihokenshaNo"
         AND  "K"."taishoNendo" = "B"."taishoNendo"
         AND  "K"."hokenshaNo" = "B"."hokenshaNo"
@@ -523,7 +523,7 @@
         <association property="支払方法変更" 
                      resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity" />
     </resultMap>
-    
+
     <resultMap id="ResultMap_DbT3170MatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.DbT3170MatchingEntity" autoMapping="true" >
         <id column="temp_hihokenshaNo" />
         <id column="temp_taishoNendo" />

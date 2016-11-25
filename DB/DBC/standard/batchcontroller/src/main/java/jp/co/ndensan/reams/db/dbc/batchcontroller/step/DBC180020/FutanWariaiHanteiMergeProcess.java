@@ -32,13 +32,14 @@ public class FutanWariaiHanteiMergeProcess extends BatchKeyBreakBase<RiyoshaFuta
 
     private static final RString 明細TABLENAME = new RString("RiyoshaFutanWariaiMeisaiTemp");
     private static final RString 根拠TABLENAME = new RString("RiyoshaFutanWariaiKonkyoTemp");
-
+    private static final RString LINE = new RString("|");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select負担割合判定マージ");
     private DBC180020ProcessParameter parameter;
     private RiyoshaFutanWariaiHantei service;
     private HihokenshaNo beforeNo;
     private HihokenshaNo nowNo;
+    private RString beforeKey;
     private FlexibleYear nendo;
     private List<RiyoshaFutanWariaiMeisaiTempEntity> 明細Entities;
     private List<RiyoshaFutanWariaiKonkyoTempEntity> 根拠Entities;
@@ -50,6 +51,7 @@ public class FutanWariaiHanteiMergeProcess extends BatchKeyBreakBase<RiyoshaFuta
 
     @Override
     protected void initialize() {
+        beforeKey = RString.EMPTY;
         service = RiyoshaFutanWariaiHantei.createInstance();
         nendo = new FlexibleYear(parameter.getTaishoNendo().toDateString());
         明細Entities = new ArrayList<>();
@@ -92,7 +94,11 @@ public class FutanWariaiHanteiMergeProcess extends BatchKeyBreakBase<RiyoshaFuta
 
     private void addHandle(RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細,
             RiyoshaFutanWariaiKonkyoTempEntity 利用者負担割合根拠) {
-        明細Entities.add(利用者負担割合明細);
+        RString nowKey = getKey(利用者負担割合明細);
+        if (!beforeKey.equals(nowKey)) {
+            明細Entities.add(利用者負担割合明細);
+            beforeKey = nowKey;
+        }
         if (利用者負担割合根拠 != null) {
             根拠Entities.add(利用者負担割合根拠);
         }
@@ -122,4 +128,7 @@ public class FutanWariaiHanteiMergeProcess extends BatchKeyBreakBase<RiyoshaFuta
     protected void keyBreakProcess(RiyoshaFutanWariaiTempUnionEntity t) {
     }
 
+    private RString getKey(RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細) {
+        return 利用者負担割合明細.getHihokenshaNo().value().concat(LINE).concat(new RString(利用者負担割合明細.getEdaNo()));
+    }
 }

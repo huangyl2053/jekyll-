@@ -34,4 +34,6 @@ public class DBC120900_SogojigyohiSeikyugakuTsuchishoKohiInParameter extends Bat
     private SaiShoriKubun saishoriKubun;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
     private RString shutsuryokujunId;
+    @BatchParameter(key = "loginUserId", name = "loginUserId")
+    private RString loginUserId;
 }

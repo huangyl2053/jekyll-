@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB241001;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.euc.nenkintokucho.NenkinTokuchoIchiranCsvEditor;
 import jp.co.ndensan.reams.db.dbb.business.euc.nenkintokucho.NenkinTokuchoInsertEditor;
 import jp.co.ndensan.reams.db.dbb.business.euc.nenkintokucho.NenkinTokuchoKennSuuCsvEditor;
@@ -18,7 +16,6 @@ import jp.co.ndensan.reams.db.dbb.entity.csv.KekkajohoCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.csv.NenkinTokuchoIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.csv.TaishoshaOrTuikaKohoshaJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.nenkintokucho.NenkinTokuchoEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.nenkintokucho.INenkinTokuchoMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.ShoriKekkaCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
@@ -44,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
@@ -61,7 +59,6 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
     private NenkinTokuchoIchiranCsvEditor ichiranCsvEditor;
     private NenkinTokuchoKennSuuCsvEditor kennSuuCsvEditor;
     private NenkinTokuchoInsertEditor insertEditor;
-    private INenkinTokuchoMapper mapper;
     private TokuchoHaishinDataTorikomiProcessParameter parameter;
     private FileSpoolManager 結果情報一覧Manager;
     private FileSpoolManager 対象者情報一覧Manager;
@@ -88,8 +85,7 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
     private RString 結果情報件数表EucFilePath;
     private RString 異動処理結果情報件数表EucFilePath;
     private TorikomiFileTrailRecordTempEntity tmpEntity;
-    private List<TorikomiFileKaifuJohoTempEntity> entityList;
-    private List<TorikomiFileTrailRecordTempEntity> 異動処理結果情報件数表List;
+    private TorikomiFileTrailRecordTempEntity 異動処理結果情報;
     private static final EucEntityId EUC_ENTITY_ID_DBB300007 = new EucEntityId("DBB300007");
     private static final EucEntityId EUC_ENTITY_ID_DBB300008 = new EucEntityId("DBB300008");
     private static final EucEntityId EUC_ENTITY_ID_DBB300009 = new EucEntityId("DBB300009");
@@ -142,10 +138,21 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
     private static final int INT_10 = 10;
     private static final int INT_11 = 11;
     private static final int INT_12 = 12;
+    private static final RString RSTRING_00 = new RString("00");
+    private static final RString RSTRING_10 = new RString("10");
     private int 資格喪失エラー件数;
     private int 仮徴収額変更エラー件数;
     private int 住所地特例エラー件数;
+    private int 資格喪失件数;
+    private int 仮徴収額変更件数;
+    private int 住所地特例件数;
+    private int 該当件数;
+    private int エラー数;
+    private int 停止数;
+    private Decimal 合計金額;
+    private Decimal 停止金額;
     private static final RString 連番_GENERIC_KEY = new RString("連番_GENERIC_KEY");
+    private FlexibleYearMonth 処理年月;
 
     /**
      * 処理対象年月です。
@@ -160,9 +167,16 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
 
     @Override
     protected void initialize() {
-        mapper = getMapper(INenkinTokuchoMapper.class);
-        entityList = new ArrayList<>();
-        異動処理結果情報件数表List = new ArrayList<>();
+        処理年月 = FlexibleYearMonth.EMPTY;
+        異動処理結果情報 = null;
+        合計金額 = Decimal.ZERO;
+        停止金額 = Decimal.ZERO;
+        エラー数 = INT_0;
+        停止数 = INT_0;
+        該当件数 = INT_0;
+        資格喪失件数 = INT_0;
+        仮徴収額変更件数 = INT_0;
+        住所地特例件数 = INT_0;
         tmpEntity = null;
         ichiranCsvEditor = new NenkinTokuchoIchiranCsvEditor();
         kennSuuCsvEditor = new NenkinTokuchoKennSuuCsvEditor();
@@ -334,48 +348,37 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
         }
         if (tmpEntity == null) {
             tmpEntity = entity.getトレイラレコードEntity();
-            entityList.add(entity.getデータレコードEntity());
+            set合計(entity.getデータレコードEntity());
         } else if (isEquals(entity.getトレイラレコードEntity())) {
-            entityList.add(entity.getデータレコードEntity());
+            set合計(entity.getデータレコードEntity());
         } else {
             editOutPutKennSuuCsv();
-            entityList.clear();
-            entityList.add(entity.getデータレコードEntity());
+            エラー数 = INT_0;
+            停止数 = INT_0;
+            該当件数 = INT_0;
+            set合計(entity.getデータレコードEntity());
             tmpEntity = entity.getトレイラレコードEntity();
         }
+        処理年月 = get処理対象年月(entity.getデータレコードEntity().getTsuchiNaiyoCode(),
+                entity.getデータレコードEntity().getSakuseiYMD());
         editOutPutIchiranCsv(entity.getデータレコードEntity());
+        shoriTaishoYM.setValue(処理年月);
         TokuchoHaishinDataTorikomiMybatisParameter param = setMybatisParameter(entity.getデータレコードEntity());
-        UeT0511NenkinTokuchoKaifuJohoEntity ueT0511Entity = mapper.select年金特徴回付情報(param);
-        if (ueT0511Entity == null) {
-            ueT0511Writer.insert(insertEditor.get対象者or追加候補者情報CsvEntity(entity.getデータレコードEntity(), param,
-                    parameter.getShoriYMDHM(), parameter.getFileName().substring(INT_0, INT_3),
-                    get処理対象年月(entity.getデータレコードEntity().getTsuchiNaiyoCode(),
-                            entity.getデータレコードEntity().getSakuseiYMD())));
-        }
+        ueT0511Writer.insert(insertEditor.get対象者or追加候補者情報CsvEntity(entity.getデータレコードEntity(), param,
+                parameter.getShoriYMDHM(), parameter.getFileName().substring(INT_0, INT_3),
+                処理年月));
+
     }
 
     @Override
     protected void afterExecute() {
         if (tmpEntity != null) {
             editOutPutKennSuuCsv();
-            shoriTaishoYM.setValue(get処理対象年月(tmpEntity.getTsuchiNaiyoCode(), tmpEntity.getSakuseiYMD()));
         }
-        if (!異動処理結果情報件数表List.isEmpty()) {
-            int 資格喪失件数 = INT_0;
-            int 仮徴収額変更件数 = INT_0;
-            int 住所地特例件数 = INT_0;
-            for (TorikomiFileTrailRecordTempEntity entity : 異動処理結果情報件数表List) {
-                if (TsuchiNaiyoCodeType.資格喪失等処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
-                    資格喪失件数 = entity.getRecordKensu();
-                } else if (TsuchiNaiyoCodeType.仮徴収額変更処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
-                    仮徴収額変更件数 = entity.getRecordKensu();
-                } else if (TsuchiNaiyoCodeType.住所地特例該当者処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
-                    住所地特例件数 = entity.getRecordKensu();
-                }
-            }
-            RString 市町村名 = get市町村名(異動処理結果情報件数表List.get(INT_0).getShichosoCode());
-            異動処理結果情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get特別徴収異動処理結果情報件数表CsvEntity(異動処理結果情報件数表List
-                    .get(INT_0), 市町村名, 資格喪失件数, 仮徴収額変更件数, 住所地特例件数, 資格喪失エラー件数,
+        if (異動処理結果情報 != null) {
+            RString 市町村名 = get市町村名(異動処理結果情報.getShichosoCode());
+            異動処理結果情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get特別徴収異動処理結果情報件数表CsvEntity(異動処理結果情報,
+                    市町村名, 資格喪失件数, 仮徴収額変更件数, 住所地特例件数, 資格喪失エラー件数,
                     仮徴収額変更エラー件数, 住所地特例エラー件数));
         }
         対象者情報一覧CsvWriter.close();
@@ -427,23 +430,25 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
     }
 
     private void editOutPutKennSuuCsv() {
-        boolean is出力 = is出力(tmpEntity.getTsuchiNaiyoCode(),
-                get処理対象年月(tmpEntity.getTsuchiNaiyoCode(), tmpEntity.getSakuseiYMD()));
+        boolean is出力 = is出力(tmpEntity.getTsuchiNaiyoCode(), 処理年月);
         RString 市町村名 = get市町村名(tmpEntity.getShichosoCode());
         if (TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode()) && is出力) {
-            対象者情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get対象者or追加候補者情報CsvEntity(tmpEntity, entityList, 市町村名));
+            対象者情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get対象者or追加候補者情報CsvEntity(tmpEntity, 該当件数, 市町村名));
         } else if (TsuchiNaiyoCodeType.特別徴収依頼処理結果通知.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode()) && is出力) {
-            依頼処理結果情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get処理結果情報件数表CsvEntity(tmpEntity, entityList, 市町村名));
+            依頼処理結果情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get処理結果情報件数表CsvEntity(tmpEntity, 該当件数,
+                    市町村名, エラー数, 停止数));
         } else if (TsuchiNaiyoCodeType.特別徴収結果通知.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode()) && is出力) {
-            結果情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get特別徴収結果情報件数表CsvEntity(tmpEntity, entityList, 市町村名));
+            結果情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get特別徴収結果情報件数表CsvEntity(tmpEntity, 該当件数,
+                    市町村名, 合計金額, 停止金額, 停止数));
         } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode()) && is出力) {
-            追加候補者情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get対象者or追加候補者情報CsvEntity(tmpEntity, entityList, 市町村名));
+            追加候補者情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get対象者or追加候補者情報CsvEntity(tmpEntity, 該当件数, 市町村名));
         } else if (TsuchiNaiyoCodeType.特別徴収追加依頼処理結果通知.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode()) && is出力) {
-            追加依頼処理結果情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get処理結果情報件数表CsvEntity(tmpEntity, entityList, 市町村名));
+            追加依頼処理結果情報件数表CsvWriter.writeLine(kennSuuCsvEditor.get処理結果情報件数表CsvEntity(tmpEntity, 該当件数,
+                    市町村名, エラー数, 停止数));
         } else if (TsuchiNaiyoCodeType.資格喪失等処理結果通知.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode())
                 || TsuchiNaiyoCodeType.仮徴収額変更処理結果通知.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode())
                 || TsuchiNaiyoCodeType.住所地特例該当者処理結果通知.get通知内容コード().equals(tmpEntity.getTsuchiNaiyoCode())) {
-            異動処理結果情報件数表List.add(tmpEntity);
+            異動処理結果情報 = tmpEntity;
         }
 
     }
@@ -517,15 +522,21 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
     }
 
     private void set異動処理エラー件数(TorikomiFileKaifuJohoTempEntity entity) {
-        if (TsuchiNaiyoCodeType.資格喪失等処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())
-                && !ShoriKekkaCode.Code00.getCode().equals(entity.getShoriKeikka())) {
-            資格喪失エラー件数 = 資格喪失エラー件数 + INT_1;
-        } else if (TsuchiNaiyoCodeType.仮徴収額変更処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())
-                && !ShoriKekkaCode.Code00.getCode().equals(entity.getShoriKeikka())) {
-            仮徴収額変更エラー件数 = 仮徴収額変更エラー件数 + INT_1;
-        } else if (TsuchiNaiyoCodeType.住所地特例該当者処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())
-                && !ShoriKekkaCode.Code00.getCode().equals(entity.getShoriKeikka())) {
-            住所地特例エラー件数 = 住所地特例エラー件数 + INT_1;
+        if (TsuchiNaiyoCodeType.資格喪失等処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
+            資格喪失件数 = 資格喪失件数 + INT_1;
+            if (!ShoriKekkaCode.Code00.getCode().equals(entity.getShoriKeikka())) {
+                資格喪失エラー件数 = 資格喪失エラー件数 + INT_1;
+            }
+        } else if (TsuchiNaiyoCodeType.仮徴収額変更処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
+            仮徴収額変更件数 = 仮徴収額変更件数 + INT_1;
+            if (!ShoriKekkaCode.Code00.getCode().equals(entity.getShoriKeikka())) {
+                仮徴収額変更エラー件数 = 仮徴収額変更エラー件数 + INT_1;
+            }
+        } else if (TsuchiNaiyoCodeType.住所地特例該当者処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
+            住所地特例件数 = 住所地特例件数 + INT_1;
+            if (!ShoriKekkaCode.Code00.getCode().equals(entity.getShoriKeikka())) {
+                住所地特例エラー件数 = 住所地特例エラー件数 + INT_1;
+            }
         }
     }
 
@@ -597,6 +608,33 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
             return false;
         }
         return true;
+    }
+
+    private void set合計(TorikomiFileKaifuJohoTempEntity entity) {
+        該当件数 = 該当件数 + INT_1;
+        if (TsuchiNaiyoCodeType.特別徴収依頼処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
+            if (ShoriKekkaCode.Code50.getCode().equals(entity.getShoriKeikka()) || ShoriKekkaCode.Code51.getCode()
+                    .equals(entity.getShoriKeikka()) || ShoriKekkaCode.Code52.getCode().equals(entity.getShoriKeikka())) {
+                エラー数 = エラー数 + INT_1;
+            } else if (ShoriKekkaCode.Code01.getCode().equals(entity.getShoriKeikka()) || ShoriKekkaCode.Code02.getCode()
+                    .equals(entity.getShoriKeikka()) || ShoriKekkaCode.Code03.getCode().equals(entity.getShoriKeikka())) {
+                停止数 = 停止数 + INT_1;
+            }
+        } else if (TsuchiNaiyoCodeType.特別徴収結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
+            合計金額 = 合計金額.add(entity.getKakushuKingaku1());
+            if (!RSTRING_00.equals(entity.getKakushuKubun()) && RSTRING_10.equals(entity.getKakushuKubun())) {
+                停止数 = 停止数 + 1;
+                停止金額 = 停止金額.add(entity.getKakushuKingaku1());
+            }
+        } else if (TsuchiNaiyoCodeType.特別徴収追加依頼処理結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
+            if (ShoriKekkaCode.Code50.getCode().equals(entity.getShoriKeikka()) || ShoriKekkaCode.Code51.getCode()
+                    .equals(entity.getShoriKeikka()) || ShoriKekkaCode.Code52.getCode().equals(entity.getShoriKeikka())) {
+                エラー数 = エラー数 + 1;
+            } else if (ShoriKekkaCode.Code01.getCode().equals(entity.getShoriKeikka()) || ShoriKekkaCode.Code02.getCode()
+                    .equals(entity.getShoriKeikka()) || ShoriKekkaCode.Code03.getCode().equals(entity.getShoriKeikka())) {
+                停止数 = 停止数 + 1;
+            }
+        }
     }
 
 }

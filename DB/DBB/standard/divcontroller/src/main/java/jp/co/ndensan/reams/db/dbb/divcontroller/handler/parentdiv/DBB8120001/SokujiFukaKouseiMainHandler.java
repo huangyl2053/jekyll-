@@ -10,24 +10,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.ca.cax.service.core.shuno.shuno.ShunoManager;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Gemmen;
-import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.ChoteiJiyuParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.FukaJohoList;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiZengoChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiZengoFuka;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.NendobunFukaList;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.KibetsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
-import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.SokujiFukaKousei;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHosokuMonth;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.FukakonkyoAtoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.FukakonkyoMaeDiv;
@@ -36,8 +26,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.Soku
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.dgFuchoKanendo_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.tblSanteinokisoAtoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.tblSanteinokisoMaeDiv;
-import jp.co.ndensan.reams.db.dbb.service.core.basic.GemmenManager;
-import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.tokucho.TokuchoIraiJohoSakuseiJokyo;
@@ -52,11 +40,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenTorikeshiShurui;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -67,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -85,21 +67,21 @@ public class SokujiFukaKouseiMainHandler {
 
     private final SokujiFukaKouseiMainDiv div;
     private static final long LONG_1 = 1;
-    private static final int NUM_0 = 0;
-    private static final int NUM_1 = 1;
-    private static final int NUM_2 = 2;
-    private static final int NUM_3 = 3;
-    private static final int NUM_4 = 4;
-    private static final int NUM_5 = 5;
-    private static final int NUM_6 = 6;
-    private static final int NUM_7 = 7;
-    private static final int NUM_8 = 8;
-    private static final int NUM_9 = 9;
-    private static final int NUM_10 = 10;
-    private static final int NUM_11 = 11;
-    private static final int NUM_12 = 12;
-    private static final int NUM_13 = 13;
-    private static final int NUM_14 = 14;
+    private static final int NUMB_0 = 0;
+    private static final int NUMB_1 = 1;
+    private static final int NUMB_2 = 2;
+    private static final int NUMB_3 = 3;
+    private static final int NUMB_4 = 4;
+    private static final int NUMB_5 = 5;
+    private static final int NUMB_6 = 6;
+    private static final int NUMB_7 = 7;
+    private static final int NUMB_8 = 8;
+    private static final int NUMB_9 = 9;
+    private static final int NUMB_10 = 10;
+    private static final int NUMB_11 = 11;
+    private static final int NUMB_12 = 12;
+    private static final int NUMB_13 = 13;
+    private static final int NUMB_14 = 14;
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final Decimal DECIMAL_12 = new Decimal(12);
@@ -215,162 +197,6 @@ public class SokujiFukaKouseiMainHandler {
         return !getPaneItem().equals(div.getInitData()) || FLAG_CHANGE.equals(div.getIsDataChange());
     }
 
-    private FukaJoho get賦課の情報履歴番号採番(FukaJoho 賦課の情報) {
-        FukaJohoBuilder fukaJohoBuilder = new FukaJoho(
-                賦課の情報.get調定年度(),
-                賦課の情報.get賦課年度(),
-                賦課の情報.get通知書番号(),
-                賦課の情報.get履歴番号() + NUM_1).createBuilderForEdit().
-                set被保険者番号(賦課の情報.get被保険者番号()).
-                set識別コード(賦課の情報.get識別コード()).
-                set世帯コード(賦課の情報.get世帯コード()).
-                set世帯員数(賦課の情報.get世帯員数()).
-                set資格取得日(賦課の情報.get資格取得日()).
-                set資格取得事由(賦課の情報.get資格取得事由()).
-                set資格喪失日(賦課の情報.get資格喪失日()).
-                set資格喪失事由(賦課の情報.get資格喪失事由()).
-                set生活保護扶助種類(賦課の情報.get生活保護扶助種類()).
-                set生保開始日(賦課の情報.get生保開始日()).
-                set生保廃止日(賦課の情報.get生保廃止日()).
-                set老年開始日(賦課の情報.get老年開始日()).
-                set老年廃止日(賦課の情報.get老年廃止日()).
-                set賦課期日(賦課の情報.get賦課期日()).
-                set課税区分(賦課の情報.get課税区分()).
-                set世帯課税区分(賦課の情報.get世帯課税区分()).
-                set合計所得金額(賦課の情報.get合計所得金額()).
-                set公的年金収入額(賦課の情報.get公的年金収入額()).
-                set保険料段階(賦課の情報.get保険料段階()).
-                set保険料算定段階1(賦課の情報.get保険料算定段階1()).
-                set算定年額保険料1(賦課の情報.get算定年額保険料1()).
-                set月割開始年月1(賦課の情報.get月割開始年月1()).
-                set月割終了年月1(賦課の情報.get月割終了年月1()).
-                set保険料算定段階2(賦課の情報.get保険料算定段階2()).
-                set算定年額保険料2(賦課の情報.get算定年額保険料2()).
-                set月割開始年月2(賦課の情報.get月割開始年月2()).
-                set月割終了年月2(賦課の情報.get月割終了年月2()).
-                set調定日時(賦課の情報.get調定日時()).
-                set調定事由1(賦課の情報.get調定事由1()).
-                set調定事由2(賦課の情報.get調定事由2()).
-                set調定事由3(賦課の情報.get調定事由3()).
-                set調定事由4(賦課の情報.get調定事由4()).
-                set更正月(賦課の情報.get更正月()).
-                set減免前介護保険料_年額(賦課の情報.get減免前介護保険料_年額()).
-                set減免額(賦課の情報.get減免額()).
-                set確定介護保険料_年額(賦課の情報.get確定介護保険料_年額()).
-                set保険料段階_仮算定時(賦課の情報.get保険料段階_仮算定時()).
-                set徴収方法履歴番号(賦課の情報.get徴収方法履歴番号()).
-                set異動基準日時(賦課の情報.get異動基準日時()).
-                set口座区分(賦課の情報.get口座区分()).
-                set境界層区分(賦課の情報.get境界層区分()).
-                set職権区分(賦課の情報.get職権区分()).
-                set賦課市町村コード(賦課の情報.get賦課市町村コード()).
-                set特徴歳出還付額(賦課の情報.get特徴歳出還付額()).
-                set普徴歳出還付額(賦課の情報.get普徴歳出還付額());
-        List<Kibetsu> kibetsuList = 賦課の情報.getKibetsuList();
-        for (Kibetsu kibetsu : kibetsuList) {
-            ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(kibetsu.get調定ID().longValue());
-            Kibetsu 介護期別 = new Kibetsu(
-                    kibetsu.get調定年度(),
-                    kibetsu.get賦課年度(),
-                    kibetsu.get通知書番号(),
-                    kibetsu.get履歴番号() + NUM_1,
-                    kibetsu.get徴収方法(),
-                    kibetsu.get期()).createBuilderForEdit().
-                    set調定ID(kibetsu.get調定ID()).
-                    setKibetsu(kibetsu.getChoteiKyotsu(identifier)).build();
-            fukaJohoBuilder.setKibetsu(介護期別);
-        }
-        return fukaJohoBuilder.build();
-    }
-
-    /**
-     * 保存処理にする。
-     *
-     * @param is特殊処理 is特殊処理
-     * @param 更正前 更正前
-     * @param 更正後 更正後
-     * @param 更正前後徴収方法 更正前後徴収方法
-     * @return SokujiFukaKousei 即時賦課更正entity
-     */
-    public SokujiFukaKousei set保存処理(boolean is特殊処理,
-            NendobunFukaList 更正前,
-            NendobunFukaList 更正後,
-            KoseiZengoChoshuHoho 更正前後徴収方法) {
-        SokujiFukaKousei sokujiFukaKousei = new SokujiFukaKousei();
-        if (is特殊処理) {
-            FukaJoho fukaJoho = 更正後.get現年度().createBuilderForEdit()
-                    .set職権区分(ShokkenKubun.該当.getコード()).build();
-            ChoteiJiyuHantei choteiJiyuHantei = new ChoteiJiyuHantei();
-            ChoteiJiyuParameter parameter = new ChoteiJiyuParameter();
-            parameter.set現年度(更正前.get現年度());
-            List<FukaJohoList> fukaJohoList = new ArrayList<>();
-            FukaJohoList 更正後賦課の情報リスト = new FukaJohoList();
-            更正後賦課の情報リスト.set現年度(fukaJoho);
-            fukaJohoList.add(更正後賦課の情報リスト);
-            parameter.set更正後賦課リスト(fukaJohoList);
-            parameter.set更正前徴収方法(更正前後徴収方法.get更正前());
-            parameter.set更正後徴収方法(更正前後徴収方法.get更正後());
-            List<FukaJohoList> 調定事由リスト = choteiJiyuHantei.set調定事由(parameter);
-            for (FukaJohoList 調定事由 : 調定事由リスト) {
-                if (調定事由.get現年度().hasChanged()) {
-                    更正後.set現年度(調定事由.get現年度());
-                }
-            }
-        } else {
-            boolean is調定事由を反映 = Boolean.FALSE;
-            if (RString.isNullOrEmpty(更正後.get現年度().get調定事由1())) {
-                is調定事由を反映 = Boolean.TRUE;
-                更正後.get現年度().createBuilderForEdit().set調定事由1(ChoteiJiyuCode.期別修正による更正.getコード());
-            }
-            if (!is調定事由を反映 && RString.isNullOrEmpty(更正後.get現年度().get調定事由2())) {
-                is調定事由を反映 = Boolean.TRUE;
-                更正後.get現年度().createBuilderForEdit().set調定事由2(ChoteiJiyuCode.期別修正による更正.getコード());
-            }
-            if (!is調定事由を反映 && RString.isNullOrEmpty(更正後.get現年度().get調定事由3())) {
-                is調定事由を反映 = Boolean.TRUE;
-                更正後.get現年度().createBuilderForEdit().set調定事由3(ChoteiJiyuCode.期別修正による更正.getコード());
-            }
-            if (!is調定事由を反映 && RString.isNullOrEmpty(更正後.get現年度().get調定事由4())) {
-                is調定事由を反映 = Boolean.TRUE;
-                更正後.get現年度().createBuilderForEdit().set調定事由4(ChoteiJiyuCode.期別修正による更正.getコード());
-            }
-        }
-        List<FukaJoho> 更新対象 = get更新対象(更正前, 更正後);
-        sokujiFukaKousei.set賦課の情報リスト(更新対象);
-        if (更正前後徴収方法.isHasChanged()) {
-            sokujiFukaKousei.set更正後徴収方法(更正前後徴収方法.get更正後());
-        }
-        List<Gemmen> 減免の情報リスト = new ArrayList<>();
-        GemmenManager gemmenManager = new GemmenManager();
-        for (FukaJoho fukaJoho : 更新対象) {
-            Decimal 減免額 = fukaJoho.get減免額() == null ? Decimal.ZERO : fukaJoho.get減免額();
-            if (減免額.compareTo(Decimal.ONE) > 0) {
-                Gemmen 減免情報 = gemmenManager.get介護賦課減免(fukaJoho.get調定年度(), fukaJoho.get賦課年度(), fukaJoho.get通知書番号());
-                if (減免情報 == null) {
-                    continue;
-                }
-                Gemmen 更新後の減免情報 = new Gemmen(減免情報.get調定年度(), 減免情報.get賦課年度(),
-                        減免情報.get通知書番号(), 減免情報.get履歴番号().add(Decimal.ONE)).createBuilderForEdit().
-                        set減免申請日(減免情報.get減免申請日()).
-                        set減免決定日(減免情報.get減免決定日()).
-                        set減免取消日(減免情報.get減免取消日()).
-                        set減免状態区分(減免情報.get減免状態区分()).
-                        set減免作成区分(減免情報.get減免作成区分()).
-                        set申請事由(減免情報.get申請事由()).
-                        set減免種類コード(減免情報.get減免種類コード()).
-                        set減免事由(減免情報.get減免事由()).
-                        set減免取消種類(new HokenryoGemmenTorikeshiShurui(減免情報.get減免取消種類コード())).
-                        set減免取消事由(減免情報.get減免取消事由()).
-                        set申請減免額(減免情報.get申請減免額()).
-                        set決定減免額(fukaJoho.get減免額()).
-                        set取消減免額(減免情報.get取消減免額()).build();
-                減免の情報リスト.add(更新後の減免情報);
-            }
-        }
-        sokujiFukaKousei.set減免の情報リスト(減免の情報リスト);
-        return sokujiFukaKousei;
-    }
-
     /**
      * 更正前後賦課のリスト順番の降順の動作です。
      *
@@ -387,264 +213,6 @@ public class SokujiFukaKouseiMainHandler {
                         arg0.get更正後().get通知書番号().getColumnValue());
             }
         });
-    }
-
-    private List<FukaJoho> get更新対象(NendobunFukaList 更正前, NendobunFukaList 更正後) {
-        List<FukaJoho> 更新対象 = new ArrayList<>();
-        if (is内容に異なる箇所がある(更正前.get現年度(), 更正後.get現年度())) {
-            boolean is履歴番号採番 = is履歴番号採番(更正前.get現年度(), 更正後.get現年度());
-            FukaJoho 現年度 = 更正後.get現年度();
-            if (is履歴番号採番) {
-                現年度 = get賦課の情報履歴番号採番(現年度);
-            }
-            更新対象.add(現年度);
-        }
-        if (is内容に異なる箇所がある(更正前.get過年度1(), 更正後.get過年度1())) {
-            boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度1(), 更正後.get過年度1());
-            FukaJoho 過年度1 = 更正後.get過年度1();
-            if (is履歴番号採番) {
-                過年度1 = get賦課の情報履歴番号採番(過年度1);
-            }
-            更新対象.add(過年度1);
-        }
-        if (is内容に異なる箇所がある(更正前.get過年度2(), 更正後.get過年度2())) {
-            boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度2(), 更正後.get過年度2());
-            FukaJoho 過年度2 = 更正後.get過年度2();
-            if (is履歴番号採番) {
-                過年度2 = get賦課の情報履歴番号採番(過年度2);
-            }
-            更新対象.add(過年度2);
-        }
-        if (is内容に異なる箇所がある(更正前.get過年度3(), 更正後.get過年度3())) {
-            boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度3(), 更正後.get過年度3());
-            FukaJoho 過年度3 = 更正後.get過年度3();
-            if (is履歴番号採番) {
-                過年度3 = get賦課の情報履歴番号採番(過年度3);
-            }
-            更新対象.add(過年度3);
-        }
-        if (is内容に異なる箇所がある(更正前.get過年度4(), 更正後.get過年度4())) {
-            boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度4(), 更正後.get過年度4());
-            FukaJoho 過年度4 = 更正後.get過年度4();
-            if (is履歴番号採番) {
-                過年度4 = get賦課の情報履歴番号採番(過年度4);
-            }
-            更新対象.add(過年度4);
-        }
-        if (is内容に異なる箇所がある(更正前.get過年度5(), 更正後.get過年度5())) {
-            boolean is履歴番号採番 = is履歴番号採番(更正前.get過年度5(), 更正後.get過年度5());
-            FukaJoho 過年度5 = 更正後.get過年度5();
-            if (is履歴番号採番) {
-                過年度5 = get賦課の情報履歴番号採番(過年度5);
-            }
-            更新対象.add(過年度5);
-        }
-        return 更新対象;
-    }
-
-    private boolean is履歴番号採番(FukaJoho 更正前賦課, FukaJoho 更正後賦課) {
-        return 更正前賦課.get履歴番号() == 更正後賦課.get履歴番号();
-    }
-
-    private boolean is内容に異なる箇所がある(FukaJoho 更正前賦課, FukaJoho 更正後賦課) {
-        if (更正前賦課 == null || 更正後賦課 == null) {
-            return Boolean.FALSE;
-        }
-        return is介護賦課異なる1(更正前賦課, 更正後賦課)
-                || is介護賦課異なる2(更正前賦課, 更正後賦課)
-                || is介護賦課異なる3(更正前賦課, 更正後賦課)
-                || is介護期別異なる(更正前賦課, 更正後賦課);
-    }
-
-    private boolean is介護期別異なる(FukaJoho 更正前賦課, FukaJoho 更正後賦課) {
-        for (Kibetsu kibetsu : 更正前賦課.getKibetsuList()) {
-            ChoteiKyotsuIdentifier choteiKyotsuIdentifier = new ChoteiKyotsuIdentifier(kibetsu.get調定ID().longValue());
-            ChoteiKyotsu 更正前介護期別 = kibetsu.getChoteiKyotsu(choteiKyotsuIdentifier);
-            KibetsuIdentifier kibetsuIdentifier = new KibetsuIdentifier(更正後賦課.get調定年度(), 更正後賦課.get賦課年度(),
-                    更正後賦課.get通知書番号(), 更正後賦課.get履歴番号(), kibetsu.get徴収方法(), kibetsu.get期());
-            ChoteiKyotsu 更正後介護期別 = 更正後賦課.getKibetsu(kibetsuIdentifier).getChoteiKyotsu(choteiKyotsuIdentifier);
-            if (is調定共通異なる(更正前介護期別, 更正後介護期別)) {
-                return Boolean.TRUE;
-            }
-        }
-        return Boolean.FALSE;
-    }
-
-    private boolean is調定共通異なる(ChoteiKyotsu 更正前介護期別, ChoteiKyotsu 更正後介護期別) {
-        return is異なる(更正前介護期別.get収納ID().intValue(), 更正後介護期別.get収納ID().intValue())
-                || is異なる(更正前介護期別.get会計年度(), 更正後介護期別.get会計年度())
-                || is異なる(更正前介護期別.get処理年度(), 更正後介護期別.get処理年度())
-                || is異なる(更正前介護期別.get処理番号(), 更正後介護期別.get処理番号())
-                || is異なる(更正前介護期別.get更正回数(), 更正後介護期別.get更正回数())
-                || is異なる(更正前介護期別.get調定事由コード(), 更正後介護期別.get調定事由コード())
-                || is異なる(更正前介護期別.get調定年月日(), 更正後介護期別.get調定年月日())
-                || is異なる(更正前介護期別.get調定額(), 更正後介護期別.get調定額())
-                || is異なる(更正前介護期別.get消費税額(), 更正後介護期別.get消費税額())
-                || is異なる(更正前介護期別.get納期限(), 更正後介護期別.get納期限())
-                || is異なる(更正前介護期別.get法定納期限等(), 更正後介護期別.get法定納期限等())
-                || (更正前介護期別.is賦課処理状況() != 更正後介護期別.is賦課処理状況());
-    }
-
-    private boolean is介護賦課異なる1(FukaJoho 更正前賦課, FukaJoho 更正後賦課) {
-        return is異なる(更正前賦課.get被保険者番号().getColumnValue(), 更正後賦課.get被保険者番号().getColumnValue())
-                || is異なる(更正前賦課.get識別コード(), 更正後賦課.get識別コード())
-                || is異なる(更正前賦課.get世帯コード(), 更正後賦課.get世帯コード())
-                || is異なる(更正前賦課.get世帯員数(), 更正後賦課.get世帯員数())
-                || is異なる(更正前賦課.get資格取得日(), 更正後賦課.get資格取得日())
-                || is異なる(更正前賦課.get資格取得事由(), 更正後賦課.get資格取得事由())
-                || is異なる(更正前賦課.get資格喪失日(), 更正後賦課.get資格喪失日())
-                || is異なる(更正前賦課.get資格喪失事由(), 更正後賦課.get資格喪失事由())
-                || is異なる(更正前賦課.get生活保護扶助種類(), 更正後賦課.get生活保護扶助種類())
-                || is異なる(更正前賦課.get生保開始日(), 更正後賦課.get生保開始日())
-                || is異なる(更正前賦課.get生保廃止日(), 更正後賦課.get生保廃止日())
-                || is異なる(更正前賦課.get老年開始日(), 更正後賦課.get老年開始日())
-                || is異なる(更正前賦課.get老年廃止日(), 更正後賦課.get老年廃止日())
-                || is異なる(更正前賦課.get賦課期日(), 更正後賦課.get賦課期日())
-                || is異なる(更正前賦課.get課税区分(), 更正後賦課.get課税区分())
-                || is異なる(更正前賦課.get世帯課税区分(), 更正後賦課.get世帯課税区分())
-                || is異なる(更正前賦課.get合計所得金額(), 更正後賦課.get合計所得金額())
-                || is異なる(更正前賦課.get公的年金収入額(), 更正後賦課.get公的年金収入額());
-    }
-
-    private boolean is介護賦課異なる2(FukaJoho 更正前賦課, FukaJoho 更正後賦課) {
-        return is異なる(更正前賦課.get保険料段階(), 更正後賦課.get保険料段階())
-                || is異なる(更正前賦課.get保険料算定段階1(), 更正後賦課.get保険料算定段階1())
-                || is異なる(更正前賦課.get算定年額保険料1(), 更正後賦課.get算定年額保険料1())
-                || is異なる(更正前賦課.get月割開始年月1(), 更正後賦課.get月割開始年月1())
-                || is異なる(更正前賦課.get月割終了年月1(), 更正後賦課.get月割終了年月1())
-                || is異なる(更正前賦課.get保険料算定段階2(), 更正後賦課.get保険料算定段階2())
-                || is異なる(更正前賦課.get算定年額保険料2(), 更正後賦課.get算定年額保険料2())
-                || is異なる(更正前賦課.get月割開始年月2(), 更正後賦課.get月割開始年月2())
-                || is異なる(更正前賦課.get月割終了年月2(), 更正後賦課.get月割終了年月2())
-                || is異なる(更正前賦課.get調定日時(), 更正後賦課.get調定日時())
-                || is異なる(更正前賦課.get調定事由1(), 更正後賦課.get調定事由1())
-                || is異なる(更正前賦課.get調定事由2(), 更正後賦課.get調定事由2())
-                || is異なる(更正前賦課.get調定事由3(), 更正後賦課.get調定事由3())
-                || is異なる(更正前賦課.get調定事由4(), 更正後賦課.get調定事由4())
-                || is異なる(更正前賦課.get更正月(), 更正後賦課.get更正月())
-                || is異なる(更正前賦課.get減免前介護保険料_年額(), 更正後賦課.get減免前介護保険料_年額())
-                || is異なる(更正前賦課.get減免額(), 更正後賦課.get減免額())
-                || is異なる(更正前賦課.get確定介護保険料_年額(), 更正後賦課.get確定介護保険料_年額());
-    }
-
-    private boolean is介護賦課異なる3(FukaJoho 更正前賦課, FukaJoho 更正後賦課) {
-        return is異なる(更正前賦課.get保険料段階(), 更正後賦課.get保険料段階())
-                || is異なる(更正前賦課.get徴収方法履歴番号(), 更正後賦課.get徴収方法履歴番号())
-                || is異なる(更正前賦課.get異動基準日時(), 更正後賦課.get異動基準日時())
-                || is異なる(更正前賦課.get口座区分(), 更正後賦課.get口座区分())
-                || is異なる(更正前賦課.get境界層区分(), 更正後賦課.get境界層区分())
-                || is異なる(更正前賦課.get職権区分(), 更正後賦課.get職権区分())
-                || is異なる(更正前賦課.get賦課市町村コード(), 更正後賦課.get賦課市町村コード())
-                || is異なる(更正前賦課.get特徴歳出還付額(), 更正後賦課.get特徴歳出還付額())
-                || is異なる(更正前賦課.get普徴歳出還付額(), 更正後賦課.get普徴歳出還付額());
-    }
-
-    private boolean is異なる(RString rstr1, RString rstr2) {
-        if (RString.isNullOrEmpty(rstr1) && RString.isNullOrEmpty(rstr2)) {
-            return Boolean.FALSE;
-        }
-        if (!RString.isNullOrEmpty(rstr1) && rstr1.equals(rstr2)) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
-    }
-
-    private boolean is異なる(LasdecCode lasdecCode1, LasdecCode lasdecCode2) {
-        if (lasdecCode1 == null && lasdecCode2 == null) {
-            return Boolean.FALSE;
-        }
-        if (lasdecCode1 != null && lasdecCode1.getColumnValue().equals(lasdecCode2.getColumnValue())) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
-    }
-
-    private boolean is異なる(ShikibetsuCode code1, ShikibetsuCode code2) {
-        if (code1 == null && code2 == null) {
-            return Boolean.FALSE;
-        }
-        if (code1 != null && code1.getColumnValue().equals(code2.getColumnValue())) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
-    }
-
-    private boolean is異なる(SetaiCode code1, SetaiCode code2) {
-        if (code1 == null && code2 == null) {
-            return Boolean.FALSE;
-        }
-        if (code1 != null && code1.getColumnValue().equals(code2.getColumnValue())) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
-    }
-
-    private boolean is異なる(RDate date1, RDate date2) {
-        if (date1 == null && date2 == null) {
-            return Boolean.FALSE;
-        }
-        if (date1 != null && date1.equals(date2)) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
-    }
-
-    private boolean is異なる(int num1, int num2) {
-        return num1 != num2;
-    }
-
-    private boolean is異なる(long num1, long num2) {
-        return num1 != num2;
-    }
-
-    private boolean is異なる(FlexibleDate date1, FlexibleDate date2) {
-        if (date1 == null && date2 == null) {
-            return Boolean.FALSE;
-        }
-        if (date1 != null && date1.equals(date2)) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
-    }
-
-    private boolean is異なる(RYear date1, RYear date2) {
-        if (date1 == null && date2 == null) {
-            return Boolean.FALSE;
-        }
-        if (date1 != null && date1.equals(date2)) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
-    }
-
-    private boolean is異なる(FlexibleYearMonth date1, FlexibleYearMonth date2) {
-        if (date1 == null && date2 == null) {
-            return Boolean.FALSE;
-        }
-        if (date1 != null && date1.equals(date2)) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
-    }
-
-    private boolean is異なる(YMDHMS date1, YMDHMS date2) {
-        if (date1 == null && date2 == null) {
-            return Boolean.FALSE;
-        }
-        if (date1 != null && date1.equals(date2)) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
-    }
-
-    private boolean is異なる(Decimal dec1, Decimal dec2) {
-        if (dec1 == null && dec2 == null) {
-            return Boolean.FALSE;
-        }
-        if (dec1 != null && dec1.equals(dec2)) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
     }
 
     private RString getRStringByTextBoxNum(TextBoxNum textBoxNum) {
@@ -762,14 +330,14 @@ public class SokujiFukaKouseiMainHandler {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         RString 月の期_4月 = 期月リスト.get月の期(Tsuki._4月).get期();
         int 期 = Integer.valueOf(月の期_4月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi04().setText(getFormat期(月の期_4月));
             tablePanel.getLblFuchoKoseiMaeValue04().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGo04().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue04().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue04().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_4月, Tsuki._4月));
             }
             RDate 納期限_4月 = get普徴納期(researcher, Integer.valueOf(月の期_4月.toString()));
@@ -787,14 +355,14 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_5月 = 期月リスト.get月の期(Tsuki._5月).get期();
         期 = Integer.valueOf(月の期_5月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi05().setText(getFormat期(月の期_5月));
             tablePanel.getLblFuchoKoseiMaeValue05().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGo05().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue05().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue05().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_5月, Tsuki._5月));
             }
             RDate 納期限_5月 = get普徴納期(researcher, Integer.valueOf(月の期_5月.toString()));
@@ -812,14 +380,14 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_6月 = 期月リスト.get月の期(Tsuki._6月).get期();
         期 = Integer.valueOf(月の期_6月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi06().setText(getFormat期(月の期_6月));
             if (更正後現年度賦課 != null) {
                 tablePanel.getLblFuchoKoseiMaeValue06().setText(更正前現年度賦課 == null ? RString.EMPTY
                         : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
                 tablePanel.getTxtFuchoKoseiGo06().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue06().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue06().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_6月, Tsuki._6月));
             }
             RDate 納期限_6月 = get普徴納期(researcher, Integer.valueOf(月の期_6月.toString()));
@@ -837,14 +405,14 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_7月 = 期月リスト.get月の期(Tsuki._7月).get期();
         期 = Integer.valueOf(月の期_7月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi07().setText(getFormat期(月の期_7月));
             tablePanel.getLblFuchoKoseiMaeValue07().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGo07().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue07().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue07().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_7月, Tsuki._7月));
             }
             RDate 納期限_7月 = get普徴納期(researcher, Integer.valueOf(月の期_7月.toString()));
@@ -866,14 +434,14 @@ public class SokujiFukaKouseiMainHandler {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         RString 月の期_8月 = 期月リスト.get月の期(Tsuki._8月).get期();
         int 期 = Integer.valueOf(月の期_8月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi08().setText(getFormat期(月の期_8月));
             tablePanel.getLblFuchoKoseiMaeValue08().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGo08().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue08().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue08().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_8月, Tsuki._8月));
             }
             RDate 納期限_8月 = get普徴納期(researcher, Integer.valueOf(月の期_8月.toString()));
@@ -891,14 +459,14 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_9月 = 期月リスト.get月の期(Tsuki._9月).get期();
         期 = Integer.valueOf(月の期_9月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi09().setText(getFormat期(月の期_9月));
             tablePanel.getLblFuchoKoseiMaeValue09().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGo09().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue09().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue09().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_9月, Tsuki._9月));
             }
             RDate 納期限_9月 = get普徴納期(researcher, Integer.valueOf(月の期_9月.toString()));
@@ -916,14 +484,14 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_10月 = 期月リスト.get月の期(Tsuki._10月).get期();
         期 = Integer.valueOf(月の期_10月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi10().setText(getFormat期(月の期_10月));
             tablePanel.getLblFuchoKoseiMaeValue10().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGo10().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue10().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue10().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_10月, Tsuki._10月));
             }
             RDate 納期限_10月 = get普徴納期(researcher, Integer.valueOf(月の期_10月.toString()));
@@ -941,14 +509,14 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_11月 = 期月リスト.get月の期(Tsuki._11月).get期();
         期 = Integer.valueOf(月の期_11月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi11().setText(getFormat期(月の期_11月));
             tablePanel.getLblFuchoKoseiMaeValue11().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGo11().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue11().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue11().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_11月, Tsuki._11月));
             }
             RDate 納期限_11月 = get普徴納期(researcher, Integer.valueOf(月の期_11月.toString()));
@@ -966,13 +534,13 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_12月 = 期月リスト.get月の期(Tsuki._12月).get期();
         期 = Integer.valueOf(月の期_12月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi12().setText(getFormat期(月の期_12月));
             tablePanel.getLblFuchoKoseiMaeValue12().setText(更正前現年度賦課 == null ? RString.EMPTY : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGo12().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue12().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue12().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_12月, Tsuki._12月));
             }
             RDate 納期限_12月 = get普徴納期(researcher, Integer.valueOf(月の期_12月.toString()));
@@ -994,14 +562,14 @@ public class SokujiFukaKouseiMainHandler {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         RString 月の期_1月 = 期月リスト.get月の期(Tsuki._1月).get期();
         int 期 = Integer.valueOf(月の期_1月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi01().setText(getFormat期(月の期_1月));
             tablePanel.getLblFuchoKoseiMaeValue01().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGo01().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue01().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue01().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_1月, Tsuki._1月));
             }
             RDate 納期限_1月 = get普徴納期(researcher, Integer.valueOf(月の期_1月.toString()));
@@ -1019,14 +587,14 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_2月 = 期月リスト.get月の期(Tsuki._2月).get期();
         期 = Integer.valueOf(月の期_2月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi02().setText(getFormat期(月の期_2月));
             tablePanel.getLblFuchoKoseiMaeValue02().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGo02().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue02().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue02().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_2月, Tsuki._2月));
             }
             RDate 納期限_2月 = get普徴納期(researcher, Integer.valueOf(月の期_2月.toString()));
@@ -1044,14 +612,14 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_3月 = 期月リスト.get月の期(Tsuki._3月).get期();
         期 = Integer.valueOf(月の期_3月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKi03().setText(getFormat期(月の期_3月));
             tablePanel.getLblFuchoKoseiMaeValue03().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGo03().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValue03().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValue03().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_3月, Tsuki._3月));
             }
             RDate 納期限_3月 = get普徴納期(researcher, Integer.valueOf(月の期_3月.toString()));
@@ -1069,14 +637,14 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_翌年度4月 = 期月リスト.get月の期(Tsuki.翌年度4月).get期();
         期 = Integer.valueOf(月の期_翌年度4月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKiYoku04().setText(getFormat期(月の期_翌年度4月));
             tablePanel.getLblFuchoKoseiMaeValueYoku04().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGoYoku04().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValueYoku04().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValueYoku04().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_翌年度4月, Tsuki.翌年度4月));
             }
             RDate 納期限_翌年度4月 = get普徴納期(researcher, Integer.valueOf(月の期_翌年度4月.toString()));
@@ -1094,14 +662,14 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_翌年度5月 = 期月リスト.get月の期(Tsuki.翌年度5月).get期();
         期 = Integer.valueOf(月の期_翌年度5月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblFuchoKiYoku05().setText(getFormat期(月の期_翌年度5月));
             tablePanel.getLblFuchoKoseiMaeValueYoku05().setText(更正前現年度賦課 == null ? RString.EMPTY
                     : get金額のカンマ編集(更正前現年度賦課.get普徴期別金額(期)));
             if (更正後現年度賦課 != null) {
                 tablePanel.getTxtFuchoKoseiGoYoku05().setValue(更正後現年度賦課.get普徴期別金額(期));
                 tablePanel.getLblFuchoZogenValueYoku05().setText(get金額のカンマ編集(更正後現年度賦課.get普徴期別金額(期).
-                        subtract(更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期))));
+                        subtract(get普徴期別金額(更正前現年度賦課, 期))));
                 tablePanel.getLblFuchoNofugakuValueYoku05().setText(get普通徴収の納付額(更正後現年度賦課, 月の期_翌年度5月, Tsuki.翌年度5月));
             }
             RDate 納期限_翌年度5月 = get普徴納期(researcher, Integer.valueOf(月の期_翌年度5月.toString()));
@@ -1122,6 +690,10 @@ public class SokujiFukaKouseiMainHandler {
         tablePanel.getLblFuchoKoseiGoSum().setText(get普通徴収の更正後合計());
         tablePanel.getLblFuchoZogenSum().setText(get普通徴収の増減合計());
         tablePanel.getLblFuchoNofugakuSum().setText(get普通徴収の納付額合計());
+    }
+
+    private Decimal get普徴期別金額(FukaJoho 更正前現年度賦課, int 期) {
+        return 更正前現年度賦課 == null ? Decimal.ZERO : 更正前現年度賦課.get普徴期別金額(期);
     }
 
     private void set現年度の普通徴収情報の入力制御(NendobunFukaList 更正後賦課リスト) {
@@ -1173,27 +745,27 @@ public class SokujiFukaKouseiMainHandler {
             tablePanel.getTxtFuchoNokigen12().setReadOnly(is入力不可_12月);
         }
         if (!tablePanel.getTxtFuchoKoseiGo01().isReadOnly()) {
-            boolean is入力不可_1月 = is更正後と納期限入力不可(賦課年度.plusYear(NUM_1), Tsuki._1月);
+            boolean is入力不可_1月 = is更正後と納期限入力不可(賦課年度.plusYear(NUMB_1), Tsuki._1月);
             tablePanel.getTxtFuchoKoseiGo01().setReadOnly(is入力不可_1月);
             tablePanel.getTxtFuchoNokigen01().setReadOnly(is入力不可_1月);
         }
         if (!tablePanel.getTxtFuchoKoseiGo02().isReadOnly()) {
-            boolean is入力不可_2月 = is更正後と納期限入力不可(賦課年度.plusYear(NUM_1), Tsuki._2月);
+            boolean is入力不可_2月 = is更正後と納期限入力不可(賦課年度.plusYear(NUMB_1), Tsuki._2月);
             tablePanel.getTxtFuchoKoseiGo02().setReadOnly(is入力不可_2月);
             tablePanel.getTxtFuchoNokigen02().setReadOnly(is入力不可_2月);
         }
         if (!tablePanel.getTxtFuchoKoseiGo03().isReadOnly()) {
-            boolean is入力不可_3月 = is更正後と納期限入力不可(賦課年度.plusYear(NUM_1), Tsuki._3月);
+            boolean is入力不可_3月 = is更正後と納期限入力不可(賦課年度.plusYear(NUMB_1), Tsuki._3月);
             tablePanel.getTxtFuchoKoseiGo03().setReadOnly(is入力不可_3月);
             tablePanel.getTxtFuchoNokigen03().setReadOnly(is入力不可_3月);
         }
         if (!tablePanel.getTxtFuchoKoseiGoYoku04().isReadOnly()) {
-            boolean is入力不可_翌年度4月 = is更正後と納期限入力不可(賦課年度.plusYear(NUM_1), Tsuki.翌年度4月);
+            boolean is入力不可_翌年度4月 = is更正後と納期限入力不可(賦課年度.plusYear(NUMB_1), Tsuki.翌年度4月);
             tablePanel.getTxtFuchoKoseiGoYoku04().setReadOnly(is入力不可_翌年度4月);
             tablePanel.getTxtFuchoNokigenYoku04().setReadOnly(is入力不可_翌年度4月);
         }
         if (!tablePanel.getTxtFuchoKoseiGoYoku05().isReadOnly()) {
-            boolean is入力不可_翌年度5月 = is更正後と納期限入力不可(賦課年度.plusYear(NUM_1), Tsuki.翌年度5月);
+            boolean is入力不可_翌年度5月 = is更正後と納期限入力不可(賦課年度.plusYear(NUMB_1), Tsuki.翌年度5月);
             tablePanel.getTxtFuchoKoseiGoYoku05().setReadOnly(is入力不可_翌年度5月);
             tablePanel.getTxtFuchoNokigenYoku05().setReadOnly(is入力不可_翌年度5月);
         }
@@ -1211,7 +783,7 @@ public class SokujiFukaKouseiMainHandler {
         FukaJoho 更正後現年度賦課 = 更正後賦課リスト.get現年度();
         RString 月の期_4月 = get月の期By月(期月リスト, Tsuki._4月);
         期 = Integer.valueOf(月の期_4月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblTokuchoKi04().setText(getFormat期(月の期_4月));
             if (更正前現年度賦課 != null) {
                 tablePanel.getLblTokuchoKoseiMaeValue04().setText(get金額のカンマ編集(更正前現年度賦課.get特徴期別金額(期)));
@@ -1233,7 +805,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_6月 = get月の期By月(期月リスト, Tsuki._6月);
         期 = Integer.valueOf(月の期_6月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblTokuchoKi06().setText(getFormat期(月の期_6月));
             if (更正前現年度賦課 != null) {
                 tablePanel.getLblTokuchoKoseiMaeValue06().setText(get金額のカンマ編集(更正前現年度賦課.get特徴期別金額(期)));
@@ -1257,7 +829,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_8月 = get月の期By月(期月リスト, Tsuki._8月);
         期 = Integer.valueOf(月の期_8月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblTokuchoKi08().setText(getFormat期(月の期_8月));
             if (更正前現年度賦課 != null) {
                 tablePanel.getLblTokuchoKoseiMaeValue08().setText(get金額のカンマ編集(更正前現年度賦課.get特徴期別金額(期)));
@@ -1292,7 +864,7 @@ public class SokujiFukaKouseiMainHandler {
         FukaJoho 更正後現年度賦課 = 更正後賦課リスト.get現年度();
         RString 月の期_10月 = get月の期By月(期月リスト, Tsuki._10月);
         期 = Integer.valueOf(月の期_10月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblTokuchoKi10().setText(getFormat期(月の期_10月));
             if (更正前現年度賦課 != null) {
                 tablePanel.getLblTokuchoKoseiMaeValue10().setText(get金額のカンマ編集(更正前現年度賦課.get特徴期別金額(期)));
@@ -1316,7 +888,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_12月 = get月の期By月(期月リスト, Tsuki._12月);
         期 = Integer.valueOf(月の期_12月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblTokuchoKi12().setText(getFormat期(月の期_12月));
             if (更正前現年度賦課 != null) {
                 tablePanel.getLblTokuchoKoseiMaeValue12().setText(get金額のカンマ編集(更正前現年度賦課.get特徴期別金額(期)));
@@ -1340,7 +912,7 @@ public class SokujiFukaKouseiMainHandler {
 
         RString 月の期_2月 = get月の期By月(期月リスト, Tsuki._2月);
         期 = Integer.valueOf(月の期_2月.toString());
-        if (期 != NUM_0) {
+        if (期 != NUMB_0) {
             tablePanel.getLblTokuchoKi02().setText(getFormat期(月の期_2月));
             if (更正前現年度賦課 != null) {
                 tablePanel.getLblTokuchoKoseiMaeValue02().setText(get金額のカンマ編集(更正前現年度賦課.get特徴期別金額(期)));
@@ -1385,8 +957,8 @@ public class SokujiFukaKouseiMainHandler {
                     更正前後徴収方法.get更正後().get徴収方法6月());
             is3期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法6月(),
                     更正前後徴収方法.get更正後().get徴収方法8月());
-            is4期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法8月(),
-                    更正前後徴収方法.get更正後().get徴収方法10月())
+            is4期入力可 = (ChoshuHoho.特別徴収_地共済.getコード().equals(更正前後徴収方法.get更正後().get徴収方法10月())
+                    || ChoshuHoho.特別徴収_厚生労働省.getコード().equals(更正前後徴収方法.get更正後().get徴収方法10月()))
                     || is特徴開始者(更正前後徴収方法.get更正後().get徴収方法10月(),
                             更正前後徴収方法.get更正後().get徴収方法12月());
             is5期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法10月(),
@@ -1395,16 +967,14 @@ public class SokujiFukaKouseiMainHandler {
                     更正前後徴収方法.get更正後().get徴収方法2月());
         }
         if (is本算定処理済フラグ) {
-            boolean is両方とも未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴10月捕捉)
-                    && is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴4月捕捉);
             boolean is4月捕捉未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴4月捕捉);
             boolean is6月捕捉未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴6月捕捉);
             boolean is8月捕捉未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴8月捕捉);
             is1期入力可 = Boolean.FALSE;
             is2期入力可 = Boolean.FALSE;
             is3期入力可 = Boolean.FALSE;
-            is4期入力可 = !is4期入力可 ? Boolean.FALSE : is4月捕捉未処理 || is両方とも未処理;
-            is5期入力可 = !is5期入力可 ? Boolean.FALSE : is4月捕捉未処理 || is6月捕捉未処理 || is両方とも未処理;
+            is4期入力可 = !is4期入力可 ? Boolean.FALSE : is4月捕捉未処理;
+            is5期入力可 = !is5期入力可 ? Boolean.FALSE : is4月捕捉未処理 || is6月捕捉未処理;
             is6期入力可 = !is6期入力可 ? Boolean.FALSE : is8月捕捉未処理;
         } else {
             is1期入力可 = Boolean.FALSE;
@@ -1436,7 +1006,7 @@ public class SokujiFukaKouseiMainHandler {
                 return Boolean.FALSE;
             }
         }
-        return 処理状況リスト.isEmpty();
+        return Boolean.TRUE;
     }
 
     private void set過年度の徴収情報(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト) {
@@ -1450,7 +1020,7 @@ public class SokujiFukaKouseiMainHandler {
         KitsukiList 期月リスト = 月期対応取得_過年度.get期月リスト();
         FlexibleYear 賦課年度 = 更正後賦課リスト.get賦課年度();
         if (更正後賦課リスト.get過年度1() != null) {
-            FlexibleYear 調定年度 = 賦課年度.plusYear(NUM_1);
+            FlexibleYear 調定年度 = 賦課年度.plusYear(NUMB_1);
             FukaJoho 更正前過年度1 = null;
             if (更正前賦課リスト != null) {
                 更正前過年度1 = 更正前賦課リスト.get過年度1();
@@ -1459,7 +1029,7 @@ public class SokujiFukaKouseiMainHandler {
             set過年度の徴収DateGrid(賦課年度, 調定年度, 更正前過年度1, 更正後過年度1, 期月リスト);
         }
         if (更正後賦課リスト.get過年度2() != null) {
-            FlexibleYear 調定年度 = 賦課年度.plusYear(NUM_2);
+            FlexibleYear 調定年度 = 賦課年度.plusYear(NUMB_2);
             FukaJoho 更正前過年度2 = null;
             if (更正前賦課リスト != null) {
                 更正前過年度2 = 更正前賦課リスト.get過年度2();
@@ -1468,7 +1038,7 @@ public class SokujiFukaKouseiMainHandler {
             set過年度の徴収DateGrid(賦課年度, 調定年度, 更正前過年度2, 更正後過年度2, 期月リスト);
         }
         if (更正後賦課リスト.get過年度3() != null) {
-            FlexibleYear 調定年度 = 賦課年度.plusYear(NUM_3);
+            FlexibleYear 調定年度 = 賦課年度.plusYear(NUMB_3);
             FukaJoho 更正前過年度3 = null;
             if (更正前賦課リスト != null) {
                 更正前過年度3 = 更正前賦課リスト.get過年度3();
@@ -1477,7 +1047,7 @@ public class SokujiFukaKouseiMainHandler {
             set過年度の徴収DateGrid(賦課年度, 調定年度, 更正前過年度3, 更正後過年度3, 期月リスト);
         }
         if (更正後賦課リスト.get過年度4() != null) {
-            FlexibleYear 調定年度 = 賦課年度.plusYear(NUM_4);
+            FlexibleYear 調定年度 = 賦課年度.plusYear(NUMB_4);
             FukaJoho 更正前過年度4 = null;
             if (更正前賦課リスト != null) {
                 更正前過年度4 = 更正前賦課リスト.get過年度4();
@@ -1487,7 +1057,7 @@ public class SokujiFukaKouseiMainHandler {
         }
         if (更正後賦課リスト.get過年度5() != null) {
             FukaJoho 更正前過年度5 = null;
-            FlexibleYear 調定年度 = 賦課年度.plusYear(NUM_5);
+            FlexibleYear 調定年度 = 賦課年度.plusYear(NUMB_5);
             if (更正前賦課リスト != null) {
                 更正前過年度5 = 更正前賦課リスト.get過年度5();
             }
@@ -1642,8 +1212,8 @@ public class SokujiFukaKouseiMainHandler {
         div.getDgFuchoKanendo().getDataSource().clear();
         for (Kitsuki kitsuki : 期月リスト.toList()) {
             dgFuchoKanendo_Row row = new dgFuchoKanendo_Row();
-            row.getChoteiNendo().setValue(new FlexibleDate(賦課年度.toDateString().concat(一月一日)));
-            row.getFukaNendo().setValue(new FlexibleDate(調定年度.toDateString().concat(一月一日)));
+            row.getChoteiNendo().setValue(new FlexibleDate(調定年度.toDateString().concat(一月一日)));
+            row.getFukaNendo().setValue(new FlexibleDate(賦課年度.toDateString().concat(一月一日)));
             row.setTsuki(new RString(kitsuki.get月AsInt()).concat(TEXT_月));
             row.setKi(getFormat期(kitsuki.get期()));
             Decimal 更正前 = Decimal.ZERO;
@@ -1666,28 +1236,28 @@ public class SokujiFukaKouseiMainHandler {
             row.getFuchoSaishutsuKanpu().setValue(更正後過年度.get普徴歳出還付額());
             if (!更正前.equals(Decimal.ZERO)
                     || !更正後.equals(Decimal.ZERO)
-                    || !更正後過年度.get特徴歳出還付額().equals(Decimal.ZERO)
-                    || !更正後過年度.get普徴歳出還付額().equals(Decimal.ZERO)) {
+                    || (null != 更正後過年度.get特徴歳出還付額() && !Decimal.ZERO.equals(更正後過年度.get特徴歳出還付額()))
+                    || (null != 更正後過年度.get普徴歳出還付額() && !Decimal.ZERO.equals(更正後過年度.get普徴歳出還付額()))) {
                 div.getDgFuchoKanendo().getDataSource().add(row);
             }
         }
     }
 
     private RString get特別徴収の更正前合計(FukaJoho 更正前現年度賦課) {
-        Decimal 特別徴収の更正前合計 = 更正前現年度賦課.get特徴期別金額(NUM_1).add(更正前現年度賦課.get特徴期別金額(NUM_2)).
-                add(更正前現年度賦課.get特徴期別金額(NUM_3)).add(更正前現年度賦課.get特徴期別金額(NUM_4)).
-                add(更正前現年度賦課.get特徴期別金額(NUM_5)).add(更正前現年度賦課.get特徴期別金額(NUM_6));
+        Decimal 特別徴収の更正前合計 = 更正前現年度賦課.get特徴期別金額(NUMB_1).add(更正前現年度賦課.get特徴期別金額(NUMB_2)).
+                add(更正前現年度賦課.get特徴期別金額(NUMB_3)).add(更正前現年度賦課.get特徴期別金額(NUMB_4)).
+                add(更正前現年度賦課.get特徴期別金額(NUMB_5)).add(更正前現年度賦課.get特徴期別金額(NUMB_6));
         return get金額のカンマ編集(特別徴収の更正前合計);
     }
 
     private RString get普通徴収の更正前合計(FukaJoho 更正前現年度賦課) {
-        Decimal 普通徴収の更正前合計 = 更正前現年度賦課.get普徴期別金額(NUM_1).add(更正前現年度賦課.get普徴期別金額(NUM_2)).
-                add(更正前現年度賦課.get普徴期別金額(NUM_3)).add(更正前現年度賦課.get普徴期別金額(NUM_4)).
-                add(更正前現年度賦課.get普徴期別金額(NUM_5)).add(更正前現年度賦課.get普徴期別金額(NUM_6)).
-                add(更正前現年度賦課.get普徴期別金額(NUM_7)).add(更正前現年度賦課.get普徴期別金額(NUM_8)).
-                add(更正前現年度賦課.get普徴期別金額(NUM_9)).add(更正前現年度賦課.get普徴期別金額(NUM_10)).
-                add(更正前現年度賦課.get普徴期別金額(NUM_11)).add(更正前現年度賦課.get普徴期別金額(NUM_12)).
-                add(更正前現年度賦課.get普徴期別金額(NUM_13)).add(更正前現年度賦課.get普徴期別金額(NUM_14));
+        Decimal 普通徴収の更正前合計 = 更正前現年度賦課.get普徴期別金額(NUMB_1).add(更正前現年度賦課.get普徴期別金額(NUMB_2)).
+                add(更正前現年度賦課.get普徴期別金額(NUMB_3)).add(更正前現年度賦課.get普徴期別金額(NUMB_4)).
+                add(更正前現年度賦課.get普徴期別金額(NUMB_5)).add(更正前現年度賦課.get普徴期別金額(NUMB_6)).
+                add(更正前現年度賦課.get普徴期別金額(NUMB_7)).add(更正前現年度賦課.get普徴期別金額(NUMB_8)).
+                add(更正前現年度賦課.get普徴期別金額(NUMB_9)).add(更正前現年度賦課.get普徴期別金額(NUMB_10)).
+                add(更正前現年度賦課.get普徴期別金額(NUMB_11)).add(更正前現年度賦課.get普徴期別金額(NUMB_12)).
+                add(更正前現年度賦課.get普徴期別金額(NUMB_13)).add(更正前現年度賦課.get普徴期別金額(NUMB_14));
         return get金額のカンマ編集(普通徴収の更正前合計);
     }
 
@@ -1830,7 +1400,7 @@ public class SokujiFukaKouseiMainHandler {
             } else if (Tsuki._1月.compareTo(更正月.get月()) == 0) {
                 from月 = Tsuki._12月;
             } else {
-                from月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).minus(LONG_1).getValue()).padZeroToLeft(NUM_2));
+                from月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).minus(LONG_1).getValue()).padZeroToLeft(NUMB_2));
             }
         }
         if (to月.compareTo(更正月.get月()) != 0 && Tsuki.翌年度4月.compareTo(更正月.get月()) != 0) {
@@ -1839,7 +1409,7 @@ public class SokujiFukaKouseiMainHandler {
             } else if (Tsuki._3月.compareTo(更正月.get月()) == 0) {
                 to月 = Tsuki.翌年度4月;
             } else {
-                to月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).plus(LONG_1).getValue()).padZeroToLeft(NUM_2));
+                to月 = Tsuki.toValue(new RString(Month.of(更正月.get月AsInt()).plus(LONG_1).getValue()).padZeroToLeft(NUMB_2));
             }
         }
         KitsukiList 期月リスト = 月期対応取得_普徴クラス.get期月リスト().subListBy月(from月, to月);
@@ -1878,7 +1448,7 @@ public class SokujiFukaKouseiMainHandler {
         if (金額 == null) {
             return ZERO;
         }
-        return DecimalFormatter.toコンマ区切りRString(金額, NUM_0);
+        return DecimalFormatter.toコンマ区切りRString(金額, NUMB_0);
     }
 
     private List<KeyValueDataSource> get通知書番号データ(List<KoseiZengoFuka> 更正前後賦課のリスト) {
@@ -1891,7 +1461,7 @@ public class SokujiFukaKouseiMainHandler {
                 dataSourceList.add(dataSource);
             }
         }
-        if (dataSourceList.size() > NUM_1) {
+        if (dataSourceList.size() > NUMB_1) {
             div.getDdlKoseigoTsuchishoNo().setDisplayNone(false);
         } else {
             div.getDdlKoseigoTsuchishoNo().setDisplayNone(true);
@@ -1917,12 +1487,12 @@ public class SokujiFukaKouseiMainHandler {
         if (Tsuki.翌年度4月.compareTo(月) == 0
                 || Tsuki.翌年度5月.compareTo(月) == 0) {
             コード_月 = コード_月.replace(ONE, ZERO);
-            年度 = 年度.plusYear(NUM_1);
+            年度 = 年度.plusYear(NUMB_1);
         }
         if (Tsuki._1月.compareTo(月) == 0
                 || Tsuki._2月.compareTo(月) == 0
                 || Tsuki._3月.compareTo(月) == 0) {
-            年度 = 年度.plusYear(NUM_1);
+            年度 = 年度.plusYear(NUMB_1);
         }
         RYearMonth 該当月 = new RYearMonth(年度.toDateString().concat(コード_月));
         return 該当月.compareTo(調定年月) >= 0;
@@ -1943,11 +1513,11 @@ public class SokujiFukaKouseiMainHandler {
     }
 
     private boolean is普通徴収の納付額は空白(FlexibleYear 年度, RYearMonth 調定年月, Tsuki 月) {
-        RYearMonth 調定年月From = 調定年月.minusMonth(NUM_1);
-        RYearMonth 調定年月To = new RYearMonth(調定年月.getYear().plusYear(NUM_1).toDateString().concat(三月));
+        RYearMonth 調定年月From = 調定年月.minusMonth(NUMB_1);
+        RYearMonth 調定年月To = new RYearMonth(調定年月.getYear().plusYear(NUMB_1).toDateString().concat(三月));
         RString コード_月 = 月.getコード();
-        if (Integer.valueOf(コード_月.toString()) < NUM_4 || Integer.valueOf(コード_月.toString()) > NUM_12) {
-            年度 = 年度.plusYear(NUM_1);
+        if (Integer.valueOf(コード_月.toString()) < NUMB_4 || Integer.valueOf(コード_月.toString()) > NUMB_12) {
+            年度 = 年度.plusYear(NUMB_1);
         }
         if (Tsuki.翌年度4月.compareTo(月) == 0
                 || Tsuki.翌年度5月.compareTo(月) == 0) {
@@ -2026,9 +1596,9 @@ public class SokujiFukaKouseiMainHandler {
 
     private int get期間の月数(FlexibleYearMonth 開始年月, FlexibleYearMonth 終了年月) {
         if (開始年月.equals(終了年月)) {
-            return NUM_1;
+            return NUMB_1;
         }
-        return 終了年月.getBetweenMonths(開始年月) + NUM_1;
+        return 終了年月.getBetweenMonths(開始年月) + NUMB_1;
     }
 
     private boolean isYMNullOrEmpty(FlexibleYearMonth 年月) {

@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.HyojunFutanEntity;
@@ -22,6 +24,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengaku
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -67,6 +70,11 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
     private static final int ORDER_13 = 13;
     private static final int ORDER_14 = 14;
     private static final int ORDER_15 = 15;
+    private static final int ORDER_16 = 16;
+    private static final int ORDER_17 = 17;
+    private static final int ORDER_18 = 18;
+    private static final int ORDER_19 = 19;
+    private static final int ORDER_20 = 20;
     private static final RString STR_2 = new RString("2");
     private static final RString STR_0 = new RString("0");
     private static final RString STR_01 = new RString("01");
@@ -83,13 +91,16 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
     private static final RString 星 = new RString("*");
     private static final RString STR_06 = new RString("06");
     private static final Code コート_06 = new Code("06");
+    private static final RString STR_11 = new RString("11");
     private static final RString STR_12 = new RString("12");
     private static final RString STR_13 = new RString("13");
+    private static final RString STR_17 = new RString("17");
     private static final RString STR_21 = new RString("21");
     private static final RString STR_22 = new RString("22");
     private static final RString STR_23 = new RString("23");
     private static final RString STR_24 = new RString("24");
     private static final RString STR_25 = new RString("25");
+    private static final FlexibleDate MIX_DATE = new FlexibleDate("20150401");
 
     private JukyushaIdoRenrakuhyoOutCommonProcess() {
     }
@@ -112,6 +123,50 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         return 受給者台帳List;
     }
 
+    private static List<DbT1001HihokenshaDaichoEntity> getチェック使用被保険者台帳(List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {
+        if (被保険者台帳List.isEmpty()) {
+            return new ArrayList<>();
+        }
+        sort被保険者台帳ListBy異動日枝番(被保険者台帳List);
+        List<DbT1001HihokenshaDaichoEntity> チェック使用被保険者台帳 = new ArrayList<>();
+        boolean lastRecordAdd = true;
+        for (int i = ORDER_0; i < 被保険者台帳List.size(); i++) {
+            DbT1001HihokenshaDaichoEntity 被保険者台帳 = 被保険者台帳List.get(i);
+            if (!isDateEmpty(被保険者台帳.getShikakuSoshitsuYMD())) {
+                チェック使用被保険者台帳.add(被保険者台帳);
+                if (i == 被保険者台帳List.size() - ORDER_1) {
+                    lastRecordAdd = false;
+                }
+            } else if (STR_11.equals(被保険者台帳.getShikakuShutokuJiyuCode())
+                    || STR_13.equals(被保険者台帳.getShikakuShutokuJiyuCode())
+                    || STR_17.equals(被保険者台帳.getShikakuShutokuJiyuCode())) {
+                チェック使用被保険者台帳.add(被保険者台帳);
+                if (i == 被保険者台帳List.size() - ORDER_1) {
+                    lastRecordAdd = false;
+                }
+            }
+        }
+        if (lastRecordAdd) {
+            チェック使用被保険者台帳.add(被保険者台帳List.get(被保険者台帳List.size() - ORDER_1));
+        }
+        return チェック使用被保険者台帳;
+    }
+
+    private static void sort被保険者台帳ListBy異動日枝番(List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {
+        Collections.sort(被保険者台帳List, new Comparator<DbT1001HihokenshaDaichoEntity>() {
+            @Override
+            public int compare(DbT1001HihokenshaDaichoEntity o1, DbT1001HihokenshaDaichoEntity o2) {
+                if (o1.getIdoYMD().isBefore(o2.getIdoYMD())) {
+                    return -1;
+                }
+                if (o2.getIdoYMD().isBefore(o1.getIdoYMD())) {
+                    return 1;
+                }
+                return o1.getEdaNo().compareTo(o2.getEdaNo());
+            }
+        });
+    }
+
     /**
      * 被保険者台帳帳取得
      *
@@ -127,7 +182,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             }
             被保険者台帳List.add(被保険者台帳);
         }
-        return 被保険者台帳List;
+        return getチェック使用被保険者台帳(被保険者台帳List);
     }
 
     /**
@@ -286,18 +341,73 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
      * 住所地特例取得
      *
      * @param 異動一時List List<IdouTblEntity>
+     * @param 被保険者台帳List List<DbT1001HihokenshaDaichoEntity>
      * @return List<JushochitokureiInfoEntity>
      */
-    public static List<JushochitokureiInfoEntity> get住所地特例(List<IdouTblEntity> 異動一時List) {
+    public static List<JushochitokureiInfoEntity> get住所地特例(List<IdouTblEntity> 異動一時List,
+            List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {
+        List<DbT1001HihokenshaDaichoEntity> 被保険者台帳Check = 抽出対象被保険者台帳(被保険者台帳List);
         List<JushochitokureiInfoEntity> 住所地特例List = new ArrayList<>();
         for (IdouTblEntity 異動一時 : 異動一時List) {
             JushochitokureiInfoEntity 住所地特例 = get住所地特例entity(異動一時.get住所地特例());
             if (住所地特例 == null) {
                 continue;
             }
+            if (!is住所地特例OK(被保険者台帳Check, 住所地特例)) {
+                continue;
+            }
             住所地特例List.add(住所地特例);
         }
         return 住所地特例List;
+    }
+
+    private static boolean is住所地特例OK(List<DbT1001HihokenshaDaichoEntity> 被保険者台帳Check, JushochitokureiInfoEntity 住所地特例) {
+        if (!isDateEmpty(住所地特例.get住所地特例適用開始日())
+                && 住所地特例.get住所地特例適用開始日().isBeforeOrEquals(MIX_DATE)) {
+            return false;
+        }
+        for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳Check) {
+            if (isBeforeDate(住所地特例.get住所地特例適用終了日(), 被保険者台帳.getJushochitokureiTekiyoYMD())) {
+                return false;
+            }
+            if (isBeforeDate(被保険者台帳.getJushochitokureiKaijoYMD(), 住所地特例.get住所地特例適用開始日())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static List<DbT1001HihokenshaDaichoEntity> 抽出対象被保険者台帳(List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {
+        List<DbT1001HihokenshaDaichoEntity> retrunList = new ArrayList<>();
+        List<DbT1001HihokenshaDaichoEntity> sortList = new ArrayList<>();
+        for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
+            if (!isDateEmpty(被保険者台帳.getJushochitokureiTekiyoYMD())) {
+                sortList.add(被保険者台帳);
+            }
+            if (!isDateEmpty(被保険者台帳.getJushochitokureiKaijoYMD())) {
+                retrunList.add(被保険者台帳);
+            }
+        }
+        if (!sortList.isEmpty()) {
+            sort被保険者台帳ListBy異動日(sortList);
+            retrunList.add(sortList.get(sortList.size() - ORDER_1));
+        }
+        return retrunList;
+    }
+
+    private static void sort被保険者台帳ListBy異動日(List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {
+        Collections.sort(被保険者台帳List, new Comparator<DbT1001HihokenshaDaichoEntity>() {
+            @Override
+            public int compare(DbT1001HihokenshaDaichoEntity o1, DbT1001HihokenshaDaichoEntity o2) {
+                if (o2.getIdoYMD().isBefore(o1.getIdoYMD())) {
+                    return -1;
+                }
+                if (o1.getIdoYMD().isBefore(o2.getIdoYMD())) {
+                    return 1;
+                }
+                return 0;
+            }
+        });
     }
 
     /**
@@ -417,6 +527,11 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.setJukyuShinseiJiyu(new Code(受給者台帳Info.get(ORDER_13)));
         entity.setJukyuShinseiYMD(new FlexibleDate(受給者台帳Info.get(ORDER_14)));
         entity.setRirekiNo(受給者台帳Info.get(ORDER_15));
+        entity.setShinseiJokyoKubun(受給者台帳Info.get(ORDER_16));
+        entity.setNinteiYMD(new FlexibleDate(受給者台帳Info.get(ORDER_17)));
+        entity.setSoshitsuYMD(new FlexibleDate(受給者台帳Info.get(ORDER_18)));
+        entity.setDataKubun(new Code(受給者台帳Info.get(ORDER_19)));
+        entity.setKyuSochishaFlag(STR_1.equals(受給者台帳Info.get(ORDER_20)));
         return entity;
     }
 
@@ -441,6 +556,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         } else {
             entity.setKoikinaiTokureiSochimotoShichosonCode(LasdecCode.EMPTY);
         }
+        entity.setShikakuShutokuJiyuCode(被保険者台帳Info.get(ORDER_7));
         return entity;
     }
 
@@ -455,6 +571,13 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.set居宅サービス計画作成区分コード(居宅計画Info.get(ORDER_2));
         entity.setサービス種類コード(居宅計画Info.get(ORDER_3));
         entity.set有効終了日(new FlexibleDate(居宅計画Info.get(ORDER_4)));
+        entity.set居宅計画種類(居宅計画Info.get(ORDER_5));
+        entity.set適用終了日(new FlexibleDate(居宅計画Info.get(ORDER_6)));
+        entity.set届出年月日(new FlexibleDate(居宅計画Info.get(ORDER_7)));
+        entity.set被保険者番号(new HihokenshaNo(居宅計画Info.get(ORDER_8)));
+        entity.setTaishoYM1(new FlexibleYearMonth(居宅計画Info.get(ORDER_9)));
+        entity.setTaishoYM2(new FlexibleYearMonth(居宅計画Info.get(ORDER_10)));
+        entity.set履歴番号(Integer.parseInt(居宅計画Info.get(ORDER_11).toString()));
         return entity;
     }
 
@@ -468,6 +591,10 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.set適用終了日(new FlexibleDate(居宅計画Info.get(ORDER_1)));
         entity.set申請日(new FlexibleDate(居宅計画Info.get(ORDER_2)));
         entity.set決定年月日(new FlexibleDate(居宅計画Info.get(ORDER_3)));
+        entity.set決定区分(居宅計画Info.get(ORDER_4));
+        if (居宅計画Info.get(ORDER_5) != null) {
+            entity.set負担額(new Decimal(居宅計画Info.get(ORDER_5).toString()));
+        }
         return entity;
     }
 
@@ -479,6 +606,12 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         List<RString> 利用者負担Info = 利用者負担.split(SPLIT.toString());
         entity.setTekiyoKaishiYMD(new FlexibleDate(利用者負担Info.get(ORDER_0)));
         entity.setTekiyoShuryoYMD(new FlexibleDate(利用者負担Info.get(ORDER_1)));
+        entity.setShinseiYMD(new FlexibleDate(利用者負担Info.get(ORDER_2)));
+        entity.setKetteiYMD(new FlexibleDate(利用者負担Info.get(ORDER_3)));
+        entity.setRirekiNo(Integer.parseInt(利用者負担Info.get(ORDER_4).toString()));
+        if (!RString.isNullOrEmpty(利用者負担Info.get(ORDER_5))) {
+            entity.setKyuhuritsu(new HokenKyufuRitsu(new Decimal(利用者負担Info.get(ORDER_5).toString())));
+        }
         return entity;
     }
 
@@ -511,6 +644,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.set旧措置者区分(特定入所者Info.get(ORDER_9));
         entity.set決定区分(特定入所者Info.get(ORDER_10));
         entity.set申請日(new FlexibleDate(特定入所者Info.get(ORDER_11)));
+        entity.set履歴番号(Integer.parseInt(特定入所者Info.get(ORDER_12).toString()));
         return entity;
     }
 
@@ -522,6 +656,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         List<RString> 社福減免Info = 社福減免.split(SPLIT.toString());
         entity.set適用開始日(new FlexibleDate(社福減免Info.get(ORDER_0)));
         entity.set適用終了日(new FlexibleDate(社福減免Info.get(ORDER_1)));
+        entity.set履歴番号(Integer.parseInt(社福減免Info.get(ORDER_4).toString()));
         return entity;
     }
 
@@ -532,6 +667,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         DbT3105SogoJigyoTaishoshaEntity entity = new DbT3105SogoJigyoTaishoshaEntity();
         List<RString> 総合事業対象者Info = 総合事業対象者.split(SPLIT.toString());
         entity.setTekiyoKaishiYMD(new FlexibleDate(総合事業対象者Info.get(ORDER_0)));
+        entity.setTekiyoShuryoYMD(new FlexibleDate(総合事業対象者Info.get(ORDER_1)));
         return entity;
     }
 
@@ -543,6 +679,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         List<RString> 住所地特例Info = 住所地特例.split(SPLIT.toString());
         entity.set住所地特例適用開始日(new FlexibleDate(住所地特例Info.get(ORDER_0)));
         entity.set住所地特例適用終了日(new FlexibleDate(住所地特例Info.get(ORDER_1)));
+        entity.set被保険者番号(new HihokenshaNo(住所地特例Info.get(ORDER_2)));
         return entity;
     }
 
@@ -566,6 +703,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
         entity.setYukoKaishiYMD(new FlexibleDate(二割負担Info.get(ORDER_0)));
         entity.setYukoShuryoYMD(new FlexibleDate(二割負担Info.get(ORDER_1)));
         entity.setHihokenshaNo(new HihokenshaNo(二割負担Info.get(ORDER_2)));
+        entity.setFutanWariaiKubun(二割負担Info.get(ORDER_3));
         return entity;
     }
 
@@ -909,7 +1047,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             DbT4001JukyushaDaichoEntity 受給者台帳, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
         insertEntity.set被保険者番号(被保険者番号);
         insertEntity.set異動年月日(異動年月日);
-        insertEntity.set変更申請中区分コード(STR_3);
+        insertEntity.set申請種別コード(STR_3);
         insertEntity.set変更申請中区分コード(STR_2);
         insertEntity.set申請年月日(受給者台帳.getJukyuShinseiYMD());
         insertEntity.setエラーフラグ(エラーなし);
@@ -1030,6 +1168,83 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
     }
 
     /**
+     * 異動一時2By二次予防パターン1設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 二次予防 DbT3100NijiYoboJigyoTaishoshaEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By二次予防パターン1(IdoTblTmpEntity insertEntity,
+            DbT3100NijiYoboJigyoTaishoshaEntity 二次予防, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        insertEntity.set二次予防事業区分コード(STR_2);
+        insertEntity.set二次予防事業有効期間開始年月日(二次予防.getTekiyoKaishiYMD());
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
+     * 異動一時2By二次予防パターン2設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 二次予防 DbT3100NijiYoboJigyoTaishoshaEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By二次予防パターン2(IdoTblTmpEntity insertEntity,
+            DbT3100NijiYoboJigyoTaishoshaEntity 二次予防, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        insertEntity.set二次予防事業区分コード(STR_2);
+        insertEntity.set二次予防事業有効期間開始年月日(二次予防.getTekiyoKaishiYMD());
+        insertEntity.set二次予防事業有効期間終了年月日(二次予防.getTekiyoShuryoYMD());
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
+     * 異動一時2By支払方法パターン1設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 支払方法 DbT4021ShiharaiHohoHenkoEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By支払方法パターン1(IdoTblTmpEntity insertEntity,
+            DbT4021ShiharaiHohoHenkoEntity 支払方法, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        FlexibleDate 適用開始年月日 = 支払方法.getTekiyoKaishiYMD();
+        if (適用開始年月日 != null && !適用開始年月日.isEmpty()) {
+            insertEntity.set償還払化開始年月日(new RString(適用開始年月日.toString()));
+        }
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
+     * 異動一時2By支払方法パターン1設定
+     *
+     * @param insertEntity IdoTblTmpEntity
+     * @param 支払方法 DbT4021ShiharaiHohoHenkoEntity
+     * @param 異動年月日 FlexibleDate
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public static void set異動一時2By支払方法パターン2(IdoTblTmpEntity insertEntity,
+            DbT4021ShiharaiHohoHenkoEntity 支払方法, FlexibleDate 異動年月日, HihokenshaNo 被保険者番号) {
+        insertEntity.set被保険者番号(被保険者番号);
+        insertEntity.set異動年月日(異動年月日);
+        FlexibleDate 適用開始年月日 = 支払方法.getTekiyoKaishiYMD();
+        if (適用開始年月日 != null && !適用開始年月日.isEmpty()) {
+            insertEntity.set償還払化開始年月日(new RString(適用開始年月日.toString()));
+        }
+        FlexibleDate 適用終了年月日 = 支払方法.getTekiyoShuryoYMD();
+        if (適用終了年月日 != null && !適用終了年月日.isEmpty()) {
+            insertEntity.set償還払化終了年月日(new RString(適用終了年月日.toString()));
+        }
+        insertEntity.setエラーフラグ(エラーなし);
+    }
+
+    /**
      * 再編集一部
      *
      * @param entity IdoTblTmpEntity
@@ -1062,13 +1277,6 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             entity.set給付率引下げ開始年月日(星);
             entity.set給付率引下げ終了年月日(星);
         }
-        if (STR_3.equals(entity.get減免申請中区分コード())
-                && (RString.isNullOrEmpty(entity.get適用開始年月日())
-                || 星.equals(entity.get適用開始年月日())
-                || RString.isNullOrEmpty(entity.get負担額適用開始年月日())
-                || 星.equals(entity.get負担額適用開始年月日()))) {
-            entity.set減免申請中区分コード(STR_1);
-        }
         if (!RString.isNullOrEmpty(entity.get適用終了年月日())
                 && (isBeforeDate(new FlexibleDate(entity.get適用終了年月日()), entity.get異動年月日())
                 || isBeforeDate(new FlexibleDate(entity.get適用終了年月日()), entity.get資格取得年月日()))) {
@@ -1094,6 +1302,14 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 && (RString.isNullOrEmpty(entity.get負担限度額適用開始年月日())
                 || 星.equals(entity.get負担限度額適用開始年月日()))) {
             entity.set特定入所者認定申請中区分コード(STR_1);
+        }
+
+        if (STR_3.equals(entity.get減免申請中区分コード())
+                && (RString.isNullOrEmpty(entity.get適用開始年月日())
+                || 星.equals(entity.get適用開始年月日())
+                || RString.isNullOrEmpty(entity.get負担額適用開始年月日())
+                || 星.equals(entity.get負担額適用開始年月日()))) {
+            entity.set減免申請中区分コード(STR_1);
         }
 
         if (!RString.isNullOrEmpty(entity.get負担限度額適用終了年月日())

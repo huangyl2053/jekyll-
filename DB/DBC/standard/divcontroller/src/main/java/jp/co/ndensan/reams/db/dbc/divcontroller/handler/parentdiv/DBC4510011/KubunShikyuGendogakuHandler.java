@@ -30,6 +30,7 @@ public class KubunShikyuGendogakuHandler {
     private final KubunShikyuGendogakuDiv div;
     private static final RString 入力前の状態に戻る = new RString("btnReset");
     private static final RString 保存する = new RString("btnUpdate");
+    private static final RString ZERO = new RString("0");
 
     /**
      * コンストラクタです。
@@ -56,11 +57,8 @@ public class KubunShikyuGendogakuHandler {
             }
             FlexibleYearMonth teikyoshuryoYM = result.toEntity().getTeikyoshuryoYM();
             if (teikyoshuryoYM != null && !teikyoshuryoYM.isEmpty()) {
-                row.setDeleteButtonState(DataGridButtonState.Disabled);
                 row.setDefaultDataName3(teikyoshuryoYM.wareki()
                         .firstYear(FirstYear.ICHI_NEN).toDateString());
-            } else {
-                row.setDeleteButtonState(DataGridButtonState.Enabled);
             }
             if (result.toEntity().getServiceShuruiMeisho() != null) {
                 row.setDefaultDataName4(result.toEntity().getServiceShuruiMeisho());
@@ -85,7 +83,8 @@ public class KubunShikyuGendogakuHandler {
         }
         div.getServiceShuruiShousai().getTxtServiceMeisho().setValue(row.getDefaultDataName4());
         div.getServiceShuruiShousai().getTxtServiceRyakusho().setValue(row.getDefaultDataName5());
-        div.getServiceShuruiShousai().getDdlServiceBunruiCode().setSelectedKey(row.getDefaultDataName6());
+        div.getServiceShuruiShousai().getDdlServiceBunruiCode().setSelectedKey(row.getDefaultDataName6().substring(0, 1).equals(ZERO)
+                ? row.getDefaultDataName6().substring(1, 2) : row.getDefaultDataName6());
     }
 
     /**
@@ -164,7 +163,9 @@ public class KubunShikyuGendogakuHandler {
     public KaigoServiceShurui setResult追加(KaigoServiceShurui result) {
         return result.createBuilderForEdit()
                 .setサービス種類名称(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue())
-                .setサービス分類コード(new Code(div.getServiceShuruiShousai().getDdlServiceBunruiCode().getSelectedKey()))
+                .setサービス分類コード(div.getServiceShuruiShousai().getDdlServiceBunruiCode().getSelectedKey().length() == 1
+                        ? new Code(ZERO.concat(div.getServiceShuruiShousai().getDdlServiceBunruiCode().getSelectedKey()))
+                        : new Code(div.getServiceShuruiShousai().getDdlServiceBunruiCode().getSelectedKey()))
                 .setサービス種類略称(div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue())
                 .set居宅サービス区分(RString.EMPTY)
                 .set基準該当サービス区分(RString.EMPTY)
@@ -183,7 +184,9 @@ public class KubunShikyuGendogakuHandler {
     public KaigoServiceShurui setResult修正(KaigoServiceShurui result) {
         return result.createBuilderForEdit()
                 .setサービス種類名称(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue())
-                .setサービス分類コード(new Code(div.getServiceShuruiShousai().getDdlServiceBunruiCode().getSelectedKey()))
+                .setサービス分類コード(div.getServiceShuruiShousai().getDdlServiceBunruiCode().getSelectedKey().length() == 1
+                        ? new Code(ZERO.concat(div.getServiceShuruiShousai().getDdlServiceBunruiCode().getSelectedKey()))
+                        : new Code(div.getServiceShuruiShousai().getDdlServiceBunruiCode().getSelectedKey()))
                 .setサービス種類略称(div.getServiceShuruiShousai().getTxtServiceRyakusho().getValue())
                 .setIsDeleted(false)
                 .build();

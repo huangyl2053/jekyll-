@@ -124,7 +124,35 @@ public class KojinJokyoShokai {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(div.getHihokenshano()));
         return ResponseData.of(div).respond();
     }
+    
+    /**
+     * 基本調査照会ボタン処理です。
+     *
+     * @param div 要介護認定個人状況照会div
+     * @return ResponseData<KojinJokyoShokaiDiv>
+     */
+    public ResponseData<KojinJokyoShokaiDiv> onClick_btnChosaKekkaInfoKihon(KojinJokyoShokaiDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 認定調査依頼履歴番号 = new RString(ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class));
+        div.setHdnShinseishoKanriNo(申請書管理番号);
+        div.setHdnNinteiChosaRirekiNo(認定調査依頼履歴番号);
+        return ResponseData.of(div).respond();
+    }
 
+    /**
+     * 概況調査照会ボタン処理です。
+     *
+     * @param div 要介護認定個人状況照会div
+     * @return ResponseData<KojinJokyoShokaiDiv>
+     */
+    public ResponseData<KojinJokyoShokaiDiv> onClick_btnChosaKekkaInfoGaikyo(KojinJokyoShokaiDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 認定調査依頼履歴番号 = new RString(ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class));
+        div.setHdnShinseishoKanriNo(申請書管理番号);
+        div.setHdnNinteiChosaRirekiNo(認定調査依頼履歴番号);
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 個人進捗状況表を発行する処理です。
      *

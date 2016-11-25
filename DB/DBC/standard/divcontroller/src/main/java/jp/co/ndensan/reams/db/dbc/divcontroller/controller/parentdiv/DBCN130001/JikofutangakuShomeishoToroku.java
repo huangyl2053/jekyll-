@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuShomeisho;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuShomeishoMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuBusiness;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.DBCN130001StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001.DBCN130001TransitionEventName;
@@ -52,6 +53,7 @@ public class JikofutangakuShomeishoToroku {
 
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
     private static final RString BUTTON_BTNBACKSEARCHRESULT_SEARCHGAMEN = new RString("btnBackSearchResult_SearchGamen");
+    private static final RString BUTTON_SAVE = new RString("btnUpdate");
     private static final RString STATUS_新規 = new RString("新規");
     private static final RString STATUS_照会 = new RString("照会");
     private static final RString STATUS_修正 = new RString("修正");
@@ -97,6 +99,12 @@ public class JikofutangakuShomeishoToroku {
         div.setExecutionStatus(STATUS_新規);
         getHandler(div).set登録情報();
         getHandler(div).set証明書登録To読取専用(false);
+        div.getTxtTorokuTaishoNendo().setReadOnly(true);
+        div.getTxtTorokuShokisaiHokenshaNo().setReadOnly(true);
+        div.getTxtTorokuShikyuShinseishoSeiriNo().setReadOnly(true);
+        div.getTxtTorokuRirekiNo().setReadOnly(true);
+        div.getTxtJikofutangakuGokei().setReadOnly(true);
+        div.getTxtUchiFutangakuGokei().setReadOnly(true);
         return ResponseData.of(div).setState(DBCN130001StateName.証明書登録);
     }
 
@@ -169,7 +177,29 @@ public class JikofutangakuShomeishoToroku {
             getHandler(div).set登録情報(list);
         }
         getHandler(div).set証明書登録To読取専用(false);
+        div.getTxtTorokuTaishoNendo().setReadOnly(true);
+        div.getTxtTorokuShokisaiHokenshaNo().setReadOnly(true);
+        div.getTxtTorokuShikyuShinseishoSeiriNo().setReadOnly(true);
+        div.getTxtTorokuRirekiNo().setReadOnly(true);
+        div.getTxtJikofutangakuGokei().setReadOnly(true);
+        div.getTxtUchiFutangakuGokei().setReadOnly(true);
         div.setExecutionStatus(STATUS_修正);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onStateTransition
+     *
+     * @param div div
+     * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
+     */
+    public ResponseData<JikofutangakuShomeishoTorokuDiv> onStateTransition(JikofutangakuShomeishoTorokuDiv div) {
+        if (div.getExecutionStatus().equals(STATUS_修正)) {
+            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_修正.toString());
+        }
+        if (div.getExecutionStatus().equals(STATUS_削除)) {
+            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_削除.toString());
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -644,39 +674,59 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onClick_btnUpdate(JikofutangakuShomeishoTorokuDiv div) {
-        JikofutangakuShomeishoTorokuBusiness business
-                = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
-        if (STATUS_新規.equals(div.getExecutionStatus()) || STATUS_修正.equals(div.getExecutionStatus())) {
-            ValidationMessageControlPairs validPairs = getValidationHandler(div).更新処理チェック(getHandler(div).is修正_証明書登録画面変更(business));
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (!ResponseHolder.isReRequest()) {
+            if (div.getExecutionStatus().equals(STATUS_新規)) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                        UrQuestionMessages.保存の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (div.getExecutionStatus().equals(STATUS_削除)) {
+                QuestionMessage message = new QuestionMessage(DbcQuestionMessages.確認メッセージ.getMessage().getCode(),
+                        DbcQuestionMessages.確認メッセージ.getMessage().replace(STATUS_削除.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (div.getExecutionStatus().equals(STATUS_修正)) {
+                QuestionMessage message = new QuestionMessage(DbcQuestionMessages.確認メッセージ.getMessage().getCode(),
+                        DbcQuestionMessages.確認メッセージ.getMessage().replace(STATUS_修正.toString()).evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
             }
         }
-        RStringBuilder 完了メッセージ = new RStringBuilder("対象者の自己負担額証明書情報の、");
-        if (STATUS_新規.equals(div.getExecutionStatus())) {
-            insert(div);
-            完了メッセージ.append(new RString("新規追加"));
-        } else if (STATUS_修正.equals(div.getExecutionStatus())) {
-            update(div, business);
-            完了メッセージ.append(STATUS_修正);
-        } else if (STATUS_削除.equals(div.getExecutionStatus())) {
-            delete(business);
-            完了メッセージ.append(STATUS_削除);
-        }
-        完了メッセージ.append(new RString("が完了しました。"));
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        RStringBuilder messageTaisho1 = new RStringBuilder(被保険者番号.value());
-        messageTaisho1.append(new RString("："));
-        messageTaisho1.append(div.getCcdAtenaInfo().get氏名漢字());
-        RStringBuilder messageTaisho2 = new RStringBuilder();
-        messageTaisho2.append(new RString("支給申請書整理番号："));
-        messageTaisho2.append(div.getTxtTorokuShikyuShinseishoSeiriNo().getValue());
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            JikofutangakuShomeishoTorokuBusiness business
+                    = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
+            if (STATUS_新規.equals(div.getExecutionStatus()) || STATUS_修正.equals(div.getExecutionStatus())) {
+                ValidationMessageControlPairs validPairs = getValidationHandler(div).更新処理チェック(getHandler(div).is修正_証明書登録画面変更(business));
+                if (validPairs.iterator().hasNext()) {
+                    return ResponseData.of(div).addValidationMessages(validPairs).respond();
+                }
+            }
+            RStringBuilder 完了メッセージ = new RStringBuilder("対象者の自己負担額証明書情報の、");
+            if (STATUS_新規.equals(div.getExecutionStatus())) {
+                insert(div);
+                完了メッセージ.append(new RString("新規追加"));
+            } else if (STATUS_修正.equals(div.getExecutionStatus())) {
+                update(div, business);
+                完了メッセージ.append(STATUS_修正);
+            } else if (STATUS_削除.equals(div.getExecutionStatus())) {
+                delete(business);
+                完了メッセージ.append(STATUS_削除);
+            }
+            完了メッセージ.append(new RString("が完了しました。"));
+            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+            RStringBuilder messageTaisho1 = new RStringBuilder(被保険者番号.value());
+            messageTaisho1.append(new RString("："));
+            messageTaisho1.append(div.getCcdAtenaInfo().get氏名漢字());
+            RStringBuilder messageTaisho2 = new RStringBuilder();
+            messageTaisho2.append(new RString("支給申請書整理番号："));
+            messageTaisho2.append(div.getTxtTorokuShikyuShinseishoSeiriNo().getValue());
 
-        div.getCcdKanryoMessage().setMessage(
-                完了メッセージ.toRString(), RString.EMPTY,
-                messageTaisho1.toRString(), messageTaisho2.toRString(), true);
-        return ResponseData.of(div).setState(DBCN130001StateName.処理完了);
+            div.getCcdKanryoMessage().setMessage(
+                    完了メッセージ.toRString(), RString.EMPTY,
+                    messageTaisho1.toRString(), messageTaisho2.toRString(), true);
+            return ResponseData.of(div).setState(DBCN130001StateName.処理完了);
+        }
+        return ResponseData.of(div).respond();
     }
 
     private void insert(JikofutangakuShomeishoTorokuDiv div) {

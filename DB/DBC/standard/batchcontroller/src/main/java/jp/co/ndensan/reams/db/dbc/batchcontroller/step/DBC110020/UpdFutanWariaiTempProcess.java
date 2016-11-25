@@ -64,12 +64,12 @@ public class UpdFutanWariaiTempProcess extends BatchProcessBase<IdouTempEntity> 
     @Override
     protected void process(IdouTempEntity entity) {
         RString 全項目 = 二割負担全項目(entity.get二割負担());
-        if (二割負担List.contains(全項目)) {
-            return;
-        }
-        二割負担List.add(全項目);
         Decimal 連番 = 連番Map.get(entity.get二割負担().getHihokenshaNo());
         if (連番 == null) {
+            if (二割負担List.contains(全項目)) {
+                return;
+            }
+            二割負担List.add(全項目);
             連番Map.put(entity.get二割負担().getHihokenshaNo(), Decimal.ONE);
             IdouTblEntity update = entity.get異動一時();
             update.set利用者負担割合明細(全項目);
@@ -81,13 +81,21 @@ public class UpdFutanWariaiTempProcess extends BatchProcessBase<IdouTempEntity> 
             if (連番temp.intValue() != entity.get異動一時().get連番()) {
                 return;
             }
+            if (二割負担List.contains(全項目)) {
+                return;
+            }
+            二割負担List.add(全項目);
             連番Map.put(entity.get二割負担().getHihokenshaNo(), 連番temp);
             IdouTblEntity update = entity.get異動一時();
-            update.set居宅計画(全項目);
+            update.set利用者負担割合明細(全項目);
             異動一時tableWriter.update(update);
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番.add(Decimal.ONE).intValue()) {
+            if (二割負担List.contains(全項目)) {
+                return;
+            }
+            二割負担List.add(全項目);
             連番Map.put(entity.get二割負担().getHihokenshaNo(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
             insert.set被保険者番号(entity.get二割負担().getHihokenshaNo());
@@ -117,14 +125,14 @@ public class UpdFutanWariaiTempProcess extends BatchProcessBase<IdouTempEntity> 
         RString 全項目 = RString.EMPTY;
         全項目 = cancatYMD(二割負担.getYukoKaishiYMD(), 全項目);
         全項目 = cancatYMD(二割負担.getYukoShuryoYMD(), 全項目);
-        全項目 = 全項目.concat(二割負担.getHihokenshaNo().getColumnValue()).concat(SPLIT)
-                .concat(二割負担.getNendo().toDateString()).concat(SPLIT)
+        全項目 = 全項目.concat(二割負担.getHihokenshaNo().getColumnValue()).concat(SPLIT);
+        全項目 = cancatRString(二割負担.getFutanWariaiKubun(), 全項目);
+        全項目 = 全項目.concat(二割負担.getNendo().toDateString()).concat(SPLIT)
                 .concat(new RString(二割負担.getRirekiNo())).concat(SPLIT)
                 .concat(new RString(二割負担.getEdaNo())).concat(SPLIT)
                 .concat(二割負担.getInsertDantaiCd()).concat(SPLIT)
                 .concat(二割負担.getIsDeleted() ? RST_TRUE : RST_FALSE).concat(SPLIT);
         全項目 = cancatRString(二割負担.getShikakuKubun(), 全項目);
-        全項目 = cancatRString(二割負担.getFutanWariaiKubun(), 全項目);
         全項目 = cancatDecimal(二割負担.getHonninGoukeiShotokuGaku(), 全項目);
         全項目 = 全項目.concat(new RString(二割負担.getSetaiIchigouHihokenshaSu())).concat(SPLIT);
         全項目 = cancatDecimal(二割負担.getNenkinShunyuGoukei(), 全項目);

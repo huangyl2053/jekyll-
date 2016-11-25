@@ -15,7 +15,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 判定結果情報出力(保険者)取得処理。
@@ -35,7 +38,7 @@ public class NijihanteiKekkaOutput {
         createHandlerOf(nijiDiv).initialize();
         return createResponseData(nijiDiv);
     }
-    
+
     /**
      * クリアボタン。<br/>
      *
@@ -47,7 +50,7 @@ public class NijihanteiKekkaOutput {
         nijiDiv.getKensakuJoken().getTxtNijihanteDateRange().setFromValue(RDate.getNowDate());
         nijiDiv.getKensakuJoken().getTxtNijihanteDateRange().setToValue(RDate.getNowDate());
         nijiDiv.getKensakuJoken().getRadDataShutsuryokuUmu().setSelectedIndex(0);
-        
+
         nijiDiv.getKensakuJoken().getTxtHyojiDataLimit().setValue(DbBusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         return createResponseData(nijiDiv);
@@ -71,6 +74,8 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<DBE525002_HanteiKekkaHokenshaParameter> onClick_btnHanteikekkaOutput(NijihanteiKekkaOutputDiv nijiDiv) {
+        FlowParameters fp = FlowParameters.of(new RString("key"), "Batch1");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(getHandler(nijiDiv).setBatchParameter()).respond();
     }
 
@@ -81,6 +86,8 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<DBE491001_NichijiShinchokuParameter> onClick_btnRenkeiDataOutput(NijihanteiKekkaOutputDiv nijiDiv) {
+        FlowParameters fp = FlowParameters.of(new RString("key"), "Batch2");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(getHandler(nijiDiv).setCSVBatchParameter()).respond();
     }
 
@@ -120,5 +127,4 @@ public class NijihanteiKekkaOutput {
     private NijihanteiKekkaOutputHandler getHandler(NijihanteiKekkaOutputDiv nijiDiv) {
         return new NijihanteiKekkaOutputHandler(nijiDiv);
     }
-
 }

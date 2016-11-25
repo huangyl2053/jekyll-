@@ -180,7 +180,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
                 return 普通徴収_仮算定新規資格適用段階;
             }
             HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().
-                    get保険料段階ListIn(entity.get普徴仮算定抽出().getFukaNendo());
+                    get保険料段階ListIn(parameter.get賦課年度());
             SeigyoJoho 月別保険料制御情報 = editor月別保険料制御情報(保険料段階List);
             FukaKonkyoBatchParameter 賦課根拠param = new FukaKonkyoBatchParameter();
             賦課根拠param.set賦課基準日(entity.get普徴仮算定抽出().getFukaYMD());
@@ -195,10 +195,9 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             保険料段階パラメータ.setFukaKonkyo(賦課根拠);
             保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
             TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
-            return 月別保険料段階.get保険料段階04月();
+            return 月別保険料段階 == null ? RString.EMPTY : 月別保険料段階.get保険料段階04月();
         } else if (entity.get介護賦課前年度() != null && entity.get介護賦課前年度().getTsuchishoNo() != null) {
-            HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().
-                    get保険料段階ListIn(entity.get普徴仮算定抽出().getFukaNendo());
+            HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
             SeigyoJoho 月別保険料制御情報 = editor月別保険料制御情報(保険料段階List);
             FukaKonkyo 賦課根拠 = new FukaKonkyo();
             賦課根拠.setFukakijunYMD(賦課年度開始日);
@@ -236,7 +235,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             保険料段階パラメータ.setFukaKonkyo(賦課根拠);
             保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
             TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine仮算定保険料段階(保険料段階パラメータ);
-            return 月別保険料段階.get保険料段階04月();
+            return 月別保険料段階 == null ? RString.EMPTY : 月別保険料段階.get保険料段階04月();
         }
         ShinkiShikakuTaishoTempEntity shinkiShikakuTaishoTempEntity = new ShinkiShikakuTaishoTempEntity();
         shinkiShikakuTaishoTempEntity.setTsuchishoNo(entity.get普徴仮算定抽出().getTsuchishoNo());
@@ -355,19 +354,36 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     }
 
     private Decimal get計算用保険料(FukaKeisanEntity entity, RString 段階区分) {
+        Decimal 計算用保険料;
+        FukaJohoTempEntity 前年度賦課情報 = entity.get介護賦課前年度();
         if (仮算定賦課方法_01.equals(仮算定賦課方法)) {
-            FukaJohoTempEntity 前年度賦課情報 = entity.get介護賦課前年度();
-            return get最後の普徴期別金額(前年度賦課情報);
+            計算用保険料 = 前年度賦課情報 != null ? get最後の普徴期別金額(前年度賦課情報) : get年額保険料(段階区分);
         } else if (仮算定賦課方法_02.equals(仮算定賦課方法) || 仮算定賦課方法_03.equals(仮算定賦課方法)) {
-            return entity.get介護賦課前年度().getNengakuHokenryo2() != null ? entity.get介護賦課前年度().getNengakuHokenryo2()
-                    : entity.get介護賦課前年度().getNengakuHokenryo1();
-        } else if (仮算定賦課方法_04.equals(仮算定賦課方法) || 仮算定賦課方法_05.equals(仮算定賦課方法) || 仮算定賦課方法_06.equals(仮算定賦課方法)) {
-            return entity.get介護賦課前年度().getKakuteiHokenryo();
+            if (前年度賦課情報 == null) {
+                計算用保険料 = get年額保険料(段階区分);
+            } else if (前年度賦課情報.getNengakuHokenryo2() != null) {
+                計算用保険料 = 前年度賦課情報.getNengakuHokenryo2();
+            } else {
+                計算用保険料 = 前年度賦課情報.getNengakuHokenryo1();
+            }
+        } else if (仮算定賦課方法_04.equals(仮算定賦課方法) || 仮算定賦課方法_05.equals(仮算定賦課方法)
+                || 仮算定賦課方法_06.equals(仮算定賦課方法)) {
+            return 前年度賦課情報 != null ? 前年度賦課情報.getKakuteiHokenryo() : get年額保険料(段階区分);
         } else {
-            HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().
-                    get保険料段階ListIn(entity.get普徴仮算定抽出().getFukaNendo());
+            計算用保険料 = get年額保険料(段階区分);
+        }
+        if (計算用保険料 == null) {
+            return Decimal.ZERO;
+        }
+        return 計算用保険料;
+    }
+
+    private Decimal get年額保険料(RString 段階区分) {
+        HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
+        if (保険料段階List.getBy段階区分(段階区分) != null) {
             return new Decimal(保険料段階List.getBy段階区分(段階区分).get保険料率().toString());
         }
+        return Decimal.ZERO;
     }
 
     private Decimal get最後の普徴期別金額(FukaJohoTempEntity 前年度賦課情報) {
@@ -419,17 +435,16 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     }
 
     private void set生保の情報List(FukaKeisanEntity entity) {
-        if (entity.get生活保護受給者Entity() != null) {
-            if (!entity.get生活保護受給者Entity().getShikibetsuCode().equals(識別コード)
-                    || !entity.get生活保護受給者Entity().getGyomuCode().equals(業務コード)
-                    || !entity.get生活保護受給者Entity().getJukyuKaishiYMD().equals(受給開始日)) {
-                SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
-                生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
-                生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
-                set生保の情報(生活保護受給者RelateEntity);
-                生活保護扶助種類EntityList.clear();
-                set識別コード(entity);
-            }
+        if (entity.get生活保護受給者Entity() != null
+                && !(entity.get生活保護受給者Entity().getShikibetsuCode().equals(識別コード)
+                && entity.get生活保護受給者Entity().getGyomuCode().equals(業務コード)
+                && entity.get生活保護受給者Entity().getJukyuKaishiYMD().equals(受給開始日))) {
+            SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
+            生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
+            生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
+            set生保の情報(生活保護受給者RelateEntity);
+            生活保護扶助種類EntityList.clear();
+            set識別コード(entity);
         }
     }
 

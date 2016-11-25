@@ -14,9 +14,11 @@ import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempResult;
+import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.TokuchoKaishiTsuchishoInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.CharacteristicsPhase;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.ShunyuJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
@@ -103,7 +105,6 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
     private static final RString 定数_ページごとに山分け = new RString("ページごとに山分け");
     private static final RString 定数_特徴方法 = new RString("getTkKibetsuGaku");
     private static final RString 定数_普徴方法 = new RString("getFuKibetsuGaku");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString 代行プリント送付票_処理名 = new RString("本算定通知書一括発行");
     private static final RString 代行プリント送付票_帳票名 = new RString("保険料納入通知書（本算定）");
     private static final RString タイトル_作成年月日 = new RString("作成年月日");
@@ -195,10 +196,10 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
      *
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 RDateTime
-     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
+     * @param 編集本算定通知書共通情報List List<TokuchoKaishiTsuchishoInfo>
      */
     public void publish特別徴収開始通知書発行一覧表(FlexibleYear 調定年度, RDateTime 帳票作成日時,
-            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List) {
+            List<TokuchoKaishiTsuchishoInfo> 編集本算定通知書共通情報List) {
 
         List<RString> headerList = new ArrayList<>();
         headerList.add(タイトル_作成年月日);
@@ -234,7 +235,8 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
                 .setEncode(Encode.UTF_8withBOM)
                 .hasHeader(true).setHeader(headerList)
                 .build()) {
-            for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
+            for (TokuchoKaishiTsuchishoInfo 編集本算定通知書共通情報 : 編集本算定通知書共通情報List) {
+                EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 編集本算定通知書共通情報.get編集後本算定通知書共通情報();
                 List<RString> bodyList = new ArrayList<>();
                 bodyList.add(帳票作成日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
                 bodyList.add(帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
@@ -334,10 +336,10 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
      *
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 RDateTime
-     * @param 編集後仮算定通知書共通情報List List<EditedKariSanteiTsuchiShoKyotsu>
+     * @param 編集後仮算定通知書共通情報List List<EditedKariSanteiTsuchiShoKyotsuInfo>
      */
     public void publish特別徴収開始通知書仮算定発行一覧表(FlexibleYear 調定年度, RDateTime 帳票作成日時,
-            List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List) {
+            List<EditedKariSanteiTsuchiShoKyotsuInfo> 編集後仮算定通知書共通情報List) {
 
         List<RString> headerList = new ArrayList<>();
         headerList.add(タイトル_作成年月日);
@@ -373,7 +375,8 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
                 .setEncode(Encode.UTF_8withBOM)
                 .hasHeader(true).setHeader(headerList)
                 .build()) {
-            for (EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 : 編集後仮算定通知書共通情報List) {
+            for (EditedKariSanteiTsuchiShoKyotsuInfo 編集仮算定通知書共通情報 : 編集後仮算定通知書共通情報List) {
+                EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 編集仮算定通知書共通情報.get編集後仮算定通知書情報();
                 List<RString> bodyList = new ArrayList<>();
                 bodyList.add(帳票作成日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
                 bodyList.add(帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
@@ -449,12 +452,12 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
      *
      * @param 帳票作成日時 RDateTime
      * @param 決定変更区分 RString
-     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
+     * @param 編集本算定通知書共通情報List List<TokuchoKaishiTsuchishoInfo>
      * @param eucEntityId EucEntityId
      * @param eucFileName RString
      */
     public void publish決定変更通知書発行一覧表(RDateTime 帳票作成日時, RString 決定変更区分,
-            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, EucEntityId eucEntityId, RString eucFileName) {
+            List<TokuchoKaishiTsuchishoInfo> 編集本算定通知書共通情報List, EucEntityId eucEntityId, RString eucFileName) {
 
         List<RString> headerList = new ArrayList<>();
         headerList.add(タイトル_作成日時);
@@ -497,7 +500,8 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
                 .hasHeader(true).setHeader(headerList)
                 .build()) {
             int 連番 = INT_1;
-            for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
+            for (TokuchoKaishiTsuchishoInfo 編集本算定通知書共通情報 : 編集本算定通知書共通情報List) {
+                EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 編集本算定通知書共通情報.get編集後本算定通知書共通情報();
                 List<RString> bodyList = new ArrayList<>();
                 bodyList.add(帳票作成日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
                 bodyList.add(帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
@@ -872,7 +876,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
 
         DaikoPrintItem daikoPrintItem = new DaikoPrintItem(SubGyomuCode.DBB介護賦課,
                 地方公共団体.getLasdecCode_(), 地方公共団体.get市町村名(),
-                ジョブ番号.concat(RString.FULL_SPACE).concat(new RString(String.valueOf(JobContextHolder.getJobId()))),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
                 代行プリント送付票_処理名, 帳票ID.getColumnValue(), 帳票名List, ページ数List, 抽出条件List,
                 出力順項目List, 改ページ項目List, 詳細設定List);
         IDaikoPrint daikoPrint = DaikoPrintFactory.createInstance(daikoPrintItem);
@@ -1004,6 +1008,9 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
         List<HonsanteiTsuchishoTempResult> tmpResultList = new ArrayList<>();
         for (HonsanteiTsuchishoTempEntity entity : entityList) {
             HonsanteiTsuchishoTempResult result = new HonsanteiTsuchishoTempResult();
+            result.set生活保護区分(entity.get生活保護区分());
+            result.set特徴8月開始者区分(entity.get特徴8月開始者区分());
+            result.set特徴10月開始者区分(entity.get特徴10月開始者区分());
             result.set計算後情報_更正後(entity.get計算後情報_更正後());
             result.set計算後情報_更正前(entity.get計算後情報_更正前());
             result.set賦課の情報_更正前(get賦課の情報_更正前後(entity, false));

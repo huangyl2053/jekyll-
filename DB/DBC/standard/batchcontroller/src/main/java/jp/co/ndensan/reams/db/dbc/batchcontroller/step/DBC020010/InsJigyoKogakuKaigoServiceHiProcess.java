@@ -6,13 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3112KogakuShikyuShinsaKetteiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufugakusanshutsu.KogakuKaigoServicehiKyufugakuSanshutsuManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
  * 事業高額介護サービス費追加のProcessフロークラスです。
@@ -49,7 +52,20 @@ public class InsJigyoKogakuKaigoServiceHiProcess extends SimpleBatchProcessBase 
             manager.save事業高額介護サービス費給付対象者合計(entity);
         }
         mapper.update事業高額介護サービス費給付対象者合計();
-        // QA確認中
-//        mapper.insert事業高額介護サービス給付対象者明細();
+        List<TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity> 高額介護サービス費給付対象者明細全件更新一時リスト
+                = mapper.get事業高額介護サービス費給付対象者明細全件更新一時();
+        for (TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity entity : 高額介護サービス費給付対象者明細全件更新一時リスト) {
+            DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity dbT3108Entity = new DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity();
+            dbT3108Entity.setHihokenshaNo(entity.getHihokenshaNo());
+            dbT3108Entity.setServiceTeikyoYM(entity.getServiceTeikyoYM());
+            dbT3108Entity.setJigyoshaNo(entity.getJigyoshaNo());
+            dbT3108Entity.setServiceShuruiCode(entity.getServiceShuruiCode());
+            dbT3108Entity.setRirekiNo(entity.getRirekiNo());
+            dbT3108Entity.setServiceHiyoGokeiGaku(entity.getServiceHiyoGokeiGaku());
+            dbT3108Entity.setRiyoshaFutanGaku(entity.getRiyoshaFutanGaku());
+            dbT3108Entity.setJigyoKogakuKyufuKonkyo(entity.getKogakuKyufuKonkyo());
+            dbT3108Entity.setTaishoshaUketoriYM(FlexibleYearMonth.EMPTY);
+            manager.save事業高額介護サービス費給付対象者明細(dbT3108Entity);
+        }
     }
 }

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.riyojokyoichiran;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.riyojokyoichiran.RiyoJokyoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.riyojokyoichiran.RiyoJokyoIchiranReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.riyojokyotokeihyo.RiyoJokyoIchiranEntity;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 

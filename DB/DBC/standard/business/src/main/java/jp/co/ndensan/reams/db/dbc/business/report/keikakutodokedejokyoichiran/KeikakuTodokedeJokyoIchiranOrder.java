@@ -24,21 +24,9 @@ public enum KeikakuTodokedeJokyoIchiranOrder implements IReportItems {
      */
     町域コード(new RString("0002"), new RString(""), new RString("\"ShikibetsuTaisho\".\"choikiCode\"")),
     /**
-     * 番地コード1 です。
+     * 番地コード です。
      */
-    番地コード1(new RString("0003"), new RString(""), new RString("\"ShikibetsuTaisho\".\"banchiCode1\"")),
-    /**
-     * 番地コード2 です。
-     */
-    番地コード2(new RString("0003"), new RString(""), new RString("\"ShikibetsuTaisho\".\"banchiCode2\"")),
-    /**
-     * 番地コード3 です。
-     */
-    番地コード3(new RString("0003"), new RString(""), new RString("\"ShikibetsuTaisho\".\"banchiCode3\"")),
-    /**
-     * 番地コード4 です。
-     */
-    番地コード4(new RString("0003"), new RString(""), new RString("\"ShikibetsuTaisho\".\"banchiCode4\"")),
+    番地コード(new RString("0003"), new RString(""), new RString("\"atesaki_banchiCode\"")),
     /**
      * 行政区コード です。
      */

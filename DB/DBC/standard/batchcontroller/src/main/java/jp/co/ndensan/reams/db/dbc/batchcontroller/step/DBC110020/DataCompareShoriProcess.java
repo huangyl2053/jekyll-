@@ -23,12 +23,17 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEn
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200010.JukyushaIdorenrakuhyoSofuTaishoshachiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200074.JukyushaIdoRirekiTeiseiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.DataCompareShoriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdoTblTmpEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.JukyushaIdoRenrakuhyoTempTBLEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200010.JukyushaIdorenrakuhyoSofuTaishoshachiranSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200074.JukyushaIdoRirekiTeiseiIchiranSource;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoCsvManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -150,6 +155,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString 住特終了日 = new RString("住特終了日");
     private static final RString 二割開始日 = new RString("二割開始日");
     private static final RString 二割終了日 = new RString("二割終了日");
+    private static final RString 受給者異動連絡票情報送付対象者リスト = new RString("受給者異動連絡票情報送付対象者リスト");
     private static final RString 記号 = new RString("*");
     private static final RString エラーあり = new RString("1");
     private static final RString RST_1 = new RString("1");
@@ -161,8 +167,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString RST_SPACE = new RString("　");
     private static final RString RST_あり = new RString("あり");
     private static final RString RST_なし = new RString("なし");
-    private int 異動連絡票件数;
-    private int 訂正連絡票件数;
     private JukyushaIdoRenrakuhyoOutProcessParameter processParameter;
 
     /**
@@ -179,7 +183,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private BatchReportWriter<JukyushaIdorenrakuhyoSofuTaishoshachiranSource> batchReportWriter_DBC200010;
     private ReportSourceWriter<JukyushaIdorenrakuhyoSofuTaishoshachiranSource> reportSourceWriter_DBC200010;
     private Map<HihokenshaNo, List<IdoTblTmpEntity>> 異動一時2Map;
-    private Map<HihokenshaNo, List<DbT3001JukyushaIdoRenrakuhyoEntity>> 受給者異動送付Map;
+    private Map<HihokenshaNo, List<JukyushaIdoRenrakuhyoTempTBLEntity>> 受給者異動送付Map;
     private List<HihokenshaNo> 被保険者番号List;
     private RString 市町村コード = RString.EMPTY;
     private RString 市町村名称 = RString.EMPTY;
@@ -200,8 +204,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     @Override
     protected void initialize() {
-        異動連絡票件数 = 0;
-        訂正連絡票件数 = 0;
         市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
         市町村名称 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records().get(COUNT_0).get市町村名称();
         RDateTime sysDate = RDate.getNowDateTime();
@@ -228,27 +230,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
         batchReportWriter_DBC200010 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200010.getReportId().value()).create();
         reportSourceWriter_DBC200010 = new ReportSourceWriter<>(batchReportWriter_DBC200010);
-        spoolManager_DBC200074 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200074,
-                UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath_DBC200074 = Path.combinePath(spoolManager_DBC200074.getEucOutputDirectry(),
-                CSV_FILENAME);
-        csvWriter_DBC200074 = new CsvWriter.InstanceBuilder(eucFilePath_DBC200074).setNewLine(NewLine.CRLF)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setEncode(Encode.UTF_8withBOM)
-                .hasHeader(true)
-                .build();
 
-        spoolManager_DBC200010 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200010,
-                UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath_DBC200010 = Path.combinePath(spoolManager_DBC200010.getEucOutputDirectry(),
-                CSV_FILENAME_DBC200010);
-        csvWriter_DBC200010 = new CsvWriter.InstanceBuilder(eucFilePath_DBC200010).setNewLine(NewLine.CRLF)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setEncode(Encode.UTF_8withBOM)
-                .hasHeader(true)
-                .build();
         this.dbT3001TableWriter = new BatchPermanentTableWriter<>(DbT3001JukyushaIdoRenrakuhyoEntity.class);
     }
 
@@ -259,11 +241,11 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     @Override
     protected void usualProcess(DataCompareShoriEntity entity) {
         IdoTblTmpEntity 異動一時2entity = entity.get異動一時2();
-        DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付 = entity.get受給者異動送付();
+        JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付 = entity.get受給者異動送付();
         if (異動一時2entity == null || 異動一時2entity.get被保険者番号() == null) {
             国保連受給者異動情報履歴削除(受給者異動送付);
         } else if (受給者異動送付 == null || 受給者異動送付.getHiHokenshaNo() == null) {
-            受給者異動連絡票Entity出力処理(異動一時2entity, true);
+            受給者異動連絡票Entity出力処理(異動一時2entity, null);
         } else if (!エラーあり.equals(異動一時2entity.getエラーフラグ())) {
             HihokenshaNo 被保険者番号 = 異動一時2entity.get被保険者番号();
             if (!被保険者番号List.contains(被保険者番号)) {
@@ -280,7 +262,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 異動一時2List.add(異動一時2entity);
                 異動一時2KeyList.add(異動一時2Key);
             }
-            List<DbT3001JukyushaIdoRenrakuhyoEntity> 受給者異動送付List = 受給者異動送付Map.get(被保険者番号);
+            List<JukyushaIdoRenrakuhyoTempTBLEntity> 受給者異動送付List = 受給者異動送付Map.get(被保険者番号);
             if (受給者異動送付List == null) {
                 受給者異動送付List = new ArrayList<>();
                 受給者異動送付Map.put(被保険者番号, 受給者異動送付List);
@@ -290,26 +272,42 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 受給者異動送付List.add(受給者異動送付);
                 受給者異動送付KeyList.add(受給者異動送付Key);
             }
-            国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
         }
     }
 
     @Override
     protected void afterExecute() {
         被保険者番号マッチング();
-        JukyushaIdoRenrakuhyoCsvManager.createInstance().csvの出力(entityList, processParameter.get処理年月());
-        csvWriter_DBC200074.close();
-        spoolManager_DBC200074.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200074);
-        csvWriter_DBC200010.close();
-        spoolManager_DBC200010.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200010);
+        JukyushaIdoRenrakuhyoEntity outEntity = null;
+        if (!entityList.isEmpty()) {
+            outEntity = JukyushaIdoRenrakuhyoCsvManager.
+                    createInstance().csvの出力(entityList, processParameter.get処理年月());
+        }
+        if (csvWriter_DBC200074 != null) {
+            csvWriter_DBC200074.close();
+        }
+        if (spoolManager_DBC200074 != null) {
+            spoolManager_DBC200074.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200074);
+        }
+        if (csvWriter_DBC200010 != null) {
+            csvWriter_DBC200010.close();
+        }
+        if (spoolManager_DBC200010 != null) {
+            spoolManager_DBC200010.spool(SubGyomuCode.DBC介護給付, eucFilePath_DBC200010);
+        }
         returnEntity = new OutputParameter<>();
         JukyushaIdoRenrakuhyoOutFlowEntity flowEntity = new JukyushaIdoRenrakuhyoOutFlowEntity();
-        flowEntity.set異動連絡票件数(異動連絡票件数);
-        flowEntity.set訂正連絡票件数(訂正連絡票件数);
+        if (outEntity != null) {
+            flowEntity.set異動連絡票件数(outEntity.get総出力件数());
+            flowEntity.set入力ファイルパス(outEntity.get入力ファイルパス());
+            flowEntity.set出力ファイルパス(outEntity.get出力ファイルパス());
+        } else {
+            flowEntity.set異動連絡票件数(COUNT_0);
+        }
         returnEntity.setValue(flowEntity);
     }
 
-    private void 受給者異動連絡票Entity出力処理(IdoTblTmpEntity 異動一時2entity, boolean 新規Flag) {
+    private void 受給者異動連絡票Entity出力処理(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
         if (異動一時2entity == null) {
             return;
         }
@@ -319,12 +317,21 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         if (異動一時2entity.get被保険者氏名カナ().length() > COUNT_25) {
             異動一時2entity.set被保険者氏名カナ(異動一時2entity.get被保険者氏名カナ().substring(COUNT_0, COUNT_25));
         }
-        JukyushaIdoRenrakuhyoCsvEntity csventity = getJukyushaIdoRenrakuhyoCsvEntity(異動一時2entity, 新規Flag);
+        if (受給者異動送付 != null) {
+            異動一時2entity.set異動年月日(受給者異動送付.getIdoYMD().plusDay(COUNT_1));
+            if (RST_1.equals(異動一時2entity.get異動区分コード())) {
+                異動一時2entity.set異動区分コード(RST_2);
+            }
+            if (RST_01.equals(異動一時2entity.get受給者異動事由())) {
+                異動一時2entity.set受給者異動事由(RST_99);
+            }
+        }
+        JukyushaIdoRenrakuhyoCsvEntity csventity = getJukyushaIdoRenrakuhyoCsvEntity(異動一時2entity);
         entityList.add(csventity);
-        this.dbT3001TableWriter.insert(異動一時2entity.copyTo3001Entity());
+        this.dbT3001TableWriter.insert(異動一時2entity.copyTo3001Entity(RST_2));
     }
 
-    private void 国保連受給者異動情報履歴削除(DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
+    private void 国保連受給者異動情報履歴削除(JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
         if (受給者異動送付 == null || 受給者異動送付.getHiHokenshaNo() == null) {
             return;
         }
@@ -373,17 +380,17 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         履歴訂正Entity.set訂正内容8(記号);
         履歴訂正Entity.set訂正内容9(記号);
         履歴訂正Entity.set訂正内容10(記号);
-        csvWriter_DBC200074.writeLine(to明細項目(履歴訂正Entity));
-        異動連絡票件数++;
+        getDBC200074CsvWriter().writeLine(to明細項目(履歴訂正Entity));
         JukyushaIdoRirekiTeiseiIchiranReport report
                 = new JukyushaIdoRirekiTeiseiIchiranReport(履歴訂正Entity, 市町村コード, 市町村名称);
         report.writeBy(reportSourceWriter_DBC200074);
     }
 
-    private void 国保連受給者異動情報履歴訂正(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
+    private void 国保連受給者異動情報履歴訂正(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
         List<List<RString>> 違う項目 = get違う項目(異動一時2entity, 受給者異動送付);
         int count_整 = 違う項目.size() / COUNT_10;
         int count_残り = 違う項目.size() % COUNT_10;
+        RString 変更項目total = RString.EMPTY;
         for (int i = 0; i <= count_整; i++) {
             JukyushaIdoRirekiTeiseiIchiranEntity 履歴訂正Entity = new JukyushaIdoRirekiTeiseiIchiranEntity();
             if (受給者異動送付.getHiHokenshaNo() != null) {
@@ -453,10 +460,8 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 履歴訂正Entity.set訂正内容10(違う項目10.get(COUNT_2));
             }
             RString 変更項目 = get変更項目(違う項目);
-            csvWriter_DBC200074.writeLine(to明細項目(履歴訂正Entity));
-            csvWriter_DBC200010.writeLine(get送付対象者リスト(異動一時2entity, 変更項目));
-            異動連絡票件数++;
-            訂正連絡票件数++;
+            変更項目total = 変更項目total.concat(変更項目);
+            getDBC200074CsvWriter().writeLine(to明細項目(履歴訂正Entity));
             JukyushaIdoRirekiTeiseiIchiranReport report_200074
                     = new JukyushaIdoRirekiTeiseiIchiranReport(履歴訂正Entity, 市町村コード, 市町村名称);
             report_200074.writeBy(reportSourceWriter_DBC200074);
@@ -467,6 +472,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                     = new JukyushaIdorenrakuhyoSofuTaishoshachiranReport(送付対象者, 市町村コード, 市町村名称);
             report_200010.writeBy(reportSourceWriter_DBC200010);
         }
+        getDBC200010CsvWriter().writeLine(get送付対象者リスト(異動一時2entity, 変更項目total));
     }
 
     private boolean count_整残りCheck(int i, int count_整, int count_残り, int cout) {
@@ -482,8 +488,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         送付対象者.set氏名(異動一時2entity.get被保険者氏名カナ());
         送付対象者.set区分(JukyushaIF_IdoKubunCode.toValue(異動一時2entity.get異動区分コード()).get名称());
         送付対象者.set異動年月日(異動一時2entity.get異動年月日());
-//        送付対象者.set要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(),
-//                異動一時2entity.get要介護状態区分コード()).getName());
+        送付対象者.set要介護度(get要介護度Map().get(異動一時2entity.get要介護状態区分コード()));
         送付対象者.set要介護度(RString.EMPTY);
         送付対象者.set開始認定日(異動一時2entity.get認定有効期間開始年月日());
         送付対象者.set終了認定日(getFlexibleDateByRString(異動一時2entity.get認定有効期間終了年月日()));
@@ -499,7 +504,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         return 変更項目.toRString();
     }
 
-    private List get違う項目(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
+    private List get違う項目(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
         List<List<RString>> 違う項目 = new ArrayList<>();
         if (!異動一時2entity.get証記載保険者番号().equals(受給者異動送付.getShoKisaiHokenshaNo())) {
             List<RString> 違う = new ArrayList<>();
@@ -582,7 +587,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (!comparaRString(異動一時2entity.get居宅介護支援事業所番号(), 受給者異動送付.getKyotakuServiceSakuseiKubunCode())) {
+        if (!comparaRString(異動一時2entity.get居宅介護支援事業所番号(), 受給者異動送付.getKyotakuKaigoShienJigyoshoNo())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(計画事業所);
             違う.add(受給者異動送付.getKyotakuKaigoShienJigyoshoNo());
@@ -597,7 +602,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う.add(異動一時2entity.get居宅サービス計画適用開始年月日());
             違う項目.add(違う);
         }
-        if (!comparaRString(異動一時2entity.get居宅サービス計画適用終了年月日(), 受給者異動送付.getKyotakuServiceTekiyoShuryoYMD())) {
+        if (!comparaYMByRString(異動一時2entity.get居宅サービス計画適用終了年月日(), 受給者異動送付.getKyotakuServiceTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(サ計終了日);
             違う.add(受給者異動送付.getKyotakuServiceTekiyoShuryoYMD());
@@ -613,7 +618,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (!comparaDate(異動一時2entity.get訪問通所サービス上限管理適用期間開始年月日(),
+        if (!comparaYM(異動一時2entity.get訪問通所サービス上限管理適用期間開始年月日(),
                 受給者異動送付.getHomonTsushoServiceJogenKanriTekiyoKaishiYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(訪問開始日);
@@ -627,9 +632,9 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         return 違う項目;
     }
 
-    private void get違う項目1(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付,
+    private void get違う項目1(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
             List<List<RString>> 違う項目) {
-        if (!comparaRString(異動一時2entity.get訪問通所サービス上限管理適用期間終了年月日(),
+        if (!comparaYMByRString(異動一時2entity.get訪問通所サービス上限管理適用期間終了年月日(),
                 受給者異動送付.getHomonTsushoServiceJogenKanriTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(訪問終了日);
@@ -645,7 +650,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う.add(new RString(異動一時2entity.get短期入所サービス支給限度基準額()));
             違う項目.add(違う);
         }
-        if (!comparaDate(異動一時2entity.get短期入所サービス上限管理適用期間開始年月日(),
+        if (!comparaYM(異動一時2entity.get短期入所サービス上限管理適用期間開始年月日(),
                 受給者異動送付.getTankinyushoServiceJogenKanriTekiyoKaishiYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(短期開始日);
@@ -654,7 +659,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (!comparaDate(異動一時2entity.get短期入所サービス上限管理適用期間終了年月日(),
+        if (!comparaYM(異動一時2entity.get短期入所サービス上限管理適用期間終了年月日(),
                 受給者異動送付.getTankinyushoServiceJogenKanriTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(短期終了日);
@@ -663,11 +668,12 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (異動一時2entity.is公費負担上限額減額有フラグ() != 受給者異動送付.getKohiFutanJogenGengakuAriFlag()) {
+        if ((!RST_2.equals(異動一時2entity.get公費負担上限額減額有フラグ()) && 受給者異動送付.isKohiFutanJogenGengakuAriFlag())
+                || (RST_2.equals(異動一時2entity.get公費負担上限額減額有フラグ()) && !受給者異動送付.isKohiFutanJogenGengakuAriFlag())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(公費上有無);
-            違う.add(受給者異動送付.getKohiFutanJogenGengakuAriFlag() ? RST_あり : RST_なし);
-            違う.add(異動一時2entity.is公費負担上限額減額有フラグ() ? RST_あり : RST_なし);
+            違う.add(受給者異動送付.isKohiFutanJogenGengakuAriFlag() ? RST_あり : RST_なし);
+            違う.add(RST_2.equals(異動一時2entity.get公費負担上限額減額有フラグ()) ? RST_あり : RST_なし);
             違う項目.add(違う);
         }
 
@@ -725,7 +731,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (異動一時2entity.get給付率() != 受給者異動送付.getKyufuritsu()) {
+        if (!comparaDecimal(異動一時2entity.get給付率(), 受給者異動送付.getKyufuritsu())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(利給付率);
             違う.add(getDecimalRString(受給者異動送付.getKyufuritsu()));
@@ -742,6 +748,10 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
+    }
+
+    private void get違う項目2(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
+            List<List<RString>> 違う項目) {
         if (!comparaRString(異動一時2entity.get適用終了年月日(),
                 受給者異動送付.getTekiyoShuryoYMD())) {
             List<RString> 違う = new ArrayList<>();
@@ -760,18 +770,13 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             違う項目.add(違う);
         }
 
-        if (異動一時2entity.get負担額() != 受給者異動送付.getFutangaku()) {
+        if (!comparaDecimal(異動一時2entity.get負担額(), 受給者異動送付.getFutangaku())) {
             List<RString> 違う = new ArrayList<>();
             違う.add(標準負担額);
             違う.add(getDecimalRString(受給者異動送付.getFutangaku()));
             違う.add(getDecimalRString(異動一時2entity.get負担額()));
             違う項目.add(違う);
         }
-
-    }
-
-    private void get違う項目2(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付,
-            List<List<RString>> 違う項目) {
         if (!comparaRString(異動一時2entity.get負担額適用開始年月日(),
                 受給者異動送付.getFutangakuTekiyoKaishiYMD())) {
             List<RString> 違う = new ArrayList<>();
@@ -889,7 +894,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     }
 
-    private void get違う項目3(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付,
+    private void get違う項目3(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
             List<List<RString>> 違う項目) {
         if (!comparaRString(異動一時2entity.get軽減率(), 受給者異動送付.getKeigenritsu())) {
             List<RString> 違う = new ArrayList<>();
@@ -1042,13 +1047,13 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private void 被保険者番号マッチング() {
         for (HihokenshaNo 被保険者番号 : 被保険者番号List) {
             List<IdoTblTmpEntity> 異動一時2List = 異動一時2Map.get(被保険者番号);
-            List<DbT3001JukyushaIdoRenrakuhyoEntity> 受給者異動送付List = 受給者異動送付Map.get(被保険者番号);
+            List<JukyushaIdoRenrakuhyoTempTBLEntity> 受給者異動送付List = 受給者異動送付Map.get(被保険者番号);
             被保険者番号項目比較(異動一時2List, 受給者異動送付List);
 
         }
     }
 
-    private void 被保険者番号項目比較(List<IdoTblTmpEntity> 異動一時2List, List<DbT3001JukyushaIdoRenrakuhyoEntity> 受給者異動送付List) {
+    private void 被保険者番号項目比較(List<IdoTblTmpEntity> 異動一時2List, List<JukyushaIdoRenrakuhyoTempTBLEntity> 受給者異動送付List) {
         sort異動一時2List(異動一時2List);
         sort受給者異動送付List(受給者異動送付List);
         List<FlexibleYearMonth> 異動年月List = new ArrayList<>();
@@ -1065,13 +1070,13 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             }
             list.add(異動一時2);
         }
-        Map<FlexibleYearMonth, List<DbT3001JukyushaIdoRenrakuhyoEntity>> 異動年月受給者異動送付Map = new HashMap<>();
-        for (DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付 : 受給者異動送付List) {
+        Map<FlexibleYearMonth, List<JukyushaIdoRenrakuhyoTempTBLEntity>> 異動年月受給者異動送付Map = new HashMap<>();
+        for (JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付 : 受給者異動送付List) {
             FlexibleYearMonth 異動年月 = 受給者異動送付.getIdoYMD().getYearMonth();
             if (!異動年月List.contains(異動年月)) {
                 異動年月List.add(異動年月);
             }
-            List<DbT3001JukyushaIdoRenrakuhyoEntity> list = 異動年月受給者異動送付Map.get(異動年月);
+            List<JukyushaIdoRenrakuhyoTempTBLEntity> list = 異動年月受給者異動送付Map.get(異動年月);
             if (list == null) {
                 list = new ArrayList<>();
                 異動年月受給者異動送付Map.put(異動年月, list);
@@ -1081,8 +1086,8 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         for (FlexibleYearMonth 異動年月 : 異動年月List) {
             if (異動年月異動一時Map.containsKey(異動年月) && 異動年月受給者異動送付Map.containsKey(異動年月)) {
                 List<IdoTblTmpEntity> 異動年月異動一時List = 異動年月異動一時Map.get(異動年月);
-                List<DbT3001JukyushaIdoRenrakuhyoEntity> 異動年月受給者異動送付List = 異動年月受給者異動送付Map.get(異動年月);
-                if (異動年月異動一時List.size() < 異動年月受給者異動送付List.size()) {
+                List<JukyushaIdoRenrakuhyoTempTBLEntity> 異動年月受給者異動送付List = 異動年月受給者異動送付Map.get(異動年月);
+                if (異動年月異動一時List.size() <= 異動年月受給者異動送付List.size()) {
                     すべての項目比較(異動年月異動一時List.get(異動年月異動一時List.size() - COUNT_1),
                             異動年月受給者異動送付List.get(異動年月受給者異動送付List.size() - COUNT_1), 異動一時2List);
                 } else {
@@ -1092,25 +1097,28 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
             } else if (異動年月異動一時Map.containsKey(異動年月)) {
                 List<IdoTblTmpEntity> 異動年月異動一時List = 異動年月異動一時Map.get(異動年月);
                 for (IdoTblTmpEntity 異動年月異動一時 : 異動年月異動一時List) {
-                    受給者異動連絡票Entity出力処理(異動年月異動一時, true);
+                    受給者異動連絡票Entity出力処理(異動年月異動一時, null);
                 }
             } else {
-                List<DbT3001JukyushaIdoRenrakuhyoEntity> 異動年月受給者異動送付List = 異動年月受給者異動送付Map.get(異動年月);
-                for (DbT3001JukyushaIdoRenrakuhyoEntity 異動年月受給者異動送付 : 異動年月受給者異動送付List) {
+                List<JukyushaIdoRenrakuhyoTempTBLEntity> 異動年月受給者異動送付List = 異動年月受給者異動送付Map.get(異動年月);
+                for (JukyushaIdoRenrakuhyoTempTBLEntity 異動年月受給者異動送付 : 異動年月受給者異動送付List) {
                     国保連受給者異動情報履歴削除(異動年月受給者異動送付);
                 }
             }
         }
     }
 
-    private void 比較追加(List<IdoTblTmpEntity> 異動一時2List, List<DbT3001JukyushaIdoRenrakuhyoEntity> 受給者異動送付List) {
-        for (int i = 受給者異動送付List.size() - COUNT_1; i < 異動一時2List.size(); i++) {
-            受給者異動連絡票Entity出力処理(異動一時2List.get(i), false);
+    private void 比較追加(List<IdoTblTmpEntity> 異動一時2List, List<JukyushaIdoRenrakuhyoTempTBLEntity> 受給者異動送付List) {
+        for (int i = 受給者異動送付List.size(); i < 異動一時2List.size(); i++) {
+            受給者異動連絡票Entity出力処理(異動一時2List.get(i), 受給者異動送付List.get(受給者異動送付List.size() - COUNT_1));
         }
     }
 
-    private void すべての項目比較(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付,
+    private void すべての項目比較(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
             List<IdoTblTmpEntity> 異動一時2List) {
+        if (エラーあり.equals(異動一時2entity.getエラーフラグ())) {
+            return;
+        }
         RString 異動一時2All項目 = get異動一時2All項目(異動一時2entity, true);
         RString 受給者異動送付All項目 = get受給者異動送付All項目(受給者異動送付, true);
         boolean hasChange = false;
@@ -1137,19 +1145,19 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         資格喪失年月日変更なし(異動一時2entity, 受給者異動送付, 申請中区分コード変更, 異動一時2List);
     }
 
-    private void 資格喪失年月日変更なし(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付,
+    private void 資格喪失年月日変更なし(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
             boolean 申請中区分コード変更, List<IdoTblTmpEntity> 異動一時2List) {
         if (申請中区分コード変更) {
             国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
             return;
         }
-        if (checkRString(異動一時2entity.get要介護状態区分コード(), 受給者異動送付.getMinashiYokaigoJotaiKubunCode())
-                || checkRString(異動一時2entity.get認定有効期間終了年月日(), 受給者異動送付.getNinteiYukoKikanShuryoYMD())) {
+        if (!checkRString(異動一時2entity.get要介護状態区分コード(), 受給者異動送付.getYokaigoJotaiKubunCode())
+                || !checkRString(異動一時2entity.get認定有効期間終了年月日(), 受給者異動送付.getNinteiYukoKikanShuryoYMD())) {
             if (dateChangeCheck(異動一時2entity.get認定有効期間開始年月日(), 受給者異動送付.getNinteiYukoKikankaishiYMD())) {
-                受給者異動連絡票Entity出力処理(異動一時2entity, true);
+                受給者異動連絡票Entity出力処理(異動一時2entity, 受給者異動送付);
                 return;
             }
-            if (checkRString(異動一時2entity.get要介護状態区分コード(), 受給者異動送付.getMinashiYokaigoJotaiKubunCode())) {
+            if (!checkRString(異動一時2entity.get要介護状態区分コード(), 受給者異動送付.getYokaigoJotaiKubunCode())) {
                 国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
                 return;
             }
@@ -1165,43 +1173,42 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         }
         if (checkRString(異動一時2entity.get居宅サービス計画適用開始年月日(), 受給者異動送付.getKyotakuServiceTekiyoKaishiYMD())) {
             if (checkRString(異動一時2entity.get居宅サービス計画作成区分コード(), 受給者異動送付.getKyotakuServiceSakuseiKubunCode())) {
-                受給者異動連絡票Entity出力処理(異動一時2entity, true);
+                受給者異動連絡票Entity出力処理(異動一時2entity, 受給者異動送付);
                 return;
             }
             国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
             return;
         }
-        if (checkRString(異動一時2entity.get適用終了年月日(), 受給者異動送付.getTekiyoShuryoYMD())
-                || checkRString(異動一時2entity.get負担額適用終了年月日(), 受給者異動送付.getFutangakuTekiyoShuryoYMD())
-                || checkRString(異動一時2entity.get負担限度額適用終了年月日(), 受給者異動送付.getFutanGendogakuTekiyoShuryoYMD())
-                || checkRString(異動一時2entity.get軽減率適用終了年月日(), 受給者異動送付.getKeigenritsuTekiyoShuryoYMD())) {
+        if (!checkRString(異動一時2entity.get適用終了年月日(), 受給者異動送付.getTekiyoShuryoYMD())
+                || !checkRString(異動一時2entity.get負担額適用終了年月日(), 受給者異動送付.getFutangakuTekiyoShuryoYMD())
+                || !checkRString(異動一時2entity.get負担限度額適用終了年月日(), 受給者異動送付.getFutanGendogakuTekiyoShuryoYMD())
+                || !checkRString(異動一時2entity.get軽減率適用終了年月日(), 受給者異動送付.getKeigenritsuTekiyoShuryoYMD())) {
             if (部分項目変更2Check(異動一時2entity, 受給者異動送付)) {
                 国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
                 return;
             }
-            受給者異動連絡票Entity出力処理(異動一時2entity, true);
+            受給者異動連絡票Entity出力処理(異動一時2entity, 受給者異動送付);
             return;
         }
         if (!isDateEmpty(異動一時2entity.get資格喪失年月日()) && isDateEmpty(受給者異動送付.getShikakuSoshitsuYMD())) {
-            受給者異動連絡票Entity出力処理(異動一時2entity, true);
+            受給者異動連絡票Entity出力処理(異動一時2entity, 受給者異動送付);
             return;
         }
         国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
     }
 
     private void 認定開始年月日以外(List<IdoTblTmpEntity> 異動一時2List,
-            IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
+            IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
         IdoTblTmpEntity 次履歴 = get次履歴(異動一時2List, 異動一時2entity);
-        if (!((RST_3.equals(異動一時2entity.get変更申請中区分コード()) || is月末ByRString(異動一時2entity.get認定有効期間終了年月日())
+        if (!((RST_3.equals(異動一時2entity.get変更申請中区分コード()) || !is月末ByRString(異動一時2entity.get認定有効期間終了年月日())
                 || 次履歴 == null || RST_3.equals(次履歴.get変更申請中区分コード()))
                 && !RST_06.equals(異動一時2entity.get要介護状態区分コード()))) {
             国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
             return;
         }
-        //TODO QA
-//        if (true) {
-        国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
-//        }
+        if (!get異動一時2All項目1(異動一時2entity).equals(get受給者異動送付All項目1(受給者異動送付))) {
+            国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
+        }
 
     }
 
@@ -1220,17 +1227,17 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         return tempList.get(COUNT_0);
     }
 
-    private boolean 部分項目変更Check(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
+    private boolean 部分項目変更Check(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
         if (!checkRString(異動一時2entity.get居宅サービス計画作成区分コード(), 受給者異動送付.getKyotakuServiceSakuseiKubunCode())
-                && !checkRString(異動一時2entity.get居宅介護支援事業所番号(), 受給者異動送付.getKyotakuKaigoShienJigyoshoNo())
-                && !checkRString(異動一時2entity.get居宅サービス計画適用開始年月日(), 受給者異動送付.getKyotakuServiceTekiyoKaishiYMD())
-                && !checkRString(異動一時2entity.get居宅サービス計画適用終了年月日(), 受給者異動送付.getKyotakuServiceTekiyoShuryoYMD())) {
+                || !checkRString(異動一時2entity.get居宅介護支援事業所番号(), 受給者異動送付.getKyotakuKaigoShienJigyoshoNo())
+                || !checkRString(異動一時2entity.get居宅サービス計画適用開始年月日(), 受給者異動送付.getKyotakuServiceTekiyoKaishiYMD())
+                || !checkRString(異動一時2entity.get居宅サービス計画適用終了年月日(), 受給者異動送付.getKyotakuServiceTekiyoShuryoYMD())) {
             return true;
         }
         return false;
     }
 
-    private boolean 部分項目変更2Check(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
+    private boolean 部分項目変更2Check(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
         if (RString.isNullOrEmpty(異動一時2entity.get適用終了年月日())
                 && !RString.isNullOrEmpty(受給者異動送付.getTekiyoShuryoYMD())) {
             return true;
@@ -1250,7 +1257,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         return false;
     }
 
-    private void 資格喪失年月日変更(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付,
+    private void 資格喪失年月日変更(IdoTblTmpEntity 異動一時2entity, JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付,
             boolean 申請中区分コード変更) {
         if (!isDateEmpty(異動一時2entity.get資格喪失年月日()) && !isDateEmpty(受給者異動送付.getShikakuSoshitsuYMD())) {
             国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
@@ -1261,16 +1268,16 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         }
         国保連受給者異動情報履歴削除(受給者異動送付);
         if (申請中区分コード変更) {
-            受給者異動連絡票Entity出力処理(異動一時2entity, true);
+            受給者異動連絡票Entity出力処理(異動一時2entity, 受給者異動送付);
             return;
         }
-        if (checkRString(異動一時2entity.get要介護状態区分コード(), 受給者異動送付.getMinashiYokaigoJotaiKubunCode())
-                || checkRString(異動一時2entity.get認定有効期間終了年月日(), 受給者異動送付.getNinteiYukoKikanShuryoYMD())) {
+        if (!checkRString(異動一時2entity.get要介護状態区分コード(), 受給者異動送付.getYokaigoJotaiKubunCode())
+                || !checkRString(異動一時2entity.get認定有効期間終了年月日(), 受給者異動送付.getNinteiYukoKikanShuryoYMD())) {
             if (!RST_3.equals(異動一時2entity.get変更申請中区分コード())) {
-                受給者異動連絡票Entity出力処理(異動一時2entity, true);
+                受給者異動連絡票Entity出力処理(異動一時2entity, 受給者異動送付);
             }
         } else {
-            受給者異動連絡票Entity出力処理(異動一時2entity, true);
+            受給者異動連絡票Entity出力処理(異動一時2entity, 受給者異動送付);
         }
     }
 
@@ -1345,7 +1352,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 .append(異動一時2entity.get短期入所サービス支給限度基準額())
                 .append(getYMbyFlexibleDate(異動一時2entity.get短期入所サービス上限管理適用期間開始年月日()))
                 .append(getYMbyFlexibleDate(異動一時2entity.get短期入所サービス上限管理適用期間終了年月日()))
-                .append(異動一時2entity.is公費負担上限額減額有フラグ())
+                .append(RST_2.equals(異動一時2entity.get公費負担上限額減額有フラグ()))
                 .append(異動一時2entity.get償還払化開始年月日())
                 .append(異動一時2entity.get償還払化終了年月日())
                 .append(異動一時2entity.get給付率引下げ開始年月日())
@@ -1388,7 +1395,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         return all項目.toRString();
     }
 
-    private RString get受給者異動送付All項目(DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付, boolean flag) {
+    private RString get受給者異動送付All項目(JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付, boolean flag) {
         RStringBuilder all項目 = new RStringBuilder();
         all項目.append(受給者異動送付.getShoKisaiHokenshaNo())
                 .append(受給者異動送付.getShikakuShutokuYMD())
@@ -1410,7 +1417,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 .append(受給者異動送付.getTankiNyushoServiceShikyuGendoKijungaku())
                 .append(getYMbyFlexibleDate(受給者異動送付.getTankinyushoServiceJogenKanriTekiyoKaishiYMD()))
                 .append(getYMbyFlexibleDate(受給者異動送付.getTankinyushoServiceJogenKanriTekiyoShuryoYMD()))
-                .append(受給者異動送付.getKohiFutanJogenGengakuAriFlag())
+                .append(受給者異動送付.isKohiFutanJogenGengakuAriFlag())
                 .append(受給者異動送付.getShokanbaraikaKaishiYMD())
                 .append(受給者異動送付.getShokanbaraikaShuryoYMD())
                 .append(受給者異動送付.getKyufuritsuHikisageKaishiYMD())
@@ -1461,22 +1468,22 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                     return -1;
                 }
                 if (o2.get異動年月日().isBefore(o1.get異動年月日())) {
-                    return -1;
+                    return 1;
                 }
                 return 0;
             }
         });
     }
 
-    private static void sort受給者異動送付List(List<DbT3001JukyushaIdoRenrakuhyoEntity> 受給者異動送付List) {
-        Collections.sort(受給者異動送付List, new Comparator<DbT3001JukyushaIdoRenrakuhyoEntity>() {
+    private static void sort受給者異動送付List(List<JukyushaIdoRenrakuhyoTempTBLEntity> 受給者異動送付List) {
+        Collections.sort(受給者異動送付List, new Comparator<JukyushaIdoRenrakuhyoTempTBLEntity>() {
             @Override
-            public int compare(DbT3001JukyushaIdoRenrakuhyoEntity o1, DbT3001JukyushaIdoRenrakuhyoEntity o2) {
+            public int compare(JukyushaIdoRenrakuhyoTempTBLEntity o1, JukyushaIdoRenrakuhyoTempTBLEntity o2) {
                 if (o1.getIdoYMD().isBefore(o2.getIdoYMD())) {
                     return -1;
                 }
                 if (o2.getIdoYMD().isBefore(o1.getIdoYMD())) {
-                    return -1;
+                    return 1;
                 }
                 return 0;
             }
@@ -1554,14 +1561,15 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     private JukyushaIdorenrakuhyoSofuCsvEntity get送付対象者リスト(IdoTblTmpEntity 異動一時2entity, RString 変更項目) {
         JukyushaIdorenrakuhyoSofuCsvEntity entity = new JukyushaIdorenrakuhyoSofuCsvEntity();
+        entity.set市町村コード(市町村コード);
+        entity.set市町村名称(市町村名称);
+        entity.set作成年月日(作成年月日);
+        entity.setタイトル(受給者異動連絡票情報送付対象者リスト);
         entity.set被保険者番号(異動一時2entity.get被保険者番号().getColumnValue());
-        entity.set氏名(異動一時2entity.get被保険者氏名カナ());
+        entity.set氏名(異動一時2entity.get被保険者氏名());
         entity.set区分(JukyushaIF_IdoKubunCode.toValue(異動一時2entity.get異動区分コード()).get名称());
         entity.set異動年月日(new RString(異動一時2entity.get異動年月日().toString()));
-        //TODO
-//        entity.set要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(),
-//                異動一時2entity.get要介護状態区分コード()).getName());
-        entity.set要介護度(RString.EMPTY);
+        entity.set要介護度(get要介護度Map().get(異動一時2entity.get要介護状態区分コード()));
         entity.set開始認定日(new RString(異動一時2entity.get認定有効期間開始年月日().toString()));
         entity.set終了認定日(異動一時2entity.get認定有効期間終了年月日());
         entity.set変更項目(変更項目);
@@ -1575,25 +1583,13 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         return new RString(date.toString());
     }
 
-    private JukyushaIdoRenrakuhyoCsvEntity getJukyushaIdoRenrakuhyoCsvEntity(IdoTblTmpEntity 異動一時2entity, boolean 新規Flag) {
+    private JukyushaIdoRenrakuhyoCsvEntity getJukyushaIdoRenrakuhyoCsvEntity(IdoTblTmpEntity 異動一時2entity) {
         JukyushaIdoRenrakuhyoCsvEntity csventity = new JukyushaIdoRenrakuhyoCsvEntity();
         csventity.set被保険者番号(異動一時2entity.get被保険者番号());
-        if (新規Flag) {
-            csventity.set異動年月日(異動一時2entity.get異動年月日());
-        } else {
-            csventity.set異動年月日(異動一時2entity.get異動年月日().plusDay(COUNT_1));
-        }
+        csventity.set異動年月日(異動一時2entity.get異動年月日());
         csventity.set履歴番号(異動一時2entity.get履歴番号());
-        if (!新規Flag && RST_1.equals(異動一時2entity.get異動区分コード())) {
-            csventity.set異動区分(RST_2);
-        } else {
-            csventity.set異動区分(異動一時2entity.get異動区分コード());
-        }
-        if (!新規Flag && RST_01.equals(異動一時2entity.get受給者異動事由())) {
-            csventity.set異動事由(RST_99);
-        } else {
-            csventity.set異動事由(異動一時2entity.get受給者異動事由());
-        }
+        csventity.set異動区分(異動一時2entity.get異動区分コード());
+        csventity.set異動事由(異動一時2entity.get受給者異動事由());
         csventity.set証記載保険者番号(異動一時2entity.get証記載保険者番号());
         csventity.set被保険者氏名カナ(異動一時2entity.get被保険者氏名カナ());
         csventity.set生年月日(異動一時2entity.get生年月日());
@@ -1621,7 +1617,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         csventity.set支給限度基準額2(異動一時2entity.get短期入所サービス支給限度基準額());
         csventity.set上限管理適用開始年月日2(異動一時2entity.get短期入所サービス上限管理適用期間開始年月日());
         csventity.set上限管理適用終了年月日2(異動一時2entity.get短期入所サービス上限管理適用期間終了年月日());
-        csventity.set公費負担上限額減額の有無(異動一時2entity.is公費負担上限額減額有フラグ() ? RST_2 : RST_1);
+        csventity.set公費負担上限額減額の有無(異動一時2entity.get公費負担上限額減額有フラグ());
         csventity.set償還払化適用開始年月日(getFlexibleDateByRString(異動一時2entity.get償還払化開始年月日()));
         csventity.set償還払化適用終了年月日(getFlexibleDateByRString(異動一時2entity.get償還払化終了年月日()));
         csventity.set給付率引下げ適用開始年月日(getFlexibleDateByRString(異動一時2entity.get給付率引下げ開始年月日()));
@@ -1737,6 +1733,45 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         return date1.equals(date2);
     }
 
+    private boolean comparaDecimal(Decimal date1, Decimal date2) {
+        if (date1 == null && date2 == null) {
+            return true;
+        }
+        if (date1 == null) {
+            return false;
+        }
+        if (date2 == null) {
+            return false;
+        }
+        return date1.equals(date2);
+    }
+
+    private boolean comparaYM(FlexibleDate date1, FlexibleDate date2) {
+        if (isDateEmpty(date1) && isDateEmpty(date2)) {
+            return true;
+        }
+        if (isDateEmpty(date1)) {
+            return false;
+        }
+        if (isDateEmpty(date2)) {
+            return false;
+        }
+        return date1.getYearMonth().equals(date2.getYearMonth());
+    }
+
+    private boolean comparaYMByRString(RString date1, RString date2) {
+        if (RString.isNullOrEmpty(date1) && RString.isNullOrEmpty(date2)) {
+            return true;
+        }
+        if (RString.isNullOrEmpty(date1)) {
+            return false;
+        }
+        if (RString.isNullOrEmpty(date2)) {
+            return false;
+        }
+        return (new FlexibleDate(date1).getYearMonth().equals(new FlexibleDate(date2).getYearMonth()));
+    }
+
     private boolean comparaRString(RString date1, RString date2) {
         if (RString.isNullOrEmpty(date1) && RString.isNullOrEmpty(date2)) {
             return true;
@@ -1752,13 +1787,181 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     private RString get異動一時2Key(IdoTblTmpEntity 異動一時2entity) {
         RStringBuilder key = new RStringBuilder();
-        key.append(異動一時2entity.get被保険者番号()).append(異動一時2entity.get異動年月日()).append(異動一時2entity.get履歴番号());
+        key.append(異動一時2entity.get被保険者番号().getColumnValue())
+                .append(異動一時2entity.get異動年月日().toString()).append(異動一時2entity.get履歴番号());
         return key.toRString();
     }
 
-    private RString get受給者異動送付Key(DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
+    private RString get受給者異動送付Key(JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
         RStringBuilder key = new RStringBuilder();
-        key.append(受給者異動送付.getHiHokenshaNo()).append(受給者異動送付.getIdoYMD()).append(受給者異動送付.getRirekiNo());
+        key.append(受給者異動送付.getHiHokenshaNo().getColumnValue())
+                .append(受給者異動送付.getIdoYMD().toString()).append(受給者異動送付.getRirekiNo());
         return key.toRString();
     }
+
+    private Map<RString, RString> get要介護度Map() {
+        Map<RString, RString> 要介護度Map = new HashMap<>();
+        要介護度Map.put(YokaigoJotaiKubun02.非該当.getコード(), YokaigoJotaiKubun02.非該当.get名称());
+        要介護度Map.put(YokaigoJotaiKubun99.みなし非該当.getコード(), YokaigoJotaiKubun99.みなし非該当.get名称());
+        要介護度Map.put(YokaigoJotaiKubun02.要支援.getコード(), YokaigoJotaiKubun02.要支援.get名称());
+        要介護度Map.put(YokaigoJotaiKubun06.要支援1.getコード(), YokaigoJotaiKubun06.要支援1.get名称());
+        要介護度Map.put(YokaigoJotaiKubun06.要支援2.getコード(), YokaigoJotaiKubun06.要支援2.get名称());
+        要介護度Map.put(YokaigoJotaiKubun99.みなし要支援.getコード(), YokaigoJotaiKubun99.みなし要支援.get名称());
+        要介護度Map.put(YokaigoJotaiKubun02.要介護1.getコード(), YokaigoJotaiKubun02.要介護1.get名称());
+        要介護度Map.put(YokaigoJotaiKubun02.要介護2.getコード(), YokaigoJotaiKubun02.要介護2.get名称());
+        要介護度Map.put(YokaigoJotaiKubun02.要介護3.getコード(), YokaigoJotaiKubun02.要介護3.get名称());
+        要介護度Map.put(YokaigoJotaiKubun02.要介護4.getコード(), YokaigoJotaiKubun02.要介護4.get名称());
+        要介護度Map.put(YokaigoJotaiKubun02.要介護5.getコード(), YokaigoJotaiKubun02.要介護5.get名称());
+        要介護度Map.put(YokaigoJotaiKubun02.再調査.getコード(), YokaigoJotaiKubun02.再調査.get名称());
+        要介護度Map.put(YokaigoJotaiKubun99.照会.getコード(), YokaigoJotaiKubun99.照会.get名称());
+        要介護度Map.put(YokaigoJotaiKubun99.保留.getコード(), YokaigoJotaiKubun99.保留.get名称());
+        要介護度Map.put(YokaigoJotaiKubun02.取消.getコード(), YokaigoJotaiKubun02.取消.get名称());
+        要介護度Map.put(YokaigoJotaiKubun02.なし.getコード(), YokaigoJotaiKubun02.なし.get名称());
+        return 要介護度Map;
+    }
+
+    private RString get異動一時2All項目1(IdoTblTmpEntity 異動一時2entity) {
+        RStringBuilder all項目 = new RStringBuilder();
+        all項目.append(異動一時2entity.get証記載保険者番号())
+                .append(異動一時2entity.get資格取得年月日())
+                .append(異動一時2entity.get資格喪失年月日())
+                .append(異動一時2entity.getみなし要介護状態区分コード())
+                .append(異動一時2entity.get認定有効期間開始年月日())
+                .append(異動一時2entity.get居宅サービス計画作成区分コード())
+                .append(異動一時2entity.get居宅介護支援事業所番号())
+                .append(異動一時2entity.get居宅サービス計画適用開始年月日())
+                .append(getYMbyRString(異動一時2entity.get居宅サービス計画適用終了年月日()))
+                .append(getYMbyFlexibleDate(異動一時2entity.get訪問通所サービス上限管理適用期間開始年月日()))
+                .append(getYMbyFlexibleDate(異動一時2entity.get短期入所サービス上限管理適用期間開始年月日()))
+                .append(RST_2.equals(異動一時2entity.get公費負担上限額減額有フラグ()))
+                .append(異動一時2entity.get償還払化開始年月日())
+                .append(異動一時2entity.get償還払化終了年月日())
+                .append(異動一時2entity.get給付率引下げ開始年月日())
+                .append(異動一時2entity.get給付率引下げ終了年月日())
+                .append(異動一時2entity.get利用者負担区分コード())
+                .append(異動一時2entity.get給付率() == null ? RString.EMPTY : 異動一時2entity.get給付率())
+                .append(異動一時2entity.get適用開始年月日())
+                .append(異動一時2entity.get適用終了年月日())
+                .append(異動一時2entity.get標準負担区分コード())
+                .append(異動一時2entity.get負担額() == null ? RString.EMPTY : 異動一時2entity.get負担額())
+                .append(異動一時2entity.get負担額適用開始年月日())
+                .append(異動一時2entity.get負担額適用終了年月日())
+                .append(異動一時2entity.get特定入所者介護サービス区分コード())
+                .append(異動一時2entity.get課税層の特例減額措置対象フラグ())
+                .append(異動一時2entity.get食費負担限度額())
+                .append(異動一時2entity.get居住費ユニット型個室負担限度額())
+                .append(異動一時2entity.get居住費ユニット型準個室負担限度額())
+                .append(異動一時2entity.get居住費従来型個室特養等負担限度額())
+                .append(異動一時2entity.get居住費従来型個室老健療養等負担限度額())
+                .append(異動一時2entity.get居住費多床室負担限度額())
+                .append(異動一時2entity.get負担限度額適用開始年月日())
+                .append(異動一時2entity.get負担限度額適用終了年月日())
+                .append(異動一時2entity.get軽減率())
+                .append(異動一時2entity.get軽減率適用開始年月日())
+                .append(異動一時2entity.get軽減率適用終了年月日())
+                .append(異動一時2entity.get二次予防事業区分コード())
+                .append(異動一時2entity.get二次予防事業有効期間開始年月日())
+                .append(異動一時2entity.get二次予防事業有効期間終了年月日())
+                .append(異動一時2entity.get住所地特例対象者区分コード())
+                .append(異動一時2entity.get施設所在保険者番号())
+                .append(異動一時2entity.get住所地特例適用開始日())
+                .append(異動一時2entity.get住所地特例適用終了日())
+                .append(異動一時2entity.get利用者負担割合有効開始日())
+                .append(異動一時2entity.get利用者負担割合有効終了日())
+                .append(異動一時2entity.get後期高齢者医療保険者番号())
+                .append(異動一時2entity.get後期高齢者医療被保険者番号())
+                .append(異動一時2entity.get国民健康保険保険者番号())
+                .append(異動一時2entity.get国民健康保険被保険者証番号())
+                .append(異動一時2entity.get国民健康保険個人番号());
+        return all項目.toRString();
+    }
+
+    private RString get受給者異動送付All項目1(JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
+        RStringBuilder all項目 = new RStringBuilder();
+        all項目.append(受給者異動送付.getShoKisaiHokenshaNo())
+                .append(受給者異動送付.getShikakuShutokuYMD())
+                .append(受給者異動送付.getShikakuSoshitsuYMD())
+                .append(受給者異動送付.getMinashiYokaigoJotaiKubunCode())
+                .append(受給者異動送付.getNinteiYukoKikankaishiYMD())
+                .append(受給者異動送付.getKyotakuServiceSakuseiKubunCode())
+                .append(受給者異動送付.getKyotakuKaigoShienJigyoshoNo())
+                .append(受給者異動送付.getKyotakuServiceTekiyoKaishiYMD())
+                .append(getYMbyRString(受給者異動送付.getKyotakuServiceTekiyoShuryoYMD()))
+                .append(getYMbyFlexibleDate(受給者異動送付.getHomonTsushoServiceJogenKanriTekiyoKaishiYMD()))
+                .append(getYMbyFlexibleDate(受給者異動送付.getTankinyushoServiceJogenKanriTekiyoKaishiYMD()))
+                .append(受給者異動送付.isKohiFutanJogenGengakuAriFlag())
+                .append(受給者異動送付.getShokanbaraikaKaishiYMD())
+                .append(受給者異動送付.getShokanbaraikaShuryoYMD())
+                .append(受給者異動送付.getKyufuritsuHikisageKaishiYMD())
+                .append(受給者異動送付.getKyufuritsuHikisageShuryoYMD())
+                .append(受給者異動送付.getRiyoshaFutanKubunCode())
+                .append(受給者異動送付.getKyufuritsu() == null ? RString.EMPTY : 受給者異動送付.getKyufuritsu())
+                .append(受給者異動送付.getTekiyoKaishiYMD())
+                .append(受給者異動送付.getTekiyoShuryoYMD())
+                .append(受給者異動送付.getHyojunFutanKubunCode())
+                .append(受給者異動送付.getFutangaku() == null ? RString.EMPTY : 受給者異動送付.getFutangaku())
+                .append(受給者異動送付.getFutangakuTekiyoKaishiYMD())
+                .append(受給者異動送付.getFutangakuTekiyoShuryoYMD())
+                .append(受給者異動送付.getTokuteiNyushoshaNinteiShinseichuKubunCode())
+                .append(受給者異動送付.getKaizeisoTokureiGengakuSochiTaishoFlag())
+                .append(受給者異動送付.getShokuhiFutanGendogaku())
+                .append(受給者異動送付.getKyojuhiUnitGataKoshitsuFutanGendogaku())
+                .append(受給者異動送付.getKyojuhiUnitGataJunKoshitsuFutanGendogaku())
+                .append(受給者異動送付.getKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku())
+                .append(受給者異動送付.getKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku())
+                .append(受給者異動送付.getKyujuhiTashoshitsuFutanGendogaku())
+                .append(受給者異動送付.getFutanGendogakuTekiyoKaishiYMD())
+                .append(受給者異動送付.getFutanGendogakuTekiyoShuryoYMD())
+                .append(受給者異動送付.getKeigenritsu())
+                .append(受給者異動送付.getKeigenritsuTekiyoKaishiYMD())
+                .append(受給者異動送付.getKeigenritsuTekiyoShuryoYMD())
+                .append(受給者異動送付.getNijiyoboJigyoKubunCode())
+                .append(受給者異動送付.getNijiyoboJigyoYukoKikanKaishiYMD())
+                .append(受給者異動送付.getNijiyoboJigyoYukoKikanShuryoYMD())
+                .append(受給者異動送付.getJushochiTokureiTaishoshaKubunCode())
+                .append(受給者異動送付.getShisetsuShozaiHokenjaNo())
+                .append(受給者異動送付.getJushochiTokureiTekiyoKaishiYMD())
+                .append(受給者異動送付.getJushochiTokureiTekiyoShuryoYMD())
+                .append(受給者異動送付.getRiyosyaFutanWariaiYukoKaishiYMD())
+                .append(受給者異動送付.getRiyosyaFutanWariaiYukoShuryoYMD())
+                .append(受給者異動送付.getKokiKoureiIryoHokenshaNo())
+                .append(受給者異動送付.getKokikoureiIryoHiHokenshaNo())
+                .append(受給者異動送付.getKokuhoHokenshaNo())
+                .append(受給者異動送付.getKokuhoHiHokenshaNo())
+                .append(受給者異動送付.getKokuhoKojinNo());
+        return all項目.toRString();
+    }
+
+    private CsvWriter getDBC200074CsvWriter() {
+        if (this.csvWriter_DBC200074 == null) {
+            spoolManager_DBC200074 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200074,
+                    UzUDE0831EucAccesslogFileType.Csv);
+            eucFilePath_DBC200074 = Path.combinePath(spoolManager_DBC200074.getEucOutputDirectry(),
+                    CSV_FILENAME);
+            csvWriter_DBC200074 = new CsvWriter.InstanceBuilder(eucFilePath_DBC200074).setNewLine(NewLine.CRLF)
+                    .setDelimiter(EUC_WRITER_DELIMITER)
+                    .setEnclosure(EUC_WRITER_ENCLOSURE)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .hasHeader(true)
+                    .build();
+        }
+        return this.csvWriter_DBC200074;
+    }
+
+    private CsvWriter getDBC200010CsvWriter() {
+        if (this.csvWriter_DBC200010 == null) {
+            spoolManager_DBC200010 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_DBC200010,
+                    UzUDE0831EucAccesslogFileType.Csv);
+            eucFilePath_DBC200010 = Path.combinePath(spoolManager_DBC200010.getEucOutputDirectry(),
+                    CSV_FILENAME_DBC200010);
+            csvWriter_DBC200010 = new CsvWriter.InstanceBuilder(eucFilePath_DBC200010).setNewLine(NewLine.CRLF)
+                    .setDelimiter(EUC_WRITER_DELIMITER)
+                    .setEnclosure(EUC_WRITER_ENCLOSURE)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .hasHeader(true)
+                    .build();
+        }
+        return this.csvWriter_DBC200010;
+    }
+
 }

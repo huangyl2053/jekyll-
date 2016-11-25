@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.jimutokkitext.JimuTokkiTe
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 特記事項A3版のインターフェースクラスです。,
+ * 事務局用一次判定+特記事項A3版のインターフェースクラスです。,
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-320 lishengli
  */
 public interface IJimuTokkiTextA3Editor extends IReportEditor<JimuTokkiTextA3ReportSource> {
 

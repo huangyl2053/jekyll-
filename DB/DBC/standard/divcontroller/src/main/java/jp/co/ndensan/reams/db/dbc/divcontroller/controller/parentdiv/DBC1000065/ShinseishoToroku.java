@@ -15,8 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -58,7 +56,7 @@ public class ShinseishoToroku {
      * @return ResponseData<DBZ0200001Div>
      */
     public ResponseData<ShinseishoTorokuDiv> onClick_Search(ShinseishoTorokuDiv div) {
-
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getTxtHihokenshaNo().getValue());
         return ResponseData.of(div).forwardWithEventName(DBC1000065TransitionEventName.対象者検索).respond();
     }
 
@@ -114,9 +112,9 @@ public class ShinseishoToroku {
                 return ResponseData.of(div).addValidationMessages(valid2).respond();
             }
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())
+                || ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())) {
             getHandler(div).年次処理が実行済みか確認();
-            return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
     }

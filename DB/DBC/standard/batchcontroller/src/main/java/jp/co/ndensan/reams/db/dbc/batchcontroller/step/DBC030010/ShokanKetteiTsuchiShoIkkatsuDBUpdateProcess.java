@@ -15,6 +15,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -40,7 +43,7 @@ public class ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess extends BatchProcessBas
     private static final RString 抽出モード_受付日 = new RString("1");
     private static final RString 抽出モード_決定日 = new RString("2");
     private static final RString 更新する = new RString("2");
-    private static final RString 初期連番 = new RString("0000");
+    private static final RString 初期連番 = new RString("0001");
     private static final RString 初期年度 = new RString("0000");
     private static final int MAXLENGTH = 4;
     private static final RString ZERO = new RString("0");
@@ -84,7 +87,9 @@ public class ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess extends BatchProcessBas
 
     @Override
     protected void afterExecute() {
-        LasdecCode 市町村コード = new LasdecCode(new RString("000000"));
+        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+        Association association = finder.getAssociation();
+        LasdecCode 市町村コード = association.get地方公共団体コード();
         FlexibleYear 年度 = new FlexibleYear(初期年度);
         RString 処理枝番 = 初期連番;
         RString 処理名;

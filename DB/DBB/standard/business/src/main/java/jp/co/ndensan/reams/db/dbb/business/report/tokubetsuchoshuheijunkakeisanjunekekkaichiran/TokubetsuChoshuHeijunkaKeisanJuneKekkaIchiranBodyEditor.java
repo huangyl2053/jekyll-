@@ -1,11 +1,10 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran;
 
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishogaiEntity;
@@ -47,20 +46,23 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     private final Association association;
     private static final Code DATA_3 = new Code("0003");
     private static final RString 被保険者番号_1 = new RString("被保険者番号");
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
 
     protected TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(
             TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表,
-            TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表, Association association) {
+            TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表,
+            Association association,
+            ChohyoSeigyoKyotsu 帳票制御共通) {
         this.特徴平準化結果対象者一覧表 = 特徴平準化結果対象者一覧表;
         this.特徴平準化結果対象外一覧表 = 特徴平準化結果対象外一覧表;
         this.association = association;
+        this.帳票制御共通 = 帳票制御共通;
     }
 
     @Override
     public TokuChoHeijunkaKeisanJuneKekkaIchiranSource edit(TokuChoHeijunkaKeisanJuneKekkaIchiranSource source) {
         source.hokenshaNo = association.get地方公共団体コード().value();
         source.hokenshaName = association.get市町村名();
-        ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId());
         if (特徴平準化結果対象者一覧表 != null) {
             対象者項目編集(特徴平準化結果対象者一覧表, source, 帳票制御共通, association);
         }

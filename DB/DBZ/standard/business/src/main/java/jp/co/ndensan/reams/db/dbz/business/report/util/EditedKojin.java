@@ -62,6 +62,15 @@ public class EditedKojin {
      *
      * @return 生年月日
      */
+    public RString get年月日() {
+        return new RString(個人.get生年月日().toFlexibleDate().toString());
+    }
+
+    /**
+     * 生年月日を返します。
+     *
+     * @return 生年月日
+     */
     public RString get生年月日() {
         if (個人.is日本人()) {
             return 個人.get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI)
@@ -152,6 +161,15 @@ public class EditedKojin {
     }
 
     /**
+     * 性別コードを返します。
+     *
+     * @return 性別コード
+     */
+    public RString get性別コード() {
+        return 個人.get性別().getCode();
+    }
+
+    /**
      * 識別コードを返します。
      *
      * @return 識別コード
@@ -230,5 +248,14 @@ public class EditedKojin {
      */
     public AtenaBanchi get番地() {
         return 個人.get住所().get番地().getBanchi();
+    }
+
+    /**
+     * 氏名５０音カナを返します。
+     *
+     * @return 氏名５０音カナ
+     */
+    public RString get氏名５０音カナ() {
+        return 個人.get名称().getKana().getColumnValue();
     }
 }

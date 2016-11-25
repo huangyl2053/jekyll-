@@ -51,12 +51,10 @@ public class KaigoHihokenshaInfoValidationHandler {
         return new ValidationDictionaryBuilder()
                 .add(KaigoHihokenshaInfoValidationMessage.連帯納付義務者が選択されていない)
                 .add(KaigoHihokenshaInfoValidationMessage.初期状態からの変更有無)
-                .add(KaigoHihokenshaInfoValidationMessage.開始日と終了日の前後順)
                 .add(KaigoHihokenshaInfoValidationMessage.開始日未入力)
+                .add(KaigoHihokenshaInfoValidationMessage.開始日と終了日の前後順)
                 .add(KaigoHihokenshaInfoValidationMessage.同一日における複数連帯納付義務者登録)
                 .add(KaigoHihokenshaInfoValidationMessage.前履歴より前の期間指定)
-                .add(KaigoHihokenshaInfoValidationMessage.同一世帯コード)
-                .add(KaigoHihokenshaInfoValidationMessage.連帯納付義務者の住民種別)
                 .build();
     }
 
@@ -85,10 +83,14 @@ public class KaigoHihokenshaInfoValidationHandler {
                     .thenAdd(KaigoHihokenshaInfoValidationMessage.連帯納付義務者が選択されていない)
                     .ifNot(KaigoHihokenshaInfoSpec.初期状態からの変更有無)
                     .thenAdd(KaigoHihokenshaInfoValidationMessage.初期状態からの変更有無)
-                    .ifNot(KaigoHihokenshaInfoSpec.開始日と終了日の前後順)
-                    .thenAdd(KaigoHihokenshaInfoValidationMessage.開始日と終了日の前後順)
                     .ifNot(KaigoHihokenshaInfoSpec.開始日未入力)
                     .thenAdd(KaigoHihokenshaInfoValidationMessage.開始日未入力)
+                    .ifNot(KaigoHihokenshaInfoSpec.開始日と終了日の前後順)
+                    .thenAdd(KaigoHihokenshaInfoValidationMessage.開始日と終了日の前後順)
+                    .ifNot(KaigoHihokenshaInfoSpec.同一日における複数連帯納付義務者登録)
+                    .thenAdd(KaigoHihokenshaInfoValidationMessage.同一日における複数連帯納付義務者登録)
+                    .ifNot(KaigoHihokenshaInfoSpec.前履歴より前の期間指定)
+                    .thenAdd(KaigoHihokenshaInfoValidationMessage.前履歴より前の期間指定)
                     .messages());
             return messages;
         }
@@ -102,9 +104,7 @@ public class KaigoHihokenshaInfoValidationHandler {
         開始日未入力(UrErrorMessages.必須, "開始日"),
         開始日と終了日の前後順(UrErrorMessages.終了日が開始日以前),
         同一日における複数連帯納付義務者登録(ErrorMessages.同一日における複数連帯納付義務者登録),
-        前履歴より前の期間指定(ErrorMessages.前履歴より前の期間指定),
-        同一世帯コード(ErrorMessages.同一世帯コード),
-        連帯納付義務者の住民種別(ErrorMessages.連帯納付義務者の住民種別);
+        前履歴より前の期間指定(ErrorMessages.前履歴より前の期間指定);
 
         private final Message message;
 
@@ -121,9 +121,7 @@ public class KaigoHihokenshaInfoValidationHandler {
     private static enum ErrorMessages implements IMessageGettable {
 
         同一日における複数連帯納付義務者登録(1, "既に登録されている連帯納付義務者と期間を重複しての登録はできません。"),
-        前履歴より前の期間指定(2, "既に登録されている連帯納付義務者の期間より以前の期間は登録できません"),
-        同一世帯コード(3, "対象者は被保険者と世帯コードが異なります。よろしいですか？"),
-        連帯納付義務者の住民種別(4, "対象者は住民ではありません。よろしいですか？");
+        前履歴より前の期間指定(2, "既に登録されている連帯納付義務者の期間より以前の期間は登録できません");
         private final Message message;
 
         /**
@@ -141,4 +139,5 @@ public class KaigoHihokenshaInfoValidationHandler {
             return this.message;
         }
     }
+
 }

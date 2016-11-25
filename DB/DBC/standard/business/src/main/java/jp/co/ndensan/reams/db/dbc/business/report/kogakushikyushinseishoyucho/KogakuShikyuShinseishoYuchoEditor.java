@@ -71,11 +71,10 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
         source.hihokenshaName = getColumnValue(帳票出力対象データ.getMeishoChohyo());
         source.birthYMD = doパターン12(帳票出力対象データ.getSeinengappiYMDChohyo());
         source.seibetsu = Seibetsu.toValue(帳票出力対象データ.getSeibetsuCodeChohyo()).get名称();
-        source.hihokenJusho = getColumnValue(帳票出力対象データ.getJushoChohyo());
+        source.hihokenJusho = 帳票出力対象データ.getEditJusho();
         source.telNo = getColumnValue(帳票出力対象データ.getTelNoChohyo());
         source.hokenshaNo = getColumnValue(帳票出力対象データ.getShoKisaiHokenshaNoChohyo());
         source.hihokenshaNo = getColumnValue(帳票出力対象データ.getHihokenshaNoChohyo());
-        source.kojinNo = getColumnValue(帳票出力対象データ.getKojinNoChohyo());
         source.ninshoshaYakushokuMei = 認証者役職名;
         source.chuiTitle = 文字_注意;
         source.chuibun = 注意文;
@@ -99,7 +98,7 @@ public class KogakuShikyuShinseishoYuchoEditor implements IKogakuShikyuShinseish
             }
         }
         source.remban = 連番;
-        if (帳票出力対象データ != null && 帳票出力対象データ.getShikibetsuCodeChohyo() != null) {
+        if (帳票出力対象データ.getShikibetsuCodeChohyo() != null) {
             source.識別コード = 帳票出力対象データ.getShikibetsuCodeChohyo();
         } else {
             source.識別コード = ShikibetsuCode.EMPTY;

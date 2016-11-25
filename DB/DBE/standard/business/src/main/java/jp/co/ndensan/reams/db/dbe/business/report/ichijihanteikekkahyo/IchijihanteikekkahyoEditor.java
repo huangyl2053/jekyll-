@@ -142,7 +142,48 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         source.jotainoanteisei = item.get状態の安定性();
         source.kyufukubun = item.get給付区分();
         source.sabisuName = item.get現在のサービス利用状況名();
-        source.sabisuText = item.get現在のサービス状況();
+        source.sabisuName1 = item.getサービス名称1();
+        source.sabisuName2 = item.getサービス名称2();
+        source.sabisuName3 = item.getサービス名称3();
+        source.sabisuName4 = item.getサービス名称4();
+        source.sabisuName5 = item.getサービス名称5();
+        source.sabisuName6 = item.getサービス名称6();
+        source.sabisuName7 = item.getサービス名称7();
+        source.sabisuName8 = item.getサービス名称8();
+        source.sabisuName9 = item.getサービス名称9();
+        source.sabisuName10 = item.getサービス名称10();
+        source.sabisuName11 = item.getサービス名称11();
+        source.sabisuName12 = item.getサービス名称12();
+        source.sabisuName13 = item.getサービス名称13();
+        source.sabisuName14 = item.getサービス名称14();
+        source.sabisuName15 = item.getサービス名称15();
+        source.sabisuName16 = item.getサービス名称16();
+        source.sabisuName17 = item.getサービス名称17();
+        source.sabisuName18 = item.getサービス名称18();
+        source.sabisuName19 = item.getサービス名称19();
+        source.sabisuName20 = item.getサービス名称20();
+        source.sabisuName21 = item.getサービス名称21();
+        source.sabisuKaisu1 = item.getサービス回数1();
+        source.sabisuKaisu2 = item.getサービス回数2();
+        source.sabisuKaisu3 = item.getサービス回数3();
+        source.sabisuKaisu4 = item.getサービス回数4();
+        source.sabisuKaisu5 = item.getサービス回数5();
+        source.sabisuKaisu6 = item.getサービス回数6();
+        source.sabisuKaisu7 = item.getサービス回数7();
+        source.sabisuKaisu8 = item.getサービス回数8();
+        source.sabisuKaisu9 = item.getサービス回数9();
+        source.sabisuKaisu10 = item.getサービス回数10();
+        source.sabisuKaisu11 = item.getサービス回数11();
+        source.sabisuKaisu12 = item.getサービス回数12();
+        source.sabisuKaisu13 = item.getサービス回数13();
+        source.sabisuKaisu14 = item.getサービス回数14();
+        source.sabisuKaisu15 = item.getサービス回数15();
+        source.sabisuKaisu16 = item.getサービス回数16();
+        source.sabisuKaisu17 = item.getサービス回数17();
+        source.sabisuKaisu18 = item.getサービス回数18();
+        source.sabisuKaisu19 = item.getサービス回数19();
+        source.sabisuKaisu20 = item.getサービス回数20();
+        source.sabisuKaisu21 = item.getサービス回数21();
         editSource1(source);
         editSource2(source);
         editSource3(source);
@@ -219,44 +260,44 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
             source.listshujiiikensho_4 = item.get主治医意見書項目4リスト().get(index);
         }
         if (index < item.get身体機能_起居動作リスト().size()) {
-            source.listtokki1_1 = item.get身体機能_起居動作リスト().get(index);
+            source.listTokki1_1 = item.get身体機能_起居動作リスト().get(index);
         }
         if (index < item.get生活機能リスト().size()) {
-            source.listtokki2_1 = item.get生活機能リスト().get(index);
+            source.listTokki2_1 = item.get生活機能リスト().get(index);
         }
         if (index < item.get認知機能リスト().size()) {
-            source.listtokki3_1 = item.get認知機能リスト().get(index);
+            source.listTokki3_1 = item.get認知機能リスト().get(index);
         }
         if (index < item.get精神_行動障害リスト().size()) {
-            source.listtokki4_1 = item.get精神_行動障害リスト().get(index);
+            source.listTokki4_1 = item.get精神_行動障害リスト().get(index);
         }
         if (index < item.get社会生活への適応リスト().size()) {
-            source.listtokki5_1 = item.get社会生活への適応リスト().get(index);
+            source.listTokki5_1 = item.get社会生活への適応リスト().get(index);
         }
         if (index < item.get特別な医療1リスト().size()) {
-            source.listtokki6_1 = item.get特別な医療1リスト().get(index);
+            source.listTokki6_1 = item.get特別な医療1リスト().get(index);
         }
         if (index < item.get特別な医療2リスト().size()) {
-            source.listtokki7_1 = item.get特別な医療2リスト().get(index);
+            source.listTokki7_1 = item.get特別な医療2リスト().get(index);
         }
         if (index < item.get日常生活自立度リスト().size()) {
-            source.listtokki8_1 = item.get日常生活自立度リスト().get(index);
+            source.listTokki8_1 = item.get日常生活自立度リスト().get(index);
         }
         if (index < item.get特別な医療3_1リスト().size()) {
-            source.listtokubetsunaIryo1_1 = item.get特別な医療3_1リスト().get(index);
+            source.listTokubetsunaIryo1_1 = item.get特別な医療3_1リスト().get(index);
         }
         if (index < item.get特別な医療3_2リスト().size()) {
-            source.listtokubetsunaIryo1_2 = item.get特別な医療3_2リスト().get(index);
+            source.listTokubetsunaIryo1_2 = item.get特別な医療3_2リスト().get(index);
         }
 
     }
 
     private void editSource3(IchijihanteikekkahyoReportSource source) {
         if (index < item.get特別な医療4_1リスト().size()) {
-            source.listtokubetsunaIryo2_1 = item.get特別な医療4_1リスト().get(index);
+            source.listTokubetsunaIryo2_1 = item.get特別な医療4_1リスト().get(index);
         }
         if (index < item.get特別な医療4_2リスト().size()) {
-            source.listtokubetsunaIryo2_2 = item.get特別な医療4_2リスト().get(index);
+            source.listTokubetsunaIryo2_2 = item.get特別な医療4_2リスト().get(index);
         }
         if (index < item.get精神_行動障害1リスト().size()) {
             source.listYongun_1 = item.get精神_行動障害1リスト().get(index);
@@ -274,8 +315,8 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
 
     private RString dateformat(RString date) {
         if (!RString.isNullOrEmpty(date)) {
-            return new FlexibleDate(date).wareki().eraType(EraType.ALPHABET)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+            return new FlexibleDate(date).wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         } else {
             return RString.EMPTY;
         }

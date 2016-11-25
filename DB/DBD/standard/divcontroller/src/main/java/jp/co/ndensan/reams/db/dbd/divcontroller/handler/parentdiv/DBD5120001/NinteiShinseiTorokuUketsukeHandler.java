@@ -200,6 +200,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         NinteiShinseiTorokuUketsukeManager manager = NinteiShinseiTorokuUketsukeManager.createInstance();
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        key.set識別コード(識別コード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         NinteiShinseiTorokuUketsukeParameter param;
         NinteiShinseiTorokuUketsukeBusiness result;
@@ -596,6 +597,11 @@ public class NinteiShinseiTorokuUketsukeHandler {
             div.getCcdShinseiTodokedesha().getCcdChoikiInput().setDisplayNoneMode(ChoikiInputDiv.DisplayNoneSetMode.使用しない);
             div.getCcdShinseiTodokedesha().getTxtYubinNo().setDisplayNone(true);
         }
+        div.getCcdKaigoNinteiShikakuInfo().getTxtHookenshaCode().setDisplayNone(true);
+        div.getCcdKaigoNinteiShikakuInfo().getTxtHokensha().setDisplayNone(true);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getServiceSakujo().setDisplayNone(true);
+        div.getCcdShujiiIryokikanAndShujiiInput().getTxtIryoKikanCode().setDisabled(true);
+        div.getCcdShujiiIryokikanAndShujiiInput().getTxtShujiiCode().setDisabled(true);
     }
     
     public boolean getShinseiDataUmu() {
@@ -785,7 +791,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnRenrakusaki().setDisabled(false);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(false);
         div.getBtnShichosonRenrakuJiko().setDisabled(false);
-        div.getBtnChosaJokyo().setDisabled(false);
+        div.getBtnChosaJokyo().setDisabled(true);
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShinseiShuseiMode.toString()));
@@ -814,7 +820,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnRenrakusaki().setDisabled(false);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(false);
         div.getBtnShichosonRenrakuJiko().setDisabled(false);
-        div.getBtnChosaJokyo().setDisabled(false);
+        div.getBtnChosaJokyo().setDisabled(true);
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
@@ -899,7 +905,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnRenrakusaki().setDisabled(false);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(true);
         div.getBtnShichosonRenrakuJiko().setDisabled(false);
-        div.getBtnChosaJokyo().setDisabled(false);
+        div.getBtnChosaJokyo().setDisabled(true);
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
@@ -984,7 +990,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnRenrakusaki().setDisabled(false);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(true);
         div.getBtnShichosonRenrakuJiko().setDisabled(false);
-        div.getBtnChosaJokyo().setDisabled(false);
+        div.getBtnChosaJokyo().setDisabled(true);
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
@@ -1038,7 +1044,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnRenrakusaki().setDisabled(false);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(false);
         div.getBtnShichosonRenrakuJiko().setDisabled(false);
-        div.getBtnChosaJokyo().setDisabled(false);
+        div.getBtnChosaJokyo().setDisabled(true);
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.TokushuTsuikaMode.toString()));
@@ -1065,7 +1071,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnRenrakusaki().setDisabled(false);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(false);
         div.getBtnShichosonRenrakuJiko().setDisabled(false);
-        div.getBtnChosaJokyo().setDisabled(false);
+        div.getBtnChosaJokyo().setDisabled(true);
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.TokushuShuseiMode.toString()));
@@ -1092,7 +1098,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnRenrakusaki().setDisabled(false);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(true);
         div.getBtnShichosonRenrakuJiko().setDisabled(false);
-        div.getBtnChosaJokyo().setDisabled(false);
+        div.getBtnChosaJokyo().setDisabled(true);
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
@@ -1119,7 +1125,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnRenrakusaki().setDisabled(false);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(false);
         div.getBtnShichosonRenrakuJiko().setDisabled(false);
-        div.getBtnChosaJokyo().setDisabled(false);
+        div.getBtnChosaJokyo().setDisabled(true);
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
@@ -1146,7 +1152,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnRenrakusaki().setDisabled(false);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(false);
         div.getBtnShichosonRenrakuJiko().setDisabled(false);
-        div.getBtnChosaJokyo().setDisabled(false);
+        div.getBtnChosaJokyo().setDisabled(true);
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokkenKisaiMode.toString()));
@@ -1173,7 +1179,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.getBtnRenrakusaki().setDisabled(false);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(false);
         div.getBtnShichosonRenrakuJiko().setDisabled(false);
-        div.getBtnChosaJokyo().setDisabled(false);
+        div.getBtnChosaJokyo().setDisabled(true);
         div.getBtnTainoJokyo().setDisabled(false);
         div.getCcdKaigoNinteiShinseiKihon().setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));

@@ -456,6 +456,11 @@ public class ShikyugakuKeisanKekkaToroku {
      */
     public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onClick_btnUchiwakeKakutei(ShikyugakuKeisanKekkaTorokuDiv div) {
         ShikyugakuKeisanKekkaTorokuValidationHandler validationhandler = getValidationHandler(div);
+        ValidationMessageControlPairs pairs = validationhandler.validate入力チェック();
+        if (pairs.iterator().hasNext()) {
+            div.getTabMeisai().setSelectedItem(div.getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake());
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         ValidationMessageControlPairs 確定Pairs = validationhandler.validate内訳を確定する();
         if (確定Pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(確定Pairs).respond();
@@ -470,6 +475,9 @@ public class ShikyugakuKeisanKekkaToroku {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細状態, RString.class);
         if (削除.equals(状態)) {
             支給額計算結果 = 支給額計算結果.createBuilderForEdit().delete高額合算支給額計算結果明細(支給額計算結果明細).build();
+        } else if (追加.equals(状態)) {
+            KogakuGassanShikyuShinseiTorokuManager manager = KogakuGassanShikyuShinseiTorokuManager.createInstance();
+            支給額計算結果 = manager.get高額合算支給額計算結果追加情報(支給額計算結果明細, 支給額計算結果);
         } else {
             支給額計算結果 = 支給額計算結果.createBuilderForEdit().set高額合算支給額計算結果明細(支給額計算結果明細).build();
         }
@@ -562,6 +570,11 @@ public class ShikyugakuKeisanKekkaToroku {
         if (内訳入力途中Pairs.iterator().hasNext()) {
             div.getTabMeisai().setSelectedItem(div.getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake());
             return ResponseData.of(div).addValidationMessages(内訳入力途中Pairs).respond();
+        }
+        ValidationMessageControlPairs pairs = validationhandler.validate支給額計算結果入力チェック();
+        if (pairs.iterator().hasNext()) {
+            div.getTabMeisai().setSelectedItem(div.getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake());
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果状態, RString.class);
         if (追加.equals(状態) || 修正.equals(状態)) {

@@ -36,6 +36,7 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
     private static final RString BUTTON_NAME = new RString("btnJikkou");
     private static final int NUM_ONE = 1;
     private static final int NUM_SEVEN = 7;
+    private static final RString 処理区分_過年度 = new RString("3");
 
     /**
      * コンストラクタです。
@@ -132,6 +133,8 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
         parameter.set年度終了年月日(new FlexibleDate(年月日));
         parameter.set抽出終了日時(抽出終了日時);
         parameter.set抽出開始日時(抽出開始日時);
+        parameter.set処理区分(処理区分_過年度);
+        parameter.setテストモード(true);
         return parameter;
     }
 

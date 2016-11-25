@@ -172,7 +172,9 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
                 row.setModifyButtonState(DataGridButtonState.Disabled);
                 row.setDeleteButtonState(DataGridButtonState.Disabled);
             }
-            row.setTxtHokenSeido(KaigoGassan_HokenSeido.toValue(item.get保険制度コード()).get名称());
+            if (item.get保険制度コード() != null && !item.get保険制度コード().isEmpty()) {
+                row.setTxtHokenSeido(KaigoGassan_HokenSeido.toValue(item.get保険制度コード()).get名称());
+            }
             row.setTxtUchiwakeHokenshaMei(item.get内訳保険者名());
             row.setTxtJikoFutanSeiriNo(item.get自己負担額証明書整理番号());
             row.setTxtTaishoshaShimei(item.get対象者氏名_漢字());
@@ -755,8 +757,17 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         div.getTxtTaishoKeisanKikan().setToValue(flexibleDateToRDate(支給額計算結果.get対象計算期間終了年月日()));
         div.getTxtJikoFutanSeiriNo().setValue(支給額計算結果.get自己負担額証明書整理番号());
         設定所得区分DDL();
-        div.getDdlShotokuKubun().setSelectedKey(支給額計算結果.get所得区分());
-        div.getDdlOver70ShotokuKubun().setSelectedKey(支給額計算結果.get70歳以上の者に係る所得区分());
+        if (null != 支給額計算結果.get所得区分() && !支給額計算結果.get所得区分().isEmpty()) {
+            div.getDdlShotokuKubun().setSelectedKey(支給額計算結果.get所得区分());
+        } else {
+            div.getDdlShotokuKubun().setSelectedIndex(INT_0);
+        }
+        if (null != 支給額計算結果.get70歳以上の者に係る所得区分() && !支給額計算結果.get70歳以上の者に係る所得区分().isEmpty()) {
+            div.getDdlOver70ShotokuKubun().setSelectedKey(支給額計算結果.get70歳以上の者に係る所得区分());
+        } else {
+            div.getDdlOver70ShotokuKubun().setSelectedIndex(INT_0);
+        }
+
         div.getTxtSetaiFutanSogaku().setValue(支給額計算結果.get世帯負担総額());
         div.getTxtSetaiShikyuSogaku().setValue(支給額計算結果.get世帯支給総額());
         div.getTxtOver70SetaiShikyuSogaku().setValue(支給額計算結果.getうち70歳以上分世帯支給総額());

@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 事務局特記事項+一次判定A3版Editorです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-190 lishengli
  */
 public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3Editor {
 

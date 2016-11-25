@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000022.Riy
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc2000022.FutanWariaiSokujiKouseiServiceData;
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariai.RiyoshaFutanWariaiSokujiKouseiFinder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
+import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiKonkyo;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiKonkyoBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
@@ -107,10 +108,17 @@ public class DBC2000022PanelAll {
             if (!ResponseHolder.isReRequest() && 判定結果.is生活保護受給者判定()) {
                 return ResponseData.of(div).addMessage(DbcInformationMessages.生活保護受給者.getMessage()).respond();
             }
-            if (!ResponseHolder.isReRequest() && RSTTWO.equals(判定結果.get判定区分())) {
+            if ((RString.isNullOrEmpty(ResponseHolder.getMessageCode())
+                    || new RString(DbcInformationMessages.生活保護受給者.getMessage().getCode()).
+                    equals(ResponseHolder.getMessageCode()))
+                    && RSTTWO.equals(判定結果.get判定区分())) {
                 return ResponseData.of(div).addMessage(DbcInformationMessages.負担割合証発行不要.getMessage()).respond();
             }
-            return ResponseData.of(div).setState(DBC2000022StateName.新規);
+            if (MessageDialogSelectedResult.Yes == ResponseHolder.getButtonType()) {
+                return ResponseData.of(div).setState(DBC2000022StateName.新規);
+            } else {
+                return ResponseData.of(div).respond();
+            }
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
             FutanWariaiSokujiKouseiResult 利用者負担割合情報 = getHandler(div).shuseiInitialize(資格対象者);
@@ -363,7 +371,7 @@ public class DBC2000022PanelAll {
             if (データ項目変更判定(div)) {
                 getHandler(div).onClick_btnUpdate(資格対象者.get識別コード(),
                         利用者負担割合,
-                        holder.get利用者負担割合明細(),
+                        getHandler(div).set利用者負担割合明細(利用者負担割合, holder),
                         null);
             } else {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
@@ -371,8 +379,16 @@ public class DBC2000022PanelAll {
         }
         FutanWariaiSokujiKouseiResult result = 利用者負担割合情報再検索(div.getDdlNendo().getSelectedKey(),
                 div.getCcdKaigoShikakuKihon().get被保険者番号());
-        引き継ぎデータ.set利用者負担割合(new RiyoshaFutanWariai(result.toEntity()));
-        引き継ぎデータ.set利用者負担割合明細list(result.get利用者負担割合明細list());
+        if (result != null) {
+            引き継ぎデータ.set利用者負担割合(new RiyoshaFutanWariai(result.toEntity()));
+            引き継ぎデータ.set利用者負担割合明細list(result.get利用者負担割合明細list());
+        } else {
+            RiyoshaFutanWariai retEntity = new RiyoshaFutanWariai(FlexibleYear.MAX,
+                    new HihokenshaNo(div.getCcdKaigoShikakuKihon().get被保険者番号()), 0);
+            RiyoshaFutanWariaiBuilder builder = retEntity.createBuilderForEdit();
+            builder.set論理削除フラグ(true);
+            引き継ぎデータ.set利用者負担割合(builder.build());
+        }
         引き継ぎデータ.set漢字氏名(div.getCcdKaigoAtenaInfo().get氏名漢字());
         引き継ぎデータ.set登録結果(true);
         ViewStateHolder.put(ViewStateKeys.引き継ぎデータ, 引き継ぎデータ);

@@ -88,6 +88,11 @@ public class TorikomiFuairu {
      * @return ResponseData<TorikomiFuairuDiv>
      */
     public ResponseData<TorikomiFuairuDiv> onCheck_btnExecute(TorikomiFuairuDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getValidationHandler(div).validateForアップロードファイル項目数(pairs);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(共有ファイル名);
         if (!isExists(sharedFiles)) {
             throw new ApplicationException(DbzErrorMessages.アップロードファイル無し.getMessage());

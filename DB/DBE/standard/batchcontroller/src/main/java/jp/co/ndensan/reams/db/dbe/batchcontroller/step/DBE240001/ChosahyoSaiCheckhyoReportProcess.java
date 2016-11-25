@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.HomonChosaIraishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyosaicheckhyo.ChosahyoSaiCheckhyoReport;
@@ -14,8 +13,6 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonCho
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ChosahyoSaiCheckhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahyosaicheckhyo.ChosahyoSaiCheckhyoReportSource;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IHomonChosaIraishoMapper;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -23,7 +20,6 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
@@ -44,21 +40,15 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get認定調査結果");
     private static final ReportId 帳票ID = ReportIdDBE.DBE293001.getReportId();
     private HomonChosaIraishoBusiness business;
-    private List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList;
-    private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
     private HomonChosaIraishoProcessParamter processParamter;
 
     @BatchWriter
     private BatchReportWriter<ChosahyoSaiCheckhyoReportSource> batchReportWriter;
     private ReportSourceWriter<ChosahyoSaiCheckhyoReportSource> reportSourceWriter;
-    @BatchWriter
-    private BatchPermanentTableWriter<DbT5201NinteichosaIraiJohoEntity> dbT5201EntityWriter;
 
     @Override
     protected void initialize() {
-        iHomonChosaIraishoMapper = getMapper(IHomonChosaIraishoMapper.class);
         business = new HomonChosaIraishoBusiness(processParamter);
-        checkEntityList = new ArrayList<>();
     }
 
     @Override
@@ -70,20 +60,16 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        dbT5201EntityWriter = new BatchPermanentTableWriter(DbT5201NinteichosaIraiJohoEntity.class);
     }
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
         business.setcheckEntityList(entity);
-        DbT5201NinteichosaIraiJohoEntity dbT5201Entity = iHomonChosaIraishoMapper.get認定調査依頼情報(entity);
-        if (dbT5201Entity != null) {
-            dbT5201EntityWriter.update(business.update認定調査依頼情報(entity, dbT5201Entity));
-        }
     }
 
     @Override
     protected void afterExecute() {
+        List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList = business.getCheckEntityList();
         for (ChosahyoSaiCheckhyoRelateEntity checkEntity : checkEntityList) {
             ChosahyoSaiCheckhyoReport report = ChosahyoSaiCheckhyoReport.createFrom(business.setItem(checkEntity));
             report.writeBy(reportSourceWriter);

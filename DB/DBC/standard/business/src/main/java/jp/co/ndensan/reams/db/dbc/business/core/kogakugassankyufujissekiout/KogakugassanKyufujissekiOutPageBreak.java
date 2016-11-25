@@ -37,8 +37,7 @@ public class KogakugassanKyufujissekiOutPageBreak extends PageBreaker<GassanKyuf
     @Override
     public boolean isBreak(ReportLineRecord<GassanKyufujissekiSofuIchiranSource> currentSource,
             ReportLineRecord<GassanKyufujissekiSofuIchiranSource> nextSource) {
-        boolean flag = false;
-        isHihokenBreak(currentSource, nextSource);
+        boolean flag = isHihokenBreak(currentSource, nextSource);
         if (this.breakKeysList.contains(KogakugassanKyufujissekiOutputOrder.証記載保険者番号.get項目ID())
                 && !currentSource.getSource().list_7.equals(nextSource.getSource().list_7)) {
             flag = true;

@@ -224,15 +224,20 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
             @Override
             public int compare(KyufuJissekiChukanKogaku8Entity arg0, KyufuJissekiChukanKogaku8Entity arg1) {
                 if (arg0.get基準収入額適用管理一時() == null || arg1.get基準収入額適用管理一時() == null) {
-                    return -1;
+                    return 0;
                 }
-                if (arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD().
-                        compareTo(arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD()) == 0) {
+                FlexibleYearMonth 適用開始年月_1 = arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD();
+                FlexibleYearMonth 適用開始年月_0 = arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD();
+                if (null == 適用開始年月_0
+                        || null == 適用開始年月_1) {
                     return arg0.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue().
                             compareTo(arg1.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue());
                 }
-                return arg1.get基準収入額適用管理一時().getTekiyoKaishiYMD().
-                        compareTo(arg0.get基準収入額適用管理一時().getTekiyoKaishiYMD());
+                if (適用開始年月_1.compareTo(適用開始年月_0) == 0) {
+                    return arg0.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue().
+                            compareTo(arg1.get基準収入額適用管理一時().getHihokenshaNo().getColumnValue());
+                }
+                return 適用開始年月_1.compareTo(適用開始年月_0);
             }
         });
         return 処理対象List;
@@ -247,12 +252,11 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
                 給付実績中間高額一時List.add(entity);
             }
         }
-        if (給付実績中間高額一時List.isEmpty()) {
-            return;
+        if (!給付実績中間高額一時List.isEmpty()) {
+            insert給付実績中間高額一時8の新規1(給付実績中間高額一時List.get(0));
         }
-        insert給付実績中間高額一時8の新規1(給付実績中間高額一時List.get(0));
         clear合計();
-        get世帯合算処理(給付実績中間高額一時List);
+        get世帯合算処理();
     }
 
     private boolean is明細に存在する(HihokenshaNo 被保険者番号) {
@@ -264,13 +268,13 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
         return false;
     }
 
-    private void get世帯合算処理(List<KyufuJissekiChukanKogaku8Entity> 給付実績中間高額一時List) {
+    private void get世帯合算処理() {
         List<KyufuJissekiChukanKogaku8Entity> 単独分List = new ArrayList<>();
         List<KyufuJissekiChukanKogaku8Entity> 世帯分List = new ArrayList<>();
-        if (給付実績中間高額一時List.size() == INT_1) {
-            単独分List.add(給付実績中間高額一時List.get(0));
+        if (給付実績中間高額一時明細List.size() == INT_1) {
+            単独分List.add(給付実績中間高額一時明細List.get(0));
         } else {
-            for (KyufuJissekiChukanKogaku8Entity entity : 給付実績中間高額一時List) {
+            for (KyufuJissekiChukanKogaku8Entity entity : 給付実績中間高額一時明細List) {
                 TempKyufujissekiTyukannEntity 給付実績中間 = entity.get給付実績中間高額一時();
                 if (ONE.equals(給付実績中間.getShotokuHantei_jushochiTokureiFlag())
                         && ONE.equals(給付実績中間.getShotokuHantei_shoboKubun())) {
@@ -359,10 +363,10 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
         世帯内給付実績中間高額一時.addAll(給付実績中間高額一時取消明細List);
         for (KyufuJissekiChukanKogaku8Entity entity : 世帯内給付実績中間高額一時) {
             TempKyufujissekiTyukannEntity 給付実績中間 = entity.get給付実績中間高額一時();
-            if (金額_145万.compareTo(給付実績中間.getShotokuHantei_kazeiShotokuGaku()) < 0) {
+            if (金額_145万.compareTo(formatByNull(給付実績中間.getShotokuHantei_kazeiShotokuGaku())) < 0) {
                 課税所得145万円以上存在Count++;
             }
-            if (金額_144万.compareTo(給付実績中間.getShotokuHantei_kazeiShotokuGaku()) == 0) {
+            if (金額_144万.compareTo(formatByNull(給付実績中間.getShotokuHantei_kazeiShotokuGaku())) == 0) {
                 課税所得144万円存在Count++;
             }
         }
@@ -375,7 +379,7 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
         世帯内給付実績中間高額一時.addAll(給付実績中間高額一時取消明細List);
         for (KyufuJissekiChukanKogaku8Entity entity : 世帯内給付実績中間高額一時) {
             TempKyufujissekiTyukannEntity 給付実績中間 = entity.get給付実績中間高額一時();
-            if (金額_145万.compareTo(給付実績中間.getShotokuHantei_kazeiShotokuGaku()) < 0) {
+            if (金額_145万.compareTo(formatByNull(給付実績中間.getShotokuHantei_kazeiShotokuGaku())) < 0) {
                 return false;
             }
         }
@@ -389,7 +393,7 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
         世帯内給付実績中間高額一時.addAll(給付実績中間高額一時取消明細List);
         for (KyufuJissekiChukanKogaku8Entity entity : 世帯内給付実績中間高額一時) {
             TempKyufujissekiTyukannEntity 給付実績中間 = entity.get給付実績中間高額一時();
-            if (金額_145万.compareTo(給付実績中間.getShotokuHantei_kazeiShotokuGaku()) < 0) {
+            if (金額_145万.compareTo(formatByNull(給付実績中間.getShotokuHantei_kazeiShotokuGaku())) < 0) {
                 課税所得145万円以上存在Count++;
             }
         }
@@ -808,13 +812,12 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
     private RString get利用者負担第２段階(TempKyufujissekiTyukannEntity 給付実績中間) {
         if (年月_200510.compareTo(給付実績中間.getServiceTeikyoYM()) <= 0
                 && !ONE.equals(給付実績中間.getShotokuHantei_shoboKubun())
-                && !ONE.equals(給付実績中間.getKogakuServicehiJogengakuGengakuGaitoFlag())) {
-            if (TWO.equals(給付実績中間.getShotokuHantei_kazeiKubunGemmenGo())
-                    && !ONE.equals(給付実績中間.getShotokuHantei_roreiFukushi())
-                    && 給付実績中間.getShotokuHantei_gokeiShotokuGaku().
-                    add(給付実績中間.getShotokuHantei_nenkiniShunyuGaku()).compareTo(金額_800000) <= 0) {
-                return ONE;
-            }
+                && !ONE.equals(給付実績中間.getKogakuServicehiJogengakuGengakuGaitoFlag())
+                && TWO.equals(給付実績中間.getShotokuHantei_kazeiKubunGemmenGo())
+                && !ONE.equals(給付実績中間.getShotokuHantei_roreiFukushi())
+                && 給付実績中間.getShotokuHantei_gokeiShotokuGaku().
+                add(給付実績中間.getShotokuHantei_nenkiniShunyuGaku()).compareTo(金額_800000) <= 0) {
+            return ONE;
         }
         return RString.EMPTY;
     }

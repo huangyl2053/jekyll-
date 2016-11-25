@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchish
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.CharacteristicsPhase;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -28,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor {
 
+    private final RString 特徴10月開始者区分;
+    private final HonSanteiTsuchiShoKyotsu 本算定通知書情報;
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final FlexibleYear 賦課年度;
     private final List<RString> 出力項目リスト;
@@ -53,6 +56,8 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
     /**
      * インスタンスを生成します。
      *
+     * @param 特徴10月開始者区分 RString
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
      * @param 編集後本算定通知書共通情報 List<EditedHonSanteiTsuchiShoKyotsu>
      * @param 賦課年度 FlexibleYear
      * @param 出力項目リスト List<RString>
@@ -62,9 +67,12 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
      * @param 市町村名 RString
      * @param 連番 int
      */
-    protected TokubetsuChoshuKaishiEditor(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+    protected TokubetsuChoshuKaishiEditor(RString 特徴10月開始者区分, HonSanteiTsuchiShoKyotsu 本算定通知書情報,
+            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             FlexibleYear 賦課年度, List<RString> 出力項目リスト, List<RString> 改頁項目リスト,
             RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名, int 連番) {
+        this.特徴10月開始者区分 = 特徴10月開始者区分;
+        this.本算定通知書情報 = 本算定通知書情報;
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.賦課年度 = 賦課年度;
         this.出力項目リスト = 出力項目リスト;
@@ -116,6 +124,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
             source.nendo = 賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
         }
         set出力改頁(source);
+        set改頁(source);
     }
 
     private void listlowers(TokubetsuChoshuKaishiSource source) {
@@ -183,5 +192,27 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
         if (NUM4 < 改頁項目リスト.size()) {
             source.kaipage5 = 改頁項目リスト.get(NUM4);
         }
+    }
+
+    private void set改頁(TokubetsuChoshuKaishiSource source) {
+        if (編集後本算定通知書共通情報.get編集後宛先() != null) {
+            source.banchiCode = 編集後本算定通知書共通情報.get編集後宛先().get編集番地コード();
+            source.choikiCode = 編集後本算定通知書共通情報.get編集後宛先().get町域コード();
+            source.gyoseikuCode = 編集後本算定通知書共通情報.get編集後宛先().get行政区コード().getColumnValue();
+            source.chikuCode1 = 編集後本算定通知書共通情報.get編集後宛先().get地区１();
+            source.chikuCode2 = 編集後本算定通知書共通情報.get編集後宛先().get地区２();
+            source.chikuCode3 = 編集後本算定通知書共通情報.get編集後宛先().get地区３();
+        }
+        if (編集後本算定通知書共通情報.get編集後個人() != null) {
+            source.shikibetsuCode = 編集後本算定通知書共通情報.get編集後個人().get識別コード().value();
+            source.kanaMeisho = 編集後本算定通知書共通情報.get編集後個人().get氏名５０音カナ();
+        }
+        source.hihokenshaNo = 編集後本算定通知書共通情報.get被保険者番号().getColumnValue();
+        source.nenkinCode = 本算定通知書情報.get徴収方法情報_更正後().get本徴収_年金コード();
+        if (本算定通知書情報.get納組情報() != null && 本算定通知書情報.get納組情報().getNokumi() != null) {
+            source.nokumiCode = 本算定通知書情報.get納組情報().getNokumi().getNokumiCode();
+        }
+        source.seihoFlag = 本算定通知書情報.get賦課の情報_更正後().get賦課情報().get生活保護扶助種類();
+        source.tokuchoKaishi10 = 特徴10月開始者区分;
     }
 }

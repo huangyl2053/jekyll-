@@ -46,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -80,7 +79,7 @@ public class PrtTaishoshaIchiranKogakuProcess extends BatchProcessBase<KogakuKai
     private static final Code EUC_CODE = new Code("0003");
     private static final RString EUC_CODE_NAME = new RString("被保険者番号");
     private static final RString 作成 = new RString("作成");
-    private static final RString 審査分 = new RString("審査分");
+    private static final RString TEXT_単 = new RString("単");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -171,12 +170,16 @@ public class PrtTaishoshaIchiranKogakuProcess extends BatchProcessBase<KogakuKai
                 : KyusochishaKubun.旧措置者以外.getコード());
         対象者一覧表Entity.set要介護認定状態区分コード(entity.get要介護認定状態区分コード());
         対象者一覧表Entity.set認定有効開始年月日(entity.get認定有効期間開始年月日());
-        対象者一覧表Entity.set認定有効開始年月日(entity.get認定有効期間終了年月日());
+        対象者一覧表Entity.set認定有効終了年月日(entity.get認定有効期間終了年月日());
         対象者一覧表Entity.set世帯コード(entity.get世帯コード());
         対象者一覧表Entity.set利用者負担額(entity.get利用者負担額());
         対象者一覧表Entity.set支給予定金額(entity.get支給予定金額());
         対象者一覧表Entity.set備考(entity.get備考欄個人所得区分());
-
+        対象者一覧表Entity.set証記載保険者番号(entity.get証記載保険者番号());
+        対象者一覧表Entity.set郵便番号(entity.get郵便番号());
+        対象者一覧表Entity.set町域コード(entity.get町域コード());
+        対象者一覧表Entity.set行政区コード(entity.get行政区コード());
+        対象者一覧表Entity.set氏名５０音カナ(entity.get氏名５０音カナ());
         return 対象者一覧表Entity;
     }
 
@@ -239,7 +242,7 @@ public class PrtTaishoshaIchiranKogakuProcess extends BatchProcessBase<KogakuKai
             csvEntity.set認定有効開始年月日(new RString(認定有効終了年月日.toString()));
         }
         csvEntity.set世帯番号(getColumnValue(entity.get世帯コード()));
-        csvEntity.set単独合算(new RString("単"));
+        csvEntity.set単独合算(TEXT_単);
         Decimal 支給予定金額 = entity.get支給予定金額();
         csvEntity.set支給予定金額(支給予定金額 != null ? new RString(支給予定金額.toString()) : RString.EMPTY);
         Decimal 自己負担額 = entity.get利用者負担額();
@@ -264,19 +267,9 @@ public class PrtTaishoshaIchiranKogakuProcess extends BatchProcessBase<KogakuKai
     }
 
     private RString format審査年月(FlexibleYearMonth 審査年月) {
-
-        if (審査年月 != null) {
-            RString format審査年月From = 審査年月.wareki().firstYear(FirstYear.ICHI_NEN)
-                    .separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
-            RString format審査年月To = RDate.getNowDate().getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN)
-                    .separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
-            return format審査年月From.concat(RString.FULL_SPACE)
-                    .concat(format審査年月To).concat(RString.FULL_SPACE)
-                    .concat(審査分);
-        }
-        return RString.EMPTY;
+        return 審査年月.wareki().firstYear(FirstYear.ICHI_NEN)
+                .separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
     }
 
     private void get出力順(RString 出力順ID) {

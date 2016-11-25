@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 特記事項A4版のReportです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-340 lishengli
  */
 public class TokkiTextA4Report extends Report<TokkiTextA4ReportSource> {
 

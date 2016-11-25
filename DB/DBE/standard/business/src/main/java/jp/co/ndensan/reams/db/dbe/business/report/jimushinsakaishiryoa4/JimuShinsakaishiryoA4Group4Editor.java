@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 特記事項2枚目以降A4Editorです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-190 lishengli
  */
 public class JimuShinsakaishiryoA4Group4Editor implements IJimuShinsakaishiryoA4Editor {
 
@@ -99,7 +99,8 @@ public class JimuShinsakaishiryoA4Group4Editor implements IJimuShinsakaishiryoA4
         source.three_chosaMM = new RString(システム日付.getMonthValue());
         source.three_chosaDD = new RString(システム日付.getDayValue());
         source.three_shinseiGengo = get元号(item.get認定調査実施年月日());
-        source.three_shinseiYY = get年(item.get認定調査実施年月日());
+        source.three_shinseiYY = get年(item.get認定調査実施年月日()).replace(get元号(item.get認定調査実施年月日()),
+                RString.EMPTY).replace(new RString("年"), RString.EMPTY);
         source.three_shinseiMM = new RString(item.get認定調査実施年月日().getMonthValue());
         source.three_shinseiDD = new RString(item.get認定調査実施年月日().getDayValue());
         source.three_shinsaGengo = get元号(item.get介護認定審査会開催年月日());
@@ -109,14 +110,14 @@ public class JimuShinsakaishiryoA4Group4Editor implements IJimuShinsakaishiryoA4
         source.three_shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.three_tokkiText = テキスト全面List.get(index);
+                source.three_tokkiText = getテキスト全面();
             } else if (短冊.equals(item.get特記パターン())) {
                 editテキスト(source, 短冊リスト);
                 set特記事項テキスト(source);
             }
         } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.three_tokkiImg = イメージ全面List.get(index);
+                source.three_tokkiImg = getイメージ全面();
             } else if (短冊.equals(item.get特記パターン())) {
                 editイメージ(source, 短冊リスト);
                 set特記事項イメージ(source);
@@ -128,6 +129,20 @@ public class JimuShinsakaishiryoA4Group4Editor implements IJimuShinsakaishiryoA4
             source.layout = Layouts.六頁目;
         }
         return source;
+    }
+
+    private RString getテキスト全面() {
+        if (0 < テキスト全面List.size()) {
+            return テキスト全面List.get(0);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getイメージ全面() {
+        if (0 < イメージ全面List.size()) {
+            return イメージ全面List.get(0);
+        }
+        return RString.EMPTY;
     }
 
     private JimuShinsakaishiryoA4ReportSource set特記事項テキスト(JimuShinsakaishiryoA4ReportSource source) {

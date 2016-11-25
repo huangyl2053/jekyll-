@@ -15,8 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NofugakuDataOutput {
 
-    private static final RString FORMAT = new RString("\"");
-
     /**
      * 納付額一覧表 出力順設定可能項目です。
      */

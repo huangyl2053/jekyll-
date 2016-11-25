@@ -8,9 +8,8 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jikofutangakusho
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseishoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3170JigyoKogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.KogakuGassanJohoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.TaisyousyaEntity;
 
 /**
  * 自己負担額証明書作成のMapperクラスです。
@@ -44,28 +43,20 @@ public interface IJikoFutangakushomeishoMapper {
     KogakuGassanJohoEntity get宛名から被保険者の個人情報(JikoFutangakushomeishoParameter parameter);
 
     /**
-     * get対象者データ
+     * get対象者データ1
      *
      * @param parameter JikoFutangakushomeishoParameter
-     * @return DbT3068KogakuGassanShinseishoEntity
+     * @return TaisyousyaEntity
      */
-    List<DbT3068KogakuGassanShinseishoEntity> get対象者データ(JikoFutangakushomeishoParameter parameter);
+    List<TaisyousyaEntity> get対象者データ1(JikoFutangakushomeishoParameter parameter);
 
     /**
-     * get高額合算自己負担額
+     * get対象者データ2
      *
      * @param parameter JikoFutangakushomeishoParameter
-     * @return DbT3070KogakuGassanJikoFutanGakuEntity
+     * @return TaisyousyaEntity
      */
-    DbT3070KogakuGassanJikoFutanGakuEntity get高額合算自己負担額(JikoFutangakushomeishoParameter parameter);
-
-    /**
-     * get事業高額合算自己負担額
-     *
-     * @param parameter JikoFutangakushomeishoParameter
-     * @return DbT3170JigyoKogakuGassanJikoFutanGakuEntity
-     */
-    DbT3170JigyoKogakuGassanJikoFutanGakuEntity get事業高額合算自己負担額(JikoFutangakushomeishoParameter parameter);
+    List<TaisyousyaEntity> get対象者データ2(JikoFutangakushomeishoParameter parameter);
 
     /**
      * get再計算区分

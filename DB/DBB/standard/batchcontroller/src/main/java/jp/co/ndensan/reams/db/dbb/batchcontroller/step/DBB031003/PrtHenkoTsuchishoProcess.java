@@ -103,7 +103,7 @@ public class PrtHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
     private static final RString CSVファイル名 = new RString("-");
     private static final RString CSV出力有無_あり = new RString("あり");
     private static final RString CSVファイル名_変更一覧表 = new RString("介護保険料額変更知書発行一覧表");
-    private static final EucEntityId 変更_EUC_ENTITY_ID = new EucEntityId("DBB200028");
+    private static final EucEntityId 変更_EUC_ENTITY_ID = new EucEntityId("DBB200030");
     private static final RString 変更_EUCファイル名 = new RString("KaigoHokenryogakuHenkoTsuchiHakkoIchiranData.csv");
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -175,10 +175,10 @@ public class PrtHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
     @Override
     protected void createWriter() {
 
-        initialize決定通知書();
+        initialize変更通知書();
 
         PageBreaker<KaigoHokenryogakuSource> breaker = new KaigoHokenryogakuPageBreak(pageBreakKeys);
-        一覧表reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200012.getReportId().value()).addBreak(breaker).create();
+        一覧表reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200030.getReportId().value()).addBreak(breaker).create();
         一覧表ReportSourceWriter = new ReportSourceWriter<>(一覧表reportWriter);
 
         fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
@@ -253,7 +253,8 @@ public class PrtHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         総ページ数 = publish変更通知書(通知書情報);
 
         連番 = 連番.add(Decimal.ONE);
-        KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(編集後本算定通知書共通情報,
+        KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(tempEntity.get生活保護区分(),
+                tempEntity.get特徴8月開始者区分(), tempEntity.get特徴10月開始者区分(), 本算定通知書情報, 編集後本算定通知書共通情報,
                 processParameter.get帳票作成日時().getRDateTime(), 地方公共団体, 出力項目リスト, 連番, 定値_タイトル);
         report.writeBy(一覧表ReportSourceWriter);
 
@@ -357,7 +358,7 @@ public class PrtHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         出力条件リスト.add(builder.toRString());
     }
 
-    private void initialize決定通知書() {
+    private void initialize変更通知書() {
         if (ReportIdDBB.DBB100042.getReportId().equals(出力帳票一覧.get帳票ID())) {
             dbb100042reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100042.getReportId().value()).create();
             dbb100042ReportSourceWriter = new ReportSourceWriter<>(dbb100042reportWriter);

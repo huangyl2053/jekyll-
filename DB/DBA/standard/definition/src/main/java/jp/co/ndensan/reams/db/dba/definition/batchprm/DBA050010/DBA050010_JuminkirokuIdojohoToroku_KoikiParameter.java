@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.batchprm.DBA050010;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba050010.JuminkirokuIdojohoTorokuKoikiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -31,7 +32,7 @@ public class DBA050010_JuminkirokuIdojohoToroku_KoikiParameter extends BatchPara
     @BatchParameter(key = SYORINICHIJI, name = "処理日時")
     private YMDHMS syorinichiji;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
-    private RString shichosoncode;
+    private List<RString> shichosoncode;
 
     /**
      * バーチのパラメータを作成します。

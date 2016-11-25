@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.hakkoShoriTimestamp;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.kofuShoShurui;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.kofuYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.lastUpdateTimestamp;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.rirekiNo;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -41,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEntity> {
 
     private static final RString 引数_被保険者番号 = new RString("被保険者番号");
+    private static final RString 引数_交付証種類 = new RString("交付証種類");
     @InjectSession
     private SqlSession session;
 
@@ -59,7 +62,7 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
             RString 交付証種類,
             int 履歴番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_被保険者番号.toString()));
-        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_交付証種類.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -67,9 +70,9 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
         return accessor.select().
                 table(DbT7037ShoKofuKaishu.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(kofuShoShurui, 交付証種類),
-                                eq(rirekiNo, 履歴番号))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(kofuShoShurui, 交付証種類),
+                        eq(rirekiNo, 履歴番号))).
                 toObject(DbT7037ShoKofuKaishuEntity.class);
     }
 
@@ -122,8 +125,8 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
         return accessor.select().
                 table(DbT7037ShoKofuKaishu.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(logicalDeletedFlag, 論理削除フラグ))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(logicalDeletedFlag, 論理削除フラグ))).
                 toList(DbT7037ShoKofuKaishuEntity.class);
     }
 
@@ -141,7 +144,7 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
             RString 交付証種類,
             HihokenshaNo 被保険者番号,
             YMDHMS 処理日時) throws NullPointerException {
-        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_交付証種類.toString()));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_被保険者番号.toString()));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
@@ -150,9 +153,9 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
         return accessor.select().
                 table(DbT7037ShoKofuKaishu.class).
                 where(and(
-                                eq(kofuShoShurui, 交付証種類),
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(hakkoShoriTimestamp, 処理日時))).
+                        eq(kofuShoShurui, 交付証種類),
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(hakkoShoriTimestamp, 処理日時))).
                 toList(DbT7037ShoKofuKaishuEntity.class);
     }
 
@@ -254,16 +257,47 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
             HihokenshaNo 被保険者番号,
             RString 交付証種類) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_被保険者番号.toString()));
-        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_交付証種類.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT7037ShoKofuKaishu.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(kofuShoShurui, 交付証種類)
-                        )).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(kofuShoShurui, 交付証種類)
+                )).
+                order(by(DbT7037ShoKofuKaishu.rirekiNo, Order.DESC)).
+                limit(1).
+                toObject(DbT7037ShoKofuKaishuEntity.class);
+    }
+
+    /**
+     * 主キー、交付年月日で証交付回収を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 交付証種類 KofuShoShurui
+     * @param 交付年月日 kofuYMD
+     * @return DbT7037ShoKofuKaishuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7037ShoKofuKaishuEntity selectByKeyAndKofu(
+            HihokenshaNo 被保険者番号,
+            RString 交付証種類, FlexibleDate 交付年月日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_被保険者番号.toString()));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_交付証種類.toString()));
+        requireNonNull(交付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("交付年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7037ShoKofuKaishu.class).
+                where(and(
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(kofuShoShurui, 交付証種類),
+                        eq(kofuYMD, 交付年月日)
+                )).
                 order(by(DbT7037ShoKofuKaishu.rirekiNo, Order.DESC)).
                 limit(1).
                 toObject(DbT7037ShoKofuKaishuEntity.class);

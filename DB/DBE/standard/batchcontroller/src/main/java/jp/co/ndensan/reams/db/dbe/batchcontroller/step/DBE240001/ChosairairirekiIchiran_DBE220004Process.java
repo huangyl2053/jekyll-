@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -79,21 +80,15 @@ public class ChosairairirekiIchiran_DBE220004Process extends BatchProcessBase<Ho
     @Override
     protected void afterExecute() {
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
-        RString 市町村名 = 導入団体クラス.get市町村名();
-        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
-        RString csv出力有無 = new RString("無し");
-        RString csvファイル名 = new RString("－");
-        RString ジョブ番号 = new RString("56");
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID.value(),
-                導入団体コード,
-                市町村名,
-                ジョブ番号,
+                導入団体クラス.getLasdecCode_().value(),
+                導入団体クラス.get市町村名(),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBE.DBE220004.getReportName(),
-                出力ページ数,
-                csv出力有無,
-                csvファイル名,
+                new RString(String.valueOf(reportSourceWriter.pageCount().value())),
+                new RString("無し"),
+                new RString("－"),
                 new HomonChosaIraishoBusiness(processParamter).set出力条件());
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();

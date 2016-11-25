@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.karisanteiidofuk
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.TokuchoTeishishaChushutsuMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.ShikakuFukaResultEntity;
@@ -112,7 +113,7 @@ public interface IKariSanteiIdoFukaBatchMapper {
      *
      * @param parameter 仮算定異動賦課Parameter
      */
-    void insert特別徴収停止者(KariSanteiIdoFukaMybatisParameter parameter);
+    void insert特別徴収停止者(TokuchoTeishishaChushutsuMybatisParameter parameter);
 
     /**
      * 賦課情報Temp一時テーブルを作成します
@@ -235,4 +236,24 @@ public interface IKariSanteiIdoFukaBatchMapper {
      * UrT0705ChoteiKyotsu_workを削除します。
      */
     void deleteUrT0705ChoteiKyotsu_work();
+
+    /**
+     * Cax一時テーブルを削除します。
+     */
+    void deleteUrT0706ChoteigakuUchiwake_work();
+
+    /**
+     * Cax一時テーブルを削除します。
+     */
+    void deleteUrT0772KamokubetsuKoyuJoho_work();
+
+    /**
+     * Cax一時テーブルを削除します。
+     */
+    void deleteUrShunoIdWork_2();
+
+    /**
+     * Cax一時テーブルを削除します。
+     */
+    void deleteUrT0707ChoteiJokyo_work();
 }

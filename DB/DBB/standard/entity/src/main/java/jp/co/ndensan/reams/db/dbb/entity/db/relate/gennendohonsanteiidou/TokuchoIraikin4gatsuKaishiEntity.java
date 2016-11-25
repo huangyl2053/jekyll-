@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -32,5 +32,5 @@ public class TokuchoIraikin4gatsuKaishiEntity implements IDbAccessable {
     private DbT2001ChoshuHohoEntity 徴収方法の情報;
     private List<SeikatsuHogoJukyushaRelateEntity> 生保の情報;
     private List<DbT7006RoreiFukushiNenkinJukyushaEntity> 老齢の情報;
-    private List<KozaRelateEntity> 口座;
+    private TokuteiKozaRelateEntity 口座;
 }

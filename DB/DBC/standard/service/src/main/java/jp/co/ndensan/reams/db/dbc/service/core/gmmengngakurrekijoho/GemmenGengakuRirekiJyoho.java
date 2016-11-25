@@ -150,9 +150,9 @@ public class GemmenGengakuRirekiJyoho {
                     軽減率 = 軽減率_0;
                 } else if (軽減率_分子 == null) {
                     軽減率_分子 = Decimal.ZERO;
-                    軽減率 = new RString(軽減率_分子.toString().trim() + スラッシュ.toString() + 軽減率_分母.toString().trim());
+                    軽減率 = new RString(軽減率_分子.intValue() + スラッシュ.toString() + 軽減率_分母.intValue());
                 } else {
-                    軽減率 = new RString(軽減率_分子.toString().trim() + スラッシュ.toString() + 軽減率_分母.toString().trim());
+                    軽減率 = new RString(軽減率_分子.intValue() + スラッシュ.toString() + 軽減率_分母.intValue());
                 }
                 entity = new ShakaiFukushiHojinRiyoshaFutanKeigenJyohoEntity(
                         減免_減額種類_04,

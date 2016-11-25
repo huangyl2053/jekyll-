@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkot
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -22,6 +23,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
 
+    private final RString 生活保護区分;
+    private final RString 特徴8月開始者区分;
+    private final RString 特徴10月開始者区分;
+    private final HonSanteiTsuchiShoKyotsu 本算定通知書情報;
     private final RString タイトル;
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final RDateTime 帳票作成日時;
@@ -32,6 +37,10 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
     /**
      * コンストラクタです。
      *
+     * @param 生活保護区分 RString
+     * @param 特徴8月開始者区分 RString
+     * @param 特徴10月開始者区分 RString
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
      * @param 帳票作成日時 RDateTime
      * @param 地方公共団体 Association
@@ -39,12 +48,18 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
      * @param 連番 Decimal
      * @param タイトル RString
      */
-    public KaigoHokenryogakuReport(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+    public KaigoHokenryogakuReport(RString 生活保護区分, RString 特徴8月開始者区分, RString 特徴10月開始者区分,
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報,
+            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             RDateTime 帳票作成日時,
             Association 地方公共団体,
             List<RString> 並び順List,
             Decimal 連番,
             RString タイトル) {
+        this.生活保護区分 = 生活保護区分;
+        this.特徴8月開始者区分 = 特徴8月開始者区分;
+        this.特徴10月開始者区分 = 特徴10月開始者区分;
+        this.本算定通知書情報 = 本算定通知書情報;
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.帳票作成日時 = 帳票作成日時;
         this.地方公共団体 = 地方公共団体;
@@ -60,8 +75,8 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
      */
     @Override
     public void writeBy(ReportSourceWriter<KaigoHokenryogakuSource> reportSourceWriter) {
-        IKaigoHokenryogakuEditor editor
-                = new KaigoHokenryogakuEditor(編集後本算定通知書共通情報, 帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
+        IKaigoHokenryogakuEditor editor = new KaigoHokenryogakuEditor(生活保護区分, 特徴8月開始者区分, 特徴10月開始者区分, 本算定通知書情報,
+                編集後本算定通知書共通情報, 帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
         IKaigoHokenryogakuBuilder builder = new KaigoHokenryogakuBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }

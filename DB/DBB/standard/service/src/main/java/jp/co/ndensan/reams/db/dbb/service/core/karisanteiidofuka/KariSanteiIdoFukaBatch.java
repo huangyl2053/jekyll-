@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.FukaKokyoBatchParameter;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKo
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKonkyoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
@@ -32,6 +34,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo8Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.TokuchoTeishishaChushutsuMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.csv.KarisanteiIdoKekkaIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
@@ -77,6 +80,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
+import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -132,6 +136,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.SourceData;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -196,10 +202,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private static final int DAY = 31;
     private static final Code エラーコード = new Code("04");
     private static final EucEntityId EUC_ENTITY_ID_仮算定異動一括結果一覧表CSV = new EucEntityId(new RString("DBB200013"));
-
-    private FileSpoolManager manager;
-    private RString eucFilePath;
-    private CsvWriter<KarisanteiIdoKekkaIchiranCSVEntity> eucCsvWriter;
+    private static final YMDHMS YMDHMS_MIN = new YMDHMS("00000101010000");
+    private static final YMDHMS YMDHMS_MAX = new YMDHMS("99991230235959");
+    private static final RString 定値区分_0 = new RString("0");
 
     /**
      * コンストラクタ
@@ -297,15 +302,36 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     @Transaction
     public void selectTokuchoTeishisha(FlexibleYear 賦課年度, RDateTime 抽出開始日時,
             RDateTime 抽出終了日時) {
-
+        YMDHMS 抽出開始日時Format = YMDHMS_MIN;
+        YMDHMS 抽出終了日時Format = YMDHMS_MAX;
+        if (抽出開始日時 != null) {
+            RString strOne = 抽出開始日時.getDate().toDateString();
+            int hour = 抽出開始日時.getHour();
+            int minute = 抽出開始日時.getMinute();
+            int second = 抽出開始日時.getSecond();
+            RString strTwo = hour < NUM_10 ? RSTRING_0.concat(new RString(hour)) : new RString(hour);
+            RString strThree = minute < NUM_10 ? RSTRING_0.concat(new RString(minute)) : new RString(minute);
+            RString strFour = second < NUM_10 ? RSTRING_0.concat(new RString(second)) : new RString(second);
+            抽出開始日時Format = new YMDHMS(strOne.concat(strTwo).concat(strThree).concat(strFour));
+        }
+        if (抽出終了日時 != null) {
+            RString strOne = 抽出終了日時.getDate().toDateString();
+            int hour = 抽出終了日時.getHour();
+            int minute = 抽出終了日時.getMinute();
+            int second = 抽出終了日時.getSecond();
+            RString strTwo = hour < NUM_10 ? RSTRING_0.concat(new RString(hour)) : new RString(hour);
+            RString strThree = minute < NUM_10 ? RSTRING_0.concat(new RString(minute)) : new RString(minute);
+            RString strFour = second < NUM_10 ? RSTRING_0.concat(new RString(second)) : new RString(second);
+            抽出終了日時Format = new YMDHMS(strOne.concat(strTwo).concat(strThree).concat(strFour));
+        }
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
         builder.setサブ業務コード(SubGyomuCode.DBB介護賦課);
         builder.set業務コード(GyomuCode.DB介護保険);
         IKozaSearchKey searchKey = builder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
-        KariSanteiIdoFukaMybatisParameter parameter = new KariSanteiIdoFukaMybatisParameter(
-                賦課年度, null, 抽出開始日時, 抽出終了日時, searchKey, list, null);
+        TokuchoTeishishaChushutsuMybatisParameter parameter = new TokuchoTeishishaChushutsuMybatisParameter(
+                賦課年度, null, 抽出開始日時Format, 抽出終了日時Format, searchKey, list, null);
         mapper.insert特別徴収停止者(parameter);
     }
 
@@ -851,7 +877,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                 前年度の保険料段階リスト = HokenryoDankaiSettings.createInstance()
                         .get保険料段階ListIn(調定年度);
                 if (前年度の保険料段階リスト != null && !RString.isNullOrEmpty(編集後賦課の情報.get保険料段階_仮算定時())) {
-                    保険料率 = 前年度の保険料段階リスト.getBy段階区分(編集後賦課の情報.get保険料段階_仮算定時()).get保険料率();
+                    保険料率 = 前年度の保険料段階リスト.getBy段階Index(編集後賦課の情報.get保険料段階_仮算定時()).get保険料率();
                 }
             }
             TokuchoKarisanteiKiwariOutput 特徴仮算定期割 = get特徴仮算定期割(調定年度, 保険料率);
@@ -978,12 +1004,16 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
         } else if (生保廃止日 == null || 生保廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
             賦課根拠.setSeihoStartYMD(開始日);
+        } else {
+            賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
         }
         賦課根拠.setSeihoEndYMD(FlexibleDate.EMPTY);
         if (老年開始日 == null || 老年開始日.isEmpty()) {
             賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
-        } else if (老年廃止日 == null || 老年廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
+        } else if (老年廃止日 == null || 老年廃止日.isEmpty() || 開始日.isBeforeOrEquals(老年廃止日)) {
             賦課根拠.setRoreiNenkinStartYMD(開始日);
+        } else {
+            賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
         }
         賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
         if (!RString.isNullOrEmpty(課税区分)) {
@@ -994,6 +1024,12 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         }
         賦課根拠.setGokeiShotoku(前年度合計所得金額);
         賦課根拠.setKotekiNenkinShunyu(前年度公的年金収入額);
+        List<KazeiKubunHonninKubun> setaiinKazeiKubunList = new ArrayList();
+        KazeiKubunHonninKubun kazeiKubunHonninKubun = new KazeiKubunHonninKubun();
+        kazeiKubunHonninKubun.set本人区分(HonninKubun.本人);
+        kazeiKubunHonninKubun.set課税区分(KazeiKubun.toValue(課税区分));
+        setaiinKazeiKubunList.add(kazeiKubunHonninKubun);
+        賦課根拠.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         HokenryoDankaiHanteiParameter parameter = new HokenryoDankaiHanteiParameter();
         parameter.setFukaNendo(調定年度);
         parameter.setFukaKonkyo(賦課根拠);
@@ -1076,7 +1112,10 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), 出力順ID);
+        IOutputOrder outputOrder = null;
+        if (出力順ID != null) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), 出力順ID);
+        }
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(KarisanteiIdoKekkaIchiranProperty.BreakerFieldsEnum.class,
@@ -1115,23 +1154,25 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             更正前後EntityList.add(entity);
         }
 
-        new KarisanteiIdoKekkaIchiranPrintService().print仮算定異動一括結果一覧表(更正前後EntityList, new RString(出力順ID),
-                調定日時, 賦課年度);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+        SourceDataCollection sourceDataCollection
+                = new KarisanteiIdoKekkaIchiranPrintService().print仮算定異動一括結果一覧表(更正前後EntityList, 出力順ID,
+                        調定日時, 賦課年度);
+        RString 出力ページ数 = get出力ページ数(sourceDataCollection);
+        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID_仮算定異動一括結果一覧表CSV, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名称);
-        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+        RString eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名称);
+        try (CsvWriter<KarisanteiIdoKekkaIchiranCSVEntity> eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
-                build();
-        List<Integer> 月List = set普徴期();
-        for (KeisanjohoAtenaKozaKouseizengoEntity 更正前後Entity : 更正前後EntityList) {
-            eucCsvWriter.writeLine(setCSVEntity(更正前後Entity, 調定日時, 賦課年度, 月List));
+                build()) {
+            List<Integer> 月List = set普徴期();
+            for (KeisanjohoAtenaKozaKouseizengoEntity 更正前後Entity : 更正前後EntityList) {
+                eucCsvWriter.writeLine(setCSVEntity(更正前後Entity, 調定日時, 賦課年度, 月List));
+            }
         }
-        eucCsvWriter.close();
 
         List<RString> 出力条件リスト = new ArrayList<>();
         RStringBuilder rstbuilder = new RStringBuilder();
@@ -1161,7 +1202,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             }
         }
         出力条件リスト.add(rstbuilder.toRString());
-        loadバッチ出力条件リスト(出力条件リスト);
+        loadバッチ出力条件リスト(出力条件リスト, 出力ページ数);
     }
 
     /**
@@ -1169,7 +1210,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
      *
      * @param 出力条件リスト List<RString>
      */
-    public void loadバッチ出力条件リスト(List<RString> 出力条件リスト) {
+    public void loadバッチ出力条件リスト(List<RString> 出力条件リスト, RString 出力ページ数) {
 
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         RString 導入団体コード = 地方公共団体.getLasdecCode_().value();
@@ -1179,9 +1220,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                 ReportIdDBB.DBB200013.getReportId().value(),
                 導入団体コード,
                 市町村名,
-                RString.FULL_SPACE.concat(String.valueOf(JobContextHolder.getJobId())),
+                RString.EMPTY.concat(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBB.DBB200013.getReportName(),
-                new RString(String.valueOf(eucCsvWriter.getCount())),
+                出力ページ数,
                 CSV出力有無,
                 ファイル名称,
                 出力条件リスト);
@@ -1227,7 +1268,12 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             return Decimal.ZERO;
         }
         HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
-        HokenryoDankai dankai = 保険料段階List.getBy段階区分(保険料段階);
+        HokenryoDankai dankai;
+        if (保険料段階.length() == NUM_2) {
+            dankai = 保険料段階List.getBy段階Index(保険料段階);
+        } else {
+            dankai = 保険料段階List.getBy段階区分(保険料段階);
+        }
         return dankai.get保険料率();
     }
 
@@ -1836,4 +1882,18 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         賦課情報Entity.setFuKibetsuGaku14(Decimal.ZERO);
         return 賦課情報Entity;
     }
+
+    private RString get出力ページ数(SourceDataCollection sourceDataCollection) {
+        if (!sourceDataCollection.iterator().hasNext()) {
+            return 定値区分_0;
+        }
+        int pageCount = 0;
+        Iterator<SourceData> sourceDataList = sourceDataCollection.iterator();
+        while (sourceDataList.hasNext()) {
+            SourceData sourceData = sourceDataList.next();
+            pageCount = pageCount + sourceData.getPageCount();
+        }
+        return new RString(pageCount);
+    }
+
 }

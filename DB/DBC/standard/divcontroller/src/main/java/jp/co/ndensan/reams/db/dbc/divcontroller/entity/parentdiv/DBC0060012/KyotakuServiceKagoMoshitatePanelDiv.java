@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyotakuServiceKagoMoshitatePanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,10 +34,10 @@ public class KyotakuServiceKagoMoshitatePanelDiv extends Panel {
     private HorizontalLine lin2;
     @JsonProperty("Service")
     private ServiceDiv Service;
-    @JsonProperty("CommonKaigpAtenainfoChildDiv1")
-    private KaigoAtenaInfoDiv CommonKaigpAtenainfoChildDiv1;
     @JsonProperty("CommonKaigoshikakuKihonChildDiv2")
     private KaigoShikakuKihonDiv CommonKaigoshikakuKihonChildDiv2;
+    @JsonProperty("CommonKaigpAtenainfoChildDiv1")
+    private KaigoAtenaInfoDiv CommonKaigpAtenainfoChildDiv1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -118,15 +118,6 @@ public class KyotakuServiceKagoMoshitatePanelDiv extends Panel {
     }
 
     /*
-     * getCommonKaigpAtenainfoChildDiv1
-     * @return CommonKaigpAtenainfoChildDiv1
-     */
-    @JsonProperty("CommonKaigpAtenainfoChildDiv1")
-    public IKaigoAtenaInfoDiv getCommonKaigpAtenainfoChildDiv1() {
-        return CommonKaigpAtenainfoChildDiv1;
-    }
-
-    /*
      * getCommonKaigoshikakuKihonChildDiv2
      * @return CommonKaigoshikakuKihonChildDiv2
      */
@@ -136,15 +127,24 @@ public class KyotakuServiceKagoMoshitatePanelDiv extends Panel {
     }
 
     /*
+     * getCommonKaigpAtenainfoChildDiv1
+     * @return CommonKaigpAtenainfoChildDiv1
+     */
+    @JsonProperty("CommonKaigpAtenainfoChildDiv1")
+    public IKaigoAtenaInfoDiv getCommonKaigpAtenainfoChildDiv1() {
+        return CommonKaigpAtenainfoChildDiv1;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBox getTxt1() {
+    public TextBoxFlexibleDate getTxt1() {
         return this.getService().getTxt1();
     }
 
     @JsonIgnore
-    public void  setTxt1(TextBox txt1) {
+    public void  setTxt1(TextBoxFlexibleDate txt1) {
         this.getService().setTxt1(txt1);
     }
 
@@ -179,12 +179,12 @@ public class KyotakuServiceKagoMoshitatePanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxt8() {
+    public TextBoxNum getTxt8() {
         return this.getService().getTxt8();
     }
 
     @JsonIgnore
-    public void  setTxt8(TextBox txt8) {
+    public void  setTxt8(TextBoxNum txt8) {
         this.getService().setTxt8(txt8);
     }
 
@@ -229,12 +229,12 @@ public class KyotakuServiceKagoMoshitatePanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxt12() {
+    public TextBoxNum getTxt12() {
         return this.getService().getTxt12();
     }
 
     @JsonIgnore
-    public void  setTxt12(TextBox txt12) {
+    public void  setTxt12(TextBoxNum txt12) {
         this.getService().setTxt12(txt12);
     }
 
@@ -249,12 +249,12 @@ public class KyotakuServiceKagoMoshitatePanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxt15() {
+    public TextBoxNum getTxt15() {
         return this.getService().getTxt15();
     }
 
     @JsonIgnore
-    public void  setTxt15(TextBox txt15) {
+    public void  setTxt15(TextBoxNum txt15) {
         this.getService().setTxt15(txt15);
     }
 
@@ -269,12 +269,12 @@ public class KyotakuServiceKagoMoshitatePanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxt18() {
+    public TextBoxNum getTxt18() {
         return this.getService().getTxt18();
     }
 
     @JsonIgnore
-    public void  setTxt18(TextBox txt18) {
+    public void  setTxt18(TextBoxNum txt18) {
         this.getService().setTxt18(txt18);
     }
 

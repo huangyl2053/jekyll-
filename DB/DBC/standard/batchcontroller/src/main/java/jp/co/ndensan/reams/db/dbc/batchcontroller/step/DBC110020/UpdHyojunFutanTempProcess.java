@@ -71,13 +71,13 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
             return;
         }
         RString 標準負担Key = get標準負担Key(entity.get標準負担());
-        if (標準負担KeyList.contains(標準負担Key)) {
-            return;
-        }
-        標準負担KeyList.add(標準負担Key);
         RString 全項目 = 標準負担全項目(entity.get標準負担());
         Decimal 連番 = 連番Map.get(entity.get標準負担().get被保険者番号());
         if (連番 == null) {
+            if (標準負担KeyList.contains(標準負担Key)) {
+                return;
+            }
+            標準負担KeyList.add(標準負担Key);
             連番Map.put(entity.get標準負担().get被保険者番号(), Decimal.ONE);
             IdouTblEntity update = entity.get異動一時();
             update.set標準負担(全項目);
@@ -89,6 +89,10 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
             if (連番temp.intValue() != entity.get異動一時().get連番()) {
                 return;
             }
+            if (標準負担KeyList.contains(標準負担Key)) {
+                return;
+            }
+            標準負担KeyList.add(標準負担Key);
             連番Map.put(entity.get標準負担().get被保険者番号(), 連番temp);
             IdouTblEntity update = entity.get異動一時();
             update.set標準負担(全項目);
@@ -96,6 +100,10 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番.add(Decimal.ONE).intValue()) {
+            if (標準負担KeyList.contains(標準負担Key)) {
+                return;
+            }
+            標準負担KeyList.add(標準負担Key);
             連番Map.put(entity.get標準負担().get被保険者番号(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
             insert.set被保険者番号(entity.get標準負担().get被保険者番号());
@@ -128,7 +136,6 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
 
     private RString 標準負担全項目(HyojunFutanEntity 標準負担) {
         RString 全項目 = RString.EMPTY;
-        全項目.concat(標準負担.get減免_減額種類()).concat(SPLIT);
         全項目 = concatDate(全項目, 標準負担.get適用開始日());
         全項目 = concatDate(全項目, 標準負担.get適用終了日());
         全項目 = concatDate(全項目, 標準負担.get申請日());
@@ -138,6 +145,13 @@ public class UpdHyojunFutanTempProcess extends BatchProcessBase<IdouTempEntity> 
         } else {
             全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
         }
+        if (標準負担.get負担額() == null) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(標準負担.get負担額().toString()).concat(SPLIT);
+        }
+        全項目 = 全項目.concat(new RString(標準負担.get履歴番号())).concat(SPLIT);
+        全項目 = 全項目.concat(標準負担.get減免_減額種類()).concat(SPLIT);
         return 全項目;
     }
 

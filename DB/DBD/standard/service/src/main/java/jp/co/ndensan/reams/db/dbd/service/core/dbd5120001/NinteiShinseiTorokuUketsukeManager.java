@@ -63,11 +63,11 @@ public class NinteiShinseiTorokuUketsukeManager {
             return null;
         }
     }
-    
+
     /**
-     * 
-     * @param param
-     * @return 
+     *
+     * @param param NinteiShinseiTorokuUketsukeParameter
+     * @return 初期化情報_申請区分変更サービス変更
      */
     @Transaction
     public NinteiShinseiTorokuUketsukeBusiness get初期化情報_申請区分変更サービス変更修正(NinteiShinseiTorokuUketsukeParameter param) {

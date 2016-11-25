@@ -27,10 +27,10 @@
                 AND "計算結果"."hokenSeidoCode" = '3'
                 <choose>
                         <when test="再処理区分.toString() == '1'.toString()">
-                                AND ("計算結果"."sofuYM" = '' OR "計算結果"."sofuYM" = #{処理年月} OR "計算結果"."saisoFG" = '1')
+                                AND ("計算結果"."sofuYM" = '' OR "計算結果"."sofuYM" is null OR "計算結果"."sofuYM" = #{処理年月} OR "計算結果"."saisoFG" = '1')
                         </when>
                         <otherwise>
-                                AND ("計算結果"."sofuYM" = '' OR "計算結果"."saisoFG" = '1')
+                                AND ("計算結果"."sofuYM" = '' OR "計算結果"."sofuYM" is null OR "計算結果"."saisoFG" = '1')
                         </otherwise>
                 </choose>
         ORDER BY

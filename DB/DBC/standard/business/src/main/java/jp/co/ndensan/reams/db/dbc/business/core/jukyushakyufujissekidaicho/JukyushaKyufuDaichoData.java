@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoData;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KeikakuHiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KojinyoTyohyoDataKomoku;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -187,6 +188,9 @@ public final class JukyushaKyufuDaichoData {
         帳票データ = set帳票データ3(帳票データ, 個人用);
         帳票データ.set決定後_サービス単位数1_公費1対象(decToRString(個人用.get決定後_サービス単位数1_公費１対象()));
         帳票データ.set決定前_1日の回数1_公費2対象(new RString(個人用.get決定前_１日の回数1_公費２対象()));
+        帳票データ.set市町村コード(個人用.get市町村コード());
+        帳票データ.set入力識別番号(個人用.get入力識別番号());
+        帳票データ.set事業所番号(個人用.get事業所番号());
         return 帳票データ;
     }
 
@@ -203,7 +207,7 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set再審査回数1_d(new RString(個人用.get再審査回数1()));
         帳票データ.set過誤回数1_d(new RString(個人用.get過誤回数1()));
         帳票データ.set審査年月1_d(dateFormat年月(個人用.get審査年月1()));
-        帳票データ.setサービスコードﾞ2_d(個人用.getサービスコードﾞ2());
+        帳票データ.setサービスコードﾞ2_d(個人用.getサービスコード2());
         帳票データ.setサービス内容2_d(個人用.getサービス内容2());
         帳票データ.set決定前_単位数2(decToRString(個人用.get決定前_単位数2()));
         帳票データ.set決定後_単位数2(decToRString(個人用.get決定後_単位数2()));
@@ -228,7 +232,7 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set再審査回数2_d(new RString(個人用.get再審査回数2()));
         帳票データ.set過誤回数2_d(new RString(個人用.get過誤回数2()));
         帳票データ.set審査年月2_d(dateFormat年月(個人用.get審査年月2()));
-        帳票データ.setサービスコードﾞ3_d(個人用.getサービスコードﾞ3());
+        帳票データ.setサービスコードﾞ3_d(個人用.getサービスコード3());
         帳票データ.setサービス内容3_d(個人用.getサービス内容3());
         帳票データ.set決定前_単位数3(decToRString(個人用.get決定前_単位数3()));
         帳票データ.set決定後_単位数3(decToRString(個人用.get決定後_単位数3()));
@@ -279,12 +283,12 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set決定後_公費3負担額1(decToRString(個人用.get決定後_公費３負担額1()));
         帳票データ.set決定前_利用者負担額1(decToRString(個人用.get決定前_利用者負担額1()));
         帳票データ.set決定後_利用者負担額1(decToRString(個人用.get決定後_利用者負担額1()));
-        帳票データ.set再審査回数1_k(new RString(個人用.get再審査回数1()));
-        帳票データ.set過誤回数1_k(new RString(個人用.get過誤回数1()));
-        帳票データ.set審査年月1_k(dateFormat年月(個人用.get審査年月1()));
+        帳票データ.set再審査回数1_k(個人用.get特定_再審査回数1());
+        帳票データ.set過誤回数1_k(個人用.get特定_過誤回数1());
+        帳票データ.set審査年月1_k(個人用.get特定_審査年月1());
         帳票データ.set番号2(個人用.get番号2());
         帳票データ.setサービスコードﾞ2_k(個人用.getサービスコードﾞ2());
-        帳票データ.setサービス内容2_k(個人用.getサービス内容2());
+        帳票データ.setサービス内容2_k(個人用.get特定_サービス内容2());
         帳票データ.set決定前_費用単価2(decToRString(個人用.get決定前_費用単価2()));
         帳票データ.set決定後_費用単価2(decToRString(個人用.get決定後_費用単価2()));
         帳票データ.set負担限度額2(decToRString(個人用.get負担限度額2()));
@@ -308,12 +312,12 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set決定後_公費3負担額2(decToRString(個人用.get決定後_公費３負担額2()));
         帳票データ.set決定前_利用者負担額2(decToRString(個人用.get決定前_利用者負担額2()));
         帳票データ.set決定後_利用者負担額2(decToRString(個人用.get決定後_利用者負担額2()));
-        帳票データ.set再審査回数2_k(new RString(個人用.get再審査回数2()));
-        帳票データ.set過誤回数2_k(new RString(個人用.get過誤回数2()));
-        帳票データ.set審査年月2_k(dateFormat年月(個人用.get審査年月2()));
+        帳票データ.set再審査回数2_k(個人用.get特定_再審査回数2());
+        帳票データ.set過誤回数2_k(個人用.get特定_過誤回数2());
+        帳票データ.set審査年月2_k(個人用.get特定_審査年月2());
         帳票データ.set番号3(個人用.get番号3());
         帳票データ.setサービスコードﾞ3_k(個人用.getサービスコードﾞ3());
-        帳票データ.setサービス内容3_k(個人用.getサービス内容3());
+        帳票データ.setサービス内容3_k(個人用.get特定_サービス内容3());
         帳票データ.set決定前_費用単価3(decToRString(個人用.get決定前_費用単価3()));
         帳票データ.set決定後_費用単価3(decToRString(個人用.get決定後_費用単価3()));
         帳票データ.set負担限度額3(decToRString(個人用.get負担限度額3()));
@@ -337,14 +341,14 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set決定後_公費3負担額3(decToRString(個人用.get決定後_公費３負担額3()));
         帳票データ.set決定前_利用者負担額3(decToRString(個人用.get決定前_利用者負担額3()));
         帳票データ.set決定後_利用者負担額3(decToRString(個人用.get決定後_利用者負担額3()));
-        帳票データ.set再審査回数3_k(new RString(個人用.get再審査回数3()));
-        帳票データ.set過誤回数3_k(new RString(個人用.get過誤回数3()));
+        帳票データ.set再審査回数3_k(個人用.get特定_再審査回数3());
+        帳票データ.set過誤回数3_k(個人用.get特定_過誤回数3());
         return 帳票データ;
     }
 
     private static JukyushaKyufuJissekidaichoData set帳票データ3(JukyushaKyufuJissekidaichoData 帳票データ,
             KojinyoTyohyoDataKomoku 個人用) {
-        帳票データ.set審査年月3_k(dateFormat年月(個人用.get審査年月3()));
+        帳票データ.set審査年月3_k(個人用.get特定_審査年月3());
         帳票データ.set決定前_費用額合計_合計情報(decToRString(個人用.get決定前_費用額合計_合計情報()));
         帳票データ.set決定後_費用額合計_合計情報(decToRString(個人用.get決定後_費用額合計_合計情報()));
         帳票データ.set決定前_保険分請求額合計_合計情報(decToRString(個人用.get決定前_保険分請求額合計_合計情報()));
@@ -639,6 +643,86 @@ public final class JukyushaKyufuDaichoData {
 
     private static RString kingakuFormat(int date) {
         return DecimalFormatter.toコンマ区切りRString(new Decimal(date), 0);
+    }
+
+    /**
+     * 帳票分類ID「DBC100055_JukyushaKyufuJissekidaicho」受給者給付実績台帳出力順設定可能項目です。
+     */
+    public enum ShutsuryokujunEnum implements IReportItems {
+
+        /**
+         * 町域コード
+         */
+        町域コード(new RString("0002"), new RString("jushoCd"), new RString("住所コード")),
+        /**
+         * 行政区コード
+         */
+        行政区コード(new RString("0004"), new RString("gyoseikuCd"), new RString("行政区コード")),
+        /**
+         * 世帯コード
+         */
+        世帯コード(new RString("0008"), new RString("setaiCd"), new RString("世帯コード")),
+        /**
+         * 氏名５０音カナ
+         */
+        氏名５０音カナ(new RString("0010"), new RString("hihoNameKana"), new RString("被保険者氏名カナ")),
+        /**
+         * 市町村コード
+         */
+        市町村コード(new RString("0013"), new RString("shichousonCode"), new RString("市町村コード")),
+        /**
+         * 被保険者番号
+         */
+        被保険者番号(new RString("0104"), new RString("hihoNo"), new RString("被保険者番号")),
+        /**
+         * サービス年月
+         */
+        サービス年月(new RString("0301"), new RString("serviceYm"), new RString("サービス提供年月")),
+        /**
+         * 審査年月
+         */
+        審査年月(new RString("0402"), new RString("shinsaYmKihon"), new RString("審査年月")),
+        /**
+         * 指定事業者番号
+         */
+        指定事業者番号(new RString("0303"), new RString("jigyoshoNo_No"), new RString("事業所番号")),
+        /**
+         * 現物償還の別
+         */
+        現物償還の別(new RString("0306"), new RString("jissekiKbnMei"), new RString("実績区分")),
+        /**
+         * 様式番号
+         */
+        様式番号(new RString("0315"), new RString("inputShikibetsuNo"), new RString("入力識別番号")),
+        /**
+         * 要介護度
+         */
+        要介護度(new RString("0403"), new RString("youKaigoKbnMei"), new RString("要介護度"));
+
+        private final RString 項目ID;
+        private final RString フォームフィールド名;
+        private final RString myBatis項目名;
+
+        private ShutsuryokujunEnum(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
+            this.項目ID = 項目ID;
+            this.フォームフィールド名 = フォームフィールド名;
+            this.myBatis項目名 = myBatis項目名;
+        }
+
+        @Override
+        public RString get項目ID() {
+            return 項目ID;
+        }
+
+        @Override
+        public RString getフォームフィールド名() {
+            return フォームフィールド名;
+        }
+
+        @Override
+        public RString getMyBatis項目名() {
+            return myBatis項目名;
+        }
     }
 
 }

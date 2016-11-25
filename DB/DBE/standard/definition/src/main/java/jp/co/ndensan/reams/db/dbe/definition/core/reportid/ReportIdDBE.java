@@ -392,17 +392,41 @@ public enum ReportIdDBE {
      */
     DBE091003(new ReportId("DBE091003_NinteiChosaTokkiImage"), new RString("主治医意見書TSOLタイプ表")),
     /**
-     * 特記事項の帳票ＩＤです。
+     * 特記事項（すべて連結）の帳票ＩＤです。
      */
     DBE517131(new ReportId("DBE517131_TokkiText1A4"), new RString("事務局用特記事項")),
+    /**
+     * 特記事項（１つずつ）の帳票ＩＤです。
+     */
+    DBE517132(new ReportId("DBE517132_TokkiText1A4"), new RString("事務局用特記事項")),
+    /**
+     * 特記事項（全イメージ）の帳票ＩＤです。
+     */
+    DBE517133(new ReportId("DBE517133_TokkiImage1A4"), new RString("事務局用特記事項")),
+    /**
+     * 特記事項（短冊）の帳票ＩＤです。
+     */
+    DBE517134(new ReportId("DBE517134_TokkiImage1A4"), new RString("事務局用特記事項")),
     /**
      * 特記事項の帳票ＩＤです。
      */
     DBE517031(new ReportId("DBE517031_TokkiText1A3"), new RString("特記事項")),
     /**
-     * 特記事項の帳票ＩＤです。
+     * 特記事項（すべて連結）の帳票ＩＤです。
      */
-    DBE517134(new ReportId("DBE517134_TokkiText2A4"), new RString("事務特記事項")),
+    DBE517135(new ReportId("DBE517135_TokkiText2A4"), new RString("事務特記事項")),
+    /**
+     * 特記事項（１つずつ）の帳票ＩＤです。
+     */
+    DBE517136(new ReportId("DBE517136_TokkiText2A4"), new RString("事務特記事項")),
+    /**
+     * 特記事項（全イメージ）の帳票ＩＤです。
+     */
+    DBE517137(new ReportId("DBE517137_TokkiImage2A4"), new RString("事務特記事項")),
+    /**
+     * 特記事項（短冊）の帳票ＩＤです。
+     */
+    DBE517138(new ReportId("DBE517138_TokkiImage2A4"), new RString("事務特記事項")),
     /**
      * 主治医意見書作成報酬支払通知書の帳票ＩＤです。
      */

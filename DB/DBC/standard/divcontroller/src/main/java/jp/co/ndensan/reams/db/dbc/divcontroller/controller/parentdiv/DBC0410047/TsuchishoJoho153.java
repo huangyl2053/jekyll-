@@ -10,10 +10,13 @@ import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410047.TsuchishoJoho153Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 国保連情報受取データ取込_[153]総合事業費等請求額通知書情報のクラスです。
@@ -54,6 +57,9 @@ public class TsuchishoJoho153 {
         parameter.setShoriYM(new FlexibleYearMonth(
                 div.getCcdKokurenJohoTorikomi().get処理年月().getYearMonth().toDateString()));
         parameter.setShutsuryokujunId(RString.EMPTY);
+        parameter.setLoginUserId(ControlDataHolder.getUserId());
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120890_SogojigyohiSeikyugakuTsuchishoIn");
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(parameter).respond();
     }
 }

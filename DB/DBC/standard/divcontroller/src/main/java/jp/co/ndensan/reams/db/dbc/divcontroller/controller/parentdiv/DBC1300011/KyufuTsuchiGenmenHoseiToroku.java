@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -54,6 +55,8 @@ public class KyufuTsuchiGenmenHoseiToroku {
     private static final RString ADDED = new RString("Added");
     private static final RString BTN_HOZON = new RString("btnHozon");
     private static final int NUM_6 = 6;
+    private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
+//    private static final RString 被保険者 = new RString("被保険者");
     private static final RString 完了メッセージ = new RString("給付費通知減免情報の更新が正常に行われました");
 
     /**
@@ -64,6 +67,8 @@ public class KyufuTsuchiGenmenHoseiToroku {
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onLoad(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+//        ViewStateHolder.put(ViewStateKeys.被保険者, 被保険者);
         getHandler(div).onLoad(資格対象者.get識別コード(), 資格対象者.get被保険者番号());
         return ResponseData.of(div).respond();
     }
@@ -181,7 +186,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
         RString jotai = new RString(row.getRowState().toString());
         KyufuhiTuchiHoseiIdentifier key = new KyufuhiTuchiHoseiIdentifier(new HokenshaNo(row.getTxtShokisaiNo()),
                 hiHokenshaNo,
-                new FlexibleYearMonth(row.getTxtServiceNengetsu()),
+                new FlexibleYearMonth(row.getTxtHdnServiceNengetsu()),
                 new JigyoshaNo(row.getTxtJigyoshaNo()),
                 new ServiceShuruiCode(row.getTxtServiceShurui().substring(0, 2)),
                 Decimal.ONE);
@@ -198,8 +203,8 @@ public class KyufuTsuchiGenmenHoseiToroku {
             ViewStateHolder.put(ViewStateKeys.給付費通知補正, models);
             getHandler(div).delete();
         }
-        div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(true);
-        div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(true);
+        row.setModifyButtonState(DataGridButtonState.Disabled);
+        row.setDeleteButtonState(DataGridButtonState.Disabled);
         return ResponseData.of(div).respond();
     }
 
@@ -258,6 +263,10 @@ public class KyufuTsuchiGenmenHoseiToroku {
      * @return ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv>
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonKakutei(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        ValidationMessageControlPairs 事業者入力pair = getValidationHandler(div).validate事業者入力();
+        if (事業者入力pair.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(事業者入力pair).respond();
+        }
         ValidationMessageControlPairs pair = getValidationHandler(div).validate確定する();
         if (pair.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pair).respond();
@@ -399,7 +408,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
     private KyufuTsuchiGenmenHoseiTorokuHandler getHandler(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         return new KyufuTsuchiGenmenHoseiTorokuHandler(div);
     }
-    
+
     private KyufuTsuchiGenmenHoseiTorokuValidationHandler getValidationHandler(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         return new KyufuTsuchiGenmenHoseiTorokuValidationHandler(div);
     }

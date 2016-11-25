@@ -196,7 +196,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
         TokuchoHeijunkaRokuBatchTaishoshaIchiran taishosha = new TokuchoHeijunkaRokuBatchTaishoshaIchiran(
                 taishoshaEntity, 今年度保険料率, new Decimal(調整金額));
         TokubetsuChoshuHeijunkaKeisanIchiranReport report = new TokubetsuChoshuHeijunkaKeisanIchiranReport(
-                taishosha, null, parameter.get調定日時(),
+                taishosha, null, 帳票制御共通, parameter.get調定日時(),
                 parameter.get調定年度(), 導入団体クラス, outputOrder, 特徴平準化対象者一覧表);
         report.writeBy(reportSourceWriter);
 
@@ -204,7 +204,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
         RString 編集後住所 = JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体クラス);
         List<RString> bodyList = new ArrayList<>();
         特徴平準化対象者CSV項目編集(bodyList, parameter.get調定日時(), parameter.get賦課年度(), taishoshaEntity,
-                編集後住所, 今年度保険料率, 調整金額, taishoshaEntity.get備考コード());
+                編集後住所, 今年度保険料率, 調整金額);
         toBodyList(bodyList);
         csvWriter.writeLine(bodyList);
 
@@ -378,7 +378,7 @@ public class CreateTaishoshaKeisanReportProcess extends BatchKeyBreakBase<Tokuch
 
     private void 特徴平準化対象者CSV項目編集(List<RString> bodyList, YMDHMS 調定日時, FlexibleYear 賦課年度,
             TokuchoHeijyunkaTaishoshaEntity 特徴平準化結果対象者, RString 編集後住所, Decimal 今年度保険料率,
-            int 調整金額, RString 編集備考) {
+            int 調整金額) {
         RString 調定日時_出力 = 調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
         bodyList.add(調定日時_出力);
         bodyList.add(調定日時_出力.concat(RString.HALF_SPACE).concat(getパターン141(調定日時)));

@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB271003;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranOutputOrder;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranReport;
@@ -16,6 +18,7 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.csv.TokubetsuChoshuDoteiIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranSource;
+import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
@@ -80,11 +83,29 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
     private static final RString 定数_すべて選択 = new RString("すべて選択");
     private static final RString 定数_同定済一覧 = new RString("同定済一覧");
     private static final RString 定数_未同定一覧 = new RString("未同定一覧");
+    private static final RString 町域コード = new RString("町域コード");
+    private static final RString 行政区コード = new RString("行政区コード");
+    private static final RString 地区１ = new RString("地区１");
+    private static final RString 地区２ = new RString("地区２");
+    private static final RString 地区３ = new RString("地区３");
+    private static final RString 世帯コード = new RString("世帯コード");
+    private static final RString 識別コード = new RString("識別コード");
+    private static final RString 氏名５０音カナ = new RString("氏名５０音カナ");
+    private static final RString 生年月日 = new RString("生年月日");
+    private static final RString 性別 = new RString("性別");
+    private static final RString 市町村コード = new RString("市町村コード");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
+    private static final RString 年金コード = new RString("年金コード");
+    private static final RString 年金番号 = new RString("年金番号");
+    private static final int 郵便番号桁数 = 7;
+    private static final int 郵便番号区切り文字桁 = 3;
+    private static final RString 郵便番号区切り文字 = new RString("-");
     private Association 導入団体クラス;
     private RString 通知内容コード;
     private IOutputOrder 出力順;
     private List<RString> pageBreakKeys;
     private List<RString> 出力順項目リスト;
+    private Map<RString, RString> 改頁項目Map;
     private List<RString> 改ページ項目リスト;
     @BatchWriter
     private CsvWriter<TokubetsuChoshuDoteiIchiranCSVEntity> eucCsvWriter;
@@ -97,6 +118,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
     protected void initialize() {
         pageBreakKeys = new ArrayList<>();
         出力順項目リスト = new ArrayList<>();
+        改頁項目Map = new HashMap<>();
         改ページ項目リスト = new ArrayList<>();
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         if (定数_10.equals(parameter.get特別徴収開始月())) {
@@ -154,6 +176,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
 
     @Override
     protected void process(TokubetsuChoshuDoteiIchiranEntity entity) {
+        change改頁項目コード(entity);
         outputCsv(entity);
         outputTyouhyou(entity);
     }
@@ -229,8 +252,39 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
         target.setChiku3(entity.getChikuCode3() == null ? RString.EMPTY : entity.getChikuCode3().getColumnValue());
         target.setShichosonCode(entity.getGenLasdecCode());
         TokubetsuChoshuDoteiIchiranReport report = new TokubetsuChoshuDoteiIchiranReport(
-                導入団体クラス, 出力順項目リスト, 改ページ項目リスト, target, parameter.get特別徴収開始月());
+                導入団体クラス, 出力順項目リスト, 改頁項目Map, 改ページ項目リスト, target, parameter.get特別徴収開始月());
         report.writeBy(reportSourceWriter);
+    }
+
+    private void change改頁項目コード(TokubetsuChoshuDoteiIchiranEntity entity) {
+        RString choikiCode = entity.getChoikiCode() == null ? RString.EMPTY : entity.getChoikiCode().getColumnValue();
+        改頁項目Map.put(町域コード, choikiCode);
+        RString gyoseikuCode = entity.getGyoseikuCode() == null ? RString.EMPTY : entity.getGyoseikuCode().getColumnValue();
+        改頁項目Map.put(行政区コード, gyoseikuCode);
+        RString chikuCode1 = entity.getChikuCode1() == null ? RString.EMPTY : entity.getChikuCode1().getColumnValue();
+        改頁項目Map.put(地区１, chikuCode1);
+        RString chikuCode2 = entity.getChikuCode1() == null ? RString.EMPTY : entity.getChikuCode1().getColumnValue();
+        改頁項目Map.put(地区２, chikuCode2);
+        RString chikuCode3 = entity.getChikuCode1() == null ? RString.EMPTY : entity.getChikuCode1().getColumnValue();
+        改頁項目Map.put(地区３, chikuCode3);
+        RString setaiCode = entity.getSetaiCode() == null ? RString.EMPTY : entity.getSetaiCode().getColumnValue();
+        改頁項目Map.put(世帯コード, setaiCode);
+        RString shikibetsuCode = entity.getShikibetsuCode() == null ? RString.EMPTY : entity.getShikibetsuCode().getColumnValue();
+        改頁項目Map.put(識別コード, shikibetsuCode);
+        RString kanaShimei = entity.getKanaShimei() == null ? RString.EMPTY : entity.getKanaShimei();
+        改頁項目Map.put(氏名５０音カナ, kanaShimei);
+        RString seinengappiYMD = entity.getBirthDay() == null ? RString.EMPTY : new RString(entity.getBirthDay().toString());
+        改頁項目Map.put(生年月日, seinengappiYMD);
+        RString seibetsu = entity.getSeibetsu() == null ? RString.EMPTY : new RString(entity.getSeibetsu().toString());
+        改頁項目Map.put(性別, seibetsu);
+        RString genLasdecCode = entity.getGenLasdecCode() == null ? RString.EMPTY : new RString(entity.getGenLasdecCode().toString());
+        改頁項目Map.put(市町村コード, genLasdecCode);
+        RString hihokenshaNo = entity.getHihokenshaNo() == null ? RString.EMPTY : new RString(entity.getHihokenshaNo().toString());
+        改頁項目Map.put(被保険者番号, hihokenshaNo);
+        RString nenkinCode = entity.getNenkinCode() == null ? RString.EMPTY : new RString(entity.getNenkinCode().toString());
+        改頁項目Map.put(年金コード, nenkinCode);
+        RString kisoNenkinNo = entity.getKisoNenkinNo() == null ? RString.EMPTY : new RString(entity.getKisoNenkinNo().toString());
+        改頁項目Map.put(年金番号, kisoNenkinNo);
     }
 
     private RString get性別コード(SeibetsuCodeNenkinTokucho seibetsu) {
@@ -262,14 +316,27 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
                 entity.getShikibetsuCode() == null ? RString.EMPTY : entity.getShikibetsuCode().getColumnValue(),
                 entity.getSetaiCode() == null ? RString.EMPTY : entity.getSetaiCode().getColumnValue(),
                 entity.getGyoseikuCode() == null ? RString.EMPTY : entity.getGyoseikuCode().getColumnValue(),
-                entity.getBirthDay(),
+                get生年月日(entity.getBirthDay()),
                 get性別名称(entity.getSeibetsu()),
                 entity.getKanaMeisho() == null ? RString.EMPTY : entity.getKanaMeisho().getColumnValue(),
                 entity.getKanaShimei(),
                 entity.getKanjiShimei(),
-                entity.getYubinNo(),
+                get郵便番号(entity.getYubinNo()),
                 entity.getKanjiJusho()
         ));
     }
 
+    private RString get生年月日(RString umareYMD) {
+        if (RDate.canConvert(umareYMD)) {
+            return DateConverter.getDate32(new RDate(umareYMD.toString()));
+        }
+        return umareYMD;
+    }
+
+    private RString get郵便番号(RString 郵便番号) {
+        if (郵便番号桁数 == 郵便番号.length()) {
+            return 郵便番号.insert(郵便番号区切り文字桁, 郵便番号区切り文字.toString());
+        }
+        return 郵便番号;
+    }
 }

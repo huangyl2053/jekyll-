@@ -88,9 +88,7 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         source.seibetsu = Seibetsu.toValue(帳票出力対象データ.getSeibetsuCodeChohyo()).get名称();
-        if (帳票出力対象データ.getJushoChohyo() != null) {
-            source.hihokenJusho = 帳票出力対象データ.getJushoChohyo().getColumnValue();
-        }
+        source.hihokenJusho = 帳票出力対象データ.getEditJusho();
         if (帳票出力対象データ.getTelNoChohyo() != null) {
             source.telNo = 帳票出力対象データ.getTelNoChohyo().getColumnValue();
         }
@@ -99,9 +97,6 @@ public class KogakuJigyoShikyuShinseishoYuchoEditor implements IKogakuJigyoShiky
         }
         if (帳票出力対象データ.getHihokenshaNoChohyo() != null) {
             source.hihokenshaNo = 帳票出力対象データ.getHihokenshaNoChohyo().getColumnValue();
-        }
-        if (帳票出力対象データ.getKojinNoChohyo() != null) {
-            source.kojinNo = 帳票出力対象データ.getKojinNoChohyo().getColumnValue();
         }
         source.ninshoshaYakushokuMei = 認証者役職名;
         source.chuiTitle = 定数_注意;

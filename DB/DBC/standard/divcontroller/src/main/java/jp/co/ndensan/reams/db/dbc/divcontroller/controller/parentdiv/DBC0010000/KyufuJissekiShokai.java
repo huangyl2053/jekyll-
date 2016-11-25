@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010000
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShokujiHiyo;
@@ -19,7 +18,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.JukyushaDaich
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KojinKakuteiKey;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCareManagementHiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCareManagementHiJyohou;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiSearchDataBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShakaiFukushiHojinKeigengakuBusiness;
@@ -116,6 +117,7 @@ public class KyufuJissekiShokai {
     private static final int INT_SJYUY = 34;
     private static final int INT_SJYUG = 35;
     private static final int INT_SJYUR = 36;
+    private static final int INT_47 = 47;
     private static final int INT_NJYUNG = 75;
     private static final RString KEY = new RString("key0");
     private static final RString サービス提供月_開始 = new RString("04");
@@ -190,12 +192,25 @@ public class KyufuJissekiShokai {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
         FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
+        int 列 = サービス提供年月_終了.getBetweenMonths(サービス提供年月_開始) + INT_ICHI;
+        div.setHiddenStartIndex(new RString(0));
+        if (列 > INT_SJYUR) {
+            div.setHiddenEndIndex(new RString(INT_SJYUG));
+        } else {
+            div.setHiddenEndIndex(new RString(列 - 1));
+        }
+        div.setHiddenStartYM(サービス提供年月_開始.toDateString());
+        div.setHiddenEndYM(サービス提供年月_終了.toDateString());
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         List<KyufuJissekiHedajyoho1> 給付実績ヘッダ情報1 = KyufuJissekiShokaiFinder.createInstance().
                 getKyufuJissekiHeaderJoho1(被保険者番号).records();
+        RString 検索対象 = div.getRadTaisho1().getSelectedKey();
+        div.setHiddenSearchKey(検索対象);
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
-                get検索データ(被保険者番号, サービス提供年月_開始, サービス提供年月_終了);
-        ValidationMessageControlPairs validationMessages = getValidationHandler(div).do検索チェック(給付実績情報照会情報);
+                get検索データ(被保険者番号, サービス提供年月_開始, サービス提供年月_終了, KEY.equals(検索対象));
+        KyufuJissekiShokaiHandler handler = getHandler(div);
+        handler.edit集計データ(サービス提供年月_開始, サービス提供年月_終了, !KEY.equals(検索対象), 給付実績情報照会情報, 被保険者番号);
+        ValidationMessageControlPairs validationMessages = getValidationHandler(div).do検索チェック(給付実績情報照会情報, 検索対象);
         if (validationMessages.iterator().hasNext()) {
             div.getKyufuJissekiSearchPanel().setIsOpen(true);
             div.getKyufuJissekiListPanel().setIsOpen(false);
@@ -203,12 +218,12 @@ public class KyufuJissekiShokai {
         }
         for (int i = INT_ZERO; i < INT_NJYUNG; i++) {
             div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i).setVisible(true);
-            div.getDgKyufuJissekiGokeiList().getGridSetting().getColumns().get(i).setVisible(true);
         }
         KyufuJissekiSearchDataBusiness 一覧データ = 給付実績情報照会情報.getSearchData();
-        getHandler(div).onClick_btnKyufuJissekiSearch(給付実績ヘッダ情報1.get(INT_ZERO),
-                サービス提供年月_開始, サービス提供年月_終了, 一覧データ);
-        setパラメータ(給付実績情報照会情報);
+        KyufuJissekiHeader 給付実績基本情報子Divデータ
+                = handler.onClick_btnKyufuJissekiSearch(給付実績ヘッダ情報1.get(INT_ZERO),
+                        サービス提供年月_開始, サービス提供年月_終了, 一覧データ);
+        setパラメータ(給付実績情報照会情報, 給付実績基本情報子Divデータ);
         div.getKyufuJissekiSearchPanel().setIsOpen(false);
         div.getKyufuJissekiListPanel().setIsOpen(true);
         return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会一覧);
@@ -223,9 +238,15 @@ public class KyufuJissekiShokai {
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnKyufuJissekiResearch(KyufuJissekiShokaiDiv div) {
         for (int i = INT_ZERO; i < INT_NJYUNG; i++) {
             div.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns().get(i).setVisible(false);
-            div.getDgKyufuJissekiGokeiList().getGridSetting().getColumns().get(i).setVisible(false);
         }
         return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会検索);
+    }
+
+    private int get明細一覧件数(RString searchKey) {
+        if (KEY.equals(searchKey)) {
+            return INT_47;
+        }
+        return INT_NJYUI;
     }
 
     /**
@@ -235,6 +256,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM1(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM1(div);
+        }
         setパラメータサービス提供年月(div, INT_ICHI);
         return response_Meisai(div);
     }
@@ -246,6 +270,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM2(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM2(div);
+        }
         setパラメータサービス提供年月(div, INT_NI);
         return response_Meisai(div);
     }
@@ -257,6 +284,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM3(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM3(div);
+        }
         setパラメータサービス提供年月(div, INT_SAN);
         return response_Meisai(div);
     }
@@ -268,6 +298,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM4(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM4(div);
+        }
         setパラメータサービス提供年月(div, INT_YON);
         return response_Meisai(div);
     }
@@ -279,6 +312,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM5(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM5(div);
+        }
         setパラメータサービス提供年月(div, INT_GO);
         return response_Meisai(div);
     }
@@ -290,6 +326,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM6(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM6(div);
+        }
         setパラメータサービス提供年月(div, INT_ROKU);
         return response_Meisai(div);
     }
@@ -301,6 +340,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM7(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM7(div);
+        }
         setパラメータサービス提供年月(div, INT_NANA);
         return response_Meisai(div);
     }
@@ -312,6 +354,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM8(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM8(div);
+        }
         setパラメータサービス提供年月(div, INT_HACHI);
         return response_Meisai(div);
     }
@@ -323,6 +368,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM9(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM9(div);
+        }
         setパラメータサービス提供年月(div, INT_KYU);
         return response_Meisai(div);
     }
@@ -334,6 +382,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM10(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM10(div);
+        }
         setパラメータサービス提供年月(div, INT_JYU);
         return response_Meisai(div);
     }
@@ -345,6 +396,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM11(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM11(div);
+        }
         setパラメータサービス提供年月(div, INT_JYUI);
         return response_Meisai(div);
     }
@@ -356,6 +410,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM12(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM12(div);
+        }
         setパラメータサービス提供年月(div, INT_JYUN);
         return response_Meisai(div);
     }
@@ -367,6 +424,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM13(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM13(div);
+        }
         setパラメータサービス提供年月(div, INT_JYUS);
         return response_Meisai(div);
     }
@@ -378,6 +438,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM14(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM4(div);
+        }
         setパラメータサービス提供年月(div, INT_JYUY);
         return response_Meisai(div);
     }
@@ -389,6 +452,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM15(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM15(div);
+        }
         setパラメータサービス提供年月(div, INT_JYUG);
         return response_Meisai(div);
     }
@@ -400,6 +466,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM16(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM16(div);
+        }
         setパラメータサービス提供年月(div, INT_JYUR);
         return response_Meisai(div);
     }
@@ -411,6 +480,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM17(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM17(div);
+        }
         setパラメータサービス提供年月(div, INT_JYUNA);
         return response_Meisai(div);
     }
@@ -422,6 +494,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM18(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM18(div);
+        }
         setパラメータサービス提供年月(div, INT_JYUH);
         return response_Meisai(div);
     }
@@ -433,6 +508,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM19(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM19(div);
+        }
         setパラメータサービス提供年月(div, INT_JYUK);
         return response_Meisai(div);
     }
@@ -444,6 +522,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM20(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM20(div);
+        }
         setパラメータサービス提供年月(div, INT_NJYU);
         return response_Meisai(div);
     }
@@ -455,6 +536,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM21(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM21(div);
+        }
         setパラメータサービス提供年月(div, INT_NJYUI);
         return response_Meisai(div);
     }
@@ -466,6 +550,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM22(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM22(div);
+        }
         setパラメータサービス提供年月(div, INT_NJYUN);
         return response_Meisai(div);
     }
@@ -477,6 +564,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM23(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM23(div);
+        }
         setパラメータサービス提供年月(div, INT_NJYUS);
         return response_Meisai(div);
     }
@@ -488,6 +578,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM24(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM24(div);
+        }
         setパラメータサービス提供年月(div, INT_NJYUY);
         return response_Meisai(div);
     }
@@ -499,6 +592,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM25(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM25(div);
+        }
         setパラメータサービス提供年月(div, INT_NJYUG);
         return response_Meisai(div);
     }
@@ -510,6 +606,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM26(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM26(div);
+        }
         setパラメータサービス提供年月(div, INT_NJYUR);
         return response_Meisai(div);
     }
@@ -521,6 +620,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM27(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM27(div);
+        }
         setパラメータサービス提供年月(div, INT_NJYUNA);
         return response_Meisai(div);
     }
@@ -532,6 +634,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM28(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM28(div);
+        }
         setパラメータサービス提供年月(div, INT_NJYUH);
         return response_Meisai(div);
     }
@@ -543,6 +648,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM29(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM29(div);
+        }
         setパラメータサービス提供年月(div, INT_NJYUK);
         return response_Meisai(div);
     }
@@ -554,6 +662,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM30(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM30(div);
+        }
         setパラメータサービス提供年月(div, INT_SJYU);
         return response_Meisai(div);
     }
@@ -565,6 +676,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM31(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM31(div);
+        }
         setパラメータサービス提供年月(div, INT_SJYUI);
         return response_Meisai(div);
     }
@@ -576,6 +690,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM32(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM32(div);
+        }
         setパラメータサービス提供年月(div, INT_SJYUN);
         return response_Meisai(div);
     }
@@ -587,6 +704,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM33(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM33(div);
+        }
         setパラメータサービス提供年月(div, INT_SJYUS);
         return response_Meisai(div);
     }
@@ -598,6 +718,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM34(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM34(div);
+        }
         setパラメータサービス提供年月(div, INT_SJYUY);
         return response_Meisai(div);
     }
@@ -609,6 +732,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM35(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM35(div);
+        }
         setパラメータサービス提供年月(div, INT_SJYUG);
         return response_Meisai(div);
     }
@@ -620,6 +746,9 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM36(KyufuJissekiShokaiDiv div) {
+        if (div.getDgKyufuJissekiMeisaiList().getClickedRowId() >= get明細一覧件数(div.getHiddenSearchKey())) {
+            return onClick_Gokei_btnYM36(div);
+        }
         setパラメータサービス提供年月(div, INT_SJYUR);
         return response_Meisai(div);
     }
@@ -991,8 +1120,10 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnSento(KyufuJissekiShokaiDiv div) {
-        FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
-        FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
+        FlexibleYearMonth サービス提供年月_開始 = new FlexibleYearMonth(div.getHiddenStartYM());
+        FlexibleYearMonth サービス提供年月_終了 = new FlexibleYearMonth(div.getHiddenEndYM());
+        div.setHiddenStartIndex(new RString(0));
+        div.setHiddenEndIndex(new RString(INT_SJYU));
         getHandler(div).onClick_btnSento(サービス提供年月_開始, サービス提供年月_終了, get一覧データ());
         return ResponseData.of(div).respond();
     }
@@ -1004,6 +1135,8 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnMae(KyufuJissekiShokaiDiv div) {
+        div.setHiddenStartIndex(new RString(Integer.parseInt(div.getHiddenStartIndex().toString()) - 1));
+        div.setHiddenEndIndex(new RString(Integer.parseInt(div.getHiddenEndIndex().toString()) - 1));
         getHandler(div).onClick_btnMae(get一覧データ());
         return ResponseData.of(div).respond();
     }
@@ -1015,6 +1148,8 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnTsugi(KyufuJissekiShokaiDiv div) {
+        div.setHiddenStartIndex(new RString(Integer.parseInt(div.getHiddenStartIndex().toString()) + 1));
+        div.setHiddenEndIndex(new RString(Integer.parseInt(div.getHiddenEndIndex().toString()) + 1));
         getHandler(div).onClick_btnTsugi(get一覧データ());
         return ResponseData.of(div).respond();
     }
@@ -1026,8 +1161,11 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnSaigo(KyufuJissekiShokaiDiv div) {
-        FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
-        FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
+        FlexibleYearMonth サービス提供年月_開始 = new FlexibleYearMonth(div.getHiddenStartYM());
+        FlexibleYearMonth サービス提供年月_終了 = new FlexibleYearMonth(div.getHiddenEndYM());
+        int 列 = サービス提供年月_終了.getBetweenMonths(サービス提供年月_開始) + INT_ICHI;
+        div.setHiddenStartIndex(new RString(列 - INT_SJYUR));
+        div.setHiddenEndIndex(new RString(列 - 1));
         getHandler(div).onClick_btnSaigo(サービス提供年月_開始, サービス提供年月_終了, get一覧データ());
         return ResponseData.of(div).respond();
     }
@@ -1089,18 +1227,18 @@ public class KyufuJissekiShokai {
     }
 
     private ResponseData<KyufuJissekiShokaiDiv> response_Gokei(KyufuJissekiShokaiDiv div, int ボタン列) {
-        if (KEY.equals(div.getRadTaisho1().getSelectedKey())) {
+        if (KEY.equals(div.getHiddenSearchKey())) {
             setパラメータサービス提供年月(div, ボタン列);
-            int 選択行 = div.getDgKyufuJissekiGokeiList().getClickedRowId();
-            if (INT_HACHI == 選択行) {
+            int 選択行 = div.getDgKyufuJissekiMeisaiList().getClickedRowId();
+            if (INT_HACHI + INT_47 == 選択行) {
                 return response_GokeiKogakuKaigoService(div);
-            } else if (INT_KYU == 選択行) {
+            } else if (INT_KYU + INT_47 == 選択行) {
                 return response_GokeiFukushiYogu(div);
-            } else if (INT_JYU == 選択行) {
+            } else if (INT_JYU + INT_47 == 選択行) {
                 return response_GokeiJyutakuKayisyu(div);
             }
         }
-        return ResponseData.of(div).respond();
+        return response_Meisai(div);
     }
 
     private ResponseData<KyufuJissekiShokaiDiv> response_GokeiKogakuKaigoService(KyufuJissekiShokaiDiv div) {
@@ -1119,7 +1257,7 @@ public class KyufuJissekiShokai {
         return ViewStateHolder.get(ViewStateKeys.給付実績情報照会検索一覧, KyufuJissekiSearchDataBusiness.class);
     }
 
-    private void setパラメータ(KyufuJissekiPrmBusiness 給付実績情報照会情報) {
+    private void setパラメータ(KyufuJissekiPrmBusiness 給付実績情報照会情報, KyufuJissekiHeader 給付実績基本情報子Divデータ) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
@@ -1187,12 +1325,13 @@ public class KyufuJissekiShokai {
         jukyushaDaichoJyohou.setJukyushaData(給付実績情報照会情報.getJukyushaData());
         ViewStateHolder.put(ViewStateKeys.受給者台帳情報, jukyushaDaichoJyohou);
         clearパラメータ(給付実績情報照会情報);
+        ViewStateHolder.put(ViewStateKeys.給付実績基本情報子Div, 給付実績基本情報子Divデータ);
     }
 
     private void clearパラメータ(KyufuJissekiPrmBusiness 給付実績情報照会情報) {
         KyufuJissekiSearchDataBusiness searchData = new KyufuJissekiSearchDataBusiness();
         給付実績情報照会情報.setSearchData(searchData);
-        List<KyufujissekiKihon> csData_A = new ArrayList<>();
+        List<KyufuJissekiKihonShukeiRelate> csData_A = new ArrayList<>();
         給付実績情報照会情報.setCsData_A(csData_A);
         List<KyufujissekiMeisaiBusiness> csData_B = new ArrayList<>();
         給付実績情報照会情報.setCsData_B(csData_B);

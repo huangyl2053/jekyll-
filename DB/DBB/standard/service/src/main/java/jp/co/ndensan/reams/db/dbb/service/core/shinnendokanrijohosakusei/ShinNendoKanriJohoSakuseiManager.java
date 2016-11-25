@@ -110,8 +110,9 @@ public class ShinNendoKanriJohoSakuseiManager {
             entity.setTsuchishoHakkoYMD(日付取得(entity.getTsuchishoHakkoYMD().plusYear(1)));
             entity.setHoteiNokigenYMD(日付取得(entity.getHoteiNokigenYMD().plusYear(1)));
             entity.setHoteiNokigenToYMD(日付取得(entity.getHoteiNokigenToYMD().plusYear(1)));
-            if (entity.getFurikaeNokiYMD() != null) {
-                entity.setFurikaeNokiYMD(日付取得(entity.getFurikaeNokiYMD().plusYear(1)));
+            RDate furikaeNokiYMD = entity.getFurikaeNokiYMD();
+            if (furikaeNokiYMD != null) {
+                entity.setFurikaeNokiYMD(日付取得(furikaeNokiYMD.plusYear(1)));
             }
             entity.setState(EntityDataState.Added);
             納期管理.save納期(new Noki(entity));
@@ -125,8 +126,9 @@ public class ShinNendoKanriJohoSakuseiManager {
             entity.setTsuchishoHakkoYMD(日付取得(entity.getTsuchishoHakkoYMD().plusYear(1)));
             entity.setHoteiNokigenYMD(日付取得(entity.getHoteiNokigenYMD().plusYear(1)));
             entity.setHoteiNokigenToYMD(日付取得(entity.getHoteiNokigenToYMD().plusYear(1)));
-            if (entity.getFurikaeNokiYMD() != null) {
-                entity.setFurikaeNokiYMD(日付取得(entity.getFurikaeNokiYMD().plusYear(1)));
+            RDate furikaeNokiYMD = entity.getFurikaeNokiYMD();
+            if (furikaeNokiYMD != null) {
+                entity.setFurikaeNokiYMD(日付取得(furikaeNokiYMD.plusYear(1)));
             }
             entity.setState(EntityDataState.Added);
             納期管理.save納期(new Noki(entity));
@@ -140,8 +142,9 @@ public class ShinNendoKanriJohoSakuseiManager {
             entity.setTsuchishoHakkoYMD(日付取得(entity.getTsuchishoHakkoYMD().plusYear(1)));
             entity.setHoteiNokigenYMD(日付取得(entity.getHoteiNokigenYMD().plusYear(1)));
             entity.setHoteiNokigenToYMD(日付取得(entity.getHoteiNokigenToYMD().plusYear(1)));
-            if (entity.getFurikaeNokiYMD() != null) {
-                entity.setFurikaeNokiYMD(日付取得(entity.getFurikaeNokiYMD().plusYear(1)));
+            RDate furikaeNokiYMD = entity.getFurikaeNokiYMD();
+            if (furikaeNokiYMD != null) {
+                entity.setFurikaeNokiYMD(日付取得(furikaeNokiYMD.plusYear(1)));
             }
             entity.setState(EntityDataState.Added);
             納期管理.save納期(new Noki(entity));

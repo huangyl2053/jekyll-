@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.Han
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvNoRenbanDataCreate;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.kinyukikan.KinyuKikanEntity;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -96,7 +95,6 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
     private static final RString すべて = new RString("すべて");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
-    private RString preBreakKey;
     private HanyoListShokanbaraiJokyoProcessParameter parameter;
     private HanyoListCsvNoRenbanDataCreate dataCreate;
     private RString eucFilePath;
@@ -104,19 +102,14 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
     private List<PersonalData> personalDataList;
     private Association 地方公共団体;
     private HanyoListShokanbaraiJokyoEntity preEntity;
-    private List<KinyuKikanEntity> lstKinyuKikanEntity;
-    private FlexibleDate システム日付;
 
     @BatchWriter
     private CsvWriter<HanyoListShokanbaraiJokyoNoRenbanCSVEntity> eucCsvWriter;
 
     @Override
     protected void beforeExecute() {
-        preBreakKey = RString.EMPTY;
-        システム日付 = FlexibleDate.getNowDate();
-        dataCreate = new HanyoListCsvNoRenbanDataCreate(システム日付);
+        dataCreate = new HanyoListCsvNoRenbanDataCreate();
         personalDataList = new ArrayList<>();
-        lstKinyuKikanEntity = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
     }

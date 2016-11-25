@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.ChosahyoKihonch
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.ChosahyoSaiCheckhyoReportProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.ChosahyoTokkijiko_221022Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.ChosairairirekiIchiran_DBE220004Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.DbT5201UpdateProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.GaikyochosaProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.IchiranhyoReportProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.IraishoReportProcess;
@@ -45,6 +46,7 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
     private static final RString DBE221022 = new RString("DBE221022_chosahyoTokkijiko.rse");
     private static final RString DBE221011 = new RString("DBE221011_chosahyoGaikyochosa.rse");
     private static final String ICHIRANHYOREPORT_PROCESS = "ichiranhyoReport_Process";
+    private static final String DBT5201UPDATEPROCESS = "DbT5201UpdateProcess";
     private static final String CHOSAIRAISHOREPORT_PROCESS = "chosaIraishoReport_Process";
     private static final String CHOSAHYOKIHONCHOSA = "chosahyoKihonchosa";
     private static final String CHOSAHYOTOKKIJIKO22 = "chosahyoTokkijiko22";
@@ -60,6 +62,7 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
     @Override
     protected void defineFlow() {
         基準日 = RDate.getNowDate();
+        executeStep(DBT5201UPDATEPROCESS);
         if (getParameter().isNinteiChosaIraiChohyo()) {
             executeStep(CHOSAIRAISHOREPORT_PROCESS);
         }
@@ -96,7 +99,6 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
         if (getParameter().isNinteiChosaIraisyo()) {
             executeStep(ICHIRANHYOREPORT_PROCESS);
         }
-
     }
 
     private void call認定調査差異チェック表() {
@@ -378,6 +380,17 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
     @Step(CHOSAIRAIRIREKIICHIRAN)
     protected IBatchFlowCommand chosairairirekiIchiranProcess() {
         return loopBatch(ChosairairirekiIchiran_DBE220004Process.class)
+                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
+    }
+
+    /**
+     * テーブル「DbT5201NinteichosaIraiJoho」の更新処理Processです。
+     *
+     * @return DbT5201UpdateProcess
+     */
+    @Step(DBT5201UPDATEPROCESS)
+    protected IBatchFlowCommand callDbT5201UpdateProcess() {
+        return loopBatch(DbT5201UpdateProcess.class)
                 .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
     }
 }

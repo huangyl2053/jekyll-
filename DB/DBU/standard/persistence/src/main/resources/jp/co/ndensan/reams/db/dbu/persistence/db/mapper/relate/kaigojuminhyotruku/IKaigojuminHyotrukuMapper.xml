@@ -16,7 +16,14 @@
         AND  
             DbT7022.nendo = '0000'
         AND
-            DbT7022."shichosonCode" = #{shichosonCode}
+       <foreach  
+            collection="shichosonCodelist"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">
+                DbT7022."shichosonCode" = #{item}
+        </foreach>
         AND DbT7022."shoriEdaban" =
         (SELECT
             MAX(A."shoriEdaban")

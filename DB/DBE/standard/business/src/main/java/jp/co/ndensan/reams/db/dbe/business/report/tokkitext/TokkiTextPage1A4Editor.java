@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 /**
  * 特記事項A4Editorです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-340 lishengli
  */
 public class TokkiTextPage1A4Editor implements ITokkiTextA4Editor {
 
@@ -115,7 +115,7 @@ public class TokkiTextPage1A4Editor implements ITokkiTextA4Editor {
             source.gaikyotokkiImg = item.get概況調査の特記事項イメージ();
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
-                && 全面.equals(item.get特記パターン())) {
+                && 全面.equals(item.get特記パターン()) && index < テキスト全面List.size()) {
             source.tokkiText = テキスト全面List.get(index);
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
@@ -124,7 +124,7 @@ public class TokkiTextPage1A4Editor implements ITokkiTextA4Editor {
             set特記事項テキスト(source);
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
-                && 全面.equals(item.get特記パターン())) {
+                && 全面.equals(item.get特記パターン()) && index < イメージ全面List.size()) {
             source.tokkiImg = イメージ全面List.get(index);
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())

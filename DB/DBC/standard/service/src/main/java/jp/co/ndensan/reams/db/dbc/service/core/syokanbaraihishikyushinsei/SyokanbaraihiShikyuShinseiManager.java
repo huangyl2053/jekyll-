@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3118ShikibetsuNoKanriDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -19,8 +22,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class SyokanbaraihiShikyuShinseiManager {
 
-    private static final RString 必要な分証明書入力済 = new RString("1");
-    private static final RString 証明書入力未済あり = new RString("2");
     private static final RString 設定可_必須 = new RString("1");
     private static final RString 未入力 = new RString("0");
     private static final RString 必要な分申請書入力済 = new RString("1");
@@ -46,212 +47,183 @@ public class SyokanbaraihiShikyuShinseiManager {
     }
 
     /**
-     * 基本証明書入力済チェック
+     * 証明書入力済チェックを行います。
      *
-     * @param 証明書入力済フラグ RString
-     * @param 識別番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @return 証明書入力済区分
+     * @param 証明書入力済フラグ 証明書入力済フラグ
+     * @param 識別番号 識別番号
+     * @param サービス年月 サービス年月
+     * @return 証明書入力完了フラグ（"1"：入力完了 "2"：入力未完了）
      */
-    public RString 基本証明書InputCheck(RString 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
-        RString 出力_証明書入力済区分 = 必要な分証明書入力済;
+    public ShomeishoNyuryokuKanryoKubunType 証明書InputCheck(ShomeishoNyuryokuFlag 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
         ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
-        if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ) && 設定可_必須.equals(shikibetsuNoKanri.get基本設定区分())) {
-                出力_証明書入力済区分 = 証明書入力未済あり;
-            }
+
+        if (!基本証明書InputCheck(証明書入力済フラグ.get基本情報_証明書入力済フラグ(), shikibetsuNoKanri)) {
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
         }
-        return 出力_証明書入力済区分;
+        if (!明細証明書InputCheck(証明書入力済フラグ.get給付費明細_証明書入力済フラグ(), shikibetsuNoKanri)) {
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
+        }
+        if (!特定診療費証明書InputCheck(証明書入力済フラグ.get特定診療費_証明書入力済フラグ(), shikibetsuNoKanri)) {
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
+        }
+        if (!居宅計画費証明書InputCheck(証明書入力済フラグ.getサービス計画費_証明書入力済フラグ(), shikibetsuNoKanri)) {
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
+        }
+        if (!特定入所者証明書InputCheck(証明書入力済フラグ.get特定入所者費用_証明書入力済フラグ(), shikibetsuNoKanri)) {
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
+        }
+        if (!明細住所地特例証明書InputCheck(証明書入力済フラグ.get給付費明細住特_証明書入力済フラグ(), shikibetsuNoKanri)) {
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
+        }
+        if (!所定疾患施設療養証明書InputCheck(証明書入力済フラグ.get緊急時所定疾患_証明書入力済フラグ(), shikibetsuNoKanri)) {
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
+        }
+        if (!緊急時施設療養証明書InputCheck(証明書入力済フラグ.get緊急時施設療養費_証明書入力済フラグ(), shikibetsuNoKanri)) {
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
+        }
+        if (!食事費用証明書InputCheck(証明書入力済フラグ.get食事費用_証明書入力済フラグ(), shikibetsuNoKanri)) {
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
+        }
+        if (!集計証明書InputCheck(証明書入力済フラグ.get請求額集計_証明書入力済フラグ(), shikibetsuNoKanri)) {
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
+        }
+        if (!社会福祉法人軽減証明書InputCheck(証明書入力済フラグ.get社福軽減額_証明書入力済フラグ(), shikibetsuNoKanri)) {
+            return ShomeishoNyuryokuKanryoKubunType.入力未完了;
+        }
+
+        return ShomeishoNyuryokuKanryoKubunType.入力完了;
     }
 
-    /**
-     * 明細証明書入力済チェック
-     *
-     * @param 証明書入力済フラグ RString
-     * @param 識別番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @return 証明書入力済区分
-     */
-    public RString 明細証明書InputCheck(RString 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
-        RString 出力_証明書入力済区分 = 必要な分証明書入力済;
-        ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
+    private boolean 基本証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+        if (証明書入力済フラグ == null) {
+            return true;
+        }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ) && 設定可_必須.equals(shikibetsuNoKanri.get明細設定区分())) {
-                出力_証明書入力済区分 = 証明書入力未済あり;
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get基本設定区分())) {
+                return false;
             }
         }
-        return 出力_証明書入力済区分;
+        return true;
     }
 
-    /**
-     * 特定診療費証明書入力済チェック
-     *
-     * @param 証明書入力済フラグ RString
-     * @param 識別番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @return 証明書入力済区分
-     */
-    public RString 特定診療費証明書InputCheck(RString 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
-        RString 出力_証明書入力済区分 = 必要な分証明書入力済;
-        ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
+    private boolean 明細証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+        if (証明書入力済フラグ == null) {
+            return true;
+        }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ) && 設定可_必須.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
-                出力_証明書入力済区分 = 証明書入力未済あり;
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get明細設定区分())) {
+                return false;
             }
         }
-        return 出力_証明書入力済区分;
+        return true;
     }
 
-    /**
-     * 居宅計画費証明書入力済チェック
-     *
-     * @param 証明書入力済フラグ RString
-     * @param 識別番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @return 証明書入力済区分
-     */
-    public RString 居宅計画費証明書InputCheck(RString 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
-        RString 出力_証明書入力済区分 = 必要な分証明書入力済;
-        ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
+    private boolean 特定診療費証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+        if (証明書入力済フラグ == null) {
+            return true;
+        }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ) && 設定可_必須.equals(shikibetsuNoKanri.get居宅計画費設定区分())) {
-                出力_証明書入力済区分 = 証明書入力未済あり;
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
+                return false;
             }
         }
-        return 出力_証明書入力済区分;
+        return true;
     }
 
-    /**
-     * 特定入所者証明書入力済チェック
-     *
-     * @param 証明書入力済フラグ RString
-     * @param 識別番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @return 証明書入力済区分
-     */
-    public RString 特定入所者証明書InputCheck(RString 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
-        RString 出力_証明書入力済区分 = 必要な分証明書入力済;
-        ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
+    private boolean 居宅計画費証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+        if (証明書入力済フラグ == null) {
+            return true;
+        }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ) && 設定可_必須.equals(shikibetsuNoKanri.get特定入所者設定区分())) {
-                出力_証明書入力済区分 = 証明書入力未済あり;
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get居宅計画費設定区分())) {
+                return false;
             }
         }
-        return 出力_証明書入力済区分;
+        return true;
     }
 
-    /**
-     * 明細住所地特例証明書入力済チェック
-     *
-     * @param 証明書入力済フラグ RString
-     * @param 識別番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @return 証明書入力済区分
-     */
-    public RString 明細住所地特例証明書InputCheck(RString 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
-        RString 出力_証明書入力済区分 = 必要な分証明書入力済;
-        ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
+    private boolean 特定入所者証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+        if (証明書入力済フラグ == null) {
+            return true;
+        }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ) && 設定可_必須.equals(shikibetsuNoKanri.get明細住所地特例設定区分())) {
-                出力_証明書入力済区分 = 証明書入力未済あり;
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get特定入所者設定区分())) {
+                return false;
             }
         }
-        return 出力_証明書入力済区分;
+        return true;
     }
 
-    /**
-     * 特定診療特別療養証明書入力済チェック
-     *
-     * @param 証明書入力済フラグ RString
-     * @param 識別番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @return 証明書入力済区分
-     */
-    public RString 特定診療特別療養証明書InputCheck(RString 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
-        RString 出力_証明書入力済区分 = 必要な分証明書入力済;
-        ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
+    private boolean 明細住所地特例証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+        if (証明書入力済フラグ == null) {
+            return true;
+        }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ) && 設定可_必須.equals(shikibetsuNoKanri.get特定診療特別療養設定区分())) {
-                出力_証明書入力済区分 = 証明書入力未済あり;
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get明細住所地特例設定区分())) {
+                return false;
             }
         }
-        return 出力_証明書入力済区分;
+        return true;
     }
 
-    /**
-     * 緊急時施設療養証明書入力済チェック
-     *
-     * @param 証明書入力済フラグ RString
-     * @param 識別番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @return 証明書入力済区分
-     */
-    public RString 緊急時施設療養証明書InputCheck(RString 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
-        RString 出力_証明書入力済区分 = 必要な分証明書入力済;
-        ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
+    private boolean 所定疾患施設療養証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+        if (証明書入力済フラグ == null) {
+            return true;
+        }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ) && 設定可_必須.equals(shikibetsuNoKanri.get緊急時施設療養設定区分())) {
-                出力_証明書入力済区分 = 証明書入力未済あり;
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get所定疾患施設療養設定区分())) {
+                return false;
             }
         }
-        return 出力_証明書入力済区分;
+        return true;
     }
 
-    /**
-     * 食事費用証明書入力済チェック
-     *
-     * @param 証明書入力済フラグ RString
-     * @param 識別番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @return 証明書入力済区分
-     */
-    public RString 食事費用証明書InputCheck(RString 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
-        RString 出力_証明書入力済区分 = 必要な分証明書入力済;
-        ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
+    private boolean 緊急時施設療養証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+        if (証明書入力済フラグ == null) {
+            return true;
+        }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ) && 設定可_必須.equals(shikibetsuNoKanri.get食事費用設定区分())) {
-                出力_証明書入力済区分 = 証明書入力未済あり;
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get緊急時施設療養設定区分())) {
+                return false;
             }
         }
-        return 出力_証明書入力済区分;
+        return true;
     }
 
-    /**
-     * 集計証明書入力済チェック
-     *
-     * @param 証明書入力済フラグ RString
-     * @param 識別番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @return 証明書入力済区分
-     */
-    public RString 集計証明書InputCheck(RString 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
-        RString 出力_証明書入力済区分 = 必要な分証明書入力済;
-        ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
+    private boolean 食事費用証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+        if (証明書入力済フラグ == null) {
+            return true;
+        }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ) && 設定可_必須.equals(shikibetsuNoKanri.get集計設定区分())) {
-                出力_証明書入力済区分 = 証明書入力未済あり;
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get食事費用設定区分())) {
+                return false;
             }
         }
-        return 出力_証明書入力済区分;
+        return true;
     }
 
-    /**
-     * 社会福祉法人軽減証明書入力済チェック
-     *
-     * @param 証明書入力済フラグ RString
-     * @param 識別番号 RString
-     * @param サービス年月 FlexibleYearMonth
-     * @return 証明書入力済区分
-     */
-    public RString 社会福祉法人軽減証明書InputCheck(RString 証明書入力済フラグ, RString 識別番号, FlexibleYearMonth サービス年月) {
-        RString 出力_証明書入力済区分 = 必要な分証明書入力済;
-        ShikibetsuNoKanri shikibetsuNoKanri = getShikibetsuNoKanri(サービス年月, 識別番号);
+    private boolean 集計証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+        if (証明書入力済フラグ == null) {
+            return true;
+        }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ) && 設定可_必須.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
-                出力_証明書入力済区分 = 証明書入力未済あり;
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get集計設定区分())) {
+                return false;
             }
         }
-        return 出力_証明書入力済区分;
+        return true;
+    }
+
+    private boolean 社会福祉法人軽減証明書InputCheck(ShomeishoNyuryokuKubunType 証明書入力済フラグ, ShikibetsuNoKanri shikibetsuNoKanri) {
+        if (証明書入力済フラグ == null) {
+            return true;
+        }
+        if (shikibetsuNoKanri != null) {
+            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

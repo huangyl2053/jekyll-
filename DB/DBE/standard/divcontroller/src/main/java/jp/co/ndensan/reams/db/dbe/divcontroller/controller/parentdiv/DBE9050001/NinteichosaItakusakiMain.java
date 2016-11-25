@@ -228,7 +228,7 @@ public class NinteichosaItakusakiMain {
     public IDownLoadServletResponse onClick_btnOutputCsv(NinteichosaItakusakiMainDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<NinteichosaItakusakiCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgSonotaKikanIchiran_Row> dataList = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
             for (dgSonotaKikanIchiran_Row row : dataList) {
@@ -470,10 +470,10 @@ public class NinteichosaItakusakiMain {
                 return ResponseData.of(div).setState(DBE9050001StateName.検索);
             }
         } else {
-            getHandler(div).load();
+//            getHandler(div).load();
             return ResponseData.of(div).setState(DBE9020001StateName.検索);
         }
-        getHandler(div).load();
+//        getHandler(div).load();
         return ResponseData.of(div).respond();
     }
 

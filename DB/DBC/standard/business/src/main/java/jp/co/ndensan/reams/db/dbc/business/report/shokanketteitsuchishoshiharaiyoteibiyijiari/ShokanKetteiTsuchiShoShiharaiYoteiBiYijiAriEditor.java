@@ -153,10 +153,10 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IShoka
             source.tsuchibun2 = item.getTsuchibun２();
         } else if (ChohyoMongonYoshiki.フォント大.getコード().equals(item.get定型文文字サイズ())) {
             source.tsuchibunLarge = item.getTsuchibunLarge();
-        } else if (ChohyoMongonYoshiki.フォント混在_上大_下小.getコード().equals((item.get定型文文字サイズ()))) {
+        } else if (ChohyoMongonYoshiki.フォント混在_上小_下大.getコード().equals((item.get定型文文字サイズ()))) {
             source.tsuchibunMix1 = item.getTsuchibunMix1();
             source.tsuchibunMix2 = item.getTsuchibunMix2();
-        } else if (ChohyoMongonYoshiki.フォント混在_上小_下大.getコード().equals(item.get定型文文字サイズ())) {
+        } else if (ChohyoMongonYoshiki.フォント混在_上大_下小.getコード().equals(item.get定型文文字サイズ())) {
             source.tsuchibunMixTwo1 = item.getTsuchibunMixtwo1();
             source.tsuchibunMixTwo2 = item.getTsuchibunMixtwo2();
         }

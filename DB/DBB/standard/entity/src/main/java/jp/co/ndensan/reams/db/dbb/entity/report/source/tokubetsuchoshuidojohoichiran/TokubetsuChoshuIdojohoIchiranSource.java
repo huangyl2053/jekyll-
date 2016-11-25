@@ -99,7 +99,7 @@ public class TokubetsuChoshuIdojohoIchiranSource implements IReportSource {
     public RString listLower_7;
     @ReportItem(name = "listLower_8", length = 23, order = 39)
     public RString listLower_8;
-    @ReportItem(name = "shichosonCode", length = 24, order = 3)
+    @ReportItem(name = "shichosonCode", length = 24, order = 40)
     public RString shichosonCode;
     @ReportExpandedInfo(id = "A")
     public ExpandedInformation expandedInformation;

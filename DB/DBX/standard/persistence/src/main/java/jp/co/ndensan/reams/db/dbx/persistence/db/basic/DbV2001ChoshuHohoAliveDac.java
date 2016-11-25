@@ -106,8 +106,6 @@ public class DbV2001ChoshuHohoAliveDac implements ISaveable<DbV2001ChoshuHohoEnt
     @Override
     public int save(DbV2001ChoshuHohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護徴収方法Aliveエンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 

@@ -29,16 +29,16 @@ class DankaiHanteiKingaku implements IHanteiHoho {
     public boolean matches(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
         Decimal gokeiKingaku;
         if (isKasei(hokenryoDankaiHanteiParameter)) {
-            gokeiKingaku = hokenryoDankaiHanteiParameter.getFukaKonkyo().getGokeiShotoku();
+            gokeiKingaku = nullToZero(hokenryoDankaiHanteiParameter.getFukaKonkyo().getGokeiShotoku());
         } else {
-            gokeiKingaku = hokenryoDankaiHanteiParameter.getFukaKonkyo().getGokeiShotoku()
-                    .add(hokenryoDankaiHanteiParameter.getFukaKonkyo().getKotekiNenkinShunyu());
+            gokeiKingaku = nullToZero(hokenryoDankaiHanteiParameter.getFukaKonkyo().getGokeiShotoku())
+                    .add(nullToZero(hokenryoDankaiHanteiParameter.getFukaKonkyo().getKotekiNenkinShunyu()));
         }
         if (getJogen().compareTo(new Decimal(-1)) == 0) {
             return (0 <= gokeiKingaku.compareTo(getKagen()));
         } else {
             // 下限＜＝合計金額　AND 合計金額＜＝上限
-            return (0 <= gokeiKingaku.compareTo(getKagen()) && gokeiKingaku.compareTo(getJogen()) <= 0);
+            return (0 <= gokeiKingaku.compareTo(getKagen()) && (gokeiKingaku.compareTo(getJogen()) <= 0 || getJogen().compareTo(Decimal.ZERO) == 0));
         }
 
     }
@@ -50,6 +50,10 @@ class DankaiHanteiKingaku implements IHanteiHoho {
             }
         }
         return false;
+    }
+
+    private Decimal nullToZero(Decimal decimal) {
+        return decimal == null ? Decimal.ZERO : decimal;
     }
 
     /**

@@ -71,7 +71,9 @@ public enum NinteiShinseiHoreiCode {
      * @return {@code code} に対応する申請区分（法令）コード
      */
     public static NinteiShinseiHoreiCode toValue(RString code) {
-        if (code == null || code.isEmpty()) return null;
+        if (code == null || code.isEmpty()) {
+            return null;
+        }
         for (NinteiShinseiHoreiCode ninteiShinseiHoreiCode : NinteiShinseiHoreiCode.values()) {
             if (ninteiShinseiHoreiCode.code.equals(code)) {
                 return ninteiShinseiHoreiCode;

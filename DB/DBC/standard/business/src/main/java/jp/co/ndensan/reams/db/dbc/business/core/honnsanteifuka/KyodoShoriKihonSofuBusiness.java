@@ -14,9 +14,13 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.KyodoShoriKiho
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.KyodoShoriKooGakuTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.KyodoShoriShouKannTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.honnsanteifuka.SofuEraRelateEntity;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -106,6 +110,7 @@ public class KyodoShoriKihonSofuBusiness {
         tableEntity.set履歴番号(entity.getRirekiNo());
         tableEntity.set世帯集約番号(entity.getSetaiShuyakuNo());
         tableEntity.set世帯所得区分コード(entity.getSetaiShotokuKubunCode());
+        tableEntity.set所得区分コード(entity.getShotokuKubunCode());
         tableEntity.set老齢福祉年金受給有フラグ(entity.getRoureiFukushiNenkinJukyuAriFlag());
         tableEntity.set利用者負担第２段階有フラグ(entity.getRiyoshaFutan2DankaiAriFlag());
         tableEntity.set支給申請書出力有フラグ(entity.getShikyuShinseishoOutputAriFlag());
@@ -199,7 +204,10 @@ public class KyodoShoriKihonSofuBusiness {
         csvEntity.set標準開始日(dateChangeToRString(entity.get標準負担適用開始日()));
         csvEntity.set標準終了日(dateChangeToRString(entity.get標準負担適用終了日()));
         csvEntity.set被下開始日(dateChangeToRString(entity.get給付率引下げ開始日()));
-        csvEntity.set作成年月日(new RString(FlexibleDate.getNowDate().toString()));
+        RString 帳票作成日時 = YMDHMS.now().getRDateTime().getTime()
+                .toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
+        csvEntity.set作成年月日(FlexibleDate.getNowDate().seireki().separator(Separator.SLASH)
+                .fillType(FillType.BLANK).toDateString().concat(RString.HALF_SPACE).concat(帳票作成日時));
         csvEntity.set処理年月(処理年月);
         return csvEntity;
     }

@@ -137,11 +137,8 @@ import jp.co.ndensan.reams.ua.uax.service.core.koza.IKozaManager;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaService;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.service.core.NenkinTokuchoKaifuJohoManager;
-import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
-import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
-import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
@@ -391,6 +388,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             発行する帳票List.add(TsuchiSho.介護保険料額決定通知書_過年度.get名称());
             発行する帳票List.add(TsuchiSho.介護保険料額変更兼特別徴収中止通知書_過年度.get名称());
             発行する帳票List.add(TsuchiSho.郵便振替納付書.get名称());
+            発行する帳票List.add(TsuchiSho.賦課台帳_本算定.get名称());
         }
         return 発行する帳票List;
     }
@@ -723,7 +721,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             仮算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(entity));
         }
 
-        List<Kitsuki> 出力期リスト = get出力期リスト(出力期);
+        List<Kitsuki> 出力期リスト = parameter.get納入通知書_出力期リスト();
         IName 代納人氏名 = null;
         if (AtesakiShubetsu.代納人.equals(通知書共通情報.get宛先情報().get宛先種別())) {
             代納人氏名 = 通知書共通情報.get宛先情報().get宛先名称();
@@ -921,8 +919,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
         本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
         本算定通知書情報.set納組情報(通知書共通情報.get納組情報());
-        本算定通知書情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報List());
-        本算定通知書情報.set特徴納期情報リスト(通知書共通情報.get特徴収入情報List());
+        本算定通知書情報.set普徴納期情報リスト(get普徴納期情報List(通知書共通情報));
+        本算定通知書情報.set特徴納期情報リスト(get特徴納期情報List(通知書共通情報));
         本算定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         本算定通知書情報.set口座情報(通知書共通情報.get口座情報());
         本算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
@@ -945,6 +943,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定決定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         本算定決定通知書情報.set処理区分(ShoriKubun.リアル);
         本算定決定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
+        本算定決定通知書情報.set現年度_過年度区分(通知書共通情報.get年度区分());
 
         RString 通知書定型文 = RString.EMPTY;
         if (帳票制御共通 != null && !nullTOEmpty(帳票制御共通.getTeikeibunMojiSize()).isEmpty()) {
@@ -996,6 +995,28 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         insertリアル発行履歴(通知書共通情報.get賦課の情報_更正後().get賦課情報(), 決定通知書_帳票分類ID);
     }
 
+    private List<NokiJoho> get普徴納期情報List(KakushuTsuchishoCommonInfo 通知書共通情報) {
+        if (GennenKanen.現年度 == 通知書共通情報.get年度区分()) {
+            return 通知書共通情報.get普徴納期情報List();
+        }
+        List<NokiJoho> 普徴納期情報List = new ArrayList<>();
+        for (NokiJoho 普徴納期情報 : 通知書共通情報.get普徴納期情報List()) {
+            Decimal 普徴期別金額 = 通知書共通情報.get賦課の情報_更正後().get賦課情報().get普徴期別金額(普徴納期情報.get期月().get期AsInt());
+            if (!(null == 普徴期別金額 || Decimal.ZERO.equals(普徴期別金額))) {
+                普徴納期情報List.add(普徴納期情報);
+            }
+        }
+        return 普徴納期情報List;
+    }
+
+    private List<NokiJoho> get特徴納期情報List(KakushuTsuchishoCommonInfo 通知書共通情報) {
+        if (GennenKanen.現年度 == 通知書共通情報.get年度区分()) {
+            return 通知書共通情報.get特徴収入情報List();
+        }
+
+        return null;
+    }
+
     /**
      * 介護保険料額変更兼特別徴収中止通知書発行メソッドです。
      *
@@ -1032,8 +1053,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
         本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
         本算定通知書情報.set納組情報(通知書共通情報.get納組情報());
-        本算定通知書情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報List());
-        本算定通知書情報.set特徴納期情報リスト(通知書共通情報.get特徴収入情報List());
+        本算定通知書情報.set普徴納期情報リスト(get普徴納期情報List(通知書共通情報));
+        本算定通知書情報.set特徴納期情報リスト(get特徴納期情報List(通知書共通情報));
         本算定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         本算定通知書情報.set口座情報(通知書共通情報.get口座情報());
         本算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
@@ -1056,6 +1077,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定決定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         本算定決定通知書情報.set処理区分(ShoriKubun.リアル);
         本算定決定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
+        本算定決定通知書情報.set現年度_過年度区分(通知書共通情報.get年度区分());
 
         List<KaigoHokenryogakuHenkoKenChushiTsuchishoJoho> entities = new ArrayList<>();
         KaigoHokenryogakuHenkoKenChushiTsuchishoJoho 決定通知書情報 = new KaigoHokenryogakuHenkoKenChushiTsuchishoJoho();
@@ -1137,7 +1159,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             本算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(entity));
         }
 
-        List<Kitsuki> 出力期リスト = get出力期リスト(出力期);
+        List<Kitsuki> 出力期リスト = parameter.get納入通知書_出力期リスト();
         IName 代納人氏名 = null;
         if (AtesakiShubetsu.代納人.equals(通知書共通情報.get宛先情報().get宛先種別())) {
             代納人氏名 = 通知書共通情報.get宛先情報().get宛先名称();
@@ -1155,7 +1177,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
         NonyuTsuchiShoJohoFactory nonyuTsuchiShoJohoFactory = InstanceProvider.create(NonyuTsuchiShoJohoFactory.class);
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報
-                = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名);
+                = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名,
+                        ReportIdDBB.DBB100045.getReportId().equals(帳票ID));
 
         if (本算定_区分.equals(区分)) {
             publish納入通知書本算定(帳票ID, 本算定納入通知書情報, reportManager);
@@ -1982,14 +2005,14 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
     }
 
-    private List<RString> get検索用科目リスト() {
-        // 科目に国保特徴と国保普徴を指定する場合の例。
-        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
-        IShunoKamoku 介護保険料_特別徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
-        IShunoKamoku 介護保険料_普通徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
-        List<RString> kamokuList = new ArrayList<>();
-        kamokuList.add(介護保険料_特別徴収.get表示用コードwithハイフン());
-        kamokuList.add(介護保険料_普通徴収.get表示用コードwithハイフン());
-        return kamokuList;
-    }
+//    private List<RString> get検索用科目リスト() {
+//        // 科目に国保特徴と国保普徴を指定する場合の例。
+//        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
+//        IShunoKamoku 介護保険料_特別徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
+//        IShunoKamoku 介護保険料_普通徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+//        List<RString> kamokuList = new ArrayList<>();
+//        kamokuList.add(介護保険料_特別徴収.get表示用コードwithハイフン());
+//        kamokuList.add(介護保険料_普通徴収.get表示用コードwithハイフン());
+//        return kamokuList;
+//    }
 }

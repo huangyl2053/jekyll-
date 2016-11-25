@@ -33,5 +33,11 @@ public class KyufuJohoEntity {
     private int 保険請求額;
     private int 利用者負担額;
     private int 改修費用合計;
+    private RString 被保険者番号;
+    private RString 整理番号;
+    private RString 事業所番号;
+    private RString 様式番号;
+    private RString 明細番号;
+    private RString 識別番号;
     private DbT7063KaigoJigyoshaShiteiServiceEntity 事業者名称;
 }

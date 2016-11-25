@@ -64,13 +64,13 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
             return;
         }
         RString 社福減免Key = get社福減免Key(entity.get社福減免());
-        if (社福減免KeyList.contains(社福減免Key)) {
-            return;
-        }
-        社福減免KeyList.add(社福減免Key);
         RString 全項目 = 社福減免全項目(entity.get社福減免());
         Decimal 連番 = 連番Map.get(entity.get社福減免().get被保険者番号());
         if (連番 == null) {
+            if (社福減免KeyList.contains(社福減免Key)) {
+                return;
+            }
+            社福減免KeyList.add(社福減免Key);
             連番Map.put(entity.get社福減免().get被保険者番号(), Decimal.ONE);
             IdouTblEntity update = entity.get異動一時();
             update.set社福減免(全項目);
@@ -82,6 +82,10 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
             if (連番temp.intValue() != entity.get異動一時().get連番()) {
                 return;
             }
+            if (社福減免KeyList.contains(社福減免Key)) {
+                return;
+            }
+            社福減免KeyList.add(社福減免Key);
             連番Map.put(entity.get社福減免().get被保険者番号(), 連番temp);
             IdouTblEntity update = entity.get異動一時();
             update.set社福減免(全項目);
@@ -89,6 +93,10 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番.add(Decimal.ONE).intValue()) {
+            if (社福減免KeyList.contains(社福減免Key)) {
+                return;
+            }
+            社福減免KeyList.add(社福減免Key);
             連番Map.put(entity.get社福減免().get被保険者番号(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
             insert.set被保険者番号(entity.get社福減免().get被保険者番号());
@@ -125,7 +133,8 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
         全項目 = cancatYMD(社福減免.get適用終了日(), 全項目);
         全項目 = 全項目
                 .concat(社福減免.get減免_減額種類()).concat(SPLIT)
-                .concat(社福減免.get軽減率());
+                .concat(社福減免.get軽減率()).concat(SPLIT)
+                .concat(new RString(社福減免.get履歴番号()));
         return 全項目;
     }
 

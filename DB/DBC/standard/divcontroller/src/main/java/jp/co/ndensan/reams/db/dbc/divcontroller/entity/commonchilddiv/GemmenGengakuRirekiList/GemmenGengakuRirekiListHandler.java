@@ -27,6 +27,8 @@ public class GemmenGengakuRirekiListHandler {
 
     private final GemmenGengakuRirekiListDiv div;
     private static final int NUM_0 = 0;
+    private static final RString 円 = new RString("\\");
+    private static final RString 率 = new RString("%");
 
     /**
      * コンストラクタです。
@@ -86,7 +88,7 @@ public class GemmenGengakuRirekiListHandler {
             tRow.getTekiyoShuryoYMD().setValue(entity.get適用終了日());
             tRow.getKyufuritsuKeigenritsuFutangaku().setValue(
                     entity.get負担額() == null
-                    ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get負担額(), NUM_0));
+                            ? RString.EMPTY : 円.concat(DecimalFormatter.toコンマ区切りRString(entity.get負担額(), NUM_0)));
             tRowList.add(tRow);
         }
         for (RiyoshaFutangakuGengakuJyohoEntity entity : riList) {
@@ -95,7 +97,7 @@ public class GemmenGengakuRirekiListHandler {
             tRow.getTekiyoKaishiYMD().setValue(entity.get適用開始日());
             tRow.getTekiyoShuryoYMD().setValue(entity.get適用終了日());
             tRow.getKyufuritsuKeigenritsuFutangaku().setValue(
-                    entity.get給付率() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get給付率().value(), NUM_0));
+                    entity.get給付率() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get給付率().value(), NUM_0).concat(率));
             tRowList.add(tRow);
         }
         for (ShakaiFukushiHojinRiyoshaFutanKeigenJyohoEntity entity : shList) {

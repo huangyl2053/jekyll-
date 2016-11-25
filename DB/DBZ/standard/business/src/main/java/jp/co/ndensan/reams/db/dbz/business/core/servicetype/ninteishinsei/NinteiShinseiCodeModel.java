@@ -37,5 +37,6 @@ public class NinteiShinseiCodeModel implements Serializable {
 
     private RString 連絡事項;
     private HyojiMode 表示モード;
+    private RString メニューID;
 
 }

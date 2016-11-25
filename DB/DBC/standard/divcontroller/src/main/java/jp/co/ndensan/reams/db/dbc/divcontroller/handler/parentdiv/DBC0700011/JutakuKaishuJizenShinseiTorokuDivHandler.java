@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugai
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.JutakuKaishuJizenShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJyusyoChofukuHanntei;
-import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakuKaishuShikyuGendogakuHantei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
 import jp.co.ndensan.reams.db.dbc.service.report.jutakukaishujizenshinseitsuchisho.JutakuKaishuJizenShinseiTsuchishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
@@ -321,6 +320,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             ShikibetsuCode 識別コード, ShokanJutakuKaishuJizenShinsei data,
             RString seiriNo, FlexibleYearMonth flexibleYearMonth) {
         ShiharaiKekkaResult result;
+
         if (登録モード.equals(画面モード)) {
             JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
             model.set被保険者番号(被保険者番号);
@@ -330,9 +330,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             model.set識別コード(識別コード);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                     .getCcdJutakuJizenShinseiDetail().initialize(model);
-            result = JutakuKaishuJizenShinsei.createInstance()
-                    .getNewJutakuKaishuHi(被保険者番号);
-            loadTabKozaJyoho(result, 画面モード, data);
         } else {
             RString yoshikiNo = JutakuKaishuJizenShinsei.createInstance()
                     .getYoshikiNo(被保険者番号, flexibleYearMonth, seiriNo);
@@ -346,12 +343,37 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             model.set識別コード(識別コード);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                     .getCcdJutakuJizenShinseiDetail().initialize(model);
-            result = JutakuKaishuJizenShinsei.createInstance()
-                    .getOldJutakuKaishuHi(被保険者番号, flexibleYearMonth, seiriNo);
-            loadTabKozaJyoho(result, 画面モード, data);
         }
+        result = JutakuKaishuJizenShinsei.createInstance()
+                .getKakoJutakuKaishuHi(被保険者番号, new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM()
+                        .getValue().getYearMonth().toDateString()));
+        loadTabKozaJyoho(result, 画面モード, data);
         div.setHidJutakuKaisyuJyohoFlg(初期化済み);
         return result;
+    }
+
+    /**
+     * 前回までの支払結果設定
+     *
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public void 前回までの支払結果設定(HihokenshaNo 被保険者番号) {
+        ShiharaiKekkaResult result;
+
+        result = JutakuKaishuJizenShinsei.createInstance()
+                .getKakoJutakuKaishuHi(被保険者番号, new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM()
+                        .getValue().getYearMonth().toDateString()));
+
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                .getTxtHiyoTotalMae().setValue(result.get費用額合計());
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                .getTxtHokenTaishoHiyoMae().setValue(result.get費用額合計());
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                .getTxtHokenKyufuAmountMae().setValue(result.get保険給付額());
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                .getTxtRiyoshaFutanAmountMae().setValue(result.get利用者負担額());
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                .setHdnResetServiceYM(result.get開始サービス提供年月().toDateString());
     }
 
     /**
@@ -744,7 +766,10 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTxtServiceYM().getValue().getYearMonth().toDateString());
 
         return JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.createInstance()
-                .checkYaokaigoJyotaiSandannkai(hihokenshaNo, yearMonth);
+                .checkYaokaigoJyotaiSandannkai(hihokenshaNo,
+                        new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
+                                .getTabJutakuKaisyuJyoho().getTotalPanel().getHdnResetServiceYM()),
+                        yearMonth);
     }
 
     /**
@@ -759,33 +784,10 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         FlexibleYearMonth yearMonth = new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel()
                 .getTxtServiceYM().getValue().getYearMonth().toDateString());
         return JutakuKaishuJyusyoChofukuHanntei.createInstance()
-                .checkKaishuJyusyoChofukuToroku(hihokenshaNo, yearMonth, 住宅住所);
-    }
-
-    /**
-     * 限度額チェック
-     *
-     * @param hihokenshaNo HihokenshaNo
-     * @param seiriNo RString
-     * @return チェック結果
-     */
-    public boolean 限度額チェック(HihokenshaNo hihokenshaNo, RString seiriNo) {
-        FlexibleYearMonth yearMonth = new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel()
-                .getTxtServiceYM().getValue().getYearMonth().toDateString());
-
-        boolean resetFlg = true;
-        List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
-                .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
-        KeyValueDataSource 要介護状態区分 = new KeyValueDataSource(要介護状態区分_KEY, 要介護状態区分_VALUE);
-        KeyValueDataSource 住宅住所変更 = new KeyValueDataSource(住宅住所変更_KEY, 住宅住所変更_VALUE);
-        if (!selectedItems.contains(要介護状態区分) && !selectedItems.contains(住宅住所変更)) {
-            resetFlg = false;
-        }
-        Decimal hiyoTotalNow = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                .getTotalPanel().getTxtHiyoTotalNow().getValue();
-
-        JutakuKaishuShikyuGendogakuHantei servies = new JutakuKaishuShikyuGendogakuHantei();
-        return servies.checkJutakukaishuShikyuGendogaku(hihokenshaNo, yearMonth, seiriNo, resetFlg, hiyoTotalNow);
+                .checkKaishuJyusyoChofukuToroku(hihokenshaNo,
+                        new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
+                                .getTabJutakuKaisyuJyoho().getTotalPanel().getHdnResetServiceYM()),
+                        yearMonth, 住宅住所);
     }
 
     /**
@@ -794,10 +796,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
      * @param hihokenshaNo HihokenshaNo
      */
     public void 支払結果の設定(HihokenshaNo hihokenshaNo) {
-        FlexibleYearMonth 着工予定日 = new FlexibleDate(new RDate(div.getKaigoShikakuKihonShaPanel()
-                .getTabShinseiContents().getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧()
-                .get(0).getTxtChakkoYoteibi().toString()).toDateString()).getYearMonth();
-        Decimal 支給限度額 = JutakuKaishuJizenShinsei.createInstance().getShikyuGendoGaku(hihokenshaNo, 着工予定日);
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel()
+                .getTxtServiceYM().getValue().getYearMonth().toDateString());
+        Decimal 支給限度額 = JutakuKaishuJizenShinsei.createInstance().getShikyuGendoGaku(hihokenshaNo, サービス提供年月);
 
         List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
@@ -1255,16 +1256,16 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 builder.set支払窓口開始時間(new RString(String.format(連番フォーマット.toString(),
                         div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza()
                         .getStartHHMM().getHour())).concat(new RString(String.format(連番フォーマット.toString(),
-                                                div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                                                .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getMinute()))));
+                        div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                        .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getMinute()))));
             }
             if (div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM() != null) {
                 builder.set支払窓口終了時間(new RString(String.format(連番フォーマット.toString(),
                         div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                         .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getHour()))
                         .concat(new RString(String.format(連番フォーマット.toString(),
-                                                div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                                                .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getMinute()))));
+                                div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                                .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getMinute()))));
             }
         } else if (ShiharaiHohoKubun.口座払.getコード().equals(支払方法区分コード)) {
             builder.set口座ID(Long.valueOf(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
@@ -1386,7 +1387,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 builder.set支払窓口開始時間(new RString(String.format(連番フォーマット.toString(),
                         div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getHour()))
                         .concat(new RString(String.format(連番フォーマット.toString(), div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                                                .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getMinute()))));
+                                .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getMinute()))));
             }
             if (div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza()
                     .getEndHHMM() != null) {
@@ -1394,7 +1395,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                         div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                         .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getHour()))
                         .concat(new RString(String.format(連番フォーマット.toString(), div.getKaigoShikakuKihonShaPanel()
-                                                .getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getMinute()))));
+                                .getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getMinute()))));
             }
         } else if (ShiharaiHohoKubun.口座払.getコード().equals(支払方法区分コード) && !div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                 .getCcdJutakuKaishuJizenShinseiKoza().getKozaNo().isEmpty()) {
@@ -1528,8 +1529,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                 .getTxtRiyoshaFutanAmountMae().setDisabled(true);
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                .getBtnRireki().setDisabled(true);
-        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                 .getTxtHiyoTotalNow().setDisabled(true);
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                 .getTxtHokenTaishoHiyoNow().setDisabled(true);
@@ -1578,25 +1577,16 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
      * @param param ShiharaiKekkaResult
      */
     private void loadTabKozaJyoho(ShiharaiKekkaResult param, RString 画面モード, ShokanJutakuKaishuJizenShinsei data) {
-        if (param != null) {
-            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtHiyoTotalMae().setValue(param.get費用額合計());
-            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtHokenTaishoHiyoMae().setValue(param.get費用額合計());
-            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtHokenKyufuAmountMae().setValue(param.get保険給付額());
-            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtRiyoshaFutanAmountMae().setValue(param.get利用者負担額());
-        } else {
-            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtHiyoTotalMae().setValue(Decimal.ZERO);
-            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtHokenTaishoHiyoMae().setValue(Decimal.ZERO);
-            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtHokenKyufuAmountMae().setValue(Decimal.ZERO);
-            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtRiyoshaFutanAmountMae().setValue(Decimal.ZERO);
-        }
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                .getTxtHiyoTotalMae().setValue(param.get費用額合計());
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                .getTxtHokenTaishoHiyoMae().setValue(param.get費用額合計());
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                .getTxtHokenKyufuAmountMae().setValue(param.get保険給付額());
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                .getTxtRiyoshaFutanAmountMae().setValue(param.get利用者負担額());
+        div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                .setHdnResetServiceYM(param.get開始サービス提供年月().toDateString());
 
         if (data != null) {
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
@@ -1956,14 +1946,14 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             if (!Decimal.valueOf(oldShinseiData.get給付額等_費用額合計()).equals(div.getKaigoShikakuKihonShaPanel()
                     .getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHiyoTotalNow().getValue())
                     || !Decimal.valueOf(oldShinseiData.get給付額等_保険対象費用額()).equals(div
-                            .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                            .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue())
+                    .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                    .getTotalPanel().getTxtHokenTaishoHiyoNow().getValue())
                     || !Decimal.valueOf(oldShinseiData.get給付額等_保険給付費額()).equals(div
-                            .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                            .getTotalPanel().getTxtHokenKyufuAmountNow().getValue())
+                    .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                    .getTotalPanel().getTxtHokenKyufuAmountNow().getValue())
                     || !Decimal.valueOf(oldShinseiData.get給付額等_利用者自己負担額()).equals(div
-                            .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
-                            .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue())) {
+                    .getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
+                    .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue())) {
                 div.setHidDataChangeFlg(非表示用フラグ_TRUE);
             }
         } else if (!Decimal.ZERO.equals(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()

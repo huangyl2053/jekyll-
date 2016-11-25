@@ -46,16 +46,6 @@ public class HonsanteiIdoValidationHandler {
     }
 
     /**
-     * 実行ボタンクリック時のバリデーションチェック。
-     *
-     * @return バリデーション突合結果
-     */
-    public ValidationMessageControlPairs 処理対象と出力期のValidate() {
-        IValidationMessages messages = new ControlValidator(div).validate();
-        return createDictionary().check(messages);
-    }
-
-    /**
      * 実行ボタンクリック時必須チェックのバリデーションチェック。
      *
      * @param 特徴開始通知書Flag boolean
@@ -72,12 +62,6 @@ public class HonsanteiIdoValidationHandler {
         return create必須チェックDictionary().check(messages);
     }
 
-    private ValidationDictionary createDictionary() {
-        return new ValidationDictionaryBuilder()
-                .add(HonsanteiIdoValidationMessages.処理対象と出力期の一致チェック,
-                        div.getHonsanteiIdoChohyoHakko().getHonSanteiIdoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki())
-                .build();
-    }
 
     private ValidationDictionary create必須チェックDictionary() {
         return new ValidationDictionaryBuilder()
@@ -98,6 +82,8 @@ public class HonsanteiIdoValidationHandler {
                         div.getHonSanteiIdoTsuchiKobetsuJoho().getChkNotsuTaishoSha())
                 .add(HonsanteiIdoValidationMessages.納入通知書の発行日チェック,
                         div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtNotsuHakkoYMD())
+                .add(HonsanteiIdoValidationMessages.処理対象と出力期の一致チェック,
+                        div.getHonsanteiIdoChohyoHakko().getHonSanteiIdoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki())
                 .build();
     }
 
@@ -107,23 +93,6 @@ public class HonsanteiIdoValidationHandler {
 
         public ControlValidator(HonsanteiIdoDiv div) {
             this.div = div;
-        }
-
-        /**
-         * 「 実行ボタンクリック時のバリデーションチェック。
-         *
-         * @param 特徴開始通知書Flag boolean
-         * @param 決定変更通知書Flag boolean
-         * @param 納入通知書Flag boolean
-         * @return バリデーション突合結果
-         */
-        public IValidationMessages validate() {
-            IValidationMessages messages = ValidationMessagesFactory.createInstance();
-            messages.add(ValidateChain.validateStart(div)
-                    .ifNot(HonsanteiIdoSpec.処理対象と出力期の一致)
-                    .thenAdd(HonsanteiIdoValidationMessages.処理対象と出力期の一致チェック)
-                    .messages());
-            return messages;
         }
 
         /**
@@ -163,6 +132,8 @@ public class HonsanteiIdoValidationHandler {
                         .thenAdd(HonsanteiIdoValidationMessages.納入通知書の対象者チェック)
                         .ifNot(HonsanteiIdoSpec.納入通知書の発行日)
                         .thenAdd(HonsanteiIdoValidationMessages.納入通知書の発行日チェック)
+                        .ifNot(HonsanteiIdoSpec.処理対象と出力期の一致)
+                        .thenAdd(HonsanteiIdoValidationMessages.処理対象と出力期の一致チェック)
                         .messages());
             }
             return messages;

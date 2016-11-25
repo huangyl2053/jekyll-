@@ -5,11 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishuyaokaigojyotai.IJutakuKaishuYaokaigoJyotaiSandannkaiHanteiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -80,30 +76,18 @@ public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
     }
 
     /**
-     * サービス提供年月取得
-     *
-     * @param 被保険者番号 HihokenshaNo
-     * @param サービス提供年月 FlexibleYearMonth
-     * @return DbT3034ShokanShinseiEntity
-     */
-    @Transaction
-    public DbT3034ShokanShinseiEntity getサービス提供年月(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
-        Map<String, Object> サービス提供年月検索条件 = new HashMap<>();
-        サービス提供年月検索条件.put("被保険者番号", 被保険者番号);
-        サービス提供年月検索条件.put("サービス提供年月", サービス提供年月);
-        IJutakuKaishuYaokaigoJyotaiSandannkaiHanteiMapper mapper = mapperProvider.create(IJutakuKaishuYaokaigoJyotaiSandannkaiHanteiMapper.class);
-        return mapper.selectサービス提供年月ByParam(サービス提供年月検索条件);
-    }
-
-    /**
      * 要介護状態３段階変更の判定
      *
      * @param 被保険者番号 HihokenshaNo
-     * @param サービス提供年月 FlexibleYearMonth
+     * @param 開始サービス提供年月 FlexibleYearMonth
+     * @param 終了サービス提供年月 FlexibleYearMonth
      * @return bolean
      */
-    public boolean checkYaokaigoJyotaiSandannkai(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
-        Code konnkaiYokaigoJotaiKubunCode = getYaokaigoJyotaiKubun(被保険者番号, サービス提供年月);
+    public boolean checkYaokaigoJyotaiSandannkai(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth 開始サービス提供年月,
+            FlexibleYearMonth 終了サービス提供年月) {
+        Code konnkaiYokaigoJotaiKubunCode = getYaokaigoJyotaiKubun(被保険者番号, 終了サービス提供年月);
         if (konnkaiYokaigoJotaiKubunCode == null) {
             return false;
         }
@@ -111,11 +95,7 @@ public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
                 && !konnkaiYokaigoJotaiKubunCode.value().startsWith(要介護, 0)) {
             return false;
         }
-        DbT3034ShokanShinseiEntity entity = getサービス提供年月(被保険者番号, サービス提供年月);
-        if (entity == null) {
-            return false;
-        }
-        Code shokaiYokaigoJotaiKubunCode = getYaokaigoJyotaiKubun(被保険者番号, entity.getServiceTeikyoYM());
+        Code shokaiYokaigoJotaiKubunCode = getYaokaigoJyotaiKubun(被保険者番号, 開始サービス提供年月);
         if (shokaiYokaigoJotaiKubunCode == null) {
             return false;
         }

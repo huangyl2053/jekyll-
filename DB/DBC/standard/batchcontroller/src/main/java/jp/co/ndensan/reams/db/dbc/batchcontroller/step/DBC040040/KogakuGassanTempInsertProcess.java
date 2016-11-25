@@ -53,7 +53,7 @@ public class KogakuGassanTempInsertProcess extends BatchProcessBase<KogakuGassan
     private void setTempEntity(KogakuGassanJohoEntity entity, KogakuGassanTempEntity tempEntity) {
         tempEntity.setHihokenshaNo(entity.get高額合算申請書().getHihokenshaNo());
         tempEntity.setTaishoNendo(entity.get高額合算申請書().getTaishoNendo());
-        tempEntity.setHokenshaNo(entity.get高額合算申請書().getHokenshaNo());
+        tempEntity.setHokenshaNo(entity.get高額合算自己負担額().getHokenshaNo());
         tempEntity.setSeiriNo(entity.get高額合算申請書().getSeiriNo());
         tempEntity.setRirekiNo(entity.get高額合算申請書().getRirekiNo());
         tempEntity.setShinseiJokyoKubun(entity.get高額合算申請書().getShinseiJokyoKubun());

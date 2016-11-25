@@ -35,8 +35,8 @@ public class KokuhorenkyoutsuGetFileProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
         KokuhorenKyoutsuuFileGetManager ファイル取得Manager = KokuhorenKyoutsuuFileGetManager.createInstance();
-        KokuhorenKyoutsuuFileGetReturnEntity entity
-                = ファイル取得Manager.getFile(parameter.get交換情報識別番号(), parameter.getファイル格納フォルダ名());
+        KokuhorenKyoutsuuFileGetReturnEntity entity = ファイル取得Manager.getFile(parameter.get交換情報識別番号(),
+                parameter.getファイル格納フォルダ名(), parameter.getLoginUserID());
         returnEntity = new OutputParameter<>();
         returnEntity.setValue(entity);
     }

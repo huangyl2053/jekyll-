@@ -165,7 +165,7 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(READ_DATA_ID, parameter.toKyufukanrihyoOutMybatisParameter());
+        return new BatchDbReader(READ_DATA_ID, parameter.toKyufukanrihyoOutMybatisParameter(RString.EMPTY, RString.EMPTY, RString.EMPTY));
     }
 
     @Override
@@ -511,8 +511,16 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
         meisaiEntity.set居宅サービス計画作成区分コード(JukyushaIF_KeikakuSakuseiKubunCode.自己作成.getコード());
         meisaiEntity.set事業所番号_サービス事業所(trimRString(自己作成管理一時Entity.getServiceTeikyoJigyoshaNo()));
         if (!RString.isNullOrEmpty(自己作成管理一時Entity.getServiceTeikyoJigyoshaNo())) {
-            meisaiEntity.set指定_基準該当_地域密着型サービス_総合事業識別コード(JigyoshoKubun.toValue(
-                    自己作成管理一時Entity.getServiceTeikyoJigyoshaNo().substring(INT_2, INT_3)).get国保連送付コード());
+            if (JigyoshoKubun.指定事業所.getコード().equals(自己作成管理一時Entity.getServiceTeikyoJigyoshaNo().substring(INT_2, INT_3))
+                    || JigyoshoKubun.基準該当事業所.getコード().equals(自己作成管理一時Entity.getServiceTeikyoJigyoshaNo().substring(INT_2, INT_3))
+                    || JigyoshoKubun.地域密着型サービス事業所.getコード().equals(自己作成管理一時Entity.getServiceTeikyoJigyoshaNo().substring(INT_2, INT_3))
+                    || JigyoshoKubun.介護予防日常生活支援総合事業事業所.getコード().equals(自己作成管理一時Entity.getServiceTeikyoJigyoshaNo().substring(INT_2, INT_3))) {
+                meisaiEntity.set指定_基準該当_地域密着型サービス_総合事業識別コード(JigyoshoKubun.toValue(
+                        自己作成管理一時Entity.getServiceTeikyoJigyoshaNo().substring(INT_2, INT_3)).get国保連送付コード());
+            } else {
+                meisaiEntity.set指定_基準該当_地域密着型サービス_総合事業識別コード(JigyoshoKubun.指定事業所.get国保連送付コード());
+            }
+
         }
         meisaiEntity.setサービス種類コード(trimRString(自己作成管理一時Entity.getServiceShuruiCode()));
         meisaiEntity.set給付計画単位数_日数(new RString(自己作成管理一時Entity.getKyufuKeikakuTaniSu().toString()));

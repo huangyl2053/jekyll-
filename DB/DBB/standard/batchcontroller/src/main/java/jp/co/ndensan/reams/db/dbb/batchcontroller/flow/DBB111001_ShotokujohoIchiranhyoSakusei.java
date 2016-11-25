@@ -60,7 +60,7 @@ public class DBB111001_ShotokujohoIchiranhyoSakusei extends BatchFlowBase<DBB111
         出力順 = MyBatisOrderByClauseCreator.create(
                 KaigoHokenShotokuJohoIchiranOutPutOrder.class, outputOrder);
         RString 導入形態コード = getParameter().get導入形態コード();
-        if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
+        if (INDEX_120.equals(導入形態コード)) {
             executeStep(所得情報一覧表のデータ取得_単一);
         } else if (INDEX_111.equals(導入形態コード)) {
             for (ShichosonJouhouResult result : getParameter().get市町村情報リスト()) {
@@ -78,7 +78,7 @@ public class DBB111001_ShotokujohoIchiranhyoSakusei extends BatchFlowBase<DBB111
         if (!INDEX_0.equals(flag)) {
             parameter = getParameter().toRegistShoriDateKanriProcessParameter();
             parameter.set市町村情報リスト(getParameter().get市町村情報リスト());
-            if (INDEX_112.equals(導入形態コード) || INDEX_120.equals(導入形態コード)) {
+            if (INDEX_120.equals(導入形態コード)) {
                 executeStep(処理日付管理マスタを登録);
             } else if (INDEX_111.equals(導入形態コード)) {
                 for (ShichosonJouhouResult result : getParameter().get市町村情報リスト()) {

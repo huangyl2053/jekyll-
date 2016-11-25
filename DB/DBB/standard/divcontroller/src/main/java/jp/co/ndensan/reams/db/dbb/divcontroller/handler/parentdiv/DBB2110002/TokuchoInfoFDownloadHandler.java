@@ -225,6 +225,7 @@ public class TokuchoInfoFDownloadHandler {
 
     private void 単一処理対象グリッド設定() {
         List<TokuchoInfoFDownloadInfo> ファイル対象List = TokuchoInfoShoriDateKanri.createInstance().getファイル対象();
+        List<RString> 状況済月 = TokuchoInfoShoriDateKanri.createInstance().get状況済月();
         List<dgTsukiShoriSelect_Row> 単一Rows = new ArrayList<>();
         for (TokuchoInfoFDownloadInfo ファイル対象 : ファイル対象List) {
             dgTsukiShoriSelect_Row row = new dgTsukiShoriSelect_Row();
@@ -237,6 +238,12 @@ public class TokuchoInfoFDownloadHandler {
                     + 作成時.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
             row.getTxtMonth().setValue(new RString(作成日.getMonthValue()).concat(STR_月));
             row.getTxtSakuseiTime().setValue(new RString(ファイル対象.get作成日時().toString()));
+            RString 月 = 作成日.toDateString().substring(INT_4, INT_6);
+            if (状況済月.contains(月) && ファイル対象.isファイル存在()) {
+                row.setSelectable(Boolean.TRUE);
+            } else {
+                row.setSelectable(Boolean.FALSE);
+            }
             単一Rows.add(row);
         }
         div.getTsukiShoriSelect().getDgTsukiShoriSelect().setDataSource(単一Rows);
@@ -244,6 +251,7 @@ public class TokuchoInfoFDownloadHandler {
 
     private void 市町村処理対象グリッド設定(RString 市町村ID) {
         List<TokuchoInfoFDownloadInfo> ファイル対象List = TokuchoInfoShoriDateKanri.createInstance().getファイル対象By市町村(市町村ID);
+        List<RString> 状況済月 = TokuchoInfoShoriDateKanri.createInstance().get状況済月();
         List<dgTsukiShoriSelect_Row> 広域Rows = new ArrayList<>();
         for (TokuchoInfoFDownloadInfo ファイル対象 : ファイル対象List) {
             dgTsukiShoriSelect_Row row = new dgTsukiShoriSelect_Row();
@@ -256,6 +264,12 @@ public class TokuchoInfoFDownloadHandler {
                     + 作成時.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
             row.getTxtMonth().setValue(new RString(作成日.getMonthValue()).concat(STR_月));
             row.getTxtSakuseiTime().setValue(new RString(ファイル対象.get作成日時().toString()));
+            RString 月 = 作成日.toDateString().substring(INT_4, INT_6);
+            if (状況済月.contains(月) && ファイル対象.isファイル存在()) {
+                row.setSelectable(Boolean.TRUE);
+            } else {
+                row.setSelectable(Boolean.FALSE);
+            }
             広域Rows.add(row);
         }
         div.getTsukiShoriSelect().getDgTsukiShoriSelect().setDataSource(広域Rows);
@@ -264,6 +278,7 @@ public class TokuchoInfoFDownloadHandler {
     private void 月処理対象グリッド設定() {
         RString 選択月 = div.getTokuchoInfoDownloadShoriNaiyo().getDdlTsuki().getSelectedKey();
         List<TokuchoInfoFDownloadInfo> ファイル対象List = TokuchoInfoShoriDateKanri.createInstance().getファイル対象();
+        List<RString> 状況済月 = TokuchoInfoShoriDateKanri.createInstance().get状況済月();
         List<dgkoikiShoriSelect_Row> 広域Rows = new ArrayList<>();
         for (TokuchoInfoFDownloadInfo ファイル対象 : ファイル対象List) {
             RDate 作成日 = ファイル対象.get作成日時().getDate();
@@ -285,6 +300,12 @@ public class TokuchoInfoFDownloadHandler {
             if (市町村 != null) {
                 row.getTxtCityCode().setValue(市町村.get市町村コード().value());
                 row.getTxtCityName().setValue(市町村.get市町村名称());
+            }
+            RString 月 = 作成日.toDateString().substring(INT_4, INT_6);
+            if (状況済月.contains(月) && ファイル対象.isファイル存在()) {
+                row.setSelectable(Boolean.TRUE);
+            } else {
+                row.setSelectable(Boolean.FALSE);
             }
             広域Rows.add(row);
         }

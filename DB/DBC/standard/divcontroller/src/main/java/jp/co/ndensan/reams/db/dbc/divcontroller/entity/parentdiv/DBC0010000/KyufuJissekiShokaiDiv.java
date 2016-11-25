@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuJissekiShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,6 +42,18 @@ public class KyufuJissekiShokaiDiv extends Panel {
     private RString hiddenSyuToKenSu;
     @JsonProperty("hiddenZenBanGo")
     private RString hiddenZenBanGo;
+    @JsonProperty("hiddenSearchKey")
+    private RString hiddenSearchKey;
+    @JsonProperty("hiddenStartYM")
+    private RString hiddenStartYM;
+    @JsonProperty("hiddenEndYM")
+    private RString hiddenEndYM;
+    @JsonProperty("hiddenSearchNendo")
+    private RString hiddenSearchNendo;
+    @JsonProperty("hiddenStartIndex")
+    private RString hiddenStartIndex;
+    @JsonProperty("hiddenEndIndex")
+    private RString hiddenEndIndex;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -158,6 +170,114 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     /*
+     * gethiddenSearchKey
+     * @return hiddenSearchKey
+     */
+    @JsonProperty("hiddenSearchKey")
+    public RString getHiddenSearchKey() {
+        return hiddenSearchKey;
+    }
+
+    /*
+     * sethiddenSearchKey
+     * @param hiddenSearchKey hiddenSearchKey
+     */
+    @JsonProperty("hiddenSearchKey")
+    public void setHiddenSearchKey(RString hiddenSearchKey) {
+        this.hiddenSearchKey = hiddenSearchKey;
+    }
+
+    /*
+     * gethiddenStartYM
+     * @return hiddenStartYM
+     */
+    @JsonProperty("hiddenStartYM")
+    public RString getHiddenStartYM() {
+        return hiddenStartYM;
+    }
+
+    /*
+     * sethiddenStartYM
+     * @param hiddenStartYM hiddenStartYM
+     */
+    @JsonProperty("hiddenStartYM")
+    public void setHiddenStartYM(RString hiddenStartYM) {
+        this.hiddenStartYM = hiddenStartYM;
+    }
+
+    /*
+     * gethiddenEndYM
+     * @return hiddenEndYM
+     */
+    @JsonProperty("hiddenEndYM")
+    public RString getHiddenEndYM() {
+        return hiddenEndYM;
+    }
+
+    /*
+     * sethiddenEndYM
+     * @param hiddenEndYM hiddenEndYM
+     */
+    @JsonProperty("hiddenEndYM")
+    public void setHiddenEndYM(RString hiddenEndYM) {
+        this.hiddenEndYM = hiddenEndYM;
+    }
+
+    /*
+     * gethiddenSearchNendo
+     * @return hiddenSearchNendo
+     */
+    @JsonProperty("hiddenSearchNendo")
+    public RString getHiddenSearchNendo() {
+        return hiddenSearchNendo;
+    }
+
+    /*
+     * sethiddenSearchNendo
+     * @param hiddenSearchNendo hiddenSearchNendo
+     */
+    @JsonProperty("hiddenSearchNendo")
+    public void setHiddenSearchNendo(RString hiddenSearchNendo) {
+        this.hiddenSearchNendo = hiddenSearchNendo;
+    }
+
+    /*
+     * gethiddenStartIndex
+     * @return hiddenStartIndex
+     */
+    @JsonProperty("hiddenStartIndex")
+    public RString getHiddenStartIndex() {
+        return hiddenStartIndex;
+    }
+
+    /*
+     * sethiddenStartIndex
+     * @param hiddenStartIndex hiddenStartIndex
+     */
+    @JsonProperty("hiddenStartIndex")
+    public void setHiddenStartIndex(RString hiddenStartIndex) {
+        this.hiddenStartIndex = hiddenStartIndex;
+    }
+
+    /*
+     * gethiddenEndIndex
+     * @return hiddenEndIndex
+     */
+    @JsonProperty("hiddenEndIndex")
+    public RString getHiddenEndIndex() {
+        return hiddenEndIndex;
+    }
+
+    /*
+     * sethiddenEndIndex
+     * @param hiddenEndIndex hiddenEndIndex
+     */
+    @JsonProperty("hiddenEndIndex")
+    public void setHiddenEndIndex(RString hiddenEndIndex) {
+        this.hiddenEndIndex = hiddenEndIndex;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -251,76 +371,6 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtKyufuJissekiListHihokenshaNo() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListHihokenshaNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListHihokenshaNo(TextBox txtKyufuJissekiListHihokenshaNo) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListHihokenshaNo(txtKyufuJissekiListHihokenshaNo);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuJissekiListJuminShubetsu() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListJuminShubetsu();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListJuminShubetsu(TextBox txtKyufuJissekiListJuminShubetsu) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListJuminShubetsu(txtKyufuJissekiListJuminShubetsu);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuJissekiListYokaigodo() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListYokaigodo();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListYokaigodo(TextBox txtKyufuJissekiListYokaigodo) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListYokaigodo(txtKyufuJissekiListYokaigodo);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtKyufuJissekiListNinteiYukoKikan() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListNinteiYukoKikan();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListNinteiYukoKikan(TextBoxDateRange txtKyufuJissekiListNinteiYukoKikan) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListNinteiYukoKikan(txtKyufuJissekiListNinteiYukoKikan);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuJissekiListName() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListName();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListName(TextBox txtKyufuJissekiListName) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListName(txtKyufuJissekiListName);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuJissekiListSeibetsu() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListSeibetsu();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListSeibetsu(TextBox txtKyufuJissekiListSeibetsu) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListSeibetsu(txtKyufuJissekiListSeibetsu);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtKyufuJissekiListSeinengappi() {
-        return this.getKyufuJissekiListPanel().getTxtKyufuJissekiListSeinengappi();
-    }
-
-    @JsonIgnore
-    public void  setTxtKyufuJissekiListSeinengappi(TextBox txtKyufuJissekiListSeinengappi) {
-        this.getKyufuJissekiListPanel().setTxtKyufuJissekiListSeinengappi(txtKyufuJissekiListSeinengappi);
-    }
-
-    @JsonIgnore
     public DataIdoPanelDiv getDataIdoPanel() {
         return this.getKyufuJissekiListPanel().getDataIdoPanel();
     }
@@ -341,16 +391,6 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnMae() {
-        return this.getKyufuJissekiListPanel().getDataIdoPanel().getBtnMae();
-    }
-
-    @JsonIgnore
-    public void  setBtnMae(Button btnMae) {
-        this.getKyufuJissekiListPanel().getDataIdoPanel().setBtnMae(btnMae);
-    }
-
-    @JsonIgnore
     public Button getBtnTsugi() {
         return this.getKyufuJissekiListPanel().getDataIdoPanel().getBtnTsugi();
     }
@@ -358,6 +398,16 @@ public class KyufuJissekiShokaiDiv extends Panel {
     @JsonIgnore
     public void  setBtnTsugi(Button btnTsugi) {
         this.getKyufuJissekiListPanel().getDataIdoPanel().setBtnTsugi(btnTsugi);
+    }
+
+    @JsonIgnore
+    public Button getBtnMae() {
+        return this.getKyufuJissekiListPanel().getDataIdoPanel().getBtnMae();
+    }
+
+    @JsonIgnore
+    public void  setBtnMae(Button btnMae) {
+        this.getKyufuJissekiListPanel().getDataIdoPanel().setBtnMae(btnMae);
     }
 
     @JsonIgnore
@@ -378,26 +428,6 @@ public class KyufuJissekiShokaiDiv extends Panel {
     @JsonIgnore
     public void  setDgKyufuJissekiMeisaiList(DataGrid<dgKyufuJissekiMeisaiList_Row> dgKyufuJissekiMeisaiList) {
         this.getKyufuJissekiListPanel().setDgKyufuJissekiMeisaiList(dgKyufuJissekiMeisaiList);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgKyufuJissekiGokeiList_Row> getDgKyufuJissekiGokeiList() {
-        return this.getKyufuJissekiListPanel().getDgKyufuJissekiGokeiList();
-    }
-
-    @JsonIgnore
-    public void  setDgKyufuJissekiGokeiList(DataGrid<dgKyufuJissekiGokeiList_Row> dgKyufuJissekiGokeiList) {
-        this.getKyufuJissekiListPanel().setDgKyufuJissekiGokeiList(dgKyufuJissekiGokeiList);
-    }
-
-    @JsonIgnore
-    public Button getBtnKyufuJissekiResearch() {
-        return this.getKyufuJissekiListPanel().getBtnKyufuJissekiResearch();
-    }
-
-    @JsonIgnore
-    public void  setBtnKyufuJissekiResearch(Button btnKyufuJissekiResearch) {
-        this.getKyufuJissekiListPanel().setBtnKyufuJissekiResearch(btnKyufuJissekiResearch);
     }
 
     // </editor-fold>

@@ -18,10 +18,12 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuch
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.entity.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -68,31 +70,37 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
             List<RString> 特徴期リスト = honSantei.create特徴期リスト();
             特徴期リスト = sort期(特徴期リスト);
             List<Tsuki> 特徴月リス = create特徴月リスト(特徴期リスト);
-            List<RString> 普徴期リスト = honSantei.create普徴期リスト();
+            List<RString> 普徴期リスト = honSantei.create普徴期リスト(item.get本算定決定通知書情報().get現年度_過年度区分());
             普徴期リスト = sort期(普徴期リスト);
-            List<Tsuki> 普徴月リスト = create普徴月リスト(普徴期リスト);
+            boolean is現年度 = GennenKanen.現年度 == item.get本算定決定通知書情報().get現年度_過年度区分();
+            List<Tsuki> 普徴月リスト = create普徴月リスト(普徴期リスト, item.get本算定決定通知書情報().get現年度_過年度区分());
             for (int i = 1; i <= ROWNUM; i++) {
                 KibetsuBusiness kibetsuBusiness = new KibetsuBusiness();
                 boolean flag = true;
-                if (i <= 普徴期リスト.size()) {
+                if (i <= 普徴期リスト.size()
+                        && (is現年度 ? true : !is特徴のみ(編集後本算定通知書共通情報))) {
                     flag = false;
                     RString 普徴期 = 普徴期リスト.get(i - 1);
                     Tsuki 普徴月Enum = 普徴月リスト.get(i - 1);
                     RString 普徴月 = get普徴月コード(普徴月Enum);
-                    if (普徴月Enum != Tsuki.翌年度4月 && 普徴月Enum != Tsuki.翌年度5月) {
+                    if (!(!is現年度 && this.get普徴期別金額(普徴期, 更正後_普徴期別金額リスト).equals(Decimal.ZERO))
+                            && 普徴月Enum != Tsuki.翌年度4月 && 普徴月Enum != Tsuki.翌年度5月) {
                         kibetsuBusiness.setListKibetsu_5(format月と期(普徴期));
                         kibetsuBusiness.setListKibetsu_6(format月と期(普徴月));
-                        set普徴期別金額(kibetsuBusiness, 普徴期, 更正前_普徴期別金額リスト, 更正後_普徴期別金額リスト);
+                        set普徴期別金額(kibetsuBusiness, 普徴期, 更正前_普徴期別金額リスト, 更正後_普徴期別金額リスト, is現年度);
                         kibetsuBusiness.setListZuiji_1(get随時(普徴期, 普徴納期情報リスト));
                     }
                 }
-                if (i <= 特徴期リスト.size()) {
+                if (i <= 特徴期リスト.size()
+                        && (is現年度 ? true : !is普徴のみ(編集後本算定通知書共通情報))) {
                     flag = false;
                     RString 特徴期 = 特徴期リスト.get(i - 1);
                     RString 特徴月 = 特徴月リス.get(i - 1).getコード();
-                    kibetsuBusiness.setListKibetsu_1(format月と期(特徴期));
-                    kibetsuBusiness.setListKibetsu_2(format月と期(特徴月));
-                    set特徴期別金額(kibetsuBusiness, 特徴期, 更正前_特徴期別金額リスト, 更正後_特徴期別金額リスト);
+                    if (!(!is現年度 && this.get特徴期別金額(特徴期, 更正後_特徴期別金額リスト).equals(Decimal.ZERO))) {
+                        kibetsuBusiness.setListKibetsu_1(format月と期(特徴期));
+                        kibetsuBusiness.setListKibetsu_2(format月と期(特徴月));
+                        set特徴期別金額(kibetsuBusiness, 特徴期, 更正前_特徴期別金額リスト, 更正後_特徴期別金額リスト, is現年度);
+                    }
                 }
                 if (flag) {
                     break;
@@ -118,7 +126,21 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
         }
     }
 
-    private RString edit金額(Decimal 金額) {
+    private boolean is普徴のみ(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
+        return !編集後本算定通知書共通情報.get更正後().get徴収方法().contains("特別徴収");
+    }
+
+    private boolean is特徴のみ(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
+        return !編集後本算定通知書共通情報.get更正後().get徴収方法().contains("普通徴収");
+    }
+
+    private RString edit金額(Decimal 金額, boolean is現年度) {
+        if (null == 金額) {
+            return is現年度 ? new RString("0") : RString.EMPTY;
+        }
+        if (Decimal.ZERO.equals(金額)) {
+            return is現年度 ? new RString("0") : RString.EMPTY;
+        }
         return DecimalFormatter.toコンマ区切りRString(金額, 0);
     }
 
@@ -184,9 +206,14 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
         return list;
     }
 
-    private List<Tsuki> create普徴月リスト(List<RString> 普徴期リスト) {
+    private List<Tsuki> create普徴月リスト(List<RString> 普徴期リスト, GennenKanen 現年過年区分) {
         List<Tsuki> tsukiList = new ArrayList<>();
-        KitsukiList kitsukiList = new FuchoKiUtil().get期月リスト();
+        KitsukiList kitsukiList;
+        if (GennenKanen.現年度 == 現年過年区分) {
+            kitsukiList = new FuchoKiUtil().get期月リスト();
+        } else {
+            kitsukiList = new KanendoKiUtil().get期月リスト();
+        }
         for (RString 普徴期 : 普徴期リスト) {
             List<Kitsuki> kitsukiのlist = kitsukiList.get期の月(Integer.parseInt(String.valueOf(普徴期)));
             if (!kitsukiのlist.isEmpty()) {
@@ -258,7 +285,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
     private void set普徴期別金額(KibetsuBusiness kibetsuBusiness,
             RString 期,
             List<UniversalPhase> 更正前_普徴期別金額リスト,
-            List<UniversalPhase> 更正後_普徴期別金額リスト) {
+            List<UniversalPhase> 更正後_普徴期別金額リスト, boolean is現年度) {
         Decimal 更正前_普徴期別金額 = get普徴期別金額(期, 更正前_普徴期別金額リスト);
         Decimal 更正後_普徴期別金額 = get普徴期別金額(期, 更正後_普徴期別金額リスト);
         if (Decimal.ZERO.equals(更正前_普徴期別金額)
@@ -266,8 +293,8 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
             kibetsuBusiness.setListKibetsu_7(RString.EMPTY);
             kibetsuBusiness.setListKibetsu_8(RString.EMPTY);
         } else {
-            kibetsuBusiness.setListKibetsu_7(edit金額(更正前_普徴期別金額));
-            kibetsuBusiness.setListKibetsu_8(edit金額(更正後_普徴期別金額));
+            kibetsuBusiness.setListKibetsu_7(edit金額(更正前_普徴期別金額, is現年度));
+            kibetsuBusiness.setListKibetsu_8(edit金額(更正後_普徴期別金額, is現年度));
         }
     }
 
@@ -289,7 +316,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
     private void set特徴期別金額(KibetsuBusiness kibetsuBusiness,
             RString 期,
             List<CharacteristicsPhase> 更正前_特徴期別金額リスト,
-            List<CharacteristicsPhase> 更正後_特徴期別金額リスト) {
+            List<CharacteristicsPhase> 更正後_特徴期別金額リスト, boolean is現年度) {
         Decimal 更正前_特徴期別金額 = get特徴期別金額(期, 更正前_特徴期別金額リスト);
         Decimal 更正後_特徴期別金額 = get特徴期別金額(期, 更正後_特徴期別金額リスト);
         if (Decimal.ZERO.equals(更正前_特徴期別金額)
@@ -297,8 +324,8 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReport
             kibetsuBusiness.setListKibetsu_3(RString.EMPTY);
             kibetsuBusiness.setListKibetsu_4(RString.EMPTY);
         } else {
-            kibetsuBusiness.setListKibetsu_3(edit金額(更正前_特徴期別金額));
-            kibetsuBusiness.setListKibetsu_4(edit金額(更正後_特徴期別金額));
+            kibetsuBusiness.setListKibetsu_3(edit金額(更正前_特徴期別金額, is現年度));
+            kibetsuBusiness.setListKibetsu_4(edit金額(更正後_特徴期別金額, is現年度));
         }
     }
 

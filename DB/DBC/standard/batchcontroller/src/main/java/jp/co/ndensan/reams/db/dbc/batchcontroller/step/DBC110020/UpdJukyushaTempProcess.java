@@ -34,6 +34,8 @@ public class UpdJukyushaTempProcess extends BatchProcessBase<IdouTempEntity> {
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select受給者台帳");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
     private static final RString SPLIT = new RString(",");
+    private static final RString RST_1 = new RString("1");
+    private static final RString RST_0 = new RString("0");
 
     private Map<HihokenshaNo, Decimal> 連番Map;
     private List<RString> 受給者台帳List;
@@ -62,12 +64,12 @@ public class UpdJukyushaTempProcess extends BatchProcessBase<IdouTempEntity> {
     @Override
     protected void process(IdouTempEntity entity) {
         RString 受給者台帳 = 受給者台帳全項目(entity.get受給者台帳());
-        if (受給者台帳List.contains(受給者台帳)) {
-            return;
-        }
-        受給者台帳List.add(受給者台帳);
         Decimal 連番 = 連番Map.get(entity.get受給者台帳().getHihokenshaNo());
         if (連番 == null) {
+            if (受給者台帳List.contains(受給者台帳)) {
+                return;
+            }
+            受給者台帳List.add(受給者台帳);
             連番Map.put(entity.get受給者台帳().getHihokenshaNo(), Decimal.ONE);
             IdouTblEntity update = entity.get異動一時();
             update.set受給者台帳(受給者台帳);
@@ -79,6 +81,10 @@ public class UpdJukyushaTempProcess extends BatchProcessBase<IdouTempEntity> {
             if (連番temp.intValue() != entity.get異動一時().get連番()) {
                 return;
             }
+            if (受給者台帳List.contains(受給者台帳)) {
+                return;
+            }
+            受給者台帳List.add(受給者台帳);
             連番Map.put(entity.get受給者台帳().getHihokenshaNo(), 連番temp);
             IdouTblEntity update = entity.get異動一時();
             update.set受給者台帳(受給者台帳);
@@ -86,6 +92,10 @@ public class UpdJukyushaTempProcess extends BatchProcessBase<IdouTempEntity> {
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番.add(Decimal.ONE).intValue()) {
+            if (受給者台帳List.contains(受給者台帳)) {
+                return;
+            }
+            受給者台帳List.add(受給者台帳);
             連番Map.put(entity.get受給者台帳().getHihokenshaNo(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
             insert.set被保険者番号(entity.get受給者台帳().getHihokenshaNo());
@@ -131,10 +141,14 @@ public class UpdJukyushaTempProcess extends BatchProcessBase<IdouTempEntity> {
         全項目 = concatDate(全項目, 受給者台帳.getJukyuShinseiYMD());
         全項目 = 全項目.concat(受給者台帳.getRirekiNo()).concat(SPLIT);
         if (RString.isNullOrEmpty(受給者台帳.getShinseiJokyoKubun())) {
-            全項目 = 全項目.concat(RString.EMPTY);
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
         } else {
-            全項目 = 全項目.concat(受給者台帳.getShinseiJokyoKubun());
+            全項目 = 全項目.concat(受給者台帳.getShinseiJokyoKubun()).concat(SPLIT);
         }
+        全項目 = concatDate(全項目, 受給者台帳.getNinteiYMD());
+        全項目 = concatDate(全項目, 受給者台帳.getSoshitsuYMD());
+        全項目 = concatCode(全項目, 受給者台帳.getDataKubun());
+        全項目 = 全項目.concat(受給者台帳.getKyuSochishaFlag() ? RST_1 : RST_0);
         return 全項目;
     }
 

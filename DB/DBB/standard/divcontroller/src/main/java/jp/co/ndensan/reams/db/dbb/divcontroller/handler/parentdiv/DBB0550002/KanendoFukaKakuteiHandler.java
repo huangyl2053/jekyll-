@@ -8,16 +8,22 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550002;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidokanendofukakakutei.KanendoIdoFukaKakutei;
+import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.KanendoFukaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgKanendoFukaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgShoriNichiji_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendofukakakutei.HonsanteiIdoKanendoFukaKakutei;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -190,7 +196,6 @@ public class KanendoFukaKakuteiHandler {
             row = new dgKanendoFukaIchiran_Row();
             row.getTxtKetsugoKomoku1().setValue(entity.getFukaKakuteiEntity().get通知書番号().value()
                     .concat(改行).concat(entity.getFukaKakuteiEntity().get識別コード().value()));
-            row.getTxtHihokenshaNo().setValue(new RString(Integer.toString(entity.getFukaKakuteiEntity().get履歴番号())));
             row.getTxtTuchishoNo().setValue(entity.getFukaKakuteiEntity().get通知書番号().value());
             if (entity.getFukaKakuteiEntity().get識別コード() != null) {
                 row.getTxtShikibetsuCode().setValue(entity.getFukaKakuteiEntity().get識別コード().value());
@@ -217,20 +222,20 @@ public class KanendoFukaKakuteiHandler {
             row.getTxtKakuteiHokenryo().setValue(更正前確定介護保険料.concat(改行).concat(確定介護保険料));
             RString 更正前算定年額保険料 = RString.EMPTY;
             RString 算定年額保険料 = RString.EMPTY;
-            if (entity.getFukaKakuteiEntity().get更正前算定年額保険料２() != null 
+            if (entity.getFukaKakuteiEntity().get更正前算定年額保険料２() != null
                     && entity.getFukaKakuteiEntity().get更正前算定年額保険料２().compareTo(Decimal.ZERO) == 1) {
                 row.getTxtNengakuHokenryoMae().setValue(entity.getFukaKakuteiEntity().get更正前算定年額保険料２());
                 更正前算定年額保険料 = DecimalFormatter.toコンマ区切りRString(entity.getFukaKakuteiEntity().get更正前算定年額保険料２(), 0);
-            } else if (entity.getFukaKakuteiEntity().get更正前算定年額保険料１() != null 
+            } else if (entity.getFukaKakuteiEntity().get更正前算定年額保険料１() != null
                     && entity.getFukaKakuteiEntity().get更正前算定年額保険料１().compareTo(Decimal.ZERO) == 1) {
                 row.getTxtNengakuHokenryoMae().setValue(entity.getFukaKakuteiEntity().get更正前算定年額保険料１());
                 更正前算定年額保険料 = DecimalFormatter.toコンマ区切りRString(entity.getFukaKakuteiEntity().get更正前算定年額保険料１(), 0);
             }
-            if (entity.getFukaKakuteiEntity().get算定年額保険料２() != null 
+            if (entity.getFukaKakuteiEntity().get算定年額保険料２() != null
                     && entity.getFukaKakuteiEntity().get算定年額保険料２().compareTo(Decimal.ZERO) == 1) {
                 row.getTxtNengakuHokenryoAto().setValue(entity.getFukaKakuteiEntity().get算定年額保険料２());
                 算定年額保険料 = DecimalFormatter.toコンマ区切りRString(entity.getFukaKakuteiEntity().get算定年額保険料２(), 0);
-            } else if (entity.getFukaKakuteiEntity().get算定年額保険料１() != null 
+            } else if (entity.getFukaKakuteiEntity().get算定年額保険料１() != null
                     && entity.getFukaKakuteiEntity().get算定年額保険料１().compareTo(Decimal.ZERO) == 1) {
                 row.getTxtNengakuHokenryoAto().setValue(entity.getFukaKakuteiEntity().get算定年額保険料１());
                 算定年額保険料 = DecimalFormatter.toコンマ区切りRString(entity.getFukaKakuteiEntity().get算定年額保険料１(), 0);
@@ -256,27 +261,8 @@ public class KanendoFukaKakuteiHandler {
                 row.getTxtShotokuDankaiMae().setValue(entity.getFukaKakuteiEntity().get更正前保険料算定段階１());
                 更正前保険料算定段階 = entity.getFukaKakuteiEntity().get更正前保険料算定段階１();
             }
-            if (!RString.isNullOrEmpty(entity.getFukaKakuteiEntity().get保険料算定段階２())) {
-                row.getTxtShotokuDankaiAto().setValue(entity.getFukaKakuteiEntity().get保険料算定段階２());
-                保険料算定段階 = entity.getFukaKakuteiEntity().get保険料算定段階２();
-            } else if (!RString.isNullOrEmpty(entity.getFukaKakuteiEntity().get保険料算定段階１())) {
-                row.getTxtShotokuDankaiAto().setValue(entity.getFukaKakuteiEntity().get保険料算定段階１());
-                保険料算定段階 = entity.getFukaKakuteiEntity().get保険料算定段階１();
-            }
-            row.getTxtShotokuDankai().setValue(更正前保険料算定段階.concat(改行).concat(保険料算定段階));
-            if (entity.getFukaKakuteiEntity().get調定額() != null) {
-                row.getTxtKanendoGaku().setValue(entity.getFukaKakuteiEntity().get調定額());
-                row.getTxtKanendoGakuAto().setValue(改行.concat(DecimalFormatter.toコンマ区切りRString(entity.getFukaKakuteiEntity().get調定額(), 0)));
-            }
-            if (entity.getFukaKakuteiEntity().get納期限() != null) {
-                row.getTxtKanendoNokiGen().setValue(entity.getFukaKakuteiEntity().get納期限());
-                row.getTxtKanendoNokiGenAto().setValue(改行.concat(entity.getFukaKakuteiEntity().get納期限().wareki()
-                        .eraType(EraType.KANJI_RYAKU)
-                        .firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.PERIOD)
-                        .fillType(FillType.ZERO)
-                        .width(Width.HALF).toDateString()));
-            }
+            setRow(entity, row, 保険料算定段階, 更正前保険料算定段階);
+            set項目(row, entity);
             dgKanendoFukaList.add(row);
         }
         div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().setDataSource(dgKanendoFukaList);
@@ -289,7 +275,8 @@ public class KanendoFukaKakuteiHandler {
         HonsanteiIdoKanendoFukaKakutei fukaKakutei = InstanceProvider.create(HonsanteiIdoKanendoFukaKakutei.class);
         RDate 年月日 = div.getDgShoriNichiji().getDataSource().get(0).getTxtShoriYMD().getValue();
         RTime 時刻 = div.getDgShoriNichiji().getDataSource().get(0).getTxtShoriTime().getValue();
-        fukaKakutei.confirmFuka(new YMDHMS(年月日, 時刻));
+        FlexibleYear 調定年度 = div.getTxtChoteiNendo().getDomain();
+        fukaKakutei.confirmFuka(new YMDHMS(年月日, 時刻), 調定年度);
         div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource().removeAll(
                 div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(確定処理, true);
@@ -321,8 +308,7 @@ public class KanendoFukaKakuteiHandler {
             fukaKakuteiEntity = new KanendoIdoFukaKakutei();
             if (row.getTxtHihokenshaNo().getValue() != null) {
                 fukaKakuteiEntity.setFukaKakuteiEntity(null);
-                fukaKakuteiEntity.set履歴番号(
-                        Integer.valueOf(row.getTxtHihokenshaNo().getValue().toString()).intValue());
+                fukaKakuteiEntity.set履歴番号(row.getTxtRirekiNoAto().getValue().toInt());
             }
             if (row.getTxtTuchishoNo().getValue() != null) {
                 fukaKakuteiEntity.set通知書番号(new TsuchishoNo(row.getTxtTuchishoNo().getValue()));
@@ -338,17 +324,162 @@ public class KanendoFukaKakuteiHandler {
             fukaKakuteiList.add(fukaKakuteiEntity);
         }
         HonsanteiIdoKanendoFukaKakutei fukaKakutei = InstanceProvider.create(HonsanteiIdoKanendoFukaKakutei.class);
+        FlexibleYear 調定年度 = div.getTxtChoteiNendo().getDomain();
         if (div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getTotalRecords() == div.
                 getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getSelectedItems().size()) {
-            fukaKakutei.deleteFuka(fukaKakuteiList, true);
+            fukaKakutei.deleteFuka(fukaKakuteiList, true, 調定年度);
         } else {
-            fukaKakutei.deleteFuka(fukaKakuteiList, false);
+            fukaKakutei.deleteFuka(fukaKakuteiList, false, 調定年度);
         }
         div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getDataSource().removeAll(
                 div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getSelectedItems());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(賦課対象外を削除, true);
         if (div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getTotalRecords() > 0) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(確定処理, false);
+        }
+    }
+
+    private void set項目(dgKanendoFukaIchiran_Row row, KanendoIdoFukaKakutei entity) {
+        if (entity.getFukaKakuteiEntity().get更正前通知書番号() != null
+                && !entity.getFukaKakuteiEntity().get更正前通知書番号().isEmpty()) {
+            row.getTxtTuchishoNoMae().setValue(entity.getFukaKakuteiEntity().get更正前通知書番号().value());
+        }
+        row.getTxtHihokenshaNo().setValue(entity.getFukaKakuteiEntity().get被保険者番号().value());
+        if (entity.getFukaKakuteiEntity().get更正前被保険者番号() != null
+                && !entity.getFukaKakuteiEntity().get更正前被保険者番号().isEmpty()) {
+            row.getTxtHihokenshaNoMae().setValue(entity.getFukaKakuteiEntity().get更正前被保険者番号().value());
+        }
+        row.getTxtRirekiNoAto().setValue(new RString(Integer.toString(entity.getFukaKakuteiEntity().get履歴番号())));
+        row.getTxtRirekiNoMae().setValue(new RString(Integer.toString(entity.getFukaKakuteiEntity().get更正前履歴番号())));
+        if (entity.getFukaKakuteiEntity().get更正前賦課年度() != null
+                && !entity.getFukaKakuteiEntity().get更正前賦課年度().isEmpty()) {
+            row.getTxtFukaNendoMae().setValue(new RDate(entity.getFukaKakuteiEntity().get更正前賦課年度().toString()));
+        }
+        row.getTxtFukaYMDAto().setValue(entity.getFukaKakuteiEntity().get賦課期日());
+        if (entity.getFukaKakuteiEntity().get更正前賦課期日() != null
+                && !entity.getFukaKakuteiEntity().get更正前賦課期日().isEmpty()) {
+            row.getTxtFukaYMDMae().setValue(entity.getFukaKakuteiEntity().get更正前賦課期日());
+        }
+        row.setTxtKoseiMAto(entity.getFukaKakuteiEntity().get更正月());
+        if (!RString.isNullOrEmpty(entity.getFukaKakuteiEntity().get更正前更正月())) {
+            row.setTxtKoseiMMae(entity.getFukaKakuteiEntity().get更正前更正月());
+        }
+        if (entity.getFukaKakuteiEntity().get調定日時() != null
+                && !entity.getFukaKakuteiEntity().get調定日時().isEmpty()) {
+            row.getTxtChoteiNichijiAto().setValue(new RString(entity.getFukaKakuteiEntity().get調定日時().toString()));
+        }
+        if (entity.getFukaKakuteiEntity().get更正前調定日時() != null
+                && !entity.getFukaKakuteiEntity().get更正前調定日時().isEmpty()) {
+            row.getTxtChoteiNichijiMae().setValue(new RString(entity.getFukaKakuteiEntity().get更正前調定日時().toString()));
+        }
+    }
+
+    /**
+     * 選択された賦課の更正後賦課照会キーを返します。
+     *
+     * @param row dgKanendoFukaIchiran_Row
+     * @return 賦課照会キー
+     */
+    public Optional<FukaShokaiKey> get後履歴Key(dgKanendoFukaIchiran_Row row) {
+        FlexibleYear 調定年度 = new FlexibleYear(row.getTxtChoteiNendoAto().getValue().getYear().toDateString());
+        FlexibleYear 賦課年度 = new FlexibleYear(row.getTxtFukaNendo().getValue().getYear().toDateString());
+        TsuchishoNo 通知書番号 = new TsuchishoNo(row.getTxtTuchishoNo().getValue());
+        int 履歴番号 = row.getTxtRirekiNoAto().getValue().toInt();
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihokenshaNo().getValue());
+        FlexibleDate 賦課期日 = row.getTxtFukaYMDAto().getValue();
+        RString 更正月 = row.getTxtKoseiMAto();
+        YMDHMS 更正日時 = null;
+        if (row.getTxtChoteiNichijiAto().getValue() != null
+                && !row.getTxtChoteiNichijiAto().getValue().isEmpty()) {
+            更正日時 = new YMDHMS(row.getTxtChoteiNichijiAto().getValue());
+        }
+        FukaShokaiKey 後履歴Key = new FukaShokaiKey(
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号,
+                被保険者番号,
+                賦課期日,
+                更正月,
+                更正日時,
+                SanteiState.本算定,
+                Boolean.FALSE,
+                Boolean.FALSE,
+                AtenaMeisho.EMPTY);
+        return Optional.of(後履歴Key);
+    }
+
+    /**
+     * 選択された賦課の更正前賦課照会キーを返します。
+     *
+     * @param row dgKanendoFukaIchiran_Row
+     * @return 賦課照会キー
+     */
+    public Optional<FukaShokaiKey> get前履歴Key(dgKanendoFukaIchiran_Row row) {
+        FlexibleYear 調定年度 = null;
+        if (row.getTxtChoteiNendoMae().getValue() != null) {
+            調定年度 = new FlexibleYear(row.getTxtChoteiNendoMae().getValue().getYear().toDateString());
+        }
+        FlexibleYear 賦課年度 = null;
+        if (row.getTxtFukaNendoMae().getValue() != null) {
+            賦課年度 = new FlexibleYear(row.getTxtFukaNendoMae().getValue().getYear().toDateString());
+        }
+        TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
+        if (!RString.isNullOrEmpty(row.getTxtTuchishoNoMae().getValue())) {
+            通知書番号 = new TsuchishoNo(row.getTxtTuchishoNoMae().getValue());
+        }
+        int 履歴番号 = 0;
+        if (!RString.isNullOrEmpty(row.getTxtRirekiNoMae().getValue())) {
+            履歴番号 = row.getTxtRirekiNoMae().getValue().toInt();
+        }
+        HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
+        if (!RString.isNullOrEmpty(row.getTxtHihokenshaNoMae().getValue())) {
+            被保険者番号 = new HihokenshaNo(row.getTxtHihokenshaNoMae().getValue());
+        }
+        FlexibleDate 賦課期日 = row.getTxtFukaYMDMae().getValue();
+        RString 更正月 = row.getTxtKoseiMMae();
+        YMDHMS 更正日時 = null;
+        if (row.getTxtChoteiNichijiMae().getValue() != null
+                && !row.getTxtChoteiNichijiMae().getValue().isEmpty()) {
+            更正日時 = new YMDHMS(row.getTxtChoteiNichijiMae().getValue());
+        }
+        FukaShokaiKey 前履歴Key = new FukaShokaiKey(
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号,
+                被保険者番号,
+                賦課期日,
+                更正月,
+                更正日時,
+                SanteiState.本算定,
+                Boolean.FALSE,
+                Boolean.FALSE,
+                AtenaMeisho.EMPTY);
+        return Optional.of(前履歴Key);
+    }
+
+    private void setRow(KanendoIdoFukaKakutei entity, dgKanendoFukaIchiran_Row row, RString 保険料算定段階, RString 更正前保険料算定段階) {
+        if (!RString.isNullOrEmpty(entity.getFukaKakuteiEntity().get保険料算定段階２())) {
+            row.getTxtShotokuDankaiAto().setValue(entity.getFukaKakuteiEntity().get保険料算定段階２());
+            保険料算定段階 = entity.getFukaKakuteiEntity().get保険料算定段階２();
+        } else if (!RString.isNullOrEmpty(entity.getFukaKakuteiEntity().get保険料算定段階１())) {
+            row.getTxtShotokuDankaiAto().setValue(entity.getFukaKakuteiEntity().get保険料算定段階１());
+            保険料算定段階 = entity.getFukaKakuteiEntity().get保険料算定段階１();
+        }
+        row.getTxtShotokuDankai().setValue(更正前保険料算定段階.concat(改行).concat(保険料算定段階));
+        if (entity.getFukaKakuteiEntity().get調定額() != null) {
+            row.getTxtKanendoGaku().setValue(entity.getFukaKakuteiEntity().get調定額());
+            row.getTxtKanendoGakuAto().setValue(改行.concat(DecimalFormatter.toコンマ区切りRString(entity.getFukaKakuteiEntity().get調定額(), 0)));
+        }
+        if (entity.getFukaKakuteiEntity().get納期限() != null) {
+            row.getTxtKanendoNokiGen().setValue(entity.getFukaKakuteiEntity().get納期限());
+            row.getTxtKanendoNokiGenAto().setValue(改行.concat(entity.getFukaKakuteiEntity().get納期限().wareki()
+                    .eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD)
+                    .fillType(FillType.ZERO)
+                    .width(Width.HALF).toDateString()));
         }
     }
 }

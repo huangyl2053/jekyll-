@@ -188,7 +188,8 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
 
         return accessor.selectSpecific(DbT3104KokuhorenInterfaceKanri.chushutsuKaishiTimestamp,
                 DbT3104KokuhorenInterfaceKanri.chushutsuShuryoTimestamp,
-                DbT3104KokuhorenInterfaceKanri.shoriYM).
+                DbT3104KokuhorenInterfaceKanri.shoriYM,
+                DbT3104KokuhorenInterfaceKanri.shoriJotaiKubun).
                 table(DbT3104KokuhorenInterfaceKanri.class).
                 where(and(
                                 eq(kokanShikibetsuNo, 交換情報識別番号),

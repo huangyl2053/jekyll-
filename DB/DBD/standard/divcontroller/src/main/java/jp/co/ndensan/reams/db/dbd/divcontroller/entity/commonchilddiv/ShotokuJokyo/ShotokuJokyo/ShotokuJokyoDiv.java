@@ -314,11 +314,11 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
                     setaiinShotoku.get識別コード().getColumnValue().concat(BR).concat(setaiinShotoku.get被保険者番号().getColumnValue()));
             row.setShimei(ObjectUtil.defaultIfNull(setaiinShotoku.getカナ氏名(), RString.EMPTY).concat(BR).
                     concat(ObjectUtil.defaultIfNull(setaiinShotoku.get氏名(), RString.EMPTY)));
-            row.setSeinengappiSeibetsuZokugara(new RString(ObjectUtil.defaultIfNull(setaiinShotoku.get生年月日(), FlexibleDate.EMPTY).toString()).
+            row.setSeinengappiSeibetsuZokugara(ObjectUtil.defaultIfNull(setaiinShotoku.get生年月日().wareki().toDateString(), RString.EMPTY).
                     concat(RString.FULL_SPACE).concat(ObjectUtil.defaultIfNull(setaiinShotoku.get性別(), RString.EMPTY)).concat(BR).
                     concat(ObjectUtil.defaultIfNull(setaiinShotoku.get続柄(), RString.EMPTY)));
             row.setShubetsu(setaiinShotoku.get種別());
-            row.setIdoDate(new RString(ObjectUtil.defaultIfNull(setaiinShotoku.get住民情報_異動日(), FlexibleDate.EMPTY).toString()));
+            row.setIdoDate(ObjectUtil.defaultIfNull(setaiinShotoku.get住民情報_異動日().wareki().toDateString(), RString.EMPTY));
             row.setRiyoshaFutandankai(利用者負担段階の判定(setaiinShotoku, is老齢福祉年金受給者, is生活保護受給者).get名称());
             row.setSeihoRorei(生保_老齢);
             if (setaiinShotoku.get課税区分_住民税減免前() != null && !setaiinShotoku.get課税区分_住民税減免前().isEmpty()) {
@@ -339,7 +339,7 @@ public class ShotokuJokyoDiv extends Panel implements IShotokuJokyoDiv {
             row.setNenkinShotoku(
                     new RString(KingakuFormatter.create(ObjectUtil.defaultIfNull(setaiinShotoku.get年金所得額(), Decimal.ZERO)).
                             format(KingakuUnit.円).setCommaSeparated().toString()));
-            row.setKoseiDate(new RString(ObjectUtil.defaultIfNull(setaiinShotoku.get更正日(), FlexibleDate.EMPTY).toString()));
+            row.setKoseiDate(ObjectUtil.defaultIfNull(setaiinShotoku.get更正日().wareki().toDateString(), RString.EMPTY));
             rows.add(row);
         }
         getDgSetaiShotoku().setDataSource(rows);

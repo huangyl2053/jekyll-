@@ -35,7 +35,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
-import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
+import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
+import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
+import jp.co.ndensan.reams.ur.urc.service.core.kamoku.shunokamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -46,7 +48,6 @@ import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.DaikoPrintFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.IDaikoPrint;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
@@ -160,16 +161,16 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
         builder.set業務コード(GyomuCode.DB介護保険);
         builder.set基準日(new FlexibleDate(納期.get納期限().toDateString()));
         IKozaSearchKey kozaSearchKey = builder.build();
-        ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
-        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
+        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
+        IShunoKamoku 介護保険料_普通徴収 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+        List<KamokuCode> list = new ArrayList<>();
+        list.add(介護保険料_普通徴収.getコード());
         RStringBuilder rStringBuilder = new RStringBuilder();
         rStringBuilder.append(LEFT_FORMAT);
-        if (list != null && !list.isEmpty()) {
-            for (int i = 0; i < list.size(); i++) {
-                rStringBuilder.append(list.get(i) == null ? RString.EMPTY : list.get(i).getColumnValue());
-                if (i != list.size() - 1) {
-                    rStringBuilder.append(MIDDLE_FORMAT);
-                }
+        for (int i = 0; i < list.size(); i++) {
+            rStringBuilder.append(list.get(i) == null ? RString.EMPTY : list.get(i).getColumnValue());
+            if (i != list.size() - 1) {
+                rStringBuilder.append(MIDDLE_FORMAT);
             }
         }
         rStringBuilder.append(RIGHT_FORMAT);
@@ -700,32 +701,32 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
     private int get山分け用スプール数Inブック開始位置_1(int 出力期サイズ) {
         return INT_1 <= 出力期サイズ && 出力期サイズ <= INT_5 ? INT_2
                 : INT_6 <= 出力期サイズ && 出力期サイズ <= INT_9 ? INT_3
-                : INT_4;
+                        : INT_4;
     }
 
     private int get山分け用スプール数Inブック開始位置_2(int 出力期サイズ) {
         return INT_1 <= 出力期サイズ && 出力期サイズ <= INT_4 ? INT_2
                 : INT_5 <= 出力期サイズ && 出力期サイズ <= INT_8 ? INT_3
-                : INT_4;
+                        : INT_4;
     }
 
     private int get山分け用スプール数Inブック開始位置_3(int 出力期サイズ) {
         return INT_1 <= 出力期サイズ && 出力期サイズ <= INT_3 ? INT_2
                 : INT_4 <= 出力期サイズ && 出力期サイズ <= INT_7 ? INT_3
-                : INT_4;
+                        : INT_4;
     }
 
     private int get山分け用スプール数Inブック開始位置_4(int 出力期サイズ) {
         return INT_1 <= 出力期サイズ && 出力期サイズ <= INT_2 ? INT_2
                 : INT_3 <= 出力期サイズ && 出力期サイズ <= INT_6 ? INT_3
-                : INT_4;
+                        : INT_4;
     }
 
     private int get山分け用スプール数Inブック開始位置_5(int 出力期サイズ) {
         return 出力期サイズ == INT_1 ? INT_2
                 : INT_2 <= 出力期サイズ && 出力期サイズ <= INT_5 ? INT_3
-                : INT_6 <= 出力期サイズ && 出力期サイズ <= INT_9 ? INT_4
-                : INT_5;
+                        : INT_6 <= 出力期サイズ && 出力期サイズ <= INT_9 ? INT_4
+                                : INT_5;
     }
 
     private int get山分け用スプール数_コンビニ(int 月AsInt, List<NokiJoho> 普徴納期情報リスト) {

@@ -40,6 +40,7 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
     private final TsukibetsuSuiihyoSakuseiParameterDiv div;
     private static final RString 年齢 = new RString("nenrei");
     private static final RString 生年月日 = new RString("umareYMD");
+    private static final int MAX_日 = 31;
     private static final int 調定基準日_S = 0;
     private static final int 調定基準日_E = 8;
 
@@ -228,7 +229,7 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
 
     private void set各月資格基準日() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        for (int i = 1; i <= RDate.getNowDate().getLastDay(); i++) {
+        for (int i = 1; i <= MAX_日 ; i++) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(new RString(i));
             dataSource.setValue(new RString(i));

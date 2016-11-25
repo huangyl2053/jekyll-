@@ -17,12 +17,16 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 国保連情報受取データ取込_[661]総合事業費過誤決定通知書（公費）情報のクラスです。
@@ -53,9 +57,12 @@ public class TsuchishoJoho661 {
      * @return ResponseData
      */
     public ResponseData<DBC120860_SogojigyohiKagoKetteiKohifutanshaInParameter> onClick_btnExcute(TsuchishoJoho661Div div) {
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120860_SogojigyohiKagoKetteiKohifutanshaIn");
+        FlowParameterAccessor.merge(fp);
         if (setBatchParameter(div) != null) {
             return ResponseData.of(setBatchParameter(div)).respond();
         }
+
         return ResponseData.of(new DBC120860_SogojigyohiKagoKetteiKohifutanshaInParameter()).respond();
     }
 
@@ -88,6 +95,7 @@ public class TsuchishoJoho661 {
             parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
             parameter.setSaishoriKubun(再処理区分);
             parameter.setShutsuryokujunId(出力順ID);
+            parameter.setLoginUserId(ControlDataHolder.getUserId());
             return parameter;
         }
         return null;

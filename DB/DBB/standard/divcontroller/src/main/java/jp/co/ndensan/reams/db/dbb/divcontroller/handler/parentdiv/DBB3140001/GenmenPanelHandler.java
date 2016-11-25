@@ -40,8 +40,8 @@ public class GenmenPanelHandler {
                 SubGyomuCode.DBB介護賦課);
         div.getTextBoxTyoutenendo().setValue(new RYear(調定年度.toString()).wareki().toDateString());
         div.getTextBoxFukanendo().setValue(new RYear(調定年度.toString()).wareki().toDateString());
-        div.getTextBoxSinsei().setValue(RDate.getNowDate().wareki().toDateString());
-        div.getTextBoxKette().setValue(RDate.getNowDate().wareki().toDateString());
+        div.getTextBoxSinsei().setValue(RDate.getNowDate());
+        div.getTextBoxKette().setValue(RDate.getNowDate());
         div.getChikuShichosonSelect().initialize();
     }
 

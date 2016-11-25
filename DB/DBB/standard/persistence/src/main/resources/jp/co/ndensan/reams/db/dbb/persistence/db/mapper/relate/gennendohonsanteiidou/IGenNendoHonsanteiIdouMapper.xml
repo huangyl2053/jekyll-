@@ -371,7 +371,7 @@
                DISTINCT B."hihokenshaNo",
                B."shikibetsuCode"
             FROM
-                rgdb."DbT1001HihokenshaDaicho" AS B
+                rgdb."DbV1001HihokenshaDaicho" AS B
             WHERE
                 B."shikakuSoshitsuYMD" IS NULL
             OR  B."shikakuSoshitsuYMD" = ''
@@ -514,7 +514,7 @@
            DISTINCT B."hihokenshaNo",
            B."shikibetsuCode"
         FROM
-            rgdb."DbT1001HihokenshaDaicho" AS B
+            rgdb."DbV1001HihokenshaDaicho" AS B
         
         WHERE
            B."shikakuSoshitsuYMD" IS NULL 
@@ -973,7 +973,7 @@
             FROM
                 "TmpFukaJouhou" AS B
             INNER JOIN
-                (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS 口座
+                (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS 口座
             ON
                 口座."uaT0310Koza_shikibetsuCode" = B."shikibetsuCode"
             )
@@ -1037,41 +1037,24 @@
             A.*
         FROM
             (SELECT 
-                DbT1001.*
-             FROM
-                rgdb."DbT1001HihokenshaDaicho" AS DbT1001
-             INNER JOIN
-             (SELECT
-                Q."hihokenshaNo",
-                Q."ichigoShikakuShutokuYMD",
-                Q."shikakuSoshitsuYMD",
-                Q."idoYMD",
-                Q."edaNo"
+                Q.*
              FROM 
                 rgdb."DbT1001HihokenshaDaicho" AS Q
                 INNER JOIN
                 (SELECT
                     "hihokenshaNo",
                     "ichigoShikakuShutokuYMD",
-                    "shikakuSoshitsuYMD",
-                    MAX("idoYMD" || "edaNo") AS max1
+                    MAX("shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
                  FROM
                     rgdb."DbT1001HihokenshaDaicho"
                  GROUP BY
                     "hihokenshaNo",
-                    "ichigoShikakuShutokuYMD",
-                    "shikakuSoshitsuYMD"
+                    "ichigoShikakuShutokuYMD"
                 )AS T
                 ON
                     T."hihokenshaNo" = Q."hihokenshaNo"
                 AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
-                AND COALESCE(T."shikakuSoshitsuYMD",'00000000') = COALESCE(Q."shikakuSoshitsuYMD",'00000000')
-                AND T."max1" = (Q."idoYMD" || Q."edaNo")
-                ) AS R
-               ON
-                  R."hihokenshaNo" = DbT1001."hihokenshaNo"
-                AND R."idoYMD" = DbT1001."idoYMD"
-                AND R."edaNo" = DbT1001."edaNo"
+                AND T."max_shikakuSoshitsuYMD" = Q."shikakuSoshitsuYMD"
             ) AS A
             INNER JOIN
                 "TmpIdoTrigger" AS B
@@ -1578,7 +1561,7 @@
         <association property="賦課の情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"/>
         <association property="徴収方法の情報" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
         <association property="月別ランク" resultMap="resultMap_TsukibetsuRankuEntity"/>
-        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
         <collection property="世帯員所得情報" resultMap="resultMap_SetaiShotokuEntity"/>
         <collection property="境界層の情報" resultMap="resultMap_KyokaisoGaitoshaEntity"/>
         <collection property="生保の情報" resultMap="resultMap_SeikatsuHogoJukyushaRelateEntity"/>
@@ -1681,7 +1664,7 @@
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
         ON "TmpHonsantei"."hihokenshaNo"  =  DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo"
         LEFT JOIN 
-        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON "TmpHonsantei"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
         ORDER BY
             "choteiNendo",
@@ -1889,7 +1872,7 @@
         <result property="zenNendoNenkinShunyuGaku" column="zenNendoNenkinShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <association property="資格の情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="徴収方法の情報" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
-        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
         <collection property="生保の情報" resultMap="resultMap_SeikatsuHogoJukyushaRelateEntity"/>
         <collection property="老齢の情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity"/>
     </resultMap>
@@ -1937,7 +1920,7 @@
         LEFT JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS "DbT7006RoreiFukushiNenkinJukyusha"
         ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode"
         LEFT JOIN 
-        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
         ORDER BY
             "TmpTokuKarisantei"."fukaNendo",
@@ -1955,7 +1938,7 @@
         <id column="dbT2015KeisangoJoho_sakuseiShoriName" />
         <association property="計算後情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.ResultMap_DbT2015KeisangoJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
     </resultMap>
     
      <!--本算定異動（現年度）情報の取得します。-->
@@ -1968,7 +1951,7 @@
             FROM
                 rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
             LEFT JOIN
-                (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS 口座
+                 (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS 口座
             ON "DbT2015KeisangoJoho"."shikibetsuCode" = 口座."uaT0310Koza_shikibetsuCode"
             WHERE
                "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}

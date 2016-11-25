@@ -20,9 +20,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_ShinsakaiShiryoParameter> {
 
-    private static final String 事務局_審査会資料一括作成 = "jimuShiryoShinsakaiFlow";
+    private static final String 事務局_審査会資料一括作成 = "DBE517001_ShinsakaiShiryoJImukyoku";
     private static final RString 事務局_審査会資料一括作成ID = new RString("DBE517001_ShinsakaiShiryoJImukyoku");
-    private static final String 委員_審査会資料一括作成 = "iinShiryoShinsakaiFlow";
+    private static final String 委員_審査会資料一括作成 = "DBE517002_ShinsakaiShiryoIin";
     private static final RString 委員_審査会資料一括作成ID = new RString("DBE517002_ShinsakaiShiryoIin");
     private static final String 審査会開催予定情報更新 = "kousin";
     private static final RString 選択 = new RString("1");
@@ -65,7 +65,8 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
      */
     @Step(委員_審査会資料一括作成)
     protected IBatchFlowCommand callIinShiryoShinsakaiFlow() {
-        return otherBatchFlow(委員_審査会資料一括作成ID, SubGyomuCode.DBE認定支援, getParameter()).define();
+        return otherBatchFlow(委員_審査会資料一括作成ID, SubGyomuCode.DBE認定支援,
+                getParameter().toDBE517002_ShinsakaiShiryoIinParameter()).define();
     }
 
     /**
@@ -75,7 +76,8 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
      */
     @Step(事務局_審査会資料一括作成)
     protected IBatchFlowCommand callJimuShiryoShinsakaiFlow() {
-        return otherBatchFlow(事務局_審査会資料一括作成ID, SubGyomuCode.DBE認定支援, getParameter()).define();
+        return otherBatchFlow(事務局_審査会資料一括作成ID, SubGyomuCode.DBE認定支援,
+                getParameter().toDBE517001_ShinsakaiShiryoJImukyokuParameter()).define();
     }
 
     /**

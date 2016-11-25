@@ -107,7 +107,10 @@ public class ShuukeiListCreateProcess extends BatchProcessBase<ShuukeiRelateEnti
         集計データ.set再審査回数(entity.getDbt3033().getSaishinsaKaisu());
         集計データ.set過誤回数(entity.getDbt3033().getKagoKaisu());
         集計データ.set審査年月(entity.getDbt3033().getShinsaYM());
-
+        集計データ.set短期入所計画日数(entity.getDbt3033().getTankiNyushoPlanNissu());
+        集計データ.set公費１_出来高医療費負担額(entity.getDbt3033().getKohi1DekidakaIryohiRiyoshaFutangaku());
+        集計データ.set公費２_出来高医療費負担額(entity.getDbt3033().getKohi2DekidakaIryohiRiyoshaFutangaku());
+        集計データ.set公費３_出来高医療費負担額(entity.getDbt3033().getKohi3DekidakaIryohiRiyoshaFutangaku());
         return 集計データ;
     }
 

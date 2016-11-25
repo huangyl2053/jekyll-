@@ -38,9 +38,10 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @reamsid_L DBD-1300-010 huangh
  */
 public class NinteiShinseiTorokuUketsuke {
-    private final RString 照会 = new RString("照会");
+    private final RString 登録 = new RString("登録");
     private static final RString SELECT_KEY0 = new RString("key0");
     private static final RString 要介護認定申請情報登録 = new RString("要介護認定申請情報登録");
+    private static final RString メニューID = new RString("DBDMN51001");
 
     /**
      * 画面初期化
@@ -100,7 +101,7 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnIryoHokenGuide(NinteiShinseiTorokuUketsukeDiv div) {
-        div.setHdnMode(照会);
+        div.setHdnMode(登録);
         ViewStateHolder.put(ViewStateKeys.識別コード, div.getHdnShikibetsuCode());
         return ResponseData.of(div).respond();
     }
@@ -136,7 +137,7 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnNyuinAndShisetsuNyusho(NinteiShinseiTorokuUketsukeDiv div) {
-        div.setHdnMode(照会);
+        div.setHdnMode(登録);
         return ResponseData.of(div).respond();
     }
 
@@ -164,6 +165,7 @@ public class NinteiShinseiTorokuUketsuke {
         NinteiShinseiCodeModel model = new NinteiShinseiCodeModel();
         model.set表示モード(HyojiMode.InputMode);
         model.set連絡事項(div.getHdnShichosonRenrakuJiko());
+        model.setメニューID(メニューID);
         ViewStateHolder.put(ViewStateKeys.モード, model);
         return ResponseData.of(div).respond();
     }
@@ -312,12 +314,15 @@ public class NinteiShinseiTorokuUketsuke {
         }
         getHandler(div).onClick_btnUpdate();
         getHandler(div).edit状態_完了();
-        div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
-                UrInformationMessages.正常終了.getMessage().replace(要介護認定申請情報登録.toString()).evaluate()));
         boolean 表示パターン = getHandler(div).getShinseiDataUmu();
+        div.getCcdKaigoKanryoMessage().setVisible(true);
         if (!表示パターン) {
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(要介護認定申請情報登録.toString()).evaluate()));
             return ResponseData.of(div).setState(DBD5120001StateName.新規完了);
         } else {
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBD5120001StateName.削除修正完了);
         }
     }

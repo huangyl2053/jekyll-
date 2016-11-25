@@ -186,8 +186,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
         HokenryoDankai 保険料段階 = null;
         if (!RString.isNullOrEmpty(賦課の情報一時Entity.getHokenryoDankaiKarisanntei())) {
             HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
-            保険料段階 = 保険料段階List.getBy段階区分(賦課の情報一時Entity.getHokenryoDankaiKarisanntei());
-
+            保険料段階 = 保険料段階List.getBy段階Index(賦課の情報一時Entity.getHokenryoDankaiKarisanntei());
         }
         TokubetsuChoshuIraikingakuMeisaiIchiranReport report = new TokubetsuChoshuIraikingakuMeisaiIchiranReport(賦課の情報一時Entity,
                 宛名, 年金特徴回付情報, 徴収方法, 出力項目リスト,
@@ -242,7 +241,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
                 ReportIdDBB.DBB200023.getReportId().getColumnValue(),
                 導入団体コード,
                 市町村名,
-                RString.FULL_SPACE.concat(String.valueOf(JobContextHolder.getJobId())),
+                RString.EMPTY.concat(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBB.DBB200023.getReportName(),
                 出力ページ数,
                 CSV出力有無_有り,
@@ -259,7 +258,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
 
         if (!RString.isNullOrEmpty(賦課の情報一時Entity.getHokenryoDankaiKarisanntei())) {
             HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
-            HokenryoDankai 保険料段階 = 保険料段階List.getBy段階区分(賦課の情報一時Entity.getHokenryoDankaiKarisanntei());
+            HokenryoDankai 保険料段階 = 保険料段階List.getBy段階Index(賦課の情報一時Entity.getHokenryoDankaiKarisanntei());
             RString 保険料段階表記 = 保険料段階.get表記();
             Decimal 基準年度保険料率 = 保険料段階.get保険料率();
             csvEntity.set保険料段階(保険料段階表記);

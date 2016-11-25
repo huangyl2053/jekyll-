@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020060.DBC020060_Kogaku
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufubunruikubun.ShiharaiHohoKinoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuuketteitsuchishosakusei.KougakuSabisuhiShikyuuKetteiTsuchishoSakusei;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -108,6 +110,7 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
             div.getShikyuKetteiTsuchisho().getCcdBunshoBangoInput().initialize(new ReportId(高額総合事業サービス費支給決定通知書帳票ID));
         }
         div.getCcdShiharaiHoho().initialize(ShiharaiHohoKinoKubun.高額介護.getコード());
+        決定者受付年月TXT制御();
     }
 
     /**
@@ -196,6 +199,25 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
                 getDBC020060_KougakuSabisuhiShikyuuKetteiTsuchishoBatchParameter(creatCommonParameter());
     }
 
+    private void 決定者受付年月TXT制御() {
+        RString configValue = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        div.getTxtKetteishaUketukeNengetsu().setDisplayNone(STR_1.equals(configValue));
+        div.getTxtKetteishaUketukeNengetsu().setDisabled(STR_1.equals(configValue));
+    }
+
+    /**
+     * テスト出力制御
+     */
+    public void テスト出力制御() {
+        boolean isチェック = div.getChkTesutoShuturyoku().isAllSelected();
+        div.getRadKetteibiIkkatsuKoshinKubun().setDisabled(isチェック);
+        div.getCcdShiharaiHoho().get窓口払い一括更新区分RB().setDisabled(isチェック);
+        if (isチェック) {
+            div.getRadKetteibiIkkatsuKoshinKubun().setSelectedKey(KEY0);
+            div.getCcdShiharaiHoho().get窓口払い一括更新区分RB().setSelectedKey(STR_1);
+        }
+    }
+
     private KogakuJigyoServicehiShikyuKetteiTsuchishoParameter creatCommonParameter() {
         KogakuJigyoServicehiShikyuKetteiTsuchishoParameter parameter = new KogakuJigyoServicehiShikyuKetteiTsuchishoParameter();
         RString 抽出モード = null;
@@ -262,6 +284,7 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
             long 出力順ID = div.getCcdShutsuryokujun().get出力順ID();
             parameter.set出力順ID(出力順ID);
         }
+        parameter.set窓口払い一括更新区分(div.getCcdShiharaiHoho().get窓口払い一括更新区分());
         return parameter;
     }
 

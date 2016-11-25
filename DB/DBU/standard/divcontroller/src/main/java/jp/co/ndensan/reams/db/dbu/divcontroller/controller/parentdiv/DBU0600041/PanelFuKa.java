@@ -63,6 +63,8 @@ public class PanelFuKa {
             List<ChoshuHoho> 介護徴収方法 = get介護徴収方法(被保険者番号, 賦課年度);
             List<Fuka> 賦課Newest = get賦課Newest(被保険者番号, 賦課年度, 調定年度);
             List<Fuka> 前年の賦課Newest = get前年の賦課Newest(被保険者番号, 前年の賦課年度, 前年の調定年度);
+            ViewStateHolder.put(ViewStateKeys.識別コード, 前年の賦課Newest.get(0).get被保険者番号());
+            ViewStateHolder.put(ViewStateKeys.賦課年度, 前年の賦課Newest.get(0).get賦課年度());
             YMDHMS 基準日時 = get本算定賦課の処理日時(賦課年度);
             FuKaJyoHoBusiness business = new FuKaJyoHoBusiness();
             business.set前年の賦課Newest(前年の賦課Newest);

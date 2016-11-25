@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 画面設計_DBCMNF1001_保険者情報送付データ作成_[179]総合事業費過誤申立書情報のクラスです。
@@ -23,6 +25,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-2530-010 chenyadong
  */
 public class SogoJigyohiKagoMositateshoJohoPanel {
+
+    private final RString バッチID = new RString("ExecutionBatchId");
+    private final RString フロー固定ID_給報出力 = new RString("DBC110140_SogojigyohiKagoMoshitateshoOut");
 
     /**
      * 画面初期化のメソッドます。
@@ -47,6 +52,8 @@ public class SogoJigyohiKagoMositateshoJohoPanel {
         IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
         manager.save前回出力順(div.getCcdShutsuryokujun().getSelected出力順());
         DBC110140_SogojigyohiKagoMoshitateshoOutParameter param = setBatchParameter(div);
+        FlowParameters fp = FlowParameters.of(バッチID, フロー固定ID_給報出力);
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(param).respond();
     }
 

@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoSyutuMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoData;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.CareManagementEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.HukushiYouguEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.JuutakuKaishuuEntity;
@@ -45,14 +47,14 @@ public interface IJukyushaTmpMapper {
      *
      * @return List<KinkyuuziShisetuRyouyouEntity>
      */
-    List<KinkyuuziShisetuRyouyouEntity> get緊急時施設療養();
+    List<KinkyuuziShisetuRyouyouEntity> get施設療養();
 
     /**
      * 特定診療費・特別療養費取得です。
      *
      * @return List<TokuteiShinryouHiEntity>
      */
-    List<TokuteiShinryouHiEntity> get特定診療費();
+    List<TokuteiShinryouHiEntity> get特別療養();
 
     /**
      * 計画費取得です。
@@ -116,4 +118,12 @@ public interface IJukyushaTmpMapper {
      * @return List<KihonEntity>
      */
     List<KihonEntity> get給付実績高額();
+
+    /**
+     * 帳票データを取得します。
+     *
+     * @param param param
+     * @return 帳票データ
+     */
+    List<JukyushaKyufuJissekidaichoData> get帳票データ(JukyushaKyufujissekiDaichoSyutuMybatisParameter param);
 }

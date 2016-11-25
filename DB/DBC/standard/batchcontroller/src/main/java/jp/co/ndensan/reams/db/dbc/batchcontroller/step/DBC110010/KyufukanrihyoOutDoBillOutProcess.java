@@ -50,12 +50,12 @@ public class KyufukanrihyoOutDoBillOutProcess extends BatchKeyBreakBase<Kyufukan
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(READ_DATA_ID, parameter.toKyufukanrihyoOutMybatisParameter());
+        return new BatchDbReader(READ_DATA_ID, parameter.toKyufukanrihyoOutMybatisParameter(RString.EMPTY, RString.EMPTY, RString.EMPTY));
     }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100035.getReportId().value())
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200009.getReportId().value())
                 .addBreak(new BreakerCatalog<KyufuKanrihyoKyotakuYoboSogoJigyoServiceReportSource>().simplePageBreaker(PAGE_BREAK_KEYS)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }

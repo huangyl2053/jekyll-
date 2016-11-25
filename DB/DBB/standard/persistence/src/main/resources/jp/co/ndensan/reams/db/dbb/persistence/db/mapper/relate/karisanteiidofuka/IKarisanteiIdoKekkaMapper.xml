@@ -15,7 +15,7 @@
         <association property="宛名" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="口座" 
-                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
     </resultMap>
     
     <select id="select仮算定異動賦課" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter" 
@@ -49,7 +49,7 @@
                    )) AS "ShikibetsuTaisho"
               ON "ShikibetsuTaisho"."shikibetsuCode" = master."shikibetsuCode"
         LEFT OUTER JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
              ON koza."uaT0310Koza_shikibetsuCode" = master."shikibetsuCode"
         <if test="出力順 !=null and !出力順.isEmpty()">
             ${出力順}

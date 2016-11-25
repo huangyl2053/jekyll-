@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -22,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 国保連情報受取データ取込_[537]受給者情報突合結果情報取込のクラスです。
@@ -52,6 +55,8 @@ public class TsuchishoJoho534 {
      * @return ResponseData
      */
     public ResponseData<DBC120810_KokuhorenJukyushaInParameter> onClick_btnExcute(TsuchishoJoho534Div div) {
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120810_KokuhorenJukyushaIn");
+        FlowParameterAccessor.merge(fp);
         if (setBatchParameter(div) != null) {
             return ResponseData.of(setBatchParameter(div)).respond();
         }
@@ -81,6 +86,7 @@ public class TsuchishoJoho534 {
             parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
             parameter.setSaishoriKubun(再処理区分);
             parameter.setShutsuryokujunId(new RString(出力順ID.toString()));
+            parameter.setLoginUserId(ControlDataHolder.getUserId());
             return parameter;
         }
         return null;

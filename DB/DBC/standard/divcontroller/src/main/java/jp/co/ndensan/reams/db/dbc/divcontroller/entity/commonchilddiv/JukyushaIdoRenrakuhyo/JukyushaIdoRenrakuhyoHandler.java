@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyoBuild
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_JukyushaIdoJiyu;
-import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_NijiyoboJigyoKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_ShokiboKyotakuServiceRIyoCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TeiseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_kohiFutanJogengakuGengakuUmu;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_kyotakuServiceSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushateiseirenrakuhyotoroku.JukyushaTeiseiRenrakuhyoToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -48,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class JukyushaIdoRenrakuhyoHandler {
 
     private final JukyushaIdoRenrakuhyoDiv div;
-    private static final RString 空KEY = new RString("space");
+    private static final RString 空KEY = RString.EMPTY;
     private static final RString 星 = new RString("*");
     private static final RString 新規モード = new RString("新規モード");
     private static final RString 訂正モード = new RString("訂正モード");
@@ -59,6 +59,7 @@ public class JukyushaIdoRenrakuhyoHandler {
     private static final RString WIDTH = new RString("220");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final RString THREE = new RString("3");
     private static final int INT_1 = 1;
 
     /**
@@ -115,7 +116,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             }
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNo().setValue(被保険者番号.value());
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().setValue(受給者異動情報.get異動年月日());
-            if (受給者異動情報.get性別コード() != null) {
+            if (!RString.isNullOrEmpty(受給者異動情報.get性別コード())) {
                 div.getJukyushaIdoRenrakuhyoKihonJoho().getRadSeibetsu().setSelectedKey(受給者異動情報.get性別コード());
             }
             div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNameKana().setValue(受給者異動情報.get被保険者氏名カナ());
@@ -140,7 +141,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().
                     setSelectedKey(空KEY);
             div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().setSelectedKey(空KEY);
-            div.getGemmenGengakuPanel().getRadGemmenShinseichuKubun().setSelectedKey(空KEY);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun().setSelectedKey(空KEY);
             div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                     getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().setSelectedKey(空KEY);
             div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
@@ -153,10 +154,27 @@ public class JukyushaIdoRenrakuhyoHandler {
                     getRadKaizeisoTokureiGengakuSochiTaishoFlag().setSelectedKey(空KEY);
             div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag().setSelectedKey(空KEY);
             div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().setSelectedKey(空KEY);
+            div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().setDisabled(false);
+            div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().setFromDisabled(false);
+            div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().setToDisabled(false);
+            div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().setDisabled(false);
+            div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().setFromDisabled(false);
+            div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().setToDisabled(false);
             onClick_計画作成区分();
+            onClick_事業区分();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtKyotakuhiShin1FutanGendogaku().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtKyotakuhiShin2FutanGendogaku().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtKyotakuhiShin3utanGendogaku().setDisabled(true);
             return 受給者異動情報;
         }
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().setValue(受給者異動情報.get異動年月日());
+        if (!RString.isNullOrEmpty(受給者異動情報.get異動区分コード())) {
+            div.getJukyushaIdoRenrakuhyoKihonJoho().getRadIdoKubun().setSelectedKey(受給者異動情報.get異動区分コード());
+        }
+
         if (JukyushaTeiseiRenrakuhyoToroku.createInstance().selectBooleanHihokenshaNo(被保険者番号)) {
             div.getJukyushaIdoRenrakuhyoKihonJoho().getRadIdoKubun().setSelectedKey(JukyushaIF_IdoKubunCode.新規.getコード());
         } else {
@@ -170,7 +188,9 @@ public class JukyushaIdoRenrakuhyoHandler {
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNo().setValue(被保険者番号.value());
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtHiHokenshaNameKana().setValue(受給者異動情報.get被保険者氏名カナ());
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtUmareYMD().setValue(受給者異動情報.get生年月日());
-        div.getJukyushaIdoRenrakuhyoKihonJoho().getRadSeibetsu().setSelectedKey(受給者異動情報.get性別コード());
+        if (!RString.isNullOrEmpty(受給者異動情報.get性別コード())) {
+            div.getJukyushaIdoRenrakuhyoKihonJoho().getRadSeibetsu().setSelectedKey(受給者異動情報.get性別コード());
+        }
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShikakuShutokuYMD().setValue(受給者異動情報.get資格取得年月日());
         div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtShikakuSoshitsuYMD().setValue(受給者異動情報.get資格喪失年月日());
         if (受給者異動情報.get証記載保険者番号() != null) {
@@ -206,17 +226,18 @@ public class JukyushaIdoRenrakuhyoHandler {
         set二割負担エリア(受給者異動情報);
         set二次予防事業エリア(受給者異動情報);
         set老人保健エリア(受給者異動情報);
-        if (新規モード.equals(処理モード) || 訂正モード.equals(処理モード)) {
-            onClick_計画作成区分();
-        }
-        if (新規モード.equals(処理モード)) {
-            onClick_事業区分();
-        }
         if (訂正モード.equals(処理モード)) {
 
             div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().setDisabled(false);
             div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtKyotakuhiShin1FutanGendogaku().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtKyotakuhiShin2FutanGendogaku().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtKyotakuhiShin3utanGendogaku().setDisabled(true);
             onClick_事業区分();
+            onClick_計画作成区分();
             if (受給者異動情報.get訂正年月日() != null && !受給者異動情報.get訂正年月日().isEmpty()) {
                 div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().setValue(new RDate(受給者異動情報.get訂正年月日().toString()));
             } else {
@@ -226,6 +247,49 @@ public class JukyushaIdoRenrakuhyoHandler {
                 div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().setSelectedKey(受給者異動情報.get訂正区分コード());
             } else {
                 div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().setSelectedKey(JukyushaIF_TeiseiKubunCode.修正.getコード());
+            }
+
+            if (THREE.equals(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey())
+                    || 空KEY.equals(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                            getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey())) {
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtShokuhiFutanGendogaku().setDisabled(false);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtFutanGendogakuTekiyoYMD().setDisabled(false);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtFutanGendogakuTekiyoYMD().setFromDisabled(false);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtFutanGendogakuTekiyoYMD().setToDisabled(false);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtJuraigataKoshitsuTokuyoFutanGendogaku().setDisabled(false);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().setDisabled(false);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtTashoshitsu().setDisabled(false);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtUnitKoshitsuGendogaku().setDisabled(false);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtUnitJunKoshitsuFutanGendogaku().setDisabled(false);
+            } else {
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtShokuhiFutanGendogaku().setDisabled(true);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtFutanGendogakuTekiyoYMD().setDisabled(true);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtFutanGendogakuTekiyoYMD().setFromDisabled(true);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtFutanGendogakuTekiyoYMD().setToDisabled(true);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtJuraigataKoshitsuTokuyoFutanGendogaku().setDisabled(true);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().setDisabled(true);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtTashoshitsu().setDisabled(true);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtUnitKoshitsuGendogaku().setDisabled(true);
+                div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                        getTxtUnitJunKoshitsuFutanGendogaku().setDisabled(true);
             }
         }
         return 受給者異動情報;
@@ -258,6 +322,9 @@ public class JukyushaIdoRenrakuhyoHandler {
                 div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setReadOnly(true);
                 div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().setDisabled(true);
                 div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().setReadOnly(true);
+                div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().clearValue();
+                div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().clearFromValue();
+                div.getShikyuGendoKijungakuPanel().getTxtTankinyushoServiceJogenKanriTekiyoYMD().clearToValue();
             } else {
                 div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setDisabled(false);
                 div.getShikyuGendoKijungakuPanel().getTxtTankiNyushoServiceShikyuGendoKijungaku().setReadOnly(false);
@@ -295,7 +362,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         } else {
             div.getYokaigoNinteiPanel().getRadHenkoShinseichuKubun().setSelectedKey(受給者異動情報.get変更申請中区分コード());
         }
-        if (受給者異動情報.get認定有効期間開始年月日() != null) {
+        if (受給者異動情報.get認定有効期間開始年月日() != null && !受給者異動情報.get認定有効期間開始年月日().isEmpty()) {
             div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().setFromValue(
                     new RDate(受給者異動情報.get認定有効期間開始年月日().toString()));
         }
@@ -313,7 +380,7 @@ public class JukyushaIdoRenrakuhyoHandler {
     private void set支給限度基準額エリア(JukyushaIdoRenrakuhyo 受給者異動情報) {
         div.getShikyuGendoKijungakuPanel().getTxtHomonTsushoServiceShikyuGendoKijungaku().setValue(
                 new Decimal(受給者異動情報.get訪問通所サービス支給限度基準額()));
-        if (受給者異動情報.get訪問通所サービス上限管理適用期間開始年月日() != null) {
+        if (受給者異動情報.get訪問通所サービス上限管理適用期間開始年月日() != null && !受給者異動情報.get訪問通所サービス上限管理適用期間開始年月日().isEmpty()) {
             div.getShikyuGendoKijungakuPanel().getTxtHomonTsushoServiceJogenKanriTekiyoYMD().setFromValue(
                     new RDate(受給者異動情報.get訪問通所サービス上限管理適用期間開始年月日().toString()));
         }
@@ -395,13 +462,19 @@ public class JukyushaIdoRenrakuhyoHandler {
                     new RDate(受給者異動情報.get住所地特例適用終了日().toString()));
         }
         div.getJushochiTokureiPanel().getHokenshaJohoPanel().getTxtShisetsuShozaiHokenjaNo().setValue(受給者異動情報.get施設所在保険者番号());
+
+        if (!RString.isNullOrEmpty(受給者異動情報.get施設所在保険者番号())) {
+            Hokensha 保険者 = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(new HokenjaNo(受給者異動情報.get施設所在保険者番号()));
+            div.getJushochiTokureiPanel().getHokenshaJohoPanel().getTxtHokenshaMeisho().setValue(保険者 == null ? RString.EMPTY : 保険者.get保険者名());
+        }
     }
 
     private void set減免_減額エリア(JukyushaIdoRenrakuhyo 受給者異動情報) {
         if (RString.isNullOrEmpty(受給者異動情報.get減免申請中区分コード())) {
-            div.getGemmenGengakuPanel().getRadGemmenShinseichuKubun().setSelectedKey(空KEY);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun().setSelectedKey(空KEY);
         } else {
-            div.getGemmenGengakuPanel().getRadGemmenShinseichuKubun().setSelectedKey(受給者異動情報.get減免申請中区分コード());
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan()
+                    .getRadGemmenShinseichuKubun().setSelectedKey(受給者異動情報.get減免申請中区分コード());
         }
         if (!星.equals(受給者異動情報.get利用者負担区分コード())) {
             if (RString.isNullOrEmpty(受給者異動情報.get利用者負担区分コード())) {
@@ -444,8 +517,10 @@ public class JukyushaIdoRenrakuhyoHandler {
                         getRadHyojunFutanKubun().setSelectedKey(受給者異動情報.get標準負担区分コード());
             }
         }
-        div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
-                getTxtFutangaku().setValue(受給者異動情報.get負担額());
+        if (!受給者異動情報.get負担額().equals(Decimal.ZERO)) {
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
+                    getTxtFutangaku().setValue(受給者異動情報.get負担額());
+        }
         if (!星.equals(受給者異動情報.get負担額適用開始年月日()) && !RString.isNullOrEmpty(受給者異動情報.get負担額適用開始年月日())) {
             div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
                     getTxtFutangakuTekiyoYMD().setFromValue(new RDate(受給者異動情報.get負担額適用開始年月日().toString()));
@@ -622,6 +697,8 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setToDisabled(false);
         } else {
             div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setDisabled(true);
+            div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().clearFromValue();
+            div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().clearToValue();
             div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setFromDisabled(true);
             div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().setToDisabled(true);
         }
@@ -634,21 +711,27 @@ public class JukyushaIdoRenrakuhyoHandler {
     public void onClick_計画作成区分() {
         RString 計画作成区分Key = div.getKyotakuServicePlanPanel().getRadKyotakuServiceSakuseiKubun().getSelectedKey();
         if (空KEY.equals(計画作成区分Key)) {
-            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setReadOnly(true);
-            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setReadOnly(true);
-            div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setReadOnly(true);
-            div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setReadOnly(true);
-        } else if (JukyushaIF_KeikakuSakuseiKubunCode.自己作成.getコード().equals(計画作成区分Key)) {
-            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setReadOnly(true);
-            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setReadOnly(true);
-            div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setReadOnly(false);
-            div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setReadOnly(false);
-        } else if (JukyushaIF_KeikakuSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(計画作成区分Key)
-                || JukyushaIF_KeikakuSakuseiKubunCode.介護予防支援事業所_地域包括支援センター作成.getコード().equals(計画作成区分Key)) {
-            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setReadOnly(false);
-            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setReadOnly(false);
-            div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setReadOnly(false);
-            div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setReadOnly(false);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setDisabled(true);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().clearValue();
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setDisabled(true);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().clearValue();
+            div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setDisabled(true);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().clearFromValue();
+            div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().clearToValue();
+            div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setDisabled(true);
+            div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setSelectedKey(空KEY);
+        } else if (JukyushaIF_kyotakuServiceSakuseiKubunCode.自己作成.getコード().equals(計画作成区分Key)) {
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setDisabled(true);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().clearValue();
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().clearValue();
+            div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setDisabled(false);
+            div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setDisabled(false);
+        } else if (JukyushaIF_kyotakuServiceSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(計画作成区分Key)
+                || JukyushaIF_kyotakuServiceSakuseiKubunCode.介護予防支援事業所作成.getコード().equals(計画作成区分Key)) {
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().clearValue();
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setDisabled(false);
+            div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setDisabled(false);
+            div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setDisabled(false);
         }
     }
 
@@ -682,10 +765,10 @@ public class JukyushaIdoRenrakuhyoHandler {
             return;
         }
         RString 計画作成区分;
-        if (JukyushaIF_KeikakuSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(計画作成区分Key)) {
-            計画作成区分 = JukyushaIF_KeikakuSakuseiKubunCode.居宅介護支援事業所作成.getコード();
+        if (JukyushaIF_kyotakuServiceSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(計画作成区分Key)) {
+            計画作成区分 = JukyushaIF_kyotakuServiceSakuseiKubunCode.居宅介護支援事業所作成.getコード();
         } else {
-            計画作成区分 = JukyushaIF_KeikakuSakuseiKubunCode.介護予防支援事業所_地域包括支援センター作成.getコード();
+            計画作成区分 = JukyushaIF_kyotakuServiceSakuseiKubunCode.介護予防支援事業所作成.getコード();
         }
         FlexibleDate 異動日 = div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtIdoYMD().getValue();
         if (異動日 == null) {
@@ -856,7 +939,8 @@ public class JukyushaIdoRenrakuhyoHandler {
     }
 
     private void set減免_減額エリアBuilder(JukyushaIdoRenrakuhyoBuilder 受給者異動送付Builder) {
-        受給者異動送付Builder.set減免申請中区分コード(div.getGemmenGengakuPanel().getRadGemmenShinseichuKubun().getSelectedKey());
+        受給者異動送付Builder.set減免申請中区分コード(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan()
+                .getRadGemmenShinseichuKubun().getSelectedKey());
         受給者異動送付Builder.set利用者負担区分コード(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                 getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().getSelectedKey());
         if (div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
@@ -1201,7 +1285,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set居宅適用終了年月日(div.getKyotakuServicePlanPanel().
                 getTxtKyotakuServiceTekiyoYMD().getToValue() == null ? RString.EMPTY : div.getKyotakuServicePlanPanel().
                         getTxtKyotakuServiceTekiyoYMD().getToValue().toDateString());
-        entity.set減免申請中区分(div.getGemmenGengakuPanel().getRadGemmenShinseichuKubun().getSelectedKey());
+        entity.set減免申請中区分(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadGemmenShinseichuKubun().getSelectedKey());
         entity.set利用者負担区分(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                 getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().getSelectedKey());
         entity.set利用給付率(new RString(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
@@ -1229,11 +1313,7 @@ public class JukyushaIdoRenrakuhyoHandler {
     }
 
     private JukyushaIdoRenrakuhyoTorokuEntity get受給者異動連絡票Entity2(JukyushaIdoRenrakuhyoTorokuEntity entity) {
-        if (div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag().getSelectedKey().equals(ONE)) {
-            entity.set公費負担上限額減額(Boolean.FALSE);
-        } else if (div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag().getSelectedKey().equals(TWO)) {
-            entity.set公費負担上限額減額(Boolean.TRUE);
-        }
+        entity.set公費負担上限額減額(div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag().getSelectedKey());
         entity.set償還払化適用開始年月日(div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().
                 getFromValue() == null ? null : div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().
                         getFromValue().toDateString());
@@ -1300,11 +1380,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set軽減率適用終了年月日(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                 getTxtFutanGendogakuTekiyoYMD().getToValue() == null ? RString.EMPTY : div.getGemmenGengakuPanel()
                         .getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtFutanGendogakuTekiyoYMD().getToValue().toDateString());
-        if (div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey().equals(ONE)) {
-            entity.set小規模居宅ｻｰﾋﾞｽ利用(Boolean.FALSE);
-        } else if (div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey().equals(TWO)) {
-            entity.set小規模居宅ｻｰﾋﾞｽ利用(Boolean.TRUE);
-        }
+        entity.set小規模居宅ｻｰﾋﾞｽ利用(div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey());
         entity.set二次予防事業区分(div.getNijiyoboJigyoPanel().getRadNijiyoboJigyoKubun().getSelectedKey());
         if (div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().getFromValue() != null
                 && !div.getNijiyoboJigyoPanel().getTxtNijiyoboJigyoYukoDateRange().getFromValue().toDateString().isEmpty()) {
@@ -1345,5 +1421,123 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set送付年月(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtSofuYM().getValue() == null ? FlexibleYearMonth.EMPTY : div
                 .getJukyushaIdoRenrakuhyoKihonJoho().getTxtSofuYM().getValue().getYearMonth());
         return entity;
+    }
+
+    /**
+     * 認定申請中区分チェック
+     */
+    public void onChange_認定申請中区分() {
+        if (空KEY.equals(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey())) {
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtShokuhiFutanGendogaku().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().setFromDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().setToDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuTokuyoFutanGendogaku().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtTashoshitsu().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitKoshitsuGendogaku().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitJunKoshitsuFutanGendogaku().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadTokuteiNyushoshaKaigoServiceKubun().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadKaizeisoTokureiGengakuSochiTaishoFlag().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtShokuhiFutanGendogaku().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().clearFromValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().clearToValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuTokuyoFutanGendogaku().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtTashoshitsu().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitKoshitsuGendogaku().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitJunKoshitsuFutanGendogaku().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadTokuteiNyushoshaKaigoServiceKubun().setSelectedKey(空KEY);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadKaizeisoTokureiGengakuSochiTaishoFlag().setSelectedKey(空KEY);
+        } else if (THREE.equals(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey())) {
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtShokuhiFutanGendogaku().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().setFromDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().setToDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuTokuyoFutanGendogaku().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtTashoshitsu().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitKoshitsuGendogaku().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitJunKoshitsuFutanGendogaku().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadTokuteiNyushoshaKaigoServiceKubun().setDisabled(false);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadKaizeisoTokureiGengakuSochiTaishoFlag().setDisabled(false);
+        } else {
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtShokuhiFutanGendogaku().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtShokuhiFutanGendogaku().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().clearFromValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().clearToValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().setFromDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtFutanGendogakuTekiyoYMD().setToDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuTokuyoFutanGendogaku().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuTokuyoFutanGendogaku().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtTashoshitsu().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtTashoshitsu().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitKoshitsuGendogaku().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitKoshitsuGendogaku().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitJunKoshitsuFutanGendogaku().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getTxtUnitJunKoshitsuFutanGendogaku().clearValue();
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadTokuteiNyushoshaKaigoServiceKubun().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadTokuteiNyushoshaKaigoServiceKubun().setSelectedKey(空KEY);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadKaizeisoTokureiGengakuSochiTaishoFlag().setDisabled(true);
+            div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
+                    getRadKaizeisoTokureiGengakuSochiTaishoFlag().setSelectedKey(空KEY);
+        }
     }
 }

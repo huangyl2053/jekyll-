@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.processprm.dba050010;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.juminkirokuidojohotorokukoiki.JuminkirokuIdojohoTorokuKoikiMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -21,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JuminkirokuIdojohoTorokuKoikiProcessParameter implements IBatchProcessParameter {
 
     private YMDHMS syorinichiji;
-    private RString shichosonCode;
+    private List<RString> shichosonCode;
 
     /**
      * コンストラクタ。
@@ -31,7 +32,7 @@ public class JuminkirokuIdojohoTorokuKoikiProcessParameter implements IBatchProc
      */
     public JuminkirokuIdojohoTorokuKoikiProcessParameter(
             YMDHMS syorinichiji,
-            RString shichosonCode) {
+            List<RString> shichosonCode) {
         this.syorinichiji = syorinichiji;
         this.shichosonCode = shichosonCode;
     }

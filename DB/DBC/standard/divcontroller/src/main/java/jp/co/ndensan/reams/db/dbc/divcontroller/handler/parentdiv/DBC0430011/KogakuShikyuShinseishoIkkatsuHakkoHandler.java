@@ -163,6 +163,8 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         div.getJidoShokanTaishoJohoSettei().getTxtKetteiDate().setValue(nowDate);
 
         div.getShinseishoHakkoParameters().getTxtHihokenshaNo().setDisabled(true);
+        div.getShinseishoHakkoParameters().getDdlServiceYM().setDisabled(true);
+        div.getShinseishoHakkoParameters().getBtniHokenSearch().setDisabled(true);
     }
 
     /**
@@ -176,6 +178,7 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         HokenshaNo 証記載保険者番号 = new HokenshaNo(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 nowdate, SubGyomuCode.DBU介護統計報告));
         List<KeyValueDataSource> datasource = new ArrayList<>();
+        datasource.add(new KeyValueDataSource());
         if (メニューID_DBCMN43001.equals(menuID)) {
             List<KogakuShikyuShinsei> serviceTeikyoYMList
                     = KogakuShikyuShinseishoIkkatsu.createInstance().getServiceTeikyoByDbT3056(被保険者番号, 証記載保険者番号);
@@ -192,8 +195,8 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             }
         }
         div.getShinseishoHakkoParameters().getDdlServiceYM().setDataSource(datasource);
-        if (!datasource.isEmpty()) {
-            div.getShinseishoHakkoParameters().getDdlServiceYM().setSelectedIndex(BEGININDEX);
+        if (datasource.size() > 1) {
+            div.getShinseishoHakkoParameters().getDdlServiceYM().setSelectedIndex(1);
         }
     }
 
@@ -213,7 +216,9 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
             parameter.setChushutsuJoken(KogakuKyufu_OshiraseTsuchi_ChushutsuJoken.審査年月);
         } else if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
             RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey();
-            処理年月 = new FlexibleYearMonth(年月.toString().substring(BEGININDEX, ENDINDEX));
+            if (!年月.isEmpty()) {
+                処理年月 = new FlexibleYearMonth(年月.toString().substring(BEGININDEX, ENDINDEX));
+            }
             parameter.setChushutsuJoken(KogakuKyufu_OshiraseTsuchi_ChushutsuJoken.被保険者番号);
         } else if (!div.getShinseishoHakkoParameters().getRadHakushiInsatsu().getSelectedKey().isEmpty()) {
             処理年月 = FlexibleYearMonth.EMPTY;

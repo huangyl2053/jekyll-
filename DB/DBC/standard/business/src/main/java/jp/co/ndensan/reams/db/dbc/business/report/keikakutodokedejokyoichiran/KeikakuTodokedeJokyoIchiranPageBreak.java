@@ -70,17 +70,8 @@ public class KeikakuTodokedeJokyoIchiranPageBreak extends PageBreaker<KyotakuSer
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.町域コード.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().choikiCode).equals(nextRecord.getSource().choikiCode);
         }
-        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.番地コード1.get項目ID())) {
+        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.番地コード.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().banchiCode1).equals(nextRecord.getSource().banchiCode1);
-        }
-        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.番地コード2.get項目ID())) {
-            flag = !checkNull(currentRecord.getSource().banchiCode2).equals(nextRecord.getSource().banchiCode2);
-        }
-        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.番地コード3.get項目ID())) {
-            flag = !checkNull(currentRecord.getSource().banchiCode3).equals(nextRecord.getSource().banchiCode3);
-        }
-        if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.番地コード4.get項目ID())) {
-            flag = !checkNull(currentRecord.getSource().banchiCode4).equals(nextRecord.getSource().banchiCode4);
         }
         if (!flag && this.keys.contains(KeikakuTodokedeJokyoIchiranOrder.行政区コード.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().listList1_4).equals(nextRecord.getSource().listList1_4);

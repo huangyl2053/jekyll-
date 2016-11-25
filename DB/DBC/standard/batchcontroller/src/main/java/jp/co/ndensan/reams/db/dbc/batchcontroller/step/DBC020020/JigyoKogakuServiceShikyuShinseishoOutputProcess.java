@@ -104,6 +104,7 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
     protected void process(ShinseiJohoChohyoTempEntity entity) {
         if (金融機関コード_9900.equals(entity.getKinyuKikanCodeChohyo())) {
             KogakuJigyoShikyuShinseishoYuchoEntity param = new KogakuJigyoShikyuShinseishoYuchoEntity();
+            entity.setEditJusho(get住所Edit(entity));
             param.setシステム日付(RDateTime.now());
             param.set注意文(注意文);
             param.set帳票出力対象データ(entity);
@@ -114,17 +115,25 @@ public class JigyoKogakuServiceShikyuShinseishoOutputProcess extends BatchProces
             KogakuJigyoShikyuShinseishoYuchoReport report = new KogakuJigyoShikyuShinseishoYuchoReport(param);
             report.writeBy(yuchoReportSourceWriter);
             count1 = count1 + 1;
-        } else {
-            KogakuJigyoShikyuShinseishoEntity param = new KogakuJigyoShikyuShinseishoEntity();
-            param.setシステム日付(RDate.getNowDate());
-            param.set申請情報帳票発行一時(entity);
-            param.set認証者役職名(認証者名);
-            param.set連番(new RString(count2));
-            param.set注意文(注意文);
-
-            KogakuJigyoShikyuShinseishoReport report = new KogakuJigyoShikyuShinseishoReport(param);
-            report.writeBy(shinseishoReportSourceWriter);
-            count2 = count2 + 1;
         }
+        KogakuJigyoShikyuShinseishoEntity param1 = new KogakuJigyoShikyuShinseishoEntity();
+        entity.setEditJusho(get住所Edit(entity));
+        param1.setシステム日付(RDate.getNowDate());
+        param1.set申請情報帳票発行一時(entity);
+        param1.set認証者役職名(認証者名);
+        param1.set連番(new RString(count2));
+        param1.set注意文(注意文);
+
+        KogakuJigyoShikyuShinseishoReport report1 = new KogakuJigyoShikyuShinseishoReport(param1);
+        report1.writeBy(shinseishoReportSourceWriter);
+        count2 = count2 + 1;
+
+    }
+    
+    private RString get住所Edit(ShinseiJohoChohyoTempEntity entity) {
+        RString 住所 = entity.getJushoChohyo() == null ? RString.EMPTY : entity.getJushoChohyo().getColumnValue();
+        RString 番地 = entity.getBanchi() == null ? RString.EMPTY : entity.getBanchi().getColumnValue();
+        RString 方書 = entity.getKatagaki() == null ? RString.EMPTY : entity.getKatagaki().getColumnValue();
+        return 住所.concat(番地).concat(RString.EMPTY).concat(方書);
     }
 }

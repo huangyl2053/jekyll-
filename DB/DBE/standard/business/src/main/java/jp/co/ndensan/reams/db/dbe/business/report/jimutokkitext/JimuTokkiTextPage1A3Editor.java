@@ -22,9 +22,9 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
- * 特記事項A3Editorです。
+ * 一次判定+特記事項A3Editorです。
  *
- * @reamsid_L DBE-0150-200 lishengli
+ * @reamsid_L DBE-0150-320 lishengli
  */
 public class JimuTokkiTextPage1A3Editor implements IJimuTokkiTextA3Editor {
 

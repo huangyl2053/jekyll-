@@ -60,13 +60,14 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     @Override
     protected void process(IdouTempEntity entity) {
+        RString key = 居宅計画Key(entity.get居宅計画());
         RString 全項目 = 居宅計画全項目(entity.get居宅計画());
-        if (居宅計画List.contains(全項目)) {
-            return;
-        }
-        居宅計画List.add(全項目);
         Decimal 連番 = 連番Map.get(entity.get居宅計画().get被保険者番号());
         if (連番 == null) {
+            if (居宅計画List.contains(key)) {
+                return;
+            }
+            居宅計画List.add(key);
             連番Map.put(entity.get居宅計画().get被保険者番号(), Decimal.ONE);
             IdouTblEntity update = entity.get異動一時();
             update.set居宅計画(全項目);
@@ -78,6 +79,10 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
             if (連番temp.intValue() != entity.get異動一時().get連番()) {
                 return;
             }
+            if (居宅計画List.contains(key)) {
+                return;
+            }
+            居宅計画List.add(key);
             連番Map.put(entity.get居宅計画().get被保険者番号(), 連番temp);
             IdouTblEntity update = entity.get異動一時();
             update.set居宅計画(全項目);
@@ -85,6 +90,10 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
             return;
         }
         if (entity.get異動一時().get被保険者番号Max連番() < 連番temp.intValue()) {
+            if (居宅計画List.contains(key)) {
+                return;
+            }
+            居宅計画List.add(key);
             連番Map.put(entity.get居宅計画().get被保険者番号(), 連番.add(Decimal.ONE));
             IdouTblEntity insert = new IdouTblEntity();
             insert.set被保険者番号(entity.get居宅計画().get被保険者番号());
@@ -120,14 +129,31 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
         全項目 = concatDate(全項目, 居宅計画.get有効終了日());
         全項目 = concatRString(全項目, 居宅計画.get居宅計画種類());
         全項目 = concatDate(全項目, 居宅計画.get適用終了日());
+        全項目 = concatDate(全項目, 居宅計画.get届出年月日());
         全項目 = 全項目.concat(居宅計画.get被保険者番号().getColumnValue()).concat(SPLIT);
+        全項目 = 全項目.concat(居宅計画.getTaishoYM1().toDateString()).concat(SPLIT);
+        全項目 = 全項目.concat(居宅計画.getTaishoYM2().toDateString()).concat(SPLIT);
+        全項目 = 全項目.concat(new RString(居宅計画.get履歴番号()).concat(SPLIT));
+        全項目 = concatDate(全項目, 居宅計画.get有効終了日());
         if (居宅計画.get委託先事業者番号() != null) {
             全項目 = 全項目.concat(居宅計画.get委託先事業者番号().getColumnValue()).concat(SPLIT);
         } else {
             全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
         }
         全項目 = concatRString(全項目, 居宅計画.get暫定区分());
-        全項目 = concatDate(全項目, 居宅計画.get届出年月日());
+        return 全項目;
+    }
+
+    private RString 居宅計画Key(KyotakuEntity 居宅計画) {
+        RString 全項目 = RString.EMPTY;
+        全項目 = 全項目.concat(居宅計画.get被保険者番号().getColumnValue());
+        全項目 = concatRString(全項目, 居宅計画.get居宅計画種類());
+        全項目 = 全項目.concat(居宅計画.getTaishoYM1().toDateString());
+        全項目 = 全項目.concat(居宅計画.getTaishoYM2().toDateString());
+        全項目 = 全項目.concat(new RString(居宅計画.get履歴番号()));
+        if (居宅計画.get有効終了日() != null) {
+            全項目 = 全項目.concat(new RString(居宅計画.get有効終了日().toString()));
+        }
         return 全項目;
     }
 

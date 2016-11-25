@@ -235,6 +235,6 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
         return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().toDateString(),
                 getParameter().get賦課年度().toDateString(),
                 new RString(new YMDHMS(バッチ起動日時).toString()),
-                ShoriName.本算定賦課.get名称(), 帳票分類ID);
+                ShoriName.普徴仮算定賦課.get名称(), 帳票分類ID);
     }
 }

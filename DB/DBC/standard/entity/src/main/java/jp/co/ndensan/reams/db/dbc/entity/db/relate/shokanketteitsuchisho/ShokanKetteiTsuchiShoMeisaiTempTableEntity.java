@@ -82,10 +82,21 @@ public class ShokanKetteiTsuchiShoMeisaiTempTableEntity
     @PrimaryKey
     private RString serviceCode;
     private RString serviceShuruiName;
+    // 支給金額
     private int kaishuKingaku;
     private RString zougenRiyu;
     private RString kinyuKikanMeisi;
     private RString kinyuKikanShitenMeisi;
     private RString yoshikiMeisho;
     private int kozaId;
+    // 前回支払金額
+    private Decimal zenkaiShiharaiKingaku;
+    // 通知書発行対象フラグ
+    private boolean hakkoutaisyouFlg;
+    // 差額金額
+    private Decimal sagakuKingaku;
+    // サービス分類
+    private RString sabisufunrui;
+    // 様式番号サブ
+    private RString yousikibangousabu;
 }

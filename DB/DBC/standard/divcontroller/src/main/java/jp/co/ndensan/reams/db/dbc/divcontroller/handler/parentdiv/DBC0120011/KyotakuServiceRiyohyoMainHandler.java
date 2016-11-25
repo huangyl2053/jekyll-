@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.kyotakuserviceriyohyomain.Kyotaku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.TodokedeKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.HihokenshaKankeiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,6 +37,8 @@ public class KyotakuServiceRiyohyoMainHandler {
     private static final RString キー_被保険者番号 = new RString("被保険者番号");
     private static final RString キー_対象年月 = new RString("対象年月");
     private static final RString キー_履歴番号 = new RString("履歴番号");
+    private final RString 居宅サービス計画 = new RString("居宅サービス計画");
+    private final RString 総合事業費計画 = new RString("総合事業費計画");
 
     /**
      * コンストラクタです。
@@ -83,13 +86,28 @@ public class KyotakuServiceRiyohyoMainHandler {
                     DateConverter.flexibleDateToRDate(result.get適用終了年月日()));
             row.getTodokedeYMD().setValue(
                     DateConverter.flexibleDateToRDate(result.get届出年月日()));
-            row.getKoshinYMD().setValue(
-                    DateConverter.flexibleDateToRDate(result.get計画変更年月日()));
+            row.getKoshinYMD().setValue(result.get更新日());
             row.setMaxRirekiNo(new RString(result.get履歴番号()));
-            row.setKyotakuJigyo(result.get居宅_総合事業区分());
+            row.setKyotakuJigyo(get居宅_総合事業区分(result.get居宅_総合事業区分()));
             rowList.add(row);
         }
         div.getDgKyotakuServiceRirekiIchiran().setDataSource(rowList);
+    }
+    
+    private RString get居宅_総合事業区分(RString 居宅_総合事業区分コード) {
+        RString 居宅_総合事業区分 = RString.EMPTY;
+        switch (居宅_総合事業区分コード.toString()) {
+            case "1":
+                居宅_総合事業区分 = 居宅サービス計画;
+                break;
+            case "2":
+                居宅_総合事業区分 = 総合事業費計画;
+                break;
+            default :
+                break;
+        }
+                
+        return 居宅_総合事業区分;
     }
 
     /**
@@ -118,13 +136,17 @@ public class KyotakuServiceRiyohyoMainHandler {
         } else {
             div.getTxtTodokedeYmd().setValue(DateConverter.flexibleDateToRDate(居宅給付計画届出.get届出年月日()));
         }
-        if (居宅給付計画届出.get届出区分() == null) {
+        if (RString.isNullOrEmpty(居宅給付計画届出.get届出区分())) {
             div.getTxtTodokedeKubun().clearValue();
         } else {
-            div.getTxtTodokedeKubun().setValue(居宅給付計画届出.get届出区分());
+            div.getTxtTodokedeKubun().setValue(TodokedeKubun.toValue(居宅給付計画届出.get届出区分()).get名称());
         }
-        div.getTxtTekiyoKikan().setFromValue(new RDate(row.getTekiyoKaishiYMD().getValue().toString()));
-        if (row.getTekiyoShuryoYMD() == null) {
+        if (row.getTekiyoKaishiYMD().getValue() == null || row.getTekiyoKaishiYMD().getValue().toDateString().isEmpty()) {
+            div.getTxtTekiyoKikan().clearFromValue();
+        } else {
+            div.getTxtTekiyoKikan().setFromValue(new RDate(row.getTekiyoKaishiYMD().getValue().toString()));
+        }
+        if (row.getTekiyoShuryoYMD().getValue() == null || row.getTekiyoShuryoYMD().getValue().toDateString().isEmpty()) {
             div.getTxtTekiyoKikan().clearToValue();
         } else {
             div.getTxtTekiyoKikan().setToValue(new RDate(row.getTekiyoShuryoYMD().getValue().toString()));
@@ -143,7 +165,7 @@ public class KyotakuServiceRiyohyoMainHandler {
         } else {
             div.getTodokedesha().getTxtTodokedeshaShimeiKana().setDomain(居宅給付計画届出.get届出者氏名カナ());
         }
-        if (居宅給付計画届出.get届出者関係区分() == null) {
+        if (RString.isNullOrEmpty(居宅給付計画届出.get届出者関係区分())) {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().clearValue();
         } else {
             div.getTodokedesha().getTxtTodokedeshaKankeiKubun().setValue(

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class ChosahyoKihonchosaKatamenReport extends Report<ChosahyoKihonchosaKatamenReportSource> {
 
     private final List<ChosahyoKihonchosaKatamenItem> itemList;
+    private final ChosahyoKihonchosaKatamenItem item;
 
     /**
      * インスタンスを生成します。
@@ -27,24 +28,43 @@ public class ChosahyoKihonchosaKatamenReport extends Report<ChosahyoKihonchosaKa
      */
     public static ChosahyoKihonchosaKatamenReport createFrom(List<ChosahyoKihonchosaKatamenItem> itemList) {
 
-        return new ChosahyoKihonchosaKatamenReport(itemList);
+        return new ChosahyoKihonchosaKatamenReport(itemList, null);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 要介護認定調査票（基本調査）のITEM
+     * @param item 要介護認定調査票（基本調査）のITEM
+     * @return 要介護認定調査票（基本調査）のReport
      */
-    protected ChosahyoKihonchosaKatamenReport(List<ChosahyoKihonchosaKatamenItem> itemList) {
+    public static ChosahyoKihonchosaKatamenReport createFrom(ChosahyoKihonchosaKatamenItem item) {
+        return new ChosahyoKihonchosaKatamenReport(null, item);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param itemList 要介護認定調査票（基本調査）のITEMLIST
+     * @param item 要介護認定調査票（基本調査）のITEM
+     */
+    protected ChosahyoKihonchosaKatamenReport(List<ChosahyoKihonchosaKatamenItem> itemList, ChosahyoKihonchosaKatamenItem item) {
         this.itemList = itemList;
+        this.item = item;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<ChosahyoKihonchosaKatamenReportSource> reportSourceWriter) {
-        for (ChosahyoKihonchosaKatamenItem item : itemList) {
+        if (itemList != null) {
+            for (ChosahyoKihonchosaKatamenItem chosahyoKihonchosaKatamenItem : itemList) {
+                ChosahyoKihonchosaKatamenEditor editor = new ChosahyoKihonchosaKatamenEditor(chosahyoKihonchosaKatamenItem);
+                ChosahyoKihonchosaKatamenBuilder builder = new ChosahyoKihonchosaKatamenBuilder(editor);
+                reportSourceWriter.writeLine(builder);
+            }
+        } else {
             ChosahyoKihonchosaKatamenEditor editor = new ChosahyoKihonchosaKatamenEditor(item);
             ChosahyoKihonchosaKatamenBuilder builder = new ChosahyoKihonchosaKatamenBuilder(editor);
             reportSourceWriter.writeLine(builder);
         }
+
     }
 }

@@ -2449,7 +2449,8 @@
     <select id="select出力対象データ" resultOrdered="true" resultMap="resultMap_FuchoKariTsuchishoIkkatsuHakkoTemp"
             fetchSize="500"  parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuchokaritsuchishoikkatsuhakko.FuchokaritsuchishoikkatsuhakkoParameter">
         SELECT
-        *
+        *,
+        "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
         FROM
         "TmpIdoFukaJoho"
         WHERE 1=1

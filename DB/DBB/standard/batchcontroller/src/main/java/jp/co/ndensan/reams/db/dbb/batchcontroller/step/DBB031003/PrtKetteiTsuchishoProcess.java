@@ -263,7 +263,8 @@ public class PrtKetteiTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchis
         総ページ数 = publish決定通知書(介護保険料額決定通知書);
 
         連番 = 連番.add(Decimal.ONE);
-        KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(編集後本算定通知書共通情報,
+        KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(tempEntity.get生活保護区分(),
+                tempEntity.get特徴8月開始者区分(), tempEntity.get特徴10月開始者区分(), 本算定通知書情報, 編集後本算定通知書共通情報,
                 processParameter.get帳票作成日時().getRDateTime(), 地方公共団体, 出力項目リスト, 連番, 定値_タイトル);
         report.writeBy(一覧表ReportSourceWriter);
 

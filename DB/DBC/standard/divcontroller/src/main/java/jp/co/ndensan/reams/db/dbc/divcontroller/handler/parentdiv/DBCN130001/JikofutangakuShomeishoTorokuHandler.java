@@ -752,7 +752,6 @@ public class JikofutangakuShomeishoTorokuHandler {
         div.getTxtUchiFutangaku7().setReadOnly(読取専用);
         div.getTxtJikofutangakuGokei().setReadOnly(読取専用);
         div.getTxtUchiFutangakuGokei().setReadOnly(読取専用);
-        div.getBtnGokei().setDisabled(読取専用);
     }
 
     /**
