@@ -945,49 +945,49 @@ public class ChoshuYuyoJuminKihonHandler {
         RString 期_8月 = 普徴期月リスト.get月の期(Tsuki._8月).get期();
         RString 期_9月 = 普徴期月リスト.get月の期(Tsuki._9月).get期();
         RString 期_10月 = 普徴期月リスト.get月の期(Tsuki._10月).get期();
-        if (期_4月 != null && !期_4月.isEmpty() && !定値_ゼロ.equals(期_4月) && !定値_ゼロゼロ.equals(期_4月)) {
+        if (期の判断(期_4月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_4月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi4().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo4().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_5月 != null && !期_5月.isEmpty() && !定値_ゼロ.equals(期_5月) && !定値_ゼロゼロ.equals(期_5月)) {
+        if (期の判断(期_5月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_5月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi5().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo5().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_6月 != null && !期_6月.isEmpty() && !定値_ゼロ.equals(期_6月) && !定値_ゼロゼロ.equals(期_6月)) {
+        if (期の判断(期_6月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_6月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi6().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo6().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_7月 != null && !期_7月.isEmpty() && !定値_ゼロ.equals(期_7月) && !定値_ゼロゼロ.equals(期_7月)) {
+        if (期の判断(期_7月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_7月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi7().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo7().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_8月 != null && !期_8月.isEmpty() && !定値_ゼロ.equals(期_8月) && !定値_ゼロゼロ.equals(期_8月)) {
+        if (期の判断(期_8月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_8月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi8().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo8().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_9月 != null && !期_9月.isEmpty() && !定値_ゼロ.equals(期_9月) && !定値_ゼロゼロ.equals(期_9月)) {
+        if (期の判断(期_9月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_9月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi9().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo9().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_10月 != null && !期_10月.isEmpty() && !定値_ゼロ.equals(期_10月) && !定値_ゼロゼロ.equals(期_10月)) {
+        if (期の判断(期_10月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_10月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi10().getValue()));
@@ -996,6 +996,10 @@ public class ChoshuYuyoJuminKihonHandler {
         }
         介護期別徴収猶予データ = get介護期別徴収猶予データ(介護期別徴収猶予データ);
         return 介護期別徴収猶予データ;
+    }
+
+    private boolean 期の判断(RString 期) {
+        return 期 != null && !期.isEmpty() && !定値_ゼロ.equals(期) && !定値_ゼロゼロ.equals(期);
     }
 
     private List<KaigoKibetsuChoshuYuyoParam> get介護期別徴収猶予データ(List<KaigoKibetsuChoshuYuyoParam> 介護期別徴収猶予データ) {
@@ -1007,49 +1011,49 @@ public class ChoshuYuyoJuminKihonHandler {
         RString 期_3月 = 普徴期月リスト.get月の期(Tsuki._3月).get期();
         RString 期_翌年4月 = 普徴期月リスト.get月の期(Tsuki.翌年度4月).get期();
         RString 期_翌年5月 = 普徴期月リスト.get月の期(Tsuki.翌年度5月).get期();
-        if (期_11月 != null && !期_11月.isEmpty() && !定値_ゼロ.equals(期_11月) && !定値_ゼロゼロ.equals(期_11月)) {
+        if (期の判断(期_11月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_11月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi11().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo11().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_12月 != null && !期_12月.isEmpty() && !定値_ゼロ.equals(期_12月) && !定値_ゼロゼロ.equals(期_12月)) {
+        if (期の判断(期_12月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_12月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi12().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo12().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_1月 != null && !期_1月.isEmpty() && !定値_ゼロ.equals(期_1月) && !定値_ゼロゼロ.equals(期_1月)) {
+        if (期の判断(期_1月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_1月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi1().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo1().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_2月 != null && !期_2月.isEmpty() && !定値_ゼロ.equals(期_2月) && !定値_ゼロゼロ.equals(期_2月)) {
+        if (期の判断(期_2月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_2月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi2().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo2().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_3月 != null && !期_3月.isEmpty() && !定値_ゼロ.equals(期_3月) && !定値_ゼロゼロ.equals(期_3月)) {
+        if (期の判断(期_3月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_3月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi3().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo3().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_翌年4月 != null && !期_翌年4月.isEmpty() && !定値_ゼロ.equals(期_翌年4月) && !定値_ゼロゼロ.equals(期_翌年4月)) {
+        if (期の判断(期_翌年4月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_翌年4月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi13().getValue()));
             介護期別徴収猶予.set徴収猶予終了日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanShuryo13().getValue()));
             介護期別徴収猶予データ.add(介護期別徴収猶予);
         }
-        if (期_翌年5月 != null && !期_翌年5月.isEmpty() && !定値_ゼロ.equals(期_翌年5月) && !定値_ゼロゼロ.equals(期_翌年5月)) {
+        if (期の判断(期_翌年5月)) {
             KaigoKibetsuChoshuYuyoParam 介護期別徴収猶予 = new KaigoKibetsuChoshuYuyoParam();
             介護期別徴収猶予.set期(Integer.valueOf(期_翌年5月.toString()));
             介護期別徴収猶予.set徴収猶予開始日(rdateToFlexible(普通徴収猶予情報パネル.getTxtYuyoKikanKaishi14().getValue()));

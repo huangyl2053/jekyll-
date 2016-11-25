@@ -80,21 +80,24 @@ public class ChoshuYuyoJuminKihon {
 
         handler.loadヘッダパネル(識別コード, searchKey);
         int 全賦課履歴データ件数 = handler.load全賦課履歴情報グリッド(被保険者番号, new FukaNendo(賦課年度));
-        if (全賦課履歴データ件数 == ゼロ_定値) {
-            handler.setDisabled制御();
-            handler.loadパネル状態2();
-            handler.set全賦課履歴情報Visible(true);
-            ValidationMessageControlPairs pairs = new ChoshuYuyoJuminKihonValidationHandler(div).賦課情報の存在チェック();
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        } else if (全賦課履歴データ件数 == イチ_定値) {
-            Fuka 賦課基本 = handler.get賦課基本();
-            ChoshuYuyoJoho 徴収猶予の情報 = KaigoFukaChoshuYuyo.createInstance()
-                    .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(), 賦課基本.get通知書番号());
-            load(徴収猶予の情報, div);
-            handler.set全賦課履歴情報Visible(false);
-        } else {
-            handler.loadパネル状態2();
-            handler.set全賦課履歴情報Visible(true);
+        switch (全賦課履歴データ件数) {
+            case ゼロ_定値:
+                handler.setDisabled制御();
+                handler.loadパネル状態2();
+                handler.set全賦課履歴情報Visible(true);
+                ValidationMessageControlPairs pairs = new ChoshuYuyoJuminKihonValidationHandler(div).賦課情報の存在チェック();
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            case イチ_定値:
+                Fuka 賦課基本 = handler.get賦課基本();
+                ChoshuYuyoJoho 徴収猶予の情報 = KaigoFukaChoshuYuyo.createInstance()
+                        .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(), 賦課基本.get通知書番号());
+                load(徴収猶予の情報, div);
+                handler.set全賦課履歴情報Visible(false);
+                break;
+            default:
+                handler.loadパネル状態2();
+                handler.set全賦課履歴情報Visible(true);
+                break;
         }
         return createResponse(div);
     }
