@@ -77,11 +77,13 @@ public class ShokanShikyuGendogakuMainHandler {
 
             for (ShokanShuruiShikyuGendoGakuData result : entityList) {
                 dgShikyuGendogaku_Row row = new dgShikyuGendogaku_Row();
-                row.setModifyButtonState(DataGridButtonState.Enabled);
+
                 if (result.get最新フラグ() == INDEX_1) {
                     row.setDeleteButtonState(DataGridButtonState.Enabled);
+                    row.setModifyButtonState(DataGridButtonState.Enabled);
                 } else {
                     row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setModifyButtonState(DataGridButtonState.Disabled);
                 }
                 row.getTekiyoKaishiYM().setValue(flexibleDateToRDate(result.getTekiyoKaishiYM()));
                 row.getTekiyoShuryoYM().setValue(flexibleDateToRDate(result.getTekiyoShuryoYM()));
