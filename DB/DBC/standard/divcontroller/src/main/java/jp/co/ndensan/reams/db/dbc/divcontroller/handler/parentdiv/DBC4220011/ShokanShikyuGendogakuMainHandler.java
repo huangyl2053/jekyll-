@@ -269,7 +269,7 @@ public class ShokanShikyuGendogakuMainHandler {
         clear詳細エリア();
         setValue();
         div.getShokanShikyuGendogakuIchiran().setDisabled(true);
-        div.getShokanShikyuGendogakuShosai().setDisabled(true);
+        div.getShokanShikyuGendogakuShosai().setDisabled(false);
         div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().setFromDisabled(true);
         div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().setToDisabled(true);
         div.getShokanShikyuGendogakuShosai().getRadTableKubun().setDisabled(true);
@@ -277,7 +277,7 @@ public class ShokanShikyuGendogakuMainHandler {
         div.getShokanShikyuGendogakuShosai().getTxtKyotakuKaigoJutakuKaishu().setDisabled(true);
         div.getShokanShikyuGendogakuShosai().getTxtKyotakuShienFukushiYogu().setDisabled(true);
         div.getShokanShikyuGendogakuShosai().getTxtKyotakuShienJutakuKaishu().setDisabled(true);
-        div.getBtnCancel().setDisabled(true);
+        div.getBtnCancel().setDisabled(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(共通ボタン, true);
     }
