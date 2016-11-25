@@ -174,7 +174,7 @@ public class JikoFutangakuShomeisho {
         try (ReportManager reportManager = new ReportManager()) {
             is帳票設計DBC100050 = true;
             JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(is帳票設計DBC100050, is帳票設計DBC100051, getKey().get識別コード(), getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), メニューID);
-            AccessLogger.log(AccessLogType.照会, toPersonalData(data));
+            AccessLogger.log(AccessLogType.照会, toPersonalData(getKey().get被保険者番号().getColumnValue()));
             printData(data, reportManager);
             JikoFutangakushomeishoManager.createInstance().upDate高額合算情報更新(getParameter(div),
                     div.getJikoFutanShomeishoSakuseiPrint().getTxtHakkoDate().getValue());
@@ -213,7 +213,7 @@ public class JikoFutangakuShomeisho {
         try (ReportManager reportManager = new ReportManager()) {
             is帳票設計DBC100051 = true;
             JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(is帳票設計DBC100050, is帳票設計DBC100051, getKey().get識別コード(), getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), メニューID);
-            AccessLogger.log(AccessLogType.照会, toPersonalData(data));
+            AccessLogger.log(AccessLogType.照会, toPersonalData(getKey().get被保険者番号().getColumnValue()));
             printyouData(data, div, reportManager);
             JikoFutangakushomeishoManager.createInstance().upDate高額合算情報更新(getParameter(div),
                     div.getJikoFutanShomeishoSakuseiPrint().getTxtHakkoDate().getValue());
@@ -254,9 +254,9 @@ public class JikoFutangakuShomeisho {
         return ViewStateHolder.get(ViewStateKeys.高額合算キークラス, KogakuGassanKey.class);
     }
 
-    private PersonalData toPersonalData(JikoFutangakushomeishoData data) {
+    private PersonalData toPersonalData(RString 被保険者番号) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                data.get高額合算データ().get被保険者番号().value());
+                被保険者番号);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
