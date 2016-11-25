@@ -273,12 +273,12 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
                 異動一時2Map.put(被保険者番号, 異動一時2List);
             }
             RString 異動一時2Key = get異動一時2Key(異動一時2entity);
+            if (!異動一時2KeyList.contains(異動一時2Key) && !エラーあり.equals(異動一時2entity.getエラーフラグ())) {
+                all異動一時2List.add(異動一時2entity);
+            }
             if (!異動一時2KeyList.contains(異動一時2Key)) {
                 異動一時2List.add(異動一時2entity);
                 異動一時2KeyList.add(異動一時2Key);
-            }
-            if (!異動一時2KeyList.contains(異動一時2Key) && !エラーあり.equals(異動一時2entity.getエラーフラグ())) {
-                all異動一時2List.add(異動一時2entity);
             }
             List<JukyushaIdoRenrakuhyoTempTBLEntity> 受給者異動送付List = 受給者異動送付Map.get(被保険者番号);
             if (受給者異動送付List == null) {
