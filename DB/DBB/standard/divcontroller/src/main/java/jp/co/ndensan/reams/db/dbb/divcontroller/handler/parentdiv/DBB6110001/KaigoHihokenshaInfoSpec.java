@@ -89,6 +89,9 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
     前履歴より前の期間指定 {
                 @Override
                 public boolean apply(KaigoHihokenshaInfoPanelDiv div) {
+                    if (DBB6110001StateName.連帯納付義務者削除.getName().equals(ResponseHolder.getState())) {
+                        return true;
+                    }
                     return SpecHelper.is前履歴より前の期間指定(div);
                 }
             };
@@ -234,11 +237,15 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             }
             RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
+            int cur履歴 = 履歴番号.toInt();
             RentaiGimusha curResult = holder.getKogakuGassanJikoFutanGaku(identifier);
             if (list != null && !list.isEmpty()) {
                 FlexibleDate minDate = null;
                 for (RentaiGimusha result : list) {
-                    if (!result.isDeleted()) {
+                    if (!result.isDeleted() && curResult == null) {
+                        minDate = result.get開始年月日();
+                    } else if (!result.isDeleted() && curResult != null
+                            && cur履歴 > result.get履歴番号().intValue()) {
                         minDate = result.get開始年月日();
                     }
                 }
