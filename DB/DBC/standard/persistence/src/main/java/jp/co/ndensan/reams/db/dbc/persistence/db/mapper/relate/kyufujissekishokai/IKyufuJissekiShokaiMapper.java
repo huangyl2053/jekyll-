@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJisse
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiShukeiKekkaData;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiFukushiYoguHanbaihiBusinessRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiJutakuKaishuhiRelateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiKyotakuServiceRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiMeisaiJushochiTokureiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufujissekiMeisaiRelateEntity;
@@ -201,9 +202,9 @@ public interface IKyufuJissekiShokaiMapper {
      * 給付実績高額介護サービス費データを取得します。
      *
      * @param parameter 給付実績情報照会検索データ取得用MyBatisパラメータ
-     * @return List<DbT3028KyufujissekiKogakuKaigoServicehiEntity>
+     * @return List<KyufujissekiKogakuKaigoServicehiRelateEntity>
      */
-    List<DbT3028KyufujissekiKogakuKaigoServicehiEntity> get給付実績高額介護サービス費データ(
+    List<KyufujissekiKogakuKaigoServicehiRelateEntity> get給付実績高額介護サービス費データ(
             KyufuJissekiKensakuDataMapperParameter parameter);
 
     /**

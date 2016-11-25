@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiRelate;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010020.KogakuKaigoServiceMainDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
@@ -28,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class KogakuKaigoServiceHandler {
 
     private final KogakuKaigoServiceMainDiv div;
-    private static final RString ZERO = new RString("0");
     private static final int INT_ZERO = 0;
     private static final RString 前月 = new RString("前月");
 
@@ -44,9 +44,11 @@ public class KogakuKaigoServiceHandler {
     /**
      * 高額介護サービス費等選別
      *
-     * @param 高額介護サービス費 高額介護サービス費
+     * @param 給付実績高額介護サービス費データ 給付実績高額介護サービス費データ
      */
-    public void set給付実績高額介護サービス費データ(KyufujissekiKogakuKaigoServicehi 高額介護サービス費) {
+    public void set給付実績高額介護サービス費データ(KyufujissekiKogakuKaigoServicehiRelate 給付実績高額介護サービス費データ) {
+        div.getCcdKyufuJissekiHeader().set被保情報2_1(給付実績高額介護サービス費データ);
+        KyufujissekiKogakuKaigoServicehi 高額介護サービス費 = 給付実績高額介護サービス費データ.get給付実績高額介護サービス費();
         div.getTxtKogakuKaigoServicehiKetteiYMD().setValue(to日期変換(高額介護サービス費.get決定年月日()));
         div.getTxtKogakuKaigoServicehiUketsukeYMD().setValue(to日期変換(高額介護サービス費.get受付年月日()));
         div.getTxtKogakuKaigoServicehiShinsaYM().setValue(to日期変換(高額介護サービス費.get審査年月()));

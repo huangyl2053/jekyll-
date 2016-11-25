@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiH
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
 import jp.co.ndensan.reams.db.dbc.definition.core.keikoku.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujisseki.KyotakuServiceKeikakuSakuseiKubunCode;
-import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyusochisha.KyuSochiNyushoshaTokureiCode;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010011.KyufuJissekiKihonJouhouMainDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
@@ -451,13 +450,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
         if (!RString.isNullOrEmpty(給付分類区分) && 総合事業.equals(給付分類区分)) {
             div.getTxtKyufuJissekiKihonHokenKyufuRitsu().setLabelLText(new RString("事業"));
         }
-    }
-
-    private RString get作成区分(RString 給付実績情報作成区分コード) {
-        if (!RString.isNullOrEmpty(給付実績情報作成区分コード)) {
-            return KyufuSakuseiKubun.toValue(給付実績情報作成区分コード).get名称();
-        }
-        return RString.EMPTY;
     }
 
     private RString get警告区分(RString 警告区分コード) {
