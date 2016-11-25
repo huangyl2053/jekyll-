@@ -750,6 +750,16 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             }
 
             NengakuHokenryo 年額保険料 = keisan.calculate年額保険料(年額保険料パラメータ);
+
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));
+            if (年額保険料.getHokenryoNengaku() == null) {
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年額保険料：null"));
+            } else {
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年額保険料：")
+                        .concat(new RString(年額保険料.getHokenryoNengaku().toString())));
+            }
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));
+
             FukaKokyoBatchParameter fukaKokyoBatchParameter = new FukaKokyoBatchParameter();
             fukaKokyoBatchParameter.set賦課年度(賦課計算の情報.get賦課年度());
             fukaKokyoBatchParameter.set調定日時(調定日時);
