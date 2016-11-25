@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batc
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -156,19 +158,47 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor implements IToku
                     : 対象外entity.get被保険者番号().value();
         }
         if (町域コード.toString().equals(list.get(index).get項目名().getClass().getName())) {
-            RString 対象外ChoikiCode = 対象外entity.get宛名の情報().getChoikiCode()
-                    == null ? RString.EMPTY : 対象外entity.get宛名の情報().getChoikiCode().value();
-            RString 対象者ChoikiCode = 対象者entity.get宛名の情報().getChoikiCode()
-                    == null ? RString.EMPTY : 対象者entity.get宛名の情報().getChoikiCode().value();
-            改頁 = 対象外entity == null ? 対象者ChoikiCode : 対象外ChoikiCode;
+            改頁 = 対象外entity == null ? get対象者ChoikiCode() : get対象外ChoikiCode();
         }
         if (行政区コード.toString().equals(list.get(index).get項目名().getClass().getName())) {
-            RString 対象外GyoseikuCode = 対象外entity.get宛名の情報().getGyoseikuCode()
-                    == null ? RString.EMPTY : 対象外entity.get宛名の情報().getGyoseikuCode().value();
-            RString 対象者GyoseikuCode = 対象者entity.get宛名の情報().getGyoseikuCode()
-                    == null ? RString.EMPTY : 対象者entity.get宛名の情報().getGyoseikuCode().value();
-            改頁 = 対象外entity == null ? 対象者GyoseikuCode : 対象外GyoseikuCode;
+            改頁 = 対象外entity == null ? get対象者GyoseikuCode() : get対象外GyoseikuCode();
         }
         return 改頁;
+    }
+
+    private RString get対象者GyoseikuCode() {
+        RString 対象者GyoseikuCode = RString.EMPTY;
+        GyoseikuCode gyoseikuCode = 対象者entity.get宛名の情報().getGyoseikuCode();
+        if (gyoseikuCode != null) {
+            対象者GyoseikuCode = gyoseikuCode.value();
+        }
+        return 対象者GyoseikuCode;
+    }
+
+    private RString get対象外GyoseikuCode() {
+        RString 対象外GyoseikuCode = RString.EMPTY;
+        GyoseikuCode gyoseikuCode = 対象外entity.get宛名の情報().getGyoseikuCode();
+        if (gyoseikuCode != null) {
+            対象外GyoseikuCode = gyoseikuCode.value();
+        }
+        return 対象外GyoseikuCode;
+    }
+
+    private RString get対象者ChoikiCode() {
+        RString 対象者ChoikiCode = RString.EMPTY;
+        ChoikiCode choikiCode = 対象者entity.get宛名の情報().getChoikiCode();
+        if (choikiCode != null) {
+            対象者ChoikiCode = choikiCode.value();
+        }
+        return 対象者ChoikiCode;
+    }
+
+    private RString get対象外ChoikiCode() {
+        RString 対象外ChoikiCode = RString.EMPTY;
+        ChoikiCode choikiCode = 対象外entity.get宛名の情報().getChoikiCode();
+        if (choikiCode != null) {
+            対象外ChoikiCode = choikiCode.value();
+        }
+        return 対象外ChoikiCode;
     }
 }
