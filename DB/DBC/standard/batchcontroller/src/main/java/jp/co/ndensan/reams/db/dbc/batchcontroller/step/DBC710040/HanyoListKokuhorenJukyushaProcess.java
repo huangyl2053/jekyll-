@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -59,15 +57,12 @@ public class HanyoListKokuhorenJukyushaProcess extends BatchProcessBase<HanyoLis
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final int NUM5 = 5;
-    private static final RString 全市町村NAME = new RString("全市町村");
-    private static final RString 全市町村CODE = new RString("000000");
     private static final RString FILENAMEKANJI = new RString("汎用リスト　国保連受給者情報CSV");
     private static final RString FILENAME = new RString("HanyoList_KokuhorenJukyusha.csv");
     private int 連番 = 1;
     private HanyoListKokuhorenJukyushaProcessParameter processParameter;
     private FileSpoolManager manager;
     private RString eucFilePath;
-    private RString 市町村名;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
     private HanyoListKokuhorenJukyushaResult business;
     private boolean flag;
@@ -153,15 +148,6 @@ public class HanyoListKokuhorenJukyushaProcess extends BatchProcessBase<HanyoLis
     }
 
     private void get市町村名() {
-        RString 保険者コード = processParameter.get保険者コード();
-        if (全市町村CODE.equals(保険者コード)) {
-            市町村名 = 全市町村NAME;
-        } else if (!RString.isNullOrEmpty(保険者コード)) {
-            IAssociationFinder finder = AssociationFinderFactory.createInstance();
-            市町村名 = finder.getAssociation(new LasdecCode(保険者コード)).get市町村名();
-        } else {
-            市町村名 = RString.EMPTY;
-        }
         市町村名MasterMap = new HashMap<>();
         List<KoseiShichosonMaster> 市町村名Master = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         for (KoseiShichosonMaster koseiShichosonMaster : 市町村名Master) {

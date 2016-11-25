@@ -189,9 +189,6 @@ public class CreateRiyojokyoIchiranHyoProcess extends BatchKeyBreakBase<DbWT1513
 //        }
     }
 
-//    private boolean hasBrek(DbWT1513RiyoJokyoTokeihyoEntity before, DbWT1513RiyoJokyoTokeihyoEntity current) {
-//        return !before.getKyuShichosonCode().equals(current.getKyuShichosonCode());
-//    }
     @Override
     protected void usualProcess(DbWT1513RiyoJokyoTokeihyoEntity entity) {
         index++;

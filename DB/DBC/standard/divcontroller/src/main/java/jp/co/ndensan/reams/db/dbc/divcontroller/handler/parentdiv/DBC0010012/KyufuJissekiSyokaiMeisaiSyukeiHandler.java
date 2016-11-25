@@ -5,15 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010012;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiMeisaiJushochiTokurei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiJushochiTokureiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekisyokaimeisaisyukei.KyufuJissekiSyokaiMeisaiSyukeiBusiness;
@@ -23,12 +19,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010012.dgKy
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010012.dgKyufuJissekiMeisai_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010012.dgKyufuJissekiShukei_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -43,15 +36,12 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     private static final FlexibleYearMonth 平成27年4月 = new FlexibleYearMonth("201504");
     private static final RString 非活性 = new RString("0");
     private static final RString TEXT_後 = new RString("後");
-    private static final RString TEXT_前月 = new RString("前月");
-    private static final RString TEXT_前事業者 = new RString("前事業者");
     private static final RString TEXT_保険 = new RString("保険");
     private static final RString TEXT_公費１ = new RString("公費１");
     private static final RString TEXT_公費２ = new RString("公費２");
     private static final RString TEXT_公費３ = new RString("公費３");
     private static final int INT_ZERO = 0;
     private static final RString 介護保険 = new RString("08");
-
     private final KyufuJissekiSyokaiMeisaiSyukeiDiv div;
 
     /**
@@ -69,23 +59,16 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param 集計情報リスト List<KyufujissekiShukei>
      * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
      * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokureiBusiness>
-     * @param 整理番号 RString
      * @param サービス提供年月 FlexibleYearMonth
      * @param 様式番号 RString
-     * @param 事業者番号 RString
      * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
      */
     public void onLoad(List<KyufujissekiShukei> 集計情報リスト, List<KyufujissekiMeisaiBusiness> 明細情報リスト,
-            List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト, RString 整理番号,
-            FlexibleYearMonth サービス提供年月, RString 様式番号, RString 事業者番号,
-            List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
+            List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト, FlexibleYearMonth サービス提供年月,
+            RString 様式番号, List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         set明細情報の表示制御(様式番号, サービス提供年月);
         set明細情報特例の表示制御(様式番号, サービス提供年月);
-        setDataGrid総計(get給付実績集計情報(集計情報リスト, 整理番号, 事業者番号, 様式番号, checkDateToRString(サービス提供年月)),
-                get給付実績明細情報(明細情報リスト, 整理番号, 事業者番号, 様式番号, checkDateToRString(サービス提供年月)),
-                get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号, 様式番号, checkDateToRString(サービス提供年月)),
-                保険者情報);
-        check前次月Btn(getサービス提供年月リスト(集計情報リスト, 明細情報リスト), サービス提供年月);
+        setDataGrid総計(集計情報リスト, 明細情報リスト, 明細情報特例リスト, 保険者情報);
     }
 
     /**
@@ -142,9 +125,8 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * ボタン状態の設定です。
      *
      * @param 識別番号管理 ShikibetsuNoKanri
-     * @param サービス提供年月 FlexibleYearMonth
      */
-    public void setButton(ShikibetsuNoKanri 識別番号管理, FlexibleYearMonth サービス提供年月) {
+    public void setButton(ShikibetsuNoKanri 識別番号管理) {
         if (非活性.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
         } else {
@@ -212,290 +194,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         }
     }
 
-    /**
-     * 事業者番号の設定です。
-     *
-     * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
-     * @param 整理番号 RString
-     * @param 事業者番号 RString
-     * @param 様式番号 RString
-     * @param サービス提供年月 RString
-     * @param 実績区分コード RString
-     * @return index index
-     */
-    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号,
-            RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
-        for (int index = 0; index < 事業者番号リスト.size(); index++) {
-            if (事業者番号.equals(事業者番号リスト.get(index).get事業所番号().value())
-                    && 整理番号.equals(事業者番号リスト.get(index).get整理番号())
-                    && 様式番号.equals(事業者番号リスト.get(index).get識別番号())
-                    && サービス提供年月.equals(事業者番号リスト.get(index).getサービス提供年月().toDateString())
-                    && 実績区分コード.equals(事業者番号リスト.get(index).get給付実績区分コード())) {
-                return index;
-            }
-        }
-        return INT_ZERO;
-    }
-
-    /**
-     * 今提供年月を取得。
-     *
-     * @param data RString
-     * @param 集計情報リスト List<KyufujissekiShukei>
-     * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
-     * @param サービス提供年月 FlexibleYearMonth
-     * @return 今提供年月
-     */
-    public FlexibleYearMonth get今提供年月(RString data,
-            List<KyufujissekiShukei> 集計情報リスト,
-            List<KyufujissekiMeisaiBusiness> 明細情報リスト,
-            FlexibleYearMonth サービス提供年月) {
-        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(集計情報リスト, 明細情報リスト);
-        FlexibleYearMonth 今提供年月;
-        if (TEXT_前月.equals(data)) {
-            今提供年月 = get前月サービス提供年月(サービス提供年月リスト, サービス提供年月);
-        } else {
-            今提供年月 = get次月サービス提供年月(サービス提供年月リスト, サービス提供年月);
-        }
-        return 今提供年月;
-    }
-
-    /**
-     * change年月です。
-     *
-     * @param data RString
-     * @param 被保険者番号 HihokenshaNo
-     * @param 集計情報リスト List<KyufujissekiShukei>
-     * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
-     * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokureiBusiness>
-     * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
-     * @param サービス提供年月 FlexibleYearMonth
-     * @param 整理番号 RString
-     * @param 識別番号 NyuryokuShikibetsuNo
-     * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
-     */
-    public void change年月(RString data, HihokenshaNo 被保険者番号, List<KyufujissekiShukei> 集計情報リスト,
-            List<KyufujissekiMeisaiBusiness> 明細情報リスト, List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト,
-            List<KyufuJissekiHedajyoho2> 事業者番号リスト, FlexibleYearMonth サービス提供年月, RString 整理番号,
-            NyuryokuShikibetsuNo 識別番号, List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
-        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(集計情報リスト, 明細情報リスト);
-        FlexibleYearMonth 今提供年月;
-        if (TEXT_前月.equals(data)) {
-            今提供年月 = get前月サービス提供年月(サービス提供年月リスト, サービス提供年月);
-        } else {
-            今提供年月 = get次月サービス提供年月(サービス提供年月リスト, サービス提供年月);
-        }
-        if (!今提供年月.isEmpty()) {
-            div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-            RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
-            RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-            RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
-            setDataGrid総計(get給付実績集計情報(集計情報リスト, 整理番号, 事業者番号, 様式番号, 今提供年月.toDateString()),
-                    get給付実績明細情報(明細情報リスト, 整理番号, 事業者番号, 様式番号, 今提供年月.toDateString()),
-                    get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号, 様式番号, 今提供年月.toDateString()),
-                    保険者情報
-            );
-            check前次月Btn(サービス提供年月リスト, 今提供年月);
-            check事業者Btn(事業者番号リスト, 整理番号, 事業者番号, 様式番号, 今提供年月.toDateString(), 実績区分コード);
-        }
-    }
-
-    /**
-     * change事業者です。
-     *
-     * @param data RString
-     * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
-     * @param 集計情報リスト List<KyufujissekiShukei>
-     * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
-     * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokureiBusiness>
-     * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
-     */
-    public void change事業者(RString data, List<KyufuJissekiHedajyoho2> 事業者番号リスト,
-            List<KyufujissekiShukei> 集計情報リスト, List<KyufujissekiMeisaiBusiness> 明細情報リスト,
-            List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト,
-            List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
-        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
-        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
-        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
-        RString サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString();
-        List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
-        set明細情報の表示制御(様式番号, new FlexibleYearMonth(サービス提供年月));
-        set明細情報特例の表示制御(様式番号, new FlexibleYearMonth(サービス提供年月));
-        int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
-        int i;
-        if (TEXT_前事業者.equals(data)) {
-            i = -1;
-        } else {
-            i = 1;
-        }
-        if (index + i < 事業者番号リスト.size() && -1 < index + i) {
-            今提供年月 = 事業者番号リスト.get(index + i).getサービス提供年月();
-            div.getCcdKyufuJissekiHeader().set事業者名称(事業者番号リスト.get(index + i).get事業者名称());
-            div.getCcdKyufuJissekiHeader().set事業者番号(事業者番号リスト.get(index + i).get事業所番号().value());
-            div.getCcdKyufuJissekiHeader().set実績区分(事業者番号リスト.get(index + i).get給付実績区分コード());
-            div.getCcdKyufuJissekiHeader().set整理番号(事業者番号リスト.get(index + i).get整理番号());
-            div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
-            div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
-            div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(事業者番号リスト.get(index + i).getサービス提供年月().toString()));
-            setDataGrid総計(get給付実績集計情報(集計情報リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月),
-                    get給付実績明細情報(明細情報リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月),
-                    get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月),
-                    保険者情報
-            );
-            サービス提供年月リスト = getサービス提供年月リスト(集計情報リスト, 明細情報リスト);
-        }
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        div.getBtnMaeJigyosha().setDisabled(true);
-        div.getBtnAtoJigyosha().setDisabled(true);
-        if (0 < index + i) {
-            div.getBtnMaeJigyosha().setDisabled(false);
-        }
-        if (index + i + 1 < 事業者番号リスト.size()) {
-            div.getBtnAtoJigyosha().setDisabled(false);
-        }
-        check前次月Btn(サービス提供年月リスト, 今提供年月);
-    }
-
-    private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufujissekiShukei> 集計情報リスト,
-            List<KyufujissekiMeisaiBusiness> 明細情報リスト) {
-        List<FlexibleYearMonth> 提供年月リスト = new ArrayList<>();
-        for (KyufujissekiShukei 集計情報 : 集計情報リスト) {
-            FlexibleYearMonth 提供年月 = 集計情報.getサービス提供年月();
-            if (!提供年月リスト.contains(提供年月)) {
-                提供年月リスト.add(提供年月);
-            }
-        }
-        for (KyufujissekiMeisaiBusiness 明細情報 : 明細情報リスト) {
-            FlexibleYearMonth 提供年月 = 明細情報.get給付実績明細().getサービス提供年月();
-            if (!提供年月リスト.contains(提供年月)) {
-                提供年月リスト.add(提供年月);
-            }
-        }
-        return 提供年月リスト;
-    }
-
-    /**
-     * get給付実績明細データです。
-     *
-     * @param 給付実績明細リスト List<KyufujissekiMeisaiBusiness>
-     * @param 整理番号 RString
-     * @param 様式番号 RString
-     * @param 事業者番号 RString
-     * @param サービス提供年月 RString
-     * @return 給付実績明細データ List<KyufujissekiMeisaiBusiness>
-     */
-    public List<KyufujissekiMeisaiBusiness> get給付実績明細情報(List<KyufujissekiMeisaiBusiness> 給付実績明細リスト, RString 整理番号,
-            RString 事業者番号, RString 様式番号, RString サービス提供年月) {
-        List<KyufujissekiMeisaiBusiness> 給付実績明細データ = new ArrayList<>();
-        for (KyufujissekiMeisaiBusiness 給付実績明細 : 給付実績明細リスト) {
-            if (事業者番号.equals(給付実績明細.get給付実績明細().get事業所番号().value())
-                    && 整理番号.equals(給付実績明細.get給付実績明細().get整理番号())
-                    && 様式番号.equals(給付実績明細.get給付実績明細().get入力識別番号().value())
-                    && サービス提供年月.equals(給付実績明細.get給付実績明細().getサービス提供年月().toDateString())) {
-                給付実績明細データ.add(給付実績明細);
-            }
-        }
-        return 給付実績明細データ;
-    }
-
-    /**
-     * get給付実績集計データです。
-     *
-     * @param 給付実績集計リスト List<KyufujissekiShukei>
-     * @param 整理番号 RString
-     * @param 様式番号 RString
-     * @param 事業者番号 RString
-     * @param サービス提供年月 RString
-     * @return 給付実績明細データ List<KyufujissekiShukei>
-     */
-    public List<KyufujissekiShukei> get給付実績集計情報(List<KyufujissekiShukei> 給付実績集計リスト, RString 整理番号,
-            RString 事業者番号, RString 様式番号, RString サービス提供年月) {
-        List<KyufujissekiShukei> 給付実績集計データ = new ArrayList<>();
-        for (KyufujissekiShukei 給付実績集計 : 給付実績集計リスト) {
-            if (事業者番号.equals(給付実績集計.get事業所番号().value())
-                    && 整理番号.equals(給付実績集計.get整理番号())
-                    && 様式番号.equals(給付実績集計.get入力識別番号().value())
-                    && サービス提供年月.equals(給付実績集計.getサービス提供年月().toDateString())) {
-                給付実績集計データ.add(給付実績集計);
-            }
-        }
-        return 給付実績集計データ;
-    }
-
-    /**
-     * get給付実績明細データです。
-     *
-     * @param 給付実績明細情報特例リスト List<KyufujissekiMeisaiJushochiTokureiBusiness>
-     * @param 整理番号 RString
-     * @param 様式番号 RString
-     * @param 事業者番号 RString
-     * @param サービス提供年月 RString
-     * @return 給付実績明細データ List<KyufujissekiMeisaiJushochiTokureiBusiness>
-     */
-    public List<KyufujissekiMeisaiJushochiTokureiBusiness> get給付実績明細情報特例(
-            List<KyufujissekiMeisaiJushochiTokureiBusiness> 給付実績明細情報特例リスト, RString 整理番号,
-            RString 事業者番号, RString 様式番号, RString サービス提供年月) {
-        List<KyufujissekiMeisaiJushochiTokureiBusiness> 給付実績明細情報特例データ = new ArrayList<>();
-        for (KyufujissekiMeisaiJushochiTokureiBusiness 給付実績明細情報特例 : 給付実績明細情報特例リスト) {
-            if (事業者番号.equals(給付実績明細情報特例.get給付実績明細住所地特例情報().get事業所番号().value())
-                    && 整理番号.equals(給付実績明細情報特例.get給付実績明細住所地特例情報().get整理番号())
-                    && 様式番号.equals(給付実績明細情報特例.get給付実績明細住所地特例情報().get入力識別番号().value())
-                    && サービス提供年月.equals(給付実績明細情報特例.get給付実績明細住所地特例情報().getサービス提供年月().toDateString())) {
-                給付実績明細情報特例データ.add(給付実績明細情報特例);
-            }
-        }
-        return 給付実績明細情報特例データ;
-    }
-
-    /**
-     * 前次月ボタン状態設定。
-     *
-     * @param サービス提供年月リスト サービス提供年月リスト
-     * @param サービス提供年月 サービス提供年月
-     */
-    public void check前次月Btn(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
-        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
-            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-            if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
-                div.getBtnZengetsu().setDisabled(true);
-            } else {
-                div.getBtnZengetsu().setDisabled(false);
-            }
-            if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
-                div.getBtnJigetsu().setDisabled(true);
-            } else {
-                div.getBtnJigetsu().setDisabled(false);
-            }
-        }
-    }
-
-    /**
-     * 事業者btnのstateです。
-     *
-     * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
-     * @param 整理番号 RString
-     * @param 様式番号 RString
-     * @param 事業者番号 RString
-     * @param サービス提供年月 RString
-     * @param 実績区分コード RString
-     */
-    public void check事業者Btn(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号,
-            RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
-        div.getBtnMaeJigyosha().setDisabled(true);
-        div.getBtnAtoJigyosha().setDisabled(true);
-        if (!事業者番号リスト.isEmpty()) {
-            int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
-            if (0 < index) {
-                div.getBtnMaeJigyosha().setDisabled(false);
-            }
-            if (index + 1 < 事業者番号リスト.size()) {
-                div.getBtnAtoJigyosha().setDisabled(false);
-            }
-        }
-    }
-
     private void set明細情報の表示制御(RString 様式番号, FlexibleYearMonth サービス提供年月) {
         if (RString.isNullOrEmpty(様式番号)) {
             return;
@@ -547,7 +245,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
 
     private List<dgKyufuJissekiShukei_Row> set集計情報(KyufujissekiShukei 集計情報) {
         List<dgKyufuJissekiShukei_Row> rowList = new ArrayList<>();
-
         dgKyufuJissekiShukei_Row row_保険 = new dgKyufuJissekiShukei_Row();
         row_保険.setTxtServiceShurui(setサービス種類(集計情報.getサービス種類コード()));
         row_保険.setTxtJitsuNissu(checkInteger(集計情報.getサービス実日数()));
@@ -569,7 +266,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_保険.setTxtKagoKaisu(checkInteger(集計情報.get過誤回数()));
         row_保険.setTxtShinsaYM(checkDate(集計情報.get審査年月()));
         rowList.add(row_保険);
-
         dgKyufuJissekiShukei_Row row_後_保険 = new dgKyufuJissekiShukei_Row();
         row_後_保険.setTxtServiceShurui(RString.EMPTY);
         row_後_保険.setTxtJitsuNissu(RString.EMPTY);
@@ -591,7 +287,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_保険.setTxtKagoKaisu(RString.EMPTY);
         row_後_保険.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_後_保険);
-
         dgKyufuJissekiShukei_Row row_公費１ = new dgKyufuJissekiShukei_Row();
         row_公費１.setTxtServiceShurui(RString.EMPTY);
         row_公費１.setTxtJitsuNissu(RString.EMPTY);
@@ -613,7 +308,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費１.setTxtKagoKaisu(RString.EMPTY);
         row_公費１.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_公費１);
-
         dgKyufuJissekiShukei_Row row_後_公費１ = new dgKyufuJissekiShukei_Row();
         row_後_公費１.setTxtServiceShurui(RString.EMPTY);
         row_後_公費１.setTxtJitsuNissu(RString.EMPTY);
@@ -641,7 +335,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
 
     private List<dgKyufuJissekiShukei_Row> addSet集計情報(KyufujissekiShukei 集計情報) {
         List<dgKyufuJissekiShukei_Row> rowList = new ArrayList<>();
-
         dgKyufuJissekiShukei_Row row_公費２ = new dgKyufuJissekiShukei_Row();
         row_公費２.setTxtServiceShurui(RString.EMPTY);
         row_公費２.setTxtJitsuNissu(RString.EMPTY);
@@ -663,7 +356,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費２.setTxtKagoKaisu(RString.EMPTY);
         row_公費２.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_公費２);
-
         dgKyufuJissekiShukei_Row row_後_公費２ = new dgKyufuJissekiShukei_Row();
         row_後_公費２.setTxtServiceShurui(RString.EMPTY);
         row_後_公費２.setTxtJitsuNissu(RString.EMPTY);
@@ -685,7 +377,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_公費２.setTxtKagoKaisu(RString.EMPTY);
         row_後_公費２.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_後_公費２);
-
         dgKyufuJissekiShukei_Row row_公費３ = new dgKyufuJissekiShukei_Row();
         row_公費３.setTxtServiceShurui(RString.EMPTY);
         row_公費３.setTxtJitsuNissu(RString.EMPTY);
@@ -707,7 +398,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費３.setTxtKagoKaisu(RString.EMPTY);
         row_公費３.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_公費３);
-
         dgKyufuJissekiShukei_Row row_後_公費３ = new dgKyufuJissekiShukei_Row();
         row_後_公費３.setTxtServiceShurui(RString.EMPTY);
         row_後_公費３.setTxtJitsuNissu(RString.EMPTY);
@@ -848,13 +538,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         return data.wareki().toDateString();
     }
 
-    private RString checkDateToRString(FlexibleYearMonth data) {
-        if (data == null) {
-            return RString.EMPTY;
-        }
-        return data.toDateString();
-    }
-
     private RString checkInteger(Integer data) {
         if (data == null) {
             return RString.EMPTY;
@@ -874,44 +557,5 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(data, INT_ZERO);
-    }
-
-    private static class DateComparatorServiceTeikyoYM implements Comparator<FlexibleYearMonth>, Serializable {
-
-        private static final long serialVersionUID = 3519678578744079048L;
-
-        @Override
-        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
-            return o2.compareTo(o1);
-        }
-    }
-
-    private static class DateComparatorServiceYM implements Comparator<FlexibleYearMonth>, Serializable {
-
-        @Override
-        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
-            return o1.compareTo(o2);
-        }
-    }
-
-    private FlexibleYearMonth get前月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト,
-            FlexibleYearMonth サービス提供年月) {
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
-            if (サービス年月.isBefore(サービス提供年月)) {
-                return サービス年月;
-            }
-        }
-        return FlexibleYearMonth.EMPTY;
-    }
-
-    private FlexibleYearMonth get次月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceYM());
-        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
-            if (サービス提供年月.isBefore(サービス年月)) {
-                return サービス年月;
-            }
-        }
-        return FlexibleYearMonth.EMPTY;
     }
 }

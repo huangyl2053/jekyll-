@@ -95,7 +95,7 @@ public class NonyuTsuchIchiranEditor implements INonyuTsuchIchiranEditor {
                 && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
             for (UniversalPhase entity : 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト()) {
                 if (entity.get期() == Integer.valueOf(出力期)) {
-                    source.listUpper_10 = DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0);
+                    source.listUpper_10 = DecimalFormatter.toコンマ区切りRString(nullToDemical(entity.get金額()), 0);
                 }
             }
         }
@@ -226,7 +226,7 @@ public class NonyuTsuchIchiranEditor implements INonyuTsuchIchiranEditor {
                 && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
             for (UniversalPhase entity : 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト()) {
                 if (entity.get期() == (Integer.valueOf(出力期) + 1)) {
-                    source.listLower_6 = DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0);
+                    source.listLower_6 = DecimalFormatter.toコンマ区切りRString(nullToDemical(entity.get金額()), 0);
                 }
             }
         }
@@ -249,30 +249,37 @@ public class NonyuTsuchIchiranEditor implements INonyuTsuchIchiranEditor {
                     || 口座番号.isEmpty() || 口座種別.isEmpty()) {
                 return RString.EMPTY;
             }
-            if (INDEX.equals(金融機関コード.substring(NUM0, NUM4))) {
-                口座情報 = 金融機関コード.substring(NUM0, NUM4).concat(RString.HALF_SPACE)
-                        .concat(NUM5 < 通帳記号.length() ? 通帳記号.substring(NUM0, 通帳記号.length())
-                                : 通帳記号.substring(NUM0, NUM5))
+            if (INDEX.equals(金融機関コード.substringReturnAsPossible(NUM0, NUM4))) {
+                口座情報 = 金融機関コード.substringReturnAsPossible(NUM0, NUM4).concat(RString.HALF_SPACE)
+                        .concat(NUM5 < 通帳記号.length() ? 通帳記号.substringReturnAsPossible(NUM0, 通帳記号.length())
+                                : 通帳記号.substringReturnAsPossible(NUM0, NUM5))
                         .concat(半角ハイフン)
-                        .concat(NUM8 < 通帳番号.length() ? 通帳番号.substring(NUM0, 通帳番号.length())
-                                : 通帳番号.substring(NUM0, NUM8))
+                        .concat(NUM8 < 通帳番号.length() ? 通帳番号.substringReturnAsPossible(NUM0, 通帳番号.length())
+                                : 通帳番号.substringReturnAsPossible(NUM0, NUM8))
                         .concat(RString.HALF_SPACE)
                         .concat(口座名義人漢字);
             } else {
-                口座情報 = 金融機関コード.substring(NUM0, NUM4).concat(半角ハイフン)
-                        .concat(NUM3 < 支店コード.length() ? 支店コード.substring(NUM0, 支店コード.length())
-                                : 支店コード.substring(NUM0, NUM3))
+                口座情報 = 金融機関コード.substringReturnAsPossible(NUM0, NUM4).concat(半角ハイフン)
+                        .concat(NUM3 < 支店コード.length() ? 支店コード.substringReturnAsPossible(NUM0, 支店コード.length())
+                                : 支店コード.substringReturnAsPossible(NUM0, NUM3))
                         .concat(RString.HALF_SPACE)
-                        .concat(NUM2 < 口座種別.length() ? 口座種別.substring(NUM0, 口座種別.length())
-                                : 口座種別.substring(NUM0, NUM2))
+                        .concat(NUM2 < 口座種別.length() ? 口座種別.substringReturnAsPossible(NUM0, 口座種別.length())
+                                : 口座種別.substringReturnAsPossible(NUM0, NUM2))
                         .concat(半角ハイフン)
-                        .concat(NUM7 < 口座番号.length() ? 口座番号.substring(NUM0, 口座番号.length())
-                                : 口座番号.substring(NUM0, NUM7))
+                        .concat(NUM7 < 口座番号.length() ? 口座番号.substringReturnAsPossible(NUM0, 口座番号.length())
+                                : 口座番号.substringReturnAsPossible(NUM0, NUM7))
                         .concat(RString.HALF_SPACE)
                         .concat(口座名義人漢字);
 
             }
         }
         return 口座情報;
+    }
+
+    private Decimal nullToDemical(Decimal 項目) {
+        if (項目 == null) {
+            return Decimal.ZERO;
+        }
+        return 項目;
     }
 }

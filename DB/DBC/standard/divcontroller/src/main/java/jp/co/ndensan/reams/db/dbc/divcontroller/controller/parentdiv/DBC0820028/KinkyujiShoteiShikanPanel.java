@@ -431,9 +431,6 @@ public class KinkyujiShoteiShikanPanel {
         if (登録.equals(処理モード) || 修正.equals(処理モード)) {
             return save(div, keys, 処理モード);
         }
-        if (getHandler(div).get内容変更状態()) {
-            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM1);
-        }
         return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る).respond();
     }
 
@@ -455,6 +452,9 @@ public class KinkyujiShoteiShikanPanel {
                         nyuryokuFlag, kensakuParameter.get様式番号(), kensakuParameter.getサービス年月());
                 set証明書入力完了フラグ(証明書入力済区分, dbJohoViewState, kensakuParameter);
             }
+        }
+        if (getHandler(div).get内容変更状態()) {
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM1);
         }
         return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.一覧に戻る).respond();
     }

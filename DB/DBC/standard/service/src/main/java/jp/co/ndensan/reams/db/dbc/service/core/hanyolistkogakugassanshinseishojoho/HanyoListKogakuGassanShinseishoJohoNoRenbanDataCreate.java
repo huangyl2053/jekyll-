@@ -155,31 +155,31 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
         }
         csvEntity.set整理番号(entity.get高額合算申請書_整理番号());
         csvEntity.set履歴番号(entity.get高額合算申請書_履歴番号());
-        if (entity.get高額合算申請書_申請状況区分() != null) {
+        if (!RString.isNullOrEmpty(entity.get高額合算申請書_申請状況区分())) {
             csvEntity.set申請状況区分(KaigoGassan_ShinseiJokyoKbn.toValue(entity.get高額合算申請書_申請状況区分()).get名称());
         }
         csvEntity.set申請年月日(dataToRString(entity.get高額合算申請書_申請年月日(), parameter));
         csvEntity.set支給申請書整理番号(entity.get高額合算申請書_支給申請書整理番号());
         csvEntity.set国保支給申請書整理番号(entity.get高額合算申請書_国保支給申請書整理番号());
-        if (entity.get高額合算申請書_支給申請区分() != null) {
+        if (!RString.isNullOrEmpty(entity.get高額合算申請書_支給申請区分())) {
             csvEntity.set支給申請区分(KaigoGassan_ShinseiKbn.toValue(entity.get高額合算申請書_支給申請区分()).get名称());
         }
         csvEntity.set対象計算期間開始(dataToRString(entity.get高額合算申請書_対象計算期間開始年月日(), parameter));
         csvEntity.set対象計算期間終了(dataToRString(entity.get高額合算申請書_対象計算期間終了年月日(), parameter));
-        if (entity.get高額合算申請書_支給申請形態() != null) {
+        if (!RString.isNullOrEmpty(entity.get高額合算申請書_支給申請形態())) {
             csvEntity.set支給申請形態(KaigoGassan_ShinseiKeitai.toValue(entity.get高額合算申請書_支給申請形態()).get名称());
         }
         csvEntity.set自己負担額証明書交付申請の有無(entity.get高額合算申請書_自己負担額証明書交付申請の有無());
         csvEntity.set申請代表者氏名漢字(entity.get高額合算申請書_申請代表者氏名());
-        if (entity.get高額合算申請書_所得区分() != null) {
+        if (!RString.isNullOrEmpty(entity.get高額合算申請書_所得区分())) {
             csvEntity.set所得区分(KaigoGassan_ShotokuKbn.toValue(entity.get高額合算申請書_所得区分()).get名称());
         }
-        if (entity.get高額合算申請書_70歳以上の者に係る所得区分() != null) {
+        if (!RString.isNullOrEmpty(entity.get高額合算申請書_70歳以上の者に係る所得区分())) {
             csvEntity.set歳以上の者に係る所得区分(KaigoGassan_Over70_ShotokuKbn.
                     toValue(entity.get高額合算申請書_70歳以上の者に係る所得区分()).get名称());
         }
         csvEntity.set資格喪失年月日(dataToRString(entity.get高額合算申請書_資格喪失年月日(), parameter));
-        if (entity.get高額合算申請書_資格喪失事由() != null) {
+        if (!RString.isNullOrEmpty(entity.get高額合算申請書_資格喪失事由())) {
             csvEntity.set資格喪失事由(KaigoGassan_SoshitsuJiyu.toValue(entity.get高額合算申請書_資格喪失事由()).get名称());
         }
         csvEntity.set加入期間開始年月日(dataToRString(entity.get高額合算申請書_加入期間開始年月日(), parameter));
@@ -189,7 +189,7 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
         csvEntity.set国保被保険者証記号(entity.get高額合算申請書_国保被保険者証記号());
         csvEntity.set国保被保険者証番号(entity.get高額合算申請書_国保被保険者証番号());
         csvEntity.set国保世帯番号(entity.get高額合算申請書_国保世帯番号());
-        if (entity.get高額合算申請書_国保続柄() != null) {
+        if (!RString.isNullOrEmpty(entity.get高額合算申請書_国保続柄())) {
             csvEntity.set国保続柄(KaigoGassan_Kokuho_Zokugara.toValue(entity.get高額合算申請書_国保続柄()).get名称());
         }
         csvEntity.set国保加入期間開始年月日(dataToRString(entity.get高額合算申請書_国保加入期間開始年月日(), parameter));
@@ -502,7 +502,7 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
         csvEntity.set受給申請事由(get受給申請事由(entity));
 
         csvEntity.set受給申請日(dataToRString(entity.get受給者台帳_受給申請年月日(), parameter));
-        if (entity.get受給者台帳_要介護認定状態区分コード() != null) {
+        if (!RString.isNullOrEmpty(entity.get受給者台帳_要介護認定状態区分コード())) {
             csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付,
                     entity.get受給者台帳_要介護認定状態区分コード()).getName());
         }
@@ -515,7 +515,7 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
                 && !MinashiCode.toValue(entity.get受給者台帳_みなし要介護区分コード()).getコード().equals(INDEX_1)) {
             csvEntity.set受給みなし更新認定(みなし);
         }
-        if (entity.get受給者台帳_直近異動事由コード() != null) {
+        if (!RString.isNullOrEmpty(entity.get受給者台帳_直近異動事由コード())) {
             csvEntity.set受給直近事由(get受給直近事由(ChokkinIdoJiyuCode.toValue(
                     entity.get受給者台帳_直近異動事由コード()).getコード()));
         }

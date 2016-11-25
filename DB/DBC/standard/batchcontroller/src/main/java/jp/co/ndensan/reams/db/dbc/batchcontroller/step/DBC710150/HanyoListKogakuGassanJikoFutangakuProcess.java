@@ -441,7 +441,7 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         csvEntity.set住所地特例状態(entity.is住所地特例フラグ() ? 住特_表示 : RString.EMPTY);
         csvEntity.set受給申請事由(get受給申請事由(entity));
         csvEntity.set受給申請日(dataToRString(entity.get受給申請年月日()));
-        if (entity.get要介護認定状態区分コード() != null) {
+        if (RString.isNullOrEmpty(entity.get要介護認定状態区分コード())) {
             csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, entity.get要介護認定状態区分コード()).getName());
         }
         csvEntity.set受給認定開始日(dataToRString(entity.get認定有効期間開始年月日()));
@@ -463,16 +463,16 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         if (entity.get所得区分() != null) {
             csvEntity.set所得区分(KaigoGassan_ShotokuKbn.toValue(entity.get所得区分()).get名称());
         }
-        if (entity.get所得区分_70歳以上() != null) {
+        if (!RString.isNullOrEmpty(entity.get所得区分_70歳以上())) {
             csvEntity.set所得区分_70歳以上(
                     KaigoGassan_Over70_ShotokuKbn.toValue(entity.get所得区分_70歳以上()).get名称());
         }
 
         csvEntity.set自己負担額証明書整理番号(entity.get自己負担額証明書整理番号());
-        if (entity.get異動区分() != null) {
+        if (!RString.isNullOrEmpty(entity.get異動区分())) {
             csvEntity.set異動区分(KaigoGassan_Idokubun.toValue(entity.get異動区分()).get名称());
         }
-        if (entity.get補正済自己負担額送付区分() != null) {
+        if (!RString.isNullOrEmpty(entity.get補正済自己負担額送付区分())) {
             csvEntity.set補正済自己負担額送付区分(
                     Kaigogassan_HoseizumiJikofutangakuSofuKubun.toValue(entity.get補正済自己負担額送付区分()).get名称());
         }
@@ -601,13 +601,13 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         if (entity.get高額合算自己負担額_補正済_合計_70_74高額支給額() != null) {
             csvEntity.set補合計_高額支給額(DecimalFormatter.toコンマ区切りRString(entity.get高額合算自己負担額_補正済_合計_70_74高額支給額(), 0));
         }
-        if (entity.get高額合算自己負担額_データ作成区分() != null) {
+        if (!RString.isNullOrEmpty(entity.get高額合算自己負担額_データ作成区分())) {
             csvEntity.setデータ作成区分(Kaigogassan_DataSakuseiKubun.toValue(entity.get高額合算自己負担額_データ作成区分()).get名称());
         }
         csvEntity.set自己負担額確認情報受取年月(monthToRString(entity.get高額合算自己負担額_自己負担額確認情報受取年月()));
         csvEntity.set補正済自己負担額情報送付年月(monthToRString(entity.get高額合算自己負担額_補正済自己負担額情報送付年月()));
         csvEntity.set自己負担額証明書情報受取年月(monthToRString(entity.get高額合算自己負担額_自己負担額証明書情報受取年月()));
-        if (entity.get高額合算自己負担額_送付対象外フラグ() != null) {
+        if (!RString.isNullOrEmpty(entity.get高額合算自己負担額_送付対象外フラグ())) {
             csvEntity.set送付対象外フラグ(Kaigogassan_SofuTaishogaiKubun.toValue(entity.get高額合算自己負担額_送付対象外フラグ()).get名称());
         }
         csvEntity.set自己負担額計算年月日(dataToRString(entity.get高額合算自己負担額_自己負担額計算年月日()));

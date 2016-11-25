@@ -434,7 +434,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請, RString 画面モード,
             JutakuGaisuViewStateHolderParameter param, ShichosonSecurityJoho 導入形態) {
         div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
+                SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.get名称(),
                 new FlexibleYear(サービス提供年月.getNendo().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         ShokanJutakuKaishuJizenShinsei 申請情報 = 住宅改修費事前申請.getJutakuKaishuJizenShinseiJyoho(被保険者番号,
                 サービス提供年月, 整理番号);
@@ -478,7 +478,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 FlexibleDate.getNowDate().getYearMonth().minusMonth(Integer.parseInt(month.toString())).toString());
         div.getTxtTeikyoYM().setValue(提供着工年月);
         div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
+                SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.get名称(),
                 new FlexibleYear(提供着工年月.getNendo().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
         model.set被保険者番号(被保険者番号);
@@ -1197,7 +1197,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             ShokanShinseiBuilder dbt3034Builder = dbt3034.createBuilderForEdit().set証記載保険者番号(
                     new ShoKisaiHokenshaNo(div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey()))
                     .set申請年月日(new FlexibleDate(div.getJutakuKaishuShinseiContents().getShinseishaInfo()
-                            .getTxtShinseiYMD().getValue().toString()))
+                                    .getTxtShinseiYMD().getValue().toString()))
                     .set申請理由(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiRiyu().getValue())
                     .set申請者区分(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseishaKubun()
                             .getSelectedKey()).set申請者氏名(div.getJutakuKaishuShinseiContents().getShinseishaInfo()
@@ -1207,20 +1207,20 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                             .getTxtYubinNo().getValue())
                     .set申請者住所(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtAddress().getDomain()
                             .value()).set理由書作成日(理由書作成日Save).set申請者電話番号(
-                    div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtTelNo().getDomain())
+                            div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtTelNo().getDomain())
                     .set理由書作成者(理由書作成者).set理由書作成者カナ(
-                    div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
-                    .getTxtCreatorKanaName().getValue()).set支払金額合計(支払金額合計)
+                            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
+                            .getTxtCreatorKanaName().getValue()).set支払金額合計(支払金額合計)
                     .set保険対象費用額(div.getJutakuKaishuShinseiResetInfo()
                             .getTxtHokenTaishoHiyoNow().getValue()).set保険給付額(div
                             .getJutakuKaishuShinseiResetInfo()
                             .getTxtHokenKyufuAmountNow().getValue().intValue())
                     .set送付年月(送付年月).set国保連再送付フラグ(国保連再送付フラグ).set住宅所有者(
-                    div.getJutakuKaishuShinseiContents().getTxtJutakuOwner().getValue())
+                            div.getJutakuKaishuShinseiContents().getTxtJutakuOwner().getValue())
                     .set被保険者の関係(div.getJutakuKaishuShinseiContents().getTxtRelationWithHihokensha().getValue())
                     .set要介護状態３段階変更(要介護状態区分3段階変更)
                     .set住宅住所変更(住宅住所変更).set領収年月日(new FlexibleDate(
-                    div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue().toString()))
+                                    div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue().toString()))
                     .set支払方法区分コード(支払方法区分コード)
                     .set支払場所(支払場所).set支払期間開始年月日(支払期間開始年月日)
                     .set支払期間終了年月日(支払期間終了年月日).set支払窓口開始時間(支払窓口開始時間)
@@ -1244,7 +1244,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             ShokanShinseiBuilder dbt3034Builder = dbt3034.createBuilderForEdit().set証記載保険者番号(
                     new ShoKisaiHokenshaNo(div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey()))
                     .set申請年月日(new FlexibleDate(div.getJutakuKaishuShinseiContents().getShinseishaInfo()
-                            .getTxtShinseiYMD().getValue().toString()))
+                                    .getTxtShinseiYMD().getValue().toString()))
                     .set申請理由(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiRiyu().getValue())
                     .set申請者区分(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseishaKubun()
                             .getSelectedKey()).set申請者氏名(div.getJutakuKaishuShinseiContents().getShinseishaInfo()
@@ -1256,9 +1256,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                             .value()).set申請者電話番号(div.getJutakuKaishuShinseiContents().getShinseishaInfo()
                             .getTxtTelNo().getDomain()).set理由書作成日(理由書作成日Save)
                     .set理由書作成者(理由書作成者).set理由書作成者カナ(div.getJutakuKaishuShinseiContents()
-                    .getJutakuKaishuShinseiReason().getTxtCreatorKanaName().getValue())
+                            .getJutakuKaishuShinseiReason().getTxtCreatorKanaName().getValue())
                     .set送付年月(送付年月).set国保連再送付フラグ(国保連再送付フラグ).set住宅所有者(
-                    div.getJutakuKaishuShinseiContents().getTxtJutakuOwner().getValue())
+                            div.getJutakuKaishuShinseiContents().getTxtJutakuOwner().getValue())
                     .set被保険者の関係(div.getJutakuKaishuShinseiContents().getTxtRelationWithHihokensha().getValue())
                     .set要介護状態３段階変更(要介護状態区分3段階変更)
                     .set住宅住所変更(住宅住所変更)
@@ -1419,11 +1419,11 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         FlexibleDate 理由書作成日Save = 理由書作成日 == null ? null : new FlexibleDate(理由書作成日.toDateString());
         ShokanShinseiBuilder dbt3034Builder = dbt3034.createBuilderForEdit()
                 .set証記載保険者番号(new ShoKisaiHokenshaNo(
-                        div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey())).set受付年月日(
-                FlexibleDate.getNowDate()).set申請年月日(new FlexibleDate(
-                        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD()
-                        .getValue().toString())).set申請理由(
-                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiRiyu().getValue())
+                                div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey())).set受付年月日(
+                        FlexibleDate.getNowDate()).set申請年月日(new FlexibleDate(
+                                div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD()
+                                .getValue().toString())).set申請理由(
+                        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiRiyu().getValue())
                 .set申請者区分(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseishaKubun()
                         .getSelectedKey())
                 .set申請者氏名(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseishaName()
@@ -1435,21 +1435,21 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                         .value()).set申請者電話番号(div.getJutakuKaishuShinseiContents().getShinseishaInfo()
                         .getTxtTelNo().getDomain()).set理由書作成日(理由書作成日Save)
                 .set理由書作成者(理由書作成者).set理由書作成者カナ(div.getJutakuKaishuShinseiContents()
-                .getJutakuKaishuShinseiReason()
-                .getTxtCreatorKanaName().getValue()).set支払金額合計(
+                        .getJutakuKaishuShinseiReason()
+                        .getTxtCreatorKanaName().getValue()).set支払金額合計(
                         div.getJutakuKaishuShinseiResetInfo()
                         .getTxtHiyoTotalNow().getValue())
                 .set保険対象費用額(div.getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenTaishoHiyoNow().getValue()).set審査方法区分(審査方法初期)
                 .set支給申請審査区分(null).set送付区分(送付区分)
                 .set送付年月(送付年月).set国保連再送付フラグ(国保連再送付フラグ).set住宅所有者(
-                div.getJutakuKaishuShinseiContents().getTxtJutakuOwner().getValue())
+                        div.getJutakuKaishuShinseiContents().getTxtJutakuOwner().getValue())
                 .set被保険者の関係(div.getJutakuKaishuShinseiContents().getTxtRelationWithHihokensha().getValue())
                 .set要介護状態３段階変更(要介護状態区分3段階変更)
                 .set住宅住所変更(住宅住所変更).set審査年月日(null).set審査結果(null).set住宅改修申請区分(
-                JutakukaishuShinseiKubun.支給申請.getCode()).set住宅改修申請取消事由コード(null)
+                        JutakukaishuShinseiKubun.支給申請.getCode()).set住宅改修申請取消事由コード(null)
                 .set領収年月日(new FlexibleDate(
-                        div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue().toString()))
+                                div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue().toString()))
                 .set支払方法区分コード(支払方法区分コード).set支払場所(支払場所).set支払期間開始年月日(支払期間開始年月日)
                 .set支払期間終了年月日(支払期間終了年月日).set支払窓口開始時間(支払窓口開始時間)
                 .set支払窓口終了時間(支払窓口終了時間).set口座ID(口座ID).set受領委任契約番号(受領委任契約番号);
@@ -1774,9 +1774,11 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 今回の被保険対象額設定(今回被保険対象額, 支給限度額, 給付率, 前回までの保険給付額);
                 Decimal 今回の保険給付額 = div.getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenKyufuAmountNow().getValue();
+                Decimal 画面今回の被保険対象額 = div.getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenTaishoHiyoNow().getValue();
                 div.getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountNow()
-                        .setValue(費用額合計.subtract(今回の保険給付額).compareTo(Decimal.ZERO) < 0
-                                ? Decimal.ZERO : 費用額合計.subtract(今回の保険給付額));
+                        .setValue(画面今回の被保険対象額.subtract(今回の保険給付額).compareTo(Decimal.ZERO) < 0
+                                ? Decimal.ZERO : 画面今回の被保険対象額.subtract(今回の保険給付額));
             } else if (費用額合計.add(前回までの費用額合計).compareTo(支給限度額) <= 0) {
                 div.getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenTaishoHiyoNow().setValue(費用額合計);
@@ -1785,9 +1787,11 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                         .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額);
                 Decimal 今回保険給付額 = div.getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenKyufuAmountNow().getValue();
+                Decimal 画面今回の被保険対象額 = div.getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenTaishoHiyoNow().getValue();
                 div.getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountNow()
-                        .setValue(費用額合計.subtract(今回保険給付額).compareTo(Decimal.ZERO) < 0
-                                ? Decimal.ZERO : 費用額合計.subtract(今回保険給付額));
+                        .setValue(画面今回の被保険対象額.subtract(今回保険給付額).compareTo(Decimal.ZERO) < 0
+                                ? Decimal.ZERO : 画面今回の被保険対象額.subtract(今回保険給付額));
             }
         } else if (費用額合計.compareTo(支給限度額) > 0) {
             div.getJutakuKaishuShinseiResetInfo()
@@ -1797,9 +1801,11 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額);
             Decimal 今回保険給付額 = div.getJutakuKaishuShinseiResetInfo()
                     .getTxtHokenKyufuAmountNow().getValue();
+            Decimal 画面今回の被保険対象額 = div.getJutakuKaishuShinseiResetInfo()
+                    .getTxtHokenTaishoHiyoNow().getValue();
             div.getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountNow()
-                    .setValue(費用額合計.subtract(今回保険給付額).compareTo(Decimal.ZERO) < 0
-                            ? Decimal.ZERO : 費用額合計.subtract(今回保険給付額));
+                    .setValue(画面今回の被保険対象額.subtract(今回保険給付額).compareTo(Decimal.ZERO) < 0
+                            ? Decimal.ZERO : 画面今回の被保険対象額.subtract(今回保険給付額));
         } else if (費用額合計.compareTo(支給限度額) <= 0) {
             div.getJutakuKaishuShinseiResetInfo()
                     .getTxtHokenTaishoHiyoNow().setValue(費用額合計);
@@ -1811,8 +1817,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             Decimal 今回保険給付額 = div.getJutakuKaishuShinseiResetInfo()
                     .getTxtHokenKyufuAmountNow().getValue();
             div.getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountNow()
-                    .setValue(費用額合計.subtract(今回保険給付額).compareTo(Decimal.ZERO) < 0
-                            ? Decimal.ZERO : 費用額合計.subtract(今回保険給付額));
+                    .setValue(画面今回の被保険対象額.subtract(今回保険給付額).compareTo(Decimal.ZERO) < 0
+                            ? Decimal.ZERO : 画面今回の被保険対象額.subtract(今回保険給付額));
         }
         if (!限度額チェック) {
             Decimal 今回保険給付額 = div.getJutakuKaishuShinseiResetInfo()

@@ -55,6 +55,28 @@
         AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = #{支給申請書整理番号}
         AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo"=#{履歴番号}       
     </select>
+    
+    <select resultOrdered="true" id="get高額合算情報更新用" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.ResultMap_DbT3170JigyoKogakuGassanJikoFutanGakuEntity" 
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.allColumns_DbT3170JigyoKogakuGassanJikoFutanGaku" />
+        FROM
+        rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS "DbT3170JigyoKogakuGassanJikoFutanGaku" 
+        INNER JOIN rgdb."DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" AS "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
+        ON  "DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo" = "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hihokenshaNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoNendo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hokenshaNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."rirekiNo"
+        WHERE "DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo" = #{被保険者番号}
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo" = #{対象年度}
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo" =#{保険者番号}
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = #{支給申請書整理番号}
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo"=#{履歴番号}       
+    </select>
+    
     <resultMap id="resultMap_KogakuGassanJohoEntity2" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeisho.KogakuGassanJohoEntity">
         <id column="事業高額合算自己負担額entity.dbT3170_hihokenshaNo" />

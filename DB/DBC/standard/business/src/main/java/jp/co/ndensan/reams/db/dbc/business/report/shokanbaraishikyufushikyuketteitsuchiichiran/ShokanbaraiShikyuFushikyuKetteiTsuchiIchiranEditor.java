@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran;
 
-import java.nio.charset.Charset;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払支給（不支給）決定通知一覧表のEditorです。
@@ -19,9 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor {
 
     private final ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem item;
-    private static final int MAX = 24;
-    private static final int MIN = 0;
-    private static final RString ENCODE = new RString("Shift-JIS");
 
     /**
      * インスタンスを生成します。
@@ -56,18 +51,9 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
         
         source.listUpper_3 = item.getKeteiTsuchiNo();
         
-        RString hihokenshanamelenthMax = item.getHihokenshaName() == null ? RString.EMPTY : item.getHihokenshaName();
-        byte[] hihokenshaname = hihokenshanamelenthMax.toString().getBytes(Charset.forName(ENCODE.toString()));
-        byte[] getHihokenshaName = new byte[hihokenshaname.length <= MAX ? hihokenshaname.length : MAX];
-        System.arraycopy(hihokenshaname, MIN, getHihokenshaName, MIN, hihokenshaname.length <= MAX ? hihokenshaname.length : MAX);
-        source.listUpper_5 = new RString(new String(getHihokenshaName, Charset.forName(ENCODE.toString())));
+        source.listUpper_5 = item.getHihokenshaName();
 
-        RString jusholenthMax = item.getJusho() == null ? RString.EMPTY : item.getJusho();
-        byte[] jusho = jusholenthMax.toString().getBytes(Charset.forName(ENCODE.toString()));
-        byte[] getJusho = new byte[jusho.length <= MAX ? jusho.length : MAX];
-        System.arraycopy(jusho, MIN, getJusho, MIN, jusho.length <= MAX ? jusho.length : MAX);
-        source.listLower_1 = new RString(new String(getJusho, Charset.forName(ENCODE.toString())));
-
+        source.listLower_1 = item.getJusho();
         
         source.listUpper_7 = item.getTeikyo();
         source.listLower_2 = item.getYoKaigodo();
@@ -76,11 +62,9 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
         source.listUpper_9 = item.getUketsukeYMD();
         source.listLower_4 = item.getKeteiYMD();
         source.listUpper_10 = item.getHonjinShiharaigaku();
-        source.listUpper_11 = item.getShikyugaku().concat(RString.HALF_SPACE);
+        source.listUpper_11 = item.getShikyugaku();
         source.listLower_5 = item.getYoshikigotoKingaku();
-        if (null != item.getKingaku()) {
-            source.listLower_6 = new RString("(").concat(item.getKingaku()).concat(new RString(") "));
-        }
+        source.listLower_6 = item.getKingaku();
         source.listLower_7 = item.getShurui2();
         source.listUpper_12 = item.getTuika();
         source.listUpper_13 = item.getShurui1();

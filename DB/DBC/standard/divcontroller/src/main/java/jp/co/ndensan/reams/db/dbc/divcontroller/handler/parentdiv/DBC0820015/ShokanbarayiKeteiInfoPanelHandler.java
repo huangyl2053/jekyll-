@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseiken
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.InsupdShokanManager;
+import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteFath;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekkaBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
@@ -130,7 +131,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         for (dgSyokanbaraikete_Row row : rowList) {
             JigyoshaNo 事業者番号 = new JigyoshaNo(row.getJigyoshaNo());
             RString 様式番号 = row.getYoshikiNo();
-            int 件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(被保険者番号,
+            int 件数 = SyokanbaraihiShikyuShinseiKetteFath.createInstance().getShikibetsuNoKanri(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, チェック区分);
             if (件数 != 0) {
                 flag = false;

@@ -134,7 +134,6 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiRenchoEditor implements IHokenry
         source.samaBun12 = 送付物宛先ソース.samaBun1;
         source.kakkoRight12 = 送付物宛先ソース.kakkoRight1;
         source.customerBarCode2 = 送付物宛先ソース.customerBarCode;
-        //TODO 世帯主名  様方
     }
 
     private void editCompSofubutsuAtesaki1(HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource source, SofubutsuAtesakiSource 送付物宛先ソース) {
@@ -169,7 +168,6 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiRenchoEditor implements IHokenry
         source.samaBun11 = 送付物宛先ソース.samaBun1;
         source.kakkoRight11 = 送付物宛先ソース.kakkoRight1;
         source.customerBarCode1 = 送付物宛先ソース.customerBarCode;
-        //TODO 世帯主名  様方
     }
 
     private void editDBBCompNofushoItem(HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource source,

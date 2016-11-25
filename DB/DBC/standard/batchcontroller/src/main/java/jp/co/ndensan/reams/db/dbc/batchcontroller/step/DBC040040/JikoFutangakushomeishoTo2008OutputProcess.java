@@ -208,6 +208,10 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
             data.set文書番号(parameter.get文書情報());
             data.set高額合算データ(高額合算データ);
             data.setタイトル(帳票タイトル);
+            data.set通知文1(通知文1);
+            data.set通知文2(通知文2);
+            data.set保険者情報(保険者情報);
+            data.set備考(備考);
             JikoFutangakushomeishoReport report = new JikoFutangakushomeishoReport(data);
             report.writeBy(reportSourceWriter);
         }

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC815001;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,8 +62,8 @@ public class KakobunJissekiKihonProcess4 extends BatchProcessBase<HihokenshaNoFu
 
     @Override
     protected void afterExecute() {
-        List<HihokenshaNoFukaEntity> hihokenshalist = new ArrayList<>();
-        List<HihokenshaNoFukaEntity> hihokousinlist = new ArrayList<>();
+        List<HihokenshaNoFukaEntity> hihokenshalist;
+        List<HihokenshaNoFukaEntity> hihokousinlist;
         maplist = sokyubun.getKakobunJissekiKihon4(business.getHihokensha());
         hihokenshalist = maplist.get(更新);
         hihokousinlist = maplist.get(追加);

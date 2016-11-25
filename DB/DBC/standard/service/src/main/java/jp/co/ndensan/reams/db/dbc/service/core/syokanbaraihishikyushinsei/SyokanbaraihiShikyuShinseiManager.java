@@ -79,9 +79,7 @@ public class SyokanbaraihiShikyuShinseiManager {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get基本設定区分())) {
-                return false;
-            }
+            return !(未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get基本設定区分()));
         }
         return true;
     }
@@ -91,9 +89,7 @@ public class SyokanbaraihiShikyuShinseiManager {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get明細設定区分())) {
-                return false;
-            }
+            return !(未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get明細設定区分()));
         }
         return true;
     }
@@ -103,9 +99,7 @@ public class SyokanbaraihiShikyuShinseiManager {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
-                return false;
-            }
+            return !(未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get特定診療費設定区分()));
         }
         return true;
     }
@@ -115,9 +109,7 @@ public class SyokanbaraihiShikyuShinseiManager {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get居宅計画費設定区分())) {
-                return false;
-            }
+            return !(未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get居宅計画費設定区分()));
         }
         return true;
     }
@@ -127,9 +119,7 @@ public class SyokanbaraihiShikyuShinseiManager {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get特定入所者設定区分())) {
-                return false;
-            }
+            return !(未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get特定入所者設定区分()));
         }
         return true;
     }
@@ -139,9 +129,7 @@ public class SyokanbaraihiShikyuShinseiManager {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get明細住所地特例設定区分())) {
-                return false;
-            }
+            return !(未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get明細住所地特例設定区分()));
         }
         return true;
     }
@@ -151,9 +139,7 @@ public class SyokanbaraihiShikyuShinseiManager {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get所定疾患施設療養設定区分())) {
-                return false;
-            }
+            return !(未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get所定疾患施設療養設定区分()));
         }
         return true;
     }
@@ -163,9 +149,7 @@ public class SyokanbaraihiShikyuShinseiManager {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get緊急時施設療養設定区分())) {
-                return false;
-            }
+            return !(未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get緊急時施設療養設定区分()));
         }
         return true;
     }
@@ -175,9 +159,7 @@ public class SyokanbaraihiShikyuShinseiManager {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get食事費用設定区分())) {
-                return false;
-            }
+            return !(未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get食事費用設定区分()));
         }
         return true;
     }
@@ -187,9 +169,7 @@ public class SyokanbaraihiShikyuShinseiManager {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get集計設定区分())) {
-                return false;
-            }
+            return !(未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get集計設定区分()));
         }
         return true;
     }
@@ -199,9 +179,7 @@ public class SyokanbaraihiShikyuShinseiManager {
             return true;
         }
         if (shikibetsuNoKanri != null) {
-            if (未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
-                return false;
-            }
+            return !(未入力.equals(証明書入力済フラグ.getCode()) && 設定可_必須.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分()));
         }
         return true;
     }

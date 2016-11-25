@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb514001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB514001;
 
 import jp.co.ndensan.reams.db.dbb.business.core.nofugakudatasakuseitandokushichoson.NofugakuJohoCreate;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.nofugakudatasakuseitandokushichoson.NofugakuDataProcessParameter;

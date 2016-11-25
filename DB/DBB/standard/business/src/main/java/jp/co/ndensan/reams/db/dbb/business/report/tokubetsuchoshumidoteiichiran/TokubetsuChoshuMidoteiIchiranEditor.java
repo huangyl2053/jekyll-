@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -92,6 +93,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         set導入団体コード(source);
         set導入市町村名(source);
         set年金番号と年金コード(source);
+        set識別コード(source);
         set生年月日(source);
         set性別(source);
         setカナ氏名(source);
@@ -156,6 +158,11 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
             source.listList1_1 = this.特徴対象一覧未同定.getYokunendoKarichoshuKisoNenkinNo();
             source.listList1_2 = this.特徴対象一覧未同定.getYokunendoKariChoshuKisonenkinCode();
         }
+    }
+
+    private void set識別コード(TokubetsuChoshuMidoteiIchiranSource source) {
+        source.shikibetsuCode = ShikibetsuCode.EMPTY;
+        source.listList1_3 = ShikibetsuCode.EMPTY.getColumnValue();
     }
 
     private void set生年月日(TokubetsuChoshuMidoteiIchiranSource source) {

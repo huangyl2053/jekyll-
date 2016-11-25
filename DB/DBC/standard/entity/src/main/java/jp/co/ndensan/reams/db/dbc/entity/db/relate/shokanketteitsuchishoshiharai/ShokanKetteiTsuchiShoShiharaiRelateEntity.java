@@ -95,7 +95,7 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private RString syurui1;
     // 種類２
     private RString syurui2;
-    
+
     // 通知書発行対象フラグ
     private boolean hakkoutaisyouFlg;
 }

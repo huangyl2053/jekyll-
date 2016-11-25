@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.keikakurirekiichi
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
@@ -84,8 +85,10 @@ public class KeikakuRirekiIchiran {
         for (KeikakuRirekiIchiranEnitity keienitity : entityList) {
             KeikakuRireki 計画履歴一覧情報 = new KeikakuRireki();
             if (定数_A.equals(keienitity.getKyotakuKeikakuShurui())) {
-                計画履歴一覧情報.set計画事業者名称(get事業者名称(keienitity.getTekiyoKaishiYMD(), keienitity.getKeikakuJigyoshaNo()));
-                計画履歴一覧情報.set委託先事業者名称(get事業者名称(keienitity.getTekiyoKaishiYMD(), keienitity.getItakusakiJigyoshaNo()));
+                計画履歴一覧情報.set計画事業者名称(get事業者名称(keienitity.getTekiyoKaishiYMD(), keienitity.getKeikakuJigyoshaNo(),
+                        keienitity.getServiceShuruiCode()));
+                計画履歴一覧情報.set委託先事業者名称(get事業者名称(keienitity.getTekiyoKaishiYMD(), keienitity.getItakusakiJigyoshaNo(),
+                        keienitity.getServiceShuruiCode()));
             } else if (定数_B.equals(keienitity.getKyotakuKeikakuShurui())) {
                 計画履歴一覧情報.set計画事業者名称(定数_自己作成);
             }
@@ -104,7 +107,7 @@ public class KeikakuRirekiIchiran {
 
     }
 
-    private AtenaMeisho get事業者名称(FlexibleDate tekiyoKaishiYMD, JigyoshaNo keikakuJigyoshaNo) {
+    private AtenaMeisho get事業者名称(FlexibleDate tekiyoKaishiYMD, JigyoshaNo keikakuJigyoshaNo, ServiceShuruiCode serviceShuruiCode) {
         AtenaMeisho atenameisho = null;
         if (keikakuJigyoshaNo == null || keikakuJigyoshaNo.isEmpty()) {
             return null;
@@ -115,7 +118,8 @@ public class KeikakuRirekiIchiran {
             介護事業者_事業者名称 = dbt7060entity.getJigyoshaName();
         }
         AtenaMeisho 介護事業者指定サービス_事業者名称 = null;
-        DbT7063KaigoJigyoshaShiteiServiceEntity dbt7063entity = 介護事業者指定サービスDac.select_事業者名称(tekiyoKaishiYMD, keikakuJigyoshaNo);
+        DbT7063KaigoJigyoshaShiteiServiceEntity dbt7063entity = 介護事業者指定サービスDac.
+                select_事業者名称(tekiyoKaishiYMD, keikakuJigyoshaNo, serviceShuruiCode);
         if (dbt7063entity != null) {
             介護事業者指定サービス_事業者名称 = dbt7063entity.getJigyoshaName();
         } else {

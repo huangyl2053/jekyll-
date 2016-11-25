@@ -611,8 +611,7 @@ public final class JukyushaKyufuDaichoData {
                         .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
                         .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
                         .concat(kingakuFormat(計画費.get請求金額().intValue())));
-                個人用帳票データ.set明細18(計画費.getサービス名称().concat("　　")
-                        .concat(計画費.get摘要()).concat(SPACE_8)
+                個人用帳票データ.set明細18(計画費.getサービス名称().concat("　　").concat(計画費.get摘要()).concat(SPACE_8)
                         .concat(new RString(計画費.get再審査回数())).concat("回").concat(SPACE_6)
                         .concat(new RString(計画費.get過誤回数())).concat(SPACE_回)
                         .concat(dateFormat年月(計画費.get審査年月())));
@@ -627,14 +626,12 @@ public final class JukyushaKyufuDaichoData {
                         .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
                         .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
                         .concat(kingakuFormat(計画費.get請求金額().intValue())));
-                個人用帳票データ.set明細20(計画費.get明細行番号().concat(SPACE_23)
-                        .concat(kingakuFormat(計画費.get単位数().intValue())).concat(SPACE_4)
+                個人用帳票データ.set明細20(計画費.get明細行番号().concat(SPACE_23).concat(kingakuFormat(計画費.get単位数().intValue())).concat(SPACE_4)
                         .concat(new RString(計画費.get回数())).concat("回").concat(SPACE_8)
                         .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
                         .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
                         .concat(kingakuFormat(計画費.get請求金額().intValue())));
-                個人用帳票データ.set明細21(計画費.getサービス名称().concat("　　")
-                        .concat(計画費.get摘要()).concat(SPACE_8)
+                個人用帳票データ.set明細21(計画費.getサービス名称().concat("　　").concat(計画費.get摘要()).concat(SPACE_8)
                         .concat(new RString(計画費.get再審査回数())).concat("回").concat(SPACE_6)
                         .concat(new RString(計画費.get過誤回数())).concat(SPACE_回)
                         .concat(dateFormat年月(計画費.get審査年月())));
@@ -704,7 +701,7 @@ public final class JukyushaKyufuDaichoData {
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0013"), new RString("shichousonCode"), new RString("市町村コード")),
+        市町村コード(new RString("0016"), new RString("shichousonCode"), new RString("市町村コード")),
         /**
          * 被保険者番号
          */

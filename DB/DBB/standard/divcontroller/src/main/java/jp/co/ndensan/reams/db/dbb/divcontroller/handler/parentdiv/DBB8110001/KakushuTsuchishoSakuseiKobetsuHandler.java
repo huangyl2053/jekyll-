@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
@@ -156,7 +157,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 return 0;
             }
         });
-        Map<RString, FukaJoho> map = new HashMap<>();
+        Map<RString, FukaJoho> map = new LinkedHashMap<>();
         for (FukaJoho info : 賦課の情報List) {
             YMDHMS 調定日時 = info.get調定日時();
             if (調定日時 != null) {
@@ -226,6 +227,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 KanendoKiUtil kanendoKi = new KanendoKiUtil();
                 set普通徴収(null, 賦課の情報, kanendoKi.get期月リスト());
             }
+            set歳出還付額(賦課の情報);
         } else {
             List<KeyValueDataSource> 更正後Data = new ArrayList<>();
             List<KeyValueDataSource> 更正前Data = new ArrayList<>();
@@ -280,11 +282,37 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 KanendoKiUtil kanendoKi = new KanendoKiUtil();
                 set普通徴収(更正前賦課の情報, 更正後賦課の情報, kanendoKi.get期月リスト());
             }
+            set歳出還付額(更正後賦課の情報);
         }
         Map<RString, FlexibleYear> 年度Map = new HashMap<>();
         年度Map.put(調定年度_KEY, 調定年度);
         年度Map.put(賦課年度_KEY, 賦課年度);
         return 年度Map;
+    }
+
+    private void set歳出還付額(FukaJoho 更正後賦課の情報) {
+        Decimal 特徴歳出還付額 = getNullToZero(更正後賦課の情報.get特徴歳出還付額());
+        Decimal 普徴歳出還付額 = getNullToZero(更正後賦課の情報.get普徴歳出還付額());
+        if (特徴歳出還付額.compareTo(Decimal.ZERO) > 0 || 普徴歳出還付額.compareTo(Decimal.ZERO) > 0) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblSaishutsuKampu()
+                    .getLblTokuchoSaishutsuKampuGaku().setText(null == 更正後賦課の情報.get特徴歳出還付額()
+                            ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(特徴歳出還付額, 0));
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblSaishutsuKampu()
+                    .getLblFuchoSaishutsuKampuGaku().setText(null == 更正後賦課の情報.get普徴歳出還付額()
+                            ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(普徴歳出還付額, 0));
+        } else {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblSaishutsuKampu()
+                    .getLblTokuchoSaishutsuKampuGaku().setText(RString.EMPTY);
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblSaishutsuKampu()
+                    .getLblFuchoSaishutsuKampuGaku().setText(RString.EMPTY);
+        }
+    }
+
+    private Decimal getNullToZero(Decimal value) {
+        if (null == value) {
+            return Decimal.ZERO;
+        }
+        return value;
     }
 
     /**
@@ -1320,10 +1348,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             }
         }
         div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setDataSource(keyValueDataSource);
-        if (isContains期月) {
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedKey(期月.get期());
-        } else {
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedIndex(0);
+        if (!keyValueDataSource.isEmpty()) {
+            if (isContains期月) {
+                div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedKey(期月.get期());
+            } else {
+                div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedIndex(0);
+            }
         }
         if (賦課年度.isBefore(調定年度)) {
             Noki 過年度納期 = FukaNokiResearcher.createInstance().get過年度納期(期月.get期AsInt());
@@ -1519,6 +1549,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         parameter.set徴収猶予通知書_文書番号(div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu()
                 .getCcdChoshuYuyoTsuchiBunshoNo().get文書番号());
         parameter.setHas更正前(有.equals(div.getHdnKouseizenFlag()));
+        parameter.set賦課の情報マップ(map);
         AccessLogger.log(AccessLogType.更新, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         return KakushuTsuchishoSakusei.createInstance().publish(parameter);
     }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -41,4 +42,5 @@ public class KakushuTsuchishoParameter implements Serializable {
     private RString 徴収猶予通知書_文書番号;
     private List<Kitsuki> 納入通知書_出力期リスト;
     private boolean has更正前;
+    private Map<RString, FukaJoho> 賦課の情報マップ;
 }

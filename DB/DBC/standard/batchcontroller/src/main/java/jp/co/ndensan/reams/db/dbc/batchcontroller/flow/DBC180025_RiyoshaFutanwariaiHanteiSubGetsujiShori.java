@@ -114,6 +114,6 @@ public class DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShori
 
     @Step(CLEAR今回利用者負担割合情報)
     IBatchFlowCommand clearKonkaiRiyoshaFutanWariaiJohoTempProcess() {
-        return loopBatch(ClearKonkaiRiyoshaFutanWariaiJohoTempProcess.class).arguments(processPrm).define();
+        return simpleBatch(ClearKonkaiRiyoshaFutanWariaiJohoTempProcess.class).define();
     }
 }

@@ -61,6 +61,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private static final RString 追加モード = new RString("追加モード");
     private static final RString 修正モード = new RString("修正モード");
     private static final RString 削除モード = new RString("削除モード");
+    private static final RString 未発行 = new RString("0");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -154,19 +155,16 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
 
     private FlexibleYear get所得年度(RDate date) {
         FlexibleYear 所得年度 = new FlexibleYear(date.getYear().toDateString());
-        if (date.getYearMonth() != null && date.getYearMonth().isBeforeOrEquals(定値所得年度1)) {
-            if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_5) {
-                所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
-            }
+        if (date.getYearMonth() != null && date.getYearMonth().isBeforeOrEquals(定値所得年度1)
+                && NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_5) {
+            所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
         } else if (date.getYearMonth() != null && date.getYearMonth().isBeforeOrEquals(定値所得年度2)
-                && 定値所得年度1.isBefore(date.getYearMonth())) {
-            if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_6) {
-                所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
-            }
-        } else if (定値所得年度2.isBefore(date.getYearMonth())) {
-            if (NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_7) {
-                所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
-            }
+                && 定値所得年度1.isBefore(date.getYearMonth()) && NUM_1 < date.getMonthValue()
+                && date.getMonthValue() <= NUM_6) {
+            所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
+        } else if (定値所得年度2.isBefore(date.getYearMonth())
+                && NUM_1 < date.getMonthValue() && date.getMonthValue() <= NUM_7) {
+            所得年度 = new FlexibleYear(date.getYear().minusYear(1).toDateString());
         }
         return 所得年度;
     }
@@ -198,6 +196,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         RString 修正前支給区分 = null;
         if (追加モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.added();
+            高額支給判定結果entity = 高額支給判定結果entity.createBuilderForEdit().set決定通知リアル発行区分(未発行).build();
             高額支給判定結果entity = 高額支給判定結果entity.added();
         } else if (修正モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.modified();
@@ -248,6 +247,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         RString 修正前支給区分 = null;
         if (追加モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.added();
+            高額支給判定結果entity = 高額支給判定結果entity.createBuilderForEdit().set決定通知リアル発行区分(未発行).build();
             高額支給判定結果entity = 高額支給判定結果entity.added();
         } else if (修正モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.modified();

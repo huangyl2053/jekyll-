@@ -5,20 +5,28 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei;
 
+import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 居宅サービス履歴一覧クラスです。
  *
  * @reamsid_L DBC-1930-010 xuchangyong
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyotakuServiceRirekiIchiranEntity {
+public class KyotakuServiceRirekiIchiranEntity implements Serializable, Cloneable {
 
+    private static final long serialVersionUID = 1L;
     private FlexibleYearMonth 対象年月;
     private RString 作成区分コード;
     private RString 事業者番号;
@@ -37,5 +45,12 @@ public class KyotakuServiceRirekiIchiranEntity {
     private RString 電話番号;
     private RString 郵便番号;
     private RString 住所;
+    private ServiceShuruiCode サービス種類コード;
+    private YubinNo 事業者郵便番号;
+    private AtenaJusho 事業者住所;
+    private TelNo 事業者電話番号;
+    private AtenaMeisho 管理者名;
+    private FlexibleDate 事業者変更年月日;
+    private RString 事業者変更事由;
     private RString 居宅総合事業区分;
 }

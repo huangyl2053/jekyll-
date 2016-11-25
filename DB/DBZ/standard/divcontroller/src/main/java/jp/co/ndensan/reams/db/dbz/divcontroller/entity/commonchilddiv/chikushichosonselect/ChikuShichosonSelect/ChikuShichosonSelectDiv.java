@@ -9,10 +9,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
@@ -378,11 +377,12 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
             return;
         }
         List<ddlCodeList_Row> dataSource = new ArrayList<>();
-        Set<Entry<RString, RString>> set = 選択結果.entrySet();
-        for (Entry<RString, RString> entry : set) {
+        Iterator it = 選択結果.entrySet().iterator();
+        while (it.hasNext()) {
             ddlCodeList_Row row = new ddlCodeList_Row();
-            row.setCode(entry.getKey());
-            row.setName(entry.getValue());
+            Map.Entry entry = (Map.Entry) it.next();
+            row.setCode(new RString(entry.getKey().toString()));
+            row.setName(new RString(entry.getValue().toString()));
             dataSource.add(row);
         }
         this.getDdlCodeList().setDataSource(dataSource);

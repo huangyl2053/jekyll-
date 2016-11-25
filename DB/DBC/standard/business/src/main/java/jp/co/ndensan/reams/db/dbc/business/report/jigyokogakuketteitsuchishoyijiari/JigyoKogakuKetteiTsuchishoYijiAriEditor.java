@@ -61,6 +61,7 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
     private static final RString 支払方法区分ONE = new RString("1");
     private static final RString 支給金額 = new RString("支給金額");
     private static final RString 決定額 = new RString("決定額");
+    private static final RString 改行 = new RString("\n");
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
     private static final int INDEX_TWO = 2;
@@ -198,7 +199,7 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
 
     private void set種別と番号と口座名義(JigyoKogakuKetteiTsuchishoYijiAriSource source) {
         if (支給.equals(帳票情報.get支給不支給決定区分()) && !支払方法区分ONE.equals(帳票情報.get支払方法区分())
-                        && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
+                && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
             source.kouzaMeigi = 帳票情報.get口座名義人();
             source.kouzaShu = 帳票情報.get口座種別();
             source.kouzaNo = 帳票情報.get口座番号();
@@ -217,7 +218,9 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
     private void set持ちものと支払場所と期間(JigyoKogakuKetteiTsuchishoYijiAriSource source) {
         if (支給.equals(帳票情報.get支給不支給決定区分()) && 支払方法区分ONE.equals(帳票情報.get支払方法区分())
                 && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
-            source.mochimono = 帳票情報.get持ちもの();
+            source.mochimono = 帳票情報.getお持ちいただくもの１().
+                    concat(改行).concat(帳票情報.getお持ちいただくもの２()).
+                    concat(改行).concat(帳票情報.getお持ちいただくもの３());
             source.shiharaiBasho = 帳票情報.get支払場所();
             RString 開始週間 = 週間編集(帳票情報.get支払期間開始年月日());
             RString 終了週間 = 週間編集(帳票情報.get支払期間終了年月日());

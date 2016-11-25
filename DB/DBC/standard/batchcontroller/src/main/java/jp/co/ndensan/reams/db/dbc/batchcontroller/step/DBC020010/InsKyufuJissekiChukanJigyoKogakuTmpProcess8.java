@@ -144,6 +144,7 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess8 extends BatchProcessBas
         }
         List<KyufuJissekiChukanKogakuJigyo8Entity> 処理対象リスト = get処理対象List();
         処理対象List = new ArrayList<>();
+        処理対象List.add(entity);
         for (KyufuJissekiChukanKogakuJigyo8Entity 処理対象 : 処理対象リスト) {
             do給付実績中間事業高額一時の作成(処理対象);
         }

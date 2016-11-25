@@ -8,21 +8,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0020011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.IServiceRiyohyoInfoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KyotakuServiceKeikakuShokaiMain のクラスファイル
- *
- * @reamsid_L DBC-1930-010 xuchangyong
+ * KyotakuServiceKeikakuShokaiMain のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KyotakuServiceKeikakuShokaiMainDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,8 +32,8 @@ public class KyotakuServiceKeikakuShokaiMainDiv extends Panel {
      */
     @JsonProperty("KyotakuServiceRirekiIchiran")
     private KyotakuServiceRirekiIchiranDiv KyotakuServiceRirekiIchiran;
-    @JsonProperty("JikoSakuseiTodokedeInfo")
-    private JikoSakuseiTodokedeInfoDiv JikoSakuseiTodokedeInfo;
+    @JsonProperty("KyotakuServiceiTodokedeInfo")
+    private KyotakuServiceiTodokedeInfoDiv KyotakuServiceiTodokedeInfo;
     @JsonProperty("RiyoNengetsuIchiran")
     private RiyoNengetsuIchiranDiv RiyoNengetsuIchiran;
     @JsonProperty("RiyoNengetsuIchiranFooter")
@@ -69,21 +70,21 @@ public class KyotakuServiceKeikakuShokaiMainDiv extends Panel {
     }
 
     /*
-     * getJikoSakuseiTodokedeInfo
-     * @return JikoSakuseiTodokedeInfo
+     * getKyotakuServiceiTodokedeInfo
+     * @return KyotakuServiceiTodokedeInfo
      */
-    @JsonProperty("JikoSakuseiTodokedeInfo")
-    public JikoSakuseiTodokedeInfoDiv getJikoSakuseiTodokedeInfo() {
-        return JikoSakuseiTodokedeInfo;
+    @JsonProperty("KyotakuServiceiTodokedeInfo")
+    public KyotakuServiceiTodokedeInfoDiv getKyotakuServiceiTodokedeInfo() {
+        return KyotakuServiceiTodokedeInfo;
     }
 
     /*
-     * setJikoSakuseiTodokedeInfo
-     * @param JikoSakuseiTodokedeInfo JikoSakuseiTodokedeInfo
+     * setKyotakuServiceiTodokedeInfo
+     * @param KyotakuServiceiTodokedeInfo KyotakuServiceiTodokedeInfo
      */
-    @JsonProperty("JikoSakuseiTodokedeInfo")
-    public void setJikoSakuseiTodokedeInfo(JikoSakuseiTodokedeInfoDiv JikoSakuseiTodokedeInfo) {
-        this.JikoSakuseiTodokedeInfo = JikoSakuseiTodokedeInfo;
+    @JsonProperty("KyotakuServiceiTodokedeInfo")
+    public void setKyotakuServiceiTodokedeInfo(KyotakuServiceiTodokedeInfoDiv KyotakuServiceiTodokedeInfo) {
+        this.KyotakuServiceiTodokedeInfo = KyotakuServiceiTodokedeInfo;
     }
 
     /*
@@ -167,48 +168,188 @@ public class KyotakuServiceKeikakuShokaiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgKyotakuServiceRirekiIchiran(DataGrid<dgKyotakuServiceRirekiIchiran_Row> dgKyotakuServiceRirekiIchiran) {
+    public void  setDgKyotakuServiceRirekiIchiran(DataGrid<dgKyotakuServiceRirekiIchiran_Row> dgKyotakuServiceRirekiIchiran) {
         this.getKyotakuServiceRirekiIchiran().setDgKyotakuServiceRirekiIchiran(dgKyotakuServiceRirekiIchiran);
     }
 
     @JsonIgnore
     public TextBoxDate getTxtTodokedeYmd() {
-        return this.getJikoSakuseiTodokedeInfo().getTxtTodokedeYmd();
+        return this.getKyotakuServiceiTodokedeInfo().getTxtTodokedeYmd();
     }
 
     @JsonIgnore
-    public void setTxtTodokedeYmd(TextBoxDate txtTodokedeYmd) {
-        this.getJikoSakuseiTodokedeInfo().setTxtTodokedeYmd(txtTodokedeYmd);
+    public void  setTxtTodokedeYmd(TextBoxDate txtTodokedeYmd) {
+        this.getKyotakuServiceiTodokedeInfo().setTxtTodokedeYmd(txtTodokedeYmd);
     }
 
     @JsonIgnore
     public TextBox getTxtTodokedeKubun() {
-        return this.getJikoSakuseiTodokedeInfo().getTxtTodokedeKubun();
+        return this.getKyotakuServiceiTodokedeInfo().getTxtTodokedeKubun();
     }
 
     @JsonIgnore
-    public void setTxtTodokedeKubun(TextBox txtTodokedeKubun) {
-        this.getJikoSakuseiTodokedeInfo().setTxtTodokedeKubun(txtTodokedeKubun);
+    public void  setTxtTodokedeKubun(TextBox txtTodokedeKubun) {
+        this.getKyotakuServiceiTodokedeInfo().setTxtTodokedeKubun(txtTodokedeKubun);
     }
 
     @JsonIgnore
     public TextBoxDateRange getTxtTekiyoKikan() {
-        return this.getJikoSakuseiTodokedeInfo().getTxtTekiyoKikan();
+        return this.getKyotakuServiceiTodokedeInfo().getTxtTekiyoKikan();
     }
 
     @JsonIgnore
-    public void setTxtTekiyoKikan(TextBoxDateRange txtTekiyoKikan) {
-        this.getJikoSakuseiTodokedeInfo().setTxtTekiyoKikan(txtTekiyoKikan);
+    public void  setTxtTekiyoKikan(TextBoxDateRange txtTekiyoKikan) {
+        this.getKyotakuServiceiTodokedeInfo().setTxtTekiyoKikan(txtTekiyoKikan);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKyotakuSogoJigyoKubun() {
+        return this.getKyotakuServiceiTodokedeInfo().getTxtKyotakuSogoJigyoKubun();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyotakuSogoJigyoKubun(TextBox txtKyotakuSogoJigyoKubun) {
+        this.getKyotakuServiceiTodokedeInfo().setTxtKyotakuSogoJigyoKubun(txtKyotakuSogoJigyoKubun);
     }
 
     @JsonIgnore
     public TodokedeshaDiv getTodokedesha() {
-        return this.getJikoSakuseiTodokedeInfo().getTodokedesha();
+        return this.getKyotakuServiceiTodokedeInfo().getTodokedesha();
     }
 
     @JsonIgnore
-    public void setTodokedesha(TodokedeshaDiv Todokedesha) {
-        this.getJikoSakuseiTodokedeInfo().setTodokedesha(Todokedesha);
+    public void  setTodokedesha(TodokedeshaDiv Todokedesha) {
+        this.getKyotakuServiceiTodokedeInfo().setTodokedesha(Todokedesha);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKeikakuSakuseiKubun() {
+        return this.getKyotakuServiceiTodokedeInfo().getTxtKeikakuSakuseiKubun();
+    }
+
+    @JsonIgnore
+    public void  setTxtKeikakuSakuseiKubun(TextBox txtKeikakuSakuseiKubun) {
+        this.getKyotakuServiceiTodokedeInfo().setTxtKeikakuSakuseiKubun(txtKeikakuSakuseiKubun);
+    }
+
+    @JsonIgnore
+    public KeikakuJigyoshaDiv getKeikakuJigyosha() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha();
+    }
+
+    @JsonIgnore
+    public void  setKeikakuJigyosha(KeikakuJigyoshaDiv KeikakuJigyosha) {
+        this.getKyotakuServiceiTodokedeInfo().setKeikakuJigyosha(KeikakuJigyosha);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJigyoshaNo() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().getTxtJigyoshaNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtJigyoshaNo(TextBox txtJigyoshaNo) {
+        this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().setTxtJigyoshaNo(txtJigyoshaNo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJigyoshaName() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().getTxtJigyoshaName();
+    }
+
+    @JsonIgnore
+    public void  setTxtJigyoshaName(TextBox txtJigyoshaName) {
+        this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().setTxtJigyoshaName(txtJigyoshaName);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtServiceShuruiMeisho() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().getTxtServiceShuruiMeisho();
+    }
+
+    @JsonIgnore
+    public void  setTxtServiceShuruiMeisho(TextBox txtServiceShuruiMeisho) {
+        this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().setTxtServiceShuruiMeisho(txtServiceShuruiMeisho);
+    }
+
+    @JsonIgnore
+    public TextBoxYubinNo getTxtJigyoshaYubinNo() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().getTxtJigyoshaYubinNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtJigyoshaYubinNo(TextBoxYubinNo txtJigyoshaYubinNo) {
+        this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().setTxtJigyoshaYubinNo(txtJigyoshaYubinNo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJigyoshaJusho() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().getTxtJigyoshaJusho();
+    }
+
+    @JsonIgnore
+    public void  setTxtJigyoshaJusho(TextBox txtJigyoshaJusho) {
+        this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().setTxtJigyoshaJusho(txtJigyoshaJusho);
+    }
+
+    @JsonIgnore
+    public TextBoxTelNo getTxtJigyoshaTelNo() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().getTxtJigyoshaTelNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtJigyoshaTelNo(TextBoxTelNo txtJigyoshaTelNo) {
+        this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().setTxtJigyoshaTelNo(txtJigyoshaTelNo);
+    }
+
+    @JsonIgnore
+    public TextBoxAtenaMeisho getTxtKanrishaName() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().getTxtKanrishaName();
+    }
+
+    @JsonIgnore
+    public void  setTxtKanrishaName(TextBoxAtenaMeisho txtKanrishaName) {
+        this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().setTxtKanrishaName(txtKanrishaName);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtItakusakiJigyoshaNo() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().getTxtItakusakiJigyoshaNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtItakusakiJigyoshaNo(TextBox txtItakusakiJigyoshaNo) {
+        this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().setTxtItakusakiJigyoshaNo(txtItakusakiJigyoshaNo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtItakusakiJigyoshaName() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().getTxtItakusakiJigyoshaName();
+    }
+
+    @JsonIgnore
+    public void  setTxtItakusakiJigyoshaName(TextBox txtItakusakiJigyoshaName) {
+        this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().setTxtItakusakiJigyoshaName(txtItakusakiJigyoshaName);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtHenkoYMD() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().getTxtHenkoYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtHenkoYMD(TextBoxDate txtHenkoYMD) {
+        this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().setTxtHenkoYMD(txtHenkoYMD);
+    }
+
+    @JsonIgnore
+    public TextBoxMultiLine getTxtHenkoJiyu() {
+        return this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().getTxtHenkoJiyu();
+    }
+
+    @JsonIgnore
+    public void  setTxtHenkoJiyu(TextBoxMultiLine txtHenkoJiyu) {
+        this.getKyotakuServiceiTodokedeInfo().getKeikakuJigyosha().setTxtHenkoJiyu(txtHenkoJiyu);
     }
 
     @JsonIgnore
@@ -217,7 +358,7 @@ public class KyotakuServiceKeikakuShokaiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgRiyoNentstsuIchiran(DataGrid<dgRiyoNentstsuIchiran_Row> dgRiyoNentstsuIchiran) {
+    public void  setDgRiyoNentstsuIchiran(DataGrid<dgRiyoNentstsuIchiran_Row> dgRiyoNentstsuIchiran) {
         this.getRiyoNengetsuIchiran().setDgRiyoNentstsuIchiran(dgRiyoNentstsuIchiran);
     }
 
@@ -227,7 +368,7 @@ public class KyotakuServiceKeikakuShokaiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnBackRirekiIchiran(Button btnBackRirekiIchiran) {
+    public void  setBtnBackRirekiIchiran(Button btnBackRirekiIchiran) {
         this.getRiyoNengetsuIchiranFooter().setBtnBackRirekiIchiran(btnBackRirekiIchiran);
     }
 

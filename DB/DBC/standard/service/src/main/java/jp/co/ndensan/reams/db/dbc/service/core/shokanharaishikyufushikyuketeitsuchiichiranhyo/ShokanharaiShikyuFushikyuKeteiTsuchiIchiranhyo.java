@@ -44,6 +44,8 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
     private static final int 数字_5 = 5;
     private static final int 数字_4 = 4;
     private static final int 数字_3 = 3;
+    private static final int 数字_19 = 19;
+    private static final int 数字_20 = 20;
     private static final int ZERO = 0;
     private static final int TEN = 10;
     private static final RString 差止中 = new RString("差止中");
@@ -104,32 +106,19 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
         for (int i = 0; i < businessList.size(); i++) {
             ShokanKetteiTsuchiShoShiharai shoShiharaiList = businessList.get(i);
             ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem ichiranItem = new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem();
-            IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
-            ichiranItem.setHokenshaNo(association.get地方公共団体コード().getColumnValue());
-            ichiranItem.setHokenshaName(association.get市町村名());
-            ichiranItem.setShutsuryokujun1(出力順.get(0));
-            ichiranItem.setShutsuryokujun2(出力順.get(1));
-            ichiranItem.setShutsuryokujun3(出力順.get(2));
-            ichiranItem.setShutsuryokujun4(出力順.get(数字_3));
-            ichiranItem.setShutsuryokujun5(出力順.get(数字_4));
-            ichiranItem.setKaipage1(改ページ.get(0));
-            ichiranItem.setKaipage2(改ページ.get(1));
-            ichiranItem.setKaipage3(改ページ.get(2));
-            ichiranItem.setKaipage4(改ページ.get(数字_3));
-            ichiranItem.setKaipage5(改ページ.get(数字_4));
-            ichiranItem.setPrintTimeStamp(get作成日時分秒());
+            setIem(ichiranItem, 出力順, 改ページ);
             RString key = getJufukuKey(shoShiharaiList);
             if (!key.equals(indexKey)) {
                 ichiranItem.setRenban(new RString(String.valueOf(++renban)));
                 setItem(ichiranItem, shoShiharaiList, 帳票制御共通情報);
-                if (shoShiharaiList.is通知書発行対象フラグ() && ShikyuFushikyuKubun.支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())) {
+                if (ShikyuFushikyuKubun.支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())) {
                     Decimal 該当レコード支給金額集計 = shoShiharaiList.get支給額() == null ? Decimal.ZERO : shoShiharaiList.get支給額();
                     Decimal 該当レコード本人支払額 = shoShiharaiList.get本人支払額() == null ? Decimal.ZERO : shoShiharaiList.get本人支払額();
                     支給本人支払額集計 = 支給本人支払額集計.add(該当レコード本人支払額);
                     支給金額集計 = 支給金額集計.add(該当レコード支給金額集計);
                     支給件数 = 支給件数 + 1;
                 }
-                if (shoShiharaiList.is通知書発行対象フラグ() && ShikyuFushikyuKubun.不支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())) {
+                if (ShikyuFushikyuKubun.不支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())) {
                     Decimal 該当レコード本人支払額 = shoShiharaiList.get本人支払額() == null ? Decimal.ZERO : shoShiharaiList.get本人支払額();
                     不支給本人支払額集計 = 不支給本人支払額集計.add(該当レコード本人支払額);
                     不支給件数 = 不支給件数 + 1;
@@ -142,39 +131,19 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
                 if ((null == befItem.getYoshikigotoKingaku() || befItem.getYoshikigotoKingaku().isEmpty())
                         && (null == befItem.getKingaku() || befItem.getKingaku().isEmpty())) {
                     // ３番目の様式は次の明細行（２行１組）の下段の「様式名称」、「様式毎の金額」部分に２番目の「様式名称」、「様式毎の金額」を出力する。
-                    befItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称());
-                    befItem.setKingaku(DecimalFormatter.toコンマ区切りRString(
-                            shoShiharaiList.get様式金額集計(), 0));
+                    befItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称().concat(new RString("(")));
+                    befItem.setKingaku(shoShiharaiList.get様式金額集計() == null
+                    ? new RString(")") : DecimalFormatter.toコンマ区切りRString(
+                            shoShiharaiList.get様式金額集計(), 0).concat(new RString(") ")));
                     continue;
                 } else {
                     // ２番目の様式は次の明細行（２行１組）の上段の「本人支払額」、「支給額」部分に２番目の「様式名称」、「様式毎の金額」を出力する。
-                    ichiranItem.setHonjinShiharaigaku(shoShiharaiList.get様式名称());
+                    ichiranItem.setHonjinShiharaigaku(shoShiharaiList.get様式名称().concat(new RString("(")));
                     ichiranItem.setShikyugaku(shoShiharaiList.get様式金額集計() == null
-                    ? RString.EMPTY : new RString("(").concat(DecimalFormatter.toコンマ区切りRString(
-                            shoShiharaiList.get様式金額集計(), 0)).concat(new RString(")")));
+                    ? new RString(")") : DecimalFormatter.toコンマ区切りRString(
+                            shoShiharaiList.get様式金額集計(), 0).concat(new RString(") ")));
                 }
-                ichiranItem.setBreakKeyFlg(true);
-                ichiranItem.setYubinBango(getEditedYubinNo(shoShiharaiList.get郵便番号()));
-                if (shoShiharaiList.get町域コード() != null) {
-                    ichiranItem.setChoikiCode(shoShiharaiList.get町域コード().value());
-                } else {
-                    ichiranItem.setChoikiCode(RString.EMPTY);
-                }
-                if (shoShiharaiList.get行政区コード() != null) {
-                    ichiranItem.setGyoseikuCode(shoShiharaiList.get行政区コード().value());
-                } else {
-                    ichiranItem.setGyoseikuCode(RString.EMPTY);
-                }
-                if (shoShiharaiList.get氏名５０音カナ() != null) {
-                    ichiranItem.setKanaMeisho(shoShiharaiList.get氏名５０音カナ().value());
-                } else {
-                    ichiranItem.setKanaMeisho(RString.EMPTY);
-                }
-                ichiranItem.setShoKisaiHokenshaNo(shoShiharaiList.get証記載保険者番号().value());
-                ichiranItem.setKetteiTsuchiNo(shoShiharaiList.get決定通知No());
-                ichiranItem.setShinseishaKubun(shoShiharaiList.get申請者区分());
-                ichiranItem.setHihokenshaNo(shoShiharaiList.get被保険者番号().value());
-                ichiranItem.setSeiriNo(shoShiharaiList.get整理番号());
+                set同じIitem(ichiranItem, shoShiharaiList);
             }
             indexKey = key;
             
@@ -186,6 +155,47 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
                 Decimal.ZERO, new RString("不支給計"), 不支給件数, businessList.get(businessList.size() - 1)));
             
         return tsuchiIchiranItemsList;
+    }
+    private void set同じIitem(ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem ichiranItem, ShokanKetteiTsuchiShoShiharai shoShiharaiList) {
+        ichiranItem.setBreakKeyFlg(true);
+        ichiranItem.setYubinBango(getEditedYubinNo(shoShiharaiList.get郵便番号()));
+        if (shoShiharaiList.get町域コード() != null) {
+            ichiranItem.setChoikiCode(shoShiharaiList.get町域コード().value());
+        } else {
+            ichiranItem.setChoikiCode(RString.EMPTY);
+        }
+        if (shoShiharaiList.get行政区コード() != null) {
+            ichiranItem.setGyoseikuCode(shoShiharaiList.get行政区コード().value());
+        } else {
+            ichiranItem.setGyoseikuCode(RString.EMPTY);
+        }
+        if (shoShiharaiList.get氏名５０音カナ() != null) {
+            ichiranItem.setKanaMeisho(shoShiharaiList.get氏名５０音カナ().value());
+        } else {
+            ichiranItem.setKanaMeisho(RString.EMPTY);
+        }
+        ichiranItem.setShoKisaiHokenshaNo(shoShiharaiList.get証記載保険者番号().value());
+        ichiranItem.setKetteiTsuchiNo(shoShiharaiList.get決定通知No());
+        ichiranItem.setShinseishaKubun(shoShiharaiList.get申請者区分());
+        ichiranItem.setHihokenshaNo(shoShiharaiList.get被保険者番号().value());
+        ichiranItem.setSeiriNo(shoShiharaiList.get整理番号());
+    }
+    private void setIem(ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem ichiranItem,
+            List<RString> 出力順, List<RString> 改ページ) {
+        IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
+        ichiranItem.setHokenshaNo(association.get地方公共団体コード().getColumnValue());
+        ichiranItem.setHokenshaName(association.get市町村名());
+        ichiranItem.setShutsuryokujun1(出力順.get(0));
+        ichiranItem.setShutsuryokujun2(出力順.get(1));
+        ichiranItem.setShutsuryokujun3(出力順.get(2));
+        ichiranItem.setShutsuryokujun4(出力順.get(数字_3));
+        ichiranItem.setShutsuryokujun5(出力順.get(数字_4));
+        ichiranItem.setKaipage1(改ページ.get(0));
+        ichiranItem.setKaipage2(改ページ.get(1));
+        ichiranItem.setKaipage3(改ページ.get(2));
+        ichiranItem.setKaipage4(改ページ.get(数字_3));
+        ichiranItem.setKaipage5(改ページ.get(数字_4));
+        ichiranItem.setPrintTimeStamp(get作成日時分秒());
     }
     private ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem set支給不支給計の編集(List<RString> 出力順, List<RString> 改ページ, Decimal 本人支払額集計,
             Decimal 支給金額集計, RString タイトル, int 件数, ShokanKetteiTsuchiShoShiharai shoShiharaiList) {
@@ -207,7 +217,7 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
         ichiranItem.setNinteiKaishibi(タイトル);
         ichiranItem.setUketsukeYMD(new RString(件数).concat(new RString("件数")));
         ichiranItem.setHonjinShiharaigaku(DecimalFormatter.toコンマ区切りRString(本人支払額集計, 0));
-        ichiranItem.setShikyugaku(DecimalFormatter.toコンマ区切りRString(支給金額集計, 0));
+        ichiranItem.setShikyugaku(DecimalFormatter.toコンマ区切りRString(支給金額集計, 0).concat(RString.FULL_SPACE));
         
         ichiranItem.setYubinBango(getEditedYubinNo(shoShiharaiList.get郵便番号()));
         if (shoShiharaiList.get町域コード() != null) {
@@ -243,6 +253,9 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
         ichiranItem.setHihokenshaName(shoShiharaiList.get被保険者氏名());
 
         RString 編集住所 = get編集住所(shoShiharaiList, 帳票制御共通情報);
+        if (編集住所.length() > 数字_20) {
+            編集住所 = 編集住所.substring(0, 数字_19).concat(new RString("＊"));
+        }
         ichiranItem.setJusho(編集住所);
 
         ichiranItem.setYubinBango(getEditedYubinNo(shoShiharaiList.get郵便番号()));
@@ -261,11 +274,12 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
         ichiranItem.setHonjinShiharaigaku(shoShiharaiList.get本人支払額() == null
                 ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get本人支払額(), 0));
         ichiranItem.setShikyugaku(shoShiharaiList.get支給額() == null
-                ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get支給額(), 0));
+                ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get支給額(), 0).concat(RString.FULL_SPACE));
         if (ShikyuFushikyuKubun.支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())) {
-            ichiranItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称());
+            ichiranItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称().concat(new RString("(")));
             ichiranItem.setKingaku(shoShiharaiList.get様式金額集計() == null
-                    ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get様式金額集計(), 0));
+                    ? new RString(") ") : DecimalFormatter.toコンマ区切りRString(
+                            shoShiharaiList.get様式金額集計(), 0).concat(new RString(") ")));
         }
         
         ichiranItem.setTuika(shoShiharaiList.get追加());
@@ -374,7 +388,7 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
      * @param 改ページ 改ページ
      * @param 種類Map 種類Map
      * @param 帳票制御共通情報 帳票制御共通情報
-     * @return List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem>
+     * @return List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> 差止対象者一覧
      */
     public List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem>
             shokanbaraiSashitomeTaishoshaIchiranReportData(
@@ -406,7 +420,6 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             return tsuchiIchiranItemsList;
         }
         int renban = 0;
-        RString hihokenshaNo = RString.EMPTY;
         for (ShokanKetteiTsuchiShoShiharai shoShiharaiList : businessList) {
             ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem ichiranItem = new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem();
             IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
@@ -425,7 +438,6 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
 //            if (!hihokenshaNo.equals(shoShiharaiList.get被保険者番号().value())) {
                 ichiranItem.setRenban(new RString(String.valueOf(++renban)));
 //            }
-            hihokenshaNo = shoShiharaiList.get被保険者番号().value();
             ichiranItem.setPrintTimeStamp(get作成日時分秒());
             ichiranItem.setSeiriNo(shoShiharaiList.get整理番号());
             ichiranItem.setKeteiTsuchiNo(shoShiharaiList.get決定通知No());

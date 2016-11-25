@@ -88,6 +88,8 @@ public final class ShafukuKeigenGakuPanelHandler {
 
     private void initialize法人軽減額リスト(List<ShokanShakaiFukushiHojinKeigengakuResult> 法人軽減額リスト) {
         if (法人軽減額リスト.isEmpty()) {
+            List<dgdShafukukeigenngaku_Row> rowList = new ArrayList<>();
+            div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().setDataSource(rowList);
             return;
         }
         List<dgdShafukukeigenngaku_Row> rowList = new ArrayList<>();
@@ -489,7 +491,7 @@ public final class ShafukuKeigenGakuPanelHandler {
                 && div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue() != null) {
             Decimal 軽減額 = div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue()
                     .multiply(new Decimal(div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai()
-                                    .getDdlKengenritsu().getSelectedValue().toString()));
+                            .getDdlKengenritsu().getSelectedValue().toString()));
             div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().setValue(軽減額);
 
             Decimal 軽減後利用者負担額 = div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue()

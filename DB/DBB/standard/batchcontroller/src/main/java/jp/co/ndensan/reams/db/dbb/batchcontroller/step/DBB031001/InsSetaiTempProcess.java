@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.FukaCalculateSetaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.FukaCalculateTempEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.honnsanteifuka.CreatCalCulateEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -36,7 +35,6 @@ public class InsSetaiTempProcess extends BatchProcessBase<FukaCalculateSetaiEnti
     private TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
     private FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
     private FlexibleYear 調定年度 = FlexibleYear.EMPTY;
-    private HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
     private int index;
 
     @Override
@@ -59,8 +57,7 @@ public class InsSetaiTempProcess extends BatchProcessBase<FukaCalculateSetaiEnti
     protected void process(FukaCalculateSetaiEntity entity) {
         if (通知書番号.equals(entity.getTsuchishoNo())
                 && 賦課年度.equals(entity.getFukaNendo())
-                && 調定年度.equals(entity.getChoteiNendo())
-                && 被保険者番号.equals(entity.get賦課計算中間Entity().getHonSanJon_hihokenshaNo())) {
+                && 調定年度.equals(entity.getChoteiNendo())) {
             賦課計算中間Entity = manager.creat世帯員所得情報Entity(賦課計算中間Entity, entity.get世帯員Entity(), index);
             set区分Key(entity);
         } else {
@@ -86,7 +83,6 @@ public class InsSetaiTempProcess extends BatchProcessBase<FukaCalculateSetaiEnti
         通知書番号 = entity.getTsuchishoNo();
         賦課年度 = entity.getFukaNendo();
         調定年度 = entity.getChoteiNendo();
-        被保険者番号 = entity.get賦課計算中間Entity().getHonSanJon_hihokenshaNo();
     }
 
 }

@@ -373,7 +373,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                 .getTxtRiyoshaFutanAmountMae().setValue(result.get利用者負担額());
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                .setHdnResetServiceYM(result.get開始サービス提供年月().toDateString());
+                .setHdnResetServiceYM(new RString(result.get開始サービス提供年月().toString()));
     }
 
     /**

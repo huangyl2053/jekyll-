@@ -134,7 +134,7 @@ public class RiyojokyoTokeihyoHandler {
         if (旧市町村コード != null && !旧市町村コード.isEmpty()) {
             div.getChikushichosonSelect().set旧市町村コード(旧市町村コード.value());
         }
-        Map<RString, RString> 選択結果 = restoreBatchParameterMap.getParameterValue(Map.class, new RString("sentakuKekkaList"));
+        Map<RString, RString> 選択結果 = restoreBatchParameterMap.getParameterValue(Map.class, new RString("sentakuTaisyoMap"));
         if (選択結果 != null && !選択結果.isEmpty()) {
             div.getChikushichosonSelect().set選択結果(選択結果);
         }
