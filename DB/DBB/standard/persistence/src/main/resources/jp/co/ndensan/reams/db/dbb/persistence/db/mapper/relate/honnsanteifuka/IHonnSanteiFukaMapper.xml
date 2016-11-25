@@ -392,6 +392,7 @@
             ORDER BY "FukaCalculateTemp"."dbT2002_choteiNendo",
                      "FukaCalculateTemp"."dbT2002_fukaNendo",
                      "FukaCalculateTemp"."dbT2002_tsuchishoNo",
+                     "FukaCalculateTemp"."honSanJon_hihokenshaNo",
                      "UrT0508SeikatsuHogoJukyusha"."gyomuCode",
                      "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD",
                      "UrT0526SeikatsuHogoFujoShurui"."fujoShuruiCode",
@@ -594,7 +595,7 @@
             AND "DbT2002Fuka1"."fukaNendo" = #{賦課年度}
             ) AS "DbT2002Fuka"
             ON "DbT2002Fuka"."hihokenshaNo" = B."dbT1001HihokenshaDaicho_hihokenshaNo"
-            ORDER BY "dbT1001HihokenshaDaicho_hihokenshaNo"
+            ORDER BY "dbT1001HihokenshaDaicho_hihokenshaNo", "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD"
     </select>
 
     
@@ -784,6 +785,7 @@
         INNER JOIN
             rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
         ON "HonSanJonTyuShutuTemp"."hihokenshaNo" = "DbT2001ChoshuHoho"."hihokenshaNo"
+        AND "HonSanJonTyuShutuTemp"."fukaNendo" = "DbT2001ChoshuHoho"."fukaNendo"
         LEFT JOIN
             rgdb."DbV2002Fuka" AS "DbT2002Fuka"
         INNER JOIN
@@ -1811,7 +1813,8 @@
         ORDER BY "TmpSetaiShotoku"."hihokenshaNo",
                  "FukaCalculateTemp"."choteiNendo",
                  "FukaCalculateTemp"."fukaNendo",
-                 "FukaCalculateTemp"."tsuchishoNo"
+                 "FukaCalculateTemp"."tsuchishoNo",
+                 "TmpSetaiShotoku"."shikibetsuCode"
     </select>
     
     <sql id="allColumns_SetaiShotoku" >
