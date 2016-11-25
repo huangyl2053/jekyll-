@@ -28,7 +28,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class PrtReportOutputJokenhyoProcess extends SimpleBatchProcessBase {
 
-    private static final RString 定数_出力条件 = new RString("出力条件");
+    private static final RString 減額 = new RString("平準化計算方法(減額)： 年額より４月分を引いた額を５期で割る");
+    private static final RString 増額 = new RString("(増額)：年額より４月分を引いた額を５期で割る");
     private static final RString 定数_出力順 = new RString("出力順");
     private static final RString 出力条件_左括弧 = new RString("【");
     private static final RString 出力条件_右括弧 = new RString("】");
@@ -60,7 +61,8 @@ public class PrtReportOutputJokenhyoProcess extends SimpleBatchProcessBase {
     private void バッチ出力条件リストの出力(FlexibleYear 調定年度, FlexibleYear 賦課年度,
             LasdecCode 市町村コード, RString 市町村名, int ページ数) {
         List<RString> 出力条件リスト = new ArrayList<>();
-        出力条件リスト.add(定数_出力条件);
+        出力条件リスト.add(減額);
+        出力条件リスト.add(増額);
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_調定年度).concat(出力条件_右括弧).concat(
                 調定年度.wareki().toDateString()).concat(年度));
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_賦課年度).concat(出力条件_右括弧).concat(
