@@ -82,7 +82,7 @@ public class JukyushaIdoRenrakuhyoCsvManager {
         RString spoolWorkPath = Path.getTmpDirectoryPath();
         filePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         if (Encode.UTF_8.equals(文字コード)) {
-            入力ファイルパス = Path.combinePath(spoolWorkPath, COPY.concat(filePath));
+            入力ファイルパス = Path.combinePath(spoolWorkPath, COPY.concat(出力ファイル名));
         } else {
             入力ファイルパス = filePath;
         }
