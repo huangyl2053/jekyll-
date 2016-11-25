@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB3150001;
 
-import java.io.Serializable;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.KibetsuChoshyuYuyoKikann;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.ChoshuYuyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigofukachoshuyuyo.KaigoFukaChoshuYuyoParam;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbQuestionMessages;
@@ -127,8 +124,7 @@ public class ChoshuYuyoJuminKihon {
         Code 減免種類コード = handler.load申請情報パネル(徴収猶予の情報);
         ViewStateHolder.put(ViewStateKeys.猶予種類コード, 減免種類コード);
         handler.load決定情報パネル(徴収猶予の情報);
-        List<KibetsuChoshyuYuyoKikann> 期別徴収猶予期間リスト = handler.load普通徴収猶予情報パネル(徴収猶予の情報);
-        ViewStateHolder.put(ViewStateKeys.期別徴収猶予期間リスト, (Serializable) 期別徴収猶予期間リスト);
+        handler.load普通徴収猶予情報パネル(徴収猶予の情報);
         handler.loadパネル状態1(状況, 徴収猶予の情報);
     }
 
@@ -222,8 +218,7 @@ public class ChoshuYuyoJuminKihon {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Code 猶予種類コード = ViewStateHolder.get(ViewStateKeys.猶予種類コード, Code.class);
             Code 取消種類コード = ViewStateHolder.get(ViewStateKeys.取消種類コード, Code.class);
-            List<KibetsuChoshyuYuyoKikann> 期別徴収猶予期間リスト = ViewStateHolder.get(ViewStateKeys.期別徴収猶予期間リスト, List.class);
-            KaigoFukaChoshuYuyoParam 画面情報param = handler.get画面情報param(徴収猶予の情報, 猶予種類コード, 取消種類コード, 期別徴収猶予期間リスト);
+            KaigoFukaChoshuYuyoParam 画面情報param = handler.get画面情報param(徴収猶予の情報, 猶予種類コード, 取消種類コード);
             KaigoFukaChoshuYuyo.createInstance().saveDBDate(徴収猶予の情報, 画面情報param);
             createHandler(div).initialize(徴収猶予の情報.get賦課年度(), 徴収猶予の情報.get調定年度(), 徴収猶予の情報.get通知書番号());
             return ResponseData.of(div).setState(DBB3150001StateName.更新結果確認);
