@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
  *
  * @reamsid_L DBU-4880-100 dingyi
  */
+@SuppressWarnings("checkstyle:illegaltype")
 public class DBM20113ToBsBeanEntity {
 
     private String requestSourceUnitCode;

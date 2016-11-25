@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukarisanteikekkaIchiran.TokubetsuChoshuKarisanteiKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -122,10 +123,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         source.kaipage4 = 改頁List.size() > NUM_3 ? 並び順List.get(NUM_3) : RString.EMPTY;
         source.kaipage5 = 改頁List.size() > NUM_4 ? 並び順List.get(NUM_4) : RString.EMPTY;
         source.listUpper_1 = new RString(String.valueOf(連番));
-        YubinNo 郵便番号 = 特徴仮算定計算後賦課情報Entity.get宛名().getYubinNo();
-        if (郵便番号 != null) {
-            source.listUpper_2 = 郵便番号.value();
-        }
+        set郵便番号(source);
         source.listUpper_3 = 住所編集;
         set行政区(source);
         RString 住民種別コード = 特徴仮算定計算後賦課情報Entity.get宛名().getJuminShubetsuCode();
@@ -136,8 +134,10 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         if (特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード() == null || 特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().isEmpty()) {
             set開始月(source);
         }
-        RString 前年度所得段階 = 特徴仮算定計算後賦課情報Entity.get前年度保険料段階().substring(NUM_0, NUM_2).trimStart(CHAR_0);
-        source.listUpper_8 = 前年度所得段階;
+        if (特徴仮算定計算後賦課情報Entity.get前年度保険料段階() != null && !特徴仮算定計算後賦課情報Entity.get前年度保険料段階().isEmpty()) {
+            RString 前年度所得段階 = 特徴仮算定計算後賦課情報Entity.get前年度保険料段階().substring(NUM_0, NUM_2).trimStart(CHAR_0);
+            source.listUpper_8 = 前年度所得段階;
+        }
         source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(前年度保険料, NUM_0);
         if (特徴仮算定計算後賦課情報Entity.get通知書番号() != null) {
             source.listLower_1 = 特徴仮算定計算後賦課情報Entity.get通知書番号().value();
@@ -147,10 +147,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         } else {
             source.listLower_2 = RString.EMPTY;
         }
-        AtenaMeisho 漢字氏名 = 特徴仮算定計算後賦課情報Entity.get宛名().getKanjiShimei();
-        if (漢字氏名 != null) {
-            source.listLower_3 = 漢字氏名.value();
-        }
+        set漢字氏名(source);
         set特別徴収業務者(source);
         set特別徴収対象年金(source);
         if (特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード() == null || 特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().isEmpty()) {
@@ -163,7 +160,32 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         }
 
         set特別徴収停止事由(source);
+        set氏名５０音カナ(source);
+        source.choshuHoho = 特徴仮算定計算後賦課情報Entity.get徴収方法();
+        source.tokuchoKaisiTuki = 特徴仮算定計算後賦課情報Entity.get特徴開始月();
         return source;
+
+    }
+
+    private void set郵便番号(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        YubinNo 郵便番号 = 特徴仮算定計算後賦課情報Entity.get宛名().getYubinNo();
+        if (郵便番号 != null) {
+            source.listUpper_2 = 郵便番号.value();
+        }
+    }
+
+    private void set漢字氏名(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        AtenaMeisho 漢字氏名 = 特徴仮算定計算後賦課情報Entity.get宛名().getKanjiShimei();
+        if (漢字氏名 != null) {
+            source.listLower_3 = 漢字氏名.value();
+        }
+    }
+
+    private void set氏名５０音カナ(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        AtenaKanaMeisho 氏名カナ = 特徴仮算定計算後賦課情報Entity.get宛名().getKanaMeisho();
+        if (氏名カナ != null && !氏名カナ.isEmpty()) {
+            source.kanaMeisho = 氏名カナ.value();
+        }
 
     }
 

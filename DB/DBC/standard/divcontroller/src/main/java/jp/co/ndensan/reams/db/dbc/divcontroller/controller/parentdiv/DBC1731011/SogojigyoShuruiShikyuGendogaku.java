@@ -40,7 +40,6 @@ public class SogojigyoShuruiShikyuGendogaku {
     private static final RString 修正 = new RString("修正モード");
     private static final RString 削除 = new RString("削除モード");
     private static final RString 前排他キー = new RString("DbT7118SogoJigyoShuruiShikyuGendoGaku");
-    private static final RString 処理完了メッセージ = new RString("更新が完了しました。");
 
     private SogojigyoShuruiShikyuGendogakuHandler getHandler(SogojigyoShuruiShikyuGendogakuDiv div) {
         return new SogojigyoShuruiShikyuGendogakuHandler(div);
@@ -165,8 +164,7 @@ public class SogojigyoShuruiShikyuGendogaku {
             getHandler(div).save(総合事業種類情報, 保存モード, manager);
             setGrid一覧表示(div);
         }
-        div.getKanryoMessagePanel().getCcdKanryoMessage().setMessage(処理完了メッセージ, RString.EMPTY, RString.EMPTY, true);
-        return ResponseData.of(div).setState(DBC1731011StateName.完了状態);
+        return ResponseData.of(div).setState(DBC1731011StateName.初期状態);
     }
 
 }

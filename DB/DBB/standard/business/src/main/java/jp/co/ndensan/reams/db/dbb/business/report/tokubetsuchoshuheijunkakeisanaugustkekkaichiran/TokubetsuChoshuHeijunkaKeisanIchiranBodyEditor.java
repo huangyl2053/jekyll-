@@ -179,9 +179,17 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                     new Code(仮徴収年金コード.substring(NUM_0, NUM_3)), FlexibleDate.getNowDate());
         }
-
+        set賦課市町村コード(source, item);
         set変更後特徴額と普通仮徴収額(item, source);
 
+    }
+
+    private void set賦課市町村コード(TokubetsuChoshuHeijunkaKeisanIchiranSource source, TokuchoHeijyunkaTaishoshaEntity item) {
+        if (item.get賦課市町村コード() != null) {
+            source.shichosonCode = item.get賦課市町村コード().value();
+        } else {
+            source.shichosonCode = RString.EMPTY;
+        }
     }
 
     private void set変更前特徴額(TokubetsuChoshuHeijunkaKeisanIchiranSource source, TokuchoHeijyunkaTaishoshaEntity item) {

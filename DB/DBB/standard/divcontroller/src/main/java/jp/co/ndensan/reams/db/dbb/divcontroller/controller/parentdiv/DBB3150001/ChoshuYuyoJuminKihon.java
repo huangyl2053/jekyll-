@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB3150001;
 
-import java.io.Serializable;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.KibetsuChoshyuYuyoKikann;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.ChoshuYuyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigofukachoshuyuyo.KaigoFukaChoshuYuyoParam;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbQuestionMessages;
@@ -83,21 +80,24 @@ public class ChoshuYuyoJuminKihon {
 
         handler.loadヘッダパネル(識別コード, searchKey);
         int 全賦課履歴データ件数 = handler.load全賦課履歴情報グリッド(被保険者番号, new FukaNendo(賦課年度));
-        if (全賦課履歴データ件数 == ゼロ_定値) {
-            handler.setDisabled制御();
-            handler.loadパネル状態2();
-            handler.set全賦課履歴情報Visible(true);
-            ValidationMessageControlPairs pairs = new ChoshuYuyoJuminKihonValidationHandler(div).賦課情報の存在チェック();
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        } else if (全賦課履歴データ件数 == イチ_定値) {
-            Fuka 賦課基本 = handler.get賦課基本();
-            ChoshuYuyoJoho 徴収猶予の情報 = KaigoFukaChoshuYuyo.createInstance()
-                    .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(), 賦課基本.get通知書番号());
-            load(徴収猶予の情報, div);
-            handler.set全賦課履歴情報Visible(false);
-        } else {
-            handler.loadパネル状態2();
-            handler.set全賦課履歴情報Visible(true);
+        switch (全賦課履歴データ件数) {
+            case ゼロ_定値:
+                handler.setDisabled制御();
+                handler.loadパネル状態2();
+                handler.set全賦課履歴情報Visible(true);
+                ValidationMessageControlPairs pairs = new ChoshuYuyoJuminKihonValidationHandler(div).賦課情報の存在チェック();
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            case イチ_定値:
+                Fuka 賦課基本 = handler.get賦課基本();
+                ChoshuYuyoJoho 徴収猶予の情報 = KaigoFukaChoshuYuyo.createInstance()
+                        .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(), 賦課基本.get通知書番号());
+                load(徴収猶予の情報, div);
+                handler.set全賦課履歴情報Visible(false);
+                break;
+            default:
+                handler.loadパネル状態2();
+                handler.set全賦課履歴情報Visible(true);
+                break;
         }
         return createResponse(div);
     }
@@ -127,8 +127,7 @@ public class ChoshuYuyoJuminKihon {
         Code 減免種類コード = handler.load申請情報パネル(徴収猶予の情報);
         ViewStateHolder.put(ViewStateKeys.猶予種類コード, 減免種類コード);
         handler.load決定情報パネル(徴収猶予の情報);
-        List<KibetsuChoshyuYuyoKikann> 期別徴収猶予期間リスト = handler.load普通徴収猶予情報パネル(徴収猶予の情報);
-        ViewStateHolder.put(ViewStateKeys.期別徴収猶予期間リスト, (Serializable) 期別徴収猶予期間リスト);
+        handler.load普通徴収猶予情報パネル(徴収猶予の情報);
         handler.loadパネル状態1(状況, 徴収猶予の情報);
     }
 
@@ -222,8 +221,7 @@ public class ChoshuYuyoJuminKihon {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Code 猶予種類コード = ViewStateHolder.get(ViewStateKeys.猶予種類コード, Code.class);
             Code 取消種類コード = ViewStateHolder.get(ViewStateKeys.取消種類コード, Code.class);
-            List<KibetsuChoshyuYuyoKikann> 期別徴収猶予期間リスト = ViewStateHolder.get(ViewStateKeys.期別徴収猶予期間リスト, List.class);
-            KaigoFukaChoshuYuyoParam 画面情報param = handler.get画面情報param(徴収猶予の情報, 猶予種類コード, 取消種類コード, 期別徴収猶予期間リスト);
+            KaigoFukaChoshuYuyoParam 画面情報param = handler.get画面情報param(徴収猶予の情報, 猶予種類コード, 取消種類コード);
             KaigoFukaChoshuYuyo.createInstance().saveDBDate(徴収猶予の情報, 画面情報param);
             createHandler(div).initialize(徴収猶予の情報.get賦課年度(), 徴収猶予の情報.get調定年度(), 徴収猶予の情報.get通知書番号());
             return ResponseData.of(div).setState(DBB3150001StateName.更新結果確認);

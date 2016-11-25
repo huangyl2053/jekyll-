@@ -393,11 +393,7 @@ public class TokuteiShinryohiInfoPanelHandler {
         } else {
             div.getBtnTokuteiNyushosha().setDisabled(false);
         }
-        if (ZERO.equals(識別番号管理データ.get高額介護サービス費設定区分())) {
-            div.getBtnKogakuKaigoService().setDisabled(true);
-        } else {
-            div.getBtnKogakuKaigoService().setDisabled(false);
-        }
+        div.getBtnKogakuKaigoService().setDisabled(true);
         if (ZERO.equals(識別番号管理データ.get居宅計画費設定区分())) {
             div.getBtnKyotakuServiceKeikaku().setDisabled(true);
         } else {

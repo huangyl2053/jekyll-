@@ -54,7 +54,7 @@ public class DBC150040_HeikinriyogakuTokeihyoParameter extends BatchParameterBas
     @BatchParameter(key = CHIKUSHITEI, name = "地区指定")
     private RString chikuShitei;
     @BatchParameter(key = SELECTORCHIKULIST, name = "選択地区Map")
-    private Map<String, String> selectorChikulist;
+    private Map<RString, RString> selectorChikulist;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
     private RString shichosonCode;
     @BatchParameter(key = SHICHOSONMEI, name = "市町村名称")
@@ -119,7 +119,7 @@ public class DBC150040_HeikinriyogakuTokeihyoParameter extends BatchParameterBas
             RString kaishiYM,
             RString shuryoYM,
             RString chikuShitei,
-            Map<String, String> 選択地区Map,
+            Map<RString, RString> 選択地区Map,
             RString shichosonCode,
             RString shichosonMei,
             RString kyuShichosonCode,
@@ -189,8 +189,8 @@ public class DBC150040_HeikinriyogakuTokeihyoParameter extends BatchParameterBas
     private List<RString> setselectorChikulist() {
         List<RString> chikulist = new ArrayList<>();
         if (0 < selectorChikulist.size()) {
-            for (String 選択結果 : selectorChikulist.keySet()) {
-                chikulist.add(new RString(選択結果));
+            for (RString 選択結果 : selectorChikulist.keySet()) {
+                chikulist.add(選択結果);
             }
         }
         return chikulist;

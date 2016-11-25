@@ -83,7 +83,7 @@ public class TaishoushaitiranhyouhakkouShori extends BatchKeyBreakBase<Taishoush
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 対象者一覧CSV名);
         business = new KakobunJissekiKihonBusiness();
         連番Map = new HashMap<>();
-        連番Map.put(new RString("連番"), new Integer("1"));
+        連番Map.put(new RString("連番"), Integer.valueOf(1));
     }
 
     @Override

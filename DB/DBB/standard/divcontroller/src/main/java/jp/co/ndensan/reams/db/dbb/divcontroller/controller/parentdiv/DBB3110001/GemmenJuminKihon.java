@@ -82,21 +82,24 @@ public class GemmenJuminKihon {
         handler.loadヘッダパネル(識別コード, searchKey);
         FukaNendo 年度 = 賦課年度 == null || 賦課年度.isEmpty() ? FukaNendo.EMPTY : new FukaNendo(賦課年度);
         int 全賦課履歴データ件数 = handler.load全賦課履歴情報グリッド(被保険者番号, 年度);
-        if (全賦課履歴データ件数 == ゼロ_定値) {
-            handler.loadパネル状態2();
-            handler.set全賦課履歴情報Visible(true);
-            ValidationMessageControlPairs pairs = new GemmenJuminKihonValidationHandler(div).賦課情報の存在チェック();
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        } else if (全賦課履歴データ件数 == イチ_定値) {
-            Fuka 賦課基本 = handler.get賦課基本();
-            NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
-                    .getJokyo(賦課基本.get賦課年度(), 賦課基本.get賦課年度(),
-                            div.getCcdKaigoFukaKihon().get通知書番号(), div.getCcdKaigoFukaKihon().get被保番号());
-            load(減免リスト, div);
-            handler.set全賦課履歴情報Visible(false);
-        } else {
-            handler.loadパネル状態2();
-            handler.set全賦課履歴情報Visible(true);
+        switch (全賦課履歴データ件数) {
+            case ゼロ_定値:
+                handler.loadパネル状態2();
+                handler.set全賦課履歴情報Visible(true);
+                ValidationMessageControlPairs pairs = new GemmenJuminKihonValidationHandler(div).賦課情報の存在チェック();
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            case イチ_定値:
+                Fuka 賦課基本 = handler.get賦課基本();
+                NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
+                        .getJokyo(賦課基本.get賦課年度(), 賦課基本.get賦課年度(),
+                                div.getCcdKaigoFukaKihon().get通知書番号(), div.getCcdKaigoFukaKihon().get被保番号());
+                load(減免リスト, div);
+                handler.set全賦課履歴情報Visible(false);
+                break;
+            default:
+                handler.loadパネル状態2();
+                handler.set全賦課履歴情報Visible(true);
+                break;
         }
         return createResponse(div);
     }

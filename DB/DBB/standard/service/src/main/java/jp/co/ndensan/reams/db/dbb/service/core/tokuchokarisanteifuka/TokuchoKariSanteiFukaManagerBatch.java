@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifuka;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.HokenryoDankaiHantei;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.TsukibetsuHokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
@@ -83,7 +85,6 @@ public class TokuchoKariSanteiFukaManagerBatch {
     private static final RString 文字列_01 = new RString("01");
     private static final RString 文字列_03 = new RString("03");
     private static final RString 文字列_31 = new RString("31");
-    private static final RString 文字列_060 = new RString("060");
     private static final RString 文字列_0000 = new RString("0000");
     private static final ReportId 特別徴収仮算定結果一覧表_帳票分類ID = new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
     private static final ReportId 帳票ID = new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
@@ -434,12 +435,19 @@ public class TokuchoKariSanteiFukaManagerBatch {
         seigyoJoho.setKazeiTorikeshiKazeiKubun(KazeiKubun.toValue(DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課)));
         hokenryoDankaiHanteiParameter.setSeigyoJoho(seigyoJoho);
-        // TODO 呼び出す方法は問題がある
-//        TsukibetsuHokenryoDankai 月別保険料段階 = new HokenryoDankaiHantei().determine月別保険料段階(hokenryoDankaiHanteiParameter);
-//        RString 保険料段階 = 月別保険料段階.get保険料段階04月().edit表示用保険料段階();
-        RString 保険料段階 = 文字列_060;
+        RString 保険料段階 = RString.EMPTY;
+        保険料段階 = set保険料段階(hokenryoDankaiHanteiParameter, 保険料段階);
         set保険料段階(保険料段階, 賦課の情報一時Entity);
         set市町村コード(資格の情報, 賦課の情報一時Entity);
+    }
+
+    private RString set保険料段階(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter, RString 保険料段階) {
+        HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
+        TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine仮算定保険料段階(hokenryoDankaiHanteiParameter);
+        if (月別保険料段階 != null && 月別保険料段階.get保険料段階04月() != null) {
+            保険料段階 = 月別保険料段階.get保険料段階04月();
+        }
+        return 保険料段階;
     }
 
     private void set保険料段階(RString 保険料段階, FukaJohoTempEntity 賦課の情報一時Entity) {
@@ -920,10 +928,9 @@ public class TokuchoKariSanteiFukaManagerBatch {
         seigyoJoho.setKazeiTorikeshiKazeiKubun(KazeiKubun.toValue(DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課)));
         hokenryoDankaiHanteiParameter.setSeigyoJoho(seigyoJoho);
-        // TODO 呼び出す方法は問題がある
-//        TsukibetsuHokenryoDankai 月別保険料段階 = new HokenryoDankaiHantei().determine月別保険料段階(hokenryoDankaiHanteiParameter);
-//        賦課情報Builder.set保険料段階_仮算定時(月別保険料段階.get保険料段階04月().edit表示用保険料段階());
-        賦課情報一時Entity.setHokenryoDankaiKarisanntei(文字列_060);
+        RString 保険料段階 = RString.EMPTY;
+        保険料段階 = set保険料段階(hokenryoDankaiHanteiParameter, 保険料段階);
+        賦課情報一時Entity.setHokenryoDankaiKarisanntei(保険料段階);
         set市町村コード_共通編集(資格の情報, 賦課情報一時Entity);
         賦課情報一時Entity.setHihokenshaNo(資格の情報.get被保険者番号());
         賦課情報一時Entity.setShikibetsuCode(資格の情報.get識別コード());
@@ -1181,6 +1188,8 @@ public class TokuchoKariSanteiFukaManagerBatch {
             entity.setDbV2002Fuka_hokenryoDankai(特徴仮算定計算後賦課情報_特徴停止.get賦課Newest().getHokenryoDankai1());
         }
         entity.setDbV2002Fuka_kakuteiHokenryo(特徴仮算定計算後賦課情報_特徴停止.get賦課Newest().getKakuteiHokenryo());
+        entity.setShutsuryokujunTemp_choshuHoho(RString.EMPTY);
+        entity.setShutsuryokujunTemp_tokuchoKaisiTuki(RString.EMPTY);
     }
 
     /**
@@ -1317,6 +1326,8 @@ public class TokuchoKariSanteiFukaManagerBatch {
         entity.setDbV2002Fuka_hokenryoDankai(特徴仮算定結果情報.get前年度保険料段階());
         entity.setDbV2002Fuka_kakuteiHokenryo(特徴仮算定結果情報.get確定介護保険料_年額());
         entity.setUeT0511_dtTokubetsuChoshuGimushaCode(特徴仮算定結果情報.get特別徴収業務者コード());
+        entity.setShutsuryokujunTemp_choshuHoho(特徴仮算定結果情報.get徴収方法());
+        entity.setShutsuryokujunTemp_tokuchoKaisiTuki(特徴仮算定結果情報.get特徴開始月());
     }
 
     private void set宛名(UaFt200FindShikibetsuTaishoEntity 宛名, TokuchoKariKeisangoFukaTempEntity entity) {
