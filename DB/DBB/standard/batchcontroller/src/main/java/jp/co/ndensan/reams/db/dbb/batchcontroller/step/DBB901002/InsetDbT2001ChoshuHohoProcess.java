@@ -30,7 +30,6 @@ public class InsetDbT2001ChoshuHohoProcess extends BatchProcessBase<DbV2001Chosh
     private NendoKirikaeMybatisParameter parameter;
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
-    private static final YMDHMS EMPTY_YMDHMS = new YMDHMS("");
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.nendokirikae."
             + "INendoKirikaeMapper.select徴収方法Newest");
@@ -138,16 +137,23 @@ public class InsetDbT2001ChoshuHohoProcess extends BatchProcessBase<DbV2001Chosh
             newEntity.setKariNenkinCode(RString.EMPTY);
             newEntity.setKariHosokuM(RString.EMPTY);
         }
+
         if ((RString.isNullOrEmpty(entity.getChoshuHoho3gatsu())
                 || ChoshuHoho.資格なし.getコード().equals(entity.getChoshuHoho3gatsu()))
-                && (null == entity.getTokuchoTeishiNichiji()
-                || EMPTY_YMDHMS.equals(entity.getTokuchoTeishiNichiji()))) {
+                && (null == 特別徴収停止日時 || 特別徴収停止日時.isEmpty())) {
             newEntity = null;
         }
+        徴収方法の編集_資格なし(entity, newEntity);
+        if (null != newEntity) {
+            writer.insert(newEntity);
+        }
+    }
+
+    private void 徴収方法の編集_資格なし(DbV2001ChoshuHohoEntity entity,
+            DbT2001ChoshuHohoEntity newEntity) {
         if ((RString.isNullOrEmpty(entity.getChoshuHoho3gatsu())
                 || ChoshuHoho.資格なし.getコード().equals(entity.getChoshuHoho3gatsu()))
-                && null != entity.getTokuchoTeishiNichiji()
-                && (!EMPTY_YMDHMS.equals(entity.getTokuchoTeishiNichiji()))) {
+                && null != entity.getTokuchoTeishiNichiji() && (!entity.getTokuchoTeishiNichiji().isEmpty())) {
             newEntity.setChoshuHoho4gatsu(ChoshuHoho.資格なし.getコード());
             newEntity.setChoshuHoho5gatsu(ChoshuHoho.資格なし.getコード());
             newEntity.setChoshuHoho6gatsu(ChoshuHoho.資格なし.getコード());
@@ -169,9 +175,6 @@ public class InsetDbT2001ChoshuHohoProcess extends BatchProcessBase<DbV2001Chosh
             newEntity.setKariNenkinNo(RString.EMPTY);
             newEntity.setKariNenkinCode(RString.EMPTY);
             newEntity.setKariHosokuM(RString.EMPTY);
-        }
-        if (null != newEntity) {
-            writer.insert(newEntity);
         }
     }
 }
