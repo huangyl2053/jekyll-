@@ -137,12 +137,9 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
         }
         if (last) {
             if (!資格_賦課_区分) {
-                //計算対象者抽出Entity 1:0  1:1 0:1
                 if (計算対象者抽出Entity.get資格の情報() == null) {
-                    //賦課エラーの対象
                     set賦課情報Error(計算対象者抽出Entity.get賦課の情報());
                 } else if (計算対象者抽出Entity.get賦課の情報() == null) {
-                    // 1:0
                     HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
                     set資格情報Entity(計算対象者抽出Entity.get資格の情報(), tempEntity, myBatisParameter);
                     tempEntity.setChoteiNendo(myBatisParameter.get調定年度());
@@ -151,7 +148,6 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
                     本算定抽出writer.insert(tempEntity);
                     load月別ランク情報();
                 } else {
-                    // 1:1
                     HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
                     set資格情報Entity(計算対象者抽出Entity.get資格の情報(), tempEntity, myBatisParameter);
                     tempEntity.setChoteiNendo(計算対象者抽出Entity.get賦課の情報().getChoteiNendo());
@@ -161,7 +157,6 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
                     load月別ランク情報();
                 }
             } else {
-                //資格の情報List 賦課情報Entity   n:1
                 set資格_賦課_N_1();
                 load月別ランク情報();
             }
@@ -169,7 +164,6 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
         }
 
         if (資格の情報List.get(0) == null) {
-            //賦課エラーの対象
             set賦課情報Error(賦課情報Entity);
             資格_賦課_区分 = false;
             資格の情報List = new ArrayList<>();
@@ -177,7 +171,6 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
             賦課情報Entity = entity.get賦課の情報();
             計算対象者抽出Entity = entity;
         } else if (賦課情報Entity == null || 賦課情報Entity.getTsuchishoNo() == null) {
-            //1:0
             HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
             set資格情報Entity(資格の情報List.get(0), tempEntity, myBatisParameter);
             tempEntity.setChoteiNendo(myBatisParameter.get調定年度());
@@ -185,7 +178,6 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
             tempEntity.setTsuchishoNo(create通知書番号(資格の情報List.get(0).getHihokenshaNo().getColumnValue(), 1));
             本算定抽出writer.insert(tempEntity);
             load月別ランク情報();
-
             資格_賦課_区分 = false;
             資格の情報List = new ArrayList<>();
             資格の情報List.add(entity.get資格の情報());
@@ -193,7 +185,6 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
             計算対象者抽出Entity = entity;
         } else if (entity.get賦課の情報() == null || entity.get賦課の情報().getTsuchishoNo() == null) {
             if (資格の情報List.size() == 1) {
-                //1:1
                 HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
                 set資格情報Entity(資格の情報List.get(0), tempEntity, myBatisParameter);
                 tempEntity.setChoteiNendo(賦課情報Entity.getChoteiNendo());
@@ -203,7 +194,6 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
                 load月別ランク情報();
                 資格_賦課_区分 = false;
             } else {
-                //n:1
                 set資格_賦課_N_1();
                 load月別ランク情報();
                 資格_賦課_区分 = false;
@@ -213,13 +203,11 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
             賦課情報Entity = entity.get賦課の情報();
             計算対象者抽出Entity = entity;
         } else if (賦課情報Entity.getTsuchishoNo().equals(entity.get賦課の情報().getTsuchishoNo())) {
-            //n:1 処理なし
             資格の情報List.add(entity.get資格の情報());
             賦課情報Entity = entity.get賦課の情報();
             計算対象者抽出Entity = entity;
             資格_賦課_区分 = true;
         } else if (資格の情報List.size() == 1) {
-            //1:1
             HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
             set資格情報Entity(資格の情報List.get(0), tempEntity, myBatisParameter);
             tempEntity.setChoteiNendo(賦課情報Entity.getChoteiNendo());
@@ -233,7 +221,6 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
             賦課情報Entity = entity.get賦課の情報();
             計算対象者抽出Entity = entity;
         } else {
-            //n:1
             set資格_賦課_N_1();
             load月別ランク情報();
             資格_賦課_区分 = false;
