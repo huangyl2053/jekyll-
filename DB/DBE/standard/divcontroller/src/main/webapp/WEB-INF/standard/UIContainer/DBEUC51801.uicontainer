@@ -12,40 +12,12 @@
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5100001",
-     "toLayoutTitle": "審査会一覧",
-     "toState": "データ出力_モバイル"
+     "toLayoutName": "DBE5180001",
+     "toLayoutTitle": "介護認定審査会対象データ出力（モバイル）",
+     "toState": "介護認定審査会審査対象データ出力"
     },
     {
      "id": "2",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE5100001",
-     "layoutTitle": "審査会一覧",
-     "eventName": "データ出力を実行する",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5180001",
-     "toLayoutTitle": "介護認定審査会対象データ出力（モバイル）",
-     "toState": "初期状態"
-    },
-    {
-     "id": "3",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE5180001",
-     "layoutTitle": "介護認定審査会対象データ出力（モバイル）",
-     "eventName": "一覧に戻る",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5100001",
-     "toLayoutTitle": "審査会一覧",
-     "toState": "データ出力_モバイル"
-    },
-    {
-     "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5180001",
