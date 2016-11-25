@@ -750,7 +750,6 @@ public class NinteiChosaIraiHandler {
         }
         RDate nowDate = RDate.getNowDate();
         div.getTxthokkoymd().setValue(nowDate);
-        div.getTxtkigenymd().setValue(nowDate);
         createPrintItemList(nowDate);
 
         List<RString> selectedItemList = new ArrayList();
