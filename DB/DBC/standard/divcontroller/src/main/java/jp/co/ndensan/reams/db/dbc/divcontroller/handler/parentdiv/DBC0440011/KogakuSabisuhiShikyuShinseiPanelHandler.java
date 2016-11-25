@@ -200,6 +200,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             高額支給判定結果entity = 高額支給判定結果entity.added();
         } else if (修正モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.modified();
+            高額支給判定結果entity = 高額支給判定結果entity.createBuilderForEdit().set決定通知リアル発行区分(未発行).build();
             高額支給判定結果entity = 高額支給判定結果entity.modified();
             if (result != null && result.get高額介護サービス費支給判定結果Entity() != null) {
                 修正前支給区分 = result.get高額介護サービス費支給判定結果Entity().get支給区分コード();
@@ -251,6 +252,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             高額支給判定結果entity = 高額支給判定結果entity.added();
         } else if (修正モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.modified();
+            高額支給判定結果entity = 高額支給判定結果entity.createBuilderForEdit().set決定通知リアル発行区分(未発行).build();
             高額支給判定結果entity = 高額支給判定結果entity.modified();
             if (result != null && result.get事業高額介護サービス費支給判定結果Entity() != null) {
                 修正前支給区分 = result.get事業高額介護サービス費支給判定結果Entity().get支給区分コード();
