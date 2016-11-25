@@ -128,9 +128,9 @@ public class InsFukaTemp2Process extends BatchProcessBase<FukaJohokeizokuRelateE
             生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
             set生保の情報(生活保護受給者RelateEntity);
             FukaJohoTempEntity 賦課情報一時Entity = new FukaJohoTempEntity();
-            TokuchoKariSanteiFukaManagerBatch.createInstance().modifyFukaJohoCommon(processParameter.get調定年度(), processParameter.get調定日時(),
+            TokuchoKariSanteiFukaManagerBatch.createInstance().createFukaJohoKeizoku(processParameter.get調定年度(), processParameter.get調定日時(),
                     資格の情報, 徴収方法の情報, 生保の情報, 老齢の情報, 前年度生保開始日, 前年度生保廃止日, 前年度老年開始日, 前年度老年廃止日,
-                    前年度世帯課税区分, 前年度課税区分, 前年度合計所得金額, 前年度公的年金収入額, null, 被保険者番号Map, 賦課情報一時Entity);
+                    前年度世帯課税区分, 前年度課税区分, 前年度合計所得金額, 前年度公的年金収入額, null, 被保険者番号Map, 賦課情報一時Entity, 特徴期別金額06);
             set被保険者番号Map(被保険者番号Map, 賦課情報一時Entity);
             tempDbWriter.insert(賦課情報一時Entity);
             set識別コード(entity);
