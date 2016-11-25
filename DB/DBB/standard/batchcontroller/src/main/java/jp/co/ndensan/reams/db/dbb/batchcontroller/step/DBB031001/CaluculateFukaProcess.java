@@ -133,6 +133,7 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
     private FlexibleYear 調定年度 = FlexibleYear.EMPTY;
     private FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
     private TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
+    private boolean 徴収方法の情報_flag = false;
     private int count;
 
     @Override
@@ -558,21 +559,21 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
                     徴収方法の情報, 年額保険料, 資格の情報, dbT7022ShoriDateKanriEntity);
             賦課の情報_更正後 = choteiResult.get賦課情報();
             徴収方法の情報_更正後 = choteiResult.get徴収方法情報();
+            徴収方法の情報_flag = true;
         }
         if (Decimal.ZERO.compareTo(賦課の情報_更正前.get減免額()) == INDEX_0) {
             賦課の情報_更正後 = creat出力対象(賦課年度, 賦課の情報_更正後,
                     賦課の情報_更正前, 調定日時, 徴収方法の情報_更正後, 資格の情報, 口座List, 徴収方法の情報);
             FukaJoho 賦課の情報_設定後 = manager.setChoteiJiyu(賦課の情報_更正前, 賦課の情報_更正後,
                     徴収方法の情報);
-
             DbT2002FukaJohoTempTableEntity fukaJohoTempTableEntity = new DbT2002FukaJohoTempTableEntity();
             fukaJohoTempTableEntity = manager.set一時賦課情報(fukaJohoTempTableEntity, 賦課の情報_設定後);
             fukaWriter.insert(fukaJohoTempTableEntity);
-            if (徴収方法の情報_更正後 != null) {
+            if (徴収方法の情報_flag && 徴収方法の情報_更正後 != null) {
                 DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報_更正後.toEntity();
                 介護徴収方法Writer.insert(dbT2001ChoshuHohoEntity);
             }
-
+            徴収方法の情報_flag = false;
         } else if (Decimal.ZERO.compareTo(賦課の情報_更正前.get減免額()) < INDEX_0) {
             DbT2010FukaErrorListEntity errorListEntity = new DbT2010FukaErrorListEntity();
             errorListEntity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);

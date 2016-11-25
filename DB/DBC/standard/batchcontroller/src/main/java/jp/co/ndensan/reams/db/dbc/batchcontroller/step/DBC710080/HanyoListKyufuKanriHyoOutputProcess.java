@@ -102,7 +102,7 @@ public class HanyoListKyufuKanriHyoOutputProcess extends BatchProcessBase<HanyoL
 
     @Override
     protected void initialize() {
-        if (parameter.get出力順() != 0L) {
+        if (parameter.get出力順() != null) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
                     ReportIdDBC.DBC701008.getReportId(), parameter.get出力順());
