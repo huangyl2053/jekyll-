@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.db.dba.business.core.kaigohokenrenrakuhyo.KogakuKaigo
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenrenrakuhyo.KyojuhiFutanGendogakuKisai;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenrenrakuhyo.KyufuGengakuKisai;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenrenrakuhyo.SyokuhiFutanGendogakuKisai;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbc.definition.core.riyoshafutandankai.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbu.business.core.renrakuhyodatacreator.FutangakuGengakuBusiness;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0070011.RenrakuhyoDataCreatorDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0070011.dgKaigoHokenryoGaitosha_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0070011.dgKaigoHokenryo_Row;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.business.core.view.HihokenshaDaichoAlive;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShiharaiHohoHenko;

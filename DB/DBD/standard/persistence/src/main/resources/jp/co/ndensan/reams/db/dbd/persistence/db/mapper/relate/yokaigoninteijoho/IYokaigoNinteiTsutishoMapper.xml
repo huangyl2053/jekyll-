@@ -155,12 +155,12 @@
         <id column="dbT7022ShoriDateKanri_shoriEdaban" />
         <id column="dbT7022ShoriDateKanri_nendo" />
         <id column="dbT7022ShoriDateKanri_nendoNaiRenban" />
-        <association property="entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"/>
+        <association property="entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"/>
     </resultMap>
 
     <select id="get一括発行データ" resultOrdered="true" resultMap="ResultMap_IkkatsuHakkoEntity" fetchSize="500">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri"/>
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri"/>
         FROM (
         SELECT
         "DbT7022ShoriDateKanri"."subGyomuCode" as "subGyomuCode"

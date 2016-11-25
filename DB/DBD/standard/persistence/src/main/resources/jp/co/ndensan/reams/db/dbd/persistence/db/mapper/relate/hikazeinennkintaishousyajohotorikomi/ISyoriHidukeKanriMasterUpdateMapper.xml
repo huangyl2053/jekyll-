@@ -8,14 +8,14 @@ and open the template in the editor.
 -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazeinennkintaishousyajohotorikomi.ISyoriHidukeKanriMasterUpdateMapper">
     <select resultOrdered="true" id="get処理日付管理マスタを更新する"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity"
             fetchSize="500">
         SELECT
-            処理日付管理マスタ.*
+        処理日付管理マスタ.*
         FROM
-            rgdb."DbT7022ShoriDateKanri" AS 処理日付管理マスタ
+        rgdb."DbT7022ShoriDateKanri" AS 処理日付管理マスタ
         WHERE
-            処理日付管理マスタ."subGyomuCode" = 'DBD'
+        処理日付管理マスタ."subGyomuCode" = 'DBD'
         AND 処理日付管理マスタ."shichosonCode" = #{保険者情報_保険者番号}
         AND 処理日付管理マスタ."shoriName" = #{処理名}
         AND 処理日付管理マスタ."shoriEdaban" = '2'

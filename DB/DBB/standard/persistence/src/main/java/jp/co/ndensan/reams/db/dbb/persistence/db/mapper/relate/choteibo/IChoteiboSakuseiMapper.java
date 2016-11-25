@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.SaishutsuKampuEntity
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.SonotaBubunDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.TokuchoKibetusDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.ZengatsuDankaiDataEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 調定簿作成のマッパーインタフェースです。

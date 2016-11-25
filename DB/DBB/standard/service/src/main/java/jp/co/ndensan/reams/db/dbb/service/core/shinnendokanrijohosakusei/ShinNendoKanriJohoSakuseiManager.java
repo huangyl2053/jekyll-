@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.shinnendokanrijohosakusei.Shi
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shinnendokanrijohosakusei.IShinNendoKanriJohoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.shinnendokanrijohosakuseifinder.ShinNendoKanriJohoSakuseiFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;

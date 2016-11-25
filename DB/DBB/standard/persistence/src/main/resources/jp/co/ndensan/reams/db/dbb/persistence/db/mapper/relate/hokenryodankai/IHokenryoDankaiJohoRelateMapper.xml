@@ -16,7 +16,7 @@
         DbT2011RankJoho.*,
         DbT2012HokenryoRank.*
         FROM
-        (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.noDeleted_DbT2013HokenryoDankai" />) AS DbT2013HokenryoDankai
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.noDeleted_DbT2013HokenryoDankai" />) AS DbT2013HokenryoDankai
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2011RankJohoMapper.noDeleted_DbT2011RankJoho" />) AS DbT2011RankJoho
         ON
@@ -40,7 +40,7 @@
     <resultMap id="resultMap_HokenryoDankaiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.hokenryodankai.HokenryoDankaiJohoRelateEntity" autoMapping="true">
         <id property="保険料段階Entity.fukaNendo" column="dbT2013HokenryoDankai_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="保険料段階Entity.rankuKubun" column="dbT2013HokenryoDankai_rankuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <association property="保険料段階Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.ResultMap_DbT2013HokenryoDankaiEntity"/>
+        <association property="保険料段階Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.ResultMap_DbT2013HokenryoDankaiEntity"/>
         <collection property="ランク情報Entity" resultMap="resultMap_RankJohoEntity"/>
     </resultMap>
 

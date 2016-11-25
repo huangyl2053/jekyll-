@@ -4,28 +4,28 @@
 <!-- @reamsid_L DBB-0890-040 xicongwang -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.karisanteiidotsuchisho.IKarisanteiIdoFukaMapper">
-    
-    <select id="select最新調定日時" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+
+    <select id="select最新調定日時" resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity"
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
-            MAX("kijunTimestamp") as "kijunTimestamp"
+        MAX("kijunTimestamp") as "kijunTimestamp"
         FROM
-            rgdb."DbT7022ShoriDateKanri"
-        WHERE 
-           "subGyomuCode" = 'DBB'
-            AND "nendo" = #{調定年度}
-            AND "shoriName" = '仮算定異動賦課'
-          
+        rgdb."DbT7022ShoriDateKanri"
+        WHERE
+        "subGyomuCode" = 'DBB'
+        AND "nendo" = #{調定年度}
+        AND "shoriName" = '仮算定異動賦課'
+
     </select>
- 
+
     <delete id="drop計算後情報中間一時">
         DROP TABLE "KeisanTyukanTemp"
     </delete>
-          
+
     <delete id="drop計算後情報一時">
         DROP TABLE "DbT2015KeisangoJohoTemp"
     </delete>
-          
+
     <delete id="clear賦課情報一時テーブル">
         DELETE FROM "TmpFukaInfo"
     </delete>
@@ -43,469 +43,469 @@
         <association property="納組" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.nokumiResult"/>
         <association property="特定口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
     </resultMap>
-            
+
     <select id="select計算後情報" resultMap="resultMap_dbT2015KeisangoJohoTemp"
-     parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdofukaJohoTempParameter"
-     fetchSize="500" resultOrdered="true">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdofukaJohoTempParameter"
+            fetchSize="500" resultOrdered="true">
         WITH master AS (
         SELECT
-            <include refid="allColumns_DbT2015KeisangoJoho" />,
-            年金特徴回付情報.*
+        <include refid="allColumns_DbT2015KeisangoJoho" />,
+        年金特徴回付情報.*
         FROM
-            rgdb."DbT2015KeisangoJoho" AS 計算後情報
+        rgdb."DbT2015KeisangoJoho" AS 計算後情報
         INNER JOIN
-            rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
-              ON 計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
-              AND 計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
-              AND 計算後情報."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
-              AND 年金特徴回付情報."gyomuCode" = 'DB'
-              AND 年金特徴回付情報."tsuchiNaiyoCode" in (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
-              AND 年金特徴回付情報."shoriNendo" = #{調定年度前年}
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+        ON 計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
+        AND 計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
+        AND 計算後情報."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
+        AND 年金特徴回付情報."gyomuCode" = 'DB'
+        AND 年金特徴回付情報."tsuchiNaiyoCode" in (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
+        AND 年金特徴回付情報."shoriNendo" = #{調定年度前年}
         WHERE
-            計算後情報."choteiNendo" = #{調定年度}
-            AND 計算後情報."fukaNendo" = #{賦課年度}
-            AND 計算後情報."koseiZengoKubun" = '2'
-            AND 計算後情報."sakuseiShoriName" = #{作成処理名}
-            AND 計算後情報."choteiNichiji" = #{調定日時}
+        計算後情報."choteiNendo" = #{調定年度}
+        AND 計算後情報."fukaNendo" = #{賦課年度}
+        AND 計算後情報."koseiZengoKubun" = '2'
+        AND 計算後情報."sakuseiShoriName" = #{作成処理名}
+        AND 計算後情報."choteiNichiji" = #{調定日時}
         )
-        SELECT    
-             master.*,
-             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
-             <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi"/>,
-             koza.*
-        FROM 
-             master 
-        INNER JOIN 
-            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-                   '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
-                   (
-                    SELECT
-                        ARRAY_AGG(CAST (master."dbT2015KeisangoJoho_shikibetsuCode" AS TEXT))
-                    FROM
-                        master
-                   )) AS "ShikibetsuTaisho"
-              ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
+        <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi"/>,
+        koza.*
+        FROM
+        master
+        INNER JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+        (
+        SELECT
+        ARRAY_AGG(CAST (master."dbT2015KeisangoJoho_shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )) AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
-             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
-              ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+        ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
-            rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
-             ON "Nokumi"."CaT0714shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
+        ON "Nokumi"."CaT0714shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
-             ON koza."uaT0310Koza_shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
+        ON koza."uaT0310Koza_shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
     </select>
 
     <select id="select計算後情報一時"  resultMap="resultMap_dbT2015KeisangoJohoTemp"
-     parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdofukaJohoTempParameter"
-     fetchSize="500" resultOrdered="true">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdofukaJohoTempParameter"
+            fetchSize="500" resultOrdered="true">
         WITH master AS (
         SELECT
-            <include refid="allColumns_DbT2015KeisangoJoho" />,
-            年金特徴回付情報.*
+        <include refid="allColumns_DbT2015KeisangoJoho" />,
+        年金特徴回付情報.*
         FROM
-            "DbT2015KeisangoJohoTemp" AS 計算後情報
+        "DbT2015KeisangoJohoTemp" AS 計算後情報
         INNER JOIN
-              rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
-              ON 計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
-              AND 計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
-              AND 計算後情報."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
-              AND 年金特徴回付情報."gyomuCode" = 'DB'
-              AND 年金特徴回付情報."tsuchiNaiyoCode" in (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
-              AND 年金特徴回付情報."shoriNendo" = #{調定年度前年}
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+        ON 計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
+        AND 計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
+        AND 計算後情報."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
+        AND 年金特徴回付情報."gyomuCode" = 'DB'
+        AND 年金特徴回付情報."tsuchiNaiyoCode" in (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
+        AND 年金特徴回付情報."shoriNendo" = #{調定年度前年}
         WHERE
-            計算後情報."choteiNendo" = #{調定年度}
-            AND 計算後情報."fukaNendo" = #{賦課年度}
-            AND 計算後情報."koseiZengoKubun" = '2'
+        計算後情報."choteiNendo" = #{調定年度}
+        AND 計算後情報."fukaNendo" = #{賦課年度}
+        AND 計算後情報."koseiZengoKubun" = '2'
         )
-        SELECT    
-             master.*,
-             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
-             <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi"/>,
-             koza.*
-        FROM 
-             master 
-        INNER JOIN 
-            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-                   '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
-                    (
-                    SELECT
-                        ARRAY_AGG(CAST (master."dbT2015KeisangoJoho_shikibetsuCode" AS TEXT))
-                    FROM
-                        master
-                   )) AS "ShikibetsuTaisho"
-              ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
+        <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi"/>,
+        koza.*
+        FROM
+        master
+        INNER JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+        (
+        SELECT
+        ARRAY_AGG(CAST (master."dbT2015KeisangoJoho_shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )) AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
-             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
-              ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+        ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
-            rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
-             ON "Nokumi"."CaT0714shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
+        ON "Nokumi"."CaT0714shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
-             ON koza."uaT0310Koza_shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
+        ON koza."uaT0310Koza_shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
     </select>
 
     <update id="update異動賦課情報一時テーブルFROM計算後情報一時">
         UPDATE "TmpFukaInfo" AS A
-        SET 
-            "choteiNendo" = B."choteiNendo",
-            "fukaNendo" = B."fukaNendo",
-            "tsuchishoNo" = B."tsuchishoNo",
-            "koseiZengoKubun" = B."koseiZengoKubun",
-            "sakuseiShoriName" = B."sakuseiShoriName",
-            "fukaRirekiNo" = B."fukaRirekiNo",
-            "hihokenshaNo" = B."hihokenshaNo",
-            "shikibetsuCode" = B."shikibetsuCode",
-            "setaiCode" = B."setaiCode",
-            "setaiInsu" = B."setaiInsu",
-            "shikakuShutokuYMD" = B."shikakuShutokuYMD",
-            "shikakuShutokuJiyu" = B."shikakuShutokuJiyu",
-            "shikakuSoshitsuYMD" = B."shikakuSoshitsuYMD",
-            "shikakuSoshitsuJiyu" = B."shikakuSoshitsuJiyu",
-            "seihofujoShurui" = B."seihofujoShurui",
-            "seihoKaishiYMD" = B."seihoKaishiYMD",
-            "seihoHaishiYMD" = B."seihoHaishiYMD",
-            "ronenKaishiYMD" = B."ronenKaishiYMD",
-            "ronenHaishiYMD" = B."ronenHaishiYMD",
-            "fukaYMD" = B."fukaYMD",
-            "kazeiKubun" = B."kazeiKubun",
-            "setaikazeiKubun" = B."setaikazeiKubun",
-            "gokeiShotokuGaku" = B."gokeiShotokuGaku",
-            "nenkinShunyuGaku" = B."nenkinShunyuGaku",
-            "hokenryoDankai" = B."hokenryoDankai",
-            "hokenryoDankai1" = B."hokenryoDankai1",
-            "nengakuHokenryo1" = B."nengakuHokenryo1",
-            "tsukiwariStartYM1" = B."tsukiwariStartYM1",
-            "tsukiwariEndYM1" = B."tsukiwariEndYM1",
-            "hokenryoDankai2" = B."hokenryoDankai2",
-            "nengakuHokenryo2" = B."nengakuHokenryo2",
-            "tsukiwariStartYM2" = B."tsukiwariStartYM2",
-            "tsukiwariEndYM2" = B."tsukiwariEndYM2",
-            "choteiNichiji" = B."choteiNichiji",
-            "choteiJiyu1" = B."choteiJiyu1",
-            "choteiJiyu2" = B."choteiJiyu2",
-            "choteiJiyu3" = B."choteiJiyu3",
-            "choteiJiyu4" = B."choteiJiyu4",
-            "koseiM" = B."koseiM",
-            "gemmenMaeHokenryo" = B."gemmenMaeHokenryo",
-            "gemmenGaku" = B."gemmenGaku",
-            "kakuteiHokenryo" = B."kakuteiHokenryo",
-            "hokenryoDankaiKarisanntei" = B."hokenryoDankaiKarisanntei",
-            "choshuHohoRirekiNo" = B."choshuHohoRirekiNo",
-            "idoKijunNichiji" = B."idoKijunNichiji",
-            "kozaKubun" = B."kozaKubun",
-            "kyokaisoKubun" = B."kyokaisoKubun",
-            "shokkenKubun" = B."shokkenKubun",
-            "fukaShichosonCode" = B."fukaShichosonCode",
-            "tkSaishutsuKampuGaku" = B."tkSaishutsuKampuGaku",
-            "fuSaishutsuKampuGaku" = B."fuSaishutsuKampuGaku",
-            "tkKibetsuGaku01" = B."tkKibetsuGaku01",
-            "tkKibetsuGaku02" = B."tkKibetsuGaku02",
-            "tkKibetsuGaku03" = B."tkKibetsuGaku03",
-            "tkKibetsuGaku04" = B."tkKibetsuGaku04",
-            "tkKibetsuGaku05" = B."tkKibetsuGaku05",
-            "tkKibetsuGaku06" = B."tkKibetsuGaku06",
-            "fuKibetsuGaku01" = B."fuKibetsuGaku01",
-            "fuKibetsuGaku02" = B."fuKibetsuGaku02",
-            "fuKibetsuGaku03" = B."fuKibetsuGaku03",
-            "fuKibetsuGaku04" = B."fuKibetsuGaku04",
-            "fuKibetsuGaku05" = B."fuKibetsuGaku05",
-            "fuKibetsuGaku06" = B."fuKibetsuGaku06",
-            "fuKibetsuGaku07" = B."fuKibetsuGaku07",
-            "fuKibetsuGaku08" = B."fuKibetsuGaku08",
-            "fuKibetsuGaku09" = B."fuKibetsuGaku09",
-            "fuKibetsuGaku10" = B."fuKibetsuGaku10",
-            "fuKibetsuGaku11" = B."fuKibetsuGaku11",
-            "fuKibetsuGaku12" = B."fuKibetsuGaku12",
-            "fuKibetsuGaku13" = B."fuKibetsuGaku13",
-            "fuKibetsuGaku14" = B."fuKibetsuGaku14",
-            "choshuHoho4gatsu" = B."choshuHoho4gatsu",
-            "choshuHoho5gatsu" = B."choshuHoho5gatsu",
-            "choshuHoho6gatsu" = B."choshuHoho6gatsu",
-            "choshuHoho7gatsu" = B."choshuHoho7gatsu",
-            "choshuHoho8gatsu" = B."choshuHoho8gatsu",
-            "choshuHoho9gatsu" = B."choshuHoho9gatsu",
-            "choshuHoho10gatsu" = B."choshuHoho10gatsu",
-            "choshuHoho11gatsu" = B."choshuHoho11gatsu",
-            "choshuHoho12gatsu" = B."choshuHoho12gatsu",
-            "choshuHoho1gatsu" = B."choshuHoho1gatsu",
-            "choshuHoho2gatsu" = B."choshuHoho2gatsu",
-            "choshuHoho3gatsu" = B."choshuHoho3gatsu",
-            "choshuHohoYoku4gatsu" = B."choshuHohoYoku4gatsu",
-            "choshuHohoYoku5gatsu" = B."choshuHohoYoku5gatsu",
-            "choshuHohoYoku6gatsu" = B."choshuHohoYoku6gatsu",
-            "choshuHohoYoku7gatsu" = B."choshuHohoYoku7gatsu",
-            "choshuHohoYoku8gatsu" = B."choshuHohoYoku8gatsu",
-            "choshuHohoYoku9gatsu" = B."choshuHohoYoku9gatsu",
-            "kariNenkinNo" = B."kariNenkinNo",
-            "kariNenkinCode" = B."kariNenkinCode",
-            "kariHosokuM" = B."kariHosokuM",
-            "honNenkinNo" = B."honNenkinNo",
-            "honNenkinCode" = B."honNenkinCode",
-            "honHosokuM" = B."honHosokuM",
-            "yokunendoKariNenkinNo" = B."yokunendoKariNenkinNo",
-            "yokunendoKariNenkinCode" = B."yokunendoKariNenkinCode",
-            "yokunendoKariHosokuM" = B."yokunendoKariHosokuM",
-            "iraiSohuzumiFlag" = B."iraiSohuzumiFlag",
-            "tsuikaIraiSohuzumiFlag" = B."tsuikaIraiSohuzumiFlag",
-            "tokuchoTeishiNichiji" = B."tokuchoTeishiNichiji",
-            "tokuchoTeishiJiyuCode" = B."tokuchoTeishiJiyuCode",
-            "tkShunyuGaku01" = B."tkShunyuGaku01",
-            "tkShunyuGaku02" = B."tkShunyuGaku02",
-            "tkShunyuGaku03" = B."tkShunyuGaku03",
-            "tkShunyuGaku04" = B."tkShunyuGaku04",
-            "tkShunyuGaku05" = B."tkShunyuGaku05",
-            "tkShunyuGaku06" = B."tkShunyuGaku06",
-            "fuShunyuGaku01" = B."fuShunyuGaku01",
-            "fuShunyuGaku02" = B."fuShunyuGaku02",
-            "fuShunyuGaku03" = B."fuShunyuGaku03",
-            "fuShunyuGaku04" = B."fuShunyuGaku04",
-            "fuShunyuGaku05" = B."fuShunyuGaku05",
-            "fuShunyuGaku06" = B."fuShunyuGaku06",
-            "fuShunyuGaku07" = B."fuShunyuGaku07",
-            "fuShunyuGaku08" = B."fuShunyuGaku08",
-            "fuShunyuGaku09" = B."fuShunyuGaku09",
-            "fuShunyuGaku10" = B."fuShunyuGaku10",
-            "fuShunyuGaku11" = B."fuShunyuGaku11",
-            "fuShunyuGaku12" = B."fuShunyuGaku12",
-            "fuShunyuGaku13" = B."fuShunyuGaku13",
-            "fuShunyuGaku14" = B."fuShunyuGaku14",
-            "更正前情報有無区分" = '1'
+        SET
+        "choteiNendo" = B."choteiNendo",
+        "fukaNendo" = B."fukaNendo",
+        "tsuchishoNo" = B."tsuchishoNo",
+        "koseiZengoKubun" = B."koseiZengoKubun",
+        "sakuseiShoriName" = B."sakuseiShoriName",
+        "fukaRirekiNo" = B."fukaRirekiNo",
+        "hihokenshaNo" = B."hihokenshaNo",
+        "shikibetsuCode" = B."shikibetsuCode",
+        "setaiCode" = B."setaiCode",
+        "setaiInsu" = B."setaiInsu",
+        "shikakuShutokuYMD" = B."shikakuShutokuYMD",
+        "shikakuShutokuJiyu" = B."shikakuShutokuJiyu",
+        "shikakuSoshitsuYMD" = B."shikakuSoshitsuYMD",
+        "shikakuSoshitsuJiyu" = B."shikakuSoshitsuJiyu",
+        "seihofujoShurui" = B."seihofujoShurui",
+        "seihoKaishiYMD" = B."seihoKaishiYMD",
+        "seihoHaishiYMD" = B."seihoHaishiYMD",
+        "ronenKaishiYMD" = B."ronenKaishiYMD",
+        "ronenHaishiYMD" = B."ronenHaishiYMD",
+        "fukaYMD" = B."fukaYMD",
+        "kazeiKubun" = B."kazeiKubun",
+        "setaikazeiKubun" = B."setaikazeiKubun",
+        "gokeiShotokuGaku" = B."gokeiShotokuGaku",
+        "nenkinShunyuGaku" = B."nenkinShunyuGaku",
+        "hokenryoDankai" = B."hokenryoDankai",
+        "hokenryoDankai1" = B."hokenryoDankai1",
+        "nengakuHokenryo1" = B."nengakuHokenryo1",
+        "tsukiwariStartYM1" = B."tsukiwariStartYM1",
+        "tsukiwariEndYM1" = B."tsukiwariEndYM1",
+        "hokenryoDankai2" = B."hokenryoDankai2",
+        "nengakuHokenryo2" = B."nengakuHokenryo2",
+        "tsukiwariStartYM2" = B."tsukiwariStartYM2",
+        "tsukiwariEndYM2" = B."tsukiwariEndYM2",
+        "choteiNichiji" = B."choteiNichiji",
+        "choteiJiyu1" = B."choteiJiyu1",
+        "choteiJiyu2" = B."choteiJiyu2",
+        "choteiJiyu3" = B."choteiJiyu3",
+        "choteiJiyu4" = B."choteiJiyu4",
+        "koseiM" = B."koseiM",
+        "gemmenMaeHokenryo" = B."gemmenMaeHokenryo",
+        "gemmenGaku" = B."gemmenGaku",
+        "kakuteiHokenryo" = B."kakuteiHokenryo",
+        "hokenryoDankaiKarisanntei" = B."hokenryoDankaiKarisanntei",
+        "choshuHohoRirekiNo" = B."choshuHohoRirekiNo",
+        "idoKijunNichiji" = B."idoKijunNichiji",
+        "kozaKubun" = B."kozaKubun",
+        "kyokaisoKubun" = B."kyokaisoKubun",
+        "shokkenKubun" = B."shokkenKubun",
+        "fukaShichosonCode" = B."fukaShichosonCode",
+        "tkSaishutsuKampuGaku" = B."tkSaishutsuKampuGaku",
+        "fuSaishutsuKampuGaku" = B."fuSaishutsuKampuGaku",
+        "tkKibetsuGaku01" = B."tkKibetsuGaku01",
+        "tkKibetsuGaku02" = B."tkKibetsuGaku02",
+        "tkKibetsuGaku03" = B."tkKibetsuGaku03",
+        "tkKibetsuGaku04" = B."tkKibetsuGaku04",
+        "tkKibetsuGaku05" = B."tkKibetsuGaku05",
+        "tkKibetsuGaku06" = B."tkKibetsuGaku06",
+        "fuKibetsuGaku01" = B."fuKibetsuGaku01",
+        "fuKibetsuGaku02" = B."fuKibetsuGaku02",
+        "fuKibetsuGaku03" = B."fuKibetsuGaku03",
+        "fuKibetsuGaku04" = B."fuKibetsuGaku04",
+        "fuKibetsuGaku05" = B."fuKibetsuGaku05",
+        "fuKibetsuGaku06" = B."fuKibetsuGaku06",
+        "fuKibetsuGaku07" = B."fuKibetsuGaku07",
+        "fuKibetsuGaku08" = B."fuKibetsuGaku08",
+        "fuKibetsuGaku09" = B."fuKibetsuGaku09",
+        "fuKibetsuGaku10" = B."fuKibetsuGaku10",
+        "fuKibetsuGaku11" = B."fuKibetsuGaku11",
+        "fuKibetsuGaku12" = B."fuKibetsuGaku12",
+        "fuKibetsuGaku13" = B."fuKibetsuGaku13",
+        "fuKibetsuGaku14" = B."fuKibetsuGaku14",
+        "choshuHoho4gatsu" = B."choshuHoho4gatsu",
+        "choshuHoho5gatsu" = B."choshuHoho5gatsu",
+        "choshuHoho6gatsu" = B."choshuHoho6gatsu",
+        "choshuHoho7gatsu" = B."choshuHoho7gatsu",
+        "choshuHoho8gatsu" = B."choshuHoho8gatsu",
+        "choshuHoho9gatsu" = B."choshuHoho9gatsu",
+        "choshuHoho10gatsu" = B."choshuHoho10gatsu",
+        "choshuHoho11gatsu" = B."choshuHoho11gatsu",
+        "choshuHoho12gatsu" = B."choshuHoho12gatsu",
+        "choshuHoho1gatsu" = B."choshuHoho1gatsu",
+        "choshuHoho2gatsu" = B."choshuHoho2gatsu",
+        "choshuHoho3gatsu" = B."choshuHoho3gatsu",
+        "choshuHohoYoku4gatsu" = B."choshuHohoYoku4gatsu",
+        "choshuHohoYoku5gatsu" = B."choshuHohoYoku5gatsu",
+        "choshuHohoYoku6gatsu" = B."choshuHohoYoku6gatsu",
+        "choshuHohoYoku7gatsu" = B."choshuHohoYoku7gatsu",
+        "choshuHohoYoku8gatsu" = B."choshuHohoYoku8gatsu",
+        "choshuHohoYoku9gatsu" = B."choshuHohoYoku9gatsu",
+        "kariNenkinNo" = B."kariNenkinNo",
+        "kariNenkinCode" = B."kariNenkinCode",
+        "kariHosokuM" = B."kariHosokuM",
+        "honNenkinNo" = B."honNenkinNo",
+        "honNenkinCode" = B."honNenkinCode",
+        "honHosokuM" = B."honHosokuM",
+        "yokunendoKariNenkinNo" = B."yokunendoKariNenkinNo",
+        "yokunendoKariNenkinCode" = B."yokunendoKariNenkinCode",
+        "yokunendoKariHosokuM" = B."yokunendoKariHosokuM",
+        "iraiSohuzumiFlag" = B."iraiSohuzumiFlag",
+        "tsuikaIraiSohuzumiFlag" = B."tsuikaIraiSohuzumiFlag",
+        "tokuchoTeishiNichiji" = B."tokuchoTeishiNichiji",
+        "tokuchoTeishiJiyuCode" = B."tokuchoTeishiJiyuCode",
+        "tkShunyuGaku01" = B."tkShunyuGaku01",
+        "tkShunyuGaku02" = B."tkShunyuGaku02",
+        "tkShunyuGaku03" = B."tkShunyuGaku03",
+        "tkShunyuGaku04" = B."tkShunyuGaku04",
+        "tkShunyuGaku05" = B."tkShunyuGaku05",
+        "tkShunyuGaku06" = B."tkShunyuGaku06",
+        "fuShunyuGaku01" = B."fuShunyuGaku01",
+        "fuShunyuGaku02" = B."fuShunyuGaku02",
+        "fuShunyuGaku03" = B."fuShunyuGaku03",
+        "fuShunyuGaku04" = B."fuShunyuGaku04",
+        "fuShunyuGaku05" = B."fuShunyuGaku05",
+        "fuShunyuGaku06" = B."fuShunyuGaku06",
+        "fuShunyuGaku07" = B."fuShunyuGaku07",
+        "fuShunyuGaku08" = B."fuShunyuGaku08",
+        "fuShunyuGaku09" = B."fuShunyuGaku09",
+        "fuShunyuGaku10" = B."fuShunyuGaku10",
+        "fuShunyuGaku11" = B."fuShunyuGaku11",
+        "fuShunyuGaku12" = B."fuShunyuGaku12",
+        "fuShunyuGaku13" = B."fuShunyuGaku13",
+        "fuShunyuGaku14" = B."fuShunyuGaku14",
+        "更正前情報有無区分" = '1'
         FROM "DbT2015KeisangoJohoTemp" AS B
         WHERE A."dbT2015KeisangoJoho_choteiNendo" = B."choteiNendo"
-             AND A."dbT2015KeisangoJoho_fukaNendo" = B."fukaNendo"
-             AND A."dbT2015KeisangoJoho_tsuchishoNo" = B."tsuchishoNo"
-             AND B."koseiZengoKubun" = '1'
+        AND A."dbT2015KeisangoJoho_fukaNendo" = B."fukaNendo"
+        AND A."dbT2015KeisangoJoho_tsuchishoNo" = B."tsuchishoNo"
+        AND B."koseiZengoKubun" = '1'
     </update>
 
     <update id="update異動賦課情報一時テーブルFROM計算後情報">
         UPDATE "TmpFukaInfo" AS A
-        SET 
-            "insertDantaiCd" = B."insertDantaiCd",
-            "insertTimestamp" = B."insertTimestamp",
-            "insertReamsLoginId" = B."insertReamsLoginId",
-            "insertContextId" = B."insertContextId",
-            "isDeleted" = B."isDeleted",
-            "updateCount" = B."updateCount",
-            "lastUpdateTimestamp" = B."lastUpdateTimestamp",
-            "lastUpdateReamsLoginId" = B."lastUpdateReamsLoginId",
-            "choteiNendo" = B."choteiNendo",
-            "fukaNendo" = B."fukaNendo",
-            "tsuchishoNo" = B."tsuchishoNo",
-            "koseiZengoKubun" = B."koseiZengoKubun",
-            "sakuseiShoriName" = B."sakuseiShoriName",
-            "fukaRirekiNo" = B."fukaRirekiNo",
-            "hihokenshaNo" = B."hihokenshaNo",
-            "shikibetsuCode" = B."shikibetsuCode",
-            "setaiCode" = B."setaiCode",
-            "setaiInsu" = B."setaiInsu",
-            "shikakuShutokuYMD" = B."shikakuShutokuYMD",
-            "shikakuShutokuJiyu" = B."shikakuShutokuJiyu",
-            "shikakuSoshitsuYMD" = B."shikakuSoshitsuYMD",
-            "shikakuSoshitsuJiyu" = B."shikakuSoshitsuJiyu",
-            "seihofujoShurui" = B."seihofujoShurui",
-            "seihoKaishiYMD" = B."seihoKaishiYMD",
-            "seihoHaishiYMD" = B."seihoHaishiYMD",
-            "ronenKaishiYMD" = B."ronenKaishiYMD",
-            "ronenHaishiYMD" = B."ronenHaishiYMD",
-            "fukaYMD" = B."fukaYMD",
-            "kazeiKubun" = B."kazeiKubun",
-            "setaikazeiKubun" = B."setaikazeiKubun",
-            "gokeiShotokuGaku" = B."gokeiShotokuGaku",
-            "nenkinShunyuGaku" = B."nenkinShunyuGaku",
-            "hokenryoDankai" = B."hokenryoDankai",
-            "hokenryoDankai1" = B."hokenryoDankai1",
-            "nengakuHokenryo1" = B."nengakuHokenryo1",
-            "tsukiwariStartYM1" = B."tsukiwariStartYM1",
-            "tsukiwariEndYM1" = B."tsukiwariEndYM1",
-            "hokenryoDankai2" = B."hokenryoDankai2",
-            "nengakuHokenryo2" = B."nengakuHokenryo2",
-            "tsukiwariStartYM2" = B."tsukiwariStartYM2",
-            "tsukiwariEndYM2" = B."tsukiwariEndYM2",
-            "choteiNichiji" = B."choteiNichiji",
-            "choteiJiyu1" = B."choteiJiyu1",
-            "choteiJiyu2" = B."choteiJiyu2",
-            "choteiJiyu3" = B."choteiJiyu3",
-            "choteiJiyu4" = B."choteiJiyu4",
-            "koseiM" = B."koseiM",
-            "gemmenMaeHokenryo" = B."gemmenMaeHokenryo",
-            "gemmenGaku" = B."gemmenGaku",
-            "kakuteiHokenryo" = B."kakuteiHokenryo",
-            "hokenryoDankaiKarisanntei" = B."hokenryoDankaiKarisanntei",
-            "choshuHohoRirekiNo" = B."choshuHohoRirekiNo",
-            "idoKijunNichiji" = B."idoKijunNichiji",
-            "kozaKubun" = B."kozaKubun",
-            "kyokaisoKubun" = B."kyokaisoKubun",
-            "shokkenKubun" = B."shokkenKubun",
-            "fukaShichosonCode" = B."fukaShichosonCode",
-            "tkSaishutsuKampuGaku" = B."tkSaishutsuKampuGaku",
-            "fuSaishutsuKampuGaku" = B."fuSaishutsuKampuGaku",
-            "tkKibetsuGaku01" = B."tkKibetsuGaku01",
-            "tkKibetsuGaku02" = B."tkKibetsuGaku02",
-            "tkKibetsuGaku03" = B."tkKibetsuGaku03",
-            "tkKibetsuGaku04" = B."tkKibetsuGaku04",
-            "tkKibetsuGaku05" = B."tkKibetsuGaku05",
-            "tkKibetsuGaku06" = B."tkKibetsuGaku06",
-            "fuKibetsuGaku01" = B."fuKibetsuGaku01",
-            "fuKibetsuGaku02" = B."fuKibetsuGaku02",
-            "fuKibetsuGaku03" = B."fuKibetsuGaku03",
-            "fuKibetsuGaku04" = B."fuKibetsuGaku04",
-            "fuKibetsuGaku05" = B."fuKibetsuGaku05",
-            "fuKibetsuGaku06" = B."fuKibetsuGaku06",
-            "fuKibetsuGaku07" = B."fuKibetsuGaku07",
-            "fuKibetsuGaku08" = B."fuKibetsuGaku08",
-            "fuKibetsuGaku09" = B."fuKibetsuGaku09",
-            "fuKibetsuGaku10" = B."fuKibetsuGaku10",
-            "fuKibetsuGaku11" = B."fuKibetsuGaku11",
-            "fuKibetsuGaku12" = B."fuKibetsuGaku12",
-            "fuKibetsuGaku13" = B."fuKibetsuGaku13",
-            "fuKibetsuGaku14" = B."fuKibetsuGaku14",
-            "choshuHoho4gatsu" = B."choshuHoho4gatsu",
-            "choshuHoho5gatsu" = B."choshuHoho5gatsu",
-            "choshuHoho6gatsu" = B."choshuHoho6gatsu",
-            "choshuHoho7gatsu" = B."choshuHoho7gatsu",
-            "choshuHoho8gatsu" = B."choshuHoho8gatsu",
-            "choshuHoho9gatsu" = B."choshuHoho9gatsu",
-            "choshuHoho10gatsu" = B."choshuHoho10gatsu",
-            "choshuHoho11gatsu" = B."choshuHoho11gatsu",
-            "choshuHoho12gatsu" = B."choshuHoho12gatsu",
-            "choshuHoho1gatsu" = B."choshuHoho1gatsu",
-            "choshuHoho2gatsu" = B."choshuHoho2gatsu",
-            "choshuHoho3gatsu" = B."choshuHoho3gatsu",
-            "choshuHohoYoku4gatsu" = B."choshuHohoYoku4gatsu",
-            "choshuHohoYoku5gatsu" = B."choshuHohoYoku5gatsu",
-            "choshuHohoYoku6gatsu" = B."choshuHohoYoku6gatsu",
-            "choshuHohoYoku7gatsu" = B."choshuHohoYoku7gatsu",
-            "choshuHohoYoku8gatsu" = B."choshuHohoYoku8gatsu",
-            "choshuHohoYoku9gatsu" = B."choshuHohoYoku9gatsu",
-            "kariNenkinNo" = B."kariNenkinNo",
-            "kariNenkinCode" = B."kariNenkinCode",
-            "kariHosokuM" = B."kariHosokuM",
-            "honNenkinNo" = B."honNenkinNo",
-            "honNenkinCode" = B."honNenkinCode",
-            "honHosokuM" = B."honHosokuM",
-            "yokunendoKariNenkinNo" = B."yokunendoKariNenkinNo",
-            "yokunendoKariNenkinCode" = B."yokunendoKariNenkinCode",
-            "yokunendoKariHosokuM" = B."yokunendoKariHosokuM",
-            "iraiSohuzumiFlag" = B."iraiSohuzumiFlag",
-            "tsuikaIraiSohuzumiFlag" = B."tsuikaIraiSohuzumiFlag",
-            "tokuchoTeishiNichiji" = B."tokuchoTeishiNichiji",
-            "tokuchoTeishiJiyuCode" = B."tokuchoTeishiJiyuCode",
-            "tkShunyuGaku01" = B."tkShunyuGaku01",
-            "tkShunyuGaku02" = B."tkShunyuGaku02",
-            "tkShunyuGaku03" = B."tkShunyuGaku03",
-            "tkShunyuGaku04" = B."tkShunyuGaku04",
-            "tkShunyuGaku05" = B."tkShunyuGaku05",
-            "tkShunyuGaku06" = B."tkShunyuGaku06",
-            "fuShunyuGaku01" = B."fuShunyuGaku01",
-            "fuShunyuGaku02" = B."fuShunyuGaku02",
-            "fuShunyuGaku03" = B."fuShunyuGaku03",
-            "fuShunyuGaku04" = B."fuShunyuGaku04",
-            "fuShunyuGaku05" = B."fuShunyuGaku05",
-            "fuShunyuGaku06" = B."fuShunyuGaku06",
-            "fuShunyuGaku07" = B."fuShunyuGaku07",
-            "fuShunyuGaku08" = B."fuShunyuGaku08",
-            "fuShunyuGaku09" = B."fuShunyuGaku09",
-            "fuShunyuGaku10" = B."fuShunyuGaku10",
-            "fuShunyuGaku11" = B."fuShunyuGaku11",
-            "fuShunyuGaku12" = B."fuShunyuGaku12",
-            "fuShunyuGaku13" = B."fuShunyuGaku13",
-            "fuShunyuGaku14" = B."fuShunyuGaku14",
-            "更正前情報有無区分" = '1'
+        SET
+        "insertDantaiCd" = B."insertDantaiCd",
+        "insertTimestamp" = B."insertTimestamp",
+        "insertReamsLoginId" = B."insertReamsLoginId",
+        "insertContextId" = B."insertContextId",
+        "isDeleted" = B."isDeleted",
+        "updateCount" = B."updateCount",
+        "lastUpdateTimestamp" = B."lastUpdateTimestamp",
+        "lastUpdateReamsLoginId" = B."lastUpdateReamsLoginId",
+        "choteiNendo" = B."choteiNendo",
+        "fukaNendo" = B."fukaNendo",
+        "tsuchishoNo" = B."tsuchishoNo",
+        "koseiZengoKubun" = B."koseiZengoKubun",
+        "sakuseiShoriName" = B."sakuseiShoriName",
+        "fukaRirekiNo" = B."fukaRirekiNo",
+        "hihokenshaNo" = B."hihokenshaNo",
+        "shikibetsuCode" = B."shikibetsuCode",
+        "setaiCode" = B."setaiCode",
+        "setaiInsu" = B."setaiInsu",
+        "shikakuShutokuYMD" = B."shikakuShutokuYMD",
+        "shikakuShutokuJiyu" = B."shikakuShutokuJiyu",
+        "shikakuSoshitsuYMD" = B."shikakuSoshitsuYMD",
+        "shikakuSoshitsuJiyu" = B."shikakuSoshitsuJiyu",
+        "seihofujoShurui" = B."seihofujoShurui",
+        "seihoKaishiYMD" = B."seihoKaishiYMD",
+        "seihoHaishiYMD" = B."seihoHaishiYMD",
+        "ronenKaishiYMD" = B."ronenKaishiYMD",
+        "ronenHaishiYMD" = B."ronenHaishiYMD",
+        "fukaYMD" = B."fukaYMD",
+        "kazeiKubun" = B."kazeiKubun",
+        "setaikazeiKubun" = B."setaikazeiKubun",
+        "gokeiShotokuGaku" = B."gokeiShotokuGaku",
+        "nenkinShunyuGaku" = B."nenkinShunyuGaku",
+        "hokenryoDankai" = B."hokenryoDankai",
+        "hokenryoDankai1" = B."hokenryoDankai1",
+        "nengakuHokenryo1" = B."nengakuHokenryo1",
+        "tsukiwariStartYM1" = B."tsukiwariStartYM1",
+        "tsukiwariEndYM1" = B."tsukiwariEndYM1",
+        "hokenryoDankai2" = B."hokenryoDankai2",
+        "nengakuHokenryo2" = B."nengakuHokenryo2",
+        "tsukiwariStartYM2" = B."tsukiwariStartYM2",
+        "tsukiwariEndYM2" = B."tsukiwariEndYM2",
+        "choteiNichiji" = B."choteiNichiji",
+        "choteiJiyu1" = B."choteiJiyu1",
+        "choteiJiyu2" = B."choteiJiyu2",
+        "choteiJiyu3" = B."choteiJiyu3",
+        "choteiJiyu4" = B."choteiJiyu4",
+        "koseiM" = B."koseiM",
+        "gemmenMaeHokenryo" = B."gemmenMaeHokenryo",
+        "gemmenGaku" = B."gemmenGaku",
+        "kakuteiHokenryo" = B."kakuteiHokenryo",
+        "hokenryoDankaiKarisanntei" = B."hokenryoDankaiKarisanntei",
+        "choshuHohoRirekiNo" = B."choshuHohoRirekiNo",
+        "idoKijunNichiji" = B."idoKijunNichiji",
+        "kozaKubun" = B."kozaKubun",
+        "kyokaisoKubun" = B."kyokaisoKubun",
+        "shokkenKubun" = B."shokkenKubun",
+        "fukaShichosonCode" = B."fukaShichosonCode",
+        "tkSaishutsuKampuGaku" = B."tkSaishutsuKampuGaku",
+        "fuSaishutsuKampuGaku" = B."fuSaishutsuKampuGaku",
+        "tkKibetsuGaku01" = B."tkKibetsuGaku01",
+        "tkKibetsuGaku02" = B."tkKibetsuGaku02",
+        "tkKibetsuGaku03" = B."tkKibetsuGaku03",
+        "tkKibetsuGaku04" = B."tkKibetsuGaku04",
+        "tkKibetsuGaku05" = B."tkKibetsuGaku05",
+        "tkKibetsuGaku06" = B."tkKibetsuGaku06",
+        "fuKibetsuGaku01" = B."fuKibetsuGaku01",
+        "fuKibetsuGaku02" = B."fuKibetsuGaku02",
+        "fuKibetsuGaku03" = B."fuKibetsuGaku03",
+        "fuKibetsuGaku04" = B."fuKibetsuGaku04",
+        "fuKibetsuGaku05" = B."fuKibetsuGaku05",
+        "fuKibetsuGaku06" = B."fuKibetsuGaku06",
+        "fuKibetsuGaku07" = B."fuKibetsuGaku07",
+        "fuKibetsuGaku08" = B."fuKibetsuGaku08",
+        "fuKibetsuGaku09" = B."fuKibetsuGaku09",
+        "fuKibetsuGaku10" = B."fuKibetsuGaku10",
+        "fuKibetsuGaku11" = B."fuKibetsuGaku11",
+        "fuKibetsuGaku12" = B."fuKibetsuGaku12",
+        "fuKibetsuGaku13" = B."fuKibetsuGaku13",
+        "fuKibetsuGaku14" = B."fuKibetsuGaku14",
+        "choshuHoho4gatsu" = B."choshuHoho4gatsu",
+        "choshuHoho5gatsu" = B."choshuHoho5gatsu",
+        "choshuHoho6gatsu" = B."choshuHoho6gatsu",
+        "choshuHoho7gatsu" = B."choshuHoho7gatsu",
+        "choshuHoho8gatsu" = B."choshuHoho8gatsu",
+        "choshuHoho9gatsu" = B."choshuHoho9gatsu",
+        "choshuHoho10gatsu" = B."choshuHoho10gatsu",
+        "choshuHoho11gatsu" = B."choshuHoho11gatsu",
+        "choshuHoho12gatsu" = B."choshuHoho12gatsu",
+        "choshuHoho1gatsu" = B."choshuHoho1gatsu",
+        "choshuHoho2gatsu" = B."choshuHoho2gatsu",
+        "choshuHoho3gatsu" = B."choshuHoho3gatsu",
+        "choshuHohoYoku4gatsu" = B."choshuHohoYoku4gatsu",
+        "choshuHohoYoku5gatsu" = B."choshuHohoYoku5gatsu",
+        "choshuHohoYoku6gatsu" = B."choshuHohoYoku6gatsu",
+        "choshuHohoYoku7gatsu" = B."choshuHohoYoku7gatsu",
+        "choshuHohoYoku8gatsu" = B."choshuHohoYoku8gatsu",
+        "choshuHohoYoku9gatsu" = B."choshuHohoYoku9gatsu",
+        "kariNenkinNo" = B."kariNenkinNo",
+        "kariNenkinCode" = B."kariNenkinCode",
+        "kariHosokuM" = B."kariHosokuM",
+        "honNenkinNo" = B."honNenkinNo",
+        "honNenkinCode" = B."honNenkinCode",
+        "honHosokuM" = B."honHosokuM",
+        "yokunendoKariNenkinNo" = B."yokunendoKariNenkinNo",
+        "yokunendoKariNenkinCode" = B."yokunendoKariNenkinCode",
+        "yokunendoKariHosokuM" = B."yokunendoKariHosokuM",
+        "iraiSohuzumiFlag" = B."iraiSohuzumiFlag",
+        "tsuikaIraiSohuzumiFlag" = B."tsuikaIraiSohuzumiFlag",
+        "tokuchoTeishiNichiji" = B."tokuchoTeishiNichiji",
+        "tokuchoTeishiJiyuCode" = B."tokuchoTeishiJiyuCode",
+        "tkShunyuGaku01" = B."tkShunyuGaku01",
+        "tkShunyuGaku02" = B."tkShunyuGaku02",
+        "tkShunyuGaku03" = B."tkShunyuGaku03",
+        "tkShunyuGaku04" = B."tkShunyuGaku04",
+        "tkShunyuGaku05" = B."tkShunyuGaku05",
+        "tkShunyuGaku06" = B."tkShunyuGaku06",
+        "fuShunyuGaku01" = B."fuShunyuGaku01",
+        "fuShunyuGaku02" = B."fuShunyuGaku02",
+        "fuShunyuGaku03" = B."fuShunyuGaku03",
+        "fuShunyuGaku04" = B."fuShunyuGaku04",
+        "fuShunyuGaku05" = B."fuShunyuGaku05",
+        "fuShunyuGaku06" = B."fuShunyuGaku06",
+        "fuShunyuGaku07" = B."fuShunyuGaku07",
+        "fuShunyuGaku08" = B."fuShunyuGaku08",
+        "fuShunyuGaku09" = B."fuShunyuGaku09",
+        "fuShunyuGaku10" = B."fuShunyuGaku10",
+        "fuShunyuGaku11" = B."fuShunyuGaku11",
+        "fuShunyuGaku12" = B."fuShunyuGaku12",
+        "fuShunyuGaku13" = B."fuShunyuGaku13",
+        "fuShunyuGaku14" = B."fuShunyuGaku14",
+        "更正前情報有無区分" = '1'
         FROM rgdb."DbT2015KeisangoJoho" AS B
         WHERE A."dbT2015KeisangoJoho_choteiNendo" = B."choteiNendo"
-             AND A."dbT2015KeisangoJoho_fukaNendo" = B."fukaNendo"
-             AND A."dbT2015KeisangoJoho_tsuchishoNo" = B."tsuchishoNo"
-             AND B."sakuseiShoriName" = '仮算定異動賦課'
-             AND B."koseiZengoKubun" = '1'
+        AND A."dbT2015KeisangoJoho_fukaNendo" = B."fukaNendo"
+        AND A."dbT2015KeisangoJoho_tsuchishoNo" = B."tsuchishoNo"
+        AND B."sakuseiShoriName" = '仮算定異動賦課'
+        AND B."koseiZengoKubun" = '1'
     </update>
 
     <update id="update異動賦課情報一時テーブル更正前対象者情報"
-    parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdofukaJohoTempParameter">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdofukaJohoTempParameter">
         UPDATE "TmpFukaInfo" AS A
-        SET 
-         "ueT0511_insertDantaiCd" = B."insertDantaiCd",
-         "ueT0511_insertTimestamp" = B."insertTimestamp",
-         "ueT0511_insertReamsLoginId" = B."insertReamsLoginId",
-         "ueT0511_insertContextId" = B."insertContextId",
-         "ueT0511_isDeleted" = B."isDeleted",
-         "ueT0511_updateCount" = B."updateCount",
-         "ueT0511_lastUpdateTimestamp" = B."lastUpdateTimestamp",
-         "ueT0511_lastUpdateReamsLoginId" = B."lastUpdateReamsLoginId",
-         "ueT0511_gyomuCode" = B."gyomuCode",
-         "ueT0511_shoriNendo" = B."shoriNendo",
-         "ueT0511_tsuchiNaiyoCode" = B."tsuchiNaiyoCode",
-         "ueT0511_shoriTaishoYM" = B."shoriTaishoYM",
-         "ueT0511_kisoNenkinNo" = B."kisoNenkinNo",
-         "ueT0511_nenkinCode" = B."nenkinCode",
-         "ueT0511_koseiCityCode" = B."koseiCityCode",
-         "ueT0511_renban" = B."renban",
-         "ueT0511_shoriTimestamp" = B."shoriTimestamp",
-         "ueT0511_renkeiShubetsu" = B."renkeiShubetsu",
-         "ueT0511_hosokuTsuki" = B."hosokuTsuki",
-         "ueT0511_tenbikiTsuki" = B."tenbikiTsuki",
-         "ueT0511_shikibetsuCode" = B."shikibetsuCode",
-         "ueT0511_hihokenshaNo" = B."hihokenshaNo",
-         "ueT0511_kokuhoSetaiCode" = B."kokuhoSetaiCode",
-         "ueT0511_dtCityCode" = B."dtCityCode",
-         "ueT0511_dtTokubetsuChoshuGimushaCode" = B."dtTokubetsuChoshuGimushaCode",
-         "ueT0511_dtTsuchiNaiyoCode" = B."dtTsuchiNaiyoCode",
-         "ueT0511_dtBaitaiCode" = B."dtBaitaiCode",
-         "ueT0511_dtTokubetsuChoshuSeidoCode" = B."dtTokubetsuChoshuSeidoCode",
-         "ueT0511_dtSakuseiYMD" = B."dtSakuseiYMD",
-         "ueT0511_dtKisoNenkinNo" = B."dtKisoNenkinNo",
-         "ueT0511_dtNenkinCode" = B."dtNenkinCode",
-         "ueT0511_dtYobi1" = B."dtYobi1",
-         "ueT0511_dtBirthDay" = B."dtBirthDay",
-         "ueT0511_dtSeibetsu" = B."dtSeibetsu",
-         "ueT0511_dtKanaShimei" = B."dtKanaShimei",
-         "ueT0511_dtShiftCode1" = B."dtShiftCode1",
-         "ueT0511_dtKanjiShimei" = B."dtKanjiShimei",
-         "ueT0511_dtShiftCode2" = B."dtShiftCode2",
-         "ueT0511_dtYubinNo" = B."dtYubinNo",
-         "ueT0511_dtKanaJusho" = B."dtKanaJusho",
-         "ueT0511_dtShiftCode3" = B."dtShiftCode3",
-         "ueT0511_dtKanjiJusho" = B."dtKanjiJusho",
-         "ueT0511_dtShiftCode4" = B."dtShiftCode4",
-         "ueT0511_dtKakushuKubun" = B."dtKakushuKubun",
-         "ueT0511_dtShoriKekka" = B."dtShoriKekka",
-         "ueT0511_dtKokiIkanCode" = B."dtKokiIkanCode",
-         "ueT0511_dtKakushuYMD" = B."dtKakushuYMD",
-         "ueT0511_dtKakushuKingaku1" = B."dtKakushuKingaku1",
-         "ueT0511_dtKakushuKingaku2" = B."dtKakushuKingaku2",
-         "ueT0511_dtKakushuKingaku3" = B."dtKakushuKingaku3",
-         "ueT0511_dtYobi2" = B."dtYobi2",
-         "ueT0511_dtKyosaiNenkinshoshoKigoNo" = B."dtKyosaiNenkinshoshoKigoNo",
-         "ueT0511_dtKakushuKingaku4" = B."dtKakushuKingaku4",
-         "ueT0511_dtKakushuKingaku5" = B."dtKakushuKingaku5",
-         "ueT0511_dtKakushuKingaku6" = B."dtKakushuKingaku6",
-         "ueT0511_dtKakushuKingaku7" = B."dtKakushuKingaku7",
-         "ueT0511_dtKakushuKingaku8" = B."dtKakushuKingaku8",
-         "ueT0511_dtTeishiYM" = B."dtTeishiYM",
-         "ueT0511_dtYobi4Juminzei" = B."dtYobi4Juminzei",
-         "ueT0511_dtKojinNo" = B."dtKojinNo"
+        SET
+        "ueT0511_insertDantaiCd" = B."insertDantaiCd",
+        "ueT0511_insertTimestamp" = B."insertTimestamp",
+        "ueT0511_insertReamsLoginId" = B."insertReamsLoginId",
+        "ueT0511_insertContextId" = B."insertContextId",
+        "ueT0511_isDeleted" = B."isDeleted",
+        "ueT0511_updateCount" = B."updateCount",
+        "ueT0511_lastUpdateTimestamp" = B."lastUpdateTimestamp",
+        "ueT0511_lastUpdateReamsLoginId" = B."lastUpdateReamsLoginId",
+        "ueT0511_gyomuCode" = B."gyomuCode",
+        "ueT0511_shoriNendo" = B."shoriNendo",
+        "ueT0511_tsuchiNaiyoCode" = B."tsuchiNaiyoCode",
+        "ueT0511_shoriTaishoYM" = B."shoriTaishoYM",
+        "ueT0511_kisoNenkinNo" = B."kisoNenkinNo",
+        "ueT0511_nenkinCode" = B."nenkinCode",
+        "ueT0511_koseiCityCode" = B."koseiCityCode",
+        "ueT0511_renban" = B."renban",
+        "ueT0511_shoriTimestamp" = B."shoriTimestamp",
+        "ueT0511_renkeiShubetsu" = B."renkeiShubetsu",
+        "ueT0511_hosokuTsuki" = B."hosokuTsuki",
+        "ueT0511_tenbikiTsuki" = B."tenbikiTsuki",
+        "ueT0511_shikibetsuCode" = B."shikibetsuCode",
+        "ueT0511_hihokenshaNo" = B."hihokenshaNo",
+        "ueT0511_kokuhoSetaiCode" = B."kokuhoSetaiCode",
+        "ueT0511_dtCityCode" = B."dtCityCode",
+        "ueT0511_dtTokubetsuChoshuGimushaCode" = B."dtTokubetsuChoshuGimushaCode",
+        "ueT0511_dtTsuchiNaiyoCode" = B."dtTsuchiNaiyoCode",
+        "ueT0511_dtBaitaiCode" = B."dtBaitaiCode",
+        "ueT0511_dtTokubetsuChoshuSeidoCode" = B."dtTokubetsuChoshuSeidoCode",
+        "ueT0511_dtSakuseiYMD" = B."dtSakuseiYMD",
+        "ueT0511_dtKisoNenkinNo" = B."dtKisoNenkinNo",
+        "ueT0511_dtNenkinCode" = B."dtNenkinCode",
+        "ueT0511_dtYobi1" = B."dtYobi1",
+        "ueT0511_dtBirthDay" = B."dtBirthDay",
+        "ueT0511_dtSeibetsu" = B."dtSeibetsu",
+        "ueT0511_dtKanaShimei" = B."dtKanaShimei",
+        "ueT0511_dtShiftCode1" = B."dtShiftCode1",
+        "ueT0511_dtKanjiShimei" = B."dtKanjiShimei",
+        "ueT0511_dtShiftCode2" = B."dtShiftCode2",
+        "ueT0511_dtYubinNo" = B."dtYubinNo",
+        "ueT0511_dtKanaJusho" = B."dtKanaJusho",
+        "ueT0511_dtShiftCode3" = B."dtShiftCode3",
+        "ueT0511_dtKanjiJusho" = B."dtKanjiJusho",
+        "ueT0511_dtShiftCode4" = B."dtShiftCode4",
+        "ueT0511_dtKakushuKubun" = B."dtKakushuKubun",
+        "ueT0511_dtShoriKekka" = B."dtShoriKekka",
+        "ueT0511_dtKokiIkanCode" = B."dtKokiIkanCode",
+        "ueT0511_dtKakushuYMD" = B."dtKakushuYMD",
+        "ueT0511_dtKakushuKingaku1" = B."dtKakushuKingaku1",
+        "ueT0511_dtKakushuKingaku2" = B."dtKakushuKingaku2",
+        "ueT0511_dtKakushuKingaku3" = B."dtKakushuKingaku3",
+        "ueT0511_dtYobi2" = B."dtYobi2",
+        "ueT0511_dtKyosaiNenkinshoshoKigoNo" = B."dtKyosaiNenkinshoshoKigoNo",
+        "ueT0511_dtKakushuKingaku4" = B."dtKakushuKingaku4",
+        "ueT0511_dtKakushuKingaku5" = B."dtKakushuKingaku5",
+        "ueT0511_dtKakushuKingaku6" = B."dtKakushuKingaku6",
+        "ueT0511_dtKakushuKingaku7" = B."dtKakushuKingaku7",
+        "ueT0511_dtKakushuKingaku8" = B."dtKakushuKingaku8",
+        "ueT0511_dtTeishiYM" = B."dtTeishiYM",
+        "ueT0511_dtYobi4Juminzei" = B."dtYobi4Juminzei",
+        "ueT0511_dtKojinNo" = B."dtKojinNo"
         FROM rgdb."UeT0511NenkinTokuchoKaifuJoho" AS B
         WHERE A."kariNenkinNo" = B."kisoNenkinNo"
-             AND A."kariNenkinCode" = B."nenkinCode"
-             AND A."kariHosokuM" = B."hosokuTsuki"
-             AND B."gyomuCode" = 'DB'
-             AND B."tsuchiNaiyoCode" in (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
-             AND B."shoriNendo" = #{調定年度前年}
+        AND A."kariNenkinCode" = B."nenkinCode"
+        AND A."kariHosokuM" = B."hosokuTsuki"
+        AND B."gyomuCode" = 'DB'
+        AND B."tsuchiNaiyoCode" in (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
+        AND B."shoriNendo" = #{調定年度前年}
     </update>
 
     <update id="update異動賦課情報一時テーブル生活保護区分">
         UPDATE "TmpFukaInfo" AS A
-        SET 
-         "生活保護区分" = '1'
+        SET
+        "生活保護区分" = '1'
         WHERE A."dbT2015KeisangoJoho_seihoKaishiYMD" IS NOT NULL
-              AND A."dbT2015KeisangoJoho_seihoKaishiYMD" <![CDATA[!=]]> ''
+        AND A."dbT2015KeisangoJoho_seihoKaishiYMD" <![CDATA[!=]]> ''
     </update>
-  
+
     <resultMap id="resultMap_KarisanteiTsuchisho" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempEntity" autoMapping="false">
         <id column="dbT2015KeisangoJoho_choteiNendo"/>
         <id column="dbT2015KeisangoJoho_fukaNendo"/>
@@ -522,156 +522,156 @@
         <association property="宛先" resultMap="ResultMap_AtesakiEntity"/>
         <association property="納組" resultMap="nokumiResult"/>
         <association property="特定口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
-    </resultMap> 
-    
+    </resultMap>
+
     <select resultOrdered="true" id="select全件賦課情報" resultMap="resultMap_KarisanteiTsuchisho"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter" fetchSize="500">
         SELECT
-            A.*,
-            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode",
-            "dbT2015KeisangoJoho_choteiJiyu1"||"dbT2015KeisangoJoho_choteiJiyu2"||"dbT2015KeisangoJoho_choteiJiyu3"||"dbT2015KeisangoJoho_choteiJiyu4" as "dbT2015KeisangoJoho_choteiJiyu"
+        A.*,
+        "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode",
+        "dbT2015KeisangoJoho_choteiJiyu1"||"dbT2015KeisangoJoho_choteiJiyu2"||"dbT2015KeisangoJoho_choteiJiyu3"||"dbT2015KeisangoJoho_choteiJiyu4" as "dbT2015KeisangoJoho_choteiJiyu"
         FROM
-            "TmpFukaInfo" AS A
+        "TmpFukaInfo" AS A
         WHERE
-            COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku01",0) = '0'
-            AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku02",0) = '0'
-            AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku03",0) <![CDATA[!=]]> '0'
-       ${出力順}
+        COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku01",0) = '0'
+        AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku02",0) = '0'
+        AND COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku03",0) <![CDATA[!=]]> '0'
+        ${出力順}
     </select>
-  
+
     <sql id="allColumns_DbT2015KeisangoJoho">
-         計算後情報."choteiNendo" as "dbT2015KeisangoJoho_choteiNendo",
-         計算後情報."fukaNendo" as "dbT2015KeisangoJoho_fukaNendo",
-         計算後情報."tsuchishoNo" as "dbT2015KeisangoJoho_tsuchishoNo",
-         計算後情報."koseiZengoKubun" as "dbT2015KeisangoJoho_koseiZengoKubun",
-         計算後情報."sakuseiShoriName" as "dbT2015KeisangoJoho_sakuseiShoriName",
-         計算後情報."insertDantaiCd" as "dbT2015KeisangoJoho_insertDantaiCd",
-         計算後情報."insertTimestamp" as "dbT2015KeisangoJoho_insertTimestamp",
-         計算後情報."insertReamsLoginId" as "dbT2015KeisangoJoho_insertReamsLoginId",
-         計算後情報."insertContextId" as "dbT2015KeisangoJoho_insertContextId",
-         計算後情報."isDeleted" as "dbT2015KeisangoJoho_isDeleted",
-         計算後情報."updateCount" as "dbT2015KeisangoJoho_updateCount",
-         計算後情報."lastUpdateTimestamp" as "dbT2015KeisangoJoho_lastUpdateTimestamp",
-         計算後情報."lastUpdateReamsLoginId" as "dbT2015KeisangoJoho_lastUpdateReamsLoginId",
-         計算後情報."fukaRirekiNo" as "dbT2015KeisangoJoho_fukaRirekiNo",
-         計算後情報."hihokenshaNo" as "dbT2015KeisangoJoho_hihokenshaNo",
-         計算後情報."shikibetsuCode" as "dbT2015KeisangoJoho_shikibetsuCode",
-         計算後情報."setaiCode" as "dbT2015KeisangoJoho_setaiCode",
-         計算後情報."setaiInsu" as "dbT2015KeisangoJoho_setaiInsu",
-         計算後情報."shikakuShutokuYMD" as "dbT2015KeisangoJoho_shikakuShutokuYMD",
-         計算後情報."shikakuShutokuJiyu" as "dbT2015KeisangoJoho_shikakuShutokuJiyu",
-         計算後情報."shikakuSoshitsuYMD" as "dbT2015KeisangoJoho_shikakuSoshitsuYMD",
-         計算後情報."shikakuSoshitsuJiyu" as "dbT2015KeisangoJoho_shikakuSoshitsuJiyu",
-         計算後情報."seihofujoShurui" as "dbT2015KeisangoJoho_seihofujoShurui",
-         計算後情報."seihoKaishiYMD" as "dbT2015KeisangoJoho_seihoKaishiYMD",
-         計算後情報."seihoHaishiYMD" as "dbT2015KeisangoJoho_seihoHaishiYMD",
-         計算後情報."ronenKaishiYMD" as "dbT2015KeisangoJoho_ronenKaishiYMD",
-         計算後情報."ronenHaishiYMD" as "dbT2015KeisangoJoho_ronenHaishiYMD",
-         計算後情報."fukaYMD" as "dbT2015KeisangoJoho_fukaYMD",
-         計算後情報."kazeiKubun" as "dbT2015KeisangoJoho_kazeiKubun",
-         計算後情報."setaikazeiKubun" as "dbT2015KeisangoJoho_setaikazeiKubun",
-         計算後情報."gokeiShotokuGaku" as "dbT2015KeisangoJoho_gokeiShotokuGaku",
-         計算後情報."nenkinShunyuGaku" as "dbT2015KeisangoJoho_nenkinShunyuGaku",
-         計算後情報."hokenryoDankai" as "dbT2015KeisangoJoho_hokenryoDankai",
-         計算後情報."hokenryoDankai1" as "dbT2015KeisangoJoho_hokenryoDankai1",
-         計算後情報."nengakuHokenryo1" as "dbT2015KeisangoJoho_nengakuHokenryo1",
-         計算後情報."tsukiwariStartYM1" as "dbT2015KeisangoJoho_tsukiwariStartYM1",
-         計算後情報."tsukiwariEndYM1" as "dbT2015KeisangoJoho_tsukiwariEndYM1",
-         計算後情報."hokenryoDankai2" as "dbT2015KeisangoJoho_hokenryoDankai2",
-         計算後情報."nengakuHokenryo2" as "dbT2015KeisangoJoho_nengakuHokenryo2",
-         計算後情報."tsukiwariStartYM2" as "dbT2015KeisangoJoho_tsukiwariStartYM2",
-         計算後情報."tsukiwariEndYM2" as "dbT2015KeisangoJoho_tsukiwariEndYM2",
-         計算後情報."choteiNichiji" as "dbT2015KeisangoJoho_choteiNichiji",
-         計算後情報."choteiJiyu1" as "dbT2015KeisangoJoho_choteiJiyu1",
-         計算後情報."choteiJiyu2" as "dbT2015KeisangoJoho_choteiJiyu2",
-         計算後情報."choteiJiyu3" as "dbT2015KeisangoJoho_choteiJiyu3",
-         計算後情報."choteiJiyu4" as "dbT2015KeisangoJoho_choteiJiyu4",
-         計算後情報."koseiM" as "dbT2015KeisangoJoho_koseiM",
-         計算後情報."gemmenMaeHokenryo" as "dbT2015KeisangoJoho_gemmenMaeHokenryo",
-         計算後情報."gemmenGaku" as "dbT2015KeisangoJoho_gemmenGaku",
-         計算後情報."kakuteiHokenryo" as "dbT2015KeisangoJoho_kakuteiHokenryo",
-         計算後情報."hokenryoDankaiKarisanntei" as "dbT2015KeisangoJoho_hokenryoDankaiKarisanntei",
-         計算後情報."choshuHohoRirekiNo" as "dbT2015KeisangoJoho_choshuHohoRirekiNo",
-         計算後情報."idoKijunNichiji" as "dbT2015KeisangoJoho_idoKijunNichiji",
-         計算後情報."kozaKubun" as "dbT2015KeisangoJoho_kozaKubun",
-         計算後情報."kyokaisoKubun" as "dbT2015KeisangoJoho_kyokaisoKubun",
-         計算後情報."shokkenKubun" as "dbT2015KeisangoJoho_shokkenKubun",
-         計算後情報."fukaShichosonCode" as "dbT2015KeisangoJoho_fukaShichosonCode",
-         計算後情報."tkSaishutsuKampuGaku" as "dbT2015KeisangoJoho_tkSaishutsuKampuGaku",
-         計算後情報."fuSaishutsuKampuGaku" as "dbT2015KeisangoJoho_fuSaishutsuKampuGaku",
-         計算後情報."tkKibetsuGaku01" as "dbT2015KeisangoJoho_tkKibetsuGaku01",
-         計算後情報."tkKibetsuGaku02" as "dbT2015KeisangoJoho_tkKibetsuGaku02",
-         計算後情報."tkKibetsuGaku03" as "dbT2015KeisangoJoho_tkKibetsuGaku03",
-         計算後情報."tkKibetsuGaku04" as "dbT2015KeisangoJoho_tkKibetsuGaku04",
-         計算後情報."tkKibetsuGaku05" as "dbT2015KeisangoJoho_tkKibetsuGaku05",
-         計算後情報."tkKibetsuGaku06" as "dbT2015KeisangoJoho_tkKibetsuGaku06",
-         計算後情報."fuKibetsuGaku01" as "dbT2015KeisangoJoho_fuKibetsuGaku01",
-         計算後情報."fuKibetsuGaku02" as "dbT2015KeisangoJoho_fuKibetsuGaku02",
-         計算後情報."fuKibetsuGaku03" as "dbT2015KeisangoJoho_fuKibetsuGaku03",
-         計算後情報."fuKibetsuGaku04" as "dbT2015KeisangoJoho_fuKibetsuGaku04",
-         計算後情報."fuKibetsuGaku05" as "dbT2015KeisangoJoho_fuKibetsuGaku05",
-         計算後情報."fuKibetsuGaku06" as "dbT2015KeisangoJoho_fuKibetsuGaku06",
-         計算後情報."fuKibetsuGaku07" as "dbT2015KeisangoJoho_fuKibetsuGaku07",
-         計算後情報."fuKibetsuGaku08" as "dbT2015KeisangoJoho_fuKibetsuGaku08",
-         計算後情報."fuKibetsuGaku09" as "dbT2015KeisangoJoho_fuKibetsuGaku09",
-         計算後情報."fuKibetsuGaku10" as "dbT2015KeisangoJoho_fuKibetsuGaku10",
-         計算後情報."fuKibetsuGaku11" as "dbT2015KeisangoJoho_fuKibetsuGaku11",
-         計算後情報."fuKibetsuGaku12" as "dbT2015KeisangoJoho_fuKibetsuGaku12",
-         計算後情報."fuKibetsuGaku13" as "dbT2015KeisangoJoho_fuKibetsuGaku13",
-         計算後情報."fuKibetsuGaku14" as "dbT2015KeisangoJoho_fuKibetsuGaku14",
-         計算後情報."choshuHoho4gatsu" as "dbT2015KeisangoJoho_choshuHoho4gatsu",
-         計算後情報."choshuHoho5gatsu" as "dbT2015KeisangoJoho_choshuHoho5gatsu",
-         計算後情報."choshuHoho6gatsu" as "dbT2015KeisangoJoho_choshuHoho6gatsu",
-         計算後情報."choshuHoho7gatsu" as "dbT2015KeisangoJoho_choshuHoho7gatsu",
-         計算後情報."choshuHoho8gatsu" as "dbT2015KeisangoJoho_choshuHoho8gatsu",
-         計算後情報."choshuHoho9gatsu" as "dbT2015KeisangoJoho_choshuHoho9gatsu",
-         計算後情報."choshuHoho10gatsu" as "dbT2015KeisangoJoho_choshuHoho10gatsu",
-         計算後情報."choshuHoho11gatsu" as "dbT2015KeisangoJoho_choshuHoho11gatsu",
-         計算後情報."choshuHoho12gatsu" as "dbT2015KeisangoJoho_choshuHoho12gatsu",
-         計算後情報."choshuHoho1gatsu" as "dbT2015KeisangoJoho_choshuHoho1gatsu",
-         計算後情報."choshuHoho2gatsu" as "dbT2015KeisangoJoho_choshuHoho2gatsu",
-         計算後情報."choshuHoho3gatsu" as "dbT2015KeisangoJoho_choshuHoho3gatsu",
-         計算後情報."choshuHohoYoku4gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku4gatsu",
-         計算後情報."choshuHohoYoku5gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku5gatsu",
-         計算後情報."choshuHohoYoku6gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku6gatsu",
-         計算後情報."choshuHohoYoku7gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku7gatsu",
-         計算後情報."choshuHohoYoku8gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku8gatsu",
-         計算後情報."choshuHohoYoku9gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku9gatsu",
-         計算後情報."kariNenkinNo" as "dbT2015KeisangoJoho_kariNenkinNo",
-         計算後情報."kariNenkinCode" as "dbT2015KeisangoJoho_kariNenkinCode",
-         計算後情報."kariHosokuM" as "dbT2015KeisangoJoho_kariHosokuM",
-         計算後情報."honNenkinNo" as "dbT2015KeisangoJoho_honNenkinNo",
-         計算後情報."honNenkinCode" as "dbT2015KeisangoJoho_honNenkinCode",
-         計算後情報."honHosokuM" as "dbT2015KeisangoJoho_honHosokuM",
-         計算後情報."yokunendoKariNenkinNo" as "dbT2015KeisangoJoho_yokunendoKariNenkinNo",
-         計算後情報."yokunendoKariNenkinCode" as "dbT2015KeisangoJoho_yokunendoKariNenkinCode",
-         計算後情報."yokunendoKariHosokuM" as "dbT2015KeisangoJoho_yokunendoKariHosokuM",
-         計算後情報."iraiSohuzumiFlag" as "dbT2015KeisangoJoho_iraiSohuzumiFlag",
-         計算後情報."tsuikaIraiSohuzumiFlag" as "dbT2015KeisangoJoho_tsuikaIraiSohuzumiFlag",
-         計算後情報."tokuchoTeishiNichiji" as "dbT2015KeisangoJoho_tokuchoTeishiNichiji",
-         計算後情報."tokuchoTeishiJiyuCode" as "dbT2015KeisangoJoho_tokuchoTeishiJiyuCode",
-         計算後情報."tkShunyuGaku01" as "dbT2015KeisangoJoho_tkShunyuGaku01",
-         計算後情報."tkShunyuGaku02" as "dbT2015KeisangoJoho_tkShunyuGaku02",
-         計算後情報."tkShunyuGaku03" as "dbT2015KeisangoJoho_tkShunyuGaku03",
-         計算後情報."tkShunyuGaku04" as "dbT2015KeisangoJoho_tkShunyuGaku04",
-         計算後情報."tkShunyuGaku05" as "dbT2015KeisangoJoho_tkShunyuGaku05",
-         計算後情報."tkShunyuGaku06" as "dbT2015KeisangoJoho_tkShunyuGaku06",
-         計算後情報."fuShunyuGaku01" as "dbT2015KeisangoJoho_fuShunyuGaku01",
-         計算後情報."fuShunyuGaku02" as "dbT2015KeisangoJoho_fuShunyuGaku02",
-         計算後情報."fuShunyuGaku03" as "dbT2015KeisangoJoho_fuShunyuGaku03",
-         計算後情報."fuShunyuGaku04" as "dbT2015KeisangoJoho_fuShunyuGaku04",
-         計算後情報."fuShunyuGaku05" as "dbT2015KeisangoJoho_fuShunyuGaku05",
-         計算後情報."fuShunyuGaku06" as "dbT2015KeisangoJoho_fuShunyuGaku06",
-         計算後情報."fuShunyuGaku07" as "dbT2015KeisangoJoho_fuShunyuGaku07",
-         計算後情報."fuShunyuGaku08" as "dbT2015KeisangoJoho_fuShunyuGaku08",
-         計算後情報."fuShunyuGaku09" as "dbT2015KeisangoJoho_fuShunyuGaku09",
-         計算後情報."fuShunyuGaku10" as "dbT2015KeisangoJoho_fuShunyuGaku10",
-         計算後情報."fuShunyuGaku11" as "dbT2015KeisangoJoho_fuShunyuGaku11",
-         計算後情報."fuShunyuGaku12" as "dbT2015KeisangoJoho_fuShunyuGaku12",
-         計算後情報."fuShunyuGaku13" as "dbT2015KeisangoJoho_fuShunyuGaku13",
-         計算後情報."fuShunyuGaku14" as "dbT2015KeisangoJoho_fuShunyuGaku14"
+        計算後情報."choteiNendo" as "dbT2015KeisangoJoho_choteiNendo",
+        計算後情報."fukaNendo" as "dbT2015KeisangoJoho_fukaNendo",
+        計算後情報."tsuchishoNo" as "dbT2015KeisangoJoho_tsuchishoNo",
+        計算後情報."koseiZengoKubun" as "dbT2015KeisangoJoho_koseiZengoKubun",
+        計算後情報."sakuseiShoriName" as "dbT2015KeisangoJoho_sakuseiShoriName",
+        計算後情報."insertDantaiCd" as "dbT2015KeisangoJoho_insertDantaiCd",
+        計算後情報."insertTimestamp" as "dbT2015KeisangoJoho_insertTimestamp",
+        計算後情報."insertReamsLoginId" as "dbT2015KeisangoJoho_insertReamsLoginId",
+        計算後情報."insertContextId" as "dbT2015KeisangoJoho_insertContextId",
+        計算後情報."isDeleted" as "dbT2015KeisangoJoho_isDeleted",
+        計算後情報."updateCount" as "dbT2015KeisangoJoho_updateCount",
+        計算後情報."lastUpdateTimestamp" as "dbT2015KeisangoJoho_lastUpdateTimestamp",
+        計算後情報."lastUpdateReamsLoginId" as "dbT2015KeisangoJoho_lastUpdateReamsLoginId",
+        計算後情報."fukaRirekiNo" as "dbT2015KeisangoJoho_fukaRirekiNo",
+        計算後情報."hihokenshaNo" as "dbT2015KeisangoJoho_hihokenshaNo",
+        計算後情報."shikibetsuCode" as "dbT2015KeisangoJoho_shikibetsuCode",
+        計算後情報."setaiCode" as "dbT2015KeisangoJoho_setaiCode",
+        計算後情報."setaiInsu" as "dbT2015KeisangoJoho_setaiInsu",
+        計算後情報."shikakuShutokuYMD" as "dbT2015KeisangoJoho_shikakuShutokuYMD",
+        計算後情報."shikakuShutokuJiyu" as "dbT2015KeisangoJoho_shikakuShutokuJiyu",
+        計算後情報."shikakuSoshitsuYMD" as "dbT2015KeisangoJoho_shikakuSoshitsuYMD",
+        計算後情報."shikakuSoshitsuJiyu" as "dbT2015KeisangoJoho_shikakuSoshitsuJiyu",
+        計算後情報."seihofujoShurui" as "dbT2015KeisangoJoho_seihofujoShurui",
+        計算後情報."seihoKaishiYMD" as "dbT2015KeisangoJoho_seihoKaishiYMD",
+        計算後情報."seihoHaishiYMD" as "dbT2015KeisangoJoho_seihoHaishiYMD",
+        計算後情報."ronenKaishiYMD" as "dbT2015KeisangoJoho_ronenKaishiYMD",
+        計算後情報."ronenHaishiYMD" as "dbT2015KeisangoJoho_ronenHaishiYMD",
+        計算後情報."fukaYMD" as "dbT2015KeisangoJoho_fukaYMD",
+        計算後情報."kazeiKubun" as "dbT2015KeisangoJoho_kazeiKubun",
+        計算後情報."setaikazeiKubun" as "dbT2015KeisangoJoho_setaikazeiKubun",
+        計算後情報."gokeiShotokuGaku" as "dbT2015KeisangoJoho_gokeiShotokuGaku",
+        計算後情報."nenkinShunyuGaku" as "dbT2015KeisangoJoho_nenkinShunyuGaku",
+        計算後情報."hokenryoDankai" as "dbT2015KeisangoJoho_hokenryoDankai",
+        計算後情報."hokenryoDankai1" as "dbT2015KeisangoJoho_hokenryoDankai1",
+        計算後情報."nengakuHokenryo1" as "dbT2015KeisangoJoho_nengakuHokenryo1",
+        計算後情報."tsukiwariStartYM1" as "dbT2015KeisangoJoho_tsukiwariStartYM1",
+        計算後情報."tsukiwariEndYM1" as "dbT2015KeisangoJoho_tsukiwariEndYM1",
+        計算後情報."hokenryoDankai2" as "dbT2015KeisangoJoho_hokenryoDankai2",
+        計算後情報."nengakuHokenryo2" as "dbT2015KeisangoJoho_nengakuHokenryo2",
+        計算後情報."tsukiwariStartYM2" as "dbT2015KeisangoJoho_tsukiwariStartYM2",
+        計算後情報."tsukiwariEndYM2" as "dbT2015KeisangoJoho_tsukiwariEndYM2",
+        計算後情報."choteiNichiji" as "dbT2015KeisangoJoho_choteiNichiji",
+        計算後情報."choteiJiyu1" as "dbT2015KeisangoJoho_choteiJiyu1",
+        計算後情報."choteiJiyu2" as "dbT2015KeisangoJoho_choteiJiyu2",
+        計算後情報."choteiJiyu3" as "dbT2015KeisangoJoho_choteiJiyu3",
+        計算後情報."choteiJiyu4" as "dbT2015KeisangoJoho_choteiJiyu4",
+        計算後情報."koseiM" as "dbT2015KeisangoJoho_koseiM",
+        計算後情報."gemmenMaeHokenryo" as "dbT2015KeisangoJoho_gemmenMaeHokenryo",
+        計算後情報."gemmenGaku" as "dbT2015KeisangoJoho_gemmenGaku",
+        計算後情報."kakuteiHokenryo" as "dbT2015KeisangoJoho_kakuteiHokenryo",
+        計算後情報."hokenryoDankaiKarisanntei" as "dbT2015KeisangoJoho_hokenryoDankaiKarisanntei",
+        計算後情報."choshuHohoRirekiNo" as "dbT2015KeisangoJoho_choshuHohoRirekiNo",
+        計算後情報."idoKijunNichiji" as "dbT2015KeisangoJoho_idoKijunNichiji",
+        計算後情報."kozaKubun" as "dbT2015KeisangoJoho_kozaKubun",
+        計算後情報."kyokaisoKubun" as "dbT2015KeisangoJoho_kyokaisoKubun",
+        計算後情報."shokkenKubun" as "dbT2015KeisangoJoho_shokkenKubun",
+        計算後情報."fukaShichosonCode" as "dbT2015KeisangoJoho_fukaShichosonCode",
+        計算後情報."tkSaishutsuKampuGaku" as "dbT2015KeisangoJoho_tkSaishutsuKampuGaku",
+        計算後情報."fuSaishutsuKampuGaku" as "dbT2015KeisangoJoho_fuSaishutsuKampuGaku",
+        計算後情報."tkKibetsuGaku01" as "dbT2015KeisangoJoho_tkKibetsuGaku01",
+        計算後情報."tkKibetsuGaku02" as "dbT2015KeisangoJoho_tkKibetsuGaku02",
+        計算後情報."tkKibetsuGaku03" as "dbT2015KeisangoJoho_tkKibetsuGaku03",
+        計算後情報."tkKibetsuGaku04" as "dbT2015KeisangoJoho_tkKibetsuGaku04",
+        計算後情報."tkKibetsuGaku05" as "dbT2015KeisangoJoho_tkKibetsuGaku05",
+        計算後情報."tkKibetsuGaku06" as "dbT2015KeisangoJoho_tkKibetsuGaku06",
+        計算後情報."fuKibetsuGaku01" as "dbT2015KeisangoJoho_fuKibetsuGaku01",
+        計算後情報."fuKibetsuGaku02" as "dbT2015KeisangoJoho_fuKibetsuGaku02",
+        計算後情報."fuKibetsuGaku03" as "dbT2015KeisangoJoho_fuKibetsuGaku03",
+        計算後情報."fuKibetsuGaku04" as "dbT2015KeisangoJoho_fuKibetsuGaku04",
+        計算後情報."fuKibetsuGaku05" as "dbT2015KeisangoJoho_fuKibetsuGaku05",
+        計算後情報."fuKibetsuGaku06" as "dbT2015KeisangoJoho_fuKibetsuGaku06",
+        計算後情報."fuKibetsuGaku07" as "dbT2015KeisangoJoho_fuKibetsuGaku07",
+        計算後情報."fuKibetsuGaku08" as "dbT2015KeisangoJoho_fuKibetsuGaku08",
+        計算後情報."fuKibetsuGaku09" as "dbT2015KeisangoJoho_fuKibetsuGaku09",
+        計算後情報."fuKibetsuGaku10" as "dbT2015KeisangoJoho_fuKibetsuGaku10",
+        計算後情報."fuKibetsuGaku11" as "dbT2015KeisangoJoho_fuKibetsuGaku11",
+        計算後情報."fuKibetsuGaku12" as "dbT2015KeisangoJoho_fuKibetsuGaku12",
+        計算後情報."fuKibetsuGaku13" as "dbT2015KeisangoJoho_fuKibetsuGaku13",
+        計算後情報."fuKibetsuGaku14" as "dbT2015KeisangoJoho_fuKibetsuGaku14",
+        計算後情報."choshuHoho4gatsu" as "dbT2015KeisangoJoho_choshuHoho4gatsu",
+        計算後情報."choshuHoho5gatsu" as "dbT2015KeisangoJoho_choshuHoho5gatsu",
+        計算後情報."choshuHoho6gatsu" as "dbT2015KeisangoJoho_choshuHoho6gatsu",
+        計算後情報."choshuHoho7gatsu" as "dbT2015KeisangoJoho_choshuHoho7gatsu",
+        計算後情報."choshuHoho8gatsu" as "dbT2015KeisangoJoho_choshuHoho8gatsu",
+        計算後情報."choshuHoho9gatsu" as "dbT2015KeisangoJoho_choshuHoho9gatsu",
+        計算後情報."choshuHoho10gatsu" as "dbT2015KeisangoJoho_choshuHoho10gatsu",
+        計算後情報."choshuHoho11gatsu" as "dbT2015KeisangoJoho_choshuHoho11gatsu",
+        計算後情報."choshuHoho12gatsu" as "dbT2015KeisangoJoho_choshuHoho12gatsu",
+        計算後情報."choshuHoho1gatsu" as "dbT2015KeisangoJoho_choshuHoho1gatsu",
+        計算後情報."choshuHoho2gatsu" as "dbT2015KeisangoJoho_choshuHoho2gatsu",
+        計算後情報."choshuHoho3gatsu" as "dbT2015KeisangoJoho_choshuHoho3gatsu",
+        計算後情報."choshuHohoYoku4gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku4gatsu",
+        計算後情報."choshuHohoYoku5gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku5gatsu",
+        計算後情報."choshuHohoYoku6gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku6gatsu",
+        計算後情報."choshuHohoYoku7gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku7gatsu",
+        計算後情報."choshuHohoYoku8gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku8gatsu",
+        計算後情報."choshuHohoYoku9gatsu" as "dbT2015KeisangoJoho_choshuHohoYoku9gatsu",
+        計算後情報."kariNenkinNo" as "dbT2015KeisangoJoho_kariNenkinNo",
+        計算後情報."kariNenkinCode" as "dbT2015KeisangoJoho_kariNenkinCode",
+        計算後情報."kariHosokuM" as "dbT2015KeisangoJoho_kariHosokuM",
+        計算後情報."honNenkinNo" as "dbT2015KeisangoJoho_honNenkinNo",
+        計算後情報."honNenkinCode" as "dbT2015KeisangoJoho_honNenkinCode",
+        計算後情報."honHosokuM" as "dbT2015KeisangoJoho_honHosokuM",
+        計算後情報."yokunendoKariNenkinNo" as "dbT2015KeisangoJoho_yokunendoKariNenkinNo",
+        計算後情報."yokunendoKariNenkinCode" as "dbT2015KeisangoJoho_yokunendoKariNenkinCode",
+        計算後情報."yokunendoKariHosokuM" as "dbT2015KeisangoJoho_yokunendoKariHosokuM",
+        計算後情報."iraiSohuzumiFlag" as "dbT2015KeisangoJoho_iraiSohuzumiFlag",
+        計算後情報."tsuikaIraiSohuzumiFlag" as "dbT2015KeisangoJoho_tsuikaIraiSohuzumiFlag",
+        計算後情報."tokuchoTeishiNichiji" as "dbT2015KeisangoJoho_tokuchoTeishiNichiji",
+        計算後情報."tokuchoTeishiJiyuCode" as "dbT2015KeisangoJoho_tokuchoTeishiJiyuCode",
+        計算後情報."tkShunyuGaku01" as "dbT2015KeisangoJoho_tkShunyuGaku01",
+        計算後情報."tkShunyuGaku02" as "dbT2015KeisangoJoho_tkShunyuGaku02",
+        計算後情報."tkShunyuGaku03" as "dbT2015KeisangoJoho_tkShunyuGaku03",
+        計算後情報."tkShunyuGaku04" as "dbT2015KeisangoJoho_tkShunyuGaku04",
+        計算後情報."tkShunyuGaku05" as "dbT2015KeisangoJoho_tkShunyuGaku05",
+        計算後情報."tkShunyuGaku06" as "dbT2015KeisangoJoho_tkShunyuGaku06",
+        計算後情報."fuShunyuGaku01" as "dbT2015KeisangoJoho_fuShunyuGaku01",
+        計算後情報."fuShunyuGaku02" as "dbT2015KeisangoJoho_fuShunyuGaku02",
+        計算後情報."fuShunyuGaku03" as "dbT2015KeisangoJoho_fuShunyuGaku03",
+        計算後情報."fuShunyuGaku04" as "dbT2015KeisangoJoho_fuShunyuGaku04",
+        計算後情報."fuShunyuGaku05" as "dbT2015KeisangoJoho_fuShunyuGaku05",
+        計算後情報."fuShunyuGaku06" as "dbT2015KeisangoJoho_fuShunyuGaku06",
+        計算後情報."fuShunyuGaku07" as "dbT2015KeisangoJoho_fuShunyuGaku07",
+        計算後情報."fuShunyuGaku08" as "dbT2015KeisangoJoho_fuShunyuGaku08",
+        計算後情報."fuShunyuGaku09" as "dbT2015KeisangoJoho_fuShunyuGaku09",
+        計算後情報."fuShunyuGaku10" as "dbT2015KeisangoJoho_fuShunyuGaku10",
+        計算後情報."fuShunyuGaku11" as "dbT2015KeisangoJoho_fuShunyuGaku11",
+        計算後情報."fuShunyuGaku12" as "dbT2015KeisangoJoho_fuShunyuGaku12",
+        計算後情報."fuShunyuGaku13" as "dbT2015KeisangoJoho_fuShunyuGaku13",
+        計算後情報."fuShunyuGaku14" as "dbT2015KeisangoJoho_fuShunyuGaku14"
     </sql>
-          
+
     <resultMap id="ResultMap_DbT2015KeisangoJohoEntity_after" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity" autoMapping="false">
         <id property="choteiNendo" column="dbT2015KeisangoJoho_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="dbT2015KeisangoJoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -804,7 +804,7 @@
         <result property="fuShunyuGaku13" column="dbT2015KeisangoJoho_fuShunyuGaku13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fuShunyuGaku14" column="dbT2015KeisangoJoho_fuShunyuGaku14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <resultMap id="ResultMap_DbT2015KeisangoJohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity" autoMapping="false">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -1000,7 +1000,7 @@
         <result property="dtYobi4Juminzei" column="dtYobi4Juminzei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dtKojinNo" column="dtKojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-            
+
     <resultMap id="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity_after" type="jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity" autoMapping="false">
         <id property="gyomuCode" column="ueT0511after_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler" />
         <id property="shoriNendo" column="ueT0511after_shoriNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
@@ -1063,7 +1063,7 @@
         <result property="dtYobi4Juminzei" column="ueT0511after_dtYobi4Juminzei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dtKojinNo" column="ueT0511after_dtKojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    
+
     <resultMap id="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity" type="jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity" autoMapping="false">
         <id property="gyomuCode" column="ueT0511_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler" />
         <id property="shoriNendo" column="ueT0511_shoriNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
@@ -1127,7 +1127,7 @@
         <result property="dtKojinNo" column="ueT0511_dtKojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-   <resultMap id="UaFt200FindShikibetsuTaishoEntity" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity" >
+    <resultMap id="UaFt200FindShikibetsuTaishoEntity" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity" >
         <id property="shikibetsuCode"                         column="shikibetsuTaisho_shikibetsuCode"                     typeHandler="ShikibetsuCodeTypeHandler" />
         <id property="rirekiNo"                               column="shikibetsuTaisho_rirekiNo"                           />
         <result property="genLasdecCode"                      column="shikibetsuTaisho_genLasdecCode"                      typeHandler="LasdecCodeTypeHandler" />
@@ -1324,7 +1324,7 @@
         <result property="yusenShimeiTimestamp"               column="shikibetsuTaisho_yusenShimeiTimestamp"               typeHandler="RDateTimeTypeHandler" />
         <result property="jukiTorokuNo"                       column="shikibetsuTaisho_jukiTorokuNo"                       typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.TorokuNoTypeHandler" />
     </resultMap>
-    
+
     <resultMap id="ResultMap_AtesakiEntity" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity">
         <id     property="shikibetsuCode"                      column="atesaki_shikibetsuCode"                      typeHandler="ShikibetsuCodeTypeHandler" />
         <id     property="atesakiShubetsu"                     column="atesaki_atesakiShubetsu"                     typeHandler="RStringTypeHandler" />
@@ -1509,359 +1509,359 @@
         <result property="kensakuyoKanaMeisho" column="caT0752kensakuyoKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="daihyoshaShikibetsuCode" column="caT0752daihyoshaShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="daihyoshaShimei" column="caT0752daihyoshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-    </resultMap> 
-             
+    </resultMap>
+
     <select resultOrdered="true" id="select全件賦課情報_変更" resultMap="resultMap_KarisanteiTsuchisho"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter" fetchSize="500">
         SELECT
-            A.*,
-            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
+        A.*,
+        "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
         FROM
-            "TmpFukaInfo" AS A
+        "TmpFukaInfo" AS A
         WHERE
-            A."更正前情報有無区分" = '1'
-       ${出力順}
+        A."更正前情報有無区分" = '1'
+        ${出力順}
     </select>
-    
+
     <select resultOrdered="true" id="select全件賦課情報_納入" resultMap="resultMap_KarisanteiTsuchisho"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter" fetchSize="500">
         SELECT
-            A.*,
-            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
+        A.*,
+        "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
         FROM
-            "TmpFukaInfo" AS A
-        WHERE 
-            <if test="出力期 == 1">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku01",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'  
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        "TmpFukaInfo" AS A
+        WHERE
+        <if test="出力期 == 1">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku01",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="2 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="3 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="4 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="5 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="6 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="7 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="8 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="9 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="10 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="11 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="12 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="13 == 出力期">
+            (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+        </if>
+        <if test="14 == 出力期">
+            COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0'
+        </if>
+        <if test="口座区分 != null">
+            AND A."dbT2015KeisangoJoho_kozaKubun" = #{口座区分}
+        </if>
+        <if test="処理対象 == 1 and 通知書プリント条件 == 2 or (処理対象 == 2 and (通知書プリント条件 == 1 or 通知書プリント条件 == 2 or 通知書プリント条件 == 3))">
+            <if test="出力期 == 1">
+                AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku01",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku01",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku02",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku03",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku04",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku05",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="2 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'  
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="2 == 出力期">
+                AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku02",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku03",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku04",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku05",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="3 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'  
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="3 == 出力期">
+                AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku03",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku04",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku05",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="4 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'  
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="4 == 出力期">
+                AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku04",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku05",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="5 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[>]]> '0'  
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="5 == 出力期">
+                AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku05",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="6 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="6 == 出力期">
+                AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="7 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="7 == 出力期">
+                AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="8 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="8 == 出力期">
+                AND  COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="9 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="9 == 出力期">
+                AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="10 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="10 == 出力期">
+                AND  COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="11 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="11 == 出力期">
+                AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="12 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="12 == 出力期">
+                AND  COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
+                + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="13 == 出力期">              
-                (COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[>]]> '0'   
-                OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0')
+            <if test="13 == 出力期">
+                AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
+                - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="14 == 出力期">              
-                COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[>]]> '0'
+            <if test="14 == 出力期">
+                AND  COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'
             </if>
-            <if test="口座区分 != null">              
-                AND A."dbT2015KeisangoJoho_kozaKubun" = #{口座区分} 
-            </if>
-            <if test="処理対象 == 1 and 通知書プリント条件 == 2 or (処理対象 == 2 and (通知書プリント条件 == 1 or 通知書プリント条件 == 2 or 通知書プリント条件 == 3))"> 
-                <if test="出力期 == 1">              
-                    AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku01",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku01",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku02",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku03",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku04",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku05",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'   
-                </if>
-                <if test="2 == 出力期">              
-                    AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku02",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku03",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku04",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku05",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'   
-                </if>
-                <if test="3 == 出力期">              
-                    AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku03",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku04",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku05",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'   
-                </if>
-                <if test="4 == 出力期">              
-                    AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku04",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku05",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'   
-                </if>
-                <if test="5 == 出力期">              
-                    AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku05",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'  
-                </if>
-                <if test="6 == 出力期">              
-                    AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku06",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'  
-                </if>
-                <if test="7 == 出力期">              
-                    AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku07",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'  
-                </if>
-                <if test="8 == 出力期">              
-                    AND  COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku08",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'  
-                </if>
-                <if test="9 == 出力期">              
-                    AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku09",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1'  
-                </if>
-                <if test="10 == 出力期">              
-                    AND  COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku10",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1' 
-                </if>
-                <if test="11 == 出力期">              
-                    AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku11",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1' 
-                </if>
-                <if test="12 == 出力期">              
-                    AND  COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0)
-                        + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku12",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1' 
-                </if>
-                <if test="13 == 出力期">              
-                    AND COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) + COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0)
-                        - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku13",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1' 
-                </if>
-                <if test="14 == 出力期">              
-                    AND  COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) - COALESCE(A."dbT2015KeisangoJoho_fuShunyuGaku14",0) <![CDATA[>=]]> '1' 
-                </if>
-            </if>
-            <if test="処理対象 == 2 and 通知書プリント条件 == 1"> 
-                    AND (A."dbT2015KeisangoJoho_kozaKubun" <![CDATA[!=]]> A."kozaKubun"
-                        OR (
-                        COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku01",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku01",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku02",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku02",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku03",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku03",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku04",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku04",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku05",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku05",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku06",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku06",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku01",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku01",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku02",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku03",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku04",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku05",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku06",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku07",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku08",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku09",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku10",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku11",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku12",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku13",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku14",0)
-                        ))
-            </if>
-            <if test="処理対象 == 2 and 通知書プリント条件 == 2"> 
-                    OR (A."dbT2015KeisangoJoho_kozaKubun" <![CDATA[!=]]> A."kozaKubun"
-                        OR (
-                        COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku01",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku01",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku02",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku02",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku03",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku03",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku04",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku04",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku05",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku05",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku06",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku06",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku01",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku01",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku02",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku03",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku04",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku05",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku06",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku07",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku08",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku09",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku10",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku11",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku12",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku13",0)
-                        OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku14",0)
-                        ))
-            </if>
-            <if test="処理対象 == 2 and 通知書プリント条件 == 3"> 
-                    AND A."dbT2015KeisangoJoho_kakuteiHokenryo" <![CDATA[!=]]> A."kakuteiHokenryo"
-            </if>
+        </if>
+        <if test="処理対象 == 2 and 通知書プリント条件 == 1">
+            AND (A."dbT2015KeisangoJoho_kozaKubun" <![CDATA[!=]]> A."kozaKubun"
+            OR (
+            COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku01",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku01",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku02",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku02",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku03",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku03",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku04",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku04",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku05",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku05",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku06",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku06",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku01",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku01",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku02",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku03",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku04",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku05",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku06",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku07",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku08",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku09",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku10",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku11",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku12",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku13",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku14",0)
+            ))
+        </if>
+        <if test="処理対象 == 2 and 通知書プリント条件 == 2">
+            OR (A."dbT2015KeisangoJoho_kozaKubun" <![CDATA[!=]]> A."kozaKubun"
+            OR (
+            COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku01",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku01",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku02",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku02",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku03",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku03",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku04",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku04",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku05",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku05",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_tkKibetsuGaku06",0) <![CDATA[!=]]> COALESCE(A."tkKibetsuGaku06",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku01",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku01",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku02",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku02",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku03",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku03",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku04",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku04",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku05",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku05",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku06",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku06",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku07",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku07",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku08",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku08",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku09",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku09",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku10",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku10",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku11",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku11",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku12",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku12",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku13",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku13",0)
+            OR COALESCE(A."dbT2015KeisangoJoho_fuKibetsuGaku14",0) <![CDATA[!=]]> COALESCE(A."fuKibetsuGaku14",0)
+            ))
+        </if>
+        <if test="処理対象 == 2 and 通知書プリント条件 == 3">
+            AND A."dbT2015KeisangoJoho_kakuteiHokenryo" <![CDATA[!=]]> A."kakuteiHokenryo"
+        </if>
         ${出力順}
     </select>
-                      
+
 </mapper>

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.hokenryodankaijoh
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.rankjoho.RankJoho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.hokenryodankai.HokenryoDankaiJohoRelateMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hokenryodankai.HokenryoDankaiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.hokenryodankai.IHokenryoDankaiJohoRelateMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.hokenryodankai.rankjoho.RankJohoManager;

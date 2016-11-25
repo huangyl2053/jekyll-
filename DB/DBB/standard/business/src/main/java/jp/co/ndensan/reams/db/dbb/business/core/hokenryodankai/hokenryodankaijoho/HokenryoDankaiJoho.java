@@ -11,7 +11,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.rankjoho.RankJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.rankjoho.RankJohoIdentifier;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hokenryodankai.HokenryoDankaiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hokenryodankai.RankJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;

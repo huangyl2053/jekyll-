@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoteishitais
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -234,7 +234,7 @@ public class TokuchoTaishoshaDotei {
         }
 
         if (単一保険者.equals(モード)) {
-            DbT7022ShoriDateKanriEntity entity = shoriDateKanriDac.select今回処理内容情報(SubGyomuCode.DBB介護賦課, 処理年度);
+            DbT7022ShoriDateKanriEntity entity = shoriDateKanriDac.select今回処理内容情報(SubGyomuCode.DBB介護賦課, 処理年度, ShoriName.特徴対象者同定.get名称());
             if (entity == null) {
                 return null;
             }
