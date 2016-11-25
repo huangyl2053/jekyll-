@@ -1444,6 +1444,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 KanendoKiUtil kanendoKi = new KanendoKiUtil();
                 set普通徴収(null, 更正後Info, kanendoKi.get期月リスト());
             }
+            set歳出還付額(更正後Info);
         } else {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setDisabled(false);
             RString 更正後日時 = new RString(更正後の調定日時.get(0).toString());
@@ -1478,6 +1479,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 KanendoKiUtil kanendoKi = new KanendoKiUtil();
                 set普通徴収(更正前Info, 更正後Info, kanendoKi.get期月リスト());
             }
+            set歳出還付額(更正後Info);
         }
         return 更正後Info;
     }
