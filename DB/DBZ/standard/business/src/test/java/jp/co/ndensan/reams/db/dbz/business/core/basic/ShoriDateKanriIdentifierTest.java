@@ -4,8 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanriIdentifier;
 import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7022ShoriDateKanriEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

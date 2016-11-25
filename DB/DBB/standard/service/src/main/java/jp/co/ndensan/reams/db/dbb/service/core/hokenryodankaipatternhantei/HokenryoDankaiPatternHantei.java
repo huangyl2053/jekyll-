@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.core.hokenryodankaipatternhantei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HokenryoDankaiPattern;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

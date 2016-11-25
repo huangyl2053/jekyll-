@@ -10,14 +10,14 @@ import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.CaluculateFukaP
 import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.HonsenteiKeisangojohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.KeisanTaishoshaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honnsanteifuka.HonsanteiTokuchoChushishaParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.CaluculateFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.FukaCalculateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.HonsenteiKeisangojohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KeisanTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.SetaiHaakuShuturyokuEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**

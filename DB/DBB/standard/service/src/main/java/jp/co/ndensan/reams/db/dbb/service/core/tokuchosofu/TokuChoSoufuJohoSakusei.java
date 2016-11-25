@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchosofu.TokuChoSoufuJo
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB211001.DBB211001_TokuchoSofuJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;

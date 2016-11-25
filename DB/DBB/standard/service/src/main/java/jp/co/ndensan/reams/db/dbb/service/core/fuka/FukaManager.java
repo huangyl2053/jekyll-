@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.JigyoKubun;

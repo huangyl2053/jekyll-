@@ -185,6 +185,7 @@ dbb/db/dbb/KaigoAtenaJoho/onload
 dbb/db/dbb/KaigoGekihenKanwaSettei/onClickBtnClose
 dbb/db/dbb/KaigoGekihenKanwaSettei/onClickBtnKakutei
 dbb/db/dbb/KaigoGekihenKanwaSettei/onLoad
+dbb/db/dbb/KaigoHihokenshaInfoPanel/onActive
 dbb/db/dbb/KaigoHihokenshaInfoPanel/onClick_Add
 dbb/db/dbb/KaigoHihokenshaInfoPanel/onClick_Cancelled
 dbb/db/dbb/KaigoHihokenshaInfoPanel/onClick_Certained
@@ -226,6 +227,7 @@ dbb/db/dbb/KanryoMessage/onLoad
 dbb/db/dbb/KarisanteiIdoFukaPanel/onChange_ddlNotsuShuturyokuki
 dbb/db/dbb/KarisanteiIdoFukaPanel/onChange_ddlShorigetsu
 dbb/db/dbb/KarisanteiIdoFukaPanel/onChange_radChushutsuJoken
+dbb/db/dbb/KarisanteiIdoFukaPanel/onClick_btnIkkatsuHakko
 dbb/db/dbb/KarisanteiIdoFukaPanel/onClick_btnSantei
 dbb/db/dbb/KarisanteiIdoFukaPanel/onClick_onBeforeCheck
 dbb/db/dbb/KarisanteiIdoFukaPanel/onLoad

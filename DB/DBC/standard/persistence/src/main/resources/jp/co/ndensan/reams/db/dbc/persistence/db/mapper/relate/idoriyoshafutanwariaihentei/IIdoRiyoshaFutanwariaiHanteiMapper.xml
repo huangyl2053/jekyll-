@@ -3,16 +3,16 @@
 <!-- 異動分利用者負担割合判定 -->
 <!-- @reamsid_L DBC-4950-031 zhujun -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoriyoshafutanwariaihentei.IIdoRiyoshaFutanwariaiHanteiMapper">
-    <select  resultOrdered="true" id="selectMaxRenban" 
-             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity" 
-             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoriyoshafutanwariaihentei.IdoRiyoshaFutanwariaiHanteiMybatisParameter" 
+    <select  resultOrdered="true" id="selectMaxRenban"
+             resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoriyoshafutanwariaihentei.IdoRiyoshaFutanwariaiHanteiMybatisParameter"
              fetchSize="500">
-        SELECT 
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM (
         SELECT
         rgdb."DbT7022ShoriDateKanri".*,
-        row_number() over (PARTITION BY "shoriName", "nendo" ORDER BY "nendoNaiRenban" DESC ) AS rowNo 
+        row_number() over (PARTITION BY "shoriName", "nendo" ORDER BY "nendoNaiRenban" DESC ) AS rowNo
         FROM
         rgdb."DbT7022ShoriDateKanri"
         WHERE
@@ -20,7 +20,7 @@
         and rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
         AND rgdb."DbT7022ShoriDateKanri"."shoriName" = #{ 処理名 }
         AND rgdb."DbT7022ShoriDateKanri"."nendo" = #{ 対象年度 }
-        ) as "DbT7022ShoriDateKanri" 
+        ) as "DbT7022ShoriDateKanri"
         WHERE "DbT7022ShoriDateKanri".rowNo = 1
     </select>
 </mapper>

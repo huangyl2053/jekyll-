@@ -17,7 +17,7 @@
 
     <select id="getKijunYMD"
             resultOrdered="true"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoMybatisParamater"
             fetchSize="500">
         SELECT
@@ -42,19 +42,19 @@
 
     <select id="getShoriDateKanriByShoriName"
             resultOrdered="true"
-            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoMybatisParamater"
             fetchSize="500">
-        SELECT * FROM 
-            (SELECT <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri"/>, 
-                    ROW_NUMBER() OVER(PARTITION BY "DbT7022ShoriDateKanri"."subGyomuCode", "DbT7022ShoriDateKanri"."shoriName" ORDER BY "DbT7022ShoriDateKanri"."kijunTimestamp" DESC) AS rank_number 
-             FROM   rgdb."DbT7022ShoriDateKanri"
-             WHERE "DbT7022ShoriDateKanri"."subGyomuCode" = #{subGyomuCode} 
-             AND   "DbT7022ShoriDateKanri"."shoriName" = #{shoriName1}
-                   <if test="isTosyo">
-                    OR "DbT7022ShoriDateKanri"."shoriName" = #{shoriName2}
-                   </if>
-             ) AS T1
+        SELECT * FROM
+        (SELECT <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri"/>,
+        ROW_NUMBER() OVER(PARTITION BY "DbT7022ShoriDateKanri"."subGyomuCode", "DbT7022ShoriDateKanri"."shoriName" ORDER BY "DbT7022ShoriDateKanri"."kijunTimestamp" DESC) AS rank_number
+        FROM   rgdb."DbT7022ShoriDateKanri"
+        WHERE "DbT7022ShoriDateKanri"."subGyomuCode" = #{subGyomuCode}
+        AND   "DbT7022ShoriDateKanri"."shoriName" = #{shoriName1}
+        <if test="isTosyo">
+            OR "DbT7022ShoriDateKanri"."shoriName" = #{shoriName2}
+        </if>
+        ) AS T1
         WHERE T1.rank_number = 1
     </select>
 

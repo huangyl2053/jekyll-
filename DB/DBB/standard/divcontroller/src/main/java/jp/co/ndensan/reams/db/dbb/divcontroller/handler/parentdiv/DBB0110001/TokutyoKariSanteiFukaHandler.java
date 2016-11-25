@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifuka.TokuchoKariSanteiFuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;

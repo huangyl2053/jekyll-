@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112002.DBB112002_Tousho
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112004.DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShoriHizukeKanriMaster;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -108,7 +108,7 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
             }
             if (遷移区分_1.equals(遷移区分)) {
                 処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_所得情報抽出連携異動(
-                        年度, entity.get市町村コード(), entity.get市町村識別ID());
+                        年度, entity.get市町村コード(), entity.get市町村識別ID(), ShoriName.所得引出.get名称());
                 if (処理日付管理異動情報Entity == null) {
                     kanriMasterEntity.set処理状態(null);
                     kanriMasterEntity.set表示用処理状態(null);

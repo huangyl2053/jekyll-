@@ -17,9 +17,9 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6.Sho
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

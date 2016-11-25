@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.Hika
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

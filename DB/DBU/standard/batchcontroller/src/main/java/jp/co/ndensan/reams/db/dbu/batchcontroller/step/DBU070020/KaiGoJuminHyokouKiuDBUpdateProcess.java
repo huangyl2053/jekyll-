@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU070020;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuProcessParameter;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigojyuminhyoutashajuki.KaiGoJuminHyokouKiuEucCsvBusiness;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;

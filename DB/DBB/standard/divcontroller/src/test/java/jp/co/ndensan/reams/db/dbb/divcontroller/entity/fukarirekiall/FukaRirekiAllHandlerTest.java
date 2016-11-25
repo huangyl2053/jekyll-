@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.core.KiwarigakuCalculator;
 import jp.co.ndensan.reams.db.dbx.business.core.choteikyotsu.ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbx.business.core.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.fukarireki
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.FukaMiscManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojuminhyotruku;
 
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojuminhyotruku.KaigojuminHyotrukuMapperParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * バッチ設計_DBUMN81001_住民異動連携情報登録【他社住基用】クラスです。

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.tokuchosedokaniftanic
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB231001.DBB231001_TokuchoSeidokanIFSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2310001.TokuchoSeidokanIFSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchosedokaniftanichu.TokuchoSedokanIFTanichu;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;

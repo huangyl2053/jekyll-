@@ -23,15 +23,15 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteifuka.BatchTyouhyouEn
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2014TsuchishoUchiwakeJokenDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteifuka.IHonsanteifukaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -165,7 +165,7 @@ public class Honsanteifuka {
     public List<ShoriDateKanri> getShoriDateKanriList(RString 遷移元区分, FlexibleYear 調定年度) {
         List<DbT7022ShoriDateKanriEntity> entityList = new ArrayList<>();
         if (区分_ゼロ.equals(遷移元区分)) {
-            entityList = 処理日付管理Dac.select処理状況_賦課(調定年度);
+            entityList = 処理日付管理Dac.select処理状況_賦課(調定年度, ShoriName.特徴対象者同定.get名称(), ShoriName.依頼金額計算.get名称());
         } else if (区分_イチ.equals(遷移元区分)) {
             entityList = 処理日付管理Dac.select処理状況(調定年度, ShoriName.本算定賦課.get名称(), new RString("0001"));
         }

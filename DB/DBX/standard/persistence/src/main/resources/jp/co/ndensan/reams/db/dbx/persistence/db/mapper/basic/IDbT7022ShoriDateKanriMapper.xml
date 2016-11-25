@@ -4,12 +4,12 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper">
 
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7022ShoriDateKanri">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM
         rgdb."DbT7022ShoriDateKanri"
         WHERE
@@ -41,7 +41,7 @@
 
 
     <!--テーブルDbT7022ShoriDateKanriの項目をDbT7022ShoriDateKanriEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7022ShoriDateKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7022ShoriDateKanriEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity" autoMapping="true">
         <id property="subGyomuCode" column="dbT7022ShoriDateKanri_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <id property="shichosonCode" column="dbT7022ShoriDateKanri_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <id property="shoriName" column="dbT7022ShoriDateKanri_shoriName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

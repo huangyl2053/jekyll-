@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsutor
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushatorokusha.NenreiTotatsushaJouhouEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 年齢到達登録者のマッパーインタフェースです。

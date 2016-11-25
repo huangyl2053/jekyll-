@@ -3,11 +3,11 @@
 
 <!-- @reamsid_L DBC-2180-030 x_miaocl -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IKanendoUpdateFutanwariaiHanteiMapper">
-    <select  resultOrdered="true" id="get処理日付管理マスタ更新" 
+    <select  resultOrdered="true" id="get処理日付管理マスタ更新"
              resultMap="ResultMap_DbT7022ShoriDateKanriEntity"
-             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.KanendoUpdateFutanwariaiHanteMybatisParameter" 
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.KanendoUpdateFutanwariaiHanteMybatisParameter"
              fetchSize="500">
-       SELECT
+        SELECT
         rgdb."DbT7022ShoriDateKanri".*
         FROM
         rgdb."DbT7022ShoriDateKanri"
@@ -18,19 +18,19 @@
         AND rgdb."DbT7022ShoriDateKanri"."shoriEdaban" ='0000'
         AND rgdb."DbT7022ShoriDateKanri"."nendo" ='0000'
         AND rgdb."DbT7022ShoriDateKanri"."nendoNaiRenban" ='0001'
-       
+
     </select>
-    
-    <select  resultOrdered="true" id="get処理日付管理マスタデータなし" 
+
+    <select  resultOrdered="true" id="get処理日付管理マスタデータなし"
              resultMap="ResultMap_DbT7022ShoriDateKanriEntity"
              fetchSize="500">
-          SELECT
+        SELECT
         rgdb."DbT7022ShoriDateKanri".*
         FROM
         rgdb."DbT7022ShoriDateKanri"
         WHERE FALSE
     </select>
-    <resultMap id="ResultMap_DbT7022ShoriDateKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7022ShoriDateKanriEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT7022ShoriDateKanriEntity_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <id property="subGyomuCode" column="dbT7022ShoriDateKanriEntity_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <id property="shoriName" column="dbT7022ShoriDateKanriEntity_shoriName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.SeikyuMeisaiItiziDa
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.SeikyuShukeiItiziDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.TempSeikyuMeisaiItiziDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.TempSeikyuShukeiItiziDataEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

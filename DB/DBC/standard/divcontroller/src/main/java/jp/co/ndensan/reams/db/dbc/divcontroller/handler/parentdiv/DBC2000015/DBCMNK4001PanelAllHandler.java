@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000015;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000015.DBCMNK4001PanelAllDiv;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

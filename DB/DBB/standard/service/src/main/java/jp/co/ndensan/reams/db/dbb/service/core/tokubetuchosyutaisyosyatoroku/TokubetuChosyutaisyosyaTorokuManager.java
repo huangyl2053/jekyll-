@@ -19,14 +19,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysTokuchoHosoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.service.core.INenkinTokuchoKaifuJohoManager;
 import jp.co.ndensan.reams.ue.uex.service.core.NenkinTokuchoKaifuJohoManager;

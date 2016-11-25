@@ -2,11 +2,11 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBA-1390-010 wanghuafeng -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.syoritaisyoshichoson.ISyoriTaisyoShichosonMapper">
- <select resultOrdered="true" id="get宛名連動介護保険更新" 
-         resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
-        parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.juminkirokuidojohotorokukoiki.JuminkirokuIdojohoTorokuKoikiMybatisParameter" 
-         fetchSize="500">
-        SELECT 
+    <select resultOrdered="true" id="get宛名連動介護保険更新"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.juminkirokuidojohotorokukoiki.JuminkirokuIdojohoTorokuKoikiMybatisParameter"
+            fetchSize="500">
+        SELECT
         "subGyomuCode"
         ,"shichosonCode"
         ,"shoriName"
@@ -22,44 +22,44 @@
         FROM
         rgdb."DbT7022ShoriDateKanri" as DbT7022
         WHERE
-            DbT7022."subGyomuCode" = #{サブ業務コード} 
+        DbT7022."subGyomuCode" = #{サブ業務コード}
         AND
-            DbT7022."shoriName" = #{処理名} 
-        AND  
-            DbT7022.nendo = #{年度}
-        AND <foreach  
+        DbT7022."shoriName" = #{処理名}
+        AND
+        DbT7022.nendo = #{年度}
+        AND <foreach
             collection="shichosonCode"
             item="item"
-            open="("  
-            separator="OR"  
+            open="("
+            separator="OR"
             close=")">
-                DbT7022."shichosonCode" = #{item}
+            DbT7022."shichosonCode" = #{item}
         </foreach>
-        AND DbT7022."shoriEdaban" = ( 
-    SELECT
-      MAX(A."shoriEdaban") 
-    FROM
-      rgdb."DbT7022ShoriDateKanri" as A 
-    WHERE
-      A."shoriName" = DbT7022."shoriName" 
-	 AND A."subGyomuCode" = DbT7022."subGyomuCode"
-	AND  A."shichosonCode" = DbT7022."shichosonCode"
-	 AND A."nendo" = DbT7022."nendo"
-	 AND A."nendoNaiRenban" = DbT7022."nendoNaiRenban"
- 
-  ) 
-  AND DbT7022."nendoNaiRenban" = ( 
-    SELECT
-      MAX(B."nendoNaiRenban") 
-    FROM
-      rgdb."DbT7022ShoriDateKanri" as B 
-    WHERE
-      B."shoriName" = DbT7022."shoriName" 
-      AND B."subGyomuCode" = DbT7022."subGyomuCode" 
-	  AND B."shichosonCode" = DbT7022."shichosonCode" 
-	  AND B."nendo" = DbT7022."nendo" 
-	  AND B."shoriEdaban" = DbT7022."shoriEdaban" 
-  ) 
+        AND DbT7022."shoriEdaban" = (
+        SELECT
+        MAX(A."shoriEdaban")
+        FROM
+        rgdb."DbT7022ShoriDateKanri" as A
+        WHERE
+        A."shoriName" = DbT7022."shoriName"
+        AND A."subGyomuCode" = DbT7022."subGyomuCode"
+        AND  A."shichosonCode" = DbT7022."shichosonCode"
+        AND A."nendo" = DbT7022."nendo"
+        AND A."nendoNaiRenban" = DbT7022."nendoNaiRenban"
+
+        )
+        AND DbT7022."nendoNaiRenban" = (
+        SELECT
+        MAX(B."nendoNaiRenban")
+        FROM
+        rgdb."DbT7022ShoriDateKanri" as B
+        WHERE
+        B."shoriName" = DbT7022."shoriName"
+        AND B."subGyomuCode" = DbT7022."subGyomuCode"
+        AND B."shichosonCode" = DbT7022."shichosonCode"
+        AND B."nendo" = DbT7022."nendo"
+        AND B."shoriEdaban" = DbT7022."shoriEdaban"
+        )
 
     </select>
 </mapper>

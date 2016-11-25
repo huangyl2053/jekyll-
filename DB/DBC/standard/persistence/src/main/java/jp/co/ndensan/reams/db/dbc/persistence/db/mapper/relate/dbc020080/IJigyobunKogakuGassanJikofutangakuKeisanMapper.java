@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc020080;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * バッチ設計_DBCMNN1001_事業高額合算・事業分自己負担額計算（括）のマッパインタフェースクラスです。

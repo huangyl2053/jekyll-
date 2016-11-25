@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka;
 
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.MaeRirekiKey;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ExceptionSuppliers;

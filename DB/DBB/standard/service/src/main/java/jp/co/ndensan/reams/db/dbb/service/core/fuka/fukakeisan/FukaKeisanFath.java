@@ -27,9 +27,9 @@ import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKij
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingakuFactory;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
@@ -44,8 +44,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.ChoteiNendoKibetsuClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FuchoTsukiClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FukaKoseiJohoClass;
