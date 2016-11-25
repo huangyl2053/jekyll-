@@ -203,6 +203,18 @@ public class KyotakuServiceKeikakuShokaiMainHander {
             jigyoshaDiv.setDisplayNone(true);
         } else {
             jigyoshaDiv.setDisplayNone(false);
+            jigyoshaDiv.getTxtJigyoshaNo().clearValue();
+            jigyoshaDiv.getTxtJigyoshaName().clearValue();
+            jigyoshaDiv.getTxtServiceShuruiMeisho().clearValue();
+            jigyoshaDiv.getTxtJigyoshaYubinNo().clearValue();
+            jigyoshaDiv.getTxtJigyoshaJusho().clearValue();
+            jigyoshaDiv.getTxtJigyoshaTelNo().clearDomain();
+            jigyoshaDiv.getTxtKanrishaName().clearDomain();
+            jigyoshaDiv.getTxtItakusakiJigyoshaNo().clearValue();
+            jigyoshaDiv.getTxtItakusakiJigyoshaName().clearValue();
+            jigyoshaDiv.getTxtHenkoYMD().clearValue();
+            jigyoshaDiv.getTxtHenkoJiyu().clearValue();
+
             jigyoshaDiv.getTxtJigyoshaNo().setValue(居宅サービス履歴.get事業者番号());
             jigyoshaDiv.getTxtJigyoshaName().setValue(居宅サービス履歴.get事業者名());
             RString サービス種類コード = 居宅サービス履歴.getサービス種類コード().getColumnValue();
