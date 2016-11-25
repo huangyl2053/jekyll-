@@ -1051,8 +1051,8 @@ public class TokuchoKariSanteiFukaManagerBatch {
      */
     public void set特徴仮算定計算後賦課情報_特徴停止(TokuchoKariKeisangoFukaTempEntity entity,
             TokuchoKarisanteiKekkaIchiranTeisiEntity 特徴仮算定計算後賦課情報_特徴停止) {
-        entity.setChoteiNendo(FlexibleYear.EMPTY);
-        entity.setFukaNendo(FlexibleYear.EMPTY);
+        entity.setChoteiNendo(特徴仮算定計算後賦課情報_特徴停止.get賦課Newest().getChoteiNendo());
+        entity.setFukaNendo(特徴仮算定計算後賦課情報_特徴停止.get賦課Newest().getFukaNendo());
         entity.setTsuchishoNo(特徴仮算定計算後賦課情報_特徴停止.get賦課Newest().getTsuchishoNo());
         entity.setKoseiZengoKubun(RString.EMPTY);
         entity.setSakuseiShoriName(RString.EMPTY);
@@ -1140,9 +1140,9 @@ public class TokuchoKariSanteiFukaManagerBatch {
         entity.setChoshuHohoYoku7gatsu(RString.EMPTY);
         entity.setChoshuHohoYoku8gatsu(RString.EMPTY);
         entity.setChoshuHohoYoku9gatsu(RString.EMPTY);
-        entity.setKariNenkinNo(RString.EMPTY);
-        entity.setKariNenkinCode(RString.EMPTY);
-        entity.setKariHosokuM(RString.EMPTY);
+        entity.setKariNenkinNo(特徴仮算定計算後賦課情報_特徴停止.get徴収方法Newest().getHonNenkinNo());
+        entity.setKariNenkinCode(特徴仮算定計算後賦課情報_特徴停止.get徴収方法Newest().getHonNenkinCode());
+        entity.setKariHosokuM(特徴仮算定計算後賦課情報_特徴停止.get徴収方法Newest().getHonHosokuM());
         entity.setHonNenkinNo(RString.EMPTY);
         entity.setHonNenkinCode(RString.EMPTY);
         entity.setHonHosokuM(RString.EMPTY);
