@@ -1870,7 +1870,8 @@
         WITH master AS (
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.allColumns_DbT2015KeisangoJoho"/>,
-        koza.*
+        koza.*,
+        "ShuturyokuTemp"."choshuHoho" as "ShuturyokuTemp_choshuHoho"
         FROM rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
         LEFT JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON koza."uaT0310Koza_shikibetsuCode"="DbT2015KeisangoJoho"."shikibetsuCode"
@@ -1934,6 +1935,7 @@
         <id column="dbT2015KeisangoJoho_tsuchishoNo" />
         <id column="dbT2015KeisangoJoho_koseiZengoKubun" />
         <id column="dbT2015KeisangoJoho_sakuseiShoriName" />
+        <result property="徴収方法" column="ShuturyokuTemp_choshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="計算後情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.ResultMap_DbT2015KeisangoJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="特定口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
