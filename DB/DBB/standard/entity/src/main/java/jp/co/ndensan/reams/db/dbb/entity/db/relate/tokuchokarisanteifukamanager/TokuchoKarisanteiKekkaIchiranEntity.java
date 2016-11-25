@@ -25,5 +25,7 @@ public class TokuchoKarisanteiKekkaIchiranEntity {
     private Code 特別徴収業務者コード;
     private Decimal 確定介護保険料_年額;
     private RString 前年度保険料段階;
+    private RString 徴収方法;
+    private RString 特徴開始月;
 
 }

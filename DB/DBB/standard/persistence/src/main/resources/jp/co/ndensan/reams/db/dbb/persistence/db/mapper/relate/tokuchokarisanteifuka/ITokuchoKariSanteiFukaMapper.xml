@@ -954,6 +954,19 @@
                  特徴仮算定抽出Temp."hihokenshaNo"
     </select>
     
+    <select resultOrdered="true" id="select計算後情報" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaMyBatisParameter" 
+             resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.ResultMap_DbT2015KeisangoJohoEntity" fetchSize="500">
+        SELECT 
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.allColumns_DbT2015KeisangoJoho"/>
+        FROM rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
+        WHERE "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
+            AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
+            AND "DbT2015KeisangoJoho"."koseiZengoKubun" = '2'
+            AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '特徴仮算定賦課'
+            AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}
+        
+    </select>
+    
      <select resultOrdered="true" id="select特徴仮算定結果情報" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaMyBatisParameter" 
              resultMap="resultMap_TokuchoKarisanteiKekkaIchiranEntity" fetchSize="500">
          WITH master as(
@@ -967,7 +980,9 @@
             "DbV2002Fuka"."hokenryoDankai1"
             else
             "DbV2002Fuka"."hokenryoDankai2"
-            end) AS 前年度保険料段階
+            end) AS 前年度保険料段階,
+            "ShutsuryokujunTemp"."choshuHoho" AS "ShutsuryokujunTemp_choshuHoho",
+            "ShutsuryokujunTemp"."tokuchoKaisiTuki" AS "ShutsuryokujunTemp_tokuchoKaisiTuki"
             FROM rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
             LEFT JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報_介護継承
             ON "DbT2015KeisangoJoho"."kariNenkinNo" = 年金特徴回付情報_介護継承."kisoNenkinNo"
@@ -998,6 +1013,10 @@
             AND "DbV2002Fuka"."fukaNendo" = #{賦課年度BeforeYear}
             AND "DbV2002Fuka"."tsuchishoNo" = B."通知書番号"
             AND "DbV2002Fuka"."hihokenshaNo" = B."hihokenshaNo"
+            LEFT OUTER JOIN "ShutsuryokujunTemp"
+            ON "ShutsuryokujunTemp"."choteiNendo" = "DbT2015KeisangoJoho"."choteiNendo"
+            AND "ShutsuryokujunTemp"."fukaNendo" = "DbT2015KeisangoJoho"."fukaNendo"
+            AND "ShutsuryokujunTemp"."tsuchishoNo" = "DbT2015KeisangoJoho"."tsuchishoNo"
             WHERE "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
             AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
             AND "DbT2015KeisangoJoho"."koseiZengoKubun" = '2'
@@ -1030,6 +1049,8 @@
         <result property="特別徴収業務者コード" column="dtTokubetsuChoshuGimushaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="確定介護保険料_年額" column="kakuteiHokenryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="前年度保険料段階" column="前年度保険料段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="徴収方法" column="ShutsuryokujunTemp_choshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特徴開始月" column="ShutsuryokujunTemp_tokuchoKaisiTuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="計算後情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.ResultMap_DbT2015KeisangoJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
@@ -1116,6 +1137,8 @@
         <result property="特別徴収義務者コード" column="ueT0511_dtTokubetsuChoshuGimushaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="前年度保険料" column="dbV2002Fuka_kakuteiHokenryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="前年度保険料段階" column="dbV2002Fuka_hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="徴収方法" column="shutsuryokujunTemp_choshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特徴開始月" column="shutsuryokujunTemp_tokuchoKaisiTuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="賦課履歴番号" column="fukaRirekiNo"/>
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
