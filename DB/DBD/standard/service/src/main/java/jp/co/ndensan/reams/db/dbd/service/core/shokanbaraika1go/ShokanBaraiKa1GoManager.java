@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -53,8 +54,8 @@ public class ShokanBaraiKa1GoManager {
     public ShiharaiHohoHenko createShiharaiHohoHenkoFor1号予告者登録(
             TainoHanteiResultKohen 滞納判定結果,
             HihokenshaNo 被保険者番号,
-            FlexibleDate 予告登録日,
-            FlexibleDate 弁明書提出期限,
+            RDate 予告登録日,
+            RDate 弁明書提出期限,
             RString 最大履歴番号) {
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
         ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
@@ -91,9 +92,9 @@ public class ShokanBaraiKa1GoManager {
     public ShiharaiHohoHenko createShiharaiHohoHenkoFor償還払い化登録(
             TainoHanteiResultKohen 滞納判定結果,
             HihokenshaNo 被保険者番号,
-            FlexibleDate 提出期限_開始,
-            FlexibleDate 変更決定日,
-            FlexibleDate 保険者証提出期限,
+            RDate 提出期限_開始,
+            RDate 変更決定日,
+            RDate 保険者証提出期限,
             RString 最大履歴番号) {
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
         ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
@@ -119,8 +120,8 @@ public class ShokanBaraiKa1GoManager {
 
     private DbT4021ShiharaiHohoHenkoEntity get1号予告者登録の登録Entity(
             HihokenshaNo 被保険者番号,
-            FlexibleDate 予告登録日,
-            FlexibleDate 弁明書提出期限,
+            RDate 予告登録日,
+            RDate 弁明書提出期限,
             RString 最大履歴番号,
             ShoKisaiHokenshaNo 証記載保険者番号) {
         DbT4021ShiharaiHohoHenkoEntity entity = new DbT4021ShiharaiHohoHenkoEntity();
@@ -130,9 +131,9 @@ public class ShokanBaraiKa1GoManager {
         entity.setRirekiNo(get最大履歴番号(最大履歴番号));
         entity.setTorokuKubun(ShiharaiHenkoTorokuKubun._１号予告登録者.getコード());
         entity.setShuryoKubun(ShiharaiHenkoShuryoKubun._空.getコード());
-        entity.setYokoku_TorokuYMD(予告登録日);
+        entity.setYokoku_TorokuYMD(FromRDateToFlexibleDate(予告登録日));
         entity.setYokoku_TsuchiSaiHakkoFlag(false);
-        entity.setBemmei_TeishutsuYMD(弁明書提出期限);
+        entity.setBemmei_TeishutsuYMD(FromRDateToFlexibleDate(弁明書提出期限));
         entity.setBemmei_RiyuCode(ShiharaiHenkoBenmeiRiyuCode._空.getコード());
         entity.setBemmei_ShinsaKekkaKubun(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
         entity.setShokan_TsuchiSaiHakkoFlag(false);
@@ -146,9 +147,9 @@ public class ShokanBaraiKa1GoManager {
 
     private DbT4021ShiharaiHohoHenkoEntity get償還払い化登録の登録Entity(
             HihokenshaNo 被保険者番号,
-            FlexibleDate 提出期限_開始,
-            FlexibleDate 変更決定日,
-            FlexibleDate 保険者証提出期限,
+            RDate 提出期限_開始,
+            RDate 変更決定日,
+            RDate 保険者証提出期限,
             RString 最大履歴番号,
             ShoKisaiHokenshaNo 証記載保険者番号) {
         DbT4021ShiharaiHohoHenkoEntity entity = new DbT4021ShiharaiHohoHenkoEntity();
@@ -157,14 +158,14 @@ public class ShokanBaraiKa1GoManager {
         entity.setKanriKubun(ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
         entity.setRirekiNo(get最大履歴番号(最大履歴番号));
         entity.setTorokuKubun(ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード());
-        entity.setTekiyoKaishiYMD(提出期限_開始);
+        entity.setTekiyoKaishiYMD(FromRDateToFlexibleDate(提出期限_開始));
         entity.setShuryoKubun(ShiharaiHenkoShuryoKubun._空.getコード());
         entity.setYokoku_TsuchiSaiHakkoFlag(false);
         entity.setBemmei_RiyuCode(ShiharaiHenkoBenmeiRiyuCode._空.getコード());
         entity.setBemmei_ShinsaKekkaKubun(ShiharaiHenkoBenmeiShinsaKekkaKubun._空.getコード());
-        entity.setShokan_KetteiYMD(変更決定日);
+        entity.setShokan_KetteiYMD(FromRDateToFlexibleDate(変更決定日));
         entity.setShokan_TsuchiSaiHakkoFlag(false);
-        entity.setHihokenshaShoTeishutsuYMD(保険者証提出期限);
+        entity.setHihokenshaShoTeishutsuYMD(FromRDateToFlexibleDate(保険者証提出期限));
         entity.setSashitome_Flag(false);
         entity.setShuryoShinsei_RiyuCode(ShiharaiHenkoShuryoShinseiRiyuCode._空.getコード());
         entity.setShuryoShinsei_ShinsaKekkaKubun(ShiharaiHenkoShuryoShinseiShinsaKekkaKubun._空.getコード());
@@ -244,4 +245,11 @@ public class ShokanBaraiKa1GoManager {
         return 対象管理区分;
     }
 
+    private FlexibleDate FromRDateToFlexibleDate(RDate rDate) {
+        if (rDate.toString().isEmpty()) {
+            return null;
+        } else {
+            return new FlexibleDate(rDate.toString());
+        }
+    }
 }

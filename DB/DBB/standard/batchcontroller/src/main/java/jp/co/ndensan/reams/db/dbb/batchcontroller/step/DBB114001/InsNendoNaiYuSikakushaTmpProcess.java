@@ -58,7 +58,7 @@ public class InsNendoNaiYuSikakushaTmpProcess extends BatchProcessBase<NendoNaiy
             年度内有資格者Entity = t;
             識別コード = t.getShikibetsuCode();
         } else if (識別コード.equals(t.getShikibetsuCode())) {
-            if (t.getHihokenshaNo() == null) {
+            if (t.getHihokenshaNo() == null || t.getHihokenshaNo().isEmpty()) {
                 年度内有資格者writer.insert(年度内有資格者Entity);
             } else {
                 年度内有資格者writer.insert(t);

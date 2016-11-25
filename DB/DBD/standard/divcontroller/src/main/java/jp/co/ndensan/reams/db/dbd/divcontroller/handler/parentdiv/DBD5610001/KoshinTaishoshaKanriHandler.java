@@ -42,7 +42,7 @@ public class KoshinTaishoshaKanriHandler {
      */
     public void onLoad() {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
-                getShichosonSecurityJoho(GyomuBunrui.介護事務);
+                getShichosonSecurityJoho(GyomuBunrui.介護認定);
         if (shichosonSecurityJoho != null && !KaigoDonyuKubun.未導入.code().equals(shichosonSecurityJoho.get介護導入区分().code())) {
             LasdecCode 市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
             ShoriDateKanriService shoriDateKanriService = ShoriDateKanriService.createInstance();
@@ -74,7 +74,7 @@ public class KoshinTaishoshaKanriHandler {
             parameter.set対象月(FlexibleYearMonth.EMPTY);
         }
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
-                getShichosonSecurityJoho(GyomuBunrui.介護事務);
+                getShichosonSecurityJoho(GyomuBunrui.介護認定);
         LasdecCode 市町村コード;
         if (shichosonSecurityJoho != null && !KaigoDonyuKubun.未導入.code().equals(shichosonSecurityJoho.get介護導入区分().code())) {
             市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();

@@ -69,6 +69,14 @@ public interface IJutakuKaishuJizenShinseiMapper {
     List<DbT3034ShokanShinseiEntity> get開始サービス提供年月(JutakuKaishuHiParameter parameter);
 
     /**
+     * 初回の申請データを取得
+     *
+     * @param parameter parameter
+     * @return List<DbT3034ShokanShinseiEntity>
+     */
+    List<DbT3034ShokanShinseiEntity> get初回の申請データ(JutakuKaishuHiParameter parameter);
+
+    /**
      * get前回までの支払結果
      *
      * @param parameter parameter

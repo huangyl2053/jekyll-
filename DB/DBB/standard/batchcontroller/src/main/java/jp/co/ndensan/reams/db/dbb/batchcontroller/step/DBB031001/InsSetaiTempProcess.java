@@ -60,7 +60,7 @@ public class InsSetaiTempProcess extends BatchProcessBase<FukaCalculateSetaiEnti
         if (通知書番号.equals(entity.getTsuchishoNo())
                 && 賦課年度.equals(entity.getFukaNendo())
                 && 調定年度.equals(entity.getChoteiNendo())
-                && 被保険者番号.equals(entity.get賦課計算中間Entity().getHonSanJon_hihokenshaNo())) {
+                && 被保険者番号.equals(entity.get世帯員Entity().getHihokenshaNo())) {
             賦課計算中間Entity = manager.creat世帯員所得情報Entity(賦課計算中間Entity, entity.get世帯員Entity(), index);
             set区分Key(entity);
         } else {
@@ -86,7 +86,7 @@ public class InsSetaiTempProcess extends BatchProcessBase<FukaCalculateSetaiEnti
         通知書番号 = entity.getTsuchishoNo();
         賦課年度 = entity.getFukaNendo();
         調定年度 = entity.getChoteiNendo();
-        被保険者番号 = entity.get賦課計算中間Entity().getHonSanJon_hihokenshaNo();
+        被保険者番号 = entity.get世帯員Entity().getHihokenshaNo();
     }
 
 }

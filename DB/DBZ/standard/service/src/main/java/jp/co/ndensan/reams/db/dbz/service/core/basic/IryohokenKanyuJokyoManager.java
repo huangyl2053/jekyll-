@@ -62,6 +62,23 @@ public class IryohokenKanyuJokyoManager {
         entity.initializeMd5();
         return new IryohokenKanyuJokyo(entity);
     }
+    
+    /**
+     * 識別コードで最新介護保険医療保険加入状況を取得します。
+     * 
+     * @param 識別コード ShikibetsuCode
+     * @return IryohokenKanyuJokyo
+     */
+    @Transaction
+    public IryohokenKanyuJokyo get最新介護保険医療保険加入状況論理非削除By識別コード(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        DbT1008IryohokenKanyuJokyoEntity entity = dac.select最新医療保険加入状況論理非削除ByShikibetsuCode(識別コード);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new IryohokenKanyuJokyo(entity);
+    }
 
     /**
      * 介護保険医療保険加入状況を全件返します。

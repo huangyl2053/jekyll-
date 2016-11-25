@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0490011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -21,6 +22,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShikyuketteituchishoSakuseiJyokenValidationHandler {
 
     private final ShikyuketteituchishoSakuseiJyokenDiv div;
+
+    private static final RString KEY0 = new RString("key0");
+    private static final RString KEY1 = new RString("key1");
 
     /**
      * 初期化
@@ -39,6 +43,11 @@ public class ShikyuketteituchishoSakuseiJyokenValidationHandler {
     public ValidationMessageControlPairs get入力チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(div.getCcdShiharaiHoho().getCheckMessage());
+        if (KEY1.equals(div.getShikyuKetteiTsuchisho().getRadKetteibiIkkatsuKoshinKubun().getSelectedKey())) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new IdocheckMessages(UrErrorMessages.未入力, "決定日"),
+                    div.getShikyuKetteiTsuchisho().getTxtketteibi2()));
+        }
         if (div.getCcdShutsuryokujun().get出力順ID() == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.出力順序を指定)));
         }

@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC4200011;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGakuHolder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseKubunShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseKubunShikyuGendoGakuHolder;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyugendogaku.ShikyuGendogakuTableKubun;
@@ -16,9 +14,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.DBC4
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.KubunShikyuGendogakuMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4200011.KubunShikyuGendogakuMainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4200011.KubunShikyuGendogakuMainValidationHandler;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.KubunShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.UwanoseKubunShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGakuHolder;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.KubunShikyuGendoGakuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KubunShikyuGendogakuMain {
 
     private static final RString 排他キー = new RString("DBCShikyuGendoGakuTableDbT7109");
-    private static final RString 完了メッセージメイン = new RString("区分支給限度額の登録が完了しました。。");
+    private static final RString 完了メッセージメイン = new RString("区分支給限度額の登録が完了しました。");
     private static final RString 省略_空 = new RString("");
     private static final RString 共通ボタン = new RString("btnUpdate");
 

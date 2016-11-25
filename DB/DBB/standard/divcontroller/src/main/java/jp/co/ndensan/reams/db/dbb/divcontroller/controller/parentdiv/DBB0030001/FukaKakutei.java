@@ -69,15 +69,17 @@ public class FukaKakutei {
         }
         if (DBBMN36003.equals(menuID)
                 && getHandler(div).処理名_仮算定異動賦課(基準日時取得(div, 仮算定異動賦課), 基準日時取得(div, 仮算定異動賦課確定))) {
-            return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
+            return ResponseData.of(div).rootTitle(仮算定異動賦課確定).respond();
         }
         if (DBBMN43003.equals(menuID)
                 && getHandler(div).処理名_本算定賦課(基準日時取得(div, 本算定賦課), 基準日時取得(div, 本算定賦課確定))) {
-            return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
+            return ResponseData.of(div).rootTitle(本算定賦課確定).respond();
         }
         if (DBBMN44003.equals(menuID)
                 && getHandler(div).処理名_異動賦課(基準日時取得(div, 異動賦課), 基準日時取得(div, 異動賦課確定))) {
             return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
+        } else {
+            getHandler(div).処理エラー();
         }
         return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
     }

@@ -39,8 +39,13 @@ public class ChosaKekkaInfoGaikyo {
      * @return 認定調査結果情報照会Div
      */
     public ResponseData<ChosaKekkaInfoGaikyoDiv> onLoad(ChosaKekkaInfoGaikyoDiv div) {
+        int 認定調査依頼履歴番号 = 0;
         RString 申請書管理番号 = div.getShinseishoKanriNo();
-        int 認定調査依頼履歴番号 = Integer.parseInt(String.valueOf(div.getNinteichosaRirekiNo()));
+        if (!div.getNinteichosaRirekiNo().isEmpty() && div.getNinteichosaRirekiNo() != null) {
+            認定調査依頼履歴番号 = Integer.parseInt(String.valueOf(div.getNinteichosaRirekiNo()));
+        } else {
+            return createResponse(div);
+        }
         RString 概況調査テキスト_イメージ区分 = div.getGaikyoChosaTextImageKubun();
         RString 概況特記テキスト_イメージ区分 = div.getGaikyoTokkiTextImageKubun();
         ChosaKekkaInfoGaikyoParameter gaikyoParameter = ChosaKekkaInfoGaikyoParameter.

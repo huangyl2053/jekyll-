@@ -64,10 +64,11 @@ public final class DBA110010_HihokenshashoHakkoKanriboParameter extends BatchPar
     @BatchParameter(key = KASYUU_JIYUU_LIST, name = "回収事由List")
     private List<RString> kasyuujiyuulist;
     @BatchParameter(key = SYUTURYOKUJUN_ID, name = "出力順ID")
-    private RString syuturyokujunid;
-  
+    private Long syuturyokujunid;
+
     /**
      * 被保険者証発行管理簿_バッチ用のパラメータラス作成
+     *
      * @param jobId ジョブID
      * @return 被保険者証発行管理簿_バッチ用のパラメータラス
      */

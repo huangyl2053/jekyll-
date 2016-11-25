@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
@@ -36,7 +37,8 @@ public interface IShujiiIkenshoTeishutsuIraishoHakkoMapper {
     /**
      * 主治医意見書作成依頼履歴一覧を取得します。
      *
+     * @param parameter 主治医意見書作成依頼履歴一覧のパラメータ
      * @return List<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity>
      */
-    List<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity> get主治医意見書作成依頼履歴一覧();
+    List<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity> get主治医意見書作成依頼履歴一覧(ShujiiIkenshoMybatisParameter parameter);
 }

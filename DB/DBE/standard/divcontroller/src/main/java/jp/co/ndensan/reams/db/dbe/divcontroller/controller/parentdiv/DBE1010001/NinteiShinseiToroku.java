@@ -602,6 +602,7 @@ public class NinteiShinseiToroku {
         if (!RString.isNullOrEmpty(div.getHdnShichosonRenrakuJiko())) {
             shinseiJohoBuilder.set市町村連絡事項(div.getHdnShichosonRenrakuJiko());
         }
+        shinseiJohoBuilder.set認定申請情報登録年月日(FlexibleDate.getNowDate());
         shinseiJohoBuilder.set処理状態区分(new Code(ShoriJotaiKubun.通常.getコード()));
         shinseiJohoBuilder.set審査継続区分(false);
         shinseiJohoBuilder.set介護認定審査会優先振分区分コード(new Code(ShinsakaiYusenWaritsukeKubunCode.通常.getコード()));

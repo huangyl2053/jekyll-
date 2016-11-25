@@ -55,8 +55,10 @@ public class JikofutangakuShomeishoToroku {
     private static final RString BUTTON_BTNBACKSEARCHRESULT_SEARCHGAMEN = new RString("btnBackSearchResult_SearchGamen");
     private static final RString BUTTON_SAVE = new RString("btnUpdate");
     private static final RString STATUS_新規 = new RString("新規");
+    private static final RString STATUS_保存 = new RString("保存");
     private static final RString STATUS_照会 = new RString("照会");
     private static final RString STATUS_修正 = new RString("修正");
+    private static final RString STATUS_更新 = new RString("更新");
     private static final RString STATUS_削除 = new RString("削除");
 
     /**
@@ -154,6 +156,8 @@ public class JikofutangakuShomeishoToroku {
         if (!list.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
+            getHandler(div).うち70_74歳に係る負担額合計の計算();
+            getHandler(div).自己負担額合計の計算();
         }
         getHandler(div).set証明書登録To読取専用(true);
         div.setExecutionStatus(STATUS_照会);
@@ -175,6 +179,8 @@ public class JikofutangakuShomeishoToroku {
         if (!list.isEmpty() && list.get(0) != null) {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
+            getHandler(div).うち70_74歳に係る負担額合計の計算();
+            getHandler(div).自己負担額合計の計算();
         }
         getHandler(div).set証明書登録To読取専用(false);
         div.getTxtTorokuTaishoNendo().setReadOnly(true);
@@ -195,10 +201,13 @@ public class JikofutangakuShomeishoToroku {
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onStateTransition(JikofutangakuShomeishoTorokuDiv div) {
         if (div.getExecutionStatus().equals(STATUS_修正)) {
-            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_修正.toString());
+            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_更新.toString());
         }
         if (div.getExecutionStatus().equals(STATUS_削除)) {
             CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_削除.toString());
+        }
+        if (div.getExecutionStatus().equals(STATUS_新規)) {
+            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_保存.toString());
         }
         return ResponseData.of(div).respond();
     }
@@ -218,6 +227,8 @@ public class JikofutangakuShomeishoToroku {
         if (!list.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
+            getHandler(div).うち70_74歳に係る負担額合計の計算();
+            getHandler(div).自己負担額合計の計算();
         }
         getHandler(div).set証明書登録To読取専用(true);
         div.setExecutionStatus(STATUS_削除);
@@ -296,7 +307,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku8(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -307,7 +318,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutanga9(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -318,7 +329,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku10(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -329,7 +340,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku11(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -340,7 +351,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku12(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -351,7 +362,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku1(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -362,7 +373,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku2(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -373,7 +384,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku3(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -384,7 +395,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku4(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -395,7 +406,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku5(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -406,7 +417,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku6(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -417,7 +428,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku7(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -428,7 +439,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku8(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -439,7 +450,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku9(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -450,7 +461,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku10(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -461,7 +472,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku11(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -472,7 +483,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku12(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -483,7 +494,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku1(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -494,7 +505,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku2(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -505,7 +516,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku3(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -516,7 +527,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku4(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -527,7 +538,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku5(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -538,7 +549,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku6(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -549,7 +560,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku7(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -687,7 +698,7 @@ public class JikofutangakuShomeishoToroku {
             }
             if (div.getExecutionStatus().equals(STATUS_修正)) {
                 QuestionMessage message = new QuestionMessage(DbcQuestionMessages.確認メッセージ.getMessage().getCode(),
-                        DbcQuestionMessages.確認メッセージ.getMessage().replace(STATUS_修正.toString()).evaluate());
+                        DbcQuestionMessages.確認メッセージ.getMessage().replace(STATUS_更新.toString()).evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }

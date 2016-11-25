@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1120001;
 
 import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112002.DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter;
@@ -18,14 +20,20 @@ import jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeikoiki.Sh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -35,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -58,6 +67,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     private static final RString 広域保険者でないため = new RString("広域保険者でないため");
     private static final RString 当初所得引出 = new RString("当初所得引出");
     private static final RString 所得引出 = new RString("所得引出");
+    private static final RString SRC = new RString("/home/D209007/sharedFiles/DEE01F001");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -112,6 +122,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
             List<ShichosonJohoResult> shichosonJohoList = ShotokuJohoChushutsuRenkeiKoiki.createInstance()
                     .getShichosonJoho(koikiZenShichosonJohoList.records(), 遷移区分, new FlexibleYear(年度));
             if (shichosonJohoList != null) {
+                ViewStateHolder.put(ViewStateKeys.市町村情報一覧, (Serializable) shichosonJohoList);
                 handler.check処理区分(shichosonJohoList);
             }
         }
@@ -129,6 +140,12 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> onclick_checkRegister(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
+        //TODO 
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(DEC05F001));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(SRC), opts);
+        entry.getSharedFileId();
         List<UzT0885SharedFileEntryEntity> 国保List = SharedFile.searchSharedFile(DEC05F001);
         List<UzT0885SharedFileEntryEntity> 国保情報List = SharedFile.searchSharedFile(DEE01F001);
         for (UzT0885SharedFileEntryEntity entity : 国保List) {
@@ -163,7 +180,9 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
      */
     public ResponseData<DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter> onclick_batchRegister_DBB112002(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
-        DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter parameter = getHandler(div).getBatchParamter_DBB112002();
+        ArrayList<ShichosonJohoResult> shichosonJohoList = ViewStateHolder.get(ViewStateKeys.市町村情報一覧, ArrayList.class);
+        DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter parameter = getHandler(div).getBatchParamter_DBB112002(
+                shichosonJohoList);
         return ResponseData.of(parameter).respond();
     }
 
@@ -175,7 +194,8 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
      */
     public ResponseData<DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter> onclick_batchRegister_DBB112004(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
-        DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter parameter = getHandler(div).getBatchParamter_DBB112004();
+        ArrayList<ShichosonJohoResult> shichosonJohoList = ViewStateHolder.get(ViewStateKeys.市町村情報一覧, ArrayList.class);
+        DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter parameter = getHandler(div).getBatchParamter_DBB112004(shichosonJohoList);
         return ResponseData.of(parameter).respond();
     }
 

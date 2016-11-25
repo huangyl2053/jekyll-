@@ -147,11 +147,7 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "被保険者(証)番号"), div.getTxtHiHokenshaShoNo()));
         }
-        if (div.getTxtKokuhoHihokenshaShoKigo().isRequired() && RString.isNullOrEmpty(div.getTxtKokuhoHihokenshaShoKigo().getValue())) {
-            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "被保険者記号"), div.getTxtKokuhoHihokenshaShoKigo()));
-        }
-
+        
         return validationMessages;
     }
 

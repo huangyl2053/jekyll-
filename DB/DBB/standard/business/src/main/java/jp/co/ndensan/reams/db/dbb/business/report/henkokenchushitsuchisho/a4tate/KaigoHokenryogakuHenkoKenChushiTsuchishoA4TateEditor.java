@@ -112,7 +112,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
         reportSource.tokuchoGimusha = 更正後.get特別徴収義務者();
         reportSource.tokuchoTaishoNenkin = 更正後.get特別徴収対象年金();
 
-        if (更正前 != null) {
+        if (更正前 != null && item.get本算定決定通知書情報().isHas更正前()) {
             reportSource.genmenMae = decimalToRString(更正前.get減免額());
             reportSource.hokenGakuMae = decimalToRString(更正前.get確定保険料_年額());
             reportSource.hokenRitsuMae = decimalToRString(更正前.get保険料率());

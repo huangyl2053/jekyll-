@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011001.InsFukaErrorLis
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011001.InsFukaTemp1Process;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011001.InsFukaTemp2Process;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011001.InsFukaTemp3Process;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011001.InsShutsuryokujunProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011001.InsTokuchoKariChushutsuTmp1Process;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011001.InsTokuchoKariChushutsuTmp2Process;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011001.InsTokuchoKarisanteiFUkaJohoTemp1Process;
@@ -50,6 +51,7 @@ public class DBB011001_TokuchoKarisanteiFuka extends BatchFlowBase<DBB011001_Tok
     private static final String 賦課の情報一時テーブルに登録_6月開始 = "InsFukaTemp3";
     private static final String 賦課の情報登録フロー = "call_FukaJohoTorokuFlow";
     private static final String 計算後情報作成 = "call_KeisangoJohoSakuseiFlow";
+    private static final String 出力順TEMPに登録 = "InsShutsuryokujun";
     private static final String 特徴仮算定計算後賦課情報TEMPに登録_通常分 = "InsTokuchoKarisanteiFUkaJohoTemp1";
     private static final String 特徴仮算定計算後賦課情報TEMPに登録_特徴停止分 = "InsTokuchoKarisanteiFUkaJohoTemp2";
     private static final String 一覧表作成 = "CrtIchiranhyo";
@@ -89,6 +91,7 @@ public class DBB011001_TokuchoKarisanteiFuka extends BatchFlowBase<DBB011001_Tok
         for (ShuturyokuTyoutuke 出力帳票一覧 : 出力帳票一覧List) {
             if (特別徴収仮算定結果一覧表_帳票分類ID.equals(出力帳票一覧.get帳票分類ID())) {
                 出力順ID = 出力帳票一覧.get出力順ID();
+                executeStep(出力順TEMPに登録);
                 executeStep(特徴仮算定計算後賦課情報TEMPに登録_通常分);
                 executeStep(特徴仮算定計算後賦課情報TEMPに登録_特徴停止分);
                 executeStep(一覧表作成);
@@ -231,6 +234,17 @@ public class DBB011001_TokuchoKarisanteiFuka extends BatchFlowBase<DBB011001_Tok
     protected IBatchFlowCommand call_KeisangoJohoSakuseiFlow() {
         return otherBatchFlow(KEISANGOJOHOSAKUEEIFLOW_FLOWID, SubGyomuCode.DBB介護賦課,
                 getParameter().toKeisangoJohoSakuseiBatchParamter(システム日時)).define();
+    }
+
+    /**
+     * 出力順TEMPに登録のメソッドです。
+     *
+     * @return InsShutsuryokujunProcess
+     */
+    @Step(出力順TEMPに登録)
+    protected IBatchFlowCommand insShutsuryokujun() {
+        return loopBatch(InsShutsuryokujunProcess.class).
+                arguments(setParameter()).define();
     }
 
     /**

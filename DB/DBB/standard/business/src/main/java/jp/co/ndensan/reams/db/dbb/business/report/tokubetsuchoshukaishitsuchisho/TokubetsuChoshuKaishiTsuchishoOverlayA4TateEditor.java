@@ -276,7 +276,7 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
         List<CharacteristicsPhase> 特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
         for (CharacteristicsPhase 特徴期別金額 : 特徴期別金額リスト) {
             if (期.equals(特徴期別金額.get期())) {
-                金額 = 特徴期別金額.get金額().multiply(MULTIPLY);
+                金額 = 特徴期別金額.get金額();
                 break;
             }
         }

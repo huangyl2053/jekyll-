@@ -46,7 +46,6 @@ public class TokuchoSeidokanIFRenkeiProcess extends BatchProcessBase<TokuchouSei
     private List<RString> ファイル出力path;
     private List<RString> ファイル入力path;
     private Map<RString, FldWriter<TokuchouSeidoKanIFRenkeiDTAEntity>> map;
-    private Map<RString, RString> 情報map;
     private static final RString レコード区分_2 = new RString("2");
     private static final RString 通知内容コード_00 = new RString("00");
     private static final RString 特別徴収制度コード_0 = new RString("0");
@@ -78,7 +77,6 @@ public class TokuchoSeidokanIFRenkeiProcess extends BatchProcessBase<TokuchouSei
         outputPath = new OutputParameter<>();
         inputPath = new OutputParameter<>();
         map = new HashMap<>();
-        情報map = new HashMap<>();
         広域市町村情報 = getMapper(ITokuchoSofuJohoRenkeiMapper.class).select広域市町村情報();
 
         if (!広域市町村情報.isEmpty()) {
@@ -106,7 +104,6 @@ public class TokuchoSeidokanIFRenkeiProcess extends BatchProcessBase<TokuchouSei
             writer = new FldWriter.InstanceBuilder(dtaFilePath_input)
                     .setNewLine(NewLine.LF)
                     .setEncodeUtf8(false).build();
-            情報map.put(情報.getShichosonCode().value(), ファイル名);
             map.put(情報.getShichosonCode().value(), writer);
             ファイル出力path.add(dtaFilePath_output);
             ファイル入力path.add(dtaFilePath_input);

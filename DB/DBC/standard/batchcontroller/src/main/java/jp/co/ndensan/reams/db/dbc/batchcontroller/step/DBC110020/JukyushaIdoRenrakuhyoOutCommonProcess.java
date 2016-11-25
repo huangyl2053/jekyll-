@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaE
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.HyojunFutanEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdoTblTmpEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTblEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.JukyushaIdoRenrakuhyoTempTBLEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.JushochitokureiInfoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.KyotakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.PSMInfoEntity;
@@ -43,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -729,59 +731,36 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
      * @param 前履歴データ IdoTblTmpEntity
      */
     public static void 引き継ぎデータ処理(IdoTblTmpEntity entity, IdoTblTmpEntity 前履歴データ) {
-        if (entity.get償還払化終了年月日() == null) {
+        if (RString.isNullOrEmpty(entity.get償還払化終了年月日())) {
             entity.set償還払化終了年月日(前履歴データ.get償還払化終了年月日());
-        } else {
-            前履歴データ.set償還払化終了年月日(entity.get償還払化終了年月日());
         }
-        if (entity.get給付率引下げ開始年月日() == null) {
+        if (RString.isNullOrEmpty(entity.get給付率引下げ開始年月日())) {
             entity.set給付率引下げ開始年月日(前履歴データ.get給付率引下げ開始年月日());
-        } else {
-            前履歴データ.set給付率引下げ開始年月日(entity.get給付率引下げ開始年月日());
-        }
-        if (entity.get給付率引下げ終了年月日() == null) {
             entity.set給付率引下げ終了年月日(前履歴データ.get給付率引下げ終了年月日());
-        } else {
-            前履歴データ.set給付率引下げ終了年月日(entity.get給付率引下げ終了年月日());
         }
-        if (entity.get減免申請中区分コード() == null) {
+        if (RString.isNullOrEmpty(entity.get減免申請中区分コード())) {
             entity.set減免申請中区分コード(前履歴データ.get減免申請中区分コード());
-        } else {
-            前履歴データ.set減免申請中区分コード(entity.get減免申請中区分コード());
         }
-        if (entity.get利用者負担区分コード() == null) {
+        if (RString.isNullOrEmpty(entity.get利用者負担区分コード())) {
             entity.set利用者負担区分コード(前履歴データ.get利用者負担区分コード());
             entity.set給付率(前履歴データ.get給付率());
             entity.set適用開始年月日(前履歴データ.get適用開始年月日());
             entity.set適用終了年月日(前履歴データ.get適用終了年月日());
-        } else {
-            if (STR_2.equals(entity.getみなし要介護状態区分コード())) {
-                前履歴データ.set利用者負担区分コード(STR_2);
-            }
-            前履歴データ.set給付率(entity.get給付率());
-            前履歴データ.set適用開始年月日(entity.get適用開始年月日());
-            前履歴データ.set適用終了年月日(entity.get適用終了年月日());
+        } else if (STR_2.equals(entity.getみなし要介護状態区分コード())) {
+            entity.set利用者負担区分コード(STR_2);
         }
-        if (entity.get標準負担区分コード() == null) {
+        if (RString.isNullOrEmpty(entity.get標準負担区分コード())) {
             entity.set標準負担区分コード(前履歴データ.get標準負担区分コード());
             entity.set負担額(前履歴データ.get負担額());
             entity.set負担額適用開始年月日(前履歴データ.get負担額適用開始年月日());
             entity.set負担額適用終了年月日(前履歴データ.get負担額適用終了年月日());
-        } else {
-            if (STR_2.equals(entity.getみなし要介護状態区分コード())) {
-                前履歴データ.set標準負担区分コード(STR_2);
-            }
-            前履歴データ.set負担額(entity.get負担額());
-            前履歴データ.set負担額適用開始年月日(entity.get負担額適用開始年月日());
-            前履歴データ.set負担額適用終了年月日(entity.get負担額適用終了年月日());
+        } else if (STR_2.equals(entity.getみなし要介護状態区分コード())) {
+            entity.set標準負担区分コード(STR_2);
         }
-        if (entity.get特定入所者認定申請中区分コード() == null) {
+        if (RString.isNullOrEmpty(entity.get特定入所者認定申請中区分コード())) {
             entity.set特定入所者認定申請中区分コード(前履歴データ.get特定入所者認定申請中区分コード());
-        } else {
-            前履歴データ.set特定入所者認定申請中区分コード(entity.get特定入所者認定申請中区分コード());
         }
-
-        if (entity.get負担限度額適用開始年月日() == null) {
+        if (RString.isNullOrEmpty(entity.get負担限度額適用開始年月日())) {
             entity.set特定入所者介護サービス区分コード(前履歴データ.get特定入所者介護サービス区分コード());
             entity.set課税層の特例減額措置対象フラグ(前履歴データ.get課税層の特例減額措置対象フラグ());
             entity.set食費負担限度額(前履歴データ.get食費負担限度額());
@@ -792,63 +771,26 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             entity.set居住費多床室負担限度額(前履歴データ.get居住費多床室負担限度額());
             entity.set負担限度額適用開始年月日(前履歴データ.get負担限度額適用開始年月日());
             entity.set負担限度額適用終了年月日(前履歴データ.get負担限度額適用終了年月日());
-        } else {
-            前履歴データ.set特定入所者介護サービス区分コード(entity.get特定入所者介護サービス区分コード());
-            前履歴データ.set課税層の特例減額措置対象フラグ(entity.get課税層の特例減額措置対象フラグ());
-            前履歴データ.set食費負担限度額(entity.get食費負担限度額());
-            前履歴データ.set居住費ユニット型個室負担限度額(entity.get居住費ユニット型個室負担限度額());
-            前履歴データ.set居住費ユニット型準個室負担限度額(entity.get居住費ユニット型準個室負担限度額());
-            前履歴データ.set居住費ユニット型準個室負担限度額(entity.get居住費ユニット型準個室負担限度額());
-            前履歴データ.set居住費従来型個室特養等負担限度額(entity.get居住費従来型個室特養等負担限度額());
-            前履歴データ.set居住費従来型個室老健療養等負担限度額(entity.get居住費従来型個室老健療養等負担限度額());
-            前履歴データ.set居住費多床室負担限度額(entity.get居住費多床室負担限度額());
-            前履歴データ.set負担限度額適用開始年月日(entity.get負担限度額適用開始年月日());
-            前履歴データ.set負担限度額適用終了年月日(entity.get負担限度額適用終了年月日());
         }
-        if (entity.get軽減率() == null) {
+        if (RString.isNullOrEmpty(entity.get軽減率適用開始年月日())) {
             entity.set軽減率(前履歴データ.get軽減率());
-        } else {
-            前履歴データ.set軽減率(entity.get軽減率());
-        }
-        if (entity.get軽減率適用開始年月日() == null) {
             entity.set軽減率適用開始年月日(前履歴データ.get軽減率適用開始年月日());
-        } else {
-            前履歴データ.set軽減率適用開始年月日(entity.get軽減率適用開始年月日());
-        }
-        if (entity.get軽減率適用終了年月日() == null) {
             entity.set軽減率適用終了年月日(前履歴データ.get軽減率適用終了年月日());
-        } else {
-            前履歴データ.set軽減率適用終了年月日(entity.get軽減率適用終了年月日());
         }
-
-        if (entity.get二次予防事業有効期間開始年月日() == null) {
+        if (entity.get二次予防事業有効期間開始年月日() == null || entity.get二次予防事業有効期間開始年月日().isEmpty()) {
             entity.set二次予防事業区分コード(前履歴データ.get二次予防事業区分コード());
             entity.set二次予防事業有効期間開始年月日(前履歴データ.get二次予防事業有効期間開始年月日());
             entity.set二次予防事業有効期間終了年月日(前履歴データ.get二次予防事業有効期間終了年月日());
-        } else {
-            前履歴データ.set二次予防事業区分コード(entity.get二次予防事業区分コード());
-            前履歴データ.set二次予防事業有効期間開始年月日(entity.get二次予防事業有効期間開始年月日());
-            前履歴データ.set二次予防事業有効期間終了年月日(entity.get二次予防事業有効期間終了年月日());
         }
-
-        if (entity.get二次予防事業有効期間開始年月日() == null) {
+        if (entity.get住所地特例適用開始日() == null || entity.get住所地特例適用開始日().isEmpty()) {
             entity.set住所地特例対象者区分コード(前履歴データ.get住所地特例対象者区分コード());
             entity.set施設所在保険者番号(前履歴データ.get施設所在保険者番号());
             entity.set住所地特例適用開始日(前履歴データ.get住所地特例適用開始日());
             entity.set住所地特例適用終了日(前履歴データ.get住所地特例適用終了日());
-        } else {
-            前履歴データ.set住所地特例対象者区分コード(entity.get住所地特例対象者区分コード());
-            前履歴データ.set施設所在保険者番号(entity.get施設所在保険者番号());
-            前履歴データ.set住所地特例適用開始日(entity.get住所地特例適用開始日());
-            前履歴データ.set住所地特例適用終了日(entity.get住所地特例適用終了日());
         }
-
-        if (entity.get利用者負担割合有効開始日() == null) {
+        if (RString.isNullOrEmpty(entity.get利用者負担割合有効開始日())) {
             entity.set利用者負担割合有効開始日(前履歴データ.get利用者負担割合有効開始日());
             entity.set利用者負担割合有効終了日(前履歴データ.get利用者負担割合有効終了日());
-        } else {
-            前履歴データ.set利用者負担割合有効開始日(entity.get利用者負担割合有効開始日());
-            前履歴データ.set利用者負担割合有効終了日(entity.get利用者負担割合有効終了日());
         }
     }
 
@@ -1281,7 +1223,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 entity.set異動年月日(翌日異動日);
                 return entity;
             }
-            if (isDateEmpty(異動一時Map.get(異動年月日).get二次予防事業有効期間開始年月日())) {
+            if (isDateEmpty(異動一時Map.get(翌日異動日).get二次予防事業有効期間開始年月日())) {
                 IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
                 insertEntity.set異動年月日(翌日異動日);
                 return insertEntity;
@@ -1308,7 +1250,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 entity.set異動年月日(翌日異動日);
                 return entity;
             }
-            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get要介護状態区分コード())) {
+            if (RString.isNullOrEmpty(異動一時Map.get(翌日異動日).get要介護状態区分コード())) {
                 IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
                 insertEntity.set異動年月日(翌日異動日);
                 return insertEntity;
@@ -1335,7 +1277,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 entity.set異動年月日(翌日異動日);
                 return entity;
             }
-            if (isDateEmpty(異動一時Map.get(異動年月日).get資格取得年月日())) {
+            if (isDateEmpty(異動一時Map.get(翌日異動日).get資格取得年月日())) {
                 IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
                 insertEntity.set異動年月日(翌日異動日);
                 return insertEntity;
@@ -1362,7 +1304,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 entity.set異動年月日(翌日異動日);
                 return entity;
             }
-            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get居宅サービス計画作成区分コード())) {
+            if (RString.isNullOrEmpty(異動一時Map.get(翌日異動日).get居宅サービス計画作成区分コード())) {
                 IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
                 insertEntity.set異動年月日(翌日異動日);
                 return insertEntity;
@@ -1389,7 +1331,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 entity.set異動年月日(翌日異動日);
                 return entity;
             }
-            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get償還払化開始年月日())) {
+            if (RString.isNullOrEmpty(異動一時Map.get(翌日異動日).get償還払化開始年月日())) {
                 IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
                 insertEntity.set異動年月日(翌日異動日);
                 return insertEntity;
@@ -1416,7 +1358,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 entity.set異動年月日(翌日異動日);
                 return entity;
             }
-            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get給付率引下げ開始年月日())) {
+            if (RString.isNullOrEmpty(異動一時Map.get(翌日異動日).get給付率引下げ開始年月日())) {
                 IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
                 insertEntity.set異動年月日(翌日異動日);
                 return insertEntity;
@@ -1443,7 +1385,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 entity.set異動年月日(翌日異動日);
                 return entity;
             }
-            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get負担額適用開始年月日())) {
+            if (RString.isNullOrEmpty(異動一時Map.get(翌日異動日).get負担額適用開始年月日())) {
                 IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
                 insertEntity.set異動年月日(翌日異動日);
                 return insertEntity;
@@ -1470,7 +1412,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 entity.set異動年月日(翌日異動日);
                 return entity;
             }
-            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get適用開始年月日())) {
+            if (RString.isNullOrEmpty(異動一時Map.get(翌日異動日).get適用開始年月日())) {
                 IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
                 insertEntity.set異動年月日(翌日異動日);
                 return insertEntity;
@@ -1497,7 +1439,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 entity.set異動年月日(翌日異動日);
                 return entity;
             }
-            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get負担限度額適用開始年月日())) {
+            if (RString.isNullOrEmpty(異動一時Map.get(翌日異動日).get負担限度額適用開始年月日())) {
                 IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
                 insertEntity.set異動年月日(翌日異動日);
                 return insertEntity;
@@ -1524,7 +1466,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 entity.set異動年月日(翌日異動日);
                 return entity;
             }
-            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get軽減率適用開始年月日())) {
+            if (RString.isNullOrEmpty(異動一時Map.get(翌日異動日).get軽減率適用開始年月日())) {
                 IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
                 insertEntity.set異動年月日(翌日異動日);
                 return insertEntity;
@@ -1551,7 +1493,7 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
                 entity.set異動年月日(翌日異動日);
                 return entity;
             }
-            if (RString.isNullOrEmpty(異動一時Map.get(異動年月日).get住所地特例適用開始日())) {
+            if (RString.isNullOrEmpty(異動一時Map.get(翌日異動日).get住所地特例適用開始日())) {
                 IdoTblTmpEntity insertEntity = 異動一時Map.get(翌日異動日);
                 insertEntity.set異動年月日(翌日異動日);
                 return insertEntity;
@@ -1706,5 +1648,143 @@ public final class JukyushaIdoRenrakuhyoOutCommonProcess {
             return false;
         }
         return date1.isBefore(date2);
+    }
+
+    /**
+     * 異動一時2All項目1取得
+     *
+     * @param 異動一時2entity IdoTblTmpEntity
+     * @return RString
+     */
+    public static RString get異動一時2All項目1(IdoTblTmpEntity 異動一時2entity) {
+        RStringBuilder all項目 = new RStringBuilder();
+        all項目.append(異動一時2entity.get証記載保険者番号())
+                .append(異動一時2entity.get資格取得年月日())
+                .append(異動一時2entity.get資格喪失年月日())
+                .append(異動一時2entity.getみなし要介護状態区分コード())
+                .append(異動一時2entity.get認定有効期間開始年月日())
+                .append(異動一時2entity.get居宅サービス計画作成区分コード())
+                .append(異動一時2entity.get居宅介護支援事業所番号())
+                .append(異動一時2entity.get居宅サービス計画適用開始年月日())
+                .append(getYMbyRString(異動一時2entity.get居宅サービス計画適用終了年月日()))
+                .append(getYMbyFlexibleDate(異動一時2entity.get訪問通所サービス上限管理適用期間開始年月日()))
+                .append(getYMbyFlexibleDate(異動一時2entity.get短期入所サービス上限管理適用期間開始年月日()))
+                .append(STR_2.equals(異動一時2entity.get公費負担上限額減額有フラグ()))
+                .append(異動一時2entity.get償還払化開始年月日())
+                .append(異動一時2entity.get償還払化終了年月日())
+                .append(異動一時2entity.get給付率引下げ開始年月日())
+                .append(異動一時2entity.get給付率引下げ終了年月日())
+                .append(異動一時2entity.get利用者負担区分コード())
+                .append(異動一時2entity.get給付率() == null ? RString.EMPTY : 異動一時2entity.get給付率())
+                .append(異動一時2entity.get適用開始年月日())
+                .append(異動一時2entity.get適用終了年月日())
+                .append(異動一時2entity.get標準負担区分コード())
+                .append(異動一時2entity.get負担額() == null ? RString.EMPTY : 異動一時2entity.get負担額())
+                .append(異動一時2entity.get負担額適用開始年月日())
+                .append(異動一時2entity.get負担額適用終了年月日())
+                .append(異動一時2entity.get特定入所者介護サービス区分コード())
+                .append(異動一時2entity.get課税層の特例減額措置対象フラグ())
+                .append(異動一時2entity.get食費負担限度額())
+                .append(異動一時2entity.get居住費ユニット型個室負担限度額())
+                .append(異動一時2entity.get居住費ユニット型準個室負担限度額())
+                .append(異動一時2entity.get居住費従来型個室特養等負担限度額())
+                .append(異動一時2entity.get居住費従来型個室老健療養等負担限度額())
+                .append(異動一時2entity.get居住費多床室負担限度額())
+                .append(異動一時2entity.get負担限度額適用開始年月日())
+                .append(異動一時2entity.get負担限度額適用終了年月日())
+                .append(異動一時2entity.get軽減率())
+                .append(異動一時2entity.get軽減率適用開始年月日())
+                .append(異動一時2entity.get軽減率適用終了年月日())
+                .append(異動一時2entity.get二次予防事業区分コード())
+                .append(異動一時2entity.get二次予防事業有効期間開始年月日())
+                .append(異動一時2entity.get二次予防事業有効期間終了年月日())
+                .append(異動一時2entity.get住所地特例対象者区分コード())
+                .append(異動一時2entity.get施設所在保険者番号())
+                .append(異動一時2entity.get住所地特例適用開始日())
+                .append(異動一時2entity.get住所地特例適用終了日())
+                .append(異動一時2entity.get利用者負担割合有効開始日())
+                .append(異動一時2entity.get利用者負担割合有効終了日())
+                .append(異動一時2entity.get後期高齢者医療保険者番号())
+                .append(異動一時2entity.get後期高齢者医療被保険者番号())
+                .append(異動一時2entity.get国民健康保険保険者番号())
+                .append(異動一時2entity.get国民健康保険被保険者証番号())
+                .append(異動一時2entity.get国民健康保険個人番号());
+        return all項目.toRString();
+    }
+
+    /**
+     * 受給者異動送付All項目1取得
+     *
+     * @param 受給者異動送付 JukyushaIdoRenrakuhyoTempTBLEntity
+     * @return RString
+     */
+    public static RString get受給者異動送付All項目1(JukyushaIdoRenrakuhyoTempTBLEntity 受給者異動送付) {
+        RStringBuilder all項目 = new RStringBuilder();
+        all項目.append(受給者異動送付.getShoKisaiHokenshaNo())
+                .append(受給者異動送付.getShikakuShutokuYMD())
+                .append(受給者異動送付.getShikakuSoshitsuYMD())
+                .append(受給者異動送付.getMinashiYokaigoJotaiKubunCode())
+                .append(受給者異動送付.getNinteiYukoKikankaishiYMD())
+                .append(受給者異動送付.getKyotakuServiceSakuseiKubunCode())
+                .append(受給者異動送付.getKyotakuKaigoShienJigyoshoNo())
+                .append(受給者異動送付.getKyotakuServiceTekiyoKaishiYMD())
+                .append(getYMbyRString(受給者異動送付.getKyotakuServiceTekiyoShuryoYMD()))
+                .append(getYMbyFlexibleDate(受給者異動送付.getHomonTsushoServiceJogenKanriTekiyoKaishiYMD()))
+                .append(getYMbyFlexibleDate(受給者異動送付.getTankinyushoServiceJogenKanriTekiyoKaishiYMD()))
+                .append(受給者異動送付.isKohiFutanJogenGengakuAriFlag())
+                .append(受給者異動送付.getShokanbaraikaKaishiYMD())
+                .append(受給者異動送付.getShokanbaraikaShuryoYMD())
+                .append(受給者異動送付.getKyufuritsuHikisageKaishiYMD())
+                .append(受給者異動送付.getKyufuritsuHikisageShuryoYMD())
+                .append(受給者異動送付.getRiyoshaFutanKubunCode())
+                .append(受給者異動送付.getKyufuritsu() == null ? RString.EMPTY : 受給者異動送付.getKyufuritsu())
+                .append(受給者異動送付.getTekiyoKaishiYMD())
+                .append(受給者異動送付.getTekiyoShuryoYMD())
+                .append(受給者異動送付.getHyojunFutanKubunCode())
+                .append(受給者異動送付.getFutangaku() == null ? RString.EMPTY : 受給者異動送付.getFutangaku())
+                .append(受給者異動送付.getFutangakuTekiyoKaishiYMD())
+                .append(受給者異動送付.getFutangakuTekiyoShuryoYMD())
+                .append(受給者異動送付.getTokuteiNyushoshaNinteiShinseichuKubunCode())
+                .append(受給者異動送付.getKaizeisoTokureiGengakuSochiTaishoFlag())
+                .append(受給者異動送付.getShokuhiFutanGendogaku())
+                .append(受給者異動送付.getKyojuhiUnitGataKoshitsuFutanGendogaku())
+                .append(受給者異動送付.getKyojuhiUnitGataJunKoshitsuFutanGendogaku())
+                .append(受給者異動送付.getKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku())
+                .append(受給者異動送付.getKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku())
+                .append(受給者異動送付.getKyujuhiTashoshitsuFutanGendogaku())
+                .append(受給者異動送付.getFutanGendogakuTekiyoKaishiYMD())
+                .append(受給者異動送付.getFutanGendogakuTekiyoShuryoYMD())
+                .append(受給者異動送付.getKeigenritsu())
+                .append(受給者異動送付.getKeigenritsuTekiyoKaishiYMD())
+                .append(受給者異動送付.getKeigenritsuTekiyoShuryoYMD())
+                .append(受給者異動送付.getNijiyoboJigyoKubunCode())
+                .append(受給者異動送付.getNijiyoboJigyoYukoKikanKaishiYMD())
+                .append(受給者異動送付.getNijiyoboJigyoYukoKikanShuryoYMD())
+                .append(受給者異動送付.getJushochiTokureiTaishoshaKubunCode())
+                .append(受給者異動送付.getShisetsuShozaiHokenjaNo())
+                .append(受給者異動送付.getJushochiTokureiTekiyoKaishiYMD())
+                .append(受給者異動送付.getJushochiTokureiTekiyoShuryoYMD())
+                .append(受給者異動送付.getRiyosyaFutanWariaiYukoKaishiYMD())
+                .append(受給者異動送付.getRiyosyaFutanWariaiYukoShuryoYMD())
+                .append(受給者異動送付.getKokiKoureiIryoHokenshaNo())
+                .append(受給者異動送付.getKokikoureiIryoHiHokenshaNo())
+                .append(受給者異動送付.getKokuhoHokenshaNo())
+                .append(受給者異動送付.getKokuhoHiHokenshaNo())
+                .append(受給者異動送付.getKokuhoKojinNo());
+        return all項目.toRString();
+    }
+
+    private static RString getYMbyRString(RString string) {
+        if (!RString.isNullOrEmpty(string) && !星.equals(string)) {
+            return string.substring(ORDER_0, ORDER_6);
+        }
+        return RString.EMPTY;
+    }
+
+    private static FlexibleYearMonth getYMbyFlexibleDate(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return FlexibleYearMonth.EMPTY;
+        }
+        return date.getYearMonth();
     }
 }

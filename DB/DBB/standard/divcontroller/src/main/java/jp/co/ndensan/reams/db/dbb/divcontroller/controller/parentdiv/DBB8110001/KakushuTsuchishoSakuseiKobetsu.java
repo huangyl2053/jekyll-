@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB8110001
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,7 +119,9 @@ public class KakushuTsuchishoSakuseiKobetsu {
         Map<String, Object> parameter = new HashMap<>();
         parameter.put(賦課年度KEY.toString(), 賦課年度);
         parameter.put(通知書番号KEY.toString(), 通知書番号);
-        ArrayList<FukaJoho> 賦課の情報List = (ArrayList<FukaJoho>) FukaJohoManager.createInstance().get賦課の情報(parameter);
+        List<FukaJoho> 賦課の情報1 = FukaJohoManager.createInstance().get賦課の情報(parameter);
+        List<FukaJoho> 賦課の情報2 = FukaJohoManager.createInstance().get賦課の情報(賦課年度, 通知書番号);
+        ArrayList<FukaJoho> 賦課の情報List = get賦課の情報リスト(賦課の情報1, 賦課の情報2);
         if (賦課の情報List != null && !賦課の情報List.isEmpty()) {
             Map<RString, FukaJoho> map = getHandler(div).put賦課の情報(賦課の情報List);
             ViewStateHolder.put(ViewStateKeys.賦課の情報リスト, (Serializable) map);
@@ -132,6 +136,45 @@ public class KakushuTsuchishoSakuseiKobetsu {
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         return ResponseData.of(div).respond();
+    }
+
+    private ArrayList<FukaJoho> get賦課の情報リスト(List<FukaJoho> 賦課の情報1, List<FukaJoho> 賦課の情報2) {
+        ArrayList<FukaJoho> 賦課の情報リスト = new ArrayList<>();
+        for (FukaJoho fukaJoho2 : 賦課の情報2) {
+            if (!isContains(賦課の情報1, fukaJoho2)) {
+                賦課の情報1.add(fukaJoho2);
+            }
+        }
+        for (FukaJoho 賦課の情報 : 賦課の情報1) {
+            賦課の情報リスト.add(賦課の情報);
+        }
+        Collections.sort(賦課の情報リスト, new Comparator<FukaJoho>() {
+            @Override
+            public int compare(FukaJoho arg0, FukaJoho arg1) {
+                int i = arg0.get調定年度().getYearValue() - arg1.get調定年度().getYearValue();
+                if (i == 0) {
+                    int j = arg0.get賦課年度().getYearValue() - arg1.get賦課年度().getYearValue();
+                    if (j == 0) {
+                        return Integer.parseInt(arg0.get通知書番号().toString()) - Integer.parseInt(arg1.get通知書番号().toString());
+                    }
+                    return j;
+                }
+                return i;
+            }
+        });
+        return 賦課の情報リスト;
+    }
+
+    private boolean isContains(List<FukaJoho> 賦課の情報List, FukaJoho 賦課の情報) {
+        for (FukaJoho fukaJoho : 賦課の情報List) {
+            if (fukaJoho.get調定年度().getYearValue() == 賦課の情報.get調定年度().getYearValue()
+                    && fukaJoho.get賦課年度().getYearValue() == 賦課の情報.get賦課年度().getYearValue()
+                    && fukaJoho.get通知書番号().getColumnValue().equals(賦課の情報.get通知書番号().getColumnValue())
+                    && fukaJoho.get履歴番号() == 賦課の情報.get履歴番号()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void set発行する帳票(FukaJoho 賦課の情報,

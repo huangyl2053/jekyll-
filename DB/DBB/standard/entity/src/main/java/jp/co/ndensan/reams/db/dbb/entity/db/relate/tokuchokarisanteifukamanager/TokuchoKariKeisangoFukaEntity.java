@@ -155,5 +155,7 @@ public class TokuchoKariKeisangoFukaEntity {
     private RString 前年度保険料段階;
     private Decimal 前年度保険料;
     private Code 特別徴収義務者コード;
+    private RString 徴収方法;
+    private RString 特徴開始月;
 
 }

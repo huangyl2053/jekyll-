@@ -212,6 +212,8 @@ public class HokenshaSofuListHandler {
                 hokenshaSofuListEntity.setH一覧表示順(一覧表示順);
             }
             csvReader.close();
+        } catch (Exception ex) {
+            throw new ApplicationException(ex.getMessage());
         }
         return hokenshaSofuListEntity;
     }

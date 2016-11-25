@@ -110,4 +110,19 @@ public class ShisetsuNyutaishoManager {
         }
         return entity.getRirekiNo();
     }
+    
+    /**
+     * 識別コードで指定した介護保険施設入退所を取得します。
+     * @param 識別コード ShikibetsuCode
+     * @return List<ShisetsuNyutaisho>
+     */
+    @Transaction
+    public List<ShisetsuNyutaisho> get介護保険施設入退所(ShikibetsuCode 識別コード) {
+        List<ShisetsuNyutaisho> businessList = new ArrayList<>();
+        for (DbT1004ShisetsuNyutaishoEntity entity : dac.get介護保険施設入退所(識別コード)) {
+            entity.initializeMd5();
+            businessList.add(new ShisetsuNyutaisho(entity));
+        }
+        return businessList;
+    }
 }

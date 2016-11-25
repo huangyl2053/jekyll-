@@ -162,7 +162,10 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         基本entity.set入所院実日数(entity.getDbT3017_nyushoJitsunissu());
         基本entity.set外泊日数(entity.getDbT3017_gaihakuNissu());
         基本entity.set出力様式(entity.getDbT3118_ryakusho());
-        RString 名称 = entity.getDbT3118_meisho();
+        RString 名称 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(名称)) {
+            名称 = entity.getDbT3118_meisho();
+        }
         if (名称.length() <= 居住サービス計画事業者名_LENGTH) {
             基本entity.set出力様式１(名称);
             基本entity.set出力様式２(RString.EMPTY);

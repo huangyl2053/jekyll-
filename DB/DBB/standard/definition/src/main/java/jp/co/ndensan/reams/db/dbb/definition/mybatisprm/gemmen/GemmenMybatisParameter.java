@@ -30,6 +30,7 @@ public class GemmenMybatisParameter implements IMyBatisParameter {
     private final List<RString> list地区1コード;
     private final List<RString> list地区2コード;
     private final List<RString> list地区3コード;
+    private final boolean has抽出条件;
     private final FlexibleDate shinseiYMD;
     private final Code gemmenJiyuCode;
     private final RString shinseiJiyu;
@@ -65,6 +66,11 @@ public class GemmenMybatisParameter implements IMyBatisParameter {
         this.list地区1コード = list地区1コード;
         this.list地区2コード = list地区2コード;
         this.list地区3コード = list地区3コード;
+        this.has抽出条件 = null != list町域コード
+                || null != list行政区コード
+                || null != list地区1コード
+                || null != list地区2コード
+                || null != list地区3コード;
         this.shinseiYMD = shinseiYMD;
         this.gemmenJiyuCode = gemmenJiyuCode;
         this.shinseiJiyu = shinseiJiyu;

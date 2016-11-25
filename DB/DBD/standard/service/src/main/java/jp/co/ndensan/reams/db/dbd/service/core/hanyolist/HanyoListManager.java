@@ -64,7 +64,8 @@ public class HanyoListManager {
                         .toDateString().substring(0, NO_6);
             }
         }
-        if (hanyoListShutsuryokuKomoku != null && hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get金額編集().equals(KingakuEditingNecessity.必要.getコード())) {
+        if (hanyoListShutsuryokuKomoku != null
+            && hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get金額編集().equals(KingakuEditingNecessity.必要.getコード())) {
             項目内容new = DecimalFormatter.toコンマ区切りRString(new Decimal(項目内容new.toString()), 0);
         }
         return 項目内容new;

@@ -33,7 +33,7 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
     private final boolean hizikehensyuuflg;
     private final List<RString> kofuJiyulist;
     private final List<RString> kaishuJiyulist;
-    private final RString syuturyokujunid;
+    private final Long syuturyokujunid;
     private final long jobId;
 
     /**
@@ -67,7 +67,7 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
             boolean 日付編集フラグ,
             List<RString> 交付事由,
             List<RString> 回収事由,
-            RString 出力順ID,
+            Long 出力順ID,
             long jobId
     ) {
         this.akasihakoumod = 証発行モード;
@@ -118,9 +118,9 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
             boolean 日付編集フラグ,
             List<RString> 交付事由,
             List<RString> 回収事由,
-            RString 出力順ID,
+            Long 出力順ID,
             long jobId) {
-        
+
         return new HihokenshashoHakkoKanriboProcessParameter(
                 証発行モード,
                 出力対象,
@@ -136,6 +136,6 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
                 回収事由,
                 出力順ID,
                 jobId
-                );
+        );
     }
 }

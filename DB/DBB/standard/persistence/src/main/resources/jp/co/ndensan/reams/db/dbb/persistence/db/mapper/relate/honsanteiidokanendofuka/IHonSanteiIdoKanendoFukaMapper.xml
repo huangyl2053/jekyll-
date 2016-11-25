@@ -8,6 +8,15 @@
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>
     
+    <!-- 宛名識別対象異動分取得PSMから異動データを取得する -->
+    <select resultOrdered="true" id="select住基異動" resultMap="resultMap_ShukiIdoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter" fetchSize="500">
+        SELECT
+        DISTINCT "宛名異動"."shikibetsuCode"
+        FROM
+        rgua."UaFt001FindIdo"('1',#{抽出開始日時},#{抽出終了日時},TRUE, '{}' ,'0', '{}' ,'0','','0','','0', '{}' , '{}','','','','','','','','','','','','','','','','')AS "宛名異動"
+    </select>
+        
     <!-- 賦課根拠異動抽出に被保険者本人異動の判断 -->
     <select resultOrdered="true" id="select住基異動_被保険者本人異動" resultMap="resultMap_ShukiIdoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter" fetchSize="500">
@@ -115,8 +124,8 @@
         rgdb."DbV2502KaigoShotoku" AS A
         WHERE
         A."shotokuNendo" in (#{ 調定年度minus1 }, #{ 調定年度minus2 })
-        AND to_char(to_date(#{ 抽出開始日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",0,8)
-        AND substring(A."shoriTimeStamp",0,8) <![CDATA[<=]]> to_char(to_date(#{ 抽出終了日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
+        AND to_char(to_date(#{ 抽出開始日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",1,8)
+        AND substring(A."shoriTimeStamp",1,8) <![CDATA[<=]]> to_char(to_date(#{ 抽出終了日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
     </select>
     
     <!-- 所得異動の取得に被保険者本人異動の判断 -->
@@ -1418,14 +1427,20 @@
         SELECT A.*
         FROM
            (SELECT 
-                Q.*
+             L.*
              FROM 
+                 rgdb."DbT1001HihokenshaDaicho" AS  L
+             INNER JOIN  
+            (SELECT 
+                Q."hihokenshaNo",
+                Q."idoYMD",
+                MAX(Q."edaNo") AS "edaNo"
+               FROM 
                 rgdb."DbT1001HihokenshaDaicho" AS Q
                 INNER JOIN
                 (SELECT "hihokenshaNo", "ichigoShikakuShutokuYMD", MAX("shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
                    FROM rgdb."DbT1001HihokenshaDaicho"  AS "ORG"
                    WHERE "hihokennshaKubunCode"='1' AND "logicalDeletedFlag"=FALSE
-                   <!--以下「法施行時（2000/4/1）に住所地特例者で～除外する」考慮-->
                    AND NOT (EXISTS 
                       (SELECT 'X' FROM 
                              (SELECT 
@@ -1443,13 +1458,17 @@
                               WHERE "法施行時住特得喪レコード_hihokenshaNo"="ORG"."hihokenshaNo"
                               AND "法施行時住特得喪レコード_idoYMD"="ORG"."idoYMD"
                               AND "法施行時住特得喪レコード_edaNo"="ORG"."edaNo" ))
-                   <!--以上-->
                    GROUP BY "hihokenshaNo", "ichigoShikakuShutokuYMD"
                 )AS T
                 ON
                     T."hihokenshaNo" = Q."hihokenshaNo"
                 AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
                 AND T."max_shikakuSoshitsuYMD" = Q."shikakuSoshitsuYMD"
+               GROUP BY Q."hihokenshaNo", Q."idoYMD") as M
+               ON
+                 M."hihokenshaNo" = L."hihokenshaNo"
+                 AND M."idoYMD" = L."idoYMD"
+                 AND M."edaNo" = L."edaNo"
             ) AS A
         INNER JOIN
         ( <include refid="distinct_IdoTmp" /> ) AS B

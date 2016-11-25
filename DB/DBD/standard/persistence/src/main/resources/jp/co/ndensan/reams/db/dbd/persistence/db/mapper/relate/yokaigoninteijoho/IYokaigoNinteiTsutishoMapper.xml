@@ -42,13 +42,15 @@
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
         FROM
         rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJoho"
-
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" AS "DbT7051KoseiShichosonMaster"
+        ON "DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
         INNER JOIN
         rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
         ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4001JukyushaDaicho"."shinseishoKanriNo"
         AND "DbT4101NinteiShinseiJoho"."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND "DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT4001JukyushaDaicho"."shichosonCode"
-
+        AND "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT4001JukyushaDaicho"."shichosonCode"
+        AND "DbT4001JukyushaDaicho"."chokkinFlag" = TRUE
         WHERE
         "DbT4101NinteiShinseiJoho"."isDeleted" = FALSE
         AND "DbT4001JukyushaDaicho"."isDeleted" = FALSE

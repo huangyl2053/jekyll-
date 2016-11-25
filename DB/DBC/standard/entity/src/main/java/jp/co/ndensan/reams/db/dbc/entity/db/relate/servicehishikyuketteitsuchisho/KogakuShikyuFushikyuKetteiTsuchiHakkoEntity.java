@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額介護サービス費支給（不支給）決定通知一覧表帳票用エンティティクラスです。
@@ -42,18 +43,19 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoEntity {
     private RString 認定終了日;
     private RString 受付年月日;
     private RString 決定年月日;
-    private RString 本人支払額;
-    private RString 支給額;
+    private Decimal 本人支払額;
+    private Decimal 支給額;
     private RString 支給_不支給_決定区分;
     private RString 資格喪失日;
     private RString 喪失事由;
     private RString 自動償還;
-    private RString 支給総件数;
-    private RString 本人支給額合計;
-    private RString 支給額給額合計;
+    private int 支給総件数;
+    private Decimal 本人支給額合計;
+    private Decimal 支給額給額合計;
     private RString 町域コード;
     private RString 行政区コード;
     private RString 氏名５０音カナ;
     private RString 証記載保険者番号;
     private RString 資格状態区分;
+    private RString 連番;
 }

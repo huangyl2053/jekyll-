@@ -124,6 +124,7 @@ public class RiyojokyoTokeihyoHandler {
         RString 選択対象区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("sentakuTaisyoKubun"));
         if (!RString.isNullOrEmpty(選択対象区分)) {
             div.getChikushichosonSelect().set選択対象(選択対象区分);
+            div.getChikushichosonSelect().onChange_選択対象DDL();
         }
         Code 市町村コード = restoreBatchParameterMap.getParameterValue(Code.class, new RString("shichosonCode"));
         if (市町村コード != null && !市町村コード.isEmpty()) {
@@ -133,7 +134,7 @@ public class RiyojokyoTokeihyoHandler {
         if (旧市町村コード != null && !旧市町村コード.isEmpty()) {
             div.getChikushichosonSelect().set旧市町村コード(旧市町村コード.value());
         }
-        Map<RString, RString> 選択結果 = restoreBatchParameterMap.getParameterValue(Map.class, new RString("sentakuKekkaList"));
+        Map<RString, RString> 選択結果 = restoreBatchParameterMap.getParameterValue(Map.class, new RString("sentakuTaisyoMap"));
         if (選択結果 != null && !選択結果.isEmpty()) {
             div.getChikushichosonSelect().set選択結果(選択結果);
         }

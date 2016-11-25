@@ -116,8 +116,9 @@ public class TokubetsuChoshuKaishiPageBreak extends PageBreaker<TokubetsuChoshuK
     }
 
     private boolean isBreak(RString current, RString next) {
-        return !(RString.isNullOrEmpty(current) && RString.isNullOrEmpty(next)
-                || (!RString.isNullOrEmpty(current) && current.equals(next)));
+        return !((RString.isNullOrEmpty(current) && RString.isNullOrEmpty(next))
+                || (!RString.isNullOrEmpty(current) && current.equals(next))
+                || (!RString.isNullOrEmpty(next) && next.equals(current)));
     }
 
 }

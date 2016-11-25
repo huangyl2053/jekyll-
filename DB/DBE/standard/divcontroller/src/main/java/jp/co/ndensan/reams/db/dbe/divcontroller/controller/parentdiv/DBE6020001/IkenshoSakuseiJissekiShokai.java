@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6020001
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601002.DBE601002_NinteichosaJissekiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojissekiichiran.IkenshoJissekiIchiranMybitisParamter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.DBE6020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.IkenshoSakuseiJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6020001.IkenshoSakuseiJissekiShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6020001.IkenshoSakuseiJissekiValidationHandler;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -82,9 +84,24 @@ public class IkenshoSakuseiJissekiShokai {
                 new RString(div.getTxtMaxKensu().getValue().toString()));
         getHandler(div).onClick_BtnKensaku(IkenshoSakuseiJissekiShokaiFindler.createInstance().get主治医意見書作成実績集計表(paramter).records());
         getHandler(div).set一覧状態();
-        if (div.getDgIkenshoSakuseiJisseki().getDataSource().isEmpty()) {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), false);
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 状態遷移された時のイベントです。
+     *
+     * @param div 画面情報
+     * @return ResponseData<IkenshoSakuseiJissekiShokaiDiv>
+     */
+    public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onChange_State(IkenshoSakuseiJissekiShokaiDiv div) {
+        if (ResponseHolder.getState().equals(DBE6020001StateName.一覧.getName())) {
+            if (div.getDgIkenshoSakuseiJisseki().getDataSource().isEmpty()) {
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnPulish"), true);
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnShutsutyoku"), true);
+            } else {
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnPulish"), false);
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -113,7 +130,7 @@ public class IkenshoSakuseiJissekiShokai {
         }
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「CSVを出力する」ボタンを押します。
      *
@@ -139,7 +156,7 @@ public class IkenshoSakuseiJissekiShokai {
     private IkenshoSakuseiJissekiShokaiHandler getHandler(IkenshoSakuseiJissekiShokaiDiv div) {
         return new IkenshoSakuseiJissekiShokaiHandler(div);
     }
-    
+
     private IkenshoSakuseiJissekiValidationHandler getValidationHandler(IkenshoSakuseiJissekiShokaiDiv div) {
         return new IkenshoSakuseiJissekiValidationHandler(div);
     }

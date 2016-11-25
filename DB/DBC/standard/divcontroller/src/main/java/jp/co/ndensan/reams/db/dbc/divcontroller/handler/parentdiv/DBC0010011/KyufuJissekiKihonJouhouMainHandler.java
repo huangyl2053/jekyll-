@@ -108,7 +108,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set申請内容エリア(給付実績基本);
             set合計内容エリア(給付実績基本);
         }
-        set合計エリア閉();
     }
 
     /**
@@ -144,7 +143,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set申請内容エリア(給付実績基本);
             set合計内容エリア(給付実績基本);
         }
-        set合計エリア閉();
         set事業者ボタン(給付実績ヘッダ情報２, 後整理番号, サービス提供年月);
     }
 
@@ -171,7 +169,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set申請内容エリア(給付実績基本);
             set合計内容エリア(給付実績基本);
         }
-        set合計エリア閉();
         set月ボタン(サービス提供年月リスト, サービス提供年月);
         set事業者ボタン(給付実績ヘッダ情報２, 整理番号, サービス提供年月);
     }
@@ -199,7 +196,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set申請内容エリア(給付実績基本);
             set合計内容エリア(給付実績基本);
         }
-        set合計エリア閉();
         set月ボタン(サービス提供年月リスト, サービス提供年月);
         set事業者ボタン(給付実績ヘッダ情報２, 整理番号, サービス提供年月);
     }
@@ -211,12 +207,12 @@ public class KyufuJissekiKihonJouhouMainHandler {
         div.getBtnShokuji().setDisabled(false);
         div.getBtnFukushiYoguKonyu().setDisabled(false);
         div.getBtnTokuteiNyushosha().setDisabled(false);
-        div.getBtnKogakuKaigoService().setDisabled(false);
         div.getBtnTokuteiShinryo().setDisabled(false);
         div.getBtnKyotakuServiceKeikaku().setDisabled(false);
         div.getBtnJutakuKaishu().setDisabled(false);
         div.getBtnCareManagement().setDisabled(false);
         div.getBtnShafukuKeigen().setDisabled(false);
+        div.getBtnKogakuKaigoService().setDisabled(true);
         if (設定不可.equals(識別番号管理データ.get明細設定区分())) {
             div.getBtnMeisaiShukei().setDisabled(true);
         }
@@ -231,9 +227,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
         }
         if (設定不可.equals(識別番号管理データ.get特定入所者設定区分())) {
             div.getBtnTokuteiNyushosha().setDisabled(true);
-        }
-        if (設定不可.equals(識別番号管理データ.get高額介護サービス費設定区分())) {
-            div.getBtnKogakuKaigoService().setDisabled(true);
         }
         if (設定不可.equals(識別番号管理データ.get特定診療費設定区分())) {
             div.getBtnTokuteiShinryo().setDisabled(true);
@@ -287,19 +280,22 @@ public class KyufuJissekiKihonJouhouMainHandler {
         return 識別番号リスト;
     }
 
+    private boolean isDateOk(FlexibleDate date) {
+        return date != null && !date.isEmpty() && date.isWareki();
+    }
+
     private void set申請内容エリア(KyufujissekiKihon 給付実績基本情報) {
-        div.getTxtKyufuJissekiKihonSakuseiKubun().setValue(get作成区分(給付実績基本情報.get給付実績情報作成区分コード()));
         if (!RString.isNullOrEmpty(給付実績基本情報.get要介護状態区分コード())) {
             div.getTxtKyufuJissekiKihonYokaigodo().setValue(YokaigoJotaiKubunSupport.toValue(給付実績基本情報.getサービス提供年月(),
                     給付実績基本情報.get要介護状態区分コード()).getName());
         }
-        if (給付実績基本情報.get認定有効期間_開始年月日() != null && 給付実績基本情報.get認定有効期間_開始年月日().isWareki()) {
+        if (isDateOk(給付実績基本情報.get認定有効期間_開始年月日())) {
             div.getTxtYukoKaishiYMD().setValue(new RDate(給付実績基本情報.get認定有効期間_開始年月日().toString()));
         }
-        if (給付実績基本情報.get認定有功期間_終了年月日() != null && 給付実績基本情報.get認定有功期間_終了年月日().isWareki()) {
+        if (isDateOk(給付実績基本情報.get認定有功期間_終了年月日())) {
             div.getTxtYukoShuryoYMD().setValue(new RDate(給付実績基本情報.get認定有功期間_終了年月日().toString()));
         }
-        if (給付実績基本情報.get審査年月() != null && 給付実績基本情報.get審査年月().isWareki()) {
+        if (給付実績基本情報.get審査年月() != null && !給付実績基本情報.get審査年月().isEmpty() && 給付実績基本情報.get審査年月().isWareki()) {
             div.getTxtKyufuJissekiKihonShinsaYM().setValue(new RDate(給付実績基本情報.get審査年月().toString()));
         }
         div.getTxtKyufuJissekiKihonKeikokuKubun().setValue(get警告区分(給付実績基本情報.get警告区分コード()));
@@ -414,10 +410,10 @@ public class KyufuJissekiKihonJouhouMainHandler {
     }
 
     private void setサービス期間エリア(KyufujissekiKihon 給付実績基本情報) {
-        if (給付実績基本情報.get開始年月日() != null && 給付実績基本情報.get開始年月日().isWareki()) {
+        if (isDateOk(給付実績基本情報.get開始年月日())) {
             div.getTxtKyufuJissekiKihonKaishiYMD().setValue(new RDate(給付実績基本情報.get開始年月日().toString()));
         }
-        if (給付実績基本情報.get中止年月日() != null && 給付実績基本情報.get中止年月日().isWareki()) {
+        if (isDateOk(給付実績基本情報.get中止年月日())) {
             div.getTxtKyufuJissekiKihonChushiYMD().setValue(new RDate(給付実績基本情報.get中止年月日().toString()));
         }
         div.getTxtKyufuJissekiKihonChushiRiyu().setValue(get中止理由(DBCCodeShubetsu.中止理由コード.getコード(),
@@ -425,11 +421,11 @@ public class KyufuJissekiKihonJouhouMainHandler {
     }
 
     private void set施設入退所_院エリア(KyufujissekiKihon 給付実績基本情報) {
-        if (給付実績基本情報.get入所_院_年月日() != null && 給付実績基本情報.get入所_院_年月日().isWareki()) {
+        if (isDateOk(給付実績基本情報.get入所_院_年月日())) {
             div.getTxtKyufuJissekiKihonNyushoYMD().setValue(new RDate(給付実績基本情報.get入所_院_年月日().toString()));
         }
         div.getTxtKyufuJissekiKihonNyushoJitsuNissu().setValue(new RString(給付実績基本情報.get入所_院_実日数()));
-        if (給付実績基本情報.get退所_院_年月日() != null && 給付実績基本情報.get退所_院_年月日().isWareki()) {
+        if (isDateOk(給付実績基本情報.get退所_院_年月日())) {
             div.getTxtKyufuJissekiKihonTaishoYMD().setValue(new RDate(給付実績基本情報.get退所_院_年月日().toString()));
         }
         div.getTxtKyufuJissekiKihonGaihakuNissu().setValue(new RString(給付実績基本情報.get外泊日数()));
@@ -504,12 +500,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             return new RString(給付率.value().intValue());
         }
         return RString.EMPTY;
-    }
-
-    private void set合計エリア閉() {
-        if (div.getKyufuJissekiKihonGokeiPanel().isIsOpen()) {
-            div.getKyufuJissekiKihonGokeiPanel().setIsOpen(false);
-        }
     }
 
     private int get事業者番号の位置(List<KyufuJissekiHedajyoho2> 事業者番号リスト,

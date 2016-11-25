@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5130011;
 
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150040.DBC150040_HeikinriyogakuTokeihyoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150040.DBC150040_HeikinriyogakuTokeihyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5130011.HeikinRiyoGakuTokeihyoDiv;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -33,10 +33,10 @@ public class HeikinRiyoGakuTokeihyoHandler {
     /**
      * 平均利用額統計表作成のBatchParameterを作成します。
      *
-     * @return DBC150040_HeikinriyogakuTokeihyoBatchParameter
+     * @return DBC150040_HeikinriyogakuTokeihyoParameter
      */
-    public DBC150040_HeikinriyogakuTokeihyoBatchParameter getBatchParameter() {
-        DBC150040_HeikinriyogakuTokeihyoBatchParameter parameter = new DBC150040_HeikinriyogakuTokeihyoBatchParameter();
+    public DBC150040_HeikinriyogakuTokeihyoParameter getBatchParameter() {
+        DBC150040_HeikinriyogakuTokeihyoParameter parameter = new DBC150040_HeikinriyogakuTokeihyoParameter();
 
         RString key = div.getRadTaishoYM().getSelectedKey();
         parameter.setTaishoNendoYM(key);

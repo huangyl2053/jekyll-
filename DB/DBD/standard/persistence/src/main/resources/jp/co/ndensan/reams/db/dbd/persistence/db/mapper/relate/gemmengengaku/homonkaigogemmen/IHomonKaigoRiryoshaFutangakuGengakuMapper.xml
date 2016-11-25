@@ -18,7 +18,8 @@
                   AND A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_rirekiNo" = B."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
                   AND B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類コード}
         WHERE A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" = #{被保険者番号}
-        ORDER BY A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_shinseiYMD" DESC
+        ORDER BY A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_tekiyoKaishiYMD" DESC,
+             A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_ketteiKubun"
     </select>
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
     <resultMap id="resultMap_HomonKaigoRiyoshaFutangakuGengakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuEntity" autoMapping="true">

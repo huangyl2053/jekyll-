@@ -80,12 +80,20 @@ public interface IKyufuJissekiShokaiMapper {
     List<DbT3118ShikibetsuNoKanriEntity> get識別番号管理データ(KyufuJissekiHeaderJohoMapperParameter parameter);
 
     /**
-     * 給付実績基本集計データを取得します。
+     * 給付実績基本データを取得します。
      *
      * @param parameter 給付実績情報照会検索データ取得用MyBatisパラメータ
      * @return List<KyufuJissekiKihonShukeiRelateEntity>
      */
     List<KyufuJissekiKihonShukeiRelateEntity> get給付実績基本集計データ(KyufuJissekiKensakuDataMapperParameter parameter);
+
+    /**
+     * 給付実績基本集計データを取得します。
+     *
+     * @param parameter 給付実績情報照会検索データ取得用MyBatisパラメータ
+     * @return List<KyufuJissekiKihonShukeiRelateEntity>
+     */
+    List<KyufuJissekiKihonShukeiRelateEntity> get給付実績基本データ(KyufuJissekiKensakuDataMapperParameter parameter);
 
     /**
      * 給付実績基本居宅サービス計画費データを取得します。

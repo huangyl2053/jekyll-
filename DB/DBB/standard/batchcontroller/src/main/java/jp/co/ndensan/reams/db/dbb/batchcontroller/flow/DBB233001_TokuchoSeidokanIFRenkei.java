@@ -14,8 +14,12 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB233001.DBB233001_Tokuch
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.batch.BatchTextFileConvert;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.batch.BatchTextFileConvertBatchParameter;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -77,6 +81,10 @@ public class DBB233001_TokuchoSeidokanIFRenkei extends BatchFlowBase<DBB233001_T
             ファイルパス_IN = 入力ファイルパス.get(i);
             executeStep(文字コード変換);
             deleteEmptyFile(ファイルパス_IN);
+            FilesystemName sharedFileName = new FilesystemName(new File(ファイルパス_OUT.toString()).getName());
+            SharedFile.defineSharedFile(sharedFileName);
+            FilesystemPath 絶対パス = new FilesystemPath(Path.getTmpDirectoryPath());
+            SharedFile.copyToSharedFile(絶対パス, sharedFileName);
         }
     }
 

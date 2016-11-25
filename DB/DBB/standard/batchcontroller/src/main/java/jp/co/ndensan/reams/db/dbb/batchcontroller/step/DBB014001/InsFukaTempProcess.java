@@ -143,7 +143,8 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
                         段階区分, getBefore().get口座Entity(), getBefore().get普徴仮算定抽出().getTsuchishoNo(), バッチ起動日時);
                 tableWriter.insert(fukaJohoTempEntity);
             } else if (特徴開始前普通徴収_あり.equals(特別徴収_特徴開始前普通徴収_6月)) {
-                RString 保険料段階_仮算定時 = getBefore().get賦課情報一時().getHokenryoDankaiKarisanntei();
+                RString 保険料段階_仮算定時 = getBefore().get賦課情報一時().getHokenryoDankaiKarisanntei() == null ? RString.EMPTY
+                        : getBefore().get賦課情報一時().getHokenryoDankaiKarisanntei();
                 HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
                 jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai 保険料段階 = 保険料段階List.getBy段階区分(保険料段階_仮算定時);
                 Decimal 計算用保険料 = 保険料段階.get保険料率();

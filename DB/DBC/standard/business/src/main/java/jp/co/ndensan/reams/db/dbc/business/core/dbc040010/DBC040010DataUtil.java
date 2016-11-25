@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.dbc040010;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -712,23 +711,20 @@ public class DBC040010DataUtil {
         IDateOfBirth dob = DateOfBirthFactory.createInstance(getFlexibleDate(umareYMD));
         AgeCalculator ageCalculator = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
         FlexibleDate age = ageCalculator.get年齢到達日(NUM_70);
-        Calendar 前到達70翌月;
-        前到達70翌月 = getRealDateCalendar(age);
-        if (前到達70翌月.get(Calendar.MONTH) == NUM_12) {
-            前到達70翌月.set(前到達70翌月.get(Calendar.YEAR) + 1, NUM_1, 1);
-        } else {
-            前到達70翌月.set(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH) + 1, 1);
+        RDate 前到達70翌月 = getRealDate(age);
+        if (前到達70翌月 != null) {
+            前到達70翌月.plusMonth(NUM_1);
+            return new FlexibleDate(前到達70翌月.toDateString()).getYearMonth();
         }
-        return new FlexibleDate(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH), 1).getYearMonth();
+
+        return null;
     }
 
-    private Calendar getRealDateCalendar(FlexibleDate date) {
+    private RDate getRealDate(FlexibleDate date) {
         if (date == null || date.isEmpty()) {
             return null;
         }
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(date.getYearValue(), date.getMonthValue(), date.getDayValue());
-        return calendar;
+        return new RDate(date.getYearValue(), date.getMonthValue(), date.getDayValue());
     }
 
     private FlexibleDate getFlexibleDate(RString date) {

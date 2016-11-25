@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 12 14:46:01 CST 2016 
+ * Tue Nov 15 11:49:17 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgKyokaisouGaitouItran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
 
     private RString shinseiDate;
     private RString ketteiDate;
@@ -27,24 +28,24 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
     private RString kaishiDate;
     private RString shuryoDate;
     private RString kyuhugakuGengakuKisaiKaijo;
-    private RString hogoFuyoKonkyoGengakuKingaku;
+    private TextBoxNum hogoFuyoKonkyoGengakuKingaku;
     private RString kyojuhiKeigengoKyoshitsuShurui;
-    private RString kyojuhiKeigengoFutangaku;
-    private RString syokuhiKeigengoFutangaku;
-    private RString yomikaegoKogakuKaigoSetaiJogengaku;
+    private TextBoxNum kyojuhiKeigengoFutangaku;
+    private TextBoxNum syokuhiKeigengoFutangaku;
+    private TextBoxNum yomikaegoKogakuKaigoSetaiJogengaku;
     private RString kaigoHokenryoTeigengoSyotokuDankai;
     private RString kyokaisoSochiKetteiDate;
-    private RString kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku;
-    private RString kyojuhiKeigenGengakuJikofutanGetsugaku;
+    private TextBoxNum kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku;
+    private TextBoxNum kyojuhiKeigenGengakuJikofutanGetsugaku;
     private RString kyojuhiKeigenFutanGendogakuDankai;
     private RString shokuhiKeigenFutanGendogakuDankai;
-    private RString riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku;
-    private RString kaigoHokenryoGengakuGengakuJikofutanGetsugaku;
-    private RString gengakuJikofutanGetsugakuGokeigaku;
+    private TextBoxNum riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku;
+    private TextBoxNum kaigoHokenryoGengakuGengakuJikofutanGetsugaku;
+    private TextBoxNum gengakuJikofutanGetsugakuGokeigaku;
     private RString linkNo;
     private RString shinseiHaishiYMD;
     private RString kyokaisoShomeishoKofuYMD;
-    private RString shokuhiKeigenGengakuJikofutanGetsugaku;
+    private TextBoxNum shokuhiKeigenGengakuJikofutanGetsugaku;
     private RString sochiGaitoHigaito;
     private RString kyuhugakuGengakuKisaiKaijoFlag;
     private RString kyojuhiKeigengoKyoshitsuShuruiCode;
@@ -67,24 +68,24 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         this.kaishiDate = RString.EMPTY;
         this.shuryoDate = RString.EMPTY;
         this.kyuhugakuGengakuKisaiKaijo = RString.EMPTY;
-        this.hogoFuyoKonkyoGengakuKingaku = RString.EMPTY;
+        this.hogoFuyoKonkyoGengakuKingaku = new TextBoxNum();
         this.kyojuhiKeigengoKyoshitsuShurui = RString.EMPTY;
-        this.kyojuhiKeigengoFutangaku = RString.EMPTY;
-        this.syokuhiKeigengoFutangaku = RString.EMPTY;
-        this.yomikaegoKogakuKaigoSetaiJogengaku = RString.EMPTY;
+        this.kyojuhiKeigengoFutangaku = new TextBoxNum();
+        this.syokuhiKeigengoFutangaku = new TextBoxNum();
+        this.yomikaegoKogakuKaigoSetaiJogengaku = new TextBoxNum();
         this.kaigoHokenryoTeigengoSyotokuDankai = RString.EMPTY;
         this.kyokaisoSochiKetteiDate = RString.EMPTY;
-        this.kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku = RString.EMPTY;
-        this.kyojuhiKeigenGengakuJikofutanGetsugaku = RString.EMPTY;
+        this.kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku = new TextBoxNum();
+        this.kyojuhiKeigenGengakuJikofutanGetsugaku = new TextBoxNum();
         this.kyojuhiKeigenFutanGendogakuDankai = RString.EMPTY;
         this.shokuhiKeigenFutanGendogakuDankai = RString.EMPTY;
-        this.riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku = RString.EMPTY;
-        this.kaigoHokenryoGengakuGengakuJikofutanGetsugaku = RString.EMPTY;
-        this.gengakuJikofutanGetsugakuGokeigaku = RString.EMPTY;
+        this.riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku = new TextBoxNum();
+        this.kaigoHokenryoGengakuGengakuJikofutanGetsugaku = new TextBoxNum();
+        this.gengakuJikofutanGetsugakuGokeigaku = new TextBoxNum();
         this.linkNo = RString.EMPTY;
         this.shinseiHaishiYMD = RString.EMPTY;
         this.kyokaisoShomeishoKofuYMD = RString.EMPTY;
-        this.shokuhiKeigenGengakuJikofutanGetsugaku = RString.EMPTY;
+        this.shokuhiKeigenGengakuJikofutanGetsugaku = new TextBoxNum();
         this.sochiGaitoHigaito = RString.EMPTY;
         this.kyuhugakuGengakuKisaiKaijoFlag = RString.EMPTY;
         this.kyojuhiKeigengoKyoshitsuShuruiCode = RString.EMPTY;
@@ -137,7 +138,7 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         this.setOriginalData("rirekiNo", rirekiNo);
     }
 
-    public dgKyokaisouGaitouItran_Row(RString shinseiDate, RString ketteiDate, RString sochiGaitoHigaitoKubun, RString kaishiDate, RString shuryoDate, RString kyuhugakuGengakuKisaiKaijo, RString hogoFuyoKonkyoGengakuKingaku, RString kyojuhiKeigengoKyoshitsuShurui, RString kyojuhiKeigengoFutangaku, RString syokuhiKeigengoFutangaku, RString yomikaegoKogakuKaigoSetaiJogengaku, RString kaigoHokenryoTeigengoSyotokuDankai, RString kyokaisoSochiKetteiDate, RString kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku, RString kyojuhiKeigenGengakuJikofutanGetsugaku, RString kyojuhiKeigenFutanGendogakuDankai, RString shokuhiKeigenFutanGendogakuDankai, RString riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku, RString kaigoHokenryoGengakuGengakuJikofutanGetsugaku, RString gengakuJikofutanGetsugakuGokeigaku, RString linkNo, RString shinseiHaishiYMD, RString kyokaisoShomeishoKofuYMD, RString shokuhiKeigenGengakuJikofutanGetsugaku, RString sochiGaitoHigaito, RString kyuhugakuGengakuKisaiKaijoFlag, RString kyojuhiKeigengoKyoshitsuShuruiCode, RString hyojunFutanGengakuGaitoFlag, RString kyojuhinadoFutangakugengakuGaitoFlag, RString shokuhiKeigengoHutangakuGaitoFlag, RString kogakuServicehiJogengakuGengakuGaitoFlag, RString kogakuServicehiJogengakuGengakugoJogengaku, RString hokenryoNofuGengakuFlag, RString kyojuhiKeigenFutanGendogakuDankaiCode, RString shokuhiKeigenFutanGendogakuDankaiCode, RString hyojunFutanKeigengoFutangaku, RString rirekiNo) {
+    public dgKyokaisouGaitouItran_Row(RString shinseiDate, RString ketteiDate, RString sochiGaitoHigaitoKubun, RString kaishiDate, RString shuryoDate, RString kyuhugakuGengakuKisaiKaijo, TextBoxNum hogoFuyoKonkyoGengakuKingaku, RString kyojuhiKeigengoKyoshitsuShurui, TextBoxNum kyojuhiKeigengoFutangaku, TextBoxNum syokuhiKeigengoFutangaku, TextBoxNum yomikaegoKogakuKaigoSetaiJogengaku, RString kaigoHokenryoTeigengoSyotokuDankai, RString kyokaisoSochiKetteiDate, TextBoxNum kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku, TextBoxNum kyojuhiKeigenGengakuJikofutanGetsugaku, RString kyojuhiKeigenFutanGendogakuDankai, RString shokuhiKeigenFutanGendogakuDankai, TextBoxNum riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku, TextBoxNum kaigoHokenryoGengakuGengakuJikofutanGetsugaku, TextBoxNum gengakuJikofutanGetsugakuGokeigaku, RString linkNo, RString shinseiHaishiYMD, RString kyokaisoShomeishoKofuYMD, TextBoxNum shokuhiKeigenGengakuJikofutanGetsugaku, RString sochiGaitoHigaito, RString kyuhugakuGengakuKisaiKaijoFlag, RString kyojuhiKeigengoKyoshitsuShuruiCode, RString hyojunFutanGengakuGaitoFlag, RString kyojuhinadoFutangakugengakuGaitoFlag, RString shokuhiKeigengoHutangakuGaitoFlag, RString kogakuServicehiJogengakuGengakuGaitoFlag, RString kogakuServicehiJogengakuGengakugoJogengaku, RString hokenryoNofuGengakuFlag, RString kyojuhiKeigenFutanGendogakuDankaiCode, RString shokuhiKeigenFutanGendogakuDankaiCode, RString hyojunFutanKeigengoFutangaku, RString rirekiNo) {
         super();
         this.setOriginalData("shinseiDate", shinseiDate);
         this.setOriginalData("ketteiDate", ketteiDate);
@@ -239,7 +240,7 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         return kyuhugakuGengakuKisaiKaijo;
     }
 
-    public RString getHogoFuyoKonkyoGengakuKingaku() {
+    public TextBoxNum getHogoFuyoKonkyoGengakuKingaku() {
         return hogoFuyoKonkyoGengakuKingaku;
     }
 
@@ -247,15 +248,15 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         return kyojuhiKeigengoKyoshitsuShurui;
     }
 
-    public RString getKyojuhiKeigengoFutangaku() {
+    public TextBoxNum getKyojuhiKeigengoFutangaku() {
         return kyojuhiKeigengoFutangaku;
     }
 
-    public RString getSyokuhiKeigengoFutangaku() {
+    public TextBoxNum getSyokuhiKeigengoFutangaku() {
         return syokuhiKeigengoFutangaku;
     }
 
-    public RString getYomikaegoKogakuKaigoSetaiJogengaku() {
+    public TextBoxNum getYomikaegoKogakuKaigoSetaiJogengaku() {
         return yomikaegoKogakuKaigoSetaiJogengaku;
     }
 
@@ -267,11 +268,11 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         return kyokaisoSochiKetteiDate;
     }
 
-    public RString getKyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku() {
+    public TextBoxNum getKyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku() {
         return kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku;
     }
 
-    public RString getKyojuhiKeigenGengakuJikofutanGetsugaku() {
+    public TextBoxNum getKyojuhiKeigenGengakuJikofutanGetsugaku() {
         return kyojuhiKeigenGengakuJikofutanGetsugaku;
     }
 
@@ -283,15 +284,15 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         return shokuhiKeigenFutanGendogakuDankai;
     }
 
-    public RString getRiyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku() {
+    public TextBoxNum getRiyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku() {
         return riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku;
     }
 
-    public RString getKaigoHokenryoGengakuGengakuJikofutanGetsugaku() {
+    public TextBoxNum getKaigoHokenryoGengakuGengakuJikofutanGetsugaku() {
         return kaigoHokenryoGengakuGengakuJikofutanGetsugaku;
     }
 
-    public RString getGengakuJikofutanGetsugakuGokeigaku() {
+    public TextBoxNum getGengakuJikofutanGetsugakuGokeigaku() {
         return gengakuJikofutanGetsugakuGokeigaku;
     }
 
@@ -307,7 +308,7 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         return kyokaisoShomeishoKofuYMD;
     }
 
-    public RString getShokuhiKeigenGengakuJikofutanGetsugaku() {
+    public TextBoxNum getShokuhiKeigenGengakuJikofutanGetsugaku() {
         return shokuhiKeigenGengakuJikofutanGetsugaku;
     }
 
@@ -393,7 +394,7 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         this.kyuhugakuGengakuKisaiKaijo = kyuhugakuGengakuKisaiKaijo;
     }
 
-    public void setHogoFuyoKonkyoGengakuKingaku(RString hogoFuyoKonkyoGengakuKingaku) {
+    public void setHogoFuyoKonkyoGengakuKingaku(TextBoxNum hogoFuyoKonkyoGengakuKingaku) {
         this.setOriginalData("hogoFuyoKonkyoGengakuKingaku", hogoFuyoKonkyoGengakuKingaku);
         this.hogoFuyoKonkyoGengakuKingaku = hogoFuyoKonkyoGengakuKingaku;
     }
@@ -403,17 +404,17 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         this.kyojuhiKeigengoKyoshitsuShurui = kyojuhiKeigengoKyoshitsuShurui;
     }
 
-    public void setKyojuhiKeigengoFutangaku(RString kyojuhiKeigengoFutangaku) {
+    public void setKyojuhiKeigengoFutangaku(TextBoxNum kyojuhiKeigengoFutangaku) {
         this.setOriginalData("kyojuhiKeigengoFutangaku", kyojuhiKeigengoFutangaku);
         this.kyojuhiKeigengoFutangaku = kyojuhiKeigengoFutangaku;
     }
 
-    public void setSyokuhiKeigengoFutangaku(RString syokuhiKeigengoFutangaku) {
+    public void setSyokuhiKeigengoFutangaku(TextBoxNum syokuhiKeigengoFutangaku) {
         this.setOriginalData("syokuhiKeigengoFutangaku", syokuhiKeigengoFutangaku);
         this.syokuhiKeigengoFutangaku = syokuhiKeigengoFutangaku;
     }
 
-    public void setYomikaegoKogakuKaigoSetaiJogengaku(RString yomikaegoKogakuKaigoSetaiJogengaku) {
+    public void setYomikaegoKogakuKaigoSetaiJogengaku(TextBoxNum yomikaegoKogakuKaigoSetaiJogengaku) {
         this.setOriginalData("yomikaegoKogakuKaigoSetaiJogengaku", yomikaegoKogakuKaigoSetaiJogengaku);
         this.yomikaegoKogakuKaigoSetaiJogengaku = yomikaegoKogakuKaigoSetaiJogengaku;
     }
@@ -428,12 +429,12 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         this.kyokaisoSochiKetteiDate = kyokaisoSochiKetteiDate;
     }
 
-    public void setKyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku(RString kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku) {
+    public void setKyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku(TextBoxNum kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku) {
         this.setOriginalData("kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku", kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku);
         this.kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku = kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku;
     }
 
-    public void setKyojuhiKeigenGengakuJikofutanGetsugaku(RString kyojuhiKeigenGengakuJikofutanGetsugaku) {
+    public void setKyojuhiKeigenGengakuJikofutanGetsugaku(TextBoxNum kyojuhiKeigenGengakuJikofutanGetsugaku) {
         this.setOriginalData("kyojuhiKeigenGengakuJikofutanGetsugaku", kyojuhiKeigenGengakuJikofutanGetsugaku);
         this.kyojuhiKeigenGengakuJikofutanGetsugaku = kyojuhiKeigenGengakuJikofutanGetsugaku;
     }
@@ -448,17 +449,17 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         this.shokuhiKeigenFutanGendogakuDankai = shokuhiKeigenFutanGendogakuDankai;
     }
 
-    public void setRiyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku(RString riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku) {
+    public void setRiyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku(TextBoxNum riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku) {
         this.setOriginalData("riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku", riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku);
         this.riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku = riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku;
     }
 
-    public void setKaigoHokenryoGengakuGengakuJikofutanGetsugaku(RString kaigoHokenryoGengakuGengakuJikofutanGetsugaku) {
+    public void setKaigoHokenryoGengakuGengakuJikofutanGetsugaku(TextBoxNum kaigoHokenryoGengakuGengakuJikofutanGetsugaku) {
         this.setOriginalData("kaigoHokenryoGengakuGengakuJikofutanGetsugaku", kaigoHokenryoGengakuGengakuJikofutanGetsugaku);
         this.kaigoHokenryoGengakuGengakuJikofutanGetsugaku = kaigoHokenryoGengakuGengakuJikofutanGetsugaku;
     }
 
-    public void setGengakuJikofutanGetsugakuGokeigaku(RString gengakuJikofutanGetsugakuGokeigaku) {
+    public void setGengakuJikofutanGetsugakuGokeigaku(TextBoxNum gengakuJikofutanGetsugakuGokeigaku) {
         this.setOriginalData("gengakuJikofutanGetsugakuGokeigaku", gengakuJikofutanGetsugakuGokeigaku);
         this.gengakuJikofutanGetsugakuGokeigaku = gengakuJikofutanGetsugakuGokeigaku;
     }
@@ -478,7 +479,7 @@ public class dgKyokaisouGaitouItran_Row extends DataRow {
         this.kyokaisoShomeishoKofuYMD = kyokaisoShomeishoKofuYMD;
     }
 
-    public void setShokuhiKeigenGengakuJikofutanGetsugaku(RString shokuhiKeigenGengakuJikofutanGetsugaku) {
+    public void setShokuhiKeigenGengakuJikofutanGetsugaku(TextBoxNum shokuhiKeigenGengakuJikofutanGetsugaku) {
         this.setOriginalData("shokuhiKeigenGengakuJikofutanGetsugaku", shokuhiKeigenGengakuJikofutanGetsugaku);
         this.shokuhiKeigenGengakuJikofutanGetsugaku = shokuhiKeigenGengakuJikofutanGetsugaku;
     }

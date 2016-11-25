@@ -7,23 +7,23 @@ package jp.co.ndensan.reams.db.dbu.entity.xml;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 特定個人情報提供状況の取得要求ファイルのメッセージヘッダ部のentityクラスです。
  *
  * @reamsid_L DBU-4880-100 dingyi
  */
+@SuppressWarnings("checkstyle:illegaltype")
 @XmlType(propOrder = {"msgId", "msgTypeId", "msgMode", "sourceSystemID", "destinationSystemID", "receptionNumber", "msgResult"})
 public class MessageHeaderEntity {
 
-    private RString msgId;
-    private RString msgTypeId;
-    private RString msgMode;
-    private RString sourceSystemID;
-    private RString destinationSystemID;
-    private RString receptionNumber;
-    private RString msgResult;
+    private String msgId;
+    private String msgTypeId;
+    private String msgMode;
+    private String sourceSystemID;
+    private String destinationSystemID;
+    private String receptionNumber;
+    private String msgResult;
 
     /**
      * 電文メッセージIDを取得します。
@@ -31,16 +31,16 @@ public class MessageHeaderEntity {
      * @return 電文メッセージID
      */
     @XmlElement(name = "MSGID", nillable = true)
-    public RString getMsgId() {
+    public String getMsgId() {
         return msgId;
     }
 
     /**
      * 電文メッセージIDを設定します。
      *
-     * @param msgId RString
+     * @param msgId String
      */
-    public void setMsgId(RString msgId) {
+    public void setMsgId(String msgId) {
         this.msgId = msgId;
     }
 
@@ -50,16 +50,16 @@ public class MessageHeaderEntity {
      * @return 電文種別ID
      */
     @XmlElement(name = "MSGTypeID", nillable = true)
-    public RString getMsgTypeId() {
+    public String getMsgTypeId() {
         return msgTypeId;
     }
 
     /**
      * 電文種別IDを設定します。
      *
-     * @param msgTypeId RString
+     * @param msgTypeId String
      */
-    public void setMsgTypeId(RString msgTypeId) {
+    public void setMsgTypeId(String msgTypeId) {
         this.msgTypeId = msgTypeId;
     }
 
@@ -69,16 +69,16 @@ public class MessageHeaderEntity {
      * @return 電文実行モード
      */
     @XmlElement(name = "MSGMode", nillable = true)
-    public RString getMsgMode() {
+    public String getMsgMode() {
         return msgMode;
     }
 
     /**
      * 電文実行モードを設定します。
      *
-     * @param msgMode RString
+     * @param msgMode String
      */
-    public void setMsgMode(RString msgMode) {
+    public void setMsgMode(String msgMode) {
         this.msgMode = msgMode;
     }
 
@@ -88,16 +88,16 @@ public class MessageHeaderEntity {
      * @return 送信元システム識別子
      */
     @XmlElement(name = "SourceSystemID", nillable = true)
-    public RString getSourceSystemID() {
+    public String getSourceSystemID() {
         return sourceSystemID;
     }
 
     /**
      * 送信元システム識別子を設定します。
      *
-     * @param sourceSystemID RString
+     * @param sourceSystemID String
      */
-    public void setSourceSystemID(RString sourceSystemID) {
+    public void setSourceSystemID(String sourceSystemID) {
         this.sourceSystemID = sourceSystemID;
     }
 
@@ -107,16 +107,16 @@ public class MessageHeaderEntity {
      * @return 送信先システム識別子
      */
     @XmlElement(name = "DestinationSystemID", nillable = true)
-    public RString getDestinationSystemID() {
+    public String getDestinationSystemID() {
         return destinationSystemID;
     }
 
     /**
      * 送信先システム識別子を設定します。
      *
-     * @param destinationSystemID RString
+     * @param destinationSystemID String
      */
-    public void setDestinationSystemID(RString destinationSystemID) {
+    public void setDestinationSystemID(String destinationSystemID) {
         this.destinationSystemID = destinationSystemID;
     }
 
@@ -126,16 +126,16 @@ public class MessageHeaderEntity {
      * @return 中間サーバー受付番号
      */
     @XmlElement(name = "ReceptionNumber", nillable = true)
-    public RString getReceptionNumber() {
+    public String getReceptionNumber() {
         return receptionNumber;
     }
 
     /**
      * 送信先システム識別子を設定します。
      *
-     * @param receptionNumber RString
+     * @param receptionNumber String
      */
-    public void setReceptionNumber(RString receptionNumber) {
+    public void setReceptionNumber(String receptionNumber) {
         this.receptionNumber = receptionNumber;
     }
 
@@ -145,16 +145,16 @@ public class MessageHeaderEntity {
      * @return 電文結果コード
      */
     @XmlElement(name = "MSGResult", nillable = true)
-    public RString getMsgResult() {
+    public String getMsgResult() {
         return msgResult;
     }
 
     /**
      * 電文結果コードを設定します。
      *
-     * @param msgResult RString
+     * @param msgResult String
      */
-    public void setMsgResult(RString msgResult) {
+    public void setMsgResult(String msgResult) {
         this.msgResult = msgResult;
     }
 

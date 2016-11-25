@@ -115,7 +115,7 @@ public final class JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter implemen
             市町村コードリスト.addAll(旧市町村コードリスト);
         }
         return new JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter(
-                市町村コードリスト, 集計年度.concat("99"), get集計番号List(), get表番号List(),
+                市町村コードリスト, 集計年度.concat("00"), get集計番号List(), get表番号List(),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
@@ -234,7 +234,7 @@ public final class JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter implemen
             }
         }
         return new JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter(
-                市町村コードリスト, 年度.concat("99"), get集計番号List(), get表番号List(),
+                市町村コードリスト, 年度.concat("00"), get集計番号List(), get表番号List(),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }

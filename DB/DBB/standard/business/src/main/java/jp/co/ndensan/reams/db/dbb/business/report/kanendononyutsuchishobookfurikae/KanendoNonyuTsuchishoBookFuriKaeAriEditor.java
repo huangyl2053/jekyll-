@@ -285,8 +285,6 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriEditor implements IKanendoNonyuT
                 source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
                 source.shimeiText = sofubutsuAtesakiSource.shimeiText;
                 source.yubinNo = sofubutsuAtesakiSource.yubinNo;
-                // TODO 世帯主名 setainusimei 共通部品から設定する
-                // TODO 様方 samaKata 共通部品から設定する
             }
         }
     }

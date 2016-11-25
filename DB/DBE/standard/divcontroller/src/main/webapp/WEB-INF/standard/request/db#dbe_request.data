@@ -217,6 +217,7 @@ dbe/db/dbe/IkenshoSakuseiIrai/onClick_btnHakkouCheck
 dbe/db/dbe/IkenshoSakuseiIrai/onClick_btnHakkouKanryo
 dbe/db/dbe/IkenshoSakuseiIrai/onClick_btnUpdate
 dbe/db/dbe/IkenshoSakuseiIrai/onLoad
+dbe/db/dbe/IkenshoSakuseiJissekiShokai/onChange_State
 dbe/db/dbe/IkenshoSakuseiJissekiShokai/onClick_BatchButton
 dbe/db/dbe/IkenshoSakuseiJissekiShokai/onClick_BtnKensaku
 dbe/db/dbe/IkenshoSakuseiJissekiShokai/onClick_BtnKensakuClear

@@ -191,10 +191,10 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
     protected void usualProcess(TokuChoYidoIchiran t) {
         isHasData = true;
         IAtesaki 宛先情報 = null;
+        UaFt200FindShikibetsuTaishoEntity 宛名情報 = t.get宛名();
         if (t.get宛先() != null) {
             宛先情報 = AtesakiFactory.createInstance(t.get宛先());
         }
-
         EditedAtesaki 編集後宛先 = get編集後宛先(宛先情報, 帳票制御共通情報);
         RString 行政区コード = 行政区コードの編集(編集後宛先);
         HyojiCodes 表示コード = get表示コード(t, 帳票制御共通情報);
@@ -202,7 +202,7 @@ public class PrtTokuchoIdojohoIchiranhyoProcess extends BatchKeyBreakBase<TokuCh
         TokuChoYidoIchiranEntity 特徴異動情報Entity = 特徴異動情報Entityを作成(編集後宛先,
                 表示コード, 年金保険者名称, t.get特徴異動追加情報());
         TokubetsuChoshuIdojohoIchiranReport report = new TokubetsuChoshuIdojohoIchiranReport(
-                特徴異動情報Entity, parameter.getシステム日時().getRDateTime(),
+                特徴異動情報Entity, 宛名情報, parameter.getシステム日時().getRDateTime(),
                 new FlexibleYear(parameter.get賦課年度().toDateString()),
                 保険者情報_保険者番号, 保険者情報_保険者名称,
                 processCore.出力順項(), processCore.改頁項());

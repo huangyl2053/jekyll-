@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -39,14 +40,23 @@ public class HihohenshashoHakkoKanriboChohyoDataSakuseiEntity {
     private RString 氏名;
     private RString 住所;
     private RString 市町村コードListYou;
-    private RString 交付年月日;
+    private FlexibleDate 交付年月日;
+    private RString 交付年月日Str;
     private RString 交付事由コード;
     private RString 交付事由略称;
     private RString 交付事由名称;
-    private RString 回収年月日;
+    private FlexibleDate 回収年月日;
+    private RString 回収年月日Str;
     private RString 回収事由コード;
     private RString 回収事由名称;
-    private RString 有効期限;
+    private FlexibleDate 有効期限;
+    private RString 有効期限Str;
     private RString 様式;
+    private int 連番;
+
+    /**
+     * 帳票の最後のページに、検索条件を表示する際にページブレイクの基準とする項目。
+     */
+    private RString 隠し改頁項目;
 
 }

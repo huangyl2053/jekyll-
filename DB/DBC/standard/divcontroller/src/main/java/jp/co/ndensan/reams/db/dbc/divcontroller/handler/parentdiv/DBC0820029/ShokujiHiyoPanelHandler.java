@@ -669,11 +669,7 @@ public class ShokujiHiyoPanelHandler {
         JigyoshaNo 事業者番号 = paramter.get事業者番号();
         RString 様式番号 = paramter.get様式番号();
         RString 明細番号 = paramter.get明細番号();
-
-        if (削除.equals(処理モード)) {
-//            SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
-//                    被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        } else if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
+        if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
             if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
                 ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
                 shokanShokujiHiyo = build食事費用登録1(shokanShokujiHiyo);
@@ -699,13 +695,7 @@ public class ShokujiHiyoPanelHandler {
                     getDgdShokuji().getDataSource()) {
                 if (RowState.Modified.equals(dgd.getRowState())) {
                     ShokanMeisai entityModified = map.get(dgd.getDefaultDataName6());
-                    if (checkIsRealModified(entityModified, dgd)) {
-                        entityModified = entityModified.createBuilderForEdit().build();
-                        entityModified = clearShokanMeisai(entityModified);
-                        entityModified = buildShokanMeisai(entityModified, dgd);
-                        entityModified.modified();
-                    }
-                    meisaiListForUpd.add(entityModified);
+                    meisaiListForUpd.add(editEntityModified(entityModified, dgd));
                 } else if (RowState.Deleted.equals(dgd.getRowState())) {
                     ShokanMeisai entityDeleted = map.get(dgd.getDefaultDataName6());
                     entityDeleted = entityDeleted.deleted();
@@ -753,6 +743,16 @@ public class ShokujiHiyoPanelHandler {
         更新用データ.set償還払請求明細データ(toShokanMeisaiResultList(meisaiListForUpd));
         更新用データ.set償還払請求食事費用データ(shokanShokujiHiyoList);
         return 更新用データ;
+    }
+
+    private ShokanMeisai editEntityModified(ShokanMeisai entityModified, dgdShokuji_Row dgd) {
+        if (checkIsRealModified(entityModified, dgd)) {
+            entityModified = entityModified.createBuilderForEdit().build();
+            entityModified = clearShokanMeisai(entityModified);
+            entityModified = buildShokanMeisai(entityModified, dgd);
+            return entityModified.modified();
+        }
+        return entityModified;
     }
 
     /**

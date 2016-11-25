@@ -136,11 +136,6 @@ public final class ShikyuShinseiDetailHandler {
             if (dbJohoViewState == null) {
                 dbJohoViewState = new DbJohoViewState();
             }
-            ShokanShinsei shokanShinsei = dbJohoViewState.get償還払支給申請();
-            if (shokanShinsei == null) {
-                shokanShinsei = new ShokanShinsei(被保険者番号, サービス年月, 整理番号);
-            }
-
             return insert(画面モード, dbJohoViewState.get償還払支給申請());
         }
 
@@ -161,16 +156,18 @@ public final class ShikyuShinseiDetailHandler {
      * @param 画面モード 画面モード
      * @param 国保連共同処理受託区分_償還 RString
      * @param 償還払支給申請 ShokanShinsei
+     * @param dbJohoViewState DbJohoViewState
      */
     public void set支給申請一覧情報(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, RString 整理番号,
-            RString 画面モード, ShokanShinsei 償還払支給申請, RString 国保連共同処理受託区分_償還) {
+            RString 画面モード, ShokanShinsei 償還払支給申請, RString 国保連共同処理受託区分_償還,
+            DbJohoViewState dbJohoViewState) {
         set申請共通エリア(償還払支給申請);
         if (MODEL_DEL.equals(画面モード)) {
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(false);
             div.getPnlShinsei().setDisabled(true);
         }
-        set申請明細エリア(償還払支給申請, 画面モード);
+        set申請明細エリア(償還払支給申請, 画面モード, dbJohoViewState);
 
         if (!受託あり.equals(国保連共同処理受託区分_償還)) {
             return;
@@ -303,10 +300,8 @@ public final class ShikyuShinseiDetailHandler {
                     getTxtShinseiYMD().getValue().toString()))) {
                 return true;
             }
-        } else {
-            if (div.getPnlShinsei().getTxtShinseiYMD().getValue() != null) {
-                return true;
-            }
+        } else if (div.getPnlShinsei().getTxtShinseiYMD().getValue() != null) {
+            return true;
         }
 
         if (償還払支給申請.get受付年月日() != null && !償還払支給申請.get受付年月日().isEmpty()) {
@@ -316,10 +311,8 @@ public final class ShikyuShinseiDetailHandler {
                     getTxtUketsukeYMD().getValue().toString()))) {
                 return true;
             }
-        } else {
-            if (div.getPnlShinsei().getTxtUketsukeYMD().getValue() != null) {
-                return true;
-            }
+        } else if (div.getPnlShinsei().getTxtUketsukeYMD().getValue() != null) {
+            return true;
         }
 
         if (ShinseishaKubun.本人.get名称().equals(div.getPnlShinsei().getRdoShinseisyaKubun().getSelectedValue())
@@ -341,10 +334,8 @@ public final class ShikyuShinseiDetailHandler {
             if (div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {
                 return true;
             }
-        } else {
-            if (!div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {
-                return true;
-            }
+        } else if (!div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {
+            return true;
         }
 
         if (償還払支給申請.get申請者氏名() != null && !償還払支給申請.get申請者氏名().isEmpty()) {
@@ -354,11 +345,9 @@ public final class ShikyuShinseiDetailHandler {
             } else if (!償還払支給申請.get申請者氏名().equals(div.getPnlShinsei().getTxtShimeiKanji().getDomain().value())) {
                 return true;
             }
-        } else {
-            if (div.getPnlShinsei().getTxtShimeiKanji().getDomain() != null
-                    && !div.getPnlShinsei().getTxtShimeiKanji().getDomain().isEmpty()) {
-                return true;
-            }
+        } else if (div.getPnlShinsei().getTxtShimeiKanji().getDomain() != null
+                && !div.getPnlShinsei().getTxtShimeiKanji().getDomain().isEmpty()) {
+            return true;
         }
 
         return is変更あり_UPD2(償還払支給申請);
@@ -372,11 +361,9 @@ public final class ShikyuShinseiDetailHandler {
             } else if (!償還払支給申請.get申請者氏名カナ().equals(div.getPnlShinsei().getTxtShimeikana().getDomain().value())) {
                 return true;
             }
-        } else {
-            if (div.getPnlShinsei().getTxtShimeikana().getDomain() != null
-                    && !div.getPnlShinsei().getTxtShimeikana().getDomain().isEmpty()) {
-                return true;
-            }
+        } else if (div.getPnlShinsei().getTxtShimeikana().getDomain() != null
+                && !div.getPnlShinsei().getTxtShimeikana().getDomain().isEmpty()) {
+            return true;
         }
 
         if (償還払支給申請.get申請者電話番号() != null && !償還払支給申請.get申請者電話番号().isEmpty()) {
@@ -385,11 +372,9 @@ public final class ShikyuShinseiDetailHandler {
             } else if (!償還払支給申請.get申請者電話番号().value().equals(div.getPnlShinsei().getTxtTelNo().getDomain().value())) {
                 return true;
             }
-        } else {
-            if (div.getPnlShinsei().getTxtTelNo().getDomain() != null
-                    && !div.getPnlShinsei().getTxtTelNo().getDomain().isEmpty()) {
-                return true;
-            }
+        } else if (div.getPnlShinsei().getTxtTelNo().getDomain() != null
+                && !div.getPnlShinsei().getTxtTelNo().getDomain().isEmpty()) {
+            return true;
         }
 
         return is変更あり_UPD3(償還払支給申請);
@@ -403,11 +388,9 @@ public final class ShikyuShinseiDetailHandler {
             } else if (!償還払支給申請.get申請理由().equals(div.getPnlShinsei().getTxtMulShinseiRiyu().getValue())) {
                 return true;
             }
-        } else {
-            if (div.getPnlShinsei().getTxtMulShinseiRiyu().getValue() != null
-                    && !div.getPnlShinsei().getTxtMulShinseiRiyu().getValue().isEmpty()) {
-                return true;
-            }
+        } else if (div.getPnlShinsei().getTxtMulShinseiRiyu().getValue() != null
+                && !div.getPnlShinsei().getTxtMulShinseiRiyu().getValue().isEmpty()) {
+            return true;
         }
 
         if (償還払支給申請.get支払金額合計() != null) {
@@ -416,10 +399,8 @@ public final class ShikyuShinseiDetailHandler {
             } else if (!償還払支給申請.get支払金額合計().equals(div.getPnlShinsei().getTxtNumShiharaKingakuGk().getValue())) {
                 return true;
             }
-        } else {
-            if (div.getPnlShinsei().getTxtNumShiharaKingakuGk().getValue() != null) {
-                return true;
-            }
+        } else if (div.getPnlShinsei().getTxtNumShiharaKingakuGk().getValue() != null) {
+            return true;
         }
         return false;
     }
@@ -454,6 +435,10 @@ public final class ShikyuShinseiDetailHandler {
             return true;
         }
 
+        return is変更あり_ADD2(pnlDiv);
+    }
+
+    private Boolean is変更あり_ADD2(pnlShinseiDiv pnlDiv) {
         if (!pnlDiv.getTxtShimeikana().getDomain().equals(new AtenaKanaMeisho(div.getPanelUp().getCcdKaigoAtenaInfo().get氏名カナ()))) {
             return true;
         }
@@ -485,7 +470,7 @@ public final class ShikyuShinseiDetailHandler {
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(償還払支給申請.getサービス提供年月().toString()));
     }
 
-    private void set申請明細エリア(ShokanShinsei 償還払支給申請, RString 画面モード) {
+    private void set申請明細エリア(ShokanShinsei 償還払支給申請, RString 画面モード, DbJohoViewState dbJohoViewState) {
         if (償還払支給申請.get申請年月日() != null && !償還払支給申請.get申請年月日().isEmpty()) {
             div.getPnlShinsei().getTxtShinseiYMD().setValue(new RDate(償還払支給申請.get申請年月日().toString()));
         }
@@ -508,7 +493,6 @@ public final class ShikyuShinseiDetailHandler {
         }
         div.getPnlShinsei().getTxtTelNo().setDomain(償還払支給申請.get申請者電話番号());
         div.getPnlShinsei().getTxtMulShinseiRiyu().setValue(償還払支給申請.get申請理由());
-        DbJohoViewState dbJohoViewState = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
 
         if (dbJohoViewState != null && dbJohoViewState.get償還払支給申請() != null) {
             ShokanShinsei 償還払支給申請Data = dbJohoViewState.get償還払支給申請();
@@ -529,6 +513,10 @@ public final class ShikyuShinseiDetailHandler {
             div.getPnlShinsei().getTxtNumHokenKyufuGaku().setValue(new Decimal(償還払支給申請.get利用者負担額()));
         }
 
+        set申請明細エリア2(償還払支給申請, 画面モード);
+    }
+
+    private void set申請明細エリア2(ShokanShinsei 償還払支給申請, RString 画面モード) {
         div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(false);
         if (償還払支給申請.is国保連再送付フラグ()) {
             List<KeyValueDataSource> items = div.getPnlShinsei().getChkKokuhorenSaiso().getDataSource();

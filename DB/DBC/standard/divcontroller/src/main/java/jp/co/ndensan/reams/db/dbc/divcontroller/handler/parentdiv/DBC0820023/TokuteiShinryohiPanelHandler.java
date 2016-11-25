@@ -1300,9 +1300,11 @@ public class TokuteiShinryohiPanelHandler {
     private boolean isRStr等しい(RString str1, RString str2) {
         if ((str1 == null || str1.isEmpty()) && (str2 == null || str2.isEmpty())) {
             return true;
-        } else if (str1 != null) {
-            return str1.equals(str2);
-        } else if (str2 != null) {
+        } else if (str1 != null && str2 == null) {
+            return false;
+        } else if (str1 == null && str2 != null) {
+            return false;
+        } else if (str1 != null && str2 != null) {
             return str2.equals(str1);
         }
         return false;
@@ -1384,14 +1386,14 @@ public class TokuteiShinryohiPanelHandler {
     /**
      * 識別コード入力補助ボタンのメソッドます。
      *
-     * @param 識別コード ShikibetsuCode
      * @param サービス年月 FlexibleYearMonth
      * @param 様式番号 RString
      */
-    public void set識別コード(ShikibetsuCode 識別コード, FlexibleYearMonth サービス年月, RString 様式番号) {
+    public void set識別コード(FlexibleYearMonth サービス年月, RString 様式番号) {
+        RString 識別コード = div.getPanelFive().getTxtShikibetsuCode().getValue();
         div.setHiddenYoshikiNo(DataPassingConverter.serialize(様式番号));
         div.setHiddenServiceTeikyoYM(DataPassingConverter.serialize(new RString(サービス年月.toString())));
-        div.setHiddenShikibetsuCode(DataPassingConverter.serialize(識別コード.getColumnValue()));
+        div.setHiddenShikibetsuCode(DataPassingConverter.serialize(識別コード));
     }
 
     /**

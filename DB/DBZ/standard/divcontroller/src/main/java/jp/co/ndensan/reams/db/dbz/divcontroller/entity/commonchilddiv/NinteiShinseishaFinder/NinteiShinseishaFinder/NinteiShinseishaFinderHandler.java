@@ -248,6 +248,7 @@ public class NinteiShinseishaFinderHandler {
     public void openSonotaJoho() {
         div.getShosaiJoken().setIsOpen(true);
         div.getSonotaJoho().setIsOpen(true);
+        div.getCcdGeninShikkan().clearDisplayedValues();
         div.getTxtShinseiKeikaNissu().clearFromValue();
         div.getTxtShinseiKeikaNissu().clearToValue();
         div.getCcdGeninShikkan().load(SubGyomuCode.DBE認定支援, DBECodeShubetsu.原因疾患コード.getコード());
@@ -440,6 +441,6 @@ public class NinteiShinseishaFinderHandler {
     private List<RString> getKeySelectingLastOnly(CheckBoxList cbl) {
         List<KeyValueDataSource> list = cbl.getDataSource();
         return list.isEmpty() ? Collections.<RString>emptyList()
-               : Arrays.asList(list.get(list.size() - 1).getKey());
+                : Arrays.asList(list.get(list.size() - 1).getKey());
     }
 }

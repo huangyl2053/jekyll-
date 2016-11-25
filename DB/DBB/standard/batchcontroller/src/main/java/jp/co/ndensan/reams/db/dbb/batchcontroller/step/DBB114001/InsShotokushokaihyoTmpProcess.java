@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.shotokushokaihyo.Shotokushokaihyo
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -34,13 +35,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShoukaiDataMapbEntity> {
 
-    private static final int INT_0 = 0;
     private static final int INT_6 = 6;
     private static final RString 管内_1 = new RString("1");
     private static final RString 住特者_2 = new RString("2");
-    private static final RString 導入形態コード_111 = new RString("111");
-    private static final RString 導入形態コード_112 = new RString("112");
-    private static final RString 導入形態コード_120 = new RString("120");
     private static final RString 表示する = new RString("1");
     private static final RString 表示しない = new RString("0");
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
@@ -61,6 +58,7 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
     private RDate 処理日付;
     private RString 導入形態コード;
     private ShotokuShoukaiDataTempEntity 所得照会票データ;
+    private LasdecCode 導入団体コード;
 
     @Override
     public void initialize() {
@@ -78,7 +76,7 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
                 処理日付, SubGyomuCode.DBU介護統計報告);
         市町村名付与有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
                 処理日付, SubGyomuCode.DBU介護統計報告);
-
+        導入団体コード = association.getLasdecCode_();
     }
 
     @Override
@@ -126,9 +124,13 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
         entity.setHonninKubun(t.getHonninKubun());
         entity.setChoikiCode(t.getChoikiCode());
         entity.setGyoseikuCode(t.getGyoseikuCode());
-        RString shichosonCode = t.getShichosonCode() == null ? RString.EMPTY : t.getShichosonCode().getColumnValue();
-        if (shichosonCode.length() >= INT_6) {
-            entity.setShichosonCode(shichosonCode.substring(INT_0, INT_6));
+        if (DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード)
+                || DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード)) {
+            entity.setShichosonCode(導入団体コード.getColumnValue());
+        } else if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
+            RString shichosonCode = t.getGenLasdecCode() == null || t.getGenLasdecCode().isEmpty()
+                    ? RString.EMPTY : t.getGenLasdecCode().getColumnValue();
+            entity.setShichosonCode(shichosonCode);
         }
         entity.setZenjushoCode(t.getZenjushoCode());
         entity.setYubinNo(t.getYubinNo());
@@ -157,7 +159,7 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
     }
 
     private void editor現住所(RString 導入形態コード) {
-        if (導入形態コード_120.equals(導入形態コード) || 導入形態コード_112.equals(導入形態コード)) {
+        if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード) || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード)) {
             if (都道府県名付与有無.equals(表示する) && 郡名付与有無.equals(表示する) && 市町村名付与有無.equals(表示する)) {
                 RString 現住所 = 都道府県名.concat(郡名).concat(市町村名).concat(所得照会票データ.getGenjusho());
                 所得照会票データ.setGenjusho(現住所);
@@ -165,7 +167,7 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
                     && 郡名付与有無.equals(表示しない) && 市町村名付与有無.equals(表示しない)) {
                 所得照会票データ.setGenjusho(RString.EMPTY);
             }
-        } else if (導入形態コード.equals(導入形態コード_111)) {
+        } else if (導入形態コード.equals(DonyuKeitaiCode.事務広域.getCode())) {
             LasdecCode 市町村コード = LasdecCode.EMPTY;
             if (所得照会票データ.getShichosonCode() != null && 所得照会票データ.getShichosonCode().length() >= INT_6) {
                 市町村コード = new LasdecCode(所得照会票データ.getShichosonCode());
@@ -185,14 +187,14 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
     }
 
     private void editor被保険者住所() {
-        if (導入形態コード_120.equals(導入形態コード) || 導入形態コード_112.equals(導入形態コード)) {
+        if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード) || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード)) {
             if (都道府県名付与有無.equals(表示する) && 郡名付与有無.equals(表示する) && 市町村名付与有無.equals(表示する)) {
                 RString 被保険者住所 = 都道府県名.concat(郡名).concat(市町村名).concat(所得照会票データ.getHihokenshajusho());
                 所得照会票データ.setHihokenshajusho(被保険者住所);
             } else if (都道府県名付与有無.equals(表示しない) && 郡名付与有無.equals(表示しない) && 市町村名付与有無.equals(表示しない)) {
                 所得照会票データ.setHihokenshajusho(RString.EMPTY);
             }
-        } else if (導入形態コード.equals(導入形態コード_111)) {
+        } else if (導入形態コード.equals(DonyuKeitaiCode.事務広域.getCode())) {
             LasdecCode 市町村コード = LasdecCode.EMPTY;
             if (所得照会票データ.getShichosonCode() != null && 所得照会票データ.getShichosonCode().length() >= INT_6) {
                 市町村コード = new LasdecCode(所得照会票データ.getShichosonCode());

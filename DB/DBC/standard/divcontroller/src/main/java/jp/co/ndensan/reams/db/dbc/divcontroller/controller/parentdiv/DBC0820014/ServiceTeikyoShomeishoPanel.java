@@ -51,6 +51,7 @@ public class ServiceTeikyoShomeishoPanel {
     private static final RString 証明書戻り_0 = new RString("0");
     private static final RString 処理_空白 = RString.EMPTY;
     private static final RString 処理_追加 = new RString("追加");
+    private static final RString 処理_追加修正 = new RString("追加修正");
     private static final RString 処理_修正 = new RString("修正");
     private static final RString 処理_削除 = new RString("削除");
     private static final RString 処理区分_0 = new RString("0");
@@ -97,7 +98,7 @@ public class ServiceTeikyoShomeishoPanel {
         handler.load宛名と基本情報(識別コード, 被保険者番号);
         handler.loadボタンエリア(画面モード);
         handler.load申請共通エリア(画面モード, サービス年月, 整理番号);
-        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報, 償還払ViewStateDB情報);
+        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報, 償還払ViewStateDB情報, サービス年月);
         return createResponse(div);
     }
 
@@ -171,7 +172,11 @@ public class ServiceTeikyoShomeishoPanel {
         if (getHandler(div).削除済チェック()) {
             throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_削除済修正.getMessage().evaluate());
         }
+        if (処理_追加.equals(div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getActiveRow().getShori())) {
+            putViewStateDown(処理_追加修正, div);
+        }
         putViewStateDown(処理モード_修正, div);
+
         証明書変更済フラグ初期化();
         証明書グリッドList設定(div);
         DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
@@ -246,7 +251,7 @@ public class ServiceTeikyoShomeishoPanel {
                 証明書グリッド.set処理(処理_修正);
                 証明書グリッド.set処理区分(処理区分_2);
             }
-        } else if (処理モード_削除.equals(処理モード_削除)) {
+        } else if (処理モード_削除.equals(処理モード)) {
             証明書グリッド.set処理(処理_削除);
             証明書グリッド.set処理区分(処理区分_3);
         }
@@ -274,7 +279,10 @@ public class ServiceTeikyoShomeishoPanel {
             様式番号 = row.getData4();
         }
         RString 明細番号 = null;
-        if (!処理モード_登録.equals(処理モード)) {
+        if (!処理モード_登録.equals(処理モード) || 処理_追加修正.equals(処理モード)) {
+            if (処理_追加修正.equals(処理モード)) {
+                処理モード = 処理モード_登録;
+            }
             明細番号 = row.getData3();
         }
         ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(

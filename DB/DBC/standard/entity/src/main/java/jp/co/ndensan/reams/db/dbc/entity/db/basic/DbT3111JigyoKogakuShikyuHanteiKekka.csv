@@ -14,3 +14,4 @@ hanteiKekkaSofuFuyoFlag,bool,boolean,,,,,判定結果送付不要フラグ,A
 shinsaKekkaHaneiKubun,varchar,RString,,,,,審査結果反映区分,A
 ketteiTsuchishoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,決定通知書作成年月日,A
 furikomiMeisaishoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,振込明細書作成年月日,A
+ketteiTsuchiHakkoKubun,varchar,RString,,,,,決定通知リアル発行区分,A

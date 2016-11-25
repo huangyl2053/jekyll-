@@ -808,7 +808,14 @@
         <result property="行政区コード"   column="行政区コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="行政区"   column="行政区"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="措置元市町村コード"   column="措置元市町村コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-
+        <result property="異動事由コード"   column="異動事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得事由コード"   column="資格取得事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失事由コード"   column="資格喪失事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格変更事由コード"   column="資格変更事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所地特例適用事由コード"   column="住所地特例適用事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所地特例解除事由コード"   column="住所地特例解除事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード"   column="市町村コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支給予定額"   column="支給予定額"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap> 
     <select resultOrdered="true" id="get対象者一覧表発行処理"  resultMap="ResultMap_対象者一覧表発行処理"
         parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter" fetchSize="500">
@@ -818,7 +825,8 @@
             A."serviceTeikyoYM" AS "サービス提供年月",
             A."shokisaiHokenshaNo" AS "証記載保険者番号",
             A."hokenRiyoshaFutangaku" AS "利用者負担額",
-            PSM."setaiCode" AS "世帯コード",
+            A."sikyugaku"  AS "支給予定額",
+            A."setaiCode" AS "世帯コード",
             A."shotokuHantei_shichosonCode" AS "市町村コード",
             A."beikoKojinshotokuKubun" AS "備考欄個人所得区分",
             PSM."meisho" AS "被保険者名",
@@ -832,9 +840,15 @@
             PSM."jusho"||PSM."banchi"||PSM."katagaki" AS "住所番地方書",
             PSM."gyoseikuCode" AS "行政区コード",
             PSM."gyoseikuName" AS "行政区",
-            D."shichosonCode"||D."koikinaiTokureiSochimotoShichosonCode" AS "措置元市町村コード"
+            D."shichosonCode"||D."koikinaiTokureiSochimotoShichosonCode" AS "措置元市町村コード",
+            D."idoJiyuCode" AS "異動事由コード",
+            D."shikakuShutokuJiyuCode" as "資格取得事由コード",
+            D."shikakuSoshitsuJiyuCode" AS "資格喪失事由コード",
+            D."shikakuHenkoJiyuCode" AS "資格変更事由コード",
+            D."jushochitokureiTekiyoJiyuCode" as "住所地特例適用事由コード",
+            D."jushochitokureiKaijoJiyuCode" AS "住所地特例解除事由コード"
         FROM
-           "TempKyufujissekiTyukann8"  AS A
+           rgdb."TempKyufujissekiTyukann9"  AS A
          INNER JOIN rgdb."DbT4001JukyushaDaicho" AS C
            ON C."hihokenshaNo" = A."hiHokenshaNo"
          INNER JOIN  rgdb."DbV1001HihokenshaDaicho" AS D

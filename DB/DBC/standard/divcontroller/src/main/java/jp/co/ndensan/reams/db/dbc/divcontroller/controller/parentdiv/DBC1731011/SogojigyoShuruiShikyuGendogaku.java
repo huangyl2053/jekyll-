@@ -164,7 +164,7 @@ public class SogojigyoShuruiShikyuGendogaku {
             getHandler(div).save(総合事業種類情報, 保存モード, manager);
             setGrid一覧表示(div);
         }
-        return ResponseData.of(div).setState(DBC1731011StateName.完了状態);
+        return ResponseData.of(div).setState(DBC1731011StateName.初期状態);
     }
 
 }

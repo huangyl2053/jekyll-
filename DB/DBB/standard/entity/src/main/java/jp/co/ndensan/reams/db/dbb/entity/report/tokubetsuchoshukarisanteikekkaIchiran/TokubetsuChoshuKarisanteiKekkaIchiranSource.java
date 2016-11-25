@@ -92,6 +92,12 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranSource implements IReportSourc
     public RString shikibetsuCode;
     @ReportItem(name = "hihokenshaNo", length = 20, order = 40)
     public RString hihokenshaNo;
+    @ReportItem(name = "kanaMeisho", length = 20, order = 41)
+    public RString kanaMeisho;
+    @ReportItem(name = "choshuHoho", length = 20, order = 42)
+    public RString choshuHoho;
+    @ReportItem(name = "tokuchoKaisiTuki", length = 20, order = 43)
+    public RString tokuchoKaisiTuki;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

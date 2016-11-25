@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseiken
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
+import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteFath;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -108,32 +109,8 @@ public class KihonInfoMainPanel {
             getHandler(div).set初期基本情報();
             getHandler(div).set画面の個別設定(サービス年月, list, 様式番号);
         } else {
-            ShokanKihon shokanKihon = null;
-            if (!請求基本データList.isEmpty()) {
-                ShokanKihon 請求基本データ = getHandler(div).judgeIsContained(請求基本データList, 被保険者番号, 整理番号, サービス年月,
-                        事業者番号, 申請日, 明細番号, 様式番号);
-                if (null != 請求基本データ) {
-                    shokanKihon = 請求基本データ;
-                }
-            }
-            if (null == shokanKihon) {
-                shokanKihon = ShokanbaraiJyokyoShokai.createInstance()
-                        .getShokanbarayiSeikyukihonDetail(被保険者番号,
-                                サービス年月,
-                                整理番号,
-                                事業者番号,
-                                様式番号,
-                                明細番号);
-                if (null != shokanKihon) {
-                    db情報.set償還払請求基本データList(請求基本データList);
-                }
-            }
-
-            if (shokanKihon == null) {
-                throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-            }
-            getHandler(div).set基本情報(shokanKihon, サービス年月, list, 様式番号);
-            ViewStateHolder.put(ViewStateKeys.基本データ, shokanKihon);
+            dbから初期化データ取得(請求基本データList, 被保険者番号, 整理番号, サービス年月, 事業者番号, 申請日, 明細番号, 様式番号,
+                    div, db情報, list);
         }
 
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
@@ -148,7 +125,7 @@ public class KihonInfoMainPanel {
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             getHandler(div).set削除状態();
-            db情報 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
+            db情報 = SyokanbaraihiShikyuShinseiKetteFath.createInstance()
                     .delShokanSyomeisyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, db情報);
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
             return ResponseData.of(div).setState(DBC0820021StateName.削除モード);
@@ -161,6 +138,37 @@ public class KihonInfoMainPanel {
         }
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
         return ResponseData.of(div).setState(DBC0820021StateName.新規修正モード);
+    }
+
+    private void dbから初期化データ取得(ArrayList<ShokanKihon> 請求基本データList, HihokenshaNo 被保険者番号, RString 整理番号,
+            FlexibleYearMonth サービス年月, JigyoshaNo 事業者番号, RDate 申請日, RString 明細番号, RString 様式番号,
+            KihonInfoMainPanelDiv div, DbJohoViewState db情報, ArrayList<RString> list) {
+        ShokanKihon shokanKihon = null;
+        if (!請求基本データList.isEmpty()) {
+            ShokanKihon 請求基本データ = getHandler(div).judgeIsContained(請求基本データList, 被保険者番号, 整理番号, サービス年月,
+                    事業者番号, 申請日, 明細番号, 様式番号);
+            if (null != 請求基本データ) {
+                shokanKihon = 請求基本データ;
+            }
+        }
+        if (null == shokanKihon) {
+            shokanKihon = ShokanbaraiJyokyoShokai.createInstance()
+                    .getShokanbarayiSeikyukihonDetail(被保険者番号,
+                            サービス年月,
+                            整理番号,
+                            事業者番号,
+                            様式番号,
+                            明細番号);
+            if (null != shokanKihon) {
+                db情報.set償還払請求基本データList(請求基本データList);
+            }
+        }
+
+        if (shokanKihon == null) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        }
+        getHandler(div).set基本情報(shokanKihon, サービス年月, list, 様式番号);
+        ViewStateHolder.put(ViewStateKeys.基本データ, shokanKihon);
     }
 
     /**
@@ -242,12 +250,16 @@ public class KihonInfoMainPanel {
             } else if (証明書入力完了フラグ.equals(ShomeishoNyuryokuKanryoKubunType.入力未完了)) {
                 db情報.get証明書入力完了フラグMap().put(meisaiPar, 証明書入力完了フラグ);
                 ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, db情報);
-                if (DBC0820021TransitionEventName.一覧に戻る.equals(eventName)) {
-                    throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage().evaluate());
-                }
+                証明書情報未入力チェック(eventName);
             }
         }
         return ResponseData.of(div).forwardWithEventName(eventName).respond();
+    }
+
+    private void 証明書情報未入力チェック(DBC0820021TransitionEventName eventName) {
+        if (DBC0820021TransitionEventName.一覧に戻る.equals(eventName)) {
+            throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_証明書情報未入力.getMessage().evaluate());
+        }
     }
 
     private void set支給申請(KihonInfoMainPanelDiv div,

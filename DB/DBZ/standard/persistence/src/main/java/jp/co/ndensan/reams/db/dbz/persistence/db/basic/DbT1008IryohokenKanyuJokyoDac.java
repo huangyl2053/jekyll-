@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyo.iryoHokenKanyuYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyo.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyo.shikibetsuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyo.isDeleted;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -151,6 +152,26 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
                 where(eq(shikibetsuCode, 識別コード)).
                 order(by(rirekiNo, Order.DESC))
                 .limit(1).toObject(DbT1008IryohokenKanyuJokyoEntity.class);
+    }
+    
+    /**
+     * 識別コードで最新介護保険医療保険加入状況を取得します。
+     * 
+     * @param 識別コード
+     * @return DbT1008IryohokenKanyuJokyoEntity 介護保険医療保険加入状況情報
+     */
+    @Transaction
+    public DbT1008IryohokenKanyuJokyoEntity select最新医療保険加入状況論理非削除ByShikibetsuCode(
+            ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1008IryohokenKanyuJokyo.class).
+                where(and(
+                        eq(shikibetsuCode, 識別コード),
+                        eq(isDeleted, false))).
+                order(by(rirekiNo, Order.DESC)).
+                limit(1).toObject(DbT1008IryohokenKanyuJokyoEntity.class);
     }
 
 }

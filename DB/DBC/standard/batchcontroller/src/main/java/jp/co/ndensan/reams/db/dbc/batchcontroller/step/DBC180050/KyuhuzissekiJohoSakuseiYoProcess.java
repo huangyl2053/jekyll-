@@ -139,19 +139,17 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
         if (entity.get審査年月().isEmpty()) {
             emptyResultList.add(entity);
             emptyFlag = true;
-        } else {
-            if (!emptyFlag) {
-                if (審査年月Flag || 審査年月.equals(entity.get審査年月())) {
-                    審査年月 = entity.get審査年月();
-                    bigestResultList.add(entity);
-                    審査年月Flag = false;
-                }
+        } else if (!emptyFlag) {
+            if (審査年月Flag || 審査年月.equals(entity.get審査年月())) {
+                審査年月 = entity.get審査年月();
+                bigestResultList.add(entity);
+                審査年月Flag = false;
+            }
 
-                if (審査年月.isBefore(entity.get審査年月())) {
-                    審査年月 = entity.get審査年月();
-                    bigestResultList.clear();
-                    bigestResultList.add(entity);
-                }
+            if (審査年月.isBefore(entity.get審査年月())) {
+                審査年月 = entity.get審査年月();
+                bigestResultList.clear();
+                bigestResultList.add(entity);
             }
         }
     }
@@ -163,6 +161,7 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
         事業所番号 = entity.get事業所番号();
         通し番号 = entity.get通し番号();
         審査年月Flag = true;
+        emptyFlag = false;
     }
 
 }

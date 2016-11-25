@@ -81,11 +81,63 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
         return accessor.select().
                 table(DbT4021ShiharaiHohoHenko.class).
                 where(and(
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(kanriKubun, 管理区分),
-                                eq(rirekiNo, 履歴番号))).
+                        eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(kanriKubun, 管理区分),
+                        eq(rirekiNo, 履歴番号))).
                 toObject(DbT4021ShiharaiHohoHenkoEntity.class);
+    }
+
+    /**
+     * 支払方法変更の更新。
+     *
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     * @param kanriKubun kanriKubun
+     * @param rirekiNo rirekiNo
+     * @param yokokuTsuchiHakkoYMD yokokuTsuchiHakkoYMD
+     */
+    @Transaction
+    public void updateYokokuTsuchiHakkoYMD(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString kanriKubun,
+            int rirekiNo, FlexibleDate yokokuTsuchiHakkoYMD) {
+        DbT4021ShiharaiHohoHenkoEntity entity = selectByKey(shoKisaiHokenshaNo, hihokenshaNo, kanriKubun, rirekiNo);
+        entity.setYokoku_TsuchiHakkoYMD(yokokuTsuchiHakkoYMD);
+        save(entity);
+    }
+
+    /**
+     * 支払方法変更の更新。
+     *
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param hihokenshaNo kanriKubun
+     * @param kanriKubun kanriKubun
+     * @param rirekiNo rirekiNo
+     * @param shokanTsuchiHakkoYMD shokanTsuchiHakkoYMD
+     */
+    @Transaction
+    public void updateShokanTsuchiHakkoYMD(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString kanriKubun,
+            int rirekiNo, FlexibleDate shokanTsuchiHakkoYMD) {
+        DbT4021ShiharaiHohoHenkoEntity entity = selectByKey(shoKisaiHokenshaNo, hihokenshaNo, kanriKubun, rirekiNo);
+        entity.setShokan_TsuchiHakkoYMD(shokanTsuchiHakkoYMD);
+        save(entity);
+
+    }
+
+    /**
+     * 支払方法変更の更新。
+     *
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     * @param kanriKubun kanriKubun
+     * @param rirekiNo rirekiNo
+     * @param gemmenTsuchiHakkoYMD gemmenTsuchiHakkoYMD
+     */
+    @Transaction
+    public void updateGemmen_TsuchiHakkoYMD(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString kanriKubun,
+            int rirekiNo, FlexibleDate gemmenTsuchiHakkoYMD) {
+        DbT4021ShiharaiHohoHenkoEntity entity = selectByKey(shoKisaiHokenshaNo, hihokenshaNo, kanriKubun, rirekiNo);
+        entity.setGemmen_TsuchiHakkoYMD(gemmenTsuchiHakkoYMD);
+        save(entity);
     }
 
     /**
@@ -112,8 +164,6 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
     @Override
     public int save(DbT4021ShiharaiHohoHenkoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("支払方法変更エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
@@ -131,11 +181,11 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
         return accessor.select().
                 table(DbT4021ShiharaiHohoHenko.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(kanriKubun, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()),
-                                not(eq(mukoKubun, ShiharaiHenkoMukoKubun.無効.getコード())),
-                                leq(substr(tekiyoKaishiYMD, 1, NUM), サービス提供年月),
-                                leq(サービス提供年月, substr(tekiyoShuryoYMD, 1, NUM)))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(kanriKubun, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()),
+                        not(eq(mukoKubun, ShiharaiHenkoMukoKubun.無効.getコード())),
+                        leq(substr(tekiyoKaishiYMD, 1, NUM), サービス提供年月),
+                        leq(サービス提供年月, substr(tekiyoShuryoYMD, 1, NUM)))).
                 order(by(rirekiNo, DESC)).
                 toList(DbT4021ShiharaiHohoHenkoEntity.class);
     }
@@ -169,11 +219,11 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
         return accessor.select().
                 table(DbT4021ShiharaiHohoHenko.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(logicalDeletedFlag, false),
-                                eq(mukoKubun, ShiharaiHenkoMukoKubun.有効.getコード()),
-                                eq(shuryoKubun, ShuryoKubun.EMPTY.code()),
-                                not(isNULL(tekiyoKaishiYMD)))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(logicalDeletedFlag, false),
+                        eq(mukoKubun, ShiharaiHenkoMukoKubun.有効.getコード()),
+                        eq(shuryoKubun, ShuryoKubun.EMPTY.code()),
+                        not(isNULL(tekiyoKaishiYMD)))).
                 order(by(kanriKubun, DESC), by(tekiyoKaishiYMD, DESC)).limit(INT_3).
                 toList(DbT4021ShiharaiHohoHenkoEntity.class);
     }
@@ -192,10 +242,10 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
         return accessor.select().
                 table(DbT4021ShiharaiHohoHenko.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                leq(tekiyoKaishiYMD, 基準日),
-                                leq(基準日, tekiyoShuryoYMD),
-                                eq(kanriKubun, 管理区分))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        leq(tekiyoKaishiYMD, 基準日),
+                        leq(基準日, tekiyoShuryoYMD),
+                        eq(kanriKubun, 管理区分))).
                 order(by(rirekiNo, DESC)).limit(INT_1).
                 toObject(DbT4021ShiharaiHohoHenkoEntity.class);
     }
@@ -212,8 +262,8 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
         return accessor.select().
                 table(DbT4021ShiharaiHohoHenko.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(logicalDeletedFlag, false))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(logicalDeletedFlag, false))).
                 order(by(kanriKubun, ASC), by(tekiyoKaishiYMD, DESC)).
                 toList(DbT4021ShiharaiHohoHenkoEntity.class);
     }
@@ -236,8 +286,8 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
         return accessor.select().
                 table(DbT4021ShiharaiHohoHenko.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                in(kanriKubun, 管理区分List))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        in(kanriKubun, 管理区分List))).
                 order(by(rirekiNo, DESC)).
                 limit(1).
                 toObject(DbT4021ShiharaiHohoHenkoEntity.class);
@@ -261,8 +311,8 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
         return accessor.select().
                 table(DbT4021ShiharaiHohoHenko.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(kanriKubun, 管理区分))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(kanriKubun, 管理区分))).
                 order(by(rirekiNo, DESC)).
                 limit(1).
                 toObject(DbT4021ShiharaiHohoHenkoEntity.class);

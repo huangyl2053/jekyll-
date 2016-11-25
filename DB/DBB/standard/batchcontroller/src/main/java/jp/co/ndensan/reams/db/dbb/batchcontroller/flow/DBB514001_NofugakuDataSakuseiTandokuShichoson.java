@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb514001.NofugakuJohoReportProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb514001.NofugakuJohoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB514001.NofugakuJohoReportProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB514001.NofugakuJohoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB514001.DBB514001_NofugakuDataSakuseiTandokuShichosonParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB514001.NofugakuDataTsushutsuJoken;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.nofugakudatasakuseitandokushichoson.NofugakuDataProcessParameter;

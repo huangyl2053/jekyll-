@@ -845,7 +845,11 @@ public class NinteiTsuchishoHakkoHandler {
         row.getBirthYMD().setValue(convertFlexibleDateToRDate(対象者.get生年月日()));
         row.getNinteiShinseiDay().setValue(convertFlexibleDateToRDate(対象者.get認定申請年月日()));
         row.setShinseiji(NinteiShinseiShinseijiKubunCode.toValue(対象者.get認定申請区分申請時コード().value()).get名称());
-        row.setHorei(NinteiShinseiHoreiCode.toValue(対象者.get認定申請区分法令コード().value()).get名称());
+        if (RString.isNullOrEmpty(対象者.get認定申請区分法令コード().value())) {
+            row.setHorei(RString.EMPTY);
+        } else {
+            row.setHorei(NinteiShinseiHoreiCode.toValue(対象者.get認定申請区分法令コード().value()).get名称());
+        }
         row.getNinteiDay().setValue(convertFlexibleDateToRDate(対象者.get認定年月日()));
         row.setYokaigodo(get要介護度名(convertCodeToRString(対象者.get厚労省IF識別コード()),
                 convertCodeToRString(対象者.get要介護認定状態区分コード())));
@@ -951,10 +955,14 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private EditedAtesaki get送付物宛先情報(ChohyoSeigyoKyotsu 帳票共通情報) {
+        return get送付物宛先情報(帳票共通情報, ShikibetsuCode.EMPTY);
+    }
+    
+    private EditedAtesaki get送付物宛先情報(ChohyoSeigyoKyotsu 帳票共通情報, ShikibetsuCode 識別コード) {
         IAtesakiGyomuHanteiKey key = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給);
         AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(key);
         builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
-        builder.set識別コード(ShikibetsuCode.EMPTY);
+        builder.set識別コード(識別コード);
         builder.set基準日(FlexibleDate.getNowDate());
         builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
         builder.set世帯主利用区分(SetainushiRiyoKubun.利用しない);
@@ -986,7 +994,7 @@ public class NinteiTsuchishoHakkoHandler {
     
 
     private SourceDataCollection print個別発行認定結果通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
-        SourceDataCollection collection = null;
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             YokaigoNinteiKekkaTshuchishoPrintService printService = new YokaigoNinteiKekkaTshuchishoPrintService();
             printService.print(create個別発行認定結果通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
@@ -1007,7 +1015,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private SourceDataCollection print個別発行サービス変更通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
-        SourceDataCollection collection = null;
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             ServiceHenkoTshuchishoPrintService printService = new ServiceHenkoTshuchishoPrintService();
             printService.print(create個別発行サービス変更通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
@@ -1027,7 +1035,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private SourceDataCollection print個別発行要介護度変更通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
-        SourceDataCollection collection = null;
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             YokaigodoHenkoTshuchishoPrintService printService = new YokaigodoHenkoTshuchishoPrintService();
             printService.print(create個別発行要介護度変更通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
@@ -1047,7 +1055,7 @@ public class NinteiTsuchishoHakkoHandler {
     }
 
     private SourceDataCollection print個別発行認定却下通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
-        SourceDataCollection collection = null;
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             YokaigoNinteiKyakkaTshuchishoPrintService printService = new YokaigoNinteiKyakkaTshuchishoPrintService();
             printService.print(create個別発行認定却下通知書データ(パネル, 画面選択データ), get帳票共通情報(パネル), パネル.getChohyoId(), reportManager);
@@ -1109,7 +1117,7 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setTsuchibun6(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_3));
         printEntity.setTsuchibun7(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_4));
 
-        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報));
+        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報, 画面選択データ.get識別コード()));
         return printEntity;
     }
 
@@ -1151,7 +1159,7 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setTsuchibun6(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_2));
         printEntity.setTsuchibun7(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_3));
 
-        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報));
+        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報, 画面選択データ.get識別コード()));
         return printEntity;
     }
 
@@ -1199,7 +1207,7 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setTsuchibun7(get通知文情報通知文(パネル, 通知文_パターン番号_3, 通知文_項目番号_6));
         printEntity.setTsuchibun8(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_5));
         printEntity.setTsuchibun9(get通知文情報通知文(パネル, 通知文_パターン番号_4, 通知文_項目番号_6));
-        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報));
+        printEntity.set送付物宛先情報(get送付物宛先情報(帳票共通情報, 画面選択データ.get識別コード()));
         return printEntity;
     }
 

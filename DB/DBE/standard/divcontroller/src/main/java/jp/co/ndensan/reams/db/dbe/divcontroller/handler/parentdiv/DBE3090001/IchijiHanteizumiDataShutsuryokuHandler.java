@@ -331,7 +331,11 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             row.setHihoBango(business.get被保険者番号());
             row.setShimei(business.get被保険者氏名());
             row.setShinseitoki(NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード()).get名称());
-            row.setHorei(NinteiShinseiHoreiCode.toValue(business.get認定申請区分法令コード()).get名称());
+            if (RString.isNullOrEmpty(business.get認定申請区分法令コード())) {
+                row.setHorei(RString.EMPTY);
+            } else {
+                row.setHorei(NinteiShinseiHoreiCode.toValue(business.get認定申請区分法令コード()).get名称());
+            }
             if (!RString.isNullOrEmpty(business.get要介護認定一次判定年月日())) {
                 row.setKanryobi(new FlexibleDate(business.get要介護認定一次判定年月日()).wareki().toDateString());
             }

@@ -105,7 +105,6 @@
       "mst"."hiHokenshaNo" = #{被保険者番号}
       AND #{サービス提供年月_開始} <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
       AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月_終了}
-      AND "mst"."shinsaYM" <![CDATA[<>]]> ''
       <if test="isKey0検索対象">
             AND "mst"."inputShikibetsuNo" not in ('71P1','8161') 
       </if>
@@ -119,12 +118,95 @@
             AND "mst"."serviceTeikyoYM" = "slv"."serviceTeikyoYM"
             AND "mst"."jigyoshoNo" = "slv"."jigyoshoNo"
             AND "mst"."seiriNo" = "slv"."seiriNo"
-            AND "slv"."shinsaYM" <![CDATA[<>]]> ''
             AND (("mst"."shinsaYM" <![CDATA[<]]> "slv"."shinsaYM")
             or   ("mst"."shinsaYM" = "slv"."shinsaYM"
              and  "slv"."kyufuSakuseiKubunCode" <![CDATA[<]]> "mst"."kyufuSakuseiKubunCode")))
     )
     </sql>
+    
+    <select resultOrdered="true" id="get給付実績基本データ" resultMap="ResultMap_給付実績基本集計データ" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiHeaderJohoMapperParameter" fetchSize="500">
+
+      with "給付実績基本" AS (
+        SELECT * FROM
+           (SELECT * FROM
+             rgdb."DbT3017KyufujissekiKihon" AS "mst" 
+           WHERE
+             "mst"."hiHokenshaNo" = #{被保険者番号}
+             AND #{サービス提供年月_開始} <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
+             AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月_終了}
+             AND NOT EXISTS (SELECT 'X'FROM rgdb."DbT3017KyufujissekiKihon" AS "slv" 
+                             WHERE "mst"."inputShikibetsuNo" = "slv"."inputShikibetsuNo" 
+                                   AND "mst"."hiHokenshaNo" = "slv"."hiHokenshaNo" 
+                                   AND "mst"."serviceTeikyoYM" = "slv"."serviceTeikyoYM" 
+                                   AND "mst"."jigyoshoNo" = "slv"."jigyoshoNo" 
+                                   AND "mst"."seiriNo" = "slv"."seiriNo" 
+                                   AND (("mst"."shinsaYM" <![CDATA[<]]> "slv"."shinsaYM") 
+                                   OR  ("mst"."shinsaYM" = "slv"."shinsaYM" 
+                                   AND   "slv"."kyufuSakuseiKubunCode" <![CDATA[<]]> "mst"."kyufuSakuseiKubunCode"))
+           )) as "基本"
+         <if test="検索条件番目 == 1">
+            WHERE  substr("基本"."inputShikibetsuNo" ,1,3)in ('21B','812')
+         </if>
+         <if test="検索条件番目 == 2">
+            WHERE  substr("基本"."inputShikibetsuNo",1,3) in('816')
+         </if>
+         <if test="検索条件番目 == 3">
+            WHERE EXISTS (select 'x' from rgdb."DbT3033KyufujissekiShukei" as "DbT3033KyufujissekiShukei"
+                          WHERE "DbT3033KyufujissekiShukei"."hiHokenshaNo" = "基本"."hiHokenshaNo"
+                                AND "DbT3033KyufujissekiShukei"."serviceTeikyoYM" = "基本"."serviceTeikyoYM"
+                                AND "DbT3033KyufujissekiShukei"."inputShikibetsuNo" = "基本"."inputShikibetsuNo"
+                                AND "DbT3033KyufujissekiShukei"."jigyoshoNo" = "基本"."jigyoshoNo"
+                                AND "DbT3033KyufujissekiShukei"."toshiNo" = "基本"."toshiNo"
+                                AND "DbT3033KyufujissekiShukei"."serviceSyuruiCode" in
+                                     <foreach item="サービス種類コード" index="index" collection="サービス種類コード" open="(" separator="," close=")">			
+                                        #{サービス種類コード}			
+                                     </foreach>	
+                          )		
+         </if>
+         <if test="検索条件番目 == 4">
+            WHERE substr("基本"."inputShikibetsuNo",1,3)  not in ('71R','817','71P','816','21B','812') 
+         </if>
+         <if test="検索条件番目 == 5">
+            WHERE substr("基本"."inputShikibetsuNo",1,3)  in ('71R','817') 
+         </if>
+         <if test="検索条件番目 == 6">
+            WHERE substr("基本"."inputShikibetsuNo",1,3)  in ('71P') 
+         </if>
+         )
+
+         SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
+            ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3118ShikibetsuNoKanriMapper.allColumns_DbT3118ShikibetsuNoKanri" />
+            ,"DbT7060KaigoJigyosha"."jigyoshaName" AS "DbT7060_jigyoshaName" 
+            ,"DbT7060KaigoJigyosha2"."jigyoshaName" AS "DbT7060_kyotakuKaigoShienJigyoshaName"
+         FROM
+            "給付実績基本" AS "DbT3017KyufujissekiKihon" 
+         LEFT JOIN rgdb."DbT3118ShikibetsuNoKanri" as "DbT3118ShikibetsuNoKanri" 
+             ON "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3118ShikibetsuNoKanri"."shikibetsuNo" 
+             AND "DbT3118ShikibetsuNoKanri"."shikibetsuNoKubon" = '2' 
+             AND "DbT3118ShikibetsuNoKanri"."tekiyoKaishiYM" <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM" 
+             AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> "DbT3118ShikibetsuNoKanri"."tekiyoShuryoYM" 
+         LEFT JOIN rgdb."DbT7060KaigoJigyosha" as "DbT7060KaigoJigyosha" 
+             ON "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT7060KaigoJigyosha"."jigyoshaNo" 
+             AND substr("DbT7060KaigoJigyosha"."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+             AND ( 
+                  "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substr("DbT7060KaigoJigyosha"."yukoShuryoYMD", 1, 6)
+                  OR substr("DbT7060KaigoJigyosha"."yukoShuryoYMD", 1, 6) = ''
+                 ) 
+         LEFT JOIN
+             rgdb."DbT7060KaigoJigyosha" as "DbT7060KaigoJigyosha2"
+           ON
+             "DbT3017KyufujissekiKihon"."kyotakuKaigoShienJigyoshoNo" = "DbT7060KaigoJigyosha2"."jigyoshaNo"
+             AND  substr("DbT7060KaigoJigyosha2"."yukoKaishiYMD",1,6)  <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+             AND ("DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> substr("DbT7060KaigoJigyosha2"."yukoShuryoYMD",1,6)
+             OR  substr("DbT7060KaigoJigyosha2"."yukoShuryoYMD",1,6) = '')
+        ORDER BY
+             "DbT3017KyufujissekiKihon"."serviceTeikyoYM" 
+             ,"DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+             ,"DbT3017KyufujissekiKihon"."jigyoshoNo"
+             ,"DbT3017KyufujissekiKihon"."seiriNo"
+    </select>
     
     <select resultOrdered="true" id="get給付実績基本集計データ" resultMap="ResultMap_給付実績基本集計データ" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiHeaderJohoMapperParameter" fetchSize="500">
@@ -213,191 +295,161 @@ ORDER BY
             "DbT3028KyufujissekiKogakuKaigoServicehi"."seiriNo" DESC
     </select>
     
-    <select resultOrdered="true" id="get給付実績集計データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity" 
+    <select resultOrdered="true" id="get給付実績集計データ" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.ResultMap_DbT3033KyufujissekiShukeiEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        <include refid="withDbT3017KyufujissekiKihon" />
-        SELECT "DbT3033KyufujissekiShukei".*
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.allColumns_DbT3033KyufujissekiShukei" />
         FROM
-            "給付実績" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN
-            rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei" 
-        ON
-            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3033KyufujissekiShukei"."inputShikibetsuNo"
-            and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3033KyufujissekiShukei"."hiHokenshaNo"
-            and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3033KyufujissekiShukei"."serviceTeikyoYM"
-            and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3033KyufujissekiShukei"."jigyoshoNo"
-            and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3033KyufujissekiShukei"."toshiNo"
+            rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei"
+        WHERE
+            #{サービス提供年月} = "DbT3033KyufujissekiShukei"."serviceTeikyoYM"
+        AND
+            "DbT3033KyufujissekiShukei"."hiHokenshaNo" = #{被保険者番号}
+        AND
+            "DbT3033KyufujissekiShukei"."toshiNo" = #{通し番号}
+        AND
+            "DbT3033KyufujissekiShukei"."jigyoshoNo" = #{事業所番号}
+        AND
+            "DbT3033KyufujissekiShukei"."inputShikibetsuNo" = #{入力識別番号}
         ORDER BY
-           "DbT3033KyufujissekiShukei"."serviceTeikyoYM"
-            , "DbT3033KyufujissekiShukei"."inputShikibetsuNo"
-            , "DbT3033KyufujissekiShukei"."jigyoshoNo"
-            , "DbT3033KyufujissekiShukei"."seiriNo"
-            , "DbT3033KyufujissekiShukei"."serviceSyuruiCode"
+            "DbT3033KyufujissekiShukei"."serviceSyuruiCode" DESC
     </select>
     
     <select resultOrdered="true" id="get給付実績明細データ" resultMap="ResultMap_KyufujissekiMeisai" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        <include refid="withDbT3017KyufujissekiKihon" />
-      SELECT
-     <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3018KyufujissekiMeisaiMapper.allColumns_DbT3018KyufujissekiMeisai" />
-      , "DbT7131KaigoServiceNaiyou"."serviceName" AS "serviceShuruiRyakusho" 
-      FROM
-      "給付実績" AS "DbT3017KyufujissekiKihon"
-      INNER JOIN
-      rgdb."DbT3018KyufujissekiMeisai" AS "DbT3018KyufujissekiMeisai" 
-      ON
-      "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3018KyufujissekiMeisai"."inputShikibetsuNo"
-      and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3018KyufujissekiMeisai"."hiHokenshaNo"
-      and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3018KyufujissekiMeisai"."serviceTeikyoYM"
-      and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3018KyufujissekiMeisai"."jigyoshoNo"
-      and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3018KyufujissekiMeisai"."toshiNo"
-      LEFT JOIN
-      rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
-      ON
-      "DbT3018KyufujissekiMeisai"."serviceShuruiCode" = "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" 
-      AND "DbT3018KyufujissekiMeisai"."serviceKomokuCode" = "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd"
-      AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3018KyufujissekiMeisai"."serviceTeikyoYM"
-      AND ("DbT3018KyufujissekiMeisai"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
-      OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
-      ORDER BY
-      "DbT3018KyufujissekiMeisai"."serviceTeikyoYM"
-      , "DbT3018KyufujissekiMeisai"."inputShikibetsuNo"
-      , "DbT3018KyufujissekiMeisai"."jigyoshoNo"
-      , "DbT3018KyufujissekiMeisai"."seiriNo"
-      , "DbT3018KyufujissekiMeisai"."serviceShuruiCode"
-      , "DbT3018KyufujissekiMeisai"."serviceKomokuCode"
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3018KyufujissekiMeisaiMapper.allColumns_DbT3018KyufujissekiMeisai" />,
+            "DbT7131KaigoServiceNaiyou"."serviceName" AS "serviceShuruiRyakusho"
+        FROM
+            rgdb."DbT3018KyufujissekiMeisai" AS "DbT3018KyufujissekiMeisai"
+        LEFT JOIN
+            rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
+        ON
+            "DbT3018KyufujissekiMeisai"."serviceShuruiCode" = "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" 
+            AND "DbT3018KyufujissekiMeisai"."serviceKomokuCode" = "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd"
+            AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3018KyufujissekiMeisai"."serviceTeikyoYM"
+            AND ("DbT3018KyufujissekiMeisai"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
+            OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+        WHERE
+            #{サービス提供年月} = "DbT3018KyufujissekiMeisai"."serviceTeikyoYM"
+        AND
+            "DbT3018KyufujissekiMeisai"."hiHokenshaNo" = #{被保険者番号}
+        AND
+            "DbT3018KyufujissekiMeisai"."toshiNo" = #{通し番号}
+        AND
+            "DbT3018KyufujissekiMeisai"."jigyoshoNo" = #{事業所番号}
+        AND
+            "DbT3018KyufujissekiMeisai"."inputShikibetsuNo" = #{入力識別番号}
+        ORDER BY
+            "DbT3018KyufujissekiMeisai"."serviceShuruiCode", 
+            "DbT3018KyufujissekiMeisai"."serviceKomokuCode"
     </select>
     
     <select resultOrdered="true" id="get給付実績緊急時施設療養データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        <include refid="withDbT3017KyufujissekiKihon" />
         SELECT
            "DbT3019KyufujissekiKinkyuShisetsuRyoyo".*
         FROM
-            "給付実績" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN
             rgdb."DbT3019KyufujissekiKinkyuShisetsuRyoyo" AS "DbT3019KyufujissekiKinkyuShisetsuRyoyo" 
-        ON
-            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo"
-            and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."hiHokenshaNo"
-            and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"
-            and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."jigyoshoNo"
-            and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."toshiNo"
+        WHERE
+            #{サービス提供年月} = "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"
+        AND
+            "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."hiHokenshaNo" = #{被保険者番号}
+        AND
+            "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."toshiNo" = #{通し番号}
+        AND
+            "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."jigyoshoNo" = #{事業所番号}
+        AND
+            "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo" = #{入力識別番号}
         ORDER BY
-           "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"
-           , "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo"
-           , "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."jigyoshoNo"
-           , "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."seiriNo"
-           , "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."recodeJunjiNo"
+           "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."recodeJunjiNo"
     </select>
     
     <select resultOrdered="true" id="get給付実績所定疾患施設療養費等データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        <include refid="withDbT3017KyufujissekiKihon" />
         SELECT
             "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo".*
         FROM
-            "給付実績" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN
             rgdb."DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo" AS "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo" 
-        ON
-            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."inputShikibetsuNo"
-            and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."hiHokenshaNo"
-            and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."serviceTeikyoYM"
-            and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."jigyoshoNo"
-            and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."toshiNo"
+        WHERE
+            #{サービス提供年月} = "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."serviceTeikyoYM"
+        AND
+            "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."hiHokenshaNo" = #{被保険者番号}
+        AND
+            "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."toshiNo" = #{通し番号}
+        AND
+            "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."jigyoshoNo" = #{事業所番号}
+        AND
+            "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."inputShikibetsuNo" = #{入力識別番号}
         ORDER BY
-            "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."serviceTeikyoYM"
-            , "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."inputShikibetsuNo"
-            , "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."jigyoshoNo"
-            , "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."seiriNo"
-            , "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."recodeJunjiNo"
+            "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."recodeJunjiNo"
     </select>
     
     <select resultOrdered="true" id="get給付実績特定診療費データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3020KyufujissekiTokuteiSinryohiEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        <include refid="withDbT3017KyufujissekiKihon" />
         SELECT
            "DbT3020KyufujissekiTokuteiSinryohi".*
         FROM
-           "給付実績" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN
-           rgdb."DbT3020KyufujissekiTokuteiSinryohi" AS "DbT3020KyufujissekiTokuteiSinryohi" 
-        ON
-           "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3020KyufujissekiTokuteiSinryohi"."inputShikibetsuNo"
-           and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3020KyufujissekiTokuteiSinryohi"."hiHokenshaNo"
-           and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3020KyufujissekiTokuteiSinryohi"."serviceTeikyoYM"
-           and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3020KyufujissekiTokuteiSinryohi"."jigyoshoNo"
-           and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3020KyufujissekiTokuteiSinryohi"."toshiNo"
+            rgdb."DbT3020KyufujissekiTokuteiSinryohi" AS "DbT3020KyufujissekiTokuteiSinryohi" 
+        WHERE
+            #{サービス提供年月} = "DbT3020KyufujissekiTokuteiSinryohi"."serviceTeikyoYM"
+        AND
+            "DbT3020KyufujissekiTokuteiSinryohi"."hiHokenshaNo" = #{被保険者番号}
+        AND
+            "DbT3020KyufujissekiTokuteiSinryohi"."toshiNo" = #{通し番号}
+        AND
+            "DbT3020KyufujissekiTokuteiSinryohi"."jigyoshoNo" = #{事業所番号}
+        AND
+            "DbT3020KyufujissekiTokuteiSinryohi"."inputShikibetsuNo" = #{入力識別番号}
         ORDER BY
-           "DbT3020KyufujissekiTokuteiSinryohi"."serviceTeikyoYM"
-           , "DbT3020KyufujissekiTokuteiSinryohi"."inputShikibetsuNo"
-           , "DbT3020KyufujissekiTokuteiSinryohi"."jigyoshoNo"
-           , "DbT3020KyufujissekiTokuteiSinryohi"."seiriNo"
-           , "DbT3020KyufujissekiTokuteiSinryohi"."recodeJunjiNo"
+            "DbT3020KyufujissekiTokuteiSinryohi"."recodeJunjiNo"
     </select>
     
     <select resultOrdered="true" id="get給付実績特定診療費_特別療養費データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        <include refid="withDbT3017KyufujissekiKihon" />
         SELECT
            "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo".*
         FROM
-           "給付実績" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN
            rgdb."DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo" AS "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo" 
-        ON
-           "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."inputShikibetsuNo"
-           and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."hiHokenshaNo"
-           and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."serviceTeikyoYM"
-           and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."jigyoshoNo"
-           and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."toshiNo"
+        WHERE
+            #{サービス提供年月} = "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."serviceTeikyoYM"
+        AND
+            "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."hiHokenshaNo" = #{被保険者番号}
+        AND
+            "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."toshiNo" = #{通し番号}
+        AND
+            "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."jigyoshoNo" = #{事業所番号}
+        AND
+            "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."inputShikibetsuNo" = #{入力識別番号}
         ORDER BY
-           "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."serviceTeikyoYM" DESC
-           , "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."inputShikibetsuNo"
-           , "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."jigyoshoNo"
-           , "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."seiriNo"
-           , "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."recodeJunjiNo"
+            "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."recodeJunjiNo"
     </select>
     
     <select resultOrdered="true" id="get給付実績食事費用データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3022KyufujissekiShokujiHiyoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        <include refid="withDbT3017KyufujissekiKihon" />
         SELECT
            "DbT3022KyufujissekiShokujiHiyo".*
         FROM
-           "給付実績" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN
            rgdb."DbT3022KyufujissekiShokujiHiyo" AS "DbT3022KyufujissekiShokujiHiyo" 
-        ON
-           "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3022KyufujissekiShokujiHiyo"."inputShikibetsuNo"
-           and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3022KyufujissekiShokujiHiyo"."hiHokenshaNo"
-           and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3022KyufujissekiShokujiHiyo"."serviceTeikyoYM"
-           and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3022KyufujissekiShokujiHiyo"."jigyoshoNo"
-           and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3022KyufujissekiShokujiHiyo"."toshiNo"
-        ORDER BY
-           "DbT3022KyufujissekiShokujiHiyo"."serviceTeikyoYM"
-           , "DbT3022KyufujissekiShokujiHiyo"."inputShikibetsuNo"
-           , "DbT3022KyufujissekiShokujiHiyo"."jigyoshoNo"
-           , "DbT3022KyufujissekiShokujiHiyo"."seiriNo"
+       WHERE
+            #{サービス提供年月} = "DbT3022KyufujissekiShokujiHiyo"."serviceTeikyoYM"
+        AND
+            "DbT3022KyufujissekiShokujiHiyo"."hiHokenshaNo" = #{被保険者番号}
+        AND
+            "DbT3022KyufujissekiShokujiHiyo"."toshiNo" = #{通し番号}
+        AND
+            "DbT3022KyufujissekiShokujiHiyo"."jigyoshoNo" = #{事業所番号}
+        AND
+            "DbT3022KyufujissekiShokujiHiyo"."inputShikibetsuNo" = #{入力識別番号}
     </select>
     
     <select resultOrdered="true" id="get給付実績居宅サービス計画費データ" resultMap="ResultMap_KyufujissekiKyotakuService" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        <include refid="withDbT3017KyufujissekiKihon" />
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3025KyufujissekiKyotakuServiceMapper.allColumns_DbT3025KyufujissekiKyotakuService" />
             , "DbT7131KaigoServiceNaiyou"."serviceName" AS "serviceShuruiRyakusho" 
         FROM
-            "給付実績" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN
             rgdb."DbT3025KyufujissekiKyotakuService" AS "DbT3025KyufujissekiKyotakuService" 
-        ON
-            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3025KyufujissekiKyotakuService"."inputShikibetsuNo"
-            and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3025KyufujissekiKyotakuService"."hiHokenshaNo"
-            and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM"
-            and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3025KyufujissekiKyotakuService"."jigyoshoNo"
-            and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3025KyufujissekiKyotakuService"."toshiNo"
         LEFT JOIN
             rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
         ON
@@ -405,64 +457,53 @@ ORDER BY
             AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM"
             AND ("DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
             OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+        WHERE
+            "DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM" = #{サービス提供年月}
+            AND "DbT3025KyufujissekiKyotakuService"."hiHokenshaNo" = #{被保険者番号}
+            AND "DbT3025KyufujissekiKyotakuService"."toshiNo" = #{通し番号}
+            AND "DbT3025KyufujissekiKyotakuService"."jigyoshoNo" = #{事業所番号}
+            AND "DbT3025KyufujissekiKyotakuService"."inputShikibetsuNo" = #{入力識別番号}
         ORDER BY
-            "DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM"
-            , "DbT3025KyufujissekiKyotakuService"."inputShikibetsuNo"
-            , "DbT3025KyufujissekiKyotakuService"."jigyoshoNo"
-            , "DbT3025KyufujissekiKyotakuService"."seiriNo"
-            , "DbT3025KyufujissekiKyotakuService"."servicePlanhiMeisaiLineNo"
+            "DbT3025KyufujissekiKyotakuService"."servicePlanhiMeisaiLineNo"
     </select>
     
     <select resultOrdered="true" id="get給付実績福祉用具販売費データ" resultMap="ResultMap_KyufujissekiFukushiYoguHanbaihi" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        
-        <include refid="withDbT3017KyufujissekiKihon" />
-        
-            SELECT
+        SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3026KyufujissekiFukushiYoguHanbaihiMapper.allColumns_DbT3026KyufujissekiFukushiYoguHanbaihi" />
             , "DbT7131KaigoServiceNaiyou"."serviceName" AS "serviceShuruiRyakusho" 
         FROM
-            "給付実績" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN
-            rgdb."DbT3026KyufujissekiFukushiYoguHanbaihi" AS "DbT3026KyufujissekiFukushiYoguHanbaihi" 
-        ON
-            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo"
-            and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3026KyufujissekiFukushiYoguHanbaihi"."hiHokenshaNo"
-            and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
-            and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo"
-            and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo"
+            rgdb."DbT3026KyufujissekiFukushiYoguHanbaihi" AS "DbT3026KyufujissekiFukushiYoguHanbaihi"
         LEFT JOIN
             rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
-        ON
-            "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceCode" = "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" || "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd"
-            AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
-            AND ("DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
-            OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+         ON
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceCode" 
+            = "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" || "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd"
+        AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
+        AND ("DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
+         OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+        WHERE 
+            #{サービス提供年月} = "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
+        AND
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."hiHokenshaNo" = #{被保険者番号}
+        AND
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo" = #{通し番号}
+        AND
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo" = #{事業所番号}
+        AND
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo" = #{入力識別番号}
         ORDER BY
-            "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
-            , "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo"
-            , "DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo"
-            , "DbT3026KyufujissekiFukushiYoguHanbaihi"."seiriNo"
-            , "DbT3026KyufujissekiFukushiYoguHanbaihi"."meisaiNo"
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."meisaiNo"
     </select>
     
     <select resultOrdered="true" id="get給付実績住宅改修費データ" resultMap="ResultMap_KyufujissekiJutakuKaishuhi" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
         
-        <include refid="withDbT3017KyufujissekiKihon" />
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3027KyufujissekiJutakuKaishuhiMapper.allColumns_DbT3027KyufujissekiJutakuKaishuhi" />
             , "DbT7131KaigoServiceNaiyou"."serviceName" AS "serviceShuruiRyakusho" 
         FROM
-            "給付実績" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN
-            rgdb."DbT3027KyufujissekiJutakuKaishuhi" AS "DbT3027KyufujissekiJutakuKaishuhi" 
-        ON
-            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3027KyufujissekiJutakuKaishuhi"."inputShikibetsuNo"
-            and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3027KyufujissekiJutakuKaishuhi"."hiHokenshaNo"
-            and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM"
-            and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3027KyufujissekiJutakuKaishuhi"."jigyoshoNo"
-            and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3027KyufujissekiJutakuKaishuhi"."toshiNo"
+            rgdb."DbT3027KyufujissekiJutakuKaishuhi" AS "DbT3027KyufujissekiJutakuKaishuhi"
         LEFT JOIN
             rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
         ON
@@ -470,12 +511,14 @@ ORDER BY
             AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM"
             AND ("DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
             OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+        WHERE
+            "DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM" = #{サービス提供年月}
+            AND "DbT3027KyufujissekiJutakuKaishuhi"."hiHokenshaNo" = #{被保険者番号}
+            AND "DbT3027KyufujissekiJutakuKaishuhi"."toshiNo" = #{通し番号}
+            AND "DbT3027KyufujissekiJutakuKaishuhi"."jigyoshoNo" = #{事業所番号}
+            AND "DbT3027KyufujissekiJutakuKaishuhi"."inputShikibetsuNo" = #{入力識別番号}
         ORDER BY
-            "DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM"
-            , "DbT3027KyufujissekiJutakuKaishuhi"."inputShikibetsuNo"
-            , "DbT3027KyufujissekiJutakuKaishuhi"."jigyoshoNo"
-            , "DbT3027KyufujissekiJutakuKaishuhi"."seiriNo"
-            , "DbT3027KyufujissekiJutakuKaishuhi"."meisaiNo"
+            "DbT3027KyufujissekiJutakuKaishuhi"."meisaiNo"
     </select>
     
     <select resultOrdered="true" id="get給付実績高額介護サービス費データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity" 
@@ -487,7 +530,6 @@ ORDER BY
             "mst"."hiHokenshaNo" = #{被保険者番号}
             AND #{サービス提供年月_開始} <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
             AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月_終了}
-            AND "mst"."shinsaYM" <![CDATA[<>]]> ''
             AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS "slv"
          WHERE
              "mst"."inputShikibetsuNo" = "slv"."inputShikibetsuNo"
@@ -495,7 +537,6 @@ ORDER BY
             AND "mst"."serviceTeikyoYM" = "slv"."serviceTeikyoYM"
             AND "mst"."toshiNo" = "slv"."toshiNo"
             AND "mst"."seiriNo" = "slv"."seiriNo"
-            AND "slv"."shinsaYM" <![CDATA[<>]]> ''
             AND (("mst"."shinsaYM" <![CDATA[<]]> "slv"."shinsaYM")
             or   ("mst"."shinsaYM" = "slv"."shinsaYM"
              and  "slv"."kyufuSakuseiKubunCode" <![CDATA[<]]> "mst"."kyufuSakuseiKubunCode")))
@@ -513,22 +554,12 @@ ORDER BY
     
     <select resultOrdered="true" id="get給付実績特定入所者介護サービス費用データ" resultMap="ResultMap_KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        
-        <include refid="withDbT3017KyufujissekiKihon" />
             
      SELECT
      <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoMapper.allColumns_DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" />
       , "DbT7131KaigoServiceNaiyou"."serviceName" AS "serviceShuruiRyakusho" 
       FROM
-      "給付実績" AS "DbT3017KyufujissekiKihon"
-      INNER JOIN
-      rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" 
-      ON
-      "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."inputShikibetsuNo"
-      and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."hiHokenshaNo"
-      and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceTeikyoYM"
-      and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."jigyoshoNo"
-      and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."toshiNo"
+      rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"
       LEFT JOIN
       rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
       ON
@@ -537,32 +568,24 @@ ORDER BY
       AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceTeikyoYM"
       AND ("DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
       OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+      WHERE
+          "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceTeikyoYM" = #{サービス提供年月}
+          AND "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."hiHokenshaNo" = #{被保険者番号}
+          AND "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."toshiNo" = #{通し番号}
+          AND "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."jigyoshoNo" = #{事業所番号}
+          AND "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."inputShikibetsuNo" = #{入力識別番号}
       ORDER BY
-      "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceTeikyoYM"
-      , "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."inputShikibetsuNo"
-      , "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."jigyoshoNo"
-      , "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."seiriNo"
-      , "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."recodeJunjiNo"
+      "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."recodeJunjiNo"
     </select>
     
     <select resultOrdered="true" id="get給付実績社会福祉法人軽減額データ" resultMap="ResultMap_KyufuJissekiShakaiFukushiHojinKeigengaku" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        
-        <include refid="withDbT3017KyufujissekiKihon" />
             
             SELECT
               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" />
               , "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" AS "serviceShuruiRyakusho" 
             FROM
-              "給付実績" AS "DbT3017KyufujissekiKihon"
-            INNER JOIN
               rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"
-            ON
-              "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."inputShikibetsuNo"
-              and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."hiHokenshaNo"
-              and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM"
-              and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."jigyoshoNo"
-              and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."toshiNo"
             LEFT JOIN
               rgdb."DbT7130KaigoServiceShurui" AS "DbT7130KaigoServiceShurui"
             ON
@@ -570,33 +593,25 @@ ORDER BY
               AND "DbT7130KaigoServiceShurui"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM"
               AND ("DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM"
               OR  "DbT7130KaigoServiceShurui"."teikyoshuryoYM" = '')
+            WHERE
+              "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM" = #{サービス提供年月}
+              AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."hiHokenshaNo" = #{被保険者番号}
+              AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."toshiNo" = #{通し番号}
+              AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."jigyoshoNo" = #{事業所番号}
+              AND "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."inputShikibetsuNo" = #{入力識別番号}
             ORDER BY
-              "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM"
-              , "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."inputShikibetsuNo"
-              , "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."jigyoshoNo"
-              , "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."seiriNo"
-              , "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceSyuruiCode"
+              "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."toshiNo" DESC
 
     </select>
     
     <select resultOrdered="true" id="get給付実績ケアマネジメント費データ" resultMap="ResultMap_KyufuJissekiCareManagementHi" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        
-        <include refid="withDbT3017KyufujissekiKihon" />
             
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3031KyufuJissekiCareManagementHiMapper.allColumns_DbT3031KyufuJissekiCareManagementHi" />
             , "DbT7131KaigoServiceNaiyou"."serviceName" AS "serviceShuruiRyakusho" 
         FROM
-            "給付実績" AS "DbT3017KyufujissekiKihon"
-        INNER JOIN
             rgdb."DbT3031KyufuJissekiCareManagementHi" AS "DbT3031KyufuJissekiCareManagementHi" 
-        ON
-            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3031KyufuJissekiCareManagementHi"."inputShikibetsuNo"
-            and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3031KyufuJissekiCareManagementHi"."hiHokenshaNo"
-            and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM"
-            and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3031KyufuJissekiCareManagementHi"."jigyoshoNo"
-            and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3031KyufuJissekiCareManagementHi"."toshiNo"
         LEFT JOIN
             rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
         ON
@@ -604,47 +619,44 @@ ORDER BY
             AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM"
             AND ("DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
             OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+        WHERE
+            "DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM" = #{サービス提供年月}
+            AND "DbT3031KyufuJissekiCareManagementHi"."hiHokenshaNo" = #{被保険者番号}
+            AND "DbT3031KyufuJissekiCareManagementHi"."toshiNo" = #{通し番号}
+            AND "DbT3031KyufuJissekiCareManagementHi"."jigyoshoNo" = #{事業所番号}
+            AND "DbT3031KyufuJissekiCareManagementHi"."inputShikibetsuNo" = #{入力識別番号}
         ORDER BY
-            "DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM"
-            , "DbT3031KyufuJissekiCareManagementHi"."inputShikibetsuNo"
-            , "DbT3031KyufuJissekiCareManagementHi"."jigyoshoNo"
-            , "DbT3031KyufuJissekiCareManagementHi"."seiriNo"
-            , "DbT3031KyufuJissekiCareManagementHi"."servicePlanhiMeisaiLineNo"
+            "DbT3031KyufuJissekiCareManagementHi"."servicePlanhiMeisaiLineNo"
     </select>
     
     <select resultOrdered="true" id="get給付実績明細住所地特例データ" resultMap="ResultMap_KyufujissekiMeisaiJushochiTokurei" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
-        
-        <include refid="withDbT3017KyufujissekiKihon" />
-            
-      SELECT
-     <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3106KyufujissekiMeisaiJushochiTokureiMapper.allColumns_DbT3106KyufujissekiMeisaiJushochiTokurei" />
-      , "DbT7131KaigoServiceNaiyou"."serviceName" AS "serviceShuruiRyakusho" 
-      FROM
-      "給付実績" AS "DbT3017KyufujissekiKihon"
-      INNER JOIN
-      rgdb."DbT3106KyufujissekiMeisaiJushochiTokurei" AS "DbT3106KyufujissekiMeisaiJushochiTokurei" 
-      ON
-      "DbT3017KyufujissekiKihon"."inputShikibetsuNo" = "DbT3106KyufujissekiMeisaiJushochiTokurei"."inputShikibetsuNo"
-      and "DbT3017KyufujissekiKihon"."hiHokenshaNo" = "DbT3106KyufujissekiMeisaiJushochiTokurei"."hiHokenshaNo"
-      and "DbT3017KyufujissekiKihon"."serviceTeikyoYM" = "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM"
-      and "DbT3017KyufujissekiKihon"."jigyoshoNo" = "DbT3106KyufujissekiMeisaiJushochiTokurei"."jigyoshoNo"
-      and "DbT3017KyufujissekiKihon"."toshiNo" = "DbT3106KyufujissekiMeisaiJushochiTokurei"."toshiNo"
-      LEFT JOIN
-      rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
-      ON
-      "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceShuruiCode" = "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" 
-      AND "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceKomokuCode" = "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd"
-      AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM"
-      AND ("DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
-      OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
-      ORDER BY
-      "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM"
-      , "DbT3106KyufujissekiMeisaiJushochiTokurei"."jigyoshoNo"
-      , "DbT3106KyufujissekiMeisaiJushochiTokurei"."inputShikibetsuNo"
-      , "DbT3106KyufujissekiMeisaiJushochiTokurei"."seiriNo"
-      , "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceShuruiCode"
-      , "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceKomokuCode"
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3106KyufujissekiMeisaiJushochiTokureiMapper.allColumns_DbT3106KyufujissekiMeisaiJushochiTokurei" />,
+           "DbT7131KaigoServiceNaiyou"."serviceName"
+        FROM
+            rgdb."DbT3106KyufujissekiMeisaiJushochiTokurei" AS "DbT3106KyufujissekiMeisaiJushochiTokurei"
+        LEFT JOIN
+            rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
+            ON
+            "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceShuruiCode" = "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" 
+            AND "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceKomokuCode" = "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd"
+            AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM"
+            AND ("DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
+            OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+        WHERE
+            #{サービス提供年月} = "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM"
+        AND
+            "DbT3106KyufujissekiMeisaiJushochiTokurei"."hiHokenshaNo" = #{被保険者番号}
+        AND
+            "DbT3106KyufujissekiMeisaiJushochiTokurei"."toshiNo" = #{通し番号}
+        AND
+            "DbT3106KyufujissekiMeisaiJushochiTokurei"."jigyoshoNo" = #{事業所番号}
+        AND
+            "DbT3106KyufujissekiMeisaiJushochiTokurei"."inputShikibetsuNo" = #{入力識別番号}
+        ORDER BY
+            "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceShuruiCode",
+            "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceKomokuCode"
     </select>
     <select resultOrdered="true" id="get集計データ" resultMap="ResultMap_集計データ" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
@@ -676,21 +688,36 @@ FROM
              THEN 0 
              ELSE "DbT3033KyufujissekiShukei"."atoHokenDekidakaTanisuTotal" END
         END as "dekidakaTanisu"
-      , CASE "DbT3033KyufujissekiShukei"."atoHokenSeikyugaku"
+      , ((CASE "DbT3033KyufujissekiShukei"."atoHokenSeikyugaku"
         WHEN null THEN 0 
         WHEN ''   THEN 0 
         ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
              WHEN '3' 
              THEN 0 
              ELSE "DbT3033KyufujissekiShukei"."atoHokenSeikyugaku" :: integer END
-        END as "seikyugaku"
-      , CASE "DbT3033KyufujissekiShukei"."hokenRiyoshaFutangaku"
+             END) +
+             (CASE "DbT3033KyufujissekiShukei"."atoHokenDekidakaSeikyugaku"
+              WHEN null THEN 0 
+              WHEN ''   THEN 0 
+              ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+                   WHEN '3' 
+                   THEN 0 
+                   ELSE "DbT3033KyufujissekiShukei"."atoHokenDekidakaSeikyugaku" :: integer END
+                   END)) as "seikyugaku"
+      , ((CASE "DbT3033KyufujissekiShukei"."hokenRiyoshaFutangaku"
         WHEN null THEN 0 
         ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
              WHEN '3' 
              THEN 0 
              ELSE "DbT3033KyufujissekiShukei"."hokenRiyoshaFutangaku" END
-        END as "riyoshaFutangaku"
+        END ) +
+          (CASE "DbT3033KyufujissekiShukei"."hokenDekidakaIryohiRiyoshaFutangaku"
+           WHEN null THEN 0 
+           ELSE CASE "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" 
+             WHEN '3' 
+             THEN 0 
+             ELSE "DbT3033KyufujissekiShukei"."hokenDekidakaIryohiRiyoshaFutangaku" END
+             END))  as "riyoshaFutangaku"
     FROM
       "給付実績" AS "DbT3017KyufujissekiKihon"
     INNER JOIN
@@ -751,17 +778,15 @@ FROM
      FROM
           rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS "mst"
      WHERE
-          "mst"."hiHokenshaNo" = '0000562408' 
-      AND '200004' <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
-      AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> '201703'
-      AND "mst"."shinsaYM" <![CDATA[<>]]> ''
+          "mst"."hiHokenshaNo" = #{被保険者番号} 
+      AND #{サービス提供年月_開始} <![CDATA[<=]]> "mst"."serviceTeikyoYM" 
+      AND "mst"."serviceTeikyoYM" <![CDATA[<=]]> #{サービス提供年月_終了}
       AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS "slv"
           WHERE
                 "mst"."inputShikibetsuNo" = "slv"."inputShikibetsuNo"
             AND "mst"."hiHokenshaNo" = "slv"."hiHokenshaNo"
             AND "mst"."serviceTeikyoYM" = "slv"."serviceTeikyoYM"
             AND "mst"."seiriNo" = "slv"."seiriNo"
-            AND "slv"."shinsaYM" <![CDATA[<>]]> ''
             AND (("mst"."shinsaYM" <![CDATA[<]]> "slv"."shinsaYM")
              OR  ("mst"."shinsaYM" = "slv"."shinsaYM"
             AND   "slv"."kyufuSakuseiKubunCode" <![CDATA[<]]> "mst"."kyufuSakuseiKubunCode")))
@@ -772,7 +797,7 @@ GROUP BY
    , "serviceSyuruiCode"
 ORDER BY
      "serviceTeikyoYM" DESC
-   , "serviceSyuruiCode" 
+   , "serviceSyuruiCode"
 
     </select>
     

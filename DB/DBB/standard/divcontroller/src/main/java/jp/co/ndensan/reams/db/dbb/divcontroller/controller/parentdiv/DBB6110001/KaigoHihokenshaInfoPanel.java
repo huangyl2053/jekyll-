@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB6110001;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.RentaiGimusha;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.RentaiGimushaHolder;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.RentaiGimushaIdentifier;
@@ -17,6 +19,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.DBB6
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.KaigoHihokenshaInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.dgRentaiNofuGimushaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.dgSetaiIchiran_Row;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB6110001.ErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB6110001.KaigoHihokenshaInfoPanelHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB6110001.KaigoHihokenshaInfoValidationHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB6110001.QuestionMessage;
@@ -63,6 +66,7 @@ public class KaigoHihokenshaInfoPanel {
     private static final RString DBBHIHOKENSHANO = new RString("DBBHihokenshaNo");
     private static final RString CODE_003 = new RString("003");
     private static final RString 名称_被保険者番号 = new RString("被保険者番号");
+    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString MESSAGETAISHO = new RString("更新は正常に終了しました。");
     private static final RString 終了年月日NULL = new RString("99991231");
@@ -158,9 +162,16 @@ public class KaigoHihokenshaInfoPanel {
         FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
         RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        履歴番号 = 最新履歴番号(div, 被保険者番号, holder);
-        RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
-                被保険者番号, new Decimal(履歴番号.toString()));
+        RentaiGimushaIdentifier identifier = null;
+        if (履歴番号.isEmpty()) {
+            履歴番号 = 最新履歴番号(div, 被保険者番号, holder);
+            identifier = new RentaiGimushaIdentifier(
+                    被保険者番号, new Decimal(履歴番号.toString()));
+        } else {
+            identifier = new RentaiGimushaIdentifier(
+                    被保険者番号, new Decimal(履歴番号.toString()));
+            履歴番号 = 最新履歴番号(div, 被保険者番号, holder);
+        }
         ValidationMessageControlPairs pairs = validationHander.validate();
         if (pairs.iterator().hasNext() && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -175,9 +186,7 @@ public class KaigoHihokenshaInfoPanel {
                 .equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).respond();
         }
-        if (!(住民種別.isNull() || 住民種別.isEmpty()
-                || 住民種別.equals(外国人) || 住民種別.equals(住登外日本人)
-                || 住民種別.equals(住登外外国人)) && !ResponseHolder.isReRequest()) {
+        if (!(is住民種別不合法(住民種別)) && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(QuestionMessage.連帯納付義務者の住民種別.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No
@@ -190,8 +199,8 @@ public class KaigoHihokenshaInfoPanel {
         RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
         ShikibetsuCode 識別コード = div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().getDomain();
         RentaiGimushaHolder 初期holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報初期, RentaiGimushaHolder.class);
-        RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
         RentaiGimusha 初期result = 初期holder.getKogakuGassanJikoFutanGaku(identifier);
+        RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
         if (result == null) {
             result = new RentaiGimusha(
                     被保険者番号, new Decimal(履歴番号.toString()));
@@ -199,6 +208,7 @@ public class KaigoHihokenshaInfoPanel {
                     .set開始年月日(new FlexibleDate(開始年月日.toString()))
                     .set終了年月日(終了年月日 == null ? new FlexibleDate(終了年月日NULL)
                             : new FlexibleDate(終了年月日.toString()))
+                    .set履歴番号(new Decimal(履歴番号.toString()))
                     .set識別コード(識別コード).build();
             result = result.added();
             holder.addKogakuGassanJikoFutanGaku(result);
@@ -210,6 +220,7 @@ public class KaigoHihokenshaInfoPanel {
                         .set開始年月日(new FlexibleDate(開始年月日.toString()))
                         .set終了年月日(終了年月日 == null ? new FlexibleDate(終了年月日NULL)
                                 : new FlexibleDate(終了年月日.toString()))
+                        .set履歴番号(new Decimal(履歴番号.toString()))
                         .build();
                 holder.addKogakuGassanJikoFutanGaku(judgeResultState(初期result, result));
             }
@@ -220,6 +231,12 @@ public class KaigoHihokenshaInfoPanel {
         handler.setDgRentaiNofuGimushaIchiran(rentaiList, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.連帯納付義務者情報, holder);
         return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者情報一覧);
+    }
+
+    private boolean is住民種別不合法(RString 住民種別) {
+        return 住民種別.isNull() || 住民種別.isEmpty()
+                || 住民種別.equals(外国人) || 住民種別.equals(住登外日本人)
+                || 住民種別.equals(住登外外国人);
     }
 
     private RentaiGimusha judgeResult削除State(RentaiGimusha 初期result,
@@ -243,28 +260,31 @@ public class KaigoHihokenshaInfoPanel {
         return result;
     }
 
-    private RString 新履歴番号(RentaiGimusha result, RString 履歴番号, Decimal 最新履歴番号, KaigoHihokenshaInfoPanelDiv div) {
-        if (result == null || ONE.equals(div.getHdnFlag())) {
-            履歴番号 = new RString(最新履歴番号.intValue() + 1);
-        }
-        return 履歴番号;
-    }
-
     private RString 最新履歴番号(KaigoHihokenshaInfoPanelDiv div, HihokenshaNo 被保険者番号, RentaiGimushaHolder holder) {
         RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
         KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
         if (DBB6110001StateName.連帯納付義務者修正.getName().equals(ResponseHolder.getState()) || 履歴番号.isEmpty()) {
-            Decimal 最新履歴番号 = manager.getNoIsDeleted最新履歴番号(被保険者番号);
-            if (最新履歴番号 == null) {
-                履歴番号 = ONE;
+            Decimal 最新履歴番号 = manager.get最新履歴番号(被保険者番号);
+            List<RentaiGimusha> list = holder.getRentaiGimushaList();
+            if (最新履歴番号 == null && (list == null || list.isEmpty())) {
+                履歴番号 = ZERO;
             } else {
-                RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
-                        被保険者番号, new Decimal(最新履歴番号.toString()));
-                RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
-                履歴番号 = 新履歴番号(result, 履歴番号, 最新履歴番号, div);
+                int 番号 = list.get(0).get履歴番号().intValue();
+                for (RentaiGimusha rentai : list) {
+                    int 新番号 = rentai.get履歴番号().intValue();
+                    番号 = max番号(番号, 新番号);
+                }
+                履歴番号 = new RString(番号 + 1);
             }
         }
         return 履歴番号;
+    }
+
+    private int max番号(int 番号, int 新番号) {
+        if (新番号 > 番号) {
+            番号 = 新番号;
+        }
+        return 番号;
     }
 
     /**
@@ -297,6 +317,9 @@ public class KaigoHihokenshaInfoPanel {
         KaigoHihokenshaInfoPanelHandler handler = getHandler(div);
         FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
         if (taishoshaKey.get識別コード() == taishoshaKey.get識別コード()) {
+            if (div.getTxtOutShikibetsuCode().equals(new RString(taishoshaKey.get識別コード().toString()))) {
+                return ResponseData.of(div).addMessage(ErrorMessages.連帯納付義務者として登録.getMessage()).respond();
+            }
             ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                     KensakuYusenKubun.住登外優先)
                     .set世帯コード(new SetaiCode(div.getTxtOutSetaiCode()))
@@ -367,30 +390,26 @@ public class KaigoHihokenshaInfoPanel {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         List<RentaiGimusha> list = rentaiNofuGimusha.getRentaiNofuGimushaInfo(被保険者番号);
         RentaiGimushaHolder 初期holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報初期, RentaiGimushaHolder.class);
+        Map<Decimal, RentaiGimusha> initEntity = new HashMap<>();
+        for (RentaiGimusha entity3 : 初期holder.getRentaiGimushaList()) {
+            initEntity.put(entity3.get履歴番号(), entity3);
+        }
         for (RentaiGimusha entity1 : list) {
-            for (RentaiGimusha entity2 : 初期holder.getRentaiGimushaList()) {
-                if (entity1.get履歴番号() == entity2.get履歴番号()) {
-                    if (!entity1.get識別コード().equals(entity2.get識別コード())
-                            || !entity1.get開始年月日().equals(entity2.get開始年月日())
-                            || !entity1.get終了年月日().equals(entity2.get終了年月日())) {
-                        return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止.getMessage()).respond();
-                    }
-                    break;
-                }
+            RentaiGimusha entity2 = initEntity.get(entity1.get履歴番号());
+            if (entity2 == null) {
+                continue;
+            }
+            if (!entity1.get識別コード().equals(entity2.get識別コード())
+                    || !entity1.get開始年月日().equals(entity2.get開始年月日())
+                    || !entity1.get終了年月日().equals(entity2.get終了年月日())) {
+                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止.getMessage()).respond();
             }
         }
-        List<RentaiGimushaAtenaJouhou> rentaiList = rentaiNofuGimusha.getRentaiNofuGimushaAtenaInfo(list);
-        if (初期holder.getRentaiGimushaList().size() != rentaiList.size()) {
+        int count = rentaiNofuGimusha.delRentaiNofuGimushaInfo(list);
+        if (初期holder.getRentaiGimushaList().size() != count) {
             return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止.getMessage()).respond();
         }
-        KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
-        for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
-            if (entity.hasChanged() && entity.isModified()) {
-                manager.saveNewModify(entity);
-            } else if (entity.hasChanged() && (entity.isAdded() || entity.isDeleted())) {
-                manager.save(entity);
-            }
-        }
+        rentaiNofuGimusha.insRentaiNofuGimushaInfo(holder.getRentaiGimushaList(), 被保険者番号);
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
                 名称_被保険者番号, 被保険者番号.getColumnValue());
         PersonalData personalData = PersonalData.of(taishoshaKey.get識別コード(), expandedInfo);

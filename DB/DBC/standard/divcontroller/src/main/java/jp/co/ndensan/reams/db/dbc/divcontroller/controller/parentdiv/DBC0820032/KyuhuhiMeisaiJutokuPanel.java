@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoHenkoFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiResult;
@@ -332,14 +331,13 @@ public class KyuhuhiMeisaiJutokuPanel {
         return 証明書入力済フラグMap;
     }
 
-    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> get証明書変更済フラグMap(DbJohoViewState 償還払ViewStateDB) {
-        Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = 償還払ViewStateDB.get証明書変更済フラグMap();
-        if (証明書変更済フラグMap == null) {
-            証明書変更済フラグMap = new HashMap<>();
-        }
-        return 証明書変更済フラグMap;
-    }
-
+//    private Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> get証明書変更済フラグMap(DbJohoViewState 償還払ViewStateDB) {
+//        Map<ShoukanharaihishinseimeisaikensakuParameter, ShomeishoHenkoFlag> 証明書変更済フラグMap = 償還払ViewStateDB.get証明書変更済フラグMap();
+//        if (証明書変更済フラグMap == null) {
+//            証明書変更済フラグMap = new HashMap<>();
+//        }
+//        return 証明書変更済フラグMap;
+//    }
     private ShomeishoNyuryokuFlag set入力有無フラグ(
             KyuhuhiMeisaiJutokuPanelDiv div, DbJohoViewState dbJoho, ShoukanharaihishinseimeisaikensakuParameter kensakuParameter) {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);

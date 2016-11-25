@@ -137,6 +137,19 @@ public class KaigoHihokenshaInfoPanelManger {
     }
 
     /**
+     * 連帯納付義務者登録を取得します。
+     *
+     * @param entity DbT2009RentaiGimushaEntity
+     */
+    public void saveNew(RentaiGimusha entity) {
+        DbT2009RentaiGimushaEntity 計算結果Entity = entity.toEntity();
+        Decimal 最新履歴番号 = getNoIsDeleted最新履歴番号(計算結果Entity.getHihokenshaNo());
+        計算結果Entity.setRirekiNo(new Decimal(最新履歴番号.intValue() + 1));
+        計算結果Entity.setState(EntityDataState.Added);
+        rentaiGimushaDac.save(計算結果Entity);
+    }
+
+    /**
      * 主キーに合致する居宅サービス区分支給限度額を削除する。
      *
      * @param entity DbT2009RentaiGimushaEntity

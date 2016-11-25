@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,36 +27,36 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
     private TorokuJokyoDiv TorokuJokyo;
     @JsonProperty("linTorokuTorokuJokyo")
     private HorizontalLine linTorokuTorokuJokyo;
-    @JsonProperty("txtNigoYokokushaTorokuIraiJuribi")
-    private TextBoxFlexibleDate txtNigoYokokushaTorokuIraiJuribi;
     @JsonProperty("txtNigoYokokushaTorokuYokokuTorokubi")
-    private TextBoxFlexibleDate txtNigoYokokushaTorokuYokokuTorokubi;
+    private TextBoxDate txtNigoYokokushaTorokuYokokuTorokubi;
     @JsonProperty("txtBemmeishoTeishutsuKigenYMD")
-    private TextBoxFlexibleDate txtBemmeishoTeishutsuKigenYMD;
+    private TextBoxDate txtBemmeishoTeishutsuKigenYMD;
     @JsonProperty("txtYokokuTsuchiHakkoYMD")
     private TextBoxFlexibleDate txtYokokuTsuchiHakkoYMD;
     @JsonProperty("txtNigoBenmeishoJuriBenmeishoUketsukebi")
-    private TextBoxFlexibleDate txtNigoBenmeishoJuriBenmeishoUketsukebi;
+    private TextBoxDate txtNigoBenmeishoJuriBenmeishoUketsukebi;
     @JsonProperty("ddlNigoBenmeishoJuriBenmeiRiyu")
     private DropDownList ddlNigoBenmeishoJuriBenmeiRiyu;
     @JsonProperty("txtBemmeiNaiyoKetteiYMD")
-    private TextBoxFlexibleDate txtBemmeiNaiyoKetteiYMD;
+    private TextBoxDate txtBemmeiNaiyoKetteiYMD;
     @JsonProperty("ddlNigoBenmeishoJuriBenmeiShinsakekka")
     private DropDownList ddlNigoBenmeishoJuriBenmeiShinsakekka;
     @JsonProperty("txtSashitomeKetteiYMD")
-    private TextBoxFlexibleDate txtSashitomeKetteiYMD;
+    private TextBoxDate txtSashitomeKetteiYMD;
     @JsonProperty("txtHokenshaTeishutsuKigenYMD")
-    private TextBoxFlexibleDate txtHokenshaTeishutsuKigenYMD;
+    private TextBoxDate txtHokenshaTeishutsuKigenYMD;
     @JsonProperty("txtSashitomeTsuchiHakkoYMD")
     private TextBoxFlexibleDate txtSashitomeTsuchiHakkoYMD;
     @JsonProperty("txtIraiUketsukeYMD")
-    private TextBoxFlexibleDate txtIraiUketsukeYMD;
+    private TextBoxDate txtIraiUketsukeYMD;
     @JsonProperty("ddlIraiRiyu")
     private DropDownList ddlIraiRiyu;
+    @JsonProperty("txtNigoYokokushaTorokuIraiJuribi")
+    private TextBoxDate txtNigoYokokushaTorokuIraiJuribi;
     @JsonProperty("txtIraiYMD")
-    private TextBoxFlexibleDate txtIraiYMD;
+    private TextBoxDate txtIraiYMD;
     @JsonProperty("txtIraiNaiyoKetteiYMD")
-    private TextBoxFlexibleDate txtIraiNaiyoKetteiYMD;
+    private TextBoxDate txtIraiNaiyoKetteiYMD;
     @JsonProperty("ddlIraiShinsaKekka")
     private DropDownList ddlIraiShinsaKekka;
     @JsonProperty("KakuteiTorikeshi")
@@ -115,29 +115,11 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
     }
 
     /*
-     * gettxtNigoYokokushaTorokuIraiJuribi
-     * @return txtNigoYokokushaTorokuIraiJuribi
-     */
-    @JsonProperty("txtNigoYokokushaTorokuIraiJuribi")
-    public TextBoxFlexibleDate getTxtNigoYokokushaTorokuIraiJuribi() {
-        return txtNigoYokokushaTorokuIraiJuribi;
-    }
-
-    /*
-     * settxtNigoYokokushaTorokuIraiJuribi
-     * @param txtNigoYokokushaTorokuIraiJuribi txtNigoYokokushaTorokuIraiJuribi
-     */
-    @JsonProperty("txtNigoYokokushaTorokuIraiJuribi")
-    public void setTxtNigoYokokushaTorokuIraiJuribi(TextBoxFlexibleDate txtNigoYokokushaTorokuIraiJuribi) {
-        this.txtNigoYokokushaTorokuIraiJuribi = txtNigoYokokushaTorokuIraiJuribi;
-    }
-
-    /*
      * gettxtNigoYokokushaTorokuYokokuTorokubi
      * @return txtNigoYokokushaTorokuYokokuTorokubi
      */
     @JsonProperty("txtNigoYokokushaTorokuYokokuTorokubi")
-    public TextBoxFlexibleDate getTxtNigoYokokushaTorokuYokokuTorokubi() {
+    public TextBoxDate getTxtNigoYokokushaTorokuYokokuTorokubi() {
         return txtNigoYokokushaTorokuYokokuTorokubi;
     }
 
@@ -146,7 +128,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @param txtNigoYokokushaTorokuYokokuTorokubi txtNigoYokokushaTorokuYokokuTorokubi
      */
     @JsonProperty("txtNigoYokokushaTorokuYokokuTorokubi")
-    public void setTxtNigoYokokushaTorokuYokokuTorokubi(TextBoxFlexibleDate txtNigoYokokushaTorokuYokokuTorokubi) {
+    public void setTxtNigoYokokushaTorokuYokokuTorokubi(TextBoxDate txtNigoYokokushaTorokuYokokuTorokubi) {
         this.txtNigoYokokushaTorokuYokokuTorokubi = txtNigoYokokushaTorokuYokokuTorokubi;
     }
 
@@ -155,7 +137,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @return txtBemmeishoTeishutsuKigenYMD
      */
     @JsonProperty("txtBemmeishoTeishutsuKigenYMD")
-    public TextBoxFlexibleDate getTxtBemmeishoTeishutsuKigenYMD() {
+    public TextBoxDate getTxtBemmeishoTeishutsuKigenYMD() {
         return txtBemmeishoTeishutsuKigenYMD;
     }
 
@@ -164,7 +146,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @param txtBemmeishoTeishutsuKigenYMD txtBemmeishoTeishutsuKigenYMD
      */
     @JsonProperty("txtBemmeishoTeishutsuKigenYMD")
-    public void setTxtBemmeishoTeishutsuKigenYMD(TextBoxFlexibleDate txtBemmeishoTeishutsuKigenYMD) {
+    public void setTxtBemmeishoTeishutsuKigenYMD(TextBoxDate txtBemmeishoTeishutsuKigenYMD) {
         this.txtBemmeishoTeishutsuKigenYMD = txtBemmeishoTeishutsuKigenYMD;
     }
 
@@ -191,7 +173,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @return txtNigoBenmeishoJuriBenmeishoUketsukebi
      */
     @JsonProperty("txtNigoBenmeishoJuriBenmeishoUketsukebi")
-    public TextBoxFlexibleDate getTxtNigoBenmeishoJuriBenmeishoUketsukebi() {
+    public TextBoxDate getTxtNigoBenmeishoJuriBenmeishoUketsukebi() {
         return txtNigoBenmeishoJuriBenmeishoUketsukebi;
     }
 
@@ -200,7 +182,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @param txtNigoBenmeishoJuriBenmeishoUketsukebi txtNigoBenmeishoJuriBenmeishoUketsukebi
      */
     @JsonProperty("txtNigoBenmeishoJuriBenmeishoUketsukebi")
-    public void setTxtNigoBenmeishoJuriBenmeishoUketsukebi(TextBoxFlexibleDate txtNigoBenmeishoJuriBenmeishoUketsukebi) {
+    public void setTxtNigoBenmeishoJuriBenmeishoUketsukebi(TextBoxDate txtNigoBenmeishoJuriBenmeishoUketsukebi) {
         this.txtNigoBenmeishoJuriBenmeishoUketsukebi = txtNigoBenmeishoJuriBenmeishoUketsukebi;
     }
 
@@ -227,7 +209,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @return txtBemmeiNaiyoKetteiYMD
      */
     @JsonProperty("txtBemmeiNaiyoKetteiYMD")
-    public TextBoxFlexibleDate getTxtBemmeiNaiyoKetteiYMD() {
+    public TextBoxDate getTxtBemmeiNaiyoKetteiYMD() {
         return txtBemmeiNaiyoKetteiYMD;
     }
 
@@ -236,7 +218,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @param txtBemmeiNaiyoKetteiYMD txtBemmeiNaiyoKetteiYMD
      */
     @JsonProperty("txtBemmeiNaiyoKetteiYMD")
-    public void setTxtBemmeiNaiyoKetteiYMD(TextBoxFlexibleDate txtBemmeiNaiyoKetteiYMD) {
+    public void setTxtBemmeiNaiyoKetteiYMD(TextBoxDate txtBemmeiNaiyoKetteiYMD) {
         this.txtBemmeiNaiyoKetteiYMD = txtBemmeiNaiyoKetteiYMD;
     }
 
@@ -263,7 +245,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @return txtSashitomeKetteiYMD
      */
     @JsonProperty("txtSashitomeKetteiYMD")
-    public TextBoxFlexibleDate getTxtSashitomeKetteiYMD() {
+    public TextBoxDate getTxtSashitomeKetteiYMD() {
         return txtSashitomeKetteiYMD;
     }
 
@@ -272,7 +254,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @param txtSashitomeKetteiYMD txtSashitomeKetteiYMD
      */
     @JsonProperty("txtSashitomeKetteiYMD")
-    public void setTxtSashitomeKetteiYMD(TextBoxFlexibleDate txtSashitomeKetteiYMD) {
+    public void setTxtSashitomeKetteiYMD(TextBoxDate txtSashitomeKetteiYMD) {
         this.txtSashitomeKetteiYMD = txtSashitomeKetteiYMD;
     }
 
@@ -281,7 +263,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @return txtHokenshaTeishutsuKigenYMD
      */
     @JsonProperty("txtHokenshaTeishutsuKigenYMD")
-    public TextBoxFlexibleDate getTxtHokenshaTeishutsuKigenYMD() {
+    public TextBoxDate getTxtHokenshaTeishutsuKigenYMD() {
         return txtHokenshaTeishutsuKigenYMD;
     }
 
@@ -290,7 +272,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @param txtHokenshaTeishutsuKigenYMD txtHokenshaTeishutsuKigenYMD
      */
     @JsonProperty("txtHokenshaTeishutsuKigenYMD")
-    public void setTxtHokenshaTeishutsuKigenYMD(TextBoxFlexibleDate txtHokenshaTeishutsuKigenYMD) {
+    public void setTxtHokenshaTeishutsuKigenYMD(TextBoxDate txtHokenshaTeishutsuKigenYMD) {
         this.txtHokenshaTeishutsuKigenYMD = txtHokenshaTeishutsuKigenYMD;
     }
 
@@ -317,7 +299,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @return txtIraiUketsukeYMD
      */
     @JsonProperty("txtIraiUketsukeYMD")
-    public TextBoxFlexibleDate getTxtIraiUketsukeYMD() {
+    public TextBoxDate getTxtIraiUketsukeYMD() {
         return txtIraiUketsukeYMD;
     }
 
@@ -326,7 +308,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @param txtIraiUketsukeYMD txtIraiUketsukeYMD
      */
     @JsonProperty("txtIraiUketsukeYMD")
-    public void setTxtIraiUketsukeYMD(TextBoxFlexibleDate txtIraiUketsukeYMD) {
+    public void setTxtIraiUketsukeYMD(TextBoxDate txtIraiUketsukeYMD) {
         this.txtIraiUketsukeYMD = txtIraiUketsukeYMD;
     }
 
@@ -349,11 +331,29 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
     }
 
     /*
+     * gettxtNigoYokokushaTorokuIraiJuribi
+     * @return txtNigoYokokushaTorokuIraiJuribi
+     */
+    @JsonProperty("txtNigoYokokushaTorokuIraiJuribi")
+    public TextBoxDate getTxtNigoYokokushaTorokuIraiJuribi() {
+        return txtNigoYokokushaTorokuIraiJuribi;
+    }
+
+    /*
+     * settxtNigoYokokushaTorokuIraiJuribi
+     * @param txtNigoYokokushaTorokuIraiJuribi txtNigoYokokushaTorokuIraiJuribi
+     */
+    @JsonProperty("txtNigoYokokushaTorokuIraiJuribi")
+    public void setTxtNigoYokokushaTorokuIraiJuribi(TextBoxDate txtNigoYokokushaTorokuIraiJuribi) {
+        this.txtNigoYokokushaTorokuIraiJuribi = txtNigoYokokushaTorokuIraiJuribi;
+    }
+
+    /*
      * gettxtIraiYMD
      * @return txtIraiYMD
      */
     @JsonProperty("txtIraiYMD")
-    public TextBoxFlexibleDate getTxtIraiYMD() {
+    public TextBoxDate getTxtIraiYMD() {
         return txtIraiYMD;
     }
 
@@ -362,7 +362,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @param txtIraiYMD txtIraiYMD
      */
     @JsonProperty("txtIraiYMD")
-    public void setTxtIraiYMD(TextBoxFlexibleDate txtIraiYMD) {
+    public void setTxtIraiYMD(TextBoxDate txtIraiYMD) {
         this.txtIraiYMD = txtIraiYMD;
     }
 
@@ -371,7 +371,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @return txtIraiNaiyoKetteiYMD
      */
     @JsonProperty("txtIraiNaiyoKetteiYMD")
-    public TextBoxFlexibleDate getTxtIraiNaiyoKetteiYMD() {
+    public TextBoxDate getTxtIraiNaiyoKetteiYMD() {
         return txtIraiNaiyoKetteiYMD;
     }
 
@@ -380,7 +380,7 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
      * @param txtIraiNaiyoKetteiYMD txtIraiNaiyoKetteiYMD
      */
     @JsonProperty("txtIraiNaiyoKetteiYMD")
-    public void setTxtIraiNaiyoKetteiYMD(TextBoxFlexibleDate txtIraiNaiyoKetteiYMD) {
+    public void setTxtIraiNaiyoKetteiYMD(TextBoxDate txtIraiNaiyoKetteiYMD) {
         this.txtIraiNaiyoKetteiYMD = txtIraiNaiyoKetteiYMD;
     }
 
@@ -524,22 +524,22 @@ public class IchijiSashitome2GoDiv extends Panel implements IIchijiSashitome2GoD
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTekiyoKaishi() {
+    public TextBoxDate getTxtTekiyoKaishi() {
         return this.getTorokuJokyo().getTxtTekiyoKaishi();
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoKaishi(TextBoxFlexibleDate txtTekiyoKaishi) {
+    public void  setTxtTekiyoKaishi(TextBoxDate txtTekiyoKaishi) {
         this.getTorokuJokyo().setTxtTekiyoKaishi(txtTekiyoKaishi);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTekiyoShuryo() {
+    public TextBoxDate getTxtTekiyoShuryo() {
         return this.getTorokuJokyo().getTxtTekiyoShuryo();
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoShuryo(TextBoxFlexibleDate txtTekiyoShuryo) {
+    public void  setTxtTekiyoShuryo(TextBoxDate txtTekiyoShuryo) {
         this.getTorokuJokyo().setTxtTekiyoShuryo(txtTekiyoShuryo);
     }
 

@@ -114,7 +114,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements 
                 && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
             for (UniversalPhase entity : 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト()) {
                 if (entity.get期() == Integer.valueOf(出力期.toString())) {
-                    source.listUpper_10 = new RString(entity.get金額().toString());
+                    source.listUpper_10 = entity.get金額() == null ? RString.EMPTY : new RString(entity.get金額().toString());
                 }
             }
         }

@@ -85,11 +85,11 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaList {
 
         FlexibleDate taishokaishi = div.getTxtTaishoKikanKaishi().getValue();
         FlexibleDate taishoshuryo = div.getTxtTaishoKikanShuryo().getValue();
-        FlexibleDate kijunymd = div.getTxtKijunYMD().getValue();
-        FlexibleDate kazeitokijundate = div.getTxtKazeiHanteiToKijunDate().getValue();
+        FlexibleDate kijunymd = new FlexibleDate(div.getTxtKijunYMD().getValue().toDateString());
+        FlexibleDate kazeitokijundate = new FlexibleDate(div.getTxtKazeiHanteiToKijunDate().getValue().toDateString());
         if (div.getRadTaishoKikanShitei().getSelectedKey().equals(対象年度)) {
             bparamt.set対象期間指定(TaishoKikan.対象年度);
-            if (div.getTxtTaishoYM().getValue() != null && !div.getTxtTaishoYM().getValue().isEmpty()) {
+            if (div.getTxtTaishoYM().getValue() != null && !div.getTxtTaishoYM().getValue().toDateString().isEmpty()) {
                 FlexibleYear taishonendo = new FlexibleYear(div.getTxtTaishoYM().getValue().toString().substring(NO_0, NO_4));
                 bparamt.set対象年度(taishonendo);
             }
@@ -103,7 +103,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaList {
             bparamt.set課税判定等基準日(kijunymd);
         }
 
-        if (div.getTxtShotokuNendo().getValue() != null && !div.getTxtShotokuNendo().getValue().isEmpty()) {
+        if (div.getTxtShotokuNendo().getValue() != null && !div.getTxtShotokuNendo().getValue().toDateString().isEmpty()) {
             FlexibleYear shotokunendo = new FlexibleYear(div.getTxtShotokuNendo().getValue().toString().substring(NO_0, NO_4));
             bparamt.set所得年度(shotokunendo);
         }

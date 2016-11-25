@@ -167,7 +167,9 @@ public class KyokaisouKanriMasterListPanelHandler {
         if (!iskogakuServicehiFlag) {
             batchPara.setIsshokuhiKeiFlag(該当内容区分ない);
         }
-        batchPara.setOrder_ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
+        RString 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID() == null ? 
+                RString.EMPTY : new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()); 
+        batchPara.setOrder_ID(出力順ID);
         return batchPara;
     }
 

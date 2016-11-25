@@ -122,7 +122,7 @@ public class RenkeiDataTorikomi {
         for (FileData file : files) {
             getHandler(div).upLoadFile(new FilesystemPath(file.getFilePath()), buider);
         }
-        div.getRenkeiDataTorikomiBatchParameter().getBtnDataTorikomi().setDisabled(false);
+        div.getUploadArea().getBtnDataTorikomi().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 

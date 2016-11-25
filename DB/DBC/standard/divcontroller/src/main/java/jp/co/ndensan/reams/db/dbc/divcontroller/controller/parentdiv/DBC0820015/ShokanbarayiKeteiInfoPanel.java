@@ -266,7 +266,7 @@ public class ShokanbarayiKeteiInfoPanel {
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
             FlexibleDate 決定日 = ViewStateHolder.get(ViewStateKeys.決定日, FlexibleDate.class);
             DBHozonJoho データ情報 = getDB情報(div);
-            if (情報のチェック(データ情報.getDB情報()) == 定数_3) {
+            if (情報のチェック(データ情報.getDb情報()) == 定数_3) {
                 if (!ResponseHolder.isReRequest()) {
                     return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
                 }
@@ -277,7 +277,7 @@ public class ShokanbarayiKeteiInfoPanel {
             RString 申請書入力済区分 = getHandler(div).get申請書入力済区分(get申請書入力済フラグ(get画面有無変化(div)));
             if (申請書入力済.equals(申請書入力済区分)) {
                 ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, 申請書入力済);
-                getHandler(div).登録Save(データ情報.getDB情報(), データ情報.get修正前支給区分(), 決定日, paramter, 画面モード, 識別コード);
+                getHandler(div).登録Save(データ情報.getDb情報(), データ情報.get修正前支給区分(), 決定日, paramter, 画面モード, 識別コード);
                 div.getCcdKanryoMessage().setMessage(getKanryoMessage(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class)),
                         paramter.getHiHokenshaNo().value(), div.getPanelOne().getCcdKaigoAtenaInfo().get氏名漢字(), true);
                 return ResponseData.of(div).setState(DBC0820015StateName.処理完了);
@@ -294,7 +294,7 @@ public class ShokanbarayiKeteiInfoPanel {
                     return ResponseData.of(div).respond();
                 }
                 ViewStateHolder.put(ViewStateKeys.申請書入力完了フラグ, 決定情報入力未済あり);
-                getHandler(div).登録Save(データ情報.getDB情報(), データ情報.get修正前支給区分(), 決定日, paramter, 画面モード, 識別コード);
+                getHandler(div).登録Save(データ情報.getDb情報(), データ情報.get修正前支給区分(), 決定日, paramter, 画面モード, 識別コード);
                 div.getCcdKanryoMessage().setMessage(getKanryoMessage(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class)),
                         paramter.getHiHokenshaNo().value(), div.getPanelOne().getCcdKaigoAtenaInfo().get氏名漢字(), true);
                 return ResponseData.of(div).setState(DBC0820015StateName.処理完了);

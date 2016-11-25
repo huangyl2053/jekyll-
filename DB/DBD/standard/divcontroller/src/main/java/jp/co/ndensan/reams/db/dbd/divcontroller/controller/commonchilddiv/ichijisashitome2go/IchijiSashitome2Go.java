@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ichijisash
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IDialogResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -40,8 +41,11 @@ public class IchijiSashitome2Go {
      */
     public ResponseData<IchijiSashitome2GoDiv> onClick_BtnTorikeshi(IchijiSashitome2GoDiv div) {
         IDialogResponse dialogResponse = ResponseData.of(div);
-        if (!ResponseHolder.isReRequest() && getHandler(div).onClick_BtnTorikeshi()) {
+        if (!ResponseHolder.isReRequest()) {
             return dialogResponse.addMessage(UrWarningMessages.未保存情報の破棄確認.getMessage().replace("処理中のデータ")).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return dialogResponse.respond();
         }
         return dialogResponse.dialogNGClose();
     }

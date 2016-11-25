@@ -33,6 +33,7 @@ public class HonsanteiFukaKeisanTotalValidationHandler {
     private static final RString MESSAGE_4 = new RString("決定/変更通知書の発行日");
     private static final RString MESSAGE_5 = new RString("納入通知書の発行日");
     private static final RString MESSAGE_6 = new RString("対象者");
+    private static final RString MESSAGE_7 = new RString("出力期");
     private final HonsanteiFukaKeisanTotalDiv div;
 
     /**
@@ -78,16 +79,22 @@ public class HonsanteiFukaKeisanTotalValidationHandler {
                 pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalValidationHandler.IdocheckMessages(
                         UrErrorMessages.必須, MESSAGE_4.toString()),
                         div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtKetteTsuchiHakkoYMD2()));
-            } else if (納入通知書帳票分類ID.equals(key)
-                    && div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtNotsuHakkoYMD2().getValue() == null) {
-                pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalValidationHandler.IdocheckMessages(
-                        UrErrorMessages.必須, MESSAGE_5.toString()),
-                        div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtNotsuHakkoYMD2()));
-            } else if (納入通知書帳票分類ID.equals(key)
-                    && div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getChkNotsuTaishosha2().getSelectedItems().isEmpty()) {
-                pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalValidationHandler.IdocheckMessages(
-                        UrErrorMessages.必須, MESSAGE_6.toString()),
-                        div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getChkNotsuTaishosha2()));
+            } else if (納入通知書帳票分類ID.equals(key)) {
+                if (div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtNotsuHakkoYMD2().getValue() == null) {
+                    pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalValidationHandler.IdocheckMessages(
+                            UrErrorMessages.必須, MESSAGE_5.toString()),
+                            div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtNotsuHakkoYMD2()));
+                }
+                if (div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getChkNotsuTaishosha2().getSelectedItems().isEmpty()) {
+                    pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalValidationHandler.IdocheckMessages(
+                            UrErrorMessages.必須, MESSAGE_6.toString()),
+                            div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getChkNotsuTaishosha2()));
+                }
+                if (RString.isNullOrEmpty(div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().getSelectedKey())) {
+                    pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalValidationHandler.IdocheckMessages(
+                            UrErrorMessages.必須, MESSAGE_7.toString()),
+                            div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2()));
+                }
             }
         }
         return pairs;

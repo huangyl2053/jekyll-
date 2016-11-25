@@ -62,11 +62,11 @@ public enum TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder implements IReportI
     /**
      * 徴収方法
      */
-    徴収方法("0209", "徴収方法", ""),
+    徴収方法("0209", "徴収方法", "\"shutsuryokujunTemp_choshuHoho\""),
     /**
      * 特徴開始月
      */
-    特徴開始月("0213", "特徴開始月", "");
+    特徴開始月("0213", "特徴開始月", "\"shutsuryokujunTemp_tokuchoKaisiTuki\"");
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

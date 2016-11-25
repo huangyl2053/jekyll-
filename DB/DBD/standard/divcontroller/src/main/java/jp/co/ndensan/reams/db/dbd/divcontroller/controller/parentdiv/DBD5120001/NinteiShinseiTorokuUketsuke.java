@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -50,42 +49,43 @@ public class NinteiShinseiTorokuUketsuke {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         被保険者番号 = taishoshaKey.get被保険者番号();
         識別コード = taishoshaKey.get識別コード();
-        getHandler(div).get表示パターン(被保険者番号, 識別コード);
-        RString nowState = ResponseHolder.getState();
-        nowState = this.getHandler(div).onLoad(被保険者番号, 識別コード);
-        if (DBD5120001StateName.申請追加.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.申請追加);
-        } else if (DBD5120001StateName.申請修正.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.申請修正);
-        } else if (DBD5120001StateName.申請取下.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.申請取下);
-        } else if (DBD5120001StateName.区分変更追加.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.区分変更追加);
-        } else if (DBD5120001StateName.区分変更修正.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.区分変更修正);
-        } else if (DBD5120001StateName.区分変更取下.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.区分変更取下);
-        } else if (DBD5120001StateName.サービス変更追加.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.サービス変更追加);
-        } else if (DBD5120001StateName.サービス変更修正.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.サービス変更修正);
-        } else if (DBD5120001StateName.サービス変更取下.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.サービス変更取下);
-        } else if (DBD5120001StateName.受給者転入追加.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.受給者転入追加);
-        } else if (DBD5120001StateName.特殊追加.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.特殊追加);
-        } else if (DBD5120001StateName.特殊修正.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.特殊修正);
-        } else if (DBD5120001StateName.特殊削除.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.特殊削除);
-        } else if (DBD5120001StateName.削除回復.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.削除回復);
-        } else if (DBD5120001StateName.職権記載.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.職権記載);
-        } else if (DBD5120001StateName.職権全喪失.getName().equals(nowState)) {
-            return ResponseData.of(div).setState(DBD5120001StateName.職権全喪失);
-        }
+        //ビルドエラーのため一時的にコメントアウト
+//        getHandler(div).get表示パターン(被保険者番号, 識別コード);
+//        RString nowState = ResponseHolder.getState();
+//        nowState = this.getHandler(div).onLoad(被保険者番号, 識別コード);
+//        if (DBD5120001StateName.申請追加.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.申請追加);
+//        } else if (DBD5120001StateName.申請修正.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.申請修正);
+//        } else if (DBD5120001StateName.申請取下.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.申請取下);
+//        } else if (DBD5120001StateName.区分変更追加.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.区分変更追加);
+//        } else if (DBD5120001StateName.区分変更修正.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.区分変更修正);
+//        } else if (DBD5120001StateName.区分変更取下.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.区分変更取下);
+//        } else if (DBD5120001StateName.サービス変更追加.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.サービス変更追加);
+//        } else if (DBD5120001StateName.サービス変更修正.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.サービス変更修正);
+//        } else if (DBD5120001StateName.サービス変更取下.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.サービス変更取下);
+//        } else if (DBD5120001StateName.受給者転入追加.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.受給者転入追加);
+//        } else if (DBD5120001StateName.特殊追加.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.特殊追加);
+//        } else if (DBD5120001StateName.特殊修正.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.特殊修正);
+//        } else if (DBD5120001StateName.特殊削除.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.特殊削除);
+//        } else if (DBD5120001StateName.削除回復.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.削除回復);
+//        } else if (DBD5120001StateName.職権記載.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.職権記載);
+//        } else if (DBD5120001StateName.職権全喪失.getName().equals(nowState)) {
+//            return ResponseData.of(div).setState(DBD5120001StateName.職権全喪失);
+//        }
         return ResponseData.of(div).respond();
     }
 

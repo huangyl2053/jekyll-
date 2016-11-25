@@ -28,6 +28,7 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
 
     private static final RString 帳票コード = new RString("DBC200100_KogakuServicehiTaishoshaIchiranSokyubun");
     private static final int 年前_5 = 5;
+    private static final int FIVE = 5;
     private final KougakuKaigotaiShoushachuuShutsuMainPanelDiv div;
 
     /**
@@ -250,6 +251,9 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
     }
 
     private RDateTime get抽出期間日時(RString 日, RString 時) {
+        if (時.length() == FIVE) {
+           return RDateTime.of(日, new RString("0").concat(時));
+        }
         return RDateTime.of(日, 時);
     }
 }

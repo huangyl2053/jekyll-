@@ -22,14 +22,11 @@ public class AkasiHakouKanriRelateEntity {
 
     private RString akasihakoumode;
     private RString chouhouTitle;
-    private RString sortJun;
-    private RString kayiPeji;
     private LasdecCode shichosonCode;
     private RString shichosonMeisho;
     private boolean koumukumeyifukaflg;
     private boolean renbanfukaflg;
     private boolean hizikehensyuuflg;
-//    private AkasiHakouKanriEntity akasiHakouKanriEntity;
     private List<AkasiHakouKanriEntity> akasiHakouKanriEntityList;
 
 }

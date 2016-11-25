@@ -100,7 +100,6 @@ public class ShinseishoHakkoTaishoshas extends
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShinseishoHakkoTaishoshas(deletedEntity, id);

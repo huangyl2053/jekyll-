@@ -511,9 +511,9 @@ public class JutakuKaishuShinseiJyohoToroku {
         if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
                 && 画面提供着工年月 != null
                 && (old提供着工年月 == null
-                || !old提供着工年月.toDateString().equals(画面提供着工年月.getYearMonth().toDateString()))) {
+                || !old提供着工年月.getNendo().toDateString().equals(画面提供着工年月.getNendo().toDateString()))) {
             div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                    SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.get名称(),
+                    SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.get名称(),
                     new FlexibleYear(画面提供着工年月.getNendo().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         }
 
@@ -706,11 +706,16 @@ public class JutakuKaishuShinseiJyohoToroku {
         ShiharaiKekkaResult 最新住宅改修費支払結果 = 住宅改修費事前申請.getKakoJutakuKaishuHi(被保険者番号,
                 new FlexibleYearMonth(div.getCommHeadPanel().getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
         handler.前回まで支払結果の初期化(最新住宅改修費支払結果);
-
-        boolean 要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(
-                被保険者番号,
-                最新住宅改修費支払結果.get開始サービス提供年月(),
-                終了サービス提供年月);
+        boolean 要介護状態３段階変更の判定 = true;
+        if (ResponseHolder.isReRequest()) {
+            要介護状態３段階変更の判定 = ViewStateHolder.get(ViewStateKeys.要介護状態３段階変更, Boolean.class);
+        } else {
+            要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(
+                    被保険者番号,
+                    最新住宅改修費支払結果.get開始サービス提供年月(),
+                    終了サービス提供年月);
+            ViewStateHolder.put(ViewStateKeys.要介護状態３段階変更, 要介護状態３段階変更の判定);
+        }
         List<RString> 要介護状態区分３段階変更チェック = div
                 .getJutakuKaishuShinseiResetInfo().getChkResetInfo().getSelectedKeys();
         boolean 限度額リセット対象 = new RString(DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage()
@@ -744,8 +749,14 @@ public class JutakuKaishuShinseiJyohoToroku {
         }
         RString 改修住宅住所 = editor改修住宅住所(div);
         JutakuKaishuJyusyoChofukuHanntei chofukuHanntei = JutakuKaishuJyusyoChofukuHanntei.createInstance();
-        boolean is改修住所重複 = chofukuHanntei.checkKaishuJyusyoChofukuToroku(被保険者番号,
-                最新住宅改修費支払結果.get開始サービス提供年月(), 終了サービス提供年月, 改修住宅住所);
+        boolean is改修住所重複 = true;
+        if (ResponseHolder.isReRequest() && (改修住所_限度額リセット対象 || 改修住所_限度額リセット対象外)) {
+            is改修住所重複 = ViewStateHolder.get(ViewStateKeys.改修住所重複, Boolean.class);
+        } else {
+            is改修住所重複 = chofukuHanntei.checkKaishuJyusyoChofukuToroku(被保険者番号,
+                    最新住宅改修費支払結果.get開始サービス提供年月(), 終了サービス提供年月, 改修住宅住所);
+            ViewStateHolder.put(ViewStateKeys.改修住所重複, is改修住所重複);
+        }
         if (is改修住所変更(is改修住所重複, 要介護状態区分３段階変更チェック)) {
             if (is改修住所_限度額リセット対象(改修住所_限度額リセット対象, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(

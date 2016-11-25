@@ -44,7 +44,8 @@
                         AND "M"."taishoNendo" = "N"."taishoNendo"
                         AND "M"."shoKisaiHokenshaNo" = "N"."shoKisaiHokenshaNo"
                         AND "M"."shikyuShinseishoSeiriNo" = "N"."shikyuShinseishoSeiriNo"
-                        AND "M"."isDeleted" = FALSE)
+                        AND "M"."isDeleted" = FALSE
+                        AND "N"."isDeleted" = FALSE)
         )
         SELECT 
             <include refid="allColumns_DbT3072KogakuGassanShikyuGakuKeisanKekka" />,

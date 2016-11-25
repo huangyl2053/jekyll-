@@ -7,8 +7,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010011
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeaderAll;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiParam;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKihonJyohou;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010011.KyufuJissekiKihonJouhouMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010011.KyufuJissekiKihonJouhouMainHandler;
@@ -43,13 +47,25 @@ public class KyufuJissekiKihonJouhouMain {
             getHandler(div).onLoad(該当月給付実績基本集計データ.get(0));
             setHidden(サービス提供年月, csData_A, div);
             set事業者_月制御(csData_A, div);
+            set検索用パラメータ(該当月給付実績基本集計データ.get(0).get給付実績基本データ());
+            set給付実績ボタン制御(該当月給付実績基本集計データ.get(0).get識別番号管理());
         } else {
             div.getBtnMaeJigyosha().setDisabled(true);
             div.getBtnAtoJigyosha().setDisabled(true);
             div.getBtnZengetsu().setDisabled(true);
             div.getBtnJigetsu().setDisabled(true);
         }
+        set給付実績基本情報データ(div);
         return ResponseData.of(div).respond();
+    }
+
+    private void set給付実績ボタン制御(ShikibetsuNoKanri 識別番号管理データ) {
+        ViewStateHolder.put(ViewStateKeys.識別番号管理, 識別番号管理データ);
+    }
+
+    private void set給付実績基本情報データ(KyufuJissekiKihonJouhouMainDiv div) {
+        KyufuJissekiHeaderAll 給付実績基本情報 = div.getCcdKyufuJissekiHeader().get給付実績基本情報データ();
+        ViewStateHolder.put(ViewStateKeys.給付実績基本情報データ, 給付実績基本情報);
     }
 
     private void setHidden(FlexibleYearMonth サービス提供年月, List<KyufuJissekiKihonShukeiRelate> csData_A, KyufuJissekiKihonJouhouMainDiv div) {
@@ -99,17 +115,6 @@ public class KyufuJissekiKihonJouhouMain {
     }
 
     /**
-     * 「合計情報」ボタンを押下する場合、画面を表示します。
-     *
-     * @param div 給付実績照会基本情報画面のDIVです
-     * @return 給付実績照会基本情報画面
-     */
-    public ResponseData<KyufuJissekiKihonJouhouMainDiv> onClick_KihonGokei(KyufuJissekiKihonJouhouMainDiv div) {
-        div.getKyufuJissekiKihonGokeiPanel().setIsOpen(true);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 「前事業者」ボタンを押下する場合、画面を表示します。
      *
      * @param div 給付実績照会基本情報画面のDIVです
@@ -123,7 +128,19 @@ public class KyufuJissekiKihonJouhouMain {
         getHandler(div).setデータ(該当給付実績基本集計データ);
         div.setHdnCurrentOrder(new RString(currenOrder));
         set事業者_月制御(csData_A, div);
+        set検索用パラメータ(該当給付実績基本集計データ.get給付実績基本データ());
+        set給付実績基本情報データ(div);
         return ResponseData.of(div).respond();
+    }
+
+    private void set検索用パラメータ(KyufujissekiKihon 給付実績基本データ) {
+        KyufuJissekiParam para = new KyufuJissekiParam();
+        para.setサービス提供年月(給付実績基本データ.getサービス提供年月());
+        para.set事業所番号(給付実績基本データ.get事業者番号());
+        para.set入力識別番号(給付実績基本データ.get入力識別番号());
+        para.set被保険者番号(給付実績基本データ.get被保険者番号());
+        para.set通し番号(給付実績基本データ.get通し番号());
+        ViewStateHolder.put(ViewStateKeys.給付実績データパラメータ, para);
     }
 
     /**
@@ -140,6 +157,8 @@ public class KyufuJissekiKihonJouhouMain {
         getHandler(div).setデータ(該当給付実績基本集計データ);
         div.setHdnCurrentOrder(new RString(currenOrder));
         set事業者_月制御(csData_A, div);
+        set検索用パラメータ(該当給付実績基本集計データ.get給付実績基本データ());
+        set給付実績基本情報データ(div);
         return ResponseData.of(div).respond();
     }
 
@@ -159,6 +178,8 @@ public class KyufuJissekiKihonJouhouMain {
         getHandler(div).onLoad(該当給付実績基本集計データ);
         setHidden(サービス提供年月, csData_A, div);
         set事業者_月制御(csData_A, div);
+        set検索用パラメータ(該当給付実績基本集計データ.get給付実績基本データ());
+        set給付実績基本情報データ(div);
         return ResponseData.of(div).respond();
     }
 
@@ -178,17 +199,8 @@ public class KyufuJissekiKihonJouhouMain {
         getHandler(div).onLoad(該当給付実績基本集計データ);
         setHidden(サービス提供年月, csData_A, div);
         set事業者_月制御(csData_A, div);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「閉じる」ボタンを押下する場合、画面を表示します。
-     *
-     * @param div 給付実績照会基本情報画面のDIV
-     * @return 給付実績照会基本情報画面
-     */
-    public ResponseData<KyufuJissekiKihonJouhouMainDiv> onClick_Close(KyufuJissekiKihonJouhouMainDiv div) {
-        div.getKyufuJissekiKihonGokeiPanel().setIsOpen(false);
+        set検索用パラメータ(該当給付実績基本集計データ.get給付実績基本データ());
+        set給付実績基本情報データ(div);
         return ResponseData.of(div).respond();
     }
 
@@ -206,7 +218,6 @@ public class KyufuJissekiKihonJouhouMain {
     }
 
     private void clear申請内容エリア(KyufuJissekiKihonJouhouMainDiv div) {
-        div.getTxtKyufuJissekiKihonSakuseiKubun().clearValue();
         div.getTxtKyufuJissekiKihonYokaigodo().clearValue();
         div.getTxtYukoKaishiYMD().clearValue();
         div.getTxtYukoShuryoYMD().clearValue();

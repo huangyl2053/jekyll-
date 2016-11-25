@@ -45,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class ShotokuJokyoHandler {
 
     private static final RString 照会モード = new RString("0");
-    private static final RString 識別対象区分_個人 = new RString("個人");
+//    private static final RString 識別対象区分_個人 = new RString("個人");
     private static final RString 改行記号 = new RString("<br>");
     private static final Decimal 数値_38万 = new Decimal("380000");
     private static final Decimal 年齢_15 = new Decimal("15");

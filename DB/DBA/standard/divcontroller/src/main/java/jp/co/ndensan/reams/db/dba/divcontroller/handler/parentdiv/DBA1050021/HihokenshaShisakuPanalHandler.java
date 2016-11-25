@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochito
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoState;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -280,8 +281,7 @@ public class HihokenshaShisakuPanalHandler {
         List<KeyValueDataSource> 措置元保険者List = new ArrayList<>();
         if (単一保険者.equals(広域と市町村判断())) {
             if (状態_追加.equals(viewState)) {
-                RString 所在保険者 = panelDiv.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
-                        .getShikibetsuTaishoHisory().get直近().get現全国地方公共団体コード().getColumnValue();
+                RString 所在保険者 = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().getColumnValue();
                 KeyValueDataSource keyValue = new KeyValueDataSource();
                 keyValue.setKey(所在保険者);
                 keyValue.setValue(RString.EMPTY);
@@ -359,8 +359,7 @@ public class HihokenshaShisakuPanalHandler {
     private RString 所在保険者の取得() {
         RString 所在保険者 = RString.EMPTY;
         if (単一保険者.equals(広域と市町村判断())) {
-            所在保険者 = panelDiv.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
-                    .getShikibetsuTaishoHisory().get直近().get現全国地方公共団体コード().getColumnValue();
+            所在保険者 = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().getColumnValue();
 
         } else if (広域保険者.equals(広域と市町村判断())) {
             KoikiShichosonJohoFinder fider = KoikiShichosonJohoFinder.createInstance();
