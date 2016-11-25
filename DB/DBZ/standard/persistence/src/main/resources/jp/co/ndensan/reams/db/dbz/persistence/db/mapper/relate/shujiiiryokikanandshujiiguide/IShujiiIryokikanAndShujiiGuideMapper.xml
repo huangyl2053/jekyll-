@@ -225,7 +225,7 @@
             1 = 1
             <if test = "hokenshaFlag">
                 AND
-                DbT5911"shichosonCode" = #{hokensha}
+                DbT5911."shichosonCode" = #{hokensha}
             </if>
             <if test = "shujiiIryokikanCodeFromFlag">
                 AND
