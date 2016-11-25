@@ -26,9 +26,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class NengakuHokenryoKeisan {
 
-    private final List<NengaokuHokenryoHoji> nengakuHokenryoHojiList = new ArrayList<>();
+    private final List<NengaokuHokenryoHoji> nengakuHokenryoHojiList;
     private static final int TAISHOTSUKI = 3;
     private static final Decimal NENTSUKISU = new Decimal(12);
+
+    /**
+     * コンストラクタ
+     */
+    public NengakuHokenryoKeisan() {
+        nengakuHokenryoHojiList = new ArrayList<>();
+    }
 
     /**
      * 年額計算
