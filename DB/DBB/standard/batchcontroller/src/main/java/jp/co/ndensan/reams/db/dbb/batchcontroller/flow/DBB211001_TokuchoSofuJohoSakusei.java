@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.DelNenkinTokuchoKaifuJohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.InsChoshuHoho2Process;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.InsChoshuHohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB211001.InsFukaTempProcess;
@@ -76,6 +77,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
     private static final String 特徴異動情報件数表の発行 = "prtTokuchoIdojohoKensuhyoProcess";
     private static final String 処理日付管理テーブル更新 = "updShoriDateKanriProcess";
     private static final String 基準日時の取得 = "getShoriDateKanriProcess";
+    private static final String 前回更新データの削除 = "delNenkinTokuchoKaifuJohoProcess";
 
     private static final RString 処理対象月_01月 = new RString("01");
     private static final RString 処理対象月_1月 = new RString("1");
@@ -112,7 +114,9 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
     protected void defineFlow() {
 
         executeStep(基準日時の取得);
-
+        if (!RString.isNullOrEmpty(getResult(RString.class, new RString(基準日時の取得), SelShoriDateKanriProcess.KIJUN_TIME))) {
+            executeStep(前回更新データの削除);
+        }
         if (is処理対象月が7月()) {
             executeStep(年金特徴回付情報追加用データ作成);
             executeStep(介護徴収方法の追加);
@@ -158,12 +162,23 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
     protected IBatchFlowCommand getShoriDateKanriProcess() {
         return simpleBatch(SelShoriDateKanriProcess.class)
                 .arguments(getParameter().toUpdShoriDateKanriProcessParameter(
-                                システム日時, is処理対象月が1月(), is処理対象月が2月(),
-                                is処理対象月が3月(), is処理対象月が4月(), is処理対象月が5月(),
-                                is処理対象月が6月(), is処理対象月が7月(), is処理対象月が8月(),
-                                is処理対象月が9月(), is処理対象月が10月(), is処理対象月が11月(),
-                                is処理対象月が12月()))
+                        システム日時, is処理対象月が1月(), is処理対象月が2月(),
+                        is処理対象月が3月(), is処理対象月が4月(), is処理対象月が5月(),
+                        is処理対象月が6月(), is処理対象月が7月(), is処理対象月が8月(),
+                        is処理対象月が9月(), is処理対象月が10月(), is処理対象月が11月(),
+                        is処理対象月が12月()))
                 .define();
+    }
+
+    /**
+     * 前回更新データの削除する。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(前回更新データの削除)
+    protected IBatchFlowCommand delNenkinTokuchoKaifuJohoProcess() {
+        return simpleBatch(DelNenkinTokuchoKaifuJohoProcess.class)
+                .arguments(getParameter().toDelTokuchoKaifuJohoProcessParameter()).define();
     }
 
     /**
@@ -350,7 +365,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
     protected IBatchFlowCommand insNenkinTokuchoKaifuJoho2Process() {
         return loopBatch(InsNenkinTokuchoKaifuJoho2Process.class)
                 .arguments(getParameter().toInsNenkinTokuchoKaifuJoho2ProcessParameter(
-                                is処理対象月が４月_６月(), is処理対象月が5月(), is処理対象月が10月_12月_2月()))
+                        is処理対象月が４月_６月(), is処理対象月が5月(), is処理対象月が10月_12月_2月()))
                 .define();
     }
 
@@ -363,7 +378,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
     protected IBatchFlowCommand insChoshuHoho2Process() {
         return loopBatch(InsChoshuHoho2Process.class)
                 .arguments(getParameter().toInsChoshuHoho2ProcessParameter(
-                                is処理対象月が４月_６月(), is処理対象月が2月()))
+                        is処理対象月が４月_６月(), is処理対象月が2月()))
                 .define();
     }
 
@@ -376,7 +391,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
     protected IBatchFlowCommand insKaigohokenNenkinTokuchoTaishosha2Process() {
         return loopBatch(InsKaigohokenNenkinTokuchoTaishosha2Process.class)
                 .arguments(getParameter().toInsKaigohokenNenkinTokuchoTaishosha2ProcessParameter(
-                                システム日時))
+                        システム日時))
                 .define();
     }
 
@@ -389,7 +404,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
     protected IBatchFlowCommand prtTokuchoIdojohoIchiranhyoProcess() {
         return loopBatch(PrtTokuchoIdojohoIchiranhyoProcess.class)
                 .arguments(getParameter().toPrtTokuchoIdojohoIchiranhyoProcessParameter(
-                                システム日時, 出力条件の編集(true)))
+                        システム日時, 出力条件の編集(true)))
                 .define();
     }
 
@@ -402,7 +417,7 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
     protected IBatchFlowCommand prtTokuchoIdojohoKensuhyoProcess() {
         return loopBatch(PrtTokuchoIdojohoKensuhyoProcess.class)
                 .arguments(getParameter().toPrtTokuchoIdojohoKensuhyoProcessParameter(
-                                システム日時, 出力条件の編集(false)))
+                        システム日時, 出力条件の編集(false)))
                 .define();
     }
 
@@ -415,11 +430,11 @@ public class DBB211001_TokuchoSofuJohoSakusei extends BatchFlowBase<DBB211001_To
     protected IBatchFlowCommand updShoriDateKanriProcess() {
         return simpleBatch(UpdShoriDateKanriProcess.class)
                 .arguments(getParameter().toUpdShoriDateKanriProcessParameter(
-                                システム日時, is処理対象月が1月(), is処理対象月が2月(),
-                                is処理対象月が3月(), is処理対象月が4月(), is処理対象月が5月(),
-                                is処理対象月が6月(), is処理対象月が7月(), is処理対象月が8月(),
-                                is処理対象月が9月(), is処理対象月が10月(), is処理対象月が11月(),
-                                is処理対象月が12月()))
+                        システム日時, is処理対象月が1月(), is処理対象月が2月(),
+                        is処理対象月が3月(), is処理対象月が4月(), is処理対象月が5月(),
+                        is処理対象月が6月(), is処理対象月が7月(), is処理対象月が8月(),
+                        is処理対象月が9月(), is処理対象月が10月(), is処理対象月が11月(),
+                        is処理対象月が12月()))
                 .define();
     }
 
