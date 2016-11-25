@@ -34,7 +34,9 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -104,6 +106,9 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
     private DBM20113AttachToBsEntity dBM20113AttachToBsEntity;
     private List<DBM20113AttachToBsBeanEntity> dBM20113AttachToBsBeanEntityList;
 
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 中間DB提供基本情報;
+
     @Override
     protected void initialize() {
         識別項目コード = RString.EMPTY;
@@ -139,6 +144,12 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
         mybatisParameter = TokuteiKojinJohoHensyuMybatisParamater.createParamter中間DB提供基本情報取得_標準(
                 転義符.concat(processParameter.get中間DBテーブル名()).concat(転義符), processParameter.get特定個人情報名コード());
         副本データ = 文字列_CDATA.concat(文字列_ENCODING);
+    }
+
+    @Override
+    protected void createWriter() {
+        中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(processParameter.get中間DBテーブル名(),
+                TeikyoKihonJohoNNTempEntity.class);
     }
 
     @Override
@@ -198,6 +209,7 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
             print電文(登録依頼電文ファイル名, setDBM20113ToBsEntity());
             print電文(登録依頼添付電文ファイル名, dBM20113AttachToBsEntity);
         }
+        中間DB提供基本情報.delete(t);
     }
 
     private RString getデータ作成日(RDate date) {
