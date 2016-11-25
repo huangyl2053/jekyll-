@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -112,6 +113,15 @@ public class NinteichosahyoServiceJokyo extends
      */
     public int getサービスの状況() {
         return entity.getServiceJokyo();
+    }
+
+    /**
+     * 厚労省IF識別コードを返します。
+     *
+     * @return 厚労省IF識別コード
+     */
+    public Code get厚労省IF識別コード() {
+        return entity.getKoroshoIfShikibetsuCode();
     }
 
     /**
