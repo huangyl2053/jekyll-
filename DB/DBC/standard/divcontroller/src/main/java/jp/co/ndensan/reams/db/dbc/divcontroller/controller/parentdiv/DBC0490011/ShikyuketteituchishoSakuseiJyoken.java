@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011.Shik
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -39,7 +40,8 @@ public class ShikyuketteituchishoSakuseiJyoken {
      */
     public ResponseData<ShikyuketteituchishoSakuseiJyokenDiv>
             onClick_radHizukeSentaku(ShikyuketteituchishoSakuseiJyokenDiv div) {
-        getHandler(div).onClick_radHizukeSentaku();
+        RString 選択Key = div.getChushutsuJoken().getRadHizukeSentaku().getSelectedKey();
+        getHandler(div).onClick_radHizukeSentaku(選択Key);
         return ResponseData.of(div).respond();
     }
 
