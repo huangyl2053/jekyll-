@@ -212,8 +212,10 @@ public class HanyoListSaishinsaKekkaResult {
         RString 申請事由 = nullToEmpty(entity.get受給申請事由());
         eucEntity.set受給申請事由(set受給申請事由(申請事由, entity));
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
-        eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(processParameter.getDate(),
-                entity.get要介護認定状態区分コード().value()).getName());
+        if (entity.get要介護認定状態区分コード() != null && !entity.get要介護認定状態区分コード().isEmpty()) {
+            eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(processParameter.getDate(),
+                    entity.get要介護認定状態区分コード().value()).getName());
+        }
         eucEntity.set受給認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
         eucEntity.set受給認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
         eucEntity.set受給認定日(set日付編集(entity.get認定年月日()));
@@ -329,7 +331,7 @@ public class HanyoListSaishinsaKekkaResult {
         RString 申請事由 = nullToEmpty(entity.get受給申請事由());
         eucEntity.set受給申請事由(set受給申請事由(申請事由, entity));
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
-        if (entity.get要介護認定状態区分コード() != null) {
+        if (entity.get要介護認定状態区分コード() != null && !entity.get要介護認定状態区分コード().isEmpty()) {
             eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(processParameter.getDate(),
                     entity.get要介護認定状態区分コード().value()).getName());
         } else {
