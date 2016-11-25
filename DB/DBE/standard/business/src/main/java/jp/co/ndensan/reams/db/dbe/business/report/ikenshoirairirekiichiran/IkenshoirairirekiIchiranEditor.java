@@ -60,7 +60,9 @@ public class IkenshoirairirekiIchiranEditor implements IIkenshoirairirekiIchiran
         source.printTimeStamp = systemDateTime.toRString();
 
         source.listChokkinKubun_1 = business.get直近区分();
-        source.listHihokenshaNo_1 = business.get被保険者番号().value();
+        if (business.get被保険者番号() != null) {
+            source.listHihokenshaNo_1 = business.get被保険者番号().value();
+        }
         if (business.get被保険者氏名カナ() != null) {
             source.listHihokenshaKana_1 = business.get被保険者氏名カナ().value();
         }
