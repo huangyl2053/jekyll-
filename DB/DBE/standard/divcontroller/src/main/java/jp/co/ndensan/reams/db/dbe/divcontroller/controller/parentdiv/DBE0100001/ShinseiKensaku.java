@@ -145,13 +145,16 @@ public class ShinseiKensaku {
         }
 
         RString 申請書管理番号 = row.getShinseishoKanriNo();
+        int 認定調査履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
         if (MENUID_DBEMN11001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
         if (MENUID_DBEMN11003.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
@@ -180,7 +183,7 @@ public class ShinseiKensaku {
                     //            ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
                     //            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号,
                     //>>>>>>> origin/sync
-                    Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
+                    認定調査履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
         } else if (MENUID_DBEMN31001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
