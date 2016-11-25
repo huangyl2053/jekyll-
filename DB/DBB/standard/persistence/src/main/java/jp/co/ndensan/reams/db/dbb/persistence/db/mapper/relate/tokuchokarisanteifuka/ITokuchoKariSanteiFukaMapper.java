@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisante
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaMyBatisParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoLokukatuRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohokeizokuRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.SikakuSaisinnsikiRelateEntity;
@@ -93,6 +94,14 @@ public interface ITokuchoKariSanteiFukaMapper {
      * @return 賦課情報の計算登録（6月開始）entity
      */
     List<FukaJohoLokukatuRelateEntity> select賦課情報_6月開始();
+
+    /**
+     * select計算後情報
+     *
+     * @param parameter TokuchoKarisanteiFukaMyBatisParameter
+     * @return 計算後情報entity
+     */
+    List<DbT2015KeisangoJohoEntity> select計算後情報(TokuchoKarisanteiFukaMyBatisParameter parameter);
 
     /**
      * 特徴仮算定結果情報を取得
