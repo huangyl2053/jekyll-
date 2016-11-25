@@ -99,6 +99,7 @@ public class ShotokuJohoTorokuTotal {
     public ResponseData<ShotokuJohoTorokuTotalDiv> onClick_btnTorikeshi(ShotokuJohoTorokuTotalDiv div) {
         div.getSetaiShotokuInfo().setDisplayNone(false);
         div.getShotokuJohoToroku().setDisplayNone(true);
+        div.getSetaiShotokuInfo().getDgSetaiShotoku().init();
         return ResponseData.of(div).respond();
     }
 

@@ -713,5 +713,9 @@ public class TokuchoKariKeisangoFukaTempEntity implements IDbAccessable {
     private Decimal dbV2002Fuka_kakuteiHokenryo;
     @TempTableColumnOrder(326)
     private Code ueT0511_dtTokubetsuChoshuGimushaCode;
+    @TempTableColumnOrder(327)
+    private RString shutsuryokujunTemp_choshuHoho;
+    @TempTableColumnOrder(328)
+    private RString shutsuryokujunTemp_tokuchoKaisiTuki;
 
 }

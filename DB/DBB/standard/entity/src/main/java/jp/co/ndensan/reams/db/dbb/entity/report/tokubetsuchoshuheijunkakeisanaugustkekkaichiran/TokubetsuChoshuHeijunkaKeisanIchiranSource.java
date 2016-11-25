@@ -104,6 +104,8 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranSource implements IReportSource
     public RString listLower_12;
     @ReportExpandedInfo(id = "A")
     public ExpandedInformation 拡張情報;
+    @ReportItem(name = "shichosonCode")
+    public RString shichosonCode;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

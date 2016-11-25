@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @reamsid_L DBU-4880-100 dingyi
  */
+@SuppressWarnings("checkstyle:illegaltype")
 @XmlRootElement(name = "SPIRegistrationDeleteList")
 public class DBM20113AttachToBsEntity {
 
