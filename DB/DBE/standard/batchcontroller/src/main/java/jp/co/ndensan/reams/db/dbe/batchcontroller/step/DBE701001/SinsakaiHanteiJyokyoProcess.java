@@ -155,7 +155,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 非該当要介護2被保険者数 + 非該当要介護3被保険者数 + 非該当要介護4被保険者数 + 非該当要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.getGogitaiNo() == -1 ? new RString("全合議体") : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -207,7 +207,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要支援1要介護2被保険者数 + 要支援1要介護3被保険者数 + 要支援1要介護4被保険者数 + 要支援1要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.getGogitaiNo() == -1 ? new RString("全合議体") : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -259,7 +259,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要支援2要介護2被保険者数 + 要支援2要介護3被保険者数 + 要支援2要介護4被保険者数 + 要支援2要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.getGogitaiNo() == -1 ? new RString("全合議体") : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -311,7 +311,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要介護1要介護2被保険者数 + 要介護1要介護3被保険者数 + 要介護1要介護4被保険者数 + 要介護1要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.getGogitaiNo() == -1 ? new RString("全合議体") : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -363,7 +363,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要介護2要介護2被保険者数 + 要介護2要介護3被保険者数 + 要介護2要介護4被保険者数 + 要介護2要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.getGogitaiNo() == -1 ? new RString("全合議体") : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -415,7 +415,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要介護3要介護2被保険者数 + 要介護3要介護3被保険者数 + 要介護3要介護4被保険者数 + 要介護3要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.getGogitaiNo() == -1 ? new RString("全合議体") : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -468,7 +468,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要介護4要介護2被保険者数 + 要介護4要介護3被保険者数 + 要介護4要介護4被保険者数 + 要介護4要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.getGogitaiNo() == -1 ? new RString("全合議体") : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -520,7 +520,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + 要介護5要介護2被保険者数 + 要介護5要介護3被保険者数 + 要介護5要介護4被保険者数 + 要介護5要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.getGogitaiNo() == -1 ? new RString("全合議体") : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -621,7 +621,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + toInt(一次判定要介護4.getListHantei_14()) + toInt(一次判定要介護5.getListHantei_14());
         ShinsaHanteiJokyoItem 合計 = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.getGogitaiNo() == -1 ? new RString("全合議体") : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -677,11 +677,9 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + toInt(一次判定要介護2.getListHantei_3()) + toInt(一次判定要介護3.getListHantei_3())
                 + toInt(一次判定要介護4.getListHantei_3()) + toInt(一次判定要介護5.getListHantei_3());
         int 変更者要支援2 = toInt(一次判定非該当.getListHantei_4()) + toInt(一次判定要支援1.getListHantei_4())
-                + toInt(一次判定要介護1.getListHantei_4())
                 + toInt(一次判定要介護2.getListHantei_4()) + toInt(一次判定要介護3.getListHantei_4())
                 + toInt(一次判定要介護4.getListHantei_4()) + toInt(一次判定要介護5.getListHantei_4());
         int 変更者要介護1 = toInt(一次判定非該当.getListHantei_5()) + toInt(一次判定要支援1.getListHantei_5())
-                + toInt(一次判定要支援2.getListHantei_5())
                 + toInt(一次判定要介護2.getListHantei_5()) + toInt(一次判定要介護3.getListHantei_5())
                 + toInt(一次判定要介護4.getListHantei_5()) + toInt(一次判定要介護5.getListHantei_5());
         int 変更者要介護2 = toInt(一次判定非該当.getListHantei_6()) + toInt(一次判定要支援1.getListHantei_6())
@@ -702,7 +700,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + toInt(一次判定要介護4.getListHantei_9());
         ShinsaHanteiJokyoItem 変更者Item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.getGogitaiNo() == -1 ? new RString("全合議体") : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
@@ -752,7 +750,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
         int 合計計 = Integer.parseInt(合計.getListHantei_10().toString());
         ShinsaHanteiJokyoItem 割合Item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                current.getGogitaiMei(),
+                paramter.getGogitaiNo() == -1 ? new RString("全合議体") : paramter.getGogitaiName(),
                 get対象開始年月日(),
                 get対象終了年月日(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
