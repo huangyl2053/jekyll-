@@ -18,7 +18,7 @@ public enum HanyoListKogakuGassanOutPutOrder implements IReportItems {
     /**
      * 行政区コード
      */
-    行政区コード(new RString("0004"), new RString(""), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
+    行政区コード(new RString("0004"), new RString(""), new RString("\"Atesaki_gyoseikuCode\"")),
     /**
      * 世帯コード
      */
@@ -40,7 +40,7 @@ public enum HanyoListKogakuGassanOutPutOrder implements IReportItems {
      *
      */
     証記載保険者番号(new RString("0103"), new RString(""),
-            new RString("\"dbT3072_taishoNendo\"")),
+            new RString("\"dbT3072_shoKisaiHokenshaNo\"")),
     /**
      * 被保険者番号
      */
@@ -54,13 +54,13 @@ public enum HanyoListKogakuGassanOutPutOrder implements IReportItems {
      * 認定開始日
      *
      */
-    認定開始日(new RString("0411"), new RString(""), new RString("\"ninteiKaishiYMD\"")),
+    認定開始日(new RString("0411"), new RString(""), new RString("\"dbT4001JukyushaDaicho_ninteiYukoKikanKaishiYMD\"")),
     /**
-     * 整理番号
+     * 申請書整理番号
      *
      */
-    整理番号(new RString("0305"), new RString(""),
-            new RString("dbT3072_shikyuSeiriNo\"")),
+    申請書整理番号(new RString("0337"), new RString(""),
+            new RString("\"dbT3072_shikyuShinseishoSeiriNo\"")),
     /**
      * 対象年度
      */
