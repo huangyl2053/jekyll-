@@ -256,7 +256,7 @@ public class JyusinDataBaitaiTorikomu {
         File from = new File(file.getFilePath().toString());
         File to = new File(from.getParent() + File.separator + fileName.toString());
         try {
-            copyFile(from, to);
+            R            copyFile(from, to);
         } catch (IOException ex) {
             Logger.getLogger(JyusinDataBaitaiTorikomu.class.getName()).log(Level.SEVERE, null, ex);
         }
