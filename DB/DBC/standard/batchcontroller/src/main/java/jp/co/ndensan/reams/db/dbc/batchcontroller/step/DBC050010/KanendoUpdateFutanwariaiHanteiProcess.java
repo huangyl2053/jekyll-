@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 処理日付管理マスタの更新処理クラスです。
@@ -74,6 +75,8 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
     private static final RString 符号 = new RString("－");
     private static final RString 連携符号 = new RString("～");
     private static final RString 帳票タイトル = new RString("振込明細一覧表");
+    private static final RString ONE = new RString("1");
+    private static final RString ZERO = new RString("0");
 
     private KanendoUpdateFutanwariaiHanteProcessParameter parameter;
     private static final int 検索件数_0 = 0;
@@ -141,13 +144,20 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
                 new RString(JobContextHolder.getJobId()),
                 get設定値(),
-                parameter.get帳票ページCount(),
+                getPageCount(parameter.get帳票ページCount()),
                 出力有無,
                 RString.EMPTY,
                 get出力条件表());
 
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
+    }
+
+    private RString getPageCount(RString 帳票ページCount) {
+        if (RString.isNullOrEmpty(帳票ページCount)) {
+            return ZERO;
+        }
+        return new RString(new Decimal(帳票ページCount.toString()).add(Decimal.ONE).toString());
     }
 
     private RString get設定値() {
