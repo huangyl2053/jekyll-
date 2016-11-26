@@ -220,6 +220,7 @@ public class KaigoHihokenshaInfoPanel {
                         .set終了年月日(終了年月日 == null ? new FlexibleDate(終了年月日NULL)
                                 : new FlexibleDate(終了年月日.toString()))
                         .set履歴番号(new Decimal(履歴番号.toString()))
+                        .set識別コード(識別コード)
                         .build();
                 holder.addKogakuGassanJikoFutanGaku(judgeResultState(初期result, result));
             }
