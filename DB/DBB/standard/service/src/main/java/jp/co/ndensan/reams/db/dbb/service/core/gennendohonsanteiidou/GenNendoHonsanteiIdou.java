@@ -1240,27 +1240,17 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
         fukaJohoRelateEntity.set介護賦課Entity(賦課の情報.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
-        List<Kibetsu> kibetsuList = 賦課の情報.getKibetsuList();
-        if (kibetsuList != null && !kibetsuList.isEmpty()) {
-            for (Kibetsu kibetsu : kibetsuList) {
-                if (ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
-                    set特徴期別金額(kibetsu, 特徴期別金額, 介護期別RelateEntity);
-                } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(kibetsu.get徴収方法())) {
-                    set普徴期別金額(kibetsu, 普徴期別金額, 介護期別RelateEntity);
-                }
-            }
-        } else {
-            for (int i = INT_1; i <= INT_6; i++) {
-                Kibetsu 特徴期別 = new Kibetsu(賦課の情報.get調定年度(), 賦課の情報.get賦課年度(), 賦課の情報.get通知書番号(),
-                        賦課の情報.get履歴番号(), ChoshuHohoKibetsu.特別徴収.getコード(), i);
-                set新規賦課の期別金額(特徴期別, 特徴期別金額.get(i - INT_1), 介護期別RelateEntity);
-            }
-            for (int i = INT_1; i <= INT_14; i++) {
-                Kibetsu 普徴期別 = new Kibetsu(賦課の情報.get調定年度(), 賦課の情報.get賦課年度(), 賦課の情報.get通知書番号(),
-                        賦課の情報.get履歴番号(), ChoshuHohoKibetsu.普通徴収.getコード(), i);
-                set新規賦課の期別金額(普徴期別, 普徴期別金額.get(i - INT_1), 介護期別RelateEntity);
-            }
+        for (int i = INT_1; i <= INT_6; i++) {
+            Kibetsu 特徴期別 = new Kibetsu(賦課の情報.get調定年度(), 賦課の情報.get賦課年度(), 賦課の情報.get通知書番号(),
+                    賦課の情報.get履歴番号(), ChoshuHohoKibetsu.特別徴収.getコード(), i);
+            set新規賦課の期別金額(特徴期別, 特徴期別金額.get(i - INT_1), 介護期別RelateEntity);
         }
+        for (int i = INT_1; i <= INT_14; i++) {
+            Kibetsu 普徴期別 = new Kibetsu(賦課の情報.get調定年度(), 賦課の情報.get賦課年度(), 賦課の情報.get通知書番号(),
+                    賦課の情報.get履歴番号(), ChoshuHohoKibetsu.普通徴収.getコード(), i);
+            set新規賦課の期別金額(普徴期別, 普徴期別金額.get(i - INT_1), 介護期別RelateEntity);
+        }
+
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
         賦課の情報 = new FukaJoho(fukaJohoRelateEntity);
         ChoshuHoho 出力用徴収方法の情報 = get出力用徴収方法の情報(徴収方法の情報_更正前, 算定月, 賦課の情報_更正前,
