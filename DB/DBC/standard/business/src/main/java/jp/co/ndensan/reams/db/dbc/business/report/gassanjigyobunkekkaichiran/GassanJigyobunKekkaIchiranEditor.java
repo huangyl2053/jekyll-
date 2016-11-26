@@ -168,9 +168,45 @@ public class GassanJigyobunKekkaIchiranEditor implements
             source.shoKisaiHokenshaNo = 帳票用データ.getShoKisaiHokenshaNo();
             setHeader(source);
         }
-
+        setPageBreakEmpty(source);
         return source;
 
+    }
+
+    private void setPageBreakEmpty(GassanJigyobunKekkaIchiranSource source) {
+        if (source.shoKisaiHokenshaNo == null) {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
+        if (source.yubinNo == null) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseiCode == null) {
+            source.gyoseiCode = RString.EMPTY;
+        }
+        if (source.atenaKanaShimei == null) {
+            source.atenaKanaShimei = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.taishoNendo == null) {
+            source.taishoNendo = RString.EMPTY;
+        }
+        if (source.List1_1 == null) {
+            source.List1_1 = RString.EMPTY;
+        }
+        if (source.List1_3 == null) {
+            source.List1_3 = RString.EMPTY;
+        }
+        if (source.List1_4 == null) {
+            source.List1_4 = RString.EMPTY;
+        }
+        if (source.List1_14 == null) {
+            source.List1_14 = RString.EMPTY;
+        }
     }
 
     private RString getSakuseiYmhm(RDate nowDate, RTime now) {
