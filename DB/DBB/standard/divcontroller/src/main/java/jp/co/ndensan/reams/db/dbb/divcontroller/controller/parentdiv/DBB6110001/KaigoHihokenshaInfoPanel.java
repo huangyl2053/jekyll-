@@ -377,16 +377,19 @@ public class KaigoHihokenshaInfoPanel {
     public ResponseData<KaigoHihokenshaInfoPanelDiv> onClick_Save(
             KaigoHihokenshaInfoPanelDiv div) {
         RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
+        for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
+            if (entity.hasChanged()) {
+                div.setHdnFlag(ONE);
+            }
+        }
+        if (!ONE.equals(div.getHdnFlag()) && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+        }
+        if (!ONE.equals(div.getHdnFlag())) {
+            return ResponseData.of(div).respond();
+        }
+        div.setHdnFlag(RString.EMPTY);
         if (!ResponseHolder.isReRequest()) {
-            for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
-                if (entity.hasChanged()) {
-                    div.setHdnFlag(ONE);
-                }
-            }
-            if (!ONE.equals(div.getHdnFlag())) {
-                return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-            }
-            div.setHdnFlag(RString.EMPTY);
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No
