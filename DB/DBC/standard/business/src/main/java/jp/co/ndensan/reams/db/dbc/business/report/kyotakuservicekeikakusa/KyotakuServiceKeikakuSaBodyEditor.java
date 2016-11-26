@@ -118,6 +118,16 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
             editAccessLog(帳票情報, source);
 
         }
+        source.listList1_4 = source.listList1_4 == null ? RString.EMPTY : source.listList1_4;
+        source.listList2_1 = source.listList2_1 == null ? RString.EMPTY : source.listList2_1;
+        source.listList3_1 = source.listList3_1 == null ? RString.EMPTY : source.listList3_1;
+        source.seibetsuCode = source.seibetsuCode == null ? RString.EMPTY : source.seibetsuCode;
+        source.shichosonCode = source.shichosonCode == null ? RString.EMPTY : source.shichosonCode;
+        source.listList1_1 = source.listList1_1 == null ? RString.EMPTY : source.listList1_1;
+        source.listList1_9 = source.listList1_9 == null ? RString.EMPTY : source.listList1_9;
+        source.listList2_8 = source.listList2_8 == null ? RString.EMPTY : source.listList2_8;
+        source.listList1_6 = source.listList1_6 == null ? RString.EMPTY : source.listList1_6;
+        source.listList2_7 = source.listList2_7 == null ? RString.EMPTY : source.listList2_7;
         return source;
 
     }
