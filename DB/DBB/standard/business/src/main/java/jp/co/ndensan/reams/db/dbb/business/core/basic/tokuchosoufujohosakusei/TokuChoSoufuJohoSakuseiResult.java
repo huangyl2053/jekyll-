@@ -75,10 +75,12 @@ public final class TokuChoSoufuJohoSakuseiResult {
             kibetsuentity.set調定共通Entity(調定共通entitylist);
             介護期別RelateEntity.add(kibetsuentity);
         }
-        FukaJohoRelateEntity fukajohorelateentity = new FukaJohoRelateEntity();
-        fukajohorelateentity.set介護賦課Entity(resultEntity.getDbt2002entity());
-        fukajohorelateentity.set介護期別RelateEntity(介護期別RelateEntity);
-        this.賦課の情報 = new FukaJoho(fukajohorelateentity);
+        if (resultEntity.getDbt2002entity() != null && !介護期別RelateEntity.isEmpty()) {
+            FukaJohoRelateEntity fukajohorelateentity = new FukaJohoRelateEntity();
+            fukajohorelateentity.set介護賦課Entity(resultEntity.getDbt2002entity());
+            fukajohorelateentity.set介護期別RelateEntity(介護期別RelateEntity);
+            this.賦課の情報 = new FukaJoho(fukajohorelateentity);
+        }
     }
 
     /**
