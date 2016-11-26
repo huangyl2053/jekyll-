@@ -44,12 +44,10 @@ public class TokuchoSofuJohoSakusei {
      * @return 特徴対象者同定Divを持つResponseData
      */
     public ResponseData<TokuchoSofuJohoSakuseiDiv> onClick_btnJikkou(TokuchoSofuJohoSakuseiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            if (getHandler(div).is選択された処理対象実行済()) {
-                WarningMessage message = new WarningMessage(DbbQuestionMessages.再処理確認.getMessage().getCode(),
-                        DbbQuestionMessages.再処理確認.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+        if (!ResponseHolder.isReRequest() && getHandler(div).is選択された処理対象実行済()) {
+            WarningMessage message = new WarningMessage(DbbQuestionMessages.再処理確認.getMessage().getCode(),
+                    DbbQuestionMessages.再処理確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         ValidationMessageControlPairs messages = getValidationHandler(div).validate();
         if (messages.existsError()) {
