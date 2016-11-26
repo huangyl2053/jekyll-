@@ -185,9 +185,9 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
             RentaiGimusha curResult = holder.getKogakuGassanJikoFutanGaku(identifier);
-            if (list != null) {
-                RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
-                RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
+            RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
+            RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
+            if (list != null && 終了年月日 != null) {
                 for (RentaiGimusha result : list) {
                     if (result.equals(curResult) || result.isDeleted()) {
                         continue;
