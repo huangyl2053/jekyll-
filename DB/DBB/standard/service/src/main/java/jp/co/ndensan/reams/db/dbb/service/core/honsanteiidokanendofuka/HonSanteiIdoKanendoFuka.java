@@ -661,7 +661,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         NengakuSeigyoJoho 年額制御情報2 = get年額制御情報(調定年度.minusYear(INT_2));
         NengakuFukaKonkyoFactory nengakuFukaKonkyo = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
         mapper.createDbT2002FukaJohoTemp();
-        
+
         for (CalculateFukaEntity 賦課計算の情報 : 賦課計算) {
             HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
             HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
@@ -692,31 +692,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
 
             if (月別保険料段階 == null) {
-                for (SetaiShotokuEntity setaiShotokuEntity : 賦課計算の情報.get世帯員所得情報()) {
-                    if (HonninKubun.世帯構成員.getCode().equals(setaiShotokuEntity.getHonninKubun())) {
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("世帯：")
-                                .concat(setaiShotokuEntity.getSetaiCode() == null
-                                        ? new RString("null") : setaiShotokuEntity.getSetaiCode().getColumnValue()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("識別コード：")
-                                .concat(setaiShotokuEntity.getShikibetsuCode() == null
-                                        ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("課税区分：")
-                                .concat(setaiShotokuEntity.getKazeiKubun()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：")
-                                .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
-                                        ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：")
-                                .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
-                                        ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
-                    } else {
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人識別コード：")
-                                .concat(setaiShotokuEntity.getShikibetsuCode() == null
-                                        ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人課税区分：")
-                                .concat(setaiShotokuEntity.getKazeiKubun()));
-                    }
-                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));
-                }
+                月別保険料段階NULL処理(賦課計算の情報.get世帯員所得情報());
             }
 
             NengakuHokenryoKeisanParameter 年額保険料パラメータ = new NengakuHokenryoKeisanParameter();
@@ -747,7 +723,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             } else {
                 年額保険料パラメータ.set年額制御情報(年額制御情報2);
             }
-            
+
             NengakuHokenryoKeisan keisan = new NengakuHokenryoKeisan();
             NengakuHokenryo 年額保険料 = keisan.calculate年額保険料(年額保険料パラメータ);
 
@@ -777,6 +753,34 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             } else {
                 create既存の賦課処理(賦課計算の情報, fukaKokyoBatchParameter, param, 年額保険料.getHokenryoNengaku());
             }
+        }
+    }
+
+    private void 月別保険料段階NULL処理(List<SetaiShotokuEntity> 世帯員所得情報) {
+        for (SetaiShotokuEntity setaiShotokuEntity : 世帯員所得情報) {
+            if (HonninKubun.世帯構成員.getCode().equals(setaiShotokuEntity.getHonninKubun())) {
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("世帯：")
+                        .concat(setaiShotokuEntity.getSetaiCode() == null
+                                ? new RString("null") : setaiShotokuEntity.getSetaiCode().getColumnValue()));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("識別コード：")
+                        .concat(setaiShotokuEntity.getShikibetsuCode() == null
+                                ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("課税区分：")
+                        .concat(setaiShotokuEntity.getKazeiKubun()));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：")
+                        .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
+                                ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：")
+                        .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
+                                ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
+            } else {
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人識別コード：")
+                        .concat(setaiShotokuEntity.getShikibetsuCode() == null
+                                ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人課税区分：")
+                        .concat(setaiShotokuEntity.getKazeiKubun()));
+            }
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));
         }
     }
 
