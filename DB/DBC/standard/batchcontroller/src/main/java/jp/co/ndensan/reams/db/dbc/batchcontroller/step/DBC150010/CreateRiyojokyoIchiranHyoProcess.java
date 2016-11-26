@@ -154,11 +154,9 @@ public class CreateRiyojokyoIchiranHyoProcess extends BatchKeyBreakBase<DbWT1513
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(Tokeihyo_CSVEditKubun.する.getコード().equals(parameter.get項目名付加()))
                 .build();
-        if (RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード().equals(parameter.get明細リスト出力区分())) {
-            利用状況一覧表ReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200004.getReportId().value()).
-                    addBreak(new BreakerCatalog<RiyoJokyoIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
-            利用状況一覧表SourceWriter = new ReportSourceWriter<>(利用状況一覧表ReportWriter);
-        }
+        利用状況一覧表ReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200004.getReportId().value()).
+                addBreak(new BreakerCatalog<RiyoJokyoIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
+        利用状況一覧表SourceWriter = new ReportSourceWriter<>(利用状況一覧表ReportWriter);
     }
 
     private RString get出力順() {
