@@ -197,7 +197,9 @@
             resultMap="resultMap_RiyoshaFutanWariaiShoTemp" fetchSize="500">
         SELECT
         A.*,
-        "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
+        "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode",
+        CASE WHEN "futanWariKikanTemp_futanWariaiKubun2" IS NULL OR  "futanWariKikanTemp_futanWariaiKubun2" = '' THEN "futanWariKikanTemp_futanWariaiKubun1"
+        ELSE "futanWariKikanTemp_futanWariaiKubun2" END AS "futanWariKikanTemp_futanWariaiKubun"
         FROM
         "RiyoshaFutanwariaishoTemp"  as A
         <if test="出力順!= null">
