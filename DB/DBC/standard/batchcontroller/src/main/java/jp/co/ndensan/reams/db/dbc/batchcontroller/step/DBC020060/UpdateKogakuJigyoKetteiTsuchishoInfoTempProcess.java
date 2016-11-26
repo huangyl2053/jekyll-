@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishik
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KogakuServiceUpdateTempEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -39,11 +39,9 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
     private static final RString フラグ_FALSE = new RString("false");
     private static final RString 抽出モード_受付日 = new RString("1");
     private static final RString 抽出モード_決定日 = new RString("2");
-    private static final RString 抽出モード_決定者受付年月 = new RString("3");
     private static final RString 読点 = new RString("、");
     private static final RString 初期連番 = new RString("0000");
     private static final RString 初期年度 = new RString("0000");
-
 
     private KogakuKaigoServiceProcessParameter parameter;
     private RString サービス種類名称;
