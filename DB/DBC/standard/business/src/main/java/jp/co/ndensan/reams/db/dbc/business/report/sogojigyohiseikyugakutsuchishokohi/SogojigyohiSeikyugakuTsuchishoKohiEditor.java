@@ -111,7 +111,20 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
             source.tesuryoSeikyugaku = this.decimal_to_string(請求額通知書情報.get手数料_請求額());
             source.tesuryoRuikeigaku = this.decimal_to_string(請求額通知書情報.get手数料_累計請求額());
         }
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(SogojigyohiSeikyugakuTsuchishoKohiSource source) {
+        if (source.kanCode == null) {
+            source.kanCode = RString.EMPTY;
+        }
+        if (source.kouCode == null) {
+            source.kouCode = RString.EMPTY;
+        }
+        if (source.kohiFutanshaNo == null) {
+            source.kohiFutanshaNo = RString.EMPTY;
+        }
     }
 
     /**
