@@ -54,7 +54,14 @@ public class ServiceCodeIchiranBodyEditor
             return source;
         }
         edit明細(source);
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(ServiceCodeIchiranSource source) {
+        if (source.List1_1 == null) {
+            source.List1_1 = RString.EMPTY;
+        }
     }
 
     private void edit明細(ServiceCodeIchiranSource source) {

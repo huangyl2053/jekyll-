@@ -49,7 +49,23 @@ public class SogojigyohiShinsaKetteiSeikyumeisaiInBodyEditor
             edit高額(source);
             edit集計(source);
         }
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(SogojigyohiShinsaKetteiSeikyumeisaihyoSource source) {
+        if (source.shoKisaiHokenshaNo == null) {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
+        if (source.serviceShuruiCode == null) {
+            source.serviceShuruiCode = RString.EMPTY;
+        }
+        if (source.listMeisai_3 == null) {
+            source.listMeisai_3 = RString.EMPTY;
+        }
+        if (source.listMeisai_1 == null) {
+            source.listMeisai_1 = RString.EMPTY;
+        }
     }
 
     private void edit明細(SogojigyohiShinsaKetteiSeikyumeisaihyoSource source) {
