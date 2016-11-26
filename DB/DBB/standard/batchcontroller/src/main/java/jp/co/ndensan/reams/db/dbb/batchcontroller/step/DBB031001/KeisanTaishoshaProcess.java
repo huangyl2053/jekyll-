@@ -76,10 +76,7 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
     private List<DbT1001HihokenshaDaichoEntity> 資格の情報List;
     private KeisanTaishoshaEntity 計算対象者抽出Entity;
     private DbT2002FukaEntity 賦課情報Entity;
-    private HihokenshaNo 被保険者番号;
-    private TsuchishoNo 通知書番号;
     private RString 導入形態コード;
-    private int count;
     private boolean 資格_賦課_区分;
     private boolean データ区分;
 
