@@ -386,6 +386,9 @@ public class Honsanteifuka {
      * @return BatchTyouhyouEntity
      */
     private BatchTyouhyouEntity get納入通知書_帳票ID(FlexibleYear 調定年度, RString 出力期, TyouhyouParameter parameter) {
+        if (出力期 == null || 出力期.isEmpty()) {
+            return null;
+        }
         int 月 = new FuchoKiUtil().get期月リスト().get期の最初月(Integer.parseInt(出力期.toString())).get月AsInt();
         RString 項目名 = set項目名(月);
         RString 納通連帳区分 = get普徴期情報_納通連帳区分(月);
