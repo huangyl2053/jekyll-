@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitoutatsuyoteishacheckli
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitoutatsuyoteishachecklist.NenreiToutatsuYoteishaCheckListJyohoEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsuyoteishaichiranhyo.NenreitotatsuYoteishaIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitoutatsuyoteishachecklist.INenreiToutatsuYoteishaCheckListMapper;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.BreakPageCreator;
 import jp.co.ndensan.reams.db.dbz.business.report.reportitem.KaigoReportItems;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -28,7 +29,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -74,7 +74,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -334,7 +333,7 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
             List<UrT0508SeikatsuHogoJukyushaEntity> urT0508Seika = nenreiCheckListMapper
                     .getSeikatsuHogojyu(entity.getShikibetsuCode());
             for (UrT0508SeikatsuHogoJukyushaEntity urT0508Sei : urT0508Seika) {
-                if (!urT0508Sei.getJukyuKaishiYMD().isEmpty() && !entity.getNenreiyotainichi().isEmpty() 
+                if (!urT0508Sei.getJukyuKaishiYMD().isEmpty() && !entity.getNenreiyotainichi().isEmpty()
                         && !urT0508Sei.getJukyuHaishiYMD().isEmpty() && urT0508Sei.getJukyuKaishiYMD()
                         .isBeforeOrEquals(entity.getNenreiyotainichi())
                         && entity.getNenreiyotainichi().isBeforeOrEquals(
@@ -371,7 +370,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     private void setJyotai(NenreiToutatsuYoteishaCheckListEntity entity) {
         getTekiyoJogaiList();
         for (DbT1002TekiyoJogaishaEntity dbT1002entity : dbT1002TekiyoJogaishaEntity) {
-            if (dbT1002entity.getTekiyoYMD() != null && dbT1002entity.getKaijoYMD() != null && dbT1002entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
+            if (dbT1002entity.getTekiyoYMD() != null && dbT1002entity.getKaijoYMD() != null
+                    && dbT1002entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
                     && dbT1002entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
                     && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1002entity.getKaijoYMD())) {
                 entity.setJyotei(状態_適用除外者);
@@ -380,7 +380,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         }
         getTashichosonJushochi();
         for (DbT1003TashichosonJushochiTokureiEntity dbT1003entity : dbT1003Entity) {
-            if (dbT1003entity.getTekiyoYMD() != null && dbT1003entity.getKaijoYMD() != null && dbT1003entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
+            if (dbT1003entity.getTekiyoYMD() != null && dbT1003entity.getKaijoYMD() != null
+                    && dbT1003entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
                     && dbT1003entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
                     && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1003entity.getKaijoYMD())) {
                 entity.setJyotei(状態_他市町村住所地特例者);

@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushatorokusha.Nen
 import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsukakuninlist.NenreitotatsuKakuninListReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitoutatsuyoteishachecklist.INenreiToutatsuYoteishaCheckListMapper;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitotatsutorokushalist.NenreiTotatsushaTorokuListBatch;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.BreakPageCreator;
 import jp.co.ndensan.reams.db.dbz.business.report.reportitem.KaigoReportItems;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
@@ -49,7 +49,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -66,9 +65,6 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsutorokusha."
             + "INenreiTotatsuTorokushaMapper.getHiHokenshaDaichoList");
     private static final RString 処理名 = new RString("年齢到達登録者リスト");
-    private static final RString 処理枝番 = new RString("0000");
-    private static final FlexibleYear 年度 = new FlexibleYear("0000");
-    private static final RString 年度内連番 = new RString("0000");
     private static final int 日付桁数 = 8;
     private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
