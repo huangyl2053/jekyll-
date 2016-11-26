@@ -132,6 +132,7 @@ public class DBC4000011MainHandler {
         List<UzT0007CodeEntity> 算定回数制限期間リスト
                 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.算定期間回数制限_期間_時期.getコード(), nowDate);
         List<KeyValueDataSource> 算定回数制限期間DataSource = new ArrayList<>();
+        算定回数制限期間DataSource.add(new KeyValueDataSource());
         for (UzT0007CodeEntity 算定回数制限期間 : 算定回数制限期間リスト) {
             算定回数制限期間DataSource.add(new KeyValueDataSource(算定回数制限期間.getコード().value(), 算定回数制限期間.getコード名称()));
         }
@@ -428,7 +429,7 @@ public class DBC4000011MainHandler {
         div.getServiceShosai().getTxtRiyoshaFutangaku().clearValue();
         div.getServiceShosai().getDdlTanisuSanteiTaniCode().setSelectedKey(RST_01);
         div.getServiceShosai().getTxtSeigenNissuKaisu().clearValue();
-        div.getServiceShosai().getDdlSanteiKaisuSeigenKikanKubun().setSelectedKey(RST_01);
+        div.getServiceShosai().getDdlSanteiKaisuSeigenKikanKubun().setSelectedIndex(INT_0);
         div.getServiceShosai().getSegTaishoJigyoJishiKubun().clearSelectedItem();
         div.getServiceShosai().getSegYoshien1().clearSelectedItem();
         div.getServiceShosai().getSegYoshien2().clearSelectedItem();
@@ -627,19 +628,19 @@ public class DBC4000011MainHandler {
         } else {
             特別地域加算フラグ = RST_1;
         }
-        RString 二次予防者 = RString.EMPTY;
+        RString 二次予防者 = RST_0;
         if (!RString.isNullOrEmpty(div.getServiceShosai().getSegNijiYobosha().getSelectedKey())) {
             二次予防者 = div.getServiceShosai().getSegNijiYobosha().getSelectedKey();
         }
-        RString 要支援１ = RString.EMPTY;
+        RString 要支援１ = RST_0;
         if (!RString.isNullOrEmpty(div.getServiceShosai().getSegYoshien1().getSelectedKey())) {
             要支援１ = div.getServiceShosai().getSegYoshien1().getSelectedKey();
         }
-        RString 要支援2 = RString.EMPTY;
+        RString 要支援2 = RST_0;
         if (!RString.isNullOrEmpty(div.getServiceShosai().getSegYoshien2().getSelectedKey())) {
             要支援2 = div.getServiceShosai().getSegYoshien2().getSelectedKey();
         }
-        RString 対象事業者 = RString.EMPTY;
+        RString 対象事業者 = RST_0;
         if (!RString.isNullOrEmpty(div.getServiceShosai().getSegTaishoJigyoJishiKubun().getSelectedKey())) {
             対象事業者 = div.getServiceShosai().getSegTaishoJigyoJishiKubun().getSelectedKey();
         }
