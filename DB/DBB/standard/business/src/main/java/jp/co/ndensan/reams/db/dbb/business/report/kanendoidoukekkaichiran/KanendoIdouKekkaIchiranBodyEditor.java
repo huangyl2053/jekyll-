@@ -9,6 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -39,6 +41,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
 
     private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity;
     private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity;
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final YMDHMS 調定日時;
     private final Association association;
 
@@ -80,8 +83,9 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
      * インスタンスを生成します。
      *
      * @param inputEntity {@link KanendoIdouKekkaIchiranInputEntity}
+     * @param 帳票制御共通 帳票制御共通
      */
-    protected KanendoIdouKekkaIchiranBodyEditor(KanendoIdouKekkaIchiranInputEntity inputEntity) {
+    protected KanendoIdouKekkaIchiranBodyEditor(KanendoIdouKekkaIchiranInputEntity inputEntity, ChohyoSeigyoKyotsu 帳票制御共通) {
         this.並び順の１件目 = inputEntity.get並び順の１件目();
         this.並び順の２件目 = inputEntity.get並び順の２件目();
         this.並び順の３件目 = inputEntity.get並び順の３件目();
@@ -95,6 +99,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         }
         計算後情報_宛名_口座_更正後Entity = inputEntity.get計算後情報_宛名_口座_更正後Entity();
         計算後情報_宛名_口座_更正後Entity.set更正前後区分(更正前後区分_更正後);
+        this.帳票制御共通 = 帳票制御共通;
         association = inputEntity.getAssociation();
     }
 
@@ -176,9 +181,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
                 source.list1_2 = 氏名.value();
             }
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座_更正後Entity.get宛名Entity());
-            if (null != kojin && null != kojin.get住所()) {
-                source.list1_3 = kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
-                        .concat(kojin.get住所().get方書().getColumnValue());
+            if (null != kojin) {
+                source.list1_3 = JushoHenshu.editJusho(帳票制御共通, kojin, association);
             }
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get口座Entity()) {
