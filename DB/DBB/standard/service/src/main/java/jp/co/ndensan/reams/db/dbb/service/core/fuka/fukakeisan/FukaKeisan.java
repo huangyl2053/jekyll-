@@ -764,9 +764,9 @@ public class FukaKeisan extends FukaKeisanFath {
         ChoshuHoho 出力徴収方法の情報 = new ChoshuHoho(param.get徴収方法の情報_更正前().toEntity());
         HihokenshaDaicho 資格の情報 = param.get資格の情報();
         if ((調定計算用年度分賦課リスト.get現年度() != null
-                && !年額保険料.equals(param.get年度分賦課リスト_更正前().get現年度().get減免前介護保険料_年額()))
-                || (param.get徴収方法の情報_更正前().get特別徴収停止事由コード() != null
-                && !param.get徴収方法の情報_更正前().get特別徴収停止事由コード().isEmpty())) {
+                && 年額保険料.compareTo(param.get年度分賦課リスト_更正前().get現年度().get減免前介護保険料_年額() == null
+                        ? Decimal.ZERO : param.get年度分賦課リスト_更正前().get現年度().get減免前介護保険料_年額()) != 0)
+                || !RString.isNullOrEmpty(param.get徴収方法の情報_更正前().get特別徴収停止事由コード())) {
             調定計算パラメータ.set年度分賦課リスト_更正前(調定計算用年度分賦課リスト);
             KoseiShorikoaResult 調定計算 = do調定計算(調定計算パラメータ);
             年度分賦課リスト_更正後 = 調定計算.get年度分賦課リスト_更正後();
@@ -846,7 +846,7 @@ public class FukaKeisan extends FukaKeisanFath {
     }
 
     private boolean is金額あり(Decimal 金額) {
-        return 金額 != null && !Decimal.ZERO.equals(金額);
+        return 金額 != null && Decimal.ZERO.compareTo(金額) != 0;
     }
 
     /**

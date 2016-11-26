@@ -9,6 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -39,6 +41,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
 
     private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity;
     private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity;
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final YMDHMS 調定日時;
     private final Association association;
 
@@ -56,6 +59,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     private static final int NUMBER_11 = 11;
     private static final int NUMBER_12 = 12;
     private static final char CHAR_0 = '0';
+    private static final RString ZERO = new RString("0");
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
     private static final RString 年 = new RString("年");
@@ -80,8 +84,9 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
      * インスタンスを生成します。
      *
      * @param inputEntity {@link KanendoIdouKekkaIchiranInputEntity}
+     * @param 帳票制御共通 帳票制御共通
      */
-    protected KanendoIdouKekkaIchiranBodyEditor(KanendoIdouKekkaIchiranInputEntity inputEntity) {
+    protected KanendoIdouKekkaIchiranBodyEditor(KanendoIdouKekkaIchiranInputEntity inputEntity, ChohyoSeigyoKyotsu 帳票制御共通) {
         this.並び順の１件目 = inputEntity.get並び順の１件目();
         this.並び順の２件目 = inputEntity.get並び順の２件目();
         this.並び順の３件目 = inputEntity.get並び順の３件目();
@@ -95,6 +100,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         }
         計算後情報_宛名_口座_更正後Entity = inputEntity.get計算後情報_宛名_口座_更正後Entity();
         計算後情報_宛名_口座_更正後Entity.set更正前後区分(更正前後区分_更正後);
+        this.帳票制御共通 = 帳票制御共通;
         association = inputEntity.getAssociation();
     }
 
@@ -108,8 +114,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         }
         set出力順And改ページ(source);
         if (null != 計算後情報_宛名_口座_更正前Entity) {
-            source.list2_1 = get年度(計算後情報_宛名_口座_更正後Entity.get調定年度());
-            source.list2_2 = get年度(計算後情報_宛名_口座_更正後Entity.get賦課年度());
+            source.list2_1 = get年度(計算後情報_宛名_口座_更正前Entity.get調定年度());
+            source.list2_2 = get年度(計算後情報_宛名_口座_更正前Entity.get賦課年度());
             if (null != 計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額()) {
                 source.list2_3 = toカンマ編集(計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額());
             }
@@ -165,7 +171,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     }
 
     private RString get年度(FlexibleYear 年度) {
-        return null == 年度 ? null
+        return null == 年度 ? RString.EMPTY
                 : 年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年);
     }
 
@@ -176,25 +182,24 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
                 source.list1_2 = 氏名.value();
             }
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座_更正後Entity.get宛名Entity());
-            if (null != kojin && null != kojin.get住所()) {
-                source.list1_3 = kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
-                        .concat(kojin.get住所().get方書().getColumnValue());
+            if (null != kojin) {
+                source.list1_3 = JushoHenshu.editJusho(帳票制御共通, kojin, association);
             }
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get口座Entity()) {
             IKoza koza = new Koza(計算後情報_宛名_口座_更正後Entity.get口座Entity());
             if (null != koza.get金融機関コード()) {
-                source.list1_4 = koza.get金融機関コード().value();
+                source.list1_4 = koza.getCombined金融機関コードand支店コード();
             }
             if (null != koza.get預金種別()) {
                 source.list1_5 = koza.get預金種別().get預金種別略称().substringReturnAsPossible(NUMBER_0, NUMBER_2);
             }
             source.list1_6 = koza.get口座番号();
             if (null != koza.get金融機関()) {
-                source.list2_19 = koza.get金融機関().get金融機関名称();
+                source.list2_19 = koza.getCombined金融機関名and支店名();
             }
             if (null != koza.get口座名義人()) {
-                source.list3_19 = koza.get口座名義人().value();
+                source.list3_19 = koza.get口座名義人漢字().value();
             }
         }
     }
@@ -495,12 +500,16 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         FlexibleDate 生年月日 = 宛名.getSeinengappiYMD();
         if (null != 生年月日) {
             source.seinengappiYMD = 生年月日.seireki().toDateString();
+        } else {
+            source.seinengappiYMD = RString.EMPTY;
         }
-        source.seibetsuCode = 宛名.getSeibetsuCode();
+        source.seibetsuCode = 宛名.getSeibetsuCode() == null ? RString.EMPTY : 宛名.getSeibetsuCode();
         source.shichosonCode = getColumnValue(計算後情報_宛名_口座_更正後Entity.get賦課市町村コード());
         source.hihokenshaNo = getColumnValue(計算後情報_宛名_口座_更正後Entity.get被保険者番号());
-        source.nenkinCode = 計算後情報_宛名_口座_更正後Entity.get本徴収_年金コード();
-        source.nenkinNo = 計算後情報_宛名_口座_更正後Entity.get本徴収_基礎年金番号();
+        source.nenkinCode = 計算後情報_宛名_口座_更正後Entity.get本徴収_年金コード() == null
+                ? RString.EMPTY : 計算後情報_宛名_口座_更正後Entity.get本徴収_年金コード();
+        source.nenkinNo = 計算後情報_宛名_口座_更正後Entity.get本徴収_基礎年金番号() == null
+                ? RString.EMPTY : 計算後情報_宛名_口座_更正後Entity.get本徴収_基礎年金番号();
     }
 
     private RString getColumnValue(IDbColumnMappable column) {
@@ -511,7 +520,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     }
 
     private RString toカンマ編集(Decimal 金額) {
-        return DecimalFormatter.toコンマ区切りRString(金額, 0);
+        RString rs金額 = DecimalFormatter.toコンマ区切りRString(金額, 0);
+        return RString.isNullOrEmpty(rs金額) ? ZERO : rs金額;
     }
 
     private RString set改頁項目(RString 改頁項目) {

@@ -48,7 +48,6 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44001.GennendoIdoFu
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
@@ -100,7 +99,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
-import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
@@ -120,7 +118,6 @@ import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamoku
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
-import jp.co.ndensan.reams.uz.uza.batch.journal.JournalWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
@@ -692,34 +689,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
             TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
 
-            if (月別保険料段階 == null) {
-                for (SetaiShotokuEntity setaiShotokuEntity : 賦課計算の情報.get世帯員所得情報()) {
-                    if (HonninKubun.世帯構成員.getCode().equals(setaiShotokuEntity.getHonninKubun())) {
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("世帯：")
-                                .concat(setaiShotokuEntity.getSetaiCode() == null
-                                        ? new RString("null") : setaiShotokuEntity.getSetaiCode().getColumnValue()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("識別コード：")
-                                .concat(setaiShotokuEntity.getShikibetsuCode() == null
-                                        ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("課税区分：")
-                                .concat(setaiShotokuEntity.getKazeiKubun()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：")
-                                .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
-                                        ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：")
-                                .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
-                                        ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
-                    } else {
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人識別コード：")
-                                .concat(setaiShotokuEntity.getShikibetsuCode() == null
-                                        ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人課税区分：")
-                                .concat(setaiShotokuEntity.getKazeiKubun()));
-                    }
-                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));
-                }
-            }
-
             NengakuHokenryoKeisanParameter 年額保険料パラメータ = new NengakuHokenryoKeisanParameter();
             年額保険料パラメータ.set賦課年度(param.get賦課年度());
 
@@ -844,8 +813,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         }
         ChoshuHoho 徴収方法の情報 = new ChoshuHoho(賦課計算の情報.get徴収方法の情報());
         if ((賦課の情報_更正後.get調定年度().equals(賦課の情報_更正後.get賦課年度())
-                && isDecimal変更(賦課の情報_更正後.get減免前介護保険料_年額(), 年額保険料)
-                || !RString.isNullOrEmpty(徴収方法の情報.get特別徴収停止事由コード()))) {
+                && (賦課の情報_設定前.get減免前介護保険料_年額() == null ? Decimal.ZERO : 賦課の情報_設定前.get減免前介護保険料_年額())
+                .compareTo(年額保険料) != 0)
+                || !RString.isNullOrEmpty(徴収方法の情報.get特別徴収停止事由コード())) {
             CaluculateChoteiResult 調定計算 = caluculateChotei(param.get算定月(), param.get調定日時(), 賦課の情報_更正後,
                     new ChoshuHoho(賦課計算の情報.get徴収方法の情報()), new HihokenshaDaicho(賦課計算の情報.get資格の情報()),
                     年額保険料);
@@ -857,7 +827,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         } else if (賦課の情報_更正後.get減免額() != null && 0 < 賦課の情報_更正後.get減免額().doubleValue()) {
             賦課エラー登録処理(賦課の情報_更正後, param.get賦課年度(), new Code(ErrorCode.賦課に減免あり.getコード()));
         } else if (ShokkenKubun.非該当.getコード().equals(賦課の情報_更正後.get職権区分())
-                && (賦課の情報_更正後.get減免額() == null || Decimal.ZERO.equals(賦課の情報_更正後.get減免額()))) {
+                && (賦課の情報_更正後.get減免額() == null || Decimal.ZERO.compareTo(賦課の情報_更正後.get減免額()) == 0)) {
             FukaJohoBuilder builder = 賦課の情報_更正後.createBuilderForEdit();
             if (!is変化有り(賦課の情報_設定前, 賦課の情報_更正後)) {
                 return;
@@ -933,7 +903,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     }
 
     private boolean is金額あり(Decimal 金額) {
-        return 金額 != null && !Decimal.ZERO.equals(金額);
+        return 金額 != null && Decimal.ZERO.compareTo(金額) != 0;
     }
 
     private LasdecCode get最終月の市町村コード(List<MonthShichoson> 月別ランク情報) {
@@ -1206,7 +1176,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         if (更正後 == null) {
             更正後 = Decimal.ZERO;
         }
-        return !更正後.equals(更正前);
+        return 更正後.compareTo(更正前) != 0;
     }
 
     /**

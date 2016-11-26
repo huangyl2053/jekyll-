@@ -19,7 +19,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 過誤決定通知書情報取込一覧表（保険者分） 帳票KagoKetteitsuchishoTorikomiIchiranHokenshaBunHeaderEditor
+ * 過誤決定通知書情報取込一覧表（保険者分）
+ * 帳票KagoKetteitsuchishoTorikomiIchiranHokenshaBunHeaderEditor
  *
  * @reamsid_L DBC-0980-470 lijunjun
  */
@@ -66,7 +67,14 @@ public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunHeaderEditor implement
         source.shutsuryokujun3 = get並び順(INDEX_3);
         source.shutsuryokujun4 = get並び順(INDEX_4);
         source.shutsuryokujun5 = get並び順(INDEX_5);
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource source) {
+        if (source.shoKisaiHokenshaNo == null) {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
     }
 
     private RString get並び順(int index) {

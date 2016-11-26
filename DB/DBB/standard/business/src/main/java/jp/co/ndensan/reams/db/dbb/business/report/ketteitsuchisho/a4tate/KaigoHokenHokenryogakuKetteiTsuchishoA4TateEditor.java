@@ -90,7 +90,7 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoA4TateEditor implements IKaigo
         reportSource.hyojicodeName2 = 表示コード.get表示コード名２();
         reportSource.hyojicodeName3 = 表示コード.get表示コード名３();
         reportSource.kakuteiHokenryoGaku = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
-        reportSource.kongoNofusubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額(), 0);
+        reportSource.kongoNofusubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額_収入元に(), 0);
         reportSource.korekaraChoshuho = 更正後.get徴収方法();
         reportSource.koseiNaiyo = new RString("年額保険料が");
         reportSource.koseiNaiyo2 = RString.EMPTY;

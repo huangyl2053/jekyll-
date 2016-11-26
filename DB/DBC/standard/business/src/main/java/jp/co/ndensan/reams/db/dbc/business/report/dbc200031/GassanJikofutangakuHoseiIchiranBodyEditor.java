@@ -7,11 +7,13 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc200031;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200031.GassanJikofutangakuHoseiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200031.GassanJikofutangakuHoseiIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -49,6 +51,7 @@ public class GassanJikofutangakuHoseiIchiranBodyEditor
         }
         edit明細(source);
         edit出力項目(source);
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -71,6 +74,8 @@ public class GassanJikofutangakuHoseiIchiranBodyEditor
         if (entity.get申請対象年度() != null) {
             source.listList1_6 = entity.get申請対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        } else {
+            source.listList1_6 = RString.EMPTY;
         }
         if (entity.get介護加入期間開始() != null
                 && entity.get介護加入期間終了() != null) {
@@ -98,6 +103,8 @@ public class GassanJikofutangakuHoseiIchiranBodyEditor
         source.add_shichosonCode = getColumnValue(entity.get市町村コード());
         if (entity.get申請年月日() != null && !entity.get申請年月日().isEmpty()) {
             source.add_shinnseiYMD = new RString(entity.get申請年月日().toString());
+        } else {
+            source.add_shinnseiYMD = RString.EMPTY;
         }
         source.add_yubinNo = getColumnValue(entity.get郵便番号());
     }
@@ -123,5 +130,20 @@ public class GassanJikofutangakuHoseiIchiranBodyEditor
         return date.wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
                 .fillType(FillType.BLANK).toDateString();
+    }
+
+    private void setPageBreakEmpty(GassanJikofutangakuHoseiIchiranSource source) {
+        if (source.listList1_5 == null) {
+            source.listList1_5 = RString.EMPTY;
+        }
+        if (entity.get申請書整理番号() == null) {
+            entity.set申請書整理番号(RString.EMPTY);
+        }
+        if (entity.get被保険者番号() == null) {
+            entity.set被保険者番号(HihokenshaNo.EMPTY);
+        }
+        if (entity.get申請対象年度() == null) {
+            entity.set申請対象年度(FlexibleYear.EMPTY);
+        }
     }
 }

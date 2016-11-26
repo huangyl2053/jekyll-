@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbb.business.core.shotokujohochushutsu.ShotokuJoho
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112001.DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -148,8 +148,13 @@ public class ShotokuJohoChushutsuRenkeitanitu {
 
     private RString 基準日時2(YMDHMS 基準日時, FlexibleYear 年度) {
         if (基準日時 != null && !基準日時.isEmpty()) {
-            DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity
-                    = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課, ShoriName.所得引出.get名称(), 枝番, 年度);
+            DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity = null;
+
+            List<DbT7022ShoriDateKanriEntity> 処理日付管理異動情報List
+                    = 処理日付管理Dac.select非課税年金対象者情報for広域BY主キー(SubGyomuCode.DBB介護賦課, ShoriName.所得引出.get名称(), 枝番, 年度);
+            if (処理日付管理異動情報List != null && !処理日付管理異動情報List.isEmpty()) {
+                処理日付管理異動情報Entity = 処理日付管理異動情報List.get(0);
+            }
             if (処理日付管理異動情報Entity != null) {
                 return 可;
             } else {

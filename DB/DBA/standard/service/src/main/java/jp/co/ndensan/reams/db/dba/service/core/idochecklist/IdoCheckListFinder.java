@@ -71,7 +71,7 @@ public class IdoCheckListFinder {
      * @return IdoCheckListResult
      */
     public SearchResult<IdoCheckListResult> getKaisiShuryobi() {
-        DbT7022ShoriDateKanriEntity entity = dac.selectKaishiShuryoYMD(
+        DbT7022ShoriDateKanriEntity entity = dac.select処理日付管理BYサブ業務コードAND処理名(
                 SubGyomuCode.DBA介護資格, new RString("異動チェックリスト"));
         if (entity == null) {
             return SearchResult.of(Collections.<IdoCheckListResult>emptyList(), 0, false);

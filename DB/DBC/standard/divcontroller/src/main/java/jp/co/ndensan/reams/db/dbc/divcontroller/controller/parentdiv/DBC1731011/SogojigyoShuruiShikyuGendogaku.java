@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.sogojigyoshurui.SogojigyoShuruiSearchResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1731011.DBC1731011StateName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1731011.DBC1731011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1731011.SogojigyoShuruiShikyuGendogakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1731011.SogojigyoShuruiShikyuGendogakuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1731011.SogojigyoShuruiShikyuGendogakuValidationHandler;
@@ -153,18 +154,37 @@ public class SogojigyoShuruiShikyuGendogaku {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
-        } else {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
-            }
+        } else if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             List<SogojigyoShuruiSearchResult> 総合事業種類情報 = ViewStateHolder.get(ViewStateKeys.総合事業種類情報, List.class);
             SogoJigyoShuruiShikyuGendoGakuManager manager = InstanceProvider.create(SogoJigyoShuruiShikyuGendoGakuManager.class);
             getHandler(div).save(総合事業種類情報, 保存モード, manager);
-            setGrid一覧表示(div);
+            return ResponseData.of(div).setState(DBC1731011StateName.完了状態);
+        } else {
+            return ResponseData.of(div).setState(DBC1731011StateName.初期状態);
         }
+    }
+
+    /**
+     * 「登録処理を続ける」ボタン押下時のメソッドです。
+     *
+     * @param div SogojigyoShuruiShikyuGendogakuDiv
+     * @return ResponseData<SogojigyoShuruiShikyuGendogakuDiv>
+     */
+    public ResponseData<SogojigyoShuruiShikyuGendogakuDiv> onClick_btnContinue(SogojigyoShuruiShikyuGendogakuDiv div) {
+        setGrid一覧表示(div);
         return ResponseData.of(div).setState(DBC1731011StateName.初期状態);
     }
 
+    /**
+     * 「完了」ボタン押下時のメソッドです。
+     *
+     * @param div SogojigyoShuruiShikyuGendogakuDiv
+     * @return ResponseData<SogojigyoShuruiShikyuGendogakuDiv>
+     */
+    public ResponseData<SogojigyoShuruiShikyuGendogakuDiv> onClick_btnComplete(SogojigyoShuruiShikyuGendogakuDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC1731011TransitionEventName.処理完了).respond();
+    }
 }

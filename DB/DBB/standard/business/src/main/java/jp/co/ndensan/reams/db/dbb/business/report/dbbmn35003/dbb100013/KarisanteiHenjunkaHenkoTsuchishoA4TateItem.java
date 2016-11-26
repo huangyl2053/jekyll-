@@ -113,5 +113,7 @@ public class KarisanteiHenjunkaHenkoTsuchishoA4TateItem {
     private RString yubinBango;
     private RString setainusimei;
     private RString samaKata;
+    private RString nofuSubekiGaku;
+    private RString kongoNofuSubekiGakuChotei;
 
 }

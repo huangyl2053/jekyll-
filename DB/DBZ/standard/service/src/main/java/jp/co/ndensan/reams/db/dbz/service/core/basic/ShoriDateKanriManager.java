@@ -42,6 +42,7 @@ public class ShoriDateKanriManager {
     private static final RString 開始時分秒 = new RString("000000");
     private static final RString 終了時分秒 = new RString("235959");
     private static final RString 処理年度 = new RString("年度");
+    private static final FlexibleYear 年度_0000 = new FlexibleYear("0000");
 
     /**
      * コンストラクタです。
@@ -176,7 +177,8 @@ public class ShoriDateKanriManager {
                 サブ業務コード,
                 市町村コード,
                 処理名,
-                処理枝番);
+                処理枝番,
+                年度_0000);
         if (entity == null) {
             return null;
         }
@@ -453,7 +455,8 @@ public class ShoriDateKanriManager {
         requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
 
-        DbT7022ShoriDateKanriEntity entity = dac.select基準日時ByKey(市町村コード, 処理名, 処理枝番, 年度);
+        DbT7022ShoriDateKanriEntity entity = dac
+                .select処理日付管理マスタ(SubGyomuCode.DBB介護賦課, 市町村コード, 処理名, 処理枝番, 年度);
         if (entity == null) {
             return null;
         }
@@ -489,7 +492,8 @@ public class ShoriDateKanriManager {
     @Transaction
     public ShoriDateKanri get抽出期間() {
 
-        DbT7022ShoriDateKanriEntity entity = dac.select抽出期間(ShoriName.更正対象給付実績一覧.get名称());
+        DbT7022ShoriDateKanriEntity entity = dac.
+                select処理日付管理BYサブ業務コードAND処理名(SubGyomuCode.DBC介護給付, ShoriName.更正対象給付実績一覧.get名称());
         if (entity == null) {
             return null;
         }
@@ -630,7 +634,7 @@ public class ShoriDateKanriManager {
         requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
         requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage(処理年度メッセージ.toString()));
         List<ShoriDateKanri> shoriDateKanriList = new ArrayList<>();
-        List<DbT7022ShoriDateKanriEntity> entityList = dac.select非課税年金対象者情報for広域(
+        List<DbT7022ShoriDateKanriEntity> entityList = dac.select非課税年金対象者情報for広域BY主キー(
                 サブ業務コード,
                 処理名,
                 処理枝番,
@@ -752,7 +756,11 @@ public class ShoriDateKanriManager {
     @Transaction
     public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_所得情報抽出連携異動(
             FlexibleYear 年度, RString 処理名, RString 処理枝番, SubGyomuCode サブ業務コード) {
-        return dac.selectByFourKeys(サブ業務コード, 処理名, 処理枝番, 年度);
+        List<DbT7022ShoriDateKanriEntity> resultList = dac.select非課税年金対象者情報for広域BY主キー(サブ業務コード, 処理名, 処理枝番, 年度);
+        if (resultList != null && !resultList.isEmpty()) {
+            return resultList.get(0);
+        }
+        return null;
     }
 
     /**
@@ -825,7 +833,7 @@ public class ShoriDateKanriManager {
      */
     public ShoriDateKanri get年次の実施日時(FlexibleYear 年度) {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(処理年度.toString()));
-        DbT7022ShoriDateKanriEntity entity = dac.get年次の実施日時(年度, ShoriName.年次利用者負担割合判定.get名称());
+        DbT7022ShoriDateKanriEntity entity = dac.get年次またはの実施日時(年度, ShoriName.年次利用者負担割合判定.get名称());
         if (entity == null) {
             return null;
         }
@@ -841,7 +849,7 @@ public class ShoriDateKanriManager {
      */
     public ShoriDateKanri get異動の実施日時(FlexibleYear 年度) {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(処理年度.toString()));
-        DbT7022ShoriDateKanriEntity entity = dac.get異動の実施日時(年度, ShoriName.異動分利用者負担割合判定.get名称());
+        DbT7022ShoriDateKanriEntity entity = dac.get年次またはの実施日時(年度, ShoriName.異動分利用者負担割合判定.get名称());
         if (entity == null) {
             return null;
         }

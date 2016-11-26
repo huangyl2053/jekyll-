@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -115,10 +116,21 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     }
 
     private HonsanteiKekkaIcihiranReportSource editSource(HonsanteiKekkaIcihiranReportSource source) {
-
+        source.listUpper_4 = RString.EMPTY;
+        source.fukaShichosonCode = RString.EMPTY;
+        source.listUpper_1 = RString.EMPTY;
+        source.choshuHoho = RString.EMPTY;
+        source.listCenter_1 = RString.EMPTY;
+        source.listUpper_8 = RString.EMPTY;
+        source.listUpper_7 = RString.EMPTY;
+        source.listUpper_5 = RString.EMPTY;
+        source.listUpper_6 = RString.EMPTY;
+        source.kanaMeisho = RString.EMPTY;
+        source.listUpper_3 = RString.EMPTY;
         editorSource_partONE(計算後情報_宛名_口座Entity, source);
         editorSource_partTWO(計算後情報_宛名_口座Entity, source);
         editorSource_partTHREE(計算後情報_宛名_口座Entity, source);
+        editorSource_partFOUR(計算後情報_宛名_口座Entity, source);
         return source;
     }
 
@@ -692,6 +704,22 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
                 break;
             default:
                 break;
+        }
+    }
+
+    private void editorSource_partFOUR(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座Entity,
+            HonsanteiKekkaIcihiranReportSource source) {
+        if (計算後情報_宛名_口座Entity.get賦課市町村コード() != null) {
+            source.fukaShichosonCode = 計算後情報_宛名_口座Entity.get賦課市町村コード().code市町村RString();
+        }
+        if (計算後情報_宛名_口座Entity.get宛名Entity() != null) {
+            AtenaKanaMeisho kanaMeisho = 計算後情報_宛名_口座Entity.get宛名Entity().getKanaMeisho();
+            if (kanaMeisho != null) {
+                source.kanaMeisho = kanaMeisho.value();
+            }
+        }
+        if (計算後情報_宛名_口座Entity.get徴収方法() != null) {
+            source.choshuHoho = 計算後情報_宛名_口座Entity.get徴収方法();
         }
     }
 

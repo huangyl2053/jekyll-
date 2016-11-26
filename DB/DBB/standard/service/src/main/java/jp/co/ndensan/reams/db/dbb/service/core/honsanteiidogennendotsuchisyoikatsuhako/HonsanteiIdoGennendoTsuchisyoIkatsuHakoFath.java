@@ -730,8 +730,8 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
         } else {
             bodyList.add(編集後本算定通知書共通情報.get更正後().get保険料段階());
         }
-        bodyList.add(isNull(編集後本算定通知書共通情報.get今後納付すべき額())
-                ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString()));
+        bodyList.add(isNull(編集後本算定通知書共通情報.get今後納付すべき額_収入元に())
+                ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get今後納付すべき額_収入元に().toString()));
         set次期以降(編集後本算定通知書共通情報, 出力期, bodyList);
         bodyList.add(get口座情報(編集後本算定通知書共通情報));
         toBodyList(bodyList);

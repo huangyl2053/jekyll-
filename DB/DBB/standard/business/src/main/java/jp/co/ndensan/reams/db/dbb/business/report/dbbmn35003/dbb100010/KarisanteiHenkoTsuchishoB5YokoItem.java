@@ -39,6 +39,8 @@ public class KarisanteiHenkoTsuchishoB5YokoItem {
     private RString tsuchishoNo;
     private RString setaiCode;
     private RString kongoNofuSubekiGaku;
+    private RString kongoNofuSubekiGakuChotei;
+    private RString nofuSubekiGaku;
     private RString mitoraikiNofuzumiGaku;
     private RString hihokenshaNo;
     private RString shikibetsuCode;

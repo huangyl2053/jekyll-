@@ -200,6 +200,10 @@ public class KarisanteiHenkoTsuchishoA4TateReportSource implements IReportSource
     public RString naisenNo;
     @ReportItem(name = "telNo", length = 20, order = 92)
     public RString telNo;
+    @ReportItem(name = "kongoNofuSubakiGakuChotei", order = 93)
+    public RString kongoNofuSubakiGakuChotei;
+    @ReportItem(name = "nofuSubekiGaku", order = 94)
+    public RString nofuSubekiGaku;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
