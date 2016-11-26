@@ -236,7 +236,12 @@
 
     <resultMap id="resultMap_RiyoshaFutanWariaiShoTemp" autoMapping="true"
                    type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity">
+        <id column="dbT3113RiyoshaFutanWariai_nendo"/>
+        <id column="dbT3113RiyoshaFutanWariai_hihokenshaNo"/>
+        <id column="dbT3113RiyoshaFutanWariai_rirekiNo"/>
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>
+        <id column="dbT1001HihokenshaDaicho_idoYMD"/>
+        <id column="dbT1001HihokenshaDaicho_edaNo"/>
         <result property="事業対象者受給者区分" column="kubun"
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="証記載保険者番号" column="shokisaiHihokenshaNo"
@@ -601,7 +606,12 @@
 
     <resultMap id="resultMap_RiyoshaFutanWariaiSho" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity">
+        <id column="dbT3113RiyoshaFutanWariai_nendo"/>
+        <id column="dbT3113RiyoshaFutanWariai_hihokenshaNo"/>
+        <id column="dbT3113RiyoshaFutanWariai_rirekiNo"/>
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>
+        <id column="dbT1001HihokenshaDaicho_idoYMD"/>
+        <id column="dbT1001HihokenshaDaicho_edaNo"/>
         <result property="事業対象者受給者区分" column="kubun"
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="証記載保険者番号" column="shokisaiHihokenshaNo"
