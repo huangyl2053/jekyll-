@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunkeisankekkarenraku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -35,7 +34,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
     private final JigyobunShikyugakuKeisanResultEntity dataEntity;
     private final NinshoshaSource 認証者;
     private final IShikibetsuTaisho 宛名データ;
-    private final ToiawasesakiSource 問い合わせ先;
+    private final RString 通知書定型文3;
     private final boolean flag;
     private final boolean isBreak;
     private final int count;
@@ -58,7 +57,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
      * @param dataEntity JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity
      * @param 認証者 NinshoshaSource
      * @param 宛名データ IShikibetsuTaisho
-     * @param 問い合わせ先 IToiawasesakiSourceBuilder
+     * @param 通知書定型文3 RString
      * @param flag boolean
      * @param isBreak boolean
      * @param count int
@@ -66,13 +65,13 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
     public GassanJigyobunKeisanKekkaRenrakuhyoEditor(RString 通知書定型文1, RString 通知書定型文2,
             JigyobunShikyugakuKeisanResultEntity dataEntity, NinshoshaSource 認証者,
             IShikibetsuTaisho 宛名データ,
-            ToiawasesakiSource 問い合わせ先, boolean flag, boolean isBreak, int count) {
+            RString 通知書定型文3, boolean flag, boolean isBreak, int count) {
         this.通知書定型文1 = 通知書定型文1;
         this.通知書定型文2 = 通知書定型文2;
         this.dataEntity = dataEntity;
         this.認証者 = 認証者;
         this.宛名データ = 宛名データ;
-        this.問い合わせ先 = 問い合わせ先;
+        this.通知書定型文3 = 通知書定型文3;
         this.flag = flag;
         this.isBreak = isBreak;
         this.count = count;
@@ -116,12 +115,8 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
     }
 
     private void edit問い合わせ先(GassanJigyobunKeisanKekkaRenrakuhyoSource source) {
-        if (問い合わせ先 != null) {
-            source.yubinBango = 問い合わせ先.yubinBango;
-            source.shozaichi = 問い合わせ先.shozaichi;
-            source.choshaBushoName = 問い合わせ先.choshaBushoName;
-            source.tantoName = 問い合わせ先.tantoName;
-            source.telNo = 問い合わせ先.telNo;
+        if (通知書定型文3 != null) {
+            source.toiawasesaki = 通知書定型文3;
         }
     }
 

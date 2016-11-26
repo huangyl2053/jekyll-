@@ -25,12 +25,32 @@ var DBZ;
     (function (HokenshaJoho) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
+                this.getTxtHokenshaNo_labelLWidth = function () {
+                    return this.controls.txtHokenshaNo().labelLWidth;
+                };
+                this.setTxtHokenshaNo_labelLWidth = function (value) {
+                    this.controls.txtHokenshaNo().labelLWidth = value;
+                };
+                this.getTxtHokenshaNo_required = function () {
+                    return this.controls.txtHokenshaNo().required;
+                };
+                this.setTxtHokenshaNo_required = function (value) {
+                    this.controls.txtHokenshaNo().required = value;
+                };
+                this.getTxtHokenshaNo_labelLText = function () {
+                    return this.controls.txtHokenshaNo().labelLText;
+                };
+                this.setTxtHokenshaNo_labelLText = function (value) {
+                    this.controls.txtHokenshaNo().labelLText = value;
+                };
                 this.fieldName = fieldName;
                 this.controls = new HokenshaJoho.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
-
+                editTypes.addEditType("TxtHokenshaNo_labelLWidth", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("TxtHokenshaNo_required", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("TxtHokenshaNo_labelLText", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             };
             return PublicProperties;

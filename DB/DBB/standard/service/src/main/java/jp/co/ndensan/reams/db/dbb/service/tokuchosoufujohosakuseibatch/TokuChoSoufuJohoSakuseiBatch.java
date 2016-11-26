@@ -14,11 +14,11 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohos
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT1704KaigoTokuchoTorikomiRirekiEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -292,12 +293,12 @@ public class TokuChoSoufuJohoSakuseiBatch {
             TokuChoSoufuJohoSakuseiResult entity, RDate 特徴開始月, RString 徴収方法n月, YMDHMS 基準日時,
             RString 特徴開始月_6月捕捉, RString 特徴開始月_8月捕捉) {
         setDT各種区分(tokuchotempentity, entity, 徴収方法n月);
-        tokuchotempentity.setDtShoriKekka(RString.FULL_SPACE);
+        tokuchotempentity.setDtShoriKekka(new RString("00"));
         tokuchotempentity.setDtKokiIkanCode(RString.FULL_SPACE);
         if (基準日時 != null && !基準日時.isEmpty()) {
             setDT各種金額欄12(tokuchotempentity, entity, 特徴開始月);
         }
-        tokuchotempentity.setDtKakushuKingaku3(entity.get対象者の情報().getDT各種金額欄３());
+        tokuchotempentity.setDtKakushuKingaku3(fromat各種金額(entity.get対象者の情報().getDT各種金額欄３()));
         tokuchotempentity.setDtYobi2(RString.FULL_SPACE);
         tokuchotempentity.setDtKyosaiNenkinshoshoKigoNo(entity.get対象者の情報().getDT共済年金証書記号番号());
         if (!RS03.equals(tokuchotempentity.getDtKakushuKubun())) {
@@ -338,10 +339,10 @@ public class TokuChoSoufuJohoSakuseiBatch {
         if (null != 賦課の情報 && TsuchiNaiyoCodeType.特別徴収対象者情報.equals(
                 entity.get対象者の情報().getDT通知内容コード().value())) {
             if (賦課の情報.get特徴期別金額04() != null) {
-                tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額04().toString()));
+                tokuchotempentity.setDtKakushuKingaku1(fromat各種金額(賦課の情報.get特徴期別金額04()));
             }
             if (賦課の情報.get特徴期別金額05() != null) {
-                tokuchotempentity.setDtKakushuKingaku2(new RString(賦課の情報.get特徴期別金額05().toString()));
+                tokuchotempentity.setDtKakushuKingaku2(fromat各種金額(賦課の情報.get特徴期別金額05()));
             }
         } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.equals(
                 entity.get対象者の情報().getDT通知内容コード().value())) {
@@ -351,32 +352,46 @@ public class TokuChoSoufuJohoSakuseiBatch {
             if (null != 賦課の情報) {
                 setDT各種金額欄1(期, tokuchotempentity, 賦課の情報);
             }
-            tokuchotempentity.setDtKakushuKingaku2(RS0);
+            tokuchotempentity.setDtKakushuKingaku2(fromat各種金額(RS0));
         } else {
-            tokuchotempentity.setDtKakushuKingaku2(RS0);
+            tokuchotempentity.setDtKakushuKingaku2(fromat各種金額(RS0));
         }
     }
 
     private void setDT各種金額欄1(RString 期, UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity,
             FukaJoho 賦課の情報) {
         if (RS01.equals(期) && 賦課の情報.get特徴期別金額01() != null) {
-            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額01().toString()));
+            tokuchotempentity.setDtKakushuKingaku1(fromat各種金額(賦課の情報.get特徴期別金額01()));
         }
         if (RS02.equals(期) && 賦課の情報.get特徴期別金額02() != null) {
-            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額02().toString()));
+            tokuchotempentity.setDtKakushuKingaku1(fromat各種金額(賦課の情報.get特徴期別金額02()));
         }
         if (RS03.equals(期) && 賦課の情報.get特徴期別金額03() != null) {
-            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額03().toString()));
+            tokuchotempentity.setDtKakushuKingaku1(fromat各種金額(賦課の情報.get特徴期別金額03()));
         }
         if (RS04.equals(期) && 賦課の情報.get特徴期別金額04() != null) {
-            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額04().toString()));
+            tokuchotempentity.setDtKakushuKingaku1(fromat各種金額(賦課の情報.get特徴期別金額04()));
         }
         if (RS05.equals(期) && 賦課の情報.get特徴期別金額05() != null) {
-            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額05().toString()));
+            tokuchotempentity.setDtKakushuKingaku1(fromat各種金額(賦課の情報.get特徴期別金額05()));
         }
         if (RS06.equals(期) && 賦課の情報.get特徴期別金額06() != null) {
-            tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額06().toString()));
+            tokuchotempentity.setDtKakushuKingaku1(fromat各種金額(賦課の情報.get特徴期別金額06()));
         }
+    }
+
+    private RString fromat各種金額(RString 期別金額) {
+        if (RString.isNullOrEmpty(期別金額)) {
+            return RString.EMPTY;
+        }
+        return 期別金額.padZeroToLeft(NUM11);
+    }
+
+    private RString fromat各種金額(Decimal 期別金額) {
+        if (null == 期別金額) {
+            return RString.EMPTY;
+        }
+        return new RString(期別金額.toString()).padZeroToLeft(NUM11);
     }
 
     /**

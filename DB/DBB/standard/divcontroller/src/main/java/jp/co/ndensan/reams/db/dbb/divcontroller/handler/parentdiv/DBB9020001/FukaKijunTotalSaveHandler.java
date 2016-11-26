@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HokenryoDankaiPattern;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020001.FukaKijunTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020001.dgHokenryoDankai_Row;

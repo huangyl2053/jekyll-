@@ -75,8 +75,8 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
     private static final RString 文字列_連結符 = new RString("_");
     private static final RString 文字列_ハイフン = new RString("-");
     private static final RString 文字列_拡張子 = new RString(".xml");
-    private static final RString 文字列_中括弧 = new RString("]]");
-    private static final RString 文字列_CDATA = new RString("<![CDATA[");
+    private static final RString 文字列_CDATA後 = new RString("]]>");
+    private static final RString 文字列_CDATA前 = new RString("<![CDATA[");
     private static final RString 文字列_VERSION = new RString(" Version=");
     private static final RString 文字列_ENCODING = new RString("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
     private static final RString 文字列_TRUE = new RString("true");
@@ -143,7 +143,7 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
                         processParameter.get版番号(), processParameter.get基準日());
         mybatisParameter = TokuteiKojinJohoHensyuMybatisParamater.createParamter中間DB提供基本情報取得_標準(
                 転義符.concat(processParameter.get中間DBテーブル名()).concat(転義符), processParameter.get特定個人情報名コード());
-        副本データ = 文字列_CDATA.concat(文字列_ENCODING);
+        副本データ = 文字列_CDATA前.concat(文字列_ENCODING);
     }
 
     @Override
@@ -200,8 +200,8 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
                         項目版管理List.get(i).get特定個人情報項目コード()).concat(文字列_大なり);
             }
         }
-        if (!副本データ.contains(文字列_中括弧)) {
-            副本データ = 副本データ.concat(文字列_中括弧);
+        if (!副本データ.contains(文字列_CDATA後)) {
+            副本データ = 副本データ.concat(文字列_CDATA後);
         }
         setDBM20113AttachToBsEntityList(t);
         if (添付データ件数 != 0) {

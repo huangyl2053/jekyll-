@@ -4,308 +4,308 @@
 <!-- * @reamsid_L DBC-2860-030 suguangjun -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc100010.IKaishuriyushoSeikyushoShinseishoMapper">
-   <select id="get請求明細一時データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100010.KaishuriyushoSeikyushoShinseishoMybatisParameter"
-           resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.KaishuriyushoSeikyushoShinseishoEntity" resultOrdered="true" fetchSize="500">
-   SELECT   		
-	dbT3034."shoKisaiHokenshaNo" AS	証記載保険者番号,  
-	dbT3034."hiHokenshaNo" AS 被保険者番号 , 
-	dbT3034."jutakuShoyusha" AS 住宅所有者 , 
-	dbT3034."riyushoSakuseiYMD" AS	理由書作成日,  
-	dbT3034."riyushoSakuseiJigyoshaNo" AS 理由書作成事業者番号 , 
-	dbT3034."riyushoSakuseishaName" AS 理由書作成者 , 
-	dbT3034."riyushoSakuseishaKanaName" AS 理由書作成者カナ , 
-	dbT3034."shinseiYMD" AS	申請年月日 , 
-	dbT3034."uketsukeYMD" AS 受付年月日 ,
-	T1."serviceCode" AS サービスコード,  
-	T1."jutakuKaishuJigyoshaName" AS 住宅改修事業者名 , 
-	T1."jutakuKaishuChakkoYMD" AS 住宅改修着工年月日,  
-	T1."jutakuKaishuJutakuAddress" AS 住宅改修住宅住所,
-	T1."jutakuKaishuNaiyo" AS 住宅改修内容  
-    FROM   		
-	rgdb."DbT3034ShokanShinsei" AS dbT3034 
-    INNER JOIN    		
-	( SELECT   	
-		dbT3049."hiHokenshaNo" ,
-		dbT3049."serviceTeikyoYM" ,	
-		dbT3049."seiriNo" , 	
-		dbT3049."serviceCode", 	
-		dbT3049."jutakuKaishuJigyoshaName", 	
-		dbT3049."jutakuKaishuChakkoYMD", 	
-		dbT3049."jutakuKaishuJutakuAddress" ,	
-		dbT3049."jutakuKaishuNaiyo"	
-	FROM   	
-		rgdb."DbT3049ShokanJutakuKaishu" AS dbT3049 
-	WHERE dbT3049."isDeleted" = False 	
-		AND SUBSTRING(dbT3049."yoshikiNo" from 1 for 3)  = #{住宅改修費申請情報}	
-	) AS  T1 ON   	
-	T1."hiHokenshaNo" =	dbT3034."hiHokenshaNo" 
-	AND 
-	T1."serviceTeikyoYM" =	dbT3034."serviceTeikyoYM"  
-	AND
-	T1."seiriNo" =	dbT3034."seiriNo"
-	WHERE  dbT3034."isDeleted" = False  
-	AND #{作成申請年月日開始} <![CDATA[<=]]> dbT3034."riyushoSakuseiYMD"  
-	AND dbT3034."riyushoSakuseiYMD" <![CDATA[<=]]> #{作成申請年月日終了}  	
-	AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3095JutakuKaishuRiyushoTesuryoMeisai" AS dbT3095   		
- WHERE	dbT3095."shoKisaiHokenshaNo" = dbT3034."shoKisaiHokenshaNo"
-	AND			
- 	dbT3095."hihokenshaNo" = dbT3034."hiHokenshaNo"	
- 	AND		
- 	dbT3095."riyushoSakuseiJigyoshaNo" = dbT3034."riyushoSakuseiJigyoshaNo"	
- 	AND		
- 	dbT3095."riyushoSakuseiYMD" = dbT3034."riyushoSakuseiYMD"
- 	AND			
- 	dbT3095."isDeleted" =	False )		
-ORDER BY    
-	dbT3034."hiHokenshaNo"  DESC,    
-	dbT3034."serviceTeikyoYM"  DESC,    
-	dbT3034."seiriNo"  DESC    
-   </select>
-   
-   <sql id="申請">
-       申請."dbT3034_jutakuShoyusha" AS "dbT3034_jutakuShoyusha",
-       申請."dbT3034_riyushoSakuseiYMD" AS "dbT3034_riyushoSakuseiYMD",
-       申請."dbT3034_riyushoSakuseiJigyoshaNo" AS "dbT3034_riyushoSakuseiJigyoshaNo",
-       申請."dbT3034_riyushoSakuseishaName" AS "dbT3034_riyushoSakuseishaName",
-       申請."dbT3034_riyushoSakuseishaKanaName" AS "dbT3034_riyushoSakuseishaKanaName",
-       申請."dbT3034_shinseiYMD" AS "dbT3034_shinseiYMD",
-       申請."dbT3034_uketsukeYMD" AS "dbT3034_uketsukeYMD",
-       申請."dbT3049_serviceCode" AS "dbT3049_serviceCode",
-       申請."dbT3049_jutakuKaishuJigyoshaName" AS "dbT3049_jutakuKaishuJigyoshaName",
-       申請."dbT3049_jutakuKaishuChakkoYMD" AS "dbT3049_jutakuKaishuChakkoYMD",
-       申請."dbT3049_jutakuKaishuJutakuAddress" AS "dbT3049_jutakuKaishuJutakuAddress",
-       申請."dbT3049_jutakuKaishuNaiyo" AS "dbT3049_jutakuKaishuNaiyo"  
+    <select id="get請求明細一時データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100010.KaishuriyushoSeikyushoShinseishoMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.KaishuriyushoSeikyushoShinseishoEntity" resultOrdered="true" fetchSize="500">
+        SELECT
+        dbT3034."shoKisaiHokenshaNo" AS	証記載保険者番号,
+        dbT3034."hiHokenshaNo" AS 被保険者番号 ,
+        dbT3034."jutakuShoyusha" AS 住宅所有者 ,
+        dbT3034."riyushoSakuseiYMD" AS	理由書作成日,
+        dbT3034."riyushoSakuseiJigyoshaNo" AS 理由書作成事業者番号 ,
+        dbT3034."riyushoSakuseishaName" AS 理由書作成者 ,
+        dbT3034."riyushoSakuseishaKanaName" AS 理由書作成者カナ ,
+        dbT3034."shinseiYMD" AS	申請年月日 ,
+        dbT3034."uketsukeYMD" AS 受付年月日 ,
+        T1."serviceCode" AS サービスコード,
+        T1."jutakuKaishuJigyoshaName" AS 住宅改修事業者名 ,
+        T1."jutakuKaishuChakkoYMD" AS 住宅改修着工年月日,
+        T1."jutakuKaishuJutakuAddress" AS 住宅改修住宅住所,
+        T1."jutakuKaishuNaiyo" AS 住宅改修内容
+        FROM
+        rgdb."DbT3034ShokanShinsei" AS dbT3034
+        INNER JOIN
+        ( SELECT
+        dbT3049."hiHokenshaNo" ,
+        dbT3049."serviceTeikyoYM" ,
+        dbT3049."seiriNo" ,
+        dbT3049."serviceCode",
+        dbT3049."jutakuKaishuJigyoshaName",
+        dbT3049."jutakuKaishuChakkoYMD",
+        dbT3049."jutakuKaishuJutakuAddress" ,
+        dbT3049."jutakuKaishuNaiyo"
+        FROM
+        rgdb."DbT3049ShokanJutakuKaishu" AS dbT3049
+        WHERE dbT3049."isDeleted" = False
+        AND SUBSTRING(dbT3049."yoshikiNo" from 1 for 3)  = #{住宅改修費申請情報}
+        ) AS  T1 ON
+        T1."hiHokenshaNo" =	dbT3034."hiHokenshaNo"
+        AND
+        T1."serviceTeikyoYM" =	dbT3034."serviceTeikyoYM"
+        AND
+        T1."seiriNo" =	dbT3034."seiriNo"
+        WHERE  dbT3034."isDeleted" = False
+        AND #{作成申請年月日開始} <![CDATA[<=]]> dbT3034."riyushoSakuseiYMD"
+        AND dbT3034."riyushoSakuseiYMD" <![CDATA[<=]]> #{作成申請年月日終了}
+        AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3095JutakuKaishuRiyushoTesuryoMeisai" AS dbT3095
+        WHERE	dbT3095."shoKisaiHokenshaNo" = dbT3034."shoKisaiHokenshaNo"
+        AND
+        dbT3095."hihokenshaNo" = dbT3034."hiHokenshaNo"
+        AND
+        dbT3095."riyushoSakuseiJigyoshaNo" = dbT3034."riyushoSakuseiJigyoshaNo"
+        AND
+        dbT3095."riyushoSakuseiYMD" = dbT3034."riyushoSakuseiYMD"
+        AND
+        dbT3095."isDeleted" =	False )
+        ORDER BY
+        dbT3034."hiHokenshaNo"  DESC,
+        dbT3034."serviceTeikyoYM"  DESC,
+        dbT3034."seiriNo"  DESC
+    </select>
+
+    <sql id="申請">
+        申請."dbT3034_jutakuShoyusha" AS "dbT3034_jutakuShoyusha",
+        申請."dbT3034_riyushoSakuseiYMD" AS "dbT3034_riyushoSakuseiYMD",
+        申請."dbT3034_riyushoSakuseiJigyoshaNo" AS "dbT3034_riyushoSakuseiJigyoshaNo",
+        申請."dbT3034_riyushoSakuseishaName" AS "dbT3034_riyushoSakuseishaName",
+        申請."dbT3034_riyushoSakuseishaKanaName" AS "dbT3034_riyushoSakuseishaKanaName",
+        申請."dbT3034_shinseiYMD" AS "dbT3034_shinseiYMD",
+        申請."dbT3034_uketsukeYMD" AS "dbT3034_uketsukeYMD",
+        申請."dbT3049_serviceCode" AS "dbT3049_serviceCode",
+        申請."dbT3049_jutakuKaishuJigyoshaName" AS "dbT3049_jutakuKaishuJigyoshaName",
+        申請."dbT3049_jutakuKaishuChakkoYMD" AS "dbT3049_jutakuKaishuChakkoYMD",
+        申請."dbT3049_jutakuKaishuJutakuAddress" AS "dbT3049_jutakuKaishuJutakuAddress",
+        申請."dbT3049_jutakuKaishuNaiyo" AS "dbT3049_jutakuKaishuNaiyo"
     </sql>
-    
-   <select id="get請求明細データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100010.KaishuriyushoSeikyushoShinseishoMybatisParameter"
-           resultMap="resultMap_SeikyuMeisaiItiziDataEntity" resultOrdered="true" fetchSize="500">
-  SELECT
-       <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3095JutakuKaishuRiyushoTesuryoMeisaiMapper.allColumns_DbT3095JutakuKaishuRiyushoTesuryoMeisai" />,
-       <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3096JutakuKaishuRiyushoTesuryoShukeiMapper.allColumns_DbT3096JutakuKaishuRiyushoTesuryoShukei" />,  
-       <include refid="申請"/>
-    FROM
-	rgdb."DbT3095JutakuKaishuRiyushoTesuryoMeisai" AS "DbT3095JutakuKaishuRiyushoTesuryoMeisai"
-    INNER JOIN
-	(SELECT dbT3096.*
-	FROM rgdb."DbT3096JutakuKaishuRiyushoTesuryoShukei" AS dbT3096
-	WHERE dbT3096."isDeleted" = FALSE
+
+    <select id="get請求明細データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100010.KaishuriyushoSeikyushoShinseishoMybatisParameter"
+            resultMap="resultMap_SeikyuMeisaiItiziDataEntity" resultOrdered="true" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3095JutakuKaishuRiyushoTesuryoMeisaiMapper.allColumns_DbT3095JutakuKaishuRiyushoTesuryoMeisai" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3096JutakuKaishuRiyushoTesuryoShukeiMapper.allColumns_DbT3096JutakuKaishuRiyushoTesuryoShukei" />,
+        <include refid="申請"/>
+        FROM
+        rgdb."DbT3095JutakuKaishuRiyushoTesuryoMeisai" AS "DbT3095JutakuKaishuRiyushoTesuryoMeisai"
+        INNER JOIN
+        (SELECT dbT3096.*
+        FROM rgdb."DbT3096JutakuKaishuRiyushoTesuryoShukei" AS dbT3096
+        WHERE dbT3096."isDeleted" = FALSE
         AND dbT3096."shinseiYMD" = #{empty}
-	AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3094JutakuKaishuRiyushoTesuryoKettei" AS dbT3094
-	WHERE dbT3096."shukeiNo" = dbT3094."shukeiNo"
-	AND dbT3094."isDeleted" = FALSE)
-	) AS "DbT3096JutakuKaishuRiyushoTesuryoShukei"
-    ON
-	 "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."shukeiNo"= "DbT3096JutakuKaishuRiyushoTesuryoShukei"."shukeiNo"
-	AND  "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."isDeleted" = FALSE
-    LEFT JOIN
-	(SELECT 
-            dbT3034."jutakuShoyusha" AS "dbT3034_jutakuShoyusha",					
-            dbT3034."riyushoSakuseiYMD" AS "dbT3034_riyushoSakuseiYMD",				
-            dbT3034."riyushoSakuseiJigyoshaNo" AS "dbT3034_riyushoSakuseiJigyoshaNo",				
-            dbT3034."riyushoSakuseishaName" AS "dbT3034_riyushoSakuseishaName",				
-            dbT3034."riyushoSakuseishaKanaName" AS "dbT3034_riyushoSakuseishaKanaName",			
-            dbT3034."shinseiYMD"  AS "dbT3034_shinseiYMD",			
-            dbT3034."uketsukeYMD" AS "dbT3034_uketsukeYMD",			
-            dbT3049."serviceCode" AS "dbT3049_serviceCode",				
-            dbT3049."jutakuKaishuJigyoshaName" AS "dbT3049_jutakuKaishuJigyoshaName",				
-            dbT3049."jutakuKaishuChakkoYMD" AS "dbT3049_jutakuKaishuChakkoYMD",						
-            dbT3049."jutakuKaishuJutakuAddress" AS "dbT3049_jutakuKaishuJutakuAddress",			
-            dbT3049."jutakuKaishuNaiyo" AS "dbT3049_jutakuKaishuNaiyo",	
-            dbT3034."shoKisaiHokenshaNo" AS "dbT3034_shoKisaiHokenshaNo",
-            dbT3049."hiHokenshaNo" AS "dbT3049_hiHokenshaNo"
-	FROM rgdb."DbT3034ShokanShinsei" AS dbT3034  
-	INNER JOIN rgdb."DbT3049ShokanJutakuKaishu" AS dbT3049   
-	ON dbT3034."hiHokenshaNo"= dbT3049."hiHokenshaNo"
-	AND dbT3034."serviceTeikyoYM"= dbT3049."serviceTeikyoYM"
-	AND dbT3034."seiriNo"= dbT3049."seiriNo"
-	AND dbT3034."isDeleted" = FALSE
-	AND dbT3049."isDeleted" = FALSE
-	AND SUBSTRING(dbT3049."yoshikiNo" from 1 for 3) = #{住宅改修費申請情報}
-	) AS 申請
-    ON
-	 "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."shoKisaiHokenshaNo" = 申請."dbT3034_shoKisaiHokenshaNo"
-	AND  "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."hihokenshaNo" = 申請."dbT3049_hiHokenshaNo"
-	AND  "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiJigyoshaNo"= 申請."dbT3034_riyushoSakuseiJigyoshaNo"
-	AND  "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiYMD"= 申請."dbT3034_riyushoSakuseiYMD"
-   </select>
-   
-   <select resultOrdered="true" resultType="int" id="select採番件数" fetchSize="500">
-      SELECT COUNT(DISTINCT(tempSeikyuData."証記載保険者番号" || tempSeikyuData."介護住宅改修理由書作成事業者番号")) AS　採番件数																	
-       FROM 
-      "tempSeikyuMeisaiItiziData" AS tempSeikyuData															
+        AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT3094JutakuKaishuRiyushoTesuryoKettei" AS dbT3094
+        WHERE dbT3096."shukeiNo" = dbT3094."shukeiNo"
+        AND dbT3094."isDeleted" = FALSE)
+        ) AS "DbT3096JutakuKaishuRiyushoTesuryoShukei"
+        ON
+        "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."shukeiNo"= "DbT3096JutakuKaishuRiyushoTesuryoShukei"."shukeiNo"
+        AND  "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."isDeleted" = FALSE
+        LEFT JOIN
+        (SELECT
+        dbT3034."jutakuShoyusha" AS "dbT3034_jutakuShoyusha",
+        dbT3034."riyushoSakuseiYMD" AS "dbT3034_riyushoSakuseiYMD",
+        dbT3034."riyushoSakuseiJigyoshaNo" AS "dbT3034_riyushoSakuseiJigyoshaNo",
+        dbT3034."riyushoSakuseishaName" AS "dbT3034_riyushoSakuseishaName",
+        dbT3034."riyushoSakuseishaKanaName" AS "dbT3034_riyushoSakuseishaKanaName",
+        dbT3034."shinseiYMD"  AS "dbT3034_shinseiYMD",
+        dbT3034."uketsukeYMD" AS "dbT3034_uketsukeYMD",
+        dbT3049."serviceCode" AS "dbT3049_serviceCode",
+        dbT3049."jutakuKaishuJigyoshaName" AS "dbT3049_jutakuKaishuJigyoshaName",
+        dbT3049."jutakuKaishuChakkoYMD" AS "dbT3049_jutakuKaishuChakkoYMD",
+        dbT3049."jutakuKaishuJutakuAddress" AS "dbT3049_jutakuKaishuJutakuAddress",
+        dbT3049."jutakuKaishuNaiyo" AS "dbT3049_jutakuKaishuNaiyo",
+        dbT3034."shoKisaiHokenshaNo" AS "dbT3034_shoKisaiHokenshaNo",
+        dbT3049."hiHokenshaNo" AS "dbT3049_hiHokenshaNo"
+        FROM rgdb."DbT3034ShokanShinsei" AS dbT3034
+        INNER JOIN rgdb."DbT3049ShokanJutakuKaishu" AS dbT3049
+        ON dbT3034."hiHokenshaNo"= dbT3049."hiHokenshaNo"
+        AND dbT3034."serviceTeikyoYM"= dbT3049."serviceTeikyoYM"
+        AND dbT3034."seiriNo"= dbT3049."seiriNo"
+        AND dbT3034."isDeleted" = FALSE
+        AND dbT3049."isDeleted" = FALSE
+        AND SUBSTRING(dbT3049."yoshikiNo" from 1 for 3) = #{住宅改修費申請情報}
+        ) AS 申請
+        ON
+        "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."shoKisaiHokenshaNo" = 申請."dbT3034_shoKisaiHokenshaNo"
+        AND  "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."hihokenshaNo" = 申請."dbT3049_hiHokenshaNo"
+        AND  "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiJigyoshaNo"= 申請."dbT3034_riyushoSakuseiJigyoshaNo"
+        AND  "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiYMD"= 申請."dbT3034_riyushoSakuseiYMD"
     </select>
-    
-    <select id="get請求集計一時用データ" 
+
+    <select resultOrdered="true" resultType="int" id="select採番件数" fetchSize="500">
+        SELECT COUNT(DISTINCT(tempSeikyuData."証記載保険者番号" || tempSeikyuData."介護住宅改修理由書作成事業者番号")) AS　採番件数
+        FROM
+        "tempSeikyuMeisaiItiziData" AS tempSeikyuData
+    </select>
+
+    <select id="get請求集計一時用データ"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.SeikyuShukeiItiziDataEntity" resultOrdered="true" fetchSize="500">
-        SELECT COUNT(*) AS 件数,									
-		請求明細.証記載保険者番号,									
-		請求明細.介護住宅改修理由書作成事業者番号																											
-	FROM "tempSeikyuMeisaiItiziData"  AS 請求明細									
-	GROUP BY 請求明細.証記載保険者番号,									
-		 請求明細.介護住宅改修理由書作成事業者番号									
-	ORDER BY 請求明細.証記載保険者番号 ASC,	
-		 請求明細.介護住宅改修理由書作成事業者番号 ASC	
+        SELECT COUNT(*) AS 件数,
+        請求明細.証記載保険者番号,
+        請求明細.介護住宅改修理由書作成事業者番号
+        FROM "tempSeikyuMeisaiItiziData"  AS 請求明細
+        GROUP BY 請求明細.証記載保険者番号,
+        請求明細.介護住宅改修理由書作成事業者番号
+        ORDER BY 請求明細.証記載保険者番号 ASC,
+        請求明細.介護住宅改修理由書作成事業者番号 ASC
     </select>
-    
-    <select id="get請求明細集計関連番号データ" 
+
+    <select id="get請求明細集計関連番号データ"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.TempSeikyuMeisaiItiziDataEntity" resultOrdered="true" fetchSize="500">
-    SELECT 一時."証記載保険者番号" AS 証記載保険者番号,
-            一時."被保険者番号" AS 被保険者番号,
-            一時."履歴番号" AS 履歴番号,
-            一時."サービスコード" AS サービスコード,
-            一時."介護住宅改修事業者名称" AS 介護住宅改修事業者名称,
-            一時."介護住宅改修着工年月日" AS 介護住宅改修着工年月日,
-            一時."介護住宅改修住宅所有者" AS 介護住宅改修住宅所有者,
-            一時."改修対象住宅住所" AS 改修対象住宅住所,
-            一時."改修内容箇所及び規模" AS 改修内容箇所及び規模,
-            一時."介護住宅改修理由書作成年月日" AS 介護住宅改修理由書作成年月日,
-            一時."介護住宅改修理由書作成事業者番号" AS 介護住宅改修理由書作成事業者番号,
-            一時."介護住宅改修理由書作成者名" AS 介護住宅改修理由書作成者名,
-            一時."介護住宅改修理由書作成者名カナ" AS 介護住宅改修理由書作成者名カナ,
-            一時."介護住宅改修理由書作成申請年月日" AS 介護住宅改修理由書作成申請年月日,
-            一時."介護住宅改修理由書作成受付年月日" AS 介護住宅改修理由書作成受付年月日,
-            一時."集計関連付け番号" AS 集計関連付け番号,
-            一時."対象外フラグ" AS 対象外フラグ
+        SELECT 一時."証記載保険者番号" AS 証記載保険者番号,
+        一時."被保険者番号" AS 被保険者番号,
+        一時."履歴番号" AS 履歴番号,
+        一時."サービスコード" AS サービスコード,
+        一時."介護住宅改修事業者名称" AS 介護住宅改修事業者名称,
+        一時."介護住宅改修着工年月日" AS 介護住宅改修着工年月日,
+        一時."介護住宅改修住宅所有者" AS 介護住宅改修住宅所有者,
+        一時."改修対象住宅住所" AS 改修対象住宅住所,
+        一時."改修内容箇所及び規模" AS 改修内容箇所及び規模,
+        一時."介護住宅改修理由書作成年月日" AS 介護住宅改修理由書作成年月日,
+        一時."介護住宅改修理由書作成事業者番号" AS 介護住宅改修理由書作成事業者番号,
+        一時."介護住宅改修理由書作成者名" AS 介護住宅改修理由書作成者名,
+        一時."介護住宅改修理由書作成者名カナ" AS 介護住宅改修理由書作成者名カナ,
+        一時."介護住宅改修理由書作成申請年月日" AS 介護住宅改修理由書作成申請年月日,
+        一時."介護住宅改修理由書作成受付年月日" AS 介護住宅改修理由書作成受付年月日,
+        一時."集計関連付け番号" AS 集計関連付け番号,
+        一時."対象外フラグ" AS 対象外フラグ
         FROM "tempSeikyuMeisaiItiziData" AS 一時
     </select>
-    
-     <select id="get帳票出力用データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100010.KaishuriyushoSeikyushoShinseishoMybatisParameter"
-              resultMap="resultMap_ChouhyouShuturyokuYouDataEntity" resultOrdered="true" fetchSize="500">
-         SELECT	請求集計一時."介護住宅改修理由書作成事業者番号" AS 介護住宅改修理由書作成事業者番号,
-                請求集計一時."介護住宅改修理由書作成請求金額" AS 介護住宅改修理由書作成請求金額,
-                請求集計一時."介護住宅改修理由書作成単価" AS 介護住宅改修理由書作成単価,
-                請求集計一時."介護住宅改修理由書作成件数" AS 介護住宅改修理由書作成件数,		  	
-                請求明細一時."介護住宅改修事業者名称" AS 介護住宅改修事業者名称,
-                請求明細一時."介護住宅改修理由書作成年月日" AS 介護住宅改修理由書作成年月日,
-                請求明細一時."被保険者番号" AS 被保険者番号,
-                請求明細一時."改修対象住宅住所" AS 改修対象住宅住所,
-                請求明細一時."改修内容箇所及び規模" AS 改修内容箇所及び規模,
-                請求明細一時."介護住宅改修理由書作成者名" AS 介護住宅改修理由書作成者名,
-                宛名PSM."meisho" AS 名称,
-                宛名PSM."shikibetsuCode" AS 識別コード , 	
-                介護事業者."yubinNo" AS 郵便番号,
-                介護事業者."jigyoshaAddress" AS 住所,
-                介護事業者."jigyoshaName" AS 事業者名,
-                介護事業者."telNo" AS 電話番号,		  			
-                介護事業者代表者."daihyoshaShimei" AS 代表者名 		
-            FROM "tempSeikyuShukeiItiziData" AS 請求集計一時   		
-            INNER JOIN "tempSeikyuMeisaiItiziData" AS 請求明細一時   		
-            ON 請求集計一時.集計関連付け番号 = 請求明細一時.集計関連付け番号  	
-            INNER JOIN	
-              rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理 
-                ON 請求明細一時.被保険者番号 = 被保険者台帳管理."hihokenshaNo"  	
-            LEFT JOIN rgua.${psmShikibetsuTaisho} AS 宛名PSM  			
-                ON 被保険者台帳管理."shikibetsuCode" = 宛名PSM."shikibetsuCode"  	
-            LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS 介護事業者 
-            ON 請求集計一時.介護住宅改修理由書作成事業者番号  	= 介護事業者."jigyoshaNo" 		
-                AND 介護事業者."yukoShuryoYMD" = #{empty}		
-            LEFT JOIN rgdb."DbT7062KaigoJigyoshaDaihyosha" AS 介護事業者代表者
-                ON 介護事業者."jigyoshaNo" = 介護事業者代表者."jigyoshaNo" 		
-                AND 介護事業者."yukoKaishiYMD" = 介護事業者代表者."yukoKaishiYMD" 		
-            ORDER BY    
-                請求集計一時.集計関連付け番号 ASC,   			
-                請求明細一時.被保険者番号 ASC	
-     </select>
-   
-    <select id="get請求明細一時出力データ" 
-              resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.TempSeikyuMeisaiItiziDataEntity" resultOrdered="true" fetchSize="500">
-         SELECT
-            一時."証記載保険者番号" AS 証記載保険者番号
-            , 一時."被保険者番号" AS 被保険者番号
-            , 一時."履歴番号" AS 履歴番号
-            , 一時."サービスコード" AS サービスコード
-            , 一時."介護住宅改修事業者名称" AS 介護住宅改修事業者名称
-            , 一時."介護住宅改修着工年月日" AS 介護住宅改修着工年月日
-            , 一時."介護住宅改修住宅所有者" AS 介護住宅改修住宅所有者
-            , 一時."改修対象住宅住所" AS 改修対象住宅住所
-            , 一時."改修内容箇所及び規模" AS 改修内容箇所及び規模
-            , 一時."介護住宅改修理由書作成年月日" AS 介護住宅改修理由書作成年月日
-            , 一時."介護住宅改修理由書作成事業者番号" AS 介護住宅改修理由書作成事業者番号
-            , 一時."介護住宅改修理由書作成者名" AS 介護住宅改修理由書作成者名
-            , 一時."介護住宅改修理由書作成者名カナ" AS 介護住宅改修理由書作成者名カナ
-            , 一時."介護住宅改修理由書作成申請年月日" AS 介護住宅改修理由書作成申請年月日
-            , 一時."介護住宅改修理由書作成受付年月日" AS 介護住宅改修理由書作成受付年月日
-            , 一時."集計関連付け番号" AS 集計関連付け番号
-            , 一時."対象外フラグ" AS 対象外フラグ
-            , coalesce(ワーク.最大履歴番号, 0) AS 基準履歴番号
-            , row_number() over ( 
-              partition by
-                一時.証記載保険者番号
-                , 一時.被保険者番号 
-              order by
-                一時.証記載保険者番号 asc
-                , 一時.被保険者番号 asc
-            ) AS rowNum 
-          FROM
-            "tempSeikyuMeisaiItiziData" AS 一時 
-            LEFT JOIN ( 
-              SELECT
-                明細."shoKisaiHokenshaNo"
-                , 明細."hihokenshaNo"
-                , MAX(明細."rirekiNo") AS 最大履歴番号 
-              FROM
-                rgdb."DbT3095JutakuKaishuRiyushoTesuryoMeisai" AS 明細 
-              GROUP BY
-                明細."shoKisaiHokenshaNo"
-                , 明細."hihokenshaNo"
-            ) AS ワーク 
-              ON 一時.証記載保険者番号 = ワーク."shoKisaiHokenshaNo" 
-              AND 一時.被保険者番号 = ワーク."hihokenshaNo"
+
+    <select id="get帳票出力用データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100010.KaishuriyushoSeikyushoShinseishoMybatisParameter"
+             resultMap="resultMap_ChouhyouShuturyokuYouDataEntity" resultOrdered="true" fetchSize="500">
+        SELECT	請求集計一時."介護住宅改修理由書作成事業者番号" AS 介護住宅改修理由書作成事業者番号,
+        請求集計一時."介護住宅改修理由書作成請求金額" AS 介護住宅改修理由書作成請求金額,
+        請求集計一時."介護住宅改修理由書作成単価" AS 介護住宅改修理由書作成単価,
+        請求集計一時."介護住宅改修理由書作成件数" AS 介護住宅改修理由書作成件数,
+        請求明細一時."介護住宅改修事業者名称" AS 介護住宅改修事業者名称,
+        請求明細一時."介護住宅改修理由書作成年月日" AS 介護住宅改修理由書作成年月日,
+        請求明細一時."被保険者番号" AS 被保険者番号,
+        請求明細一時."改修対象住宅住所" AS 改修対象住宅住所,
+        請求明細一時."改修内容箇所及び規模" AS 改修内容箇所及び規模,
+        請求明細一時."介護住宅改修理由書作成者名" AS 介護住宅改修理由書作成者名,
+        宛名PSM."meisho" AS 名称,
+        宛名PSM."shikibetsuCode" AS 識別コード ,
+        介護事業者."yubinNo" AS 郵便番号,
+        介護事業者."jigyoshaAddress" AS 住所,
+        介護事業者."jigyoshaName" AS 事業者名,
+        介護事業者."telNo" AS 電話番号,
+        介護事業者代表者."daihyoshaShimei" AS 代表者名
+        FROM "tempSeikyuShukeiItiziData" AS 請求集計一時
+        INNER JOIN "tempSeikyuMeisaiItiziData" AS 請求明細一時
+        ON 請求集計一時.集計関連付け番号 = 請求明細一時.集計関連付け番号
+        INNER JOIN
+        rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理
+        ON 請求明細一時.被保険者番号 = 被保険者台帳管理."hihokenshaNo"
+        LEFT JOIN rgua.${psmShikibetsuTaisho} AS 宛名PSM
+        ON 被保険者台帳管理."shikibetsuCode" = 宛名PSM."shikibetsuCode"
+        LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS 介護事業者
+        ON 請求集計一時.介護住宅改修理由書作成事業者番号  	= 介護事業者."jigyoshaNo"
+        AND 介護事業者."yukoShuryoYMD" = #{empty}
+        LEFT JOIN rgdb."DbT7062KaigoJigyoshaDaihyosha" AS 介護事業者代表者
+        ON 介護事業者."jigyoshaNo" = 介護事業者代表者."jigyoshaNo"
+        AND 介護事業者."yukoKaishiYMD" = 介護事業者代表者."yukoKaishiYMD"
+        ORDER BY
+        請求集計一時.集計関連付け番号 ASC,
+        請求明細一時.被保険者番号 ASC
     </select>
-    
-    <select id="get請求集計一時出力データ" 
+
+    <select id="get請求明細一時出力データ"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.TempSeikyuMeisaiItiziDataEntity" resultOrdered="true" fetchSize="500">
+        SELECT
+        一時."証記載保険者番号" AS 証記載保険者番号
+        , 一時."被保険者番号" AS 被保険者番号
+        , 一時."履歴番号" AS 履歴番号
+        , 一時."サービスコード" AS サービスコード
+        , 一時."介護住宅改修事業者名称" AS 介護住宅改修事業者名称
+        , 一時."介護住宅改修着工年月日" AS 介護住宅改修着工年月日
+        , 一時."介護住宅改修住宅所有者" AS 介護住宅改修住宅所有者
+        , 一時."改修対象住宅住所" AS 改修対象住宅住所
+        , 一時."改修内容箇所及び規模" AS 改修内容箇所及び規模
+        , 一時."介護住宅改修理由書作成年月日" AS 介護住宅改修理由書作成年月日
+        , 一時."介護住宅改修理由書作成事業者番号" AS 介護住宅改修理由書作成事業者番号
+        , 一時."介護住宅改修理由書作成者名" AS 介護住宅改修理由書作成者名
+        , 一時."介護住宅改修理由書作成者名カナ" AS 介護住宅改修理由書作成者名カナ
+        , 一時."介護住宅改修理由書作成申請年月日" AS 介護住宅改修理由書作成申請年月日
+        , 一時."介護住宅改修理由書作成受付年月日" AS 介護住宅改修理由書作成受付年月日
+        , 一時."集計関連付け番号" AS 集計関連付け番号
+        , 一時."対象外フラグ" AS 対象外フラグ
+        , coalesce(ワーク.最大履歴番号, 0) AS 基準履歴番号
+        , row_number() over (
+        partition by
+        一時.証記載保険者番号
+        , 一時.被保険者番号
+        order by
+        一時.証記載保険者番号 asc
+        , 一時.被保険者番号 asc
+        ) AS rowNum
+        FROM
+        "tempSeikyuMeisaiItiziData" AS 一時
+        LEFT JOIN (
+        SELECT
+        明細."shoKisaiHokenshaNo"
+        , 明細."hihokenshaNo"
+        , MAX(明細."rirekiNo") AS 最大履歴番号
+        FROM
+        rgdb."DbT3095JutakuKaishuRiyushoTesuryoMeisai" AS 明細
+        GROUP BY
+        明細."shoKisaiHokenshaNo"
+        , 明細."hihokenshaNo"
+        ) AS ワーク
+        ON 一時.証記載保険者番号 = ワーク."shoKisaiHokenshaNo"
+        AND 一時.被保険者番号 = ワーク."hihokenshaNo"
+    </select>
+
+    <select id="get請求集計一時出力データ"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.TempSeikyuShukeiItiziDataEntity" resultOrdered="true" fetchSize="500">
-     SELECT 
+        SELECT
         集計."証記載保険者番号" AS 証記載保険者番号,
-	集計."介護住宅改修理由書作成事業者番号" AS 介護住宅改修理由書作成事業者番号,
-	集計."集計関連付け番号" AS 集計関連番号,
-	集計."履歴番号" AS 履歴番号,
-	集計."集計開始年月" AS 集計開始年月,
-	集計."集計終了年月" AS 集計終了年月,
-	集計."介護住宅改修理由書作成件数" AS 介護住宅改修理由書作成件数,
-	集計."介護住宅改修理由書作成単価" AS 介護住宅改修理由書作成単価,
-	集計."介護住宅改修理由書作成請求金額"  AS 介護住宅改修理由書作成請求金額         
-     FROM 
-        "tempSeikyuShukeiItiziData" AS 集計             
+        集計."介護住宅改修理由書作成事業者番号" AS 介護住宅改修理由書作成事業者番号,
+        集計."集計関連付け番号" AS 集計関連番号,
+        集計."履歴番号" AS 履歴番号,
+        集計."集計開始年月" AS 集計開始年月,
+        集計."集計終了年月" AS 集計終了年月,
+        集計."介護住宅改修理由書作成件数" AS 介護住宅改修理由書作成件数,
+        集計."介護住宅改修理由書作成単価" AS 介護住宅改修理由書作成単価,
+        集計."介護住宅改修理由書作成請求金額"  AS 介護住宅改修理由書作成請求金額
+        FROM
+        "tempSeikyuShukeiItiziData" AS 集計
     </select>
-    
+
     <select id="get処理日付管理マスタデータ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100010.KaishuriyushoSeikyushoShinseishoMybatisParameter"
-            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity" resultOrdered="true" fetchSize="500">
-     SELECT
+            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity" resultOrdered="true" fetchSize="500">
+        SELECT
         DbT7022ShoriDateKanri.*
         FROM
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.noDeleted_DbT7022ShoriDateKanri" />) AS DbT7022ShoriDateKanri
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.noDeleted_DbT7022ShoriDateKanri" />) AS DbT7022ShoriDateKanri
         WHERE
-	    DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_subGyomuCode" = #{サブ業務コード}   
-	AND DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_shichosonCode" = #{市町村コード}   
-	AND DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_shoriName" = #{処理名}  
-	AND DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_shoriEdaban"  = #{処理枝番}   
-	AND DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_nendo" = #{年度}  
-	AND DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_nendoNaiRenban" = #{年度内連番}  
+        DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_subGyomuCode" = #{サブ業務コード}
+        AND DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_shichosonCode" = #{市町村コード}
+        AND DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_shoriName" = #{処理名}
+        AND DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_shoriEdaban"  = #{処理枝番}
+        AND DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_nendo" = #{年度}
+        AND DbT7022ShoriDateKanri."dbT7022ShoriDateKanri_nendoNaiRenban" = #{年度内連番}
     </select>
-    
-   <resultMap id="resultMap_ChouhyouShuturyokuYouDataEntity" 
+
+    <resultMap id="resultMap_ChouhyouShuturyokuYouDataEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.ChouhyouShuturyokuYouDataEntity" autoMapping="true">
         <result property="介護住宅改修理由書作成事業者番号" column="介護住宅改修理由書作成事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="介護住宅改修理由書作成請求金額" column="介護住宅改修理由書作成請求金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-         <result property="介護住宅改修理由書作成単価" column="介護住宅改修理由書作成単価" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護住宅改修理由書作成単価" column="介護住宅改修理由書作成単価" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="介護住宅改修理由書作成件数" column="介護住宅改修理由書作成件数"/>
-         <result property="介護住宅改修事業者名称" column="介護住宅改修事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護住宅改修事業者名称" column="介護住宅改修事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護住宅改修理由書作成年月日" column="介護住宅改修理由書作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="改修対象住宅住所" column="改修対象住宅住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-         <result property="改修内容箇所及び規模" column="改修内容箇所及び規模" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="改修内容箇所及び規模" column="改修内容箇所及び規模" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護住宅改修理由書作成者名" column="介護住宅改修理由書作成者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-         <result property="名称" column="名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="名称" column="名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-         <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="事業者名" column="事業者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="電話番号" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="代表者名" column="代表者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-   </resultMap>
-   
-   <resultMap id="resultMap_SeikyuMeisaiItiziDataEntity" 
+    </resultMap>
+
+    <resultMap id="resultMap_SeikyuMeisaiItiziDataEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010.SeikyuMeisaiItiziDataEntity" autoMapping="true">
         <id property="住宅所有者" column="dbT3034_jutakuShoyusha" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="理由書作成日" column="dbT3034_riyushoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -319,9 +319,9 @@ ORDER BY
         <id property="住宅改修着工年月日" column="dbT3049_jutakuKaishuChakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="住宅改修住宅住所" column="dbT3049_jutakuKaishuJutakuAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="住宅改修内容" column="dbT3049_jutakuKaishuNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        
+
         <association property="dbT3095" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3095JutakuKaishuRiyushoTesuryoMeisaiMapper.ResultMap_DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity"/>
         <association property="dbT3096" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3096JutakuKaishuRiyushoTesuryoShukeiMapper.ResultMap_DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity"/>
-   </resultMap>
-    
-</mapper>  
+    </resultMap>
+
+</mapper>

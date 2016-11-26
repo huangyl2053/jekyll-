@@ -73,6 +73,7 @@ public class KogakuKaigoServiceProcessParameter implements IBatchProcessParamete
      * @param 終了時間 RTime
      * @param 出力順ID long
      * @param 窓口払い一括更新区分 RString
+     * @param jobId jobId
      */
     public KogakuKaigoServiceProcessParameter(RString 抽出モード,
             RDate 抽出条件日付From,

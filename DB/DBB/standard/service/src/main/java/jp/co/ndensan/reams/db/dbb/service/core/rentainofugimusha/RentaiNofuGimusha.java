@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * ビジネス設計_DBBMN71001_連帯納付義務者登録のクラス
@@ -148,6 +149,7 @@ public class RentaiNofuGimusha {
      * @param 連帯納付義務者情報リスト List<RentaiGimushaAtenaJouhouEntity>
      * @return 削除件数
      */
+    @Transaction
     public int delRentaiNofuGimushaInfo(List<RentaiGimusha> 連帯納付義務者情報リスト) {
 
         int 削除件数 = 0;

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.Tais
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010001.dgShoriSettei_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010001.TaishoShoriHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010001.TaishoShoriValidationHandler;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

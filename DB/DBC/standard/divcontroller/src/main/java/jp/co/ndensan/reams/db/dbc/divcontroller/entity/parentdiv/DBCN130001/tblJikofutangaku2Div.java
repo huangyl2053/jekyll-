@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblJikofutangaku2Div extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -179,11 +179,6 @@ public class tblJikofutangaku2Div extends TablePanel {
     @JsonIgnore
     public TextBoxNum getTxtUchiFutangaku7() {
         return this.celUchiFutangaku7.getTxtUchiFutangaku7();
-    }
-
-    @JsonIgnore
-    public Button getBtnGokei() {
-        return this.celGokeiLbl.getBtnGokei();
     }
 
     @JsonIgnore
@@ -642,7 +637,7 @@ public class tblJikofutangaku2Div extends TablePanel {
  * @author 自動生成
  */
 class celTsukiLbl2AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("lblTsuki2")
     private Label lblTsuki2;
 
@@ -672,7 +667,7 @@ class celTsukiLbl2AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celJikofutangakuLbl2AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("lblJikofutangaku2")
     private Label lblJikofutangaku2;
 
@@ -702,7 +697,7 @@ class celJikofutangakuLbl2AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celUchiFutangakuLbl2AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("lblUchiFutangaku2")
     private Label lblUchiFutangaku2;
 
@@ -732,7 +727,7 @@ class celUchiFutangakuLbl2AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class cel2GatsuAttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("lbl2Gatsu")
     private Label lbl2Gatsu;
 
@@ -762,7 +757,7 @@ class cel2GatsuAttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celJikofutangaku2AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtJikofutangaku2")
     private TextBoxNum txtJikofutangaku2;
 
@@ -792,7 +787,7 @@ class celJikofutangaku2AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celUchiFutangaku2AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtUchiFutangaku2")
     private TextBoxNum txtUchiFutangaku2;
 
@@ -822,7 +817,7 @@ class celUchiFutangaku2AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class cel3GatsuAttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("lbl3Gatsu")
     private Label lbl3Gatsu;
 
@@ -852,7 +847,7 @@ class cel3GatsuAttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celJikofutangaku3AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtJikofutangaku3")
     private TextBoxNum txtJikofutangaku3;
 
@@ -882,7 +877,7 @@ class celJikofutangaku3AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celUchiFutangaku3AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtUchiFutangaku3")
     private TextBoxNum txtUchiFutangaku3;
 
@@ -912,7 +907,7 @@ class celUchiFutangaku3AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class cel4GatsuAttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("lbl4Gatsu")
     private Label lbl4Gatsu;
 
@@ -942,7 +937,7 @@ class cel4GatsuAttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celJikofutangaku4AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtJikofutangaku4")
     private TextBoxNum txtJikofutangaku4;
 
@@ -972,7 +967,7 @@ class celJikofutangaku4AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celUchiFutangaku4AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtUchiFutangaku4")
     private TextBoxNum txtUchiFutangaku4;
 
@@ -1002,7 +997,7 @@ class celUchiFutangaku4AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class cel5GatsuAttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("lbl5Gatsu")
     private Label lbl5Gatsu;
 
@@ -1032,7 +1027,7 @@ class cel5GatsuAttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celJikofutangaku5AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtJikofutangaku5")
     private TextBoxNum txtJikofutangaku5;
 
@@ -1062,7 +1057,7 @@ class celJikofutangaku5AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celUchiFutangaku5AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtUchiFutangaku5")
     private TextBoxNum txtUchiFutangaku5;
 
@@ -1092,7 +1087,7 @@ class celUchiFutangaku5AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class cel6GatsuAttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("lbl6Gatsu")
     private Label lbl6Gatsu;
 
@@ -1122,7 +1117,7 @@ class cel6GatsuAttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celJikofutangaku6AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtJikofutangaku6")
     private TextBoxNum txtJikofutangaku6;
 
@@ -1152,7 +1147,7 @@ class celJikofutangaku6AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celUchiFutangaku6AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtUchiFutangaku6")
     private TextBoxNum txtUchiFutangaku6;
 
@@ -1182,7 +1177,7 @@ class celUchiFutangaku6AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class cel7GatsuAttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("lbl7Gatsu")
     private Label lbl7Gatsu;
 
@@ -1212,7 +1207,7 @@ class cel7GatsuAttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celJikofutangaku7AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtJikofutangaku7")
     private TextBoxNum txtJikofutangaku7;
 
@@ -1242,7 +1237,7 @@ class celJikofutangaku7AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celUchiFutangaku7AttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtUchiFutangaku7")
     private TextBoxNum txtUchiFutangaku7;
 
@@ -1272,27 +1267,7 @@ class celUchiFutangaku7AttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celGokeiLblAttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
-    @JsonProperty("btnGokei")
-    private Button btnGokei;
-
-    /*
-     * getbtnGokei
-     * @return btnGokei
-     */
-    @JsonProperty("btnGokei")
-    public Button getBtnGokei() {
-        return btnGokei;
-    }
-
-    /*
-     * setbtnGokei
-     * @param btnGokei btnGokei
-     */
-    @JsonProperty("btnGokei")
-    public void setBtnGokei(Button btnGokei) {
-        this.btnGokei = btnGokei;
-    }
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
 
     // </editor-fold>
 }
@@ -1302,7 +1277,7 @@ class celGokeiLblAttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celJikofutangakuGokeiAttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtJikofutangakuGokei")
     private TextBoxNum txtJikofutangakuGokei;
 
@@ -1332,7 +1307,7 @@ class celJikofutangakuGokeiAttblJikofutangaku2 extends TableCell {
  * @author 自動生成
  */
 class celUchiFutangakuGokeiAttblJikofutangaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     @JsonProperty("txtUchiFutangakuGokei")
     private TextBoxNum txtUchiFutangakuGokei;
 

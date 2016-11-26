@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dba.service.core.nenreitotatsutorokushalist;
 
 import jp.co.ndensan.reams.db.dba.business.core.nenreitotatsutoroku.DbT7022ShoriDateKanriBusiness;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA150010.DBA150010_NenreitotatsuTorokuListParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

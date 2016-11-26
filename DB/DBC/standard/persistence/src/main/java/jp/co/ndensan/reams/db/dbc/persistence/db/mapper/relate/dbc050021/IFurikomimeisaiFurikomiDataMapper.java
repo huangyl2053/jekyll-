@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050021.FurikomimeisaiFurik
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050021.FurikomimeisaiFurikomiDataJigyoKogakuGassanEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050021.HihokenshaToAtenaResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.furikomimeisaiichiranjigyokogaku.DbWT0510FurikomiMeisaiTempEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 振込明細・振込みデータ作成のMapperです。

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.saishinsaketteidbtoroku;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120190;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SaishinsaKetteiDBTorokuParameter extends BatchParameterBase {
+public class DBC120191_SaishinsaKetteiDBTorokuParameter extends BatchParameterBase {
 
     @BatchParameter(key = "処理年月", name = "処理年月")
     private FlexibleYearMonth 処理年月;

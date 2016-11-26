@@ -942,7 +942,7 @@ public class FukaKeisan extends FukaKeisanFath {
         賦課RelateEntity.set介護賦課Entity(賦課の情報.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
 
-        if (!賦課の情報.getKibetsuList().isEmpty()) {
+        if (賦課の情報.getKibetsuList() != null && !賦課の情報.getKibetsuList().isEmpty()) {
             for (Kibetsu kibetsu : 賦課の情報.getKibetsuList()) {
                 KibetsuEntity entity = new KibetsuEntity();
                 List<UrT0705ChoteiKyotsuEntity> 調定共通Entity = new ArrayList<>();
@@ -1199,7 +1199,7 @@ public class FukaKeisan extends FukaKeisanFath {
                     break;
                 }
             }
-            builder.set世帯員数(param.get世帯員所得情報List().size());
+            builder.set世帯員数(param.get世帯員所得情報List().size() - INT_1);
         } else {
             builder.set課税区分(null).set合計所得金額(null).set公的年金収入額(null);
         }

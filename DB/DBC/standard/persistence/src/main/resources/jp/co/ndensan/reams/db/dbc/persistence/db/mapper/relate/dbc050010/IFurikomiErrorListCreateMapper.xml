@@ -11,7 +11,7 @@
     SELECT
         振込明細.*
     FROM "DbWT0510FurikomiMeisai" AS 振込明細
-        WHERE "shinseiDataFlag" = FALSE
+        WHERE "kozaDataFlag" = FALSE
     ORDER BY
         振込明細."hihokenshaNo",
         振込明細."serviceTeikyoYM",

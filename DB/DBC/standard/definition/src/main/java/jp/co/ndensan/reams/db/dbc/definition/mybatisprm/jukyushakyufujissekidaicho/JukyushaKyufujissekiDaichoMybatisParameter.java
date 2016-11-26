@@ -122,8 +122,11 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
     private final boolean 介護予防_生活支援総合事業flag;
     private final boolean 総合事業ケアマネジメントflag;
     private final boolean 旧措置特定有無flag;
+    private final boolean 旧措置特定有無flag1;
     private final boolean 老人保健市町村番号有無flag;
+    private final boolean 老人保健市町村番号有無flag1;
     private final boolean 老人保健受給者番号有無flag;
+    private final boolean 老人保健受給者番号有無flag1;
     private final boolean 公費負担者番号flag;
     private final boolean 公費受給者番号flag;
     private final boolean 事業者番号flag;
@@ -240,8 +243,11 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
      * @param 介護予防_生活支援総合事業flag 介護予防_生活支援総合事業flag
      * @param 総合事業ケアマネジメントflag 総合事業ケアマネジメントflag
      * @param 旧措置特定有無flag 旧措置特定有無flag
+     * @param 旧措置特定有無flag1 旧措置特定有無flag1
      * @param 老人保健市町村番号有無flag 老人保健市町村番号有無flag
+     * @param 老人保健市町村番号有無flag1 老人保健市町村番号有無flag1
      * @param 老人保健受給者番号有無flag 老人保健受給者番号有無flag
+     * @param 老人保健受給者番号有無flag1 老人保健受給者番号有無flag1
      * @param 公費負担者番号flag 公費負担者番号flag
      * @param 公費受給者番号flag 公費受給者番号flag
      * @param 事業者番号flag 事業者番号flag
@@ -355,8 +361,11 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
             boolean 介護予防_生活支援総合事業flag,
             boolean 総合事業ケアマネジメントflag,
             boolean 旧措置特定有無flag,
+            boolean 旧措置特定有無flag1,
             boolean 老人保健市町村番号有無flag,
+            boolean 老人保健市町村番号有無flag1,
             boolean 老人保健受給者番号有無flag,
+            boolean 老人保健受給者番号有無flag1,
             boolean 公費負担者番号flag,
             boolean 公費受給者番号flag,
             boolean 事業者番号flag,
@@ -469,8 +478,11 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
         this.介護予防_生活支援総合事業flag = 介護予防_生活支援総合事業flag;
         this.総合事業ケアマネジメントflag = 総合事業ケアマネジメントflag;
         this.旧措置特定有無flag = 旧措置特定有無flag;
+        this.旧措置特定有無flag1 = 旧措置特定有無flag1;
         this.老人保健市町村番号有無flag = 老人保健市町村番号有無flag;
+        this.老人保健市町村番号有無flag1 = 老人保健市町村番号有無flag1;
         this.老人保健受給者番号有無flag = 老人保健受給者番号有無flag;
+        this.老人保健受給者番号有無flag1 = 老人保健受給者番号有無flag1;
         this.公費負担者番号flag = 公費負担者番号flag;
         this.公費受給者番号flag = 公費受給者番号flag;
         this.事業者番号flag = 事業者番号flag;
@@ -613,22 +625,25 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
             RString psmShikibetsuTaisho
     ) {
         boolean 旧措置特定有無flag = false;
+        boolean 旧措置特定有無flag1 = false;
         if (new RString("2").equals(旧措置特定有無)) {
             旧措置特定有無flag = true;
         } else if (new RString("3").equals(旧措置特定有無)) {
-            旧措置特定有無flag = false;
+            旧措置特定有無flag1 = true;
         }
         boolean 老人保健市町村番号有無flag = false;
+        boolean 老人保健市町村番号有無flag1 = false;
         if (new RString("2").equals(老人保健市町村番号有無)) {
             老人保健市町村番号有無flag = true;
         } else if (new RString("3").equals(老人保健市町村番号有無)) {
-            老人保健市町村番号有無flag = false;
+            老人保健市町村番号有無flag1 = true;
         }
         boolean 老人保健受給者番号有無flag = false;
+        boolean 老人保健受給者番号有無flag1 = false;
         if (new RString("2").equals(老人保健受給者番号有無)) {
             老人保健受給者番号有無flag = true;
         } else if (new RString("3").equals(老人保健受給者番号有無)) {
-            老人保健受給者番号有無flag = false;
+            老人保健受給者番号有無flag1 = true;
         }
         boolean すべてflag = true;
         if (new RString("1").equals(要介護1)
@@ -747,8 +762,11 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
                 new RString("1").equals(介護予防_生活支援総合事業),
                 new RString("1").equals(総合事業ケアマネジメント),
                 旧措置特定有無flag,
+                旧措置特定有無flag1,
                 老人保健市町村番号有無flag,
+                老人保健市町村番号有無flag1,
                 老人保健受給者番号有無flag,
+                老人保健受給者番号有無flag1,
                 !RString.isNullOrEmpty(公費負担者番号),
                 !RString.isNullOrEmpty(公費受給者番号),
                 !RString.isNullOrEmpty(事業者番号_開始) && !RString.isNullOrEmpty(事業者番号_終了),

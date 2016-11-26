@@ -5,9 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.core.basic.shoridatekanri;
 
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -41,7 +42,7 @@ public class ShoriDateKanriService {
      */
     @Transaction
     public ShoriDateKanri getDbT7022ShoriDateKanriEntity(LasdecCode 市町村コード) {
-        DbT7022ShoriDateKanriEntity entity = dac.select前回処理日(市町村コード);
+        DbT7022ShoriDateKanriEntity entity = dac.select前回処理日(市町村コード, ShoriName.更新申請者管理.get名称());
         if (entity == null) {
             return null;
         } else {
@@ -58,7 +59,7 @@ public class ShoriDateKanriService {
      */
     @Transaction
     public ShoriDateKanri get一件取得(LasdecCode 市町村コード) {
-        DbT7022ShoriDateKanriEntity entity = dac.select前回抽出期間情報の取得(市町村コード);
+        DbT7022ShoriDateKanriEntity entity = dac.select前回抽出期間情報の取得(市町村コード, ShoriName.受給者台帳.get名称());
         if (entity == null) {
             return null;
         } else {
