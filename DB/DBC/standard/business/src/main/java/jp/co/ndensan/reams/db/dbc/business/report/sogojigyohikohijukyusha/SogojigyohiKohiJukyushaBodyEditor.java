@@ -112,11 +112,14 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
         return twoPart;
     }
 
-    private RString decimalFormatter(Decimal 額, int count) {
+    private RString decimalFormatter(RString 額, int count) {
         if (null == 額) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toコンマ区切りRString(額, count);
+        if (Decimal.canConvert(額)) {
+            return DecimalFormatter.toコンマ区切りRString(new Decimal(額.toString()), count);
+        }
+        return 額;
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {

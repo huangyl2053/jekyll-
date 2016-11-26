@@ -239,6 +239,17 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
         }
     }
 
+    private RString doパターン4(RString 年月日) {
+        if (null == 年月日) {
+            return RString.EMPTY;
+        }
+        if (FlexibleDate.canConvert(年月日)) {
+            return new FlexibleDate(年月日).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD)
+                    .fillType(FillType.BLANK).toDateString();
+        }
+        return 年月日;
+    }
+
     private RString doパターン4(FlexibleDate 年月日) {
         if (null == 年月日) {
             return RString.EMPTY;
@@ -247,11 +258,14 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
                 .fillType(FillType.BLANK).toDateString();
     }
 
-    private RString doカンマ編集(Decimal number) {
+    private RString doカンマ編集(RString number) {
         if (null == number) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toコンマ区切りRString(number, 0);
+        if (Decimal.canConvert(number)) {
+            return DecimalFormatter.toコンマ区切りRString(new Decimal(number.toString()), 0);
+        }
+        return number;
     }
 
     private RString getNotNull(RString str) {

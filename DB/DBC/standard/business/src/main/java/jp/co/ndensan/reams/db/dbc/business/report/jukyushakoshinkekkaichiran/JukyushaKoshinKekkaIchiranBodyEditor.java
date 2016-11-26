@@ -322,17 +322,31 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
                 .fillType(FillType.BLANK).toDateString();
     }
 
+    private static RString date_to_string(RString 年月日) {
+        if (null == 年月日) {
+            return RString.EMPTY;
+        }
+        if (FlexibleDate.canConvert(年月日)) {
+            return new FlexibleDate(年月日).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+                    .fillType(FillType.BLANK).toDateString();
+        }
+        return 年月日;
+    }
+
     /**
      * 数値からstringに転換する。
      *
      * @param number 数値
      * @return カンマで編集した値
      */
-    private static RString decimal_to_string(Decimal number) {
+    private static RString decimal_to_string(RString number) {
         if (null == number) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toコンマ区切りRString(number, 0);
+        if (Decimal.canConvert(number)) {
+            return DecimalFormatter.toコンマ区切りRString(new Decimal(number.toString()), 0);
+        }
+        return number;
     }
 
     /**
@@ -341,11 +355,11 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
      * @param number 数値
      * @return 「%」で付けた値
      */
-    private static RString decimal_to_percentStr(Decimal number) {
+    private static RString decimal_to_percentStr(RString number) {
         if (null == number) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toRString(number, 0).concat(パーセント);
+        return number.concat(パーセント);
     }
 
     private RString getNotNull(RString str) {
