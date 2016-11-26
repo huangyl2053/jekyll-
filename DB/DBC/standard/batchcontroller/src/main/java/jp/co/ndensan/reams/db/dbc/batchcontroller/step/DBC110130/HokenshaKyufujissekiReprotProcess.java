@@ -297,7 +297,8 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
         HokenshaKyufujissekiReprotCsvEntity csvEntity = new HokenshaKyufujissekiReprotCsvEntity();
         csvEntity.set送付年月(RString.EMPTY);
         csvEntity.set作成日時(RString.EMPTY);
-        csvEntity.set保険者番号(給付実績一時Entity.getコントロールレコード保険者番号().getColumnValue());
+        csvEntity.set保険者番号(給付実績一時Entity.getコントロールレコード保険者番号() == null
+                ? RString.EMPTY : 給付実績一時Entity.getコントロールレコード保険者番号().getColumnValue());
         csvEntity.set保険者名(給付実績一時Entity.getコントロールレコード保険者名() == null ? RString.EMPTY : 給付実績一時Entity.getコントロールレコード保険者名());
         csvEntity.setNo(RString.EMPTY);
         csvEntity.set入力識別番号(RString.EMPTY);
