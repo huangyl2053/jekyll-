@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kanendoriyoshafu
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kanendoriyoshafutanwariaihantei.KanendoRiyoshaFutanwariaiHanteiMybatisParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 処理日付管理情報を取得クラス.

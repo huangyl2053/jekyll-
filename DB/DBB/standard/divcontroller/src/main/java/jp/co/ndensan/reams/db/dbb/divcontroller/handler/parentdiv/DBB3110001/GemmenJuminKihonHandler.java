@@ -1344,12 +1344,10 @@ public class GemmenJuminKihonHandler {
             } else {
                 return 入力状況_申請中取消;
             }
+        } else if (取消日 == null) {
+            return 入力状況_決定済訂正;
         } else {
-            if (取消日 == null) {
-                return 入力状況_決定済訂正;
-            } else {
-                return 入力状況_決定済取消;
-            }
+            return 入力状況_決定済取消;
         }
     }
 

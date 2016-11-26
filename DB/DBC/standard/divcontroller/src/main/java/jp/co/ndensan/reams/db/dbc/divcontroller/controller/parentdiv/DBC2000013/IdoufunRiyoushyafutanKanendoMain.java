@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000013.Idou
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000013.IdoufunRiyoushyafutanKanendoMainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000013.IdoufunRiyoushyafutanKanendoMainValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.idoufunriyoushyafutankanendo.IdoufunRiyoushyafutanKanendoManager;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -67,8 +67,10 @@ public class InsReHakouShotokushokaihyoTmpProcess extends BatchProcessBase<Shoto
         }
         entity.setSetaiCode(所得照会票データ.getSetaiCode());
         entity.setHihokenshaNo(所得照会票データ.getHihokenshaNo());
-        entity.setHihokenshaName(所得照会票データ.getHihokenshaName());
-        entity.setHihokenshajusho(所得照会票データ.getHihokenshajusho());
+        if (所得照会票データ.getMeisho() != null && !所得照会票データ.getMeisho().isEmpty()) {
+            entity.setHihokenshaName(所得照会票データ.getMeisho().value());
+        }
+        entity.setHihokenshajusho(所得照会票データ.getGenjusho());
         entity.setZenjusho(所得照会票データ.getZenjusho());
         entity.setGenjusho(所得照会票データ.getGenjusho());
         entity.setKanaMeisho(所得照会票データ.getKanaMeisho());

@@ -7,12 +7,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJiss
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeaderAll;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiRelate;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
@@ -286,8 +288,13 @@ public class KyufuJissekiHeaderHandler {
         }
         set実績区分(給付実績基本データ.get給付実績区分コード());
         set整理番号(給付実績基本データ.get整理番号());
-        set識別番号名称(識別番号管理.get識別番号());
-        div.getTxtYoshikiMeisho().setValue(識別番号管理.get名称());
+        if (識別番号管理 != null) {
+            set識別番号名称(識別番号管理.get識別番号());
+            div.getTxtYoshikiMeisho().setValue(識別番号管理.get名称());
+        } else {
+            div.getJigyosha().clearValue();
+            set整理番号(RString.EMPTY);
+        }
         if (csData_A.get事業者名称() != null) {
             div.getJigyosha().setValue(csData_A.get事業者名称().getColumnValue());
         } else {
@@ -358,5 +365,41 @@ public class KyufuJissekiHeaderHandler {
         div.getTxtYoshikiMeisho().setValue(給付実績基本情報.get様式番号_Name());
         div.getTxtJigyoshaNo().setValue(給付実績基本情報.get事業者());
         div.getJigyosha().setValue(給付実績基本情報.get事業者_Name());
+    }
+
+    /**
+     * 被保情報を設定します。
+     *
+     * @param 給付実績高額介護サービス費データ 給付実績高額介護サービス費データ
+     */
+    public void set被保情報2(KyufujissekiKogakuKaigoServicehiRelate 給付実績高額介護サービス費データ) {
+        KyufujissekiKogakuKaigoServicehi 高額介護サービス費 = 給付実績高額介護サービス費データ.get給付実績高額介護サービス費();
+        div.getTxtTeikyoNengetsu().setValue(new RDate(
+                高額介護サービス費.getサービス提供年月().getYearValue(), 高額介護サービス費.getサービス提供年月().getMonthValue(), 1));
+        if (!RString.isNullOrEmpty(高額介護サービス費.get給付実績情報作成区分コード())) {
+            div.getTxtSakuseiKubun().setValue(KyufuSakuseiKubun.toValue(高額介護サービス費.get給付実績情報作成区分コード()).get名称());
+        } else {
+            div.getTxtSakuseiKubun().clearValue();
+        }
+        if (null == 高額介護サービス費.get証記載保険者番号() || 高額介護サービス費.get証記載保険者番号().isEmpty()) {
+            div.getTxtShokisaiHokenshaNo().clearValue();
+        } else {
+            RString 証記載保険者番号 = 高額介護サービス費.get証記載保険者番号().getColumnValue();
+            証記載保険者番号 = (証記載保険者番号.length() <= INT_6
+                    ? 証記載保険者番号 : 証記載保険者番号.substring(証記載保険者番号.length() - INT_6)).replace("0", "");
+            div.getTxtShokisaiHokenshaNo().setValue(証記載保険者番号);
+        }
+        set実績区分(高額介護サービス費.get給付実績区分コード());
+        set整理番号(高額介護サービス費.get整理番号());
+        ShikibetsuNoKanri 識別番号管理 = 給付実績高額介護サービス費データ.get識別番号管理();
+        if (識別番号管理 != null) {
+            set識別番号名称(識別番号管理.get識別番号());
+            div.getTxtYoshikiMeisho().setValue(識別番号管理.get名称());
+        } else {
+            div.getTxtYoshikiMeisho().clearValue();
+            div.getTxtYoshikiNo().clearValue();
+        }
+        div.getTxtJigyoshaNo().clearValue();
+        div.getJigyosha().clearValue();
     }
 }

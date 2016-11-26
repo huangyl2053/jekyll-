@@ -229,13 +229,11 @@ public class JikoFutangakushomeishoManager {
         mapper = mapperProvider.create(IJikoFutangakushomeishoMapper.class);
         if (メニューID_DBCMNN2001.equals(parameter.getメニューID())) {
             List<DbT3170JigyoKogakuGassanJikoFutanGakuEntity> 高額合算情報 = mapper.get高額合算情報更新用(parameter);
-            if (高額合算情報 != null && !高額合算情報.isEmpty()) {
-                for (DbT3170JigyoKogakuGassanJikoFutanGakuEntity entity : 高額合算情報) {
-                    JigyoKogakuGassanJikoFutanGaku jigyoKogakuGassanJikoFutanGaku = new JigyoKogakuGassanJikoFutanGaku(entity);
-                    jigyoKogakuGassanJikoFutanGaku = jigyoKogakuGassanJikoFutanGaku.createBuilderForEdit().set自己負担額証明書作成年月日(自己負担額証明書作成年月日)
-                            .build().modified();
-                    save高額合算情報更新(jigyoKogakuGassanJikoFutanGaku);
-                }
+            if (高額合算情報 != null && !高額合算情報.isEmpty() && 0 < 高額合算情報.size()) {
+                JigyoKogakuGassanJikoFutanGaku jigyoKogakuGassanJikoFutanGaku = new JigyoKogakuGassanJikoFutanGaku(高額合算情報.get(0));
+                jigyoKogakuGassanJikoFutanGaku = jigyoKogakuGassanJikoFutanGaku.createBuilderForEdit().set自己負担額証明書作成年月日(自己負担額証明書作成年月日)
+                        .build().modified();
+                save高額合算情報更新(jigyoKogakuGassanJikoFutanGaku);
             }
         }
     }

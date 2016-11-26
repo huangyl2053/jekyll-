@@ -1,20 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT7022ShoriDateKanriの項目定義クラスです。
+ * DbT7022ShoriDateKanriの項目定義クラスです
  *
- * @reamsid_L DBB-9999-022 xuxin
  */
 public enum DbT7022ShoriDateKanri implements IColumnDefinition {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
-    // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     /**
      * insertDantaiCd
      */
@@ -124,6 +118,6 @@ public enum DbT7022ShoriDateKanri implements IColumnDefinition {
     public int getScale() {
         return scale;
     }
-// </editor-fold>
 
+// </editor-fold>
 }

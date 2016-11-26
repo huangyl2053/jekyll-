@@ -2674,10 +2674,10 @@ and open the template in the editor.
 
     <!-- 一時テーブル情報を取得します -->
     <select resultOrdered="true" id="getDbT7022ShoriDateKanri"
-            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter" fetchSize="500">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri"/>
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri"/>
         FROM
         rgdb."DbT7022ShoriDateKanri"
         WHERE
@@ -2687,7 +2687,7 @@ and open the template in the editor.
     </select>
 
     <!-- 処理日付管理マスタテーブル更新 -->
-    <update id="updateShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" >
+    <update id="updateShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity" >
         UPDATE
         rgdb."DbT7022ShoriDateKanri"
         SET

@@ -21,12 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 処理日付管理マスタを管理するクラスです。
- *
- * @reamsid_L DBB-9999-012 xuxin
  */
-public class ShoriDateKanri extends
-        ParentModelBase<ShoriDateKanriIdentifier, DbT7022ShoriDateKanriEntity, ShoriDateKanri>
-        implements Serializable {
+public class ShoriDateKanri extends ParentModelBase<ShoriDateKanriIdentifier, DbT7022ShoriDateKanriEntity, ShoriDateKanri> implements Serializable {
 
     private final DbT7022ShoriDateKanriEntity entity;
     private final ShoriDateKanriIdentifier id;
@@ -295,6 +291,16 @@ public class ShoriDateKanri extends
             return new ShoriDateKanri(this.entity, this.id);
         }
     }
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 
+    /**
+     * このクラスの編集を行うBuilderを取得します。<br/>
+     * 編集後のインスタンスを取得する場合は{@link SeishinTechoNini.createBuilderForEdit#build()}を使用してください。
+     *
+     * @return Builder
+     */
+    public ShoriDateKanriBuilder createBuilderForEdit() {
+        return new ShoriDateKanriBuilder(entity, id);
+    }
+
+//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

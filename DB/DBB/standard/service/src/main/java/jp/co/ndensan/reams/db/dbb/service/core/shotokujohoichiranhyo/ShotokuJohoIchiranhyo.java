@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohoichiranhyo.TaishoShuryoYmd;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyo.TaishoShuryoYmdEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -71,7 +72,8 @@ public class ShotokuJohoIchiranhyo {
                         .getMessage().evaluate());
             }
             List<DbT7022ShoriDateKanriEntity> 処理日付管理マスリスト = 処理日付管理マスタDac
-                    .selec対象終了日時(導入形態コード, 市町村コードリスト, 市町村識別IDリスト, 市町村コード, 処理年度);
+                    .selec対象終了日時(導入形態コード, 市町村コードリスト, 市町村識別IDリスト,
+                            市町村コード, 処理年度, ShoriName.所得情報一覧表作成.get名称(), ShoriName.所得情報一覧表作成.get名称());
             for (DbT7022ShoriDateKanriEntity entity : 処理日付管理マスリスト) {
                 TaishoShuryoYmdEntity ymdEntity = new TaishoShuryoYmdEntity();
                 ymdEntity.set対象終了日時(entity.getTaishoShuryoTimestamp());
@@ -92,7 +94,8 @@ public class ShotokuJohoIchiranhyo {
                 市町村識別IDリスト.add(市町村識別ID);
             }
             List<DbT7022ShoriDateKanriEntity> 処理日付管理マスリスト = 処理日付管理マスタDac
-                    .selec対象終了日時(導入形態コード, 市町村コードリスト, 市町村識別IDリスト, 市町村コード, 処理年度);
+                    .selec対象終了日時(導入形態コード, 市町村コードリスト, 市町村識別IDリスト, 市町村コード, 処理年度,
+                            ShoriName.所得情報一覧表作成.get名称(), ShoriName.所得情報一覧表作成.get名称());
             for (DbT7022ShoriDateKanriEntity entity : 処理日付管理マスリスト) {
                 TaishoShuryoYmdEntity ymdEntity = new TaishoShuryoYmdEntity();
                 ymdEntity.set対象終了日時(entity.getTaishoShuryoTimestamp());

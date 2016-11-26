@@ -274,7 +274,7 @@
      FROM rgdb."DbV1001HihokenshaDaicho"
      WHERE
      "hihokennshaKubunCode"='1'
-     AND "ichigoShikakuShutokuYMD"<![CDATA[<=]]>#{処理年度_0401}
+     AND "ichigoShikakuShutokuYMD"<![CDATA[<=]]>#{システム日付}
      AND ("shikakuSoshitsuYMD"='' OR "shikakuSoshitsuYMD" IS NULL OR #{処理年度_0401}<![CDATA[<=]]>"shikakuSoshitsuYMD")
      AND SUBSTRING("ichigoShikakuShutokuYMD", 1, 6)<![CDATA[<>]]>SUBSTRING(COALESCE("shikakuSoshitsuYMD",'00000000'), 1, 6)
      AND "logicalDeletedFlag" IS FALSE
@@ -497,7 +497,8 @@
         B."juminShubetsuCode",
         B."torokuTodokedeYMD",
         B."seibetsuCode",
-        B."tenshutsuKakuteiZenkokuJushoCode"
+        B."tenshutsuKakuteiZenkokuJushoCode",
+        A."shotokuNendo"
         FROM 
         <if test="出力対象 == 2">
         "TmpSetaiShotoku1" AS A
@@ -575,6 +576,12 @@
                         master
                    )) AS C
         ON master."shikibetsuCode"=C."shikibetsuCode"
+        WHERE
+        NOT (EXISTS
+            (SELECT 'X'
+                FROM rgdb."DbV2502KaigoShotoku"
+                WHERE "DbV2502KaigoShotoku"."shotokuNendo" = master."shotokuNendo"
+                AND "DbV2502KaigoShotoku"."shikibetsuCode" = master."shikibetsuCode"))
         ORDER BY "soufusenzenkokuJushoCode" ASC, 
                  master."setaiCode" ASC, 
                  master."kouhoshakubun" ASC, 

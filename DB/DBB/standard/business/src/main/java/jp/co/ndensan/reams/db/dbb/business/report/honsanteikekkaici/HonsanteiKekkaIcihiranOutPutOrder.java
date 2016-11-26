@@ -54,7 +54,7 @@ public enum HonsanteiKekkaIcihiranOutPutOrder implements IReportItems {
     /**
      * 徴収方法
      */
-    徴収方法(new RString("0209"), new RString("徴収方法"), new RString("\"choshuHoho\"")),
+    徴収方法(new RString("0209"), new RString("徴収方法"), new RString("\"ShuturyokuTemp_choshuHoho\"")),
     /**
      * 被保険者番号
      */

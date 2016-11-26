@@ -11,31 +11,31 @@
     </select>
     <sql id="selectDbT7022ShoriDateKanriEntity" >
         SELECT
-            rgdb."DbT7022ShoriDateKanri"."shoriEdaban",
-            rgdb."DbT7022ShoriDateKanri"."kijunTimestamp"
+        rgdb."DbT7022ShoriDateKanri"."shoriEdaban",
+        rgdb."DbT7022ShoriDateKanri"."kijunTimestamp"
         FROM
-            rgdb."DbT7022ShoriDateKanri"
+        rgdb."DbT7022ShoriDateKanri"
         LEFT JOIN
-            rgdb."DbT7051KoseiShichosonMaster"
+        rgdb."DbT7051KoseiShichosonMaster"
         ON
-            rgdb."DbT7022ShoriDateKanri"."shoriEdaban" = LPAD(rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID", 4, '0')
+        rgdb."DbT7022ShoriDateKanri"."shoriEdaban" = LPAD(rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID", 4, '0')
         WHERE
-            rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBB'
+        rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBB'
         AND rgdb."DbT7022ShoriDateKanri"."shoriName" = #{処理名}
         AND rgdb."DbT7022ShoriDateKanri"."nendo" = #{調定年度}
         AND rgdb."DbT7022ShoriDateKanri"."nendoNaiRenban" = #{年度内連番}
-        AND rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID" IN 
-        <foreach  
-                    collection="市町村識別IDList"  
-                    item="item"
-                    open="("  
-                    separator=","  
-                    close=")">  
-                     #{item}  
-                 </foreach>
+        AND rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID" IN
+        <foreach
+            collection="市町村識別IDList"
+            item="item"
+            open="("
+            separator=","
+            close=")">
+            #{item}
+        </foreach>
     </sql>
-    
-   <!-- get広域月処理日付 -->
+
+    <!-- get広域月処理日付 -->
     <select id="get広域月処理日付"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoinfoshoridate.TokuchoInfoShoriDateParameter"
             resultMap="resultMap_DbT7022ShoriDateKanriEntity" fetchSize="500" resultOrdered="true">
@@ -43,32 +43,32 @@
     </select>
     <sql id="select広域月処理日付" >
         SELECT
-            rgdb."DbT7022ShoriDateKanri"."shoriEdaban",
-            rgdb."DbT7022ShoriDateKanri"."kijunTimestamp"
+        rgdb."DbT7022ShoriDateKanri"."shoriEdaban",
+        rgdb."DbT7022ShoriDateKanri"."kijunTimestamp"
         FROM
-            rgdb."DbT7022ShoriDateKanri"
+        rgdb."DbT7022ShoriDateKanri"
         LEFT JOIN
-            rgdb."DbT7051KoseiShichosonMaster"
+        rgdb."DbT7051KoseiShichosonMaster"
         ON
-            rgdb."DbT7022ShoriDateKanri"."shoriEdaban" = LPAD(rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID", 4, '0')
+        rgdb."DbT7022ShoriDateKanri"."shoriEdaban" = LPAD(rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID", 4, '0')
         WHERE
-            rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBB'
+        rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBB'
         AND rgdb."DbT7022ShoriDateKanri"."shoriName" = #{処理名}
         AND rgdb."DbT7022ShoriDateKanri"."nendo" = #{調定年度}
         AND rgdb."DbT7022ShoriDateKanri"."nendoNaiRenban" = #{年度内連番}
-        AND rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID" IN 
-        <foreach  
-                    collection="市町村識別IDList"  
-                    item="item"
-                    open="("  
-                    separator=","  
-                    close=")">  
-                     #{item}  
-         </foreach>
-          ORDER BY rgdb."DbT7022ShoriDateKanri"."shoriEdaban"
+        AND rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID" IN
+        <foreach
+            collection="市町村識別IDList"
+            item="item"
+            open="("
+            separator=","
+            close=")">
+            #{item}
+        </foreach>
+        ORDER BY rgdb."DbT7022ShoriDateKanri"."shoriEdaban"
     </sql>
-    
-     <!-- get広域月処理日付 -->
+
+    <!-- get広域月処理日付 -->
     <select id="get広域5月と9月処理日付"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoinfoshoridate.TokuchoInfoShoriDateParameter"
             resultMap="resultMap_DbT7022ShoriDateKanriEntity" fetchSize="500" resultOrdered="true">
@@ -76,34 +76,34 @@
     </select>
     <sql id="select広域5月と9月処理日付" >
         SELECT
-            rgdb."DbT7022ShoriDateKanri"."shoriEdaban",
-            rgdb."DbT7022ShoriDateKanri"."kijunTimestamp"
+        rgdb."DbT7022ShoriDateKanri"."shoriEdaban",
+        rgdb."DbT7022ShoriDateKanri"."kijunTimestamp"
         FROM
-            rgdb."DbT7022ShoriDateKanri"
+        rgdb."DbT7022ShoriDateKanri"
         LEFT JOIN
-            rgdb."DbT7051KoseiShichosonMaster"
+        rgdb."DbT7051KoseiShichosonMaster"
         ON
-            rgdb."DbT7022ShoriDateKanri"."shoriEdaban" = LPAD(rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID", 4, '0')
+        rgdb."DbT7022ShoriDateKanri"."shoriEdaban" = LPAD(rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID", 4, '0')
         WHERE
-            rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBB'
+        rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBB'
         AND rgdb."DbT7022ShoriDateKanri"."nendo" = #{調定年度}
         AND ((rgdb."DbT7022ShoriDateKanri"."shoriName" = '特徴結果情報取込' AND  rgdb."DbT7022ShoriDateKanri"."nendoNaiRenban" = #{年度内連番})
-            OR(rgdb."DbT7022ShoriDateKanri"."shoriName" = #{処理名} AND  rgdb."DbT7022ShoriDateKanri"."nendoNaiRenban" = '0001')
+        OR(rgdb."DbT7022ShoriDateKanri"."shoriName" = #{処理名} AND  rgdb."DbT7022ShoriDateKanri"."nendoNaiRenban" = '0001')
         )
-        AND rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID" IN 
-        <foreach  
-                    collection="市町村識別IDList"  
-                    item="item"
-                    open="("  
-                    separator=","  
-                    close=")">  
-                     #{item}  
-         </foreach>
-          ORDER BY rgdb."DbT7022ShoriDateKanri"."shoriEdaban"
+        AND rgdb."DbT7051KoseiShichosonMaster"."shichosonShokibetsuID" IN
+        <foreach
+            collection="市町村識別IDList"
+            item="item"
+            open="("
+            separator=","
+            close=")">
+            #{item}
+        </foreach>
+        ORDER BY rgdb."DbT7022ShoriDateKanri"."shoriEdaban"
     </sql>
     <resultMap id="resultMap_DbT7022ShoriDateKanriEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity">
+               type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity">
         <result property="shoriEdaban" column="shoriEdaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-    </resultMap> 
+    </resultMap>
 </mapper>

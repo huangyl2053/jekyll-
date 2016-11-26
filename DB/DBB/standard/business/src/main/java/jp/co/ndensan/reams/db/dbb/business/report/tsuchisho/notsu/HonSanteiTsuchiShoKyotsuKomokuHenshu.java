@@ -89,7 +89,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
      * @return 編集後本算定通知書共通情報
      */
     public EditedHonSanteiTsuchiShoKyotsu create本算定通知書共通情報(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
-
         GennenKanen 現年度_過年度区分 = 本算定通知書情報.get現年度_過年度区分();
         Decimal 普徴納付済額_未到来期含む;
         Decimal 普徴納付済額_未到来期含まない;
@@ -146,7 +145,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                     break;
                 }
             }
-
             特徴納付済額_未到来期含まない = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_納付済期);
             特徴納付済額_未到来期含む = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_最大期);
             納付済額_未到来期含む = 普徴納付済額_未到来期含む.add(特徴納付済額_未到来期含む);
@@ -195,7 +193,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             特別徴収額合計 = 特徴既に納付すべき額.add(特徴今後納付すべき額);
             普通徴収額合計 = 普徴既に納付すべき額.add(普徴今後納付すべき額_調定元に);
         }
-
         FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
         EditedHonSanteiTsuchiShoKyotsu shoKyotsu = new EditedHonSanteiTsuchiShoKyotsu();
         shoKyotsu.set被保険者番号(賦課情報.get被保険者番号());
@@ -217,9 +214,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         shoKyotsu.set更正後(更正後);
         shoKyotsu.set減免額(賦課情報.get減免額());
         Decimal 確定保険料_年額 = 更正後.get確定保険料_年額();
-        if (確定保険料_年額 == null) {
-            確定保険料_年額 = Decimal.ZERO;
-        }
+        確定保険料_年額 = 確定保険料_年額 == null ? Decimal.ZERO : 確定保険料_年額;
         shoKyotsu.set増減額(確定保険料_年額.subtract(nullToZero(更正前.get確定保険料_年額())));
         shoKyotsu.set納付済額_未到来期含む(納付済額_未到来期含む);
         shoKyotsu.set納付済額_未到来期含まない(納付済額_未到来期含まない);

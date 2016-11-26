@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXB;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import jp.co.ndensan.reams.db.dbu.business.core.tokuteikojinjohoteikyo.TokuteiKojinJohoKoumokuHanKanriBusiness;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.BangoseidoKinoShiyoSeigyo;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.MukokaFlag;
@@ -30,10 +34,13 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.io.FileWriter;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  *
  * @reamsid_L DBU-4880-100 wangxiaodong
  */
+@SuppressWarnings("checkstyle:illegaltoken")
 public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJohoNNTempEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
@@ -54,15 +62,29 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
     private static final int 桁目_6 = 5;
     private static final int 桁目_3 = 2;
     private static final int 桁数_3 = 3;
+    private static final RString 換行符 = new RString("\\n");
     private static final RString 転義符 = new RString("\"");
     private static final RString 本番モード = new RString("0");
     private static final RString テストモード = new RString("1");
-    private static final RString 文字列_大なり = new RString("&gt");
-    private static final RString 文字列_小なり = new RString("&lt");
-    private static final RString 文字列_二重引用符 = new RString("&quot");
+    private static final RString 登録削除区分 = new RString("1");
+    private static final RString 電文種別ID = new RString("IF_DBM_20113_R01");
+    private static final RString 文字列_大なり = new RString(">");
+    private static final RString 文字列_小なり = new RString("<");
+    private static final RString 文字列_二重引用符 = new RString("\"");
     private static final RString 文字列_スラッシュ = new RString("/");
     private static final RString 文字列_連結符 = new RString("_");
+    private static final RString 文字列_ハイフン = new RString("-");
     private static final RString 文字列_拡張子 = new RString(".xml");
+    private static final RString 文字列_CDATA後 = new RString("]]>");
+    private static final RString 文字列_CDATA前 = new RString("<![CDATA[");
+    private static final RString 文字列_VERSION = new RString(" Version=");
+    private static final RString 文字列_ENCODING = new RString("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+    private static final RString 文字列_TRUE = new RString("true");
+    private static final RString 文字列_TIMEANDDATEOFUPDATE = new RString(" TimeAndDateOfUpdate=");
+    private static final RString 文字列_REASONOFNULL = new RString("ReasonOfNull=");
+    private static final RString 文字列_XSI = new RString(" xsi:nil=");
+    private static final RString 文字列_XMLNS = new RString(" xmlns:xsi=");
+    private static final RString 文字列_URL = new RString("http://www.w3.org/2001/XMLSchema-instance");
     private static final RString 登録依頼電文ファイル名 = new RString("DBM_20113");
     private static final RString 登録依頼添付電文ファイル名 = new RString("DBM_20113_ATTACH");
     private static final RDate システム日付 = RDate.getNowDate();
@@ -83,6 +105,9 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
     private List<TokuteiKojinJohoKoumokuHanKanriBusiness> 項目版管理List;
     private DBM20113AttachToBsEntity dBM20113AttachToBsEntity;
     private List<DBM20113AttachToBsBeanEntity> dBM20113AttachToBsBeanEntityList;
+
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 中間DB提供基本情報;
 
     @Override
     protected void initialize() {
@@ -118,9 +143,13 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
                         processParameter.get版番号(), processParameter.get基準日());
         mybatisParameter = TokuteiKojinJohoHensyuMybatisParamater.createParamter中間DB提供基本情報取得_標準(
                 転義符.concat(processParameter.get中間DBテーブル名()).concat(転義符), processParameter.get特定個人情報名コード());
-        副本データ = 文字列_小なり.concat(new RString("?xml version=")).concat(文字列_二重引用符).concat(new RString("1.0")).
-                concat(文字列_二重引用符).concat(new RString(" encoding=")).concat(文字列_二重引用符).
-                concat(new RString("utf-8")).concat(文字列_二重引用符).concat(new RString("?")).concat(文字列_大なり);
+        副本データ = 文字列_CDATA前.concat(文字列_ENCODING);
+    }
+
+    @Override
+    protected void createWriter() {
+        中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(processParameter.get中間DBテーブル名(),
+                TeikyoKihonJohoNNTempEntity.class);
     }
 
     @Override
@@ -133,34 +162,32 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
         if (Integer.parseInt(特定個人情報分割件数.toString()) <= 添付データ件数) {
             ファイル連番 = ファイル連番 + 1;
             添付データ件数 = 0;
-            DBM20113ToBsEntity entity = setDBM20113ToBsEntity();
-            JAXB.marshal(entity, get電文ファイル名(登録依頼電文ファイル名).toString());
-            JAXB.marshal(dBM20113AttachToBsEntity, get電文ファイル名(登録依頼添付電文ファイル名).toString());
+            print電文(登録依頼電文ファイル名, setDBM20113ToBsEntity());
+            print電文(登録依頼添付電文ファイル名, dBM20113AttachToBsEntity);
         }
         添付データ件数 = 添付データ件数 + 1;
         レコード識別番号 = レコード識別番号 + 1;
         get提供内容リスト(t);
         for (TokuteiKojinJohoKoumokuHanKanriBusiness business : 項目版管理List) {
             if (TokuteiKojinJohoKomokuKubun.情報HD.getコード().equals(business.get特定個人情報項目区分())) {
-                副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(文字列_大なり);
+                副本データ = 副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(文字列_大なり);
             } else if (TokuteiKojinJohoKomokuKubun.繰返し項目.getコード().equals(business.get特定個人情報項目区分())) {
                 識別項目コード = business.get特定個人情報項目コード();
-                副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(new RString(" Version=")).concat(文字列_二重引用符).
-                        concat(business.getバージョン情報()).concat(文字列_二重引用符).concat(new RString(" TimeAndDateOfUpdate=")).
+                副本データ = 副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(文字列_VERSION).concat(文字列_二重引用符).
+                        concat(business.getバージョン情報()).concat(文字列_二重引用符).concat(文字列_TIMEANDDATEOFUPDATE).
                         concat(文字列_二重引用符).concat(getデータ作成日(システム日付)).concat(文字列_二重引用符).concat(文字列_大なり);
             } else if (TokuteiKojinJohoKomokuKubun.日付項目.getコード().equals(business.get特定個人情報項目区分())
                     || TokuteiKojinJohoKomokuKubun.個別項目.getコード().equals(business.get特定個人情報項目区分())) {
                 int index = Integer.parseInt(business.get提供内容項目番号().toString()) - 1;
                 if (MukokaFlag.有効.getコード().equals(business.get無効化フラグ())) {
-                    副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(new RString(" Version=")).
+                    副本データ = 副本データ.concat(文字列_小なり).concat(business.get特定個人情報項目コード()).concat(文字列_VERSION).
                             concat(文字列_二重引用符).concat(business.getバージョン情報()).concat(文字列_二重引用符);
                 }
                 if (RString.isNullOrEmpty(提供内容.get(index).get提供内容())) {
-                    副本データ.concat(new RString("ReasonOfNull=")).concat(文字列_二重引用符).concat(提供内容.get(index).get未設定事由()).
-                            concat(文字列_二重引用符).concat(new RString(" xsi:nil=")).concat(文字列_二重引用符).concat(new RString("true")).
-                            concat(文字列_二重引用符).concat(new RString(" xmlns:xsi=")).concat(文字列_二重引用符).
-                            concat(new RString("http://www.w3.org/2001/XMLSchema-instance")).concat(文字列_二重引用符).
-                            concat(文字列_スラッシュ).concat(文字列_大なり);
+                    副本データ = 副本データ.concat(文字列_REASONOFNULL).concat(文字列_二重引用符).concat(提供内容.get(index).get未設定事由()).
+                            concat(文字列_二重引用符).concat(文字列_XSI).concat(文字列_二重引用符).concat(文字列_TRUE).
+                            concat(文字列_二重引用符).concat(文字列_XMLNS).concat(文字列_二重引用符).concat(文字列_URL).
+                            concat(文字列_二重引用符).concat(文字列_スラッシュ).concat(文字列_大なり);
                 } else {
                     get副本データ(提供内容.get(index).get提供内容(), business.get特定個人情報項目区分(), business.get特定個人情報項目コード());
                 }
@@ -169,24 +196,28 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
         for (int i = 項目版管理List.size() - 1; i >= 0; i--) {
             if (TokuteiKojinJohoKomokuKubun.繰返し項目.getコード().equals(項目版管理List.get(i).get特定個人情報項目区分())
                     || TokuteiKojinJohoKomokuKubun.情報HD.getコード().equals(項目版管理List.get(i).get特定個人情報項目区分())) {
-                副本データ.concat(文字列_小なり).concat(文字列_スラッシュ).concat(
+                副本データ = 副本データ.concat(文字列_小なり).concat(文字列_スラッシュ).concat(
                         項目版管理List.get(i).get特定個人情報項目コード()).concat(文字列_大なり);
             }
+        }
+        if (!副本データ.contains(文字列_CDATA後)) {
+            副本データ = 副本データ.concat(文字列_CDATA後);
         }
         setDBM20113AttachToBsEntityList(t);
         if (添付データ件数 != 0) {
             ファイル連番 = ファイル連番 + 1;
-            JAXB.marshal(setDBM20113ToBsEntity(), get電文ファイル名(登録依頼電文ファイル名).toString());
-            JAXB.marshal(dBM20113AttachToBsEntity, get電文ファイル名(登録依頼添付電文ファイル名).toString());
+            print電文(登録依頼電文ファイル名, setDBM20113ToBsEntity());
+            print電文(登録依頼添付電文ファイル名, dBM20113AttachToBsEntity);
         }
+        中間DB提供基本情報.delete(t);
     }
 
     private RString getデータ作成日(RDate date) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(date.getYearValue());
-        builder.append("-");
+        builder.append(文字列_ハイフン);
         builder.append(new RString(date.getMonthValue()).padZeroToLeft(2));
-        builder.append("-");
+        builder.append(文字列_ハイフン);
         builder.append(new RString(date.getDayValue()).padZeroToLeft(2));
         return builder.toRString();
     }
@@ -208,13 +239,13 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
         entity.setDuplicateCopyData(副本データ.toString());
         dBM20113AttachToBsBeanEntityList.add(entity);
         dBM20113AttachToBsEntity.setInformationOfSPIRegistrationDelete(dBM20113AttachToBsBeanEntityList);
-        dBM20113AttachToBsEntity.setSegmentOfRegistrationDelete("1");
+        dBM20113AttachToBsEntity.setSegmentOfRegistrationDelete(登録削除区分.toString());
     }
 
     private MessageHeaderEntity setMessageHeaderEntity() {
         MessageHeaderEntity entity = new MessageHeaderEntity();
         entity.setMsgId(RString.EMPTY.toString());
-        entity.setMsgTypeId("IF_DBM_20113_R01");
+        entity.setMsgTypeId(電文種別ID.toString());
         entity.setMsgMode(電文実行モード.toString());
         entity.setSourceSystemID(送信元システムID.toString());
         entity.setDestinationSystemID(送信先システムID.toString());
@@ -286,4 +317,34 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
                 concat(文字列_連結符).concat(送信先システムID).concat(文字列_連結符).concat(processParameter.getデータセット番号()).
                 concat(文字列_連結符).concat(new RString(ファイル連番).padZeroToLeft(桁数_3)).concat(文字列_拡張子));
     }
+
+    private void print電文(RString ファイル名, Object jaxbElement) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(jaxbElement.getClass());
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, com.fasterxml.jackson.core.JsonEncoding.UTF8.getJavaName());
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, false);
+            marshaller.setProperty(com.sun.xml.bind.marshaller.CharacterEscapeHandler.class.getName(),
+                    new com.sun.xml.bind.marshaller.CharacterEscapeHandler() {
+                        @Override
+                        public void escape(char[] ac, int i, int j, boolean flag, java.io.Writer writer) throws IOException {
+                            writer.write(ac, i, j);
+                        }
+                    });
+            java.io.StringWriter writer = new StringWriter();
+            marshaller.marshal(jaxbElement, writer);
+            RString strXml = new RString(writer.toString());
+            List<RString> listStr = strXml.split(換行符.toString());
+            try (FileWriter fileWriter = new FileWriter(get電文ファイル名(ファイル名))) {
+                for (RString rString : listStr) {
+                    fileWriter.writeLine(rString);
+                }
+                fileWriter.close();
+            }
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

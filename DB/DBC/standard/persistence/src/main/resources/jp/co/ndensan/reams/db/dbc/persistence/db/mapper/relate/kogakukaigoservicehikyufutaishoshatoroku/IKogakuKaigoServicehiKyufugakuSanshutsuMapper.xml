@@ -4,7 +4,6 @@
 <!-- @reamsid_L DBC-2010-070 tianshuai -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper">
 
-    <!--tianshuai START-->
     <!-- 給付実績基本情報高額一時1をINSERT用のデータの取得 -->
     <select resultOrdered="true" id="select給付実績基本情報高額一時1"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020010.KogakuKaigoServicehiKyufutaishoshaTorokuMybatisParameter"
@@ -687,9 +686,7 @@
          "TempSetaiinShotokuHantei3"."atena_juminShubetsuCode" as "tempSetaiinShotokuHantei3_atena_juminShubetsuCode",
          "TempSetaiinShotokuHantei3"."atena_seinengappiYMD" as "tempSetaiinShotokuHantei3_atena_seinengappiYMD"
     </sql>
-    <!--tianshuai END-->
 
-    <!--lifei START-->
     <select id="get給付実績基本情報高額一時3" resultMap="ResultMap_HihokenshaKanriDataEntity" fetchSize="500" resultOrdered="true" >
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
@@ -847,9 +844,7 @@
             A."jigyoshoNo" ASC,
             A."shinsaYM" DESC
     </select>
-    <!--lifei END-->
 
-    <!--zhouchuanlin START-->
     <!--高額介護サービス世帯員所得判定明細高額一時２と宛名情報の抽出-->
     <select resultOrdered="true" id="select高額介護サービス世帯員所得判定明細高額一時２と宛名情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
@@ -1181,9 +1176,7 @@
          AND "jigyoshoNo" = #{jigyoshoNo}
          AND "toshiNo" = #{toshiNo}
     </update>
-    <!--zhouchuanlin END-->
 
-    <!--shifengming START-->
     <!-- 給付実績集計一時にselsctする。 -->
     <select resultOrdered="true" id="select給付実績集計" resultMap="ResultMap_DbT3033KyufujissekiShukeiEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter" fetchSize="500">
@@ -2531,10 +2524,8 @@
          <result property="beikoSetaishotokuKubun" column="tempKyufujissekiTyukannJigyo_beikoSetaishotokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
          <result property="beikoKojinshotokuKubun" column="tempKyufujissekiTyukannJigyo_beikoKojinshotokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
          <result property="riyoFitanDankai2" column="tempKyufujissekiTyukannJigyo_riyoFitanDankai2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-         </resultMap>
-    <!--shifengming END-->
+    </resultMap>
 
-    <!--chenaoqi START-->
     <resultMap id="resultMap_SetaiHihokenshaResultEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.SetaiHihokenshaResultEntity" autoMapping="true">
         <id column="tmpSetaiShotoku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id column="tmpSetaiShotoku_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
@@ -2876,7 +2867,7 @@
                 ELSE to_char(CAST(SUBSTRING(MAX(世帯員所得判定明細一時."kijunYMD"),1,4) AS numeric)-2,'9999')
                 END AS 最大続柄コード参照年
          FROM  "TempSetaiinShotokuHanteiMeisai" AS 世帯員所得判定明細一時
-     </select>
+    </select>
 
     <resultMap id="ResultMap_高額介護データ一時" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannKogakuRelateEntity" autoMapping="true">
         <id column="tempKyufujissekiTyukann_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -3445,5 +3436,4 @@
         <result property="kyugoShisetsuNyuTaishoKubun" column="UrT0508SeikatsuHogoJukyusha_kyugoShisetsuNyuTaishoKubun" typeHandler="jp.co.ndensan.reams.ur.urd.entity.typehandlers.KyugoShisetsuNyuTaishoKubunTypeHandler"/>
         <result property="kyugoShisetsuNyutaishoYMD" column="UrT0508SeikatsuHogoJukyusha_kyugoShisetsuNyutaishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-    <!--chenaoqi END-->
 </mapper>

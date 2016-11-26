@@ -6,10 +6,11 @@
 package jp.co.ndensan.reams.db.dba.service.core.nenreitoutatuyoteishachecklist;
 
 import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7068ChohyoBunruiKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7068ChohyoBunruiKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -64,7 +65,7 @@ public class NenreiToutatuYoteishaCheckListManager {
      */
     @Transaction
     public DbT7022ShoriDateKanriBusiness get開始終了日() {
-        DbT7022ShoriDateKanriEntity entity = dbt7022dac.selectkaisyuYMD();
+        DbT7022ShoriDateKanriEntity entity = dbt7022dac.selectkaisyuYMD(ShoriName.年齢到達予定者チェックリスト.get名称());
         if (entity == null) {
             return null;
         }

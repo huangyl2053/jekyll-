@@ -281,7 +281,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         if (年度区分_現年度.equals(年度区分)) {
             徴収方法 = get徴収方法(賦課の情報);
         }
-        List<RString> 発行する帳票List = get通知書(算定区分, 年度区分, 徴収方法);
+        List<RString> 発行する帳票List = get通知書(算定区分, 年度区分, 徴収方法, 賦課の情報);
 
         RString 減免通知書 = get減免通知書(賦課の情報);
         if (減免通知書 != null) {
@@ -342,7 +342,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         return false;
     }
 
-    private List<RString> get通知書(RString 算定区分, RString 年度区分, RString 徴収方法) {
+    private List<RString> get通知書(RString 算定区分, RString 年度区分, RString 徴収方法, FukaJoho 賦課の情報) {
 
         List<RString> 発行する帳票List = new ArrayList<>();
         if (算定区分_仮算定.equals(算定区分)) {
@@ -383,7 +383,10 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
                 発行する帳票List.add(TsuchiSho.郵便振替納付書.get名称());
             }
         } else if (算定区分_本算定.equals(算定区分) && 年度区分_過年度.equals(年度区分)) {
-            発行する帳票List.add(TsuchiSho.保険料納入通知書_過年度.get名称());
+            if ((null == 賦課の情報.get特徴歳出還付額() || 賦課の情報.get特徴歳出還付額().equals(Decimal.ZERO))
+                    && (null == 賦課の情報.get普徴歳出還付額() || 賦課の情報.get普徴歳出還付額().equals(Decimal.ZERO))) {
+                発行する帳票List.add(TsuchiSho.保険料納入通知書_過年度.get名称());
+            }
             発行する帳票List.add(TsuchiSho.介護保険料額決定通知書_過年度.get名称());
             発行する帳票List.add(TsuchiSho.介護保険料額変更兼特別徴収中止通知書_過年度.get名称());
             発行する帳票List.add(TsuchiSho.郵便振替納付書.get名称());
@@ -1663,6 +1666,9 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
 
     private ShunyuJoho find現年度収入情報(Map<RString, FukaJoho> 賦課の情報マップ, RString 処理日, IKozaSearchKey kozaSearchKey,
             List<KamokuCode> list, RString 科目コード) {
+        if (賦課の情報マップ == null) {
+            return null;
+        }
         Set<Map.Entry<RString, FukaJoho>> map = 賦課の情報マップ.entrySet();
         FukaJoho 賦課情報 = null;
         for (Map.Entry<RString, FukaJoho> 賦課の情報 : map) {

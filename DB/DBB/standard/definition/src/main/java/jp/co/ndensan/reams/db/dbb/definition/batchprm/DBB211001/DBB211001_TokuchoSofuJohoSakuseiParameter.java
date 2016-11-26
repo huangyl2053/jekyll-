@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB211001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb211001.DelTokuchoKaifuJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb211001.InsChoshuHoho2ProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb211001.InsFukaTempProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb211001.InsJushochiTokureiTempProcessParameter;
@@ -318,5 +319,14 @@ public class DBB211001_TokuchoSofuJohoSakuseiParameter extends BatchParameterBas
                 処理対象月が1月, 処理対象月が2月, 処理対象月が3月, 処理対象月が4月,
                 処理対象月が5月, 処理対象月が6月, 処理対象月が7月, 処理対象月が8月,
                 処理対象月が9月, 処理対象月が10月, 処理対象月が11月, 処理対象月が12月);
+    }
+
+    /**
+     * DelTokuchoKaifuJohoProcessParameterの取得です。
+     *
+     * @return DelTokuchoKaifuJohoProcessParameter
+     */
+    public DelTokuchoKaifuJohoProcessParameter toDelTokuchoKaifuJohoProcessParameter() {
+        return new DelTokuchoKaifuJohoProcessParameter(賦課年度, 処理対象月);
     }
 }
