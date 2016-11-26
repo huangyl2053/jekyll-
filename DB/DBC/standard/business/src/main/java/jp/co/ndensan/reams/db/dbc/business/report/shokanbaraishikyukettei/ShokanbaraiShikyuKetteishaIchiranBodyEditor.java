@@ -110,6 +110,7 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
         source.choikiCode = getNotNull(被保険者.get町域コード());
         source.gyoseikuCode = getNotNull(被保険者.get行政区コード());
         source.shimei50onKana = getNotNull(被保険者.get氏名50音カナ());
+        source.serviceShuruiCode = getNotNull(サービス種類コード);
         if (!RString.isNullOrEmpty(被保険者.get識別コード())) {
             source.shikibetuCode = new ShikibetsuCode(被保険者.get識別コード());
         }
