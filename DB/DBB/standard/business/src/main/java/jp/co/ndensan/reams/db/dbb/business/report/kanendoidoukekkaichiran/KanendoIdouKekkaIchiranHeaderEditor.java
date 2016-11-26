@@ -41,8 +41,6 @@ public class KanendoIdouKekkaIchiranHeaderEditor implements IKanendoIdouKekkaIch
     private static final int NUM_9 = 9;
     private static final int NUM_10 = 10;
     private static final int NUM_11 = 11;
-    private static final int NUM_12 = 12;
-    private static final int NUM_13 = 13;
     private static final RString SAKUSEI = new RString("作成");
 
     /**
