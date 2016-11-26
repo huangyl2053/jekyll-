@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc100030;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100030.JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc100030.JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票設計_DBCMN32002_介護保険受領委任契約承認（不承認）確認書（事業者用） BodyEditor
@@ -32,6 +33,7 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEditor
     public JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoSource edit(
             JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoSource source) {
         editSource(source);
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -98,6 +100,18 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEditor
         source.tsuchibun2 = entity.get通知文2();
         source.pagecnt = entity.getページ();
 
+    }
+
+    private void setPageBreakEmpty(JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoSource source) {
+        if (source.kyufuShurui == null) {
+            source.kyufuShurui = RString.EMPTY;
+        }
+        if (source.shoninYMD == null) {
+            source.shoninYMD = RString.EMPTY;
+        }
+        if (source.hihokenshaNo == null) {
+            source.hihokenshaNo = RString.EMPTY;
+        }
     }
 
 }
