@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaish
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -64,6 +65,16 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     private final RString 並び順の４件目;
     private final RString 並び順の５件目;
     private final List<RString> 改頁項目List;
+
+    private static final RString 識別コード = new RString("識別コード");
+    private static final RString 氏名５０音カナ = new RString("氏名５０音カナ");
+    private static final RString 生年月日 = new RString("生年月日");
+    private static final RString 性別 = new RString("性別");
+    private static final RString 市町村コード = new RString("市町村コード");
+    private static final RString 賦課年度 = new RString("賦課年度");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
+    private static final RString 年金コード = new RString("年金コード");
+    private static final RString 年金番号 = new RString("年金番号");
 
     /**
      * インスタンスを生成します。
@@ -460,19 +471,19 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         source.shutsuryokujun5 = 並び順の５件目;
         if (null != 改頁項目List && !改頁項目List.isEmpty()) {
             if (改頁項目List.size() > NUMBER_0) {
-                source.kaipage1 = 改頁項目List.get(NUMBER_0);
+                source.kaipage1 = set改頁項目(改頁項目List.get(NUMBER_0));
             }
             if (改頁項目List.size() > NUMBER_1) {
-                source.kaipage2 = 改頁項目List.get(NUMBER_1);
+                source.kaipage2 = set改頁項目(改頁項目List.get(NUMBER_1));
             }
             if (改頁項目List.size() > NUMBER_2) {
-                source.kaipage3 = 改頁項目List.get(NUMBER_2);
+                source.kaipage3 = set改頁項目(改頁項目List.get(NUMBER_2));
             }
             if (改頁項目List.size() > NUMBER_3) {
-                source.kaipage4 = 改頁項目List.get(NUMBER_3);
+                source.kaipage4 = set改頁項目(改頁項目List.get(NUMBER_3));
             }
             if (改頁項目List.size() > NUMBER_4) {
-                source.kaipage5 = 改頁項目List.get(NUMBER_4);
+                source.kaipage5 = set改頁項目(改頁項目List.get(NUMBER_4));
             }
         }
     }
@@ -503,4 +514,41 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         return DecimalFormatter.toコンマ区切りRString(金額, 0);
     }
 
+    private RString set改頁項目(RString 改頁項目) {
+        RString 改頁 = RString.EMPTY;
+        if (氏名５０音カナ.equals(改頁項目)) {
+            AtenaKanaMeisho kanaMeisho = 計算後情報_宛名_口座_更正後Entity.get宛名Entity().getKanaMeisho();
+            if (kanaMeisho != null) {
+                改頁 = kanaMeisho.value();
+            }
+        }
+        if (識別コード.equals(改頁項目)) {
+            改頁 = 計算後情報_宛名_口座_更正後Entity.get識別コード().value();
+        }
+        if (市町村コード.equals(改頁項目)) {
+            改頁 = 計算後情報_宛名_口座_更正後Entity.get賦課市町村コード().value();
+        }
+        if (被保険者番号.equals(改頁項目)) {
+            改頁 = 計算後情報_宛名_口座_更正後Entity.get被保険者番号().value();
+        }
+        if (生年月日.equals(改頁項目)) {
+            FlexibleDate seinengappiYMD = 計算後情報_宛名_口座_更正後Entity.get宛名Entity().getSeinengappiYMD();
+            if (seinengappiYMD != null) {
+                改頁 = new RString(seinengappiYMD.toString());
+            }
+        }
+        if (性別.equals(改頁項目)) {
+            改頁 = 計算後情報_宛名_口座_更正後Entity.get宛名Entity().getSeibetsuCode();
+        }
+        if (賦課年度.equals(改頁項目)) {
+            改頁 = 計算後情報_宛名_口座_更正後Entity.get賦課年度().toDateString();
+        }
+        if (年金コード.equals(改頁項目)) {
+            改頁 = 計算後情報_宛名_口座_更正後Entity.get本徴収_年金コード();
+        }
+        if (年金番号.equals(改頁項目)) {
+            改頁 = 計算後情報_宛名_口座_更正後Entity.get本徴収_基礎年金番号();
+        }
+        return 改頁;
+    }
 }
