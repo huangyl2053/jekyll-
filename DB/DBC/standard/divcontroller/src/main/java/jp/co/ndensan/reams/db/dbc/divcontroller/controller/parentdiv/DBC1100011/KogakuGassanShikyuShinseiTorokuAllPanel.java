@@ -71,6 +71,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     private static final RString RSTRING_THREE = new RString("3");
     private static final RString 排他情報 = new RString("DBCHihokenshaNo");
     private static final RString 申請情報を保存する_申請登録 = new RString("btnSaveShinseiToroku");
+    private static final RString 申請情報を保存する_変更取下げ = new RString("btnSaveHenkoTorisage");
     private static final int INT_6 = 6;
     private static final RString 完了メッセージ = new RString("高額合算支給申請情報の登録が完了しました。");
     private static final RString 支給申請書整理番号 = new RString("支給申請書整理番号：");
@@ -189,6 +190,14 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
                 && !flg) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(申請情報を保存する_申請登録, true);
         }
+        RString 照会モード = ViewStateHolder.get(ViewStateKeys.照会モード, RString.class);
+        if (照会モード != null) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請情報を保存する_変更取下げ, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請情報を保存する_変更取下げ, false);
+
+        }
+
         return ResponseData.of(div).rootTitle(タイトル).respond();
     }
 
