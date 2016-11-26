@@ -36,7 +36,7 @@ public class InsShutsuryokujunProcess extends BatchProcessBase<DbT2015KeisangoJo
     private static final RString 特徴開始月_4月 = new RString("4");
     private static final RString 特徴開始月_6月 = new RString("6");
     private static final RString 特徴開始月_8月 = new RString("8");
-    private static final int INT_1 = -1;
+    private static final int INT_0 = 0;
 
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
@@ -66,11 +66,11 @@ public class InsShutsuryokujunProcess extends BatchProcessBase<DbT2015KeisangoJo
             出力順TemoEntity.setChoshuHoho(併用徴収);
         }
         出力順TemoEntity.setTokuchoKaisiTuki(特徴開始月);
-        if (Decimal.ZERO.compareTo(entity.getTkKibetsuGaku01()) == INT_1) {
+        if (Decimal.ZERO.compareTo(entity.getTkKibetsuGaku01()) < INT_0) {
             出力順TemoEntity.setTokuchoKaisiTuki(特徴開始月_4月);
-        } else if (Decimal.ZERO.compareTo(entity.getTkKibetsuGaku02()) == INT_1) {
+        } else if (Decimal.ZERO.compareTo(entity.getTkKibetsuGaku02()) < INT_0) {
             出力順TemoEntity.setTokuchoKaisiTuki(特徴開始月_6月);
-        } else if (Decimal.ZERO.compareTo(entity.getTkKibetsuGaku03()) == INT_1) {
+        } else if (Decimal.ZERO.compareTo(entity.getTkKibetsuGaku03()) < INT_0) {
             出力順TemoEntity.setTokuchoKaisiTuki(特徴開始月_8月);
         }
         tempDbWriter.insert(出力順TemoEntity);

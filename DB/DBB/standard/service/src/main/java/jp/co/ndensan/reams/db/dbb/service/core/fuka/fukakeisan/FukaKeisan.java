@@ -593,7 +593,12 @@ public class FukaKeisan extends FukaKeisanFath {
         調定計算パラメータ.set賦課年度(param.get賦課年度());
         調定計算パラメータ.set調定日時(param.get調定日時());
         調定計算パラメータ.set徴収方法の情報_更正前(new ChoshuHoho(param.get徴収方法の情報_更正前().toEntity()));
-        調定計算パラメータ.set年額保険料(年額保険料.getHokenryoNengaku());
+
+        if (param.get年度分賦課リスト_更正前() != null && param.get年度分賦課リスト_更正前().get現年度() != null) {
+            調定計算パラメータ.set年額保険料(param.get年度分賦課リスト_更正前().get現年度().get減免前介護保険料_年額());
+        } else {
+            調定計算パラメータ.set年額保険料(年額保険料.getHokenryoNengaku());
+        }
         調定計算パラメータ.set資格の情報(new HihokenshaDaicho(param.get資格の情報().toEntity()));
         if (param.get年度分賦課リスト_更正前() == null) {
             return create新規の賦課処理コア(param, 賦課根拠パラメータ, 賦課基準日, 調定計算パラメータ);
@@ -759,7 +764,7 @@ public class FukaKeisan extends FukaKeisanFath {
         ChoshuHoho 出力徴収方法の情報 = new ChoshuHoho(param.get徴収方法の情報_更正前().toEntity());
         HihokenshaDaicho 資格の情報 = param.get資格の情報();
         if ((調定計算用年度分賦課リスト.get現年度() != null
-                && !年額保険料.equals(調定計算用年度分賦課リスト.get現年度().get減免前介護保険料_年額()))
+                && !年額保険料.equals(param.get年度分賦課リスト_更正前().get現年度().get減免前介護保険料_年額()))
                 || (param.get徴収方法の情報_更正前().get特別徴収停止事由コード() != null
                 && !param.get徴収方法の情報_更正前().get特別徴収停止事由コード().isEmpty())) {
             調定計算パラメータ.set年度分賦課リスト_更正前(調定計算用年度分賦課リスト);
@@ -770,27 +775,27 @@ public class FukaKeisan extends FukaKeisanFath {
         }
         if (調定計算用年度分賦課リスト.get現年度() != null) {
             年度分賦課リスト_更正後.set現年度(create出力対象の生成(param, param.get年度分賦課リスト_更正前().get現年度(),
-                    調定計算用年度分賦課リスト.get現年度(), 出力徴収方法の情報));
+                    年度分賦課リスト_更正後.get現年度(), 出力徴収方法の情報));
         }
         if (調定計算用年度分賦課リスト.get過年度1() != null) {
             年度分賦課リスト_更正後.set過年度1(create出力対象の生成(param, param.get年度分賦課リスト_更正前().get過年度1(),
-                    調定計算用年度分賦課リスト.get過年度1(), 出力徴収方法の情報));
+                    年度分賦課リスト_更正後.get過年度1(), 出力徴収方法の情報));
         }
         if (調定計算用年度分賦課リスト.get過年度2() != null) {
             年度分賦課リスト_更正後.set過年度2(create出力対象の生成(param, param.get年度分賦課リスト_更正前().get過年度2(),
-                    調定計算用年度分賦課リスト.get過年度2(), 出力徴収方法の情報));
+                    年度分賦課リスト_更正後.get過年度2(), 出力徴収方法の情報));
         }
         if (調定計算用年度分賦課リスト.get過年度3() != null) {
             年度分賦課リスト_更正後.set過年度3(create出力対象の生成(param, param.get年度分賦課リスト_更正前().get過年度3(),
-                    調定計算用年度分賦課リスト.get過年度3(), 出力徴収方法の情報));
+                    年度分賦課リスト_更正後.get過年度3(), 出力徴収方法の情報));
         }
         if (調定計算用年度分賦課リスト.get過年度4() != null) {
             年度分賦課リスト_更正後.set過年度4(create出力対象の生成(param, param.get年度分賦課リスト_更正前().get過年度4(),
-                    調定計算用年度分賦課リスト.get過年度4(), 出力徴収方法の情報));
+                    年度分賦課リスト_更正後.get過年度4(), 出力徴収方法の情報));
         }
         if (調定計算用年度分賦課リスト.get過年度5() != null) {
             年度分賦課リスト_更正後.set過年度5(create出力対象の生成(param, param.get年度分賦課リスト_更正前().get過年度5(),
-                    調定計算用年度分賦課リスト.get過年度5(), 出力徴収方法の情報));
+                    年度分賦課リスト_更正後.get過年度5(), 出力徴収方法の情報));
         }
 
         KoseiShorikoaResult result = new KoseiShorikoaResult();
@@ -937,7 +942,7 @@ public class FukaKeisan extends FukaKeisanFath {
         賦課RelateEntity.set介護賦課Entity(賦課の情報.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
 
-        if (!賦課の情報.getKibetsuList().isEmpty()) {
+        if (賦課の情報.getKibetsuList() != null && !賦課の情報.getKibetsuList().isEmpty()) {
             for (Kibetsu kibetsu : 賦課の情報.getKibetsuList()) {
                 KibetsuEntity entity = new KibetsuEntity();
                 List<UrT0705ChoteiKyotsuEntity> 調定共通Entity = new ArrayList<>();
@@ -1194,7 +1199,7 @@ public class FukaKeisan extends FukaKeisanFath {
                     break;
                 }
             }
-            builder.set世帯員数(param.get世帯員所得情報List().size());
+            builder.set世帯員数(param.get世帯員所得情報List().size() - INT_1);
         } else {
             builder.set課税区分(null).set合計所得金額(null).set公的年金収入額(null);
         }

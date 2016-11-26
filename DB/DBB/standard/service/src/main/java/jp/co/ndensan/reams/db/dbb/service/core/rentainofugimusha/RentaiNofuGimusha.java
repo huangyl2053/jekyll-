@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * ビジネス設計_DBBMN71001_連帯納付義務者登録のクラス
@@ -92,6 +93,9 @@ public class RentaiNofuGimusha {
         RentaiGimushaAtenaJouhou 連帯納付義務者宛名情報;
         for (RentaiGimusha 連帯納付義務者 : 連帯納付義務者リスト) {
             DbT2009RentaiGimushaEntity 連帯納付義務者entity = 連帯納付義務者.toEntity();
+            if (!連帯納付義務者.hasChanged()) {
+                連帯納付義務者entity.setState(EntityDataState.Unchanged);
+            }
             IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(
                     GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
             IShikibetsuTaishoSearchKey 検索キー = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true)
@@ -132,6 +136,7 @@ public class RentaiNofuGimusha {
         List<RentaiGimusha> 連帯納付義務者リスト = new ArrayList<>();
         if (連帯納付義務者情報リスト != null && !連帯納付義務者情報リスト.isEmpty()) {
             for (DbT2009RentaiGimushaEntity entity : 連帯納付義務者情報リスト) {
+                entity.initializeMd5();
                 連帯納付義務者リスト.add(new RentaiGimusha(entity));
             }
         }
@@ -144,6 +149,7 @@ public class RentaiNofuGimusha {
      * @param 連帯納付義務者情報リスト List<RentaiGimushaAtenaJouhouEntity>
      * @return 削除件数
      */
+    @Transaction
     public int delRentaiNofuGimushaInfo(List<RentaiGimusha> 連帯納付義務者情報リスト) {
 
         int 削除件数 = 0;

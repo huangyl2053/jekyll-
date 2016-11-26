@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import java.util.Objects;
@@ -20,14 +15,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
- * DbT7022ShoriDateKanriの項目定義クラスです。
+ * DbT7022ShoriDateKanriの項目定義クラスです
  *
- * @reamsid_L DBB-9999-022 xuxin
  */
-public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriDateKanriEntity>
-        implements IDbAccessable {
+public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriDateKanriEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
-    // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7022ShoriDateKanri");
 
@@ -335,7 +328,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
      * このエンティティの主キーが他の{@literal DbT7022ShoriDateKanriEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ {@literal DbT7022ShoriDateKanriEntity}の 場合{@literal true}、 それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7022ShoriDateKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7022ShoriDateKanriEntity other) {
@@ -389,9 +382,8 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(subGyomuCode, shichosonCode, shoriName, shoriEdaban, nendo, nendoNaiRenban, kijunYMD,
-                kijunTimestamp, taishoKaishiYMD, taishoShuryoYMD, taishoKaishiTimestamp, taishoShuryoTimestamp);
+        return super.toMd5(subGyomuCode, shichosonCode, shoriName, shoriEdaban, nendo, nendoNaiRenban, kijunYMD, kijunTimestamp, taishoKaishiYMD, taishoShuryoYMD, taishoKaishiTimestamp, taishoShuryoTimestamp);
     }
-// </editor-fold>
 
+// </editor-fold>
 }

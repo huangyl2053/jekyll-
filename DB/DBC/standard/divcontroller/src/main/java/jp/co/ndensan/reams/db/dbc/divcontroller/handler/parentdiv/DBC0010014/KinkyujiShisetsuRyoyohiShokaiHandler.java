@@ -219,11 +219,7 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
         } else {
             div.getBtnTokuteiNyushosha().setDisabled(false);
         }
-        if (ZERO.equals(識別番号管理.get高額介護サービス費設定区分())) {
-            div.getBtnKogakuKaigoService().setDisabled(true);
-        } else {
-            div.getBtnKogakuKaigoService().setDisabled(false);
-        }
+        div.getBtnKogakuKaigoService().setDisabled(true);
         if (ZERO.equals(識別番号管理.get特定診療費設定区分())) {
             div.getBtnTokuteiShinryo().setDisabled(true);
         } else {

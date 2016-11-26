@@ -32,6 +32,7 @@ public class DBB314001_GemmenParameter extends BatchParameterBase {
     private static final String KEY_FUKANENDO = "fukaNendo";
     private static final String KEY_SHINSEIYMD = "shinseiYMD";
     private static final String KEY_GEMMENJIYUCODE = "gemmenJiyuCode";
+    private static final String KEY_GEMMENJIYU = "gemmenJiyu";
     private static final String KEY_KETTEIJIYU = "ketteiJiyu";
     private static final String KEY_KETTEIYMD = "ketteiYMD";
     private static final String KEY_SHINSEIJIYU = "shinseiJiyu";
@@ -59,6 +60,8 @@ public class DBB314001_GemmenParameter extends BatchParameterBase {
     private FlexibleDate shinseiYMD;
     @BatchParameter(key = KEY_GEMMENJIYUCODE, name = "減免種類")
     private Code gemmenJiyuCode;
+    @BatchParameter(key = KEY_GEMMENJIYU, name = "減免事由")
+    private RString gemmenJiyu;
     @BatchParameter(key = KEY_SHINSEIJIYU, name = "申請理由")
     private RString shinseiJiyu;
     @BatchParameter(key = KEY_KETTEIYMD, name = "決定日")
@@ -73,6 +76,6 @@ public class DBB314001_GemmenParameter extends BatchParameterBase {
      */
     public GemmenProcessParameter toProcessParameter() {
         return new GemmenProcessParameter(choteiNendo, fukaNendo, list町域コード, list行政区コード, list地区1コード,
-                list地区2コード, list地区3コード, shinseiYMD, gemmenJiyuCode, shinseiJiyu, ketteiYMD, ketteiJiyu);
+                list地区2コード, list地区3コード, shinseiYMD, gemmenJiyuCode, gemmenJiyu, shinseiJiyu, ketteiYMD, ketteiJiyu);
     }
 }

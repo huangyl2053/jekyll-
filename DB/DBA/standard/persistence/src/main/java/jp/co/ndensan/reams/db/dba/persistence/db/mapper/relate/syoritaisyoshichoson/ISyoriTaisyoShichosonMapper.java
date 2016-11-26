@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.syoritaisyoshich
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.juminkirokuidojohotorokukoiki.JuminkirokuIdojohoTorokuKoikiMybatisParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 住民異動連携情報登録【広域保険者用】クラスです。

@@ -38,8 +38,7 @@
                 計算後情報."choteiNendo" = #{調定年度}
             AND 計算後情報."fukaNendo" = #{賦課年度}
             AND 計算後情報."koseiZengoKubun" = '2'
-            AND 計算後情報."tkKibetsuGaku01" <![CDATA[<>]]> 0 
-            AND 計算後情報."tkKibetsuGaku01" is not null 
+
             AND 計算後情報."tkKibetsuGaku02" <![CDATA[<>]]> 0
             AND 計算後情報."tkKibetsuGaku02" is not null 
             AND 計算後情報."tkKibetsuGaku03" <![CDATA[<>]]> 0

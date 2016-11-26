@@ -141,26 +141,26 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor implements IToku
     }
 
     private RString set改頁(List<ISetSortItem> list, RString 改頁, int index) {
-        if (世帯コード.toString().equals(list.get(index).get項目名().getClass().getName())) {
+        if (世帯コード.equals(list.get(index).get項目名())) {
             改頁 = 対象外entity == null ? 対象者entity.get世帯コード().value()
                     : 対象外entity.get世帯コード().value();
         }
-        if (識別コード.toString().equals(list.get(index).get項目名().getClass().getName())) {
+        if (識別コード.equals(list.get(index).get項目名())) {
             改頁 = 対象外entity == null ? 対象者entity.get識別コード().value()
                     : 対象外entity.get識別コード().value();
         }
-        if (市町村コード.toString().equals(list.get(index).get項目名().getClass().getName())) {
+        if (市町村コード.equals(list.get(index).get項目名())) {
             改頁 = 対象外entity == null ? 対象者entity.get賦課市町村コード().value()
                     : 対象外entity.get賦課市町村コード().value();
         }
-        if (被保険者番号.toString().equals(list.get(index).get項目名().getClass().getName())) {
+        if (被保険者番号.equals(list.get(index).get項目名())) {
             改頁 = 対象外entity == null ? 対象者entity.get被保険者番号().value()
                     : 対象外entity.get被保険者番号().value();
         }
-        if (町域コード.toString().equals(list.get(index).get項目名().getClass().getName())) {
+        if (町域コード.equals(list.get(index).get項目名())) {
             改頁 = 対象外entity == null ? get対象者ChoikiCode() : get対象外ChoikiCode();
         }
-        if (行政区コード.toString().equals(list.get(index).get項目名().getClass().getName())) {
+        if (行政区コード.equals(list.get(index).get項目名())) {
             改頁 = 対象外entity == null ? get対象者GyoseikuCode() : get対象外GyoseikuCode();
         }
         return 改頁;

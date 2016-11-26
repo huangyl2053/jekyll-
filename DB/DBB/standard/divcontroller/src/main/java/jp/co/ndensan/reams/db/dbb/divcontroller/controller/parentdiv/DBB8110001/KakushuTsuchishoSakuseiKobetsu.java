@@ -141,6 +141,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
     private ArrayList<FukaJoho> get賦課の情報リスト(List<FukaJoho> 賦課の情報1, List<FukaJoho> 賦課の情報2) {
         ArrayList<FukaJoho> 賦課の情報リスト = new ArrayList<>();
         for (FukaJoho fukaJoho2 : 賦課の情報2) {
+            賦課の情報1 = this.merge調定日時重複(賦課の情報1, fukaJoho2);
             if (!isContains(賦課の情報1, fukaJoho2)) {
                 賦課の情報1.add(fukaJoho2);
             }
@@ -162,6 +163,20 @@ public class KakushuTsuchishoSakuseiKobetsu {
                 return i;
             }
         });
+        return 賦課の情報リスト;
+    }
+
+    private List<FukaJoho> merge調定日時重複(List<FukaJoho> 賦課の情報List, FukaJoho 賦課の情報) {
+        List<FukaJoho> 賦課の情報リスト = new ArrayList<>();
+        for (FukaJoho fukaJoho : 賦課の情報List) {
+            if (fukaJoho.get賦課年度().getYearValue() == 賦課の情報.get賦課年度().getYearValue()
+                    && fukaJoho.get調定日時().toDateString().equals(賦課の情報.get調定日時().toDateString())) {
+                賦課の情報リスト.add(賦課の情報);
+            } else {
+                賦課の情報リスト.add(fukaJoho);
+            }
+
+        }
         return 賦課の情報リスト;
     }
 

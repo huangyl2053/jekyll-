@@ -2,17 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.dankaiIndex;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.dankaiKubun;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.fukaNendo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.rankuKubun;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankai;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankai.dankaiIndex;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankai.dankaiKubun;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankai.fukaNendo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankai.rankuKubun;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -59,9 +58,9 @@ public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankai
         return accessor.select().
                 table(DbT2013HokenryoDankai.class).
                 where(and(
-                                eq(fukaNendo, 賦課年度),
-                                eq(dankaiIndex, 段階インデックス),
-                                eq(rankuKubun, ランク区分))).
+                        eq(fukaNendo, 賦課年度),
+                        eq(dankaiIndex, 段階インデックス),
+                        eq(rankuKubun, ランク区分))).
                 toObject(DbT2013HokenryoDankaiEntity.class);
     }
 
@@ -85,8 +84,8 @@ public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankai
         List<DbT2013HokenryoDankaiEntity> list = accessor.select().
                 table(DbT2013HokenryoDankai.class).
                 where(and(
-                                eq(fukaNendo, 賦課年度),
-                                eq(dankaiKubun, 段階区分))).
+                        eq(fukaNendo, 賦課年度),
+                        eq(dankaiKubun, 段階区分))).
                 toList(DbT2013HokenryoDankaiEntity.class);
 
         return !list.isEmpty() ? list.get(0) : null;
@@ -126,8 +125,8 @@ public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankai
         return accessor.select().
                 table(DbT2013HokenryoDankai.class).
                 where(and(
-                                eq(fukaNendo, 賦課年度),
-                                eq(rankuKubun, ランク区分))).
+                        eq(fukaNendo, 賦課年度),
+                        eq(rankuKubun, ランク区分))).
                 toList(DbT2013HokenryoDankaiEntity.class);
     }
 

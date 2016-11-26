@@ -235,7 +235,8 @@ public class JikofutangakuShomeishoTorokuHandler {
     }
 
     private boolean is負担額変更1(boolean is変更, JikofutangakuShomeishoTorokuBusiness business) {
-        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> 明細List = business.get事業高額合算自己負担額証明書明細情報();
+        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> 明細List = getJibunnoMeisaiList(business.get事業高額合算自己負担額証明書情報(),
+                business.get事業高額合算自己負担額証明書明細情報());
 
         for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : 明細List) {
             if (八月.equals(meisai.get対象月())) {
@@ -1143,7 +1144,8 @@ public class JikofutangakuShomeishoTorokuHandler {
         div.getTxtRenrakusakiJusho().setValue(shomeisho.get支給額計算結果連絡先住所());
         div.getTxtRenrakusakiMei1().setValue(shomeisho.get支給額計算結果連絡先名称1());
         div.getTxtRenrakusakiMei2().setValue(shomeisho.get支給額計算結果連絡先名称2());
-        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> 明細List = business.get事業高額合算自己負担額証明書明細情報();
+        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> 明細List = getJibunnoMeisaiList(shomeisho,
+                business.get事業高額合算自己負担額証明書明細情報());
 
         for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : 明細List) {
             if (八月.equals(meisai.get対象月())) {
@@ -1198,6 +1200,22 @@ public class JikofutangakuShomeishoTorokuHandler {
 
         div.getTxtJikofutangakuGokei().setValue(shomeisho.get合計_自己負担額());
         div.getTxtUchiFutangakuGokei().setValue(shomeisho.get合計_70_74自己負担額_内訳());
+    }
+    
+    private List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> getJibunnoMeisaiList(JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho,
+            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList) {
+        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> jibunnoMeisaiList = new ArrayList<>();
+        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : meisaiList) {
+            if (shomeisho.get被保険者番号().equals(meisai.get被保険者番号())
+                    && shomeisho.get対象年度().equals(meisai.get対象年度())
+                    && shomeisho.get証記載保険者番号().equals(meisai.get証記載保険者番号())
+                    && shomeisho.get支給申請書整理番号().equals(meisai.get支給申請書整理番号())
+                    && shomeisho.get転入前保険者番号().equals(meisai.get転入前保険者番号())
+                    && shomeisho.get履歴番号() == meisai.get履歴番号()) {
+                jibunnoMeisaiList.add(meisai);
+            }
+        }
+        return jibunnoMeisaiList;
     }
 
     /**

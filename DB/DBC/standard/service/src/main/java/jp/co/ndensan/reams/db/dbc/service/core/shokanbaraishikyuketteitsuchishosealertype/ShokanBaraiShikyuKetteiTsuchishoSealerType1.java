@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
@@ -167,9 +168,23 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
             SofubutsuAtesakiSource 送付物宛先ソースデータ = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
             sealer = create帳票ソースデータ(sealer, count, ninshoshaSource, shiharai, batchPram, 文書番号, 通知文,
                     情報文, タイトル, 送付物宛先ソースデータ, pageCount, 種類);
-            count++;
+            boolean 金融機関未登録フラグ = false;
+            if (ShiharaiHohoKubun.口座払.getコード().equals(shiharai.get支払方法区分コード())
+                    && (null == shiharai.get金融機関コード() || shiharai.get金融機関コード().isEmpty())) {
+                金融機関未登録フラグ = true;
+            }
+            if (!RString.isNullOrEmpty(shiharai.get支給不支給決定区分())
+                    && ShikyuFushikyuKubun.支給.getコード().equals(shiharai.get支給不支給決定区分())
+                    && ShikakuKubun._２号.getコード().equals(shiharai.get被保険者区分コード())) {
+                金融機関未登録フラグ = false;
+            }
+            if (!金融機関未登録フラグ) {
+                count++;
+                hiHokenshaNo = shiharai.get被保険者番号().value();
+            } else {
+                帳票ソースデータ.remove(sealer);
+            }
             
-            hiHokenshaNo = shiharai.get被保険者番号().value();
         }
         List<RString> 帳票名 = new ArrayList<>();
         帳票名.add(ReportIdDBC.DBC100004.getReportName());

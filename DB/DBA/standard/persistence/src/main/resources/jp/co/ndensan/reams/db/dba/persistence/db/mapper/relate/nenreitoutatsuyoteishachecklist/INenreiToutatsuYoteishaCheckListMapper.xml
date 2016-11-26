@@ -54,8 +54,8 @@
         AND
         DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
         <if test ="userShutsuryokuSort">
-        ORDER BY
-        #{shutsuryokuSort}
+            ORDER BY
+            #{shutsuryokuSort}
         </if>
     </select>
 
@@ -92,8 +92,8 @@
         AND
         DbT1001Hiho."hihokennshaKubunCode" = '2'
         <if test ="userShutsuryokuSort">
-        ORDER BY
-        #{shutsuryokuSort}
+            ORDER BY
+            #{shutsuryokuSort}
         </if>
     </select>
 
@@ -132,8 +132,8 @@
         rgua.${psmShikibetsuTaisho2}
         )
         <if test ="userShutsuryokuSort">
-        ORDER BY
-        #{shutsuryokuSort}
+            ORDER BY
+            #{shutsuryokuSort}
         </if>
     </select>
 
@@ -225,8 +225,8 @@
         AND
         PSM."seinengappiYMD" IS NOT NULL
         <if test ="userShutsuryokuSort">
-        ORDER BY
-        #{shutsuryokuSort}
+            ORDER BY
+            #{shutsuryokuSort}
         </if>
 
     </select>
@@ -336,7 +336,7 @@
     </select>
 
     <!--処理日付管理マスタインサート処理-->
-    <insert id="getInsert" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" >
+    <insert id="getInsert" parameterType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity" >
         INSERT INTO
         rgdb."DbT7022ShoriDateKanri"
         ("subGyomuCode",

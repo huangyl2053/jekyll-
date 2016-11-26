@@ -29,17 +29,20 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.tblS
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.tokucho.TokuchoIraiJohoSakuseiJokyo;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -937,9 +940,6 @@ public class SokujiFukaKouseiMainHandler {
         if (更正前現年度賦課 != null) {
             tablePanel.getLblTokuchoKoseiMaeSum().setText(get特別徴収の更正前合計(更正前現年度賦課));
         }
-        tablePanel.getLblTokuchoKoseiGoSum().setText(get特別徴収の更正後合計());
-        tablePanel.getLblTokuchoZogenSum().setText(get特別徴収の増減合計());
-        tablePanel.getLblTokuchoNofugakuSum().setText(get特別徴収の納付額合計());
     }
 
     private void set現年度の特別徴収情報の入力制御(
@@ -984,6 +984,17 @@ public class SokujiFukaKouseiMainHandler {
             is5期入力可 = Boolean.FALSE;
             is6期入力可 = Boolean.FALSE;
         }
+
+        RString 日付関連_調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        if (!日付関連_調定年度.equals(更正前後徴収方法.get賦課年度().toDateString())) {
+            is1期入力可 = Boolean.FALSE;
+            is2期入力可 = Boolean.FALSE;
+            is3期入力可 = Boolean.FALSE;
+            is4期入力可 = Boolean.FALSE;
+            is5期入力可 = Boolean.FALSE;
+            is6期入力可 = Boolean.FALSE;
+        }
+
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         tablePanel.getTxtTokuchoKoseiGo04().setReadOnly(!is1期入力可 || tablePanel.getTxtTokuchoKoseiGo04().isReadOnly());
         tablePanel.getTxtTokuchoKoseiGo06().setReadOnly(!is2期入力可 || tablePanel.getTxtTokuchoKoseiGo06().isReadOnly());
@@ -991,6 +1002,10 @@ public class SokujiFukaKouseiMainHandler {
         tablePanel.getTxtTokuchoKoseiGo10().setReadOnly(!is4期入力可 || tablePanel.getTxtTokuchoKoseiGo10().isReadOnly());
         tablePanel.getTxtTokuchoKoseiGo12().setReadOnly(!is5期入力可 || tablePanel.getTxtTokuchoKoseiGo12().isReadOnly());
         tablePanel.getTxtTokuchoKoseiGo02().setReadOnly(!is6期入力可 || tablePanel.getTxtTokuchoKoseiGo02().isReadOnly());
+
+        tablePanel.getLblTokuchoKoseiGoSum().setText(get特別徴収の更正後合計());
+        tablePanel.getLblTokuchoZogenSum().setText(get特別徴収の増減合計());
+        tablePanel.getLblTokuchoNofugakuSum().setText(get特別徴収の納付額合計());
     }
 
     private boolean is特徴開始者(RString 徴収方法前月, RString 徴収方法) {

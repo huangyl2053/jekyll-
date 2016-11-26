@@ -139,16 +139,15 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
     private static void setページ数と金額(int 様式連番, Decimal 振込金額) {
         データ数++;
+        if (1 == データ数 % ページ件数 && 1 != データ数) {
+            毎ページ振込金額合算 = Decimal.ZERO;
+            毎ページ数 = 0;
+        }
         if (様式連番_1 == 様式連番) {
             毎ページ数++;
             総レコード数++;
             毎ページ振込金額合算 = 毎ページ振込金額合算.add(振込金額);
             振込金額合算 = 振込金額合算.add(振込金額);
-
-        }
-        if (1 == データ数 % ページ件数 && 1 != データ数) {
-            毎ページ振込金額合算 = Decimal.ZERO;
-            毎ページ数 = 0;
         }
     }
 
@@ -434,7 +433,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                         concat(半角ハイフン).concat(振込明細一時TBL.getKinyuKikanShitenCode().value());
             }
             if (振込明細一時TBL.getKinyuKikanCode() != null) {
-                source.listUpper_5 = 振込明細一時TBL.getKinyuKikanCode().value();
+                source.listUpper_5 = 振込明細一時TBL.getKinyuKikanName();
             }
 
             source.listUpper_6 = 振込明細一時TBL.getYokinShubetsuName();

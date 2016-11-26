@@ -768,7 +768,7 @@
                   AND
                   DbT3017."kyuSochiNyushoshaTokureiCode" = '1'
               </if>
-              <if test="!旧措置特定有無flag">
+              <if test="旧措置特定有無flag1">
                   AND
                   DbT3017."kyuSochiNyushoshaTokureiCode" = '2'
               </if>
@@ -776,7 +776,7 @@
                   AND
                   DbT3017."rojinHokenShichosonNo" = ''
               </if>
-              <if test="!老人保健市町村番号有無flag">
+              <if test="老人保健市町村番号有無flag1">
                   AND
                     #{老人保健市町村番号有_開始} <![CDATA[<=]]> DbT3017."rojinHokenShichosonNo" 
                   AND
@@ -786,7 +786,7 @@
                 AND
                     DbT3017."rojinhokenJukyushaNo" = ''
               </if>
-              <if test="!老人保健受給者番号有無flag">
+              <if test="老人保健受給者番号有無flag1">
                 AND
                     #{老人保健受給者番号有_開始} <![CDATA[<=]]> DbT3017."rojinhokenJukyushaNo" 
                 AND

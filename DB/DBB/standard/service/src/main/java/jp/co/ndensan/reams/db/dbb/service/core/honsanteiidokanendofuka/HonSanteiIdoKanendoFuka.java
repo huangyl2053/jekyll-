@@ -660,9 +660,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         NengakuSeigyoJoho 年額制御情報1 = get年額制御情報(調定年度.minusYear(INT_1));
         NengakuSeigyoJoho 年額制御情報2 = get年額制御情報(調定年度.minusYear(INT_2));
         NengakuFukaKonkyoFactory nengakuFukaKonkyo = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
-        NengakuHokenryoKeisan keisan = InstanceProvider.create(NengakuHokenryoKeisan.class);
-
         mapper.createDbT2002FukaJohoTemp();
+        
         for (CalculateFukaEntity 賦課計算の情報 : 賦課計算) {
             HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
             HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
@@ -748,7 +747,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             } else {
                 年額保険料パラメータ.set年額制御情報(年額制御情報2);
             }
-
+            
+            NengakuHokenryoKeisan keisan = new NengakuHokenryoKeisan();
             NengakuHokenryo 年額保険料 = keisan.calculate年額保険料(年額保険料パラメータ);
 
             new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));

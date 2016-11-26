@@ -12,7 +12,6 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiSearchDataBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShukeiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiShukeiKekkaDataBusiness;
@@ -102,9 +101,7 @@ public class KyufuJissekiShokaiHandler {
     private static final int INT_56 = 56;
     private static final int INT_57 = 57;
     private static final int INT_58 = 58;
-    private static final int INT_59 = 59;
     private static final int INT_NJYUNG = 75;
-    private static final RString RS_ZERO = new RString(0);
     private static final RString 指定居宅サービス = new RString("指定居宅サービス");
     private static final RString 居宅介護 = new RString("居宅介護");
     private static final RString 指定施設サービス等 = new RString("指定施設サービス等");
@@ -1070,11 +1067,12 @@ public class KyufuJissekiShokaiHandler {
      * @param サービス提供年月_開始 サービス提供年月_開始
      * @param サービス提供年月_終了 サービス提供年月_終了
      * @param is経過措置 is経過措置
-     * @param 給付実績情報照会情報 給付実績情報照会情報
+     * @param 一覧データ 一覧データ
      * @param 被保険者番号 被保険者番号
+     * @return 集計データ
      */
-    public void edit集計データ(FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了,
-            boolean is経過措置, KyufuJissekiPrmBusiness 給付実績情報照会情報, HihokenshaNo 被保険者番号) {
+    public List<KyufuJissekiShukeiKekkaDataBusiness> edit集計データ(FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了,
+            boolean is経過措置, KyufuJissekiSearchDataBusiness 一覧データ, HihokenshaNo 被保険者番号) {
         List<KyufuJissekiShukeiKekkaDataBusiness> 集計データ
                 = KyufuJissekiShokaiFinder.createInstance().get集計データ(is経過措置, サービス提供年月_開始, サービス提供年月_終了, 被保険者番号);
         List<KyufuJissekiShukeiKekka> 集計結果List;
@@ -1083,7 +1081,8 @@ public class KyufuJissekiShokaiHandler {
         } else {
             集計結果List = edit集計結果(集計データ, サービス提供年月_開始, サービス提供年月_終了);
         }
-        給付実績情報照会情報.getSearchData().set給付実績集計結果明細データ(集計結果List);
+        一覧データ.set給付実績集計結果明細データ(集計結果List);
+        return 集計データ;
     }
 
     private List<KyufuJissekiShukeiKekka> edit集計結果_経過措置(List<KyufuJissekiShukeiKekkaDataBusiness> 集計データ,

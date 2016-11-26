@@ -40,7 +40,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -182,7 +184,8 @@ public class DBC1210011PanelHandler {
             List<KeyValueDataSource> ddlTaishoNendodataSource = new ArrayList();
             for (FlexibleYear 対象年度 : 対象年度List) {
                 ddlTaishoNendodataSource.add(new KeyValueDataSource(対象年度.toDateString(),
-                        対象年度.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(度STR)));
+                        対象年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                        .fillType(FillType.BLANK).toDateString().concat(度STR)));
             }
             div.getDdlTaishoNendo().setDataSource(ddlTaishoNendodataSource);
             div.getDdlTaishoNendo().setSelectedIndex(整数_ZERO);
