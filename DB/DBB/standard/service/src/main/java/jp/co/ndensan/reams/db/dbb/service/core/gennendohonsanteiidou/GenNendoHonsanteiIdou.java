@@ -813,7 +813,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         }
         ChoshuHoho 徴収方法の情報 = new ChoshuHoho(賦課計算の情報.get徴収方法の情報());
         if ((賦課の情報_更正後.get調定年度().equals(賦課の情報_更正後.get賦課年度())
-                && isDecimal変更(賦課の情報_設定前.get減免前介護保険料_年額(), 年額保険料))
+                && (賦課の情報_設定前.get減免前介護保険料_年額() == null ? Decimal.ZERO : 賦課の情報_設定前.get減免前介護保険料_年額())
+                .compareTo(年額保険料) != 0)
                 || !RString.isNullOrEmpty(徴収方法の情報.get特別徴収停止事由コード())) {
             CaluculateChoteiResult 調定計算 = caluculateChotei(param.get算定月(), param.get調定日時(), 賦課の情報_更正後,
                     new ChoshuHoho(賦課計算の情報.get徴収方法の情報()), new HihokenshaDaicho(賦課計算の情報.get資格の情報()),
@@ -826,7 +827,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         } else if (賦課の情報_更正後.get減免額() != null && 0 < 賦課の情報_更正後.get減免額().doubleValue()) {
             賦課エラー登録処理(賦課の情報_更正後, param.get賦課年度(), new Code(ErrorCode.賦課に減免あり.getコード()));
         } else if (ShokkenKubun.非該当.getコード().equals(賦課の情報_更正後.get職権区分())
-                && (賦課の情報_更正後.get減免額() == null || Decimal.ZERO.equals(賦課の情報_更正後.get減免額()))) {
+                && (賦課の情報_更正後.get減免額() == null || Decimal.ZERO.compareTo(賦課の情報_更正後.get減免額()) == 0)) {
             FukaJohoBuilder builder = 賦課の情報_更正後.createBuilderForEdit();
             if (!is変化有り(賦課の情報_設定前, 賦課の情報_更正後)) {
                 return;
@@ -902,7 +903,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     }
 
     private boolean is金額あり(Decimal 金額) {
-        return 金額 != null && !Decimal.ZERO.equals(金額);
+        return 金額 != null && Decimal.ZERO.compareTo(金額) != 0;
     }
 
     private LasdecCode get最終月の市町村コード(List<MonthShichoson> 月別ランク情報) {
@@ -1175,7 +1176,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         if (更正後 == null) {
             更正後 = Decimal.ZERO;
         }
-        return !更正後.equals(更正前);
+        return 更正後.compareTo(更正前) != 0;
     }
 
     /**
