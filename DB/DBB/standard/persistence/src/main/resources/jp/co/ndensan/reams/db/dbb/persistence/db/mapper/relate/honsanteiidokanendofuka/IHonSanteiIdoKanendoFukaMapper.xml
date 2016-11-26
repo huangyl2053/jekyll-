@@ -1476,8 +1476,6 @@
         A."hihokenshaNo" = B."hihokenshaNo"
         WHERE
         A."hihokennshaKubunCode" = '1'
-        AND (A."shikakuSoshitsuYMD" = '' OR A."shikakuSoshitsuYMD" IS NULL OR (A."shikakuSoshitsuYMD" <![CDATA[>]]> #{資格喪失日From}
-             AND A."shikakuSoshitsuYMD" <![CDATA[<]]> #{資格喪失日To}))
         )AS 資格
         LEFT OUTER  JOIN
         (  SELECT
