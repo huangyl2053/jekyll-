@@ -174,19 +174,20 @@
         AND "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."kariNenkinNo"
         AND "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."kariNenkinCode"
         AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."kariHosokuM"
-        INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+        AND ("DbT2001ChoshuHoho"."tokuchoTeishiJiyuCode" ='' OR "DbT2001ChoshuHoho"."tokuchoTeishiJiyuCode" IS NULL)
+        LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         ON "DbT2001ChoshuHoho"."hihokenshaNo" ="DbT1001HihokenshaDaicho"."hihokenshaNo"
-        INNER JOIN rgdb."DbV2002Fuka" AS "DbT2002Fuka"
+        LEFT JOIN rgdb."DbV2002Fuka" AS "DbT2002Fuka"
         ON "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
         AND "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."choteiNendo"
         AND "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT2002Fuka"."hihokenshaNo"
-        INNER JOIN rgdb."DbT2003Kibetsu" AS  "DbT2003Kibetsu"
+        LEFT JOIN rgdb."DbT2003Kibetsu" AS  "DbT2003Kibetsu"
         ON "DbT2002Fuka"."choteiNendo" = "DbT2003Kibetsu"."choteiNendo"
         AND "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."fukaNendo"
         AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."tsuchishoNo"
         AND "DbT2002Fuka"."rirekiNo"= "DbT2003Kibetsu"."rirekiNo"
         AND "DbT2003Kibetsu"."choshuHouhou"='1'
-        INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705"
+        LEFT JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705"
         ON "DbT2003Kibetsu"."choteiId" = "UrT0705"."choteiId"
         ORDER BY 
         "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" ,

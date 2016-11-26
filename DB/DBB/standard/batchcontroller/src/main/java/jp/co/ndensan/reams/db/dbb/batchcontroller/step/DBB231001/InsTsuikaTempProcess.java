@@ -187,7 +187,7 @@ public class InsTsuikaTempProcess extends BatchKeyBreakBase<TokuChoSoufuJohoSaku
         }
         beforeKey = sakuseiBatch.getKeyOfTokuChoSoufuJohoSakuseiEntity(getBefore());
         nowKey = sakuseiBatch.getKeyOfTokuChoSoufuJohoSakuseiEntity(entity);
-        if (resultEntities.size() < NUM6 && beforeKey.equals(nowKey)) {
+        if (resultEntities.size() < NUM6 && null != beforeKey && null != nowKey && beforeKey.equals(nowKey)) {
             resultEntities.add(entity);
             return;
         }

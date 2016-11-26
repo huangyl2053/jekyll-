@@ -92,7 +92,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
      */
     public static TokuChoSoufuJohoSakuseiBatch createInstance() {
         return InstanceProvider.create(TokuChoSoufuJohoSakuseiBatch.class);
@@ -239,46 +240,46 @@ public class TokuChoSoufuJohoSakuseiBatch {
         tokuchotempentity.setDtShiftCode3(entity.get対象者の情報().getDTシフトコード３());
         tokuchotempentity.setDtKanjiJusho(entity.get対象者の情報().getDT漢字住所());
         tokuchotempentity.setDtShiftCode4(entity.get対象者の情報().getDTシフトコード４());
-        RString 徴収方法n月;
-        switch (特徴開始月.getMonthValue()) {
-            case NUM1:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法1月();
-                break;
-            case NUM2:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法2月();
-                break;
-            case NUM3:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法3月();
-                break;
-            case NUM4:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法4月();
-                break;
-            case NUM5:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法5月();
-                break;
-            case NUM6:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法6月();
-                break;
-            case NUM7:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法7月();
-                break;
-            case NUM8:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法8月();
-                break;
-            case NUM9:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法9月();
-                break;
-            case NUM10:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法10月();
-                break;
-            case NUM11:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法11月();
-                break;
-            case NUM12:
-                徴収方法n月 = entity.get徴収方法の情報().get徴収方法12月();
-                break;
-            default:
-                徴収方法n月 = RString.EMPTY;
+        RString 徴収方法n月 = RString.EMPTY;
+        if (null != entity.get徴収方法の情報()) {
+            switch (特徴開始月.getMonthValue()) {
+                case NUM1:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法1月();
+                    break;
+                case NUM2:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法2月();
+                    break;
+                case NUM3:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法3月();
+                    break;
+                case NUM4:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法4月();
+                    break;
+                case NUM5:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法5月();
+                    break;
+                case NUM6:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法6月();
+                    break;
+                case NUM7:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法7月();
+                    break;
+                case NUM8:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法8月();
+                    break;
+                case NUM9:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法9月();
+                    break;
+                case NUM10:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法10月();
+                    break;
+                case NUM11:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法11月();
+                    break;
+                case NUM12:
+                    徴収方法n月 = entity.get徴収方法の情報().get徴収方法12月();
+                    break;
+            }
         }
         if (処理日時 != null) {
             tokuchotempentity.setDtKakushuYMD(処理日時.getDate().toDateString());
@@ -290,15 +291,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
     private void setEntityValueContinue(UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity,
             TokuChoSoufuJohoSakuseiResult entity, RDate 特徴開始月, RString 徴収方法n月, YMDHMS 基準日時,
             RString 特徴開始月_6月捕捉, RString 特徴開始月_8月捕捉) {
-        if ((RS1.equals(徴収方法n月) || RS2.equals(徴収方法n月)) && !RS1.equals(entity.get資格の情報().get住所地特例フラグ())) {
-            tokuchotempentity.setDtKakushuKubun(RS01);
-        } else if ((RS1.equals(徴収方法n月) || RS2.equals(徴収方法n月)) && entity.get資格の情報().get資格喪失事由コード() == null
-                && RS1.equals(entity.get資格の情報().get住所地特例フラグ())) {
-            tokuchotempentity.setDtKakushuKubun(RS02);
-        }
-        if (!RS1.equals(entity.get徴収方法の情報().get徴収方法10月()) && !RS2.equals(entity.get徴収方法の情報().get徴収方法10月())) {
-            tokuchotempentity.setDtKakushuKubun(RS03);
-        }
+        setDT各種区分(tokuchotempentity, entity, 徴収方法n月);
         tokuchotempentity.setDtShoriKekka(RString.FULL_SPACE);
         tokuchotempentity.setDtKokiIkanCode(RString.FULL_SPACE);
         if (基準日時 != null && !基準日時.isEmpty()) {
@@ -313,7 +306,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
             if (entity.get対象者の情報().get識別コード() != null) {
                 tokuchotempentity.setKojinCode(entity.get対象者の情報().get識別コード().value().padZeroToLeft(NUM15));
             }
-            tokuchotempentity.setKaigohokenJushochitokureiKubun(entity.get資格の情報().get住所地特例フラグ());
+            tokuchotempentity.setKaigohokenJushochitokureiKubun(null == entity.get資格の情報() ? null : entity.get資格の情報().get住所地特例フラグ());
             if (entity.get対象者の情報().get処理年度() != null) {
                 tokuchotempentity.setHosokuYMD(entity.get対象者の情報().get処理年度().toDateString().concat(
                         entity.get対象者の情報().get捕捉月()).concat(RS01));
@@ -327,10 +320,22 @@ public class TokuChoSoufuJohoSakuseiBatch {
         }
     }
 
+    private void setDT各種区分(UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity, TokuChoSoufuJohoSakuseiResult entity, RString 徴収方法n月) {
+        if (null != entity.get資格の情報() && (RS1.equals(徴収方法n月) || RS2.equals(徴収方法n月)) && !RS1.equals(entity.get資格の情報().get住所地特例フラグ())) {
+            tokuchotempentity.setDtKakushuKubun(RS01);
+        } else if (null != entity.get資格の情報() && (RS1.equals(徴収方法n月) || RS2.equals(徴収方法n月)) && entity.get資格の情報().get資格喪失事由コード() == null
+                && RS1.equals(entity.get資格の情報().get住所地特例フラグ())) {
+            tokuchotempentity.setDtKakushuKubun(RS02);
+        }
+        if (null != entity.get徴収方法の情報() && !RS1.equals(entity.get徴収方法の情報().get徴収方法10月()) && !RS2.equals(entity.get徴収方法の情報().get徴収方法10月())) {
+            tokuchotempentity.setDtKakushuKubun(RS03);
+        }
+    }
+
     private void setDT各種金額欄12(UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity,
             TokuChoSoufuJohoSakuseiResult entity, RDate 特徴開始月) {
         FukaJoho 賦課の情報 = entity.get賦課の情報();
-        if (TsuchiNaiyoCodeType.特別徴収対象者情報.equals(
+        if (null != 賦課の情報 && TsuchiNaiyoCodeType.特別徴収対象者情報.equals(
                 entity.get対象者の情報().getDT通知内容コード().value())) {
             if (賦課の情報.get特徴期別金額04() != null) {
                 tokuchotempentity.setDtKakushuKingaku1(new RString(賦課の情報.get特徴期別金額04().toString()));
@@ -343,7 +348,9 @@ public class TokuChoSoufuJohoSakuseiBatch {
             TokuchoKiUtil tokuchokiutil = new TokuchoKiUtil();
             RString 期 = tokuchokiutil.get期月リスト().get月の期(Tsuki.toValue(
                     new RString(特徴開始月.getMonthValue()).padZeroToLeft(NUM2))).get期();
-            setDT各種金額欄1(期, tokuchotempentity, 賦課の情報);
+            if (null != 賦課の情報) {
+                setDT各種金額欄1(期, tokuchotempentity, 賦課の情報);
+            }
             tokuchotempentity.setDtKakushuKingaku2(RS0);
         } else {
             tokuchotempentity.setDtKakushuKingaku2(RS0);
