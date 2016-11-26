@@ -520,7 +520,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     }
 
     private RString toカンマ編集(Decimal 金額) {
-        RString rs金額 = DecimalFormatter.toコンマ区切りRString(金額, 0)
+        RString rs金額 = DecimalFormatter.toコンマ区切りRString(金額, 0);
         return RString.isNullOrEmpty(rs金額) ? ZERO : rs金額;
     }
 
