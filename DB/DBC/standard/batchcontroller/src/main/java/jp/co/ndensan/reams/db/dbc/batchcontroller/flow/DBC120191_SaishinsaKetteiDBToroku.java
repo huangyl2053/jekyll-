@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.saishinsaketteidbtoroku;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.saishinsaketteidbtoroku.SaishinsaKetteiMeisaiSakujoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.saishinsaketteidbtoroku.SaishinsaKetteiMeisaiTorokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.saishinsaketteidbtoroku.SaishinsaKetteiShukeiSakujoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.saishinsaketteidbtoroku.SaishinsaKetteiShukeiTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.saishinsaketteidbtoroku.SaishinsaKetteiDBTorokuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120190.DBC120191_SaishinsaKetteiDBTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.saishinsaketteidbtoroku.SaishinsaKetteiDBProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2520-010 chenaoqi
  */
-public class SaishinsaKetteiDBToroku extends BatchFlowBase<SaishinsaKetteiDBTorokuParameter> {
+public class DBC120191_SaishinsaKetteiDBToroku extends BatchFlowBase<DBC120191_SaishinsaKetteiDBTorokuParameter> {
 
     private static final String 再審査決定集計削除 = "deleteSaishinsaKetteiShukei";
     private static final String 再審査決定明細削除 = "deleteSaishinsaKetteiMeisai";
