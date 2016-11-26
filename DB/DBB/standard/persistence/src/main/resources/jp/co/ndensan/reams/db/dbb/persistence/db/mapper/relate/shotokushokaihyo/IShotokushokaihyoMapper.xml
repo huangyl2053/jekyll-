@@ -274,7 +274,7 @@
      FROM rgdb."DbV1001HihokenshaDaicho"
      WHERE
      "hihokennshaKubunCode"='1'
-     AND "ichigoShikakuShutokuYMD"<![CDATA[<=]]>#{処理年度_0401}
+     AND "ichigoShikakuShutokuYMD"<![CDATA[<=]]>#{システム日付}
      AND ("shikakuSoshitsuYMD"='' OR "shikakuSoshitsuYMD" IS NULL OR #{処理年度_0401}<![CDATA[<=]]>"shikakuSoshitsuYMD")
      AND SUBSTRING("ichigoShikakuShutokuYMD", 1, 6)<![CDATA[<>]]>SUBSTRING(COALESCE("shikakuSoshitsuYMD",'00000000'), 1, 6)
      AND "logicalDeletedFlag" IS FALSE
