@@ -68,8 +68,8 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
     private static final RString 誤_振込指定日 = new RString("【誤・振込指定日】");
     private static final RString 正_振込指定日 = new RString("【正・振込指定日】");
     private static final RString 支払方法 = new RString("【支払方法】");
-    private static final RString 抽出期間_発行日 = new RString("【抽出期間】決定通知書発行日：】");
-    private static final RString 抽出期間_受取年月 = new RString("【抽出期間】決定者受取年月：】");
+    private static final RString 抽出期間_発行日 = new RString("【抽出期間】決定通知書発行日：");
+    private static final RString 抽出期間_受取年月 = new RString("【抽出期間】決定者受取年月：");
     private static final RString 抽出対象 = new RString("【抽出対象】");
     private static final RString 対象作成日 = new RString("【対象作成日】");
     private static final RString 符号 = new RString("－");
@@ -177,14 +177,15 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
         editバッチ出力条件_処理区分(list, parameter);
         editバッチ出力条件_決定通知書発行日(list, parameter);
         editバッチ出力条件_決定者受取年月(list, parameter);
-        if (parameter.get抽出対象() != null
-                && Furikomi_MeisaiIchiranChushutsuTaisho.振込データ作成済のみ.getコード().equals(parameter.get抽出対象().getコード())) {
+        if (parameter.get抽出対象() != null) {
             list.add(抽出対象.concat(parameter.get抽出対象().get名称()));
         }
         if (parameter.get対象作成年月日() == null || parameter.get対象作成年月日().isEmpty()) {
             list.add(対象作成日.concat(符号));
         } else {
-            list.add(対象作成日.concat(parameter.get対象作成年月日().toString()));
+            list.add(対象作成日.concat(parameter.get対象作成年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE)
+                    .fillType(FillType.ZERO).toDateString()));
         }
         return list;
     }
