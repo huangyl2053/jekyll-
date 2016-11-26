@@ -90,7 +90,8 @@ public class SogojigyohiShikakuShogohyoKeikaSochiEditor
             if (target.get資格照合表一時().getShinsaYM() != null) {
                 source.shinsaYM = パターン56(target.get資格照合表一時().getShinsaYM());
             }
-            source.hokenshaNo = target.get資格照合表一時().getHokenshaNo().getColumnValue();
+            source.hokenshaNo = target.get資格照合表一時().getHokenshaNo() == null ? RString.EMPTY
+                    : target.get資格照合表一時().getHokenshaNo().getColumnValue();
             source.hokenshaName = target.get資格照合表一時().getHokenshaName();
             source.listUpper_4 = target.get資格照合表一時().getServiceShuruiCode().getColumnValue();
             source.listUpper_5 = target.get資格照合表一時().getServiceShuruiMei();
