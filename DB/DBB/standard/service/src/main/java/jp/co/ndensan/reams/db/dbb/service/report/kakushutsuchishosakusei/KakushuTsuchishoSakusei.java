@@ -1666,6 +1666,9 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
 
     private ShunyuJoho find現年度収入情報(Map<RString, FukaJoho> 賦課の情報マップ, RString 処理日, IKozaSearchKey kozaSearchKey,
             List<KamokuCode> list, RString 科目コード) {
+        if (賦課の情報マップ == null) {
+            return null;
+        }
         Set<Map.Entry<RString, FukaJoho>> map = 賦課の情報マップ.entrySet();
         FukaJoho 賦課情報 = null;
         for (Map.Entry<RString, FukaJoho> 賦課の情報 : map) {
