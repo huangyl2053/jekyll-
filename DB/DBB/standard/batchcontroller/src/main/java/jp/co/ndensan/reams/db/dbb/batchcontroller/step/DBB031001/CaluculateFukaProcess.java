@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt4300.HonsanteiFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.CaluculateFukaEntity;
@@ -47,6 +46,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
@@ -55,7 +56,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
@@ -467,27 +467,28 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         保険料段階パラメータ.setFukaKonkyo(賦課根拠);
         保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
         TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
+        RString setNull = new RString("null");
         if (月別保険料段階 == null) {
             for (SetaiShotokuEntity setaiShotokuEntity : 世帯員所得情報List) {
                 if (HonninKubun.世帯構成員.getCode().equals(setaiShotokuEntity.getHonninKubun())) {
                     new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("世帯：")
                             .concat(setaiShotokuEntity.getSetaiCode() == null
-                                    ? new RString("null") : setaiShotokuEntity.getSetaiCode().getColumnValue()));
+                                    ? setNull : setaiShotokuEntity.getSetaiCode().getColumnValue()));
                     new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("識別コード：")
                             .concat(setaiShotokuEntity.getShikibetsuCode() == null
-                                    ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
+                                    ? setNull : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
                     new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("課税区分：")
                             .concat(setaiShotokuEntity.getKazeiKubun()));
                     new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：")
                             .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
-                                    ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
+                                    ? setNull : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
                     new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：")
                             .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
-                                    ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
+                                    ? setNull : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
                 } else {
                     new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人識別コード：")
                             .concat(setaiShotokuEntity.getShikibetsuCode() == null
-                                    ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
+                                    ? setNull : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
                     new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人課税区分：")
                             .concat(setaiShotokuEntity.getKazeiKubun()));
                 }
