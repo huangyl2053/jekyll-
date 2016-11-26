@@ -479,36 +479,36 @@ public enum JikoFutangakuHosei2Spec implements IPredicate<JikoFutangakuHosei2Div
         }
 
         public static boolean is補正後チェック４(JikoFutangakuHosei2Div div) {
-            if (!Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuMae().getValue())
-                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuMae().getValue())
-                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuMae().getValue())
-                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuMae().getValue())
-                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuMae().getValue())
-                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuMae().getValue())
-                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuMae().getValue())
-                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuMae().getValue())
-                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuMae().getValue())
-                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuMae().getValue())
-                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuMae().getValue())
-                    || !Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuMae().getValue())) {
+            if (!Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuMae().getValue()))
+                    || !Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuMae().getValue()))
+                    || !Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuMae().getValue()))
+                    || !Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuMae().getValue()))
+                    || !Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuMae().getValue()))
+                    || !Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuMae().getValue()))
+                    || !Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuMae().getValue()))
+                    || !Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuMae().getValue()))
+                    || !Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuMae().getValue()))
+                    || !Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuMae().getValue()))
+                    || !Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuMae().getValue()))
+                    || !Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuMae().getValue()))) {
                 return false;
             }
             return is補正後チェック４_補正後(div);
         }
 
         private static boolean is補正後チェック４_補正後(JikoFutangakuHosei2Div div) {
-            return Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuGo().getValue())
-                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuGo().getValue())
-                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuGo().getValue())
-                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuGo().getValue())
-                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuGo().getValue())
-                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuGo().getValue())
-                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuGo().getValue())
-                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuGo().getValue())
-                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuGo().getValue())
-                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuGo().getValue())
-                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuGo().getValue())
-                    && Decimal.ZERO.equals(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuGo().getValue());
+            return Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku8GatsuGo().getValue()))
+                    && Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku9GatsuGo().getValue()))
+                    && Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku10GatsuGo().getValue()))
+                    && Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku11GatsuGo().getValue()))
+                    && Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74Futangaku12GatsuGo().getValue()))
+                    && Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku1GatsuGo().getValue()))
+                    && Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku2GatsuGo().getValue()))
+                    && Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku3GatsuGo().getValue()))
+                    && Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku4GatsuGo().getValue()))
+                    && Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku5GatsuGo().getValue()))
+                    && Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku6GatsuGo().getValue()))
+                    && Decimal.ZERO.equals(toZeroIfNull(div.getJikoFutangakuHosei2a().getTxt70Kara74FutangakuYoku7GatsuGo().getValue()));
         }
 
         public static boolean is高額総合事業サービス費チェック(JikoFutangakuHosei2Div div) {

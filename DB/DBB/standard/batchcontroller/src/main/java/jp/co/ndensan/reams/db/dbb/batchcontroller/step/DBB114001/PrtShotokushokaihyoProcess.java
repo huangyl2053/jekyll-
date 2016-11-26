@@ -72,6 +72,7 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     public static final RString PARAMETER_OUT_OUTPUTCOUNT;
 
     private static final RString INDEX_0 = new RString("0");
+    private static final RString INDEX_1 = new RString("1");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_6 = 6;
@@ -196,7 +197,7 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
             setKey();
             所得照会票データbefore = t;
         }
-
+        outputCount.setValue(INDEX_1);
     }
 
     @Override

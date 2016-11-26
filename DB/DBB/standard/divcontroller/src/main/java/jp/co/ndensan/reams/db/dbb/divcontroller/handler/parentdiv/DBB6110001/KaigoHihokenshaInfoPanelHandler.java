@@ -267,8 +267,11 @@ public class KaigoHihokenshaInfoPanelHandler {
                 : new RDate(seinengappiYMD.toString()));
         div.getRentaiNofuGimushaInfo().getTxtSeibetsu().setValue(宛名情報.toEntity().getSeibetsuCode() == null ? RString.EMPTY
                 : Seibetsu.toValue(宛名情報.toEntity().getSeibetsuCode()).get名称());
-        div.getRentaiNofuGimushaInfo().getTxtJuminShu().setValue(宛名情報.toEntity().getJuminJotaiCode() == null ? RString.EMPTY
-                : JuminShubetsu.toValue(宛名情報.toEntity().getJuminJotaiCode()).toRString());
+        if (宛名情報.toEntity().getJuminJotaiCode() == null || ONE.equals(宛名情報.toEntity().getJuminJotaiCode())) {
+            div.getRentaiNofuGimushaInfo().getTxtJuminShu().setValue(RString.EMPTY);
+        } else {
+            div.getRentaiNofuGimushaInfo().getTxtJuminShu().setValue(JuminShubetsu.toValue(宛名情報.toEntity().getJuminJotaiCode()).toRString());
+        }
         div.getRentaiNofuGimushaInfo().getTxtZokuGara().setValue(宛名情報.toEntity().getTsuzukigara() == null ? RString.EMPTY
                 : 宛名情報.toEntity().getTsuzukigara());
         div.getRentaiNofuGimushaInfo().getTxtJusho().setDomain(宛名情報.toEntity().getJusho() == null ? null

@@ -49,6 +49,7 @@ public class JukyushaIdoRenrakuhyoHandler {
     private final JukyushaIdoRenrakuhyoDiv div;
     private static final RString 空KEY = RString.EMPTY;
     private static final RString 星 = new RString("*");
+    private static final RString 記号 = new RString("：");
     private static final RString 新規モード = new RString("新規モード");
     private static final RString 訂正モード = new RString("訂正モード");
     private static final RString 再発行モード = new RString("再発行モード");
@@ -689,6 +690,7 @@ public class JukyushaIdoRenrakuhyoHandler {
         RString 計画作成区分Key = div.getKyotakuServicePlanPanel().getRadKyotakuServiceSakuseiKubun().getSelectedKey();
         if (空KEY.equals(計画作成区分Key)) {
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setDisabled(true);
+            div.getKyotakuServicePlanPanel().getBtnShienJigyoshoNo().setDisabled(true);
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().clearValue();
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().setDisabled(true);
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().clearValue();
@@ -699,6 +701,7 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setSelectedKey(空KEY);
         } else if (JukyushaIF_kyotakuServiceSakuseiKubunCode.自己作成.getコード().equals(計画作成区分Key)) {
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setDisabled(true);
+            div.getKyotakuServicePlanPanel().getBtnShienJigyoshoNo().setDisabled(true);
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().clearValue();
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().clearValue();
             div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setDisabled(false);
@@ -707,6 +710,7 @@ public class JukyushaIdoRenrakuhyoHandler {
                 || JukyushaIF_kyotakuServiceSakuseiKubunCode.介護予防支援事業所作成.getコード().equals(計画作成区分Key)) {
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().clearValue();
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setDisabled(false);
+            div.getKyotakuServicePlanPanel().getBtnShienJigyoshoNo().setDisabled(false);
             div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setDisabled(false);
             div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setDisabled(false);
         }
@@ -1158,17 +1162,10 @@ public class JukyushaIdoRenrakuhyoHandler {
     private List<KeyValueDataSource> create異動事由DropDownList() {
         List<KeyValueDataSource> keiyakuServiceShuruiList = new ArrayList<>();
         keiyakuServiceShuruiList.add(new KeyValueDataSource(空KEY, RString.EMPTY));
-        keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                JukyushaIF_JukyushaIdoJiyu.受給資格取得.getコード(), JukyushaIF_JukyushaIdoJiyu.受給資格取得.get名称()));
-        keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                JukyushaIF_JukyushaIdoJiyu.受給資格喪失.getコード(), JukyushaIF_JukyushaIdoJiyu.受給資格喪失.get名称()));
-        keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                JukyushaIF_JukyushaIdoJiyu.広域連合における受給者の市町村間転居異動.getコード(),
-                JukyushaIF_JukyushaIdoJiyu.広域連合における受給者の市町村間転居異動.get名称()));
-        keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                JukyushaIF_JukyushaIdoJiyu.合併による新規.getコード(), JukyushaIF_JukyushaIdoJiyu.合併による新規.get名称()));
-        keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                JukyushaIF_JukyushaIdoJiyu.その他異動.getコード(), JukyushaIF_JukyushaIdoJiyu.その他異動.get名称()));
+        for (JukyushaIF_JukyushaIdoJiyu value : JukyushaIF_JukyushaIdoJiyu.values()) {
+            keiyakuServiceShuruiList.add(new KeyValueDataSource(
+                    value.getコード(), value.getコード().concat(記号).concat(value.get名称())));
+        }
         return keiyakuServiceShuruiList;
     }
 
@@ -1181,25 +1178,35 @@ public class JukyushaIdoRenrakuhyoHandler {
         List<KeyValueDataSource> keiyakuServiceShuruiList = new ArrayList<>();
         keiyakuServiceShuruiList.add(new KeyValueDataSource(空KEY, RString.EMPTY));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                YokaigoJotaiKubun99.非該当.getコード(), YokaigoJotaiKubun99.非該当.get名称()));
+                YokaigoJotaiKubun99.非該当.getコード(),
+                YokaigoJotaiKubun99.非該当.getコード().concat(記号).concat(YokaigoJotaiKubun99.非該当.get名称())));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                YokaigoJotaiKubun.事業対象外.getコード(), YokaigoJotaiKubun.事業対象外.get名称()));
+                YokaigoJotaiKubun.事業対象外.getコード(),
+                YokaigoJotaiKubun.事業対象外.getコード().concat(記号).concat(YokaigoJotaiKubun.事業対象外.get名称())));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                YokaigoJotaiKubun99.経過的要介護.getコード(), YokaigoJotaiKubun99.経過的要介護.get名称()));
+                YokaigoJotaiKubun99.経過的要介護.getコード(),
+                YokaigoJotaiKubun99.経過的要介護.getコード().concat(記号).concat(YokaigoJotaiKubun99.経過的要介護.get名称())));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                YokaigoJotaiKubun06.要支援1.getコード(), YokaigoJotaiKubun06.要支援1.get名称()));
+                YokaigoJotaiKubun06.要支援1.getコード(),
+                YokaigoJotaiKubun06.要支援1.getコード().concat(記号).concat(YokaigoJotaiKubun06.要支援1.get名称())));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                YokaigoJotaiKubun06.要支援2.getコード(), YokaigoJotaiKubun06.要支援2.get名称()));
+                YokaigoJotaiKubun06.要支援2.getコード(),
+                YokaigoJotaiKubun06.要支援2.getコード().concat(記号).concat(YokaigoJotaiKubun06.要支援2.get名称())));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                YokaigoJotaiKubun99.要介護1.getコード(), YokaigoJotaiKubun99.要介護1.get名称()));
+                YokaigoJotaiKubun99.要介護1.getコード(),
+                YokaigoJotaiKubun99.要介護1.getコード().concat(記号).concat(YokaigoJotaiKubun99.要介護1.get名称())));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                YokaigoJotaiKubun99.要介護2.getコード(), YokaigoJotaiKubun99.要介護2.get名称()));
+                YokaigoJotaiKubun99.要介護2.getコード(),
+                YokaigoJotaiKubun99.要介護2.getコード().concat(記号).concat(YokaigoJotaiKubun99.要介護2.get名称())));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                YokaigoJotaiKubun99.要介護3.getコード(), YokaigoJotaiKubun99.要介護3.get名称()));
+                YokaigoJotaiKubun99.要介護3.getコード(),
+                YokaigoJotaiKubun99.要介護3.getコード().concat(記号).concat(YokaigoJotaiKubun99.要介護3.get名称())));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                YokaigoJotaiKubun99.要介護4.getコード(), YokaigoJotaiKubun99.要介護4.get名称()));
+                YokaigoJotaiKubun99.要介護4.getコード(),
+                YokaigoJotaiKubun99.要介護4.getコード().concat(記号).concat(YokaigoJotaiKubun99.要介護4.get名称())));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                YokaigoJotaiKubun99.要介護5.getコード(), YokaigoJotaiKubun99.要介護5.get名称()));
+                YokaigoJotaiKubun99.要介護5.getコード(),
+                YokaigoJotaiKubun99.要介護5.getコード().concat(記号).concat(YokaigoJotaiKubun99.要介護5.get名称())));
         return keiyakuServiceShuruiList;
     }
 
