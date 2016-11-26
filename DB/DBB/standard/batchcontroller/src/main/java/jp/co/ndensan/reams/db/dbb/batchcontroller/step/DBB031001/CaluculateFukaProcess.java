@@ -87,7 +87,6 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
 
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
-    private static final RString 本算定賦課 = new RString("A1");
     private static final RString バッチID = new RString("DBBBT43001");
     private static final RString 内部帳票ID = new RString("DBB400001_FukaErrorIchitan");
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
@@ -528,16 +527,8 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
                     徴収方法の情報, 年額保険料, 資格の情報, dbT7022ShoriDateKanriEntity);
             賦課の情報_更正後 = choteiResult.get賦課情報();
             徴収方法の情報_更正後 = choteiResult.get徴収方法情報();
-            FukaJoho 賦課の情報_設定後 = manager.setChoteiJiyu(賦課の情報_更正前, 賦課の情報_更正後,
-                    徴収方法の情報);
-            DbT2002FukaJohoTempTableEntity fukaJohoTempTableEntity = new DbT2002FukaJohoTempTableEntity();
-            fukaJohoTempTableEntity = manager.set一時賦課情報(fukaJohoTempTableEntity, 賦課の情報_設定後);
-            fukaWriter.insert(fukaJohoTempTableEntity);
-            if (徴収方法の情報_更正後 != null) {
-                DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報_更正後.toEntity();
-                介護徴収方法Writer.insert(dbT2001ChoshuHohoEntity);
-            }
-        } else if (Decimal.ZERO.compareTo(賦課の情報_更正前.get減免額()) == INDEX_0) {
+        }
+        if (Decimal.ZERO.equals(賦課の情報_更正前.get減免額()) || 賦課の情報_更正前.get減免額() == null) {
             賦課の情報_更正後 = creat出力対象(賦課年度, 賦課の情報_更正後,
                     賦課の情報_更正前, 調定日時, 徴収方法の情報_更正後, 資格の情報, 口座List, 徴収方法の情報);
             FukaJoho 賦課の情報_設定後 = manager.setChoteiJiyu(賦課の情報_更正前, 賦課の情報_更正後,

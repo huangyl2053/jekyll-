@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
@@ -46,10 +45,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.ChoteiNendoKibetsuClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FuchoTsukiClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FukaKoseiJohoClass;
@@ -670,26 +670,15 @@ public class HonnSanteiFuka {
         FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
         fukaJohoRelateEntity.set介護賦課Entity(賦課情報_更正前.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
-        List<Kibetsu> kibetsuList = 賦課情報_更正前.getKibetsuList();
-        if (kibetsuList != null && !kibetsuList.isEmpty()) {
-            for (Kibetsu kibetsu : kibetsuList) {
-                if (ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
-                    set特徴期別金額(kibetsu, 特徴期別金額List, 介護期別RelateEntity);
-                } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(kibetsu.get徴収方法())) {
-                    set普徴期別金額(kibetsu, 普徴期別金額List, 介護期別RelateEntity);
-                }
-            }
-        } else {
-            for (int i = INDEX_1; i <= INDEX_6; i++) {
-                Kibetsu 特徴期別 = new Kibetsu(賦課情報_更正前.get調定年度(), 賦課情報_更正前.get賦課年度(), 賦課情報_更正前.get通知書番号(),
-                        賦課情報_更正前.get履歴番号(), ChoshuHohoKibetsu.特別徴収.getコード(), i);
-                set新規賦課の期別金額(特徴期別, 特徴期別金額List.get(i - INDEX_1), 介護期別RelateEntity);
-            }
-            for (int i = INDEX_1; i <= INDEX_14; i++) {
-                Kibetsu 普徴期別 = new Kibetsu(賦課情報_更正前.get調定年度(), 賦課情報_更正前.get賦課年度(), 賦課情報_更正前.get通知書番号(),
-                        賦課情報_更正前.get履歴番号(), ChoshuHohoKibetsu.普通徴収.getコード(), i);
-                set新規賦課の期別金額(普徴期別, 普徴期別金額List.get(i - INDEX_1), 介護期別RelateEntity);
-            }
+        for (int i = INDEX_1; i <= INDEX_6; i++) {
+            Kibetsu 特徴期別 = new Kibetsu(賦課情報_更正前.get調定年度(), 賦課情報_更正前.get賦課年度(), 賦課情報_更正前.get通知書番号(),
+                    賦課情報_更正前.get履歴番号(), ChoshuHohoKibetsu.特別徴収.getコード(), i);
+            set新規賦課の期別金額(特徴期別, 特徴期別金額List.get(i - INDEX_1), 介護期別RelateEntity);
+        }
+        for (int i = INDEX_1; i <= INDEX_14; i++) {
+            Kibetsu 普徴期別 = new Kibetsu(賦課情報_更正前.get調定年度(), 賦課情報_更正前.get賦課年度(), 賦課情報_更正前.get通知書番号(),
+                    賦課情報_更正前.get履歴番号(), ChoshuHohoKibetsu.普通徴収.getコード(), i);
+            set新規賦課の期別金額(普徴期別, 普徴期別金額List.get(i - INDEX_1), 介護期別RelateEntity);
         }
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
         FukaJoho 賦課の情報_クローン = new FukaJoho(fukaJohoRelateEntity);
@@ -1447,7 +1436,7 @@ public class HonnSanteiFuka {
                 nowDate, SubGyomuCode.DBB介護賦課);
 
         List<Decimal> hokenryoRitsuList = new ArrayList<>();
-        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<RString, RankBetsuKijunKingaku>();
+        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<>();
         RString rankuKubun = RString.EMPTY;
         if (dbT2013HokenryoDankaiList != null && !dbT2013HokenryoDankaiList.isEmpty()) {
             for (DbT2013HokenryoDankaiEntity entity : dbT2013HokenryoDankaiList) {
