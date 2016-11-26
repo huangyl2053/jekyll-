@@ -422,24 +422,24 @@ public class DBC8010001MainHandler {
         if (null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
             parameter.set正振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
         }
-        if (null != div.getTxtKonkaiTaishoYmdRange().getToValue()) {
+        if (null != div.getTxtKonkaiTaishoYmdRange().getToValue() && div.getRadShoriSentakuFurikomiDataModify().getSelectedKey().isEmpty()) {
             parameter.set終了年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getToValue().toDateString()));
         }
         parameter.set抽出対象(Furikomi_MeisaiIchiranChushutsuTaisho.toValue(div.getRadChushutsuTaisho().getSelectedKey()));
         parameter.set振込グループコード(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(INDEX_4));
 
         parameter.set支払方法(Furikomi_ShihraiHohoShitei.toValue(div.getRadSiharaihohou().getSelectedKey()));
-        if (null != div.getTxtKetteishaUketoriYmRange().getToValue()) {
+        if (null != div.getTxtKetteishaUketoriYmRange().getToValue() && div.getRadShoriSentakuFurikomiDataModify().getSelectedKey().isEmpty()) {
             parameter.set終了受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getToValue().toDateString().substring(INDEXSTART, INDEXEND)));
         }
         if (null != div.getTxtWrongFurikomiShiteiYMD().getValue()) {
             parameter.set誤振込指定年月日(div.getTxtWrongFurikomiShiteiYMD().getValue());
 
         }
-        if (null != div.getTxtKetteishaUketoriYmRange().getFromValue()) {
+        if (null != div.getTxtKetteishaUketoriYmRange().getFromValue() && div.getRadShoriSentakuFurikomiDataModify().getSelectedKey().isEmpty()) {
             parameter.set開始受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString().substring(INDEXSTART, INDEXEND)));
         }
-        if (null != div.getTxtKonkaiTaishoYmdRange().getFromValue()) {
+        if (null != div.getTxtKonkaiTaishoYmdRange().getFromValue() && div.getRadShoriSentakuFurikomiDataModify().getSelectedKey().isEmpty()) {
             parameter.set開始年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getFromValue().toDateString()));
         }
         return parameter;
