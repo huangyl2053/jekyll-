@@ -185,6 +185,13 @@ public class HonsanteiKekkaIcihiranReportSource implements IReportSource {
     /**
      * ReportSourceFields
      */
+    @ReportItem(name = "fukaShichosonCode", length = 18, order = 77)
+    public RString fukaShichosonCode;
+    @ReportItem(name = "kanaMeisho", length = 100, order = 78)
+    public RString kanaMeisho;
+    @ReportItem(name = "choshuHoho", length = 100, order = 79)
+    public RString choshuHoho;
+
     public enum ReportSourceFields {
 
         printTimeStamp,
@@ -262,5 +269,8 @@ public class HonsanteiKekkaIcihiranReportSource implements IReportSource {
         listLower_17,
         listLower_18,
         listLower_19,
+        fukaShichosonCode,
+        kanaMeisho,
+        choshuHoho
     }
 }
