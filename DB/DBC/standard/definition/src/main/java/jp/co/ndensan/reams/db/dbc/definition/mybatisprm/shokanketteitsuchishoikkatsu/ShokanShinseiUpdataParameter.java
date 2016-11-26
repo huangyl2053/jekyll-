@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShokanShinseiUpdataParameter implements IMyBatisParameter {
+public final class ShokanShinseiUpdataParameter implements IMyBatisParameter {
 
     private static final RString 発行しない = new RString("0");
 

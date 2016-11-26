@@ -109,8 +109,13 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             setIem(ichiranItem, 出力順, 改ページ);
             RString key = getJufukuKey(shoShiharaiList);
             if (!key.equals(indexKey)) {
-                ichiranItem.setRenban(new RString(String.valueOf(++renban)));
                 setItem(ichiranItem, shoShiharaiList, 帳票制御共通情報);
+                if (new RString("金融機関未登録").equals(ichiranItem.getKeteiKubun())) {
+                    indexKey = key;
+                    tsuchiIchiranItemsList.add(ichiranItem);
+                   continue;
+                }
+                ichiranItem.setRenban(new RString(String.valueOf(++renban)));
                 if (ShikyuFushikyuKubun.支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())) {
                     Decimal 該当レコード支給金額集計 = shoShiharaiList.get支給額() == null ? Decimal.ZERO : shoShiharaiList.get支給額();
                     Decimal 該当レコード本人支払額 = shoShiharaiList.get本人支払額() == null ? Decimal.ZERO : shoShiharaiList.get本人支払額();
@@ -291,7 +296,6 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
         if (ShiharaiHohoKubun.口座払.getコード().equals(shoShiharaiList.get支払方法区分コード())
                 && (null == shoShiharaiList.get金融機関コード() || shoShiharaiList.get金融機関コード().isEmpty())) {
             ichiranItem.setKeteiKubun(new RString("金融機関未登録"));
-            ichiranItem.setRenban(RString.EMPTY);
         }
         if (!RString.isNullOrEmpty(shoShiharaiList.get支給不支給決定区分())
                 && ShikyuFushikyuKubun.支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())
