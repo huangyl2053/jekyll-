@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.gemmen.gemmenjoho.GemmenJohoManag
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HonsanteiIkoHantei;
 import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.KakushuTsuchishoSakusei;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
@@ -93,8 +94,7 @@ public class KaigoHokenryoGemmen {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoHokenryoGemmen}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KaigoHokenryoGemmen}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KaigoHokenryoGemmen}のインスタンス
      */
     public static KaigoHokenryoGemmen createInstance() {
         return InstanceProvider.create(KaigoHokenryoGemmen.class);
@@ -388,6 +388,8 @@ public class KaigoHokenryoGemmen {
         各種通知書発行パラメータ.set減免通知書_文書番号(通知書発行パラメータ.get減免決定_文書番号());
         各種通知書発行パラメータ.set徴収猶予通知書_発行日(FlexibleDate.EMPTY);
         各種通知書発行パラメータ.set徴収猶予通知書_文書番号(RString.EMPTY);
+        List<Kitsuki> 出力期リスト = new ArrayList();
+        各種通知書発行パラメータ.set納入通知書_出力期リスト(出力期リスト);
         return KakushuTsuchishoSakusei.createInstance().publish(各種通知書発行パラメータ);
     }
 
