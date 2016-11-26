@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBC-4350-060 chenhui
  */
 public class KyotakuServicePlanPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,8 @@ public class KyotakuServicePlanPanelDiv extends Panel {
     private ButtonDialog btnKyotakuServiceRireki;
     @JsonProperty("txtKyotakuKaigoShienJigyoshoNo")
     private TextBoxCode txtKyotakuKaigoShienJigyoshoNo;
+    @JsonProperty("btnShienJigyoshoNo")
+    private ButtonDialog btnShienJigyoshoNo;
     @JsonProperty("txtKyotakuKaigoShienJigyoshoName")
     private TextBoxKana txtKyotakuKaigoShienJigyoshoName;
     @JsonProperty("txtKyotakuServiceTekiyoYMD")
@@ -92,6 +94,24 @@ public class KyotakuServicePlanPanelDiv extends Panel {
     @JsonProperty("txtKyotakuKaigoShienJigyoshoNo")
     public void setTxtKyotakuKaigoShienJigyoshoNo(TextBoxCode txtKyotakuKaigoShienJigyoshoNo) {
         this.txtKyotakuKaigoShienJigyoshoNo = txtKyotakuKaigoShienJigyoshoNo;
+    }
+
+    /*
+     * getbtnShienJigyoshoNo
+     * @return btnShienJigyoshoNo
+     */
+    @JsonProperty("btnShienJigyoshoNo")
+    public ButtonDialog getBtnShienJigyoshoNo() {
+        return btnShienJigyoshoNo;
+    }
+
+    /*
+     * setbtnShienJigyoshoNo
+     * @param btnShienJigyoshoNo btnShienJigyoshoNo
+     */
+    @JsonProperty("btnShienJigyoshoNo")
+    public void setBtnShienJigyoshoNo(ButtonDialog btnShienJigyoshoNo) {
+        this.btnShienJigyoshoNo = btnShienJigyoshoNo;
     }
 
     /*
