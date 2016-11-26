@@ -246,6 +246,7 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
     protected void afterExecute() {
         eucCsvWriter.close();
         reportWriter.close();
+        manager.spool(eucFilePath);
         List<RString> 出力条件リスト = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(定数_調定年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
@@ -270,7 +271,6 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
         出力条件リスト.add(builder.toRString());
         int 出力ページ数 = sourceWriter.pageCount().value();
         loadバッチ出力条件リスト(出力条件リスト, 出力ページ数, CSV出力有無_有り, CSVファイル名_一覧表);
-        manager.spool(eucFilePath);
     }
 
     private void loadバッチ出力条件リスト(List<RString> 出力条件リスト, int 出力ページ数,
