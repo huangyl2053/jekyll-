@@ -120,4 +120,14 @@
           ${出力順}
     </select>
     
+    <select resultOrdered="true" id="get帳票データCount" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoSyutuMybatisParameter"
+            fetchSize="500">
+        SELECT
+          count(1)
+        FROM 
+          "tempJukyushaKyufuJissekidaichoData"
+          ${出力順}
+    </select>
+    
 </mapper>

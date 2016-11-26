@@ -100,8 +100,8 @@ public class JukyushaKyufuDaichoEdit {
     private static final RString 頁数_1 = new RString("1");
     private static final int LIST_SIZE_2 = 2;
     private static final int LIST_SIZE_3 = 3;
-    private static final int INDEX_3 = 5;
-    private static final int INDEX_4 = 5;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
     private static final int INDEX_6 = 6;
     private static final int INDEX_7 = 6;

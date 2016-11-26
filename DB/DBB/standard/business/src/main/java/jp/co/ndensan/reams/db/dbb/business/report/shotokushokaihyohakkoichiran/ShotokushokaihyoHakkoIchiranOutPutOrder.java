@@ -50,7 +50,7 @@ public enum ShotokushokaihyoHakkoIchiranOutPutOrder implements IReportItems {
     /**
      * 前住所コード
      */
-    前住所コード(new RString("0018"), new RString("前住所コード"), new RString("\"zenJushoCode\""));
+    前住所コード(new RString("0018"), new RString("前住所コード"), new RString("\"zenjushoCode\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

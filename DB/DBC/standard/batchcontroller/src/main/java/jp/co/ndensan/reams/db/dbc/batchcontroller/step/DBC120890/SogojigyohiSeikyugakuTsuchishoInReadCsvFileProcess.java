@@ -81,6 +81,7 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
     private DbWT1511SeikyugakuTsuchishoTempEntity shoTempentity;
     private int 連番;
     private int レコード件数合計;
+    private boolean is最後レコード取り込み = false;
 
     @Override
     protected void initialize() {
@@ -112,7 +113,8 @@ public class SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess extends BatchPro
     @Override
     protected void process(List<RString> data) {
         if (data != null && !data.isEmpty()) {
-            if (レコード種別_エンド.equals(data.get(INDEX_0))) {
+            if (レコード種別_エンド.equals(data.get(INDEX_0)) || is最後レコード取り込み) {
+                is最後レコード取り込み = true;
                 return;
             }
             if (レコード種別.equals(data.get(INDEX_0))) {
