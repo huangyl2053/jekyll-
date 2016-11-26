@@ -90,7 +90,7 @@ public class FutanWariaiShoKattokamiProperty extends ReportPropertyBase<FutanWar
         /**
          * 年金コード
          */
-        負担割合(new RString("0367"), new RString("負担割合"), new RString("\"futanWariKikanTemp_futanWariaiKubun1\"")),
+        負担割合(new RString("0367"), new RString("負担割合"), new RString("\"futanWariKikanTemp_futanWariaiKubun\"")),
         /**
          * 納組コード
          */

@@ -147,8 +147,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
      */
     public static HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo createInstance() {
         return InstanceProvider.create(HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo.class);
@@ -160,8 +159,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
      * @param entityList List<HonsanteiTsuchishoTempEntity>
      * @param 口座振替分出力様式 RString
      * @return List<HonsanteiTsuchishoTempResult> 賦課情報リスト
-     * @throws java.lang.reflect.InvocationTargetException
-     * 賦課の情報_更正前後が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException 賦課の情報_更正前後が取得できない場合、Exception
      */
     public List<HonsanteiTsuchishoTempResult> get賦課情報(
             List<HonsanteiTsuchishoTempEntity> entityList, RString 口座振替分出力様式) throws InvocationTargetException {
@@ -511,8 +509,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
                 } else {
                     bodyList.add(編集後本算定通知書共通情報.get更正後().get保険料段階());
                 }
-                bodyList.add(isNull(編集後本算定通知書共通情報.get今後納付すべき額())
-                        ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString()));
+                bodyList.add(isNull(編集後本算定通知書共通情報.get今後納付すべき額_収入元に())
+                        ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get今後納付すべき額_収入元に().toString()));
                 bodyList.add(定値区分_0);
                 bodyList.add(tutishoKyoutuKoumokuHenshuu(編集後本算定通知書共通情報));
                 toBodyList(bodyList);

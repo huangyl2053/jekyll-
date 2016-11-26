@@ -153,8 +153,12 @@ public class HonsanteiIdoKanendo {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(定数調定年度.toString()));
         List<DbT7022ShoriDateKanriEntity> entityList = new ArrayList<>();
         List<ShoriDateKanri> kanriList = new ArrayList<>();
-        DbT7022ShoriDateKanriEntity shentity = 処理日付管理Dac.selectByFourKeys(
+        DbT7022ShoriDateKanriEntity shentity = null;
+        List<DbT7022ShoriDateKanriEntity> resultList = 処理日付管理Dac.select非課税年金対象者情報for広域BY主キー(
                 SubGyomuCode.DBB介護賦課, ShoriName.過年度賦課.get名称(), new RString("0001"), 調定年度);
+        if (resultList != null && !resultList.isEmpty()) {
+            shentity = resultList.get(0);
+        }
         if (shentity == null) {
             return new ArrayList<>();
         }

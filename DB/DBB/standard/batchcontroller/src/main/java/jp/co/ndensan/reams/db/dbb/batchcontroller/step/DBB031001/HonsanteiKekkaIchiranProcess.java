@@ -415,6 +415,7 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
         atenaKozaEntity.set普徴収入額12(keisangoJoho.get普徴収入額12());
         atenaKozaEntity.set普徴収入額13(keisangoJoho.get普徴収入額13());
         atenaKozaEntity.set普徴収入額14(keisangoJoho.get普徴収入額14());
+        atenaKozaEntity.set徴収方法(entity.get徴収方法());
         atenaKozaEntity.set宛名Entity(entity.get宛名());
         atenaKozaEntity.set口座Entity(entity.get特定口座());
         return atenaKozaEntity;

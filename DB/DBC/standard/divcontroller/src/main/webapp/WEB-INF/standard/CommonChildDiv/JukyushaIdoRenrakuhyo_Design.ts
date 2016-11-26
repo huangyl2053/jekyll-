@@ -20,6 +20,14 @@ module DBC {
                 return "onBlur_txtKyotakuKaigoShienJigyoshoNo";
             }
 
+            public static onOkClose_btnJigyosha(): string {
+                return "onOkClose_btnJigyosha";
+            }
+
+            public static onBeforeOpenDialog_btnJigyosha(): string {
+                return "onBeforeOpenDialog_btnJigyosha";
+            }
+
             public static onBlur_txtShisetsuShozaiHokenjaNo(): string {
                 return "onBlur_txtShisetsuShozaiHokenjaNo";
             }
@@ -215,6 +223,10 @@ module DBC {
 
             public txtKyotakuKaigoShienJigyoshoNo(): UZA.TextBoxCode {
                 return new UZA.TextBoxCode(this.convFiledName("txtKyotakuKaigoShienJigyoshoNo"));
+            }
+
+            public btnShienJigyoshoNo(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnShienJigyoshoNo"));
             }
 
             public txtKyotakuKaigoShienJigyoshoName(): UZA.TextBoxKana {

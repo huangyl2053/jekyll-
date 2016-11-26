@@ -4,26 +4,27 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaI
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * JukyushaIdoRenrakuhyo のクラスファイル
@@ -31,8 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBC-4350-060 chenhui
  */
 public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenrakuhyoDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -65,6 +65,8 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     private RojinHokenPanelDiv RojinHokenPanel;
     @JsonProperty("HihokenshaNo")
     private RString HihokenshaNo;
+    @JsonProperty("jigyoshaMode")
+    private RString jigyoshaMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -307,6 +309,24 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     /*
+     * getjigyoshaMode
+     * @return jigyoshaMode
+     */
+    @JsonProperty("jigyoshaMode")
+    public RString getJigyoshaMode() {
+        return jigyoshaMode;
+    }
+
+    /*
+     * setjigyoshaMode
+     * @param jigyoshaMode jigyoshaMode
+     */
+    @JsonProperty("jigyoshaMode")
+    public void setJigyoshaMode(RString jigyoshaMode) {
+        this.jigyoshaMode = jigyoshaMode;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -329,7 +349,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -344,11 +364,11 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
+        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
     }
 
-    public void setMode_DisplayMode(DisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
+    public void setMode_DisplayMode( DisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
     }
 
     /*
@@ -360,7 +380,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     @JsonIgnore
-    public void setTxtTeiseiYMD(TextBoxDate txtTeiseiYMD) {
+    public void  setTxtTeiseiYMD(TextBoxDate txtTeiseiYMD) {
         this.getJukyushaIdoRenrakuhyoTeisei().setTxtTeiseiYMD(txtTeiseiYMD);
     }
 
@@ -370,7 +390,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     @JsonIgnore
-    public void setRadTeiseiKubunCode(RadioButton radTeiseiKubunCode) {
+    public void  setRadTeiseiKubunCode(RadioButton radTeiseiKubunCode) {
         this.getJukyushaIdoRenrakuhyoTeisei().setRadTeiseiKubunCode(radTeiseiKubunCode);
     }
 
@@ -380,7 +400,7 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     @JsonIgnore
-    public void setLin3(HorizontalLine lin3) {
+    public void  setLin3(HorizontalLine lin3) {
         this.getJukyushaIdoRenrakuhyoTeisei().setLin3(lin3);
     }
 
