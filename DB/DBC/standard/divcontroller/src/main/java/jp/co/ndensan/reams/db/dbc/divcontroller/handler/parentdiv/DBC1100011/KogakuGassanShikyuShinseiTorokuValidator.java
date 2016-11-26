@@ -90,6 +90,14 @@ public class KogakuGassanShikyuShinseiTorokuValidator {
                 .thenAdd(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間5)
                 .ifNot(KogakuGassanShikyuShinseiTorokuSpec.終了計算期間チェック6)
                 .thenAdd(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間6)
+                .ifNot(KogakuGassanShikyuShinseiTorokuSpec.所得区分入力チェック)
+                .thenAdd(KogakuGassanShikyuShinseiTorokuValidationMessage.必須項目)
+                .ifNot(KogakuGassanShikyuShinseiTorokuSpec.加入期間FROM入力チェック)
+                .thenAdd(KogakuGassanShikyuShinseiTorokuValidationMessage.必須項目)
+                .ifNot(KogakuGassanShikyuShinseiTorokuSpec.加入期間TO入力チェック)
+                .thenAdd(KogakuGassanShikyuShinseiTorokuValidationMessage.必須項目)
+                .ifNot(KogakuGassanShikyuShinseiTorokuSpec.備考文字種チェック)
+                .thenAdd(KogakuGassanShikyuShinseiTorokuValidationMessage.備考文字種)
                 .messages());
         return messages;
     }
