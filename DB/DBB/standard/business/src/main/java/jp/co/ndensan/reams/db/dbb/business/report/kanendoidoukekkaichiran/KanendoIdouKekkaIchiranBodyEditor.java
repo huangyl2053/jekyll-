@@ -165,7 +165,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     }
 
     private RString get年度(FlexibleYear 年度) {
-        return null == 年度 ? null
+        return null == 年度 ? RString.EMPTY
                 : 年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年);
     }
 
@@ -495,12 +495,16 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         FlexibleDate 生年月日 = 宛名.getSeinengappiYMD();
         if (null != 生年月日) {
             source.seinengappiYMD = 生年月日.seireki().toDateString();
+        } else {
+            source.seinengappiYMD = RString.EMPTY;
         }
-        source.seibetsuCode = 宛名.getSeibetsuCode();
+        source.seibetsuCode = 宛名.getSeibetsuCode() == null ? RString.EMPTY : 宛名.getSeibetsuCode();
         source.shichosonCode = getColumnValue(計算後情報_宛名_口座_更正後Entity.get賦課市町村コード());
         source.hihokenshaNo = getColumnValue(計算後情報_宛名_口座_更正後Entity.get被保険者番号());
-        source.nenkinCode = 計算後情報_宛名_口座_更正後Entity.get本徴収_年金コード();
-        source.nenkinNo = 計算後情報_宛名_口座_更正後Entity.get本徴収_基礎年金番号();
+        source.nenkinCode = 計算後情報_宛名_口座_更正後Entity.get本徴収_年金コード() == null
+                ? RString.EMPTY : 計算後情報_宛名_口座_更正後Entity.get本徴収_年金コード();
+        source.nenkinNo = 計算後情報_宛名_口座_更正後Entity.get本徴収_基礎年金番号() == null
+                ? RString.EMPTY : 計算後情報_宛名_口座_更正後Entity.get本徴収_基礎年金番号();
     }
 
     private RString getColumnValue(IDbColumnMappable column) {
