@@ -166,9 +166,13 @@ public class HonsanteiIdoGennendo {
                         処理_枝番, 調定年度, zFiveRS);
             }
         } else if (oneRS.equals(遷移元区分)) {
-            DbT7022ShoriDateKanriEntity entity
-                    = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課,
-                            ShoriName.異動賦課.get名称(), 処理_枝番, 調定年度);
+            DbT7022ShoriDateKanriEntity entity = null;
+            List<DbT7022ShoriDateKanriEntity> resultList = 処理日付管理Dac.select非課税年金対象者情報for広域BY主キー(SubGyomuCode.DBB介護賦課,
+                    ShoriName.異動賦課.get名称(), 処理_枝番, 調定年度);
+
+            if (resultList != null && !resultList.isEmpty()) {
+                entity = resultList.get(0);
+            }
             if (entity != null) {
                 entityList.add(entity);
             }
@@ -190,8 +194,14 @@ public class HonsanteiIdoGennendo {
      * @return ShoriDateKanri
      */
     public ShoriDateKanri getChushutsuKaishiNichiji(FlexibleYear 調定年度) {
-        DbT7022ShoriDateKanriEntity kanriEntity = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課,
+        DbT7022ShoriDateKanriEntity kanriEntity = null;
+        List<DbT7022ShoriDateKanriEntity> resultList = 処理日付管理Dac.select非課税年金対象者情報for広域BY主キー(SubGyomuCode.DBB介護賦課,
                 ShoriName.異動賦課.get名称(), 処理_枝番, 調定年度);
+
+        if (resultList != null && !resultList.isEmpty()) {
+            kanriEntity = resultList.get(0);
+        }
+
         if (kanriEntity == null) {
             List<DbT7022ShoriDateKanriEntity> kanriEntityList = 処理日付管理Dac
                     .selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), 処理_枝番, 調定年度, 処理_枝番);

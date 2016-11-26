@@ -55,8 +55,7 @@ public class JukiRendoTorokushaListFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JukiRendoTorokushaListFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link JukiRendoTorokushaListFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link JukiRendoTorokushaListFinder}のインスタンス
      */
     public static JukiRendoTorokushaListFinder createInstance() {
         return InstanceProvider.create(JukiRendoTorokushaListFinder.class);
@@ -69,7 +68,7 @@ public class JukiRendoTorokushaListFinder {
      */
     @Transaction
     public DbT7022ShoriDateKanriBusiness getKaishiShuryobi() {
-        DbT7022ShoriDateKanriEntity entity = dac.selectKaishiShuryoYMD(SubGyomuCode.DBA介護資格, 処理名);
+        DbT7022ShoriDateKanriEntity entity = dac.select処理日付管理BYサブ業務コードAND処理名(SubGyomuCode.DBA介護資格, 処理名);
         if (entity == null) {
             return null;
         }
