@@ -52,6 +52,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
+import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
@@ -60,6 +61,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGait
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0526SeikatsuHogoFujoShuruiEntity;
+import jp.co.ndensan.reams.uz.uza.batch.journal.JournalWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -74,6 +76,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -462,6 +465,36 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         保険料段階パラメータ.setFukaKonkyo(賦課根拠);
         保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
         TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
+
+        RString setNull = new RString("null");
+        if (月別保険料段階 == null) {
+            for (SetaiShotokuEntity setaiShotokuEntity : 世帯員所得情報List) {
+                if (HonninKubun.世帯構成員.getCode().equals(setaiShotokuEntity.getHonninKubun())) {
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("世帯：")
+                            .concat(setaiShotokuEntity.getSetaiCode() == null
+                                    ? setNull : setaiShotokuEntity.getSetaiCode().getColumnValue()));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("識別コード：")
+                            .concat(setaiShotokuEntity.getShikibetsuCode() == null
+                                    ? setNull : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("課税区分：")
+                            .concat(setaiShotokuEntity.getKazeiKubun()));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：")
+                            .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
+                                    ? setNull : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：")
+                            .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
+                                    ? setNull : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
+                } else {
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人識別コード：")
+                            .concat(setaiShotokuEntity.getShikibetsuCode() == null
+                                    ? setNull : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人課税区分：")
+                            .concat(setaiShotokuEntity.getKazeiKubun()));
+                }
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));
+            }
+        }
+
         NengakuHokenryoKeisanParameter 年額保険料パラメータ = new NengakuHokenryoKeisanParameter();
         年額保険料パラメータ.set賦課年度(processParameter.get賦課年度());
         NengakuFukaKonkyoFactory nengakuFukaKonkyo = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
@@ -528,7 +561,7 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
             賦課の情報_更正後 = choteiResult.get賦課情報();
             徴収方法の情報_更正後 = choteiResult.get徴収方法情報();
         }
-        if (Decimal.ZERO.equals(賦課の情報_更正前.get減免額()) || 賦課の情報_更正前.get減免額() == null) {
+        if (Decimal.ZERO.compareTo(賦課の情報_更正前.get減免額()) == INDEX_0 || 賦課の情報_更正前.get減免額() == null) {
             賦課の情報_更正後 = creat出力対象(賦課年度, 賦課の情報_更正後,
                     賦課の情報_更正前, 調定日時, 徴収方法の情報_更正後, 資格の情報, 口座List, 徴収方法の情報);
             FukaJoho 賦課の情報_設定後 = manager.setChoteiJiyu(賦課の情報_更正前, 賦課の情報_更正後,
