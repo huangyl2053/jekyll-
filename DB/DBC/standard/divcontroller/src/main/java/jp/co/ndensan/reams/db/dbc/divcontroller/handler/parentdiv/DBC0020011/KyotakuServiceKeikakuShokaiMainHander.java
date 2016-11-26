@@ -12,6 +12,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyotakuServiceRirekiIchiranEntityResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyotakuServiceRirekiIchiranJoho;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakuserviceriyohyomain.TaishoshaIchiranResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.jikosakusei.Kyotaku_SogyoJigyoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.TodokedeshaKankeiKBN;
@@ -55,6 +56,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
     private static final RString サービス種類_小規模介護 = new RString("小規模介護");
     private static final RString サービス種類_小規模予防 = new RString("小規模予防");
     private static final RString サービス種類_ケアマネジメント = new RString("ケアマネジメント");
+    private static final RString 自己作成 = new RString("自己作成");
 
     /**
      * コンストラクタです。
@@ -121,7 +123,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         List<TaishoshaIchiranResult> 対象情報一覧 = finder.selectTaishoshaIchiran(parameter).records();
         KyotakuServiceRirekiIchiranEntityResult 居宅サービス履歴 = get居宅サービス履歴(対象年月, 作成区分);
         RString 作成区分コード = 居宅サービス履歴.get作成区分コード();
-        set居宅サービス届出情報エリア(居宅給付計画届出, 居宅サービス履歴);
+        set居宅サービス届出情報エリア(居宅給付計画届出, 居宅サービス履歴, 作成区分);
         set対象情報一覧(対象情報一覧, 作成区分コード);
     }
 
@@ -138,7 +140,10 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         return null;
     }
 
-    private void set居宅サービス届出情報エリア(KyotakuKeikakuTodokede 居宅給付計画届出, KyotakuServiceRirekiIchiranEntityResult 居宅サービス履歴) {
+    private void set居宅サービス届出情報エリア(
+            KyotakuKeikakuTodokede 居宅給付計画届出,
+            KyotakuServiceRirekiIchiranEntityResult 居宅サービス履歴,
+            RString 作成区分) {
         dgKyotakuServiceRirekiIchiran_Row row = div.getDgKyotakuServiceRirekiIchiran().getClickedItem();
         if (居宅給付計画届出.get届出年月日() == null) {
             div.getTxtTodokedeYmd().clearValue();
@@ -162,7 +167,14 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         }
         div.getTxtKyotakuSogoJigyoKubun().clearValue();
         div.getTxtKeikakuSakuseiKubun().clearValue();
-        div.getTxtKyotakuSogoJigyoKubun().setValue(居宅サービス履歴.get居宅総合事業区分() != null ? 居宅サービス履歴.get居宅総合事業区分() : RString.EMPTY);
+
+        if (自己作成.equals(作成区分)) {
+            div.getTxtKyotakuSogoJigyoKubun().setVisible(true);
+            div.getTxtKyotakuSogoJigyoKubun().setValue(居宅サービス履歴.get居宅総合事業区分() != null
+                    ? Kyotaku_SogyoJigyoKubun.toValue(居宅サービス履歴.get居宅総合事業区分()).get名称() : RString.EMPTY);
+        } else {
+            div.getTxtKyotakuSogoJigyoKubun().setVisible(false);
+        }
         div.getTxtKeikakuSakuseiKubun().setValue(居宅サービス履歴.get作成区分コード() != null
                 ? JukyushaIF_KeikakuSakuseiKubunCode.toValue(居宅サービス履歴.get作成区分コード()).get名称() : RString.EMPTY);
         set届出者情報(居宅給付計画届出);

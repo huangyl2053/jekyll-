@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutan
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.JigyoKogakuGassanJikofutangakuHosei;
 import jp.co.ndensan.reams.db.dbc.definition.core.jigyougassan.JigyouGassan_ShoumeishoyouDataKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.jikosakusei.Kyotaku_SogyoJigyoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
@@ -218,7 +219,7 @@ public class JikoFutangakuHoseiHandler {
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.get自己負担額計算年月日().toString())));
             row.setTxtDataKBN(result.getデータ作成区分() == null ? RString.EMPTY
-                    : JigyouGassan_ShoumeishoyouDataKubun.toValue(result.getデータ作成区分()).get名称());
+                    : Kyotaku_SogyoJigyoKubun.toValue(result.getデータ作成区分()).get名称());
             row.setTxtHoseiYMDTan(isFlexibleDateNullOrEmpty(result.getリアル補正実施年月日()) ? RString.EMPTY
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.getリアル補正実施年月日().toString())));
