@@ -734,7 +734,7 @@ public class TokuchoKariSanteiFukaManagerBatch {
 
     private Decimal set保険料率1(RString 前年度保険料段階, Decimal 保険料率, HokenryoDankaiList 前年度の保険料段階リスト) {
         if (前年度保険料段階 != null) {
-            保険料率 = 前年度の保険料段階リスト.getBy段階区分(前年度保険料段階).get保険料率();
+            保険料率 = 前年度の保険料段階リスト.getBy段階Index(前年度保険料段階).get保険料率();
         }
         return 保険料率;
     }
