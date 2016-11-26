@@ -59,6 +59,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     private static final int NUMBER_11 = 11;
     private static final int NUMBER_12 = 12;
     private static final char CHAR_0 = '0';
+    private static final RString ZERO = new RString("0");
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
     private static final RString 年 = new RString("年");
@@ -198,7 +199,7 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
                 source.list2_19 = koza.getCombined金融機関名and支店名();
             }
             if (null != koza.get口座名義人()) {
-                source.list3_19 = koza.get口座名義人().value();
+                source.list3_19 = koza.get口座名義人漢字().value();
             }
         }
     }
@@ -519,7 +520,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     }
 
     private RString toカンマ編集(Decimal 金額) {
-        return DecimalFormatter.toコンマ区切りRString(金額, 0);
+        RString rs金額 = DecimalFormatter.toコンマ区切りRString(金額, 0)
+        return RString.isNullOrEmpty(rs金額) ? ZERO : rs金額;
     }
 
     private RString set改頁項目(RString 改頁項目) {
