@@ -72,7 +72,6 @@ public class JyusinDataBaitaiTorikomu {
     private RString 識別番号;
     private static final int 配列 = 1024000;
 
-
     /**
      * 画面初期化のメソッドです。
      *
@@ -188,12 +187,12 @@ public class JyusinDataBaitaiTorikomu {
 
             処理年月 = getHandler(div).処理年月取得(データ種別);
             処理年月の前月 = FlexibleYearMonth.EMPTY;
-            if (処理年月 != null) {
+            if (処理年月 != null && !処理年月.isEmpty()) {
                 処理年月の前月 = 処理年月.minusMonth(一1);
             }
             HokenshaSofuResult entity = HokenshaSofuFinder.createInstance().get国保連管理(データ種別, 処理年月);
             RString 二重取込チェック = getHandler(div).二重取込チェック(file, データ種別, myBatisParameter, コントロールレコード, entity);
-               
+
             if (二重取込チェック != null) {
                 return 二重取込message(二重取込チェック, コントロールレコード.get(処理年月INDEX), データ種別, div);
             }
@@ -271,6 +270,7 @@ public class JyusinDataBaitaiTorikomu {
         List<UzT0885SharedFileEntryEntity> uzt0885EntityList2 = SharedFile.searchSharedFile(searchSharedFile);
         getHandler(div).setDatasource(uzt0885EntityList2);
     }
+
     private boolean 判断(HokenshaSofuResult entity) {
         return entity != null && entity.getKokuhorenInterfaceKanriList() != null && !entity.getKokuhorenInterfaceKanriList().isEmpty();
     }
