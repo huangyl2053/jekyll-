@@ -778,16 +778,32 @@ public class JikofutangakuShomeishoToroku {
             manager.save事業高額合算自己負担額証明書and明細(
                     getHandler(div).get事業高額合算自己負担額証明書(被保険者番号, Decimal.ZERO),
                     getHandler(div).get事業高額合算自己負担額証明書明細(被保険者番号, Decimal.ZERO),
-                    getHandler(div).get更新用事業高額合算自己負担額証明書1(被保険者番号, shomeisho),
-                    getHandler(div).get更新用事業高額合算自己負担額証明書明細1(被保険者番号, meisaiList));
+                    shomeisho,
+                    getDeletedmeisaiList(shomeisho, meisaiList));
         }
+    }
+    
+    private List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> getDeletedmeisaiList(JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho,
+            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList) {
+        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> deletedMeisaiList = new ArrayList<>();
+        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : meisaiList) {
+            if (shomeisho.get被保険者番号().equals(meisai.get被保険者番号())
+                    && shomeisho.get対象年度().equals(meisai.get対象年度())
+                    && shomeisho.get証記載保険者番号().equals(meisai.get証記載保険者番号())
+                    && shomeisho.get支給申請書整理番号().equals(meisai.get支給申請書整理番号())
+                    && shomeisho.get転入前保険者番号().equals(meisai.get転入前保険者番号())
+                    && shomeisho.get履歴番号() == meisai.get履歴番号()) {
+                deletedMeisaiList.add(meisai);
+            }
+        }
+        return deletedMeisaiList;
     }
 
     private void delete(JikofutangakuShomeishoTorokuBusiness business) {
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho = business.get事業高額合算自己負担額証明書情報();
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = business.get事業高額合算自己負担額証明書明細情報();
-        manager.delete事業高額合算自己負担額証明書and明細(shomeisho, meisaiList);
+        manager.delete事業高額合算自己負担額証明書and明細(shomeisho, getDeletedmeisaiList(shomeisho, meisaiList));
     }
 
     private PersonalData toPersonalData(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
