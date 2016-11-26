@@ -219,8 +219,8 @@ public class NonyuTsuchIchiranEditor implements INonyuTsuchIchiranEditor {
                 && 編集後本算定通知書共通情報.get更正後().get保険料段階() != null) {
             source.listLower_4 = 編集後本算定通知書共通情報.get更正後().get保険料段階();
         }
-        if (編集後本算定通知書共通情報.get今後納付すべき額() != null) {
-            source.listLower_5 = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額(), 0);
+        if (編集後本算定通知書共通情報.get今後納付すべき額_収入元に() != null) {
+            source.listLower_5 = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額_収入元に(), 0);
         }
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {

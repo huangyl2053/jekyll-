@@ -46,7 +46,7 @@ public enum HonsanteiKekkaIcihiranOutPutOrder implements IReportItems {
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"fukaShichosonCode\"")),
+    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"dbT2015KeisangoJoho_fukaShichosonCode\"")),
     /**
      * 通知書番号
      */

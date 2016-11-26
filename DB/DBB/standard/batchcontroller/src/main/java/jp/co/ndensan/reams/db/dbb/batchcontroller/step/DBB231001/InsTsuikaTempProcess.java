@@ -83,64 +83,12 @@ public class InsTsuikaTempProcess extends BatchKeyBreakBase<TokuChoSoufuJohoSaku
     @Override
     protected void initialize() {
         param = new TokuchoSeidokanIFSakuseiMyBatisParameter(parameter.get処理年度());
-        int 特徴開始年数 = parameter.get特別徴収開始年月().getYearValue();
         RString 特徴開始月数 = DateConverter.formatMonthFull(parameter.get特別徴収開始年月().getMonthValue());
-        FlexibleYear 入力処理年度 = null;
-        RString 通知内容コード = null;
-        RString 捕捉月 = RString.EMPTY;
-        RString 遷移元メニュー = parameter.get遷移元メニュー();
+        setMyBatisParameter(特徴開始月数);
         if (月4開始_待機.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課))
                 || 月4開始_待機.equals(
                         DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課))) {
             月4開始_待機FLG = true;
-        }
-        if (月8.equals(特徴開始月数)) {
-            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
-                param.setSelectSQL(SELECTAUG);
-            }
-            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
-            通知内容コード = RS30;
-            捕捉月 = 月2;
-        } else if (月10.equals(特徴開始月数)) {
-            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
-                param.setSelectSQL(SELECTOCT);
-            }
-            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
-            通知内容コード = RS00;
-            捕捉月 = 月4;
-        } else if (月12.equals(特徴開始月数)) {
-            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
-                param.setSelectSQL(SELECTDEC);
-            }
-            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
-            通知内容コード = RS30;
-            捕捉月 = 月6;
-        } else if (月2.equals(特徴開始月数)) {
-            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
-                param.setSelectSQL(SELECTFEB);
-            }
-            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
-            通知内容コード = RS30;
-            捕捉月 = 月8;
-        } else if (月4.equals(特徴開始月数)) {
-            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
-                param.setSelectSQL(SELECTAPR);
-            }
-            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
-            通知内容コード = RS30;
-            捕捉月 = 月10;
-        } else if (月6.equals(特徴開始月数)) {
-            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
-                param.setSelectSQL(SELECTJUN);
-            }
-            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
-            通知内容コード = RS30;
-            捕捉月 = 月12;
-        }
-        if (特徴制度間IF作成.equals(遷移元メニュー)) {
-            param = new TokuchoSeidokanIFSakuseiMyBatisParameter(
-                    入力処理年度, 通知内容コード, 捕捉月);
-            param.setSelectSQL(SELECT);
         }
         resultEntities = new ArrayList();
         シーケンスMap = new HashMap<>();
@@ -208,5 +156,60 @@ public class InsTsuikaTempProcess extends BatchKeyBreakBase<TokuChoSoufuJohoSaku
         }
         対象者情報追加Temp.insert(sakuseiBatch.setTuikaData(parameter.get特別徴収開始年月(),
                 システム日時, 連番, 基準日時, 特徴開始月_6月捕捉, 特徴開始月_8月捕捉, resultEntities, シーケンスMap));
+    }
+
+    private void setMyBatisParameter(RString 特徴開始月数) {
+        int 特徴開始年数 = parameter.get特別徴収開始年月().getYearValue();
+        FlexibleYear 入力処理年度 = null;
+        RString 通知内容コード = null;
+        RString 捕捉月 = RString.EMPTY;
+        RString 遷移元メニュー = parameter.get遷移元メニュー();
+        if (月8.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTAUG);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
+            通知内容コード = RS30;
+            捕捉月 = 月2;
+        } else if (月10.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTOCT);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
+            通知内容コード = RS00;
+            捕捉月 = 月4;
+        } else if (月12.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTDEC);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
+            通知内容コード = RS30;
+            捕捉月 = 月6;
+        } else if (月2.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTFEB);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
+            通知内容コード = RS30;
+            捕捉月 = 月8;
+        } else if (月4.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTAPR);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
+            通知内容コード = RS30;
+            捕捉月 = 月10;
+        } else if (月6.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTJUN);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
+            通知内容コード = RS30;
+            捕捉月 = 月12;
+        }
+        if (特徴制度間IF作成.equals(遷移元メニュー)) {
+            param = new TokuchoSeidokanIFSakuseiMyBatisParameter(入力処理年度, 通知内容コード, 捕捉月);
+            param.setSelectSQL(SELECT);
+        }
     }
 }

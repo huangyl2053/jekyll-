@@ -282,8 +282,8 @@ public class HokenryoNonyuTsuchishoKigotoRenchoEditor implements IHokenryoNonyuT
         if (編集後本算定通知書共通情報.get納付済額_未到来期含む() != null) {
             source.nofuZumiGaku = new RString(編集後本算定通知書共通情報.get納付済額_未到来期含む().toString());
         }
-        if (編集後本算定通知書共通情報.get今後納付すべき額() != null) {
-            source.kongoNofuSubekiGaku = new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString());
+        if (編集後本算定通知書共通情報.get今後納付すべき額_収入元に() != null) {
+            source.kongoNofuSubekiGaku = new RString(編集後本算定通知書共通情報.get今後納付すべき額_収入元に().toString());
         }
 
         List<UniversalPhase> 普徴期別金額リスト = 更正後.get普徴期別金額リスト();

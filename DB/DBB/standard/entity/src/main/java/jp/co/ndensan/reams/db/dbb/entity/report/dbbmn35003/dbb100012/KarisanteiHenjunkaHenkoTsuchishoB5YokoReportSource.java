@@ -208,6 +208,10 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource implements IRepo
     public RString naisenNo;
     @ReportItem(name = "naisenLabel", length = 4, order = 96)
     public RString naisenLabel;
+    @ReportItem(name = "kongoNofuSubekigakuChotei", order = 97)
+    public RString kongoNofuSubekigakuChotei;
+    @ReportItem(name = "nofuSubekiGaku", order = 98)
+    public RString nofuSubekiGaku;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
