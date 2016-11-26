@@ -128,10 +128,22 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
         item.setHyojicodeName3(編集後仮算定通知書共通情報.get表示コード３名());
         item.setTsuchishoNo(編集後仮算定通知書共通情報.get通知書番号() != null ? 編集後仮算定通知書共通情報.get通知書番号().getColumnValue() : RString.EMPTY);
 
-        if (編集後仮算定通知書共通情報.get今後納付すべき額() != null) {
-            IKingakuFormatter 今後納付すべき額formatter = KingakuFormatter.create(編集後仮算定通知書共通情報.get今後納付すべき額());
+        if (編集後仮算定通知書共通情報.get今後納付すべき額_収入元に() != null) {
+            IKingakuFormatter 今後納付すべき額formatter = KingakuFormatter.create(編集後仮算定通知書共通情報.get今後納付すべき額_収入元に());
             RString kongoNofuSubekiGaku = new RString(今後納付すべき額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
             item.setKongoNofuSubekiGaku(kongoNofuSubekiGaku);
+        }
+
+        if (編集後仮算定通知書共通情報.get今後納付すべき額_調定元に() != null) {
+            IKingakuFormatter 今後納付すべき額formatter = KingakuFormatter.create(編集後仮算定通知書共通情報.get今後納付すべき額_調定元に());
+            RString kongoNofuSubekigakuChotei = new RString(今後納付すべき額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
+            item.setKongoNofuSubekigakuChotei(kongoNofuSubekigakuChotei);
+        }
+
+        if (編集後仮算定通知書共通情報.get既に納付すべき額() != null) {
+            IKingakuFormatter 既に納付すべき額formatter = KingakuFormatter.create(編集後仮算定通知書共通情報.get既に納付すべき額());
+            RString nofuSubekiGaku = new RString(既に納付すべき額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
+            item.setNofuSubekiGaku(nofuSubekiGaku);
         }
 
         Decimal 納付済額_未到来期含む = 編集後仮算定通知書共通情報.get納付済額_未到来期含む() != null ? 編集後仮算定通知書共通情報.get納付済額_未到来期含む() : Decimal.ZERO;

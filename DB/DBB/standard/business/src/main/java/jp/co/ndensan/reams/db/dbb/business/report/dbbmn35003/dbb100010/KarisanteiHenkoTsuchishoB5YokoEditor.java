@@ -48,6 +48,8 @@ class KarisanteiHenkoTsuchishoB5YokoEditor implements IKarisanteiHenkoTsuchishoB
         source.tsuchishoNo = item.getTsuchishoNo();
         source.setaiCode = item.getSetaiCode();
         source.kongoNofuSubekiGaku = item.getKongoNofuSubekiGaku();
+        source.kongoNofuSubekiGakuChotei = item.getKongoNofuSubekiGakuChotei();
+        source.nofuSubekiGaku = item.getNofuSubekiGaku();
         source.mitoraikiNofuzumiGaku = item.getMitoraikiNofuzumiGaku();
         source.hihokenshaNo = item.getHihokenshaNo();
         source.shikibetsuCode = item.getShikibetsuCode();

@@ -123,9 +123,17 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
         item.setHyojicodeName3(編集後仮算定通知書共通情報.get表示コード３名());
         item.setTsuchishoNo(編集後仮算定通知書共通情報.get通知書番号() != null ? 編集後仮算定通知書共通情報.get通知書番号().getColumnValue() : RString.EMPTY);
 
-        if (編集後仮算定通知書共通情報.get今後納付すべき額() != null) {
-            RString kongoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get今後納付すべき額(), 0);
+        if (編集後仮算定通知書共通情報.get今後納付すべき額_収入元に() != null) {
+            RString kongoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get今後納付すべき額_収入元に(), 0);
             item.setKongoNofuSubekiGaku(kongoNofuSubekiGaku);
+        }
+        if (編集後仮算定通知書共通情報.get今後納付すべき額_調定元に() != null) {
+            RString kongoNofuSubekiGakuChotei = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get今後納付すべき額_調定元に(), 0);
+            item.setKongoNofuSubekiGakuChotei(kongoNofuSubekiGakuChotei);
+        }
+        if (編集後仮算定通知書共通情報.get既に納付すべき額() != null) {
+            RString nofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get既に納付すべき額(), 0);
+            item.setNofuSubekiGaku(nofuSubekiGaku);
         }
 
         Decimal 納付済額_未到来期含む = 編集後仮算定通知書共通情報.get納付済額_未到来期含む() != null ? 編集後仮算定通知書共通情報.get納付済額_未到来期含む() : Decimal.ZERO;

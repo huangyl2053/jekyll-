@@ -238,8 +238,8 @@ public class KanendoHokenryoNonyuTsuchishoKigotoEditor implements IKanendoHokenr
             if (編集後本算定通知書共通情報.get納付済額_未到来期含む() != null) {
                 source.nofuZumiGaku = new RString(編集後本算定通知書共通情報.get納付済額_未到来期含む().toString());
             }
-            if (編集後本算定通知書共通情報.get今後納付すべき額() != null) {
-                source.kongoNofuSubekiGaku = new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString());
+            if (編集後本算定通知書共通情報.get今後納付すべき額_収入元に() != null) {
+                source.kongoNofuSubekiGaku = new RString(編集後本算定通知書共通情報.get今後納付すべき額_収入元に().toString());
             }
             EditedKoza 編集後口座 = 編集後本算定通知書共通情報.get編集後口座();
             if (編集後口座 != null) {

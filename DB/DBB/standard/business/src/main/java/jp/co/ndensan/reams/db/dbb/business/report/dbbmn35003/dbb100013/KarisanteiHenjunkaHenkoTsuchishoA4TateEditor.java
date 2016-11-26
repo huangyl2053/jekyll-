@@ -54,6 +54,8 @@ class KarisanteiHenjunkaHenkoTsuchishoA4TateEditor implements IKarisanteiHenjunk
         source.koseigoHokenryoGaku = item.getKoseigoHokenryoGaku();
         source.nofuzumiGaku = item.getNofuzumiGaku();
         source.kongoNofusubekiGaku = item.getKongoNofuSubekiGaku();
+        source.nofuSubekiGaku = item.getNofuSubekiGaku();
+        source.kongoNofuSubekiGakuChotei = item.getKongoNofuSubekiGakuChotei();
         source.korekaraChoshuho = item.getKorekaraChoshuho();
         source.listKibetsu_1 = item.getListKibetsu_1();
         source.listKibetsu_2 = item.getListKibetsu_2();

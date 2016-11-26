@@ -45,6 +45,8 @@ public class KarisanteiHenkoTsuchishoA4TateItem {
     private RString koseigoHokenryoGaku;
     private RString nofuzumiGaku;
     private RString kongoNofuSubekiGaku;
+    private RString kongoNofuSubakiGakuChotei;
+    private RString nofuSubekiGaku;
     private RString korekaraChoshuho;
     private RString listKibetsu_1;
     private RString listKibetsu_2;
