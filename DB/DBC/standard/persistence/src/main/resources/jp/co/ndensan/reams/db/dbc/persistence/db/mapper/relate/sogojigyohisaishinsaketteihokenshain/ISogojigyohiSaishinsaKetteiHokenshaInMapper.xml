@@ -88,6 +88,6 @@
         DbWT0001."shimei50onKana" AS dbwt0001_shimei50onKana,
         DbWT0001."meisho" AS dbwt0001_meisho,
         DbWT3063."hokenshaNo" AS dbwt3063_hokenshaNo,
-        DbWT3063."hokenshaName" AS dbwt3063_hokenshaMei
+        DbWT3063."hokenshaName" AS dbwt3063_hokenshaName
     </sql>
 </mapper>
