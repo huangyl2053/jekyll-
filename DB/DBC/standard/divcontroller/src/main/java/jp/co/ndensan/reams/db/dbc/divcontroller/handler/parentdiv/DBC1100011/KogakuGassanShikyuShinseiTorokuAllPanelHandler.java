@@ -157,7 +157,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         高額合算申請書保持.set訂正フラグ(訂正WK);
         if (申請状態WK == INT_1) {
             div.getTxtShikyuShinseiKubun().setValue(KaigoGassan_ShinseiKbn.新規.get名称());
-            新規状態を初期化設定();
+            新規状態を初期化設定(メニューID);
             ドロップダウンリスト項目セット();
         } else if (申請状態WK == INT_2 || 申請状態WK == INT_3 || 申請状態WK == INT_0) {
             div.getTxtShikyuShinseiKubun().clearValue();
@@ -243,8 +243,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
 
     /**
      * 申請登録状態初期表示に設定のイベントです。
+     *
+     * @param メニューID メニューID
      */
-    public void 申請登録状態初期表示に設定() {
+    public void 申請登録状態初期表示に設定(RString メニューID) {
         申請情報クリア();
         被保険者情報等TABクリア();
         国保後期資格情報TABクリア();
@@ -258,10 +260,19 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         } else {
             div.getTxtTeishutsuHokenshaNo().setValue(保険者番号);
         }
+
         div.getDdlShokisaiHokenshaNo().setSelectedIndex(INT_0);
         div.getTxtKaigoShikyuShinseishoSeiriBango2().setValue(RSTRING_99);
         div.getTxtRirekiBango().setValue(Decimal.ONE);
-        div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(RSTRING_00);
+        if (DBCMN61009.equals(メニューID)) {
+            div.getTxtIryoShikyuShinseishoSeiriBango2().clearValue();
+            div.getDdlShikyuShinseiKeitai().setDisabled(true);
+            div.getChkKofuShinseiUmu().setDisabled(true);
+        } else {
+            div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(RSTRING_00);
+            div.getDdlShikyuShinseiKeitai().setDisabled(false);
+            div.getChkKofuShinseiUmu().setDisabled(false);
+        }
         div.getTxtShikyuShinseiKubun().setValue(KaigoGassan_ShinseiKbn.新規.get名称());
         div.getDdlShikyuShinseiKeitai().setSelectedIndex(INT_0);
         div.getTxtShinseiYMD().setValue(nowDate);
@@ -338,6 +349,16 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
      * 新規初期値取得設定のメソッドです。
      */
     public void 新規初期値取得設定() {
+        set対象計算期間();
+        RDate 資格取得年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格取得年月日());
+        RDate 資格喪失年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格喪失年月日());
+        set加入期間(資格取得年月日, 資格喪失年月日);
+        div.getTxtShikakuSoshitsuYMD().setValue(資格喪失年月日);
+        申請情報パネル制御(false);
+        申請登録パネル制御(false);
+    }
+
+    private void set対象計算期間() {
         RString 申請対象年度 = div.getDdlShinseiTaishoNendo().getSelectedKey();
         if (new RString(INT_2008).equals(申請対象年度)) {
             div.getTxtTaishoKeisanKikanYMD().setFromValue(new RDate(申請対象年度.concat(DATE_0401).toString()));
@@ -346,23 +367,21 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         }
         div.getTxtTaishoKeisanKikanYMD().setToValue(
                 new RDate(new RString(Integer.parseInt(申請対象年度.toString()) + INT_1).concat(DATE_0731).toString()));
+    }
+
+    private void set加入期間(RDate 資格取得年月日, RDate 資格喪失年月日) {
         RDate 計算期間FROM = div.getTxtTaishoKeisanKikanYMD().getFromValue();
-        RDate 資格取得年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格取得年月日());
         if (資格取得年月日 != null && 資格取得年月日.compareTo(計算期間FROM) <= INT_0) {
             div.getTxtKanyuKikanYMD().setFromValue(計算期間FROM);
         } else {
             div.getTxtKanyuKikanYMD().setFromValue(資格取得年月日);
         }
         RDate 計算期間TO = div.getTxtTaishoKeisanKikanYMD().getToValue();
-        RDate 資格喪失年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格喪失年月日());
         if (資格喪失年月日 != null && 計算期間TO.compareTo(資格喪失年月日) <= 0) {
             div.getTxtKanyuKikanYMD().setToValue(計算期間TO);
         } else {
             div.getTxtKanyuKikanYMD().setToValue(資格喪失年月日);
         }
-        div.getTxtShikakuSoshitsuYMD().setValue(資格喪失年月日);
-        申請情報パネル制御(false);
-        申請登録パネル制御(false);
     }
 
     /**
@@ -520,12 +539,20 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴リスト) {
             dgKanyuRirekiIchiran_Row row = new dgKanyuRirekiIchiran_Row();
             EntityDataState 状態 = 加入歴.toEntity().getState();
-            if (EntityDataState.Added.equals(状態)) {
-                row.setRowState(RowState.Added);
-            } else if (EntityDataState.Modified.equals(状態)) {
-                row.setRowState(RowState.Modified);
-            } else if (EntityDataState.Deleted.equals(状態)) {
-                row.setRowState(RowState.Deleted);
+            if (null != 状態) {
+                switch (状態) {
+                    case Added:
+                        row.setRowState(RowState.Added);
+                        break;
+                    case Modified:
+                        row.setRowState(RowState.Modified);
+                        break;
+                    case Deleted:
+                        row.setRowState(RowState.Deleted);
+                        break;
+                    default:
+                        break;
+                }
             }
             row.setTxtHihokenshaNo(加入歴.get被保険者番号().getColumnValue());
             row.setTxtHokenshaName(加入歴.get保険者名());
@@ -653,12 +680,20 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         for (KogakuGassanShinseishoRelate item : 高額合算申請書リスト) {
             dgShinseiIchiran_Row row = new dgShinseiIchiran_Row();
             EntityDataState 状態 = item.toEntity().getState();
-            if (EntityDataState.Added.equals(状態)) {
-                row.setRowState(RowState.Added);
-            } else if (EntityDataState.Modified.equals(状態)) {
-                row.setRowState(RowState.Modified);
-            } else if (EntityDataState.Deleted.equals(状態)) {
-                row.setRowState(RowState.Deleted);
+            if (null != 状態) {
+                switch (状態) {
+                    case Added:
+                        row.setRowState(RowState.Added);
+                        break;
+                    case Modified:
+                        row.setRowState(RowState.Modified);
+                        break;
+                    case Deleted:
+                        row.setRowState(RowState.Deleted);
+                        break;
+                    default:
+                        break;
+                }
             }
             row.setTxtHihokenshaNo(item.get被保険者番号().getColumnValue());
             KogakuGassanShikyuShinseiToroku bussiness = KogakuGassanShikyuShinseiToroku.createInstance();
@@ -785,7 +820,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .build();
     }
 
-    private void 新規状態を初期化設定() {
+    private void 新規状態を初期化設定(RString メニューID) {
         div.getBtnAddShinsei().setVisible(true);
         div.getDdlShokisaiHokenshaNo().setReadOnly(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
@@ -801,6 +836,27 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         div.getDdlShinseiTaishoNendo().setReadOnly(false);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
+        if (DBCMN61009.equals(メニューID)) {
+            RDate 資格取得年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格取得年月日());
+            RDate 資格喪失年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格喪失年月日());
+            set加入期間(資格取得年月日, 資格喪失年月日);
+            div.getKogakuGassanShikyuShinseiToroku().getTabShinseiTorokuPanel1().setVisible(true);
+            div.getKogakuGassanShikyuShinseiToroku().getTabShinseiTorokuPanel1().getKaigoShikaku().setReadOnly(false);
+            div.getTxtKanyuKikanYMD().setDisabled(false);
+            div.getDdlShotokuKubun().setSelectedIndex(INT_0);
+            div.getDdlShotokuKubun().setDisabled(true);
+            div.getDdlOver70ShotokuKubun().setSelectedIndex(INT_0);
+            div.getDdlOver70ShotokuKubun().setDisabled(true);
+            div.getTxtShikakuSoshitsuYMD().clearValue();
+            div.getTxtShikakuSoshitsuYMD().setDisabled(true);
+            div.getDdlShikakuSoshitsuJiyu().setSelectedIndex(INT_0);
+            div.getDdlShikakuSoshitsuJiyu().setDisabled(true);
+            set対象計算期間();
+            div.getTxtTaishoKeisanKikanYMD().setFromDisabled(true);
+            div.getTxtTaishoKeisanKikanYMD().setToDisabled(false);
+            div.getTxtBiko().clearValue();
+            div.getTxtBiko().setDisabled(false);
+        }
     }
 
     private void 変更状態を初期化設定() {

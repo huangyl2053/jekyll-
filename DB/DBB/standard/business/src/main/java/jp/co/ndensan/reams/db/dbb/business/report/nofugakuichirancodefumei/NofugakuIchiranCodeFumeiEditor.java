@@ -210,6 +210,7 @@ public class NofugakuIchiranCodeFumeiEditor implements
         source.list12_15 = RString.EMPTY;
 
         source.list13_15 = RString.EMPTY;
+        setPageBreakEmpty(source);
         return source;
 
     }
@@ -365,4 +366,38 @@ public class NofugakuIchiranCodeFumeiEditor implements
         source.list13_12 = doカンマ編集(納付額情報.get普徴収入額08(), NUM_6);
         source.list13_13 = doカンマ編集(納付額情報.get普徴収入額09(), NUM_6);
     }
+
+    private void setPageBreakEmpty(NofugakuIchiranSource source) {
+        if (source.list5_1 == null) {
+            source.list5_1 = RString.EMPTY;
+        }
+        if (source.list3_1 == null) {
+            source.list3_1 = RString.EMPTY;
+        }
+        if (source.list2_1 == null) {
+            source.list2_1 = RString.EMPTY;
+        }
+        if (source.list6_3 == null) {
+            source.list6_3 = RString.EMPTY;
+        }
+        if (source.list6_2 == null) {
+            source.list6_2 = RString.EMPTY;
+        }
+        if (source.cityCd == null) {
+            source.cityCd = RString.EMPTY;
+        }
+        if (source.list1_1 == null) {
+            source.list1_1 = RString.EMPTY;
+        }
+        if (source.list6_4 == null) {
+            source.list6_4 = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.kanaMeisho == null) {
+            source.kanaMeisho = RString.EMPTY;
+        }
+    }
+
 }

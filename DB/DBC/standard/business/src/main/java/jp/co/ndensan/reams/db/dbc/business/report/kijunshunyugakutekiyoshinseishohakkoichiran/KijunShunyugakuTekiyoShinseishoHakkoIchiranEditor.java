@@ -113,6 +113,16 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEditor implements IKijun
         source.shichosonCode = 発行対象者.get市町村コード();
         source.拡張情報A1 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listIchiran_5);
         source.拡張情報A2 = new ExpandedInformation(new Code("0004"), new RString("被保険者氏名"), source.listIchiran_6);
+        checkNull(source);
+        return source;
+    }
+
+    private KijunShunyugakuTekiyoShinseishoHakkoIchiranSource checkNull(KijunShunyugakuTekiyoShinseishoHakkoIchiranSource source) {
+        source.yubinNo = source.yubinNo == null ? RString.EMPTY : source.yubinNo;
+        source.choikiCode = source.choikiCode == null ? RString.EMPTY : source.choikiCode;
+        source.gyoseikuCode = source.gyoseikuCode == null ? RString.EMPTY : source.gyoseikuCode;
+        source.setaiCode = source.setaiCode == null ? RString.EMPTY : source.setaiCode;
+        source.shichosonCode = source.shichosonCode == null ? RString.EMPTY : source.shichosonCode;
         return source;
     }
 
