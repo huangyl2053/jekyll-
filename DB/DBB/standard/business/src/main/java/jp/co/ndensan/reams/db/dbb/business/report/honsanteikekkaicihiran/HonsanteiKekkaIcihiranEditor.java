@@ -217,7 +217,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
             source.listCenter_3 = entity.get資格喪失日().wareki().toDateString();
         }
         ShikakuKikan shikakuKikan = new ShikakuKikan();
-        if (entity.get資格喪失日() != null && entity.get資格喪失日().isEmpty()) {
+        if (entity.get資格喪失日() != null && !entity.get資格喪失日().isEmpty()) {
             ShikakuKikanJoho shikakuKikanJoho = shikakuKikan.get資格期間(賦課年度,
                     entity.get資格取得日(), entity.get資格喪失日());
             source.listCenter_4 = new RString(String.valueOf(shikakuKikanJoho.get月数()));
