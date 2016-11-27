@@ -669,11 +669,15 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         }
         builder.set調定日時(調定日時);
         builder.set異動基準日時(調定日時);
-        if (徴収方法の情報_更正後 == null) {
-            builder.set徴収方法履歴番号(徴収方法の情報.get履歴番号() + INDEX_1);
-        } else {
-            builder.set徴収方法履歴番号(徴収方法の情報_更正後.get履歴番号() + INDEX_1);
-        }
+        // TODO 仕様確認待て
+        int rirekiNo = 徴収方法の情報.get履歴番号() == 徴収方法の情報_更正後.get履歴番号()
+                ? 徴収方法の情報.get履歴番号() + INDEX_1 : 徴収方法の情報_更正後.get履歴番号();
+        builder.set徴収方法履歴番号(rirekiNo);
+//        if (徴収方法の情報_更正後 == null) {
+//            builder.set徴収方法履歴番号(徴収方法の情報.get履歴番号() + INDEX_1);
+//        } else {
+//            builder.set徴収方法履歴番号(徴収方法の情報_更正後.get履歴番号() + INDEX_1);
+//        }
         if (manager.is普徴期別がZERO(賦課の情報_更正後)) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
         } else if (!口座List.isEmpty()) {
