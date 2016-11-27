@@ -251,7 +251,7 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
     }
 
     private void edit市町村情報(KarisanteiIdoKekkaIchiranSource source) {
-        source.hokenshaNo = association.get地方公共団体コード().code市町村RString();
+        source.hokenshaNo = association.get地方公共団体コード().getColumnValue();
         source.hokenshaName = association.get市町村名();
     }
 
