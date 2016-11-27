@@ -520,8 +520,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
     }
 
     private RString toカンマ編集(Decimal 金額) {
-        RString rs金額 = DecimalFormatter.toコンマ区切りRString(金額, 0);
-        return RString.isNullOrEmpty(rs金額) ? ZERO : rs金額;
+        return (null == 金額 || Decimal.ZERO.equals(金額))
+                ? ZERO : DecimalFormatter.toコンマ区切りRString(金額, 0);
     }
 
     private RString set改頁項目(RString 改頁項目) {
