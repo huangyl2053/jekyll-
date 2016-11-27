@@ -376,20 +376,20 @@ public class HonnSanteiFuka {
      * @return boolean
      */
     public boolean is普徴期別がZERO(FukaJoho 賦課の情報_更正後) {
-        return Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額01())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額02())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額03())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額04())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額05())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額06())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額07())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額08())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額09())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額10())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額11())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額12())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額13())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額14());
+        return Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額01()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額02()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額03()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額04()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額05()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額06()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額07()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額08()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額09()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額10()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額11()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額12()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額13()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額14()) == INDEX_0;
     }
 
     /**
@@ -701,6 +701,7 @@ public class HonnSanteiFuka {
                 .add(特徴期別金額List.get(INDEX_4)).add(特徴期別金額List.get(INDEX_5));
         ChoshuHoho 徴収方法の情報_クローン = new ChoshuHoho(徴収方法情報_更正前.toEntity());
         CalculateChoteiResult result = new CalculateChoteiResult();
+        // TODO 仕様確認待て
         if (更正後特徴期別金額合計.compareTo(更正前特徴期別金額合計) < INDEX_0) {
             徴収方法の情報_クローン = 徴収方法の情報_クローン.createBuilderForEdit()
                     .set特別徴収停止事由コード(ChoteiJiyuCode.保険料額の減額変更.getコード())
@@ -710,8 +711,19 @@ public class HonnSanteiFuka {
                             賦課の情報_クローン.get資格喪失日());
             result.set徴収方法情報(徴収方法の情報_クローン);
         } else {
-            result.set徴収方法情報(null);
+            result.set徴収方法情報(徴収方法の情報_クローン);
         }
+//        if (更正後特徴期別金額合計.compareTo(更正前特徴期別金額合計) < INDEX_0) {
+//            徴収方法の情報_クローン = 徴収方法の情報_クローン.createBuilderForEdit()
+//                    .set特別徴収停止事由コード(ChoteiJiyuCode.保険料額の減額変更.getコード())
+//                    .set特別徴収停止日時(調定日時).build();
+//            徴収方法の情報_クローン = ChoshuHohoKoshin.createInstance()
+//                    .getChoshuHohoKoshinData(徴収方法の情報_クローン, 調定日時, 賦課の情報_クローン.get資格取得日(),
+//                            賦課の情報_クローン.get資格喪失日());
+//            result.set徴収方法情報(徴収方法の情報_クローン);
+//        } else {
+//            result.set徴収方法情報(null);
+//        }
         result.set賦課情報(賦課の情報_クローン);
         return result;
     }
@@ -1117,78 +1129,6 @@ public class HonnSanteiFuka {
             業務コンフィグ情報.set端数区分普徴期別額(INDEX_3);
         } else if (HasuChoseiTani._1000.getコード().equals(普通徴収_期別端数)) {
             業務コンフィグ情報.set端数区分普徴期別額(INDEX_4);
-        }
-    }
-
-    private void set特徴期別金額(Kibetsu kibetsu, List<Decimal> 特徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
-        switch (kibetsu.get期()) {
-            case INDEX_1:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_0), 介護期別RelateEntity);
-                break;
-            case INDEX_2:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_1), 介護期別RelateEntity);
-                break;
-            case INDEX_3:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_2), 介護期別RelateEntity);
-                break;
-            case INDEX_4:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_3), 介護期別RelateEntity);
-                break;
-            case INDEX_5:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_4), 介護期別RelateEntity);
-                break;
-            case INDEX_6:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_5), 介護期別RelateEntity);
-                break;
-            default:
-        }
-    }
-
-    private void set普徴期別金額(Kibetsu kibetsu, List<Decimal> 普徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
-        switch (kibetsu.get期()) {
-            case INDEX_1:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_0), 介護期別RelateEntity);
-                break;
-            case INDEX_2:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_1), 介護期別RelateEntity);
-                break;
-            case INDEX_3:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_2), 介護期別RelateEntity);
-                break;
-            case INDEX_4:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_3), 介護期別RelateEntity);
-                break;
-            case INDEX_5:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_4), 介護期別RelateEntity);
-                break;
-            case INDEX_6:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_5), 介護期別RelateEntity);
-                break;
-            case INDEX_7:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_6), 介護期別RelateEntity);
-                break;
-            case INDEX_8:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_7), 介護期別RelateEntity);
-                break;
-            case INDEX_9:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_8), 介護期別RelateEntity);
-                break;
-            case INDEX_10:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_9), 介護期別RelateEntity);
-                break;
-            case INDEX_11:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_10), 介護期別RelateEntity);
-                break;
-            case INDEX_12:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_11), 介護期別RelateEntity);
-                break;
-            case INDEX_13:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_12), 介護期別RelateEntity);
-                break;
-            case INDEX_14:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_13), 介護期別RelateEntity);
-                break;
-            default:
         }
     }
 

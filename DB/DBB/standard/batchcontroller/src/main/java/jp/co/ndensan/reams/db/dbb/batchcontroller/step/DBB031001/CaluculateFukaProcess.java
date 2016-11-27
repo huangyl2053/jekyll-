@@ -475,6 +475,9 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
                                     ? setNull : setaiShotokuEntity.getSetaiCode().getColumnValue()));
                     new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("識別コード：")
                             .concat(setaiShotokuEntity.getShikibetsuCode() == null
+                                    ? setNull : setaiShotokuEntity.getHihokenshaNo().getColumnValue()));
+                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("被保険者：")
+                            .concat(setaiShotokuEntity.getShikibetsuCode() == null
                                     ? setNull : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
                     new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("課税区分：")
                             .concat(setaiShotokuEntity.getKazeiKubun()));
@@ -569,10 +572,12 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
             DbT2002FukaJohoTempTableEntity fukaJohoTempTableEntity = new DbT2002FukaJohoTempTableEntity();
             fukaJohoTempTableEntity = manager.set一時賦課情報(fukaJohoTempTableEntity, 賦課の情報_設定後);
             fukaWriter.insert(fukaJohoTempTableEntity);
-            if (徴収方法の情報_更正後 != null) {
-                DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報_更正後.toEntity();
-                介護徴収方法Writer.insert(dbT2001ChoshuHohoEntity);
-            }
+            // TODO 仕様確認待て
+            DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報_更正後.toEntity();
+            int rirekiNo = 徴収方法の情報.get履歴番号() == 徴収方法の情報_更正後.get履歴番号()
+                    ? 徴収方法の情報.get履歴番号() + INDEX_1 : 徴収方法の情報_更正後.get履歴番号();
+            dbT2001ChoshuHohoEntity.setRirekiNo(rirekiNo);
+            介護徴収方法Writer.insert(dbT2001ChoshuHohoEntity);
         } else if (Decimal.ZERO.compareTo(賦課の情報_更正前.get減免額()) < INDEX_0) {
             DbT2010FukaErrorListEntity errorListEntity = new DbT2010FukaErrorListEntity();
             errorListEntity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
@@ -635,10 +640,19 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         DbT2002FukaJohoTempTableEntity fukaJohoTempTableEntity = new DbT2002FukaJohoTempTableEntity();
         fukaJohoTempTableEntity = manager.set一時賦課情報(fukaJohoTempTableEntity, 賦課の情報_更正後);
         fukaWriter.insert(fukaJohoTempTableEntity);
-        if (徴収方法の情報_更正後 != null) {
-            DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報_更正後.toEntity();
-            介護徴収方法Writer.insert(dbT2001ChoshuHohoEntity);
-        }
+        // TODO 仕様確認待て
+        DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報_更正後.toEntity();
+        int rirekiNo = 徴収方法の情報.get履歴番号() == 徴収方法の情報_更正後.get履歴番号()
+                ? 徴収方法の情報.get履歴番号() + INDEX_1 : 徴収方法の情報_更正後.get履歴番号();
+        dbT2001ChoshuHohoEntity.setRirekiNo(rirekiNo);
+        介護徴収方法Writer.insert(dbT2001ChoshuHohoEntity);
+//        if (徴収方法の情報_更正後 != null) {
+//            DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報_更正後.toEntity();
+//            int rirekiNo = 徴収方法の情報.get履歴番号() == 徴収方法の情報_更正後.get履歴番号()
+//                    ? 徴収方法の情報.get履歴番号() + INDEX_1 : 徴収方法の情報_更正後.get履歴番号();
+//            dbT2001ChoshuHohoEntity.setRirekiNo(rirekiNo);
+//            介護徴収方法Writer.insert(dbT2001ChoshuHohoEntity);
+//        }
 
     }
 
