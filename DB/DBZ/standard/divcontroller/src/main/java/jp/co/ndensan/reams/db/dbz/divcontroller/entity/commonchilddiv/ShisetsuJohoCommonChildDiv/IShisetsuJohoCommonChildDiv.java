@@ -41,6 +41,8 @@ public interface IShisetsuJohoCommonChildDiv extends ICommonChildDivBaseProperti
 
     public abstract RString get施設種類();
 
+    public abstract RString getサービス種類コード();
+
     public abstract void set施設種類(RString key);
 
     public abstract void setShisetsuMeisho(RString meisho);
@@ -52,8 +54,7 @@ public interface IShisetsuJohoCommonChildDiv extends ICommonChildDivBaseProperti
     /**
      * 入力した施設コード・名称が、施設種類にあっているかを検査します。
      *
-     * @return 入力した施設コード・名称が選択されている施設種類と矛盾している場合、エラーメッセージを返す。
-     * 矛盾していない場合は、空のエラーメッセージが返る。
+     * @return 入力した施設コード・名称が選択されている施設種類と矛盾している場合、エラーメッセージを返す。 矛盾していない場合は、空のエラーメッセージが返る。
      */
     ValidationMessageControlPairs validate施設種類();
 

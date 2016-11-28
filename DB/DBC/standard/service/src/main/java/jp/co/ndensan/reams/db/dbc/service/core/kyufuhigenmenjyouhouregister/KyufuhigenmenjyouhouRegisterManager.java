@@ -116,4 +116,16 @@ public class KyufuhigenmenjyouhouRegisterManager {
         KyufuJissekiJyouhouEntity entity = mapper.checkKyufuJissekiJyouhou(parameter);
         return entity.is存在();
     }
+
+    /**
+     * 事業者指定サービスの存在するです。
+     *
+     * @param parameter GenmenJyouhouParameter
+     * @return boolean boolean
+     */
+    @Transaction
+    public boolean isKaigoJigyoshaShiteiService(GenmenJyouhouParameter parameter) {
+        IkyufuhigenmenjyouhouregisterMapper mapper = mapperProvider.create(IkyufuhigenmenjyouhouregisterMapper.class);
+        return mapper.checkKaigoJigyoshaShiteiService(parameter) > 0;
+    }
 }

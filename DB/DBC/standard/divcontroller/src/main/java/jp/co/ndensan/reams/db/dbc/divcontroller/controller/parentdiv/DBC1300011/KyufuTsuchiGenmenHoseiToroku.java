@@ -273,6 +273,9 @@ public class KyufuTsuchiGenmenHoseiToroku {
         if (pair.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pair).respond();
         }
+        if (!事業者指定サービスチェック(div)) {
+            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).get事業者_サービス種類_組み合わせ不正メッセージ()).respond();
+        }
         div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(false);
         div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(false);
         if (changeCheck(div)) {
@@ -336,6 +339,29 @@ public class KyufuTsuchiGenmenHoseiToroku {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 事業者コード変更の処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv>
+     */
+    public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onChange_nyuryokuShisetsuKodo(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        if (!RString.isNullOrEmpty(div.getCcdJigyoshaInput().getサービス種類コード())) {
+            div.getCcdServiceTypeInput().initialize(div.getCcdJigyoshaInput().getサービス種類コード());
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 事業者・施設入力ガイドのOKClose時の処理を行います。
+     *
+     * @param div 画面情報
+     * @return ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv>
+     */
+    public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onOkClose_btnSenTaKu(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        return onChange_nyuryokuShisetsuKodo(div);
+    }
+
     private boolean kakutei(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         HokenshaSummary hokenshaSummary = div.getCcdHokenshaList().getSelectedItem();
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
@@ -344,7 +370,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
         GenmenJyouhouParameter parameter = GenmenJyouhouParameter.createByKeyParam(
                 hiHokenshaNo,
                 !hokenshaSummary.get証記載保険者番号().value().isEmpty() ? new HokenshaNo(hokenshaSummary.get証記載保険者番号().value())
-                : new HokenshaNo(ALL_SHICHOSON_KEY),
+                        : new HokenshaNo(ALL_SHICHOSON_KEY),
                 new FlexibleYearMonth(div.getTextBoxDateSaabisu().getValue().toDateString().substring(0, NUM_6)),
                 new JigyoshaNo(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo()),
                 new ServiceShuruiCode(div.getCcdServiceTypeInput().getサービス種類コード()),
@@ -365,10 +391,10 @@ public class KyufuTsuchiGenmenHoseiToroku {
         if (状態_追加.equals(イベント状態)) {
             KyufuhiTuchiHosei kyufuhiTuchiHosei = new KyufuhiTuchiHosei(
                     !hokenshaSummary.get証記載保険者番号().value().isEmpty() ? new HokenshaNo(hokenshaSummary.get証記載保険者番号().value())
-                    : new HokenshaNo(ALL_SHICHOSON_KEY),
+                            : new HokenshaNo(ALL_SHICHOSON_KEY),
                     hiHokenshaNo,
                     new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString().substring(0,
-                                    NUM_6)),
+                            NUM_6)),
                     new JigyoshaNo(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().getNyuryokuShisetsuKodo()),
                     new ServiceShuruiCode(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdServiceTypeInput().getサービス種類コード()),
                     Decimal.ONE);
@@ -381,10 +407,10 @@ public class KyufuTsuchiGenmenHoseiToroku {
         } else if (状態_修正.equals(イベント状態)) {
             KyufuhiTuchiHoseiIdentifier key = new KyufuhiTuchiHoseiIdentifier(
                     !hokenshaSummary.get証記載保険者番号().value().isEmpty() ? new HokenshaNo(hokenshaSummary.get証記載保険者番号().value())
-                    : new HokenshaNo(ALL_SHICHOSON_KEY),
+                            : new HokenshaNo(ALL_SHICHOSON_KEY),
                     hiHokenshaNo,
                     new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString().substring(0,
-                                    NUM_6)),
+                            NUM_6)),
                     new JigyoshaNo(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().getNyuryokuShisetsuKodo()),
                     new ServiceShuruiCode(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdServiceTypeInput().getサービス種類コード()),
                     Decimal.ONE);
@@ -394,10 +420,10 @@ public class KyufuTsuchiGenmenHoseiToroku {
         } else if (状態_削除.equals(イベント状態)) {
             KyufuhiTuchiHoseiIdentifier key = new KyufuhiTuchiHoseiIdentifier(
                     !hokenshaSummary.get証記載保険者番号().value().isEmpty() ? new HokenshaNo(hokenshaSummary.get証記載保険者番号().value())
-                    : new HokenshaNo(ALL_SHICHOSON_KEY),
+                            : new HokenshaNo(ALL_SHICHOSON_KEY),
                     hiHokenshaNo,
                     new FlexibleYearMonth(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxDateSaabisu().getValue().toDateString().substring(0,
-                                    NUM_6)),
+                            NUM_6)),
                     new JigyoshaNo(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().getNyuryokuShisetsuKodo()),
                     new ServiceShuruiCode(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdServiceTypeInput().getサービス種類コード()),
                     Decimal.ONE);
@@ -434,5 +460,15 @@ public class KyufuTsuchiGenmenHoseiToroku {
 
     private boolean isUpdate(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         return !getHandler(div).getInputDiv().equals(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getHiddenInputDiv());
+    }
+
+    private boolean 事業者指定サービスチェック(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        RString サービス提供年月 = RString.EMPTY;
+        if (div.getTextBoxDateSaabisu().getValue() != null) {
+            サービス提供年月 = div.getTextBoxDateSaabisu().getValue().getYearMonth().toDateString();
+        }
+        return KyufuhigenmenjyouhouRegisterManager.createInstance().isKaigoJigyoshaShiteiService(
+                GenmenJyouhouParameter.createByKeyParam(
+                        div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo(), div.getCcdServiceTypeInput().getサービス種類コード(), サービス提供年月));
     }
 }
