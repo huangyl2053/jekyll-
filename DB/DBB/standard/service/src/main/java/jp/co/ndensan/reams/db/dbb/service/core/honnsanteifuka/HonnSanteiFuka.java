@@ -1130,25 +1130,13 @@ public class HonnSanteiFuka {
 
         UrT0705ChoteiKyotsuEntity urT0705ChoteiKyotsuEntity = new UrT0705ChoteiKyotsuEntity();
         urT0705ChoteiKyotsuEntity.setChoteiId(Long.valueOf(rst.toString()));
+        urT0705ChoteiKyotsuEntity.setShunoId(Long.valueOf(rst.toString()));
         urT0705ChoteiKyotsuEntity.setChoteigaku(期別金額);
         List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
         entityList.add(urT0705ChoteiKyotsuEntity);
 
         kibetsuEntity.set調定共通Entity(entityList);
         介護期別RelateEntity.add(kibetsuEntity);
-    }
-
-    private void set既存賦課の期別金額(Kibetsu kibetsu, Decimal 期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
-        if (kibetsu.getChoteiKyotsuList() != null && !kibetsu.getChoteiKyotsuList().isEmpty()) {
-            KibetsuEntity relateEntity = new KibetsuEntity();
-            relateEntity.set介護期別Entity(kibetsu.toEntity());
-            UrT0705ChoteiKyotsuEntity entity = kibetsu.getChoteiKyotsuList().get(0).toEntity();
-            entity.setChoteigaku(期別金額);
-            List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
-            entityList.add(entity);
-            relateEntity.set調定共通Entity(entityList);
-            介護期別RelateEntity.add(relateEntity);
-        }
     }
 
     /**
