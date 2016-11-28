@@ -47,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -158,7 +159,8 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
                 ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
-        if (div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtZenkaiHakkoYMD().getValue() != null && !ResponseHolder.isReRequest()) {
+        if (div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtZenkaiHakkoYMD().getValue() != null
+                && !judgeMsg(DbcWarningMessages.高額合算支給決定通知書発行済.getMessage())) {
             WarningMessage message = new WarningMessage(
                     DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().getCode(),
                     DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().evaluate(),
@@ -172,7 +174,8 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         ShoukanbaraiShikyuKetteiTsuchisho shoukanFinder = ShoukanbaraiShikyuKetteiTsuchisho.createInstance();
         HihokenshaDaicho 被保険者情報 = shoukanFinder.getShikaku(被保険者番号);
         if (被保険者情報 != null) {
-            if (被保険者情報.get被保険者区分コード().equals(ShikakuKubun._２号.getコード()) && !ResponseHolder.isReRequest()) {
+            if (被保険者情報.get被保険者区分コード().equals(ShikakuKubun._２号.getコード())
+                    && !judgeMsg(DbcWarningMessages.二号滞納状況確認.getMessage())) {
                 WarningMessage message = new WarningMessage(
                         DbcWarningMessages.二号滞納状況確認.getMessage().getCode(),
                         DbcWarningMessages.二号滞納状況確認.getMessage().evaluate(),
@@ -238,5 +241,9 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
 
     private ShokanShikyuKetteiTsuchishoHakkouHandler getHandler(ShokanShikyuKetteiTsuchishoHakkouDiv div) {
         return new ShokanShikyuKetteiTsuchishoHakkouHandler(div);
+    }
+
+    private boolean judgeMsg(Message message) {
+        return new RString(message.getCode()).equals(ResponseHolder.getMessageCode());
     }
 }
