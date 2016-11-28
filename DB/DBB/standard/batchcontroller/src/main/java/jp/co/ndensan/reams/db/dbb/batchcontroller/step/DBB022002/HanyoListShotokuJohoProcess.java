@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMas
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -137,6 +139,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
     private HokenryoDankaiList 保険料段階リスト;
     List<KoseiShichosonMaster> 構成市町村マスタlist;
     private Association 地方公共団体;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
     private FileSpoolManager manager;
     private YMDHMS システム日時;
     private RString eucFilePath;
@@ -152,6 +155,8 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
         RString 出力順 = MyBatisOrderByClauseCreator
                 .create(DBB200034BreakerFieldsEnum.class, 並び順);
         processParameter.set出力順(出力順);
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課, processParameter.get帳票ID());
     }
 
     @Override
@@ -242,7 +247,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
 
     @Override
     protected void process(HanyoListShotokuJohoEntity entity) {
-        eucCsvWriter.writeLine(csvEditor.editor(entity, processParameter, 連番, 保険料段階リスト, 構成市町村マスタlist));
+        eucCsvWriter.writeLine(csvEditor.editor(entity, processParameter, 連番, 保険料段階リスト, 構成市町村マスタlist, 帳票制御共通));
         連番 = 連番.add(Decimal.ONE);
         personalDataList.add(toPersonalData(entity));
     }
