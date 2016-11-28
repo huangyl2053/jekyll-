@@ -677,7 +677,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             } else if (!変更有無 && !ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
             }
-        } else {
+        } else if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
 
