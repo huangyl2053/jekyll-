@@ -64,7 +64,7 @@
             "shikibetsuCode"."kanaMeisho" as "kanaMeisho",
             "shikibetsuCode"."juminShubetsuCode" as "juminShubetsuCode",
             "shikibetsuCode"."kanjiShimei" as "kanjiShimei",
-            "shikibetsuCode"."seibetsuCode" as "seibetsuCode",
+            "shikibetsuCode"."seibetsuCode" as "dtSeibetsu",
             "shikibetsuCode"."jusho" as "jusho",
             "shikibetsuCode"."yubinNo" as "yubinNo",
             
@@ -160,7 +160,7 @@
         <result property="kisoNenkinNo" column="kisoNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="nenkinCode" column="nenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="birthDay" column="dtBirthDay" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="seibetsu" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.SeibetsuCodeNenkinTokuchoTypeHandler" />
+        <result property="seibetsu" column="dtSeibetsu" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.SeibetsuCodeNenkinTokuchoTypeHandler" />
         <result property="kanjiJusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="tokubetsuChoshuGimushaCode" column="dtTokubetsuChoshuGimushaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="kanaShimei" column="dtKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
