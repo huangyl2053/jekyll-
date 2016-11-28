@@ -202,8 +202,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         }
         RString 照会モード = ViewStateHolder.get(ViewStateKeys.照会モード, RString.class);
 
-        if (DBC1100011StateName.変更取下げ.getName().equals(ResponseHolder.getState())
-                || DBC1100011StateName.申請登録.getName().equals(ResponseHolder.getState())) {
+        if (DBC1100011StateName.変更取下げ.getName().equals(ResponseHolder.getState())) {
             if (照会モード != null) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(申請情報を保存する_変更取下げ, true);
             } else {
