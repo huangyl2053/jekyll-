@@ -700,7 +700,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             FukaKonkyo 賦課根拠 = factory.create(fukaKonkyoBatchParameter);
             TsukibetsuHokenryoDankai 月別保険料段階 = new TsukibetsuHokenryoDankai();
             FlexibleDate 資格喪失日 = 賦課計算の情報.get資格の情報().getShikakuSoshitsuYMD();
-            if (資格喪失日 != null && !資格喪失日.isEmpty() && 賦課計算の情報.get賦課期日().isBefore(資格喪失日)) {
+            if (資格喪失日 == null || 資格喪失日.isEmpty() || 賦課計算の情報.get賦課期日().isBefore(資格喪失日)) {
                 HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
                 HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
                 保険料段階パラメータ.setFukaNendo(賦課計算の情報.get賦課年度());
@@ -715,7 +715,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             }
             NengakuHokenryo 年額保険料 = new NengakuHokenryo();
             Decimal 年額保険料Tmp = Decimal.ZERO;
-            if (資格喪失日 != null && !資格喪失日.isEmpty() && 賦課計算の情報.get賦課期日().isBefore(資格喪失日)) {
+            if (資格喪失日 == null || 資格喪失日.isEmpty() || 賦課計算の情報.get賦課期日().isBefore(資格喪失日)) {
                 NengakuHokenryoKeisanParameter 年額保険料パラメータ = new NengakuHokenryoKeisanParameter();
                 年額保険料パラメータ.set賦課年度(賦課計算の情報.get賦課年度());
                 TsukibetsuRankuTmpEntity 月別ランク = 賦課計算の情報.get月別ランク();
