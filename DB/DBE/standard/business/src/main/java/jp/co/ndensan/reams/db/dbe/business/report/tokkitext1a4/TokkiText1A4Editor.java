@@ -139,7 +139,7 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
             set特記事項List(事項, index, source);
             index = index + 1;
         }
-        if (count < 15) {
+        if (count < 30) {
             source.layoutBreakItem = 1;
         } else {
             source.layoutBreakItem = 2;
