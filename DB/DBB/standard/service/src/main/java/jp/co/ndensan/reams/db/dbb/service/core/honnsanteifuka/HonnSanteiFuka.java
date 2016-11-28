@@ -701,7 +701,6 @@ public class HonnSanteiFuka {
                 .add(特徴期別金額List.get(INDEX_4)).add(特徴期別金額List.get(INDEX_5));
         ChoshuHoho 徴収方法の情報_クローン = new ChoshuHoho(徴収方法情報_更正前.toEntity());
         CalculateChoteiResult result = new CalculateChoteiResult();
-        // TODO 仕様確認待て
         if (更正後特徴期別金額合計.compareTo(更正前特徴期別金額合計) < INDEX_0) {
             徴収方法の情報_クローン = 徴収方法の情報_クローン.createBuilderForEdit()
                     .set特別徴収停止事由コード(ChoteiJiyuCode.保険料額の減額変更.getコード())
@@ -711,19 +710,8 @@ public class HonnSanteiFuka {
                             賦課の情報_クローン.get資格喪失日());
             result.set徴収方法情報(徴収方法の情報_クローン);
         } else {
-            result.set徴収方法情報(徴収方法の情報_クローン);
+            result.set徴収方法情報(null);
         }
-//        if (更正後特徴期別金額合計.compareTo(更正前特徴期別金額合計) < INDEX_0) {
-//            徴収方法の情報_クローン = 徴収方法の情報_クローン.createBuilderForEdit()
-//                    .set特別徴収停止事由コード(ChoteiJiyuCode.保険料額の減額変更.getコード())
-//                    .set特別徴収停止日時(調定日時).build();
-//            徴収方法の情報_クローン = ChoshuHohoKoshin.createInstance()
-//                    .getChoshuHohoKoshinData(徴収方法の情報_クローン, 調定日時, 賦課の情報_クローン.get資格取得日(),
-//                            賦課の情報_クローン.get資格喪失日());
-//            result.set徴収方法情報(徴収方法の情報_クローン);
-//        } else {
-//            result.set徴収方法情報(null);
-//        }
         result.set賦課情報(賦課の情報_クローン);
         return result;
     }
@@ -742,7 +730,7 @@ public class HonnSanteiFuka {
         int 現在期 = 更正月_本算定期.get期AsInt();
         kiwariKeisanInput.set現在期(現在期);
         ITsukiShorkiKubun 現在期区分 = 更正月_本算定期.get月処理区分();
-        kiwariKeisanInput.set現在期区分(Integer.parseInt(現在期区分.get区分().toString()));
+        kiwariKeisanInput.set現在期区分(Integer.parseInt(現在期区分.get区分().toString()) - INDEX_1);
         kiwariKeisanInput.set特徴停止可能期(固定値_4期);
         kiwariKeisanInput.set現在特徴期区分(固定値_本算定);
         int 現在過年期 = 更正月判定.find過年度更正月(処理日付).get期AsInt();
