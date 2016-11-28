@@ -22,7 +22,7 @@ public class SinsakaiHanteiJyokyoShinsakaishukeihyoEditor {
 
     private static final RString タイトル = new RString("介護認定審査会集計表（判定別）");
     private static final RString 全市町村 = new RString("全市町村");
-    private static final RString 全市町村コード = new RString("000000");
+    private static final RString 全市町村コード = RString.EMPTY;
     private static final RString 非該当タイトル = new RString("非該当");
     private static final RString 要支援1タイトル = new RString("要支援1");
     private static final RString 要支援2タイトル = new RString("要支援2");
