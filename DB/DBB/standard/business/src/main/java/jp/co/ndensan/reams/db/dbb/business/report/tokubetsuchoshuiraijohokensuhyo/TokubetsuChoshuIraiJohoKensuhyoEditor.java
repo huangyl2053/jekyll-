@@ -94,6 +94,7 @@ public class TokubetsuChoshuIraiJohoKensuhyoEditor implements ITokubetsuChoshuIr
         if (parameter.get金額2の金額の合計() != null) {
             source.gokeiKingaku2 = doカンマ編集(new Decimal(parameter.get金額2の金額の合計().toString()));
         }
+        pageBreakNullCheck(source);
         return source;
     }
 
@@ -102,5 +103,14 @@ public class TokubetsuChoshuIraiJohoKensuhyoEditor implements ITokubetsuChoshuIr
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
+    }
+
+    private void pageBreakNullCheck(TokubetsuChoshuIraiJohoKensuhyoSource source) {
+        if (source.nenkinHokenshaName == null) {
+            source.nenkinHokenshaName = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
     }
 }
