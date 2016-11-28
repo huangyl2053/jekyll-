@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukadaichodatahenshu.FukaDaichoInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.report.fukadaicho.EditedHonSanteiFukaDaichoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.fukadaicho.EditedKariSanteiFukaDaichoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.fukadaicho.FutsuChoshu;
@@ -1025,7 +1026,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             特別徴収.set特徴金額６(format金額(賦課情報.get特徴期別金額06()));
         }
         if (is特徴金額がある) {
-            特別徴収.set特徴調定月(new RString(賦課情報.get調定日時().getMonthValue()).concat(FORMAT_月));
+            特別徴収.set特徴調定月(new RString(new KoseiTsukiHantei().
+                    find更正月(賦課情報.get調定日時().getDate()).get月AsInt()).padLeft(RString.HALF_SPACE, INT_2).concat(FORMAT_月));
             特別徴収.set特徴調定月の期(FORMAT_LEFT.concat(get月の期(期月リスト_特徴, 賦課情報.get調定日時().getMonthValue())).concat(FORMAT_RIGHT));
             Decimal 特別期別合計 = get特徴仮算定保険料(賦課情報, INT_1, INT_6);
             特別徴収.set特徴仮算定保険料(DecimalFormatter.toコンマ区切りRString(特別期別合計, 0));
@@ -1163,7 +1165,8 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
             普通徴収.set普徴金額１４(format金額(賦課情報.get普徴期別金額14()));
         }
         if (is普徴金額がある) {
-            普通徴収.set普徴調定月(new RString(賦課情報.get調定日時().getMonthValue()).concat(FORMAT_月));
+            普通徴収.set普徴調定月(new RString(new KoseiTsukiHantei().
+                    find更正月(賦課情報.get調定日時().getDate()).get月AsInt()).padLeft(RString.HALF_SPACE, INT_2).concat(FORMAT_月));
             普通徴収.set普徴調定月の期(FORMAT_LEFT.concat(get月の期(期月リスト_普徴, 賦課情報.get調定日時().getMonthValue())).concat(FORMAT_RIGHT));
             Decimal 普徴期別合計 = get普徴納付済額(賦課情報, INT_1, INT_14);
             RString 普徴確定年額保険料 = DecimalFormatter.toコンマ区切りRString(普徴期別合計, 0);
