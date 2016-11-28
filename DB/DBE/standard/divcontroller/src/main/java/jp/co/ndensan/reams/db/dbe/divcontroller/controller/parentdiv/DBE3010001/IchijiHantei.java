@@ -65,7 +65,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class IchijiHantei {
 
     private final IChiJiPanTeiSyoRiManager manager;
-    private final RString メニュー = new RString("DBEMN41001");
+    private final RString メニュー = new RString("DBEMN51001");
     private final RString 完了処理_一次判定 = new RString("DBEMNA1006");
     private static final RString LOCKINGKEY = new RString("ShinseishoKanriNo");
     private static final RString データ取込 = new RString("btnTorikomi");

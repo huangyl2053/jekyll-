@@ -142,7 +142,7 @@ public class ChosaKekkaInfoKihonHandler {
             NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
             ArrayList<NinteichosahyoTokkijiko> list = manager.get調査特記事項(chosaItem.get申請書管理番号(), chosaItem.get認定調査依頼履歴番号(), 認定調査特記事項番号List);
             if (list.isEmpty()) {
-                dgJigyoshaItiran.getBtnTokkiJiko().setVisible(false);
+                dgJigyoshaItiran.getBtnTokkiJiko().setDisabled(true);
             } else {
                 dgJigyoshaItiran.getBtnTokkiJiko().setDisabled(false);
             }

@@ -45,7 +45,7 @@ public class SinsakaiHanteiJyokyoHeaderJotaikubunbetsuEditor {
     private static final RString パーセント = new RString("%");
     private static final RString なし = new RString(0);
     private static final RString 全合議体 = new RString("全合議体");
-    private static final RString 全市町村コード = new RString("000000");
+    private static final RString 全市町村コード = RString.EMPTY;
     private static final RString 全市町村 = new RString("全市町村");
     private static final int 割合 = 100;
     private final SinsakaiHanteiJyokyoProcessParameter parameter;
