@@ -194,6 +194,7 @@
                     this.controls.btnKyotakuServiceRireki().disabled = false;
                     this.controls.radKyotakuServiceSakuseiKubun().disabled = true;
                     this.controls.txtKyotakuKaigoShienJigyoshoNo().disabled = true;
+					this.controls.btnShienJigyoshoNo().disabled = true;
                     this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = true;
                     this.controls.txtKyotakuServiceTekiyoYMD().disabled = true;
                     this.controls.radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().disabled = true;

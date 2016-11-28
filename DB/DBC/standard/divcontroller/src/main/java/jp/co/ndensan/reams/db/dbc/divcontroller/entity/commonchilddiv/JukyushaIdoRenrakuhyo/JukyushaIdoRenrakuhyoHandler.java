@@ -708,7 +708,6 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setDisabled(false);
         } else if (JukyushaIF_kyotakuServiceSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(計画作成区分Key)
                 || JukyushaIF_kyotakuServiceSakuseiKubunCode.介護予防支援事業所作成.getコード().equals(計画作成区分Key)) {
-            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().clearValue();
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setDisabled(false);
             div.getKyotakuServicePlanPanel().getBtnShienJigyoshoNo().setDisabled(false);
             div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setDisabled(false);
