@@ -285,6 +285,17 @@ public class JutakuKaishuShinseiJyohoToroku {
         } else if ((削除の確認 || 保存の確認) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
+        return 保存処理(div, 画面モード, 引き継ぎデータEntity, handler, 保存終了, 確認_汎用, 被保険者番号, param);
+    }
+
+    private ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> 保存処理(JutakuKaishuShinseiJyohoTorokuDiv div,
+            RString 画面モード,
+            ShokanharaKeteiJyohoParameter 引き継ぎデータEntity,
+            JutakuKaishuShinseiJyohoTorokuHandler handler,
+            boolean 保存終了,
+            boolean 確認_汎用,
+            HihokenshaNo 被保険者番号,
+            JutakuGaisuViewStateHolderParameter param) {
         if (is状態Check(画面モード)) {
             set完了状態(div);
             return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
@@ -318,6 +329,13 @@ public class JutakuKaishuShinseiJyohoToroku {
                     UrInformationMessages.保存終了.getMessage().evaluate());
             return ResponseData.of(div).addMessage(infoMessage).respond();
         }
+        return 保存終了(保存終了, div, 確認_汎用, 引き継ぎデータEntity, handler, 被保険者番号, param);
+    }
+
+    private ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> 保存終了(boolean 保存終了, JutakuKaishuShinseiJyohoTorokuDiv div, boolean 確認_汎用,
+            ShokanharaKeteiJyohoParameter 引き継ぎデータEntity, JutakuKaishuShinseiJyohoTorokuHandler handler,
+            HihokenshaNo 被保険者番号,
+            JutakuGaisuViewStateHolderParameter param) {
         if (保存終了 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_遷移元, 遷移元);
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
