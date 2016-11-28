@@ -133,8 +133,41 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
                         nullToZero(更正前.get保険料率()), 0);
                 reportSource.hokenSanshutsuMae = DecimalFormatter.toコンマ区切りRString(
                         nullToZero(更正前.get減免前保険料_年額()), 0);
+                reportSource.kotekiNenkinShunyuGakuMae = edit金額(更正前.get公的年金収入額());
+                reportSource.gokeiShotokuKingakuMae = edit金額(更正前.get合計所得金額());
+                reportSource.seikatsuHogoFujoShuruiMae = 更正前.get生活保護扶助種類();
+                reportSource.honninKazeiKubunMae = 更正前.get市町村民税課税区分_本人();
+                reportSource.setaiKazeiKubunMae = 更正前.get市町村民税課税区分_世帯();
+                reportSource.roreiHaishiYmdMae = 更正前.get老齢廃止日();
+                reportSource.roreiKaishiYmdMae = 更正前.get老齢開始日();
+                reportSource.seihoHaishiYmdMae = 更正前.get生保廃止日();
+                reportSource.seihoKaishiYmdMae = 更正前.get生保開始日();
             }
         }
+        reportSource.kotekiNenkinShunyuGakuAto = edit金額(更正後.get公的年金収入額());
+        reportSource.gokeiShotokuKingakuAto = edit金額(更正後.get合計所得金額());
+        reportSource.seikatsuHogoFujoShuruiAto = 更正後.get生活保護扶助種類();
+        reportSource.honninKazeiKubunAto = 更正後.get市町村民税課税区分_本人();
+        reportSource.setaiKazeiKubunAto = 更正後.get市町村民税課税区分_世帯();
+        reportSource.roreiHaishiYmdAto = 更正後.get老齢廃止日();
+        reportSource.roreiKaishiYmdAto = 更正後.get老齢開始日();
+        reportSource.seihoHaishiYmdAto = 更正後.get生保廃止日();
+        reportSource.seihoKaishiYmdAto = 更正後.get生保開始日();
+        reportSource.nofuzumiGakuMiToraiKi = edit金額(編集後本算定通知書共通情報.get未到来期の納付済額());
+        reportSource.nofuzumiGakuToraiKi = edit金額(編集後本算定通知書共通情報.get納付済額_未到来期含まない());
+        reportSource.tokuchoNofuzumiGaku = edit金額(編集後本算定通知書共通情報.get特徴納付済額_未到来期含む());
+        reportSource.fuchoNofuzumiGaku = edit金額(編集後本算定通知書共通情報.get普徴納付済額_未到来期含む());
+        reportSource.tokuchoNofuzumiGakuToraiKi = edit金額(編集後本算定通知書共通情報.get特徴納付済額_未到来期含まない());
+        reportSource.fuchoNofuzumiGakuToraiKi = edit金額(編集後本算定通知書共通情報.get普徴納付済額_未到来期含まない());
+        reportSource.nofuzumiGakuSanshutsuYmd = 編集後本算定通知書共通情報.get納付済額算出年月日();
+        reportSource.tokuchoSudeniNofuSubekiGaku = edit金額(編集後本算定通知書共通情報.get特徴既に納付すべき額());
+        reportSource.fuchoSudeniNofuSubekiGaku = edit金額(編集後本算定通知書共通情報.get普徴既に納付すべき額());
+        reportSource.sudeniNofuSubekiGaku = edit金額(編集後本算定通知書共通情報.get既に納付すべき額());
+        reportSource.tokuchoKongoNofuSubekiGakuShunyu = edit金額(編集後本算定通知書共通情報.get特徴今後納付すべき額_収入元に());
+        reportSource.tokuchoKongoNofuSubekiGakuChotei = edit金額(編集後本算定通知書共通情報.get特徴今後納付すべき額_調定元に());
+        reportSource.fuchoKongoNofuSubekiGakuShunyu = edit金額(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に());
+        reportSource.fuchoKongoNofuSubekiGakuChotei = edit金額(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に());
+        reportSource.kongoNofuSubekiGakuChotei = edit金額(編集後本算定通知書共通情報.get今後納付すべき額_調定元に());
         return reportSource;
     }
 
@@ -255,6 +288,14 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
 
     private Decimal nullToZero(Decimal decimal) {
         return decimal == null ? Decimal.ZERO : decimal;
+    }
+
+    private RString edit金額(Decimal 金額) {
+        if (金額 == null || Decimal.ZERO.compareTo(金額) == 0) {
+            return RString.HALF_SPACE;
+        } else {
+            return DecimalFormatter.toコンマ区切りRString(金額, 0);
+        }
     }
 
 }
