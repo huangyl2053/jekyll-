@@ -81,9 +81,6 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString 年度内連番_3 = new RString("0003");
     private static final RString 年度内連番_6 = new RString("0006");
     private static final RString 処理枝番 = new RString("0001");
-    private static final RString 処理枝番_01 = new RString("01");
-    private static final RString 処理枝番_02 = new RString("02");
-    private static final RString 処理枝番_03 = new RString("03");
     private static final RString FORMAT_補00 = new RString("00%s");
     private static final RString INDEX_112 = new RString("112");
     private static final RString INDEX_120 = new RString("120");
@@ -1941,6 +1938,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
      * 処理日付管理マスタテーブルから、最大年度内連番を取得する。
      *
      * @param 調定年度 調定年度
+     * @param 処理名 処理名
      * @return DbT7022ShoriDateKanriEntity
      */
     @Transaction

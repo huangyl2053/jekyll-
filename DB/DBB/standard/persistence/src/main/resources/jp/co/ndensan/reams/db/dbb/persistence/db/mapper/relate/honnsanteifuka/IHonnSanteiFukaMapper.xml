@@ -2822,5 +2822,15 @@
         AND "shoriName"='特徴依頼情報作成'
         LIMIT(1)
     </select>
+    
+    <select resultOrdered="true" id="select既存有無"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.ChoshuHohomyBatisParameter" fetchSize="500">
+        SELECT *
+        FROM rgdb."DbT2001ChoshuHoho"
+        WHERE "fukaNendo"=#{賦課年度}
+        AND"hihokenshaNo"=#{被保険者番号}
+        AND "rirekiNo"=#{履歴番号}
+    </select>
 
 </mapper>

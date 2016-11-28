@@ -131,7 +131,44 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         editorSource_partTWO(計算後情報_宛名_口座Entity, source);
         editorSource_partTHREE(計算後情報_宛名_口座Entity, source);
         editorSource_partFOUR(計算後情報_宛名_口座Entity, source);
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(HonsanteiKekkaIcihiranReportSource source) {
+        if (source.listUpper_4 == null) {
+            source.listUpper_4 = RString.EMPTY;
+        }
+        if (source.fukaShichosonCode == null) {
+            source.fukaShichosonCode = RString.EMPTY;
+        }
+        if (source.listUpper_1 == null) {
+            source.listUpper_1 = RString.EMPTY;
+        }
+        if (source.choshuHoho == null) {
+            source.choshuHoho = RString.EMPTY;
+        }
+        if (source.listCenter_1 == null) {
+            source.listCenter_1 = RString.EMPTY;
+        }
+        if (source.listUpper_8 == null) {
+            source.listUpper_8 = RString.EMPTY;
+        }
+        if (source.listUpper_7 == null) {
+            source.listUpper_7 = RString.EMPTY;
+        }
+        if (source.listUpper_5 == null) {
+            source.listUpper_5 = RString.EMPTY;
+        }
+        if (source.listUpper_6 == null) {
+            source.listUpper_6 = RString.EMPTY;
+        }
+        if (source.kanaMeisho == null) {
+            source.kanaMeisho = RString.EMPTY;
+        }
+        if (source.listUpper_3 == null) {
+            source.listUpper_3 = RString.EMPTY;
+        }
     }
 
     private void editorSource_partONE(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座Entity,

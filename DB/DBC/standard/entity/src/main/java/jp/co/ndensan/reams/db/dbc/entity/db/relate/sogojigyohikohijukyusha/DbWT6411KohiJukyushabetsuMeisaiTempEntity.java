@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikohijukyusha;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
@@ -42,11 +41,11 @@ public class DbWT6411KohiJukyushabetsuMeisaiTempEntity extends
     @TempTableColumnOrder(9)
     private RString serviceKomokuMei;
     @TempTableColumnOrder(10)
-    private Decimal nissuKaisu;
+    private RString nissuKaisu;
     @TempTableColumnOrder(11)
-    private Decimal kohiTaishoTanisu;
+    private RString kohiTaishoTanisu;
     @TempTableColumnOrder(12)
-    private Decimal kohiFutanKingaku;
+    private RString kohiFutanKingaku;
     @TempTableColumnOrder(13)
-    private Decimal kohibunHonninFutangaku;
+    private RString kohibunHonninFutangaku;
 }

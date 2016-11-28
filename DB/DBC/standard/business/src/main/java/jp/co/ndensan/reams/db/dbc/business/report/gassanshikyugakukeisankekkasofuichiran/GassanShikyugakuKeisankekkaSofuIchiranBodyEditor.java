@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001Hih
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110070.GassanShikyugakuKeisankekkaRanrakuhyoSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanshikyugakukeisankekkasofuichiran.GassanShikyugakuKeisankekkaSofuIchiranSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -96,7 +97,38 @@ public class GassanShikyugakuKeisankekkaSofuIchiranBodyEditor implements IGassan
         source.shichosonCode = tempEntity.getShichosonCode();
         source.shoKisaiHokenshaNo = 高額合算Entity.getShoKisaiHokenshaNo().getColumnValue();
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.listLower_1));
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(GassanShikyugakuKeisankekkaSofuIchiranSource source) {
+        if (null == source.listLower_1) {
+            source.listLower_1 = RString.EMPTY;
+        }
+        if (null == source.listUpper_2) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (null == source.listUpper_4) {
+            source.listUpper_4 = RString.EMPTY;
+        }
+        if (null == source.yubinNo) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (null == source.choikiCode) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (null == source.gyoseikuCode) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (null == source.shimei50onKana) {
+            source.shimei50onKana = RString.EMPTY;
+        }
+        if (null == source.shichosonCode) {
+            source.shichosonCode = LasdecCode.EMPTY;
+        }
+        if (null == source.shoKisaiHokenshaNo) {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
     }
 
     private RString doカンマ編集(Decimal decimal) {

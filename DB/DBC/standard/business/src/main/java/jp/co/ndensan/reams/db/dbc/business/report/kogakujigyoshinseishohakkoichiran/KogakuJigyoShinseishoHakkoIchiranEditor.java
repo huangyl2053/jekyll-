@@ -138,6 +138,7 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
                 ReportKomokuEditorUtil.get非空文字列(source.listHakkoTaishosha_2));
         editIOutputOrder(source);
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -226,6 +227,30 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
         }
         if (list改頁項目値.size() > INDEX_4) {
             source.kaipage5 = list改頁項目値.get(INDEX_4);
+        }
+    }
+
+    private void setPageBreakEmpty(KogakuJigyoShinseishoHakkoIchiranSource source) {
+        if (source.証記載保険者番号 == null) {
+            source.証記載保険者番号 = RString.EMPTY;
+        }
+        if (source.listHakkoTaishosha_5 == null) {
+            source.listHakkoTaishosha_5 = RString.EMPTY;
+        }
+        if (source.listHakkoTaishosha_7 == null) {
+            source.listHakkoTaishosha_7 = RString.EMPTY;
+        }
+        if (source.listHakkoTaishosha_4 == null) {
+            source.listHakkoTaishosha_4 = RString.EMPTY;
+        }
+        if (source.listHakkoTaishosha_2 == null) {
+            source.listHakkoTaishosha_2 = RString.EMPTY;
+        }
+        if (source.listHakkoTaishosha_3 == null) {
+            source.listHakkoTaishosha_3 = RString.EMPTY;
+        }
+        if (source.tsuchishoNo == null) {
+            source.tsuchishoNo = RString.EMPTY;
         }
     }
 }

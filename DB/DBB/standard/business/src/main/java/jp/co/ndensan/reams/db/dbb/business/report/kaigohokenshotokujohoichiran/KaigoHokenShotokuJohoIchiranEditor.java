@@ -153,7 +153,20 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
         RString 日時 = new RString(システム日時.toString().substring(NUM_8, NUM_10).concat(定数_時.toString())
                 .concat(YMDHMS.now().toString().substring(NUM_10, NUM_12)).concat(定数_分.toString()));
         source.printTimeStamp = 作成年月.concat(RString.FULL_SPACE).concat(日時);
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(KaigoHokenShotokuJohoIchiranSource source) {
+        if (source.listIchiranhyoLower_1 == null) {
+            source.listIchiranhyoLower_1 = RString.EMPTY;
+        }
+        if (source.listIchiranhyoUpper_2 == null) {
+            source.listIchiranhyoUpper_2 = RString.EMPTY;
+        }
+        if (source.listIchiranhyoUpper_3 == null) {
+            source.listIchiranhyoUpper_3 = RString.EMPTY;
+        }
     }
 
     private void set住民種別(KaigoHokenShotokuJohoIchiranSource source) {

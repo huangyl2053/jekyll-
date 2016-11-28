@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040050;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoProcessParameter;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -38,7 +38,7 @@ public class UpdateDbT7022Process extends BatchProcessBase<DbT7022ShoriDateKanri
     private static final RString 処理枝番_決定年月日 = new RString("0003");
     private static final RString 日_01 = new RString("01");
     private static final RString INSERT_RENBAN = new RString("0001");
-    private static DbT7022ShoriDateKanriEntity tempEntity;
+    private DbT7022ShoriDateKanriEntity tempEntity;
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakugassanshikyuketteitsuchisho.IKogakugassanShikyuKetteitsuchishoMapper.update処理日付管理マスタ");

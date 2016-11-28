@@ -823,10 +823,16 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         returnEntity.set決定通知No(一時Entity.getTsuchishoNo() == null ? RString.EMPTY : 一時Entity.getTsuchishoNo());
         if (null != 一時Entity.getHihokenshaNo()) {
             returnEntity.set被保険者番号(一時Entity.getHihokenshaNo().getColumnValue());
+        } else {
+            returnEntity.set被保険者番号(RString.EMPTY);
         }
         returnEntity.set被保険者氏名(宛名情報.get名称().getName().getColumnValue());
         returnEntity.set住所(住所);
-        returnEntity.set郵便番号(宛名情報.get住所().get郵便番号().getEditedYubinNo());
+        RString 郵便番号 = RString.EMPTY;
+        if (null != 宛名情報.get住所().get郵便番号()) {
+            郵便番号 = 宛名情報.get住所().get郵便番号().getEditedYubinNo();
+        }
+        returnEntity.set郵便番号(郵便番号);
         if (null != 一時Entity.getServiceTeikyoYM()) {
             returnEntity.set提供年月(一時Entity.getServiceTeikyoYM().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());

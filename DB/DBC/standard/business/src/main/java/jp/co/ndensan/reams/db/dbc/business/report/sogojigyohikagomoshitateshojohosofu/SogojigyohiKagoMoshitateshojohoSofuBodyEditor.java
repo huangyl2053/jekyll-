@@ -97,6 +97,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
         source.listUpper_15 = getColumnValue(送付一覧表データ.getDbWT1001Entity().getShichosonCode());
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
                 ReportKomokuEditorUtil.get非空文字列(source.listUpper_4));
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -120,5 +121,35 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
+    }
+
+    private void setPageBreakEmpty(SogojigyohiKagoMoshitateshojohoSofuSource source) {
+        if (source.shokisaiHokenshaNo == null) {
+            source.shokisaiHokenshaNo = RString.EMPTY;
+        }
+        if (source.listUpper_11 == null) {
+            source.listUpper_11 = RString.EMPTY;
+        }
+        if (source.listUpper_12 == null) {
+            source.listUpper_12 = RString.EMPTY;
+        }
+        if (source.listUpper_13 == null) {
+            source.listUpper_13 = RString.EMPTY;
+        }
+        if (source.listUpper_14 == null) {
+            source.listUpper_14 = RString.EMPTY;
+        }
+        if (source.listUpper_15 == null) {
+            source.listUpper_15 = RString.EMPTY;
+        }
+        if (source.listUpper_4 == null) {
+            source.listUpper_4 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.listUpper_6 == null) {
+            source.listUpper_6 = RString.EMPTY;
+        }
     }
 }

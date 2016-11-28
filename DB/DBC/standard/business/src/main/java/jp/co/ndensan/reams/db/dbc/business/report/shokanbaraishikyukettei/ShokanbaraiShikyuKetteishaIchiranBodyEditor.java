@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -97,10 +98,7 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
             ShiharaiHohoKubun 支払方法区分 = ShiharaiHohoKubun.toValue(支払方法区分コード);
             source.listLower_8 = 支払方法区分コード.concat(コロン).concat(支払方法区分.get名称());
         }
-        if (null != 被保険者.get資格喪失日()) {
-            source.listLower_9 = 被保険者.get資格喪失日().wareki().eraType(EraType.KANJI_RYAKU)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-        }
+        source.listLower_9 = doパターン12(被保険者.get資格喪失日());
         if (更新DB有無_有.equals(判定結果.get更新DB有無())) {
             source.listDBKoshinUmu_1 = アスタリスク;
         } else {
@@ -131,6 +129,14 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
             return RString.EMPTY;
         }
         return str;
+    }
+
+    private RString doパターン12(FlexibleDate 年月日) {
+        if (null == 年月日) {
+            return RString.EMPTY;
+        }
+        return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
     }
 
 }

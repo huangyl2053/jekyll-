@@ -76,7 +76,41 @@ public class GassanJigyobunJikofutangakuKeisanKekkaIchiranBodyEditor implements 
         source.list_12 = this.get共通ポリシー金額(帳票出力対象データ.get自己負担額内数());
         source.list_13 = this.get一覧表示区分(帳票出力対象データ.get一覧用確認区分(), 帳票出力対象データ.get一覧用確認区分２());
         editFour(source);
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(GassanJigyobunJikofutangakuKeisanKekkaIchiranSource source) {
+        if (source.list_1 == null) {
+            source.list_1 = RString.EMPTY;
+        }
+        if (source.list_6 == null) {
+            source.list_6 = RString.EMPTY;
+        }
+        if (source.list_7 == null) {
+            source.list_7 = RString.EMPTY;
+        }
+        if (source.list_5 == null) {
+            source.list_5 = RString.EMPTY;
+        }
+        if (source.yubinNo == null) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.list_2 == null) {
+            source.list_2 = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.hokenshaNo == null) {
+            source.hokenshaNo = RString.EMPTY;
+        }
     }
 
     private RString get性別(RString 性別) {

@@ -123,7 +123,47 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
         source.shichosonCode = entity.get被保険者_市町村コード();
         source.shikibetsuCode = entity.get被保険者_識別コード();
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.list_3));
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(GassanJikofutangakuShomeishoTorikomiIchiranSource source) {
+        if (source.shoKisaiHokenshaNo == null) {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
+        if (source.list_14 == null) {
+            source.list_14 = RString.EMPTY;
+        }
+        if (source.yubinNo == null) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.shimei50onKana == null) {
+            source.shimei50onKana = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.list_3 == null) {
+            source.list_3 = RString.EMPTY;
+        }
+        if (source.list_2 == null) {
+            source.list_2 = RString.EMPTY;
+        }
+        if (source.list_7 == null) {
+            source.list_7 = RString.EMPTY;
+        }
+        if (source.list_5 == null) {
+            source.list_5 = RString.EMPTY;
+        }
+        if (source.list_11 == null) {
+            source.list_11 = RString.EMPTY;
+        }
     }
 
     private void set出力順And改ページ(GassanJikofutangakuShomeishoTorikomiIchiranSource source) {

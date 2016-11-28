@@ -75,6 +75,8 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
         source.shikibetsuCode = entity.get識別コード();
         if (null != entity.get資格照合_保険者番号()) {
             source.hokenshaNo = entity.get資格照合_保険者番号().getColumnValue();
+        } else {
+            source.hokenshaNo = RString.EMPTY;
         }
         source.hokenshaName = entity.get資格照合_保険者名();
         source.listUpper_1 = new RString(entity.get連番());
