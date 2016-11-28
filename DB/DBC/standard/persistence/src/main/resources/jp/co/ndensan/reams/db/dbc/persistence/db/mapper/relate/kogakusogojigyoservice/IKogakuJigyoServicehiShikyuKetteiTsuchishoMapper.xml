@@ -96,7 +96,7 @@
         ) AS SUB受給者台帳
         ON 支給申請."hihokenshaNo" = SUB受給者台帳."hihokenshaNo"
         AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanKaishiYMD",1,8) <![CDATA[<=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd') + INTERVAL '1 month' - INTERVAL '1 day' , 'yyyymmdd')
-        AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanShuryoYMD",1,8) <![CDATA[>=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd') + INTERVAL '1 month' - INTERVAL '1 day' , 'yyyymmdd')
+        AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanShuryoYMD",1,8) <![CDATA[>=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd'), 'yyyymmdd')
         WHERE 1 = 1
         <if test="抽出モード == 1">
             AND 支給申請."uketsukeYMD" <![CDATA[>=]]> #{抽出条件日付From}
