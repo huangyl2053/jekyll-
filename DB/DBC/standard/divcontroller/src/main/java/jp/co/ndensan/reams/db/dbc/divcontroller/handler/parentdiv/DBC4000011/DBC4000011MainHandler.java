@@ -212,6 +212,7 @@ public class DBC4000011MainHandler {
             row.setModifyButtonState(DataGridButtonState.Disabled);
         }
         clear詳細パネル();
+        div.getServiceShosai().getTxtTeikyoKikanYM().setFromDisabled(false);
         div.getServiceShosai().getTxtTeikyoKikanYM().setToDisabled(true);
         編集状態の画面制御();
         定率定額区分選択();
