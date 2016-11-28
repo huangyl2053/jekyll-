@@ -85,7 +85,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomo
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_2;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_20;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_21;
-import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_22;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_24;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_25;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku09B_26;
@@ -648,7 +647,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         if (halfList != null && !halfList.isEmpty()) {
             介護給付状況 = RString.EMPTY;
             for (dgRiyoServiceJyokyo_Row row : halfList) {
-                joho = johoList.isEmpty() ? null : johoList.get(0); 
+                joho = johoList.isEmpty() ? null : johoList.get(0);
                 if (joho != null) {
                     row.getServiceJokyo().setValue(new Decimal(joho.getサービスの状況()));
                     介護給付状況 = 介護給付状況.concat(new RString(Integer.valueOf(joho.getサービスの状況()).toString())).concat(カンマ);
@@ -690,7 +689,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         if (shisetsuList != null && !shisetsuList.isEmpty()) {
             施設利用 = RString.EMPTY;
             for (dgRiyoShisetsu_Row row : shisetsuList) {
-                joho = johoList.isEmpty() ? null : johoList.get(0); 
+                joho = johoList.isEmpty() ? null : johoList.get(0);
                 if (joho != null && joho.is施設利用フラグ()) {
                     row.setShisetsuRiyoUmu(Boolean.TRUE);
                     施設利用 = 施設利用.concat(new RString(Boolean.TRUE.toString())).concat(カンマ);
@@ -802,7 +801,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
         List<RString> 変更前の設定値List = 変更前の設定値.split(カンマ.toString());
         int index = 0;
-        RString 数値 = RString.EMPTY;
+        RString 数値;
         for (dgRiyoServiceJyokyo_Row row : fistHalf) {
             row.setSelected(Boolean.FALSE);
             数値 = 変更前の設定値List.get(index);
@@ -843,6 +842,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
         div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo().setDomain(new TelNo(RString.EMPTY));
     }
 
+    /**
+     * 規定値設定前に行う前処理です。
+     *
+     * @param map 第1群、第2群、特別な医療等の基本調査情報をmapにまとめたもの
+     * @return 引数のmapを編集し、前処理を施したものを返す。
+     */
     public Map<RString, ArrayList<KihonChosaInput>> 規定値設定の前処理(Map<RString, ArrayList<KihonChosaInput>> map) {
         ArrayList<KihonChosaInput> 第1群List = map.get(KEY1);
         第1群List.clear();
@@ -1288,7 +1293,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
     private boolean is施設連絡先等しい(RString 初期の施設連絡先) {
 
-        RString 施設連絡先 = RString.EMPTY;
+        RString 施設連絡先;
         RString 施設名称 = div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().getValue();
         RString 郵便 = div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo().getValue().getColumnValue();
         RString 住所 = div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho().getDomain().getColumnValue();
@@ -1330,7 +1335,11 @@ public class NinnteiChousaKekkaTouroku1Handler {
         } else if ((beforeVal == null || beforeVal.isEmpty()) && (afterVal != null && !afterVal.isEmpty())) {
             return false;
         }
-        return beforeVal.equals(afterVal);
+
+        if (beforeVal != null && afterVal != null) {
+            return beforeVal.equals(afterVal);
+        }
+        return false;
     }
 
     @SuppressWarnings("unchecked")
