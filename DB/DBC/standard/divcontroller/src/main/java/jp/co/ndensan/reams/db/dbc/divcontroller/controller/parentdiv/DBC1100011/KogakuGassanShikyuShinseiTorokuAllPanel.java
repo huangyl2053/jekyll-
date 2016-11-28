@@ -405,8 +405,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShinseishoRelate 高額合算申請書 = 高額合算申請書保持.get高額合算申請書(identifier);
         handler.onClick_dgShinseiJohoSelect(高額合算申請書, 高額合算申請書保持.get申請状況());
         ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 照会);
-        div.getBtnBackShinseiIchiran().setVisible(false);
-        div.getBtnKakuteiShintei().setVisible(false);
+        div.getBtnKakuteiShintei().setDisplayNone(true);
         return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴一覧);
     }
 
@@ -526,12 +525,15 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
      */
     public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onClick_btnShinseiJohoModoru(
             KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+        RString 高額合算申請書状態 = ViewStateHolder.get(ViewStateKeys.高額合算申請書状態, RString.class);
+        if (照会.equals(高額合算申請書状態)) {
+            return ResponseData.of(div).setState(DBC1100011StateName.変更取下げ);
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
-            RString 高額合算申請書状態 = ViewStateHolder.get(ViewStateKeys.高額合算申請書状態, RString.class);
             if (追加.equals(高額合算申請書状態)) {
                 RString 被保険者番号 = ViewStateHolder.get(
                         ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号().getColumnValue();
