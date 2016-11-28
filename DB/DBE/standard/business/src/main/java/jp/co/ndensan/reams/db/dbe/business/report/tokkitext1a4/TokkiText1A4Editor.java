@@ -59,6 +59,25 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
     }
 
     private TokkiText1ReportSource editSource(TokkiText1ReportSource source) {
+        source.hokenshaNo = entity.get保険者番号();
+        source.hihokenshaNo = entity.get被保険者番号();
+        source.hihokenshaName = entity.get被保険者氏名();
+        source.shinseiGengo = entity.get申請日_元号();
+        source.shinseiYY = !RString.isNullOrEmpty(entity.get申請日_年()) ? entity.get申請日_年().substring(2) : RString.EMPTY;
+        source.shinseiMM = entity.get申請日_月();
+        source.shinseiDD = entity.get申請日_日();
+        source.sakuseiGengo = entity.get作成日_元号();
+        source.sakuseiYY = !RString.isNullOrEmpty(entity.get作成日_年()) ? entity.get作成日_年().substring(2) : RString.EMPTY;
+        source.sakuseiMM = entity.get作成日_月();
+        source.sakuseiDD = entity.get作成日_日();
+        source.chosaGengo = entity.get調査日_元号();
+        source.chosaYY = !RString.isNullOrEmpty(entity.get調査日_年()) ? entity.get調査日_年().substring(2) : RString.EMPTY;
+        source.chosaMM = entity.get調査日_月();
+        source.chosaDD = entity.get調査日_日();
+        source.shinsaGengo = entity.get審査日_元号();
+        source.shinsaYY = !RString.isNullOrEmpty(entity.get審査日_年()) ? entity.get審査日_年().substring(2) : RString.EMPTY;
+        source.shinsaMM = entity.get審査日_月();
+        source.shinsaDD = entity.get審査日_日();
         source.tokkiImg = entity.get特記事項イメージ();
         if (entity.get特記事項リスト() != null && !entity.get特記事項リスト().isEmpty()) {
             RStringBuilder builder = new RStringBuilder();
@@ -119,6 +138,11 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         for (RString 事項 : 特記事項) {
             set特記事項List(事項, index, source);
             index = index + 1;
+        }
+        if (count < 15) {
+            source.layoutBreakItem = 1;
+        } else {
+            source.layoutBreakItem = 2;
         }
         return source;
     }

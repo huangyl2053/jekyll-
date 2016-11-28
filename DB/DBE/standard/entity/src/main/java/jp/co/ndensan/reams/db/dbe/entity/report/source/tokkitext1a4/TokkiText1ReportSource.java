@@ -80,10 +80,60 @@ public class TokkiText1ReportSource implements IReportSource {
     public RString tokkiImg;
     @ReportItem(name = "tokkiText", order = 34)
     public RString tokkiText;
+    @ReportItem(name = "gaikyotokkiImg", order = 101)
+    public RString gaikyotokkiImg;
+    @ReportItem(name = "hihokenshaName", length = 30, order = 102)
+    public RString hihokenshaName;
+    @ReportItem(name = "hokenshaNo", length = 6, order = 103)
+    public RString hokenshaNo;
+    @ReportItem(name = "shinseiYY", length = 2, order = 104)
+    public RString shinseiYY;
+    @ReportItem(name = "shinseiMM", length = 2, order = 105)
+    public RString shinseiMM;
+    @ReportItem(name = "shinseiDD", length = 2, order = 106)
+    public RString shinseiDD;
+    @ReportItem(name = "sakuseiGengo", length = 2, order = 107)
+    public RString sakuseiGengo;
+    @ReportItem(name = "chosaGengo", length = 2, order = 108)
+    public RString chosaGengo;
+    @ReportItem(name = "sakuseiYY", length = 2, order = 109)
+    public RString sakuseiYY;
+    @ReportItem(name = "sakuseiMM", length = 2, order = 110)
+    public RString sakuseiMM;
+    @ReportItem(name = "sakuseiDD", length = 2, order = 111)
+    public RString sakuseiDD;
+    @ReportItem(name = "hihokenshaNo", length = 10, order = 112)
+    public RString hihokenshaNo;
+    @ReportItem(name = "shinseiGengo", length = 2, order = 113)
+    public RString shinseiGengo;
+    @ReportItem(name = "shinsaGengo", length = 2, order = 114)
+    public RString shinsaGengo;
+    @ReportItem(name = "shinsaYY", length = 2, order = 115)
+    public RString shinsaYY;
+    @ReportItem(name = "shinsaMM", length = 2, order = 116)
+    public RString shinsaMM;
+    @ReportItem(name = "shinsaDD", length = 2, order = 117)
+    public RString shinsaDD;
+    @ReportItem(name = "chosaYY", length = 2, order = 118)
+    public RString chosaYY;
+    @ReportItem(name = "chosaMM", length = 2, order = 119)
+    public RString chosaMM;
+    @ReportItem(name = "chosaDD", length = 2, order = 120)
+    public RString chosaDD;
+    @ReportItem(name = "gaikyotokkiText", order = 121)
+    public RString gaikyotokkiText;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+    @ReportItem(name = "layoutBreakItem", length = 10, order = 999)
+    public int layoutBreakItem;
+    public static final RString LAYOUTBREAKITEM;
+
+    static {
+        LAYOUTBREAKITEM = new RString("layoutBreakItem");
+    }
 }

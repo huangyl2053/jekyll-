@@ -37,11 +37,18 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog.SimpleLayoutBreaker;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 特記事項の作成クラスです。
@@ -89,12 +96,28 @@ public class ChkTokkiJiko31TextProcess extends BatchProcessBase<YokaigoninteiEnt
 
     @Override
     protected void createWriter() {
-        if (すべて.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(),
-                SubGyomuCode.DBE認定支援))) {
-            batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517131.getReportId().value()).create();
+        RString reportId;
+        if (すべて.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            reportId = ReportIdDBE.DBE517131.getReportId().value();
         } else {
-            batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517132.getReportId().value()).create();
+            reportId = ReportIdDBE.DBE517132.getReportId().value();
         }
+        batchWrite = BatchReportFactory.createBatchReportWriter(reportId).addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
+
+
+            TokkiText1ReportSource.LAYOUTBREAKITEM) {
+            @Override
+            public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
+                    ReportLineRecord<TokkiText1ReportSource> currentRecord, ReportLineRecord<TokkiText1ReportSource> nextRecord, ReportDynamicChart dynamicChart) {
+                int layout = currentRecord.getSource().layoutBreakItem;
+                currentRecord.setFormGroupIndex(layout);
+                if (nextRecord != null && nextRecord.getSource() != null) {
+                    layout = nextRecord.getSource().layoutBreakItem;
+                    nextRecord.setFormGroupIndex(layout);
+                }
+                return currentRecord;
+            }
+        }).create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
 
@@ -138,7 +161,44 @@ public class ChkTokkiJiko31TextProcess extends BatchProcessBase<YokaigoninteiEnt
 
     private TokkiText1A4Entity setBodyItem(YokaigoninteiEntity entity) {
         TokkiText1A4Entity ninteiEntity = new TokkiText1A4Entity();
+        if (processPrm.getRadTokkiJikoMasking().equals(new RString("0"))) {
+            ninteiEntity.set保険者番号(entity.get保険者番号());
+            ninteiEntity.set被保険者番号(entity.get被保険者番号());
+            ninteiEntity.set被保険者氏名(entity.get被保険者氏名());
+        }
         ninteiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
+        ninteiEntity.set申請日_元号(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
+        ninteiEntity.set申請日_年(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
+        ninteiEntity.set申請日_月(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
+        ninteiEntity.set申請日_日(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
+        ninteiEntity.set作成日_元号(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
+        ninteiEntity.set作成日_年(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
+        ninteiEntity.set作成日_月(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
+        ninteiEntity.set作成日_日(entity.get作成年月日() == null ? RString.EMPTY : entity.get作成年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
+        ninteiEntity.set調査日_元号(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
+        ninteiEntity.set調査日_年(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
+        ninteiEntity.set調査日_月(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
+        ninteiEntity.set調査日_日(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
+        ninteiEntity.set審査日_元号(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
+        ninteiEntity.set審査日_年(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
+        ninteiEntity.set審査日_月(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
+        ninteiEntity.set審査日_日(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
+                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         setBodyItem01(特記事項リスト, ninteiEntity);
         return ninteiEntity;
     }
