@@ -506,7 +506,11 @@ public enum ReportIdDBE {
     /**
      * 要介護認定個人進捗状況票の帳票ＩＤです。
      */
-    DBE521001(new ReportId("DBE521001_KojinShinchokuJokyohyo"), new RString("要介護認定個人進捗状況票"));
+    DBE521001(new ReportId("DBE521001_KojinShinchokuJokyohyo"), new RString("要介護認定個人進捗状況票")),
+    /**
+     * 報告資料の条件表用ダミー帳票ID。
+     */
+    DBE701000(new ReportId("DBE701000_HokokuShiryo"), new RString("報告資料"));
 
     private final ReportId reportId;
 
