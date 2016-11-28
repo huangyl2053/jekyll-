@@ -62,6 +62,10 @@ public class JuryoIninShoninKakuninshoIchiranSource implements IReportSource {
     public RString ListLower_3;
     @ReportItem(name = "ListLower_4", length = 15, order = 25)
     public RString ListLower_4;
+
+    public RString 契約申請年月日;
+    public RString 契約事業者番号;
+    public RString 受領委任契約番号;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

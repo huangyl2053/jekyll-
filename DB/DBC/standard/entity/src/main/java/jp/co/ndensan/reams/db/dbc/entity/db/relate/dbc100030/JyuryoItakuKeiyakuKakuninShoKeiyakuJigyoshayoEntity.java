@@ -99,4 +99,8 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity {
     private RDateTime 作成日時;
     private RString 市町村コード;
     private RString 市町村名称;
+    private RString 契約申請年月日;
+    private RString 契約事業者番号;
+    private RString 受領委任契約番号;
+    private RString 承認期間_開始;
 }

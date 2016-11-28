@@ -62,6 +62,18 @@ public class JyuryoItakuKeiyakuKakuninShoPageBreak extends PageBreaker<JyuryoIta
         if (!flag && this.keys.contains(JuryoininKeiyakuShoninKakuninshoOutputOrder.被保険者番号.get項目ID())) {
             flag = !currentRecord.getSource().hihokenshaNo.equals(nextRecord.getSource().hihokenshaNo);
         }
+        if (!flag && this.keys.contains(JuryoininKeiyakuShoninKakuninshoOutputOrder.受領委任契約番号.get項目ID())) {
+            flag = !currentRecord.getSource().受領委任契約番号.equals(nextRecord.getSource().受領委任契約番号);
+        }
+        if (!flag && this.keys.contains(JuryoininKeiyakuShoninKakuninshoOutputOrder.契約事業者番号.get項目ID())) {
+            flag = !currentRecord.getSource().契約事業者番号.equals(nextRecord.getSource().契約事業者番号);
+        }
+        if (!flag && this.keys.contains(JuryoininKeiyakuShoninKakuninshoOutputOrder.契約申請年月日.get項目ID())) {
+            flag = !currentRecord.getSource().契約申請年月日.equals(nextRecord.getSource().契約申請年月日);
+        }
+        if (!flag && this.keys.contains(JuryoininKeiyakuShoninKakuninshoOutputOrder.承認期間_開始.get項目ID())) {
+            flag = !currentRecord.getSource().承認期間_開始.equals(nextRecord.getSource().承認期間_開始);
+        }
         return flag;
     }
 

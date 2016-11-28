@@ -134,6 +134,11 @@ public class JyuryoItakuKeiyakuKakuninShoSource implements IReportSource {
     public RString tsuchibun2;
     @ReportItem(name = "pagecnt", length = 5, order = 61)
     public RString pagecnt;
+
+    public RString 契約申請年月日;
+    public RString 契約事業者番号;
+    public RString 受領委任契約番号;
+    public RString 承認期間_開始;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
