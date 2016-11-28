@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1310011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuTsuchiGenmenHoseiListSakuseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,8 +25,8 @@ public class KyufuTsuchiGenmenHoseiListSakuseiDiv extends Panel {
      */
     @JsonProperty("txtServiceYM")
     private TextBoxDateRange txtServiceYM;
-    @JsonProperty("ddlShichoson")
-    private DropDownList ddlShichoson;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -51,21 +53,12 @@ public class KyufuTsuchiGenmenHoseiListSakuseiDiv extends Panel {
     }
 
     /*
-     * getddlShichoson
-     * @return ddlShichoson
+     * getccdHokenshaList
+     * @return ccdHokenshaList
      */
-    @JsonProperty("ddlShichoson")
-    public DropDownList getDdlShichoson() {
-        return ddlShichoson;
-    }
-
-    /*
-     * setddlShichoson
-     * @param ddlShichoson ddlShichoson
-     */
-    @JsonProperty("ddlShichoson")
-    public void setDdlShichoson(DropDownList ddlShichoson) {
-        this.ddlShichoson = ddlShichoson;
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
     }
 
     // </editor-fold>

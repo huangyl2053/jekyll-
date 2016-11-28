@@ -98,7 +98,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
     private static final ServiceShuruiCode SERVICECODE_41 = new ServiceShuruiCode("41");
     private static final RString MSG_NAME_HIHOKENSHANO = new RString("被保険者番号");
     private static final RString MSG_NAME_SERVICETEIKYOYM = new RString("サービス提供年月");
-    private static final int INDEX_1 = 1;
+    private static final int INDEX_0 = 0;
     private static final int INDEX_6 = 6;
 
     /**
@@ -834,7 +834,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         if (RString.isNullOrEmpty(制度改正施行日_平成１８年０４月改正)) {
             return ServiceShuruiCode.EMPTY;
         }
-        FlexibleYearMonth 制度改正施行日_平成１８年０４月改正の年月 = new FlexibleYearMonth(制度改正施行日_平成１８年０４月改正.substring(INDEX_1, INDEX_6));
+        FlexibleYearMonth 制度改正施行日_平成１８年０４月改正の年月 = new FlexibleYearMonth(制度改正施行日_平成１８年０４月改正.substring(INDEX_0, INDEX_6));
         if (サービス提供年月.isBefore(制度改正施行日_平成１８年０４月改正の年月)) {
             if (isSERVICECODE_41設定(要介護認定状態区分コード)) {
                 return SERVICECODE_41;
