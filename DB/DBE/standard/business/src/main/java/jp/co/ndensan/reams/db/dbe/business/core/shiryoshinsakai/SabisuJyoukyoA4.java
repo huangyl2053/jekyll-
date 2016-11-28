@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJot
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -87,8 +88,7 @@ public class SabisuJyoukyoA4 {
                 entity.getKijunJikanIdo(), entity.getKijunJikanSeiketsuHoji(), entity.getKijunJikanKansetsuCare(),
                 entity.getKijunJikanBPSDKanren(), entity.getKijunJikanKinoKunren(), entity.getKijunJikanIryoKanren(),
                 entity.getKijunJikanNinchishoKasan(), entity.getKijunJikan()));
-        //TODO QA回答まち、
-//        項目.set基準時間の積み上げグラフ(月間);
+        set基準時間の積み上げグラフ(項目, entity);
         項目.set要介護認定等基準時間_食事(new RString(entity.getKijunJikanShokuji()));
         項目.set要介護認定等基準時間_排泄(new RString(entity.getKijunJikanHaisetsu()));
         項目.set要介護認定等基準時間_移動(new RString(entity.getKijunJikanIdo()));
@@ -271,4 +271,16 @@ public class SabisuJyoukyoA4 {
         return RString.EMPTY;
     }
 
+    private void set基準時間の積み上げグラフ(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity) {
+        int 食事 = entity.getKijunJikanShokuji() + entity.getKijunJikanNinchishoKasan()
+                + entity.getKijunJikanKansetsuCare();
+        int 排泄 = entity.getKijunJikanHaisetsu() + entity.getKijunJikanBPSDKanren();
+        int 移動 = entity.getKijunJikanIdo() + entity.getKijunJikanKinoKunren();
+        int 清潔保持 = entity.getKijunJikanSeiketsuHoji() + entity.getKijunJikanIryoKanren();
+        RString 文件名 = new RString(FlexibleDate.getNowDate().toString());
+        StackedBarChart stackedBarChart = new StackedBarChart(食事, 排泄, 移動, 清潔保持, 文件名);
+        stackedBarChart.getTitle();
+        RString 文件 = new RString(Path.getUserHomePath().toString() + "\\" + 文件名 + ".png");
+        項目.set基準時間の積み上げグラフ(文件);
+    }
 }
