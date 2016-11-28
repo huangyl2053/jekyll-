@@ -373,12 +373,9 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
 
         private static boolean check算定基準額_44_400円(Decimal 課税所得, boolean 一人世帯flg, Decimal 一人で総収入金額,
                 Decimal 二人以上で総収入金額, RString 算定基準額) {
-            if (円_145万.compareTo(課税所得) < NUM_1
+            return 円_145万.compareTo(課税所得) < NUM_1
                     && ((一人世帯flg && 円_383万.compareTo(一人で総収入金額) == NUM_1) || (!一人世帯flg && 円_520万.compareTo(二人以上で総収入金額) == NUM_1))
-                    && !SanteiKijungaku.算定基準額_44_400円.get略称().equals(算定基準額)) {
-                return true;
-            }
-            return false;
+                    && !SanteiKijungaku.算定基準額_44_400円.get略称().equals(算定基準額);
         }
 
         private static boolean getチェック(KijunShunyuShinseiTourokuDiv div, List<dgMeisai_Row> rowList,
