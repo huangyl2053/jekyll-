@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -59,14 +60,10 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
     public ShokanbaraiShikyuKetteishaIchiranSource edit(ShokanbaraiShikyuKetteishaIchiranSource source) {
         DbWT0001HihokenshaTempEntity 被保険者 = 帳票出力対象データ.get被保険者();
         DbWT3036ShokanHanteiKekkaTempEntity 判定結果 = 帳票出力対象データ.get判定結果();
-        source.listUpper_1 = 判定結果.getNo();
-        if (null != 被保険者.get登録被保険者番号()) {
-            source.listUpper_2 = 被保険者.get登録被保険者番号().getColumnValue();
-        }
+        source.listUpper_1 = getNotNull(判定結果.getNo());
+        source.listUpper_2 = getColumnValue(被保険者.get登録被保険者番号());
         source.listUpper_3 = 被保険者.get宛名名称();
-        if (null != 判定結果.get事業所番号()) {
-            source.listUpper_4 = 判定結果.get事業所番号().getColumnValue();
-        }
+        source.listUpper_4 = getColumnValue(判定結果.get事業所番号());
         source.listUpper_5 = 判定結果.get事業所名();
         if (null != 判定結果.getサービス提供年月()) {
             source.listUpper_6 = 判定結果.getサービス提供年月().wareki()
@@ -79,17 +76,15 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
                     new Code(被保険者.get資格喪失事由コード()));
         }
         source.listUpper_10 = 判定結果.get備考1();
-        source.listLower_1 = 判定結果.get整理番号();
-        source.listLower_2 = 被保険者.get町域コード();
+        source.listLower_1 = getNotNull(判定結果.get整理番号());
+        source.listLower_2 = getNotNull(被保険者.get町域コード());
         if (null != 編集住所) {
             source.listLower_3 = 編集住所.substringReturnAsPossible(0, 文字20);
         }
-        source.listLower_4 = 被保険者.get行政区コード();
+        source.listLower_4 = getNotNull(被保険者.get行政区コード());
         source.listLower_5 = 被保険者.get行政区名();
         RString サービス種類コード = RString.EMPTY;
-        if (null != 判定結果.getサービス種類コード()) {
-            サービス種類コード = 判定結果.getサービス種類コード().getColumnValue();
-        }
+        サービス種類コード = getColumnValue(判定結果.getサービス種類コード());
         RString サービス種類名 = (null == 判定結果.getサービス種類名()) ? RString.EMPTY : 判定結果.getサービス種類名();
         source.listLower_6 = サービス種類コード.concat(コロン).concat(サービス種類名);
         source.listLower_7 = doカンマ編集(判定結果.get増減単位数());
@@ -137,6 +132,13 @@ public class ShokanbaraiShikyuKetteishaIchiranBodyEditor implements IShokanbarai
         }
         return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
 
 }
