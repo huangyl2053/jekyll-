@@ -558,35 +558,17 @@
         ON
         DbT3034ShokanShinsei."hiHokenshaNo" = SUBHihokenshaDaicho."hihokenshaNo"
         LEFT JOIN
-        (
-        SELECT
-        "hihokenshaNo"
-        ,"shichosonCode"
-        ,"yokaigoJotaiKubunCode"
-        ,"ninteiYukoKikanKaishiYMD"
-        ,"ninteiYukoKikanShuryoYMD"
-        ,"ninteiYMD"
-        FROM
-        (
-        SELECT
-        ROW_NUMBER() OVER(PARTITION BY DbT4001JukyushaDaicho."hihokenshaNo",DbT4001JukyushaDaicho."shichosonCode"
-        ORDER BY DbT4001JukyushaDaicho."rirekiNo" DESC,DbT4001JukyushaDaicho."edaban" DESC)  AS  "sortNo"
-        ,DbT4001JukyushaDaicho."hihokenshaNo"
-        ,DbT4001JukyushaDaicho."shichosonCode"
-        ,DbT4001JukyushaDaicho."yokaigoJotaiKubunCode"
-        ,DbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD"
-        ,DbT4001JukyushaDaicho."ninteiYukoKikanShuryoYMD"
-        ,DbT4001JukyushaDaicho."ninteiYMD"
-        FROM
-        rgdb."DbT4001JukyushaDaicho" AS DbT4001JukyushaDaicho
-        )B
-        WHERE
-        B."sortNo" = 1
-        )SUBDbT4001JukyushaDaicho
+        rgdb."DbT4001JukyushaDaicho" SUBDbT4001JukyushaDaicho
         ON
         DbT3034ShokanShinsei."hiHokenshaNo" = SUBDbT4001JukyushaDaicho."hihokenshaNo"
         AND
-        SUBHihokenshaDaicho."shichosonCode" = SUBDbT4001JukyushaDaicho."shichosonCode"
+        SUBDbT4001JukyushaDaicho."isDeleted" = FALSE
+        AND
+        SUBDbT4001JukyushaDaicho."yukoMukoKubun" = '1'
+        AND 
+        SUBDbT4001JukyushaDaicho."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> (DbT3034ShokanShinsei."serviceTeikyoYM" || '31')
+        AND 
+        SUBDbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD" <![CDATA[>=]]> (DbT3034ShokanShinsei."serviceTeikyoYM" || '01')
         LEFT JOIN
         (
         SELECT
