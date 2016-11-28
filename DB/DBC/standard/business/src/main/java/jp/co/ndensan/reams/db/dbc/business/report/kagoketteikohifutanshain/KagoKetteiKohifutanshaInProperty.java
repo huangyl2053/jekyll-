@@ -51,6 +51,8 @@ public class KagoKetteiKohifutanshaInProperty
 
 
 
+
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KagoKetteiKohifutanshaInSource> occuredBreak(
@@ -90,6 +92,10 @@ public class KagoKetteiKohifutanshaInProperty
          * 氏名５０音カナ
          */
         氏名５０音カナ(new RString("0022"), new RString("shimei50onKana"), new RString("DbWT0001.\"shimei50onKana\"")),
+        /**
+         * 市町村コード
+         */
+        市町村コード(new RString("0023"), new RString("shichosonCode"), new RString("DbWT0001.\"shichosonCode\"")),
         /**
          * 被保険者番号
          */

@@ -44,6 +44,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
     private final KyufuJissekiKihonJouhouMainDiv div;
     private static final int INT_ZERO = 0;
     private static final int INT_ITI = 1;
+    private static final RString 無し = new RString("1");
     private static final RString 設定不可 = new RString("0");
     private static final RString 総合事業 = new RString("5");
     private static final FlexibleYearMonth 平成２０年４月 = new FlexibleYearMonth("200804");
@@ -75,11 +76,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
         KyufujissekiKihon 給付実績基本 = 実績基本集計データ.get給付実績基本データ();
         set申請内容エリア(給付実績基本);
         set合計内容エリア(給付実績基本);
-        if (実績基本集計データ.get事業者名称2() != null) {
-            div.getTxtKyufuJissekiKihonJigyoshoName().setValue(実績基本集計データ.get事業者名称2().getColumnValue());
-        } else {
-            div.getTxtKyufuJissekiKihonJigyoshoName().clearValue();
-        }
         set表示制御(給付実績基本.getサービス提供年月(), 給付実績基本.get入力識別番号());
     }
 
@@ -107,6 +103,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set申請内容エリア(給付実績基本);
             set合計内容エリア(給付実績基本);
         }
+        set各ボタン活性非活性設定(該当給付実績基本集計データ.get識別番号管理());
     }
 
     /**
@@ -212,7 +209,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
         div.getBtnCareManagement().setDisabled(false);
         div.getBtnShafukuKeigen().setDisabled(false);
         div.getBtnKogakuKaigoService().setDisabled(true);
-        if (設定不可.equals(識別番号管理データ.get明細設定区分())) {
+        if (設定不可.equals(識別番号管理データ.get明細設定区分()) && 設定不可.equals(識別番号管理データ.get集計設定区分())) {
             div.getBtnMeisaiShukei().setDisabled(true);
         }
         if (設定不可.equals(識別番号管理データ.get所定疾患施設療養設定区分())) {
@@ -248,34 +245,30 @@ public class KyufuJissekiKihonJouhouMainHandler {
     }
 
     private void set表示制御(FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号検索キー) {
-        div.getTxtKyufuJissekiKihonChushiRiyu().setVisible(true);
-        div.getTxtKyufuJissekiKihonNyushoMaeJokyo().setVisible(true);
-        if (平成２１年４月.isBeforeOrEquals(サービス提供年月) && get識別番号リスト().contains(識別番号検索キー)) {
-            div.getTxtKyufuJissekiKihonChushiRiyu().setVisible(false);
+        div.getTxtKyufuJissekiKihonChushiRiyu().setDisplayNone(false);
+        div.getTxtKyufuJissekiKihonNyushoMaeJokyo().setDisplayNone(false);
+        List<NyuryokuShikibetsuNo> 識別番号リスト = get識別番号リスト();
+        if (平成２１年４月.isBeforeOrEquals(サービス提供年月) && 識別番号リスト.contains(識別番号検索キー)) {
+            div.getTxtKyufuJissekiKihonChushiRiyu().setDisplayNone(true);
         }
         if (サービス提供年月.isBefore(平成２１年４月)
-                || (平成２１年４月.isBeforeOrEquals(サービス提供年月) && !get識別番号リスト().contains(識別番号検索キー))) {
-            div.getTxtKyufuJissekiKihonNyushoMaeJokyo().setVisible(false);
+                || (平成２１年４月.isBeforeOrEquals(サービス提供年月) && !識別番号リスト.contains(識別番号検索キー))) {
+            div.getTxtKyufuJissekiKihonNyushoMaeJokyo().setDisplayNone(true);
         }
     }
 
     private List<NyuryokuShikibetsuNo> get識別番号リスト() {
         List<NyuryokuShikibetsuNo> 識別番号リスト = new ArrayList<>();
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2171")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2172")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2173")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2174")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2181")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2182")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2183")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2191")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2192")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2193")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2194")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("2195")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("21A1")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("21A2")));
-        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("21A3")));
+        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("7171")));
+        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("7172")));
+        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("7173")));
+        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("7174")));
+        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("7181")));
+        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("7183")));
+        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("7191")));
+        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("7195")));
+        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("71A1")));
+        識別番号リスト.add(new NyuryokuShikibetsuNo(new RString("71A3")));
         return 識別番号リスト;
     }
 
@@ -461,8 +454,13 @@ public class KyufuJissekiKihonJouhouMainHandler {
 
     private RString get旧措置入所者特例(RString 旧措置入所者特例コード) {
         if (!RString.isNullOrEmpty(旧措置入所者特例コード)) {
-            return KyuSochiNyushoshaTokureiCode.toValue(旧措置入所者特例コード).get名称();
+            if (無し.equals(旧措置入所者特例コード)) {
+                return KyuSochiNyushoshaTokureiCode.無し.get名称();
+            } else {
+                return KyuSochiNyushoshaTokureiCode.有り.get名称();
+            }
         }
+
         return RString.EMPTY;
     }
 
@@ -475,8 +473,13 @@ public class KyufuJissekiKihonJouhouMainHandler {
 
     private RString get居宅介護支援事業所番号(JigyoshaNo 居宅介護支援事業所番号) {
         if (居宅介護支援事業所番号 != null && !居宅介護支援事業所番号.isEmpty()) {
+            if (Integer.parseInt(居宅介護支援事業所番号.value().toString()) == 0) {
+                div.getTxtKyufuJissekiKihonJigyoshoName().clearValue();
+                return RString.EMPTY;
+            }
             return 居宅介護支援事業所番号.value();
         }
+        div.getTxtKyufuJissekiKihonJigyoshoName().clearValue();
         return RString.EMPTY;
     }
 

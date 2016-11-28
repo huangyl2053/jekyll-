@@ -160,7 +160,7 @@ public class HanyoListKyufuKanriHyoOutputProcess extends BatchProcessBase<HanyoL
                 地方公共団体情報, 構成市町村マスタ, parameter.getシステム日付(), 連番);
         csvWriter.writeLine(editor.edit());
         ExpandedInformation expandedInformation = new ExpandedInformation(
-                CODE_0003, DATANAME_被保険者番号, entity.get給付管理票().getHiHokenshaNo().getColumnValue());
+                CODE_0003, DATANAME_被保険者番号, entity.getHiHokenshaNo().getColumnValue());
         personalDataList.add(PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInformation));
     }
 

@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.DBC0010000TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.KyufuJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010000.KyufuJissekiShokaiHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010000.KyufuJissekiShokaiHandler2;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010000.KyufuJissekiShokaiValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
@@ -133,7 +134,7 @@ public class KyufuJissekiShokai {
                 return ResponseData.of(div).addMessage(message).respond();
             } else {
                 setアクセスログ(識別コード, 被保険者番号);
-                getHandler(div).onLoad(被保険者番号, 識別コード);
+                getHandler2(div).onLoad(被保険者番号, 識別コード);
                 return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会検索);
             }
         }
@@ -152,7 +153,7 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onClick_btnKyufuJissekiSearchClear(KyufuJissekiShokaiDiv div) {
-        getHandler(div).onClick_btnKyufuJissekiSearchClear();
+        getHandler2(div).onClick_btnKyufuJissekiSearchClear();
         return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会検索);
     }
 
@@ -163,7 +164,7 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onChange_radKyufuJissekiSearchDateType(KyufuJissekiShokaiDiv div) {
-        getHandler(div).onChange_radKyufuJissekiSearchDateType();
+        getHandler2(div).onChange_radKyufuJissekiSearchDateType();
         return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会検索);
     }
 
@@ -200,7 +201,7 @@ public class KyufuJissekiShokai {
         KyufuJissekiShokaiHandler handler = getHandler(div);
         KyufuJissekiSearchDataBusiness 一覧データ = new KyufuJissekiSearchDataBusiness();
         List<KyufuJissekiShukeiKekkaDataBusiness> 集計データ
-                = handler.edit集計データ(サービス提供年月_開始, サービス提供年月_終了, !KEY.equals(検索対象), 一覧データ, 被保険者番号);
+                = getHandler2(div).edit集計データ(サービス提供年月_開始, サービス提供年月_終了, !KEY.equals(検索対象), 一覧データ, 被保険者番号);
         ValidationMessageControlPairs validationMessages = getValidationHandler(div).do検索チェック(集計データ);
         if (validationMessages.iterator().hasNext()) {
             div.getKyufuJissekiSearchPanel().setIsOpen(true);
@@ -1567,6 +1568,10 @@ public class KyufuJissekiShokai {
 
     private KyufuJissekiShokaiHandler getHandler(KyufuJissekiShokaiDiv div) {
         return new KyufuJissekiShokaiHandler(div);
+    }
+
+    private KyufuJissekiShokaiHandler2 getHandler2(KyufuJissekiShokaiDiv div) {
+        return new KyufuJissekiShokaiHandler2(div);
     }
 
     private KyufuJissekiShokaiValidationHandler getValidationHandler(KyufuJissekiShokaiDiv div) {

@@ -91,7 +91,7 @@ public class DBC4000011MainHandler {
         div.getServiceShosai().getTxtTani().setDisabled(isDisabled);
         div.getServiceShosai().getDdlTanisuShikibetsu().setDisabled(isDisabled);
         div.getServiceShosai().getDdlIdouJiyuCode().setDisabled(isDisabled);
-        div.getServiceShosai().getRadTeiritsuOrTeigaku().setDisabled(isDisabled);
+        div.getServiceShosai().getSegTeiritsuOrTeigaku().setDisabled(isDisabled);
         div.getServiceShosai().getDdlTanisuSanteiTaniCode().setDisabled(isDisabled);
         div.getServiceShosai().getTxtKyufuritsu().setDisabled(isDisabled);
         div.getServiceShosai().getTxtSeigenNissuKaisu().setDisabled(isDisabled);
@@ -212,6 +212,7 @@ public class DBC4000011MainHandler {
             row.setModifyButtonState(DataGridButtonState.Disabled);
         }
         clear詳細パネル();
+        div.getServiceShosai().getTxtTeikyoKikanYM().setFromDisabled(false);
         div.getServiceShosai().getTxtTeikyoKikanYM().setToDisabled(true);
         編集状態の画面制御();
         定率定額区分選択();
@@ -297,7 +298,7 @@ public class DBC4000011MainHandler {
             row.setDeleteButtonState(DataGridButtonState.Disabled);
             row.setModifyButtonState(DataGridButtonState.Disabled);
         }
-        RString 選択Key = div.getServiceShosai().getRadTeiritsuOrTeigaku().getSelectedKey();
+        RString 選択Key = div.getServiceShosai().getSegTeiritsuOrTeigaku().getSelectedKey();
         if (RST_1.equals(選択Key)) {
             div.getServiceShosai().getTxtRiyoshaFutangaku().clearValue();
         } else if (RST_2.equals(選択Key)) {
@@ -330,7 +331,7 @@ public class DBC4000011MainHandler {
             return null;
         }
         詳細パネル設定(サービス内容);
-        RString 選択Key = div.getServiceShosai().getRadTeiritsuOrTeigaku().getSelectedKey();
+        RString 選択Key = div.getServiceShosai().getSegTeiritsuOrTeigaku().getSelectedKey();
         if (RST_1.equals(選択Key)) {
             div.getServiceShosai().getTxtRiyoshaFutangaku().clearValue();
         } else if (RST_2.equals(選択Key)) {
@@ -354,7 +355,12 @@ public class DBC4000011MainHandler {
         div.getServiceShosai().getTxtTani().setValue(new Decimal(サービス内容.get単位数()));
         div.getServiceShosai().getDdlTanisuShikibetsu().setSelectedKey(サービス内容.get単位数識別().getColumnValue());
         div.getServiceShosai().getDdlIdouJiyuCode().setSelectedKey(サービス内容.get異動事由().getColumnValue());
-        div.getServiceShosai().getRadTeiritsuOrTeigaku().setSelectedKey(サービス内容.get利用者負担定率定額区分());
+        RString 利用者負担定率定額区分 = サービス内容.get利用者負担定率定額区分();
+        if (RST_1.equals(利用者負担定率定額区分) || RST_2.equals(利用者負担定率定額区分)) {
+            div.getServiceShosai().getSegTeiritsuOrTeigaku().setSelectedKey(サービス内容.get利用者負担定率定額区分());
+        } else {
+            div.getServiceShosai().getSegTeiritsuOrTeigaku().clearSelectedItem();
+        }        
         if (!RString.isNullOrEmpty(サービス内容.get給付率())) {
             div.getServiceShosai().getTxtKyufuritsu().setValue(new Decimal(サービス内容.get給付率().toString()));
         } else {
@@ -424,7 +430,7 @@ public class DBC4000011MainHandler {
         div.getServiceShosai().getTxtTani().clearValue();
         div.getServiceShosai().getDdlTanisuShikibetsu().setSelectedKey(RST_01);
         div.getServiceShosai().getDdlIdouJiyuCode().setSelectedKey(RST_010);
-        div.getServiceShosai().getRadTeiritsuOrTeigaku().setSelectedKey(RST_1);
+        div.getServiceShosai().getSegTeiritsuOrTeigaku().clearSelectedItem();
         div.getServiceShosai().getTxtKyufuritsu().clearValue();
         div.getServiceShosai().getTxtRiyoshaFutangaku().clearValue();
         div.getServiceShosai().getDdlTanisuSanteiTaniCode().setSelectedKey(RST_01);
@@ -480,7 +486,7 @@ public class DBC4000011MainHandler {
         div.getServiceShosai().getTxtTani().clearValue();
         div.getServiceShosai().getDdlTanisuShikibetsu().setSelectedKey(RString.EMPTY);
         div.getServiceShosai().getDdlIdouJiyuCode().setSelectedKey(RString.EMPTY);
-        div.getServiceShosai().getRadTeiritsuOrTeigaku().setSelectedKey(RST_1);
+        div.getServiceShosai().getSegTeiritsuOrTeigaku().clearSelectedItem();
         div.getServiceShosai().getTxtKyufuritsu().clearValue();
         div.getServiceShosai().getTxtRiyoshaFutangaku().clearValue();
         div.getServiceShosai().getDdlTanisuSanteiTaniCode().setSelectedKey(RString.EMPTY);
@@ -500,7 +506,7 @@ public class DBC4000011MainHandler {
      * 定率定額区分選択のメソッドです。
      */
     public void 定率定額区分選択() {
-        RString 選択Key = div.getServiceShosai().getRadTeiritsuOrTeigaku().getSelectedKey();
+        RString 選択Key = div.getServiceShosai().getSegTeiritsuOrTeigaku().getSelectedKey();
         if (RST_1.equals(選択Key)) {
             div.getServiceShosai().getTxtKyufuritsu().setDisabled(false);
             div.getServiceShosai().getTxtRiyoshaFutangaku().setDisabled(true);
@@ -644,6 +650,10 @@ public class DBC4000011MainHandler {
         if (!RString.isNullOrEmpty(div.getServiceShosai().getSegTaishoJigyoJishiKubun().getSelectedKey())) {
             対象事業者 = div.getServiceShosai().getSegTaishoJigyoJishiKubun().getSelectedKey();
         }
+        RString 利用者負担定率_定額区分 = RST_0;
+        if (!RString.isNullOrEmpty(div.getServiceShosai().getSegTeiritsuOrTeigaku().getSelectedKey())) {
+            利用者負担定率_定額区分 = div.getServiceShosai().getSegTeiritsuOrTeigaku().getSelectedKey();
+        }
         RString 利用者負担額 = RString.EMPTY;
         if (div.getServiceShosai().getTxtRiyoshaFutangaku().getValue() != null) {
             利用者負担額 = new RString(div.getServiceShosai().getTxtRiyoshaFutangaku().getValue().toString());
@@ -667,7 +677,7 @@ public class DBC4000011MainHandler {
                     .set限度額対象外フラグ(限度額対象外フラグ)
                     .set外部サービス利用型区分(外部サービス利用型区分)
                     .set特別地域加算フラグ(特別地域加算フラグ)
-                    .set利用者負担定率_定額区分(div.getServiceShosai().getRadTeiritsuOrTeigaku().getSelectedKey())
+                    .set利用者負担定率_定額区分(利用者負担定率_定額区分)
                     .set利用者負担額(利用者負担額)
                     .set給付率(給付率)
                     .set二次予防事業対象者実施区分_非該当(二次予防者)
@@ -690,7 +700,7 @@ public class DBC4000011MainHandler {
                 .set限度額対象外フラグ(限度額対象外フラグ)
                 .set外部サービス利用型区分(外部サービス利用型区分)
                 .set特別地域加算フラグ(特別地域加算フラグ)
-                .set利用者負担定率_定額区分(div.getServiceShosai().getRadTeiritsuOrTeigaku().getSelectedKey())
+                .set利用者負担定率_定額区分(利用者負担定率_定額区分)
                 .set更新有無フラグ(RString.EMPTY)
                 .set元点数(RString.EMPTY)
                 .set元限度額対象外フラグ(RString.EMPTY)

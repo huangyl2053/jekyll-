@@ -136,7 +136,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
         if (編集後本算定通知書共通情報 != null) {
             if (編集後本算定通知書共通情報.get編集後宛先() != null) {
                 source.listUpper_2 = 編集後本算定通知書共通情報.get編集後宛先().get郵便番号();
-                source.listUpper_3 = 編集後本算定通知書共通情報.get編集後宛先().get町域();
+                source.listUpper_3 = 編集後本算定通知書共通情報.get編集後宛先().get編集後住所();
                 source.listUpper_4 = 編集後本算定通知書共通情報.get編集後宛先().get宛先行政区();
             }
             if (編集後本算定通知書共通情報.get編集後個人() != null) {

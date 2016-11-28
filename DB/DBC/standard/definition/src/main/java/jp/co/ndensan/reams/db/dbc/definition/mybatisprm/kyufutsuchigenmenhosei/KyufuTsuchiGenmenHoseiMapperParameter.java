@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufutsuchigenmenhosei;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,25 +21,29 @@ public class KyufuTsuchiGenmenHoseiMapperParameter implements IMyBatisParameter 
 
     private final FlexibleYearMonth サービス開始年月;
     private final FlexibleYearMonth サービス終了年月;
-    private final List<RString> 市町村コードList;
+    private final RString 証記載保険者番号;
     private final RString 出力順;
+    private final boolean is広域保険者;
 
     /**
      * コンストラクタです。
      *
      * @param サービス開始年月 サービス開始年月
      * @param サービス終了年月 サービス終了年月
-     * @param 市町村コードList 市町村コードList
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 出力順 出力順
+     * @param is広域保険者 is広域保険者
      */
     public KyufuTsuchiGenmenHoseiMapperParameter(
             FlexibleYearMonth サービス開始年月,
             FlexibleYearMonth サービス終了年月,
-            List<RString> 市町村コードList,
-            RString 出力順) {
+            RString 証記載保険者番号,
+            RString 出力順,
+            boolean is広域保険者) {
         this.サービス開始年月 = サービス開始年月;
         this.サービス終了年月 = サービス終了年月;
-        this.市町村コードList = 市町村コードList;
+        this.証記載保険者番号 = 証記載保険者番号;
         this.出力順 = 出力順;
+        this.is広域保険者 = is広域保険者;
     }
 }

@@ -147,8 +147,8 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         if (特徴仮算定計算後賦課情報Entity.get通知書番号() != null) {
             source.listLower_1 = 特徴仮算定計算後賦課情報Entity.get通知書番号().value();
         }
-        if (特徴仮算定計算後賦課情報Entity.get世帯コード() != null) {
-            source.listLower_2 = 特徴仮算定計算後賦課情報Entity.get世帯コード().value();
+        if (特徴仮算定計算後賦課情報Entity.get宛名().getSetaiCode() != null) {
+            source.listLower_2 = 特徴仮算定計算後賦課情報Entity.get宛名().getSetaiCode().value();
         } else {
             source.listLower_2 = RString.EMPTY;
         }

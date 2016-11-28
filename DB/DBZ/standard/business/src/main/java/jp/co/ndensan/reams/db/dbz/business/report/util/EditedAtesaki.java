@@ -95,7 +95,7 @@ public class EditedAtesaki {
         builder.set管内住所接頭辞(管内住所接頭辞, 地方公共団体);
         builder.set行政区印字区分(行政区印字区分);
         builder.set氏名2括弧有無(true);
-        builder.set代納区分名印字有無(true);
+        builder.set代納区分名印字有無(帳票制御共通.is代納人表示有無());
         SofubutsuAtesakiSource atesakiSource = new SofubutsuAtesakiSourceBuilder(builder.build()).buildSource();
         if (帳票制御共通.isカスタマバーコード使用有無() && atesakiSource.customerBarCode.isEmpty()
                 && 入力郵便番号をセット.equals(帳票制御共通.getカスタマバーコード変換エラー編集方法())) {

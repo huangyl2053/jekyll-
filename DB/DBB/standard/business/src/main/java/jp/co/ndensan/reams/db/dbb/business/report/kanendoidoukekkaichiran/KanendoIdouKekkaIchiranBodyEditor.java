@@ -189,15 +189,20 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         if (null != 計算後情報_宛名_口座_更正後Entity.get口座Entity()) {
             IKoza koza = new Koza(計算後情報_宛名_口座_更正後Entity.get口座Entity());
             if (null != koza.get金融機関コード()) {
+                RString 支店コードor店番 = koza.isゆうちょ銀行() ? koza.get店番() : koza.get支店コード().value();
                 source.list1_4 = koza.get金融機関コード().value().concat(
-                        koza.get支店コード().value());
+                        RString.isNullOrEmpty(支店コードor店番) ? RString.EMPTY : 支店コードor店番);
+
             }
             if (null != koza.get預金種別()) {
                 source.list1_5 = koza.get預金種別().get預金種別略称().substringReturnAsPossible(NUMBER_0, NUMBER_2);
             }
             source.list1_6 = koza.get口座番号();
             if (null != koza.get金融機関()) {
-                source.list2_19 = koza.get金融機関().get金融機関名称().concat(koza.get支店().get支店名称());
+                RString 支店名Or店名 = koza.isゆうちょ銀行()
+                        ? koza.get店名() : koza.get支店(koza.get終了年月日()).get支店名称();
+                source.list2_19 = koza.get金融機関(koza.get終了年月日()).get金融機関名称().concat(
+                        RString.isNullOrEmpty(支店名Or店名) ? RString.EMPTY : 支店名Or店名);
             }
             if (null != koza.get口座名義人()) {
                 source.list3_19 = koza.get口座名義人漢字().value();

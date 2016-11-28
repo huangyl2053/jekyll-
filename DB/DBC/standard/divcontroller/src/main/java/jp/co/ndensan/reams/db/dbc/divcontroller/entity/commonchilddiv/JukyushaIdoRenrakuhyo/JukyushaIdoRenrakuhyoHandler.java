@@ -192,6 +192,10 @@ public class JukyushaIdoRenrakuhyoHandler {
         if ((再発行モード.equals(処理モード) || 照会モード.equals(処理モード)) && INT_1 != 履歴番号) {
             set訂正日と訂正区分(受給者異動情報.get訂正年月日(), 受給者異動情報.get訂正区分コード());
         }
+
+        if (再発行モード.equals(処理モード) || 照会モード.equals(処理モード)) {
+            div.getKyotakuServicePlanPanel().getBtnShienJigyoshoNo().setDisabled(true);
+        }
         set要介護認定エリア(受給者異動情報);
         set支給限度基準額エリア(受給者異動情報);
         set居宅サービス計画エリア(受給者異動情報);
@@ -708,7 +712,6 @@ public class JukyushaIdoRenrakuhyoHandler {
             div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().setDisabled(false);
         } else if (JukyushaIF_kyotakuServiceSakuseiKubunCode.居宅介護支援事業所作成.getコード().equals(計画作成区分Key)
                 || JukyushaIF_kyotakuServiceSakuseiKubunCode.介護予防支援事業所作成.getコード().equals(計画作成区分Key)) {
-            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoName().clearValue();
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setDisabled(false);
             div.getKyotakuServicePlanPanel().getBtnShienJigyoshoNo().setDisabled(false);
             div.getKyotakuServicePlanPanel().getTxtKyotakuServiceTekiyoYMD().setDisabled(false);

@@ -32,4 +32,8 @@ public class JuryoIninShoninKakuninshoIchiranEntity {
     private RString 承認日;
     private RString 利用サービス内容;
 
+    private RString 契約申請年月日;
+    private RString 契約事業者番号;
+    private RString 受領委任契約番号;
+
 }

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC060010;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -29,8 +28,12 @@ public class DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter extends Batch
     private FlexibleYearMonth サービス開始年月;
     @BatchParameter(key = "サービス終了年月", name = "サービス終了年月")
     private FlexibleYearMonth サービス終了年月;
-    @BatchParameter(key = "市町村コード", name = "市町村コードList")
-    private List<RString> 市町村コードList;
+    @BatchParameter(key = "市町村コード", name = "市町村コード")
+    private RString 市町村コード;
+    @BatchParameter(key = "証記載保険者番号", name = "証記載保険者番号")
+    private RString 証記載保険者番号;
+    @BatchParameter(key = "市町村名称", name = "市町村名称")
+    private RString 市町村名称;
     @BatchParameter(key = "帳票出力順ID", name = "帳票出力順ID")
     private long 帳票出力順ID;
 
@@ -41,6 +44,6 @@ public class DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter extends Batch
      */
     public KyufuTsuchiGenmenHoseiProcessParameter toProcessParameter() {
         return new KyufuTsuchiGenmenHoseiProcessParameter(
-                サービス開始年月, サービス終了年月, 市町村コードList, 帳票出力順ID);
+                サービス開始年月, サービス終了年月, 市町村コード, 証記載保険者番号, 市町村名称, 帳票出力順ID);
     }
 }

@@ -64,9 +64,12 @@ public class KougakuKetteiTuutisyo {
      * @return ResponseData<KougakuKetteiTuutisyoDiv>
      */
     public ResponseData<KougakuKetteiTuutisyoDiv> onLoad(KougakuKetteiTuutisyoDiv div) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         if (!ResponseHolder.isReRequest()
-                && (key.get被保険者番号() == null || key.get被保険者番号().isEmpty())) {
+                && (key == null || key.get被保険者番号() == null || key.get被保険者番号().isEmpty())) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_NAME, true);
             return ResponseData.of(div).addMessage(UrErrorMessages.該当データなし.getMessage()).respond();
         }

@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -171,7 +172,8 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
         builder.set住民種別(住民種別List);
         builder.set住民状態(住民状態List);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        KariSanteiIdoFukaPsmParameter parameter = new KariSanteiIdoFukaPsmParameter(出力順, searchKey);
+        KariSanteiIdoFukaPsmParameter parameter
+                = KariSanteiIdoFukaPsmParameter.createSelectByKeyParam(出力順, new UaFt200FindShikibetsuTaishoParam(searchKey));
         return new BatchDbReader(MAPPERPATH, parameter);
     }
 

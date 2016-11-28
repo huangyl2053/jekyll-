@@ -156,6 +156,16 @@ public class JuryoininKeiyakuShoninKakuninshoService {
         利用者向けEntity.set利用者負担額(decimalFormat(entity.get償還受領委任契約者().getRiyoshaJikoFutanGaku()));
         利用者向けEntity.set保険給付額(decimalFormat(entity.get償還受領委任契約者().getHokenKyufuhiGaku()));
         利用者向けEntity.setページ(new RString(entity.getページ()));
+        利用者向けEntity.set受領委任契約番号(entity.get償還受領委任契約者().getKeiyakuNo());
+        FlexibleDate shinseiYMD = entity.get償還受領委任契約者().getShinseiYMD();
+        if (shinseiYMD != null) {
+            利用者向けEntity.set契約申請年月日(new RString(entity.get償還受領委任契約者().getShinseiYMD().toString()));
+        }
+        利用者向けEntity.set契約事業者番号(entity.get受領委任契約事業者().getKeiyakuJigyoshaNo());
+        FlexibleDate juryoininKaishiYMD = entity.get償還受領委任契約者().getJuryoininKaishiYMD();
+        if (juryoininKaishiYMD != null) {
+            利用者向けEntity.set承認期間_開始(new RString(juryoininKaishiYMD.toString()));
+        }
         return 利用者向けEntity;
     }
 
@@ -197,6 +207,16 @@ public class JuryoininKeiyakuShoninKakuninshoService {
         }
         事業者用Entity.set名称付与1(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_宛先敬称));
         事業者用Entity.setカスタマバーコード(editカスタマバーコード(entity));
+        事業者用Entity.set受領委任契約番号(entity.get償還受領委任契約者().getKeiyakuNo());
+        FlexibleDate shinseiYMD = entity.get償還受領委任契約者().getShinseiYMD();
+        if (shinseiYMD != null) {
+            事業者用Entity.set契約申請年月日(new RString(entity.get償還受領委任契約者().getShinseiYMD().toString()));
+        }
+        事業者用Entity.set契約事業者番号(entity.get受領委任契約事業者().getKeiyakuJigyoshaNo());
+        FlexibleDate juryoininKaishiYMD = entity.get償還受領委任契約者().getJuryoininKaishiYMD();
+        if (juryoininKaishiYMD != null) {
+            事業者用Entity.set承認期間_開始(new RString(juryoininKaishiYMD.toString()));
+        }
         edit事業者用EntitySub(entity, 事業者用Entity);
         return 事業者用Entity;
     }
@@ -235,6 +255,7 @@ public class JuryoininKeiyakuShoninKakuninshoService {
         事業者用Entity.set利用者負担額(decimalFormat(entity.get償還受領委任契約者().getRiyoshaJikoFutanGaku()));
         事業者用Entity.set保険給付額(decimalFormat(entity.get償還受領委任契約者().getHokenKyufuhiGaku()));
         事業者用Entity.setページ(new RString(entity.getページ()));
+
     }
 
     private JuryoIninShoninKakuninshoIchiranEntity edit一覧表Entity(JuryoininKeiyakuShoninKakuninshoEntity entity) {
@@ -264,6 +285,12 @@ public class JuryoininKeiyakuShoninKakuninshoService {
         }
         一覧表Entity.set承認日(editパターン4(entity.get償還受領委任契約者().getKetteiYMD()));
         一覧表Entity.set利用サービス内容(edit契約サービス種類(entity.get償還受領委任契約者().getKeiyakuServiceShurui()));
+        一覧表Entity.set受領委任契約番号(entity.get償還受領委任契約者().getKeiyakuNo());
+        FlexibleDate shinseiYMD = entity.get償還受領委任契約者().getShinseiYMD();
+        if (shinseiYMD != null) {
+            一覧表Entity.set契約申請年月日(new RString(entity.get償還受領委任契約者().getShinseiYMD().toString()));
+        }
+        一覧表Entity.set契約事業者番号(entity.get受領委任契約事業者().getKeiyakuJigyoshaNo());
         return 一覧表Entity;
     }
 

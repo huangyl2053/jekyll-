@@ -69,6 +69,8 @@ public class ShokanbaraiShikyuKetteishaIchiranHeaderEditor implements IShokanbar
         source.kokuhorenName = 帳票出力対象データ.get判定結果().get国保連合会名();
         if (null != 帳票出力対象データ.get判定結果().get証記載保険者番号()) {
             source.shoKisaiHokenshaNo = 帳票出力対象データ.get判定結果().get証記載保険者番号().getColumnValue();
+        } else {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
         }
         source.shoKisaiHokenshaName = 帳票出力対象データ.get判定結果().get証記載保険者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);

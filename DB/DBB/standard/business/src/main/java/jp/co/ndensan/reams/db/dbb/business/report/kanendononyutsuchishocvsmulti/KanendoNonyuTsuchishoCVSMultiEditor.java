@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiSho
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NofugakuSanshutsuHoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendononyutsuchishocvsmulti.KanendoNonyuTsuchishoCVSMultiSource;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -179,11 +180,19 @@ public class KanendoNonyuTsuchishoCVSMultiEditor implements IKanendoNonyuTsuchis
             if (item.get編集後本算定通知書共通情報().get調定年度_年度なし() != null) {
                 source.keisanMeisaishoNendo3 = RStringUtil.convert半角to全角(item.get編集後本算定通知書共通情報().get調定年度_年度なし());
             }
-            if (item.get編集後本算定通知書共通情報().get納付済額_未到来期含む() != null) {
-                source.keisanMeisaishoNofuZumiGaku = new RString(item.get編集後本算定通知書共通情報().get納付済額_未到来期含む().toString());
+            if (NofugakuSanshutsuHoho.収入額をもとに算出.equals(item.get本算定納入通知書制御情報().get納入通知書制御情報().get納付額算出方法())
+                    && item.get編集後本算定通知書共通情報().get納付済額_未到来期含む() != null) {
+                source.keisanMeisaishoNofuZumiGaku = new RString(item.get編集後本算定通知書共通情報().get普徴納付済額_未到来期含む().toString());
+            } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(item.get本算定納入通知書制御情報().get納入通知書制御情報().get納付額算出方法())
+                    && item.get編集後本算定通知書共通情報().get普徴既に納付すべき額() != null) {
+                source.keisanMeisaishoNofuZumiGaku = new RString(item.get編集後本算定通知書共通情報().get普徴既に納付すべき額().toString());
             }
-            if (item.get編集後本算定通知書共通情報().get今後納付すべき額_収入元に() != null) {
-                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get今後納付すべき額_収入元に().toString());
+            if (NofugakuSanshutsuHoho.収入額をもとに算出.equals(item.get本算定納入通知書制御情報().get納入通知書制御情報().get納付額算出方法())
+                    && item.get編集後本算定通知書共通情報().get普徴今後納付すべき額_収入元に() != null) {
+                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get普徴今後納付すべき額_収入元に().toString());
+            } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(item.get本算定納入通知書制御情報().get納入通知書制御情報().get納付額算出方法())
+                    && item.get編集後本算定通知書共通情報().get普徴今後納付すべき額_調定元に() != null) {
+                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get普徴今後納付すべき額_調定元に().toString());
             }
 
             this.更正後情報相関設定(source);

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kaigohokenryogemmen.NendobunFuka
 import jp.co.ndensan.reams.db.dbb.business.core.kaigohokenryogemmen.TuuchisyoGaihatuParam;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.TyouteiZiyu;
+import jp.co.ndensan.reams.db.dbb.business.core.tsuchisho.notsu.ShutsuryokuKiKoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TsuchiSho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajoho.FukaJohoRelateMapperParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateMapperParameter;
@@ -388,9 +389,17 @@ public class KaigoHokenryoGemmen {
         各種通知書発行パラメータ.set減免通知書_文書番号(通知書発行パラメータ.get減免決定_文書番号());
         各種通知書発行パラメータ.set徴収猶予通知書_発行日(FlexibleDate.EMPTY);
         各種通知書発行パラメータ.set徴収猶予通知書_文書番号(RString.EMPTY);
-        List<Kitsuki> 出力期リスト = new ArrayList();
-        各種通知書発行パラメータ.set納入通知書_出力期リスト(出力期リスト);
+        各種通知書発行パラメータ.set納入通知書_出力期リスト(get出力期リスト(通知書発行パラメータ.get納入_出力期(), 通知書発行パラメータ.get出力期候補()));
         return KakushuTsuchishoSakusei.createInstance().publish(各種通知書発行パラメータ);
+    }
+
+    private List<Kitsuki> get出力期リスト(RString 出力期, List<ShutsuryokuKiKoho> 出力期候補List) {
+        for (ShutsuryokuKiKoho 出力期候補 : 出力期候補List) {
+            if (出力期候補.get期月().get期().equals(出力期)) {
+                return 出力期候補.get出力期リスト();
+            }
+        }
+        return null;
     }
 
     private List<RString> set発行帳票一覧(TuuchisyoGaihatuParam 通知書発行パラメータ, boolean is本算定, RString 徴, boolean is過年度) {

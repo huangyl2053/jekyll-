@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
 
-    private final MapperProvider mapperProvider;
     private final RString 要支援 = new RString("1");
     private final RString 要介護 = new RString("2");
     private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
@@ -34,19 +32,15 @@ public class JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager {
      * コンストラクタです
      */
     public JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
     }
 
     /**
      * コンストラクタです
      *
-     * @param mapperProvider MapperProvider
      * @param 受給者台帳Dac DbT4001JukyushaDaichoDac
      */
-    public JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager(MapperProvider mapperProvider,
-            DbT4001JukyushaDaichoDac 受給者台帳Dac) {
-        this.mapperProvider = mapperProvider;
+    public JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager(DbT4001JukyushaDaichoDac 受給者台帳Dac) {
         this.受給者台帳Dac = 受給者台帳Dac;
     }
 

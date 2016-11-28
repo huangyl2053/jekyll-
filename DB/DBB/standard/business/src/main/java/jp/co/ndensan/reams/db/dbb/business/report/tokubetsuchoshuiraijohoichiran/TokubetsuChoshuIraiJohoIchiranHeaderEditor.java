@@ -84,7 +84,9 @@ public class TokubetsuChoshuIraiJohoIchiranHeaderEditor implements ITokubetsuCho
         source.kaipage3 = get改頁(INDEX_3);
         source.kaipage4 = get改頁(INDEX_4);
         source.kaipage5 = get改頁(INDEX_5);
-
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
         return source;
     }
 

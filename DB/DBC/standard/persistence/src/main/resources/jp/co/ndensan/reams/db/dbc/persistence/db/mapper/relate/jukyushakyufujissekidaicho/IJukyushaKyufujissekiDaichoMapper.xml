@@ -600,7 +600,7 @@
                   AND
                      DbT3017."kyufuJissekiKubunCode" = #{給付実績区分}
               </if>
-              <if test="!給付実績区分flag">
+              <if test="給付実績区分flag1">
                   AND
                      DbT3017."kyufuJissekiKubunCode" = #{給付実績区分}
               </if>
@@ -1390,6 +1390,7 @@
     </select>
     
     <resultMap id="resultMap_ShuukeiRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShuukeiRelateEntity" autoMapping="true">
+        <id column="hiHokenshaNo" />
         <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
         <association property="dbt3033" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.ResultMap_DbT3033KyufujissekiShukeiEntity"/>
     </resultMap>
@@ -1397,6 +1398,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
             resultMap="resultMap_ShuukeiRelateEntity" fetchSize="500">
         SELECT 
+                "DbT3017KyufujissekiKihon"."hiHokenshaNo",
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
                 <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.allColumns_DbT3033KyufujissekiShukei" />
         FROM		
@@ -1943,7 +1945,7 @@
             AND
                DbT3028."kyufuJissekiKubunCode" = #{給付実績区分}
         </if>
-        <if test="!給付実績区分flag">
+        <if test="給付実績区分flag1">
             AND
                DbT3028."kyufuJissekiKubunCode" = #{給付実績区分}
         </if>

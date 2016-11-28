@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchish
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -104,7 +106,8 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
     }
 
     private void do処理日付管理マスタ登録更新() {
-        LasdecCode 市町村コード = new LasdecCode(new RString("000000"));
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        LasdecCode 市町村コード = 導入団体クラス.get地方公共団体コード();
         FlexibleYear 年度 = new FlexibleYear(初期年度);
         RString 処理枝番 = 初期連番;
         RString 処理名 = RString.EMPTY;

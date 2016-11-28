@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.kaigohokenryogemmen;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.tsuchisho.notsu.ShutsuryokuKiKoho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -37,4 +39,5 @@ public class TuuchisyoGaihatuParam {
     private RString 納入_出力方法;
     private RString 納入_出力形式;
     private boolean 賦課台帳_出力有無;
+    private List<ShutsuryokuKiKoho> 出力期候補;
 }

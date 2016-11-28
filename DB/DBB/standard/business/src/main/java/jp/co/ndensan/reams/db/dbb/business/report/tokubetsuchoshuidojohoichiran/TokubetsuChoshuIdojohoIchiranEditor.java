@@ -168,7 +168,7 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
         } else {
             source.listUpper_5 = RString.EMPTY;
         }
-
+        pageBreakNullCheck(source);
         return source;
     }
 
@@ -257,6 +257,27 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
             return DecimalFormatter.toコンマ区切りRString(new Decimal(dT各種金額欄.toString()), NUM_0);
         } else {
             return RString.EMPTY;
+        }
+    }
+
+    private void pageBreakNullCheck(TokubetsuChoshuIdojohoIchiranSource source) {
+        if (source.listUpper_3 == null) {
+            source.listUpper_3 = RString.EMPTY;
+        }
+        if (source.listLower_4 == null) {
+            source.listLower_4 = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.listUpper_1 == null) {
+            source.listUpper_1 = RString.EMPTY;
+        }
+        if (source.listLower_2 == null) {
+            source.listLower_2 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
         }
     }
 }

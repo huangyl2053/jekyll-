@@ -65,6 +65,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -1195,9 +1196,7 @@ public class SabisuJyoukyoA3 {
                 entity.getZKijunJikanIdo(), entity.getZKijunJikanSeiketsuHoji(), entity.getZKijunJikanKansetsuCare(),
                 entity.getZKijunJikanBPSDKanren(), entity.getZKijunJikanKinoKunren(), entity.getZKijunJikanIryoKanren(),
                 entity.getZKijunJikanNinchishoKasan(), entity.getZKijunJikan()));
-        //TODO QA回答まち、
-//        項目.set基準時間の積み上げグラフ(月間);
-
+        set基準時間の積み上げグラフ(項目, entity);
         List<NitijouSeikatsu> 日常生活自立度リスト = new ArrayList<>();
         NitijouSeikatsu 障害高齢者自立度 = new NitijouSeikatsu();
         障害高齢者自立度.set特記事項フラグ(entity.getShogaiNichijoSeikatsuJiritsudo());
@@ -1792,5 +1791,24 @@ public class SabisuJyoukyoA3 {
                 settei.set麻痺認定調査と主治医意見書結果比(第１群.get調査結果コード(), 主治医意見書コード, 第１群);
             }
         }
+    }
+
+    private void set基準時間の積み上げグラフ(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity) {
+        int 食事 = entity.getKijunJikanShokuji() + entity.getKijunJikanNinchishoKasan()
+                + entity.getKijunJikanKansetsuCare();
+        int 排泄 = entity.getKijunJikanHaisetsu() + entity.getKijunJikanBPSDKanren();
+        int 移動 = entity.getKijunJikanIdo() + entity.getKijunJikanKinoKunren();
+        int 清潔保持 = entity.getKijunJikanSeiketsuHoji() + entity.getKijunJikanIryoKanren();
+        RDateTime 日期 = RDate.getNowDateTime();
+        RString 文件名 = 日期.getDate().toDateString().concat(get文件名(日期.getHour()))
+                .concat(get文件名(日期.getSecond())).concat(get文件名(日期.getMicros()));
+        StackedBarChart stackedBarChart = new StackedBarChart(食事, 排泄, 移動, 清潔保持, 文件名);
+        stackedBarChart.getTitle();
+        RString 文件 = new RString(Path.getUserHomePath().toString() + "\\" + 文件名 + ".png");
+        項目.set基準時間の積み上げグラフ(文件);
+    }
+
+    private RString get文件名(int 日期) {
+        return new RString(日期);
     }
 }

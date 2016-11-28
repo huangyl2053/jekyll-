@@ -68,26 +68,23 @@ public class PrtReportOutputJokenhyoProcess extends SimpleBatchProcessBase {
             LasdecCode 市町村コード, RString 市町村名, int ページ数) {
         List<RString> 出力条件リスト = new ArrayList<>();
 
-        RString 減額 = RString.EMPTY;
+        RString 減額 = new RString("平準化計算方法(減額)：");
         RString 減額コンフィグ = DbBusinessConfig.
                 get(ConfigNameDBB.特別徴収_平準化計算方法_6月分減額, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString());
         if (平準化しない.equals(減額コンフィグ)) {
-            減額 = TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称();
+            減額 = 減額.concat(TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称());
         } else if (平準化するを判定し.equals(減額コンフィグ)) {
-            減額 = TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConfig.
-                    get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称();
+            減額 = 減額.concat(TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConfig.
+                    get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称());
         }
-        RString 増額 = RString.EMPTY;
+        RString 増額 = SPACE.concat(new RString("(増額)："));
         RString 増額コンフィグ = DbBusinessConfig.
                 get(ConfigNameDBB.特別徴収_平準化計算方法_6月分増額, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString());
         if (平準化しない.equals(増額コンフィグ)) {
-            増額 = TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称();
+            増額 = 増額.concat(TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称());
         } else if (平準化するを判定し.equals(増額コンフィグ)) {
-            増額 = TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConfig.
-                    get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称();
-        }
-        if (!増額.isEmpty()) {
-            増額 = SPACE.concat(増額);
+            増額 = 増額.concat(TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConfig.
+                    get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称());
         }
 
         出力条件リスト.add(減額);

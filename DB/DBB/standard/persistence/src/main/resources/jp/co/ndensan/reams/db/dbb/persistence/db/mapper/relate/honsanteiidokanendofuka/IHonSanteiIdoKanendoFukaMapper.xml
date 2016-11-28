@@ -1433,7 +1433,7 @@
              INNER JOIN  
             (SELECT 
                 Q."hihokenshaNo",
-                Q."idoYMD",
+                MAX(Q."idoYMD") AS "idoYMD",
                 MAX(Q."edaNo") AS "edaNo"
                FROM 
                 rgdb."DbT1001HihokenshaDaicho" AS Q

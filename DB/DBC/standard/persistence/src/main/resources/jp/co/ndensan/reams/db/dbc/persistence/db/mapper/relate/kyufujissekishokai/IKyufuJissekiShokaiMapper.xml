@@ -471,17 +471,17 @@ ORDER BY
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3026KyufujissekiFukushiYoguHanbaihiMapper.allColumns_DbT3026KyufujissekiFukushiYoguHanbaihi" />
-            , "DbT7131KaigoServiceNaiyou"."serviceName" AS "serviceShuruiRyakusho" 
+            , "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" AS "serviceShuruiRyakusho" 
         FROM
             rgdb."DbT3026KyufujissekiFukushiYoguHanbaihi" AS "DbT3026KyufujissekiFukushiYoguHanbaihi"
         LEFT JOIN
-            rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
+            rgdb."DbT7130KaigoServiceShurui" AS "DbT7130KaigoServiceShurui"
          ON
-            "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceCode" 
-            = "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" || "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd"
-        AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
-        AND ("DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
-         OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+            substr("DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceCode",1,2)
+            = "DbT7130KaigoServiceShurui"."serviceShuruiCd"
+        AND "DbT7130KaigoServiceShurui"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
+        AND ("DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM"
+         OR  "DbT7130KaigoServiceShurui"."teikyoshuryoYM" = '')
         WHERE 
             #{サービス提供年月} = "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
         AND
@@ -501,16 +501,17 @@ ORDER BY
         
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3027KyufujissekiJutakuKaishuhiMapper.allColumns_DbT3027KyufujissekiJutakuKaishuhi" />
-            , "DbT7131KaigoServiceNaiyou"."serviceName" AS "serviceShuruiRyakusho" 
+            , "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" AS "serviceShuruiRyakusho" 
         FROM
             rgdb."DbT3027KyufujissekiJutakuKaishuhi" AS "DbT3027KyufujissekiJutakuKaishuhi"
         LEFT JOIN
-            rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
-        ON
-            "DbT3027KyufujissekiJutakuKaishuhi"."serviceCode" = "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" || "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd"
-            AND "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM"
-            AND ("DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM"
-            OR  "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" = '')
+            rgdb."DbT7130KaigoServiceShurui" AS "DbT7130KaigoServiceShurui"
+         ON
+            substr("DbT3027KyufujissekiJutakuKaishuhi"."serviceCode",1,2)
+            = "DbT7130KaigoServiceShurui"."serviceShuruiCd"
+        AND "DbT7130KaigoServiceShurui"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM"
+        AND ("DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM"
+         OR  "DbT7130KaigoServiceShurui"."teikyoshuryoYM" = '')
         WHERE
             "DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM" = #{サービス提供年月}
             AND "DbT3027KyufujissekiJutakuKaishuhi"."hiHokenshaNo" = #{被保険者番号}

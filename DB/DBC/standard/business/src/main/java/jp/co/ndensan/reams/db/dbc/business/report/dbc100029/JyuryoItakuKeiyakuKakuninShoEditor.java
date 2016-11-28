@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc100029;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100029.JyuryoItakuKeiyakuKakuninShoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc100029.JyuryoItakuKeiyakuKakuninShoSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票設計_DBCMN32002_介護保険受領委任契約承認（不承認）確認書（利用者向け）BodyEditor
@@ -32,6 +33,7 @@ public class JyuryoItakuKeiyakuKakuninShoEditor
     public JyuryoItakuKeiyakuKakuninShoSource edit(
             JyuryoItakuKeiyakuKakuninShoSource source) {
         editSource(source);
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -97,7 +99,35 @@ public class JyuryoItakuKeiyakuKakuninShoEditor
         source.hokenKyufuhigaku = entity.get保険給付額();
         source.tsuchibun2 = entity.get通知文2();
         source.pagecnt = entity.getページ();
+        source.受領委任契約番号 = entity.get受領委任契約番号();
+        source.契約事業者番号 = entity.get契約事業者番号();
+        source.契約申請年月日 = entity.get契約申請年月日();
+        source.承認期間_開始 = entity.get承認期間_開始();
 
+    }
+
+    private void setPageBreakEmpty(JyuryoItakuKeiyakuKakuninShoSource source) {
+        if (source.kyufuShurui == null) {
+            source.kyufuShurui = RString.EMPTY;
+        }
+        if (source.shoninYMD == null) {
+            source.shoninYMD = RString.EMPTY;
+        }
+        if (source.hihokenshaNo == null) {
+            source.hihokenshaNo = RString.EMPTY;
+        }
+        if (source.契約申請年月日 == null) {
+            source.契約申請年月日 = RString.EMPTY;
+        }
+        if (source.契約事業者番号 == null) {
+            source.契約事業者番号 = RString.EMPTY;
+        }
+        if (source.受領委任契約番号 == null) {
+            source.受領委任契約番号 = RString.EMPTY;
+        }
+        if (source.承認期間_開始 == null) {
+            source.承認期間_開始 = RString.EMPTY;
+        }
     }
 
 }
