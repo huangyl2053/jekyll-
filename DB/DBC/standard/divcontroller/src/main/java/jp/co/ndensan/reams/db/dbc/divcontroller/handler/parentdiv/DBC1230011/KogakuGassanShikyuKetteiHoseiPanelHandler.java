@@ -31,9 +31,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -153,6 +151,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
 
     /**
      * 新規と検索条件登録パネル設定です。
+     *
      */
     public void set新規と検索条件登録パネル() {
         RDate システムタイム = RDate.getNowDate();
@@ -164,9 +163,6 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         }
         div.getShinkiPanel().getTxtShinkiTaishoNendo().setValue(new RDate(システム年度.toString()));
         div.getSearchPanel().getTxtKensakuTaishoNendo().setValue(new RDate(システム年度.toString()));
-        LasdecCode 地方公共団体コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
-        div.getShinkiPanel().getTxtShinkiHihokenshaNo().setValue(地方公共団体コード.value());
-        div.getSearchPanel().getTxtKensakuHihokenshaNo().setValue(地方公共団体コード.value());
     }
 
     /**

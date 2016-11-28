@@ -19,15 +19,23 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1230011.Kog
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1230011.KogakuGassanShikyuKetteiHoseiPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc1230011.KogakuGassanShikyuKetteiHoseiDetailParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHosei;
+import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
@@ -94,7 +102,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                 被保険者番号.getColumnValue()));
         div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         getHandler(div).set新規と検索条件登録パネル();
-
+        set証記載保険者番号(div, 被保険者番号);
         List<JukyushaDaicho> 受給者台帳データ = KogakuGassanShikyuKetteiHosei.
                 createInstance().get受給者台帳データ(被保険者番号);
         List<SogoJigyoTaishosha> 総合事業対象者データ = KogakuGassanShikyuKetteiHosei.
@@ -116,6 +124,23 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             getHandler(div).set決定情報一覧グリッド(result);
             return response.respond();
         }
+    }
+
+    private void set証記載保険者番号(KogakuGassanShikyuKetteiHoseiPanelDiv div, HihokenshaNo 被保険者番号) {
+        ShichosonSecurityJoho shseJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        RString wk保険者構成 = RString.EMPTY;
+        if (shseJoho != null && (DonyuKeitaiCode.事務構成市町村.getCode().equals(shseJoho.get導入形態コード().value())
+                || DonyuKeitaiCode.事務単一.getCode().equals(shseJoho.get導入形態コード().value()))) {
+            wk保険者構成 = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        } else if (shseJoho != null && DonyuKeitaiCode.事務広域.getCode().equals(shseJoho.get導入形態コード().value())) {
+            List<ShichosonCodeYoriShichoson> yoriShichosonList = KoikiShichosonJohoFinder.createInstance().shichosonCodeYoriShichosonJoho(
+                    KogakuGassanShikyuKetteiHosei.createInstance().get市町村コード(被保険者番号)).records();
+            if (yoriShichosonList != null && !yoriShichosonList.isEmpty()) {
+                wk保険者構成 = yoriShichosonList.get(0).get証記載保険者番号().value();
+            }
+        }
+        div.getShinkiPanel().getTxtShinkiHihokenshaNo().setValue(wk保険者構成);
+        div.getSearchPanel().getTxtKensakuHihokenshaNo().setValue(wk保険者構成);
     }
 
     /**
@@ -471,6 +496,9 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             return save決定情報登録(div, 画面モード, para);
         }
         boolean flag = getHandler(div).is決定情報内容変更状態(para);
+        if (新規.equals(画面モード)) {
+            flag = true;
+        }
         ValidationMessageControlPairs validPairs = getCheckHandler(div).check決定情報保存();
         if (flag) {
             if (validPairs.iterator().hasNext()) {
