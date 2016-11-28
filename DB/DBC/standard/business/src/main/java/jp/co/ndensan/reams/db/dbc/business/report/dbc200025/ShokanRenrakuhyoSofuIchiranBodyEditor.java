@@ -55,8 +55,48 @@ public class ShokanRenrakuhyoSofuIchiranBodyEditor
             return source;
         }
         edit明細(source);
+        setPageBreakEmpty(source);
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.list_5);
         return source;
+    }
+
+    private void setPageBreakEmpty(ShokanRenrakuhyoSofuIchiranSource source) {
+        if (source.hokenshaNo == null) {
+            source.hokenshaNo = RString.EMPTY;
+        }
+        if (source.yubinNo == null) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.shimei50onKana == null) {
+            source.shimei50onKana = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.list_5 == null) {
+            source.list_5 = RString.EMPTY;
+        }
+        if (source.list_3 == null) {
+            source.list_3 = RString.EMPTY;
+        }
+        if (source.list_2 == null) {
+            source.list_2 = RString.EMPTY;
+        }
+        if (source.shinseiYMD == null) {
+            source.shinseiYMD = RString.EMPTY;
+        }
+        if (source.jigyoshaNo == null) {
+            source.jigyoshaNo = RString.EMPTY;
+        }
+        if (source.list_14 == null) {
+            source.list_14 = RString.EMPTY;
+        }
     }
 
     private void edit明細(ShokanRenrakuhyoSofuIchiranSource source) {
