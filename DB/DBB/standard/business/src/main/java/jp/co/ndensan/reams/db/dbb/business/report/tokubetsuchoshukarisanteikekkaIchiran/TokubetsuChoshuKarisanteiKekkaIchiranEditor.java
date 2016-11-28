@@ -9,10 +9,15 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokuchoKariKeisangoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukarisanteikekkaIchiran.TokubetsuChoshuKarisanteiKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -163,14 +168,105 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         set氏名５０音カナ(source);
         source.choshuHoho = 特徴仮算定計算後賦課情報Entity.get徴収方法();
         source.tokuchoKaisiTuki = 特徴仮算定計算後賦課情報Entity.get特徴開始月();
+        set賦課市町村コード(source);
+        set町域コード(source);
+        set行政区コード(source);
+        set識別コード(source);
+        set被保険者番号(source);
+        setPageBreakEmpty(source);
         return source;
 
     }
 
+    private void setPageBreakEmpty(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.listLower_2 == null) {
+            source.listLower_2 = RString.EMPTY;
+        }
+        if (source.shikibetsuCode == null) {
+            source.shikibetsuCode = RString.EMPTY;
+        }
+        if (source.kanaMeisho == null) {
+            source.kanaMeisho = RString.EMPTY;
+        }
+        if (source.listUpper_5 == null) {
+            source.listUpper_5 = RString.EMPTY;
+        }
+        if (source.listUpper_6 == null) {
+            source.listUpper_6 = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.listLower_1 == null) {
+            source.listLower_1 = RString.EMPTY;
+        }
+        if (source.hihokenshaNo == null) {
+            source.hihokenshaNo = RString.EMPTY;
+        }
+        if (source.choshuHoho == null) {
+            source.choshuHoho = RString.EMPTY;
+        }
+        if (source.tokuchoKaisiTuki == null) {
+            source.tokuchoKaisiTuki = RString.EMPTY;
+        }
+    }
+
+    private void set被保険者番号(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        HihokenshaNo 被保険者番号 = 特徴仮算定計算後賦課情報Entity.get被保険者番号();
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+            source.hihokenshaNo = 被保険者番号.value();
+        }
+    }
+
+    private void set識別コード(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        ShikibetsuCode 識別コード = 特徴仮算定計算後賦課情報Entity.get宛名().getShikibetsuCode();
+        if (識別コード != null && !識別コード.isEmpty()) {
+            source.shikibetsuCode = 識別コード.value();
+        }
+    }
+
+    private void set行政区コード(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        GyoseikuCode 行政区コード = 特徴仮算定計算後賦課情報Entity.get宛名().getGyoseikuCode();
+        if (行政区コード != null && !行政区コード.isEmpty()) {
+            source.gyoseikuCode = 行政区コード.value();
+        } else {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+    }
+
+    private void set町域コード(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        ChoikiCode 町域コード = 特徴仮算定計算後賦課情報Entity.get宛名().getChoikiCode();
+        if (町域コード != null && !町域コード.isEmpty()) {
+            source.choikiCode = 町域コード.value();
+        } else {
+            source.choikiCode = RString.EMPTY;
+        }
+    }
+
+    private void set賦課市町村コード(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        LasdecCode 賦課市町村コード = 特徴仮算定計算後賦課情報Entity.get賦課市町村コード();
+        if (賦課市町村コード != null && !賦課市町村コード.isEmpty()) {
+            source.shichosonCode = 賦課市町村コード.value();
+        } else {
+            source.shichosonCode = RString.EMPTY;
+        }
+    }
+
     private void set郵便番号(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
         YubinNo 郵便番号 = 特徴仮算定計算後賦課情報Entity.get宛名().getYubinNo();
-        if (郵便番号 != null) {
+        if (郵便番号 != null && !郵便番号.isEmpty()) {
             source.listUpper_2 = 郵便番号.value();
+        } else {
+            source.listUpper_2 = RString.EMPTY;
         }
     }
 
