@@ -60,6 +60,12 @@ public class ShokanFushikyuKetteiInPageBreak extends PageBreaker<ShokanbaraiFush
         } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.サービス種類コード.get項目ID())
                 && !currentSource.getSource().listLower_6.equals(nextSource.getSource().listLower_6)) {
             flag = true;
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.郵便番号.get項目ID())
+                && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().shimei50onKana.equals(nextSource.getSource().shimei50onKana)) {
+            flag = true;
         }
         return flag;
     }
@@ -94,6 +100,12 @@ public class ShokanFushikyuKetteiInPageBreak extends PageBreaker<ShokanbaraiFush
             flag = true;
         } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.サービス種類コード.get項目ID())
                 && !currentSource.getサービス種類コード().equals(nextSource.getサービス種類コード())) {
+            flag = true;
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.郵便番号.get項目ID())
+                && !currentSource.get郵便番号().equals(nextSource.get郵便番号())) {
+            flag = true;
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.氏名５０音カナ.get項目ID())
+                && !currentSource.get氏名５０音カナ().equals(nextSource.get氏名５０音カナ())) {
             flag = true;
         }
         return flag;

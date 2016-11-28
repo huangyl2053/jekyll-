@@ -530,4 +530,13 @@ public final class TokuchoSofuJohoSakuseiHandler {
         return new SimpleEntry(処理対象月, flag);
     }
 
+    /**
+     * 選択された処理対象月の処理が既に実行済みの判断です。
+     *
+     * @return is実行済
+     */
+    public boolean is選択された処理対象実行済() {
+        return get処理対象月().getValue();
+    }
+
 }

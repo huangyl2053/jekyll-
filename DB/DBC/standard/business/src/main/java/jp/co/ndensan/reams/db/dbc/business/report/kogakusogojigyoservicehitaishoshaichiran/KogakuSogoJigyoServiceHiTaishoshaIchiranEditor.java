@@ -107,7 +107,35 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranEditor implements IKogakuSo
         付値(source);
         source.拡張情報 = new ExpandedInformation(CODE, NAME,
                 ReportKomokuEditorUtil.get非空文字列(source.listTaishoshaIchiran_2));
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(KogakuSogoJigyoServiceHiTaishoshaIchiranSource source) {
+        if (source.listTaishoshaIchiran_2 == null) {
+            source.listTaishoshaIchiran_2 = RString.EMPTY;
+        }
+        if (source.listTaishoshaIchiran_3 == null) {
+            source.listTaishoshaIchiran_3 = RString.EMPTY;
+        }
+        if (source.listTaishoshaIchiran_5 == null) {
+            source.listTaishoshaIchiran_5 = RString.EMPTY;
+        }
+        if (source.listTaishoshaIchiran_12 == null) {
+            source.listTaishoshaIchiran_12 = RString.EMPTY;
+        }
+        if (source.listTaishoshaIchiran_13 == null) {
+            source.listTaishoshaIchiran_13 = RString.EMPTY;
+        }
+        if (source.listTaishoshaIchiran_14 == null) {
+            source.listTaishoshaIchiran_14 = RString.EMPTY;
+        }
+        if (source.listTaishoshaIchiran_15 == null) {
+            source.listTaishoshaIchiran_15 = RString.EMPTY;
+        }
+        if (source.listTaishoshaIchiran_16 == null) {
+            source.listTaishoshaIchiran_16 = RString.EMPTY;
+        }
     }
 
     /**

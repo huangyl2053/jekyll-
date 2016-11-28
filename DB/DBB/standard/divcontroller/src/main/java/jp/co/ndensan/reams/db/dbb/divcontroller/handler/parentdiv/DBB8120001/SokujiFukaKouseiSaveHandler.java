@@ -162,6 +162,10 @@ public class SokujiFukaKouseiSaveHandler {
             }
             更新対象.add(過年度2);
         }
+        return get更新対象追加(更正前, 更正後, 更正前賦課, 更新対象);
+    }
+
+    private List<FukaJoho> get更新対象追加(NendobunFukaList 更正前, NendobunFukaList 更正後, FukaJoho 更正前賦課, List<FukaJoho> 更新対象) {
         更正前賦課 = 更正前 == null ? null : 更正前.get過年度3();
         if (更正後 != null && 更正後.get過年度3() != null && is内容に異なる箇所がある(更正前賦課, 更正後.get過年度3())) {
             boolean is履歴番号採番 = is履歴番号採番(更正前賦課, 更正後.get過年度3());

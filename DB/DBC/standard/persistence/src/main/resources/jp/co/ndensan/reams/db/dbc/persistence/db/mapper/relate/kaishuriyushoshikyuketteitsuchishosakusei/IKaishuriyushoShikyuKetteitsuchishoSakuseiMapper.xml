@@ -26,9 +26,9 @@
         <result property="riyushoSakuseiShinseiYMD" column="riyushoSakuseiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shukeiNo" column="shukeiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shukeiFlag" column="shukeiFlag" />
-          <association property="dbT7060Entity"
-                     resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
-          <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="dbT7060Entity"
+                       resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     <select id="get住宅改修理由書作成手数料請求" resultOrdered="true" resultMap="ResultMap_住宅改修理由書作成手数料請求"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100020.KaishuriyushoShikyuKetteitsuchishoParameter"  fetchSize="500">
@@ -55,40 +55,40 @@
         ,"DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiShinseiYMD" AS "riyushoSakuseiShinseiYMD"
         ,"DbT3095JutakuKaishuRiyushoTesuryoMeisai"."shukeiNo" AS "shukeiNo"
         ,"DbT3095JutakuKaishuRiyushoTesuryoMeisai"."TaishogaiFlag" AS "shukeiFlag"
-        ,<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha"/> 
+        ,<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha"/>
         ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         <include refid="共通条件" />
     </select>
     <sql id="共通条件">
-         ( 
-          SELECT
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."riyushoSakuseiJigyoshaNo",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."rirekiNo",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."insertDantaiCd",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."insertTimestamp",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."insertReamsLoginId",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."insertContextId" ,
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."isDeleted",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."updateCount",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."lastUpdateTimestamp",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."lastUpdateReamsLoginId",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKubun",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."fushikyuRiyu",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."tesuryoShiharaiYoteiYMD",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shukeiNo",
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."ketteiTsuchiSakuseiYMD" ,
-         "DbT3094JutakuKaishuRiyushoTesuryoKettei"."furikomiTsuchiSakuseiYMD"
-          FROM
-            rgdb."DbT3094JutakuKaishuRiyushoTesuryoKettei" AS "DbT3094JutakuKaishuRiyushoTesuryoKettei" 
-          WHERE
-            "DbT3094JutakuKaishuRiyushoTesuryoKettei"."ketteiTsuchiSakuseiYMD" is NULL 
-            AND #{決定開始日} <![CDATA[<=]]> "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD" 
-            AND "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD" <![CDATA[<=]]> #{決定終了日}
-                <if test = "指定事業者のみフラグ"> 
-            AND "DbT3094JutakuKaishuRiyushoTesuryoKettei"."riyushoSakuseiJigyoshaNo" = #{事業者コード} 
-                </if>
+        (
+        SELECT
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."riyushoSakuseiJigyoshaNo",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."rirekiNo",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."insertDantaiCd",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."insertTimestamp",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."insertReamsLoginId",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."insertContextId" ,
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."isDeleted",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."updateCount",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."lastUpdateTimestamp",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."lastUpdateReamsLoginId",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKubun",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."fushikyuRiyu",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."tesuryoShiharaiYoteiYMD",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shukeiNo",
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."ketteiTsuchiSakuseiYMD" ,
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."furikomiTsuchiSakuseiYMD"
+        FROM
+        rgdb."DbT3094JutakuKaishuRiyushoTesuryoKettei" AS "DbT3094JutakuKaishuRiyushoTesuryoKettei"
+        WHERE
+        "DbT3094JutakuKaishuRiyushoTesuryoKettei"."ketteiTsuchiSakuseiYMD" is NULL
+        AND #{決定開始日} <![CDATA[<=]]> "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD"
+        AND "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD" <![CDATA[<=]]> #{決定終了日}
+        <if test = "指定事業者のみフラグ">
+            AND "DbT3094JutakuKaishuRiyushoTesuryoKettei"."riyushoSakuseiJigyoshaNo" = #{事業者コード}
+        </if>
         ) AS "DbT3094"
         INNER JOIN rgdb."DbT3096JutakuKaishuRiyushoTesuryoShukei" AS  "DbT3096JutakuKaishuRiyushoTesuryoShukei"
         ON "DbT3094"."riyushoSakuseiJigyoshaNo" = "DbT3096JutakuKaishuRiyushoTesuryoShukei"."riyushoSakuseiJigyoshaNo"
@@ -100,26 +100,26 @@
         AND "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."TaishogaiFlag" =False
         AND "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."isDeleted" = False
         INNER JOIN rgdb."DbT1001HihokenshaDaicho" AS 被保険者台帳管理
-        ON 被保険者台帳管理."hihokenshaNo" = "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."hihokenshaNo" 
+        ON 被保険者台帳管理."hihokenshaNo" = "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."hihokenshaNo"
         LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
         AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-         ON 被保険者台帳管理."shikibetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        ON 被保険者台帳管理."shikibetsuCode" = <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS "DbT7060KaigoJigyosha"
-        ON  "DbT3094"."riyushoSakuseiJigyoshaNo"="DbT7060KaigoJigyosha"."jigyoshaNo" 
-        AND  "DbT7060KaigoJigyosha"."yukoShuryoYMD" is NULL 
+        ON  "DbT3094"."riyushoSakuseiJigyoshaNo"="DbT7060KaigoJigyosha"."jigyoshaNo"
+        AND  "DbT7060KaigoJigyosha"."yukoShuryoYMD" is NULL
         ORDER BY  "DbT3094"."riyushoSakuseiJigyoshaNo" ASC,
-		"DbT3094"."shikyu_FushikyuKetteiYMD" ASC,
- 		<if test="出力順 != null and !出力順.isEmpty()">
-                ${出力順},
-            	</if>
-		"DbT3095JutakuKaishuRiyushoTesuryoMeisai"."hihokenshaNo" ASC
+        "DbT3094"."shikyu_FushikyuKetteiYMD" ASC,
+        <if test="出力順 != null and !出力順.isEmpty()">
+            ${出力順},
+        </if>
+        "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."hihokenshaNo" ASC
     </sql>
     <select id="get住宅改修理由書作成手数料請求決定" resultOrdered="true" resultMap="ResultMap_DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100020.KaishuriyushoShikyuKetteitsuchishoParameter"  fetchSize="500">
         SELECT
         DISTINCT
         "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."hihokenshaNo",
-       "DbT3094"."riyushoSakuseiJigyoshaNo" as "riyushoSakuseiJigyoshaNo",
+        "DbT3094"."riyushoSakuseiJigyoshaNo" as "riyushoSakuseiJigyoshaNo",
         "DbT3094"."rirekiNo" as "rirekiNo",
         "DbT3094"."isDeleted" as "isDeleted",
         "DbT3094"."shikyu_FushikyuKetteiYMD" as "shikyu_FushikyuKetteiYMD",
@@ -156,18 +156,18 @@
         <result property="ketteiTsuchiSakuseiYMD" column="ketteiTsuchiSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="furikomiTsuchiSakuseiYMD" column="furikomiTsuchiSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-     <select id="select処理日付管理"    resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100020.KaishuriyushoShikyuKetteitsuchishoParameter" fetchSize="500" resultOrdered="true">
+    <select id="select処理日付管理"    resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100020.KaishuriyushoShikyuKetteitsuchishoParameter" fetchSize="500" resultOrdered="true">
         SELECT
-       <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM
-          rgdb."DbT7022ShoriDateKanri" AS "DbT7022ShoriDateKanri" 
+        rgdb."DbT7022ShoriDateKanri" AS "DbT7022ShoriDateKanri"
         WHERE
-          "DbT7022ShoriDateKanri"."subGyomuCode" = #{サブ業務コード}
-          AND "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
-          AND "DbT7022ShoriDateKanri"."shoriName" = #{処理名}
-          AND "DbT7022ShoriDateKanri"."shoriEdaban" = #{処理枝番}
-          AND "DbT7022ShoriDateKanri"."nendo" = #{年度}
-          AND "DbT7022ShoriDateKanri"."nendoNaiRenban" = #{年度内連番}
+        "DbT7022ShoriDateKanri"."subGyomuCode" = #{サブ業務コード}
+        AND "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
+        AND "DbT7022ShoriDateKanri"."shoriName" = #{処理名}
+        AND "DbT7022ShoriDateKanri"."shoriEdaban" = #{処理枝番}
+        AND "DbT7022ShoriDateKanri"."nendo" = #{年度}
+        AND "DbT7022ShoriDateKanri"."nendoNaiRenban" = #{年度内連番}
     </select>
 </mapper>

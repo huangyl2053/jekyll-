@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5100011;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150010.DBC150010_RiyojokyoTokeihyoMeisaiListParameter;
@@ -108,6 +109,8 @@ public class DBC5100011MainHandler {
         tempData.set旧市町村名称(div.getCcdChikuShichosonSelect().get旧市町村名称());
         if (div.getCcdChikuShichosonSelect().get選択結果() != null) {
             tempData.set選択地区リスト(div.getCcdChikuShichosonSelect().get選択結果());
+        } else {
+            tempData.set選択地区リスト(new HashMap<RString, RString>());
         }
         tempData.set導入形態コード(DonyuKeitaiCode.toValue(div.getCcdChikuShichosonSelect().get導入形態コード()).getCode());
         tempData.set対象年月(div.getRadTaishoYM().getSelectedKey());

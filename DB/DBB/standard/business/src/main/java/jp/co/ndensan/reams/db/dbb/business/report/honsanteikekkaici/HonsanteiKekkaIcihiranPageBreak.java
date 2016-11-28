@@ -41,11 +41,11 @@ public class HonsanteiKekkaIcihiranPageBreak extends PageBreaker<HonsanteiKekkaI
         boolean flag = false;
         flag = setBreakKeyList(currentSource, nextSource, flag);
         if (this.breakKeysList.contains(HonsanteiKekkaIcihiranOutPutOrder.性別.get項目ID())
-                && !currentSource.getSource().listUpper_6.equals(nextSource.getSource().listUpper_4)) {
+                && !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4)) {
             flag = true;
         }
         if (this.breakKeysList.contains(HonsanteiKekkaIcihiranOutPutOrder.市町村コード.get項目ID())
-                && !currentSource.getSource().listUpper_6.equals(nextSource.getSource().hokenshaNo)) {
+                && !currentSource.getSource().fukaShichosonCode.equals(nextSource.getSource().fukaShichosonCode)) {
             flag = true;
         }
         if (this.breakKeysList.contains(HonsanteiKekkaIcihiranOutPutOrder.通知書番号.get項目ID())
@@ -53,7 +53,7 @@ public class HonsanteiKekkaIcihiranPageBreak extends PageBreaker<HonsanteiKekkaI
             flag = true;
         }
         if (this.breakKeysList.contains(HonsanteiKekkaIcihiranOutPutOrder.徴収方法.get項目ID())
-                && !currentSource.getSource().listUpper_1.equals(nextSource.getSource().listCenter_8)) {
+                && !currentSource.getSource().choshuHoho.equals(nextSource.getSource().choshuHoho)) {
             flag = true;
         }
         if (this.breakKeysList.contains(HonsanteiKekkaIcihiranOutPutOrder.被保険者番号.get項目ID())
@@ -66,11 +66,11 @@ public class HonsanteiKekkaIcihiranPageBreak extends PageBreaker<HonsanteiKekkaI
     private boolean setBreakKeyList(ReportLineRecord<HonsanteiKekkaIcihiranReportSource> currentSource,
             ReportLineRecord<HonsanteiKekkaIcihiranReportSource> nextSource, boolean flag) {
         if (this.breakKeysList.contains(HonsanteiKekkaIcihiranOutPutOrder.郵便番号.get項目ID())
-                && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_8)) {
+                && !currentSource.getSource().listUpper_8.equals(nextSource.getSource().listUpper_8)) {
             flag = true;
         }
         if (this.breakKeysList.contains(HonsanteiKekkaIcihiranOutPutOrder.町域コード.get項目ID())
-                && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_7)) {
+                && !currentSource.getSource().listUpper_7.equals(nextSource.getSource().listUpper_7)) {
             flag = true;
         }
         if (this.breakKeysList.contains(HonsanteiKekkaIcihiranOutPutOrder.世帯コード.get項目ID())
@@ -82,11 +82,11 @@ public class HonsanteiKekkaIcihiranPageBreak extends PageBreaker<HonsanteiKekkaI
             flag = true;
         }
         if (this.breakKeysList.contains(HonsanteiKekkaIcihiranOutPutOrder.氏名５０音カナ.get項目ID())
-                && !currentSource.getSource().listUpper_6.equals(nextSource.getSource().listUpper_2)) {
+                && !currentSource.getSource().kanaMeisho.equals(nextSource.getSource().kanaMeisho)) {
             flag = true;
         }
         if (this.breakKeysList.contains(HonsanteiKekkaIcihiranOutPutOrder.生年月日.get項目ID())
-                && !currentSource.getSource().listUpper_6.equals(nextSource.getSource().listUpper_3)) {
+                && !currentSource.getSource().listUpper_3.equals(nextSource.getSource().listUpper_3)) {
             flag = true;
         }
         return flag;

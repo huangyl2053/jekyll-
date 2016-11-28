@@ -86,7 +86,7 @@
          SELECT *
          FROM
          ( SELECT 
-               *,ROW_NUMBER() OVER(PARTITION BY "shikibetsuCode" ORDER BY "kijunYMD" DESC) AS rank_number
+               *,ROW_NUMBER() OVER(PARTITION BY "shikibetsuCode" ORDER BY "honninKubun" ASC) AS rank_number
          FROM
                "TmpSetaiShotoku" ) AS T1 
          WHERE 

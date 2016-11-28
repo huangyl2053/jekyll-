@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120850.DBC120850_SogojigyohiSaishinsaKetteiHokenshaInParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.saishinsaketteidbtoroku.SaishinsaKetteiDBTorokuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120190.DBC120191_SaishinsaKetteiDBTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
@@ -48,7 +48,7 @@ public class DBC120850_SogojigyohiSaishinsaKetteiHokenshaIn extends BatchFlowBas
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
-    private static final RString マスタ登録BATCHID = new RString("SaishinsaKetteiDBToroku");
+    private static final RString マスタ登録BATCHID = new RString("DBC120191_SaishinsaKetteiDBToroku");
     private static final RString ファイル格納フォルダ名 = new RString("DBC120850");
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
@@ -128,7 +128,7 @@ public class DBC120850_SogojigyohiSaishinsaKetteiHokenshaIn extends BatchFlowBas
      */
     @Step(マスタ登録)
     protected IBatchFlowCommand callDoMasterTorokuFlow() {
-        SaishinsaKetteiDBTorokuParameter parameter = new SaishinsaKetteiDBTorokuParameter();
+        DBC120191_SaishinsaKetteiDBTorokuParameter parameter = new DBC120191_SaishinsaKetteiDBTorokuParameter();
         parameter.set交換情報識別番号(交換情報識別番号);
         parameter.set再処理区分(getParameter().getSaishoriKubun());
         parameter.set処理年月(getParameter().getShoriYM());

@@ -175,8 +175,8 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
             if (item.get編集後本算定通知書共通情報().get納付済額_未到来期含む() != null) {
                 source.keisanMeisaishoNofuZumiGaku = new RString(item.get編集後本算定通知書共通情報().get納付済額_未到来期含む().toString());
             }
-            if (item.get編集後本算定通知書共通情報().get今後納付すべき額() != null) {
-                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get今後納付すべき額().toString());
+            if (item.get編集後本算定通知書共通情報().get今後納付すべき額_収入元に() != null) {
+                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get今後納付すべき額_収入元に().toString());
             }
 
             this.更正後情報相関設定(source);

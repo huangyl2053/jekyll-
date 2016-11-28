@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDan
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -44,12 +45,16 @@ class DankaiHanteiKingaku implements IHanteiHoho {
     }
 
     private Boolean isKasei(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
-        for (KazeiKubunHonninKubun kazeiKubunHonninKubun : hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList()) {
-            if (HonninKubun.本人 == kazeiKubunHonninKubun.get本人区分()) {
-                return KazeiKubun.課税 == kazeiKubunHonninKubun.get課税区分();
+        if (null == hokenryoDankaiHanteiParameter.getFukaKonkyo().getZennendoKazeiKubun()) {
+            for (KazeiKubunHonninKubun kazeiKubunHonninKubun : hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList()) {
+                if (HonninKubun.本人 == kazeiKubunHonninKubun.get本人区分()) {
+                    return KazeiKubun.課税 == kazeiKubunHonninKubun.get課税区分();
+                }
             }
+
+            return false;
         }
-        return false;
+        return SetaiKazeiKubun.非課税 == hokenryoDankaiHanteiParameter.getFukaKonkyo().getZennendoSetaiKazeiKubun();
     }
 
     private Decimal nullToZero(Decimal decimal) {

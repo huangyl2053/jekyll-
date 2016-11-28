@@ -4,27 +4,27 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kougakukaigotaishoushachuushutsumainpanel.IKougakuKaigotaiShouMainPanelMapper">
-<resultMap id="resultMap_getShoriDateKanri" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" autoMapping="true">
-<result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="taishoKaishiYMD" column="taishoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="taishoKaishiTimestamp" column="taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-<result property="taishoShuryoYMD" column="taishoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-<result property="taishoShuryoTimestamp" column="taishoShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-<result property="kijunTimestamp" column="kijunTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-</resultMap>
+    <resultMap id="resultMap_getShoriDateKanri" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity" autoMapping="true">
+        <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoKaishiYMD" column="taishoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoKaishiTimestamp" column="taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="taishoShuryoYMD" column="taishoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoShuryoTimestamp" column="taishoShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="kijunTimestamp" column="kijunTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+    </resultMap>
     <select resultOrdered="true" id="get処理日付管理" resultMap="resultMap_getShoriDateKanri"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakukaigotaishoumainpanel.KougakuKaigotaiShouMainPanelMapperParameter"
-        fetchSize="500">
-    SELECT 
+            fetchSize="500">
+        SELECT
         処理日付管理マスタ."kijunYMD" AS kijunYMD,
         処理日付管理マスタ."taishoKaishiYMD" AS taishoKaishiYMD,
         処理日付管理マスタ."taishoKaishiTimestamp" AS taishoKaishiTimestamp,
         処理日付管理マスタ."taishoShuryoYMD" AS taishoShuryoYMD,
         処理日付管理マスタ."taishoShuryoTimestamp" AS taishoShuryoTimestamp,
         処理日付管理マスタ."kijunTimestamp" AS kijunTimestamp
-    FROM
+        FROM
         rgdb."DbT7022ShoriDateKanri" AS 処理日付管理マスタ
-    WHERE
+        WHERE
         処理日付管理マスタ."subGyomuCode" = #{サブ業務コード} AND
         処理日付管理マスタ."shichosonCode" = #{市町村コード} AND
         処理日付管理マスタ."shoriName" = #{処理名} AND
@@ -32,25 +32,25 @@
         処理日付管理マスタ."nendoNaiRenban" = #{年度内連番} AND
         処理日付管理マスタ."shoriEdaban" = #{処理枝番} AND
         処理日付管理マスタ."isDeleted" = FALSE
-</select>
+    </select>
 
-<resultMap id="resultMap_getKokuhorenInterfaceKanri" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity" autoMapping="true">
-<result property="shoriJisshiTimestamp" column="shoriJisshiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-<result property="shoriYM" column="shoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-</resultMap>
-<select resultOrdered="true" id="get国保連インターフェース管理" resultMap="resultMap_getKokuhorenInterfaceKanri"
+    <resultMap id="resultMap_getKokuhorenInterfaceKanri" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity" autoMapping="true">
+        <result property="shoriJisshiTimestamp" column="shoriJisshiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="shoriYM" column="shoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="get国保連インターフェース管理" resultMap="resultMap_getKokuhorenInterfaceKanri"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakukaigotaishoumainpanel.KougakuKaigotaiShouMainPanelMapperParameter"
-        fetchSize="500">
-    SELECT 
+            fetchSize="500">
+        SELECT
         国保連管理."shoriJisshiTimestamp" AS shoriJisshiTimestamp,
         国保連管理."shoriYM" AS shoriYM
-    FROM
+        FROM
         rgdb."DbT3104KokuhorenInterfaceKanri" AS 国保連管理
-    WHERE
+        WHERE
         国保連管理."shoriJotaiKubun" = #{処理状態区分} AND
-        国保連管理."isDeleted" = FALSE 
-    AND
+        国保連管理."isDeleted" = FALSE
+        AND
         国保連管理."kokanShikibetsuNo" = #{交換情報識別番号}
-   LIMIT 1 
-</select>
+        LIMIT 1
+    </select>
 </mapper>

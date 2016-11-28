@@ -66,11 +66,11 @@ public class InsShutsuryokujunProcess extends BatchProcessBase<DbT2015KeisangoJo
             出力順TemoEntity.setChoshuHoho(併用徴収);
         }
         出力順TemoEntity.setTokuchoKaisiTuki(特徴開始月);
-        if (Decimal.ZERO.compareTo(entity.getTkKibetsuGaku01()) < INT_0) {
+        if (entity.getTkKibetsuGaku01() != null && Decimal.ZERO.compareTo(entity.getTkKibetsuGaku01()) < INT_0) {
             出力順TemoEntity.setTokuchoKaisiTuki(特徴開始月_4月);
-        } else if (Decimal.ZERO.compareTo(entity.getTkKibetsuGaku02()) < INT_0) {
+        } else if (entity.getTkKibetsuGaku02() != null && Decimal.ZERO.compareTo(entity.getTkKibetsuGaku02()) < INT_0) {
             出力順TemoEntity.setTokuchoKaisiTuki(特徴開始月_6月);
-        } else if (Decimal.ZERO.compareTo(entity.getTkKibetsuGaku03()) < INT_0) {
+        } else if (entity.getTkKibetsuGaku03() != null && Decimal.ZERO.compareTo(entity.getTkKibetsuGaku03()) < INT_0) {
             出力順TemoEntity.setTokuchoKaisiTuki(特徴開始月_8月);
         }
         tempDbWriter.insert(出力順TemoEntity);

@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護予防・日常生活支援総合事業費公費受給者別一覧表情報取込のファイル読込を実行する。
@@ -167,10 +166,10 @@ public class SogojigyohiKohiJukyushaReadCsvFileProcess extends BatchProcessBase<
         明細一時TBL.setServiceCode(set字符(meisaEntity.getサービスコード()));
         明細一時TBL.setServiceShuruiMei(set字符(meisaEntity.getサービス種類名()));
         明細一時TBL.setServiceKomokuMei(set字符(meisaEntity.getサービス項目名()));
-        明細一時TBL.setNissuKaisu(set数値(meisaEntity.get日数回数()));
-        明細一時TBL.setKohiTaishoTanisu(set数値(meisaEntity.get公費対象単位数()));
-        明細一時TBL.setKohiFutanKingaku(set数値(meisaEntity.get公費負担金額()));
-        明細一時TBL.setKohibunHonninFutangaku(set数値(meisaEntity.get公費分本人負担額()));
+        明細一時TBL.setNissuKaisu(meisaEntity.get日数回数());
+        明細一時TBL.setKohiTaishoTanisu(meisaEntity.get公費対象単位数());
+        明細一時TBL.setKohiFutanKingaku(meisaEntity.get公費負担金額());
+        明細一時TBL.setKohibunHonninFutangaku(meisaEntity.get公費分本人負担額());
         公費受給者別明細一時tbWriter.insert(明細一時TBL);
     }
 
@@ -181,9 +180,9 @@ public class SogojigyohiKohiJukyushaReadCsvFileProcess extends BatchProcessBase<
         集計Entity.setKohiFutanshaName(set字符(headEntity.get公費負担者名()));
         集計Entity.setShinsaYM(set年月(headEntity.get審査年月()));
         集計Entity.setKokuhorenName(set字符(headEntity.get国保連合会名()));
-        集計Entity.setKohiTaishoTanisuShukei(set数値(toreraEntity.get公費対象単位数()));
-        集計Entity.setKohiFutanKingakuShukei(set数値(toreraEntity.get公費負担金額()));
-        集計Entity.setKohibunHonninFutangakuShukei(set数値(toreraEntity.get公費分本人負担額()));
+        集計Entity.setKohiTaishoTanisuShukei(toreraEntity.get公費対象単位数());
+        集計Entity.setKohiFutanKingakuShukei(toreraEntity.get公費負担金額());
+        集計Entity.setKohibunHonninFutangakuShukei(toreraEntity.get公費分本人負担額());
         公費受給者別集計一時tbWriter.insert(集計Entity);
         履歴番号++;
     }
@@ -257,14 +256,6 @@ public class SogojigyohiKohiJukyushaReadCsvFileProcess extends BatchProcessBase<
             return FlexibleYearMonth.EMPTY;
         } else {
             return yearMonth;
-        }
-    }
-
-    private Decimal set数値(Decimal decimal) {
-        if (decimal == null) {
-            return Decimal.ZERO;
-        } else {
-            return decimal;
         }
     }
 }

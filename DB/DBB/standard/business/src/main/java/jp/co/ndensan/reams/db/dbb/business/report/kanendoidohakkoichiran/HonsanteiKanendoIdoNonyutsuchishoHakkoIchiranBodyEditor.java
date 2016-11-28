@@ -134,8 +134,8 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements 
                 && 共通情報.get更正後().get保険料段階() != null) {
             source.listLower_4 = 共通情報.get更正後().get保険料段階();
         }
-        if (共通情報.get今後納付すべき額() != null) {
-            source.listLower_5 = new RString(共通情報.get今後納付すべき額().toString());
+        if (共通情報.get今後納付すべき額_収入元に() != null) {
+            source.listLower_5 = new RString(共通情報.get今後納付すべき額_収入元に().toString());
         }
         source.listLower_6 = new RString(NUM_0);
         RStringBuilder builder = new RStringBuilder();

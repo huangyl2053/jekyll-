@@ -104,6 +104,16 @@ public class KyufuKanrihyoTorikomiKekkaIchiranSource implements IReportSource {
     public RString gokeiKensuTitle;
     @ReportItem(name = "gokeiKensu", length = 7, order = 43)
     public RString gokeiKensu;
+    @ReportItem(name = "yubinNo", length = 10, order = 44)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 10, order = 45)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 46)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 10, order = 47)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 10, order = 48)
+    public RString shichosonCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation 拡張情報;
 // </editor-fold>

@@ -29,6 +29,7 @@ class Dai5Ki extends HokenryoDankaiHanteiHohoHozon {
         Decimal 基準年金収入3 = hokenryoDankaiHanteiParameter.getSeigyoJoho().getKijunNenkinShunyu03();
         Decimal 基準所得段階1 = hokenryoDankaiHanteiParameter.getSeigyoJoho().getKijunShotokuKingaku01();
         Decimal 基準所得段階2 = hokenryoDankaiHanteiParameter.getSeigyoJoho().getKijunShotokuKingaku02();
+        Decimal 基準所得段階3 = hokenryoDankaiHanteiParameter.getSeigyoJoho().getKijunShotokuKingaku03();
 
         List<IHanteiHoho> 段階2 = new ArrayList<>();
         段階2.add(new DankaiHanteiSetaiHiKazei());
@@ -54,23 +55,23 @@ class Dai5Ki extends HokenryoDankaiHanteiHohoHozon {
 
         List<IHanteiHoho> 段階6 = new ArrayList<>();
         段階6.add(new DankaiHanteiSetaiKazei());
-        段階6.add(new DankaiHanteiHonninHiKazei());
-        段階6.add(new DankaiHanteiKingaku(基準年金収入3.add(1), new Decimal(-1)));
+        段階6.add(new DankaiHanteiHonninKazei());
+        段階6.add(new DankaiHanteiKingaku(new Decimal(0), 基準所得段階1));
 
         List<IHanteiHoho> 段階7 = new ArrayList<>();
         段階7.add(new DankaiHanteiSetaiKazei());
         段階7.add(new DankaiHanteiHonninKazei());
-        段階7.add(new DankaiHanteiKingaku(new Decimal(0), 基準所得段階1));
+        段階7.add(new DankaiHanteiKingaku(基準所得段階1.add(1), 基準所得段階2));
 
         List<IHanteiHoho> 段階8 = new ArrayList<>();
         段階8.add(new DankaiHanteiSetaiKazei());
         段階8.add(new DankaiHanteiHonninKazei());
-        段階8.add(new DankaiHanteiKingaku(基準所得段階1.add(1), 基準所得段階2));
+        段階8.add(new DankaiHanteiKingaku(基準所得段階2.add(1), 基準所得段階3));
 
         List<IHanteiHoho> 段階9 = new ArrayList<>();
         段階9.add(new DankaiHanteiSetaiKazei());
         段階9.add(new DankaiHanteiHonninKazei());
-        段階9.add(new DankaiHanteiKingaku(基準所得段階2.add(1), new Decimal(-1)));
+        段階9.add(new DankaiHanteiKingaku(基準所得段階3.add(1), new Decimal(-1)));
 
         getHanteiHoho().put(new RString("02"), 段階2);
         getHanteiHoho().put(new RString("03"), 段階3);

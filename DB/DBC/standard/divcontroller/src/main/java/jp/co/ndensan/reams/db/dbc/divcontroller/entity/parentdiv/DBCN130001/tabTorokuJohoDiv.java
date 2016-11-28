@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
  * @author 自動生成
  */
 public class tabTorokuJohoDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -103,16 +103,6 @@ public class tabTorokuJohoDiv extends TabContainer {
     @JsonIgnore
     public void  setTxtJikofutangakuShomeishoSeiriNo(TextBox txtJikofutangakuShomeishoSeiriNo) {
         this.getTplShomeishoKisaiJiko().getShomeishoKisaiJoho().setTxtJikofutangakuShomeishoSeiriNo(txtJikofutangakuShomeishoSeiriNo);
-    }
-
-    @JsonIgnore
-    public Label getLblTennyumae() {
-        return this.getTplShomeishoKisaiJiko().getShomeishoKisaiJoho().getLblTennyumae();
-    }
-
-    @JsonIgnore
-    public void  setLblTennyumae(Label lblTennyumae) {
-        this.getTplShomeishoKisaiJiko().getShomeishoKisaiJoho().setLblTennyumae(lblTennyumae);
     }
 
     @JsonIgnore
@@ -438,11 +428,6 @@ public class tabTorokuJohoDiv extends TabContainer {
     @JsonIgnore
     public TextBoxNum getTxtUchiFutangaku7() {
         return this.getTplJikofutangakuJoho().getTblJikofutangaku2().getTxtUchiFutangaku7();
-    }
-
-    @JsonIgnore
-    public Button getBtnGokei() {
-        return this.getTplJikofutangakuJoho().getTblJikofutangaku2().getBtnGokei();
     }
 
     @JsonIgnore

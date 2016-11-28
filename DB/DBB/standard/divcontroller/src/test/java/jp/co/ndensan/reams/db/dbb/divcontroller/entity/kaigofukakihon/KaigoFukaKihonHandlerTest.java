@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.kaigofukakihon;
 
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.KaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.KaigoFukaKihonHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.FukaMiscManager;

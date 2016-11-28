@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
@@ -46,10 +45,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.ChoteiNendoKibetsuClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FuchoTsukiClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FukaKoseiJohoClass;
@@ -376,20 +376,20 @@ public class HonnSanteiFuka {
      * @return boolean
      */
     public boolean is普徴期別がZERO(FukaJoho 賦課の情報_更正後) {
-        return Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額01())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額02())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額03())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額04())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額05())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額06())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額07())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額08())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額09())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額10())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額11())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額12())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額13())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額14());
+        return Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額01()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額02()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額03()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額04()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額05()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額06()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額07()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額08()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額09()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額10()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額11()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額12()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額13()) == INDEX_0
+                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額14()) == INDEX_0;
     }
 
     /**
@@ -670,26 +670,15 @@ public class HonnSanteiFuka {
         FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
         fukaJohoRelateEntity.set介護賦課Entity(賦課情報_更正前.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
-        List<Kibetsu> kibetsuList = 賦課情報_更正前.getKibetsuList();
-        if (kibetsuList != null && !kibetsuList.isEmpty()) {
-            for (Kibetsu kibetsu : kibetsuList) {
-                if (ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
-                    set特徴期別金額(kibetsu, 特徴期別金額List, 介護期別RelateEntity);
-                } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(kibetsu.get徴収方法())) {
-                    set普徴期別金額(kibetsu, 普徴期別金額List, 介護期別RelateEntity);
-                }
-            }
-        } else {
-            for (int i = INDEX_1; i <= INDEX_6; i++) {
-                Kibetsu 特徴期別 = new Kibetsu(賦課情報_更正前.get調定年度(), 賦課情報_更正前.get賦課年度(), 賦課情報_更正前.get通知書番号(),
-                        賦課情報_更正前.get履歴番号(), ChoshuHohoKibetsu.特別徴収.getコード(), i);
-                set新規賦課の期別金額(特徴期別, 特徴期別金額List.get(i - INDEX_1), 介護期別RelateEntity);
-            }
-            for (int i = INDEX_1; i <= INDEX_14; i++) {
-                Kibetsu 普徴期別 = new Kibetsu(賦課情報_更正前.get調定年度(), 賦課情報_更正前.get賦課年度(), 賦課情報_更正前.get通知書番号(),
-                        賦課情報_更正前.get履歴番号(), ChoshuHohoKibetsu.普通徴収.getコード(), i);
-                set新規賦課の期別金額(普徴期別, 普徴期別金額List.get(i - INDEX_1), 介護期別RelateEntity);
-            }
+        for (int i = INDEX_1; i <= INDEX_6; i++) {
+            Kibetsu 特徴期別 = new Kibetsu(賦課情報_更正前.get調定年度(), 賦課情報_更正前.get賦課年度(), 賦課情報_更正前.get通知書番号(),
+                    賦課情報_更正前.get履歴番号(), ChoshuHohoKibetsu.特別徴収.getコード(), i);
+            set新規賦課の期別金額(特徴期別, 特徴期別金額List.get(i - INDEX_1), 介護期別RelateEntity);
+        }
+        for (int i = INDEX_1; i <= INDEX_14; i++) {
+            Kibetsu 普徴期別 = new Kibetsu(賦課情報_更正前.get調定年度(), 賦課情報_更正前.get賦課年度(), 賦課情報_更正前.get通知書番号(),
+                    賦課情報_更正前.get履歴番号(), ChoshuHohoKibetsu.普通徴収.getコード(), i);
+            set新規賦課の期別金額(普徴期別, 普徴期別金額List.get(i - INDEX_1), 介護期別RelateEntity);
         }
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
         FukaJoho 賦課の情報_クローン = new FukaJoho(fukaJohoRelateEntity);
@@ -741,7 +730,7 @@ public class HonnSanteiFuka {
         int 現在期 = 更正月_本算定期.get期AsInt();
         kiwariKeisanInput.set現在期(現在期);
         ITsukiShorkiKubun 現在期区分 = 更正月_本算定期.get月処理区分();
-        kiwariKeisanInput.set現在期区分(Integer.parseInt(現在期区分.get区分().toString()));
+        kiwariKeisanInput.set現在期区分(Integer.parseInt(現在期区分.get区分().toString()) - INDEX_1);
         kiwariKeisanInput.set特徴停止可能期(固定値_4期);
         kiwariKeisanInput.set現在特徴期区分(固定値_本算定);
         int 現在過年期 = 更正月判定.find過年度更正月(処理日付).get期AsInt();
@@ -1131,78 +1120,6 @@ public class HonnSanteiFuka {
         }
     }
 
-    private void set特徴期別金額(Kibetsu kibetsu, List<Decimal> 特徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
-        switch (kibetsu.get期()) {
-            case INDEX_1:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_0), 介護期別RelateEntity);
-                break;
-            case INDEX_2:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_1), 介護期別RelateEntity);
-                break;
-            case INDEX_3:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_2), 介護期別RelateEntity);
-                break;
-            case INDEX_4:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_3), 介護期別RelateEntity);
-                break;
-            case INDEX_5:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_4), 介護期別RelateEntity);
-                break;
-            case INDEX_6:
-                set既存賦課の期別金額(kibetsu, 特徴期別金額.get(INDEX_5), 介護期別RelateEntity);
-                break;
-            default:
-        }
-    }
-
-    private void set普徴期別金額(Kibetsu kibetsu, List<Decimal> 普徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
-        switch (kibetsu.get期()) {
-            case INDEX_1:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_0), 介護期別RelateEntity);
-                break;
-            case INDEX_2:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_1), 介護期別RelateEntity);
-                break;
-            case INDEX_3:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_2), 介護期別RelateEntity);
-                break;
-            case INDEX_4:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_3), 介護期別RelateEntity);
-                break;
-            case INDEX_5:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_4), 介護期別RelateEntity);
-                break;
-            case INDEX_6:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_5), 介護期別RelateEntity);
-                break;
-            case INDEX_7:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_6), 介護期別RelateEntity);
-                break;
-            case INDEX_8:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_7), 介護期別RelateEntity);
-                break;
-            case INDEX_9:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_8), 介護期別RelateEntity);
-                break;
-            case INDEX_10:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_9), 介護期別RelateEntity);
-                break;
-            case INDEX_11:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_10), 介護期別RelateEntity);
-                break;
-            case INDEX_12:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_11), 介護期別RelateEntity);
-                break;
-            case INDEX_13:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_12), 介護期別RelateEntity);
-                break;
-            case INDEX_14:
-                set既存賦課の期別金額(kibetsu, 普徴期別金額.get(INDEX_13), 介護期別RelateEntity);
-                break;
-            default:
-        }
-    }
-
     private void set新規賦課の期別金額(Kibetsu kibetsu, Decimal 期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
         KibetsuEntity kibetsuEntity = new KibetsuEntity();
 
@@ -1447,7 +1364,7 @@ public class HonnSanteiFuka {
                 nowDate, SubGyomuCode.DBB介護賦課);
 
         List<Decimal> hokenryoRitsuList = new ArrayList<>();
-        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<RString, RankBetsuKijunKingaku>();
+        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<>();
         RString rankuKubun = RString.EMPTY;
         if (dbT2013HokenryoDankaiList != null && !dbT2013HokenryoDankaiList.isEmpty()) {
             for (DbT2013HokenryoDankaiEntity entity : dbT2013HokenryoDankaiList) {

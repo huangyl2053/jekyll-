@@ -27,9 +27,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKij
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingakuFactory;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
@@ -42,10 +40,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2013HokenryoDankaiDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.ChoteiNendoKibetsuClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FuchoTsukiClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FukaKoseiJohoClass;
@@ -150,7 +150,7 @@ public class FukaKeisanFath {
 
         Kitsuki 本算定期と月の対応 = hantei.find更正月_本算定期(param.get調定日時().getDate());
         kiwariKeisanInput.set現在期(本算定期と月の対応.get期AsInt());
-        kiwariKeisanInput.set現在期区分(Integer.parseInt(本算定期と月の対応.get月処理区分().get区分().toString()));
+        kiwariKeisanInput.set現在期区分(Integer.parseInt(本算定期と月の対応.get月処理区分().get区分().toString()) - INT_1);
         kiwariKeisanInput.set特徴停止可能期(get特徴停止可能期(param.get調定日時().getDate()));
 
         kiwariKeisanInput.set現在特徴期区分(GenzaiTokuchoKiKubun.本算異動.getコード());
@@ -775,7 +775,7 @@ public class FukaKeisanFath {
         if (更正後 == null) {
             更正後 = Decimal.ZERO;
         }
-        return !更正後.equals(更正前);
+        return 更正後.compareTo(更正前) != 0;
     }
 
     /**

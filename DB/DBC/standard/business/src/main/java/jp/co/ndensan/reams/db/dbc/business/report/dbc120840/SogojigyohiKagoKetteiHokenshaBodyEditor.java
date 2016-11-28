@@ -55,7 +55,26 @@ public class SogojigyohiKagoKetteiHokenshaBodyEditor
             edit集計(source);
         }
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.listUpper_4));
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(SogojigyohiKagoKetteiTorikomiIchiranSource source) {
+        if (source.shoKisaiHokenshaNo == null) {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
+        if (source.listUpper_4 == null) {
+            source.listUpper_4 = RString.EMPTY;
+        }
+        if (source.listUpper_6 == null) {
+            source.listUpper_6 = RString.EMPTY;
+        }
+        if (source.listUpper_3 == null) {
+            source.listUpper_3 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
     }
 
     private void edit明細(SogojigyohiKagoKetteiTorikomiIchiranSource source) {

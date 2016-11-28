@@ -83,8 +83,42 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
         } else {
             edit明細(source);
         }
+        setPageBreakEmpty(source);
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listCerter_2);
         return source;
+    }
+
+    private void setPageBreakEmpty(GassanShikyuFushikyuKetteishaIchiranSource source) {
+        if (source.listCerter_2 == null) {
+            source.listCerter_2 = RString.EMPTY;
+        }
+        if (source.listUpper_3 == null) {
+            source.listUpper_3 = RString.EMPTY;
+        }
+        if (source.listLower_2 == null) {
+            source.listLower_2 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.add_hokenshaNo == null) {
+            source.add_hokenshaNo = RString.EMPTY;
+        }
+        if (source.add_shichosonCode == null) {
+            source.add_shichosonCode = RString.EMPTY;
+        }
+        if (source.add_kanaMeisho == null) {
+            source.add_kanaMeisho = RString.EMPTY;
+        }
+        if (source.add_choikiCode == null) {
+            source.add_choikiCode = RString.EMPTY;
+        }
+        if (source.add_gyoseikuCode == null) {
+            source.add_gyoseikuCode = RString.EMPTY;
+        }
+        if (source.add_yubinNo == null) {
+            source.add_yubinNo = RString.EMPTY;
+        }
     }
 
     private void edit明細(GassanShikyuFushikyuKetteishaIchiranSource source) {

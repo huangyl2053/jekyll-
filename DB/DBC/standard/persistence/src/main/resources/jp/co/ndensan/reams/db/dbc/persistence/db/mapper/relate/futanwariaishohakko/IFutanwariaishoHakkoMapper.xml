@@ -3,7 +3,7 @@
 
 <!-- @reamsid_L DBC-4990-030 pengxingyi -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.futanwariaishohakko.IFutanwariaishoHakkoMapper">
-                    
+
     <select resultOrdered="true" id="select利用者負担割合明細"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
             resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity" fetchSize="500">
@@ -11,246 +11,253 @@
     </select>
     <sql id="selectRiyoshaFutanWariaiMeisai">
         SELECT
-            dbT3114RiyoshaFutanWariaiMeisai.*
+        dbT3114RiyoshaFutanWariaiMeisai.*
         FROM
-            (
-            SELECT * FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai"
-            WHERE "nendo" = #{年度}  AND  "logicalDeletedFlag"= false
-            ) AS dbT3114RiyoshaFutanWariaiMeisai
+        (
+        SELECT * FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai"
+        WHERE "nendo" = #{年度}  AND  "logicalDeletedFlag"= false
+        ) AS dbT3114RiyoshaFutanWariaiMeisai
         INNER JOIN
+        (
+        SELECT * FROM rgdb."DbV3113RiyoshaFutanWariai"
+        WHERE "nendo"=#{年度}
+        AND  "hakoFuyoFlag"= false
+        <if test="出力対象==1 or 出力対象==2">
+            AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時}
+            AND "insertTimestamp" <![CDATA[<]]> #{抽出期間終了日時}
+        </if>
+        <if test="発行区分==0">
+            AND ("hakoYMD" is null or "hakoYMD"='')
+        </if>
+        <if test="発行区分==1">
+            AND ("hakoYMD" is not null and "hakoYMD" <![CDATA[<>]]> '')
+        </if>
+        <if test="出力対象==2">
+            AND "hihokenshaNo" IN
             (
-            SELECT * FROM rgdb."DbV3113RiyoshaFutanWariai"
-            WHERE "nendo"=#{年度}  
-            AND  "hakoFuyoFlag"= false
-            <if test="出力対象==1 or 出力対象==2">
+            SELECT
+            DISTINCT "hihokenshaNo"
+            FROM
+            rgdb."DbT4001JukyushaDaicho"
+            WHERE
+            "yukoMukoKubun" = '1' AND
+            <if test="抽出期間開始日時 != null">
+                "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+            </if>
+            <if test="抽出期間終了日時 != null">
+                "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} AND
+            </if>
+            "logicalDeletedFlag" = false AND
+            "chokkinIdoJiyuCode" IN ('01', '02', '04', '10')
+            UNION
+            SELECT
+            DISTINCT "hihokenshaNo"
+            FROM
+            rgdb."DbT3105SogoJigyoTaishosha"
+            WHERE
+            1=1
+            <if test="抽出期間開始日時 != null">
                 AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時}
-                AND "insertTimestamp" <![CDATA[<]]> #{抽出期間終了日時}
             </if>
-            <if test="発行区分==0">
-                AND ("hakoYMD" is null or "hakoYMD"='')
+            <if test="抽出期間終了日時 != null">
+                AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時}
             </if>
-            <if test="発行区分==1">
-                AND ("hakoYMD" is not null and "hakoYMD" <![CDATA[<>]]> '')
-            </if>
-            <if test="出力対象==2">
-                AND "hihokenshaNo" IN 
-                (
-                SELECT 
-                    DISTINCT "hihokenshaNo" 
-                FROM 
-                    rgdb."DbT4001JukyushaDaicho"
-                WHERE 
-                    "yukoMukoKubun" = '1' AND
-                     <if test="抽出期間開始日時 != null">
-                    "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
-                     </if>
-                     <if test="抽出期間終了日時 != null">
-                    "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} AND
-                     </if>
-                    "logicalDeletedFlag" = false AND
-                    "chokkinIdoJiyuCode" IN ('01', '02', '04', '10')
-                UNION
-                SELECT
-                    DISTINCT "hihokenshaNo" 
-                FROM
-                    rgdb."DbT3105SogoJigyoTaishosha"
-                WHERE
-                    1=1
-                    <if test="抽出期間開始日時 != null">
-                     AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時}
-                    </if>
-                    <if test="抽出期間終了日時 != null">
-                     AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} 
-                    </if>
-                )               
-             </if>
-             ) AS dbT3113RiyoshaFutanWariai
-         ON dbT3114RiyoshaFutanWariaiMeisai."nendo" = dbT3113RiyoshaFutanWariai."nendo"
-         AND dbT3114RiyoshaFutanWariaiMeisai."hihokenshaNo" = dbT3113RiyoshaFutanWariai."hihokenshaNo"
-         AND dbT3114RiyoshaFutanWariaiMeisai."rirekiNo" = dbT3113RiyoshaFutanWariai."rirekiNo"
-         ORDER BY
-         dbT3114RiyoshaFutanWariaiMeisai."nendo" , dbT3114RiyoshaFutanWariaiMeisai."hihokenshaNo" , dbT3114RiyoshaFutanWariaiMeisai."rirekiNo", dbT3114RiyoshaFutanWariaiMeisai."edaNo" 
+            )
+        </if>
+        ) AS dbT3113RiyoshaFutanWariai
+        ON dbT3114RiyoshaFutanWariaiMeisai."nendo" = dbT3113RiyoshaFutanWariai."nendo"
+        AND dbT3114RiyoshaFutanWariaiMeisai."hihokenshaNo" = dbT3113RiyoshaFutanWariai."hihokenshaNo"
+        AND dbT3114RiyoshaFutanWariaiMeisai."rirekiNo" = dbT3113RiyoshaFutanWariai."rirekiNo"
+        ORDER BY
+        dbT3114RiyoshaFutanWariaiMeisai."nendo" , dbT3114RiyoshaFutanWariaiMeisai."hihokenshaNo" , dbT3114RiyoshaFutanWariaiMeisai."rirekiNo", dbT3114RiyoshaFutanWariaiMeisai."edaNo"
     </sql>
-      
-      
-    
+
+
+
     <select resultOrdered="true" id="select利用者負担割合証"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
             resultMap="resultMap_RiyoshaFutanWariaiSho" fetchSize="500">
         <include refid="selectRiyoshaFutanWariaiSho" />
     </select>
     <sql id="selectRiyoshaFutanWariaiSho">
-        WITH master as( 
+        WITH master as(
         SELECT
-            <include refid="allColumns_DbT3113RiyoshaFutanWariai" />,
-            <include refid="allColumns_DbT1001HihokenshaDaicho" />,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
-            
-            CASE WHEN jigyoutaishousha_jyukyusha."kubun" IS NULL THEN '3' ELSE jigyoutaishousha_jyukyusha."kubun" END AS "kubun" ,
-            <include refid="allColumns_FutanWariKikanTemp" />,
-            CASE WHEN "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" = '1' THEN "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" ELSE
-            "DbT1001HihokenshaDaicho"."shichosonCode" END AS "shokisaiHihokenshaNo",
-            <include refid="allColumns_DbT7037ShoKofuKaishu" />
+        <include refid="allColumns_DbT3113RiyoshaFutanWariai" />,
+        <include refid="allColumns_DbT1001HihokenshaDaicho" />,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
+
+        CASE WHEN jigyoutaishousha_jyukyusha."kubun" IS NULL THEN '3' ELSE jigyoutaishousha_jyukyusha."kubun" END AS "kubun" ,
+        <include refid="allColumns_FutanWariKikanTemp" />,
+        CASE WHEN "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" = '1' THEN "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" ELSE
+        "DbT1001HihokenshaDaicho"."shichosonCode" END AS "shokisaiHihokenshaNo",
+        <include refid="allColumns_DbT7037ShoKofuKaishu" />
         FROM
-           (
-            SELECT * FROM rgdb."DbV3113RiyoshaFutanWariai"
-            WHERE "nendo"=#{年度}  
-                AND  "hakoFuyoFlag"= false
-            <if test="出力対象==1 or 出力対象==2">
+        (
+        SELECT * FROM rgdb."DbV3113RiyoshaFutanWariai"
+        WHERE "nendo"=#{年度}
+        AND  "hakoFuyoFlag"= false
+        <if test="出力対象==1 or 出力対象==2">
+            AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時}
+            AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時}
+        </if>
+        <if test="発行区分==0">
+            AND ("hakoYMD" is null or "hakoYMD"='')
+        </if>
+        <if test="発行区分==1">
+            AND ("hakoYMD" is not null and "hakoYMD" <![CDATA[<>]]> '')
+        </if>
+        <if test="出力対象==2">
+            AND "hihokenshaNo" IN
+            (
+            SELECT
+            DISTINCT "hihokenshaNo"
+            FROM
+            rgdb."DbT4001JukyushaDaicho"
+            WHERE
+            "yukoMukoKubun" = '1' AND
+            <if test="抽出期間開始日時 != null">
+                "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+            </if>
+            <if test="抽出期間終了日時 != null">
+                "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} AND
+            </if>
+            "logicalDeletedFlag" = false AND
+            "chokkinIdoJiyuCode" IN ('01', '02', '04', '10')
+            UNION
+            SELECT
+            DISTINCT "hihokenshaNo"
+            FROM
+            rgdb."DbT3105SogoJigyoTaishosha"
+            WHERE
+            1=1
+            <if test="抽出期間開始日時 != null">
                 AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時}
+            </if>
+            <if test="抽出期間終了日時 != null">
                 AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時}
             </if>
-            <if test="発行区分==0">
-                AND ("hakoYMD" is null or "hakoYMD"='')
-            </if>
-            <if test="発行区分==1">
-                AND ("hakoYMD" is not null and "hakoYMD" <![CDATA[<>]]> '')
-            </if>
-            <if test="出力対象==2">
-                AND "hihokenshaNo" IN 
-                (
-                SELECT 
-                    DISTINCT "hihokenshaNo" 
-                FROM 
-                    rgdb."DbT4001JukyushaDaicho"
-                WHERE 
-                    "yukoMukoKubun" = '1' AND
-                     <if test="抽出期間開始日時 != null">
-                    "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
-                     </if>
-                     <if test="抽出期間終了日時 != null">
-                    "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} AND
-                     </if>
-                    "logicalDeletedFlag" = false AND
-                    "chokkinIdoJiyuCode" IN ('01', '02', '04', '10')
-                UNION
-                SELECT
-                    DISTINCT "hihokenshaNo" 
-                FROM
-                    rgdb."DbT3105SogoJigyoTaishosha"
-                WHERE
-                    1=1
-                    <if test="抽出期間開始日時 != null">
-                     AND "insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} 
-                    </if>
-                    <if test="抽出期間終了日時 != null">
-                     AND "insertTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} 
-                    </if>
-                )               
-             </if>
-             ) AS "DbT3113RiyoshaFutanWariai" 
+            )
+        </if>
+        ) AS "DbT3113RiyoshaFutanWariai"
         LEFT OUTER JOIN
-            rgdb."DbV1001HihokenshaDaicho"  as "DbT1001HihokenshaDaicho"
+        rgdb."DbV1001HihokenshaDaicho"  as "DbT1001HihokenshaDaicho"
         ON  "DbT3113RiyoshaFutanWariai"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
-       
+
         LEFT OUTER JOIN
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmParamClassAtesaki" /> AS "Atesaki"   
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmParamClassAtesaki" /> AS "Atesaki"
         ON  "DbT1001HihokenshaDaicho"."shikibetsuCode" =  "Atesaki"."shikibetsuCode"
         LEFT OUTER JOIN
-            (SELECT DISTINCT "hihokenshaNo" , '2' AS "kubun"
-            FROM rgdb."DbT4001JukyushaDaicho"
-            WHERE "ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{交付年月日} AND 
-               "ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{交付年月日} AND
-               "yukoMukoKubun" = '1' AND
-               "logicalDeletedFlag" = false 
-            UNION
-            SELECT DISTINCT "hihokenshaNo" , '1' AS "kubun"
-            FROM rgdb."DbT3105SogoJigyoTaishosha" 
-            WHERE "tekiyoKaishiYMD" <![CDATA[<=]]> #{交付年月日} AND 
-               "tekiyoShuryoYMD" <![CDATA[>=]]> #{交付年月日} 
+        (SELECT DISTINCT "hihokenshaNo" , '2' AS "kubun"
+        FROM rgdb."DbT4001JukyushaDaicho"
+        WHERE "ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{交付年月日} AND
+        "ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{交付年月日} AND
+        "yukoMukoKubun" = '1' AND
+        "logicalDeletedFlag" = false
+        UNION
+        SELECT DISTINCT "hihokenshaNo" , '1' AS "kubun"
+        FROM rgdb."DbT3105SogoJigyoTaishosha"
+        WHERE "tekiyoKaishiYMD" <![CDATA[<=]]> #{交付年月日} AND
+        "tekiyoShuryoYMD" <![CDATA[>=]]> #{交付年月日}
         ) AS jigyoutaishousha_jyukyusha
         ON  "DbT3113RiyoshaFutanWariai"."hihokenshaNo" = jigyoutaishousha_jyukyusha."hihokenshaNo"
-        LEFT OUTER JOIN 
-            "FutanWariKikanTemp" AS FutanWariKikanTemp
-        ON  "DbT3113RiyoshaFutanWariai"."hihokenshaNo" = FutanWariKikanTemp."hihokenshaNo"     
         LEFT OUTER JOIN
-            (SELECT * FROM rgdb."DbT7037ShoKofuKaishu" AS "A" WHERE "kofuShoShurui"='003'
-             AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT7037ShoKofuKaishu" AS "B" 
-                            WHERE  "B"."hihokenshaNo" = "A"."hihokenshaNo"
-			    AND    "B"."kofuShoShurui" = "A"."kofuShoShurui" 
-                            AND    "B"."rirekiNo"  <![CDATA[>]]> "A"."rirekiNo"
-                          ) 
-            ) AS "DbT7037ShoKofuKaishu"
+        "FutanWariKikanTemp" AS FutanWariKikanTemp
+        ON  "DbT3113RiyoshaFutanWariai"."hihokenshaNo" = FutanWariKikanTemp."hihokenshaNo"
+        LEFT OUTER JOIN
+        (SELECT * FROM rgdb."DbT7037ShoKofuKaishu" AS "A" WHERE "kofuShoShurui"='003'
+        AND NOT EXISTS(SELECT 'X' FROM rgdb."DbT7037ShoKofuKaishu" AS "B"
+        WHERE  "B"."hihokenshaNo" = "A"."hihokenshaNo"
+        AND    "B"."kofuShoShurui" = "A"."kofuShoShurui"
+        AND    "B"."rirekiNo"  <![CDATA[>]]> "A"."rirekiNo"
+        )
+        ) AS "DbT7037ShoKofuKaishu"
         ON   "DbT1001HihokenshaDaicho"."hihokenshaNo"  = "DbT7037ShoKofuKaishu"."hihokenshaNo"
         )
-        select 
-            master.*,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        select
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
         FROM
-            master
+        master
         LEFT OUTER JOIN
-            rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
-            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',        
-                (
-                    SELECT
-                        ARRAY_AGG(CAST (master."dbT1001HihokenshaDaicho_shikibetsuCode" AS TEXT))
-                    FROM
-                        master
-                )      
-            ) AS "ShikibetsuTaisho"
-        ON  "master"."dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"         
+        rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+        (
+        SELECT
+        ARRAY_AGG(CAST (master."dbT1001HihokenshaDaicho_shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )
+        ) AS "ShikibetsuTaisho"
+        ON  "master"."dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </sql>
-    
+
     <select resultOrdered="true" id="select利用者負担割合証Temp"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
             resultMap="resultMap_RiyoshaFutanWariaiShoTemp" fetchSize="500">
         SELECT
-            A.*,
-            "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode"
+        A.*,
+        "atesaki_banchiCode1"||"atesaki_banchiCode2"||"atesaki_banchiCode3"||"atesaki_banchiCode4" as "atesaki_banchiCode",
+        CASE WHEN "futanWariKikanTemp_futanWariaiKubun2" IS NULL OR  "futanWariKikanTemp_futanWariaiKubun2" = '' THEN "futanWariKikanTemp_futanWariaiKubun1"
+        ELSE "futanWariKikanTemp_futanWariaiKubun2" END AS "futanWariKikanTemp_futanWariaiKubun"
         FROM
-            "RiyoshaFutanwariaishoTemp"  as A
-       <if test="出力順!= null">
-             ${出力順}
-       </if>    
+        "RiyoshaFutanwariaishoTemp"  as A
+        <if test="出力順!= null">
+            ${出力順}
+        </if>
     </select>
-    
+
     <select resultOrdered="true" id="select帳票制御汎用キー"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
             resultMap="NewResultMap_DbT7067ChohyoSeigyoHanyoEntity" fetchSize="500">
         SELECT
-            <include refid="allColumns_DbT7067ChohyoSeigyoHanyo" />
+        <include refid="allColumns_DbT7067ChohyoSeigyoHanyo" />
         FROM
-            rgdb."DbT7067ChohyoSeigyoHanyo" AS  "DbT7067ChohyoSeigyoHanyo"
-        WHERE 
-            "DbT7067ChohyoSeigyoHanyo"."subGyomuCode"= #{サブ業務コード}   
-            AND  "DbT7067ChohyoSeigyoHanyo"."chohyoBunruiID"= #{帳票分類ID}   
-            AND  "DbT7067ChohyoSeigyoHanyo"."kanriNendo"= #{管理年度}  
-            AND  "DbT7067ChohyoSeigyoHanyo"."komokuName"= #{項目名}              
+        rgdb."DbT7067ChohyoSeigyoHanyo" AS  "DbT7067ChohyoSeigyoHanyo"
+        WHERE
+        "DbT7067ChohyoSeigyoHanyo"."subGyomuCode"= #{サブ業務コード}
+        AND  "DbT7067ChohyoSeigyoHanyo"."chohyoBunruiID"= #{帳票分類ID}
+        AND  "DbT7067ChohyoSeigyoHanyo"."kanriNendo"= #{管理年度}
+        AND  "DbT7067ChohyoSeigyoHanyo"."komokuName"= #{項目名}
     </select>
-    
-        <select resultOrdered="true" id="select帳票制御共通"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
-            resultMap="NewResultMap_DbT7065ChohyoSeigyoKyotsuEntity" fetchSize="500">
+
+    <select resultOrdered="true" id="select帳票制御共通"
+                parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
+                resultMap="NewResultMap_DbT7065ChohyoSeigyoKyotsuEntity" fetchSize="500">
         SELECT
-            <include refid="allColumns_DbT7065ChohyoSeigyoKyotsu" />
+        <include refid="allColumns_DbT7065ChohyoSeigyoKyotsu" />
         FROM
-            rgdb."DbT7065ChohyoSeigyoKyotsu" AS  "DbT7065ChohyoSeigyoKyotsu"
-        WHERE 
-            "DbT7065ChohyoSeigyoKyotsu"."subGyomuCode"= #{サブ業務コード}   
-            AND  "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiID"= #{帳票分類ID}           
+        rgdb."DbT7065ChohyoSeigyoKyotsu" AS  "DbT7065ChohyoSeigyoKyotsu"
+        WHERE
+        "DbT7065ChohyoSeigyoKyotsu"."subGyomuCode"= #{サブ業務コード}
+        AND  "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiID"= #{帳票分類ID}
     </select>
-    
-    
-    
-    
-        <resultMap id="resultMap_RiyoshaFutanWariaiShoTemp" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity">
-        <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>     
+
+
+
+
+    <resultMap id="resultMap_RiyoshaFutanWariaiShoTemp" autoMapping="true"
+                   type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity">
+        <id column="dbT3113RiyoshaFutanWariai_nendo"/>
+        <id column="dbT3113RiyoshaFutanWariai_hihokenshaNo"/>
+        <id column="dbT3113RiyoshaFutanWariai_rirekiNo"/>
+        <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>
+        <id column="dbT1001HihokenshaDaicho_idoYMD"/>
+        <id column="dbT1001HihokenshaDaicho_edaNo"/>
         <result property="事業対象者受給者区分" column="kubun"
-            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>     
+                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="証記載保険者番号" column="shokisaiHihokenshaNo"
-            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>      
+                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <association property="利用者負担割合" resultMap="NewResultMap_DbT3113RiyoshaFutanWariaiEntity"/>
         <association property="被保台帳" resultMap="NewResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="証交付回収" resultMap="NewResultMap_DbT7037ShoKofuKaishuEntity"/>
         <association property = "宛名" resultMap = "New_UaFt200FindShikibetsuTaishoEntity"/>
-        <association property = "宛先" resultMap = "New_ResultAtesakiEntity"/>             
-        <association property= "負担割合期間" resultMap="resultMap_FutanWariKikanTemp"/> 
-    </resultMap> 
-    
-    
-     <resultMap id="New_ResultAtesakiEntity" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity">
+        <association property = "宛先" resultMap = "New_ResultAtesakiEntity"/>
+        <association property= "負担割合期間" resultMap="resultMap_FutanWariKikanTemp"/>
+    </resultMap>
+
+
+    <resultMap id="New_ResultAtesakiEntity" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity">
         <id     property="shikibetsuCode"                      column="atesaki_shikibetsuCode"                      typeHandler="ShikibetsuCodeTypeHandler" />
         <id     property="atesakiShubetsu"                     column="atesaki_atesakiShubetsu"                     typeHandler="RStringTypeHandler" />
         <id     property="gyomubetsuPrimaryKey"                column="atesaki_gyomubetsuPrimaryKey"                typeHandler="RStringTypeHandler" />
@@ -379,7 +386,7 @@
         <result property="honninSetaiCode"                     column="atesaki_honninSetaiCode"                     typeHandler="SetaiCodeTypeHandler" />
         <result property="dainoninSetaiCode"                   column="atesaki_dainoninSetaiCode"                   typeHandler="SetaiCodeTypeHandler" />
     </resultMap>
-    
+
     <resultMap id="New_UaFt200FindShikibetsuTaishoEntity" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity" >
         <id property="shikibetsuCode"                         column="shikibetsuTaisho_shikibetsuCode"                     typeHandler="ShikibetsuCodeTypeHandler" />
         <id property="rirekiNo"                               column="shikibetsuTaisho_rirekiNo"                           />
@@ -577,44 +584,49 @@
         <result property="yusenShimeiTimestamp"               column="shikibetsuTaisho_yusenShimeiTimestamp"               typeHandler="RDateTimeTypeHandler" />
         <result property="jukiTorokuNo"                       column="shikibetsuTaisho_jukiTorokuNo"                       typeHandler="jp.co.ndensan.reams.ur.urz.entity.typehandlers.TorokuNoTypeHandler" />
     </resultMap>
-    
-    
-    
-    
+
+
+
+
     <select resultOrdered="true" id="select処理日付管理"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" fetchSize="500">
-        SELECT 
-            <include refid="allColumns_DbT7022ShoriDateKanri" />
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity" fetchSize="500">
+        SELECT
+        <include refid="allColumns_DbT7022ShoriDateKanri" />
         FROM
-            rgdb."DbT7022ShoriDateKanri"  AS "DbT7022ShoriDateKanri"
-        WHERE 
-            "DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
-            AND  "DbT7022ShoriDateKanri"."shoriName" = '負担割合証一括発行'
-            <if test="出力対象==0">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0000' </if>
-            <if test="出力対象==1">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0001' </if>
-            <if test="出力対象==2">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0002' </if>
-            AND  "DbT7022ShoriDateKanri"."nendo" = #{年度}
+        rgdb."DbT7022ShoriDateKanri"  AS "DbT7022ShoriDateKanri"
+        WHERE
+        "DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
+        AND  "DbT7022ShoriDateKanri"."shoriName" = '負担割合証一括発行'
+        <if test="出力対象==0">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0000' </if>
+        <if test="出力対象==1">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0001' </if>
+        <if test="出力対象==2">AND "DbT7022ShoriDateKanri"."shoriEdaban" = '0002' </if>
+        AND  "DbT7022ShoriDateKanri"."nendo" = #{年度}
     </select>
-        
-   
-    
+
+
+
     <resultMap id="resultMap_RiyoshaFutanWariaiSho" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity">
-        <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>     
+        <id column="dbT3113RiyoshaFutanWariai_nendo"/>
+        <id column="dbT3113RiyoshaFutanWariai_hihokenshaNo"/>
+        <id column="dbT3113RiyoshaFutanWariai_rirekiNo"/>
+        <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>
+        <id column="dbT1001HihokenshaDaicho_idoYMD"/>
+        <id column="dbT1001HihokenshaDaicho_edaNo"/>
         <result property="事業対象者受給者区分" column="kubun"
-            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>     
+                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="証記載保険者番号" column="shokisaiHihokenshaNo"
-            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>    
+                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <association property="利用者負担割合" resultMap="NewResultMap_DbT3113RiyoshaFutanWariaiEntity"/>
         <association property="被保台帳" resultMap="NewResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="証交付回収" resultMap="NewResultMap_DbT7037ShoKofuKaishuEntity"/>
         <association property = "宛名" resultMap = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        <association property = "宛先" resultMap = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>             
-        <association property= "負担割合期間" resultMap="resultMap_FutanWariKikanTemp"/> 
-    </resultMap> 
-    
-    
+        <association property = "宛先" resultMap = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+        <association property= "負担割合期間" resultMap="resultMap_FutanWariKikanTemp"/>
+    </resultMap>
+
+
     <resultMap id="resultMap_FutanWariKikanTemp" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.FutanWariKikanTempEntity">
         <result property="nendo" column="futanWariKikanTemp_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -626,46 +638,46 @@
         <result property="futanWariaiKubun2" column="futanWariKikanTemp_futanWariaiKubun2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yukoKaishiYMD2" column="futanWariKikanTemp_yukoKaishiYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="yukoShuryoYMD2" column="futanWariKikanTemp_yukoShuryoYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shikakuKubun2" column="futanWariKikanTemp_shikakuKubun2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>     
+        <result property="shikakuKubun2" column="futanWariKikanTemp_shikakuKubun2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
+
     <sql id="allColumns_FutanWariKikanTemp">
-         FutanWariKikanTemp."nendo" as "futanWariKikanTemp_nendo",
-         FutanWariKikanTemp."hihokenshaNo" as "futanWariKikanTemp_hihokenshaNo",
-         FutanWariKikanTemp."futanWariaiKubun1" as "futanWariKikanTemp_futanWariaiKubun1",
-         FutanWariKikanTemp."yukoKaishiYMD1" as "futanWariKikanTemp_yukoKaishiYMD1",
-         FutanWariKikanTemp."yukoShuryoYMD1" as "futanWariKikanTemp_yukoShuryoYMD1",
-         FutanWariKikanTemp."shikakuKubun1" as "futanWariKikanTemp_shikakuKubun1",
-         FutanWariKikanTemp."futanWariaiKubun2" as "futanWariKikanTemp_futanWariaiKubun2",
-         FutanWariKikanTemp."yukoKaishiYMD2" as "futanWariKikanTemp_yukoKaishiYMD2",
-         FutanWariKikanTemp."yukoShuryoYMD2" as "futanWariKikanTemp_yukoShuryoYMD2",
-         FutanWariKikanTemp."shikakuKubun2" as "futanWariKikanTemp_shikakuKubun2"
+        FutanWariKikanTemp."nendo" as "futanWariKikanTemp_nendo",
+        FutanWariKikanTemp."hihokenshaNo" as "futanWariKikanTemp_hihokenshaNo",
+        FutanWariKikanTemp."futanWariaiKubun1" as "futanWariKikanTemp_futanWariaiKubun1",
+        FutanWariKikanTemp."yukoKaishiYMD1" as "futanWariKikanTemp_yukoKaishiYMD1",
+        FutanWariKikanTemp."yukoShuryoYMD1" as "futanWariKikanTemp_yukoShuryoYMD1",
+        FutanWariKikanTemp."shikakuKubun1" as "futanWariKikanTemp_shikakuKubun1",
+        FutanWariKikanTemp."futanWariaiKubun2" as "futanWariKikanTemp_futanWariaiKubun2",
+        FutanWariKikanTemp."yukoKaishiYMD2" as "futanWariKikanTemp_yukoKaishiYMD2",
+        FutanWariKikanTemp."yukoShuryoYMD2" as "futanWariKikanTemp_yukoShuryoYMD2",
+        FutanWariKikanTemp."shikakuKubun2" as "futanWariKikanTemp_shikakuKubun2"
     </sql>
-    
-    
+
+
     <sql id="allColumns_DbT3113RiyoshaFutanWariai">
-         "DbT3113RiyoshaFutanWariai"."nendo" as "dbT3113RiyoshaFutanWariai_nendo",
-         "DbT3113RiyoshaFutanWariai"."hihokenshaNo" as "dbT3113RiyoshaFutanWariai_hihokenshaNo",
-         "DbT3113RiyoshaFutanWariai"."rirekiNo" as "dbT3113RiyoshaFutanWariai_rirekiNo",
-         NULL as "dbT3113RiyoshaFutanWariai_insertDantaiCd",
-         NULL as "dbT3113RiyoshaFutanWariai_insertTimestamp",
-         NULL as "dbT3113RiyoshaFutanWariai_insertReamsLoginId",
-         NULL as "dbT3113RiyoshaFutanWariai_insertContextId",
-         NULL as "dbT3113RiyoshaFutanWariai_isDeleted",
-         NULL as "dbT3113RiyoshaFutanWariai_updateCount",
-         NULL as "dbT3113RiyoshaFutanWariai_lastUpdateTimestamp",
-         NULL as "dbT3113RiyoshaFutanWariai_lastUpdateReamsLoginId",
-         "DbT3113RiyoshaFutanWariai"."hakoFuyoFlag" as "dbT3113RiyoshaFutanWariai_hakoFuyoFlag",
-         "DbT3113RiyoshaFutanWariai"."shokenFlag" as "dbT3113RiyoshaFutanWariai_shokenFlag",
-         "DbT3113RiyoshaFutanWariai"."hanteiYMD" as "dbT3113RiyoshaFutanWariai_hanteiYMD",
-         "DbT3113RiyoshaFutanWariai"."hanteiKubun" as "dbT3113RiyoshaFutanWariai_hanteiKubun",
-         "DbT3113RiyoshaFutanWariai"."koseiJiyu" as "dbT3113RiyoshaFutanWariai_koseiJiyu",
-         "DbT3113RiyoshaFutanWariai"."hakoKubun" as "dbT3113RiyoshaFutanWariai_hakoKubun",
-         "DbT3113RiyoshaFutanWariai"."hakoYMD" as "dbT3113RiyoshaFutanWariai_hakoYMD",
-         "DbT3113RiyoshaFutanWariai"."kofuYMD" as "dbT3113RiyoshaFutanWariai_kofuYMD",
-         "DbT3113RiyoshaFutanWariai"."logicalDeletedFlag" as "dbT3113RiyoshaFutanWariai_logicalDeletedFlag"
+        "DbT3113RiyoshaFutanWariai"."nendo" as "dbT3113RiyoshaFutanWariai_nendo",
+        "DbT3113RiyoshaFutanWariai"."hihokenshaNo" as "dbT3113RiyoshaFutanWariai_hihokenshaNo",
+        "DbT3113RiyoshaFutanWariai"."rirekiNo" as "dbT3113RiyoshaFutanWariai_rirekiNo",
+        NULL as "dbT3113RiyoshaFutanWariai_insertDantaiCd",
+        NULL as "dbT3113RiyoshaFutanWariai_insertTimestamp",
+        NULL as "dbT3113RiyoshaFutanWariai_insertReamsLoginId",
+        NULL as "dbT3113RiyoshaFutanWariai_insertContextId",
+        NULL as "dbT3113RiyoshaFutanWariai_isDeleted",
+        NULL as "dbT3113RiyoshaFutanWariai_updateCount",
+        NULL as "dbT3113RiyoshaFutanWariai_lastUpdateTimestamp",
+        NULL as "dbT3113RiyoshaFutanWariai_lastUpdateReamsLoginId",
+        "DbT3113RiyoshaFutanWariai"."hakoFuyoFlag" as "dbT3113RiyoshaFutanWariai_hakoFuyoFlag",
+        "DbT3113RiyoshaFutanWariai"."shokenFlag" as "dbT3113RiyoshaFutanWariai_shokenFlag",
+        "DbT3113RiyoshaFutanWariai"."hanteiYMD" as "dbT3113RiyoshaFutanWariai_hanteiYMD",
+        "DbT3113RiyoshaFutanWariai"."hanteiKubun" as "dbT3113RiyoshaFutanWariai_hanteiKubun",
+        "DbT3113RiyoshaFutanWariai"."koseiJiyu" as "dbT3113RiyoshaFutanWariai_koseiJiyu",
+        "DbT3113RiyoshaFutanWariai"."hakoKubun" as "dbT3113RiyoshaFutanWariai_hakoKubun",
+        "DbT3113RiyoshaFutanWariai"."hakoYMD" as "dbT3113RiyoshaFutanWariai_hakoYMD",
+        "DbT3113RiyoshaFutanWariai"."kofuYMD" as "dbT3113RiyoshaFutanWariai_kofuYMD",
+        "DbT3113RiyoshaFutanWariai"."logicalDeletedFlag" as "dbT3113RiyoshaFutanWariai_logicalDeletedFlag"
     </sql>
-     <resultMap id="NewResultMap_DbT3113RiyoshaFutanWariaiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity" autoMapping="true">
+    <resultMap id="NewResultMap_DbT3113RiyoshaFutanWariaiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity" autoMapping="true">
         <id property="nendo" column="dbT3113RiyoshaFutanWariai_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="hihokenshaNo" column="dbT3113RiyoshaFutanWariai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="rirekiNo" column="dbT3113RiyoshaFutanWariai_rirekiNo" />
@@ -687,36 +699,36 @@
         <result property="kofuYMD" column="dbT3113RiyoshaFutanWariai_kofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="logicalDeletedFlag" column="dbT3113RiyoshaFutanWariai_logicalDeletedFlag" />
     </resultMap>
-    
+
     <sql id="allColumns_DbT1001HihokenshaDaicho">
-         "DbT1001HihokenshaDaicho"."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
-         "DbT1001HihokenshaDaicho"."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",
-         "DbT1001HihokenshaDaicho"."edaNo" as "dbT1001HihokenshaDaicho_edaNo",
-         
-         "DbT1001HihokenshaDaicho"."shichosonCode" as "dbT1001HihokenshaDaicho_shichosonCode",
-         "DbT1001HihokenshaDaicho"."shikibetsuCode" as "dbT1001HihokenshaDaicho_shikibetsuCode",
-         "DbT1001HihokenshaDaicho"."shikakuShutokuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
-         "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuYMD",
-         "DbT1001HihokenshaDaicho"."shikakuShutokuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
-         "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD" as "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
-         "DbT1001HihokenshaDaicho"."hihokennshaKubunCode" as "dbT1001HihokenshaDaicho_hihokennshaKubunCode",
-         "DbT1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
-         "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
-         "DbT1001HihokenshaDaicho"."shikakuSoshitsuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
-         "DbT1001HihokenshaDaicho"."shikakuHenkoJiyuCode" as "dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
-         "DbT1001HihokenshaDaicho"."shikakuHenkoYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoYMD",
-         "DbT1001HihokenshaDaicho"."shikakuHenkoTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
-         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
-         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
-         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
-         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
-         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD",
-         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
-         "DbT1001HihokenshaDaicho"."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
-         "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
-         "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
-         "DbT1001HihokenshaDaicho"."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
-         "DbT1001HihokenshaDaicho"."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag"
+        "DbT1001HihokenshaDaicho"."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo" as "dbT1001HihokenshaDaicho_edaNo",
+
+        "DbT1001HihokenshaDaicho"."shichosonCode" as "dbT1001HihokenshaDaicho_shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode" as "dbT1001HihokenshaDaicho_shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
+        "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD" as "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode" as "dbT1001HihokenshaDaicho_hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+        "DbT1001HihokenshaDaicho"."shikakuHenkoJiyuCode" as "dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
+        "DbT1001HihokenshaDaicho"."shikakuHenkoYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoYMD",
+        "DbT1001HihokenshaDaicho"."shikakuHenkoTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
+        "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+        "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
+        "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
+        "DbT1001HihokenshaDaicho"."jushochitokureiKaijoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+        "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD",
+        "DbT1001HihokenshaDaicho"."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
+        "DbT1001HihokenshaDaicho"."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
+        "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
+        "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+        "DbT1001HihokenshaDaicho"."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
+        "DbT1001HihokenshaDaicho"."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag"
     </sql>
 
 
@@ -749,9 +761,9 @@
         <result property="kyuShichosonCode" column="dbT1001HihokenshaDaicho_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="logicalDeletedFlag" column="dbT1001HihokenshaDaicho_logicalDeletedFlag" />
     </resultMap>
-    
-    
-     <sql id="allColumns_DbT7037ShoKofuKaishu">
+
+
+    <sql id="allColumns_DbT7037ShoKofuKaishu">
         "DbT7037ShoKofuKaishu"."hihokenshaNo" as "dbT7037ShoKofuKaishu_hihokenshaNo",
         "DbT7037ShoKofuKaishu"."kofuShoShurui" as "dbT7037ShoKofuKaishu_kofuShoShurui",
         "DbT7037ShoKofuKaishu"."rirekiNo" as "dbT7037ShoKofuKaishu_rirekiNo",
@@ -778,7 +790,7 @@
         "DbT7037ShoKofuKaishu"."shoYoshikiKubunCode" as "dbT7037ShoKofuKaishu_shoYoshikiKubunCode",
         "DbT7037ShoKofuKaishu"."logicalDeletedFlag" as "dbT7037ShoKofuKaishu_logicalDeletedFlag"
     </sql>
-    
+
     <resultMap id="NewResultMap_DbT7037ShoKofuKaishuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity" autoMapping="true">
         <id property="hihokenshaNo" column="dbT7037ShoKofuKaishu_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="kofuShoShurui" column="dbT7037ShoKofuKaishu_kofuShoShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -806,8 +818,8 @@
         <result property="shoYoshikiKubunCode" column="dbT7037ShoKofuKaishu_shoYoshikiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="logicalDeletedFlag" column="dbT7037ShoKofuKaishu_logicalDeletedFlag" />
     </resultMap>
-    
-    
+
+
     <sql id="allColumns_DbT7022ShoriDateKanri">
         "DbT7022ShoriDateKanri"."subGyomuCode" as "dbT7022ShoriDateKanri_subGyomuCode",
         "DbT7022ShoriDateKanri"."shichosonCode" as "dbT7022ShoriDateKanri_shichosonCode",
@@ -830,32 +842,32 @@
         "DbT7022ShoriDateKanri"."taishoKaishiTimestamp" as "dbT7022ShoriDateKanri_taishoKaishiTimestamp",
         "DbT7022ShoriDateKanri"."taishoShuryoTimestamp" as "dbT7022ShoriDateKanri_taishoShuryoTimestamp"
     </sql>
-    
-    
-    
-    
+
+
+
+
     <sql id="allColumns_DbT7067ChohyoSeigyoHanyo">
-         "DbT7067ChohyoSeigyoHanyo"."subGyomuCode" as "dbT7067ChohyoSeigyoHanyo_subGyomuCode",
-         "DbT7067ChohyoSeigyoHanyo"."chohyoBunruiID" as "dbT7067ChohyoSeigyoHanyo_chohyoBunruiID",
-         "DbT7067ChohyoSeigyoHanyo"."kanriNendo" as "dbT7067ChohyoSeigyoHanyo_kanriNendo",
-         "DbT7067ChohyoSeigyoHanyo"."komokuName" as "dbT7067ChohyoSeigyoHanyo_komokuName",
-         "DbT7067ChohyoSeigyoHanyo"."insertDantaiCd" as "dbT7067ChohyoSeigyoHanyo_insertDantaiCd",
-         "DbT7067ChohyoSeigyoHanyo"."insertTimestamp" as "dbT7067ChohyoSeigyoHanyo_insertTimestamp",
-         "DbT7067ChohyoSeigyoHanyo"."insertReamsLoginId" as "dbT7067ChohyoSeigyoHanyo_insertReamsLoginId",
-         "DbT7067ChohyoSeigyoHanyo"."insertContextId" as "dbT7067ChohyoSeigyoHanyo_insertContextId",
-         "DbT7067ChohyoSeigyoHanyo"."isDeleted" as "dbT7067ChohyoSeigyoHanyo_isDeleted",
-         "DbT7067ChohyoSeigyoHanyo"."updateCount" as "dbT7067ChohyoSeigyoHanyo_updateCount",
-         "DbT7067ChohyoSeigyoHanyo"."lastUpdateTimestamp" as "dbT7067ChohyoSeigyoHanyo_lastUpdateTimestamp",
-         "DbT7067ChohyoSeigyoHanyo"."lastUpdateReamsLoginId" as "dbT7067ChohyoSeigyoHanyo_lastUpdateReamsLoginId",
-         "DbT7067ChohyoSeigyoHanyo"."komokuValue" as "dbT7067ChohyoSeigyoHanyo_komokuValue",
-         "DbT7067ChohyoSeigyoHanyo"."komokuSetsumei" as "dbT7067ChohyoSeigyoHanyo_komokuSetsumei",
-         "DbT7067ChohyoSeigyoHanyo"."henkoKahi" as "dbT7067ChohyoSeigyoHanyo_henkoKahi",
-         "DbT7067ChohyoSeigyoHanyo"."codeMasterSubGyomuCode" as "dbT7067ChohyoSeigyoHanyo_codeMasterSubGyomuCode",
-         "DbT7067ChohyoSeigyoHanyo"."codeMasterCodeShubetsu" as "dbT7067ChohyoSeigyoHanyo_codeMasterCodeShubetsu"
+        "DbT7067ChohyoSeigyoHanyo"."subGyomuCode" as "dbT7067ChohyoSeigyoHanyo_subGyomuCode",
+        "DbT7067ChohyoSeigyoHanyo"."chohyoBunruiID" as "dbT7067ChohyoSeigyoHanyo_chohyoBunruiID",
+        "DbT7067ChohyoSeigyoHanyo"."kanriNendo" as "dbT7067ChohyoSeigyoHanyo_kanriNendo",
+        "DbT7067ChohyoSeigyoHanyo"."komokuName" as "dbT7067ChohyoSeigyoHanyo_komokuName",
+        "DbT7067ChohyoSeigyoHanyo"."insertDantaiCd" as "dbT7067ChohyoSeigyoHanyo_insertDantaiCd",
+        "DbT7067ChohyoSeigyoHanyo"."insertTimestamp" as "dbT7067ChohyoSeigyoHanyo_insertTimestamp",
+        "DbT7067ChohyoSeigyoHanyo"."insertReamsLoginId" as "dbT7067ChohyoSeigyoHanyo_insertReamsLoginId",
+        "DbT7067ChohyoSeigyoHanyo"."insertContextId" as "dbT7067ChohyoSeigyoHanyo_insertContextId",
+        "DbT7067ChohyoSeigyoHanyo"."isDeleted" as "dbT7067ChohyoSeigyoHanyo_isDeleted",
+        "DbT7067ChohyoSeigyoHanyo"."updateCount" as "dbT7067ChohyoSeigyoHanyo_updateCount",
+        "DbT7067ChohyoSeigyoHanyo"."lastUpdateTimestamp" as "dbT7067ChohyoSeigyoHanyo_lastUpdateTimestamp",
+        "DbT7067ChohyoSeigyoHanyo"."lastUpdateReamsLoginId" as "dbT7067ChohyoSeigyoHanyo_lastUpdateReamsLoginId",
+        "DbT7067ChohyoSeigyoHanyo"."komokuValue" as "dbT7067ChohyoSeigyoHanyo_komokuValue",
+        "DbT7067ChohyoSeigyoHanyo"."komokuSetsumei" as "dbT7067ChohyoSeigyoHanyo_komokuSetsumei",
+        "DbT7067ChohyoSeigyoHanyo"."henkoKahi" as "dbT7067ChohyoSeigyoHanyo_henkoKahi",
+        "DbT7067ChohyoSeigyoHanyo"."codeMasterSubGyomuCode" as "dbT7067ChohyoSeigyoHanyo_codeMasterSubGyomuCode",
+        "DbT7067ChohyoSeigyoHanyo"."codeMasterCodeShubetsu" as "dbT7067ChohyoSeigyoHanyo_codeMasterCodeShubetsu"
     </sql>
 
 
-    
+
     <resultMap id="NewResultMap_DbT7067ChohyoSeigyoHanyoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity" autoMapping="true">
         <id property="subGyomuCode" column="dbT7067ChohyoSeigyoHanyo_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <id property="chohyoBunruiID" column="dbT7067ChohyoSeigyoHanyo_chohyoBunruiID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
@@ -875,48 +887,48 @@
         <result property="codeMasterSubGyomuCode" column="dbT7067ChohyoSeigyoHanyo_codeMasterSubGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <result property="codeMasterCodeShubetsu" column="dbT7067ChohyoSeigyoHanyo_codeMasterCodeShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeShubetsuTypeHandler"/>
     </resultMap>
-    
-    
+
+
     <sql id="allColumns_DbT7065ChohyoSeigyoKyotsu">
-         "DbT7065ChohyoSeigyoKyotsu"."subGyomuCode" as "dbT7065ChohyoSeigyoKyotsu_subGyomuCode",
-         "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiID" as "dbT7065ChohyoSeigyoKyotsu_chohyoBunruiID",
-         "DbT7065ChohyoSeigyoKyotsu"."insertDantaiCd" as "dbT7065ChohyoSeigyoKyotsu_insertDantaiCd",
-         "DbT7065ChohyoSeigyoKyotsu"."insertTimestamp" as "dbT7065ChohyoSeigyoKyotsu_insertTimestamp",
-         "DbT7065ChohyoSeigyoKyotsu"."insertReamsLoginId" as "dbT7065ChohyoSeigyoKyotsu_insertReamsLoginId",
-         "DbT7065ChohyoSeigyoKyotsu"."insertContextId" as "dbT7065ChohyoSeigyoKyotsu_insertContextId",
-         "DbT7065ChohyoSeigyoKyotsu"."isDeleted" as "dbT7065ChohyoSeigyoKyotsu_isDeleted",
-         "DbT7065ChohyoSeigyoKyotsu"."updateCount" as "dbT7065ChohyoSeigyoKyotsu_updateCount",
-         "DbT7065ChohyoSeigyoKyotsu"."lastUpdateTimestamp" as "dbT7065ChohyoSeigyoKyotsu_lastUpdateTimestamp",
-         "DbT7065ChohyoSeigyoKyotsu"."lastUpdateReamsLoginId" as "dbT7065ChohyoSeigyoKyotsu_lastUpdateReamsLoginId",
-         "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiMeisho" as "dbT7065ChohyoSeigyoKyotsu_chohyoBunruiMeisho",
-         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuKubun" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuKubun",
-         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuTodoufukenMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuTodoufukenMeiHyojiUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuGunMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuGunMeiHyojiUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuShichosonMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuShichosonMeiHyojiUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuChoikiHenshuHoho" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuChoikiHenshuHoho",
-         "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuKatagakiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuKatagakiHyojiUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."setainushiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_setainushiHyojiUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."dainoninHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_dainoninHyojiUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."customerBarCodeShiyoUmu" as "dbT7065ChohyoSeigyoKyotsu_customerBarCodeShiyoUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."customerBarCodeHenkanErrHenshuHoho" as "dbT7065ChohyoSeigyoKyotsu_customerBarCodeHenkanErrHenshuHoho",
-         "DbT7065ChohyoSeigyoKyotsu"."gaibuChohyoMojigireSeigyo" as "dbT7065ChohyoSeigyoKyotsu_gaibuChohyoMojigireSeigyo",
-         "DbT7065ChohyoSeigyoKyotsu"."naibuChohyoMojigireSeigyo" as "dbT7065ChohyoSeigyoKyotsu_naibuChohyoMojigireSeigyo",
-         "DbT7065ChohyoSeigyoKyotsu"."mojigireBunriSeigyo" as "dbT7065ChohyoSeigyoKyotsu_mojigireBunriSeigyo",
-         "DbT7065ChohyoSeigyoKyotsu"."teikeibunMojiSize" as "dbT7065ChohyoSeigyoKyotsu_teikeibunMojiSize",
-         "DbT7065ChohyoSeigyoKyotsu"."kozaMaskUmu" as "dbT7065ChohyoSeigyoKyotsu_kozaMaskUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."kozaMeigininKanaYusenKubun" as "dbT7065ChohyoSeigyoKyotsu_kozaMeigininKanaYusenKubun",
-         "DbT7065ChohyoSeigyoKyotsu"."daikoPrintUmu" as "dbT7065ChohyoSeigyoKyotsu_daikoPrintUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."denshiKoinInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_denshiKoinInjiUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."shuchoMeiInjiIchi" as "dbT7065ChohyoSeigyoKyotsu_shuchoMeiInjiIchi",
-         "DbT7065ChohyoSeigyoKyotsu"."koinShoryakuInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_koinShoryakuInjiUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."koinMojiretsuInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_koinMojiretsuInjiUmu",
-         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji1" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji1",
-         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji2" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji2",
-         "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji3" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji3"
+        "DbT7065ChohyoSeigyoKyotsu"."subGyomuCode" as "dbT7065ChohyoSeigyoKyotsu_subGyomuCode",
+        "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiID" as "dbT7065ChohyoSeigyoKyotsu_chohyoBunruiID",
+        "DbT7065ChohyoSeigyoKyotsu"."insertDantaiCd" as "dbT7065ChohyoSeigyoKyotsu_insertDantaiCd",
+        "DbT7065ChohyoSeigyoKyotsu"."insertTimestamp" as "dbT7065ChohyoSeigyoKyotsu_insertTimestamp",
+        "DbT7065ChohyoSeigyoKyotsu"."insertReamsLoginId" as "dbT7065ChohyoSeigyoKyotsu_insertReamsLoginId",
+        "DbT7065ChohyoSeigyoKyotsu"."insertContextId" as "dbT7065ChohyoSeigyoKyotsu_insertContextId",
+        "DbT7065ChohyoSeigyoKyotsu"."isDeleted" as "dbT7065ChohyoSeigyoKyotsu_isDeleted",
+        "DbT7065ChohyoSeigyoKyotsu"."updateCount" as "dbT7065ChohyoSeigyoKyotsu_updateCount",
+        "DbT7065ChohyoSeigyoKyotsu"."lastUpdateTimestamp" as "dbT7065ChohyoSeigyoKyotsu_lastUpdateTimestamp",
+        "DbT7065ChohyoSeigyoKyotsu"."lastUpdateReamsLoginId" as "dbT7065ChohyoSeigyoKyotsu_lastUpdateReamsLoginId",
+        "DbT7065ChohyoSeigyoKyotsu"."chohyoBunruiMeisho" as "dbT7065ChohyoSeigyoKyotsu_chohyoBunruiMeisho",
+        "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuKubun" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuKubun",
+        "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuTodoufukenMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuTodoufukenMeiHyojiUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuGunMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuGunMeiHyojiUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuShichosonMeiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuShichosonMeiHyojiUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuChoikiHenshuHoho" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuChoikiHenshuHoho",
+        "DbT7065ChohyoSeigyoKyotsu"."jushoHenshuKatagakiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_jushoHenshuKatagakiHyojiUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."setainushiHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_setainushiHyojiUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."dainoninHyojiUmu" as "dbT7065ChohyoSeigyoKyotsu_dainoninHyojiUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."customerBarCodeShiyoUmu" as "dbT7065ChohyoSeigyoKyotsu_customerBarCodeShiyoUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."customerBarCodeHenkanErrHenshuHoho" as "dbT7065ChohyoSeigyoKyotsu_customerBarCodeHenkanErrHenshuHoho",
+        "DbT7065ChohyoSeigyoKyotsu"."gaibuChohyoMojigireSeigyo" as "dbT7065ChohyoSeigyoKyotsu_gaibuChohyoMojigireSeigyo",
+        "DbT7065ChohyoSeigyoKyotsu"."naibuChohyoMojigireSeigyo" as "dbT7065ChohyoSeigyoKyotsu_naibuChohyoMojigireSeigyo",
+        "DbT7065ChohyoSeigyoKyotsu"."mojigireBunriSeigyo" as "dbT7065ChohyoSeigyoKyotsu_mojigireBunriSeigyo",
+        "DbT7065ChohyoSeigyoKyotsu"."teikeibunMojiSize" as "dbT7065ChohyoSeigyoKyotsu_teikeibunMojiSize",
+        "DbT7065ChohyoSeigyoKyotsu"."kozaMaskUmu" as "dbT7065ChohyoSeigyoKyotsu_kozaMaskUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."kozaMeigininKanaYusenKubun" as "dbT7065ChohyoSeigyoKyotsu_kozaMeigininKanaYusenKubun",
+        "DbT7065ChohyoSeigyoKyotsu"."daikoPrintUmu" as "dbT7065ChohyoSeigyoKyotsu_daikoPrintUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."denshiKoinInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_denshiKoinInjiUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."shuchoMeiInjiIchi" as "dbT7065ChohyoSeigyoKyotsu_shuchoMeiInjiIchi",
+        "DbT7065ChohyoSeigyoKyotsu"."koinShoryakuInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_koinShoryakuInjiUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."koinMojiretsuInjiUmu" as "dbT7065ChohyoSeigyoKyotsu_koinMojiretsuInjiUmu",
+        "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji1" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji1",
+        "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji2" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji2",
+        "DbT7065ChohyoSeigyoKyotsu"."chikuHyoji3" as "dbT7065ChohyoSeigyoKyotsu_chikuHyoji3"
     </sql>
-    
-    
-     <resultMap id="NewResultMap_DbT7065ChohyoSeigyoKyotsuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity" autoMapping="true">
+
+
+    <resultMap id="NewResultMap_DbT7065ChohyoSeigyoKyotsuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity" autoMapping="true">
         <id property="subGyomuCode" column="dbT7065ChohyoSeigyoKyotsu_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <id property="chohyoBunruiID" column="dbT7065ChohyoSeigyoKyotsu_chohyoBunruiID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7065ChohyoSeigyoKyotsu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

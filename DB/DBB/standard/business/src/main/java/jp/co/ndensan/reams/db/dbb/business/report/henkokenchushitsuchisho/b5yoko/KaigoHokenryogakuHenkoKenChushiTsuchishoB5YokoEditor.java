@@ -91,7 +91,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
             reportSource.hyojicodeName3 = 表示コード.get表示コード名３();
         }
         reportSource.kongoNofuSubekiGaku = DecimalFormatter
-                .toコンマ区切りRString(nullToZero(編集後本算定通知書共通情報.get今後納付すべき額()), 0);
+                .toコンマ区切りRString(nullToZero(編集後本算定通知書共通情報.get今後納付すべき額_収入元に()), 0);
         reportSource.korekaraChoshuho = 更正後.get徴収方法();
         reportSource.korekaraTokuchoGimusha = 更正後.get特別徴収義務者();
         reportSource.korekaraTokuchoTaishoNenkin = 更正後.get特別徴収対象年金();

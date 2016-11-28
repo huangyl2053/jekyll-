@@ -75,8 +75,8 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
     private static final RString 文字列_連結符 = new RString("_");
     private static final RString 文字列_ハイフン = new RString("-");
     private static final RString 文字列_拡張子 = new RString(".xml");
-    private static final RString 文字列_中括弧 = new RString("]]");
-    private static final RString 文字列_CDATA = new RString("<![CDATA[");
+    private static final RString 文字列_CDATA後 = new RString("]]>");
+    private static final RString 文字列_CDATA前 = new RString("<![CDATA[");
     private static final RString 文字列_VERSION = new RString(" Version=");
     private static final RString 文字列_ENCODING = new RString("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
     private static final RString 文字列_TRUE = new RString("true");
@@ -143,7 +143,7 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
                         processParameter.get版番号(), processParameter.get基準日());
         mybatisParameter = TokuteiKojinJohoHensyuMybatisParamater.createParamter中間DB提供基本情報取得_標準(
                 転義符.concat(processParameter.get中間DBテーブル名()).concat(転義符), processParameter.get特定個人情報名コード());
-        副本データ = 文字列_CDATA.concat(文字列_ENCODING);
+        副本データ = 文字列_CDATA前.concat(文字列_ENCODING);
     }
 
     @Override
@@ -200,8 +200,8 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
                         項目版管理List.get(i).get特定個人情報項目コード()).concat(文字列_大なり);
             }
         }
-        if (!副本データ.contains(文字列_中括弧)) {
-            副本データ = 副本データ.concat(文字列_中括弧);
+        if (!副本データ.contains(文字列_CDATA後)) {
+            副本データ = 副本データ.concat(文字列_CDATA後);
         }
         setDBM20113AttachToBsEntityList(t);
         if (添付データ件数 != 0) {
@@ -269,10 +269,10 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
 
     private void get副本データ(RString 提供内容, RString 特定個人情報項目区分, RString 特定個人情報項目コード) {
         if (TokuteiKojinJohoKomokuKubun.日付項目.getコード().equals(特定個人情報項目区分)) {
-            副本データ.concat(文字列_大なり).concat(getデータ作成日(new RDate(提供内容.toString()))).concat(文字列_小なり).
+            副本データ = 副本データ.concat(文字列_大なり).concat(getデータ作成日(new RDate(提供内容.toString()))).concat(文字列_小なり).
                     concat(文字列_スラッシュ).concat(特定個人情報項目コード).concat(文字列_大なり);
         } else {
-            副本データ.concat(文字列_大なり).concat(提供内容).concat(文字列_小なり).
+            副本データ = 副本データ.concat(文字列_大なり).concat(提供内容).concat(文字列_小なり).
                     concat(文字列_スラッシュ).concat(特定個人情報項目コード).concat(文字列_大なり);
         }
     }
@@ -283,30 +283,39 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
         entity.set提供内容(t.getTeikyoNaiyo01());
         entity.set未設定事由(t.getMisetteiJiyu01());
         提供内容.add(entity);
+        entity = new TeyikyouNaiyouRelateEntity();
         entity.set提供内容(t.getTeikyoNaiyo02());
         entity.set未設定事由(t.getMisetteiJiyu02());
         提供内容.add(entity);
+        entity = new TeyikyouNaiyouRelateEntity();
         entity.set提供内容(t.getTeikyoNaiyo03());
         entity.set未設定事由(t.getMisetteiJiyu03());
         提供内容.add(entity);
+        entity = new TeyikyouNaiyouRelateEntity();
         entity.set提供内容(t.getTeikyoNaiyo04());
         entity.set未設定事由(t.getMisetteiJiyu04());
         提供内容.add(entity);
+        entity = new TeyikyouNaiyouRelateEntity();
         entity.set提供内容(t.getTeikyoNaiyo05());
         entity.set未設定事由(t.getMisetteiJiyu05());
         提供内容.add(entity);
+        entity = new TeyikyouNaiyouRelateEntity();
         entity.set提供内容(t.getTeikyoNaiyo06());
         entity.set未設定事由(t.getMisetteiJiyu06());
         提供内容.add(entity);
+        entity = new TeyikyouNaiyouRelateEntity();
         entity.set提供内容(t.getTeikyoNaiyo07());
         entity.set未設定事由(t.getMisetteiJiyu07());
         提供内容.add(entity);
+        entity = new TeyikyouNaiyouRelateEntity();
         entity.set提供内容(t.getTeikyoNaiyo08());
         entity.set未設定事由(t.getMisetteiJiyu08());
         提供内容.add(entity);
+        entity = new TeyikyouNaiyouRelateEntity();
         entity.set提供内容(t.getTeikyoNaiyo09());
         entity.set未設定事由(t.getMisetteiJiyu09());
         提供内容.add(entity);
+        entity = new TeyikyouNaiyouRelateEntity();
         entity.set提供内容(t.getTeikyoNaiyo10());
         entity.set未設定事由(t.getMisetteiJiyu10());
         提供内容.add(entity);

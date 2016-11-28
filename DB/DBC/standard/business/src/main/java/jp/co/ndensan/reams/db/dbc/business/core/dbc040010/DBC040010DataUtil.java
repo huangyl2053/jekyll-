@@ -33,10 +33,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.RiyoshaFutangakuEnt
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
@@ -84,7 +84,6 @@ public class DBC040010DataUtil {
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_8 = 8;
-    private static final int NUM_12 = 12;
 
     private static final int NUM_70 = 70;
     private static final int NUM_75 = 75;
@@ -713,8 +712,7 @@ public class DBC040010DataUtil {
         FlexibleDate age = ageCalculator.get年齢到達日(NUM_70);
         RDate 前到達70翌月 = getRealDate(age);
         if (前到達70翌月 != null) {
-            前到達70翌月.plusMonth(NUM_1);
-            return new FlexibleDate(前到達70翌月.toDateString()).getYearMonth();
+            return new FlexibleDate(前到達70翌月.plusMonth(NUM_1).toDateString()).getYearMonth();
         }
 
         return null;

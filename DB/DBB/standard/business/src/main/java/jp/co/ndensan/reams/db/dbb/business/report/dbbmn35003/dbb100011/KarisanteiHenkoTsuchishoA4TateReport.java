@@ -171,9 +171,17 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
             item.setNofuzumiGaku(nofuzumiGaku);
         }
 
-        if (編集後仮算定通知書共通情報.get今後納付すべき額() != null) {
-            RString kongoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get今後納付すべき額(), 0);
+        if (編集後仮算定通知書共通情報.get今後納付すべき額_収入元に() != null) {
+            RString kongoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get今後納付すべき額_収入元に(), 0);
             item.setKongoNofuSubekiGaku(kongoNofuSubekiGaku);
+        }
+        if (編集後仮算定通知書共通情報.get今後納付すべき額_調定元に() != null) {
+            RString kongoNofuSubakiGakuChotei = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get今後納付すべき額_調定元に(), 0);
+            item.setKongoNofuSubakiGakuChotei(kongoNofuSubakiGakuChotei);
+        }
+        if (編集後仮算定通知書共通情報.get既に納付すべき額() != null) {
+            RString nofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get既に納付すべき額(), 0);
+            item.setNofuSubekiGaku(nofuSubekiGaku);
         }
 
         item.setKorekaraChoshuho(更正後.get更正後徴収方法());

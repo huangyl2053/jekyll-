@@ -151,9 +151,11 @@ public class InsetDbT2001ChoshuHohoProcess extends BatchProcessBase<DbV2001Chosh
 
     private void 徴収方法の編集_資格なし(DbV2001ChoshuHohoEntity entity,
             DbT2001ChoshuHohoEntity newEntity) {
-        if ((RString.isNullOrEmpty(entity.getChoshuHoho3gatsu())
-                || ChoshuHoho.資格なし.getコード().equals(entity.getChoshuHoho3gatsu()))
-                && null != entity.getTokuchoTeishiNichiji() && (!entity.getTokuchoTeishiNichiji().isEmpty())) {
+        RString choshuHoho3gatsu = entity.getChoshuHoho3gatsu();
+        YMDHMS tokuchoTeishiNichiji = entity.getTokuchoTeishiNichiji();
+        if ((RString.isNullOrEmpty(choshuHoho3gatsu)
+                || ChoshuHoho.資格なし.getコード().equals(choshuHoho3gatsu))
+                && null != tokuchoTeishiNichiji && (!tokuchoTeishiNichiji.isEmpty())) {
             newEntity.setChoshuHoho4gatsu(ChoshuHoho.資格なし.getコード());
             newEntity.setChoshuHoho5gatsu(ChoshuHoho.資格なし.getコード());
             newEntity.setChoshuHoho6gatsu(ChoshuHoho.資格なし.getコード());

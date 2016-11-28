@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Nov 21 19:48:05 CST 2016 
+ * Mon Nov 28 12:22:27 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
@@ -23,7 +24,7 @@ public class dgSetaiIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
 
     private TextBox txtShikibetsuCode;
-    private TextBox txtShimei;
+    private RString txtShimei;
     private TextBoxDate txtUmareYND;
     private TextBox txtSeibetsu;
     private TextBox txtJuminShu;
@@ -34,7 +35,7 @@ public class dgSetaiIchiran_Row extends DataRow {
     public dgSetaiIchiran_Row() {
         super();
         this.txtShikibetsuCode = new TextBox();
-        this.txtShimei = new TextBox();
+        this.txtShimei = RString.EMPTY;
         this.txtUmareYND = new TextBoxDate();
         this.txtSeibetsu = new TextBox();
         this.txtJuminShu = new TextBox();
@@ -51,7 +52,7 @@ public class dgSetaiIchiran_Row extends DataRow {
         this.setOriginalData("txtJusho", txtJusho);
     }
 
-    public dgSetaiIchiran_Row(TextBox txtShikibetsuCode, TextBox txtShimei, TextBoxDate txtUmareYND, TextBox txtSeibetsu, TextBox txtJuminShu, TextBox txtZokugara, TextBox txtSetaiCode, TextBox txtJusho) {
+    public dgSetaiIchiran_Row(TextBox txtShikibetsuCode, RString txtShimei, TextBoxDate txtUmareYND, TextBox txtSeibetsu, TextBox txtJuminShu, TextBox txtZokugara, TextBox txtSetaiCode, TextBox txtJusho) {
         super();
         this.setOriginalData("txtShikibetsuCode", txtShikibetsuCode);
         this.setOriginalData("txtShimei", txtShimei);
@@ -75,7 +76,7 @@ public class dgSetaiIchiran_Row extends DataRow {
         return txtShikibetsuCode;
     }
 
-    public TextBox getTxtShimei() {
+    public RString getTxtShimei() {
         return txtShimei;
     }
 
@@ -108,7 +109,7 @@ public class dgSetaiIchiran_Row extends DataRow {
         this.txtShikibetsuCode = txtShikibetsuCode;
     }
 
-    public void setTxtShimei(TextBox txtShimei) {
+    public void setTxtShimei(RString txtShimei) {
         this.setOriginalData("txtShimei", txtShimei);
         this.txtShimei = txtShimei;
     }

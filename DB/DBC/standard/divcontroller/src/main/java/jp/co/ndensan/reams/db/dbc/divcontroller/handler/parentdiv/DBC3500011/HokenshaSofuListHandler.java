@@ -100,6 +100,7 @@ public class HokenshaSofuListHandler {
     private static final RString データ種別178 = new RString("178");
     private static final RString データ種別386 = new RString("386");
     private static final RString データ種別38B = new RString("38B");
+    private static final RString データ種別38G = new RString("38G");
     private static final RString データ種別38H = new RString("38H");
     private static final RString データ種別38J = new RString("38J");
     private static final RString データ種別38P = new RString("38P");
@@ -199,6 +200,9 @@ public class HokenshaSofuListHandler {
                 .hasHeader(false).setNewLine(NewLine.CRLF).build()) {
             List<RString> コントロールレコード = csvReader.readLine();
             RString データ種別 = コントロールレコード.get(四);
+            if (データ種別38G.equals(データ種別)) {
+                データ種別 = データ種別38B;
+            }
             ConfigKeysKokuhorenTorikomi 国保連取込情報名称 = ConfigKeysKokuhorenTorikomi.toValue(データ種別);
             hokenshaSofuListEntity = new HokenshaSofuResult();
             if (!コントロールレコード.isEmpty()) {

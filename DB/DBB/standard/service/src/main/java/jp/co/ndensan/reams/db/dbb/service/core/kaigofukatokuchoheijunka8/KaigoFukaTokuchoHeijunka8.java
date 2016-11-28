@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHeijunkaKeisanH
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendo.HonsanteiIdoKanendoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendo.IHonsanteiIdoKanendoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -92,13 +92,15 @@ public class KaigoFukaTokuchoHeijunka8 {
      */
     public List<ShoriDateKanriEntityResult> getShoriJohkyoList(FlexibleYear 調定年度) {
         List<ShoriDateKanriEntityResult> shoriList = new ArrayList<>();
-        DbT7022ShoriDateKanriEntity 当初所得引出 = dbT7022ShoriDateKanriDac.select処理日付管理マスタ_当初所得引出(調定年度);
+        DbT7022ShoriDateKanriEntity 当初所得引出 = dbT7022ShoriDateKanriDac.select処理日付管理マスタ_当初所得引出(調定年度, ShoriName.当初所得引出.get名称());
         if (当初所得引出 != null) {
             ShoriDateKanriEntityResult result = new ShoriDateKanriEntityResult();
             result.setEntity(当初所得引出);
             shoriList.add(result);
         }
-        List<DbT7022ShoriDateKanriEntity> 当初所得引出以外 = dbT7022ShoriDateKanriDac.select処理日付管理マスタ_当初所得引出以外(調定年度);
+        List<DbT7022ShoriDateKanriEntity> 当初所得引出以外 = dbT7022ShoriDateKanriDac
+                .select処理日付管理マスタ_当初所得引出以外(調定年度, ShoriName.依頼金額計算.get名称(),
+                        ShoriName.特徴異動情報作成.get名称(), ShoriName.本算定賦課.get名称());
         if (当初所得引出以外 != null) {
             for (DbT7022ShoriDateKanriEntity entity : 当初所得引出以外) {
                 ShoriDateKanriEntityResult result = new ShoriDateKanriEntityResult();

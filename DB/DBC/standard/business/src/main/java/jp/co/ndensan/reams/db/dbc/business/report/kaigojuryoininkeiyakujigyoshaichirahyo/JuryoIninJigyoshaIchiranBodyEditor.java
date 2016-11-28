@@ -31,7 +31,6 @@ public class JuryoIninJigyoshaIchiranBodyEditor implements IJuryoIninJigyoshaIch
      *
      * @param 帳票出力対象データ KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity
      */
-
     public JuryoIninJigyoshaIchiranBodyEditor(
             KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity 帳票出力対象データ) {
         this.帳票出力対象データ = 帳票出力対象データ;
@@ -72,6 +71,7 @@ public class JuryoIninJigyoshaIchiranBodyEditor implements IJuryoIninJigyoshaIch
         if (帳票出力対象データ.get振込先名義人名() != null) {
             source.listLower_5 = 帳票出力対象データ.get振込先名義人名().getColumnValue();
         }
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -81,5 +81,20 @@ public class JuryoIninJigyoshaIchiranBodyEditor implements IJuryoIninJigyoshaIch
         }
         return 年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
+    private void setPageBreakEmpty(JuryoIninJigyoshaIchiranSource source) {
+        if (source.listUpper_1 == null) {
+            source.listUpper_1 = RString.EMPTY;
+        }
+        if (source.listUpper_3 == null) {
+            source.listUpper_3 = RString.EMPTY;
+        }
+        if (source.listUpper_5 == null) {
+            source.listUpper_5 = RString.EMPTY;
+        }
+        if (source.listLower_3 == null) {
+            source.listLower_3 = RString.EMPTY;
+        }
     }
 }

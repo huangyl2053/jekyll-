@@ -203,7 +203,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             FukaKonkyo 賦課根拠 = new FukaKonkyo();
             賦課根拠.setFukakijunYMD(賦課年度開始日);
             if (entity.get介護賦課前年度().getSeihoKaishiYMD() != null
-                    && (entity.get介護賦課前年度().getSeihoHaishiYMD() == null
+                    && (entity.get介護賦課前年度().getSeihoHaishiYMD() == null || entity.get介護賦課前年度().getSeihoHaishiYMD().isEmpty()
                     || 賦課年度開始日.isBeforeOrEquals(entity.get介護賦課前年度().getSeihoHaishiYMD()))) {
                 賦課根拠.setSeihoStartYMD(賦課年度開始日);
             } else {
@@ -211,7 +211,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             }
             賦課根拠.setSeihoEndYMD(FlexibleDate.EMPTY);
             if (entity.get介護賦課前年度().getRonenKaishiYMD() != null
-                    && (entity.get介護賦課前年度().getRonenHaishiYMD() == null
+                    && (entity.get介護賦課前年度().getRonenHaishiYMD() == null || entity.get介護賦課前年度().getRonenHaishiYMD().isEmpty()
                     || 賦課年度開始日.isBeforeOrEquals(entity.get介護賦課前年度().getRonenHaishiYMD()))) {
                 賦課根拠.setRoreiNenkinStartYMD(賦課年度開始日);
             } else {

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.JigyoKubun;
@@ -217,6 +217,9 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
         entity.setRirekiNo(0L);
         entity.setShunoId(収納ID);
         entity.setKaikeiNendo(new RYear(賦課情報.getChoteiNendo().toString()));
+        entity.setShoriNendo(RDate.getNowDate().getYear());
+        entity.setShoriNo(0);
+        entity.setKoseiKaisu(0);
         if (0 == 賦課情報.getRirekiNo()) {
             entity.setChoteiJiyuCode(当初処理);
         } else if (0 < 賦課情報.getRirekiNo()) {
@@ -229,6 +232,7 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
         entity.setChoteigaku(調定額);
         entity.setShohizei(Decimal.ZERO);
         entity.setNokigenYMD(納期限);
+        entity.setHoteiNokigenToYMD(RDate.getNowDate());
         entity.setFukaShoriJokyo(false);
         return entity;
     }

@@ -11,6 +11,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishohihokenshabun.ShokanKetteiTsuchiShoHihokenshabunItem;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraiskkttcsrysmuke.ShokanBaraiSkKtTcsRysmukeParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -196,7 +198,21 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(shoShiharai.get宛先情報(), 地方公共団体, 帳票制御共通情報);
             SofubutsuAtesakiSource 送付物宛先ソースデータ = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
             setSofubutsuAtesaki(item, 送付物宛先ソースデータ);
-            retList.add(item);
+            
+            boolean 金融機関未登録フラグ = false;
+            if (ShiharaiHohoKubun.口座払.getコード().equals(shoShiharai.get支払方法区分コード())
+                    && (null == shoShiharai.get金融機関コード() || shoShiharai.get金融機関コード().isEmpty())) {
+                金融機関未登録フラグ = true;
+            }
+            if (!RString.isNullOrEmpty(shoShiharai.get支給不支給決定区分())
+                    && ShikyuFushikyuKubun.支給.getコード().equals(shoShiharai.get支給不支給決定区分())
+                    && ShikakuKubun._２号.getコード().equals(shoShiharai.get被保険者区分コード())) {
+                金融機関未登録フラグ = false;
+            }
+            if (!金融機関未登録フラグ) {
+                retList.add(item);
+            }
+            
         }
         return retList;
     }

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190010.DBC190010_kijuns
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ChushutsuKikan;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.Insho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000074.TsuuchishoHakkoDiv;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;

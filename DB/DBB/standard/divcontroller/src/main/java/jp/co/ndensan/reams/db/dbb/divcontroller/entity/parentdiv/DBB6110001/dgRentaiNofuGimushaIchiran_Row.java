@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Nov 21 19:48:05 CST 2016 
+ * Mon Nov 28 13:35:40 CST 2016 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
@@ -26,7 +27,7 @@ public class dgRentaiNofuGimushaIchiran_Row extends DataRow {
     private TextBoxDate txtShuryoYMD;
     private TextBox txtShikibetsuCode;
     private TextBox txtSetaiCode;
-    private TextBox txtShimei;
+    private RString txtShimei;
     private TextBoxDate txtUmareYMD;
     private TextBox txtSeibetsu;
     private TextBox txtJuminShu;
@@ -40,7 +41,7 @@ public class dgRentaiNofuGimushaIchiran_Row extends DataRow {
         this.txtShuryoYMD = new TextBoxDate();
         this.txtShikibetsuCode = new TextBox();
         this.txtSetaiCode = new TextBox();
-        this.txtShimei = new TextBox();
+        this.txtShimei = RString.EMPTY;
         this.txtUmareYMD = new TextBoxDate();
         this.txtSeibetsu = new TextBox();
         this.txtJuminShu = new TextBox();
@@ -60,7 +61,7 @@ public class dgRentaiNofuGimushaIchiran_Row extends DataRow {
         this.setOriginalData("txtRirekiNo", txtRirekiNo);
     }
 
-    public dgRentaiNofuGimushaIchiran_Row(TextBoxDate txtKaishiYMD, TextBoxDate txtShuryoYMD, TextBox txtShikibetsuCode, TextBox txtSetaiCode, TextBox txtShimei, TextBoxDate txtUmareYMD, TextBox txtSeibetsu, TextBox txtJuminShu, TextBox txtZokugara, TextBox txtJusho, TextBox txtRirekiNo) {
+    public dgRentaiNofuGimushaIchiran_Row(TextBoxDate txtKaishiYMD, TextBoxDate txtShuryoYMD, TextBox txtShikibetsuCode, TextBox txtSetaiCode, RString txtShimei, TextBoxDate txtUmareYMD, TextBox txtSeibetsu, TextBox txtJuminShu, TextBox txtZokugara, TextBox txtJusho, TextBox txtRirekiNo) {
         super();
         this.setOriginalData("txtKaishiYMD", txtKaishiYMD);
         this.setOriginalData("txtShuryoYMD", txtShuryoYMD);
@@ -102,7 +103,7 @@ public class dgRentaiNofuGimushaIchiran_Row extends DataRow {
         return txtSetaiCode;
     }
 
-    public TextBox getTxtShimei() {
+    public RString getTxtShimei() {
         return txtShimei;
     }
 
@@ -150,7 +151,7 @@ public class dgRentaiNofuGimushaIchiran_Row extends DataRow {
         this.txtSetaiCode = txtSetaiCode;
     }
 
-    public void setTxtShimei(TextBox txtShimei) {
+    public void setTxtShimei(RString txtShimei) {
         this.setOriginalData("txtShimei", txtShimei);
         this.txtShimei = txtShimei;
     }

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120200.DBC120200_SaishinsaKetteiKohifutanshaInParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.saishinsaketteidbtoroku.SaishinsaKetteiDBTorokuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120190.DBC120191_SaishinsaKetteiDBTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaReadCsvFileProcessParameter;
@@ -53,7 +53,7 @@ public class DBC120200_SaishinsaKetteiKohifutanshaIn
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120200");
     private static final RString 帳票ID = new RString("DBC200049_SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBun");
-    private static final RString マスタ登録BATCHID = new RString("SaishinsaKetteiDBToroku");
+    private static final RString マスタ登録BATCHID = new RString("DBC120191_SaishinsaKetteiDBToroku");
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
 
@@ -136,7 +136,7 @@ public class DBC120200_SaishinsaKetteiKohifutanshaIn
      */
     @Step(マスタ登録)
     protected IBatchFlowCommand callDoMasterTorokuFlow() {
-        SaishinsaKetteiDBTorokuParameter parameter = new SaishinsaKetteiDBTorokuParameter();
+        DBC120191_SaishinsaKetteiDBTorokuParameter parameter = new DBC120191_SaishinsaKetteiDBTorokuParameter();
         parameter.set交換情報識別番号(交換情報識別番号);
         parameter.set再処理区分(getParameter().getSaishoriKubun());
         parameter.set処理年月(getParameter().getShoriYM());

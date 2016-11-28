@@ -476,6 +476,19 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * @param 年月日 日付
      * @return stringで表示する日付
      */
+    private static RString date_to_string(RString 年月日) {
+        if (null == 年月日) {
+            return RString.EMPTY;
+        }
+        if (FlexibleDate.canConvert(年月日)) {
+            if (new FlexibleDate(年月日).isWareki()) {
+                return new FlexibleDate(年月日).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                        .fillType(FillType.BLANK).toDateString();
+            }
+        }
+        return 年月日;
+    }
+
     private static RString date_to_string(FlexibleDate 年月日) {
         if (null == 年月日) {
             return RString.EMPTY;
@@ -490,11 +503,14 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * @param number 数値
      * @return カンマで編集した値
      */
-    private static RString decimal_to_string(Decimal number) {
+    private static RString decimal_to_string(RString number) {
         if (null == number) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toコンマ区切りRString(number, 0);
+        if (Decimal.canConvert(number)) {
+            return DecimalFormatter.toコンマ区切りRString(new Decimal(number.toString()), 0);
+        }
+        return number;
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {

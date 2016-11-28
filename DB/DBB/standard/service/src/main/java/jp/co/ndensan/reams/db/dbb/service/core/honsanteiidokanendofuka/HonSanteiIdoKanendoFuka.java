@@ -386,14 +386,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         List<DbT1001AndFukaJohoEntity> daichoEntityList = mapper.select被保険者台帳管理と賦課(param);
         List<HihokenshaDaicho> 資格の情報年度minus1 = new ArrayList<>();
         List<FukaJoho> 賦課の情報年度minus1 = new ArrayList<>();
-        for (DbT1001AndFukaJohoEntity entity : daichoEntityList) {
-            if (null != entity.get被保険者台帳管理()) {
-                資格の情報年度minus1.add(new HihokenshaDaicho(entity.get被保険者台帳管理()));
-            }
-            if (null != entity.get賦課Newest().get介護賦課Entity().getChoteiNendo()) {
-                add賦課の情報年度(賦課の情報年度minus1, new FukaJoho(entity.get賦課Newest()));
-            }
-        }
+        資格と賦課の処理(daichoEntityList, 資格の情報年度minus1, 賦課の情報年度minus1, param.get調定年度(), 0);
 
         mapper.createKanendoHonSanteiChushutsuTmp();
         mapper.createTsukibetsuRankuTmp();
@@ -404,16 +397,39 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         daichoEntityList = mapper.select被保険者台帳管理と賦課(param);
         List<HihokenshaDaicho> 資格の情報年度minus2 = new ArrayList<>();
         List<FukaJoho> 賦課の情報年度minus2 = new ArrayList<>();
-        for (DbT1001AndFukaJohoEntity entity : daichoEntityList) {
-            if (null != entity.get被保険者台帳管理()) {
-                資格の情報年度minus2.add(new HihokenshaDaicho(entity.get被保険者台帳管理()));
-            }
-            if (null != entity.get賦課Newest().get介護賦課Entity().getChoteiNendo()) {
-                add賦課の情報年度(賦課の情報年度minus2, new FukaJoho(entity.get賦課Newest()));
-            }
-        }
+        資格と賦課の処理(daichoEntityList, 資格の情報年度minus2, 賦課の情報年度minus2, param.get調定年度(), 1);
 
         dbの処理(資格の情報年度minus2, 賦課の情報年度minus2, param);
+    }
+
+    private void 資格と賦課の処理(List<DbT1001AndFukaJohoEntity> daichoList, List<HihokenshaDaicho> 資格の情報,
+            List<FukaJoho> 賦課の情報, FlexibleYear 調定年度, int number) {
+        FlexibleDate 資格取得日;
+        FlexibleDate 資格喪失日;
+        if (number == 0) {
+            資格取得日 = new FlexibleDate(調定年度.toDateString().concat(定値_0401));
+            資格喪失日 = new FlexibleDate(調定年度.minusYear(INT_1).toDateString().concat(定値_0331));
+        } else {
+            資格取得日 = new FlexibleDate(調定年度.minusYear(INT_1).toDateString().concat(定値_0401));
+            資格喪失日 = new FlexibleDate(調定年度.minusYear(INT_2).toDateString().concat(定値_0331));
+        }
+        FlexibleDate 第1号資格取得年月日;
+        FlexibleDate 資格喪失年月日;
+        for (DbT1001AndFukaJohoEntity entity : daichoList) {
+            if (null != entity.get被保険者台帳管理()) {
+                第1号資格取得年月日 = entity.get被保険者台帳管理().getIchigoShikakuShutokuYMD();
+                資格喪失年月日 = entity.get被保険者台帳管理().getShikakuSoshitsuYMD();
+                if ((第1号資格取得年月日 != null && 第1号資格取得年月日.isBefore(資格取得日))
+                        && (資格喪失年月日 == null
+                        || 資格喪失年月日.isEmpty()
+                        || 資格喪失日.isBefore(資格喪失年月日))) {
+                    資格の情報.add(new HihokenshaDaicho(entity.get被保険者台帳管理()));
+                }
+            }
+            if (null != entity.get賦課Newest().get介護賦課Entity().getChoteiNendo()) {
+                add賦課の情報年度(賦課の情報, new FukaJoho(entity.get賦課Newest()));
+            }
+        }
     }
 
     private void add賦課の情報年度(List<FukaJoho> 賦課の情報年度, FukaJoho 賦課) {
@@ -661,11 +677,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         NengakuSeigyoJoho 年額制御情報2 = get年額制御情報(調定年度.minusYear(INT_2));
         NengakuFukaKonkyoFactory nengakuFukaKonkyo = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
         mapper.createDbT2002FukaJohoTemp();
-        
+
         for (CalculateFukaEntity 賦課計算の情報 : 賦課計算) {
-            HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
-            HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
-            保険料段階パラメータ.setFukaNendo(賦課計算の情報.get賦課年度());
             List<SeikatsuHogoJukyusha> 生保の情報 = new ArrayList<>();
             for (SeikatsuHogoJukyushaRelateEntity entity : 賦課計算の情報.get生保の情報()) {
                 生保の情報.add(new SeikatsuHogoJukyusha(entity));
@@ -685,71 +698,57 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             fukaKonkyoBatchParameter.set老齢の情報のリスト(老齢の情報);
             fukaKonkyoBatchParameter.set世帯員所得情報List(賦課計算の情報.get世帯員所得情報());
             FukaKonkyo 賦課根拠 = factory.create(fukaKonkyoBatchParameter);
-            保険料段階パラメータ.setFukaKonkyo(賦課根拠);
-            保険料段階List = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(賦課計算の情報.get賦課年度());
-            月別保険料制御情報 = get月別保険料制御情報(保険料段階List);
-            保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
-            TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
-
+            TsukibetsuHokenryoDankai 月別保険料段階 = new TsukibetsuHokenryoDankai();
+            FlexibleDate 資格喪失日 = 賦課計算の情報.get資格の情報().getShikakuSoshitsuYMD();
+            if (資格喪失日 != null && !資格喪失日.isEmpty() && 賦課計算の情報.get賦課期日().isBefore(資格喪失日)) {
+                HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
+                HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
+                保険料段階パラメータ.setFukaNendo(賦課計算の情報.get賦課年度());
+                保険料段階パラメータ.setFukaKonkyo(賦課根拠);
+                保険料段階List = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(賦課計算の情報.get賦課年度());
+                月別保険料制御情報 = get月別保険料制御情報(保険料段階List);
+                保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
+                月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
+            }
             if (月別保険料段階 == null) {
-                for (SetaiShotokuEntity setaiShotokuEntity : 賦課計算の情報.get世帯員所得情報()) {
-                    if (HonninKubun.世帯構成員.getCode().equals(setaiShotokuEntity.getHonninKubun())) {
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("世帯：")
-                                .concat(setaiShotokuEntity.getSetaiCode() == null
-                                        ? new RString("null") : setaiShotokuEntity.getSetaiCode().getColumnValue()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("識別コード：")
-                                .concat(setaiShotokuEntity.getShikibetsuCode() == null
-                                        ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("課税区分：")
-                                .concat(setaiShotokuEntity.getKazeiKubun()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：")
-                                .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
-                                        ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：")
-                                .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
-                                        ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
-                    } else {
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人識別コード：")
-                                .concat(setaiShotokuEntity.getShikibetsuCode() == null
-                                        ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
-                        new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人課税区分：")
-                                .concat(setaiShotokuEntity.getKazeiKubun()));
-                    }
-                    new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));
+                月別保険料段階NULL処理(賦課計算の情報.get世帯員所得情報());
+            }
+            NengakuHokenryo 年額保険料 = new NengakuHokenryo();
+            Decimal 年額保険料Tmp = Decimal.ZERO;
+            if (資格喪失日 != null && !資格喪失日.isEmpty() && 賦課計算の情報.get賦課期日().isBefore(資格喪失日)) {
+                NengakuHokenryoKeisanParameter 年額保険料パラメータ = new NengakuHokenryoKeisanParameter();
+                年額保険料パラメータ.set賦課年度(賦課計算の情報.get賦課年度());
+                TsukibetsuRankuTmpEntity 月別ランク = 賦課計算の情報.get月別ランク();
+                NengakuFukaKonkyo 年額賦課根拠;
+                if (月別ランク == null) {
+                    年額賦課根拠 = nengakuFukaKonkyo.createNengakuFukaKonkyo(
+                            賦課計算の情報.get賦課期日(),
+                            賦課計算の情報.get資格の情報().getIchigoShikakuShutokuYMD(),
+                            賦課計算の情報.get資格の情報().getShikakuSoshitsuYMD(),
+                            月別保険料段階,
+                            null, null, null, null, null, null, null, null, null, null, null, null);
+                } else {
+                    年額賦課根拠 = nengakuFukaKonkyo.createNengakuFukaKonkyo(
+                            賦課計算の情報.get賦課期日(),
+                            賦課計算の情報.get資格の情報().getIchigoShikakuShutokuYMD(),
+                            賦課計算の情報.get資格の情報().getShikakuSoshitsuYMD(),
+                            月別保険料段階,
+                            月別ランク.getRankKubun4Gatsu(), 月別ランク.getRankKubun5Gatsu(), 月別ランク.getRankKubun6Gatsu(),
+                            月別ランク.getRankKubun7Gatsu(), 月別ランク.getRankKubun8Gatsu(), 月別ランク.getRankKubun9Gatsu(),
+                            月別ランク.getRankKubun10Gatsu(), 月別ランク.getRankKubun11Gatsu(), 月別ランク.getRankKubun12Gatsu(),
+                            月別ランク.getRankKubun1Gatsu(), 月別ランク.getRankKubun2Gatsu(), 月別ランク.getRankKubun3Gatsu());
                 }
-            }
+                年額保険料パラメータ.set年額賦課根拠(年額賦課根拠);
+                if (調定年度.minusYear(INT_1).equals(賦課計算の情報.get賦課年度())) {
+                    年額保険料パラメータ.set年額制御情報(年額制御情報1);
+                } else {
+                    年額保険料パラメータ.set年額制御情報(年額制御情報2);
+                }
 
-            NengakuHokenryoKeisanParameter 年額保険料パラメータ = new NengakuHokenryoKeisanParameter();
-            年額保険料パラメータ.set賦課年度(賦課計算の情報.get賦課年度());
-            TsukibetsuRankuTmpEntity 月別ランク = 賦課計算の情報.get月別ランク();
-            NengakuFukaKonkyo 年額賦課根拠;
-            if (月別ランク == null) {
-                年額賦課根拠 = nengakuFukaKonkyo.createNengakuFukaKonkyo(
-                        賦課計算の情報.get賦課期日(),
-                        賦課計算の情報.get資格の情報().getIchigoShikakuShutokuYMD(),
-                        賦課計算の情報.get資格の情報().getShikakuSoshitsuYMD(),
-                        月別保険料段階,
-                        null, null, null, null, null, null, null, null, null, null, null, null);
-            } else {
-                年額賦課根拠 = nengakuFukaKonkyo.createNengakuFukaKonkyo(
-                        賦課計算の情報.get賦課期日(),
-                        賦課計算の情報.get資格の情報().getIchigoShikakuShutokuYMD(),
-                        賦課計算の情報.get資格の情報().getShikakuSoshitsuYMD(),
-                        月別保険料段階,
-                        月別ランク.getRankKubun4Gatsu(), 月別ランク.getRankKubun5Gatsu(), 月別ランク.getRankKubun6Gatsu(),
-                        月別ランク.getRankKubun7Gatsu(), 月別ランク.getRankKubun8Gatsu(), 月別ランク.getRankKubun9Gatsu(),
-                        月別ランク.getRankKubun10Gatsu(), 月別ランク.getRankKubun11Gatsu(), 月別ランク.getRankKubun12Gatsu(),
-                        月別ランク.getRankKubun1Gatsu(), 月別ランク.getRankKubun2Gatsu(), 月別ランク.getRankKubun3Gatsu());
+                NengakuHokenryoKeisan keisan = new NengakuHokenryoKeisan();
+                年額保険料 = keisan.calculate年額保険料(年額保険料パラメータ);
+                年額保険料Tmp = 年額保険料.getHokenryoNengaku();
             }
-            年額保険料パラメータ.set年額賦課根拠(年額賦課根拠);
-            if (調定年度.minusYear(INT_1).equals(賦課計算の情報.get賦課年度())) {
-                年額保険料パラメータ.set年額制御情報(年額制御情報1);
-            } else {
-                年額保険料パラメータ.set年額制御情報(年額制御情報2);
-            }
-            
-            NengakuHokenryoKeisan keisan = new NengakuHokenryoKeisan();
-            NengakuHokenryo 年額保険料 = keisan.calculate年額保険料(年額保険料パラメータ);
 
             new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));
             if (年額保険料.getHokenryoNengaku() == null) {
@@ -768,7 +767,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             fukaKokyoBatchParameter.set生保の情報のリスト(生保の情報);
             fukaKokyoBatchParameter.set老福の情報のリスト(老齢の情報);
             fukaKokyoBatchParameter.set境界層の情報のリスト(境界層の情報);
-            fukaKokyoBatchParameter.set年額保険料(年額保険料.getHokenryoNengaku());
+            fukaKokyoBatchParameter.set年額保険料(年額保険料Tmp);
             fukaKokyoBatchParameter.set月別保険料段階(月別保険料段階);
             fukaKokyoBatchParameter.set賦課根拠パラメータ(賦課根拠);
             if (賦課計算の情報.get賦課の情報() == null || 賦課計算の情報.get賦課の情報().isEmpty()
@@ -777,6 +776,34 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             } else {
                 create既存の賦課処理(賦課計算の情報, fukaKokyoBatchParameter, param, 年額保険料.getHokenryoNengaku());
             }
+        }
+    }
+
+    private void 月別保険料段階NULL処理(List<SetaiShotokuEntity> 世帯員所得情報) {
+        for (SetaiShotokuEntity setaiShotokuEntity : 世帯員所得情報) {
+            if (HonninKubun.世帯構成員.getCode().equals(setaiShotokuEntity.getHonninKubun())) {
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("世帯：")
+                        .concat(setaiShotokuEntity.getSetaiCode() == null
+                                ? new RString("null") : setaiShotokuEntity.getSetaiCode().getColumnValue()));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("識別コード：")
+                        .concat(setaiShotokuEntity.getShikibetsuCode() == null
+                                ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("課税区分：")
+                        .concat(setaiShotokuEntity.getKazeiKubun()));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：")
+                        .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
+                                ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：")
+                        .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
+                                ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
+            } else {
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人識別コード：")
+                        .concat(setaiShotokuEntity.getShikibetsuCode() == null
+                                ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人課税区分：")
+                        .concat(setaiShotokuEntity.getKazeiKubun()));
+            }
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));
         }
     }
 
@@ -1508,7 +1535,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                 UaT0310KozaEntity 口座Entity = (計算後情報_宛名_口座Entity.get口座Entity() != null
                         && 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() != null
                         && 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0)
-                                ? 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() : null;
+                        ? 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() : null;
                 RString 作成年月日 = 調定日時.getRDateTime().getDate().seireki()
                         .separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
                 RString 作成日時 = 調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);

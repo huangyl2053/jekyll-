@@ -75,79 +75,71 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoSource implements IReportSource 
     public RString setaiShikyuGaku;
     @ReportItem(name = "over70SetaiShikyuGaku", length = 10, order = 30)
     public RString over70SetaiShikyuGaku;
-    @ReportItem(name = "honninShikyuGaku", length = 10, order = 31)
+    @ReportItem(name = "toiawasesaki", order = 31)
+    public RString toiawasesaki;
+    @ReportItem(name = "honninShikyuGaku", length = 10, order = 32)
     public RString honninShikyuGaku;
-    @ReportItem(name = "over70HonninShikyuGaku", length = 10, order = 32)
+    @ReportItem(name = "over70HonninShikyuGaku", length = 10, order = 33)
     public RString over70HonninShikyuGaku;
-    @ReportItem(name = "biko", order = 33)
+    @ReportItem(name = "biko", order = 34)
     public RString biko;
-    @ReportItem(name = "shikyuSeiriNO", length = 17, order = 34)
+    @ReportItem(name = "shikyuSeiriNO", length = 17, order = 35)
     public RString shikyuSeiriNO;
-    @ReportItem(name = "list1_1", length = 16, order = 35)
+    @ReportItem(name = "list1_1", length = 16, order = 36)
     public RString list1_1;
-    @ReportItem(name = "list1_2", length = 20, order = 36)
+    @ReportItem(name = "list1_2", length = 20, order = 37)
     public RString list1_2;
-    @ReportItem(name = "list1_3", length = 12, order = 37)
+    @ReportItem(name = "list1_3", length = 12, order = 38)
     public RString list1_3;
-    @ReportItem(name = "list1_4", length = 10, order = 38)
+    @ReportItem(name = "list1_4", length = 10, order = 39)
     public RString list1_4;
-    @ReportItem(name = "list1_5", length = 20, order = 39)
+    @ReportItem(name = "list1_5", length = 20, order = 40)
     public RString list1_5;
-    @ReportItem(name = "list1_6", length = 20, order = 40)
+    @ReportItem(name = "list1_6", length = 20, order = 41)
     public RString list1_6;
-    @ReportItem(name = "list1_7", length = 13, order = 41)
+    @ReportItem(name = "list1_7", length = 13, order = 42)
     public RString list1_7;
-    @ReportItem(name = "list1_8", length = 17, order = 42)
+    @ReportItem(name = "list1_8", length = 17, order = 43)
     public RString list1_8;
-    @ReportItem(name = "list1_9", length = 13, order = 43)
+    @ReportItem(name = "list1_9", length = 13, order = 44)
     public RString list1_9;
-    @ReportItem(name = "list1_10", length = 13, order = 44)
+    @ReportItem(name = "list1_10", length = 13, order = 45)
     public RString list1_10;
-    @ReportItem(name = "list1_11", length = 13, order = 45)
+    @ReportItem(name = "list1_11", length = 13, order = 46)
     public RString list1_11;
-    @ReportItem(name = "list1_12", length = 17, order = 46)
+    @ReportItem(name = "list1_12", length = 17, order = 47)
     public RString list1_12;
-    @ReportItem(name = "list1_13", length = 13, order = 47)
+    @ReportItem(name = "list1_13", length = 13, order = 48)
     public RString list1_13;
-    @ReportItem(name = "list1_14", length = 13, order = 48)
+    @ReportItem(name = "list1_14", length = 13, order = 49)
     public RString list1_14;
-    @ReportItem(name = "over70FutangakuGokei", length = 13, order = 49)
+    @ReportItem(name = "over70FutangakuGokei", length = 13, order = 50)
     public RString over70FutangakuGokei;
-    @ReportItem(name = "over70ShikyugakuGokei", length = 13, order = 50)
+    @ReportItem(name = "over70ShikyugakuGokei", length = 13, order = 51)
     public RString over70ShikyugakuGokei;
-    @ReportItem(name = "under70FutangakuGokei", length = 13, order = 51)
+    @ReportItem(name = "under70FutangakuGokei", length = 13, order = 52)
     public RString under70FutangakuGokei;
-    @ReportItem(name = "futangakuGokei", length = 13, order = 52)
+    @ReportItem(name = "futangakuGokei", length = 13, order = 53)
     public RString futangakuGokei;
-    @ReportItem(name = "under70ShikyugakuGokei", length = 13, order = 53)
+    @ReportItem(name = "under70ShikyugakuGokei", length = 13, order = 54)
     public RString under70ShikyugakuGokei;
-    @ReportItem(name = "shikyugakuGokei", length = 13, order = 54)
+    @ReportItem(name = "shikyugakuGokei", length = 13, order = 55)
     public RString shikyugakuGokei;
-    @ReportItem(name = "yubinBango", length = 8, order = 55)
-    public RString yubinBango;
-    @ReportItem(name = "shozaichi", length = 50, order = 56)
-    public RString shozaichi;
-    @ReportItem(name = "choshaBushoName", length = 50, order = 57)
-    public RString choshaBushoName;
-    @ReportItem(name = "tantoName", length = 20, order = 58)
-    public RString tantoName;
-    @ReportItem(name = "telNo", length = 20, order = 59)
-    public RString telNo;
-    @ReportItem(name = "denshiKoin", order = 60)
+    @ReportItem(name = "denshiKoin", order = 56)
     public RString denshiKoin;
-    @ReportItem(name = "ninshoshaYakushokuMei1", order = 61)
+    @ReportItem(name = "ninshoshaYakushokuMei1", order = 57)
     public RString ninshoshaYakushokuMei1;
-    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 62)
+    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 58)
     public RString ninshoshaYakushokuMei;
-    @ReportItem(name = "koinMojiretsu", length = 4, order = 63)
+    @ReportItem(name = "koinMojiretsu", length = 4, order = 59)
     public RString koinMojiretsu;
-    @ReportItem(name = "ninshoshaYakushokuMei2", order = 64)
+    @ReportItem(name = "ninshoshaYakushokuMei2", order = 60)
     public RString ninshoshaYakushokuMei2;
-    @ReportItem(name = "ninshoshaShimeiKakeru", order = 65)
+    @ReportItem(name = "ninshoshaShimeiKakeru", order = 61)
     public RString ninshoshaShimeiKakeru;
-    @ReportItem(name = "ninshoshaShimeiKakenai", order = 66)
+    @ReportItem(name = "ninshoshaShimeiKakenai", order = 62)
     public RString ninshoshaShimeiKakenai;
-    @ReportItem(name = "koinShoryaku", length = 15, order = 67)
+    @ReportItem(name = "koinShoryaku", length = 15, order = 63)
     public RString koinShoryaku;
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)

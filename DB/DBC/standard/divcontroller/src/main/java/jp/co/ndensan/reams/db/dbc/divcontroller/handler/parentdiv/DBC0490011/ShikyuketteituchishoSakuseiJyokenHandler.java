@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020060.DBC020060_Kogaku
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufubunruikubun.ShiharaiHohoKinoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuuketteitsuchishosakusei.KougakuSabisuhiShikyuuKetteiTsuchishoSakusei;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -91,11 +91,11 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
     public void onClick_radHizukeSentaku(RString 選択Key) {
         RString 処理名;
         if (KEY0.equals(選択Key)) {
-            処理名 = ShoriName.事業高額サービス等支給不支給決定通知書一括作成_受付日.get名称();
+            処理名 = ShoriName.高額サービス等支給不支給決定通知書一括作成_受付日.get名称();
         } else if (KEY1.equals(選択Key)) {
-            処理名 = ShoriName.事業高額サービス等支給不支給決定通知書一括作成_決定日.get名称();
+            処理名 = ShoriName.高額サービス等支給不支給決定通知書一括作成_決定日.get名称();
         } else {
-            処理名 = ShoriName.事業高額サービス等支給不支給決定通知書一括作成_決定者受付年月.get名称();
+            処理名 = ShoriName.高額サービス等支給不支給決定通知書一括作成_決定者受付年月.get名称();
         }
 
         RDate システム日付 = RDate.getNowDate();

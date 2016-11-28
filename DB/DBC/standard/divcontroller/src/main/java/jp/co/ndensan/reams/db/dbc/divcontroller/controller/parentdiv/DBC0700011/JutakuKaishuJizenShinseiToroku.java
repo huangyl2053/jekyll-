@@ -288,9 +288,7 @@ public class JutakuKaishuJizenShinseiToroku {
      */
     public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onClick_btnCheckGendogaku(JutakuKaishuJizenShinseiTorokuDiv div) {
         HihokenshaNo hihokenshaNo = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        RString seiriNo = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         KeyValueDataSource 要介護状態区分 = new KeyValueDataSource(要介護状態区分_KEY, 要介護状態区分_VALUE);
-        KeyValueDataSource 住宅住所変更 = new KeyValueDataSource(住宅住所変更_KEY, 住宅住所変更_VALUE);
         List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
@@ -298,18 +296,17 @@ public class JutakuKaishuJizenShinseiToroku {
         handler.住宅改修内容のチェック();
         handler.費用額合計の設定();
         handler.前回までの支払結果設定(hihokenshaNo);
-
         boolean 要介護状態３段階変更の判定 = true;
-        if (ResponseHolder.isReRequest()) {
+        if (ResponseHolder.isReRequest() && (is３段階変更MSG() || is改修住所MSG())) {
             要介護状態３段階変更の判定 = ViewStateHolder.get(ViewStateKeys.要介護状態３段階変更, Boolean.class);
         } else {
             要介護状態３段階変更の判定 = handler.要介護状態３段階変更の有効性チェック(hihokenshaNo);
             ViewStateHolder.put(ViewStateKeys.要介護状態３段階変更, 要介護状態３段階変更の判定);
         }
 
-        if (!非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg()) && 要介護状態３段階変更の判定
+        if (要介護状態３段階変更の判定
                 && !selectedItems.contains(要介護状態区分)) {
-            if (!ResponseHolder.isReRequest()) {
+            if (!is３段階変更MSG() && !is改修住所MSG()) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().getCode(),
                         DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage().evaluate());
@@ -323,11 +320,10 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.setHidSandannkaiMsgFlg(非表示用フラグ_TRUE);
             } else {
                 div.setHidSandannkaiMsgFlg(RString.EMPTY);
-                return ResponseData.of(div).respond();
             }
-        } else if (!非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg()) && !要介護状態３段階変更の判定
+        } else if (!要介護状態３段階変更の判定
                 && selectedItems.contains(要介護状態区分)) {
-            if (!ResponseHolder.isReRequest()) {
+            if (!is３段階変更MSG() && !is改修住所MSG()) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.要介護状態区分変更_限度額リセット対象外.getMessage().getCode(),
                         DbcQuestionMessages.要介護状態区分変更_限度額リセット対象外.getMessage().evaluate());
@@ -342,14 +338,11 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.setHidSandannkaiMsgFlg(非表示用フラグ_TRUE);
             } else {
                 div.setHidSandannkaiMsgFlg(RString.EMPTY);
-                return ResponseData.of(div).respond();
             }
         }
         QuestionMessage msg = 限度額リセットチェック(div, hihokenshaNo);
-        if (msg != null) {
-            if (!QuestionMessage.NO_MESSAGE.getCode().equals(msg.getCode())) {
-                return ResponseData.of(div).addMessage(msg).respond();
-            }
+        if (msg != null && !QuestionMessage.NO_MESSAGE.getCode().equals(msg.getCode())) {
+            return ResponseData.of(div).addMessage(msg).respond();
         }
         handler.支払結果の設定(hihokenshaNo);
         ViewStateHolder.put(ViewStateKeys.限度額リセット値, (Serializable) handler.住宅改修データと限度額リセット値の保存());
@@ -363,10 +356,17 @@ public class JutakuKaishuJizenShinseiToroku {
         KeyValueDataSource 住宅住所変更 = new KeyValueDataSource(住宅住所変更_KEY, 住宅住所変更_VALUE);
         List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
-        if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgNotNeedFlg())
-                && !handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
-                && !selectedItems.contains(住宅住所変更)) {
-            if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgDisplayedFlg())) {
+
+        boolean 改修住所変更 = true;
+        if (ResponseHolder.isReRequest() && is改修住所MSG()) {
+            改修住所変更 = ViewStateHolder.get(ViewStateKeys.改修住所重複, Boolean.class);
+        } else {
+            改修住所変更 = handler.改修住所変更による限度額リセットチェック(hihokenshaNo);
+            ViewStateHolder.put(ViewStateKeys.改修住所重複, 改修住所変更);
+        }
+
+        if (!改修住所変更 && !selectedItems.contains(住宅住所変更)) {
+            if (!is改修住所MSG()) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().getCode(),
                         DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().evaluate());
@@ -378,15 +378,13 @@ public class JutakuKaishuJizenShinseiToroku {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                         .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems().add(住宅住所変更);
-                div.setHidLimitMsgDisplayedFlg(非表示用フラグ_TRUE);
+                div.setHidLimitMsgDisplayedFlg(RString.EMPTY);
             } else {
                 div.setHidLimitMsgDisplayedFlg(RString.EMPTY);
                 return new QuestionMessage(QuestionMessage.NO_MESSAGE.getCode(), QuestionMessage.NO_MESSAGE.evaluate());
             }
-        } else if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgNotNeedFlg())
-                && handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
-                && selectedItems.contains(住宅住所変更)) {
-            if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgDisplayedFlg())) {
+        } else if (改修住所変更 && selectedItems.contains(住宅住所変更)) {
+            if (!is改修住所MSG()) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().getCode(),
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().evaluate());
@@ -399,13 +397,29 @@ public class JutakuKaishuJizenShinseiToroku {
                 selectedItems.remove(住宅住所変更);
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                         .getChkResetInfo().setSelectedItems(selectedItems);
-                div.setHidLimitMsgNotNeedFlg(非表示用フラグ_TRUE);
+                div.setHidLimitMsgNotNeedFlg(RString.EMPTY);
             } else {
                 div.setHidLimitMsgNotNeedFlg(RString.EMPTY);
                 return new QuestionMessage(QuestionMessage.NO_MESSAGE.getCode(), QuestionMessage.NO_MESSAGE.evaluate());
             }
         }
         return null;
+    }
+
+    private boolean is３段階変更MSG() {
+        boolean 限度額リセット対象 = new RString(DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage()
+                .getCode()).equals(ResponseHolder.getMessageCode());
+        boolean 限度額リセット対象外 = new RString(DbcQuestionMessages.要介護状態区分変更_限度額リセット対象外.getMessage()
+                .getCode()).equals(ResponseHolder.getMessageCode());
+        return 限度額リセット対象 || 限度額リセット対象外;
+    }
+
+    private boolean is改修住所MSG() {
+        boolean 改修住所_限度額リセット対象 = new RString(DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage()
+                .getCode()).equals(ResponseHolder.getMessageCode());
+        boolean 改修住所_限度額リセット対象外 = new RString(DbcQuestionMessages.改修住所変更_限度額リセット対象外
+                .getMessage().getCode()).equals(ResponseHolder.getMessageCode());
+        return 改修住所_限度額リセット対象 || 改修住所_限度額リセット対象外;
     }
 
     /**

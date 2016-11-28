@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakuseibatch;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.DeleteTokuchoKaifuJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.InsTorikomiRirekiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.SelectChoshuHohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.SelectFukaTempJouhouMyBatisParameter;
@@ -41,6 +42,13 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
  * @reamsid_L DBB-1840-040 xuzhao
  */
 public interface ITokuChoSoufuJohoSakuseiBatchMapper {
+
+    /**
+     * 年金特徴回付情報を削除です。
+     *
+     * @param parameter DeleteTokuchoKaifuJohoMyBatisParameter
+     */
+    void 年金特徴回付情報削除(DeleteTokuchoKaifuJohoMyBatisParameter parameter);
 
     /**
      * 特徴依頼のデータを取得です。

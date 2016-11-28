@@ -764,9 +764,8 @@ public class FukaKeisan extends FukaKeisanFath {
         ChoshuHoho 出力徴収方法の情報 = new ChoshuHoho(param.get徴収方法の情報_更正前().toEntity());
         HihokenshaDaicho 資格の情報 = param.get資格の情報();
         if ((調定計算用年度分賦課リスト.get現年度() != null
-                && !年額保険料.equals(param.get年度分賦課リスト_更正前().get現年度().get減免前介護保険料_年額()))
-                || (param.get徴収方法の情報_更正前().get特別徴収停止事由コード() != null
-                && !param.get徴収方法の情報_更正前().get特別徴収停止事由コード().isEmpty())) {
+                && isDecimal変更(年額保険料, param.get年度分賦課リスト_更正前().get現年度().get減免前介護保険料_年額()))
+                || !RString.isNullOrEmpty(param.get徴収方法の情報_更正前().get特別徴収停止事由コード())) {
             調定計算パラメータ.set年度分賦課リスト_更正前(調定計算用年度分賦課リスト);
             KoseiShorikoaResult 調定計算 = do調定計算(調定計算パラメータ);
             年度分賦課リスト_更正後 = 調定計算.get年度分賦課リスト_更正後();
@@ -846,7 +845,7 @@ public class FukaKeisan extends FukaKeisanFath {
     }
 
     private boolean is金額あり(Decimal 金額) {
-        return 金額 != null && !Decimal.ZERO.equals(金額);
+        return 金額 != null && Decimal.ZERO.compareTo(金額) != 0;
     }
 
     /**
@@ -942,7 +941,7 @@ public class FukaKeisan extends FukaKeisanFath {
         賦課RelateEntity.set介護賦課Entity(賦課の情報.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
 
-        if (!賦課の情報.getKibetsuList().isEmpty()) {
+        if (賦課の情報.getKibetsuList() != null && !賦課の情報.getKibetsuList().isEmpty()) {
             for (Kibetsu kibetsu : 賦課の情報.getKibetsuList()) {
                 KibetsuEntity entity = new KibetsuEntity();
                 List<UrT0705ChoteiKyotsuEntity> 調定共通Entity = new ArrayList<>();
@@ -1168,9 +1167,9 @@ public class FukaKeisan extends FukaKeisanFath {
         set保険料情報(builder, param.get賦課年度(), param.get月別保険料段階());
 
         if (param.get年額保険料() != null) {
-            builder.set減免前介護保険料_年額(param.get年額保険料());
-            builder.set確定介護保険料_年額(param.get年額保険料().subtract(param.get賦課の情報_設定前().get減免額() == null
-                    ? Decimal.ZERO : param.get賦課の情報_設定前().get減免額()));
+            builder.set減免前介護保険料_年額(param.get年額保険料())
+                    .set確定介護保険料_年額(param.get年額保険料().subtract(param.get賦課の情報_設定前().get減免額() == null
+                            ? Decimal.ZERO : param.get賦課の情報_設定前().get減免額()));
         } else {
             builder.set減免前介護保険料_年額(null).set確定介護保険料_年額(null);
         }
@@ -1200,7 +1199,7 @@ public class FukaKeisan extends FukaKeisanFath {
                     break;
                 }
             }
-            builder.set世帯員数(param.get世帯員所得情報List().size());
+            builder.set世帯員数(param.get世帯員所得情報List().size() - INT_1);
         } else {
             builder.set課税区分(null).set合計所得金額(null).set公的年金収入額(null);
         }

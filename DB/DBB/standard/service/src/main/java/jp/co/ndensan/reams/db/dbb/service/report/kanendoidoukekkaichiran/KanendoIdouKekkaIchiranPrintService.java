@@ -14,12 +14,16 @@ import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.Kanend
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KeisangojohoAtenaKozaKouseizengoEntity;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 帳票設計_DBBRP45001_2_本算定異動（過年度）結果一覧表 PrintService
@@ -46,6 +51,7 @@ public class KanendoIdouKekkaIchiranPrintService {
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final ReportId 帳票分類ID = new ReportId("DBB200027_KanendoIdouKekkaIchiran");
 
     /**
      * printメソッド(単一帳票出力用)
@@ -110,8 +116,11 @@ public class KanendoIdouKekkaIchiranPrintService {
                 }
             }
             doSort(更正前後EntityList);
+            DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
+            DbT7065ChohyoSeigyoKyotsuEntity entity = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(entity);
             new KanendoIdouKekkaIchiranReport(更正前後EntityList, 出力順ID, 調定日時, association, 並び順の１件目, 並び順の２件目,
-                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List)
+                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, 帳票制御共通)
                     .writeBy(reportSourceWriter);
         }
     }

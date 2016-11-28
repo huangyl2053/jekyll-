@@ -321,10 +321,10 @@
         ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT1001HihokenshaDaicho" AS dbT1001
-        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  
+        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         AS        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
         ON        dbT1001."shikibetsuCode"  =
-                  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         WHERE
         TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> dbT1001."lastUpdateTimestamp"
         AND dbT1001."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
@@ -336,7 +336,7 @@
         #{shutsuryokuSort}
     </select>
 
-    <update id="updateShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" >
+    <update id="updateShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity" >
         UPDATE rgdb."DbT7022ShoriDateKanri"
         SET
         "taishoKaishiYMD" = #{taishoKaishiYMD},

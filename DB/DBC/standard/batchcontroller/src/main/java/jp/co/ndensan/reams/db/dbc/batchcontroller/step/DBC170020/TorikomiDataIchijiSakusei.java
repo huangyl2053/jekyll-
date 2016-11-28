@@ -160,8 +160,8 @@ public class TorikomiDataIchijiSakusei extends BatchProcessBase<KaigoServiceNaiy
         tblEntity.setYoshien2JukyushaJishiKubun(ゼロ);
         tblEntity.setTaishoJigyoJishiKubun(ゼロ);
         tblEntity.setSogoJigyoServiceKubun(ゼロ);
-        tblEntity.setSeigenNissuKaisu(csvEntity.get回数日数());
-        tblEntity.setSanteiKaisuSeigenKikanKubun(csvEntity.get期間時期());
+        tblEntity.setSeigenNissuKaisu(RString.EMPTY);
+        tblEntity.setSanteiKaisuSeigenKikanKubun(RString.EMPTY);
     }
 
 }

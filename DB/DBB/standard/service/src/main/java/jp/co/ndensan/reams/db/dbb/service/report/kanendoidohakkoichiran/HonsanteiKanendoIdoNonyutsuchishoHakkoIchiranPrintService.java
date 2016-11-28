@@ -66,7 +66,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService {
         IOutputOrder 並び順 = null;
         if (!RString.isNullOrEmpty(出力順ID)) {
             並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                    .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200017.getReportId(),
+                    .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100045.getReportId(),
                             Long.valueOf(出力順ID.toString()));
         }
         int i = 0;

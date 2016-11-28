@@ -10,9 +10,12 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoHoj
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.KogakuGassanShikyuShinseiTorokuAllPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.dgKanyuRirekiIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -26,281 +29,318 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
      * 老人所得区分必須入力チェックです。
      */
     老人所得区分必須入力チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is老人所得区分必須入力チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is老人所得区分必須入力チェック(div);
+        }
+    },
     /**
      * 年度内範囲のチェックです。
      */
     年度内範囲チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is年度内範囲チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is年度内範囲チェック(div);
+        }
+    },
     /**
      * 加入期間範囲チェックです。
      */
     加入期間範囲チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is加入期間範囲チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is加入期間範囲チェック(div);
+        }
+    },
     /**
      * 資格喪失チェック1です。
      */
     資格喪失チェック1 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is資格喪失チェック1(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is資格喪失チェック1(div);
+        }
+    },
     /**
      * 資格喪失チェック2です。
      */
     資格喪失チェック2 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is資格喪失チェック2(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is資格喪失チェック2(div);
+        }
+    },
     /**
      * 後期資格情報保険者番号のチェックです。
      */
     後期資格情報保険者番号チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is後期資格情報保険者番号(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is後期資格情報保険者番号(div);
+        }
+    },
     /**
      * 国保保険者番号桁数のチェックです。
      */
     国保保険者番号桁数チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is国保保険者番号桁数チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is国保保険者番号桁数チェック(div);
+        }
+    },
     /**
      * 後期保険者番号桁数のチェックです。
      */
     後期保険者番号桁数チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is後期保険者番号桁数チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is後期保険者番号桁数チェック(div);
+        }
+    },
     /**
      * 後期被保険者番号桁数のチェックです。
      */
     後期被保険者番号桁数チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is後期被保険者番号桁数チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is後期被保険者番号桁数チェック(div);
+        }
+    },
     /**
      * 被保険者証記号桁数のチェックです。
      */
     被保険者証記号桁数チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is被保険者証記号桁数チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is被保険者証記号桁数チェック(div);
+        }
+    },
     /**
      * 被保険者証番号桁数のチェックです。
      */
     被保険者証番号桁数チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is被保険者証番号桁数チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is被保険者証番号桁数チェック(div);
+        }
+    },
     /**
      * 介護日付のチェックです。
      */
     介護日付チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is介護日付チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is介護日付チェック(div);
+        }
+    },
     /**
      * 被保日付のチェックです。
      */
     被保日付チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is被保日付チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is被保日付チェック(div);
+        }
+    },
     /**
      * 国保日付のチェックです。
      */
     国保日付チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is国保日付チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is国保日付チェック(div);
+        }
+    },
     /**
      * 後期日付のチェックです。
      */
     後期日付チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is後期日付チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is後期日付チェック(div);
+        }
+    },
     /**
      * 開始計算期間1のチェックです。
      */
     開始計算期間チェック1 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is開始計算期間チェック1(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is開始計算期間チェック1(div);
+        }
+    },
     /**
      * 開始計算期間2のチェックです。
      */
     開始計算期間チェック2 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is開始計算期間チェック2(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is開始計算期間チェック2(div);
+        }
+    },
     /**
      * 開始計算期間3のチェックです。
      */
     開始計算期間チェック3 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is開始計算期間チェック3(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is開始計算期間チェック3(div);
+        }
+    },
     /**
      * 開始計算期間4のチェックです。
      */
     開始計算期間チェック4 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is開始計算期間チェック4(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is開始計算期間チェック4(div);
+        }
+    },
     /**
      * 開始計算期間5のチェックです。
      */
     開始計算期間チェック5 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is開始計算期間チェック5(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is開始計算期間チェック5(div);
+        }
+    },
     /**
      * 開始計算期間6のチェックです。
      */
     開始計算期間チェック6 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is開始計算期間チェック6(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is開始計算期間チェック6(div);
+        }
+    },
     /**
      * 終了計算期間1のチェックです。
      */
     終了計算期間チェック1 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is終了計算期間チェック1(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is終了計算期間チェック1(div);
+        }
+    },
     /**
      * 終了計算期間2のチェックです。
      */
     終了計算期間チェック2 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is終了計算期間チェック2(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is終了計算期間チェック2(div);
+        }
+    },
     /**
      * 終了計算期間3のチェックです。
      */
     終了計算期間チェック3 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is終了計算期間チェック3(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is終了計算期間チェック3(div);
+        }
+    },
     /**
      * 終了計算期間4のチェックです。
      */
     終了計算期間チェック4 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is終了計算期間チェック4(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is終了計算期間チェック4(div);
+        }
+    },
     /**
      * 終了計算期間5のチェックです。
      */
     終了計算期間チェック5 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is終了計算期間チェック5(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is終了計算期間チェック5(div);
+        }
+    },
     /**
      * 終了計算期間6のチェックです。
      */
     終了計算期間チェック6 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is終了計算期間チェック6(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is終了計算期間チェック6(div);
+        }
+    },
     /**
      * 保険加入期間が不正のチェックです。
      */
     保険加入期間が不正チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is保険加入期間が不正チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is保険加入期間が不正チェック(div);
+        }
+    },
     /**
      * 自己負担額証明書整理番号桁数のチェックです。
      */
     自己負担額証明書整理番号桁数チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is自己負担額証明書整理番号桁数チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is自己負担額証明書整理番号桁数チェック(div);
+        }
+    },
     /**
      * 自己負担額証明書整理番号既に存在のチェックです。
      */
     自己負担額証明書整理番号既に存在チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is自己負担額証明書整理番号既に存在チェック(div);
-                }
-            },
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is自己負担額証明書整理番号既に存在チェック(div);
+        }
+    },
     /**
      * 医療支給申請書整理番号入力チェックです。
      */
     医療支給申請書整理番号入力チェック {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-                    return SpecHelper.is医療支給申請書整理番号入力チェック(div);
-                }
-            };
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is医療支給申請書整理番号入力チェック(div);
+        }
+    },
+    /**
+     * 所得区分入力チェック
+     */
+    所得区分入力チェック {
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is所得区分入力チェック(div);
+        }
+    },
+    /**
+     * 加入期間FROM入力チェック
+     */
+    加入期間FROM入力チェック {
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is加入期間FROM入力チェック(div);
+        }
+    },
+    /**
+     * 加入期間TO入力チェック
+     */
+    加入期間TO入力チェック {
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is加入期間TO入力チェック(div);
+        }
+    },
+    /**
+     * 備考文字種チェック
+     */
+    備考文字種チェック {
+        @Override
+        public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            return SpecHelper.is備考文字種チェック(div);
+        }
+
+    };
 
     /**
      * {@link JikoFutangakuHoseiSpec}における判定ロジックのHelperクラスです。
@@ -319,8 +359,43 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         private static final RString DATE_0801 = new RString("0801");
         private static final RString RSTRING_39 = new RString("39");
         private static final RString 追加 = new RString("追加");
+        private static final RString DBCMN61009 = new RString("DBCMN61009");
+
+        public static boolean is所得区分入力チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            IUrControlData controlData = UrControlDataFactory.createInstance();
+            RString メニューID = controlData.getMenuID();
+            if (DBCMN61009.equals(メニューID)) {
+                return true;
+            } else if (RString.isNullOrEmpty(div.getDdlShotokuKubun().getSelectedValue())) {
+                return false;
+            }
+            return true;
+        }
+
+        public static boolean is加入期間FROM入力チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            IUrControlData controlData = UrControlDataFactory.createInstance();
+            RString メニューID = controlData.getMenuID();
+            return !(DBCMN61009.equals(メニューID) && div.getTxtKanyuKikanYMD().getFromValue() == null);
+        }
+
+        public static boolean is加入期間TO入力チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            IUrControlData controlData = UrControlDataFactory.createInstance();
+            RString メニューID = controlData.getMenuID();
+            return !(DBCMN61009.equals(メニューID) && div.getTxtKanyuKikanYMD().getToValue() == null);
+        }
+
+        public static boolean is備考文字種チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            IUrControlData controlData = UrControlDataFactory.createInstance();
+            RString メニューID = controlData.getMenuID();
+            return !(DBCMN61009.equals(メニューID) && !RStringUtil.is全角Only(div.getTxtBiko().getValue()));
+        }
 
         public static boolean is老人所得区分必須入力チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            IUrControlData controlData = UrControlDataFactory.createInstance();
+            RString メニューID = controlData.getMenuID();
+            if (DBCMN61009.equals(メニューID)) {
+                return true;
+            }
             KogakuGassanShinseishoHoji 高額合算申請書保持
                     = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
             return !(div.getDdlOver70ShotokuKubun().getSelectedIndex() == INT_0 && !RSTRING_3.equals(高額合算申請書保持.get申請状況()));

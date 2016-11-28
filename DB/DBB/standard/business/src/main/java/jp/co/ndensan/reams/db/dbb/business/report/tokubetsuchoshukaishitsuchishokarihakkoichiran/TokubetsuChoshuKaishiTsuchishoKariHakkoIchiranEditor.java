@@ -137,6 +137,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
             source.listLower_10 = 仮徴収月8月;
         }
         set改頁(source);
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -334,7 +335,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         source.hihokenshaNo = 編集後仮算定通知書共通情報entity.get被保険者番号().getColumnValue();
         if (仮算定通知書情報.get徴収方法情報_更正後() != null) {
             source.nenkinCode = 仮算定通知書情報.get徴収方法情報_更正後().get本徴収_年金コード();
-        }    
+        }
         if (仮算定通知書情報.get納組情報() != null && 仮算定通知書情報.get納組情報().getNokumi() != null) {
             source.nokumiCode = 仮算定通知書情報.get納組情報().getNokumi().getNokumiCode();
         }
@@ -350,5 +351,68 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
             return RString.EMPTY;
         }
         return 項目;
+    }
+
+    private void setPageBreakEmpty(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.atesaki_choikiCode == null) {
+            source.atesaki_choikiCode = RString.EMPTY;
+        }
+        if (source.atesaki_banchiCode == null) {
+            source.atesaki_banchiCode = RString.EMPTY;
+        }
+        if (source.atesaki_gyoseikuCode == null) {
+            source.atesaki_gyoseikuCode = RString.EMPTY;
+        }
+        if (source.atesaki_chikuCode1 == null) {
+            source.atesaki_chikuCode1 = RString.EMPTY;
+        }
+        if (source.atesaki_chikuCode2 == null) {
+            source.atesaki_chikuCode2 = RString.EMPTY;
+        }
+        if (source.atesaki_chikuCode3 == null) {
+            source.atesaki_chikuCode3 = RString.EMPTY;
+        }
+        if (source.listLower_2 == null) {
+            source.listLower_2 = RString.EMPTY;
+        }
+
+        setPageBreakEmpty_2(source);
+
+    }
+
+    private void setPageBreakEmpty_2(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
+        if (source.atena_shikibetsuCode == null) {
+            source.atena_shikibetsuCode = RString.EMPTY;
+        }
+        if (source.atena_kanaMeisho == null) {
+            source.atena_kanaMeisho = RString.EMPTY;
+        }
+        if (source.listUpper_5 == null) {
+            source.listUpper_5 = RString.EMPTY;
+        }
+        if (source.listUpper_6 == null) {
+            source.listUpper_6 = RString.EMPTY;
+        }
+        if (source.dbT2015KeisangoJoho_fukaShichosonCode == null) {
+            source.dbT2015KeisangoJoho_fukaShichosonCode = RString.EMPTY;
+        }
+        if (source.hokenshaNo == null) {
+            source.hokenshaNo = RString.EMPTY;
+        }
+        if (source.nenkinTokuchoKaifuJoho_nenkinCode == null) {
+            source.nenkinTokuchoKaifuJoho_nenkinCode = RString.EMPTY;
+        }
+        if (source.dbT2015KeisangoJoho_seihofujoShurui == null) {
+            source.dbT2015KeisangoJoho_seihofujoShurui = RString.EMPTY;
+        }
+        if (source.caT0714SeikyuHoho_nokumiCode == null) {
+            source.caT0714SeikyuHoho_nokumiCode = RString.EMPTY;
+        }
+        if (source.dbT2015KeisangoJoho_choteiJiyu1 == null) {
+            source.dbT2015KeisangoJoho_choteiJiyu1 = RString.EMPTY;
+        }
     }
 }
