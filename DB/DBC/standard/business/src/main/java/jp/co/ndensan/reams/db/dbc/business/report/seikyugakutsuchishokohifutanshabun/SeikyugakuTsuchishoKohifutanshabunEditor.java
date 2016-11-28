@@ -99,7 +99,7 @@ public class SeikyugakuTsuchishoKohifutanshabunEditor implements
         } else {
             source.listMeisai_1 = new RString(new StringBuilder(RString.FULL_SPACE).append(請求額通知書帳票用データ
                     .getサービス種類名()).toString());
-            source.listMeisai_3 = RString.EMPTY;
+            source.listMeisai_3 = doカンマ編集(請求額通知書帳票用データ.get通常分_実日数());
         }
 
         source.listMeisai_2 = doカンマ編集(請求額通知書帳票用データ.get通常分_件数());
