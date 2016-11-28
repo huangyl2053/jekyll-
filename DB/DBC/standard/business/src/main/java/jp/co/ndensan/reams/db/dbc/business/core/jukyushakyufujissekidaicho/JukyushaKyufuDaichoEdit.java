@@ -144,7 +144,6 @@ public class JukyushaKyufuDaichoEdit {
     private static final RString 公費２ = new RString("公費２");
     private static final RString 公費３ = new RString("公費３");
     private static final FlexibleYearMonth 日付200201 = new FlexibleYearMonth("200201");
-    private static final List<KojinyoTyohyoDataKomoku> 特定データLIST = new ArrayList<>();
 
     private RString 保険者コード;
     private RString 保険者名;
@@ -267,8 +266,8 @@ public class JukyushaKyufuDaichoEdit {
         KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
         個人用帳票データ = set基本(基本, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 明細 = set明細(基本, 明細List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ, 特定データLIST);
-        List<KojinyoTyohyoDataKomoku> 社福 = set社会福祉法人軽減額の編集(社福List, 特定データLIST, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 社福 = set社会福祉法人軽減額の編集(社福List, 個人用帳票データ);
         int tmp = 0;
         if (tmp < 明細.size()) {
             tmp = 明細.size();
@@ -287,11 +286,11 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp, 特定データLIST).get(i);
+                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
             }
             if (i < 社福.size()
                     && 社福.get(i) != null) {
-                出力Tmp = set社会福祉法人軽減額の編集(社福List, 特定データLIST, 出力Tmp).get(i);
+                出力Tmp = set社会福祉法人軽減額の編集(社福List, 出力Tmp).get(i);
             }
             データList.insert(
                     set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
@@ -308,8 +307,8 @@ public class JukyushaKyufuDaichoEdit {
         KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
         個人用帳票データ = set基本(基本, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 明細 = set明細(基本, 明細List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ, 特定データLIST);
-        List<KojinyoTyohyoDataKomoku> 社福 = set社会福祉法人軽減額の編集(社福List, 特定データLIST, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 社福 = set社会福祉法人軽減額の編集(社福List, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 入所 = set入所(基本, 入所List, 個人用帳票データ);
         int tmp = 0;
         if (tmp < 明細.size()) {
@@ -332,11 +331,11 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp, 特定データLIST).get(i);
+                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
             }
             if (i < 社福.size()
                     && 社福.get(i) != null) {
-                出力Tmp = set社会福祉法人軽減額の編集(社福List, 特定データLIST, 出力Tmp).get(i);
+                出力Tmp = set社会福祉法人軽減額の編集(社福List, 出力Tmp).get(i);
             }
             if (i < 入所.size()
                     && 入所.get(i) != null) {
@@ -357,10 +356,10 @@ public class JukyushaKyufuDaichoEdit {
         KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
         個人用帳票データ = set基本(基本, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 明細 = set明細(基本, 明細List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ, 特定データLIST);
+        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 入所 = set入所(基本, 入所List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 施設療養 = set施設療養明細(施設療養List, 特定データLIST, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 特別療養 = set特別療養明細(特別療養List, 特定データLIST, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 施設療養 = set施設療養明細(施設療養List, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 特別療養 = set特別療養明細(特別療養List, 個人用帳票データ);
         int tmp = 0;
         if (tmp < 明細.size()) {
             tmp = 明細.size();
@@ -385,11 +384,11 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp, 特定データLIST).get(i);
+                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
             }
             if (i < 施設療養.size()
                     && 施設療養.get(i) != null) {
-                出力Tmp = set施設療養明細(施設療養List, 特定データLIST, 出力Tmp).get(i);
+                出力Tmp = set施設療養明細(施設療養List, 出力Tmp).get(i);
             }
             if (i < 入所.size()
                     && 入所.get(i) != null) {
@@ -397,7 +396,7 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < 特別療養.size()
                     && 特別療養.get(i) != null) {
-                出力Tmp = set特別療養明細(特別療養List, 特定データLIST, 出力Tmp).get(i);
+                出力Tmp = set特別療養明細(特別療養List, 出力Tmp).get(i);
             }
             データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
         }
@@ -413,9 +412,9 @@ public class JukyushaKyufuDaichoEdit {
         KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
         個人用帳票データ = set基本(基本, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 明細 = set明細(基本, 明細List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ, 特定データLIST);
+        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 入所 = set入所(基本, 入所List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 特別療養 = set特別療養明細(特別療養List, 特定データLIST, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 特別療養 = set特別療養明細(特別療養List, 個人用帳票データ);
         int tmp = 0;
         if (tmp < 明細.size()) {
             tmp = 明細.size();
@@ -437,7 +436,7 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp, 特定データLIST).get(i);
+                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
             }
             if (i < 入所.size()
                     && 入所.get(i) != null) {
@@ -445,7 +444,7 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < 特別療養.size()
                     && 特別療養.get(i) != null) {
-                出力Tmp = set特別療養明細(特別療養List, 特定データLIST, 出力Tmp).get(i);
+                出力Tmp = set特別療養明細(特別療養List, 出力Tmp).get(i);
             }
             データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
         }
@@ -459,7 +458,7 @@ public class JukyushaKyufuDaichoEdit {
         KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
         個人用帳票データ = set基本(基本, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 明細 = set明細(基本, 明細List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ, 特定データLIST);
+        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ);
         int tmp = 0;
         if (tmp < 明細.size()) {
             tmp = 明細.size();
@@ -475,7 +474,7 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp, 特定データLIST).get(i);
+                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
             }
             データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
         }
@@ -487,8 +486,7 @@ public class JukyushaKyufuDaichoEdit {
             BatchEntityCreatedTempTableWriter データList) {
         KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
         個人用帳票データ = set基本(基本, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
-        List<KojinyoTyohyoDataKomoku> 計画費 = JukyushaKyufuDaichoData.set計画費明細(計画費List, list特定データ, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 計画費 = JukyushaKyufuDaichoData.set計画費明細(計画費List, 個人用帳票データ);
         for (int i = 0; i < 計画費.size(); i++) {
             データList.insert(set帳票データ(jukyushaKyufuDaicho,
                     計画費.get(i), i, 計画費.size(), 保険者コード, 保険者名));
@@ -506,10 +504,10 @@ public class JukyushaKyufuDaichoEdit {
         KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
         個人用帳票データ = set基本(基本, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 明細 = set明細(基本, 明細List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ, 特定データLIST);
-        List<KojinyoTyohyoDataKomoku> 所定疾患 = set所定疾患施設療養明細(所定疾患List, 特定データLIST, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 所定疾患 = set所定疾患施設療養明細(所定疾患List, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 入所 = set入所(基本, 入所List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 特別療養 = set特別療養明細(特別療養List, 特定データLIST, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 特別療養 = set特別療養明細(特別療養List, 個人用帳票データ);
         int tmp = 0;
         if (tmp < 明細.size()) {
             tmp = 明細.size();
@@ -534,11 +532,11 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp, 特定データLIST).get(i);
+                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
             }
             if (i < 所定疾患.size()
                     && 所定疾患.get(i) != null) {
-                出力Tmp = set所定疾患施設療養明細(所定疾患List, 特定データLIST, 出力Tmp).get(i);
+                出力Tmp = set所定疾患施設療養明細(所定疾患List, 出力Tmp).get(i);
             }
             if (i < 入所.size()
                     && 入所.get(i) != null) {
@@ -546,7 +544,7 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < 特別療養.size()
                     && 特別療養.get(i) != null) {
-                出力Tmp = set特別療養明細(特別療養List, 特定データLIST, 出力Tmp).get(i);
+                出力Tmp = set特別療養明細(特別療養List, 出力Tmp).get(i);
             }
             データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
         }
@@ -562,9 +560,9 @@ public class JukyushaKyufuDaichoEdit {
         KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
         個人用帳票データ = set基本(基本, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 明細 = set明細(基本, 明細List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ, 特定データLIST);
+        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 入所 = set入所(基本, 入所List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> 特別療養 = set特別療養明細(特別療養List, 特定データLIST, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 特別療養 = set特別療養明細(特別療養List, 個人用帳票データ);
         int tmp = 0;
         if (tmp < 明細.size()) {
             tmp = 明細.size();
@@ -586,7 +584,7 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp, 特定データLIST).get(i);
+                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
             }
             if (i < 入所.size()
                     && 入所.get(i) != null) {
@@ -594,7 +592,7 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < 特別療養.size()
                     && 特別療養.get(i) != null) {
-                出力Tmp = set特別療養明細(特別療養List, 特定データLIST, 出力Tmp).get(i);
+                出力Tmp = set特別療養明細(特別療養List, 出力Tmp).get(i);
             }
             データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
         }
@@ -607,9 +605,8 @@ public class JukyushaKyufuDaichoEdit {
             BatchEntityCreatedTempTableWriter データList) {
         KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
         個人用帳票データ = set基本(基本, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
-        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ, list特定データ);
-        List<KojinyoTyohyoDataKomoku> 福祉 = set福祉用具の編集(福祉List, 特定データLIST, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 福祉 = set福祉用具の編集(福祉List, 個人用帳票データ);
 
         int tmp = 0;
         if (tmp < 集計.size()) {
@@ -622,11 +619,11 @@ public class JukyushaKyufuDaichoEdit {
             KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 福祉.size()
                     && 福祉.get(i) != null) {
-                出力Tmp = set福祉用具の編集(福祉List, 特定データLIST, 出力Tmp).get(i);
+                出力Tmp = set福祉用具の編集(福祉List, 出力Tmp).get(i);
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp, 特定データLIST).get(i);
+                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
             }
             データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
         }
@@ -639,9 +636,8 @@ public class JukyushaKyufuDaichoEdit {
             BatchEntityCreatedTempTableWriter データList) {
         KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
         個人用帳票データ = set基本(基本, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
-        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ, list特定データ);
-        List<KojinyoTyohyoDataKomoku> 住宅 = set住宅改修(住宅List, 個人用帳票データ, 特定データLIST);
+        List<KojinyoTyohyoDataKomoku> 集計 = set集計(基本, 集計List, 個人用帳票データ);
+        List<KojinyoTyohyoDataKomoku> 住宅 = set住宅改修(住宅List, 個人用帳票データ);
 
         int tmp = 0;
         if (tmp < 集計.size()) {
@@ -654,11 +650,11 @@ public class JukyushaKyufuDaichoEdit {
             KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 住宅.size()
                     && 住宅.get(i) != null) {
-                出力Tmp = set住宅改修(住宅List, 出力Tmp, 特定データLIST).get(i);
+                出力Tmp = set住宅改修(住宅List, 出力Tmp).get(i);
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp, 特定データLIST).get(i);
+                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
             }
             データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
         }
@@ -672,7 +668,7 @@ public class JukyushaKyufuDaichoEdit {
         KojinyoTyohyoDataKomoku 個人用帳票データ = new KojinyoTyohyoDataKomoku();
         個人用帳票データ = set基本(基本, 個人用帳票データ);
         List<KojinyoTyohyoDataKomoku> 明細 = set明細(基本, 明細List, 個人用帳票データ);
-        List<KojinyoTyohyoDataKomoku> ケア = setケアマネジメント費の編集(ケアList, 個人用帳票データ, 特定データLIST);
+        List<KojinyoTyohyoDataKomoku> ケア = setケアマネジメント費の編集(ケアList, 個人用帳票データ);
         int tmp = 0;
         if (tmp < 明細.size()) {
             tmp = 明細.size();
@@ -688,7 +684,7 @@ public class JukyushaKyufuDaichoEdit {
             }
             if (i < ケア.size()
                     && ケア.get(i) != null) {
-                出力Tmp = setケアマネジメント費の編集(ケアList, 個人用帳票データ, 特定データLIST).get(i);
+                出力Tmp = setケアマネジメント費の編集(ケアList, 個人用帳票データ).get(i);
             }
             データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
         }
@@ -809,7 +805,7 @@ public class JukyushaKyufuDaichoEdit {
         return 個人用帳票データ;
     }
 
-    private List<KojinyoTyohyoDataKomoku> set明細(KihonEntity 基本,
+    private List<KojinyoTyohyoDataKomoku> set明細(KihonEntity 基本, 
             List<MeisaiEntity> list明細,
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
         List<KojinyoTyohyoDataKomoku> list明細データ = new ArrayList<>();
@@ -1092,8 +1088,8 @@ public class JukyushaKyufuDaichoEdit {
 
     private List<KojinyoTyohyoDataKomoku> set集計(KihonEntity 基本,
             List<ShuukeiEntity> 集計List,
-            KojinyoTyohyoDataKomoku 個人用帳票データ,
-            List<KojinyoTyohyoDataKomoku> list特定データ) {
+            KojinyoTyohyoDataKomoku 個人用帳票データ) {
+        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
         for (ShuukeiEntity 集計 : 集計List) {
             if (基本.get入力識別番号().equals(集計.get入力識別番号())
                     && 基本.get被保険者番号().equals(集計.get被保険者番号())
@@ -1203,8 +1199,8 @@ public class JukyushaKyufuDaichoEdit {
 
     private List<KojinyoTyohyoDataKomoku> setケアマネジメント費の編集(
             List<CareManagementEntity> list編集,
-            KojinyoTyohyoDataKomoku 個人用帳票データ,
-            List<KojinyoTyohyoDataKomoku> list特定データ) {
+            KojinyoTyohyoDataKomoku 個人用帳票データ) {
+        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
         for (int i = 0; i < list編集.size(); i++) {
             CareManagementEntity 編集 = list編集.get(i);
             if (0 == i % INDEX_5) {
@@ -1352,8 +1348,8 @@ public class JukyushaKyufuDaichoEdit {
 
     private List<KojinyoTyohyoDataKomoku> set住宅改修(
             List<JuutakuKaishuuEntity> list住宅改修,
-            KojinyoTyohyoDataKomoku 個人用帳票データ,
-            List<KojinyoTyohyoDataKomoku> list住宅改修データ) {
+            KojinyoTyohyoDataKomoku 個人用帳票データ) {
+        List<KojinyoTyohyoDataKomoku> list住宅改修データ = new ArrayList<>();
         個人用帳票データ.setヘッダー2((new RString("サービスコード")).concat(SPACE_28)
                 .concat((new RString("住宅改修着工年月日"))).concat(SPACE_5).concat((new RString("改修金額")))
                 .concat(SPACE_2).concat((審査年月)));
@@ -1496,8 +1492,8 @@ public class JukyushaKyufuDaichoEdit {
     }
 
     private List<KojinyoTyohyoDataKomoku> set施設療養明細(List<KinkyuuziShisetuRyouyouEntity> 施設療養List,
-            List<KojinyoTyohyoDataKomoku> list特定データ,
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
+        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
         for (KinkyuuziShisetuRyouyouEntity 施設療養 : 施設療養List) {
             個人用帳票データ.setヘッダー1(施設療養.get略称());
             個人用帳票データ.setヘッダー2(new RString("番号　緊急時傷病名　緊急時治療"));
@@ -1563,8 +1559,8 @@ public class JukyushaKyufuDaichoEdit {
     }
 
     private List<KojinyoTyohyoDataKomoku> set特別療養明細(List<TokuteiShinryouHiEntity> 特別療養List,
-            List<KojinyoTyohyoDataKomoku> list特定データ,
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
+        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
         for (int i = 0; i < 特別療養List.size(); i++) {
             RString 摘要_Sub = 特別療養List.get(i).get摘要();
             RString 摘要_10 = RString.EMPTY;
@@ -1694,8 +1690,8 @@ public class JukyushaKyufuDaichoEdit {
     }
 
     private List<KojinyoTyohyoDataKomoku> set所定疾患施設療養明細(List<ShoteiShikkanEntity> 所定疾患List,
-            List<KojinyoTyohyoDataKomoku> list特定データ,
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
+        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
         for (ShoteiShikkanEntity 所定疾患 : 所定疾患List) {
             個人用帳票データ.setヘッダー1(所定疾患.get名称());
             個人用帳票データ.setヘッダー2(new RString("番号").concat("  ").concat("１段：緊急時傷病名")
@@ -1764,8 +1760,8 @@ public class JukyushaKyufuDaichoEdit {
     }
 
     private List<KojinyoTyohyoDataKomoku> set社会福祉法人軽減額の編集(List<ShakaiHukushiHouzinKeigenEntity> 社会福祉List,
-            List<KojinyoTyohyoDataKomoku> list特定データ,
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
+        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
         個人用帳票データ.set適用13(new RString("給付社会福祉法人軽減額"));
         個人用帳票データ.set適用14(new RString("前").concat(SPACE_2).concat("負担額").concat(SPACE_5).concat("軽減額")
                 .concat(SPACE_1).concat("軽減後負担額").concat(SPACE_2).concat("軽減率").concat(SPACE_3).concat(再審査回数)
@@ -1812,8 +1808,8 @@ public class JukyushaKyufuDaichoEdit {
     }
 
     private List<KojinyoTyohyoDataKomoku> set福祉用具の編集(List<HukushiYouguEntity> 福祉用具List,
-            List<KojinyoTyohyoDataKomoku> list特定データ,
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
+        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
         個人用帳票データ.setヘッダー2(new RString("サービスコード                            購入年月日  摘要                 審査年月"));
         個人用帳票データ.setヘッダー3(new RString("福祉用具商品名                                              種目"));
         個人用帳票データ.setヘッダー5(new RString("福祉用具製造業者名"));
