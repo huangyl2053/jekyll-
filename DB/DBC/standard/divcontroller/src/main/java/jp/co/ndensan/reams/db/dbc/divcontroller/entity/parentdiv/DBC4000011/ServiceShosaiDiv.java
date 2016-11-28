@@ -8,24 +8,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4000011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.SegmentedControl;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ServiceShosai のクラスファイル
- *
- * @reamsid_L DBC-3320-010 chenhui
+ * ServiceShosai のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ServiceShosaiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -308,18 +300,18 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRiyoshaFutanLeft(RiyoshaFutanLeftDiv RiyoshaFutanLeft) {
+    public void  setRiyoshaFutanLeft(RiyoshaFutanLeftDiv RiyoshaFutanLeft) {
         this.getRiyoshaFutan().setRiyoshaFutanLeft(RiyoshaFutanLeft);
     }
 
     @JsonIgnore
-    public RadioButton getRadTeiritsuOrTeigaku() {
-        return this.getRiyoshaFutan().getRiyoshaFutanLeft().getRadTeiritsuOrTeigaku();
+    public SegmentedControl getSegTeiritsuOrTeigaku() {
+        return this.getRiyoshaFutan().getRiyoshaFutanLeft().getSegTeiritsuOrTeigaku();
     }
 
     @JsonIgnore
-    public void setRadTeiritsuOrTeigaku(RadioButton radTeiritsuOrTeigaku) {
-        this.getRiyoshaFutan().getRiyoshaFutanLeft().setRadTeiritsuOrTeigaku(radTeiritsuOrTeigaku);
+    public void  setSegTeiritsuOrTeigaku(SegmentedControl segTeiritsuOrTeigaku) {
+        this.getRiyoshaFutan().getRiyoshaFutanLeft().setSegTeiritsuOrTeigaku(segTeiritsuOrTeigaku);
     }
 
     @JsonIgnore
@@ -328,7 +320,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKyufuritsu(TextBoxNum txtKyufuritsu) {
+    public void  setTxtKyufuritsu(TextBoxNum txtKyufuritsu) {
         this.getRiyoshaFutan().getRiyoshaFutanLeft().setTxtKyufuritsu(txtKyufuritsu);
     }
 
@@ -338,7 +330,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutangaku(TextBoxNum txtRiyoshaFutangaku) {
+    public void  setTxtRiyoshaFutangaku(TextBoxNum txtRiyoshaFutangaku) {
         this.getRiyoshaFutan().getRiyoshaFutanLeft().setTxtRiyoshaFutangaku(txtRiyoshaFutangaku);
     }
 
@@ -348,7 +340,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRiyoshaFutanRight(RiyoshaFutanRightDiv RiyoshaFutanRight) {
+    public void  setRiyoshaFutanRight(RiyoshaFutanRightDiv RiyoshaFutanRight) {
         this.getRiyoshaFutan().setRiyoshaFutanRight(RiyoshaFutanRight);
     }
 
@@ -358,7 +350,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlTanisuSanteiTaniCode(DropDownList ddlTanisuSanteiTaniCode) {
+    public void  setDdlTanisuSanteiTaniCode(DropDownList ddlTanisuSanteiTaniCode) {
         this.getRiyoshaFutan().getRiyoshaFutanRight().setDdlTanisuSanteiTaniCode(ddlTanisuSanteiTaniCode);
     }
 
@@ -368,7 +360,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSeigenNissuKaisu(TextBoxNum txtSeigenNissuKaisu) {
+    public void  setTxtSeigenNissuKaisu(TextBoxNum txtSeigenNissuKaisu) {
         this.getRiyoshaFutan().getRiyoshaFutanRight().setTxtSeigenNissuKaisu(txtSeigenNissuKaisu);
     }
 
@@ -378,7 +370,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlSanteiKaisuSeigenKikanKubun(DropDownList ddlSanteiKaisuSeigenKikanKubun) {
+    public void  setDdlSanteiKaisuSeigenKikanKubun(DropDownList ddlSanteiKaisuSeigenKikanKubun) {
         this.getRiyoshaFutan().getRiyoshaFutanRight().setDdlSanteiKaisuSeigenKikanKubun(ddlSanteiKaisuSeigenKikanKubun);
     }
 
@@ -388,7 +380,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSegTaishoJigyoJishiKubun(SegmentedControl segTaishoJigyoJishiKubun) {
+    public void  setSegTaishoJigyoJishiKubun(SegmentedControl segTaishoJigyoJishiKubun) {
         this.getJisshiKubun().setSegTaishoJigyoJishiKubun(segTaishoJigyoJishiKubun);
     }
 
@@ -398,7 +390,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSegYoshien1(SegmentedControl segYoshien1) {
+    public void  setSegYoshien1(SegmentedControl segYoshien1) {
         this.getJisshiKubun().setSegYoshien1(segYoshien1);
     }
 
@@ -408,7 +400,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSegYoshien2(SegmentedControl segYoshien2) {
+    public void  setSegYoshien2(SegmentedControl segYoshien2) {
         this.getJisshiKubun().setSegYoshien2(segYoshien2);
     }
 
@@ -418,7 +410,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSegNijiYobosha(SegmentedControl segNijiYobosha) {
+    public void  setSegNijiYobosha(SegmentedControl segNijiYobosha) {
         this.getJisshiKubun().setSegNijiYobosha(segNijiYobosha);
     }
 
@@ -428,7 +420,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkGendogakuTaishogai(CheckBoxList chkGendogakuTaishogai) {
+    public void  setChkGendogakuTaishogai(CheckBoxList chkGendogakuTaishogai) {
         this.getKakushuKubun().setChkGendogakuTaishogai(chkGendogakuTaishogai);
     }
 
@@ -438,7 +430,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkGaibuService(CheckBoxList chkGaibuService) {
+    public void  setChkGaibuService(CheckBoxList chkGaibuService) {
         this.getKakushuKubun().setChkGaibuService(chkGaibuService);
     }
 
@@ -448,7 +440,7 @@ public class ServiceShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkTokubetsuChiikiKasn(CheckBoxList chkTokubetsuChiikiKasn) {
+    public void  setChkTokubetsuChiikiKasn(CheckBoxList chkTokubetsuChiikiKasn) {
         this.getKakushuKubun().setChkTokubetsuChiikiKasn(chkTokubetsuChiikiKasn);
     }
 
