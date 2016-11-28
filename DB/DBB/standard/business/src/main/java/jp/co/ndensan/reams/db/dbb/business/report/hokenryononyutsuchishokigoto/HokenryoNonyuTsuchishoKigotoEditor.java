@@ -270,8 +270,8 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.fuchoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普通徴収額合計());
         NofugakuSanshutsuHoho 納付額算出方法 = 本算定納入通知書制御情報.get納入通知書制御情報().get納付額算出方法();
         if (NofugakuSanshutsuHoho.収入額をもとに算出.equals(納付額算出方法)) {
-            source.nofuZumiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get納付済額_未到来期含む());
-            source.kongoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額_収入元に());
+            source.nofuZumiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普徴納付済額_未到来期含む());
+            source.kongoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に());
         } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(納付額算出方法)) {
             source.nofuZumiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普徴既に納付すべき額());
             source.kongoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に());

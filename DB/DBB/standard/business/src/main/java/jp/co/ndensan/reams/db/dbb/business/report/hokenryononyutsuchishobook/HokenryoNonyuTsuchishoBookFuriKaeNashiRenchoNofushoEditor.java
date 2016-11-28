@@ -129,22 +129,22 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor implement
             source.nofushoZuiji4 = 納入通知書期情報印字位置5.get随時表記();
             source.nofuzumishoZuiji4
                     = 納入通知書期情報印字位置5.get随時表記();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofuzumishoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
+                source.ryoshushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
+                source.nofushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            source.ryoshushoJusho4 = 納付書共通.get住所();
+            source.ryoshushoKatagaki4 = 納付書共通.get方書();
+            if (納付書共通.get世帯コード() != null) {
+                source.nofuzumishoSetaiCode4 = 納付書共通.get世帯コード().getColumnValue();
+            }
+            source.ryoshushoHihokenshaName4 = 納付書共通.get納付者氏名();
+            source.nofushoHihokenshaName4 = 納付書共通.get納付者氏名();
+            source.nofuzumishoHihokenshaName4 = 納付書共通.get納付者氏名();
+            source.nofuzumishoJusho4 = 納付書共通.get住所();
+            source.nofuzumishoKatagaki4 = 納付書共通.get方書();
         }
-        if (納付書共通.get通知書番号() != null) {
-            source.nofuzumishoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
-            source.ryoshushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
-        }
-        source.ryoshushoJusho4 = 納付書共通.get住所();
-        source.ryoshushoKatagaki4 = 納付書共通.get方書();
-        if (納付書共通.get世帯コード() != null) {
-            source.nofuzumishoSetaiCode4 = 納付書共通.get世帯コード().getColumnValue();
-        }
-        source.ryoshushoHihokenshaName4 = 納付書共通.get納付者氏名();
-        source.nofushoHihokenshaName4 = 納付書共通.get納付者氏名();
-        source.nofuzumishoHihokenshaName4 = 納付書共通.get納付者氏名();
-        source.nofuzumishoJusho4 = 納付書共通.get住所();
-        source.nofuzumishoKatagaki4 = 納付書共通.get方書();
         source.nofuzumishoshichosonName4 = 納付書共通.get納付書市町村名();
         if (ShoriKubun.バッチ.equals(本算定納入通知書情報.get処理区分())) {
             source.pagerenban4 = new RString(本算定納入通知書情報.get連番()).concat("-").concat(get連番(INT_5));
@@ -218,22 +218,23 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor implement
             source.nofushoZuiji3 = 納入通知書期情報印字位置4.get随時表記();
             source.nofuzumishoZuiji3
                     = 納入通知書期情報印字位置4.get随時表記();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofuzumishoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
+                source.ryoshushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
+                source.nofushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            source.ryoshushoJusho3 = 納付書共通.get住所();
+            source.ryoshushoKatagaki3 = 納付書共通.get方書();
+            if (納付書共通.get世帯コード() != null) {
+                source.nofuzumishoSetaiCode3 = 納付書共通.get世帯コード().getColumnValue();
+            }
+            source.ryoshushoHihokenshaName3 = 納付書共通.get納付者氏名();
+            source.nofushoHihokenshaName3 = 納付書共通.get納付者氏名();
+            source.nofuzumishoHihokenshaName3 = 納付書共通.get納付者氏名();
+            source.nofuzumishoJusho3 = 納付書共通.get住所();
+            source.nofuzumishoKatagaki3 = 納付書共通.get方書();
         }
-        if (納付書共通.get通知書番号() != null) {
-            source.nofuzumishoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
-            source.ryoshushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
-        }
-        source.ryoshushoJusho3 = 納付書共通.get住所();
-        source.ryoshushoKatagaki3 = 納付書共通.get方書();
-        if (納付書共通.get世帯コード() != null) {
-            source.nofuzumishoSetaiCode3 = 納付書共通.get世帯コード().getColumnValue();
-        }
-        source.ryoshushoHihokenshaName3 = 納付書共通.get納付者氏名();
-        source.nofushoHihokenshaName3 = 納付書共通.get納付者氏名();
-        source.nofuzumishoHihokenshaName3 = 納付書共通.get納付者氏名();
-        source.nofuzumishoJusho3 = 納付書共通.get住所();
-        source.nofuzumishoKatagaki3 = 納付書共通.get方書();
+
         source.nofuzumishoshichosonName3 = 納付書共通.get納付書市町村名();
         if (ShoriKubun.バッチ.equals(本算定納入通知書情報.get処理区分())) {
             source.pagerenban3 = new RString(本算定納入通知書情報.get連番()).concat("-").concat(get連番(INT_4));
@@ -307,22 +308,23 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor implement
             source.nofushoZuiji2 = 納入通知書期情報印字位置3.get随時表記();
             source.nofuzumishoZuiji2
                     = 納入通知書期情報印字位置3.get随時表記();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofuzumishoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
+                source.ryoshushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
+                source.nofushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            source.ryoshushoJusho2 = 納付書共通.get住所();
+            source.ryoshushoKatagaki2 = 納付書共通.get方書();
+            if (納付書共通.get世帯コード() != null) {
+                source.nofuzumishoSetaiCode2 = 納付書共通.get世帯コード().getColumnValue();
+            }
+            source.ryoshushoHihokenshaName2 = 納付書共通.get納付者氏名();
+            source.nofushoHihokenshaName2 = 納付書共通.get納付者氏名();
+            source.nofuzumishoHihokenshaName2 = 納付書共通.get納付者氏名();
+            source.nofuzumishoJusho2 = 納付書共通.get住所();
+            source.nofuzumishoKatagaki2 = 納付書共通.get方書();
         }
-        if (納付書共通.get通知書番号() != null) {
-            source.nofuzumishoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
-            source.ryoshushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
-        }
-        source.ryoshushoJusho2 = 納付書共通.get住所();
-        source.ryoshushoKatagaki2 = 納付書共通.get方書();
-        if (納付書共通.get世帯コード() != null) {
-            source.nofuzumishoSetaiCode2 = 納付書共通.get世帯コード().getColumnValue();
-        }
-        source.ryoshushoHihokenshaName2 = 納付書共通.get納付者氏名();
-        source.nofushoHihokenshaName2 = 納付書共通.get納付者氏名();
-        source.nofuzumishoHihokenshaName2 = 納付書共通.get納付者氏名();
-        source.nofuzumishoJusho2 = 納付書共通.get住所();
-        source.nofuzumishoKatagaki2 = 納付書共通.get方書();
+
         source.nofuzumishoshichosonName2 = 納付書共通.get納付書市町村名();
         if (ShoriKubun.バッチ.equals(本算定納入通知書情報.get処理区分())) {
             source.pagerenban2 = new RString(本算定納入通知書情報.get連番()).concat("-").concat(get連番(INT_3));
@@ -395,22 +397,22 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor implement
             source.ryoshushoZuiji1 = 納入通知書期情報印字位置2.get随時表記();
             source.nofushoZuiji1 = 納入通知書期情報印字位置2.get随時表記();
             source.nofuzumishoZuiji1 = 納入通知書期情報印字位置2.get随時表記();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofuzumishoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
+                source.ryoshushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
+                source.nofushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            source.ryoshushoJusho1 = 納付書共通.get住所();
+            source.ryoshushoKatagaki1 = 納付書共通.get方書();
+            if (納付書共通.get世帯コード() != null) {
+                source.nofuzumishoSetaiCode1 = 納付書共通.get世帯コード().getColumnValue();
+            }
+            source.ryoshushoHihokenshaName1 = 納付書共通.get納付者氏名();
+            source.nofushoHihokenshaName1 = 納付書共通.get納付者氏名();
+            source.nofuzumishoHihokenshaName1 = 納付書共通.get納付者氏名();
+            source.nofuzumishoJusho1 = 納付書共通.get住所();
+            source.nofuzumishoKatagaki1 = 納付書共通.get方書();
         }
-        if (納付書共通.get通知書番号() != null) {
-            source.nofuzumishoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
-            source.ryoshushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
-        }
-        source.ryoshushoJusho1 = 納付書共通.get住所();
-        source.ryoshushoKatagaki1 = 納付書共通.get方書();
-        if (納付書共通.get世帯コード() != null) {
-            source.nofuzumishoSetaiCode1 = 納付書共通.get世帯コード().getColumnValue();
-        }
-        source.ryoshushoHihokenshaName1 = 納付書共通.get納付者氏名();
-        source.nofushoHihokenshaName1 = 納付書共通.get納付者氏名();
-        source.nofuzumishoHihokenshaName1 = 納付書共通.get納付者氏名();
-        source.nofuzumishoJusho1 = 納付書共通.get住所();
-        source.nofuzumishoKatagaki1 = 納付書共通.get方書();
         source.nofuzumishoshichosonName1 = 納付書共通.get納付書市町村名();
         if (ShoriKubun.バッチ.equals(本算定納入通知書情報.get処理区分())) {
             source.pagerenban1 = new RString(本算定納入通知書情報.get連番()).concat("-").concat(get連番(INT_2));

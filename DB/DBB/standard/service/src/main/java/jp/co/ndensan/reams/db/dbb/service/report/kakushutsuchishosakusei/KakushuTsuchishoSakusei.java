@@ -1602,7 +1602,9 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
                         賦課の情報_更正後.get識別コード(), RString.EMPTY,
                         賦課の情報_更正後.get調定日時().getDate().toDateString());
         KakushuTsuchishoEntity 更正後entity = mapper.get更正前後賦課の情報(更正後);
-        更正後entity.set収入情報取得PSM(get収入情報(更正後entity, findTotalShunyuMapper));
+        if (null != 更正後entity) {
+            更正後entity.set収入情報取得PSM(get収入情報(更正後entity, findTotalShunyuMapper));
+        }
         KakushuTsuchishoEntity 更正前entity = get賦課の情報更正前(賦課の情報_更正前, 処理日, kozaSearchKey, list, 科目コード);
         if (null != 更正前entity) {
             List<TotalShunyuRelateEntity> 収入情報_更正前 = get収入情報(更正前entity, findTotalShunyuMapper);
@@ -1710,6 +1712,9 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
     }
 
     private List<TotalShunyuRelateEntity> get収入情報(KakushuTsuchishoEntity entity, ICaFt702FindTotalShunyuFunctionMapper findTotalShunyuMapper) {
+        if (null == entity) {
+            return new ArrayList<>();
+        }
         List<TotalShunyuRelateEntity> 収入情報 = new ArrayList<>();
         for (KibetsuEntity 介護期別RelateEntity : entity.get介護期別RelateEntity()) {
             long 収納ID = 介護期別RelateEntity.get調定共通Entity().get(0).getShunoId();
