@@ -48,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -731,8 +730,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         FlexibleDate 期間_至 = null;
         if (月割開始年月1 != null && !月割開始年月1.isEmpty()) {
             期間_自 = getFlexibleDate自(月割開始年月1);
-            更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).
+            更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).
                     fillType(FillType.BLANK).toDateString());
             更正前.set期間_自_西暦(期間_自.seireki().separator(Separator.SLASH).
                     fillType(FillType.BLANK).toDateString());
@@ -744,8 +743,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             期間_至 = getFlexibleDate至(月割終了年月2);
         }
         if (期間_至 != null) {
-            更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).
+            更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).
                     fillType(FillType.BLANK).toDateString());
             更正前.set期間_至_西暦(期間_至.seireki().separator(Separator.SLASH).
                     fillType(FillType.BLANK).toDateString());
@@ -877,7 +876,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private RString get月数_ケ月(int 月数) {
-        RStringBuilder 月数SB = new RStringBuilder(RStringUtil.convert半角to全角(new RString(月数).padLeft(RString.HALF_SPACE, 2)));
+        RStringBuilder 月数SB = new RStringBuilder(new RString(月数).padLeft(RString.HALF_SPACE, 2));
         月数SB.append(文字列_ケ月);
         return 月数SB.toRString();
     }
