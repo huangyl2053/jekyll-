@@ -86,18 +86,14 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         source.kaipage5 = get改頁(NUM_4);
 
         source.listCenter_1 = new RString(entity.get連番());
-        source.listUpper_1 = RString.EMPTY;
-        if (被保険者 != null) {
+        source.listUpper_1 = getColumnValue(被保険者.get登録被保険者番号());
+        source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
+                source.listUpper_1);
 
-            source.listUpper_1 = getColumnValue(被保険者.get登録被保険者番号());
-            source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
-                    source.listUpper_1);
+        source.listUpper_2 = 被保険者.get宛名名称();
+        source.listLower_2 = listLower_2(被保険者.get住所(), 被保険者.get番地(), 被保険者.get方書());
 
-            source.listUpper_2 = 被保険者.get宛名名称();
-            source.listLower_2 = listLower_2(被保険者.get住所(), 被保険者.get番地(), 被保険者.get方書());
-
-            set規定外項目(source, 被保険者, 計算結果entity);
-        }
+        set規定外項目(source, 被保険者, 計算結果entity);
         source.listUpper_3 = get非空項目(計算結果entity.get支給申請書整理番号());
         source.listUpper_4 = new FlexibleDate(計算結果entity.get申請年月日()).wareki().
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).

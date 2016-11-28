@@ -94,6 +94,7 @@ public class KogakuKyufuTaishoshaIchiranBodyEditor implements IKogakuKyufuTaisho
         source.choikiCode = getNotNull(被保険者一時.get町域コード());
         source.gyoseikuCode = getNotNull(被保険者一時.get行政区コード());
         source.shimei50onKana = getNotNull(被保険者一時.get氏名50音カナ());
+        source.shichosonCode = getColumnValue(被保険者一時.get市町村コード());
         source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listUpper_2);
         return source;
     }

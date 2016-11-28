@@ -89,6 +89,8 @@ public class KogakuShikyuFushikyuKetteishaIchiranBodyEditor implements IKogakuSh
         source.listUpper_10 = 被保険者.get行政区名();
         if (null != 被保険者.get登録被保険者番号()) {
             source.listLower_1 = 被保険者.get登録被保険者番号().getColumnValue();
+        } else {
+            source.listLower_1 = RString.EMPTY;
         }
         if (!RString.isNullOrEmpty(source.listLower_1)) {
             source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号,
