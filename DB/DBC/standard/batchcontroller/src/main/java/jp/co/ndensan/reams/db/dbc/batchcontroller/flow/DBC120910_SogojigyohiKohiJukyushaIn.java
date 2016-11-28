@@ -65,7 +65,7 @@ public class DBC120910_SogojigyohiKohiJukyushaIn extends BatchFlowBase<DBC120910
             帳票ID = ReportIdDBC.DBC200083.getReportId();
             RDate now = RDate.getNowDate();
             交換情報識別番号 = DbBusinessConfig.get(
-                    ConfigNameDBC.国保連取込_総合事業費公費受給者別一覧表_交換情報識別番号,
+                    ConfigNameDBC.国保連取込_介護給付費公費受給者別一覧表情報_交換情報識別番号,
                     now, SubGyomuCode.DBC介護給付);
             executeStep(ファイル取得);
             returnEntity
