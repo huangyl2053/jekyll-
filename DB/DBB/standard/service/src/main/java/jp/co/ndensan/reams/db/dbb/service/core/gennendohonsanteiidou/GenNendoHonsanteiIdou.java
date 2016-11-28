@@ -764,8 +764,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         }
         if (!is普徴期別金額あり(調定計算.get賦課の情報())) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
-        } else if (賦課計算の情報.get口座() != null && 賦課計算の情報.get口座().getUaT0310KozaEntity() != null
-                && 賦課計算の情報.get口座().getUaT0310KozaEntity().getKozaId() != 0) {
+        } else if (賦課計算の情報.get口座() != null) {
             builder.set口座区分(KozaKubun.口座振替.getコード());
         } else {
             builder.set口座区分(KozaKubun.現金納付.getコード());
@@ -798,17 +797,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             set一時賦課情報(fukaJohoTempTableEntity, 出力用賦課.get現年度());
             mapper.insert賦課の情報一時テーブル(fukaJohoTempTableEntity);
         }
-        if (調定計算.get徴収方法の情報() == null) {
-            return;
-        }
-        DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 調定計算.get徴収方法の情報().toEntity();
-        dbT2001ChoshuHohoEntity.setRirekiNo(賦課の情報_更正後.get徴収方法履歴番号());
-        dbT2001ChoshuHohoEntity.setState(EntityDataState.Added);
-        DbT2001ChoshuHohoEntity entity = 徴収方法Dac.selectByKey(dbT2001ChoshuHohoEntity.getFukaNendo(),
-                dbT2001ChoshuHohoEntity.getHihokenshaNo(), 賦課の情報_更正後.get徴収方法履歴番号());
-        if (entity == null) {
-            徴収方法Dac.save(dbT2001ChoshuHohoEntity);
-        }
+        徴収方法登録処理(調定計算.get徴収方法の情報(), 賦課の情報_更正後.get徴収方法履歴番号());
     }
 
     private void create既存の賦課処理(CalculateFukaEntity 賦課計算の情報, FukaKokyoBatchParameter fukaKokyoBatchParameter,
@@ -818,9 +807,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
 
         FukaKeisan fukaKeisan = FukaKeisan.createInstance();
         FukaJoho 賦課の情報_更正後 = fukaKeisan.reflect賦課根拠(fukaKokyoBatchParameter);
-        if (賦課の情報_更正後 == null) {
-            return;
-        }
         ChoshuHoho 徴収方法の情報 = null;
         if ((賦課の情報_更正後.get調定年度().equals(賦課の情報_更正後.get賦課年度())
                 && isDecimal変更(賦課の情報_設定前.get減免前介護保険料_年額(), 年額保険料))
@@ -855,8 +841,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             }
             if (!is普徴期別金額あり(賦課の情報_更正後)) {
                 builder.set口座区分(KozaKubun.現金納付.getコード());
-            } else if (賦課計算の情報.get口座() != null && 賦課計算の情報.get口座().getUaT0310KozaEntity() != null
-                    && 賦課計算の情報.get口座().getUaT0310KozaEntity().getKozaId() != 0) {
+            } else if (賦課計算の情報.get口座() != null) {
                 builder.set口座区分(KozaKubun.口座振替.getコード());
             } else {
                 builder.set口座区分(KozaKubun.現金納付.getコード());
@@ -889,19 +874,23 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 set一時賦課情報(fukaJohoTempTableEntity, 出力用賦課.get現年度());
                 mapper.insert賦課の情報一時テーブル(fukaJohoTempTableEntity);
             }
-            if (徴収方法の情報 == null) {
-                return;
-            }
-            DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報.toEntity();
-            dbT2001ChoshuHohoEntity.setRirekiNo(賦課の情報_更正後.get徴収方法履歴番号());
-            dbT2001ChoshuHohoEntity.setState(EntityDataState.Added);
-            DbT2001ChoshuHohoEntity entity = 徴収方法Dac.selectByKey(dbT2001ChoshuHohoEntity.getFukaNendo(),
-                    dbT2001ChoshuHohoEntity.getHihokenshaNo(), 賦課の情報_更正後.get徴収方法履歴番号());
-            if (entity == null) {
-                徴収方法Dac.save(dbT2001ChoshuHohoEntity);
-            }
+            徴収方法登録処理(徴収方法の情報, 賦課の情報_更正後.get徴収方法履歴番号());
         }
 
+    }
+
+    private void 徴収方法登録処理(ChoshuHoho 徴収方法の情報, int 徴収方法履歴番号) {
+        if (徴収方法の情報 == null) {
+            return;
+        }
+        DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報.toEntity();
+        dbT2001ChoshuHohoEntity.setRirekiNo(徴収方法履歴番号);
+        dbT2001ChoshuHohoEntity.setState(EntityDataState.Added);
+        DbT2001ChoshuHohoEntity entity = 徴収方法Dac.selectByKey(dbT2001ChoshuHohoEntity.getFukaNendo(),
+                dbT2001ChoshuHohoEntity.getHihokenshaNo(), 徴収方法履歴番号);
+        if (entity == null) {
+            徴収方法Dac.save(dbT2001ChoshuHohoEntity);
+        }
     }
 
     private boolean is普徴期別金額あり(FukaJoho 賦課の情報) {
