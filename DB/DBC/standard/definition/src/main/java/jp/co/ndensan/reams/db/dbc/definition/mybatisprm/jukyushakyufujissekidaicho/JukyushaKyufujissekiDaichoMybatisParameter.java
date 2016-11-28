@@ -82,6 +82,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
     private final RString psmShikibetsuTaisho;
     private final boolean 対象年月flag;
     private final boolean 給付実績区分flag;
+    private final boolean 給付実績区分flag1;
     private final boolean すべて選択flag;
     private final boolean 要介護1flag;
     private final boolean 要介護2flag;
@@ -203,6 +204,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @param 対象年月flag 対象年月flag
      * @param 給付実績区分flag 給付実績区分flag
+     * @param 給付実績区分flag1 給付実績区分flag1
      * @param すべて選択flag すべて選択flag
      * @param 要介護1flag 要介護1flag
      * @param 要介護2flag 要介護2flag
@@ -321,6 +323,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
             RString psmShikibetsuTaisho,
             boolean 対象年月flag,
             boolean 給付実績区分flag,
+            boolean 給付実績区分flag1,
             boolean すべて選択flag,
             boolean 要介護1flag,
             boolean 要介護2flag,
@@ -438,6 +441,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.対象年月flag = 対象年月flag;
         this.給付実績区分flag = 給付実績区分flag;
+        this.給付実績区分flag1 = 給付実績区分flag1;
         this.すべて選択flag = すべて選択flag;
         this.要介護1flag = 要介護1flag;
         this.要介護2flag = 要介護2flag;
@@ -716,6 +720,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
                 psmShikibetsuTaisho,
                 new RString("1").equals(対象年月),
                 new RString("1").equals(給付実績区分),
+                new RString("2").equals(給付実績区分),
                 すべてflag,
                 new RString("1").equals(要介護1),
                 new RString("1").equals(要介護2),

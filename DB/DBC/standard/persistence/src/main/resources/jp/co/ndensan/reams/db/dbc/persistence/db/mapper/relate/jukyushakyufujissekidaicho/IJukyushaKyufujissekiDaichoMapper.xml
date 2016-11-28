@@ -600,7 +600,7 @@
                   AND
                      DbT3017."kyufuJissekiKubunCode" = #{給付実績区分}
               </if>
-              <if test="!給付実績区分flag">
+              <if test="給付実績区分flag1">
                   AND
                      DbT3017."kyufuJissekiKubunCode" = #{給付実績区分}
               </if>

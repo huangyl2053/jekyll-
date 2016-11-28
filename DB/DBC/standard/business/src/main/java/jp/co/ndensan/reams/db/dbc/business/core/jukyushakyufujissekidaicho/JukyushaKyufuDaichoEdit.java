@@ -243,15 +243,15 @@ public class JukyushaKyufuDaichoEdit {
                 .concat(SPACE_5).concat(kingakuFormat(基本データ.get高額支給額())).concat(SPACE_17)
                 .concat(dateFormat年月(基本データ.get審査年月())));
         個人用帳票データ.set明細3(SPACE_1.concat(dateFormat(基本データ.get高額決定年月日())).concat(SPACE_6).concat(公費１).concat(SPACE_4)
-                .concat(基本データ.get高額公費１負担番号())
+                .concat(nullToEmpty(基本データ.get高額公費１負担番号()))
                 .concat(SPACE_5).concat(kingakuFormat(基本データ.get高額公費１負担額())).concat(SPACE_5)
                 .concat(kingakuFormat(基本データ.get高額公費１支給額())));
         個人用帳票データ.set明細4(SPACE_17.concat(公費２).concat(SPACE_4)
-                .concat(基本データ.get高額公費２負担番号())
+                .concat(nullToEmpty(基本データ.get高額公費２負担番号()))
                 .concat(SPACE_5).concat(kingakuFormat(基本データ.get高額公費２負担額())).concat(SPACE_5)
                 .concat(kingakuFormat(基本データ.get高額公費２支給額())));
         個人用帳票データ.set明細6(SPACE_17.concat(公費３).concat(SPACE_4)
-                .concat(基本データ.get高額公費３負担番号())
+                .concat(nullToEmpty(基本データ.get高額公費３負担番号()))
                 .concat(SPACE_5).concat(kingakuFormat(基本データ.get高額公費３負担額())).concat(SPACE_5)
                 .concat(kingakuFormat(基本データ.get高額公費２支給額())));
         データList.insert(set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, INDEX_3, INDEX_3, 保険者コード, 保険者名));
@@ -795,7 +795,7 @@ public class JukyushaKyufuDaichoEdit {
         return 個人用帳票データ;
     }
 
-    private List<KojinyoTyohyoDataKomoku> set明細(KihonEntity 基本, 
+    private List<KojinyoTyohyoDataKomoku> set明細(KihonEntity 基本,
             List<MeisaiEntity> list明細,
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
         List<KojinyoTyohyoDataKomoku> list明細データ = new ArrayList<>();
@@ -1947,5 +1947,12 @@ public class JukyushaKyufuDaichoEdit {
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(new Decimal(date.toString()), 0);
+    }
+
+    private RString nullToEmpty(RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            return RString.EMPTY;
+        }
+        return data;
     }
 }
