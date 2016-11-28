@@ -115,6 +115,7 @@ public class KariSanteiIdoFuka {
     private static final RString 標準版 = new RString("001");
     private static final RString コンビニマルチ収納タイプ = new RString("301");
     private static final RString コンビニ角公タイプ = new RString("302");
+    private static final RString 枝番 = new RString("0001");
 
     /**
      * コンストラクタです。
@@ -176,7 +177,11 @@ public class KariSanteiIdoFuka {
     public YMDHMS getTyusyutuKaishibi(FlexibleYear 調定年度) {
         DbT7022ShoriDateKanriEntity 処理日付管理entity;
         処理日付管理entity = 処理日付管理Dac.select抽出開始日時(調定年度, ShoriName.仮算定異動賦課.get名称());
-        if (処理日付管理entity == null || 処理日付管理entity.getKijunTimestamp() == null || 処理日付管理entity.getKijunTimestamp().isEmpty()) {
+        if (処理日付管理entity != null) {
+            return 処理日付管理entity.getKijunTimestamp();
+        }
+        処理日付管理entity = 処理日付管理Dac.select特徴月処理日付(調定年度, ShoriName.特徴仮算定賦課.get名称(), 枝番, 枝番);
+        if (処理日付管理entity == null) {
             return null;
         } else {
             return 処理日付管理entity.getKijunTimestamp();
