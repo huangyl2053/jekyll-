@@ -75,8 +75,20 @@ public class SeikyugakuTsuchishoKohifutanshabunEditor implements
         setフッター合計(source);
         setフッター累計(source);
         setフッター審査支払手数料(source);
-
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(SeikyugakuTsuchishoKohifutanshabunSource source) {
+        if (source.kohiFutanshaNo == null) {
+            source.kohiFutanshaNo = RString.EMPTY;
+        }
+        if (source.kanCode == null) {
+            source.kanCode = RString.EMPTY;
+        }
+        if (source.kouCode == null) {
+            source.kouCode = RString.EMPTY;
+        }
     }
 
     private void set明細(SeikyugakuTsuchishoKohifutanshabunSource source) {

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.sogojigyokubun.SogoJigyoKubunEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1730011.DBC1730011StateName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1730011.DBC1730011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1730011.SogoJigyoKubunShikyuGendogakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1730011.SogoJigyoKubunShikyuGendogakuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1730011.SogoJigyoKubunShikyuGendogakuValidationHandler;
@@ -143,24 +144,45 @@ public class SogoJigyoKubunShikyuGendogaku {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
-        } else {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
-            }
+        } else if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             List<SogoJigyoKubunEntity> 総合事業区分情報 = ViewStateHolder.get(ViewStateKeys.総合事業区分情報, List.class);
             SogoJigyoKubunShikyuGendoGakuManager manager = InstanceProvider.create(SogoJigyoKubunShikyuGendoGakuManager.class);
             getHandler(div).save(総合事業区分情報, 保存モード, manager);
-            List<SogoJigyoKubunEntity> businessList = manager.get介護予防_日常生活支援総合事業区分支給限度額_適用開始日の降順一覧();
-            ViewStateHolder.put(ViewStateKeys.総合事業区分情報, (Serializable) businessList);
-            if (businessList.isEmpty()) {
-                div.getDgShikyuGendogaku().init();
-            } else {
-                getHandler(div).initialize(businessList);
-            }
+            return ResponseData.of(div).setState(DBC1730011StateName.完了状態);
+        } else {
+            return ResponseData.of(div).setState(DBC1730011StateName.初期表示);
+        }
+    }
+
+    /**
+     * 「登録処理を続ける」ボタン押下時のメソッドです。
+     *
+     * @param div SogoJigyoKubunShikyuGendogakuDiv
+     * @return ResponseData<SogoJigyoKubunShikyuGendogakuDiv>
+     */
+    public ResponseData<SogoJigyoKubunShikyuGendogakuDiv> onClick_btnContinue(SogoJigyoKubunShikyuGendogakuDiv div) {
+        SogoJigyoKubunShikyuGendoGakuManager manager = InstanceProvider.create(SogoJigyoKubunShikyuGendoGakuManager.class);
+        List<SogoJigyoKubunEntity> businessList = manager.get介護予防_日常生活支援総合事業区分支給限度額_適用開始日の降順一覧();
+        ViewStateHolder.put(ViewStateKeys.総合事業区分情報, (Serializable) businessList);
+        if (businessList.isEmpty()) {
+            div.getDgShikyuGendogaku().init();
+        } else {
+            getHandler(div).initialize(businessList);
         }
         return ResponseData.of(div).setState(DBC1730011StateName.初期表示);
+    }
+
+    /**
+     * 「完了」ボタン押下時のメソッドです。
+     *
+     * @param div SogoJigyoKubunShikyuGendogakuDiv
+     * @return ResponseData<SogoJigyoKubunShikyuGendogakuDiv>
+     */
+    public ResponseData<SogoJigyoKubunShikyuGendogakuDiv> onClick_btnComplete(SogoJigyoKubunShikyuGendogakuDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC1730011TransitionEventName.処理完了).respond();
     }
 
     private void set保存非活性(boolean flag) {

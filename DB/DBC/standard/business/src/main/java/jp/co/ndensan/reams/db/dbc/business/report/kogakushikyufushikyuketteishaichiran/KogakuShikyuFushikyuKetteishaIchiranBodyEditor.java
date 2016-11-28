@@ -60,13 +60,14 @@ public class KogakuShikyuFushikyuKetteishaIchiranBodyEditor implements IKogakuSh
     public KogakuShikyuFushikyuKetteishaIchiranSource edit(KogakuShikyuFushikyuKetteishaIchiranSource source) {
         DbWT0001HihokenshaTempEntity 被保険者 = 帳票出力対象データ.getHihokenshaTemp();
         DbWT3511KogakuShikyuShinsaKetteiTempEntity 審査決定 = 帳票出力対象データ.getKetteiTemp();
-        source.listUpper_1 = 審査決定.getNo();
-        if (null != 被保険者.get宛名カナ名称()) {
-            source.listUpper_2 = 被保険者.get宛名カナ名称().substringReturnAsPossible(0, 文字40);
-        }
+        source.listUpper_1 = ReportKomokuEditorUtil.get非空文字列(審査決定.getNo());
+        source.listUpper_2 = ReportKomokuEditorUtil.get非空文字列(被保険者.get宛名カナ名称())
+                .substringReturnAsPossible(0, 文字40);
         if (null != 審査決定.getサービス提供年月()) {
             source.listUpper_3 = 審査決定.getサービス提供年月().wareki()
                     .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        } else {
+            source.listUpper_3 = RString.EMPTY;
         }
         if (支給区分コード_可.equals(審査決定.get支給区分コード())) {
             source.listUpper_4 = 支給区分_可;
@@ -80,8 +81,8 @@ public class KogakuShikyuFushikyuKetteishaIchiranBodyEditor implements IKogakuSh
             source.listUpper_6 = CodeMaster.getCodeMeisho(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
                     new Code(被保険者.get資格喪失事由コード()));
         }
-        source.listUpper_7 = 被保険者.get町域コード();
-        source.listUpper_8 = 被保険者.get郵便番号();
+        source.listUpper_7 = ReportKomokuEditorUtil.get非空文字列(被保険者.get町域コード());
+        source.listUpper_8 = ReportKomokuEditorUtil.get非空文字列(被保険者.get郵便番号());
         編集住所 = 編集住所.substringReturnAsPossible(0, 文字30);
         source.listUpper_9 = 編集住所.substringReturnAsPossible(0, 文字15);
         source.listLower_8 = 編集住所.substringReturnAsPossible(文字15);
@@ -113,7 +114,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranBodyEditor implements IKogakuSh
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         }
         source.shikibetuCode = 被保険者.get識別コード() == null ? RString.EMPTY : 被保険者.get識別コード();
-        source.listLower_7 = 被保険者.get行政区コード();
+        source.listLower_7 = ReportKomokuEditorUtil.get非空文字列(被保険者.get行政区コード());
         source.listLower_9 = RString.EMPTY;
         return source;
     }

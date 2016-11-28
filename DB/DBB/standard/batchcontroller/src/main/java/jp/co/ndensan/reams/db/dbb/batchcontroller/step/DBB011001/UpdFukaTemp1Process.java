@@ -211,6 +211,14 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
         調定年度 = entity.get賦課情報一時Entity().getChoteiNendo();
         賦課年度 = entity.get賦課情報一時Entity().getFukaNendo();
         通知書番号 = entity.get賦課情報一時Entity().getTsuchishoNo();
+        前年度生保開始日 = entity.get生保開始日();
+        前年度生保廃止日 = entity.get生保廃止日();
+        前年度老年開始日 = entity.get老年開始日();
+        前年度老年廃止日 = entity.get老年廃止日();
+        前年度世帯課税区分 = entity.get世帯課税区分();
+        前年度課税区分 = entity.get課税区分();
+        前年度合計所得金額 = entity.get合計所得金額();
+        前年度公的年金収入額 = entity.get公的年金収入額();
     }
 
     private void set識別コード(SikakuSaisinnsikiRelateEntity entity) {

@@ -269,10 +269,10 @@ public class TokuteiKojinJohoHensyuProcess extends BatchProcessBase<TeikyoKihonJ
 
     private void get副本データ(RString 提供内容, RString 特定個人情報項目区分, RString 特定個人情報項目コード) {
         if (TokuteiKojinJohoKomokuKubun.日付項目.getコード().equals(特定個人情報項目区分)) {
-            副本データ.concat(文字列_大なり).concat(getデータ作成日(new RDate(提供内容.toString()))).concat(文字列_小なり).
+            副本データ = 副本データ.concat(文字列_大なり).concat(getデータ作成日(new RDate(提供内容.toString()))).concat(文字列_小なり).
                     concat(文字列_スラッシュ).concat(特定個人情報項目コード).concat(文字列_大なり);
         } else {
-            副本データ.concat(文字列_大なり).concat(提供内容).concat(文字列_小なり).
+            副本データ = 副本データ.concat(文字列_大なり).concat(提供内容).concat(文字列_小なり).
                     concat(文字列_スラッシュ).concat(特定個人情報項目コード).concat(文字列_大なり);
         }
     }

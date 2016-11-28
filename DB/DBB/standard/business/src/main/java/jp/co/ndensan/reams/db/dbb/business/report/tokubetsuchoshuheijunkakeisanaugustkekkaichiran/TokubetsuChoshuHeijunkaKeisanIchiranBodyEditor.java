@@ -88,7 +88,29 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         if (特徴平準化結果対象外一覧表 != null) {
             対象外項目編集(特徴平準化結果対象外一覧表, source, 帳票制御共通, association);
         }
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(TokubetsuChoshuHeijunkaKeisanIchiranSource source) {
+        if (source.listUpper_3 == null) {
+            source.listUpper_3 = RString.EMPTY;
+        }
+        if (source.listLower_2 == null) {
+            source.listLower_2 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.listLower_1 == null) {
+            source.listLower_1 = RString.EMPTY;
+        }
+        if (source.listLower_3 == null) {
+            source.listLower_3 = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
     }
 
     private void 対象者項目編集(

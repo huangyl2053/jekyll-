@@ -187,10 +187,14 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             RentaiGimusha curResult = holder.getKogakuGassanJikoFutanGaku(identifier);
             RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
             RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
-            if (list != null && 終了年月日 != null) {
+            if (list != null) {
                 for (RentaiGimusha result : list) {
                     if (result.equals(curResult) || result.isDeleted()) {
                         continue;
+                    }
+                    if (終了年月日 == null) {
+                        return !(開始年月日.isAfter(new RDate(result.get開始年月日().toString()))
+                                && 開始年月日.isBeforeOrEquals(new RDate(result.get終了年月日().toString())));
                     }
                     return !(開始年月日.isBeforeOrEquals(new RDate(result.get開始年月日().toString()))
                             && 終了年月日.isAfterOrEquals(new RDate(result.get開始年月日().toString())))

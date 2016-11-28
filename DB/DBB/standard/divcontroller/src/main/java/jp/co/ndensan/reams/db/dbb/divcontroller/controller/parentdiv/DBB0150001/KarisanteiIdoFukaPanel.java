@@ -33,6 +33,8 @@ public class KarisanteiIdoFukaPanel {
     private static final RString 仮算定異動賦課_MENU = new RString("DBBMN36001");
     private static final RString 特徴仮算定賦課 = new RString("仮算定異動賦課");
     private static final RString 通知書一括発行 = new RString("仮算定異動通知書作成");
+    private static final RString 処理なし = new RString("1");
+    private static final RString 確定処理なし = new RString("2");
 
     /**
      * 画面初期化のメソッドます。
@@ -41,11 +43,18 @@ public class KarisanteiIdoFukaPanel {
      * @return ResponseData
      */
     public ResponseData<KarisanteiIdoFukaPanelDiv> onLoad(KarisanteiIdoFukaPanelDiv div) {
-        if (getHandler(div).is基準日時()) {
+        RString 確定処理Flag = getHandler(div).is基準日時();
+        div.getShoriJokyo().getKarisanteiIdoFukashoriKakunin().getDgKarisanteiIdoshoriKakunin().init();
+        div.getShoriJokyo().getKanriJohoKakunin().getDgHokenryoDankai().init();
+        div.getShoriJokyo().getKanriJohoKakunin().getDgKomokuNaiyo().init();
+        div.getKarisanteiIdoFukaKanriInfo().getDgChushutsuKikan().init();
+        if (処理なし.equals(確定処理Flag)) {
+            ViewStateHolder.put(ViewStateKeys.実行フラグ, false);
+        } else if (確定処理なし.equals(確定処理Flag)) {
             throw new ApplicationException(DbbErrorMessages.異動賦課の確定処理が未処理.getMessage());
+        } else {
+            ViewStateHolder.put(ViewStateKeys.実行フラグ, getHandler(div).initialize());
         }
-        boolean flag = getHandler(div).initialize();
-        ViewStateHolder.put(ViewStateKeys.実行フラグ, flag);
         if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())) {
             return ResponseData.of(div).setState(DBB0150001StateName.仮算定異動賦課);
         } else {
