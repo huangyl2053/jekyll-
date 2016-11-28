@@ -673,13 +673,14 @@
         <if test="temp_出力順 != null and !temp_出力順.isEmpty()">
             ${temp_出力順},
             T2."shotaiCode"
-         </if>
+        </if>
      </select>
      
     <resultMap id="ResultMap_CreateTaishoSetaiyinEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.CreateTaishoSetaiyinEntity" autoMapping="true">
         <id column="shotaiCode" />
         <id column="hihokenshaNo" />
         <id column="shikibetsuCode" />
+        <id column="shuturyokuUmu" />
         <association property="対象世帯員" resultMap="resultMap_TaishoSetaiinEntity"/>
         <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
