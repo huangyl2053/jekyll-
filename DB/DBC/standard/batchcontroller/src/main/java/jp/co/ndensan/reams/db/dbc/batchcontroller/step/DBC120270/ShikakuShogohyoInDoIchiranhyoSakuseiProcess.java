@@ -460,11 +460,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
                 csvEntity1.set支援事業者番号(entity.get資格照合表一時().getShienJigyoshoNo().getColumnValue());
 
             }
-            csvEntity1.set旧措置入所者特例コード(entity.get資格照合表一時().getKyusochiTokureiCode());
-            if (!RString.isNullOrEmpty(entity.get資格照合表一時().getKyusochiTokureiCode())) {
-                csvEntity1.set旧措置入所者特例有無(KyuSochiNyushoshaTokureiCode.
-                        toValue(entity.get資格照合表一時().getKyusochiTokureiCode()).get名称());
-            }
+            set旧措置入所者特例(entity);
             if (entity.get資格照合表一時().getTokuteiNyushoshaKaigoServiceGaku() != null) {
                 csvEntity1.set特定入所者介護サービス費等(decimal_to_string(entity.get資格照合表一時().getTokuteiNyushoshaKaigoServiceGaku()));
             }
