@@ -129,6 +129,11 @@ public class SokujiFukaKouseiManager {
             ShunoManager 収納Manager,
             FukaJoho 介護賦課,
             List<Kibetsu> 介護期別List) {
+        if (!介護賦課.get賦課年度().equals(介護賦課.get調定年度())
+                && (介護賦課.get特徴歳出還付額().compareTo(Decimal.ZERO) > 0
+                || 介護賦課.get普徴歳出還付額().compareTo(Decimal.ZERO) > 0)) {
+            return;
+        }
         for (Kibetsu 介護期別 : 介護期別List) {
             save介護期別(shunoKamokuManager, 収納Manager, 介護賦課, 介護期別);
         }

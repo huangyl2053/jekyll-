@@ -1136,7 +1136,8 @@ public class FukaKeisan extends FukaKeisanFath {
                 .set資格取得日(param.get資格の情報().get第1号資格取得年月日())
                 .set資格取得事由(param.get資格の情報().get資格取得事由コード())
                 .set資格喪失日(param.get資格の情報().get資格喪失年月日())
-                .set資格喪失事由(param.get資格の情報().get資格喪失事由コード());
+                .set資格喪失事由(param.get資格の情報().get資格喪失事由コード())
+                .set調定日時(param.get調定日時());
         FlexibleDate 賦課期日 = findOut賦課基準日(param.get賦課の情報_設定前().get賦課年度(), param.get資格の情報());
         builder.set賦課期日(賦課期日);
         if (param.get世帯員所得情報List() != null) {
@@ -1388,7 +1389,7 @@ public class FukaKeisan extends FukaKeisanFath {
         List<FukaJohoList> 更正後賦課リスト = new ArrayList<>();
         FukaJohoList johoList = new FukaJohoList();
         johoList.set現年度(現年度);
-        if (現年度 != null && 現年度.get減免前介護保険料_年額().compareTo(param.get年額保険料()) < 0) {
+        if (過年度 != null) {
             choteiJiyuParameter.set過年度(get過年度(param.get年度分賦課リスト_更正前(), 調定年度));
             johoList.set過年度(過年度);
         }
@@ -1413,6 +1414,7 @@ public class FukaKeisan extends FukaKeisanFath {
                 } else if (fukaJoho.get過年度().get賦課年度().equals(fukaJoho.get過年度().get調定年度().minusYear(INT_5))) {
                     年度分賦課リスト.set過年度5(fukaJoho.get過年度());
                 }
+                年度分賦課リスト.setHas過年度賦課(true);
             }
         }
         result.set年度分賦課リスト_更正後(年度分賦課リスト);

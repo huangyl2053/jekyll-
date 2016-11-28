@@ -1112,6 +1112,8 @@ public class SokujiFukaKouseiMain {
     private boolean set画面入力項目を反映(SokujiFukaKouseiMainDiv div, NendobunFukaList 更正後) {
         Boolean is差異がある = Boolean.FALSE;
         FukaJoho 最新賦課の情報 = 更正後.get最新賦課の情報();
+        FlexibleYear 賦課年度 = 最新賦課の情報.get賦課年度();
+        FlexibleYear 調定年度 = 最新賦課の情報.get調定年度();
         is差異がある = set期別金額(最新賦課の情報, NUM_1, ChoshuHohoKibetsu.特別徴収.getコード(), get特別徴収期TextBoxNum(div, NUM_1),
                 null, is差異がある);
         is差異がある = set期別金額(最新賦課の情報, NUM_2, ChoshuHohoKibetsu.特別徴収.getコード(), get特別徴収期TextBoxNum(div, NUM_2),
@@ -1154,25 +1156,58 @@ public class SokujiFukaKouseiMain {
         is差異がある = set期別金額(最新賦課の情報, NUM_14, ChoshuHohoKibetsu.普通徴収.getコード(), get普通徴収期TextBoxNum(div, NUM_14),
                 get普通徴収期TextBoxDate(div, NUM_14), is差異がある);
         boolean is過年度を反映 = Boolean.FALSE;
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        Decimal 特徴歳出還付額 = getFormat金額(tablePanel.getLblTokuchoZogenSum().getText()).multiply((-1));
+        Decimal 普徴歳出還付額 = getFormat金額(tablePanel.getLblFuchoZogenSum().getText()).multiply((-1));
         if (更正後.get過年度5() != null) {
-            is過年度を反映 = Boolean.TRUE;
-            更正後.set過年度5(最新賦課の情報);
+            if (調定年度.equals(賦課年度.plusYear(NUM_5))) {
+                is過年度を反映 = Boolean.TRUE;
+                更正後.set過年度5(最新賦課の情報);
+            }
+            if (特徴歳出還付額.compareTo(Decimal.ZERO) > 0 || 普徴歳出還付額.compareTo(Decimal.ZERO) > 0) {
+                更正後.get過年度5().createBuilderForEdit().set特徴歳出還付額(特徴歳出還付額);
+                更正後.get過年度5().createBuilderForEdit().set普徴歳出還付額(普徴歳出還付額);
+            }
         }
         if (!is過年度を反映 && 更正後.get過年度4() != null) {
-            is過年度を反映 = Boolean.TRUE;
-            更正後.set過年度4(最新賦課の情報);
+            if (調定年度.equals(賦課年度.plusYear(NUM_4))) {
+                is過年度を反映 = Boolean.TRUE;
+                更正後.set過年度4(最新賦課の情報);
+            }
+            if (特徴歳出還付額.compareTo(Decimal.ZERO) > 0 || 普徴歳出還付額.compareTo(Decimal.ZERO) > 0) {
+                更正後.get過年度4().createBuilderForEdit().set特徴歳出還付額(特徴歳出還付額);
+                更正後.get過年度4().createBuilderForEdit().set普徴歳出還付額(普徴歳出還付額);
+            }
         }
         if (!is過年度を反映 && 更正後.get過年度3() != null) {
-            is過年度を反映 = Boolean.TRUE;
-            更正後.set過年度3(最新賦課の情報);
+            if (調定年度.equals(賦課年度.plusYear(NUM_3))) {
+                is過年度を反映 = Boolean.TRUE;
+                更正後.set過年度3(最新賦課の情報);
+            }
+            if (特徴歳出還付額.compareTo(Decimal.ZERO) > 0 || 普徴歳出還付額.compareTo(Decimal.ZERO) > 0) {
+                更正後.get過年度3().createBuilderForEdit().set特徴歳出還付額(特徴歳出還付額);
+                更正後.get過年度3().createBuilderForEdit().set普徴歳出還付額(普徴歳出還付額);
+            }
         }
         if (!is過年度を反映 && 更正後.get過年度2() != null) {
-            is過年度を反映 = Boolean.TRUE;
-            更正後.set過年度2(最新賦課の情報);
+            if (調定年度.equals(賦課年度.plusYear(NUM_2))) {
+                is過年度を反映 = Boolean.TRUE;
+                更正後.set過年度2(最新賦課の情報);
+            }
+            if (特徴歳出還付額.compareTo(Decimal.ZERO) > 0 || 普徴歳出還付額.compareTo(Decimal.ZERO) > 0) {
+                更正後.get過年度2().createBuilderForEdit().set特徴歳出還付額(特徴歳出還付額);
+                更正後.get過年度2().createBuilderForEdit().set普徴歳出還付額(普徴歳出還付額);
+            }
         }
         if (!is過年度を反映 && 更正後.get過年度1() != null) {
-            is過年度を反映 = Boolean.TRUE;
-            更正後.set過年度1(最新賦課の情報);
+            if (調定年度.equals(賦課年度.plusYear(NUM_1))) {
+                is過年度を反映 = Boolean.TRUE;
+                更正後.set過年度1(最新賦課の情報);
+            }
+            if (特徴歳出還付額.compareTo(Decimal.ZERO) > 0 || 普徴歳出還付額.compareTo(Decimal.ZERO) > 0) {
+                更正後.get過年度1().createBuilderForEdit().set特徴歳出還付額(特徴歳出還付額);
+                更正後.get過年度1().createBuilderForEdit().set普徴歳出還付額(普徴歳出還付額);
+            }
         }
         if (!is過年度を反映) {
             更正後.set現年度(最新賦課の情報);
