@@ -91,7 +91,7 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         List<JukyushaDaicho> 受給者台帳List = finder.get受給者台帳(被保険者番号);
         List<SogoJigyoTaishosha> 総合事業対象者List = finder.get総合事業対象者(被保険者番号);
         List<ShokanHanteiKekka> 償還払支給判定結果 = finder.select償還払支給判定結果(被保険者番号);
-        if (!ResponseHolder.isReRequest() && (受給者台帳List.isEmpty() || 総合事業対象者List.isEmpty())) {
+        if (!ResponseHolder.isReRequest() && (受給者台帳List.isEmpty() && 総合事業対象者List.isEmpty())) {
             throw new ApplicationException(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
         }
         if (!ResponseHolder.isReRequest() && 償還払支給判定結果.isEmpty()) {
