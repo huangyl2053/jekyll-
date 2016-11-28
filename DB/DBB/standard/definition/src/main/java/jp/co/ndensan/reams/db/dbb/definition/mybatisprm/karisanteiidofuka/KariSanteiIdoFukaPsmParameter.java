@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka;
 
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,22 +18,36 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@SuppressWarnings ("PMD.UnusedPrivateField")
-public class KariSanteiIdoFukaPsmParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public class KariSanteiIdoFukaPsmParameter implements IMyBatisParameter {
 
     private RString 出力順;
+    private UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタです
      *
-     * @param 出力順 出力順
-     * @param searchKey IShikibetsuTaishoPSMSearchKey
+     * @param 出力順 RString
+     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
      */
     public KariSanteiIdoFukaPsmParameter(
             RString 出力順,
-            IShikibetsuTaishoPSMSearchKey searchKey) {
-        super(searchKey);
+            UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam) {
         this.出力順 = 出力順;
+        this.shikibetsutaishoParam = shikibetsutaishoParam;
+    }
+
+    /**
+     * パラメータメソッドです。
+     *
+     * @param 出力順 RString
+     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
+     * @return パラメータ
+     */
+    public static KariSanteiIdoFukaPsmParameter createSelectByKeyParam(
+            RString 出力順,
+            UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam) {
+        return new KariSanteiIdoFukaPsmParameter(出力順, shikibetsutaishoParam);
     }
 
 }
