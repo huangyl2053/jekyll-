@@ -44,6 +44,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
     private final KyufuJissekiKihonJouhouMainDiv div;
     private static final int INT_ZERO = 0;
     private static final int INT_ITI = 1;
+    private static final RString 無し = new RString("1");
     private static final RString 設定不可 = new RString("0");
     private static final RString 総合事業 = new RString("5");
     private static final FlexibleYearMonth 平成２０年４月 = new FlexibleYearMonth("200804");
@@ -461,8 +462,13 @@ public class KyufuJissekiKihonJouhouMainHandler {
 
     private RString get旧措置入所者特例(RString 旧措置入所者特例コード) {
         if (!RString.isNullOrEmpty(旧措置入所者特例コード)) {
-            return KyuSochiNyushoshaTokureiCode.toValue(旧措置入所者特例コード).get名称();
+            if (無し.equals(旧措置入所者特例コード)) {
+                return KyuSochiNyushoshaTokureiCode.無し.get名称();
+            } else {
+                return KyuSochiNyushoshaTokureiCode.有り.get名称();
+            }
         }
+
         return RString.EMPTY;
     }
 
