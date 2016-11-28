@@ -755,7 +755,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         builder.set被保険者番号(賦課計算の情報.get資格の情報().getHihokenshaNo())
                 .set調定日時(param.get調定日時())
                 .set異動基準日時(param.get調定日時());
-        if (調定計算.get徴収方法の情報().get履歴番号() == 賦課計算の情報.get徴収方法の情報().getRirekiNo()) {
+        if (調定計算.get徴収方法の情報() == null) {
+            builder.set徴収方法履歴番号(賦課計算の情報.get徴収方法の情報().getRirekiNo());
+        } else if (調定計算.get徴収方法の情報().get履歴番号() == 賦課計算の情報.get徴収方法の情報().getRirekiNo()) {
             builder.set徴収方法履歴番号(調定計算.get徴収方法の情報().get履歴番号() + INT_1);
         } else {
             builder.set徴収方法履歴番号(調定計算.get徴収方法の情報().get履歴番号());
@@ -786,7 +788,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         ChoteiJiyuParameter choteiJiyuParameter = new ChoteiJiyuParameter();
         choteiJiyuParameter.set更正後賦課リスト(更正後賦課リスト);
         choteiJiyuParameter.set更正前徴収方法(new ChoshuHoho(賦課計算の情報.get徴収方法の情報()));
-        choteiJiyuParameter.set更正後徴収方法(調定計算.get徴収方法の情報());
+        choteiJiyuParameter.set更正後徴収方法(調定計算.get徴収方法の情報() == null
+                ? new ChoshuHoho(賦課計算の情報.get徴収方法の情報()) : 調定計算.get徴収方法の情報());
         ChoteiJiyuHantei hantei = ChoteiJiyuHantei.createInstance();
         List<FukaJohoList> 出力用賦課リスト = hantei.set調定事由(choteiJiyuParameter);
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
@@ -794,6 +797,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             DbT2002FukaJohoTempTableEntity fukaJohoTempTableEntity = new DbT2002FukaJohoTempTableEntity();
             set一時賦課情報(fukaJohoTempTableEntity, 出力用賦課.get現年度());
             mapper.insert賦課の情報一時テーブル(fukaJohoTempTableEntity);
+        }
+        if (調定計算.get徴収方法の情報() == null) {
+            return;
         }
         DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 調定計算.get徴収方法の情報().toEntity();
         dbT2001ChoshuHohoEntity.setRirekiNo(賦課の情報_更正後.get徴収方法履歴番号());
@@ -815,10 +821,10 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         if (賦課の情報_更正後 == null) {
             return;
         }
-        ChoshuHoho 徴収方法の情報 = new ChoshuHoho(賦課計算の情報.get徴収方法の情報());
+        ChoshuHoho 徴収方法の情報 = null;
         if ((賦課の情報_更正後.get調定年度().equals(賦課の情報_更正後.get賦課年度())
                 && isDecimal変更(賦課の情報_設定前.get減免前介護保険料_年額(), 年額保険料))
-                || !RString.isNullOrEmpty(徴収方法の情報.get特別徴収停止事由コード())) {
+                || !RString.isNullOrEmpty(賦課計算の情報.get徴収方法の情報().getTokuchoTeishiJiyuCode())) {
             CaluculateChoteiResult 調定計算 = caluculateChotei(param.get算定月(), param.get調定日時(), 賦課の情報_更正後,
                     new ChoshuHoho(賦課計算の情報.get徴収方法の情報()), new HihokenshaDaicho(賦課計算の情報.get資格の情報()),
                     年額保険料);
@@ -840,7 +846,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                     .set調定日時(param.get調定日時())
                     .set異動基準日時(param.get調定日時())
                     .set保険料段階_仮算定時(賦課の情報_設定前.get保険料段階_仮算定時());
-            if (徴収方法の情報.get履歴番号() == 賦課計算の情報.get徴収方法の情報().getRirekiNo()) {
+            if (徴収方法の情報 == null) {
+                builder.set徴収方法履歴番号(賦課計算の情報.get徴収方法の情報().getRirekiNo());
+            } else if (徴収方法の情報.get履歴番号() == 賦課計算の情報.get徴収方法の情報().getRirekiNo()) {
                 builder.set徴収方法履歴番号(徴収方法の情報.get履歴番号() + INT_1);
             } else {
                 builder.set徴収方法履歴番号(徴収方法の情報.get履歴番号());
@@ -871,7 +879,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             choteiJiyuParameter.set現年度(賦課の情報_設定前);
             choteiJiyuParameter.set更正後賦課リスト(更正後賦課リスト);
             choteiJiyuParameter.set更正前徴収方法(new ChoshuHoho(賦課計算の情報.get徴収方法の情報()));
-            choteiJiyuParameter.set更正後徴収方法(徴収方法の情報);
+            choteiJiyuParameter.set更正後徴収方法(徴収方法の情報 == null
+                    ? new ChoshuHoho(賦課計算の情報.get徴収方法の情報()) : 徴収方法の情報);
             ChoteiJiyuHantei hantei = ChoteiJiyuHantei.createInstance();
             List<FukaJohoList> 出力用賦課リスト = hantei.set調定事由(choteiJiyuParameter);
             IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
@@ -879,6 +888,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 DbT2002FukaJohoTempTableEntity fukaJohoTempTableEntity = new DbT2002FukaJohoTempTableEntity();
                 set一時賦課情報(fukaJohoTempTableEntity, 出力用賦課.get現年度());
                 mapper.insert賦課の情報一時テーブル(fukaJohoTempTableEntity);
+            }
+            if (徴収方法の情報 == null) {
+                return;
             }
             DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報.toEntity();
             dbT2001ChoshuHohoEntity.setRirekiNo(賦課の情報_更正後.get徴収方法履歴番号());
@@ -1724,8 +1736,10 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 出力用徴収方法の情報 = choshuHohoKoshin.getChoshuHohoKoshinData(出力用徴収方法の情報,
                         調定日時, 賦課の情報.get資格取得日(), 賦課の情報.get資格喪失日());
             }
+            return 出力用徴収方法の情報;
+        } else {
+            return null;
         }
-        return 出力用徴収方法の情報;
     }
 
     /**
