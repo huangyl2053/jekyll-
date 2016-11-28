@@ -165,6 +165,7 @@ public class CrtIchiranhyoProcess extends BatchKeyBreakBase<TokuchoKariKeisangoF
 
     @Override
     protected void usualProcess(TokuchoKariKeisangoFukaEntity entity) {
+        連番 = 連番 + 1;
         set住所編集(entity);
         TokubetsuChoshuKarisanteiKekkaIchiranReport 一覧表report = new TokubetsuChoshuKarisanteiKekkaIchiranReport(市町村コード, 市町村名称,
                 entity, processParameter.get調定年度(), processParameter.get調定日時(), 並び順List, 改頁List, 住所編集, 前年度保険料, 連番);
