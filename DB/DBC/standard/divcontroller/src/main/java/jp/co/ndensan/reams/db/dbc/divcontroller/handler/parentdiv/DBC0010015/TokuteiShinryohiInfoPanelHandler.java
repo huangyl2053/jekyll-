@@ -363,7 +363,7 @@ public class TokuteiShinryohiInfoPanelHandler {
         } else {
             div.getBtnKihon().setDisabled(false);
         }
-        if (ZERO.equals(識別番号管理データ.get明細設定区分())) {
+        if (ZERO.equals(識別番号管理データ.get明細設定区分()) && ZERO.equals(識別番号管理データ.get集計設定区分())) {
             div.getBtnMeisaiShukei().setDisabled(true);
         } else {
             div.getBtnMeisaiShukei().setDisabled(false);

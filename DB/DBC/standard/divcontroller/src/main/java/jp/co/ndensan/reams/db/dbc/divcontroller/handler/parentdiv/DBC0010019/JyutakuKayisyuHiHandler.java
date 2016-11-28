@@ -55,7 +55,7 @@ public class JyutakuKayisyuHiHandler {
         if (ZERO.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
         }
-        if (ZERO.equals(識別番号管理.get明細設定区分())) {
+        if (ZERO.equals(識別番号管理.get明細設定区分()) && ZERO.equals(識別番号管理.get集計設定区分())) {
             div.getBtnMeisaiShukei().setDisabled(true);
         }
         if (ZERO.equals(識別番号管理.get所定疾患施設療養設定区分())) {
