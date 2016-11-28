@@ -104,6 +104,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         set出力順(source);
         set改ページ項目名(source);
         set改ページデータ(source);
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -145,18 +146,39 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
             source.listList1_2 = this.特徴対象一覧未同定.getNenkinCode();
             return;
         }
-        Integer 特徴開始月 = Integer.parseInt(this.特徴開始月.toString());
-        if (仮徴収月リスト.contains(特徴開始月)) {
+        Integer 開始月 = Integer.parseInt(this.特徴開始月.toString());
+        if (仮徴収月リスト.contains(開始月)) {
             source.listList1_1 = this.特徴対象一覧未同定.getKarichoshuKisoNenkinNo();
             source.listList1_2 = this.特徴対象一覧未同定.getKarichoshuNenkinCode();
         }
-        if (本徴収月リスト.contains(特徴開始月)) {
+        if (本徴収月リスト.contains(開始月)) {
             source.listList1_1 = this.特徴対象一覧未同定.getHonchoshuKisoNenkinNo();
             source.listList1_2 = this.特徴対象一覧未同定.getHonchoshuKisonenkinCode();
         }
-        if (翌年度仮徴収月リスト.contains(特徴開始月)) {
+        if (翌年度仮徴収月リスト.contains(開始月)) {
             source.listList1_1 = this.特徴対象一覧未同定.getYokunendoKarichoshuKisoNenkinNo();
             source.listList1_2 = this.特徴対象一覧未同定.getYokunendoKariChoshuKisonenkinCode();
+        }
+    }
+
+    private void setPageBreakEmpty(TokubetsuChoshuMidoteiIchiranSource source) {
+        if (source.kanaShimei == null) {
+            source.kanaShimei = RString.EMPTY;
+        }
+        if (source.seinengappiYMD == null) {
+            source.seinengappiYMD = RString.EMPTY;
+        }
+        if (source.seibetsuCode == null) {
+            source.seibetsuCode = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.nenkinCode == null) {
+            source.nenkinCode = RString.EMPTY;
+        }
+        if (source.kisoNenkinNo == null) {
+            source.kisoNenkinNo = RString.EMPTY;
         }
     }
 

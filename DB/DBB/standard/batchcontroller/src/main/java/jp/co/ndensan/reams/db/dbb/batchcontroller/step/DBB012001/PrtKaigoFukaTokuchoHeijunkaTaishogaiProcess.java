@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.DBB200003_HeijunkaKeisanJuneKekkaIchiran;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TkChoshuHeijunkaKeisanJuneKekkaIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport;
@@ -21,6 +20,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batc
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -176,7 +176,7 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
     @Override
     protected void usualProcess(TokuchoHeijunkaRokuBatchTaishogaiEntity entity) {
         TokuchoHeijyunkaTaishogaiEntity taishogaiEntity = get特徴平準化計算対象外entity(
-                entity.get対象外データTemp(), entity);
+                entity.get対象外データTemp(), entity, entity.get宛名());
         Optional<HokenryoDankai> 保険料段階 = 保険料段階取得.get保険料段階(parameter.get賦課年度(),
                 taishogaiEntity.get保険料段階仮算定時());
         Decimal 今年度保険料率 = 今年度保険料率取得(保険料段階);
@@ -192,7 +192,7 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
         RString 編集後住所 = JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体クラス);
         List<RString> bodyList = new ArrayList<>();
         特徴平準化対象外CSV項目編集(bodyList, parameter.get調定日時(), parameter.get賦課年度(), taishogaiEntity,
-                編集後住所, 今年度保険料率, 調整金額, taishogaiEntity.get備考コード());
+                編集後住所, 今年度保険料率, 調整金額, taishogaiEntity.get備考コード(), entity.get宛名());
         toBodyList(bodyList);
         csvWriter.writeLine(bodyList);
     }
@@ -206,7 +206,7 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
 
     private void 特徴平準化対象外CSV項目編集(List<RString> bodyList, YMDHMS 調定日時, FlexibleYear 賦課年度,
             TokuchoHeijyunkaTaishogaiEntity 特徴平準化結果対象外, RString 編集後住所, Decimal 今年度保険料率,
-            int 調整金額, RString 編集備考) {
+            int 調整金額, RString 編集備考, UaFt200FindShikibetsuTaishoEntity 宛名) {
         bodyList.add(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
         bodyList.add(new RString(調定日時.toString()));
         bodyList.add(タイトル_対象外一覧表);
@@ -267,8 +267,8 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
         bodyList.add(DecimalFormatter.toコンマ区切りRString(new Decimal(調整金額), 0));
         bodyList.add(編集備考);
         bodyList.add(特徴平準化結果対象外.get被保険者番号().value());
-        if (特徴平準化結果対象外.get世帯コード() != null) {
-            bodyList.add(特徴平準化結果対象外.get世帯コード().value());
+        if (宛名.getSetaiCode() != null) {
+            bodyList.add(宛名.getSetaiCode().getColumnValue());
         } else {
             bodyList.add(RString.EMPTY);
         }
@@ -360,7 +360,7 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
     }
 
     private TokuchoHeijyunkaTaishogaiEntity get特徴平準化計算対象外entity(FukaJohoTmpEntity 対象外データTemp,
-            TokuchoHeijunkaRokuBatchTaishogaiEntity 対象外データ) {
+            TokuchoHeijunkaRokuBatchTaishogaiEntity 対象外データ, UaFt200FindShikibetsuTaishoEntity 宛名) {
         TokuchoHeijyunkaTaishogaiEntity taishogaiEntity = new TokuchoHeijyunkaTaishogaiEntity();
         taishogaiEntity.set調定年度(対象外データTemp.getChoteiNendo());
         taishogaiEntity.set賦課年度(対象外データTemp.getFukaNendo());
@@ -368,7 +368,7 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
         taishogaiEntity.set履歴番号(対象外データTemp.getRirekiNo());
         taishogaiEntity.set被保険者番号(対象外データTemp.getHihokenshaNo());
         taishogaiEntity.set識別コード(対象外データTemp.getShikibetsuCode());
-        taishogaiEntity.set世帯コード(対象外データTemp.getSetaiCode());
+        taishogaiEntity.set世帯コード(宛名.getSetaiCode());
         taishogaiEntity.set世帯員数(対象外データTemp.getSetaiInsu());
         taishogaiEntity.set資格取得日(対象外データTemp.getShikakuShutokuYMD());
         taishogaiEntity.set資格取得事由(対象外データTemp.getShikakuShutokuJiyu());

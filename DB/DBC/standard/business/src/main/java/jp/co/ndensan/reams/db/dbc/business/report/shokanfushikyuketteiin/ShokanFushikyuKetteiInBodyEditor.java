@@ -106,6 +106,13 @@ public class ShokanFushikyuKetteiInBodyEditor implements IShokanFushikyuKetteiIn
         }
         source.拡張情報 = new ExpandedInformation(CODE, NAME,
                 ReportKomokuEditorUtil.get非空文字列(source.listUpper_2));
+        if (帳票出力対象データ.get郵便番号() != null) {
+            source.yubinNo = 帳票出力対象データ.get郵便番号();
+        }
+        if (帳票出力対象データ.get氏名５０音カナ() != null) {
+            source.shimei50onKana = 帳票出力対象データ.get氏名５０音カナ();
+        }
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -121,5 +128,32 @@ public class ShokanFushikyuKetteiInBodyEditor implements IShokanFushikyuKetteiIn
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(number, 0);
+    }
+
+    private void setPageBreakEmpty(ShokanbaraiFushikyuKetteishaIchiranSource source) {
+        if (source.listLower_2 == null) {
+            source.listLower_2 = RString.EMPTY;
+        }
+        if (source.listLower_4 == null) {
+            source.listLower_4 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.listUpper_1 == null) {
+            source.listUpper_1 = RString.EMPTY;
+        }
+        if (source.listLower_1 == null) {
+            source.listLower_1 = RString.EMPTY;
+        }
+        if (source.listLower_6 == null) {
+            source.listLower_6 = RString.EMPTY;
+        }
+        if (source.yubinNo == null) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (source.shimei50onKana == null) {
+            source.shimei50onKana = RString.EMPTY;
+        }
     }
 }

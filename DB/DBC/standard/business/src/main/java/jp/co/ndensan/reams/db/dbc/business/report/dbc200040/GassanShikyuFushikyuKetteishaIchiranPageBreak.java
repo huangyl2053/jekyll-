@@ -49,7 +49,7 @@ public class GassanShikyuFushikyuKetteishaIchiranPageBreak extends PageBreaker<G
                     && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
                 flag = true;
             } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請書整理番号.get項目ID())
-                    && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
+                    && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
                 flag = true;
             } else {
                 setFlag(currentSource, nextSource);

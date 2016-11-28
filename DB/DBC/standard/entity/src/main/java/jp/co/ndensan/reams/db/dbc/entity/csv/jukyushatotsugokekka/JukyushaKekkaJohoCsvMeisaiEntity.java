@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.entity.csv.jukyushatotsugokekka;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,13 +44,13 @@ public class JukyushaKekkaJohoCsvMeisaiEntity {
     @CsvField(order = 110, name = "被保険者氏名（カナ）")
     private RString hihokenshaShimeikana;
     @CsvField(order = 120, name = "生年月日")
-    private FlexibleDate seinengappiYmd;
+    private RString seinengappiYmd;
     @CsvField(order = 130, name = "性別コード")
     private RString seibetsuCode;
     @CsvField(order = 140, name = "資格取得年月日")
-    private FlexibleDate shikakuShutokuYmd;
+    private RString shikakuShutokuYmd;
     @CsvField(order = 150, name = "資格喪失年月日")
-    private FlexibleDate shikakuSoshitsuYmd;
+    private RString shikakuSoshitsuYmd;
     @CsvField(order = 160, name = "老人保健市町村番号")
     private RString rojinHokenShichosonNo;
     @CsvField(order = 170, name = "老人保健受給者番号")
@@ -65,63 +64,63 @@ public class JukyushaKekkaJohoCsvMeisaiEntity {
     @CsvField(order = 210, name = "変更申請中区分コード")
     private RString henkoShinseichuKubunCode;
     @CsvField(order = 220, name = "申請年月日")
-    private FlexibleDate shinseiYmd;
+    private RString shinseiYmd;
     @CsvField(order = 230, name = "みなし要介護区分コード")
     private RString minashiYokaigoKubunCode;
     @CsvField(order = 240, name = "要介護状態区分コード")
     private RString yokaigoJotaiKubunCode;
     @CsvField(order = 250, name = "認定有効期間開始年月日")
-    private FlexibleDate ninteiYukokikanFromYmd;
+    private RString ninteiYukokikanFromYmd;
     @CsvField(order = 260, name = "認定有効期間終了年月日")
-    private FlexibleDate ninteiYukokikanToYmd;
+    private RString ninteiYukokikanToYmd;
     @CsvField(order = 270, name = "居宅サービス計画作成区分コード")
     private RString kyotakuServiceKubunCode;
     @CsvField(order = 280, name = "居宅介護支援事業所番号")
     private RString kyotakuKaigoShienJigyoshoNo;
     @CsvField(order = 290, name = "居宅サービス計画適用開始年月日")
-    private FlexibleDate kyotakuServiceTekiyoFromYmd;
+    private RString kyotakuServiceTekiyoFromYmd;
     @CsvField(order = 300, name = "居宅サービス計画適用終了年月日")
-    private FlexibleDate kyotakuServiceTekiyoToYmd;
+    private RString kyotakuServiceTekiyoToYmd;
     @CsvField(order = 310, name = "訪問通所_支給限度基準額")
-    private Decimal homonShikyugendoKijungaku;
+    private RString homonShikyugendoKijungaku;
     @CsvField(order = 320, name = "訪問通所_上限管理適用期間開始年月日")
-    private FlexibleDate homonJogenKanriTekiyoKikanFromYmd;
+    private RString homonJogenKanriTekiyoKikanFromYmd;
     @CsvField(order = 330, name = "訪問通所_上限管理適用期間終了年月日")
-    private FlexibleDate homonJogenKanriTekiyoKikanToYmd;
+    private RString homonJogenKanriTekiyoKikanToYmd;
     @CsvField(order = 340, name = "短期入所_支給限度基準額")
-    private Decimal tankiShikyugendoKijungaku;
+    private RString tankiShikyugendoKijungaku;
     @CsvField(order = 350, name = "短期入所_上限管理適用期間開始年月日")
-    private FlexibleDate tankiJogenKanriTekiyoKikanFromYmd;
+    private RString tankiJogenKanriTekiyoKikanFromYmd;
     @CsvField(order = 360, name = "短期入所_上限管理適用期間終了年月日")
-    private FlexibleDate tankiJogenKanriTekiyoKikanToYmd;
+    private RString tankiJogenKanriTekiyoKikanToYmd;
     @CsvField(order = 370, name = "公費負担上限額減額の有無")
     private RString kohiFutanJogengakuGengakuUmu;
     @CsvField(order = 380, name = "償還払化開始年月日")
-    private FlexibleDate shokanHaraikaFromYmd;
+    private RString shokanHaraikaFromYmd;
     @CsvField(order = 390, name = "償還払化終了年月日")
-    private FlexibleDate shokanHaraikaToYmd;
+    private RString shokanHaraikaToYmd;
     @CsvField(order = 400, name = "給付率引下げ開始年月日")
-    private FlexibleDate kyufuritsuHikisageFromYmd;
+    private RString kyufuritsuHikisageFromYmd;
     @CsvField(order = 410, name = "給付率引下げ終了年月日")
-    private FlexibleDate kyufuritsuHikisageToYmd;
+    private RString kyufuritsuHikisageToYmd;
     @CsvField(order = 420, name = "減免申請中区分コード")
     private RString genmenShinseichuKubunCode;
     @CsvField(order = 430, name = "利用者負担区分コード")
     private RString riyoshaFutanKubunCode;
     @CsvField(order = 440, name = "給付率")
-    private Decimal kyufuRitsu;
+    private RString kyufuRitsu;
     @CsvField(order = 450, name = "利用者負担適用開始年月日")
-    private FlexibleDate riyoshaFutanTekiyoFromYmd;
+    private RString riyoshaFutanTekiyoFromYmd;
     @CsvField(order = 460, name = "利用者負担適用終了年月日")
-    private FlexibleDate riyoshaFutanTekiyoToYmd;
+    private RString riyoshaFutanTekiyoToYmd;
     @CsvField(order = 470, name = "標準負担区分コード")
     private RString hyojunFutanKubunCode;
     @CsvField(order = 480, name = "負担額")
-    private Decimal futanGaku;
+    private RString futanGaku;
     @CsvField(order = 490, name = "負担額適用開始年月日")
-    private FlexibleDate futanGakuTekiyoFromYmd;
+    private RString futanGakuTekiyoFromYmd;
     @CsvField(order = 500, name = "負担額適用終了年月日")
-    private FlexibleDate futanGakuTekiyoToYmd;
+    private RString futanGakuTekiyoToYmd;
     @CsvField(order = 510, name = "特定入所者認定申請中区分コード")
     private RString tokuteiNyushoshaNinteiShinseichuKubunCode;
     @CsvField(order = 520, name = "特定入所者介護サービス区分コード")
@@ -129,27 +128,27 @@ public class JukyushaKekkaJohoCsvMeisaiEntity {
     @CsvField(order = 530, name = "課税層の特例減額措置対象区分")
     private RString kazeisoNoTokureiGengakuSochiTaishoKubun;
     @CsvField(order = 540, name = "特定入所者食費負担限度額")
-    private Decimal tokuteiNyushoshaShokuhiFutanGendoGaku;
+    private RString tokuteiNyushoshaShokuhiFutanGendoGaku;
     @CsvField(order = 550, name = "居住費_ユニット型個室_負担限度額")
-    private Decimal kyojuhiUnitKoshitsuFutanGendoGaku;
+    private RString kyojuhiUnitKoshitsuFutanGendoGaku;
     @CsvField(order = 560, name = "居住費_ユニット型準個室_負担限度額")
-    private Decimal kyojuhiUnitJunkoshitsuFutanGendoGaku;
+    private RString kyojuhiUnitJunkoshitsuFutanGendoGaku;
     @CsvField(order = 570, name = "居住費_従来型個室_特養等_負担限度額")
-    private Decimal kyojuhiTokuyotoFutanGenndoGaku;
+    private RString kyojuhiTokuyotoFutanGenndoGaku;
     @CsvField(order = 580, name = "居住費_従来型個室_老健療養等_負担限度額")
-    private Decimal kyojuhiRokenRyoyotoFutanGendoGaku;
+    private RString kyojuhiRokenRyoyotoFutanGendoGaku;
     @CsvField(order = 590, name = "居住費_多床室_負担限度額")
-    private Decimal kyojuhiTashoShitsuFutanGendoGaku;
+    private RString kyojuhiTashoShitsuFutanGendoGaku;
     @CsvField(order = 600, name = "負担限度額適用開始年月日")
-    private FlexibleDate futanGendoGakuTekiyoFromYmd;
+    private RString futanGendoGakuTekiyoFromYmd;
     @CsvField(order = 610, name = "負担限度額適用終了年月日")
-    private FlexibleDate futanGendoGakuTekiyoToYmd;
+    private RString futanGendoGakuTekiyoToYmd;
     @CsvField(order = 620, name = "軽減率")
-    private Decimal keigenRitsu;
+    private RString keigenRitsu;
     @CsvField(order = 630, name = "軽減率適用開始年月日")
-    private FlexibleDate keigenRitsuTekiyoFromYmd;
+    private RString keigenRitsuTekiyoFromYmd;
     @CsvField(order = 640, name = "軽減率適用終了年月日")
-    private FlexibleDate keigenRitsuTekiyoToYmd;
+    private RString keigenRitsuTekiyoToYmd;
     @CsvField(order = 650, name = "小規模居宅サービス利用有無")
     private RString shokiboKyotakuServiceRiyoUmu;
     @CsvField(order = 660, name = "保険者番号_後期_")
@@ -165,25 +164,25 @@ public class JukyushaKekkaJohoCsvMeisaiEntity {
     @CsvField(order = 710, name = "二次予防事業区分コード")
     private RString nijiyoboJigyoKubunCode;
     @CsvField(order = 720, name = "二次予防事業有効期間開始年月日")
-    private FlexibleDate nijiyoboJigyoYukokikanFromYmd;
+    private RString nijiyoboJigyoYukokikanFromYmd;
     @CsvField(order = 730, name = "二次予防事業有効期間終了年月日")
-    private FlexibleDate nijiyoboJigyoYukokikanToYmd;
+    private RString nijiyoboJigyoYukokikanToYmd;
     @CsvField(order = 740, name = "住所地特例対象者区分コード")
     private RString jushochiTokureiTaishoshaKubunCode;
     @CsvField(order = 750, name = "施設所在保険者番号")
     private RString shisetsuShozaiHokenshaNo;
     @CsvField(order = 760, name = "住所地特例適用開始年月日")
-    private FlexibleDate jushochiTokureiTekiyoFromYmd;
+    private RString jushochiTokureiTekiyoFromYmd;
     @CsvField(order = 770, name = "住所地特例適用終了年月日")
-    private FlexibleDate jushochiTokureiTekiyoToYmd;
+    private RString jushochiTokureiTekiyoToYmd;
     @CsvField(order = 780, name = "居住費_新１_負担限度額")
-    private Decimal kyojuhi1FutanGendogaku;
+    private RString kyojuhi1FutanGendogaku;
     @CsvField(order = 790, name = "居住費_新２_負担限度額")
-    private Decimal kyojuhi2FutanGendogaku;
+    private RString kyojuhi2FutanGendogaku;
     @CsvField(order = 800, name = "居住費_新３_負担限度額")
-    private Decimal kyojuhi3FutanGendogaku;
+    private RString kyojuhi3FutanGendogaku;
     @CsvField(order = 810, name = "二割負担適用開始年月日")
-    private FlexibleDate niwariFutanTekiyoFromYmd;
+    private RString niwariFutanTekiyoFromYmd;
     @CsvField(order = 820, name = "二割負担適用終了年月日")
-    private FlexibleDate niwariFutanTekiyoToYmd;
+    private RString niwariFutanTekiyoToYmd;
 }

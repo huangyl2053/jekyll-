@@ -29,17 +29,20 @@ public class KagoKetteiKohifutanshaInBodyEditor implements IKagoKetteiKohifutans
     private final boolean 集計Flag;
     private static final Code DATA_3 = new Code("0003");
     private static final RString 被保険者番号 = new RString("被保険者番号");
+    private final int index;
 
     /**
      * コンストラクタです
      *
      * @param 帳票出力対象データ KagoKetteiKohifutanshaChohyoEntity
      * @param 集計Flag boolean
+     * @param index int
      */
     public KagoKetteiKohifutanshaInBodyEditor(KagoKetteiKohifutanshaChohyoEntity 帳票出力対象データ,
-            boolean 集計Flag) {
+            boolean 集計Flag, int index) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.集計Flag = 集計Flag;
+        this.index = index;
     }
 
     @Override
@@ -53,7 +56,7 @@ public class KagoKetteiKohifutanshaInBodyEditor implements IKagoKetteiKohifutans
     }
 
     private void edit明細(KagoKetteiKohifutanshaInSource source) {
-        source.listUpper_1 = new RString(帳票出力対象データ.getNo());
+        source.listUpper_1 = new RString(index);
         source.listUpper_2 = doパターン54(帳票出力対象データ.get取扱年月());
         source.listUpper_3 = getColumnValue(帳票出力対象データ.get事業者番号());
         source.listUpper_4 = 帳票出力対象データ.get公費受給者番号();

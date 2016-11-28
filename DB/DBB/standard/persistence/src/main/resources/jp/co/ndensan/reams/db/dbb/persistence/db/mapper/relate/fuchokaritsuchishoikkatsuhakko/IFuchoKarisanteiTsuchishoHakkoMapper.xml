@@ -1133,13 +1133,13 @@
     <resultMap id="resultMap_DbT2015KeisangoJohoTemp" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokaritsuchishoikkatsuhakko.DbT2015KeisangoJohoTempEntity" autoMapping="true">
         <id column="ueT0511after_shoriTaishoYM"/>
         <id column="ueT0511after_renban"/>
-        <id column="dbT2015KeisangoJohoTemp_tsuchishoNo"/>
         <association property="計算後情報_更正前" resultMap="ResultMap_DbT2015KeisangoJohoTempEntity"/>
         <association property="異動賦課情報一時テーブル" resultMap="resultMap_異動賦課情報一時テーブル"/>
     </resultMap>
     <resultMap id="resultMap_KaigoFukaZenengoTemp" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokaritsuchishoikkatsuhakko.KaigoFukaZenedoTempEntity" autoMapping="true">
         <id column="ueT0511after_shoriTaishoYM"/>
         <id column="ueT0511after_renban"/>
+        <id column="dbT2002Fuka_tsuchishoNo"/>
         <association property="介護賦課前年度" resultMap="resultMap_FukaInfo"/>
         <association property="異動賦課情報一時テーブル" resultMap="resultMap_異動賦課情報一時テーブル"/>
     </resultMap>

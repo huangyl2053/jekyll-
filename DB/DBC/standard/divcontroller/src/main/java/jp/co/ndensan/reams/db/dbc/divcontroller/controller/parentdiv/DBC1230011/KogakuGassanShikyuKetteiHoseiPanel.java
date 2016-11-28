@@ -50,8 +50,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KogakuGassanShikyuKetteiHoseiPanel {
 
-    private static final RString 高額合算支給決定情報補正 = new RString("高額合算支給決定情報補正");
-    private static final RString 事業高額合算支給決定情報補正 = new RString("事業分支給決定情報補正（単）");
+    private static final RString 高額合算支給決定情報補正 = new RString("高額合算　支給決定情報補正（単）");
+    private static final RString 事業高額合算支給決定情報補正 = new RString("事業分　高額合算　支給決定情報補正（単）");
     private static final RString 支給額決定情報の更新が正常に行われました = new RString("支給額決定情報の更新が正常に行われました");
     private static final RString 新規 = new RString("新規");
     private static final RString 修正 = new RString("修正");

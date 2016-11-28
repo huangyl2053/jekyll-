@@ -174,16 +174,6 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
         item.setHokenryoGakuAto(更正後.get更正後介護保険料仮徴収額合計() != null
                 ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後介護保険料仮徴収額合計(), 0) : RString.EMPTY);
 
-        if (編集後仮算定通知書共通情報.get増減額() != null) {
-            RString zogenGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get増減額(), 0);
-            item.setZogenGaku(zogenGaku);
-        }
-
-        if (編集後仮算定通知書共通情報.get納付済額_未到来期含む() != null) {
-            RString nofuzumiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get納付済額_未到来期含む(), 0);
-            item.setNofuzumiGaku(nofuzumiGaku);
-        }
-
         item.setKoremadeChoshuho(更正前.get更正前徴収方法());
         item.setKoremadeTokuchoGimusha(更正前.get更正前特別徴収義務者());
         item.setKoremadeTokuchoTaishoNenkin(更正前.get更正前特別徴収対象年金());
@@ -313,6 +303,15 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
     }
 
     private void set調定事由(KarisanteiHenkoTsuchishoB5YokoItem item, EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報) {
+        if (編集後仮算定通知書共通情報.get増減額() != null) {
+            RString zogenGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get増減額(), 0);
+            item.setZogenGaku(zogenGaku);
+        }
+
+        if (編集後仮算定通知書共通情報.get納付済額_未到来期含む() != null) {
+            RString nofuzumiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get納付済額_未到来期含む(), 0);
+            item.setNofuzumiGaku(nofuzumiGaku);
+        }
         item.setChoteiJiyu1(編集後仮算定通知書共通情報.get調定事由１() == null ? RString.EMPTY : 編集後仮算定通知書共通情報.get調定事由１());
         item.setChoteiJiyu2(編集後仮算定通知書共通情報.get調定事由２() == null ? RString.EMPTY : 編集後仮算定通知書共通情報.get調定事由２());
         item.setChoteiJiyu3(編集後仮算定通知書共通情報.get調定事由３() == null ? RString.EMPTY : 編集後仮算定通知書共通情報.get調定事由３());

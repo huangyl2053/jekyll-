@@ -43,7 +43,9 @@
             <result property="備考1" column="dbWT3036_biko1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="備考2" column="dbWT3036_biko2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="更新DB無" column="dbWT3036_koshinDBumu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-            <result property="識別コード" column="dbWT0001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+            <result property="識別コード" column="dbWT0001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>          
+            <result property="郵便番号" column="dbWT0001_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+            <result property="氏名５０音カナ" column="dbWT0001_shimei50onKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="連番コード" column="row_number" /> 
      </resultMap> 
         
@@ -75,6 +77,8 @@
          DbWT3036."biko2" AS dbWT3036_biko2,
          DbWT3036."koshinDBumu" AS dbWT3036_koshinDBumu,
          DbWT0001."shikibetsuCode" As  dbWT0001_shikibetsuCode,
+         DbWT0001."yubinNo" As dbWT0001_yubinNo,
+         DbWT0001."shimei50onKana" As dbWT0001_shimei50onKana,
          ROW_NUMBER() OVER() AS row_number
     </sql>
         

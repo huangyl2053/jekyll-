@@ -1164,6 +1164,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             for (KeisanjohoAtenaKozaKouseizengoEntity 更正前後Entity : 更正前後EntityList) {
                 eucCsvWriter.writeLine(setCSVEntity(更正前後Entity, 調定日時, 賦課年度, 月List));
             }
+            eucCsvWriter.close();
         }
 
         List<RString> 出力条件リスト = new ArrayList<>();
