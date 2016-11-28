@@ -446,7 +446,8 @@ public class TokuchoKariSanteiFukaManagerBatch {
         HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
         TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine仮算定保険料段階(hokenryoDankaiHanteiParameter);
         if (月別保険料段階 != null && 月別保険料段階.get保険料段階04月() != null) {
-            保険料段階 = 月別保険料段階.get保険料段階04月();
+            保険料段階 = hokenryoDankaiHanteiParameter.getSeigyoJoho().getHokenryoDankaiList()
+                    .getBy段階Index(月別保険料段階.get保険料段階04月()).get段階区分();
         }
         return 保険料段階;
     }
