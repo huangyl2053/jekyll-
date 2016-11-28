@@ -142,9 +142,13 @@ public enum KogakuGassanShikyuShinseiTorokuValidationMessage implements IValidat
      */
     医療支給申請書整理番号入力桁不足(UrErrorMessages.入力値が不正_追加メッセージあり, "入力桁不足"),
     /**
-     * 必須項目
+     * 所得区分必須項目
      */
-    必須項目(UrErrorMessages.必須項目),
+    所得区分必須項目(UrErrorMessages.必須項目),
+    /**
+     * 加入期間必須項目
+     */
+    加入期間必須項目(UrErrorMessages.必須項目),
     /**
      * 備考文字種
      */

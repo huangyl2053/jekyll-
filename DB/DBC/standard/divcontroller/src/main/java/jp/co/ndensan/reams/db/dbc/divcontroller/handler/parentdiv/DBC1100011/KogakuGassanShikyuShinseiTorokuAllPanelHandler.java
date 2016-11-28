@@ -161,7 +161,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             ドロップダウンリスト項目セット();
         } else if (申請状態WK == INT_2 || 申請状態WK == INT_3 || 申請状態WK == INT_0) {
             div.getTxtShikyuShinseiKubun().clearValue();
-            変更状態を初期化設定();
+            変更状態を初期化設定(メニューID);
             if (照会モード != null) {
                 照会WK = true;
             }
@@ -280,8 +280,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
 
     /**
      * 申請登録状態初期設定のイベントです。
+     *
+     * @param メニューID メニューID
      */
-    public void 申請登録状態初期設定() {
+    public void 申請登録状態初期設定(RString メニューID) {
         被保険者情報等TABクリア();
         国保後期資格情報TABクリア();
         保険者加入情報パネルクリア();
@@ -294,10 +296,19 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         } else {
             div.getTxtTeishutsuHokenshaNo().setValue(保険者番号);
         }
+
         div.getDdlShokisaiHokenshaNo().setSelectedIndex(INT_0);
         div.getTxtKaigoShikyuShinseishoSeiriBango2().setValue(RSTRING_99);
         div.getTxtRirekiBango().setValue(Decimal.ONE);
-        div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(RSTRING_00);
+        if (DBCMN61009.equals(メニューID)) {
+            div.getTxtIryoShikyuShinseishoSeiriBango2().clearValue();
+            div.getDdlShikyuShinseiKeitai().setDisabled(true);
+            div.getChkKofuShinseiUmu().setDisabled(true);
+        } else {
+            div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(RSTRING_00);
+            div.getDdlShikyuShinseiKeitai().setDisabled(false);
+            div.getChkKofuShinseiUmu().setDisabled(false);
+        }
         div.getTxtShikyuShinseiKubun().setValue(KaigoGassan_ShinseiKbn.新規.get名称());
         div.getDdlShikyuShinseiKeitai().setSelectedIndex(INT_0);
         div.getTxtShinseiYMD().setValue(nowDate);
@@ -837,29 +848,52 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         申請情報パネル制御(false);
         申請登録パネル制御(false);
         if (DBCMN61009.equals(メニューID)) {
-            RDate 資格取得年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格取得年月日());
-            RDate 資格喪失年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格喪失年月日());
-            set加入期間(資格取得年月日, 資格喪失年月日);
-            div.getKogakuGassanShikyuShinseiToroku().getTabShinseiTorokuPanel1().setVisible(true);
-            div.getKogakuGassanShikyuShinseiToroku().getTabShinseiTorokuPanel1().getKaigoShikaku().setReadOnly(false);
-            div.getTxtKanyuKikanYMD().setDisabled(false);
-            div.getDdlShotokuKubun().setSelectedIndex(INT_0);
-            div.getDdlShotokuKubun().setDisabled(true);
-            div.getDdlOver70ShotokuKubun().setSelectedIndex(INT_0);
-            div.getDdlOver70ShotokuKubun().setDisabled(true);
-            div.getTxtShikakuSoshitsuYMD().clearValue();
-            div.getTxtShikakuSoshitsuYMD().setDisabled(true);
-            div.getDdlShikakuSoshitsuJiyu().setSelectedIndex(INT_0);
-            div.getDdlShikakuSoshitsuJiyu().setDisabled(true);
-            set対象計算期間();
-            div.getTxtTaishoKeisanKikanYMD().setFromDisabled(true);
-            div.getTxtTaishoKeisanKikanYMD().setToDisabled(false);
-            div.getTxtBiko().clearValue();
-            div.getTxtBiko().setDisabled(false);
+            set介護資格情報初期化();
         }
     }
 
-    private void 変更状態を初期化設定() {
+    private void set介護資格情報初期化() {
+        set対象計算期間();
+        RDate 資格取得年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格取得年月日());
+        RDate 資格喪失年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格喪失年月日());
+        set加入期間(資格取得年月日, 資格喪失年月日);
+        div.getKogakuGassanShikyuShinseiToroku().getTabShinseiTorokuPanel1().setVisible(true);
+        div.getKogakuGassanShikyuShinseiToroku().getTabShinseiTorokuPanel1().getKaigoShikaku().setReadOnly(false);
+        div.getTxtKanyuKikanYMD().setDisabled(false);
+        div.getDdlShotokuKubun().setSelectedIndex(INT_0);
+        div.getDdlShotokuKubun().setDisabled(true);
+        div.getDdlOver70ShotokuKubun().setSelectedIndex(INT_0);
+        div.getDdlOver70ShotokuKubun().setDisabled(true);
+        div.getTxtShikakuSoshitsuYMD().clearValue();
+        div.getTxtShikakuSoshitsuYMD().setDisabled(true);
+        div.getDdlShikakuSoshitsuJiyu().setSelectedIndex(INT_0);
+        div.getDdlShikakuSoshitsuJiyu().setDisabled(true);
+        div.getTxtTaishoKeisanKikanYMD().setFromDisabled(true);
+        div.getTxtTaishoKeisanKikanYMD().setToDisabled(false);
+        div.getTxtBiko().clearValue();
+        div.getTxtBiko().setDisabled(false);
+    }
+
+    private void 変更状態を初期化設定(RString メニューID) {
+        if (DBCMN61003.equals(メニューID) || DBCMN61007.equals(メニューID) || DBCMN61011.equals(メニューID)) {
+            div.getDdlShikyuShinseiKeitai().setDisabled(true);
+            div.getTxtShinseiYMD().setDisabled(true);
+            div.getChkKofuShinseiUmu().setDisabled(true);
+            div.getTxtDaihyoshaShimei().setDisabled(true);
+            div.getTxtDaihyoshaJusho().setDisabled(true);
+            div.getTxtDaihyoshaTelNo().setDisabled(true);
+            div.getTxtDaihyoshaYubinNo().setDisabled(true);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請情報を保存する, true);
+        } else {
+            div.getDdlShikyuShinseiKeitai().setDisabled(false);
+            div.getTxtShinseiYMD().setDisabled(false);
+            div.getChkKofuShinseiUmu().setDisabled(false);
+            div.getTxtDaihyoshaShimei().setDisabled(false);
+            div.getTxtDaihyoshaJusho().setDisabled(false);
+            div.getTxtDaihyoshaTelNo().setDisabled(false);
+            div.getTxtDaihyoshaYubinNo().setDisabled(false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請情報を保存する, false);
+        }
         div.getBtnAddShinsei().setVisible(true);
         div.getDdlShokisaiHokenshaNo().setReadOnly(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
@@ -874,6 +908,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         div.getBtnKakuteiShintei().setVisible(true);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
+        if (メニューID.equals(DBCMN61010) || DBCMN61012.equals(メニューID)) {
+            set介護資格情報初期化();
+        }
     }
 
     private void 照会状態を初期化設定() {
