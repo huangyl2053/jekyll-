@@ -67,7 +67,7 @@ public class InsKaigohokenNenkinTokuchoTaishosha1Process extends BatchProcessBas
     protected void beforeExecute() {
         Integer 連番 = getMapper(ITokuChoSoufuJohoSakuseiBatchMapper.class).getMAX連番();
         if (連番 != null) {
-            max連番 = 連番;
+            max連番 = 連番 + 1;
         }
     }
 
