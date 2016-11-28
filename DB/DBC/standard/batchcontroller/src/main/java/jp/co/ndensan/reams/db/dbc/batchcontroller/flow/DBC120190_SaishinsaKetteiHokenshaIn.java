@@ -48,7 +48,7 @@ public class DBC120190_SaishinsaKetteiHokenshaIn extends BatchFlowBase<DBC120190
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
-    private static final RString マスタ登録BATCHID = new RString("SaishinsaKetteiDBToroku");
+    private static final RString マスタ登録BATCHID = new RString("DBC120191_SaishinsaKetteiDBToroku");
     private static final RString ファイル格納フォルダ名 = new RString("DBC120080");
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
