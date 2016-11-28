@@ -1424,7 +1424,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         for (KeisangojohoAtenaKozaEntity entity_更正後 : 計算後情報_宛名_口座_更正後List) {
             boolean has更正前 = false;
             for (KeisangojohoAtenaKozaEntity entity_更正前 : 計算後情報_宛名_口座_更正前List) {
-                if (entity_更正後.get通知書番号().equals(entity_更正前.get通知書番号())) {
+                if (entity_更正後.get通知書番号().equals(entity_更正前.get通知書番号())
+                        && entity_更正後.get賦課年度().getYearValue() == entity_更正前.get賦課年度().getYearValue()) {
                     KeisangojohoAtenaKozaKouseizengoEntity 更正前後Entity
                             = new KeisangojohoAtenaKozaKouseizengoEntity(entity_更正前, entity_更正後);
                     更正前後EntityList.add(更正前後Entity);
