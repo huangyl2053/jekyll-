@@ -545,7 +545,7 @@
         C."meisho",
         C."seinengappiYMD",
         CASE WHEN master."kouhoshakubun"='1' THEN master."torokuIdoYMD"
-        WHEN master."kouhoshakubun"='2' THEN C."shojoIdoYMD"
+        WHEN master."kouhoshakubun"='2' THEN D."shojoIdoYMD"
         ELSE ''
         END AS "idoYMD",
         master."kouhoshakubun",
@@ -576,6 +576,16 @@
                         master
                    )) AS C
         ON master."shikibetsuCode"=C."shikibetsuCode"
+        INNER JOIN 
+        rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
+        ,'','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0','0','','','0','0','0',''
+        ,'','','','','','','','','','','','','','','','','', (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS D
+        ON master."shikibetsuCode"=D."shikibetsuCode"
         WHERE
         NOT (EXISTS
             (SELECT 'X'
