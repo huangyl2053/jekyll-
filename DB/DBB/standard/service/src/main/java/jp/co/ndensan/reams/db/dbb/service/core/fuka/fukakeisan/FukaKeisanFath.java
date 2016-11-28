@@ -150,7 +150,7 @@ public class FukaKeisanFath {
 
         Kitsuki 本算定期と月の対応 = hantei.find更正月_本算定期(param.get調定日時().getDate());
         kiwariKeisanInput.set現在期(本算定期と月の対応.get期AsInt());
-        kiwariKeisanInput.set現在期区分(Integer.parseInt(本算定期と月の対応.get月処理区分().get区分().toString()));
+        kiwariKeisanInput.set現在期区分(Integer.parseInt(本算定期と月の対応.get月処理区分().get区分().toString()) - INT_1);
         kiwariKeisanInput.set特徴停止可能期(get特徴停止可能期(param.get調定日時().getDate()));
 
         kiwariKeisanInput.set現在特徴期区分(GenzaiTokuchoKiKubun.本算異動.getコード());
