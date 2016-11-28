@@ -55,6 +55,7 @@ public class ShinseiKensaku {
     private static final RString MENUID_DBEMN62001 = new RString("DBEMN72001");
 //>>>>>>> origin/sync
     private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
+    private static final RString 完了メッセージ = new RString("要介護認定申請検索の発行処理が完了しました。");
 
     /**
      * 画面初期化処理です。
@@ -232,6 +233,7 @@ public class ShinseiKensaku {
      * @return ResponseData<ShinseiKensakuDiv>
      */
     public ResponseData<ShinseiKensakuDiv> onClick_printAfter(ShinseiKensakuDiv div) {
+        div.getCcdKanryoMessage().setMessage(完了メッセージ, RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBE0100001StateName.完了);
     }
 
