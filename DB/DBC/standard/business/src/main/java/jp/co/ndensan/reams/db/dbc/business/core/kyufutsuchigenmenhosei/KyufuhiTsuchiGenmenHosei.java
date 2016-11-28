@@ -9,7 +9,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchigenmenhoseiichira
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 給付費通知減免補正一覧表のbusinessクラスです。
@@ -44,7 +47,7 @@ public class KyufuhiTsuchiGenmenHosei {
         reportEntity.set改ページ条件5(出力順entity.get改頁項目5());
         reportEntity.set被保険者番号(entity.getHiHokenshaNo().value());
         reportEntity.set被保険者名(entity.getMeisho());
-        reportEntity.set年月(entity.getServiceTeikyoYM().toDateString());
+        reportEntity.set年月(getパターン54(entity.getServiceTeikyoYM()));
         reportEntity.setサービス事業者コード(entity.getJigyoshoNo().value());
         reportEntity.setサービス事業者(entity.getJigyoshaName());
         reportEntity.setサービス種類コード(entity.getServiceShuruiCode().value());
@@ -52,6 +55,13 @@ public class KyufuhiTsuchiGenmenHosei {
         reportEntity.set利用者負担額(entity.getRiyoshaFutangaku());
         reportEntity.setサービス費用(entity.getServiceHiyoTotal());
         return reportEntity;
+    }
+
+    private RString getパターン54(FlexibleYearMonth サービス提供年月) {
+        if (サービス提供年月 == null || サービス提供年月.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return サービス提供年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
     /**
