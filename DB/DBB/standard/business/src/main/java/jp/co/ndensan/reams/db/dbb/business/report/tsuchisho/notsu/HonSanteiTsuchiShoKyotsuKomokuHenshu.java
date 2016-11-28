@@ -200,7 +200,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             特徴既に納付すべき額 = 特徴納付済額_更正前;
             特徴今後納付すべき額_収入元に = 特徴納付済額_更正前.subtract(特徴歳出還付額_更正後).subtract(特徴納付済額);
             特徴今後納付すべき額_調定元に = get特徴納付済額(賦課情報_更正後, 1, Integer.parseInt(特徴現在期.toString()) - 1).subtract(特徴歳出還付額_更正後)
-                    .subtract(特徴既に納付すべき額);;
+                    .subtract(特徴既に納付すべき額);
             既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
             今後納付すべき額_調定元に = 普徴今後納付すべき額_調定元に.add(特徴今後納付すべき額_調定元に);
             今後納付すべき額_収入元に = 普徴今後納付すべき額_収入元に.add(特徴今後納付すべき額_収入元に);
@@ -209,19 +209,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         }
         FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
         EditedHonSanteiTsuchiShoKyotsu shoKyotsu = new EditedHonSanteiTsuchiShoKyotsu();
-        shoKyotsu.set被保険者番号(賦課情報.get被保険者番号());
-        shoKyotsu.set調定年度(賦課情報.get調定年度());
-        shoKyotsu.set調定年度_年度あり(賦課情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                fillType(FillType.BLANK).toDateString().concat("年度"));
-        shoKyotsu.set調定年度_年度なし(賦課情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                fillType(FillType.BLANK).toDateString());
-        shoKyotsu.set賦課年度(賦課情報.get賦課年度());
-        shoKyotsu.set賦課年度_年度あり(賦課情報.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                fillType(FillType.BLANK).toDateString().concat("年度"));
-        shoKyotsu.set賦課年度_年度なし(賦課情報.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                fillType(FillType.BLANK).toDateString());
-        shoKyotsu.set識別コード(賦課情報.get識別コード());
-        shoKyotsu.set通知書番号(賦課情報.get通知書番号());
+        edit編集後本算定通知書共通情報2(shoKyotsu, 賦課情報);
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前 = get更正前(本算定通知書情報);
         shoKyotsu.set更正前(更正前);
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = get更正後(本算定通知書情報);
@@ -239,6 +227,33 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         shoKyotsu.set特徴納付済額_未到来期含まない(特徴納付済額_未到来期含まない);
         shoKyotsu.set納付済額算出年月日(本算定通知書情報.get発行日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        edit編集後本算定通知書共通情報(本算定通知書情報, shoKyotsu, 既に納付すべき額, 今後納付すべき額_調定元に, 今後納付すべき額_収入元に,
+                特徴既に納付すべき額, 普徴今後納付すべき額_調定元に, 普徴既に納付すべき額, 普徴今後納付すべき額_収入元に, 特徴今後納付すべき額_調定元に,
+                特徴今後納付すべき額_収入元に, 特別徴収額合計, 普通徴収額合計);
+        return shoKyotsu;
+    }
+
+    private void edit編集後本算定通知書共通情報2(EditedHonSanteiTsuchiShoKyotsu shoKyotsu, FukaJoho 賦課情報) {
+        shoKyotsu.set被保険者番号(賦課情報.get被保険者番号());
+        shoKyotsu.set調定年度(賦課情報.get調定年度());
+        shoKyotsu.set調定年度_年度あり(賦課情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString().concat("年度"));
+        shoKyotsu.set調定年度_年度なし(賦課情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        shoKyotsu.set賦課年度(賦課情報.get賦課年度());
+        shoKyotsu.set賦課年度_年度あり(賦課情報.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString().concat("年度"));
+        shoKyotsu.set賦課年度_年度なし(賦課情報.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        shoKyotsu.set識別コード(賦課情報.get識別コード());
+        shoKyotsu.set通知書番号(賦課情報.get通知書番号());
+    }
+
+    private void edit編集後本算定通知書共通情報(HonSanteiTsuchiShoKyotsu 本算定通知書情報, EditedHonSanteiTsuchiShoKyotsu shoKyotsu,
+            Decimal 既に納付すべき額, Decimal 今後納付すべき額_調定元に, Decimal 今後納付すべき額_収入元に,
+            Decimal 特徴既に納付すべき額, Decimal 普徴今後納付すべき額_調定元に, Decimal 普徴既に納付すべき額,
+            Decimal 普徴今後納付すべき額_収入元に, Decimal 特徴今後納付すべき額_調定元に,
+            Decimal 特徴今後納付すべき額_収入元に, Decimal 特別徴収額合計, Decimal 普通徴収額合計) {
         shoKyotsu.set既に納付すべき額(既に納付すべき額);
         shoKyotsu.set今後納付すべき額_調定元に(今後納付すべき額_調定元に);
         shoKyotsu.set今後納付すべき額_収入元に(今後納付すべき額_収入元に);
@@ -250,11 +265,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         shoKyotsu.set特徴今後納付すべき額_収入元に(特徴今後納付すべき額_収入元に);
         shoKyotsu.set特別徴収額合計(特別徴収額合計);
         shoKyotsu.set普通徴収額合計(普通徴収額合計);
-        edit編集後本算定通知書共通情報(本算定通知書情報, shoKyotsu);
-        return shoKyotsu;
-    }
-
-    private void edit編集後本算定通知書共通情報(HonSanteiTsuchiShoKyotsu 本算定通知書情報, EditedHonSanteiTsuchiShoKyotsu shoKyotsu) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(本算定通知書情報.get賦課の情報_更正後().get宛名().toEntity());
         EditedKojin editedKojin = new EditedKojin(kojin, 本算定通知書情報.get帳票制御共通(), 本算定通知書情報.get地方公共団体());
 
