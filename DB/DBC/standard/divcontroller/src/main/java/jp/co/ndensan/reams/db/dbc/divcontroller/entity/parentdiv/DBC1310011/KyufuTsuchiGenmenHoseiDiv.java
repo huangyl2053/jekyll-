@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1310011;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -17,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuTsuchiGenmenHoseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -85,13 +87,8 @@ public class KyufuTsuchiGenmenHoseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public DropDownList getDdlShichoson() {
-        return this.getKyufuTsuchiGenmenHoseiListSakusei().getDdlShichoson();
-    }
-
-    @JsonIgnore
-    public void  setDdlShichoson(DropDownList ddlShichoson) {
-        this.getKyufuTsuchiGenmenHoseiListSakusei().setDdlShichoson(ddlShichoson);
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getKyufuTsuchiGenmenHoseiListSakusei().getCcdHokenshaList();
     }
 
     @JsonIgnore

@@ -61,8 +61,9 @@
         ON T4."shikibetsuCode" = PSM."shikibetsuCode"
         WHERE #{サービス開始年月} <![CDATA[<=]]> T1."serviceTeikyoYM"
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{サービス終了年月}
-        AND T1."shokisaiHokenshaNo" IN 
-        <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
+        <if test="is広域保険者">
+            AND T1."shokisaiHokenshaNo" = #{証記載保険者番号}
+        </if>
         ${出力順}
     </select>
 </mapper>
