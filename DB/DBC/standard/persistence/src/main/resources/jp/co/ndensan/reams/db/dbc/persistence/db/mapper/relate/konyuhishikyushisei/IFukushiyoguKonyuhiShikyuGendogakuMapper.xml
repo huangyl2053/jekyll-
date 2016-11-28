@@ -88,10 +88,11 @@
     </resultMap>
     
     <select id="select要介護認定状態区分コード"
-            resultType="jp.co.ndensan.reams.uz.uza.biz.Code"
+            resultMap="Result_yokaigoJotaiKubunCode"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ServiceShuruiCodeParameter" fetchSize="500" resultOrdered="true">
         SELECT
-        JukyushaDaicho."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode"
+        JukyushaDaicho."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode",
+        JukyushaDaicho."kyuSochishaFlag" AS "kyuSochishaFlag"
         FROM
         rgdb."DbT4001JukyushaDaicho" AS JukyushaDaicho
         WHERE
@@ -103,9 +104,14 @@
         AND
         JukyushaDaicho."logicalDeletedFlag" <![CDATA[<>]]> true
         ORDER BY
-        JukyushaDaicho."ninteiYukoKikanKaishiYMD" DESC
+        JukyushaDaicho."rirekiNo" DESC,
+        JukyushaDaicho."edaban" DESC
         LIMIT 1
     </select>
+     <resultMap id="Result_yokaigoJotaiKubunCode" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinsei" autoMapping="true">
+            <result property="yokaigoJotaiKubunCode" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+            <result property="kyuSochishaFlag" column="kyuSochishaFlag"/>
+    </resultMap>
     
     <select id="select措置元市町村データ"
             resultMap="Result_Shichoson"

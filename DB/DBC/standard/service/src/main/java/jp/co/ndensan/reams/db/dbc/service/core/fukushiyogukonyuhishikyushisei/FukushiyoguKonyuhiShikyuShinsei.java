@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShik
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.ShichosonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekka;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.YokaigoJotaiKubunCode;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3048ShokanFukushiYoguHanbaihiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3118ShikibetsuNoKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7112ShokanShuruiShikyuGendoGakuDac;
@@ -47,6 +48,8 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3036ShokanHanteiKekkaD
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3038ShokanKihonDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -54,14 +57,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -95,6 +98,8 @@ public class FukushiyoguKonyuhiShikyuShinsei {
     private static final ServiceShuruiCode SERVICECODE_41 = new ServiceShuruiCode("41");
     private static final RString MSG_NAME_HIHOKENSHANO = new RString("被保険者番号");
     private static final RString MSG_NAME_SERVICETEIKYOYM = new RString("サービス提供年月");
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_6 = 6;
 
     /**
      * コンストラクタです。
@@ -808,35 +813,51 @@ public class FukushiyoguKonyuhiShikyuShinsei {
             throw new ApplicationException(
                     UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().replace(MSG_NAME_SERVICETEIKYOYM.toString()));
         }
-        ServiceShuruiCode サービス種類 = new ServiceShuruiCode("");
         IFukushiyoguKonyuhiShikyuGendogakuMapper mapper
                 = mapperProvider.create(IFukushiyoguKonyuhiShikyuGendogakuMapper.class);
         ServiceShuruiCodeParameter parameter = ServiceShuruiCodeParameter.createParameter(被保険者番号, サービス提供年月);
-        Code 要介護認定状態区分コード = mapper.select要介護認定状態区分コード(parameter);
+        YokaigoJotaiKubunCode 要介護認定状態区分コード_旧措置者フラグ = mapper.select要介護認定状態区分コード(parameter);
 
-        if (null == 要介護認定状態区分コード) {
-            throw new ApplicationException(
-                    UrErrorMessages.未指定.getMessage().replace("要介護認定状態区分"));
+        if (null == 要介護認定状態区分コード_旧措置者フラグ || 要介護認定状態区分コード_旧措置者フラグ.getYokaigoJotaiKubunCode() == null) {
+            return ServiceShuruiCode.EMPTY;
         }
-        if (YokaigoJotaiKubun09.非該当.getコード()
-                .equals(要介護認定状態区分コード.value())) {
-            throw new ApplicationException(
-                    UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().replace("要介護認定状態区分コード"));
+        RString 要介護認定状態区分コード = 要介護認定状態区分コード_旧措置者フラグ.getYokaigoJotaiKubunCode().value();
+        if (YoKaigoJotaiKubun.非該当.getCode()
+                .equals(要介護認定状態区分コード)) {
+            if (要介護認定状態区分コード_旧措置者フラグ.isKyuSochishaFlag()) {
+                return SERVICECODE_41;
+            } else {
+                return ServiceShuruiCode.EMPTY;
+            }
         }
+        RString 制度改正施行日_平成１８年０４月改正 = BusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, SubGyomuCode.DBU介護統計報告);
+        if (RString.isNullOrEmpty(制度改正施行日_平成１８年０４月改正)) {
+            return ServiceShuruiCode.EMPTY;
+        }
+        FlexibleYearMonth 制度改正施行日_平成１８年０４月改正の年月 = new FlexibleYearMonth(制度改正施行日_平成１８年０４月改正.substring(INDEX_1, INDEX_6));
+        if (サービス提供年月.isBefore(制度改正施行日_平成１８年０４月改正の年月)) {
+            if (isSERVICECODE_41設定(要介護認定状態区分コード)) {
+                return SERVICECODE_41;
+            }
+        } else {
+            if (YoKaigoJotaiKubun.要支援1.getCode().equals(要介護認定状態区分コード)
+                    || YoKaigoJotaiKubun.要介護2.getCode().equals(要介護認定状態区分コード)) {
+                return SERVICECODE_44;
+            }
+            if (isSERVICECODE_41設定(要介護認定状態区分コード)) {
+                return SERVICECODE_41;
+            }
+        }
+        return ServiceShuruiCode.EMPTY;
+    }
 
-        if (YokaigoJotaiKubun09.要支援1.getコード()
-                .equals(要介護認定状態区分コード.value())
-                || YokaigoJotaiKubun09.要支援2.getコード().equals(要介護認定状態区分コード.value())) {
-            サービス種類 = SERVICECODE_44;
-        } else if (YokaigoJotaiKubun09.要介護1.getコード()
-                .equals(要介護認定状態区分コード.value())
-                || YokaigoJotaiKubun09.要介護2.getコード().equals(要介護認定状態区分コード.value())
-                || YokaigoJotaiKubun09.要介護3.getコード().equals(要介護認定状態区分コード.value())
-                || YokaigoJotaiKubun09.要介護4.getコード().equals(要介護認定状態区分コード.value())
-                || YokaigoJotaiKubun09.要介護5.getコード().equals(要介護認定状態区分コード.value())) {
-            サービス種類 = SERVICECODE_41;
-        }
-        return サービス種類;
+    private boolean isSERVICECODE_41設定(RString 要介護認定状態区分コード) {
+        return YoKaigoJotaiKubun.要支援_経過的要介護.getCode().equals(要介護認定状態区分コード)
+                || YoKaigoJotaiKubun.要介護1.getCode().equals(要介護認定状態区分コード)
+                || YoKaigoJotaiKubun.要介護2.getCode().equals(要介護認定状態区分コード)
+                || YoKaigoJotaiKubun.要介護3.getCode().equals(要介護認定状態区分コード)
+                || YoKaigoJotaiKubun.要介護4.getCode().equals(要介護認定状態区分コード)
+                || YoKaigoJotaiKubun.要介護5.getCode().equals(要介護認定状態区分コード);
     }
 
     /**
