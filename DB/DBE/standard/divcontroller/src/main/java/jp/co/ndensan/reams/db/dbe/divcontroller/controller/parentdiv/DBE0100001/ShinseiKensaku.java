@@ -55,7 +55,7 @@ public class ShinseiKensaku {
     private static final RString MENUID_DBEMN62001 = new RString("DBEMN72001");
 //>>>>>>> origin/sync
     private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
-    private static final RString 完了メッセージ = new RString("要介護認定申請検索の発行処理が完了しました。");
+    private static final RString 完了メッセージ = new RString("要介護認定・要支援認定等申請者一覧表の発行処理が完了しました。");
 
     /**
      * 画面初期化処理です。
