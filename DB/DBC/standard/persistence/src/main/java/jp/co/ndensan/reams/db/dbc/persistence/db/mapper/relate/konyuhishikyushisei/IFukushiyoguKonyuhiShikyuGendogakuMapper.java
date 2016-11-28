@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyu
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.ShichosonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekka;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.YokaigoJotaiKubunCode;
 
 /**
  * 福祉用具購入費支給申請Mapperです。
@@ -35,7 +35,7 @@ public interface IFukushiyoguKonyuhiShikyuGendogakuMapper {
      * @param parameter {@link ServiceShuruiCodeParameter}
      * @return Code
      */
-    Code select要介護認定状態区分コード(ServiceShuruiCodeParameter parameter);
+    YokaigoJotaiKubunCode select要介護認定状態区分コード(ServiceShuruiCodeParameter parameter);
 
     /**
      * 措置元市町村データ取得
