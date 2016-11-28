@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgMi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgWaritsukeZumiShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgchosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2200001.NinteiChosaIraiHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2200001.NinteiChosaIraiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai.NinnteiChousairaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.ninnteichousairai.NinteiChosaIraiPrintService;
@@ -61,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -558,16 +560,22 @@ public class NinteiChosaIrai {
      * @param div NinteiChosaIraiDiv
      * @return ResponseData<SourceDataCollection>
      */
+    public ResponseData<NinteiChosaIraiDiv> onBeforeClick_BtnPrint(NinteiChosaIraiDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        NinteiChosaIraiValidationHandler handler = new NinteiChosaIraiValidationHandler();
+        pairs = handler.validate割付済申請者未指定(pairs, div);
+        pairs = handler.validate認定調査依頼未割付(pairs, div);
+        return ResponseData.of(div).addValidationMessages(pairs).respond();
+    }
+
+    /**
+     * 「選択した帳票を発行する」ボタンのclick処理です。
+     *
+     * @param div NinteiChosaIraiDiv
+     * @return ResponseData<SourceDataCollection>
+     */
     public ResponseData<SourceDataCollection> onClick_BtnPrint(NinteiChosaIraiDiv div) {
-        List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
-        if (selectedItems.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("割付済み申請者未指定ため、依頼書の印刷"));
-        }
-        for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
-            if (MIWARITSUKE.equals(row.getJotai())) {
-                throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("認定調査依頼が未割付のため、発行"));
-            }
-        }
+
         List<RString> list = new ArrayList<>();
         List<RString> chkirai = div.getChkirai().getSelectedKeys();
         if (!chkirai.isEmpty()) {
