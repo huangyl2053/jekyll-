@@ -320,7 +320,6 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.setHidSandannkaiMsgFlg(非表示用フラグ_TRUE);
             } else {
                 div.setHidSandannkaiMsgFlg(RString.EMPTY);
-                return ResponseData.of(div).respond();
             }
         } else if (!要介護状態３段階変更の判定
                 && selectedItems.contains(要介護状態区分)) {
@@ -342,10 +341,8 @@ public class JutakuKaishuJizenShinseiToroku {
             }
         }
         QuestionMessage msg = 限度額リセットチェック(div, hihokenshaNo);
-        if (msg != null) {
-            if (!QuestionMessage.NO_MESSAGE.getCode().equals(msg.getCode())) {
-                return ResponseData.of(div).addMessage(msg).respond();
-            }
+        if (msg != null && !QuestionMessage.NO_MESSAGE.getCode().equals(msg.getCode())) {
+            return ResponseData.of(div).addMessage(msg).respond();
         }
         handler.支払結果の設定(hihokenshaNo);
         ViewStateHolder.put(ViewStateKeys.限度額リセット値, (Serializable) handler.住宅改修データと限度額リセット値の保存());
@@ -368,8 +365,7 @@ public class JutakuKaishuJizenShinseiToroku {
             ViewStateHolder.put(ViewStateKeys.改修住所重複, 改修住所変更);
         }
 
-        if (改修住所変更
-                && !selectedItems.contains(住宅住所変更)) {
+        if (!改修住所変更 && !selectedItems.contains(住宅住所変更)) {
             if (!is改修住所MSG()) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().getCode(),
@@ -387,8 +383,7 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.setHidLimitMsgDisplayedFlg(RString.EMPTY);
                 return new QuestionMessage(QuestionMessage.NO_MESSAGE.getCode(), QuestionMessage.NO_MESSAGE.evaluate());
             }
-        } else if (!改修住所変更
-                && selectedItems.contains(住宅住所変更)) {
+        } else if (改修住所変更 && selectedItems.contains(住宅住所変更)) {
             if (!is改修住所MSG()) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().getCode(),
