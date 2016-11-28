@@ -279,21 +279,20 @@ public class JukyushaKyufuDaichoEdit {
             tmp = 社福.size();
         }
         for (int i = 0; i < tmp; i++) {
-            KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 明細.size()
                     && 明細.get(i) != null) {
-                出力Tmp = set明細(基本, 明細List, 明細.get(i)).get(i);
+                個人用帳票データ = set明細(基本, 明細List, 明細.get(i)).get(i);
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
+                個人用帳票データ = set集計(基本, 集計List, 個人用帳票データ).get(i);
             }
             if (i < 社福.size()
                     && 社福.get(i) != null) {
-                出力Tmp = set社会福祉法人軽減額の編集(社福List, 出力Tmp).get(i);
+                個人用帳票データ = set社会福祉法人軽減額の編集(社福List, 個人用帳票データ).get(i);
             }
             データList.insert(
-                    set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
+                    set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, i, tmp, 保険者コード, 保険者名));
         }
     }
 
@@ -324,24 +323,23 @@ public class JukyushaKyufuDaichoEdit {
             tmp = 入所.size();
         }
         for (int i = 0; i < tmp; i++) {
-            KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 明細.size()
                     && 明細.get(i) != null) {
-                出力Tmp = set明細(基本, 明細List, 明細.get(i)).get(i);
+                個人用帳票データ = set明細(基本, 明細List, 明細.get(i)).get(i);
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
+                個人用帳票データ = set集計(基本, 集計List, 個人用帳票データ).get(i);
             }
             if (i < 社福.size()
                     && 社福.get(i) != null) {
-                出力Tmp = set社会福祉法人軽減額の編集(社福List, 出力Tmp).get(i);
+                個人用帳票データ = set社会福祉法人軽減額の編集(社福List, 個人用帳票データ).get(i);
             }
             if (i < 入所.size()
                     && 入所.get(i) != null) {
-                出力Tmp = set入所(基本, 入所List, 出力Tmp).get(i);
+                個人用帳票データ = set入所(基本, 入所List, 個人用帳票データ).get(i);
             }
-            データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
+            データList.insert(set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, i, tmp, 保険者コード, 保険者名));
         }
     }
 
@@ -377,28 +375,27 @@ public class JukyushaKyufuDaichoEdit {
             tmp = 特別療養.size();
         }
         for (int i = 0; i < tmp; i++) {
-            KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 明細.size()
                     && 明細.get(i) != null) {
-                出力Tmp = set明細(基本, 明細List, 明細.get(i)).get(i);
+                個人用帳票データ = set明細(基本, 明細List, 明細.get(i)).get(i);
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
+                個人用帳票データ = set集計(基本, 集計List, 個人用帳票データ).get(i);
             }
             if (i < 施設療養.size()
                     && 施設療養.get(i) != null) {
-                出力Tmp = set施設療養明細(施設療養List, 出力Tmp).get(i);
+                個人用帳票データ = set施設療養明細(施設療養List, 個人用帳票データ).get(i);
             }
             if (i < 入所.size()
                     && 入所.get(i) != null) {
-                出力Tmp = set入所(基本, 入所List, 出力Tmp).get(i);
+                個人用帳票データ = set入所(基本, 入所List, 個人用帳票データ).get(i);
             }
             if (i < 特別療養.size()
                     && 特別療養.get(i) != null) {
-                出力Tmp = set特別療養明細(特別療養List, 出力Tmp).get(i);
+                個人用帳票データ = set特別療養明細(特別療養List, 個人用帳票データ).get(i);
             }
-            データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
+            データList.insert(set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, i, tmp, 保険者コード, 保険者名));
         }
     }
 
@@ -429,24 +426,23 @@ public class JukyushaKyufuDaichoEdit {
             tmp = 特別療養.size();
         }
         for (int i = 0; i < tmp; i++) {
-            KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 明細.size()
                     && 明細.get(i) != null) {
-                出力Tmp = set明細(基本, 明細List, 明細.get(i)).get(i);
+                個人用帳票データ = set明細(基本, 明細List, 明細.get(i)).get(i);
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
+                個人用帳票データ = set集計(基本, 集計List, 個人用帳票データ).get(i);
             }
             if (i < 入所.size()
                     && 入所.get(i) != null) {
-                出力Tmp = set入所(基本, 入所List, 出力Tmp).get(i);
+                個人用帳票データ = set入所(基本, 入所List, 個人用帳票データ).get(i);
             }
             if (i < 特別療養.size()
                     && 特別療養.get(i) != null) {
-                出力Tmp = set特別療養明細(特別療養List, 出力Tmp).get(i);
+                個人用帳票データ = set特別療養明細(特別療養List, 個人用帳票データ).get(i);
             }
-            データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
+            データList.insert(set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, i, tmp, 保険者コード, 保険者名));
         }
     }
 
@@ -467,16 +463,15 @@ public class JukyushaKyufuDaichoEdit {
             tmp = 集計.size();
         }
         for (int i = 0; i < tmp; i++) {
-            KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 明細.size()
                     && 明細.get(i) != null) {
-                出力Tmp = set明細(基本, 明細List, 明細.get(i)).get(i);
+                個人用帳票データ = set明細(基本, 明細List, 明細.get(i)).get(i);
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
+                個人用帳票データ = set集計(基本, 集計List, 個人用帳票データ).get(i);
             }
-            データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
+            データList.insert(set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, i, tmp, 保険者コード, 保険者名));
         }
     }
 
@@ -525,28 +520,27 @@ public class JukyushaKyufuDaichoEdit {
             tmp = 特別療養.size();
         }
         for (int i = 0; i < tmp; i++) {
-            KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 明細.size()
                     && 明細.get(i) != null) {
-                出力Tmp = set明細(基本, 明細List, 明細.get(i)).get(i);
+                個人用帳票データ = set明細(基本, 明細List, 明細.get(i)).get(i);
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
+                個人用帳票データ = set集計(基本, 集計List, 個人用帳票データ).get(i);
             }
             if (i < 所定疾患.size()
                     && 所定疾患.get(i) != null) {
-                出力Tmp = set所定疾患施設療養明細(所定疾患List, 出力Tmp).get(i);
+                個人用帳票データ = set所定疾患施設療養明細(所定疾患List, 個人用帳票データ).get(i);
             }
             if (i < 入所.size()
                     && 入所.get(i) != null) {
-                出力Tmp = set入所(基本, 入所List, 出力Tmp).get(i);
+                個人用帳票データ = set入所(基本, 入所List, 個人用帳票データ).get(i);
             }
             if (i < 特別療養.size()
                     && 特別療養.get(i) != null) {
-                出力Tmp = set特別療養明細(特別療養List, 出力Tmp).get(i);
+                個人用帳票データ = set特別療養明細(特別療養List, 個人用帳票データ).get(i);
             }
-            データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
+            データList.insert(set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, i, tmp, 保険者コード, 保険者名));
         }
     }
 
@@ -577,24 +571,23 @@ public class JukyushaKyufuDaichoEdit {
             tmp = 特別療養.size();
         }
         for (int i = 0; i < tmp; i++) {
-            KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 明細.size()
                     && 明細.get(i) != null) {
-                出力Tmp = set明細(基本, 明細List, 明細.get(i)).get(i);
+                個人用帳票データ = set明細(基本, 明細List, 明細.get(i)).get(i);
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
+                個人用帳票データ = set集計(基本, 集計List, 個人用帳票データ).get(i);
             }
             if (i < 入所.size()
                     && 入所.get(i) != null) {
-                出力Tmp = set入所(基本, 入所List, 出力Tmp).get(i);
+                個人用帳票データ = set入所(基本, 入所List, 個人用帳票データ).get(i);
             }
             if (i < 特別療養.size()
                     && 特別療養.get(i) != null) {
-                出力Tmp = set特別療養明細(特別療養List, 出力Tmp).get(i);
+                個人用帳票データ = set特別療養明細(特別療養List, 個人用帳票データ).get(i);
             }
-            データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
+            データList.insert(set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, i, tmp, 保険者コード, 保険者名));
         }
     }
 
@@ -616,16 +609,15 @@ public class JukyushaKyufuDaichoEdit {
             tmp = 福祉.size();
         }
         for (int i = 0; i < tmp; i++) {
-            KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 福祉.size()
                     && 福祉.get(i) != null) {
-                出力Tmp = set福祉用具の編集(福祉List, 出力Tmp).get(i);
+                個人用帳票データ = set福祉用具の編集(福祉List, 個人用帳票データ).get(i);
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
+                個人用帳票データ = set集計(基本, 集計List, 個人用帳票データ).get(i);
             }
-            データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
+            データList.insert(set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, i, tmp, 保険者コード, 保険者名));
         }
     }
 
@@ -647,16 +639,15 @@ public class JukyushaKyufuDaichoEdit {
             tmp = 住宅.size();
         }
         for (int i = 0; i < tmp; i++) {
-            KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 住宅.size()
                     && 住宅.get(i) != null) {
-                出力Tmp = set住宅改修(住宅List, 出力Tmp).get(i);
+                個人用帳票データ = set住宅改修(住宅List, 個人用帳票データ).get(i);
             }
             if (i < 集計.size()
                     && 集計.get(i) != null) {
-                出力Tmp = set集計(基本, 集計List, 出力Tmp).get(i);
+                個人用帳票データ = set集計(基本, 集計List, 個人用帳票データ).get(i);
             }
-            データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
+            データList.insert(set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, i, tmp, 保険者コード, 保険者名));
         }
     }
 
@@ -677,16 +668,15 @@ public class JukyushaKyufuDaichoEdit {
             tmp = ケア.size();
         }
         for (int i = 0; i < tmp; i++) {
-            KojinyoTyohyoDataKomoku 出力Tmp = new KojinyoTyohyoDataKomoku();
             if (i < 明細.size()
                     && 明細.get(i) != null) {
-                出力Tmp = set明細(基本, 明細List, 明細.get(i)).get(i);
+                個人用帳票データ = set明細(基本, 明細List, 明細.get(i)).get(i);
             }
             if (i < ケア.size()
                     && ケア.get(i) != null) {
-                出力Tmp = setケアマネジメント費の編集(ケアList, 個人用帳票データ).get(i);
+                個人用帳票データ = setケアマネジメント費の編集(ケアList, 個人用帳票データ).get(i);
             }
-            データList.insert(set帳票データ(jukyushaKyufuDaicho, 出力Tmp, i, tmp, 保険者コード, 保険者名));
+            データList.insert(set帳票データ(jukyushaKyufuDaicho, 個人用帳票データ, i, tmp, 保険者コード, 保険者名));
         }
     }
 
