@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunkeisankekkarenrakuhyo;
 
 import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanResultEntity;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunkeisankekkarenrakuhyo.GassanJigyobunKeisanKekkaRenrakuhyoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
@@ -225,8 +227,8 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
         if (over70_SetaiGassanGaku != null) {
             source.over70SetaiGassanFutanGaku = new RString(over70_SetaiGassanGaku.toString());
         }
-        source.shotokuKbn = dataEntity.getDbt3172Entity().getShotokuKubun();
-        source.over70ShotokuKbn = dataEntity.getDbt3172Entity().getOver70_ShotokuKubun();
+        source.shotokuKbn = KaigoGassan_ShotokuKbn.toValue(dataEntity.getDbt3172Entity().getShotokuKubun()).get名称();
+        source.over70ShotokuKbn = KaigoGassan_Over70_ShotokuKbn.toValue(dataEntity.getDbt3172Entity().getOver70_ShotokuKubun()).get名称();
         Decimal santeiKijunGaku = dataEntity.getDbt3172Entity().getSanteiKijunGaku();
         if (santeiKijunGaku != null) {
             source.santeiKijunGaku = new RString(santeiKijunGaku.toString());

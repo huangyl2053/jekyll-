@@ -85,12 +85,21 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         if (!div.getDgKyufuJissekiShukei().isDisplayNone() && !集計情報リスト.isEmpty()) {
             setDataGrid集計情報(集計情報リスト);
+        } else {
+            List<dgKyufuJissekiShukei_Row> rowList = new ArrayList<>();
+            div.getDgKyufuJissekiShukei().setDataSource(rowList);
         }
         if (!div.getDgKyufuJissekiMeisai().isDisplayNone() && !明細情報リスト.isEmpty()) {
             setDataGrid明細情報(明細情報リスト);
+        } else {
+            List<dgKyufuJissekiMeisai_Row> rowList = new ArrayList<>();
+            div.getDgKyufuJissekiMeisai().setDataSource(rowList);
         }
         if (!div.getDgKyufuJissekiMeisaiJustoku().isDisplayNone() && !明細情報特例リスト.isEmpty()) {
             setDataGrid明細情報特例(明細情報特例リスト, 保険者情報);
+        } else {
+            List<dgKyufuJissekiMeisaiJustoku_Row> rowList = new ArrayList<>();
+            div.getDgKyufuJissekiMeisaiJustoku().setDataSource(rowList);
         }
     }
 
@@ -139,9 +148,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
         }
         if (非活性.equals(識別番号管理.get所定疾患施設療養設定区分())) {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
         } else {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(false);
         }
         if (非活性.equals(識別番号管理.get食事費用設定区分())) {
             div.getBtnShokuji().setDisabled(true);

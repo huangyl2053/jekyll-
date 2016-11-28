@@ -527,6 +527,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             更正前.set徴収方法(new RString("普通徴収"));
         } else if (has特徴期別金額データ(特徴期別金額リスト) && has普徴期別金額データ(普徴期別金額リスト)) {
             更正前.set徴収方法(new RString("特別徴収　普通徴収"));
+        } else {
+            更正前.set徴収方法(RString.EMPTY);
         }
     }
 

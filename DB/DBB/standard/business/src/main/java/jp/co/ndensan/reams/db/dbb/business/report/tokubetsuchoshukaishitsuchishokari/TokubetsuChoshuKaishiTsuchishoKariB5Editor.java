@@ -30,6 +30,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
     private final RString 宛名連番;
     private final EditedAtesaki 編集後宛先;
     private final NinshoshaSource ninshoshaSource;
+    private static final RString 括弧_左 = new RString("(");
+    private static final RString 括弧_右 = new RString(")");
 
     /**
      * コンストラクタです
@@ -60,7 +62,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
                 && 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース() != null) {
             SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
             source.yubinNo1 = sofubutsuAtesakiSource.yubinNo;
-            source.gyoseiku1 = 編集後宛先.get行政区().get名称();
+            source.gyoseiku1 = 括弧_左.concat(編集後宛先.get行政区().get名称()).concat(括弧_右);
             source.jusho3 = sofubutsuAtesakiSource.jusho3;
             source.jushoText = sofubutsuAtesakiSource.jushoText;
             source.jusho1 = sofubutsuAtesakiSource.jusho1;

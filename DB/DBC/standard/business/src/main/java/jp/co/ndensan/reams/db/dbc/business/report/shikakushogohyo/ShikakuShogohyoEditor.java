@@ -41,6 +41,7 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
     private static final RString 件 = new RString("件");
     private static final RString 期間 = new RString("～");
     private static final RString 被保険者番号 = new RString("被保険者番号");
+    private static final RString 無し = new RString("1");
     private static final int NUM_2 = 2;
     private static final int NUM_100 = 100;
     private final boolean flag;
@@ -142,7 +143,12 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
 
     private void editパターン4(ShikakuShogohyoSource source) {
         if (!RString.isNullOrEmpty(target.get資格照合表一時().getKyusochiTokureiCode())) {
-            source.listLower_4 = KyuSochiNyushoshaTokureiCode.toValue(target.get資格照合表一時().getKyusochiTokureiCode()).get名称();
+
+            if (無し.equals(target.get資格照合表一時().getKyusochiTokureiCode())) {
+                source.listLower_4 = KyuSochiNyushoshaTokureiCode.無し.get名称();
+            } else {
+                source.listLower_4 = KyuSochiNyushoshaTokureiCode.有り.get名称();
+            }
         }
         if (target.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD() != null) {
             source.listLower_5 = パターン4(target.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD());

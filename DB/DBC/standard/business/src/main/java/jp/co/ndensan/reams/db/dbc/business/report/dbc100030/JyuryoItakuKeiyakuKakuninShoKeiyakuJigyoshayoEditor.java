@@ -99,6 +99,10 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEditor
         source.hokenKyufuhigaku = entity.get保険給付額();
         source.tsuchibun2 = entity.get通知文2();
         source.pagecnt = entity.getページ();
+        source.受領委任契約番号 = entity.get受領委任契約番号();
+        source.契約事業者番号 = entity.get契約事業者番号();
+        source.契約申請年月日 = entity.get契約申請年月日();
+        source.承認期間_開始 = entity.get承認期間_開始();
 
     }
 
@@ -111,6 +115,18 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEditor
         }
         if (source.hihokenshaNo == null) {
             source.hihokenshaNo = RString.EMPTY;
+        }
+        if (source.契約申請年月日 == null) {
+            source.契約申請年月日 = RString.EMPTY;
+        }
+        if (source.契約事業者番号 == null) {
+            source.契約事業者番号 = RString.EMPTY;
+        }
+        if (source.受領委任契約番号 == null) {
+            source.受領委任契約番号 = RString.EMPTY;
+        }
+        if (source.承認期間_開始 == null) {
+            source.承認期間_開始 = RString.EMPTY;
         }
     }
 

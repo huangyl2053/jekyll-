@@ -240,11 +240,19 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
     }
 
     private boolean is普徴のみ(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報) {
-        return !編集後仮算定通知書共通情報.get更正後().get更正後徴収方法().contains(特別徴収);
+        RString 徴収方法 = 編集後仮算定通知書共通情報.get更正後().get更正後徴収方法();
+        if (RString.isNullOrEmpty(徴収方法)) {
+            return false;
+        }
+        return !徴収方法.contains(特別徴収);
     }
 
     private boolean is特徴のみ(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報) {
-        return !編集後仮算定通知書共通情報.get更正後().get更正後徴収方法().contains(普通徴収);
+        RString 徴収方法 = 編集後仮算定通知書共通情報.get更正後().get更正後徴収方法();
+        if (RString.isNullOrEmpty(徴収方法)) {
+            return false;
+        }
+        return !徴収方法.contains(普通徴収);
     }
 
     private void set普徴(int 行, KarisanteiHenkoTsuchishoB5YokoItem item, List<UniversalSignDeliveryInformation> 普徴納期情報リスト,

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.jukyushakyufujissekidaicho;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoData;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KeikakuHiEntity;
@@ -484,13 +485,12 @@ public final class JukyushaKyufuDaichoData {
      * 計画費明細を設定します。
      *
      * @param 計画費List 計画費List
-     * @param list特定データ list特定データ
      * @param 個人用帳票データ 個人用帳票データ
      * @return 個人用帳票データ
      */
     public static List<KojinyoTyohyoDataKomoku> set計画費明細(List<KeikakuHiEntity> 計画費List,
-            List<KojinyoTyohyoDataKomoku> list特定データ,
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
+        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
         for (int i = 0; i < 計画費List.size(); i++) {
             KeikakuHiEntity 計画費 = 計画費List.get(i);
             個人用帳票データ.setヘッダー1(計画費.get略称());

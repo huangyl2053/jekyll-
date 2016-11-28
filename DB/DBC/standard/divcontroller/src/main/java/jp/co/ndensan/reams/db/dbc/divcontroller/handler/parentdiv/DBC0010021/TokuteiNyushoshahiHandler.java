@@ -176,7 +176,7 @@ public class TokuteiNyushoshahiHandler {
         } else {
             div.getBtnKihon().setDisabled(false);
         }
-        if (DISABLED.equals(識別番号管理.get明細設定区分())) {
+        if (DISABLED.equals(識別番号管理.get明細設定区分()) && DISABLED.equals(識別番号管理.get集計設定区分())) {
             div.getBtnMeisaiShukei().setDisabled(true);
         } else {
             div.getBtnMeisaiShukei().setDisabled(false);

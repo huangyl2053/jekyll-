@@ -89,13 +89,21 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
      * @param 選択Key RString
      */
     public void onClick_radHizukeSentaku(RString 選択Key) {
-        RString 処理名;
-        if (KEY0.equals(選択Key)) {
-            処理名 = ShoriName.高額サービス等支給不支給決定通知書一括作成_受付日.get名称();
-        } else if (KEY1.equals(選択Key)) {
-            処理名 = ShoriName.高額サービス等支給不支給決定通知書一括作成_決定日.get名称();
-        } else {
-            処理名 = ShoriName.高額サービス等支給不支給決定通知書一括作成_決定者受付年月.get名称();
+        RString 処理名 = RString.EMPTY;
+        if (高額サービス費支給決定通知書作成メニューID.equals(ResponseHolder.getMenuID())) {
+            if (KEY0.equals(選択Key)) {
+                処理名 = ShoriName.高額サービス等支給不支給決定通知書一括作成_受付日.get名称();
+            } else if (KEY1.equals(選択Key)) {
+                処理名 = ShoriName.高額サービス等支給不支給決定通知書一括作成_決定日.get名称();
+            } else if (KEY2.equals(選択Key)) {
+                処理名 = ShoriName.高額サービス等支給不支給決定通知書一括作成_決定者受付年月.get名称();
+            }
+        } else if (高額総合事業サービス費支給決定通知書メニューID.equals(ResponseHolder.getMenuID())) {
+            if (KEY0.equals(選択Key)) {
+                処理名 = ShoriName.事業高額サービス等支給不支給決定通知書一括作成_受付日.get名称();
+            } else if (KEY1.equals(選択Key)) {
+                処理名 = ShoriName.事業高額サービス等支給不支給決定通知書一括作成_決定日.get名称();
+            }
         }
 
         RDate システム日付 = RDate.getNowDate();

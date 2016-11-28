@@ -129,6 +129,7 @@ public class KyufuJissekiKihonJouhouMain {
         div.setHdnCurrentOrder(new RString(currenOrder));
         set事業者_月制御(csData_A, div);
         set検索用パラメータ(該当給付実績基本集計データ.get給付実績基本データ());
+        set給付実績ボタン制御(該当給付実績基本集計データ.get識別番号管理());
         set給付実績基本情報データ(div);
         return ResponseData.of(div).respond();
     }
@@ -158,6 +159,7 @@ public class KyufuJissekiKihonJouhouMain {
         div.setHdnCurrentOrder(new RString(currenOrder));
         set事業者_月制御(csData_A, div);
         set検索用パラメータ(該当給付実績基本集計データ.get給付実績基本データ());
+        set給付実績ボタン制御(該当給付実績基本集計データ.get識別番号管理());
         set給付実績基本情報データ(div);
         return ResponseData.of(div).respond();
     }
@@ -179,6 +181,7 @@ public class KyufuJissekiKihonJouhouMain {
         setHidden(サービス提供年月, csData_A, div);
         set事業者_月制御(csData_A, div);
         set検索用パラメータ(該当給付実績基本集計データ.get給付実績基本データ());
+        set給付実績ボタン制御(該当給付実績基本集計データ.get識別番号管理());
         set給付実績基本情報データ(div);
         return ResponseData.of(div).respond();
     }
@@ -200,6 +203,7 @@ public class KyufuJissekiKihonJouhouMain {
         setHidden(サービス提供年月, csData_A, div);
         set事業者_月制御(csData_A, div);
         set検索用パラメータ(該当給付実績基本集計データ.get給付実績基本データ());
+        set給付実績ボタン制御(該当給付実績基本集計データ.get識別番号管理());
         set給付実績基本情報データ(div);
         return ResponseData.of(div).respond();
     }

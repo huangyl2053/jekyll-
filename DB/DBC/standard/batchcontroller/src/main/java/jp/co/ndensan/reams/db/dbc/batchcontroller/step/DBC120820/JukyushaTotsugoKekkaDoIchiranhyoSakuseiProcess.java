@@ -391,7 +391,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
     }
 
     private static RString date_to_string(RString 年月日) {
-        if (null == 年月日) {
+        if (null == 年月日 || RString.EMPTY == 年月日) {
             return RString.EMPTY;
         }
         if (FlexibleDate.canConvert(年月日)) {

@@ -25,10 +25,8 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnTsuika")
-    private Button btnTsuika;
-    @JsonProperty("dgShikyuGendogaku")
-    private DataGrid<dgShikyuGendogaku_Row> dgShikyuGendogaku;
+    @JsonProperty("ShuruiShikyuGendogakuShosaiIchiran")
+    private ShuruiShikyuGendogakuShosaiIchiranDiv ShuruiShikyuGendogakuShosaiIchiran;
     @JsonProperty("ShuruiShikyuGendogakuShosai")
     private ShuruiShikyuGendogakuShosaiDiv ShuruiShikyuGendogakuShosai;
     @JsonProperty("KanryoMessagePanel")
@@ -41,39 +39,21 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnTsuika
-     * @return btnTsuika
+     * getShuruiShikyuGendogakuShosaiIchiran
+     * @return ShuruiShikyuGendogakuShosaiIchiran
      */
-    @JsonProperty("btnTsuika")
-    public Button getBtnTsuika() {
-        return btnTsuika;
+    @JsonProperty("ShuruiShikyuGendogakuShosaiIchiran")
+    public ShuruiShikyuGendogakuShosaiIchiranDiv getShuruiShikyuGendogakuShosaiIchiran() {
+        return ShuruiShikyuGendogakuShosaiIchiran;
     }
 
     /*
-     * setbtnTsuika
-     * @param btnTsuika btnTsuika
+     * setShuruiShikyuGendogakuShosaiIchiran
+     * @param ShuruiShikyuGendogakuShosaiIchiran ShuruiShikyuGendogakuShosaiIchiran
      */
-    @JsonProperty("btnTsuika")
-    public void setBtnTsuika(Button btnTsuika) {
-        this.btnTsuika = btnTsuika;
-    }
-
-    /*
-     * getdgShikyuGendogaku
-     * @return dgShikyuGendogaku
-     */
-    @JsonProperty("dgShikyuGendogaku")
-    public DataGrid<dgShikyuGendogaku_Row> getDgShikyuGendogaku() {
-        return dgShikyuGendogaku;
-    }
-
-    /*
-     * setdgShikyuGendogaku
-     * @param dgShikyuGendogaku dgShikyuGendogaku
-     */
-    @JsonProperty("dgShikyuGendogaku")
-    public void setDgShikyuGendogaku(DataGrid<dgShikyuGendogaku_Row> dgShikyuGendogaku) {
-        this.dgShikyuGendogaku = dgShikyuGendogaku;
+    @JsonProperty("ShuruiShikyuGendogakuShosaiIchiran")
+    public void setShuruiShikyuGendogakuShosaiIchiran(ShuruiShikyuGendogakuShosaiIchiranDiv ShuruiShikyuGendogakuShosaiIchiran) {
+        this.ShuruiShikyuGendogakuShosaiIchiran = ShuruiShikyuGendogakuShosaiIchiran;
     }
 
     /*
@@ -115,6 +95,26 @@ public class SogojigyoShuruiShikyuGendogakuDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public Button getBtnTsuika() {
+        return this.getShuruiShikyuGendogakuShosaiIchiran().getBtnTsuika();
+    }
+
+    @JsonIgnore
+    public void  setBtnTsuika(Button btnTsuika) {
+        this.getShuruiShikyuGendogakuShosaiIchiran().setBtnTsuika(btnTsuika);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgShikyuGendogaku_Row> getDgShikyuGendogaku() {
+        return this.getShuruiShikyuGendogakuShosaiIchiran().getDgShikyuGendogaku();
+    }
+
+    @JsonIgnore
+    public void  setDgShikyuGendogaku(DataGrid<dgShikyuGendogaku_Row> dgShikyuGendogaku) {
+        this.getShuruiShikyuGendogakuShosaiIchiran().setDgShikyuGendogaku(dgShikyuGendogaku);
+    }
+
     @JsonIgnore
     public TextBoxDate getTxtTekiyoKaishiYM() {
         return this.getShuruiShikyuGendogakuShosai().getTxtTekiyoKaishiYM();

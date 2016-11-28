@@ -262,22 +262,22 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
 
     private void pageBreakNullCheck(TokubetsuChoshuIdojohoIchiranSource source) {
         if (source.listUpper_3 == null) {
-            source.listUpper_3 == RString.EMPTY;
+            source.listUpper_3 = RString.EMPTY;
         }
         if (source.listLower_4 == null) {
-            source.listLower_4 == RString.EMPTY;
+            source.listLower_4 = RString.EMPTY;
         }
         if (source.shichosonCode == null) {
-            source.shichosonCode == RString.EMPTY;
+            source.shichosonCode = RString.EMPTY;
         }
         if (source.listUpper_1 == null) {
-            source.listUpper_1 == RString.EMPTY;
+            source.listUpper_1 = RString.EMPTY;
         }
         if (source.listLower_2 == null) {
-            source.listLower_2 == RString.EMPTY;
+            source.listLower_2 = RString.EMPTY;
         }
         if (source.listUpper_2 == null) {
-            source.listUpper_2 == RString.EMPTY;
+            source.listUpper_2 = RString.EMPTY;
         }
     }
 }

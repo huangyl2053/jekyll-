@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc200013;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200013.JuryoIninShoninKakuninshoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200013.JuryoIninShoninKakuninshoIchiranSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票設計_DBCMN32002_受領委任契約承認確認書発行一覧表BodyEditor
@@ -35,6 +36,7 @@ public class JuryoIninShoninKakuninshoIchiranBodyEditor
             return source;
         }
         edit明細(source);
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -51,6 +53,33 @@ public class JuryoIninShoninKakuninshoIchiranBodyEditor
         source.ListLower_2 = entity.get事業者名称();
         source.ListLower_3 = entity.get承認日();
         source.ListLower_4 = entity.get利用サービス内容();
+        source.受領委任契約番号 = entity.get受領委任契約番号();
+        source.契約事業者番号 = entity.get契約事業者番号();
+        source.契約申請年月日 = entity.get契約申請年月日();
+    }
+
+    private void setPageBreakEmpty(JuryoIninShoninKakuninshoIchiranSource source) {
+        if (source.ListLower_4 == null) {
+            source.ListLower_4 = RString.EMPTY;
+        }
+        if (source.ListLower_3 == null) {
+            source.ListLower_3 = RString.EMPTY;
+        }
+        if (source.ListUpper_2 == null) {
+            source.ListUpper_2 = RString.EMPTY;
+        }
+        if (source.契約申請年月日 == null) {
+            source.契約申請年月日 = RString.EMPTY;
+        }
+        if (source.契約事業者番号 == null) {
+            source.契約事業者番号 = RString.EMPTY;
+        }
+        if (source.受領委任契約番号 == null) {
+            source.受領委任契約番号 = RString.EMPTY;
+        }
+        if (source.ListUpper_6 == null) {
+            source.ListUpper_6 = RString.EMPTY;
+        }
     }
 
 }

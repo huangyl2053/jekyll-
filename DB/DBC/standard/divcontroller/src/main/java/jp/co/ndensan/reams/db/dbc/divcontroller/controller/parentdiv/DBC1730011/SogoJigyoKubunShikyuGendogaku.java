@@ -39,6 +39,7 @@ public class SogoJigyoKubunShikyuGendogaku {
     private static final RString 修正 = new RString("修正モード");
     private static final RString 削除 = new RString("削除モード");
     private static final RString 前排他キー = new RString("DbT7117SogoJigyoKubunShikyuGendoGaku");
+    private static final RString 完了メッセージ = new RString("更新が完了しました。");
 
     private SogoJigyoKubunShikyuGendogakuHandler getHandler(SogoJigyoKubunShikyuGendogakuDiv div) {
         return new SogoJigyoKubunShikyuGendogakuHandler(div);
@@ -151,6 +152,9 @@ public class SogoJigyoKubunShikyuGendogaku {
             List<SogoJigyoKubunEntity> 総合事業区分情報 = ViewStateHolder.get(ViewStateKeys.総合事業区分情報, List.class);
             SogoJigyoKubunShikyuGendoGakuManager manager = InstanceProvider.create(SogoJigyoKubunShikyuGendoGakuManager.class);
             getHandler(div).save(総合事業区分情報, 保存モード, manager);
+            div.getBtnTsuika().setDisplayNone(true);
+            div.getDgShikyuGendogaku().setDisplayNone(true);
+            div.getCcdKaigoKanryoMessage().setMessage(完了メッセージ, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBC1730011StateName.完了状態);
         } else {
             return ResponseData.of(div).setState(DBC1730011StateName.初期表示);
@@ -165,6 +169,8 @@ public class SogoJigyoKubunShikyuGendogaku {
      */
     public ResponseData<SogoJigyoKubunShikyuGendogakuDiv> onClick_btnContinue(SogoJigyoKubunShikyuGendogakuDiv div) {
         SogoJigyoKubunShikyuGendoGakuManager manager = InstanceProvider.create(SogoJigyoKubunShikyuGendoGakuManager.class);
+        div.getBtnTsuika().setDisplayNone(false);
+        div.getDgShikyuGendogaku().setDisplayNone(false);
         List<SogoJigyoKubunEntity> businessList = manager.get介護予防_日常生活支援総合事業区分支給限度額_適用開始日の降順一覧();
         ViewStateHolder.put(ViewStateKeys.総合事業区分情報, (Serializable) businessList);
         if (businessList.isEmpty()) {

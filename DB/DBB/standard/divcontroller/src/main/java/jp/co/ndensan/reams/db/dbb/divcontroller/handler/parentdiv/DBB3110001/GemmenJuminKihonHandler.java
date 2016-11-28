@@ -1553,6 +1553,16 @@ public class GemmenJuminKihonHandler {
         boolean is変更通知書兼特徴checked = 発行パネル.getPritPublish2().isIsPublish() && 発行パネル.getPritPublish2().isVisible();
         boolean is納入通知書checked = 発行パネル.getPritPublish3().isIsPublish() && 発行パネル.getPritPublish3().isVisible();
         boolean is賦課台帳checked = 発行パネル.getPritPublish4().isIsPublish() && 発行パネル.getPritPublish4().isVisible();
+
+        FukaJohoRelateMapperParameter 賦課の情報検索条件
+                = FukaJohoRelateMapperParameter.createSelectListParam(調定年度, 賦課年度, 通知書番号);
+        List<FukaJoho> 賦課情報List = FukaJohoManager.createInstance().get最新の賦課情報(賦課の情報検索条件);
+        boolean is本算定 = HonsanteiIkoHantei.createInstance().is本算定後(賦課情報List.get(0));
+        RDate 調定年月日 = new RDate(調定年度.toString().concat(調定月日.toString()));
+        RString config = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型1, 調定年月日, SubGyomuCode.DBB介護賦課);
+        boolean is期毎タイプ = 定値_ヨ.equals(config) || 定値_ロク.equals(config);
+        List<ShutsuryokuKiKoho> 出力期候補List = ShutsuryokuKiKohoFactory.createInstance(調定年度).create出力期候補(is期毎タイプ, !is本算定);
+
         通知書発行パラメータ.set減免決定_出力有無(is減免決定通知書checked);
         通知書発行パラメータ.set減免決定_発行日(減免_発行日);
         通知書発行パラメータ.set減免決定_文書番号(減免_文書番号);
@@ -1569,6 +1579,7 @@ public class GemmenJuminKihonHandler {
         通知書発行パラメータ.set納入_出力方法(発行パネル.getPritPublish3().getRadShutsuryokuHoho().getSelectedKey());
         通知書発行パラメータ.set納入_出力形式(発行パネル.getPritPublish3().getRadShutsuryokuKeishiki().getSelectedKey());
         通知書発行パラメータ.set賦課台帳_出力有無(is賦課台帳checked);
+        通知書発行パラメータ.set出力期候補(出力期候補List);
         return KaigoHokenryoGemmen.createInstance().publish(通知書発行パラメータ);
     }
 

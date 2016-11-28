@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichoson
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -229,6 +230,31 @@ public class KogakuGassanShikyuKetteiHosei {
         }
         result.set喪失事由コード(被保険者台帳管理entity.getShikakuSoshitsuJiyuCode());
         return result;
+    }
+
+    /**
+     * 被保険者台帳管理から「市町村コード」を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return LasdecCode
+     */
+    public LasdecCode get市町村コード(HihokenshaNo 被保険者番号) {
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
+        }
+        DbV1001HihokenshaDaichoEntity 被保険者台帳管理entity = 被保険者台帳管理dac.select被保険者台帳情報(被保険者番号);
+        if (被保険者台帳管理entity == null) {
+            return null;
+        }
+        if (!RString.isNullOrEmpty(被保険者台帳管理entity.getJushochiTokureiFlag())
+                && ONE.equals(被保険者台帳管理entity.getJushochiTokureiFlag())) {
+            return 被保険者台帳管理entity.getKoikinaiTokureiSochimotoShichosonCode();
+        }
+        if (!RString.isNullOrEmpty(被保険者台帳管理entity.getJushochiTokureiFlag())
+                && !ONE.equals(被保険者台帳管理entity.getJushochiTokureiFlag())) {
+            return 被保険者台帳管理entity.getShichosonCode();
+        }
+        return null;
     }
 
     /**
