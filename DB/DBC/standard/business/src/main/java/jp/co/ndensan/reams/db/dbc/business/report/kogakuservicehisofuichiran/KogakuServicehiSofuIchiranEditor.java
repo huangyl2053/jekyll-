@@ -128,7 +128,11 @@ public class KogakuServicehiSofuIchiranEditor implements
         source.listUpper_6 = doカンマ編集(entity.get高額介護_本人支払額());
         source.listLower_8 = doカンマ編集(entity.get高額介護_支給金額());
 
-        if (entity.get高額介護_不支給理由().length() <= INDEX_20) {
+        if (entity.get高額介護_不支給理由() == null) {
+            source.listUpper_7 = RString.EMPTY;
+            source.listCenter_3 = RString.EMPTY;
+            source.listLower_9 = RString.EMPTY;
+        } else if (entity.get高額介護_不支給理由().length() <= INDEX_20) {
             source.listUpper_7 = entity.get高額介護_不支給理由();
         } else if (entity.get高額介護_不支給理由().length() <= INDEX_40) {
             source.listUpper_7 = entity.get高額介護_不支給理由().substring(INDEX_0, INDEX_20);

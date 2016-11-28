@@ -189,14 +189,15 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         if (null != 計算後情報_宛名_口座_更正後Entity.get口座Entity()) {
             IKoza koza = new Koza(計算後情報_宛名_口座_更正後Entity.get口座Entity());
             if (null != koza.get金融機関コード()) {
-                source.list1_4 = koza.getCombined金融機関コードand支店コード();
+                source.list1_4 = koza.get金融機関コード().value().concat(
+                        koza.get支店コード().value());
             }
             if (null != koza.get預金種別()) {
                 source.list1_5 = koza.get預金種別().get預金種別略称().substringReturnAsPossible(NUMBER_0, NUMBER_2);
             }
             source.list1_6 = koza.get口座番号();
             if (null != koza.get金融機関()) {
-                source.list2_19 = koza.getCombined金融機関名and支店名();
+                source.list2_19 = koza.get金融機関().get金融機関名称().concat(koza.get支店().get支店名称());
             }
             if (null != koza.get口座名義人()) {
                 source.list3_19 = koza.get口座名義人漢字().value();

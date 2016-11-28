@@ -171,7 +171,7 @@ public class KyotakuServiceKeikakuShokaiMainHander {
         if (自己作成.equals(作成区分)) {
             div.getTxtKyotakuSogoJigyoKubun().setVisible(true);
             div.getTxtKyotakuSogoJigyoKubun().setValue(居宅サービス履歴.get居宅総合事業区分() != null
-                    ? Kyotaku_SogyoJigyoKubun.toValue(居宅サービス履歴.get居宅総合事業区分()).get名称() : RString.EMPTY);
+                    ? Kyotaku_SogyoJigyoKubun.toValue(居宅サービス履歴.get居宅総合事業区分()).get表示名称() : RString.EMPTY);
         } else {
             div.getTxtKyotakuSogoJigyoKubun().setVisible(false);
         }

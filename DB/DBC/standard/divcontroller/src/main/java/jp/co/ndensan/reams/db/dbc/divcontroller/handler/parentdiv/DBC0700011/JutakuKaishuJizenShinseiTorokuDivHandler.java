@@ -103,9 +103,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private static final int 着工日不一致コード = 2;
     private static final int 対象住宅住所不一致コード = 3;
     private static final RString 非表示用フラグ_TRUE = new RString("true");
-    private static final RString 行状態_削除 = new RString("削除");
-    private static final RString 行状態_更新 = new RString("更新");
-    private static final RString 行状態_登録 = new RString("登録");
     private static final RString 連番フォーマット = new RString("%02d");
     private static final RString 事前申請情報 = new RString("事前申請情報");
     private static final RString 登録FLAG = new RString("登録");
@@ -965,7 +962,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     || RowState.Deleted.equals(row.getRowState())
                     || RowState.Added.equals(row.getRowState())) {
                 JutakuJizenShinseiEntity entity = 住宅改修内容一覧データMap.get(row.getId());
-                if (!entity.get状態().equals(row.getRowState())) {
+                if (!entity.get状態().toString().equals(row.getRowState().toString())) {
                     return true;
                 }
                 if (!entity.get住宅改修内容().equals(row.getTxtKaishuNaiyo())) {
