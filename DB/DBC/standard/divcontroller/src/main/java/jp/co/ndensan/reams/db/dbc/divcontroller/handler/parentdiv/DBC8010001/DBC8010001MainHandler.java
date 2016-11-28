@@ -235,7 +235,7 @@ public class DBC8010001MainHandler {
             div.getTxtZenkaiTaishoYmdRange().clearToValue();
             div.getTxtKonkaiTaishoYmdRange().clearFromValue();
             div.getTxtKonkaiTaishoYmdRange().setToValue(RDate.getNowDate());
-        } else {
+        } else if (null != dbc.getEntity().getTaishoShuryoYMD() && !dbc.getEntity().getTaishoShuryoYMD().isEmpty()) {
             div.getTxtKonkaiTaishoYmdRange().setFromValue(dbc.getEntity().getTaishoShuryoYMD().toRDate().plusDay(1));
             if (RDate.getNowDate().isBeforeOrEquals(dbc.getEntity().getTaishoShuryoYMD().toRDate())) {
                 div.getTxtKonkaiTaishoYmdRange().setToValue(dbc.getEntity().getTaishoShuryoYMD().toRDate().plusDay(1));
