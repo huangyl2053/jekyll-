@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -277,10 +279,16 @@ public class SabisuJyoukyoA4 {
         int 排泄 = entity.getKijunJikanHaisetsu() + entity.getKijunJikanBPSDKanren();
         int 移動 = entity.getKijunJikanIdo() + entity.getKijunJikanKinoKunren();
         int 清潔保持 = entity.getKijunJikanSeiketsuHoji() + entity.getKijunJikanIryoKanren();
-        RString 文件名 = new RString(FlexibleDate.getNowDate().toString());
+        RDateTime 日期 = RDate.getNowDateTime();
+        RString 文件名 = 日期.getDate().toDateString().concat(get文件名(日期.getHour()))
+                .concat(get文件名(日期.getSecond())).concat(get文件名(日期.getMicros()));
         StackedBarChart stackedBarChart = new StackedBarChart(食事, 排泄, 移動, 清潔保持, 文件名);
         stackedBarChart.getTitle();
         RString 文件 = new RString(Path.getUserHomePath().toString() + "\\" + 文件名 + ".png");
         項目.set基準時間の積み上げグラフ(文件);
+    }
+
+    private RString get文件名(int 日期) {
+        return new RString(日期);
     }
 }
