@@ -108,7 +108,7 @@ public class KaigoHihokenshaInfoPanelHandler {
             dgSetaiIchiran_Row row = new dgSetaiIchiran_Row();
             row.getTxtShikibetsuCode().setValue(result.get識別コード() == null ? RString.EMPTY
                     : result.get識別コード().getColumnValue());
-            row.getTxtShimei().setValue(result.get氏名() == null ? RString.EMPTY
+            row.setTxtShimei(result.get氏名() == null ? RString.EMPTY
                     : result.get氏名().getColumnValue());
             row.getTxtUmareYND().setValue(result.get生年月日() == null ? null
                     : new RDate(result.get生年月日().toString()));
@@ -200,7 +200,7 @@ public class KaigoHihokenshaInfoPanelHandler {
         div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().setDomain(row.getTxtShikibetsuCode() == null ? null
                 : new ShikibetsuCode(row.getTxtShikibetsuCode().getValue()));
         div.getRentaiNofuGimushaInfo().getTxtShimei().setValue(row.getTxtShimei() == null ? RString.EMPTY
-                : row.getTxtShimei().getValue());
+                : row.getTxtShimei());
         div.getRentaiNofuGimushaInfo().getTxtUmareYMD().setValue(row.getTxtUmareYND() == null ? null
                 : row.getTxtUmareYND().getValue());
         div.getRentaiNofuGimushaInfo().getTxtSeibetsu().setValue(row.getTxtSeibetsu() == null ? RString.EMPTY
@@ -289,7 +289,7 @@ public class KaigoHihokenshaInfoPanelHandler {
             dgSetaiIchiran_Row row = new dgSetaiIchiran_Row();
             row.getTxtShikibetsuCode().setValue(result.get識別コード() == null ? RString.EMPTY
                     : result.get識別コード().getColumnValue());
-            row.getTxtShimei().setValue(result.get氏名() == null ? RString.EMPTY
+            row.setTxtShimei(result.get氏名() == null ? RString.EMPTY
                     : result.get氏名().getColumnValue());
             row.getTxtUmareYND().setValue(result.get生年月日() == null ? null
                     : new RDate(result.get生年月日().toString()));
