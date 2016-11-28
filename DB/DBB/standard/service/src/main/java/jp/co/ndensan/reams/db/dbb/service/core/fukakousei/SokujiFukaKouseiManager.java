@@ -152,6 +152,10 @@ public class SokujiFukaKouseiManager {
         ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
         ChoteiKyotsu choteiKyotsu = 介護期別.getChoteiKyotsu(identifier);
         choteiKyotsu = choteiKyotsu.createBuilderForEdit().set処理年度(RDate.getNowDate().getNendo()).build();
+        if ((!介護賦課.get調定年度().equals(介護賦課.get賦課年度()))
+                && choteiKyotsu.get調定額().compareTo(Decimal.ZERO) == 0) {
+            return true;
+        }
         IShunoKamoku 科目 = shunoKamokuManager.get科目(介護期別.get徴収方法().equals(ChoshuHohoKibetsu.普通徴収.getコード())
                 ? ShunoKamokuShubetsu.介護保険料_普通徴収 : ShunoKamokuShubetsu.介護保険料_特別徴収);
         ShunoKanri 収納管理 = get収納管理(収納ID, 介護賦課, 科目, 介護期別.get期());

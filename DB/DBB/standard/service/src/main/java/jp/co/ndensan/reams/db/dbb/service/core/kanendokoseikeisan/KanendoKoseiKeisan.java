@@ -458,6 +458,7 @@ public class KanendoKoseiKeisan {
                 介護期別RelateEntity.add(entity);
             }
         } else {
+            FukaNokiResearcher researcher = FukaNokiResearcher.createInstance();
             for (int i = 0; i < INT_6; i++) {
                 KibetsuEntity entity = new KibetsuEntity();
                 Long 調定ID = create調定ID(ChoshuHohoKibetsu.特別徴収.getコード(), i + 1);
@@ -467,7 +468,7 @@ public class KanendoKoseiKeisan {
                         賦課の情報.get通知書番号(),
                         INT_0,
                         ChoshuHohoKibetsu.特別徴収.getコード(),
-                        i);
+                        i + 1);
                 kibetsu = kibetsu.createBuilderForEdit().set調定ID(new Decimal(調定ID)).build();
                 List<UrT0705ChoteiKyotsuEntity> choteiEntity = new ArrayList<>();
                 ChoteiKyotsu 調定共通 = new ChoteiKyotsu(調定ID);
@@ -479,8 +480,12 @@ public class KanendoKoseiKeisan {
                         .set調定年月日(賦課の情報.get調定日時().getDate())
                         .set調定額(Decimal.ZERO)
                         .set消費税額(Decimal.ZERO)
-                        .set納期限(RDate.getNowDate())
                         .set賦課処理状況(Boolean.FALSE).build();
+                RDate 過年度納期 = get過年度納期(researcher, i + 1);
+                if (過年度納期 != null) {
+                    調定共通 = 調定共通.createBuilderForEdit()
+                            .set納期限(過年度納期).build();
+                }
                 choteiEntity.add(調定共通.toEntity());
                 entity.set調定共通Entity(choteiEntity);
                 entity.set介護期別Entity(kibetsu.toEntity());
@@ -495,7 +500,7 @@ public class KanendoKoseiKeisan {
                         賦課の情報.get通知書番号(),
                         INT_0,
                         ChoshuHohoKibetsu.普通徴収.getコード(),
-                        i);
+                        i + 1);
                 kibetsu = kibetsu.createBuilderForEdit().set調定ID(new Decimal(調定ID)).build();
                 List<UrT0705ChoteiKyotsuEntity> choteiEntity = new ArrayList<>();
                 ChoteiKyotsu 調定共通 = new ChoteiKyotsu(調定ID);
@@ -507,8 +512,12 @@ public class KanendoKoseiKeisan {
                         .set調定年月日(賦課の情報.get調定日時().getDate())
                         .set調定額(Decimal.ZERO)
                         .set消費税額(Decimal.ZERO)
-                        .set納期限(RDate.getNowDate())
                         .set賦課処理状況(Boolean.FALSE).build();
+                RDate 過年度納期 = get過年度納期(researcher, i + 1);
+                if (過年度納期 != null) {
+                    調定共通 = 調定共通.createBuilderForEdit()
+                            .set納期限(過年度納期).build();
+                }
                 choteiEntity.add(調定共通.toEntity());
                 entity.set調定共通Entity(choteiEntity);
                 entity.set介護期別Entity(kibetsu.toEntity());
