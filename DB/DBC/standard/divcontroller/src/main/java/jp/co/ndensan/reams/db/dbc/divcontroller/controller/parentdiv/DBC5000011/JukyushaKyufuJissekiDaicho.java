@@ -335,7 +335,7 @@ public class JukyushaKyufuJissekiDaicho {
         if (flag && div.getTxtRangeYM().getToValue().isBefore(div.getTxtRangeYM().getFromValue())) {
             message.add(getValidation(div).check大小関係不正(new RString("年月")));
         }
-        if (flag && div.getTxtRangeYM().getToValue().getMonthValue() > 月１３以上 && div.getTxtRangeYM().getFromValue().getMonthValue() > 月１３以上) {
+        if (flag && div.getTxtRangeYM().getToValue().getMonthValue() - div.getTxtRangeYM().getFromValue().getMonthValue() > 0) {
             message.add(getValidation(div).check年月範囲不正());
         }
         if (div.getTxtRangeHihokenshaNoFrom().getValue().compareTo(div.getTxtRangeHihokenshaNoTo().getValue()) > 0) {
@@ -370,8 +370,8 @@ public class JukyushaKyufuJissekiDaicho {
         if (出力様式を1.isEmpty() && 出力様式を2.isEmpty() && 出力様式を3.isEmpty() && 出力様式を4.isEmpty() && 出力様式を5.isEmpty()) {
             message.add(getValidation(div).check未指定(new RString("出力様式を")));
         }
-        if (div.getTabChushutsuJoken().getTxtKyufuritsu().getValue() == null
-                || div.getTabChushutsuJoken().getTxtKyufuritsu().getValue().compareTo(いち) > 0
+        if (div.getTabChushutsuJoken().getTxtKyufuritsu().getValue() != null
+                && div.getTabChushutsuJoken().getTxtKyufuritsu().getValue().compareTo(いち) > 0
                 && div.getTabChushutsuJoken().getTxtKyufuritsu().getValue().compareTo(いちゼロ) > 0) {
             message.add(getValidation(div).check必須項目を入力(new RString("１～100")));
         }
