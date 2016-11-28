@@ -357,23 +357,23 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         if (source.listUpper_2 == null) {
             source.listUpper_2 = RString.EMPTY;
         }
-        if (source.atesaki_choikiCode == null) {
-            source.atesaki_choikiCode = RString.EMPTY;
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
         }
-        if (source.atesaki_banchiCode == null) {
-            source.atesaki_banchiCode = RString.EMPTY;
+        if (source.banchiCode == null) {
+            source.banchiCode = RString.EMPTY;
         }
-        if (source.atesaki_gyoseikuCode == null) {
-            source.atesaki_gyoseikuCode = RString.EMPTY;
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
         }
-        if (source.atesaki_chikuCode1 == null) {
-            source.atesaki_chikuCode1 = RString.EMPTY;
+        if (source.chikuCode1 == null) {
+            source.chikuCode1 = RString.EMPTY;
         }
-        if (source.atesaki_chikuCode2 == null) {
-            source.atesaki_chikuCode2 = RString.EMPTY;
+        if (source.chikuCode2 == null) {
+            source.chikuCode2 = RString.EMPTY;
         }
-        if (source.atesaki_chikuCode3 == null) {
-            source.atesaki_chikuCode3 = RString.EMPTY;
+        if (source.chikuCode3 == null) {
+            source.chikuCode3 = RString.EMPTY;
         }
         if (source.listLower_2 == null) {
             source.listLower_2 = RString.EMPTY;
@@ -384,11 +384,11 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
     }
 
     private void setPageBreakEmpty_2(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
-        if (source.atena_shikibetsuCode == null) {
-            source.atena_shikibetsuCode = RString.EMPTY;
+        if (source.shikibetsuCode == null) {
+            source.shikibetsuCode = RString.EMPTY;
         }
-        if (source.atena_kanaMeisho == null) {
-            source.atena_kanaMeisho = RString.EMPTY;
+        if (source.kanaMeisho == null) {
+            source.kanaMeisho = RString.EMPTY;
         }
         if (source.listUpper_5 == null) {
             source.listUpper_5 = RString.EMPTY;
@@ -396,23 +396,23 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         if (source.listUpper_6 == null) {
             source.listUpper_6 = RString.EMPTY;
         }
-        if (source.dbT2015KeisangoJoho_fukaShichosonCode == null) {
-            source.dbT2015KeisangoJoho_fukaShichosonCode = RString.EMPTY;
-        }
         if (source.hokenshaNo == null) {
             source.hokenshaNo = RString.EMPTY;
         }
-        if (source.nenkinTokuchoKaifuJoho_nenkinCode == null) {
-            source.nenkinTokuchoKaifuJoho_nenkinCode = RString.EMPTY;
+        if (source.hihokenshaNo == null) {
+            source.hihokenshaNo = RString.EMPTY;
         }
-        if (source.dbT2015KeisangoJoho_seihofujoShurui == null) {
-            source.dbT2015KeisangoJoho_seihofujoShurui = RString.EMPTY;
+        if (source.nenkinCode == null) {
+            source.nenkinCode = RString.EMPTY;
         }
-        if (source.caT0714SeikyuHoho_nokumiCode == null) {
-            source.caT0714SeikyuHoho_nokumiCode = RString.EMPTY;
+        if (source.nokumiCode == null) {
+            source.nokumiCode = RString.EMPTY;
         }
-        if (source.dbT2015KeisangoJoho_choteiJiyu1 == null) {
-            source.dbT2015KeisangoJoho_choteiJiyu1 = RString.EMPTY;
+        if (source.seihoFlag == null) {
+            source.seihoFlag = RString.EMPTY;
+        }
+        if (source.choteiJiyu == null) {
+            source.choteiJiyu = RString.EMPTY;
         }
     }
 }

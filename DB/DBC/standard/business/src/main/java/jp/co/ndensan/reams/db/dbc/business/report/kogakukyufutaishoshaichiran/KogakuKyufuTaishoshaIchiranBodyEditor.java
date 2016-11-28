@@ -58,8 +58,9 @@ public class KogakuKyufuTaishoshaIchiranBodyEditor implements IKogakuKyufuTaisho
         source.listUpper_2 = RString.EMPTY;
         source.listUpper_3 = RString.EMPTY;
         source.listLower_1 = RString.EMPTY;
+        source.listUpper_1 = RString.EMPTY;
         if (!集計Flag) {
-            source.listUpper_1 = 対象者.getNo();
+            source.listUpper_1 = getNotNull(対象者.getNo());
             source.listUpper_4 = getColumnValue(対象者.get事業所番号());
             source.listUpper_5 = getColumnValue(対象者.getサービス種類コード());
             source.listUpper_6 = doカンマ編集(対象者.getサービス費用合計額());

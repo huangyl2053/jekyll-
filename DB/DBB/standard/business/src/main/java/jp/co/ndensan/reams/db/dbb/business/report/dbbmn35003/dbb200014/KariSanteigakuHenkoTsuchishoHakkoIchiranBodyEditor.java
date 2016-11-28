@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200014;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200014.KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 仮算定額変更通知書発行一覧表ボディEditorです。
@@ -56,20 +57,23 @@ class KariSanteigakuHenkoTsuchishoHakkoIchiranBodyEditor implements IKariSanteig
     }
 
     private void set改頁(KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource source) {
-        source.banchiCode = item.getBanchiCode();
-        source.choikiCode = item.getChoikiCode();
-        source.gyoseikuCode = item.getGyoseikuCode();
-        source.chikuCode1 = item.getChikuCode1();
-        source.chikuCode2 = item.getChikuCode2();
-        source.chikuCode3 = item.getChikuCode3();
-        source.shikibetsuCode = item.getShikibetsuCode();
-        source.kanaMeisho = item.getKanaMeisho();
-        source.hihokenshaNo = item.getHihokenshaNo();
-        source.nenkinCode = item.getNenkinCode();
-        source.nokumiCode = item.getNokumiCode();
-        source.seihoFlag = item.getSeihoFlag();
-        source.seinengappiYMD = item.getSeinengappiYMD();
-        source.seibetsuCode = item.getSeibetsuCode();
+        source.banchiCode = nonullRString(item.getBanchiCode());
+        source.choikiCode = nonullRString(item.getChoikiCode());
+        source.gyoseikuCode = nonullRString(item.getGyoseikuCode());
+        source.chikuCode1 = nonullRString(item.getChikuCode1());
+        source.chikuCode2 = nonullRString(item.getChikuCode2());
+        source.chikuCode3 = nonullRString(item.getChikuCode3());
+        source.shikibetsuCode = nonullRString(item.getShikibetsuCode());
+        source.kanaMeisho = nonullRString(item.getKanaMeisho());
+        source.hihokenshaNo = nonullRString(item.getHihokenshaNo());
+        source.nenkinCode = nonullRString(item.getNenkinCode());
+        source.nokumiCode = nonullRString(item.getNokumiCode());
+        source.seihoFlag = nonullRString(item.getSeihoFlag());
+        source.seinengappiYMD = nonullRString(item.getSeinengappiYMD());
+        source.seibetsuCode = nonullRString(item.getSeibetsuCode());
     }
 
+    private RString nonullRString(RString str) {
+        return RString.isNullOrEmpty(str) ? RString.EMPTY : str;
+    }
 }

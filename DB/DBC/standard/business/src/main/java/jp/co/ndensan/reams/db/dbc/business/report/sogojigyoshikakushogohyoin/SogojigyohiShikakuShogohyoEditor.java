@@ -10,8 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyoshikakushogohyoin.So
 import jp.co.ndensan.reams.db.dbc.entity.report.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -99,11 +98,9 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
         if (null != entity.get事業所番号()) {
             source.listUpper_7 = entity.get事業所番号().getColumnValue();
         }
-        if (null != entity.getサービス提供年月() && !entity.getサービス提供年月().isEmpty()
-                && null != entity.get要介護区分コード() && !entity.get要介護区分コード().isEmpty()) {
-            IYokaigoJotaiKubun 要介護区分 = YokaigoJotaiKubunSupport.toValue(entity.getサービス提供年月(),
-                    entity.get要介護区分コード().getColumnValue());
-            source.listUpper_8 = 要介護区分.getName();
+        if (null != entity.get要介護区分コード() && !entity.get要介護区分コード().isEmpty()) {
+            source.listUpper_8 = YokaigoJotaiKubun.toValue(
+                    entity.get要介護区分コード().getColumnValue()).get名称();
         }
         if (null != entity.get支援事業所番号()) {
             source.listLower_7 = entity.get支援事業所番号().getColumnValue();

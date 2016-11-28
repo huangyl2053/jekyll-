@@ -1291,7 +1291,7 @@ public class KijunShunyuShinseiTourokuHandler {
             KijunShunyuShinseiTourokuDiv div,
             DBC1000062TransitionEventName eventName,
             HihokenshaNo 被保険者番号) {
-        if (被保険者番号 == null && 被保険者番号.isEmpty()) {
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(eventName).respond();
         }
         if (!ResponseHolder.isReRequest()) {

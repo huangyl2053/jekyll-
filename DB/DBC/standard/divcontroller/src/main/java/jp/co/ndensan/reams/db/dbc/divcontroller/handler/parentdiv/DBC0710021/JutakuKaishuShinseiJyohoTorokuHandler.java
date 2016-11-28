@@ -117,12 +117,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private static final RString 証明書2 = new RString("21D2");
     private static final RString 送付区分_送付済 = new RString("1");
     private static final RString 償還払請求基本_明細番号 = new RString("0001");
-    private static final RString 審査結果_承認する = new RString("1");
-    private static final RString 審査結果_却下する = new RString("2");
     private static final RString 証明書様式内容_NULL = new RString("証明書様式内容");
     private static final JigyoshaNo 償還払請求基本_事業者番号 = new JigyoshaNo("0000000000");
     private static final RString 申請者区分_空 = new RString("0");
-    private static final RString 申請取消事由_空 = new RString("0");
     private static final RString 連番_固定値 = new RString("01");
     private static final RString コロン = new RString(":");
     private static final int 被除数 = 100;
@@ -166,11 +163,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private static final RString サービス種類コード固定 = new RString("0000");
     private static final RString 連番から = new RString("01");
     private static final RString 国保連再送付_チェック = new RString("0");
-    private static final RString 行状態_削除 = new RString("削除");
-    private static final RString 行状態_更新 = new RString("更新");
-    private static final RString 行状態_更新なし = RString.EMPTY;
     private static final RString FORMAT = new RString("%02d");
-    private static final RString 住宅改修_状態 = new RString("Unchanged");
     private static final RString 申請を保存ボタン = new RString("btnAddShikyuShinsei");
     private static final FlexibleYearMonth 平成21年03月 = new FlexibleYearMonth(new RString("200903"));
     private static final int 前ゼロ付き10桁 = 10;

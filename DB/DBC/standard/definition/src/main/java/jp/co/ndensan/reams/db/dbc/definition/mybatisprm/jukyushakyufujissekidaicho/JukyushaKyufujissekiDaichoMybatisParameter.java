@@ -622,8 +622,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
             RString 給付率区分,
             RString 給付率,
             long 出力順ID,
-            RString psmShikibetsuTaisho
-    ) {
+            RString psmShikibetsuTaisho) {
         boolean 旧措置特定有無flag = false;
         boolean 旧措置特定有無flag1 = false;
         if (new RString("2").equals(旧措置特定有無)) {
@@ -657,12 +656,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
                 || new RString("1").equals(事業対象者)) {
             すべてflag = false;
         }
-        return new JukyushaKyufujissekiDaichoMybatisParameter(
-                対象年月,
-                年月範囲_開始,
-                年月範囲_終了,
-                被保険者番号_開始,
-                被保険者番号_終了,
+        return new JukyushaKyufujissekiDaichoMybatisParameter(対象年月, 年月範囲_開始, 年月範囲_終了, 被保険者番号_開始, 被保険者番号_終了,
                 給付実績区分,
                 すべて選択,
                 要介護1,

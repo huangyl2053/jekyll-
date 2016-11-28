@@ -34,13 +34,13 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.karisanteiidofuka.KariSanteiIdoFuka;
 import jp.co.ndensan.reams.db.dbb.service.core.tsuchisho.notsu.ShutsuryokuKiKohoFactory;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -116,6 +116,8 @@ public class KarisanteiIdoFukaPanelHandler {
     private static final ReportId 仮算定額変更通知書 = new ReportId("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final ReportId 納入通知書 = new ReportId("DBB200006_FutsuChoshuKarisanteiKekkaIchiran");
     private static final ReportId 納入通知書_DBB100014 = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
+    private static final RString 処理なし = new RString("1");
+    private static final RString 確定処理なし = new RString("2");
 
     /**
      * コンストラクタです。
@@ -154,8 +156,10 @@ public class KarisanteiIdoFukaPanelHandler {
                 SubGyomuCode.DBB介護賦課);
         set帳票グループ(date);
         set抽出条件(調定年度);
-        boolean flag = set処理状態(調定年度);
-        set帳票作成個別情報();
+        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+        KitsukiList 仮算定の期月リスト = 月期対応取得_普徴.get期月リスト().filtered仮算定期間();
+        boolean flag = set処理状態(調定年度, 仮算定の期月リスト);
+        set帳票作成個別情報(仮算定の期月リスト);
         return flag;
     }
 
@@ -292,10 +296,8 @@ public class KarisanteiIdoFukaPanelHandler {
         }
     }
 
-    private void set帳票作成個別情報() {
+    private void set帳票作成個別情報(KitsukiList 仮算定の期月リスト) {
         KariSanteiIdoFuka idoFuka = new KariSanteiIdoFuka();
-        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
-        KitsukiList 仮算定の期月リスト = 月期対応取得_普徴.get期月リスト().filtered仮算定期間();
         if (仮算定の期月リスト.toList() == null || 仮算定の期月リスト.toList().isEmpty()) {
             set納入通知書出力内容(true);
             return;
@@ -397,7 +399,7 @@ public class KarisanteiIdoFukaPanelHandler {
         return 出力帳票一覧;
     }
 
-    private boolean set処理状態(RString 調定年度) {
+    private boolean set処理状態(RString 調定年度, KitsukiList 仮算定の期月リスト) {
         List<dgKarisanteiIdoshoriKakunin_Row> rowList = new ArrayList<>();
         dgKarisanteiIdoshoriKakunin_Row row = new dgKarisanteiIdoshoriKakunin_Row();
         boolean flag;
@@ -406,12 +408,10 @@ public class KarisanteiIdoFukaPanelHandler {
             List<ShoriDateKanri> entityList = idoFuka.getShoriDateKanriList(遷移元区分_0, new FlexibleYear(調定年度));
             RString 処理名_特徴 = ShoriName.特徴仮算定賦課.get名称();
             RString 処理名_普徴 = ShoriName.普徴仮算定賦課.get名称();
-            if (entityList.isEmpty()) {
-                rowList.add(setDgRow(row, 処理名_特徴));
-                rowList.add(setDgRow(row, 処理名_普徴));
-                flag = false;
+            if (仮算定の期月リスト.toList() == null || 仮算定の期月リスト.toList().isEmpty()) {
+                flag = set特徴の処理状態(entityList, 処理名_特徴, rowList);
             } else {
-                flag = is仮算定異動賦課状況(処理名_特徴, 処理名_普徴, entityList, row, rowList);
+                flag = set特徴と普徴の処理状態(entityList, 処理名_特徴, 処理名_普徴, rowList);
             }
         } else {
             List<ShoriDateKanri> entityList = idoFuka.getShoriDateKanriList(遷移元区分_1, new FlexibleYear(調定年度));
@@ -429,6 +429,50 @@ public class KarisanteiIdoFukaPanelHandler {
         return flag;
     }
 
+    private boolean set特徴と普徴の処理状態(List<ShoriDateKanri> entityList,
+            RString 処理名_特徴,
+            RString 処理名_普徴,
+            List<dgKarisanteiIdoshoriKakunin_Row> rowList) {
+        boolean flag;
+        dgKarisanteiIdoshoriKakunin_Row row = new dgKarisanteiIdoshoriKakunin_Row();
+        if (entityList.isEmpty()) {
+            rowList.add(setDgRow(row, 処理名_特徴));
+            rowList.add(setDgRow(row, 処理名_普徴));
+            flag = false;
+        } else {
+            flag = is仮算定異動賦課状況(処理名_特徴, 処理名_普徴, entityList, row, rowList);
+        }
+        return flag;
+    }
+
+    private boolean set特徴の処理状態(List<ShoriDateKanri> entityList,
+            RString 処理名_特徴,
+            List<dgKarisanteiIdoshoriKakunin_Row> rowList) {
+        dgKarisanteiIdoshoriKakunin_Row row = new dgKarisanteiIdoshoriKakunin_Row();
+        if (entityList.isEmpty()) {
+            rowList.add(setDgRow(row, 処理名_特徴));
+            return false;
+        } else {
+            return is特徴状況(処理名_特徴, entityList, row, rowList);
+        }
+    }
+
+    private boolean is特徴状況(
+            RString 処理名_特徴,
+            List<ShoriDateKanri> entityList,
+            dgKarisanteiIdoshoriKakunin_Row row,
+            List<dgKarisanteiIdoshoriKakunin_Row> rowList) {
+        boolean flag1 = false;
+        for (ShoriDateKanri entity : entityList) {
+            if (処理名_特徴.equals(entity.get処理名())) {
+                FlexibleDate 基準年月日 = entity.get基準年月日();
+                YMDHMS 基準日時 = entity.get基準日時();
+                flag1 = is仮算定状況(基準年月日, 基準日時, row, 処理名_特徴, rowList);
+            }
+        }
+        return flag1;
+    }
+
     private boolean is仮算定異動賦課状況(
             RString 処理名_特徴,
             RString 処理名_普徴,
@@ -442,13 +486,14 @@ public class KarisanteiIdoFukaPanelHandler {
                 FlexibleDate 基準年月日 = entity.get基準年月日();
                 YMDHMS 基準日時 = entity.get基準日時();
                 rowList.add(setDgRow(row, 処理名_普徴));
-                return is仮算定状況(基準年月日, 基準日時, row, 処理名_特徴, rowList);
+                is仮算定状況(基準年月日, 基準日時, row, 処理名_特徴, rowList);
             } else {
                 FlexibleDate 基準年月日 = entity.get基準年月日();
                 YMDHMS 基準日時 = entity.get基準日時();
                 rowList.add(setDgRow(row, 処理名_特徴));
-                return is仮算定状況(基準年月日, 基準日時, row, 処理名_普徴, rowList);
+                is仮算定状況(基準年月日, 基準日時, row, 処理名_普徴, rowList);
             }
+            return false;
         } else {
             boolean flag1 = false;
             boolean flag2 = false;
@@ -546,9 +591,9 @@ public class KarisanteiIdoFukaPanelHandler {
     /**
      * 画面onLoadの時にチェックを行う。
      *
-     * @return is基準日時 boolean
+     * @return 確定処理Flag RString
      */
-    public boolean is基準日時() {
+    public RString is基準日時() {
 
         RString choteiNendo = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
@@ -561,12 +606,12 @@ public class KarisanteiIdoFukaPanelHandler {
         dbT7022Entity = idoFuka.get基準日時(年度, 仮算定異動賦課確定_処理名);
         YMDHMS 異動賦課確定の基準日時 = dbT7022Entity.get基準日時();
         if (異動賦課の基準日時 == null || 異動賦課の基準日時.isEmpty()) {
-            異動賦課の基準日時 = new YMDHMS(RDateTime.MIN);
+            return 処理なし;
+        } else if (異動賦課確定の基準日時 == null || 異動賦課確定の基準日時.isEmpty()
+                || 異動賦課確定の基準日時.isBefore(異動賦課の基準日時)) {
+            return 確定処理なし;
         }
-        if (異動賦課確定の基準日時 == null || 異動賦課確定の基準日時.isEmpty()) {
-            異動賦課確定の基準日時 = new YMDHMS(RDateTime.MIN);
-        }
-        return 異動賦課確定の基準日時.isBefore(異動賦課の基準日時);
+        return RString.EMPTY;
     }
 
     /**
