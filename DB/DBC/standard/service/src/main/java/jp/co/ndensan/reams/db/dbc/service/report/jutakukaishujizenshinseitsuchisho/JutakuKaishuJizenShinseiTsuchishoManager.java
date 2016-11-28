@@ -25,25 +25,17 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKub
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
-import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
-import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.CountedItem;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -54,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class JutakuKaishuJizenShinseiTsuchishoManager {
 
     private final MapperProvider mapperProvider;
-    private final RString 汎用キー_文書番号 = new RString("文書番号");
 
     /**
      * コンストラクタです。
@@ -194,22 +185,6 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
                 nullTOEmpty(送付物宛先.samabunShimeiSmall1),
                 nullTOEmpty(送付物宛先.customerBarCode)
         );
-    }
-
-    private RString get文書番号(BunshoNo bushoNo) {
-
-        RString 文書番号 = RString.EMPTY;
-        RString 文書番号発番方法 = bushoNo.get文書番号発番方法();
-        if (BunshoNoHatsubanHoho.固定.getCode().equalsIgnoreCase(文書番号発番方法)) {
-            文書番号 = bushoNo.edit文書番号();
-        } else if (BunshoNoHatsubanHoho.手入力.getCode().equalsIgnoreCase(文書番号発番方法)) {
-            throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("文書番号情報の取得"));
-        } else if (BunshoNoHatsubanHoho.自動採番.getCode().equalsIgnoreCase(文書番号発番方法)) {
-            CountedItem 採番 = Saiban.get(SubGyomuCode.DBC介護給付, 汎用キー_文書番号,
-                    new FlexibleYear(RDate.getNowDate().getYear().toDateString()));
-            文書番号 = bushoNo.edit文書番号(採番.nextString());
-        }
-        return 文書番号;
     }
 
     /**
