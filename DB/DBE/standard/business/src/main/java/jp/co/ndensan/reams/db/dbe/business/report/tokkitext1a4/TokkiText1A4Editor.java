@@ -39,6 +39,7 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
     private static final int 連番_12 = 12;
     private static final int 連番_13 = 13;
     private static final int 連番_14 = 14;
+    private static final int フォームインデックス_一ページ目 = 30;
 
     /**
      * インスタンスを生成します。
@@ -139,7 +140,7 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
             set特記事項List(事項, index, source);
             index = index + 1;
         }
-        if (count < 30) {
+        if (count < フォームインデックス_一ページ目) {
             source.layoutBreakItem = 1;
         } else {
             source.layoutBreakItem = 2;
