@@ -166,7 +166,41 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
                 : new RString(所得照会票発行一覧.getIdoYMD().toString());
         source.zenjushoCode = 所得照会票発行一覧.getZenjushoCode();
         source.kouhoshakubun = 所得照会票発行一覧.getKouhoshakubun();
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(ShotokushokaihyoHakkoIchiranSource source) {
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.listUpper_1 == null) {
+            source.listUpper_1 = RString.EMPTY;
+        }
+        if (source.listLower_1 == null) {
+            source.listLower_1 = RString.EMPTY;
+        }
+        if (source.listLower_2 == null) {
+            source.listLower_2 = RString.EMPTY;
+        }
+        if (source.listUpper_4 == null) {
+            source.listUpper_4 = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.idoYMD == null) {
+            source.idoYMD = RString.EMPTY;
+        }
+        if (source.zenjushoCode == null) {
+            source.zenjushoCode = RString.EMPTY;
+        }
+        if (source.kouhoshakubun == null) {
+            source.kouhoshakubun = RString.EMPTY;
+        }
     }
 
     private void editorSource(ShotokushokaihyoHakkoIchiranSource source) {
