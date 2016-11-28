@@ -187,24 +187,41 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             RentaiGimusha curResult = holder.getKogakuGassanJikoFutanGaku(identifier);
             RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
             RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
-            if (list != null) {
-                for (RentaiGimusha result : list) {
-                    if (result.equals(curResult) || result.isDeleted()) {
-                        continue;
+            FlexibleDate foreMaxDate = null;
+            FlexibleDate nextMinDate = null;
+            int 履歴番号Num = Integer.parseInt(履歴番号.toString());
+            int notDeletedCount = 0;
+            if (list != null && !list.isEmpty()) {
+                for (int i = 0; i < 履歴番号Num; i++) {
+                    if (!list.get(i).isDeleted()) {
+                        foreMaxDate = list.get(i).get終了年月日();
                     }
-                    if (終了年月日 == null) {
-                        return !(開始年月日.isAfter(new RDate(result.get開始年月日().toString()))
-                                && 開始年月日.isBeforeOrEquals(new RDate(result.get終了年月日().toString())));
+                }
+                for (int i = 履歴番号Num; i < list.size(); i++) {
+                    if (!list.get(i).isDeleted() && !list.get(i).equals(curResult)) {
+                        nextMinDate = list.get(i).get開始年月日();
+                        break;
                     }
-                    return !(開始年月日.isBeforeOrEquals(new RDate(result.get開始年月日().toString()))
-                            && 終了年月日.isAfterOrEquals(new RDate(result.get開始年月日().toString())))
-                            && !(開始年月日.isBeforeOrEquals(new RDate(result.get終了年月日().toString()))
-                            && 終了年月日.isAfterOrEquals(new RDate(result.get終了年月日().toString())))
-                            && !(開始年月日.isAfterOrEquals(new RDate(result.get開始年月日().toString()))
-                            && 終了年月日.isBeforeOrEquals(new RDate(result.get終了年月日().toString())));
+                }
+                for (int i = 0; i < list.size(); i++) {
+                    if (!list.get(i).isDeleted()) {
+                        notDeletedCount++;
+                    }
                 }
             }
+            if (notDeletedCount == 0) {
+                return true;
+            }
+            if (is不合法年月日(foreMaxDate, 開始年月日, nextMinDate, 終了年月日)) {
+                return false;
+            }
             return true;
+        }
+
+        private static boolean is不合法年月日(FlexibleDate foreMaxDate, RDate 開始年月日, FlexibleDate nextMinDate, RDate 終了年月日) {
+            return (foreMaxDate != null && foreMaxDate.equals(FlexibleDate.MAX))
+                    || ((foreMaxDate != null && 開始年月日.isBeforeOrEquals(new RDate(foreMaxDate.toString())))
+                    || (nextMinDate != null && 終了年月日.isAfterOrEquals(new RDate(nextMinDate.toString()))));
         }
 
         private static int max番号(int 番号, int 新番号) {
