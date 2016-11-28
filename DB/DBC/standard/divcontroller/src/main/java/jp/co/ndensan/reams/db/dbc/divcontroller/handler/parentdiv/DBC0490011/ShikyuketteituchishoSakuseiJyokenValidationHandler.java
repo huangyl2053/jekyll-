@@ -43,7 +43,8 @@ public class ShikyuketteituchishoSakuseiJyokenValidationHandler {
     public ValidationMessageControlPairs get入力チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(div.getCcdShiharaiHoho().getCheckMessage());
-        if (KEY1.equals(div.getShikyuKetteiTsuchisho().getRadKetteibiIkkatsuKoshinKubun().getSelectedKey())) {
+        if (KEY1.equals(div.getShikyuKetteiTsuchisho().getRadKetteibiIkkatsuKoshinKubun().getSelectedKey())
+                && RString.isNullOrEmpty(div.getShikyuKetteiTsuchisho().getTxtketteibi2().getText())) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.未入力, "決定日"),
                     div.getShikyuKetteiTsuchisho().getTxtketteibi2()));
