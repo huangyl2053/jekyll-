@@ -187,39 +187,6 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         batchReportWriter_明細一覧表 = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBC.DBC200101.getReportId().value(), SubGyomuCode.DBC介護給付)
                 .addBreak(new BreakerCatalog<FurikomiMeisaiIchiranDetailReportSource>().new SimpleLayoutBreaker(
-
-
-
-
-
-
-
-
-
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
                     FurikomiMeisaiIchiranDetailReportSource.LAYOUT_BREAK_KEYS) {
             @Override
                     public ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> occuredBreak(
@@ -267,7 +234,6 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
                     RDateTime.now(), 設定値);
             report.writeBy(reportSourceWriter_明細一覧表);
             if (t.get振込明細一時Entity().getServiceTeikyoYM().isBefore(制度改正施行日)) {
-
                 set認定状態区分before施行日高額(t.get振込明細一時Entity().getYokaigoJotaiKubunCode(),
                         振込明細一覧表合計.get(NUM12), t.get振込明細一時Entity().getFurikomiKingaku());
             } else {
@@ -380,76 +346,63 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     private void set件数加算before制度改正施行日(Code code, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
         RString 印字様式番号 = 印字様式番号別金額.get印字様式番号();
-        if (印字様式番号.equals(識別番号2131)) {
+        if (is同一様式番号(印字様式番号, 識別番号2131)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM0), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2141)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2141)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM1), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2151)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2151)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM2), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2161)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2161)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM3), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2171)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2171)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM4), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21B1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21B1)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM5), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2181)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2181)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM6), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2191)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2191)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM7), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21A1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21A1)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM8), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21C1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21C1)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM9), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21D1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21D1)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM10), flag, 印字様式番号別金額);
         }
     }
 
     private void set件数加算after制度改正施行日(Code code, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
         RString 印字様式番号 = 印字様式番号別金額.get印字様式番号();
-        if (印字様式番号.equals(識別番号2131)) {
+        if (is同一様式番号(印字様式番号, 識別番号2131)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM0), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2141)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2141)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM1), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2151)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2151)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM2), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2161)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2161)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM3), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2171)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2171)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM4), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21B1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21B1)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM5), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2181)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2181)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM6), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2191)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2191)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM7), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21A1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21A1)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM8), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21C1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21C1)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM9), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21D1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21D1)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM10), flag, 印字様式番号別金額);
         }
+    }
+
+    private boolean is同一様式番号(RString 様式番号, RString 識別番号) {
+        if (RString.isNullOrEmpty(様式番号) || 様式番号.length() < NUM3) {
+            return false;
+        }
+        return 識別番号.substring(NUM0, NUM3).equals(様式番号.substring(NUM0, NUM3));
     }
 
     private void set認定状態区分before施行日(Code jotaiKubunCode, GokeiDataEntity entity, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
