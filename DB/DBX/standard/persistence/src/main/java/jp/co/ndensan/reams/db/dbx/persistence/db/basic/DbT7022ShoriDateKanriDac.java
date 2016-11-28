@@ -1938,6 +1938,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
      * 処理日付管理マスタテーブルから、最大年度内連番を取得する。
      *
      * @param 調定年度 調定年度
+     * @param 処理名 処理名
      * @return DbT7022ShoriDateKanriEntity
      */
     @Transaction
