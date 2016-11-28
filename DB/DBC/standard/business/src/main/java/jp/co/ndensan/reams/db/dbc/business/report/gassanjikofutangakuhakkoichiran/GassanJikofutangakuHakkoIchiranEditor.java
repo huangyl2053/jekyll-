@@ -103,9 +103,36 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
             source.list_11 = DecimalFormatter.toコンマ区切りRString(entity.get補正済_合計_70_74自己負担額_内訳(), 0);
         }
         source.shikibetsuCode = entity.get識別コード().value();
-
+        setPageBreakEmpty(source);
         return source;
 
+    }
+
+    private void setPageBreakEmpty(GassanJikofutangakuHakkoIchiranSource source) {
+        if (source.郵便番号 == null) {
+            source.郵便番号 = RString.EMPTY;
+        }
+        if (source.町域コード == null) {
+            source.町域コード = RString.EMPTY;
+        }
+        if (source.行政区コード == null) {
+            source.行政区コード = RString.EMPTY;
+        }
+        if (source.市町村コード == null) {
+            source.市町村コード = RString.EMPTY;
+        }
+        if (source.氏名５０音カナ == null) {
+            source.氏名５０音カナ = RString.EMPTY;
+        }
+        if (source.証記載保険者番号 == null) {
+            source.証記載保険者番号 = RString.EMPTY;
+        }
+        if (source.list_2 == null) {
+            source.list_2 = RString.EMPTY;
+        }
+        if (source.list_6 == null) {
+            source.list_6 = RString.EMPTY;
+        }
     }
 
     private RString getSakuseiYmhm(RDate nowDate, RTime now) {
