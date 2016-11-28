@@ -96,7 +96,7 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
         source.list_2 = entity.get高額合算自己負担額_対象年度().wareki().firstYear(FirstYear.ICHI_NEN)
                 .fillType(FillType.BLANK).toDateString();
         source.list_3 = entity.get被保険者_登録被保険者番号();
-        source.list_4 = entity.get被保険者_宛名名称();
+        source.list_4 = entity.get被保険者_被保険者氏名();
         source.list_5 = entity.get高額合算自己負担額_支給申請書整理番号();
         source.list_6 = new RString(entity.get高額合算自己負担額_履歴番号());
         source.list_7 = entity.get高額合算自己負担額_申請年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
