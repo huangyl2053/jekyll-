@@ -1517,7 +1517,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
 
     private Code getCode(TokubetsuChoshuGimushaCode code) {
         if (code != null) {
-            code.getColumnValue();
+            return code.getColumnValue();
         }
         return null;
     }
