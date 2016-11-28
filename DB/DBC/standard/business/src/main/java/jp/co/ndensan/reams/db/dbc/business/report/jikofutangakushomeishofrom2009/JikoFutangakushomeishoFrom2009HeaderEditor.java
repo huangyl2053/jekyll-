@@ -43,6 +43,7 @@ public class JikoFutangakushomeishoFrom2009HeaderEditor implements IJikoFutangak
         source.hokenshaJoho = data.get保険者情報();
         source.tsuchibun2 = data.get通知文2();
         source.biko = data.get備考();
+        source.toiawasesaki = data.get問合せ先情報();
         KogakuGassanData 高額合算データ = data.get高額合算データ();
         if (高額合算データ.get被保険者氏名カナ() != null) {
             source.hihokenshaNameKana = 高額合算データ.get被保険者氏名カナ().value();

@@ -58,8 +58,8 @@ public class JikoFutangakushomeishoReportSource implements IReportSource {
     public RString yokuNendo;
     @ReportItem(name = "hokenshaJoho", order = 21)
     public RString hokenshaJoho;
-    @ReportItem(name = "toiawasesakiTitle", length = 30, order = 22)
-    public RString toiawasesakiTitle;
+    @ReportItem(name = "toiawasesaki", order = 22)
+    public RString toiawasesaki;
     @ReportItem(name = "tsuchibun2", order = 23)
     public RString tsuchibun2;
     @ReportItem(name = "biko", order = 24)
@@ -146,20 +146,6 @@ public class JikoFutangakushomeishoReportSource implements IReportSource {
     public RString ninshoshaShimeiKakeru;
     @ReportItem(name = "koinShoryaku", length = 15, order = 65)
     public RString koinShoryaku;
-    @ReportItem(name = "yubinBango", length = 8, order = 66)
-    public RString yubinBango;
-    @ReportItem(name = "shozaichi", order = 67)
-    public RString shozaichi;
-    @ReportItem(name = "choshaBushoName", order = 68)
-    public RString choshaBushoName;
-    @ReportItem(name = "tantoName", order = 69)
-    public RString tantoName;
-    @ReportItem(name = "naisenLabel", length = 4, order = 70)
-    public RString naisenLabel;
-    @ReportItem(name = "naisenNo", length = 20, order = 71)
-    public RString naisenNo;
-    @ReportItem(name = "telNo", length = 20, order = 72)
-    public RString telNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

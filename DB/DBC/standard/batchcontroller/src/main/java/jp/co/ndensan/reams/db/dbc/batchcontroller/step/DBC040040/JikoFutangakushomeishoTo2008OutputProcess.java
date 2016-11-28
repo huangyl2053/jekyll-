@@ -83,6 +83,7 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
+    private static final int NUM_5 = 5;
     private static final int NUM_7 = 7;
     private static final int NUM_12 = 12;
     private IOutputOrder 出力順;
@@ -92,7 +93,7 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
     private NinshoshaSource 認証者情報;
     private Association 地方公共団体情報;
     private List<KogakuGassanMeisai> 明細List;
-    private ToiawasesakiSource 問合せ先情報;
+    private RString 問合せ先情報;
     private RString 帳票タイトル = RString.EMPTY;
     private RString 通知文1 = RString.EMPTY;
     private RString 通知文2 = RString.EMPTY;
@@ -105,11 +106,6 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
 
     @Override
     protected void initialize() {
-        mapper = getMapper(IJikofutanShomeishoMapper.class);
-        DbT7069KaigoToiawasesakiEntity toiawasesakiEntity = mapper.select問合せ先();
-        if (toiawasesakiEntity != null) {
-            問合せ先情報 = get問合せ先情報(toiawasesakiEntity);
-        }
         明細List = get明細List();
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
         認証者 = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, 保険者印_0001);
@@ -141,6 +137,9 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
         }
         if (NUM_3 < 通知文.size()) {
             備考 = 通知文.get(NUM_4);
+        }
+        if (NUM_4 < 通知文.size()) {
+            問合せ先情報 = 通知文.get(NUM_5);
         }
     }
 
@@ -265,26 +264,6 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
             list.add(kogakuGassanMeisai);
         }
         return list;
-    }
-
-    private ToiawasesakiSource get問合せ先情報(DbT7069KaigoToiawasesakiEntity toiawasesakiEntity) {
-        ToiawasesakiSource source = new ToiawasesakiSource();
-        YubinNo yubinNo = toiawasesakiEntity.getYubinNo();
-        if (yubinNo != null) {
-            source.yubinBango = yubinNo.getEditedYubinNo();
-        }
-        RString choshaName = toiawasesakiEntity.getChoshaName();
-        if (choshaName != null && !RString.isNullOrEmpty(choshaName)) {
-            source.choshaBushoName = choshaName.concat(RString.FULL_SPACE).concat(toiawasesakiEntity.getBushoName());
-        }
-        source.shozaichi = toiawasesakiEntity.getShozaichi();
-        source.tantoName = toiawasesakiEntity.getTantoshaName();
-        TelNo telNo = toiawasesakiEntity.getTelNo();
-        if (telNo != null) {
-            source.telNo = telNo.getColumnValue();
-        }
-        source.naisenNo = toiawasesakiEntity.getNaisenNo();
-        return source;
     }
 
     private void バッチ出力条件リストの出力() {

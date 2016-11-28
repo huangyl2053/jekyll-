@@ -32,5 +32,5 @@ public class JikoFutangakushomeishoFromData {
     private RString 備考;
     private NinshoshaSource 認証者情報;
     private SofubutsuAtesakiSource 宛先情報;
-    private ToiawasesakiSource 問合せ先情報;
+    private RString 問合せ先情報;
 }

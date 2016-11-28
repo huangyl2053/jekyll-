@@ -43,12 +43,11 @@ public class JikoFutangakushomeishoFrom2009Report extends Report<JikoFutangakush
                 JikoFutangakushomeishoFrom2009HeaderEditor headerEditor = new JikoFutangakushomeishoFrom2009HeaderEditor(data);
                 CompSofubutsuAtesakiEditor atesakiEditor = new CompSofubutsuAtesakiEditor(data.get宛先情報());
                 CompNinshoshaEditor compNinshoshaEditor = new CompNinshoshaEditor(data.get認証者情報());
-                CompKaigoToiawasesakiEditor toiawasesakiEditor = new CompKaigoToiawasesakiEditor(data.get問合せ先情報());
                 IJikoFutangakushomeishoFrom2009Builder builder = new JikoFutangakushomeishoFrom2009Builder(headerEditor,
                         bodyEditor,
                         atesakiEditor,
-                        compNinshoshaEditor,
-                        toiawasesakiEditor);
+                        compNinshoshaEditor
+                );
                 reportSourceWriter.writeLine(builder);
             }
         }
@@ -58,12 +57,11 @@ public class JikoFutangakushomeishoFrom2009Report extends Report<JikoFutangakush
         JikoFutangakushomeishoFrom2009HeaderEditor headerEditor = new JikoFutangakushomeishoFrom2009HeaderEditor(data);
         CompSofubutsuAtesakiEditor atesakiEditor = new CompSofubutsuAtesakiEditor(data.get宛先情報());
         CompNinshoshaEditor compNinshoshaEditor = new CompNinshoshaEditor(data.get認証者情報());
-        CompKaigoToiawasesakiEditor toiawasesakiEditor = new CompKaigoToiawasesakiEditor(data.get問合せ先情報());
         IJikoFutangakushomeishoFrom2009Builder builder = new JikoFutangakushomeishoFrom2009Builder(headerEditor,
                 bodyEditor,
                 atesakiEditor,
-                compNinshoshaEditor,
-                toiawasesakiEditor);
+                compNinshoshaEditor
+        );
         reportSourceWriter.writeLine(builder);
     }
 }

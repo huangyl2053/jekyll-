@@ -261,7 +261,7 @@ public class JikoFutangakushomeishoHandler {
         JikoFutangakushomeishoData 高額合算データ = new JikoFutangakushomeishoData();
         KogakuGassanData kogakuGassanData = 高額合算申請書.get高額合算情報(parameter);
         高額合算データ.set高額合算データ(kogakuGassanData);
-        高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(帳票分類ID));
+        // TODO 一時コメント 高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(帳票分類ID));
 
         高額合算データ.set文書番号(高額合算申請書.get文書番号(メニューID));
         高額合算データ.setタイトル(高額合算申請書.getタイトル(メニューID));
