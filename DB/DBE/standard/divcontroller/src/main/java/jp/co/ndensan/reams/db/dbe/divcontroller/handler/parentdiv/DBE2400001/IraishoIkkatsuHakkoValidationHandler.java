@@ -110,7 +110,8 @@ public class IraishoIkkatsuHakkoValidationHandler {
                 && div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().isEmpty()
                 && div.getChkNinteiChosahyoSonota().getSelectedKeys().isEmpty())
                 || (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().isEmpty()
-                && div.getChkchosairaihakko().getSelectedKeys().isEmpty()))) {
+                && div.getChkchosairaihakko().getSelectedKeys().isEmpty()
+                && div.getChkchosairaiRireki().getSelectedKeys().isEmpty()))) {
             validationMessages.add(new ValidationMessageControlPair(
                     new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定)));
         }
@@ -120,7 +121,8 @@ public class IraishoIkkatsuHakkoValidationHandler {
                 && div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().isEmpty()
                 && div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().isEmpty())
                 || div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().isEmpty()
-                && div.getChkikenshiiraihakko().getSelectedKeys().isEmpty())) {
+                && div.getChkikenshiiraihakko().getSelectedKeys().isEmpty()
+                && div.getChkikenshiiraiRireki().getSelectedKeys().isEmpty())) {
             validationMessages.add(new ValidationMessageControlPair(
                     new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定)));
         }
