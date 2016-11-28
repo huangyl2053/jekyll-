@@ -607,15 +607,11 @@ public class RiyoshaFutanWariaiHanteiManager {
             HihokenshaDaicho 被保険者台帳,
             List<SetaiinShikibetsuCd> 世帯員識別コード情報) {
         判定対象者Temp.setHihokenshaNo(被保険者番号);
-        if (被保険者台帳 != null) {
-            if (被保険者台帳.get識別コード() != null) {
-                判定対象者Temp.setShikibetsuCode(被保険者台帳.get識別コード());
-            }
+        if (被保険者台帳 != null && 被保険者台帳.get識別コード() != null) {
+            判定対象者Temp.setShikibetsuCode(被保険者台帳.get識別コード());
         }
-        if (世帯員識別コード情報 != null && !世帯員識別コード情報.isEmpty()) {
-            if (世帯員識別コード情報.get(0).get世帯コード() != null) {
-                判定対象者Temp.setSetaiCode(世帯員識別コード情報.get(0).get世帯コード());
-            }
+        if (世帯員識別コード情報 != null && !世帯員識別コード情報.isEmpty() && 世帯員識別コード情報.get(0).get世帯コード() != null) {
+            判定対象者Temp.setSetaiCode(世帯員識別コード情報.get(0).get世帯コード());
         }
         判定対象者Temp.setIdoShubetsu(RString.EMPTY);
 
@@ -639,13 +635,11 @@ public class RiyoshaFutanWariaiHanteiManager {
             List<JukyushaDaicho> 基準日時点で受給者台帳) {
         if (jukyushaDaicholist != null && !jukyushaDaicholist.isEmpty()) {
             get受給者台帳_判定対象者Temp(jukyushaDaicholist.get(0), 判定対象者Temp);
-        } else {
-            if (sogoJigyoTaishoshalist != null && !sogoJigyoTaishoshalist.isEmpty()) {
-                get総合事業対象者_受給者台帳_判定対象者Temp(
-                        sogoJigyoTaishoshalist.get(0), 判定対象者Temp);
-            } else if (!基準日時点で受給者台帳.isEmpty()) {
-                get受給者台帳_判定対象者Temp(基準日時点で受給者台帳.get(0), 判定対象者Temp);
-            }
+        } else if (sogoJigyoTaishoshalist != null && !sogoJigyoTaishoshalist.isEmpty()) {
+            get総合事業対象者_受給者台帳_判定対象者Temp(
+                    sogoJigyoTaishoshalist.get(0), 判定対象者Temp);
+        } else if (!基準日時点で受給者台帳.isEmpty()) {
+            get受給者台帳_判定対象者Temp(基準日時点で受給者台帳.get(0), 判定対象者Temp);
         }
     }
 
