@@ -105,9 +105,6 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         Decimal 普徴既に納付すべき額 = 仮算定通知書情報.get賦課の情報_更正後() == null ? Decimal.ZERO
                 : get納付額By賦課情報(普徴メソッド_賦課, 仮算定通知書情報.get賦課の情報_更正後().get賦課情報(),
                         1, new KoseiTsukiHantei().find更正月(RDate.getNowDate()).get期AsInt());
-        Decimal 普徴今後納付すべき額 = 仮算定通知書情報.get賦課の情報_更正後() == null ? Decimal.ZERO
-                : get納付額By賦課情報(普徴メソッド_賦課, 仮算定通知書情報.get賦課の情報_更正後().get賦課情報(),
-                        1, new FuchoKiUtil().get期月リスト().get最終法定納期().get期AsInt());
         Decimal 特徴既に納付すべき額 = 仮算定通知書情報.get賦課の情報_更正後() == null ? Decimal.ZERO
                 : get納付額By賦課情報(特徴メソッド_賦課, 仮算定通知書情報.get賦課の情報_更正後().get賦課情報(),
                         1, new TokuchoKiUtil().get期月リスト().get月の期(Tsuki.toValue(
