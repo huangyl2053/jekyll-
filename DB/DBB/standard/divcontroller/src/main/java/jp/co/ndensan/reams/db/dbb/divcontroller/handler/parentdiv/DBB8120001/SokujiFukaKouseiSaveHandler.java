@@ -467,7 +467,7 @@ public class SokujiFukaKouseiSaveHandler {
 
     private boolean is履歴番号採番(FukaJoho 更正前賦課, FukaJoho 更正後賦課) {
         if (更正前賦課 == null) {
-            return true;
+            return false;
         }
         return 更正前賦課.get履歴番号() == 更正後賦課.get履歴番号();
     }
