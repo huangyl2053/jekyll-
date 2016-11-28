@@ -8,22 +8,6 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnBeforeTokkiJiko(): string {
-                return "onClick_btnBeforeTokkiJiko";
-            }
-
-            public static onClick_btnAfterTokkiJiko(): string {
-                return "onClick_btnAfterTokkiJiko";
-            }
-
-            public static onClick_btnBeforeTokkiJikoNo(): string {
-                return "onClick_btnBeforeTokkiJikoNo";
-            }
-
-            public static onClick_btnAfterTokkiJikoNo(): string {
-                return "onClick_btnAfterTokkiJikoNo";
-            }
-
             public static onClick_btnReturn(): string {
                 return "onClick_btnReturn";
             }
@@ -53,24 +37,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public TestTokki(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TestTokki"));
-            }
-
-            public lblTextTokkiJikoTitle(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTextTokkiJikoTitle"));
-            }
-
             public txtTokkiJikouNo(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouNo"));
-            }
-
-            public lblTextTokkiJikoHyphen(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTextTokkiJikoHyphen"));
-            }
-
-            public txtTokkiJikoNoText(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtTokkiJikoNoText"));
             }
 
             public txtTokkiJikouName(): UZA.TextBox {
@@ -81,88 +49,408 @@ module DBZ {
                 return new UZA.Label(this.convFiledName("lblTextGenpon"));
             }
 
-            public txtTokkijikoInputGenpo(): UZA.TextBoxMultiLine {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInputGenpo"));
-            }
-
             public lblTextMask(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblTextMask"));
             }
 
-            public txtTokkijikoInputMask(): UZA.TextBoxMultiLine {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInputMask"));
+            public txtTokkijikoNo1(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo1"));
             }
 
-            public btnBeforeTextTokkiJiko(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnBeforeTextTokkiJiko"));
+            public lbl1(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl1"));
             }
 
-            public btnAfterTextTokkiJiko(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnAfterTextTokkiJiko"));
+            public txtRemban1(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban1"));
             }
 
-            public btnBeforeTokkiJikoNoText(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnBeforeTokkiJikoNoText"));
+            public txtTextGenpo1(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextGenpo1"));
             }
 
-            public btnAfterTokkiJikoNoText(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnAfterTokkiJikoNoText"));
+            public txtTextMask1(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextMask1"));
             }
 
-            public lblImageTokkiJikoTitle(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblImageTokkiJikoTitle"));
+            public txtTokkijikoNo2(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo2"));
             }
 
-            public ImageTokki(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("ImageTokki"));
+            public lbl2(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl2"));
             }
 
-            public txtTokkiJikouNoImage(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtTokkiJikouNoImage"));
+            public txtRemban2(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban2"));
             }
 
-            public lblTokkiJikoHyphenImage(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTokkiJikoHyphenImage"));
+            public txtTextGenpo2(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextGenpo2"));
             }
 
-            public txtTokkiJikoNoImage(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtTokkiJikoNoImage"));
+            public txtTextMask2(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextMask2"));
             }
 
-            public txtTokkiJikouNameImage(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtTokkiJikouNameImage"));
+            public txtTokkijikoNo3(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo3"));
             }
 
-            public lblMsgGenpon(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblMsgGenpon"));
+            public lbl3(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl3"));
             }
 
-            public imgGenpoImage(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgGenpoImage"));
+            public txtRemban3(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban3"));
             }
 
-            public lblMsgMask(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblMsgMask"));
+            public txtTextGenpo3(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextGenpo3"));
             }
 
-            public imgMaskingImage(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgMaskingImage"));
+            public txtTextMask3(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextMask3"));
             }
 
-            public btnBeforeImageTokkiJiko(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnBeforeImageTokkiJiko"));
+            public txtTokkijikoNo4(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo4"));
             }
 
-            public btnAfterImageTokkiJiko(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnAfterImageTokkiJiko"));
+            public lbl4(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl4"));
             }
 
-            public btnBeforeTokkiJikoNoImg(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnBeforeTokkiJikoNoImg"));
+            public txtRemban4(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban4"));
             }
 
-            public btnAfterTokkiJikoNoImg(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnAfterTokkiJikoNoImg"));
+            public txtTextGenpo4(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextGenpo4"));
+            }
+
+            public txtTextMask4(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextMask4"));
+            }
+
+            public txtTokkijikoNo5(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo5"));
+            }
+
+            public lbl5(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl5"));
+            }
+
+            public txtRemban5(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban5"));
+            }
+
+            public txtTextGenpo5(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextGenpo5"));
+            }
+
+            public txtTextMask5(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextMask5"));
+            }
+
+            public txtTokkijikoNo6(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo6"));
+            }
+
+            public lbl6(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl6"));
+            }
+
+            public txtRemban6(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban6"));
+            }
+
+            public txtTextGenpo6(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextGenpo6"));
+            }
+
+            public txtTextMask6(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextMask6"));
+            }
+
+            public txtTokkijikoNo7(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo7"));
+            }
+
+            public lbl7(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl7"));
+            }
+
+            public txtRemban7(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban7"));
+            }
+
+            public txtTextGenpo7(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextGenpo7"));
+            }
+
+            public txtTextMask7(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextMask7"));
+            }
+
+            public txtTokkijikoNo8(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo8"));
+            }
+
+            public lbl8(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl8"));
+            }
+
+            public txtRemban8(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban8"));
+            }
+
+            public txtTextGenpo8(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextGenpo8"));
+            }
+
+            public txtTextMask8(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextMask8"));
+            }
+
+            public txtTokkijikoNo9(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo9"));
+            }
+
+            public lbl9(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl9"));
+            }
+
+            public txtRemban9(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban9"));
+            }
+
+            public txtTextGenpo9(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextGenpo9"));
+            }
+
+            public txtTextMask9(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextMask9"));
+            }
+
+            public txtTokkijikoNo10(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo10"));
+            }
+
+            public lbl10(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl10"));
+            }
+
+            public txtRemban10(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban10"));
+            }
+
+            public txtTextGenpo10(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextGenpo10"));
+            }
+
+            public txtTextMask10(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTextMask10"));
+            }
+
+            public txtTokkijikoNo11(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo11"));
+            }
+
+            public lbl11(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl11"));
+            }
+
+            public txtRemban11(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban11"));
+            }
+
+            public imgGenpo1(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo1"));
+            }
+
+            public imgMasking1(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgMasking1"));
+            }
+
+            public txtTokkijikoNo12(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo12"));
+            }
+
+            public lbl12(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl12"));
+            }
+
+            public txtRemban12(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban12"));
+            }
+
+            public imgGenpo2(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo2"));
+            }
+
+            public imgMasking2(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgMasking2"));
+            }
+
+            public txtTokkijikoNo13(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo13"));
+            }
+
+            public lbl13(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl13"));
+            }
+
+            public txtRemban13(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban13"));
+            }
+
+            public imgGenpo3(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo3"));
+            }
+
+            public imgMasking3(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgMasking3"));
+            }
+
+            public txtTokkijikoNo14(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo14"));
+            }
+
+            public lbl14(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl14"));
+            }
+
+            public txtRemban14(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban14"));
+            }
+
+            public imgGenpo4(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo4"));
+            }
+
+            public imgMasking4(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgMasking4"));
+            }
+
+            public txtTokkijikoNo15(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo15"));
+            }
+
+            public lbl15(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl15"));
+            }
+
+            public txtRemban15(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban15"));
+            }
+
+            public imgGenpo5(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo5"));
+            }
+
+            public imgMasking5(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgMasking5"));
+            }
+
+            public txtTokkijikoNo16(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo16"));
+            }
+
+            public lbl16(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl16"));
+            }
+
+            public txtRemban16(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban16"));
+            }
+
+            public imgGenpo6(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo6"));
+            }
+
+            public imgMasking6(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgMasking6"));
+            }
+
+            public txtTokkijikoNo17(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo17"));
+            }
+
+            public lbl17(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl17"));
+            }
+
+            public txtRemban17(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban17"));
+            }
+
+            public imgGenpo7(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo7"));
+            }
+
+            public imgMasking7(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgMasking7"));
+            }
+
+            public txtTokkijikoNo18(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo18"));
+            }
+
+            public lbl18(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl18"));
+            }
+
+            public txtRemban18(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban18"));
+            }
+
+            public imgGenpo8(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo8"));
+            }
+
+            public imgMasking8(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgMasking8"));
+            }
+
+            public txtTokkijikoNo19(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo19"));
+            }
+
+            public lbl19(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl19"));
+            }
+
+            public txtRemban19(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban19"));
+            }
+
+            public imgGenpo9(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo9"));
+            }
+
+            public imgMasking9(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgMasking9"));
+            }
+
+            public txtTokkijikoNo20(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo20"));
+            }
+
+            public lbl20(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl20"));
+            }
+
+            public txtRemban20(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban20"));
+            }
+
+            public imgGenpo10(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo10"));
+            }
+
+            public imgMasking10(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgMasking10"));
             }
 
             public btnReturn(): UZA.Button {
