@@ -51,17 +51,17 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoBodyEditor implements IKogakuS
             source.listUpper_12 = entity.get自動償還();
             source.listLower_7 = entity.get喪失事由();
             source.listUpper_7 = entity.get認定開始日();
-        }
-        source.yubinNo = entity.get郵便番号();
-        source.choikiCode = entity.get町域コード();
-        source.gyoseikuCode = entity.get行政区コード();
-        source.kanaMeisho = entity.get氏名５０音カナ();
-        source.shichosonCode = entity.get市町村コード();
-        source.shoKisaiHokenshaNo = entity.get証記載保険者番号();
-        source.hihokenshaNo = entity.get被保険者番号();
-        source.tsuchishoNo = entity.get決定通知No();
-        source.shikakuJyotaiKubun = entity.get資格状態区分();
 
+            source.yubinNo = entity.get郵便番号();
+            source.choikiCode = entity.get町域コード();
+            source.gyoseikuCode = entity.get行政区コード();
+            source.kanaMeisho = entity.get氏名５０音カナ();
+            source.shichosonCode = entity.get市町村コード();
+            source.shoKisaiHokenshaNo = entity.get証記載保険者番号();
+            source.hihokenshaNo = entity.get被保険者番号();
+            source.tsuchishoNo = entity.get決定通知No();
+            source.shikakuJyotaiKubun = entity.get資格状態区分();
+        }
         return source;
     }
 }
