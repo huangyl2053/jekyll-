@@ -879,8 +879,8 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         }
         Decimal 以上負担額 = div.getTxtOver70Futangaku().getValue() == null ? Decimal.ZERO : div.getTxtOver70Futangaku().getValue();
         Decimal 負担額 = div.getTxtFutangaku().getValue() == null ? Decimal.ZERO : div.getTxtFutangaku().getValue();
-        set以上負担額分率(以上負担額, 以上負担額合計);
-        set負担額分率(負担額, 負担額合計);
+        set以上負担額分率(以上負担額, 以上負担額合計.add(以上負担額));
+        set負担額分率(負担額, 負担額合計.add(負担額));
     }
 
     private void set負担額分率(Decimal 負担額, Decimal 負担額合計) {
