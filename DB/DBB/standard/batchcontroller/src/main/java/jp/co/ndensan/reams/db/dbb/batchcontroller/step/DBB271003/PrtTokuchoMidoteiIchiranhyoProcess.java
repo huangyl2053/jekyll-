@@ -249,7 +249,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
         改頁項目Map.put(氏名５０音カナ, kanaShimei);
         RString seinengappiYMD = entity.getBirthDay() == null ? RString.EMPTY : new RString(entity.getBirthDay().toString());
         改頁項目Map.put(生年月日, seinengappiYMD);
-        RString seibetsu = entity.getSeibetsu() == null ? RString.EMPTY : new RString(entity.getSeibetsu().toString());
+        RString seibetsu = entity.getSeibetsu() == null ? RString.EMPTY : get性別名称(entity.getSeibetsu());
         改頁項目Map.put(性別, seibetsu);
         RString genLasdecCode = entity.getGenLasdecCode() == null ? RString.EMPTY : new RString(entity.getGenLasdecCode().toString());
         改頁項目Map.put(市町村コード, genLasdecCode);

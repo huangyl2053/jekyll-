@@ -66,6 +66,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
         } else {
             div.getTxtSaishoriKubun().setValue(RString.EMPTY);
         }
+        div.getTxtShoriTaisho().setDisplayNone(true);
     }
 
     /**

@@ -1250,11 +1250,18 @@ public class SokujiFukaKouseiMainHandler {
             row.getTokuchoSaishutsuKanpu().setValue(更正後過年度.get特徴歳出還付額());
             row.getFuchoSaishutsuKanpu().setValue(更正後過年度.get普徴歳出還付額());
             if (!更正前.equals(Decimal.ZERO)
-                    || !更正後.equals(Decimal.ZERO)
-                    || (null != 更正後過年度.get特徴歳出還付額() && !Decimal.ZERO.equals(更正後過年度.get特徴歳出還付額()))
-                    || (null != 更正後過年度.get普徴歳出還付額() && !Decimal.ZERO.equals(更正後過年度.get普徴歳出還付額()))) {
+                    || !更正後.equals(Decimal.ZERO)) {
                 div.getDgFuchoKanendo().getDataSource().add(row);
             }
+        }
+        if ((null != 更正後過年度.get特徴歳出還付額() && !Decimal.ZERO.equals(更正後過年度.get特徴歳出還付額()))
+                || (null != 更正後過年度.get普徴歳出還付額() && !Decimal.ZERO.equals(更正後過年度.get普徴歳出還付額()))) {
+            dgFuchoKanendo_Row row = new dgFuchoKanendo_Row();
+            row.getChoteiNendo().setValue(new FlexibleDate(調定年度.toDateString().concat(一月一日)));
+            row.getFukaNendo().setValue(new FlexibleDate(賦課年度.toDateString().concat(一月一日)));
+            row.getTokuchoSaishutsuKanpu().setValue(更正後過年度.get特徴歳出還付額());
+            row.getFuchoSaishutsuKanpu().setValue(更正後過年度.get普徴歳出還付額());
+            div.getDgFuchoKanendo().getDataSource().add(row);
         }
     }
 

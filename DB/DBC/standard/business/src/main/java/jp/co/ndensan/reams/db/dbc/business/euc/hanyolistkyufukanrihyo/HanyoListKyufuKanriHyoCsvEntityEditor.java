@@ -203,6 +203,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
     public HanyoListKyufuKanriHyoCsvEntity edit() {
         HanyoListKyufuKanriHyoCsvEntity csvEntity = new HanyoListKyufuKanriHyoCsvEntity();
         edit_part2(csvEntity);
+        edit_part3(csvEntity);
         csvEntity.set審査年月(format日付項目(entity.get給付管理票().getShinsaYM()));
         csvEntity.setサービス年月(format日付項目(entity.get給付管理票().getServiceTeikyoYM()));
         csvEntity.set明細行番号(entity.get給付管理票().getKyufuMeisaiLineNo());
@@ -364,6 +365,9 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
                 csvEntity.set受給直近事由(set異動事由文言(entity.get受給者台帳().getChokkinIdoJiyuCode().getColumnValue()));
             }
         }
+    }
+
+    private void edit_part3(HanyoListKyufuKanriHyoCsvEntity csvEntity) {
         csvEntity.set市町村コード(entity.get最新被保台帳().getShichosonCode().getColumnValue());
         if (構成市町村マスタ.containsKey(entity.get最新被保台帳().getShichosonCode())) {
             csvEntity.set市町村名(構成市町村マスタ.get(entity.get最新被保台帳().getShichosonCode()).get市町村名称());

@@ -49,6 +49,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
     private static final int INDEX_ELEVEN = 11;
     private static final int INDEX_TWELVE = 12;
     private final int 連番;
+    private final RString 金融機関コード;
     private final List<RString> 通知書定型文List;
     private static final RString 増減の理由 = new RString("増減の理由");
     private static final RString 不支給の理由 = new RString("不支給の理由");
@@ -68,7 +69,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
     private static final RString SIZE_TWO = new RString("2");
     private static final RString SIZE_THREE = new RString("3");
     private static final RString SIZE_FOUR = new RString("4");
-    private static final RString コード_9900 = new RString("9900");
     private final SofubutsuAtesakiSource compSofubutsuAtesakiソース;
     private static final RString 支給金額 = new RString("支給金額");
     private static final RString 決定額 = new RString("決定額");
@@ -97,6 +97,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
             SofubutsuAtesakiSource compSofubutsuAtesakiソース) {
         this.帳票情報 = 帳票情報;
         this.連番 = 連番;
+        this.金融機関コード = 金融機関コード;
         this.titleList = titleList;
         this.通知書定型文List = 通知書定型文List;
         this.認証者ソースデータ = 認証者ソースデータ;
