@@ -60,7 +60,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
                 && 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース() != null) {
             SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
             source.yubinNo1 = sofubutsuAtesakiSource.yubinNo;
-            source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
+            source.gyoseiku1 = 編集後宛先.get行政区().get名称();
             source.jusho3 = sofubutsuAtesakiSource.jusho3;
             source.jushoText = sofubutsuAtesakiSource.jushoText;
             source.jusho1 = sofubutsuAtesakiSource.jusho1;
