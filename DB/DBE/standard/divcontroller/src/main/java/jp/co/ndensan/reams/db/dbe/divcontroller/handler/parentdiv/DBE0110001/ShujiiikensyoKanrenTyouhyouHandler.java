@@ -41,6 +41,7 @@ public class ShujiiikensyoKanrenTyouhyouHandler {
         div.getChkShinsei().setSelectedItemsByKey(DATA_CLARE);
         div.getChkNinteiChosa().setSelectedItemsByKey(DATA_CLARE);
         div.getChkShujiiIkensho().setSelectedItemsByKey(DATA_CLARE);
+        onClick_RadChohyoHakko();
     }
 
     /**
