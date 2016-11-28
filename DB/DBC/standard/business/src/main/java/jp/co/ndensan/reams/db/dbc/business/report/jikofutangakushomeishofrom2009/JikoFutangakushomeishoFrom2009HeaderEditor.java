@@ -120,8 +120,8 @@ public class JikoFutangakushomeishoFrom2009HeaderEditor implements IJikoFutangak
         if (date == null || date.equals(FlexibleDate.MAX) || date.equals(FlexibleDate.MIN)) {
             return RString.EMPTY;
         }
-        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-                .fillType(FillType.ZERO).toDateString();
+        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
     }
 
     private RString パターン62(FlexibleYear 年度) {

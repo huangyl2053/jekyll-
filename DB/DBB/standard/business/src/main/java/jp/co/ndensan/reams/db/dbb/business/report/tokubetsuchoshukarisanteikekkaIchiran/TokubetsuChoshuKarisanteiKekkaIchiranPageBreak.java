@@ -72,7 +72,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranPageBreak extends PageBreaker<
             ReportLineRecord<TokubetsuChoshuKarisanteiKekkaIchiranSource> nextSource) {
         boolean breakFlag = false;
         if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.市町村コード.getフォームフィールド名())
-                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
             breakFlag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.通知書番号.getフォームフィールド名())
                 && !currentSource.getSource().listLower_1.equals(nextSource.getSource().listLower_1)) {

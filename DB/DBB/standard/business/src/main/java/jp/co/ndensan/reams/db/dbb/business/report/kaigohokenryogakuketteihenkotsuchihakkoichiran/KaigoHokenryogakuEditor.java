@@ -148,6 +148,7 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         source.listUpper_12 = 生活保護扶助名称;
         listlowers(source);
         set改頁(source);
+        setNonull改ページ(source);
     }
 
     /**
@@ -268,5 +269,28 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         source.seihoFlag1 = 生活保護区分;
         source.tokuchoKaishi8 = 特徴8月開始者区分;
         source.tokuchoKaishi10 = 特徴10月開始者区分;
+    }
+
+    private void setNonull改ページ(KaigoHokenryogakuSource source) {
+        source.listLower_2 = source.listLower_2 == null ? RString.EMPTY : source.listLower_2;
+        source.choikiCode = source.choikiCode == null ? RString.EMPTY : source.choikiCode;
+        source.banchiCode = source.banchiCode == null ? RString.EMPTY : source.banchiCode;
+        source.gyoseikuCode = source.gyoseikuCode == null ? RString.EMPTY : source.gyoseikuCode;
+        source.chikuCode1 = source.chikuCode1 == null ? RString.EMPTY : source.chikuCode1;
+        source.chikuCode2 = source.chikuCode2 == null ? RString.EMPTY : source.chikuCode2;
+        source.chikuCode3 = source.chikuCode3 == null ? RString.EMPTY : source.chikuCode3;
+        source.listUpper_4 = source.listUpper_4 == null ? RString.EMPTY : source.listUpper_4;
+        source.shikibetsuCode = source.shikibetsuCode == null ? RString.EMPTY : source.shikibetsuCode;
+        source.kanaMeisho = source.kanaMeisho == null ? RString.EMPTY : source.kanaMeisho;
+        source.listUpper_5 = source.listUpper_5 == null ? RString.EMPTY : source.listUpper_5;
+        source.listUpper_6 = source.listUpper_6 == null ? RString.EMPTY : source.listUpper_6;
+        source.hokenshaNo = source.hokenshaNo == null ? RString.EMPTY : source.hokenshaNo;
+        source.listUpper_3 = source.listUpper_3 == null ? RString.EMPTY : source.listUpper_3;
+        source.nenkinCode = source.nenkinCode == null ? RString.EMPTY : source.nenkinCode;
+        source.nokumiCode = source.nokumiCode == null ? RString.EMPTY : source.nokumiCode;
+        source.seihoFlag1 = source.seihoFlag1 == null ? RString.EMPTY : source.seihoFlag1;
+        source.seihoFlag = source.seihoFlag == null ? RString.EMPTY : source.seihoFlag;
+        source.tokuchoKaishi8 = source.tokuchoKaishi8 == null ? RString.EMPTY : source.tokuchoKaishi8;
+        source.tokuchoKaishi10 = source.tokuchoKaishi10 == null ? RString.EMPTY : source.tokuchoKaishi10;
     }
 }

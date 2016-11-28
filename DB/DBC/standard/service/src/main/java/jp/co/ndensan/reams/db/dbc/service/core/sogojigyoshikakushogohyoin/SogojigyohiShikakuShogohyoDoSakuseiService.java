@@ -11,8 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyoshikakushogohyoin.Sogojigy
 import jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInCsvTanitsuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoInEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -93,13 +92,12 @@ public class SogojigyohiShikakuShogohyoDoSakuseiService {
             resultEntity.set事業者番号(entity.get事業所番号().getColumnValue());
         }
         resultEntity.set事業者名(entity.get事業所名());
-        if (null != entity.get要介護区分コード()) {
+        if (null != entity.get要介護区分コード() && !entity.get要介護区分コード().isEmpty()) {
             resultEntity.set要介護区分コード(entity.get要介護区分コード().getColumnValue());
-            if (null != entity.getサービス提供年月()) {
-                IYokaigoJotaiKubun 要介護区分 = YokaigoJotaiKubunSupport.toValue(entity.getサービス提供年月(),
-                        entity.get要介護区分コード().getColumnValue());
-                resultEntity.set要介護度(要介護区分.getName());
-            }
+            YokaigoJotaiKubun 要介護区分 = YokaigoJotaiKubun.toValue(
+                    entity.get要介護区分コード().getColumnValue());
+            resultEntity.set要介護度(要介護区分.get名称());
+
         }
         set有効期間(entity, resultEntity);
         set費用と区分(entity, resultEntity);

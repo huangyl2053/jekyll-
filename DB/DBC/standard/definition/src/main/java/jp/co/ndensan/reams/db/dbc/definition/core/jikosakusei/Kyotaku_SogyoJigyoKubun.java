@@ -16,20 +16,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum Kyotaku_SogyoJigyoKubun {
 
     /**
-     * コード:1 名称:居宅サービス計画 略称:定義なし
+     * コード:1 名称:居宅サービス計画 表示名称:居宅 略称:定義なし
      */
-    居宅サービス計画("1", "居宅サービス計画"),
+    居宅サービス計画("1", "居宅サービス計画", "居宅"),
     /**
-     * コード:2 名称:総合事業費計画 略称:定義なし
+     * コード:2 名称:総合事業費計画 表示名称:総合事業 略称:定義なし
      */
-    総合事業費計画("2", "総合事業費計画");
+    総合事業費計画("2", "総合事業費計画", "総合事業");
 
     private final RString code;
     private final RString fullName;
+    private final RString hyojiName;
 
-    private Kyotaku_SogyoJigyoKubun(String code, String fullName) {
+    private Kyotaku_SogyoJigyoKubun(String code, String fullName, String hyojiName) {
         this.code = new RString(code);
         this.fullName = new RString(fullName);
+        this.hyojiName = new RString(hyojiName);
     }
 
     /**
@@ -48,6 +50,15 @@ public enum Kyotaku_SogyoJigyoKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 居宅・総合事業区分の表示名称を返します。
+     *
+     * @return 事業高額合算_証明書用データ区分の表示名称
+     */
+    public RString get表示名称() {
+        return hyojiName;
     }
 
     /**

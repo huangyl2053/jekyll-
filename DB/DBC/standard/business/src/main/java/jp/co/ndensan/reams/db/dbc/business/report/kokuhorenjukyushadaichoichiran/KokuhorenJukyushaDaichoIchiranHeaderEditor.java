@@ -66,9 +66,16 @@ public class KokuhorenJukyushaDaichoIchiranHeaderEditor implements IKokuhoernJuk
     public JukyushaKoshinkekkaIchiranSource edit(JukyushaKoshinkekkaIchiranSource source) {
 
         source.title = TITLE;
-        source.hokenshaNo = 帳票出力対象データ.get保険者番号();
-        source.hokenshaName = 帳票出力対象データ.get保険者名();
-
+        if (帳票出力対象データ != null && 帳票出力対象データ.get保険者番号() != null) {
+            source.hokenshaNo = 帳票出力対象データ.get保険者番号();
+        } else {
+            source.hokenshaNo = RString.EMPTY;
+        }
+        if (帳票出力対象データ != null && 帳票出力対象データ.get保険者名() != null) {
+            source.hokenshaName = 帳票出力対象データ.get保険者名();
+        } else {
+            source.hokenshaName = RString.EMPTY;
+        }
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
         source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);

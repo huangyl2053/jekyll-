@@ -59,7 +59,8 @@
             再審査申立."kokuhorenSofuYM" = #{送付年月}
         </if>
         <if test="!送付年月フラグ">
-            再審査申立."kokuhorenSofuYM" IS NULL
+            (再審査申立."kokuhorenSofuYM" IS NULL
+        OR 再審査申立."kokuhorenSofuYM" = '')
         </if>
         <if test="保険者番号フラグ">
             AND substr(再審査申立."shokisaiHokenshaNo",1,5) = #{証記載保険者番号}

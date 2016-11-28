@@ -66,7 +66,7 @@ public class KagoKetteiKohifutanshaInReport extends
             IKagoKetteiKohifutanshaInEditor headerEditor = new KagoKetteiKohifutanshaInHeaderEditor(
                     帳票出力対象データリスト.get(index), 出力順Map, 処理年月, 作成日時);
             IKagoKetteiKohifutanshaInEditor bodyEditor
-                    = new KagoKetteiKohifutanshaInBodyEditor(帳票出力対象データリスト.get(index), 集計Flag);
+                    = new KagoKetteiKohifutanshaInBodyEditor(帳票出力対象データリスト.get(index), 集計Flag, ++index);
             IKagoKetteiKohifutanshaInBuilder builder
                     = new KagoKetteiKohifutanshaInBuilder(headerEditor, bodyEditor);
             writer.writeLine(builder);

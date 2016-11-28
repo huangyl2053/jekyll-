@@ -53,7 +53,7 @@ public class DBC120200_SaishinsaKetteiKohifutanshaIn
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120200");
     private static final RString 帳票ID = new RString("DBC200049_SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBun");
-    private static final RString マスタ登録BATCHID = new RString("SaishinsaKetteiDBToroku");
+    private static final RString マスタ登録BATCHID = new RString("DBC120191_SaishinsaKetteiDBToroku");
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
 

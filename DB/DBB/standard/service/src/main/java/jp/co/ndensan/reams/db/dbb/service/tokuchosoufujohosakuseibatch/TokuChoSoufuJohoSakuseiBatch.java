@@ -93,8 +93,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
      */
     public static TokuChoSoufuJohoSakuseiBatch createInstance() {
         return InstanceProvider.create(TokuChoSoufuJohoSakuseiBatch.class);
@@ -244,6 +243,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
         RString 徴収方法n月 = RString.EMPTY;
         if (null != entity.get徴収方法の情報()) {
             switch (特徴開始月.getMonthValue()) {
+                default:
+                    break;
                 case NUM1:
                     徴収方法n月 = entity.get徴収方法の情報().get徴収方法1月();
                     break;
@@ -321,7 +322,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
         }
     }
 
-    private void setDT各種区分(UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity, TokuChoSoufuJohoSakuseiResult entity, RString 徴収方法n月) {
+    private void setDT各種区分(UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity,
+            TokuChoSoufuJohoSakuseiResult entity, RString 徴収方法n月) {
         if (null != entity.get資格の情報() && (RS1.equals(徴収方法n月) || RS2.equals(徴収方法n月)) && !RS1.equals(entity.get資格の情報().get住所地特例フラグ())) {
             tokuchotempentity.setDtKakushuKubun(RS01);
         } else if (null != entity.get資格の情報() && (RS1.equals(徴収方法n月) || RS2.equals(徴収方法n月)) && entity.get資格の情報().get資格喪失事由コード() == null
