@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -82,7 +83,11 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
             RString 突合結果名称 = JukyushaIF_TsugoKekkaKubun.toValue(受給者情報.get突合結果区分()).get名称();
             source.listList1_1 = 受給者情報.get突合結果区分().concat(コロン).concat(突合結果名称);
         }
-        source.listList1_4 = 被保険者情報.get登録被保険者番号().getColumnValue();
+        if (被保険者情報.get登録被保険者番号() != null) {
+            source.listList1_4 = 被保険者情報.get登録被保険者番号().getColumnValue();
+        } else {
+            source.listList1_4 = RString.EMPTY;
+        }
         source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
                 source.listList1_4);
         source.listList1_5 = 被保険者情報.get宛名カナ名称();
@@ -106,18 +111,17 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
         source.listList7_12 = 受給者情報.get宛名番号();
         source.listList8_12 = 受給者情報.get被保険者番号_後期_();
         source.listList8_13 = 受給者情報.get被保険者証番号_国保_();
-        source.yubinNo = 被保険者情報.get郵便番号();
-        source.choikiCode = 被保険者情報.get町域コード();
-        source.gyoseikuCode = 被保険者情報.get行政区コード();
-        source.shimei50onKana = 被保険者情報.get氏名50音カナ();
-        source.shichosonCode = 被保険者情報.get市町村コード();
         source.listList8_12 = 受給者情報.get被保険者番号_後期_();
         source.listList8_13 = 受給者情報.get被保険者証番号_国保_();
         source.yubinNo = getNotNull(被保険者情報.get郵便番号());
         source.choikiCode = getNotNull(被保険者情報.get町域コード());
         source.gyoseikuCode = getNotNull(被保険者情報.get行政区コード());
         source.shimei50onKana = getNotNull(被保険者情報.get氏名50音カナ());
-        source.shichosonCode = 被保険者情報.get市町村コード();
+        if (被保険者情報.get市町村コード() != null) {
+            source.shichosonCode = 被保険者情報.get市町村コード();
+        } else {
+            source.shichosonCode = LasdecCode.EMPTY;
+        }
         if (!RString.isNullOrEmpty(被保険者情報.get識別コード())) {
             source.shikibetuCode = new ShikibetsuCode(被保険者情報.get識別コード());
         }

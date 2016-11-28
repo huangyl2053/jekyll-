@@ -146,19 +146,40 @@ public class KogakuServicehiSofuIchiranEditor implements
 
         if (entity.get被保険者_氏名50音カナ() != null) {
             source.shimei50onKana = entity.get被保険者_氏名50音カナ();
-        } else {
-            source.shimei50onKana = RString.EMPTY;
         }
         if (entity.get被保険者_市町村コード() != null) {
             source.shichosonCode = entity.get被保険者_市町村コード().value();
-        } else {
-            source.shichosonCode = RString.EMPTY;
         }
+        setPageBreakEmpty(source);
 
         source.shikibetsuCode = entity.get被保険者_識別コード().value();
 
         return source;
 
+    }
+
+    private void setPageBreakEmpty(KogakuServicehiSofuIchiranSource source) {
+        if (null == source.hokenshaNo) {
+            source.hokenshaNo = RString.EMPTY;
+        }
+        if (null == source.listUpper_3) {
+            source.listUpper_3 = RString.EMPTY;
+        }
+        if (null == source.listUpper_2) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (null == source.listLower_2) {
+            source.listLower_2 = RString.EMPTY;
+        }
+        if (null == source.shimei50onKana) {
+            source.shimei50onKana = RString.EMPTY;
+        }
+        if (null == source.shichosonCode) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (null == source.listCenter_2) {
+            source.listCenter_2 = RString.EMPTY;
+        }
     }
 
     private RString getSakuseiYmhm(RDateTime datetime) {

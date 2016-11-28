@@ -100,8 +100,16 @@ public class JukyushaKoshinKekkaIchiranHeaderEditor implements IJukyushaKoshinKe
             source.komokuName3 = RString.EMPTY;
         }
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
-        source.hokenshaNo = 対象者.get保険者番号();
-        source.hokenshaName = 対象者.get保険者名();
+        if (対象者 != null && 対象者.get保険者番号() != null) {
+            source.hokenshaNo = 対象者.get保険者番号();
+        } else {
+            source.hokenshaNo = RString.EMPTY;
+        }
+        if (対象者 != null && 対象者.get保険者名() != null) {
+            source.hokenshaName = 対象者.get保険者名();
+        } else {
+            source.hokenshaName = RString.EMPTY;
+        }
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
         source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);

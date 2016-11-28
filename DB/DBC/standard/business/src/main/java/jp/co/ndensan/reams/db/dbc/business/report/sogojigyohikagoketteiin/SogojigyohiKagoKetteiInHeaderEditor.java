@@ -68,6 +68,8 @@ public class SogojigyohiKagoKetteiInHeaderEditor implements ISogojigyohiKagoKett
         source.hokenshaName = 帳票出力対象データ.get保険者名();
         if (null != 帳票出力対象データ.get証記載保険者番号()) {
             source.shoKisaiHokenshaNo = 帳票出力対象データ.get証記載保険者番号().getColumnValue();
+        } else {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
         }
         source.shoKisaiHokenshaName = 帳票出力対象データ.get証記載保険者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);

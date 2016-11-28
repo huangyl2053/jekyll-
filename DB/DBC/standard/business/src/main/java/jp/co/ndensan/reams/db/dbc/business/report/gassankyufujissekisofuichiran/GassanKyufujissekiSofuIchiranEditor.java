@@ -111,14 +111,49 @@ public class GassanKyufujissekiSofuIchiranEditor implements
             if (帳票用データ.get識別コード() != null) {
                 source.shikibetsuCode = 帳票用データ.get識別コード().value();
             }
-            source.yubinNo = 帳票用データ.get郵便番号() == null ? RString.EMPTY : 帳票用データ.get郵便番号();
-            source.choikiCode = 帳票用データ.get町域コード() == null ? RString.EMPTY : 帳票用データ.get町域コード();
-            source.gyoseikuCode = 帳票用データ.get行政区コード() == null ? RString.EMPTY : 帳票用データ.get行政区コード();
-            source.shimei50onKana = 帳票用データ.get氏名50音カナ() == null ? RString.EMPTY : 帳票用データ.get氏名50音カナ();
-            source.shichosonCode = 帳票用データ.get市町村コード() == null ? RString.EMPTY : 帳票用データ.get市町村コード().value();
+            source.yubinNo = 帳票用データ.get郵便番号();
+            source.choikiCode = 帳票用データ.get町域コード();
+            source.gyoseikuCode = 帳票用データ.get行政区コード();
+            source.shimei50onKana = 帳票用データ.get氏名50音カナ();
+            source.shichosonCode = 帳票用データ.get市町村コード().value();
         }
+        setPageBreakEmpty(source);
 
         return source;
+
+    }
+
+    private void setPageBreakEmpty(GassanKyufujissekiSofuIchiranSource source) {
+        if (source.list_7 == null) {
+            source.list_7 = RString.EMPTY;
+        }
+        if (source.list_2 == null) {
+            source.list_2 = RString.EMPTY;
+        }
+        if (source.list_8 == null) {
+            source.list_8 = RString.EMPTY;
+        }
+        if (source.list_4 == null) {
+            source.list_4 = RString.EMPTY;
+        }
+        if (source.list_9 == null) {
+            source.list_9 = RString.EMPTY;
+        }
+        if (source.yubinNo == null) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.shimei50onKana == null) {
+            source.shimei50onKana = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
 
     }
 
