@@ -1353,7 +1353,10 @@ public class JukyushaKyufuDaichoEdit {
                         .concat(dateFormat年月日(住宅改修.get住宅改修着工年月日()))
                         .concat(SPACE_12).concat(kingakuFormat(住宅改修.get改修金額().intValue()))
                         .concat(SPACE_2).concat(dateFormat年月(住宅改修.get審査年月())));
-                個人用帳票データ.set明細3(ServiceCategoryShurui.toValue(住宅改修.getサービスコード()).get名称());
+                if (!RString.isNullOrEmpty(住宅改修.getサービスコード()) && 住宅改修.getサービスコード().length() >= LIST_SIZE_2) {
+                    RString サービスコード = 住宅改修.getサービスコード().substring(0, LIST_SIZE_2);
+                    個人用帳票データ.set明細3(ServiceCategoryShurui.toValue(サービスコード).get名称());
+                }
                 個人用帳票データ.set適用1(住宅改修.get住宅改修事業者名());
                 if (住宅改修.get住宅改修事業者名().length() > INDEX_64) {
                     個人用帳票データ.set適用2(住宅改修.get住宅改修事業者名().substring(0, INDEX_64));
