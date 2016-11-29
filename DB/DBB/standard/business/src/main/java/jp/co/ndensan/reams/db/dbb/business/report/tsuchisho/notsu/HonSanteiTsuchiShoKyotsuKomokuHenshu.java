@@ -200,8 +200,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             Decimal 普徴納付済額_更正後 = get普徴納付済額(賦課情報_更正後, 1, SIZE_14);
             Decimal 普徴納付済額_更正前 = get普徴納付済額(賦課情報_更正前, 1, SIZE_14);
             Decimal 普徴歳出還付額_更正後 = null == 賦課情報_更正後.get普徴歳出還付額() ? Decimal.ZERO : 賦課情報_更正後.get普徴歳出還付額();
-            普徴既に納付すべき額 = 普徴納付済額_更正後.add(get普徴納付済額(賦課情報_更正前, 1, Integer.parseInt(普徴現在期.toString()) - 1));
-            普徴今後納付すべき額_収入元に = 普徴納付済額_更正後.add(普徴納付済額_更正前).subtract(普徴歳出還付額_更正後).subtract(普徴納付済額);
+            普徴既に納付すべき額 = 普徴納付済額_更正前.add(get普徴納付済額(賦課情報_更正後, 1, Integer.parseInt(普徴現在期.toString()) - 1));
+            普徴今後納付すべき額_収入元に = 普徴納付済額_更正前.add(普徴納付済額_更正後).subtract(普徴歳出還付額_更正後).subtract(普徴納付済額);
             普徴今後納付すべき額_調定元に = 普徴納付済額_更正前.add(普徴納付済額_更正後).subtract(普徴歳出還付額_更正後).subtract(普徴既に納付すべき額);
             Decimal 特徴納付済額_更正前 = get特徴納付済額(賦課情報_更正前, 1, SIZE_6);
             Decimal 特徴歳出還付額_更正後 = null == 賦課情報_更正後.get特徴歳出還付額() ? Decimal.ZERO : 賦課情報_更正後.get特徴歳出還付額();
@@ -210,7 +210,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
             特徴今後納付すべき額_調定元に = Decimal.ZERO;
             if (!特徴現在期.isEmpty()) {
-                特徴今後納付すべき額_調定元に = get特徴納付済額(賦課情報_更正後, 1, Integer.parseInt(特徴現在期.toString()) - 1).subtract(特徴歳出還付額_更正後)
+                特徴今後納付すべき額_調定元に = get特徴納付済額(賦課情報_更正前, 1, Integer.parseInt(特徴現在期.toString()) - 1).subtract(特徴歳出還付額_更正後)
                         .subtract(特徴既に納付すべき額);
             }
             既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
