@@ -52,7 +52,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JikofutangakuShomeishoToroku {
 
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
-    private static final RString BUTTON_BTNBACKSEARCHRESULT_SEARCHGAMEN = new RString("btnBackSearchResult_SearchGamen");
+    private static final RString 戻る結果一覧へ = new RString("btnBackSearchResult_SearchGamen");
     private static final RString BUTTON_SAVE = new RString("btnUpdate");
     private static final RString STATUS_新規 = new RString("新規");
     private static final RString STATUS_保存 = new RString("保存");
@@ -77,7 +77,7 @@ public class JikofutangakuShomeishoToroku {
             throw new PessimisticLockingException();
         }
         div.setDisabled(false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNBACKSEARCHRESULT_SEARCHGAMEN, false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(戻る結果一覧へ, false);
         getHandler(div).onLoad(被保険者番号, 識別コード);
         AccessLogger.log(AccessLogType.照会, toPersonalData(被保険者番号, 識別コード));
         return ResponseData.of(div).respond();
@@ -702,42 +702,42 @@ public class JikofutangakuShomeishoToroku {
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            JikofutangakuShomeishoTorokuBusiness business
-                    = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
-            if (STATUS_新規.equals(div.getExecutionStatus()) || STATUS_修正.equals(div.getExecutionStatus())) {
-                ValidationMessageControlPairs validPairs = getValidationHandler(div).更新処理チェック(getHandler(div).is修正_証明書登録画面変更(business));
-                if (validPairs.iterator().hasNext()) {
-                    return ResponseData.of(div).addValidationMessages(validPairs).respond();
-                }
-            }
-            RStringBuilder 完了メッセージ = new RStringBuilder("対象者の自己負担額証明書情報の、");
-            if (STATUS_新規.equals(div.getExecutionStatus())) {
-                insert(div);
-                完了メッセージ.append(new RString("新規追加"));
-            } else if (STATUS_修正.equals(div.getExecutionStatus())) {
-                update(div, business);
-                完了メッセージ.append(STATUS_修正);
-            } else if (STATUS_削除.equals(div.getExecutionStatus())) {
-                delete(business);
-                完了メッセージ.append(STATUS_削除);
-            }
-            完了メッセージ.append(new RString("が完了しました。"));
-            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-            RStringBuilder messageTaisho1 = new RStringBuilder(被保険者番号.value());
-            messageTaisho1.append(new RString("："));
-            messageTaisho1.append(div.getCcdAtenaInfo().get氏名漢字());
-            RStringBuilder messageTaisho2 = new RStringBuilder();
-            messageTaisho2.append(new RString("支給申請書整理番号："));
-            messageTaisho2.append(div.getTxtTorokuShikyuShinseishoSeiriNo().getValue());
-
-            div.getCcdKanryoMessage().setMessage(
-                    完了メッセージ.toRString(), RString.EMPTY,
-                    messageTaisho1.toRString(), messageTaisho2.toRString(), true);
-            return ResponseData.of(div).setState(DBCN130001StateName.処理完了);
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
         }
-        return ResponseData.of(div).respond();
+        JikofutangakuShomeishoTorokuBusiness business
+                    = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
+        if (STATUS_新規.equals(div.getExecutionStatus()) || STATUS_修正.equals(div.getExecutionStatus())) {
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).更新処理チェック(getHandler(div).is修正_証明書登録画面変更(business));
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
+        RStringBuilder 完了メッセージ = new RStringBuilder("対象者の自己負担額証明書情報の、");
+        if (STATUS_新規.equals(div.getExecutionStatus())) {
+            insert(div);
+            完了メッセージ.append(new RString("新規追加"));
+        } else if (STATUS_修正.equals(div.getExecutionStatus())) {
+            update(div, business);
+            完了メッセージ.append(STATUS_修正);
+        } else if (STATUS_削除.equals(div.getExecutionStatus())) {
+            delete(business);
+            完了メッセージ.append(STATUS_削除);
+        }
+        完了メッセージ.append(new RString("が完了しました。"));
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+        RStringBuilder messageTaisho1 = new RStringBuilder(被保険者番号.value());
+        messageTaisho1.append(new RString("："));
+        messageTaisho1.append(div.getCcdAtenaInfo().get氏名漢字());
+        RStringBuilder messageTaisho2 = new RStringBuilder();
+        messageTaisho2.append(new RString("支給申請書整理番号："));
+        messageTaisho2.append(div.getTxtTorokuShikyuShinseishoSeiriNo().getValue());
+
+        div.getCcdKanryoMessage().setMessage(
+                完了メッセージ.toRString(), RString.EMPTY,
+                messageTaisho1.toRString(), messageTaisho2.toRString(), true);
+        return ResponseData.of(div).setState(DBCN130001StateName.処理完了);        
     }
 
     private void insert(JikofutangakuShomeishoTorokuDiv div) {
