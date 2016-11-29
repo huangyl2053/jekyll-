@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.business.report.jukyushajyufujissekidaicho;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoData;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 受給者給付実績台帳 のEditorです。
@@ -41,7 +43,11 @@ public class JukyushaKyufuJissekidaichoEditor implements IJukyushaKyufuJissekida
         source.hihoNameKana = data.get被保険者氏名カナ();
         source.jissekiKbnMei = data.get実績区分();
         source.umareYmd = data.get生年月日();
-        source.seibetsu = data.get性別();
+        if (!RString.isNullOrEmpty(data.get性別())) {
+            source.seibetsu = Seibetsu.toValue(data.get性別()).get名称();
+        } else {
+            source.seibetsu = RString.EMPTY;
+        }
         source.youKaigoKbnMei = data.get要介護度();
         source.ninYmdStEd = data.get認定有効期間();
         source.shoHokenshaNo = data.get証記載保険者番号();

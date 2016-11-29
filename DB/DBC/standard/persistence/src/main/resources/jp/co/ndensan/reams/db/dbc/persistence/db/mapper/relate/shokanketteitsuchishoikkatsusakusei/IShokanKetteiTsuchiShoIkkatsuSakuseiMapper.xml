@@ -610,10 +610,11 @@
         ,"ninteiYukoKikanKaishiYMD"
         ,"ninteiYukoKikanShuryoYMD"
         ,"ninteiYMD"
+        ,"serviceTeikyoYM"
         FROM
         (
         SELECT
-        ROW_NUMBER() OVER(PARTITION BY DbT4001JukyushaDaicho."hihokenshaNo",DbT4001JukyushaDaicho."shichosonCode"
+        ROW_NUMBER() OVER(PARTITION BY DbT4001JukyushaDaicho."hihokenshaNo",DbT4001JukyushaDaicho."shichosonCode", DbT3034."serviceTeikyoYM"
         ORDER BY DbT4001JukyushaDaicho."rirekiNo" DESC,DbT4001JukyushaDaicho."edaban" DESC)  AS  "sortNo"
         ,DbT4001JukyushaDaicho."hihokenshaNo"
         ,DbT4001JukyushaDaicho."shichosonCode"
@@ -621,6 +622,7 @@
         ,DbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD"
         ,DbT4001JukyushaDaicho."ninteiYukoKikanShuryoYMD"
         ,DbT4001JukyushaDaicho."ninteiYMD"
+        ,DbT3034."serviceTeikyoYM"
         FROM
         rgdb."DbT4001JukyushaDaicho" AS DbT4001JukyushaDaicho
         INNER JOIN DbT3034
@@ -643,6 +645,7 @@
         )SUBDbT4001JukyushaDaicho
         ON
         DbT3034ShokanShinsei."hiHokenshaNo" = SUBDbT4001JukyushaDaicho."hihokenshaNo"
+        AND DbT3034ShokanShinsei."serviceTeikyoYM" = SUBDbT4001JukyushaDaicho."serviceTeikyoYM"
         
         LEFT JOIN
         (

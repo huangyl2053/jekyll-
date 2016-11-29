@@ -148,12 +148,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         if (特徴仮算定計算後賦課情報Entity.get通知書番号() != null) {
             source.listLower_1 = 特徴仮算定計算後賦課情報Entity.get通知書番号().value();
         }
-        if (特徴仮算定計算後賦課情報Entity.get宛名().getSetaiCode() != null) {
-            SetaiCode setaiCode = 特徴仮算定計算後賦課情報Entity.get宛名().getSetaiCode();
-            source.listLower_2 = setaiCode.value();
-        } else {
-            source.listLower_2 = RString.EMPTY;
-        }
+        setSetaiCode(source);
         set漢字氏名(source);
         set特別徴収業務者(source);
         set特別徴収対象年金(source);
@@ -178,6 +173,17 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         setPageBreakEmpty(source);
         return source;
 
+    }
+
+    private void setSetaiCode(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        if (特徴仮算定計算後賦課情報Entity.get宛名().getSetaiCode() != null) {
+            SetaiCode setaiCode = 特徴仮算定計算後賦課情報Entity.get宛名().getSetaiCode();
+            if (null != setaiCode && !setaiCode.isEmpty()) {
+                source.listLower_2 = setaiCode.value();
+            }
+        } else {
+            source.listLower_2 = RString.EMPTY;
+        }
     }
 
     private void setPageBreakEmpty(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {

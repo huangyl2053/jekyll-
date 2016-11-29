@@ -264,6 +264,36 @@ public class KariSanteiIdoFukaBatchFath {
         list.add(調定事由2);
         list.add(調定事由3);
         list.add(調定事由4);
+        list = set調定事由(当初賦課情報, 設定前賦課情報, list,
+                flag1, flag2, flag3, flag4);
+        FukaJohoBuilder builder = 設定前賦課情報.createBuilderForEdit();
+        builder.set調定事由1(list.get(NUM_0));
+        builder.set調定事由2(list.get(NUM_1));
+        builder.set調定事由3(list.get(NUM_2));
+        builder.set調定事由4(list.get(NUM_3));
+        return builder.build();
+    }
+
+    private RString get資格事由(RString 資格事由) {
+        if (資格事由 == null) {
+            return RString.EMPTY;
+        }
+        return 資格事由;
+    }
+
+    private FlexibleDate get資格日(FlexibleDate 資格日) {
+        if (資格日 == null) {
+            return FlexibleDate.EMPTY;
+        }
+        return 資格日;
+    }
+
+    private List<RString> set調定事由(FukaJoho 当初賦課情報, FukaJoho 設定前賦課情報,
+            List<RString> list,
+            boolean flag1,
+            boolean flag2,
+            boolean flag3,
+            boolean flag4) {
         if (RString.isNullOrEmpty(設定前賦課情報.get調定事由1())
                 && RString.isNullOrEmpty(設定前賦課情報.get調定事由2())
                 && RString.isNullOrEmpty(設定前賦課情報.get調定事由3())
@@ -299,31 +329,11 @@ public class KariSanteiIdoFukaBatchFath {
                 flag4 = true;
             }
         }
-        list = set調定事由(当初賦課情報, 設定前賦課情報, list,
+        return set調定事由1(当初賦課情報, 設定前賦課情報, list,
                 flag1, flag2, flag3, flag4);
-        FukaJohoBuilder builder = 設定前賦課情報.createBuilderForEdit();
-        builder.set調定事由1(list.get(NUM_0));
-        builder.set調定事由2(list.get(NUM_1));
-        builder.set調定事由3(list.get(NUM_2));
-        builder.set調定事由4(list.get(NUM_3));
-        return builder.build();
     }
 
-    private RString get資格事由(RString 資格事由) {
-        if (資格事由 == null) {
-            return RString.EMPTY;
-        }
-        return 資格事由;
-    }
-
-    private FlexibleDate get資格日(FlexibleDate 資格日) {
-        if (資格日 == null) {
-            return FlexibleDate.EMPTY;
-        }
-        return 資格日;
-    }
-
-    private List<RString> set調定事由(FukaJoho 当初賦課情報, FukaJoho 設定前賦課情報,
+    private List<RString> set調定事由1(FukaJoho 当初賦課情報, FukaJoho 設定前賦課情報,
             List<RString> list,
             boolean flag1,
             boolean flag2,
@@ -363,6 +373,16 @@ public class KariSanteiIdoFukaBatchFath {
                 flag4 = true;
             }
         }
+        return set調定事由2(当初賦課情報, 設定前賦課情報, list,
+                flag1, flag2, flag3, flag4);
+    }
+
+    private List<RString> set調定事由2(FukaJoho 当初賦課情報, FukaJoho 設定前賦課情報,
+            List<RString> list,
+            boolean flag1,
+            boolean flag2,
+            boolean flag3,
+            boolean flag4) {
         if (!nullTOZero(設定前賦課情報.get減免額()).equals(当初賦課情報.get減免額())
                 && !list.contains(ChoteiJiyuCode.減免決定による更正.getコード())) {
             if (!flag1) {
