@@ -341,7 +341,8 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     @Override
     protected void process(HanyoListKogakuGassanShinseishoJohoEntity entity) {
         出力有無 = CSV出力有無_あり;
-        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 市町村名MasterMap, 帳票制御共通, 地方公共団体));
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get最新被保台帳_市町村コード());
+        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 市町村名MasterMap, 帳票制御共通, 地方公共団体, 導入団体情報));
         personalDataList.add(toPersonalData(entity));
     }
 

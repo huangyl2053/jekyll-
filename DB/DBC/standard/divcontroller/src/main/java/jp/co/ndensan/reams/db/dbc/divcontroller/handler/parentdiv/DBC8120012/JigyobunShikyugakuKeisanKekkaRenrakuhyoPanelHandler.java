@@ -39,7 +39,6 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
     private final JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv div;
     private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
     private static final RString 発行する = new RString("btnPrint");
-    private static final RString チェック = new RString("btnCheck");
 
     /**
      * コンストラクタです。
@@ -69,8 +68,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
                 コントロールの非活性化();
                 throw new PessimisticLockingException();
             }
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行する, true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(チェック, false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
 
             div.getCclKaigoAtenaInfo().initialize(識別コード);
             被保険者番号存在チェック(被保険者番号);

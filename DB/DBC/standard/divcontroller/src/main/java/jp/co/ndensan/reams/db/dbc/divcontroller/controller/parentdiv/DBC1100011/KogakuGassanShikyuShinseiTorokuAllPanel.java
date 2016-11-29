@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoKany
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoDataResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoHoji;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoRelate;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKbn;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.DBC1100011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.DBC1100011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.KogakuGassanShikyuShinseiTorokuAllPanelDiv;
@@ -760,6 +761,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         画面項目.set申請代表者郵便番号(div.getTxtDaihyoshaYubinNo().getValue());
         画面項目.set申請代表者住所(div.getTxtDaihyoshaJusho().getValue());
         画面項目.set申請代表者電話番号(div.getTxtDaihyoshaTelNo().getDomain());
+        if (!RString.isNullOrEmpty(div.getTxtShikyuShinseiKubun().getValue())) {
+            画面項目.set支給申請区分(KaigoGassan_ShinseiKbn.valueof(div.getTxtShikyuShinseiKubun().getValue()).getCode());
+        }
         return 画面項目;
     }
 

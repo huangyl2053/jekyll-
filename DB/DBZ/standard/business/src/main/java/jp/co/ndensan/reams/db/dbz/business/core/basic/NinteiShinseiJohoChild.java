@@ -788,7 +788,8 @@ public class NinteiShinseiJohoChild
     }
 
     /**
-     * 要介護認定申請情報のみを変更対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定申請情報のみを変更対象とします。<br/>
+     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiShinseiJohoChild}
      */
@@ -802,7 +803,8 @@ public class NinteiShinseiJohoChild
     }
 
     /**
-     * 保持する要介護認定申請情報を削除対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定申請情報を削除対象とします。<br/>
+     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiShinseiJohoChild}
      */
@@ -812,7 +814,6 @@ public class NinteiShinseiJohoChild
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new NinteiShinseiJohoChild(deletedEntity, id);

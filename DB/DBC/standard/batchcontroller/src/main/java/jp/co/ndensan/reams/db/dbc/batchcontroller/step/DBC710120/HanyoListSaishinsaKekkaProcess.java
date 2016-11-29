@@ -107,10 +107,11 @@ public class HanyoListSaishinsaKekkaProcess extends BatchProcessBase<HanyoListSa
     @Override
     protected void process(HanyoListSaishinsaKekkaRelateEntity entity) {
         flag = true;
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
         if (processParameter.isRenbanFuka()) {
-            eucCsvWriter.writeLine(business.setRenbanariEUCEntity(entity, 連番++, 市町村名MasterMap, 帳票制御共通, association));
+            eucCsvWriter.writeLine(business.setRenbanariEUCEntity(entity, 連番++, 市町村名MasterMap, 帳票制御共通, association, 導入団体情報));
         } else {
-            eucCsvWriter.writeLine(business.setRenbanashiEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association));
+            eucCsvWriter.writeLine(business.setRenbanashiEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association, 導入団体情報));
         }
 
     }

@@ -232,28 +232,30 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
         RString 介護支給申請書整理番号2 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango2().getValue();
         RString 介護支給申請書整理番号3 = div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().getSelectedValue();
         RString 介護支給申請書整理番号4 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango4().getValue();
-        if (介護支給申請書整理番号4.length() < 六) {
-            介護支給申請書整理番号4.padZeroToLeft(六 - 介護支給申請書整理番号4.length());
+        int length2 = 介護支給申請書整理番号4.length();
+        if (!RString.isNullOrEmpty(介護支給申請書整理番号4) && length2 < 六) {
+            介護支給申請書整理番号4.padZeroToLeft(六 - length2);
         }
         RString 介護支給申請書整理番号list
                 = 介護支給申請書整理番号1.insert(介護支給申請書整理番号1.length() - 1, 介護支給申請書整理番号2.toString());
         介護支給申請書整理番号list = 介護支給申請書整理番号list.insert(介護支給申請書整理番号list.length() - 1, 介護支給申請書整理番号3.toString());
         介護支給申請書整理番号list = 介護支給申請書整理番号list.insert(介護支給申請書整理番号list.length() - 1, 介護支給申請書整理番号4.toString());
-        if (介護支給申請書整理番号list.length() != 十七) {
+        if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkKaigoShikyuShinseishoSeiriBango().isAllSelected()) {
             介護支給申請書整理番号list = null;
         }
         RString 医療支給申請書整理番号1 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango1().getValue();
         RString 医療支給申請書整理番号2 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango2().getValue();
         RString 医療支給申請書整理番号3 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango3().getValue();
         RString 医療支給申請書整理番号4 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango4().getValue();
-        if (医療支給申請書整理番号4.length() < 六) {
-            医療支給申請書整理番号4.padZeroToLeft(六 - 医療支給申請書整理番号4.length());
+        int length = 医療支給申請書整理番号4.length();
+        if (!RString.isNullOrEmpty(医療支給申請書整理番号4) && length < 六) {
+            医療支給申請書整理番号4 = 医療支給申請書整理番号4.padZeroToLeft(六 - length);
         }
         RString 医療支給申請書整理番号list
                 = 医療支給申請書整理番号1.insert(医療支給申請書整理番号1.length() - 1, 医療支給申請書整理番号2.toString());
         医療支給申請書整理番号list = 医療支給申請書整理番号list.insert(医療支給申請書整理番号list.length() - 1, 医療支給申請書整理番号3.toString());
         医療支給申請書整理番号list = 医療支給申請書整理番号list.insert(医療支給申請書整理番号list.length() - 1, 医療支給申請書整理番号4.toString());
-        if (医療支給申請書整理番号list.length() != 十七) {
+        if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkIryoShikyuShinseishoSeiriBango().isAllSelected()) {
             医療支給申請書整理番号list = null;
         }
         boolean 申請基本情報検索有無 = !div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbShinseiKihonJohoKensaku().getSelectedKey().isEmpty();

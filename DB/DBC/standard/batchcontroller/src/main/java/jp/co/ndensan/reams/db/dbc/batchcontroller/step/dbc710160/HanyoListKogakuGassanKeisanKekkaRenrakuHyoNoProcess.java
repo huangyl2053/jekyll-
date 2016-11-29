@@ -329,7 +329,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
         HanyoListKogakuGassanKeisanNoCSVEntity output = new HanyoListKogakuGassanKeisanNoCSVEntity();
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         if (kojin != null) {
-            set宛名1(kojin, output);
+            set宛名1(kojin, output, entity);
             set宛名2(kojin, output);
         }
         set最新被保台帳(entity, output);
@@ -343,7 +343,8 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
     }
 
     private void set宛名1(IKojin kojin,
-            HanyoListKogakuGassanKeisanNoCSVEntity output) {
+            HanyoListKogakuGassanKeisanNoCSVEntity output,
+            HanyoListKogakuGassanKeisanEntity entity) {
         output.set識別コード(getColumnValue(kojin.get識別コード()));
         if (kojin.get住民状態() != null) {
             output.set住民種別(kojin.get住民状態().住民状態略称());
@@ -377,7 +378,8 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
             }
             output.set方書(getColumnValue(kojin.get住所().get方書()));
         }
-        output.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, kojin, 地方公共団体));
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get最新被保台帳().getShichosonCode());
+        output.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, kojin, 導入団体情報));
         if (kojin.get行政区画() != null) {
             if (kojin.get行政区画().getGyoseiku() != null) {
                 output.set行政区コード(getColumnValue(kojin.get行政区画().getGyoseiku().getコード()));

@@ -95,11 +95,12 @@ public class HanyoListSogoJigyoHi {
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association Association
      * @param 連番 連番
+     * @param 導入団体情報 Association
      * @return JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity
      */
     public HanyoListSogoJigyoHiKiHonReibanAriEUCEntity set連番基本ありEUCEntity(HanyoListSogoJigyoHiRelateEntity entity,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association association, int 連番) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association, Association 導入団体情報, int 連番) {
         HanyoListSogoJigyoHiKiHonReibanAriEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonReibanAriEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -119,7 +120,7 @@ public class HanyoListSogoJigyoHi {
             eucEntity.set世帯主名(iKojin.get世帯主名());
             eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -181,12 +182,13 @@ public class HanyoListSogoJigyoHi {
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association Association
+     * @param 導入団体情報 Association
      * @param 連番 連番
      * @return HanyoListSogoJigyoHiKiHonMeisaiReibanAriEUCEntity
      */
     public HanyoListSogoJigyoHiKiHonMeisaiReibanAriEUCEntity set連番基本明細ありEUCEntity(HanyoListSogoJigyoHiRelateEntity entity,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association association, int 連番) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association, Association 導入団体情報, int 連番) {
         HanyoListSogoJigyoHiKiHonMeisaiReibanAriEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonMeisaiReibanAriEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -206,7 +208,7 @@ public class HanyoListSogoJigyoHi {
             eucEntity.set世帯主名(iKojin.get世帯主名());
             eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -257,12 +259,13 @@ public class HanyoListSogoJigyoHi {
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association Association
+     * @param 導入団体情報 Association
      * @param 連番 連番
      * @return HanyoListSogoJigyoHiKiHonShukeiReibanAriEUCEntity
      */
     public HanyoListSogoJigyoHiKiHonShukeiReibanAriEUCEntity set連番基本集計ありEUCEntity(HanyoListSogoJigyoHiRelateEntity entity,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association association, int 連番) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association, Association 導入団体情報, int 連番) {
         HanyoListSogoJigyoHiKiHonShukeiReibanAriEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonShukeiReibanAriEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -282,7 +285,7 @@ public class HanyoListSogoJigyoHi {
             eucEntity.set世帯主名(iKojin.get世帯主名());
             eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -334,12 +337,13 @@ public class HanyoListSogoJigyoHi {
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association Association
+     * @param 導入団体情報 Association
      * @param 連番 連番
      * @return HanyoListSogoJigyoHiKiHonManejimentoReibanAriEUCEntity
      */
     public HanyoListSogoJigyoHiKiHonManejimentoReibanAriEUCEntity set連番基本マネジありEUCEntity(HanyoListSogoJigyoHiRelateEntity entity,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association association, int 連番) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association, Association 導入団体情報, int 連番) {
         HanyoListSogoJigyoHiKiHonManejimentoReibanAriEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonManejimentoReibanAriEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -359,7 +363,7 @@ public class HanyoListSogoJigyoHi {
             eucEntity.set世帯主名(iKojin.get世帯主名());
             eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -416,11 +420,12 @@ public class HanyoListSogoJigyoHi {
      * @param 市町村名MasterMap Map<RString, KoseiShichosonMaster>
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association Association
+     * @param 導入団体情報 Association
      * @return HanyoListSogoJigyoHiKiHonReibanNashiEUCEntity
      */
     public HanyoListSogoJigyoHiKiHonReibanNashiEUCEntity set連番基本なしEUCEntity(HanyoListSogoJigyoHiRelateEntity entity,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association, Association 導入団体情報) {
         HanyoListSogoJigyoHiKiHonReibanNashiEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonReibanNashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -439,7 +444,7 @@ public class HanyoListSogoJigyoHi {
             eucEntity.set世帯主名(iKojin.get世帯主名());
             eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -501,11 +506,12 @@ public class HanyoListSogoJigyoHi {
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association Association
+     * @param 導入団体情報 Association
      * @return HanyoListSogoJigyoHiKiHonMeisaiReibanNashiEUCEntity
      */
     public HanyoListSogoJigyoHiKiHonMeisaiReibanNashiEUCEntity set連番基本明細なしEUCEntity(HanyoListSogoJigyoHiRelateEntity entity,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association, Association 導入団体情報) {
         HanyoListSogoJigyoHiKiHonMeisaiReibanNashiEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonMeisaiReibanNashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -524,7 +530,7 @@ public class HanyoListSogoJigyoHi {
             eucEntity.set世帯主名(iKojin.get世帯主名());
             eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -575,11 +581,12 @@ public class HanyoListSogoJigyoHi {
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association Association
+     * @param 導入団体情報 Association
      * @return HanyoListSogoJigyoHiKiHonShukeiReibanNashiEUCEntity
      */
     public HanyoListSogoJigyoHiKiHonShukeiReibanNashiEUCEntity set連番基本集計なしEUCEntity(HanyoListSogoJigyoHiRelateEntity entity,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association, Association 導入団体情報) {
         HanyoListSogoJigyoHiKiHonShukeiReibanNashiEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonShukeiReibanNashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -598,7 +605,7 @@ public class HanyoListSogoJigyoHi {
             eucEntity.set世帯主名(iKojin.get世帯主名());
             eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -650,11 +657,12 @@ public class HanyoListSogoJigyoHi {
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association Association
+     * @param 導入団体情報 Association
      * @return HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntity
      */
     public HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntity set連番基本マネジなしEUCEntity(HanyoListSogoJigyoHiRelateEntity entity,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association, Association 導入団体情報) {
         HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -673,7 +681,7 @@ public class HanyoListSogoJigyoHi {
             eucEntity.set世帯主名(iKojin.get世帯主名());
             eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
