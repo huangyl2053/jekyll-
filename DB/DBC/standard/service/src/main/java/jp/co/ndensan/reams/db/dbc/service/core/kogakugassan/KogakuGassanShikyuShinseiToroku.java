@@ -242,7 +242,6 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
                 entity.setShinseiDaihyoshaTelNo(画面項目.get申請代表者電話番号());
-                entity.setShikyuShinseiKubun(画面項目.get支給申請区分());
                 高額合算申請書Dac.save(entity);
                 List<KogakuGassanShinseishoKanyureki> 加入歴list = 高額合算申請書.get高額合算申請書加入歴list();
                 for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴list) {
@@ -259,7 +258,6 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
                 entity.setShinseiDaihyoshaTelNo(画面項目.get申請代表者電話番号());
-                entity.setShikyuShinseiKubun(画面項目.get支給申請区分());
                 高額合算申請書Dac.save(entity);
                 List<KogakuGassanShinseishoKanyureki> 加入歴list = 高額合算申請書.get高額合算申請書加入歴list();
                 for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴list) {
@@ -298,7 +296,6 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
                 entity.setShinseiDaihyoshaTelNo(画面項目.get申請代表者電話番号());
-                entity.setShikyuShinseiKubun(画面項目.get支給申請区分());
                 entity.setState(EntityDataState.Added);
                 List<KogakuGassanShinseishoKanyureki> 加入歴list = 高額合算申請書.get高額合算申請書加入歴list();
                 for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴list) {
@@ -327,7 +324,6 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
                 entity.setShinseiDaihyoshaTelNo(画面項目.get申請代表者電話番号());
-                entity.setShikyuShinseiKubun(画面項目.get支給申請区分());
                 List<KogakuGassanShinseishoKanyureki> 加入歴list = 高額合算申請書.get高額合算申請書加入歴list();
                 for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴list) {
                     DbT3069KogakuGassanShinseishoKanyurekiEntity kanyurekiEntity = 加入歴.toEntity();
@@ -360,7 +356,6 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
                 entity.setShinseiDaihyoshaTelNo(画面項目.get申請代表者電話番号());
-                entity.setShikyuShinseiKubun(画面項目.get支給申請区分());
                 List<KogakuGassanShinseishoKanyureki> 加入歴list = 高額合算申請書.get高額合算申請書加入歴list();
                 for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴list) {
                     DbT3069KogakuGassanShinseishoKanyurekiEntity kanyurekiEntity = 加入歴.toEntity();
