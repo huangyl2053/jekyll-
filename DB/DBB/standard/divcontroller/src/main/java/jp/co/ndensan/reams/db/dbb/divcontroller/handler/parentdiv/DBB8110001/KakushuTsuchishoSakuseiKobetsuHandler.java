@@ -1542,6 +1542,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 set普通徴収(null, 更正後Info, util.get期月リスト());
             } else {
                 KanendoKiUtil kanendoKi = new KanendoKiUtil();
+                set特別徴収(null, 更正後Info);
                 set普通徴収(null, 更正後Info, kanendoKi.get期月リスト());
             }
             set歳出還付額(更正後Info);
@@ -1577,6 +1578,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 set普通徴収(更正前Info, 更正後Info, util.get期月リスト());
             } else {
                 KanendoKiUtil kanendoKi = new KanendoKiUtil();
+                set特別徴収(null, 更正後Info);
                 set普通徴収(更正前Info, 更正後Info, kanendoKi.get期月リスト());
             }
             set歳出還付額(更正後Info);
