@@ -114,7 +114,7 @@ public class CrtIchiranhyoProcess extends BatchKeyBreakBase<TokuchoKariKeisangoF
         前年度保険料 = Decimal.ZERO;
         並び順List = new ArrayList<>();
         改頁List = new ArrayList<>();
-        連番 = INT_1;
+        連番 = INT_0;
         連番_CSV = INT_1;
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
