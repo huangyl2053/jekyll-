@@ -254,7 +254,7 @@ public class KariSanteiIdoFukaBatchFath {
             if (!flag1) {
                 調定事由1 = 特別徴収停止事由コード;
                 flag1 = true;
-            } else if (!資格喪失事由コード.equals(特別徴収停止事由コード)) {
+            } else if (!特別徴収停止事由コード.equals(資格喪失事由コード)) {
                 調定事由2 = 特別徴収停止事由コード;
                 flag2 = true;
             }
@@ -270,13 +270,13 @@ public class KariSanteiIdoFukaBatchFath {
                 && RString.isNullOrEmpty(設定前賦課情報.get調定事由4())
                 && !list.contains(ChoteiJiyuCode.その他資格異動.getコード())) {
             if (!flag1) {
-                調定事由1 = ChoteiJiyuCode.その他資格異動.getコード();
+                list.set(NUM_0, ChoteiJiyuCode.その他資格異動.getコード());
                 flag1 = true;
             } else if (!flag2) {
-                調定事由2 = ChoteiJiyuCode.その他資格異動.getコード();
+                list.set(NUM_1, ChoteiJiyuCode.その他資格異動.getコード());
                 flag2 = true;
             } else {
-                調定事由3 = ChoteiJiyuCode.その他資格異動.getコード();
+                list.set(NUM_2, ChoteiJiyuCode.その他資格異動.getコード());
                 flag3 = true;
             }
         }
@@ -286,16 +286,16 @@ public class KariSanteiIdoFukaBatchFath {
                 || (!get資格事由(当初賦課情報.get資格喪失事由()).equals(設定前賦課情報.get資格喪失事由())))
                 && !list.contains(ChoteiJiyuCode.資格異動による更正.getコード())) {
             if (!flag1) {
-                調定事由1 = ChoteiJiyuCode.資格異動による更正.getコード();
+                list.set(NUM_0, ChoteiJiyuCode.資格異動による更正.getコード());
                 flag1 = true;
             } else if (!flag2) {
-                調定事由2 = ChoteiJiyuCode.資格異動による更正.getコード();
+                list.set(NUM_1, ChoteiJiyuCode.資格異動による更正.getコード());
                 flag2 = true;
             } else if (!flag3) {
-                調定事由3 = ChoteiJiyuCode.資格異動による更正.getコード();
+                list.set(NUM_2, ChoteiJiyuCode.資格異動による更正.getコード());
                 flag3 = true;
             } else {
-                調定事由4 = ChoteiJiyuCode.資格異動による更正.getコード();
+                list.set(NUM_3, ChoteiJiyuCode.資格異動による更正.getコード());
                 flag4 = true;
             }
         }
@@ -367,16 +367,12 @@ public class KariSanteiIdoFukaBatchFath {
                 && !list.contains(ChoteiJiyuCode.減免決定による更正.getコード())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.減免決定による更正.getコード());
-                flag1 = true;
             } else if (!flag2) {
                 list.set(NUM_1, ChoteiJiyuCode.減免決定による更正.getコード());
-                flag2 = true;
             } else if (!flag3) {
                 list.set(NUM_2, ChoteiJiyuCode.減免決定による更正.getコード());
-                flag3 = true;
             } else if (!flag4) {
                 list.set(NUM_3, ChoteiJiyuCode.減免決定による更正.getコード());
-                flag4 = true;
             }
         }
         return list;
