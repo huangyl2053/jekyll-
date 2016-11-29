@@ -32,9 +32,9 @@ public class SpoolKariSanteiIdoKekkaIchiranProcess extends SimpleBatchProcessBas
             出力順ID = Long.parseLong(processParameter.get出力帳票Entity().get出力順ID().toString());
         }
         if (processParameter.get出力帳票Entity() != null) {
-            manager.spoolKariSanteiIdoKekkaIchiran(processParameter.get調定年度(),
-                    processParameter.get賦課年度(), new YMDHMS(processParameter.get調定日時()),
-                    出力順ID);
+            manager.spoolKariSanteiIdoKekkaIchiran(processParameter.get調定年度(), processParameter.get賦課年度(),
+                    new YMDHMS(processParameter.get調定日時()), 出力順ID, processParameter.get抽出開始日時(),
+                    processParameter.get抽出終了日時());
         }
     }
 
