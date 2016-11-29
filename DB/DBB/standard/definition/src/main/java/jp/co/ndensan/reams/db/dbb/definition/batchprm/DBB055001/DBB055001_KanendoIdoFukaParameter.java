@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.kanendoidofuka.KanendoIdoFukaProcessParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -107,11 +108,13 @@ public class DBB055001_KanendoIdoFukaParameter extends BatchParameterBase {
      * @return 本算定異動（過年度）のMybatisParameter
      */
     public KanendoIdoFukaProcessParameter toKanendoIdoFukaProcessParameter(YMDHMS システム日時) {
-        RString 出力順ID;
+        RString 出力順ID = RString.EMPTY;
         if (出力帳票List != null && !出力帳票List.isEmpty()) {
-            出力順ID = 出力帳票List.get(0).get出力順ID();
-        } else {
-            出力順ID = RString.EMPTY;
+            for (ChohyoResult 出力帳票 : 出力帳票List) {
+                if (ReportIdDBB.DBB200027.getReportId().value().equals(出力帳票.get帳票ID())) {
+                    出力順ID = 出力帳票.get出力順ID();
+                }
+            }
         }
         RString 日付関連_年度サイクル = DbBusinessConfig.get(ConfigNameDBB.日付関連_年度サイクル, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         return new KanendoIdoFukaProcessParameter(日付関連_年度サイクル, 調定年度, 処理対象, 抽出開始日時, 抽出終了日時, 出力順ID, システム日時);
