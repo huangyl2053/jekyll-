@@ -807,15 +807,6 @@ public class HanyoListSogoJigyoHi {
         return AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
     }
 
-    private RString get住所_番地_方書(RString 住所, RString 番地, RString 方書) {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(住所);
-        builder.append(番地);
-        builder.append(new RString("　"));
-        builder.append(方書);
-        return builder.toRString();
-    }
-
     private RString get方書(Katagaki katagaki) {
         RString 方書 = RString.EMPTY;
         if (katagaki != null) {

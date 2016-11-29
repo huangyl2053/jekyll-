@@ -28,7 +28,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport extends Report<Kogak
     private final List<RString> 通知書定型文List;
     private final NinshoshaSource 認証者ソースデータ;
     private final ChohyoSeigyoKyotsu 帳票制御共通情報;
-    private final RString 金融機関コード;
     private final SofubutsuAtesakiSource compSofubutsuAtesakiソース;
 
     /**
@@ -40,7 +39,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport extends Report<Kogak
      * @param 通知書定型文List List<RString>
      * @param 認証者ソースデータ NinshoshaSource
      * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
-     * @param 金融機関コード RString
      * @param compSofubutsuAtesakiソース SofubutsuAtesakiSource
      */
     public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(
@@ -50,7 +48,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport extends Report<Kogak
             List<RString> 通知書定型文List,
             NinshoshaSource 認証者ソースデータ,
             ChohyoSeigyoKyotsu 帳票制御共通情報,
-            RString 金融機関コード,
             SofubutsuAtesakiSource compSofubutsuAtesakiソース) {
         this.帳票情報 = 帳票情報;
         this.連番 = 連番;
@@ -58,7 +55,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport extends Report<Kogak
         this.通知書定型文List = 通知書定型文List;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.帳票制御共通情報 = 帳票制御共通情報;
-        this.金融機関コード = 金融機関コード;
         this.compSofubutsuAtesakiソース = compSofubutsuAtesakiソース;
     }
 
@@ -66,7 +62,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport extends Report<Kogak
     public void writeBy(ReportSourceWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> writer) {
         IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor editor
                 = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor(
-                        帳票情報, 連番, titleList, 通知書定型文List, 認証者ソースデータ, 帳票制御共通情報, 金融機関コード, compSofubutsuAtesakiソース);
+                        帳票情報, 連番, titleList, 通知書定型文List, 認証者ソースデータ, 帳票制御共通情報, compSofubutsuAtesakiソース);
         IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiBuilder builder = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiBuilder(editor);
         writer.writeLine(builder);
     }

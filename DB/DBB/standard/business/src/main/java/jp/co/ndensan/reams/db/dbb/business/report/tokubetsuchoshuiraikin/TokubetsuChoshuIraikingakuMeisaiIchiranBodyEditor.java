@@ -81,7 +81,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
                 source.listCenter_1 = 保険料段階.get表記();
                 source.listCenter_2 = doカンマ編集(保険料段階.get保険料率());
             }
-            source.listCenter_6 = doカンマ編集(賦課の情報一時Entity.getTkKibetsuGaku03());
+            source.listCenter_4 = doカンマ編集(賦課の情報一時Entity.getTkKibetsuGaku03());
             source.listLower_1 = getColumnValue(賦課の情報一時Entity.getHihokenshaNo());
             source.listLower_2 = getColumnValue(賦課の情報一時Entity.getSetaiCode());
         }
@@ -126,11 +126,11 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
                     : RString.EMPTY;
         }
         if (本算定Flag) {
-            source.listCenter_5 = 特徴開始月4;
+            source.listCenter_3 = 特徴開始月4;
         } else {
-            source.listCenter_5 = 特徴開始月8;
+            source.listCenter_3 = 特徴開始月8;
         }
-        source.listCenter_7 = RString.EMPTY;
+        source.listCenter_5 = RString.EMPTY;
         source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listLower_1);
         setPageBreakEmpty(source);
         return source;

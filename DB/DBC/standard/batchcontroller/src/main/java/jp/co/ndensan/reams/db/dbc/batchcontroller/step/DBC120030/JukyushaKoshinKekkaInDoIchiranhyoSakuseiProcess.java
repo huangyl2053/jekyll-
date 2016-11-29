@@ -264,10 +264,13 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
             output.set保険者名(RString.EMPTY);
             output.set作成日時(RString.EMPTY);
         }
+        if (受給者情報.get標準負担区分コード() != null || !RString.isNullOrEmpty(受給者情報.get標準負担区分コード().trim())) {
+            output.set標準負担区分名称(JukyushaIF_HyojunFutanKubunCode.toValue(受給者情報.get標準負担区分コード()).get名称());
+        }
         日付項目編集(output, 受給者情報);
         数値項目編集(output, 受給者情報);
         名称項目編集1(output, 受給者情報, 被保険者);
-        名称項目編集2(output, 受給者情報, 被保険者);
+        名称項目編集2(output, 受給者情報);
         output.set訂正区分(受給者情報.get訂正区分コード());
         output.set異動区分(受給者情報.get異動区分コード());
         output.set異動事由(受給者情報.get異動事由区分());
@@ -404,7 +407,7 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
         if (受給者情報.getみなし要介護区分コード() != null || !RString.isNullOrEmpty(受給者情報.getみなし要介護区分コード().trim())) {
             output.setみなし区分名称(MinashiCode.toValue(受給者情報.getみなし要介護区分コード()).get名称());
         }
-        if (受給者情報.get要介護状態区分コード() != null | !RString.isNullOrEmpty(受給者情報.get要介護状態区分コード().trim())) {
+        if (受給者情報.get要介護状態区分コード() != null || !RString.isNullOrEmpty(受給者情報.get要介護状態区分コード().trim())) {
             output.set要介護区分名称(YokaigoJotaiKubunSupport.toValue(被保険者.getサービス提供年月末日().getYearMonth(),
                     受給者情報.get要介護状態区分コード()).getName());
         }
@@ -424,12 +427,8 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      *
      * @param output JukyushaKoshinKekkaIchiranCsvEntity
      * @param 受給者情報 DbWT5331JukyushaJohoCsvEntity
-     * @param 被保険者 DbWT0001HihokenshaTempEntity
      */
-    private void 名称項目編集2(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報, DbWT0001HihokenshaTempEntity 被保険者) {
-        if (受給者情報.get標準負担区分コード() != null || !RString.isNullOrEmpty(受給者情報.get標準負担区分コード().trim())) {
-            output.set標準負担区分名称(JukyushaIF_HyojunFutanKubunCode.toValue(受給者情報.get標準負担区分コード()).get名称());
-        }
+    private void 名称項目編集2(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報) {
         if (受給者情報.get減免申請中区分コード() != null || !RString.isNullOrEmpty(受給者情報.get減免申請中区分コード().trim())) {
             output.set減免中区分名称(JukyushaIF_GemmenShinseichuKubunCode.toValue(受給者情報.get減免申請中区分コード()).get名称());
         }

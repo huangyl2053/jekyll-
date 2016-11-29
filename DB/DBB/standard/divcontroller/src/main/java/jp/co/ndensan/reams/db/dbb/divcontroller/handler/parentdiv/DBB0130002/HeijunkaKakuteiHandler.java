@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.Heij
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.dgHeijunkaKakutei_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunkakakutei.TokuchoHeijunkaKakutei;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -243,20 +243,31 @@ public class HeijunkaKakuteiHandler {
         FlexibleYear 賦課年度 = new FlexibleYear(調定年度.toString());
         TokuchoHeijunkaKakutei.createInstance().updateFukaShoriJokyo(賦課年度, 処理日付管理.get基準日時());
         ShoriDateKanriManager manager = new ShoriDateKanriManager();
-        ShoriDateKanri 処理日付管理new = null;
+        RString 処理名 = null;
         if (特徴平準化_特徴6月分.equals(ResponseHolder.getMenuID())) {
-            処理日付管理new = 処理日付管理.createBuilderForEdit()
-                    .set処理名(ShoriName.特徴平準化_6月分_確定.get名称())
-                    .set基準日時(new YMDHMS(RDate.getNowDate(), RDate.getNowTime())).build();
-        } else if (特徴平準化_特徴8月分.equals(ResponseHolder.getMenuID())) {
-            処理日付管理new = 処理日付管理.createBuilderForEdit()
-                    .set処理名(ShoriName.特徴平準化_8月分_確定.get名称())
-                    .set基準日時(new YMDHMS(RDate.getNowDate(), RDate.getNowTime())).build();
+            処理名 = ShoriName.特徴平準化_6月分_確定.get名称();
+        } else {
+            処理名 = ShoriName.特徴平準化_8月分_確定.get名称();
         }
-        if (処理日付管理new != null) {
-            処理日付管理new = 処理日付管理new.modifiedModel();
-            manager.save処理日付管理マスタ(処理日付管理new);
+        ShoriDateKanri 更新処理日付管理 = manager.get処理日付管理マスタ(処理日付管理.getサブ業務コード(),
+                処理日付管理.get市町村コード(),
+                処理名,
+                処理日付管理.get処理枝番(),
+                処理日付管理.get年度(),
+                処理日付管理.get年度内連番());
+        if (更新処理日付管理 == null) {
+            更新処理日付管理 = new ShoriDateKanri(処理日付管理.getサブ業務コード(),
+                    処理日付管理.get市町村コード(),
+                    処理名,
+                    処理日付管理.get処理枝番(),
+                    処理日付管理.get年度(),
+                    処理日付管理.get年度内連番()).createBuilderForEdit()
+                    .build();
         }
+        更新処理日付管理 = 更新処理日付管理.createBuilderForEdit()
+                .set基準日時(new YMDHMS(RDate.getNowDate(), RDate.getNowTime())).build();
+        更新処理日付管理 = 更新処理日付管理.modifiedModel();
+        manager.save処理日付管理マスタ(更新処理日付管理);
     }
 
     /**

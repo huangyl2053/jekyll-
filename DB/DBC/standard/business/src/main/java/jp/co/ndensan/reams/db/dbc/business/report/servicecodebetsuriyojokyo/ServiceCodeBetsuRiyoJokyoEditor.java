@@ -32,7 +32,6 @@ public class ServiceCodeBetsuRiyoJokyoEditor implements
 
     private final RDateTime 作成日時;
     private final ServicecodeRiyojokyoReport entity;
-    private static final RString 合計 = new RString("合計");
 
     /**
      * コンストラクタです

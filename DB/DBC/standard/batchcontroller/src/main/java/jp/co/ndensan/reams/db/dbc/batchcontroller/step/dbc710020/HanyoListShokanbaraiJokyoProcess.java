@@ -186,13 +186,13 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void afterExecute() {
-        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(preEntity.get市町村コード());
-        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(preEntity.get宛名Entity());
-        RString 住所番地方書 = JushoHenshu.editJusho(帳票制御共通情報, 宛名, 導入団体情報);
         if (preEntity == null && parameter.is項目名付加()) {
             eucCsvWriter.writeLine(new HanyoListShokanbaraiJokyoCSVEntity());
         }
         if (preEntity != null) {
+            Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(preEntity.get市町村コード());
+            IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(preEntity.get宛名Entity());
+            RString 住所番地方書 = JushoHenshu.editJusho(帳票制御共通情報, 宛名, 導入団体情報);
             eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番, 住所番地方書));
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
