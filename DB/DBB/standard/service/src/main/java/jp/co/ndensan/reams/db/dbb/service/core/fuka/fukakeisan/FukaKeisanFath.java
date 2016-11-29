@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.definition.core.tokucho.TokuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
@@ -246,13 +247,19 @@ public class FukaKeisanFath {
      * @return RString
      */
     protected RString get算定月(YMDHMS 調定日時) {
-        int 本算定第１期の期月 = new TokuchoKiUtil().get期月リスト().filtered本算定期間().toList().get(0).get月AsInt();
+        int 本算定第１期の期月 = 0;
+        for (Kitsuki kitsuki : new TokuchoKiUtil().get期月リスト().toList()) {
+            if (TokuchokiJohoTsukiShoriKubun.本算定.equals(kitsuki.get月処理区分())) {
+                本算定第１期の期月 = kitsuki.get月AsInt();
+                break;
+            }
+        }
         KoseiTsukiHantei hantei = InstanceProvider.create(KoseiTsukiHantei.class);
         int 算定月 = hantei.find更正月_本算定期(調定日時.getDate()).get月AsInt();
-        if (本算定第１期の期月 > 算定月) {
-            return fomate月(本算定第１期の期月);
-        } else {
+        if (現在月判断(fomate月(本算定第１期の期月), fomate月(算定月))) {
             return fomate月(算定月);
+        } else {
+            return fomate月(本算定第１期の期月);
         }
     }
 
@@ -262,6 +269,10 @@ public class FukaKeisanFath {
         } else {
             return new RString(月).padZeroToLeft(INT_3);
         }
+    }
+
+    private boolean 現在月判断(RString 本算定第１期の期月, RString 算定月) {
+        return Integer.parseInt(本算定第１期の期月.toString()) <= Integer.parseInt(算定月.toString());
     }
 
     private int get特徴停止可能期(RDate 調定日時) {
