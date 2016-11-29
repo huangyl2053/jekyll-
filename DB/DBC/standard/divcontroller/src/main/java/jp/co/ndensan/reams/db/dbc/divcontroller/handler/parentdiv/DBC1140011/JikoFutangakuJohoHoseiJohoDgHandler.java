@@ -28,10 +28,13 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -112,7 +115,8 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
         List<dgJohoIchiran_Row> rowList = new ArrayList();
         for (KogakuGassanJikoFutanGaku result : resultList) {
             dgJohoIchiran_Row row = new dgJohoIchiran_Row();
-            row.setTxtTaishoNendo(result.get対象年度().wareki().toDateString());
+            row.setTxtTaishoNendo(result.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).toDateString());
             row.setTxtHdnTaishoNendo(result.get対象年度().toDateString());
             row.setTxtSanteiKubun(set算定区分(result.get異動区分()));
             row.setTxtHokenshaNo(result.get保険者番号().getColumnValue());
@@ -149,7 +153,8 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
         List<PersonalData> personalDataList = new ArrayList();
         for (KogakuGassanJikoFutanGaku result : resultList) {
             dgJohoIchiran_Row row = new dgJohoIchiran_Row();
-            row.setTxtTaishoNendo(result.get対象年度().wareki().toDateString());
+            row.setTxtTaishoNendo(result.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).toDateString());
             row.setTxtHdnTaishoNendo(result.get対象年度().toDateString());
             row.setTxtSanteiKubun(set算定区分(result.get異動区分()));
             row.setTxtHokenshaNo(result.get保険者番号().getColumnValue());
