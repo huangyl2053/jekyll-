@@ -497,18 +497,18 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         支給限度額一本化年月対象List.add(NyuryokuShikibetsuNoTop3Keta.償還_短期入所老健施設.getコード());
         支給限度額一本化年月対象List.add(NyuryokuShikibetsuNoTop3Keta.現物_短期入所医療施設.getコード());
         支給限度額一本化年月対象List.add(NyuryokuShikibetsuNoTop3Keta.償還_短期入所医療施設.getコード());
-        入所院実日数対象List.add(KyufuJissekiYoshikiKubun._7175_様式第六の五.getコード());
-        入所院実日数対象List.add(KyufuJissekiYoshikiKubun._7176_様式第六の六.getコード());
-        入所院実日数対象List.add(KyufuJissekiYoshikiKubun._7177_様式第六の七.getコード());
-        入所院実日数対象List.add(KyufuJissekiYoshikiKubun._2175_様式第六の五.getコード());
-        入所院実日数対象List.add(KyufuJissekiYoshikiKubun._2176_様式第六の六.getコード());
-        入所院実日数対象List.add(KyufuJissekiYoshikiKubun._2177_様式第六の七.getコード());
+        支給限度額一本化年月対象List.add(KyufuJissekiYoshikiKubun._7175_様式第六の五.getコード());
+        支給限度額一本化年月対象List.add(KyufuJissekiYoshikiKubun._7176_様式第六の六.getコード());
+        支給限度額一本化年月対象List.add(KyufuJissekiYoshikiKubun._7177_様式第六の七.getコード());
+        支給限度額一本化年月対象List.add(KyufuJissekiYoshikiKubun._2175_様式第六の五.getコード());
+        支給限度額一本化年月対象List.add(KyufuJissekiYoshikiKubun._2176_様式第六の六.getコード());
+        支給限度額一本化年月対象List.add(KyufuJissekiYoshikiKubun._2177_様式第六の七.getコード());
         if (入所院実日数対象List.contains(入力識別番号上3桁) || 入所院実日数対象List.contains(入力識別番号上4桁)) {
             利用状況統計表一時.setTankiNyushoJitsunissu(new RString(String.valueOf(entity.getNyushoJitsunissu())));
         } else if (支給限度額一本化年月対象List.contains(入力識別番号上3桁) || 支給限度額一本化年月対象List.contains(入力識別番号上4桁)) {
             FlexibleYearMonth 制度改正施行日_支給限度額一本化 = new FlexibleDate(DbBusinessConfig.
                     get(ConfigNameDBU.制度改正施行日_支給限度額一本化, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)).getYearMonth();
-            if (制度改正施行日_支給限度額一本化.isBefore(entity.getServiceTeikyoYM())) {
+            if (entity.getServiceTeikyoYM().isBefore(制度改正施行日_支給限度額一本化)) {
                 利用状況統計表一時.setTankiNyushoJitsunissu(new RString(String.valueOf(集計費.getAtoTankiNyushoJitsunissu())));
             } else {
                 利用状況統計表一時.setTankiNyushoJitsunissu(new RString(String.valueOf(集計費.getServiceJitsunissu())));
@@ -987,23 +987,22 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
 
         Integer 日数回数 = ZERO;
         for (KyuhuJissekiMeisaiEntity 明細 : 給付実績明細ワーク) {
-            if (サービス種類コード.equals(明細.getEntity().getServiceShuruiCode().value())) {
-                if ((サービス種類コード.equals(ServiceCategoryShurui.訪問介護.getコード())
-                        || サービス種類コード.equals(ServiceCategoryShurui.訪問入浴.getコード())
-                        || サービス種類コード.equals(ServiceCategoryShurui.予訪介護.getコード())
-                        || サービス種類コード.equals(ServiceCategoryShurui.予訪入浴.getコード()))
-                        && (Integer.parseInt(明細.getEntity().getServiceKomokuCode().value().toString()) < EIGHT)) {
-
-                    日数回数 = 日数回数 + 明細.getEntity().getAtoNissuKaisu();
-                } else if ((サービス種類コード.equals(ServiceCategoryShurui.訪問看護.getコード())
-                        || サービス種類コード.equals(ServiceCategoryShurui.予訪看護.getコード()))
-                        && (Integer.parseInt(明細.getEntity().getServiceKomokuCode().value().toString()) < THREE)) {
-
-                    日数回数 = 日数回数 + 明細.getEntity().getAtoNissuKaisu();
-                } else {
-
-                    日数回数 = 日数回数 + 明細.getEntity().getAtoNissuKaisu();
-                }
+            Integer 明細日数回数 = ZERO;
+            RString 明細種類コード = RString.EMPTY;
+            if (明細.getEntity() != null) {
+                明細種類コード = 明細.getEntity().getServiceShuruiCode().value();
+                明細日数回数 = 明細.getEntity().getAtoNissuKaisu();
+            }
+            if (サービス種類コード.equals(明細種類コード)
+                    && !((サービス種類コード.equals(ServiceCategoryShurui.訪問介護.getコード())
+                    || サービス種類コード.equals(ServiceCategoryShurui.訪問入浴.getコード())
+                    || サービス種類コード.equals(ServiceCategoryShurui.予訪介護.getコード())
+                    || サービス種類コード.equals(ServiceCategoryShurui.予訪入浴.getコード()))
+                    && (EIGHT <= Integer.parseInt(明細.getEntity().getServiceKomokuCode().value().toString())))
+                    || ((サービス種類コード.equals(ServiceCategoryShurui.訪問看護.getコード())
+                    || サービス種類コード.equals(ServiceCategoryShurui.予訪看護.getコード()))
+                    && (THREE <= Integer.parseInt(明細.getEntity().getServiceKomokuCode().value().toString())))) {
+                日数回数 = 日数回数 + 明細日数回数;
             }
         }
         return new RString(日数回数.toString());
@@ -1384,17 +1383,21 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         Decimal 費用額居住 = Decimal.ZERO;
         Decimal 保険分請求額居住 = Decimal.ZERO;
         Decimal 利用者負担額居住 = Decimal.ZERO;
+        Integer 特定日数食費 = ZERO;
         if ((入所院実日数対象List.contains(入力識別番号上3桁) || 支給限度額一本化年月対象List.contains(入力識別番号上3桁))
                 && サービス種類コードList.contains(集計サービス種類コード)) {
             for (DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity 特定 : 給付実績特定入所者介護サービス費用ワーク) {
                 RString サービス項目コードの3桁目 = 特定.getServiceKomokuCode().value().substring(TWO, THREE);
+                if (特定.getAtoNissu() != null) {
+                    特定日数食費 = 特定.getAtoNissu();
+                }
                 if (new RString("1").equals(サービス項目コードの3桁目)) {
-                    日数食費 = 日数食費 + 特定.getAtoNissu();
+                    日数食費 = 日数食費 + 特定日数食費;
                     費用額食費 = 費用額食費.add(特定.getAtoHiyogaku());
                     保険分請求額食費 = 保険分請求額食費.add(特定.getAtoHokenbunSeikyugaku());
                     利用者負担額食費 = 利用者負担額食費.add(特定.getAtoRiyoshaFutangaku());
                 } else if (new RString("2").equals(サービス項目コードの3桁目)) {
-                    日数居住 = 日数居住 + 特定.getAtoNissu();
+                    日数居住 = 日数居住 + 特定日数食費;
                     費用額居住 = 費用額居住.add(特定.getAtoHiyogaku());
                     保険分請求額居住 = 保険分請求額居住.add(特定.getAtoHokenbunSeikyugaku());
                     利用者負担額居住 = 利用者負担額居住.add(特定.getAtoRiyoshaFutangaku());
@@ -1482,6 +1485,7 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         社会福祉法人軽減額対象サービス種類コードList.add(ServiceCategoryShurui.地予小外.getコード());
         社会福祉法人軽減額対象サービス種類コードList.add(ServiceCategoryShurui.定期随時.getコード());
         社会福祉法人軽減額対象サービス種類コードList.add(ServiceCategoryShurui.看小短外.getコード());
+        boolean flg = false;
         if (社会福祉法人軽減額対象List.contains(入力識別番号上3桁) && 社会福祉法人軽減額対象サービス種類コードList.contains(集計サービス種類コード)) {
             for (DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity 社会福祉 : 給付実績社会福祉法人軽減額ワーク) {
                 if (集計サービス種類コード.equals(社会福祉.getServiceSyuruiCode().value())) {
@@ -1489,8 +1493,15 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
                     利用状況統計表一時.setShafukuRiyoshaFutangaku(decimaltoRString(社会福祉.getAtoRiyoshaFutanTotal()));
                     利用状況統計表一時.setShafukuKeigengaku(decimaltoRString(社会福祉.getAtoKeigengaku()));
                     利用状況統計表一時.setShafukuKeigengoRiyoshaFutangaku(decimaltoRString(社会福祉.getAtoKeigengoRiyoshaFutangaku()));
+                    flg = true;
                     break;
                 }
+            }
+            if (!flg) {
+                利用状況統計表一時.setShafukuKeigenritsu(初期金額または日数_0);
+                利用状況統計表一時.setShafukuRiyoshaFutangaku(初期金額または日数_0);
+                利用状況統計表一時.setShafukuKeigengaku(初期金額または日数_0);
+                利用状況統計表一時.setShafukuKeigengoRiyoshaFutangaku(初期金額または日数_0);
             }
         } else {
             利用状況統計表一時.setShafukuKeigenritsu(初期金額または日数_0);

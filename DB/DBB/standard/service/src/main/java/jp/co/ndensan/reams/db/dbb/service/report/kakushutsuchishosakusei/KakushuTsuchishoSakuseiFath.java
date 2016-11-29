@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.FukaDait
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoCommonInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
@@ -40,12 +41,12 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1006KyokaisoGaitoshaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV4001JukyushaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dainonin.Dainonin;
@@ -53,6 +54,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.dainonin.DainoninRelate;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.dainonin.DainoninRelateFinderFactory;
+import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -770,5 +772,39 @@ public class KakushuTsuchishoSakuseiFath {
             return RString.EMPTY;
         }
         return 項目;
+    }
+
+    /**
+     * 普徴納期情報リストの取得します。
+     *
+     * @param 通知書共通情報 通知書共通情報
+     * @return List
+     */
+    public List<NokiJoho> get普徴納期情報List(KakushuTsuchishoCommonInfo 通知書共通情報) {
+        if (GennenKanen.現年度 == 通知書共通情報.get年度区分()) {
+            return 通知書共通情報.get普徴納期情報List();
+        }
+        List<NokiJoho> 普徴納期情報List = new ArrayList<>();
+        for (NokiJoho 普徴納期情報 : 通知書共通情報.get普徴納期情報List()) {
+            Decimal 普徴期別金額 = 通知書共通情報.get賦課の情報_更正後().get賦課情報().get普徴期別金額(普徴納期情報.get期月().get期AsInt());
+            if (!(null == 普徴期別金額 || Decimal.ZERO.equals(普徴期別金額))) {
+                普徴納期情報List.add(普徴納期情報);
+            }
+        }
+        return 普徴納期情報List;
+    }
+
+    /**
+     * 特徴納期情報リストの取得します。
+     *
+     * @param 通知書共通情報 通知書共通情報
+     * @return List
+     */
+    public List<NokiJoho> get特徴納期情報List(KakushuTsuchishoCommonInfo 通知書共通情報) {
+        if (GennenKanen.現年度 == 通知書共通情報.get年度区分()) {
+            return 通知書共通情報.get特徴収入情報List();
+        }
+
+        return null;
     }
 }

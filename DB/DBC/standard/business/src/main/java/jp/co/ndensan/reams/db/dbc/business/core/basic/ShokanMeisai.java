@@ -229,6 +229,15 @@ public class ShokanMeisai extends ModelBase<ShokanMeisaiIdentifier, DbT3039Shoka
      *
      * @return {@link DbT3039ShokanMeisaiEntity}のクローン
      */
+    public DbT3039ShokanMeisaiEntity toRealEntity() {
+        return this.entity;
+    }
+
+    /**
+     * {@link DbT3039ShokanMeisaiEntity}のクローンを返します。
+     *
+     * @return {@link DbT3039ShokanMeisaiEntity}のクローン
+     */
     @Override
     public DbT3039ShokanMeisaiEntity toEntity() {
         return this.entity.clone();

@@ -95,4 +95,23 @@
         ) AS is存在
     </select>
     
+    <select resultOrdered="true" id="checkKaigoJigyoshaShiteiService"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufuhigenmenjyouhouregister.GenmenJyouhouParameter"
+            resultType="int"
+            fetchSize="500">
+        SELECT
+          COUNT(1) 
+        FROM
+          rgdb."DbT7063KaigoJigyoshaShiteiService" 
+        WHERE
+          "jigyoshaNo" = #{事業者番号}
+          AND "serviceShuruiCode" = #{サービス種類コード} 
+          AND "yukoKaishiYMD" <![CDATA[<=]]> #{サービス提供年月の月初日} 
+          AND ( 
+            #{サービス提供年月の月初日} <![CDATA[<=]]> "yukoShuryoYMD" 
+            OR "yukoShuryoYMD" = '' 
+            OR "yukoShuryoYMD" = NULL
+          ) 
+    </select>
+    
 </mapper>

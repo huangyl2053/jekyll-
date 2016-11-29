@@ -38,7 +38,7 @@ public enum TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder implements IReportI
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ("0010", "氏名５０音カナ", ""),
+    氏名５０音カナ("0010", "氏名５０音カナ", "\"atena_kanaMeisho\""),
     /**
      * 生年月日
      */
@@ -50,7 +50,7 @@ public enum TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder implements IReportI
     /**
      * 市町村コード
      */
-    市町村コード("0016", "市町村コード", ""),
+    市町村コード("0016", "市町村コード", "\"fukaShichosonCode\""),
     /**
      * 通知書番号
      */
@@ -62,11 +62,11 @@ public enum TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder implements IReportI
     /**
      * 徴収方法
      */
-    徴収方法("0209", "徴収方法", ""),
+    徴収方法("0209", "徴収方法", "\"shutsuryokujunTemp_choshuHoho\""),
     /**
      * 特徴開始月
      */
-    特徴開始月("0213", "特徴開始月", "");
+    特徴開始月("0213", "特徴開始月", "\"shutsuryokujunTemp_tokuchoKaisiTuki\"");
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

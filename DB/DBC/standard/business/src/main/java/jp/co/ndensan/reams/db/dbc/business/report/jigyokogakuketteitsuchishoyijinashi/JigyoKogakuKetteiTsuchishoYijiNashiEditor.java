@@ -61,6 +61,7 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiEditor implements IJigyoKogakuKe
     private static final RString 定型文文字サイズTWO = new RString("2");
     private static final RString 定型文文字サイズTHREE = new RString("3");
     private static final RString 定型文文字サイズFOUR = new RString("4");
+    private static final RString 改行 = new RString("\n");
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
     private static final int INDEX_TWO = 2;
@@ -219,7 +220,9 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiEditor implements IJigyoKogakuKe
     private void set持ちものと支払場所と期間(JigyoKogakuKetteiTsuchishoYijiNashiSource source) {
         if (支給.equals(帳票情報.get支給不支給決定区分()) && 支払方法区分ONE.equals(帳票情報.get支払方法区分())
                 && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
-            source.mochimono = 帳票情報.get持ちもの();
+            source.mochimono = 帳票情報.getお持ちいただくもの１().
+                    concat(改行).concat(帳票情報.getお持ちいただくもの２()).
+                    concat(改行).concat(帳票情報.getお持ちいただくもの３());
             source.shiharaiBasho = 帳票情報.get支払場所();
             RString 開始週間 = 週間編集(帳票情報.get支払期間開始年月日());
             RString 終了週間 = 週間編集(帳票情報.get支払期間終了年月日());

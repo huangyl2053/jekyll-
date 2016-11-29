@@ -67,7 +67,7 @@ public class DBC120820_JukyushaTotsugoKekkaIn extends BatchFlowBase<DBC120820_Ju
             帳票ID = ReportIdDBC.DBC200058.getReportId();
             RDate now = RDate.getNowDate();
             交換情報識別番号 = DbBusinessConfig.get(
-                    ConfigNameDBC.国保連取込_受給者情報突合結果情報_交換情報識別番号,
+                    ConfigNameDBC.国保連取込_受給者台帳突合結果情報随時_交換情報識別番号,
                     now, SubGyomuCode.DBC介護給付);
             executeStep(ファイル取得);
             returnEntity

@@ -122,7 +122,9 @@ public class TorikomiDataIchijiSakusei extends BatchProcessBase<KaigoServiceNaiy
         tblEntity.setTeikyoShuryoYM(new FlexibleYearMonth(csvEntity.get適用終了年月日().substring(0, NUM_6)));
         tblEntity.setServiceName(csvEntity.getサービス略称());
         tblEntity.setServiceNameRyaku(csvEntity.getサービス略称());
-        tblEntity.setTaniSu(Integer.valueOf(csvEntity.get単位数_合成単位数().toString()));
+        if (!RString.isNullOrEmpty(csvEntity.get単位数_合成単位数())) {
+            tblEntity.setTaniSu(Integer.parseInt(csvEntity.get単位数_合成単位数().toString()));
+        }
         tblEntity.setTanisuShikibetsuCode(new Code(csvEntity.get単位数識別()));
         tblEntity.setTanisuSanteiTaniCode(new Code(csvEntity.get算定単位()));
         tblEntity.setIdouJiyuCode(new Code(異動事由コード_010));
@@ -158,8 +160,8 @@ public class TorikomiDataIchijiSakusei extends BatchProcessBase<KaigoServiceNaiy
         tblEntity.setYoshien2JukyushaJishiKubun(ゼロ);
         tblEntity.setTaishoJigyoJishiKubun(ゼロ);
         tblEntity.setSogoJigyoServiceKubun(ゼロ);
-        tblEntity.setSeigenNissuKaisu(csvEntity.get回数日数());
-        tblEntity.setSanteiKaisuSeigenKikanKubun(csvEntity.get期間時期());
+        tblEntity.setSeigenNissuKaisu(RString.EMPTY);
+        tblEntity.setSanteiKaisuSeigenKikanKubun(RString.EMPTY);
     }
 
 }

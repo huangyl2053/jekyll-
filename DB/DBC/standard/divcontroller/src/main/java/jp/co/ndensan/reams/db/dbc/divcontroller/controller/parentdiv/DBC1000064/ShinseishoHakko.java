@@ -116,14 +116,14 @@ public class ShinseishoHakko {
         if (div.getCcdChohyoShutsuryokujun().get出力順ID() == null) {
             throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace(出力順を.toString()));
         }
+        if (getHandler(div).is異動処理が実施済みか判定()) {
+            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().
+                    replace(異動処理が実施済みの.toString(), 実行.toString()));
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                             UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
-        }
-        if (getHandler(div).is異動処理が実施済みか判定()) {
-            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().
-                    replace(異動処理が実施済みの.toString(), 実行.toString()));
         }
         return ResponseData.of(div).respond();
     }

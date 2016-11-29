@@ -27,9 +27,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKij
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingakuFactory;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
@@ -40,12 +38,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.definition.core.tokucho.TokuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2013HokenryoDankaiDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.ChoteiNendoKibetsuClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FuchoTsukiClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FukaKoseiJohoClass;
@@ -150,7 +151,7 @@ public class FukaKeisanFath {
 
         Kitsuki 本算定期と月の対応 = hantei.find更正月_本算定期(param.get調定日時().getDate());
         kiwariKeisanInput.set現在期(本算定期と月の対応.get期AsInt());
-        kiwariKeisanInput.set現在期区分(Integer.parseInt(本算定期と月の対応.get月処理区分().get区分().toString()));
+        kiwariKeisanInput.set現在期区分(Integer.parseInt(本算定期と月の対応.get月処理区分().get区分().toString()) - INT_1);
         kiwariKeisanInput.set特徴停止可能期(get特徴停止可能期(param.get調定日時().getDate()));
 
         kiwariKeisanInput.set現在特徴期区分(GenzaiTokuchoKiKubun.本算異動.getコード());
@@ -246,13 +247,19 @@ public class FukaKeisanFath {
      * @return RString
      */
     protected RString get算定月(YMDHMS 調定日時) {
-        int 本算定第１期の期月 = new TokuchoKiUtil().get期月リスト().filtered本算定期間().toList().get(0).get月AsInt();
+        int 本算定第１期の期月 = 0;
+        for (Kitsuki kitsuki : new TokuchoKiUtil().get期月リスト().toList()) {
+            if (TokuchokiJohoTsukiShoriKubun.本算定.equals(kitsuki.get月処理区分())) {
+                本算定第１期の期月 = kitsuki.get月AsInt();
+                break;
+            }
+        }
         KoseiTsukiHantei hantei = InstanceProvider.create(KoseiTsukiHantei.class);
         int 算定月 = hantei.find更正月_本算定期(調定日時.getDate()).get月AsInt();
-        if (本算定第１期の期月 > 算定月) {
-            return fomate月(本算定第１期の期月);
-        } else {
+        if (現在月判断(fomate月(本算定第１期の期月), fomate月(算定月))) {
             return fomate月(算定月);
+        } else {
+            return fomate月(本算定第１期の期月);
         }
     }
 
@@ -262,6 +269,10 @@ public class FukaKeisanFath {
         } else {
             return new RString(月).padZeroToLeft(INT_3);
         }
+    }
+
+    private boolean 現在月判断(RString 本算定第１期の期月, RString 算定月) {
+        return Integer.parseInt(本算定第１期の期月.toString()) <= Integer.parseInt(算定月.toString());
     }
 
     private int get特徴停止可能期(RDate 調定日時) {
@@ -519,21 +530,27 @@ public class FukaKeisanFath {
     private FlexibleDate get年金支払い日(int 月) {
         switch (月) {
             case INT_4:
+            case INT_5:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_4月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             case INT_6:
+            case INT_7:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_6月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             case INT_8:
+            case INT_9:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_8月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             case INT_10:
+            case INT_11:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_10月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             case INT_12:
+            case INT_1:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_12月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             case INT_2:
+            case INT_3:
                 return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_2月,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             default:
@@ -769,7 +786,7 @@ public class FukaKeisanFath {
         if (更正後 == null) {
             更正後 = Decimal.ZERO;
         }
-        return !更正後.equals(更正前);
+        return 更正後.compareTo(更正前) != 0;
     }
 
     /**

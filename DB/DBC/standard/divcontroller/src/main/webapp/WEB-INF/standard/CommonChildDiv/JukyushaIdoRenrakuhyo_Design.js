@@ -16,6 +16,14 @@ var DBC;
                 return "onBlur_txtKyotakuKaigoShienJigyoshoNo";
             };
 
+            Events.onOkClose_btnJigyosha = function () {
+                return "onOkClose_btnJigyosha";
+            };
+
+            Events.onBeforeOpenDialog_btnJigyosha = function () {
+                return "onBeforeOpenDialog_btnJigyosha";
+            };
+
             Events.onBlur_txtShisetsuShozaiHokenjaNo = function () {
                 return "onBlur_txtShisetsuShozaiHokenjaNo";
             };
@@ -209,6 +217,10 @@ var DBC;
 
             Controls.prototype.txtKyotakuKaigoShienJigyoshoNo = function () {
                 return new UZA.TextBoxCode(this.convFiledName("txtKyotakuKaigoShienJigyoshoNo"));
+            };
+
+            Controls.prototype.btnShienJigyoshoNo = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnShienJigyoshoNo"));
             };
 
             Controls.prototype.txtKyotakuKaigoShienJigyoshoName = function () {

@@ -91,7 +91,26 @@ public class ShotokuDankaiBetsuShunoritsuIchiranEditor implements IShotokuDankai
         source.kamokuCode = パラメータ.get科目コード() == null ? RString.EMPTY
                 : パラメータ.get科目コード().getColumnValue();
         source.isPageBreaker = getIsPageBreaker(パラメータ);
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(ShotokuDankaiBetsuShunoritsuIchiranSource source) {
+        if (source.list_1 == null) {
+            source.list_1 = RString.EMPTY;
+        }
+        if (source.hdn_list_1 == null) {
+            source.hdn_list_1 = RString.EMPTY;
+        }
+        if (source.kamokuCode == null) {
+            source.kamokuCode = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.choshu == null) {
+            source.choshu = RString.EMPTY;
+        }
     }
 
     private static RString getIsPageBreaker(DankaibetsuShunoritsuIchiran data) {

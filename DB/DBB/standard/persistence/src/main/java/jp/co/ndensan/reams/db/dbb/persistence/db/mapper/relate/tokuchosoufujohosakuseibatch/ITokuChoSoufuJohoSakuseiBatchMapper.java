@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakuseibatch;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.DeleteTokuchoKaifuJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.InsTorikomiRirekiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.SelectChoshuHohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.SelectFukaTempJouhouMyBatisParameter;
@@ -33,6 +34,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakuseibatch.
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * DBB-1840-040バッチ設計_DBBBT82001_特徴送付情報作成のMapperクラスです。
@@ -40,6 +42,13 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoE
  * @reamsid_L DBB-1840-040 xuzhao
  */
 public interface ITokuChoSoufuJohoSakuseiBatchMapper {
+
+    /**
+     * 年金特徴回付情報を削除です。
+     *
+     * @param parameter DeleteTokuchoKaifuJohoMyBatisParameter
+     */
+    void 年金特徴回付情報削除(DeleteTokuchoKaifuJohoMyBatisParameter parameter);
 
     /**
      * 特徴依頼のデータを取得です。
@@ -228,5 +237,13 @@ public interface ITokuChoSoufuJohoSakuseiBatchMapper {
      * @param parameter UpdateTableMyBatisParameter
      */
     void 処理日付管理テーブル更新(UpdateTableMyBatisParameter parameter);
+
+    /**
+     * 処理日付管理テーブルから基準日時を取得する。
+     *
+     * @param parameter UpdateTableMyBatisParameter
+     * @return YMDHMS 基準日時
+     */
+    YMDHMS get基準日時(UpdateTableMyBatisParameter parameter);
 
 }

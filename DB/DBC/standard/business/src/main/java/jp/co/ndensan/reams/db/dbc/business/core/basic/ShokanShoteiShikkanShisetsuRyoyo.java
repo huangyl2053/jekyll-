@@ -608,6 +608,15 @@ public class ShokanShoteiShikkanShisetsuRyoyo
      *
      * @return {@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}のクローン
      */
+    public DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity toRealEntity() {
+        return this.entity;
+    }
+
+    /**
+     * {@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}のクローンを返します。
+     *
+     * @return {@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}のクローン
+     */
     @Override
     public DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity toEntity() {
         return this.entity.clone();

@@ -125,6 +125,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
                     UrQuestionMessages.確認_汎用.getMessage().replace(この連絡票は既に印刷されていますが.toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
+
         return ResponseData.of(div).respond();
     }
 

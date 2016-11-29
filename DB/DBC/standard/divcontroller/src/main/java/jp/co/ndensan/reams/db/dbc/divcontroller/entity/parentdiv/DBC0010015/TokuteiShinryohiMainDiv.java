@@ -8,12 +8,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010015;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.IKyufuJissekiHeaderDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
  * TokuteiShinryohiMain のクラスファイル
@@ -22,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
  */
 public class TokuteiShinryohiMainDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -297,46 +293,6 @@ public class TokuteiShinryohiMainDiv extends Panel {
     @JsonIgnore
     public void setLinButtonArea3(HorizontalLine linButtonArea3) {
         this.getKyufuJisseki().setLinButtonArea3(linButtonArea3);
-    }
-
-    @JsonIgnore
-    public Button getBtnJigetsu() {
-        return this.getKyufuJisseki().getBtnJigetsu();
-    }
-
-    @JsonIgnore
-    public void setBtnJigetsu(Button btnJigetsu) {
-        this.getKyufuJisseki().setBtnJigetsu(btnJigetsu);
-    }
-
-    @JsonIgnore
-    public Button getBtnZengetsu() {
-        return this.getKyufuJisseki().getBtnZengetsu();
-    }
-
-    @JsonIgnore
-    public void setBtnZengetsu(Button btnZengetsu) {
-        this.getKyufuJisseki().setBtnZengetsu(btnZengetsu);
-    }
-
-    @JsonIgnore
-    public Button getBtnAtoJigyosha() {
-        return this.getKyufuJisseki().getBtnAtoJigyosha();
-    }
-
-    @JsonIgnore
-    public void setBtnAtoJigyosha(Button btnAtoJigyosha) {
-        this.getKyufuJisseki().setBtnAtoJigyosha(btnAtoJigyosha);
-    }
-
-    @JsonIgnore
-    public Button getBtnMaeJigyosha() {
-        return this.getKyufuJisseki().getBtnMaeJigyosha();
-    }
-
-    @JsonIgnore
-    public void setBtnMaeJigyosha(Button btnMaeJigyosha) {
-        this.getKyufuJisseki().setBtnMaeJigyosha(btnMaeJigyosha);
     }
 
     @JsonIgnore

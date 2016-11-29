@@ -128,8 +128,17 @@ public class TokubetsuChoshuIdojohoKensuhyoEditor implements ITokubetsuChoshuIdo
         source.gokeiKariSanShutsuGakuHenkoKensu = parameter.get仮徴収額変更の件数の合計();
         source.gokeijushochiTokureiKensu = parameter.get住所地特例の件数の合計();
         source.gokeiTsukairaiKensu = parameter.get特徴追加依頼の件数の合計();
+        pageBreakNullCheck(source);
         return source;
 
     }
 
+    private void pageBreakNullCheck(TokubetsuChoshuIdojohoKensuhyoSource source) {
+        if (source.nenkinHokenshaName == null) {
+            source.nenkinHokenshaName = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+    }
 }

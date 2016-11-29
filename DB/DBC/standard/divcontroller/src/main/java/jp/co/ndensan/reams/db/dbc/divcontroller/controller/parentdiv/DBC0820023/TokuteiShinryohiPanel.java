@@ -55,6 +55,8 @@ public class TokuteiShinryohiPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString NUM1 = new RString("1");
+    private static final RString NUM0 = new RString("0");
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成１５年４月 = new FlexibleYearMonth("200304");
     private static final RString 登録_削除 = new RString("登録_削除");
@@ -340,13 +342,13 @@ public class TokuteiShinryohiPanel {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode(),
                     DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().evaluate());
-
-            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class));
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class));
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM0);
             return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.一覧に戻る).respond();
         } else {
             return ResponseData.of(div).respond();
@@ -374,6 +376,7 @@ public class TokuteiShinryohiPanel {
         if (flag) {
             viewStateDB = 証明書フラグ設定(div, 明細検索キー, 処理モード, viewStateDB);
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, viewStateDB);
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, NUM1);
         }
         return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.一覧に戻る).respond();
     }

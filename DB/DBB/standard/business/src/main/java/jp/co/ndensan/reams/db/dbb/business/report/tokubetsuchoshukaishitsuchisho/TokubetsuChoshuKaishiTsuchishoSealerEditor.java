@@ -37,7 +37,6 @@ public class TokubetsuChoshuKaishiTsuchishoSealerEditor implements ITokubetsuCho
     private static final RString 特徴期別金額4期 = new RString("4");
     private static final RString 特徴期別金額5期 = new RString("5");
     private static final RString 特徴期別金額6期 = new RString("6");
-    private static final int MULTIPLY = 3;
     private static final RString TOKEN = new RString("～");
 
     /**
@@ -262,7 +261,7 @@ public class TokubetsuChoshuKaishiTsuchishoSealerEditor implements ITokubetsuCho
         List<CharacteristicsPhase> 特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
         for (CharacteristicsPhase 特徴期別金額 : 特徴期別金額リスト) {
             if (期.equals(特徴期別金額.get期())) {
-                金額 = 特徴期別金額.get金額().multiply(MULTIPLY);
+                金額 = 特徴期別金額.get金額();
                 break;
             }
         }

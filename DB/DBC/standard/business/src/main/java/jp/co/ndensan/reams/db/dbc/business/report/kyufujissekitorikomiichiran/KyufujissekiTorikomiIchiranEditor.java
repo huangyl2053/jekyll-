@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kyufujissekitorikomiichir
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -118,7 +119,7 @@ public class KyufujissekiTorikomiIchiranEditor implements
         source.torikomiYM = 処理年月.wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
 
-        source.hokenshaNo = entity.get給付実績_保険者番号().value();
+        source.hokenshaNo = getColumnValue(entity.get給付実績_保険者番号());
         source.hokenshaName = entity.get給付実績_保険者名();
 
         source.shutsuryokujun1 = 並び順の１件目;
@@ -133,7 +134,7 @@ public class KyufujissekiTorikomiIchiranEditor implements
         source.kaiPege5 = get改頁(INDEX_5);
 
         source.listUpper_1 = new RString(連番);
-        source.listUpper_2 = entity.get給付実績_入力識別番号();
+        source.listUpper_2 = ReportKomokuEditorUtil.get非空文字列(entity.get給付実績_入力識別番号());
         if (entity.get給付実績_入力識別名称() != null) {
             if (entity.get給付実績_入力識別名称().length() < LENGTH_9) {
                 source.listUpper_3 = entity.get給付実績_入力識別名称();
@@ -147,21 +148,20 @@ public class KyufujissekiTorikomiIchiranEditor implements
         }
         source.listUpper_4 = get作成区分(entity, DBCCodeShubetsu.給付実績情報作成区分.getコード());
 
-        if (entity.get被保険者_登録被保険者番号() != null) {
-            source.listUpper_5 = entity.get被保険者_登録被保険者番号().value();
-        }
+        source.listUpper_5 = getColumnValue(entity.get被保険者_登録被保険者番号());
 
         source.listUpper_6 = entity.get被保険者_宛名カナ名称();
         if (entity.get給付実績_サービス提供年月() != null) {
-            source.listUpper_7 = entity.get給付実績_サービス提供年月().wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+            source.listUpper_7 = entity.get給付実績_サービス提供年月().wareki()
+                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        } else {
+            source.listUpper_7 = RString.EMPTY;
         }
 
         source.listUpper_8 = get給付実績区分(entity, DBCCodeShubetsu.給付実績区分.getコード());
-        if (entity.get給付実績_事業所番号() != null) {
-            source.listUpper_9 = entity.get給付実績_事業所番号().value();
-        }
+        source.listUpper_9 = getColumnValue(entity.get給付実績_事業所番号());
 
-        source.listUpper_10 = entity.get給付実績_整理番号();
+        source.listUpper_10 = ReportKomokuEditorUtil.get非空文字列(entity.get給付実績_整理番号());
 
         レコード種別セット(source);
 
@@ -185,20 +185,17 @@ public class KyufujissekiTorikomiIchiranEditor implements
             source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(new Decimal(合計件数), 0).concat(件タイトル);
         }
 
-        if (entity != null && entity.get識別コード() != null) {
+        if (entity.get識別コード() != null) {
             source.shikibetsuCode = entity.get識別コード();
         } else {
             source.shikibetsuCode = RString.EMPTY;
         }
-        if (entity.get給付実績_保険者番号() != null) {
-            source.hokenshaNo = entity.get給付実績_保険者番号().getColumnValue();
-        }
-        source.yubinNo = entity.get被保険者_郵便番号();
-        source.choikiCode = entity.get被保険者_町域コード();
-        source.gyoseikuCode = entity.get被保険者_行政区コード();
-        source.shimei50onKana = entity.get被保険者_氏名50音カナ();
-        source.shichosonCode = entity.get被保険者_市町村コード();
-        source.kyufuJissekiKubun = entity.get給付実績_給付実績区分();
+        source.yubinNo = ReportKomokuEditorUtil.get非空文字列(entity.get被保険者_郵便番号());
+        source.choikiCode = ReportKomokuEditorUtil.get非空文字列(entity.get被保険者_町域コード());
+        source.gyoseikuCode = ReportKomokuEditorUtil.get非空文字列(entity.get被保険者_行政区コード());
+        source.shimei50onKana = ReportKomokuEditorUtil.get非空文字列(entity.get被保険者_氏名50音カナ());
+        source.shichosonCode = ReportKomokuEditorUtil.get非空文字列(entity.get被保険者_市町村コード());
+        source.kyufuJissekiKubun = ReportKomokuEditorUtil.get非空文字列(entity.get給付実績_給付実績区分());
         source.拡張情報 = new ExpandedInformation(CODE, NAME,
                 ReportKomokuEditorUtil.get非空文字列(source.listUpper_5));
         return source;
@@ -275,5 +272,9 @@ public class KyufujissekiTorikomiIchiranEditor implements
 
     private RString get改頁(int index) {
         return index < 改頁リスト.size() ? 改頁リスト.get(index) : RString.EMPTY;
+    }
+
+    private RString getColumnValue(IValueObject<RString> column) {
+        return (null == column) ? RString.EMPTY : column.value();
     }
 }

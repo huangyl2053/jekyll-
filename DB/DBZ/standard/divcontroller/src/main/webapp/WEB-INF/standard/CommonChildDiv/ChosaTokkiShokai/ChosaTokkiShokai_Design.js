@@ -39,6 +39,10 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouName"));
             };
 
+            Controls.prototype.textPanel = function () {
+                return new UZA.Panel(this.convFiledName("textPanel"));
+            };
+
             Controls.prototype.lblTextGenpon = function () {
                 return new UZA.Label(this.convFiledName("lblTextGenpon"));
             };
@@ -247,8 +251,32 @@ var DBZ;
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTextMask10"));
             };
 
+            Controls.prototype.imgPanel1 = function () {
+                return new UZA.Panel(this.convFiledName("imgPanel1"));
+            };
+
             Controls.prototype.txtTokkijikoNo11 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo11"));
+            };
+
+            Controls.prototype.txtTokkijikoNo16 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo16"));
+            };
+
+            Controls.prototype.lbl16 = function () {
+                return new UZA.Label(this.convFiledName("lbl16"));
+            };
+
+            Controls.prototype.txtRemban16 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban16"));
+            };
+
+            Controls.prototype.genpoPanel6 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel6"));
+            };
+
+            Controls.prototype.imgGenpo6 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo6"));
             };
 
             Controls.prototype.lbl11 = function () {
@@ -259,8 +287,16 @@ var DBZ;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban11"));
             };
 
+            Controls.prototype.genpoPanel1 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel1"));
+            };
+
             Controls.prototype.imgGenpo1 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgGenpo1"));
+            };
+
+            Controls.prototype.maskPanel1 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel1"));
             };
 
             Controls.prototype.imgMasking1 = function () {
@@ -279,8 +315,16 @@ var DBZ;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban12"));
             };
 
+            Controls.prototype.genpoPanel2 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel2"));
+            };
+
             Controls.prototype.imgGenpo2 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgGenpo2"));
+            };
+
+            Controls.prototype.maskPanel2 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel2"));
             };
 
             Controls.prototype.imgMasking2 = function () {
@@ -299,8 +343,16 @@ var DBZ;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban13"));
             };
 
+            Controls.prototype.genpoPanel3 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel3"));
+            };
+
             Controls.prototype.imgGenpo3 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgGenpo3"));
+            };
+
+            Controls.prototype.maskPanel3 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel3"));
             };
 
             Controls.prototype.imgMasking3 = function () {
@@ -319,8 +371,16 @@ var DBZ;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban14"));
             };
 
+            Controls.prototype.genpoPanel4 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel4"));
+            };
+
             Controls.prototype.imgGenpo4 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgGenpo4"));
+            };
+
+            Controls.prototype.maskPanel4 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel4"));
             };
 
             Controls.prototype.imgMasking4 = function () {
@@ -339,28 +399,24 @@ var DBZ;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban15"));
             };
 
+            Controls.prototype.genpoPanel5 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel5"));
+            };
+
             Controls.prototype.imgGenpo5 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgGenpo5"));
+            };
+
+            Controls.prototype.maskPanel5 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel5"));
             };
 
             Controls.prototype.imgMasking5 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking5"));
             };
 
-            Controls.prototype.txtTokkijikoNo16 = function () {
-                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo16"));
-            };
-
-            Controls.prototype.lbl16 = function () {
-                return new UZA.Label(this.convFiledName("lbl16"));
-            };
-
-            Controls.prototype.txtRemban16 = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtRemban16"));
-            };
-
-            Controls.prototype.imgGenpo6 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo6"));
+            Controls.prototype.maskPanel6 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel6"));
             };
 
             Controls.prototype.imgMasking6 = function () {
@@ -379,8 +435,16 @@ var DBZ;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban17"));
             };
 
+            Controls.prototype.genpoPanel7 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel7"));
+            };
+
             Controls.prototype.imgGenpo7 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgGenpo7"));
+            };
+
+            Controls.prototype.maskPanel7 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel7"));
             };
 
             Controls.prototype.imgMasking7 = function () {
@@ -399,8 +463,16 @@ var DBZ;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban18"));
             };
 
+            Controls.prototype.genpoPanel8 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel8"));
+            };
+
             Controls.prototype.imgGenpo8 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgGenpo8"));
+            };
+
+            Controls.prototype.maskPanel8 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel8"));
             };
 
             Controls.prototype.imgMasking8 = function () {
@@ -419,8 +491,16 @@ var DBZ;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban19"));
             };
 
+            Controls.prototype.genpoPanel9 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel9"));
+            };
+
             Controls.prototype.imgGenpo9 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgGenpo9"));
+            };
+
+            Controls.prototype.maskPanel9 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel9"));
             };
 
             Controls.prototype.imgMasking9 = function () {
@@ -439,12 +519,304 @@ var DBZ;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban20"));
             };
 
+            Controls.prototype.genpoPanel10 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel10"));
+            };
+
             Controls.prototype.imgGenpo10 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgGenpo10"));
             };
 
+            Controls.prototype.maskPanel10 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel10"));
+            };
+
             Controls.prototype.imgMasking10 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking10"));
+            };
+
+            Controls.prototype.imgPanel2 = function () {
+                return new UZA.Panel(this.convFiledName("imgPanel2"));
+            };
+
+            Controls.prototype.txtTokkijikoNo21 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo21"));
+            };
+
+            Controls.prototype.lbl21 = function () {
+                return new UZA.Label(this.convFiledName("lbl21"));
+            };
+
+            Controls.prototype.txtRemban21 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban21"));
+            };
+
+            Controls.prototype.genpoPanel11 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel11"));
+            };
+
+            Controls.prototype.imgGenpo11 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo11"));
+            };
+
+            Controls.prototype.maskPanel11 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel11"));
+            };
+
+            Controls.prototype.imgMasking11 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgMasking11"));
+            };
+
+            Controls.prototype.txtTokkijikoNo22 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo22"));
+            };
+
+            Controls.prototype.lbl22 = function () {
+                return new UZA.Label(this.convFiledName("lbl22"));
+            };
+
+            Controls.prototype.txtRemban22 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban22"));
+            };
+
+            Controls.prototype.genpoPanel12 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel12"));
+            };
+
+            Controls.prototype.imgGenpo12 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo12"));
+            };
+
+            Controls.prototype.maskPanel12 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel12"));
+            };
+
+            Controls.prototype.imgMasking12 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgMasking12"));
+            };
+
+            Controls.prototype.txtTokkijikoNo23 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo23"));
+            };
+
+            Controls.prototype.lbl23 = function () {
+                return new UZA.Label(this.convFiledName("lbl23"));
+            };
+
+            Controls.prototype.txtRemban23 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban23"));
+            };
+
+            Controls.prototype.genpoPanel13 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel13"));
+            };
+
+            Controls.prototype.imgGenpo13 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo13"));
+            };
+
+            Controls.prototype.maskPanel13 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel13"));
+            };
+
+            Controls.prototype.imgMasking13 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgMasking13"));
+            };
+
+            Controls.prototype.txtTokkijikoNo24 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo24"));
+            };
+
+            Controls.prototype.lbl24 = function () {
+                return new UZA.Label(this.convFiledName("lbl24"));
+            };
+
+            Controls.prototype.txtRemban24 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban24"));
+            };
+
+            Controls.prototype.genpoPanel14 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel14"));
+            };
+
+            Controls.prototype.imgGenpo14 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo14"));
+            };
+
+            Controls.prototype.maskPanel14 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel14"));
+            };
+
+            Controls.prototype.imgMasking14 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgMasking14"));
+            };
+
+            Controls.prototype.txtTokkijikoNo25 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo25"));
+            };
+
+            Controls.prototype.lbl25 = function () {
+                return new UZA.Label(this.convFiledName("lbl25"));
+            };
+
+            Controls.prototype.txtRemban25 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban25"));
+            };
+
+            Controls.prototype.genpoPanel15 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel15"));
+            };
+
+            Controls.prototype.imgGenpo15 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo15"));
+            };
+
+            Controls.prototype.maskPanel15 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel15"));
+            };
+
+            Controls.prototype.imgMasking15 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgMasking15"));
+            };
+
+            Controls.prototype.txtTokkijikoNo26 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo26"));
+            };
+
+            Controls.prototype.lbl26 = function () {
+                return new UZA.Label(this.convFiledName("lbl26"));
+            };
+
+            Controls.prototype.txtRemban26 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban26"));
+            };
+
+            Controls.prototype.genpoPanel16 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel16"));
+            };
+
+            Controls.prototype.imgGenpo16 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo16"));
+            };
+
+            Controls.prototype.maskPanel16 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel16"));
+            };
+
+            Controls.prototype.imgMasking16 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgMasking16"));
+            };
+
+            Controls.prototype.txtTokkijikoNo27 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo27"));
+            };
+
+            Controls.prototype.lbl27 = function () {
+                return new UZA.Label(this.convFiledName("lbl27"));
+            };
+
+            Controls.prototype.txtRemban27 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban27"));
+            };
+
+            Controls.prototype.genpoPanel17 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel17"));
+            };
+
+            Controls.prototype.imgGenpo17 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo17"));
+            };
+
+            Controls.prototype.maskPanel17 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel17"));
+            };
+
+            Controls.prototype.imgMasking17 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgMasking17"));
+            };
+
+            Controls.prototype.txtTokkijikoNo28 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo28"));
+            };
+
+            Controls.prototype.lbl28 = function () {
+                return new UZA.Label(this.convFiledName("lbl28"));
+            };
+
+            Controls.prototype.txtRemban28 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban28"));
+            };
+
+            Controls.prototype.genpoPanel18 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel18"));
+            };
+
+            Controls.prototype.imgGenpo18 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo18"));
+            };
+
+            Controls.prototype.maskPanel18 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel18"));
+            };
+
+            Controls.prototype.imgMasking18 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgMasking18"));
+            };
+
+            Controls.prototype.txtTokkijikoNo29 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo29"));
+            };
+
+            Controls.prototype.lbl29 = function () {
+                return new UZA.Label(this.convFiledName("lbl29"));
+            };
+
+            Controls.prototype.txtRemban29 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban29"));
+            };
+
+            Controls.prototype.genpoPanel19 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel19"));
+            };
+
+            Controls.prototype.imgGenpo19 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo19"));
+            };
+
+            Controls.prototype.maskPanel19 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel19"));
+            };
+
+            Controls.prototype.imgMasking19 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgMasking19"));
+            };
+
+            Controls.prototype.txtTokkijikoNo30 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo30"));
+            };
+
+            Controls.prototype.lbl30 = function () {
+                return new UZA.Label(this.convFiledName("lbl30"));
+            };
+
+            Controls.prototype.txtRemban30 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban30"));
+            };
+
+            Controls.prototype.genpoPanel20 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel20"));
+            };
+
+            Controls.prototype.imgGenpo20 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo20"));
+            };
+
+            Controls.prototype.maskPanel20 = function () {
+                return new UZA.Panel(this.convFiledName("maskPanel20"));
+            };
+
+            Controls.prototype.imgMasking20 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgMasking20"));
             };
 
             Controls.prototype.btnReturn = function () {

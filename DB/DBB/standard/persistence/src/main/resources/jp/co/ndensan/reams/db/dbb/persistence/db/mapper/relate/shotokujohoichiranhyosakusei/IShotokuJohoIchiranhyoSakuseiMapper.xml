@@ -4,7 +4,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shotokujohoichiranhyosakusei.IShotokuJohoIchiranhyoSakuseiMapper">
 
-        <!--KaigoHokenShotokuTempEntityの項目にマッピングします。-->
+    <!--KaigoHokenShotokuTempEntityの項目にマッピングします。-->
     <resultMap id="resultMap_KaigoHokenShotokuTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuTempEntity" autoMapping="true">
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -26,13 +26,13 @@
         <result property="torokuGyomu" column="torokuGyomu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
     </resultMap>
-    
+
     <!--介護保険所得情報一覧データ取得-->
-    <select resultOrdered="true" id="select介護保険所得情報一覧データ" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiParameter" 
+    <select resultOrdered="true" id="select介護保険所得情報一覧データ"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiParameter"
             resultMap="resultMap_KaigoHokenShotokuTempEntity" fetchSize="500">
-      WITH master AS (
-      SELECT
+        WITH master AS (
+        SELECT
         A."shikibetsuCode",
         C."hihokenshaNo",
         A."shotokuNendo",
@@ -43,7 +43,7 @@
         A."nenkiniShotokuGaku",
         A."kazeiShotokuGaku",
         A."torokuGyomu"
-      FROM
+        FROM
         (
         SELECT
         F."shotokuNendo",
@@ -64,7 +64,7 @@
         F."torokuGyomu"
         FROM rgdb."DbV2502KaigoShotoku" AS F
         <if test="ラジオボタン == 2">
-            INNER JOIN 
+            INNER JOIN
             (SELECT
             "shotokuNendo",
             "shikibetsuCode"
@@ -107,18 +107,18 @@
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','','','','','','','','','','','0','0','','','','','',
         '','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','',
         '0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', (
-                    SELECT
-                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
-                    FROM
-                        master
-                   )) AS B
+        SELECT
+        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )) AS B
         ON master."shikibetsuCode"=B."shikibetsuCode"
         ${出力順} , master."shotokuNendo" ASC
     </select>
-    
+
     <!--広域市町村の所得情報一覧を取得します。-->
-    <select resultOrdered="true" id="select対象データ" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiGParameter" 
+    <select resultOrdered="true" id="select対象データ"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiGParameter"
             resultMap="resultMap_KaigoHokenShotokuTempEntity" fetchSize="500">
         WITH leader AS (
         WITH master AS (
@@ -134,7 +134,7 @@
         M."kazeiShotokuGaku",
         M."torokuGyomu",
         M."shoriTimeStamp"
-      FROM
+        FROM
         (
         SELECT
         F."shotokuNendo",
@@ -155,18 +155,18 @@
         F."torokuGyomu"
         FROM rgdb."DbV2502KaigoShotoku" F
         <if test="チックボックス == 2">
-        INNER JOIN 
-        (SELECT
-        "shotokuNendo"
-        ,max("rirekiNo") AS rirekiNo
-        ,"shikibetsuCode"
-        FROM rgdb."DbV2502KaigoShotoku" AS X
-        GROUP BY X."shotokuNendo", X."shikibetsuCode"
-        ORDER BY X."shotokuNendo", X."shikibetsuCode"
-        ) AS Y
-        ON Y."shotokuNendo"=F."shotokuNendo"
-        AND Y."shikibetsuCode"= F."shikibetsuCode"
-        AND Y.rirekiNo=F."rirekiNo"
+            INNER JOIN
+            (SELECT
+            "shotokuNendo"
+            ,max("rirekiNo") AS rirekiNo
+            ,"shikibetsuCode"
+            FROM rgdb."DbV2502KaigoShotoku" AS X
+            GROUP BY X."shotokuNendo", X."shikibetsuCode"
+            ORDER BY X."shotokuNendo", X."shikibetsuCode"
+            ) AS Y
+            ON Y."shotokuNendo"=F."shotokuNendo"
+            AND Y."shikibetsuCode"= F."shikibetsuCode"
+            AND Y.rirekiNo=F."rirekiNo"
         </if>
         WHERE
         F."shotokuNendo"=#{処理年度}
@@ -187,14 +187,14 @@
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','','','','','','','','','','','0','0','','','','','',
         '','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','',
         '0','0','','','0','0','0','','','','','','','','','','','','','','','','','','',                    (
-                    SELECT
-                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
-                    FROM
-                        master
-                   )) AS N
+        SELECT
+        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )) AS N
         ON master."shikibetsuCode"=N."shikibetsuCode"
         ORDER BY master."shotokuNendo" ASC, master."rirekiNo" DESC)
-      SELECT
+        SELECT
         A."shikibetsuCode",
         B."hihokenshaNo",
         A."kanaMeisho",
@@ -213,7 +213,7 @@
         A."kazeiShotokuGaku",
         A."torokuGyomu",
         A."setaiCode"
-      FROM
+        FROM
         (
         SELECT
         leader."shikibetsuCode",
@@ -254,15 +254,15 @@
         AND(B."hihokennshaKubunCode"='1' OR B."hihokennshaKubunCode"='2')
         ${出力順}, "shotokuNendo" ASC
     </select>
-    
+
     <!--select所得情報一覧データ-->
     <select id="select所得情報一覧データ" resultMap="resultMap_KaigoHokenShotokuTempEntity" fetchSize="500">
-      SELECT *
-      FROM "KaigoHokenShotokuTemp"
+        SELECT *
+        FROM "KaigoHokenShotokuTemp"
     </select>
-    
+
     <!--処理日付管理マスタ_単一市町村を取得します。-->
-    <select resultOrdered="true" id="select処理日付管理マスタ_単一市町村" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+    <select resultOrdered="true" id="select処理日付管理マスタ_単一市町村" resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.RegistShoriDateKanriParameter" fetchSize="500">
         SELECT *
         FROM rgdb."DbT7022ShoriDateKanri"
@@ -273,10 +273,10 @@
         AND "nendo"=#{処理年度}
         AND "nendoNaiRenban"='0001'
     </select>
-    
+
     <!--処理日付管理マスタ_広域市町村を取得します。-->
-    <select resultOrdered="true" id="select処理日付管理マスタ_広域市町村" 
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+    <select resultOrdered="true" id="select処理日付管理マスタ_広域市町村"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.RegistShoriDateKanriParameter" fetchSize="500">
         SELECT *
         FROM rgdb."DbT7022ShoriDateKanri"
@@ -287,13 +287,13 @@
         AND "nendo"=#{処理年度}
         AND "nendoNaiRenban"='0001'
     </select>
-    
-    <select resultOrdered="true" id="selectTempAll" 
+
+    <select resultOrdered="true" id="selectTempAll"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.PrtKaigoHokenShotokuJohoIchiranParameter"
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuTempEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "KaigoHokenShotokuTemp" TEMP
         ${出力順}
     </select>
-    
+
 </mapper>

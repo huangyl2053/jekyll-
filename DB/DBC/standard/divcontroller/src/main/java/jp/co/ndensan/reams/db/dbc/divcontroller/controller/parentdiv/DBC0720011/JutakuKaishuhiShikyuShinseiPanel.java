@@ -521,12 +521,13 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         for (dgMishinsaShikyuShinsei_Row row : lists) {
             row.setSelected(Boolean.FALSE);
             for (JutakuKaishuhiShikyuShinseiHozon 選択 : 選択list) {
-                if (選択.get被保険者番号() != null && 選択.getサービス提供年月() != null && 選択.get整理番号() != null) {
-                    if (row.getTxtHihoNo().equals(選択.get被保険者番号().getColumnValue())
-                            && new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().getYearMonth().toDateString()).equals(選択.getサービス提供年月())
-                            && row.getTxtSeiriNo().getValue().equals(選択.get整理番号())) {
-                        row.setSelected(Boolean.TRUE);
-                    }
+                if (選択.get被保険者番号() != null
+                        && 選択.getサービス提供年月() != null
+                        && 選択.get整理番号() != null
+                        && row.getTxtHihoNo().equals(選択.get被保険者番号().getColumnValue())
+                        && new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().getYearMonth().toDateString()).equals(選択.getサービス提供年月())
+                        && row.getTxtSeiriNo().getValue().equals(選択.get整理番号())) {
+                    row.setSelected(Boolean.TRUE);
                 }
             }
         }
@@ -535,16 +536,15 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             for (MiShinsaSikyuShinsei viewState : viewStateList) {
                 if (viewState.getEntity().get被保険者番号() != null
                         && viewState.getEntity().getサービス提供年月() != null
-                        && viewState.getEntity().get整理番号() != null) {
-                    if (row.getTxtHihoNo().equals(viewState.getEntity().get被保険者番号().getColumnValue())
-                            && new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().getYearMonth().
-                                    toDateString()).equals(viewState.getEntity().getサービス提供年月())
-                            && row.getTxtSeiriNo().getValue().equals(viewState.getEntity().get整理番号())) {
-                        row.setTxtShinsaResult(RString.isNullOrEmpty(viewState.getEntity().get審査結果())
-                                ? RString.EMPTY : ShinsaNaiyoKubun.toValue(viewState.getEntity().get審査結果()).get名称());
-                        row.setTxtTenkyoReset(viewState.getEntity().is住宅住所変更());
-                        row.setTxt3DankaiReset(viewState.getEntity().is要介護状態３段階変更());
-                    }
+                        && viewState.getEntity().get整理番号() != null
+                        && row.getTxtHihoNo().equals(viewState.getEntity().get被保険者番号().getColumnValue())
+                        && new FlexibleYearMonth(row.getTxtTeikyoYM().getValue().getYearMonth().
+                                toDateString()).equals(viewState.getEntity().getサービス提供年月())
+                        && row.getTxtSeiriNo().getValue().equals(viewState.getEntity().get整理番号())) {
+                    row.setTxtShinsaResult(RString.isNullOrEmpty(viewState.getEntity().get審査結果())
+                            ? RString.EMPTY : ShinsaNaiyoKubun.toValue(viewState.getEntity().get審査結果()).get名称());
+                    row.setTxtTenkyoReset(viewState.getEntity().is住宅住所変更());
+                    row.setTxt3DankaiReset(viewState.getEntity().is要介護状態３段階変更());
                 }
             }
         }

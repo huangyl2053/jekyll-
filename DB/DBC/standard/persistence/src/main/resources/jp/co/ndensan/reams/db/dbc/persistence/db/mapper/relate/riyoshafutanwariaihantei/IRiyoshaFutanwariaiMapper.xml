@@ -1218,6 +1218,17 @@
         FROM
         "SetainJohoTemp"  
     </select>
+    
+    <delete id="delete世帯員情報Temp">
+        CREATE TEMPORARY TABLE IF NOT EXISTS "SetainJohoTemp"
+        ("id" integer,
+        "name" text);
+        DELETE FROM
+            "SetainJohoTemp" 
+        WHERE
+            1 = 1
+    </delete>
+    
     <select resultOrdered="true" id="select追加判定対象者Temp" 
             resultMap="ResultMap_TukiHanteiTaishoshaTemp"
             fetchSize="500">
@@ -1234,6 +1245,17 @@
         FROM
         "TmpSetaiHaaku"  
     </select>
+    
+    <delete id="delete世帯員把握入力Temp">
+       CREATE TEMPORARY TABLE IF NOT EXISTS "TmpSetaiHaaku"
+        ("id" integer,
+        "name" text);
+        DELETE FROM
+            "TmpSetaiHaaku"
+        WHERE
+            1 = 1
+    </delete>
+    
     <select resultOrdered="true" id="select月別判定対象者Temp" 
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IHanteiTaishoshaTempMapper.ResultMap_HanteiTaishoshaTempEntity"
             fetchSize="500">
@@ -1298,6 +1320,17 @@
         FROM
         "RiyoshaFutanWariaiMeisai01Temp"   AS "RiyoshaFutanWariaiMeisaiTemp"
     </select>
+    
+    <delete id="delete利用者負担割合明細01Temp">
+      CREATE TEMPORARY TABLE IF NOT EXISTS "RiyoshaFutanWariaiMeisai01Temp"
+        ("id" integer,
+        "name" text);
+        DELETE FROM
+            "RiyoshaFutanWariaiMeisai01Temp"
+        WHERE
+            1 = 1
+    </delete>
+    
     <select resultOrdered="true" id="select利用者負担割合明細02Temp" 
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IRiyoshaFutanWariaiMeisaiTempMapper.ResultMap_RiyoshaFutanWariaiMeisaiTempEntity"
             fetchSize="500">
@@ -1306,6 +1339,17 @@
         FROM
         "RiyoshaFutanWariaiMeisai02Temp"   AS "RiyoshaFutanWariaiMeisaiTemp"
     </select>
+    
+    <delete id="delete利用者負担割合明細02Temp">
+        CREATE TEMPORARY TABLE IF NOT EXISTS "RiyoshaFutanWariaiMeisai02Temp"
+        ("id" integer,
+        "name" text);
+        DELETE FROM
+            "RiyoshaFutanWariaiMeisai02Temp"
+        WHERE
+            1 = 1
+    </delete>
+    
     <select resultOrdered="true" id="select利用者負担割合明細03Temp" 
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IRiyoshaFutanWariaiMeisaiTempMapper.ResultMap_RiyoshaFutanWariaiMeisaiTempEntity"
             fetchSize="500">
@@ -1379,6 +1423,17 @@
         FROM
         "KonkaiRiyoshaFutanWariaiJohoTemp"  
     </select>
+    
+    <delete id="delete今回利用者負担割合情報Temp">
+         CREATE TEMPORARY TABLE IF NOT EXISTS "KonkaiRiyoshaFutanWariaiJohoTemp"
+        ("id" integer,
+        "name" text);
+        DELETE FROM
+            "KonkaiRiyoshaFutanWariaiJohoTemp"
+        WHERE 
+            1 = 1
+    </delete>
+    
     <select resultOrdered="true" id="select被保険者番号Temp" 
             resultMap="ResultMap_HihokenshaNoEntity"
             fetchSize="500">
@@ -1388,6 +1443,18 @@
         FROM
         "HanteiHihokenshaNoTemp"  
     </select>
+    
+    <delete id="delete被保険者番号Temp">
+       CREATE TEMPORARY TABLE IF NOT EXISTS "HanteiHihokenshaNoTemp"
+        ("id" integer,
+        "name" text);
+        DELETE FROM
+            "HanteiHihokenshaNoTemp"
+        WHERE 
+            1 = 1
+    </delete>
+            
+    
     <select resultOrdered="true" id="select世帯員所得情報Temp" 
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISetaiShotokuTempMapper.resultMap_SetaiShotokuEntity"
             fetchSize="500">
@@ -1396,6 +1463,16 @@
         FROM
         "TmpSetaiShotoku"  
     </select>
+    
+    <delete id="delete世帯員所得情報Temp">
+       CREATE TEMPORARY TABLE IF NOT EXISTS "TmpSetaiShotoku"
+        ("id" integer,
+        "name" text);
+        DELETE FROM
+            "TmpSetaiShotoku"  
+        WHERE 
+            1 = 1
+    </delete>
     
     <resultMap id="ResultMap_FutanWariaiRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiRelateEntity" autoMapping="true">
         <id  column="RiyoshaFutanWariaiMeisaiTemp_hihokenshaNo"  />

@@ -107,7 +107,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     private static final RString 処理モード修正 = new RString("処理モード修正");
     private static final RString 処理モード削除 = new RString("処理モード削除");
     private static final RString 申請を保存する = new RString("btnUpdate");
-    private static final RString 種目コード = new RString("種目コード");
     private static final RString 品目コード = new RString("品目コード");
     private static final RString 領収年月日 = new RString(
             "領収年月日にサービス提供年月より前の日付が設定されています。");
@@ -846,6 +845,12 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().
                     getPnlShinsesyaJoho().getTxtJigyosya().getValue())).build();
         }
+        entity = get氏名と支給申請審査区分(entity, 状態);
+        entity = get償還払支給申請2(entity);
+        return entity;
+    }
+
+    private ShokanShinsei get氏名と支給申請審査区分(ShokanShinsei entity, RString 状態) {
         if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShimei() != null) {
             entity = entity.createBuilderForEdit().set申請者氏名(
                     div.getYoguKonyuhiShikyuShinseiContentsPanel().
@@ -861,7 +866,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         } else {
             entity = entity.createBuilderForEdit().set支給申請審査区分(NUMB1).build();
         }
-        entity = get償還払支給申請2(entity);
         return entity;
     }
 
@@ -1118,6 +1122,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                     break;
                 }
             }
+        }
+        ServiceShuruiCode サービス種類 = FukushiyoguKonyuhiShikyuShinsei.createInstance().getServiceShuruiCode(被保険者番号, サービス提供年月);
+        if (サービス種類.isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(DbcErrorMessages.提供_購入_年月チェック)));
         }
         return validPairs;
     }

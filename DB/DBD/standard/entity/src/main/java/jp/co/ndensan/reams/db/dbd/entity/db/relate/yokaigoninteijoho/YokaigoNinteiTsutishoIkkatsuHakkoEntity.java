@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 要介護認定通知書一括発行Entityのクラスです。

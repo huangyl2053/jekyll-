@@ -165,13 +165,13 @@
             AND DbT2002Fuka."dbT2002Fuka_tsuchishoNo" = #{通知書番号}
             AND DbT2002Fuka."dbT2002Fuka_rirekiNo" = #{履歴番号}
             AND DbT2002Fuka."dbT2002Fuka_choteiNichiji" = #{調定日時}
-            AND ((DbT2004Gemmen."dbT2004Gemmen_jotaiKubun" = '1'
+<!--            AND ((DbT2004Gemmen."dbT2004Gemmen_jotaiKubun" = '1'
                  AND
                  DbT2004Gemmen."dbT2004Gemmen_sakuseiKubun" = '1')
                  OR
                  ((DbT2004Gemmen."dbT2004Gemmen_jotaiKubun" = '2'
                  AND
-                 DbT2004Gemmen."dbT2004Gemmen_sakuseiKubun" = '2')))
+                 DbT2004Gemmen."dbT2004Gemmen_sakuseiKubun" = '2')))-->
     </select>
 
      <select id="select減免の情報_取消更正後" resultMap="resultMap_GemmenJohoRelateEntity" 

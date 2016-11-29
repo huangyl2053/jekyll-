@@ -139,16 +139,15 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
     private static void setページ数と金額(int 様式連番, Decimal 振込金額) {
         データ数++;
+        if (1 == データ数 % ページ件数 && 1 != データ数) {
+            毎ページ振込金額合算 = Decimal.ZERO;
+            毎ページ数 = 0;
+        }
         if (様式連番_1 == 様式連番) {
             毎ページ数++;
             総レコード数++;
             毎ページ振込金額合算 = 毎ページ振込金額合算.add(振込金額);
             振込金額合算 = 振込金額合算.add(振込金額);
-
-        }
-        if (1 == データ数 % ページ件数 && 1 != データ数) {
-            毎ページ振込金額合算 = Decimal.ZERO;
-            毎ページ数 = 0;
         }
     }
 
@@ -273,10 +272,10 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     private void set様式連番_1のLower帳票データ(FurikomiMeisaiIchiranDetailReportSource source) {
         FurikomiDetailTempTableEntity 振込明細一時Data = 一覧表用データ.get振込明細一時TBL();
         if (振込明細一時Data.getJusho() != null) {
-            if (振込明細一時Data.getJusho().value().length() <= LISTINDEX_20) {
-                source.listLower_1 = 振込明細一時Data.getJusho().value();
+            if (振込明細一時Data.getJusho().length() <= LISTINDEX_20) {
+                source.listLower_1 = 振込明細一時Data.getJusho();
             } else {
-                source.listLower_1 = 振込明細一時Data.getJusho().value().substring(0, LISTINDEX_20);
+                source.listLower_1 = 振込明細一時Data.getJusho().substring(0, LISTINDEX_20);
             }
             set様式連番_1のLower支払方法_口座以外情報(source, 振込明細一時Data);
 
@@ -434,7 +433,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                         concat(半角ハイフン).concat(振込明細一時TBL.getKinyuKikanShitenCode().value());
             }
             if (振込明細一時TBL.getKinyuKikanCode() != null) {
-                source.listUpper_5 = 振込明細一時TBL.getKinyuKikanCode().value();
+                source.listUpper_5 = 振込明細一時TBL.getKinyuKikanName();
             }
 
             source.listUpper_6 = 振込明細一時TBL.getYokinShubetsuName();

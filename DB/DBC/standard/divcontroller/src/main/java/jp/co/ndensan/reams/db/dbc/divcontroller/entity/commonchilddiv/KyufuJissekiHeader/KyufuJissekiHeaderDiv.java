@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJiss
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeader;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHeaderAll;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiKihonShukeiRelate;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiRelate;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -779,5 +781,35 @@ public class KyufuJissekiHeaderDiv extends Panel implements IKyufuJissekiHeaderD
     @Override
     public void set被保情報2(KyufuJissekiKihonShukeiRelate csData_A) {
         getHandler().set被保情報2(csData_A);
+    }
+
+    /**
+     * 給付実績基本情報データを取得します。
+     *
+     * @return 給付実績基本情報データ 給付実績基本情報データ
+     */
+    @Override
+    public KyufuJissekiHeaderAll get給付実績基本情報データ() {
+        return getHandler().get給付実績基本情報データ();
+    }
+
+    /**
+     * 給付実績基本情報を設定します。
+     *
+     * @param 給付実績基本情報 給付実績基本情報子Divデータ
+     */
+    @Override
+    public void set給付実績基本情報データ(KyufuJissekiHeaderAll 給付実績基本情報) {
+        getHandler().set給付実績基本情報データ(給付実績基本情報);
+    }
+
+    /**
+     * 被保情報を設定します。
+     *
+     * @param 給付実績高額介護サービス費データ 給付実績高額介護サービス費データ
+     */
+    @Override
+    public void set被保情報2_1(KyufujissekiKogakuKaigoServicehiRelate 給付実績高額介護サービス費データ) {
+        getHandler().set被保情報2(給付実績高額介護サービス費データ);
     }
 }

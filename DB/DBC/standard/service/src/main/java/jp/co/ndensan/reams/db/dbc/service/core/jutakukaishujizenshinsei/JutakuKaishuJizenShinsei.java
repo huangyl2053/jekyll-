@@ -212,14 +212,14 @@ public class JutakuKaishuJizenShinsei {
         FlexibleYearMonth 制度改正施行年月 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
         if (区分コード_01.equals(jyoho.get要介護認定状態区分コード())) {
             if (jyoho.is旧措置者フラグ()) {
-                return 種類コード_45;
+                return 種類コード_42;
             } else {
                 return null;
             }
         }
         if (サービス提供年月.isBefore(制度改正施行年月)) {
             if (区分コード_11.equals(jyoho.get要介護認定状態区分コード())) {
-                return 種類コード_45;
+                return 種類コード_42;
             } else if (区分コード_21.equals(jyoho.get要介護認定状態区分コード())
                     || 区分コード_22.equals(jyoho.get要介護認定状態区分コード())
                     || 区分コード_23.equals(jyoho.get要介護認定状態区分コード())
@@ -618,10 +618,19 @@ public class JutakuKaishuJizenShinsei {
         List<DbT3034ShokanShinseiEntity> entityList = mapper.get開始サービス提供年月(parameter);
         FlexibleYearMonth 開始サービス提供年月;
         if (entityList == null || entityList.isEmpty()) {
-            開始サービス提供年月 = new FlexibleYearMonth("000000");
+            開始サービス提供年月 = null;
         } else {
             開始サービス提供年月 = entityList.get(0).getServiceTeikyoYM();
         }
+        if (null == 開始サービス提供年月 || 開始サービス提供年月.isEmpty()) {
+            entityList = mapper.get初回の申請データ(parameter);
+            if (entityList == null || entityList.isEmpty()) {
+                開始サービス提供年月 = new FlexibleYearMonth("000000");
+            } else {
+                開始サービス提供年月 = entityList.get(0).getServiceTeikyoYM();
+            }
+        }
+
         parameter = JutakuKaishuHiParameter.createParameter(被保険者番号, サービス提供年月,
                 開始サービス提供年月, null);
         ShiharaiKekaEntity result = mapper.get前回までの支払結果(parameter);

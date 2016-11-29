@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryS
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -112,6 +113,16 @@ public class HekinRiyoGakuTokehyoResult {
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
+    private static final RString 保険料算定段階_01 = new RString("01");
+    private static final RString 保険料算定段階_02 = new RString("02");
+    private static final RString 保険料算定段階_03 = new RString("03");
+    private static final RString 保険料算定段階_04 = new RString("04");
+    private static final RString 保険料算定段階_05 = new RString("05");
+    private static final RString 保険料算定段階_06 = new RString("06");
+    private static final RString 保険料算定段階_07 = new RString("07");
+    private static final RString 保険料算定段階_08 = new RString("08");
+    private static final RString 保険料算定段階_09 = new RString("09");
+    private static final RString 保険料算定段階_10 = new RString("10～");
 
     /**
      * set給付実績データ一時TBL
@@ -142,7 +153,20 @@ public class HekinRiyoGakuTokehyoResult {
             }
             set給付実績データ一時Entity(entity, 一時Entity);
         }
+        一時Entity.setTaishofukaNendo(setTaishofukaNendo(entity.getServiceTeikyoYM()));
         return 一時Entity;
+    }
+
+    private RString setTaishofukaNendo(FlexibleYearMonth serviceTeikyoYM) {
+        if (serviceTeikyoYM.isEmpty()) {
+            return RString.EMPTY;
+        }
+        int 月 = serviceTeikyoYM.getMonthValue();
+        if (1 <= 月 && 月 <= 定数3) {
+            return serviceTeikyoYM.minusYear(1).getNendo().toDateString();
+        } else {
+            return serviceTeikyoYM.getNendo().toDateString();
+        }
     }
 
     private void set一時EntityのServiceBunrui(KyufujissekiTempTblEntity entity, KyufujissekiTempTblEntity 一時Entity) {
@@ -336,7 +360,29 @@ public class HekinRiyoGakuTokehyoResult {
                 一時Entity.setServiceshurui(serviceshuruiList.get(i));
                 一時Entity.setShukeinaiyou(shukeinaiyouList.get(j));
                 一時Entity.setShotoku(shotokuList.get(n));
-                一時Entity.setHokenseiteitoku(RString.EMPTY);
+                if (サービス分類_1.equals(shotokuList.get(n))) {
+                    一時Entity.setHokenseiteitoku(保険料算定段階_01);
+                } else if (サービス分類_2.equals(shotokuList.get(n))) {
+                    一時Entity.setHokenseiteitoku(保険料算定段階_02);
+                } else if (サービス分類_3.equals(shotokuList.get(n))) {
+                    一時Entity.setHokenseiteitoku(保険料算定段階_03);
+                } else if (サービス分類_4.equals(shotokuList.get(n))) {
+                    一時Entity.setHokenseiteitoku(保険料算定段階_04);
+                } else if (サービス分類_5.equals(shotokuList.get(n))) {
+                    一時Entity.setHokenseiteitoku(保険料算定段階_05);
+                } else if (サービス分類_6.equals(shotokuList.get(n))) {
+                    一時Entity.setHokenseiteitoku(保険料算定段階_06);
+                } else if (サービス分類_7.equals(shotokuList.get(n))) {
+                    一時Entity.setHokenseiteitoku(保険料算定段階_07);
+                } else if (サービス分類_8.equals(shotokuList.get(n))) {
+                    一時Entity.setHokenseiteitoku(保険料算定段階_08);
+                } else if (サービス分類_9.equals(shotokuList.get(n))) {
+                    一時Entity.setHokenseiteitoku(保険料算定段階_09);
+                } else if (所得段階_10以上.equals(shotokuList.get(n))) {
+                    一時Entity.setHokenseiteitoku(保険料算定段階_10);
+                } else if (所得段階_その他.equals(shotokuList.get(n))) {
+                    一時Entity.setHokenseiteitoku(RString.EMPTY);
+                }
                 一時Entity.setYoshien1(Decimal.ZERO);
                 一時Entity.setYoshien2(Decimal.ZERO);
                 一時Entity.setKeikanoyokaigo(Decimal.ZERO);

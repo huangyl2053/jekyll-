@@ -21,9 +21,7 @@
         <result property="serviceBunrui" column="サービス分類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>   
         <result property="hokenryoDankai2" column="保険料算定段階2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenryoDankai1" column="保険料算定段階1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="fukaNendo" column="賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="rank_num" column="rank_number" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       
+        <result property="taishofukaNendo" column="対象賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="get給付実績データ一時" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.heikinriyogakuyokeihyo.HeikinriyogakuTokeihyoMybatisParameter"
@@ -329,59 +327,32 @@
             fetchSize="500">
         SELECT
         <include refid = "allColumns_DbWTkyufujisTempTbl"/>
-        , 介護賦課データ.保険料算定段階2 AS 保険料算定段階2
-        , 介護賦課データ.保険料算定段階1 AS 保険料算定段階1
-        , 介護賦課データ.賦課年度 AS 賦課年度
-        , 介護賦課データ.rank_num AS rank_number 
+        , 賦課.保険料算定段階2 AS 保険料算定段階2
+        , 賦課.保険料算定段階1 AS 保険料算定段階1 
         FROM
-        ( 
+        "DbWTkyufujisTempTbl" 
+        INNER JOIN ( 
         SELECT
-        介護1.被保険者番号 AS 被保険者番号
-        , 介護1.賦課年度 AS 賦課年度
-        , 介護1.保険料算定段階2 AS 保険料算定段階2
-        , 介護1.保険料算定段階1 AS 保険料算定段階1
-        , 介護1.rank_num AS rank_num 
+        "hihokenshaNo" AS 被保険者番号
+        , "fukaNendo" AS 賦課年度
+        , "hokenryoDankai2" AS 保険料算定段階2
+        , "hokenryoDankai1" AS 保険料算定段階1 
         FROM
-        (
-        SELECT
-        Dbt2002."hihokenshaNo" AS 被保険者番号
-        , Dbt2002."fukaNendo" AS 賦課年度
-        , Dbt2002."hokenryoDankai2" AS 保険料算定段階2
-        , Dbt2002."hokenryoDankai1" AS 保険料算定段階1
-        , row_number() over ( 
-        partition by
-        Dbt2002."hihokenshaNo"
-        , Dbt2002."fukaNendo" 
-        order by
-        Dbt2002."tsuchishoNo"
-        , Dbt2002."choteiNendo"
-        , Dbt2002."rirekiNo" DESC
-        ) AS rank_num 
-        FROM
-        rgdb."DbT2002Fuka" AS Dbt2002 
+        rgdb."DbV2002Fuka" AS mst 
         WHERE
-        Dbt2002."fukaNendo" <![CDATA[>=]]> ( 
+        NOT EXISTS ( 
         SELECT
-        substr(MIN("DbWTkyufujisTempTbl"."serviceTeikyoYM"), 1, 4) 
+        'X' 
         FROM
-        "DbWTkyufujisTempTbl"
-        ) 
-        AND Dbt2002."fukaNendo" <![CDATA[<=]]> ( 
-        SELECT
-        substr( 
-        MAX("DbWTkyufujisTempTbl"."serviceTeikyoYM") , 1 , 4
-        ) 
-        FROM
-        "DbWTkyufujisTempTbl"
+        rgdb."DbV2002Fuka" AS slv 
+        WHERE
+        mst."hihokenshaNo" = slv."hihokenshaNo" 
+        AND mst."fukaNendo" = slv."fukaNendo" 
+        AND mst."tsuchishoNo" = slv."tsuchishoNo"
         )
-        ) AS 介護1 
-        WHERE
-        rank_num = 1
-        ) AS 介護賦課データ 
-        INNER JOIN "DbWTkyufujisTempTbl" 
-        ON 介護賦課データ.被保険者番号 = "DbWTkyufujisTempTbl"."hiHokenshaNo" 
-        AND 介護賦課データ.賦課年度 = substr("DbWTkyufujisTempTbl"."serviceTeikyoYM", 1, 4)
-
+        ) AS 賦課 
+        ON 賦課.被保険者番号 = "DbWTkyufujisTempTbl"."hiHokenshaNo" 
+        AND 賦課.賦課年度 = "DbWTkyufujisTempTbl"."taishofukaNendo"
     </select>
        
     <select resultOrdered="true" id="get給付実績データ取得処理" 
@@ -392,7 +363,7 @@
         FROM
         "DbWTkyufujisTempTbl"
         ORDER BY
-         LPAD('0', 2-length("serviceBunrui")) || "serviceBunrui"
+        LPAD('0', 2-length("serviceBunrui")) || "serviceBunrui"
         ,"DbWTkyufujisTempTbl"."hiHokenshaNo"
         , "DbWTkyufujisTempTbl"."serviceTeikyoYM"
         , "DbWTkyufujisTempTbl"."yoKaigoJotaiKubunCode" 
@@ -688,7 +659,7 @@
         "DbWTkyufujisTempTbl"."hokenDekidakaTanisu" AS 保険出来高点数,
         "DbWTkyufujisTempTbl"."hiyosogaku" AS 費用額,
         "DbWTkyufujisTempTbl"."shotoku" AS 所得段階,
-        "DbWTkyufujisTempTbl"."serviceBunrui" AS サービス分類 
-        
+        "DbWTkyufujisTempTbl"."serviceBunrui" AS サービス分類,
+        "DbWTkyufujisTempTbl"."taishofukaNendo" AS 対象賦課年度
     </sql>
 </mapper>

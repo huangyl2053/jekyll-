@@ -77,11 +77,13 @@ public class ShokanShikyuGendogakuMainHandler {
 
             for (ShokanShuruiShikyuGendoGakuData result : entityList) {
                 dgShikyuGendogaku_Row row = new dgShikyuGendogaku_Row();
-                row.setModifyButtonState(DataGridButtonState.Enabled);
+
                 if (result.get最新フラグ() == INDEX_1) {
                     row.setDeleteButtonState(DataGridButtonState.Enabled);
+                    row.setModifyButtonState(DataGridButtonState.Enabled);
                 } else {
                     row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setModifyButtonState(DataGridButtonState.Disabled);
                 }
                 row.getTekiyoKaishiYM().setValue(flexibleDateToRDate(result.getTekiyoKaishiYM()));
                 row.getTekiyoShuryoYM().setValue(flexibleDateToRDate(result.getTekiyoShuryoYM()));
@@ -267,7 +269,7 @@ public class ShokanShikyuGendogakuMainHandler {
         clear詳細エリア();
         setValue();
         div.getShokanShikyuGendogakuIchiran().setDisabled(true);
-        div.getShokanShikyuGendogakuShosai().setDisabled(true);
+        div.getShokanShikyuGendogakuShosai().setDisabled(false);
         div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().setFromDisabled(true);
         div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().setToDisabled(true);
         div.getShokanShikyuGendogakuShosai().getRadTableKubun().setDisabled(true);
@@ -275,7 +277,7 @@ public class ShokanShikyuGendogakuMainHandler {
         div.getShokanShikyuGendogakuShosai().getTxtKyotakuKaigoJutakuKaishu().setDisabled(true);
         div.getShokanShikyuGendogakuShosai().getTxtKyotakuShienFukushiYogu().setDisabled(true);
         div.getShokanShikyuGendogakuShosai().getTxtKyotakuShienJutakuKaishu().setDisabled(true);
-        div.getBtnCancel().setDisabled(true);
+        div.getBtnCancel().setDisabled(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(共通ボタン, true);
     }

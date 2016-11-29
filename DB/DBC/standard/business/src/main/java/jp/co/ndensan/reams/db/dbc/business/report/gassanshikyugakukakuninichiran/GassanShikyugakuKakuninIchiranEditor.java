@@ -110,7 +110,7 @@ public class GassanShikyugakuKakuninIchiranEditor implements
         source.hihokenshaNo = getColumnValue(計算結果entity.getHihokenshaNoIn());
 
         source.shikibetsuCode = 被保険者entity.getShikibetsuCode().value();
-
+        setNonull改ページ(source);
         return source;
 
     }
@@ -172,4 +172,17 @@ public class GassanShikyugakuKakuninIchiranEditor implements
         }
         return RString.EMPTY;
     }
+
+    private void setNonull改ページ(GassanShikyugakuKakuninIchiranSource source) {
+        source.yubinNo = source.yubinNo == null ? RString.EMPTY : source.yubinNo;
+        source.choikiCode = source.choikiCode == null ? RString.EMPTY : source.choikiCode;
+        source.gyoseikuCode = source.gyoseikuCode == null ? RString.EMPTY : source.gyoseikuCode;
+        source.shimei50onKana = source.shimei50onKana == null ? RString.EMPTY : source.shimei50onKana;
+        source.shichosonCode = source.shichosonCode == null ? RString.EMPTY : source.shichosonCode;
+        source.shoKisaiHokenshaNo = source.shoKisaiHokenshaNo == null ? RString.EMPTY : source.shoKisaiHokenshaNo;
+        source.hihokenshaNo = source.hihokenshaNo == null ? RString.EMPTY : source.hihokenshaNo;
+        source.listUpper_2 = source.listUpper_2 == null ? RString.EMPTY : source.listUpper_2;
+        source.listUpper_4 = source.listUpper_4 == null ? RString.EMPTY : source.listUpper_4;
+    }
+
 }

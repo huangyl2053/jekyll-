@@ -21,25 +21,7 @@
                             rgdb."DbT7130KaigoServiceShurui" A  
                          WHERE T7130."serviceShuruiCd" = A."serviceShuruiCd"
                             AND A."teikyoKaishiYM" <![CDATA[>]]> T7130."teikyoKaishiYM" 
-            )
-         INNER JOIN   
-             rgdb."UzT0007Code" T0007_1
-             ON T0007_1."schemaName" = 'rgdb'
-             AND T0007_1."subGyomuCode" = 'DBC'
-             AND T0007_1."codeShubetsu" = '0027'
-             AND T0007_1.code = rgdb."DbT7131KaigoServiceNaiyou"."tanisuShikibetsuCode"
-         INNER JOIN   
-             rgdb."UzT0007Code" T0007_2
-             ON T0007_2."schemaName" = 'rgdb'
-             AND T0007_2."subGyomuCode" = 'DBC'
-             AND T0007_2."codeShubetsu" = '0025'
-             AND T0007_2.code = rgdb."DbT7131KaigoServiceNaiyou"."tanisuSanteiTaniCode"
-        INNER JOIN   
-             rgdb."UzT0007Code" T0007_3
-             ON T0007_3."schemaName" = 'rgdb'
-             AND T0007_3."subGyomuCode" = 'DBC'
-             AND T0007_3."codeShubetsu" = '0055'
-             AND T0007_3.code = rgdb."DbT7131KaigoServiceNaiyou"."idouJiyuCode"
+            )         
         WHERE 
                 rgdb."DbT7131KaigoServiceNaiyou"."serviceShuruiCd" = #{サービス種類コード}
             AND rgdb."DbT7131KaigoServiceNaiyou"."serviceKoumokuCd" LIKE #{サービス項目コード}

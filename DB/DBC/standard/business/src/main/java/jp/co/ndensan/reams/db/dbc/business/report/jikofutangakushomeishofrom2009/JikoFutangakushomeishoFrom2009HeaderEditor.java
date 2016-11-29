@@ -43,6 +43,7 @@ public class JikoFutangakushomeishoFrom2009HeaderEditor implements IJikoFutangak
         source.hokenshaJoho = data.get保険者情報();
         source.tsuchibun2 = data.get通知文2();
         source.biko = data.get備考();
+        source.toiawasesaki = data.get問合せ先情報();
         KogakuGassanData 高額合算データ = data.get高額合算データ();
         if (高額合算データ.get被保険者氏名カナ() != null) {
             source.hihokenshaNameKana = 高額合算データ.get被保険者氏名カナ().value();
@@ -120,8 +121,8 @@ public class JikoFutangakushomeishoFrom2009HeaderEditor implements IJikoFutangak
         if (date == null || date.equals(FlexibleDate.MAX) || date.equals(FlexibleDate.MIN)) {
             return RString.EMPTY;
         }
-        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-                .fillType(FillType.ZERO).toDateString();
+        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
     }
 
     private RString パターン62(FlexibleYear 年度) {

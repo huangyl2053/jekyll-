@@ -86,6 +86,7 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
      */
     public void search(List<KyufuhigenmenjyouhouRegisterResult> list) {
         setDataGrid(list);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_HOZON, true);
     }
 
     /**
@@ -192,6 +193,9 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setVisible(false);
         div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(false);
         div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTN_HOZON, true);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTN_RESEARCH, true);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTN_RESEARCH_RESULT, true);
     }
 
     /**
@@ -222,7 +226,6 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
             div.getDataGridItiran().getDataSource().set(index, row);
         }
         back();
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTN_HOZON, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_HOZON, false);
     }
 

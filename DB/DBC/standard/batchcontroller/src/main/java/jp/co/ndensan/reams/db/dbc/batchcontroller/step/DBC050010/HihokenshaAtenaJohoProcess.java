@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -111,7 +110,7 @@ public class HihokenshaAtenaJohoProcess extends BatchProcessBase<HihokenshaAtena
         tempTableEntity.setGyoseikuCode(識別対象.get行政区画().getGyoseiku().getコード());
         tempTableEntity.setGyoseikuMei(識別対象.get行政区画().getGyoseiku().get名称());
         tempTableEntity.setYubinNo(識別対象.get住所().get郵便番号());
-        tempTableEntity.setJusho(new AtenaJusho(編集住所));
+        tempTableEntity.setJusho(編集住所);
         tempTableEntity.setShichosonCode(市町村コード);
 
         furikomiDetailTempTable.update(tempTableEntity);

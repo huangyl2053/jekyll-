@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB231001.InsKaifuTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB231001.InsKaigoNenkinTokuchoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB231001.InsTorikomiRirekiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB231001.InsTsuikaTempProcess;
@@ -27,28 +26,15 @@ public class DBB231001_TokuchoSeidokanIFSakusei
     @Override
     protected void defineFlow() {
         getParameter().setシステム日時(RDateTime.now());
-        executeStep(年金特徴回付情報の抽出);
         executeStep(介護特別徴収情報取込履歴追加);
         executeStep(介護保険年金特徴対象者情報追加用データ作成);
         executeStep(介護保険年金特徴対象者情報登録);
         executeStep(処理日付管理マスタ更新);
     }
-    private static final String 年金特徴回付情報の抽出 = "nenkinTokuChoKaifuJohoSelectProcess";
     private static final String 介護特別徴収情報取込履歴追加 = "tokuChoJohoTorikomiRirekiTuikaProcess";
     private static final String 介護保険年金特徴対象者情報追加用データ作成 = "tuikaDataSakuseiProcess";
     private static final String 介護保険年金特徴対象者情報登録 = "nenkinTokuChoTaishosyaJohoInsertProcess";
     private static final String 処理日付管理マスタ更新 = "shoriDateKanriUpdateProcess";
-
-    /**
-     * 年金特徴回付情報の抽出です。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(年金特徴回付情報の抽出)
-    protected IBatchFlowCommand nenkinTokuChoKaifuJohoSelectProcess() {
-        return loopBatch(InsKaifuTempProcess.class).arguments(getParameter().
-                toTokuchoSeidokanIFSakuseiDBUpdateProcessParameter()).define();
-    }
 
     /**
      * 介護特別徴収情報取込履歴追加です。

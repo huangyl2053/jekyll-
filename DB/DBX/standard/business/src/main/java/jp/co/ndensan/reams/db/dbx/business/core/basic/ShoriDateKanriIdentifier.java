@@ -13,8 +13,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 処理日付管理マスタの識別子です。
- *
- * @reamsid_L DBB-9999-022 xuxin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
@@ -50,5 +48,4 @@ public class ShoriDateKanriIdentifier implements Serializable {
         this.年度 = 年度;
         this.年度内連番 = 年度内連番;
     }
-
 }

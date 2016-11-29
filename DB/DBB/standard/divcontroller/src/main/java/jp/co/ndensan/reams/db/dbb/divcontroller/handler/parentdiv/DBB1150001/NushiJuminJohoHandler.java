@@ -228,7 +228,7 @@ public final class NushiJuminJohoHandler {
                 所得照会票発行対象世帯員.set送付先役所名２段目(役所_役場名の下段);
             }
             住所 = atesaki.get住所().concat(RString.FULL_SPACE).concat(atesaki.get番地().value());
-            if (整数_FIFTEEN <= 住所.length()) {
+            if (整数_FIFTEEN < 住所.length()) {
                 住所の上段 = 住所.substring(整数_ZERO, 整数_FIFTEEN);
                 所得照会票発行対象世帯員.set送付先住所１段目(住所の上段);
                 住所の下段 = 住所.substring(整数_FIFTEEN, 住所.length());
@@ -315,7 +315,7 @@ public final class NushiJuminJohoHandler {
                 役所_役場名の下段 = 役所_役場名;
             }
             住所 = atesaki.get住所().concat(RString.FULL_SPACE).concat(atesaki.get番地().value());
-            if (整数_FIFTEEN <= 住所.length()) {
+            if (整数_FIFTEEN < 住所.length()) {
                 住所の上段 = 住所.substring(整数_ZERO, 整数_FIFTEEN);
                 住所の下段 = 住所.substring(整数_FIFTEEN, 住所.length());
             }
@@ -822,7 +822,7 @@ public final class NushiJuminJohoHandler {
                 役所_役場名の下段 = 役所_役場名;
             }
             住所 = atesaki.get住所().concat(RString.FULL_SPACE).concat(atesaki.get番地().value());
-            if (整数_FIFTEEN <= 住所.length()) {
+            if (整数_FIFTEEN < 住所.length()) {
                 住所の上段 = 住所.substring(整数_ZERO, 整数_FIFTEEN);
                 住所の下段 = 住所.substring(整数_FIFTEEN, 住所.length());
             }

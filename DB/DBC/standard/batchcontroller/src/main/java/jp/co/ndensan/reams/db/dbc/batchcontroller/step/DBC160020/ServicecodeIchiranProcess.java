@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -290,17 +291,18 @@ public class ServicecodeIchiranProcess extends BatchKeyBreakBase<ServicecodeIchi
             }
         }
         if (entity.get介護サービス内容().getTanisuShikibetsuCode() != null && !entity.get介護サービス内容()
-                .getTanisuShikibetsuCode().isEmpty()) {
-            rStringList.add(entity.get介護サービス内容().getTanisuShikibetsuCode().getColumnValue());
+                .getTanisuShikibetsuCode().isEmpty()) {            
             if (!CODE_05.equals(entity.get介護サービス内容().getTanisuShikibetsuCode())) {
-                rStringList.add(new RString(entity.get介護サービス内容().getTaniSu()));
+                rStringList.add(new RString(entity.get介護サービス内容().getTaniSu()));    
             } else {
                 rStringList.add(RString.EMPTY);
             }
+            set単位(rStringList, entity.get介護サービス内容().getTanisuShikibetsuCode().getColumnValue());
         } else {
             rStringList.add(RString.EMPTY);
         }
         editorCsvPart2(entity, rStringList);
+        editorCsvPart3(entity, rStringList);
         return rStringList;
     }
 
@@ -310,14 +312,16 @@ public class ServicecodeIchiranProcess extends BatchKeyBreakBase<ServicecodeIchi
         } else {
             rStringList.add(RString.EMPTY);
         }
-        if (!RString.isNullOrEmpty(entity.get介護サービス内容().getMotoTaniShikibetsuCd())) {
-            rStringList.add(entity.get介護サービス内容().getMotoTaniShikibetsuCd());
+        if (RSTRING_1.equals(entity.get介護サービス内容().getKoshinUmuFoag())
+                && !RString.isNullOrEmpty(entity.get介護サービス内容().getMotoTaniShikibetsuCd())) {            
             if (!RSTRING_05.equals(entity.get介護サービス内容().getMotoTaniShikibetsuCd())) {
-                rStringList.add(entity.get介護サービス内容().getMotoTensu());
+                rStringList.add(entity.get介護サービス内容().getMotoTensu());    
             } else {
                 rStringList.add(RString.EMPTY);
             }
+            set単位(rStringList, entity.get介護サービス内容().getMotoTaniShikibetsuCd());
         } else {
+            rStringList.add(RString.EMPTY);
             rStringList.add(RString.EMPTY);
         }
         if (isRstring_1(entity.get介護サービス内容().getMotoGendogakuTaishogaiFlag())) {
@@ -325,31 +329,56 @@ public class ServicecodeIchiranProcess extends BatchKeyBreakBase<ServicecodeIchi
         } else {
             rStringList.add(RString.EMPTY);
         }
-        if (isRstring_1(entity.get介護サービス内容().getRiyosyaFutanTeiritsuTeigakuKubun())) {
+        if (!isRstring_1(entity.get介護サービス内容().getSogoJigyoServiceKubun())) {
+            rStringList.add(RString.EMPTY);
+        } else if (isRstring_1(entity.get介護サービス内容().getRiyosyaFutanTeiritsuTeigakuKubun())) {
             rStringList.add(定率);
         } else if (isRstring_2(entity.get介護サービス内容().getRiyosyaFutanTeiritsuTeigakuKubun())) {
             rStringList.add(定額);
         } else {
             rStringList.add(RString.EMPTY);
         }
-        rStringList.add(entity.get介護サービス内容().getKyufuRitsu());
-        rStringList.add(entity.get介護サービス内容().getRiyoshaFutanGaku());
-        if (isRstring_2(entity.get介護サービス内容().getTaishoJigyoJishiKubun())) {
+        if (!isRstring_1(entity.get介護サービス内容().getSogoJigyoServiceKubun())) {
+            rStringList.add(RString.EMPTY);
+        } else if (isRstring_2(entity.get介護サービス内容().getRiyosyaFutanTeiritsuTeigakuKubun())) {
+            rStringList.add(RString.EMPTY);
+        } else {
+            rStringList.add(entity.get介護サービス内容().getKyufuRitsu());
+        }
+        if (!isRstring_1(entity.get介護サービス内容().getSogoJigyoServiceKubun())) {
+            rStringList.add(RString.EMPTY);
+        } else if (isRstring_1(entity.get介護サービス内容().getRiyosyaFutanTeiritsuTeigakuKubun())) {
+            rStringList.add(RString.EMPTY);
+        } else {
+            rStringList.add(entity.get介護サービス内容().getRiyoshaFutanGaku());
+        }        
+    }
+    
+    private void editorCsvPart3(ServicecodeIchiranEntity entity, List<RString> rStringList) {
+        if (!isRstring_1(entity.get介護サービス内容().getSogoJigyoServiceKubun())) {
+            rStringList.add(RString.EMPTY);
+        } else if (isRstring_2(entity.get介護サービス内容().getTaishoJigyoJishiKubun())) {
             rStringList.add(HOSHI);
         } else {
             rStringList.add(RString.EMPTY);
         }
-        if (isRstring_2(entity.get介護サービス内容().getYoshien1JukyushaJishiKubun())) {
+        if (!isRstring_1(entity.get介護サービス内容().getSogoJigyoServiceKubun())) {
+            rStringList.add(RString.EMPTY);
+        } else if (isRstring_2(entity.get介護サービス内容().getYoshien1JukyushaJishiKubun())) {
             rStringList.add(HOSHI);
         } else {
             rStringList.add(RString.EMPTY);
         }
-        if (isRstring_2(entity.get介護サービス内容().getYoshien2JukyushaJishiKubun())) {
+        if (!isRstring_1(entity.get介護サービス内容().getSogoJigyoServiceKubun())) {
+            rStringList.add(RString.EMPTY);
+        } else if (isRstring_2(entity.get介護サービス内容().getYoshien2JukyushaJishiKubun())) {
             rStringList.add(HOSHI);
         } else {
             rStringList.add(RString.EMPTY);
         }
-        if (isRstring_2(entity.get介護サービス内容().getNijiyoboJigyoTaishaJishiKubunHigaito())) {
+        if (!isRstring_1(entity.get介護サービス内容().getSogoJigyoServiceKubun())) {
+            rStringList.add(RString.EMPTY);
+        } else if (isRstring_2(entity.get介護サービス内容().getNijiyoboJigyoTaishaJishiKubunHigaito())) {
             rStringList.add(HOSHI);
         } else {
             rStringList.add(RString.EMPTY);
@@ -364,6 +393,25 @@ public class ServicecodeIchiranProcess extends BatchKeyBreakBase<ServicecodeIchi
         } else {
             rStringList.add(RString.EMPTY);
         }
+    }
+    
+    private void set単位(List<RString> rStringList, RString code) {
+        if (!getCodeNameByCode(DBCCodeShubetsu.単位数識別コード.getコード(), code).isEmpty()) {
+            rStringList.add(getCodeNameByCode(DBCCodeShubetsu.単位数識別コード.getコード(), code));
+        } else {
+            rStringList.add(code);
+        }
+    }
+    
+    private RString getCodeNameByCode(CodeShubetsu codeShubetsu, RString code) {
+        if (code == null || code.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return CodeMaster.getCodeRyakusho(
+                SubGyomuCode.DBC介護給付,
+                codeShubetsu,
+                new Code(code),
+                FlexibleDate.getNowDate());
     }
 
     private List<RString> toBodyList(List<RString> bodyList) {

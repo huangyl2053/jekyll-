@@ -122,7 +122,7 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
         if (null != entity.get帳票用データ().get被保険者entity().getShikibetsuCode()) {
             source.shikibetsuCode = entity.get帳票用データ().get被保険者entity().getShikibetsuCode().value();
         }
-
+        setNonull改ページ(source);
         return source;
 
     }
@@ -183,6 +183,18 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
+    }
+
+    private void setNonull改ページ(GassanShikyugakuTorikomiIchiranSource source) {
+        source.yubinNo = source.yubinNo == null ? RString.EMPTY : source.yubinNo;
+        source.choikiCode = source.choikiCode == null ? RString.EMPTY : source.choikiCode;
+        source.gyoseikuCode = source.gyoseikuCode == null ? RString.EMPTY : source.gyoseikuCode;
+        source.shimei50onKana = source.shimei50onKana == null ? RString.EMPTY : source.shimei50onKana;
+        source.shichosonCode = source.shichosonCode == null ? RString.EMPTY : source.shichosonCode;
+        source.shoKisaiHokenshaNo = source.shoKisaiHokenshaNo == null ? RString.EMPTY : source.shoKisaiHokenshaNo;
+        source.hihokenshaNo = source.hihokenshaNo == null ? RString.EMPTY : source.hihokenshaNo;
+        source.listUpper_2 = source.listUpper_2 == null ? RString.EMPTY : source.listUpper_2;
+        source.listUpper_4 = source.listUpper_4 == null ? RString.EMPTY : source.listUpper_4;
     }
 
 }

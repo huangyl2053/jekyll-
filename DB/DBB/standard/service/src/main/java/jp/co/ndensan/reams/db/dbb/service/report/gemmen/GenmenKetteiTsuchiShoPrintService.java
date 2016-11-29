@@ -18,17 +18,20 @@ import jp.co.ndensan.reams.db.dbb.entity.report.gemmen.KaigoHokenryoGenmenKettei
 import jp.co.ndensan.reams.db.dbb.entity.report.gemmen.KaigoHokenryoGenmenKetteiTsuchishoYokoSource;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HyojiCodeResearcher;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.definition.core.kanendo.KanendoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.gyosekukaku.IGyoseiKukaku;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
@@ -167,7 +170,7 @@ public class GenmenKetteiTsuchiShoPrintService {
             RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder,
             ReportSourceWriter<KaigoHokenryoGenmenKetteiTsuchishoTateSource> reportSourceWriter) {
         List<KoseiZengoKiwariGaku> 更正前後期割額リスト = 更正前後期割額リストを生成(減免決定通知書情報);
-        List<RString> 随時リスト = 随時リストを生成();
+        List<RString> 随時リスト = 随時リストを生成(減免決定通知書情報);
         HyojiCodeResearcher researcher = new HyojiCodeResearcher();
         HyojiCodes 表示コード = null;
         if (isNotNull(減免決定通知書情報.get帳票制御共通())) {
@@ -209,7 +212,7 @@ public class GenmenKetteiTsuchiShoPrintService {
             RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder,
             ReportSourceWriter<KaigoHokenryoGenmenKetteiTsuchishoYokoSource> reportSourceWriter) {
         List<KoseiZengoKiwariGaku> 更正前後期割額リスト = 更正前後期割額リストを生成(減免決定通知書情報);
-        List<RString> 随時リスト = 随時リストを生成();
+        List<RString> 随時リスト = 随時リストを生成(減免決定通知書情報);
         HyojiCodeResearcher researcher = new HyojiCodeResearcher();
         HyojiCodes 表示コード = null;
         if (isNotNull(減免決定通知書情報.get帳票制御共通())) {
@@ -250,16 +253,24 @@ public class GenmenKetteiTsuchiShoPrintService {
     /**
      * 随時リストを生成する。
      *
+     * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @return List<RString>
      */
-    private List<RString> 随時リストを生成() {
+    private List<RString> 随時リストを生成(GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
         List<RString> 随時リスト = new ArrayList<>();
-        FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
-        KitsukiList 普徴期月リスト = fuchoKiUtil.get期月リスト();
+        KitsukiList 普徴期月リスト;
+        if (減免決定通知書情報.get年度区分() == GennenKanen.現年度) {
+            FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
+            普徴期月リスト = fuchoKiUtil.get期月リスト();
+        } else {
+            KanendoKiUtil kanendoKiUtil = new KanendoKiUtil();
+            普徴期月リスト = kanendoKiUtil.get期月リスト();
+        }
         for (int index = INDEX_ONE; index <= INDEX_FOURTEEN; index++) {
             Kitsuki 期月普徴 = 普徴期月リスト.get期の最初月(index);
             if (FuchokiJohoTsukiShoriKubun.随時.getName().equals(期月普徴.get月処理区分().getName())
-                    || FuchokiJohoTsukiShoriKubun.現年随時.getName().equals(期月普徴.get月処理区分().getName())) {
+                    || FuchokiJohoTsukiShoriKubun.現年随時.getName().equals(期月普徴.get月処理区分().getName())
+                    || KanendoTsukiShoriKubun.随時 == 期月普徴.get月処理区分()) {
                 随時リスト.add(FuchokiJohoTsukiShoriKubun.随時.getName());
             } else {
                 随時リスト.add(RString.EMPTY);
@@ -278,8 +289,15 @@ public class GenmenKetteiTsuchiShoPrintService {
         List<KoseiZengoKiwariGaku> 更正前後期割額リスト = new ArrayList<>();
         TokuchoKiUtil tokuchoKiUtil = new TokuchoKiUtil();
         KitsukiList 特徴期月リスト = tokuchoKiUtil.get期月リスト();
-        FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
-        KitsukiList 普徴期月リスト = fuchoKiUtil.get期月リスト();
+        KitsukiList 普徴期月リスト;
+        if (減免決定通知書情報.get年度区分() == GennenKanen.現年度) {
+            FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
+            普徴期月リスト = fuchoKiUtil.get期月リスト();
+        } else {
+            KanendoKiUtil kanendoKiUtil = new KanendoKiUtil();
+            普徴期月リスト = kanendoKiUtil.get期月リスト();
+        }
+
         for (int index = INDEX_ONE; index <= INDEX_FOURTEEN; index++) {
             Kitsuki 期月特徴 = 特徴期月リスト.get期の最初月(index);
             Kitsuki 期月普徴 = 普徴期月リスト.get期の最初月(index);

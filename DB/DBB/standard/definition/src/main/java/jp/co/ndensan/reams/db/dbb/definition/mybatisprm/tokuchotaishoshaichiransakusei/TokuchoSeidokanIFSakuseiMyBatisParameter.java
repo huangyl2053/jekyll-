@@ -24,6 +24,7 @@ public class TokuchoSeidokanIFSakuseiMyBatisParameter implements IMyBatisParamet
     private RString tsuchiNaiyoCode;
     private RString hosokuTsuki;
     private boolean 四月待機フラグ;
+    private RString selectSQL;
 
     /**
      * TokuchoSeidokanIFSakuseiMyBatisParameterのコンストラクタです。

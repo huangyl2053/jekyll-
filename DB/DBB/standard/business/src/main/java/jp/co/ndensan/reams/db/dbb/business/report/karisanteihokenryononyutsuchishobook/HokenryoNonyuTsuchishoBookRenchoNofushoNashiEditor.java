@@ -71,12 +71,15 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.ryoshushoTitleNendo5 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.ryoshushoTitleKi5 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.ryoshushoTitleTsuki5 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.ryoshushoJusho5 = 納付書共通.get住所();
-        source.ryoshushoKatagaki5 = 納付書共通.get方書();
-        source.ryoshushoHihokenshaName5 = 納付書共通.get納付者氏名();
-        if (納付書共通.get通知書番号() != null) {
-            source.ryoshushoTsuchishoNo5 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo5 = 納付書共通.get通知書番号().getColumnValue();
+        if (is納入通知書期情報がある) {
+            source.ryoshushoJusho5 = 納付書共通.get住所();
+            source.ryoshushoKatagaki5 = 納付書共通.get方書();
+            source.ryoshushoHihokenshaName5 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.ryoshushoTsuchishoNo5 = 納付書共通.get通知書番号().getColumnValue();
+                source.nofushoTsuchishoNo5 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            source.nofushoHihokenshaName5 = 納付書共通.get納付者氏名();
         }
         source.ryoshushoHokenryoGaku5 = is納入通知書期情報がある ? 納入通知書期情報.get領収証書納付額欄() : 星10;
         source.ryoshushoNokigen5 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
@@ -86,7 +89,6 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.nofushoTitleNendo5 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.nofushoTitleKi5 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofushoTitleTsuki5 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.nofushoHihokenshaName5 = 納付書共通.get納付者氏名();
         source.nofushoHokenryoGaku5 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofushoNokigen5 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofushoNofuIn5 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
@@ -109,14 +111,16 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.nofuzumishoOCR35 = is納入通知書期情報がある
                 ? null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT3) : 星12;
         source.nofuzumishoNofuGaku5 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
-        source.nofuzumishoJusho5 = 納付書共通.get住所();
-        source.nofuzumishoKatagaki5 = 納付書共通.get方書();
-        source.nofuzumishoHihokenshaName5 = 納付書共通.get納付者氏名();
-        if (納付書共通.get通知書番号() != null) {
-            source.nofuzumishoTsuchishoNo5 = 納付書共通.get通知書番号().getColumnValue();
-        }
-        if (納付書共通.get世帯コード() != null) {
-            source.nofuzumishoSetaiCode5 = 納付書共通.get世帯コード().getColumnValue();
+        if (is納入通知書期情報がある) {
+            source.nofuzumishoJusho5 = 納付書共通.get住所();
+            source.nofuzumishoKatagaki5 = 納付書共通.get方書();
+            source.nofuzumishoHihokenshaName5 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofuzumishoTsuchishoNo5 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            if (納付書共通.get世帯コード() != null) {
+                source.nofuzumishoSetaiCode5 = 納付書共通.get世帯コード().getColumnValue();
+            }
         }
         source.nofuzumishoNokigen5 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofuzumishoNofuIn5 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
@@ -132,12 +136,15 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.ryoshushoTitleNendo2 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.ryoshushoTitleKi2 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.ryoshushoTitleTsuki2 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.ryoshushoJusho2 = 納付書共通.get住所();
-        source.ryoshushoKatagaki2 = 納付書共通.get方書();
-        source.ryoshushoHihokenshaName2 = 納付書共通.get納付者氏名();
-        if (納付書共通.get通知書番号() != null) {
-            source.ryoshushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
+        if (is納入通知書期情報がある) {
+            source.ryoshushoJusho2 = 納付書共通.get住所();
+            source.ryoshushoKatagaki2 = 納付書共通.get方書();
+            source.ryoshushoHihokenshaName2 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.ryoshushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
+                source.nofushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            source.nofushoHihokenshaName2 = 納付書共通.get納付者氏名();
         }
         source.ryoshushoHokenryoGaku2 = is納入通知書期情報がある ? 納入通知書期情報.get領収証書納付額欄() : 星10;
         source.ryoshushoNokigen2 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
@@ -147,7 +154,6 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.nofushoTitleNendo2 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.nofushoTitleKi2 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofushoTitleTsuki2 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.nofushoHihokenshaName2 = 納付書共通.get納付者氏名();
         source.nofushoHokenryoGaku2 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofushoNokigen2 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         edit印字位置3_1(source, 納入通知書期情報, is納入通知書期情報がある);
@@ -166,21 +172,21 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
             source.nofuzumishoOCR12 = null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT1);
             source.nofuzumishoOCR22 = null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT2);
             source.nofuzumishoOCR32 = null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT3);
+            source.nofuzumishoJusho2 = 納付書共通.get住所();
+            source.nofuzumishoKatagaki2 = 納付書共通.get方書();
+            source.nofuzumishoHihokenshaName2 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofuzumishoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            if (納付書共通.get世帯コード() != null) {
+                source.nofuzumishoSetaiCode2 = 納付書共通.get世帯コード().getColumnValue();
+            }
         } else {
             source.nofuzumishoOCR12 = 星19;
             source.nofuzumishoOCR22 = 星20;
             source.nofuzumishoOCR32 = 星12;
         }
         source.nofuzumishoNofuGaku2 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
-        source.nofuzumishoJusho2 = 納付書共通.get住所();
-        source.nofuzumishoKatagaki2 = 納付書共通.get方書();
-        source.nofuzumishoHihokenshaName2 = 納付書共通.get納付者氏名();
-        if (納付書共通.get通知書番号() != null) {
-            source.nofuzumishoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
-        }
-        if (納付書共通.get世帯コード() != null) {
-            source.nofuzumishoSetaiCode2 = 納付書共通.get世帯コード().getColumnValue();
-        }
         source.nofuzumishoNokigen2 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofuzumishoNofuIn2 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
         source.nofuzumishoKozaCom2 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
@@ -195,12 +201,15 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.ryoshushoTitleNendo3 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.ryoshushoTitleKi3 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.ryoshushoTitleTsuki3 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.ryoshushoJusho3 = 納付書共通.get住所();
-        source.ryoshushoKatagaki3 = 納付書共通.get方書();
-        source.ryoshushoHihokenshaName3 = 納付書共通.get納付者氏名();
-        if (納付書共通.get通知書番号() != null) {
-            source.ryoshushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
+        if (is納入通知書期情報がある) {
+            source.ryoshushoJusho3 = 納付書共通.get住所();
+            source.ryoshushoKatagaki3 = 納付書共通.get方書();
+            source.ryoshushoHihokenshaName3 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.ryoshushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
+                source.nofushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            source.nofushoHihokenshaName3 = 納付書共通.get納付者氏名();
         }
         source.ryoshushoHokenryoGaku3 = is納入通知書期情報がある ? 納入通知書期情報.get領収証書納付額欄() : 星10;
         source.ryoshushoNokigen3 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
@@ -210,7 +219,6 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.nofushoTitleNendo3 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.nofushoTitleKi3 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofushoTitleTsuki3 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.nofushoHihokenshaName3 = 納付書共通.get納付者氏名();
         source.nofushoHokenryoGaku3 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofushoNokigen3 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofushoNofuIn3 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
@@ -232,14 +240,16 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.nofuzumishoOCR33 = is納入通知書期情報がある
                 ? null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT3) : 星12;
         source.nofuzumishoNofuGaku3 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
-        source.nofuzumishoJusho3 = 納付書共通.get住所();
-        source.nofuzumishoKatagaki3 = 納付書共通.get方書();
-        source.nofuzumishoHihokenshaName3 = 納付書共通.get納付者氏名();
-        if (納付書共通.get通知書番号() != null) {
-            source.nofuzumishoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
-        }
-        if (納付書共通.get世帯コード() != null) {
-            source.nofuzumishoSetaiCode3 = 納付書共通.get世帯コード().getColumnValue();
+        if (is納入通知書期情報がある) {
+            source.nofuzumishoJusho3 = 納付書共通.get住所();
+            source.nofuzumishoKatagaki3 = 納付書共通.get方書();
+            source.nofuzumishoHihokenshaName3 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofuzumishoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            if (納付書共通.get世帯コード() != null) {
+                source.nofuzumishoSetaiCode3 = 納付書共通.get世帯コード().getColumnValue();
+            }
         }
         source.nofuzumishoNokigen3 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofuzumishoNofuIn3 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
@@ -255,12 +265,15 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.ryoshushoTitleNendo4 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.ryoshushoTitleKi4 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.ryoshushoTitleTsuki4 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.ryoshushoJusho4 = 納付書共通.get住所();
-        source.ryoshushoKatagaki4 = 納付書共通.get方書();
-        source.ryoshushoHihokenshaName4 = 納付書共通.get納付者氏名();
-        if (納付書共通.get通知書番号() != null) {
-            source.ryoshushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
+        if (is納入通知書期情報がある) {
+            source.ryoshushoJusho4 = 納付書共通.get住所();
+            source.ryoshushoKatagaki4 = 納付書共通.get方書();
+            source.ryoshushoHihokenshaName4 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.ryoshushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
+                source.nofushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            source.nofushoHihokenshaName4 = 納付書共通.get納付者氏名();
         }
         source.ryoshushoHokenryoGaku4 = is納入通知書期情報がある ? 納入通知書期情報.get領収証書納付額欄() : 星10;
         source.ryoshushoNokigen4 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
@@ -270,7 +283,6 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.nofushoTitleNendo4 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.nofushoTitleKi4 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofushoTitleTsuki4 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.nofushoHihokenshaName4 = 納付書共通.get納付者氏名();
         source.nofushoHokenryoGaku4 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofushoNokigen4 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofushoNofuIn4 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
@@ -292,14 +304,16 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.nofuzumishoOCR34 = is納入通知書期情報がある
                 ? null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT3) : 星12;
         source.nofuzumishoNofuGaku4 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
-        source.nofuzumishoJusho4 = 納付書共通.get住所();
-        source.nofuzumishoKatagaki4 = 納付書共通.get方書();
-        source.nofuzumishoHihokenshaName4 = 納付書共通.get納付者氏名();
-        if (納付書共通.get通知書番号() != null) {
-            source.nofuzumishoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
-        }
-        if (納付書共通.get世帯コード() != null) {
-            source.nofuzumishoSetaiCode4 = 納付書共通.get世帯コード().getColumnValue();
+        if (is納入通知書期情報がある) {
+            source.nofuzumishoJusho4 = 納付書共通.get住所();
+            source.nofuzumishoKatagaki4 = 納付書共通.get方書();
+            source.nofuzumishoHihokenshaName4 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofuzumishoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            if (納付書共通.get世帯コード() != null) {
+                source.nofuzumishoSetaiCode4 = 納付書共通.get世帯コード().getColumnValue();
+            }
         }
         source.nofuzumishoNokigen4 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofuzumishoNofuIn4 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");

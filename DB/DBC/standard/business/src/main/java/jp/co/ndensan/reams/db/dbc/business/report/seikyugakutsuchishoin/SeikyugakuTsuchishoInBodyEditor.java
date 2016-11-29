@@ -75,7 +75,7 @@ public class SeikyugakuTsuchishoInBodyEditor implements ISeikyugakuTsuchishoInEd
             source.tesuryoSeikyugaku = doカンマ編集(帳票出力対象データ.get手数料_請求額());
             source.tesuryoRuikeigaku = doカンマ編集(帳票出力対象データ.get手数料_累計請求額());
         }
-
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -84,6 +84,18 @@ public class SeikyugakuTsuchishoInBodyEditor implements ISeikyugakuTsuchishoInEd
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(number, 0);
+    }
+
+    private void setPageBreakEmpty(SeikyugakuTsuchishoSource source) {
+        if (source.shoKisaiHokenshaNo == null) {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
+        if (source.kanCode == null) {
+            source.kanCode = RString.EMPTY;
+        }
+        if (source.kouCode == null) {
+            source.kouCode = RString.EMPTY;
+        }
     }
 
 }

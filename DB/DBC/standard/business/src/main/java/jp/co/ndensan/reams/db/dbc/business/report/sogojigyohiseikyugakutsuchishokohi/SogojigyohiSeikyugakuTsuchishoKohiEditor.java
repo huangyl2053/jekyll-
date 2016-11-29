@@ -77,7 +77,7 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
             source.listMeisai_3 = this.decimal_to_string(請求額通知書情報.get通常分_実日数());
         } else {
             source.listMeisai_1 = RString.FULL_SPACE.concat(請求額通知書情報.getサービス種類名());
-            source.listMeisai_3 = RString.EMPTY;
+            source.listMeisai_3 = this.decimal_to_string(請求額通知書情報.get通常分_実日数());
         }
         source.listMeisai_2 = this.decimal_to_string(請求額通知書情報.get通常分_件数());
         source.listMeisai_4 = this.decimal_to_string(請求額通知書情報.get通常分_単位数());
@@ -111,7 +111,20 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
             source.tesuryoSeikyugaku = this.decimal_to_string(請求額通知書情報.get手数料_請求額());
             source.tesuryoRuikeigaku = this.decimal_to_string(請求額通知書情報.get手数料_累計請求額());
         }
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(SogojigyohiSeikyugakuTsuchishoKohiSource source) {
+        if (source.kanCode == null) {
+            source.kanCode = RString.EMPTY;
+        }
+        if (source.kouCode == null) {
+            source.kouCode = RString.EMPTY;
+        }
+        if (source.kohiFutanshaNo == null) {
+            source.kohiFutanshaNo = RString.EMPTY;
+        }
     }
 
     /**

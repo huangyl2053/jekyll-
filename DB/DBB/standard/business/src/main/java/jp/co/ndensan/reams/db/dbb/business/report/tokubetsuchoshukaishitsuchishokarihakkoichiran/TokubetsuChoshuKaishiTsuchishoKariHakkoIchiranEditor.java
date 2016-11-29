@@ -137,6 +137,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
             source.listLower_10 = 仮徴収月8月;
         }
         set改頁(source);
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -334,7 +335,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         source.hihokenshaNo = 編集後仮算定通知書共通情報entity.get被保険者番号().getColumnValue();
         if (仮算定通知書情報.get徴収方法情報_更正後() != null) {
             source.nenkinCode = 仮算定通知書情報.get徴収方法情報_更正後().get本徴収_年金コード();
-        }    
+        }
         if (仮算定通知書情報.get納組情報() != null && 仮算定通知書情報.get納組情報().getNokumi() != null) {
             source.nokumiCode = 仮算定通知書情報.get納組情報().getNokumi().getNokumiCode();
         }
@@ -350,5 +351,68 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
             return RString.EMPTY;
         }
         return 項目;
+    }
+
+    private void setPageBreakEmpty(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.banchiCode == null) {
+            source.banchiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.chikuCode1 == null) {
+            source.chikuCode1 = RString.EMPTY;
+        }
+        if (source.chikuCode2 == null) {
+            source.chikuCode2 = RString.EMPTY;
+        }
+        if (source.chikuCode3 == null) {
+            source.chikuCode3 = RString.EMPTY;
+        }
+        if (source.listLower_2 == null) {
+            source.listLower_2 = RString.EMPTY;
+        }
+
+        setPageBreakEmpty_2(source);
+
+    }
+
+    private void setPageBreakEmpty_2(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
+        if (source.shikibetsuCode == null) {
+            source.shikibetsuCode = RString.EMPTY;
+        }
+        if (source.kanaMeisho == null) {
+            source.kanaMeisho = RString.EMPTY;
+        }
+        if (source.listUpper_5 == null) {
+            source.listUpper_5 = RString.EMPTY;
+        }
+        if (source.listUpper_6 == null) {
+            source.listUpper_6 = RString.EMPTY;
+        }
+        if (source.hokenshaNo == null) {
+            source.hokenshaNo = RString.EMPTY;
+        }
+        if (source.hihokenshaNo == null) {
+            source.hihokenshaNo = RString.EMPTY;
+        }
+        if (source.nenkinCode == null) {
+            source.nenkinCode = RString.EMPTY;
+        }
+        if (source.nokumiCode == null) {
+            source.nokumiCode = RString.EMPTY;
+        }
+        if (source.seihoFlag == null) {
+            source.seihoFlag = RString.EMPTY;
+        }
+        if (source.choteiJiyu == null) {
+            source.choteiJiyu = RString.EMPTY;
+        }
     }
 }

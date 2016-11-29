@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.SofuTorikomiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1211011.KogakuGassanShikyuKetteiTsuchishoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
@@ -96,17 +96,17 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, 高額合算決定通知書);
         RString 支払予定日印字有無 = get支払予定日印字有無();
         List<KeyValueDataSource> list = new ArrayList<>();
-        KeyValueDataSource 単票発行分を除く = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.単票発行分を除く.getコード(),
-                KaigoGassan_JikoFutanShomeisho_Insho.単票発行分を除く.get名称());
-        KeyValueDataSource 単票発行分も含める = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.単票発行分も含める.getコード(),
-                KaigoGassan_JikoFutanShomeisho_Insho.単票発行分も含める.get名称());
+        KeyValueDataSource 単票発行済を除く = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.単票発行済を除く.getコード(),
+                KaigoGassan_JikoFutanShomeisho_Insho.単票発行済を除く.get名称());
+        KeyValueDataSource 単票発行済も含める = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.単票発行済も含める.getコード(),
+                KaigoGassan_JikoFutanShomeisho_Insho.単票発行済も含める.get名称());
         KeyValueDataSource 未発行分のみ = new KeyValueDataSource(KaigoGassan_JikoFutanShomeisho_Insho.未発行分のみ.getコード(),
                 KaigoGassan_JikoFutanShomeisho_Insho.未発行分のみ.get名称());
-        list.add(単票発行分を除く);
-        list.add(単票発行分も含める);
+        list.add(単票発行済を除く);
+        list.add(単票発行済も含める);
         list.add(未発行分のみ);
         div.getDdlInsho().setDataSource(list);
-        div.getDdlInsho().setSelectedKey(KaigoGassan_JikoFutanShomeisho_Insho.単票発行分を除く.getコード());
+        div.getDdlInsho().setSelectedKey(KaigoGassan_JikoFutanShomeisho_Insho.単票発行済を除く.getコード());
         if (支払予定日印字有無.equals(NUM_0)) {
             div.getTxtShiharaiYoteiYMD().setDisplayNone(true);
         }
@@ -133,7 +133,7 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
             最新受取年月 = 国保連インターフェース管理.get処理年月();
         }
         市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
-        RString 処理名 = ShoriName.高額合算自己負担額計算登録.get名称();
+        RString 処理名 = ShoriName.高額合算支給決定通知書_一括.get名称();
         RString 処理枝番 = NUM_0001;
         ShoriDateKanri 処理日付管理マスタ = new ShoriDateKanriManager().get処理日付管理マスタ(SubGyomuCode.DBC介護給付,
                 市町村コード, 処理名, 処理枝番);
@@ -173,8 +173,8 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         div.getTxtUketoriYM().setVisible(true);
         div.getTxtZenkaiKaishiYMD().clearValue();
         div.getTxtZenkaiShuryoYMD().clearValue();
+        div.getTxtZenkaiKaishiYMD().setYmdKubunEnum(YmdKubun.年月);
         if (!(前回受取年月 == null || 前回受取年月.isEmpty())) {
-            div.getTxtZenkaiKaishiYMD().setYmdKubunEnum(YmdKubun.年月);
             div.getTxtZenkaiKaishiYMD().setValue(new RDate(前回受取年月.toString()));
         }
         div.getLblKara().setVisible(false);
@@ -219,10 +219,10 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         }
         div.getTxtUketoriYM().setDisabled(true);
         div.getTxtShinseiYMD().setDisabled(false);
-        if (前回申請年月終了 == null || 前回申請年月終了.isEmpty()) {
+        if (前回申請年月開始 == null || 前回申請年月開始.isEmpty()) {
             div.getTxtShinseiYMD().setFromValue(null);
         } else {
-            div.getTxtShinseiYMD().setFromValue(new RDate(前回申請年月終了.toString()).plusDay(1));
+            div.getTxtShinseiYMD().setFromValue(new RDate(前回申請年月開始.toString()).plusDay(1));
         }
         RDate システム日付 = RDate.getNowDate();
         div.getTxtShinseiYMD().setToValue(システム日付);
@@ -262,10 +262,10 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         div.getTxtShinseiYMD().setDisabled(true);
         div.getTxtKetteiYMD().setDisabled(false);
         div.getRadKetteiYMD().setSelectedKey(KEY_0);
-        if (前回決定年月終了 == null || 前回決定年月終了.isEmpty()) {
+        if (前回決定年月開始 == null || 前回決定年月開始.isEmpty()) {
             div.getTxtKetteiYMD().setFromValue(null);
         } else {
-            div.getTxtKetteiYMD().setFromValue(new RDate(前回決定年月終了.toString()).plusDay(1));
+            div.getTxtKetteiYMD().setFromValue(new RDate(前回決定年月開始.toString()).plusDay(1));
         }
         RDate システム日付 = RDate.getNowDate();
         div.getTxtKetteiYMD().setToValue(システム日付);

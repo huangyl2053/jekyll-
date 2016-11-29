@@ -235,6 +235,15 @@ public class KogakuShikyuHanteiKekka
     }
 
     /**
+     * 決定通知リアル発行区分を返します。
+     *
+     * @return 決定通知リアル発行区分
+     */
+    public RString get決定通知リアル発行区分() {
+        return entity.getKetteiTsuchiHakkoKubun();
+    }
+
+    /**
      * {@link DbT3057KogakuShikyuHanteiKekkaEntity}のクローンを返します。
      *
      * @return {@link DbT3057KogakuShikyuHanteiKekkaEntity}のクローン

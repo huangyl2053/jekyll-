@@ -137,9 +137,9 @@
         <result property="tokuchoSeidoCode" column="Trail_tokuchoSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sakuseiYMD" column="Trail_sakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="recordKensu" column="Trail_recordKensu" />
-        <result property="goukeiKingaku1" column="Joho_kakushuKingaku1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="goukeiKingaku1" column="Joho_kakushuKingaku2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="goukeiKingaku1" column="Joho_kakushuKingaku3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="goukeiKingaku1" column="Trail_goukeiKingaku1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="goukeiKingaku2" column="Trail_goukeiKingaku2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="goukeiKingaku3" column="Trail_goukeiKingaku3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="yobi2" column="Trail_yobi2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     

@@ -38,6 +38,8 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiListParameter extends BatchParamet
     private RString 被保険者番号;
     @BatchParameter(key = "事業者番号", name = "事業者番号")
     private RString 事業者番号;
+    @BatchParameter(key = "事業者名称", name = "事業者名称")
+    private RString 事業者名称;
     @BatchParameter(key = "利用実績区分", name = "利用実績区分")
     private RString 利用実績区分;
     @BatchParameter(key = "居宅利用率指定", name = "居宅利用率指定")

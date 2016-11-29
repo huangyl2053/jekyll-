@@ -135,12 +135,12 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor implements IH
             source.cover_kaisanMeisaishoNofuZumiGaku
                     = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴納付済額_未到来期含む(), 0);
             source.cover_keisanMeisaishoKongoNofuGaku
-                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に(), 0);
+                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に(), 0);
         } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(納付額算出方法)) {
             source.cover_kaisanMeisaishoNofuZumiGaku
                     = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴既に納付すべき額(), 0);
             source.cover_keisanMeisaishoKongoNofuGaku
-                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に(), 0);
+                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に(), 0);
         }
         source.cover_yen1 = EN;
         source.cover_yen2 = EN;
@@ -279,8 +279,6 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor implements IH
                 source.cover_shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
                 source.cover_shimeiText = sofubutsuAtesakiSource.shimeiText;
                 source.cover_yubinNo = sofubutsuAtesakiSource.yubinNo;
-                // TODO 世帯主名 setainusimei 共通部品から設定する
-                // TODO 様方 samaKata 共通部品から設定する
             }
         }
     }

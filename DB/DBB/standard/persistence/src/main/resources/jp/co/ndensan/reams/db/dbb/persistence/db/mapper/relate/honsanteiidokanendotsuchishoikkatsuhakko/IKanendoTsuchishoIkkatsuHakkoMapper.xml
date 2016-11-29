@@ -1025,7 +1025,7 @@
                 年金特徴回付情報."dtKojinNo" AS "ueT0511after_dtKojinNo"
         FROM 
           "DbT2015KeisangoJoho" AS 計算後情報
-          INNER JOIN 
+          LEFT JOIN 
               rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
@@ -2226,7 +2226,7 @@
             年金特徴回付情報."dtYobi4Juminzei" AS "ueT0511after_dtYobi4Juminzei",
             年金特徴回付情報."dtKojinNo" AS "ueT0511after_dtKojinNo"
         FROM 
-          "DbT2015KeisangoJoho" AS 計算後情報
+          "DbT2015KeisangoJohoTemp" AS 計算後情報
         LEFT JOIN 
               rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
@@ -3429,7 +3429,7 @@
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
             A.*,
-            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "ShikibetsuTaisho_banchiCode1"
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "IdoFukaJohoTemp" AS A
         WHERE
@@ -3454,8 +3454,8 @@
     <select id="select納入通知書発行後異動者" resultMap="resultMap_IdoFukaJohoTemp"
             parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
-            A.*，
-            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "ShikibetsuTaisho_banchiCode1"
+            DISTINCT A.*,
+            "Atesaki_banchiCode1"||"Atesaki_banchiCode2"||"Atesaki_banchiCode3"||"Atesaki_banchiCode4" as "Atesaki_banchiCode"
         FROM
             "IdoFukaJohoTemp" AS A
         WHERE

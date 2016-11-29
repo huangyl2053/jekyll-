@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushakyufujissekidaic
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoData;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoReportSource;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaTmpMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -42,11 +43,16 @@ public class JukyushaKyufuJissekidaichoProcess extends BatchProcessBase<Jukyusha
     private ReportSourceWriter<JukyushaKyufuJissekidaichoReportSource> reportSourceWriter;
     private JukyushaKyufujissekiDaichoProcessParameter parameter;
     private ShutsuryokujunRelateEntity 出力順entity;
+    private IJukyushaTmpMapper mapper;
     private boolean flag = false;
+    private int index = 0;
+    private int pageCnt = 0;
 
     @Override
     protected void initialize() {
         出力順entity = ReportUtil.get出力順情報(JukyushaKyufuDaichoData.ShutsuryokujunEnum.class, SubGyomuCode.DBC介護給付, ID, parameter.get出力順ID());
+        mapper = getMapper(IJukyushaTmpMapper.class);
+        pageCnt = mapper.get帳票データCount(parameter.toJukyushaKyufujissekiDaichoMybatisParameter(出力順entity.get出力順OrderBy()));
     }
 
     @Override
@@ -64,6 +70,10 @@ public class JukyushaKyufuJissekidaichoProcess extends BatchProcessBase<Jukyusha
     @Override
     protected void process(JukyushaKyufuJissekidaichoData entity) {
         flag = true;
+        index++;
+        entity.set被保険者毎ページ数(new RString(index));
+        entity.set被保険者毎総ページ数(new RString(pageCnt));
+        entity.setページ数(new RString(pageCnt));
         JukyushaKyufuJissekidaichoReport report = new JukyushaKyufuJissekidaichoReport(entity);
         report.writeBy(reportSourceWriter);
     }

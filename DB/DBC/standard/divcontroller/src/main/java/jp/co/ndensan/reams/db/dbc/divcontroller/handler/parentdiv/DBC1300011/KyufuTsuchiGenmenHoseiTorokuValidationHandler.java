@@ -3,24 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1300011;
 
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1300011.KyufuTsuchiGenmenHoseiTorokuDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *画面設計_DBCMN71001_給付費通知減免情報補正登録のValidationHandlerです。
- * 
+ * 画面設計_DBCMN71001_給付費通知減免情報補正登録のValidationHandlerです。
+ *
  * @reamsid_L DBC-2260-010 guyan
  */
 public class KyufuTsuchiGenmenHoseiTorokuValidationHandler {
-    
+
     private final KyufuTsuchiGenmenHoseiTorokuDiv div;
-    
+
     /**
      * コンストラクタです。
      *
@@ -29,10 +33,10 @@ public class KyufuTsuchiGenmenHoseiTorokuValidationHandler {
     public KyufuTsuchiGenmenHoseiTorokuValidationHandler(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         this.div = div;
     }
-    
+
     /**
-     *「検索する」ボタン押下時のチェックです。
-     * 
+     * 「検索する」ボタン押下時のチェックです。
+     *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validate検索する() {
@@ -45,10 +49,10 @@ public class KyufuTsuchiGenmenHoseiTorokuValidationHandler {
                 .add(KyufuTsuchiGenmenHoseiTorokuMessage.最大取得件数不正, div.getKyufuTsuchiGenmenHoseiTorokuSearch().getTextBoxNumKensuu())
                 .build();
     }
-    
+
     /**
-     *事業者入力のチェックです。
-     * 
+     * 事業者入力のチェックです。
+     *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validate事業者入力() {
@@ -60,15 +64,41 @@ public class KyufuTsuchiGenmenHoseiTorokuValidationHandler {
         return new ValidationDictionaryBuilder().add(KyufuTsuchiGenmenHoseiTorokuMessage.事業者入力)
                 .build();
     }
-    
+
     /**
-     *「補正情報を確定する」ボタン
-     * 
+     * 「補正情報を確定する」ボタン
+     *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validate確定する() {
         IValidationMessages message = new KyufuTsuchiGenmenHoseiTorokuValidator(div).validate確定する();
         return create確定するDictionary().check(message);
+    }
+
+    /**
+     * 事業者_サービス種類_組み合わせ不正メッセージを取得します。
+     *
+     * @return IValidationMessages
+     */
+    public ValidationMessageControlPairs get事業者_サービス種類_組み合わせ不正メッセージ() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(
+                new KyufuTsuchiGenmenHoseiTorokuValidationHandler.IdocheckMessages(DbcErrorMessages.事業者_サービス種類_組み合わせ不正)));
+        return validPairs;
+    }
+
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 
     private ValidationDictionary create確定するDictionary() {
@@ -81,5 +111,5 @@ public class KyufuTsuchiGenmenHoseiTorokuValidationHandler {
                 .add(KyufuTsuchiGenmenHoseiTorokuMessage.サービス費用合計入力, div.getKyufuTsuchiGenmenHoseiTorokuDetail().getTextBoxNumHiyouGoukei())
                 .build();
     }
-    
+
 }

@@ -40,7 +40,6 @@ public class KokuhorenKyoutsuuFileGetManager {
     private static final RString MSG_ファイル格納フォルダ名 = new RString("ファイル格納フォルダ名");
     private static final RString PREFIX = new RString("1\\_");
     private static final RString パーセント = new RString("%");
-    private static final RString FILTER = new RString("1_*.csv");
 
     /**
      * 国保連情報取込共通処理（ファイル取得）のコンストラクタ。

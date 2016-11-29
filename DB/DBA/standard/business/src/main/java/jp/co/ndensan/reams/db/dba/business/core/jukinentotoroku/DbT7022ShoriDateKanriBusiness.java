@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**

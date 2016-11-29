@@ -8,19 +8,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4000011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * DBC4000011Main のクラスファイル
- *
- * @reamsid_L DBC-3320-010 chenhui
+ * DBC4000011Main のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class DBC4000011MainDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -114,7 +114,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnSearch(Button btnSearch) {
+    public void  setBtnSearch(Button btnSearch) {
         this.getKensakuJoken().setBtnSearch(btnSearch);
     }
 
@@ -129,7 +129,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnTsuika(Button btnTsuika) {
+    public void  setBtnTsuika(Button btnTsuika) {
         this.getServiceNaiyoIchiran().setBtnTsuika(btnTsuika);
     }
 
@@ -139,7 +139,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgService(DataGrid<dgService_Row> dgService) {
+    public void  setDgService(DataGrid<dgService_Row> dgService) {
         this.getServiceNaiyoIchiran().setDgService(dgService);
     }
 
@@ -149,7 +149,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtServiceMeisho(TextBox txtServiceMeisho) {
+    public void  setTxtServiceMeisho(TextBox txtServiceMeisho) {
         this.getServiceShosai().setTxtServiceMeisho(txtServiceMeisho);
     }
 
@@ -159,7 +159,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtServiceNameRyaku(TextBox txtServiceNameRyaku) {
+    public void  setTxtServiceNameRyaku(TextBox txtServiceNameRyaku) {
         this.getServiceShosai().setTxtServiceNameRyaku(txtServiceNameRyaku);
     }
 
@@ -169,7 +169,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTeikyoKikanYM(TextBoxDateRange txtTeikyoKikanYM) {
+    public void  setTxtTeikyoKikanYM(TextBoxDateRange txtTeikyoKikanYM) {
         this.getServiceShosai().setTxtTeikyoKikanYM(txtTeikyoKikanYM);
     }
 
@@ -179,7 +179,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSpc01(Space spc01) {
+    public void  setSpc01(Space spc01) {
         this.getServiceShosai().setSpc01(spc01);
     }
 
@@ -189,7 +189,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTani(TextBoxNum txtTani) {
+    public void  setTxtTani(TextBoxNum txtTani) {
         this.getServiceShosai().setTxtTani(txtTani);
     }
 
@@ -199,7 +199,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlTanisuShikibetsu(DropDownList ddlTanisuShikibetsu) {
+    public void  setDdlTanisuShikibetsu(DropDownList ddlTanisuShikibetsu) {
         this.getServiceShosai().setDdlTanisuShikibetsu(ddlTanisuShikibetsu);
     }
 
@@ -209,7 +209,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlIdouJiyuCode(DropDownList ddlIdouJiyuCode) {
+    public void  setDdlIdouJiyuCode(DropDownList ddlIdouJiyuCode) {
         this.getServiceShosai().setDdlIdouJiyuCode(ddlIdouJiyuCode);
     }
 
@@ -219,7 +219,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRiyoshaFutan(RiyoshaFutanDiv RiyoshaFutan) {
+    public void  setRiyoshaFutan(RiyoshaFutanDiv RiyoshaFutan) {
         this.getServiceShosai().setRiyoshaFutan(RiyoshaFutan);
     }
 
@@ -229,18 +229,18 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRiyoshaFutanLeft(RiyoshaFutanLeftDiv RiyoshaFutanLeft) {
+    public void  setRiyoshaFutanLeft(RiyoshaFutanLeftDiv RiyoshaFutanLeft) {
         this.getServiceShosai().getRiyoshaFutan().setRiyoshaFutanLeft(RiyoshaFutanLeft);
     }
 
     @JsonIgnore
-    public RadioButton getRadTeiritsuOrTeigaku() {
-        return this.getServiceShosai().getRiyoshaFutan().getRiyoshaFutanLeft().getRadTeiritsuOrTeigaku();
+    public SegmentedControl getSegTeiritsuOrTeigaku() {
+        return this.getServiceShosai().getRiyoshaFutan().getRiyoshaFutanLeft().getSegTeiritsuOrTeigaku();
     }
 
     @JsonIgnore
-    public void setRadTeiritsuOrTeigaku(RadioButton radTeiritsuOrTeigaku) {
-        this.getServiceShosai().getRiyoshaFutan().getRiyoshaFutanLeft().setRadTeiritsuOrTeigaku(radTeiritsuOrTeigaku);
+    public void  setSegTeiritsuOrTeigaku(SegmentedControl segTeiritsuOrTeigaku) {
+        this.getServiceShosai().getRiyoshaFutan().getRiyoshaFutanLeft().setSegTeiritsuOrTeigaku(segTeiritsuOrTeigaku);
     }
 
     @JsonIgnore
@@ -249,7 +249,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKyufuritsu(TextBoxNum txtKyufuritsu) {
+    public void  setTxtKyufuritsu(TextBoxNum txtKyufuritsu) {
         this.getServiceShosai().getRiyoshaFutan().getRiyoshaFutanLeft().setTxtKyufuritsu(txtKyufuritsu);
     }
 
@@ -259,7 +259,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutangaku(TextBoxNum txtRiyoshaFutangaku) {
+    public void  setTxtRiyoshaFutangaku(TextBoxNum txtRiyoshaFutangaku) {
         this.getServiceShosai().getRiyoshaFutan().getRiyoshaFutanLeft().setTxtRiyoshaFutangaku(txtRiyoshaFutangaku);
     }
 
@@ -269,7 +269,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRiyoshaFutanRight(RiyoshaFutanRightDiv RiyoshaFutanRight) {
+    public void  setRiyoshaFutanRight(RiyoshaFutanRightDiv RiyoshaFutanRight) {
         this.getServiceShosai().getRiyoshaFutan().setRiyoshaFutanRight(RiyoshaFutanRight);
     }
 
@@ -279,7 +279,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlTanisuSanteiTaniCode(DropDownList ddlTanisuSanteiTaniCode) {
+    public void  setDdlTanisuSanteiTaniCode(DropDownList ddlTanisuSanteiTaniCode) {
         this.getServiceShosai().getRiyoshaFutan().getRiyoshaFutanRight().setDdlTanisuSanteiTaniCode(ddlTanisuSanteiTaniCode);
     }
 
@@ -289,7 +289,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSeigenNissuKaisu(TextBoxNum txtSeigenNissuKaisu) {
+    public void  setTxtSeigenNissuKaisu(TextBoxNum txtSeigenNissuKaisu) {
         this.getServiceShosai().getRiyoshaFutan().getRiyoshaFutanRight().setTxtSeigenNissuKaisu(txtSeigenNissuKaisu);
     }
 
@@ -299,7 +299,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlSanteiKaisuSeigenKikanKubun(DropDownList ddlSanteiKaisuSeigenKikanKubun) {
+    public void  setDdlSanteiKaisuSeigenKikanKubun(DropDownList ddlSanteiKaisuSeigenKikanKubun) {
         this.getServiceShosai().getRiyoshaFutan().getRiyoshaFutanRight().setDdlSanteiKaisuSeigenKikanKubun(ddlSanteiKaisuSeigenKikanKubun);
     }
 
@@ -309,7 +309,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setJisshiKubun(JisshiKubunDiv JisshiKubun) {
+    public void  setJisshiKubun(JisshiKubunDiv JisshiKubun) {
         this.getServiceShosai().setJisshiKubun(JisshiKubun);
     }
 
@@ -319,7 +319,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSegTaishoJigyoJishiKubun(SegmentedControl segTaishoJigyoJishiKubun) {
+    public void  setSegTaishoJigyoJishiKubun(SegmentedControl segTaishoJigyoJishiKubun) {
         this.getServiceShosai().getJisshiKubun().setSegTaishoJigyoJishiKubun(segTaishoJigyoJishiKubun);
     }
 
@@ -329,7 +329,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSegYoshien1(SegmentedControl segYoshien1) {
+    public void  setSegYoshien1(SegmentedControl segYoshien1) {
         this.getServiceShosai().getJisshiKubun().setSegYoshien1(segYoshien1);
     }
 
@@ -339,7 +339,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSegYoshien2(SegmentedControl segYoshien2) {
+    public void  setSegYoshien2(SegmentedControl segYoshien2) {
         this.getServiceShosai().getJisshiKubun().setSegYoshien2(segYoshien2);
     }
 
@@ -349,7 +349,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSegNijiYobosha(SegmentedControl segNijiYobosha) {
+    public void  setSegNijiYobosha(SegmentedControl segNijiYobosha) {
         this.getServiceShosai().getJisshiKubun().setSegNijiYobosha(segNijiYobosha);
     }
 
@@ -359,7 +359,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setSpc02(Space spc02) {
+    public void  setSpc02(Space spc02) {
         this.getServiceShosai().setSpc02(spc02);
     }
 
@@ -369,7 +369,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setKakushuKubun(KakushuKubunDiv KakushuKubun) {
+    public void  setKakushuKubun(KakushuKubunDiv KakushuKubun) {
         this.getServiceShosai().setKakushuKubun(KakushuKubun);
     }
 
@@ -379,7 +379,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkGendogakuTaishogai(CheckBoxList chkGendogakuTaishogai) {
+    public void  setChkGendogakuTaishogai(CheckBoxList chkGendogakuTaishogai) {
         this.getServiceShosai().getKakushuKubun().setChkGendogakuTaishogai(chkGendogakuTaishogai);
     }
 
@@ -389,7 +389,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkGaibuService(CheckBoxList chkGaibuService) {
+    public void  setChkGaibuService(CheckBoxList chkGaibuService) {
         this.getServiceShosai().getKakushuKubun().setChkGaibuService(chkGaibuService);
     }
 
@@ -399,7 +399,7 @@ public class DBC4000011MainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkTokubetsuChiikiKasn(CheckBoxList chkTokubetsuChiikiKasn) {
+    public void  setChkTokubetsuChiikiKasn(CheckBoxList chkTokubetsuChiikiKasn) {
         this.getServiceShosai().getKakushuKubun().setChkTokubetsuChiikiKasn(chkTokubetsuChiikiKasn);
     }
 

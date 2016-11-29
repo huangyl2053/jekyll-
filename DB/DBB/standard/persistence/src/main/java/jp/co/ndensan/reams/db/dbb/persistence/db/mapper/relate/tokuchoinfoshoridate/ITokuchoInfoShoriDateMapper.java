@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoinfoshori
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoinfoshoridate.TokuchoInfoShoriDateParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 広域職員の処理日付取得クラスです。

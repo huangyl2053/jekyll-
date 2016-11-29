@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRe
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.KaigoJuminhyoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiDateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;

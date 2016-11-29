@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiJokyoKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKbn;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1170011.JikoFutangakuShomeishoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.jikofutangakushomeisho.JikoFutangakushomeishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -57,6 +56,7 @@ public class JikoFutangakushomeishoHandler {
     private Map<FlexibleYear, List<KogakuGassanNendoKey>> 年度毎キー = new HashMap<>();
     private FlexibleYear 対象年度 = FlexibleYear.EMPTY;
     private List<KogakuGassanNendoKey> kogakuGassanNendoKeyList;
+    private static final ReportId 帳票分類ID = new ReportId("DBC100050_JikoFutangakushomeisho");
 
     /**
      * コンストラクタです。
@@ -261,7 +261,7 @@ public class JikoFutangakushomeishoHandler {
         JikoFutangakushomeishoData 高額合算データ = new JikoFutangakushomeishoData();
         KogakuGassanData kogakuGassanData = 高額合算申請書.get高額合算情報(parameter);
         高額合算データ.set高額合算データ(kogakuGassanData);
-        高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(ReportIdDBC.DBC100050.getReportId()));
+        // TODO 一時コメント 高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(帳票分類ID));
 
         高額合算データ.set文書番号(高額合算申請書.get文書番号(メニューID));
         高額合算データ.setタイトル(高額合算申請書.getタイトル(メニューID));

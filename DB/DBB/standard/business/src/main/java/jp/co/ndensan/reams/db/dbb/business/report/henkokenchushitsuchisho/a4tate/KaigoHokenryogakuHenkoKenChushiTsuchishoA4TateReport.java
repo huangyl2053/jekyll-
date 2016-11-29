@@ -119,11 +119,19 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReport
     }
 
     private boolean is普徴のみ(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
-        return !編集後本算定通知書共通情報.get更正後().get徴収方法().contains("特別徴収");
+        RString 徴収方法 = 編集後本算定通知書共通情報.get更正後().get徴収方法();
+        if (RString.isNullOrEmpty(徴収方法)) {
+            return false;
+        }
+        return !徴収方法.contains("特別徴収");
     }
 
     private boolean is特徴のみ(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
-        return !編集後本算定通知書共通情報.get更正後().get徴収方法().contains("普通徴収");
+        RString 徴収方法 = 編集後本算定通知書共通情報.get更正後().get徴収方法();
+        if (RString.isNullOrEmpty(徴収方法)) {
+            return false;
+        }
+        return !徴収方法.contains("普通徴収");
     }
 
     private RString edit金額(Decimal 金額, boolean is現年度) {

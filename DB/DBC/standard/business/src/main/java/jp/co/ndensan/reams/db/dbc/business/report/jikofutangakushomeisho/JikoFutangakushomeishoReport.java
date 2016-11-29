@@ -43,12 +43,11 @@ public class JikoFutangakushomeishoReport extends Report<JikoFutangakushomeishoR
             JikoFutangakushomeishoHeaderEditor headerEditor = new JikoFutangakushomeishoHeaderEditor(data);
             CompSofubutsuAtesakiEditor atesakiEditor = new CompSofubutsuAtesakiEditor(data.get宛先情報());
             CompNinshoshaEditor compNinshoshaEditor = new CompNinshoshaEditor(data.get認証者情報());
-            CompKaigoToiawasesakiEditor toiawasesakiEditor = new CompKaigoToiawasesakiEditor(data.get問合せ先情報());
             IJikoFutangakushomeishoBuilder builder = new JikoFutangakushomeishoBuilder(headerEditor,
                     bodyEditor,
                     atesakiEditor,
-                    compNinshoshaEditor,
-                    toiawasesakiEditor);
+                    compNinshoshaEditor
+            );
             reportSourceWriter.writeLine(builder);
         }
 
@@ -58,12 +57,11 @@ public class JikoFutangakushomeishoReport extends Report<JikoFutangakushomeishoR
         JikoFutangakushomeishoHeaderEditor headerEditor = new JikoFutangakushomeishoHeaderEditor(data);
         CompSofubutsuAtesakiEditor atesakiEditor = new CompSofubutsuAtesakiEditor(data.get宛先情報());
         CompNinshoshaEditor compNinshoshaEditor = new CompNinshoshaEditor(data.get認証者情報());
-        CompKaigoToiawasesakiEditor toiawasesakiEditor = new CompKaigoToiawasesakiEditor(data.get問合せ先情報());
         IJikoFutangakushomeishoBuilder builder = new JikoFutangakushomeishoBuilder(headerEditor,
                 bodyEditor,
                 atesakiEditor,
-                compNinshoshaEditor,
-                toiawasesakiEditor);
+                compNinshoshaEditor
+        );
         reportSourceWriter.writeLine(builder);
     }
 }

@@ -622,7 +622,7 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
             }
         } else if (TsuchiNaiyoCodeType.特別徴収結果通知.get通知内容コード().equals(entity.getTsuchiNaiyoCode())) {
             合計金額 = 合計金額.add(entity.getKakushuKingaku1());
-            if (!RSTRING_00.equals(entity.getKakushuKubun()) && RSTRING_10.equals(entity.getKakushuKubun())) {
+            if (!RSTRING_00.equals(entity.getKakushuKubun()) && !RSTRING_10.equals(entity.getKakushuKubun())) {
                 停止数 = 停止数 + 1;
                 停止金額 = 停止金額.add(entity.getKakushuKingaku1());
             }

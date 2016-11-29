@@ -50,7 +50,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private static final RString 照会モード = new RString("照会モード");
     private static final RString 修正モード_TWO = new RString("修正モード2");
     private static final RString 修正モード_THREE = new RString("修正モード3");
-    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");

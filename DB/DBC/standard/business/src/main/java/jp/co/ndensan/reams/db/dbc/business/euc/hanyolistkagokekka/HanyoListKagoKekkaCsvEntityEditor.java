@@ -259,6 +259,7 @@ public class HanyoListKagoKekkaCsvEntityEditor {
             csvEntity.set二次予防決定日(format日付項目(entity.get二次予防事業対象情報().getKetteiYMD()));
         }
         edit_part2(csvEntity);
+        edit_part3(csvEntity);
         return csvEntity;
     }
 
@@ -291,6 +292,9 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         if (単位数 != null) {
             csvEntity.set単位数(new RString(単位数.toString()));
         }
+    }
+
+    private void edit_part3(HanyoListKagoKekkaCsvEntity csvEntity) {
         Decimal 保険者負担額 = entity.get過誤決定明細().getHokenshaFutangaku();
         if (保険者負担額 != null) {
             csvEntity.set保険者負担額(new RString(保険者負担額.toString()));
@@ -305,8 +309,14 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         if (entity.get受給者台帳() != null) {
             csvEntity.set受給申請事由(get受給申請事由(entity.get受給者台帳().getJukyuShinseiJiyu().getColumnValue()));
             csvEntity.set受給申請日(format日付項目(entity.get受給者台帳().getJukyuShinseiYMD()));
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
-                    toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+            if (entity.get受給者台帳() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode().isEmpty()) {
+                csvEntity.set受給要介護度(RString.EMPTY);
+            } else {
+                csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
+                        toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+            }
             csvEntity.set受給認定開始日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanKaishiYMD()));
             csvEntity.set受給認定終了日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanShuryoYMD()));
             csvEntity.set受給認定日(format日付項目(entity.get受給者台帳().getNinteiYMD()));
@@ -424,6 +434,7 @@ public class HanyoListKagoKekkaCsvEntityEditor {
             csvEntity.set二次予防決定日(format日付項目(entity.get二次予防事業対象情報().getKetteiYMD()));
         }
         noRenbanEdit_part2(csvEntity);
+        noRenbanEdit_part3(csvEntity);
         return csvEntity;
     }
 
@@ -456,6 +467,10 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         if (単位数 != null) {
             csvEntity.set単位数(new RString(単位数.toString()));
         }
+
+    }
+
+    private void noRenbanEdit_part3(HanyoListKagoKekkaNoRebanCsvEntity csvEntity) {
         Decimal 保険者負担額 = entity.get過誤決定明細().getHokenshaFutangaku();
         if (保険者負担額 != null) {
             csvEntity.set保険者負担額(new RString(保険者負担額.toString()));
@@ -470,8 +485,14 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         if (entity.get受給者台帳() != null) {
             csvEntity.set受給申請事由(get受給申請事由(entity.get受給者台帳().getJukyuShinseiJiyu().getColumnValue()));
             csvEntity.set受給申請日(format日付項目(entity.get受給者台帳().getJukyuShinseiYMD()));
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
-                    toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+            if (entity.get受給者台帳() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode().isEmpty()) {
+                csvEntity.set受給要介護度(RString.EMPTY);
+            } else {
+                csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
+                        toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+            }
             csvEntity.set受給認定開始日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanKaishiYMD()));
             csvEntity.set受給認定終了日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanShuryoYMD()));
             csvEntity.set受給認定日(format日付項目(entity.get受給者台帳().getNinteiYMD()));

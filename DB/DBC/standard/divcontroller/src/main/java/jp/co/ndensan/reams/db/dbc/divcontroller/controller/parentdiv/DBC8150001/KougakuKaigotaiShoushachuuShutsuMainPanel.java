@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8150001.Kou
 import jp.co.ndensan.reams.db.dbc.service.core.basic.dbc5100011mainpanel.DBC5100011MainPanelFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;

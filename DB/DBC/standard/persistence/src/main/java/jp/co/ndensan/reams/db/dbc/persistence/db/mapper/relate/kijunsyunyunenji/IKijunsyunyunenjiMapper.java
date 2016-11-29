@@ -151,6 +151,14 @@ public interface IKijunsyunyunenjiMapper {
     int select処理日付管理マスタ(UpdTaishoSeitaiyinTemp5ProcessMybatisParameter para);
 
     /**
+     * 処理日付管理マスタ異動分に取得する。
+     *
+     * @param para UpdTaishoSeitaiyinTemp5ProcessMybatisParameter
+     * @return 件数 int
+     */
+    int select処理日付管理マスタ異動分(UpdTaishoSeitaiyinTemp5ProcessMybatisParameter para);
+
+    /**
      * 対象世帯員クラスTempに更新。
      *
      * @param para UpdTaishoSeitaiyinTemp5ProcessMybatisParameter

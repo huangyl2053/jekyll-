@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_Tokuch
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHeijunkaKeisanHoho6Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.HeijunkaHenkoOutputJoken;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.dgHeijunkaShoriKakunin1_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6.KaigoFukaTokuchoHeijunka6;
@@ -43,14 +44,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 public class HeijunkaKeisanHandler {
 
     private final HeijunkaKeisanDiv div;
-    private final RString 特徴平準化_特徴6月分_メニュー = new RString("DBBMN35001");
-    private final RString 特徴平準化_特徴6月分_通知書一括発行メニュー = new RString("DBBMN35003");
-    private final RString 状況未 = new RString("未");
-    private final RString 状況済 = new RString("済");
-    private final RString 平準化しない = new RString("0");
-    private final RString 平準化するを判定し = new RString("1");
-    private final RString 特別徴収平準化計算_特別徴収6月分 = new RString("特別徴収平準化計算（特別徴収6月分）");
-    private final RString 仮算定額変更通知書_平準化 = new RString("仮算定額変更通知書(平準化)");
+    private static final RString 特徴平準化_特徴6月分_メニュー = new RString("DBBMN35001");
+    private static final RString 特徴平準化_特徴6月分_通知書一括発行メニュー = new RString("DBBMN35003");
+    private static final RString 状況未 = new RString("未");
+    private static final RString 状況済 = new RString("済");
+    private static final RString 平準化しない = new RString("0");
+    private static final RString 平準化するを判定し = new RString("1");
+    private static final RString 仮算定額変更通知書_平準化 = new RString("仮算定額変更通知書(平準化)");
     private static final RString 遷移元区分_0 = new RString("0");
     private static final RString 遷移元区分_1 = new RString("1");
     private static final RString 帳票グループコード_DBB0120001 = new RString("DBB0120001");
@@ -147,7 +147,7 @@ public class HeijunkaKeisanHandler {
         div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 帳票グループコード, 選択列表示, 設定ボタン列表示);
 
         for (int i = 0, len = div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().size(); i < len; i++) {
-            if (ResponseHolder.getMenuID().equals(特徴平準化_特徴6月分_メニュー) && 特別徴収平準化計算_特別徴収6月分.
+            if (ResponseHolder.getMenuID().equals(特徴平準化_特徴6月分_メニュー) && ReportIdDBB.DBB200003.getReportName().
                     equals(div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).getChohyoName())) {
                 div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).setSelected(true);
                 // TODO 74150  読取専用（readOnly = true）の設定メソッドが提供されていない

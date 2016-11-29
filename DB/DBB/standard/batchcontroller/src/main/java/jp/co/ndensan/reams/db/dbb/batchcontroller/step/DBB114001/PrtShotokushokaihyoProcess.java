@@ -72,6 +72,7 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
     public static final RString PARAMETER_OUT_OUTPUTCOUNT;
 
     private static final RString INDEX_0 = new RString("0");
+    private static final RString INDEX_1 = new RString("1");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_6 = 6;
@@ -196,13 +197,15 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
             setKey();
             所得照会票データbefore = t;
         }
-
+        outputCount.setValue(INDEX_1);
     }
 
     @Override
     protected void afterExecute() {
         int 出力ページ数 = 0;
-        出力ページ数 = 所得照会票Report();
+        if (所得照会票データbefore != null) {
+            出力ページ数 = 所得照会票Report();
+        }
         if (文字列_001.equals(通知書タイプ)) {
             yokoReportWriter.close();
         } else {
@@ -375,7 +378,7 @@ public class PrtShotokushokaihyoProcess extends BatchProcessBase<ShotokuShoukaiD
             }
         }
         住所 = 住所.concat(RString.FULL_SPACE).concat(番地.value());
-        if (住所.length() >= INT_15) {
+        if (住所.length() > INT_15) {
             住所の上段 = 住所.substring(INT_0, INT_15);
             住所の下段 = 住所.substring(INT_15, 住所.length());
         }

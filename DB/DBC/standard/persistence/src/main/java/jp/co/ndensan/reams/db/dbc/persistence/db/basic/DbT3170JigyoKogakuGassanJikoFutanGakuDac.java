@@ -43,6 +43,11 @@ public class DbT3170JigyoKogakuGassanJikoFutanGakuDac implements ISaveable<DbT31
     @InjectSession
     private SqlSession session;
 
+    private static final RString 被保険者番号STR = new RString("被保険者番号");
+    private static final RString 対象年度STR = new RString("対象年度");
+    private static final RString 保険者番号STR = new RString("保険者番号");
+    private static final RString 支給申請書整理番号STR = new RString("支給申請書整理番号");
+
     /**
      * 主キーで事業高額合算申請書を取得します。
      *
@@ -60,10 +65,10 @@ public class DbT3170JigyoKogakuGassanJikoFutanGakuDac implements ISaveable<DbT31
             RString 保険者番号,
             RString 支給申請書整理番号
     ) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
-        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
-        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号STR.toString()));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage(対象年度STR.toString()));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(保険者番号STR.toString()));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(支給申請書整理番号STR.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.selectSpecific(jikoFutanSeiriNo, shomeiShoSakuseiYMD, max(rirekiNo)).table(DbT3170JigyoKogakuGassanJikoFutanGaku.class).
@@ -93,10 +98,10 @@ public class DbT3170JigyoKogakuGassanJikoFutanGakuDac implements ISaveable<DbT31
             HokenshaNo 保険者番号,
             RString 支給申請書整理番号,
             int 履歴番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
-        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
-        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号STR.toString()));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage(対象年度STR.toString()));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(保険者番号STR.toString()));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(支給申請書整理番号STR.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -120,7 +125,7 @@ public class DbT3170JigyoKogakuGassanJikoFutanGakuDac implements ISaveable<DbT31
      */
     @Transaction
     public List<DbT3170JigyoKogakuGassanJikoFutanGakuEntity> selectByHihokenshaNo(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号STR.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -149,10 +154,10 @@ public class DbT3170JigyoKogakuGassanJikoFutanGakuDac implements ISaveable<DbT31
             FlexibleYear 対象年度,
             HokenshaNo 保険者番号,
             RString 支給申請書整理番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
-        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
-        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号STR.toString()));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage(対象年度STR.toString()));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(保険者番号STR.toString()));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(支給申請書整理番号STR.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -181,10 +186,10 @@ public class DbT3170JigyoKogakuGassanJikoFutanGakuDac implements ISaveable<DbT31
             FlexibleYear 対象年度,
             RString 保険者番号,
             RString 支給申請書整理番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
-        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
-        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号STR.toString()));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage(対象年度STR.toString()));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(保険者番号STR.toString()));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(支給申請書整理番号STR.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.selectSpecific(jikoFutanSeiriNo, shomeiShoSakuseiYMD, max(rirekiNo)).

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,6 +33,7 @@ public class KanendoIdouKekkaIchiranReport extends Report<KanendoIdouKekkaIchira
     private final RString 並び順の４件目;
     private final RString 並び順の５件目;
     private final List<RString> 改頁項目List;
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
 
     /**
      * コンストラクタです。
@@ -46,10 +48,12 @@ public class KanendoIdouKekkaIchiranReport extends Report<KanendoIdouKekkaIchira
      * @param 並び順の４件目 RString
      * @param 並び順の５件目 RString
      * @param 改頁項目List List<RString>
+     * @param 帳票制御共通 帳票制御共通
      */
     public KanendoIdouKekkaIchiranReport(List<KeisangojohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
             RString 出力順ID, YMDHMS 調定日時, Association association, RString 並び順の１件目, RString 並び順の２件目,
-            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目, List<RString> 改頁項目List) {
+            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目, List<RString> 改頁項目List,
+            ChohyoSeigyoKyotsu 帳票制御共通) {
         this.更正前後EntityList = 更正前後EntityList;
         this.出力順ID = 出力順ID;
         this.調定日時 = 調定日時;
@@ -60,6 +64,7 @@ public class KanendoIdouKekkaIchiranReport extends Report<KanendoIdouKekkaIchira
         this.並び順の４件目 = 並び順の４件目;
         this.並び順の５件目 = 並び順の５件目;
         this.改頁項目List = 改頁項目List;
+        this.帳票制御共通 = 帳票制御共通;
     }
 
     @Override
@@ -71,7 +76,7 @@ public class KanendoIdouKekkaIchiranReport extends Report<KanendoIdouKekkaIchira
                     更正前Entity, 更正後Entity, 出力順ID, 調定日時, association, 並び順の１件目,
                     並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List);
             IKanendoIdouKekkaIchiranEditor headerEditor = new KanendoIdouKekkaIchiranHeaderEditor(inputEntity);
-            IKanendoIdouKekkaIchiranEditor bodyEditor = new KanendoIdouKekkaIchiranBodyEditor(inputEntity);
+            IKanendoIdouKekkaIchiranEditor bodyEditor = new KanendoIdouKekkaIchiranBodyEditor(inputEntity, 帳票制御共通);
             IKanendoIdouKekkaIchiranBuilder builder = new KanendoIdouKekkaIchiranBuilder(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
         }

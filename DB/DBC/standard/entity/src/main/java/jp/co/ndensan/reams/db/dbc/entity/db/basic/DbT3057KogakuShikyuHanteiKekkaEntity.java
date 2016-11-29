@@ -1,20 +1,20 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 高額介護サービス費支給判定結果テーブルのエンティティクラスです。
@@ -54,6 +54,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
     private RString shinsaKekkaHaneiKubun;
     private FlexibleDate ketteiTsuchishoSakuseiYMD;
     private FlexibleDate furikomiMeisaishoSakuseiYMD;
+    private RString ketteiTsuchiHakkoKubun;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -428,6 +429,29 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      */
     public void setFurikomiMeisaishoSakuseiYMD(FlexibleDate furikomiMeisaishoSakuseiYMD) {
         this.furikomiMeisaishoSakuseiYMD = furikomiMeisaishoSakuseiYMD;
+    }
+
+    /**
+     * 決定通知リアル発行区分のgetメソッドです。
+     * <br/>
+     * <br/>0:未発行,1:発行済
+     *
+     * @return 決定通知リアル発行区分
+     */
+    @CheckForNull
+    public RString getKetteiTsuchiHakkoKubun() {
+        return ketteiTsuchiHakkoKubun;
+    }
+
+    /**
+     * 決定通知リアル発行区分のsetメソッドです。
+     * <br/>
+     * <br/>0:未発行,1:発行済
+     *
+     * @param ketteiTsuchiHakkoKubun 決定通知リアル発行区分
+     */
+    public void setKetteiTsuchiHakkoKubun(RString ketteiTsuchiHakkoKubun) {
+        this.ketteiTsuchiHakkoKubun = ketteiTsuchiHakkoKubun;
     }
 
     /**

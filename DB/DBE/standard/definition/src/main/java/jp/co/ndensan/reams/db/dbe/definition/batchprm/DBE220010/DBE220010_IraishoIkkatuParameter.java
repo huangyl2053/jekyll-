@@ -60,7 +60,7 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private static final String SHUJIIIKENSHOSAKUSEIIRAILIST = "shujiiIkenshoSakuseiIraiList";
     private static final String 認定調査依頼履歴一覧 = "認定調査依頼履歴一覧";
     private static final String 主治医意見書作成依頼履歴一覧 = "主治医意見書作成依頼履歴一覧";
-    private static final String IKENSHO_IRAIRIREKI_ICHIRAN_KUBUN = "IkenshoirairirekiIchiranKubun";
+    private static final String IKENSHOIRAIRIREKIICHIRANKUBUN = "IkenshoirairirekiIchiranKubun";
 
     @BatchParameter(key = 認定調査依頼履歴一覧, name = "認定調査依頼履歴一覧")
     private boolean is認定調査依頼履歴一覧;
@@ -130,7 +130,7 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private RString teishutsuKigen;
     @BatchParameter(key = KYOTSU_HIZUKE, name = "共通日付")
     private RString kyotsuHizuke;
-    @BatchParameter(key = IKENSHO_IRAIRIREKI_ICHIRAN_KUBUN, name = "主治医意見書作成依頼履歴一覧出力区分")
+    @BatchParameter(key = IKENSHOIRAIRIREKIICHIRANKUBUN, name = "主治医意見書作成依頼履歴一覧出力区分")
     private boolean ikenshoirairirekiIchiranKubun;
 
     /**

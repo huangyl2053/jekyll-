@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NofuShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NofugakuSanshutsuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NokigenShutsuryokuHoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoRenchoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesak
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 保険料納入通知書（本算定）【期毎タイプ】HokenryoNonyuTsuchishoKigotoRenchoEditor
@@ -279,11 +281,13 @@ public class HokenryoNonyuTsuchishoKigotoRenchoEditor implements IHokenryoNonyuT
         if (編集後本算定通知書共通情報.get普徴既に納付すべき額() != null) {
             source.fuchoNofuSubekiGaku = new RString(編集後本算定通知書共通情報.get普徴既に納付すべき額().toString());
         }
-        if (編集後本算定通知書共通情報.get納付済額_未到来期含む() != null) {
-            source.nofuZumiGaku = new RString(編集後本算定通知書共通情報.get納付済額_未到来期含む().toString());
-        }
-        if (編集後本算定通知書共通情報.get今後納付すべき額() != null) {
-            source.kongoNofuSubekiGaku = new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString());
+        NofugakuSanshutsuHoho 納付額算出方法 = 本算定納入通知書制御情報.get納入通知書制御情報().get納付額算出方法();
+        if (NofugakuSanshutsuHoho.収入額をもとに算出.equals(納付額算出方法)) {
+            source.nofuZumiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普徴納付済額_未到来期含む());
+            source.kongoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に());
+        } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(納付額算出方法)) {
+            source.nofuZumiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普徴既に納付すべき額());
+            source.kongoNofuSubekiGaku = getコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に());
         }
 
         List<UniversalPhase> 普徴期別金額リスト = 更正後.get普徴期別金額リスト();
@@ -298,6 +302,10 @@ public class HokenryoNonyuTsuchishoKigotoRenchoEditor implements IHokenryoNonyuT
             source.kozaShurui = 編集後本算定通知書共通情報.get編集後口座().get口座種別略称();
             source.kozaNo = 編集後本算定通知書共通情報.get編集後口座().get口座番号Or通帳記号番号();
         }
+    }
+
+    private RString getコンマ区切りRString(Decimal コンマ区切り対象) {
+        return null == コンマ区切り対象 ? null : DecimalFormatter.toコンマ区切りRString(コンマ区切り対象, 0);
     }
 
     private void edit期月(HokenryoNonyuTsuchishoKigotoRenchoSource source) {

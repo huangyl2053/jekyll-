@@ -5,18 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000011;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuParamter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufubunruikubun.ShiharaiHohoKinoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000011.PanelnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.service.report.shoukanbaraisuuchishoikkatsusakusei.ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -39,6 +46,9 @@ public class PanelnlTotalHandler {
     private static final RString 利用者向け決定通知書 = new RString("ForRiyosha");
     private static final RString 受領委任者向け決定通知書 = new RString("ForJuryoininsha");
     private static final RString STR_1 = new RString(1);
+    private static final RString 管理しない = new RString("0");
+    private static final RString 帳票制御汎用キー_償還払い支給不支給決定通知書 = new RString("償還払い支給（不支給）決定通知書");
+    private static final RString 通知書有 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -122,6 +132,34 @@ public class PanelnlTotalHandler {
         div.getPnlTestOutput().getTxtKeteibiTuchisho().setDisplayNone(true);
         div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().initialize(ShiharaiHohoKinoKubun.償還払.getコード());
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, chohyo.get帳票分類ID());
+        
+        RString 受領委任払い管理_管理制御 = DbBusinessConfig.get(ConfigNameDBC.受領委任払い管理_管理制御, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (管理しない.equals(受領委任払い管理_管理制御)) {
+            div.getChkOutputTargetKubun().setVisible(false);
+            div.getChkOutputTargetKubun().setSelectedItemsByKey(null);
+            return;
+        }
+        
+        ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
+        RString 償還払い支給不支給決定通知書 = RString.EMPTY;
+
+        ChohyoSeigyoHanyo 帳票制御汎用償還払い支給不支給決定通知書 = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                FlexibleYear.MIN, 帳票制御汎用キー_償還払い支給不支給決定通知書);
+        if (帳票制御汎用償還払い支給不支給決定通知書 != null) {
+            償還払い支給不支給決定通知書 = 帳票制御汎用償還払い支給不支給決定通知書.get設定値();
+        }
+        if (!通知書有.equals(償還払い支給不支給決定通知書)) {
+            KeyValueDataSource dataSource = new KeyValueDataSource();
+            dataSource.setKey(new RString("ForJuryoininsha"));
+            dataSource.setValue(new RString("受領委任者向け決定通知書"));
+            List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+            dataSourceList.add(dataSource);
+            div.getChkOutputTargetKubun().setDataSource(dataSourceList);
+            List<RString> keys = new ArrayList<>();
+            keys.add(new RString("ForJuryoininsha"));
+            div.getChkOutputTargetKubun().setSelectedItemsByKey(keys);
+        }
+        
     }
 
     /**

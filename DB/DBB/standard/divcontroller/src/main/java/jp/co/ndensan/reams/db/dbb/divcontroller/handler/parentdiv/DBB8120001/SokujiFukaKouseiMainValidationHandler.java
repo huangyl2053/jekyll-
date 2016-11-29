@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8120001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiZengoChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
@@ -12,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.definition.message.DbbWarningMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.FukakonkyoAtoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.SokujiFukaKouseiMainDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.SokujikouseiKiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001.dgFuchoKanendo_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -208,8 +210,14 @@ public class SokujiFukaKouseiMainValidationHandler {
         FukakonkyoAtoDiv fukakonkyoAtoDiv = div.getTabSokujiKousei().getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoAto();
         Decimal 更正後年間保険料額 = fukakonkyoAtoDiv.getTxtNenkanHokenryo2().getValue();
         更正後年間保険料額 = 更正後年間保険料額 == null ? Decimal.ZERO : 更正後年間保険料額;
+        List<dgFuchoKanendo_Row> 過年度情報 = div.getDgFuchoKanendo().getDataSource();
+        Decimal 過年度金額合計 = Decimal.ZERO;
+        for (dgFuchoKanendo_Row row : 過年度情報) {
+            過年度金額合計 = 過年度金額合計.add(getFormat金額(row.getZogen().getText()));
+        }
         if (!更正後年間保険料額.equals(getFormat金額(tablePanel.getLblTokuchoKoseiGoSum().getText()).
-                add(getFormat金額(tablePanel.getLblFuchoKoseiGoSum().getText())))) {
+                add(getFormat金額(tablePanel.getLblFuchoKoseiGoSum().getText())).
+                add(過年度金額合計))) {
             validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(UrErrorMessages.項目に対する制約,
                     更正後年間保険料.toString(), 特別徴収の更正後合計_普通徴収の更正後合計.toString())));
         }

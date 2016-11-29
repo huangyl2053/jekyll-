@@ -21,11 +21,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -51,6 +49,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
     private static final int INDEX_ELEVEN = 11;
     private static final int INDEX_TWELVE = 12;
     private final int 連番;
+    private final RString 金融機関コード;
     private final List<RString> 通知書定型文List;
     private static final RString 増減の理由 = new RString("増減の理由");
     private static final RString 不支給の理由 = new RString("不支給の理由");
@@ -70,10 +69,10 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
     private static final RString SIZE_TWO = new RString("2");
     private static final RString SIZE_THREE = new RString("3");
     private static final RString SIZE_FOUR = new RString("4");
-    private static final RString コード_9900 = new RString("9900");
     private final SofubutsuAtesakiSource compSofubutsuAtesakiソース;
     private static final RString 支給金額 = new RString("支給金額");
     private static final RString 決定額 = new RString("決定額");
+    private static final RString 改行 = new RString("\n");
 
     /**
      * コンストラクタです。
@@ -98,6 +97,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
             SofubutsuAtesakiSource compSofubutsuAtesakiソース) {
         this.帳票情報 = 帳票情報;
         this.連番 = 連番;
+        this.金融機関コード = 金融機関コード;
         this.titleList = titleList;
         this.通知書定型文List = 通知書定型文List;
         this.認証者ソースデータ = 認証者ソースデータ;
@@ -212,12 +212,15 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
 
         if (支給.equals(帳票情報.get支給_不支給決定区分()) && 窓口払い区分.equals(帳票情報.get支払方法区分())
                 && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0) {
-            source.mochimono = 帳票情報.get持ちもの();
+            source.mochimono = 帳票情報.getお持ちいただくもの１().
+                    concat(改行).concat(帳票情報.getお持ちいただくもの２()).
+                    concat(改行).concat(帳票情報.getお持ちいただくもの３());
             source.shiharaiBasho = 帳票情報.get支払場所();
             source.shiharaiStartYMD = 年月日編集(帳票情報.get支払期間開始年月日())
                     .concat(get日本語名略称(帳票情報.get支払期間開始年月日())).concat(記号);
             source.karaFugo = 記号;
-            source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日());
+            source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日())
+                    .concat(get日本語名略称(帳票情報.get支払期間開始年月日()));
             source.shiharaiStartHMS = 帳票情報.get支払窓口開始時間();
             source.shiharaiEndHMS = 帳票情報.get支払窓口終了時間();
         } else {
@@ -330,16 +333,17 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
     }
 
     private RString 年月日編集(RDate 日付) {
+        if (日付 == null) {
+            return RString.EMPTY;
+        }
         return 日付.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
-    private RString 時分秒編集(RString 時間) {
-        RTime 時間時分秒 = new RTime(時間);
-        return 時間時分秒.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-    }
-
     private RString 年月編集(FlexibleYearMonth 日付) {
+        if (日付 == null) {
+            return RString.EMPTY;
+        }
         return 日付.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
@@ -351,8 +355,11 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiEditor implements IKogakuKe
         return RString.EMPTY;
     }
 
-    private String get日本語名略称(RDate 日付) {
-        return 日付.getDayOfWeek().getInFullParentheses();
+    private RString get日本語名略称(RDate 日付) {
+        if (日付 == null) {
+            return RString.EMPTY;
+        }
+        return new RString(日付.getDayOfWeek().getInFullParentheses());
     }
 
     private RString get非空文字列(RString 文字列) {

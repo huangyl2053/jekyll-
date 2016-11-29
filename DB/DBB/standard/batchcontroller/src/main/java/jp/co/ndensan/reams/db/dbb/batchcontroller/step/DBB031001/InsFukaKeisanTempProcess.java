@@ -91,13 +91,6 @@ public class InsFukaKeisanTempProcess extends BatchProcessBase<FukaCalculateEnti
         }
     }
 
-    @Override
-    protected void afterExecute() {
-        if (tempEntity != null) {
-            tableWriter.insert(tempEntity);
-        }
-    }
-
     private void setKey(FukaCalculateEntity entity) {
         賦課年度 = entity.getFukaNendo();
         調定年度 = entity.getChoteiNendo();

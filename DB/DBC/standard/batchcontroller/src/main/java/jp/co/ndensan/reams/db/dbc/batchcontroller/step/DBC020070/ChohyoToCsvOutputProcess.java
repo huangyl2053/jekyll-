@@ -179,6 +179,8 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
         for (ISetSortItem item : 出力順.get設定項目リスト()) {
             if (item.is改頁項目()) {
                 breakItemIds.add(item.get項目ID());
+            } else {
+                breakItemIds.add(RString.EMPTY);
             }
         }
         parameter.set自市町村コード(地方公共団体.get地方公共団体コード().value());

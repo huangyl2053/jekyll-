@@ -6,12 +6,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010012;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.IKyufuJissekiHeaderDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.KyufuJissekiHeaderDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.IKyufuJissekiHeaderDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -21,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class KyufuJissekiSyokaiMeisaiSyukeiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -72,14 +69,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiDiv extends Panel {
     private DataGrid<dgKyufuJissekiMeisaiJustoku_Row> dgKyufuJissekiMeisaiJustoku;
     @JsonProperty("linButtonArea3")
     private HorizontalLine linButtonArea3;
-    @JsonProperty("btnJigetsu")
-    private Button btnJigetsu;
-    @JsonProperty("btnZengetsu")
-    private Button btnZengetsu;
-    @JsonProperty("btnAtoJigyosha")
-    private Button btnAtoJigyosha;
-    @JsonProperty("btnMaeJigyosha")
-    private Button btnMaeJigyosha;
     @JsonProperty("ccdKyufuJissekiHeader")
     private KyufuJissekiHeaderDiv ccdKyufuJissekiHeader;
 
@@ -483,78 +472,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiDiv extends Panel {
     @JsonProperty("linButtonArea3")
     public void setLinButtonArea3(HorizontalLine linButtonArea3) {
         this.linButtonArea3 = linButtonArea3;
-    }
-
-    /*
-     * getbtnJigetsu
-     * @return btnJigetsu
-     */
-    @JsonProperty("btnJigetsu")
-    public Button getBtnJigetsu() {
-        return btnJigetsu;
-    }
-
-    /*
-     * setbtnJigetsu
-     * @param btnJigetsu btnJigetsu
-     */
-    @JsonProperty("btnJigetsu")
-    public void setBtnJigetsu(Button btnJigetsu) {
-        this.btnJigetsu = btnJigetsu;
-    }
-
-    /*
-     * getbtnZengetsu
-     * @return btnZengetsu
-     */
-    @JsonProperty("btnZengetsu")
-    public Button getBtnZengetsu() {
-        return btnZengetsu;
-    }
-
-    /*
-     * setbtnZengetsu
-     * @param btnZengetsu btnZengetsu
-     */
-    @JsonProperty("btnZengetsu")
-    public void setBtnZengetsu(Button btnZengetsu) {
-        this.btnZengetsu = btnZengetsu;
-    }
-
-    /*
-     * getbtnAtoJigyosha
-     * @return btnAtoJigyosha
-     */
-    @JsonProperty("btnAtoJigyosha")
-    public Button getBtnAtoJigyosha() {
-        return btnAtoJigyosha;
-    }
-
-    /*
-     * setbtnAtoJigyosha
-     * @param btnAtoJigyosha btnAtoJigyosha
-     */
-    @JsonProperty("btnAtoJigyosha")
-    public void setBtnAtoJigyosha(Button btnAtoJigyosha) {
-        this.btnAtoJigyosha = btnAtoJigyosha;
-    }
-
-    /*
-     * getbtnMaeJigyosha
-     * @return btnMaeJigyosha
-     */
-    @JsonProperty("btnMaeJigyosha")
-    public Button getBtnMaeJigyosha() {
-        return btnMaeJigyosha;
-    }
-
-    /*
-     * setbtnMaeJigyosha
-     * @param btnMaeJigyosha btnMaeJigyosha
-     */
-    @JsonProperty("btnMaeJigyosha")
-    public void setBtnMaeJigyosha(Button btnMaeJigyosha) {
-        this.btnMaeJigyosha = btnMaeJigyosha;
     }
 
     /*

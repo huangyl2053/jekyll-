@@ -112,9 +112,9 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
         }
         if (高額合算自己負担額計算結果一覧表 != null) {
             if (高額合算自己負担額計算結果一覧表.get被保険者番号() != null) {
-                source.list_1 = 高額合算自己負担額計算結果一覧表.get被保険者番号().getColumnValue();
+                source.list_1 = get非空文字列(高額合算自己負担額計算結果一覧表.get被保険者番号().getColumnValue());
             }
-            source.list_2 = 高額合算自己負担額計算結果一覧表.get被保険者氏名();
+            source.list_2 = get非空文字列(高額合算自己負担額計算結果一覧表.get被保険者氏名());
             if (高額合算自己負担額計算結果一覧表.get生年月日() != null && (住民種別コード_TWO.
                     equals(高額合算自己負担額計算結果一覧表.get住民種別コード()) || 住民種別コード_FOUR.
                     equals(高額合算自己負担額計算結果一覧表.get住民種別コード()))) {
@@ -138,15 +138,17 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
         } else if (Seibetsu.女.getコード().equals(高額合算自己負担額計算結果一覧表.get性別())) {
             source.list_4 = Seibetsu.女.get名称();
         }
-        source.list_5 = 高額合算自己負担額計算結果一覧表.get申請書整理番号();
+        source.list_5 = get非空文字列(高額合算自己負担額計算結果一覧表.get申請書整理番号());
         if (高額合算自己負担額計算結果一覧表.get申請年月日() != null) {
             source.list_6 = 高額合算自己負担額計算結果一覧表.get申請年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         }
+        source.list_6 = source.list_6 == null ? RString.EMPTY : source.list_6;
         if (高額合算自己負担額計算結果一覧表.get申請対象年度() != null) {
             source.list_7 = 高額合算自己負担額計算結果一覧表.get申請対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(定数);
         }
+        source.list_7 = source.list_7 == null ? RString.EMPTY : source.list_7;
         if (高額合算自己負担額計算結果一覧表.get介護加入期間開始() != null
                 && 高額合算自己負担額計算結果一覧表.get介護加入期間終了() != null) {
             RString 介護加入期間開始 = 高額合算自己負担額計算結果一覧表.get介護加入期間開始().wareki().
@@ -175,11 +177,11 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
     }
 
     private void editFour(GassanJikofutangakuKeisanKekkaIchiranSource source) {
-        source.yubinNo = 高額合算自己負担額計算結果一覧表.getYubinNo();
-        source.choikiCode = 高額合算自己負担額計算結果一覧表.getChoikiCode();
-        source.gyoseikuCode = 高額合算自己負担額計算結果一覧表.getGyoseikuCode();
-        source.hokenshaNo = 高額合算自己負担額計算結果一覧表.getHokenshaNo();
-        source.shichosonCode = 高額合算自己負担額計算結果一覧表.getShichosonCode();
+        source.yubinNo = get非空文字列(高額合算自己負担額計算結果一覧表.getYubinNo());
+        source.choikiCode = get非空文字列(高額合算自己負担額計算結果一覧表.getChoikiCode());
+        source.gyoseikuCode = get非空文字列(高額合算自己負担額計算結果一覧表.getGyoseikuCode());
+        source.hokenshaNo = get非空文字列(高額合算自己負担額計算結果一覧表.getHokenshaNo());
+        source.shichosonCode = get非空文字列(高額合算自己負担額計算結果一覧表.getShichosonCode());
     }
 
     private RString get非空文字列(RString 文字列) {

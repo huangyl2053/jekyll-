@@ -8,6 +8,15 @@
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>
     
+    <!-- 宛名識別対象異動分取得PSMから異動データを取得する -->
+    <select resultOrdered="true" id="select住基異動" resultMap="resultMap_ShukiIdoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter" fetchSize="500">
+        SELECT
+        DISTINCT "宛名異動"."shikibetsuCode"
+        FROM
+        rgua."UaFt001FindIdo"('1',#{抽出開始日時},#{抽出終了日時},TRUE, '{}' ,'0', '{}' ,'0','','0','','0', '{}' , '{}','','','','','','','','','','','','','','','','')AS "宛名異動"
+    </select>
+        
     <!-- 賦課根拠異動抽出に被保険者本人異動の判断 -->
     <select resultOrdered="true" id="select住基異動_被保険者本人異動" resultMap="resultMap_ShukiIdoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter" fetchSize="500">
@@ -115,8 +124,8 @@
         rgdb."DbV2502KaigoShotoku" AS A
         WHERE
         A."shotokuNendo" in (#{ 調定年度minus1 }, #{ 調定年度minus2 })
-        AND to_char(to_date(#{ 抽出開始日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",0,8)
-        AND substring(A."shoriTimeStamp",0,8) <![CDATA[<=]]> to_char(to_date(#{ 抽出終了日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
+        AND to_char(to_date(#{ 抽出開始日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD') <![CDATA[<=]]> substring(A."shoriTimeStamp",1,8)
+        AND substring(A."shoriTimeStamp",1,8) <![CDATA[<=]]> to_char(to_date(#{ 抽出終了日時 }, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
     </select>
     
     <!-- 所得異動の取得に被保険者本人異動の判断 -->
@@ -451,7 +460,7 @@
         DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_rirekiNo" and
         DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
         LEFT JOIN 
-        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON A."dbT1001HihokenshaDaicho_shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
         ORDER BY
         A."dbT1001HihokenshaDaicho_hihokenshaNo",
@@ -487,7 +496,7 @@
         <collection property="世帯員所得情報" resultMap="resultMap_SetaiShotokuEntity"/>
         <collection property="生保の情報" resultMap="resultMap_SeikatsuHogoJukyushaRelateEntity"/>
         <collection property="老齢の情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity" />
-        <collection property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+        <collection property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
     </resultMap>
     
     <resultMap id="resultMap_KyokaisoGaitoshaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity" autoMapping="true">
@@ -534,7 +543,7 @@
                 master
         )) AS "ShikibetsuTaisho"
         ON "DbT2015KeisangoJoho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-        LEFT JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+        LEFT JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON "DbT2015KeisangoJoho"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
         ${出力順},
         "DbT2015KeisangoJoho"."choteiNendo",
@@ -551,7 +560,7 @@
         <id column="dbT2015KeisangoJoho_sakuseiShoriName" />
         <association property="計算後情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.ResultMap_DbT2015KeisangoJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity"/>
     </resultMap>
     <!-- 住基抽出Tempを作成します。 -->
     <insert id="createJukiChushutsuTmp">
@@ -1418,24 +1427,48 @@
         SELECT A.*
         FROM
            (SELECT 
-                Q.*
+             L.*
              FROM 
+                 rgdb."DbT1001HihokenshaDaicho" AS  L
+             INNER JOIN  
+            (SELECT 
+                Q."hihokenshaNo",
+                MAX(Q."idoYMD") AS "idoYMD",
+                MAX(Q."edaNo") AS "edaNo"
+               FROM 
                 rgdb."DbT1001HihokenshaDaicho" AS Q
                 INNER JOIN
-                (SELECT
-                    "hihokenshaNo",
-                    "ichigoShikakuShutokuYMD",
-                    MAX("shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
-                 FROM
-                    rgdb."DbT1001HihokenshaDaicho"
-                 GROUP BY
-                    "hihokenshaNo",
-                    "ichigoShikakuShutokuYMD"
+                (SELECT "hihokenshaNo", "ichigoShikakuShutokuYMD", MAX("shikakuSoshitsuYMD") AS "max_shikakuSoshitsuYMD"
+                   FROM rgdb."DbT1001HihokenshaDaicho"  AS "ORG"
+                   WHERE "hihokennshaKubunCode"='1' AND "logicalDeletedFlag"=FALSE
+                   AND NOT (EXISTS 
+                      (SELECT 'X' FROM 
+                             (SELECT 
+                              "HIHO"."hihokenshaNo" AS "法施行時住特得喪レコード_hihokenshaNo",
+                              "HIHO"."idoYMD" AS "法施行時住特得喪レコード_idoYMD", 	
+                              "HIHO"."edaNo" AS "法施行時住特得喪レコード_edaNo" 	 
+                              FROM rgdb."DbT1001HihokenshaDaicho" AS "HIHO"
+                              INNER JOIN 
+                              (SELECT "hihokenshaNo","idoYMD","edaNo"
+                              FROM rgdb."DbT1001HihokenshaDaicho" 
+                              WHERE "hihokennshaKubunCode"='1' AND "logicalDeletedFlag"=FALSE
+                              AND "jushochiTokureiFlag"='1' AND "jushochitokureiTekiyoYMD"='20000401') AS "法施行時住特レコード"
+                              ON "法施行時住特レコード"."hihokenshaNo"="HIHO"."hihokenshaNo"
+                              AND "HIHO"."ichigoShikakuShutokuYMD"='20000401' AND "HIHO"."shikakuSoshitsuYMD"='20000401') AS "法施行時住特得喪レコード"
+                              WHERE "法施行時住特得喪レコード_hihokenshaNo"="ORG"."hihokenshaNo"
+                              AND "法施行時住特得喪レコード_idoYMD"="ORG"."idoYMD"
+                              AND "法施行時住特得喪レコード_edaNo"="ORG"."edaNo" ))
+                   GROUP BY "hihokenshaNo", "ichigoShikakuShutokuYMD"
                 )AS T
                 ON
                     T."hihokenshaNo" = Q."hihokenshaNo"
                 AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
                 AND T."max_shikakuSoshitsuYMD" = Q."shikakuSoshitsuYMD"
+               GROUP BY Q."hihokenshaNo") as M
+               ON
+                 M."hihokenshaNo" = L."hihokenshaNo"
+                 AND M."idoYMD" = L."idoYMD"
+                 AND M."edaNo" = L."edaNo"
             ) AS A
         INNER JOIN
         ( <include refid="distinct_IdoTmp" /> ) AS B
@@ -1443,7 +1476,6 @@
         A."hihokenshaNo" = B."hihokenshaNo"
         WHERE
         A."hihokennshaKubunCode" = '1'
-        AND A."isDeleted" = FALSE
         )AS 資格
         LEFT OUTER  JOIN
         (  SELECT

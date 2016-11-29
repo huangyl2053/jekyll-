@@ -399,12 +399,6 @@ public class JuminIdoRendoShikakuToroku {
     private JuminIdoRendoShikakuTorokuEntity tennyu(
             UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳, RString 介護保険施行日,
             RString 第２号被保険者到達基準年齢, RString 広域システム構成, RString 自動資格異動連動区分) {
-        requireNonNull(住民異動情報);
-        requireNonNull(被保険者台帳);
-        requireNonNull(介護保険施行日);
-        requireNonNull(第２号被保険者到達基準年齢);
-        requireNonNull(広域システム構成);
-        requireNonNull(自動資格異動連動区分);
         JuminIdoRendoShikakuTorokuEntity entity = new JuminIdoRendoShikakuTorokuEntity();
         FlexibleDate torokuIdoYMD = 住民異動情報.getTorokuIdoYMD();
         FlexibleDate torokuTodokedeYMD = 住民異動情報.getTorokuTodokedeYMD();

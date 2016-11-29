@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiRelate;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010020.KogakuKaigoServiceMainDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class KogakuKaigoServiceHandler {
 
     private final KogakuKaigoServiceMainDiv div;
-    private static final RString ZERO = new RString("0");
     private static final int INT_ZERO = 0;
     private static final RString 前月 = new RString("前月");
 
@@ -45,25 +44,11 @@ public class KogakuKaigoServiceHandler {
     /**
      * 高額介護サービス費等選別
      *
-     * @param 高額介護サービス費等 高額介護サービス費等
-     * @param サービス提供年月 サービス提供年月
+     * @param 給付実績高額介護サービス費データ 給付実績高額介護サービス費データ
      */
-    public void set給付実績高額介護サービス費データ(List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費等, FlexibleYearMonth サービス提供年月) {
-        List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費リスト = new ArrayList<>();
-        if (高額介護サービス費等 != null && !高額介護サービス費等.isEmpty()) {
-            this.setGetsuBtn(高額介護サービス費等, サービス提供年月);
-            for (KyufujissekiKogakuKaigoServicehi 高額介護サービス費 : 高額介護サービス費等) {
-                if (サービス提供年月 != null && サービス提供年月.compareTo(高額介護サービス費.getサービス提供年月()) == 0) {
-                    高額介護サービス費リスト.add(高額介護サービス費);
-                }
-            }
-        }
-        if (!高額介護サービス費リスト.isEmpty()) {
-            this.setData(高額介護サービス費リスト.get(INT_ZERO));
-        }
-    }
-
-    private void setData(KyufujissekiKogakuKaigoServicehi 高額介護サービス費) {
+    public void set給付実績高額介護サービス費データ(KyufujissekiKogakuKaigoServicehiRelate 給付実績高額介護サービス費データ) {
+        div.getCcdKyufuJissekiHeader().set被保情報2_1(給付実績高額介護サービス費データ);
+        KyufujissekiKogakuKaigoServicehi 高額介護サービス費 = 給付実績高額介護サービス費データ.get給付実績高額介護サービス費();
         div.getTxtKogakuKaigoServicehiKetteiYMD().setValue(to日期変換(高額介護サービス費.get決定年月日()));
         div.getTxtKogakuKaigoServicehiUketsukeYMD().setValue(to日期変換(高額介護サービス費.get受付年月日()));
         div.getTxtKogakuKaigoServicehiShinsaYM().setValue(to日期変換(高額介護サービス費.get審査年月()));
@@ -79,76 +64,28 @@ public class KogakuKaigoServiceHandler {
         div.getTxtKogakuKaigoServicehiKohi1Shikyugaku().setValue(get金額(高額介護サービス費.get公費１支給額()));
         div.getTxtKogakuKaigoServicehiKohi2Shikyugaku().setValue(get金額(高額介護サービス費.get公費２支給額()));
         div.getTxtKogakuKaigoServicehiKohi3Shikyugaku().setValue(get金額(高額介護サービス費.get公費３支給額()));
+        clear制御性();
     }
 
     /**
      *
      * 制御性設定です。
      *
-     * @param 識別番号管理データ 識別番号
      */
-    public void clear制御性(ShikibetsuNoKanri 識別番号管理データ) {
+    public void clear制御性() {
         div.getBtnKogakuKaigoService().setDisabled(true);
-        if (ZERO.equals(識別番号管理データ.get基本設定区分())) {
-            div.getBtnKihon().setDisabled(true);
-        } else {
-            div.getBtnKihon().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理データ.get明細設定区分())) {
-            div.getBtnMeisaiShukei().setDisabled(true);
-        } else {
-            div.getBtnMeisaiShukei().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理データ.get食事費用設定区分())) {
-            div.getBtnShokuji().setDisabled(true);
-        } else {
-            div.getBtnShokuji().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理データ.get福祉用具購入費設定区分())) {
-            div.getBtnFukushiYoguKonyu().setDisabled(true);
-        } else {
-            div.getBtnFukushiYoguKonyu().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理データ.get特定入所者設定区分())) {
-            div.getBtnTokuteiNyushosha().setDisabled(true);
-        } else {
-            div.getBtnTokuteiNyushosha().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理データ.get特定診療費設定区分())) {
-            div.getBtnTokuteiShinryo().setDisabled(true);
-        } else {
-            div.getBtnTokuteiShinryo().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理データ.get居宅計画費設定区分())) {
-            div.getBtnKyotakuServiceKeikaku().setDisabled(true);
-        } else {
-            div.getBtnKyotakuServiceKeikaku().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理データ.get住宅改修費設定区分())) {
-            div.getBtnJutakuKaishu().setDisabled(true);
-        } else {
-            div.getBtnJutakuKaishu().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理データ.getケアマネジメント設定区分())) {
-            div.getBtnCareManagement().setDisabled(true);
-        } else {
-            div.getBtnCareManagement().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理データ.get社会福祉法人軽減設定区分())) {
-            div.getBtnShafukuKeigen().setDisabled(true);
-        } else {
-            div.getBtnShafukuKeigen().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理データ.get所定疾患施設療養設定区分())) {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
-        } else {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理データ.get緊急時施設療養設定区分())) {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-        } else {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
-        }
+        div.getBtnKihon().setDisabled(true);
+        div.getBtnMeisaiShukei().setDisabled(true);
+        div.getBtnShokuji().setDisabled(true);
+        div.getBtnFukushiYoguKonyu().setDisabled(true);
+        div.getBtnTokuteiNyushosha().setDisabled(true);
+        div.getBtnTokuteiShinryo().setDisabled(true);
+        div.getBtnKyotakuServiceKeikaku().setDisabled(true);
+        div.getBtnJutakuKaishu().setDisabled(true);
+        div.getBtnCareManagement().setDisabled(true);
+        div.getBtnShafukuKeigen().setDisabled(true);
+        div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
+        div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
     }
 
     /**
@@ -166,7 +103,7 @@ public class KogakuKaigoServiceHandler {
         FlexibleYearMonth 今提供年月 = get今提供年月(data, 高額介護サービス費リスト, サービス提供年月);
         if (!今提供年月.isEmpty()) {
             div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-            set給付実績高額介護サービス費データ(高額介護サービス費リスト, 今提供年月);
+            //set給付実績高額介護サービス費データ(高額介護サービス費リスト, 今提供年月);
             setGetsuBtn(高額介護サービス費リスト, 今提供年月);
         }
     }

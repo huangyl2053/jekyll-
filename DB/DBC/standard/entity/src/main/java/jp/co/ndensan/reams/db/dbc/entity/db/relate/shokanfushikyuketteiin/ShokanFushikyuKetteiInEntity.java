@@ -56,5 +56,7 @@ public class ShokanFushikyuKetteiInEntity implements Serializable {
     private RString 更新DB無;
     private ShikibetsuCode 識別コード;
     private int 連番コード;
+    private RString 郵便番号;
+    private RString 氏名５０音カナ;
 
 }

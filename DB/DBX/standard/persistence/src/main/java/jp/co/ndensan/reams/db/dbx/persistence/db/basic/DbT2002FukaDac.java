@@ -11,9 +11,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.choteiNendo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.choteiNichiji;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.fuSaishutsuKampuGaku;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.fukaNendo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.rirekiNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.tkSaishutsuKampuGaku;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -28,6 +30,9 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -73,11 +78,41 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         return accessor.select().
                 table(DbT2002Fuka.class).
                 where(and(
-                                eq(choteiNendo, 調定年度),
-                                eq(fukaNendo, 賦課年度),
-                                eq(tsuchishoNo, 通知書番号),
-                                eq(rirekiNo, 履歴番号))).
+                        eq(choteiNendo, 調定年度),
+                        eq(fukaNendo, 賦課年度),
+                        eq(tsuchishoNo, 通知書番号),
+                        eq(rirekiNo, 履歴番号))).
                 toObject(DbT2002FukaEntity.class);
+    }
+
+    /**
+     * 主キーで介護賦課を取得します。
+     *
+     * @param 賦課年度 FukaNendo
+     * @param 通知書番号 TsuchishoNo
+     * @return DbT2002FukaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT2002FukaEntity> select歳出還付額(
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) throws NullPointerException {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_KEY.toString()));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号_KEY.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2002Fuka.class).
+                where(and(
+                        eq(fukaNendo, 賦課年度),
+                        eq(tsuchishoNo, 通知書番号),
+                        not(eq(choteiNendo, 賦課年度)),
+                        (or(lt(0, tkSaishutsuKampuGaku),
+                                lt(0, fuSaishutsuKampuGaku)))
+                )).
+                order(by(choteiNendo), by(fukaNendo), by(tsuchishoNo)).
+                toList(DbT2002FukaEntity.class);
     }
 
     /**
@@ -103,9 +138,9 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         return accessor.select().
                 table(DbT2002Fuka.class).
                 where(and(
-                                eq(choteiNendo, 調定年度),
-                                eq(fukaNendo, 賦課年度),
-                                eq(tsuchishoNo, 通知書番号))).
+                        eq(choteiNendo, 調定年度),
+                        eq(fukaNendo, 賦課年度),
+                        eq(tsuchishoNo, 通知書番号))).
                 toList(DbT2002FukaEntity.class);
     }
 
@@ -131,9 +166,9 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         return accessor.select().
                 table(DbT2002Fuka.class).
                 where(and(
-                                eq(choteiNendo, 調定年度),
-                                eq(fukaNendo, 賦課年度),
-                                eq(tsuchishoNo, 通知書番号))).
+                        eq(choteiNendo, 調定年度),
+                        eq(fukaNendo, 賦課年度),
+                        eq(tsuchishoNo, 通知書番号))).
                 order(by(DbT2002Fuka.rirekiNo, Order.DESC)).
                 limit(1).
                 toObject(DbT2002FukaEntity.class);
@@ -165,10 +200,10 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         List<DbT2002FukaEntity> list = accessor.select().
                 table(DbT2002Fuka.class).
                 where(and(
-                                eq(choteiNendo, 調定年度),
-                                eq(fukaNendo, 賦課年度),
-                                eq(hihokenshaNo, 被保険者番号),
-                                leq(choteiNichiji, 調定日時))).
+                        eq(choteiNendo, 調定年度),
+                        eq(fukaNendo, 賦課年度),
+                        eq(hihokenshaNo, 被保険者番号),
+                        leq(choteiNichiji, 調定日時))).
                 order(by(rirekiNo, Order.DESC)).
                 toList(DbT2002FukaEntity.class);
 
@@ -195,8 +230,8 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         return accessor.select().
                 table(DbT2002Fuka.class).
                 where(and(
-                                eq(fukaNendo, 賦課年度),
-                                eq(tsuchishoNo, 通知書番号))).
+                        eq(fukaNendo, 賦課年度),
+                        eq(tsuchishoNo, 通知書番号))).
                 order(
                         by(choteiNendo, Order.DESC),
                         by(rirekiNo, Order.DESC))
@@ -218,8 +253,8 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         return accessor.select().
                 table(DbT2002Fuka.class).
                 where(and(
-                                eq(fukaNendo, 賦課年度),
-                                eq(hihokenshaNo, 被保険者番号))).
+                        eq(fukaNendo, 賦課年度),
+                        eq(hihokenshaNo, 被保険者番号))).
                 toList(DbT2002FukaEntity.class);
     }
 

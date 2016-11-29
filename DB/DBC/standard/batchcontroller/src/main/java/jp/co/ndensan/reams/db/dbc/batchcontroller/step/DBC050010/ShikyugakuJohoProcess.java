@@ -187,24 +187,20 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         batchReportWriter_明細一覧表 = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBC.DBC200101.getReportId().value(), SubGyomuCode.DBC介護給付)
                 .addBreak(new BreakerCatalog<FurikomiMeisaiIchiranDetailReportSource>().new SimpleLayoutBreaker(
-
-
-
-
                     FurikomiMeisaiIchiranDetailReportSource.LAYOUT_BREAK_KEYS) {
             @Override
                     public ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> occuredBreak(
                             ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> currentRecord,
                             ReportLineRecord<FurikomiMeisaiIchiranDetailReportSource> nextRecord,
                             ReportDynamicChart dynamicChart) {
-                        int layout = currentRecord.getSource().layout.index();
-                        currentRecord.setFormGroupIndex(layout);
-                        if (nextRecord != null && nextRecord.getSource() != null) {
-                            layout = nextRecord.getSource().layout.index();
-                            nextRecord.setFormGroupIndex(layout);
-                        }
-                        return currentRecord;
-                    }
+                                int layout = currentRecord.getSource().layout.index();
+                                currentRecord.setFormGroupIndex(layout);
+                                if (nextRecord != null && nextRecord.getSource() != null) {
+                                    layout = nextRecord.getSource().layout.index();
+                                    nextRecord.setFormGroupIndex(layout);
+                                }
+                                return currentRecord;
+                            }
                 }).create();
         reportSourceWriter_明細一覧表 = new ReportSourceWriter<>(batchReportWriter_明細一覧表);
     }
@@ -238,7 +234,6 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
                     RDateTime.now(), 設定値);
             report.writeBy(reportSourceWriter_明細一覧表);
             if (t.get振込明細一時Entity().getServiceTeikyoYM().isBefore(制度改正施行日)) {
-
                 set認定状態区分before施行日高額(t.get振込明細一時Entity().getYokaigoJotaiKubunCode(),
                         振込明細一覧表合計.get(NUM12), t.get振込明細一時Entity().getFurikomiKingaku());
             } else {
@@ -249,7 +244,6 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
     }
 
     private void edit処理区分が1の場合_帳票データ作成(ShikyugakuJohoEntity t, FlexibleYearMonth 制度改正施行日) {
-        boolean flag = false;
         FurikomiMeisaiYoshikiBetsuKingakuShukei bisness = new FurikomiMeisaiYoshikiBetsuKingakuShukei();
         List<InjiYoushikiBangouBetuKingaku> 印字様式番号別金額List = bisness.sumKingakuBy印字様式番号(t.get様式番号別金額EntityList());
         MeisaiDataEntity 振込明細一覧表明細 = new MeisaiDataEntity();
@@ -279,20 +273,21 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
                 振込明細一覧表明細.set印字様式番号別金額List(list);
                 振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
                 if (2 == count) {
-                    FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, null, outputOrder, parameter.get支払方法(),
-                            RDateTime.now(), 設定値);
+                    FurikomiMeisaiIchiranDetailReport report
+                            = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, null, outputOrder, parameter.get支払方法(),
+                                    RDateTime.now(), 設定値);
                     report.writeBy(reportSourceWriter_明細一覧表);
                     list.clear();
                     count = 0;
                 }
             }
 
-            flag = is支給金額計(t);
+            boolean flag = is支給金額計(t);
 
             if (t.get振込明細一時Entity().getServiceTeikyoYM().isBefore(制度改正施行日)) {
-                set件数加算before制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode().value(), flag, 印字様式番号別金額);
+                set件数加算before制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode(), flag, 印字様式番号別金額);
             } else {
-                set件数加算after制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode().value(), flag, 印字様式番号別金額);
+                set件数加算after制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode(), flag, 印字様式番号別金額);
             }
         }
     }
@@ -321,7 +316,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     @Override
     protected void afterExecute() {
-        outputPageCount.setValue(new RString(batchReportWriter_明細一覧表.getCount()));
+        outputPageCount.setValue(new RString(batchReportWriter_明細一覧表.getPageCount()));
 
         if (parameter.get処理区分().getコード().equals(処理区分3)) {
             ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = new ShoriKekkaKakuninListTempTableEntity();
@@ -349,81 +344,72 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         }
     }
 
-    private void set件数加算before制度改正施行日(RString code, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+    private void set件数加算before制度改正施行日(Code code, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
         RString 印字様式番号 = 印字様式番号別金額.get印字様式番号();
-        if (印字様式番号.equals(識別番号2131)) {
+        if (is同一様式番号(印字様式番号, 識別番号2131)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM0), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2141)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2141)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM1), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2151)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2151)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM2), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2161)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2161)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM3), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2171)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2171)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM4), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21B1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21B1)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM5), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2181)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2181)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM6), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2191)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2191)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM7), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21A1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21A1)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM8), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21C1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21C1)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM9), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21D1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21D1)) {
             set認定状態区分before施行日(code, 振込明細一覧表合計.get(NUM10), flag, 印字様式番号別金額);
         }
     }
 
-    private void set件数加算after制度改正施行日(RString code, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+    private void set件数加算after制度改正施行日(Code code, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
         RString 印字様式番号 = 印字様式番号別金額.get印字様式番号();
-        if (印字様式番号.equals(識別番号2131)) {
+        if (is同一様式番号(印字様式番号, 識別番号2131)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM0), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2141)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2141)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM1), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2151)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2151)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM2), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2161)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2161)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM3), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2171)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2171)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM4), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21B1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21B1)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM5), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2181)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2181)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM6), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号2191)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号2191)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM7), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21A1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21A1)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM8), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21C1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21C1)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM9), flag, 印字様式番号別金額);
-        }
-        if (印字様式番号.equals(識別番号21D1)) {
+        } else if (is同一様式番号(印字様式番号, 識別番号21D1)) {
             set認定状態区分after施行日(code, 振込明細一覧表合計.get(NUM10), flag, 印字様式番号別金額);
         }
     }
 
-    private void set認定状態区分before施行日(RString code, GokeiDataEntity entity, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+    private boolean is同一様式番号(RString 様式番号, RString 識別番号) {
+        if (RString.isNullOrEmpty(様式番号) || 様式番号.length() < NUM3) {
+            return false;
+        }
+        return 識別番号.substring(NUM0, NUM3).equals(様式番号.substring(NUM0, NUM3));
+    }
+
+    private void set認定状態区分before施行日(Code jotaiKubunCode, GokeiDataEntity entity, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+        RString code = RString.EMPTY;
+        if (jotaiKubunCode != null) {
+            code = jotaiKubunCode.value();
+        }
         if (code.equals(要介護1) || code.equals(要介護2) || code.equals(要介護3)
                 || code.equals(要介護4) || code.equals(要介護5)) {
             entity.set要介護件数(entity.get要介護件数().add(NUM1));
@@ -449,7 +435,11 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         }
     }
 
-    private void set認定状態区分after施行日(RString code, GokeiDataEntity entity, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+    private void set認定状態区分after施行日(Code jotaiKubunCode, GokeiDataEntity entity, boolean flag, InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+        RString code = RString.EMPTY;
+        if (jotaiKubunCode != null) {
+            code = jotaiKubunCode.value();
+        }
         if (code.equals(要介護1) || code.equals(要介護2) || code.equals(要介護3)
                 || code.equals(要介護4) || code.equals(要介護5) || code.equals(経過的要介護)) {
             entity.set要介護件数(entity.get要介護件数().add(NUM1));
@@ -477,7 +467,10 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     private void set認定状態区分before施行日高額(Code code, GokeiDataEntity entity, Decimal 金額) {
         RString 認定状態区分 = RString.EMPTY;
-        if (認定状態区分 != null && !認定状態区分.isEmpty()) {
+        if (null == 金額) {
+            金額 = Decimal.ZERO;
+        }
+        if (code != null && !code.isEmpty()) {
             認定状態区分 = code.value();
         }
         if (認定状態区分.equals(要介護1) || 認定状態区分.equals(要介護2) || 認定状態区分.equals(要介護3)
@@ -495,37 +488,22 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     private void set認定状態区分after施行日高額(Code code, GokeiDataEntity entity, Decimal 金額) {
         RString 認定状態区分 = RString.EMPTY;
-        if (認定状態区分 != null && !認定状態区分.isEmpty()) {
+        if (null == 金額) {
+            金額 = Decimal.ZERO;
+        }
+        if (code != null && !code.isEmpty()) {
             認定状態区分 = code.value();
         }
         if (認定状態区分.equals(要介護1) || 認定状態区分.equals(要介護2) || 認定状態区分.equals(要介護3)
                 || 認定状態区分.equals(要介護4) || 認定状態区分.equals(要介護5) || 認定状態区分.equals(経過的要介護)) {
             entity.set要介護件数(entity.get要介護件数().add(NUM1));
-            if (entity.get要介護金額() != null && 金額 != null) {
-                entity.set要介護金額(entity.get要介護金額().add(金額));
-            } else if (entity.get要介護金額() != null) {
-                entity.set要介護金額(entity.get要介護金額());
-            } else if (金額 != null) {
-                entity.set要介護金額(金額);
-            }
+            entity.set要介護金額(entity.get要介護金額().add(金額));
         } else if (認定状態区分.equals(要支援1) || 認定状態区分.equals(要支援2)) {
             entity.set要支援件数(entity.get要支援件数().add(NUM1));
-            if (entity.get要支援金額() != null && 金額 != null) {
-                entity.set要支援金額(entity.get要支援金額().add(金額));
-            } else if (entity.get要支援金額() != null) {
-                entity.set要支援金額(entity.get要支援金額());
-            } else if (金額 != null) {
-                entity.set要支援金額(金額);
-            }
+            entity.set要支援金額(entity.get要支援金額().add(金額));
         } else {
             entity.setその他件数(entity.getその他件数().add(NUM1));
-            if (entity.getその他金額() != null && 金額 != null) {
-                entity.setその他金額(entity.getその他金額().add(金額));
-            } else if (entity.getその他金額() != null) {
-                entity.setその他金額(entity.getその他金額());
-            } else if (金額 != null) {
-                entity.setその他金額(金額);
-            }
+            entity.setその他金額(entity.getその他金額().add(金額));
         }
     }
 

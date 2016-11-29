@@ -52,12 +52,16 @@ public class EditedHonSanteiTsuchiShoKyotsu {
     private Decimal 特徴納付済額_未到来期含まない;
     private RString 納付済額算出年月日;
     private Decimal 既に納付すべき額;
-    private Decimal 今後納付すべき額;
+    private Decimal 今後納付すべき額_調定元に;
+    private Decimal 今後納付すべき額_収入元に;
     private Decimal 普徴既に納付すべき額;
     private Decimal 特徴既に納付すべき額;
     private Decimal 普徴今後納付すべき額_調定元に;
     private Decimal 普徴今後納付すべき額_収入元に;
-    private Decimal 特徴今後納付すべき額;
+    private Decimal 特徴今後納付すべき額_調定元に;
+    private Decimal 特徴今後納付すべき額_収入元に;
+    private Decimal 特別徴収額合計;
+    private Decimal 普通徴収額合計;
     private EditedKoza 編集後口座;
     private RString 調定事由１;
     private RString 調定事由２;

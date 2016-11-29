@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -29,6 +30,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
     private final RString 宛名連番;
     private final EditedAtesaki 編集後宛先;
     private final NinshoshaSource ninshoshaSource;
+    private static final RString 括弧_左 = new RString("(");
+    private static final RString 括弧_右 = new RString(")");
 
     /**
      * コンストラクタです
@@ -59,7 +62,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
                 && 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース() != null) {
             SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
             source.yubinNo1 = sofubutsuAtesakiSource.yubinNo;
-            source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
+            source.gyoseiku1 = 括弧_左.concat(編集後宛先.get行政区().get名称()).concat(括弧_右);
             source.jusho3 = sofubutsuAtesakiSource.jusho3;
             source.jushoText = sofubutsuAtesakiSource.jushoText;
             source.jusho1 = sofubutsuAtesakiSource.jusho1;
@@ -132,14 +135,11 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
             source.nendo3 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         }
-        if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null
-                && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01() != null
-                && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02() != null
-                && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03() != null) {
+        if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null) {
             source.hokenryoGokei = DecimalFormatter.toコンマ区切りRString(
-                    仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01()
-                    .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02())
-                    .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03()),
+                    nullToDemical(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01())
+                    .add(nullToDemical(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02()))
+                    .add(nullToDemical(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03())),
                     0);
         }
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報() != null
@@ -255,4 +255,12 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
         }
         source.hokenshaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get保険者名();
     }
+
+    private Decimal nullToDemical(Decimal 項目) {
+        if (項目 == null) {
+            return Decimal.ZERO;
+        }
+        return 項目;
+    }
+
 }

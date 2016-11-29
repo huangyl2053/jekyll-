@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.DbT3017MatchingEnti
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.DbT3170MatchingEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.JissekiFutangakuDataTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.RiyoshaFutanMatchingEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * バッチ設計_DBCMN62006_自己負担額計算（一括）のDB検索用のインターフェースクラスです。

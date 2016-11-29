@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSant
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200014.KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -28,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 仮算定額変更通知書発行一覧表のReportです。
@@ -53,10 +53,12 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
     private final RDateTime 帳票作成日時;
     private final KariSanteiTsuchiShoKyotsu 仮算定通知書情報;
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報;
+    private final int 連番;
 
     /**
      * コンストラクタです。
      *
+     * @param 連番 int
      * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @param 編集後仮算定通知書共通情報 EditedKariSanteiTsuchiShoKyotsu
      * @param 出力順１ RString
@@ -66,9 +68,10 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
      * @param 出力順５ RString
      * @param 帳票作成日時 RDateTime
      */
-    public KariSanteigakuHenkoTsuchishoHakkoIchiranReport(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
+    public KariSanteigakuHenkoTsuchishoHakkoIchiranReport(int 連番, KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報,
             RString 出力順１, RString 出力順２, RString 出力順３, RString 出力順４, RString 出力順５, RDateTime 帳票作成日時) {
+        this.連番 = 連番;
         this.仮算定通知書情報 = 仮算定通知書情報;
         this.編集後仮算定通知書共通情報 = 編集後仮算定通知書共通情報;
         this.出力順１ = 出力順１;
@@ -81,9 +84,8 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
 
     @Override
     public void writeBy(ReportSourceWriter<KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource> reportSourceWriter) {
-        int 連番 = 1;
         KariSanteigakuHenkoTsuchishoHakkoIchiranItem item = new KariSanteigakuHenkoTsuchishoHakkoIchiranItem();
-        setHeader(編集後仮算定通知書共通情報, item);
+        setHeader(仮算定通知書情報, 編集後仮算定通知書共通情報, item);
         setBody(編集後仮算定通知書共通情報, item, 連番);
         set改頁(仮算定通知書情報, 編集後仮算定通知書共通情報, item);
         IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor headerEditor = new KariSanteigakuHenkoTsuchishoHakkoIchiranHeaderEditor(item);
@@ -91,10 +93,10 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
         IKariSanteigakuHenkoTsuchishoHakkoIchiranBuilder builder
                 = new KariSanteigakuHenkoTsuchishoHakkoIchiranBuilderImpl(headerEditor, hyojiBodyEditor);
         reportSourceWriter.writeLine(builder);
-        連番++;
     }
 
-    private void setHeader(EditedKariSanteiTsuchiShoKyotsu editedData, KariSanteigakuHenkoTsuchishoHakkoIchiranItem item) {
+    private void setHeader(KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
+            EditedKariSanteiTsuchiShoKyotsu editedData, KariSanteigakuHenkoTsuchishoHakkoIchiranItem item) {
         RTime time = 帳票作成日時.getTime();
         RString hour = new RString(time.toString()).substring(INDEX_0, INDEX_2);
         RString min = new RString(time.toString()).substring(INDEX_3, INDEX_5);
@@ -107,8 +109,8 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
 
         item.setPrintTimeStamp(printTimeStamp);
         item.setNendo(editedData.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString());
-        item.setHokenshaNo(Association.getLasdecCode().getColumnValue());
-        item.setHokenshaName(Association.getShichosonName());
+        item.setHokenshaNo(仮算定通知書情報.get地方公共団体().get地方公共団体コード().getColumnValue());
+        item.setHokenshaName(仮算定通知書情報.get地方公共団体().get市町村名());
         item.setShutsuryokujun1(出力順１);
         item.setShutsuryokujun2(出力順２);
         item.setShutsuryokujun3(出力順３);
@@ -136,8 +138,8 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
         item.setListUpper_7(editedData.get表示コード３());
 
         if (editedData.get更正前() != null) {
-            item.setListUpper_8(new RString(ObjectUtil.defaultIfNull(editedData.get更正前().get更正前特徴期別金額合計(), Decimal.ZERO)
-                    .add(ObjectUtil.defaultIfNull(editedData.get更正前().get更正前普徴期別金額合計(), Decimal.ZERO)).toString()));
+            item.setListUpper_8(DecimalFormatter.toコンマ区切りRString(ObjectUtil.defaultIfNull(editedData.get更正前().get更正前特徴期別金額合計(), Decimal.ZERO)
+                    .add(ObjectUtil.defaultIfNull(editedData.get更正前().get更正前普徴期別金額合計(), Decimal.ZERO)), 0));
             item.setListUpper_9(editedData.get更正前().get更正前徴収方法());
         }
 
@@ -158,8 +160,8 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
         }
 
         if (editedData.get更正後() != null) {
-            item.setListLower_4(new RString(ObjectUtil.defaultIfNull(editedData.get更正後().get更正後特徴期別金額合計(), Decimal.ZERO)
-                    .add(ObjectUtil.defaultIfNull(editedData.get更正後().get更正後普徴期別金額合計(), Decimal.ZERO)).toString()));
+            item.setListLower_4(DecimalFormatter.toコンマ区切りRString(ObjectUtil.defaultIfNull(editedData.get更正後().get更正後特徴期別金額合計(), Decimal.ZERO)
+                    .add(ObjectUtil.defaultIfNull(editedData.get更正後().get更正後普徴期別金額合計(), Decimal.ZERO)), 0));
             item.setListLower_5(editedData.get更正後().get更正後徴収方法());
         }
 
