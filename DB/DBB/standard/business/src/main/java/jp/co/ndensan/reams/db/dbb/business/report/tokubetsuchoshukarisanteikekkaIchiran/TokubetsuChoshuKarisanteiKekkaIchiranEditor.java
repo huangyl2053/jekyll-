@@ -264,7 +264,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
     private void set郵便番号(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
         YubinNo 郵便番号 = 特徴仮算定計算後賦課情報Entity.get宛名().getYubinNo();
         if (郵便番号 != null && !郵便番号.isEmpty()) {
-            source.listUpper_2 = 郵便番号.value();
+            source.listUpper_2 = 郵便番号.getEditedYubinNo();
         } else {
             source.listUpper_2 = RString.EMPTY;
         }

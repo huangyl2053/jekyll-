@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -132,14 +133,15 @@ public class HanyoListSogoJigyoHiRenbanNashiProcess extends BatchProcessBase<Han
     @Override
     protected void process(HanyoListSogoJigyoHiRelateEntity entity) {
         flag = true;
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(entity.get市町村コード()));
         if (基本情報.equals(processParameter.get抽出方法())) {
-            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本なしEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association));
+            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本なしEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association, 導入団体情報));
         } else if (基本明細情報.equals(processParameter.get抽出方法())) {
-            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本明細なしEUCEntity(entity, 市町村名MasterMap, 帳票制御共通_明細, association));
+            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本明細なしEUCEntity(entity, 市町村名MasterMap, 帳票制御共通_明細, association, 導入団体情報));
         } else if (基本集計情報.equals(processParameter.get抽出方法())) {
-            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本集計なしEUCEntity(entity, 市町村名MasterMap, 帳票制御共通_集計, association));
+            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本集計なしEUCEntity(entity, 市町村名MasterMap, 帳票制御共通_集計, association, 導入団体情報));
         } else if (基本ケアマネジメント情報.equals(processParameter.get抽出方法())) {
-            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本マネジなしEUCEntity(entity, 市町村名MasterMap, 帳票制御共通_ケアマネジメント, association));
+            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本マネジなしEUCEntity(entity, 市町村名MasterMap, 帳票制御共通_ケアマネジメント, association, 導入団体情報));
         }
     }
 

@@ -566,9 +566,9 @@
         AND
         SUBDbT4001JukyushaDaicho."yukoMukoKubun" = '1'
         AND 
-        SUBDbT4001JukyushaDaicho."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> (DbT3034ShokanShinsei."serviceTeikyoYM" || '31')
+        SUBDbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3034ShokanShinsei."serviceTeikyoYM" || '31')
         AND 
-        SUBDbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD" <![CDATA[>=]]> (DbT3034ShokanShinsei."serviceTeikyoYM" || '01')
+        SUBDbT4001JukyushaDaicho."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> (DbT3034ShokanShinsei."serviceTeikyoYM" || '01')
         LEFT JOIN
         (
         SELECT

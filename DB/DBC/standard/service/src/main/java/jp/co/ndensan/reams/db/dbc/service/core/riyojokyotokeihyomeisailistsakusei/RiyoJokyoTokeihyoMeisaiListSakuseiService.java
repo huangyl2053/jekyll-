@@ -79,6 +79,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -1072,14 +1073,11 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         builder = new RStringBuilder();
         builder.append(年月範囲);
         if (!parameter.get開始年月().equals(parameter.get終了年月())) {
-            builder.append(parameter.get開始年月().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString());
+            builder.append(get和暦年月(parameter.get開始年月()));
             builder.append(KARA);
-            builder.append(parameter.get終了年月().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString());
+            builder.append(get和暦年月(parameter.get終了年月()));
         } else {
-            builder.append(parameter.get開始年月().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString());
+            builder.append(get和暦年月(parameter.get開始年月()));
         }
         outputJokenhyoList.add(builder.toRString());
         builder = new RStringBuilder();
@@ -1155,6 +1153,10 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         return outputJokenhyoList;
     }
 
+    private RString get和暦年月(FlexibleYearMonth 年月) {
+        return 年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
     private RString get地区指定(RString 地区指定Str) {
         RString result = RString.EMPTY;
         if (地区指定_全て.equals(地区指定Str)) {
@@ -1196,14 +1198,11 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
             終了年月 = new FlexibleYearMonth(parameter.get終了年月());
         }
         if (!開始年月.equals(終了年月)) {
-            builder.append(開始年月.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString());
+            builder.append(get和暦年月(開始年月));
             builder.append(KARA);
-            builder.append(終了年月.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString());
+            builder.append(get和暦年月(終了年月));
         } else {
-            builder.append(開始年月.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString());
+            builder.append(get和暦年月(開始年月));
         }
         outputJokenhyoList.add(builder.toRString());
         builder = new RStringBuilder();

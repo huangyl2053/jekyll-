@@ -106,15 +106,17 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
      * @param 市町村名MasterMap Map<RString, KoseiShichosonMaster>
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param 地方公共団体 Association
+     * @param 導入団体情報 Association
      * @return HanyoListKogakuGassanShinseishoJohoCSVEntity
      */
     public HanyoListKogakuGassanShinseishoJohoCSVEntity createCsvData(HanyoListKogakuGassanShinseishoJohoEntity entity,
             HanyoListKogakuGassanShinseishoJohoProcessParameter parameter,
             Decimal 連番, Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
+            Association 導入団体情報) {
         HanyoListKogakuGassanShinseishoJohoCSVEntity csvEntity = new HanyoListKogakuGassanShinseishoJohoCSVEntity();
         csvEntity.set連番(numToRString(連番));
-        set宛名(entity, csvEntity, parameter, 帳票制御共通, 地方公共団体);
+        set宛名(entity, csvEntity, parameter, 帳票制御共通, 導入団体情報);
         set宛先(entity, csvEntity);
         set被保険者台帳管理(entity, csvEntity, parameter, 市町村名MasterMap, 地方公共団体);
         set口座情報(entity, csvEntity);
@@ -246,7 +248,7 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
             HanyoListKogakuGassanShinseishoJohoCSVEntity csvEntity,
             HanyoListKogakuGassanShinseishoJohoProcessParameter parameter,
             ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体) {
+            Association 導入団体情報) {
 
         if (entity.get宛名Entity() != null) {
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
@@ -279,7 +281,7 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
             YubinNo 郵便番号 = 宛名.get住所() != null ? 宛名.get住所().get郵便番号() : null;
             csvEntity.set郵便番号(郵便番号 != null
                     ? 郵便番号.getEditedYubinNo() : RString.EMPTY);
-            set住所番地方書(entity, csvEntity, 帳票制御共通, 地方公共団体);
+            set住所番地方書(entity, csvEntity, 帳票制御共通, 導入団体情報);
             set宛名本人(entity, csvEntity, parameter);
         }
     }
@@ -287,12 +289,12 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
     private void set住所番地方書(HanyoListKogakuGassanShinseishoJohoEntity entity,
             HanyoListKogakuGassanShinseishoJohoCSVEntity csvEntity,
             ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体
+            Association 導入団体情報
     ) {
         if (entity.get宛名Entity() != null) {
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
             IJusho 住所 = 宛名.get住所();
-            csvEntity.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, 宛名, 地方公共団体));
+            csvEntity.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, 宛名, 導入団体情報));
             csvEntity.set住所(住所 != null
                     ? 住所.get住所() : RString.EMPTY);
             csvEntity.set番地(住所 != null && 住所.get番地() != null && 住所.get番地().getBanchi() != null

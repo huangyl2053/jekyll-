@@ -106,8 +106,7 @@ public class KogakuGassanShikyuShinseiToroku {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KogakuGassanShikyuShinseiToroku}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KogakuGassanShikyuShinseiToroku}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KogakuGassanShikyuShinseiToroku}のインスタンス
      */
     public static KogakuGassanShikyuShinseiToroku createInstance() {
         return InstanceProvider.create(KogakuGassanShikyuShinseiToroku.class);
@@ -223,7 +222,7 @@ public class KogakuGassanShikyuShinseiToroku {
         } else {
             RString 整理番号New = Saiban.get(SubGyomuCode.DBC介護給付,
                     SaibanHanyokeyName.支給申請書整理番号.getコード(), 高額合算申請書保持.get対象年度() == null
-                    ? 画面項目.get対象年度() : 高額合算申請書保持.get対象年度()).nextString().padZeroToLeft(INT_6);
+                            ? 画面項目.get対象年度() : 高額合算申請書保持.get対象年度()).nextString().padZeroToLeft(INT_6);
             RString 申請状態 = 高額合算申請書保持.get申請状態();
             訂正フラグしないの場合(申請状態, 処理対象のList, 画面項目, 整理番号New);
             return 整理番号New;
@@ -243,6 +242,7 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
                 entity.setShinseiDaihyoshaTelNo(画面項目.get申請代表者電話番号());
+                entity.setShikyuShinseiKubun(画面項目.get支給申請区分());
                 高額合算申請書Dac.save(entity);
                 List<KogakuGassanShinseishoKanyureki> 加入歴list = 高額合算申請書.get高額合算申請書加入歴list();
                 for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴list) {
@@ -259,6 +259,7 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
                 entity.setShinseiDaihyoshaTelNo(画面項目.get申請代表者電話番号());
+                entity.setShikyuShinseiKubun(画面項目.get支給申請区分());
                 高額合算申請書Dac.save(entity);
                 List<KogakuGassanShinseishoKanyureki> 加入歴list = 高額合算申請書.get高額合算申請書加入歴list();
                 for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴list) {
@@ -297,6 +298,7 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
                 entity.setShinseiDaihyoshaTelNo(画面項目.get申請代表者電話番号());
+                entity.setShikyuShinseiKubun(画面項目.get支給申請区分());
                 entity.setState(EntityDataState.Added);
                 List<KogakuGassanShinseishoKanyureki> 加入歴list = 高額合算申請書.get高額合算申請書加入歴list();
                 for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴list) {
@@ -325,6 +327,7 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
                 entity.setShinseiDaihyoshaTelNo(画面項目.get申請代表者電話番号());
+                entity.setShikyuShinseiKubun(画面項目.get支給申請区分());
                 List<KogakuGassanShinseishoKanyureki> 加入歴list = 高額合算申請書.get高額合算申請書加入歴list();
                 for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴list) {
                     DbT3069KogakuGassanShinseishoKanyurekiEntity kanyurekiEntity = 加入歴.toEntity();
@@ -357,6 +360,7 @@ public class KogakuGassanShikyuShinseiToroku {
                 entity.setShinseiDaihyoshaJusho(画面項目.get申請代表者住所());
                 entity.setShinseiDaihyoshaYubinNo(画面項目.get申請代表者郵便番号());
                 entity.setShinseiDaihyoshaTelNo(画面項目.get申請代表者電話番号());
+                entity.setShikyuShinseiKubun(画面項目.get支給申請区分());
                 List<KogakuGassanShinseishoKanyureki> 加入歴list = 高額合算申請書.get高額合算申請書加入歴list();
                 for (KogakuGassanShinseishoKanyureki 加入歴 : 加入歴list) {
                     DbT3069KogakuGassanShinseishoKanyurekiEntity kanyurekiEntity = 加入歴.toEntity();

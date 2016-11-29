@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMas
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -165,7 +165,7 @@ public class KijunShunyugakuTekiyo {
         eucEntity.set受給申請事由(get受給申請事由(entity));
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
         if (!isNullCheck(entity.get要介護認定状態区分コード())) {
-            eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(), entity.get要介護認定状態区分コード()).getName());
+            eucEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.get要介護認定状態区分コード()).get名称());
         }
         eucEntity.set受給認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
         eucEntity.set受給認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
@@ -483,7 +483,7 @@ public class KijunShunyugakuTekiyo {
         eucEntity.set受給申請事由(get受給申請事由(entity));
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
         if (!isNullCheck(entity.get要介護認定状態区分コード())) {
-            eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(), entity.get要介護認定状態区分コード()).getName());
+            eucEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.get要介護認定状態区分コード()).get名称());
         }
         eucEntity.set受給認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
         eucEntity.set受給認定終了日(set日付編集(entity.get認定有効期間終了年月日()));

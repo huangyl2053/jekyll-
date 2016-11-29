@@ -217,4 +217,17 @@
         <result property="保険者名" column= "dbWT331JukyushaJoho_hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="取込年月" column= "dbWT331JukyushaJoho_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
     </resultMap>
+    
+    <select id="getDbT3104KokuhorenInterfaceKanri"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3104KokuhorenInterfaceKanriMapper.ResultMap_DbT3104KokuhorenInterfaceKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakoshinkekka.DbT3104KensakuMybatisParameter" 
+            fetchSize="500"
+            resultOrdered="true">
+        SELECT DbT3104.*
+        FROM
+            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3104KokuhorenInterfaceKanriMapper.noDeleted_DbT3104KokuhorenInterfaceKanri"/>) AS DbT3104
+        WHERE
+            DbT3104."dbT3104KokuhorenInterfaceKanri_shoriYM" = #{処理年月}
+            AND DbT3104."dbT3104KokuhorenInterfaceKanri_kokanShikibetsuNo" = #{交換情報識別番号}
+    </select>
 </mapper>

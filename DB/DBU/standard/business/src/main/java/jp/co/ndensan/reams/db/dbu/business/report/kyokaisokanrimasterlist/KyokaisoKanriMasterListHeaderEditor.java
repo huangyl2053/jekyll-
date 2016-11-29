@@ -34,8 +34,6 @@ class KyokaisoKanriMasterListHeaderEditor implements IKyokaisoKanriMasterListEdi
     private KyokaisoKanriMasterListReportSource editHeader(KyokaisoKanriMasterListReportSource source) {
 
         source.printTimeStamp = headItem.get印刷日時();
-        // TODO 袁献輝 QA608、rseファイルにpageCountを存在しない　2016/02/20。
-//        source.pageCount = item.getPageCount();
         source.shichosonCode = headItem.get市町村コード();
         source.shichosonName = headItem.get市町村名();
         source.shutsuryokujun1 = headItem.get並び順1();

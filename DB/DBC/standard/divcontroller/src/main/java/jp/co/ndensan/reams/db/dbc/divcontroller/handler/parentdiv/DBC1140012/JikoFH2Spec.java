@@ -585,11 +585,11 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
             Decimal 高額介護_予防_サービス費_11月分 = div.getTbl20Igai().getTxt20IgaiKougakuKaigoServicehi11GatsuGo().getValue();
             Decimal 自己負担額_12月分 = div.getTbl20Igai().getTxt20IgaiJikofutangaku12GatsuGo().getValue();
             Decimal 高額介護_予防_サービス費_12月分 = div.getTbl20Igai().getTxt20IgaiKougakuKaigoServicehi12GatsuGo().getValue();
-            if (高額介護_予防_サービス費_8月分.compareTo(自己負担額_8月分) == INT_1
-                    || 高額介護_予防_サービス費_9月分.compareTo(自己負担額_9月分) == INT_1
-                    || 高額介護_予防_サービス費_10月分.compareTo(自己負担額_10月分) == INT_1
-                    || 高額介護_予防_サービス費_11月分.compareTo(自己負担額_11月分) == INT_1
-                    || 高額介護_予防_サービス費_12月分.compareTo(自己負担額_12月分) == INT_1) {
+            if (isNull(高額介護_予防_サービス費_8月分).compareTo(isNull(自己負担額_8月分)) == INT_1
+                    || isNull(高額介護_予防_サービス費_9月分).compareTo(isNull(自己負担額_9月分)) == INT_1
+                    || isNull(高額介護_予防_サービス費_10月分).compareTo(isNull(自己負担額_10月分)) == INT_1
+                    || isNull(高額介護_予防_サービス費_11月分).compareTo(isNull(自己負担額_11月分)) == INT_1
+                    || isNull(高額介護_予防_サービス費_12月分).compareTo(isNull(自己負担額_12月分)) == INT_1) {
                 return false;
             }
             return !is高額介護_予防_サービス費チェック_翌年_20年度以外(div);
@@ -610,13 +610,13 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
             Decimal 高額介護_予防_サービス費_6月分 = div.getTbl20Igai().getTxt20IgaiKougakuKaigoServicehiYoku6GatsuGo().getValue();
             Decimal 自己負担額_7月分 = div.getTbl20Igai().getTxt20IgaiJikofutangakuYoku7GatsuGo().getValue();
             Decimal 高額介護_予防_サービス費_7月分 = div.getTbl20Igai().getTxt20IgaiKougakuKaigoServicehiYoku7GatsuGo().getValue();
-            return (高額介護_予防_サービス費_1月分.compareTo(自己負担額_1月分) == INT_1
-                    || 高額介護_予防_サービス費_2月分.compareTo(自己負担額_2月分) == INT_1
-                    || 高額介護_予防_サービス費_3月分.compareTo(自己負担額_3月分) == INT_1
-                    || 高額介護_予防_サービス費_4月分.compareTo(自己負担額_4月分) == INT_1
-                    || 高額介護_予防_サービス費_5月分.compareTo(自己負担額_5月分) == INT_1
-                    || 高額介護_予防_サービス費_6月分.compareTo(自己負担額_6月分) == INT_1
-                    || 高額介護_予防_サービス費_7月分.compareTo(自己負担額_7月分) == INT_1);
+            return (isNull(高額介護_予防_サービス費_1月分).compareTo(isNull(自己負担額_1月分)) == INT_1
+                    || isNull(高額介護_予防_サービス費_2月分).compareTo(isNull(自己負担額_2月分)) == INT_1
+                    || isNull(高額介護_予防_サービス費_3月分).compareTo(isNull(自己負担額_3月分)) == INT_1
+                    || isNull(高額介護_予防_サービス費_4月分).compareTo(isNull(自己負担額_4月分)) == INT_1
+                    || isNull(高額介護_予防_サービス費_5月分).compareTo(isNull(自己負担額_5月分)) == INT_1
+                    || isNull(高額介護_予防_サービス費_6月分).compareTo(isNull(自己負担額_6月分)) == INT_1
+                    || isNull(高額介護_予防_サービス費_7月分).compareTo(isNull(自己負担額_7月分)) == INT_1);
         }
     }
 

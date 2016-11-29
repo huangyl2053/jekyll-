@@ -1,27 +1,23 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220012;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.PrintContentsSettingDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonReportPublish;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 
 /**
  * OutputJukyushaIdoRenrakuhyo のクラスファイル
  *
- * @reamsid_L DBC-2101-020 quxiaodong
+ * @author 自動生成
  */
 public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,6 +34,8 @@ public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
     private HorizontalLine lin01;
     @JsonProperty("radTeiseiKomokuHantei")
     private RadioButton radTeiseiKomokuHantei;
+    @JsonProperty("btnSave")
+    private Button btnSave;
     @JsonProperty("JukyushaIdoRenrakuhyoHenkoPrintSetting")
     private PrintContentsSettingDiv JukyushaIdoRenrakuhyoHenkoPrintSetting;
 
@@ -47,7 +45,7 @@ public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * getchkJukyushaTeiseiRearakuhyoHakkou
      * @return chkJukyushaTeiseiRearakuhyoHakkou
      */
@@ -135,6 +133,24 @@ public class OutputJukyushaIdoRenrakuhyoDiv extends Panel {
     @JsonProperty("radTeiseiKomokuHantei")
     public void setRadTeiseiKomokuHantei(RadioButton radTeiseiKomokuHantei) {
         this.radTeiseiKomokuHantei = radTeiseiKomokuHantei;
+    }
+
+    /*
+     * getbtnSave
+     * @return btnSave
+     */
+    @JsonProperty("btnSave")
+    public Button getBtnSave() {
+        return btnSave;
+    }
+
+    /*
+     * setbtnSave
+     * @param btnSave btnSave
+     */
+    @JsonProperty("btnSave")
+    public void setBtnSave(Button btnSave) {
+        this.btnSave = btnSave;
     }
 
     /*
