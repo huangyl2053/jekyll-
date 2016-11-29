@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsogojigyohi.HanyoListSogoJ
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsogojigyohi.IHanyoListSogoJigyoHiEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -87,6 +89,10 @@ public class HanyoListSogoJigyoHiRenbanAriProcess extends BatchProcessBase<Hanyo
     private HanyoListSogoJigyoHi hanyolistsogojigyohi;
     private Association association;
     private boolean flag;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
+    private ChohyoSeigyoKyotsu 帳票制御共通_明細;
+    private ChohyoSeigyoKyotsu 帳票制御共通_集計;
+    private ChohyoSeigyoKyotsu 帳票制御共通_ケアマネジメント;
 
     @Override
     protected void initialize() {
@@ -94,6 +100,11 @@ public class HanyoListSogoJigyoHiRenbanAriProcess extends BatchProcessBase<Hanyo
         hanyolistsogojigyohi = new HanyoListSogoJigyoHi(processParameter);
         association = AssociationFinderFactory.createInstance().getAssociation();
         get市町村名();
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701018.getReportId());
+        帳票制御共通_明細 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701022.getReportId());
+        帳票制御共通_集計 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701023.getReportId());
+        帳票制御共通_ケアマネジメント = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701024.getReportId());
     }
 
     @BatchWriter
@@ -123,13 +134,13 @@ public class HanyoListSogoJigyoHiRenbanAriProcess extends BatchProcessBase<Hanyo
     protected void process(HanyoListSogoJigyoHiRelateEntity entity) {
         flag = true;
         if (基本情報.equals(processParameter.get抽出方法())) {
-            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本ありEUCEntity(entity, 市町村名MasterMap, association, 連番++));
+            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本ありEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association, 連番++));
         } else if (基本明細情報.equals(processParameter.get抽出方法())) {
-            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本明細ありEUCEntity(entity, 市町村名MasterMap, association, 連番++));
+            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本明細ありEUCEntity(entity, 市町村名MasterMap, 帳票制御共通_明細, association, 連番++));
         } else if (基本集計情報.equals(processParameter.get抽出方法())) {
-            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本集計ありEUCEntity(entity, 市町村名MasterMap, association, 連番++));
+            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本集計ありEUCEntity(entity, 市町村名MasterMap, 帳票制御共通_集計, association, 連番++));
         } else if (基本ケアマネジメント情報.equals(processParameter.get抽出方法())) {
-            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本マネジありEUCEntity(entity, 市町村名MasterMap, association, 連番++));
+            eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本マネジありEUCEntity(entity, 市町村名MasterMap, 帳票制御共通_ケアマネジメント, association, 連番++));
         }
     }
 
@@ -255,12 +266,10 @@ public class HanyoListSogoJigyoHiRenbanAriProcess extends BatchProcessBase<Hanyo
             } else {
                 return 出力順.concat(SERVICEKOMOKU);
             }
+        } else if (出力順項目.contains(サービス項目)) {
+            return 出力順.concat(SERVICESHURUICODE);
         } else {
-            if (出力順項目.contains(サービス項目)) {
-                return 出力順.concat(SERVICESHURUICODE);
-            } else {
-                return 出力順.concat(SERVICEKOMOKU).concat(SERVICESHURUICODE);
-            }
+            return 出力順.concat(SERVICEKOMOKU).concat(SERVICESHURUICODE);
         }
     }
 
@@ -287,12 +296,10 @@ public class HanyoListSogoJigyoHiRenbanAriProcess extends BatchProcessBase<Hanyo
             } else {
                 return 出力順.concat(KYUFUJISSEKIJIGYOSHA);
             }
+        } else if (出力順項目.contains(給付実績事業者)) {
+            return 出力順.concat(SEIRINO);
         } else {
-            if (出力順項目.contains(給付実績事業者)) {
-                return 出力順.concat(SEIRINO);
-            } else {
-                return 出力順.concat(SEIRINO).concat(KYUFUJISSEKIJIGYOSHA);
-            }
+            return 出力順.concat(SEIRINO).concat(KYUFUJISSEKIJIGYOSHA);
         }
     }
 
@@ -303,12 +310,10 @@ public class HanyoListSogoJigyoHiRenbanAriProcess extends BatchProcessBase<Hanyo
             } else {
                 return 出力順.concat(SERVICEYM).concat(KYUFUJISSEKIJIGYOSHA);
             }
+        } else if (出力順項目.contains(給付実績事業者)) {
+            return 出力順.concat(SERVICEYM).concat(SEIRINO);
         } else {
-            if (出力順項目.contains(給付実績事業者)) {
-                return 出力順.concat(SERVICEYM).concat(SEIRINO);
-            } else {
-                return 出力順.concat(SERVICEYM).concat(SEIRINO).concat(KYUFUJISSEKIJIGYOSHA);
-            }
+            return 出力順.concat(SERVICEYM).concat(SEIRINO).concat(KYUFUJISSEKIJIGYOSHA);
         }
     }
 
