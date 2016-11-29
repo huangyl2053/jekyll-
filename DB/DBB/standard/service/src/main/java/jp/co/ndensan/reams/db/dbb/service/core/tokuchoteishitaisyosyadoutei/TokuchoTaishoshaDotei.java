@@ -330,7 +330,7 @@ public class TokuchoTaishoshaDotei {
         RString 特別徴収開始月 = RString.EMPTY;
         if (月捕捉_00.equals(開始月)) {
             特別徴収開始月 = null;
-        } else if (月捕捉_06.equals(開始月)) {
+        } else if (月捕捉_08.equals(開始月)) {
             特別徴収開始月 = new RString(処理年度.toString().concat(月捕捉_08.toString()));
         }
         return 特別徴収開始月;

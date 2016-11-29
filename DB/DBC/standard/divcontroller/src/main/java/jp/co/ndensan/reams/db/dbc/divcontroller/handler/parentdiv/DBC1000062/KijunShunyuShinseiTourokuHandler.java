@@ -753,7 +753,7 @@ public class KijunShunyuShinseiTourokuHandler {
                 continue;
             }
             hihokenshaDaichoAlive = manager.get最新の被保険者台帳情報(世帯員所得.get被保険者番号().value());
-            if (hihokenshaDaichoAlive == null || hihokenshaDaichoAlive.get資格喪失事由コード().isNullOrEmpty()) {
+            if (hihokenshaDaichoAlive == null || RString.isNullOrEmpty(hihokenshaDaichoAlive.get資格喪失事由コード())) {
                 世帯員所得情報.add(世帯員所得);
             }
         }
@@ -845,7 +845,7 @@ public class KijunShunyuShinseiTourokuHandler {
     private boolean is非課税(List<SetaiinShotoku> 世帯員所得List) {
         RString 非課税 = KazeiKubun.非課税.getコード();
         for (SetaiinShotoku 世帯員所得 : 世帯員所得List) {
-            if (世帯員所得.get課税区分_住民税減免後().isNullOrEmpty()) {
+            if (RString.isNullOrEmpty(世帯員所得.get課税区分_住民税減免後())) {
                 continue;
             }
             if (!非課税.equals(世帯員所得.get課税区分_住民税減免後())) {
@@ -880,14 +880,14 @@ public class KijunShunyuShinseiTourokuHandler {
     }
 
     private boolean is年齢未満(RString 年齢, RString 基準年齢) {
-        if (年齢.isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(年齢)) {
             return true;
         }
         return Integer.parseInt(年齢.toString()) < Integer.parseInt(基準年齢.toString());
     }
 
     private boolean is年齢以上(RString 年齢, RString 基準年齢) {
-        if (年齢.isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(年齢)) {
             return false;
         }
         return Integer.parseInt(年齢.toString()) >= Integer.parseInt(基準年齢.toString());
@@ -1622,7 +1622,7 @@ public class KijunShunyuShinseiTourokuHandler {
     }
 
     private int get年齢(RString 年齢) {
-        if (年齢.isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(年齢)) {
             return 0;
         }
         return Integer.parseInt(年齢.toString());
