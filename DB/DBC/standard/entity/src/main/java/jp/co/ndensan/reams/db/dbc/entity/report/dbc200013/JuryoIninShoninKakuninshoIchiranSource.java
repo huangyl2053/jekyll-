@@ -62,9 +62,11 @@ public class JuryoIninShoninKakuninshoIchiranSource implements IReportSource {
     public RString ListLower_3;
     @ReportItem(name = "ListLower_4", length = 15, order = 25)
     public RString ListLower_4;
-
+    @ReportItem(name = "契約申請年月日", length = 15, order = 26)
     public RString 契約申請年月日;
+    @ReportItem(name = "契約事業者番号", length = 15, order = 27)
     public RString 契約事業者番号;
+    @ReportItem(name = "受領委任契約番号", length = 15, order = 28)
     public RString 受領委任契約番号;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
