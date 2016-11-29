@@ -39,7 +39,7 @@ public class ChikuNinteiNinteichosa {
     }
 
     /**
-     * TODO 認定調査委託先名称を返します。
+     * 認定調査委託先名称を返します。
      *
      * @return 認定調査委託先名称
      */

@@ -25,7 +25,6 @@ public class HihokenshaDaichoIkkatsuHakkoPanel {
         div.getHihokenshaDaichoHakkoChushutsuJokenPanel().getRadChushutsuSoshitsusha().setSelectedIndex(0);
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA200002.getReportId());
         div.getHihokenshaDaichoHakkoListPanel().setIsPublish(false);
-//      TODO 帳票出力順 技術点No.15
         return ResponseData.of(div).respond();
     }
 
