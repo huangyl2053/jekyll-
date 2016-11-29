@@ -502,8 +502,9 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         }
         output.set受給申請事由(get受給申請事由(受給者台帳));
         output.set受給申請日(get日付項目(受給者台帳.getJukyuShinseiYMD()));
-        if (受給者台帳.getYokaigoJotaiKubunCode() != null && !受給者台帳.getYokaigoJotaiKubunCode().isEmpty()) {
-            output.set受給要介護度(YokaigoJotaiKubun.toValue(受給者台帳.getYokaigoJotaiKubunCode().value()).get名称());
+        Code yokaigoJotaiKubunCode = 受給者台帳.getYokaigoJotaiKubunCode();
+        if (yokaigoJotaiKubunCode != null && !yokaigoJotaiKubunCode.isEmpty()) {
+            output.set受給要介護度(YokaigoJotaiKubun.toValue(yokaigoJotaiKubunCode.value()).get名称());
         } else {
             output.set受給要介護度(RString.EMPTY);
         }

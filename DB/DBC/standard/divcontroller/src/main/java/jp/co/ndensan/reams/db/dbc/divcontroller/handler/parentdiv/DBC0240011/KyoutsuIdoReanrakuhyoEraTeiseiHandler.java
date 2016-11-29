@@ -62,7 +62,6 @@ public class KyoutsuIdoReanrakuhyoEraTeiseiHandler {
      * @return 一覧検索キーEntity
      */
     public KyodoJukyushaTaishoshaEntity get一覧検索キー() {
-        KyodoJukyushaTaishoshaEntity entity = new KyodoJukyushaTaishoshaEntity();
-        return entity;
+        return new KyodoJukyushaTaishoshaEntity();
     }
 }

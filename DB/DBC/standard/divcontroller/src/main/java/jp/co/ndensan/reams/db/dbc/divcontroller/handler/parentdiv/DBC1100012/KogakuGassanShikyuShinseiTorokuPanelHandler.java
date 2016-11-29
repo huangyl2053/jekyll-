@@ -41,7 +41,6 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
     private static final int 六 = 6;
     private static final int 平成二十年度 = 2007;
     private static final RString 九十九 = new RString("99");
-    private static final int 十七 = 17;
     private static final RString ゼロ = new RString("00");
     private static final int ゼロ一 = 0;
     private static final RString キー = new RString("key0");

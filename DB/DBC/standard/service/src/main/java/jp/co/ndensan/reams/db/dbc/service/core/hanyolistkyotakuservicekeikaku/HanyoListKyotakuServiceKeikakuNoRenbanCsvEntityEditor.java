@@ -70,7 +70,6 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
     private static final RString 表示名称_介護予防支援事業者作成 = new RString("介護予防支援事業者作成");
     private static final RString 旧措置者 = new RString("旧措置者");
     private static final RString みなし = new RString("みなし");
-    private static final RString ONE = new RString("t");
 
     /**
      * コンストラクタです。

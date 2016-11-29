@@ -387,11 +387,6 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
         csvEntity.set国保保険者番号(出力対象.get保険者番号国保());
         csvEntity.set国保被保険者証番号(出力対象.get被保険者証番号国保());
         csvEntity.set個人番号(出力対象.get宛名番号());
-        名称項目編集(csvEntity, 出力対象);
-        eucCsvWriter.writeLine(csvEntity);
-    }
-
-    private void 名称項目編集(KokuhorenJukyushaOutCsvEntity csvEntity, DbWT0001DbWT5331Entity 出力対象) {
         if (出力対象.get減免申請中区分コード() != null || !RString.isNullOrEmpty(出力対象.get減免申請中区分コード().trim())) {
             csvEntity.set減免中区分名称(JukyushaIF_GemmenShinseichuKubunCode
                     .toValue(出力対象.get減免申請中区分コード()).get名称());
@@ -400,6 +395,11 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
             csvEntity.set利用者負担区分名称(JukyushaIF_RiyoshaFutanKubunCode
                     .toValue(出力対象.get利用者負担区分コード()).get名称());
         }
+        名称項目編集(csvEntity, 出力対象);
+        eucCsvWriter.writeLine(csvEntity);
+    }
+
+    private void 名称項目編集(KokuhorenJukyushaOutCsvEntity csvEntity, DbWT0001DbWT5331Entity 出力対象) {
         if (出力対象.get公費負担上限額減額の有無() != null || !RString.isNullOrEmpty(出力対象.get公費負担上限額減額の有無().trim())) {
             csvEntity.set公費負担上限額減額名称(JukyushaIF_kohiFutanJogengakuGengakuUmu
                     .toValue(出力対象.get公費負担上限額減額の有無()).get名称());

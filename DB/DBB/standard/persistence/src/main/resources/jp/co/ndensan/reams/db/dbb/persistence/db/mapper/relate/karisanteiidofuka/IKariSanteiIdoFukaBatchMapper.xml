@@ -1256,6 +1256,7 @@
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter"
             resultMap="ResultMap_8月特徴開始">
             SELECT 
+                   特徴仮算定."kariSanntei_hihokenshaNo",
                    特徴仮算定."kariSanntei_zenNendoHokenryoDankai",
                    特徴仮算定."kariSanntei_zenNendoGokeiShotokuGaku",
                    特徴仮算定."kariSanntei_zenNendoNenkinShunyuGaku",
@@ -1418,6 +1419,7 @@
     </resultMap>
     
     <resultMap id="ResultMap_8月特徴開始" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.TokutyouKariSannteiRelateEntity" autoMapping="true">
+        <id  column="kariSanntei_hihokenshaNo"/>
         <id  column="dbT2002Fuka_choteiNendo"/>
         <id  column="dbT2002Fuka_fukaNendo"/>
         <id  column="dbT2002Fuka_tsuchishoNo"/> 
