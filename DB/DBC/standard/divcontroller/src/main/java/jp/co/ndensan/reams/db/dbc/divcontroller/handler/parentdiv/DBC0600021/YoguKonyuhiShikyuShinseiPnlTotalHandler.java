@@ -1138,6 +1138,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 }
             }
         }
+        ServiceShuruiCode サービス種類 = FukushiyoguKonyuhiShikyuShinsei.createInstance().getServiceShuruiCode(被保険者番号, サービス提供年月);
+        if (サービス種類.isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(DbcErrorMessages.提供_購入_年月チェック)));
+        }
         return validPairs;
     }
 
