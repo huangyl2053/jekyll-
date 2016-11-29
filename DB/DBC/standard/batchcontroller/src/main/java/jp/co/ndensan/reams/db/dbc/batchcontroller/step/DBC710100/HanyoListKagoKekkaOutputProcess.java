@@ -131,7 +131,7 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
         }
         personalDataList = new ArrayList<>();
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
-        帳票制御共通情報 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701002.getReportId());
+        帳票制御共通情報 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701010.getReportId());
 
     }
 
