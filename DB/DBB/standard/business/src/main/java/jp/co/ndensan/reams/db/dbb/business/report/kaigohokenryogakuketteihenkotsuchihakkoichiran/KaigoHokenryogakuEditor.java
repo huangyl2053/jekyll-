@@ -295,6 +295,6 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
     }
 
     private RString getNonullRString(RString str) {
-        return RString.isNullOrEmpty(str) ? RString.EMPTY : str;
+        return str == null ? RString.EMPTY : str;
     }
 }
