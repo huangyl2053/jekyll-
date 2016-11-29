@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -110,7 +111,7 @@ public class KohiJukyushaInReadCsvFileProcess extends BatchProcessBase<RString> 
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.getファイルパース());
+        return new BatchSimpleReader(parameter.getファイルパース(), Encode.SJIS);
     }
 
     @Override
