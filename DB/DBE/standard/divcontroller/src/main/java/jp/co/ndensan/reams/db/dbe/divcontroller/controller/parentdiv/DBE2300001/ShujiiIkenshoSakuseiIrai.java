@@ -186,7 +186,7 @@ public class ShujiiIkenshoSakuseiIrai {
         AccessLogger.log(AccessLogType.照会, toPersonalData(div));
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter();
-        createHandler(div).init(manager.get申請者情報(param).records());
+        createHandler(div).init(manager.get申請者情報(param));
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
                 = Models.create(manager.get主治医意見書作成依頼情報(param).records());
         Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
@@ -297,7 +297,7 @@ public class ShujiiIkenshoSakuseiIrai {
                     = Models.create(manager.get主治医意見書作成依頼情報(param).records());
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
             printData(div, reportManager);
-            createHandler(div).init(manager.get申請者情報(param).records());
+            createHandler(div).init(manager.get申請者情報(param));
             response.data = reportManager.publish();
         }
         return response;
@@ -551,6 +551,10 @@ public class ShujiiIkenshoSakuseiIrai {
             } else if (new RString("昭").equals(birthYMD.wareki().getEra())) {
                 iraishoItem.setBirthGengoTaisho(星);
                 iraishoItem.setBirthGengoMeiji(星);
+            } else {
+                iraishoItem.setBirthGengoMeiji(星);
+                iraishoItem.setBirthGengoShowa(星);
+                iraishoItem.setBirthGengoTaisho(星);
             }
         }
         if (!RString.isNullOrEmpty(row.getSeibetsu())) {
@@ -663,6 +667,10 @@ public class ShujiiIkenshoSakuseiIrai {
             } else if (new RString("昭").equals(birthYMD.wareki().getEra())) {
                 business.setBirthGengoTaisho(星);
                 business.setBirthGengoMeiji(星);
+            } else {
+                business.setBirthGengoMeiji(星);
+                business.setBirthGengoShowa(星);
+                business.setBirthGengoTaisho(星);
             }
         }
         if (!RString.isNullOrEmpty(row.getSeibetsu())) {
@@ -860,6 +868,10 @@ public class ShujiiIkenshoSakuseiIrai {
             } else if (new RString("昭").equals(birthYMD.wareki().getEra())) {
                 item.setBirthGengoTaisho(星);
                 item.setBirthGengoMeiji(星);
+            } else {
+                item.setBirthGengoMeiji(星);
+                item.setBirthGengoShowa(星);
+                item.setBirthGengoTaisho(星);
             }
         }
         if (!RString.isNullOrEmpty(row.getSeibetsu())) {

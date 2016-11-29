@@ -46,8 +46,17 @@
         "DbT5912ShujiiJoho_pre"."shujiiName" AS "preShujiiName",
         "DbT5101NinteiShinseiJoho"."shisetsuNyushoFlag"
         <include refid="selectJouken" />
+        LIMIT #{limitCount}
     </select>
 
+    <select id="countShinSeiShaJoho" resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter"
+            fetchSize="500">
+        SELECT
+            count(1)
+            <include refid="selectJouken"/>
+    </select>
+    
     <select resultOrdered="true" id="get要介護認定申請情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter"
             fetchSize="500">
@@ -572,7 +581,6 @@
                 AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL
             </if>
         </if>
-        LIMIT #{limitCount}
     </sql>
     <resultMap id="resultMap_Shujiiikenshosakuseiirai" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiirai.ShujiiikenshosakuseiiraiRelateEntity" autoMapping="true">
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
