@@ -680,7 +680,7 @@ public class ServiceRiyohyoInfoDivHandler {
         }
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
 
-        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false); 
+        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setValue(RString.isNullOrEmpty(row.getTani())
                 ? null : new Decimal(row.getTani().toString()));
         div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setValue(RString.isNullOrEmpty(row.getWaribikigoRitsu())
@@ -712,7 +712,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().getTxtHokenKyufugaku().setValue(row.getHokenKyufugaku().getValue());
             div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setValue(row.getRiyoshaFutangakuHoken().getValue());
             div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().setValue(row.getRiyoshaFutangakuZengaku().getValue());
-            
+
             div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(true);
             div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().setDisabled(true);
             div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setDisabled(true);
@@ -842,7 +842,7 @@ public class ServiceRiyohyoInfoDivHandler {
                 || RSTRING_09.equals(利用サービス.get単位数識別().getKey()))) {
             総合事業以外の場合(サービス種類Tmp, 利用サービス);
         }
-        
+
         if (サービスフラグTmp && 利用サービス
                 != null) {
             div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setReadOnly(false);
@@ -875,7 +875,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().setReadOnly(true);
 //            div.getBtnCalcMeisaiGokei().setDisabled(false);
 //            div.getBtnBeppyoMeisaiKakutei().setDisabled(true);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(false);   
+            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setReadOnly(false);
             div.getBtnBeppyoGokeiKakutei().setDisabled(false);
             div.getBtnCalcMeisai().setDisplayNone(true);
             div.getBtnCalcGokei().setDisplayNone(true);
@@ -1266,7 +1266,7 @@ public class ServiceRiyohyoInfoDivHandler {
         rowListNew = ソードGrid(rowListNew);
         div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowListNew);
     }
-    
+
     private List<dgServiceRiyohyoBeppyoList_Row> get全て同事業者(List<dgServiceRiyohyoBeppyoList_Row> rowList, dgServiceRiyohyoBeppyoList_Row row) {
         List<dgServiceRiyohyoBeppyoList_Row> 全て同事業者 = new ArrayList<>();
         for (dgServiceRiyohyoBeppyoList_Row dgRow : rowList) {
@@ -1277,7 +1277,7 @@ public class ServiceRiyohyoInfoDivHandler {
         }
         return 全て同事業者;
     }
-    
+
     private List<dgServiceRiyohyoBeppyoList_Row> get同事業者(List<dgServiceRiyohyoBeppyoList_Row> rowList, dgServiceRiyohyoBeppyoList_Row row) {
         List<dgServiceRiyohyoBeppyoList_Row> 同事業者 = new ArrayList<>();
         for (dgServiceRiyohyoBeppyoList_Row dgRow : rowList) {
@@ -1511,7 +1511,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuHoken().setValue(row.getRiyoshaFutangakuHoken().getValue());
             div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().setValue(row.getRiyoshaFutangakuZengaku().getValue());
         }
-        
+
     }
 
     /**
@@ -1807,7 +1807,7 @@ public class ServiceRiyohyoInfoDivHandler {
      * @param サービス利用票情報 List<KyufuJikoSakuseiResult>
      */
     public void init保存処理(RString 居宅総合事業区分, List<KyufuJikoSakuseiResult> サービス利用票情報) {
-        // TODO QAのNo.1234 業務概念を取得できないので、DB保存処理できない。
+
         List<dgServiceRiyohyoBeppyoList_Row> rowList = div.getServiceRiyohyoBeppyoList()
                 .getDgServiceRiyohyoBeppyoList().getDataSource();
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);

@@ -91,19 +91,21 @@ public class KijunShunyugakuTekiyo {
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param association association
      * @param 連番 連番
+     * @param 住所 RString
      * @return HanyoListParamRenbanariEUCEntity
      */
     public HanyoListParamRenbanariEUCEntity setRenbanariEUCEntity(HanyoListParamRelateEntity entity,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association, int 連番) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association, int 連番, RString 住所) {
         HanyoListParamRenbanariEUCEntity eucEntity = new HanyoListParamRenbanariEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
             IShikibetsuTaisho iShikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(宛名Entity);
             IKojin iKojin = iShikibetsuTaisho.to個人();
             personalDataList.add(toPersonalData(entity.get被保険者番号(), iKojin.get識別コード()));
+            eucEntity.set住所_番地_方書(住所);
             eucEntity.set連番(new RString(連番));
             eucEntity.set識別コード(iKojin.get識別コード());
-            eucEntity.set住民種別(iKojin.get住民状態());
+            eucEntity.set住民種別(iKojin.get住民状態().住民状態略称());
             eucEntity.set氏名(iKojin.get名称().getName());
             eucEntity.set氏名カナ(iKojin.get名称().getKana());
             eucEntity.set生年月日(set日付編集(iKojin.get生年月日().toFlexibleDate()));
@@ -112,10 +114,8 @@ public class KijunShunyugakuTekiyo {
             eucEntity.set続柄コード(iKojin.get続柄コードリスト().toTsuzukigaraCode());
             eucEntity.set世帯コード(iKojin.get世帯コード());
             eucEntity.set世帯主名(iKojin.get世帯主名());
-            eucEntity.set住所コード(iKojin.get住所().get全国住所コード());
+            eucEntity.set住所コード(iKojin.get住所().get町域コード());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(get住所_番地_方書(iKojin.get住所().get住所(),
-                    get番地(iKojin.get住所().get番地()), get方書(iKojin.get住所().get方書())));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -175,7 +175,11 @@ public class KijunShunyugakuTekiyo {
         } else {
             eucEntity.set受給旧措置(RString.EMPTY);
         }
-        eucEntity.set受給みなし更新認定(get受給みなし更新認定(entity.getみなし要介護区分コード()));
+        if (!isNullCheck(entity.getみなし要介護区分コード())) {
+            eucEntity.set受給みなし更新認定(get受給みなし更新認定(entity.getみなし要介護区分コード()));
+        } else {
+            eucEntity.set受給みなし更新認定(RString.EMPTY);
+        }
         if (!isNullCheck(entity.get直近異動事由コード())) {
             eucEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get直近異動事由コード()).get名称());
         }
@@ -406,18 +410,20 @@ public class KijunShunyugakuTekiyo {
      * @param entity entity
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param association association
+     * @param 住所 RString
      * @return HanyoListParamRenbannashiEUCEntity
      */
     public HanyoListParamRenbannashiEUCEntity setRenbannashiEUCEntity(HanyoListParamRelateEntity entity,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association, RString 住所) {
         HanyoListParamRenbannashiEUCEntity eucEntity = new HanyoListParamRenbannashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
             IShikibetsuTaisho iShikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(宛名Entity);
             IKojin iKojin = iShikibetsuTaisho.to個人();
             personalDataList.add(toPersonalData(entity.get被保険者番号(), iKojin.get識別コード()));
+            eucEntity.set住所_番地_方書(住所);
             eucEntity.set識別コード(iKojin.get識別コード());
-            eucEntity.set住民種別(iKojin.get住民状態());
+            eucEntity.set住民種別(iKojin.get住民状態().住民状態略称());
             eucEntity.set氏名(iKojin.get名称().getName());
             eucEntity.set氏名カナ(iKojin.get名称().getKana());
             eucEntity.set生年月日(set日付編集(iKojin.get生年月日().toFlexibleDate()));
@@ -426,10 +432,8 @@ public class KijunShunyugakuTekiyo {
             eucEntity.set続柄コード(iKojin.get続柄コードリスト().toTsuzukigaraCode());
             eucEntity.set世帯コード(iKojin.get世帯コード());
             eucEntity.set世帯主名(iKojin.get世帯主名());
-            eucEntity.set住所コード(iKojin.get住所().get全国住所コード());
+            eucEntity.set住所コード(iKojin.get住所().get町域コード());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(get住所_番地_方書(iKojin.get住所().get住所(),
-                    get番地(iKojin.get住所().get番地()), get方書(iKojin.get住所().get方書())));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -489,7 +493,11 @@ public class KijunShunyugakuTekiyo {
         } else {
             eucEntity.set受給旧措置(RString.EMPTY);
         }
-        eucEntity.set受給みなし更新認定(get受給みなし更新認定(entity.getみなし要介護区分コード()));
+        if (!isNullCheck(entity.getみなし要介護区分コード())) {
+            eucEntity.set受給みなし更新認定(get受給みなし更新認定(entity.getみなし要介護区分コード()));
+        } else {
+            eucEntity.set受給みなし更新認定(RString.EMPTY);
+        }
         if (!isNullCheck(entity.get直近異動事由コード())) {
             eucEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get直近異動事由コード()).get名称());
         }

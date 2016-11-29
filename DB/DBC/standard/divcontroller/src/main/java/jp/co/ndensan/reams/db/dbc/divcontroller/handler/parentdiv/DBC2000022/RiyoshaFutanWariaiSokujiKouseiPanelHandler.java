@@ -47,7 +47,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -182,12 +181,6 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         div.getCcdKaigoAtenaInfo().initialize(資格対象者.get識別コード());
         div.getCcdKaigoShikakuKihon().initialize(資格対象者.get識別コード());
         AccessLogger.log(AccessLogType.照会, toPersonalData(資格対象者.get識別コード(), 資格対象者.get被保険者番号().getColumnValue()));
-        LockingKey key = new LockingKey(前排他キー.concat(資格対象者.get被保険者番号().getColumnValue()));
-        if (!RealInitialLocker.tryGetLock(key)) {
-            throw new PessimisticLockingException();
-        } else {
-            div.setDisabled(false);
-        }
     }
 
     private void set年度と履歴番号ドロップダウンリスト(RString 処理区分, FlexibleYear 年度, TaishoshaKey 資格対象者) {
