@@ -75,7 +75,6 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
     private static final RString 符号 = new RString("－");
     private static final RString 連携符号 = new RString("～");
     private static final RString 帳票タイトル = new RString("振込明細一覧表");
-    private static final RString ONE = new RString("1");
     private static final RString ZERO = new RString("0");
 
     private KanendoUpdateFutanwariaiHanteProcessParameter parameter;

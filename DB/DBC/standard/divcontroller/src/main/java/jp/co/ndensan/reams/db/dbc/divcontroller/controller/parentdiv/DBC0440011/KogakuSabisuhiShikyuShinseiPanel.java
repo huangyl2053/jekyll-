@@ -100,10 +100,8 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             if (受給者台帳.isEmpty() && 総合事業対象者.isEmpty()) {
                 throw new ApplicationException(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
             }
-        } else if (高額サービス費支給申請書登録.equals(メニューID)) {
-            if (受給者台帳.isEmpty()) {
-                throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
-            }
+        } else if (高額サービス費支給申請書登録.equals(メニューID) && 受給者台帳.isEmpty()) {
+            throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
         }
         if (!getHandler(div).is前排他キーのセット(被保険者番号)) {
             throw new PessimisticLockingException();
@@ -380,6 +378,12 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         return manager.get受給者台帳情報(被保険者番号);
     }
 
+    /**
+     * 総合事業対象者を取得する。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<SogoJigyoTaishosha>
+     */
     public List<SogoJigyoTaishosha> get総合事業対象者(HihokenshaNo 被保険者番号) {
         SogoJigyoTaishoshaManager manager = new SogoJigyoTaishoshaManager();
         return manager.get総合事業対象者(被保険者番号);

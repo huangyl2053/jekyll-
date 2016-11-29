@@ -45,7 +45,6 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
     private static final RString 窓口払い値 = new RString("1");
     private static final RString 口座払い値 = new RString("2");
     private static final RString 支給 = new RString("1");
-    private static final RString 不支給 = new RString("2");
     private static final RString 支払方法区分ONE = new RString("1");
     private static final RString 定量_円 = new RString("円");
     private static final int NUM_ONE = 1;
