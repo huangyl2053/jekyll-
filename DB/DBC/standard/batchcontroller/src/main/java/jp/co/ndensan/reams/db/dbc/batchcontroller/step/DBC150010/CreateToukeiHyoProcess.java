@@ -148,23 +148,25 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     @Override
     protected void afterExecute() {
         DbWT1513RiyoJokyoTokeihyoEntity before = getBefore();
-        for (RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity : 利用状況統計表集計結果Map.values()) {
-            利用状況統計表集計結果Entity.set作成日時(RDateTime.now());
-            利用状況統計表集計結果Entity.set保険者番号(保険者情報.getShoKisaiHokenshaNo().value());
-            利用状況統計表集計結果Entity.set保険者名(保険者情報.getShichosonMeisho());
-            if (!RString.isNullOrEmpty(before.getShoriShichosonCode())) {
-                利用状況統計表集計結果Entity.set処理市町村コード(new Code(before.getShoriShichosonCode()));
+        if (before != null) {
+            for (RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity : 利用状況統計表集計結果Map.values()) {
+                利用状況統計表集計結果Entity.set作成日時(RDateTime.now());
+                利用状況統計表集計結果Entity.set保険者番号(保険者情報.getShoKisaiHokenshaNo().value());
+                利用状況統計表集計結果Entity.set保険者名(保険者情報.getShichosonMeisho());
+                if (!RString.isNullOrEmpty(before.getShoriShichosonCode())) {
+                    利用状況統計表集計結果Entity.set処理市町村コード(new Code(before.getShoriShichosonCode()));
+                }
+                if (RString.isNullOrEmpty(before.getShoriShichosonName())) {
+                    利用状況統計表集計結果Entity.set処理市町村名(RString.EMPTY);
+                    利用状況統計表集計結果Entity.set旧市町村名(RString.EMPTY);
+                } else {
+                    利用状況統計表集計結果Entity.set処理市町村名(before.getShoriShichosonName());
+                    利用状況統計表集計結果Entity.set旧市町村名(before.getShoriShichosonName());
+                }
+                利用状況統計表集計結果Entity.set旧市町村コード(before.getKyuShichosonCode());
+                RiyoJokyoTokeihyoReport report = new RiyoJokyoTokeihyoReport(利用状況統計表集計結果Entity);
+                report.writeBy(利用状況統計表SourceWriter);
             }
-            if (RString.isNullOrEmpty(before.getShoriShichosonName())) {
-                利用状況統計表集計結果Entity.set処理市町村名(RString.EMPTY);
-                利用状況統計表集計結果Entity.set旧市町村名(RString.EMPTY);
-            } else {
-                利用状況統計表集計結果Entity.set処理市町村名(before.getShoriShichosonName());
-                利用状況統計表集計結果Entity.set旧市町村名(before.getShoriShichosonName());
-            }
-            利用状況統計表集計結果Entity.set旧市町村コード(before.getKyuShichosonCode());
-            RiyoJokyoTokeihyoReport report = new RiyoJokyoTokeihyoReport(利用状況統計表集計結果Entity);
-            report.writeBy(利用状況統計表SourceWriter);
         }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
@@ -183,7 +185,7 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
     @Override
     protected void keyBreakProcess(DbWT1513RiyoJokyoTokeihyoEntity current) {
         DbWT1513RiyoJokyoTokeihyoEntity before = getBefore();
-        if (hasBreak(before, current)) {
+        if (before != null && hasBreak(before, current)) {
             for (RiyoJokyoTokeihyoShukeiKekkaEntity 利用状況統計表集計結果Entity : 利用状況統計表集計結果Map.values()) {
                 利用状況統計表集計結果Entity.set作成日時(RDateTime.now());
                 利用状況統計表集計結果Entity.set保険者名(保険者情報.getShichosonMeisho());

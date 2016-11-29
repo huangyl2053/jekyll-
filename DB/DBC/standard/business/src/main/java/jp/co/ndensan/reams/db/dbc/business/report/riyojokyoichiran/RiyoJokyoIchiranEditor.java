@@ -229,8 +229,12 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
         source.listRiyoJokyo1_5 = DecimalFormatter.
                 toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getHokenRiyoshaFutangaku().toString()), 0);
         source.listRiyoJokyo2_1 = entity.get帳票出力対象データリスト().getTankiNyushoJitsunissu();
-        source.listRiyoJokyo2_2 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.退所_院_後の状態コード.getコード(),
-                new Code(entity.get帳票出力対象データリスト().getTaishogoJotaiCode()), FlexibleDate.getNowDate());
+        if (RString.isNullOrEmpty(entity.get帳票出力対象データリスト().getTaishogoJotaiCode())) {
+            source.listRiyoJokyo2_2 = RString.EMPTY;
+        } else {
+            source.listRiyoJokyo2_2 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.退所_院_後の状態コード.getコード(),
+                    new Code(entity.get帳票出力対象データリスト().getTaishogoJotaiCode()), FlexibleDate.getNowDate());
+        }
         source.listRiyoJokyo2_3 = DecimalFormatter.
                 toコンマ区切りRString(new Decimal(entity.get帳票出力対象データリスト().getHokenDekidakaTanisu().toString()), 0);
         source.listRiyoJokyo2_4 = DecimalFormatter.
