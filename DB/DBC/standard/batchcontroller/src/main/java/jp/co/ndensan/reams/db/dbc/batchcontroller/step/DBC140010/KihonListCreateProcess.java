@@ -91,6 +91,7 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
     private static final RString 入所_院_前 = new RString("201104");
     private static final RString 区分_基本 = new RString("1");
     private static final RString 広域内住所地特例フラグ = new RString("1");
+    private static final RString EMPTY = new RString("00000000");
 
     private static final int 居住サービス計画事業者名_LENGTH = 20;
     private static final int 居住サービス計画事業者名_LENGTH_40 = 40;
@@ -284,14 +285,20 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
 
     private RString get期間(RString 開始, RString 終了) {
         RStringBuilder 認定有効期間sb = new RStringBuilder();
-        if (!RString.isNullOrEmpty(開始)) {
+        if (!RString.isNullOrEmpty(開始) && !EMPTY.equals(開始)) {
             RString 開始_F = new RDate(開始.toString()).wareki().fillType(FillType.NONE).toDateString();
             認定有効期間sb.append(開始_F);
             認定有効期間sb.append(チルダ);
         }
-        if (!RString.isNullOrEmpty(終了)) {
+        if (!RString.isNullOrEmpty(終了) && !EMPTY.equals(終了)) {
+            if (認定有効期間sb.length() == 0) {
+                認定有効期間sb.append(チルダ);
+            }
             RString 終了_F = new RDate(終了.toString()).wareki().fillType(FillType.NONE).toDateString();
             認定有効期間sb.append(終了_F);
+        }
+        if (認定有効期間sb.length() == 0) {
+            return RString.EMPTY;
         }
         return 認定有効期間sb.toRString();
     }
@@ -322,17 +329,15 @@ public class KihonListCreateProcess extends BatchProcessBase<KihonRelateEntity> 
         if (RString.isNullOrEmpty(事業者名称)) {
             住サービス計画事業者名.add(RString.EMPTY);
             住サービス計画事業者名.add(RString.EMPTY);
+        } else if (事業者名称.length() <= 居住サービス計画事業者名_LENGTH) {
+            住サービス計画事業者名.add(事業者名称);
+            住サービス計画事業者名.add(RString.EMPTY);
+        } else if (事業者名称.length() <= 居住サービス計画事業者名_LENGTH_40) {
+            住サービス計画事業者名.add(事業者名称.substring(0, 居住サービス計画事業者名_LENGTH));
+            住サービス計画事業者名.add(事業者名称.substring(居住サービス計画事業者名_LENGTH));
         } else {
-            if (事業者名称.length() <= 居住サービス計画事業者名_LENGTH) {
-                住サービス計画事業者名.add(事業者名称);
-                住サービス計画事業者名.add(RString.EMPTY);
-            } else if (事業者名称.length() <= 居住サービス計画事業者名_LENGTH_40) {
-                住サービス計画事業者名.add(事業者名称.substring(0, 居住サービス計画事業者名_LENGTH));
-                住サービス計画事業者名.add(事業者名称.substring(居住サービス計画事業者名_LENGTH));
-            } else {
-                住サービス計画事業者名.add(事業者名称.substring(0, 居住サービス計画事業者名_LENGTH));
-                住サービス計画事業者名.add(事業者名称.substring(居住サービス計画事業者名_LENGTH, 居住サービス計画事業者名_LENGTH_40));
-            }
+            住サービス計画事業者名.add(事業者名称.substring(0, 居住サービス計画事業者名_LENGTH));
+            住サービス計画事業者名.add(事業者名称.substring(居住サービス計画事業者名_LENGTH, 居住サービス計画事業者名_LENGTH_40));
         }
         return 住サービス計画事業者名;
     }
