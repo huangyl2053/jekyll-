@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakuShutokuJiyuHihokensha;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakuSositsuJiyuHihokensha;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -285,13 +285,10 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         if (entity.get受給者台帳() != null) {
             csvEntity.set受給申請事由(get受給申請事由(entity.get受給者台帳().getJukyuShinseiJiyu().getColumnValue()));
             csvEntity.set受給申請日(format日付項目(entity.get受給者台帳().getJukyuShinseiYMD()));
-            if (entity.get受給者台帳() == null
-                    || entity.get受給者台帳().getYokaigoJotaiKubunCode() == null
-                    || entity.get受給者台帳().getYokaigoJotaiKubunCode().isEmpty()) {
-                csvEntity.set受給要介護度(RString.EMPTY);
+            if (entity.get受給者台帳().getYokaigoJotaiKubunCode() != null && !entity.get受給者台帳().getYokaigoJotaiKubunCode().isEmpty()) {
+                csvEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.get受給者台帳().getYokaigoJotaiKubunCode().value()).get名称());
             } else {
-                csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
-                        toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+                csvEntity.set受給要介護度(RString.EMPTY);
             }
             csvEntity.set受給認定開始日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanKaishiYMD()));
             csvEntity.set受給認定終了日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanShuryoYMD()));
@@ -436,13 +433,10 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         if (entity.get受給者台帳() != null) {
             csvEntity.set受給申請事由(get受給申請事由(entity.get受給者台帳().getJukyuShinseiJiyu().getColumnValue()));
             csvEntity.set受給申請日(format日付項目(entity.get受給者台帳().getJukyuShinseiYMD()));
-            if (entity.get受給者台帳() == null
-                    || entity.get受給者台帳().getYokaigoJotaiKubunCode() == null
-                    || entity.get受給者台帳().getYokaigoJotaiKubunCode().isEmpty()) {
-                csvEntity.set受給要介護度(RString.EMPTY);
+            if (entity.get受給者台帳().getYokaigoJotaiKubunCode() != null && !entity.get受給者台帳().getYokaigoJotaiKubunCode().isEmpty()) {
+                csvEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.get受給者台帳().getYokaigoJotaiKubunCode().value()).get名称());
             } else {
-                csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
-                        toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+                csvEntity.set受給要介護度(RString.EMPTY);
             }
             csvEntity.set受給認定開始日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanKaishiYMD()));
             csvEntity.set受給認定終了日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanShuryoYMD()));

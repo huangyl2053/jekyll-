@@ -15,10 +15,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiKoshinNintei;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -593,16 +592,10 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         csvEntity.set受給申請事由(isNull(entity.getDbV4001受給申請事由())
                 ? RString.EMPTY : JukyuShinseiJiyu.toValue(entity.getDbV4001受給申請事由().value()).get名称());
         csvEntity.set受給申請日(dataToRString(entity.getDbV4001受給申請年月日(), parameter));
-        KoroshoInterfaceShikibetsuCode kifsc = KoroshoInterfaceShikibetsuCode.toValueOrDefault(entity.getDbT4101厚労省IF識別コード(), null);
-        if (entity.getDbV4001要介護認定状態区分コード() == null
-                || entity.getDbV4001要介護認定状態区分コード().isEmpty()
-                || kifsc == null) {
-            csvEntity.set受給要介護度(RString.EMPTY);
+        if (entity.getDbV4001要介護認定状態区分コード() != null && !entity.getDbV4001要介護認定状態区分コード().isEmpty()) {
+            csvEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.getDbV4001要介護認定状態区分コード().value()).get名称());
         } else {
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(
-                    kifsc,
-                    entity.getDbV4001要介護認定状態区分コード().value()).getName()
-            );
+            csvEntity.set受給要介護度(RString.EMPTY);
         }
         csvEntity.set受給認定開始日(dataToRString(entity.getDbV4001認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.getDbV4001認定有効期間終了日(), parameter));
@@ -614,7 +607,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         }
 
         try {
-            if (MinashiKoshinNintei.通常認定.equals(MinashiKoshinNintei.toValue(entity.getDbT4001みなし要介護区分コード().value()))) {
+            if (MinashiCode.通常の認定.equals(MinashiCode.toValue(entity.getDbT4001みなし要介護区分コード().value()))) {
                 csvEntity.set受給みなし更新認定(RString.EMPTY);
             } else {
                 csvEntity.set受給みなし更新認定(みなし);
