@@ -45,7 +45,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 public class JikofutangakuShomeishoTorokuHandler {
 
     private final JikofutangakuShomeishoTorokuDiv div;
-    private static final int 平成26年度 = 2014;
     private static final int SIZE = 6;
     private static final RString STATUS_新規 = new RString("新規");
     private static final RString STATUS_修正 = new RString("修正");
