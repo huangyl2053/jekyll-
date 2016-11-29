@@ -692,8 +692,8 @@ public class ShujiiIkenshoSakuseiIrai {
         business.setHihokenshaNo10(hihokenshaNo.substring(数字_9));
         RDate 認定申請日 = row.getShinseiDay().getValue();
         if (認定申請日 != null) {
-            business.setShinseiYY1(認定申請日.getYear().wareki().toDateString().substring(数字_0, 数字_1));
-            business.setShinseiYY2(認定申請日.getYear().wareki().toDateString().substring(数字_1, 数字_2));
+            business.setShinseiYY1(認定申請日.getYear().wareki().toDateString().substring(数字_1, 数字_2));
+            business.setShinseiYY2(認定申請日.getYear().wareki().toDateString().substring(数字_2, 数字_3));
             business.setShinseiMM1(new RString(String.valueOf(認定申請日.getMonthValue() / 数字_10)));
             business.setShinseiMM2(new RString(String.valueOf(認定申請日.getMonthValue() % 数字_10)));
             business.setShinseiDD1(new RString(String.valueOf(認定申請日.getDayValue() / 数字_10)));
@@ -819,8 +819,8 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setJushinArea(div.getMeireisho().getTxtjyushinbasho().getValue());
         item.setHakkoYMD(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        item.setJushoText(row.getIryoukikanShozaichi());
-        item.setYubinNo(getEditedYubinNo(row.getIryoKikanYubinNo()));
+        item.setJushoText(row.getJusho());
+        item.setYubinNo(getEditedYubinNo(row.getYubinNo()));
         item.setMeishoFuyo(ChohyoAtesakiKeisho.toValue(
                 DbBusinessConfig.get(ConfigNameDBE.介護保険診断命令書_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
         item.setCustomerBarCode(ReportUtil.getCustomerBarCode(row.getIryoKikanYubinNo(), row.getIryoukikanShozaichi()));
