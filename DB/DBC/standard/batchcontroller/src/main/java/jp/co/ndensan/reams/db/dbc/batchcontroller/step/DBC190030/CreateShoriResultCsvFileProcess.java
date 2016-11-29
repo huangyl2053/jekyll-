@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -119,9 +118,8 @@ public class CreateShoriResultCsvFileProcess extends BatchProcessBase<KijunShuny
 
     @Override
     protected void afterExecute() {
-        getアクセスログ();
         処理結果確認リストＣＳＶ.close();
-        manager.spool(SubGyomuCode.DBC介護給付, 処理結果確認リストＣＳＶFilePath);
+        manager.spool(処理結果確認リストＣＳＶFilePath, getアクセスログ());
     }
 
     private AccessLogUUID getアクセスログ() {
