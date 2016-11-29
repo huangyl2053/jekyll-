@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -245,7 +245,8 @@ public class HanyoListFukaDaichoCsvEditor {
     private void 受給者台帳Newestの設定(HanyoListFukaDaichoCsvEntity csvEntity) {
         if (賦課台帳.get受給者台帳Newest() != null) {
             if (賦課台帳.get受給者台帳Newest().getYokaigoJotaiKubunCode() != null) {
-                csvEntity.set要介護度(YokaigoJotaiKubun.toValue(賦課台帳.get受給者台帳Newest().getYokaigoJotaiKubunCode().value()).getName());
+                csvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(),
+                        賦課台帳.get受給者台帳Newest().getYokaigoJotaiKubunCode().value()).getName());
             }
             if (賦課台帳.get受給者台帳Newest().getNinteiYukoKikanKaishiYMD() != null) {
                 csvEntity.set認定開始日(dataToRString(賦課台帳.get受給者台帳Newest().getNinteiYukoKikanKaishiYMD()));

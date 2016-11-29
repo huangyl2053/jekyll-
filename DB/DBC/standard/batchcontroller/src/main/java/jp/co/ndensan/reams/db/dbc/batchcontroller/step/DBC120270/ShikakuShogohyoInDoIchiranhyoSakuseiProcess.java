@@ -86,6 +86,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
     private static final int NUM_2 = 2;
     private static final int NUM_1 = 1;
     private static final RString 無し = new RString("1");
+    private static final RString 有り = new RString("2");
     private static IYokaigoJotaiKubun 要介護状態区分;
     private final Set<RString> 識別コードset = new HashSet<>();
     private ShikakuShogohyoInDoIchiranhyoSakuseiProcessParameter parameter;
@@ -381,7 +382,8 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
             if (無し.equals(entity.get資格照合表一時().getKyusochiTokureiCode())) {
                 csvEntity.set旧措置入所者特例コード(KyuSochiNyushoshaTokureiCode.無し.getコード());
                 csvEntity.set旧措置入所者特例有無(KyuSochiNyushoshaTokureiCode.無し.get名称());
-            } else {
+            }
+            if (有り.equals(entity.get資格照合表一時().getKyusochiTokureiCode())) {
                 csvEntity.set旧措置入所者特例コード(KyuSochiNyushoshaTokureiCode.有り.getコード());
                 csvEntity.set旧措置入所者特例有無(KyuSochiNyushoshaTokureiCode.有り.get名称());
             }

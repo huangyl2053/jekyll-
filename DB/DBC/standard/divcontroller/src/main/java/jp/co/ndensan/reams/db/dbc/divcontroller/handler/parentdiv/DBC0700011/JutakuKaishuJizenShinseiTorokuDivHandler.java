@@ -364,7 +364,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                 .getTxtHiyoTotalMae().setValue(result.get費用額合計());
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                .getTxtHokenTaishoHiyoMae().setValue(result.get費用額合計());
+                .getTxtHokenTaishoHiyoMae().setValue(result.get保険対象費用額());
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                 .getTxtHokenKyufuAmountMae().setValue(result.get保険給付額());
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
@@ -686,7 +686,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                     .getTxtHiyoTotalMae().setValue(result.get費用額合計());
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getTxtHokenTaishoHiyoMae().setValue(result.get費用額合計());
+                    .getTxtHokenTaishoHiyoMae().setValue(result.get保険対象費用額());
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                     .getTxtHokenKyufuAmountMae().setValue(result.get保険給付額());
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
@@ -1577,7 +1577,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                 .getTxtHiyoTotalMae().setValue(param.get費用額合計());
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                .getTxtHokenTaishoHiyoMae().setValue(param.get費用額合計());
+                .getTxtHokenTaishoHiyoMae().setValue(param.get保険対象費用額());
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                 .getTxtHokenKyufuAmountMae().setValue(param.get保険給付額());
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()

@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.euc.saishinsamoshitate;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.IIdoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -17,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.TsuzukigaraCode;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
@@ -38,7 +35,7 @@ public class HanyoListSaishinsaMoshitateAriEUCEntity {
     @CsvField(order = 2, name = "識別コード")
     private ShikibetsuCode 識別コード;
     @CsvField(order = 3, name = "住民種別")
-    private JuminJotai 住民種別;
+    private RString 住民種別;
     @CsvField(order = 4, name = "氏名")
     private AtenaMeisho 氏名;
     @CsvField(order = 5, name = "氏名カナ")
@@ -56,7 +53,7 @@ public class HanyoListSaishinsaMoshitateAriEUCEntity {
     @CsvField(order = 11, name = "世帯主名")
     private AtenaMeisho 世帯主名;
     @CsvField(order = 12, name = "住所コード")
-    private ZenkokuJushoCode 住所コード;
+    private RString 住所コード;
     @CsvField(order = 13, name = "郵便番号")
     private RString 郵便番号;
     @CsvField(order = 14, name = "住所＋番地＋方書")
@@ -184,5 +181,5 @@ public class HanyoListSaishinsaMoshitateAriEUCEntity {
     @CsvField(order = 75, name = "受給みなし更新認定")
     private RString 受給みなし更新認定;
     @CsvField(order = 76, name = "受給直近事由")
-    private ChokkinIdoJiyuCode 受給直近事由;
+    private RString 受給直近事由;
 }

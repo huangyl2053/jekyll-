@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0400011;
 
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0400011.HihokenshaShoBatchPrmDiv;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbu.definition.message.DbuErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -68,9 +68,9 @@ public class ValidationHandler {
 
     private static enum RRVMessages implements IValidationMessage {
 
-        ValidateA(DbzErrorMessages.期間が不正_未来日時入力不可, "開始日時に", "前回の基準日時"),
-        ValidateB(DbzErrorMessages.期間が不正_過去日時入力不可, "終了日時に", "今回の基準日時"),
-        ValidateC(DbzErrorMessages.期間が不正_未来日時入力不可, "開始日時に", "終了日時");
+        ValidateA(DbuErrorMessages.期間が不正_未来日時入力不可, "開始日時に", "前回の基準日時"),
+        ValidateB(DbuErrorMessages.期間が不正_過去日時入力不可, "終了日時に", "今回の基準日時"),
+        ValidateC(DbuErrorMessages.期間が不正_未来日時入力不可, "開始日時に", "終了日時");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

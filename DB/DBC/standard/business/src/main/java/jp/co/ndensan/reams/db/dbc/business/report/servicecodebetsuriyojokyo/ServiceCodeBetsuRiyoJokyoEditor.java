@@ -32,6 +32,7 @@ public class ServiceCodeBetsuRiyoJokyoEditor implements
 
     private final RDateTime 作成日時;
     private final ServicecodeRiyojokyoReport entity;
+    private static final RString 合計 = new RString("合計");
 
     /**
      * コンストラクタです
@@ -58,7 +59,7 @@ public class ServiceCodeBetsuRiyoJokyoEditor implements
         source.hokenshaNo1 = entity.get保険者番号().value();
         source.hokenshaName1 = entity.get保険者名();
 
-        if (明細リスト.get種類コード() != null) {
+        if (明細リスト.get種類コード() != null && !合計.equals(明細リスト.getサービス略称_上())) {
             source.List1_1 = 明細リスト.get種類コード();
         } else {
             source.List1_1 = RString.EMPTY;
@@ -90,7 +91,7 @@ public class ServiceCodeBetsuRiyoJokyoEditor implements
         source.List2_11 = doカンマ編集(明細リスト.get単位数合計値());
 
         source.title = entity.getタイトル();
-
+        source.breakKey = 明細リスト.get種類コード();
         return source;
 
     }
