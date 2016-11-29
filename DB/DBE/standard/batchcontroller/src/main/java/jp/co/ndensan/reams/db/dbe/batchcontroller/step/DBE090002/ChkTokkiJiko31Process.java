@@ -196,11 +196,6 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         }
         batchWrite = BatchReportFactory.createBatchReportWriter(reportId).addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
 
-
-
-
-
-
             TokkiText1ReportSource.LAYOUTBREAKITEM) {
             @Override
             public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
