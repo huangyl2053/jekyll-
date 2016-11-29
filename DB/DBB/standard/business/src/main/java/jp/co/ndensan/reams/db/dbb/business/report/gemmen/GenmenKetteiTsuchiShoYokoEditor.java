@@ -90,7 +90,7 @@ public class GenmenKetteiTsuchiShoYokoEditor implements IGenmenKetteiTsuchiShoYo
             }
             RString 減免状態区分 = 減免決定通知書情報.get減免の情報更正後().get減免状態区分();
             if (!RString.isNullOrEmpty(減免状態区分)) {
-                source.ketteiKekka = GemmenChoshuYuyoStateKubun.toValue(減免決定通知書情報.get減免の情報更正後().get減免状態区分()).get名称()
+                source.ketteiKekka = GemmenChoshuYuyoStateKubun.toValue(減免状態区分).get名称()
                         .replace(new RString("決定_"), RString.EMPTY);
             }
         }
