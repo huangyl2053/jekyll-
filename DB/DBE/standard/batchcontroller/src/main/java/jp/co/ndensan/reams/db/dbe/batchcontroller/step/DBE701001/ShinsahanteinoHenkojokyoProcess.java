@@ -51,7 +51,7 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
     private static final RString 実施済 = new RString("2");
     private static final RString 全合議体 = new RString("全合議体");
     private static final RString 全市町村 = new RString("全市町村");
-    private static final RString 全市町村コード = new RString("000000");
+    private static final RString 全市町村コード = RString.EMPTY;
     private ShinsahanteinoHenkojokyoProcessParameter paramter;
     private IHokokuShiryoSakuSeiMapper mapper;
     private ShinsahanteinoHenkojokyo henkojokyo;

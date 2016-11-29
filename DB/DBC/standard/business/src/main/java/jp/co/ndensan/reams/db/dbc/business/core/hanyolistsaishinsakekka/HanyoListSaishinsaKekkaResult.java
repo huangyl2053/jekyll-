@@ -21,8 +21,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -116,13 +118,17 @@ public class HanyoListSaishinsaKekkaResult {
      * @param entity HanyoListSaishinsaKekkaRelateEntity
      * @param 連番 連番
      * @param 市町村名MasterMap 市町村名MasterMap
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association association
+     * @param 導入団体情報 Association
      * @return HanyoListSaishinsaKekkaRenbanAriEUCEntity
      */
     public HanyoListSaishinsaKekkaRenbanAriEUCEntity setRenbanariEUCEntity(HanyoListSaishinsaKekkaRelateEntity entity,
             int 連番,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            Association association) {
+            ChohyoSeigyoKyotsu 帳票制御共通,
+            Association association,
+            Association 導入団体情報) {
         HanyoListSaishinsaKekkaRenbanAriEUCEntity eucEntity = new HanyoListSaishinsaKekkaRenbanAriEUCEntity();
         eucEntity.set連番(new RString(String.valueOf(連番)));
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.getPsmEntity();
@@ -130,7 +136,7 @@ public class HanyoListSaishinsaKekkaResult {
         if (宛名Entity != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(宛名Entity).to個人();
             eucEntity.set識別コード(iKojin.get識別コード());
-            eucEntity.set住民種別(iKojin.get住民状態());
+            eucEntity.set住民種別(iKojin.get住民状態().住民状態略称());
             eucEntity.set氏名(iKojin.get名称().getName());
             eucEntity.set氏名カナ(iKojin.get名称().getKana());
             eucEntity.set生年月日(set日付編集(iKojin.get生年月日().toFlexibleDate()));
@@ -139,10 +145,9 @@ public class HanyoListSaishinsaKekkaResult {
             eucEntity.set続柄コード(iKojin.get続柄コードリスト().toTsuzukigaraCode());
             eucEntity.set世帯コード(iKojin.get世帯コード());
             eucEntity.set世帯主名(iKojin.get世帯主名());
-            eucEntity.set住所コード(iKojin.get住所().get全国住所コード());
+            eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所番地方書(get住所_番地_方書(iKojin.get住所().get住所(),
-                    get番地(iKojin.get住所().get番地()), get方書(iKojin.get住所().get方書())));
+            eucEntity.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -213,8 +218,7 @@ public class HanyoListSaishinsaKekkaResult {
         eucEntity.set受給申請事由(set受給申請事由(申請事由, entity));
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
         if (entity.get要介護認定状態区分コード() != null && !entity.get要介護認定状態区分コード().isEmpty()) {
-            eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(processParameter.getDate(),
-                    entity.get要介護認定状態区分コード().value()).getName());
+            eucEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.get要介護認定状態区分コード().value()).get名称());
         }
         eucEntity.set受給認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
         eucEntity.set受給認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
@@ -223,7 +227,7 @@ public class HanyoListSaishinsaKekkaResult {
             eucEntity.set受給旧措置(旧措置者);
         }
         RString 要介護区分 = nullToEmpty(entity.getみなし要介護区分コード());
-        eucEntity.set受給みなし更新認定(set受給みなし更新認定(要介護区分));
+        eucEntity.set受給みなし更新認定(get受給みなし更新認定(要介護区分));
         RString 受給直近事由 = nullToEmpty(entity.get直近異動事由コード());
         if (!受給直近事由.isNullOrEmpty()) {
             eucEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(受給直近事由).get名称());
@@ -231,24 +235,40 @@ public class HanyoListSaishinsaKekkaResult {
         return eucEntity;
     }
 
+    private RString get受給みなし更新認定(RString みなし要介護区分コード) {
+        RString 受給みなし更新認定 = RString.EMPTY;
+        List minashiCodeList = new ArrayList();
+        for (MinashiCode minashiCode : MinashiCode.values()) {
+            minashiCodeList.add(minashiCode.getコード());
+        }
+        if (minashiCodeList.contains(みなし要介護区分コード) && !MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
+            受給みなし更新認定 = みなし;
+        }
+        return 受給みなし更新認定;
+    }
+
     /**
      * HanyoListSaishinsaKekkaRenbanNashiEUCEntityの設定クラスです。
      *
      * @param entity entity
      * @param 市町村名MasterMap 市町村名MasterMap
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association association
+     * @param 導入団体情報 Association
      * @return HanyoListSaishinsaKekkaRenbanNashiEUCEntity
      */
     public HanyoListSaishinsaKekkaRenbanNashiEUCEntity setRenbanashiEUCEntity(HanyoListSaishinsaKekkaRelateEntity entity,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            Association association) {
+            ChohyoSeigyoKyotsu 帳票制御共通,
+            Association association,
+            Association 導入団体情報) {
         HanyoListSaishinsaKekkaRenbanNashiEUCEntity eucEntity = new HanyoListSaishinsaKekkaRenbanNashiEUCEntity();
         personalDataList.add(toPersonalData(entity));
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.getPsmEntity();
         if (宛名Entity != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(宛名Entity).to個人();
             eucEntity.set識別コード(iKojin.get識別コード());
-            eucEntity.set住民種別(iKojin.get住民状態());
+            eucEntity.set住民種別(iKojin.get住民状態().住民状態略称());
             eucEntity.set氏名(iKojin.get名称().getName());
             eucEntity.set氏名カナ(iKojin.get名称().getKana());
             eucEntity.set生年月日(set日付編集(iKojin.get生年月日().toFlexibleDate()));
@@ -257,10 +277,9 @@ public class HanyoListSaishinsaKekkaResult {
             eucEntity.set続柄コード(iKojin.get続柄コードリスト().toTsuzukigaraCode());
             eucEntity.set世帯コード(iKojin.get世帯コード());
             eucEntity.set世帯主名(iKojin.get世帯主名());
-            eucEntity.set住所コード(iKojin.get住所().get全国住所コード());
+            eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所番地方書(get住所_番地_方書(iKojin.get住所().get住所(),
-                    get番地(iKojin.get住所().get番地()), get方書(iKojin.get住所().get方書())));
+            eucEntity.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -332,8 +351,7 @@ public class HanyoListSaishinsaKekkaResult {
         eucEntity.set受給申請事由(set受給申請事由(申請事由, entity));
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
         if (entity.get要介護認定状態区分コード() != null && !entity.get要介護認定状態区分コード().isEmpty()) {
-            eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(processParameter.getDate(),
-                    entity.get要介護認定状態区分コード().value()).getName());
+            eucEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.get要介護認定状態区分コード().value()).get名称());
         } else {
             eucEntity.set受給要介護度(RString.EMPTY);
         }
@@ -344,7 +362,7 @@ public class HanyoListSaishinsaKekkaResult {
             eucEntity.set受給旧措置(旧措置者);
         }
         RString 要介護区分 = nullToEmpty(entity.getみなし要介護区分コード());
-        eucEntity.set受給みなし更新認定(set受給みなし更新認定(要介護区分));
+        eucEntity.set受給みなし更新認定(get受給みなし更新認定(要介護区分));
         RString 受給直近事由 = nullToEmpty(entity.get直近異動事由コード());
         if (!受給直近事由.isNullOrEmpty()) {
             eucEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(受給直近事由).get名称());
@@ -685,22 +703,6 @@ public class HanyoListSaishinsaKekkaResult {
         }
     }
 
-    private RString set受給みなし更新認定(RString 要介護区分) {
-        if (要介護区分.isNullOrEmpty()) {
-            return RString.EMPTY;
-        }
-        try {
-            MinashiCode.toValue(要介護区分);
-        } catch (IllegalArgumentException e) {
-            return RString.EMPTY;
-        }
-        if (!MinashiCode.通常の認定.getコード().equals(MinashiCode.toValue(要介護区分).getコード())) {
-            return みなし;
-        } else {
-            return RString.EMPTY;
-        }
-    }
-
     private RString get市町村名(KoseiShichosonMaster koseiShichosonMaster) {
         if (koseiShichosonMaster != null) {
             return koseiShichosonMaster.get市町村名称();
@@ -748,10 +750,8 @@ public class HanyoListSaishinsaKekkaResult {
             if (!isNullCheck(entity.get広住特措置元市町村コード())) {
                 証記載保険者番号 = get保険者番号(市町村名MasterMap.get(entity.get広住特措置元市町村コード()));
             }
-        } else {
-            if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty() && entity.get市町村コード() != null && !entity.get市町村コード().isEmpty()) {
-                証記載保険者番号 = get保険者番号(市町村名MasterMap.get(entity.get市町村コード().value()));
-            }
+        } else if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty() && entity.get市町村コード() != null && !entity.get市町村コード().isEmpty()) {
+            証記載保険者番号 = get保険者番号(市町村名MasterMap.get(entity.get市町村コード().value()));
         }
         return 証記載保険者番号;
     }

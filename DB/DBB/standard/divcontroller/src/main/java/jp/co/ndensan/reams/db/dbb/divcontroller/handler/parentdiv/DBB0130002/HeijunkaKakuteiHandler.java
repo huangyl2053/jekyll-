@@ -243,10 +243,20 @@ public class HeijunkaKakuteiHandler {
         FlexibleYear 賦課年度 = new FlexibleYear(調定年度.toString());
         TokuchoHeijunkaKakutei.createInstance().updateFukaShoriJokyo(賦課年度, 処理日付管理.get基準日時());
         ShoriDateKanriManager manager = new ShoriDateKanriManager();
-        処理日付管理 = 処理日付管理.createBuilderForEdit()
-                .set基準日時(new YMDHMS(RDate.getNowDate(), RDate.getNowTime())).build();
-        処理日付管理 = 処理日付管理.modifiedModel();
-        manager.save処理日付管理マスタ(処理日付管理);
+        ShoriDateKanri 処理日付管理new = null;
+        if (特徴平準化_特徴6月分.equals(ResponseHolder.getMenuID())) {
+            処理日付管理new = 処理日付管理.createBuilderForEdit()
+                    .set処理名(ShoriName.特徴平準化_6月分_確定.get名称())
+                    .set基準日時(new YMDHMS(RDate.getNowDate(), RDate.getNowTime())).build();
+        } else if (特徴平準化_特徴8月分.equals(ResponseHolder.getMenuID())) {
+            処理日付管理new = 処理日付管理.createBuilderForEdit()
+                    .set処理名(ShoriName.特徴平準化_8月分_確定.get名称())
+                    .set基準日時(new YMDHMS(RDate.getNowDate(), RDate.getNowTime())).build();
+        }
+        if (処理日付管理new != null) {
+            処理日付管理new = 処理日付管理new.modifiedModel();
+            manager.save処理日付管理マスタ(処理日付管理new);
+        }
     }
 
     /**

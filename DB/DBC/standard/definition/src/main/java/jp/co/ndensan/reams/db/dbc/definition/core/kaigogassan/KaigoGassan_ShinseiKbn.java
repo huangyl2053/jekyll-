@@ -26,7 +26,7 @@ public enum KaigoGassan_ShinseiKbn {
     /**
      * コード:3 名称:取り下げ 略称:定義なし
      */
-    取り下げ("3", "取り下げ");
+    取り下げ("3", "取下げ");
 
     private final RString code;
     private final RString fullName;
@@ -63,6 +63,21 @@ public enum KaigoGassan_ShinseiKbn {
     public static KaigoGassan_ShinseiKbn toValue(RString code) {
         for (KaigoGassan_ShinseiKbn kaigogassanidokubun : KaigoGassan_ShinseiKbn.values()) {
             if (kaigogassanidokubun.code.equals(code)) {
+                return kaigogassanidokubun;
+            }
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護合算_支給申請区分"));
+    }
+
+    /**
+     * 介護合算_支給申請区分の名称と一致する内容を探します。
+     *
+     * @param name 名称
+     * @return 名称に対応する介護合算_支給申請区分
+     */
+    public static KaigoGassan_ShinseiKbn valueof(RString name) {
+        for (KaigoGassan_ShinseiKbn kaigogassanidokubun : KaigoGassan_ShinseiKbn.values()) {
+            if (kaigogassanidokubun.fullName.equals(name)) {
                 return kaigogassanidokubun;
             }
         }

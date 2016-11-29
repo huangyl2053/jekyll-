@@ -19,8 +19,6 @@ import lombok.Getter;
 public class KyokaisoKanriMasterListHeadItem {
 
     private final RString printTimeStamp;
-    // TODO 袁献輝 QA608、rseファイルにpageCountを存在しない　2016/02/20。
-//    private final RString pageCount;
     private final RString shichosonCode;
     private final RString shichosonName;
     private final RString shutsuryokujun1;

@@ -50,8 +50,6 @@ public class KyoutsuIdoReanrakuhyoEraTeiseiHandler {
                 row.setTxtHihoBango(entity.get被保番号().value());
             }
             row.setTxtHihokenshaShimei(entity.getかな氏名());
-            // TODO QA104461により、エラー訂正処理全体の設計の見直しが必要なので、送付区分は実装できません。
-//            row.setTxtSofuKubun(entity.get送付区分());
             row.setTxtKomoku(entity.get項目());
             rowList.add(row);
         }
@@ -65,18 +63,6 @@ public class KyoutsuIdoReanrakuhyoEraTeiseiHandler {
      */
     public KyodoJukyushaTaishoshaEntity get一覧検索キー() {
         KyodoJukyushaTaishoshaEntity entity = new KyodoJukyushaTaishoshaEntity();
-        // TODO QA104461により、エラー訂正処理全体の設計の見直しが必要なので実装できません。
-//        dgIdoReanrakuhyoEraTeisei_Row row = div.getDgIdoReanrakuhyoEraTeisei().getActiveRow();
-//        if (!RString.isNullOrEmpty(row.getTxtIdobi().getValue().toDateString())) {
-//            entity.set異動日(new FlexibleDate(row.getTxtIdobi().getValue().toDateString()));
-//        }
-//        entity.set被保番号(new HihokenshaNo(row.getTxtHihoBango()));
-//        entity.set被保険者氏名(row.getTxtHihokenshaShimei());
-//        entity.set履歴番号(0);
-//        entity.set対象年月(FlexibleYearMonth.MAX);
-//        entity.set論理削除フラグ(true);
-//        entity.set送付区分(row.getTxtSofuKubun());
-//        entity.set項目(row.getTxtKomoku());
         return entity;
     }
 }

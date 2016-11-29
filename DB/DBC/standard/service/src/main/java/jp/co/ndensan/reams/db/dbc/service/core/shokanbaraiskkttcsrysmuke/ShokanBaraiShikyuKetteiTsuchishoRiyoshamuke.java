@@ -137,7 +137,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
         Decimal 支給金額 = Decimal.ZERO;
         RString 給付の種類 = RString.EMPTY;
         RString 増減理由等 = RString.EMPTY;
-        ShokanKetteiTsuchiShoHihokenshabunItem item = new ShokanKetteiTsuchiShoHihokenshabunItem();
+        ShokanKetteiTsuchiShoHihokenshabunItem item;
         for (ShokanKetteiTsuchiShoShiharai shoShiharai : businessList) {
             item = new ShokanKetteiTsuchiShoHihokenshabunItem();
             key = getJufukuKey(shoShiharai);
@@ -198,23 +198,26 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(shoShiharai.get宛先情報(), 地方公共団体, 帳票制御共通情報);
             SofubutsuAtesakiSource 送付物宛先ソースデータ = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
             setSofubutsuAtesaki(item, 送付物宛先ソースデータ);
-            
-            boolean 金融機関未登録フラグ = false;
-            if (ShiharaiHohoKubun.口座払.getコード().equals(shoShiharai.get支払方法区分コード())
-                    && (null == shoShiharai.get金融機関コード() || shoShiharai.get金融機関コード().isEmpty())) {
-                金融機関未登録フラグ = true;
-            }
-            if (!RString.isNullOrEmpty(shoShiharai.get支給不支給決定区分())
-                    && ShikyuFushikyuKubun.支給.getコード().equals(shoShiharai.get支給不支給決定区分())
-                    && ShikakuKubun._２号.getコード().equals(shoShiharai.get被保険者区分コード())) {
-                金融機関未登録フラグ = false;
-            }
-            if (!金融機関未登録フラグ) {
-                retList.add(item);
-            }
-            
+            set金融機関未登録フラグ(shoShiharai, retList, item);
         }
         return retList;
+    }
+
+    private void set金融機関未登録フラグ(ShokanKetteiTsuchiShoShiharai shoShiharai,
+            List<ShokanKetteiTsuchiShoHihokenshabunItem> retList, ShokanKetteiTsuchiShoHihokenshabunItem item) {
+        boolean 金融機関未登録フラグ = false;
+        if (ShiharaiHohoKubun.口座払.getコード().equals(shoShiharai.get支払方法区分コード())
+                && (null == shoShiharai.get金融機関コード() || shoShiharai.get金融機関コード().isEmpty())) {
+            金融機関未登録フラグ = true;
+        }
+        if (!RString.isNullOrEmpty(shoShiharai.get支給不支給決定区分())
+                && ShikyuFushikyuKubun.支給.getコード().equals(shoShiharai.get支給不支給決定区分())
+                && ShikakuKubun._２号.getコード().equals(shoShiharai.get被保険者区分コード())) {
+            金融機関未登録フラグ = false;
+        }
+        if (!金融機関未登録フラグ) {
+            retList.add(item);
+        }
     }
 
     private void setTitle(ShokanKetteiTsuchiShoHihokenshabunItem item, ShokanKetteiTsuchiShoShiharai shoShiharai) {

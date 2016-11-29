@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class YokaigoJotaiKubunCode implements Serializable {
+public class YokaigoJotaiTokyuSochishaKubunCode implements Serializable {
 
     private Code yokaigoJotaiKubunCode;
     private boolean kyuSochishaFlag;

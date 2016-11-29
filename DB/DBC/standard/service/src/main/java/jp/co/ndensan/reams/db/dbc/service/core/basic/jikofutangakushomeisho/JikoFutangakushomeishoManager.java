@@ -62,15 +62,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class JikoFutangakushomeishoManager {
 
-    private DbT7069KaigoToiawasesakiDac 介護問合せ先dac;
+    private final DbT7069KaigoToiawasesakiDac 介護問合せ先dac;
     private final MapperProvider mapperProvider;
     private final DbT3170JigyoKogakuGassanJikoFutanGakuDac 事業高額合算情報dac;
     private final DbT3070KogakuGassanJikoFutanGakuDac 高額合算自己負担額情報dac;
     private static final RString メニューID_DBCMN63001 = new RString("DBCMN63001");
     private static final RString メニューID_DBCMNN2001 = new RString("DBCMNN2001");
     private IJikoFutangakushomeishoMapper mapper;
-    private static final RString 自己負担額証明書作成 = new RString("自己負担額証明書");
-    private static final RString 事業分_自己負担額証明書作成 = new RString("事業分・自己負担額証明書");
 
     /**
      * コンストラクタです。
@@ -356,21 +354,6 @@ public class JikoFutangakushomeishoManager {
             return ReportUtil.get文書番号(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100050.getReportId(), FlexibleDate.getNowDate());
         } else if (メニューID_DBCMNN2001.equals(メニューID)) {
             return ReportUtil.get文書番号(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100051.getReportId(), FlexibleDate.getNowDate());
-        }
-        return RString.EMPTY;
-    }
-
-    /**
-     * getタイトル
-     *
-     * @param menuId menuId
-     * @return タイトル
-     */
-    public RString getタイトル(RString menuId) {
-        if (メニューID_DBCMN63001.equals(menuId)) {
-            return 自己負担額証明書作成;
-        } else if (メニューID_DBCMNN2001.equals(menuId)) {
-            return 事業分_自己負担額証明書作成;
         }
         return RString.EMPTY;
     }

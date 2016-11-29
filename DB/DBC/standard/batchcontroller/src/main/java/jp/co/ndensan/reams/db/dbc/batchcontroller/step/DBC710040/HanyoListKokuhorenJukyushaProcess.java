@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkokuhorenjukyusha.Ha
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistkokuhorenjukyusha.IHanyoListKokuhorenJukyushaEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -30,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -69,6 +72,7 @@ public class HanyoListKokuhorenJukyushaProcess extends BatchProcessBase<HanyoLis
     private Association association;
     @BatchWriter
     private CsvWriter<IHanyoListKokuhorenJukyushaEUCEntity> eucCsvWriter;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
 
     @Override
     protected void initialize() {
@@ -76,6 +80,8 @@ public class HanyoListKokuhorenJukyushaProcess extends BatchProcessBase<HanyoLis
         business = new HanyoListKokuhorenJukyushaResult(processParameter);
         association = AssociationFinderFactory.createInstance().getAssociation();
         get市町村名();
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701004.getReportId());
     }
 
     @Override
@@ -100,10 +106,11 @@ public class HanyoListKokuhorenJukyushaProcess extends BatchProcessBase<HanyoLis
     @Override
     protected void process(HanyoListKokuhorenJukyushaRelateEntity entity) {
         flag = true;
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(entity.get市町村コード()));
         if (processParameter.is連番付加()) {
-            eucCsvWriter.writeLine(business.set連番ありEUCEntity(entity, 市町村名MasterMap, association, 連番++));
+            eucCsvWriter.writeLine(business.set連番ありEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association, 導入団体情報, 連番++));
         } else {
-            eucCsvWriter.writeLine(business.set連番なしEUCEntity(entity, 市町村名MasterMap, association));
+            eucCsvWriter.writeLine(business.set連番なしEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association, 導入団体情報));
         }
     }
 

@@ -703,9 +703,10 @@ public class HonnSanteiFuka {
                 ? Decimal.ZERO : 賦課情報_更正前.get特徴期別金額06();
         Decimal 更正前特徴期別金額合計 = 特徴期別金額01.add(特徴期別金額02).add(特徴期別金額03)
                 .add(特徴期別金額04).add(特徴期別金額05).add(特徴期別金額06);
-        Decimal 更正後特徴期別金額合計 = 特徴期別金額List.get(INDEX_0).add(特徴期別金額List.get(INDEX_1))
-                .add(特徴期別金額List.get(INDEX_2)).add(特徴期別金額List.get(INDEX_3))
-                .add(特徴期別金額List.get(INDEX_4)).add(特徴期別金額List.get(INDEX_5));
+        Decimal 更正後特徴期別金額合計 = Decimal.ZERO;
+        for (Decimal 特徴期別金額 : 特徴期別金額List) {
+            更正後特徴期別金額合計 = 更正後特徴期別金額合計.add(特徴期別金額);
+        }
         ChoshuHoho 徴収方法の情報_クローン = new ChoshuHoho(徴収方法情報_更正前.toEntity());
         CalculateChoteiResult result = new CalculateChoteiResult();
         if (更正後特徴期別金額合計.compareTo(更正前特徴期別金額合計) < INDEX_0) {

@@ -7,21 +7,28 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteish
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideResult;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuide.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 認定審査会委員ガイドDivの操作を行うクラスです。
@@ -40,10 +47,47 @@ public class NinteiShinsakaiIinGuideHandler {
     }
 
     /**
+     * 初期化
+     *
+     *
+     */
+    public void onLoad() {
+        set全部クリア();
+        set性別();
+        set審査会委員資格();
+        div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        set医療機関();
+        set介護事業者();
+        setその他事業者();
+    }
+
+    /**
+     * 全項目クリア処理です。
+     *
+     */
+    private void set全部クリア() {
+        div.getKensakuJoken().getTxtShinsakaiIinCodeFrom().clearValue();
+        div.getKensakuJoken().getTxtShinsakaiIinCodeTo().clearValue();
+        div.getKensakuJoken().getTxtShinsakaiIinName().clearValue();
+        div.getKensakuJoken().getDdlSeibetsu().setSelectedKey(RString.EMPTY);
+        div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
+        div.getKensakuJoken().getTxtMaxKensu().clearValue();
+        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
+        div.getBtnSaikensaku().setVisible(false);
+        div.getDdlIryoKikan().getDataSource().clear();
+        div.getDdlKaigoJigyosha().getDataSource().clear();
+        div.getDdlSonotaJigyosha().getDataSource().clear();
+        List<RString> list = new ArrayList();
+        list.add(new RString("key0"));
+        div.getKensakuJoken().getShosaiJoken().getChkHaishi().setSelectedItemsByKey(list);
+        div.getKensakuJoken().getShosaiJoken().getChkKiken().setSelectedItemsByKey(list);
+    }
+
+    /**
      * 性別ドロップダウンリストの設定です。
      *
      */
-    public void set性別() {
+    private void set性別() {
         List<KeyValueDataSource> 性別リスト = new ArrayList<>();
         KeyValueDataSource dateSource = new KeyValueDataSource();
         dateSource.setKey(Seibetsu.男.getコード());
@@ -60,7 +104,7 @@ public class NinteiShinsakaiIinGuideHandler {
      * 審査会委員資格ドロップダウンリストの設定です。
      *
      */
-    public void set審査会委員資格() {
+    private void set審査会委員資格() {
         List<KeyValueDataSource> 審査会委員資格リスト = new ArrayList<>();
         KeyValueDataSource dateSource = new KeyValueDataSource();
         dateSource.setKey(Sikaku.医師.getコード());
@@ -133,14 +177,27 @@ public class NinteiShinsakaiIinGuideHandler {
         div.getDdlShinsainShikakuCode().setDataSource(審査会委員資格リスト);
     }
 
+    private Decimal get最大取得件数() {
+        Decimal 最大取得件数 = new Decimal(0);
+        if (DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) != null) {
+            最大取得件数 = new Decimal(DbBusinessConfig.get(
+                    ConfigNameDBU.検索制御_最大取得件数,
+                    RDate.getNowDate(),
+                    SubGyomuCode.DBU介護統計報告).toString());
+        }
+        return 最大取得件数;
+    }
+
     /**
      * 医療機関情報ドロップダウンリストの設定です。
      *
      * @param 市町村コード 市町村コード
      */
-    public void set医療機関(LasdecCode 市町村コード) {
+    private void set医療機関() {
+        LasdecCode 市町村コード = div.getKensakuJoken().getCcdHokensha().getSelectedItem().get市町村コード();
         List<KeyValueDataSource> 医療機関リスト = createInstanceOfManager().get主治医医療機関情報(市町村コード).records();
         div.getKensakuJoken().getDdlIryoKikan().setDataSource(医療機関リスト);
+        div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setSelectedKey(RString.EMPTY);
     }
 
     /**
@@ -148,9 +205,11 @@ public class NinteiShinsakaiIinGuideHandler {
      *
      * @param 市町村コード 市町村コード
      */
-    public void set介護事業者(LasdecCode 市町村コード) {
+    private void set介護事業者() {
+        LasdecCode 市町村コード = div.getKensakuJoken().getCcdHokensha().getSelectedItem().get市町村コード();
         List<KeyValueDataSource> 介護事業者リスト = createInstanceOfManager().get認定調査委託先情報(市町村コード).records();
         div.getDdlKaigoJigyosha().setDataSource(介護事業者リスト);
+        div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setSelectedKey(RString.EMPTY);
     }
 
     /**
@@ -158,11 +217,28 @@ public class NinteiShinsakaiIinGuideHandler {
      *
      * @param 証記載保険者番号 証記載保険者番号
      */
-    public void setその他事業者(ShoKisaiHokenshaNo 証記載保険者番号) {
+    private void setその他事業者() {
+        ShoKisaiHokenshaNo 証記載保険者番号 = div.getKensakuJoken().getCcdHokensha().getSelectedItem().get証記載保険者番号();
         List<KeyValueDataSource> その他事業者リスト = createInstanceOfManager().getその他機関情報(証記載保険者番号).records();
         div.getDdlSonotaJigyosha().setDataSource(その他事業者リスト);
+        div.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha().setSelectedKey(RString.EMPTY);
     }
-
+    
+    /**
+     * 保険者選択の処理です。
+     *
+     */
+    public void set保険者選択() {
+        set医療機関();
+        set介護事業者();
+        setその他事業者();
+        List<dgShinsakaiIinIchiran_Row> 検索一覧データ = new ArrayList<>();
+        div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().setDataSource(検索一覧データ);
+        div.getShinsakaiIinIchiran().setIsOpen(false);
+        div.getBtnSaikensaku().setVisible(false);
+    }
+    
+    
     /**
      * 審査会委員一覧情報の設定です。
      *

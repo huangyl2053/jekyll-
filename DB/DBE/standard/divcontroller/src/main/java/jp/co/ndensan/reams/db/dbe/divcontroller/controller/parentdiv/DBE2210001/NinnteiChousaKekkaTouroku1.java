@@ -514,7 +514,8 @@ public class NinnteiChousaKekkaTouroku1 {
     }
 
     /**
-     * 実施場所selectのonChange処理です。
+     * 実施場所selectのonChange処理です。<br />
+     * 選択された値をViewStateへのputのみを実施しています。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
@@ -549,13 +550,6 @@ public class NinnteiChousaKekkaTouroku1 {
 //            return ResponseData.of(div).respond();
 //        }
         ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 現在の実施場所);
-
-        if (!ChosaJisshiBashoCode.自宅内.getコード().equals(現在の実施場所)) {
-            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(false);
-        } else {
-            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().clearValue();
-            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(true);
-        }
 
         return ResponseData.of(div).respond();
     }
@@ -1230,7 +1224,8 @@ public class NinnteiChousaKekkaTouroku1 {
         dbt5202builder.set認定調査委託先コード(new JigyoshaNo(div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText()));
         dbt5202builder.set認定調査員コード(div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText());
         dbt5202builder.set認定調査実施場所コード(new Code(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey()));
-        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey())) {
+        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey())
+                || ChosaJisshiBashoCode.自宅外.getコード().equals(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey())) {
             dbt5202builder.set認定調査実施場所名称(RString.EMPTY);
         } else {
             dbt5202builder.set認定調査実施場所名称(div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getValue());
@@ -1668,7 +1663,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private void resetData(NinnteiChousaKekkaTouroku1Div div) {
         前排他キーの解除();
         div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().clearValue();
-        div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setSelectedKey(new RString("1"));
+        div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setSelectedKey(ChosaJisshiBashoCode.自宅内.getコード());
         div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().clearValue();
         div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().clearValue();
         div.getCcdChosaJisshishaJoho().getTxtShozokuKikanName().clearValue();

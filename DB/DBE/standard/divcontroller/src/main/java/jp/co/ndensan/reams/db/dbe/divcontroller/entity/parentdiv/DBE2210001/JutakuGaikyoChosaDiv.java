@@ -14,15 +14,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JutakuGaikyoChosaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radJutakuKaishu")
-    private RadioButton radJutakuKaishu;
     @JsonProperty("dgRiyoServiceJyokyo")
     private DataGrid<dgRiyoServiceJyokyo_Row> dgRiyoServiceJyokyo;
 
@@ -32,24 +30,6 @@ public class JutakuGaikyoChosaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getradJutakuKaishu
-     * @return radJutakuKaishu
-     */
-    @JsonProperty("radJutakuKaishu")
-    public RadioButton getRadJutakuKaishu() {
-        return radJutakuKaishu;
-    }
-
-    /*
-     * setradJutakuKaishu
-     * @param radJutakuKaishu radJutakuKaishu
-     */
-    @JsonProperty("radJutakuKaishu")
-    public void setRadJutakuKaishu(RadioButton radJutakuKaishu) {
-        this.radJutakuKaishu = radJutakuKaishu;
-    }
-
     /*
      * getdgRiyoServiceJyokyo
      * @return dgRiyoServiceJyokyo

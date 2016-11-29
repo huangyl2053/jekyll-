@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassan.KogakuGassanData;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;

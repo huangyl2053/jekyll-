@@ -35,9 +35,9 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IEucFileOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
@@ -891,17 +891,16 @@ public class TokuchoHeijunkaKakuteiBatch {
         builder.append(帳票作成時);
         出力条件.add(builder.toRString());
 
-        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                EUC_ID.value(),
+        EucFileOutputJokenhyoItem eucFileOutputJokenhyoItem = new EucFileOutputJokenhyoItem(
+                日本語ファイル名,
                 導入団体コード,
                 市町村名,
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                日本語ファイル名,
-                出力件数,
-                CSV出力有無,
                 英数字ファイル名,
+                EUC_ENTITY_ID.toRString(),
+                出力件数,
                 出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
+        IEucFileOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(eucFileOutputJokenhyoItem);
         printer.print();
     }
 

@@ -16,7 +16,7 @@ import java.util.List;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyotakuServiceRirekiIchiranJoho implements Serializable, Cloneable {
+public class KyotakuServiceRirekiIchiranJoho implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private List<KyotakuServiceRirekiIchiranEntityResult> rirekiIchiran;

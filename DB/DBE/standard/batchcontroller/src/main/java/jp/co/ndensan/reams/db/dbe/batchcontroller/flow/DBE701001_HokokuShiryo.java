@@ -57,7 +57,7 @@ public class DBE701001_HokokuShiryo extends BatchFlowBase<DBE701001_HokokuShiryo
         if (getParameter().isCsvShutsuryoku()) {
             executeStep(県報告用資料情報作成);
         }
-
+        executeStep(条件表);
     }
 
     /**

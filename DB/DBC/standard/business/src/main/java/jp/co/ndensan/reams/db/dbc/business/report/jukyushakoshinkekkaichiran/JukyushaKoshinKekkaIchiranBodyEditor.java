@@ -327,14 +327,13 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
     }
 
     private static RString date_to_string(RString 年月日) {
-        if (null == 年月日) {
+        年月日 = 年月日.trim();
+        if (null == 年月日 || RString.EMPTY.equals(年月日)) {
             return RString.EMPTY;
         }
-        if (FlexibleDate.canConvert(年月日)) {
-            if (new FlexibleDate(年月日).isWareki()) {
-                return new FlexibleDate(年月日).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-                        .fillType(FillType.BLANK).toDateString();
-            }
+        if (FlexibleDate.canConvert(年月日) && new FlexibleDate(年月日).isWareki()) {
+            return new FlexibleDate(年月日).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+                    .fillType(FillType.BLANK).toDateString();
         }
         return 年月日;
     }

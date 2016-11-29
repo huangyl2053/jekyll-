@@ -456,27 +456,79 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiParameter"
             resultMap="resultMap_KetteiTsuchiSho"
             fetchSize="500">
-        WITH master AS (
+        WITH DbT3034 AS (
+            SELECT
+            DbT3034ShokanShinsei."hiHokenshaNo"
+            ,DbT3034ShokanShinsei."serviceTeikyoYM"
+            ,DbT3034ShokanShinsei."seiriNo"
+            ,DbT3034ShokanShinsei."shoKisaiHokenshaNo"
+            ,DbT3034ShokanShinsei."uketsukeYMD"
+            ,DbT3034ShokanShinsei."shinseishaKubun"
+            ,DbT3034ShokanShinsei."shiharaiHohoKubunCode"
+            ,DbT3034ShokanShinsei."shiharaiBasho"
+            ,DbT3034ShokanShinsei."shiharaiKaishiYMD"
+            ,DbT3034ShokanShinsei."shiharaiShuryoYMD"
+            ,DbT3034ShokanShinsei."shiharaiKaishiTime"
+            ,DbT3034ShokanShinsei."shiharaiShuryoTime"
+            ,DbT3034ShokanShinsei."shiharaiKingakuTotal"
+            ,DbT3034ShokanShinsei."kozaID"
+            ,DbT3036ShokanHanteiKekka."ketteiYMD"
+            ,DbT3036ShokanHanteiKekka."ketteiTsuchiNo"
+            ,DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun"
+            ,DbT3036ShokanHanteiKekka."shiharaiKingaku"
+            ,DbT3036ShokanHanteiKekka."sagakuKingakuGokei"
+            ,DbT3036ShokanHanteiKekka."zenkaiShiharaiKingaku"
+           FROM
+            rgdb."DbT3034ShokanShinsei" AS DbT3034ShokanShinsei
+            LEFT JOIN
+            rgdb."DbT3036ShokanHanteiKekka" AS DbT3036ShokanHanteiKekka
+            ON
+            DbT3034ShokanShinsei."hiHokenshaNo" = DbT3036ShokanHanteiKekka."hiHokenshaNo"
+            AND
+            DbT3034ShokanShinsei."serviceTeikyoYM" = DbT3036ShokanHanteiKekka."serviceTeikyoYM"
+            AND
+            DbT3034ShokanShinsei."seiriNo" = DbT3036ShokanHanteiKekka."seiriNo"
+           WHERE
+            ((
+            DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun" = #{shikyu}
+            AND
+            DbT3036ShokanHanteiKekka."shiharaiKingaku"<![CDATA[<>]]> '0' ) OR
+            DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun" = #{hushikyu} )
+            <if test="isRiaruHakko">
+                AND
+                DbT3036ShokanHanteiKekka."ketteiTsuchiHakkoKubun" = #{inshoKubun}
+            </if>
+            <if test="isInshoKubun3">
+                AND(
+                DbT3036ShokanHanteiKekka."ketteiTsuchishoSakuseiYMD" = ''
+                OR DbT3036ShokanHanteiKekka."ketteiTsuchishoSakuseiYMD" IS NULL)
+            </if>
+            <if test="chusyutuUketsukeFlag">
+                AND
+                DbT3034ShokanShinsei."uketsukeYMD" <![CDATA[>=]]> #{dataFrom}
+                AND
+                DbT3034ShokanShinsei."uketsukeYMD" <![CDATA[<=]]> #{dataTo}
+            </if>
+            <if test="chusyutuKetteiFlag">
+                AND
+                DbT3036ShokanHanteiKekka."ketteiYMD" <![CDATA[>=]]> #{dataFrom}
+                AND
+                DbT3036ShokanHanteiKekka."ketteiYMD" <![CDATA[<=]]> #{dataTo}
+            </if>
+            <if test="chusyutuKetteiShaUketsukeFlag">
+                AND
+                DbT3036ShokanHanteiKekka."ketteiIchiranTorikomiYM" = #{ketteishaUketsukeYM}
+            </if>
+            <if test="yoshiFlag">
+                AND
+                DbT3034ShokanShinsei."shiharaiHohoKubunCode" = #{kozashiharai}
+                AND
+                DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun" = #{shikyu}
+            </if>
+        ),
+        master AS (
         SELECT
-        DbT3034ShokanShinsei."hiHokenshaNo"
-        ,DbT3034ShokanShinsei."serviceTeikyoYM"
-        ,DbT3034ShokanShinsei."seiriNo"
-        ,DbT3034ShokanShinsei."shoKisaiHokenshaNo"
-        ,DbT3034ShokanShinsei."uketsukeYMD"
-        ,DbT3034ShokanShinsei."shinseishaKubun"
-        ,DbT3034ShokanShinsei."shiharaiHohoKubunCode"
-        ,DbT3034ShokanShinsei."shiharaiBasho"
-        ,DbT3034ShokanShinsei."shiharaiKaishiYMD"
-        ,DbT3034ShokanShinsei."shiharaiShuryoYMD"
-        ,DbT3034ShokanShinsei."shiharaiKaishiTime"
-        ,DbT3034ShokanShinsei."shiharaiShuryoTime"
-        ,DbT3034ShokanShinsei."shiharaiKingakuTotal"
-        ,DbT3036ShokanHanteiKekka."ketteiYMD"
-        ,DbT3036ShokanHanteiKekka."ketteiTsuchiNo"
-        ,DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun"
-        ,DbT3036ShokanHanteiKekka."shiharaiKingaku"
-        ,DbT3036ShokanHanteiKekka."sagakuKingakuGokei"
-        ,DbT3036ShokanHanteiKekka."zenkaiShiharaiKingaku"
+        DbT3034ShokanShinsei.*
         ,true as "hakkoutaisyouFlg"
         ,口座情報."uaT0310Koza_kozaId"
         ,口座情報."uaT0310Koza_kinyuKikanCode"
@@ -501,15 +553,7 @@
         ,ShiharaiHohoHenkoSashitome."hihokenshaNo" AS sashitomeHiHokenshaNo
         ,ShiharaiHohoHenkoSashitome."sashitomeKojoNo"
         FROM
-        rgdb."DbT3034ShokanShinsei" AS DbT3034ShokanShinsei
-        LEFT JOIN
-        rgdb."DbT3036ShokanHanteiKekka" AS DbT3036ShokanHanteiKekka
-        ON
-        DbT3034ShokanShinsei."hiHokenshaNo" = DbT3036ShokanHanteiKekka."hiHokenshaNo"
-        AND
-        DbT3034ShokanShinsei."serviceTeikyoYM" = DbT3036ShokanHanteiKekka."serviceTeikyoYM"
-        AND
-        DbT3034ShokanShinsei."seiriNo" = DbT3036ShokanHanteiKekka."seiriNo"
+        DbT3034 AS DbT3034ShokanShinsei
         LEFT JOIN
         (
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />
@@ -558,17 +602,48 @@
         ON
         DbT3034ShokanShinsei."hiHokenshaNo" = SUBHihokenshaDaicho."hihokenshaNo"
         LEFT JOIN
-        rgdb."DbT4001JukyushaDaicho" SUBDbT4001JukyushaDaicho
+        (
+        SELECT
+        "hihokenshaNo"
+        ,"shichosonCode"
+        ,"yokaigoJotaiKubunCode"
+        ,"ninteiYukoKikanKaishiYMD"
+        ,"ninteiYukoKikanShuryoYMD"
+        ,"ninteiYMD"
+        FROM
+        (
+        SELECT
+        ROW_NUMBER() OVER(PARTITION BY DbT4001JukyushaDaicho."hihokenshaNo",DbT4001JukyushaDaicho."shichosonCode"
+        ORDER BY DbT4001JukyushaDaicho."rirekiNo" DESC,DbT4001JukyushaDaicho."edaban" DESC)  AS  "sortNo"
+        ,DbT4001JukyushaDaicho."hihokenshaNo"
+        ,DbT4001JukyushaDaicho."shichosonCode"
+        ,DbT4001JukyushaDaicho."yokaigoJotaiKubunCode"
+        ,DbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD"
+        ,DbT4001JukyushaDaicho."ninteiYukoKikanShuryoYMD"
+        ,DbT4001JukyushaDaicho."ninteiYMD"
+        FROM
+        rgdb."DbT4001JukyushaDaicho" AS DbT4001JukyushaDaicho
+        INNER JOIN DbT3034
+        ON 
+            DbT3034."hiHokenshaNo" = DbT4001JukyushaDaicho."hihokenshaNo"
+        AND ( 
+            (SUBSTR(DbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD", 1, 6) <![CDATA[<=]]> DbT3034."serviceTeikyoYM"
+            AND SUBSTR(DbT4001JukyushaDaicho."ninteiYukoKikanShuryoYMD", 1, 6) <![CDATA[>=]]> DbT3034."serviceTeikyoYM"
+            AND DbT4001JukyushaDaicho."yukoMukoKubun" = '1'
+            )
+            OR 
+            (SUBSTR(DbT4001JukyushaDaicho."ninteiYMD", 1, 6) <![CDATA[<=]]> DbT3034."serviceTeikyoYM"
+            AND DbT4001JukyushaDaicho."yukoMukoKubun" = '2'
+            AND DbT4001JukyushaDaicho."yokaigoJotaiKubunCode" = '01'
+            )
+        )    
+        )B
+        WHERE
+        B."sortNo" = 1
+        )SUBDbT4001JukyushaDaicho
         ON
         DbT3034ShokanShinsei."hiHokenshaNo" = SUBDbT4001JukyushaDaicho."hihokenshaNo"
-        AND
-        SUBDbT4001JukyushaDaicho."isDeleted" = FALSE
-        AND
-        SUBDbT4001JukyushaDaicho."yukoMukoKubun" = '1'
-        AND 
-        SUBDbT4001JukyushaDaicho."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> (DbT3034ShokanShinsei."serviceTeikyoYM" || '31')
-        AND 
-        SUBDbT4001JukyushaDaicho."ninteiYukoKikanKaishiYMD" <![CDATA[>=]]> (DbT3034ShokanShinsei."serviceTeikyoYM" || '01')
+        
         LEFT JOIN
         (
         SELECT
@@ -608,43 +683,6 @@
         ShiharaiHohoHenkoSashitome."johoBunruiKubun" = '1'
         AND
         ShiharaiHohoHenkoSashitome."sashitomeKojoJotaiKubun"='01'
-        WHERE
-        ((
-        DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun" = #{shikyu}
-        AND
-        DbT3036ShokanHanteiKekka."shiharaiKingaku"<![CDATA[<>]]> '0' ) OR
-        DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun" = #{hushikyu} )
-        <if test="isRiaruHakko">
-            AND
-            DbT3036ShokanHanteiKekka."ketteiTsuchiHakkoKubun" = #{inshoKubun}
-        </if>
-        <if test="isInshoKubun3">
-            AND(
-            DbT3036ShokanHanteiKekka."ketteiTsuchishoSakuseiYMD" = ''
-            OR DbT3036ShokanHanteiKekka."ketteiTsuchishoSakuseiYMD" IS NULL)
-        </if>
-        <if test="chusyutuUketsukeFlag">
-            AND
-            DbT3034ShokanShinsei."uketsukeYMD" <![CDATA[>=]]> #{dataFrom}
-            AND
-            DbT3034ShokanShinsei."uketsukeYMD" <![CDATA[<=]]> #{dataTo}
-        </if>
-        <if test="chusyutuKetteiFlag">
-            AND
-            DbT3036ShokanHanteiKekka."ketteiYMD" <![CDATA[>=]]> #{dataFrom}
-            AND
-            DbT3036ShokanHanteiKekka."ketteiYMD" <![CDATA[<=]]> #{dataTo}
-        </if>
-        <if test="chusyutuKetteiShaUketsukeFlag">
-            AND
-            DbT3036ShokanHanteiKekka."ketteiIchiranTorikomiYM" = #{ketteishaUketsukeYM}
-        </if>
-        <if test="yoshiFlag">
-            AND
-            DbT3034ShokanShinsei."shiharaiHohoKubunCode" = #{kozashiharai}
-            AND
-            DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun" = #{shikyu}
-        </if>
         )
 
         SELECT

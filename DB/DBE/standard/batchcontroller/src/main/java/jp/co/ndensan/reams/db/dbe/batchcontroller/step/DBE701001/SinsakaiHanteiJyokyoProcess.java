@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsahanteijokyo.ShinsaHanteiJokyoItem;
+import jp.co.ndensan.reams.db.dbe.business.report.shinsahanteijokyo.ShinsaHanteiJokyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.SinsakaiHanteiJyokyoProcessParameter;
@@ -12,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.SinsakaiH
 import jp.co.ndensan.reams.db.dbe.entity.report.shinsahanteijokyo.ShinsaHanteiJokyoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -28,13 +29,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1450-020 wangxiaodong
  */
-public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHanteiJyokyoHeaderEntity> {
+public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHanteiJyokyoHeaderEntity> {
 
-    private static final int 桁数_市町村コード_CD除く = 5;
-
-    private static final RString SELECT_HEADER
-            = new RString("jp.co.ndensan.reams.db.dbe.persistence"
-                    + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getSinsakaiHanteiJyokyoHeader");
+    private static final RString SELECT_HEADER = new RString("jp.co.ndensan.reams.db.dbe.persistence"
+            + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getSinsakaiHanteiJyokyoHeader");
     private static final RString 帳票タイトル = new RString("介護認定審査会判定状況表");
     private static final DecimalFormat FORMAT = new DecimalFormat("0.0");
     private static final RString コード_非該当 = new RString("01");
@@ -59,12 +57,11 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
     private static final RString 割合なし = new RString("0.0%");
     private static final int 割合 = 100;
     private static final RString パーセント = new RString("%");
-    private static final RString 全合議体 = new RString("全合議体");
-    private static final RString 全市町村コード = new RString("000000");
-    private static final RString 全市町村 = new RString("全市町村");
     List<ShinsaHanteiJokyoItem> itemList;
     private SinsakaiHanteiJyokyoProcessParameter paramter;
     private IHokokuShiryoSakuSeiMapper mapper;
+    private static final RString 全合議体 = new RString("全合議体");
+    private static final int 小数点以下有効桁数 = 1;
 
     @BatchWriter
     private BatchReportWriter<ShinsaHanteiJokyoReportSource> batchWriter;
@@ -89,46 +86,60 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
     }
 
     @Override
-    protected void process(SinsakaiHanteiJyokyoHeaderEntity current) {
-        if (0 != current.getShinsakaiKaisaiNoCount()) {
-            List<SinsakaiHanteiJyokyoEntity> 審査判定状況 = get審査判定状況(current);
-            ShinsaHanteiJokyoItem 一次判定非該当 = get一次判定非該当(審査判定状況, current);
-            ShinsaHanteiJokyoItem 一次判定要支援1 = get一次判定要支援1(審査判定状況, current);
-            ShinsaHanteiJokyoItem 一次判定要支援2 = get一次判定要支援2(審査判定状況, current);
-            ShinsaHanteiJokyoItem 一次判定要介護1 = get一次判定要介護1(審査判定状況, current);
-            ShinsaHanteiJokyoItem 一次判定要介護2 = get一次判定要介護2(審査判定状況, current);
-            ShinsaHanteiJokyoItem 一次判定要介護3 = get一次判定要介護3(審査判定状況, current);
-            ShinsaHanteiJokyoItem 一次判定要介護4 = get一次判定要介護4(審査判定状況, current);
-            ShinsaHanteiJokyoItem 一次判定要介護5 = get一次判定要介護5(審査判定状況, current);
-            ShinsaHanteiJokyoItem 合計 = get計(current, 一次判定非該当, 一次判定要支援1, 一次判定要支援2, 一次判定要介護1,
-                    一次判定要介護2, 一次判定要介護3, 一次判定要介護4, 一次判定要介護5);
-            ShinsaHanteiJokyoItem 変更者Item = get変更者(current, 一次判定非該当, 一次判定要支援1, 一次判定要支援2, 一次判定要介護1,
-                    一次判定要介護2, 一次判定要介護3, 一次判定要介護4, 一次判定要介護5);
-            ShinsaHanteiJokyoItem 割合計 = get割合(current, 合計);
-            itemList.add(get判定件数(一次判定非該当, 合計));
-            itemList.add(一次判定要支援1);
-            itemList.add(一次判定要支援2);
-            itemList.add(一次判定要介護1);
-            itemList.add(一次判定要介護2);
-            itemList.add(一次判定要介護3);
-            itemList.add(一次判定要介護4);
-            itemList.add(一次判定要介護5);
-            itemList.add(合計);
-            itemList.add(変更者Item);
-            itemList.add(割合計);
+    protected void keyBreakProcess(SinsakaiHanteiJyokyoHeaderEntity headerJoho) {
+        if (hasBrek(getBefore(), headerJoho)) {
+            ShinsaHanteiJokyoReport report = ShinsaHanteiJokyoReport.createFrom(itemList);
+            report.writeBy(reportSourceWriter);
+            itemList = new ArrayList<>();
         }
     }
 
     @Override
+    protected void usualProcess(SinsakaiHanteiJyokyoHeaderEntity current) {
+        List<SinsakaiHanteiJyokyoEntity> 審査判定状況 = get審査判定状況(current);
+        ShinsaHanteiJokyoItem 一次判定非該当 = get一次判定非該当(審査判定状況, current);
+        ShinsaHanteiJokyoItem 一次判定要支援1 = get一次判定要支援1(審査判定状況, current);
+        ShinsaHanteiJokyoItem 一次判定要支援2 = get一次判定要支援2(審査判定状況, current);
+        ShinsaHanteiJokyoItem 一次判定要介護1 = get一次判定要介護1(審査判定状況, current);
+        ShinsaHanteiJokyoItem 一次判定要介護2 = get一次判定要介護2(審査判定状況, current);
+        ShinsaHanteiJokyoItem 一次判定要介護3 = get一次判定要介護3(審査判定状況, current);
+        ShinsaHanteiJokyoItem 一次判定要介護4 = get一次判定要介護4(審査判定状況, current);
+        ShinsaHanteiJokyoItem 一次判定要介護5 = get一次判定要介護5(審査判定状況, current);
+        ShinsaHanteiJokyoItem 合計 = get計(current, 一次判定非該当, 一次判定要支援1, 一次判定要支援2, 一次判定要介護1,
+                一次判定要介護2, 一次判定要介護3, 一次判定要介護4, 一次判定要介護5);
+        ShinsaHanteiJokyoItem 変更者Item = get変更者(current, 一次判定非該当, 一次判定要支援1, 一次判定要支援2, 一次判定要介護1,
+                一次判定要介護2, 一次判定要介護3, 一次判定要介護4, 一次判定要介護5);
+        ShinsaHanteiJokyoItem 割合計 = get割合(current, 合計);
+        itemList.add(get判定件数(一次判定非該当, 合計));
+        itemList.add(一次判定要支援1);
+        itemList.add(一次判定要支援2);
+        itemList.add(一次判定要介護1);
+        itemList.add(一次判定要介護2);
+        itemList.add(一次判定要介護3);
+        itemList.add(一次判定要介護4);
+        itemList.add(一次判定要介護5);
+        itemList.add(合計);
+        itemList.add(変更者Item);
+        itemList.add(割合計);
+    }
+
+    @Override
     protected void afterExecute() {
-        //ShinsaHanteiJokyoReport report = ShinsaHanteiJokyoReport.createFrom(itemList);
-        //report.writeBy(reportSourceWriter);
+        ShinsaHanteiJokyoReport report = ShinsaHanteiJokyoReport.createFrom(itemList);
+        report.writeBy(reportSourceWriter);
+    }
+
+    private boolean hasBrek(SinsakaiHanteiJyokyoHeaderEntity before, SinsakaiHanteiJyokyoHeaderEntity current) {
+        return !(before.getGogitaiMei() == current.getGogitaiMei()
+                && before.getShoKisaiHokenshaNo().equals(current.getShoKisaiHokenshaNo()));
     }
 
     private List<SinsakaiHanteiJyokyoEntity> get審査判定状況(SinsakaiHanteiJyokyoHeaderEntity current) {
         SinsakaiHanteiJyokyoMyBatisParameter batisParameter = paramter.toSinsakaiHanteiJyokyoMyBatisParameter();
+        batisParameter.setGogitaiNo(current.getGogitaiNo());
         batisParameter.setTaishoGeppiFrom(current.getShinsakaiKaisaiYMDMin());
         batisParameter.setTaishoGeppiTo(current.getShinsakaiKaisaiYMDMax());
+        batisParameter.setShichosonCode(current.getShichosonCode());
         return mapper.getSinsakaiHanteiJyokyo(batisParameter);
     }
 
@@ -146,13 +157,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 + 非該当要介護2被保険者数 + 非該当要介護3被保険者数 + 非該当要介護4被保険者数 + 非該当要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
+                paramter.getGogitaiNo() == -1 ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
+                current.getShichosonMeisho(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -177,15 +188,11 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 RString.EMPTY,
                 toRString(非該当計 - 非該当非該当被保険者数),
                 非該当計 == 0 || 非該当計 == 非該当非該当被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(非該当計 - 非該当非該当被保険者数).divide(非該当計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(非該当計 - 非該当非該当被保険者数).divide(非該当計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
         return item;
-    }
-
-    private static RString to五桁(RString rstr) {
-        return rstr.substringReturnAsPossible(0, 桁数_市町村コード_CD除く);
     }
 
     private ShinsaHanteiJokyoItem get一次判定要支援1(List<SinsakaiHanteiJyokyoEntity> 審査判定状況,
@@ -202,13 +209,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 + 要支援1要介護2被保険者数 + 要支援1要介護3被保険者数 + 要支援1要介護4被保険者数 + 要支援1要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
+                paramter.getGogitaiNo() == -1 ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
+                current.getShichosonMeisho(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -233,7 +240,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 toRString(要支援1非該当被保険者数),
                 toRString(要支援1計 - 要支援1非該当被保険者数 - 要支援1要支援1被保険者数),
                 要支援1計 == 0 || 要支援1計 == 要支援1要支援1被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要支援1計 - 要支援1要支援1被保険者数).divide(要支援1計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(要支援1計 - 要支援1要支援1被保険者数).divide(要支援1計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -254,13 +261,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 + 要支援2要介護2被保険者数 + 要支援2要介護3被保険者数 + 要支援2要介護4被保険者数 + 要支援2要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
+                paramter.getGogitaiNo() == -1 ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
+                current.getShichosonMeisho(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -285,7 +292,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 toRString(要支援2非該当被保険者数 + 要支援2要支援1被保険者数),
                 toRString(要支援2要介護2被保険者数 + 要支援2要介護3被保険者数 + 要支援2要介護4被保険者数 + 要支援2要介護5被保険者数),
                 要支援2計 == 0 || 要支援2計 == 要支援2要支援2被保険者数 + 要支援2要介護1被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要支援2計 - 要支援2要支援2被保険者数 - 要支援2要介護1被保険者数).divide(要支援2計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(要支援2計 - 要支援2要支援2被保険者数 - 要支援2要介護1被保険者数).divide(要支援2計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -306,13 +313,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 + 要介護1要介護2被保険者数 + 要介護1要介護3被保険者数 + 要介護1要介護4被保険者数 + 要介護1要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
+                paramter.getGogitaiNo() == -1 ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
+                current.getShichosonMeisho(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -336,8 +343,8 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 toRString(要介護1計 - 要介護1要介護1被保険者数 - 要介護1要支援2被保険者数),
                 toRString(要介護1非該当被保険者数 + 要介護1要支援1被保険者数),
                 toRString(要介護1要介護2被保険者数 + 要介護1要介護3被保険者数 + 要介護1要介護4被保険者数 + 要介護1要介護5被保険者数),
-                要介護1計 == 0 || 要介護1計 == 要介護1要支援2被保険者数 + 要介護1要介護1被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要介護1計 - 要介護1要支援2被保険者数 - 要介護1要介護1被保険者数).divide(要介護1計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                要介護1計 == 0 || 要介護1計 == 要介護1要介護1被保険者数 + 要介護1要支援2被保険者数 ? 割合なし : new RString(
+                        FORMAT.format(new Decimal(要介護1計 - 要介護1要介護1被保険者数 - 要介護1要支援2被保険者数).divide(要介護1計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -358,13 +365,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 + 要介護2要介護2被保険者数 + 要介護2要介護3被保険者数 + 要介護2要介護4被保険者数 + 要介護2要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
+                paramter.getGogitaiNo() == -1 ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
+                current.getShichosonMeisho(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -389,7 +396,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 toRString(要介護2非該当被保険者数 + 要介護2要支援1被保険者数 + 要介護2要支援2被保険者数 + 要介護2要介護1被保険者数),
                 toRString(要介護2要介護3被保険者数 + 要介護2要介護4被保険者数 + 要介護2要介護5被保険者数),
                 要介護2計 == 0 || 要介護2計 == 要介護2要介護2被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要介護2計 - 要介護2要介護2被保険者数).divide(要介護2計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(要介護2計 - 要介護2要介護2被保険者数).divide(要介護2計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -410,13 +417,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 + 要介護3要介護2被保険者数 + 要介護3要介護3被保険者数 + 要介護3要介護4被保険者数 + 要介護3要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
+                paramter.getGogitaiNo() == -1 ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
+                current.getShichosonMeisho(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -442,7 +449,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                         + 要介護3要支援2被保険者数 + 要介護3要介護1被保険者数 + 要介護3要介護2被保険者数),
                 toRString(要介護3要介護4被保険者数 + 要介護3要介護5被保険者数),
                 要介護3計 == 0 || 要介護3計 == 要介護3要介護3被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要介護3計 - 要介護3要介護3被保険者数).divide(要介護3計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(要介護3計 - 要介護3要介護3被保険者数).divide(要介護3計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -463,13 +470,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 + 要介護4要介護2被保険者数 + 要介護4要介護3被保険者数 + 要介護4要介護4被保険者数 + 要介護4要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
+                paramter.getGogitaiNo() == -1 ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
+                current.getShichosonMeisho(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -494,7 +501,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 toRString(要介護4計 - 要介護4要介護4被保険者数 - 要介護4要介護5被保険者数),
                 toRString(要介護4要介護5被保険者数),
                 要介護4計 == 0 || 要介護4計 == 要介護4要介護4被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要介護4計 - 要介護4要介護4被保険者数).divide(要介護4計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(要介護4計 - 要介護4要介護4被保険者数).divide(要介護4計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -515,13 +522,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 + 要介護5要介護2被保険者数 + 要介護5要介護3被保険者数 + 要介護5要介護4被保険者数 + 要介護5要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
+                paramter.getGogitaiNo() == -1 ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
+                current.getShichosonMeisho(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -546,7 +553,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 toRString(要介護5計 - 要介護5要介護5被保険者数),
                 RString.EMPTY,
                 要介護5計 == 0 || 要介護5計 == 要介護5要介護5被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要介護5計 - 要介護5要介護5被保険者数).divide(要介護5計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(要介護5計 - 要介護5要介護5被保険者数).divide(要介護5計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -616,13 +623,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 + toInt(一次判定要介護4.getListHantei_14()) + toInt(一次判定要介護5.getListHantei_14());
         ShinsaHanteiJokyoItem 合計 = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
+                paramter.getGogitaiNo() == -1 ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
+                current.getShichosonMeisho(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -647,7 +654,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(計軽度変更者数),
                 new RString(計重度変更者数),
                 計計 == 0 || 計判定変更者数 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(計判定変更者数).divide(計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(計判定変更者数).divide(計計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -672,11 +679,9 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 + toInt(一次判定要介護2.getListHantei_3()) + toInt(一次判定要介護3.getListHantei_3())
                 + toInt(一次判定要介護4.getListHantei_3()) + toInt(一次判定要介護5.getListHantei_3());
         int 変更者要支援2 = toInt(一次判定非該当.getListHantei_4()) + toInt(一次判定要支援1.getListHantei_4())
-                //                + toInt(一次判定要介護1.getListHantei_4())
                 + toInt(一次判定要介護2.getListHantei_4()) + toInt(一次判定要介護3.getListHantei_4())
                 + toInt(一次判定要介護4.getListHantei_4()) + toInt(一次判定要介護5.getListHantei_4());
         int 変更者要介護1 = toInt(一次判定非該当.getListHantei_5()) + toInt(一次判定要支援1.getListHantei_5())
-                //                + toInt(一次判定要支援2.getListHantei_5())
                 + toInt(一次判定要介護2.getListHantei_5()) + toInt(一次判定要介護3.getListHantei_5())
                 + toInt(一次判定要介護4.getListHantei_5()) + toInt(一次判定要介護5.getListHantei_5());
         int 変更者要介護2 = toInt(一次判定非該当.getListHantei_6()) + toInt(一次判定要支援1.getListHantei_6())
@@ -697,13 +702,13 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 + toInt(一次判定要介護4.getListHantei_9());
         ShinsaHanteiJokyoItem 変更者Item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
-                paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
+                paramter.getGogitaiNo() == -1 ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
+                current.getShichosonMeisho(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -722,7 +727,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 toRString(変更者要介護3),
                 toRString(変更者要介護4),
                 toRString(変更者要介護5),
-                new RString(変更者非該当 + 変更者要支援1 + 変更者要支援2 + 変更者要介護1 + 変更者要介護2 + 変更者要介護3 + 変更者要介護4 + 変更者要介護5),
+                toRString(変更者非該当 + 変更者要支援1 + 変更者要支援2 + 変更者要介護1 + 変更者要介護2 + 変更者要介護3 + 変更者要介護4 + 変更者要介護5),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -745,15 +750,15 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         int 二次判定要介護4計 = Integer.parseInt(合計.getListHantei_8().toString());
         int 二次判定要介護5計 = Integer.parseInt(合計.getListHantei_9().toString());
         int 合計計 = Integer.parseInt(合計.getListHantei_10().toString());
-        RString shichosonName = find市町村名(this.paramter);
         ShinsaHanteiJokyoItem 割合Item = new ShinsaHanteiJokyoItem(
-                帳票タイトル, find合議体名(this.paramter),
+                帳票タイトル,
+                paramter.getGogitaiNo() == -1 ? 全合議体 : paramter.getGogitaiName(),
                 get対象開始年月日(),
                 get対象終了年月日(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
-                shichosonName,
+                current.getShichosonMeisho(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -765,22 +770,22 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 計,
                 new RString("割合"),
                 合計計 == 0 || 二次判定非該当計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定非該当計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定非該当計).divide(合計計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 合計計 == 0 || 二次判定要支援1計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要支援1計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要支援1計).divide(合計計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 合計計 == 0 || 二次判定要支援2計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要支援2計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要支援2計).divide(合計計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 合計計 == 0 || 二次判定要介護1計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要介護1計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要介護1計).divide(合計計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 合計計 == 0 || 二次判定要介護2計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要介護2計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要介護2計).divide(合計計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 合計計 == 0 || 二次判定要介護3計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要介護3計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要介護3計).divide(合計計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 合計計 == 0 || 二次判定要介護4計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要介護4計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要介護4計).divide(合計計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
                 合計計 == 0 || 二次判定要介護5計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要介護5計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
-                new RString("100.0%"),
+                        FORMAT.format(new Decimal(二次判定要介護5計).divide(合計計).multiply(割合).roundDownTo(小数点以下有効桁数)) + パーセント),
+                new RString("100%"),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -790,18 +795,6 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 RString.EMPTY,
                 RString.EMPTY);
         return 割合Item;
-    }
-
-    private RString find合議体名(SinsakaiHanteiJyokyoProcessParameter parameter) {
-        return paramter.isEmptyGogitaiNo() ? 全合議体 : parameter.getGogitaiName();
-    }
-
-    private RString find市町村名(SinsakaiHanteiJyokyoProcessParameter parameter) {
-        if (RString.isNullOrEmpty(paramter.getShichosonCode().value())) {
-            return 全市町村;
-        } else {
-            return parameter.getShichosonName();
-        }
     }
 
     private RString get対象開始年月日() {
@@ -867,10 +860,10 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
     }
 
     private int get被保険者数(List<SinsakaiHanteiJyokyoEntity> 審査判定状況,
-            RString 要介護認定一次判定結果コード認知症加算,
+            RString 要介護認定一次判定結果コード,
             RString 二次判定要介護状態区分コード) {
         for (SinsakaiHanteiJyokyoEntity sinsakaiHanteiJyokyoEntity : 審査判定状況) {
-            if (sinsakaiHanteiJyokyoEntity.getIchijiHanteiKekkaNinchishoKasanCode().value().equals(要介護認定一次判定結果コード認知症加算)
+            if (sinsakaiHanteiJyokyoEntity.getIchijiHanteiKekkaNinchishoKasanCode().value().equals(要介護認定一次判定結果コード)
                     && sinsakaiHanteiJyokyoEntity.getNijiHanteiYokaigoJotaiKubunCode().value().equals(二次判定要介護状態区分コード)) {
                 return sinsakaiHanteiJyokyoEntity.getHihokenshaCount();
             }

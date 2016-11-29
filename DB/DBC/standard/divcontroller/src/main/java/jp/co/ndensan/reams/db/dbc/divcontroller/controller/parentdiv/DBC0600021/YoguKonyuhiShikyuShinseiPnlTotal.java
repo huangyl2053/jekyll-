@@ -340,6 +340,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                 getTxtTeikyoYM().getValue().getYearMonth().toString());
         ServiceShuruiCode サービス種類 = FukushiyoguKonyuhiShikyuShinsei.
                 createInstance().getServiceShuruiCode(被保険者番号, サービス提供年月);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtServiceCode().setValue(サービス種類.value());
         RString 証明書コード = RString.EMPTY;
         if (NUM41.equals(サービス種類.value())) {
             証明書コード = 証明書コード1;
@@ -372,6 +373,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().
                     setSelectedKey(dataSourceList.get(0).getKey());
         }
+        ValidationMessageControlPairs validPairs = getHandler(div).提供購入年月チェック(サービス種類);
+        if (validPairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+
         RString 証明書 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().getValue();
         ViewStateHolder.put(ViewStateKeys.証明書, 証明書);
         return createResponse(div);

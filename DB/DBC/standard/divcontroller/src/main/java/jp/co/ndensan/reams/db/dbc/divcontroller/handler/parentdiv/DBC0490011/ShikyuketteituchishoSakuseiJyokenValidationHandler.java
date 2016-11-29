@@ -23,7 +23,6 @@ public class ShikyuketteituchishoSakuseiJyokenValidationHandler {
 
     private final ShikyuketteituchishoSakuseiJyokenDiv div;
 
-    private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
 
     /**

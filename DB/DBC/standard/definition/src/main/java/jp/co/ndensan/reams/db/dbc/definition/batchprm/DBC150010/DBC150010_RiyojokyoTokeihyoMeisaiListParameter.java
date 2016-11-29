@@ -84,6 +84,8 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiListParameter extends BatchParamet
     private RString 日付スラッシュ編集;
     @BatchParameter(key = "出力順ID", name = "出力順ID")
     private Long 出力順ID;
+    @BatchParameter(key = "更新データ件数", name = "更新データ件数")
+    private int 更新データ件数;
 
     /**
      * コンストラクタです。
@@ -138,6 +140,6 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiListParameter extends BatchParamet
                 事業者番号, 利用実績区分, 居宅利用率指定, 開始居宅利用率, 終了居宅利用率, 訪問利用率指定,
                 開始訪問居宅利用率, 終了訪問居宅利用率, 地区指定, 選択地区リスト, 市町村コード, 市町村名称,
                 旧市町村コード, 旧市町村名称, 導入形態コード, 統計表出力区分, 明細リスト出力区分,
-                明細CSV出力区分, 明細合計出力区分, 項目名付加, 連番付加, 日付スラッシュ編集, new RString(出力順ID.toString()));
+                明細CSV出力区分, 明細合計出力区分, 項目名付加, 連番付加, 日付スラッシュ編集, new RString(出力順ID.toString()), 更新データ件数);
     }
 }

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 認定調査に関する帳票発行画面クラスです
@@ -25,6 +27,8 @@ public class HakkoJoken {
     private static final RString SELECT_KEY0 = new RString("key0");
     private static final RString SELECT_KEY1 = new RString("key1");
     private static final RString SELECT_KEY2 = new RString("key2");
+    private static final RString KEY = new RString("key");
+    private static final RString VALUE_BATCH = new RString("Batch2");
 
     /**
      * 画面初期化処理です。
@@ -166,6 +170,8 @@ public class HakkoJoken {
      * @return ResponseData<HakkoJokenDiv>
      */
     public ResponseData<DBE012001_ChosaInfoPrintParameter> onClick_Jikkou(HakkoJokenDiv div) {
+        FlowParameters fp = FlowParameters.of(KEY, VALUE_BATCH);
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 

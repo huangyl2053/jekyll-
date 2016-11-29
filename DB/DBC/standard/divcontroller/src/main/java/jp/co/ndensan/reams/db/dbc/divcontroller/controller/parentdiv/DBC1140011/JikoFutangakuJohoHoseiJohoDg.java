@@ -75,6 +75,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
     private static final RString 平成２０年度以外 = new RString("平成２０年度以外");
     private static final int NENDO2008 = 2008;
     private static final RString 登録 = new RString("登録");
+    private static final RString 完了メッセージ = new RString("自己負担額情報の更新が完了しました。");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -168,19 +169,19 @@ public class JikoFutangakuJohoHoseiJohoDg {
         boolean flg = handler.isCheckPass(対象者.get被保険者番号(), row);
         if (!flg && !JigyouGassan_ShoumeishoyouDataKubun.証明書用.getCode().equals(row.getTxtDataKBN())
                 && !ResponseHolder.isReRequest()
-                && !(new RString(DbcWarningMessages.高額合算補正関連３
+                && !(new RString(DbcWarningMessages.高額合算補正関連２
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連１.getMessage()).respond();
         } else if (!flg && JigyouGassan_ShoumeishoyouDataKubun.証明書用.getCode().equals(row.getTxtDataKBN())
                 && !ResponseHolder.isReRequest()
-                && !(new RString(DbcWarningMessages.高額合算補正関連３
+                && !(new RString(DbcWarningMessages.高額合算補正関連１
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連２.getMessage()).respond();
         }
-        if (RString.isNullOrEmpty(row.getTxtSofuNengetsu())
-                && (new RString(DbcWarningMessages.高額合算補正関連１
+        if (!RString.isNullOrEmpty(row.getTxtSofuNengetsu())
+                && !(new RString(DbcWarningMessages.高額合算補正関連１
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 || new RString(
                         DbcWarningMessages.高額合算補正関連２
@@ -188,13 +189,21 @@ public class JikoFutangakuJohoHoseiJohoDg {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連３.getMessage()).respond();
         }
-        if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())) {
+        if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())
+                && (new RString(DbcWarningMessages.高額合算補正関連１
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                || new RString(
+                        DbcWarningMessages.高額合算補正関連２
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                || new RString(
+                        DbcWarningMessages.高額合算補正関連３
+                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
             return ResponseData.of(div).respond();
         }
         KogakuGassanJikoFutanGakuHolder 高額合算情報 = ViewStateHolder.get(
                 ViewStateKeys.高額合算自己負担額情報, KogakuGassanJikoFutanGakuHolder.class);
         int 履歴番号 = Integer.parseInt(row.getTxtRirekiNo().toString());
-        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
+        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtHdnTaishoNendo());
         HokenshaNo 保険者番号 = new HokenshaNo(row.getTxtHokenshaNo());
         RString 支給申請書整理番号 = row.getTxtShikyuShinseishoSeiriNo();
         KogakuGassanJikoFutanGakuIdentifier identifier = new KogakuGassanJikoFutanGakuIdentifier(
@@ -414,6 +423,14 @@ public class JikoFutangakuJohoHoseiJohoDg {
         if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())) {
             return ResponseData.of(div).respond();
         }
+
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+        }
+        if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())) {
+            return ResponseData.of(div).respond();
+        }
+
         KogakuGassanJikoFutanGaku 負担額 = ViewStateHolder.get(
                 ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
         負担額 = handler.編集処理対象から画面(負担額);
@@ -431,19 +448,26 @@ public class JikoFutangakuJohoHoseiJohoDg {
             manager.保存(負担額, 負担額明細一覧);
             登録flg = true;
         }
-        if (登録メッセージ判定(登録flg)) {
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了
-                    .getMessage().replace(登録.toString())).respond();
-        }
         TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
                 名称_被保険者番号, 対象者.get被保険者番号().getColumnValue());
         PersonalData personalData = PersonalData.of(対象者.get識別コード(), expandedInfo);
         AccessLogger.log(AccessLogType.更新, personalData);
-        handler.initializeDisplay(対象者);
-        onClick_chkRirekiHyouji(div);
-        return ResponseData.of(div).setState(DBC1140011StateName.処理完了);
+        if (登録メッセージ判定(登録flg)) {
 
+            handler.initializeDisplay(対象者);
+            onClick_chkRirekiHyouji(div);
+            RString 前排他キー = 排他キー.concat(対象者.get被保険者番号().getColumnValue());
+            LockingKey key = new LockingKey(前排他キー);
+            RealInitialLocker.release(key);
+
+            div.getCcdKanryoMessage().setSuccessMessage(完了メッセージ, 対象者.get被保険者番号().getColumnValue(),
+                    div.getKogakuGassanShikyuShinseiTorokuKihon().get氏名漢字());
+            return ResponseData.of(div).setState(DBC1140011StateName.処理完了);
+        } else {
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
+        }
     }
 
     /**

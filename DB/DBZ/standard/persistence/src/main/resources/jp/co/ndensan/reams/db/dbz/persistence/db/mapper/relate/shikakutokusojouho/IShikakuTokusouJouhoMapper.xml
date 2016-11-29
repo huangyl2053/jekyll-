@@ -55,7 +55,6 @@
         DbT1001Hiho. "koikinaiTokureiSochimotoShichosonCode" = DbT7051Kosei."shichosonCode"
         AND
         DbT7051Kosei."gappeiKyuShichosonKubun" = '0'
-        <!--//TODO QA947 -->
         LEFT JOIN
         rgdb."DbT7056GappeiShichoson" as  DbT7056Gappei
         ON

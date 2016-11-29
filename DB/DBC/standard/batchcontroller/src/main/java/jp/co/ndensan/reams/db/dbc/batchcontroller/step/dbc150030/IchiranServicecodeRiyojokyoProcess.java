@@ -152,7 +152,7 @@ public class IchiranServicecodeRiyojokyoProcess
         taniSuSyukeichi_25 = Decimal.ZERO;
         改頁項目リスト = new ArrayList<>();
         改頁項目リスト.add(new RString(
-                ServiceCodeBetsuRiyoJokyoSource.DBC300002ServiceCodeBetsuRiyoJokyoFields.List1_1.name()));
+                ServiceCodeBetsuRiyoJokyoSource.DBC300002ServiceCodeBetsuRiyoJokyoFields.breakKey.name()));
 
     }
 
@@ -307,6 +307,7 @@ public class IchiranServicecodeRiyojokyoProcess
 
     private void 集計(DbWT3470chohyouShutsuryokuyouTempEntity entity) {
         ServicecodeRiyojokyoReportEntity meisaiEntity = new ServicecodeRiyojokyoReportEntity();
+        meisaiEntity.set種類コード(entity.getServiceShuruiCode());
         meisaiEntity.setサービス略称_上(合計);
         meisaiEntity.set非該当日数_回数集計値(setDecimalVaule(nissuKaisuSyukeichi_01));
         meisaiEntity.set非該当単位数集計値(setDecimalVaule(taniSuSyukeichi_01));

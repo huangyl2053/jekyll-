@@ -1607,6 +1607,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                 csvListWriter.writeLine(bodyList);
             }
             csvListWriter.close();
+            manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
         }
     }
 

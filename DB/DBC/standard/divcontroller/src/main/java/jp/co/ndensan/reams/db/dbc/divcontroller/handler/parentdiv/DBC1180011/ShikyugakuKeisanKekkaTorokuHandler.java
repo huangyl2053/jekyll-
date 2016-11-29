@@ -140,7 +140,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
                 row.setModifyButtonState(DataGridButtonState.Disabled);
                 row.setDeleteButtonState(DataGridButtonState.Disabled);
             } else {
-                row.setSelectButtonState(DataGridButtonState.Disabled);
+                row.setSelectButtonState(DataGridButtonState.Enabled);
                 row.setModifyButtonState(DataGridButtonState.Enabled);
                 row.setDeleteButtonState(DataGridButtonState.Enabled);
             }
@@ -454,17 +454,17 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         List<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> rowList = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getDataSource();
         for (dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row row : rowList) {
             if (!RowState.Deleted.equals(row.getRowState())) {
-                内訳WK1 = 内訳WK1.add(RString.isNullOrEmpty(row.getTxtOver70Futangaku().getText())
+                内訳WK1 = 内訳WK1.add(row.getTxtOver70Futangaku().getValue() == null
                         ? Decimal.ZERO : new Decimal(row.getTxtOver70Futangaku().getValue().toString()));
-                内訳WK3 = 内訳WK3.add(RString.isNullOrEmpty(row.getTxtOver70Shikyugaku().getText())
+                内訳WK3 = 内訳WK3.add(row.getTxtOver70Shikyugaku().getValue() == null
                         ? Decimal.ZERO : new Decimal(row.getTxtOver70Shikyugaku().getValue().toString()));
-                内訳WK4 = 内訳WK4.add(RString.isNullOrEmpty(row.getTxtUnder70Futangaku().getText())
+                内訳WK4 = 内訳WK4.add(row.getTxtUnder70Futangaku().getValue() == null
                         ? Decimal.ZERO : new Decimal(row.getTxtUnder70Futangaku().getValue().toString()));
-                内訳WK5 = 内訳WK5.add(RString.isNullOrEmpty(row.getTxtFutangaku().getText())
+                内訳WK5 = 内訳WK5.add(row.getTxtFutangaku().getValue() == null
                         ? Decimal.ZERO : new Decimal(row.getTxtFutangaku().getValue().toString()));
-                内訳WK7 = 内訳WK7.add(RString.isNullOrEmpty(row.getTxtUnder70Shikyugaku().getText())
+                内訳WK7 = 内訳WK7.add(row.getTxtUnder70Shikyugaku().getValue() == null
                         ? Decimal.ZERO : new Decimal(row.getTxtUnder70Shikyugaku().getValue().toString()));
-                内訳WK8 = 内訳WK8.add(RString.isNullOrEmpty(row.getTxtShikyugaku().getText())
+                内訳WK8 = 内訳WK8.add(row.getTxtShikyugaku().getValue() == null
                         ? Decimal.ZERO : new Decimal(row.getTxtShikyugaku().getValue().toString()));
             }
         }
@@ -864,17 +864,17 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         Decimal 負担額合計 = Decimal.ZERO;
         for (dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row row : rowList) {
             if (!RowState.Deleted.equals(row.getRowState())) {
-                以上負担額合計 = 以上負担額合計.add(RString.isNullOrEmpty(row.getTxtOver70Futangaku().getText())
+                以上負担額合計 = 以上負担額合計.add(row.getTxtOver70Futangaku().getValue() == null
                         ? Decimal.ZERO : new Decimal(row.getTxtOver70Futangaku().getValue().toString()));
-                負担額合計 = 負担額合計.add(RString.isNullOrEmpty(row.getTxtFutangaku().getText())
+                負担額合計 = 負担額合計.add(row.getTxtFutangaku().getValue() == null
                         ? Decimal.ZERO : new Decimal(row.getTxtFutangaku().getValue().toString()));
             }
         }
         if (!追加.equals(状態)) {
             dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row clickedRow = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem();
-            以上負担額合計 = 以上負担額合計.subtract(RString.isNullOrEmpty(clickedRow.getTxtOver70Futangaku().getText())
+            以上負担額合計 = 以上負担額合計.subtract(clickedRow.getTxtOver70Futangaku().getValue() == null
                     ? Decimal.ZERO : new Decimal(clickedRow.getTxtOver70Futangaku().getValue().toString()));
-            負担額合計 = 負担額合計.subtract(RString.isNullOrEmpty(clickedRow.getTxtFutangaku().getText())
+            負担額合計 = 負担額合計.subtract(clickedRow.getTxtFutangaku().getValue() == null
                     ? Decimal.ZERO : new Decimal(clickedRow.getTxtFutangaku().getValue().toString()));
         }
         Decimal 以上負担額 = div.getTxtOver70Futangaku().getValue() == null ? Decimal.ZERO : div.getTxtOver70Futangaku().getValue();

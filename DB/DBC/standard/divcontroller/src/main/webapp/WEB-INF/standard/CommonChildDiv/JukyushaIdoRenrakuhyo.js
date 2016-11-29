@@ -123,10 +123,6 @@
 
                     this.controls.btnKyotakuServiceRireki().disabled = false;
                     this.controls.radKyotakuServiceSakuseiKubun().disabled = false;
-                    this.controls.txtKyotakuKaigoShienJigyoshoNo().disabled = false;
-                    this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = true;
-                    this.controls.txtKyotakuServiceTekiyoYMD().disabled = false;
-                    this.controls.radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().disabled = false;
 
                     this.controls.radJushochiTokureiTaishoshaKubun().disabled = false;
                     this.controls.txtJushochiTokureiTekiyoYMD().disabled = false;
@@ -194,7 +190,7 @@
                     this.controls.btnKyotakuServiceRireki().disabled = false;
                     this.controls.radKyotakuServiceSakuseiKubun().disabled = true;
                     this.controls.txtKyotakuKaigoShienJigyoshoNo().disabled = true;
-					this.controls.btnShienJigyoshoNo().disabled = true;
+                    this.controls.btnShienJigyoshoNo().disabled = true;
                     this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = true;
                     this.controls.txtKyotakuServiceTekiyoYMD().disabled = true;
                     this.controls.radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().disabled = true;

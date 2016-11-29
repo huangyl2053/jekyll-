@@ -116,7 +116,7 @@ public class IchijihanteikekkahyoPrintService {
         entity.set状態の安定性(data.get状態の安定性());
         entity.set給付区分(data.get給付区分());
         entity.set現在のサービス利用状況名(data.get現在のサービス利用状況名());
-        entity.set現在のサービス状況(data.get現在のサービス状況());
+//        entity.set現在のサービス状況(data.get現在のサービス状況());
         entity.set主治医意見書項目1リスト(data.get主治医意見書項目1リスト());
         entity.set主治医意見書項目2リスト(data.get主治医意見書項目2リスト());
         entity.set主治医意見書項目3リスト(data.get主治医意見書項目3リスト());

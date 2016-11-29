@@ -49,6 +49,9 @@ public class HonKakushuTsuchiUchiwakeKakunin {
                 getHandler(div).show打分け方法情報(方法情報一覧.get(0));
                 ViewStateHolder.put(ViewStateKeys.打分け方法情報キー, 打ち分け条件);
             }
+        } else {
+            getHandler(div).show空の打分け();
+            ViewStateHolder.put(ViewStateKeys.打分け方法情報キー, RString.EMPTY);
         }
         return createResponse(div);
     }
@@ -154,9 +157,14 @@ public class HonKakushuTsuchiUchiwakeKakunin {
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
         HonKakushuTsuchiUchiwakeKakuninHandler handler = getHandler(div);
         RString 打ち分け条件view = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
+        boolean 変更flag;
+        if (打ち分け条件view == null || 打ち分け条件view.isEmpty()) {
+            変更flag = handler.変更有無();
+        } else {
+            List<TsuchishoUchiwakeJoken> 打分け方法 = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件view);
+            変更flag = handler.変更有無(打分け方法.get(0));
+        }
 
-        List<TsuchishoUchiwakeJoken> 打分け方法 = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件view);
-        boolean 変更flag = handler.変更有無(打分け方法.get(0));
         if (変更flag) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(DbbQuestionMessages.変更途中の内容破棄確認.getMessage().getCode(),

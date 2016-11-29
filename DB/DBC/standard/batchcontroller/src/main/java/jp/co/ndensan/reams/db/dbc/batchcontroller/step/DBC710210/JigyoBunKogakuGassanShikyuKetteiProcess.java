@@ -15,9 +15,15 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunkogakugassanshikyuket
 import jp.co.ndensan.reams.db.dbc.entity.euc.jigyobunkogakugassanshikyukettei.IJigyoBunKogakuGassanShikyuKetteiEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.maskedkoza.MaskedKozaCreator;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
@@ -34,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -68,6 +76,8 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
     private JigyoBunKogakuGassanShikyuKettei business;
     private Association association;
+    private ChohyoSeigyoKyotsu 帳票制御共通情報;
+    private ReportId 帳票ID;
     private boolean flag;
     @BatchWriter
     private CsvWriter<IJigyoBunKogakuGassanShikyuKetteiEUCEntity> eucCsvWriter;
@@ -78,6 +88,8 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
         association = AssociationFinderFactory.createInstance().getAssociation();
         business = new JigyoBunKogakuGassanShikyuKettei(processParameter);
         get市町村名();
+        帳票ID = ReportIdDBC.DBC701021.getReportId();
+        帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票ID);
     }
 
     @Override
@@ -108,10 +120,14 @@ public class JigyoBunKogakuGassanShikyuKetteiProcess extends BatchProcessBase<Ji
             MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
             iKoza = maskedKozaCreator.createマスク編集済口座(new Koza(口座Entity));
         }
+        IShikibetsuTaisho iShikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
+        IKojin iKojin = iShikibetsuTaisho.to個人();
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(entity.get市町村コード()));
+        RString 住所 = JushoHenshu.editJusho(帳票制御共通情報, iKojin, 導入団体情報);
         if (processParameter.is連番付加()) {
-            eucCsvWriter.writeLine(business.set連番ありEUCEntity(entity, iKoza, 市町村名MasterMap, association, 連番++));
+            eucCsvWriter.writeLine(business.set連番ありEUCEntity(entity, iKoza, 市町村名MasterMap, association, 連番++, 住所));
         } else {
-            eucCsvWriter.writeLine(business.set連番なしEUCEntity(entity, iKoza, 市町村名MasterMap, association));
+            eucCsvWriter.writeLine(business.set連番なしEUCEntity(entity, iKoza, 市町村名MasterMap, association, 住所));
         }
     }
 

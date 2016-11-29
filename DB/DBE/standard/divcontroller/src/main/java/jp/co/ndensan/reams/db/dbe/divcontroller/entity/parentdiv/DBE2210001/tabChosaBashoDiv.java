@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tabChosaBashoDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -75,6 +75,16 @@ public class tabChosaBashoDiv extends TabContainer {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public RadioButton getRadJutakuKaishu() {
+        return this.getTplZaitaku().getRadJutakuKaishu();
+    }
+
+    @JsonIgnore
+    public void  setRadJutakuKaishu(RadioButton radJutakuKaishu) {
+        this.getTplZaitaku().setRadJutakuKaishu(radJutakuKaishu);
+    }
+
+    @JsonIgnore
     public JutakuGaikyoChosaDiv getJutakuGaikyoChosa() {
         return this.getTplZaitaku().getJutakuGaikyoChosa();
     }
@@ -82,16 +92,6 @@ public class tabChosaBashoDiv extends TabContainer {
     @JsonIgnore
     public void  setJutakuGaikyoChosa(JutakuGaikyoChosaDiv JutakuGaikyoChosa) {
         this.getTplZaitaku().setJutakuGaikyoChosa(JutakuGaikyoChosa);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadJutakuKaishu() {
-        return this.getTplZaitaku().getJutakuGaikyoChosa().getRadJutakuKaishu();
-    }
-
-    @JsonIgnore
-    public void  setRadJutakuKaishu(RadioButton radJutakuKaishu) {
-        this.getTplZaitaku().getJutakuGaikyoChosa().setRadJutakuKaishu(radJutakuKaishu);
     }
 
     @JsonIgnore

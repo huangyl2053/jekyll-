@@ -121,7 +121,7 @@ public class HokenshaSofuListHandler {
     private static final RString 九 = new RString("9");
     private static final RString H1 = new RString("H1");
     private static final RString D8 = new RString("D8");
-    private static RString 保険者番号;
+    private RString 保険者番号;
 
     /**
      * コンストラクタです。

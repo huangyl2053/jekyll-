@@ -84,10 +84,11 @@ public class ChosaJisshishaJohoHandler {
         }
         div.getTxtJisshiBashoMeisho().setValue(key.get実施場所名称());
 
-        if (!ChosaJisshiBashoCode.自宅内.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
-            div.getTxtJisshiBashoMeisho().setDisabled(false);
-        } else {
+        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())
+                || ChosaJisshiBashoCode.自宅外.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
             div.getTxtJisshiBashoMeisho().setDisabled(true);
+        } else {
+            div.getTxtJisshiBashoMeisho().setDisabled(false);
         }
 
         if (key.get所属機関コード() != null && !key.get所属機関コード().isEmpty()) {
@@ -100,7 +101,7 @@ public class ChosaJisshishaJohoHandler {
                 div.getTxtShozokuKikanName().setValue(ninteichosaItakusakiJohoList.get(0).get事業者名称());
             }
         }
-        
+
         if (key.get記入者コード() != null && !key.get記入者コード().isEmpty()) {
             div.getTxtKinyushaCode().setValue(key.get記入者コード());
             this.onBlurTxtKinyushaCode();
@@ -172,5 +173,18 @@ public class ChosaJisshishaJohoHandler {
         div.getTxtKinyushaName().setValue(shinsakaiChosainJoho == null ? RString.EMPTY
                 : shinsakaiChosainJoho.get調査員氏名() == null ? RString.EMPTY
                 : shinsakaiChosainJoho.get調査員氏名());
+    }
+
+    /**
+     * 調査実施場所ddl変更時のイベントメソッド
+     */
+    public void onChange_ddlChosaJisshiBasho() {
+        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())
+                || ChosaJisshiBashoCode.自宅外.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
+            div.getTxtJisshiBashoMeisho().clearValue();
+            div.getTxtJisshiBashoMeisho().setDisabled(true);
+        } else {
+            div.getTxtJisshiBashoMeisho().setDisabled(false);
+        }
     }
 }

@@ -46,30 +46,30 @@ public class TorokuData implements Serializable {
     private RString 他科受信の有無;
     @CsvField(order = 10, name = "内科")
     private RString 内科;
-    @CsvField(order = 11, name = "皮膚科")
-    private RString 皮膚科;
-    @CsvField(order = 12, name = "リハビリテーション科")
-    private RString リハビリテーション科;
-    @CsvField(order = 13, name = "精神科")
+    @CsvField(order = 11, name = "精神科")
     private RString 精神科;
-    @CsvField(order = 14, name = "泌尿器科")
-    private RString 泌尿器科;
-    @CsvField(order = 15, name = "歯科")
-    private RString 歯科;
-    @CsvField(order = 16, name = "外科")
+    @CsvField(order = 12, name = "外科")
     private RString 外科;
+    @CsvField(order = 13, name = "整形外科")
+    private RString 整形外科;
+    @CsvField(order = 14, name = "脳神経外科")
+    private RString 脳神経外科;
+    @CsvField(order = 15, name = "皮膚科")
+    private RString 皮膚科;
+    @CsvField(order = 16, name = "泌尿器科")
+    private RString 泌尿器科;
     @CsvField(order = 17, name = "婦人科")
     private RString 婦人科;
-    @CsvField(order = 18, name = "その他受診科の有無")
-    private RString その他受診科の有無;
-    @CsvField(order = 19, name = "整形外科")
-    private RString 整形外科;
-    @CsvField(order = 20, name = "眼科")
-    private RString 眼科;
-    @CsvField(order = 21, name = "脳神経外科")
-    private RString 脳神経外科;
-    @CsvField(order = 22, name = "耳鼻咽喉科")
+    @CsvField(order = 18, name = "耳鼻咽喉科")
     private RString 耳鼻咽喉科;
+    @CsvField(order = 19, name = "リハビリテーション科")
+    private RString リハビリテーション科;
+    @CsvField(order = 20, name = "歯科")
+    private RString 歯科;
+    @CsvField(order = 21, name = "眼科")
+    private RString 眼科;
+    @CsvField(order = 22, name = "その他受診科の有無")
+    private RString その他受診科の有無;
     @CsvField(order = 23, name = "発症年月日1")
     private RString 発症年月日1;
     @CsvField(order = 24, name = "発症年月日2")
@@ -80,20 +80,20 @@ public class TorokuData implements Serializable {
     private RString 症状の安定性;
     @CsvField(order = 27, name = "点滴の管理")
     private RString 点滴の管理;
-    @CsvField(order = 28, name = "ストーマの処置")
-    private RString ストーマの処置;
-    @CsvField(order = 29, name = "気管切開の処置")
-    private RString 気管切開の処置;
-    @CsvField(order = 30, name = "中心静脈栄養")
+    @CsvField(order = 28, name = "中心静脈栄養")
     private RString 中心静脈栄養;
+    @CsvField(order = 29, name = "透折")
+    private RString 透折;
+    @CsvField(order = 30, name = "ストーマの処置")
+    private RString ストーマの処置;
     @CsvField(order = 31, name = "酸素療法")
     private RString 酸素療法;
-    @CsvField(order = 32, name = "疼痛の看護")
-    private RString 疼痛の看護;
-    @CsvField(order = 33, name = "透折")
-    private RString 透折;
-    @CsvField(order = 34, name = "レスピレーター")
+    @CsvField(order = 32, name = "レスピレーター")
     private RString レスピレーター;
+    @CsvField(order = 33, name = "気管切開の処置")
+    private RString 気管切開の処置;
+    @CsvField(order = 34, name = "疼痛の看護")
+    private RString 疼痛の看護;
     @CsvField(order = 35, name = "経管栄養")
     private RString 経管栄養;
     @CsvField(order = 36, name = "モニター測定")
@@ -116,28 +116,28 @@ public class TorokuData implements Serializable {
     private RString 問題行動の有無;
     @CsvField(order = 45, name = "幻視_幻聴")
     private RString 幻視_幻聴;
-    @CsvField(order = 46, name = "火の不始末")
-    private RString 火の不始末;
-    @CsvField(order = 47, name = "妄想")
+    @CsvField(order = 46, name = "妄想")
     private RString 妄想;
-    @CsvField(order = 48, name = "不潔行為")
-    private RString 不潔行為;
-    @CsvField(order = 49, name = "昼夜逆転")
+    @CsvField(order = 47, name = "昼夜逆転")
     private RString 昼夜逆転;
-    @CsvField(order = 50, name = "異食行動")
-    private RString 異食行動;
-    @CsvField(order = 51, name = "暴言")
+    @CsvField(order = 48, name = "暴言")
     private RString 暴言;
-    @CsvField(order = 52, name = "性的問題行動")
-    private RString 性的問題行動;
-    @CsvField(order = 53, name = "暴行")
+    @CsvField(order = 49, name = "暴行")
     private RString 暴行;
-    @CsvField(order = 54, name = "その他")
-    private RString その他;
-    @CsvField(order = 55, name = "介護への抵抗")
+    @CsvField(order = 50, name = "介護への抵抗")
     private RString 介護への抵抗;
-    @CsvField(order = 56, name = "徘徊")
+    @CsvField(order = 51, name = "徘徊")
     private RString 徘徊;
+    @CsvField(order = 52, name = "火の不始末")
+    private RString 火の不始末;
+    @CsvField(order = 53, name = "不潔行為")
+    private RString 不潔行為;
+    @CsvField(order = 54, name = "異食行動")
+    private RString 異食行動;
+    @CsvField(order = 55, name = "性的問題行動")
+    private RString 性的問題行動;
+    @CsvField(order = 56, name = "その他")
+    private RString その他;
     @CsvField(order = 57, name = "精神_神経症状")
     private RString 精神_神経症状;
     @CsvField(order = 58, name = "専門科医受診")
@@ -154,14 +154,14 @@ public class TorokuData implements Serializable {
     private RString 麻痺_右上肢;
     @CsvField(order = 64, name = "麻痺_右上肢_程度")
     private RString 麻痺_右上肢_程度;
-    @CsvField(order = 65, name = "麻痺_右下肢")
-    private RString 麻痺_右下肢;
-    @CsvField(order = 66, name = "麻痺_右下肢_程度")
-    private RString 麻痺_右下肢_程度;
-    @CsvField(order = 67, name = "麻痺_左上肢")
+    @CsvField(order = 65, name = "麻痺_左上肢")
     private RString 麻痺_左上肢;
-    @CsvField(order = 68, name = "麻痺_左上肢_程度")
+    @CsvField(order = 66, name = "麻痺_左上肢_程度")
     private RString 麻痺_左上肢_程度;
+    @CsvField(order = 67, name = "麻痺_右下肢")
+    private RString 麻痺_右下肢;
+    @CsvField(order = 68, name = "麻痺_右下肢_程度")
+    private RString 麻痺_右下肢_程度;
     @CsvField(order = 69, name = "麻痺_左下肢")
     private RString 麻痺_左下肢;
     @CsvField(order = 70, name = "麻痺_左下肢_程度")
@@ -250,44 +250,44 @@ public class TorokuData implements Serializable {
     private RString 予後の見通し;
     @CsvField(order = 112, name = "訪問診療")
     private RString 訪問診療;
-    @CsvField(order = 113, name = "訪問看護")
-    private RString 訪問看護;
-    @CsvField(order = 114, name = "相談_支援")
-    private RString 相談_支援;
-    @CsvField(order = 115, name = "訪問歯科診療")
-    private RString 訪問歯科診療;
-    @CsvField(order = 116, name = "訪問薬剤管理指導")
-    private RString 訪問薬剤管理指導;
-    @CsvField(order = 117, name = "訪問リハビリテーション")
-    private RString 訪問リハビリテーション;
-    @CsvField(order = 118, name = "短期入所療養介護")
-    private RString 短期入所療養介護;
-    @CsvField(order = 119, name = "訪問歯科衛生指導")
-    private RString 訪問歯科衛生指導;
-    @CsvField(order = 120, name = "訪問栄養食事指導")
-    private RString 訪問栄養食事指導;
-    @CsvField(order = 121, name = "通所リハビリテーション")
-    private RString 通所リハビリテーション;
-    @CsvField(order = 122, name = "その他の医療系サービス")
-    private RString その他の医療系サービス;
-    @CsvField(order = 123, name = "訪問診療_必要性")
+    @CsvField(order = 113, name = "訪問診療_必要性")
     private RString 訪問診療_必要性;
-    @CsvField(order = 124, name = "訪問看護_必要性")
+    @CsvField(order = 114, name = "訪問看護")
+    private RString 訪問看護;
+    @CsvField(order = 115, name = "訪問看護_必要性")
     private RString 訪問看護_必要性;
-    @CsvField(order = 125, name = "相談_支援_必要性")
+    @CsvField(order = 116, name = "相談_支援")
+    private RString 相談_支援;
+    @CsvField(order = 117, name = "相談_支援_必要性")
     private RString 相談_支援_必要性;
-    @CsvField(order = 126, name = "訪問歯科診療_必要性")
+    @CsvField(order = 118, name = "訪問歯科診療")
+    private RString 訪問歯科診療;
+    @CsvField(order = 119, name = "訪問歯科診療_必要性")
     private RString 訪問歯科診療_必要性;
-    @CsvField(order = 127, name = "訪問薬剤管理指導_必要性")
+    @CsvField(order = 120, name = "訪問薬剤管理指導")
+    private RString 訪問薬剤管理指導;
+    @CsvField(order = 121, name = "訪問薬剤管理指導_必要性")
     private RString 訪問薬剤管理指導_必要性;
-    @CsvField(order = 128, name = "訪問リハビリテーション_必要性")
+    @CsvField(order = 122, name = "訪問リハビリテーション")
+    private RString 訪問リハビリテーション;
+    @CsvField(order = 123, name = "訪問リハビリテーション_必要性")
     private RString 訪問リハビリテーション_必要性;
-    @CsvField(order = 129, name = "短期入所療養介護_必要性")
+    @CsvField(order = 124, name = "短期入所療養介護")
+    private RString 短期入所療養介護;
+    @CsvField(order = 125, name = "短期入所療養介護_必要性")
     private RString 短期入所療養介護_必要性;
-    @CsvField(order = 130, name = "訪問歯科衛生指導_必要性")
+    @CsvField(order = 126, name = "訪問歯科衛生指導")
+    private RString 訪問歯科衛生指導;
+    @CsvField(order = 127, name = "訪問歯科衛生指導_必要性")
     private RString 訪問歯科衛生指導_必要性;
-    @CsvField(order = 131, name = "訪問栄養食事指導_必要性")
+    @CsvField(order = 128, name = "訪問栄養食事指導")
+    private RString 訪問栄養食事指導;
+    @CsvField(order = 129, name = "訪問栄養食事指導_必要性")
     private RString 訪問栄養食事指導_必要性;
+    @CsvField(order = 130, name = "通所リハビリテーション")
+    private RString 通所リハビリテーション;
+    @CsvField(order = 131, name = "その他の医療系サービス")
+    private RString その他の医療系サービス;
     @CsvField(order = 132, name = "通所リハビリテーション_必要性")
     private RString 通所リハビリテーション_必要性;
     @CsvField(order = 133, name = "その他の医療系サービス_必要性")

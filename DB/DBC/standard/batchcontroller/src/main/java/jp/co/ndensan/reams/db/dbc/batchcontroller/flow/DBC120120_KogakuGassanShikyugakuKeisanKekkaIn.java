@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120120.PntKogakuGassan
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120120.PntKogakuGassanTorikomiIchiranProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinByMybatisProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
@@ -238,7 +238,7 @@ public class DBC120120_KogakuGassanShikyugakuKeisanKekkaIn extends BatchFlowBase
         parameter.set処理対象年月(flowEntity.getShoriYM());
         parameter.setレコード件数合計(flowEntity.getCodeNum());
         parameter.setFileNameList(returnEntity.getFileNameList());
-        return simpleBatch(KokuhorenkyoutsuDoInterfaceKanriKousinProcess.class).arguments(parameter).define();
+        return loopBatch(KokuhorenkyoutsuDoInterfaceKanriKousinByMybatisProcess.class).arguments(parameter).define();
     }
 
     /**

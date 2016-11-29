@@ -12,12 +12,15 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.hanyolistkogakugassanshinseisho.HanyoListKogakuGassanShinseishoOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.KozaYotoKubunType;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
@@ -277,6 +280,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     private Association 地方公共団体;
     private FlexibleDate システム日付;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
 
     @BatchWriter
     private CsvWriter<HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity> eucCsvWriter;
@@ -285,8 +289,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     protected IBatchReader createReader() {
         出力有無 = CSV出力有無_なし;
         システム日付 = FlexibleDate.getNowDate();
-        dataCreate = new HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate(システム日付);
-
+        dataCreate = new HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate();
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
         builder.setサブ業務コード(SubGyomuCode.DBC介護給付);
         builder.set業務コード(GyomuCode.DB介護保険);
@@ -321,6 +324,8 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
 
     @Override
     protected void beforeExecute() {
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701014.getReportId());
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
@@ -336,7 +341,8 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     @Override
     protected void process(HanyoListKogakuGassanShinseishoJohoEntity entity) {
         出力有無 = CSV出力有無_あり;
-        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 市町村名MasterMap, 地方公共団体));
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get最新被保台帳_市町村コード());
+        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 市町村名MasterMap, 帳票制御共通, 地方公共団体, 導入団体情報));
         personalDataList.add(toPersonalData(entity));
     }
 

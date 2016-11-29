@@ -230,7 +230,7 @@ public class ShiharaiHouhouKanriHitotokiDataManager {
         tempTable.set弁明書提出期限(new RString(entity.get弁明書提出期限().toString()));
         tempTable.set弁明書受付日(entity.get弁明書受付日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
         tempTable.set弁明理由(entity.get弁明理由());
-        if (entity.get弁明理由() == null) {
+        if (entity.get弁明理由() == null || entity.get弁明理由().isEmpty()) {
             tempTable.set弁明理由名称(RString.EMPTY);
         } else {
             tempTable.set弁明理由名称(ShiharaiHenkoBenmeiRiyuCode.toValue(new RString(entity.get弁明理由().toString())).get名称());

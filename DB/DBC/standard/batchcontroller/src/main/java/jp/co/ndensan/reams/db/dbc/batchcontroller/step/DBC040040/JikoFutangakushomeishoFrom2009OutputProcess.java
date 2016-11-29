@@ -13,12 +13,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassan.KogakuGassanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho.JikoFutangakushomeishoShutsuryokujunEnum;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.JikoFutangakushomeishoFrom2009Report;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.JikoFutangakushomeishoFromData;
+import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040040.JikofutanShomeishoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.JikoFutangakushomeishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jikofutangakushomeishofrom2009.JikoFutangakushomeishoFrom2009ReportSource;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040040.IJikofutanShomeishoMapper;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesakiEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
@@ -34,7 +33,6 @@ import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJok
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
@@ -55,8 +53,6 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -78,7 +74,6 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
     private static final RString 定数_10 = new RString("10");
     private static final RString 定数_ORDERBY = new RString("order by");
     private static final ReportId 帳票分類ID = new ReportId("DBC100050_JikoFutangakushomeisho");
-    private static final RString 項目名 = new RString("帳票タイトル");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
@@ -89,7 +84,6 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
     private static final int NUM_12 = 12;
     private IOutputOrder 出力順;
     private JikofutanShomeishoProcessParameter parameter;
-    private IJikofutanShomeishoMapper mapper;
     private Ninshosha 認証者;
     private NinshoshaSource 認証者情報;
     private Association 地方公共団体情報;
@@ -126,7 +120,7 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
         }
 
         帳票タイトル = ChohyoSeigyoHanyoManager.createInstance().get帳票制御汎用(SubGyomuCode.DBC介護給付,
-                帳票分類ID, 項目名).get設定値();
+                帳票分類ID, ChohyoSeigyoHanyoKomokuMei.帳票タイトル.get名称()).get設定値();
 
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票分類ID, KamokuCode.EMPTY, NUM_1);
         if (0 < 通知文.size()) {
@@ -267,26 +261,6 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
             list.add(kogakuGassanMeisai);
         }
         return list;
-    }
-
-    private ToiawasesakiSource get問合せ先情報(DbT7069KaigoToiawasesakiEntity toiawasesakiEntity) {
-        ToiawasesakiSource source = new ToiawasesakiSource();
-        YubinNo yubinNo = toiawasesakiEntity.getYubinNo();
-        if (yubinNo != null) {
-            source.yubinBango = yubinNo.getEditedYubinNo();
-        }
-        RString choshaName = toiawasesakiEntity.getChoshaName();
-        if (choshaName != null && !RString.isNullOrEmpty(choshaName)) {
-            source.choshaBushoName = choshaName.concat(RString.FULL_SPACE).concat(toiawasesakiEntity.getBushoName());
-        }
-        source.shozaichi = toiawasesakiEntity.getShozaichi();
-        source.tantoName = toiawasesakiEntity.getTantoshaName();
-        TelNo telNo = toiawasesakiEntity.getTelNo();
-        if (telNo != null) {
-            source.telNo = telNo.getColumnValue();
-        }
-        source.naisenNo = toiawasesakiEntity.getNaisenNo();
-        return source;
     }
 
     private void バッチ出力条件リストの出力() {

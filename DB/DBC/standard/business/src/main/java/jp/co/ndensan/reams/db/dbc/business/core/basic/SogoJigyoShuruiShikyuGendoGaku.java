@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護予防・日常生活支援総合事業種類支給限度額を管理するクラスです。
  *
- * @reamsid_L DBC-3364-010 xuxin
+ * @reamsid_L DBC-9999-012 xuxin
  */
 public class SogoJigyoShuruiShikyuGendoGaku extends
         ModelBase<SogoJigyoShuruiShikyuGendoGakuIdentifier, DbT7118SogoJigyoShuruiShikyuGendoGakuEntity, SogoJigyoShuruiShikyuGendoGaku> implements

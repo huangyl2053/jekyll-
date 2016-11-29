@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.controller.SetaiShotokuIchiran;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -50,12 +49,7 @@ public class HyojunFutanGemmen {
      */
     public ResponseData<HyojunFutanGemmenDiv> onLoad(HyojunFutanGemmenDiv div) {
 
-        // TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        // TODO テストデータ
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo(new RString("0000000001")),
-                new ShikibetsuCode(new RString("000000000000010")),
-                new SetaiCode(new RString("000000000000100")));
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
 
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
