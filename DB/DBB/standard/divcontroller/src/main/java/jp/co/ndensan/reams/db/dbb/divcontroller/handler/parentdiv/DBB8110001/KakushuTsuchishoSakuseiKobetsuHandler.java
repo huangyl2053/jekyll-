@@ -821,6 +821,25 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                     .getLblZengoFuchoAto7().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
+        set更正後合計_2(更正後期別金額, 更正後情報, flag, 更正後合計, 期_4月, 期_5月, 期_6月, 期_7月, 期_8月,
+                期_9月, 期_10月, 期_11月, 期_12月, 期_1月, 期_2月, 期_3月, 期_13月, 期_14月);
+    }
+
+    private void set更正後合計_2(Decimal 更正後期別金額, FukaJoho 更正後情報, boolean flag, Decimal 更正後合計,
+            RString 期_4月,
+            RString 期_5月,
+            RString 期_6月,
+            RString 期_7月,
+            RString 期_8月,
+            RString 期_9月,
+            RString 期_10月,
+            RString 期_11月,
+            RString 期_12月,
+            RString 期_1月,
+            RString 期_2月,
+            RString 期_3月,
+            RString 期_13月,
+            RString 期_14月) {
         更正後期別金額 = get普徴期別金額(期_11月, 更正後情報);
         if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
                 div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
