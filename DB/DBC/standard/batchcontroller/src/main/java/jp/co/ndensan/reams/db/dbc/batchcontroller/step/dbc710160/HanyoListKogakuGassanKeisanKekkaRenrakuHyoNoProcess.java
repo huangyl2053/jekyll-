@@ -378,7 +378,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
             }
             output.set方書(getColumnValue(kojin.get住所().get方書()));
         }
-        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get受給者台帳().getShichosonCode());
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get最新被保台帳().getShichosonCode());
         output.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, kojin, 導入団体情報));
         if (kojin.get行政区画() != null) {
             if (kojin.get行政区画().getGyoseiku() != null) {

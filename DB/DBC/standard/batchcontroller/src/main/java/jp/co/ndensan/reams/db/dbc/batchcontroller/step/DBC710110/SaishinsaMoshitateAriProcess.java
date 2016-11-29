@@ -133,7 +133,9 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
     @Override
     protected void process(SaishinsaMoshitateRelateEntity entity) {
         flag = true;
-        eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanariEUCEntity(entity, 連番++, processParameter, 市町村名MasterMap, 帳票制御共通, association));
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
+        eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanariEUCEntity(entity, 連番++, processParameter,
+                市町村名MasterMap, 帳票制御共通, association, 導入団体情報));
         if (!RString.isNullOrEmpty(nullToEmpty(entity.get被保険者番号()))) {
             personalDataList.add(toPersonalData(entity));
         }

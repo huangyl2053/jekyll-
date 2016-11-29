@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -99,10 +100,11 @@ public class TankiNyushoKakudaiGaitoshaProcess extends BatchProcessBase<TankiNyu
     @Override
     protected void process(TankiNyushoKakudaiGaitoshaRelateEntity entity) {
         flag = true;
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(entity.get市町村コード()));
         if (processParameter.is連番付加()) {
-            eucCsvWriter.writeLine(business.set連番ありEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association, 連番++));
+            eucCsvWriter.writeLine(business.set連番ありEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association, 導入団体情報, 連番++));
         } else {
-            eucCsvWriter.writeLine(business.set連番なしEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association));
+            eucCsvWriter.writeLine(business.set連番なしEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association, 導入団体情報));
         }
     }
 

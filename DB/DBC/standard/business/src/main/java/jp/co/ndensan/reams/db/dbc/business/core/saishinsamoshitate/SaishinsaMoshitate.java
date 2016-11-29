@@ -84,6 +84,7 @@ public class SaishinsaMoshitate {
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association association
+     * @param 導入団体情報 Association
      * @return HanyoListSaishinsaMoshitateAriEUCEntity
      */
     public HanyoListSaishinsaMoshitateAriEUCEntity setRenbanariEUCEntity(SaishinsaMoshitateRelateEntity entity,
@@ -91,7 +92,8 @@ public class SaishinsaMoshitate {
             SaishinsamoshitateProcessParameter processParameter,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
             ChohyoSeigyoKyotsu 帳票制御共通,
-            Association association) {
+            Association association,
+            Association 導入団体情報) {
         HanyoListSaishinsaMoshitateAriEUCEntity eucEntity = new HanyoListSaishinsaMoshitateAriEUCEntity();
         eucEntity.set連番(new RString(String.valueOf(連番)));
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.getPsmEntity();
@@ -111,7 +113,7 @@ public class SaishinsaMoshitate {
         eucEntity.set世帯主名(iKojin.get世帯主名());
         eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
         eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-        eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+        eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
         eucEntity.set住所(iKojin.get住所().get住所());
         eucEntity.set番地(get番地(iKojin.get住所().get番地()));
         eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -201,13 +203,15 @@ public class SaishinsaMoshitate {
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association association
+     * @param 導入団体情報 Association
      * @return HanyoListSaishinsaMoshitateNashiEUCEntity
      */
     public HanyoListSaishinsaMoshitateNashiEUCEntity setRenbanashiEUCEntity(SaishinsaMoshitateRelateEntity entity,
             SaishinsamoshitateProcessParameter processParameter,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
             ChohyoSeigyoKyotsu 帳票制御共通,
-            Association association) {
+            Association association,
+            Association 導入団体情報) {
         HanyoListSaishinsaMoshitateNashiEUCEntity eucEntity = new HanyoListSaishinsaMoshitateNashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.getPsmEntity();
         if (宛名Entity == null) {
@@ -226,7 +230,7 @@ public class SaishinsaMoshitate {
         eucEntity.set世帯主名(iKojin.get世帯主名());
         eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
         eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-        eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+        eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
         eucEntity.set住所(iKojin.get住所().get住所());
         eucEntity.set番地(get番地(iKojin.get住所().get番地()));
         eucEntity.set方書(get方書(iKojin.get住所().get方書()));
