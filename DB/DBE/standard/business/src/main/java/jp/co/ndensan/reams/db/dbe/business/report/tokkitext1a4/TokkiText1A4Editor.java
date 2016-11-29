@@ -39,7 +39,8 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
     private static final int 連番_12 = 12;
     private static final int 連番_13 = 13;
     private static final int 連番_14 = 14;
-    private static final int フォームインデックス_一ページ目 = 30;
+    private static final int フォームインデックス_判定用 = 30;
+    private static final int 連番_計算用 = 15;
 
     /**
      * インスタンスを生成します。
@@ -136,11 +137,19 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         if (new番号.equals(old番号)) {
             特記事項.add(特記事項builder.toRString());
         }
-        for (RString 事項 : 特記事項) {
-            set特記事項List(事項, index, source);
-            index = index + 1;
+        int tokkijikoIndex = count / フォームインデックス_判定用;
+        int setIndex = 0;
+        if (0 < tokkijikoIndex) {
+            setIndex = tokkijikoIndex * 連番_計算用;
         }
-        if (count < フォームインデックス_一ページ目) {
+        for (int num = 0; num < 連番_計算用; num++) {
+            if (setIndex + num < 特記事項.size()) {
+                set特記事項List(特記事項.get(setIndex + num), num, source);
+            } else {
+                break;
+            }
+        }
+        if (count < フォームインデックス_判定用) {
             source.layoutBreakItem = 1;
         } else {
             source.layoutBreakItem = 2;
@@ -149,50 +158,50 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
     }
 
     private void set特記事項List(RString item, int index, TokkiText1ReportSource source) {
-
-        if (index == 連番_0) {
+        int remban = index % 連番_計算用;
+        if (remban == 連番_0) {
             source.tokkiText1 = item;
         }
-        if (index == 連番_1) {
+        if (remban == 連番_1) {
             source.tokkiText2 = item;
         }
-        if (index == 連番_2) {
+        if (remban == 連番_2) {
             source.tokkiText3 = item;
         }
-        if (index == 連番_3) {
+        if (remban == 連番_3) {
             source.tokkiText4 = item;
         }
-        if (index == 連番_4) {
+        if (remban == 連番_4) {
             source.tokkiText5 = item;
         }
-        if (index == 連番_5) {
+        if (remban == 連番_5) {
             source.tokkiText6 = item;
         }
-        if (index == 連番_6) {
+        if (remban == 連番_6) {
             source.tokkiText7 = item;
         }
-        if (index == 連番_7) {
+        if (remban == 連番_7) {
             source.tokkiText8 = item;
         }
-        if (index == 連番_8) {
+        if (remban == 連番_8) {
             source.tokkiText9 = item;
         }
-        if (index == 連番_9) {
+        if (remban == 連番_9) {
             source.tokkiText10 = item;
         }
-        if (index == 連番_10) {
+        if (remban == 連番_10) {
             source.tokkiText11 = item;
         }
-        if (index == 連番_11) {
+        if (remban == 連番_11) {
             source.tokkiText12 = item;
         }
-        if (index == 連番_12) {
+        if (remban == 連番_12) {
             source.tokkiText13 = item;
         }
-        if (index == 連番_13) {
+        if (remban == 連番_13) {
             source.tokkiText14 = item;
         }
-        if (index == 連番_14) {
+        if (remban == 連番_14) {
             source.tokkiText15 = item;
         }
     }
