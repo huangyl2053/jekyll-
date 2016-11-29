@@ -262,9 +262,8 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
             AtenaMeisho 世帯主名 = 宛名.get世帯主名();
             csvEntity.set世帯主名(世帯主名 != null
                     ? 世帯主名.getColumnValue() : RString.EMPTY);
-            ZenkokuJushoCode 住所コード = 宛名.get住所().get全国住所コード();
-            csvEntity.set住所コード(住所コード != null
-                    ? 住所コード.getColumnValue() : RString.EMPTY);
+            csvEntity.set住所コード(宛名.get住所().get町域コード() != null
+                    ? 宛名.get住所().get町域コード().value() : RString.EMPTY);
             YubinNo 郵便番号 = 宛名.get住所().get郵便番号();
             csvEntity.set郵便番号(郵便番号 != null
                     ? 郵便番号.getEditedYubinNo() : RString.EMPTY);
