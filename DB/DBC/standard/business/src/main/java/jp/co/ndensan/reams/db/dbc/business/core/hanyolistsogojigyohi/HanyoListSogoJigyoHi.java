@@ -1004,8 +1004,6 @@ public class HanyoListSogoJigyoHi {
         市町村コード(new RString("0016"), new RString(""), new RString("\"shichosonCode\"")),
         /**
          * 証記載保険者番号
-         *
-         * TODO QA1684 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
         証記載保険者番号(new RString("0103"), new RString(""), new RString("\"shoKisaiHokenshaNo\"")),
         /**
