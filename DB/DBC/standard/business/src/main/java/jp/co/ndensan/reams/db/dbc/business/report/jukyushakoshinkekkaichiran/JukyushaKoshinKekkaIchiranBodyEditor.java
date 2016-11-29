@@ -327,7 +327,8 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
     }
 
     private static RString date_to_string(RString 年月日) {
-        if (null == 年月日) {
+        年月日 = 年月日.trim();
+        if (null == 年月日 || RString.EMPTY.equals(年月日)) {
             return RString.EMPTY;
         }
         if (FlexibleDate.canConvert(年月日)) {
