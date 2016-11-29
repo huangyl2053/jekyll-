@@ -103,7 +103,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
                     = 総合事業対象者manager.get総合事業対象者情報(被保険者番号);
             KogakuGassanJikoFutanGakuManager 高額合算manager = new KogakuGassanJikoFutanGakuManager();
             List<KogakuGassanJikoFutanGaku> 高額合算List = 高額合算manager.getBy被保険者番号(被保険者番号);
-            if (受給者台帳List.isEmpty() || 総合事業対象者List.isEmpty()) {
+            if (受給者台帳List.isEmpty() && 総合事業対象者List.isEmpty()) {
                 throw new ApplicationException(
                         DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
             }
