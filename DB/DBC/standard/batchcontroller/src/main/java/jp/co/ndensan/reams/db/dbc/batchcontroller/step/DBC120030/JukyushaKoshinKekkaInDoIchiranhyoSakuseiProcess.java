@@ -389,32 +389,32 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * @param 被保険者 DbWT0001HihokenshaTempEntity
      */
     private void 名称項目編集1(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報, DbWT0001HihokenshaTempEntity 被保険者) {
-        if (!RString.isNullOrEmpty(受給者情報.get訂正区分コード())) {
+        if (受給者情報.get訂正区分コード() != null || !RString.isNullOrEmpty(受給者情報.get訂正区分コード().trim())) {
             output.set訂正区分名称(JukyushaIF_TeiseiKubunCode.toValue(受給者情報.get訂正区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get異動区分コード())) {
+        if (受給者情報.get異動区分コード() != null || !RString.isNullOrEmpty(受給者情報.get異動区分コード().trim())) {
             output.set異動区分名称(JukyushaIF_IdoKubunCode.toValue(受給者情報.get異動区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get異動事由区分())) {
+        if (受給者情報.get異動事由区分() != null || !RString.isNullOrEmpty(受給者情報.get異動事由区分().trim())) {
             output.set異動事由名称(JukyushaIF_JukyushaIdoJiyu.toValue(受給者情報.get異動事由区分()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get性別コード())) {
+        if (受給者情報.get性別コード() != null || !RString.isNullOrEmpty(受給者情報.get性別コード().trim())) {
             output.set性別名称(Seibetsu.toValue(受給者情報.get性別コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.getみなし要介護区分コード())) {
+        if (受給者情報.getみなし要介護区分コード() != null || !RString.isNullOrEmpty(受給者情報.getみなし要介護区分コード().trim())) {
             output.setみなし区分名称(MinashiCode.toValue(受給者情報.getみなし要介護区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get要介護状態区分コード())) {
+        if (受給者情報.get要介護状態区分コード() != null | !RString.isNullOrEmpty(受給者情報.get要介護状態区分コード().trim())) {
             output.set要介護区分名称(YokaigoJotaiKubunSupport.toValue(被保険者.getサービス提供年月末日().getYearMonth(),
                     受給者情報.get要介護状態区分コード()).getName());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get申請種別コード())) {
+        if (受給者情報.get申請種別コード() != null || !RString.isNullOrEmpty(受給者情報.get申請種別コード().trim())) {
             output.set申請種別名称(JukyushaIF_ShinseiShubetsuCode.toValue(受給者情報.get申請種別コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get変更申請中区分コード())) {
+        if (受給者情報.get変更申請中区分コード() != null || !RString.isNullOrEmpty(受給者情報.get変更申請中区分コード().trim())) {
             output.set変更申請区分名称(JukyushaIF_HenkoShinseichuKubunCode.toValue(受給者情報.get変更申請中区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get居宅サービス計画作成区分コード())) {
+        if (受給者情報.get居宅サービス計画作成区分コード() != null || !RString.isNullOrEmpty(受給者情報.get居宅サービス計画作成区分コード())) {
             output.set計画作成区分名称(JukyushaIF_KeikakuSakuseiKubunCode.toValue(受給者情報.get居宅サービス計画作成区分コード()).get名称());
         }
     }
@@ -427,34 +427,34 @@ public class JukyushaKoshinKekkaInDoIchiranhyoSakuseiProcess extends BatchKeyBre
      * @param 被保険者 DbWT0001HihokenshaTempEntity
      */
     private void 名称項目編集2(JukyushaKoshinKekkaIchiranCsvEntity output, DbWT5331JukyushaJohoCsvEntity 受給者情報, DbWT0001HihokenshaTempEntity 被保険者) {
-        if (!RString.isNullOrEmpty(受給者情報.get標準負担区分コード())) {
+        if (受給者情報.get標準負担区分コード() != null || !RString.isNullOrEmpty(受給者情報.get標準負担区分コード().trim())) {
             output.set標準負担区分名称(JukyushaIF_HyojunFutanKubunCode.toValue(受給者情報.get標準負担区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get減免申請中区分コード())) {
+        if (受給者情報.get減免申請中区分コード() != null || !RString.isNullOrEmpty(受給者情報.get減免申請中区分コード().trim())) {
             output.set減免中区分名称(JukyushaIF_GemmenShinseichuKubunCode.toValue(受給者情報.get減免申請中区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get利用者負担区分コード())) {
+        if (受給者情報.get利用者負担区分コード() != null || !RString.isNullOrEmpty(受給者情報.get利用者負担区分コード().trim())) {
             output.set利用者負担区分名称(JukyushaIF_RiyoshaFutanKubunCode.toValue(受給者情報.get利用者負担区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get公費負担上限額減額の有無())) {
+        if (受給者情報.get公費負担上限額減額の有無() != null || !RString.isNullOrEmpty(受給者情報.get公費負担上限額減額の有無().trim())) {
             output.set公費負担上限額減額名称(JukyushaIF_kohiFutanJogengakuGengakuUmu.toValue(受給者情報.get公費負担上限額減額の有無()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get住所地特例対象者区分コード())) {
+        if (受給者情報.get住所地特例対象者区分コード() != null || !RString.isNullOrEmpty(受給者情報.get住所地特例対象者区分コード().trim())) {
             output.set住所地特例区分名称(JukyushaIF_JutokuJigyoKubunCode.toValue(受給者情報.get住所地特例対象者区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get小規模居宅サービス利用有無())) {
+        if (受給者情報.get小規模居宅サービス利用有無() != null || !RString.isNullOrEmpty(受給者情報.get小規模居宅サービス利用有無().trim())) {
             output.set小規模居宅サービス利用の有無名称(JukyushaIF_ShokiboKyotakuServiceRIyoCode.toValue(受給者情報.get小規模居宅サービス利用有無()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get二次予防事業区分コード())) {
+        if (受給者情報.get二次予防事業区分コード() != null || !RString.isNullOrEmpty(受給者情報.get二次予防事業区分コード().trim())) {
             output.set二次予防事業区分名称(JukyushaIF_NijiyoboJigyoKubunCode.toValue(受給者情報.get二次予防事業区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get特定入所者認定申請中区分コード())) {
+        if (受給者情報.get特定入所者認定申請中区分コード() != null || !RString.isNullOrEmpty(受給者情報.get特定入所者認定申請中区分コード().trim())) {
             output.set特定入所者認定申請中区分名称(JukyushaIF_NinteiShinseichuKubunCode.toValue(受給者情報.get特定入所者認定申請中区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get特定入所者介護サービス区分コード())) {
+        if (受給者情報.get特定入所者介護サービス区分コード() != null || !RString.isNullOrEmpty(受給者情報.get特定入所者介護サービス区分コード().trim())) {
             output.set特定入所者介護サービス区分名称(JukyushaIF_ServiceKubunCode.toValue(受給者情報.get特定入所者介護サービス区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(受給者情報.get課税層の特例減額措置対象区分())) {
+        if (受給者情報.get課税層の特例減額措置対象区分() != null || !RString.isNullOrEmpty(受給者情報.get課税層の特例減額措置対象区分().trim())) {
             output.set課税層の特例減額措置対象名称(JukyushaIF_TokureiGengakuSochiTaisho.toValue(受給者情報.get課税層の特例減額措置対象区分()).get名称());
         }
     }
