@@ -32,7 +32,6 @@ public class CreatCalCulateEntity {
 
     private static final RString 徴収方法1 = new RString("1");
     private static final RString 徴収方法2 = new RString("2");
-    private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;

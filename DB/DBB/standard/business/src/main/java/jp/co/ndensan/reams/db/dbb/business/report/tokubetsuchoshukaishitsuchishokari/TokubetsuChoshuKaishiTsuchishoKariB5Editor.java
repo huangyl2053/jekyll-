@@ -122,7 +122,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5Editor implements
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get名称() != null) {
                 source.hihokenshaName2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get名称().getName().value();
             }
-            source.birthYMD2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日For帳票();
+            source.birthYMD2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日();
             source.seibetsu2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get性別();
         }
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null) {

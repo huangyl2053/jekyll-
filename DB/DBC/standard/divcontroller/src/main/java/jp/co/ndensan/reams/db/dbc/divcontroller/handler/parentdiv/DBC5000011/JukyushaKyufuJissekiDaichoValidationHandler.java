@@ -99,8 +99,7 @@ public class JukyushaKyufuJissekiDaichoValidationHandler {
         }
         if (new RString("出力様式を").equals(msg)) {
             validationMessages.add(new ValidationMessageControlPair(new JukyushaKyufuJissekiDaichoValidationHandler.CheckMessages(
-                    UrErrorMessages.未指定, "出力様式を"), div.getChkShutsuryokuYoshiki1(), div.getChkShutsuryokuYoshiki2(),
-                    div.getChkShutsuryokuYoshiki3(), div.getChkShutsuryokuYoshiki4(), div.getChkShutsuryokuYoshiki5()));
+                    UrErrorMessages.未指定, "出力様式を"), div.getTblchkShutsuryokuYoshiki()));
         }
         return validationMessages;
     }

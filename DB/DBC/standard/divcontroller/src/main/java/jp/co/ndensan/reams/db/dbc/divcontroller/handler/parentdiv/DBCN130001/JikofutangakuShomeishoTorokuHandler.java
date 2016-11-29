@@ -723,9 +723,9 @@ public class JikofutangakuShomeishoTorokuHandler {
             row.setTennyumaeShokisaiHokensha(転入前証記載保険者.toRString());
             row.setRirekiNo(new RString(String.valueOf(shomeisho.get履歴番号())));
             RStringBuilder 被保険者期間 = new RStringBuilder();
-            被保険者期間.append(shomeisho.get被保険者期間開始年月日().wareki().toString());
+            被保険者期間.append(shomeisho.get被保険者期間開始年月日().wareki().toDateString());
             被保険者期間.append(new RString("～"));
-            被保険者期間.append(shomeisho.get被保険者期間終了年月日().wareki().toString());
+            被保険者期間.append(shomeisho.get被保険者期間終了年月日().wareki().toDateString());
             row.setHihokenshaKikan(被保険者期間.toRString());
             TextBoxFlexibleDate uketsukeDate = new TextBoxFlexibleDate();
             uketsukeDate.setValue(shomeisho.get受付年月日());

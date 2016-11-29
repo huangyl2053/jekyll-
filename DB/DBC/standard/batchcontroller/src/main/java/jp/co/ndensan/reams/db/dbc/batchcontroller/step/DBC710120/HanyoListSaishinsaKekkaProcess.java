@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistsaishinsakekka.Hanyo
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsaishinsakekka.IHanyoListSaishinsaKekkaEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -67,6 +69,7 @@ public class HanyoListSaishinsaKekkaProcess extends BatchProcessBase<HanyoListSa
     private boolean flag;
     @BatchWriter
     private CsvWriter<IHanyoListSaishinsaKekkaEUCEntity> eucCsvWriter;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
 
     @Override
     protected void initialize() {
@@ -78,6 +81,8 @@ public class HanyoListSaishinsaKekkaProcess extends BatchProcessBase<HanyoListSa
             市町村名MasterMap.put(koseiShichosonMaster.get市町村コード().value(), koseiShichosonMaster);
         }
         business = new HanyoListSaishinsaKekkaResult(processParameter);
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701012.getReportId());
     }
 
     @Override
@@ -103,9 +108,9 @@ public class HanyoListSaishinsaKekkaProcess extends BatchProcessBase<HanyoListSa
     protected void process(HanyoListSaishinsaKekkaRelateEntity entity) {
         flag = true;
         if (processParameter.isRenbanFuka()) {
-            eucCsvWriter.writeLine(business.setRenbanariEUCEntity(entity, 連番++, 市町村名MasterMap, association));
+            eucCsvWriter.writeLine(business.setRenbanariEUCEntity(entity, 連番++, 市町村名MasterMap, 帳票制御共通, association));
         } else {
-            eucCsvWriter.writeLine(business.setRenbanashiEUCEntity(entity, 市町村名MasterMap, association));
+            eucCsvWriter.writeLine(business.setRenbanashiEUCEntity(entity, 市町村名MasterMap, 帳票制御共通, association));
         }
 
     }

@@ -849,6 +849,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         申請登録パネル制御(false);
         if (DBCMN61009.equals(メニューID)) {
             set介護資格情報初期化();
+            div.getTxtShikakuSoshitsuYMD().clearValue();
         }
     }
 
@@ -913,7 +914,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         }
     }
 
-    private void 照会状態を初期化設定() {
+    /**
+     * 照会状態を初期化設定
+     */
+    public void 照会状態を初期化設定() {
         div.getBtnAddShinsei().setVisible(false);
         div.getDdlShokisaiHokenshaNo().setReadOnly(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
@@ -1179,7 +1183,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private void 申請情報データで設定(KogakuGassanShinseishoRelate 高額合算申請書) {
         RowState state = div.getDgShinseiIchiran().getClickedItem() == null
                 ? null : div.getDgShinseiIchiran().getClickedItem().getRowState();
-        if (RowState.Added.equals(state)) {
+        if (RowState.Added == state) {
             RDate nowDate = RDate.getNowDate();
             RString 保険者番号 = DbBusinessConfig.get(
                     ConfigNameDBU.保険者情報_保険者番号, nowDate, SubGyomuCode.DBU介護統計報告);

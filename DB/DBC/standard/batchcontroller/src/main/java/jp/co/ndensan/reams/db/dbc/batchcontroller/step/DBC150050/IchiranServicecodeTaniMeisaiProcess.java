@@ -94,6 +94,7 @@ public class IchiranServicecodeTaniMeisaiProcess
     private final RString 漢字_被保険者番号 = new RString("被保険者番号");
     private static final RString SAKUSEI = new RString("作成");
     private static final RString 無し = new RString("1");
+    private static final RString 有り = new RString("2");
 
     @Override
     protected void initialize() {
@@ -283,7 +284,8 @@ public class IchiranServicecodeTaniMeisaiProcess
             if (無し.equals(entity.getKyuSochiNyushoshaTokureiCode())) {
                 csvEntity.set旧措置入所者特例コード(KyuSochiNyushoshaTokureiCode.無し.getコード());
                 csvEntity.set旧措置入所者特例名称(KyuSochiNyushoshaTokureiCode.無し.get名称());
-            } else {
+            }
+            if (有り.equals(entity.getKyuSochiNyushoshaTokureiCode())) {
                 csvEntity.set旧措置入所者特例コード(KyuSochiNyushoshaTokureiCode.有り.getコード());
                 csvEntity.set旧措置入所者特例名称(KyuSochiNyushoshaTokureiCode.有り.get名称());
             }
