@@ -423,6 +423,14 @@ public class JikoFutangakuJohoHoseiJohoDg {
         if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())) {
             return ResponseData.of(div).respond();
         }
+
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+        }
+        if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())) {
+            return ResponseData.of(div).respond();
+        }
+
         KogakuGassanJikoFutanGaku 負担額 = ViewStateHolder.get(
                 ViewStateKeys.高額合算自己負担額, KogakuGassanJikoFutanGaku.class);
         負担額 = handler.編集処理対象から画面(負担額);
@@ -440,21 +448,26 @@ public class JikoFutangakuJohoHoseiJohoDg {
             manager.保存(負担額, 負担額明細一覧);
             登録flg = true;
         }
-        if (登録メッセージ判定(登録flg)) {
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了
-                    .getMessage().replace(登録.toString())).respond();
-        }
         TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
                 名称_被保険者番号, 対象者.get被保険者番号().getColumnValue());
         PersonalData personalData = PersonalData.of(対象者.get識別コード(), expandedInfo);
         AccessLogger.log(AccessLogType.更新, personalData);
-        handler.initializeDisplay(対象者);
-        onClick_chkRirekiHyouji(div);
-        div.getCcdKanryoMessage().setSuccessMessage(完了メッセージ, 対象者.get被保険者番号().getColumnValue(),
-                div.getKogakuGassanShikyuShinseiTorokuKihon().get氏名漢字());
-        return ResponseData.of(div).setState(DBC1140011StateName.処理完了);
+        if (登録メッセージ判定(登録flg)) {
 
+            handler.initializeDisplay(対象者);
+            onClick_chkRirekiHyouji(div);
+            RString 前排他キー = 排他キー.concat(対象者.get被保険者番号().getColumnValue());
+            LockingKey key = new LockingKey(前排他キー);
+            RealInitialLocker.release(key);
+
+            div.getCcdKanryoMessage().setSuccessMessage(完了メッセージ, 対象者.get被保険者番号().getColumnValue(),
+                    div.getKogakuGassanShikyuShinseiTorokuKihon().get氏名漢字());
+            return ResponseData.of(div).setState(DBC1140011StateName.処理完了);
+        } else {
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
+        }
     }
 
     /**
