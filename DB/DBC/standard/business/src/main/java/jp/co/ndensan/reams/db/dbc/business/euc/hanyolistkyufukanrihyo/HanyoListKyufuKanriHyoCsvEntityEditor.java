@@ -244,10 +244,10 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
         if (entity.getサービス事業者() != null) {
             csvEntity.setサービス事業者名(entity.getサービス事業者().getJigyoshaName().getColumnValue());
         }
-//        if (!RString.isNullOrEmpty(entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode())) {
-//            csvEntity.set事業者区分(JigyoshoKubun.toValue(
-//                    entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode()).get名称());
-//        }
+        if (!RString.isNullOrEmpty(entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode())) {
+            csvEntity.set事業者区分(JigyoshoKubun.toValue(
+                    entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode()).get名称());
+        }
         ServiceShuruiCode serviceShuruiCode = entity.getServiceShuruiCode();
         if (serviceShuruiCode != null) {
             csvEntity.setサービス種類(serviceShuruiCode.getColumnValue());
