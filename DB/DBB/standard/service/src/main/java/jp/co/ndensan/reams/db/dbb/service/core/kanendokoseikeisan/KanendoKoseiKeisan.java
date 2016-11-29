@@ -100,6 +100,7 @@ public class KanendoKoseiKeisan {
     private static final RString 重複させる_14期 = new RString("14");
     private static final RString 特別徴収_厚生労働省 = new RString("1");
     private static final RString 特別徴収_地共済 = new RString("2");
+    private static final Long 履歴番号_0 = Long.parseLong("0");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -477,7 +478,7 @@ public class KanendoKoseiKeisan {
                 調定共通 = 調定共通.createBuilderForEdit()
                         .set収納ID(0L)
                         .set会計年度(new RYear(調定年度.getYearValue()))
-                        .set履歴番号(INT_0)
+                        .set履歴番号(履歴番号_0)
                         .set調定事由コード(ChoteiJiyu.更正その他.getCode().getColumnValue())
                         .set調定年月日(賦課の情報.get調定日時().getDate())
                         .set調定額(Decimal.ZERO)
@@ -509,7 +510,7 @@ public class KanendoKoseiKeisan {
                 調定共通 = 調定共通.createBuilderForEdit()
                         .set収納ID(0L)
                         .set会計年度(new RYear(調定年度.getYearValue()))
-                        .set履歴番号(INT_0)
+                        .set履歴番号(履歴番号_0)
                         .set調定事由コード(ChoteiJiyu.更正その他.getCode().getColumnValue())
                         .set調定年月日(賦課の情報.get調定日時().getDate())
                         .set調定額(Decimal.ZERO)
