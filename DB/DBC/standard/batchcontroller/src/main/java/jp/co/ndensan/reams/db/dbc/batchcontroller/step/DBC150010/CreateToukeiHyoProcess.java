@@ -890,6 +890,9 @@ public class CreateToukeiHyoProcess extends BatchKeyBreakBase<DbWT1513RiyoJokyoT
         Decimal 加算対象1;
         Decimal 加算対象2;
         DbWT1513RiyoJokyoTokeihyoEntity before = getBefore();
+        if (before == null) {
+            return Decimal.ZERO;
+        }
         if (entity.getServiceTeikyoYM().compareTo(制度改正施行年月) < 0) {
             if (before.getHihokenshaNo().equals(entity.getHihokenshaNo())
                     && before.getServiceTeikyoYM().equals(entity.getServiceTeikyoYM())

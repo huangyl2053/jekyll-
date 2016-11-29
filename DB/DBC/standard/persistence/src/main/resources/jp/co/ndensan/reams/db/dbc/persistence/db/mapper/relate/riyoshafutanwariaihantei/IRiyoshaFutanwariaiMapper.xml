@@ -1220,6 +1220,9 @@
     </select>
     
     <delete id="delete世帯員情報Temp">
+        CREATE TEMPORARY TABLE IF NOT EXISTS "SetainJohoTemp"
+        ("id" integer,
+        "name" text);
         DELETE FROM
             "SetainJohoTemp" 
         WHERE
@@ -1244,6 +1247,9 @@
     </select>
     
     <delete id="delete世帯員把握入力Temp">
+       CREATE TEMPORARY TABLE IF NOT EXISTS "TmpSetaiHaaku"
+        ("id" integer,
+        "name" text);
         DELETE FROM
             "TmpSetaiHaaku"
         WHERE
@@ -1316,6 +1322,9 @@
     </select>
     
     <delete id="delete利用者負担割合明細01Temp">
+      CREATE TEMPORARY TABLE IF NOT EXISTS "RiyoshaFutanWariaiMeisai01Temp"
+        ("id" integer,
+        "name" text);
         DELETE FROM
             "RiyoshaFutanWariaiMeisai01Temp"
         WHERE
@@ -1332,6 +1341,9 @@
     </select>
     
     <delete id="delete利用者負担割合明細02Temp">
+        CREATE TEMPORARY TABLE IF NOT EXISTS "RiyoshaFutanWariaiMeisai02Temp"
+        ("id" integer,
+        "name" text);
         DELETE FROM
             "RiyoshaFutanWariaiMeisai02Temp"
         WHERE
@@ -1413,6 +1425,9 @@
     </select>
     
     <delete id="delete今回利用者負担割合情報Temp">
+         CREATE TEMPORARY TABLE IF NOT EXISTS "KonkaiRiyoshaFutanWariaiJohoTemp"
+        ("id" integer,
+        "name" text);
         DELETE FROM
             "KonkaiRiyoshaFutanWariaiJohoTemp"
         WHERE 
@@ -1430,6 +1445,9 @@
     </select>
     
     <delete id="delete被保険者番号Temp">
+       CREATE TEMPORARY TABLE IF NOT EXISTS "HanteiHihokenshaNoTemp"
+        ("id" integer,
+        "name" text);
         DELETE FROM
             "HanteiHihokenshaNoTemp"
         WHERE 
@@ -1447,6 +1465,9 @@
     </select>
     
     <delete id="delete世帯員所得情報Temp">
+       CREATE TEMPORARY TABLE IF NOT EXISTS "TmpSetaiShotoku"
+        ("id" integer,
+        "name" text);
         DELETE FROM
             "TmpSetaiShotoku"  
         WHERE 

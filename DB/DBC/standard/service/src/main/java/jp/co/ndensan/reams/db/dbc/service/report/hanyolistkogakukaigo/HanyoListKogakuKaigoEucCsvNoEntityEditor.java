@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
@@ -27,10 +28,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiKoshinNintei;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
@@ -107,6 +110,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
     private static final RString 国保連委託_無し = new RString("受託無し");
     private static final RString 国保連委託_有り = new RString("受託有り");
     private static final RString ZERO = new RString("0");
+    private static final RString BOOLEAN_TRUE = new RString("t");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -132,14 +136,18 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
      * @param 連番 Decimal
      * @param 構成市町村Map Map<LasdecCode, KoseiShichosonMaster>
      * <p>
+     * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
      * @return HanyouRisutoSyuturyokuEucCsvNoEntity
      */
     public HanyouRisutoSyuturyokuEucCsvNoEntity edit(HanyouRisutoSyuturyokuEntity entity,
             HanyoListKogakuKaigoProcessParameter parameter,
             Decimal 連番,
-            Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map) {
+            Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map, ChohyoSeigyoKyotsu 帳票制御共通情報) {
         HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity = new HanyouRisutoSyuturyokuEucCsvNoEntity();
-
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
+        RString 住所 = JushoHenshu.editJusho(帳票制御共通情報, 宛名, 導入団体情報);
+        csvEntity.set住所と番地と方書(住所);
         set宛名(entity, csvEntity, parameter);
         set宛先(entity, csvEntity);
         set口座(entity, csvEntity);
@@ -260,13 +268,29 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         csvEntity.set受給認定開始日(get日付項目(entity.get認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(get日付項目(entity.get認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(get日付項目(entity.get受給認定日(), parameter));
-        csvEntity.set受給旧措置(entity.get旧措置フラグ());
+        if (entity.get旧措置フラグ() != null && BOOLEAN_TRUE.equals(entity.get旧措置フラグ())) {
+            csvEntity.set受給旧措置(new RString("旧措置者"));
+        } else {
+            csvEntity.set受給旧措置(RString.EMPTY);
+        }
         if (entity.getみなし要介護区分コード() != null && !entity.getみなし要介護区分コード().isEmpty()) {
-            csvEntity.set受給みなし更新認定(MinashiKoshinNintei.toValue(entity.getみなし要介護区分コード().getColumnValue()).get名称());
+            csvEntity.set受給みなし更新認定(get受給みなし更新認定(entity.getみなし要介護区分コード().getColumnValue()));
         }
         if (entity.get直近異動事由コード() != null && !entity.get直近異動事由コード().isEmpty()) {
             csvEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get直近異動事由コード().getColumnValue()).get名称());
         }
+    }
+
+    private RString get受給みなし更新認定(RString みなし要介護区分コード) {
+        RString 受給みなし更新認定 = RString.EMPTY;
+        List minashiCodeList = new ArrayList();
+        for (MinashiCode minashiCode : MinashiCode.values()) {
+            minashiCodeList.add(minashiCode.getコード());
+        }
+        if (minashiCodeList.contains(みなし要介護区分コード) && !MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
+            受給みなし更新認定 = new RString("みなし");
+        }
+        return 受給みなし更新認定;
     }
 
     private void set宛名(HanyouRisutoSyuturyokuEntity entity,
@@ -298,6 +322,11 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             if (宛名 != null && 宛名.get性別() != null) {
                 csvEntity.set性別(宛名.get性別().getName().getShortJapanese());
             }
+            if (宛名 != null && 宛名.get住所() != null && 宛名.get住所().get町域コード() != null) {
+                csvEntity.set住所コード(宛名.get住所().get町域コード().getColumnValue());
+            } else {
+                csvEntity.set住所コード(RString.EMPTY);
+            }
             set続柄から(entity, csvEntity);
             set宛名(entity, csvEntity);
         }
@@ -317,10 +346,6 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         csvEntity.set世帯主名(世帯主名 != null
                 ? 世帯主名.getColumnValue()
                 : RString.EMPTY);
-        ZenkokuJushoCode 住所コード = entity.get宛名().getZenkokuJushoCode();
-        csvEntity.set住所コード(住所コード != null
-                ? 住所コード.getColumnValue()
-                : RString.EMPTY);
         YubinNo 郵便番号 = entity.get宛名().getYubinNo();
         csvEntity.set郵便番号(郵便番号 != null
                 ? 郵便番号.getColumnValue()
@@ -337,16 +362,6 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         csvEntity.set方書(方書 != null
                 ? 方書.getColumnValue()
                 : RString.EMPTY);
-        csvEntity.set住所と番地と方書((住所 != null
-                ? 住所.getColumnValue()
-                : RString.EMPTY)
-                .concat(番地 != null
-                        ? 番地.getColumnValue()
-                        : RString.EMPTY)
-                .concat(RString.FULL_SPACE)
-                .concat(方書 != null
-                        ? 方書.getColumnValue()
-                        : RString.EMPTY));
     }
 
     private void set宛名(HanyouRisutoSyuturyokuEntity entity,

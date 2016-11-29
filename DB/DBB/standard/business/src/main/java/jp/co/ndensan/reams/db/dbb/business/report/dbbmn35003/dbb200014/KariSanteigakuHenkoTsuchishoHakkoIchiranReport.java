@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 仮算定額変更通知書発行一覧表のReportです。
@@ -137,8 +138,8 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
         item.setListUpper_7(editedData.get表示コード３());
 
         if (editedData.get更正前() != null) {
-            item.setListUpper_8(new RString(ObjectUtil.defaultIfNull(editedData.get更正前().get更正前特徴期別金額合計(), Decimal.ZERO)
-                    .add(ObjectUtil.defaultIfNull(editedData.get更正前().get更正前普徴期別金額合計(), Decimal.ZERO)).toString()));
+            item.setListUpper_8(DecimalFormatter.toコンマ区切りRString(ObjectUtil.defaultIfNull(editedData.get更正前().get更正前特徴期別金額合計(), Decimal.ZERO)
+                    .add(ObjectUtil.defaultIfNull(editedData.get更正前().get更正前普徴期別金額合計(), Decimal.ZERO)), 0));
             item.setListUpper_9(editedData.get更正前().get更正前徴収方法());
         }
 
@@ -159,8 +160,8 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
         }
 
         if (editedData.get更正後() != null) {
-            item.setListLower_4(new RString(ObjectUtil.defaultIfNull(editedData.get更正後().get更正後特徴期別金額合計(), Decimal.ZERO)
-                    .add(ObjectUtil.defaultIfNull(editedData.get更正後().get更正後普徴期別金額合計(), Decimal.ZERO)).toString()));
+            item.setListLower_4(DecimalFormatter.toコンマ区切りRString(ObjectUtil.defaultIfNull(editedData.get更正後().get更正後特徴期別金額合計(), Decimal.ZERO)
+                    .add(ObjectUtil.defaultIfNull(editedData.get更正後().get更正後普徴期別金額合計(), Decimal.ZERO)), 0));
             item.setListLower_5(editedData.get更正後().get更正後徴収方法());
         }
 

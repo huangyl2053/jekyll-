@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.SofuTorikomiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1211011.KogakuGassanShikyuKetteiTsuchishoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
@@ -173,8 +173,8 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
         div.getTxtUketoriYM().setVisible(true);
         div.getTxtZenkaiKaishiYMD().clearValue();
         div.getTxtZenkaiShuryoYMD().clearValue();
+        div.getTxtZenkaiKaishiYMD().setYmdKubunEnum(YmdKubun.年月);
         if (!(前回受取年月 == null || 前回受取年月.isEmpty())) {
-            div.getTxtZenkaiKaishiYMD().setYmdKubunEnum(YmdKubun.年月);
             div.getTxtZenkaiKaishiYMD().setValue(new RDate(前回受取年月.toString()));
         }
         div.getLblKara().setVisible(false);
@@ -289,7 +289,8 @@ public class KogakuGassanShikyuKetteiTsuchishoHandler {
     /**
      * getバッチのメソッドです。
      *
-     * @return ResponseData DBC040050_KogakugassanShikyuKetteitsuchishoBatchParameter
+     * @return ResponseData
+     * DBC040050_KogakugassanShikyuKetteitsuchishoBatchParameter
      */
     public DBC040050_KogakugassanShikyuKetteitsuchishoParameter setバッチ() {
         DBC040050_KogakugassanShikyuKetteitsuchishoParameter parameter = new DBC040050_KogakugassanShikyuKetteitsuchishoParameter();

@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -428,8 +429,9 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishoshaProcess extends BatchKeyBreakBa
         bodyList.add(DecimalFormatter.toコンマ区切りRString(new Decimal(調整金額), 0));
         bodyList.add(編集備考);
         bodyList.add(特徴平準化結果対象者.get被保険者番号().value());
-        if (宛名.getSetaiCode() != null) {
-            bodyList.add(宛名.getSetaiCode().getColumnValue());
+        SetaiCode 世帯コード = 宛名.getSetaiCode();
+        if (世帯コード != null) {
+            bodyList.add(世帯コード.getColumnValue());
         } else {
             bodyList.add(RString.EMPTY);
         }

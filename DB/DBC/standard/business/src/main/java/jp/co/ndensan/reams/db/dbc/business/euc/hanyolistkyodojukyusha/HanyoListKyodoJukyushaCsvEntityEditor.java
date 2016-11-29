@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubu
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710050.HanyoListKyodoJukyushaProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710050.KyodoJukyushaKihonEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -169,17 +171,18 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
      * @param 地方公共団体情報 地方公共団体情報
      * @param 構成市町村マスタ 構成市町村マスタ
      * @param 連番 連番
+     * @param 帳票制御共通 帳票制御共通
      * @return {@link List<RString>}
      */
     public List<RString> setBodyList(KyodoJukyushaKihonEntity entity, HanyoListKyodoJukyushaProcessParameter param,
-            Association 地方公共団体情報, Map<LasdecCode, KoseiShichosonMaster> 構成市町村マスタ, int 連番) {
+            Association 地方公共団体情報, Map<LasdecCode, KoseiShichosonMaster> 構成市町村マスタ, int 連番, ChohyoSeigyoKyotsu 帳票制御共通) {
         List<RString> bodyList = new ArrayList<>();
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         if (param.is連番付加()) {
             bodyList.add(new RString(連番));
         }
         bodyList.add(kojin.get識別コード().getColumnValue());
-        bodyList.add(kojin.get住民種別().toRString());
+        bodyList.add(kojin.get住民状態().住民状態略称());
         bodyList.add(kojin.get名称().getName().getColumnValue());
         bodyList.add(kojin.get名称().getKana().getColumnValue());
         bodyList.add(format日付項目(kojin.get生年月日().toFlexibleDate(), param));
@@ -188,14 +191,9 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
         bodyList.add(kojin.get続柄コードリスト().toTsuzukigaraCode().getColumnValue());
         bodyList.add(kojin.get世帯コード().getColumnValue());
         bodyList.add(kojin.get世帯主名().getColumnValue());
-        bodyList.add(kojin.get住所().get全国住所コード().getColumnValue());
+        bodyList.add(kojin.get住所().get町域コード().getColumnValue());
         bodyList.add(kojin.get住所().get郵便番号().getEditedYubinNo());
-        if (kojin.get住所().get方書() != null && !kojin.get住所().get方書().isEmpty()) {
-            bodyList.add(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
-                    .concat(RString.FULL_SPACE).concat(kojin.get住所().get方書().getColumnValue()));
-        } else {
-            bodyList.add(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue()));
-        }
+        bodyList.add(JushoHenshu.editJusho(帳票制御共通, kojin, 地方公共団体情報));
         bodyList.add(kojin.get住所().get住所());
         bodyList.add(kojin.get住所().get番地().getBanchi().getColumnValue());
         bodyList.add(kojin.get住所().get方書().getColumnValue());

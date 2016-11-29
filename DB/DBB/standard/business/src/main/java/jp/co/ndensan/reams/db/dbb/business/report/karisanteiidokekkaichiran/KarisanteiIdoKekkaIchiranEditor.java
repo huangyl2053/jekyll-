@@ -61,9 +61,9 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
     private static final RString RSTONE = new RString("1");
     private static final RString 現金 = new RString("現金");
     private static final RString 口座 = new RString("口座");
-    private final RString 特別徴収 = new RString("特別徴収");
-    private final RString 普通徴収 = new RString("普通徴収");
-    private final RString 併用徴収 = new RString("併用徴収");
+    private final RString 特別徴収 = new RString("特徴");
+    private final RString 普通徴収 = new RString("普徴");
+    private final RString 併用徴収 = new RString("併徴");
     private static final RString 作成 = new RString("作成");
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
