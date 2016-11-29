@@ -123,7 +123,7 @@
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
         ON "Nokumi"."CaT0714shikibetsuCode" = 特徴依頼追加Temp."shikibetsuCode"
         LEFT JOIN
-            rgdb."DbT5051KoseiShichosonMaster" AS 構成市町村マスタ
+            rgdb."DbT7051KoseiShichosonMaster" AS 構成市町村マスタ
         ON substring(構成市町村マスタ."shichosonCode",1,5)  = 特徴依頼追加Temp."koseiCityCode"
         AND 構成市町村マスタ."gappeiKyuShichosonKubun" = '0'
         AND 構成市町村マスタ."gappeiKyuShichosonHyojiUmu" = '0'
@@ -166,7 +166,7 @@
     FROM
         master
     LEFT JOIN
-            rgdb."DbT5051KoseiShichosonMaster" AS 構成市町村マスタ
+            rgdb."DbT7051KoseiShichosonMaster" AS 構成市町村マスタ
         ON substring(構成市町村マスタ."shichosonCode",1,5) = master."構成市町村コード"
         AND 構成市町村マスタ."gappeiKyuShichosonKubun" = '0'
         AND 構成市町村マスタ."gappeiKyuShichosonHyojiUmu" = '0'
@@ -774,7 +774,7 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         master.*,
         構成市町村マスタ."shichosonMeisho" AS 市町村名称
     FROM master
-    LEFT JOIN rgdb."DbT5051KoseiShichosonMaster" AS 構成市町村マスタ
+    LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS 構成市町村マスタ
         ON substring(構成市町村マスタ."shichosonCode",1,5) = master."構成市町村コード"
         AND 構成市町村マスタ."gappeiKyuShichosonKubun" = '0'
         AND 構成市町村マスタ."gappeiKyuShichosonHyojiUmu" = '0'
