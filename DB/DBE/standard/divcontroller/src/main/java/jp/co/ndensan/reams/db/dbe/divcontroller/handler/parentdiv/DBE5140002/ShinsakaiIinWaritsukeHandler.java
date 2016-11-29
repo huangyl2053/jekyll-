@@ -115,7 +115,7 @@ public class ShinsakaiIinWaritsukeHandler {
                 koseiIchiranGridList.add(koseiIchiran_Row);
             }
         }
-        div.getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
+        div.getDgShinsakaiIinIchiran().setDataSource(set重複調整(ichiranGridList));
         div.getDgShinsakaiIinKoseiIchiran().setDataSource(koseiIchiranGridList);
     }
 
