@@ -40,6 +40,10 @@ public class KanendoHokenryoNonyuTsuchishoKigotoReport extends NonyuTsuchisho<Ka
     public void writeBy(ReportSourceWriter<KanendoHokenryoNonyuTsuchishoKigotoSource> writer) {
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 本算定納入通知書情報.get納入通知書期情報リスト();
         if (null == 納入通知書期情報リスト || 納入通知書期情報リスト.isEmpty()) {
+            IKanendoHokenryoNonyuTsuchishoKigotoEditor editor
+                    = new KanendoHokenryoNonyuTsuchishoKigotoEditor(本算定納入通知書情報, ninshoshaSource, null, 1);
+            IKanendoHokenryoNonyuTsuchishoKigotoBuilder builder = new KanendoHokenryoNonyuTsuchishoKigotoBuilder(editor);
+            writer.writeLine(builder);
             return;
         }
         int 連番 = 1;
