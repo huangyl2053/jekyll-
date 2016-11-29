@@ -1917,7 +1917,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                 .concat(RString.FULL_SPACE).concat(未満));
         出力条件リスト.add(rstbuilder.toRString());
         rstbuilder = new RStringBuilder();
-        rstbuilder.append(FORMAT_LEFT.concat(普徴仮算定異動方法).concat(FORMAT_RIGHT);
+        rstbuilder.append(FORMAT_LEFT.concat(普徴仮算定異動方法).concat(FORMAT_RIGHT));
         RString 普徴仮異動方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定異動方法,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         if (RSTRING_1.equals(普徴仮異動方法)) {
