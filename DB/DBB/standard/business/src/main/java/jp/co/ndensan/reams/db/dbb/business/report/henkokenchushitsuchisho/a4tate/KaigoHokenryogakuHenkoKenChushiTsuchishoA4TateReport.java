@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -213,7 +215,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReport
         RString 納期限 = RString.EMPTY;
         for (AfterEditInformation afterEditInformation : 普徴納期情報リスト) {
             if (期.equals(afterEditInformation.get期())) {
-                納期限 = afterEditInformation.get納期限();
+                納期限 = DateConverter.getWarekiYMD(new RDate(afterEditInformation.get納期限_西暦().toString()));
                 break;
             }
         }
