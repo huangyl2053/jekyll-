@@ -146,11 +146,8 @@ public class ShinsakaiIinWaritsukeHandler {
     private List<dgShinsakaiIinIchiran_Row> set重複調整(List<dgShinsakaiIinIchiran_Row> ichiranGridList) {
         List<dgShinsakaiIinIchiran_Row> list = new ArrayList();
         if (ichiranGridList != null && !ichiranGridList.isEmpty()) {
+            list.add(ichiranGridList.get(0));
             for (dgShinsakaiIinIchiran_Row ichiran : ichiranGridList) {
-                if (list.isEmpty()) {
-                    list.add(ichiran);
-                    continue;
-                }
                 for (int i = 0; i < list.size(); i++) {
                     if (!list.get(i).getShinsakaiIinCode().equals(ichiran.getShinsakaiIinCode())) {
                         list.add(ichiran);
