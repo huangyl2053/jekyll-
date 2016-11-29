@@ -68,6 +68,7 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
         Map<RString, List<KoikiZenShichosonJoho>> map = KogakuGassanShikyuShinseiToroku.createInstance().getHokensyaBango();
         List<KeyValueDataSource> seishoSeiriBangoList = new ArrayList<>();
         List<KeyValueDataSource> shiChoSonList = new ArrayList<>();
+        seishoSeiriBangoList.add(new KeyValueDataSource(キー, RString.EMPTY));
         RString モード = RString.EMPTY;
         if (map != null && map.containsKey(単一市町村モード) && map.get(単一市町村モード) != null && !map.get(単一市町村モード).isEmpty()) {
             RString 市町村識別ID = map.get(単一市町村モード).get(0).get市町村識別ID();
@@ -79,7 +80,6 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
             div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setDataSource(seishoSeiriBangoList);
             div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setDataSource(seishoSeiriBangoList);
         } else if (map != null && map.containsKey(広域市町村モード) && map.get(広域市町村モード) != null && !map.get(広域市町村モード).isEmpty()) {
-            seishoSeiriBangoList.add(new KeyValueDataSource(キー, RString.EMPTY));
             shiChoSonList.add(new KeyValueDataSource(キー, RString.EMPTY));
             List<RString> keyList = new ArrayList();
             List<RString> keyList2 = new ArrayList();
@@ -327,15 +327,14 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
     private void 状態1(RString モード) {
         final Integer eight = 8;
         final Integer seven = 7;
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setDisabled(true);
         if (モード.equals(単一市町村モード)) {
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setVisible(false);
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setSelectedIndex(ゼロ一);
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setDisabled(true);
+            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setDisplayNone(true);
+
         } else if (モード.equals(広域市町村モード)) {
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setVisible(true);
+            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setDisplayNone(false);
             div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setSelectedIndex(ゼロ一);
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setSelectedIndex(ゼロ一);
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setDisabled(false);
+
         }
         div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShinseiTaisyoNendo().setDisabled(false);
         RDate システム日付 = RDate.getNowDate();
@@ -368,27 +367,30 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango2().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango2().setValue(九十九);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango4().clearValue();
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango4().setDisabled(false);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango4().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkIryoShikyuShinseishoSeiriBango().setDisabled(false);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkIryoShikyuShinseishoSeiriBango().setSelectedItemsByKey(Collections.EMPTY_LIST);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango1().setDisabled(true);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango2().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango2().setValue(ゼロ);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango3().clearValue();
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango3().setDisabled(false);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango3().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango4().clearValue();
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango4().setDisabled(false);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango4().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbShinseiKihonJohoKensaku().clearSelectedItem();
         div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbShinseiKihonJohoKensaku().setDisabled(false);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbShinseiKihonJohoKensaku().setSelectedKey(キー);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtShinseiDaihyoshaShimei().clearValue();
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtShinseiDaihyoshaShimei().setDisabled(false);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihobango().clearValue();
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihobango().setDisabled(false);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihobango().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihokensyaShimei().clearValue();
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihokensyaShimei().setDisabled(true);
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi1().setSelectedItemsByKey(Collections.EMPTY_LIST);
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi1().setDisabled(false);
+
         List<RString> list = new ArrayList<>();
         list.add(キー);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi1().setSelectedItemsByKey(list);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi1().setDisabled(false);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi2().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi2().setSelectedItemsByKey(list);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbHihokensyaJohoKensaku().setDisabled(false);
