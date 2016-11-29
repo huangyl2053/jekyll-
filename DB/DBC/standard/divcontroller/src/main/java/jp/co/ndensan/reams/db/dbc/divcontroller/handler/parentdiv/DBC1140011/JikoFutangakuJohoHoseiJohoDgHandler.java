@@ -120,8 +120,8 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
             row.setTxtIdoKubun(result.get異動区分() == null ? RString.EMPTY
                     : KaigoGassan_Idokubun.toValue(result.get異動区分()).get名称());
             row.setTxtRirekiNo(new RString(result.get履歴番号()).padZeroToLeft(INT_4));
-            row.setTxtUketoriNengetsu(result.get自己負担額証明書情報受取年月() == null || result.get自己負担額証明書情報受取年月().isEmpty() ? RString.EMPTY
-                    : result.get自己負担額証明書情報受取年月().wareki().toDateString());
+            row.setTxtUketoriNengetsu(result.get自己負担額確認情報受取年月() == null || result.get自己負担額確認情報受取年月().isEmpty() ? RString.EMPTY
+                    : result.get自己負担額確認情報受取年月().wareki().toDateString());
             row.setTxtHoseiYMDKatsu(result.getバッチ補正実施年月日() == null || result.getバッチ補正実施年月日().isEmpty() ? RString.EMPTY
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.getバッチ補正実施年月日().toString())));
@@ -157,8 +157,8 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
             row.setTxtIdoKubun(result.get異動区分() == null ? RString.EMPTY
                     : KaigoGassan_Idokubun.toValue(result.get異動区分()).get名称());
             row.setTxtRirekiNo(new RString(result.get履歴番号()).padZeroToLeft(INT_4));
-            row.setTxtUketoriNengetsu(result.get自己負担額証明書情報受取年月() == null || result.get自己負担額証明書情報受取年月().isEmpty() ? RString.EMPTY
-                    : result.get自己負担額証明書情報受取年月().wareki().toDateString());
+            row.setTxtUketoriNengetsu(result.get自己負担額確認情報受取年月() == null || result.get自己負担額確認情報受取年月().isEmpty() ? RString.EMPTY
+                    : result.get自己負担額確認情報受取年月().wareki().toDateString());
             row.setTxtHoseiYMDKatsu(result.getバッチ補正実施年月日() == null || result.getバッチ補正実施年月日().isEmpty() ? RString.EMPTY
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.getバッチ補正実施年月日().toString())));
@@ -349,11 +349,11 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
         detailDiv.getTxtTaishouNendo().setValue(new RDate(result.get対象年度().getYearValue()));
         detailDiv.getTxtShoukisaiHokenjaNO().setValue(result.get保険者番号().getColumnValue());
         detailDiv.getTxtShikyuShinseiSeiriNO().setValue(result.get支給申請書整理番号());
-        if (result.get自己負担額証明書情報受取年月() == null || result.get自己負担額証明書情報受取年月().isEmpty()) {
+        if (result.get自己負担額確認情報受取年月() == null || result.get自己負担額確認情報受取年月().isEmpty()) {
             detailDiv.getTxtUketoriYM().clearValue();
         } else {
             detailDiv.getTxtUketoriYM().setValue(new RDate(
-                    result.get自己負担額証明書情報受取年月().toString()));
+                    result.get自己負担額確認情報受取年月().toString()));
         }
         List<RString> 再送フラグList = new ArrayList();
         if (CODE_ONE.equals(result.get再送フラグ())) {
