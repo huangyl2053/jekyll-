@@ -225,7 +225,8 @@
         D3."serviceTeikyoYM" = K1."サービス提供年月" AND
         D3."inputShikibetsuNo" = K1."入力識別番号" AND
         D3."jigyoshoNo" = K1."事業所番号" AND
-        D3."seiriNo" = K1."整理番号"
+        D3."seiriNo" = K1."整理番号" AND
+        D3."toshiNo" = K1."通し番号"
         LEFT OUTER JOIN
         rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS D4
         ON D4."hiHokenshaNo" = K1."被保険者番号" AND
