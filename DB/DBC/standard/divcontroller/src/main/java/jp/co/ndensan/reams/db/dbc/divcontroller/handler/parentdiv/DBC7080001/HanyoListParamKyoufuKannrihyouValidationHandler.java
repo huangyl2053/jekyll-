@@ -38,17 +38,17 @@ public class HanyoListParamKyoufuKannrihyouValidationHandler {
     public ValidationMessageControlPairs 条件保存チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().getFromValue() != null
-                && div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().getToValue() != null) {
-            if (div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().getToValue().isBefore(
-                    div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().getFromValue())) {
-                validPairs.add(new ValidationMessageControlPair(
-                        new HanyoListParamKyoufuKannrihyouValidationHandler.IdocheckMessages(
-                                UrErrorMessages.期間が不正_追加メッセージあり２.getMessage(),
-                                div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().getFromValue()
-                                .getYearMonth().wareki().toDateString().toString(),
-                                div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().getToValue()
-                                .getYearMonth().wareki().toDateString().toString())));
-            }
+                && div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().getToValue() != null
+                && div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().getToValue().isBefore(
+                        div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().getFromValue())) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new HanyoListParamKyoufuKannrihyouValidationHandler.IdocheckMessages(
+                            UrErrorMessages.期間が不正_追加メッセージあり２.getMessage(),
+                            div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().getFromValue()
+                            .getYearMonth().wareki().toDateString().toString(),
+                            div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().getToValue()
+                            .getYearMonth().wareki().toDateString().toString())));
+
         }
         return validPairs;
     }
