@@ -556,7 +556,7 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
         FukaJoho 賦課の情報_更正前 = 賦課の情報;
         fukaKokyoBatchParameter.set賦課の情報_設定前(賦課の情報_更正前);
         FukaJoho 賦課の情報_更正後 = FukaKeisan.createInstance().reflect賦課根拠(fukaKokyoBatchParameter);
-        ChoshuHoho 徴収方法の情報_更正後 = 徴収方法の情報;
+        ChoshuHoho 徴収方法の情報_更正後 = null;
         if ((賦課の情報_更正前.get調定年度().equals(賦課の情報_更正前.get賦課年度())
                 && !賦課の情報_更正前.get減免前介護保険料_年額().equals(年額保険料.getHokenryoNengaku()))
                 || !RString.isNullOrEmpty(徴収方法の情報.get特別徴収停止事由コード())) {

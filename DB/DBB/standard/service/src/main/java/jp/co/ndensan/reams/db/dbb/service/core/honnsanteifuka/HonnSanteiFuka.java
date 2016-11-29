@@ -705,7 +705,7 @@ public class HonnSanteiFuka {
                 .add(特徴期別金額04).add(特徴期別金額05).add(特徴期別金額06);
         Decimal 更正後特徴期別金額合計 = Decimal.ZERO;
         for (Decimal 特徴期別金額 : 特徴期別金額List) {
-            更正後特徴期別金額合計.add(特徴期別金額);
+            更正後特徴期別金額合計 = 更正後特徴期別金額合計.add(特徴期別金額);
         }
         ChoshuHoho 徴収方法の情報_クローン = new ChoshuHoho(徴収方法情報_更正前.toEntity());
         CalculateChoteiResult result = new CalculateChoteiResult();
