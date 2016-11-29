@@ -28,8 +28,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
@@ -136,17 +134,14 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
      * @param 連番 Decimal
      * @param 構成市町村Map Map<LasdecCode, KoseiShichosonMaster>
      * <p>
-     * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
+     * @param 住所 RString
      * @return HanyouRisutoSyuturyokuEucCsvNoEntity
      */
     public HanyouRisutoSyuturyokuEucCsvNoEntity edit(HanyouRisutoSyuturyokuEntity entity,
             HanyoListKogakuKaigoProcessParameter parameter,
             Decimal 連番,
-            Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map, ChohyoSeigyoKyotsu 帳票制御共通情報) {
+            Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map, RString 住所) {
         HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity = new HanyouRisutoSyuturyokuEucCsvNoEntity();
-        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
-        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
-        RString 住所 = JushoHenshu.editJusho(帳票制御共通情報, 宛名, 導入団体情報);
         csvEntity.set住所と番地と方書(住所);
         set宛名(entity, csvEntity, parameter);
         set宛先(entity, csvEntity);
@@ -710,8 +705,8 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
     private RString convertDayOfWeek(FlexibleDate targetDate) {
         return targetDate != null
                 && targetDate.isValid()
-                        ? new RString(targetDate.getDayOfWeek().toString())
-                        : RString.EMPTY;
+                ? new RString(targetDate.getDayOfWeek().toString())
+                : RString.EMPTY;
     }
 
     private void set給付対象者合計(HanyouRisutoSyuturyokuEntity entity,
