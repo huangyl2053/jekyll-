@@ -30,7 +30,7 @@ public class KariSanteiIdoFukaPsmParameter implements IMyBatisParameter {
      * @param 出力順 RString
      * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
      */
-    public KariSanteiIdoFukaPsmParameter(
+    private KariSanteiIdoFukaPsmParameter(
             RString 出力順,
             UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam) {
         this.出力順 = 出力順;
