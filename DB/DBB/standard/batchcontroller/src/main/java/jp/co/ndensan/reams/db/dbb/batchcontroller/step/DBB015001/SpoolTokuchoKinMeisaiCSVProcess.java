@@ -208,14 +208,15 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
-        spoolManager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
+
         List<RString> 出力条件リスト = new ArrayList<>();
         if (processParameter.get出力帳票Entity() != null
                 && !RString.isNullOrEmpty(processParameter.get出力帳票Entity().get出力順ID())) {
             出力条件リスト = get出力条件リスト(processParameter.get出力帳票Entity().get出力順ID());
         }
         loadバッチ出力条件リスト(出力条件リスト, new RString(reportSourceWriter.pageCount().value()));
+        eucCsvWriter.close();
+        spoolManager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
     }
 
     private List<RString> get出力条件リスト(RString 出力順Id) {
