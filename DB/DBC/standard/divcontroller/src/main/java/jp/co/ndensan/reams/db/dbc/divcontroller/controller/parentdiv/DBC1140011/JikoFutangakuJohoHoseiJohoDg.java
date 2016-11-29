@@ -169,23 +169,23 @@ public class JikoFutangakuJohoHoseiJohoDg {
         boolean flg = handler.isCheckPass(対象者.get被保険者番号(), row);
         if (!flg && !JigyouGassan_ShoumeishoyouDataKubun.証明書用.getCode().equals(row.getTxtDataKBN())
                 && !ResponseHolder.isReRequest()
-                && !(new RString(DbcWarningMessages.高額合算補正関連３
+                && !(new RString(DbcWarningMessages.高額合算補正関連２
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連１.getMessage()).respond();
         } else if (!flg && JigyouGassan_ShoumeishoyouDataKubun.証明書用.getCode().equals(row.getTxtDataKBN())
                 && !ResponseHolder.isReRequest()
-                && !(new RString(DbcWarningMessages.高額合算補正関連３
+                && !(new RString(DbcWarningMessages.高額合算補正関連１
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連２.getMessage()).respond();
         }
-        if (RString.isNullOrEmpty(row.getTxtSofuNengetsu())
-                && (new RString(DbcWarningMessages.高額合算補正関連１
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                || new RString(
-                        DbcWarningMessages.高額合算補正関連２
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
+        if (!RString.isNullOrEmpty(row.getTxtSofuNengetsu())) {
+//                && (new RString(DbcWarningMessages.高額合算補正関連１
+//                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+//                || new RString(
+//                        DbcWarningMessages.高額合算補正関連２
+//                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連３.getMessage()).respond();
         }
