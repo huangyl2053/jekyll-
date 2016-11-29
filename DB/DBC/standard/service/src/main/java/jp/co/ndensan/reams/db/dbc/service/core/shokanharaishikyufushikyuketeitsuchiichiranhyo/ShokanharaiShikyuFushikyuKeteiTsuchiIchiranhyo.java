@@ -136,17 +136,17 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
                 if ((null == befItem.getYoshikigotoKingaku() || befItem.getYoshikigotoKingaku().isEmpty())
                         && (null == befItem.getKingaku() || befItem.getKingaku().isEmpty())) {
                     // ３番目の様式は次の明細行（２行１組）の下段の「様式名称」、「様式毎の金額」部分に２番目の「様式名称」、「様式毎の金額」を出力する。
-                    befItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称().concat(new RString("(")));
+                    befItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称().concat(new RString(" (")));
                     befItem.setKingaku(shoShiharaiList.get様式金額集計() == null
                     ? new RString(")") : DecimalFormatter.toコンマ区切りRString(
-                            shoShiharaiList.get様式金額集計(), 0).concat(new RString(") ")));
+                            shoShiharaiList.get様式金額集計(), 0).concat(new RString(" )")));
                     continue;
                 } else {
                     // ２番目の様式は次の明細行（２行１組）の上段の「本人支払額」、「支給額」部分に２番目の「様式名称」、「様式毎の金額」を出力する。
-                    ichiranItem.setHonjinShiharaigaku(shoShiharaiList.get様式名称().concat(new RString("(")));
+                    ichiranItem.setHonjinShiharaigaku(shoShiharaiList.get様式名称().concat(new RString(" (")));
                     ichiranItem.setShikyugaku(shoShiharaiList.get様式金額集計() == null
                     ? new RString(")") : DecimalFormatter.toコンマ区切りRString(
-                            shoShiharaiList.get様式金額集計(), 0).concat(new RString(") ")));
+                            shoShiharaiList.get様式金額集計(), 0).concat(new RString(" )")));
                 }
                 set同じIitem(ichiranItem, shoShiharaiList);
             }
@@ -221,7 +221,7 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
         ichiranItem.setPrintTimeStamp(get作成日時分秒());
         ichiranItem.setNinteiKaishibi(タイトル);
         ichiranItem.setUketsukeYMD(new RString(件数).concat(new RString("件数")));
-        ichiranItem.setHonjinShiharaigaku(DecimalFormatter.toコンマ区切りRString(本人支払額集計, 0));
+        ichiranItem.setHonjinShiharaigaku(DecimalFormatter.toコンマ区切りRString(本人支払額集計, 0).concat(RString.HALF_SPACE));
         ichiranItem.setShikyugaku(DecimalFormatter.toコンマ区切りRString(支給金額集計, 0).concat(RString.FULL_SPACE));
         
         ichiranItem.setYubinBango(getEditedYubinNo(shoShiharaiList.get郵便番号()));
@@ -277,14 +277,14 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
         ichiranItem.setUketsukeYMD(共通ポリシfomart(shoShiharaiList.get受付年月日()));
         ichiranItem.setKeteiYMD(共通ポリシfomart(shoShiharaiList.get決定年月日()));
         ichiranItem.setHonjinShiharaigaku(shoShiharaiList.get本人支払額() == null
-                ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get本人支払額(), 0));
+                ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get本人支払額(), 0).concat(RString.HALF_SPACE));
         ichiranItem.setShikyugaku(shoShiharaiList.get支給額() == null
                 ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get支給額(), 0).concat(RString.FULL_SPACE));
         if (ShikyuFushikyuKubun.支給.getコード().equals(shoShiharaiList.get支給不支給決定区分())) {
-            ichiranItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称().concat(new RString("(")));
+            ichiranItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称().concat(new RString(" (")));
             ichiranItem.setKingaku(shoShiharaiList.get様式金額集計() == null
-                    ? new RString(") ") : DecimalFormatter.toコンマ区切りRString(
-                            shoShiharaiList.get様式金額集計(), 0).concat(new RString(") ")));
+                    ? new RString(")") : DecimalFormatter.toコンマ区切りRString(
+                            shoShiharaiList.get様式金額集計(), 0).concat(new RString(" )")));
         }
         
         ichiranItem.setTuika(shoShiharaiList.get追加());
