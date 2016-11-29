@@ -108,7 +108,6 @@ public class ShokanFukushiYoguHanbaihi
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 被保険者番号を返します。
      *
@@ -294,7 +293,6 @@ public class ShokanFukushiYoguHanbaihi
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShokanFukushiYoguHanbaihi(deletedEntity, id);
@@ -366,5 +364,4 @@ public class ShokanFukushiYoguHanbaihi
         return new ShokanFukushiYoguHanbaihiBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

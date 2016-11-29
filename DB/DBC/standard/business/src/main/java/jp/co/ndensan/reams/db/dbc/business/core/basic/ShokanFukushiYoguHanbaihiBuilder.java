@@ -41,8 +41,6 @@ public class ShokanFukushiYoguHanbaihiBuilder {
 
     }
 
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
     /**
      * 被保険者番号を設定します。
      *
