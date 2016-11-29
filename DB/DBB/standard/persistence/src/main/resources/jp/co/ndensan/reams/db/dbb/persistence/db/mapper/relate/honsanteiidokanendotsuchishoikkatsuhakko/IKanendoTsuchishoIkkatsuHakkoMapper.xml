@@ -1025,7 +1025,7 @@
                 年金特徴回付情報."dtKojinNo" AS "ueT0511after_dtKojinNo"
         FROM 
           "DbT2015KeisangoJoho" AS 計算後情報
-          INNER JOIN 
+          LEFT JOIN 
               rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"

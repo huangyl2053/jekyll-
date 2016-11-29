@@ -1464,7 +1464,7 @@
                     T."hihokenshaNo" = Q."hihokenshaNo"
                 AND T."ichigoShikakuShutokuYMD" = Q."ichigoShikakuShutokuYMD"
                 AND T."max_shikakuSoshitsuYMD" = Q."shikakuSoshitsuYMD"
-               GROUP BY Q."hihokenshaNo", Q."idoYMD") as M
+               GROUP BY Q."hihokenshaNo") as M
                ON
                  M."hihokenshaNo" = L."hihokenshaNo"
                  AND M."idoYMD" = L."idoYMD"
