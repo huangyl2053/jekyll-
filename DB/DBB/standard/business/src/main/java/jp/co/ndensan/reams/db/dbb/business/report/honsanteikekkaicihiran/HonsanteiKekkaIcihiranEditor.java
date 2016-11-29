@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -82,6 +83,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     private static final RString HYPHEN = new RString("-");
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final Code EXPANDEDINFORMATION = new Code("0003");
+    private static final RString 文字列_ケ月 = new RString("ケ月");
 
     /**
      * コンストラクタです。
@@ -251,82 +253,82 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
             source.fuchoKi11 = 期の表記.get(NUM_1);
             source.fuchoKi12 = 期の表記.get(NUM_0);
         } else if (!期の表記.get(NUM_10).isEmpty()) {
-            source.fuchoKi1 = 期の表記.get(NUM_11);
-            source.fuchoKi2 = 期の表記.get(NUM_10);
-            source.fuchoKi3 = 期の表記.get(NUM_9);
-            source.fuchoKi4 = 期の表記.get(NUM_8);
-            source.fuchoKi5 = 期の表記.get(NUM_7);
-            source.fuchoKi6 = 期の表記.get(NUM_6);
-            source.fuchoKi7 = 期の表記.get(NUM_5);
-            source.fuchoKi8 = 期の表記.get(NUM_4);
-            source.fuchoKi9 = 期の表記.get(NUM_3);
-            source.fuchoKi10 = 期の表記.get(NUM_2);
-            source.fuchoKi11 = 期の表記.get(NUM_1);
+            source.fuchoKi1 = 期の表記.get(NUM_10);
+            source.fuchoKi2 = 期の表記.get(NUM_9);
+            source.fuchoKi3 = 期の表記.get(NUM_8);
+            source.fuchoKi4 = 期の表記.get(NUM_7);
+            source.fuchoKi5 = 期の表記.get(NUM_6);
+            source.fuchoKi6 = 期の表記.get(NUM_5);
+            source.fuchoKi7 = 期の表記.get(NUM_4);
+            source.fuchoKi8 = 期の表記.get(NUM_3);
+            source.fuchoKi9 = 期の表記.get(NUM_2);
+            source.fuchoKi10 = 期の表記.get(NUM_1);
+            source.fuchoKi11 = 期の表記.get(NUM_0);
         } else if (!期の表記.get(NUM_9).isEmpty()) {
-            source.fuchoKi1 = 期の表記.get(NUM_11);
-            source.fuchoKi2 = 期の表記.get(NUM_10);
-            source.fuchoKi3 = 期の表記.get(NUM_9);
-            source.fuchoKi4 = 期の表記.get(NUM_8);
-            source.fuchoKi5 = 期の表記.get(NUM_7);
-            source.fuchoKi6 = 期の表記.get(NUM_6);
-            source.fuchoKi7 = 期の表記.get(NUM_5);
-            source.fuchoKi8 = 期の表記.get(NUM_4);
-            source.fuchoKi9 = 期の表記.get(NUM_3);
-            source.fuchoKi10 = 期の表記.get(NUM_2);
+            source.fuchoKi1 = 期の表記.get(NUM_9);
+            source.fuchoKi2 = 期の表記.get(NUM_8);
+            source.fuchoKi3 = 期の表記.get(NUM_7);
+            source.fuchoKi4 = 期の表記.get(NUM_6);
+            source.fuchoKi5 = 期の表記.get(NUM_5);
+            source.fuchoKi6 = 期の表記.get(NUM_4);
+            source.fuchoKi7 = 期の表記.get(NUM_3);
+            source.fuchoKi8 = 期の表記.get(NUM_2);
+            source.fuchoKi9 = 期の表記.get(NUM_1);
+            source.fuchoKi10 = 期の表記.get(NUM_0);
         } else if (!期の表記.get(NUM_8).isEmpty()) {
-            source.fuchoKi1 = 期の表記.get(NUM_11);
-            source.fuchoKi2 = 期の表記.get(NUM_10);
-            source.fuchoKi3 = 期の表記.get(NUM_9);
-            source.fuchoKi4 = 期の表記.get(NUM_8);
-            source.fuchoKi5 = 期の表記.get(NUM_7);
-            source.fuchoKi6 = 期の表記.get(NUM_6);
-            source.fuchoKi7 = 期の表記.get(NUM_5);
-            source.fuchoKi8 = 期の表記.get(NUM_4);
-            source.fuchoKi9 = 期の表記.get(NUM_3);
+            source.fuchoKi1 = 期の表記.get(NUM_8);
+            source.fuchoKi2 = 期の表記.get(NUM_7);
+            source.fuchoKi3 = 期の表記.get(NUM_6);
+            source.fuchoKi4 = 期の表記.get(NUM_5);
+            source.fuchoKi5 = 期の表記.get(NUM_4);
+            source.fuchoKi6 = 期の表記.get(NUM_3);
+            source.fuchoKi7 = 期の表記.get(NUM_2);
+            source.fuchoKi8 = 期の表記.get(NUM_1);
+            source.fuchoKi9 = 期の表記.get(NUM_0);
         } else if (!期の表記.get(NUM_7).isEmpty()) {
-            source.fuchoKi1 = 期の表記.get(NUM_11);
-            source.fuchoKi2 = 期の表記.get(NUM_10);
-            source.fuchoKi3 = 期の表記.get(NUM_9);
-            source.fuchoKi4 = 期の表記.get(NUM_8);
-            source.fuchoKi5 = 期の表記.get(NUM_7);
-            source.fuchoKi6 = 期の表記.get(NUM_6);
-            source.fuchoKi7 = 期の表記.get(NUM_5);
-            source.fuchoKi8 = 期の表記.get(NUM_4);
+            source.fuchoKi1 = 期の表記.get(NUM_7);
+            source.fuchoKi2 = 期の表記.get(NUM_6);
+            source.fuchoKi3 = 期の表記.get(NUM_5);
+            source.fuchoKi4 = 期の表記.get(NUM_4);
+            source.fuchoKi5 = 期の表記.get(NUM_3);
+            source.fuchoKi6 = 期の表記.get(NUM_2);
+            source.fuchoKi7 = 期の表記.get(NUM_1);
+            source.fuchoKi8 = 期の表記.get(NUM_0);
         } else if (!期の表記.get(NUM_6).isEmpty()) {
-            source.fuchoKi1 = 期の表記.get(NUM_11);
-            source.fuchoKi2 = 期の表記.get(NUM_10);
-            source.fuchoKi3 = 期の表記.get(NUM_9);
-            source.fuchoKi4 = 期の表記.get(NUM_8);
-            source.fuchoKi5 = 期の表記.get(NUM_7);
-            source.fuchoKi6 = 期の表記.get(NUM_6);
-            source.fuchoKi7 = 期の表記.get(NUM_5);
+            source.fuchoKi1 = 期の表記.get(NUM_6);
+            source.fuchoKi2 = 期の表記.get(NUM_5);
+            source.fuchoKi3 = 期の表記.get(NUM_4);
+            source.fuchoKi4 = 期の表記.get(NUM_3);
+            source.fuchoKi5 = 期の表記.get(NUM_2);
+            source.fuchoKi6 = 期の表記.get(NUM_1);
+            source.fuchoKi7 = 期の表記.get(NUM_0);
         } else if (!期の表記.get(NUM_5).isEmpty()) {
-            source.fuchoKi1 = 期の表記.get(NUM_11);
-            source.fuchoKi2 = 期の表記.get(NUM_10);
-            source.fuchoKi3 = 期の表記.get(NUM_9);
-            source.fuchoKi4 = 期の表記.get(NUM_8);
-            source.fuchoKi5 = 期の表記.get(NUM_7);
-            source.fuchoKi6 = 期の表記.get(NUM_6);
+            source.fuchoKi1 = 期の表記.get(NUM_5);
+            source.fuchoKi2 = 期の表記.get(NUM_4);
+            source.fuchoKi3 = 期の表記.get(NUM_3);
+            source.fuchoKi4 = 期の表記.get(NUM_2);
+            source.fuchoKi5 = 期の表記.get(NUM_1);
+            source.fuchoKi6 = 期の表記.get(NUM_0);
         } else if (!期の表記.get(NUM_4).isEmpty()) {
-            source.fuchoKi1 = 期の表記.get(NUM_11);
-            source.fuchoKi2 = 期の表記.get(NUM_10);
-            source.fuchoKi3 = 期の表記.get(NUM_9);
-            source.fuchoKi4 = 期の表記.get(NUM_8);
-            source.fuchoKi5 = 期の表記.get(NUM_7);
+            source.fuchoKi1 = 期の表記.get(NUM_4);
+            source.fuchoKi2 = 期の表記.get(NUM_3);
+            source.fuchoKi3 = 期の表記.get(NUM_2);
+            source.fuchoKi4 = 期の表記.get(NUM_1);
+            source.fuchoKi5 = 期の表記.get(NUM_0);
         } else if (!期の表記.get(NUM_3).isEmpty()) {
-            source.fuchoKi1 = 期の表記.get(NUM_11);
-            source.fuchoKi2 = 期の表記.get(NUM_10);
-            source.fuchoKi3 = 期の表記.get(NUM_9);
-            source.fuchoKi4 = 期の表記.get(NUM_8);
+            source.fuchoKi1 = 期の表記.get(NUM_3);
+            source.fuchoKi2 = 期の表記.get(NUM_2);
+            source.fuchoKi3 = 期の表記.get(NUM_1);
+            source.fuchoKi4 = 期の表記.get(NUM_0);
         } else if (!期の表記.get(NUM_2).isEmpty()) {
-            source.fuchoKi1 = 期の表記.get(NUM_11);
-            source.fuchoKi2 = 期の表記.get(NUM_10);
-            source.fuchoKi3 = 期の表記.get(NUM_9);
+            source.fuchoKi1 = 期の表記.get(NUM_2);
+            source.fuchoKi2 = 期の表記.get(NUM_1);
+            source.fuchoKi3 = 期の表記.get(NUM_0);
         } else if (!期の表記.get(NUM_1).isEmpty()) {
-            source.fuchoKi1 = 期の表記.get(NUM_11);
-            source.fuchoKi2 = 期の表記.get(NUM_10);
+            source.fuchoKi1 = 期の表記.get(NUM_1);
+            source.fuchoKi2 = 期の表記.get(NUM_0);
         } else if (!期の表記.get(NUM_0).isEmpty()) {
-            source.fuchoKi1 = 期の表記.get(NUM_11);
+            source.fuchoKi1 = 期の表記.get(NUM_0);
         }
     }
 
@@ -346,7 +348,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         if (entity.get資格喪失日() != null && !entity.get資格喪失日().isEmpty()) {
             ShikakuKikanJoho shikakuKikanJoho = shikakuKikan.get資格期間(賦課年度,
                     entity.get資格取得日(), entity.get資格喪失日());
-            source.listCenter_4 = new RString(String.valueOf(shikakuKikanJoho.get月数()));
+            source.listCenter_4 = get月数_ケ月(shikakuKikanJoho.get月数());
         }
         if (entity.get確定介護保険料_年額() != null) {
             source.listCenter_5 = DecimalFormatter.toコンマ区切りRString(entity.get確定介護保険料_年額(), 0);
@@ -361,6 +363,12 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         set月別取得段階(entity, source);
         source.listCenter_21 = set備考1(entity, 本算定期間);
 
+    }
+
+    private RString get月数_ケ月(int 月数) {
+        RStringBuilder 月数SB = new RStringBuilder(new RString(月数).padLeft(RString.HALF_SPACE, 2));
+        月数SB.append(文字列_ケ月);
+        return 月数SB.toRString();
     }
 
     private void editorSource_partTHREE(KeisangojohoAtenaKozaEntity entity,

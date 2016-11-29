@@ -85,6 +85,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.tokucho.TokuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
@@ -1247,9 +1248,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
 
         FlexibleYear 現在調定年度 = 賦課の情報_更正前.get調定年度();
         kiwariKeisanInput.set現在調定年度(現在調定年度);
-        Kitsuki 本算定第１期の期月 = new TokuchoKiUtil().get期月リスト().filtered本算定期間().toList().get(0);
-        RString 現在月 = get現在月(本算定第１期の期月, 算定月);
-        kiwariKeisanInput.set現在月(現在月);
+        kiwariKeisanInput.set現在月(get現在月(算定月));
         RDate 処理日付 = RDate.getNowDate();
         Kitsuki 更正月_本算定期 = 更正月判定.find更正月_本算定期(処理日付);
         int 現在期 = 更正月_本算定期.get期AsInt();
@@ -1581,9 +1580,17 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         return fuchoTsukiClass;
     }
 
-    private RString get現在月(Kitsuki 本算定第１期の期月, RString 算定月) {
-        if (本算定第１期の期月.get月AsInt() <= Integer.parseInt(算定月.toString())) {
-            return fomate月(Integer.parseInt(算定月.toString()));
+    private RString get現在月(RString 算定月) {
+        Kitsuki 本算定第１期の期月 = null;
+        for (Kitsuki kitsuki : new TokuchoKiUtil().get期月リスト().toList()) {
+            if (TokuchokiJohoTsukiShoriKubun.本算定.equals(kitsuki.get月処理区分())) {
+                本算定第１期の期月 = kitsuki;
+                break;
+            }
+        }
+        RString 月 = fomate月(Integer.parseInt(算定月.toString()));
+        if (本算定第１期の期月 == null || 現在月判断(fomate月(本算定第１期の期月.get月AsInt()), 月)) {
+            return 月;
         } else {
             return fomate月(本算定第１期の期月.get月AsInt());
         }
@@ -1595,6 +1602,10 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         } else {
             return new RString(月).padZeroToLeft(INT_3);
         }
+    }
+
+    private boolean 現在月判断(RString 本算定第１期の期月, RString 算定月) {
+        return Integer.parseInt(本算定第１期の期月.toString()) <= Integer.parseInt(算定月.toString());
     }
 
     private Integer get特徴停止可能期(Kitsuki 期月クラス) {

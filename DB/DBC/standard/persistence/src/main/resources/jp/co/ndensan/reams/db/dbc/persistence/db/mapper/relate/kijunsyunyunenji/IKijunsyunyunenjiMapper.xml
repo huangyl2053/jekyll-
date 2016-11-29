@@ -714,6 +714,28 @@
          AND
                "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
          AND
+               "DbT7022ShoriDateKanri"."shoriName" = '基準収入額適用申請書発行'
+         AND
+               "DbT7022ShoriDateKanri"."shoriEdaban" ='0000'
+         AND
+               "DbT7022ShoriDateKanri"."nendoNaiRenban" ='0000'
+         AND
+               "DbT7022ShoriDateKanri"."nendo" = #{処理年度}
+     </select>
+     
+     <select resultOrdered="true" id="select処理日付管理マスタ異動分" 
+              parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.UpdTaishoSeitaiyinTemp5ProcessMybatisParameter"
+              resultType="java.lang.Integer"
+              fetchSize="500">
+         SELECT 
+            COUNT(*)
+         FROM
+          rgdb."DbT7022ShoriDateKanri"  AS "DbT7022ShoriDateKanri"
+         WHERE 
+               "DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
+         AND
+               "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
+         AND
                "DbT7022ShoriDateKanri"."shoriName" = '基準収入額適用申請書異動'
          AND
                "DbT7022ShoriDateKanri"."shoriEdaban" ='0000'

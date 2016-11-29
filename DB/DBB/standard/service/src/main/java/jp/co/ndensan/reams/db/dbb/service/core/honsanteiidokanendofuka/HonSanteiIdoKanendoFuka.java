@@ -790,18 +790,19 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                                 ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
                 new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("課税区分：")
                         .concat(setaiShotokuEntity.getKazeiKubun()));
-                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：")
-                        .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
-                                ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
-                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：")
-                        .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
-                                ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
+
             } else {
                 new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人識別コード：")
                         .concat(setaiShotokuEntity.getShikibetsuCode() == null
                                 ? new RString("null") : setaiShotokuEntity.getShikibetsuCode().getColumnValue()));
                 new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("本人課税区分：")
                         .concat(setaiShotokuEntity.getKazeiKubun()));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("年金収入額：")
+                        .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
+                                ? new RString("null") : new RString(setaiShotokuEntity.getNenkiniShunyuGaku().toString())));
+                new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("合計所得額：")
+                        .concat(setaiShotokuEntity.getNenkiniShunyuGaku() == null
+                                ? new RString("null") : new RString(setaiShotokuEntity.getGokeiShotokuGaku().toString())));
             }
             new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("*****************"));
         }
@@ -1536,7 +1537,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                 UaT0310KozaEntity 口座Entity = (計算後情報_宛名_口座Entity.get口座Entity() != null
                         && 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() != null
                         && 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() != 0)
-                        ? 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() : null;
+                                ? 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity() : null;
                 RString 作成年月日 = 調定日時.getRDateTime().getDate().seireki()
                         .separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
                 RString 作成日時 = 調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);

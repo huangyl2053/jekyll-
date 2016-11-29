@@ -160,7 +160,8 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
             return ResponseData.of(div).respond();
         }
         if (div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtZenkaiHakkoYMD().getValue() != null
-                && !judgeMsg(DbcWarningMessages.高額合算支給決定通知書発行済.getMessage())) {
+                && !judgeMsg(DbcWarningMessages.高額合算支給決定通知書発行済.getMessage())
+                && (!ResponseHolder.isReRequest() || judgeMsg(UrWarningMessages.未入力.getMessage()))) {
             WarningMessage message = new WarningMessage(
                     DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().getCode(),
                     DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().evaluate(),

@@ -114,17 +114,21 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         RString 照会モード = ViewStateHolder.get(ViewStateKeys.照会モード, RString.class);
         KogakuGassanShinseishoHoji 高額合算申請書保持 = handler.initialize(引き継ぎデータ, 照会モード);
         if (!申請登録状態(メニューID) && 高額合算申請書保持.get高額合算申請書().isEmpty()) {
-            return ResponseData.of(div).addMessage(UrErrorMessages.該当データなし.getMessage()).respond();
+            handler.照会状態を初期化設定();
+            div.getTxtKaigoShikyuShinseishoSeiriBango3().clearValue();
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索一覧へ画面に戻る, false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(検索一覧へ画面に戻る, false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請情報を保存する_変更取下げ, true);
+            return ResponseData.of(div).setState(DBC1100011StateName.変更取下げ);
         }
         ViewStateHolder.put(ViewStateKeys.高額合算申請書保持Entity, 高額合算申請書保持);
         if (RString.isNullOrEmpty(照会モード)) {
             前排他の設定(div);
         }
-        handler.onChange_ddlShokisaiHokenshaNo();
         if (申請登録状態(メニューID)) {
             handler.申請登録状態初期表示に設定(メニューID);
             handler.onChange_ddlShinseiTaisyoNendo();
-            div.getTxtKaigoShikyuShinseishoSeiriBango3().clearValue();
+            handler.onChange_ddlShokisaiHokenshaNo();
             div.getTxtKaigoShikyuShinseishoSeiriBango4().setReadOnly(true);
             if (DBCMN61009.equals(メニューID)) {
                 div.getTxtIryoShikyuShinseishoSeiriBango2().setDisabled(true);
@@ -294,11 +298,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
                 = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
         handler.onClick_btnShinseiJohoModoru();
         handler.画面内共有子DIV初期化処理新規場合(対象者);
-        handler.onChange_ddlShokisaiHokenshaNo();
         if (申請登録状態(メニューID)) {
             handler.申請登録状態初期設定(メニューID);
             handler.onChange_ddlShinseiTaisyoNendo();
-            div.getTxtKaigoShikyuShinseishoSeiriBango3().clearValue();
+            handler.onChange_ddlShokisaiHokenshaNo();
             div.getTxtKaigoShikyuShinseishoSeiriBango4().setReadOnly(true);
             div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
             div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);

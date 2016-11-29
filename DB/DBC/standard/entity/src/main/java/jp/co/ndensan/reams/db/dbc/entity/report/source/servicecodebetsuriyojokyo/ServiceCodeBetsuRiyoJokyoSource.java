@@ -83,13 +83,16 @@ public class ServiceCodeBetsuRiyoJokyoSource implements IReportSource {
     public RString List2_11;
     @ReportItem(name = "title", length = 12, order = 33)
     public RString title;
+
+    @ReportItem(name = "breakKey", length = 2, order = 34)
+    public RString breakKey;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
-
     /**
      * ServiceCodeBetsuRiyoJokyoSourceのENUM
      */
@@ -127,6 +130,7 @@ public class ServiceCodeBetsuRiyoJokyoSource implements IReportSource {
         List2_9,
         List2_10,
         List2_11,
-        title
+        title,
+        breakKey
     }
 }

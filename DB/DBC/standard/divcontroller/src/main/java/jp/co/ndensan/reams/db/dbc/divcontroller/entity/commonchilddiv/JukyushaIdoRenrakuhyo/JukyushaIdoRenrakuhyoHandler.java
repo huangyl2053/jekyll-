@@ -693,6 +693,7 @@ public class JukyushaIdoRenrakuhyoHandler {
     public void onClick_計画作成区分() {
         RString 計画作成区分Key = div.getKyotakuServicePlanPanel().getRadKyotakuServiceSakuseiKubun().getSelectedKey();
         if (空KEY.equals(計画作成区分Key)) {
+            div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setDisabled(false);
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().setDisabled(true);
             div.getKyotakuServicePlanPanel().getBtnShienJigyoshoNo().setDisabled(true);
             div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().clearValue();

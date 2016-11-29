@@ -31,6 +31,7 @@ public class GassanJikofutangakuHoseiIchiranBodyEditor
     private final GassanJikofutangakuHoseiIchiranEntity entity;
     private static final RString 種別日本人 = new RString("1");
     private static final RString 種別外国人 = new RString("2");
+    private static final RString 度 = new RString("度");
     private static final RString LINE = new RString(" ～ ");
 
     /**
@@ -73,7 +74,7 @@ public class GassanJikofutangakuHoseiIchiranBodyEditor
         source.listList1_5 = entity.get申請書整理番号();
         if (entity.get申請対象年度() != null) {
             source.listList1_6 = entity.get申請対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(度);
         } else {
             source.listList1_6 = RString.EMPTY;
         }

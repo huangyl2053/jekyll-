@@ -28,7 +28,7 @@ public class UpdShoriDateKanriProcess extends SimpleBatchProcessBase {
         para.set処理年度(parameter.get処理年度());
         para.set市町村コード(parameter.get市町村コード());
         para.set基準日時(YMDHMS.now());
-        int 件数 = getMapper(IKijunsyunyunenjiMapper.class).select処理日付管理マスタ(para);
+        int 件数 = getMapper(IKijunsyunyunenjiMapper.class).select処理日付管理マスタ異動分(para);
         if (INT_0 == 件数) {
             getMapper(IKijunsyunyunenjiMapper.class).insert処理日付管理マスタ_異動分(para);
         } else {

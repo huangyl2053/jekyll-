@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_KarisanteiData;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassan.HanyoListKogakuGassanKeisanProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassan.HanyoListKogakuGassanKeisanNoCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassan.HanyoListKogakuGassanKeisanEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
@@ -24,13 +25,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -93,7 +96,6 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
     private static final RString READ_DATA_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
                     + "hanyolistkogakugassan.IHanyoListKogakuGassanMapper.getCSVData");
-    private FlexibleDate システム日付;
     private FileSpoolManager manager;
     private Association 地方公共団体;
     private List<KoseiShichosonMaster> 構成市町村マスタ;
@@ -120,19 +122,6 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
     private static final RString 受給申請事由_指定サービス種類変更申請 = new RString("サ変更申請　");
     private static final RString 受給申請事由_申請_法施行前 = new RString("施行前申請　");
     private static final RString 受給申請事由_追加_申請なしの追加 = new RString("追加　　　　");
-    private static final RString 追加_認定 = new RString("認定　　　　　");
-    private static final RString 要介護度変更申請認定 = new RString("変更申請認定　");
-    private static final RString 要介護度変更申請却下 = new RString("変更申請却下　");
-    private static final RString サービス種類変更申請認定 = new RString("サ変更申請認定");
-    private static final RString サービス種類変更申請却下 = new RString("サ変更申請却下");
-    private static final RString 削除 = new RString("削除　　　　　");
-    private static final RString 修正 = new RString("修正　　　　　");
-    private static final RString 受給申請却下 = new RString("受給申請却下　");
-    private static final RString 削除回復 = new RString("削除回復　　　");
-    private static final RString 職権記載 = new RString("職権記載　　　");
-    private static final RString 職権修正 = new RString("職権修正　　　");
-    private static final RString 職権取消 = new RString("職権取消　　　");
-    private static final RString 履歴修正 = new RString("履歴修正　　　");
     private List<PersonalData> personalDataList;
     private static final Code CODE = new Code("0003");
     private static final RString 被保険者番号 = new RString("被保険者番号");
@@ -260,13 +249,13 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
     private static final RString 出力順_保険者番号 = new RString("\"dbT3072_shoKisaiHokenshaNo\" ASC, ");
     private static final RString 出力順_支給申請書整理番号 = new RString("\"dbT3072_shikyuShinseishoSeiriNo\" ASC, ");
     private static final RString 出力順_履歴番号 = new RString("\"dbT3072_rirekiNo\" ASC");
+    private ChohyoSeigyoKyotsu 帳票制御共通;
 
     @Override
     protected void initialize() {
         super.initialize();
         出力有無 = なし;
         personalDataList = new ArrayList<>();
-        システム日付 = FlexibleDate.getNowDate();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタ = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         構成市町村Map = new HashMap<>();
@@ -281,6 +270,8 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         parameter.setSearchKey(new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).setデータ取得区分(DataShutokuKubun.直近レコード).build());
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701016.getReportId());
     }
 
     @Override
@@ -378,22 +369,15 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
         output.set世帯コード(getColumnValue(kojin.get世帯コード()));
         output.set世帯主名(getColumnValue(kojin.get世帯主名()));
         if (kojin.get住所() != null) {
-            output.set住所コード(getColumnValue(kojin.get住所().get全国住所コード()));
+            output.set住所コード(getColumnValue(kojin.get住所().get町域コード()));
             output.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
-            if (kojin.get住所().get住所() != null
-                    && kojin.get住所().get番地() != null
-                    && kojin.get住所().get方書() != null) {
-                output.set住所番地方書(kojin.get住所().get住所()
-                        .concat(getColumnValue(kojin.get住所().get番地().getBanchi()))
-                        .concat(RString.FULL_SPACE)
-                        .concat(getColumnValue(kojin.get住所().get方書())));
-            }
             output.set住所(kojin.get住所().get住所());
             if (kojin.get住所().get番地() != null) {
                 output.set番地(getColumnValue(kojin.get住所().get番地().getBanchi()));
             }
             output.set方書(getColumnValue(kojin.get住所().get方書()));
         }
+        output.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, kojin, 地方公共団体));
         if (kojin.get行政区画() != null) {
             if (kojin.get行政区画().getGyoseiku() != null) {
                 output.set行政区コード(getColumnValue(kojin.get行政区画().getGyoseiku().getコード()));
@@ -502,9 +486,9 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
         output.set受給申請事由(get受給申請事由(受給者台帳));
         output.set受給申請日(get日付項目(受給者台帳.getJukyuShinseiYMD()));
         if (受給者台帳.getYokaigoJotaiKubunCode() != null && !受給者台帳.getYokaigoJotaiKubunCode().isEmpty()) {
-            IYokaigoJotaiKubun 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(
-                    システム日付, getColumnValue(受給者台帳.getYokaigoJotaiKubunCode()));
-            output.set受給要介護度(要介護状態区分 != null ? 要介護状態区分.getName() : RString.EMPTY);
+            output.set受給要介護度(YokaigoJotaiKubun.toValue(受給者台帳.getYokaigoJotaiKubunCode().value()).get名称());
+        } else {
+            output.set受給要介護度(RString.EMPTY);
         }
 
         output.set受給認定開始日(get日付項目(受給者台帳.getNinteiYukoKikanKaishiYMD()));
@@ -515,13 +499,21 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
         }
         RString みなし要介護区分コード = getColumnValue(受給者台帳.getShiteiServiceShurui01());
         if (!RString.isNullOrEmpty(みなし要介護区分コード)) {
-            if (MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
-                output.set受給みなし更新認定(MinashiCode.toValue(みなし要介護区分コード).get名称());
-            } else {
-                output.set受給みなし更新認定(文字_みなし);
-            }
+            output.set受給みなし更新認定(get受給みなし更新認定(みなし要介護区分コード));
         }
-        output.set受給直近事由(set異動事由文言(getColumnValue(受給者台帳.getChokkinIdoJiyuCode())));
+        output.set受給直近事由(ChokkinIdoJiyuCode.toValue(getColumnValue(受給者台帳.getChokkinIdoJiyuCode())).get名称());
+    }
+
+    private RString get受給みなし更新認定(RString みなし要介護区分コード) {
+        RString 受給みなし更新認定 = RString.EMPTY;
+        List minashiCodeList = new ArrayList();
+        for (MinashiCode minashiCode : MinashiCode.values()) {
+            minashiCodeList.add(minashiCode.getコード());
+        }
+        if (minashiCodeList.contains(みなし要介護区分コード) && !MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
+            受給みなし更新認定 = 文字_みなし;
+        }
+        return 受給みなし更新認定;
     }
 
     private void set高額合算支給額計算結果(HanyoListKogakuGassanKeisanEntity entity,
@@ -679,43 +671,6 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
             受給申請事由 = 受給申請事由_追加_申請なしの追加;
         }
         return 受給申請事由;
-    }
-
-    private RString set異動事由文言(RString 異動事由コード) {
-        if (RString.isNullOrEmpty(異動事由コード)) {
-            return RString.EMPTY;
-        }
-        RString 直近異動事由 = ChokkinIdoJiyuCode.toValue(異動事由コード).get名称();
-        if (ChokkinIdoJiyuCode.未登録.get名称().equals(直近異動事由)) {
-            return RString.EMPTY;
-        } else if (ChokkinIdoJiyuCode.追加_認定.get名称().equals(直近異動事由)) {
-            return 追加_認定;
-        } else if (ChokkinIdoJiyuCode.要介護度変更申請認定.get名称().equals(直近異動事由)) {
-            return 要介護度変更申請認定;
-        } else if (ChokkinIdoJiyuCode.要介護度変更申請却下.get名称().equals(直近異動事由)) {
-            return 要介護度変更申請却下;
-        } else if (ChokkinIdoJiyuCode.サービス種類変更申請認定.get名称().equals(直近異動事由)) {
-            return サービス種類変更申請認定;
-        } else if (ChokkinIdoJiyuCode.サービス種類変更申請却下.get名称().equals(直近異動事由)) {
-            return サービス種類変更申請却下;
-        } else if (ChokkinIdoJiyuCode.削除.get名称().equals(直近異動事由)) {
-            return 削除;
-        } else if (ChokkinIdoJiyuCode.修正.get名称().equals(直近異動事由)) {
-            return 修正;
-        } else if (ChokkinIdoJiyuCode.受給申請却下.get名称().equals(直近異動事由)) {
-            return 受給申請却下;
-        } else if (ChokkinIdoJiyuCode.削除回復.get名称().equals(直近異動事由)) {
-            return 削除回復;
-        } else if (ChokkinIdoJiyuCode.職権記載.get名称().equals(直近異動事由)) {
-            return 職権記載;
-        } else if (ChokkinIdoJiyuCode.職権修正.get名称().equals(直近異動事由)) {
-            return 職権修正;
-        } else if (ChokkinIdoJiyuCode.職権取消.get名称().equals(直近異動事由)) {
-            return 職権取消;
-        } else if (ChokkinIdoJiyuCode.履歴修正.get名称().equals(直近異動事由)) {
-            return 履歴修正;
-        }
-        return RString.EMPTY;
     }
 
     private PersonalData toPersonalData(HanyoListKogakuGassanKeisanEntity entity) {

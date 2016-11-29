@@ -69,6 +69,9 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
     private static final RString 表示名称_指定居宅介護支援事業者作成 = new RString("指定居宅介護支援事業者作成");
     private static final RString 表示名称_基準該当居宅介護支援事業者作成 = new RString("基準該当居宅介護支援事業者作成");
     private static final RString 表示名称_介護予防支援事業者作成 = new RString("介護予防支援事業者作成");
+    private static final RString 旧措置者 = new RString("旧措置者");
+    private static final RString みなし = new RString("みなし");
+    private static final RString ONE = new RString("t");
 
     /**
      * コンストラクタです。
@@ -82,13 +85,14 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
      *
      * @param entity HanyoListKyotakuServiceKeikakuEntity
      * @param parameter HanyoListKyotakuServiceKeikakuProcessParameter
+     * @param 住所 RString
      * @return HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity
      */
     public HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity editor(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+            HanyoListKyotakuServiceKeikakuProcessParameter parameter, RString 住所) {
         HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity = new HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity();
         editor宛名(entity, csvEntity, parameter);
-        editor地区(entity, csvEntity);
+        editor地区(entity, csvEntity, 住所);
         editor前住所(entity, csvEntity, parameter);
         editor宛先(entity, csvEntity);
         editor資格(entity, csvEntity, parameter);
@@ -180,9 +184,8 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
         } else {
             csvEntity.set世帯主名(RString.EMPTY);
         }
-        ZenkokuJushoCode zenkokuJushoCode = entity.get宛名Entity().getZenkokuJushoCode();
-        if (zenkokuJushoCode != null) {
-            csvEntity.set住所コード(zenkokuJushoCode.getColumnValue());
+        if (宛名 != null && 宛名.get住所() != null && 宛名.get住所().get町域コード() != null) {
+            csvEntity.set住所コード(宛名.get住所().get町域コード().value());
         } else {
             csvEntity.set住所コード(RString.EMPTY);
         }
@@ -195,7 +198,7 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
     }
 
     private void editor地区(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity) {
+            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity, RString 住所) {
 
         StringBuilder stringBuilder = new StringBuilder();
         AtenaJusho atenaJusho = entity.get宛名Entity().getJusho();
@@ -213,8 +216,8 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
         if (katagaki != null) {
             stringBuilder.append(katagaki.toString());
         }
-        if (stringBuilder.length() > 0) {
-            csvEntity.set住所番地方書(new RString(stringBuilder.toString()));
+        if (住所 != null) {
+            csvEntity.set住所番地方書(住所);
         } else {
             csvEntity.set住所番地方書(RString.EMPTY);
         }
@@ -596,9 +599,21 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
         csvEntity.set受給認定開始日(dataToRString(entity.getDbV4001認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.getDbV4001認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(dataToRString(entity.getDbV4001受給認定日(), parameter));
-        csvEntity.set受給旧措置(entity.getDbV4001旧措置フラグ());
-        csvEntity.set受給みなし更新認定(isNull(entity.getDbT4001みなし要介護区分コード())
-                ? RString.EMPTY : MinashiKoshinNintei.toValue(entity.getDbT4001みなし要介護区分コード().value()).get名称());
+        if (KEY_ONE.equals(entity.getDbV4001旧措置フラグ())) {
+            csvEntity.set受給旧措置(旧措置者);
+        } else {
+            csvEntity.set受給旧措置(RString.EMPTY);
+        }
+
+        try {
+            if (MinashiKoshinNintei.通常認定.equals(MinashiKoshinNintei.toValue(entity.getDbT4001みなし要介護区分コード().value()))) {
+                csvEntity.set受給みなし更新認定(RString.EMPTY);
+            } else {
+                csvEntity.set受給みなし更新認定(みなし);
+            }
+        } catch (Exception e) {
+            csvEntity.set受給みなし更新認定(RString.EMPTY);
+        }
         csvEntity.set受給直近事由(isNull(entity.getDbV4001直近異動事由コード())
                 ? RString.EMPTY : ChokkinIdoJiyuCode.toValue(entity.getDbV4001直近異動事由コード().value()).get名称());
     }

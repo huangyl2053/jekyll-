@@ -83,7 +83,7 @@ public class HanyoListCsvNoRenbanDataCreate {
     private static final RString 他 = new RString("他");
     private static final int INDEX_13 = 13;
     private static final int INDEX_15 = 15;
-    private static final RString 旧措置者フラグTRUE = new RString("true");
+    private static final RString 旧措置者フラグTRUE = new RString("t");
     private static final RString 旧措置者STR = new RString("旧措置者");
 
     /**
@@ -91,12 +91,13 @@ public class HanyoListCsvNoRenbanDataCreate {
      *
      * @param entity HanyoListShokanbaraiJokyoEntity
      * @param parameter HanyoListShokanbaraiJokyoProcessParameter
+     * @param 住所番地方書 RString
      * @return HanyoListShokanbaraiJokyoNoRenbanCSVEntity
      */
     public HanyoListShokanbaraiJokyoNoRenbanCSVEntity createCsvData(HanyoListShokanbaraiJokyoEntity entity,
-            HanyoListShokanbaraiJokyoProcessParameter parameter) {
+            HanyoListShokanbaraiJokyoProcessParameter parameter, RString 住所番地方書) {
         HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity = new HanyoListShokanbaraiJokyoNoRenbanCSVEntity();
-        set宛名(entity, csvEntity, parameter);
+        set宛名(entity, csvEntity, parameter, 住所番地方書);
         set宛先(entity, csvEntity);
         set被保険者台帳管理(entity, csvEntity, parameter);
         set介護保険(entity, csvEntity, parameter);
@@ -181,7 +182,7 @@ public class HanyoListCsvNoRenbanDataCreate {
     }
 
     private void set宛名(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
-            HanyoListShokanbaraiJokyoProcessParameter parameter) {
+            HanyoListShokanbaraiJokyoProcessParameter parameter, RString 住所番地方書) {
         if (entity.get宛名Entity() != null) {
             ShikibetsuCode 識別コード = entity.get宛名Entity().getShikibetsuCode();
             csvEntity.set識別コード(識別コード != null
@@ -210,36 +211,22 @@ public class HanyoListCsvNoRenbanDataCreate {
             AtenaMeisho 世帯主名 = entity.get宛名Entity().getSetainushiMei();
             csvEntity.set世帯主名(世帯主名 != null
                     ? 世帯主名.getColumnValue() : RString.EMPTY);
-            ZenkokuJushoCode 住所コード = entity.get宛名Entity().getZenkokuJushoCode();
-            csvEntity.set住所コード(住所コード != null
-                    ? 住所コード.getColumnValue() : RString.EMPTY);
+            if (宛名.get住所() != null && 宛名.get住所().get町域コード() != null) {
+                csvEntity.set住所コード(宛名.get住所().get町域コード().getColumnValue());
+            } else {
+                csvEntity.set住所コード(RString.EMPTY);
+            }
             YubinNo 郵便番号 = entity.get宛名Entity().getYubinNo();
             csvEntity.set郵便番号(郵便番号 != null
                     ? 郵便番号.getColumnValue() : RString.EMPTY);
-            set住所番地方書(entity, csvEntity);
+            if (住所番地方書 != null) {
+                csvEntity.set住所番地方書(住所番地方書);
+            } else {
+                csvEntity.set住所番地方書(RString.EMPTY);
+            }
+
             set宛名本人(entity, csvEntity, parameter);
         }
-    }
-
-    private void set住所番地方書(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity
-    ) {
-        if (entity.get宛名Entity() != null) {
-            AtenaBanchi 番地 = entity.get宛名Entity().getBanchi();
-            Katagaki 方書 = entity.get宛名Entity().getKatagaki();
-            AtenaJusho 住所 = entity.get宛名Entity().getJusho();
-            if (番地 != null && 方書 != null && 住所 != null) {
-                csvEntity.set住所番地方書(住所.getColumnValue()
-                        .concat(番地.getColumnValue()).concat(RString.FULL_SPACE)
-                        .concat(方書.getColumnValue()));
-            }
-            csvEntity.set住所(住所 != null
-                    ? 住所.getColumnValue() : RString.EMPTY);
-            csvEntity.set番地(番地 != null
-                    ? 番地.getColumnValue() : RString.EMPTY);
-            csvEntity.set方書(方書 != null
-                    ? 方書.getColumnValue() : RString.EMPTY);
-        }
-
     }
 
     private void set宛名本人(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
@@ -541,7 +528,7 @@ public class HanyoListCsvNoRenbanDataCreate {
 
     private RString get受給直近事由(Code code) {
         for (ChokkinIdoJiyuCode chokkinIdoJiyuCode : ChokkinIdoJiyuCode.values()) {
-            if (chokkinIdoJiyuCode.getコード().equals(code.getColumnValue())) {
+            if (code != null && chokkinIdoJiyuCode.getコード().equals(code.getColumnValue())) {
                 return chokkinIdoJiyuCode.get名称();
             }
         }
@@ -554,7 +541,7 @@ public class HanyoListCsvNoRenbanDataCreate {
         for (MinashiCode minashiCode : MinashiCode.values()) {
             minashiCodeList.add(minashiCode.getコード());
         }
-        if (minashiCodeList.contains(みなし要介護区分コード)) {
+        if (みなし要介護区分コード != null && minashiCodeList.contains(みなし要介護区分コード)) {
             受給みなし更新認定 = MinashiCode.toValue(みなし要介護区分コード).get名称();
         }
         return 受給みなし更新認定;

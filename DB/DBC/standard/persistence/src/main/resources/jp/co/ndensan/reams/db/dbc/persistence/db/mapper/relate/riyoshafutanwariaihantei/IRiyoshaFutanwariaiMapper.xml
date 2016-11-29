@@ -1220,10 +1220,11 @@
     </select>
     
     <delete id="delete世帯員情報Temp">
-        DELETE FROM
+        CREATE TEMPORARY TABLE IF NOT EXISTS "SetainJohoTemp"
+        ("id" integer,
+        "name" text);
+        DROP TABLE
             "SetainJohoTemp" 
-        WHERE
-            1 = 1
     </delete>
     
     <select resultOrdered="true" id="select追加判定対象者Temp" 
@@ -1244,10 +1245,11 @@
     </select>
     
     <delete id="delete世帯員把握入力Temp">
-        DELETE FROM
+       CREATE TEMPORARY TABLE IF NOT EXISTS "TmpSetaiHaaku"
+        ("id" integer,
+        "name" text);
+         DROP TABLE
             "TmpSetaiHaaku"
-        WHERE
-            1 = 1
     </delete>
     
     <select resultOrdered="true" id="select月別判定対象者Temp" 
@@ -1316,10 +1318,11 @@
     </select>
     
     <delete id="delete利用者負担割合明細01Temp">
-        DELETE FROM
+      CREATE TEMPORARY TABLE IF NOT EXISTS "RiyoshaFutanWariaiMeisai01Temp"
+        ("id" integer,
+        "name" text);
+        DROP TABLE
             "RiyoshaFutanWariaiMeisai01Temp"
-        WHERE
-            1 = 1
     </delete>
     
     <select resultOrdered="true" id="select利用者負担割合明細02Temp" 
@@ -1332,10 +1335,11 @@
     </select>
     
     <delete id="delete利用者負担割合明細02Temp">
-        DELETE FROM
+        CREATE TEMPORARY TABLE IF NOT EXISTS "RiyoshaFutanWariaiMeisai02Temp"
+        ("id" integer,
+        "name" text);
+        DROP TABLE
             "RiyoshaFutanWariaiMeisai02Temp"
-        WHERE
-            1 = 1
     </delete>
     
     <select resultOrdered="true" id="select利用者負担割合明細03Temp" 
@@ -1413,10 +1417,11 @@
     </select>
     
     <delete id="delete今回利用者負担割合情報Temp">
-        DELETE FROM
+         CREATE TEMPORARY TABLE IF NOT EXISTS "KonkaiRiyoshaFutanWariaiJohoTemp"
+        ("id" integer,
+        "name" text);
+        DROP TABLE
             "KonkaiRiyoshaFutanWariaiJohoTemp"
-        WHERE 
-            1 = 1
     </delete>
     
     <select resultOrdered="true" id="select被保険者番号Temp" 
@@ -1430,10 +1435,11 @@
     </select>
     
     <delete id="delete被保険者番号Temp">
-        DELETE FROM
+       CREATE TEMPORARY TABLE IF NOT EXISTS "HanteiHihokenshaNoTemp"
+        ("id" integer,
+        "name" text);
+         DROP TABLE
             "HanteiHihokenshaNoTemp"
-        WHERE 
-            1 = 1
     </delete>
             
     
@@ -1447,10 +1453,10 @@
     </select>
     
     <delete id="delete世帯員所得情報Temp">
-        DELETE FROM
-            "TmpSetaiShotoku"  
-        WHERE 
-            1 = 1
+       CREATE TEMPORARY TABLE IF NOT EXISTS "TmpSetaiShotoku"
+        ("id" integer,
+        "name" text);
+       DROP TABLE "TmpSetaiShotoku"  
     </delete>
     
     <resultMap id="ResultMap_FutanWariaiRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiRelateEntity" autoMapping="true">

@@ -41,6 +41,7 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
     private static final int LIST_12 = 12;
     private static final int 変更区分_0 = 0;
     private static final int 変更区分_1 = 1;
+    private static final RString RSTRING_0 = new RString("0");
     private static final RString EMPTY = RString.EMPTY;
     private static final RString 徴収なし = new RString("徴収なし");
     private static final RString 特別徴収 = new RString("特別徴収");
@@ -81,6 +82,136 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
             dataSources.add(row);
         }
         div.getHonKakushuTsuchiUchiwakeSentaku().getDgKakushuTsuchiUchiwakeSentaku().setDataSource(dataSources);
+    }
+
+    /**
+     * 打分け方法一覧を表示。
+     *
+     */
+    public void show空の打分け() {
+        List<KeyValueDataSource> 通知書List = get通知書List();
+        List<KeyValueDataSource> 対象者List = get対象者List();
+        List<dgTsuchishoSettei_Row> dataSources = new ArrayList<>();
+
+        dgTsuchishoSettei_Row row1 = new dgTsuchishoSettei_Row();
+        row1.setTxtChosyuHoho(徴収なし);
+        row1.setTxtJotai(資格継続_イコール);
+        row1.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row1.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row1.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row1.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row1);
+
+        dgTsuchishoSettei_Row row2 = new dgTsuchishoSettei_Row();
+        row2.setTxtChosyuHoho(徴収なし);
+        row2.setTxtJotai(資格継続_大或);
+        row2.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row2.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row2.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row2.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row2);
+
+        dgTsuchishoSettei_Row row3 = new dgTsuchishoSettei_Row();
+        row3.setTxtChosyuHoho(徴収なし);
+        row3.setTxtJotai(資格喪失_イコール);
+        row3.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row3.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row3.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row3.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row3);
+
+        dgTsuchishoSettei_Row row4 = new dgTsuchishoSettei_Row();
+        row4.setTxtChosyuHoho(徴収なし);
+        row4.setTxtJotai(資格喪失_大或);
+        row4.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row4.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row4.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row4.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row4);
+
+        dgTsuchishoSettei_Row row5 = new dgTsuchishoSettei_Row();
+        row5.setTxtChosyuHoho(徴収なし);
+        row5.setTxtJotai(資格喪失);
+        row5.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row5.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row5.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row5.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row5);
+
+        dgTsuchishoSettei_Row row6 = new dgTsuchishoSettei_Row();
+        row6.setTxtChosyuHoho(特別徴収);
+        row6.setTxtJotai(仮徴収は特別徴収);
+        row6.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row6.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row6.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row6.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row6);
+
+        dgTsuchishoSettei_Row row7 = new dgTsuchishoSettei_Row();
+        row7.setTxtChosyuHoho(特別徴収);
+        row7.setTxtJotai(仮徴収は特別徴収_から);
+        row7.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row7.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row7.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row7.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row7.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row7);
+
+        dgTsuchishoSettei_Row row8 = new dgTsuchishoSettei_Row();
+        row8.setTxtChosyuHoho(特別徴収);
+        row8.setTxtJotai(仮徴収は普通徴収);
+        row8.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row8.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row8.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row8.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row8);
+
+        dgTsuchishoSettei_Row row9 = new dgTsuchishoSettei_Row();
+        row9.setTxtChosyuHoho(普通徴収);
+        row9.setTxtJotai(資格継続_なし);
+        row9.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row9.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row9.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row9.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row9);
+
+        dgTsuchishoSettei_Row row10 = new dgTsuchishoSettei_Row();
+        row10.setTxtChosyuHoho(普通徴収);
+        row10.setTxtJotai(資格継続_特別);
+        row10.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row10.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row10.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row10.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row10);
+
+        dgTsuchishoSettei_Row row11 = new dgTsuchishoSettei_Row();
+        row11.setTxtChosyuHoho(普通徴収);
+        row11.setTxtJotai(資格継続_普通);
+        row11.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row11.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row11.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row11.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row11);
+
+        dgTsuchishoSettei_Row row12 = new dgTsuchishoSettei_Row();
+        row12.setTxtChosyuHoho(普通徴収);
+        row12.setTxtJotai(資格喪失_特別);
+        row12.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row12.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row12.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row12.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row12);
+
+        dgTsuchishoSettei_Row row13 = new dgTsuchishoSettei_Row();
+        row13.setTxtChosyuHoho(普通徴収);
+        row13.setTxtJotai(資格喪失_普通);
+        row13.getTxtTsuchisyoShitei().setDataSource(通知書List);
+        row13.getTxtTsuchisyoShitei().setSelectedIndex(LIST_00);
+        row13.getTxtGenkinKozaShitei().setDataSource(対象者List);
+        row13.getTxtGenkinKozaShitei().setSelectedIndex(LIST_00);
+        dataSources.add(row13);
+
+        div.getDgTsuchishoSettei().setDataSource(dataSources);
     }
 
     /**
@@ -291,6 +422,58 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         return 変更flag != 0;
     }
 
+    /**
+     * 現データは変更有無
+     *
+     * @return 変更flag
+     */
+    public boolean 変更有無() {
+        int 変更flag = 0;
+        RString 選択通知書 = get通知書List().get(LIST_00).getKey();
+        RString 対象者 = get対象者List().get(LIST_00).getKey();
+        List<dgTsuchishoSettei_Row> dataSources = div.getDgTsuchishoSettei().getDataSource();
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_00).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_00).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_00).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_01).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_01).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_01).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_02).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_02).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_02).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_03).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_03).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_03).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_04).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_04).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_04).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_05).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_05).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_05).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_06).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_06).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_06).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_07).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_07).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_07).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_08).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_08).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_08).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_09).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_09).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_09).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_10).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_10).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_10).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_11).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_11).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_11).getTxtHakkojiGroup().getValue());
+        変更flag = 変更flag + check(選択通知書, dataSources.get(LIST_12).getTxtTsuchisyoShitei().getSelectedKey());
+        変更flag = 変更flag + check(対象者, dataSources.get(LIST_12).getTxtGenkinKozaShitei().getSelectedKey());
+        変更flag = 変更flag + check(dataSources.get(LIST_12).getTxtHakkojiGroup().getValue());
+        return 変更flag != 0;
+    }
+
     private int check(RString object, RString obj) {
         if (obj == null && object != null) {
             return 1;
@@ -298,6 +481,10 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
             return 1;
         }
         return 0;
+    }
+
+    private int check(RString 出力順グループ名) {
+        return (出力順グループ名 == null || 出力順グループ名.isEmpty()) ? 0 : 1;
     }
 
     /**
@@ -331,11 +518,18 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
      * @return 確認画面の打分け方法
      */
     public TsuchishoUchiwakeJoken get確認画面の打分け方法(boolean flag, RString 打ち分け条件, RString 打ち分け条件view) {
-        Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
-        List<TsuchishoUchiwakeJoken> jokenList = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件view);
-        TsuchishoUchiwakeJoken joken = new TsuchishoUchiwakeJoken(打ち分け条件,
-                RDateTime.now(),
-                jokenList.get(0).get賦課処理区分());
+        TsuchishoUchiwakeJoken joken;
+        if (打ち分け条件view == null || 打ち分け条件view.isEmpty()) {
+            joken = new TsuchishoUchiwakeJoken(打ち分け条件,
+                    RDateTime.now(),
+                    RSTRING_0);
+        } else {
+            Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
+            List<TsuchishoUchiwakeJoken> jokenList = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件view);
+            joken = new TsuchishoUchiwakeJoken(打ち分け条件,
+                    RDateTime.now(),
+                    jokenList.get(0).get賦課処理区分());
+        }
         List<dgTsuchishoSettei_Row> dataSources = div.getDgTsuchishoSettei().getDataSource();
         joken = joken.createBuilderForEdit()
                 .set選択通知書01(dataSources.get(LIST_00).getTxtTsuchisyoShitei().getSelectedKey())

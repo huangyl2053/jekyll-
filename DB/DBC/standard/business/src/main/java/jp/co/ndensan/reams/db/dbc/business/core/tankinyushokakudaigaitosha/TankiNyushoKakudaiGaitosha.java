@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMas
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
@@ -85,12 +87,14 @@ public class TankiNyushoKakudaiGaitosha {
      *
      * @param entity entity
      * @param 市町村名MasterMap 市町村名MasterMap
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association association
      * @param 連番 連番
      * @return JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity
      */
     public TankiNyushoKakudaiGaitoshaReibanAriEUCEntity set連番ありEUCEntity(TankiNyushoKakudaiGaitoshaRelateEntity entity,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association, int 連番) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association, int 連番) {
         TankiNyushoKakudaiGaitoshaReibanAriEUCEntity eucEntity = new TankiNyushoKakudaiGaitoshaReibanAriEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -99,7 +103,7 @@ public class TankiNyushoKakudaiGaitosha {
             personalDataList.add(toPersonalData(entity.get被保険者番号(), iKojin.get識別コード()));
             eucEntity.set連番(new RString(連番));
             eucEntity.set識別コード(iKojin.get識別コード());
-            eucEntity.set住民種別(iKojin.get住民状態());
+            eucEntity.set住民種別(iKojin.get住民状態().住民状態略称());
             eucEntity.set氏名(iKojin.get名称().getName());
             eucEntity.set氏名カナ(iKojin.get名称().getKana());
             eucEntity.set生年月日(set日付編集(iKojin.get生年月日().toFlexibleDate()));
@@ -108,10 +112,9 @@ public class TankiNyushoKakudaiGaitosha {
             eucEntity.set続柄コード(iKojin.get続柄コードリスト().toTsuzukigaraCode());
             eucEntity.set世帯コード(iKojin.get世帯コード());
             eucEntity.set世帯主名(iKojin.get世帯主名());
-            eucEntity.set住所コード(iKojin.get住所().get全国住所コード());
+            eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(get住所_番地_方書(iKojin.get住所().get住所(),
-                    get番地(iKojin.get住所().get番地()), get方書(iKojin.get住所().get方書())));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -162,6 +165,8 @@ public class TankiNyushoKakudaiGaitosha {
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
         if (!isNullCheck(entity.get要介護認定状態区分コード())) {
             eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(), entity.get要介護認定状態区分コード()).getName());
+        } else {
+            eucEntity.set受給要介護度(RString.EMPTY);
         }
         eucEntity.set受給認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
         eucEntity.set受給認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
@@ -271,11 +276,13 @@ public class TankiNyushoKakudaiGaitosha {
      *
      * @param entity entity
      * @param 市町村名MasterMap 市町村名MasterMap
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association association
      * @return TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity
      */
     public TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity set連番なしEUCEntity(TankiNyushoKakudaiGaitoshaRelateEntity entity,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
         TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity eucEntity = new TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -283,7 +290,7 @@ public class TankiNyushoKakudaiGaitosha {
             IKojin iKojin = iShikibetsuTaisho.to個人();
             personalDataList.add(toPersonalData(entity.get被保険者番号(), iKojin.get識別コード()));
             eucEntity.set識別コード(iKojin.get識別コード());
-            eucEntity.set住民種別(iKojin.get住民状態());
+            eucEntity.set住民種別(iKojin.get住民状態().住民状態略称());
             eucEntity.set氏名(iKojin.get名称().getName());
             eucEntity.set氏名カナ(iKojin.get名称().getKana());
             eucEntity.set生年月日(set日付編集(iKojin.get生年月日().toFlexibleDate()));
@@ -292,10 +299,9 @@ public class TankiNyushoKakudaiGaitosha {
             eucEntity.set続柄コード(iKojin.get続柄コードリスト().toTsuzukigaraCode());
             eucEntity.set世帯コード(iKojin.get世帯コード());
             eucEntity.set世帯主名(iKojin.get世帯主名());
-            eucEntity.set住所コード(iKojin.get住所().get全国住所コード());
+            eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(get住所_番地_方書(iKojin.get住所().get住所(),
-                    get番地(iKojin.get住所().get番地()), get方書(iKojin.get住所().get方書())));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -346,6 +352,8 @@ public class TankiNyushoKakudaiGaitosha {
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
         if (!isNullCheck(entity.get要介護認定状態区分コード())) {
             eucEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(), entity.get要介護認定状態区分コード()).getName());
+        } else {
+            eucEntity.set受給要介護度(RString.EMPTY);
         }
         eucEntity.set受給認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
         eucEntity.set受給認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
@@ -454,10 +462,8 @@ public class TankiNyushoKakudaiGaitosha {
             if (!isNullCheck(entity.get広住特措置元市町村コード())) {
                 証記載保険者番号 = 市町村名MasterMap.get(entity.get広住特措置元市町村コード()).get証記載保険者番号().value();
             }
-        } else {
-            if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
-                証記載保険者番号 = 市町村名MasterMap.get(entity.get市町村コード()).get証記載保険者番号().value();
-            }
+        } else if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
+            証記載保険者番号 = 市町村名MasterMap.get(entity.get市町村コード()).get証記載保険者番号().value();
         }
         return 証記載保険者番号;
     }

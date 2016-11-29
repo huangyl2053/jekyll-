@@ -39,6 +39,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
     private final JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv div;
     private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
     private static final RString 発行する = new RString("btnPrint");
+    private static final RString チェック = new RString("btnCheck");
 
     /**
      * コンストラクタです。
@@ -54,8 +55,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 識別コード ShikibetsuCode
-     * @param parameter
-     * JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter
+     * @param parameter JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter
      *
      * @throws PessimisticLockingException
      * @throws ApplicationException
@@ -69,7 +69,9 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
                 コントロールの非活性化();
                 throw new PessimisticLockingException();
             }
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行する, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(チェック, false);
+
             div.getCclKaigoAtenaInfo().initialize(識別コード);
             被保険者番号存在チェック(被保険者番号);
             div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
@@ -192,8 +194,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
     /**
      * ドロップダウンリスト項目をセットし、前回作成日TXTをセットします
      *
-     * @param parameter
-     * JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter
+     * @param parameter JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter
      */
     public void ドロップダウンリスト項目と前回作成日TXTセット(JigyobunShikyugakuPanelListParameter parameter) {
         List<JigyobunShikyugakuKeisanResultEntity> renrakuhyoPanelList = 対象データ取得(parameter);
@@ -252,8 +253,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
     /**
      * 対象データを取得します
      *
-     * @param parameter
-     * JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter
+     * @param parameter JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter
      * @return List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
      */
     public List<JigyobunShikyugakuKeisanResultEntity> 対象データ取得(
@@ -279,8 +279,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler {
     /**
      * 処理対象データを取得します
      *
-     * @param parameter
-     * JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter
+     * @param parameter JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter
      * @return List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult>
      */
     public List<JigyobunShikyugakuKeisanResultEntity> 処理対象データ取得(

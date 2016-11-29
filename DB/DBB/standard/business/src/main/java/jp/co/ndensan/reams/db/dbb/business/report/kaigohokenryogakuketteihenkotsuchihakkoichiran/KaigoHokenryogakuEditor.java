@@ -272,25 +272,29 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
     }
 
     private void setNonull改ページ(KaigoHokenryogakuSource source) {
-        source.listLower_2 = source.listLower_2 == null ? RString.EMPTY : source.listLower_2;
-        source.choikiCode = source.choikiCode == null ? RString.EMPTY : source.choikiCode;
-        source.banchiCode = source.banchiCode == null ? RString.EMPTY : source.banchiCode;
-        source.gyoseikuCode = source.gyoseikuCode == null ? RString.EMPTY : source.gyoseikuCode;
-        source.chikuCode1 = source.chikuCode1 == null ? RString.EMPTY : source.chikuCode1;
-        source.chikuCode2 = source.chikuCode2 == null ? RString.EMPTY : source.chikuCode2;
-        source.chikuCode3 = source.chikuCode3 == null ? RString.EMPTY : source.chikuCode3;
-        source.listUpper_4 = source.listUpper_4 == null ? RString.EMPTY : source.listUpper_4;
-        source.shikibetsuCode = source.shikibetsuCode == null ? RString.EMPTY : source.shikibetsuCode;
-        source.kanaMeisho = source.kanaMeisho == null ? RString.EMPTY : source.kanaMeisho;
-        source.listUpper_5 = source.listUpper_5 == null ? RString.EMPTY : source.listUpper_5;
-        source.listUpper_6 = source.listUpper_6 == null ? RString.EMPTY : source.listUpper_6;
-        source.hokenshaNo = source.hokenshaNo == null ? RString.EMPTY : source.hokenshaNo;
-        source.listUpper_3 = source.listUpper_3 == null ? RString.EMPTY : source.listUpper_3;
-        source.nenkinCode = source.nenkinCode == null ? RString.EMPTY : source.nenkinCode;
-        source.nokumiCode = source.nokumiCode == null ? RString.EMPTY : source.nokumiCode;
-        source.seihoFlag1 = source.seihoFlag1 == null ? RString.EMPTY : source.seihoFlag1;
-        source.seihoFlag = source.seihoFlag == null ? RString.EMPTY : source.seihoFlag;
-        source.tokuchoKaishi8 = source.tokuchoKaishi8 == null ? RString.EMPTY : source.tokuchoKaishi8;
-        source.tokuchoKaishi10 = source.tokuchoKaishi10 == null ? RString.EMPTY : source.tokuchoKaishi10;
+        source.listLower_2 = getNonullRString(source.listLower_2);
+        source.choikiCode = getNonullRString(source.choikiCode);
+        source.banchiCode = getNonullRString(source.banchiCode);
+        source.gyoseikuCode = getNonullRString(source.gyoseikuCode);
+        source.chikuCode1 = getNonullRString(source.chikuCode1);
+        source.chikuCode2 = getNonullRString(source.chikuCode2);
+        source.chikuCode3 = getNonullRString(source.chikuCode3);
+        source.listUpper_4 = getNonullRString(source.listUpper_4);
+        source.shikibetsuCode = getNonullRString(source.shikibetsuCode);
+        source.kanaMeisho = getNonullRString(source.kanaMeisho);
+        source.listUpper_5 = getNonullRString(source.listUpper_5);
+        source.listUpper_6 = getNonullRString(source.listUpper_6);
+        source.hokenshaNo = getNonullRString(source.hokenshaNo);
+        source.listUpper_3 = getNonullRString(source.listUpper_3);
+        source.nenkinCode = getNonullRString(source.nenkinCode);
+        source.nokumiCode = getNonullRString(source.nokumiCode);
+        source.seihoFlag1 = getNonullRString(source.seihoFlag1);
+        source.seihoFlag = getNonullRString(source.seihoFlag);
+        source.tokuchoKaishi8 = getNonullRString(source.tokuchoKaishi8);
+        source.tokuchoKaishi10 = getNonullRString(source.tokuchoKaishi10);
+    }
+
+    private RString getNonullRString(RString str) {
+        return str == null ? RString.EMPTY : str;
     }
 }

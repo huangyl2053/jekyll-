@@ -61,7 +61,38 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoBodyEditor implements IKogakuS
             source.hihokenshaNo = entity.get被保険者番号();
             source.tsuchishoNo = entity.get決定通知No();
             source.shikakuJyotaiKubun = entity.get資格状態区分();
+            setPageBreakEmpty(source);
         }
         return source;
+    }
+
+    private void setPageBreakEmpty(KogakuShikyuFushikyuKetteiTsuchiHakkoSource source) {
+        if (source.yubinNo == null) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.kanaMeisho == null) {
+            source.kanaMeisho = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.shoKisaiHokenshaNo == null) {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
+        if (source.hihokenshaNo == null) {
+            source.hihokenshaNo = RString.EMPTY;
+        }
+        if (source.tsuchishoNo == null) {
+            source.tsuchishoNo = RString.EMPTY;
+        }
+        if (source.shikakuJyotaiKubun == null) {
+            source.shikakuJyotaiKubun = RString.EMPTY;
+        }
     }
 }

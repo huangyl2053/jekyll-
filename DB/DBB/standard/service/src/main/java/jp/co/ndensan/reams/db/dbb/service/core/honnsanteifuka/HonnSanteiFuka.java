@@ -376,20 +376,27 @@ public class HonnSanteiFuka {
      * @return boolean
      */
     public boolean is普徴期別がZERO(FukaJoho 賦課の情報_更正後) {
-        return Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額01()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額02()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額03()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額04()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額05()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額06()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額07()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額08()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額09()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額10()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額11()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額12()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額13()) == INDEX_0
-                && Decimal.ZERO.compareTo(賦課の情報_更正後.get普徴期別金額14()) == INDEX_0;
+        return Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額01())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額02())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額03())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額04())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額05())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額06())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額07())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額08())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額09())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額10())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額11())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額12())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額13())) == INDEX_0
+                && Decimal.ZERO.compareTo(get期別金額(賦課の情報_更正後.get普徴期別金額14())) == INDEX_0;
+    }
+
+    private Decimal get期別金額(Decimal 期別金額) {
+        if (期別金額 == null) {
+            return Decimal.ZERO;
+        }
+        return 期別金額;
     }
 
     /**
@@ -696,9 +703,10 @@ public class HonnSanteiFuka {
                 ? Decimal.ZERO : 賦課情報_更正前.get特徴期別金額06();
         Decimal 更正前特徴期別金額合計 = 特徴期別金額01.add(特徴期別金額02).add(特徴期別金額03)
                 .add(特徴期別金額04).add(特徴期別金額05).add(特徴期別金額06);
-        Decimal 更正後特徴期別金額合計 = 特徴期別金額List.get(INDEX_0).add(特徴期別金額List.get(INDEX_1))
-                .add(特徴期別金額List.get(INDEX_2)).add(特徴期別金額List.get(INDEX_3))
-                .add(特徴期別金額List.get(INDEX_4)).add(特徴期別金額List.get(INDEX_5));
+        Decimal 更正後特徴期別金額合計 = Decimal.ZERO;
+        for (Decimal 特徴期別金額 : 特徴期別金額List) {
+            更正後特徴期別金額合計.add(特徴期別金額);
+        }
         ChoshuHoho 徴収方法の情報_クローン = new ChoshuHoho(徴収方法情報_更正前.toEntity());
         CalculateChoteiResult result = new CalculateChoteiResult();
         if (更正後特徴期別金額合計.compareTo(更正前特徴期別金額合計) < INDEX_0) {

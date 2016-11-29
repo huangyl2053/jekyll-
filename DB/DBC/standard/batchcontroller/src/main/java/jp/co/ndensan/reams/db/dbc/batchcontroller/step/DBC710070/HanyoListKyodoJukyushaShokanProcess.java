@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710070.HanyoListKyodo
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710070.KyodoJukyushaShokanEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -30,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -101,6 +105,7 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
     private FileSpoolManager spoolManager;
     private Map<LasdecCode, KoseiShichosonMaster> 構成市町村マスタ;
     private RString csv出力Flag;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
 
     @Override
     protected void initialize() {
@@ -126,7 +131,8 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
             構成市町村マスタ.put(現市町村情報.get(i).get市町村コード(), 現市町村情報.get(i));
         }
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
-
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, new ReportId(processParameter.get帳票ID()));
     }
 
     @Override
@@ -158,7 +164,7 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
     protected void process(KyodoJukyushaShokanEntity entity) {
         連番++;
         csv出力Flag = あり;
-        csvListWriter.writeLine(editor.setBodyList(entity, processParameter, 地方公共団体情報, 構成市町村マスタ, 連番));
+        csvListWriter.writeLine(editor.setBodyList(entity, processParameter, 地方公共団体情報, 構成市町村マスタ, 連番, 帳票制御共通));
         ExpandedInformation expandedInformation = new ExpandedInformation(
                 CODE_0003, DATANAME_被保険者番号, entity.get共同処理用受給者異動償還送付().getHiHokenshaNo().getColumnValue());
         personalDataList.add(PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInformation));

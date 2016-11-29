@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.hanyolistkogakugassanshinseishojoho;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Kokuho_Zokugara;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
@@ -21,8 +23,10 @@ import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMas
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
@@ -70,39 +74,9 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class HanyoListKogakuGassanShinseishoJohoDataCreate {
 
-    private static final RString INDEX_1 = new RString("1");
     private static final RString 住特 = new RString("住特");
     private static final RString 旧措置者 = new RString("旧措置者");
     private static final RString みなし = new RString("みなし");
-
-    private static final RString 直近異動事由コード00 = new RString("00");
-    private static final RString 直近異動事由コード01 = new RString("01");
-    private static final RString 直近異動事由コード02 = new RString("02");
-    private static final RString 直近異動事由コード03 = new RString("03");
-    private static final RString 直近異動事由コード04 = new RString("04");
-    private static final RString 直近異動事由コード05 = new RString("05");
-    private static final RString 直近異動事由コード06 = new RString("06");
-    private static final RString 直近異動事由コード07 = new RString("07");
-    private static final RString 直近異動事由コード08 = new RString("08");
-    private static final RString 直近異動事由コード09 = new RString("09");
-    private static final RString 直近異動事由コード10 = new RString("10");
-    private static final RString 直近異動事由コード11 = new RString("11");
-    private static final RString 直近異動事由コード12 = new RString("12");
-    private static final RString 直近異動事由コード20 = new RString("20");
-    private static final RString 直近異動事由コード名称00 = new RString("");
-    private static final RString 直近異動事由コード名称01 = new RString("認定　　　　　");
-    private static final RString 直近異動事由コード名称02 = new RString("変更申請認定　");
-    private static final RString 直近異動事由コード名称03 = new RString("変更申請却下　");
-    private static final RString 直近異動事由コード名称04 = new RString("サ変更申請認定");
-    private static final RString 直近異動事由コード名称05 = new RString("サ変更申請却下");
-    private static final RString 直近異動事由コード名称06 = new RString("削除　　　　　");
-    private static final RString 直近異動事由コード名称07 = new RString("修正　　　　　");
-    private static final RString 直近異動事由コード名称08 = new RString("受給申請却下　");
-    private static final RString 直近異動事由コード名称09 = new RString("削除回復　　　");
-    private static final RString 直近異動事由コード名称10 = new RString("職権記載　　　");
-    private static final RString 直近異動事由コード名称11 = new RString("職権修正　　　");
-    private static final RString 直近異動事由コード名称12 = new RString("職権取消　　　");
-    private static final RString 直近異動事由コード名称20 = new RString("履歴修正　　　");
     private static final RString 受給申請事由_初回申請 = new RString("初回申請　　");
     private static final RString 受給申請事由_再申請内 = new RString("再申請内　　");
     private static final RString 受給申請事由_再申請外 = new RString("再申請外　　");
@@ -115,15 +89,12 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
     private static final int INT_8 = 8;
     private static final int INT_10 = 10;
     private static final int INT_20 = 20;
-    private final FlexibleDate システム日付;
+    private static final RString 銀行 = new RString("銀行");
 
     /**
      * コンストラクタ
-     *
-     * @param システム日付 FlexibleDate
      */
-    public HanyoListKogakuGassanShinseishoJohoDataCreate(FlexibleDate システム日付) {
-        this.システム日付 = システム日付;
+    public HanyoListKogakuGassanShinseishoJohoDataCreate() {
     }
 
     /**
@@ -133,15 +104,17 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
      * @param parameter HanyoListKogakuGassanShinseishoJohoProcessParameter
      * @param 連番 Decimal
      * @param 市町村名MasterMap Map<RString, KoseiShichosonMaster>
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param 地方公共団体 Association
      * @return HanyoListKogakuGassanShinseishoJohoCSVEntity
      */
     public HanyoListKogakuGassanShinseishoJohoCSVEntity createCsvData(HanyoListKogakuGassanShinseishoJohoEntity entity,
             HanyoListKogakuGassanShinseishoJohoProcessParameter parameter,
-            Decimal 連番, Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association 地方公共団体) {
+            Decimal 連番, Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
+            ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {
         HanyoListKogakuGassanShinseishoJohoCSVEntity csvEntity = new HanyoListKogakuGassanShinseishoJohoCSVEntity();
         csvEntity.set連番(numToRString(連番));
-        set宛名(entity, csvEntity, parameter);
+        set宛名(entity, csvEntity, parameter, 帳票制御共通, 地方公共団体);
         set宛先(entity, csvEntity);
         set被保険者台帳管理(entity, csvEntity, parameter, 市町村名MasterMap, 地方公共団体);
         set口座情報(entity, csvEntity);
@@ -271,7 +244,9 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
 
     private void set宛名(HanyoListKogakuGassanShinseishoJohoEntity entity,
             HanyoListKogakuGassanShinseishoJohoCSVEntity csvEntity,
-            HanyoListKogakuGassanShinseishoJohoProcessParameter parameter) {
+            HanyoListKogakuGassanShinseishoJohoProcessParameter parameter,
+            ChohyoSeigyoKyotsu 帳票制御共通,
+            Association 地方公共団体) {
 
         if (entity.get宛名Entity() != null) {
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
@@ -299,28 +274,25 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
             AtenaMeisho 世帯主名 = 宛名.get世帯主名();
             csvEntity.set世帯主名(世帯主名 != null
                     ? 世帯主名.getColumnValue() : RString.EMPTY);
-            ZenkokuJushoCode 住所コード = 宛名.get住所() != null ? 宛名.get住所().get全国住所コード() : null;
-            csvEntity.set住所コード(住所コード != null
-                    ? 住所コード.getColumnValue() : RString.EMPTY);
+            csvEntity.set住所コード(宛名.get住所().get町域コード() != null
+                    ? 宛名.get住所().get町域コード().value() : RString.EMPTY);
             YubinNo 郵便番号 = 宛名.get住所() != null ? 宛名.get住所().get郵便番号() : null;
             csvEntity.set郵便番号(郵便番号 != null
                     ? 郵便番号.getEditedYubinNo() : RString.EMPTY);
-            set住所番地方書(entity, csvEntity);
+            set住所番地方書(entity, csvEntity, 帳票制御共通, 地方公共団体);
             set宛名本人(entity, csvEntity, parameter);
         }
     }
 
     private void set住所番地方書(HanyoListKogakuGassanShinseishoJohoEntity entity,
-            HanyoListKogakuGassanShinseishoJohoCSVEntity csvEntity
+            HanyoListKogakuGassanShinseishoJohoCSVEntity csvEntity,
+            ChohyoSeigyoKyotsu 帳票制御共通,
+            Association 地方公共団体
     ) {
         if (entity.get宛名Entity() != null) {
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
             IJusho 住所 = 宛名.get住所();
-            if (住所 != null && 住所.get番地() != null && 住所.get方書() != null && 住所.get番地().getBanchi() != null) {
-                csvEntity.set住所番地方書(住所.get住所()
-                        .concat(住所.get番地().getBanchi().getColumnValue()).concat(RString.FULL_SPACE)
-                        .concat(住所.get方書().getColumnValue()));
-            }
+            csvEntity.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, 宛名, 地方公共団体));
             csvEntity.set住所(住所 != null
                     ? 住所.get住所() : RString.EMPTY);
             csvEntity.set番地(住所 != null && 住所.get番地() != null && 住所.get番地().getBanchi() != null
@@ -454,7 +426,7 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
                     ? 送付先住所.get住所() : RString.EMPTY);
             csvEntity.set送付先番地(送付先住所 != null && 送付先住所.get番地() != null
                     && 送付先住所.get番地().getBanchi() != null
-                    ? 送付先住所.get番地().getBanchi().getColumnValue() : RString.EMPTY);
+                            ? 送付先住所.get番地().getBanchi().getColumnValue() : RString.EMPTY);
             csvEntity.set送付先方書(送付先住所 != null && 送付先住所.get方書() != null
                     ? 送付先住所.get方書().getColumnValue() : RString.EMPTY);
         }
@@ -504,23 +476,30 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
 
         csvEntity.set受給申請日(dataToRString(entity.get受給者台帳_受給申請年月日(), parameter));
         if (!RString.isNullOrEmpty(entity.get受給者台帳_要介護認定状態区分コード())) {
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(
-                    システム日付, entity.get受給者台帳_要介護認定状態区分コード()).getName());
+            csvEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.get受給者台帳_要介護認定状態区分コード()).get名称());
         }
         csvEntity.set受給認定開始日(dataToRString(entity.get受給者台帳_認定有効期間開始年月日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.get受給者台帳_認定有効期間終了年月日(), parameter));
         csvEntity.set受給認定日(dataToRString(entity.get受給者台帳_認定年月日(), parameter));
         csvEntity.set受給旧措置(entity.is受給者台帳_旧措置者フラグ() ? 旧措置者 : RString.EMPTY);
-        if (!RString.isNullOrEmpty(entity.get受給者台帳_みなし要介護区分コード()) && null != MinashiCode
-                .toValue(entity.get受給者台帳_みなし要介護区分コード())
-                && !MinashiCode.toValue(entity.get受給者台帳_みなし要介護区分コード()).getコード().equals(INDEX_1)) {
-            csvEntity.set受給みなし更新認定(みなし);
+        if (!RString.isNullOrEmpty(entity.get受給者台帳_みなし要介護区分コード())) {
+            csvEntity.set受給みなし更新認定(get受給みなし更新認定(entity.get受給者台帳_みなし要介護区分コード()));
         }
         if (entity.get受給者台帳_直近異動事由コード() != null) {
-
-            csvEntity.set受給直近事由(get受給直近事由(ChokkinIdoJiyuCode.toValue(
-                    entity.get受給者台帳_直近異動事由コード()).getコード()));
+            csvEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get受給者台帳_直近異動事由コード()).get名称());
         }
+    }
+
+    private RString get受給みなし更新認定(RString みなし要介護区分コード) {
+        RString 受給みなし更新認定 = RString.EMPTY;
+        List minashiCodeList = new ArrayList();
+        for (MinashiCode minashiCode : MinashiCode.values()) {
+            minashiCodeList.add(minashiCode.getコード());
+        }
+        if (minashiCodeList.contains(みなし要介護区分コード) && !MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
+            受給みなし更新認定 = みなし;
+        }
+        return 受給みなし更新認定;
     }
 
     private RString get受給申請事由(HanyoListKogakuGassanShinseishoJohoEntity entity) {
@@ -554,39 +533,6 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
         return RString.EMPTY;
     }
 
-    private RString get受給直近事由(RString 直近異動事由コード) {
-        if (直近異動事由コード00.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称00;
-        } else if (直近異動事由コード01.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称01;
-        } else if (直近異動事由コード02.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称02;
-        } else if (直近異動事由コード03.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称03;
-        } else if (直近異動事由コード04.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称04;
-        } else if (直近異動事由コード05.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称05;
-        } else if (直近異動事由コード06.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称06;
-        } else if (直近異動事由コード07.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称07;
-        } else if (直近異動事由コード08.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称08;
-        } else if (直近異動事由コード09.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称09;
-        } else if (直近異動事由コード10.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称10;
-        } else if (直近異動事由コード11.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称11;
-        } else if (直近異動事由コード12.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称12;
-        } else if (直近異動事由コード20.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称20;
-        }
-        return RString.EMPTY;
-    }
-
     private void set口座情報(HanyoListKogakuGassanShinseishoJohoEntity entity,
             HanyoListKogakuGassanShinseishoJohoCSVEntity csvEntity) {
         KozaRelateEntity releteEntity = entity.get口座情報Entity();
@@ -597,9 +543,9 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
                 csvEntity.set銀行郵便区分(Kaigogassan_KinyuKikanKubun.ゆうちょ.get名称());
                 csvEntity.set支店コード(口座.get店番());
                 csvEntity.set支店名カナ(RString.EMPTY);
-                csvEntity.set支店名(RString.EMPTY);
+                csvEntity.set支店名(口座.get店名());
             } else {
-                csvEntity.set銀行郵便区分(Kaigogassan_KinyuKikanKubun.普銀.get名称());
+                csvEntity.set銀行郵便区分(銀行);
                 KinyuKikanShitenCode 支店コード = 口座.get支店コード();
                 csvEntity.set支店コード(支店コード != null ? 支店コード.getColumnValue() : RString.EMPTY);
                 csvEntity.set支店名カナ(支店 != null ? 支店.get支店カナ名称() : RString.EMPTY);

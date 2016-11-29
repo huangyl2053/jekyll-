@@ -40,8 +40,8 @@
             <result property="再審査_過誤_単位数" column="s_Tanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="再審査_過誤_調整額" column="s_Choseigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="介護給付_総合事業費" column="kaigokyufuSogojigyohi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-            <result property="公費負担額" column="riyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-            <result property="利用者負担額" column="kohiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+            <result property="公費負担額" column="kohiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+            <result property="利用者負担額" column="riyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="合計_帳票レコード種別" column="gokeiChohyoRecordShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="合計_通常分_件数" column="t_GokeiKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="合計_通常分_単位数" column="t_GokeiTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -50,8 +50,8 @@
             <result property="合計_再審査_過誤_単位数" column="s_GokeiTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="合計_再審査_過誤_調整額" column="s_GokeiChoseigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="合計_介護給付_総合事業費" column="gokeiKaigokyufuSogojigyohi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-            <result property="合計_公費負担額" column="gokeiRiyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-            <result property="合計_利用者負担額" column="gokeiKohiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+            <result property="合計_公費負担額" column="gokeiKohiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+            <result property="合計_利用者負担額" column="gokeiRiyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="累計_帳票レコード種別" column="ruisekiChohyoRecordShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="累計_通常分_件数" column="t_RuisekiKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="累計_通常分_単位数" column="t_RuisekiTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
