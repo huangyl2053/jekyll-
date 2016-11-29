@@ -89,12 +89,13 @@ public class TankiNyushoKakudaiGaitosha {
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association association
+     * @param 導入団体情報 Association
      * @param 連番 連番
      * @return JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity
      */
     public TankiNyushoKakudaiGaitoshaReibanAriEUCEntity set連番ありEUCEntity(TankiNyushoKakudaiGaitoshaRelateEntity entity,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association association, int 連番) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association, Association 導入団体情報, int 連番) {
         TankiNyushoKakudaiGaitoshaReibanAriEUCEntity eucEntity = new TankiNyushoKakudaiGaitoshaReibanAriEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -114,7 +115,7 @@ public class TankiNyushoKakudaiGaitosha {
             eucEntity.set世帯主名(iKojin.get世帯主名());
             eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -278,11 +279,12 @@ public class TankiNyushoKakudaiGaitosha {
      * @param 市町村名MasterMap 市町村名MasterMap
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param association association
+     * @param 導入団体情報 Association
      * @return TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity
      */
     public TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity set連番なしEUCEntity(TankiNyushoKakudaiGaitoshaRelateEntity entity,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association association, Association 導入団体情報) {
         TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity eucEntity = new TankiNyushoKakudaiGaitoshaReibanNashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -301,7 +303,7 @@ public class TankiNyushoKakudaiGaitosha {
             eucEntity.set世帯主名(iKojin.get世帯主名());
             eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, association));
+            eucEntity.set住所_番地_方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
