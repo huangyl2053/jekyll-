@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_KarisanteiData;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassan.HanyoListKogakuGassanKeisanProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassan.HanyoListKogakuGassanKeisanCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassan.HanyoListKogakuGassanKeisanEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
@@ -24,13 +25,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -263,6 +266,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private static final RString 出力順_保険者番号 = new RString("\"dbT3072_shoKisaiHokenshaNo\" ASC, ");
     private static final RString 出力順_支給申請書整理番号 = new RString("\"dbT3072_shikyuShinseishoSeiriNo\" ASC, ");
     private static final RString 出力順_履歴番号 = new RString("\"dbT3072_rirekiNo\" ASC");
+    private ChohyoSeigyoKyotsu 帳票制御共通;
 
     @Override
     protected void initialize() {
@@ -285,6 +289,8 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         parameter.setSearchKey(new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).setデータ取得区分(DataShutokuKubun.直近レコード).build());
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701016.getReportId());
     }
 
     @Override
@@ -338,7 +344,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         output.set連番(DecimalFormatter.toRString(連番, 定値INT_0));
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         if (kojin != null) {
-            set宛名1(kojin, output);
+            set宛名1(kojin, output, entity);
             set宛名2(kojin, output);
         }
         set最新被保台帳(entity, output);
@@ -352,7 +358,8 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     }
 
     private void set宛名1(IKojin kojin,
-            HanyoListKogakuGassanKeisanCSVEntity output) {
+            HanyoListKogakuGassanKeisanCSVEntity output,
+            HanyoListKogakuGassanKeisanEntity entity) {
         output.set識別コード(getColumnValue(kojin.get識別コード()));
         if (kojin.get住民状態() != null) {
             output.set住民種別(kojin.get住民状態().住民状態略称());
@@ -378,22 +385,16 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         output.set世帯コード(getColumnValue(kojin.get世帯コード()));
         output.set世帯主名(getColumnValue(kojin.get世帯主名()));
         if (kojin.get住所() != null) {
-            output.set住所コード(getColumnValue(kojin.get住所().get全国住所コード()));
+            output.set住所コード(getColumnValue(kojin.get住所().get町域コード()));
             output.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
-            if (kojin.get住所().get住所() != null
-                    && kojin.get住所().get番地() != null
-                    && kojin.get住所().get方書() != null) {
-                output.set住所番地方書(kojin.get住所().get住所()
-                        .concat(getColumnValue(kojin.get住所().get番地().getBanchi()))
-                        .concat(RString.FULL_SPACE)
-                        .concat(getColumnValue(kojin.get住所().get方書())));
-            }
             output.set住所(kojin.get住所().get住所());
             if (kojin.get住所().get番地() != null) {
                 output.set番地(getColumnValue(kojin.get住所().get番地().getBanchi()));
             }
             output.set方書(getColumnValue(kojin.get住所().get方書()));
         }
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get受給者台帳().getShichosonCode());
+        output.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, kojin, 導入団体情報));
         if (kojin.get行政区画() != null) {
             if (kojin.get行政区画().getGyoseiku() != null) {
                 output.set行政区コード(getColumnValue(kojin.get行政区画().getGyoseiku().getコード()));
@@ -502,9 +503,9 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         output.set受給申請事由(get受給申請事由(受給者台帳));
         output.set受給申請日(get日付項目(受給者台帳.getJukyuShinseiYMD()));
         if (受給者台帳.getYokaigoJotaiKubunCode() != null && !受給者台帳.getYokaigoJotaiKubunCode().isEmpty()) {
-            IYokaigoJotaiKubun 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(
-                    システム日付, getColumnValue(受給者台帳.getYokaigoJotaiKubunCode()));
-            output.set受給要介護度(要介護状態区分 != null ? 要介護状態区分.getName() : RString.EMPTY);
+            output.set受給要介護度(YokaigoJotaiKubun.toValue(受給者台帳.getYokaigoJotaiKubunCode().value()).get名称());
+        } else {
+            output.set受給要介護度(RString.EMPTY);
         }
         output.set受給認定開始日(get日付項目(受給者台帳.getNinteiYukoKikanKaishiYMD()));
         output.set受給認定終了日(get日付項目(受給者台帳.getNinteiYukoKikanShuryoYMD()));
@@ -514,13 +515,21 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         }
         RString みなし要介護区分コード = getColumnValue(受給者台帳.getShiteiServiceShurui01());
         if (!RString.isNullOrEmpty(みなし要介護区分コード)) {
-            if (MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
-                output.set受給みなし更新認定(MinashiCode.toValue(みなし要介護区分コード).get名称());
-            } else {
-                output.set受給みなし更新認定(文字_みなし);
-            }
+            output.set受給みなし更新認定(get受給みなし更新認定(みなし要介護区分コード));
         }
-        output.set受給直近事由(set異動事由文言(getColumnValue(受給者台帳.getChokkinIdoJiyuCode())));
+        output.set受給直近事由(ChokkinIdoJiyuCode.toValue(getColumnValue(受給者台帳.getChokkinIdoJiyuCode())).get名称());
+    }
+
+    private RString get受給みなし更新認定(RString みなし要介護区分コード) {
+        RString 受給みなし更新認定 = RString.EMPTY;
+        List minashiCodeList = new ArrayList();
+        for (MinashiCode minashiCode : MinashiCode.values()) {
+            minashiCodeList.add(minashiCode.getコード());
+        }
+        if (minashiCodeList.contains(みなし要介護区分コード) && !MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
+            受給みなし更新認定 = 文字_みなし;
+        }
+        return 受給みなし更新認定;
     }
 
     private void set高額合算支給額計算結果(HanyoListKogakuGassanKeisanEntity entity,
