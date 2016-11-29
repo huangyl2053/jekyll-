@@ -119,7 +119,6 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         RStringBuilder 特記事項builder = new RStringBuilder();
         RString new番号 = RString.EMPTY;
         RString old番号 = RString.EMPTY;
-        int index = 0;
         for (TokkiTextEntity tokkiTextEntity : entity.get特記事項番号リスト()) {
             new番号 = tokkiTextEntity.get特記事項番号();
             if (!new番号.equals(old番号)) {
@@ -137,6 +136,16 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         if (new番号.equals(old番号)) {
             特記事項.add(特記事項builder.toRString());
         }
+        set特記事項リスト(特記事項, source);
+        if (count < フォームインデックス_判定用) {
+            source.layoutBreakItem = 1;
+        } else {
+            source.layoutBreakItem = 2;
+        }
+        return source;
+    }
+
+    private void set特記事項リスト(List<RString> 特記事項, TokkiText1ReportSource source) {
         int tokkijikoIndex = count / フォームインデックス_判定用;
         int setIndex = 0;
         if (0 < tokkijikoIndex) {
@@ -149,12 +158,6 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
                 break;
             }
         }
-        if (count < フォームインデックス_判定用) {
-            source.layoutBreakItem = 1;
-        } else {
-            source.layoutBreakItem = 2;
-        }
-        return source;
     }
 
     private void set特記事項List(RString item, int index, TokkiText1ReportSource source) {

@@ -76,6 +76,7 @@ public class ChkTokkiJiko31TextProcess extends BatchProcessBase<YokaigoninteiEnt
     private static final RString 総合事業開始区分 = new RString("【総合事業開始区分】");
     private static final RString すべて = new RString("1");
     private static final RString 一つずつ = new RString("3");
+    private static final RString マスキングあり = new RString("1");
     List<NinteichosaRelateEntity> 特記事項リスト;
 
     @Override
@@ -103,7 +104,6 @@ public class ChkTokkiJiko31TextProcess extends BatchProcessBase<YokaigoninteiEnt
             reportId = ReportIdDBE.DBE517132.getReportId().value();
         }
         batchWrite = BatchReportFactory.createBatchReportWriter(reportId).addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
-
 
             TokkiText1ReportSource.LAYOUTBREAKITEM) {
             @Override
@@ -161,7 +161,7 @@ public class ChkTokkiJiko31TextProcess extends BatchProcessBase<YokaigoninteiEnt
 
     private TokkiText1A4Entity setBodyItem(YokaigoninteiEntity entity) {
         TokkiText1A4Entity ninteiEntity = new TokkiText1A4Entity();
-        if (processPrm.getRadTokkiJikoMasking().equals(new RString("0"))) {
+        if (processPrm.getRadTokkiJikoMasking().equals(マスキングあり)) {
             ninteiEntity.set保険者番号(entity.get保険者番号());
             ninteiEntity.set被保険者番号(entity.get被保険者番号());
             ninteiEntity.set被保険者氏名(entity.get被保険者氏名());

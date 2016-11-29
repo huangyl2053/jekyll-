@@ -167,6 +167,7 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
     private static final RString 特記事項番号_701 = new RString("701");
     private static final RString 特記事項番号_702 = new RString("702");
     private static final RString 拡張子_PNG = new RString(".png");
+    private static final RString マスキングあり = new RString("1");
     List<NinteichosaRelateEntity> 特記事項リスト;
 
     @Override
@@ -196,15 +197,19 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         batchWrite = BatchReportFactory.createBatchReportWriter(reportId).addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
 
 
+
+
+
+
             TokkiText1ReportSource.LAYOUTBREAKITEM) {
             @Override
             public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
                     ReportLineRecord<TokkiText1ReportSource> currentRecord, ReportLineRecord<TokkiText1ReportSource> nextRecord, ReportDynamicChart dynamicChart) {
                 int layout = currentRecord.getSource().layoutBreakItem;
-                currentRecord.setFormGroupIndex(2);
+                currentRecord.setFormGroupIndex(layout);
                 if (nextRecord != null && nextRecord.getSource() != null) {
                     layout = nextRecord.getSource().layoutBreakItem;
-                    nextRecord.setFormGroupIndex(2);
+                    nextRecord.setFormGroupIndex(layout);
                 }
                 return currentRecord;
             }
@@ -252,7 +257,7 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
 
     private TokkiText1A4Entity setBodyItem(YokaigoninteiEntity entity) {
         TokkiText1A4Entity ninteiEntity = new TokkiText1A4Entity();
-        if (processPrm.getRadTokkiJikoMasking().equals(new RString("0"))) {
+        if (processPrm.getRadTokkiJikoMasking().equals(マスキングあり)) {
             ninteiEntity.set保険者番号(entity.get保険者番号());
             ninteiEntity.set被保険者番号(entity.get被保険者番号());
             ninteiEntity.set被保険者氏名(entity.get被保険者氏名());
