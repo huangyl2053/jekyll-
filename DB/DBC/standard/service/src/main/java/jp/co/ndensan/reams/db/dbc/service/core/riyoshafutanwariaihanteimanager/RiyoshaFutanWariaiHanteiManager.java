@@ -53,7 +53,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * ビジネス設計_DBCMNK2001_利用者負担割合判定（service）
@@ -107,7 +106,6 @@ public class RiyoshaFutanWariaiHanteiManager {
      * @param 基準日 FlexibleDate
      * @return RiyoshaFutanWariaiHanteiManagerResult
      */
-    @Transaction
     public RiyoshaFutanWariaiHanteiManagerResult futanWariaiHantei(
             HihokenshaNo 被保険者番号,
             FlexibleYear 年度,
@@ -141,13 +139,9 @@ public class RiyoshaFutanWariaiHanteiManager {
                     世帯員識別コード情報list, 基準日,
                     new FlexibleDate(判定基準日list.get(i)));
             set判定対象者Tempの共通項目部分(被保険者番号, 判定対象者Temp, 被保険者台帳, 世帯員識別コード情報);
-            IRiyoshaFutanWariaiHanteiManagerMapper mapper = mapperProvider.create(
-                    IRiyoshaFutanWariaiHanteiManagerMapper.class);
-            RiyoshaFutanWariaiHanteiParameter parameter = new RiyoshaFutanWariaiHanteiParameter(
-                    年度, get識別code(世帯員識別コード情報));
-            List<DbV2512KaigoShotokuNewestEntity> 介護所得情報 = mapper.get介護所得情報(parameter);
+            DbV2512KaigoShotokuNewestEntity 介護所得情報 = get介護所得情報(年度, get識別code(世帯員識別コード情報));
             set判定対象者Tempの介護所得情報部分(判定対象者Temp, 介護所得情報);
-            set世帯員介護所得情報(年度, 介護所得情報, 世帯員識別コード情報, mapper);
+            List<DbV2512KaigoShotokuNewestEntity> 介護所得情報List = set世帯員介護所得情報(年度, 介護所得情報, 世帯員識別コード情報);
             JukyushaDaichoManager jukyumanager = new JukyushaDaichoManager();
             List<JukyushaDaicho> 受給者台帳情報 = jukyumanager.get受給者台帳被保険者番号(被保険者番号);
             List<JukyushaDaicho> 受給者台帳 = get受給者台帳情報の取得(受給者台帳情報, 被保険者番号);
@@ -171,8 +165,11 @@ public class RiyoshaFutanWariaiHanteiManager {
                     sogoJigyoTaishoshalist, 基準日時点で受給者台帳);
             RiyoshaFutanWariaiHanteiManagerParameter para
                     = new RiyoshaFutanWariaiHanteiManagerParameter(
-                            被保険者台帳.get識別コード(), new FlexibleDate(対象開始日list.get(0)),
+                            被保険者台帳 != null ? 被保険者台帳.get識別コード() : ShikibetsuCode.EMPTY,
+                            new FlexibleDate(対象開始日list.get(0)),
                             new FlexibleDate(対象終了日list.get(0)));
+            IRiyoshaFutanWariaiHanteiManagerMapper mapper = mapperProvider.create(
+                    IRiyoshaFutanWariaiHanteiManagerMapper.class);
             List<UrT0508SeikatsuHogoJukyushaEntity> 生活保護受給者情報 = mapper.get生活保護受給者entity(para);
             SeikatsuHogoGaitoJohoTempEntity 生活保護該当情報Temp = new SeikatsuHogoGaitoJohoTempEntity();
             if (生活保護受給者情報 != null && !生活保護受給者情報.isEmpty()
@@ -182,18 +179,18 @@ public class RiyoshaFutanWariaiHanteiManager {
                         new FlexibleDate(判定基準日list.get(i)));
             }
             FutanWariaiHanteiJoho entity = new FutanWariaiHanteiJoho(
-                    判定対象者Temp, 生活保護該当情報Temp, null, 介護所得情報, new FlexibleDate(判定基準日list.get(i)));
+                    判定対象者Temp, 生活保護該当情報Temp, null, 介護所得情報List, new FlexibleDate(判定基準日list.get(i)));
             FutanWariaiHanteiResult 負担割合判定の結果
                     = RiyoshaFutanWariaiHantei.createInstance().futanWariaiHantei(entity);
-            int 世帯１号被保険者数 = get世帯１号被保険者数(被保険者台帳, 世帯員識別コード情報);
+            int 世帯１号被保険者数 = get世帯１号被保険者数(被保険者台帳, 世帯員識別コード情報, new FlexibleDate(判定基準日list.get(i)));
             RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp = new RiyoshaFutanWariaiMeisaiTempEntity();
-            get利用者負担割合明細Temp(被保険者番号, 被保険者台帳, 負担割合判定の結果, 介護所得情報,
+            get利用者負担割合明細Temp(被保険者番号, 被保険者台帳, 負担割合判定の結果, 介護所得情報List,
                     get世帯code(世帯員識別コード情報), 世帯１号被保険者数,
                     生活保護該当情報Temp, 判定対象者Temp, 利用者負担割合明細Temp);
             利用者負担割合明細Tempのマージデータ.add(利用者負担割合明細Temp);
             RiyoshaFutanWariaiKonkyoTempEntity 利用者負担割合根拠Temp
                     = new RiyoshaFutanWariaiKonkyoTempEntity();
-            get利用者負担割合根拠Temp(年度, 被保険者番号, 被保険者台帳, 利用者負担割合根拠Temp, 介護所得情報);
+            get利用者負担割合根拠Temp(年度, 被保険者番号, 被保険者台帳, 利用者負担割合根拠Temp, 介護所得情報List);
             利用者負担割合根拠Temp.setEdaNo(i + 1);
             利用者負担割合根拠Tempのマージデータ.add(利用者負担割合根拠Temp);
         }
@@ -234,23 +231,25 @@ public class RiyoshaFutanWariaiHanteiManager {
         return 識別code;
     }
 
-    private void set世帯員介護所得情報(FlexibleYear 年度,
-            List<DbV2512KaigoShotokuNewestEntity> 介護所得情報, List<SetaiinShikibetsuCd> 世帯員識別コード情報,
-            IRiyoshaFutanWariaiHanteiManagerMapper mapper) {
+    private List<DbV2512KaigoShotokuNewestEntity> set世帯員介護所得情報(FlexibleYear 年度,
+            DbV2512KaigoShotokuNewestEntity 介護所得情報, List<SetaiinShikibetsuCd> 世帯員識別コード情報
+    ) {
+        List<DbV2512KaigoShotokuNewestEntity> 世帯員介護所得情報 = new ArrayList<>();
+        if (介護所得情報 != null) {
+            世帯員介護所得情報.add(介護所得情報);
+        }
         if (世帯員識別コード情報 != null && !世帯員識別コード情報.isEmpty()) {
-            List<DbV2512KaigoShotokuNewestEntity> 世帯員介護所得情報;
-            ShikibetsuCode 識別code;
-            RiyoshaFutanWariaiHanteiParameter parameter;
             for (SetaiinShikibetsuCd 世帯員 : 世帯員識別コード情報) {
                 if (HonninKubun.本人.getCode().equals(世帯員.get本人区分())) {
                     continue;
                 }
-                識別code = get世帯員識別code(世帯員);
-                parameter = new RiyoshaFutanWariaiHanteiParameter(年度, 識別code);
-                世帯員介護所得情報 = mapper.get介護所得情報(parameter);
-                add世帯員介護所得情報(介護所得情報, 世帯員介護所得情報);
+                DbV2512KaigoShotokuNewestEntity 介護所得世帯員 = get介護所得情報(年度, get世帯員識別code(世帯員));
+                if (介護所得世帯員 != null) {
+                    世帯員介護所得情報.add(介護所得世帯員);
+                }
             }
         }
+        return 世帯員介護所得情報;
     }
 
     private ShikibetsuCode get世帯員識別code(SetaiinShikibetsuCd 世帯員) {
@@ -258,16 +257,6 @@ public class RiyoshaFutanWariaiHanteiManager {
             return 世帯員.get世帯員識別コード();
         }
         return ShikibetsuCode.EMPTY;
-    }
-
-    private void add世帯員介護所得情報(List<DbV2512KaigoShotokuNewestEntity> 介護所得情報, List<DbV2512KaigoShotokuNewestEntity> 世帯員介護所得情報) {
-        if (介護所得情報 == null) {
-            return;
-        }
-        if (世帯員介護所得情報 == null || 世帯員介護所得情報.isEmpty()) {
-            return;
-        }
-        介護所得情報.add(世帯員介護所得情報.get(INDEX_ZERO));
     }
 
     private SetaiCode get世帯code(List<SetaiinShikibetsuCd> 世帯員識別コード情報) {
@@ -647,17 +636,17 @@ public class RiyoshaFutanWariaiHanteiManager {
 
     private void set判定対象者Tempの介護所得情報部分(
             HanteiTaishoshaTempEntity 判定対象者Temp,
-            List<DbV2512KaigoShotokuNewestEntity> 介護所得情報) {
-        if (介護所得情報 != null && !介護所得情報.isEmpty()) {
-            判定対象者Temp.setShotokuNendo(介護所得情報.get(0).getShotokuNendo());
-            判定対象者Temp.setRirekiNo(new RString(Long.toString(介護所得情報.get(0).getRirekiNo())));
-            判定対象者Temp.setKazeiKubun(介護所得情報.get(0).getKazeiKubun());
-            判定対象者Temp.setKazeiKubunGemmenGo(介護所得情報.get(0).getKazeiKubunGemmenGo());
-            判定対象者Temp.setGokeiShotokuGaku(介護所得情報.get(0).getGokeiShotokuGaku());
-            判定対象者Temp.setNenkiniShunyuGaku(介護所得情報.get(0).getNenkiniShunyuGaku());
-            判定対象者Temp.setNenkiniShotokuGaku(介護所得情報.get(0).getNenkiniShotokuGaku());
-            判定対象者Temp.setKazeiShotokuGaku(介護所得情報.get(0).getKazeiShotokuGaku());
-            判定対象者Temp.setGekihenKanwaKubun(介護所得情報.get(0).getGekihenKanwaKubun());
+            DbV2512KaigoShotokuNewestEntity 介護所得情報) {
+        if (介護所得情報 != null) {
+            判定対象者Temp.setShotokuNendo(介護所得情報.getShotokuNendo());
+            判定対象者Temp.setRirekiNo(new RString(Long.toString(介護所得情報.getRirekiNo())));
+            判定対象者Temp.setKazeiKubun(介護所得情報.getKazeiKubun());
+            判定対象者Temp.setKazeiKubunGemmenGo(介護所得情報.getKazeiKubunGemmenGo());
+            判定対象者Temp.setGokeiShotokuGaku(介護所得情報.getGokeiShotokuGaku());
+            判定対象者Temp.setNenkiniShunyuGaku(介護所得情報.getNenkiniShunyuGaku());
+            判定対象者Temp.setNenkiniShotokuGaku(介護所得情報.getNenkiniShotokuGaku());
+            判定対象者Temp.setKazeiShotokuGaku(介護所得情報.getKazeiShotokuGaku());
+            判定対象者Temp.setGekihenKanwaKubun(介護所得情報.getGekihenKanwaKubun());
         }
     }
 
@@ -837,8 +826,8 @@ public class RiyoshaFutanWariaiHanteiManager {
                 continue;
             }
             HihokenshaDaicho 世帯員の被保険者 = get世帯員の被保険者台帳(世帯員情報.get世帯員識別コード(), 判定基準日);
-            if (基準日.equals(判定基準日) && (世帯員の被保険者 == null || !ONE.equals(
-                    世帯員の被保険者.get被保険者区分コード()))) {
+            if (世帯員の被保険者 == null || !ONE.equals(
+                    世帯員の被保険者.get被保険者区分コード())) {
                 continue;
             }
             世帯員識別情報list.add(世帯員情報);
@@ -853,10 +842,33 @@ public class RiyoshaFutanWariaiHanteiManager {
                 find被保険者台帳(世帯員識別コード, 判定基準日);
     }
 
-    private int get世帯１号被保険者数(HihokenshaDaicho 被保険者台帳, List<SetaiinShikibetsuCd> 世帯員識別コード情報) {
-        if (被保険者台帳 != null && !ONE.equals(被保険者台帳.get被保険者区分コード())) {
-            return 世帯員識別コード情報.size() - 1;
+    private int get世帯１号被保険者数(HihokenshaDaicho 被保険者台帳, List<SetaiinShikibetsuCd> 世帯員識別コード情報, FlexibleDate 判定基準日) {
+        int i = 0;
+        for (SetaiinShikibetsuCd 世帯員情報 : 世帯員識別コード情報) {
+            if (HonninKubun.本人.getCode().equals(世帯員情報.get本人区分())) {
+                continue;
+            }
+            HihokenshaDaicho 世帯員の被保険者 = get世帯員の被保険者台帳(世帯員情報.get世帯員識別コード(), 判定基準日);
+            if (世帯員の被保険者 != null && ONE.equals(
+                    世帯員の被保険者.get被保険者区分コード())) {
+                i = i + 1;
+            }
         }
-        return 世帯員識別コード情報.size();
+        if (被保険者台帳 != null && ONE.equals(被保険者台帳.get被保険者区分コード())) {
+            i = i + 1;
+        }
+        return i;
+    }
+
+    private DbV2512KaigoShotokuNewestEntity get介護所得情報(FlexibleYear 年度, ShikibetsuCode 識別コード) {
+        RiyoshaFutanWariaiHanteiParameter parameter = new RiyoshaFutanWariaiHanteiParameter(
+                年度, 識別コード);
+        IRiyoshaFutanWariaiHanteiManagerMapper mapper = mapperProvider.create(
+                IRiyoshaFutanWariaiHanteiManagerMapper.class);
+        List<DbV2512KaigoShotokuNewestEntity> 介護所得情報 = mapper.get介護所得情報(parameter);
+        if (介護所得情報 != null && !介護所得情報.isEmpty()) {
+            return 介護所得情報.get(0);
+        }
+        return null;
     }
 }

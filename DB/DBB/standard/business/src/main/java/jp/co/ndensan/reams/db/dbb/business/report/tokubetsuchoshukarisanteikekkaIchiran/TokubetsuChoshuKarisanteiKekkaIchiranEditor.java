@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -148,7 +149,8 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
             source.listLower_1 = 特徴仮算定計算後賦課情報Entity.get通知書番号().value();
         }
         if (特徴仮算定計算後賦課情報Entity.get宛名().getSetaiCode() != null) {
-            source.listLower_2 = 特徴仮算定計算後賦課情報Entity.get宛名().getSetaiCode().value();
+            SetaiCode setaiCode = 特徴仮算定計算後賦課情報Entity.get宛名().getSetaiCode();
+            source.listLower_2 = setaiCode.value();
         } else {
             source.listLower_2 = RString.EMPTY;
         }
