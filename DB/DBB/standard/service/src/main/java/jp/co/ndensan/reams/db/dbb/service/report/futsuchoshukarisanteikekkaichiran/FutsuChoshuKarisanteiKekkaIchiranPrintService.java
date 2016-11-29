@@ -53,7 +53,6 @@ public class FutsuChoshuKarisanteiKekkaIchiranPrintService {
      * @param 出力順ID long
      * @return SourceDataCollection
      */
-    //TODO バッチパラメータ ->出力順ID
     public SourceDataCollection printSinger(List<FuchoKariKeisanGoFukaEntity> 普徴仮算定計算後賦課list, long 出力順ID,
             FlexibleYear 調定年度, FlexibleYear 賦課年度, YMDHMS 調定日時) {
         SourceDataCollection collection;
