@@ -12,9 +12,12 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.KetteiJok
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShiharaiHoho;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoNoRenbanCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvNoRenbanDataCreate;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
@@ -102,6 +105,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
     private List<PersonalData> personalDataList;
     private Association 地方公共団体;
     private HanyoListShokanbaraiJokyoEntity preEntity;
+    private ChohyoSeigyoKyotsu 帳票制御共通情報;
 
     @BatchWriter
     private CsvWriter<HanyoListShokanbaraiJokyoNoRenbanCSVEntity> eucCsvWriter;
@@ -111,6 +115,8 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
         dataCreate = new HanyoListCsvNoRenbanDataCreate();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通情報 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701002.getReportId());
 
     }
 
@@ -165,7 +171,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
 
-        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter));
+        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 帳票制御共通情報));
         personalDataList.add(toPersonalData(entity));
         preEntity = entity;
     }

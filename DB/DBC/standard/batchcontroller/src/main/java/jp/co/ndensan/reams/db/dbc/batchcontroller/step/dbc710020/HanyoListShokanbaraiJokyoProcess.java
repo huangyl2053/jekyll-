@@ -12,9 +12,12 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.KetteiJok
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShiharaiHoho;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvDataCreate;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
@@ -104,6 +107,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private Association 地方公共団体;
     private HanyoListShokanbaraiJokyoEntity preEntity;
     private Decimal 連番;
+    private ChohyoSeigyoKyotsu 帳票制御共通情報;
     @BatchWriter
     private CsvWriter<HanyoListShokanbaraiJokyoCSVEntity> eucCsvWriter;
 
@@ -113,6 +117,8 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         dataCreate = new HanyoListCsvDataCreate();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通情報 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701002.getReportId());
 
     }
 
@@ -168,7 +174,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
 
-        eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
+        eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番, 帳票制御共通情報));
         連番 = 連番.add(Decimal.ONE);
         personalDataList.add(toPersonalData(preEntity));
     }
@@ -180,7 +186,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
             eucCsvWriter.writeLine(new HanyoListShokanbaraiJokyoCSVEntity());
         }
         if (preEntity != null) {
-            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
+            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番, 帳票制御共通情報));
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
         }
