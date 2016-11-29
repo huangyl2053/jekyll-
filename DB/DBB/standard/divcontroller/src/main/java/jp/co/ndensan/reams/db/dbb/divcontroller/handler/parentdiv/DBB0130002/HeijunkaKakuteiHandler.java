@@ -254,8 +254,8 @@ public class HeijunkaKakuteiHandler {
                     .set基準日時(new YMDHMS(RDate.getNowDate(), RDate.getNowTime())).build();
         }
         if (処理日付管理new != null) {
-            処理日付管理 = 処理日付管理.modifiedModel();
-            manager.save処理日付管理マスタ(処理日付管理);
+            処理日付管理new = 処理日付管理new.modifiedModel();
+            manager.save処理日付管理マスタ(処理日付管理new);
         }
     }
 
