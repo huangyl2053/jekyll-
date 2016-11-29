@@ -49,7 +49,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -66,9 +65,9 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsutorokusha."
             + "INenreiTotatsuTorokushaMapper.getHiHokenshaDaichoList");
     private static final RString 処理名 = new RString("年齢到達登録者リスト");
-    private static final RString 処理枝番 = new RString("0000");
-    private static final FlexibleYear 年度 = new FlexibleYear("0000");
-    private static final RString 年度内連番 = new RString("0000");
+//    private static final RString 処理枝番 = new RString("0000");
+//    private static final FlexibleYear 年度 = new FlexibleYear("0000");
+//    private static final RString 年度内連番 = new RString("0000");
     private static final int 日付桁数 = 8;
     private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
