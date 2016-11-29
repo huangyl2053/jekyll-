@@ -76,64 +76,21 @@ public class FukushiYoguKonyuhiShokaiHandler {
      * @param 識別番号管理 識別番号管理
      */
     public void setButton(ShikibetsuNoKanri 識別番号管理) {
-        if (ZERO.equals(識別番号管理.get基本設定区分())) {
-            div.getBtnKihon().setDisabled(true);
-        } else {
-            div.getBtnKihon().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理.get明細設定区分()) && ZERO.equals(識別番号管理.get集計設定区分())) {
-            div.getBtnMeisaiShukei().setDisabled(true);
-        } else {
-            div.getBtnMeisaiShukei().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理.get所定疾患施設療養設定区分())) {
-
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
-        } else {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理.get緊急時施設療養設定区分())) {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-        } else {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理.get食事費用設定区分())) {
-            div.getBtnShokuji().setDisabled(true);
-        } else {
-            div.getBtnShokuji().setDisabled(false);
-        }
+        div.getBtnKihon().setDisabled(ZERO.equals(識別番号管理.get基本設定区分()));
+        div.getBtnMeisaiShukei().setDisabled(
+                ZERO.equals(識別番号管理.get明細設定区分()) && ZERO.equals(識別番号管理.get集計設定区分()));
+        div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(ZERO.equals(識別番号管理.get所定疾患施設療養設定区分()));
+        div.getBtnKinkyujiShisetsuRyoyo().setDisabled(ZERO.equals(識別番号管理.get緊急時施設療養設定区分()));
+        div.getBtnShokuji().setDisabled(ZERO.equals(識別番号管理.get食事費用設定区分()));
         div.getBtnFukushiYoguKonyu().setDisabled(true);
-        if (ZERO.equals(識別番号管理.get特定入所者設定区分())) {
-            div.getBtnTokuteiNyushosha().setDisabled(true);
-        } else {
-            div.getBtnTokuteiNyushosha().setDisabled(false);
-        }
+        div.getBtnTokuteiNyushosha().setDisabled(ZERO.equals(識別番号管理.get特定入所者設定区分()));
         div.getBtnKogakuKaigoService().setDisabled(true);
-        if (ZERO.equals(識別番号管理.get特定診療費設定区分())) {
-            div.getBtnTokuteiShinryo().setDisabled(true);
-        } else {
-            div.getBtnTokuteiShinryo().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理.get居宅計画費設定区分())) {
-            div.getBtnKyotakuServiceKeikaku().setDisabled(true);
-        } else {
-            div.getBtnKyotakuServiceKeikaku().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理.get住宅改修費設定区分())) {
-            div.getBtnJutakuKaishu().setDisabled(true);
-        } else {
-            div.getBtnJutakuKaishu().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理.getケアマネジメント設定区分())) {
-            div.getBtnCareManagement().setDisabled(true);
-        } else {
-            div.getBtnCareManagement().setDisabled(false);
-        }
-        if (ZERO.equals(識別番号管理.get社会福祉法人軽減設定区分())) {
-            div.getBtnShafukuKeigen().setDisabled(true);
-        } else {
-            div.getBtnShafukuKeigen().setDisabled(false);
-        }
+        div.getBtnTokuteiShinryo().setDisabled(
+                ZERO.equals(識別番号管理.get特定診療費設定区分()) && ZERO.equals(識別番号管理.get特定診療特別療養設定区分()));
+        div.getBtnKyotakuServiceKeikaku().setDisabled(ZERO.equals(識別番号管理.get居宅計画費設定区分()));
+        div.getBtnJutakuKaishu().setDisabled(ZERO.equals(識別番号管理.get住宅改修費設定区分()));
+        div.getBtnCareManagement().setDisabled(ZERO.equals(識別番号管理.getケアマネジメント設定区分()));
+        div.getBtnShafukuKeigen().setDisabled(ZERO.equals(識別番号管理.get社会福祉法人軽減設定区分()));
     }
 
     private RString kinngakuFormat(Decimal date) {
