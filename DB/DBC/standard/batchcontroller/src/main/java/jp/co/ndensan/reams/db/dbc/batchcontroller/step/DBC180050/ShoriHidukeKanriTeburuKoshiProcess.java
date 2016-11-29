@@ -56,7 +56,7 @@ public class ShoriHidukeKanriTeburuKoshiProcess extends BatchProcessBase<DbT7022
     protected void process(DbT7022ShoriDateKanriEntity entity) {
         データ取得flag = true;
         entity.setTaishoKaishiTimestamp(new YMDHMS(processParameter.get抽出期間開始日時()));
-        entity.setTaishoShuryoTimestamp(new YMDHMS(processParameter.get抽出期間開始日時()));
+        entity.setTaishoShuryoTimestamp(new YMDHMS(processParameter.get抽出期間終了日時()));
         処理管理日付マスタWriter.update(entity);
     }
 

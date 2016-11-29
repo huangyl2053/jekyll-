@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Sep 22 15:32:35 CST 2016 
+ * Tue Nov 29 15:56:24 CST 2016 
  */
 
 
@@ -19,9 +19,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgJohoIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
 
     private RString txtTaishoNendo;
+    private RString txtHdnTaishoNendo;
     private RString txtSanteiKubun;
     private RString txtHokenshaNo;
     private RString txtShikyuShinseishoSeiriNo;
@@ -36,6 +37,7 @@ public class dgJohoIchiran_Row extends DataRow {
     public dgJohoIchiran_Row() {
         super();
         this.txtTaishoNendo = RString.EMPTY;
+        this.txtHdnTaishoNendo = RString.EMPTY;
         this.txtSanteiKubun = RString.EMPTY;
         this.txtHokenshaNo = RString.EMPTY;
         this.txtShikyuShinseishoSeiriNo = RString.EMPTY;
@@ -47,6 +49,7 @@ public class dgJohoIchiran_Row extends DataRow {
         this.txtSofuNengetsu = RString.EMPTY;
         this.txtDataKBN = RString.EMPTY;
         this.setOriginalData("txtTaishoNendo", txtTaishoNendo);
+        this.setOriginalData("txtHdnTaishoNendo", txtHdnTaishoNendo);
         this.setOriginalData("txtSanteiKubun", txtSanteiKubun);
         this.setOriginalData("txtHokenshaNo", txtHokenshaNo);
         this.setOriginalData("txtShikyuShinseishoSeiriNo", txtShikyuShinseishoSeiriNo);
@@ -59,9 +62,10 @@ public class dgJohoIchiran_Row extends DataRow {
         this.setOriginalData("txtDataKBN", txtDataKBN);
     }
 
-    public dgJohoIchiran_Row(RString txtTaishoNendo, RString txtSanteiKubun, RString txtHokenshaNo, RString txtShikyuShinseishoSeiriNo, RString txtIdoKubun, RString txtRirekiNo, RString txtUketoriNengetsu, RString txtHoseiYMDKatsu, RString txtHoseiYMDTan, RString txtSofuNengetsu, RString txtDataKBN) {
+    public dgJohoIchiran_Row(RString txtTaishoNendo, RString txtHdnTaishoNendo, RString txtSanteiKubun, RString txtHokenshaNo, RString txtShikyuShinseishoSeiriNo, RString txtIdoKubun, RString txtRirekiNo, RString txtUketoriNengetsu, RString txtHoseiYMDKatsu, RString txtHoseiYMDTan, RString txtSofuNengetsu, RString txtDataKBN) {
         super();
         this.setOriginalData("txtTaishoNendo", txtTaishoNendo);
+        this.setOriginalData("txtHdnTaishoNendo", txtHdnTaishoNendo);
         this.setOriginalData("txtSanteiKubun", txtSanteiKubun);
         this.setOriginalData("txtHokenshaNo", txtHokenshaNo);
         this.setOriginalData("txtShikyuShinseishoSeiriNo", txtShikyuShinseishoSeiriNo);
@@ -73,6 +77,7 @@ public class dgJohoIchiran_Row extends DataRow {
         this.setOriginalData("txtSofuNengetsu", txtSofuNengetsu);
         this.setOriginalData("txtDataKBN", txtDataKBN);
         this.txtTaishoNendo = txtTaishoNendo;
+        this.txtHdnTaishoNendo = txtHdnTaishoNendo;
         this.txtSanteiKubun = txtSanteiKubun;
         this.txtHokenshaNo = txtHokenshaNo;
         this.txtShikyuShinseishoSeiriNo = txtShikyuShinseishoSeiriNo;
@@ -87,6 +92,10 @@ public class dgJohoIchiran_Row extends DataRow {
 
     public RString getTxtTaishoNendo() {
         return txtTaishoNendo;
+    }
+
+    public RString getTxtHdnTaishoNendo() {
+        return txtHdnTaishoNendo;
     }
 
     public RString getTxtSanteiKubun() {
@@ -132,6 +141,11 @@ public class dgJohoIchiran_Row extends DataRow {
     public void setTxtTaishoNendo(RString txtTaishoNendo) {
         this.setOriginalData("txtTaishoNendo", txtTaishoNendo);
         this.txtTaishoNendo = txtTaishoNendo;
+    }
+
+    public void setTxtHdnTaishoNendo(RString txtHdnTaishoNendo) {
+        this.setOriginalData("txtHdnTaishoNendo", txtHdnTaishoNendo);
+        this.txtHdnTaishoNendo = txtHdnTaishoNendo;
     }
 
     public void setTxtSanteiKubun(RString txtSanteiKubun) {
