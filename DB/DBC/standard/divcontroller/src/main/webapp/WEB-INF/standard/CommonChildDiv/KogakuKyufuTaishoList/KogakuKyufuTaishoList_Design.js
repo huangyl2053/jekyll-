@@ -60,12 +60,12 @@ var DBC;
                 return "onChange_rdbGekihenkanwaKubun";
             };
 
-            Events.onClick_btnTorikeshi = function () {
-                return "onClick_btnTorikeshi";
-            };
-
             Events.onClick_btnkakutei = function () {
                 return "onClick_btnkakutei";
+            };
+
+            Events.onClick_btnTorikeshi = function () {
+                return "onClick_btnTorikeshi";
             };
             return Events;
         })();
@@ -191,12 +191,12 @@ var DBC;
                 return new UZA.RadioButton(this.convFiledName("rdbGekihenkanwaKubun"));
             };
 
-            Controls.prototype.btnTorikeshi = function () {
-                return new UZA.Button(this.convFiledName("btnTorikeshi"));
-            };
-
             Controls.prototype.btnkakutei = function () {
                 return new UZA.Button(this.convFiledName("btnkakutei"));
+            };
+
+            Controls.prototype.btnTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnTorikeshi"));
             };
 
             Controls.prototype.rowId = function () {

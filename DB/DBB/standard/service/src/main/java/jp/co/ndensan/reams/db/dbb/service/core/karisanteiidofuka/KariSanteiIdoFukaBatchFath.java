@@ -228,9 +228,10 @@ public class KariSanteiIdoFukaBatchFath {
      * @param 当初賦課情報 FukaJoho
      * @param 設定前賦課情報 FukaJoho
      * @param 徴収方法情報 ChoshuHoho
+     * @param 資格喪失事由コード RString
      * @return 設定後賦課の情報
      */
-    public FukaJoho 調定事由設定(FukaJoho 当初賦課情報, FukaJoho 設定前賦課情報, ChoshuHoho 徴収方法情報) {
+    public FukaJoho 調定事由設定(FukaJoho 当初賦課情報, FukaJoho 設定前賦課情報, ChoshuHoho 徴収方法情報, RString 資格喪失事由コード) {
         RString 調定事由1 = RString.EMPTY;
         RString 調定事由2 = RString.EMPTY;
         RString 調定事由3 = RString.EMPTY;
@@ -239,38 +240,23 @@ public class KariSanteiIdoFukaBatchFath {
         boolean flag2 = false;
         boolean flag3 = false;
         boolean flag4 = false;
-        if (ChoteiJiyuCode.年金保険者からの通知.getコード().equals(徴収方法情報.get特別徴収停止事由コード())
-                || ChoteiJiyuCode.保険料額の減額変更.getコード().equals(徴収方法情報.get特別徴収停止事由コード())
-                || ChoteiJiyuCode.徴収方法修正.getコード().equals(徴収方法情報.get特別徴収停止事由コード())
-                || ChoteiJiyuCode.資格喪失特徴中止.getコード().equals(徴収方法情報.get特別徴収停止事由コード())) {
-            調定事由1 = 徴収方法情報.get特別徴収停止事由コード();
+        if (資格喪失事由コード != null && !資格喪失事由コード.isEmpty()
+                && !資格喪失事由コード.equals(当初賦課情報.get調定事由1()) && !資格喪失事由コード.equals(当初賦課情報.get調定事由2())
+                && !資格喪失事由コード.equals(当初賦課情報.get調定事由3()) && !資格喪失事由コード.equals(当初賦課情報.get調定事由4())) {
+            調定事由1 = 資格喪失事由コード;
             flag1 = true;
         }
-        if (RString.isNullOrEmpty(設定前賦課情報.get調定事由1())
-                && RString.isNullOrEmpty(設定前賦課情報.get調定事由2())
-                && RString.isNullOrEmpty(設定前賦課情報.get調定事由3())
-                && RString.isNullOrEmpty(設定前賦課情報.get調定事由4())) {
+        RString 特別徴収停止事由コード = 徴収方法情報.get特別徴収停止事由コード();
+        if (ChoteiJiyuCode.年金保険者からの通知.getコード().equals(特別徴収停止事由コード)
+                || ChoteiJiyuCode.保険料額の減額変更.getコード().equals(特別徴収停止事由コード)
+                || ChoteiJiyuCode.徴収方法修正.getコード().equals(特別徴収停止事由コード)
+                || ChoteiJiyuCode.資格喪失特徴中止.getコード().equals(特別徴収停止事由コード)) {
             if (!flag1) {
-                調定事由1 = ChoteiJiyuCode.その他資格異動.getコード();
+                調定事由1 = 特別徴収停止事由コード;
                 flag1 = true;
-            } else {
-                調定事由2 = ChoteiJiyuCode.その他資格異動.getコード();
+            } else if (!特別徴収停止事由コード.equals(資格喪失事由コード)) {
+                調定事由2 = 特別徴収停止事由コード;
                 flag2 = true;
-            }
-        }
-        if ((!get資格日(当初賦課情報.get資格取得日()).equals(設定前賦課情報.get資格取得日()))
-                || (!get資格事由(当初賦課情報.get資格取得事由()).equals(設定前賦課情報.get資格取得事由()))
-                || (!get資格日(当初賦課情報.get資格喪失日()).equals(設定前賦課情報.get資格喪失日()))
-                || (!get資格事由(当初賦課情報.get資格喪失事由()).equals(設定前賦課情報.get資格喪失事由()))) {
-            if (!flag1) {
-                調定事由1 = ChoteiJiyuCode.資格異動による更正.getコード();
-                flag1 = true;
-            } else if (!flag2) {
-                調定事由2 = ChoteiJiyuCode.資格異動による更正.getコード();
-                flag2 = true;
-            } else {
-                調定事由3 = ChoteiJiyuCode.資格異動による更正.getコード();
-                flag3 = true;
             }
         }
         List<RString> list = new ArrayList<>();
@@ -278,6 +264,41 @@ public class KariSanteiIdoFukaBatchFath {
         list.add(調定事由2);
         list.add(調定事由3);
         list.add(調定事由4);
+        if (RString.isNullOrEmpty(設定前賦課情報.get調定事由1())
+                && RString.isNullOrEmpty(設定前賦課情報.get調定事由2())
+                && RString.isNullOrEmpty(設定前賦課情報.get調定事由3())
+                && RString.isNullOrEmpty(設定前賦課情報.get調定事由4())
+                && !list.contains(ChoteiJiyuCode.その他資格異動.getコード())) {
+            if (!flag1) {
+                list.set(NUM_0, ChoteiJiyuCode.その他資格異動.getコード());
+                flag1 = true;
+            } else if (!flag2) {
+                list.set(NUM_1, ChoteiJiyuCode.その他資格異動.getコード());
+                flag2 = true;
+            } else {
+                list.set(NUM_2, ChoteiJiyuCode.その他資格異動.getコード());
+                flag3 = true;
+            }
+        }
+        if (((!get資格日(当初賦課情報.get資格取得日()).equals(設定前賦課情報.get資格取得日()))
+                || (!get資格事由(当初賦課情報.get資格取得事由()).equals(設定前賦課情報.get資格取得事由()))
+                || (!get資格日(当初賦課情報.get資格喪失日()).equals(設定前賦課情報.get資格喪失日()))
+                || (!get資格事由(当初賦課情報.get資格喪失事由()).equals(設定前賦課情報.get資格喪失事由())))
+                && !list.contains(ChoteiJiyuCode.資格異動による更正.getコード())) {
+            if (!flag1) {
+                list.set(NUM_0, ChoteiJiyuCode.資格異動による更正.getコード());
+                flag1 = true;
+            } else if (!flag2) {
+                list.set(NUM_1, ChoteiJiyuCode.資格異動による更正.getコード());
+                flag2 = true;
+            } else if (!flag3) {
+                list.set(NUM_2, ChoteiJiyuCode.資格異動による更正.getコード());
+                flag3 = true;
+            } else {
+                list.set(NUM_3, ChoteiJiyuCode.資格異動による更正.getコード());
+                flag4 = true;
+            }
+        }
         list = set調定事由(当初賦課情報, 設定前賦課情報, list,
                 flag1, flag2, flag3, flag4);
         FukaJohoBuilder builder = 設定前賦課情報.createBuilderForEdit();
@@ -308,8 +329,9 @@ public class KariSanteiIdoFukaBatchFath {
             boolean flag2,
             boolean flag3,
             boolean flag4) {
-        if (!nullToDate(設定前賦課情報.get老年開始日()).equals(当初賦課情報.get老年開始日())
-                || !nullToDate(設定前賦課情報.get老年廃止日()).equals(当初賦課情報.get老年廃止日())) {
+        if ((!nullToDate(設定前賦課情報.get老年開始日()).equals(当初賦課情報.get老年開始日())
+                || !nullToDate(設定前賦課情報.get老年廃止日()).equals(当初賦課情報.get老年廃止日()))
+                && !list.contains(ChoteiJiyuCode.老齢年金による更正.getコード())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.老齢年金による更正.getコード());
                 flag1 = true;
@@ -324,8 +346,9 @@ public class KariSanteiIdoFukaBatchFath {
                 flag4 = true;
             }
         }
-        if (!nullToDate(設定前賦課情報.get生保開始日()).equals(当初賦課情報.get生保開始日())
-                || !nullToDate(設定前賦課情報.get生保廃止日()).equals(当初賦課情報.get生保廃止日())) {
+        if ((!nullToDate(設定前賦課情報.get生保開始日()).equals(当初賦課情報.get生保開始日())
+                || !nullToDate(設定前賦課情報.get生保廃止日()).equals(当初賦課情報.get生保廃止日()))
+                && !list.contains(ChoteiJiyuCode.生活保護による更正.getコード())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.生活保護による更正.getコード());
                 flag1 = true;
@@ -339,21 +362,17 @@ public class KariSanteiIdoFukaBatchFath {
                 list.set(NUM_3, ChoteiJiyuCode.生活保護による更正.getコード());
                 flag4 = true;
             }
-
         }
-        if (!nullTOZero(設定前賦課情報.get減免額()).equals(当初賦課情報.get減免額())) {
+        if (!nullTOZero(設定前賦課情報.get減免額()).equals(当初賦課情報.get減免額())
+                && !list.contains(ChoteiJiyuCode.減免決定による更正.getコード())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.減免決定による更正.getコード());
-                flag1 = true;
             } else if (!flag2) {
                 list.set(NUM_1, ChoteiJiyuCode.減免決定による更正.getコード());
-                flag2 = true;
             } else if (!flag3) {
                 list.set(NUM_2, ChoteiJiyuCode.減免決定による更正.getコード());
-                flag3 = true;
             } else if (!flag4) {
                 list.set(NUM_3, ChoteiJiyuCode.減免決定による更正.getコード());
-                flag4 = true;
             }
         }
         return list;

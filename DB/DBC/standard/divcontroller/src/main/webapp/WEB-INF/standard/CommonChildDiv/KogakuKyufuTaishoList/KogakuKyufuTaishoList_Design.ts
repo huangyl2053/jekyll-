@@ -1,6 +1,6 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBC {
 
@@ -64,12 +64,12 @@ module DBC {
                 return "onChange_rdbGekihenkanwaKubun";
             }
 
-            public static onClick_btnTorikeshi(): string {
-                return "onClick_btnTorikeshi";
-            }
-
             public static onClick_btnkakutei(): string {
                 return "onClick_btnkakutei";
+            }
+
+            public static onClick_btnTorikeshi(): string {
+                return "onClick_btnTorikeshi";
             }
 
         }
@@ -197,12 +197,12 @@ module DBC {
                 return new UZA.RadioButton(this.convFiledName("rdbGekihenkanwaKubun"));
             }
 
-            public btnTorikeshi(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnTorikeshi"));
-            }
-
             public btnkakutei(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnkakutei"));
+            }
+
+            public btnTorikeshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnTorikeshi"));
             }
 
             public rowId(): UZA.TextBoxNum {

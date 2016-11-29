@@ -133,6 +133,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -177,6 +179,16 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private static final RString 定数_賦課年度 = new RString("賦課年度");
     private static final RString 定数_調定年度 = new RString("調定年度");
     private static final RString 定数_出力順 = new RString("出力順");
+    private static final RString 定数_開始日時 = new RString("仮算定異動賦課抽出開始日時");
+    private static final RString 定数_終了日時 = new RString("仮算定異動賦課抽出終了日時");
+    private static final RString 普徴仮算定異動方法 = new RString("普徴仮算定異動方法");
+    private static final RString 普徴仮算定異動方法_1 = new RString("4月喪失のみ0円にする");
+    private static final RString 普徴仮算定異動方法_2 = new RString("喪失月以降0円にする");
+    private static final RString 時 = new RString("時");
+    private static final RString 分 = new RString("分");
+    private static final RString 秒 = new RString("秒");
+    private static final RString 以上 = new RString("以上");
+    private static final RString 未満 = new RString("未満");
     private static final RString FORMAT_LEFT = new RString("【");
     private static final RString FORMAT_RIGHT = new RString("】");
     private static final RString 年度 = new RString("年度");
@@ -549,7 +561,8 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             fukaBuilder.set職権区分(ShokkenKubun.非該当.getコード());
             fukaBuilder.set賦課市町村コード(get賦課市町村コード(資格情報));
             賦課の情報_設定後 = fukaBuilder.build();
-            賦課の情報_設定後 = 調定事由設定(更正後賦課情報, 賦課の情報_設定後, 徴収方法情報);
+            賦課の情報_設定後 = 調定事由設定(更正後賦課情報, 賦課の情報_設定後, 徴収方法情報,
+                    資格喪失情報Entity.get資格喪失Entity().getShikakuSoshitsuJiyuCode());
             DbT2002FukaJohoTempTableEntity 賦課情報Entity = set賦課情報一時テーブルEntity(賦課の情報_設定後);
             mapper.insert賦課の情報一時テーブル(賦課情報Entity);
         }
@@ -632,7 +645,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                     fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
                     賦課の情報_設定後 = new FukaJoho(fukaJohoRelateEntity);
                 }
-                賦課の情報_設定後 = 調定事由設定(更正前賦課情報, 賦課の情報_設定後, 徴収方法情報);
+                賦課の情報_設定後 = 調定事由設定(更正前賦課情報, 賦課の情報_設定後, 徴収方法情報, RString.EMPTY);
                 DbT2002FukaJohoTempTableEntity 賦課情報Entity = set賦課情報一時テーブルEntity(賦課の情報_設定後);
                 mapper.insert賦課の情報一時テーブル(賦課情報Entity);
             }
@@ -1093,9 +1106,11 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
      * @param 賦課年度 FlexibleYear
      * @param 調定日時 YMDHMS
      * @param 出力順ID Long
+     * @param 抽出開始日時 RDateTime
+     * @param 抽出終了日時 RDateTime
      */
     public void spoolKariSanteiIdoKekkaIchiran(FlexibleYear 調定年度,
-            FlexibleYear 賦課年度, YMDHMS 調定日時, Long 出力順ID) {
+            FlexibleYear 賦課年度, YMDHMS 調定日時, Long 出力順ID, RDateTime 抽出開始日時, RDateTime 抽出終了日時) {
         IKarisanteiIdoKekkaMapper kekkaMapper = mapperProvider.create(IKarisanteiIdoKekkaMapper.class);
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
         builder.set業務コード(GyomuCode.DB介護保険);
@@ -1167,35 +1182,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             }
             eucCsvWriter.close();
         }
-
-        List<RString> 出力条件リスト = new ArrayList<>();
-        RStringBuilder rstbuilder = new RStringBuilder();
-        rstbuilder.append(定数_出力条件);
-        出力条件リスト.add(rstbuilder.toRString());
-        rstbuilder = new RStringBuilder();
-        rstbuilder.append(FORMAT_LEFT.concat(定数_調定年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                .concat(調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
-                        .fillType(FillType.BLANK).toDateString().concat(年度)));
-        出力条件リスト.add(rstbuilder.toRString());
-        rstbuilder = new RStringBuilder();
-        rstbuilder.append(FORMAT_LEFT.concat(定数_賦課年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                .concat(賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
-                        .fillType(FillType.BLANK).toDateString().concat(年度)));
-        出力条件リスト.add(rstbuilder.toRString());
-        rstbuilder = new RStringBuilder();
-        rstbuilder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
-
-        if (outputOrder != null) {
-            List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
-            for (ISetSortItem iSetSortItem : iSetSortItemList) {
-                if (iSetSortItem == iSetSortItemList.get(iSetSortItemList.size() - 1)) {
-                    rstbuilder.append(iSetSortItem.get項目名());
-                } else {
-                    rstbuilder.append(iSetSortItem.get項目名()).append(SIGN);
-                }
-            }
-        }
-        出力条件リスト.add(rstbuilder.toRString());
+        List<RString> 出力条件リスト = get出力条件リスト(調定年度, outputOrder, 賦課年度, 抽出開始日時, 抽出終了日時);
         loadバッチ出力条件リスト(出力条件リスト, 出力ページ数);
     }
 
@@ -1206,7 +1193,6 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
      * @param 出力ページ数 RString
      */
     public void loadバッチ出力条件リスト(List<RString> 出力条件リスト, RString 出力ページ数) {
-
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         RString 導入団体コード = 地方公共団体.getLasdecCode_().value();
         RString 市町村名 = 地方公共団体.get市町村名();
@@ -1889,6 +1875,72 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             pageCount = pageCount + sourceData.getPageCount();
         }
         return new RString(pageCount);
+    }
+
+    private RString format時間(RTime time) {
+        RStringBuilder sb = new RStringBuilder();
+        sb.append(new RString(time.getHour()).padLeft(RString.EMPTY, NUM_2)).append(時)
+                .append(new RString(time.getMinute()).padLeft(RString.EMPTY, NUM_2)).append(分)
+                .append(new RString(time.getSecond()).padLeft(RString.EMPTY, NUM_2)).append(秒);
+        return sb.toRString();
+    }
+
+    private List<RString> get出力条件リスト(FlexibleYear 調定年度, IOutputOrder outputOrder,
+            FlexibleYear 賦課年度, RDateTime 抽出開始日時, RDateTime 抽出終了日時) {
+
+        List<RString> 出力条件リスト = new ArrayList<>();
+        RStringBuilder rstbuilder = new RStringBuilder();
+        rstbuilder.append(定数_出力条件);
+        出力条件リスト.add(rstbuilder.toRString());
+        rstbuilder = new RStringBuilder();
+        rstbuilder.append(FORMAT_LEFT.concat(定数_調定年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                .concat(調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
+                        .fillType(FillType.BLANK).toDateString().concat(年度)));
+        出力条件リスト.add(rstbuilder.toRString());
+        rstbuilder = new RStringBuilder();
+        rstbuilder.append(FORMAT_LEFT.concat(定数_賦課年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                .concat(賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
+                        .fillType(FillType.BLANK).toDateString().concat(年度)));
+        出力条件リスト.add(rstbuilder.toRString());
+        rstbuilder = new RStringBuilder();
+        rstbuilder.append(FORMAT_LEFT.concat(定数_開始日時).concat(FORMAT_RIGHT)
+                .concat(抽出開始日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                .concat(format時間(抽出開始日時.getTime()))
+                .concat(RString.FULL_SPACE).concat(以上));
+        出力条件リスト.add(rstbuilder.toRString());
+        rstbuilder = new RStringBuilder();
+        rstbuilder.append(FORMAT_LEFT.concat(定数_終了日時).concat(FORMAT_RIGHT)
+                .concat(抽出終了日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
+                .concat(format時間(抽出終了日時.getTime()))
+                .concat(RString.FULL_SPACE).concat(未満));
+        出力条件リスト.add(rstbuilder.toRString());
+        rstbuilder = new RStringBuilder();
+        rstbuilder.append(FORMAT_LEFT.concat(普徴仮算定異動方法).concat(FORMAT_RIGHT));
+        RString 普徴仮異動方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定異動方法,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        if (RSTRING_1.equals(普徴仮異動方法)) {
+            rstbuilder.append(普徴仮算定異動方法_1);
+        } else if (RSTRING_2.equals(普徴仮異動方法)) {
+            rstbuilder.append(普徴仮算定異動方法_2);
+        }
+        出力条件リスト.add(rstbuilder.toRString());
+        rstbuilder = new RStringBuilder();
+        rstbuilder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
+
+        if (outputOrder != null) {
+            List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
+            for (ISetSortItem iSetSortItem : iSetSortItemList) {
+                if (iSetSortItem == iSetSortItemList.get(iSetSortItemList.size() - 1)) {
+                    rstbuilder.append(iSetSortItem.get項目名());
+                } else {
+                    rstbuilder.append(iSetSortItem.get項目名()).append(SIGN);
+                }
+            }
+        }
+        出力条件リスト.add(rstbuilder.toRString());
+        return 出力条件リスト;
     }
 
 }

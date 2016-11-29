@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShik
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.ShichosonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekka;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.YokaigoJotaiKubunCode;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.YokaigoJotaiTokyuSochishaKubunCode;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3048ShokanFukushiYoguHanbaihiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3118ShikibetsuNoKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7112ShokanShuruiShikyuGendoGakuDac;
@@ -123,7 +123,8 @@ public class FukushiyoguKonyuhiShikyuShinsei {
     /**
      * {@link InstanceProvider#create}により生成されたインタフェースを返します。
      *
-     * @return {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuShinsei}
+     * @return
+     * {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuShinsei}
      */
     public static FukushiyoguKonyuhiShikyuShinsei createInstance() {
         return InstanceProvider.create(FukushiyoguKonyuhiShikyuShinsei.class);
@@ -816,7 +817,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         IFukushiyoguKonyuhiShikyuGendogakuMapper mapper
                 = mapperProvider.create(IFukushiyoguKonyuhiShikyuGendogakuMapper.class);
         ServiceShuruiCodeParameter parameter = ServiceShuruiCodeParameter.createParameter(被保険者番号, サービス提供年月);
-        YokaigoJotaiKubunCode 要介護認定状態区分コード_旧措置者フラグ = mapper.select要介護認定状態区分コード(parameter);
+        YokaigoJotaiTokyuSochishaKubunCode 要介護認定状態区分コード_旧措置者フラグ = mapper.select要介護認定状態区分コード(parameter);
 
         if (null == 要介護認定状態区分コード_旧措置者フラグ || 要介護認定状態区分コード_旧措置者フラグ.getYokaigoJotaiKubunCode() == null) {
             return ServiceShuruiCode.EMPTY;

@@ -855,14 +855,19 @@ public class HanyoListKokuhorenJukyushaResult {
     private RString set日付編集(RString value) {
         RString 日付 = RString.EMPTY;
         if (processParameter.is日付編集() && !RString.isNullOrEmpty(value)) {
-            日付 = value;
-            if (value.length() == LENGTH) {
-                if (FlexibleYearMonth.canConvert(value)) {
-                    日付 = new FlexibleYearMonth(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-                }
-            } else if (FlexibleDate.canConvert(value)) {
-                日付 = new FlexibleDate(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+            日付 = set日付編集(日付, value);
+        }
+        return 日付;
+    }
+
+    private RString set日付編集(RString 日付, RString value) {
+        日付 = value;
+        if (value.length() == LENGTH) {
+            if (FlexibleYearMonth.canConvert(value)) {
+                日付 = new FlexibleYearMonth(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
             }
+        } else if (FlexibleDate.canConvert(value)) {
+            日付 = new FlexibleDate(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
         return 日付;
     }

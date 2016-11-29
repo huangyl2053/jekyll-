@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyotakuServiceRirekiIchiranEntityResult implements Serializable, Cloneable {
+public class KyotakuServiceRirekiIchiranEntityResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private KyotakuServiceRirekiIchiranEntity entity;

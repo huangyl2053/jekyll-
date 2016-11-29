@@ -191,6 +191,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 div.getTabShinseiTorokuPanel3().setVisible(true);
                 div.getTabShinseiTorokuPanel4().setVisible(true);
             }
+            if (訂正WK) {
+                div.getTxtShikyuShinseiKubun().setValue(KaigoGassan_ShinseiKbn.
+                        toValue(高額合算申請書保持.get高額合算申請書().get(0).get支給申請区分()).get名称());
+            }
         }
         return 高額合算申請書保持;
     }
@@ -310,7 +314,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             div.getDdlShikyuShinseiKeitai().setDisabled(true);
             div.getChkKofuShinseiUmu().setDisabled(true);
         } else {
-            div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(RSTRING_00);
             div.getDdlShikyuShinseiKeitai().setDisabled(false);
             div.getChkKofuShinseiUmu().setDisabled(false);
         }
@@ -1235,12 +1238,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 div.getTxtIryoShikyuShinseishoSeiriBango4().setValue(国保支給申請書整理番号.substring(INT_11));
             }
         }
-//        if (RString.isNullOrEmpty(高額合算申請書.get支給申請区分())) {
-//            div.getTxtShikyuShinseiKubun().clearValue();
-//        } else {
-//            div.getTxtShikyuShinseiKubun().setValue(
-//                    KaigoGassan_ShinseiKbn.toValue(高額合算申請書.get支給申請区分()).get名称());
-//        }
         if (RString.isNullOrEmpty(高額合算申請書.get支給申請形態())) {
             div.getDdlShikyuShinseiKeitai().setSelectedIndex(INT_0);
         } else {

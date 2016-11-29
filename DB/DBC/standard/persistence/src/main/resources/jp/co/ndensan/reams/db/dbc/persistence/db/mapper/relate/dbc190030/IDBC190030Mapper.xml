@@ -39,10 +39,10 @@
                      OR A."shikakuSoshitsuYMD" IS NULL 
                      OR A."shikakuSoshitsuYMD" = ''
                    )
-                ) AS A
                 <if test="被保険者番号flag">
                     AND A."hihokenshaNo" = #{被保険者番号}
                 </if>
+                ) AS A
             ORDER BY A.TEMP_hihokenshaNo
     </select>
     

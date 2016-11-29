@@ -586,7 +586,8 @@ public class KarisanteiIdoTsuchishoHakkoSyori {
 
         set計算後情報_更正後(entity.get計算後情報_更正後(), tmpEntity);
 
-        if (entity.get対象者_追加含む_情報_更正後() != null) {
+        if (entity.get対象者_追加含む_情報_更正後() != null && entity.get対象者_追加含む_情報_更正後().getShoriNendo() != null
+                && !entity.get対象者_追加含む_情報_更正後().getShoriNendo().isEmpty()) {
             set対象者追加含む情報_更正後(entity.get対象者_追加含む_情報_更正後(), tmpEntity);
         }
 

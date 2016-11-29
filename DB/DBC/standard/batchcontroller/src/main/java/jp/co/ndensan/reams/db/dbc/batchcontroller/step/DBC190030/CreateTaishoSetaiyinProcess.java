@@ -263,29 +263,24 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     @Override
     protected void createWriter() {
+        PageBreaker<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> breaker
+                = new KijunShunyugakuTekiyoShinseishoHakkoIchiranPageBreak(改頁項目リスト);
+        dBC200088ReportWriter
+                = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200088.getReportId().value()).addBreak(breaker).create();
+        dBC200088SourceWriter = new ReportSourceWriter<>(dBC200088ReportWriter);
 
-        if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(this.parameter.get抽出条件())) {
-            PageBreaker<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> breaker
-                    = new KijunShunyugakuTekiyoShinseishoHakkoIchiranPageBreak(改頁項目リスト);
-            dBC200088ReportWriter
-                    = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200088.getReportId().value()).addBreak(breaker).create();
-            dBC200088SourceWriter = new ReportSourceWriter<>(dBC200088ReportWriter);
-
-            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
-                    UzUDE0831EucAccesslogFileType.Csv);
-            eucFilePath = Path.combinePath(manager.getEucOutputDirectry(),
-                    出力ファイル名);
-            eucCsvWriter = BatchWriters.csvWriter(TaishoSetaiyinCsvEntity.class).
-                    filePath(eucFilePath).
-                    setDelimiter(コンマ).
-                    setEnclosure(ダブル引用符).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(true).
-                    build();
-
-        }
-
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
+                UzUDE0831EucAccesslogFileType.Csv);
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(),
+                出力ファイル名);
+        eucCsvWriter = BatchWriters.csvWriter(TaishoSetaiyinCsvEntity.class).
+                filePath(eucFilePath).
+                setDelimiter(コンマ).
+                setEnclosure(ダブル引用符).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build();
     }
 
     @Override
@@ -318,6 +313,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         }
         if (ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(this.parameter.get抽出条件())) {
             if (無条件.equals(parameter.get抽出対象())) {
+                personalDataList.add(toPersonalData(isNullOrEmpty(対象世帯員.getHihokenshaNo()), getShikibetsuCode(対象世帯員.getShikibetsuCode())));
                 KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 申請一覧Entity = this.set申請一覧Entity(entity);
                 KijunShunyugakuTekiyoShinseishoHakkoIchiranReport 申請一覧Report = new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(
                         申請一覧Entity, parameter.get市町村コード().getColumnValue(), parameter.get市町村名(), 出力順リスト, 改頁項目名リスト, parameter.get処理年度());
@@ -326,6 +322,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 eucCsvWriter.writeLine(申請書発行一覧CSV);
             }
             if (有条件.equals(parameter.get抽出対象()) && new RString("1").equals(対象世帯員.getShuturyokuUmu())) {
+                personalDataList.add(toPersonalData(isNullOrEmpty(対象世帯員.getHihokenshaNo()), getShikibetsuCode(対象世帯員.getShikibetsuCode())));
                 KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 申請一覧Entity = this.set申請一覧Entity(entity);
                 KijunShunyugakuTekiyoShinseishoHakkoIchiranReport 申請一覧Report = new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(
                         申請一覧Entity, parameter.get市町村コード().getColumnValue(), parameter.get市町村名(), 出力順リスト, 改頁項目名リスト, parameter.get処理年度());
@@ -343,7 +340,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     @Override
     protected void afterExecute() {
-        getアクセスログ();
         if (ShinseishoTorokuChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())) {
             dBC100063ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100063.getReportId().value()).create();
             dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
@@ -403,9 +399,16 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             dBC100064ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
             dBC100064SourceWriter0 = new ReportSourceWriter<>(dBC100064ReportWriter0);
 
+            if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(this.parameter.get抽出条件())) {
+                get帳票データ作成_異動分();
+            }
+            if (ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(this.parameter.get抽出条件())) {
+                get帳票データ作成_被保険者番号();
+            }
+            出力条件表();
         }
 
-        if (!flag && this.parameter.get一覧表CSV出力フラグ() && ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(this.parameter.get抽出条件())) {
+        if (!flag && this.parameter.get一覧表CSV出力フラグ()) {
             TaishoSetaiyinCsvEntity 申請書発行一覧CSV = this.get申請書発行一覧CSV(null);
             eucCsvWriter.writeLine(申請書発行一覧CSV);
             KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 収入額適用申請書一覧表 = this.set申請一覧Entity(null);
@@ -413,23 +416,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                     収入額適用申請書一覧表, parameter.get市町村コード().getColumnValue(), parameter.get市町村名(), 出力順リスト, 改頁項目名リスト, parameter.get処理年度());
             申請一覧Report.writeBy(dBC200088SourceWriter);
         }
-
-        List<CreateTaishoSetaiyinEntity> taishoSetaiyinList = new ArrayList();
-        for (int i = 0; i < this.createTaishoSetaiyinList.size(); i++) {
-            if (createTaishoSetaiyinList.get(i).get対象世帯員() != null
-                    && new RString("1").equals(createTaishoSetaiyinList.get(i).get対象世帯員().getShuturyokuUmu())) {
-                taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
-                if (i == this.createTaishoSetaiyinList.size() - 1) {
-                    this.write帳票(taishoSetaiyinList);
-                } else if (isChangeShotaiCode(this.createTaishoSetaiyinList.get(i).get対象世帯員(),
-                        this.createTaishoSetaiyinList.get(i + 1).get対象世帯員())) {
-                    this.write帳票(taishoSetaiyinList);
-                    taishoSetaiyinList.clear();
-                }
-            }
-            お知らせ通知書(createTaishoSetaiyinList, i);
-        }
-
         if (null != dBC200088ReportWriter) {
             dBC200088ReportWriter.close();
         }
@@ -446,34 +432,70 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
         if (null != eucCsvWriter) {
             eucCsvWriter.close();
-            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+            manager.spool(eucFilePath, getアクセスログ());
         }
-        出力条件表();
     }
 
-    private void お知らせ通知書(List<CreateTaishoSetaiyinEntity> taishoSetaiyinList, int i) {
-        if (ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(this.parameter.get抽出条件())
-                && 無条件.equals(parameter.get抽出対象())) {
-            taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
-            if (i == this.createTaishoSetaiyinList.size() - 1) {
-                this.write帳票(taishoSetaiyinList);
-            } else if (isChangeShotaiCode(this.createTaishoSetaiyinList.get(i).get対象世帯員(),
-                    this.createTaishoSetaiyinList.get(i + 1).get対象世帯員())) {
-                this.write帳票(taishoSetaiyinList);
-                taishoSetaiyinList.clear();
+    private void get帳票データ作成_異動分() {
+        List<CreateTaishoSetaiyinEntity> taishoSetaiyinList = new ArrayList();
+        RString shotaiCode = RString.EMPTY;
+        for (int i = 0; i < this.createTaishoSetaiyinList.size(); i++) {
+            if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(this.parameter.get抽出条件())
+                    && createTaishoSetaiyinList.get(i).get対象世帯員() != null
+                    && new RString("1").equals(createTaishoSetaiyinList.get(i).get対象世帯員().getShuturyokuUmu())) {
+                if (RString.isNullOrEmpty(shotaiCode)) {
+                    taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
+                    shotaiCode = createTaishoSetaiyinList.get(i).get対象世帯員().getShotaiCode();
+                } else if (!shotaiCode.equals(createTaishoSetaiyinList.get(i).get対象世帯員().getShotaiCode())) {
+                    this.write帳票(taishoSetaiyinList);
+                    shotaiCode = createTaishoSetaiyinList.get(i).get対象世帯員().getShotaiCode();
+                    taishoSetaiyinList.clear();
+                    taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
+                } else {
+                    taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
+                }
             }
         }
-        if (ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(this.parameter.get抽出条件())
-                && 有条件.equals(parameter.get抽出対象())
-                && new RString("1").equals(createTaishoSetaiyinList.get(i).get対象世帯員().getShuturyokuUmu())) {
-            taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
-            if (i == this.createTaishoSetaiyinList.size() - 1) {
-                this.write帳票(taishoSetaiyinList);
-            } else if (isChangeShotaiCode(this.createTaishoSetaiyinList.get(i).get対象世帯員(),
-                    this.createTaishoSetaiyinList.get(i + 1).get対象世帯員())) {
-                this.write帳票(taishoSetaiyinList);
-                taishoSetaiyinList.clear();
+        if (!taishoSetaiyinList.isEmpty()) {
+            this.write帳票(taishoSetaiyinList);
+        }
+    }
+
+    private void get帳票データ作成_被保険者番号() {
+        List<CreateTaishoSetaiyinEntity> taishoSetaiyinList = new ArrayList();
+        RString shotaiCode = RString.EMPTY;
+        for (int i = 0; i < this.createTaishoSetaiyinList.size(); i++) {
+            if (ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(this.parameter.get抽出条件())
+                    && 無条件.equals(parameter.get抽出対象())) {
+                if (RString.isNullOrEmpty(shotaiCode)) {
+                    taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
+                    shotaiCode = createTaishoSetaiyinList.get(i).get対象世帯員().getShotaiCode();
+                } else if (!shotaiCode.equals(createTaishoSetaiyinList.get(i).get対象世帯員().getShotaiCode())) {
+                    this.write帳票(taishoSetaiyinList);
+                    shotaiCode = createTaishoSetaiyinList.get(i).get対象世帯員().getShotaiCode();
+                    taishoSetaiyinList.clear();
+                    taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
+                } else {
+                    taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
+                }
+            } else if (ShinseishoTorokuChushutsuJoken.被保険者番号.getコード().equals(this.parameter.get抽出条件())
+                    && 有条件.equals(parameter.get抽出対象())
+                    && new RString("1").equals(createTaishoSetaiyinList.get(i).get対象世帯員().getShuturyokuUmu())) {
+                if (RString.isNullOrEmpty(shotaiCode)) {
+                    taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
+                    shotaiCode = createTaishoSetaiyinList.get(i).get対象世帯員().getShotaiCode();
+                } else if (!shotaiCode.equals(createTaishoSetaiyinList.get(i).get対象世帯員().getShotaiCode())) {
+                    this.write帳票(taishoSetaiyinList);
+                    shotaiCode = createTaishoSetaiyinList.get(i).get対象世帯員().getShotaiCode();
+                    taishoSetaiyinList.clear();
+                    taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
+                } else {
+                    taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
+                }
             }
+        }
+        if (!taishoSetaiyinList.isEmpty()) {
+            this.write帳票(taishoSetaiyinList);
         }
     }
 

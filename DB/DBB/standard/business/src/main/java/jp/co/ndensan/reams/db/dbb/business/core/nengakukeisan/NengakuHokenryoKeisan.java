@@ -153,13 +153,10 @@ public class NengakuHokenryoKeisan {
 
         Decimal result = new Decimal(0);
         Decimal kosuu;
-        Decimal wariai;
 
         for (NengaokuHokenryoHoji nengakuHokenryoHoji : nengakuHokenryoHojiList) {
             kosuu = new Decimal(nengakuHokenryoHoji.getKosuu());
-            wariai = kosuu.divide(NENTSUKISU);
-            result = result.add(kijunNengakuShutoku(input.get年額制御情報(), nengakuHokenryoHoji).multiply(wariai));
-
+            result = result.add(kijunNengakuShutoku(input.get年額制御情報(), nengakuHokenryoHoji).divide(NENTSUKISU).multiply(kosuu));
         }
         return result;
     }

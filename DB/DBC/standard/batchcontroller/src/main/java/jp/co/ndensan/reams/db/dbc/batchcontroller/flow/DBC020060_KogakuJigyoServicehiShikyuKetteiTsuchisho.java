@@ -38,7 +38,7 @@ public class DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchisho
     private static final int INDEX_6 = 6;
     private static final RString 決定日一括更新区分_2 = new RString("2");
     private static final RString 更新する = new RString("2");
-    private static long jobId;
+    private long jobId;
 
     @Override
     protected void defineFlow() {
@@ -96,6 +96,7 @@ public class DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchisho
     protected IBatchFlowCommand updateDbT3110JigyoKogakuShikyuShinseiProcess() {
         return loopBatch(UpdateDbT3110JigyoKogakuShikyuShinseiProcess.class).arguments(createParameter()).define();
     }
+
     /**
      * 帳票発行です。
      *

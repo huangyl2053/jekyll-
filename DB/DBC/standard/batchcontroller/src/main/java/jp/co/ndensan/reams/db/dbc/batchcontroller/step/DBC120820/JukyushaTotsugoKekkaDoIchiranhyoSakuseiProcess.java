@@ -394,11 +394,9 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
         if (null == 年月日 || RString.EMPTY.equals(年月日.trim())) {
             return RString.EMPTY;
         }
-        if (FlexibleDate.canConvert(年月日.trim())) {
-            if (new FlexibleDate(年月日.trim()).isWareki()) {
-                return new FlexibleDate(年月日.trim()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                        .fillType(FillType.BLANK).toDateString();
-            }
+        if (FlexibleDate.canConvert(年月日.trim()) && new FlexibleDate(年月日.trim()).isWareki()) {
+            return new FlexibleDate(年月日.trim()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
         }
         return 年月日.trim();
     }

@@ -499,7 +499,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
         if (受給者台帳.getKyuSochishaFlag()) {
             output.set受給旧措置(文字_旧措置者);
         }
-        RString みなし要介護区分コード = getColumnValue(受給者台帳.getShiteiServiceShurui01());
+        RString みなし要介護区分コード = getColumnValue(受給者台帳.getMinashiCode());
         if (!RString.isNullOrEmpty(みなし要介護区分コード)) {
             output.set受給みなし更新認定(get受給みなし更新認定(みなし要介護区分コード));
         }

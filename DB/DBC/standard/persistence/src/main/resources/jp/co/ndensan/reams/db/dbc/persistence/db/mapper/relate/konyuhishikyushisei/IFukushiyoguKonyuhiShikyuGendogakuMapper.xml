@@ -108,7 +108,7 @@
         JukyushaDaicho."edaban" DESC
         LIMIT 1
     </select>
-     <resultMap id="Result_yokaigoJotaiKubunCode" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.YokaigoJotaiKubunCode" autoMapping="true">
+     <resultMap id="Result_yokaigoJotaiKubunCode" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.YokaigoJotaiTokyuSochishaKubunCode" autoMapping="true">
             <result property="yokaigoJotaiKubunCode" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
             <result property="kyuSochishaFlag" column="kyuSochishaFlag"/>
     </resultMap>
