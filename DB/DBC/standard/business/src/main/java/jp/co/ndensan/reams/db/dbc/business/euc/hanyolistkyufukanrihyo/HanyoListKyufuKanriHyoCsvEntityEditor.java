@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkyufukanrihyo;
 
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.JigyoshoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.ServiceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710080.HanyoListKyufuKanriHyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710080.HanyoListKyufuKanriHyoCsvEntity;
@@ -448,7 +449,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
             csvEntity.setサービス事業者名(entity.getサービス事業者().getJigyoshaName().getColumnValue());
         }
         if (!RString.isNullOrEmpty(entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode())) {
-            csvEntity.set事業者区分(JigyoshoKubun.toValue(
+            csvEntity.set事業者区分(ServiceShikibetsuCode.toValue(
                     entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode()).get名称());
         }
         ServiceShuruiCode serviceShuruiCode = entity.getServiceShuruiCode();
