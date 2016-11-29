@@ -1,6 +1,10 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,6 +43,7 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
     private static final int 定数_3 = 3;
     private static final RString アンダーライン = new RString("_");
     private static final RString ドット = new RString(".");
+    private static final int 配列 = 1024000;
 
     private static final RString MESSAGE_処理年月 = new RString("処理年月");
     private static final RString MESSAGE_保存先フォルダ = new RString("保存先フォルダ");
@@ -80,7 +85,10 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
             新ファイル名.append(拡張子);
             File from = new File(保存先フォルダ + File.separator + fileName);
             File to = new File(保存先フォルダ + File.separator + 新ファイル名.toString());
-            if (!from.renameTo(to)) {
+            try {
+                copyFile(from, to);
+            } catch (Exception ex) {
+                RString msg = new RString("A usuless message to confirm whether the program is running here!");
                 throw new BatchInterruptedException(UrErrorMessages.ファイルWRITEエラー.getMessage().
                         replace(新ファイル名.toString()).toString());
             }
@@ -108,5 +116,28 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
             }
         }
         return true;
+    }
+
+    private void copyFile(File sourceFile, File targetFile) throws Exception {
+        BufferedInputStream inBuff = null;
+        BufferedOutputStream outBuff = null;
+        try {
+            inBuff = new BufferedInputStream(new FileInputStream(sourceFile));
+            outBuff = new BufferedOutputStream(new FileOutputStream(targetFile));
+            //CHECKSTYLE IGNORE IllegalToken FOR NEXT 1 LINES
+            byte[] b = new byte[配列];
+            int len;
+            while ((len = inBuff.read(b)) != -1) {
+                outBuff.write(b, 0, len);
+            }
+            outBuff.flush();
+        } finally {
+            if (inBuff != null) {
+                inBuff.close();
+            }
+            if (outBuff != null) {
+                outBuff.close();
+            }
+        }
     }
 }
