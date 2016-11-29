@@ -235,7 +235,7 @@ public class KijunShunyuShinseiTourokuHandler {
                 管理情報履歴番号 = 管理情報.get履歴番号();
                 List<KijunShunyugakuTekiyoKanri> 基準収入額適用管理情報明細List = KijunShunyuShinseiTourokuManager
                         .createInstance().get基準収入額適用管理情報BY世帯コード(管理情報世帯コード, 管理情報年度, 管理情報履歴番号);
-                RString key = 管理情報世帯コード.value().concat(getWarekiYear(管理情報年度)).concat(new RString(管理情報履歴番号));
+                RString key = 管理情報世帯コード.value().concat(getWarekiYear(管理情報年度)).concat(new RString(管理情報履歴番号).padLeft("0", NUM_4));
                 基準収入Map.put(key, 基準収入額適用管理情報明細List);
                 List<KijunShunyuShinseiDate> 基準収入額データList = get基準収入額データ(管理情報, 基準収入額適用管理情報明細List);
                 rowList.add(set画面の初期化項目(管理情報, row, 基準収入額データList));
