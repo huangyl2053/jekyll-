@@ -82,7 +82,8 @@ public class RiyoshaFutanWariaiHanteiManager {
     /**
      * 初期化メソッドです。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link RiyoshaFutanWariaiHanteiManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link RiyoshaFutanWariaiHanteiManager}のインスタンス
      */
     public static RiyoshaFutanWariaiHanteiManager createInstance() {
         return InstanceProvider.create(RiyoshaFutanWariaiHanteiManager.class);
@@ -502,12 +503,13 @@ public class RiyoshaFutanWariaiHanteiManager {
             List<DbV2512KaigoShotokuNewestEntity> 介護所得情報) {
         利用者負担割合根拠Temp.setNendo(年度);
         利用者負担割合根拠Temp.setHihokenshaNo(被保険者番号);
-        利用者負担割合根拠Temp.setSetaiinHihokenshaNo(被保険者台帳.get被保険者番号());
+        if (被保険者台帳 != null) {
+            利用者負担割合根拠Temp.setSetaiinHihokenshaNo(被保険者台帳.get被保険者番号());
+        }
         if (介護所得情報 != null && !介護所得情報.isEmpty()) {
             利用者負担割合根拠Temp.setSetaiinShotokuRirekiNo(new Decimal(Integer.parseInt(
                     Long.toString(介護所得情報.get(0).getRirekiNo()))));
         }
-
     }
 
     private void get利用者負担割合明細Temp(
@@ -521,20 +523,28 @@ public class RiyoshaFutanWariaiHanteiManager {
             HanteiTaishoshaTempEntity 判定対象者Temp,
             RiyoshaFutanWariaiMeisaiTempEntity 利用者負担割合明細Temp) {
         利用者負担割合明細Temp.setHihokenshaNo(被保険者番号);
-        利用者負担割合明細Temp.setEdaNo(Integer.parseInt(被保険者台帳.get枝番().toString()));
-        if (!RString.isNullOrEmpty(被保険者台帳.get被保険者区分コード())) {
-            利用者負担割合明細Temp.setShikakuKubun(被保険者台帳.get被保険者区分コード().padZeroToLeft(1));
+        if (被保険者台帳 != null) {
+            利用者負担割合明細Temp.setEdaNo(Integer.parseInt(被保険者台帳.get枝番().toString()));
+            if (!RString.isNullOrEmpty(被保険者台帳.get被保険者区分コード())) {
+                利用者負担割合明細Temp.setShikakuKubun(被保険者台帳.get被保険者区分コード().padZeroToLeft(1));
+            }
         }
-        利用者負担割合明細Temp.setFutanWariaiKubun(負担割合判定の結果.get負担割合区分());
+        if (負担割合判定の結果 != null) {
+            利用者負担割合明細Temp.setFutanWariaiKubun(負担割合判定の結果.get負担割合区分());
+            利用者負担割合明細Temp.setHanteiKubun(負担割合判定の結果.get判定区分());
+        }
         利用者負担割合明細Temp.setYukoKaishiYMD(FlexibleDate.EMPTY);
         利用者負担割合明細Temp.setYukoShuryoYMD(FlexibleDate.EMPTY);
         Decimal 年金収入合計 = Decimal.ZERO;
         Decimal その他の合計所得金額 = Decimal.ZERO;
         if (介護所得情報list != null && !介護所得情報list.isEmpty()) {
             for (DbV2512KaigoShotokuNewestEntity 介護所得情報 : 介護所得情報list) {
-                if (isその他の合計所得金額(介護所得情報.getNenkiniShotokuGaku(), 介護所得情報.getGokeiShotokuGaku())) {
-                    その他の合計所得金額 = その他の合計所得金額.add(介護所得情報.getGokeiShotokuGaku().
-                            subtract(介護所得情報.getNenkiniShotokuGaku()));
+                Decimal gokeiShotokuGaku = 介護所得情報.getGokeiShotokuGaku();
+                Decimal nenkiniShotokuGaku = 介護所得情報.getNenkiniShotokuGaku();
+                if (isその他の合計所得金額(介護所得情報.getNenkiniShotokuGaku(), 介護所得情報.getGokeiShotokuGaku())
+                        && gokeiShotokuGaku != null && nenkiniShotokuGaku != null) {
+                    その他の合計所得金額 = その他の合計所得金額.add(gokeiShotokuGaku.
+                            subtract(nenkiniShotokuGaku));
                 }
                 if (介護所得情報.getNenkiniShotokuGaku() != null) {
                     年金収入合計 = 年金収入合計.add(介護所得情報.getNenkiniShotokuGaku());
@@ -548,9 +558,11 @@ public class RiyoshaFutanWariaiHanteiManager {
         利用者負担割合明細Temp.setKoseiRiyu(RString.EMPTY);
         利用者負担割合明細Temp.setSetaiCd(世帯コード);
         利用者負担割合明細Temp.setKoseiJiyu(RString.EMPTY);
-        利用者負担割合明細Temp.setHanteiKubun(負担割合判定の結果.get判定区分());
-        利用者負担割合明細Temp.setNinteiYukoKaishiDate(判定対象者Temp.getNinteiYukoKaishiDate());
-        if (生活保護該当情報Temp.getJukyuKaishiYMD() != null && !生活保護該当情報Temp.getJukyuKaishiYMD().isEmpty()) {
+        if (判定対象者Temp != null) {
+            利用者負担割合明細Temp.setNinteiYukoKaishiDate(判定対象者Temp.getNinteiYukoKaishiDate());
+        }
+        if (生活保護該当情報Temp != null && 生活保護該当情報Temp.getJukyuKaishiYMD() != null
+                && !生活保護該当情報Temp.getJukyuKaishiYMD().isEmpty()) {
             利用者負担割合明細Temp.setJukyuKaishiYMD(new FlexibleDate(生活保護該当情報Temp.getJukyuKaishiYMD()));
         }
     }
@@ -559,10 +571,7 @@ public class RiyoshaFutanWariaiHanteiManager {
         if (nenkiniShotokuGaku == null || gokeiShotokuGaku == null) {
             return false;
         }
-        if (nenkiniShotokuGaku.compareTo(gokeiShotokuGaku) < 0) {
-            return true;
-        }
-        return false;
+        return nenkiniShotokuGaku.compareTo(gokeiShotokuGaku) < 0;
     }
 
     private void get生活保護該当情報Temp(
@@ -796,9 +805,7 @@ public class RiyoshaFutanWariaiHanteiManager {
             }
         }
         List<SetaiinShikibetsuCd> tempList = new ArrayList<>();
-        for (RString code : 識別コードMap.keySet()) {
-            tempList.add(識別コードMap.get(code));
-        }
+        tempList.addAll(識別コードMap.values());
         return tempList;
     }
 

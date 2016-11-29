@@ -368,7 +368,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity reportEntity2 = getReportEntity(一時Entity, 宛名情報, 口座情報);
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport report2
                     = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiReport(reportEntity2, 連番, getタイトル(一時Entity), get通知書定型文(),
-                            ninshoshaSource2, 帳票制御共通情報, 金融機関コード, compSofubutsuAtesakiソース);
+                            ninshoshaSource2, 帳票制御共通情報, compSofubutsuAtesakiソース);
             report2.writeBy(reportSourceWriter2);
         } else if (帳票タイプ_3.equals(帳票タイプ)) {
             KogakuKetteiTsuchiShoEntity reportEntity3 = getShoSealerReportEntity(一時Entity, 宛名情報, 口座情報);
