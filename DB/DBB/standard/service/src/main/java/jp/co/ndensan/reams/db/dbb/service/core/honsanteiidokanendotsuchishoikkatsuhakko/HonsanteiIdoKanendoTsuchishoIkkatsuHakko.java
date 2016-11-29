@@ -118,7 +118,6 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
     private static final int INT_12 = 12;
     private static final int INT_13 = 13;
     private static final int INT_14 = 14;
-    private static final int INT_15 = 15;
     private static final RString 定値区分_0 = new RString("0");
     private static final RString 定値区分_1 = new RString("1");
     private static final RString 定値区分_2 = new RString("2");
