@@ -89,6 +89,7 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
     private static final int INT_8 = 8;
     private static final int INT_10 = 10;
     private static final int INT_20 = 20;
+    private static final RString 銀行 = new RString("銀行");
 
     /**
      * コンストラクタ
@@ -543,9 +544,9 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
                 csvEntity.set銀行郵便区分(Kaigogassan_KinyuKikanKubun.ゆうちょ.get名称());
                 csvEntity.set支店コード(口座.get店番());
                 csvEntity.set支店名カナ(RString.EMPTY);
-                csvEntity.set支店名(RString.EMPTY);
+                csvEntity.set支店名(口座.get店名());
             } else {
-                csvEntity.set銀行郵便区分(Kaigogassan_KinyuKikanKubun.普銀.get名称());
+                csvEntity.set銀行郵便区分(銀行);
                 KinyuKikanShitenCode 支店コード = 口座.get支店コード();
                 csvEntity.set支店コード(支店コード != null ? 支店コード.getColumnValue() : RString.EMPTY);
                 csvEntity.set支店名カナ(支店 != null ? 支店.get支店カナ名称() : RString.EMPTY);
