@@ -10,7 +10,6 @@
         <include refid="selectShinsakaiWariateJohoEntity" />
     </select>
 
-    <!-- TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 -->
     <sql id="selectShinsakaiWariateJohoEntity">
         SELECT
         DbT5502ShinsakaiWariateJoho.*,
@@ -63,7 +62,6 @@
     </select>
 
 
-    <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
     <resultMap id="resultMap_ShinsakaiWariateJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoRelateEntity" autoMapping="true">
         <id column="dbT5502ShinsakaiWariateJoho_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id column="dbT5502ShinsakaiWariateJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>

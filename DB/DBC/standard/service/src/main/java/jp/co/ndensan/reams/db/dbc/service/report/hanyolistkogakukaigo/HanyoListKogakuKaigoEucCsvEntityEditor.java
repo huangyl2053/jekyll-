@@ -411,7 +411,6 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set消除届出日(消除届出日 != null
                 ? new RString(消除届出日.toString())
                 : RString.EMPTY);
-        //  TODO 宛名・本人・は不明です
         csvEntity.set転出入理由(RString.EMPTY);
         YubinNo 前住所郵便番号 = entity.get宛名().getTennyumaeYubinNo();
         csvEntity.set前住所郵便番号(前住所郵便番号 != null

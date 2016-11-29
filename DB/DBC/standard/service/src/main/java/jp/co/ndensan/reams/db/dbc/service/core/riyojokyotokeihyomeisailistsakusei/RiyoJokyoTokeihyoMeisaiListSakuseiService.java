@@ -410,6 +410,7 @@ public class RiyoJokyoTokeihyoMeisaiListSakuseiService {
         利用状況統計表一時.setShafukuKeigengaku(初期金額または日数_0);
         利用状況統計表一時.setShafukuKeigengoRiyoshaFutangaku(初期金額または日数_0);
         利用状況統計表一時.setMeisaiOutFlag(FLAG_FALSE);
+        利用状況統計表一時.setTaishogoJotaiCode(RString.EMPTY);
         return 利用状況統計表一時;
     }
 

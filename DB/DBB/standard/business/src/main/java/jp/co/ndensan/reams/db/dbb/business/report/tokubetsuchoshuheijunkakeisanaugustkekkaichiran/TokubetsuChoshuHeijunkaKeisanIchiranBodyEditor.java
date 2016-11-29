@@ -323,6 +323,9 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                     new Code(仮徴収年金コード.substring(NUM_0, NUM_3)), FlexibleDate.getNowDate());
         }
+        if (item.get賦課市町村コード() != null) {
+            source.shichosonCode = item.get賦課市町村コード().value();
+        }
 
         set変更後特徴額と普通仮徴収額外(item, source);
 
