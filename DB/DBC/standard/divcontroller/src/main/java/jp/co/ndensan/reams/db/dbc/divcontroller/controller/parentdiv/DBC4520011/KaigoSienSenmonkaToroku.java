@@ -171,11 +171,10 @@ public class KaigoSienSenmonkaToroku {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (状態_追加.equals(div.getOperateState())) {
-                ValidationMessageControlPairs pairs = getValidationHandler(div).validate();
-                if (pairs.iterator().hasNext()) {
-                    return ResponseData.of(div).addValidationMessages(pairs).respond();
-                }
+            ValidationMessageControlPairs pairs = getValidationHandler(div).validate();
+            if (状態_追加.equals(div.getOperateState())
+                    && pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
             RString 介護支援専門員番号 = div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninBango().getValue();
             RString 介護支援専門員氏名 = div.getKaigoSienSenmoninToroku().getTxtKaigoSienSenmoninShimei().getValue();

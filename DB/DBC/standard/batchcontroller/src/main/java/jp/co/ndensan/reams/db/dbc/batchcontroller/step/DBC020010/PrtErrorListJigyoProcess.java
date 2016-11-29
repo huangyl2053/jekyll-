@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -58,7 +57,6 @@ public class PrtErrorListJigyoProcess extends BatchProcessBase<HanteiEraaResultE
     private static final RString MYBATISPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate"
             + ".kogakukaigoservicehikyufutaishoshatoroku."
             + "IKogakuKaigoServicehiKyufugakuSanshutsuMapper.select高額総合事業サービス費判定エラーリスト");
-    private static final ReportId 帳票分類ID = new ReportId("DBC200076_KogakuSogoJigyoServicehiHanteiErrorIchiran");
     private static final RString 出力ファイル名 = new RString("KogakuSogoJigyoServicehiHanteiErrorIchiran.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");

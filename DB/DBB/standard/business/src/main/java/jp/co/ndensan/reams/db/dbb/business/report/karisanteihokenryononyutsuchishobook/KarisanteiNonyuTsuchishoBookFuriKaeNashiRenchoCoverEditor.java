@@ -147,13 +147,16 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         source.ryoshushoTitleNendo1 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : new RString("******");
         source.ryoshushoTitleKi1 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.ryoshushoTitleTsuki1 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.ryoshushoJusho1 = 納付書共通.get住所();
-        source.ryoshushoKatagaki1 = 納付書共通.get方書();
-        source.ryoshushoHihokenshaName1 = 納付書共通.get納付者氏名();
-        if (納付書共通.get通知書番号() != null) {
-            source.ryoshushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofuzumishoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
+        if (is納入通知書期情報がある) {
+            source.ryoshushoJusho1 = 納付書共通.get住所();
+            source.ryoshushoKatagaki1 = 納付書共通.get方書();
+            source.ryoshushoHihokenshaName1 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.ryoshushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
+                source.nofushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
+                source.nofuzumishoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            source.nofushoHihokenshaName1 = 納付書共通.get納付者氏名();
         }
         source.ryoshushoHokenryoGaku1 = is納入通知書期情報がある ? 納入通知書期情報.get領収証書納付額欄() : new RString("**********");
         source.ryoshushoNokigen1 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : new RString("***********");
@@ -163,7 +166,6 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         source.nofushoTitleNendo1 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : new RString("******");
         source.nofushoTitleKi1 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofushoTitleTsuki1 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.nofushoHihokenshaName1 = 納付書共通.get納付者氏名();
         editCompNofushoBookItem_1(source, 納入通知書期情報, is納入通知書期情報がある);
     }
 
@@ -190,6 +192,12 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
             source.nofuzumishoNofuIn1 = 納入通知書期情報.get領収日付欄();
             source.nofuzumishoKozaCom1 = 納入通知書期情報.get納付書領収印欄();
             source.nofuzumishoZuiji1 = 納入通知書期情報.get随時表記();
+            source.nofuzumishoJusho1 = 納付書共通.get住所();
+            source.nofuzumishoKatagaki1 = 納付書共通.get方書();
+            source.nofuzumishoHihokenshaName1 = 納付書共通.get納付者氏名();
+            if (納付書共通.get世帯コード() != null) {
+                source.nofuzumishoSetaiCode1 = 納付書共通.get世帯コード().getColumnValue();
+            }
         } else {
             source.nofushoHokenryoGaku1 = new RString("**********");
             source.nofushoNokigen1 = new RString("***********");
@@ -209,12 +217,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
             source.nofuzumishoKozaCom1 = RString.EMPTY;
             source.nofuzumishoZuiji1 = RString.EMPTY;
         }
-        source.nofuzumishoJusho1 = 納付書共通.get住所();
-        source.nofuzumishoKatagaki1 = 納付書共通.get方書();
-        source.nofuzumishoHihokenshaName1 = 納付書共通.get納付者氏名();
-        if (納付書共通.get世帯コード() != null) {
-            source.nofuzumishoSetaiCode1 = 納付書共通.get世帯コード().getColumnValue();
-        }
+
         source.nofuzumishoshichosonName1 = 納付書共通.get納付書市町村名();
         source.pagerenban4 = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())
                 ? new RString(String.valueOf(連番)).concat("-4") : new RString("1-4");
@@ -235,7 +238,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
                 = 納入通知書期情報リスト.size() >= INT6 ? 納入通知書期情報リスト.get(INT5) : new NonyuTsuchiShoKiJoho();
         EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後
                 = null == 編集後仮算定通知書共通情報.get更正後()
-                ? new EditedKariSanteiTsuchiShoKyotsuAfterCorrection() : 編集後仮算定通知書共通情報.get更正後();
+                        ? new EditedKariSanteiTsuchiShoKyotsuAfterCorrection() : 編集後仮算定通知書共通情報.get更正後();
         if (編集後仮算定通知書共通情報.get調定年度_年度なし() != null) {
             source.titleNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
             source.keisanMeisaishoNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
@@ -457,7 +460,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
             EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後) {
         List<OrdinaryIncomeInformation> 特徴収入情報リスト
                 = null == 編集後仮算定通知書共通情報.get特徴収入情報リスト()
-                ? new ArrayList<OrdinaryIncomeInformation>() : 編集後仮算定通知書共通情報.get特徴収入情報リスト();
+                        ? new ArrayList<OrdinaryIncomeInformation>() : 編集後仮算定通知書共通情報.get特徴収入情報リスト();
         Decimal 納期別明細書特徴納付額１ = 更正後.get更正後特徴期別金額01();
         Decimal 納期別明細書特徴納付額２ = 更正後.get更正後特徴期別金額02();
         Decimal 納期別明細書特徴納付額３ = 更正後.get更正後特徴期別金額03();

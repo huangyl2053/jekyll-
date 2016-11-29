@@ -52,6 +52,7 @@ public class DbT3111JigyoKogakuShikyuHanteiKekkaEntity extends DbTableEntityBase
     private RString shinsaKekkaHaneiKubun;
     private FlexibleDate ketteiTsuchishoSakuseiYMD;
     private FlexibleDate furikomiMeisaishoSakuseiYMD;
+    private RString ketteiTsuchiHakkoKubun;
 
     /**
      * rirekiEdaNoのgetメソッドです。
@@ -412,6 +413,24 @@ public class DbT3111JigyoKogakuShikyuHanteiKekkaEntity extends DbTableEntityBase
     }
 
     /**
+     * 決定通知リアル発行区分のgetメソッドです。
+     *
+     * @return 決定通知リアル発行区分
+     */
+    public RString getKetteiTsuchiHakkoKubun() {
+        return ketteiTsuchiHakkoKubun;
+    }
+
+    /**
+     * 決定通知リアル発行区分のsetメソッドです。
+     *
+     * @param ketteiTsuchiHakkoKubun 決定通知リアル発行区分
+     */
+    public void setKetteiTsuchiHakkoKubun(RString ketteiTsuchiHakkoKubun) {
+        this.ketteiTsuchiHakkoKubun = ketteiTsuchiHakkoKubun;
+    }
+
+    /**
      * 振込明細書作成年月日のsetメソッドです。
      *
      * @param furikomiMeisaishoSakuseiYMD 振込明細書作成年月日
@@ -424,8 +443,7 @@ public class DbT3111JigyoKogakuShikyuHanteiKekkaEntity extends DbTableEntityBase
      * このエンティティの主キーが他の{@literal DbT3111JigyoKogakuShikyuHanteiKekkaEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3111JigyoKogakuShikyuHanteiKekkaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT3111JigyoKogakuShikyuHanteiKekkaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3111JigyoKogakuShikyuHanteiKekkaEntity other) {
@@ -468,6 +486,7 @@ public class DbT3111JigyoKogakuShikyuHanteiKekkaEntity extends DbTableEntityBase
         this.shinsaKekkaHaneiKubun = entity.shinsaKekkaHaneiKubun;
         this.ketteiTsuchishoSakuseiYMD = entity.ketteiTsuchishoSakuseiYMD;
         this.furikomiMeisaishoSakuseiYMD = entity.furikomiMeisaishoSakuseiYMD;
+        this.ketteiTsuchiHakkoKubun = entity.ketteiTsuchiHakkoKubun;
     }
 
     /**

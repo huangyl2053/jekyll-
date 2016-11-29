@@ -152,10 +152,10 @@ module DBC
                     //this.controls.KyotakuServicePlanPanel().disabled = true;
                     this.controls.btnKyotakuServiceRireki().disabled = false;
                     this.controls.radKyotakuServiceSakuseiKubun().disabled = false;
-                    this.controls.txtKyotakuKaigoShienJigyoshoNo().disabled = false;
-                    this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = true;
-                    this.controls.txtKyotakuServiceTekiyoYMD().disabled = false;
-                    this.controls.radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().disabled = false;
+                    //this.controls.txtKyotakuKaigoShienJigyoshoNo().disabled = false;
+                    //this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = true;
+                    //this.controls.txtKyotakuServiceTekiyoYMD().disabled = false;
+                    //this.controls.radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().disabled = false;
                     //住所地特例エリア
                     //this.controls.JushochiTokureiPanel().disabled = true;
                     this.controls.radJushochiTokureiTaishoshaKubun().disabled = false;
@@ -237,6 +237,7 @@ module DBC
                     this.controls.btnKyotakuServiceRireki().disabled = false;
                     this.controls.radKyotakuServiceSakuseiKubun().disabled = true;
                     this.controls.txtKyotakuKaigoShienJigyoshoNo().disabled = true;
+					this.controls.btnShienJigyoshoNo().disabled = true;
                     this.controls.txtKyotakuKaigoShienJigyoshoName().disabled = true;
                     this.controls.txtKyotakuServiceTekiyoYMD().disabled = true;
                     this.controls.radShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().disabled = true;

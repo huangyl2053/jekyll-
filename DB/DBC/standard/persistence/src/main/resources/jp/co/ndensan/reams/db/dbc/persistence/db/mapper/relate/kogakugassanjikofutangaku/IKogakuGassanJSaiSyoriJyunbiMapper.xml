@@ -99,6 +99,7 @@
             "DbWT0001Hihokensha" AS "DbWT0001"
         ON 
             "DbWT37H1"."renban" = "DbWT0001"."meisaiRenban"
+            AND "DbWT37H1"."koshinFlag" = TRUE
         ${出力順}
     </select>
     

@@ -8,14 +8,13 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
-import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_MeisaiIchiranChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_SaishoriShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.KanendoUpdateFutanwariaiHanteProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -39,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 処理日付管理マスタの更新処理クラスです。
@@ -68,13 +68,15 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
     private static final RString 誤_振込指定日 = new RString("【誤・振込指定日】");
     private static final RString 正_振込指定日 = new RString("【正・振込指定日】");
     private static final RString 支払方法 = new RString("【支払方法】");
-    private static final RString 抽出期間_発行日 = new RString("【抽出期間】決定通知書発行日：】");
-    private static final RString 抽出期間_受取年月 = new RString("【抽出期間】決定者受取年月：】");
+    private static final RString 抽出期間_発行日 = new RString("【抽出期間】決定通知書発行日：");
+    private static final RString 抽出期間_受取年月 = new RString("【抽出期間】決定者受取年月：");
     private static final RString 抽出対象 = new RString("【抽出対象】");
     private static final RString 対象作成日 = new RString("【対象作成日】");
     private static final RString 符号 = new RString("－");
     private static final RString 連携符号 = new RString("～");
     private static final RString 帳票タイトル = new RString("振込明細一覧表");
+    private static final RString ONE = new RString("1");
+    private static final RString ZERO = new RString("0");
 
     private KanendoUpdateFutanwariaiHanteProcessParameter parameter;
     private static final int 検索件数_0 = 0;
@@ -142,13 +144,20 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
                 new RString(JobContextHolder.getJobId()),
                 get設定値(),
-                parameter.get帳票ページCount(),
+                getPageCount(parameter.get帳票ページCount()),
                 出力有無,
                 RString.EMPTY,
                 get出力条件表());
 
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
+    }
+
+    private RString getPageCount(RString 帳票ページCount) {
+        if (RString.isNullOrEmpty(帳票ページCount)) {
+            return ZERO;
+        }
+        return new RString(new Decimal(帳票ページCount.toString()).add(Decimal.ONE).toString());
     }
 
     private RString get設定値() {
@@ -177,14 +186,15 @@ public class KanendoUpdateFutanwariaiHanteiProcess extends BatchProcessBase<DbT7
         editバッチ出力条件_処理区分(list, parameter);
         editバッチ出力条件_決定通知書発行日(list, parameter);
         editバッチ出力条件_決定者受取年月(list, parameter);
-        if (parameter.get抽出対象() != null
-                && Furikomi_MeisaiIchiranChushutsuTaisho.振込データ作成済のみ.getコード().equals(parameter.get抽出対象().getコード())) {
+        if (parameter.get抽出対象() != null) {
             list.add(抽出対象.concat(parameter.get抽出対象().get名称()));
         }
         if (parameter.get対象作成年月日() == null || parameter.get対象作成年月日().isEmpty()) {
             list.add(対象作成日.concat(符号));
         } else {
-            list.add(対象作成日.concat(parameter.get対象作成年月日().toString()));
+            list.add(対象作成日.concat(parameter.get対象作成年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE)
+                    .fillType(FillType.ZERO).toDateString()));
         }
         return list;
     }

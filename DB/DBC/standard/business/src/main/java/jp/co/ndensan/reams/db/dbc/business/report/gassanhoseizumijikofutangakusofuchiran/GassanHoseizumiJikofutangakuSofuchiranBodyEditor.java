@@ -92,8 +92,42 @@ public class GassanHoseizumiJikofutangakuSofuchiranBodyEditor implements IGassan
         } else {
             source.list_15 = RString.EMPTY;
         }
+        setPageBreakEmpty(source);
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), get非空文字列(source.list_3));
         return source;
+    }
+
+    private void setPageBreakEmpty(GassanHoseizumiJikofutangakuSofuchiranSource source) {
+        if (source.yubinNo == null) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.shimei50onKana == null) {
+            source.shimei50onKana = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.exShoHokenshaNo == null) {
+            source.exShoHokenshaNo = RString.EMPTY;
+        }
+        if (source.list_3 == null) {
+            source.list_3 = RString.EMPTY;
+        }
+        if (source.list_2 == null) {
+            source.list_2 = RString.EMPTY;
+        }
+        if (source.list_4 == null) {
+            source.list_4 = RString.EMPTY;
+        }
+        if (source.list_6 == null) {
+            source.list_6 = RString.EMPTY;
+        }
     }
 
     private RString get期間(RString s1, RString s2) {

@@ -39,4 +39,5 @@ public class KyufuJissekiHedajyoho1 implements Serializable {
     private Association 地方公共団体;
     private IAtesaki 宛先情報;
     private FlexibleDate 認定年月日;
+    private RString 住民種別;
 }

@@ -67,6 +67,18 @@ public class KogakuServicehiTaishoshaIchiranSokyubunReportSource implements IRep
     public RString listTaishosha_10;
     @ReportItem(name = "listTaishosha_11", length = 30, order = 25)
     public RString listTaishosha_11;
+    @ReportItem(name = "listTaishosha_12", length = 30, order = 25)
+    public RString listTaishosha_12;
+    @ReportItem(name = "listTaishosha_13", length = 30, order = 25)
+    public RString listTaishosha_13;
+    @ReportItem(name = "listTaishosha_14", length = 30, order = 25)
+    public RString listTaishosha_14;
+    @ReportItem(name = "listTaishosha_15", length = 30, order = 25)
+    public RString listTaishosha_15;
+    @ReportItem(name = "listTaishosha_16", length = 30, order = 25)
+    public RString listTaishosha_16;
+    @ReportItem(name = "listTaishosha_17", length = 30, order = 25)
+    public RString listTaishosha_17;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

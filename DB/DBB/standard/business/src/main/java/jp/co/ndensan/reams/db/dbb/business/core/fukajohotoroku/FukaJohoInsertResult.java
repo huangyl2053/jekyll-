@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class FukaJohoInsertResult {
 
+    private static final int 更正月桁数 = 2;
+
     /**
      * 介護期別テーブルのエンティティの設定メッソドです。
      *
@@ -78,8 +80,8 @@ public class FukaJohoInsertResult {
         dbT2002.setChoteiJiyu2(entity.getChoteiJiyu2());
         dbT2002.setChoteiJiyu3(entity.getChoteiJiyu3());
         dbT2002.setChoteiJiyu4(entity.getChoteiJiyu4());
-        dbT2002.setKoseiM(((!RString.isNullOrEmpty(entity.getKoseiM())) && 1 == entity.getKoseiM().length()) ?
-                entity.getKoseiM().padZeroToLeft(1) : entity.getKoseiM());
+        dbT2002.setKoseiM(((!RString.isNullOrEmpty(entity.getKoseiM())) && 1 == entity.getKoseiM().length())
+                ? entity.getKoseiM().padZeroToLeft(更正月桁数) : entity.getKoseiM());
         dbT2002.setGemmenMaeHokenryo(entity.getGemmenMaeHokenryo());
         dbT2002.setGemmenGaku(entity.getGemmenGaku());
         dbT2002.setKakuteiHokenryo(entity.getKakuteiHokenryo());

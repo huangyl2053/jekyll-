@@ -52,7 +52,16 @@ public class NofugakuDataPageBreak extends PageBreaker<NofugakuIchiranSource> {
         } else if (this.breakKeysList.contains(NofugakuDataOutput.BreakerFieldsEnum.性別.get項目ID())
                 && !currentSource.getSource().list6_2.equals(nextSource.getSource().list6_2)) {
             flg = true;
-        } else if (this.breakKeysList.contains(NofugakuDataOutput.BreakerFieldsEnum.市町村コード.get項目ID())
+        } else {
+            flg = isBreakTwo(currentSource, nextSource);
+        }
+        return flg;
+    }
+
+    private boolean isBreakTwo(ReportLineRecord<NofugakuIchiranSource> currentSource,
+            ReportLineRecord<NofugakuIchiranSource> nextSource) {
+        boolean flg = false;
+        if (this.breakKeysList.contains(NofugakuDataOutput.BreakerFieldsEnum.市町村コード.get項目ID())
                 && !currentSource.getSource().cityCd.equals(nextSource.getSource().cityCd)) {
             flg = true;
         } else if (this.breakKeysList.contains(NofugakuDataOutput.BreakerFieldsEnum.被保険者番号.get項目ID())
@@ -60,6 +69,12 @@ public class NofugakuDataPageBreak extends PageBreaker<NofugakuIchiranSource> {
             flg = true;
         } else if (this.breakKeysList.contains(NofugakuDataOutput.BreakerFieldsEnum.徴収方法.get項目ID())
                 && !currentSource.getSource().list6_4.equals(nextSource.getSource().list6_4)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(NofugakuDataOutput.BreakerFieldsEnum.町域コード.get項目ID())
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+            flg = true;
+        } else if (this.breakKeysList.contains(NofugakuDataOutput.BreakerFieldsEnum.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().kanaMeisho.equals(nextSource.getSource().kanaMeisho)) {
             flg = true;
         }
         return flg;

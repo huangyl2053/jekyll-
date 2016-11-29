@@ -125,6 +125,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
         }
         set出力改頁(source);
         set改頁(source);
+        setNonull改頁(source);
     }
 
     private void listlowers(TokubetsuChoshuKaishiSource source) {
@@ -135,7 +136,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
         if (編集後本算定通知書共通情報 != null) {
             if (編集後本算定通知書共通情報.get編集後宛先() != null) {
                 source.listUpper_2 = 編集後本算定通知書共通情報.get編集後宛先().get郵便番号();
-                source.listUpper_3 = 編集後本算定通知書共通情報.get編集後宛先().get町域();
+                source.listUpper_3 = 編集後本算定通知書共通情報.get編集後宛先().get編集後住所();
                 source.listUpper_4 = 編集後本算定通知書共通情報.get編集後宛先().get宛先行政区();
             }
             if (編集後本算定通知書共通情報.get編集後個人() != null) {
@@ -214,5 +215,26 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
         }
         source.seihoFlag = 本算定通知書情報.get賦課の情報_更正後().get賦課情報().get生活保護扶助種類();
         source.tokuchoKaishi10 = 特徴10月開始者区分;
+    }
+
+    private void setNonull改頁(TokubetsuChoshuKaishiSource source) {
+        source.listUpper_2 = source.listUpper_2 == null ? RString.EMPTY : source.listUpper_2;
+        source.choikiCode = source.choikiCode == null ? RString.EMPTY : source.choikiCode;
+        source.banchiCode = source.banchiCode == null ? RString.EMPTY : source.banchiCode;
+        source.gyoseikuCode = source.gyoseikuCode == null ? RString.EMPTY : source.gyoseikuCode;
+        source.chikuCode1 = source.chikuCode1 == null ? RString.EMPTY : source.chikuCode1;
+        source.chikuCode2 = source.chikuCode2 == null ? RString.EMPTY : source.chikuCode2;
+        source.chikuCode3 = source.chikuCode3 == null ? RString.EMPTY : source.chikuCode3;
+        source.listLower_2 = source.listLower_2 == null ? RString.EMPTY : source.listLower_2;
+        source.shikibetsuCode = source.shikibetsuCode == null ? RString.EMPTY : source.shikibetsuCode;
+        source.kanaMeisho = source.kanaMeisho == null ? RString.EMPTY : source.kanaMeisho;
+        source.listUpper_5 = source.listUpper_5 == null ? RString.EMPTY : source.listUpper_5;
+        source.listUpper_6 = source.listUpper_6 == null ? RString.EMPTY : source.listUpper_6;
+        source.hokenshaNo = source.hokenshaNo == null ? RString.EMPTY : source.hokenshaNo;
+        source.hihokenshaNo = source.hihokenshaNo == null ? RString.EMPTY : source.hihokenshaNo;
+        source.nenkinCode = source.nenkinCode == null ? RString.EMPTY : source.nenkinCode;
+        source.nokumiCode = source.nokumiCode == null ? RString.EMPTY : source.nokumiCode;
+        source.seihoFlag = source.seihoFlag == null ? RString.EMPTY : source.seihoFlag;
+        source.tokuchoKaishi10 = source.tokuchoKaishi10 == null ? RString.EMPTY : source.tokuchoKaishi10;
     }
 }

@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.ue.uex.definition.core.DoteiFuitchiRiyu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -30,6 +30,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     private static final RString 男性 = new RString("1");
     private static final RString 女性 = new RString("2");
     private static final RString 年度 = new RString("年度");
+    private static final RString 作成 = new RString("　作成");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -92,6 +93,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         set導入団体コード(source);
         set導入市町村名(source);
         set年金番号と年金コード(source);
+        set識別コード(source);
         set生年月日(source);
         set性別(source);
         setカナ氏名(source);
@@ -99,10 +101,10 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         set郵便番号(source);
         set住所(source);
         set天引先区分(source);
-        set出力事由(source);
         set出力順(source);
         set改ページ項目名(source);
         set改ページデータ(source);
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -127,7 +129,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     }
 
     private void set作成日時(TokubetsuChoshuMidoteiIchiranSource source) {
-        source.printTimeStamp = DateConverter.getSakuseiYMD();
+        source.printTimeStamp = DateConverter.getSakuseiYMD().concat(作成);
     }
 
     private void set導入団体コード(TokubetsuChoshuMidoteiIchiranSource source) {
@@ -144,19 +146,45 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
             source.listList1_2 = this.特徴対象一覧未同定.getNenkinCode();
             return;
         }
-        Integer 特徴開始月 = Integer.parseInt(this.特徴開始月.toString());
-        if (仮徴収月リスト.contains(特徴開始月)) {
+        Integer 開始月 = Integer.parseInt(this.特徴開始月.toString());
+        if (仮徴収月リスト.contains(開始月)) {
             source.listList1_1 = this.特徴対象一覧未同定.getKarichoshuKisoNenkinNo();
             source.listList1_2 = this.特徴対象一覧未同定.getKarichoshuNenkinCode();
         }
-        if (本徴収月リスト.contains(特徴開始月)) {
+        if (本徴収月リスト.contains(開始月)) {
             source.listList1_1 = this.特徴対象一覧未同定.getHonchoshuKisoNenkinNo();
             source.listList1_2 = this.特徴対象一覧未同定.getHonchoshuKisonenkinCode();
         }
-        if (翌年度仮徴収月リスト.contains(特徴開始月)) {
+        if (翌年度仮徴収月リスト.contains(開始月)) {
             source.listList1_1 = this.特徴対象一覧未同定.getYokunendoKarichoshuKisoNenkinNo();
             source.listList1_2 = this.特徴対象一覧未同定.getYokunendoKariChoshuKisonenkinCode();
         }
+    }
+
+    private void setPageBreakEmpty(TokubetsuChoshuMidoteiIchiranSource source) {
+        if (source.kanaShimei == null) {
+            source.kanaShimei = RString.EMPTY;
+        }
+        if (source.seinengappiYMD == null) {
+            source.seinengappiYMD = RString.EMPTY;
+        }
+        if (source.seibetsuCode == null) {
+            source.seibetsuCode = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.nenkinCode == null) {
+            source.nenkinCode = RString.EMPTY;
+        }
+        if (source.kisoNenkinNo == null) {
+            source.kisoNenkinNo = RString.EMPTY;
+        }
+    }
+
+    private void set識別コード(TokubetsuChoshuMidoteiIchiranSource source) {
+        source.shikibetsuCode = ShikibetsuCode.EMPTY;
+        source.listList1_3 = ShikibetsuCode.EMPTY.getColumnValue();
     }
 
     private void set生年月日(TokubetsuChoshuMidoteiIchiranSource source) {
@@ -209,20 +237,6 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     private void set天引先区分(TokubetsuChoshuMidoteiIchiranSource source) {
         Boolean 厚労省判定 = this.特徴対象一覧未同定.getKoroshoHantei();
         source.listList1_8 = 厚労省判定 ? 厚労省 : 地共済;
-    }
-
-    private void set出力事由(TokubetsuChoshuMidoteiIchiranSource source) {
-        RString 不一致理由コード = this.特徴対象一覧未同定.getFuichiRiyuCode();
-        if (RString.isNullOrEmpty(不一致理由コード)) {
-            return;
-        }
-        for (DoteiFuitchiRiyu type : DoteiFuitchiRiyu.values()) {
-            if (type.getコード().equals(不一致理由コード)) {
-                source.listList1_9 = type.get不一致理由名();
-                return;
-            }
-        }
-        source.listList1_9 = RString.EMPTY;
     }
 
     private void set出力順(TokubetsuChoshuMidoteiIchiranSource source) {

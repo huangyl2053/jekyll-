@@ -28,11 +28,11 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissek
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3075KogakuGassanKyufuJissekiDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyuketteihosei.IKogakuGassanShikyuKetteiHoseiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichoson
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -229,6 +230,31 @@ public class KogakuGassanShikyuKetteiHosei {
         }
         result.set喪失事由コード(被保険者台帳管理entity.getShikakuSoshitsuJiyuCode());
         return result;
+    }
+
+    /**
+     * 被保険者台帳管理から「市町村コード」を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return LasdecCode
+     */
+    public LasdecCode get市町村コード(HihokenshaNo 被保険者番号) {
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
+        }
+        DbV1001HihokenshaDaichoEntity 被保険者台帳管理entity = 被保険者台帳管理dac.select被保険者台帳情報(被保険者番号);
+        if (被保険者台帳管理entity == null) {
+            return null;
+        }
+        if (!RString.isNullOrEmpty(被保険者台帳管理entity.getJushochiTokureiFlag())
+                && ONE.equals(被保険者台帳管理entity.getJushochiTokureiFlag())) {
+            return 被保険者台帳管理entity.getKoikinaiTokureiSochimotoShichosonCode();
+        }
+        if (!RString.isNullOrEmpty(被保険者台帳管理entity.getJushochiTokureiFlag())
+                && !ONE.equals(被保険者台帳管理entity.getJushochiTokureiFlag())) {
+            return 被保険者台帳管理entity.getShichosonCode();
+        }
+        return null;
     }
 
     /**

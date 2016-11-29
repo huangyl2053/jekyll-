@@ -148,6 +148,7 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         source.listUpper_12 = 生活保護扶助名称;
         listlowers(source);
         set改頁(source);
+        setNonull改ページ(source);
     }
 
     /**
@@ -268,5 +269,32 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         source.seihoFlag1 = 生活保護区分;
         source.tokuchoKaishi8 = 特徴8月開始者区分;
         source.tokuchoKaishi10 = 特徴10月開始者区分;
+    }
+
+    private void setNonull改ページ(KaigoHokenryogakuSource source) {
+        source.listLower_2 = getNonullRString(source.listLower_2);
+        source.choikiCode = getNonullRString(source.choikiCode);
+        source.banchiCode = getNonullRString(source.banchiCode);
+        source.gyoseikuCode = getNonullRString(source.gyoseikuCode);
+        source.chikuCode1 = getNonullRString(source.chikuCode1);
+        source.chikuCode2 = getNonullRString(source.chikuCode2);
+        source.chikuCode3 = getNonullRString(source.chikuCode3);
+        source.listUpper_4 = getNonullRString(source.listUpper_4);
+        source.shikibetsuCode = getNonullRString(source.shikibetsuCode);
+        source.kanaMeisho = getNonullRString(source.kanaMeisho);
+        source.listUpper_5 = getNonullRString(source.listUpper_5);
+        source.listUpper_6 = getNonullRString(source.listUpper_6);
+        source.hokenshaNo = getNonullRString(source.hokenshaNo);
+        source.listUpper_3 = getNonullRString(source.listUpper_3);
+        source.nenkinCode = getNonullRString(source.nenkinCode);
+        source.nokumiCode = getNonullRString(source.nokumiCode);
+        source.seihoFlag1 = getNonullRString(source.seihoFlag1);
+        source.seihoFlag = getNonullRString(source.seihoFlag);
+        source.tokuchoKaishi8 = getNonullRString(source.tokuchoKaishi8);
+        source.tokuchoKaishi10 = getNonullRString(source.tokuchoKaishi10);
+    }
+
+    private RString getNonullRString(RString str) {
+        return str == null ? RString.EMPTY : str;
     }
 }

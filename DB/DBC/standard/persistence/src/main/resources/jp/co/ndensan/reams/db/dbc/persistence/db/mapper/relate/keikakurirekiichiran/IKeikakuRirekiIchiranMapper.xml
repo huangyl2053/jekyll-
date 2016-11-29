@@ -13,6 +13,7 @@
               B."tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
               B."tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
               B."keikakuJigyoshaNo" AS "keikakuJigyoshaNo",
+              B."serviceShuruiCode" AS "serviceShuruiCode",
               B."itakusakiJigyoshaNo" AS "itakusakiJigyoshaNo",
               A."zanteiKubun" AS "zanteiKubun"
          FROM rgdb."DbT3005KyotakuKeikakuTodokede" AS A
@@ -23,6 +24,7 @@
                       C."tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
                       C."tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
                       '' AS "keikakuJigyoshaNo",
+                      '' AS "serviceShuruiCode",
                       '' AS "itakusakiJigyoshaNo",
                       A2."zanteiKubun" AS "zanteiKubun"
          FROM rgdb."DbT3005KyotakuKeikakuTodokede" AS A2

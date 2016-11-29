@@ -17,14 +17,15 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendo.HonsanteiIdoKanendoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendo.IHonsanteiIdoKanendoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -55,6 +56,20 @@ public class HonsanteiIdoKanendo {
     private final RString twlZRS = new RString("301");
     private final RString twlTRS = new RString("302");
     private final RString zOneOneRS = new RString("0001");
+    private static final int 定値_1期 = 1;
+    private static final int 定値_2期 = 2;
+    private static final int 定値_3期 = 3;
+    private static final int 定値_4期 = 4;
+    private static final int 定値_5期 = 5;
+    private static final int 定値_6期 = 6;
+    private static final int 定値_7期 = 7;
+    private static final int 定値_8期 = 8;
+    private static final int 定値_9期 = 9;
+    private static final int 定値_10期 = 10;
+    private static final int 定値_11期 = 11;
+    private static final int 定値_12期 = 12;
+    private static final int 定値_14期 = 14;
+    private static final int 定値_15期 = 15;
     private final RString 納入通知書の帳票ID = new RString("納入通知書の帳票ID");
     private final RString 期毎納入通知書タイプ = new RString("期毎納入通知書タイプ");
     private final RString 銀振納入通知書タイプ = new RString("銀振納入通知書タイプ");
@@ -138,8 +153,12 @@ public class HonsanteiIdoKanendo {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(定数調定年度.toString()));
         List<DbT7022ShoriDateKanriEntity> entityList = new ArrayList<>();
         List<ShoriDateKanri> kanriList = new ArrayList<>();
-        DbT7022ShoriDateKanriEntity shentity = 処理日付管理Dac.selectByFourKeys(
+        DbT7022ShoriDateKanriEntity shentity = null;
+        List<DbT7022ShoriDateKanriEntity> resultList = 処理日付管理Dac.select非課税年金対象者情報for広域BY主キー(
                 SubGyomuCode.DBB介護賦課, ShoriName.過年度賦課.get名称(), new RString("0001"), 調定年度);
+        if (resultList != null && !resultList.isEmpty()) {
+            shentity = resultList.get(0);
+        }
         if (shentity == null) {
             return new ArrayList<>();
         }
@@ -341,71 +360,40 @@ public class HonsanteiIdoKanendo {
         }
     }
 
-    private RString get納付書の型(RString 算定期) {
-        if (算定期.startsWith(zeroRS)) {
-            算定期 = 算定期.substring(1);
-        }
-        RString 設定値;
-        switch (算定期.toString()) {
-            case "1":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型1,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",1");
-            case "2":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型2,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",2");
-            case "3":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型3,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",3");
-            case "4":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型4,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",4");
-            case "5":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型5,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",5");
-            case "6":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型6,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",6");
-            case "7":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型7,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",7");
-            case "8":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型8,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",8");
-            case "9":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型9,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",9");
-            case "10":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型10,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",10");
-            case "11":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型11,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",11");
-            case "12":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型12,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",12");
-            case "13":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型13,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",13");
-            case "14":
-                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型14,
-                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-                return new RString(設定値.toString() + ",14");
+    private RString get納付書の型(int 月) {
+        RDate 調定年月日 = RDate.getNowDate();
+
+        switch (月) {
+            case 定値_1期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型10, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_2期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型11, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_3期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型12, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_4期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型1, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_5期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型2, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_6期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型3, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_7期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型4, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_8期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型5, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_9期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型6, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_10期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型7, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_11期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型8, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_12期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型9, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_14期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型13, 調定年月日, SubGyomuCode.DBB介護賦課);
+            case 定値_15期:
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型14, 調定年月日, SubGyomuCode.DBB介護賦課);
             default:
-                設定値 = RString.EMPTY;
-                return 設定値;
+                return zeroRS;
         }
     }
 
@@ -468,28 +456,29 @@ public class HonsanteiIdoKanendo {
         RString 項目名;
         RString アイテムとして;
         ChohyoSeigyoHanyo 帳票タイプ;
-        RString 設定値 = new RString(get納付書の型(算定期).toString().split(",")[0]);
-        switch (設定値.toString()) {
-            case "1":
+        int 月 = new FuchoKiUtil().get期月リスト().get期の最初月(Integer.parseInt(算定期.toString())).get月AsInt();
+        RString 設定値 = get納付書の型(月);
+        switch (Integer.parseInt(設定値.toString())) {
+            case 定値_1期:
                 項目名 = 期毎納入通知書タイプ;
                 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 return get期毎タイプ(帳票タイプ, 帳票分類ID, 出力順ID);
-            case "2":
+            case 定値_2期:
                 項目名 = 銀振納入通知書タイプ;
                 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 return get銀振型5期タイプ(帳票タイプ, 帳票分類ID, 出力順ID);
-            case "4":
+            case 定値_4期:
                 項目名 = 銀振納入通知書タイプ;
                 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 return get銀振型４期タイプ(帳票タイプ, 帳票分類ID, 出力順ID);
-            case "5":
+            case 定値_5期:
                 項目名 = その他納入通知書タイプ;
                 アイテムとして = ブック口座振替依頼表示;
                 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 ChohyoSeigyoHanyo 帳票_口座振替依頼 = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                         調定年度, アイテムとして);
                 return getブックタイプ(帳票タイプ, 帳票_口座振替依頼, 帳票分類ID, 出力順ID);
-            case "6":
+            case 定値_6期:
                 項目名 = その他納入通知書タイプ;
                 アイテムとして = コンビニ期毎出力;
                 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);

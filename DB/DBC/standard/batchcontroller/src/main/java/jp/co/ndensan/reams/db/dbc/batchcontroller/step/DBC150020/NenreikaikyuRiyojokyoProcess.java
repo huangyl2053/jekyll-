@@ -222,9 +222,11 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
         RStringBuilder rb = new RStringBuilder();
         rb.append(対象区分);
         rb.append(":");
-        rb.append(processParameter.getSentakuTaisyoList().get(0));
-        rb.append("～");
-        rb.append(processParameter.getSentakuTaisyoList().get(processParameter.getSentakuTaisyoList().size() - 1));
+        if (processParameter.getSentakuTaisyoList() != null && !processParameter.getSentakuTaisyoList().isEmpty()) {
+            rb.append(processParameter.getSentakuTaisyoList().get(0));
+            rb.append("～");
+            rb.append(processParameter.getSentakuTaisyoList().get(processParameter.getSentakuTaisyoList().size() - 1));
+        }
         return rb.toRString();
     }
 

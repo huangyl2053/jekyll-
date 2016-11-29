@@ -75,6 +75,9 @@ public class NonyuTsuchiShoDataHenshu {
     private static final int 整数12 = 12;
     private static final int 整数14 = 14;
     private static final int 整数15 = 15;
+    private static final int ORC1行目桁数 = 19;
+    private static final int ORC2行目桁数 = 20;
+    private static final int ORC3行目桁数 = 12;
     private static final RString 星10 = new RString("**********");
 
     /**
@@ -462,8 +465,9 @@ public class NonyuTsuchiShoDataHenshu {
         納入通知書期情報.set納期終了日表記(納期.get納期終了日().wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         納入通知書期情報.set納期限(納期.get納期限());
-        納入通知書期情報.set納期限表記(納付額.compareTo(Decimal.ZERO) <= 0 ? new RString("***********") : 納期.get納期限() != null ? 納期.get納期限().wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString() : new RString("***********"));
+        納入通知書期情報.set納期限表記(納付額.compareTo(Decimal.ZERO) <= 0 ? new RString("***********") : 納期.get納期限() != null
+                ? 納期.get納期限().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString() : new RString("***********"));
         納入通知書期情報.set納付額(納付額);
         納入通知書期情報.set納付額表記(new RString(String.valueOf(納付額)));
         納入通知書期情報.set調定額(金額);
@@ -586,10 +590,24 @@ public class NonyuTsuchiShoDataHenshu {
         if (請求情報OCR != null && !請求情報OCR.isEmpty()) {
             Set<Integer> 行目Keys = 請求情報OCR.keySet();
             for (Integer 行目 : 行目Keys) {
-                newOCR.put(行目, 印字文字列);
+                if (1 == 行目) {
+                    newOCR.put(行目, get印字文字列(印字文字列, ORC1行目桁数));
+                } else if (2 == 行目) {
+                    newOCR.put(行目, get印字文字列(印字文字列, ORC2行目桁数));
+                } else {
+                    newOCR.put(行目, get印字文字列(印字文字列, ORC3行目桁数));
+                }
+
             }
         }
         return newOCR;
+    }
+
+    private RString get印字文字列(RString value, int 文字数) {
+        if (value.isEmpty()) {
+            return value;
+        }
+        return RString.EMPTY.padRight(value, 文字数);
     }
 
     private List<RString> get各印字位置2(int 月) {

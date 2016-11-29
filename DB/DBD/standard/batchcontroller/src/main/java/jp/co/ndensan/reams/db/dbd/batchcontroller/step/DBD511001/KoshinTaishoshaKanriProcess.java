@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD511001;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5610001.KoshinTaishoshaKanriProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5610001.KoshinTaishoshaKanriEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT7202KaigoNinteiHokaiseiKanriMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
@@ -22,8 +21,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4123NinteiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanriEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7202KaigoNinteiHokaiseiKanriMapper;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -106,7 +106,7 @@ public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishosh
         isInsert = true;
         DbT4101NinteiShinseiJohoEntity dbT4101Entity = entity.getDbT4101NinteiShinseiJohoEntity();
 //        DbT4102NinteiKekkaJohoEntity dbT4102Entity = entity.getDbT4102NinteiKekkaJohoEntity();
-        
+
         DbT4001JukyushaDaichoEntity dbT4001Entity = entity.getDbT4001JukyushaDaichoEntity();
         RString 申請書管理番号 = new RString(getCountedItem(SubGyomuCode.DBD介護受給,
                 parameter.get市町村コード()).next());
@@ -302,7 +302,8 @@ public class KoshinTaishoshaKanriProcess extends BatchProcessBase<KoshinTaishosh
             entity.setTaishoKaishiYMD(new FlexibleDate(parameter.get対象月().toString() + "01"));
             entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get対象月().toString() + "01000000"));
             entity.setTaishoShuryoYMD(new FlexibleDate(parameter.get対象月().toString() + "01").plusMonth(1).plusDay(-1));
-            entity.setTaishoShuryoTimestamp(new YMDHMS(new FlexibleDate(parameter.get対象月().toString() + "01").plusMonth(1).plusDay(-1).toString() + "000000"));
+            entity.setTaishoShuryoTimestamp(new YMDHMS(new FlexibleDate(
+                    parameter.get対象月().toString() + "01").plusMonth(1).plusDay(-1).toString() + "000000"));
             return entity;
         } else {
             DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();

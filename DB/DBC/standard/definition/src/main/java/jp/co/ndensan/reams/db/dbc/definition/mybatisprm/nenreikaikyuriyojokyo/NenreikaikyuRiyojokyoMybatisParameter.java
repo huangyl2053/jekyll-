@@ -42,6 +42,7 @@ public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter 
     private final boolean shichosonFlag;
     private final boolean kyuShichosonFlag;
     private final boolean shichosonAndKyu;
+    private final boolean has選択対象;
     private final boolean tyouikiFlag;
     private final boolean gyoseikuFlag;
     private final boolean chikuCode1Flag;
@@ -70,6 +71,7 @@ public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter 
      * @param chikuCode1Flag chikuCode1Flag
      * @param chikuCode2Flag chikuCode2Flag
      * @param chikuCode3Flag chikuCode3Flag
+     * @param has選択対象 has選択対象
      */
     protected NenreikaikyuRiyojokyoMybatisParameter(FlexibleDate serviceTeikyoYM,
             FlexibleDate sinsaYM,
@@ -89,7 +91,8 @@ public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter 
             boolean gyoseikuFlag,
             boolean chikuCode1Flag,
             boolean chikuCode2Flag,
-            boolean chikuCode3Flag) {
+            boolean chikuCode3Flag,
+            boolean has選択対象) {
         this.serviceTeikyoYM = serviceTeikyoYM;
         this.sinsaYM = sinsaYM;
         this.nenreiSansyutuKijyubi = nenreiSansyutuKijyubi;
@@ -109,6 +112,7 @@ public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter 
         this.chikuCode1Flag = chikuCode1Flag;
         this.chikuCode2Flag = chikuCode2Flag;
         this.chikuCode3Flag = chikuCode3Flag;
+        this.has選択対象 = has選択対象;
     }
 
     /**
@@ -142,6 +146,7 @@ public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter 
         boolean chikuCode1Flag = false;
         boolean chikuCode2Flag = false;
         boolean chikuCode3Flag = false;
+        boolean is選択対象 = false;
         RString tmpSentakuTaisyo = RString.EMPTY;
         if (!serviceTeikyoYM.isEmpty()) {
             teikyoYMFlag = true;
@@ -157,6 +162,9 @@ public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter 
         }
         if (!sentakuTaisyoKubun.isNullOrEmpty()) {
             tmpSentakuTaisyo = new RString(sentakuTaisyoKubun.toString());
+        }
+        if (!sentakuTaisyoList.isEmpty()) {
+            is選択対象 = true;
         }
         if (kyoShichosonCode.isEmpty() && shichosonCode.isEmpty()) {
             shichosonAndKyu = true;
@@ -194,7 +202,8 @@ public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter 
                 gyoseikuFlag,
                 chikuCode1Flag,
                 chikuCode2Flag,
-                chikuCode3Flag);
+                chikuCode3Flag,
+                is選択対象);
     }
 
 }

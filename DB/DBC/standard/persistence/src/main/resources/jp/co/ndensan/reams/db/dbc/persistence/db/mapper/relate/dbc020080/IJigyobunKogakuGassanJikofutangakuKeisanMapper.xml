@@ -2,24 +2,24 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBC-4790-030 pengxingyi -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper">
-    
+
     <select id="select処理日付管理"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080_JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" resultOrdered="true" fetchSize="500">
-        SELECT 
-            *
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity" resultOrdered="true" fetchSize="500">
+        SELECT
+        *
         FROM
-            rgdb."DbT7022ShoriDateKanri"  AS "DbT7022ShoriDateKanri"
-        WHERE 
-            "DbT7022ShoriDateKanri"."subGyomuCode" = #{サブ業務コード}
-            AND    "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
-            AND    "DbT7022ShoriDateKanri"."shoriName" = #{処理名}
-            AND    "DbT7022ShoriDateKanri"."nendo" = #{年度}
-            AND    "DbT7022ShoriDateKanri"."shoriEdaban" = #{処理枝番}
+        rgdb."DbT7022ShoriDateKanri"  AS "DbT7022ShoriDateKanri"
+        WHERE
+        "DbT7022ShoriDateKanri"."subGyomuCode" = #{サブ業務コード}
+        AND    "DbT7022ShoriDateKanri"."shichosonCode" = #{市町村コード}
+        AND    "DbT7022ShoriDateKanri"."shoriName" = #{処理名}
+        AND    "DbT7022ShoriDateKanri"."nendo" = #{年度}
+        AND    "DbT7022ShoriDateKanri"."shoriEdaban" = #{処理枝番}
         ORDER BY
-            "DbT7022ShoriDateKanri"."nendoNaiRenban" DESC
+        "DbT7022ShoriDateKanri"."nendoNaiRenban" DESC
         LIMIT 1
     </select>
-    
-   
+
+
 </mapper>

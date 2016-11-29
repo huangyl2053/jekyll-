@@ -76,7 +76,40 @@ public class GassanKyufujissekiTorikomiIchiranBodyEditor implements IGassanKyufu
         source.shikibetsuCode = target.get被保険者一時().get識別コード();
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
                 ReportKomokuEditorUtil.get非空文字列(source.list_2));
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(GassanKyufujissekiTorikomiIchiranSource source) {
+
+        if (null == source.list_2) {
+            source.list_2 = RString.EMPTY;
+        }
+        if (null == source.list_7) {
+            source.list_7 = RString.EMPTY;
+        }
+        if (null == source.list_8) {
+            source.list_8 = RString.EMPTY;
+        }
+        if (null == source.yubinNo) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (null == source.choikiCode) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (null == source.gyoseikuCode) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (null == source.shichosonCode) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (null == source.shimei50onKana) {
+            source.shimei50onKana = RString.EMPTY;
+        }
+        if (null == source.shikyuShinseishoSeiriNo) {
+            source.shikyuShinseishoSeiriNo = RString.EMPTY;
+        }
+
     }
 
     private RString パターン4(FlexibleDate 年月日) {

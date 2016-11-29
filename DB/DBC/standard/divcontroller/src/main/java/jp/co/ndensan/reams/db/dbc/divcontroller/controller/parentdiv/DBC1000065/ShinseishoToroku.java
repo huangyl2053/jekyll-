@@ -11,10 +11,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000065.DBC1
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000065.ShinseishoTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000065.ShinseishoTorokuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000065.ShinseishoTorokuValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -68,8 +70,19 @@ public class ShinseishoToroku {
      */
     public ResponseData<ShinseishoTorokuDiv> onActive(ShinseishoTorokuDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        div.getTxtHihokenshaNo().setValue(資格対象者.get被保険者番号().getColumnValue());
+        if (資格対象者 == null) {
+            div.getTxtHihokenshaNo().setValue(RString.EMPTY);
+        } else {
+            div.getTxtHihokenshaNo().setValue(isNullOrEmpty(資格対象者.get被保険者番号()));
+        }
         return ResponseData.of(div).respond();
+    }
+
+    private RString isNullOrEmpty(HihokenshaNo date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return date.value();
     }
 
     /**

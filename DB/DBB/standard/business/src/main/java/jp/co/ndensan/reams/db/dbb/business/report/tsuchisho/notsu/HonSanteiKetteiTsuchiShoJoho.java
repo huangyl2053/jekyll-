@@ -30,4 +30,5 @@ public class HonSanteiKetteiTsuchiShoJoho {
     private ReportId 帳票ID;
     private ShoriKubun 処理区分;
     private Association 地方公共団体;
+    private boolean has更正前;
 }

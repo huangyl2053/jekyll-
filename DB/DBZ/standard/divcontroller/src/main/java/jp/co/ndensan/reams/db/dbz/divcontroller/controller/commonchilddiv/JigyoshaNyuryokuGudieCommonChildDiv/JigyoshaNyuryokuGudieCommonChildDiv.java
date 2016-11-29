@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.JigyoshaNyuryokuGudieCommonChildDiv;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaNyuryokuGudieCommonChildDiv.JiGyoSyaHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaNyuryokuGudieCommonChildDiv.JigyoshaNyuryokuGudieCommonChildDivDiv;
@@ -48,8 +49,8 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
     public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> onclick_BtnTaishoJigyoshaKensaku(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
 
         if ((requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue() != null
-             && requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() != null)
-            && (!requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().
+                && requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() != null)
+                && (!requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().
                 isBeforeOrEquals(requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue()))) {
 
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
@@ -126,6 +127,12 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
         mode.setJigyoshaName(new AtenaMeisho(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtMeisho()));
         mode.setYukoKaishiYMD(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran()
                 .getSelectedItems().get(0).getTxtYukoKaishibiYMD().getValue().toDateString());
+        if (requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getHdnServiceShuruiCode() != null) {
+            mode.setServiceShuruiCode(new ServiceShuruiCode(
+                    requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getHdnServiceShuruiCode()));
+        } else {
+            mode.setServiceShuruiCode(ServiceShuruiCode.EMPTY);
+        }
 
         requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
         return ResponseData.of(requestDiv).respond();

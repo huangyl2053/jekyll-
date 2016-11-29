@@ -289,7 +289,7 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
 
         public static boolean is開始時間_時間チェック(JikoFutangakuHoseiDiv div) {
             RString 時間Str = div.getTxtMadoguchiKaishiJikan().getValue();
-            if (時間Str == null) {
+            if (時間Str == null || 時間Str.isEmpty()) {
                 return true;
             } else {
                 Decimal 時間 = new Decimal(時間Str.toString());
@@ -299,7 +299,7 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
 
         public static boolean is開始時間_分チェック(JikoFutangakuHoseiDiv div) {
             RString 分Str = div.getTxtMadoguchiKaishiFun().getValue();
-            if (分Str == null) {
+            if (分Str == null || 分Str.isEmpty()) {
                 return true;
             } else {
                 Decimal 分 = new Decimal(分Str.toString());
@@ -309,7 +309,7 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
 
         public static boolean is終了時間_時間チェック(JikoFutangakuHoseiDiv div) {
             RString 時間Str = div.getTxtMadoguchiShuryoJikan().getValue();
-            if (時間Str == null) {
+            if (時間Str == null || 時間Str.isEmpty()) {
                 return true;
             } else {
                 Decimal 時間 = new Decimal(時間Str.toString());
@@ -319,7 +319,7 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
 
         public static boolean is終了時間_分チェック(JikoFutangakuHoseiDiv div) {
             RString 分Str = div.getTxtMadoguchiShuryoFun().getValue();
-            if (分Str == null) {
+            if (分Str == null || 分Str.isEmpty()) {
                 return true;
             } else {
                 Decimal 分 = new Decimal(分Str.toString());
@@ -340,8 +340,8 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
 
         public static boolean is判定コードより開始時間チェック(JikoFutangakuHoseiDiv div) {
             RString 判定コード = div.getTxtMadoguchiTaishoushaHantei().getValue();
-            return !(該当.equals(判定コード) && (div.getTxtMadoguchiKaishiJikan().getValue() == null
-                    || div.getTxtMadoguchiKaishiFun().getValue() == null));
+            return !(該当.equals(判定コード) && (RString.isNullOrEmpty(div.getTxtMadoguchiKaishiJikan().getValue())
+                    || RString.isNullOrEmpty(div.getTxtMadoguchiKaishiFun().getValue())));
         }
 
         public static boolean is判定コードより終了日年月日チェック(JikoFutangakuHoseiDiv div) {
@@ -351,8 +351,8 @@ public enum JikoFutangakuHoseiSpec implements IPredicate<JikoFutangakuHoseiDiv> 
 
         public static boolean is判定コードより終了時間チェック(JikoFutangakuHoseiDiv div) {
             RString 判定コード = div.getTxtMadoguchiTaishoushaHantei().getValue();
-            return !(該当.equals(判定コード) && (div.getTxtMadoguchiShuryoJikan().getValue() == null
-                    || div.getTxtMadoguchiShuryoFun().getValue() == null));
+            return !(該当.equals(判定コード) && (RString.isNullOrEmpty(div.getTxtMadoguchiShuryoJikan().getValue())
+                    || RString.isNullOrEmpty(div.getTxtMadoguchiShuryoFun().getValue())));
         }
     }
 }

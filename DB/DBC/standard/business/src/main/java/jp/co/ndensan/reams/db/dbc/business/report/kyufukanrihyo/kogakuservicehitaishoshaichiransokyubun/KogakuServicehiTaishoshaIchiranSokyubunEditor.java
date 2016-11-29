@@ -79,6 +79,12 @@ public class KogakuServicehiTaishoshaIchiranSokyubunEditor implements IKogakuSer
         source.shikibetuCode = entity.get識別コード();
         source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
                 ReportKomokuEditorUtil.get非空文字列(entity.get被保険者番号()));
+        source.listTaishosha_12 = entity.get郵便番号();
+        source.listTaishosha_13 = entity.get町域コード();
+        source.listTaishosha_14 = entity.get行政区コード();
+        source.listTaishosha_15 = entity.get保険者名();
+        source.listTaishosha_16 = entity.get証記載保険者番号();
+        source.listTaishosha_17 = entity.get要介護認定状態区分コード();
         return source;
     }
 

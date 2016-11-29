@@ -68,6 +68,9 @@ public class KogakuGassanShikyuShinseiTorokuValidationHandler {
                 .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間4, div.getTxtTaishoKeisanKikanYMD())
                 .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間5, div.getTxtTaishoKeisanKikanYMD())
                 .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間6, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.加入期間必須項目, div.getTxtKanyuKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.所得区分必須項目, div.getDdlShotokuKubun())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.備考文字種, div.getTxtBiko())
                 .build();
     }
 

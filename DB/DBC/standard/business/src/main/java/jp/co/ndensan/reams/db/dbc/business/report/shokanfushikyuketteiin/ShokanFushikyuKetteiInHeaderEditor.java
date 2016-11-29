@@ -70,7 +70,11 @@ public class ShokanFushikyuKetteiInHeaderEditor implements IShokanFushikyuKettei
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
         source.kokuhorenName = 帳票出力対象データ.get国保連合会名();
-        source.shoKisaiHokenshaNo = 帳票出力対象データ.get証記載保険者番号().getColumnValue();
+        if (帳票出力対象データ.get証記載保険者番号() != null) {
+            source.shoKisaiHokenshaNo = 帳票出力対象データ.get証記載保険者番号().getColumnValue();
+        } else {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
         source.shoKisaiHokenshaName = 帳票出力対象データ.get証記載保険者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);

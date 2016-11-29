@@ -77,7 +77,7 @@ public class ShokanKetteiTsuchiShoTempTableEntity extends DbTableEntityBase<Shok
     private RString meisho;
     private HihokenshaNo sashitomeHiHokenshaNo;
     private RString sashitomeKojoNo;
-    private int kozaId;
+    private int kingaku_kozaId;
     // 前回支払金額
     private Decimal zenkaiShiharaiKingaku;
     // 通知書発行対象フラグ

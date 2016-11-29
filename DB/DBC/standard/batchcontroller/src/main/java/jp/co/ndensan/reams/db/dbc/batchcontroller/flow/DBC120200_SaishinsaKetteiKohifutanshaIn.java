@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120200.SaishinsaKohifutanshaDoDBTorokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120200.SaishinsaKohifutanshaDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120200.SaishinsaKohifutanshaReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
@@ -15,10 +14,9 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120200.DBC120200_SaishinsaKetteiKohifutanshaInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120190.DBC120191_SaishinsaKetteiDBTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
-import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoMasterTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaReadCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
@@ -55,7 +53,7 @@ public class DBC120200_SaishinsaKetteiKohifutanshaIn
 
     private static final RString ファイル格納フォルダ名 = new RString("DBC120200");
     private static final RString 帳票ID = new RString("DBC200049_SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBun");
-
+    private static final RString マスタ登録BATCHID = new RString("DBC120191_SaishinsaKetteiDBToroku");
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private FlowEntity flowEntity;
 
@@ -137,16 +135,12 @@ public class DBC120200_SaishinsaKetteiKohifutanshaIn
      * @return SaishinsaKohifutanshaDoDBTorokuProcess
      */
     @Step(マスタ登録)
-    protected IBatchFlowCommand callDoMasterTorokuProcess() {
-        KohifutanshaDoMasterTorokuProcessParameter parameter = new KohifutanshaDoMasterTorokuProcessParameter();
-        parameter.set処理年月(getParameter().getShoriYM());
-        if (null != getParameter().getSaishoriKubun()) {
-            parameter.set再処理区分(getParameter().getSaishoriKubun());
-        } else {
-            parameter.set再処理区分(SaiShoriKubun.空白);
-        }
+    protected IBatchFlowCommand callDoMasterTorokuFlow() {
+        DBC120191_SaishinsaKetteiDBTorokuParameter parameter = new DBC120191_SaishinsaKetteiDBTorokuParameter();
         parameter.set交換情報識別番号(交換情報識別番号);
-        return simpleBatch(SaishinsaKohifutanshaDoDBTorokuProcess.class).arguments(parameter).define();
+        parameter.set再処理区分(getParameter().getSaishoriKubun());
+        parameter.set処理年月(getParameter().getShoriYM());
+        return otherBatchFlow(マスタ登録BATCHID, SubGyomuCode.DBC介護給付, parameter).define();
     }
 
     /**

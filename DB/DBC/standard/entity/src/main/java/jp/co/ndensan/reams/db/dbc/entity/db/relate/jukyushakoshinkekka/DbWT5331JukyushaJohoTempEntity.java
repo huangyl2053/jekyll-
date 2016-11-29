@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakoshinkekka;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
@@ -32,19 +31,19 @@ public class DbWT5331JukyushaJohoTempEntity extends DbTableEntityBase<DbWT5331Ju
     @TempTableColumnOrder(4)
     private RString idoKubunCode;
     @TempTableColumnOrder(5)
-    private FlexibleDate teiseiYmd;
+    private RString teiseiYmd;
     @TempTableColumnOrder(6)
     private RString teiseiKubunCode;
     @TempTableColumnOrder(7)
     private RString idoJiyuKubun;
     @TempTableColumnOrder(8)
-    private FlexibleDate seinengappiYmd;
+    private RString seinengappiYmd;
     @TempTableColumnOrder(9)
     private RString seibetsuCode;
     @TempTableColumnOrder(10)
-    private FlexibleDate shikakuShutokuYmd;
+    private RString shikakuShutokuYmd;
     @TempTableColumnOrder(11)
-    private FlexibleDate shikakuSoshitsuYmd;
+    private RString shikakuSoshitsuYmd;
     @TempTableColumnOrder(12)
     private RString rojinHokenShichosonNo;
     @TempTableColumnOrder(13)
@@ -56,63 +55,63 @@ public class DbWT5331JukyushaJohoTempEntity extends DbTableEntityBase<DbWT5331Ju
     @TempTableColumnOrder(16)
     private RString henkoShinseichuKubunCode;
     @TempTableColumnOrder(17)
-    private FlexibleDate shinseiYmd;
+    private RString shinseiYmd;
     @TempTableColumnOrder(18)
     private RString minashiYokaigoKubunCode;
     @TempTableColumnOrder(19)
     private RString yokaigoJotaiKubunCode;
     @TempTableColumnOrder(20)
-    private FlexibleDate ninteiYukokikanFromYmd;
+    private RString ninteiYukokikanFromYmd;
     @TempTableColumnOrder(21)
-    private FlexibleDate ninteiYukokikanToYmd;
+    private RString ninteiYukokikanToYmd;
     @TempTableColumnOrder(22)
     private RString kyotakuServiceKubunCode;
     @TempTableColumnOrder(23)
     private RString kyotakuKaigoShienJigyoshoNo;
     @TempTableColumnOrder(24)
-    private FlexibleDate kyotakuServiceTekiyoFromYmd;
+    private RString kyotakuServiceTekiyoFromYmd;
     @TempTableColumnOrder(25)
-    private FlexibleDate kyotakuServiceTekiyoToYmd;
+    private RString kyotakuServiceTekiyoToYmd;
     @TempTableColumnOrder(26)
-    private Decimal homonShikyugendoKijungaku;
+    private RString homonShikyugendoKijungaku;
     @TempTableColumnOrder(27)
-    private FlexibleDate homonJogenKanriTekiyoKikanFromYmd;
+    private RString homonJogenKanriTekiyoKikanFromYmd;
     @TempTableColumnOrder(28)
-    private FlexibleDate homonJogenKanriTekiyoKikanToYmd;
+    private RString homonJogenKanriTekiyoKikanToYmd;
     @TempTableColumnOrder(29)
-    private Decimal tankiShikyugendoKijungaku;
+    private RString tankiShikyugendoKijungaku;
     @TempTableColumnOrder(30)
-    private FlexibleDate tankiJogenKanriTekiyoKikanFromYmd;
+    private RString tankiJogenKanriTekiyoKikanFromYmd;
     @TempTableColumnOrder(31)
-    private FlexibleDate tankiJogenKanriTekiyoKikanToYmd;
+    private RString tankiJogenKanriTekiyoKikanToYmd;
     @TempTableColumnOrder(32)
     private RString kohiFutanJogengakuGengakuUmu;
     @TempTableColumnOrder(33)
-    private FlexibleDate shokanHaraikaFromYmd;
+    private RString shokanHaraikaFromYmd;
     @TempTableColumnOrder(34)
-    private FlexibleDate shokanHaraikaToYmd;
+    private RString shokanHaraikaToYmd;
     @TempTableColumnOrder(35)
-    private FlexibleDate kyufuritsuHikisageFromYmd;
+    private RString kyufuritsuHikisageFromYmd;
     @TempTableColumnOrder(36)
-    private FlexibleDate kyufuritsuHikisageToYmd;
+    private RString kyufuritsuHikisageToYmd;
     @TempTableColumnOrder(37)
     private RString genmenShinseichuKubunCode;
     @TempTableColumnOrder(38)
     private RString riyoshaFutanKubunCode;
     @TempTableColumnOrder(39)
-    private Decimal kyufuRitsu;
+    private RString kyufuRitsu;
     @TempTableColumnOrder(40)
-    private FlexibleDate riyoshaFutanTekiyoFromYmd;
+    private RString riyoshaFutanTekiyoFromYmd;
     @TempTableColumnOrder(41)
-    private FlexibleDate riyoshaFutanTekiyoToYmd;
+    private RString riyoshaFutanTekiyoToYmd;
     @TempTableColumnOrder(42)
     private RString hyojunFutanKubunCode;
     @TempTableColumnOrder(43)
-    private Decimal futanGaku;
+    private RString futanGaku;
     @TempTableColumnOrder(44)
-    private FlexibleDate futanGakuTekiyoFromYmd;
+    private RString futanGakuTekiyoFromYmd;
     @TempTableColumnOrder(45)
-    private FlexibleDate futanGakuTekiyoToYmd;
+    private RString futanGakuTekiyoToYmd;
     @TempTableColumnOrder(46)
     private RString tokuteiNyushoshaNinteiShinseichuKubunCode;
     @TempTableColumnOrder(47)
@@ -120,27 +119,27 @@ public class DbWT5331JukyushaJohoTempEntity extends DbTableEntityBase<DbWT5331Ju
     @TempTableColumnOrder(48)
     private RString kazeisoNoTokureiGengakuSochiTaishoKubun;
     @TempTableColumnOrder(49)
-    private Decimal tokuteiNyushoshaShokuhiFutanGendoGaku;
+    private RString tokuteiNyushoshaShokuhiFutanGendoGaku;
     @TempTableColumnOrder(50)
-    private Decimal kyojuhiUnitKoshitsuFutanGendoGaku;
+    private RString kyojuhiUnitKoshitsuFutanGendoGaku;
     @TempTableColumnOrder(51)
-    private Decimal kyojuhiUnitJunkoshitsuFutanGendoGaku;
+    private RString kyojuhiUnitJunkoshitsuFutanGendoGaku;
     @TempTableColumnOrder(52)
-    private Decimal kyojuhiTokuyotoFutanGenndoGaku;
+    private RString kyojuhiTokuyotoFutanGenndoGaku;
     @TempTableColumnOrder(53)
-    private Decimal kyojuhiRokenRyoyotoFutanGendoGaku;
+    private RString kyojuhiRokenRyoyotoFutanGendoGaku;
     @TempTableColumnOrder(54)
-    private Decimal kyojuhiTashoShitsuFutanGendoGaku;
+    private RString kyojuhiTashoShitsuFutanGendoGaku;
     @TempTableColumnOrder(55)
-    private FlexibleDate futanGendoGakuTekiyoFromYmd;
+    private RString futanGendoGakuTekiyoFromYmd;
     @TempTableColumnOrder(56)
-    private FlexibleDate futanGendoGakuTekiyoToYmd;
+    private RString futanGendoGakuTekiyoToYmd;
     @TempTableColumnOrder(57)
-    private Decimal keigenRitsu;
+    private RString keigenRitsu;
     @TempTableColumnOrder(58)
-    private FlexibleDate keigenRitsuTekiyoFromYmd;
+    private RString keigenRitsuTekiyoFromYmd;
     @TempTableColumnOrder(59)
-    private FlexibleDate keigenRitsuTekiyoToYmd;
+    private RString keigenRitsuTekiyoToYmd;
     @TempTableColumnOrder(60)
     private RString shokiboKyotakuServiceRiyoUmu;
     @TempTableColumnOrder(61)
@@ -156,27 +155,27 @@ public class DbWT5331JukyushaJohoTempEntity extends DbTableEntityBase<DbWT5331Ju
     @TempTableColumnOrder(66)
     private RString nijiyoboJigyoKubunCode;
     @TempTableColumnOrder(67)
-    private FlexibleDate nijiyoboJigyoYukokikanFromYmd;
+    private RString nijiyoboJigyoYukokikanFromYmd;
     @TempTableColumnOrder(68)
-    private FlexibleDate nijiyoboJigyoYukokikanToYmd;
+    private RString nijiyoboJigyoYukokikanToYmd;
     @TempTableColumnOrder(69)
     private RString jushochiTokureiTaishoshaKubunCode;
     @TempTableColumnOrder(70)
     private RString shisetsuShozaiHokenshaNo;
     @TempTableColumnOrder(71)
-    private FlexibleDate jushochiTokureiTekiyoFromYmd;
+    private RString jushochiTokureiTekiyoFromYmd;
     @TempTableColumnOrder(72)
-    private FlexibleDate jushochiTokureiTekiyoToYmd;
+    private RString jushochiTokureiTekiyoToYmd;
     @TempTableColumnOrder(73)
-    private Decimal kyojuhi1FutanGendogaku;
+    private RString kyojuhi1FutanGendogaku;
     @TempTableColumnOrder(74)
-    private Decimal kyojuhi2FutanGendogaku;
+    private RString kyojuhi2FutanGendogaku;
     @TempTableColumnOrder(75)
-    private Decimal kyojuhi3FutanGendogaku;
+    private RString kyojuhi3FutanGendogaku;
     @TempTableColumnOrder(76)
-    private FlexibleDate niwariFutanTekiyoFromYmd;
+    private RString niwariFutanTekiyoFromYmd;
     @TempTableColumnOrder(77)
-    private FlexibleDate niwariFutanTekiyoToYmd;
+    private RString niwariFutanTekiyoToYmd;
     @TempTableColumnOrder(78)
     private RString yuryoRojinHomeDoishoUmu;
     @TempTableColumnOrder(79)

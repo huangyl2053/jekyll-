@@ -34,14 +34,14 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNen
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.HonsanteiIdoKekkaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.TokuchoIraikin4gatsuKaishiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.genendoidoukekkaichiran.KeisanjohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.HonsanteiIdoKekkaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.TokuchoIraikin4gatsuKaishiEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gennendohonsanteiidou.IGenNendoHonsanteiIdouMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
@@ -968,7 +968,9 @@ public class GenNendoHonsanteiIdouFath {
     }
 
     private RString get口座情報(KeisanjohoAtenaKozaEntity 更正後Entity) {
-        if (更正後Entity == null || 更正後Entity.get口座Entity() == null) {
+        if (更正後Entity == null || 更正後Entity.get口座Entity() == null
+                || 更正後Entity.get口座Entity().getUaT0310KozaEntity() == null
+                || 更正後Entity.get口座Entity().getUaT0310KozaEntity().getKozaId() == 0) {
             return RString.EMPTY;
         }
         IKoza 口座_更正後 = new Koza(更正後Entity.get口座Entity());

@@ -87,7 +87,7 @@ public class TokubetsuChoshuIdojohoIchiranPrintService {
         try (ReportAssembler<TokubetsuChoshuIdojohoIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChoshuIdojohoIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            new TokubetsuChoshuIdojohoIchiranReport(特徴異動情報, 作成日時, 賦課年度, 保険者番号, 保険者名称, 出力順リスト, 改頁リスト).writeBy(reportSourceWriter);
+            new TokubetsuChoshuIdojohoIchiranReport(特徴異動情報, null, 作成日時, 賦課年度, 保険者番号, 保険者名称, 出力順リスト, 改頁リスト).writeBy(reportSourceWriter);
         }
     }
 

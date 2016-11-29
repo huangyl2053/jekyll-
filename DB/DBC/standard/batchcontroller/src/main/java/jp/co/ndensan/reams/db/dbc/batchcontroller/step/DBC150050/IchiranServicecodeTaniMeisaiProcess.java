@@ -93,6 +93,7 @@ public class IchiranServicecodeTaniMeisaiProcess
     private final Code code = new Code("0003");
     private final RString 漢字_被保険者番号 = new RString("被保険者番号");
     private static final RString SAKUSEI = new RString("作成");
+    private static final RString 無し = new RString("1");
 
     @Override
     protected void initialize() {
@@ -239,13 +240,7 @@ public class IchiranServicecodeTaniMeisaiProcess
         } else {
             csvEntity.set要介護状態区分名称(RString.EMPTY);
         }
-        csvEntity.set旧措置入所者特例コード(entity.getKyuSochiNyushoshaTokureiCode());
-        if (!RString.isNullOrEmpty(entity.getKyuSochiNyushoshaTokureiCode())) {
-            csvEntity.set旧措置入所者特例名称(KyuSochiNyushoshaTokureiCode.
-                    toValue(entity.getKyuSochiNyushoshaTokureiCode()).get名称());
-        } else {
-            csvEntity.set旧措置入所者特例名称(RString.EMPTY);
-        }
+        set旧措置入所者特例(entity, csvEntity);
         csvEntity.set認定有効期間_開始年月日(doパターン4(entity.getNinteiYukoKaishiYMD()));
         csvEntity.set認定有効期間_終了年月日(doパターン4(entity.getNinteiYukoShuryoYMD()));
         csvEntity.set老人保健市町村番号(entity.getRojinHokenShichosonNo());
@@ -279,6 +274,20 @@ public class IchiranServicecodeTaniMeisaiProcess
         csvEntity.set公費３サービス単位数(doカンマ編集(entity.getAtoKohi3TaishoServiceTanisu()));
         csvEntity.set審査年月(doパターン54(entity.getShinsaYM()));
 
+    }
+
+    private void set旧措置入所者特例(DbWT3470chohyouShutsuryokuTempEntity entity, DbWT3470chohyouShutsuryokuyouCSVEntity csvEntity) {
+
+        if (!RString.isNullOrEmpty(entity.getKyuSochiNyushoshaTokureiCode())) {
+
+            if (無し.equals(entity.getKyuSochiNyushoshaTokureiCode())) {
+                csvEntity.set旧措置入所者特例コード(KyuSochiNyushoshaTokureiCode.無し.getコード());
+                csvEntity.set旧措置入所者特例名称(KyuSochiNyushoshaTokureiCode.無し.get名称());
+            } else {
+                csvEntity.set旧措置入所者特例コード(KyuSochiNyushoshaTokureiCode.有り.getコード());
+                csvEntity.set旧措置入所者特例名称(KyuSochiNyushoshaTokureiCode.有り.get名称());
+            }
+        }
     }
 
     private IOutputOrder get並び順() {

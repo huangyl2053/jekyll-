@@ -43,5 +43,6 @@ public class KakushuTsuchishoCommonInfo {
     private NenkinTokuchoKaifuJoho 対象者_追加含む_の情報_更正前;
     private NenkinTokuchoKaifuJoho 対象者_追加含む_の情報_更正後;
     private ShunyuJoho 収入情報;
+    private ShunyuJoho 現年度収入情報;
     private GennenKanen 年度区分;
 }

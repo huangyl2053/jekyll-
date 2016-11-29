@@ -93,15 +93,21 @@ public class KarisanteiIdoKekkaIchiranProperty extends ReportPropertyBase<Karisa
     private RString to帳票物理名(RString 項目ID) {
 
         RString 帳票物理名 = RString.EMPTY;
-
         if (KarisanteiIdoKekkaIchiranProperty.BreakerFieldsEnum.氏名５０音カナ.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(KarisanteiIdoKekkaIchiranSource.ReportSourceFields.listUpper_2.name());
+            帳票物理名 = new RString(KarisanteiIdoKekkaIchiranSource.ReportSourceFields.kanaMeisho.name());
         } else if (KarisanteiIdoKekkaIchiranProperty.BreakerFieldsEnum.市町村コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(KarisanteiIdoKekkaIchiranSource.ReportSourceFields.hokenshaNo.name());
         } else if (KarisanteiIdoKekkaIchiranProperty.BreakerFieldsEnum.通知書番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(KarisanteiIdoKekkaIchiranSource.ReportSourceFields.listUpper_1.name());
+        } else if (KarisanteiIdoKekkaIchiranProperty.BreakerFieldsEnum.町域コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(KarisanteiIdoKekkaIchiranSource.ReportSourceFields.choikiCode.name());
+        } else if (KarisanteiIdoKekkaIchiranProperty.BreakerFieldsEnum.生年月日.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(KarisanteiIdoKekkaIchiranSource.ReportSourceFields.seinengappiYMD.name());
+        } else if (KarisanteiIdoKekkaIchiranProperty.BreakerFieldsEnum.性別.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(KarisanteiIdoKekkaIchiranSource.ReportSourceFields.seibetsuCode.name());
+        } else if (KarisanteiIdoKekkaIchiranProperty.BreakerFieldsEnum.被保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(KarisanteiIdoKekkaIchiranSource.ReportSourceFields.hihokenshaNo.name());
         }
-
         return 帳票物理名;
     }
 
@@ -117,16 +123,6 @@ public class KarisanteiIdoKekkaIchiranProperty extends ReportPropertyBase<Karisa
             Breakers<KarisanteiIdoKekkaIchiranSource> breakers,
             BreakerCatalog<KarisanteiIdoKekkaIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
-
-
-
-
-
-
-
-
-
 
             pageBreakKeys) {
             @Override

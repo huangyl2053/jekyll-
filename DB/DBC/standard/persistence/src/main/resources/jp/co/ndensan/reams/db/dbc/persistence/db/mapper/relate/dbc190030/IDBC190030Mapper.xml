@@ -26,6 +26,9 @@
                      OR A."shikakuSoshitsuYMD" IS NULL 
                      OR A."shikakuSoshitsuYMD" = ''
                     )
+                <if test="被保険者番号flag">
+                    AND A."hihokenshaNo" = #{被保険者番号}
+                </if>
                 UNION																							
                 SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
                 FROM rgdb."DbV1001HihokenshaDaicho" AS A
@@ -37,6 +40,9 @@
                      OR A."shikakuSoshitsuYMD" = ''
                    )
                 ) AS A
+                <if test="被保険者番号flag">
+                    AND A."hihokenshaNo" = #{被保険者番号}
+                </if>
             ORDER BY A.TEMP_hihokenshaNo
     </select>
     
@@ -50,7 +56,9 @@
              OR A."shikakuSoshitsuYMD" IS NULL 
              OR A."shikakuSoshitsuYMD" = ''
             )
-        ORDER BY A."hihokenshaNo"
+        <if test="被保険者番号flag">
+             AND A."hihokenshaNo" = #{被保険者番号}
+        </if>
     </select>
     
     <select resultOrdered="true" id="get被保険者台帳3"

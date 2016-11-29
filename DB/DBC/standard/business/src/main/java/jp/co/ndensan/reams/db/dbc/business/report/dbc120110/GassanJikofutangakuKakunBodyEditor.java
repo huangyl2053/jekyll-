@@ -63,7 +63,41 @@ public class GassanJikofutangakuKakunBodyEditor implements IGassanJikofutangakuK
         source.list_12 = doカンマ編集(帳票出力対象データ.get自己負担額合計_うち70_74歳());
         source.list_13 = doカンマ編集(帳票出力対象データ.get高額介護サービス費());
         source.shikibetsuCode = getColumnValue(帳票出力対象データ.get識別コード());
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(GassanJikofutangakuKakuninSource source) {
+        if (source.shoKisaiHokenshaNo == null) {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
+        if (source.list_2 == null) {
+            source.list_2 = RString.EMPTY;
+        }
+        if (source.list_5 == null) {
+            source.list_5 = RString.EMPTY;
+        }
+        if (source.list_7 == null) {
+            source.list_7 = RString.EMPTY;
+        }
+        if (source.list_4 == null) {
+            source.list_4 = RString.EMPTY;
+        }
+        if (source.yubinNo == null) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.shimei50onKana == null) {
+            source.shimei50onKana = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
     }
 
     private RString get期間(FlexibleDate 開始年月日, FlexibleDate 終了年月日) {

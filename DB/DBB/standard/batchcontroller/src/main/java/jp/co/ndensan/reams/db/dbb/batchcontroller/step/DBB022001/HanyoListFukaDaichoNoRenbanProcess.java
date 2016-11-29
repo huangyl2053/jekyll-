@@ -27,7 +27,9 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -189,6 +191,7 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchKeyBreakBase<HanyoL
     private HokenryoDankaiList 保険料段階リスト;
     List<KoseiShichosonMaster> 構成市町村マスタlist;
     private Association 地方公共団体;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
     private FileSpoolManager manager;
     private YMDHMS システム日時;
     private RString eucFilePath;
@@ -215,6 +218,8 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchKeyBreakBase<HanyoL
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         賦課台帳 = new HanyoListFukaDaichoEntity();
         breakProcessCore = new HanyoListFukaDaichoProcessCore();
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課, processParameter.get帳票ID());
     }
 
     @Override
@@ -308,7 +313,7 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchKeyBreakBase<HanyoL
     private void csvファイル出力() {
         if (賦課台帳 != null && is出力データ(賦課台帳)) {
             csvWriter.writeLine(csvEditor.editor(賦課台帳, processParameter, 保険料段階リスト, 構成市町村マスタlist,
-                    new FlexibleDate(システム日時.getDate().toDateString())));
+                    new FlexibleDate(システム日時.getDate().toDateString()), 帳票制御共通));
             personalDataList.add(toPersonalData(賦課台帳));
         }
     }

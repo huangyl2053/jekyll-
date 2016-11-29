@@ -151,6 +151,7 @@ public class KeisangojohoAtenaKozaEntity {
     private Decimal 普徴収入額12;
     private Decimal 普徴収入額13;
     private Decimal 普徴収入額14;
+    private RString 徴収方法;
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
     private TokuteiKozaRelateEntity 口座Entity;
 

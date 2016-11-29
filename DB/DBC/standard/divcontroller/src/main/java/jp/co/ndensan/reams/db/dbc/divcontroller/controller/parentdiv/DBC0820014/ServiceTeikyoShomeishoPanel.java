@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820014;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
@@ -12,10 +13,12 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoHenkoFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShomeishoGridList;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.DBC0820014TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.dgdServiceTeikyoShomeisyo_Row;
@@ -27,6 +30,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,12 +43,21 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ServiceTeikyoShomeishoPanel {
 
-    private static final RString 登録モード = new RString("登録");
     private static final RString 処理モード_修正 = new RString("修正");
     private static final RString 処理モード_登録 = new RString("登録");
     private static final RString 処理モード_削除 = new RString("削除");
     private static final RString 変更あり = new RString("1");
     private static final RString 入力完了 = new RString("1");
+    private static final RString 証明書戻り_0 = new RString("0");
+    private static final RString 処理_空白 = RString.EMPTY;
+    private static final RString 処理_追加 = new RString("追加");
+    private static final RString 処理_追加修正 = new RString("追加修正");
+    private static final RString 処理_修正 = new RString("修正");
+    private static final RString 処理_削除 = new RString("削除");
+    private static final RString 処理区分_0 = new RString("0");
+    private static final RString 処理区分_1 = new RString("1");
+    private static final RString 処理区分_2 = new RString("2");
+    private static final RString 処理区分_3 = new RString("3");
 
     /**
      * 画面初期化onLoad
@@ -78,13 +91,14 @@ public class ServiceTeikyoShomeishoPanel {
             申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
             ViewStateHolder.put(ViewStateKeys.申請日, 申請日.toDateString());
         }
+        証明書グリッド変更();
         DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         List<ServiceTeikyoShomeishoResult> 証明書一覧情報 = ShokanbaraiJyokyoShokai
                 .createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号);
         handler.load宛名と基本情報(識別コード, 被保険者番号);
         handler.loadボタンエリア(画面モード);
         handler.load申請共通エリア(画面モード, サービス年月, 整理番号);
-        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報, 償還払ViewStateDB情報);
+        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報, 償還払ViewStateDB情報, サービス年月);
         return createResponse(div);
     }
 
@@ -96,11 +110,7 @@ public class ServiceTeikyoShomeishoPanel {
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnShinseiInfo(ServiceTeikyoShomeishoPanelDiv div) {
         入力有無フラグ設定();
-//        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-////        if (登録モード.equals(画面モード)) {
-//            画面モード = 処理モード_修正;
-//        }
-//        ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
+        証明書グリッドList設定(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.申請情報).respond();
     }
 
@@ -111,14 +121,8 @@ public class ServiceTeikyoShomeishoPanel {
      * @return 償還払支給申請_口座登録画面
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnKouzaInfo(ServiceTeikyoShomeishoPanelDiv div) {
-//        ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
-//        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
-//        FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
-//                ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
-//                toString())).getYearMonth().toDateString());
-//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-//        handler.申請既存チェック(整理番号, サービス年月, 被保険者番号);
         入力有無フラグ設定();
+        証明書グリッドList設定(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.口座情報).respond();
     }
 
@@ -129,14 +133,8 @@ public class ServiceTeikyoShomeishoPanel {
      * @return 償還払支給申請一覧画面
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnShokanKeteiInfo(ServiceTeikyoShomeishoPanelDiv div) {
-//        ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
-//        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
-//        FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
-//                ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
-//                toString())).getYearMonth().toDateString());
-//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-//        handler.申請既存チェック(整理番号, サービス年月, 被保険者番号);
         入力有無フラグ設定();
+        証明書グリッドList設定(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払決定情報).respond();
     }
 
@@ -158,7 +156,9 @@ public class ServiceTeikyoShomeishoPanel {
         handler.サービス提供証明書の存在チェック(整理番号, サービス年月, 被保険者番号, 償還払ViewStateDB情報);
         putViewStateDown(処理モード_登録, div);
         証明書入力済フラグ初期化();
+        証明書グリッドList設定(div);
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDBBAK, 償還払ViewStateDB情報);
+        ViewStateHolder.put(ViewStateKeys.証明書戻り, 証明書戻り_0);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払い費支給申請).respond();
     }
 
@@ -169,10 +169,19 @@ public class ServiceTeikyoShomeishoPanel {
      * @return 償還払費支給申請決定_サービス提供証明書(基本情報)画面
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_Modify(ServiceTeikyoShomeishoPanelDiv div) {
+        if (getHandler(div).削除済チェック()) {
+            throw new ApplicationException(DbcErrorMessages.償還払い費支給申請決定_削除済修正.getMessage().evaluate());
+        }
+        if (処理_追加.equals(div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getActiveRow().getShori())) {
+            putViewStateDown(処理_追加修正, div);
+        }
         putViewStateDown(処理モード_修正, div);
+
         証明書変更済フラグ初期化();
+        証明書グリッドList設定(div);
         DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         ViewStateHolder.put(ViewStateKeys.償還払ViewStateDBBAK, 償還払ViewStateDB情報);
+        ViewStateHolder.put(ViewStateKeys.証明書戻り, 証明書戻り_0);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払い費支給申請).respond();
     }
 
@@ -183,8 +192,69 @@ public class ServiceTeikyoShomeishoPanel {
      * @return 償還払費支給申請決定_サービス提供証明書(基本情報)画面
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_Delete(ServiceTeikyoShomeishoPanelDiv div) {
+        if (処理_追加.equals(div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getActiveRow().getShori())) {
+            DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
+                    ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
+                    toString())).getYearMonth().toDateString());
+            RDate 申請日 = div.getPanelShinseiNaiyo().getTxtShinseibi().getValue();
+            RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+            ShoukanharaihishinseimeisaikensakuParameter removeKey = new ShoukanharaihishinseimeisaikensakuParameter(被保険者番号, サービス年月, 申請日, 整理番号,
+                    new JigyoshaNo(div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getActiveRow().getData1()),
+                    div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getActiveRow().getData4(),
+                    div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getActiveRow().getData3());
+            ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, getHandler(div).明細削除_償還払情報クリア(償還払ViewStateDB情報, removeKey));
+            onLoad(div);
+            return ResponseData.of(div).respond();
+        }
         putViewStateDown(処理モード_削除, div);
+        ViewStateHolder.put(ViewStateKeys.証明書戻り, 証明書戻り_0);
+        証明書グリッドList設定(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払い費支給申請).respond();
+    }
+
+    private void 証明書グリッド変更() {
+        DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ShoukanharaihishinseimeisaikensakuParameter 明細検索キー = ViewStateHolder.get(ViewStateKeys.明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        RString 証明書戻り = ViewStateHolder.get(ViewStateKeys.証明書戻り, RString.class);
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        ArrayList<ShomeishoGridList> 証明書グリッドList = 償還払ViewStateDB情報.get証明書グリッドリスト();
+        if (null != 明細検索キー && null != 証明書戻り && null != 処理モード && null != 証明書グリッドList) {
+            for (ShomeishoGridList 証明書グリッド : 証明書グリッドList) {
+                if (証明書グリッド.get事業者番号().equals(明細検索キー.get事業者番号().value())
+                        && 証明書グリッド.get明細().equals(明細検索キー.get明細番号())
+                        && 証明書グリッド.getサービス提供証明書().equals(明細検索キー.get様式番号())) {
+                    証明書グリッド項目変更(証明書グリッド, 処理モード, 証明書戻り);
+                }
+            }
+        }
+        償還払ViewStateDB情報.set証明書グリッドリスト(証明書グリッドList);
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB情報);
+    }
+
+    private void 証明書グリッド項目変更(ShomeishoGridList 証明書グリッド, RString 処理モード, RString 証明書戻り) {
+        if (処理_空白.equals(証明書グリッド.get処理()) && 処理モード_登録.equals(処理モード)) {
+            if (証明書戻り_0.equals(証明書戻り)) {
+                証明書グリッド.set処理(処理_空白);
+                証明書グリッド.set処理区分(処理区分_0);
+            } else {
+                証明書グリッド.set処理(処理_追加);
+                証明書グリッド.set処理区分(処理区分_1);
+            }
+        } else if (処理_空白.equals(証明書グリッド.get処理()) && 処理モード_修正.equals(処理モード)) {
+            if (証明書戻り_0.equals(証明書戻り)) {
+                証明書グリッド.set処理(処理_空白);
+                証明書グリッド.set処理区分(処理区分_0);
+            } else {
+                証明書グリッド.set処理(処理_修正);
+                証明書グリッド.set処理区分(処理区分_2);
+            }
+        } else if (処理モード_削除.equals(処理モード)) {
+            証明書グリッド.set処理(処理_削除);
+            証明書グリッド.set処理区分(処理区分_3);
+        }
     }
 
     private void putViewStateDown(RString 処理モード, ServiceTeikyoShomeishoPanelDiv div) {
@@ -209,7 +279,10 @@ public class ServiceTeikyoShomeishoPanel {
             様式番号 = row.getData4();
         }
         RString 明細番号 = null;
-        if (!処理モード_登録.equals(処理モード)) {
+        if (!処理モード_登録.equals(処理モード) || 処理_追加修正.equals(処理モード)) {
+            if (処理_追加修正.equals(処理モード)) {
+                処理モード = 処理モード_登録;
+            }
             明細番号 = row.getData3();
         }
         ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
@@ -232,6 +305,26 @@ public class ServiceTeikyoShomeishoPanel {
         証明書入力済フラグ.set請求額集計_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
         証明書入力済フラグ.set食事費用_証明書入力済フラグ(ShomeishoNyuryokuKubunType.入力なし);
         ViewStateHolder.put(ViewStateKeys.証明書入力済フラグ, 証明書入力済フラグ);
+    }
+
+    private void 証明書グリッドList設定(ServiceTeikyoShomeishoPanelDiv div) {
+        DbJohoViewState 償還払ViewStateDB情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
+        ArrayList<ShomeishoGridList> 証明書グリッドList = new ArrayList<>();
+        if (null != div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getDataSource()
+                && !div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getDataSource().isEmpty()) {
+            for (dgdServiceTeikyoShomeisyo_Row row : div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getDataSource()) {
+                ShomeishoGridList 証明書グリッド = new ShomeishoGridList();
+                証明書グリッド.set処理(row.getShori());
+                証明書グリッド.set事業者番号(row.getData1());
+                証明書グリッド.set事業者名(row.getData2() == null ? RString.EMPTY : row.getData2());
+                証明書グリッド.set明細(row.getData3());
+                証明書グリッド.setサービス提供証明書(row.getData4());
+                証明書グリッド.set処理区分(row.getShoriKubun());
+                証明書グリッドList.add(証明書グリッド);
+            }
+        }
+        償還払ViewStateDB情報.set証明書グリッドリスト(証明書グリッドList);
+        ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, 償還払ViewStateDB情報);
     }
 
     private void 証明書変更済フラグ初期化() {

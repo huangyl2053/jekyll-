@@ -97,6 +97,9 @@ public class ShotokuDankaiBetsuHihokenshasuIchiranBodyEditor implements IShotoku
                 && this.標準設定段階別被保険者数合計entity.get市町村名称() != null) {
             source.hokenshaName = this.標準設定段階別被保険者数合計entity.get市町村名称();
         }
+        if (source.hokenshaNo == null) {
+            source.hokenshaNo = RString.EMPTY;
+        }
     }
 
     private RString doカンマ編集(Decimal decimal) {

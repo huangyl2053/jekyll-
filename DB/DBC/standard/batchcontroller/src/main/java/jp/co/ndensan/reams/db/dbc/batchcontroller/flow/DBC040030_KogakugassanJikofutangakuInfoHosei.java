@@ -50,10 +50,7 @@ public class DBC040030_KogakugassanJikofutangakuInfoHosei extends BatchFlowBase<
         executeStep(高額合算自己負担額情報更新);
         executeStep(高額合算自己負担額明細情報更新);
         executeStep(負担額補正対象者データ更新);
-        if (getParameter().is出力フラグが()) {
-            executeStep(帳票出力);
-        }
-
+        executeStep(帳票出力);
     }
 
     /**

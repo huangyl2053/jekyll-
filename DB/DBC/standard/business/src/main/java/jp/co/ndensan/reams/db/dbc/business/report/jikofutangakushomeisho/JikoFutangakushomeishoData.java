@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassan.KogakuGassanData;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -32,5 +31,5 @@ public class JikoFutangakushomeishoData {
     private RString 備考;
     private NinshoshaSource 認証者情報;
     private SofubutsuAtesakiSource 宛先情報;
-    private ToiawasesakiSource 問合せ先情報;
+    private RString 問合せ先情報;
 }

@@ -60,6 +60,8 @@ public class FukaKonkyoFactory {
             }
         }
         賦課根拠.setSetaiinKazeiKubunList(課税区分リスト);
+        賦課根拠.setZennendoKazeiKubun(param.get前年度課税区分());
+        賦課根拠.setZennendoSetaiKazeiKubun(param.get前年度世帯課税区分());
         return 賦課根拠;
     }
 

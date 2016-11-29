@@ -306,6 +306,9 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         if (div.getTxtMasuiTanisu().getValue() != null) {
             data = data.add(div.getTxtMasuiTanisu().getValue());
         }
+        if (div.getTxtHoshasenChiryoTanisu().getValue() != null) {
+            data = data.add(div.getTxtHoshasenChiryoTanisu().getValue());
+        }
         div.getTxtKinkyuShisetsuRyoyohiTotalTanisu().setValue(data);
     }
 
@@ -1275,7 +1278,6 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
             }
         }
         kihon = kihon.createBuilderForEdit().set緊急時施設療養費請求額(金額合計).build();
-        kihon = kihon.modified();
         return kihon;
     }
 

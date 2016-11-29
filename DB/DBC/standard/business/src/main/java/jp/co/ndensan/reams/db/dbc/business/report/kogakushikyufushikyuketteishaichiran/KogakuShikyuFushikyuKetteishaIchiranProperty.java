@@ -35,10 +35,6 @@ public class KogakuShikyuFushikyuKetteishaIchiranProperty
 
     private final List<RString> pageBreakKeys;
     private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
-    private static final int INDEX_5 = 5;
 
     /**
      * コンストラクタです。
@@ -50,11 +46,6 @@ public class KogakuShikyuFushikyuKetteishaIchiranProperty
 
         pageBreakKeys = new ArrayList<>();
         pageBreakKeys.add(new RString(ReportSourceFields.shoKisaiHokenshaNo.name()));
-        RString 改頁２ = RString.EMPTY;
-        RString 改頁３ = RString.EMPTY;
-        RString 改頁４ = RString.EMPTY;
-        RString 改頁５ = RString.EMPTY;
-        RString 改頁６ = RString.EMPTY;
 
         if (outputOrder == null) {
             return;
@@ -63,36 +54,10 @@ public class KogakuShikyuFushikyuKetteishaIchiranProperty
         if (iSetSortItemList == null) {
             return;
         }
-        if (INDEX_1 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_1).is改頁項目()) {
-            改頁２ = to帳票物理名(iSetSortItemList.get(INDEX_1).get項目ID());
-        }
-        if (INDEX_2 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_2).is改頁項目()) {
-            改頁３ = to帳票物理名(iSetSortItemList.get(INDEX_2).get項目ID());
-        }
-        if (INDEX_3 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_3).is改頁項目()) {
-            改頁４ = to帳票物理名(iSetSortItemList.get(INDEX_3).get項目ID());
-        }
-        if (INDEX_4 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_4).is改頁項目()) {
-            改頁５ = to帳票物理名(iSetSortItemList.get(INDEX_4).get項目ID());
-        }
-        if (INDEX_5 < iSetSortItemList.size() && iSetSortItemList.get(INDEX_5).is改頁項目()) {
-            改頁６ = to帳票物理名(iSetSortItemList.get(INDEX_5).get項目ID());
-        }
-
-        if (!改頁２.isEmpty()) {
-            pageBreakKeys.add(改頁２);
-        }
-        if (!改頁３.isEmpty()) {
-            pageBreakKeys.add(改頁３);
-        }
-        if (!改頁４.isEmpty()) {
-            pageBreakKeys.add(改頁４);
-        }
-        if (!改頁５.isEmpty()) {
-            pageBreakKeys.add(改頁５);
-        }
-        if (!改頁６.isEmpty()) {
-            pageBreakKeys.add(改頁６);
+        for (int i = INDEX_1; i < iSetSortItemList.size(); i++) {
+            if (iSetSortItemList.get(i).is改頁項目()) {
+                pageBreakKeys.add(to帳票物理名(iSetSortItemList.get(i).get項目ID()));
+            }
         }
     }
 

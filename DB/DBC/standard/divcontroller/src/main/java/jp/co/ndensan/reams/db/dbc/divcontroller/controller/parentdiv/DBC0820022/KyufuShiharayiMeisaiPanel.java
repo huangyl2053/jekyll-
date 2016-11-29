@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(給付費明細）
@@ -60,13 +61,9 @@ public class KyufuShiharayiMeisaiPanel {
     private static final RString 修正する = new RString("修正する");
     private static final RString 削除する = new RString("削除する");
     private static final ServiceShuruiCode サービス種類コード_50 = new ServiceShuruiCode("50");
-    private static final RString 入力なし = new RString("0");
-    private static final RString 入力あり = new RString("1");
-    private static final RString 変更なし = new RString("0");
-    private static final RString 変更あり = new RString("1");
-    private static final RString 入力完了 = new RString("1");
-    private static final RString 入力未完了 = new RString("2");
     private static final RString エーラメッセージ = new RString("請求額集計情報の未登録のサービス種類が存在します。請求額集計情報を登録して下さい。");
+    private static final RString 証明書戻り = new RString("0");
+    private static final RString 確認戻り = new RString("1");
 
     /**
      * onLoad事件
@@ -101,21 +98,47 @@ public class KyufuShiharayiMeisaiPanel {
         getHandler(div).set申請共通エリア(サービス年月, 事業者番号, 申請日, 明細番号, 様式番号);
 
         List<ShokanMeisaiResult> entityList = new ArrayList();
+        List<ShokanMeisaiResult> johoList = new ArrayList();
         DbJohoViewState 償還払ViewStateDB = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDB, DbJohoViewState.class);
         if (償還払ViewStateDB.get償還払請求明細データList() != null) {
-            entityList = 償還払ViewStateDB.get償還払請求明細データList();
+            johoList = 償還払ViewStateDB.get償還払請求明細データList();
         }
-        entityList = getHandler(div).getUpdateList(entityList, meisaiPar);
+        johoList = getHandler(div).getUpdateList(johoList, meisaiPar);
         List<ShokanMeisaiResult> list = ShokanbaraiJyokyoShokai.createInstance().
                 getShokanbarayiSeikyuMeisayiShiteiIgaiList(
                         被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null, サービス種類コード_50);
-        if (list != null && !list.isEmpty()) {
-            for (ShokanMeisaiResult result : list) {
-                entityList.add(result);
+        for (ShokanMeisaiResult ryoyo : list) {
+            boolean isModifiedorDeleted = false;
+            for (ShokanMeisaiResult result : johoList) {
+                if (result.getEntity().get連番().equals(result.getEntity().get連番())) {
+                    if (result.getEntity().toEntity().getState() == EntityDataState.Modified) {
+                        isModifiedorDeleted = true;
+                        ryoyo.getEntity().toRealEntity().setState(EntityDataState.Modified);
+                        entityList.add(ryoyo);
+                        break;
+                    }
+                    if (result.getEntity().toEntity().getState() == EntityDataState.Deleted) {
+                        isModifiedorDeleted = true;
+                        ryoyo.getEntity().toRealEntity().setState(EntityDataState.Deleted);
+                        entityList.add(ryoyo);
+                        break;
+                    }
+                }
+            }
+            if (!isModifiedorDeleted) {
+                ryoyo.getEntity().toRealEntity().setState(EntityDataState.Unchanged);
+                entityList.add(ryoyo);
+            }
+        }
+        for (ShokanMeisaiResult updateRyoyo : johoList) {
+            if (updateRyoyo.getEntity().toEntity().getState() == EntityDataState.Added) {
+                updateRyoyo.getEntity().toRealEntity().setState(EntityDataState.Added);
+                entityList.add(updateRyoyo);
             }
         }
         div.getPanelThree().getPanelFour().setVisible(false);
         getHandler(div).initialize(entityList);
+        setRowSort(div);
         ViewStateHolder.put(ViewStateKeys.給付費明細登録, (Serializable) entityList);
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
         ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
@@ -236,6 +259,7 @@ public class KyufuShiharayiMeisaiPanel {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             DbJohoViewState dbJoho = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);
             ViewStateHolder.put(ViewStateKeys.償還払ViewStateDB, dbJoho);
+            ViewStateHolder.put(ViewStateKeys.証明書戻り, 証明書戻り);
             return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.一覧に戻る).respond();
         }
 
@@ -255,6 +279,7 @@ public class KyufuShiharayiMeisaiPanel {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        div.getPanelThree().getPanelFour().getBtnClear().setDisabled(false);
         dgdKyufuhiMeisai_Row row;
         RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (登録.equals(state)) {
@@ -297,6 +322,7 @@ public class KyufuShiharayiMeisaiPanel {
                     nyuryokuFlag, kensakuParameter.get様式番号(), kensakuParameter.getサービス年月());
             set証明書入力完了フラグ(証明書入力済区分, 償還払ViewStateDB, kensakuParameter);
         }
+        ViewStateHolder.put(ViewStateKeys.証明書戻り, 確認戻り);
         return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.一覧に戻る).respond();
     }
 

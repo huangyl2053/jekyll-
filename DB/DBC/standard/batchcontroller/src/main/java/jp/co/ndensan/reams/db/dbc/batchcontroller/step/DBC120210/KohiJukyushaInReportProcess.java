@@ -384,10 +384,13 @@ public class KohiJukyushaInReportProcess extends BatchKeyBreakBase<SogojigyohiKo
                 && !beforeEntity.get公費負担者番号().equals(currentEntity.get公費負担者番号());
     }
 
-    private RString doカンマ編集(Decimal number) {
+    private RString doカンマ編集(RString number) {
         if (null == number) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toコンマ区切りRString(number, 0);
+        if (Decimal.canConvert(number)) {
+            return DecimalFormatter.toコンマ区切りRString(new Decimal(number.toString()), 0);
+        }
+        return number;
     }
 }

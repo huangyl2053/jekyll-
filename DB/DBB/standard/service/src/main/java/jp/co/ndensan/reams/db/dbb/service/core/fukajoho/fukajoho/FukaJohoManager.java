@@ -16,8 +16,11 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRel
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.kibetsu.KibetsuManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -61,11 +64,31 @@ public class FukaJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link FukaJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link FukaJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link FukaJohoManager}のインスタンス
      */
     public static FukaJohoManager createInstance() {
         return InstanceProvider.create(FukaJohoManager.class);
+    }
+
+    /**
+     * 引数に一致する賦課の情報を返します。
+     *
+     * @param 賦課年度 FukaNendo
+     * @param 通知書番号 TsuchishoNo
+     * @return List<Fuka>
+     */
+    @Transaction
+    public List<FukaJoho> get賦課の情報(FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) {
+        List<FukaJoho> businessList = new ArrayList<>();
+
+        for (DbT2002FukaEntity entity : 介護賦課Dac.select歳出還付額(賦課年度, 通知書番号)) {
+            FukaJohoRelateEntity relateEntity = new FukaJohoRelateEntity();
+            relateEntity.set介護賦課Entity(entity);
+            businessList.add(new FukaJoho(relateEntity));
+        }
+
+        return businessList;
     }
 
     /**

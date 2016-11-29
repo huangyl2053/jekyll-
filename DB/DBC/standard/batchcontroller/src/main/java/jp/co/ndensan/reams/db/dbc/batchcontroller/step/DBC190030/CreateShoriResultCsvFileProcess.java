@@ -5,15 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190030;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.CreateShoriResultCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc190030.ShoriResultCsvEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.taishosetaiinido.KijunShunyugakuTekiyoKanriEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -23,6 +28,10 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -31,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBC-4640-080 xuzhao
  */
-public class CreateShoriResultCsvFileProcess extends BatchProcessBase<DbT3116KijunShunyugakuTekiyoKanriEntity> {
+public class CreateShoriResultCsvFileProcess extends BatchProcessBase<KijunShunyugakuTekiyoKanriEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence"
             + ".db.mapper.relate.taishosetaiinido.ITaishoSetaiinIdoMapper.select基準収入額適用管理マスタ");
@@ -50,6 +59,7 @@ public class CreateShoriResultCsvFileProcess extends BatchProcessBase<DbT3116Kij
     private FileSpoolManager manager;
     private RString 市町村コード;
     private RString 市町村名;
+    private List<PersonalData> personalDataList;
 
     @BatchWriter
     CsvWriter<ShoriResultCsvEntity> 処理結果確認リストＣＳＶ;
@@ -59,6 +69,7 @@ public class CreateShoriResultCsvFileProcess extends BatchProcessBase<DbT3116Kij
         市町村コード = AssociationFinderFactory.createInstance().getAssociation()
                 .get地方公共団体コード().code市町村RString();
         市町村名 = AssociationFinderFactory.createInstance().getAssociation().get市町村名();
+        personalDataList = new ArrayList<>();
     }
 
     @Override
@@ -83,7 +94,8 @@ public class CreateShoriResultCsvFileProcess extends BatchProcessBase<DbT3116Kij
     }
 
     @Override
-    protected void process(DbT3116KijunShunyugakuTekiyoKanriEntity t) {
+    protected void process(KijunShunyugakuTekiyoKanriEntity entity) {
+        personalDataList.add(toPersonalData(isNullOrEmpty(entity.getHihokenshaNo()), getShikibetsuCode(entity.getShikibetsuCode())));
         ShoriResultCsvEntity csvEntity = new ShoriResultCsvEntity();
         csvEntity.set市町村コード(市町村コード);
         csvEntity.set市町村名(市町村名);
@@ -95,8 +107,8 @@ public class CreateShoriResultCsvFileProcess extends BatchProcessBase<DbT3116Kij
         csvEntity.setキー項目5(RString.EMPTY);
         csvEntity.setプログラム名_上(DATA_対象者判定);
         csvEntity.setプログラム名_下(DATA_ENTITY_ID);
-        csvEntity.set項目1(t.getSetaiCode().getColumnValue());
-        csvEntity.set項目2(t.getHihokenshaNo().getColumnValue());
+        csvEntity.set項目1(entity.getSetaiCode().value());
+        csvEntity.set項目2(entity.getHihokenshaNo().value());
         csvEntity.set項目3(RString.EMPTY);
         csvEntity.set項目4(RString.EMPTY);
         csvEntity.set項目5(RString.EMPTY);
@@ -107,8 +119,31 @@ public class CreateShoriResultCsvFileProcess extends BatchProcessBase<DbT3116Kij
 
     @Override
     protected void afterExecute() {
+        getアクセスログ();
         処理結果確認リストＣＳＶ.close();
         manager.spool(SubGyomuCode.DBC介護給付, 処理結果確認リストＣＳＶFilePath);
     }
 
+    private AccessLogUUID getアクセスログ() {
+        return AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+    }
+
+    private PersonalData toPersonalData(RString 被保険者番号, ShikibetsuCode 識別コード) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号);
+        return PersonalData.of(識別コード, expandedInfo);
+    }
+
+    private RString isNullOrEmpty(HihokenshaNo date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return date.value();
+    }
+
+    private ShikibetsuCode getShikibetsuCode(ShikibetsuCode date) {
+        if (date == null) {
+            return ShikibetsuCode.EMPTY;
+        }
+        return date;
+    }
 }

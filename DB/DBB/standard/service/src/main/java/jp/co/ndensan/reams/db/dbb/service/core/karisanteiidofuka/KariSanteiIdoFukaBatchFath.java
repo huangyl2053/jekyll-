@@ -82,9 +82,9 @@ public class KariSanteiIdoFukaBatchFath {
     private static final RString MONTHDATE = new RString("0401");
     private static final RString 現金 = new RString("現金");
     private static final RString 口座 = new RString("口座");
-    private static final RString 特別徴収 = new RString("特別徴収");
-    private static final RString 普通徴収 = new RString("普通徴収");
-    private static final RString 併用徴収 = new RString("併用徴収");
+    private static final RString 特別徴収 = new RString("特徴");
+    private static final RString 普通徴収 = new RString("普徴");
+    private static final RString 併用徴収 = new RString("併徴");
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
     private static final int NUM_0 = 0;
@@ -246,10 +246,10 @@ public class KariSanteiIdoFukaBatchFath {
             調定事由1 = 徴収方法情報.get特別徴収停止事由コード();
             flag1 = true;
         }
-        if (設定前賦課情報.get調定事由1().isNullOrEmpty()
-                && 設定前賦課情報.get調定事由2().isNullOrEmpty()
-                && 設定前賦課情報.get調定事由3().isNullOrEmpty()
-                && 設定前賦課情報.get調定事由4().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(設定前賦課情報.get調定事由1())
+                && RString.isNullOrEmpty(設定前賦課情報.get調定事由2())
+                && RString.isNullOrEmpty(設定前賦課情報.get調定事由3())
+                && RString.isNullOrEmpty(設定前賦課情報.get調定事由4())) {
             if (!flag1) {
                 調定事由1 = ChoteiJiyuCode.その他資格異動.getコード();
                 flag1 = true;
@@ -308,8 +308,8 @@ public class KariSanteiIdoFukaBatchFath {
             boolean flag2,
             boolean flag3,
             boolean flag4) {
-        if (!設定前賦課情報.get老年開始日().equals(当初賦課情報.get老年開始日())
-                || !設定前賦課情報.get老年廃止日().equals(当初賦課情報.get老年廃止日())) {
+        if (!nullToDate(設定前賦課情報.get老年開始日()).equals(当初賦課情報.get老年開始日())
+                || !nullToDate(設定前賦課情報.get老年廃止日()).equals(当初賦課情報.get老年廃止日())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.老齢年金による更正.getコード());
                 flag1 = true;
@@ -324,8 +324,8 @@ public class KariSanteiIdoFukaBatchFath {
                 flag4 = true;
             }
         }
-        if (!設定前賦課情報.get生保開始日().equals(当初賦課情報.get生保開始日())
-                || !設定前賦課情報.get生保廃止日().equals(当初賦課情報.get生保廃止日())) {
+        if (!nullToDate(設定前賦課情報.get生保開始日()).equals(当初賦課情報.get生保開始日())
+                || !nullToDate(設定前賦課情報.get生保廃止日()).equals(当初賦課情報.get生保廃止日())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.生活保護による更正.getコード());
                 flag1 = true;
@@ -341,7 +341,7 @@ public class KariSanteiIdoFukaBatchFath {
             }
 
         }
-        if (設定前賦課情報.get減免額() != null && !設定前賦課情報.get減免額().equals(当初賦課情報.get減免額())) {
+        if (!nullTOZero(設定前賦課情報.get減免額()).equals(当初賦課情報.get減免額())) {
             if (!flag1) {
                 list.set(NUM_0, ChoteiJiyuCode.減免決定による更正.getコード());
                 flag1 = true;
@@ -561,14 +561,15 @@ public class KariSanteiIdoFukaBatchFath {
         entity.set作成年月日(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
         entity.set作成時刻(調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         entity.set賦課年度(賦課年度.seireki().toDateString());
-        AtenaMeisho atenaMeisho = 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity().getKanjiShimei();
-        if (atenaMeisho != null) {
-            entity.set氏名(atenaMeisho.value());
-        }
         if (更正前後Entity.get計算後情報_宛名_口座_更正前Entity() != null
                 && 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity() != null) {
+            AtenaMeisho atenaMeisho = 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity().getKanjiShimei();
+            if (atenaMeisho != null) {
+                entity.set氏名(atenaMeisho.value());
+            }
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity());
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId());
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBB介護賦課,
+                    ReportIdDBB.DBB200013.getReportId());
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             Association association = finder.getAssociation();
             EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, association);
@@ -818,5 +819,12 @@ public class KariSanteiIdoFukaBatchFath {
             return Decimal.ZERO;
         }
         return decimal;
+    }
+
+    private FlexibleDate nullToDate(FlexibleDate date) {
+        if (date == null) {
+            return FlexibleDate.EMPTY;
+        }
+        return date;
     }
 }

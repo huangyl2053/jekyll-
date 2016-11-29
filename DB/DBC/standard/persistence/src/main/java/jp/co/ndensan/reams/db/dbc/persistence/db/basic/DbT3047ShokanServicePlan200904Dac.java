@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904.hiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904.jigyoshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904.meisaiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904.renban;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904.seiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904.serviceCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904.serviceTeikyoYM;
@@ -47,6 +48,8 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
     private static final RString 定数_サービス提供年月 = new RString("サービス提供年月");
     private static final RString 定数_整理番号 = new RString("整理番号");
     private static final RString 定数_事業者番号 = new RString("事業者番号");
+    private static final RString 定数_様式番号 = new RString("様式番号");
+    private static final RString 定数_明細番号 = new RString("明細番号");
     @InjectSession
     private SqlSession session;
 
@@ -76,8 +79,8 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
-        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_様式番号.toString()));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_明細番号.toString()));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -89,9 +92,9 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
                         eq(serviceTeikyoYM, サービス提供年月),
                         eq(seiriNo, 整理番号),
                         eq(jigyoshaNo, 事業者番号),
-                        eq(yoshikiNo, 様式番号)
-                //                                eq(meisaiNo, 明細番号),
-                //                                eq(renban, 連番)
+                        eq(yoshikiNo, 様式番号),
+                        eq(meisaiNo, 明細番号),
+                        eq(renban, 連番)
                 )).
                 toObject(DbT3047ShokanServicePlan200904Entity.class);
     }
@@ -219,7 +222,7 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
-        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_様式番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -254,7 +257,7 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
-        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_様式番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -291,8 +294,8 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
-        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_様式番号.toString()));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_明細番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 

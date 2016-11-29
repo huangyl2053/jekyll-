@@ -20,9 +20,9 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.Tas
 import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyo.KaigoJyuminhyouTashajukiCSVDataSakuseiFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.RenkeiDataFormatVersion;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7035RendoPatternEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7035RendoPatternMapper;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;

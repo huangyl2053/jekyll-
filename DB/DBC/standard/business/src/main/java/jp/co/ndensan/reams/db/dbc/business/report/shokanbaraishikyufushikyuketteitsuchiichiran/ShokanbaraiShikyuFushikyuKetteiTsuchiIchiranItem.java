@@ -52,6 +52,8 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
     private RString kingaku;
     private RString tuika;
     private RString shurui;
+    private RString shurui1;
+    private RString shurui2;
     private RString keteiKubun;
     private RString shiharaiHoho;
 
@@ -61,6 +63,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
     private RString shoKisaiHokenshaNo;
     private RString ketteiTsuchiNo;
     private RString shinseishaKubun;
+    private boolean breakKeyFlg;
 
     /**
      * インスタンスを生成します。
@@ -104,6 +107,8 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
      * @param kingaku 様式毎の金額
      * @param tuika 追加
      * @param shurui 種類
+     * @param shurui1 種類
+     * @param shurui2 種類
      * @param keteiKubun 支給（不支給）決定区分
      * @param shiharaiHoho 支払方法
      * @param choikiCode 町域コード
@@ -120,7 +125,8 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
             RString keteiTsuchiNo, RString hihokenshaNo, RString hihokenshaName, RString jusho, RString yubinBango,
             RString teikyo, RString yoKaigodo, RString ninteiKaishibi, RString ninteiShuryobi, RString uketsukeYMD,
             RString keteiYMD, RString honjinShiharaigaku, RString shikyugaku, RString yoshikigotoKingaku, RString kingaku, RString tuika,
-            RString shurui, RString keteiKubun, RString shiharaiHoho, RString choikiCode, RString gyoseikuCode, RString kanaMeisho,
+            RString shurui, RString shurui1, RString shurui2, RString keteiKubun, 
+            RString shiharaiHoho, RString choikiCode, RString gyoseikuCode, RString kanaMeisho,
             RString shoKisaiHokenshaNo, RString ketteiTsuchiNo, RString shinseishaKubun) {
         this.printTimeStamp = printTimeStamp;
         this.hokenshaNo = hokenshaNo;
@@ -154,6 +160,8 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
         this.kingaku = kingaku;
         this.tuika = tuika;
         this.shurui = shurui;
+        this.shurui1 = shurui1;
+        this.shurui2 = shurui2;
         this.keteiKubun = keteiKubun;
         this.shiharaiHoho = shiharaiHoho;
         this.choikiCode = choikiCode;

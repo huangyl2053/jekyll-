@@ -480,11 +480,11 @@ public class SeikyuShinsaShuseiTorokuHandler {
         }
         出力集計 = 出力集計.createBuilderForEdit().set識別コード(ShikibetsuCode.EMPTY).build();
         出力集計 = 出力集計.createBuilderForEdit().set介護支払方法区分(ShiharaiHohoKubun.口座払.getコード()).build();
-        if (div.getCcdKinyuKikanInput().get金融機関().get金融機関コード() != null) {
+        if (div.getCcdKinyuKikanInput().get金融機関() != null && div.getCcdKinyuKikanInput().get金融機関().get金融機関コード() != null) {
             出力集計 = 出力集計.createBuilderForEdit().set金融機関コード(new RString(div.getCcdKinyuKikanInput().get金融機関().
                     get金融機関コード().toString())).build();
         }
-        if (div.getCcdKinyuKikanInput().get金融機関支店().get支店コード() != null) {
+        if (div.getCcdKinyuKikanInput().get金融機関支店() != null && div.getCcdKinyuKikanInput().get金融機関支店().get支店コード() != null) {
             出力集計 = 出力集計.createBuilderForEdit().set支店コード(new RString(div.getCcdKinyuKikanInput().get金融機関支店().
                     get支店コード().toString())).build();
         }

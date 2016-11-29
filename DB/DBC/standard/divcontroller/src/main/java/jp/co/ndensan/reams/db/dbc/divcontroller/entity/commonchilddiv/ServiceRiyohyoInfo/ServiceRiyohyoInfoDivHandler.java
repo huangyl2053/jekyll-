@@ -1398,8 +1398,8 @@ public class ServiceRiyohyoInfoDivHandler {
         ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(給付率));
         div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(給付率);
 
-//        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
-//        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
+        div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
 //        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
 //        div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
 //        div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(false);
@@ -1467,7 +1467,11 @@ public class ServiceRiyohyoInfoDivHandler {
      */
     public void init削除() {
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
-        row.setRowState(RowState.Deleted);
+        RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+        if (!照会.equals(表示モード)) {
+            row.setRowState(RowState.Deleted);
+            div.getBtnUpdate().setDisabled(false);
+        }
 
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisabled(true);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(false);
@@ -1508,7 +1512,6 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().getTxtRiyoshaFutangakuZengaku().setValue(row.getRiyoshaFutangakuZengaku().getValue());
         }
         
-        div.getBtnUpdate().setDisabled(false);
     }
 
     /**

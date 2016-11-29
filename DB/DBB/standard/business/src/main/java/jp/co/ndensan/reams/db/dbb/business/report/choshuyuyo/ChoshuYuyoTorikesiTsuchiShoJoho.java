@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.Choshu
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 
 /**
@@ -28,4 +29,5 @@ public class ChoshuYuyoTorikesiTsuchiShoJoho {
     private Association 地方公共団体;
     private CaFt703FindNokumiEntity 納組情報;
     private ChohyoSeigyoKyotsu 帳票制御共通;
+    private GennenKanen 年度区分;
 }

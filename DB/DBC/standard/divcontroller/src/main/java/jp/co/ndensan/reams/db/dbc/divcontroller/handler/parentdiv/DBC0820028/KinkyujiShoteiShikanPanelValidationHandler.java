@@ -271,6 +271,11 @@ public class KinkyujiShoteiShikanPanelValidationHandler {
                     new KinkyujiShoteiShikanPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.未入力, 放射線治療.toString())));
         }
+        validPairs = check計算3_2(validPairs);
+        return validPairs;
+    }
+
+    private ValidationMessageControlPairs check計算3_2(ValidationMessageControlPairs validPairs) {
         if (div.getPanelDetail().getTxtShochiTanisu().getValue() == null
                 && (div.getPanelDetail().getTxtShujutsuTanisu().getValue() != null
                 || div.getPanelDetail().getTxtHoshasenChiryoTanisu().getValue() != null
@@ -289,6 +294,7 @@ public class KinkyujiShoteiShikanPanelValidationHandler {
                     new KinkyujiShoteiShikanPanelValidationHandler.IdocheckMessages(
                             UrErrorMessages.未入力, 麻酔.toString())));
         }
+
         return validPairs;
     }
 

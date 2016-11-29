@@ -65,7 +65,7 @@ public class KagoMoshitatePanelHandler {
                     servive_Row.setDefaultDataName4(
                             ServiceCategoryShurui.toValue(給付管理明細.getサービス種類コード().value()).get名称());
                 }
-                servive_Row.getDefaultDataName5().setValue(Decimal.valueOf(給付管理明細.get給付計画合計単位数_日数()));
+                servive_Row.getDefaultDataName5().setValue(Decimal.valueOf(給付管理明細.get給付計画単位数_日数()));
                 rowList.add(servive_Row);
             }
         }

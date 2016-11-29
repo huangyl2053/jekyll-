@@ -43,10 +43,6 @@
                   )
             </if>
              and 被保険者台帳管理NEWEST. "shikibetsuCode" is not null
-             <if test="改頁出力順 != null">
-                 ORDER BY
-                  ${改頁出力順}
-             </if>
        )
        SELECT 
            master.*,
@@ -73,7 +69,10 @@
                 )   
              ) AS 宛名PSM  
        ON  宛名PSM."shikibetsuCode" = "master"."shikibetsuCode"
-
+        <if test="改頁出力順 != null">
+                 ORDER BY
+                  ${改頁出力順}
+        </if>
    </select>
    <resultMap id="受領委任データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc010010.JuryoininKeiyakuShoninKakuninshoEntity" autoMapping="true">
         <id column="dbT3078ShokanJuryoininKeiyakusha_keiyakuJigyoshaNo"/>

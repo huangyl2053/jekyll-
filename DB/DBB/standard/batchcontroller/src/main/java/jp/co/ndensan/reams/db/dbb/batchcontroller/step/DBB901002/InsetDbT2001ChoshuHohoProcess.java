@@ -110,6 +110,9 @@ public class InsetDbT2001ChoshuHohoProcess extends BatchProcessBase<DbV2001Chosh
             newEntity.setChoshuHohoYoku7gatsu(ChoshuHoho.普通徴収.getコード());
             newEntity.setChoshuHohoYoku8gatsu(ChoshuHoho.普通徴収.getコード());
             newEntity.setChoshuHohoYoku9gatsu(ChoshuHoho.普通徴収.getコード());
+            newEntity.setKariNenkinNo(RString.EMPTY);
+            newEntity.setKariNenkinCode(RString.EMPTY);
+            newEntity.setKariHosokuM(RString.EMPTY);
         }
         if (ChoshuHoho.普通徴収.getコード().equals(entity.getChoshuHoho3gatsu())) {
             newEntity.setChoshuHoho4gatsu(ChoshuHoho.普通徴収.getコード());
@@ -130,7 +133,50 @@ public class InsetDbT2001ChoshuHohoProcess extends BatchProcessBase<DbV2001Chosh
             newEntity.setChoshuHohoYoku7gatsu(ChoshuHoho.普通徴収.getコード());
             newEntity.setChoshuHohoYoku8gatsu(ChoshuHoho.普通徴収.getコード());
             newEntity.setChoshuHohoYoku9gatsu(ChoshuHoho.普通徴収.getコード());
+            newEntity.setKariNenkinNo(RString.EMPTY);
+            newEntity.setKariNenkinCode(RString.EMPTY);
+            newEntity.setKariHosokuM(RString.EMPTY);
         }
-        writer.insert(newEntity);
+
+        if ((RString.isNullOrEmpty(entity.getChoshuHoho3gatsu())
+                || ChoshuHoho.資格なし.getコード().equals(entity.getChoshuHoho3gatsu()))
+                && (null == 特別徴収停止日時 || 特別徴収停止日時.isEmpty())) {
+            newEntity = null;
+        }
+        徴収方法の編集_資格なし(entity, newEntity);
+        if (null != newEntity) {
+            writer.insert(newEntity);
+        }
+    }
+
+    private void 徴収方法の編集_資格なし(DbV2001ChoshuHohoEntity entity,
+            DbT2001ChoshuHohoEntity newEntity) {
+        RString choshuHoho3gatsu = entity.getChoshuHoho3gatsu();
+        YMDHMS tokuchoTeishiNichiji = entity.getTokuchoTeishiNichiji();
+        if ((RString.isNullOrEmpty(choshuHoho3gatsu)
+                || ChoshuHoho.資格なし.getコード().equals(choshuHoho3gatsu))
+                && null != tokuchoTeishiNichiji && (!tokuchoTeishiNichiji.isEmpty())) {
+            newEntity.setChoshuHoho4gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHoho5gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHoho6gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHoho7gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHoho8gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHoho9gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHoho10gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHoho11gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHoho12gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHoho1gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHoho2gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHoho3gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHohoYoku4gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHohoYoku5gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHohoYoku6gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHohoYoku7gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHohoYoku8gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setChoshuHohoYoku9gatsu(ChoshuHoho.資格なし.getコード());
+            newEntity.setKariNenkinNo(RString.EMPTY);
+            newEntity.setKariNenkinCode(RString.EMPTY);
+            newEntity.setKariHosokuM(RString.EMPTY);
+        }
     }
 }

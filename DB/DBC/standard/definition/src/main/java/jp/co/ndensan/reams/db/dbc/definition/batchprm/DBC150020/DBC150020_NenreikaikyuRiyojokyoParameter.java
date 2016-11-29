@@ -32,7 +32,7 @@ public class DBC150020_NenreikaikyuRiyojokyoParameter extends BatchParameterBase
     private static final String SHINSAYM = "sinsaYM";
     private static final String NENREISANSYUTUKIJUBI = "nenreiSansyutuKijyubi";
     private static final String SENTAKUTEISYOKUBUN = "sentakuTaisyoKubun";
-    private static final String SENTAKUTEISYOLIST = "sentakuTaisyoList";
+    private static final String SENTAKUTAISYOMAP = "sentakuTaisyoMap";
     private static final String SHICHOSONCODE = "shichosonCode";
     private static final String SHICHOSONMEISHO = "shichosonMeisho";
     private static final String KYOSHICHOSONCODE = "kyoShichosonCode";
@@ -46,7 +46,7 @@ public class DBC150020_NenreikaikyuRiyojokyoParameter extends BatchParameterBase
     private FlexibleDate nenreiSansyutuKijyubi;
     @BatchParameter(key = SENTAKUTEISYOKUBUN, name = "選択対象区分")
     private RString sentakuTaisyoKubun;
-    @BatchParameter(key = SENTAKUTEISYOLIST, name = "選択対象リスト")
+    @BatchParameter(key = SENTAKUTAISYOMAP, name = "選択対象リスト")
     private Map<RString, RString> sentakuTaisyoMap;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
     private Code shichosonCode;

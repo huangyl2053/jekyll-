@@ -73,6 +73,8 @@ public class KogakuKyufuTaishoshaIchiranHeaderEditor implements IKogakuKyufuTais
         source.kokuhorenName = 帳票出力対象データ.get対象者().get国保連合会名();
         if (null != 対象者.get証記載保険者番号()) {
             source.shoKisaiHokenshaNo = 対象者.get証記載保険者番号().getColumnValue();
+        } else {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
         }
         source.shoKisaiHokenshaName = 対象者.get証記載保険者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);

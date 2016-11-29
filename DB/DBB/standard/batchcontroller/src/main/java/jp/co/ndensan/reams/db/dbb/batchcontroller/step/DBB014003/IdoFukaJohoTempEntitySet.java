@@ -805,7 +805,9 @@ public class IdoFukaJohoTempEntitySet {
 
         UaT0301YokinShubetsuPatternEntity uat0301Entity = 特定口座.getYokinShubetsuPatternEntity();
         if (uat0301Entity != null) {
-            tmpEntity.setUaT0301YokinShubetsuPattern_yokinShubetsuPatternCode(uat0301Entity.getYokinShubetsuPatternCode().getColumnValue());
+            if (uat0301Entity.getYokinShubetsuPatternCode() != null) {
+                tmpEntity.setUaT0301YokinShubetsuPattern_yokinShubetsuPatternCode(uat0301Entity.getYokinShubetsuPatternCode().getColumnValue());
+            }
             tmpEntity.setUaT0301YokinShubetsuPattern_yokinShubetsuCode(uat0301Entity.getYokinShubetsuCode());
             tmpEntity.setUaT0301YokinShubetsuPattern_yokinShubetsuMeisho(uat0301Entity.getYokinShubetsuMeisho());
             tmpEntity.setUaT0301YokinShubetsuPattern_yokinShubetsuRyakusho(uat0301Entity.getYokinShubetsuRyakusho());

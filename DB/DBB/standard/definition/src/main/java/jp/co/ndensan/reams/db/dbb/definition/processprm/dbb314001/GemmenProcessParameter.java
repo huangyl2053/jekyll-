@@ -35,9 +35,10 @@ public class GemmenProcessParameter implements IBatchProcessParameter {
     private List<RString> list地区3コード;
     private FlexibleDate shinseiYMD;
     private Code gemmenJiyuCode;
+    private RString gemmenJiyu;
     private RString shinseiJiyu;
     private FlexibleDate ketteiYMD;
-    private RString gemmenJiyu;
+    private RString ketteiJiyu;
     private UaFt200FindShikibetsuTaishoParam 宛名検索条件;
 
     /**
@@ -61,13 +62,14 @@ public class GemmenProcessParameter implements IBatchProcessParameter {
      * @param list地区3コード List<RString>
      * @param shinseiYMD FlexibleDate
      * @param gemmenJiyuCode Code
+     * @param gemmenJiyu RString
      * @param shinseiJiyu RString
      * @param ketteiYMD FlexibleDate
-     * @param gemmenJiyu RString
+     * @param ketteiJiyu RString
      */
     public GemmenProcessParameter(FlexibleYear choteiNendo, FlexibleYear fukaNendo, List<RString> list町域コード,
             List<RString> list行政区コード, List<RString> list地区1コード, List<RString> list地区2コード, List<RString> list地区3コード,
-            FlexibleDate shinseiYMD, Code gemmenJiyuCode, RString shinseiJiyu, FlexibleDate ketteiYMD, RString gemmenJiyu) {
+            FlexibleDate shinseiYMD, Code gemmenJiyuCode, RString gemmenJiyu, RString shinseiJiyu, FlexibleDate ketteiYMD, RString ketteiJiyu) {
         this.choteiNendo = choteiNendo;
         this.fukaNendo = fukaNendo;
         this.list町域コード = list町域コード;
@@ -77,9 +79,10 @@ public class GemmenProcessParameter implements IBatchProcessParameter {
         this.list地区3コード = list地区3コード;
         this.shinseiYMD = shinseiYMD;
         this.gemmenJiyuCode = gemmenJiyuCode;
+        this.gemmenJiyu = gemmenJiyu;
         this.shinseiJiyu = shinseiJiyu;
         this.ketteiYMD = ketteiYMD;
-        this.gemmenJiyu = gemmenJiyu;
+        this.ketteiJiyu = ketteiJiyu;
     }
 
     /**
@@ -89,7 +92,7 @@ public class GemmenProcessParameter implements IBatchProcessParameter {
      */
     public GemmenMybatisParameter toMybatisParameter() {
         return new GemmenMybatisParameter(choteiNendo, fukaNendo, list町域コード, list行政区コード, list地区1コード,
-                list地区2コード, list地区3コード, shinseiYMD, gemmenJiyuCode, shinseiJiyu, ketteiYMD, gemmenJiyu, 宛名検索条件);
+                list地区2コード, list地区3コード, shinseiYMD, gemmenJiyuCode, shinseiJiyu, ketteiYMD, ketteiJiyu, 宛名検索条件);
     }
 
 }

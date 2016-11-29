@@ -30,6 +30,14 @@ public interface IKakushuTsuchishoSakuseiMapper {
     KakushuTsuchishoEntity get更正前後賦課の情報(KakushuTsuchishoEntityParameter parameter);
 
     /**
+     * 更正後賦課の情報を取得メソッドです。
+     *
+     * @param parameter parameter
+     * @return KakushuTsuchishoEntity
+     */
+    KakushuTsuchishoEntity get更正前後賦課の情報With還付額(KakushuTsuchishoEntityParameter parameter);
+
+    /**
      * 宛名、納組、納期、宛先、口座情報を取得メソッドです。
      *
      * @param parameter parameter

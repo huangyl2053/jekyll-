@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoHenkoFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
 import jp.co.ndensan.reams.db.dbc.business.core.dbjoho.DbJohoViewState;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseijoho.ShokujiHiyoUpdateData;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoHenkoKubunType;
@@ -67,6 +66,8 @@ public class ShokujiHiyoPanel {
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成17年９月 = new FlexibleYearMonth("200509");
     private static final FlexibleYearMonth 平成17年１０月 = new FlexibleYearMonth("200510");
+    private static final RString 証明書戻り_0 = new RString("0");
+    private static final RString 証明書戻り_1 = new RString("1");
 
     /**
      * onLoad
@@ -102,7 +103,6 @@ public class ShokujiHiyoPanel {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
         getHandler(div).setヘッダーエリア(サービス提供年月, 申請日, 事業者番号, 明細番号, 様式番号);
-        ArrayList<ShokanMeisaiResult> 償還払請求明細データList = 償還払ViewStateDB.get償還払請求明細データList();
         ArrayList<ShokanShokujiHiyo> 償還払請求食事費用データList = 償還払ViewStateDB.get償還払請求食事費用データList();
         if (!サービス提供年月.isEmpty() && サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
             getHandler(div).set平成１５年３月_状態();
@@ -243,6 +243,7 @@ public class ShokujiHiyoPanel {
                 return ResponseData.of(div).addValidationMessages(controlPairs).respond();
             }
         }
+        ViewStateHolder.put(ViewStateKeys.証明書戻り, 証明書戻り_1);
         return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.一覧に戻る).respond();
     }
 
@@ -256,18 +257,17 @@ public class ShokujiHiyoPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.一覧に戻る).respond();
         }
+        ViewStateHolder.put(ViewStateKeys.証明書戻り, 証明書戻り_0);
         return clear入力内容(div);
 
     }
 
     private ResponseData<ShokujiHiyoPanelDiv> clear入力内容(ShokujiHiyoPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode(),
-                        DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+            QuestionMessage message = new QuestionMessage(
+                    DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().getCode(),
+                    DbcQuestionMessages.償還払い費支給申請決定_入力内容破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             DbJohoViewState db情報 = ViewStateHolder.get(ViewStateKeys.償還払ViewStateDBBAK, DbJohoViewState.class);

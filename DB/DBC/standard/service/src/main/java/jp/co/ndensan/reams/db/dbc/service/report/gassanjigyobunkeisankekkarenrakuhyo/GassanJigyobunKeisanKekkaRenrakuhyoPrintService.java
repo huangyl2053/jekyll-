@@ -16,18 +16,11 @@ import jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunkeisankekkarenraku
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.toiawasesaki.IToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.toiawasesaki.IToiawasesakiSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilders.ReportSourceBuilders;
-import jp.co.ndensan.reams.uz.uza.biz.BushoCode;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -51,6 +44,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
     private static final int INDEX_12 = 12;
     private static final RString INT_5 = new RString("5");
 
@@ -92,11 +86,9 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
             RString 通知書定型文1 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100204.getReportId(),
                     KamokuCode.EMPTY, INDEX_1).get(INDEX_1);
             RString 通知書定型文2 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100204.getReportId(),
-                    KamokuCode.EMPTY, INDEX_2).get(INDEX_1);
-            IToiawasesakiSourceBuilderCreator creator = ReportSourceBuilders.toiawaseSourceBuilder();
-            IToiawasesakiSourceBuilder builder = creator.create(GyomuCode.DB介護保険,
-                    ReportIdDBC.DBC100204.getReportId(), BushoCode.EMPTY, RDate.getNowDate());
-            ToiawasesakiSource 問い合わせ先 = builder.buildSource();
+                    KamokuCode.EMPTY, INDEX_1).get(INDEX_2);
+            RString 通知書定型文3 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100204.getReportId(),
+                    KamokuCode.EMPTY, INDEX_1).get(INDEX_3);
             NinshoshaSource 認証者 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100204.getReportId(),
                     作成日, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
 
@@ -201,7 +193,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
                 }
                 int count = editCount(entityList);
                 printOrder(保険制度コード, entityList, j, 通知書定型文1, 通知書定型文2,
-                        panelEntity1, 認証者, 宛名データ, 問い合わせ先, flag, reportSourceWriter, panelEntity2, isBreak, count);
+                        panelEntity1, 認証者, 宛名データ, 通知書定型文3, flag, reportSourceWriter, panelEntity2, isBreak, count);
 
             }
 
@@ -219,7 +211,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
     private void printOrder(RString 保険制度コード, List<JigyobunShikyugakuKeisanResultEntity> entityList,
             int j, RString 通知書定型文1, RString 通知書定型文2, JigyobunShikyugakuKeisanResultEntity panelEntity1,
             NinshoshaSource 認証者,
-            IShikibetsuTaisho 宛名データ, ToiawasesakiSource 問い合わせ先, boolean flag,
+            IShikibetsuTaisho 宛名データ, RString 通知書定型文3, boolean flag,
             ReportSourceWriter<GassanJigyobunKeisanKekkaRenrakuhyoSource> reportSourceWriter,
             JigyobunShikyugakuKeisanResultEntity panelEntity2, boolean isBreak, int count) {
 
@@ -228,32 +220,32 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
                 && !保険制度コード.equals(entityList.get(j - 1).getHokenSeidoCode())) {
             isBreak = true;
             new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, panelEntity1, 認証者,
-                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
+                    宛名データ, 通知書定型文3, flag, isBreak, count).writeBy(reportSourceWriter);
             isBreak = false;
             new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者,
-                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
+                    宛名データ, 通知書定型文3, flag, isBreak, count).writeBy(reportSourceWriter);
 
         } else if (j == entityList.size() - INDEX_1
                 && !保険制度コード.equals(INT_5)) {
             new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者,
-                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
+                    宛名データ, 通知書定型文3, flag, isBreak, count).writeBy(reportSourceWriter);
             flag = true;
             isBreak = true;
             new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, panelEntity1, 認証者,
-                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
+                    宛名データ, 通知書定型文3, flag, isBreak, count).writeBy(reportSourceWriter);
 
         } else if (j == entityList.size() - INDEX_1
                 && 保険制度コード.equals(INT_5)) {
             new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者,
-                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
+                    宛名データ, 通知書定型文3, flag, isBreak, count).writeBy(reportSourceWriter);
             flag = true;
             isBreak = true;
             new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, panelEntity2, 認証者,
-                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
+                    宛名データ, 通知書定型文3, flag, isBreak, count).writeBy(reportSourceWriter);
 
         } else {
             new GassanJigyobunKeisanKekkaRenrakuhyoReport(通知書定型文1, 通知書定型文2, entityList.get(j), 認証者,
-                    宛名データ, 問い合わせ先, flag, isBreak, count).writeBy(reportSourceWriter);
+                    宛名データ, 通知書定型文3, flag, isBreak, count).writeBy(reportSourceWriter);
 
         }
     }

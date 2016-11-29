@@ -41,9 +41,37 @@ module DBZ
 
             public getEditTypes(): UZA.EditTypeForPublicProperty {
                 var editTypes = new UZA.EditTypeForPublicProperty();
-
+                editTypes.addEditType("TxtHokenshaNo_labelLWidth", UZA.EditTypeEnumForPublicProperty.StringType);
+				editTypes.addEditType("TxtHokenshaNo_required", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("TxtHokenshaNo_labelLText", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             }
+
+			public getTxtHokenshaNo_labelLWidth = function () {
+                return this.controls.txtHokenshaNo().labelLWidth;
+            }
+
+            public setTxtHokenshaNo_labelLWidth = function (value) {
+                this.controls.txtHokenshaNo().labelLWidth = value;
+            }
+
+			public getTxtHokenshaNo_required = function () {
+                return this.controls.txtHokenshaNo().required;
+            }
+
+            public setTxtHokenshaNo_required = function (value) {
+                this.controls.txtHokenshaNo().required = value;
+            }
+
+            public getTxtHokenshaNo_labelLText = function () {
+                return this.controls.txtHokenshaNo().labelLText;
+            }
+
+            public setTxtHokenshaNo_labelLText = function (value) {
+                this.controls.txtHokenshaNo().labelLText = value;
+            }
+
+
         }
     }
 }

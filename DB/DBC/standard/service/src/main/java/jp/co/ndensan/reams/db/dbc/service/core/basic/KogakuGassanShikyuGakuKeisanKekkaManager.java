@@ -197,19 +197,15 @@ public class KogakuGassanShikyuGakuKeisanKekkaManager {
     /**
      * 合致する高額合算支給額計算結果を返します。
      *
-     * @param 被保険者番号 HihokenshaNo
      * @param 支給申請書整理番号 ShikyuShinseishoSeiriNo
      * @return List<KogakuGassanShikyuGakuKeisanKekka>
      */
     @Transaction
     public List<KogakuGassanShikyuGakuKeisanKekka> get高額合算支給額計算結果(
-            HihokenshaNo 被保険者番号,
             RString 支給申請書整理番号) {
         List<KogakuGassanShikyuGakuKeisanKekka> businessList = new ArrayList<>();
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_支給申請書整理番号.toString()));
-        for (DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity : dac.selectBySeiriNo(被保険者番号,
-                支給申請書整理番号)) {
+        for (DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity : dac.selectBySeiriNo(支給申請書整理番号)) {
             entity.initializeMd5();
             businessList.add(new KogakuGassanShikyuGakuKeisanKekka(entity));
         }

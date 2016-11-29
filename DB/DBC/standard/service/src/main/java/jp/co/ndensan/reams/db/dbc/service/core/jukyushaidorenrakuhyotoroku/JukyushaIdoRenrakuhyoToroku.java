@@ -196,61 +196,65 @@ public class JukyushaIdoRenrakuhyoToroku {
             jukyuEntity.set新１(entity.getKyotakuhiShin1FutanGendogaku());
             jukyuEntity.set新２(entity.getKyotakuhiShin2FutanGendogaku());
             jukyuEntity.set新３(entity.getKyotakuhiShin3FutanGendogaku());
-            ShoKisaiHokenshaNo koikiRengoHokenshaNo = entity.getKoikiRengoHokenshaNo();
-            if (koikiRengoHokenshaNo != null) {
-                jukyuEntity.set広域保険者番号(koikiRengoHokenshaNo.getColumnValue());
-            }
-            jukyuEntity.set老人保健市町村番号(entity.getRojinHokenShichosonNo());
-            jukyuEntity.set老人保健受給者番号(entity.getRojinHokenJukyushaNo());
-            RString 軽減率 = entity.getKeigenritsu();
-            if (null != 軽減率 && !軽減率.isEmpty()) {
-                int count = 軽減率.length();
-                if (INT_1 == count) {
-                    jukyuEntity.set軽減率(ZERO.concat(ZERO).concat(ZERO).concat(軽減率));
-                } else if (INT_2 == count) {
-                    jukyuEntity.set軽減率(ZERO.concat(ZERO).concat(軽減率));
-                } else if (INT_3 == count) {
-                    jukyuEntity.set軽減率(ZERO.concat(軽減率));
-                } else {
-                    jukyuEntity.set軽減率(軽減率);
-                }
-            } else {
-                jukyuEntity.set軽減率(new RString(""));
-            }
-            if (entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag()) {
-                jukyuEntity.set小規模居宅ｻｰﾋﾞｽ利用(TWO);
-            } else {
-                jukyuEntity.set小規模居宅ｻｰﾋﾞｽ利用(ONE);
-            }
-            jukyuEntity.set二次予防事業区分(entity.getNijiyoboJigyoKubunCode());
-            jukyuEntity.set二次予防有効期間開始年月日(entity.getNijiyoboJigyoYukoKikanKaishiYMD());
-            jukyuEntity.set二次予防有効期間終了年月日(entity.getNijiyoboJigyoYukoKikanShuryoYMD());
-            jukyuEntity.set申請種別(entity.getShinseiShubetsuCode());
-            jukyuEntity.set変更申請中区分(entity.getHenkoShinseichuKubunCode());
-            jukyuEntity.set申請年月日(entity.getShinseiYMD());
-            jukyuEntity.set国保保険者番号(entity.getKokuhoHokenshaNo());
-            jukyuEntity.set国保被保険者証番号(entity.getKokuhoHiHokenshaNo());
-            jukyuEntity.set国保個人番号(entity.getKokuhoKojinNo());
-            jukyuEntity.set後期高齢保険者番号(entity.getKokiKoureiIryoHokenshaNo());
-            jukyuEntity.set後期高齢被保険者番号(entity.getKokikoureiIryoHiHokenshaNo());
-            jukyuEntity.set住特対象者区分(entity.getJushochiTokureiTaishoshaKubunCode());
-            jukyuEntity.set住特施設所在保険者番号(entity.getShisetsuShozaiHokenjaNo());
-            if (entity.getJushochiTokureiTekiyoKaishiYMD() != null) {
-                jukyuEntity.set住特適用開始年月日(entity.getJushochiTokureiTekiyoKaishiYMD());
-            }
-            if (entity.getJushochiTokureiTekiyoShuryoYMD() != null) {
-                jukyuEntity.set住特適用終了年月日(entity.getJushochiTokureiTekiyoShuryoYMD());
-            }
-            jukyuEntity.set送付年月(entity.getSofuYM());
-            if (entity.getRiyosyaFutanWariaiYukoKaishiYMD() != null) {
-                jukyuEntity.set二割負担適用開始年月日(entity.getRiyosyaFutanWariaiYukoKaishiYMD());
-            }
-            if (entity.getRiyosyaFutanWariaiYukoShuryoYMD() != null) {
-                jukyuEntity.set二割負担適用終了年月日(entity.getRiyosyaFutanWariaiYukoShuryoYMD());
-            }
+            setJukyuEntity(jukyuEntity, entity);
             set年月日(jukyuEntity, entity);
         }
         return jukyuEntity;
+    }
+
+    private void setJukyuEntity(JukyushaIdoRenrakuhyoTorokuEntity jukyuEntity, DbT3001JukyushaIdoRenrakuhyoEntity entity) {
+        ShoKisaiHokenshaNo koikiRengoHokenshaNo = entity.getKoikiRengoHokenshaNo();
+        if (koikiRengoHokenshaNo != null) {
+            jukyuEntity.set広域保険者番号(koikiRengoHokenshaNo.getColumnValue());
+        }
+        jukyuEntity.set老人保健市町村番号(entity.getRojinHokenShichosonNo());
+        jukyuEntity.set老人保健受給者番号(entity.getRojinHokenJukyushaNo());
+        RString 軽減率 = entity.getKeigenritsu();
+        if (null != 軽減率 && !軽減率.isEmpty()) {
+            int count = 軽減率.length();
+            if (INT_1 == count) {
+                jukyuEntity.set軽減率(ZERO.concat(ZERO).concat(ZERO).concat(軽減率));
+            } else if (INT_2 == count) {
+                jukyuEntity.set軽減率(ZERO.concat(ZERO).concat(軽減率));
+            } else if (INT_3 == count) {
+                jukyuEntity.set軽減率(ZERO.concat(軽減率));
+            } else {
+                jukyuEntity.set軽減率(軽減率);
+            }
+        } else {
+            jukyuEntity.set軽減率(new RString(""));
+        }
+        if (entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag()) {
+            jukyuEntity.set小規模居宅ｻｰﾋﾞｽ利用(TWO);
+        } else {
+            jukyuEntity.set小規模居宅ｻｰﾋﾞｽ利用(ONE);
+        }
+        jukyuEntity.set二次予防事業区分(entity.getNijiyoboJigyoKubunCode());
+        jukyuEntity.set二次予防有効期間開始年月日(entity.getNijiyoboJigyoYukoKikanKaishiYMD());
+        jukyuEntity.set二次予防有効期間終了年月日(entity.getNijiyoboJigyoYukoKikanShuryoYMD());
+        jukyuEntity.set申請種別(entity.getShinseiShubetsuCode());
+        jukyuEntity.set変更申請中区分(entity.getHenkoShinseichuKubunCode());
+        jukyuEntity.set申請年月日(entity.getShinseiYMD());
+        jukyuEntity.set国保保険者番号(entity.getKokuhoHokenshaNo());
+        jukyuEntity.set国保被保険者証番号(entity.getKokuhoHiHokenshaNo());
+        jukyuEntity.set国保個人番号(entity.getKokuhoKojinNo());
+        jukyuEntity.set後期高齢保険者番号(entity.getKokiKoureiIryoHokenshaNo());
+        jukyuEntity.set後期高齢被保険者番号(entity.getKokikoureiIryoHiHokenshaNo());
+        jukyuEntity.set住特対象者区分(entity.getJushochiTokureiTaishoshaKubunCode());
+        jukyuEntity.set住特施設所在保険者番号(entity.getShisetsuShozaiHokenjaNo());
+        if (entity.getJushochiTokureiTekiyoKaishiYMD() != null) {
+            jukyuEntity.set住特適用開始年月日(entity.getJushochiTokureiTekiyoKaishiYMD());
+        }
+        if (entity.getJushochiTokureiTekiyoShuryoYMD() != null) {
+            jukyuEntity.set住特適用終了年月日(entity.getJushochiTokureiTekiyoShuryoYMD());
+        }
+        jukyuEntity.set送付年月(entity.getSofuYM());
+        if (entity.getRiyosyaFutanWariaiYukoKaishiYMD() != null) {
+            jukyuEntity.set二割負担適用開始年月日(entity.getRiyosyaFutanWariaiYukoKaishiYMD());
+        }
+        if (entity.getRiyosyaFutanWariaiYukoShuryoYMD() != null) {
+            jukyuEntity.set二割負担適用終了年月日(entity.getRiyosyaFutanWariaiYukoShuryoYMD());
+        }
     }
 
     private void set年月日(JukyushaIdoRenrakuhyoTorokuEntity jukyuEntity, DbT3001JukyushaIdoRenrakuhyoEntity entity) {

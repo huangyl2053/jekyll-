@@ -138,26 +138,25 @@ public class CreateRiyojokyoIchiranHyoProcess extends BatchKeyBreakBase<DbWT1513
         } else {
             mybatisParameter.setSort旧市町村コード(false);
         }
-        if (RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード().equals(parameter.get明細CSV出力区分())) {
-            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
-            eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), EUCファイル名);
-            csvWriter = BatchWriters.csvWriter(IRiyoJokyoIchiranEUCEntity.class)
-                    .filePath(eucFilePath)
-                    .setDelimiter(コンマ)
-                    .setEnclosure(EUC_WRITER_ENCLOSURE)
-                    .setEncode(Encode.UTF_8withBOM)
-                    .setNewLine(NewLine.CRLF)
-                    .hasHeader(Tokeihyo_CSVEditKubun.する.getコード().equals(parameter.get項目名付加()))
-                    .build();
-        }
         mybatisParameter.set出力順(get出力順());
-        service = RiyoJokyoTokeihyoMeisaiListSakuseiService.createInstance();
-        if (RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード().equals(parameter.get明細リスト出力区分())) {
-            利用状況一覧表ReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200004.getReportId().value()).
-                    addBreak(new BreakerCatalog<RiyoJokyoIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
-            利用状況一覧表SourceWriter = new ReportSourceWriter<>(利用状況一覧表ReportWriter);
-        }
         return new BatchDbReader(MYBATIS_SELECT_ID, mybatisParameter);
+    }
+
+    @Override
+    protected void createWriter() {
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), EUCファイル名);
+        csvWriter = BatchWriters.csvWriter(IRiyoJokyoIchiranEUCEntity.class)
+                .filePath(eucFilePath)
+                .setDelimiter(コンマ)
+                .setEnclosure(EUC_WRITER_ENCLOSURE)
+                .setEncode(Encode.UTF_8withBOM)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(Tokeihyo_CSVEditKubun.する.getコード().equals(parameter.get項目名付加()))
+                .build();
+        利用状況一覧表ReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200004.getReportId().value()).
+                addBreak(new BreakerCatalog<RiyoJokyoIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
+        利用状況一覧表SourceWriter = new ReportSourceWriter<>(利用状況一覧表ReportWriter);
     }
 
     private RString get出力順() {
@@ -188,9 +187,6 @@ public class CreateRiyojokyoIchiranHyoProcess extends BatchKeyBreakBase<DbWT1513
 //        }
     }
 
-//    private boolean hasBrek(DbWT1513RiyoJokyoTokeihyoEntity before, DbWT1513RiyoJokyoTokeihyoEntity current) {
-//        return !before.getKyuShichosonCode().equals(current.getKyuShichosonCode());
-//    }
     @Override
     protected void usualProcess(DbWT1513RiyoJokyoTokeihyoEntity entity) {
         index++;

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
@@ -65,7 +64,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -81,16 +79,12 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKetteiTsuchiShoShiharaiRelateEntity> {
 
     private static final RString 帳票取得SQL = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper.get決定通知一覧表帳票データ");
+            + "shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper.get決定通知書明細一覧情報Data");
     private static final RString ORDER_BY = new RString("order by");
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
-    private static final int ZERO = 0;
-    private static final int TEN = 10;
-    private static final RString カンマ = new RString("、");
     List<ShokanKetteiTsuchiShoShiharai> 帳票データリスト = new ArrayList<>();
-    Map<RString, RString> 種類Map = new HashMap<RString, RString>();
     ShokanKetteiTsuchiShoSealerBatchParameter batchPram;
     List<RString> 並び順List;
     List<RString> 改頁List;
@@ -189,39 +183,10 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
     protected void usualProcess(ShokanKetteiTsuchiShoShiharaiRelateEntity entity) {
         
         ShokanKetteiTsuchiShoShiharai データ = new ShokanKetteiTsuchiShoShiharai(entity);
-        RString key = getJufukuKey(データ);
-        RString 種類 = データ.get種類() == null ? RString.EMPTY : データ.get種類();
-        if (種類Map.containsKey(key)) {
-            RString bef種類 = 種類Map.get(key) == null ? RString.EMPTY : 種類Map.get(key);
-            if (bef種類.indexOf(種類) == -1) {
-                種類Map.put(key, set種類(bef種類, 種類));
-            }
-        } else {
-            帳票データリスト.add(データ);
-            種類Map.put(key, 種類);
-            personalDataList.add(toPersonalData(entity));         
-        }
+        帳票データリスト.add(データ);
+        personalDataList.add(toPersonalData(entity));         
     }
-    
-    private RString set種類(RString kyufuShu, RString 種類) {
-        if (RString.isNullOrEmpty(kyufuShu)) {
-            return 種類;
-        }
-        RStringBuilder builder = new RStringBuilder(kyufuShu);
-        if (!RString.isNullOrEmpty(種類)) {
-            builder.append(カンマ);
-            builder.append(種類);
-        }
-        return builder.toRString();
-    }
-    
-    private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {
-        RStringBuilder key = new RStringBuilder();
-        key.append(shiharai.get被保険者番号().value());
-        key.append(shiharai.get提供年月().wareki().toDateString());
-        key.append(shiharai.get整理番号().padLeft(new RString(ZERO), TEN));
-        return key.toRString();
-    }
+
 
     @Override
     protected void afterExecute() {
@@ -230,7 +195,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
         }
         ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo ichiranhyo = new ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo();
         List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> itemList
-                = ichiranhyo.getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(帳票データリスト, batchPram, 並び順List, 改頁List, 種類Map, 帳票制御共通情報);
+                = ichiranhyo.getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(帳票データリスト, batchPram, 並び順List, 改頁List, 帳票制御共通情報);
         ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReport report = ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);
         AccessLogger.log(AccessLogType.照会, personalDataList);

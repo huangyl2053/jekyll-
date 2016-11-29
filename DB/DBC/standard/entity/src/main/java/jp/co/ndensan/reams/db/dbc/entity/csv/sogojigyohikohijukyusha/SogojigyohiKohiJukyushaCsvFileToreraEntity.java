@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyohikohijukyusha;
 
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,11 +29,11 @@ public class SogojigyohiKohiJukyushaCsvFileToreraEntity {
     @CsvField(order = 40, name = "帳票レコード種別")
     private RString 帳票レコード種別;
     @CsvField(order = 50, name = "公費対象単位数")
-    private Decimal 公費対象単位数;
+    private RString 公費対象単位数;
     @CsvField(order = 60, name = "公費負担金額")
-    private Decimal 公費負担金額;
+    private RString 公費負担金額;
     @CsvField(order = 70, name = "公費分本人負担額")
-    private Decimal 公費分本人負担額;
+    private RString 公費分本人負担額;
     @CsvField(order = 80, name = "ブランク")
     private RString ブランク;
 }

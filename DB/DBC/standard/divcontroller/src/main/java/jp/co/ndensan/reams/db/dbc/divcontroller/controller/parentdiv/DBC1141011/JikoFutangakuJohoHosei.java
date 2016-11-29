@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1141011;
 
+import java.io.Serializable;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040030.DBC040030_KogakugassanJikofutangakuInfoHoseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
@@ -38,7 +40,7 @@ public class JikoFutangakuJohoHosei {
 
     private static final RString 送付取込区分 = new RString("2");
     private static final RString 処理状態区分 = new RString("3");
-    private static final RString 交換情報識別番号 = new RString("37J");
+    private static final RString 交換情報識別番号 = new RString("37J%");
     private static final RString MAX = new RString("MAX");
     private static final RString MIN = new RString("MIN");
 
@@ -104,6 +106,11 @@ public class JikoFutangakuJohoHosei {
      * @return ResponseData
      */
     public ResponseData<JikoFutangakuJohoHoseiDiv> onBeforeOpenCheck(JikoFutangakuJohoHoseiDiv div) {
+        KokuhorenInterfaceKanriManager manager = new KokuhorenInterfaceKanriManager();
+        List<KokuhorenInterfaceKanri> list = manager.get自己負担額確認情報(new FlexibleYearMonth(
+                div.getTxtKakuninJouhouUketoriYM().getValue().getYearMonth().toDateString()),
+                交換情報識別番号, 送付取込区分, 処理状態区分);
+        ViewStateHolder.put(ViewStateKeys.自己負担額確認情報, (Serializable) list);
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validate();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -137,17 +144,13 @@ public class JikoFutangakuJohoHosei {
         parameter.setShuryoWeek(new RString(div.getTxtShuryoYoubi().getValue().toString()));
         parameter.setShuryoHHMM(new RString(div.getTxtshuryoJikanHH().getValue().toString().
                 concat(div.getTxtshuryoJikanMM().getValue().toString())));
-        if (div.getJikoFutangakuHoseiPrint().isIsPublish()) {
-            long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
-            parameter.setShutsuryokujunId(new RString(Long.toString(出力順ID)));
-        } else {
-            parameter.setShutsuryokujunId(null);
-        }
+        long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();
+        parameter.setShutsuryokujunId(new RString(Long.toString(出力順ID)));
+
         RString 国保連共同処理受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);
         parameter.setTreatmentType(国保連共同処理受託区分);
         parameter.setHandleTimestamp(RDate.getNowDateTime());
-        parameter.set出力フラグが(div.getJikoFutangakuHoseiPrint().isIsPublish());
         return parameter;
     }
 

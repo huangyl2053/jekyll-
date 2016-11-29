@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoriyoshafutanwariaihentei;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoriyoshafutanwariaihentei.IdoRiyoshaFutanwariaiHanteiMybatisParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 異動分利用者負担割合判定マッパーインタフェースです。

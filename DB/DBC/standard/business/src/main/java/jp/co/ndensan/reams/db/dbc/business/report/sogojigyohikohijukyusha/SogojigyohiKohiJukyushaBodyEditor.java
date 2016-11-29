@@ -50,7 +50,32 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
             edit集計(source);
         }
         edit明細(source);
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(SogojigyohiKohiJukyushaSource source) {
+        if (source.kohiFutanshaNo == null) {
+            source.kohiFutanshaNo = RString.EMPTY;
+        }
+        if (source.yubinNo == null) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.shimei50onKana == null) {
+            source.shimei50onKana = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.listUpper_10 == null) {
+            source.listUpper_10 = RString.EMPTY;
+        }
     }
 
     private void edit明細(SogojigyohiKohiJukyushaSource source) {
@@ -112,11 +137,14 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
         return twoPart;
     }
 
-    private RString decimalFormatter(Decimal 額, int count) {
+    private RString decimalFormatter(RString 額, int count) {
         if (null == 額) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toコンマ区切りRString(額, count);
+        if (Decimal.canConvert(額)) {
+            return DecimalFormatter.toコンマ区切りRString(new Decimal(額.toString()), count);
+        }
+        return 額;
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {

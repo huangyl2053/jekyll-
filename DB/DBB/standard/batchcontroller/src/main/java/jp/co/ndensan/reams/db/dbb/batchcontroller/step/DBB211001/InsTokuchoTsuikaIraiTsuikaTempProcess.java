@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -155,6 +156,8 @@ public class InsTokuchoTsuikaIraiTsuikaTempProcess extends BatchProcessBase<Shik
         if (!DT各種区分_03.equals(dT各種区分)) {
             対象者情報.setShikibetsuCode(資格情報.getShikibetsuCode());
             対象者情報.setHihokenshaNo(資格情報.getHihokenshaNo().value());
+        } else {
+            対象者情報.setShikibetsuCode(ShikibetsuCode.EMPTY);
         }
         対象者情報.setKokuhoSetaiCode(国保世帯コード);
         対象者情報.setDtKakushuKingaku4(RString.EMPTY);

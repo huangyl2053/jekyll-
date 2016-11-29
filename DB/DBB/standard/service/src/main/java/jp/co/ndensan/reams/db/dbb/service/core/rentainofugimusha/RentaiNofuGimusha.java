@@ -23,10 +23,10 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt200FindShikibetsuTaishoFunctionDac;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * ビジネス設計_DBBMN71001_連帯納付義務者登録のクラス
@@ -72,7 +72,7 @@ public class RentaiNofuGimusha {
             世帯宛名情報Entity.set氏名(entity.getMeisho());
             世帯宛名情報Entity.set生年月日(entity.getSeinengappiYMD());
             世帯宛名情報Entity.set性別(entity.getSeibetsuCode());
-            世帯宛名情報Entity.set住民種別(entity.getJuminJotaiCode());
+            世帯宛名情報Entity.set住民種別(entity.getJuminShubetsuCode());
             世帯宛名情報Entity.set続柄(entity.getTsuzukigara());
             世帯宛名情報Entity.set世帯コード(entity.getSetaiCode());
             世帯宛名情報Entity.set住所(entity.getJusho());
@@ -93,6 +93,9 @@ public class RentaiNofuGimusha {
         RentaiGimushaAtenaJouhou 連帯納付義務者宛名情報;
         for (RentaiGimusha 連帯納付義務者 : 連帯納付義務者リスト) {
             DbT2009RentaiGimushaEntity 連帯納付義務者entity = 連帯納付義務者.toEntity();
+            if (!連帯納付義務者.hasChanged()) {
+                連帯納付義務者entity.setState(EntityDataState.Unchanged);
+            }
             IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(
                     GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
             IShikibetsuTaishoSearchKey 検索キー = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true)
@@ -110,7 +113,7 @@ public class RentaiNofuGimusha {
                 連帯納付義務者宛名情報.set氏名(宛名entity.getMeisho());
                 連帯納付義務者宛名情報.set生年月日(宛名entity.getSeinengappiYMD());
                 連帯納付義務者宛名情報.set性別(宛名entity.getSeibetsuCode());
-                連帯納付義務者宛名情報.set住民種別(宛名entity.getJuminJotaiCode());
+                連帯納付義務者宛名情報.set住民種別(宛名entity.getJuminShubetsuCode());
                 連帯納付義務者宛名情報.set続柄(宛名entity.getTsuzukigara());
                 連帯納付義務者宛名情報.set住所(宛名entity.getJusho());
                 連帯納付義務者宛名情報.set履歴番号(連帯納付義務者entity.getRirekiNo().intValue());
@@ -133,6 +136,7 @@ public class RentaiNofuGimusha {
         List<RentaiGimusha> 連帯納付義務者リスト = new ArrayList<>();
         if (連帯納付義務者情報リスト != null && !連帯納付義務者情報リスト.isEmpty()) {
             for (DbT2009RentaiGimushaEntity entity : 連帯納付義務者情報リスト) {
+                entity.initializeMd5();
                 連帯納付義務者リスト.add(new RentaiGimusha(entity));
             }
         }
@@ -145,6 +149,7 @@ public class RentaiNofuGimusha {
      * @param 連帯納付義務者情報リスト List<RentaiGimushaAtenaJouhouEntity>
      * @return 削除件数
      */
+    @Transaction
     public int delRentaiNofuGimushaInfo(List<RentaiGimusha> 連帯納付義務者情報リスト) {
 
         int 削除件数 = 0;
@@ -166,24 +171,18 @@ public class RentaiNofuGimusha {
     public void insRentaiNofuGimushaInfo(
             List<RentaiGimusha> 連帯納付義務者情報リスト,
             HihokenshaNo 被保険者番号) {
-        Decimal 履歴番号;
         if (連帯納付義務者情報リスト != null && !連帯納付義務者情報リスト.isEmpty()) {
             for (RentaiGimusha 連帯納付義務者 : 連帯納付義務者情報リスト) {
                 DbT2009RentaiGimushaEntity 連帯納付義務者Entity = 連帯納付義務者.toEntity();
-                DbT2009RentaiGimushaEntity 連帯納付義務者_履歴番号Entity = 連帯納付義務者Dac
-                        .selectBy連帯納付義務者_履歴番号(被保険者番号);
-                if (連帯納付義務者_履歴番号Entity != null) {
-                    履歴番号 = 連帯納付義務者_履歴番号Entity.getRirekiNo();
-                } else {
-                    履歴番号 = Decimal.ZERO;
+                if (連帯納付義務者.isAdded() || 連帯納付義務者.isModified() || 連帯納付義務者.isUnchanged()) {
+                    連帯納付義務者Entity.setHihokenshaNo(被保険者番号);
+                    連帯納付義務者Entity.setRirekiNo(連帯納付義務者Entity.getRirekiNo());
+                    連帯納付義務者Entity.setShikibetuCode(連帯納付義務者.get識別コード());
+                    連帯納付義務者Entity.setStartYMD(連帯納付義務者.get開始年月日());
+                    連帯納付義務者Entity.setEndYMD(連帯納付義務者.get終了年月日());
+                    連帯納付義務者Entity.setState(EntityDataState.Added);
+                    連帯納付義務者Dac.save(連帯納付義務者Entity);
                 }
-                連帯納付義務者Entity.setHihokenshaNo(被保険者番号);
-                連帯納付義務者Entity.setRirekiNo(履歴番号.add(Decimal.ONE));
-                連帯納付義務者Entity.setShikibetuCode(連帯納付義務者.get識別コード());
-                連帯納付義務者Entity.setStartYMD(連帯納付義務者.get開始年月日());
-                連帯納付義務者Entity.setEndYMD(連帯納付義務者.get終了年月日());
-                連帯納付義務者Entity.setState(EntityDataState.Added);
-                連帯納付義務者Dac.save(連帯納付義務者Entity);
             }
         }
     }

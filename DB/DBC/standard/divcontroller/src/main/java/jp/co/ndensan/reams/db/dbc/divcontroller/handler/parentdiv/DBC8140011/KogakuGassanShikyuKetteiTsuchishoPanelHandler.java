@@ -38,10 +38,14 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -71,10 +75,12 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     private static final YubinNo 支給額計算結果連絡先郵便番号 = new YubinNo("9999999");
     private static final ReportId 帳票ID = new ReportId("DBC200201_GassanJigyobunKetteiTsuchisho");
     private static final int 整数_ZERO = 0;
+    private static final int INT_4 = 4;
     private static final Code CODE_0003 = new Code("0003");
     private static final Code CODE_003 = new Code("003");
     private static final RString 発行する = new RString("btnReportPublish");
     private static final RString 発行済 = new RString("1");
+    private static final RString 度 = new RString("度");
 
     /**
      * コンストラクタです。
@@ -147,7 +153,8 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     /**
      * 事業高額合算支給不支給決定Listのセットです。
      *
-     * @param 事業高額合算支給不支給決定List JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
+     * @param 事業高額合算支給不支給決定List
+     * JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
      * @return JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
      */
     public List<JigyoKogakuGassanShikyuFushikyuKettei> set事業高額合算支給不支給決定List(
@@ -185,11 +192,19 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
             Collections.sort(対象年度List, comparator);
             List<KeyValueDataSource> ddlTaishoNendodataSource = new ArrayList();
             for (FlexibleYear 対象年度 : 対象年度List) {
-                ddlTaishoNendodataSource.add(new KeyValueDataSource(対象年度.toDateString(), 対象年度.toDateString()));
+                if (null != 対象年度 && !対象年度.isEmpty()) {
+                    ddlTaishoNendodataSource.add(new KeyValueDataSource(対象年度.toDateString(), getDateformat(対象年度).concat(度)));
+                }
+
             }
             div.getDdlTaishoNendo().setDataSource(ddlTaishoNendodataSource);
             div.getDdlTaishoNendo().setSelectedIndex(整数_ZERO);
         }
+    }
+
+    private RString getDateformat(FlexibleYear 対象年度) {
+        return 対象年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     /**
@@ -240,7 +255,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
             for (RString 履歴番号 : 履歴番号List) {
                 if (!履歴番号KeyValue.contains(
                         new KeyValueDataSource(履歴番号, 履歴番号))) {
-                    履歴番号KeyValue.add(new KeyValueDataSource(履歴番号, 履歴番号));
+                    履歴番号KeyValue.add(new KeyValueDataSource(履歴番号, 履歴番号.padZeroToLeft(INT_4)));
                 }
             }
             div.getDdlRirekiNO().setDataSource(履歴番号KeyValue);
@@ -265,7 +280,8 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     /**
      * 事業高額合算支給不支給決定のンメソッドです。
      *
-     * @param 事業高額合算支給不支給決定List JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
+     * @param 事業高額合算支給不支給決定List
+     * JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
      * @return JigyoKogakuGassanShikyuFushikyuKettei
      */
     public JigyoKogakuGassanShikyuFushikyuKettei get事業高額合算支給不支給決定(
@@ -306,7 +322,8 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     /**
      * 対象年度_連絡票整理番号Mapのメソッドです。
      *
-     * @param 事業高額合算支給不支給決定List JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
+     * @param 事業高額合算支給不支給決定List
+     * JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
      * @return Map
      */
     public Map<FlexibleYear, Set<RString>> put対象年度_連絡票整理番号(List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List) {
@@ -326,7 +343,8 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     /**
      * 連絡票整理番号_履歴番号Mapのメソッドです。
      *
-     * @param 事業高額合算支給不支給決定List JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
+     * @param 事業高額合算支給不支給決定List
+     * JigyoKogakuGassanShikyuFushikyuKetteiの{@code list}
      * @return Map
      */
     public Map<RString, Set<RString>> put連絡票整理番号_履歴番号(List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List) {
@@ -493,6 +511,9 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         div.getTxtHakkouYMD().setDisabled(true);
         div.getTxtShiharaiYoteiYMD().setDisabled(true);
         div.getCcdBunshoNO().setDisabled(true);
+        div.getDdlTaishoNendo().setSelectedIndex(0);
+        div.getDdlRearakuhyoSeiriNO().setSelectedIndex(0);
+        div.getDdlRirekiNO().setSelectedIndex(0);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
     }
 

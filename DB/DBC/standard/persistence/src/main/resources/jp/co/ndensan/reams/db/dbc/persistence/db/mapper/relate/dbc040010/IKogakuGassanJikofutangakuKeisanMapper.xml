@@ -142,13 +142,13 @@
         WHERE "DbT3017KyufujissekiKihon"."isDeleted"=False
         AND "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode"<![CDATA[<>]]>'3'
         AND substring("DbT3017KyufujissekiKihon"."hiHokenshaNo" from 1 for 1)<![CDATA[<>]]>'H'
-        AND "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode" IN ('1','2') 
+        AND "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode" IN ('1','2')
         <if test="事業分フラグ">
             AND substring("DbT3017KyufujissekiKihon"."inputShikibetsuNo" from 1 for 3)='71R'
         </if>
         AND EXISTS(SELECT "temp".* FROM "JissekiFutangakuDataTemp" AS "temp"
         WHERE "temp"."hihokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
-        AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)<![CDATA[<=]]>"DbT3017KyufujissekiKihon"."serviceTeikyoYM"            
+        AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)<![CDATA[<=]]>"DbT3017KyufujissekiKihon"."serviceTeikyoYM"
         AND "DbT3017KyufujissekiKihon"."serviceTeikyoYM"<![CDATA[<=]]>substring("temp"."taishoKeisanShuryoYMD" from 1 for 6))
         ORDER BY "DbT3017KyufujissekiKihon"."hiHokenshaNo","DbT3017KyufujissekiKihon"."serviceTeikyoYM"
     </select>
@@ -156,7 +156,7 @@
     <!--BatchStep2.3<変更>-->
     <select id="getShiharaihohoHenkoHosoku"
             resultMap="ResultMap_DbT3017MatchingEntity" resultOrdered="true" fetchSize="500">
-        SELECT 
+        SELECT
         <include refid="allColumns_JissekiFutangakuDataTempEntity" />
         ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
         ,<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.allColumns_DbT4021ShiharaiHohoHenko" />
@@ -179,22 +179,22 @@
     <!--BatchStep2.4<変更>-->
     <select resultOrdered="true" id="getShafukuKeigenTempHenko" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040010.UpdshafukuKeigenTempMyBatisParameter"
             resultMap="ResultMap_RiyoshaFutanMatchingEntity" fetchSize="500">
-        SELECT 
+        SELECT
         <include refid="allColumns_JissekiFutangakuDataTempEntity" />
         ,"riyoshaFutan"."hiHokenshaNo" as "hiHokenshaNo"
         ,"riyoshaFutan"."serviceTeikyoYM" as "serviceTeikyoYM"
         ,"riyoshaFutan"."riyoshaFutangaku" as "riyoshaFutangaku"
         ,"riyoshaFutan"."dataShubetsu" as "dataShubetsu"
         FROM "JissekiFutangakuDataTemp2" AS "temp"
-        INNER JOIN                        
+        INNER JOIN
         (
-        (SELECT 
-        "hiHokenshaNo"                      
-        ,"serviceTeikyoYM"                      
+        (SELECT
+        "hiHokenshaNo"
+        ,"serviceTeikyoYM"
         ,SUM("atoKeigengoRiyoshaFutangaku") AS "riyoshaFutangaku"
         ,1 AS "dataShubetsu"
-        FROM rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS "A"                      
-        WHERE "isDeleted" =FALSE                 
+        FROM rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS "A"
+        WHERE "isDeleted" =FALSE
         AND "serviceSyuruiCode" IN
         <choose>
             <when test="事業分フラグ">
@@ -214,7 +214,7 @@
         "hiHokenshaNo"
         ,"serviceTeikyoYM"
         )
-        UNION 
+        UNION
         (SELECT
         "hiHokenshaNo"
         ,"serviceTeikyoYM"
@@ -238,8 +238,8 @@
         AND "kihon"."jigyoshoNo" = "A"."jigyoshoNo"
         AND "kihon"."seiriNo" = "A"."seiriNo" )
         GROUP BY
-        "hiHokenshaNo"                      
-        ,"serviceTeikyoYM"                       
+        "hiHokenshaNo"
+        ,"serviceTeikyoYM"
         )
         ) AS "riyoshaFutan"
         ON "temp"."hihokenshaNo"="riyoshaFutan"."hiHokenshaNo"
@@ -272,7 +272,7 @@
         SELECT COUNT(*)
         FROM "JissekiFutangakuDataTemp"
     </select>
-    
+
     <select id="get実績負担額データ"
             resultMap="ResultMap_JissekiFutangakuDataTempEntity" resultOrdered="true" fetchSize="500">
         SELECT <include refid="allColumns_JissekiFutangakuDataTempEntity" />
@@ -287,9 +287,9 @@
     </select>
 
     <select id="get処理日付管理" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040010.DBC040010MyBatisParameter"
-            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity" resultOrdered="true" fetchSize="500">
+            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity" resultOrdered="true" fetchSize="500">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM rgdb."DbT7022ShoriDateKanri" AS "DbT7022ShoriDateKanri"
         WHERE
         "DbT7022ShoriDateKanri"."subGyomuCode"='DBC'
@@ -343,13 +343,13 @@
         ) AS "DbT3055KogakuKyufuTaishoshaGokei"
         ON "DbT3056KogakuShikyuShinsei"."hihokenshaNo"="DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo"
         AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"="DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM"
-        ORDER BY         
+        ORDER BY
         "temp"."hihokenshaNo"
         ,"temp"."taishoNendo"
         ,"temp"."hokenshaNo"
         ,"temp"."shikyuShinseishoSeiriNo"
-        ,"DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" 
-        ,"DbT3056KogakuShikyuShinsei"."rirekiNo" 
+        ,"DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"
+        ,"DbT3056KogakuShikyuShinsei"."rirekiNo"
     </select>
 
     <!--BatchStep_SetFutangaku-->
@@ -430,8 +430,8 @@
         FROM
         "JissekiFutangakuDataTemp" AS "temp"
         LEFT JOIN (
-        SELECT * 
-        FROM 
+        SELECT *
+        FROM
         <choose>
             <when test="事業分フラグ">
                 rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku"
@@ -443,7 +443,7 @@
         AS mst
         WHERE NOT EXISTS (
         SELECT *
-        FROM 
+        FROM
         <choose>
             <when test="事業分フラグ">
                 rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku"
@@ -463,7 +463,7 @@
         AND "temp"."taishoNendo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo"
         AND "temp"."shikyuShinseishoSeiriNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
         AND "temp"."hokenshaNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"
-        LEFT JOIN 
+        LEFT JOIN
         <choose>
             <when test="事業分フラグ">
                 rgdb."DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
@@ -478,7 +478,7 @@
         AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hokenshaNo"
         AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo"
         AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."rirekiNo"
-        ORDER BY  
+        ORDER BY
         "temp"."hihokenshaNo" ASC,
         "temp"."taishoNendo" ASC,
         "temp"."hokenshaNo" ASC,
@@ -518,9 +518,9 @@
         <id column="temp_shikyuShinseishoSeiriNo" />
         <id column="dbT3017_serviceTeikyoYM" />
         <association property="実績負担額データ" resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
-        <association property="給付実績基本" 
+        <association property="給付実績基本"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity" />
-        <association property="支払方法変更" 
+        <association property="支払方法変更"
                      resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity" />
     </resultMap>
 
@@ -533,7 +533,7 @@
         <association property="実績負担額データ" resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
         <association property="高額合算自己負担額"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.ResultMap_DbT3170JigyoKogakuGassanJikoFutanGakuEntity" />
-        <association property="高額合算自己負担額明細" 
+        <association property="高額合算自己負担額明細"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3171JigyoKogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity" />
     </resultMap>
     <resultMap id="ResultMap_RiyoshaFutanMatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.RiyoshaFutanMatchingEntity" autoMapping="true" >
@@ -551,7 +551,7 @@
         <result property="riyoshaFutangaku" column="riyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="dataShubetsu" column="dataShubetsu"  />
     </resultMap>
-    
+
     <resultMap id="ResultMap_JissekiFutangakuDataTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.JissekiFutangakuDataTempEntity" autoMapping="true" >
         <id property="hihokenshaNo" column="temp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="taishoNendo" column="temp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -842,20 +842,20 @@
         <result property="biko107" column="temp_biko107" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceTeikyoYMs" column="temp_serviceTeikyoYMs" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
+
     <sql id="WKサービス種類コード集計対象" >
         ('11','15','21','24','51','54','61','65','71','72','73','74','75','76','77')
     </sql>
     <sql id="WKサービス種類コード集計対象外" >
         ('41','42','43','44','45','46','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97')
-    </sql>    
+    </sql>
     <sql id="WKサービス種類コード集計対象事業分" >
         ('11','15','21','24','51','54','61','65','71','72','73','74','75','76','77','A1','A2','A5','A6')
     </sql>
     <sql id="WKサービス種類コード集計対象外事業分" >
         ('41','42','43','44','45','46','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97')
     </sql>
-    
+
     <sql id="allColumns_JissekiFutangakuDataTempEntity" >
         "temp"."sortArea"as "temp_sortArea"
         ,"temp"."kaipageArea"as "temp_kaipageArea"
@@ -1146,4 +1146,4 @@
         ,"temp"."biko107"as "temp_biko107"
         ,"temp"."serviceTeikyoYMs"as "temp_serviceTeikyoYMs"
     </sql>
-</mapper>  
+</mapper>

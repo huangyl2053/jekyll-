@@ -108,7 +108,38 @@ public class KogakuServicehiTaishoshaIchiranEditor implements IKogakuServicehiTa
         付値(source);
         source.拡張情報 = new ExpandedInformation(CODE, NAME,
                 ReportKomokuEditorUtil.get非空文字列(source.listTaishosha_2));
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(KogakuServicehiTaishoshaIchiranSource source) {
+        if (source.listTaishosha_2 == null) {
+            source.listTaishosha_2 = RString.EMPTY;
+        }
+        if (source.listTaishosha_3 == null) {
+            source.listTaishosha_3 = RString.EMPTY;
+        }
+        if (source.listTaishosha_6 == null) {
+            source.listTaishosha_6 = RString.EMPTY;
+        }
+        if (source.hokenshaNo == null) {
+            source.hokenshaNo = RString.EMPTY;
+        }
+        if (source.listTaishosha_15 == null) {
+            source.listTaishosha_15 = RString.EMPTY;
+        }
+        if (source.listTaishosha_16 == null) {
+            source.listTaishosha_16 = RString.EMPTY;
+        }
+        if (source.listTaishosha_17 == null) {
+            source.listTaishosha_17 = RString.EMPTY;
+        }
+        if (source.listTaishosha_18 == null) {
+            source.listTaishosha_18 = RString.EMPTY;
+        }
+        if (source.listTaishosha_19 == null) {
+            source.listTaishosha_19 = RString.EMPTY;
+        }
     }
 
     private void set出力改頁(KogakuServicehiTaishoshaIchiranSource source) {

@@ -48,7 +48,7 @@ public class CreateCsvFileProcess extends BatchProcessBase<KokiKoreshaJyohoRealE
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         this.eucFilePath = Path.combinePath(spoolWorkPath, csvファイル名);
         csvWriter = new CsvWriter.InstanceBuilder(this.eucFilePath).

@@ -62,13 +62,16 @@ public class ShokanbaraiSashitomeTaishoshaIchiranEditor implements IShokanbaraiS
         source.List2_3 = entity.getKeteiYMD();
         source.List2_4 = entity.getShikyugaku();
         
+        source.yubinBango = entity.getYubinBango();
         source.choikiCode = entity.getChoikiCode();
         source.gyoseikuCode = entity.getGyoseikuCode();
         source.kanaMeisho = entity.getKanaMeisho();
+        source.hidHokenshaNo = entity.getHokenshaNo();
         source.shoKisaiHokenshaNo = entity.getShoKisaiHokenshaNo();
+        source.hiHokenshaNo = entity.getHihokenshaNo();
+        source.seiriNo = entity.getSeiriNo();
         source.ketteiTsuchiNo = entity.getKetteiTsuchiNo();
         source.shinseishaKubun = entity.getShinseishaKubun();
-        source.listUpper_6 = entity.getYubinBango();
         return source;
     }
 

@@ -170,55 +170,55 @@
     </sql>   
     <sql id="tokuteiJoukenn">
         <if test= "縦軸index == 1">
-            SUBSTRING("serviceKomokuCode", 0, 3) IN ('511','521','531','541','211','241','221','251','231','261') AND
+            SUBSTRING("serviceKomokuCode", 1, 3) IN ('511','521','531','541','211','241','221','251','231','261') AND
         </if>
         <if test= "縦軸index == 2">
-            SUBSTRING("serviceKomokuCode",0,3) IN ('512','522','532','542','212','242','222','252','232','262') AND
+            SUBSTRING("serviceKomokuCode", 1, 3) IN ('512','522','532','542','212','242','222','252','232','262') AND
         </if>
         <if test= "縦軸index == 3">
-            SUBSTRING("serviceKomokuCode",0,3) IN ('511','521','531','541','211','241','221','251','231','261','512','522','532','542','212','242','222','252','232','262') AND
+            SUBSTRING("serviceKomokuCode", 1, 3) IN ('511','521','531','541','211','241','221','251','231','261','512','522','532','542','212','242','222','252','232','262') AND
         </if>
         <if test= "縦軸index == 4">
-            SUBSTRING("serviceKomokuCode",0,3) = '511' AND
+            SUBSTRING("serviceKomokuCode", 1, 3) = '511' AND
         </if>
         <if test= "縦軸index == 5">
-            SUBSTRING("serviceKomokuCode",0,3) = '521' AND
+            SUBSTRING("serviceKomokuCode", 1, 3) = '521' AND
         </if>
         <if test= "縦軸index == 6">
-            SUBSTRING("serviceKomokuCode",0,3) = '531' AND
+            SUBSTRING("serviceKomokuCode", 1, 3) = '531' AND
         </if>
         <if test= "縦軸index == 7">
-            SUBSTRING("serviceKomokuCode",0,3) IN ('211','241') AND
+            SUBSTRING("serviceKomokuCode", 1, 3) IN ('211','241') AND
         </if>
         <if test= "縦軸index == 8">
-            SUBSTRING("serviceKomokuCode",0,3) IN ('221','251') AND
+            SUBSTRING("serviceKomokuCode", 1, 3) IN ('221','251') AND
         </if>
         <if test= "縦軸index == 9">
-            SUBSTRING("serviceKomokuCode",0,3) IN ('231','261') AND
+            SUBSTRING("serviceKomokuCode", 1, 3) IN ('231','261') AND
         </if>
         <if test= "縦軸index == 10">
-            SUBSTRING("serviceKomokuCode",0,3) = '512' AND
+            SUBSTRING("serviceKomokuCode", 1, 3) = '512' AND
         </if>
         <if test= "縦軸index == 11">
-            SUBSTRING("serviceKomokuCode",0,3) = '522' AND
+            SUBSTRING("serviceKomokuCode", 1, 3) = '522' AND
         </if>
         <if test= "縦軸index == 12">
-            SUBSTRING("serviceKomokuCode",0,3) = '532' AND
+            SUBSTRING("serviceKomokuCode", 1, 3) = '532' AND
         </if>
         <if test= "縦軸index == 13">
-            SUBSTRING("serviceKomokuCode",0,3) IN ('212','242') AND
+            SUBSTRING("serviceKomokuCode", 1, 3) IN ('212','242') AND
         </if>
         <if test= "縦軸index == 14">
-            SUBSTRING("serviceKomokuCode",0,3) IN ('222','252') AND
+            SUBSTRING("serviceKomokuCode", 1, 3) IN ('222','252') AND
         </if>
         <if test= "縦軸index == 15">
-            SUBSTRING("serviceKomokuCode",0,3) IN ('232','262') AND
+            SUBSTRING("serviceKomokuCode", 1, 3) IN ('232','262') AND
         </if>
         <if test= "縦軸index == 16">
-            SUBSTRING("serviceKomokuCode",0,3) = '541' AND
+            SUBSTRING("serviceKomokuCode", 1, 3) = '541' AND
         </if>
         <if test= "縦軸index == 17">
-            SUBSTRING("serviceKomokuCode",0,3) = '542' AND
+            SUBSTRING("serviceKomokuCode", 1, 3) = '542' AND
         </if>
         <if test ="横軸index == 1">
             "yoKaigoJotaiKubunCode" IN ('01')
@@ -412,7 +412,7 @@
                     WHEN B."hiHokenshaNo" IS NOT NULL 
                     THEN B."serviceSyuruiCode" 
                     WHEN C."hiHokenshaNo" IS NOT NULL 
-                    THEN SUBSTRING(C."serviceCode", 0, 2) 
+                    THEN SUBSTRING(C."serviceCode", 1, 2) 
                     ELSE NULL 
                     END AS serviceSyuruiCode
                 , B."hokenTanisuTani"
@@ -531,7 +531,7 @@
                     WHEN B."hiHokenshaNo" IS NOT NULL 
                     THEN B."serviceSyuruiCode" 
                     WHEN C."hiHokenshaNo" IS NOT NULL 
-                    THEN SUBSTRING(C."serviceCode", 0, 2) 
+                    THEN SUBSTRING(C."serviceCode", 1, 2) 
                     ELSE NULL 
                     END AS serviceSyuruiCode
                 , B."hokenTanisuTani"
@@ -822,8 +822,8 @@
               rgdb."DbT4014RiyoshaFutangakuGengaku" 
             WHERE
               "hihokenshaNo" = "hihokenshaNo" 
-              AND SUBSTRING("tekiyoKaishiYMD", 0, 6) <![CDATA[<=]]> "serviceTeikyoYM" 
-              AND "serviceTeikyoYM" <![CDATA[<=]]> SUBSTRING("tekiyoShuryoYMD", 0, 6) 
+              AND SUBSTRING("tekiyoKaishiYMD", 1, 6) <![CDATA[<=]]> "serviceTeikyoYM" 
+              AND "serviceTeikyoYM" <![CDATA[<=]]> SUBSTRING("tekiyoShuryoYMD", 1, 6) 
               AND "ketteiKubun" = '1')
     </update>-->
     <update id="update0x02_集計" >

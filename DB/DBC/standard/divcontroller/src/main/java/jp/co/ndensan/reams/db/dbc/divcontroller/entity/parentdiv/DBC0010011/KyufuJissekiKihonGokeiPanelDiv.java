@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuJissekiKihonGokeiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,8 +24,6 @@ public class KyufuJissekiKihonGokeiPanelDiv extends Panel {
      */
     @JsonProperty("tblKihonGokei")
     private tblKihonGokeiDiv tblKihonGokei;
-    @JsonProperty("btnKyufuJissekiKihonGokeiClose")
-    private Button btnKyufuJissekiKihonGokeiClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -49,24 +47,6 @@ public class KyufuJissekiKihonGokeiPanelDiv extends Panel {
     @JsonProperty("tblKihonGokei")
     public void setTblKihonGokei(tblKihonGokeiDiv tblKihonGokei) {
         this.tblKihonGokei = tblKihonGokei;
-    }
-
-    /*
-     * getbtnKyufuJissekiKihonGokeiClose
-     * @return btnKyufuJissekiKihonGokeiClose
-     */
-    @JsonProperty("btnKyufuJissekiKihonGokeiClose")
-    public Button getBtnKyufuJissekiKihonGokeiClose() {
-        return btnKyufuJissekiKihonGokeiClose;
-    }
-
-    /*
-     * setbtnKyufuJissekiKihonGokeiClose
-     * @param btnKyufuJissekiKihonGokeiClose btnKyufuJissekiKihonGokeiClose
-     */
-    @JsonProperty("btnKyufuJissekiKihonGokeiClose")
-    public void setBtnKyufuJissekiKihonGokeiClose(Button btnKyufuJissekiKihonGokeiClose) {
-        this.btnKyufuJissekiKihonGokeiClose = btnKyufuJissekiKihonGokeiClose;
     }
 
     /*

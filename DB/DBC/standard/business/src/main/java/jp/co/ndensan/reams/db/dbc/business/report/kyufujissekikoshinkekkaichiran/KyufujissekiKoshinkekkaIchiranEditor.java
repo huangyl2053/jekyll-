@@ -163,7 +163,29 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
             source.拡張情報 = new ExpandedInformation(CODE, NAME,
                     ReportKomokuEditorUtil.get非空文字列(source.listUpper_5));
         }
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(KyufujissekiKoshinkekkaIchiranSource source) {
+        if (source.hokenshaNo == null) {
+            source.hokenshaNo = RString.EMPTY;
+        }
+        if (source.listUpper_5 == null) {
+            source.listUpper_5 = RString.EMPTY;
+        }
+        if (source.listUpper_7 == null) {
+            source.listUpper_7 = RString.EMPTY;
+        }
+        if (source.listUpper_9 == null) {
+            source.listUpper_9 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.listUpper_10 == null) {
+            source.listUpper_10 = RString.EMPTY;
+        }
     }
 
     private KyufujissekiKoshinkekkaIchiranSource editor給付実績_レコード件数(KyufujissekiKoshinkekkaIchiranSource source) {

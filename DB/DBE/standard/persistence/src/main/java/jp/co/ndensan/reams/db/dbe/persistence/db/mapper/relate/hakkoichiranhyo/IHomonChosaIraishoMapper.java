@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 
 /**
  * 訪問調査依頼書発行のマッパーインタフェースです。
@@ -28,15 +28,16 @@ public interface IHomonChosaIraishoMapper {
     /**
      * 認定調査依頼情報を検索します。
      *
-     * @param entity HomonChosaIraishoRelateEntity
+     * @param param HomonChosaIraishoMybitisParamter
      * @return DbT5201NinteichosaIraiJohoEntity
      */
-    DbT5201NinteichosaIraiJohoEntity get認定調査依頼情報(HomonChosaIraishoRelateEntity entity);
+    List<HomonChosaIraishoRelateEntity> get認定調査依頼情報(HomonChosaIraishoMybitisParamter param);
 
     /**
      * 認定調査依頼履歴一覧を取得します。
      *
+     * @param parameter 認定調査依頼履歴一覧のパラメータ
      * @return List<HomonChosaIraishoRelateEntity>
      */
-    List<HomonChosaIraishoRelateEntity> get認定調査依頼履歴一覧();
+    List<HomonChosaIraishoRelateEntity> get認定調査依頼履歴一覧(ShujiiIkenshoMybatisParameter parameter);
 }

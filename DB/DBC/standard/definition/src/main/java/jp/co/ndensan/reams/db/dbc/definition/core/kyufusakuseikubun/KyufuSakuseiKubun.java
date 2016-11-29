@@ -21,7 +21,7 @@ public enum KyufuSakuseiKubun {
     /**
      * コード:3 名称:削除 略称:定義なし
      */
-    削除("3", "削除");
+    削除("3", "取消");
 
     private final RString code;
     private final RString fullName;

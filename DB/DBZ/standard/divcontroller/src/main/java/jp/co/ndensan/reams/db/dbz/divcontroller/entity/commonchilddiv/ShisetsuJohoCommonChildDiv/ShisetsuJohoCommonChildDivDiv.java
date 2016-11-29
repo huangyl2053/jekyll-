@@ -4,22 +4,23 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJ
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ShisetsuJohoCommonChildDiv のクラスファイル
@@ -27,8 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBA-0190-010 houtianpeng
  */
 public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJohoCommonChildDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -51,6 +51,8 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     private TextBox txtNyuryokuShisetsuMeisho;
     @JsonProperty("JigyoshaMode")
     private RString JigyoshaMode;
+    @JsonProperty("HdnServiceShuruiCode")
+    private RString HdnServiceShuruiCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -81,7 +83,6 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @return radKaigoHokenShisetsu
      */
     @JsonProperty("radKaigoHokenShisetsu")
-    @Override
     public RadioButton getRadKaigoHokenShisetsu() {
         return radKaigoHokenShisetsu;
     }
@@ -91,7 +92,6 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @param radKaigoHokenShisetsu radKaigoHokenShisetsu
      */
     @JsonProperty("radKaigoHokenShisetsu")
-    @Override
     public void setRadKaigoHokenShisetsu(RadioButton radKaigoHokenShisetsu) {
         this.radKaigoHokenShisetsu = radKaigoHokenShisetsu;
     }
@@ -101,7 +101,6 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @return radOtherTokureiShisetsu
      */
     @JsonProperty("radOtherTokureiShisetsu")
-    @Override
     public RadioButton getRadOtherTokureiShisetsu() {
         return radOtherTokureiShisetsu;
     }
@@ -111,7 +110,6 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @param radOtherTokureiShisetsu radOtherTokureiShisetsu
      */
     @JsonProperty("radOtherTokureiShisetsu")
-    @Override
     public void setRadOtherTokureiShisetsu(RadioButton radOtherTokureiShisetsu) {
         this.radOtherTokureiShisetsu = radOtherTokureiShisetsu;
     }
@@ -121,7 +119,6 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @return radTekiyoJyogaiShisetsu
      */
     @JsonProperty("radTekiyoJyogaiShisetsu")
-    @Override
     public RadioButton getRadTekiyoJyogaiShisetsu() {
         return radTekiyoJyogaiShisetsu;
     }
@@ -131,7 +128,6 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @param radTekiyoJyogaiShisetsu radTekiyoJyogaiShisetsu
      */
     @JsonProperty("radTekiyoJyogaiShisetsu")
-    @Override
     public void setRadTekiyoJyogaiShisetsu(RadioButton radTekiyoJyogaiShisetsu) {
         this.radTekiyoJyogaiShisetsu = radTekiyoJyogaiShisetsu;
     }
@@ -141,7 +137,6 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @return txtNyuryokuShisetsuKodo
      */
     @JsonProperty("txtNyuryokuShisetsuKodo")
-    @Override
     public TextBoxCode getTxtNyuryokuShisetsuKodo() {
         return txtNyuryokuShisetsuKodo;
     }
@@ -178,7 +173,6 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
      * @return txtNyuryokuShisetsuMeisho
      */
     @JsonProperty("txtNyuryokuShisetsuMeisho")
-    @Override
     public TextBox getTxtNyuryokuShisetsuMeisho() {
         return txtNyuryokuShisetsuMeisho;
     }
@@ -211,6 +205,24 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     }
 
     /*
+     * getHdnServiceShuruiCode
+     * @return HdnServiceShuruiCode
+     */
+    @JsonProperty("HdnServiceShuruiCode")
+    public RString getHdnServiceShuruiCode() {
+        return HdnServiceShuruiCode;
+    }
+
+    /*
+     * setHdnServiceShuruiCode
+     * @param HdnServiceShuruiCode HdnServiceShuruiCode
+     */
+    @JsonProperty("HdnServiceShuruiCode")
+    public void setHdnServiceShuruiCode(RString HdnServiceShuruiCode) {
+        this.HdnServiceShuruiCode = HdnServiceShuruiCode;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -235,7 +247,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
             State[] enumArray = State.values();
 
             for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -250,11 +262,11 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     }
 
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
+        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
     }
 
-    public void setMode_State(State value) {
-        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
+    public void setMode_State( State value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
     }
 
     // </editor-fold>
@@ -387,5 +399,10 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     @Override
     public void setサービス種類(RString サービス種類抽出区分, List<RString> サービス種類) {
         getHandler().setサービス種類(サービス種類抽出区分, サービス種類);
+    }
+
+    @Override
+    public RString getサービス種類コード() {
+        return this.HdnServiceShuruiCode;
     }
 }

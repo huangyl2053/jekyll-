@@ -11,14 +11,19 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.Chushuts
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.SakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkyotakuservicekeikaku.IHanyoListKyotakuServiceKeikakuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -97,7 +102,7 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
     private FileSpoolManager manager;
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
-    private IHanyoListKyotakuServiceKeikakuMapper mapper;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
 
     @BatchWriter
     private CsvWriter<HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity> eucCsvWriter;
@@ -107,7 +112,8 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
         csvEntityEditor = new HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        mapper = getMapper(IHanyoListKyotakuServiceKeikakuMapper.class);
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701001.getReportId());
 
     }
 
@@ -151,7 +157,10 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
 
     @Override
     protected void process(HanyoListKyotakuServiceKeikakuEntity entity) {
-        eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter));
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.getDbV1001市町村コード());
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
+        RString 住所 = JushoHenshu.editJusho(帳票制御共通, 宛名, 導入団体情報);
+        eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter, 住所));
         personalDataList.add(toPersonalData(entity));
     }
 

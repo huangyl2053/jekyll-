@@ -82,12 +82,8 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
      * @return boolean
      */
     public boolean get被保険者番号チェック(HihokenshaNo 被保険者番号) {
-        if (JukyushaTeiseiRenrakuhyoToroku.createInstance().selectBooleanDbT4001JukyushaDaicho(被保険者番号)) {
-            if (JukyushaTeiseiRenrakuhyoToroku.createInstance().selectBooleanDbT3105SogoJigyoTaishosha(被保険者番号)) {
-                return true;
-            }
-        }
-        return false;
+        return JukyushaTeiseiRenrakuhyoToroku.createInstance().selectBooleanDbT4001JukyushaDaicho(被保険者番号)
+                && JukyushaTeiseiRenrakuhyoToroku.createInstance().selectBooleanDbT3105SogoJigyoTaishosha(被保険者番号);
     }
 
     /**

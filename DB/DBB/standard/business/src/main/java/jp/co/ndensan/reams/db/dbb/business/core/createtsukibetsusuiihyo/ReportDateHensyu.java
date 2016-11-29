@@ -39,6 +39,7 @@ public class ReportDateHensyu {
     private static final int INT_16 = 16;
     private static final int INT_17 = 17;
     private static final int INT_18 = 18;
+    private static final int INT_19 = 19;
     private static final RString 第一段階 = new RString("010");
     private static final RString 第二段階 = new RString("020");
     private static final RString 第三段階 = new RString("030");
@@ -58,6 +59,7 @@ public class ReportDateHensyu {
     private static final RString 第十七段階 = new RString("170");
     private static final RString 第十八段階 = new RString("180");
     private static final RString 第十九段階 = new RString("190");
+    private static final RString 第二十段階 = new RString("200");
     private int i;
 
     /**
@@ -832,43 +834,46 @@ public class ReportDateHensyu {
             entity.set金額_19段階_歳出還付(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).get歳出還付の金額合計()));
             i = i + 1;
         }
+        if (listLength > i) {
+            set20段階_合計(entity, koumokuGoukeyList);
+        }
         boolean is不明が存在 = false;
         for (KoumokuGoukey koumokuGoukey : koumokuGoukeyList) {
             if (不明.equals(koumokuGoukey.getHokenryoDankai())) {
-                entity.set人数_20段階_Title(koumokuGoukey.getHokenryoDankai());
-                entity.set人数_20段階_4月(getNinsuuOrKinkaku(koumokuGoukey.getYoGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_5月(getNinsuuOrKinkaku(koumokuGoukey.getGoGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_6月(getNinsuuOrKinkaku(koumokuGoukey.getRokuGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_7月(getNinsuuOrKinkaku(koumokuGoukey.getNanaGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_8月(getNinsuuOrKinkaku(koumokuGoukey.getHatiGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_9月(getNinsuuOrKinkaku(koumokuGoukey.getKyuGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_10月(getNinsuuOrKinkaku(koumokuGoukey.getJyuGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_11月(getNinsuuOrKinkaku(koumokuGoukey.getJyuitiGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_12月(getNinsuuOrKinkaku(koumokuGoukey.getJyuniGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_1月(getNinsuuOrKinkaku(koumokuGoukey.getItiGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_2月(getNinsuuOrKinkaku(koumokuGoukey.getNiGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_3月(getNinsuuOrKinkaku(koumokuGoukey.getSanGetuNinsuuGoukeyi()));
-                entity.set人数_20段階_現年随時(getNinsuuOrKinkaku(koumokuGoukey.get現年随時の人数合計()));
-                entity.set人数_20段階_過年度(getNinsuuOrKinkaku(koumokuGoukey.get過年度の人数合計()));
-                entity.set人数_20段階_合計(getNinsuuOrKinkaku(koumokuGoukey.get該当段階の人数合計()));
-                entity.set人数_20段階_歳出還付(getNinsuuOrKinkaku(koumokuGoukey.get歳出還付の人数合計()));
-                entity.set金額_20段階_Title(koumokuGoukey.getHokenryoDankai());
-                entity.set金額_20段階_4月(getNinsuuOrKinkaku(koumokuGoukey.getYoGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_5月(getNinsuuOrKinkaku(koumokuGoukey.getGoGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_6月(getNinsuuOrKinkaku(koumokuGoukey.getRokuGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_7月(getNinsuuOrKinkaku(koumokuGoukey.getNanaGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_8月(getNinsuuOrKinkaku(koumokuGoukey.getHatiGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_9月(getNinsuuOrKinkaku(koumokuGoukey.getKyuGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_10月(getNinsuuOrKinkaku(koumokuGoukey.getJyuGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_11月(getNinsuuOrKinkaku(koumokuGoukey.getJyuitiGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_12月(getNinsuuOrKinkaku(koumokuGoukey.getJyuniGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_1月(getNinsuuOrKinkaku(koumokuGoukey.getItiGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_2月(getNinsuuOrKinkaku(koumokuGoukey.getNiGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_3月(getNinsuuOrKinkaku(koumokuGoukey.getSanGetuKinkakuGoukeyi()));
-                entity.set金額_20段階_現年随時(getNinsuuOrKinkaku(koumokuGoukey.get現年随時の金額合計()));
-                entity.set金額_20段階_過年度(getNinsuuOrKinkaku(koumokuGoukey.get過年度の金額合計()));
-                entity.set金額_20段階_合計(getNinsuuOrKinkaku(koumokuGoukey.get該当段階の金額合計()));
-                entity.set金額_20段階_歳出還付(getNinsuuOrKinkaku(koumokuGoukey.get歳出還付の金額合計()));
+                entity.set人数_21段階_Title(koumokuGoukey.getHokenryoDankai());
+                entity.set人数_21段階_4月(getNinsuuOrKinkaku(koumokuGoukey.getYoGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_5月(getNinsuuOrKinkaku(koumokuGoukey.getGoGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_6月(getNinsuuOrKinkaku(koumokuGoukey.getRokuGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_7月(getNinsuuOrKinkaku(koumokuGoukey.getNanaGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_8月(getNinsuuOrKinkaku(koumokuGoukey.getHatiGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_9月(getNinsuuOrKinkaku(koumokuGoukey.getKyuGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_10月(getNinsuuOrKinkaku(koumokuGoukey.getJyuGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_11月(getNinsuuOrKinkaku(koumokuGoukey.getJyuitiGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_12月(getNinsuuOrKinkaku(koumokuGoukey.getJyuniGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_1月(getNinsuuOrKinkaku(koumokuGoukey.getItiGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_2月(getNinsuuOrKinkaku(koumokuGoukey.getNiGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_3月(getNinsuuOrKinkaku(koumokuGoukey.getSanGetuNinsuuGoukeyi()));
+                entity.set人数_21段階_現年随時(getNinsuuOrKinkaku(koumokuGoukey.get現年随時の人数合計()));
+                entity.set人数_21段階_過年度(getNinsuuOrKinkaku(koumokuGoukey.get過年度の人数合計()));
+                entity.set人数_21段階_合計(getNinsuuOrKinkaku(koumokuGoukey.get該当段階の人数合計()));
+                entity.set人数_21段階_歳出還付(getNinsuuOrKinkaku(koumokuGoukey.get歳出還付の人数合計()));
+                entity.set金額_21段階_Title(koumokuGoukey.getHokenryoDankai());
+                entity.set金額_21段階_4月(getNinsuuOrKinkaku(koumokuGoukey.getYoGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_5月(getNinsuuOrKinkaku(koumokuGoukey.getGoGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_6月(getNinsuuOrKinkaku(koumokuGoukey.getRokuGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_7月(getNinsuuOrKinkaku(koumokuGoukey.getNanaGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_8月(getNinsuuOrKinkaku(koumokuGoukey.getHatiGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_9月(getNinsuuOrKinkaku(koumokuGoukey.getKyuGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_10月(getNinsuuOrKinkaku(koumokuGoukey.getJyuGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_11月(getNinsuuOrKinkaku(koumokuGoukey.getJyuitiGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_12月(getNinsuuOrKinkaku(koumokuGoukey.getJyuniGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_1月(getNinsuuOrKinkaku(koumokuGoukey.getItiGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_2月(getNinsuuOrKinkaku(koumokuGoukey.getNiGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_3月(getNinsuuOrKinkaku(koumokuGoukey.getSanGetuKinkakuGoukeyi()));
+                entity.set金額_21段階_現年随時(getNinsuuOrKinkaku(koumokuGoukey.get現年随時の金額合計()));
+                entity.set金額_21段階_過年度(getNinsuuOrKinkaku(koumokuGoukey.get過年度の金額合計()));
+                entity.set金額_21段階_合計(getNinsuuOrKinkaku(koumokuGoukey.get該当段階の金額合計()));
+                entity.set金額_21段階_歳出還付(getNinsuuOrKinkaku(koumokuGoukey.get歳出還付の金額合計()));
                 is不明が存在 = true;
             }
             if (合計.equals(koumokuGoukey.getHokenryoDankai())) {
@@ -907,13 +912,54 @@ public class ReportDateHensyu {
                 entity.set金額_合計_合計(getNinsuuOrKinkaku(koumokuGoukey.get該当段階の金額合計()));
                 entity.set金額_合計_歳出還付(getNinsuuOrKinkaku(koumokuGoukey.get歳出還付の金額合計()));
             }
-            
+
         }
         if (!is不明が存在) {
-            entity.set人数_20段階_Title(不明);
-            entity.set金額_20段階_Title(不明);
+            entity.set人数_21段階_Title(不明);
+            entity.set金額_21段階_Title(不明);
         }
         return entity;
+    }
+
+    private void set20段階_合計(TsukibetsuSuiihyoEntity entity, List<KoumokuGoukey> koumokuGoukeyList) {
+
+        if (第二十段階.equals(koumokuGoukeyList.get(i).getHokenryoDankai())) {
+            entity.set人数_20段階_Title(koumokuGoukeyList.get(i).getHokenryoDankai());
+            entity.set人数_20段階_4月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getYoGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_5月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getGoGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_6月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getRokuGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_7月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getNanaGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_8月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getHatiGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_9月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getKyuGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_10月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getJyuGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_11月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getJyuitiGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_12月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getJyuniGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_1月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getItiGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_2月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getNiGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_3月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getSanGetuNinsuuGoukeyi()));
+            entity.set人数_20段階_現年随時(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).get現年随時の人数合計()));
+            entity.set人数_20段階_過年度(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).get過年度の人数合計()));
+            entity.set人数_20段階_合計(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).get該当段階の人数合計()));
+            entity.set人数_20段階_歳出還付(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).get歳出還付の人数合計()));
+            entity.set金額_20段階_Title(koumokuGoukeyList.get(i).getHokenryoDankai());
+            entity.set金額_20段階_4月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getYoGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_5月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getGoGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_6月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getRokuGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_7月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getNanaGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_8月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getHatiGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_9月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getKyuGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_10月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getJyuGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_11月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getJyuitiGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_12月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getJyuniGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_1月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getItiGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_2月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getNiGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_3月(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).getSanGetuKinkakuGoukeyi()));
+            entity.set金額_20段階_現年随時(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).get現年随時の金額合計()));
+            entity.set金額_20段階_過年度(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).get過年度の金額合計()));
+            entity.set金額_20段階_合計(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).get該当段階の金額合計()));
+            entity.set金額_20段階_歳出還付(getNinsuuOrKinkaku(koumokuGoukeyList.get(i).get歳出還付の金額合計()));
+            i = i + 1;
+        }
     }
 
     private RString getNinsuuOrKinkaku(Decimal temp) {
@@ -1132,15 +1178,23 @@ public class ReportDateHensyu {
             entity.set金額_19段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_19段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
         }
+        if (listLength > i && 第二十段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
+            entity.set人数_20段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
+            entity.set人数_20段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
+            entity.set人数_20段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_20段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
+            entity.set金額_20段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set金額_20段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
+        }
         boolean is不明が存在 = false;
         for (GemmenJyoho gemmenJyoho : gemmenJyohoList) {
             if (不明.equals(gemmenJyoho.getHokenryoDankai())) {
-                entity.set人数_20段階_Title(gemmenJyoho.getHokenryoDankai());
-                entity.set人数_20段階_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHokenryoDankaiKanendoNinsu()));
-                entity.set人数_20段階_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoNinsuGoukeyi()));
-                entity.set金額_20段階_Title(gemmenJyoho.getHokenryoDankai());
-                entity.set金額_20段階_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemmenGaku()));
-                entity.set金額_20段階_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemenGakuGoukei()));
+                entity.set人数_21段階_Title(gemmenJyoho.getHokenryoDankai());
+                entity.set人数_21段階_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHokenryoDankaiKanendoNinsu()));
+                entity.set人数_21段階_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoNinsuGoukeyi()));
+                entity.set金額_21段階_Title(gemmenJyoho.getHokenryoDankai());
+                entity.set金額_21段階_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemmenGaku()));
+                entity.set金額_21段階_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemenGakuGoukei()));
                 is不明が存在 = true;
             }
             if (合計.equals(gemmenJyoho.getHokenryoDankai())) {
@@ -1153,8 +1207,8 @@ public class ReportDateHensyu {
             }
         }
         if (!is不明が存在) {
-            entity.set人数_20段階_Title(不明);
-            entity.set金額_20段階_Title(不明);
+            entity.set人数_21段階_Title(不明);
+            entity.set金額_21段階_Title(不明);
         }
         return entity;
     }
@@ -1239,6 +1293,10 @@ public class ReportDateHensyu {
         if (INT_18 < 表記List.size()) {
             entity.set人数_19段階_Title(表記List.get(INT_18));
             entity.set金額_19段階_Title(表記List.get(INT_18));
+        }
+        if (INT_19 < 表記List.size()) {
+            entity.set人数_20段階_Title(表記List.get(INT_19));
+            entity.set金額_20段階_Title(表記List.get(INT_19));
         }
         return entity;
     }

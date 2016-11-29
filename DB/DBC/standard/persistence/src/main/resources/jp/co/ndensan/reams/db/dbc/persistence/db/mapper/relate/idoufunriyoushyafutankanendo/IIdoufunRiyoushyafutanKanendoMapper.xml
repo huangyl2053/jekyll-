@@ -4,51 +4,51 @@
 <!-- @reamsid_L DBC-4940-010 wangrenze -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoufunriyoushyafutankanendo.IIdoufunRiyoushyafutanKanendoMapper">
-     
-    <select resultOrdered="true" id="get直近の年次負担割合判定処理" 
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
-    parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
-    SELECT  *	
-    FROM
+
+    <select resultOrdered="true" id="get直近の年次負担割合判定処理"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT  *
+        FROM
         rgdb."DbT7022ShoriDateKanri" as dbT7022
-    WHERE		
+        WHERE
         dbT7022."subGyomuCode" = 'DBC'	AND
         dbT7022."shoriName"=#{処理名}	AND
         dbT7022."kijunTimestamp" <![CDATA[<>]]> ''
-    ORDER BY 
+        ORDER BY
         dbT7022."nendo" DESC,
-        dbT7022."shoriEdaban"  DESC			
-    LIMIT 1			
+        dbT7022."shoriEdaban"  DESC
+        LIMIT 1
 
     </select>
-    <select resultOrdered="true" id="get処理年度の異動分利用者負担割合判定_過年度のデータ" 
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
-    parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
-    SELECT  *	
-    FROM
+    <select resultOrdered="true" id="get処理年度の異動分利用者負担割合判定_過年度のデータ"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT  *
+        FROM
         rgdb."DbT7022ShoriDateKanri" as dbT7022
-    WHERE		
+        WHERE
         dbT7022."subGyomuCode" = 'DBC'	AND
-        dbT7022."shoriName"=#{処理名}	
-    ORDER BY
-        dbT7022."shoriEdaban"  DESC			
-    LIMIT 1			
+        dbT7022."shoriName"=#{処理名}
+        ORDER BY
+        dbT7022."shoriEdaban"  DESC
+        LIMIT 1
 
     </select>
-    <select resultOrdered="true" id="get異動分利用者負担割合判定のデータ" 
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
-    parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoufunriyoushyafutankanendo.IdoufunRiyoushyafutanKanendoMybatisParameter"
+    <select resultOrdered="true" id="get異動分利用者負担割合判定のデータ"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoufunriyoushyafutankanendo.IdoufunRiyoushyafutanKanendoMybatisParameter"
             fetchSize="500">
-    SELECT   *	
-    FROM
+        SELECT   *
+        FROM
         rgdb."DbT7022ShoriDateKanri" as dbT7022
-    WHERE		
+        WHERE
         dbT7022."subGyomuCode" = 'DBC'	AND
         dbT7022."shoriName"=#{処理名}	AND
         dbT7022."nendo" <![CDATA[<]]> #{年次判定年度}
-    ORDER BY
-        dbT7022."nendo" DESC, dbT7022."shoriEdaban"  DESC			
-    LIMIT 1			
+        ORDER BY
+        dbT7022."nendo" DESC, dbT7022."shoriEdaban"  DESC
+        LIMIT 1
 
     </select>
 </mapper>
