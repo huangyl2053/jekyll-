@@ -99,7 +99,6 @@ public class NinteichosahyoTokkijiko extends
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 申請書管理番号を返します。
      *
@@ -210,7 +209,6 @@ public class NinteichosahyoTokkijiko extends
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new NinteichosahyoTokkijiko(deletedEntity, id);
@@ -256,6 +254,4 @@ public class NinteichosahyoTokkijiko extends
     public NinteichosahyoTokkijikoBuilder createBuilderForEdit() {
         return new NinteichosahyoTokkijikoBuilder(entity, id);
     }
-
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }
