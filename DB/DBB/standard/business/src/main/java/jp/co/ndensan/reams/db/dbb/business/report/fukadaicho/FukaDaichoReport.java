@@ -160,15 +160,23 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
     }
 
     private boolean has普通徴収情報(EditedHonSanteiFukaDaichoJoho entity) {
-        RString 更正前確定年額保険料 = entity.get普通徴収更正前().get普徴確定年額保険料();
-        RString 更正後確定年額保険料 = entity.get普通徴収更正後().get普徴確定年額保険料();
+        RString 更正前確定年額保険料 = RString.EMPTY;
+        RString 更正後確定年額保険料 = RString.EMPTY;
+        if (entity.get普通徴収更正前() != null) {
+            更正前確定年額保険料 = entity.get普通徴収更正前().get普徴確定年額保険料();
+            更正後確定年額保険料 = entity.get普通徴収更正後().get普徴確定年額保険料();
+        }
         return !((RString.isNullOrEmpty(更正前確定年額保険料) || 更正前確定年額保険料.equals(new RString("0")))
                 && (RString.isNullOrEmpty(更正後確定年額保険料) || 更正後確定年額保険料.equals(new RString("0"))));
     }
 
     private boolean has特別徴収情報(EditedHonSanteiFukaDaichoJoho entity) {
-        RString 更正前確定年額保険料 = entity.get特別徴収更正前().get特徴確定年額保険料();
-        RString 更正後確定年額保険料 = entity.get特別徴収更正後().get特徴確定年額保険料();
+        RString 更正前確定年額保険料 = RString.EMPTY;
+        RString 更正後確定年額保険料 = RString.EMPTY;
+        if (entity.get特別徴収更正前() != null) {
+            更正前確定年額保険料 = entity.get特別徴収更正前().get特徴確定年額保険料();
+            更正後確定年額保険料 = entity.get特別徴収更正後().get特徴確定年額保険料();
+        }
         return !((RString.isNullOrEmpty(更正前確定年額保険料) || 更正前確定年額保険料.equals(new RString("0")))
                 && (RString.isNullOrEmpty(更正後確定年額保険料) || 更正後確定年額保険料.equals(new RString("0"))));
     }
