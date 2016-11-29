@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBCN130001.Jik
 import jp.co.ndensan.reams.db.dbc.service.core.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -40,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -71,6 +74,27 @@ public class JikofutangakuShomeishoToroku {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+
+        if (null == 被保険者番号 || 被保険者番号.isEmpty()) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            pairs.add(new ValidationMessageControlPair(DbzErrorMessages.被保険者でないデータ, div));
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+        }
+
+        JikofutangakuShomeishoTorokuParameter parameter = new JikofutangakuShomeishoTorokuParameter();
+        parameter.set被保険者番号(被保険者番号.value());
+        parameter.setシステム日付(RDate.getNowDate().toDateString());
+        JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
+        if (!manager.judgeIs受給者or総合次号対象者(parameter).getIs受給者()
+                && !manager.judgeIs受給者or総合次号対象者(parameter).getIs総合事業対象者()) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            pairs.add(new ValidationMessageControlPair(DbzErrorMessages.受給者_総合事業対象者でないデータ, div));
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+        }
         RString 前排他キー = 排他キー.concat(被保険者番号.value());
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
@@ -706,7 +730,7 @@ public class JikofutangakuShomeishoToroku {
             return ResponseData.of(div).respond();
         }
         JikofutangakuShomeishoTorokuBusiness business
-                    = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
+                = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
         if (STATUS_新規.equals(div.getExecutionStatus()) || STATUS_修正.equals(div.getExecutionStatus())) {
             ValidationMessageControlPairs validPairs = getValidationHandler(div).更新処理チェック(getHandler(div).is修正_証明書登録画面変更(business));
             if (validPairs.iterator().hasNext()) {
@@ -737,7 +761,7 @@ public class JikofutangakuShomeishoToroku {
         div.getCcdKanryoMessage().setMessage(
                 完了メッセージ.toRString(), RString.EMPTY,
                 messageTaisho1.toRString(), messageTaisho2.toRString(), true);
-        return ResponseData.of(div).setState(DBCN130001StateName.処理完了);        
+        return ResponseData.of(div).setState(DBCN130001StateName.処理完了);
     }
 
     private void insert(JikofutangakuShomeishoTorokuDiv div) {
@@ -760,7 +784,7 @@ public class JikofutangakuShomeishoToroku {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho = business.get事業高額合算自己負担額証明書情報();
-        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = getJibunnoMeisaiList(shomeisho, 
+        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = getJibunnoMeisaiList(shomeisho,
                 business.get事業高額合算自己負担額証明書明細情報());
         if (shomeisho.get転入前保険者番号().value().equals(div.getCcdTennyumaeHokensha().getHokenjaNo())) {
 
@@ -783,7 +807,7 @@ public class JikofutangakuShomeishoToroku {
                     meisaiList);
         }
     }
-    
+
     private List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> getJibunnoMeisaiList(JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho,
             List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList) {
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> jibunnoMeisaiList = new ArrayList<>();
