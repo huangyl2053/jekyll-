@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040040.JikofutanShome
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.JikoFutangakushomeishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jikofutangakushomeishofrom2009.JikoFutangakushomeishoFrom2009ReportSource;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040040.IJikofutanShomeishoMapper;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesakiEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
@@ -34,7 +32,6 @@ import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJok
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
@@ -55,8 +52,6 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -89,7 +84,6 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
     private static final int NUM_12 = 12;
     private IOutputOrder 出力順;
     private JikofutanShomeishoProcessParameter parameter;
-    private IJikofutanShomeishoMapper mapper;
     private Ninshosha 認証者;
     private NinshoshaSource 認証者情報;
     private Association 地方公共団体情報;
@@ -267,26 +261,6 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
             list.add(kogakuGassanMeisai);
         }
         return list;
-    }
-
-    private ToiawasesakiSource get問合せ先情報(DbT7069KaigoToiawasesakiEntity toiawasesakiEntity) {
-        ToiawasesakiSource source = new ToiawasesakiSource();
-        YubinNo yubinNo = toiawasesakiEntity.getYubinNo();
-        if (yubinNo != null) {
-            source.yubinBango = yubinNo.getEditedYubinNo();
-        }
-        RString choshaName = toiawasesakiEntity.getChoshaName();
-        if (choshaName != null && !RString.isNullOrEmpty(choshaName)) {
-            source.choshaBushoName = choshaName.concat(RString.FULL_SPACE).concat(toiawasesakiEntity.getBushoName());
-        }
-        source.shozaichi = toiawasesakiEntity.getShozaichi();
-        source.tantoName = toiawasesakiEntity.getTantoshaName();
-        TelNo telNo = toiawasesakiEntity.getTelNo();
-        if (telNo != null) {
-            source.telNo = telNo.getColumnValue();
-        }
-        source.naisenNo = toiawasesakiEntity.getNaisenNo();
-        return source;
     }
 
     private void バッチ出力条件リストの出力() {
