@@ -335,7 +335,8 @@ public class JukyushaKyufuJissekiDaicho {
         if (flag && div.getTxtRangeYM().getToValue().isBefore(div.getTxtRangeYM().getFromValue())) {
             message.add(getValidation(div).check大小関係不正(new RString("年月")));
         }
-        if (flag && div.getTxtRangeYM().getToValue().getMonthValue() - div.getTxtRangeYM().getFromValue().getMonthValue() > 0) {
+        if (flag && div.getTxtRangeYM().getToValue().getYearValue() - div.getTxtRangeYM().getFromValue().getYearValue() != 0
+                && div.getTxtRangeYM().getToValue().getMonthValue() - div.getTxtRangeYM().getFromValue().getMonthValue() >= 0) {
             message.add(getValidation(div).check年月範囲不正());
         }
         if (div.getTxtRangeHihokenshaNoFrom().getValue().compareTo(div.getTxtRangeHihokenshaNoTo().getValue()) > 0) {
