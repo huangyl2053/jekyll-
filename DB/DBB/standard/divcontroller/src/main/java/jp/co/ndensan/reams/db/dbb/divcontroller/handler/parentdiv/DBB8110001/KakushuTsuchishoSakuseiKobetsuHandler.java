@@ -266,14 +266,9 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                     .setSelectedKey(new RString(更正前調定日時List.get(0).toString()));
             FukaJoho 更正後賦課の情報 = 賦課の情報List.get(0);
             FukaJoho 更正前賦課の情報 = 賦課の情報List.get(1);
-            HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
             set更正後賦課根拠(更正後賦課の情報);
-            div.setHdnKouseizenFlag(無);
-            if (!更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度())
-                    || (更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度()) && honsanteiIkoHantei.is本算定後(更正前賦課の情報))) {
-                set更正前賦課根拠(更正前賦課の情報);
-                div.setHdnKouseizenFlag(有);
-            }
+            set更正前賦課根拠(更正前賦課の情報);
+            div.setHdnKouseizenFlag(有);
             if (!賦課年度.isBefore(調定年度)) {
                 FuchoKiUtil util = new FuchoKiUtil();
                 set特別徴収(更正前賦課の情報, 更正後賦課の情報);
