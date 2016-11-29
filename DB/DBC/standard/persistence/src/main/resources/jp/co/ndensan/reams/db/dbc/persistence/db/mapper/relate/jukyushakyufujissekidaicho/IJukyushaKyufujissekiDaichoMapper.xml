@@ -604,6 +604,10 @@
                   AND
                      DbT3017."kyufuJissekiKubunCode" = #{給付実績区分}
               </if>
+              <if test="すべて選択flag">
+                  AND
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('06','11','12','13','21','22','23','24','25')
+              </if>
               <if test="!すべて選択flag">
               AND (
               </if>
