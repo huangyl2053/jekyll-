@@ -550,8 +550,10 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         Kitsuki 最終法定納期 = 期月リスト_普徴.get最終法定納期();
         List<RString> 期の表記 = new ArrayList<>();
         for (Kitsuki 期 : 表記リスト) {
-            if (期.get期AsInt() <= 最終法定納期.get期AsInt()) {
+            if (期.get期AsInt() != 0 && 期.get期AsInt() <= 最終法定納期.get期AsInt()) {
                 期の表記.add(期.get表記().asX期());
+            } else {
+                期の表記.add(RString.EMPTY);
             }
         }
         return 期の表記;
