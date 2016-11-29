@@ -82,18 +82,20 @@ public class KokuhorenJohoSofuHandler {
         div.getTxtFileName().setValue(外部ＣＳＶファイル名);
         RDate 基準日 = RDate.getNowDate();
         RString 同月審査区分 = DbBusinessConfig.get(ConfigNameDBC.過誤取下げ再請求指示_同月審査区分, 基準日, SubGyomuCode.DBC介護給付);
+        List<KeyValueDataSource> dateSourceList = new ArrayList<>();
+        KeyValueDataSource keyValueData1 = new KeyValueDataSource(NUM_0, RString.EMPTY);
+        dateSourceList.add(keyValueData1);
+        KeyValueDataSource keyValueData2 = new KeyValueDataSource(NUM_1, KagomoshitateshoSofutaishoKubun.toValue(NUM_1).get名称());
+        dateSourceList.add(keyValueData2);
+        KeyValueDataSource keyValueData3 = new KeyValueDataSource(NUM_2, KagomoshitateshoSofutaishoKubun.toValue(NUM_2).get名称());
+        dateSourceList.add(keyValueData3);
+        div.getDdlSofuTaishojoho().setDataSource(dateSourceList);
         if (!同月審査区分.equals(NUM_1)) {
-            div.getDdlSofuTaishojoho().setVisible(false);
-        } else {
-            List<KeyValueDataSource> dateSourceList = new ArrayList<>();
-            KeyValueDataSource keyValueData1 = new KeyValueDataSource(NUM_0, RString.EMPTY);
-            dateSourceList.add(keyValueData1);
-            KeyValueDataSource keyValueData2 = new KeyValueDataSource(NUM_1, KagomoshitateshoSofutaishoKubun.toValue(NUM_1).get名称());
-            dateSourceList.add(keyValueData2);
-            KeyValueDataSource keyValueData3 = new KeyValueDataSource(NUM_2, KagomoshitateshoSofutaishoKubun.toValue(NUM_2).get名称());
-            dateSourceList.add(keyValueData3);
-            div.getDdlSofuTaishojoho().setDataSource(dateSourceList);
             div.getDdlSofuTaishojoho().setSelectedKey(NUM_0);
+            div.getDdlSofuTaishojoho().setDisplayNone(true);
+        } else {
+            div.getDdlSofuTaishojoho().setDisplayNone(false);
+            div.getDdlSofuTaishojoho().setSelectedKey(NUM_2);
         }
         div.getShoriJikkoMaekakuninJiko().setVisible(false);
     }
