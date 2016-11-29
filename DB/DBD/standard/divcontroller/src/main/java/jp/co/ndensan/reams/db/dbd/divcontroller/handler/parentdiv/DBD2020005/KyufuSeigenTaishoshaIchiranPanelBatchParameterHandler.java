@@ -109,6 +109,7 @@ public class KyufuSeigenTaishoshaIchiranPanelBatchParameterHandler {
         } else {
             parameter.set給付制限状態(NO_3);
         }
+        parameter.set基準日(div.getTxtKijunbi().getValue().toDateString());
     }
 
     private void select_chkKobetushitei() {
