@@ -56,7 +56,7 @@
             T1."hiHokenshaNo" NOT LIKE 'H%'
             AND (T1."kyufuSakuseiKubunCode" = '1'
             OR T1."kyufuSakuseiKubunCode" = '2')
-            AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
+            AND SUBSTR(T1."inputShikibetsuNo",1,3) NOT IN ('71P','816','71R','817')
         <if test="'00'.toString()==対象年月指定.toString()">
         AND #{年月範囲開始} <![CDATA[<=]]> T1."serviceTeikyoYM" 
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
@@ -131,7 +131,7 @@
             T1."hiHokenshaNo" NOT LIKE 'H%'
             AND (T1."kyufuSakuseiKubunCode" = '1'
             OR T1."kyufuSakuseiKubunCode" = '2')
-            AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
+            AND SUBSTR(T1."inputShikibetsuNo",1,3) NOT IN ('71P','816','71R','817')
         <if test="'00'.toString()==対象年月指定.toString()">
         AND #{年月範囲開始}<![CDATA[<=]]>T1."serviceTeikyoYM"  
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
@@ -206,7 +206,7 @@
             T1."hiHokenshaNo" NOT LIKE 'H%'
             AND (T1."kyufuSakuseiKubunCode" = '1'
             OR T1."kyufuSakuseiKubunCode" = '2')
-            AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
+            AND SUBSTR(T1."inputShikibetsuNo",1,3) NOT IN ('71P','816','71R','817')
         <if test="'00'.toString()==対象年月指定.toString()">
         AND #{年月範囲開始}<![CDATA[<=]]>T1."serviceTeikyoYM"  
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
