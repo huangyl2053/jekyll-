@@ -88,7 +88,6 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
             try {
                 copyFile(from, to);
             } catch (Exception ex) {
-                RString msg = new RString("A usuless message to confirm whether the program is running here!");
                 throw new BatchInterruptedException(UrErrorMessages.ファイルWRITEエラー.getMessage().
                         replace(新ファイル名.toString()).toString());
             }
