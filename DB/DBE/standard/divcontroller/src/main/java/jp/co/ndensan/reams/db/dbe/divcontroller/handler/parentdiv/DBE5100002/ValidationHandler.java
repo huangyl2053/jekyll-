@@ -27,6 +27,7 @@ public class ValidationHandler {
 
     private final ShinsakaiAutoDiv shinDiv;
     private final RString 未開催 = new RString("未開催");
+    private final RString 未開催_割付完了 = new RString("未開催/割付完了");
 
     /**
      * コンストラクタです。
@@ -73,7 +74,7 @@ public class ValidationHandler {
      */
     public ValidationMessageControlPairs 審査会開催チェック(ValidationMessageControlPairs validPairs) {
         for (dgShinsakaiIchiran_Row row : shinDiv.getDgShinsakaiIchiran().getSelectedItems()) {
-            if (!未開催.equals(row.getShinchokuJokyo())) {
+            if (!未開催.equals(row.getShinchokuJokyo()) && !未開催_割付完了.equals(row.getShinchokuJokyo())) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate未開催以外の場合,
                         shinDiv.getDgShinsakaiIchiran()));
                 break;

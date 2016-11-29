@@ -125,20 +125,36 @@ public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205Ninte
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.selectSpecific(ninteichosaTokkijikoNo,
-                ninteichosaTokkijikoRemban,
-                tokkijikoTextImageKubun,
-                genponMaskKubun,
-                tokkiJiko).
-                table(DbT5205NinteichosahyoTokkijiko.class).
-                where(and(
-                                eq(shinseishoKanriNo, 申請書管理番号),
-                                eq(ninteichosaRirekiNo, 認定調査依頼履歴番号),
-                                in(ninteichosaTokkijikoNo, 認定調査特記事項番号)
-                        )).order(
-                        by(ninteichosaTokkijikoNo),
-                        by(ninteichosaTokkijikoRemban)).
-                toList(DbT5205NinteichosahyoTokkijikoEntity.class);
+        if (!認定調査特記事項番号.isEmpty()) {
+            return accessor.selectSpecific(ninteichosaTokkijikoNo,
+                    ninteichosaTokkijikoRemban,
+                    tokkijikoTextImageKubun,
+                    genponMaskKubun,
+                    tokkiJiko).
+                    table(DbT5205NinteichosahyoTokkijiko.class).
+                    where(and(
+                                    eq(shinseishoKanriNo, 申請書管理番号),
+                                    eq(ninteichosaRirekiNo, 認定調査依頼履歴番号),
+                                    in(ninteichosaTokkijikoNo, 認定調査特記事項番号)
+                            )).order(
+                            by(ninteichosaTokkijikoNo),
+                            by(ninteichosaTokkijikoRemban)).
+                    toList(DbT5205NinteichosahyoTokkijikoEntity.class);
+        } else {
+            return accessor.selectSpecific(ninteichosaTokkijikoNo,
+                    ninteichosaTokkijikoRemban,
+                    tokkijikoTextImageKubun,
+                    genponMaskKubun,
+                    tokkiJiko).
+                    table(DbT5205NinteichosahyoTokkijiko.class).
+                    where(and(
+                                    eq(shinseishoKanriNo, 申請書管理番号),
+                                    eq(ninteichosaRirekiNo, 認定調査依頼履歴番号)
+                            )).order(
+                            by(ninteichosaTokkijikoNo),
+                            by(ninteichosaTokkijikoRemban)).
+                    toList(DbT5205NinteichosahyoTokkijikoEntity.class);
+        }
     }
 
     /**

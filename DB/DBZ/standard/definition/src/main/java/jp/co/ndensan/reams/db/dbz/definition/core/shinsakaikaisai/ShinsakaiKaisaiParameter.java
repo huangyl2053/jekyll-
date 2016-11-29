@@ -88,7 +88,7 @@ public final class ShinsakaiKaisaiParameter {
      * @param 表示期間To 表示期間To
      * @param モード モード
      * @param 表示条件 表示条件
-     * @param 最大表示件数
+     * @param 最大表示件数 最大表示件数
      * @param ダミー審査会 ダミー審査会
      * @return 介護認定審査会共有一覧のパラメータ
      */
@@ -113,7 +113,7 @@ public final class ShinsakaiKaisaiParameter {
             if (割付完了のみ.equals(表示条件)) {
                 is割付完了のみ = true;
             }
-            if (審査会未完了のみ.equals(表示条件)) {
+            if (開催予定登録.equals(モード) || 審査会未完了のみ.equals(表示条件)) {
                 is審査会未完了のみ = true;
             }
             if (審査会完了のみ.equals(表示条件)) {

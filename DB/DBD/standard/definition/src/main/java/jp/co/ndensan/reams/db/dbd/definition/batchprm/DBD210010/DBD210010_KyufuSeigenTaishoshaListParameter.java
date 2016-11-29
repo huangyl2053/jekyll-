@@ -31,6 +31,7 @@ public class DBD210010_KyufuSeigenTaishoshaListParameter extends BatchParameterB
     private static final String YITIGOUSKIFUTOUROKUSHA = "nigoukifutourokusha";
     private static final String OUTPUTJUNNID = "outputJunnId";
     private static final String KYUFUJOTAI = "kyufujotai";
+    private static final String KIJUNYMD = "kijunYMD";
 
     @BatchParameter(key = ZENTOUROKUSHA, name = "全登録者")
     private boolean 全登録者;
@@ -52,4 +53,6 @@ public class DBD210010_KyufuSeigenTaishoshaListParameter extends BatchParameterB
     private Long 出力順設定リスト;
     @BatchParameter(key = KYUFUJOTAI, name = "給付制限状態")
     private RString 給付制限状態;
+    @BatchParameter(key = KIJUNYMD, name = "基準日")
+    private RString 基準日;
 }

@@ -6,12 +6,16 @@
 
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.koseishichosonselector.KoseiShiChosonSelector;
 
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.koseishichosonselector.KoseiShiChosonSelectorParamter;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.koseishichosonselector.KoseiShiChosonSelector.KoseiShiChosonSelectorDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.koseishichosonselector.KoseiShiChosonSelectorHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.koseishichosonselector.KoseiShiChosonSelectorFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -38,10 +42,15 @@ public class KoseiShiChosonSelector {
     public ResponseData<KoseiShiChosonSelectorDiv> onLoad(KoseiShiChosonSelectorDiv div) {
         KoseiShiChosonSelectorParamter param = KoseiShiChosonSelectorParamter.createParam();
         List<KoseiShichoson> koseiShichosonList = service.getKoseiShichoson(param).records();
+        List<HokenshaSummary> hokenshaList = new ArrayList<>(
+                HokenshaListLoader.createInstance()
+                .getShichosonCodeNameList(GyomuBunrui.介護認定)
+                .getAll()
+        );
         if (koseiShichosonList.isEmpty()) {
             return ResponseData.of(div).addValidationMessages(getHandler(div).getMessage()).respond();
         }
-        getHandler(div).onLoad(koseiShichosonList);
+        getHandler(div).onLoad(hokenshaList);
         return ResponseData.of(div).respond();
     }
     

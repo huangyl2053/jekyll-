@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KojinJokyoShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -37,6 +37,10 @@ public class KojinJokyoShokaiDiv extends Panel {
     private ButtonDialog btnShujiiIkenshoSakuseiIraiShokai;
     @JsonProperty("btnNinteiChosaIraiShokai")
     private ButtonDialog btnNinteiChosaIraiShokai;
+    @JsonProperty("btnChosaKekkaInfoKihon")
+    private ButtonDialog btnChosaKekkaInfoKihon;
+    @JsonProperty("btnChosaKekkaInfoGaikyo")
+    private ButtonDialog btnChosaKekkaInfoGaikyo;
     @JsonProperty("tblKanryoJisseki")
     private tblKanryoJissekiDiv tblKanryoJisseki;
     @JsonProperty("KojinShinchokuShosai")
@@ -61,6 +65,12 @@ public class KojinJokyoShokaiDiv extends Panel {
     private RString hihokenshano;
     @JsonProperty("shoKisaiHokenshaNo")
     private RString shoKisaiHokenshaNo;
+    @JsonProperty("hdnNinteiChosaRirekiNo")
+    private RString hdnNinteiChosaRirekiNo;
+    @JsonProperty("hdnNinteiChosaTokkijikoNo")
+    private RString hdnNinteiChosaTokkijikoNo;
+    @JsonProperty("hdnGaikyoChosaTextImageKubun")
+    private RString hdnGaikyoChosaTextImageKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -174,6 +184,42 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("btnNinteiChosaIraiShokai")
     public void setBtnNinteiChosaIraiShokai(ButtonDialog btnNinteiChosaIraiShokai) {
         this.btnNinteiChosaIraiShokai = btnNinteiChosaIraiShokai;
+    }
+
+    /*
+     * getbtnChosaKekkaInfoKihon
+     * @return btnChosaKekkaInfoKihon
+     */
+    @JsonProperty("btnChosaKekkaInfoKihon")
+    public ButtonDialog getBtnChosaKekkaInfoKihon() {
+        return btnChosaKekkaInfoKihon;
+    }
+
+    /*
+     * setbtnChosaKekkaInfoKihon
+     * @param btnChosaKekkaInfoKihon btnChosaKekkaInfoKihon
+     */
+    @JsonProperty("btnChosaKekkaInfoKihon")
+    public void setBtnChosaKekkaInfoKihon(ButtonDialog btnChosaKekkaInfoKihon) {
+        this.btnChosaKekkaInfoKihon = btnChosaKekkaInfoKihon;
+    }
+
+    /*
+     * getbtnChosaKekkaInfoGaikyo
+     * @return btnChosaKekkaInfoGaikyo
+     */
+    @JsonProperty("btnChosaKekkaInfoGaikyo")
+    public ButtonDialog getBtnChosaKekkaInfoGaikyo() {
+        return btnChosaKekkaInfoGaikyo;
+    }
+
+    /*
+     * setbtnChosaKekkaInfoGaikyo
+     * @param btnChosaKekkaInfoGaikyo btnChosaKekkaInfoGaikyo
+     */
+    @JsonProperty("btnChosaKekkaInfoGaikyo")
+    public void setBtnChosaKekkaInfoGaikyo(ButtonDialog btnChosaKekkaInfoGaikyo) {
+        this.btnChosaKekkaInfoGaikyo = btnChosaKekkaInfoGaikyo;
     }
 
     /*
@@ -381,6 +427,60 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("shoKisaiHokenshaNo")
     public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+    }
+
+    /*
+     * gethdnNinteiChosaRirekiNo
+     * @return hdnNinteiChosaRirekiNo
+     */
+    @JsonProperty("hdnNinteiChosaRirekiNo")
+    public RString getHdnNinteiChosaRirekiNo() {
+        return hdnNinteiChosaRirekiNo;
+    }
+
+    /*
+     * sethdnNinteiChosaRirekiNo
+     * @param hdnNinteiChosaRirekiNo hdnNinteiChosaRirekiNo
+     */
+    @JsonProperty("hdnNinteiChosaRirekiNo")
+    public void setHdnNinteiChosaRirekiNo(RString hdnNinteiChosaRirekiNo) {
+        this.hdnNinteiChosaRirekiNo = hdnNinteiChosaRirekiNo;
+    }
+
+    /*
+     * gethdnNinteiChosaTokkijikoNo
+     * @return hdnNinteiChosaTokkijikoNo
+     */
+    @JsonProperty("hdnNinteiChosaTokkijikoNo")
+    public RString getHdnNinteiChosaTokkijikoNo() {
+        return hdnNinteiChosaTokkijikoNo;
+    }
+
+    /*
+     * sethdnNinteiChosaTokkijikoNo
+     * @param hdnNinteiChosaTokkijikoNo hdnNinteiChosaTokkijikoNo
+     */
+    @JsonProperty("hdnNinteiChosaTokkijikoNo")
+    public void setHdnNinteiChosaTokkijikoNo(RString hdnNinteiChosaTokkijikoNo) {
+        this.hdnNinteiChosaTokkijikoNo = hdnNinteiChosaTokkijikoNo;
+    }
+
+    /*
+     * gethdnGaikyoChosaTextImageKubun
+     * @return hdnGaikyoChosaTextImageKubun
+     */
+    @JsonProperty("hdnGaikyoChosaTextImageKubun")
+    public RString getHdnGaikyoChosaTextImageKubun() {
+        return hdnGaikyoChosaTextImageKubun;
+    }
+
+    /*
+     * sethdnGaikyoChosaTextImageKubun
+     * @param hdnGaikyoChosaTextImageKubun hdnGaikyoChosaTextImageKubun
+     */
+    @JsonProperty("hdnGaikyoChosaTextImageKubun")
+    public void setHdnGaikyoChosaTextImageKubun(RString hdnGaikyoChosaTextImageKubun) {
+        this.hdnGaikyoChosaTextImageKubun = hdnGaikyoChosaTextImageKubun;
     }
 
     /*

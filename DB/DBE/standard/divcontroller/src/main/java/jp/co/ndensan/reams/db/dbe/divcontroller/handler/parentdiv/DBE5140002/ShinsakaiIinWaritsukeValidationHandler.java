@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class ShinsakaiIinWaritsukeValidationHandler {
 
-    private static final int 選択件数 = 5;
     private final ShinsakaiIinWaritsukeDiv div;
 
     /**
@@ -77,10 +76,6 @@ public class ShinsakaiIinWaritsukeValidationHandler {
         if (div.getDgShinsakaiIinKoseiIchiran().getDataSource().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(
                     IdocheckMessages.Validate審査会委員構成一覧データなし, div.getDgShinsakaiIinKoseiIchiran()));
-//        } else if (div.getDgShinsakaiIinKoseiIchiran().getSelectedItems().size() < 選択件数) {
-//            validPairs.add(new ValidationMessageControlPair(
-//                    IdocheckMessages.Validate一覧は少なくとも5人, div.getDgShinsakaiIinKoseiIchiran()));
-//        }
         }
         return validPairs;
     }

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.Irai
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.dgNinteiChosaIraiTaishoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -69,6 +70,10 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkchosairaihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_NINTEIO);
+        div.getTxtChosaDispMax().setValue(new Decimal(DbBusinessConfig
+                .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtChosaDispMax().setMaxValue(new Decimal(DbBusinessConfig
+                .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
@@ -93,6 +98,10 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkikenshiiraihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_SHUJII);
+        div.getTxtIkenshoDispMax().setValue(new Decimal(DbBusinessConfig
+                .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtIkenshoDispMax().setMaxValue(new Decimal(DbBusinessConfig
+                .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
@@ -176,6 +185,8 @@ public class IraishoIkkatsuHakkoHandler {
             div.getCcdNinteiChosaHokensha().loadHokenshaList(GyomuBunrui.介護認定);
             div.getChkNinteiChosahyo().setSelectedItemsByKey(selectKeys);
             div.getTxtChosaDispMax().clearValue();
+            div.getTxtChosaDispMax().setValue(new Decimal(DbBusinessConfig
+                    .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         }
         if (STATE_SHUJII.equals(div.getState())) {
             div.getTxtShujiiIkenshoSakuseiIraibiFrom().clearValue();
@@ -186,6 +197,8 @@ public class IraishoIkkatsuHakkoHandler {
             div.getCcdShujiiIkenshoHokensha().loadHokenshaList(GyomuBunrui.介護認定);
             div.getChkShujiiIkensho().setSelectedItemsByKey(selectKeys);
             div.getTxtIkenshoDispMax().clearValue();
+            div.getTxtIkenshoDispMax().setValue(new Decimal(DbBusinessConfig
+                    .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         }
     }
 

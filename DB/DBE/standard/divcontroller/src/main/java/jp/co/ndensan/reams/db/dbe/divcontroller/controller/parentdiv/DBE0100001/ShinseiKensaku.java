@@ -39,11 +39,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class ShinseiKensaku {
 
 //<<<<<<< HEAD
-    private static final RString MENUID_DBEMN11001 = new RString("DBEMN21001");
-    private static final RString MENUID_DBEMN11003 = new RString("DBEMN21003");
-    private static final RString MENUID_DBEMN14001 = new RString("DBEMN24001");
-    private static final RString MENUID_DBEMN32002 = new RString("DBEMN42002");
-    private static final RString MENUID_DBEMN31005 = new RString("DBEMN41005");
+    private static final RString MENUID_DBEMN21001 = new RString("DBEMN21001");
+    private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
+    private static final RString MENUID_DBEMN24001 = new RString("DBEMN24001");
+    private static final RString MENUID_DBEMN42002 = new RString("DBEMN42002");
+    private static final RString MENUID_DBEMN41005 = new RString("DBEMN41005");
 //=======
 //    private static final RString MENUID_DBEMN11001 = new RString("DBEMN11001");
 //    private static final RString MENUID_DBEMN11003 = new RString("DBEMN11003");
@@ -52,9 +52,10 @@ public class ShinseiKensaku {
 //    private static final RString MENUID_DBEMN31005 = new RString("DBEMN31005");
     private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
     private static final RString MENUID_DBEMN43001 = new RString("DBEMN43001");
-    private static final RString MENUID_DBEMN62001 = new RString("DBEMN72001");
+    private static final RString MENUID_DBEMN72001 = new RString("DBEMN72001");
 //>>>>>>> origin/sync
     private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
+    private static final RString 完了メッセージ = new RString("要介護認定・要支援認定等申請者一覧表の発行処理が完了しました。");
 
     /**
      * 画面初期化処理です。
@@ -70,13 +71,13 @@ public class ShinseiKensaku {
 
     private static DBE0100001StateName findStateAt条件指定() {
         RString menuID = ResponseHolder.getMenuID();
-        if (MENUID_DBEMN11001.equals(menuID)) {
+        if (MENUID_DBEMN21001.equals(menuID)) {
             return DBE0100001StateName.申請検索;
-        } else if (MENUID_DBEMN11003.equals(menuID)) {
+        } else if (MENUID_DBEMN21003.equals(menuID)) {
             return DBE0100001StateName.個人照会;
-        } else if (MENUID_DBEMN14001.equals(menuID)
-                || MENUID_DBEMN32002.equals(menuID)
-                || MENUID_DBEMN31005.equals(menuID)) {
+        } else if (MENUID_DBEMN24001.equals(menuID)
+                || MENUID_DBEMN42002.equals(menuID)
+                || MENUID_DBEMN41005.equals(menuID)) {
             return DBE0100001StateName.情報提供;
         }
         return DBE0100001StateName.条件指定;
@@ -115,17 +116,15 @@ public class ShinseiKensaku {
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
         div.getBtnClear().setDisabled(true);
         div.getTxtMaxDisp().setDisabled(true);
-        div.getBtnKensaku().setDisabled(true);
         div.getBtnModoru().setDisabled(false);
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
-        if (MENUID_DBEMN11001.equals(menuID)) {
+        if (MENUID_DBEMN21001.equals(menuID)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNITIRANPRINT, false);
         }
         if (searchResult.records().size() == 1) {
             div.getBtnClear().setDisabled(false);
             div.getTxtMaxDisp().setDisabled(false);
-            div.getBtnKensaku().setDisabled(false);
             return forwardNextOrStay(div, Events.検索結果1件);
         }
         return ResponseData.of(div).setState(DBE0100001StateName.検索結果一覧);
@@ -147,17 +146,20 @@ public class ShinseiKensaku {
         }
 
         RString 申請書管理番号 = row.getShinseishoKanriNo();
-        if (MENUID_DBEMN11001.equals(menuID)) {
+        int 認定調査履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
+        if (MENUID_DBEMN21001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
-        if (MENUID_DBEMN11003.equals(menuID)) {
+        if (MENUID_DBEMN21003.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
-        if (MENUID_DBEMN14001.equals(menuID)) {
+        if (MENUID_DBEMN24001.equals(menuID)) {
             RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
             RString 被保険者番号 = row.getHihokenshaNo();
             ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
@@ -165,7 +167,7 @@ public class ShinseiKensaku {
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定情報提供へ).respond();
         }
 
-        if (MENUID_DBEMN32002.equals(menuID)) {
+        if (MENUID_DBEMN42002.equals(menuID)) {
             RString 主治医意見書作成依頼履歴番号 = row.getIkenshoIraiRirekiNo();
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
@@ -173,7 +175,7 @@ public class ShinseiKensaku {
 //<<<<<<< HEAD
         }
 
-        if (MENUID_DBEMN31005.equals(menuID)) {
+        if (MENUID_DBEMN41005.equals(menuID)) {
             ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.申請書管理番号,
                     new ShinseishoKanriNo(申請書管理番号));
             ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.認定調査履歴番号,
@@ -182,7 +184,7 @@ public class ShinseiKensaku {
                     //            ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
                     //            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号,
                     //>>>>>>> origin/sync
-                    Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
+                    認定調査履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
         } else if (MENUID_DBEMN31001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
@@ -190,7 +192,7 @@ public class ShinseiKensaku {
         } else if (MENUID_DBEMN43001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.個人依頼内容更新へ).respond();
-        } else if (MENUID_DBEMN62001.equals(menuID)) {
+        } else if (MENUID_DBEMN72001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定イメージ情報管理へ).respond();
         }
@@ -207,7 +209,6 @@ public class ShinseiKensaku {
     public ResponseData<ShinseiKensakuDiv> onSelect_dgShinseiJoho(ShinseiKensakuDiv div) {
         div.getBtnClear().setDisabled(false);
         div.getTxtMaxDisp().setDisabled(false);
-        div.getBtnKensaku().setDisabled(false);
         return forwardNextOrStay(div, Events.対象選択);
     }
 
@@ -221,7 +222,6 @@ public class ShinseiKensaku {
         div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
         div.getBtnClear().setDisabled(false);
         div.getTxtMaxDisp().setDisabled(false);
-        div.getBtnKensaku().setDisabled(false);
         div.getBtnModoru().setDisabled(true);
         return ResponseData.of(div).setState(findStateAt条件指定());
     }
@@ -233,6 +233,7 @@ public class ShinseiKensaku {
      * @return ResponseData<ShinseiKensakuDiv>
      */
     public ResponseData<ShinseiKensakuDiv> onClick_printAfter(ShinseiKensakuDiv div) {
+        div.getCcdKanryoMessage().setMessage(完了メッセージ, RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBE0100001StateName.完了);
     }
 

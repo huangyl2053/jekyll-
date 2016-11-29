@@ -6,11 +6,9 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.NinteiShinsakaiIinGuide;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideResult;
@@ -20,7 +18,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishi
 import jp.co.ndensan.reams.db.dbz.service.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -48,21 +45,7 @@ public class NinteiShinsakaiIinGuide {
      * @return ResponseData<NinteiShinsakaiIinGuideDiv>
      */
     public ResponseData<NinteiShinsakaiIinGuideDiv> onLoad(NinteiShinsakaiIinGuideDiv div) {
-
-        div.getKensakuJoken().getTxtShinsakaiIinCodeFrom().clearValue();
-        div.getKensakuJoken().getTxtShinsakaiIinCodeTo().clearValue();
-        div.getKensakuJoken().getTxtShinsakaiIinName().clearValue();
-        div.getKensakuJoken().getTxtMaxKensu().clearValue();
-        div.getKensakuJoken().getDdlSeibetsu().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
-        getHandler(div).set性別();
-        getHandler(div).set審査会委員資格();
-        div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
-        div.getBtnSaikensaku().setVisible(false);
-        div.getDdlIryoKikan().getDataSource().clear();
-        div.getDdlKaigoJigyosha().getDataSource().clear();
-        div.getDdlSonotaJigyosha().getDataSource().clear();
+        getHandler(div).onLoad();
         return ResponseData.of(div).respond();
     }
 
@@ -73,20 +56,7 @@ public class NinteiShinsakaiIinGuide {
      * @return ResponseData<NinteiShinsakaiIinGuideDiv>
      */
     public ResponseData<NinteiShinsakaiIinGuideDiv> onClick_btnClear(NinteiShinsakaiIinGuideDiv div) {
-        div.getKensakuJoken().getTxtShinsakaiIinCodeFrom().setValue(RString.EMPTY);
-        div.getKensakuJoken().getTxtShinsakaiIinCodeTo().setValue(RString.EMPTY);
-        div.getKensakuJoken().getTxtShinsakaiIinName().setValue(RString.EMPTY);
-        div.getKensakuJoken().getDdlSeibetsu().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
-        div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha().setSelectedKey(RString.EMPTY);
-        List<RString> list = new ArrayList();
-        list.add(new RString("key0"));
-        div.getKensakuJoken().getShosaiJoken().getChkHaishi().setSelectedItemsByKey(list);
-        div.getKensakuJoken().getShosaiJoken().getChkKiken().setSelectedItemsByKey(list);
+        getHandler(div).onLoad();
         return ResponseData.of(div).respond();
     }
 
@@ -151,11 +121,7 @@ public class NinteiShinsakaiIinGuide {
      * @return ResponseData<NinteiShinsakaiIinGuideDiv>
      */
     public ResponseData<NinteiShinsakaiIinGuideDiv> onChange_HokenshaList(NinteiShinsakaiIinGuideDiv div) {
-        LasdecCode 市町村コード = div.getKensakuJoken().getCcdHokensha().getSelectedItem().get市町村コード();
-        ShoKisaiHokenshaNo 証記載保険者番号 = div.getKensakuJoken().getCcdHokensha().getSelectedItem().get証記載保険者番号();
-        getHandler(div).set医療機関(市町村コード);
-        getHandler(div).set介護事業者(市町村コード);
-        getHandler(div).setその他事業者(証記載保険者番号);
+        getHandler(div).set保険者選択();
         return ResponseData.of(div).respond();
     }
 
@@ -167,23 +133,8 @@ public class NinteiShinsakaiIinGuide {
      */
     public ResponseData<NinteiShinsakaiIinGuideDiv> onClick_btnSaikensaku(NinteiShinsakaiIinGuideDiv div) {
         div.getKensakuJoken().setIsOpen(true);
-        div.getKensakuJoken().getShosaiJoken().setIsOpen(false);
+        div.getShosaiJoken().setIsOpen(false);
         div.getShinsakaiIinIchiran().setIsOpen(false);
-        div.getKensakuJoken().getTxtShinsakaiIinCodeFrom().setValue(RString.EMPTY);
-        div.getKensakuJoken().getTxtShinsakaiIinCodeTo().setValue(RString.EMPTY);
-        div.getKensakuJoken().getTxtShinsakaiIinName().setValue(RString.EMPTY);
-        div.getKensakuJoken().getDdlSeibetsu().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
-        div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setSelectedKey(RString.EMPTY);
-        div.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha().setSelectedKey(RString.EMPTY);
-        List<RString> list = new ArrayList();
-        list.add(new RString("key0"));
-        div.getKensakuJoken().getShosaiJoken().getChkHaishi().setSelectedItemsByKey(list);
-        div.getKensakuJoken().getShosaiJoken().getChkKiken().setSelectedItemsByKey(list);
-        div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().getDataSource().clear();
         div.getBtnSaikensaku().setVisible(false);
         return ResponseData.of(div).respond();
     }
@@ -212,17 +163,6 @@ public class NinteiShinsakaiIinGuide {
      */
     public ResponseData<NinteiShinsakaiIinGuideDiv> onClick_btnModoru(NinteiShinsakaiIinGuideDiv div) {
         return ResponseData.of(div).respond();
-    }
-
-    private Decimal get最大取得件数() {
-        Decimal 最大取得件数 = new Decimal(0);
-        if (DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) != null) {
-            最大取得件数 = new Decimal(DbBusinessConfig.get(
-                    ConfigNameDBU.検索制御_最大取得件数,
-                    RDate.getNowDate(),
-                    SubGyomuCode.DBU介護統計報告).toString());
-        }
-        return 最大取得件数;
     }
 
     private Decimal get最大取得件数上限() {

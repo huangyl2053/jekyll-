@@ -39,6 +39,8 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
     private static final int 連番_12 = 12;
     private static final int 連番_13 = 13;
     private static final int 連番_14 = 14;
+    private static final int フォームインデックス_判定用 = 30;
+    private static final int 連番_計算用 = 15;
 
     /**
      * インスタンスを生成します。
@@ -59,6 +61,25 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
     }
 
     private TokkiText1ReportSource editSource(TokkiText1ReportSource source) {
+        source.hokenshaNo = entity.get保険者番号();
+        source.hihokenshaNo = entity.get被保険者番号();
+        source.hihokenshaName = entity.get被保険者氏名();
+        source.shinseiGengo = entity.get申請日_元号();
+        source.shinseiYY = !RString.isNullOrEmpty(entity.get申請日_年()) ? entity.get申請日_年().substring(2) : RString.EMPTY;
+        source.shinseiMM = entity.get申請日_月();
+        source.shinseiDD = entity.get申請日_日();
+        source.sakuseiGengo = entity.get作成日_元号();
+        source.sakuseiYY = !RString.isNullOrEmpty(entity.get作成日_年()) ? entity.get作成日_年().substring(2) : RString.EMPTY;
+        source.sakuseiMM = entity.get作成日_月();
+        source.sakuseiDD = entity.get作成日_日();
+        source.chosaGengo = entity.get調査日_元号();
+        source.chosaYY = !RString.isNullOrEmpty(entity.get調査日_年()) ? entity.get調査日_年().substring(2) : RString.EMPTY;
+        source.chosaMM = entity.get調査日_月();
+        source.chosaDD = entity.get調査日_日();
+        source.shinsaGengo = entity.get審査日_元号();
+        source.shinsaYY = !RString.isNullOrEmpty(entity.get審査日_年()) ? entity.get審査日_年().substring(2) : RString.EMPTY;
+        source.shinsaMM = entity.get審査日_月();
+        source.shinsaDD = entity.get審査日_日();
         source.tokkiImg = entity.get特記事項イメージ();
         if (entity.get特記事項リスト() != null && !entity.get特記事項リスト().isEmpty()) {
             RStringBuilder builder = new RStringBuilder();
@@ -98,7 +119,6 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         RStringBuilder 特記事項builder = new RStringBuilder();
         RString new番号 = RString.EMPTY;
         RString old番号 = RString.EMPTY;
-        int index = 0;
         for (TokkiTextEntity tokkiTextEntity : entity.get特記事項番号リスト()) {
             new番号 = tokkiTextEntity.get特記事項番号();
             if (!new番号.equals(old番号)) {
@@ -116,58 +136,75 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         if (new番号.equals(old番号)) {
             特記事項.add(特記事項builder.toRString());
         }
-        for (RString 事項 : 特記事項) {
-            set特記事項List(事項, index, source);
-            index = index + 1;
+        set特記事項リスト(特記事項, source);
+        if (count < フォームインデックス_判定用) {
+            source.layoutBreakItem = 1;
+        } else {
+            source.layoutBreakItem = 2;
         }
         return source;
     }
 
-    private void set特記事項List(RString item, int index, TokkiText1ReportSource source) {
+    private void set特記事項リスト(List<RString> 特記事項, TokkiText1ReportSource source) {
+        int tokkijikoIndex = count / フォームインデックス_判定用;
+        int setIndex = 0;
+        if (0 < tokkijikoIndex) {
+            setIndex = tokkijikoIndex * 連番_計算用;
+        }
+        for (int num = 0; num < 連番_計算用; num++) {
+            if (setIndex + num < 特記事項.size()) {
+                set特記事項List(特記事項.get(setIndex + num), num, source);
+            } else {
+                break;
+            }
+        }
+    }
 
-        if (index == 連番_0) {
+    private void set特記事項List(RString item, int index, TokkiText1ReportSource source) {
+        int remban = index % 連番_計算用;
+        if (remban == 連番_0) {
             source.tokkiText1 = item;
         }
-        if (index == 連番_1) {
+        if (remban == 連番_1) {
             source.tokkiText2 = item;
         }
-        if (index == 連番_2) {
+        if (remban == 連番_2) {
             source.tokkiText3 = item;
         }
-        if (index == 連番_3) {
+        if (remban == 連番_3) {
             source.tokkiText4 = item;
         }
-        if (index == 連番_4) {
+        if (remban == 連番_4) {
             source.tokkiText5 = item;
         }
-        if (index == 連番_5) {
+        if (remban == 連番_5) {
             source.tokkiText6 = item;
         }
-        if (index == 連番_6) {
+        if (remban == 連番_6) {
             source.tokkiText7 = item;
         }
-        if (index == 連番_7) {
+        if (remban == 連番_7) {
             source.tokkiText8 = item;
         }
-        if (index == 連番_8) {
+        if (remban == 連番_8) {
             source.tokkiText9 = item;
         }
-        if (index == 連番_9) {
+        if (remban == 連番_9) {
             source.tokkiText10 = item;
         }
-        if (index == 連番_10) {
+        if (remban == 連番_10) {
             source.tokkiText11 = item;
         }
-        if (index == 連番_11) {
+        if (remban == 連番_11) {
             source.tokkiText12 = item;
         }
-        if (index == 連番_12) {
+        if (remban == 連番_12) {
             source.tokkiText13 = item;
         }
-        if (index == 連番_13) {
+        if (remban == 連番_13) {
             source.tokkiText14 = item;
         }
-        if (index == 連番_14) {
+        if (remban == 連番_14) {
             source.tokkiText15 = item;
         }
     }

@@ -53,6 +53,16 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0100001",
+     "layoutTitle": "要介護認定申請検索",
+     "eventName": "完了処理",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }

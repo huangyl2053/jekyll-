@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImageTokkiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,20 +31,12 @@ public class ImageTokkiDiv extends Panel {
     private TextBox txtTokkiJikouNameImage;
     @JsonProperty("lblMsgGenpon")
     private Label lblMsgGenpon;
-    @JsonProperty("imgGenpoImage")
-    private StaticImage imgGenpoImage;
     @JsonProperty("lblMsgMask")
     private Label lblMsgMask;
+    @JsonProperty("imgGenpoImage")
+    private StaticImage imgGenpoImage;
     @JsonProperty("imgMaskingImage")
     private StaticImage imgMaskingImage;
-    @JsonProperty("btnBeforeImageTokkiJiko")
-    private Button btnBeforeImageTokkiJiko;
-    @JsonProperty("btnAfterImageTokkiJiko")
-    private Button btnAfterImageTokkiJiko;
-    @JsonProperty("btnBeforeTokkiJikoNoImg")
-    private Button btnBeforeTokkiJikoNoImg;
-    @JsonProperty("btnAfterTokkiJikoNoImg")
-    private Button btnAfterTokkiJikoNoImg;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -143,24 +135,6 @@ public class ImageTokkiDiv extends Panel {
     }
 
     /*
-     * getimgGenpoImage
-     * @return imgGenpoImage
-     */
-    @JsonProperty("imgGenpoImage")
-    public StaticImage getImgGenpoImage() {
-        return imgGenpoImage;
-    }
-
-    /*
-     * setimgGenpoImage
-     * @param imgGenpoImage imgGenpoImage
-     */
-    @JsonProperty("imgGenpoImage")
-    public void setImgGenpoImage(StaticImage imgGenpoImage) {
-        this.imgGenpoImage = imgGenpoImage;
-    }
-
-    /*
      * getlblMsgMask
      * @return lblMsgMask
      */
@@ -179,6 +153,24 @@ public class ImageTokkiDiv extends Panel {
     }
 
     /*
+     * getimgGenpoImage
+     * @return imgGenpoImage
+     */
+    @JsonProperty("imgGenpoImage")
+    public StaticImage getImgGenpoImage() {
+        return imgGenpoImage;
+    }
+
+    /*
+     * setimgGenpoImage
+     * @param imgGenpoImage imgGenpoImage
+     */
+    @JsonProperty("imgGenpoImage")
+    public void setImgGenpoImage(StaticImage imgGenpoImage) {
+        this.imgGenpoImage = imgGenpoImage;
+    }
+
+    /*
      * getimgMaskingImage
      * @return imgMaskingImage
      */
@@ -194,78 +186,6 @@ public class ImageTokkiDiv extends Panel {
     @JsonProperty("imgMaskingImage")
     public void setImgMaskingImage(StaticImage imgMaskingImage) {
         this.imgMaskingImage = imgMaskingImage;
-    }
-
-    /*
-     * getbtnBeforeImageTokkiJiko
-     * @return btnBeforeImageTokkiJiko
-     */
-    @JsonProperty("btnBeforeImageTokkiJiko")
-    public Button getBtnBeforeImageTokkiJiko() {
-        return btnBeforeImageTokkiJiko;
-    }
-
-    /*
-     * setbtnBeforeImageTokkiJiko
-     * @param btnBeforeImageTokkiJiko btnBeforeImageTokkiJiko
-     */
-    @JsonProperty("btnBeforeImageTokkiJiko")
-    public void setBtnBeforeImageTokkiJiko(Button btnBeforeImageTokkiJiko) {
-        this.btnBeforeImageTokkiJiko = btnBeforeImageTokkiJiko;
-    }
-
-    /*
-     * getbtnAfterImageTokkiJiko
-     * @return btnAfterImageTokkiJiko
-     */
-    @JsonProperty("btnAfterImageTokkiJiko")
-    public Button getBtnAfterImageTokkiJiko() {
-        return btnAfterImageTokkiJiko;
-    }
-
-    /*
-     * setbtnAfterImageTokkiJiko
-     * @param btnAfterImageTokkiJiko btnAfterImageTokkiJiko
-     */
-    @JsonProperty("btnAfterImageTokkiJiko")
-    public void setBtnAfterImageTokkiJiko(Button btnAfterImageTokkiJiko) {
-        this.btnAfterImageTokkiJiko = btnAfterImageTokkiJiko;
-    }
-
-    /*
-     * getbtnBeforeTokkiJikoNoImg
-     * @return btnBeforeTokkiJikoNoImg
-     */
-    @JsonProperty("btnBeforeTokkiJikoNoImg")
-    public Button getBtnBeforeTokkiJikoNoImg() {
-        return btnBeforeTokkiJikoNoImg;
-    }
-
-    /*
-     * setbtnBeforeTokkiJikoNoImg
-     * @param btnBeforeTokkiJikoNoImg btnBeforeTokkiJikoNoImg
-     */
-    @JsonProperty("btnBeforeTokkiJikoNoImg")
-    public void setBtnBeforeTokkiJikoNoImg(Button btnBeforeTokkiJikoNoImg) {
-        this.btnBeforeTokkiJikoNoImg = btnBeforeTokkiJikoNoImg;
-    }
-
-    /*
-     * getbtnAfterTokkiJikoNoImg
-     * @return btnAfterTokkiJikoNoImg
-     */
-    @JsonProperty("btnAfterTokkiJikoNoImg")
-    public Button getBtnAfterTokkiJikoNoImg() {
-        return btnAfterTokkiJikoNoImg;
-    }
-
-    /*
-     * setbtnAfterTokkiJikoNoImg
-     * @param btnAfterTokkiJikoNoImg btnAfterTokkiJikoNoImg
-     */
-    @JsonProperty("btnAfterTokkiJikoNoImg")
-    public void setBtnAfterTokkiJikoNoImg(Button btnAfterTokkiJikoNoImg) {
-        this.btnAfterTokkiJikoNoImg = btnAfterTokkiJikoNoImg;
     }
 
     // </editor-fold>

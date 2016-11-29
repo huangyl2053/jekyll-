@@ -175,7 +175,6 @@ public class NiTeiCyoSaiChiRanManager {
      * @param 認定調査依頼履歴番号 int
      * @param 概況調査テキストイメージ区分 RString
      * @param 認定調査特記事項番号 RString
-     * @param 認定調査特記事項連番 int
      * @param 特記事項テキスト_イメージ区分 RString
      * @param 原本マスク区分 Code
      * @param 概況調査 NinteichosahyoGaikyoChosaBuilder
@@ -183,19 +182,23 @@ public class NiTeiCyoSaiChiRanManager {
      * @param 概況特記 NinteichosahyoGaikyoChosa
      * @param 基本調査 NinteichosahyoKihonChosa
      * @param 要介護認定調査履歴番号 int
-     * @param 連番 int
      * @param 調査項目 NinteichosahyoChosaItem
      * @param サービスの状況 NinteichosahyoServiceJokyo
      * @param サービスの状況フラグ NinteichosahyoServiceJokyoFlag
      * @param 記入項目 NinteichosahyoKinyuItem
      * @param 施設利用 NinteichosahyoShisetsuRiyo
+     * @param 調査項目連番 int
+     * @param 認定調査特記事項連番 int
+     * @param サービス状況連番 int
+     * @param サービス状況フラグ連番 int
+     * @param サービス状況記入連番 int
+     * @param 施設利用フラグ連番 int
      */
     @Transaction
     public void 認定調査一覧更新処理(ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             RString 概況調査テキストイメージ区分,
             RString 認定調査特記事項番号,
-            int 認定調査特記事項連番,
             RString 特記事項テキスト_イメージ区分,
             Code 原本マスク区分,
             NinteichosahyoTokkijiko 特記情報,
@@ -203,12 +206,17 @@ public class NiTeiCyoSaiChiRanManager {
             GaikyoTokki 概況特記,
             NinteichosahyoKihonChosa 基本調査,
             int 要介護認定調査履歴番号,
-            int 連番,
             NinteichosahyoChosaItem 調査項目,
             NinteichosahyoServiceJokyo サービスの状況,
             NinteichosahyoServiceJokyoFlag サービスの状況フラグ,
             NinteichosahyoKinyuItem 記入項目,
-            NinteichosahyoShisetsuRiyo 施設利用
+            NinteichosahyoShisetsuRiyo 施設利用,
+            int 調査項目連番,
+            int 認定調査特記事項連番,
+            int サービス状況連番,
+            int サービス状況フラグ連番,
+            int サービス状況記入連番,
+            int 施設利用フラグ連番
     ) {
         認定調査票概況調査(
                 申請書管理番号,
@@ -235,29 +243,28 @@ public class NiTeiCyoSaiChiRanManager {
         基本調査調査項目(
                 申請書管理番号,
                 要介護認定調査履歴番号,
-                連番,
+                調査項目連番,
                 調査項目);
         認定調査票概況調査サービスの状況(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                連番,
+                サービス状況連番,
                 サービスの状況);
         認定調査票概況調査サービスの状況フラグ(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                連番,
+                サービス状況フラグ連番,
                 サービスの状況フラグ);
         認定調査票概況調査記入項目(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                連番,
+                サービス状況記入連番,
                 記入項目);
         認定調査票概況調査施設利用(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                連番,
+                施設利用フラグ連番,
                 施設利用);
-
     }
 
     /**
@@ -277,16 +284,41 @@ public class NiTeiCyoSaiChiRanManager {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
         requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage(概況調査テキストイメージ区分_Message.toString()));
+
         DbT5202NinteichosahyoGaikyoChosaEntity entity = dbT5202Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 概況調査テキストイメージ区分);
         if (!概況調査.hasChanged()) {
             return false;
         }
         if (entity == null) {
-
             return 1 == dbT5202Dac.save(概況調査.toEntity());
-
         }
-        return 1 == dbT5202Dac.save(概況調査.modifiedModel().toEntity());
+        return 1 == dbT5202Dac.save(createModifyData(entity, 概況調査));
+    }
+
+    private DbT5202NinteichosahyoGaikyoChosaEntity createModifyData(DbT5202NinteichosahyoGaikyoChosaEntity entity,
+            NinteichosahyoGaikyoChosa 概況調査) {
+        entity.setShinseishoKanriNo(概況調査.get申請書管理番号());
+        entity.setNinteichosaRirekiNo(概況調査.get認定調査依頼履歴番号());
+        entity.setGaikyoChosaTextImageKubun(概況調査.get概況調査テキストイメージ区分());
+        entity.setKoroshoIfShikibetsuCode(概況調査.get厚労省IF識別コード());
+        entity.setNinteichousaIraiKubunCode(概況調査.get認定調査依頼区分コード());
+        entity.setNinteichosaIraiKaisu(概況調査.get認定調査回数());
+        entity.setNinteichosaJisshiYMD(概況調査.get認定調査実施年月日());
+        entity.setNinteichosaJuryoYMD(概況調査.get認定調査受領年月日());
+        entity.setNinteiChosaKubunCode(概況調査.get認定調査区分コード());
+        entity.setChosaItakusakiCode(概況調査.get認定調査委託先コード());
+        entity.setChosainCode(概況調査.get認定調査員コード());
+        entity.setChosaJisshiBashoCode(概況調査.get認定調査実施場所コード());
+        entity.setChosaJisshiBashoMeisho(概況調査.get認定調査実施場所名称());
+        entity.setServiceKubunCode(概況調査.get認定調査_サービス区分コード());
+        entity.setRiyoShisetsuShimei(概況調査.get利用施設名());
+        entity.setRiyoShisetsuJusho(概況調査.get利用施設住所().getColumnValue());
+        entity.setRiyoShisetsuTelNo(概況調査.get利用施設電話番号().getColumnValue());
+        entity.setRiyoShisetsuYubinNo(概況調査.get利用施設郵便番号());
+        entity.setTokki(概況調査.get特記());
+        entity.setTokkijikoUketsukeYMD(概況調査.get認定調査特記事項受付年月日());
+        entity.setTokkijikoJuryoYMD(概況調査.get認定調査特記事項受領年月日());
+        return entity;
     }
 
     /**
@@ -311,10 +343,23 @@ public class NiTeiCyoSaiChiRanManager {
             return false;
         }
         if (entity == null) {
-
             return 1 == dbT5206Dac.save(概況特記.toEntity());
         }
-        return 1 == dbT5206Dac.save(概況特記.modifiedModel().toEntity());
+        return 1 == dbT5206Dac.save(createModifyData(entity, 概況特記));
+    }
+
+    private DbT5206GaikyoTokkiEntity createModifyData(DbT5206GaikyoTokkiEntity entity, GaikyoTokki 概況特記) {
+        entity.setShinseishoKanriNo(概況特記.get申請書管理番号());
+        entity.setNinteichosaRirekiNo(概況特記.get認定調査依頼履歴番号());
+        entity.setGaikyoTokkiTextImageKubun(概況特記.get概況特記テキストイメージ区分());
+        entity.setJutakuKaishu(概況特記.get住宅改修());
+        entity.setTokubetsuKyufuService(概況特記.get市町村特別給付サービス種類名());
+        entity.setZaitakuService(概況特記.get介護保険給付以外の在宅サービス種類名());
+        entity.setShuso(概況特記.get概況特記事項_主訴());
+        entity.setKazokuJokyo(概況特記.get概況特記事項_家族状況());
+        entity.setKyojuKankyo(概況特記.get概況特記事項_居住環境());
+        entity.setKikaiKiki(概況特記.get概況特記事項_機器_器械());
+        return entity;
     }
 
     /**
@@ -349,10 +394,21 @@ public class NiTeiCyoSaiChiRanManager {
             return false;
         }
         if (entity == null) {
-
             return 1 == dbT5205Dac.save(特記情報.toEntity());
         }
-        return 1 == dbT5205Dac.save(特記情報.modifiedModel().toEntity());
+        return 1 == dbT5205Dac.save(createModifyData(entity, 特記情報));
+    }
+
+    private DbT5205NinteichosahyoTokkijikoEntity createModifyData(DbT5205NinteichosahyoTokkijikoEntity entity,
+            NinteichosahyoTokkijiko 特記情報) {
+        entity.setShinseishoKanriNo(特記情報.get申請書管理番号());
+        entity.setNinteichosaRirekiNo(特記情報.get認定調査依頼履歴番号());
+        entity.setNinteichosaTokkijikoNo(特記情報.get認定調査特記事項番号());
+        entity.setNinteichosaTokkijikoRemban(特記情報.get認定調査特記事項連番());
+        entity.setTokkijikoTextImageKubun(特記情報.get特記事項テキスト_イメージ区分());
+        entity.setGenponMaskKubun(特記情報.get原本マスク区分());
+        entity.setTokkiJiko(特記情報.get特記事項());
+        return entity;
     }
 
     /**
@@ -376,10 +432,19 @@ public class NiTeiCyoSaiChiRanManager {
             return false;
         }
         if (entity == null) {
-
             return 1 == dbT5203Dac.save(基本調査.toEntity());
         }
-        return 1 == dbT5203Dac.save(基本調査.modifiedModel().toEntity());
+        return 1 == dbT5203Dac.save(createModifyData(entity, 基本調査));
+    }
+
+    private DbT5203NinteichosahyoKihonChosaEntity createModifyData(DbT5203NinteichosahyoKihonChosaEntity entity,
+            NinteichosahyoKihonChosa 基本調査) {
+        entity.setShinseishoKanriNo(基本調査.get申請書管理番号());
+        entity.setNinteichosaRirekiNo(基本調査.get要介護認定調査履歴番号());
+        entity.setKoroshoIfShikibetsuCode(基本調査.get厚労省IF識別コード());
+        entity.setNinchishoNichijoSeikatsuJiritsudoCode(基本調査.get認定調査_認知症高齢者の日常生活自立度コード());
+        entity.setShogaiNichijoSeikatsuJiritsudoCode(基本調査.get認定調査_障害高齢者の日常生活自立度コード());
+        return entity;
     }
 
     /**
@@ -405,10 +470,19 @@ public class NiTeiCyoSaiChiRanManager {
             return false;
         }
         if (entity == null) {
-
             return 1 == dbT5211Dac.save(調査項目.toEntity());
         }
-        return 1 == dbT5211Dac.save(調査項目.modifiedModel().toEntity());
+        return 1 == dbT5211Dac.save(createModifyData(entity, 調査項目));
+    }
+
+    private DbT5211NinteichosahyoChosaItemEntity createModifyData(DbT5211NinteichosahyoChosaItemEntity entity,
+            NinteichosahyoChosaItem 調査項目) {
+        entity.setShinseishoKanriNo(調査項目.get申請書管理番号());
+        entity.setNinteichosaRirekiNo(調査項目.get要介護認定調査履歴番号());
+        entity.setRemban(調査項目.get連番());
+        entity.setKoroshoIfShikibetsuCode(調査項目.get厚労省IF識別コード());
+        entity.setResearchItem(調査項目.get調査項目());
+        return entity;
     }
 
     /**
@@ -434,10 +508,19 @@ public class NiTeiCyoSaiChiRanManager {
             return false;
         }
         if (entity == null) {
-
             return 1 == dbT5207Dac.save(サービスの状況.toEntity());
         }
-        return 1 == dbT5207Dac.save(サービスの状況.modifiedModel().toEntity());
+        return 1 == dbT5207Dac.save(createModifyData(entity, サービスの状況));
+    }
+
+    private DbT5207NinteichosahyoServiceJokyoEntity createModifyData(DbT5207NinteichosahyoServiceJokyoEntity entity,
+            NinteichosahyoServiceJokyo サービスの状況) {
+        entity.setShinseishoKanriNo(サービスの状況.get申請書管理番号());
+        entity.setNinteichosaRirekiNo(サービスの状況.get認定調査依頼履歴番号());
+        entity.setRemban(サービスの状況.get連番());
+        entity.setKoroshoIfShikibetsuCode(サービスの状況.get厚労省IF識別コード());
+        entity.setServiceJokyo(サービスの状況.getサービスの状況());
+        return entity;
     }
 
     /**
@@ -464,10 +547,19 @@ public class NiTeiCyoSaiChiRanManager {
             return false;
         }
         if (entity == null) {
-
             return 1 == dbT5208Dac.save(サービスの状況フラグ.toEntity());
         }
-        return 1 == dbT5208Dac.save(サービスの状況フラグ.modifiedModel().toEntity());
+        return 1 == dbT5208Dac.save(createModifyData(entity, サービスの状況フラグ));
+    }
+
+    private DbT5208NinteichosahyoServiceJokyoFlagEntity createModifyData(DbT5208NinteichosahyoServiceJokyoFlagEntity entity,
+            NinteichosahyoServiceJokyoFlag サービスの状況フラグ) {
+        entity.setShinseishoKanriNo(サービスの状況フラグ.get申請書管理番号());
+        entity.setNinteichosaRirekiNo(サービスの状況フラグ.get認定調査依頼履歴番号());
+        entity.setRemban(サービスの状況フラグ.get連番());
+        entity.setKoroshoIfShikibetsuCode(サービスの状況フラグ.get厚労省IF識別コード());
+        entity.setServiceJokyoFlag(サービスの状況フラグ.isサービスの状況フラグ());
+        return entity;
     }
 
     /**
@@ -493,10 +585,19 @@ public class NiTeiCyoSaiChiRanManager {
             return false;
         }
         if (entity == null) {
-
             return 1 == dbT5209Dac.save(記入項目.toEntity());
         }
-        return 1 == dbT5209Dac.save(記入項目.modifiedModel().toEntity());
+        return 1 == dbT5209Dac.save(createModifyData(entity, 記入項目));
+    }
+
+    private DbT5209NinteichosahyoKinyuItemEntity createModifyData(DbT5209NinteichosahyoKinyuItemEntity entity,
+            NinteichosahyoKinyuItem 記入項目) {
+        entity.setShinseishoKanriNo(記入項目.get申請書管理番号());
+        entity.setNinteichosaRirekiNo(記入項目.get認定調査依頼履歴番号());
+        entity.setRemban(記入項目.get連番());
+        entity.setKoroshoIfShikibetsuCode(記入項目.get厚労省IF識別コード());
+        entity.setServiceJokyoKinyu(記入項目.getサービスの状況記入());
+        return entity;
     }
 
     /**
@@ -522,9 +623,18 @@ public class NiTeiCyoSaiChiRanManager {
             return false;
         }
         if (entity == null) {
-
             return 1 == dbT5210Dac.save(施設利用.toEntity());
         }
-        return 1 == dbT5210Dac.save(施設利用.modifiedModel().toEntity());
+        return 1 == dbT5210Dac.save(createModifyData(entity, 施設利用));
+    }
+
+    private DbT5210NinteichosahyoShisetsuRiyoEntity createModifyData(DbT5210NinteichosahyoShisetsuRiyoEntity entity,
+            NinteichosahyoShisetsuRiyo 施設利用) {
+        entity.setShinseishoKanriNo(施設利用.get申請書管理番号());
+        entity.setNinteichosaRirekiNo(施設利用.get認定調査依頼履歴番号());
+        entity.setRemban(施設利用.get連番());
+        entity.setKoroshoIfShikibetsuCode(施設利用.get厚労省IF識別コード());
+        entity.setShisetsuRiyoFlag(施設利用.is施設利用フラグ());
+        return entity;
     }
 }
