@@ -113,9 +113,9 @@ public class GenmenJyouhouParameter implements IMyBatisParameter {
     /**
      * コンストラクタです。
      *
-     * @param 事業者番号
-     * @param サービス種類コード
-     * @param rstサービス提供年月
+     * @param 事業者番号 事業者番号
+     * @param サービス種類コード サービス種類コード
+     * @param rstサービス提供年月 rstサービス提供年月
      * @return GenmenJyouhouParameter
      */
     public static GenmenJyouhouParameter createByKeyParam(

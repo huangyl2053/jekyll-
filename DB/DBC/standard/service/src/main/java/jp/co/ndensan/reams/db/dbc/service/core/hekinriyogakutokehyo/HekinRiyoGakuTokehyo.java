@@ -84,8 +84,7 @@ public class HekinRiyoGakuTokehyo {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HekinRiyoGakuTokehyo}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HekinRiyoGakuTokehyo}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HekinRiyoGakuTokehyo}のインスタンス
      */
     public static HekinRiyoGakuTokehyo createInstance() {
         return InstanceProvider.create(HekinRiyoGakuTokehyo.class);
@@ -105,7 +104,11 @@ public class HekinRiyoGakuTokehyo {
             サービス分類 = entityList.get(0).getServiceBunrui();
             被保険者番号 = entityList.get(0).getHiHokenshaNo();
             サービス提供年月 = entityList.get(0).getServiceTeikyoYM();
-            要介護状態区分コード = entityList.get(0).getYoKaigoJotaiKubunCode();
+            if (entityList.get(0).getYoKaigoJotaiKubunCode() != null) {
+                要介護状態区分コード = entityList.get(0).getYoKaigoJotaiKubunCode();
+            } else {
+                要介護状態区分コード = RString.EMPTY;
+            }
             int 人数 = 1;
             for (int i = 0; i < entityList.size(); i++) {
                 KyufujissekiTempTblEntity レコード = entityList.get(i);
@@ -114,7 +117,7 @@ public class HekinRiyoGakuTokehyo {
                         && 要介護状態区分コード.equals(レコード.getYoKaigoJotaiKubunCode()) && サービス分類.equals(レコード.getServiceBunrui())) {
                     被保険者番号 = レコード.getHiHokenshaNo();
                     サービス提供年月 = レコード.getServiceTeikyoYM();
-                    要介護状態区分コード = レコード.getYoKaigoJotaiKubunCode();
+                    setYoKaigoJotaiKubunCode(レコード);
                     サービス分類 = レコード.getServiceBunrui();
                     人数++;
                 } else {
@@ -127,6 +130,14 @@ public class HekinRiyoGakuTokehyo {
                     サービス分類 = entityList.get(i).getServiceBunrui();
                 }
             }
+        }
+    }
+
+    private void setYoKaigoJotaiKubunCode(KyufujissekiTempTblEntity レコード) {
+        if (レコード.getYoKaigoJotaiKubunCode() != null) {
+            要介護状態区分コード = レコード.getYoKaigoJotaiKubunCode();
+        } else {
+            要介護状態区分コード = RString.EMPTY;
         }
     }
 
