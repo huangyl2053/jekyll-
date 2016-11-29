@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 画面設計_DBE0110004_主治医意見書に関する帳票発行画面クラスです
@@ -23,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class HakkoJokenSyujiiIkensyo {
 
     private static final RString SELECT_KEY0 = new RString("key0");
+    private static final RString KEY = new RString("key");
+    private static final RString VALUE_BATCH = new RString("Batch3");
 
     /**
      * 画面初期化処理です。
@@ -313,6 +317,8 @@ public class HakkoJokenSyujiiIkensyo {
      * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
      */
     public ResponseData<DBE013001_IkenshoInfoPrintParameter> onClick_Jikkou(HakkoJokenSyujiiIkensyoDiv div) {
+        FlowParameters fp = FlowParameters.of(KEY, VALUE_BATCH);
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 

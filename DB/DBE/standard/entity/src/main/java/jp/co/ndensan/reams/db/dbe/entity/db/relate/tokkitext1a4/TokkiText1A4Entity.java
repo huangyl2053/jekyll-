@@ -18,6 +18,25 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokkiText1A4Entity {
 
+    private RString 保険者番号;
+    private RString 被保険者番号;
+    private RString 被保険者氏名;
+    private RString 申請日_元号;
+    private RString 申請日_年;
+    private RString 申請日_月;
+    private RString 申請日_日;
+    private RString 作成日_元号;
+    private RString 作成日_年;
+    private RString 作成日_月;
+    private RString 作成日_日;
+    private RString 調査日_元号;
+    private RString 調査日_年;
+    private RString 調査日_月;
+    private RString 調査日_日;
+    private RString 審査日_元号;
+    private RString 審査日_年;
+    private RString 審査日_月;
+    private RString 審査日_日;
     private List<TokkiTextEntity> 特記事項リスト;
     private List<TokkiTextEntity> 特記事項番号リスト;
     private RString 特記事項イメージ;

@@ -52,10 +52,6 @@ public class KokuhorenkyoutsuDoInterfaceKanriKousinByMybatisProcess extends Batc
 
     @Override
     protected void process(DbT3104KokuhorenInterfaceKanriEntity entity) {
-//        KokuhorenKyoutsuuInterfaceKanriKousinManager 国保連インタフェース管理更新Manager
-//                = KokuhorenKyoutsuuInterfaceKanriKousinManager.createInstance();
-//        国保連インタフェース管理更新Manager.updateInterfaceKanriTbl(parameter.get処理年月(), parameter.get交換情報識別番号(),
-//                parameter.get処理対象年月(), parameter.getレコード件数合計(), parameter.getFileNameList());
 
         entity.setShoriJotaiKubun(処理状態区分_終了);
         entity.setShoriJisshiTimestamp(YMDHMS.now());

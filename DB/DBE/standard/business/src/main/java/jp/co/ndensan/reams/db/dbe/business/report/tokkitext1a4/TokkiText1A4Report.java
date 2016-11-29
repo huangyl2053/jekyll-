@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class TokkiText1A4Report extends Report<TokkiText1ReportSource> {
 
     private final TokkiText1A4Entity entity;
-    private static final int 連番 = 30;
 
     /**
      * インスタンスを生成します。
@@ -43,18 +42,18 @@ public class TokkiText1A4Report extends Report<TokkiText1ReportSource> {
         List<RString> list = new ArrayList();
         int count = 0;
         if (entity.get特記事項番号リスト() != null && !entity.get特記事項番号リスト().isEmpty()) {
-            count = 連番;
             for (TokkiTextEntity tokki : entity.get特記事項番号リスト()) {
                 list.add(tokki.get特記事項番号());
                 list.add(tokki.get特記事項名称());
             }
+            count = list.size();
         }
         if (entity.get特記事項イメージリスト() != null && !entity.get特記事項イメージリスト().isEmpty()) {
-            count = 連番;
             for (TokkiTextEntity tokki : entity.get特記事項イメージリスト()) {
                 list.add(tokki.get特記事項番号());
                 list.add(tokki.get特記事項名称());
             }
+            count = list.size();
         }
         if (entity.get特記事項リスト() != null && !entity.get特記事項リスト().isEmpty()) {
             count = 1;

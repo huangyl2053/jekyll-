@@ -513,7 +513,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      */
     public TsuchishoKyotsuEntity getTuutishoKyoutuJoho(FlexibleYear 調定年度, RString 出力期) {
         TsuchishoKyotsuEntity 通知書共通情報entity = new TsuchishoKyotsuEntity();
-        if (出力期 != null) {
+        if (!RString.isNullOrEmpty(出力期)) {
             KanendoKiUtil 月期対応取得_過年度 = new KanendoKiUtil();
             Kitsuki 期月_過年度 = 月期対応取得_過年度.get期月リスト().get期の月(Integer.parseInt(出力期.toString())).get(0);
             FukaNokiResearcher fukaNokiResearcher = new FukaNokiResearcher(new RYear(調定年度.toDateString()));

@@ -171,7 +171,10 @@
         WHERE
         (#{表示パターン }='0'
         AND T1001_2."hihokenshaNo" = #{被保険者番号}
-        AND T1001_2."shikibetsuCode" = #{識別コード}))) AS T1001
+        AND T1001_2."shikibetsuCode" = #{識別コード}))
+        AND 
+        (#{表示パターン }='0'
+        AND T1001_1."hihokenshaNo" = #{被保険者番号})) AS T1001
         ON V4001."shichosonCode" = T1001."shichosonCode"
         LEFT JOIN rgdb."DbT4001JukyushaDaicho" T4001
         ON V4001."shichosonCode" = T4001."shichosonCode"
@@ -317,7 +320,9 @@
         FROM
         rgdb."DbT1001HihokenshaDaicho" AS T1001_2
         WHERE
-        T1001_2."hihokenshaNo" = #{被保険者番号})) AS T1001
+        T1001_2."hihokenshaNo" = #{被保険者番号})
+        AND 
+        T1001_1."hihokenshaNo" = #{被保険者番号}) AS T1001
         ON T4001."shichosonCode" = T1001."shichosonCode"
         LEFT JOIN rgdb."DbT4101NinteiShinseiJoho" T4101
         ON T4001."shinseishoKanriNo" = T4101."shinseishoKanriNo"

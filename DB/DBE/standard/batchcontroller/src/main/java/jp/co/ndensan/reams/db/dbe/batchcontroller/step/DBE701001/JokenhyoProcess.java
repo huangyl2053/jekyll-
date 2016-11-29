@@ -10,19 +10,16 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.yokaigonintei.shinsei.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.SinsakaiHanteiJyokyoProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.jotaikubumbetsuhantei.JotaikubumbetsuhanteiReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  *
@@ -54,91 +51,42 @@ public class JokenhyoProcess extends SimpleBatchProcessBase {
     private final RString 使用しない = new RString("使用しない");
     private final RString 集計する = new RString("集計単位として使用する");
     private final RString 集計しない = new RString("集計単位として使用しない");
-
-    @BatchWriter
-    private ReportSourceWriter<JotaikubumbetsuhanteiReportSource> reportSourceWriter;
+    private final int 事業状況報告帳票数 = 2;
+    private final int 実施状況統計帳票数 = 1;
+    private final int 審査判定状況帳票数 = 1;
+    private final int 審査会関連統計帳票数 = 5;
 
     @Override
     protected void process() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                getReportId(),
+                ReportIdDBE.DBE701000.getReportId().value(),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                get帳票タイトル(),
-                new RString(reportSourceWriter.pageCount().value()),
+                ReportIdDBE.DBE701000.getReportName(),
+                getPageCount(),
                 new RString(paramter.isCsvShutsuryoku() ? "有り" : "無し"),
                 new RString(paramter.isCsvShutsuryoku() ? "D__県報告資料ファイル.CSV" : "ー"),
                 contribute());
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
-    private RString getReportId() {
-        RStringBuilder 帳票ID = new RStringBuilder(RString.EMPTY);
-
+    private RString getPageCount() {
+        int i = 0;
         if (paramter.isJigyoJyokyoHokoku()) {
-            帳票ID.append(ReportIdDBE.DBE702001.getReportId().value());
+            i += 事業状況報告帳票数;
         }
         if (paramter.isJissiJyokyoTokei()) {
-            if (帳票ID.length() != 0) {
-                帳票ID.append("・");
-            }
-            帳票ID.append(ReportIdDBE.DBE701003.getReportId().value());
+            i += 実施状況統計帳票数;
         }
         if (paramter.isSinsaHanteiJyokyo()) {
-            if (帳票ID.length() != 0) {
-                帳票ID.append("・");
-            }
-            帳票ID.append(ReportIdDBE.DBE701001.getReportId().value());
+            i += 審査判定状況帳票数;
         }
         if (paramter.isSinsakaiKanrenTokei()) {
-            if (帳票ID.length() != 0) {
-                帳票ID.append("・");
-            }
-            帳票ID.append(ReportIdDBE.DBE701005.getReportId().value());
-            帳票ID.append("・");
-            帳票ID.append(ReportIdDBE.DBE701006.getReportId().value());
-            帳票ID.append("・");
-            帳票ID.append(ReportIdDBE.DBE701007.getReportId().value());
-            帳票ID.append("・");
-            帳票ID.append(ReportIdDBE.DBE701008.getReportId().value());
-            帳票ID.append("・");
-            帳票ID.append(ReportIdDBE.DBE701009.getReportId().value());
+            i += 審査会関連統計帳票数;
         }
-        return 帳票ID.toRString();
-    }
-
-    private RString get帳票タイトル() {
-
-        RStringBuilder 帳票タイトル = new RStringBuilder(RString.EMPTY);
-
-        if (paramter.isJigyoJyokyoHokoku()) {
-            帳票タイトル.append("要介護認定事業状況報告");
-        }
-        if (paramter.isJissiJyokyoTokei()) {
-            if (帳票タイトル.length() != 0) {
-                帳票タイトル.append("・");
-            }
-            帳票タイトル.append("要介護認定実施状況統計");
-        }
-        if (paramter.isSinsaHanteiJyokyo()) {
-            if (帳票タイトル.length() != 0) {
-                帳票タイトル.append("・");
-            }
-            帳票タイトル.append("介護認定審査会判定状況表");
-        }
-        if (paramter.isSinsakaiKanrenTokei()) {
-            if (帳票タイトル.length() != 0) {
-                帳票タイトル.append("・");
-            }
-            帳票タイトル.append("要介護状態区分別判定件数");
-            帳票タイトル.append("・認定審査会審査判定状況");
-            帳票タイトル.append("・介護認定審査会集計表（判定別）");
-            帳票タイトル.append("・介護認定審査会集計表（申請区分別）");
-            帳票タイトル.append("・介護認定審査会集計表（現在の状況別）");
-        }
-        return 帳票タイトル.toRString();
+        return new RString(i);
     }
 
     private List<RString> contribute() {

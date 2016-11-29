@@ -25,6 +25,11 @@ public enum DbaFlowParameterKeys {
         flowParameterName = new RString(str);
     }
 
+    /**
+     * getフローパラメータ名()
+     *
+     * @return RString
+     */
     public RString getフローパラメータ名() {
         return flowParameterName;
     }

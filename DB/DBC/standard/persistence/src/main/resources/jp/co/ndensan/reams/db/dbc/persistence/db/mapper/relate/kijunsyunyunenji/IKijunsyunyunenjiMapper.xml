@@ -653,26 +653,53 @@
              parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kijunsyunyunenji.CreateTaishoSetaiyinProcessMybatisParameter"
              resultMap="ResultMap_CreateTaishoSetaiyinEntity" 
               fetchSize="500">
-       WITH 対象世帯員 AS(
-         SELECT 
-            T1.*,
-           <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
-         FROM
-           "TaishoSetaiin"  AS T1
-        LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
-         ON "Atesaki"."shikibetsuCode" = T1."shikibetsuCode" 
-         )
-         SELECT 
+        WITH 対象世帯員 AS(
+            SELECT 
+               T1.*,
+              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+            FROM
+              "TaishoSetaiin"  AS T1
+            INNER JOIN (
+                SELECT
+                    ts."shotaiCode" "shotaiCode",
+                    MIN(ts."shikibetsuCode") "shikibetsuCode"
+                FROM
+                    "TaishoSetaiin" ts 
+                WHERE
+                    NOT EXISTS (
+                        SELECT 1
+                        FROM "TaishoSetaiin" ts2
+                        WHERE
+                             ts."shotaiCode" = ts2."shotaiCode"
+                         AND (CASE WHEN COALESCE( ts."hihokenshaNo", '') = '' THEN true
+                                   WHEN COALESCE(ts2."hihokenshaNo", '') = '' THEN false 
+                                   ELSE  ts."hihokenshaNo" <![CDATA[>]]> ts2."hihokenshaNo" END)
+                    ) OR NOT EXISTS (
+                        SELECT 1
+                        FROM "TaishoSetaiin" ts3
+                        WHERE
+                             ts."shotaiCode" = ts3."shotaiCode"
+                         AND COALESCE(ts3."hihokenshaNo", '') <![CDATA[<>]]> ''
+                    )
+                GROUP BY ts."shotaiCode"
+            ) AS atesakiKey
+                ON atesakiKey."shotaiCode" = T1."shotaiCode"
+            LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
+                ON "Atesaki"."shikibetsuCode" = atesakiKey."shikibetsuCode"
+        )
+        SELECT 
             T2.*,
            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
-         FROM
+        FROM
             対象世帯員 AS T2 
-         LEFT JOIN
+        LEFT JOIN
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode" = T2."shikibetsuCode"  
         <if test="temp_出力順 != null and !temp_出力順.isEmpty()">
             ${temp_出力順},
-            T2."shotaiCode"
+            T2."shotaiCode" ASC,
+            (T2."jukyuKubun" = '' OR T2."jukyuKubun" IS NULL) ASC, T2."jukyuKubun" ASC,
+            T2."hihokenshaNo" ASC
         </if>
      </select>
      

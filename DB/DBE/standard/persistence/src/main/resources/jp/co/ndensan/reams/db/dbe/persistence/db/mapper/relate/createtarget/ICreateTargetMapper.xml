@@ -63,7 +63,7 @@
               AND dbt5105."ninteiShinsakaiKanryoYMD" IS NOT NULL 
               AND dbt5105."maskingKanryoYMD" IS NOT NULL 
             LEFT JOIN rgdb."DbT7211GaibuRenkeiDataoutputJoho" AS dbt7211 
-              ON dbt5101."shinseishoKanriNo" = dbt5102."shinseishoKanriNo" 
+              ON dbt5101."shinseishoKanriNo" = dbt7211."shinseishoKanriNo" 
           WHERE
             dbt5101."logicalDeletedFlag" = FALSE 
             <if test="detaFlg">

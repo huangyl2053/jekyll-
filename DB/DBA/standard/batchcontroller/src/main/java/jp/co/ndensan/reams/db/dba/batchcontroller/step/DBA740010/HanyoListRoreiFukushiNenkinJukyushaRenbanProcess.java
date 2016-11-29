@@ -148,7 +148,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaRenbanProcess extends BatchProce
     @Override
     protected IBatchReader createReader() {
         RString 出力順 = RString.EMPTY;
-        if (processParamter.getShutsuryokujunId() != null){
+        if (processParamter.getShutsuryokujunId() != null) {
             出力順 = ReportUtil.get出力順情報(HanyoListRoreiFukushiNenkinJukyushaResult.ShutsuryokujunEnum.class,
                     SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701004.getReportId(),
                     processParamter.getShutsuryokujunId()).get出力順OrderBy();

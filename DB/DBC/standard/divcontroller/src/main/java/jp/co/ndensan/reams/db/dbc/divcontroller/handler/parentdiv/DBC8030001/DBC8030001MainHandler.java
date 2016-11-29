@@ -5,19 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8030001;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiGyomunaiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8030001.DBC8030001MainDiv;
+import jp.co.ndensan.reams.db.dbc.service.core.dbc8030001main.DBC8030001MainFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ux.uxx.definition.mybatisprm.kozafurikomi.furikomiitakushakosei.FurikomiItakushaKoseiMapperParameter;
 import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.FurikomiBaitaiSakuseiDiv;
 import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.IFurikomiBaitaiSakuseiDiv;
-import jp.co.ndensan.reams.ux.uxx.entity.db.basic.kozafurikomi.furikomigroup.UrT0717FurikomiGroupEntity;
-import jp.co.ndensan.reams.ux.uxx.entity.db.relate.kozafurikomi.furikomigroup.FurikomiGroupItakushaRelateEntity;
-import jp.co.ndensan.reams.ux.uxx.service.core.kozafurikomi.furikomi.FurikomiGroupItakushaItakushaKoseiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -69,22 +66,9 @@ public class DBC8030001MainHandler {
             業務内区分 = FurikomiGyomunaiKubun.事業高額合算.getコード();
         }
         div.getTxtShoriTaisho().setValue(FurikomiGyomunaiKubun.toValue(業務内区分).get名称());
-        List<RString> list = new ArrayList<>();
-
         FurikomiItakushaKoseiMapperParameter parameter;
         parameter = FurikomiItakushaKoseiMapperParameter.createSelectByKeyParamAllowsNull(null, SubGyomuCode.DBC介護給付, 業務内区分, null, null, null);
-
-        List<FurikomiGroupItakushaRelateEntity> furikomiGroupItakushaList
-                = FurikomiGroupItakushaItakushaKoseiFinder.createInstance().getFurikomiGroupItakushItakushKosei(parameter);
-
-        if (furikomiGroupItakushaList != null && !furikomiGroupItakushaList.isEmpty()) {
-            for (FurikomiGroupItakushaRelateEntity data : furikomiGroupItakushaList) {
-                UrT0717FurikomiGroupEntity furikomiGroupData = data.get振込グループEntity();
-                if (furikomiGroupData != null) {
-                    list.add(furikomiGroupData.getDaihyoKinyuKikanCode().value().concat(furikomiGroupData.getFurikomiGroupCode()));
-                }
-            }
-        }
+        List<RString> list = new DBC8030001MainFinder().getGroupList(parameter);
         div.getCcdFurikomiBaitaiSakusei().setTestBaitaiSakuseiMode(FurikomiBaitaiSakuseiDiv.TestBaitaiSakuseiMode.通常);
         div.getCcdFurikomiBaitaiSakusei().setCommonChohyoSakuseiMode(FurikomiBaitaiSakuseiDiv.CommonChohyoSakuseiMode.送付書＿明細書);
         div.getCcdFurikomiBaitaiSakusei().setSelectButtonDisplayMode(FurikomiBaitaiSakuseiDiv.SelectButtonDisplayMode.表示しない);

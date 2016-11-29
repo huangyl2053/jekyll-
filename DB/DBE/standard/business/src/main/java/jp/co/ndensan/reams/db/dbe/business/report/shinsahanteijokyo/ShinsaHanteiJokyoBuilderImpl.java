@@ -16,18 +16,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 public class ShinsaHanteiJokyoBuilderImpl implements IShinsaHanteiJokyoBuilder {
 
     private final IShinsaHanteiJokyoEditor editor;
-    private final ShinsaHanteiJokyoBodyEditor bodyeditor;
 
     /**
      * インスタンスを生成します。
      *
      * @param editor {@link IShinsaHanteiJokyoEditor}
-     * @param bodyeditor {@link IShinsaHanteiJokyoEditor}
      */
-    public ShinsaHanteiJokyoBuilderImpl(IShinsaHanteiJokyoEditor editor,
-            ShinsaHanteiJokyoBodyEditor bodyeditor) {
+    public ShinsaHanteiJokyoBuilderImpl(IShinsaHanteiJokyoEditor editor) {
         this.editor = editor;
-        this.bodyeditor = bodyeditor;
     }
 
     /**
@@ -37,7 +33,7 @@ public class ShinsaHanteiJokyoBuilderImpl implements IShinsaHanteiJokyoBuilder {
      */
     @Override
     public ShinsaHanteiJokyoReportSource build() {
-        return ReportEditorJoiner.from(new ShinsaHanteiJokyoReportSource()).join(editor).join(bodyeditor).buildSource();
+        return ReportEditorJoiner.from(new ShinsaHanteiJokyoReportSource()).join(editor).buildSource();
     }
 
 }

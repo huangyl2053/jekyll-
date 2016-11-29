@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.ChosaKekkaInfoKihonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.TokiJikouBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
@@ -34,8 +35,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser34;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -101,37 +104,47 @@ public class ChosaKekkaInfoKihonHandler {
         for (TokiJikouBusiness chosaItem : serviceJokyos) {
             dgKihonChosa_Row dgJigyoshaItiran = new dgKihonChosa_Row();
             ArrayList<RString> 認定調査特記事項番号List = new ArrayList<>();
-            認定調査特記事項番号List.add(chosaItem.get認定調査特記事項番号());
-            dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
             if (A_02.equals(chosaItem.get厚労省IF識別コード().value())) {
                 dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping02A.toValue(new RString(chosaItem.get連番())).get表示番号());
                 dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping02A.toValue(new RString(chosaItem.get連番())).get名称());
                 setパターン1(dgJigyoshaItiran, chosaItem);
+                認定調査特記事項番号List.add(NinteichosaKomokuMapping02A.toValue(new RString(chosaItem.get連番())).get特記事項番号());
+                dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
             }
             if (A_06.equals(chosaItem.get厚労省IF識別コード().value())) {
                 dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping06A.toValue(new RString(chosaItem.get連番())).get表示番号());
                 dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping06A.toValue(new RString(chosaItem.get連番())).get名称());
                 setパターン2(dgJigyoshaItiran, chosaItem);
+                認定調査特記事項番号List.add(NinteichosaKomokuMapping06A.toValue(new RString(chosaItem.get連番())).get特記事項番号());
+                dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
             }
             if (A_09.equals(chosaItem.get厚労省IF識別コード().value())) {
                 dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping09A.toValue(new RString(chosaItem.get連番())).get表示番号());
                 dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping09A.toValue(new RString(chosaItem.get連番())).get名称());
                 setパターン3(dgJigyoshaItiran, chosaItem);
+                認定調査特記事項番号List.add(NinteichosaKomokuMapping09A.toValue(new RString(chosaItem.get連番())).get特記事項番号());
+                dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
             }
             if (A_99.equals(chosaItem.get厚労省IF識別コード().value())) {
                 dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping99A.toValue(new RString(chosaItem.get連番())).get表示番号());
                 dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping99A.toValue(new RString(chosaItem.get連番())).get名称());
                 setパターン4(dgJigyoshaItiran, chosaItem);
+                認定調査特記事項番号List.add(NinteichosaKomokuMapping99A.toValue(new RString(chosaItem.get連番())).get特記事項番号());
+                dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
             }
             if (B_09.equals(chosaItem.get厚労省IF識別コード().value())) {
                 dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get表示番号());
                 dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get名称());
                 setパターン5(dgJigyoshaItiran, chosaItem);
+                認定調査特記事項番号List.add(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get特記事項番号());
+                dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
             }
-            if (chosaItem.get認定調査特記事項番号() != null && !chosaItem.get認定調査特記事項番号().isEmpty()) {
-                dgJigyoshaItiran.getBtnTokkiJiko().setDisabled(false);
+            NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
+            ArrayList<NinteichosahyoTokkijiko> list = manager.get調査特記事項(chosaItem.get申請書管理番号(), chosaItem.get認定調査依頼履歴番号(), 認定調査特記事項番号List);
+            if (list.isEmpty()) {
+                dgJigyoshaItiran.getBtnTokkiJiko().setDisabled(true);
             } else {
-                dgJigyoshaItiran.getBtnTokkiJiko().setVisible(false);
+                dgJigyoshaItiran.getBtnTokkiJiko().setDisabled(false);
             }
             grdSinsaSeiList.add(dgJigyoshaItiran);
         }

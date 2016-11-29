@@ -562,10 +562,10 @@ public class ShikyugakuKeisanKekkaToroku {
         KogakuGassanShikyugakuKeisanKekkaMeisai 支給額計算結果明細
                 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細, KogakuGassanShikyugakuKeisanKekkaMeisai.class);
         TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
-        支給額計算結果明細 = handler.支給額計算結果明細編集(支給額計算結果明細, 対象者);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細状態, RString.class);
-
+        ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
+        handler.再計算処理(状態);
+        支給額計算結果明細 = handler.支給額計算結果明細編集(支給額計算結果明細, 対象者);
         List<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> rowList = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getDataSource();
         Decimal 以上負担額合計 = Decimal.ZERO;
         Decimal 負担額合計 = Decimal.ZERO;
@@ -601,11 +601,6 @@ public class ShikyugakuKeisanKekkaToroku {
         ViewStateHolder.put(ViewStateKeys.支給額計算結果, 支給額計算結果);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(計算結果を保存する, false);
         return ResponseData.of(div).respond();
-    }
-
-    private void set合計(List<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> rowList, Decimal 以上負担額合計,
-            Decimal 負担額合計, RString 状態, ShikyugakuKeisanKekkaTorokuDiv div) {
-        
     }
 
     /**

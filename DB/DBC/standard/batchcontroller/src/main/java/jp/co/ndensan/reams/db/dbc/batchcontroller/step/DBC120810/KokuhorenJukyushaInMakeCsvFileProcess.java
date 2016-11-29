@@ -392,43 +392,43 @@ public class KokuhorenJukyushaInMakeCsvFileProcess extends BatchKeyBreakBase<DbW
     }
 
     private void 名称項目編集(KokuhorenJukyushaOutCsvEntity csvEntity, DbWT0001DbWT5331Entity 出力対象) {
-        if (!RString.isNullOrEmpty(出力対象.get減免申請中区分コード())) {
+        if (出力対象.get減免申請中区分コード() != null || !RString.isNullOrEmpty(出力対象.get減免申請中区分コード().trim())) {
             csvEntity.set減免中区分名称(JukyushaIF_GemmenShinseichuKubunCode
                     .toValue(出力対象.get減免申請中区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(出力対象.get利用者負担区分コード())) {
+        if (出力対象.get利用者負担区分コード() != null || !RString.isNullOrEmpty(出力対象.get利用者負担区分コード().trim())) {
             csvEntity.set利用者負担区分名称(JukyushaIF_RiyoshaFutanKubunCode
                     .toValue(出力対象.get利用者負担区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(出力対象.get公費負担上限額減額の有無())) {
+        if (出力対象.get公費負担上限額減額の有無() != null || !RString.isNullOrEmpty(出力対象.get公費負担上限額減額の有無().trim())) {
             csvEntity.set公費負担上限額減額名称(JukyushaIF_kohiFutanJogengakuGengakuUmu
                     .toValue(出力対象.get公費負担上限額減額の有無()).get名称());
         }
-        if (!RString.isNullOrEmpty(出力対象.get住所地特例対象者区分コード())) {
+        if (出力対象.get住所地特例対象者区分コード() != null || !RString.isNullOrEmpty(出力対象.get住所地特例対象者区分コード().trim())) {
             csvEntity.set住所地特例区分名称(JukyushaIF_JutokuJigyoKubunCode
                     .toValue(出力対象.get住所地特例対象者区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(出力対象.get小規模居宅サービス利用有無())) {
+        if (出力対象.get小規模居宅サービス利用有無() != null || !RString.isNullOrEmpty(出力対象.get小規模居宅サービス利用有無().trim())) {
             csvEntity.set小規模居宅サービス利用の有無名称(JukyushaIF_ShokiboKyotakuServiceRIyoCode
                     .toValue(出力対象.get小規模居宅サービス利用有無()).get名称());
         }
-        if (!RString.isNullOrEmpty(出力対象.get有料老人ホーム等同意書の有無())) {
+        if (出力対象.get有料老人ホーム等同意書の有無() != null || !RString.isNullOrEmpty(出力対象.get有料老人ホーム等同意書の有無().trim())) {
             csvEntity.set有料老人ホーム等同意書名称(JukyushaIF_YuryoRojinHomeDoishoUmu
                     .toValue(出力対象.get有料老人ホーム等同意書の有無()).get名称());
         }
-        if (!RString.isNullOrEmpty(出力対象.get二次予防事業区分コード())) {
+        if (出力対象.get二次予防事業区分コード() != null || !RString.isNullOrEmpty(出力対象.get二次予防事業区分コード().trim())) {
             csvEntity.set二次予防事業区分名称(JukyushaIF_NijiyoboJigyoKubunCode
                     .toValue(出力対象.get二次予防事業区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(出力対象.get特定入所者認定申請中区分コード())) {
+        if (出力対象.get特定入所者認定申請中区分コード() != null || !RString.isNullOrEmpty(出力対象.get特定入所者認定申請中区分コード().trim())) {
             csvEntity.set特定入所者認定申請中区分名称(JukyushaIF_NinteiShinseichuKubunCode
                     .toValue(出力対象.get特定入所者認定申請中区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(出力対象.get特定入所者介護サービス区分コード())) {
+        if (出力対象.get特定入所者介護サービス区分コード() != null || !RString.isNullOrEmpty(出力対象.get特定入所者介護サービス区分コード().trim())) {
             csvEntity.set特定入所者介護サービス区分名称(JukyushaIF_ServiceKubunCode
                     .toValue(出力対象.get特定入所者介護サービス区分コード()).get名称());
         }
-        if (!RString.isNullOrEmpty(出力対象.get課税層の特例減額措置対象区分())) {
+        if (出力対象.get課税層の特例減額措置対象区分() != null || !RString.isNullOrEmpty(出力対象.get課税層の特例減額措置対象区分().trim())) {
             csvEntity.set課税層の特例減額措置対象名称(JukyushaIF_TokureiGengakuSochiTaisho
                     .toValue(出力対象.get課税層の特例減額措置対象区分()).get名称());
         }

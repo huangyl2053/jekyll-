@@ -555,7 +555,8 @@ public class FukaKeisan extends FukaKeisanFath {
         FukaKonkyo 賦課根拠 = factory.create(fukaKonkyoParameter);
         保険料段階パラメータ.setFukaKonkyo(賦課根拠);
 
-        SeigyoJoho 月別保険料制御情報 = get月別保険料制御情報(param.get保険料段階リスト());
+        SeigyoJoho 月別保険料制御情報 = get月別保険料制御情報(param.get保険料段階リスト(),
+                new RDate(param.get賦課年度().getYearValue(), INT_4, INT_1));
         保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
         TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
 

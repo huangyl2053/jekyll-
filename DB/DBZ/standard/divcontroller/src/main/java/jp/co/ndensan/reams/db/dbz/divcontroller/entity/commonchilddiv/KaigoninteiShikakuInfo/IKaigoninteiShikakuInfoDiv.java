@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Kaigonint
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
@@ -31,4 +32,8 @@ public interface IKaigoninteiShikakuInfoDiv extends ICommonChildDivBasePropertie
     RString getHookenshaCode();
 
     RString getHokensha();
+    
+    TextBoxCode getTxtHookenshaCode();
+    
+    TextBox getTxtHokensha();
 }

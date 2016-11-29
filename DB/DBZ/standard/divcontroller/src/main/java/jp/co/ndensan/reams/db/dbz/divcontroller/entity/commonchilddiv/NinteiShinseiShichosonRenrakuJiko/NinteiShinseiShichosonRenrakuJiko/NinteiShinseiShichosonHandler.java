@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
 
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -17,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class NinteiShinseiShichosonHandler {
 
     private final NinteiShinseiShichosonRenrakuJikoDiv div;
+    private static final RString 要介護認定申請登録申請メニューID = new RString("DBDMN51001");
+    private static final RString 連絡事項タイトル = new RString("連絡事項");
 
     /**
      * コンストラクタです。
@@ -34,6 +37,11 @@ public class NinteiShinseiShichosonHandler {
      */
     public void initialize(NinteiShinseiCodeModel shinseiCodeModel) {
         div.getTxtRenrakujiko().clearValue();
+        if (shinseiCodeModel.getメニューID() != null 
+                && !shinseiCodeModel.getメニューID().isEmpty() 
+                && shinseiCodeModel.getメニューID().equals(要介護認定申請登録申請メニューID)) {
+            div.setTitle(連絡事項タイトル);
+        }
         if (NinteiShinseiCodeModel.HyojiMode.InputMode.equals(shinseiCodeModel.get表示モード())) {
             div.getTxtRenrakujiko().setValue(shinseiCodeModel.get連絡事項());
             div.getBtnModoru().setDisabled(false);

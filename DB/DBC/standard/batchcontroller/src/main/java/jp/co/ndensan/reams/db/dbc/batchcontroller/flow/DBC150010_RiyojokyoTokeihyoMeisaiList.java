@@ -146,6 +146,8 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiList extends BatchFlowBase<DBC1500
         }
         if (出力する.equals(parameter.get明細リスト出力区分()) || 出力する.equals(parameter.get明細CSV出力区分())) {
             executeStep(利用状況一覧表作成);
+            parameter.set更新データ件数(getResult(Integer.class, new RString(利用状況一覧表作成),
+                    DbWT1513ShutsuRyokuTaishoDataInsertProcess.PARAMETER_OUT_COUNT));
             executeStep(サービス提供年月取得);
             List<FlexibleYearMonth> outData
                     = getResult(List.class, new RString(サービス提供年月取得), ServiceTeikyoYMSelectProcess.データ有無);
