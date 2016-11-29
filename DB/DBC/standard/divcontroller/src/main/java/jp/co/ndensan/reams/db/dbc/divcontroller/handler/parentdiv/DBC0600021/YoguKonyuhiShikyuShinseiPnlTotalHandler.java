@@ -1085,6 +1085,21 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     }
 
     /**
+     * 提供購入年月チェック
+     *
+     * @param サービス種類 ServiceShuruiCode
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 提供購入年月チェック(ServiceShuruiCode サービス種類) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (サービス種類.isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(DbcErrorMessages.提供_購入_年月チェック)));
+        }
+        return validPairs;
+    }
+
+    /**
      * 保存チェック
      *
      * @param skipFlg boolean
@@ -1122,10 +1137,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                     break;
                 }
             }
-        }
-        ServiceShuruiCode サービス種類 = FukushiyoguKonyuhiShikyuShinsei.createInstance().getServiceShuruiCode(被保険者番号, サービス提供年月);
-        if (サービス種類.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(DbcErrorMessages.提供_購入_年月チェック)));
         }
         return validPairs;
     }
