@@ -508,8 +508,7 @@ public final class JukyushaKyufuDaichoData {
                 個人用帳票データ.set明細5(new RString("サービスコード　　決定後　　単位数　　　　"
                         + "回数　　　　ｻｰﾋﾞｽ単位数　　　　ｻｰﾋﾞｽ単位数合計　　　　請求金額"));
                 個人用帳票データ.set明細6(new RString("サービス名称　　　　　　　　　　　　　　　　　　　　"
-                        + "摘要　　　　　　　　　　　　　　　　　　再審査回数　　"
-                        + "過誤回数　　審査年月"));
+                        + "摘要　　　　　　　　　　　　　　　　　　再審査回数　　" + "過誤回数　　審査年月"));
                 個人用帳票データ.set明細7(計画費.get明細行番号().concat(SPACE_23)
                         .concat(kingakuFormat(計画費.get単位数().intValue())).concat(SPACE_4)
                         .concat(new RString(計画費.get回数())).concat("回").concat(SPACE_8)
