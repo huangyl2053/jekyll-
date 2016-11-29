@@ -323,6 +323,8 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             }
             if (宛名 != null && 宛名.get住所() != null && 宛名.get住所().get町域コード() != null) {
                 csvEntity.set住所コード(宛名.get住所().get町域コード().getColumnValue());
+            } else {
+                csvEntity.set住所コード(RString.EMPTY);
             }
             set続柄から(entity, csvEntity);
             set宛名(entity, csvEntity);
@@ -343,10 +345,6 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set世帯主名(世帯主名 != null
                 ? 世帯主名.getColumnValue()
                 : RString.EMPTY);
-//        ZenkokuJushoCode 住所コード = entity.get宛名().getZenkokuJushoCode();
-//        csvEntity.set住所コード(住所コード != null
-//                ? 住所コード.getColumnValue()
-//                : RString.EMPTY);
         YubinNo 郵便番号 = entity.get宛名().getYubinNo();
         csvEntity.set郵便番号(郵便番号 != null
                 ? 郵便番号.getColumnValue()
@@ -363,16 +361,6 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set方書(方書 != null
                 ? 方書.getColumnValue()
                 : RString.EMPTY);
-//        csvEntity.set住所と番地と方書((住所 != null
-//                ? 住所.getColumnValue()
-//                : RString.EMPTY)
-//                .concat(番地 != null
-//                        ? 番地.getColumnValue()
-//                        : RString.EMPTY)
-//                .concat(RString.FULL_SPACE)
-//                .concat(方書 != null
-//                        ? 方書.getColumnValue()
-//                        : RString.EMPTY));
     }
 
     private void set宛名(HanyouRisutoSyuturyokuEntity entity,
@@ -722,8 +710,8 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private RString convertDayOfWeek(FlexibleDate targetDate) {
         return targetDate != null
                 && targetDate.isValid()
-                ? new RString(targetDate.getDayOfWeek().toString())
-                : RString.EMPTY;
+                        ? new RString(targetDate.getDayOfWeek().toString())
+                        : RString.EMPTY;
     }
 
     private void set給付対象者合計(HanyouRisutoSyuturyokuEntity entity,
