@@ -228,7 +228,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
         if (設定不可.equals(識別番号管理データ.get特定入所者設定区分())) {
             div.getBtnTokuteiNyushosha().setDisabled(true);
         }
-        if (設定不可.equals(識別番号管理データ.get特定診療費設定区分())) {
+        if (設定不可.equals(識別番号管理データ.get特定診療費設定区分()) && 設定不可.equals(識別番号管理データ.get特定診療特別療養設定区分())) {
             div.getBtnTokuteiShinryo().setDisabled(true);
         }
         if (設定不可.equals(識別番号管理データ.get居宅計画費設定区分())) {
