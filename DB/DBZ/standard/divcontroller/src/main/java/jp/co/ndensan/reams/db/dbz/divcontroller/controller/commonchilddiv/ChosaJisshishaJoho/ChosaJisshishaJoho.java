@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ChosaJisshishaJoho;
 
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @author n3423
  */
 public class ChosaJisshishaJoho {
-    
+
     /**
      * 入力された所属機関コードより、所属機関名称を取得します。
      *
@@ -102,6 +101,17 @@ public class ChosaJisshishaJoho {
         div.getTxtShozokuKikanName().setValue(modle.get委託先名());
         div.getTxtKinyushaCode().setValue(modle.get調査員コード());
         div.getTxtKinyushaName().setValue(modle.get調査員名());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 実施場所ddlの値が変更された（onChange）時のイベント
+     *
+     * @param div 調査実施者情報共有子Div
+     * @return イベント処理後の共有子Div
+     */
+    public ResponseData<ChosaJisshishaJohoDiv> onChange_ddlChosaJisshiBasho(ChosaJisshishaJohoDiv div) {
+        getHandler(div).onChange_ddlChosaJisshiBasho();
         return ResponseData.of(div).respond();
     }
 
