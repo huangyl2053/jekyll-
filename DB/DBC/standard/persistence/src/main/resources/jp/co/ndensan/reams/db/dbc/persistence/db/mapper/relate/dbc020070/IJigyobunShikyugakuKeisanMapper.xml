@@ -239,8 +239,6 @@
         AND "DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisai"."hokenshaNo" = 支給額計算一時."zenFutangaku_shokisaiHokenshaNo"
         AND "DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisai"."shikyuShinseishoSeiriNo" = 支給額計算一時."zenFutangaku_shikyuShinseishoSeiriNo"
         AND "DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisai"."hihokenshaNo" = 支給額計算一時."zenFutangaku_hihokenshaNo"
-        <!--TODO QA 1594-->
-        AND "DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisai"."tennyumaeHokenshaNo" = 支給額計算一時."zenFutangaku_tennyumaeHokenshaNo"
         AND "DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisai"."rirekiNo" = 支給額計算一時."zenFutangaku_rirekiNo"
         ORDER BY
         "DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisai"."taishoNendo" ASC,
