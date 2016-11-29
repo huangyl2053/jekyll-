@@ -101,7 +101,7 @@ public class KojinJokyoShokai {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         div.setHdnShinseishoKanriNo(申請書管理番号);
-        if (!審査会開催番号.isNullOrEmpty()){
+        if (!審査会開催番号.isNullOrEmpty()) {
             div.setHdnShinsakaiKaisaiNo(審査会開催番号);
         } 
         return ResponseData.of(div).respond();
