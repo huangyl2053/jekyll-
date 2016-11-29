@@ -98,7 +98,6 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     private static final RString READ_DATA_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
                     + "hanyolistkogakugassanshikyugakukettei.IHanyoListKogakuGassanShikyugakuKetteiMapper.getCSVData");
-    private FlexibleDate システム日付;
     private FileSpoolManager manager;
     private Association 地方公共団体;
     private List<KoseiShichosonMaster> 構成市町村マスタ;
@@ -127,19 +126,6 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     private static final RString 受給申請事由_指定サービス種類変更申請 = new RString("サ変更申請　");
     private static final RString 受給申請事由_申請_法施行前 = new RString("施行前申請　");
     private static final RString 受給申請事由_追加_申請なしの追加 = new RString("追加　　　　");
-    private static final RString 追加_認定 = new RString("認定　　　　　");
-    private static final RString 要介護度変更申請認定 = new RString("変更申請認定　");
-    private static final RString 要介護度変更申請却下 = new RString("変更申請却下　");
-    private static final RString サービス種類変更申請認定 = new RString("サ変更申請認定");
-    private static final RString サービス種類変更申請却下 = new RString("サ変更申請却下");
-    private static final RString 削除 = new RString("削除　　　　　");
-    private static final RString 修正 = new RString("修正　　　　　");
-    private static final RString 受給申請却下 = new RString("受給申請却下　");
-    private static final RString 削除回復 = new RString("削除回復　　　");
-    private static final RString 職権記載 = new RString("職権記載　　　");
-    private static final RString 職権修正 = new RString("職権修正　　　");
-    private static final RString 職権取消 = new RString("職権取消　　　");
-    private static final RString 履歴修正 = new RString("履歴修正　　　");
     private List<PersonalData> personalDataList;
     private static final Code CODE = new Code("0003");
     private static final RString 被保険者番号 = new RString("被保険者番号");
@@ -280,7 +266,6 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     protected void initialize() {
         出力有無 = なし;
         連番 = Decimal.ZERO;
-        システム日付 = FlexibleDate.getNowDate();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタ = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         構成市町村Map = new HashMap<>();
@@ -858,43 +843,6 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
             受給申請事由 = 受給申請事由_追加_申請なしの追加;
         }
         return 受給申請事由;
-    }
-
-    private RString set異動事由文言(RString 異動事由コード) {
-        if (RString.isNullOrEmpty(異動事由コード)) {
-            return RString.EMPTY;
-        }
-        RString 直近異動事由 = ChokkinIdoJiyuCode.toValue(異動事由コード).get名称();
-        if (ChokkinIdoJiyuCode.未登録.get名称().equals(直近異動事由)) {
-            return RString.EMPTY;
-        } else if (ChokkinIdoJiyuCode.追加_認定.get名称().equals(直近異動事由)) {
-            return 追加_認定;
-        } else if (ChokkinIdoJiyuCode.要介護度変更申請認定.get名称().equals(直近異動事由)) {
-            return 要介護度変更申請認定;
-        } else if (ChokkinIdoJiyuCode.要介護度変更申請却下.get名称().equals(直近異動事由)) {
-            return 要介護度変更申請却下;
-        } else if (ChokkinIdoJiyuCode.サービス種類変更申請認定.get名称().equals(直近異動事由)) {
-            return サービス種類変更申請認定;
-        } else if (ChokkinIdoJiyuCode.サービス種類変更申請却下.get名称().equals(直近異動事由)) {
-            return サービス種類変更申請却下;
-        } else if (ChokkinIdoJiyuCode.削除.get名称().equals(直近異動事由)) {
-            return 削除;
-        } else if (ChokkinIdoJiyuCode.修正.get名称().equals(直近異動事由)) {
-            return 修正;
-        } else if (ChokkinIdoJiyuCode.受給申請却下.get名称().equals(直近異動事由)) {
-            return 受給申請却下;
-        } else if (ChokkinIdoJiyuCode.削除回復.get名称().equals(直近異動事由)) {
-            return 削除回復;
-        } else if (ChokkinIdoJiyuCode.職権記載.get名称().equals(直近異動事由)) {
-            return 職権記載;
-        } else if (ChokkinIdoJiyuCode.職権修正.get名称().equals(直近異動事由)) {
-            return 職権修正;
-        } else if (ChokkinIdoJiyuCode.職権取消.get名称().equals(直近異動事由)) {
-            return 職権取消;
-        } else if (ChokkinIdoJiyuCode.履歴修正.get名称().equals(直近異動事由)) {
-            return 履歴修正;
-        }
-        return RString.EMPTY;
     }
 
     private PersonalData toPersonalData(HanyoListKogakuGassanShikyugakuKetteiEntity entity) {
