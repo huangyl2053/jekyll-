@@ -833,8 +833,17 @@ public class KanendoKoseiKeisan {
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度.minusYear(idx));
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         List<Kitsuki> 期月リスト = 期月リスト_普徴.toList();
+        Collections.sort(期月リスト, new Comparator<Kitsuki>() {
+            @Override
+            public int compare(Kitsuki o1, Kitsuki o2) {
+                if (重複させない.equals(o1.get期())) {
+                    return 1;
+                }
+                return o1.get期().compareTo(o2.get期());
+            }
+        });
         for (Kitsuki 期月 : 期月リスト) {
-            普徴月テーブル.add(期月.get月AsInt());
+            普徴月テーブル.add(Integer.parseInt(期月.get期().toString()));
         }
 
         fuchoTsukiClass.set普徴月テーブル(普徴月テーブル);
