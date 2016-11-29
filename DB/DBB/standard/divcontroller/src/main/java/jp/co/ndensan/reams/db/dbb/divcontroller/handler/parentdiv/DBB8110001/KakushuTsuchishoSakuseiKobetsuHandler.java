@@ -522,7 +522,9 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getLblZengoTokuchoKi1().setText(get期(期_4月));
         Decimal 特徴期別金額 = get特徴期別金額(期_4月, 更正後情報);
         Decimal 更正後合計 = Decimal.ZERO;
+        boolean flag = false;
         if (特徴期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoAto1().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額, 0));
             更正後合計 = 更正後合計.add(特徴期別金額);
@@ -532,6 +534,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getLblZengoTokuchoKi2().setText(get期(期_6月));
         特徴期別金額 = get特徴期別金額(期_6月, 更正後情報);
         if (特徴期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoAto2().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額, 0));
             更正後合計 = 更正後合計.add(特徴期別金額);
@@ -541,6 +544,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getLblZengoTokuchoKi3().setText(get期(期_8月));
         特徴期別金額 = get特徴期別金額(期_8月, 更正後情報);
         if (特徴期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoAto3().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額, 0));
             更正後合計 = 更正後合計.add(特徴期別金額);
@@ -550,6 +554,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getLblZengoTokuchoKi4().setText(get期(期_10月));
         特徴期別金額 = get特徴期別金額(期_10月, 更正後情報);
         if (特徴期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoAto4().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額, 0));
             更正後合計 = 更正後合計.add(特徴期別金額);
@@ -559,6 +564,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getLblZengoTokuchoKi5().setText(get期(期_12月));
         特徴期別金額 = get特徴期別金額(期_12月, 更正後情報);
         if (特徴期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoAto5().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額, 0));
             更正後合計 = 更正後合計.add(特徴期別金額);
@@ -568,12 +574,14 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getLblZengoTokuchoKi6().setText(get期(期_2月));
         特徴期別金額 = get特徴期別金額(期_2月, 更正後情報);
         if (特徴期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoAto6().setText(DecimalFormatter.toコンマ区切りRString(特徴期別金額, 0));
             更正後合計 = 更正後合計.add(特徴期別金額);
         }
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoTokuchoAtoKei().setText(DecimalFormatter.toコンマ区切りRString(更正後合計, 0));
+                .getLblZengoTokuchoAtoKei().setText(更正後合計.equals(Decimal.ZERO) && !flag ? RString.EMPTY
+                        : DecimalFormatter.toコンマ区切りRString(更正後合計, 0));
         if (更正前情報 != null) {
             set特徴_更正前期割額(更正前情報, 期_4月, 期_6月, 期_8月, 期_10月, 期_12月, 期_2月);
         }
@@ -626,44 +634,52 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             RString 期_12月,
             RString 期_2月) {
         Decimal 更正前合計 = Decimal.ZERO;
+        boolean flag = false;
         Decimal 更正前期別金額 = get特徴期別金額(期_4月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoMae1().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get特徴期別金額(期_6月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoMae2().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get特徴期別金額(期_8月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoMae3().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get特徴期別金額(期_10月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoMae4().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get特徴期別金額(期_12月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoMae5().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get特徴期別金額(期_2月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoTokuchoMae6().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoTokuchoMaeKei().setText(DecimalFormatter.toコンマ区切りRString(更正前合計, 0));
+                .getLblZengoTokuchoMaeKei().setText(Decimal.ZERO.equals(更正前合計) && !flag ? RString.EMPTY
+                        : DecimalFormatter.toコンマ区切りRString(更正前合計, 0));
     }
 
     private Decimal get特徴期別金額(RString 期, FukaJoho 賦課の情報) {
@@ -708,6 +724,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         RString 期_3月 = 期月リスト.get月の期(Tsuki._3月).get期();
         RString 期_13月 = 期月リスト.get月の期(Tsuki.翌年度4月).get期();
         RString 期_14月 = 期月リスト.get月の期(Tsuki.翌年度5月).get期();
+        if (更正前情報 != null) {
+            set普徴_更正前期割額(更正前情報, 期_1月, 期_2月, 期_3月, 期_4月, 期_5月, 期_6月, 期_7月, 期_8月,
+                    期_9月, 期_10月, 期_11月, 期_12月, 期_13月, 期_14月);
+        }
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                 .getLblZengoFuchoKi1().setText(get期(期_4月));
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
@@ -738,97 +758,144 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getLblZengoFuchoKi14().setText(get期(期_14月));
         Decimal 更正後合計 = Decimal.ZERO;
         Decimal 更正後期別金額 = get普徴期別金額(期_4月, 更正後情報);
-        if (更正後期別金額 != null) {
+        boolean flag = false;
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae1().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto1().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_5月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae2().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto2().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_6月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae3().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto3().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_7月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae4().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto4().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_8月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae5().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto5().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_9月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae6().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto6().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_10月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae7().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto7().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_11月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae8().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto8().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_12月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae9().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto9().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_1月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae10().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto10().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_2月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae11().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto11().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_3月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae12().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto12().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_13月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae13().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto13().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         更正後期別金額 = get普徴期別金額(期_14月, 更正後情報);
-        if (更正後期別金額 != null) {
+        if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                .getLblZengoFuchoMae14().getText())) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoAto14().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoFuchoAtoKei().setText(DecimalFormatter.toコンマ区切りRString(更正後合計, 0));
-        if (更正前情報 != null) {
-            set普徴_更正前期割額(更正前情報, 期_1月, 期_2月, 期_3月, 期_4月, 期_5月, 期_6月, 期_7月, 期_8月,
-                    期_9月, 期_10月, 期_11月, 期_12月, 期_13月, 期_14月);
-        }
+                .getLblZengoFuchoAtoKei().setText(Decimal.ZERO.equals(更正後合計) && !flag ? RString.EMPTY
+                        : DecimalFormatter.toコンマ区切りRString(更正後合計, 0));
         set納期限(更正後情報, 期_1月, 期_2月, 期_3月, 期_4月, 期_5月, 期_6月, 期_7月, 期_8月,
                 期_9月, 期_10月, 期_11月, 期_12月, 期_13月, 期_14月);
+    }
+
+    private boolean has徴収更正後データ(Decimal 更正後期別金額, RString value) {
+        if (!Decimal.ZERO.equals(更正後期別金額)) {
+            return true;
+        }
+        return !RString.isNullOrEmpty(value);
     }
 
     private void set納期限(FukaJoho 更正後情報, RString 期_1月, RString 期_2月, RString 期_3月, RString 期_4月,
@@ -962,19 +1029,23 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             RString 期_14月) {
         Decimal 更正前合計 = Decimal.ZERO;
         Decimal 更正前期別金額 = get普徴期別金額(期_4月, 更正前情報);
+        boolean flag = false;
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae1().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get普徴期別金額(期_5月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae2().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get普徴期別金額(期_6月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae3().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
@@ -987,66 +1058,76 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
         更正前期別金額 = get普徴期別金額(期_8月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae5().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get普徴期別金額(期_9月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae6().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get普徴期別金額(期_10月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae7().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get普徴期別金額(期_11月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae8().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get普徴期別金額(期_12月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae9().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get普徴期別金額(期_1月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae10().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get普徴期別金額(期_2月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae11().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get普徴期別金額(期_3月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae12().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get普徴期別金額(期_13月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae13().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         更正前期別金額 = get普徴期別金額(期_14月, 更正前情報);
         if (更正前期別金額 != null) {
+            flag = true;
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                     .getLblZengoFuchoMae14().setText(DecimalFormatter.toコンマ区切りRString(更正前期別金額, 0));
             更正前合計 = 更正前合計.add(更正前期別金額);
         }
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoFuchoMaeKei().setText(Decimal.ZERO.equals(更正前合計) ? RString.EMPTY
+                .getLblZengoFuchoMaeKei().setText(Decimal.ZERO.equals(更正前合計) && !flag ? RString.EMPTY
                         : DecimalFormatter.toコンマ区切りRString(更正前合計, 0));
     }
 

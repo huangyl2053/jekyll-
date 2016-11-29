@@ -348,7 +348,7 @@
         WHERE
         mst."hihokenshaNo" = slv."hihokenshaNo" 
         AND mst."fukaNendo" = slv."fukaNendo" 
-        AND mst."tsuchishoNo" = slv."tsuchishoNo"
+        AND mst."tsuchishoNo" <![CDATA[<]]> slv."tsuchishoNo"
         )
         ) AS 賦課 
         ON 賦課.被保険者番号 = "DbWTkyufujisTempTbl"."hiHokenshaNo" 

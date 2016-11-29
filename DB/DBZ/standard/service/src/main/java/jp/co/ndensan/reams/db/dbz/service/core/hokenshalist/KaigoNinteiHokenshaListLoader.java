@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJoho
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定用の保険者リストを取得します。
@@ -51,7 +52,7 @@ final class KaigoNinteiHokenshaListLoader {
         }
 
         if (shichosonSecurity.get導入形態コード().is広域()) {
-            return HokenshaList.createFor広域(search市町村リストFor広域());
+            return HokenshaList.createFor広域(search市町村リストFor広域(shichosonSecurity.get市町村情報()));
         } else {
             return HokenshaList.createFor単一(
                     Arrays.asList(toShichosonCodeNameResult(shichosonSecurity.get市町村情報(), TokeiTaishoKubun.保険者分))
@@ -59,18 +60,21 @@ final class KaigoNinteiHokenshaListLoader {
         }
     }
 
-    private static List<HokenshaSummary> search市町村リストFor広域() {
+    private static List<HokenshaSummary> search市町村リストFor広域(IShichosonJoho shichosonJoho) {
         List<KoseiShichosonMaster> genShichosonJohoList = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         if (genShichosonJohoList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("現市町村情報"));
         }
+        RString shichosonShikibetsuID = shichosonJoho.get市町村識別ID().value();
         List<HokenshaSummary> output = new ArrayList<>();
         for (KoseiShichosonMaster genShichosonJoho : genShichosonJohoList) {
-            output.add(new HokenshaSummary(
-                    genShichosonJoho.get市町村コード(),
-                    genShichosonJoho.get市町村名称(),
-                    genShichosonJoho.get証記載保険者番号(),
-                    TokeiTaishoKubun.構成市町村分));
+            if (shichosonShikibetsuID.equals(new RString("00")) || genShichosonJoho.get市町村識別ID().equals(shichosonShikibetsuID)) {
+                output.add(new HokenshaSummary(
+                        genShichosonJoho.get市町村コード(),
+                        genShichosonJoho.get市町村名称(),
+                        genShichosonJoho.get証記載保険者番号(),
+                        TokeiTaishoKubun.構成市町村分));
+            }
         }
         return output;
     }

@@ -45,4 +45,5 @@ public class KogakuGassanShinseishoDataResult implements Serializable {
     private RString 国保支給申請書整理番号;
     private RString 支給申請形態;
     private RString 自己負担額証明書交付申請の有無;
+    private RString 支給申請区分;
 }

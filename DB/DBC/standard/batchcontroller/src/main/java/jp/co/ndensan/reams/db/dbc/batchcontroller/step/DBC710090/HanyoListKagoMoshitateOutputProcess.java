@@ -18,6 +18,11 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710090.HanyoListKagoMoshitateCsv
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710090.HanyoListKagoMoshitateEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -94,6 +99,7 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
     private int 連番;
     private RString csv出力Flag;
     FileSpoolManager spoolManager;
+    private ChohyoSeigyoKyotsu 帳票制御共通情報;
 
     @BatchWriter
     private CsvWriter<HanyoListKagoMoshitateCsvEntity> csvWriter;
@@ -124,6 +130,8 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
             構成市町村マスタ.put(現市町村情報.get(i).get市町村コード(), 現市町村情報.get(i));
         }
         personalDataList = new ArrayList<>();
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通情報 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701009.getReportId());
     }
 
     @Override
@@ -152,11 +160,14 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
 
     @Override
     protected void process(HanyoListKagoMoshitateEntity entity) {
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get受給者台帳().getShichosonCode());
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
+        RString 住所番地方書 = JushoHenshu.editJusho(帳票制御共通情報, 宛名, 導入団体情報);
         連番++;
         csv出力Flag = 定数_あり;
         HanyoListKagoMoshitateCsvEntityEditor edit = new HanyoListKagoMoshitateCsvEntityEditor(entity, parameter,
                 地方公共団体情報, 構成市町村マスタ, parameter.getシステム日付(), 連番);
-        csvWriter.writeLine(edit.edit());
+        csvWriter.writeLine(edit.edit(住所番地方書));
         ExpandedInformation expandedInformation = new ExpandedInformation(
                 CODE_0003, DATANAME_被保険者番号, entity.get過誤申立().getHiHokenshaNo().getColumnValue());
         personalDataList.add(PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInformation));

@@ -112,23 +112,24 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
         List<dgJohoIchiran_Row> rowList = new ArrayList();
         for (KogakuGassanJikoFutanGaku result : resultList) {
             dgJohoIchiran_Row row = new dgJohoIchiran_Row();
-            row.setTxtTaishoNendo(result.get対象年度().toDateString());
+            row.setTxtTaishoNendo(result.get対象年度().wareki().toDateString());
+            row.setTxtHdnTaishoNendo(result.get対象年度().toDateString());
             row.setTxtSanteiKubun(set算定区分(result.get異動区分()));
             row.setTxtHokenshaNo(result.get保険者番号().getColumnValue());
             row.setTxtShikyuShinseishoSeiriNo(result.get支給申請書整理番号());
             row.setTxtIdoKubun(result.get異動区分() == null ? RString.EMPTY
                     : KaigoGassan_Idokubun.toValue(result.get異動区分()).get名称());
-            row.setTxtRirekiNo(new RString(result.get履歴番号()));
-            row.setTxtUketoriNengetsu(result.get自己負担額証明書情報受取年月() == null ? RString.EMPTY
-                    : result.get自己負担額証明書情報受取年月().toDateString());
-            row.setTxtHoseiYMDTan(result.getバッチ補正実施年月日() == null || result.getバッチ補正実施年月日().isEmpty() ? RString.EMPTY
+            row.setTxtRirekiNo(new RString(result.get履歴番号()).padZeroToLeft(INT_4));
+            row.setTxtUketoriNengetsu(result.get自己負担額証明書情報受取年月() == null || result.get自己負担額証明書情報受取年月().isEmpty() ? RString.EMPTY
+                    : result.get自己負担額証明書情報受取年月().wareki().toDateString());
+            row.setTxtHoseiYMDKatsu(result.getバッチ補正実施年月日() == null || result.getバッチ補正実施年月日().isEmpty() ? RString.EMPTY
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.getバッチ補正実施年月日().toString())));
             row.setTxtHoseiYMDTan(result.getリアル補正実施年月日() == null || result.getリアル補正実施年月日().isEmpty() ? RString.EMPTY
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.getリアル補正実施年月日().toString())));
             row.setTxtSofuNengetsu(result.get補正済自己負担額情報送付年月() == null || result.get補正済自己負担額情報送付年月().isEmpty() ? RString.EMPTY
-                    : new RString(result.get補正済自己負担額情報送付年月().toString()));
+                    : result.get補正済自己負担額情報送付年月().wareki().toDateString());
             row.setTxtDataKBN(result.getデータ作成区分() == null ? RString.EMPTY
                     : result.getデータ作成区分());
             rowList.add(row);
@@ -148,20 +149,24 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
         List<PersonalData> personalDataList = new ArrayList();
         for (KogakuGassanJikoFutanGaku result : resultList) {
             dgJohoIchiran_Row row = new dgJohoIchiran_Row();
-            row.setTxtTaishoNendo(result.get対象年度().toDateString());
+            row.setTxtTaishoNendo(result.get対象年度().wareki().toDateString());
+            row.setTxtHdnTaishoNendo(result.get対象年度().toDateString());
             row.setTxtSanteiKubun(set算定区分(result.get異動区分()));
             row.setTxtHokenshaNo(result.get保険者番号().getColumnValue());
             row.setTxtShikyuShinseishoSeiriNo(result.get支給申請書整理番号());
             row.setTxtIdoKubun(result.get異動区分() == null ? RString.EMPTY
                     : KaigoGassan_Idokubun.toValue(result.get異動区分()).get名称());
-            row.setTxtRirekiNo(new RString(result.get履歴番号()));
+            row.setTxtRirekiNo(new RString(result.get履歴番号()).padZeroToLeft(INT_4));
             row.setTxtUketoriNengetsu(result.get自己負担額証明書情報受取年月() == null || result.get自己負担額証明書情報受取年月().isEmpty() ? RString.EMPTY
-                    : result.get自己負担額証明書情報受取年月().toDateString());
-            row.setTxtHoseiYMDTan(result.getバッチ補正実施年月日() == null || result.getバッチ補正実施年月日().isEmpty() ? RString.EMPTY
+                    : result.get自己負担額証明書情報受取年月().wareki().toDateString());
+            row.setTxtHoseiYMDKatsu(result.getバッチ補正実施年月日() == null || result.getバッチ補正実施年月日().isEmpty() ? RString.EMPTY
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.getバッチ補正実施年月日().toString())));
+            row.setTxtHoseiYMDTan(result.getリアル補正実施年月日() == null || result.getリアル補正実施年月日().isEmpty() ? RString.EMPTY
+                    : DateConverter.toWarekiHalf_Zero(
+                            new RDate(result.getリアル補正実施年月日().toString())));
             row.setTxtSofuNengetsu(result.get補正済自己負担額情報送付年月() == null || result.get補正済自己負担額情報送付年月().isEmpty() ? RString.EMPTY
-                    : new RString(result.get補正済自己負担額情報送付年月().toString()));
+                    : result.get補正済自己負担額情報送付年月().wareki().toDateString());
             row.setTxtDataKBN(result.getデータ作成区分() == null ? RString.EMPTY
                     : result.getデータ作成区分());
             rowList.add(row);
@@ -220,7 +225,7 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
      */
     public boolean isCheckPass(HihokenshaNo 被保険者番号, dgJohoIchiran_Row row) {
         int 履歴番号 = Integer.parseInt(row.getTxtRirekiNo().toString());
-        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
+        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtHdnTaishoNendo());
         HokenshaNo 保険者番号 = new HokenshaNo(row.getTxtHokenshaNo());
         RString 支給申請書整理番号 = row.getTxtShikyuShinseishoSeiriNo();
         KogakuGassanJikoFutanGakuManager manager = new KogakuGassanJikoFutanGakuManager();
@@ -379,7 +384,7 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
                 : KaigoGassan_Idokubun.toValue(result.get異動区分()).get名称());
         kanriJohoDiv1.getDdlShotokuKBN().setIsBlankLine(false);
         kanriJohoDiv1.getDdlShotokuKBN().setDataSource(set所得区分(result.get対象年度()));
-        if (result.get所得区分() == null) {
+        if (RString.isNullOrEmpty(result.get所得区分())) {
             kanriJohoDiv1.getDdlShotokuKBN().setSelectedIndex(0);
         } else {
             kanriJohoDiv1.getDdlShotokuKBN().setSelectedKey(result.get所得区分());
@@ -540,12 +545,15 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
     private List<KeyValueDataSource> set所得区分(FlexibleYear 対象年度) {
         int 年度 = 対象年度.getYearValue();
         List<KeyValueDataSource> h25年度以前 = new ArrayList();
+        h25年度以前.add(new KeyValueDataSource());
         h25年度以前.add(new KeyValueDataSource(所得区分_課税, 課税));
         h25年度以前.add(new KeyValueDataSource(所得区分_非課税, 非課税));
         h25年度以前.add(new KeyValueDataSource(KaigoGassan_ShotokuKbn.上位所得者.getCode(),
                 KaigoGassan_ShotokuKbn.上位所得者.get名称()));
         List<KeyValueDataSource> h26年度以降 = new ArrayList();
+        h26年度以降.add(new KeyValueDataSource());
         List<KeyValueDataSource> h27年1月以降 = new ArrayList();
+        h27年1月以降.add(new KeyValueDataSource());
         for (KaigoGassan_ShotokuKbn type : KaigoGassan_ShotokuKbn.values()) {
             if (type.getCode() == null || type.getCode().isEmpty()) {
                 h27年1月以降.add(new KeyValueDataSource(RString.HALF_SPACE, type.get名称()));

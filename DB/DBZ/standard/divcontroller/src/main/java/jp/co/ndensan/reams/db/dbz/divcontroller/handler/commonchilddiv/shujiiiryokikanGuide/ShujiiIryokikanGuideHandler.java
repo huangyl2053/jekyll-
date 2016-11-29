@@ -84,7 +84,7 @@ public class ShujiiIryokikanGuideHandler {
                 kensakuKekkaIchiran_Row.setIryoKikanjusho(nullToEmpty(business.get主治医医療機関情報_住所()));
                 kensakuKekkaIchiran_Row.setIryoKikantelNo(nullToEmpty(business.get主治医医療機関情報_電話番号()));
                 kensakuKekkaIchiran_Row.setIryoKikanJokyo(business.is主治医医療機関情報_状況フラグ()
-                                                          ? new RString("有効") : new RString("無効"));
+                        ? new RString("有効") : new RString("無効"));
                 kensakuKekkaIchiran_Row.setShichosonCode(business.get市町村コード());
                 if (!business.is主治医医療機関情報_状況フラグ()) {
                     kensakuKekkaIchiran_Row.setSelectButtonState(DataGridButtonState.Enabled);
@@ -125,6 +125,7 @@ public class ShujiiIryokikanGuideHandler {
         div.getTxtIryoKikanName().clearValue();
         div.getTxtIryoKikanKanaMeisho().clearValue();
         div.getTxtMaxKensu().clearValue();
+        intialize();
     }
 
     private RString nullToEmpty(RString obj) {

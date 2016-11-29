@@ -161,6 +161,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private static final RString RSTRING_3 = new RString("3");
     private static final RString RSTRING_4 = new RString("04");
     private static final RString RSTRING_6 = new RString("06");
+    private static final RString RSTRING_8 = new RString("08");
     private static final RString RSTRING_11 = new RString("11");
     private static final RString RSTRING_12 = new RString("12");
     private static final RString RSTRING_100 = new RString("100");
@@ -267,7 +268,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         RDate date = new RDate(Integer.valueOf(日付関連_調定年度.toString()) - 1, システム日時.getMonthValue(), システム日時.getDayValue());
         RString 特徴開始月_2月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_2月捕捉,
                 date, SubGyomuCode.DBB介護賦課);
-        if (RSTRING_6.equals(処理対象月) && RSTRING_6.equals(特徴開始月_2月捕捉)) {
+        if (RSTRING_6.equals(処理対象月) && RSTRING_8.equals(特徴開始月_2月捕捉)) {
             List<DbV2001ChoshuHohoEntity> 特別徴収開始者データ = 徴収方法dac.get特別徴収開始者データ(賦課年度);
             if (特別徴収開始者データ != null && !特別徴収開始者データ.isEmpty()) {
                 for (DbV2001ChoshuHohoEntity entity : 特別徴収開始者データ) {

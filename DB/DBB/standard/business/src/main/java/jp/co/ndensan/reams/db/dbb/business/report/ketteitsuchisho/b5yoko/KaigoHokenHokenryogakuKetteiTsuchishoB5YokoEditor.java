@@ -13,10 +13,12 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.entity.report.ketteitsuchisho.KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
+import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -110,9 +112,9 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
         reportSource.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
         reportSource.shotokuKbnAto = 更正後.get保険料段階();
 
-        reportSource.shutokuYmdAto = 更正後.get期間_自();
+        reportSource.shutokuYmdAto = DateConverter.getWarekiYMD(new RDate(更正後.get期間_自_西暦().toString()));
 
-        reportSource.soshitsuYmdAto = 更正後.get期間_至();
+        reportSource.soshitsuYmdAto = DateConverter.getWarekiYMD(new RDate(更正後.get期間_至_西暦().toString()));
 
         set転入者通知文(reportSource, 編集後本算定通知書共通情報);
         set通知文1と通知区分(reportSource, 編集後本算定通知書共通情報);
@@ -128,8 +130,8 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
             reportSource.hokenRitsuMae = edit金額(更正前.get保険料率());
             reportSource.hokenSanshutsuMae = edit金額(更正前.get減免前保険料_年額());
             reportSource.shotokuKbnMae = 更正前.get保険料段階();
-            reportSource.shutokuYmdMae = 更正前.get期間_自();
-            reportSource.soshitsuYmdMae = 更正前.get期間_至();
+            reportSource.shutokuYmdMae = DateConverter.getWarekiYMD(new RDate(更正前.get期間_自_西暦().toString()));
+            reportSource.soshitsuYmdMae = DateConverter.getWarekiYMD(new RDate(更正前.get期間_至_西暦().toString()));
             reportSource.tsukisuMae = 更正前.get月数_ケ月();
             reportSource.honninKazeiKubunMae = 更正前.get市町村民税課税区分_本人();
             reportSource.setaiKazeiKubunMae = 更正前.get市町村民税課税区分_世帯();

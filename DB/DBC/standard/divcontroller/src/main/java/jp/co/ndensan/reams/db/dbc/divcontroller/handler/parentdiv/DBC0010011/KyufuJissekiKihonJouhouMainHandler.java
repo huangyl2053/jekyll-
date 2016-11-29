@@ -44,7 +44,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
     private final KyufuJissekiKihonJouhouMainDiv div;
     private static final int INT_ZERO = 0;
     private static final int INT_ITI = 1;
-    private static final RString 無し = new RString("1");
     private static final RString 設定不可 = new RString("0");
     private static final RString 総合事業 = new RString("5");
     private static final FlexibleYearMonth 平成２０年４月 = new FlexibleYearMonth("200804");
@@ -74,6 +73,11 @@ public class KyufuJissekiKihonJouhouMainHandler {
         }
         div.getCcdKyufuJissekiHeader().set被保情報2(実績基本集計データ);
         KyufujissekiKihon 給付実績基本 = 実績基本集計データ.get給付実績基本データ();
+        if (実績基本集計データ.get事業者名称2() != null) {
+            div.getTxtKyufuJissekiKihonJigyoshoName().setValue(実績基本集計データ.get事業者名称2().getColumnValue());
+        } else {
+            div.getTxtKyufuJissekiKihonJigyoshoName().clearValue();
+        }
         set申請内容エリア(給付実績基本);
         set合計内容エリア(給付実績基本);
         set表示制御(給付実績基本.getサービス提供年月(), 給付実績基本.get入力識別番号());
@@ -454,11 +458,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
 
     private RString get旧措置入所者特例(RString 旧措置入所者特例コード) {
         if (!RString.isNullOrEmpty(旧措置入所者特例コード)) {
-            if (無し.equals(旧措置入所者特例コード)) {
-                return KyuSochiNyushoshaTokureiCode.無し.get名称();
-            } else {
-                return KyuSochiNyushoshaTokureiCode.有り.get名称();
-            }
+            return KyuSochiNyushoshaTokureiCode.toValue(旧措置入所者特例コード).get名称();
         }
 
         return RString.EMPTY;

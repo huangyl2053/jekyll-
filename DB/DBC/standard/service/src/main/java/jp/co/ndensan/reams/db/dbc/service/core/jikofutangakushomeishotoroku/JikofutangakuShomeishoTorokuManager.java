@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jikofutangakushomeishotoroku.Jik
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeishotoroku.CheckResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3180JigyoKogakuGassanJikoFutanGakuShomeishoDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3181JigyoKogakuGassanJikoFutanGakuShomeishoMeisaiDac;
@@ -249,5 +250,16 @@ public class JikofutangakuShomeishoTorokuManager {
     @Transaction
     public Decimal get事業高額合算自己負担額証明書最新履歴番号(JikofutangakuShomeishoTorokuParameter parameter) {
         return mapperProvider.create(IJikofutangakuShomeishoTorokuMapper.class).get事業高額合算自己負担額証明書最新履歴番号(parameter);
+    }
+
+    /**
+     * 受給者/総合次号対象者の判定の処理です。
+     *
+     * @param parameter JikofutangakuShomeishoTorokuParameter
+     * @return JikofutangakuShomeishoTorokuBusiness
+     */
+    @Transaction
+    public CheckResultEntity judgeIs受給者or総合次号対象者(JikofutangakuShomeishoTorokuParameter parameter) {
+        return mapperProvider.create(IJikofutangakuShomeishoTorokuMapper.class).judge受給者or総合次号対象者(parameter);
     }
 }

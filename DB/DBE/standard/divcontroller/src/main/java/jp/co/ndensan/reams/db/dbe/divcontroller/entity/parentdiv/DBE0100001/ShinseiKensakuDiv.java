@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinseiKensakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -117,16 +117,6 @@ public class ShinseiKensakuDiv extends Panel {
     @JsonIgnore
     public void  setKensakuOption(KensakuOptionDiv KensakuOption) {
         this.getKensakuJoken().setKensakuOption(KensakuOption);
-    }
-
-    @JsonIgnore
-    public Button getBtnKensaku() {
-        return this.getKensakuJoken().getKensakuOption().getBtnKensaku();
-    }
-
-    @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
-        this.getKensakuJoken().getKensakuOption().setBtnKensaku(btnKensaku);
     }
 
     @JsonIgnore

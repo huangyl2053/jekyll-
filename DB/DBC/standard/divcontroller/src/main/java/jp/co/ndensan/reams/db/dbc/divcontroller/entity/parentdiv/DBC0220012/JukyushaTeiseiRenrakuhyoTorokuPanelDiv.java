@@ -1,10 +1,10 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220012;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.JukyushaIdoRenrakuhyo.IJukyushaIdoRenrakuhyoDiv;
@@ -13,37 +13,34 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanry
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonReportPublish;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 
 /**
  * JukyushaTeiseiRenrakuhyoTorokuPanel のクラスファイル
  *
- * @reamsid_L DBC-2101-020 quxiaodong
+ * @author 自動生成
  */
 public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("JukyushaIdoRenrakuhyo")
+    private JukyushaIdoRenrakuhyoDiv JukyushaIdoRenrakuhyo;
     @JsonProperty("OutputJukyushaIdoRenrakuhyo")
     private OutputJukyushaIdoRenrakuhyoDiv OutputJukyushaIdoRenrakuhyo;
     @JsonProperty("hdnFlag")
     private TextBox hdnFlag;
-    @JsonProperty("JukyushaIdoRenrakuhyo")
-    private JukyushaIdoRenrakuhyoDiv JukyushaIdoRenrakuhyo;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("dialogFlag")
     private RString dialogFlag;
+    @JsonProperty("saveFlg")
+    private RString saveFlg;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -51,6 +48,15 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+ /*
+     * getJukyushaIdoRenrakuhyo
+     * @return JukyushaIdoRenrakuhyo
+     */
+    @JsonProperty("JukyushaIdoRenrakuhyo")
+    public IJukyushaIdoRenrakuhyoDiv getJukyushaIdoRenrakuhyo() {
+        return JukyushaIdoRenrakuhyo;
+    }
+
     /*
      * getOutputJukyushaIdoRenrakuhyo
      * @return OutputJukyushaIdoRenrakuhyo
@@ -88,15 +94,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
     }
 
     /*
-     * getJukyushaIdoRenrakuhyo
-     * @return JukyushaIdoRenrakuhyo
-     */
-    @JsonProperty("JukyushaIdoRenrakuhyo")
-    public IJukyushaIdoRenrakuhyoDiv getJukyushaIdoRenrakuhyo() {
-        return JukyushaIdoRenrakuhyo;
-    }
-
-    /*
      * getccdKanryoMessage
      * @return ccdKanryoMessage
      */
@@ -121,6 +118,24 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
     @JsonProperty("dialogFlag")
     public void setDialogFlag(RString dialogFlag) {
         this.dialogFlag = dialogFlag;
+    }
+
+    /*
+     * getsaveFlg
+     * @return saveFlg
+     */
+    @JsonProperty("saveFlg")
+    public RString getSaveFlg() {
+        return saveFlg;
+    }
+
+    /*
+     * setsaveFlg
+     * @param saveFlg saveFlg
+     */
+    @JsonProperty("saveFlg")
+    public void setSaveFlg(RString saveFlg) {
+        this.saveFlg = saveFlg;
     }
 
     /*
@@ -174,6 +189,16 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelDiv extends Panel {
     @JsonIgnore
     public void setRadTeiseiKomokuHantei(RadioButton radTeiseiKomokuHantei) {
         this.getOutputJukyushaIdoRenrakuhyo().setRadTeiseiKomokuHantei(radTeiseiKomokuHantei);
+    }
+
+    @JsonIgnore
+    public Button getBtnSave() {
+        return this.getOutputJukyushaIdoRenrakuhyo().getBtnSave();
+    }
+
+    @JsonIgnore
+    public void setBtnSave(Button btnSave) {
+        this.getOutputJukyushaIdoRenrakuhyo().setBtnSave(btnSave);
     }
 
     @JsonIgnore

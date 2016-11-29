@@ -556,7 +556,6 @@ public class DBC040010DataUtil {
 
     /**
      * getErrorMessageのメソッドです。 <br/>
-     * TODO QA
      *
      * @param 実績負担額 JissekiFutangakuDataTempEntity
      * @return RString

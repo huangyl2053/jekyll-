@@ -103,6 +103,12 @@ public class KogakuGassanShikyuKetteiTsuchisho {
         RDate 申請開始年月日 = div.getTxtShinseiYMD().getFromValue();
         RDate 支払予定日 = div.getTxtShiharaiYoteiYMD().getValue();
         RDate 作成開始年月日 = div.getTxtKetteiYMD().getFromValue();
+        if (div.getRadKetteibiIkkatsuKoshinKBN().getSelectedKey().equals(KEY_1)) {
+            ValidationMessageControlPairs pairs = validation.決定予定日validate();
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+        }
         if (div.getRadUketoriYM().getSelectedKey().equals(KEY_0)) {
             ValidationMessageControlPairs pairs = validation.受取年月validate();
             if (pairs.iterator().hasNext()) {
@@ -127,12 +133,7 @@ public class KogakuGassanShikyuKetteiTsuchisho {
                 return ResponseData.of(div).addMessage(DbcWarningMessages.高額合算支給決定通知書全件処理確認.getMessage()).respond();
             }
         }
-        if (div.getRadKetteibiIkkatsuKoshinKBN().getSelectedKey().equals(KEY_1)) {
-            ValidationMessageControlPairs pairs = validation.決定予定日validate();
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
-        }
+
         if ((getHandler(div).get支払予定日印字有無().equals(NUM_1)) && 支払予定日 == null && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrWarningMessages.未入力.getMessage().replace(予定日.toString())).respond();
         }

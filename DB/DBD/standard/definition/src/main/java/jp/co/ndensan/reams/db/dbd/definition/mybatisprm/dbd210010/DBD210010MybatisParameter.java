@@ -41,7 +41,7 @@ public class DBD210010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
     private RString 支払方法変更登録区分_2号予告登録者;
     private RString 支払方法変更登録区分_1号償還払い化登録;
     private RString 支払方法変更登録区分_1号給付額減額登録;
-    private RDate システム日付の2年前;
+    private RDate 納期限;
     private static final int NUM5 = 5;
     private static final int NUM8 = 8;
 
@@ -85,11 +85,12 @@ public class DBD210010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
      * @param 一号給付制限登録者 boolean
      * @param 出力順 RString
      * @param 給付制限状態 RString
+     * @param 基準日 FlexibleDate
      * @param searchKey IShikibetsuTaishoPSMSearchKey
      */
     public DBD210010MybatisParameter(boolean 全登録者, boolean 二号差止予告登録者, boolean 二号差止登録者, boolean 一号償還予告登録者,
             boolean 一号償還決定登録者, boolean 一号償還決定登録者_差止中あり, boolean 一号償還決定登録者_保険料控除あり, boolean 一号給付制限登録者,
-            RString 出力順, RString 給付制限状態, IShikibetsuTaishoPSMSearchKey searchKey) {
+            RString 出力順, RString 給付制限状態, FlexibleDate 基準日, IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);
         this.全登録者 = 全登録者;
         this.二号差止登録者 = 二号差止登録者;
@@ -114,7 +115,7 @@ public class DBD210010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
         this.支払方法変更登録区分_2号予告登録者 = ShiharaiHenkoTorokuKubun._２号予告登録者.getコード();
         this.支払方法変更登録区分_1号償還払い化登録 = ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード();
         this.支払方法変更登録区分_1号給付額減額登録 = ShiharaiHenkoTorokuKubun._１号給付額減額登録.getコード();
-        set2年前付のシステム日();
+        set納期限(基準日);
     }
 
     private void set管理区分(boolean 二号差止予告登録者, boolean 二号差止登録者, boolean 一号償還予告登録者,
@@ -230,13 +231,13 @@ public class DBD210010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
         }
     }
 
-    private void set2年前付のシステム日() {
-        RString date1 = new RString("0228");
-        RString date2 = new RString("0229");
-        if (date1.toString().equals(RDate.getNowDate().toString().substring(NUM5, NUM8))) {
-            システム日付の2年前 = new RDate(RDate.getNowDate().getYear().toString().concat(date2.toString()));
+    private void set納期限(FlexibleDate 基準日) {
+        RString date1 = new RString("0229");
+        RString date2 = new RString("0228");
+        if (date1.toString().equals(基準日.toString().substring(NUM5, NUM8))) {
+            納期限 = new RDate(基準日.minusYear(2).getYear().toString().concat(date2.toString()));
         } else {
-            システム日付の2年前 = RDate.getNowDate().minusYear(2);
+            納期限 = new RDate(基準日.minusYear(2).toString());
         }
     }
 }
