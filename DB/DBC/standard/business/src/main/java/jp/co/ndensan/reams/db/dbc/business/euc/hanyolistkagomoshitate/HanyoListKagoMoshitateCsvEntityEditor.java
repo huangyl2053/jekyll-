@@ -172,7 +172,7 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         HanyoListKagoMoshitateCsvEntity csvEntity = new HanyoListKagoMoshitateCsvEntity();
         csvEntity.set連番(new RString(連番));
         csvEntity.set識別コード(kojin.get識別コード().getColumnValue());
-        csvEntity.set住民種別(kojin.get住民種別().toRString());
+        csvEntity.set住民種別(kojin.get住民状態().住民状態略称());
         csvEntity.set氏名(kojin.get名称().getName().getColumnValue());
         csvEntity.set氏名カナ(kojin.get名称().getKana().getColumnValue());
         csvEntity.set生年月日(format日付項目(kojin.get生年月日().toFlexibleDate()));
@@ -323,7 +323,7 @@ public class HanyoListKagoMoshitateCsvEntityEditor {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         HanyoListKagoMoshitateNoRenbanCsvEntity csvEntity = new HanyoListKagoMoshitateNoRenbanCsvEntity();
         csvEntity.set識別コード(kojin.get識別コード().getColumnValue());
-        csvEntity.set住民種別(kojin.get住民種別().toRString());
+        csvEntity.set住民種別(kojin.get住民状態().住民状態略称());
         csvEntity.set氏名(kojin.get名称().getName().getColumnValue());
         csvEntity.set氏名カナ(kojin.get名称().getKana().getColumnValue());
         csvEntity.set生年月日(format日付項目(kojin.get生年月日().toFlexibleDate()));
